@@ -394,7 +394,7 @@ def table(headers, rows, tid):
         # allow raw cell strings that are anchors
         out = []
         for c in r:
-            if isinstance(c, str) and (c.startswith("<a ") or c.startswith("<span") or c.startswith("<em")):
+            if isinstance(c, str) and c.startswith(("<a ", "<span", "<em", "<strong", "<b")):
                 out.append(f"<td>{c}</td>")
             else:
                 out.append(f"<td>{esc(c)}</td>")
