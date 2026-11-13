@@ -42,11 +42,15 @@
      "passed": false
     },
     "G3_luck_bootstrap": {
-     "requirement": "5th percentile of bootstrap ROI > 0",
+     "requirement": "5th percentile of bootstrap ROI > 0, with enough losses to resample",
      "draws": 10000,
      "roi_at_minus110": 0.9091,
+     "losses": 0,
+     "minimum_losses_required": 5,
      "roi_5th_percentile": 0.9091,
-     "passed": true
+     "degenerate": true,
+     "passed": false,
+     "note": "DEGENERATE — too few losses for the bootstrap to have any variance, so a positive 5th percentile is uninformative and the gate does not pass."
     },
     "G4_stability": {
      "requirement": "profitable in both disjoint halves",
@@ -71,14 +75,15 @@
      "note": "Inputs are the NBA.com team ratings and official final scores; all pass."
     }
    },
-   "gates_passed": 4,
+   "gates_passed": 3,
    "gates_total": 6,
    "failed_gates": [
     "G1_sample_floor",
-    "G2_significance"
+    "G2_significance",
+    "G3_luck_bootstrap"
    ],
    "status": "NOT VALIDATED",
-   "blocking_reason": "fails G1_sample_floor, G2_significance",
+   "blocking_reason": "fails G1_sample_floor, G2_significance, G3_luck_bootstrap",
    "id": "S01",
    "market": "single",
    "rule": "Bet the model's pick straight up when its win probability is at least 0.65.",
@@ -118,11 +123,15 @@
      "passed": false
     },
     "G3_luck_bootstrap": {
-     "requirement": "5th percentile of bootstrap ROI > 0",
+     "requirement": "5th percentile of bootstrap ROI > 0, with enough losses to resample",
      "draws": 10000,
      "roi_at_minus110": 0.9091,
+     "losses": 0,
+     "minimum_losses_required": 5,
      "roi_5th_percentile": 0.9091,
-     "passed": true
+     "degenerate": true,
+     "passed": false,
+     "note": "DEGENERATE — too few losses for the bootstrap to have any variance, so a positive 5th percentile is uninformative and the gate does not pass."
     },
     "G4_stability": {
      "requirement": "profitable in both disjoint halves",
@@ -147,14 +156,15 @@
      "note": "Inputs are the NBA.com team ratings and official final scores; all pass."
     }
    },
-   "gates_passed": 4,
+   "gates_passed": 3,
    "gates_total": 6,
    "failed_gates": [
     "G1_sample_floor",
-    "G2_significance"
+    "G2_significance",
+    "G3_luck_bootstrap"
    ],
    "status": "NOT VALIDATED",
-   "blocking_reason": "fails G1_sample_floor, G2_significance",
+   "blocking_reason": "fails G1_sample_floor, G2_significance, G3_luck_bootstrap",
    "id": "S02",
    "market": "single",
    "rule": "Bet the model's pick straight up when its win probability is at least 0.75.",
@@ -194,11 +204,15 @@
      "passed": false
     },
     "G3_luck_bootstrap": {
-     "requirement": "5th percentile of bootstrap ROI > 0",
+     "requirement": "5th percentile of bootstrap ROI > 0, with enough losses to resample",
      "draws": 10000,
      "roi_at_minus110": 0.5,
+     "losses": 3,
+     "minimum_losses_required": 5,
      "roi_5th_percentile": 0.0909,
-     "passed": true
+     "degenerate": true,
+     "passed": false,
+     "note": "DEGENERATE — too few losses for the bootstrap to have any variance, so a positive 5th percentile is uninformative and the gate does not pass."
     },
     "G4_stability": {
      "requirement": "profitable in both disjoint halves",
@@ -223,14 +237,15 @@
      "note": "Inputs are the NBA.com team ratings and official final scores; all pass."
     }
    },
-   "gates_passed": 4,
+   "gates_passed": 3,
    "gates_total": 6,
    "failed_gates": [
     "G1_sample_floor",
-    "G2_significance"
+    "G2_significance",
+    "G3_luck_bootstrap"
    ],
    "status": "NOT VALIDATED",
-   "blocking_reason": "fails G1_sample_floor, G2_significance",
+   "blocking_reason": "fails G1_sample_floor, G2_significance, G3_luck_bootstrap",
    "id": "S08",
    "market": "control",
    "rule": "Bet a coin flip on every game in the backtest sample.",
@@ -269,11 +284,15 @@
      "passed": false
     },
     "G3_luck_bootstrap": {
-     "requirement": "5th percentile of bootstrap ROI > 0",
+     "requirement": "5th percentile of bootstrap ROI > 0, with enough losses to resample",
      "draws": 10000,
      "roi_at_minus110": 0.4318,
+     "losses": 2,
+     "minimum_losses_required": 5,
      "roi_5th_percentile": -0.0455,
-     "passed": false
+     "degenerate": true,
+     "passed": false,
+     "note": "DEGENERATE — too few losses for the bootstrap to have any variance, so a positive 5th percentile is uninformative and the gate does not pass."
     },
     "G4_stability": {
      "requirement": "profitable in both disjoint halves",
@@ -348,11 +367,15 @@
      "passed": false
     },
     "G3_luck_bootstrap": {
-     "requirement": "5th percentile of bootstrap ROI > 0",
+     "requirement": "5th percentile of bootstrap ROI > 0, with enough losses to resample",
      "draws": 10000,
      "roi_at_minus110": null,
+     "losses": 0,
+     "minimum_losses_required": 5,
      "roi_5th_percentile": null,
-     "passed": false
+     "degenerate": true,
+     "passed": false,
+     "note": "DEGENERATE — too few losses for the bootstrap to have any variance, so a positive 5th percentile is uninformative and the gate does not pass."
     },
     "G4_stability": {
      "requirement": "profitable in both disjoint halves",
@@ -426,11 +449,15 @@
      "passed": false
     },
     "G3_luck_bootstrap": {
-     "requirement": "5th percentile of bootstrap ROI > 0",
+     "requirement": "5th percentile of bootstrap ROI > 0, with enough losses to resample",
      "draws": 10000,
      "roi_at_minus110": null,
+     "losses": 0,
+     "minimum_losses_required": 5,
      "roi_5th_percentile": null,
-     "passed": false
+     "degenerate": true,
+     "passed": false,
+     "note": "DEGENERATE — too few losses for the bootstrap to have any variance, so a positive 5th percentile is uninformative and the gate does not pass."
     },
     "G4_stability": {
      "requirement": "profitable in both disjoint halves",
@@ -505,11 +532,15 @@
      "passed": false
     },
     "G3_luck_bootstrap": {
-     "requirement": "5th percentile of bootstrap ROI > 0",
+     "requirement": "5th percentile of bootstrap ROI > 0, with enough losses to resample",
      "draws": 10000,
      "roi_at_minus110": null,
+     "losses": 0,
+     "minimum_losses_required": 5,
      "roi_5th_percentile": null,
-     "passed": false
+     "degenerate": true,
+     "passed": false,
+     "note": "DEGENERATE — too few losses for the bootstrap to have any variance, so a positive 5th percentile is uninformative and the gate does not pass."
     },
     "G4_stability": {
      "requirement": "profitable in both disjoint halves",
@@ -584,11 +615,15 @@
      "passed": false
     },
     "G3_luck_bootstrap": {
-     "requirement": "5th percentile of bootstrap ROI > 0",
+     "requirement": "5th percentile of bootstrap ROI > 0, with enough losses to resample",
      "draws": 10000,
      "roi_at_minus110": null,
+     "losses": 0,
+     "minimum_losses_required": 5,
      "roi_5th_percentile": null,
-     "passed": false
+     "degenerate": true,
+     "passed": false,
+     "note": "DEGENERATE — too few losses for the bootstrap to have any variance, so a positive 5th percentile is uninformative and the gate does not pass."
     },
     "G4_stability": {
      "requirement": "profitable in both disjoint halves",
