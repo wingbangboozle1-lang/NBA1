@@ -1,0 +1,33 @@
+{
+  "description": "Pearson correlation among verified team metrics (Basketball-Reference 2026-27 standings).",
+  "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html",
+  "captured": "2026-11-13",
+  "verified": true,
+  "note": "Used to design strategies and to gate parlay/combo legs.",
+  "matrix": {
+    "ps_g": {
+      "ps_g": 1.0,
+      "pa_g": -0.118,
+      "srs": 0.702,
+      "wl_pct": 0.641
+    },
+    "pa_g": {
+      "ps_g": -0.118,
+      "pa_g": 1.0,
+      "srs": -0.705,
+      "wl_pct": -0.75
+    },
+    "srs": {
+      "ps_g": 0.702,
+      "pa_g": -0.705,
+      "srs": 1.0,
+      "wl_pct": 0.882
+    },
+    "wl_pct": {
+      "ps_g": 0.641,
+      "pa_g": -0.75,
+      "srs": 0.882,
+      "wl_pct": 1.0
+    }
+  }
+}

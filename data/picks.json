@@ -1,0 +1,1912 @@
+{
+  "description": "Generated picks for the upcoming slate (up to 3 days ahead), produced from our originated lines.",
+  "generated": "2026-11-13",
+  "window": "2026-11-13 .. 2026-11-16",
+  "source_schedule": "https://www.nba.com/schedule",
+  "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html",
+  "picks": [
+    {
+      "side": "Under",
+      "prob": 0.7480049215114086,
+      "edge": 0.24800492151140863,
+      "line": "Total 220",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-13",
+        "away": "New York Knicks",
+        "home": "Indiana Pacers",
+        "time_et": "7:00 PM",
+        "game_id": "0022600034",
+        "preview": "https://www.nba.com/game/nyk-vs-ind-0022600034"
+      },
+      "originated_line": {
+        "away_expected": 112.2,
+        "home_expected": 107.5,
+        "spread": -5,
+        "spread_label": "IND -5",
+        "total": 220,
+        "expected_margin": -4.7,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.3204,
+          "away_win_prob": 0.6796
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.512,
+          "away_cover_prob": 0.488
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Under",
+      "prob": 0.5715064294675564,
+      "edge": 0.07150642946755636,
+      "line": "Total 225",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-13",
+        "away": "Milwaukee Bucks",
+        "home": "Orlando Magic",
+        "time_et": "7:00 PM",
+        "game_id": "0022600035",
+        "preview": "https://www.nba.com/game/mil-vs-orl-0022600035"
+      },
+      "originated_line": {
+        "away_expected": 110.4,
+        "home_expected": 114.9,
+        "spread": 4,
+        "spread_label": "ORL +4",
+        "total": 225,
+        "expected_margin": 4.5,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.6726,
+          "away_win_prob": 0.3274
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.52,
+          "away_cover_prob": 0.48
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Over",
+      "prob": 0.729482778751689,
+      "edge": 0.229482778751689,
+      "line": "Total 233",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-13",
+        "away": "Cleveland Cavaliers",
+        "home": "Miami Heat",
+        "time_et": "8:00 PM",
+        "game_id": "0022600036",
+        "preview": "https://www.nba.com/game/cle-vs-mia-0022600036"
+      },
+      "originated_line": {
+        "away_expected": 118.2,
+        "home_expected": 115.0,
+        "spread": -3,
+        "spread_label": "MIA -3",
+        "total": 233,
+        "expected_margin": -3.2,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.3747,
+          "away_win_prob": 0.6253
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.492,
+          "away_cover_prob": 0.508
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Over",
+      "prob": 0.857172307360413,
+      "edge": 0.35717230736041305,
+      "line": "Total 238",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-13",
+        "away": "Atlanta Hawks",
+        "home": "Chicago Bulls",
+        "time_et": "8:00 PM",
+        "game_id": "0022600037",
+        "preview": "https://www.nba.com/game/atl-vs-chi-0022600037"
+      },
+      "originated_line": {
+        "away_expected": 123.6,
+        "home_expected": 114.8,
+        "spread": -9,
+        "spread_label": "CHI -9",
+        "total": 238,
+        "expected_margin": -8.8,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.1965,
+          "away_win_prob": 0.8035
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.5079,
+          "away_cover_prob": 0.4921
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Over",
+      "prob": 0.8133611858632264,
+      "edge": 0.31336118586322637,
+      "line": "Total 236",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-13",
+        "away": "Memphis Grizzlies",
+        "home": "New Orleans Pelicans",
+        "time_et": "8:00 PM",
+        "game_id": "0022600038",
+        "preview": "https://www.nba.com/game/mem-vs-nop-0022600038"
+      },
+      "originated_line": {
+        "away_expected": 121.1,
+        "home_expected": 114.4,
+        "spread": -7,
+        "spread_label": "NOP -7",
+        "total": 236,
+        "expected_margin": -6.7,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.255,
+          "away_win_prob": 0.745
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.512,
+          "away_cover_prob": 0.488
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Under",
+      "prob": 0.6474844401655163,
+      "edge": 0.14748444016551632,
+      "line": "Total 223",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-13",
+        "away": "Utah Jazz",
+        "home": "Houston Rockets",
+        "time_et": "8:30 PM",
+        "game_id": "0022600039",
+        "preview": "https://www.nba.com/game/uta-vs-hou-0022600039"
+      },
+      "originated_line": {
+        "away_expected": 106.5,
+        "home_expected": 116.8,
+        "spread": 10,
+        "spread_label": "HOU +10",
+        "total": 223,
+        "expected_margin": 10.3,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.8386,
+          "away_win_prob": 0.1614
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.512,
+          "away_cover_prob": 0.488
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Over",
+      "prob": 0.5871024895421691,
+      "edge": 0.08710248954216915,
+      "line": "Total 229",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-13",
+        "away": "Golden State Warriors",
+        "home": "San Antonio Spurs",
+        "time_et": "9:30 PM",
+        "game_id": "0022600040",
+        "preview": "https://www.nba.com/game/gsw-vs-sas-0022600040"
+      },
+      "originated_line": {
+        "away_expected": 113.7,
+        "home_expected": 115.3,
+        "spread": 2,
+        "spread_label": "SAS +2",
+        "total": 229,
+        "expected_margin": 1.6,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.5637,
+          "away_win_prob": 0.4363
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.4841,
+          "away_cover_prob": 0.5159
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Over",
+      "prob": 0.6252752039990868,
+      "edge": 0.12527520399908676,
+      "line": "Total 230",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-13",
+        "away": "Portland Trail Blazers",
+        "home": "Sacramento Kings",
+        "time_et": "10:00 PM",
+        "game_id": "0022600041",
+        "preview": "https://www.nba.com/game/por-vs-sac-0022600041"
+      },
+      "originated_line": {
+        "away_expected": 120.2,
+        "home_expected": 110.3,
+        "spread": -10,
+        "spread_label": "SAC -10",
+        "total": 230,
+        "expected_margin": -9.9,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.1702,
+          "away_win_prob": 0.8298
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.5039,
+          "away_cover_prob": 0.4961
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Under",
+      "prob": 0.610163610942811,
+      "edge": 0.11016361094281102,
+      "line": "Total 224",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-13",
+        "away": "Oklahoma City Thunder",
+        "home": "LA Clippers",
+        "time_et": "10:30 PM",
+        "game_id": "0022600042",
+        "preview": "https://www.nba.com/game/okc-vs-lac-0022600042"
+      },
+      "originated_line": {
+        "away_expected": 114.6,
+        "home_expected": 109.6,
+        "spread": -5,
+        "spread_label": "LAC -5",
+        "total": 224,
+        "expected_margin": -5.0,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.31,
+          "away_win_prob": 0.69
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.5,
+          "away_cover_prob": 0.5
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Over",
+      "prob": 0.7598760354908779,
+      "edge": 0.2598760354908779,
+      "line": "Total 234",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-14",
+        "away": "Denver Nuggets",
+        "home": "New Orleans Pelicans",
+        "time_et": "7:00 PM",
+        "game_id": "0022600231",
+        "preview": "https://www.nba.com/game/den-vs-nop-0022600231"
+      },
+      "originated_line": {
+        "away_expected": 119.4,
+        "home_expected": 115.1,
+        "spread": -4,
+        "spread_label": "NOP -4",
+        "total": 234,
+        "expected_margin": -4.3,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.3345,
+          "away_win_prob": 0.6655
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.488,
+          "away_cover_prob": 0.512
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Over",
+      "prob": 0.6252752039990868,
+      "edge": 0.12527520399908676,
+      "line": "Total 230",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-14",
+        "away": "Detroit Pistons",
+        "home": "Miami Heat",
+        "time_et": "8:00 PM",
+        "game_id": "0022600233",
+        "preview": "https://www.nba.com/game/det-vs-mia-0022600233"
+      },
+      "originated_line": {
+        "away_expected": 117.8,
+        "home_expected": 111.8,
+        "spread": -6,
+        "spread_label": "MIA -6",
+        "total": 230,
+        "expected_margin": -6.0,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.2769,
+          "away_win_prob": 0.7231
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.5,
+          "away_cover_prob": 0.5
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Over",
+      "prob": 0.7598760354908779,
+      "edge": 0.2598760354908779,
+      "line": "Total 234",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-14",
+        "away": "Chicago Bulls",
+        "home": "Minnesota Timberwolves",
+        "time_et": "8:00 PM",
+        "game_id": "0022600235",
+        "preview": "https://www.nba.com/game/chi-vs-min-0022600235"
+      },
+      "originated_line": {
+        "away_expected": 109.6,
+        "home_expected": 124.1,
+        "spread": 14,
+        "spread_label": "MIN +14",
+        "total": 234,
+        "expected_margin": 14.5,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.9105,
+          "away_win_prob": 0.0895
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.5199,
+          "away_cover_prob": 0.4801
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Under",
+      "prob": 0.6474844401655163,
+      "edge": 0.14748444016551632,
+      "line": "Total 223",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-15",
+        "away": "Indiana Pacers",
+        "home": "Philadelphia 76ers",
+        "time_et": "1:00 PM",
+        "game_id": "0022600236",
+        "preview": "https://www.nba.com/game/ind-vs-phi-0022600236"
+      },
+      "originated_line": {
+        "away_expected": 110.5,
+        "home_expected": 112.6,
+        "spread": 2,
+        "spread_label": "PHI +2",
+        "total": 223,
+        "expected_margin": 2.1,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.5832,
+          "away_win_prob": 0.4168
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.504,
+          "away_cover_prob": 0.496
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Over",
+      "prob": 0.6967776531583724,
+      "edge": 0.19677765315837237,
+      "line": "Total 232",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-15",
+        "away": "Los Angeles Lakers",
+        "home": "Phoenix Suns",
+        "time_et": "4:00 PM",
+        "game_id": "0022600237",
+        "preview": "https://www.nba.com/game/lal-vs-phx-0022600237"
+      },
+      "originated_line": {
+        "away_expected": 119.2,
+        "home_expected": 113.0,
+        "spread": -6,
+        "spread_label": "PHO -6",
+        "total": 232,
+        "expected_margin": -6.2,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.2705,
+          "away_win_prob": 0.7295
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.492,
+          "away_cover_prob": 0.508
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Under",
+      "prob": 0.7769534596019575,
+      "edge": 0.2769534596019575,
+      "line": "Total 219",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-15",
+        "away": "Charlotte Hornets",
+        "home": "LA Clippers",
+        "time_et": "4:30 PM",
+        "game_id": "0022600238",
+        "preview": "https://www.nba.com/game/cha-vs-lac-0022600238"
+      },
+      "originated_line": {
+        "away_expected": 108.3,
+        "home_expected": 110.9,
+        "spread": 3,
+        "spread_label": "LAC +3",
+        "total": 219,
+        "expected_margin": 2.6,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.6025,
+          "away_win_prob": 0.3975
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.484,
+          "away_cover_prob": 0.516
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Under",
+      "prob": 0.716669352751496,
+      "edge": 0.216669352751496,
+      "line": "Total 221",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-15",
+        "away": "Dallas Mavericks",
+        "home": "Boston Celtics",
+        "time_et": "6:00 PM",
+        "game_id": "0022600240",
+        "preview": "https://www.nba.com/game/dal-vs-bos-0022600240"
+      },
+      "originated_line": {
+        "away_expected": 108.2,
+        "home_expected": 113.2,
+        "spread": 5,
+        "spread_label": "BOS +5",
+        "total": 221,
+        "expected_margin": 5.0,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.69,
+          "away_win_prob": 0.31
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.5,
+          "away_cover_prob": 0.5
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Under",
+      "prob": 0.7480049215114086,
+      "edge": 0.24800492151140863,
+      "line": "Total 220",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-15",
+        "away": "New York Knicks",
+        "home": "Toronto Raptors",
+        "time_et": "6:00 PM",
+        "game_id": "0022600241",
+        "preview": "https://www.nba.com/game/nyk-vs-tor-0022600241"
+      },
+      "originated_line": {
+        "away_expected": 111.5,
+        "home_expected": 108.9,
+        "spread": -3,
+        "spread_label": "TOR -3",
+        "total": 220,
+        "expected_margin": -2.6,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.3975,
+          "away_win_prob": 0.6025
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.516,
+          "away_cover_prob": 0.484
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Under",
+      "prob": 0.610163610942811,
+      "edge": 0.11016361094281102,
+      "line": "Total 224",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-15",
+        "away": "Houston Rockets",
+        "home": "Washington Wizards",
+        "time_et": "7:00 PM",
+        "game_id": "0022600242",
+        "preview": "https://www.nba.com/game/hou-vs-was-0022600242"
+      },
+      "originated_line": {
+        "away_expected": 115.6,
+        "home_expected": 108.2,
+        "spread": -7,
+        "spread_label": "WAS -7",
+        "total": 224,
+        "expected_margin": -7.4,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.2343,
+          "away_win_prob": 0.7657
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.484,
+          "away_cover_prob": 0.516
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Over",
+      "prob": 0.6619508479065775,
+      "edge": 0.16195084790657754,
+      "line": "Total 231",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-15",
+        "away": "Atlanta Hawks",
+        "home": "Milwaukee Bucks",
+        "time_et": "8:00 PM",
+        "game_id": "0022600243",
+        "preview": "https://www.nba.com/game/atl-vs-mil-0022600243"
+      },
+      "originated_line": {
+        "away_expected": 119.8,
+        "home_expected": 111.5,
+        "spread": -8,
+        "spread_label": "MIL -8",
+        "total": 231,
+        "expected_margin": -8.3,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.2095,
+          "away_win_prob": 0.7905
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.488,
+          "away_cover_prob": 0.512
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Under",
+      "prob": 0.610163610942811,
+      "edge": 0.11016361094281102,
+      "line": "Total 224",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-15",
+        "away": "Oklahoma City Thunder",
+        "home": "Sacramento Kings",
+        "time_et": "9:00 PM",
+        "game_id": "0022600244",
+        "preview": "https://www.nba.com/game/okc-vs-sac-0022600244"
+      },
+      "originated_line": {
+        "away_expected": 116.0,
+        "home_expected": 107.6,
+        "spread": -8,
+        "spread_label": "SAC -8",
+        "total": 224,
+        "expected_margin": -8.4,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.2069,
+          "away_win_prob": 0.7931
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.4841,
+          "away_cover_prob": 0.5159
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Under",
+      "prob": 0.7480049215114086,
+      "edge": 0.24800492151140863,
+      "line": "Total 220",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-16",
+        "away": "Orlando Magic",
+        "home": "Boston Celtics",
+        "time_et": "7:00 PM",
+        "game_id": "0022600245",
+        "preview": "https://www.nba.com/game/orl-vs-bos-0022600245"
+      },
+      "originated_line": {
+        "away_expected": 105.8,
+        "home_expected": 114.2,
+        "spread": 8,
+        "spread_label": "BOS +8",
+        "total": 220,
+        "expected_margin": 8.4,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.7931,
+          "away_win_prob": 0.2069
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.5159,
+          "away_cover_prob": 0.4841
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "side": "Over",
+      "prob": 0.8133611858632264,
+      "edge": 0.31336118586322637,
+      "line": "Total 236",
+      "bet_kind": "total",
+      "strategy_id": "S3",
+      "strategy": "Total Lean (Over/Under)",
+      "gate_edge": "pass",
+      "game": {
+        "date": "2026-11-16",
+        "away": "Chicago Bulls",
+        "home": "Cleveland Cavaliers",
+        "time_et": "7:00 PM",
+        "game_id": "0022600246",
+        "preview": "https://www.nba.com/game/chi-vs-cle-0022600246"
+      },
+      "originated_line": {
+        "away_expected": 113.8,
+        "home_expected": 122.6,
+        "spread": 9,
+        "spread_label": "CLE +9",
+        "total": 236,
+        "expected_margin": 8.8,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.8035,
+          "away_win_prob": 0.1965
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.4921,
+          "away_cover_prob": 0.5079
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      },
+      "source_schedule": "https://www.nba.com/schedule",
+      "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "strategy_id": "S5",
+      "strategy": "Two-Team Parlay Combo",
+      "legs": [
+        {
+          "side": "Over",
+          "prob": 0.857172307360413,
+          "edge": 0.35717230736041305,
+          "line": "Total 238",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-13",
+            "away": "Atlanta Hawks",
+            "home": "Chicago Bulls",
+            "time_et": "8:00 PM",
+            "arena": "United Center",
+            "group": "East Group C",
+            "game_id": "0022600037",
+            "preview": "https://www.nba.com/game/atl-vs-chi-0022600037",
+            "away_abbr": "ATL",
+            "home_abbr": "CHI",
+            "originated": {
+              "away_expected": 123.6,
+              "home_expected": 114.8,
+              "spread": -9,
+              "spread_label": "CHI -9",
+              "total": 238,
+              "expected_margin": -8.8,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.1965,
+                "away_win_prob": 0.8035
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.5079,
+                "away_cover_prob": 0.4921
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        },
+        {
+          "side": "Over",
+          "prob": 0.8133611858632264,
+          "edge": 0.31336118586322637,
+          "line": "Total 236",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-13",
+            "away": "Memphis Grizzlies",
+            "home": "New Orleans Pelicans",
+            "time_et": "8:00 PM",
+            "arena": "Smoothie King Center",
+            "group": "West Group B",
+            "game_id": "0022600038",
+            "preview": "https://www.nba.com/game/mem-vs-nop-0022600038",
+            "away_abbr": "MEM",
+            "home_abbr": "NOP",
+            "originated": {
+              "away_expected": 121.1,
+              "home_expected": 114.4,
+              "spread": -7,
+              "spread_label": "NOP -7",
+              "total": 236,
+              "expected_margin": -6.7,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.255,
+                "away_win_prob": 0.745
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.512,
+                "away_cover_prob": 0.488
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        }
+      ],
+      "rejected": false,
+      "gate_correlation": "pass",
+      "correlation": 0.0,
+      "combined_prob": 0.6972,
+      "edge": 0.4472,
+      "bet_kind": "parlay"
+    },
+    {
+      "strategy_id": "S5",
+      "strategy": "Two-Team Parlay Combo",
+      "legs": [
+        {
+          "side": "Over",
+          "prob": 0.8133611858632264,
+          "edge": 0.31336118586322637,
+          "line": "Total 236",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-16",
+            "away": "Chicago Bulls",
+            "home": "Cleveland Cavaliers",
+            "time_et": "7:00 PM",
+            "arena": "Rocket Arena",
+            "group": null,
+            "game_id": "0022600246",
+            "preview": "https://www.nba.com/game/chi-vs-cle-0022600246",
+            "away_abbr": "CHI",
+            "home_abbr": "CLE",
+            "originated": {
+              "away_expected": 113.8,
+              "home_expected": 122.6,
+              "spread": 9,
+              "spread_label": "CLE +9",
+              "total": 236,
+              "expected_margin": 8.8,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.8035,
+                "away_win_prob": 0.1965
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.4921,
+                "away_cover_prob": 0.5079
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        },
+        {
+          "side": "Under",
+          "prob": 0.7769534596019575,
+          "edge": 0.2769534596019575,
+          "line": "Total 219",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-15",
+            "away": "Charlotte Hornets",
+            "home": "LA Clippers",
+            "time_et": "4:30 PM",
+            "arena": "Intuit Dome",
+            "group": null,
+            "game_id": "0022600238",
+            "preview": "https://www.nba.com/game/cha-vs-lac-0022600238",
+            "away_abbr": "CHO",
+            "home_abbr": "LAC",
+            "originated": {
+              "away_expected": 108.3,
+              "home_expected": 110.9,
+              "spread": 3,
+              "spread_label": "LAC +3",
+              "total": 219,
+              "expected_margin": 2.6,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.6025,
+                "away_win_prob": 0.3975
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.484,
+                "away_cover_prob": 0.516
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        }
+      ],
+      "rejected": false,
+      "gate_correlation": "pass",
+      "correlation": 0.0,
+      "combined_prob": 0.6319,
+      "edge": 0.3819,
+      "bet_kind": "parlay"
+    },
+    {
+      "strategy_id": "S5",
+      "strategy": "Two-Team Parlay Combo",
+      "legs": [
+        {
+          "side": "Over",
+          "prob": 0.7598760354908779,
+          "edge": 0.2598760354908779,
+          "line": "Total 234",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-14",
+            "away": "Denver Nuggets",
+            "home": "New Orleans Pelicans",
+            "time_et": "7:00 PM",
+            "arena": "Smoothie King Center",
+            "group": null,
+            "game_id": "0022600231",
+            "preview": "https://www.nba.com/game/den-vs-nop-0022600231",
+            "away_abbr": "DEN",
+            "home_abbr": "NOP",
+            "originated": {
+              "away_expected": 119.4,
+              "home_expected": 115.1,
+              "spread": -4,
+              "spread_label": "NOP -4",
+              "total": 234,
+              "expected_margin": -4.3,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.3345,
+                "away_win_prob": 0.6655
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.488,
+                "away_cover_prob": 0.512
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        },
+        {
+          "side": "Over",
+          "prob": 0.7598760354908779,
+          "edge": 0.2598760354908779,
+          "line": "Total 234",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-14",
+            "away": "Chicago Bulls",
+            "home": "Minnesota Timberwolves",
+            "time_et": "8:00 PM",
+            "arena": "Target Center",
+            "group": null,
+            "game_id": "0022600235",
+            "preview": "https://www.nba.com/game/chi-vs-min-0022600235",
+            "away_abbr": "CHI",
+            "home_abbr": "MIN",
+            "originated": {
+              "away_expected": 109.6,
+              "home_expected": 124.1,
+              "spread": 14,
+              "spread_label": "MIN +14",
+              "total": 234,
+              "expected_margin": 14.5,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.9105,
+                "away_win_prob": 0.0895
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.5199,
+                "away_cover_prob": 0.4801
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        }
+      ],
+      "rejected": false,
+      "gate_correlation": "pass",
+      "correlation": 0.0,
+      "combined_prob": 0.5774,
+      "edge": 0.3274,
+      "bet_kind": "parlay"
+    },
+    {
+      "strategy_id": "S5",
+      "strategy": "Two-Team Parlay Combo",
+      "legs": [
+        {
+          "side": "Under",
+          "prob": 0.7480049215114086,
+          "edge": 0.24800492151140863,
+          "line": "Total 220",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-13",
+            "away": "New York Knicks",
+            "home": "Indiana Pacers",
+            "time_et": "7:00 PM",
+            "arena": "Gainbridge Fieldhouse",
+            "group": "East Group B",
+            "game_id": "0022600034",
+            "preview": "https://www.nba.com/game/nyk-vs-ind-0022600034",
+            "away_abbr": "NYK",
+            "home_abbr": "IND",
+            "originated": {
+              "away_expected": 112.2,
+              "home_expected": 107.5,
+              "spread": -5,
+              "spread_label": "IND -5",
+              "total": 220,
+              "expected_margin": -4.7,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.3204,
+                "away_win_prob": 0.6796
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.512,
+                "away_cover_prob": 0.488
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        },
+        {
+          "side": "Under",
+          "prob": 0.7480049215114086,
+          "edge": 0.24800492151140863,
+          "line": "Total 220",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-15",
+            "away": "New York Knicks",
+            "home": "Toronto Raptors",
+            "time_et": "6:00 PM",
+            "arena": "Scotiabank Arena",
+            "group": null,
+            "game_id": "0022600241",
+            "preview": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+            "away_abbr": "NYK",
+            "home_abbr": "TOR",
+            "originated": {
+              "away_expected": 111.5,
+              "home_expected": 108.9,
+              "spread": -3,
+              "spread_label": "TOR -3",
+              "total": 220,
+              "expected_margin": -2.6,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.3975,
+                "away_win_prob": 0.6025
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.516,
+                "away_cover_prob": 0.484
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        }
+      ],
+      "rejected": false,
+      "gate_correlation": "pass",
+      "correlation": 0.0,
+      "combined_prob": 0.5595,
+      "edge": 0.3095,
+      "bet_kind": "parlay"
+    },
+    {
+      "strategy_id": "S5",
+      "strategy": "Two-Team Parlay Combo",
+      "legs": [
+        {
+          "side": "Under",
+          "prob": 0.7480049215114086,
+          "edge": 0.24800492151140863,
+          "line": "Total 220",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-16",
+            "away": "Orlando Magic",
+            "home": "Boston Celtics",
+            "time_et": "7:00 PM",
+            "arena": "TD Garden",
+            "group": null,
+            "game_id": "0022600245",
+            "preview": "https://www.nba.com/game/orl-vs-bos-0022600245",
+            "away_abbr": "ORL",
+            "home_abbr": "BOS",
+            "originated": {
+              "away_expected": 105.8,
+              "home_expected": 114.2,
+              "spread": 8,
+              "spread_label": "BOS +8",
+              "total": 220,
+              "expected_margin": 8.4,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.7931,
+                "away_win_prob": 0.2069
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.5159,
+                "away_cover_prob": 0.4841
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        },
+        {
+          "side": "Over",
+          "prob": 0.729482778751689,
+          "edge": 0.229482778751689,
+          "line": "Total 233",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-13",
+            "away": "Cleveland Cavaliers",
+            "home": "Miami Heat",
+            "time_et": "8:00 PM",
+            "arena": "Kaseya Center",
+            "group": "East Group B",
+            "game_id": "0022600036",
+            "preview": "https://www.nba.com/game/cle-vs-mia-0022600036",
+            "away_abbr": "CLE",
+            "home_abbr": "MIA",
+            "originated": {
+              "away_expected": 118.2,
+              "home_expected": 115.0,
+              "spread": -3,
+              "spread_label": "MIA -3",
+              "total": 233,
+              "expected_margin": -3.2,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.3747,
+                "away_win_prob": 0.6253
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.492,
+                "away_cover_prob": 0.508
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        }
+      ],
+      "rejected": false,
+      "gate_correlation": "pass",
+      "correlation": 0.0,
+      "combined_prob": 0.5457,
+      "edge": 0.2957,
+      "bet_kind": "parlay"
+    },
+    {
+      "strategy_id": "S5",
+      "strategy": "Two-Team Parlay Combo",
+      "legs": [
+        {
+          "side": "Under",
+          "prob": 0.716669352751496,
+          "edge": 0.216669352751496,
+          "line": "Total 221",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-15",
+            "away": "Dallas Mavericks",
+            "home": "Boston Celtics",
+            "time_et": "6:00 PM",
+            "arena": "TD Garden",
+            "group": null,
+            "game_id": "0022600240",
+            "preview": "https://www.nba.com/game/dal-vs-bos-0022600240",
+            "away_abbr": "DAL",
+            "home_abbr": "BOS",
+            "originated": {
+              "away_expected": 108.2,
+              "home_expected": 113.2,
+              "spread": 5,
+              "spread_label": "BOS +5",
+              "total": 221,
+              "expected_margin": 5.0,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.69,
+                "away_win_prob": 0.31
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.5,
+                "away_cover_prob": 0.5
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        },
+        {
+          "side": "Over",
+          "prob": 0.6967776531583724,
+          "edge": 0.19677765315837237,
+          "line": "Total 232",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-15",
+            "away": "Los Angeles Lakers",
+            "home": "Phoenix Suns",
+            "time_et": "4:00 PM",
+            "arena": "Mortgage Matchup Center",
+            "group": null,
+            "game_id": "0022600237",
+            "preview": "https://www.nba.com/game/lal-vs-phx-0022600237",
+            "away_abbr": "LAL",
+            "home_abbr": "PHO",
+            "originated": {
+              "away_expected": 119.2,
+              "home_expected": 113.0,
+              "spread": -6,
+              "spread_label": "PHO -6",
+              "total": 232,
+              "expected_margin": -6.2,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.2705,
+                "away_win_prob": 0.7295
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.492,
+                "away_cover_prob": 0.508
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        }
+      ],
+      "rejected": false,
+      "gate_correlation": "pass",
+      "correlation": 0.0,
+      "combined_prob": 0.4994,
+      "edge": 0.2494,
+      "bet_kind": "parlay"
+    },
+    {
+      "strategy_id": "S5",
+      "strategy": "Two-Team Parlay Combo",
+      "legs": [
+        {
+          "side": "Over",
+          "prob": 0.6619508479065775,
+          "edge": 0.16195084790657754,
+          "line": "Total 231",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-15",
+            "away": "Atlanta Hawks",
+            "home": "Milwaukee Bucks",
+            "time_et": "8:00 PM",
+            "arena": "Fiserv Forum",
+            "group": null,
+            "game_id": "0022600243",
+            "preview": "https://www.nba.com/game/atl-vs-mil-0022600243",
+            "away_abbr": "ATL",
+            "home_abbr": "MIL",
+            "originated": {
+              "away_expected": 119.8,
+              "home_expected": 111.5,
+              "spread": -8,
+              "spread_label": "MIL -8",
+              "total": 231,
+              "expected_margin": -8.3,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.2095,
+                "away_win_prob": 0.7905
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.488,
+                "away_cover_prob": 0.512
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        },
+        {
+          "side": "Under",
+          "prob": 0.6474844401655163,
+          "edge": 0.14748444016551632,
+          "line": "Total 223",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-13",
+            "away": "Utah Jazz",
+            "home": "Houston Rockets",
+            "time_et": "8:30 PM",
+            "arena": "Toyota Center",
+            "group": "West Group A",
+            "game_id": "0022600039",
+            "preview": "https://www.nba.com/game/uta-vs-hou-0022600039",
+            "away_abbr": "UTA",
+            "home_abbr": "HOU",
+            "originated": {
+              "away_expected": 106.5,
+              "home_expected": 116.8,
+              "spread": 10,
+              "spread_label": "HOU +10",
+              "total": 223,
+              "expected_margin": 10.3,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.8386,
+                "away_win_prob": 0.1614
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.512,
+                "away_cover_prob": 0.488
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        }
+      ],
+      "rejected": false,
+      "gate_correlation": "pass",
+      "correlation": 0.0,
+      "combined_prob": 0.4286,
+      "edge": 0.1786,
+      "bet_kind": "parlay"
+    },
+    {
+      "strategy_id": "S5",
+      "strategy": "Two-Team Parlay Combo",
+      "legs": [
+        {
+          "side": "Under",
+          "prob": 0.6474844401655163,
+          "edge": 0.14748444016551632,
+          "line": "Total 223",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-15",
+            "away": "Indiana Pacers",
+            "home": "Philadelphia 76ers",
+            "time_et": "1:00 PM",
+            "arena": "Xfinity Mobile Arena",
+            "group": null,
+            "game_id": "0022600236",
+            "preview": "https://www.nba.com/game/ind-vs-phi-0022600236",
+            "away_abbr": "IND",
+            "home_abbr": "PHI",
+            "originated": {
+              "away_expected": 110.5,
+              "home_expected": 112.6,
+              "spread": 2,
+              "spread_label": "PHI +2",
+              "total": 223,
+              "expected_margin": 2.1,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.5832,
+                "away_win_prob": 0.4168
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.504,
+                "away_cover_prob": 0.496
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        },
+        {
+          "side": "Over",
+          "prob": 0.6252752039990868,
+          "edge": 0.12527520399908676,
+          "line": "Total 230",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-13",
+            "away": "Portland Trail Blazers",
+            "home": "Sacramento Kings",
+            "time_et": "10:00 PM",
+            "arena": "Golden 1 Center",
+            "group": "West Group C",
+            "game_id": "0022600041",
+            "preview": "https://www.nba.com/game/por-vs-sac-0022600041",
+            "away_abbr": "POR",
+            "home_abbr": "SAC",
+            "originated": {
+              "away_expected": 120.2,
+              "home_expected": 110.3,
+              "spread": -10,
+              "spread_label": "SAC -10",
+              "total": 230,
+              "expected_margin": -9.9,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.1702,
+                "away_win_prob": 0.8298
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.5039,
+                "away_cover_prob": 0.4961
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        }
+      ],
+      "rejected": false,
+      "gate_correlation": "pass",
+      "correlation": 0.0,
+      "combined_prob": 0.4049,
+      "edge": 0.1549,
+      "bet_kind": "parlay"
+    },
+    {
+      "strategy_id": "S5",
+      "strategy": "Two-Team Parlay Combo",
+      "legs": [
+        {
+          "side": "Over",
+          "prob": 0.6252752039990868,
+          "edge": 0.12527520399908676,
+          "line": "Total 230",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-14",
+            "away": "Detroit Pistons",
+            "home": "Miami Heat",
+            "time_et": "8:00 PM",
+            "arena": "Kaseya Center",
+            "group": null,
+            "game_id": "0022600233",
+            "preview": "https://www.nba.com/game/det-vs-mia-0022600233",
+            "away_abbr": "DET",
+            "home_abbr": "MIA",
+            "originated": {
+              "away_expected": 117.8,
+              "home_expected": 111.8,
+              "spread": -6,
+              "spread_label": "MIA -6",
+              "total": 230,
+              "expected_margin": -6.0,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.2769,
+                "away_win_prob": 0.7231
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.5,
+                "away_cover_prob": 0.5
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        },
+        {
+          "side": "Under",
+          "prob": 0.610163610942811,
+          "edge": 0.11016361094281102,
+          "line": "Total 224",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-13",
+            "away": "Oklahoma City Thunder",
+            "home": "LA Clippers",
+            "time_et": "10:30 PM",
+            "arena": "Intuit Dome",
+            "group": "West Group B",
+            "game_id": "0022600042",
+            "preview": "https://www.nba.com/game/okc-vs-lac-0022600042",
+            "away_abbr": "OKC",
+            "home_abbr": "LAC",
+            "originated": {
+              "away_expected": 114.6,
+              "home_expected": 109.6,
+              "spread": -5,
+              "spread_label": "LAC -5",
+              "total": 224,
+              "expected_margin": -5.0,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.31,
+                "away_win_prob": 0.69
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.5,
+                "away_cover_prob": 0.5
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        }
+      ],
+      "rejected": false,
+      "gate_correlation": "pass",
+      "correlation": 0.0,
+      "combined_prob": 0.3815,
+      "edge": 0.1315,
+      "bet_kind": "parlay"
+    },
+    {
+      "strategy_id": "S5",
+      "strategy": "Two-Team Parlay Combo",
+      "legs": [
+        {
+          "side": "Under",
+          "prob": 0.610163610942811,
+          "edge": 0.11016361094281102,
+          "line": "Total 224",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-15",
+            "away": "Houston Rockets",
+            "home": "Washington Wizards",
+            "time_et": "7:00 PM",
+            "arena": "Capital One Arena",
+            "group": null,
+            "game_id": "0022600242",
+            "preview": "https://www.nba.com/game/hou-vs-was-0022600242",
+            "away_abbr": "HOU",
+            "home_abbr": "WAS",
+            "originated": {
+              "away_expected": 115.6,
+              "home_expected": 108.2,
+              "spread": -7,
+              "spread_label": "WAS -7",
+              "total": 224,
+              "expected_margin": -7.4,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.2343,
+                "away_win_prob": 0.7657
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.484,
+                "away_cover_prob": 0.516
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        },
+        {
+          "side": "Under",
+          "prob": 0.610163610942811,
+          "edge": 0.11016361094281102,
+          "line": "Total 224",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-15",
+            "away": "Oklahoma City Thunder",
+            "home": "Sacramento Kings",
+            "time_et": "9:00 PM",
+            "arena": "Golden 1 Center",
+            "group": null,
+            "game_id": "0022600244",
+            "preview": "https://www.nba.com/game/okc-vs-sac-0022600244",
+            "away_abbr": "OKC",
+            "home_abbr": "SAC",
+            "originated": {
+              "away_expected": 116.0,
+              "home_expected": 107.6,
+              "spread": -8,
+              "spread_label": "SAC -8",
+              "total": 224,
+              "expected_margin": -8.4,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.2069,
+                "away_win_prob": 0.7931
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.4841,
+                "away_cover_prob": 0.5159
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        }
+      ],
+      "rejected": false,
+      "gate_correlation": "pass",
+      "correlation": 0.0,
+      "combined_prob": 0.3723,
+      "edge": 0.1223,
+      "bet_kind": "parlay"
+    },
+    {
+      "strategy_id": "S5",
+      "strategy": "Two-Team Parlay Combo",
+      "legs": [
+        {
+          "side": "Over",
+          "prob": 0.5871024895421691,
+          "edge": 0.08710248954216915,
+          "line": "Total 229",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-13",
+            "away": "Golden State Warriors",
+            "home": "San Antonio Spurs",
+            "time_et": "9:30 PM",
+            "arena": "Frost Bank Center",
+            "group": "West Group C",
+            "game_id": "0022600040",
+            "preview": "https://www.nba.com/game/gsw-vs-sas-0022600040",
+            "away_abbr": "GSW",
+            "home_abbr": "SAS",
+            "originated": {
+              "away_expected": 113.7,
+              "home_expected": 115.3,
+              "spread": 2,
+              "spread_label": "SAS +2",
+              "total": 229,
+              "expected_margin": 1.6,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.5637,
+                "away_win_prob": 0.4363
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.4841,
+                "away_cover_prob": 0.5159
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        },
+        {
+          "side": "Under",
+          "prob": 0.5715064294675564,
+          "edge": 0.07150642946755636,
+          "line": "Total 225",
+          "bet_kind": "total",
+          "strategy_id": "S3",
+          "strategy": "Total Lean (Over/Under)",
+          "game": {
+            "date": "2026-11-13",
+            "away": "Milwaukee Bucks",
+            "home": "Orlando Magic",
+            "time_et": "7:00 PM",
+            "arena": "Kia Center",
+            "group": "East Group A",
+            "game_id": "0022600035",
+            "preview": "https://www.nba.com/game/mil-vs-orl-0022600035",
+            "away_abbr": "MIL",
+            "home_abbr": "ORL",
+            "originated": {
+              "away_expected": 110.4,
+              "home_expected": 114.9,
+              "spread": 4,
+              "spread_label": "ORL +4",
+              "total": 225,
+              "expected_margin": 4.5,
+              "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+              "win_prob": {
+                "home_win_prob": 0.6726,
+                "away_win_prob": 0.3274
+              },
+              "cover_prob": {
+                "home_cover_prob": 0.52,
+                "away_cover_prob": 0.48
+              },
+              "source_standings": "https://www.nba.com/schedule",
+              "source_schedule": "https://www.nba.com/schedule"
+            }
+          },
+          "gate_edge": "pass"
+        }
+      ],
+      "rejected": false,
+      "gate_correlation": "pass",
+      "correlation": 0.0,
+      "combined_prob": 0.3355,
+      "edge": 0.0855,
+      "bet_kind": "parlay"
+    },
+    {
+      "strategy_id": "S6",
+      "strategy": "Player Prop + Team Parlay",
+      "bet_kind": "parlay_player_prop",
+      "side": null,
+      "line": null,
+      "edge": null,
+      "combined_prob": null,
+      "correlation": null,
+      "flag": "methodology defined; live legs require verified per-player stats & roster — not auto-fired"
+    }
+  ]
+}

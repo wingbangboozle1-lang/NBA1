@@ -1,0 +1,38 @@
+{
+  "description": "Completed NBA games on 2026-11-12 captured from the official Basketball-Reference boxscore index. Used as a verified recent-results sample.",
+  "source": "https://www.basketball-reference.com/boxscores/index.fcgi?month=11&day=12&year=2026",
+  "source_name": "Basketball-Reference.com — NBA Games Played on November 12, 2026",
+  "captured": "2026-11-13",
+  "verified": true,
+  "games": [
+    {
+      "date": "2026-11-12", "away": "Dallas Mavericks", "home": "Minnesota Timberwolves",
+      "away_score": 94, "home_score": 133, "status": "Final",
+      "q_scores": {"away": [26, 26, 17, 25], "home": [34, 33, 36, 30]},
+      "box": "https://www.basketball-reference.com/boxscores/202611120MIN.html",
+      "leaders": [{"stat": "PTS", "player": "B. Hyland", "team": "MIN", "value": 24}, {"stat": "TRB", "player": "2 tied", "team": "MIN", "value": 9}]
+    },
+    {
+      "date": "2026-11-12", "away": "Toronto Raptors", "home": "Philadelphia 76ers",
+      "away_score": 112, "home_score": 123, "status": "Final",
+      "q_scores": {"away": [33, 27, 27, 25], "home": [24, 36, 36, 27]},
+      "box": "https://www.basketball-reference.com/boxscores/202611120PHI.html",
+      "leaders": [{"stat": "PTS", "player": "R. Barrett", "team": "TOR", "value": 31}, {"stat": "TRB", "player": "R. Barrett", "team": "TOR", "value": 14}]
+    },
+    {
+      "date": "2026-11-12", "away": "Charlotte Hornets", "home": "Phoenix Suns",
+      "away_score": 96, "home_score": 101, "status": "Final",
+      "q_scores": {"away": [22, 28, 26, 20], "home": [28, 27, 17, 29]},
+      "box": "https://www.basketball-reference.com/boxscores/202611120PHO.html",
+      "leaders": [{"stat": "PTS", "player": "D. Booker", "team": "PHO", "value": 30}, {"stat": "TRB", "player": "M. Diabaté", "team": "CHO", "value": 13}]
+    },
+    {
+      "date": "2026-11-12", "away": "Detroit Pistons", "home": "Washington Wizards",
+      "away_score": 144, "home_score": 140, "status": "Final (2OT)",
+      "q_scores": {"away": [33, 31, 30, 27, 11, 12], "home": [32, 29, 29, 31, 11, 8]},
+      "box": "https://www.basketball-reference.com/boxscores/202611120WAS.html",
+      "leaders": [{"stat": "PTS", "player": "C. Cunningham", "team": "DET", "value": 52}, {"stat": "TRB", "player": "A. Davis", "team": "WAS", "value": 15}],
+      "irregularity_flag": "Leader 'A. Davis' is listed with Washington (WAS). A star-caliber player on an unexpected team; verify current roster/trade status before relying on this line for production projections."
+    }
+  ]
+}

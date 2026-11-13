@@ -1,0 +1,816 @@
+{
+  "description": "Our own originated NBA lines (spread, total, win/cover probabilities) for the upcoming slate.",
+  "originator": "NBA1 model (simple-rating expected score)",
+  "source_standings": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html",
+  "source_schedule": "https://www.nba.com/schedule",
+  "captured": "2026-11-13",
+  "league_avg_ppg": 113.41,
+  "lines": [
+    {
+      "date": "2026-11-13",
+      "away": "New York Knicks",
+      "home": "Indiana Pacers",
+      "time_et": "7:00 PM",
+      "arena": "Gainbridge Fieldhouse",
+      "group": "East Group B",
+      "game_id": "0022600034",
+      "preview": "https://www.nba.com/game/nyk-vs-ind-0022600034",
+      "away_abbr": "NYK",
+      "home_abbr": "IND",
+      "originated": {
+        "away_expected": 112.2,
+        "home_expected": 107.5,
+        "spread": -5,
+        "spread_label": "IND -5",
+        "total": 220,
+        "expected_margin": -4.7,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.3204,
+          "away_win_prob": 0.6796
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.512,
+          "away_cover_prob": 0.488
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "away": "Milwaukee Bucks",
+      "home": "Orlando Magic",
+      "time_et": "7:00 PM",
+      "arena": "Kia Center",
+      "group": "East Group A",
+      "game_id": "0022600035",
+      "preview": "https://www.nba.com/game/mil-vs-orl-0022600035",
+      "away_abbr": "MIL",
+      "home_abbr": "ORL",
+      "originated": {
+        "away_expected": 110.4,
+        "home_expected": 114.9,
+        "spread": 4,
+        "spread_label": "ORL +4",
+        "total": 225,
+        "expected_margin": 4.5,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.6726,
+          "away_win_prob": 0.3274
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.52,
+          "away_cover_prob": 0.48
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "away": "Cleveland Cavaliers",
+      "home": "Miami Heat",
+      "time_et": "8:00 PM",
+      "arena": "Kaseya Center",
+      "group": "East Group B",
+      "game_id": "0022600036",
+      "preview": "https://www.nba.com/game/cle-vs-mia-0022600036",
+      "away_abbr": "CLE",
+      "home_abbr": "MIA",
+      "originated": {
+        "away_expected": 118.2,
+        "home_expected": 115.0,
+        "spread": -3,
+        "spread_label": "MIA -3",
+        "total": 233,
+        "expected_margin": -3.2,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.3747,
+          "away_win_prob": 0.6253
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.492,
+          "away_cover_prob": 0.508
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "away": "Atlanta Hawks",
+      "home": "Chicago Bulls",
+      "time_et": "8:00 PM",
+      "arena": "United Center",
+      "group": "East Group C",
+      "game_id": "0022600037",
+      "preview": "https://www.nba.com/game/atl-vs-chi-0022600037",
+      "away_abbr": "ATL",
+      "home_abbr": "CHI",
+      "originated": {
+        "away_expected": 123.6,
+        "home_expected": 114.8,
+        "spread": -9,
+        "spread_label": "CHI -9",
+        "total": 238,
+        "expected_margin": -8.8,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.1965,
+          "away_win_prob": 0.8035
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.5079,
+          "away_cover_prob": 0.4921
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "away": "Memphis Grizzlies",
+      "home": "New Orleans Pelicans",
+      "time_et": "8:00 PM",
+      "arena": "Smoothie King Center",
+      "group": "West Group B",
+      "game_id": "0022600038",
+      "preview": "https://www.nba.com/game/mem-vs-nop-0022600038",
+      "away_abbr": "MEM",
+      "home_abbr": "NOP",
+      "originated": {
+        "away_expected": 121.1,
+        "home_expected": 114.4,
+        "spread": -7,
+        "spread_label": "NOP -7",
+        "total": 236,
+        "expected_margin": -6.7,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.255,
+          "away_win_prob": 0.745
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.512,
+          "away_cover_prob": 0.488
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "away": "Utah Jazz",
+      "home": "Houston Rockets",
+      "time_et": "8:30 PM",
+      "arena": "Toyota Center",
+      "group": "West Group A",
+      "game_id": "0022600039",
+      "preview": "https://www.nba.com/game/uta-vs-hou-0022600039",
+      "away_abbr": "UTA",
+      "home_abbr": "HOU",
+      "originated": {
+        "away_expected": 106.5,
+        "home_expected": 116.8,
+        "spread": 10,
+        "spread_label": "HOU +10",
+        "total": 223,
+        "expected_margin": 10.3,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.8386,
+          "away_win_prob": 0.1614
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.512,
+          "away_cover_prob": 0.488
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "away": "Golden State Warriors",
+      "home": "San Antonio Spurs",
+      "time_et": "9:30 PM",
+      "arena": "Frost Bank Center",
+      "group": "West Group C",
+      "game_id": "0022600040",
+      "preview": "https://www.nba.com/game/gsw-vs-sas-0022600040",
+      "away_abbr": "GSW",
+      "home_abbr": "SAS",
+      "originated": {
+        "away_expected": 113.7,
+        "home_expected": 115.3,
+        "spread": 2,
+        "spread_label": "SAS +2",
+        "total": 229,
+        "expected_margin": 1.6,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.5637,
+          "away_win_prob": 0.4363
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.4841,
+          "away_cover_prob": 0.5159
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "away": "Portland Trail Blazers",
+      "home": "Sacramento Kings",
+      "time_et": "10:00 PM",
+      "arena": "Golden 1 Center",
+      "group": "West Group C",
+      "game_id": "0022600041",
+      "preview": "https://www.nba.com/game/por-vs-sac-0022600041",
+      "away_abbr": "POR",
+      "home_abbr": "SAC",
+      "originated": {
+        "away_expected": 120.2,
+        "home_expected": 110.3,
+        "spread": -10,
+        "spread_label": "SAC -10",
+        "total": 230,
+        "expected_margin": -9.9,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.1702,
+          "away_win_prob": 0.8298
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.5039,
+          "away_cover_prob": 0.4961
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-13",
+      "away": "Oklahoma City Thunder",
+      "home": "LA Clippers",
+      "time_et": "10:30 PM",
+      "arena": "Intuit Dome",
+      "group": "West Group B",
+      "game_id": "0022600042",
+      "preview": "https://www.nba.com/game/okc-vs-lac-0022600042",
+      "away_abbr": "OKC",
+      "home_abbr": "LAC",
+      "originated": {
+        "away_expected": 114.6,
+        "home_expected": 109.6,
+        "spread": -5,
+        "spread_label": "LAC -5",
+        "total": 224,
+        "expected_margin": -5.0,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.31,
+          "away_win_prob": 0.69
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.5,
+          "away_cover_prob": 0.5
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-14",
+      "away": "Denver Nuggets",
+      "home": "New Orleans Pelicans",
+      "time_et": "7:00 PM",
+      "arena": "Smoothie King Center",
+      "group": null,
+      "game_id": "0022600231",
+      "preview": "https://www.nba.com/game/den-vs-nop-0022600231",
+      "away_abbr": "DEN",
+      "home_abbr": "NOP",
+      "originated": {
+        "away_expected": 119.4,
+        "home_expected": 115.1,
+        "spread": -4,
+        "spread_label": "NOP -4",
+        "total": 234,
+        "expected_margin": -4.3,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.3345,
+          "away_win_prob": 0.6655
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.488,
+          "away_cover_prob": 0.512
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-14",
+      "away": "Dallas Mavericks",
+      "home": "Cleveland Cavaliers",
+      "time_et": "7:30 PM",
+      "arena": "Rocket Arena",
+      "group": null,
+      "game_id": "0022600232",
+      "preview": "https://www.nba.com/game/dal-vs-cle-0022600232",
+      "away_abbr": "DAL",
+      "home_abbr": "CLE",
+      "originated": {
+        "away_expected": 113.8,
+        "home_expected": 114.3,
+        "spread": 0,
+        "spread_label": "CLE +0",
+        "total": 228,
+        "expected_margin": 0.5,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.52,
+          "away_win_prob": 0.48
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.52,
+          "away_cover_prob": 0.48
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-14",
+      "away": "Detroit Pistons",
+      "home": "Miami Heat",
+      "time_et": "8:00 PM",
+      "arena": "Kaseya Center",
+      "group": null,
+      "game_id": "0022600233",
+      "preview": "https://www.nba.com/game/det-vs-mia-0022600233",
+      "away_abbr": "DET",
+      "home_abbr": "MIA",
+      "originated": {
+        "away_expected": 117.8,
+        "home_expected": 111.8,
+        "spread": -6,
+        "spread_label": "MIA -6",
+        "total": 230,
+        "expected_margin": -6.0,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.2769,
+          "away_win_prob": 0.7231
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.5,
+          "away_cover_prob": 0.5
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-14",
+      "away": "Brooklyn Nets",
+      "home": "Memphis Grizzlies",
+      "time_et": "8:00 PM",
+      "arena": "FedExForum",
+      "group": null,
+      "game_id": "0022600234",
+      "preview": "https://www.nba.com/game/bkn-vs-mem-0022600234",
+      "away_abbr": "BRK",
+      "home_abbr": "MEM",
+      "originated": {
+        "away_expected": 111.1,
+        "home_expected": 116.6,
+        "spread": 6,
+        "spread_label": "MEM +6",
+        "total": 228,
+        "expected_margin": 5.5,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.7068,
+          "away_win_prob": 0.2932
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.48,
+          "away_cover_prob": 0.52
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-14",
+      "away": "Chicago Bulls",
+      "home": "Minnesota Timberwolves",
+      "time_et": "8:00 PM",
+      "arena": "Target Center",
+      "group": null,
+      "game_id": "0022600235",
+      "preview": "https://www.nba.com/game/chi-vs-min-0022600235",
+      "away_abbr": "CHI",
+      "home_abbr": "MIN",
+      "originated": {
+        "away_expected": 109.6,
+        "home_expected": 124.1,
+        "spread": 14,
+        "spread_label": "MIN +14",
+        "total": 234,
+        "expected_margin": 14.5,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.9105,
+          "away_win_prob": 0.0895
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.5199,
+          "away_cover_prob": 0.4801
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-15",
+      "away": "Indiana Pacers",
+      "home": "Philadelphia 76ers",
+      "time_et": "1:00 PM",
+      "arena": "Xfinity Mobile Arena",
+      "group": null,
+      "game_id": "0022600236",
+      "preview": "https://www.nba.com/game/ind-vs-phi-0022600236",
+      "away_abbr": "IND",
+      "home_abbr": "PHI",
+      "originated": {
+        "away_expected": 110.5,
+        "home_expected": 112.6,
+        "spread": 2,
+        "spread_label": "PHI +2",
+        "total": 223,
+        "expected_margin": 2.1,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.5832,
+          "away_win_prob": 0.4168
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.504,
+          "away_cover_prob": 0.496
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-15",
+      "away": "Los Angeles Lakers",
+      "home": "Phoenix Suns",
+      "time_et": "4:00 PM",
+      "arena": "Mortgage Matchup Center",
+      "group": null,
+      "game_id": "0022600237",
+      "preview": "https://www.nba.com/game/lal-vs-phx-0022600237",
+      "away_abbr": "LAL",
+      "home_abbr": "PHO",
+      "originated": {
+        "away_expected": 119.2,
+        "home_expected": 113.0,
+        "spread": -6,
+        "spread_label": "PHO -6",
+        "total": 232,
+        "expected_margin": -6.2,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.2705,
+          "away_win_prob": 0.7295
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.492,
+          "away_cover_prob": 0.508
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-15",
+      "away": "Charlotte Hornets",
+      "home": "LA Clippers",
+      "time_et": "4:30 PM",
+      "arena": "Intuit Dome",
+      "group": null,
+      "game_id": "0022600238",
+      "preview": "https://www.nba.com/game/cha-vs-lac-0022600238",
+      "away_abbr": "CHO",
+      "home_abbr": "LAC",
+      "originated": {
+        "away_expected": 108.3,
+        "home_expected": 110.9,
+        "spread": 3,
+        "spread_label": "LAC +3",
+        "total": 219,
+        "expected_margin": 2.6,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.6025,
+          "away_win_prob": 0.3975
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.484,
+          "away_cover_prob": 0.516
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-15",
+      "away": "San Antonio Spurs",
+      "home": "Utah Jazz",
+      "time_et": "5:00 PM",
+      "arena": "Delta Center",
+      "group": null,
+      "game_id": "0022600239",
+      "preview": "https://www.nba.com/game/sas-vs-uta-0022600239",
+      "away_abbr": "SAS",
+      "home_abbr": "UTA",
+      "originated": {
+        "away_expected": 118.7,
+        "home_expected": 107.3,
+        "spread": -11,
+        "spread_label": "UTA -11",
+        "total": 226,
+        "expected_margin": -11.4,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.139,
+          "away_win_prob": 0.861
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.4841,
+          "away_cover_prob": 0.5159
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-15",
+      "away": "Dallas Mavericks",
+      "home": "Boston Celtics",
+      "time_et": "6:00 PM",
+      "arena": "TD Garden",
+      "group": null,
+      "game_id": "0022600240",
+      "preview": "https://www.nba.com/game/dal-vs-bos-0022600240",
+      "away_abbr": "DAL",
+      "home_abbr": "BOS",
+      "originated": {
+        "away_expected": 108.2,
+        "home_expected": 113.2,
+        "spread": 5,
+        "spread_label": "BOS +5",
+        "total": 221,
+        "expected_margin": 5.0,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.69,
+          "away_win_prob": 0.31
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.5,
+          "away_cover_prob": 0.5
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-15",
+      "away": "New York Knicks",
+      "home": "Toronto Raptors",
+      "time_et": "6:00 PM",
+      "arena": "Scotiabank Arena",
+      "group": null,
+      "game_id": "0022600241",
+      "preview": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+      "away_abbr": "NYK",
+      "home_abbr": "TOR",
+      "originated": {
+        "away_expected": 111.5,
+        "home_expected": 108.9,
+        "spread": -3,
+        "spread_label": "TOR -3",
+        "total": 220,
+        "expected_margin": -2.6,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.3975,
+          "away_win_prob": 0.6025
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.516,
+          "away_cover_prob": 0.484
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-15",
+      "away": "Houston Rockets",
+      "home": "Washington Wizards",
+      "time_et": "7:00 PM",
+      "arena": "Capital One Arena",
+      "group": null,
+      "game_id": "0022600242",
+      "preview": "https://www.nba.com/game/hou-vs-was-0022600242",
+      "away_abbr": "HOU",
+      "home_abbr": "WAS",
+      "originated": {
+        "away_expected": 115.6,
+        "home_expected": 108.2,
+        "spread": -7,
+        "spread_label": "WAS -7",
+        "total": 224,
+        "expected_margin": -7.4,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.2343,
+          "away_win_prob": 0.7657
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.484,
+          "away_cover_prob": 0.516
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-15",
+      "away": "Atlanta Hawks",
+      "home": "Milwaukee Bucks",
+      "time_et": "8:00 PM",
+      "arena": "Fiserv Forum",
+      "group": null,
+      "game_id": "0022600243",
+      "preview": "https://www.nba.com/game/atl-vs-mil-0022600243",
+      "away_abbr": "ATL",
+      "home_abbr": "MIL",
+      "originated": {
+        "away_expected": 119.8,
+        "home_expected": 111.5,
+        "spread": -8,
+        "spread_label": "MIL -8",
+        "total": 231,
+        "expected_margin": -8.3,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.2095,
+          "away_win_prob": 0.7905
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.488,
+          "away_cover_prob": 0.512
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-15",
+      "away": "Oklahoma City Thunder",
+      "home": "Sacramento Kings",
+      "time_et": "9:00 PM",
+      "arena": "Golden 1 Center",
+      "group": null,
+      "game_id": "0022600244",
+      "preview": "https://www.nba.com/game/okc-vs-sac-0022600244",
+      "away_abbr": "OKC",
+      "home_abbr": "SAC",
+      "originated": {
+        "away_expected": 116.0,
+        "home_expected": 107.6,
+        "spread": -8,
+        "spread_label": "SAC -8",
+        "total": 224,
+        "expected_margin": -8.4,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.2069,
+          "away_win_prob": 0.7931
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.4841,
+          "away_cover_prob": 0.5159
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-16",
+      "away": "Orlando Magic",
+      "home": "Boston Celtics",
+      "time_et": "7:00 PM",
+      "arena": "TD Garden",
+      "group": null,
+      "game_id": "0022600245",
+      "preview": "https://www.nba.com/game/orl-vs-bos-0022600245",
+      "away_abbr": "ORL",
+      "home_abbr": "BOS",
+      "originated": {
+        "away_expected": 105.8,
+        "home_expected": 114.2,
+        "spread": 8,
+        "spread_label": "BOS +8",
+        "total": 220,
+        "expected_margin": 8.4,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.7931,
+          "away_win_prob": 0.2069
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.5159,
+          "away_cover_prob": 0.4841
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-16",
+      "away": "Chicago Bulls",
+      "home": "Cleveland Cavaliers",
+      "time_et": "7:00 PM",
+      "arena": "Rocket Arena",
+      "group": null,
+      "game_id": "0022600246",
+      "preview": "https://www.nba.com/game/chi-vs-cle-0022600246",
+      "away_abbr": "CHI",
+      "home_abbr": "CLE",
+      "originated": {
+        "away_expected": 113.8,
+        "home_expected": 122.6,
+        "spread": 9,
+        "spread_label": "CLE +9",
+        "total": 236,
+        "expected_margin": 8.8,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.8035,
+          "away_win_prob": 0.1965
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.4921,
+          "away_cover_prob": 0.5079
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    },
+    {
+      "date": "2026-11-16",
+      "away": "Memphis Grizzlies",
+      "home": "Washington Wizards",
+      "time_et": "7:00 PM",
+      "arena": "Capital One Arena",
+      "group": null,
+      "game_id": "0022600247",
+      "preview": "https://www.nba.com/game/mem-vs-was-0022600247",
+      "away_abbr": "MEM",
+      "home_abbr": "WAS",
+      "originated": {
+        "away_expected": 116.8,
+        "home_expected": 111.0,
+        "spread": -6,
+        "spread_label": "WAS -6",
+        "total": 228,
+        "expected_margin": -5.8,
+        "pace_note": "model-originated; inputs PS/G & PA/G verified from Basketball-Reference",
+        "win_prob": {
+          "home_win_prob": 0.2833,
+          "away_win_prob": 0.7167
+        },
+        "cover_prob": {
+          "home_cover_prob": 0.508,
+          "away_cover_prob": 0.492
+        },
+        "source_standings": "https://www.nba.com/schedule",
+        "source_schedule": "https://www.nba.com/schedule"
+      }
+    }
+  ]
+}

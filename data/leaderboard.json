@@ -1,0 +1,57 @@
+{
+  "description": "Strategy leaderboard with rewards for top-performing strategies.",
+  "generated": "2026-11-13",
+  "reward_tiers": [
+    {
+      "tier": "1",
+      "name": "Top performer",
+      "reward": "Feature placement + priority allocation"
+    },
+    {
+      "tier": "2",
+      "name": "Promising (skill-significant)",
+      "reward": "Increased allocation"
+    },
+    {
+      "tier": "3",
+      "name": "Monitor",
+      "reward": "Tracked, no allocation"
+    }
+  ],
+  "live_ranked": [],
+  "small_sample_demo": {
+    "note": "Backtest on the verified 2026-11-12 slate (n=4 games). Small sample — shown only to demonstrate skill-vs-luck shrinkage and gate behavior, NOT as proof of skill.",
+    "ranking": [
+      {
+        "id": "S1",
+        "name": "Home Favorite Cover",
+        "hits": 4,
+        "n": 4,
+        "hit_rate": 1.0,
+        "shrunk_skill": 0.625,
+        "z_score": 2.0,
+        "skill_significant": true
+      },
+      {
+        "id": "S3",
+        "name": "Total Lean (Over/Under)",
+        "hits": 1,
+        "n": 4,
+        "hit_rate": 0.25,
+        "shrunk_skill": 0.4375,
+        "z_score": -1.0,
+        "skill_significant": false
+      },
+      {
+        "id": "S2",
+        "name": "Away Underdog Cover",
+        "hits": 0,
+        "n": 4,
+        "hit_rate": 0.0,
+        "shrunk_skill": 0.375,
+        "z_score": -2.0,
+        "skill_significant": true
+      }
+    ]
+  }
+}

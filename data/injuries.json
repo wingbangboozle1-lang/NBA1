@@ -1,0 +1,764 @@
+{
+  "description": "Injury -> rotation minutes -> production tracking and game-flow analysis.",
+  "generated": "2026-11-13",
+  "injury_status_note": "Live injury statuses are UNVERIFIED in this session and left blank (flagged). The rotation/production models are defined and run automatically once a verified official injury feed is wired in.",
+  "official_injury_source": "https://www.nba.com/news/injury-report",
+  "game_flow": [
+    {
+      "date": "2026-11-13",
+      "game": "New York Knicks @ Indiana Pacers",
+      "game_id": "0022600034",
+      "away_expected": 112.2,
+      "home_expected": 107.5,
+      "model_total": 219.7,
+      "pace_proxy": 439.4,
+      "pace_vs_league_pct": -3.1,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Milwaukee Bucks @ Orlando Magic",
+      "game_id": "0022600035",
+      "away_expected": 110.4,
+      "home_expected": 114.9,
+      "model_total": 225.3,
+      "pace_proxy": 450.6,
+      "pace_vs_league_pct": -0.7,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Cleveland Cavaliers @ Miami Heat",
+      "game_id": "0022600036",
+      "away_expected": 118.2,
+      "home_expected": 115.0,
+      "model_total": 233.2,
+      "pace_proxy": 466.4,
+      "pace_vs_league_pct": 2.8,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Atlanta Hawks @ Chicago Bulls",
+      "game_id": "0022600037",
+      "away_expected": 123.6,
+      "home_expected": 114.8,
+      "model_total": 238.3,
+      "pace_proxy": 476.6,
+      "pace_vs_league_pct": 5.1,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Memphis Grizzlies @ New Orleans Pelicans",
+      "game_id": "0022600038",
+      "away_expected": 121.1,
+      "home_expected": 114.4,
+      "model_total": 235.5,
+      "pace_proxy": 471.0,
+      "pace_vs_league_pct": 3.8,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Utah Jazz @ Houston Rockets",
+      "game_id": "0022600039",
+      "away_expected": 106.5,
+      "home_expected": 116.8,
+      "model_total": 223.3,
+      "pace_proxy": 446.6,
+      "pace_vs_league_pct": -1.5,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Golden State Warriors @ San Antonio Spurs",
+      "game_id": "0022600040",
+      "away_expected": 113.7,
+      "home_expected": 115.3,
+      "model_total": 229.0,
+      "pace_proxy": 458.0,
+      "pace_vs_league_pct": 1.0,
+      "flow": "high-scoring shootout (both offenses clear opposing defenses)",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Portland Trail Blazers @ Sacramento Kings",
+      "game_id": "0022600041",
+      "away_expected": 120.2,
+      "home_expected": 110.3,
+      "model_total": 230.6,
+      "pace_proxy": 461.1,
+      "pace_vs_league_pct": 1.7,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Oklahoma City Thunder @ LA Clippers",
+      "game_id": "0022600042",
+      "away_expected": 114.6,
+      "home_expected": 109.6,
+      "model_total": 224.2,
+      "pace_proxy": 448.3,
+      "pace_vs_league_pct": -1.2,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-14",
+      "game": "Denver Nuggets @ New Orleans Pelicans",
+      "game_id": "0022600231",
+      "away_expected": 119.4,
+      "home_expected": 115.1,
+      "model_total": 234.5,
+      "pace_proxy": 469.0,
+      "pace_vs_league_pct": 3.4,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-14",
+      "game": "Dallas Mavericks @ Cleveland Cavaliers",
+      "game_id": "0022600232",
+      "away_expected": 113.8,
+      "home_expected": 114.3,
+      "model_total": 228.1,
+      "pace_proxy": 456.1,
+      "pace_vs_league_pct": 0.6,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-14",
+      "game": "Detroit Pistons @ Miami Heat",
+      "game_id": "0022600233",
+      "away_expected": 117.8,
+      "home_expected": 111.8,
+      "model_total": 229.5,
+      "pace_proxy": 459.0,
+      "pace_vs_league_pct": 1.2,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-14",
+      "game": "Brooklyn Nets @ Memphis Grizzlies",
+      "game_id": "0022600234",
+      "away_expected": 111.1,
+      "home_expected": 116.6,
+      "model_total": 227.7,
+      "pace_proxy": 455.3,
+      "pace_vs_league_pct": 0.4,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-14",
+      "game": "Chicago Bulls @ Minnesota Timberwolves",
+      "game_id": "0022600235",
+      "away_expected": 109.6,
+      "home_expected": 124.1,
+      "model_total": 233.7,
+      "pace_proxy": 467.3,
+      "pace_vs_league_pct": 3.0,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "Indiana Pacers @ Philadelphia 76ers",
+      "game_id": "0022600236",
+      "away_expected": 110.5,
+      "home_expected": 112.6,
+      "model_total": 223.1,
+      "pace_proxy": 446.2,
+      "pace_vs_league_pct": -1.6,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "Los Angeles Lakers @ Phoenix Suns",
+      "game_id": "0022600237",
+      "away_expected": 119.2,
+      "home_expected": 113.0,
+      "model_total": 232.1,
+      "pace_proxy": 464.2,
+      "pace_vs_league_pct": 2.3,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "Charlotte Hornets @ LA Clippers",
+      "game_id": "0022600238",
+      "away_expected": 108.3,
+      "home_expected": 110.9,
+      "model_total": 219.2,
+      "pace_proxy": 438.5,
+      "pace_vs_league_pct": -3.3,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "San Antonio Spurs @ Utah Jazz",
+      "game_id": "0022600239",
+      "away_expected": 118.7,
+      "home_expected": 107.3,
+      "model_total": 225.9,
+      "pace_proxy": 451.9,
+      "pace_vs_league_pct": -0.4,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "Dallas Mavericks @ Boston Celtics",
+      "game_id": "0022600240",
+      "away_expected": 108.2,
+      "home_expected": 113.2,
+      "model_total": 221.4,
+      "pace_proxy": 442.8,
+      "pace_vs_league_pct": -2.4,
+      "flow": "high-scoring shootout (both offenses clear opposing defenses)",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "New York Knicks @ Toronto Raptors",
+      "game_id": "0022600241",
+      "away_expected": 111.5,
+      "home_expected": 108.9,
+      "model_total": 220.4,
+      "pace_proxy": 440.9,
+      "pace_vs_league_pct": -2.8,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "Houston Rockets @ Washington Wizards",
+      "game_id": "0022600242",
+      "away_expected": 115.6,
+      "home_expected": 108.2,
+      "model_total": 223.8,
+      "pace_proxy": 447.7,
+      "pace_vs_league_pct": -1.3,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "Atlanta Hawks @ Milwaukee Bucks",
+      "game_id": "0022600243",
+      "away_expected": 119.8,
+      "home_expected": 111.5,
+      "model_total": 231.3,
+      "pace_proxy": 462.6,
+      "pace_vs_league_pct": 2.0,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "Oklahoma City Thunder @ Sacramento Kings",
+      "game_id": "0022600244",
+      "away_expected": 116.0,
+      "home_expected": 107.6,
+      "model_total": 223.6,
+      "pace_proxy": 447.3,
+      "pace_vs_league_pct": -1.4,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-16",
+      "game": "Orlando Magic @ Boston Celtics",
+      "game_id": "0022600245",
+      "away_expected": 105.8,
+      "home_expected": 114.2,
+      "model_total": 219.9,
+      "pace_proxy": 439.9,
+      "pace_vs_league_pct": -3.0,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-16",
+      "game": "Chicago Bulls @ Cleveland Cavaliers",
+      "game_id": "0022600246",
+      "away_expected": 113.8,
+      "home_expected": 122.6,
+      "model_total": 236.4,
+      "pace_proxy": 472.8,
+      "pace_vs_league_pct": 4.2,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    },
+    {
+      "date": "2026-11-16",
+      "game": "Memphis Grizzlies @ Washington Wizards",
+      "game_id": "0022600247",
+      "away_expected": 116.8,
+      "home_expected": 111.0,
+      "model_total": 227.8,
+      "pace_proxy": 455.6,
+      "pace_vs_league_pct": 0.4,
+      "flow": "balanced / pace-neutral",
+      "inputs_verified": true,
+      "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html"
+    }
+  ],
+  "injury_report": [
+    {
+      "date": "2026-11-13",
+      "game": "New York Knicks @ Indiana Pacers",
+      "game_id": "0022600034",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Milwaukee Bucks @ Orlando Magic",
+      "game_id": "0022600035",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Cleveland Cavaliers @ Miami Heat",
+      "game_id": "0022600036",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Atlanta Hawks @ Chicago Bulls",
+      "game_id": "0022600037",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Memphis Grizzlies @ New Orleans Pelicans",
+      "game_id": "0022600038",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Utah Jazz @ Houston Rockets",
+      "game_id": "0022600039",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Golden State Warriors @ San Antonio Spurs",
+      "game_id": "0022600040",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Portland Trail Blazers @ Sacramento Kings",
+      "game_id": "0022600041",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-13",
+      "game": "Oklahoma City Thunder @ LA Clippers",
+      "game_id": "0022600042",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-14",
+      "game": "Denver Nuggets @ New Orleans Pelicans",
+      "game_id": "0022600231",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-14",
+      "game": "Dallas Mavericks @ Cleveland Cavaliers",
+      "game_id": "0022600232",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-14",
+      "game": "Detroit Pistons @ Miami Heat",
+      "game_id": "0022600233",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-14",
+      "game": "Brooklyn Nets @ Memphis Grizzlies",
+      "game_id": "0022600234",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-14",
+      "game": "Chicago Bulls @ Minnesota Timberwolves",
+      "game_id": "0022600235",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "Indiana Pacers @ Philadelphia 76ers",
+      "game_id": "0022600236",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "Los Angeles Lakers @ Phoenix Suns",
+      "game_id": "0022600237",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "Charlotte Hornets @ LA Clippers",
+      "game_id": "0022600238",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "San Antonio Spurs @ Utah Jazz",
+      "game_id": "0022600239",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "Dallas Mavericks @ Boston Celtics",
+      "game_id": "0022600240",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "New York Knicks @ Toronto Raptors",
+      "game_id": "0022600241",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "Houston Rockets @ Washington Wizards",
+      "game_id": "0022600242",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "Atlanta Hawks @ Milwaukee Bucks",
+      "game_id": "0022600243",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "Oklahoma City Thunder @ Sacramento Kings",
+      "game_id": "0022600244",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-16",
+      "game": "Orlando Magic @ Boston Celtics",
+      "game_id": "0022600245",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-16",
+      "game": "Chicago Bulls @ Cleveland Cavaliers",
+      "game_id": "0022600246",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    },
+    {
+      "date": "2026-11-16",
+      "game": "Memphis Grizzlies @ Washington Wizards",
+      "game_id": "0022600247",
+      "injury_status": null,
+      "affected_players": [],
+      "rotation_adjustment": {
+        "status": null,
+        "base_minutes": 36.0,
+        "adjusted_minutes": null,
+        "flag": "unverified — live injury status not confirmed"
+      },
+      "production_impact": null,
+      "flag": "unverified — requires live official injury report (NBA.com / team injury pages)",
+      "official_injury_source": "https://www.nba.com/news/injury-report"
+    }
+  ]
+}

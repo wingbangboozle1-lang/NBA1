@@ -1,0 +1,134 @@
+{
+  "description": "Strategy library with validation gates, correlation handling, and skill/luck metrics.",
+  "generated": "2026-11-13",
+  "source": "https://www.basketball-reference.com/leagues/NBA_2027_standings.html",
+  "source_name": "Basketball-Reference.com — 2026-27 NBA Standings (edge inputs)",
+  "gate_thresholds": {
+    "min_edge": 0.05,
+    "min_sample": 30,
+    "max_leg_corr": 0.7,
+    "prior_strength": 12
+  },
+  "strategies": [
+    {
+      "id": "S1",
+      "name": "Home Favorite Cover",
+      "type": "single_bet",
+      "bet_kind": "spread",
+      "description": "Back the originated home favorite to cover the spread when the model edge clears the threshold.",
+      "backtest_hits": 4,
+      "backtest_n": 4,
+      "projected_edge": null,
+      "validation": {
+        "G1_edge": "fail",
+        "G2_sample": "pending",
+        "G3_correlation": "pass",
+        "G4_skill": "pass",
+        "shrunk_skill": 0.625,
+        "z_score": 2.0,
+        "passes": false,
+        "ranked": false
+      }
+    },
+    {
+      "id": "S2",
+      "name": "Away Underdog Cover",
+      "type": "single_bet",
+      "bet_kind": "spread",
+      "description": "Back the originated away underdog to cover (take the points) when the model edge clears the threshold.",
+      "backtest_hits": 0,
+      "backtest_n": 4,
+      "projected_edge": null,
+      "validation": {
+        "G1_edge": "fail",
+        "G2_sample": "pending",
+        "G3_correlation": "pass",
+        "G4_skill": "pass",
+        "shrunk_skill": 0.375,
+        "z_score": -2.0,
+        "passes": false,
+        "ranked": false
+      }
+    },
+    {
+      "id": "S3",
+      "name": "Total Lean (Over/Under)",
+      "type": "single_bet",
+      "bet_kind": "total",
+      "description": "Back Over or Under based on the originated total versus the league-average total, when the lean clears the threshold.",
+      "backtest_hits": 1,
+      "backtest_n": 4,
+      "projected_edge": 0.1984,
+      "validation": {
+        "G1_edge": "pass",
+        "G2_sample": "pending",
+        "G3_correlation": "pass",
+        "G4_skill": "fail",
+        "shrunk_skill": 0.4375,
+        "z_score": -1.0,
+        "passes": true,
+        "ranked": false
+      }
+    },
+    {
+      "id": "S4",
+      "name": "Star Player Prop Lean",
+      "type": "single_bet",
+      "bet_kind": "player_prop",
+      "description": "Back Over/Under on an originated player points prop when the model edge clears the threshold. Requires verified per-player stats + roster (see flags).",
+      "backtest_hits": null,
+      "backtest_n": 0,
+      "projected_edge": null,
+      "validation": {
+        "G1_edge": "fail",
+        "G2_sample": "pending",
+        "G3_correlation": "pass",
+        "G4_skill": "pending",
+        "shrunk_skill": 0.5,
+        "z_score": 0.0,
+        "passes": false,
+        "ranked": false
+      }
+    },
+    {
+      "id": "S5",
+      "name": "Two-Team Parlay Combo",
+      "type": "parlay",
+      "bet_kind": "parlay",
+      "description": "Combine two single-bet edges from two different games. Legs must be near-independent (correlation gate).",
+      "backtest_hits": null,
+      "backtest_n": 0,
+      "projected_edge": null,
+      "validation": {
+        "G1_edge": "fail",
+        "G2_sample": "pending",
+        "G3_correlation": "pass",
+        "G4_skill": "pending",
+        "shrunk_skill": 0.5,
+        "z_score": 0.0,
+        "passes": false,
+        "ranked": false
+      }
+    },
+    {
+      "id": "S6",
+      "name": "Player Prop + Team Parlay",
+      "type": "parlay",
+      "bet_kind": "parlay_player_prop",
+      "description": "Combine a player prop and a team bet. Correlation between the player's points and the team total is measured and gated.",
+      "backtest_hits": null,
+      "backtest_n": 0,
+      "projected_edge": null,
+      "validation": {
+        "G1_edge": "fail",
+        "G2_sample": "pending",
+        "G3_correlation": "pass",
+        "G4_skill": "pending",
+        "shrunk_skill": 0.5,
+        "z_score": 0.0,
+        "passes": false,
+        "ranked": false
+      }
+    }
+  ]
+}

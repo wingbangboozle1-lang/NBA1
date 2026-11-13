@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive Summary — NBA1</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="topbar"><div class="topbar-inner"><div class="brand">NBA<span>1</span></div><nav class="mainnav"><a href="index.html" class="">Dashboard</a><a href="requirements.html" class="">Requirements</a><a href="lines.html" class="">Originated Lines</a><a href="strategies.html" class="">Strategies</a><a href="picks.html" class="">Picks</a><a href="injuries.html" class="">Injuries &amp; Flow</a><a href="summary.html" class="active">Executive Summary</a><a href="suggestions.html" class="">Suggestions</a><a href="qanda.html" class="">Questions &amp; Answers</a><a href="flagged.html" class="">Flagged for Review</a><a href="sources.html" class="">Sources</a></nav></div></header>
+<main>
+
+    <h1>Executive Summary</h1>
+    <p class="lede">Important details across the NBA1 system: data, lines, strategies, picks,
+    injuries/flow, verification, and open risks.</p>
+    <div class="panel">
+    <h2 style="margin-top:0">What was built</h2>
+    <ul class="tight">
+    <li>A self-contained engine (<span class="mono">src/nba1</span>) that originates lines, runs validated strategies, generates picks, and tracks injuries/game-flow — no manual input.</li>
+    <li>A live GitHub Pages dashboard with category subpages; every data row links to its official source.</li>
+    <li>Verified current-season (2026-27) data captured from Basketball-Reference and NBA.com.</li>
+    </ul>
+    <h2>Key figures</h2>
+    <ul class="tight">
+    <li><b>Upcoming slate:</b> 26 games across 2026-11-13..16 (verified from NBA.com).</li>
+    <li><b>Generated picks:</b> 34 (22 single-bet, 11 parlay, 1 defined player-prop combo).</li>
+    <li><b>Strategies:</b> 6 across single / parlay / player-prop, each with 4 validation gates.</li>
+    <li><b>Correlations:</b> SRS↔W/L% = <span class="mono">0.882</span>, PA/G↔W/L% = <span class="mono">-0.75</span>.</li>
+    </ul>
+    </div>
+    <div class="two-col">
+    <div class="panel">
+    <h2 style="margin-top:0">Skill vs luck</h2>
+    <p>Hit rates are Bayesian-shrunk toward 0.5 (prior 12) and a z-score significance gate (95%) decides
+    skill vs luck. The 2026-11-12 demo slate (n=4) shrinks a 4/4 start to 0.625 and a 0/4 start to 0.375 —
+    small samples are deliberately not over-credited.</p>
+    <h2>Validation gates</h2>
+    <p>G1 edge (≥5%) · G2 sample (≥30) · G3 correlation (|r|≤0.70) · G4 skill significance. A strategy is
+    ranked only when all four pass. No strategy is fully ranked yet — the results feed is pending.</p>
+    </div>
+    <div class="panel">
+    <h2 style="margin-top:0">Risks &amp; flags</h2>
+    <ul class="tight">
+    <li><b>Spread edge is structurally near-zero</b> against our own fair line; real spread edges need a verified market line (flagged).</li>
+    <li><b>Live injury statuses unverified</b> — rotation/production inputs are blank + flagged.</li>
+    <li><b>Player props</b> are methodology-only until per-player stats + roster are verified.</li>
+    <li><b>5 of 8 games on 2026-11-16</b> not captured in detail — needs a live re-pull.</li>
+    </ul>
+    <h2>Next steps</h2>
+    <p>Wire verified feeds for odds, injuries, per-player stats, and results grading. See
+    <a href="suggestions.html">Suggestions</a> (review before implementing) and
+    <a href="qanda.html">Questions &amp; Answers</a>.</p>
+    </div>
+    </div>
+</main>
+<footer>NBA1 · self-originated lines, verified sources · generated 2026-11-13 · no manual input</footer>
+</body>
+</html>
