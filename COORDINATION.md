@@ -172,7 +172,31 @@ _None._
 | Merge | recorded in `notes/publish-log.md` |
 | GitHub Pages | `https://wingbangboozle1-lang.github.io/NBA1/` |
 | Publish path | `.github/workflows/pages.yml` (from the parallel session) publishes `docs/`; this branch's dashboard lives there, so the workflow serves it rather than the root pages |
-| Verification at merge | `verify_data.py` errors=0 · `verify_inline.py` 18/18 · `check_links.py` PASS (24 pages, 667 rows, 0 unsourced, 0 ragged, 0 broken, 0 bad hosts) |
+| Verification at merge | `verify_data.py` errors=0 · `verify_inline.py` 20/20 · `check_links.py` PASS (24 pages, 667 rows, 0 unsourced, 0 ragged, 0 broken, 0 bad hosts) |
+| PR #10 | **merged** `186c5a2` — origination desk, gates, dashboard, parallel-session integration |
+| PR #12 | **merged** `5afb230` — removed a degenerate luck gate that flattered the leaderboard |
+| PR #13 | **merged** — removed five stale figures from the executive summary |
+| Deploy workflow | `Publish static site to GitHub Pages` → **completed/success** on `main` for all three merges |
+| Live URLs | dashboard `https://wingbangboozle1-lang.github.io/NBA1/docs/index.html` · root research site `https://wingbangboozle1-lang.github.io/NBA1/index.html` |
+
+### 6.1 Post-publish defects found by reading the deployed pages
+
+Three defects survived every automated gate and were only caught by reading the live HTML. All three
+are the same class of error — a plausible number typed into prose instead of looked up — and all three
+were fixed by deriving the value rather than correcting it.
+
+| # | Defect | Why the gates missed it | Fix |
+|---|---|---|---|
+| 1 | The bootstrap luck gate passed on a 7–0 record. With no losses every resample is all-wins, so the 5th percentile of ROI is trivially positive. | `verify_inline.py` checked that no *invalidated* strategy was marked validated. It never asked whether an individual gate was meaningful. | G3 now requires at least 5 losses before a pass counts, reports `degenerate` otherwise, and two new checks fail the build on a degenerate pass. Counts fell from 4/6 to 3/6 for three strategies. |
+| 2 | Executive summary said "three absences are genuinely new" when the data has two. | The sentence was hand-written prose. | Now counted from `new_abs`. |
+| 3 | Executive summary said "486 table rows" when the site has 667. | Same. | Now measured from the built pages at build time. |
+
+Two further cosmetic defects were found in the same pass: an HTML entity that was being escaped into
+literal text inside a card, and full float precision (`17.126`) leaking into prose.
+
+**Lesson recorded for any future session:** a green test suite says the artefacts agree with each other.
+It does not say the prose agrees with the artefacts. Reading the rendered output is a separate check and
+it has now found five defects that no automated gate caught.
 =======
 # Coordination board
 
