@@ -54,6 +54,8 @@ jobs:
           bad = []
           for p in pages:
               html = open(p, encoding="utf-8").read()
+              # strip <script> blocks: their string literals are not links
+              html = re.sub(r"<script\\b.*?</script>", "", html, flags=re.S | re.I)
               base = os.path.relpath(os.path.dirname(p), root)
               for m in re.finditer(r'(?:href|src)="([^"#][^"]*)"', html):
                   h = m.group(1)
