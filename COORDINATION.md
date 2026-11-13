@@ -1,16 +1,28 @@
 # Coordination board
 
-Session ID: `arena/4f997533-nba1` (current Arena branch; no separate session ID was supplied)
+The board was absent on initial inspection of `arena/4f997533-nba1`; after the initial claim/push, concurrent merged work was found on `main`. This current-branch integration preserves that work and adds the source-linked subpages and checks. Session IDs below are branch identifiers supplied by Arena; separate IDs were not available.
 
 | Task | Status | Owner | File scope |
 |---|---|---|---|
-| Repository audit, source-backed NBA decision framework, static GitHub Pages dashboard, verification and final integration | done (PR/deploy follow-up pending) | `arena/4f997533-nba1` | `COORDINATION.md`, `README.md`, `index.html`, `research.html`, `slate.html`, `suggestions.html`, `review.html`, `sources.html`, `styles.css`, `scripts/check_site.py`, `.github/workflows/pages.yml` |
+| Build verified NBA lines research/dashboard, methodology, decision questions, and review flags | done (previous merged work) | `arena/0684edd4-nba1` (per merged main coordination history) | `index.html`, `styles.css`, `app.js`, `README.md`, `.github/workflows/pages.yml` |
+| Extend dashboard into source-linked subpages, verification/source register, and integrate without discarding merged work | done locally; current PR/deploy follow-up pending | `arena/4f997533-nba1` | `COORDINATION.md`, `README.md`, `index.html`, `research.html`, `slate.html`, `suggestions.html`, `review.html`, `sources.html`, `subpages.css`, `scripts/check_site.py`, `.github/workflows/pages.yml` |
 
-## Session log
+## Source and verification log
 
-- 2026-11-13: Claimed the only available project task after reading the root. Repository initially contained only a six-byte `README.md`; no prior coordination board or other in-repo work was present. This session is restricted to the current branch by the Arena environment, so all changes are on `arena/4f997533-nba1`.
-- Source-backed static site completed: executive summary, strategy/validation research, 72-hour slate shell, decision questions and proposals, flagged review, source register, GitHub Pages workflow, and dependency-free site checker.
-- Official-source references checked 2026-11-13 using official page/search content: NBA schedule (`https://www.nba.com/schedule`); NBA 2026–27 injury report policy (`https://official.nba.com/nba-injury-report-2026-27-season/`); NBA Stats glossary (`https://www.nba.com/stats/help/glossary`); player box scores (`https://www.nba.com/stats/players/boxscores`); team advanced stats (`https://www.nba.com/stats/teams/advanced`); NBA Rule No. 5 (`https://official.nba.com/rule-no-5-scoring-and-timing/`); GitHub Pages custom workflow docs (`https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages`).
-- Verification: Python HTML parser accepted all six pages; `python3 scripts/check_site.py` passed and checked all 61 table-body rows for official NBA/GitHub links plus local links and new-tab safety; `git diff --check` was run. An initial checker attempt treated table header rows as data and failed; checker was corrected to validate body rows, then passed.
-- Unverified/flagged: no slate/history/injury snapshots/odds/model/picks/correlations/backtests; market data, legal/data-use rights, and Pages configuration/deployment are not verified. No live recommendations are enabled. See `review.html` (F-01–F-10).
-- PR/deployment follow-up: pending current-branch PR, checks, and a Pages deployment confirmation. Do not claim the site is live until deployment is confirmed.
+- Official source references checked 2026-11-13: NBA schedule https://www.nba.com/schedule; official 2026–27 injury report policy https://official.nba.com/nba-injury-report-2026-27-season/; NBA Stats glossary https://www.nba.com/stats/help/glossary; NBA player box scores https://www.nba.com/stats/players/boxscores; NBA team advanced stats https://www.nba.com/stats/teams/advanced; NBA Rule No. 5 https://official.nba.com/rule-no-5-scoring-and-timing/; GitHub Pages custom workflows https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages.
+- The merged `main` coordination history records that PR #1 merged on 2026-11-13 and that Pages workflow run 43518760512 completed, with public URL https://wingbangboozle1-lang.github.io/NBA1/. This session has not independently re-run or re-verified that earlier deployment after the new changes.
+- Current work preserves the existing single-page dashboard, styling, JavaScript, prior source/verification notes, and Pages deployment implementation. Added separate detail pages and a separate stylesheet to avoid overwriting existing shared assets.
+- Verification: Python HTML parsing succeeded for the added pages; final `python3 scripts/check_site.py` passes across the landing page plus five subpages, all local links, and all 81 table-body rows with official NBA/GitHub source links. `git diff --cached --check` passed. External link availability/data rights are not represented by this structural check.
+
+## Concurrency / conflict log
+
+- 2026-11-13: After this branch's PR was opened, `origin/main` had advanced through merged PRs #1 and #2 from `arena/0684edd4-nba1`; the PR showed merge conflicts in the workflow, coordination board, README, landing page and stylesheet. This work paused and inspected the merged files before resolving.
+- Resolved by retaining the merged `main` versions of the shared landing page, stylesheet, README, Pages workflow and existing coordination history, then adding this session's distinct subpages, `subpages.css`, source/link validator, and navigation links as integration additions. No prior session files were intentionally removed.
+
+## Open limitations
+
+No current slate, injury snapshots, market odds, projections, correlations, backtests, or skill evidence are available. Sportsbook feed rights, legal scope and data-use rights need review. Numerical values stay blank and picks remain disabled. See `review.html` (F-01–F-10).
+
+## PR / deployment follow-up
+
+Current PR and post-merge Pages workflow/deployment verification are pending. Do not claim updated deployment until the GitHub run and public site are checked.
