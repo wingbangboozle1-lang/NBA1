@@ -1,0 +1,89 @@
+#!/usr/bin/env python3
+"""Dependency-free structural checks for the static NBA Lines Lab site."""
+from html.parser import HTMLParser
+from pathlib import Path
+from urllib.parse import urlparse
+
+ROOT = Path(__file__).resolve().parents[1]
+PAGES = ["index.html", "research.html", "slate.html", "suggestions.html", "review.html", "sources.html"]
+OFFICIAL_HOSTS = {"nba.com", "www.nba.com", "official.nba.com", "docs.github.com"}
+
+class Audit(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.links = []
+        self.in_row = False
+        self.in_tbody = False
+        self.row_links = []
+        self.table_rows = 0
+        self.errors = []
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "tbody":
+            self.in_tbody = True
+        if tag == "tr" and self.in_tbody:
+            self.in_row = True
+            self.row_links = []
+        if tag == "a" and attrs.get("href"):
+            href = attrs["href"]
+            self.links.append((href, attrs))
+            if self.in_row:
+                self.row_links.append(href)
+        if tag == "table" and attrs.get("aria-hidden") == "true":
+            self.errors.append("hidden table not expected")
+
+    def handle_endtag(self, tag):
+        if tag == "tr" and self.in_row:
+            self.table_rows += 1
+            official = any(is_official(href) for href in self.row_links)
+            if not official:
+                self.errors.append(f"table row has no official source link: {self.getpos()}")
+            self.in_row = False
+        if tag == "tbody":
+            self.in_tbody = False
+
+
+def is_official(href):
+    host = (urlparse(href).hostname or "").lower()
+    return any(host == allowed or host.endswith("." + allowed) for allowed in OFFICIAL_HOSTS)
+
+
+def main():
+    errors = []
+    for name in PAGES:
+        path = ROOT / name
+        if not path.is_file():
+            errors.append(f"missing page: {name}")
+            continue
+        parser = Audit()
+        try:
+            parser.feed(path.read_text(encoding="utf-8"))
+        except Exception as exc:  # report parser errors without hiding file/page name
+            errors.append(f"{name}: HTML parse failed: {exc}")
+            continue
+        errors.extend(f"{name}: {error}" for error in parser.errors)
+        for href, attrs in parser.links:
+            parsed = urlparse(href)
+            if parsed.scheme in ("http", "https"):
+                if attrs.get("target") == "_blank" and "noopener" not in attrs.get("rel", "").split():
+                    errors.append(f"{name}: external new-tab link lacks rel=noopener: {href}")
+            elif parsed.scheme or href.startswith("#") or href.startswith("mailto:"):
+                continue
+            else:
+                local = (ROOT / parsed.path).resolve()
+                if not local.is_file():
+                    errors.append(f"{name}: broken local link: {href}")
+        if parser.table_rows == 0:
+            errors.append(f"{name}: expected source-backed table rows")
+        print(f"{name}: {parser.table_rows} table rows checked")
+    if errors:
+        print("\nSITE CHECK FAILED")
+        for error in errors:
+            print(f"- {error}")
+        return 1
+    print("\nAll pages exist; local links resolve; every table row includes an official NBA/GitHub source link.")
+    return 0
+
+if __name__ == "__main__":
+    raise SystemExit(main())

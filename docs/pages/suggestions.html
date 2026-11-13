@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="../assets/style.css">
 </head><body>
 <header><div class="wrap bar"><div class="brand">NBA <span>Origination Desk</span></div>
-<nav><a class="" href="../index.html">Overview</a><a class="" href="lines.html">Originated lines</a><a class="" href="picks.html">Picks by slate</a><a class="" href="strategies.html">Strategies</a><a class="" href="gates.html">Validation gates</a><a class="" href="correlations.html">Correlations</a><a class="" href="injuries.html">Injuries</a><a class="" href="gameflow.html">Game flow</a><a class="" href="backtest.html">Backtest</a><a class="" href="questions.html">Open questions</a><a class="on" href="suggestions.html">Suggestions</a><a class="" href="flagged.html">Flagged for review</a><a class="" href="glossary.html">Glossary</a><a class="" href="sources.html">Sources</a></nav></div></header>
+<nav><a class="" href="../index.html">Overview</a><a class="" href="summary.html">Executive summary</a><a class="" href="lines.html">Originated lines</a><a class="" href="picks.html">Picks by slate</a><a class="" href="strategies.html">Strategies</a><a class="" href="gates.html">Validation gates</a><a class="" href="correlations.html">Correlations</a><a class="" href="injuries.html">Injuries</a><a class="" href="gameflow.html">Game flow</a><a class="" href="backtest.html">Backtest</a><a class="" href="questions.html">Open questions</a><a class="on" href="suggestions.html">Suggestions</a><a class="" href="flagged.html">Flagged for review</a><a class="" href="glossary.html">Glossary</a><a class="" href="sources.html">Sources</a></nav></div></header>
 <main><div class="wrap">
 
 <h1>Suggestions for improving decisions</h1>
@@ -20,6 +20,92 @@ look-ahead problem and the dispersion problem simultaneously, and it costs one s
 <div class="note bad"><b>No implementation has been started on any of these.</b> They are proposals
 awaiting review, which is what the brief asked for. The system as published is the system as reviewed
 here, with no half-built changes behind it.</div>
+
+<h2>Register A &mdash; governance, legal compliance and data pipeline</h2>
+<p class="lede">Eleven proposals covering the operational side: licensing, legal review, data refresh and
+audit. Every one still has decision status <i>pending</i>, which is the correct status before review.</p>
+
+<h3>S-01 &middot; Automate the data refresh from official NBA sources <span class="chip">Medium effort</span></h3>
+<dl class="kv">
+<dt>Proposal</dt><dd>A script re-pulls the games page and injury PDF each run, and writes a timestamp and checksum per file.</dd>
+<dt>Benefit</dt><dd>Repeatable, auditable data; removes manual copy errors.</dd>
+<dt>Risk</dt><dd>Scraping may break when pages change. Needs monitoring.</dd>
+<dt>Decision</dt><dd><span class="flag">pending</span></dd>
+</dl>
+<h3>S-02 &middot; Parse the injury PDF with a table-aware tool and cross-check <span class="chip">Medium effort</span></h3>
+<dl class="kv">
+<dt>Proposal</dt><dd>Use a PDF table extractor, then compare each row with the text extraction. Mismatches go to Flagged for Review.</dd>
+<dt>Benefit</dt><dd>Fixes F-02 to F-07 at the source.</dd>
+<dt>Risk</dt><dd>Layout changes between reports.</dd>
+<dt>Decision</dt><dd><span class="flag">pending</span></dd>
+</dl>
+<h3>S-03 &middot; Add a legal review gate before any betting-related output <span class="chip">Low (process), external cost for counsel effort</span></h3>
+<dl class="kv">
+<dt>Proposal</dt><dd>Nothing that looks like a wager, line, or prize leaderboard is published until a qualified Dutch legal review (Q-04) is done.</dd>
+<dt>Benefit</dt><dd>Avoids regulatory exposure in NL.</dd>
+<dt>Risk</dt><dd>Delays launch of strategy content.</dd>
+<dt>Decision</dt><dd><span class="flag">pending</span></dd>
+</dl>
+<h3>S-04 &middot; Source historical game logs and minutes from official NBA stats <span class="chip">High effort</span></h3>
+<dl class="kv">
+<dt>Proposal</dt><dd>Collect per-game box scores and minutes for the past seasons to support correlation and backtest work (Q-06, Q-08).</dd>
+<dt>Benefit</dt><dd>Enables validation; without it no strategy can pass gates.</dd>
+<dt>Risk</dt><dd>Volume and rate limits; must verify each row.</dd>
+<dt>Decision</dt><dd><span class="flag">pending</span></dd>
+</dl>
+<h3>S-05 &middot; Pick an odds source with clear license terms before modelling prices <span class="chip">Medium effort</span></h3>
+<dl class="kv">
+<dt>Proposal</dt><dd>Identify a licensed odds provider or an open dataset with explicit reuse rights (Q-07). Record the terms on the Sources page.</dd>
+<dt>Benefit</dt><dd>Makes the originated-lines comparison and CLV measurable.</dd>
+<dt>Risk</dt><dd>Paid data and licensing cost.</dd>
+<dt>Decision</dt><dd><span class="flag">pending</span></dd>
+</dl>
+<h3>S-06 &middot; Add per-row &#x27;as of&#x27; timestamps to every table <span class="chip">Low effort</span></h3>
+<dl class="kv">
+<dt>Proposal</dt><dd>Show when each row was retrieved, so records and injury statuses can be read in context (F-08).</dd>
+<dt>Benefit</dt><dd>Clearer decision-making; avoids stale data.</dd>
+<dt>Risk</dt><dd>None significant.</dd>
+<dt>Decision</dt><dd><span class="flag">pending</span></dd>
+</dl>
+<h3>S-07 &middot; Add filter, search, and CSV export on each table <span class="chip">Low effort</span></h3>
+<dl class="kv">
+<dt>Proposal</dt><dd>Let users filter by date, team, or status, and download the table.</dd>
+<dt>Benefit</dt><dd>Simpler review of large tables.</dd>
+<dt>Risk</dt><dd>None significant.</dd>
+<dt>Decision</dt><dd><span class="flag">pending</span></dd>
+</dl>
+<h3>S-08 &middot; Add a Dutch / English language switch <span class="chip">Medium effort</span></h3>
+<dl class="kv">
+<dt>Proposal</dt><dd>The user is in the Netherlands; a language toggle would help non-English reviewers.</dd>
+<dt>Benefit</dt><dd>Broader audience.</dd>
+<dt>Risk</dt><dd>Translation must be verified.</dd>
+<dt>Decision</dt><dd><span class="flag">pending</span></dd>
+</dl>
+<h3>S-09 &middot; Track suggestions and decisions in GitHub Issues <span class="chip">Low effort</span></h3>
+<dl class="kv">
+<dt>Proposal</dt><dd>Use an issue template per suggestion with a &#x27;decision&#x27; label, instead of editing this static page.</dd>
+<dt>Benefit</dt><dd>Clear audit trail of what was chosen and why.</dd>
+<dt>Risk</dt><dd>Requires GitHub access for reviewers.</dd>
+<dt>Decision</dt><dd><span class="flag">pending</span></dd>
+</dl>
+<h3>S-10 &middot; Add responsible-gambling information if any betting content is shown <span class="chip">Low effort</span></h3>
+<dl class="kv">
+<dt>Proposal</dt><dd>Ksa runs responsible-gambling campaigns (Gokstop). Add links only after the exact official URLs are verified.</dd>
+<dt>Benefit</dt><dd>Safer presentation of any betting-related content.</dd>
+<dt>Risk</dt><dd>Link accuracy.</dd>
+<dt>Decision</dt><dd><span class="flag">pending</span></dd>
+</dl>
+<h3>S-11 &middot; Consolidate the two landing pages into one <span class="chip">Medium effort</span></h3>
+<dl class="kv">
+<dt>Proposal</dt><dd>Two sites now exist: the root &#x27;NBA Edge Lab&#x27; dashboard (from another session, PRs #1 and #2) and this session&#x27;s multi-page site in docs/. Pick one landing page and link the other as a subpage. Nothing was changed on the root site.</dd>
+<dt>Benefit</dt><dd>One clear entry point; one navigation structure.</dd>
+<dt>Risk</dt><dd>Touches another session&#x27;s files, so it needs your decision and that session&#x27;s agreement.</dd>
+<dt>Decision</dt><dd><span class="flag">pending</span></dd>
+</dl>
+
+<h2>Register B &mdash; model and validation improvements</h2>
+<p class="lede">Ten proposals tied directly to the validation gates, including the one that matters most:
+a daily pre-tip-off snapshot.</p>
 
 <h3>N01 &middot; Log predictions before tip-off, every day, starting now</h3>
 <dl class="kv">

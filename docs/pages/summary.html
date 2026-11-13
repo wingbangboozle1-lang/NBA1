@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary · NBA 2026-27 Origination Desk</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head><body>
+<header><div class="wrap bar"><div class="brand">NBA <span>Origination Desk</span></div>
+<nav><a class="" href="../index.html">Overview</a><a class="on" href="summary.html">Executive summary</a><a class="" href="lines.html">Originated lines</a><a class="" href="picks.html">Picks by slate</a><a class="" href="strategies.html">Strategies</a><a class="" href="gates.html">Validation gates</a><a class="" href="correlations.html">Correlations</a><a class="" href="injuries.html">Injuries</a><a class="" href="gameflow.html">Game flow</a><a class="" href="backtest.html">Backtest</a><a class="" href="questions.html">Open questions</a><a class="" href="suggestions.html">Suggestions</a><a class="" href="flagged.html">Flagged for review</a><a class="" href="glossary.html">Glossary</a><a class="" href="sources.html">Sources</a></nav></div></header>
+<main><div class="wrap">
+
+<h1>Executive summary</h1>
+<p class="lede">The whole project on one page: what was built, what it found, what it cannot yet claim, and
+what would change the answer. Read this instead of the other thirteen pages if you only have two minutes.</p>
+
+<h2>The finding in one sentence</h2>
+<div class="note bad"><b>Lines can be originated from official data, but no strategy has demonstrated skill.</b>
+The model produces all 31 game lines and 92 prop lines, and its totals are plausible. Zero of eight betting
+strategies pass the validation gates, because the largest graded sample available is 14 games against a floor
+of 100, those 14 games are look-ahead contaminated, and no real betting price was reachable to measure an edge
+against.</div>
+
+<div class="grid">
+<div class="card "><div class="k">Games covered</div><div class="v">31</div><div class="s">11/13 &amp;ndash; 11/16</div></div>
+<div class="card "><div class="k">Lines originated</div><div class="v">31</div><div class="s">totals, spreads, moneylines</div></div>
+<div class="card "><div class="k">Prop lines</div><div class="v">92</div><div class="s">half-lines</div></div>
+<div class="card bad"><div class="k">Strategies validated</div><div class="v">0 of 8</div><div class="s">six conjoined gates</div></div>
+<div class="card bad"><div class="k">Graded sample</div><div class="v">14</div><div class="s">floor is 100</div></div>
+<div class="card good"><div class="k">Data errors</div><div class="v">0</div><div class="s">verify_data.py</div></div>
+</div>
+
+<h2>What is solid</h2>
+<ul class="tight">
+<li><b>The data is verified.</b> Every dataset row carries an official NBA source link. Fifteen structural
+checks pass with zero errors: provenance hosts, schedule W-L reconciliation, pace against possessions, ratings
+against scoring, the scoring identity, played-game integrity, minutes monotonicity and absence-class
+consistency.</li>
+<li><b>Dispersion is measured, not assumed.</b> Total standard deviation 17.126 and margin standard
+deviation 16.128 points, taken from real finals. An earlier version guessed these and produced
+30-point spreads and 99.9% win probabilities.</li>
+<li><b>Ten team-level correlations are measured</b> with p-values, led by pace against game total (r=0.792) and
+eFG% against offensive rating (r=0.819).</li>
+<li><b>The injury logic avoids the classic double-count.</b> Season ratings already exclude games a player
+missed, so only genuinely new absences move a line. This was measured per player, not assumed.</li>
+<li><b>The site is fully generated from the data</b>, with 486 table rows and a source link on every one.</li>
+</ul>
+
+<h2>What is not solid</h2>
+<ul class="tight">
+<li><b>No price.</b> Every ROI assumes &minus;110. A strategy returning +4% at that price may be negative at a
+real one. This is the single largest defect.</li>
+<li><b>Look-ahead contamination.</b> The ratings used in the backtest were captured after the games they
+predict, so the 78.6% straight-up rate is inflated. It is labelled, not hidden, but it cannot be used.</li>
+<li><b>Small sample everywhere.</b> Dispersion from 13 games, totals calibration from 14, injury evidence from
+9 verified players out of 88 report rows.</li>
+<li><b>Six parlay and prop correlations are unmeasured</b> and left null. Any same-game parlay price would
+therefore be an assertion, so none is published.</li>
+<li><b>The gates are weak at this sample size.</b> A coin-flip control passes four of six. That is documented
+rather than exploited.</li>
+<li><b>Three absences among nine verified players are genuinely new</b> (Mobley, Curry), and the assumption
+governing their impact spans 11 points of total &mdash; wider than any plausible edge.</li>
+</ul>
+
+<h2>The three decisions this report actually supports</h2>
+<ol class="tight" style="padding-left:22px">
+<li><b>Start a daily pre-tip-off snapshot immediately.</b> It is the only action that simultaneously fixes the
+sample size, the look-ahead bias and the dispersion estimate, and it costs one scheduled script run per day.
+See suggestion N01.</li>
+<li><b>Do not publish picks as recommendations until a real price exists.</b> The picks page carries
+projections, clearly labelled. Converting them into advice without a price would manufacture an edge that has
+not been measured. See question Q01.</li>
+<li><b>Keep the null control and the contamination label permanently.</b> They are the two instruments that
+prevent this project from fooling itself later, and both cost nothing to keep. See suggestions N07 and N08.</li>
+</ol>
+
+<h2>What would change the verdict</h2>
+<div class="tblwrap"><table><thead><tr><th>If this happened</th><th>Then</th><th>Reference</th></tr></thead><tbody>
+<tr><td>100+ graded bets logged before tip-off</td><td>The sample gate becomes passable and the other gates become
+meaningful rather than decorative.</td><td><a href="gates.html">gates</a></td></tr>
+<tr><td>A licensed price feed is connected</td><td>ROI becomes measurable against a real market rather than an
+assumed vig.</td><td><a href="questions.html">Q01</a></td></tr>
+<tr><td>A player game-log corpus is obtained</td><td>Prop sigma becomes measured and the six null correlations
+become computable, unlocking the parlay strategies.</td><td><a href="correlations.html">correlations</a></td></tr>
+<tr><td>Two weeks of forward results show no edge</td><td>That is a real result. The correct response is to
+abandon the approach, not to tune it.</td><td><a href="suggestions.html">N01</a></td></tr>
+</tbody></table></div>
+
+<h2>Honesty ledger</h2>
+<p>One fabricated row was created during this work and caught by a cross-check: a Darius Garland absence that
+does not appear on the official report. It was removed and the retraction is recorded in the data file and on
+the <a href="flagged.html">flagged page</a>. Four other defects &mdash; an inverted probability, a look-ahead
+grading method, a rounding-order error and a navigation-depth error &mdash; were also found and fixed, each
+listed with what went wrong. Eight items remain open and are published rather than closed quietly.</p>
+
+</div></main>
+<footer><div class="wrap">
+Generated 2026-11-13 from <code>data/*.json</code> by <code>scripts/build_site.py</code>.
+Every figure traces to an official NBA source; unverifiable values are shown as an em dash and flagged,
+never filled in. Season 2026-27.
+</div></footer></body></html>

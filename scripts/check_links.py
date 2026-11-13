@@ -6,7 +6,9 @@ Two different questions, checked separately:
 
   1. INTERNAL links   — every relative href must resolve to a real file in docs/. A broken internal
                         link is a build failure and the merge must not happen.
-  2. EXTERNAL links   — every absolute href must be present in the approved-host allowlist. Reachability
+  2. EXTERNAL links   — every absolute href must be present in the approved-host allowlist. The allowlist is
+                        split by purpose: NBA hosts for statistics, the Dutch regulator for licensing questions,
+                        and GitHub for build provenance. Reachability
                         cannot be tested from this sandbox (outbound access to nba.com is blocked at the
                         network layer), so this checks the host, not the HTTP status, and says so.
   3. EVERY TABLE ROW  — the brief requires each row to carry a source link. A table row with no <a>
@@ -21,8 +23,13 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS = os.path.join(ROOT, "docs")
 
 APPROVED_HOSTS = {
+    # official NBA properties — the only acceptable source for a statistic
     "www.nba.com", "nba.com", "official.nba.com", "ak-static.cms.nba.com",
     "stats.nba.com", "data.nba.com", "cdn.nba.com",
+    # regulatory: the Dutch gambling authority. Used for licensing questions only, never for a statistic.
+    "kansspelautoriteit.nl",
+    # the repository and platform documentation, for provenance of the build itself
+    "github.com", "docs.github.com",
 }
 
 HREF = re.compile(r'href="([^"]+)"')
@@ -40,6 +47,7 @@ def main():
     bad_hosts = []
     external_links = set()
     rows_without_source = []
+    ragged = []
     total_rows = 0
     total_links = 0
 
@@ -63,6 +71,16 @@ def main():
             if not os.path.exists(target):
                 broken_internal.append((rel, href))
 
+        # every table must be rectangular: a row with the wrong number of cells means the header
+        # and body disagree, which is what a botched in-place patch looks like
+        for thead, tbody in re.findall(r"<thead>(.*?)</thead>\s*<tbody>(.*?)</tbody>", html, re.S):
+            ncol = len(re.findall(r"<th[^>]*>", thead))
+            for row in re.findall(r"<tr>(.*?)</tr>", tbody, re.S):
+                ncells = len(re.findall(r"<td[^>]*>", row))
+                total_rows += 0
+                if ncells and ncells != ncol:
+                    ragged.append((rel, ncol, ncells))
+
         # table rows must carry a source link
         for tbl in re.findall(r"<tbody>(.*?)</tbody>", html, re.S):
             for row in re.findall(r"<tr>(.*?)</tr>", tbl, re.S):
@@ -80,18 +98,21 @@ def main():
     print(f"  internal broken      : {len(broken_internal)}")
     print(f"  non-approved hosts   : {len(bad_hosts)}")
     print(f"  rows without a source: {len(rows_without_source)}")
+    print(f"  ragged table rows    : {len(ragged)}")
 
     for r, h in broken_internal:
         print(f"  ERROR broken internal link in {r}: {h}")
     for r, h in bad_hosts:
         print(f"  ERROR non-approved host in {r}: {h}")
+    for r, ncol, ncells in ragged[:10]:
+        print(f"  ERROR ragged row in {r}: header has {ncol} columns, row has {ncells}")
     for r, t in rows_without_source:
         print(f"  FLAG  table row without source link in {r}: {t}")
 
     print("-" * 78)
     print("note: external links are checked for approved host only. Outbound access to nba.com is")
     print("      blocked from this sandbox, so HTTP status cannot be verified here and is not claimed.")
-    ok = not broken_internal and not bad_hosts
+    ok = not broken_internal and not bad_hosts and not ragged
     print(f"RESULT: {'PASS' if ok else 'FAIL'}")
     return 0 if ok else 1
 

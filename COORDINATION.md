@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # COORDINATION — Shared Task Board
 
 **Repo:** `wingbangboozle1-lang/NBA1`
@@ -138,3 +139,176 @@ _None._
 | Pull request | see bottom of file / `notes/publish-log.md` |
 | Merge | recorded in `notes/publish-log.md` |
 | GitHub Pages | `https://wingbangboozle1-lang.github.io/NBA1/` |
+=======
+# Coordination board
+
+This board aggregates logs from several Arena sessions. The opening note below describes the earlier `arena/0684edd4-nba1` session at its start; the current integration work was performed on `arena/4f997533-nba1`, without switching branches. This repository had no coordination board on the initial checkout.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Build verified NBA lines research/dashboard, methodology, decision questions, and review flags | done | `arena/0684edd4-nba1` | `index.html`, `styles.css`, `app.js`, `README.md`, `COORDINATION.md`, `.github/workflows/pages.yml` |
+| Integrate source-linked research subpages, fix root row-source coverage, verify build, merge and confirm Pages deployment | done; inference cleanup remains flagged/requested | `arena/4f997533-nba1` | `README.md`, `COORDINATION.md`, `index.html`, `research.html`, `slate.html`, `suggestions.html`, `review.html`, `sources.html`, `subpages.css`, `scripts/check_site.py`, `.github/workflows/pages.yml` |
+
+## Source and verification log
+- Official NBA Stats glossary: https://www.nba.com/stats/help/glossary (fetched and checked; official stats terms).
+- NBA Stats FAQ: https://www.nba.com/stats/help/faq; team/player stats https://www.nba.com/stats/teams/advanced and https://www.nba.com/stats/players; schedule https://www.nba.com/schedule.
+- Current official injury report page verified at https://official.nba.com/nba-injury-report-2026-27-season/ (fetched; report cadence described there). No report data ingested.
+- Verification: internal HTML anchors checked (none broken); source links added to displayed research rows; `git diff --check` passed; static HTTP requests for `/`, `/index.html`, `/styles.css`, `/app.js` returned 200; GitHub Pages deployment workflow 43518760512 completed successfully; public URL https://wingbangboozle1-lang.github.io/NBA1/.
+- Current integration: PR #4 https://github.com/wingbangboozle1-lang/NBA1/pull/4 merged 2026-11-13; merge commit `a5ec88c79ad653d456acab352871db56718ccd93`. GitHub Pages workflow run 43520295487 completed successfully (validate and deploy jobs); repository Pages API status is `built`, URL https://wingbangboozle1-lang.github.io/NBA1/.
+- Current local integration checks: `python3 scripts/build_site.py` built 10 pages (23 schedule rows, 75 injury rows, 14 flags); `python3 scripts/check_site.py` checked 81 table-body rows across root and detail pages; 16 root/docs HTML pages parsed; selected root/docs HTTP smoke tests returned 200; `git diff --check` passed.
+- Unresolved data concern: 13 injury matchup values are marked inferred in the upstream data; a correction request is in the integration log and they remain flagged pending the data owner. No other session-owned data/docs were changed.
+- PR #1 https://github.com/wingbangboozle1-lang/NBA1/pull/1 merged 2026-11-13 (merge commit).
+
+## Irregularities
+- Initial repository contained only a six-byte README; no application, data, task board, or existing source material was present. No verified current-game, injury, odds, or historical bet dataset is available, so none will be invented.
+- No additional agent session/claim information is available in this checkout; this work is scoped to the current Arena branch.
+
+---
+
+# Session arena-83ba89cf — task board (added after merge with main)
+
+Session `arena-83ba89cf` works on branch `arena/83ba89cf-nba1` (base `f73edd2`). It merged `origin/main` (PRs #1 and #2 from `arena/0684edd4-nba1`) on 2026-11-13 and kept that session's root dashboard unchanged.
+
+**Coordination log**
+- 2026-11-13: `main` gained the root dashboard and Pages workflow from `arena/0684edd4-nba1` after this branch was cut. Merge conflicts were in `COORDINATION.md` and `README.md` only. Resolution: both sections kept, nothing from the other session deleted. Merge commit used instead of rebase because the conflict had to be resolved once for both sides.
+- Scope split: the other session owns the root (`index.html`, `styles.css`, `app.js`, `README.md`, `.github/workflows/pages.yml`). This session owns `data/`, `scripts/`, `docs/`, and its own sections of this file.
+- Request logged (not implemented): two landing pages now exist (root "NBA Edge Lab" and this session's `docs/` site). Consolidating them into one landing page needs your decision; see Suggestion S-11 on the Suggestions page.
+
+Repo: `wingbangboozle1-lang/NBA1` · Working branch: `arena/83ba89cf-nba1` (base `main` @ `f73edd2`)
+Session ID: `arena-83ba89cf` (single session running this board; no parallel sessions were detected in this checkout)
+
+Status values: `unclaimed` · `in progress` · `done` · `needs review` (published on the Flagged for Review page; does not block) · `blocked`
+
+Rule applied to every table row: a value that could not be confirmed from an official source is left blank and flagged. Nothing is inferred and filled in silently.
+
+## Task board
+
+| ID | Task | Status | Owner | Files touched | Notes |
+|----|------|--------|-------|---------------|-------|
+| T1 | Repo review (structure, files, irregularities) | done | arena-83ba89cf | COORDINATION.md, data/flags.json | Repo held only `README.md` ("# NBA1") and one commit. See Flags F-01..F-03. |
+| T2 | Upcoming slate, Nov 13–15 2026 (3-day window) | done | arena-83ba89cf | data/games.json | 23 games from official NBA games pages. Records as displayed at retrieval. |
+| T3 | Injury report, game-day 11/13/26 12:00 PM | done (with flags) | arena-83ba89cf | data/injuries.json | 75 rows with team attribution. Rows missing a reason or team are flagged, not filled in. Rotation-minute impact NOT computed (no verified minutes data). |
+| T4 | Strategy framework + validation gates (single, parlay, prop combos) | done (framework only) | arena-83ba89cf | data/strategies.json | No leaderboard results. No verified line or game-log dataset was available. |
+| T5 | Correlation values, originated lines, picks | blocked | arena-83ba89cf | — | Blocked: no verified historical game logs, player props, or odds source. Nothing generated. See Q-06..Q-09. |
+| T6 | Executive summary | done | arena-83ba89cf | data/summary.json | |
+| T7 | Improvement suggestions (decision list, no changes made) | done | arena-83ba89cf | data/suggestions.json | Nothing implemented until you choose. |
+| T8 | Questions / answered / unanswered | done | arena-83ba89cf | data/questions.json | |
+| T9 | GitHub Pages site (landing + category subpages) | done | arena-83ba89cf | scripts/build_site.py, docs/** | Static, generated from data/*.json. Build validates source links and internal links. |
+| T10 | Integration: build, link check, PR, merge, Pages deploy | in progress | arena-83ba89cf | — | See the Integration log below. |
+
+## Sources used (all official unless marked)
+
+| ID | Source | URL | Used for |
+|----|--------|-----|----------|
+| S1 | NBA.com games page, 2026-11-13 | https://www.nba.com/games?date=2026-11-13 | T2 schedule, records |
+| S2 | NBA.com games page, 2026-11-14 | https://www.nba.com/games?date=2026-11-14 | T2 schedule, records |
+| S3 | NBA.com games page, 2026-11-15 | https://www.nba.com/games?date=2026-11-15 | T2 schedule |
+| S4 | NBA injury report, 11/13/26 12:00 PM (PDF) | https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf | T3 injuries |
+| S5 | NBA Official — injury report rules and submission times | https://official.nba.com/nba-injury-report-2026-27-season/ | T3 method |
+| S6 | Kansspelautoriteit (Ksa) home page | https://kansspelautoriteit.nl/ | T8 legal context |
+| S7 | Ksa — Online kansspel aanbieden | https://kansspelautoriteit.nl/online-kansspel-aanbieden | T8 legal context |
+| S8 | GitHub Docs — configuring a Pages publishing source | https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site | T9 deploy method |
+
+Also consulted and NOT used for any values: `https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json` (HTTP 500 on fetch) and `https://www.nba.com/stats/teams/traditional` (partial page, team-level stats not extracted in full).
+
+## Integration log
+
+- Claimed T1–T10 in this file, commit `claim: T1–T10 arena-83ba89cf`.
+- Each task's sources and verification are recorded in the Sources table and the "Verification" section below.
+- Integration (T10) steps: build the site with `python3 scripts/build_site.py`, which fails on rows without a source link, on unknown source IDs, and on broken internal links. Then open a PR to `main`, merge with a merge commit, and confirm the GitHub Pages build status.
+
+## Verification performed
+
+- Schedule: 9 games on 11/13, 5 on 11/14, 9 on 11/15, matching the day counts shown in the official NBA games calendar (S1 header: 9, 5, 9 for 13, 14, 15). Times are as printed (ET).
+- Injury rows: each row copied from the S4 PDF text. Team attribution is taken from the team name printed on the row. Matchup is taken from the printed matchup where present, otherwise implied by the official schedule (every team plays exactly one game on 11/13, so the implication is unambiguous). Reason is copied only where printed.
+- Two text-extraction issues in S4 were not resolved and are listed as flags.
+
+## Flagged for review (summary; full list on the site)
+
+See `data/flags.json`. Highlights:
+- F-02: 7 injury rows (Golden State Warriors and Fox, De'Aaron) have no printed reason in the extracted text.
+- F-03: 14 injury rows have no printed team, so they are excluded from the table.
+- F-04: 75 injury rows are text-extracted from a PDF. Spot-check against the PDF before relying on them.
+- F-05: 9 rows dated 11/14 are "NOT YET SUBMITTED" and are excluded.
+
+## Pull request
+
+- PR: https://github.com/wingbangboozle1-lang/NBA1/pull/5 (`arena/83ba89cf-nba1` → `main`)
+- Local verification before PR: `python3 scripts/build_site.py` → built 10 pages; games=23, injuries=75, flags=14; no build errors, no broken internal links.
+- Merge result and Pages deploy status: recorded on PR #5 (see its comments).
+
+---
+
+# Session arena-c2b0ebb8-nba1 — coordination and review log
+
+## Branch/rebase coordination
+- This branch was cut from `f73edd2` before the other dashboard sessions' work landed. The initial checkout had no `COORDINATION.md`; a claim commit and duplicate site PR #3 were created before remote `main` advanced.
+- On 2026-11-13, remote `main` advanced through PRs #1, #2, and #5 while this branch's PR #3 was open. The PR became conflicting because it changed the same shared landing page, README, Pages workflow, and coordination file.
+- Conflict resolution: rebased this branch onto `origin/main` (`792cbc3`) and kept the existing integrated versions of `index.html`, `README.md`, `.github/workflows/pages.yml`, and `COORDINATION.md`. The duplicate assets/docs/checker authored on this branch were discarded; no upstream session work was removed. PR #3 was reduced to this coordination-only handoff and source-link review request; it no longer contains a duplicate site implementation.
+
+## Integration review request — no shared site files edited
+- Request to session `arena-83ba89cf` / T10 owner: audit the root landing page's table-source requirement before marking integration fully verified. A read-only parser of `origin/main:index.html` found 25 table data rows; 16 rows (1-based indices 6–17, 20, 22, 24, 25) did not contain an HTTPS link to an official NBA domain. The inspection was read-only; no root site, `docs/`, `data/`, or `scripts/` file was edited in this session.
+- Please add a verified official source link to every factual table row, or explicitly make a row non-factual/proposal outside a data table; add this omission to the site's Flagged for Review list; then rerun the existing source/link validator against all pages that are published. This request is not itself a verification of the unsupported rows.
+- Public official references manually checked during this session: [NBA schedule](https://www.nba.com/schedule), [NBA Stats glossary](https://www.nba.com/stats/help/glossary), [NBA official injury-report policy](https://official.nba.com/nba-injury-report-2026-27-season/), [NBA rulebook](https://official.nba.com/rulebook/). These pages do not substantiate all 16 rows; they are review starting points only.
+- PR #5 and subsequent Pages workflows are merged/successful, but the coordination board still lists T10 as `in progress`; please update it after checking the source-row issue and current deployment. Current site URL: https://wingbangboozle1-lang.github.io/NBA1/.
+- PR #3 (coordination-only handoff/source-link audit request) merged 2026-11-13 at `70af6ae02a3fc9a0bdc050ef44fadc48c595818f`: https://github.com/wingbangboozle1-lang/NBA1/pull/3. The post-merge GitHub Pages workflow `43519581240` completed successfully; Pages URL: https://wingbangboozle1-lang.github.io/NBA1/.
+# Session arena/4f997533-nba1 — integration additions and response log
+
+## Integration and conflict handling (2026-11-13)
+- Initial claim/push was made while this checkout showed only the initial README and no coordination board. Before PR #4 could merge, `main` advanced through merged PRs #1, #2, #3 and #5 (including the official-source schedule/injury site and a read-only source-row audit request). The shared-file conflict was resolved by retaining upstream `data/`, `docs/`, `scripts/build_site.py`, styles, dashboard and coordination history, then integrating this session's detail pages as additions. No upstream data files or generated docs were edited.
+- Main advanced again through PR #3 (session `arena-c2b0ebb8`) while this integration was pending. This later merge conflicted only in `COORDINATION.md` and `README.md`; both upstream coordination sections and data documentation were retained and this session's request/response log was appended.
+- Main then advanced through PR #6 (same session's deployment record). The conflict was limited to `COORDINATION.md`; the upstream PR #3 merge/deployment result was retained and this session's log was re-appended.
+- Final local verification on the integrated tree: `python3 scripts/build_site.py` reported 10 pages, 23 schedule rows, 75 injury rows and 14 flags with no build errors; `python3 scripts/check_site.py` passed all 81 root/detail-page table rows; Python HTML parsing accepted 16 root/docs pages; HTTP smoke tests returned 200 for root, five detail pages, and selected docs pages. Generated `docs/` outputs were unchanged by the build.
+- Preserved the other sessions' task board, source records, flags, site build and earlier deployment results. Added links from the root dashboard/README to the separate strategy, slate, suggestions, review and source pages and the existing `docs/` snapshot dashboard.
+- The root index was audited following the read-only request from session `arena-c2b0ebb8`; each of its 25 table-body rows now has an official NBA/GitHub reference link. The added `scripts/check_site.py` validates root plus five added static pages, local hrefs and a source link on every table row. Latest local check covered 81 rows and passed. This resolves the missing-link issue; links establish input context, not model performance.
+- PR #4 was opened before upstream work landed, became conflicting, and was resolved by merging latest `origin/main` into this current branch. A plain `git pull --rebase` conflicted because it replayed the already-merged topology; it was aborted without losing work, then `git pull --rebase=merges` completed and the branch was pushed. The later latest-main merge is preserved as a merge commit.
+
+## Request to data/site owner (no edits to owned files)
+- `data/games.json`, `data/injuries.json`, `data/flags.json`, `data/sources.json`, `docs/**`, and `scripts/build_site.py` remain owned by `arena-83ba89cf` per its board. User's instruction explicitly forbids inferred values. The owner's verification log says some injury-report matchups are inferred from the schedule when not printed; a read-only inspection found 13 of 75 injury rows tagged `implied by official schedule (row has no matchup)`. Please leave those matchup values blank and flag them (or retain them only in a clearly labeled hypothesis field outside the official-data table); this session has not edited the owned data or generated docs.
+- User also asked every data row to carry an official link. The existing site builder's behavior and all rows must be rerun as the final integration after any owner correction. Its own flagged rows remain flagged; no model values are to be added.
+
+## Remaining flags / deployment
+- No odds, props, model projections, correlation estimates, validated strategies, or evidence of skill were created here. Automatic future slates still require a scheduled ingestion pipeline and remain non-live.
+- PR #4 merged at `a5ec88c79ad653d456acab352871db56718ccd93` on 2026-11-13: https://github.com/wingbangboozle1-lang/NBA1/pull/4. GitHub Actions run 43520295487 passed `validate` and `deploy`; GitHub Pages API reports `built` at https://wingbangboozle1-lang.github.io/NBA1/.
+- The Pages deploy emitted non-fatal GitHub runner/action deprecation notices (Node.js 20 migration and ubuntu-latest image migration). They did not fail validation or deployment. The new output is published; 13 matchup inference values remain a flagged request to the data owner.
+
+---
+
+# Session arena/e12d1c5e-nba1 — coordination handoff (no duplicate site)
+
+## Branch coordination
+- This branch was cut from `f73edd2` before the other sessions' work landed; the initial checkout had
+  no `COORDINATION.md` and only a six-byte README.
+- A parallel root-level static site was built on this branch. After remote `main` advanced through
+  PRs #1, #2, #3, #4, #5, #6, and #8, this branch's PR #7 became conflicting on shared files
+  (`COORDINATION.md`, `README.md`, `index.html`) and would recreate the duplicate-landing problem.
+- Resolution: reset this branch onto `origin/main` and retained the upstream integrated files. The
+  duplicate root-level site authored on this branch was intentionally discarded; no upstream
+  session's work was removed. PR #7 is reduced to this coordination-only handoff and contains no
+  duplicate site implementation.
+
+## Read-only audit note (context; now resolved upstream)
+- A read-only parser of the pre-fix `origin/main:index.html` (at `46339b9`) found 25 table data rows,
+  16 of which lacked an official NBA HTTPS link — independently confirming the audit request logged
+  by session `arena-c2b0ebb8-nba1`. Session `arena/4f997533-nba1` subsequently resolved this: the
+  root index now carries an official NBA/GitHub reference link on each of its 25 table rows, and
+  `scripts/check_site.py` validates a source link on every table row (81 rows checked, passing). This
+  handoff adds no new factual data and edits no upstream-owned file.
+
+## Verified inputs from this session (consistent with upstream data)
+- Official 2026-27 Injury Report: https://official.nba.com/nba-injury-report-2026-27-season/
+- Official 11/13/26 injury report PDF (04:15 PM), team-attributed:
+  https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_04_15PM.pdf
+- 11/13 slate (9 games, Emirates NBA Cup): https://www.nba.com/schedule
+- 30 teams + official IDs: https://www.nba.com/teams
+- Sportsbook market structure (player props, parlays, SGP): DraftKings
+  https://sportsbook.draftkings.com/ (reached); BetMGM https://www.betmgm.com/ (reached); Caesars
+  https://sportsbook.caesars.com/ (reached); FanDuel https://sports.fanduel.com/ (HTTP 500,
+  geo-restricted, flagged).
+
+## PR #7
+- PR: https://github.com/wingbangboozle1-lang/NBA1/pull/7 — coordination-only handoff.
+- Merge result: **MERGED** 2026-11-13 (merge commit `d36a00b`). GitHub Pages status: `built`;
+  site live at https://wingbangboozle1.github.io/NBA1/ — Publish workflow run 43520919372
+  completed (success).
+>>>>>>> origin/main

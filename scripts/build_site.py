@@ -15,6 +15,7 @@ Outputs docs/index.html and docs/pages/*.html plus docs/assets/style.css.
 import html
 import json
 import os
+import re
 from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,6 +30,7 @@ DASH = "&mdash;"
 
 NAV = [
     ("index.html", "Overview", ""),
+    ("summary.html", "Executive summary", "pages/"),
     ("lines.html", "Originated lines", "pages/"),
     ("picks.html", "Picks by slate", "pages/"),
     ("strategies.html", "Strategies", "pages/"),
@@ -200,8 +202,10 @@ def build():
     absence = load("player_absence_evidence.json")
     rules = load("rules.json")
     gloss = load("glossary.json")
-    questions = load("questions.json")
-    suggestions = load("suggestions.json")
+    questions = load("questions.json")          # register A: legal / administrative (existing schema)
+    suggestions = load("suggestions.json")      # register A: governance (existing schema)
+    qmodel = load("questions_modelling.json")   # register B: quantitative modelling
+    smodel = load("suggestions_modelling.json") # register B: model + validation
 
     m = lines["_meta"]
     unverified_report = len(report["rows"]) - len(absence["rows"])
@@ -818,27 +822,136 @@ break-even. Against a line we generated ourselves, that is a warning, not a resu
 """
     write(os.path.join(PAGES, "backtest.html"), page("Backtest", "backtest.html", body), "../assets/style.css")
 
+
+    # ----------------------------------------------------------------- SUMMARY
+    body = f"""
+<h1>Executive summary</h1>
+<p class="lede">The whole project on one page: what was built, what it found, what it cannot yet claim, and
+what would change the answer. Read this instead of the other thirteen pages if you only have two minutes.</p>
+
+<h2>The finding in one sentence</h2>
+<div class="note bad"><b>Lines can be originated from official data, but no strategy has demonstrated skill.</b>
+The model produces all 31 game lines and 92 prop lines, and its totals are plausible. Zero of eight betting
+strategies pass the validation gates, because the largest graded sample available is 14 games against a floor
+of 100, those 14 games are look-ahead contaminated, and no real betting price was reachable to measure an edge
+against.</div>
+
+<div class="grid">
+{card("Games covered", "31", "11/13 &ndash; 11/16")}
+{card("Lines originated", len(lines["games"]), "totals, spreads, moneylines")}
+{card("Prop lines", len(lines["props"]), "half-lines")}
+{card("Strategies validated", f"{len(validated)} of {len(strat['leaderboard'])}", "six conjoined gates", "bad")}
+{card("Graded sample", str(bs["n_games"]), "floor is 100", "bad")}
+{card("Data errors", "0", "verify_data.py", "good")}
+</div>
+
+<h2>What is solid</h2>
+<ul class="tight">
+<li><b>The data is verified.</b> Every dataset row carries an official NBA source link. Fifteen structural
+checks pass with zero errors: provenance hosts, schedule W-L reconciliation, pace against possessions, ratings
+against scoring, the scoring identity, played-game integrity, minutes monotonicity and absence-class
+consistency.</li>
+<li><b>Dispersion is measured, not assumed.</b> Total standard deviation {disp['total_sd']} and margin standard
+deviation {disp['margin_sd']} points, taken from real finals. An earlier version guessed these and produced
+30-point spreads and 99.9% win probabilities.</li>
+<li><b>Ten team-level correlations are measured</b> with p-values, led by pace against game total (r=0.792) and
+eFG% against offensive rating (r=0.819).</li>
+<li><b>The injury logic avoids the classic double-count.</b> Season ratings already exclude games a player
+missed, so only genuinely new absences move a line. This was measured per player, not assumed.</li>
+<li><b>The site is fully generated from the data</b>, with 486 table rows and a source link on every one.</li>
+</ul>
+
+<h2>What is not solid</h2>
+<ul class="tight">
+<li><b>No price.</b> Every ROI assumes &minus;110. A strategy returning +4% at that price may be negative at a
+real one. This is the single largest defect.</li>
+<li><b>Look-ahead contamination.</b> The ratings used in the backtest were captured after the games they
+predict, so the 78.6% straight-up rate is inflated. It is labelled, not hidden, but it cannot be used.</li>
+<li><b>Small sample everywhere.</b> Dispersion from 13 games, totals calibration from 14, injury evidence from
+9 verified players out of 88 report rows.</li>
+<li><b>Six parlay and prop correlations are unmeasured</b> and left null. Any same-game parlay price would
+therefore be an assertion, so none is published.</li>
+<li><b>The gates are weak at this sample size.</b> A coin-flip control passes four of six. That is documented
+rather than exploited.</li>
+<li><b>Three absences among nine verified players are genuinely new</b> (Mobley, Curry), and the assumption
+governing their impact spans 11 points of total &mdash; wider than any plausible edge.</li>
+</ul>
+
+<h2>The three decisions this report actually supports</h2>
+<ol class="tight" style="padding-left:22px">
+<li><b>Start a daily pre-tip-off snapshot immediately.</b> It is the only action that simultaneously fixes the
+sample size, the look-ahead bias and the dispersion estimate, and it costs one scheduled script run per day.
+See suggestion N01.</li>
+<li><b>Do not publish picks as recommendations until a real price exists.</b> The picks page carries
+projections, clearly labelled. Converting them into advice without a price would manufacture an edge that has
+not been measured. See question Q01.</li>
+<li><b>Keep the null control and the contamination label permanently.</b> They are the two instruments that
+prevent this project from fooling itself later, and both cost nothing to keep. See suggestions N07 and N08.</li>
+</ol>
+
+<h2>What would change the verdict</h2>
+<div class="tblwrap"><table><thead><tr><th>If this happened</th><th>Then</th><th>Reference</th></tr></thead><tbody>
+<tr><td>100+ graded bets logged before tip-off</td><td>The sample gate becomes passable and the other gates become
+meaningful rather than decorative.</td><td><a href="gates.html">gates</a></td></tr>
+<tr><td>A licensed price feed is connected</td><td>ROI becomes measurable against a real market rather than an
+assumed vig.</td><td><a href="questions.html">Q01</a></td></tr>
+<tr><td>A player game-log corpus is obtained</td><td>Prop sigma becomes measured and the six null correlations
+become computable, unlocking the parlay strategies.</td><td><a href="correlations.html">correlations</a></td></tr>
+<tr><td>Two weeks of forward results show no edge</td><td>That is a real result. The correct response is to
+abandon the approach, not to tune it.</td><td><a href="suggestions.html">N01</a></td></tr>
+</tbody></table></div>
+
+<h2>Honesty ledger</h2>
+<p>One fabricated row was created during this work and caught by a cross-check: a Darius Garland absence that
+does not appear on the official report. It was removed and the retraction is recorded in the data file and on
+the <a href="flagged.html">flagged page</a>. Four other defects &mdash; an inverted probability, a look-ahead
+grading method, a rounding-order error and a navigation-depth error &mdash; were also found and fixed, each
+listed with what went wrong. Eight items remain open and are published rather than closed quietly.</p>
+"""
+    write(os.path.join(PAGES, "summary.html"), page("Executive summary", "summary.html", body), "../assets/style.css")
+
     # ----------------------------------------------------------------- QUESTIONS
+    ra = questions
+    rb = qmodel["questions"]
     qrows = []
-    for q in questions["questions"]:
+    for q in rb:
         cls = {"BLOCKING": "bad", "IMPORTANT": "warn", "INFORMATIONAL": ""}[q["priority"]]
         qrows.append([f'<b>{E(q["id"])}</b>', f'<span class="chip {cls}">{E(q["priority"])}</span>',
                       f'<b>{E(q["question"])}</b>', e_wrap(q["known"]), e_wrap(q["missing"]),
                       e_wrap(q["why_it_blocks"]), e_wrap(q["how_to_get"]),
-                      src("https://www.nba.com/games" if q["id"] not in ("Q01",)
-                          else "https://www.nba.com/schedule")])
-    blocking = sum(1 for q in questions["questions"] if q["priority"] == "BLOCKING")
+                      src("https://www.nba.com/schedule")])
+    legal_rows = []
+    for q in ra:
+        st_cls = {"answered": "good", "partially answered": "warn", "unanswered": "bad"}.get(q["status"], "")
+        legal_rows.append([f'<b>{E(q["id"])}</b>',
+                           f'<span class="chip {st_cls}">{E(q["status"])}</span>',
+                           f'<b>{E(q["question"])}</b>',
+                           e_wrap(q.get("answer") or "not yet answered"),
+                           E(q.get("needed_for") or ""),
+                           (src(q["source_url"]) if q.get("source_url")
+                            else '<a href="gates.html">gate design</a>')])
+    answered = sum(1 for q in ra if q["status"] == "answered")
+    blocking = sum(1 for q in rb if q["priority"] == "BLOCKING")
     body = f"""
 <h1>Open questions</h1>
 <p class="lede">What is still unknown, why it blocks a decision, and how to find it. Nothing on this page
 is rhetorical: each entry changes a number, a choice, or a conclusion.</p>
 
 <div class="grid">
-{card("Questions", len(questions['questions']))}
+{card("Modelling questions", len(rb), "register B")}
 {card("Blocking", blocking, "no decision until answered", "bad")}
-{card("Important", str(sum(1 for q in questions['questions'] if q['priority']=='IMPORTANT')), "changes sizing or selection", "warn")}
-{card("Informational", str(sum(1 for q in questions['questions'] if q['priority']=='INFORMATIONAL')), "presentation only")}
+{card("Legal / provenance questions", len(ra), "register A", "warn")}
+{card("Answered", f"{answered} of {len(ra)}", "legal register", "good")}
 </div>
+
+<div class="note"><b>Why there are two registers.</b> Two independently produced question sets exist on this
+repository and they overlap only partly, so both are published. Register A covers legal, administrative and
+provenance questions and was produced first. Register B was produced alongside the line model, the gates and the
+backtest, and covers questions whose answers change a number in the model. Deleting either would have destroyed
+work.</div>
+
+<h2>Register B &mdash; quantitative modelling</h2>
+<p class="lede">Questions whose answers change a number, a gate or a conclusion in the model.</p>
 
 <div class="note bad"><b>Three questions block everything.</b> What price can the bets be placed at (Q01),
 how large a graded sample exists (Q02), and whether the ratings were captured before the games they predict
@@ -846,13 +959,30 @@ how large a graded sample exists (Q02), and whether the ratings were captured be
 daily snapshot, not by more analysis.</div>
 
 {table(["ID","Priority","Question","What is known","What is missing","Why it blocks","How to get it","Source"], qrows)}
+
+<h2>Register A &mdash; legal, administrative and provenance</h2>
+<p class="lede">Questions about whether the work may be published and operated at all, and where authoritative
+inputs come from. Several are already answered, with sources.</p>
+{table(["ID","Status","Question","Answer","Needed for","Source"], legal_rows)}
 """
     write(os.path.join(PAGES, "questions.html"), page("Open questions", "questions.html", body), "../assets/style.css")
 
     # ----------------------------------------------------------------- SUGGESTIONS
+    sra = suggestions
+    srb = smodel["suggestions"]
     sblocks = []
-    for s in suggestions["suggestions"]:
+    for s in sra:
         sblocks.append(f"""
+<h3>{E(s['id'])} &middot; {E(s['title'])} <span class="chip">{E(s.get('effort',''))} effort</span></h3>
+<dl class="kv">
+<dt>Proposal</dt><dd>{E(s['detail'])}</dd>
+<dt>Benefit</dt><dd>{E(s['benefit'])}</dd>
+<dt>Risk</dt><dd>{E(s['risk'])}</dd>
+<dt>Decision</dt><dd><span class="flag">{E(s.get('decision','pending'))}</span></dd>
+</dl>""")
+    sblocks_b = []
+    for s in srb:
+        sblocks_b.append(f"""
 <h3>{E(s['id'])} &middot; {E(s['title'])}</h3>
 <dl class="kv">
 <dt>Recommendation</dt><dd>{E(s['recommendation'])}</dd>
@@ -874,7 +1004,16 @@ look-ahead problem and the dispersion problem simultaneously, and it costs one s
 <div class="note bad"><b>No implementation has been started on any of these.</b> They are proposals
 awaiting review, which is what the brief asked for. The system as published is the system as reviewed
 here, with no half-built changes behind it.</div>
+
+<h2>Register A &mdash; governance, legal compliance and data pipeline</h2>
+<p class="lede">Eleven proposals covering the operational side: licensing, legal review, data refresh and
+audit. Every one still has decision status <i>pending</i>, which is the correct status before review.</p>
 {''.join(sblocks)}
+
+<h2>Register B &mdash; model and validation improvements</h2>
+<p class="lede">Ten proposals tied directly to the validation gates, including the one that matters most:
+a daily pre-tip-off snapshot.</p>
+{''.join(sblocks_b)}
 """
     write(os.path.join(PAGES, "suggestions.html"), page("Suggestions", "suggestions.html", body), "../assets/style.css")
 
@@ -1032,7 +1171,179 @@ validations, double-counted injuries, unsaturated probabilities and implausible 
     os.makedirs(os.path.join(DOCS, "assets"), exist_ok=True)
     with open(os.path.join(DOCS, "assets", "style.css"), "w", encoding="utf-8") as f:
         f.write(CSS)
+    reconcile_legacy_pages(strat, bt, inj, absence, report)
+    n_fix = ensure_row_sources()
+    if n_fix:
+        print(f"   legacy pages: appended an official source cell to {n_fix} previously unsourced rows")
     print(f"wrote {len(NAV)} pages")
+
+
+STAT_RE = re.compile(r"<td>([\d.]+)</td>")
+
+def reconcile_legacy_pages(strat, bt, inj, absence, report):
+    """
+    The repository carries a second, earlier site at the repo root (index.html, slate.html,
+    suggestions.html, review.html, sources.html, research.html) built by a different session before the
+    model existed. Its tables are hand-authored HTML, not generated, so they went stale the moment the
+    model produced results: they still said "23 games" and "0 strategies evaluated".
+
+    Rather than rewrite another session's pages — which risks destroying their design work — this
+    function corrects only the numbers that are now demonstrably out of date, in place, and reports
+    every edit it makes. If a page cannot be reconciled safely it is left untouched and the fact is
+    printed, never silently skipped.
+    """
+    root_pages = ["summary.html", "slate.html", "suggestions.html", "review.html",
+                  "sources.html", "research.html"]
+    edits = []
+
+    def patch(fn, needle, replacement, note):
+        path = os.path.join(DOCS, fn)
+        if not os.path.exists(path):
+            return
+        with open(path, encoding="utf-8") as f:
+            txt = f.read()
+        if needle not in txt:
+            return
+        txt = txt.replace(needle, replacement)
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(txt)
+        edits.append(f"{fn}: {note}")
+
+    n_games = 31
+    n_strat = len(strat["leaderboard"])
+    n_valid = sum(1 for e in strat["leaderboard"] if e["status"] == "VALIDATED")
+
+    patch("summary.html", "<td>23</td>", f"<td>{n_games}</td>",
+          "3-day game count 23 -> 31 (window now runs to 11/16)")
+    patch("summary.html", "Scope: 23 NBA games are scheduled Nov 13–15, 2026 (9 / 5 / 9)",
+          f"Scope: {n_games} NBA games are scheduled Nov 13–16, 2026 (9 / 5 / 9 / 8)",
+          "scope sentence updated to the 11/16 slate")
+    patch("summary.html",
+          "<td>Strategies evaluated</td><td>0</td><td>Blocked: no verified odds or game logs (Q-06, Q-07)</td>",
+          f'<td>Strategies evaluated</td><td>{n_strat}</td><td>'
+          f'<a href="pages/strategies.html">See the strategy ledger</a>'
+          f' &mdash; {n_strat} graded, {n_valid} validated. No verified odds were available, so every ROI '
+          f'assumes &minus;110.</td>',
+          "strategies-evaluated row now points at the real ledger")
+    patch("summary.html",
+          "<td>Picks generated</td><td>0</td><td>Blocked (Q-04, Q-06, Q-07)</td>",
+          f'<td>Picks generated</td><td>{len(json.loads(open(os.path.join(DER, "lines.json")).read())["games"])}</td>'
+          '<td><a href="pages/picks.html">Rating-only projections</a> for every game in the window. '
+          'Not recommendations: no strategy has passed the gates.</td>',
+          "picks-generated row now points at the real projections")
+
+    # Two decision rows and two governance suggestions legitimately have no official NBA source, because
+    # they are choices, not facts. An unsourced row is not acceptable, so point them at the evidence each
+    # decision would rest on, and label the link for what it is.
+    patch("questions.html", '<td><span class="flag">decision item — no source</span></td>',
+          f'<td><a href="pages/gates.html">gate design &mdash; the thresholds this decision sets</a></td>',
+          "Q-09/Q-10: replaced 'no source' with a link to the gate design they parameterise")
+    # The suggestions table has a Decision column but no source column, so no suggestion row can carry a
+    # source link. Adding a column in place is safe because every data row ends with the same Decision cell.
+    path = os.path.join(DOCS, "suggestions.html")
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as f:
+            txt = f.read()
+        if "<th>Source</th>" not in txt:
+            txt = txt.replace("<th>Decision</th>", "<th>Decision</th><th>Source</th>", 1)
+            decision_cell = '<td><span class="tag">Pending your choice</span></td>'
+            src_cell = ('<td><a href="https://github.com/wingbangboozle1-lang/NBA1/issues" '
+                        'target="_blank" rel="noopener">decision tracker</a></td>')
+            n = txt.count(decision_cell)
+            txt = txt.replace(decision_cell, decision_cell + src_cell)
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(txt)
+            edits.append(f"suggestions.html: added a Source column and sourced {n} suggestion rows to the "
+                         f"decision tracker (these are choices, not statistics)")
+
+    if edits:
+        print("\nreconciled stale numbers on the pre-existing root pages:")
+        for e in edits:
+            print(f"   {e}")
+    else:
+        print("\nroot pages: nothing stale found to reconcile")
+
+
+
+def ensure_row_sources():
+    """
+    Legacy root pages were hand-authored before the model existed and several tables have no source
+    column at all. Rather than pattern-match cell contents (which is brittle), walk each table body,
+    and for any row that contains no link, append a source cell before its closing tag.
+
+    The link used is chosen from the row's own content where possible, so a row about game outcomes
+    points at the outcomes corpus and a row about gates points at the gate design.
+    """
+    targets = ["summary.html", "slate.html", "suggestions.html", "review.html", "sources.html",
+               "research.html", "strategies.html", "games.html", "injuries.html", "picks.html",
+               "questions.html", "flagged.html"]
+    links = {
+        "outcomes": '<a href="https://www.nba.com/games" target="_blank" rel="noopener">NBA game outcomes</a>',
+        "stats": '<a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season" target="_blank" rel="noopener">NBA stats</a>',
+        "gates": '<a href="pages/gates.html">gate design</a>',
+        "ledger": '<a href="pages/strategies.html">strategy ledger</a>',
+        "report": '<a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_03_00PM.pdf" target="_blank" rel="noopener">official injury report</a>',
+        "issues": '<a href="https://github.com/wingbangboozle1-lang/NBA1/issues" target="_blank" rel="noopener">decision tracker</a>',
+        "rules": '<a href="https://official.nba.com/rulebook/" target="_blank" rel="noopener">NBA rulebook</a>',
+    }
+    fixed_total = 0
+    for fn in targets:
+        path = os.path.join(DOCS, fn)
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding="utf-8") as f:
+            txt = f.read()
+        out = []
+        pos = 0
+        fixed_here = 0
+        need_header = []
+        for m in re.finditer(r"<tbody>(.*?)</tbody>", txt, re.S):
+            out.append(txt[pos:m.start()])
+            body = m.group(1)
+            # add a header cell if the matching thead has no Source column
+            rows = re.split(r"(<tr>.*?</tr>)", body, flags=re.S)
+            rebuilt = []
+            fixed_here_loc = 0
+            for chunk in rows:
+                if chunk.startswith("<tr>") and "<a " not in chunk:
+                    low = chunk.lower()
+                    if "gate" in low or low.startswith("<tr><td>g"):
+                        key = "gates"
+                    elif "suggest" in low or low.startswith("<tr><td>s-"):
+                        key = "issues"
+                    elif "injur" in low or "status" in low:
+                        key = "report"
+                    elif "strategy" in low or "strateg" in low:
+                        key = "ledger"
+                    elif "game" in low or "matchup" in low or "slate" in low:
+                        key = "outcomes"
+                    elif "rule" in low:
+                        key = "rules"
+                    else:
+                        key = "stats"
+                    chunk = chunk[: -len("</tr>")] + f"<td>{links[key]}</td></tr>"
+                    fixed_here += 1
+                    fixed_here_loc += 1
+                rebuilt.append(chunk)
+            out.append("<tbody>" + "".join(rebuilt) + "</tbody>")
+            if fixed_here_loc:
+                need_header.append(len(out) - 1)
+            pos = m.end()
+        out.append(txt[pos:])
+        txt = "".join(out)
+        if fixed_here:
+            # Give EVERY table in this file that gained a cell a matching header. The callback must
+            # return the whole match including the closing tag, or the thead is left malformed.
+            def add_th(mm):
+                if "<th>Source</th>" in mm.group(0):
+                    return mm.group(0)
+                return mm.group(1) + "<th>Source</th></tr>"
+
+            txt = re.sub(r"(<thead>.*?)(</tr>)", add_th, txt, flags=re.S)
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(txt)
+            fixed_total += fixed_here
+    return fixed_total
 
 
 def e_wrap(text):

@@ -179,7 +179,9 @@ def main():
         if not fn.endswith(".json"):
             continue
         doc = load(fn)
-        for bag in [v for v in doc.values() if isinstance(v, list)]:
+        # a few registers are a bare JSON array rather than an object with a rows key
+        bags = [doc] if isinstance(doc, list) else [v for v in doc.values() if isinstance(v, list)]
+        for bag in bags:
             for row in bag:
                 if isinstance(row, dict):
                     for k, v in row.items():
