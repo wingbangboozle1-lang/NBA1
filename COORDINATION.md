@@ -129,3 +129,41 @@ See `data/flags.json`. Highlights:
 - No odds, props, model projections, correlation estimates, validated strategies, or evidence of skill were created here. Automatic future slates still require a scheduled ingestion pipeline and remain non-live.
 - PR #4 merged at `a5ec88c79ad653d456acab352871db56718ccd93` on 2026-11-13: https://github.com/wingbangboozle1-lang/NBA1/pull/4. GitHub Actions run 43520295487 passed `validate` and `deploy`; GitHub Pages API reports `built` at https://wingbangboozle1-lang.github.io/NBA1/.
 - The Pages deploy emitted non-fatal GitHub runner/action deprecation notices (Node.js 20 migration and ubuntu-latest image migration). They did not fail validation or deployment. The new output is published; 13 matchup inference values remain a flagged request to the data owner.
+
+---
+
+# Session arena/e12d1c5e-nba1 — coordination handoff (no duplicate site)
+
+## Branch coordination
+- This branch was cut from `f73edd2` before the other sessions' work landed; the initial checkout had
+  no `COORDINATION.md` and only a six-byte README.
+- A parallel root-level static site was built on this branch. After remote `main` advanced through
+  PRs #1, #2, #3, #4, #5, #6, and #8, this branch's PR #7 became conflicting on shared files
+  (`COORDINATION.md`, `README.md`, `index.html`) and would recreate the duplicate-landing problem.
+- Resolution: reset this branch onto `origin/main` and retained the upstream integrated files. The
+  duplicate root-level site authored on this branch was intentionally discarded; no upstream
+  session's work was removed. PR #7 is reduced to this coordination-only handoff and contains no
+  duplicate site implementation.
+
+## Read-only audit note (context; now resolved upstream)
+- A read-only parser of the pre-fix `origin/main:index.html` (at `46339b9`) found 25 table data rows,
+  16 of which lacked an official NBA HTTPS link — independently confirming the audit request logged
+  by session `arena-c2b0ebb8-nba1`. Session `arena/4f997533-nba1` subsequently resolved this: the
+  root index now carries an official NBA/GitHub reference link on each of its 25 table rows, and
+  `scripts/check_site.py` validates a source link on every table row (81 rows checked, passing). This
+  handoff adds no new factual data and edits no upstream-owned file.
+
+## Verified inputs from this session (consistent with upstream data)
+- Official 2026-27 Injury Report: https://official.nba.com/nba-injury-report-2026-27-season/
+- Official 11/13/26 injury report PDF (04:15 PM), team-attributed:
+  https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_04_15PM.pdf
+- 11/13 slate (9 games, Emirates NBA Cup): https://www.nba.com/schedule
+- 30 teams + official IDs: https://www.nba.com/teams
+- Sportsbook market structure (player props, parlays, SGP): DraftKings
+  https://sportsbook.draftkings.com/ (reached); BetMGM https://www.betmgm.com/ (reached); Caesars
+  https://sportsbook.caesars.com/ (reached); FanDuel https://sports.fanduel.com/ (HTTP 500,
+  geo-restricted, flagged).
+
+## PR #7
+- PR: https://github.com/wingbangboozle1-lang/NBA1/pull/7 — coordination-only handoff.
+- Merge result and Pages deploy status: recorded below after merge.
