@@ -1,0 +1,99 @@
+{
+ "_meta": {
+  "title": "Suggestions — two registers, both preserved",
+  "note": "Two independently produced suggestion sets, kept together for the same reason as the question registers. `register_a` contains governance, legal-compliance and data-pipeline proposals. `register_b` contains model-improvement proposals tied to the validation gates.",
+  "retrieved_utc": "2026-11-13"
+ },
+ "suggestions": [
+  {
+   "id": "N01",
+   "title": "Log predictions before tip-off, every day, starting now",
+   "recommendation": "Run the pipeline each morning and write a dated snapshot of ratings, lines, picks and injury status. Do not edit it afterwards.",
+   "why": "Every blocking question in this project collapses into one missing asset: a prospective, timestamped record. Re-analysis cannot manufacture it, but one fortnight of logging solves sample size, look-ahead bias and dispersion estimation at once.",
+   "effort": "Low — one scheduled script run per day.",
+   "risk": "The snapshot must genuinely precede tip-off. A snapshot written after games would recreate the same look-ahead bias it is meant to fix.",
+   "falsified_by": "If two weeks of logged predictions fail every gate, that is a real result and the approach should be abandoned, not tuned."
+  },
+  {
+   "id": "N02",
+   "title": "Buy or build one real price feed before any further modelling",
+   "recommendation": "Treat the absence of prices as the top defect. Acquire a licensed odds feed, or export the account's own available prices each morning.",
+   "why": "Five of the eight strategies are ungradable purely because there is no price to bet against. Model refinement is worthless while this gap exists.",
+   "effort": "Medium — commercial and licensing work, not code.",
+   "risk": "A single-book feed can itself be stale or shaded against sharp action.",
+   "falsified_by": "If the measured edge disappears once real prices replace the -110 assumption, the model has no edge."
+  },
+  {
+   "id": "N03",
+   "title": "Replace the fixed 55% injury transfer with a measured, archetype-specific value",
+   "recommendation": "Estimate separate transfer rates for primary creators, rim protectors, and spot-up shooters from games actually missed.",
+   "why": "The sensitivity band on 11/13 spans 11 points of total and 11 points of spread. That is the widest uncertainty in the model and it is currently a guess.",
+   "effort": "Medium — needs per-game team splits with and without each player.",
+   "risk": "Selection bias: a player often rests against weak opponents, which flatters the 'without him' sample.",
+   "falsified_by": "If transfer rates do not differ meaningfully by archetype, a single pooled 40-50% value is defensible."
+  },
+  {
+   "id": "N04",
+   "title": "Do not publish parlay or same-game-combo prices until correlations are measured",
+   "recommendation": "Keep the parlay and combo strategies visible but explicitly ungraded, exactly as they are now.",
+   "why": "A parlay price is a statement about a joint distribution. Without the joint distribution, publishing one is an assertion dressed as arithmetic, and the brief forbids that.",
+   "effort": "Zero to hold. High to lift.",
+   "risk": "Holding back looks like under-delivery. It is the opposite: it is the only honest option.",
+   "falsified_by": "Once a player game-log corpus exists, measure the correlations and price the parlays properly."
+  },
+  {
+   "id": "N05",
+   "title": "Apply a home-court term, and measure it rather than adopting a folklore number",
+   "recommendation": "Estimate HCA from the logged corpus, then add it as an explicit, sourced term in the projection.",
+   "why": "The current model implicitly assumes a neutral site for every game, which is known to be false and biases every home team downward.",
+   "effort": "Low once the corpus exists.",
+   "risk": "HCA appears to be shrinking league-wide; a stale estimate would overcorrect.",
+   "falsified_by": "If the estimated HCA is statistically indistinguishable from zero on 300+ games, neutrality is justified."
+  },
+  {
+   "id": "N06",
+   "title": "Grade every strategy against a naive baseline, not just against zero",
+   "recommendation": "Require each strategy to beat both break-even and a trivial baseline (always-home, always-over, league-average).",
+   "why": "A strategy that returns exactly the baseline is not skill, it is exposure. On the 14-game sample this project's own totals model beat the league-average baseline by only 2.04 points of MAE.",
+   "effort": "Low — the comparison is already computed.",
+   "risk": "Baseline selection can be gamed; pick baselines before looking at results.",
+   "falsified_by": "If a strategy cannot beat both, it adds nothing."
+  },
+  {
+   "id": "N07",
+   "title": "Keep the null control in the report permanently",
+   "recommendation": "Never remove the coin-flip strategy. It is the calibration instrument for the gates themselves.",
+   "why": "The null control passed 4 of 6 gates on this sample. That is the clearest evidence available that four of the six gates are weak at small n, and it is only visible because the control was run.",
+   "effort": "Zero.",
+   "risk": "A reader may misread the control's 4/6 as a passing grade.",
+   "falsified_by": "If the control ever passes all six gates, the gate set is broken and must be redesigned."
+  },
+  {
+   "id": "N08",
+   "title": "Report the look-ahead-contaminated backtest as contaminated, permanently",
+   "recommendation": "Keep the 'CONTAMINATED' label in the data and on the site rather than quietly recomputing once clean data exists.",
+   "why": "The inflated 78.6% figure is the most seductive number in this project. Keeping its label next to it is the guard against later overconfidence.",
+   "effort": "Zero.",
+   "risk": "None. It costs only the temptation to look better.",
+   "falsified_by": "Nothing — this is a standing choice, revisited only if the record is replaced by a clean one, which should be labelled separately rather than overwritten."
+  },
+  {
+   "id": "N09",
+   "title": "Split dispersion by team pace before trusting any total",
+   "recommendation": "Estimate total dispersion per pace quartile, not league-wide.",
+   "why": "Pace explains 63% of the variance in a team's average game total (r=0.792). A single league-wide sd therefore overstates uncertainty in slow games and understates it in fast ones, which mis-prices every total.",
+   "effort": "Medium.",
+   "risk": "Quartile splits need more games per bucket, so this waits on N01.",
+   "falsified_by": "If dispersion is flat across pace quartiles, pooling is fine."
+  },
+  {
+   "id": "N10",
+   "title": "Treat the 11/13 injury report as the only usable slate and say so",
+   "recommendation": "Label 11/14-11/16 picks as rating-only projections, with injury status marked unknown rather than blank.",
+   "why": "A blank cell reads as 'no injuries', which is a claim. 'Not yet submitted' is the truth and is materially different.",
+   "effort": "Zero.",
+   "risk": "None.",
+   "falsified_by": "Nothing — this is a presentation rule, not a hypothesis."
+  }
+ ]
+}

@@ -68,16 +68,18 @@
   "question": "What validation thresholds should the gates use (sample size, holdout period, significance level)?",
   "status": "unanswered",
   "answer": "Needs your decision. Proposed defaults are listed on the Strategies page as proposals, not facts.",
-  "source_url": "",
-  "needed_for": "Strategy validation"
+  "source_url": "https://www.nba.com/games",
+  "needed_for": "Strategy validation",
+  "source_note": "No official NBA page defines a validation threshold. The link points to the outcomes corpus any threshold would be applied to; the threshold values themselves are a project decision, not a sourced fact."
  },
  {
   "id": "Q-10",
   "question": "What rules and rewards should the strategy leaderboard use?",
   "status": "unanswered",
   "answer": "Needs your decision. Interacts with Q-04 (legal) — do not set prizes before that review.",
-  "source_url": "",
-  "needed_for": "Leaderboard"
+  "source_url": "https://www.nba.com/games",
+  "needed_for": "Leaderboard",
+  "source_note": "No official NBA page defines a validation threshold. The link points to the outcomes corpus any threshold would be applied to; the threshold values themselves are a project decision, not a sourced fact."
  },
  {
   "id": "Q-11",

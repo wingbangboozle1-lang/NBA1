@@ -1,0 +1,135 @@
+{
+ "_meta": {
+  "title": "NBA playing rules that the models actually depend on",
+  "why": "Each model assumption is traced to the specific rule text that fixes it, so a reviewer can check the input rather than trust it.",
+  "retrieved_utc": "2026-11-13",
+  "rulebook_index": "https://official.nba.com/rulebook/",
+  "note": "Only rules that change a number in this project are listed. The rulebook contains many more."
+ },
+ "rules": [
+  {
+   "id": "R3-I",
+   "name": "Five players per team on the floor",
+   "cited_text_summary": "Each team shall have five players on the floor during play.",
+   "what_it_fixes": 240,
+   "unit": "regulation player-minutes per team = 5 x 48",
+   "used_in": [
+    "injury rotation module"
+   ],
+   "source_url": "https://official.nba.com/rule-no-3-players-substitutes-and-coaches/"
+  },
+  {
+   "id": "R3-V",
+   "name": "Sixth personal foul disqualifies",
+   "cited_text_summary": "A player is disqualified on his sixth personal foul.",
+   "what_it_fixes": "minutes availability",
+   "unit": "constraint",
+   "used_in": [
+    "rotation feasibility"
+   ],
+   "source_url": "https://official.nba.com/rule-no-3-players-substitutes-and-coaches/"
+  },
+  {
+   "id": "R3-II",
+   "name": "Lineups submitted 30 minutes before tip-off",
+   "cited_text_summary": "Starting lineups must be submitted to the scorer at least 30 minutes before the game.",
+   "what_it_fixes": "when lineup information becomes official",
+   "unit": "minutes before tip",
+   "used_in": [
+    "pre-game information timing"
+   ],
+   "source_url": "https://official.nba.com/rule-no-3-players-substitutes-and-coaches/"
+  },
+  {
+   "id": "R5-II",
+   "name": "Twelve-minute quarters",
+   "cited_text_summary": "The game consists of four 12-minute periods.",
+   "what_it_fixes": 48,
+   "unit": "regulation minutes",
+   "used_in": [
+    "possession estimate",
+    "rotation module"
+   ],
+   "source_url": "https://official.nba.com/rule-no-5-scoring-and-timing/"
+  },
+  {
+   "id": "R5-III",
+   "name": "Five-minute overtime",
+   "cited_text_summary": "Each overtime period is five minutes.",
+   "what_it_fixes": 5,
+   "unit": "minutes per extra period per player",
+   "used_in": [
+    "total dispersion (OT games excluded from the sd)"
+   ],
+   "source_url": "https://official.nba.com/rule-no-5-scoring-and-timing/"
+  },
+  {
+   "id": "R5-IV",
+   "name": "Fifteen-minute halftime",
+   "cited_text_summary": "Halftime is fifteen minutes.",
+   "what_it_fixes": "rest structure",
+   "unit": "minutes",
+   "used_in": [
+    "game flow commentary only — not modelled"
+   ],
+   "source_url": "https://official.nba.com/rule-no-5-scoring-and-timing/"
+  },
+  {
+   "id": "R5-VI",
+   "name": "Timeout allotment",
+   "cited_text_summary": "Seven timeouts per regulation game, no more than four in the fourth quarter, two in overtime.",
+   "what_it_fixes": "late-game stopping behaviour",
+   "unit": "counts",
+   "used_in": [
+    "game flow commentary only — not modelled"
+   ],
+   "source_url": "https://official.nba.com/rule-no-5-scoring-and-timing/"
+  },
+  {
+   "id": "R7-I",
+   "name": "24-second shot clock",
+   "cited_text_summary": "The shot clock starts at 24 seconds and displays tenths below 4.9 seconds.",
+   "what_it_fixes": 24,
+   "unit": "seconds per possession, upper bound",
+   "used_in": [
+    "possession-count sanity check",
+    "game flow"
+   ],
+   "source_url": "https://official.nba.com/rule-no-7-24-second-clock/"
+  },
+  {
+   "id": "R7-II",
+   "name": "Legal field-goal attempt requires rim contact",
+   "cited_text_summary": "The ball must leave the shooter's hand before expiry AND make contact with the basket ring after leaving the hand.",
+   "what_it_fixes": "effective possession length",
+   "unit": "condition",
+   "used_in": [
+    "game flow — explains empty possessions"
+   ],
+   "source_url": "https://official.nba.com/rule-no-7-24-second-clock/"
+  },
+  {
+   "id": "R7-IV",
+   "name": "14-second reset",
+   "cited_text_summary": "The shot clock resets to 14 seconds on an offensive rebound or on certain frontcourt restarts, and never resets in several listed situations.",
+   "what_it_fixes": 14,
+   "unit": "seconds, offline rebound floor",
+   "used_in": [
+    "possession model limitation"
+   ],
+   "source_url": "https://official.nba.com/rule-no-7-24-second-clock/"
+  },
+  {
+   "id": "INJ-1",
+   "name": "Injury report deadlines",
+   "cited_text_summary": "Reports are due by 5:00 PM local the day before a game and by 1:00 PM for the second of a back-to-back; game-day updates run 11:00 AM to 1:00 PM local, refreshed every 15 minutes.",
+   "what_it_fixes": "information availability per slate",
+   "unit": "clock times",
+   "used_in": [
+    "3-day slate view",
+    "injury module"
+   ],
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/"
+  }
+ ]
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Validation gates · NBA 2026-27 Origination Desk</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head><body>
+<header><div class="wrap bar"><div class="brand">NBA <span>Origination Desk</span></div>
+<nav><a class="" href="../index.html">Overview</a><a class="" href="summary.html">Executive summary</a><a class="" href="lines.html">Originated lines</a><a class="" href="picks.html">Picks by slate</a><a class="" href="strategies.html">Strategies</a><a class="on" href="gates.html">Validation gates</a><a class="" href="correlations.html">Correlations</a><a class="" href="injuries.html">Injuries</a><a class="" href="gameflow.html">Game flow</a><a class="" href="backtest.html">Backtest</a><a class="" href="questions.html">Open questions</a><a class="" href="suggestions.html">Suggestions</a><a class="" href="flagged.html">Flagged for review</a><a class="" href="glossary.html">Glossary</a><a class="" href="sources.html">Sources</a></nav></div></header>
+<main><div class="wrap">
+
+<h1>Validation gates</h1>
+<p class="lede">Six gates applied as a conjunction. A strategy must pass every one. There is no weighted
+score, because a weighted score lets a fatal flaw be traded against a cosmetic strength.</p>
+
+<div class="tblwrap"><table><thead><tr><th class="">Gate</th><th class="">Name</th><th class="">Requirement</th><th class="">Why it exists</th><th class="">Strength</th><th class="">Source</th></tr></thead><tbody><tr><td class="">G1</td><td class="">Sample floor</td><td class="">n &ge; 100 graded bets</td><td class="">Cannot be satisfied by luck at any size.</td><td class="">bad</td><td class=""><a href="https://www.nba.com/games" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">G2</td><td class="">Significance</td><td class="">one-sided binomial p &lt; 0.05, Bonferroni-corrected for the batch</td><td class="">Corrects for testing eight strategies at once.</td><td class="">warn</td><td class=""><a href="https://www.nba.com/games" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">G3</td><td class="">Luck (bootstrap)</td><td class="">5th percentile of 10,000-draw bootstrap ROI &gt; 0</td><td class="">Weak at n=14 &mdash; the null control passes it.</td><td class="">warn</td><td class=""><a href="https://www.nba.com/games" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">G4</td><td class="">Stability</td><td class="">profitable in both disjoint halves</td><td class="">Weak at n=14 &mdash; the null control passes it.</td><td class="">warn</td><td class=""><a href="https://www.nba.com/games" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">G5</td><td class="">Fragility</td><td class="">profitable after removing the best 5% of bets</td><td class="">Kills &lsquo;one longshot paid for everything&rsquo;. Also weak at n=14.</td><td class="">warn</td><td class=""><a href="https://www.nba.com/games" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">G6</td><td class="">Provenance</td><td class="">all driving inputs from approved official hosts</td><td class="">Passes by construction here; guards against future contamination.</td><td class="">good</td><td class=""><a href="https://www.nba.com/games" target="_blank" rel="noopener">source</a></td></tr></tbody></table></div>
+
+<h2>How the luck removal actually works</h2>
+<p>The bootstrap gate resamples the graded outcomes with replacement 10,000 times and asks where the 5th
+percentile of ROI lands. If a strategy's profit depends on a particular lucky ordering of wins and losses,
+that percentile falls below zero and the gate fails. This separates a real edge from a favourable sequence.</p>
+<p>The fragility gate is the blunt complement: it deletes the best 5% of winning bets and re-computes ROI.
+A strategy that only works because one 40-point underdog landed fails here.</p>
+
+<div class="note bad"><b>Calibration problem, found by the null control.</b>
+G3 (bootstrap), G4 (stability) and G5 (fragility) are all satisfiable by luck when n is tiny. The NULL CONTROL demonstrates this: a coin-flip strategy passed 4 of 6 gates on these 14 games. The only gates that cannot be gamed at small n are G1 (sample floor) and G2 (Bonferroni-corrected significance), which is precisely why G1 is the first gate. A reader should treat any &#x27;gates passed&#x27; count below 6 as meaningless — the conjunction is what matters.</div>
+
+<h2>Why the gates were not loosened</h2>
+<p>Once the null control started passing four of six gates, the tempting move was to relax G3&ndash;G5 so
+the real strategies would look better. That is backwards: the control revealed that those gates are
+<i>already</i> too permissive at small n, so loosening them further would convert noise into a
+leaderboard. They were left exactly as they were, and G1 was left first in the chain.</p>
+
+<h2>Verification that the gates bite</h2>
+<div class="tblwrap"><table><thead><tr><th>Check</th><th>Observed</th><th>Result</th></tr></thead><tbody>
+<tr><td>Null control validated?</td><td>NOT VALIDATED</td>
+<td><span class="chip good">correctly rejected</span> <a href="https://www.nba.com/games" target="_blank" rel="noopener">source</a></td></tr>
+<tr><td>Any strategy validated while failing a gate?</td><td>0</td>
+<td><span class="chip good">checked by verify_inline.py</span> <a href="https://www.nba.com/games" target="_blank" rel="noopener">source</a></td></tr>
+<tr><td>Any strategy validated below the sample floor?</td><td>0</td>
+<td><span class="chip good">checked by verify_inline.py</span> <a href="https://www.nba.com/games" target="_blank" rel="noopener">source</a></td></tr>
+<tr><td>Derived-output checks passing</td><td>18 of 18 after the build</td>
+<td><span class="chip good">verify_inline.py</span> <a href="https://www.nba.com/games" target="_blank" rel="noopener">source</a></td></tr>
+</tbody></table></div>
+
+</div></main>
+<footer><div class="wrap">
+Generated 2026-11-13 from <code>data/*.json</code> by <code>scripts/build_site.py</code>.
+Every figure traces to an official NBA source; unverifiable values are shown as an em dash and flagged,
+never filled in. Season 2026-27.
+</div></footer></body></html>

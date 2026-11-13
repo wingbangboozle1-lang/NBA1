@@ -1,0 +1,206 @@
+{
+ "_meta": {
+  "title": "Correlation register",
+  "generated_by": "scripts/compute_correlations.py",
+  "generated_utc": "2026-11-13",
+  "tiers": {
+   "A": "Empirical — computed from official NBA.com team data, with n and a p-value.",
+   "B": "Structural — true by construction, not an edge.",
+   "C": "Not computed — data required is unavailable; value left null and NOT guessed."
+  },
+  "method_note": "p-values use the normal approximation to the t distribution. With n=30 this is close to exact but is disclosed rather than implied.",
+  "multiple_comparisons_note": "10 pairs were tested. At alpha=0.05 you expect about 0.6 false positives by chance alone. Treat any single marginal result with suspicion; the site reports the count of significant pairs but does not treat them as independently confirmed."
+ },
+ "tier_a_empirical": [
+  {
+   "x": "pace",
+   "y": "game_total",
+   "r": 0.7923,
+   "r_squared": 0.6278,
+   "p_two_sided_approx": 0.0,
+   "n": 30,
+   "significant_at_0_05": true,
+   "interpretation": "Pace vs that team's average game total — the core over/under driver.",
+   "derivation": "EMPIRICAL — Pearson r across the 30-team cross-section of official NBA.com season-to-date values",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season and https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame"
+  },
+  {
+   "x": "pace",
+   "y": "pts",
+   "r": 0.3018,
+   "r_squared": 0.0911,
+   "p_two_sided_approx": 0.09389,
+   "n": 30,
+   "significant_at_0_05": false,
+   "interpretation": "Pace vs own scoring.",
+   "derivation": "EMPIRICAL — Pearson r across the 30-team cross-section of official NBA.com season-to-date values",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season and https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame"
+  },
+  {
+   "x": "off_rtg",
+   "y": "win_pct",
+   "r": 0.8276,
+   "r_squared": 0.685,
+   "p_two_sided_approx": 0.0,
+   "n": 30,
+   "significant_at_0_05": true,
+   "interpretation": "Offensive rating vs win rate.",
+   "derivation": "EMPIRICAL — Pearson r across the 30-team cross-section of official NBA.com season-to-date values",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season and https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame"
+  },
+  {
+   "x": "def_rtg",
+   "y": "win_pct",
+   "r": -0.8001,
+   "r_squared": 0.6402,
+   "p_two_sided_approx": 0.0,
+   "n": 30,
+   "significant_at_0_05": true,
+   "interpretation": "Defensive rating vs win rate (lower DefRtg is better, so r should be negative).",
+   "derivation": "EMPIRICAL — Pearson r across the 30-team cross-section of official NBA.com season-to-date values",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season and https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame"
+  },
+  {
+   "x": "fg3_pct",
+   "y": "off_rtg",
+   "r": 0.6841,
+   "r_squared": 0.468,
+   "p_two_sided_approx": 0.0,
+   "n": 30,
+   "significant_at_0_05": true,
+   "interpretation": "Three-point percentage vs offensive rating.",
+   "derivation": "EMPIRICAL — Pearson r across the 30-team cross-section of official NBA.com season-to-date values",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season and https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame"
+  },
+  {
+   "x": "fg3a",
+   "y": "pace",
+   "r": 0.0263,
+   "r_squared": 0.0007,
+   "p_two_sided_approx": 0.88924,
+   "n": 30,
+   "significant_at_0_05": false,
+   "interpretation": "Three-point volume vs pace.",
+   "derivation": "EMPIRICAL — Pearson r across the 30-team cross-section of official NBA.com season-to-date values",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season and https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame"
+  },
+  {
+   "x": "tov_pct",
+   "y": "off_rtg",
+   "r": -0.4734,
+   "r_squared": 0.2241,
+   "p_two_sided_approx": 0.00446,
+   "n": 30,
+   "significant_at_0_05": true,
+   "interpretation": "Turnover rate vs offensive rating (should be negative).",
+   "derivation": "EMPIRICAL — Pearson r across the 30-team cross-section of official NBA.com season-to-date values",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season and https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame"
+  },
+  {
+   "x": "oreb_pct",
+   "y": "off_rtg",
+   "r": 0.3716,
+   "r_squared": 0.1381,
+   "p_two_sided_approx": 0.03418,
+   "n": 30,
+   "significant_at_0_05": true,
+   "interpretation": "Offensive rebounding vs offensive rating.",
+   "derivation": "EMPIRICAL — Pearson r across the 30-team cross-section of official NBA.com season-to-date values",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season and https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame"
+  },
+  {
+   "x": "efg_pct",
+   "y": "off_rtg",
+   "r": 0.8189,
+   "r_squared": 0.6705,
+   "p_two_sided_approx": 0.0,
+   "n": 30,
+   "significant_at_0_05": true,
+   "interpretation": "Effective field-goal percentage vs offensive rating.",
+   "derivation": "EMPIRICAL — Pearson r across the 30-team cross-section of official NBA.com season-to-date values",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season and https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame"
+  },
+  {
+   "x": "ast_pct",
+   "y": "pace",
+   "r": 0.0617,
+   "r_squared": 0.0038,
+   "p_two_sided_approx": 0.74348,
+   "n": 30,
+   "significant_at_0_05": false,
+   "interpretation": "Assist rate vs pace.",
+   "derivation": "EMPIRICAL — Pearson r across the 30-team cross-section of official NBA.com season-to-date values",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season and https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame"
+  }
+ ],
+ "tier_b_structural": [
+  {
+   "relationship": "NetRtg = OffRtg - DefRtg",
+   "value": "identity",
+   "note": "True by definition (NBA.com glossary: 100*(PTS-OPP PTS)/POSS reduces to the difference of the two ratings).",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  },
+  {
+   "relationship": "PTS = 2*FGM + 3PM + FTM",
+   "value": "identity",
+   "note": "Scoring identity; enforced as a data check on every player row in verify_data.py.",
+   "source_url": "https://official.nba.com/rule-no-5-scoring-and-timing/"
+  },
+  {
+   "relationship": "Average margin ≈ NetRtg * possessions / 100 / games",
+   "value": "near-identity",
+   "note": "An earlier version of this register listed 'plus_minus vs net_rtg' as an empirical correlation. It came out at r=0.999, which is the tell: it is an identity, not a finding. It has been moved here rather than presented as an edge.",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  },
+  {
+   "relationship": "Game spread sign convention",
+   "value": "identity",
+   "note": "SPREAD = home points - away points, so a negative spread means the home team is favoured.",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  }
+ ],
+ "tier_c_not_computable": [
+  {
+   "pair": "Player points OVER + same player rebounds OVER",
+   "expected_sign": "positive",
+   "value": null,
+   "why_missing": "Needs a player game-log corpus (per-game values for many games) to measure co-movement. NBA.com exposes per-game logs one player at a time; the volume needed (thousands of rows) could not be retrieved in this environment.",
+   "how_to_obtain": "Pull https://www.nba.com/stats/players/boxscores for every player-season, or use the official NBA stats API game logs."
+  },
+  {
+   "pair": "Player points OVER + same-game team total OVER",
+   "expected_sign": "positive",
+   "value": null,
+   "why_missing": "Needs the joint distribution of a player's stat and the game total. Requires game logs joined to final scores.",
+   "how_to_obtain": "Join per-game player box scores to final scores from https://www.nba.com/games."
+  },
+  {
+   "pair": "Two teammates' points OVER (usage cannibalisation)",
+   "expected_sign": "negative",
+   "value": null,
+   "why_missing": "Needs teammate game logs and controls for total team possessions.",
+   "how_to_obtain": "Same corpus as above, grouped by team-game."
+  },
+  {
+   "pair": "Team spread cover + team total OVER",
+   "expected_sign": "positive (a fast game helps the favourite's total)",
+   "value": null,
+   "why_missing": "Needs historical closing lines to define 'cover'. No official line source is reachable here.",
+   "how_to_obtain": "Requires a licensed odds archive. This is the single largest blocker in the project."
+  },
+  {
+   "pair": "Player points OVER + opponent's defensive rating quartile",
+   "expected_sign": "negative",
+   "value": null,
+   "why_missing": "Needs per-game player performances against specific opponents.",
+   "how_to_obtain": "NBA.com player splits by opponent, aggregated across a full season."
+  },
+  {
+   "pair": "Parlay legs from different games",
+   "expected_sign": "zero (approximately independent)",
+   "value": null,
+   "why_missing": "Independence is an assumption, not a measurement. Two games on the same slate can share weather/travel/referee crews, so the assumption itself is unverified.",
+   "how_to_obtain": "Test residual correlation of same-slate, cross-game legs against a historical results corpus."
+  }
+ ]
+}
