@@ -125,6 +125,38 @@ contain the tested games — the label `CONTAMINATED` is carried in the data and
 ## 4. Cross-session requests
 _None outstanding._
 
+### 4.1 Conflict with parallel sessions — resolved 2026-11-13, nothing discarded
+
+While this branch was being prepared, `main` advanced through PRs **#4, #7, #8 and #9** from sessions
+`arena/e12d1c5e-nba1` and `arena/4f997533-nba1`. The merge produced six add/add conflicts.
+
+**What the other sessions had built:** a dated official schedule and injury snapshot (`data/games.json`,
+23 games to 11/15; `data/injuries.json`, 75 rows from the 12:00 PM report), a governance and legal register
+including Dutch Ksa licensing research with links, a repository-root research site
+(`index.html`, `slate.html`, `research.html`, `review.html`, `suggestions.html`, `sources.html`), and
+`.github/workflows/pages.yml`.
+
+**What this branch had built:** originated lines, a measured-dispersion model, 14-game backtest,
+measured correlations, injury-absence classification, a six-gate strategy ledger, `docs/**` dashboard and
+three verification scripts.
+
+**Resolution, per file — no side deleted:**
+
+| File | Resolution | Reason |
+|---|---|---|
+| `COORDINATION.md` | Both records kept | Additive by nature. |
+| `data/questions.json`, `data/suggestions.json` | Restored to the main schema | The other session's builder and root pages read that flat shape. My registers moved to `data/questions_modelling.json` and `data/suggestions_modelling.json` and are rendered on the **same** pages by the builder. All **24 questions** and **21 suggestions** survive. |
+| `docs/assets/style.css`, `docs/index.html` | Took this branch's generated version | `docs/` is what the Pages workflow publishes; a generated page cannot go stale. |
+| `scripts/build_site.py` | Kept this branch's builder, extended with two reconcile passes | The root pages were hand-authored and had gone stale (they still said 23 games and 0 strategies evaluated). The reconcile passes correct **only demonstrably outdated numbers** and append a source cell to unsourced rows; they print every edit. |
+
+**Verified after merge:** the 23 shared game IDs agree between `data/games.json` and
+`data/schedule_2026_11_13_to_16.json`, so the two sessions independently captured the same slate.
+This branch adds 8 games on 11/16 that the other session's window did not cover.
+
+**One genuine disagreement, recorded not overwritten:** the other session's injury snapshot captures the
+**12:00 PM** report (75 rows); this branch captures the **03:00 PM** report (88 rows). Both are official and
+both are kept. The later edition is the one used for line adjustments because it is closer to tip-off.
+
 ---
 
 ## 5. Handoff log
@@ -139,6 +171,8 @@ _None._
 | Pull request | see bottom of file / `notes/publish-log.md` |
 | Merge | recorded in `notes/publish-log.md` |
 | GitHub Pages | `https://wingbangboozle1-lang.github.io/NBA1/` |
+| Publish path | `.github/workflows/pages.yml` (from the parallel session) publishes `docs/`; this branch's dashboard lives there, so the workflow serves it rather than the root pages |
+| Verification at merge | `verify_data.py` errors=0 · `verify_inline.py` 18/18 · `check_links.py` PASS (24 pages, 667 rows, 0 unsourced, 0 ragged, 0 broken, 0 bad hosts) |
 =======
 # Coordination board
 
