@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Overview · NBA 2026-27 Origination Desk</title>
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<header><div class="wrap bar"><div class="brand">NBA <span>Origination Desk</span></div>
+<nav><a class="on" href="index.html">Overview</a><a class="" href="pages/lines.html">Originated lines</a><a class="" href="pages/picks.html">Picks by slate</a><a class="" href="pages/strategies.html">Strategies</a><a class="" href="pages/gates.html">Validation gates</a><a class="" href="pages/correlations.html">Correlations</a><a class="" href="pages/injuries.html">Injuries</a><a class="" href="pages/gameflow.html">Game flow</a><a class="" href="pages/backtest.html">Backtest</a><a class="" href="pages/questions.html">Open questions</a><a class="" href="pages/suggestions.html">Suggestions</a><a class="" href="pages/flagged.html">Flagged for review</a><a class="" href="pages/glossary.html">Glossary</a><a class="" href="pages/sources.html">Sources</a></nav></div></header>
+<main><div class="wrap">
+
+<h1>NBA 2026-27 origination desk</h1>
+<p class="lede">Lines originated from official NBA data &mdash; not vendor prices. Strategies are
+admitted to the leaderboard only through six conjoined validation gates. This session's honest
+result is that <b>no strategy is validated yet</b>, and the pages explain exactly why and what
+would change that.</p>
+
+<div class="grid">
+<div class="card "><div class="k">Games covered</div><div class="v">31</div><div class="s">11/13 &amp;ndash; 11/16</div></div>
+<div class="card "><div class="k">Game lines originated</div><div class="v">31</div><div class="s">totals, spreads, moneylines</div></div>
+<div class="card "><div class="k">Player prop lines</div><div class="v">92</div><div class="s">half-lines, no pushes</div></div>
+<div class="card bad"><div class="k">Strategies validated</div><div class="v">0 of 8</div><div class="s">six gates, no partial credit</div></div>
+<div class="card bad"><div class="k">Graded sample</div><div class="v">14 games</div><div class="s">floor is 100</div></div>
+<div class="card good"><div class="k">Data errors</div><div class="v">0</div><div class="s">from verify_data.py</div></div>
+</div>
+
+<div class="note bad"><b>The headline.</b> The single most important number on this site is the
+graded sample: 14 finished games against a validation floor of 100. Every strategy here fails the
+sample gate, and the 14 games that do exist are look-ahead contaminated. Rather than tune the gates
+until something passes, the gates were left alone and the result is reported as a failure.</div>
+
+<h2>What was built</h2>
+<div class="tblwrap"><table><tbody>
+<tr><td><b>Originated lines</b></td><td class="wrap">Totals, spreads and moneylines for all 31 games, computed from
+offensive/defensive ratings and pace. No sportsbook price is used anywhere, because none was reachable.</td>
+<td><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">nba.com</a></td></tr>
+<tr><td><b>Validation gates</b></td><td class="wrap">Six gates applied as a conjunction, including a bootstrap
+luck test, a stability split, and a fragility test that removes the best 5% of bets.</td>
+<td><a href="pages/gates.html">gate definitions</a></td></tr>
+<tr><td><b>Correlations</b></td><td class="wrap">Ten measured team-level relationships with p-values; six
+same-game and player-prop correlations deliberately left null because the data to compute them was not reachable.</td>
+<td><a href="pages/correlations.html">register</a></td></tr>
+<tr><td><b>Injury &rarr; rotation &rarr; production</b></td><td class="wrap">Every injured player is classified by
+whether his absence is already inside his team's season stats. Only genuinely new absences move a line.</td>
+<td><a href="pages/injuries.html">impact</a></td></tr>
+<tr><td><b>Game flow</b></td><td class="wrap">How possessions, the 24-second clock and the 14-second reset bound
+what a game can look like, tied to the actual rule text.</td>
+<td><a href="pages/gameflow.html">flow</a></td></tr>
+<tr><td><b>Review trail</b></td><td class="wrap">Open questions, suggestions for improvement, and a flag list
+that includes an error this project found in its own work and corrected.</td>
+<td><a href="pages/flagged.html">flagged</a></td></tr>
+</tbody></table></div>
+
+<h2>The three warnings a reader should carry into every other page</h2>
+<ul class="tight">
+<li><b>No price exists.</b> Every ROI figure assumes a standard &minus;110 price. No sportsbook or exchange
+quote was observable here, so no edge can be called real.</li>
+<li><b>The 14-game backtest is contaminated.</b> The team ratings were captured after the games they predict,
+which inflates the 78.6% straight-up rate. The page labels it rather than hiding it.</li>
+<li><b>The null control passes 4 of 6 gates.</b> A coin-flip strategy clears the bootstrap, stability and
+fragility gates on 14 games. That is why only the sample floor and the corrected significance test can
+be trusted at this size &mdash; and both fail.</li>
+</ul>
+
+<h2>Where to start</h2>
+<div class="grid">
+<a class="card" href="pages/lines.html"><div class="k">Markets</div><div class="v">Lines</div>
+<div class="s">31 games, formulas printed</div></a>
+<a class="card" href="pages/picks.html"><div class="k">Slates</div><div class="v">Picks</div>
+<div class="s">3 days ahead, injuries marked</div></a>
+<a class="card" href="pages/strategies.html"><div class="k">Competition</div><div class="v">Leaderboard</div>
+<div class="s">8 strategies, 0 validated</div></a>
+<a class="card" href="pages/flagged.html"><div class="k">Review</div><div class="v">Flagged</div>
+<div class="s">including one self-caught error</div></a>
+</div>
+
+</div></main>
+<footer><div class="wrap">
+Generated 2026-11-13 from <code>data/*.json</code> by <code>scripts/build_site.py</code>.
+Every figure traces to an official NBA source; unverifiable values are shown as an em dash and flagged,
+never filled in. Season 2026-27.
+</div></footer></body></html>

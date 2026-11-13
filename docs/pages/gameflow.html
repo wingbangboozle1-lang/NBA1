@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Game flow · NBA 2026-27 Origination Desk</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head><body>
+<header><div class="wrap bar"><div class="brand">NBA <span>Origination Desk</span></div>
+<nav><a class="" href="../index.html">Overview</a><a class="" href="lines.html">Originated lines</a><a class="" href="picks.html">Picks by slate</a><a class="" href="strategies.html">Strategies</a><a class="" href="gates.html">Validation gates</a><a class="" href="correlations.html">Correlations</a><a class="" href="injuries.html">Injuries</a><a class="on" href="gameflow.html">Game flow</a><a class="" href="backtest.html">Backtest</a><a class="" href="questions.html">Open questions</a><a class="" href="suggestions.html">Suggestions</a><a class="" href="flagged.html">Flagged for review</a><a class="" href="glossary.html">Glossary</a><a class="" href="sources.html">Sources</a></nav></div></header>
+<main><div class="wrap">
+
+<h1>Game flow</h1>
+<p class="lede">What a 48-minute NBA game can physically look like, and which of those constraints this
+model actually uses. The rules below are quoted from the official rulebook, and each is tied to the number
+it fixes in the model.</p>
+
+<div class="note ok"><b>Why this page exists.</b> A projected total is a claim about how many possessions
+two teams will get and how efficiently they convert them. Possessions are bounded by the shot clock, the
+period length and the substitution rules. If a projection implies more possessions than the rules allow, the
+projection is wrong regardless of the statistics behind it.</div>
+
+<h2>Rules that change a number in this model</h2>
+<div class="tblwrap"><table><thead><tr><th class="">Rule</th><th class="">Name</th><th class="">Cited text (summarised)</th><th class="">Fixes</th><th class="">Unit</th><th class="">Used in</th><th class="">Source</th></tr></thead><tbody><tr><td class="">R3-I</td><td class="">Five players per team on the floor</td><td class="">Each team shall have five players on the floor during play.</td><td class="">240</td><td class="">regulation player-minutes per team = 5 x 48</td><td class="">injury rotation module</td><td class=""><a href="https://official.nba.com/rule-no-3-players-substitutes-and-coaches/" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">R3-V</td><td class="">Sixth personal foul disqualifies</td><td class="">A player is disqualified on his sixth personal foul.</td><td class="">minutes availability</td><td class="">constraint</td><td class="">rotation feasibility</td><td class=""><a href="https://official.nba.com/rule-no-3-players-substitutes-and-coaches/" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">R3-II</td><td class="">Lineups submitted 30 minutes before tip-off</td><td class="">Starting lineups must be submitted to the scorer at least 30 minutes before the game.</td><td class="">when lineup information becomes official</td><td class="">minutes before tip</td><td class="">pre-game information timing</td><td class=""><a href="https://official.nba.com/rule-no-3-players-substitutes-and-coaches/" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">R5-II</td><td class="">Twelve-minute quarters</td><td class="">The game consists of four 12-minute periods.</td><td class="">48</td><td class="">regulation minutes</td><td class="">possession estimate, rotation module</td><td class=""><a href="https://official.nba.com/rule-no-5-scoring-and-timing/" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">R5-III</td><td class="">Five-minute overtime</td><td class="">Each overtime period is five minutes.</td><td class="">5</td><td class="">minutes per extra period per player</td><td class="">total dispersion (OT games excluded from the sd)</td><td class=""><a href="https://official.nba.com/rule-no-5-scoring-and-timing/" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">R5-IV</td><td class="">Fifteen-minute halftime</td><td class="">Halftime is fifteen minutes.</td><td class="">rest structure</td><td class="">minutes</td><td class="">game flow commentary only — not modelled</td><td class=""><a href="https://official.nba.com/rule-no-5-scoring-and-timing/" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">R5-VI</td><td class="">Timeout allotment</td><td class="">Seven timeouts per regulation game, no more than four in the fourth quarter, two in overtime.</td><td class="">late-game stopping behaviour</td><td class="">counts</td><td class="">game flow commentary only — not modelled</td><td class=""><a href="https://official.nba.com/rule-no-5-scoring-and-timing/" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">R7-I</td><td class="">24-second shot clock</td><td class="">The shot clock starts at 24 seconds and displays tenths below 4.9 seconds.</td><td class="">24</td><td class="">seconds per possession, upper bound</td><td class="">possession-count sanity check, game flow</td><td class=""><a href="https://official.nba.com/rule-no-7-24-second-clock/" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">R7-II</td><td class="">Legal field-goal attempt requires rim contact</td><td class="">The ball must leave the shooter&#x27;s hand before expiry AND make contact with the basket ring after leaving the hand.</td><td class="">effective possession length</td><td class="">condition</td><td class="">game flow — explains empty possessions</td><td class=""><a href="https://official.nba.com/rule-no-7-24-second-clock/" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">R7-IV</td><td class="">14-second reset</td><td class="">The shot clock resets to 14 seconds on an offensive rebound or on certain frontcourt restarts, and never resets in several listed situations.</td><td class="">14</td><td class="">seconds, offline rebound floor</td><td class="">possession model limitation</td><td class=""><a href="https://official.nba.com/rule-no-7-24-second-clock/" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">INJ-1</td><td class="">Injury report deadlines</td><td class="">Reports are due by 5:00 PM local the day before a game and by 1:00 PM for the second of a back-to-back; game-day updates run 11:00 AM to 1:00 PM local, refreshed every 15 minutes.</td><td class="">information availability per slate</td><td class="">clock times</td><td class="">3-day slate view, injury module</td><td class=""><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">source</a></td></tr></tbody></table></div>
+
+<h2>Possession arithmetic</h2>
+<p>League pace this season is <b>99.853</b> possessions per 48 minutes. That is
+consistent with a 24-second clock: 48 minutes is 2,880 seconds, and at roughly 14&ndash;16 seconds of
+actual possession per trip a team lands near 100 possessions. The 14-second reset after an offensive
+rebound is the reason pace sits above 96 rather than below it.</p>
+<dl class="kv">
+<dt>Regulation seconds</dt><dd>48 &times; 60 = 2,880</dd>
+<dt>Shot clock</dt><dd>24 seconds, with 14 seconds after an offensive rebound (Rule 7 IV)</dd>
+<dt>Overtime</dt><dd>5 minutes per extra period (Rule 5 III) &mdash; excluded from the total dispersion
+estimate because an OT game is not the same event</dd>
+<dt>Halftime</dt><dd>15 minutes (Rule 5 IV)</dd>
+<dt>Timeouts</dt><dd>7 per regulation game, at most 4 in the fourth quarter, 2 in overtime (Rule 5 VI)</dd>
+</dl>
+
+<h2>Flow effects that are <span class="flag">not modelled</span></h2>
+<ul class="tight">
+<li><b>Garbage time.</b> A blowout shortens the effective game and drags totals under. No official source
+publishes a garbage-time adjustment, so none is applied.</li>
+<li><b>Foul-game endgames.</b> Deliberate fouling adds possessions in the last two minutes and inflates
+totals. Not modelled.</li>
+<li><b>Timeout usage.</b> The allowance is known; its effect on pace is not, and no official data ties the
+two.</li>
+<li><b>Back-to-backs and travel.</b> The schedule shows the dates but no official rest-effect estimate
+exists, so rest is not in the model.</li>
+<li><b>Overtime probability.</b> Roughly one game in fifteen reaches overtime in this sample (1 of 14), but
+that is far too small a sample to price, and OT games are excluded from the dispersion estimate rather than
+predicted.</li>
+</ul>
+
+<div class="note"><b>An honest bound.</b> The widest projected total here implies roughly 105 possessions
+per team, which is fast but inside what the rules permit. No projected total exceeds 280 points, and
+<code>verify_inline.py</code> fails the build if one ever does.</div>
+
+</div></main>
+<footer><div class="wrap">
+Generated 2026-11-13 from <code>data/*.json</code> by <code>scripts/build_site.py</code>.
+Every figure traces to an official NBA source; unverifiable values are shown as an em dash and flagged,
+never filled in. Season 2026-27.
+</div></footer></body></html>

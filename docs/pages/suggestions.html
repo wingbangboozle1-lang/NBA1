@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Suggestions · NBA 2026-27 Origination Desk</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head><body>
+<header><div class="wrap bar"><div class="brand">NBA <span>Origination Desk</span></div>
+<nav><a class="" href="../index.html">Overview</a><a class="" href="lines.html">Originated lines</a><a class="" href="picks.html">Picks by slate</a><a class="" href="strategies.html">Strategies</a><a class="" href="gates.html">Validation gates</a><a class="" href="correlations.html">Correlations</a><a class="" href="injuries.html">Injuries</a><a class="" href="gameflow.html">Game flow</a><a class="" href="backtest.html">Backtest</a><a class="" href="questions.html">Open questions</a><a class="on" href="suggestions.html">Suggestions</a><a class="" href="flagged.html">Flagged for review</a><a class="" href="glossary.html">Glossary</a><a class="" href="sources.html">Sources</a></nav></div></header>
+<main><div class="wrap">
+
+<h1>Suggestions for improving decisions</h1>
+<p class="lede">Ten proposals a reviewer can accept, reject or modify before anything is implemented. Each
+states its cost, its risk, and what evidence would prove it wrong &mdash; so a reviewer is choosing a path,
+not signing up to an opinion.</p>
+
+<div class="note"><b>How to use this page.</b> The suggestions are ordered by expected decision value. If
+only one can be adopted, take <b>N01</b>: a daily pre-tip-off snapshot solves the sample-size problem, the
+look-ahead problem and the dispersion problem simultaneously, and it costs one scheduled script.</div>
+
+<div class="note bad"><b>No implementation has been started on any of these.</b> They are proposals
+awaiting review, which is what the brief asked for. The system as published is the system as reviewed
+here, with no half-built changes behind it.</div>
+
+<h3>N01 &middot; Log predictions before tip-off, every day, starting now</h3>
+<dl class="kv">
+<dt>Recommendation</dt><dd>Run the pipeline each morning and write a dated snapshot of ratings, lines, picks and injury status. Do not edit it afterwards.</dd>
+<dt>Why</dt><dd>Every blocking question in this project collapses into one missing asset: a prospective, timestamped record. Re-analysis cannot manufacture it, but one fortnight of logging solves sample size, look-ahead bias and dispersion estimation at once.</dd>
+<dt>Effort</dt><dd>Low — one scheduled script run per day.</dd>
+<dt>Risk</dt><dd>The snapshot must genuinely precede tip-off. A snapshot written after games would recreate the same look-ahead bias it is meant to fix.</dd>
+<dt>Falsified by</dt><dd>If two weeks of logged predictions fail every gate, that is a real result and the approach should be abandoned, not tuned.</dd>
+</dl>
+<h3>N02 &middot; Buy or build one real price feed before any further modelling</h3>
+<dl class="kv">
+<dt>Recommendation</dt><dd>Treat the absence of prices as the top defect. Acquire a licensed odds feed, or export the account&#x27;s own available prices each morning.</dd>
+<dt>Why</dt><dd>Five of the eight strategies are ungradable purely because there is no price to bet against. Model refinement is worthless while this gap exists.</dd>
+<dt>Effort</dt><dd>Medium — commercial and licensing work, not code.</dd>
+<dt>Risk</dt><dd>A single-book feed can itself be stale or shaded against sharp action.</dd>
+<dt>Falsified by</dt><dd>If the measured edge disappears once real prices replace the -110 assumption, the model has no edge.</dd>
+</dl>
+<h3>N03 &middot; Replace the fixed 55% injury transfer with a measured, archetype-specific value</h3>
+<dl class="kv">
+<dt>Recommendation</dt><dd>Estimate separate transfer rates for primary creators, rim protectors, and spot-up shooters from games actually missed.</dd>
+<dt>Why</dt><dd>The sensitivity band on 11/13 spans 11 points of total and 11 points of spread. That is the widest uncertainty in the model and it is currently a guess.</dd>
+<dt>Effort</dt><dd>Medium — needs per-game team splits with and without each player.</dd>
+<dt>Risk</dt><dd>Selection bias: a player often rests against weak opponents, which flatters the &#x27;without him&#x27; sample.</dd>
+<dt>Falsified by</dt><dd>If transfer rates do not differ meaningfully by archetype, a single pooled 40-50% value is defensible.</dd>
+</dl>
+<h3>N04 &middot; Do not publish parlay or same-game-combo prices until correlations are measured</h3>
+<dl class="kv">
+<dt>Recommendation</dt><dd>Keep the parlay and combo strategies visible but explicitly ungraded, exactly as they are now.</dd>
+<dt>Why</dt><dd>A parlay price is a statement about a joint distribution. Without the joint distribution, publishing one is an assertion dressed as arithmetic, and the brief forbids that.</dd>
+<dt>Effort</dt><dd>Zero to hold. High to lift.</dd>
+<dt>Risk</dt><dd>Holding back looks like under-delivery. It is the opposite: it is the only honest option.</dd>
+<dt>Falsified by</dt><dd>Once a player game-log corpus exists, measure the correlations and price the parlays properly.</dd>
+</dl>
+<h3>N05 &middot; Apply a home-court term, and measure it rather than adopting a folklore number</h3>
+<dl class="kv">
+<dt>Recommendation</dt><dd>Estimate HCA from the logged corpus, then add it as an explicit, sourced term in the projection.</dd>
+<dt>Why</dt><dd>The current model implicitly assumes a neutral site for every game, which is known to be false and biases every home team downward.</dd>
+<dt>Effort</dt><dd>Low once the corpus exists.</dd>
+<dt>Risk</dt><dd>HCA appears to be shrinking league-wide; a stale estimate would overcorrect.</dd>
+<dt>Falsified by</dt><dd>If the estimated HCA is statistically indistinguishable from zero on 300+ games, neutrality is justified.</dd>
+</dl>
+<h3>N06 &middot; Grade every strategy against a naive baseline, not just against zero</h3>
+<dl class="kv">
+<dt>Recommendation</dt><dd>Require each strategy to beat both break-even and a trivial baseline (always-home, always-over, league-average).</dd>
+<dt>Why</dt><dd>A strategy that returns exactly the baseline is not skill, it is exposure. On the 14-game sample this project&#x27;s own totals model beat the league-average baseline by only 2.04 points of MAE.</dd>
+<dt>Effort</dt><dd>Low — the comparison is already computed.</dd>
+<dt>Risk</dt><dd>Baseline selection can be gamed; pick baselines before looking at results.</dd>
+<dt>Falsified by</dt><dd>If a strategy cannot beat both, it adds nothing.</dd>
+</dl>
+<h3>N07 &middot; Keep the null control in the report permanently</h3>
+<dl class="kv">
+<dt>Recommendation</dt><dd>Never remove the coin-flip strategy. It is the calibration instrument for the gates themselves.</dd>
+<dt>Why</dt><dd>The null control passed 4 of 6 gates on this sample. That is the clearest evidence available that four of the six gates are weak at small n, and it is only visible because the control was run.</dd>
+<dt>Effort</dt><dd>Zero.</dd>
+<dt>Risk</dt><dd>A reader may misread the control&#x27;s 4/6 as a passing grade.</dd>
+<dt>Falsified by</dt><dd>If the control ever passes all six gates, the gate set is broken and must be redesigned.</dd>
+</dl>
+<h3>N08 &middot; Report the look-ahead-contaminated backtest as contaminated, permanently</h3>
+<dl class="kv">
+<dt>Recommendation</dt><dd>Keep the &#x27;CONTAMINATED&#x27; label in the data and on the site rather than quietly recomputing once clean data exists.</dd>
+<dt>Why</dt><dd>The inflated 78.6% figure is the most seductive number in this project. Keeping its label next to it is the guard against later overconfidence.</dd>
+<dt>Effort</dt><dd>Zero.</dd>
+<dt>Risk</dt><dd>None. It costs only the temptation to look better.</dd>
+<dt>Falsified by</dt><dd>Nothing — this is a standing choice, revisited only if the record is replaced by a clean one, which should be labelled separately rather than overwritten.</dd>
+</dl>
+<h3>N09 &middot; Split dispersion by team pace before trusting any total</h3>
+<dl class="kv">
+<dt>Recommendation</dt><dd>Estimate total dispersion per pace quartile, not league-wide.</dd>
+<dt>Why</dt><dd>Pace explains 63% of the variance in a team&#x27;s average game total (r=0.792). A single league-wide sd therefore overstates uncertainty in slow games and understates it in fast ones, which mis-prices every total.</dd>
+<dt>Effort</dt><dd>Medium.</dd>
+<dt>Risk</dt><dd>Quartile splits need more games per bucket, so this waits on N01.</dd>
+<dt>Falsified by</dt><dd>If dispersion is flat across pace quartiles, pooling is fine.</dd>
+</dl>
+<h3>N10 &middot; Treat the 11/13 injury report as the only usable slate and say so</h3>
+<dl class="kv">
+<dt>Recommendation</dt><dd>Label 11/14-11/16 picks as rating-only projections, with injury status marked unknown rather than blank.</dd>
+<dt>Why</dt><dd>A blank cell reads as &#x27;no injuries&#x27;, which is a claim. &#x27;Not yet submitted&#x27; is the truth and is materially different.</dd>
+<dt>Effort</dt><dd>Zero.</dd>
+<dt>Risk</dt><dd>None.</dd>
+<dt>Falsified by</dt><dd>Nothing — this is a presentation rule, not a hypothesis.</dd>
+</dl>
+
+</div></main>
+<footer><div class="wrap">
+Generated 2026-11-13 from <code>data/*.json</code> by <code>scripts/build_site.py</code>.
+Every figure traces to an official NBA source; unverifiable values are shown as an em dash and flagged,
+never filled in. Season 2026-27.
+</div></footer></body></html>
