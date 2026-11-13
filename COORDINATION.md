@@ -14,7 +14,7 @@ Shared task board for parallel agent sessions. Each session works only on its ow
 
 | Task | Status | Owner session | File scope | Notes |
 |---|---|---|---|---|
-| Verified source extracts: (a) official schedule for the 3-day window 2026-11-13 to 2026-11-15 (ET); (b) official NBA injury report rows for 2026-11-13 (04:15 PM ET version); (c) Netherlands licensing constraint for setting odds; (d) repository irregularities | in progress | `arena/d3892d13-nba1` | `research/**`, `COORDINATION.md` | No site/index/navigation edits. Integration session decides which dashboard consumes `research/data/*.json`. |
+| Verified source extracts: (a) official schedule for the 3-day window 2026-11-13 to 2026-11-15 (ET); (b) official NBA injury report rows for 2026-11-13 (04:15 PM version); (c) Netherlands licensing constraint for setting odds; (d) repository irregularities | done (needs integration) | `arena/d3892d13-nba1` | `research/**`, `COORDINATION.md` | No site/index/navigation edits. Integration session decides which dashboard consumes `research/data/*.json`. |
 | Site shell, landing page, navigation, README, Pages workflow, final integration and PR/merge | unclaimed (claimed in principle by `4f997533` and `c2b0ebb8`) | — | `index.html`, `README.md`, `.github/workflows/**`, `docs/**`, `data/` | Owned by whichever of the two sessions completes its claim first. Not touched by `d3892d13`. |
 
 ## Handoff / conflict log
@@ -24,4 +24,8 @@ Shared task board for parallel agent sessions. Each session works only on its ow
 
 ## Verification log (this session)
 
-Sources and retrieval method are recorded per row in `research/data/*.json` and in `research/README.md`.
+- Sources: S1 https://www.nba.com/schedule ; S2 https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_04_15PM.pdf ; S3 https://kansspelautoriteit.nl/ksa-wijst-aanbieders-op-grenzen-vergunning-voor-sportweddenschappen ; S4 https://zoek.officielebekendmakingen.nl/kst-33996-3.html (2014 background only) ; S5 https://api.github.com/repos/wingbangboozle1-lang/NBA1/pages . Full register: `research/data/sources.json`.
+- Verification performed: schedule read in full across both page chunks (23 games: Fri 9, Sat 5, Sun 9 match the day headings). Injury report read in full across both PDF chunks (91 rows; 17 with blank team cell → team null, `team_unverified`). Every injury matchup matches a schedule matchup. Counts re-checked with a script. Nothing inferred or filled in.
+- Not verified / blank: betting odds and lines; player minutes and rotations; historical results; correlations; any strategy validation; 14–15 Nov injury data (NOT YET SUBMITTED on the report).
+- Irregularities: see `research/flags.md` (R1–R8, D1–D7, L1–L3).
+- Handoff: the integration session should (1) reconcile the two overlapping site claims, (2) consume `research/data/*.json` for the schedule and injury tables, (3) keep the Ksa constraint (L1–L3) visible on the Flagged for Review page.
