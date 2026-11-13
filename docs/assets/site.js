@@ -1,6 +1,14 @@
 /* Shared helpers. No build step, no framework, no network calls at runtime. */
 
-const DATA = (p) => "data/" + p;
+const DATA = (p) => DATA_PREFIX + "data/" + p;
+/* Resolved from this script's own src so the same file works at docs/ and docs/b/ */
+const DATA_PREFIX = (() => {
+  const d = document.querySelector("script[src*='site.js']");
+  if (!d) return "";
+  const src = d.getAttribute("src") || "";
+  const i = src.indexOf("assets/site.js");
+  return i === -1 ? "" : src.slice(0, i);
+})();
 
 async function loadJSON(path) {
   const res = await fetch(path, { cache: "no-store" });

@@ -15,7 +15,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import OUT, ROOT, read_json
 
 DOCS = os.path.join(ROOT, "docs")
-PAGES = os.path.join(DOCS, "pages")
+# A second session published a site at docs/ (its root dashboard links to
+# docs/index.html, docs/injuries.html, docs/flagged.html and docs/sources.html).
+# This build is namespaced under docs/b/ so both survive the merge intact.
+SUB = "b"
+PAGES = os.path.join(DOCS, SUB, "pages")
 
 NAV = [
     ("index", "", "Overview"),
@@ -50,8 +54,14 @@ def nav_html(active, depth):
     return "\n".join(out)
 
 
-def page(active, title, body, subtitle="", depth=0, wide=True):
-    prefix = "" if depth == 0 else "../"
+def page(active, title, body, subtitle="", depth=0, wide=True,
+         page_prefix=None, asset_prefix=None):
+    if page_prefix is None:
+        page_prefix = "" if depth == 0 else "../"
+    if asset_prefix is None:
+        asset_prefix = page_prefix
+    prefix = page_prefix
+    ap = asset_prefix
     return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -59,8 +69,8 @@ def page(active, title, body, subtitle="", depth=0, wide=True):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title} — NBA1 Line Origination</title>
 <meta name="description" content="{subtitle or title}">
-<link rel="stylesheet" href="{prefix}assets/site.css">
-<script src="{prefix}assets/site.js"></script>
+<link rel="stylesheet" href="{ap}assets/site.css">
+<script src="{ap}assets/site.js"></script>
 </head>
 <body>
 <header class="top">
@@ -1675,10 +1685,11 @@ def main():
     meta = read_json(os.path.join(OUT, "meta.json"))
     ex = read_json(os.path.join(OUT, "executive.json"))
 
-    # index
-    write(os.path.join(DOCS, "index.html"),
+    # index (namespaced)
+    write(os.path.join(DOCS, SUB, "index.html"),
           page("index", "Executive Summary", p_index(meta, ex),
-               subtitle="Original NBA line origination, validation and analysis", depth=0))
+               subtitle="Original NBA line origination, validation and analysis",
+               depth=0, page_prefix="", asset_prefix="../"))
 
     bodies = {
         "lines": ("Originated Lines", p_lines()),
@@ -1702,7 +1713,9 @@ def main():
         script = SCRIPTS.get(key, "")
         if script:
             body += f"\n<script>\n{script}\n</script>\n"
-        write(os.path.join(PAGES, key + ".html"), page(key, title, body, depth=1))
+        write(os.path.join(PAGES, key + ".html"),
+              page(key, title, body, depth=1,
+                   page_prefix="../", asset_prefix="../../"))
 
     # append helpers to site.js
     js_path = os.path.join(DOCS, "assets", "site.js")
