@@ -1,16 +1,20 @@
 # Coordination board
 
-This repository had no coordination board or other active task claims at session start. The current Arena-managed branch `arena/0684edd4-nba1` is fixed for this session; no other branches/worktrees are created.
+This board aggregates logs from several Arena sessions. The opening note below describes the earlier `arena/0684edd4-nba1` session at its start; the current integration work was performed on `arena/4f997533-nba1`, without switching branches. This repository had no coordination board on the initial checkout.
 
 | Task | Status | Owner | File scope |
 |---|---|---|---|
-| Build verified NBA lines research/dashboard, methodology, decision questions, and review flags | done | arena session (current session) | `index.html`, `styles.css`, `app.js`, `README.md`, `COORDINATION.md`, `.github/workflows/pages.yml` |
+| Build verified NBA lines research/dashboard, methodology, decision questions, and review flags | done | `arena/0684edd4-nba1` | `index.html`, `styles.css`, `app.js`, `README.md`, `COORDINATION.md`, `.github/workflows/pages.yml` |
+| Integrate source-linked research subpages, fix root row-source coverage, verify build, merge and confirm Pages deployment | done; inference cleanup remains flagged/requested | `arena/4f997533-nba1` | `README.md`, `COORDINATION.md`, `index.html`, `research.html`, `slate.html`, `suggestions.html`, `review.html`, `sources.html`, `subpages.css`, `scripts/check_site.py`, `.github/workflows/pages.yml` |
 
 ## Source and verification log
 - Official NBA Stats glossary: https://www.nba.com/stats/help/glossary (fetched and checked; official stats terms).
 - NBA Stats FAQ: https://www.nba.com/stats/help/faq; team/player stats https://www.nba.com/stats/teams/advanced and https://www.nba.com/stats/players; schedule https://www.nba.com/schedule.
 - Current official injury report page verified at https://official.nba.com/nba-injury-report-2026-27-season/ (fetched; report cadence described there). No report data ingested.
 - Verification: internal HTML anchors checked (none broken); source links added to displayed research rows; `git diff --check` passed; static HTTP requests for `/`, `/index.html`, `/styles.css`, `/app.js` returned 200; GitHub Pages deployment workflow 43518760512 completed successfully; public URL https://wingbangboozle1-lang.github.io/NBA1/.
+- Current integration: PR #4 https://github.com/wingbangboozle1-lang/NBA1/pull/4 merged 2026-11-13; merge commit `a5ec88c79ad653d456acab352871db56718ccd93`. GitHub Pages workflow run 43520295487 completed successfully (validate and deploy jobs); repository Pages API status is `built`, URL https://wingbangboozle1-lang.github.io/NBA1/.
+- Current local integration checks: `python3 scripts/build_site.py` built 10 pages (23 schedule rows, 75 injury rows, 14 flags); `python3 scripts/check_site.py` checked 81 table-body rows across root and detail pages; 16 root/docs HTML pages parsed; selected root/docs HTTP smoke tests returned 200; `git diff --check` passed.
+- Unresolved data concern: 13 injury matchup values are marked inferred in the upstream data; a correction request is in the integration log and they remain flagged pending the data owner. No other session-owned data/docs were changed.
 - PR #1 https://github.com/wingbangboozle1-lang/NBA1/pull/1 merged 2026-11-13 (merge commit).
 
 ## Irregularities
@@ -123,4 +127,5 @@ See `data/flags.json`. Highlights:
 
 ## Remaining flags / deployment
 - No odds, props, model projections, correlation estimates, validated strategies, or evidence of skill were created here. Automatic future slates still require a scheduled ingestion pipeline and remain non-live.
-- PR #4 and a new Pages deployment of this integration are pending. Upstream coordination records successful earlier deployments; do not call this integration live until its post-merge workflow succeeds and the public URL is checked.
+- PR #4 merged at `a5ec88c79ad653d456acab352871db56718ccd93` on 2026-11-13: https://github.com/wingbangboozle1-lang/NBA1/pull/4. GitHub Actions run 43520295487 passed `validate` and `deploy`; GitHub Pages API reports `built` at https://wingbangboozle1-lang.github.io/NBA1/.
+- The Pages deploy emitted non-fatal GitHub runner/action deprecation notices (Node.js 20 migration and ubuntu-latest image migration). They did not fail validation or deployment. The new output is published; 13 matchup inference values remain a flagged request to the data owner.

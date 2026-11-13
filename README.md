@@ -40,4 +40,4 @@ A static, evidence-first NBA research workspace. It distinguishes official-sourc
 
 ## GitHub Pages
 
-The main branch's coordination history records a successful prior deployment at <https://wingbangboozle1-lang.github.io/NBA1/>. This branch's additions are not live until its PR is merged and the post-merge Pages workflow succeeds. Do not treat the earlier deployment status as confirmation of the updated site.
+The current integration merged in PR [#4](https://github.com/wingbangboozle1-lang/NBA1/pull/4). Post-merge Actions run [43520295487](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43520295487) passed validation and deployment; GitHub Pages reports the site as built at <https://wingbangboozle1-lang.github.io/NBA1/>. The schedule/injury section is still a dated snapshot, not a live feed.
