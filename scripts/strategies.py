@@ -37,6 +37,9 @@ DATA = os.path.join(ROOT, "data")
 random.seed(20261113)
 
 MIN_SAMPLE = 100
+# Below this many losses a resampling bootstrap has so little variance that it cannot fail, so a
+# positive result would be an artefact of the resample rather than evidence against luck.
+MIN_LOSSES_FOR_BOOTSTRAP = 5
 BOOTSTRAP_DRAWS = 10000
 
 
@@ -162,13 +165,24 @@ def evaluate(graded, n_strategies_in_batch, name):
         "passed": bool(p_adj is not None and p_adj < 0.05),
     }
 
-    p5 = bootstrap_roi_p5(wins, n - wins) if n else None
+    losses = n - wins
+    p5 = bootstrap_roi_p5(wins, losses) if n else None
+    # A resampling bootstrap is DEGENERATE when there are too few losses: with zero losses every
+    # resample is all-wins and the 5th percentile is trivially positive. The gate would then "pass"
+    # a 7-0 record, which says nothing. Require enough losses for the resample to have variance.
+    degenerate = losses < MIN_LOSSES_FOR_BOOTSTRAP
     gates["G3_luck_bootstrap"] = {
-        "requirement": "5th percentile of bootstrap ROI > 0",
+        "requirement": "5th percentile of bootstrap ROI > 0, with enough losses to resample",
         "draws": BOOTSTRAP_DRAWS,
         "roi_at_minus110": roi,
+        "losses": losses,
+        "minimum_losses_required": MIN_LOSSES_FOR_BOOTSTRAP,
         "roi_5th_percentile": p5,
-        "passed": bool(p5 is not None and p5 > 0),
+        "degenerate": degenerate,
+        "passed": bool(not degenerate and p5 is not None and p5 > 0),
+        "note": ("DEGENERATE — too few losses for the bootstrap to have any variance, so a positive "
+                 "5th percentile is uninformative and the gate does not pass." if degenerate else
+                 "Meaningful: enough losses for the resample to vary."),
     }
 
     half = n // 2

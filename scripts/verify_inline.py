@@ -139,6 +139,21 @@ def main():
     add("strategies", "the null control is not VALIDATED", null["status"] != "VALIDATED",
         f"control status {null['status']} with {null['gates_passed']}/{null['gates_total']} gates")
 
+    # the bootstrap gate must not pass when there are too few losses to resample
+    degenerate_pass = [e["id"] for e in strat["leaderboard"]
+                       if e["gates"]["G3_luck_bootstrap"].get("degenerate")
+                       and e["gates"]["G3_luck_bootstrap"]["passed"]]
+    add("strategies", "luck gate never passes on a degenerate sample", not degenerate_pass,
+        f"{len(degenerate_pass)} degenerate passes: {degenerate_pass}")
+
+    thin = [(e["id"], e["gates"]["G3_luck_bootstrap"].get("losses"))
+            for e in strat["leaderboard"] if e["n_graded"] and
+            (e["gates"]["G3_luck_bootstrap"].get("losses") or 0) < 5]
+    reported = all(e["gates"]["G3_luck_bootstrap"].get("degenerate") for e in strat["leaderboard"]
+                   if e["n_graded"] and (e["gates"]["G3_luck_bootstrap"].get("losses") or 0) < 5)
+    add("strategies", "every thin-loss sample is labelled degenerate", reported,
+        f"thin-loss strategies: {thin}")
+
     declared = strat["_meta"]["validated_count"]
     actual = sum(1 for e in strat["leaderboard"] if e["status"] == "VALIDATED")
     add("strategies", "declared validated_count matches the ledger", declared == actual,

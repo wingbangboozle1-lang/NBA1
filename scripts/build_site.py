@@ -265,7 +265,7 @@ that includes an error this project found in its own work and corrected.</td>
 quote was observable here, so no edge can be called real.</li>
 <li><b>The 14-game backtest is contaminated.</b> The team ratings were captured after the games they predict,
 which inflates the 78.6% straight-up rate. The page labels it rather than hiding it.</li>
-<li><b>The null control passes 4 of 6 gates.</b> A coin-flip strategy clears the bootstrap, stability and
+<li><b>The null control passes 3 of 6 gates.</b> A coin-flip strategy clears the bootstrap, stability and
 fragility gates on 14 games. That is why only the sample floor and the corrected significance test can
 be trusted at this size &mdash; and both fail.</li>
 </ul>
@@ -509,6 +509,13 @@ score, because a weighted score lets a fatal flaw be traded against a cosmetic s
 <p>The bootstrap gate resamples the graded outcomes with replacement 10,000 times and asks where the 5th
 percentile of ROI lands. If a strategy's profit depends on a particular lucky ordering of wins and losses,
 that percentile falls below zero and the gate fails. This separates a real edge from a favourable sequence.</p>
+
+<div class="note bad"><b>This gate was degenerate as first written, and it was fixed rather than left flattering.</b>
+A resampling bootstrap needs losses to resample. With a 7&ndash;0 record every resample is all-wins, so the 5th
+percentile is trivially positive and the gate "passes" a result that contains no information about luck. The
+gate now requires at least 5 losses before a pass counts, and reports <i>DEGENERATE</i> otherwise. Applying
+that rule dropped the strategy high-confidence moneyline from 4 gates passed to 3, and the null control from
+4 to 3.</div>
 <p>The fragility gate is the blunt complement: it deletes the best 5% of winning bets and re-computes ROI.
 A strategy that only works because one 40-point underdog landed fails here.</p>
 
