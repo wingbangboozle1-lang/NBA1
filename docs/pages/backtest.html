@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Backtest · NBA 2026-27 Origination Desk</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head><body>
+<header><div class="wrap bar"><div class="brand">NBA <span>Origination Desk</span></div>
+<nav><a class="" href="../index.html">Overview</a><a class="" href="summary.html">Executive summary</a><a class="" href="lines.html">Originated lines</a><a class="" href="picks.html">Picks by slate</a><a class="" href="strategies.html">Strategies</a><a class="" href="gates.html">Validation gates</a><a class="" href="correlations.html">Correlations</a><a class="" href="injuries.html">Injuries</a><a class="" href="gameflow.html">Game flow</a><a class="on" href="backtest.html">Backtest</a><a class="" href="questions.html">Open questions</a><a class="" href="suggestions.html">Suggestions</a><a class="" href="flagged.html">Flagged for review</a><a class="" href="glossary.html">Glossary</a><a class="" href="sources.html">Sources</a></nav></div></header>
+<main><div class="wrap">
+
+<h1>Backtest &mdash; and why it cannot be trusted</h1>
+<p class="lede">The model was run against the 14 games that finished on 11/11 and 11/12. The pipeline works.
+The result is not evidence of skill, and the label below is the most important thing on this page.</p>
+
+<div class="note bad"><b>CONTAMINATED — inputs are season-to-date and include the tested games.</b> The team ratings used as inputs were captured on 11/13,
+which means they include the very games being predicted. That is look-ahead bias. A clean walk-forward
+test needs each team's rating as of the morning of the game, and those snapshots were never taken.</div>
+
+<div class="grid">
+<div class="card "><div class="k">Games</div><div class="v">14</div><div class="s">11/11 and 11/12</div></div>
+<div class="card warn"><div class="k">Total error (MAE)</div><div class="v">14.06</div><div class="s">vs baseline 16.10</div></div>
+<div class="card "><div class="k">Margin error (MAE)</div><div class="v">12.36</div><div class="s">points</div></div>
+<div class="card warn"><div class="k">Straight up</div><div class="v">78.6%</div><div class="s">contaminated</div></div>
+<div class="card "><div class="k">Always-home baseline</div><div class="v">42.9%</div><div class="s">trivial comparison</div></div>
+<div class="card warn"><div class="k">Vs own line (ATS)</div><div class="v">57.1%</div><div class="s">own line, not a book</div></div>
+</div>
+
+<div class="note"><b>What the numbers do and do not say.</b> The totals model beat a league-average baseline
+by 2.04 points of mean absolute error, which is a real
+improvement in fit. But the 78.6% straight-up rate is inflated by the contamination, and 14 games is far too
+few to distinguish 79% from a coin flip that ran hot. The honest reading is: the mechanics are sound, the
+validation is pending.</div>
+
+<h2>Every graded game</h2>
+<div class="tblwrap"><table><thead><tr><th class="">Date</th><th class="">Matchup</th><th class="">OT</th><th class="n">Proj total</th><th class="n">Actual</th><th class="n">Total err</th><th class="n">Proj margin</th><th class="n">Actual margin</th><th class="">Model pick</th><th class="">Result</th><th class="">Source</th></tr></thead><tbody><tr><td class="">2026-11-11</td><td class=""><b>CLE@NYK</b></td><td class=""></td><td class="n">216.7</td><td class="n">222</td><td class="n"><span class="pos">-5.3</span></td><td class="n">+4.6</td><td class="n">-8</td><td class="">NYK</td><td class=""><span class="chip bad">miss</span></td><td class=""><a href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">2026-11-11</td><td class=""><b>BOS@TOR</b></td><td class=""></td><td class="n">216.9</td><td class="n">191</td><td class="n"><span class="neg">+25.9</span></td><td class="n">-9.9</td><td class="n">-5</td><td class="">BOS</td><td class=""><span class="chip good">hit</span></td><td class=""><a href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">2026-11-11</td><td class=""><b>WAS@IND</b></td><td class=""></td><td class="n">222.3</td><td class="n">215</td><td class="n"><span class="pos">+7.3</span></td><td class="n">+3.7</td><td class="n">+13</td><td class="">IND</td><td class=""><span class="chip good">hit</span></td><td class=""><a href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">2026-11-11</td><td class=""><b>LAL@MIL</b></td><td class=""></td><td class="n">239.6</td><td class="n">235</td><td class="n"><span class="pos">+4.6</span></td><td class="n">-23.4</td><td class="n">-11</td><td class="">LAL</td><td class=""><span class="chip good">hit</span></td><td class=""><a href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">2026-11-11</td><td class=""><b>BKN@NOP</b></td><td class=""></td><td class="n">232.7</td><td class="n">256</td><td class="n"><span class="neg">-23.3</span></td><td class="n">-1.8</td><td class="n">-34</td><td class="">BKN</td><td class=""><span class="chip good">hit</span></td><td class=""><a href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">2026-11-11</td><td class=""><b>DEN@MEM</b></td><td class=""></td><td class="n">227.6</td><td class="n">241</td><td class="n"><span class="neg">-13.4</span></td><td class="n">+5.0</td><td class="n">-5</td><td class="">MEM</td><td class=""><span class="chip bad">miss</span></td><td class=""><a href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">2026-11-11</td><td class=""><b>SAS@CHI</b></td><td class=""></td><td class="n">242.8</td><td class="n">243</td><td class="n"><span class="pos">-0.2</span></td><td class="n">-27.2</td><td class="n">-5</td><td class="">SAS</td><td class=""><span class="chip good">hit</span></td><td class=""><a href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">2026-11-11</td><td class=""><b>ORL@UTA</b></td><td class=""></td><td class="n">215.6</td><td class="n">231</td><td class="n"><span class="neg">-15.4</span></td><td class="n">-6.7</td><td class="n">-15</td><td class="">ORL</td><td class=""><span class="chip good">hit</span></td><td class=""><a href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">2026-11-11</td><td class=""><b>GSW@HOU</b></td><td class=""></td><td class="n">224.8</td><td class="n">223</td><td class="n"><span class="pos">+1.8</span></td><td class="n">+1.7</td><td class="n">+7</td><td class="">HOU</td><td class=""><span class="chip good">hit</span></td><td class=""><a href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">2026-11-11</td><td class=""><b>OKC@POR</b></td><td class=""></td><td class="n">224.1</td><td class="n">226</td><td class="n"><span class="pos">-1.9</span></td><td class="n">+2.7</td><td class="n">+10</td><td class="">POR</td><td class=""><span class="chip good">hit</span></td><td class=""><a href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">2026-11-12</td><td class=""><b>TOR@PHI</b></td><td class=""></td><td class="n">222.1</td><td class="n">235</td><td class="n"><span class="neg">-12.9</span></td><td class="n">-0.2</td><td class="n">+11</td><td class="">TOR</td><td class=""><span class="chip bad">miss</span></td><td class=""><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">2026-11-12</td><td class=""><b>DET@WAS</b></td><td class=""><span class="chip warn">OT</span></td><td class="n">216.1</td><td class="n">284</td><td class="n"><span class="neg">-67.9</span></td><td class="n">-12.5</td><td class="n">-4</td><td class="">DET</td><td class=""><span class="chip good">hit</span></td><td class=""><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">2026-11-12</td><td class=""><b>DAL@MIN</b></td><td class=""></td><td class="n">223.2</td><td class="n">227</td><td class="n"><span class="pos">-3.8</span></td><td class="n">+12.7</td><td class="n">+39</td><td class="">MIN</td><td class=""><span class="chip good">hit</span></td><td class=""><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">source</a></td></tr><tr><td class="">2026-11-12</td><td class=""><b>CHA@PHX</b></td><td class=""></td><td class="n">210.1</td><td class="n">197</td><td class="n"><span class="neg">+13.1</span></td><td class="n">+7.5</td><td class="n">+5</td><td class="">PHX</td><td class=""><span class="chip good">hit</span></td><td class=""><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">source</a></td></tr></tbody></table></div>
+
+<h2>Lessons the errors actually teach</h2>
+<ul class="tight">
+<li><b>The single biggest miss is an overtime game.</b> DET@WAS finished 284 points after two overtimes
+against a 216.1 projection, a 67.9-point error. This is why overtime games are excluded from the
+dispersion estimate rather than predicted.</li>
+<li><b>Two large misses went the same direction.</b> BKN@NOP (+23.3) and ORL@UTA (+15.4) both beat their
+projections badly, suggesting the model under-reacts to fast, high-variance teams.</li>
+<li><b>Close calls are frequent.</b> 5 of 14 games finished within 2 points of the
+projected margin, which is roughly what noise would produce.</li>
+<li><b>ATS accuracy against our own line is 57.1%</b> &mdash; below
+break-even. Against a line we generated ourselves, that is a warning, not a result.</li>
+</ul>
+
+<h2>Verdict</h2>
+<p><b>NOT VALIDATION. Look-ahead bias is present because the team stats cover the same games being predicted. Use this to confirm the pipeline runs, not to claim skill.</b></p>
+
+</div></main>
+<footer><div class="wrap">
+Generated 2026-11-13 from <code>data/*.json</code> by <code>scripts/build_site.py</code>.
+Every figure traces to an official NBA source; unverifiable values are shown as an em dash and flagged,
+never filled in. Season 2026-27.
+</div></footer></body></html>

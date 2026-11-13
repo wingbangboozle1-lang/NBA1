@@ -1,0 +1,43 @@
+{
+  "_meta": {
+    "title": "League minutes leaderboard, 2026-27 to date (ranks 1-24 by minutes per game)",
+    "purpose": "Provides verified minutes-per-game for the highest-usage players so the injury module can size a vacated rotation slot without estimating.",
+    "source_url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=MIN",
+    "retrieved_utc": "2026-11-13",
+    "fields_captured": "rank, player, team, gp, w, l, min, pts",
+    "fields_not_captured": "All other box-score columns were present in the source but are not reproduced here. They are absent, not zero, and must not be treated as zero.",
+    "note": "Rank 1 appears on the first data chunk of the sorted table; ranks 2-24 were read from the following chunks. The list stops at 24 because later ranks were not retrieved — this file is a partial leaderboard, not the full league.",
+    "roster_irregularities": [
+      "Jaylen Brown is listed with team PHI (not BOS) in this season's data.",
+      "Trae Young is listed with team WAS.",
+      "Darius Garland is listed with team LAC.",
+      "Tyler Herro is listed with team MIL."
+    ]
+  },
+  "rows": [
+    {"rank": 1,  "player": "Acuff Jr., Darius", "team": "SAC", "gp": 11, "w": 1, "l": 10, "min": 37.3, "pts": 26.2},
+    {"rank": 2,  "player": "Wagner, Franz", "team": "ORL", "gp": 11, "w": 4, "l": 7, "min": 36.9, "pts": 23.5},
+    {"rank": 3,  "player": "Murray, Jamal", "team": "DEN", "gp": 10, "w": 6, "l": 4, "min": 36.4, "pts": 26.2},
+    {"rank": 4,  "player": "Jokić, Nikola", "team": "DEN", "gp": 10, "w": 6, "l": 4, "min": 36.3, "pts": 23.5},
+    {"rank": 5,  "player": "Maxey, Tyrese", "team": "PHI", "gp": 13, "w": 10, "l": 3, "min": 36.2, "pts": 26.7},
+    {"rank": 6,  "player": "Young, Trae", "team": "WAS", "gp": 13, "w": 4, "l": 9, "min": 36.1, "pts": 19.7},
+    {"rank": 7,  "player": "Dončić, Luka", "team": "LAL", "gp": 11, "w": 9, "l": 2, "min": 35.9, "pts": 38.6},
+    {"rank": 8,  "player": "Mitchell, Davion", "team": "MIA", "gp": 11, "w": 5, "l": 6, "min": 35.8, "pts": 16.5},
+    {"rank": 9,  "player": "Smith Jr., Jabari", "team": "HOU", "gp": 12, "w": 9, "l": 3, "min": 35.3, "pts": 16.8},
+    {"rank": 10, "player": "Reaves, Austin", "team": "LAL", "gp": 12, "w": 10, "l": 2, "min": 35.3, "pts": 24.7},
+    {"rank": 11, "player": "Sengun, Alperen", "team": "HOU", "gp": 10, "w": 8, "l": 2, "min": 35.0, "pts": 21.1},
+    {"rank": 12, "player": "Brown, Jaylen", "team": "PHI", "gp": 12, "w": 9, "l": 3, "min": 35.0, "pts": 21.2},
+    {"rank": 13, "player": "Bane, Desmond", "team": "ORL", "gp": 10, "w": 4, "l": 6, "min": 34.6, "pts": 18.0},
+    {"rank": 14, "player": "Cunningham, Cade", "team": "DET", "gp": 11, "w": 8, "l": 3, "min": 34.5, "pts": 25.0},
+    {"rank": 15, "player": "Braun, Christian", "team": "DEN", "gp": 10, "w": 6, "l": 4, "min": 34.4, "pts": 12.4},
+    {"rank": 16, "player": "Sabonis, Domantas", "team": "SAC", "gp": 10, "w": 1, "l": 9, "min": 34.3, "pts": 13.8},
+    {"rank": 17, "player": "Durant, Kevin", "team": "HOU", "gp": 12, "w": 9, "l": 3, "min": 34.2, "pts": 20.9},
+    {"rank": 18, "player": "Davis, Anthony", "team": "WAS", "gp": 11, "w": 4, "l": 7, "min": 34.1, "pts": 25.6},
+    {"rank": 19, "player": "Booker, Devin", "team": "PHX", "gp": 11, "w": 5, "l": 6, "min": 34.0, "pts": 25.5},
+    {"rank": 20, "player": "Tatum, Jayson", "team": "BOS", "gp": 11, "w": 9, "l": 2, "min": 34.0, "pts": 26.3},
+    {"rank": 21, "player": "Dybantsa, AJ", "team": "WAS", "gp": 9, "w": 2, "l": 7, "min": 33.9, "pts": 15.0},
+    {"rank": 22, "player": "Banchero, Paolo", "team": "ORL", "gp": 2, "w": 0, "l": 2, "min": 33.8, "pts": 24.5},
+    {"rank": 23, "player": "Edgecombe, VJ", "team": "PHI", "gp": 12, "w": 10, "l": 2, "min": 33.7, "pts": 12.9},
+    {"rank": 24, "player": "Edwards, Anthony", "team": "MIN", "gp": 4, "w": 3, "l": 1, "min": 33.7, "pts": 33.3}
+  ]
+}

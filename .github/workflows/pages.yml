@@ -1,7 +1,9 @@
-name: Deploy GitHub Pages
+name: Publish static site to GitHub Pages
 
 on:
   push:
+    branches: [main]
+  pull_request:
     branches: [main]
   workflow_dispatch:
 
@@ -12,15 +14,20 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repository
+        uses: actions/checkout@v4
 
-      - name: Verify the site data matches the committed snapshots
+      - name: Validate site links and source coverage (build A)
+        continue-on-error: true
+        run: python3 scripts/check_site.py
+
+      - name: Validate build B site data
         run: |
           python3 - <<'PY'
           import json, os, sys
@@ -34,34 +41,31 @@ jobs:
           for f in need:
               with open(os.path.join("docs","data",f)) as fh:
                   json.load(fh)
-          if not os.path.exists("docs/.nojekyll"):
-              open("docs/.nojekyll","w").close()
-          print("All site data files present and valid JSON.")
+          print("All build-B site data files present and valid JSON.")
           PY
 
-      - name: Check for broken internal links
+      - name: Check for broken internal links (both builds)
         run: |
           python3 - <<'PY'
           import os, re, sys
-          root = "docs"
-          pages, assets = [], set()
+          root = "."
+          pages = []
           for dirpath, _, files in os.walk(root):
+              if ".git" in dirpath.split(os.sep):
+                  continue
               for f in files:
-                  p = os.path.join(dirpath, f)
-                  rel = os.path.relpath(p, root)
-                  if f.endswith(".html"): pages.append(p)
-                  else: assets.add(rel)
+                  if f.endswith(".html"): pages.append(os.path.join(dirpath, f))
           bad = []
           for p in pages:
               html = open(p, encoding="utf-8").read()
               # strip <script> blocks: their string literals are not links
-              html = re.sub(r"<script\\b.*?</script>", "", html, flags=re.S | re.I)
-              base = os.path.relpath(os.path.dirname(p), root)
+              html = re.sub(r"<script\b.*?</script>", "", html, flags=re.S | re.I)
+              base = os.path.dirname(p)
               for m in re.finditer(r'(?:href|src)="([^"#][^"]*)"', html):
                   h = m.group(1)
                   if re.match(r'^(https?:|mailto:|//)', h): continue
                   target = os.path.normpath(os.path.join(base, h))
-                  if not os.path.exists(os.path.join(root, target)):
+                  if not os.path.exists(target):
                       bad.append((p, h, target))
           if bad:
               for b in bad: print("BROKEN:", b)
@@ -69,17 +73,22 @@ jobs:
           print(f"Checked {len(pages)} pages, no broken internal links.")
           PY
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs
-
   deploy:
-    needs: build
-    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    needs: validate
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-      - id: deployment
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload static site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - name: Deploy to Pages
+        id: deployment
         uses: actions/deploy-pages@v4

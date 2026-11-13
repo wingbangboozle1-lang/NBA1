@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Strategies · NBA 2026-27 Origination Desk</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head><body>
+<header><div class="wrap bar"><div class="brand">NBA <span>Origination Desk</span></div>
+<nav><a class="" href="../index.html">Overview</a><a class="" href="summary.html">Executive summary</a><a class="" href="lines.html">Originated lines</a><a class="" href="picks.html">Picks by slate</a><a class="on" href="strategies.html">Strategies</a><a class="" href="gates.html">Validation gates</a><a class="" href="correlations.html">Correlations</a><a class="" href="injuries.html">Injuries</a><a class="" href="gameflow.html">Game flow</a><a class="" href="backtest.html">Backtest</a><a class="" href="questions.html">Open questions</a><a class="" href="suggestions.html">Suggestions</a><a class="" href="flagged.html">Flagged for review</a><a class="" href="glossary.html">Glossary</a><a class="" href="sources.html">Sources</a></nav></div></header>
+<main><div class="wrap">
+
+<h1>Strategy leaderboard</h1>
+<p class="lede">Eight strategies covering single bets, parlays and player-prop combinations. Rank is by
+gates passed, then ROI. Reward is payable only on a <b>VALIDATED</b> strategy, and there are none, so the
+current reward allocation is zero.</p>
+
+<div class="grid">
+<div class="card "><div class="k">Strategies entered</div><div class="v">8</div><div class="s"></div></div>
+<div class="card bad"><div class="k">Validated</div><div class="v">0</div><div class="s">needs all six gates</div></div>
+<div class="card warn"><div class="k">Ungraded</div><div class="v">4</div><div class="s">no outcomes to grade</div></div>
+<div class="card bad"><div class="k">Reward payable</div><div class="v">None</div><div class="s">no validated strategy</div></div>
+</div>
+
+<div class="note bad"><b>Zero of eight validated, and that is the finding.</b> The binding constraint is not
+model quality, it is sample size: the largest graded set is 14 bets against a floor of 100. The brief asked
+for only selectively skill-based strategies to survive. On the evidence available, none survive, and
+manufacturing a pass from 14 games would defeat the purpose of the exercise.</div>
+
+<h2>Leaderboard</h2>
+<div class="tblwrap"><table><thead><tr><th class="n">#</th><th class="">ID</th><th class="">Strategy</th><th class="">Market</th><th class="n">n</th><th class="n">Hit rate</th><th class="n">ROI &amp;minus;110</th><th class="n">Gates</th><th class="">Status</th><th class="">Blocking reason</th><th class="">Source</th></tr></thead><tbody><tr><td class="n">1</td><td class=""><b>S01</b></td><td class="">High-confidence moneyline</td><td class="">single</td><td class="n">7</td><td class="n">1.000</td><td class="n">0.909</td><td class="n">3/6</td><td class=""><span class="chip warn">NOT VALIDATED</span></td><td class=""><span class="wrap">fails G1_sample_floor, G2_significance, G3_luck_bootstrap</span></td><td class=""><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">source</a></td></tr><tr><td class="n">2</td><td class=""><b>S02</b></td><td class="">Extreme-confidence moneyline</td><td class="">single</td><td class="n">4</td><td class="n">1.000</td><td class="n">0.909</td><td class="n">3/6</td><td class=""><span class="chip warn">NOT VALIDATED</span></td><td class=""><span class="wrap">fails G1_sample_floor, G2_significance, G3_luck_bootstrap</span></td><td class=""><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">source</a></td></tr><tr><td class="n">3</td><td class=""><b>S08</b></td><td class="">NULL CONTROL — coin flip</td><td class="">control</td><td class="n">14</td><td class="n">0.786</td><td class="n">0.500</td><td class="n">3/6</td><td class=""><span class="chip warn">NOT VALIDATED</span></td><td class=""><span class="wrap">fails G1_sample_floor, G2_significance, G3_luck_bootstrap</span></td><td class=""><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">source</a></td></tr><tr><td class="n">4</td><td class=""><b>S03</b></td><td class="">Total deviation fade</td><td class="">single</td><td class="n">8</td><td class="n">0.750</td><td class="n">0.432</td><td class="n">2/6</td><td class=""><span class="chip warn">NOT VALIDATED</span></td><td class=""><span class="wrap">fails G1_sample_floor, G2_significance, G3_luck_bootstrap, G4_stability</span></td><td class=""><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">source</a></td></tr><tr><td class="n">5</td><td class=""><b>S04</b></td><td class="">Two-leg moneyline parlay, cross-game</td><td class="">parlay</td><td class="n">0</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">1/6</td><td class=""><span class="chip ">UNGRADED</span></td><td class=""><span class="wrap">No slate produced two picks at the required confidence with both games finished. Cross-game leg correlation is also unmeasured (correlations.json tier C), so the independence assumption behind the parlay price would itself be unverified.</span></td><td class=""><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">source</a></td></tr><tr><td class="n">6</td><td class=""><b>S05</b></td><td class="">Player prop over, half-line</td><td class="">prop</td><td class="n">0</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">1/6</td><td class=""><span class="chip ">UNGRADED</span></td><td class=""><span class="wrap">The per-game sigma used for props is a modelled estimate, not a measured distribution, and no finished prop outcomes were captured to grade against. Grading without real outcomes is impossible, so this stays ungraded.</span></td><td class=""><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">source</a></td></tr><tr><td class="n">7</td><td class=""><b>S06</b></td><td class="">Same-game parlay: player points + team total</td><td class="">parlay</td><td class="n">0</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">1/6</td><td class=""><span class="chip ">UNGRADED</span></td><td class=""><span class="wrap">This is exactly the correlation that could not be measured (correlations.json tier C). Without the joint distribution, the parlay price is a guess, so the strategy cannot be validated — only asserted. Left ungraded deliberately.</span></td><td class=""><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">source</a></td></tr><tr><td class="n">8</td><td class=""><b>S07</b></td><td class="">Injury-fade total under</td><td class="">single</td><td class="n">0</td><td class="n">&mdash;</td><td class="n">&mdash;</td><td class="n">1/6</td><td class=""><span class="chip ">UNGRADED</span></td><td class=""><span class="wrap">The first qualifying games (CLE@MIA, GSW@SAS on 11/13) have not been played. No outcome exists to grade.</span></td><td class=""><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">source</a></td></tr></tbody></table></div>
+
+<h2>Gate-by-gate detail</h2>
+
+<h3>S01 &middot; High-confidence moneyline <span class="chip">NOT VALIDATED</span></h3>
+<dl class="kv">
+<dt>Rule</dt><dd>Bet the model&#x27;s pick straight up when its win probability is at least 0.65.</dd>
+<dt>Why it might work</dt><dd>A large rating gap is the only signal the model has that is not noise-dominated at n=14. If the model has any real information, it shows up here first.</dd>
+<dt>Inputs</dt><dd>team OffRtg/DefRtg/pace, originated win probability</dd>
+<dt>Sample</dt><dd>7 graded bets, 7 won, 0 lost</dd>
+<dt>Gate 1 sample floor</dt><dd>n &gt;= 100 graded bets &mdash;
+<span class="chip bad">fail</span>, short by 93</dd>
+<dt>Gate 2 significance</dt><dd>raw p = 0.00781,
+after Bonferroni p = 0.06250
+<span class="chip bad">fail</span></dd>
+<dt>Gate 3 luck</dt><dd>ROI 5th percentile = 0.909
+<span class="chip bad">fail</span></dd>
+<dt>Gate 4 stability</dt><dd>first half 1.000 vs
+second half 1.000
+<span class="chip good">pass</span></dd>
+<dt>Gate 5 fragility</dt><dd>ROI after removing best 5% = 0.909
+<span class="chip good">pass</span></dd>
+<dt>Gate 6 provenance</dt><dd><span class="chip good">pass</span></dd>
+<dt>Verdict</dt><dd>fails G1_sample_floor, G2_significance, G3_luck_bootstrap</dd>
+</dl>
+<h3>S02 &middot; Extreme-confidence moneyline <span class="chip">NOT VALIDATED</span></h3>
+<dl class="kv">
+<dt>Rule</dt><dd>Bet the model&#x27;s pick straight up when its win probability is at least 0.75.</dd>
+<dt>Why it might work</dt><dd>A stricter cut than S01: fewer bets, larger gaps, less noise per bet but far fewer observations.</dd>
+<dt>Inputs</dt><dd>team OffRtg/DefRtg/pace, originated win probability</dd>
+<dt>Sample</dt><dd>4 graded bets, 4 won, 0 lost</dd>
+<dt>Gate 1 sample floor</dt><dd>n &gt;= 100 graded bets &mdash;
+<span class="chip bad">fail</span>, short by 96</dd>
+<dt>Gate 2 significance</dt><dd>raw p = 0.06250,
+after Bonferroni p = 0.50000
+<span class="chip bad">fail</span></dd>
+<dt>Gate 3 luck</dt><dd>ROI 5th percentile = 0.909
+<span class="chip bad">fail</span></dd>
+<dt>Gate 4 stability</dt><dd>first half 1.000 vs
+second half 1.000
+<span class="chip good">pass</span></dd>
+<dt>Gate 5 fragility</dt><dd>ROI after removing best 5% = 0.909
+<span class="chip good">pass</span></dd>
+<dt>Gate 6 provenance</dt><dd><span class="chip good">pass</span></dd>
+<dt>Verdict</dt><dd>fails G1_sample_floor, G2_significance, G3_luck_bootstrap</dd>
+</dl>
+<h3>S08 &middot; NULL CONTROL — coin flip <span class="chip">NOT VALIDATED</span></h3>
+<dl class="kv">
+<dt>Rule</dt><dd>Bet a coin flip on every game in the backtest sample.</dd>
+<dt>Why it might work</dt><dd>It cannot. It exists to prove the gates reject noise, so a passing grade elsewhere means something.</dd>
+<dt>Inputs</dt><dd>random</dd>
+<dt>Sample</dt><dd>14 graded bets, 11 won, 3 lost</dd>
+<dt>Gate 1 sample floor</dt><dd>n &gt;= 100 graded bets &mdash;
+<span class="chip bad">fail</span>, short by 86</dd>
+<dt>Gate 2 significance</dt><dd>raw p = 0.02869,
+after Bonferroni p = 0.22949
+<span class="chip bad">fail</span></dd>
+<dt>Gate 3 luck</dt><dd>ROI 5th percentile = 0.091
+<span class="chip bad">fail</span></dd>
+<dt>Gate 4 stability</dt><dd>first half 0.714 vs
+second half 0.857
+<span class="chip good">pass</span></dd>
+<dt>Gate 5 fragility</dt><dd>ROI after removing best 5% = 0.469
+<span class="chip good">pass</span></dd>
+<dt>Gate 6 provenance</dt><dd><span class="chip good">pass</span></dd>
+<dt>Verdict</dt><dd>fails G1_sample_floor, G2_significance, G3_luck_bootstrap</dd>
+</dl>
+<h3>S03 &middot; Total deviation fade <span class="chip">NOT VALIDATED</span></h3>
+<dl class="kv">
+<dt>Rule</dt><dd>When the model&#x27;s projected total sits more than 6 points away from the league-average total, take that side of the baseline and grade against the realised total.</dd>
+<dt>Why it might work</dt><dd>Pace drives totals with r=0.79 across teams, so a large projected deviation is the model&#x27;s most defensible claim.</dd>
+<dt>Inputs</dt><dd>pace, OffRtg/DefRtg, measured total dispersion</dd>
+<dt>Sample</dt><dd>8 graded bets, 6 won, 2 lost</dd>
+<dt>Gate 1 sample floor</dt><dd>n &gt;= 100 graded bets &mdash;
+<span class="chip bad">fail</span>, short by 92</dd>
+<dt>Gate 2 significance</dt><dd>raw p = 0.14453,
+after Bonferroni p = 1.00000
+<span class="chip bad">fail</span></dd>
+<dt>Gate 3 luck</dt><dd>ROI 5th percentile = -0.045
+<span class="chip bad">fail</span></dd>
+<dt>Gate 4 stability</dt><dd>first half 1.000 vs
+second half 0.500
+<span class="chip bad">fail</span></dd>
+<dt>Gate 5 fragility</dt><dd>ROI after removing best 5% = 0.364
+<span class="chip good">pass</span></dd>
+<dt>Gate 6 provenance</dt><dd><span class="chip good">pass</span></dd>
+<dt>Verdict</dt><dd>fails G1_sample_floor, G2_significance, G3_luck_bootstrap, G4_stability</dd>
+</dl>
+<h3>S04 &middot; Two-leg moneyline parlay, cross-game <span class="chip">UNGRADED</span></h3>
+<dl class="kv">
+<dt>Rule</dt><dd>Combine the two highest-confidence moneyline picks on a slate.</dd>
+<dt>Why it might work</dt><dd>If leg win probabilities are informative, compounding two of them raises the payout faster than it raises the variance.</dd>
+<dt>Inputs</dt><dd>originated win probability</dd>
+<dt>Sample</dt><dd>0 graded bets, 0 won, 0 lost</dd>
+<dt>Gate 1 sample floor</dt><dd>n &gt;= 100 graded bets &mdash;
+<span class="chip bad">fail</span>, short by 100</dd>
+<dt>Gate 2 significance</dt><dd>raw p = &mdash;,
+after Bonferroni p = &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 3 luck</dt><dd>ROI 5th percentile = &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 4 stability</dt><dd>first half &mdash; vs
+second half &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 5 fragility</dt><dd>ROI after removing best 5% = &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 6 provenance</dt><dd><span class="chip good">pass</span></dd>
+<dt>Verdict</dt><dd>No slate produced two picks at the required confidence with both games finished. Cross-game leg correlation is also unmeasured (correlations.json tier C), so the independence assumption behind the parlay price would itself be unverified.</dd>
+</dl>
+<h3>S05 &middot; Player prop over, half-line <span class="chip">UNGRADED</span></h3>
+<dl class="kv">
+<dt>Rule</dt><dd>Take the over on a player prop line set half a point below his season average, when the normal-approximation probability clears 0.55.</dd>
+<dt>Why it might work</dt><dd>Season-average anchoring with a half-line buffer avoids pushes, and the prop lines are derived from the same verified player table.</dd>
+<dt>Inputs</dt><dd>player per-game points, player game-to-game sigma</dd>
+<dt>Sample</dt><dd>0 graded bets, 0 won, 0 lost</dd>
+<dt>Gate 1 sample floor</dt><dd>n &gt;= 100 graded bets &mdash;
+<span class="chip bad">fail</span>, short by 100</dd>
+<dt>Gate 2 significance</dt><dd>raw p = &mdash;,
+after Bonferroni p = &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 3 luck</dt><dd>ROI 5th percentile = &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 4 stability</dt><dd>first half &mdash; vs
+second half &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 5 fragility</dt><dd>ROI after removing best 5% = &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 6 provenance</dt><dd><span class="chip good">pass</span></dd>
+<dt>Verdict</dt><dd>The per-game sigma used for props is a modelled estimate, not a measured distribution, and no finished prop outcomes were captured to grade against. Grading without real outcomes is impossible, so this stays ungraded.</dd>
+</dl>
+<h3>S06 &middot; Same-game parlay: player points + team total <span class="chip">UNGRADED</span></h3>
+<dl class="kv">
+<dt>Rule</dt><dd>Pair a player-points over with the same game&#x27;s total over.</dd>
+<dt>Why it might work</dt><dd>Both legs lean on pace, so the combination could be positively correlated in a way a book might under-price.</dd>
+<dt>Inputs</dt><dd>player props, originated total</dd>
+<dt>Sample</dt><dd>0 graded bets, 0 won, 0 lost</dd>
+<dt>Gate 1 sample floor</dt><dd>n &gt;= 100 graded bets &mdash;
+<span class="chip bad">fail</span>, short by 100</dd>
+<dt>Gate 2 significance</dt><dd>raw p = &mdash;,
+after Bonferroni p = &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 3 luck</dt><dd>ROI 5th percentile = &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 4 stability</dt><dd>first half &mdash; vs
+second half &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 5 fragility</dt><dd>ROI after removing best 5% = &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 6 provenance</dt><dd><span class="chip good">pass</span></dd>
+<dt>Verdict</dt><dd>This is exactly the correlation that could not be measured (correlations.json tier C). Without the joint distribution, the parlay price is a guess, so the strategy cannot be validated — only asserted. Left ungraded deliberately.</dd>
+</dl>
+<h3>S07 &middot; Injury-fade total under <span class="chip">UNGRADED</span></h3>
+<dl class="kv">
+<dt>Rule</dt><dd>Take the under when a NEW absence removes at least 12 expected points from one side.</dd>
+<dt>Why it might work</dt><dd>A genuinely new absence is information the season-long ratings cannot contain, which is the one place the model can beat a rating-only baseline.</dd>
+<dt>Inputs</dt><dd>official injury report, verified player minutes and points, absence classification</dd>
+<dt>Sample</dt><dd>0 graded bets, 0 won, 0 lost</dd>
+<dt>Gate 1 sample floor</dt><dd>n &gt;= 100 graded bets &mdash;
+<span class="chip bad">fail</span>, short by 100</dd>
+<dt>Gate 2 significance</dt><dd>raw p = &mdash;,
+after Bonferroni p = &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 3 luck</dt><dd>ROI 5th percentile = &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 4 stability</dt><dd>first half &mdash; vs
+second half &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 5 fragility</dt><dd>ROI after removing best 5% = &mdash;
+<span class="chip bad">fail</span></dd>
+<dt>Gate 6 provenance</dt><dd><span class="chip good">pass</span></dd>
+<dt>Verdict</dt><dd>The first qualifying games (CLE@MIA, GSW@SAS on 11/13) have not been played. No outcome exists to grade.</dd>
+</dl>
+
+<h2>What would unblock each strategy</h2>
+<div class="tblwrap"><table><thead><tr><th>Strategy</th><th>Missing requirement</th><th>Source</th></tr></thead>
+<tbody><tr><td><b>S01/S02</b></td><td class="wrap">At least 100 completed games with pre-game ratings captured before tip-off, so no look-ahead bias.</td><td><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">source</a></td></tr><tr><td><b>S03</b></td><td class="wrap">Same, plus point-in-time totals so the deviation is not measured against the game it is predicting.</td><td><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">source</a></td></tr><tr><td><b>S04</b></td><td class="wrap">A licensed two-sided price to parlay against, and a measured cross-game correlation.</td><td><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">source</a></td></tr><tr><td><b>S05</b></td><td class="wrap">Per-game player logs to estimate sigma empirically, plus recorded prop outcomes.</td><td><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">source</a></td></tr><tr><td><b>S06</b></td><td class="wrap">The joint player-points/game-total distribution (correlations tier C).</td><td><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">source</a></td></tr><tr><td><b>S07</b></td><td class="wrap">Outcomes for the 11/13 games plus a full injury report for each slate.</td><td><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">source</a></td></tr></tbody></table></div>
+
+<h3>Grading conventions</h3>
+<p>Wins pay +100/110 units, losses pay -1 unit. No sportsbook price was observable in this environment, so the standard -110 price is assumed and disclosed rather than presented as observed.</p>
+<p>8 strategies were tested in this batch, so every p-value is multiplied by 8 before comparison with 0.05.</p>
+
+</div></main>
+<footer><div class="wrap">
+Generated 2026-11-13 from <code>data/*.json</code> by <code>scripts/build_site.py</code>.
+Every figure traces to an official NBA source; unverifiable values are shown as an em dash and flagged,
+never filled in. Season 2026-27.
+</div></footer></body></html>
