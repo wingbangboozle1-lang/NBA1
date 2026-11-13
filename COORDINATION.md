@@ -166,4 +166,6 @@ See `data/flags.json`. Highlights:
 
 ## PR #7
 - PR: https://github.com/wingbangboozle1-lang/NBA1/pull/7 — coordination-only handoff.
-- Merge result and Pages deploy status: recorded below after merge.
+- Merge result: **MERGED** 2026-11-13 (merge commit `d36a00b`). GitHub Pages status: `built`;
+  site live at https://wingbangboozle1.github.io/NBA1/ — Publish workflow run 43520919372
+  completed (success).
