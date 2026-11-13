@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Injuries & Rotation — NBA1 Line Origination</title>
+<meta name="description" content="Injuries & Rotation">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html">Lines</a>
+<a href="../pages/picks.html">Picks</a>
+<a href="../pages/props.html">Player Props</a>
+<a href="../pages/injuries.html" class="active">Injuries</a>
+<a href="../pages/gameflow.html">Game Flow</a>
+<a href="../pages/validation.html">Validation</a>
+<a href="../pages/strategy.html">Strategies</a>
+<a href="../pages/correlations.html">Correlations</a>
+<a href="../pages/luck.html">Luck</a>
+<a href="../pages/backtest.html">Game Log</a>
+<a href="../pages/teams.html">Teams</a>
+<a href="../pages/model.html">Model</a>
+<a href="../pages/flagged.html">Flagged</a>
+<a href="../pages/questions.html">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Injuries &amp; Rotation</h1>
+  <p class="lede">The official NBA injury report transcribed row by row, plus the rotation impact
+  derived from it. Every status and reason is exactly as the team published it.</p>
+
+  <div class="banner danger">
+    <div class="ico">!</div>
+    <div><p><strong>The impact column is a measured floor, not an estimate.</strong>
+    A player's minutes are only known if he appears in the captured official top-50 minutes table.
+    Anyone else contributes 0.00 to the impact, so a team missing a rotation player who is not a
+    top-50 scorer will show a smaller number than the truth — sometimes zero. The
+    <em>Minutes known</em> and <em>Coverage</em> columns sit next to every figure so a 0.00 is
+    never read as "healthy". See <a href="flagged.html">F2</a>.</p></div>
+  </div>
+
+  <h2>Team impact, by game</h2>
+  <div class="toolbar">
+    <div class="chipbar" id="f-date"></div>
+    <div class="spacer"></div>
+    <span class="count" id="cnt"></span>
+  </div>
+  <div id="tbl-team"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h2>Every listed player</h2>
+  <div class="toolbar">
+    <div class="chipbar" id="f-date2"></div>
+    <div class="spacer"></div>
+    <label>Team
+      <select id="f-team"><option value="">All teams</option></select>
+    </label>
+    <label>Status
+      <select id="f-status"><option value="">All statuses</option></select>
+    </label>
+    <div class="spacer"></div>
+    <span class="count" id="cnt2"></span>
+  </div>
+  <div id="tbl-player"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h3>Method</h3>
+  <div class="eq">weighted minutes at risk = Σ (status weight × player minutes ÷ 240)
+impact (net rating points per 100) = 15.0 × weighted minutes at risk</div>
+  <p class="small">Status weights: Out 1.00 · Doubtful 0.70 · Questionable 0.35 · Probable 0.10 ·
+  Available 0.00. The 15.0 coefficient is a declared modelling choice, not an official figure, and
+  a sensitivity band of 10 / 15 / 20 is published for every team on the
+  <a href="flagged.html">Flagged</a> page. See <a href="flagged.html">F4</a>.</p>
+
+<script>
+
+(async () => {
+  await initSources();
+  const d = await loadJSON(DATA("injuries.json"));
+  const rows = d.rows;
+  const dates = uniq(rows.map(r => r.date)).sort();
+  fillChipbar("#f-date", dates, v => {st.date=v; drawTeam();}, "All dates");
+  fillChipbar("#f-date2", dates, v => {st2.date=v; drawPlayer();}, "All dates");
+  fillSelect("#f-team", uniq(rows.map(r => r.team)).filter(Boolean).sort());
+  fillSelect("#f-status", uniq(rows.map(r => r.status)).filter(Boolean).sort());
+
+  const st = {date:""}, st2 = {date:"", team:"", status:""};
+
+  function drawTeam() {
+    const seen = new Set(); const out = [];
+    for (const r of rows) {
+      if (st.date && r.date !== st.date) continue;
+      const k = r.matchup + "|" + r.team;
+      if (seen.has(k)) continue;
+      seen.add(k);
+      out.push(r);
+    }
+    setText("#cnt", out.length + " team reports");
+    const cols = [
+      {key:"date", label:"Date", cls:"date"},
+      {key:"matchup", label:"Game", cls:"lbl"},
+      {key:"team", label:"Team", cls:"lbl"},
+      {key:"listed", label:"Listed", num:true, d:0, cls:"muted"},
+      {key:"team_weighted_lost_share", label:"Min at risk",
+        fmt: v => v === null || v === undefined
+          ? '<span class="blank" title="No entry in this edition">n/a</span>'
+          : `<span class="num ${v>=0.15?"neg":v>0?"muted":"muted"}">${(v*100).toFixed(1)}%</span>`},
+      {key:"team_impact_net_rating", label:"Impact (net rtg)",
+        fmt: v => v === null || v === undefined
+          ? '<span class="blank" title="No entry in this edition">n/a</span>'
+          : `<span class="num ${v>0?"neg":"muted"}">${(-v).toFixed(2)}</span>`},
+      {key:"impact_sensitivity", label:"Sensitivity 10/15/20", fmt: v => {
+        if (!v) return '<span class="blank">n/a</span>';
+        const a = v["10"], b = v["15"], c = v["20"];
+        if (a === null || a === undefined) return '<span class="blank">n/a</span>';
+        return `<span class="num muted mono">${(-a).toFixed(1)} / ${(-b).toFixed(1)} / ${(-c).toFixed(1)}</span>`;
+      }},
+      {key:"minutes_coverage", label:"Coverage",
+        fmt: v => v === null || v === undefined ? '<span class="blank">n/a</span>'
+          : `<span class="num ${v>=0.5?"pos":"neg"}">${(v*100).toFixed(0)}%</span>`},
+      {key:"confidence", label:"Confidence", fmt: v => {
+        if (!v) return "";
+        const k = v.startsWith("HIGH") ? "pass" : v.startsWith("MEDIUM") ? "prov" : v.startsWith("LOW") ? "prov" : "na";
+        return badge(v.split(" - ")[0], k) + (v.includes(" - ") ? `<div class="small faint">${esc(v.split(" - ")[1])}</div>` : "");
+      }},
+      {key:"src", label:"Src", src:true},
+    ];
+    setHTML("#tbl-team", table(cols, sortBy(out, "team_weighted_lost_share", -1), {thin:true}));
+  }
+
+  function drawPlayer() {
+    let rs = rows.filter(r =>
+      (!st2.date || r.date === st2.date) &&
+      (!st2.team || r.team === st2.team) &&
+      (!st2.status || r.status === st2.status) &&
+      r.player);
+    rs = sortBy(rs, "weighted_share", -1);
+    setText("#cnt2", rs.length + " player rows");
+    const cols = [
+      {key:"date", label:"Date", cls:"date"},
+      {key:"matchup", label:"Game", cls:"lbl"},
+      {key:"team", label:"TM"},
+      {key:"player", label:"Player", cls:"lbl"},
+      {key:"status", label:"Status", fmt: v => {
+        const k = v === "Out" ? "fail" : v === "Doubtful" ? "prov" :
+                  v === "Questionable" ? "prov" : v === "Probable" ? "pass" :
+                  v === "Available" ? "pass" : "na";
+        return badge(v, k);
+      }},
+      {key:"reason", label:"Reason as published"},
+      {key:"status_weight", label:"Weight", num:true, d:2, cls:"muted"},
+      {key:"season_min", label:"MPG", num:true, d:1, cls:"muted"},
+      {key:"minutes_share", label:"Min share", fmt: v =>
+        v === null || v === undefined
+          ? '<span class="blank" title="Outside the captured top-50 minutes table (F2)">unknown</span>'
+          : `<span class="num muted">${(v*100).toFixed(1)}%</span>`},
+      {key:"weighted_share", label:"Weighted", num:true, d:3, cls:"muted"},
+      {key:"src", label:"Src", src:true},
+    ];
+    setHTML("#tbl-player", table(cols, rs, {thin:true}));
+  }
+  bind("#f-team", v => {st2.team=v; drawPlayer();});
+  bind("#f-status", v => {st2.status=v; drawPlayer();});
+  drawTeam(); drawPlayer();
+})().catch(e => {setHTML("#tbl-team",'<div class="empty">'+e.message+'</div>');
+                 setHTML("#tbl-player",'<div class="empty">'+e.message+'</div>');});
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>

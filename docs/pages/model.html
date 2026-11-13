@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model — NBA1 Line Origination</title>
+<meta name="description" content="Model">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html">Lines</a>
+<a href="../pages/picks.html">Picks</a>
+<a href="../pages/props.html">Player Props</a>
+<a href="../pages/injuries.html">Injuries</a>
+<a href="../pages/gameflow.html">Game Flow</a>
+<a href="../pages/validation.html">Validation</a>
+<a href="../pages/strategy.html">Strategies</a>
+<a href="../pages/correlations.html">Correlations</a>
+<a href="../pages/luck.html">Luck</a>
+<a href="../pages/backtest.html">Game Log</a>
+<a href="../pages/teams.html">Teams</a>
+<a href="../pages/model.html" class="active">Model</a>
+<a href="../pages/flagged.html">Flagged</a>
+<a href="../pages/questions.html">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Model</h1>
+  <p class="lede">Exactly how a line is produced, including the parts that are chosen rather than
+  measured.</p>
+
+  <h2>The core</h2>
+  <div class="eq">points per 100 (home) = OffRtg(home) + DefRtg(away) − L
+points per 100 (away) = OffRtg(away) + DefRtg(home) − L
+possessions           = (Pace(home) + Pace(away)) ÷ 2
+margin (home)         = (pts100_home − pts100_away) × poss ÷ 100
+total                 = (pts100_home + pts100_away) × poss ÷ 100</div>
+
+  <p class="small">L is the league average of the two ratings (112.94 this season). This is the
+  standard additive form.</p>
+
+  <div class="banner warn">
+    <div class="ico">!</div>
+    <div><p><strong>An honest property of this form.</strong> Substituting the definitions shows the
+    per-100-possession margin collapses to NetRtg(home) − NetRtg(away): the opponent-interaction
+    term cancels. So the side's forecast carries no opponent-adjustment signal at all beyond the
+    ratings themselves. Home court, rest, availability and shrinkage are the entire game for the
+    side — which is exactly why they are modelled explicitly and reported separately.</p></div>
+  </div>
+
+  <h2>Shrinkage</h2>
+  <p class="small">Each team's rating is pulled toward the league average before use:</p>
+  <div class="eq">f = G ÷ (G + k)        rating_used = L + f × (rating_observed − L)</div>
+  <p class="small">k is derived, not guessed: the spread of forecast residuals on the test window
+  implies a single-game team noise of s, and combining that with the observed spread of net ratings
+  gives k = s² ÷ Var(true). The calculation and a fixed-k sensitivity sweep are on the
+  <a href="validation.html">Validation</a> page.</p>
+
+  <h2>Adjustments</h2>
+  <div class="eq">margin += HCA − b2b_penalty × (home_b2b − away_b2b) + (loss_away − loss_home) × poss ÷ 100
+total  += total_bias + total_b2b_coef × (home_b2b + away_b2b) − (1 − 2α) × (loss_home + loss_away) × poss ÷ 100</div>
+  <p class="small">α = 0.60 is the share of an availability loss landing on the team's own offence;
+  the rest lands on its defence, so the total moves by −(1 − 2α) × the combined loss. An
+  availability loss is symmetric in the margin by construction — it moves the side only through the
+  difference between the two teams' losses.</p>
+
+  <h2>Every modelling choice, in the open</h2>
+  <div id="assump"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h2>What the model does not do</h2>
+  <ul class="tight">
+    <li>No market prices — there is no official source for them, so none is used
+      (<a href="flagged.html">F3</a>).</li>
+    <li>No possession-level simulation — no play-by-play was captured.</li>
+    <li>No player-tracking or line-up data — not published in the captured tables.</li>
+    <li>No automatic luck correction in the ratings — with 10–13 games per team that would fit noise.
+      The luck numbers are published separately instead.</li>
+    <li>No inferred values anywhere. Where the official source has nothing, the cell is blank.</li>
+  </ul>
+
+<script>
+
+(async () => {
+  await initSources();
+  const m = await loadJSON(DATA("meta.json"));
+  const rows = Object.entries(m.assumptions).map(([k,v]) => ({key:k, ...v}));
+  setHTML("#assump", table([
+    {key:"key", label:"Constant", cls:"lbl mono"},
+    {key:"value", label:"Value", fmt: v => typeof v === "object"
+      ? `<span class="mono small">${esc(JSON.stringify(v))}</span>`
+      : `<span class="num strong">${v}</span>`},
+    {key:"unit", label:"What it means", fmt: v => `<span class="small">${esc(v)}</span>`},
+    {key:"status", label:"Provenance", fmt: v => {
+      const k = v.startsWith("ARITHMETIC") ? "derived" : v.startsWith("DERIVED") ? "derived" : "assumption";
+      return prov(k, k) + `<div class="small faint" style="margin-top:4px">${esc(v)}</div>`;
+    }},
+  ], rows, {thin:true}));
+})().catch(e => setHTML("#assump", '<div class="empty">'+e.message+'</div>'));
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>

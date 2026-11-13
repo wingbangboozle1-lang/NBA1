@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Team Ratings — NBA1 Line Origination</title>
+<meta name="description" content="Team Ratings">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html">Lines</a>
+<a href="../pages/picks.html">Picks</a>
+<a href="../pages/props.html">Player Props</a>
+<a href="../pages/injuries.html">Injuries</a>
+<a href="../pages/gameflow.html">Game Flow</a>
+<a href="../pages/validation.html">Validation</a>
+<a href="../pages/strategy.html">Strategies</a>
+<a href="../pages/correlations.html">Correlations</a>
+<a href="../pages/luck.html">Luck</a>
+<a href="../pages/backtest.html">Game Log</a>
+<a href="../pages/teams.html" class="active">Teams</a>
+<a href="../pages/model.html">Model</a>
+<a href="../pages/flagged.html">Flagged</a>
+<a href="../pages/questions.html">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Team Ratings</h1>
+  <p class="lede">The official advanced team table, published verbatim, plus two arithmetic
+  columns. This is the input to every line on this site.</p>
+
+  <div class="toolbar">
+    <label>Sort by
+      <select id="f-sort">
+        <option value="netr">Net rating</option>
+        <option value="ortg">Offensive rating</option>
+        <option value="drtg">Defensive rating (best first)</option>
+        <option value="pace">Pace</option>
+        <option value="win_pct">Win percentage</option>
+        <option value="efg_pct">Effective FG%</option>
+        <option value="tov_pct">Turnover % (best first)</option>
+        <option value="pie">PIE</option>
+      </select>
+    </label>
+    <div class="spacer"></div>
+    <span class="count" id="cnt"></span>
+  </div>
+
+  <div id="tbl"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h3>Notes</h3>
+  <p class="small">Points and opponent points per game are arithmetic
+  (OffRtg × Pace ÷ 100) on the two official columns — they are labelled
+  <span class="prov derived">derived</span>. Every other column is published verbatim by NBA.com and
+  labelled <span class="prov official">official</span>. Ratings are per 100 possessions; pace is
+  possessions per 48 minutes.</p>
+
+<script>
+
+(async () => {
+  await initSources();
+  const d = await loadJSON(DATA("teams.json"));
+  let rows = d.rows;
+  fillSelect("#f-sort", [
+    {v:"netr",l:"Net rating"},{v:"ortg",l:"Offensive rating"},{v:"drtg",l:"Defensive rating (best first)"},
+    {v:"pace",l:"Pace"},{v:"win_pct",l:"Win percentage"},{v:"efg_pct",l:"Effective FG%"},
+    {v:"tov_pct",l:"Turnover % (best first)"},{v:"pie",l:"PIE"}
+  ]);
+  const st = {sort:"netr"};
+  const draw = () => {
+    let rs = sortBy(rows, st.sort, st.sort==="drtg"||st.sort==="tov_pct" ? 1 : -1);
+    setText("#cnt", rs.length + " teams");
+    const cols = [
+      {key:"abbr", label:"TM", cls:"lbl"},
+      {key:"team", label:"Team"},
+      {key:"gp", label:"GP", num:true, d:0, cls:"muted"},
+      {key:"w", label:"W", num:true, d:0},
+      {key:"l", label:"L", num:true, d:0, cls:"muted"},
+      {key:"win_pct", label:"Win%", num:true, d:3},
+      {key:"ortg", label:"Off rtg", num:true, d:1},
+      {key:"drtg", label:"Def rtg", num:true, d:1},
+      {key:"netr", label:"Net rtg", num:true, signed:true, d:1, cls:"strong"},
+      {key:"pace", label:"Pace", num:true, d:2, cls:"muted"},
+      {key:"ppg_implied", label:"PPG (derived)", num:true, d:1, cls:"muted"},
+      {key:"opp_ppg_implied", label:"Opp PPG (derived)", num:true, d:1, cls:"muted"},
+      {key:"efg_pct", label:"eFG%", num:true, d:1, cls:"muted"},
+      {key:"ts_pct", label:"TS%", num:true, d:1, cls:"muted"},
+      {key:"tov_pct", label:"TOV%", num:true, d:1, cls:"muted"},
+      {key:"oreb_pct", label:"OREB%", num:true, d:1, cls:"muted"},
+      {key:"dreb_pct", label:"DREB%", num:true, d:1, cls:"muted"},
+      {key:"ast_pct", label:"AST%", num:true, d:1, cls:"muted"},
+      {key:"pie", label:"PIE", num:true, d:1, cls:"muted"},
+      {key:"src", label:"Src", src:true},
+    ];
+    setHTML("#tbl", table(cols, rs, {thin:true}));
+  };
+  bind("#f-sort", v => {st.sort=v; draw();});
+  draw();
+})().catch(e => setHTML("#tbl", '<div class="empty">'+e.message+'</div>'));
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>

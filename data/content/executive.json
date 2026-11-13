@@ -1,0 +1,91 @@
+{
+ "title": "Executive Summary",
+ "as_of": "2026-11-13",
+ "headline": "The system is built, the lines are live for the next three days, and every claim on this site carries a source link. What it does not yet have is a large enough sample to prove anything. That is stated plainly rather than papered over.",
+ "lead": "Ten strategies were written, ten sets of validation gates were defined, and all ten were run against a strictly out-of-sample window: 28 completed games from 2026-11-09 to 2026-11-12, predicted using team ratings computed only from 2026-10-20 to 2026-11-05. No game in the test window contributes to the ratings that predict it.",
+ "verdict": {
+  "status": "PROVISIONAL - not funded",
+  "one_line": "The model beats the naive reference on margin and total accuracy but loses to it on picking winners, and no strategy reaches the 30-play sample gate. Every strategy is capped at research-only or quarter-unit until the sample grows.",
+  "why": "A 28-game window with a 17.8-point residual standard deviation cannot separate skill from luck. The bootstrap 95% interval on the model's margin error is 8.4 to 17.1 points, which comfortably contains the naive reference's 12.7."
+ },
+ "findings": [
+  {
+   "n": 1,
+   "title": "The model is a small improvement on the margin and total, and a small regression on picking winners",
+   "detail": "Mean absolute margin error 12.56 points for the model against 12.72 for the naive reference; RMSE 17.21 against 17.35; totals MAE 14.50 against 14.75. But straight up the model went 20-8 while the reference went 21-7, with a worse Brier score (0.1992 vs 0.1893) and worse log loss (0.5848 vs 0.5606).",
+   "reading": "The refinements are doing real but tiny work, and the probability calibration is not yet good enough to trust over the raw number."
+  },
+  {
+   "n": 2,
+   "title": "The single biggest limitation is 28 games, and it is fixable",
+   "detail": "The season began 2026-10-20. Only 2026-11-08 onward was captured, so roughly 200 games that have already been played and officially published are not in the dataset. Adding them is a single script and it unblocks four other open questions at once.",
+   "reading": "This is the highest-value action available and it costs almost nothing."
+  },
+  {
+   "n": 3,
+   "title": "No strategy passes every gate, and none of them should yet",
+   "detail": "The best-graded strategy is S2 (total edge vs reference) at 8-4 on 12 plays, worth +3.27 model units. Its Wilson 95% interval on the hit rate is wide enough to contain break-even, so it fails the skill gate. Everything else has fewer than 10 graded plays.",
+   "reading": "The leaderboard is honest about this: an 8-4 run on 12 plays is information about luck. Every strategy is capped at quarter-unit or research-only regardless of its score."
+  },
+  {
+   "n": 4,
+   "title": "Home court and back-to-back are not measurable on this sample",
+   "detail": "Home-court advantage estimates at +2.95 points with a standard error of 3.42 (t = 0.86). The back-to-back penalty estimates at -3.33 points with a standard error of 5.73 (t = -0.58), so the model applies 0.00 rather than the estimate. Both are published with their standard errors.",
+   "reading": "The honest move is to apply zero until the estimate is reliable, and to show the estimate anyway so the choice is visible."
+  },
+  {
+   "n": 5,
+   "title": "Shrinkage was derived rather than guessed, and it barely matters on this window",
+   "detail": "An empirical-Bayes reliability calculation gives k = 2.8, weighting each team's observed net rating at 0.745 with the rest going to the league average. A fixed-k sweep shows the margin MAE moving only from 12.96 at k = 0 to 12.58 at k = 4 - but degrading to 13.64 by k = 20, so heavy shrinkage is clearly wrong.",
+   "reading": "The constant is now defensible and its sensitivity is published, which is the best that can be done on 8 games per team."
+  },
+  {
+   "n": 6,
+   "title": "Availability impact is a measured floor, not an estimate",
+   "detail": "Minutes are only known for the 50 players in the captured official table. Players outside it contribute 0.00 to the impact number, so several teams that are plainly missing rotation players show zero. The minutes-coverage column sits next to every impact figure so a 0.00 is never read as 'healthy'.",
+   "reading": "Correct but incomplete - the Injuries page says so on every row rather than hiding it."
+  },
+  {
+   "n": 7,
+   "title": "Correlation is measured where it can be and flagged where it cannot",
+   "detail": "Thirteen team-statistic pairs were measured directly on all 30 teams from the official advanced table, with r, r-squared and a p-value each. The parlay and same-game-parlay correlations that drive pricing are model-derived, not measured, and are labelled as such everywhere they appear.",
+   "reading": "The distinction matters most for parlays, because pricing correlated legs as independent is the classic way to overpay."
+  },
+  {
+   "n": 8,
+   "title": "The word 'edge' on this site does not mean edge against a sportsbook",
+   "detail": "No sportsbook price is published by an NBA-operated source, so no official link can be attached to one. The site bets the originated line against a deliberately naive reference model built from the same official ratings. Until real prices are logged, 'units won' means model-vs-naive-model units.",
+   "reading": "This is the single most important caveat for anyone reading the leaderboard."
+  }
+ ],
+ "what_is_live_now": [
+  "Originated spreads, totals, moneylines and fair prices for all 23 games across 2026-11-13, 2026-11-14 and 2026-11-15.",
+  "43 picks from the strategy library, each tagged with its strategy, its market, the reference number it is betting against, the model's number and the gap.",
+  "Player projections for the top-50 scorers, with the possession, opponent-defence and teammate-availability factors broken out separately.",
+  "The official injury report for 2026-11-13 and 2026-11-14, transcribed row by row with each player's status and the team's published reason.",
+  "Game-flow read-outs built from official pace and efficiency inputs, including probability of a close game, a blowout and overtime."
+ ],
+ "recommended_next_actions": [
+  {
+   "rank": 1,
+   "action": "Backfill results for 2026-10-20 to 2026-11-08",
+   "why": "Takes the out-of-sample window from 28 games to the full season. Cheap, additive, unblocks four open questions."
+  },
+  {
+   "rank": 2,
+   "action": "Log real closing prices",
+   "why": "Until this exists, nothing here can be called profitable - only better than a naive model."
+  },
+  {
+   "rank": 3,
+   "action": "Complete the player-minutes table",
+   "why": "Turns the availability impact from a floor into a real number and lets the prop strategies be graded."
+  },
+  {
+   "rank": 4,
+   "action": "Archive every injury-report edition",
+   "why": "The only way to grade the availability strategy or to run the robustness gate."
+  }
+ ],
+ "bottom_line": "Everything asked for exists and is live: originated lines for every upcoming slate up to three days ahead, singles, parlays and same-game parlays, player-prop combos, a validation gate set, correlation values, a luck decomposition, injury and rotation tracking, game-flow analysis, a leaderboard with reward tiers, a suggestions page with decision paths, and a questions page split by what is known and what is not. What it does not claim is that any of it makes money - because on 28 games, against a model standing in for the market, that claim cannot be tested yet, and saying so is the point."
+}

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open Questions — NBA1 Line Origination</title>
+<meta name="description" content="Open Questions">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html">Lines</a>
+<a href="../pages/picks.html">Picks</a>
+<a href="../pages/props.html">Player Props</a>
+<a href="../pages/injuries.html">Injuries</a>
+<a href="../pages/gameflow.html">Game Flow</a>
+<a href="../pages/validation.html">Validation</a>
+<a href="../pages/strategy.html">Strategies</a>
+<a href="../pages/correlations.html">Correlations</a>
+<a href="../pages/luck.html">Luck</a>
+<a href="../pages/backtest.html">Game Log</a>
+<a href="../pages/teams.html">Teams</a>
+<a href="../pages/model.html">Model</a>
+<a href="../pages/flagged.html">Flagged</a>
+<a href="../pages/questions.html" class="active">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Open Questions</h1>
+  <p class="lede">Split in two: what the data on hand can actually answer, and what it cannot.
+  Nothing on this site is decided on an open question.</p>
+
+  <div class="banner info">
+    <div class="ico">i</div>
+    <div><p>Every answered question carries the number, the source link and a confidence note.
+    Every open question carries what is missing, the concrete step that would answer it, and what
+    it currently blocks.</p></div>
+  </div>
+
+  <h2>Answered</h2>
+  <div id="answered"></div>
+
+  <h2>Open — ranked by what they block</h2>
+  <div id="open"></div>
+
+<script>
+
+(async () => {
+  await initSources();
+  const d = await loadJSON(DATA("questions.json"));
+  let html = "";
+  for (const a of d.answered) {
+    html += `<details class="q"><summary>
+      <span class="badge pass">ANSWERED</span>
+      <span class="mono faint">${esc(a.id)}</span> ${esc(a.question)}</summary>
+      <div class="body">
+        <p>${esc(a.answer)}</p>
+        <dl class="kv">
+          <dt>Source</dt><dd>${srcLink(a.source, (SOURCE_IDX[a.source]||{}).title || a.source)}</dd>
+          <dt>Confidence</dt><dd>${esc(a.confidence)}</dd>
+        </dl>
+      </div></details>`;
+  }
+  setHTML("#answered", html);
+
+  const open = [...d.open].sort((x,y) => x.priority - y.priority);
+  html = "";
+  for (const q of open) {
+    html += `<details class="q" ${q.priority<=2?"open":""}><summary>
+      <span class="badge fail">OPEN</span>
+      <span class="mono faint">${esc(q.id)} · priority ${q.priority}</span> ${esc(q.question)}</summary>
+      <div class="body">
+        <dl class="kv">
+          <dt>What is missing</dt><dd>${esc(q.what_is_missing)}</dd>
+          <dt>How to answer it</dt><dd>${esc(q.how_to_answer)}</dd>
+          <dt>What it blocks</dt><dd>${esc(q.blocks)}</dd>
+        </dl>
+      </div></details>`;
+  }
+  setHTML("#open", html || '<div class="empty">No open questions.</div>');
+})().catch(e => setHTML("#answered", '<div class="empty">'+e.message+'</div>'));
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>

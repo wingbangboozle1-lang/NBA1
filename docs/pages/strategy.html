@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategy Library — NBA1 Line Origination</title>
+<meta name="description" content="Strategy Library">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html">Lines</a>
+<a href="../pages/picks.html">Picks</a>
+<a href="../pages/props.html">Player Props</a>
+<a href="../pages/injuries.html">Injuries</a>
+<a href="../pages/gameflow.html">Game Flow</a>
+<a href="../pages/validation.html">Validation</a>
+<a href="../pages/strategy.html" class="active">Strategies</a>
+<a href="../pages/correlations.html">Correlations</a>
+<a href="../pages/luck.html">Luck</a>
+<a href="../pages/backtest.html">Game Log</a>
+<a href="../pages/teams.html">Teams</a>
+<a href="../pages/model.html">Model</a>
+<a href="../pages/flagged.html">Flagged</a>
+<a href="../pages/questions.html">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Strategy Library</h1>
+  <p class="lede">Ten strategies covering single bets, parlays, same-game parlays and player-prop
+  combos. Each states the exact rule that makes it play, the threshold, and why it might work.</p>
+
+  <div class="banner warn">
+    <div class="ico">!</div>
+    <div><p><strong>Graded vs ungraded.</strong> A strategy is only graded if its inputs were
+    actually captured. S6 needs archived injury reports, and S7/S8 need player game logs; none were
+    captured, so they are shown as <em>ungraded</em> rather than being scored with substituted
+    numbers. See <a href="flagged.html">F5</a> and <a href="questions.html">Q3</a>.</p></div>
+  </div>
+
+  <div class="toolbar">
+    <label>Family
+      <select id="f-family"><option value="">All families</option></select>
+    </label>
+    <div class="spacer"></div>
+    <span class="count" id="cnt"></span>
+  </div>
+
+  <div id="cards"></div>
+
+<script>
+
+(async () => {
+  await initSources();
+  const vd = await loadJSON(DATA("validation.json"));
+  const ss = vd.strategies;
+  fillSelect("#f-family", uniq(ss.map(s => s.family)).sort());
+  const st = {family:""};
+  const draw = () => {
+    let rs = ss.filter(s => !st.family || s.family === st.family);
+    setText("#cnt", rs.length + " strategies");
+    let html = '<div class="grid k2">';
+    for (const s of rs) {
+      const gates = s.gates.map(g => `${gateBadge(g.status)} ${g.id}`).join(" ");
+      html += `<div class="card">
+        <div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
+          <strong>${esc(s.id)}</strong> <span>${esc(s.name)}</span>
+          <span class="badge na">${esc(s.family)}</span>
+          ${s.gradeable ? "" : badge("UNGRADED","fail")}
+        </div>
+        <p class="small" style="margin:8px 0"><strong>Rule:</strong> ${esc(s.rule)}</p>
+        <p class="small faint mono" style="margin:0 0 8px">threshold: ${esc(s.threshold)}</p>
+        <p class="small" style="margin:0 0 10px"><strong>Why:</strong> ${esc(s.why)}</p>
+        ${s.ungraded_reason ? `<p class="small"><span class="badge fail">cannot grade yet</span> ${esc(s.ungraded_reason)}</p>` : ""}
+        <div class="pill-row">${gates}</div>
+        <div class="small faint" style="margin-top:8px">
+          Graded plays: ${s.n_graded} · record ${s.wins}-${s.losses}${s.pushes?"-"+s.pushes:""}
+          ${s.n_graded ? ` · ${s.units_at_minus110>=0?"+":""}${s.units_at_minus110} units` : ""}
+        </div>
+      </div>`;
+    }
+    html += "</div>";
+    setHTML("#cards", html);
+  };
+  bind("#f-family", v => {st.family=v; draw();});
+  draw();
+})().catch(e => setHTML("#cards", '<div class="empty">'+e.message+'</div>'));
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>

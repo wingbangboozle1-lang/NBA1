@@ -1,0 +1,152 @@
+{
+  "title": "Open Questions",
+  "intro": "Split in two. ANSWERED = a question the data on hand can actually answer, with the number, the source and a confidence note. OPEN = a question that cannot be answered yet, what is missing, and the concrete step that would answer it. Nothing is decided on an OPEN question anywhere on this site.",
+  "answered": [
+    {
+      "id": "A1",
+      "question": "Do the model's refinements beat a naive net-rating line at predicting the margin?",
+      "answer": "Marginally, and not significantly. On the 28-game out-of-sample window the model's mean absolute margin error is 12.56 points against 12.72 for the naive reference, and its RMSE is 17.21 against 17.35. The bootstrap 95% interval on the model's MAE is 8.42-17.06, so the two are statistically indistinguishable.",
+      "source": "S2",
+      "source_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
+      "confidence": "Low - n = 28, see F8"
+    },
+    {
+      "id": "A2",
+      "question": "Does the model beat the naive reference at predicting game totals?",
+      "answer": "Yes, slightly. Mean absolute total error is 14.50 against 14.75; RMSE 19.76 against 19.91. The reference total ignores defence entirely, so this is the opponent-adjustment signal doing the work. Again within noise.",
+      "source": "S2",
+      "source_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
+      "confidence": "Low - n = 28"
+    },
+    {
+      "id": "A3",
+      "question": "Does the model beat the reference at picking winners?",
+      "answer": "No, not on this window. Straight up the model went 20-8 and the naive reference 21-7. Brier score 0.1992 for the model against 0.1893 for the reference; log loss 0.5848 against 0.5606. The reference is better on both probability metrics.",
+      "source": "S3_2026-11-12",
+      "source_url": "https://www.nba.com/games?date=2026-11-12",
+      "confidence": "Low - n = 28 and one 51-point game dominates the probability metrics"
+    },
+    {
+      "id": "A4",
+      "question": "How much of each team's record is luck rather than skill?",
+      "answer": "See the Luck page. Pythagorean expectation from the official OffRtg and DefRtg gives each team an expected win total; the difference from actual wins, divided by the binomial standard deviation over games played, is the luck z-score. With 10-13 games played, roughly two thirds of the league sits inside one standard deviation, which is what you would expect this early.",
+      "source": "S1",
+      "source_url": "https://www.nba.com/stats/teams/advanced",
+      "confidence": "Medium - the method is standard; the sample per team is small"
+    },
+    {
+      "id": "A5",
+      "question": "Is there a real home-court advantage in this season's data?",
+      "answer": "The point estimate on the out-of-sample window is +2.95 points with a standard error of 3.42 (t = 0.86). It is not distinguishable from zero on 28 games. The flat +2.0 used by the reference line sits inside that interval, so the two are not in conflict.",
+      "source": "S3_2026-11-12",
+      "source_url": "https://www.nba.com/games?date=2026-11-12",
+      "confidence": "Low - disclosed as estimated on the test window"
+    },
+    {
+      "id": "A6",
+      "question": "Is there a measurable back-to-back penalty?",
+      "answer": "The point estimate is -3.33 points on the home margin with a standard error of 5.73 (t = -0.58). Because |t| < 1 the model applies 0.00 rather than the estimate, and the estimate is published with its standard error so the decision is visible. Detection is also incomplete for 2026-11-09 (F9).",
+      "source": "S3_2026-11-11",
+      "source_url": "https://www.nba.com/games?date=2026-11-11",
+      "confidence": "None - not distinguishable from zero"
+    },
+    {
+      "id": "A7",
+      "question": "How much should ratings be shrunk at this point in the season?",
+      "answer": "The empirical-Bayes derivation on the Validation page gives k = 2.8, i.e. a weight of 0.745 on each team's observed net rating with the rest going to the league average. The fixed-k sweep shows the margin MAE barely moves between k = 0 (12.96) and k = 4 (12.58), so the choice is not doing much on this window - but k = 8 and above is clearly too aggressive.",
+      "source": "S2",
+      "source_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
+      "confidence": "Low - the noise term is estimated on the test window, see F4"
+    },
+    {
+      "id": "A8",
+      "question": "Which upcoming games have a measurable availability issue?",
+      "answer": "On the 2026-11-13 slate, Orlando (0.141 weighted minutes at risk), Chicago (0.170), Indiana (0.138) and Golden State (0.110) have measured availability losses; the impact is a floor because minutes are only known for top-50 scorers (F2). Five of the ten 2026-11-14 team-reports were marked NOT YET SUBMITTED at capture, and no 2026-11-15 report existed at all.",
+      "source": "S6",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+      "confidence": "Medium for 2026-11-13, none for 2026-11-15"
+    },
+    {
+      "id": "A9",
+      "question": "Which team statistics actually move together in the official data?",
+      "answer": "See the Correlations page. The measured table is computed on all 30 teams from the official advanced table, with r, r-squared and a p-value for each pair. The strongest relationships are the mechanical ones - OffRtg against eFG%, TS% and points per game - while pace is close to unrelated to net rating.",
+      "source": "S1",
+      "source_url": "https://www.nba.com/stats/teams/advanced",
+      "confidence": "High for the measured table (n = 30, computed directly), none for the model-derived parlay values"
+    },
+    {
+      "id": "A10",
+      "question": "Which teams are on the second night of a back-to-back in the next three days?",
+      "answer": "Computed from the official schedule and results: on 2026-11-14 the home team is on a back-to-back in DEN@NOP, DAL@CLE, DET@MIA and BKN@MEM, and the away team is in CHI@MIN. On 2026-11-15 only Dallas (at Boston) is on a back-to-back. No 2026-11-13 game involves a back-to-back.",
+      "source": "S4",
+      "source_url": "https://www.nba.com/schedule",
+      "confidence": "High - derived only from published dates and results"
+    }
+  ],
+  "open": [
+    {
+      "id": "Q1",
+      "question": "Does any strategy actually beat a real sportsbook?",
+      "what_is_missing": "Closing prices. No book price is published by an NBA-operated source, so no official link can be attached to one (F3). Without it, 'units won' measures the model against a naive model, not against a market.",
+      "how_to_answer": "Log closing spread, total and price for every graded play into data/raw/market.json with a per-row source field, then recompute. Close-vs-model comparison is the only honest measure of betting value.",
+      "blocks": "Any statement about profitability; the whole point of the leaderboard's reward tiers",
+      "priority": 1
+    },
+    {
+      "id": "Q2",
+      "question": "Are the gate results real, or an artefact of a 28-game sample?",
+      "what_is_missing": "Results for 2026-10-20 through 2026-11-08. The season started 2026-10-20 and the window used here starts 2026-11-09, so roughly 200 games of the current season are not in the dataset.",
+      "how_to_answer": "Add a backfill job that walks the official games page one date at a time and stores every final score. That single change takes the out-of-sample window from 28 games to the full season and is the highest-value task on this list.",
+      "blocks": "Passing or failing any strategy; promoting anything past Tier 3",
+      "priority": 2
+    },
+    {
+      "id": "Q3",
+      "question": "Are the player-prop projections any good?",
+      "what_is_missing": "Player game logs. The model can produce a projection (possession factor, opponent-defence factor, teammate-availability factor) but game-to-game variance has never been measured, so no probability is published and no prop has ever been graded.",
+      "how_to_answer": "Capture official box scores for the top-50 players and store per-game minutes and counting stats; then measure each projection's error and standard deviation and replace the blank probability column with a real one.",
+      "blocks": "Pricing S7 and S8; including props in parlays",
+      "priority": 3
+    },
+    {
+      "id": "Q4",
+      "question": "How much of a team does an injury actually cost?",
+      "what_is_missing": "Minutes for the 415 players outside the captured top-50 table (F2), and archived injury reports (F5) to fit the impact coefficient against.",
+      "how_to_answer": "Two steps: backfill minutes so the minutes-at-risk number is complete, and archive every injury-report edition so the coefficient can be fitted on actual outcomes instead of being a declared modelling choice.",
+      "blocks": "Trusting the availability column; grading S6; running gate G7",
+      "priority": 4
+    },
+    {
+      "id": "Q5",
+      "question": "What are the real same-game correlations?",
+      "what_is_missing": "Play-by-play or box scores. Every rho used to price S9 and S10 is derived from the structure of the model, not measured (F6).",
+      "how_to_answer": "Estimate empirical correlations from a season of official box scores - player-stat pairs for the same game, and side/total from final scores - then replace the MODEL-DERIVED block on the Correlations page.",
+      "blocks": "Trusting parlay and SGP prices, which is where correlation risk actually bites",
+      "priority": 5
+    },
+    {
+      "id": "Q6",
+      "question": "Does the Emirates NBA Cup change how teams play?",
+      "what_is_missing": "Any measurement. The 2026-11-13 slate is entirely Cup games (group play), and point differential is the Cup tiebreaker, which plausibly changes late-game behaviour in blowouts - but nothing in the captured data measures it.",
+      "how_to_answer": "Compare Cup games to non-Cup games once the results backfill (Q2) exists, matching on the same team ratings and looking at fourth-quarter scoring in decided games.",
+      "blocks": "Applying a Cup adjustment, or safely ignoring one",
+      "priority": 6
+    },
+    {
+      "id": "Q7",
+      "question": "How should the model treat overtime and the 2026-11-12 Detroit-Washington double-overtime game?",
+      "what_is_missing": "A decision. That game produced a 284-point total, which inflates the fitted total-error spread on a 28-game sample.",
+      "how_to_answer": "Either model regulation separately from overtime, or winsorise. Both need the results backfill to evaluate.",
+      "blocks": "Total-market calibration",
+      "priority": 7
+    },
+    {
+      "id": "Q8",
+      "question": "Should the reference line be replaced by a real market line once prices are logged?",
+      "what_is_missing": "The prices themselves (Q1). Once they exist the reference model can be retired and every strategy re-graded against something real.",
+      "how_to_answer": "Run both in parallel for a month - model-vs-reference and model-vs-market - and keep whichever grading set is more predictive of market performance.",
+      "blocks": "The final meaning of the leaderboard",
+      "priority": 8
+    }
+  ]
+}

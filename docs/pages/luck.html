@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luck — NBA1 Line Origination</title>
+<meta name="description" content="Luck">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html">Lines</a>
+<a href="../pages/picks.html">Picks</a>
+<a href="../pages/props.html">Player Props</a>
+<a href="../pages/injuries.html">Injuries</a>
+<a href="../pages/gameflow.html">Game Flow</a>
+<a href="../pages/validation.html">Validation</a>
+<a href="../pages/strategy.html">Strategies</a>
+<a href="../pages/correlations.html">Correlations</a>
+<a href="../pages/luck.html" class="active">Luck</a>
+<a href="../pages/backtest.html">Game Log</a>
+<a href="../pages/teams.html">Teams</a>
+<a href="../pages/model.html">Model</a>
+<a href="../pages/flagged.html">Flagged</a>
+<a href="../pages/questions.html">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Luck</h1>
+  <p class="lede">How much of each team's record is real. Pythagorean expectation applied to the
+  official offensive and defensive ratings, compared against actual wins.</p>
+
+  <div class="eq">pythag = OffRtg^13.91 ÷ (OffRtg^13.91 + DefRtg^13.91)
+expected wins = games played × pythag
+luck (wins)  = actual wins − expected wins
+z            = luck ÷ √(games × pythag × (1 − pythag))</div>
+
+  <p class="small">The z-score divides the gap by the binomial standard deviation over the games a
+  team has actually played, so it is comparable across teams with different schedules. With 10–13
+  games played, roughly two thirds of the league should sit inside ±1 — and it does, which is the
+  point: this early, most of the spread in the standings is noise.</p>
+
+  <div class="toolbar">
+    <label>Direction
+      <select id="f-dir">
+        <option value="all">All teams</option>
+        <option value="over">Overperformers (lucky)</option>
+        <option value="under">Underperformers (unlucky)</option>
+      </select>
+    </label>
+    <div class="spacer"></div>
+    <span class="count" id="cnt"></span>
+  </div>
+
+  <div id="tbl"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h3>What this is used for</h3>
+  <p class="small">A team whose record outruns its efficiency ratings tends to regress. That is a
+  reason to be careful backing them and a reason not to write them off when they are behind their
+  ratings. It is deliberately <em>not</em> wired into the model as an automatic correction: with
+  10–13 games per team that would be fitting noise. See
+  <a href="questions.html">A4</a>.</p>
+
+<script>
+
+(async () => {
+  await initSources();
+  const d = await loadJSON(DATA("luck.json"));
+  const rows = d.rows;
+  const st = {dir:"all"};
+  const draw = () => {
+    let rs = rows.filter(r => st.dir === "all" || (st.dir === "over" ? r.luck_z > 0 : r.luck_z < 0));
+    rs = sortBy(rs, "luck_z", -1);
+    setText("#cnt", rs.length + " teams");
+    const cols = [
+      {key:"team", label:"TM", cls:"lbl"},
+      {key:"name", label:"Team"},
+      {key:"gp", label:"GP", num:true, d:0, cls:"muted"},
+      {key:"w", label:"W", num:true, d:0},
+      {key:"l", label:"L", num:true, d:0, cls:"muted"},
+      {key:"netr", label:"Net rtg", num:true, signed:true, d:1},
+      {key:"ortg", label:"Off rtg", num:true, d:1, cls:"muted"},
+      {key:"drtg", label:"Def rtg", num:true, d:1, cls:"muted"},
+      {key:"pyth_win_pct", label:"Pythag", num:true, d:3, cls:"muted"},
+      {key:"expected_wins", label:"Exp W", num:true, d:2, cls:"muted"},
+      {key:"actual_wins", label:"Act W", num:true, d:0},
+      {key:"luck_wins", label:"Luck (W)", num:true, signed:true, d:2},
+      {key:"luck_z", label:"z", fmt: v => `${signed(v,2)}${bar(Math.min(100, Math.abs(v)/2.5*100), v>0?"good":"bad")}`},
+      {key:"src", label:"Src", src:true},
+    ];
+    setHTML("#tbl", table(cols, rs, {thin:true}));
+  };
+  bind("#f-dir", v => {st.dir=v; draw();});
+  draw();
+})().catch(e => setHTML("#tbl", '<div class="empty">'+e.message+'</div>'));
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>

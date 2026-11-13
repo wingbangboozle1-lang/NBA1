@@ -1,0 +1,234 @@
+{
+ "weights": {
+  "sample": 0.2,
+  "edge": 0.25,
+  "calibration": 0.15,
+  "result": 0.25,
+  "gates": 0.15
+ },
+ "formula": "LBS = 100 x (0.20*sample + 0.25*edge + 0.15*calibration + 0.25*result + 0.15*gates)",
+ "rows": [
+  {
+   "id": "S2",
+   "name": "Total edge vs reference",
+   "family": "Single bet",
+   "components": {
+    "sample": 0.4,
+    "edge": 1.0,
+    "calibration": 0.902,
+    "result": 1.0,
+    "gates": 0.5
+   },
+   "lbs": 79.0,
+   "tier": "Tier 3 - Quarter unit",
+   "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
+   "n_graded": 12,
+   "record": "8-4",
+   "units": 3.273,
+   "status": "GRADED",
+   "rank": 1
+  },
+  {
+   "id": "S1",
+   "name": "Side edge vs reference",
+   "family": "Single bet",
+   "components": {
+    "sample": 0.2,
+    "edge": 1.0,
+    "calibration": 0.621,
+    "result": 1.0,
+    "gates": 0.4
+   },
+   "lbs": 69.3,
+   "tier": "Tier 3 - Quarter unit",
+   "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
+   "n_graded": 6,
+   "record": "4-2",
+   "units": 1.636,
+   "status": "GRADED",
+   "rank": 2
+  },
+  {
+   "id": "S5",
+   "name": "Back-to-back fade",
+   "family": "Single bet",
+   "components": {
+    "sample": 0.1,
+    "edge": 1.0,
+    "calibration": 0.479,
+    "result": 1.0,
+    "gates": 0.4
+   },
+   "lbs": 65.2,
+   "tier": "Tier 3 - Quarter unit",
+   "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
+   "n_graded": 3,
+   "record": "2-1",
+   "units": 0.818,
+   "status": "GRADED",
+   "rank": 3
+  },
+  {
+   "id": "S10",
+   "name": "Same-game parlay (side + total)",
+   "family": "Parlay / SGP",
+   "components": {
+    "sample": 0.1,
+    "edge": 0.0,
+    "calibration": 0.0,
+    "result": 1.0,
+    "gates": 0.167
+   },
+   "lbs": 29.5,
+   "tier": "Tier 3 - Quarter unit",
+   "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
+   "n_graded": 3,
+   "record": "2-1",
+   "units": 1.922,
+   "status": "GRADED",
+   "rank": 4
+  },
+  {
+   "id": "S9",
+   "name": "Two-leg cross-game parlay",
+   "family": "Parlay",
+   "components": {
+    "sample": 0.133,
+    "edge": 0.0,
+    "calibration": 0.932,
+    "result": 0.0,
+    "gates": 0.333
+   },
+   "lbs": 21.6,
+   "tier": "Tier 3 - Quarter unit",
+   "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
+   "n_graded": 4,
+   "record": "2-2",
+   "units": 0.013,
+   "status": "GRADED",
+   "rank": 5
+  },
+  {
+   "id": "S3",
+   "name": "Moneyline value",
+   "family": "Single bet",
+   "components": {
+    "sample": 0.067,
+    "edge": 0.0,
+    "calibration": 0.212,
+    "result": 0.0,
+    "gates": 0.0
+   },
+   "lbs": 4.5,
+   "tier": "Tier 3 - Quarter unit",
+   "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
+   "n_graded": 2,
+   "record": "1-1",
+   "units": -0.091,
+   "status": "GRADED",
+   "rank": 6
+  },
+  {
+   "id": "S4",
+   "name": "Pace-driven total",
+   "family": "Single bet",
+   "components": {
+    "sample": 0.0,
+    "edge": 0.0,
+    "calibration": 0.0,
+    "result": 0.0,
+    "gates": 0.0
+   },
+   "lbs": 0.0,
+   "tier": "Not funded - research only",
+   "tier_note": "No graded record yet, or a hard gate failure. - never graded.",
+   "n_graded": 0,
+   "record": "0-0",
+   "units": 0.0,
+   "status": "UNGRADED",
+   "rank": 7
+  },
+  {
+   "id": "S6",
+   "name": "Availability shock",
+   "family": "Single bet",
+   "components": {
+    "sample": 0.0,
+    "edge": 0.0,
+    "calibration": 0.0,
+    "result": 0.0,
+    "gates": 0.0
+   },
+   "lbs": 0.0,
+   "tier": "Not funded - research only",
+   "tier_note": "No graded record yet, or a hard gate failure. - never graded.",
+   "n_graded": 0,
+   "record": "0-0",
+   "units": 0.0,
+   "status": "UNGRADED",
+   "rank": 8
+  },
+  {
+   "id": "S7",
+   "name": "Player points prop",
+   "family": "Player prop",
+   "components": {
+    "sample": 0.0,
+    "edge": 0.0,
+    "calibration": 0.0,
+    "result": 0.0,
+    "gates": 0.0
+   },
+   "lbs": 0.0,
+   "tier": "Not funded - research only",
+   "tier_note": "No graded record yet, or a hard gate failure. - never graded.",
+   "n_graded": 0,
+   "record": "0-0",
+   "units": 0.0,
+   "status": "UNGRADED",
+   "rank": 9
+  },
+  {
+   "id": "S8",
+   "name": "Points + rebounds + assists combo",
+   "family": "Player prop",
+   "components": {
+    "sample": 0.0,
+    "edge": 0.0,
+    "calibration": 0.0,
+    "result": 0.0,
+    "gates": 0.0
+   },
+   "lbs": 0.0,
+   "tier": "Not funded - research only",
+   "tier_note": "No graded record yet, or a hard gate failure. - never graded.",
+   "n_graded": 0,
+   "record": "0-0",
+   "units": 0.0,
+   "status": "UNGRADED",
+   "rank": 10
+  }
+ ],
+ "tiers": [
+  {
+   "floor": 70,
+   "name": "Tier 1 - Funded",
+   "note": "Full unit."
+  },
+  {
+   "floor": 50,
+   "name": "Tier 2 - Half unit",
+   "note": "Half unit."
+  },
+  {
+   "floor": 30,
+   "name": "Tier 3 - Quarter unit",
+   "note": "Quarter unit."
+  },
+  {
+   "floor": 0,
+   "name": "Not funded - research only",
+   "note": "Paper only."
+  }
+ ]
+}

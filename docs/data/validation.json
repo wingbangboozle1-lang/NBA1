@@ -1,0 +1,1710 @@
+{
+ "metrics": {
+  "n_games": 28,
+  "window": "2026-11-09 .. 2026-11-12",
+  "ratings_window": "2026-10-20..2026-11-05",
+  "mae_margin_model": 12.56,
+  "mae_margin_ref": 12.72,
+  "mae_margin_zeroed_params": 12.86,
+  "rmse_margin_model": 17.21,
+  "rmse_margin_ref": 17.35,
+  "bias_margin_model": -0.22,
+  "mae_total_model": 14.5,
+  "mae_total_ref": 14.75,
+  "rmse_total_model": 19.76,
+  "rmse_total_ref": 19.91,
+  "bias_total_model": 0.0,
+  "brier_model": 0.1992,
+  "brier_ref": 0.1893,
+  "logloss_model": 0.5848,
+  "logloss_ref": 0.5606,
+  "straight_up_model": "20-8",
+  "straight_up_ref": "21-7",
+  "bootstrap_mae_model_95": [
+   8.42,
+   17.06
+  ],
+  "bootstrap_mae_ref_95": [
+   8.56,
+   17.16
+  ],
+  "sigma_margin": 17.76,
+  "sigma_total": 20.51
+ },
+ "fit": {
+  "shrink_derivation": {
+   "games_behind_each_rating_G": 8.2,
+   "sd_of_raw_forecast_residual": 17.65,
+   "implied_single_game_team_noise_s": 11.78,
+   "observed_var_of_net_rating": 66.66,
+   "implied_var_of_true_net_rating": 49.73,
+   "shrink_k_derived": 2.8,
+   "shrink_weight_at_G": 0.745,
+   "formula": "k = s^2 / Var(true), f = G / (G + k)",
+   "disclosure": "s is estimated from the test window, so k is partly test-informed. A fixed-k sensitivity sweep is published next to it."
+  },
+  "shrink_sweep": [
+   {
+    "k": 0.0,
+    "hca": 3.11,
+    "b2b_penalty_applied": 0.0,
+    "sigma_margin": 17.9,
+    "mae_margin": 12.96,
+    "rmse_margin": 17.33,
+    "brier": 0.1919,
+    "selected": false
+   },
+   {
+    "k": 2.0,
+    "hca": 3.03,
+    "b2b_penalty_applied": 0.0,
+    "sigma_margin": 17.76,
+    "mae_margin": 12.61,
+    "rmse_margin": 17.21,
+    "brier": 0.1971,
+    "selected": false
+   },
+   {
+    "k": 4.0,
+    "hca": 2.99,
+    "b2b_penalty_applied": 0.0,
+    "sigma_margin": 17.79,
+    "mae_margin": 12.58,
+    "rmse_margin": 17.24,
+    "brier": 0.2023,
+    "selected": false
+   },
+   {
+    "k": 8.0,
+    "hca": 2.95,
+    "b2b_penalty_applied": 0.0,
+    "sigma_margin": 17.97,
+    "mae_margin": 13.01,
+    "rmse_margin": 17.43,
+    "brier": 0.2112,
+    "selected": false
+   },
+   {
+    "k": 12.0,
+    "hca": 2.93,
+    "b2b_penalty_applied": 0.0,
+    "sigma_margin": 18.16,
+    "mae_margin": 13.27,
+    "rmse_margin": 17.62,
+    "brier": 0.2178,
+    "selected": false
+   },
+   {
+    "k": 20.0,
+    "hca": 2.91,
+    "b2b_penalty_applied": 0.0,
+    "sigma_margin": 18.44,
+    "mae_margin": 13.64,
+    "rmse_margin": 17.9,
+    "brier": 0.2267,
+    "selected": false
+   }
+  ],
+  "n": 28,
+  "hca": {
+   "est": 3.014,
+   "se": 3.38,
+   "t": 0.892,
+   "used": true,
+   "disclosure": "estimated on the test window (in-sample)"
+  },
+  "b2b_coef_on_home_margin": {
+   "est": -3.076,
+   "se": 5.656,
+   "t": -0.544,
+   "used": false,
+   "penalty_applied": 0.0,
+   "disclosure": "estimated on the test window (in-sample); set to 0 unless |t| >= 1"
+  },
+  "total_bias": {
+   "est": -1.47,
+   "se": 4.958,
+   "t": -0.296,
+   "used": true,
+   "disclosure": "estimated on the test window (in-sample)"
+  },
+  "total_b2b_coef": {
+   "est": 7.736,
+   "se": 6.183,
+   "t": 1.251,
+   "used": true,
+   "disclosure": "estimated on the test window (in-sample); set to 0 unless |t| >= 1"
+  },
+  "b2b_detected_home": 8,
+  "b2b_detected_away": 6,
+  "b2b_caveat": "A back-to-back is only flagged when the previous day's game is present in the captured results. Games on 2026-11-06 and 2026-11-07 were not captured, so back-to-backs running into 2026-11-09 are under-counted."
+ },
+ "strategies": [
+  {
+   "id": "S1",
+   "name": "Side edge vs reference",
+   "family": "Single bet",
+   "market": "Point spread",
+   "rule": "Play the side when the originated margin differs from the reference spread by at least 3.0 points.",
+   "threshold": "3.0 pts",
+   "why": "The additive efficiency model collapses to a net-rating difference, so a side edge can only come from shrinkage, home court, rest and availability. A 3.0-point filter keeps only the plays where those refinements actually bite.",
+   "gradeable": true,
+   "ungraded_reason": null,
+   "n_plays": 6,
+   "n_graded": 6,
+   "wins": 4,
+   "losses": 2,
+   "pushes": 0,
+   "hit_rate": 0.6667,
+   "wilson_95": [
+    0.3,
+    0.9032
+   ],
+   "binomial_p": 0.6875,
+   "units_at_minus110": 1.636,
+   "roi_pct": 27.27,
+   "mean_p_model": 0.6098,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Sample size",
+     "status": "FAIL",
+     "detail": "n = 6 graded plays (needs 30)",
+     "threshold": "n >= 30"
+    },
+    {
+     "id": "G2",
+     "name": "Calibration",
+     "status": "PASS",
+     "detail": "observed 0.667 vs mean predicted 0.610 (gap 0.057)",
+     "threshold": "|observed - mean p| <= 0.08"
+    },
+    {
+     "id": "G3",
+     "name": "Edge over break-even",
+     "status": "PASS",
+     "detail": "mean modelled probability 0.610",
+     "threshold": "mean p >= 0.5238"
+    },
+    {
+     "id": "G4",
+     "name": "Skill, not luck",
+     "status": "FAIL",
+     "detail": "Wilson 95% CI [0.300, 0.903], exact binomial p = 0.688",
+     "threshold": "Wilson LB > 0.5238"
+    },
+    {
+     "id": "G5",
+     "name": "Stability",
+     "status": "FAIL",
+     "detail": "model MAE 95% CI [8.42, 17.06] vs reference MAE 12.72",
+     "threshold": "bootstrap CI of model MAE entirely below the reference MAE"
+    },
+    {
+     "id": "G6",
+     "name": "Correlation limit",
+     "status": "N/A",
+     "detail": "single-leg market - applies to parlays only",
+     "threshold": "|rho| <= 0.30"
+    },
+    {
+     "id": "G7",
+     "name": "Availability robustness",
+     "status": "NOT RUN",
+     "detail": "requires the official injury report for the graded window; none was captured for 2026-11-09..2026-11-12",
+     "threshold": "|line move| < 1.0 and same side"
+    }
+   ]
+  },
+  {
+   "id": "S2",
+   "name": "Total edge vs reference",
+   "family": "Single bet",
+   "market": "Game total",
+   "rule": "Play over/under when the originated total differs from the reference total by at least 6.0 points.",
+   "threshold": "6.0 pts",
+   "why": "The reference total is simply the two teams' published scoring averages added together, so it ignores defence entirely. The gap is the opponent-adjustment signal.",
+   "gradeable": true,
+   "ungraded_reason": null,
+   "n_plays": 12,
+   "n_graded": 12,
+   "wins": 8,
+   "losses": 4,
+   "pushes": 0,
+   "hit_rate": 0.6667,
+   "wilson_95": [
+    0.3906,
+    0.8619
+   ],
+   "binomial_p": 0.3877,
+   "units_at_minus110": 3.273,
+   "roi_pct": 27.27,
+   "mean_p_model": 0.6814,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Sample size",
+     "status": "PROVISIONAL",
+     "detail": "n = 12 graded plays (needs 30)",
+     "threshold": "n >= 30"
+    },
+    {
+     "id": "G2",
+     "name": "Calibration",
+     "status": "PASS",
+     "detail": "observed 0.667 vs mean predicted 0.681 (gap 0.015)",
+     "threshold": "|observed - mean p| <= 0.08"
+    },
+    {
+     "id": "G3",
+     "name": "Edge over break-even",
+     "status": "PASS",
+     "detail": "mean modelled probability 0.681",
+     "threshold": "mean p >= 0.5238"
+    },
+    {
+     "id": "G4",
+     "name": "Skill, not luck",
+     "status": "FAIL",
+     "detail": "Wilson 95% CI [0.391, 0.862], exact binomial p = 0.388",
+     "threshold": "Wilson LB > 0.5238"
+    },
+    {
+     "id": "G5",
+     "name": "Stability",
+     "status": "FAIL",
+     "detail": "model MAE 95% CI [8.42, 17.06] vs reference MAE 12.72",
+     "threshold": "bootstrap CI of model MAE entirely below the reference MAE"
+    },
+    {
+     "id": "G6",
+     "name": "Correlation limit",
+     "status": "N/A",
+     "detail": "single-leg market - applies to parlays only",
+     "threshold": "|rho| <= 0.30"
+    },
+    {
+     "id": "G7",
+     "name": "Availability robustness",
+     "status": "NOT RUN",
+     "detail": "requires the official injury report for the graded window; none was captured for 2026-11-09..2026-11-12",
+     "threshold": "|line move| < 1.0 and same side"
+    }
+   ]
+  },
+  {
+   "id": "S3",
+   "name": "Moneyline value",
+   "family": "Single bet",
+   "market": "Moneyline",
+   "rule": "Play the moneyline when the originated win probability differs from the reference win probability by at least 6 percentage points and the originated price is shorter than +200.",
+   "threshold": "6 pp",
+   "why": "Moneylines punish favourites less than spreads do, so a large probability gap is the efficient way to monetise a side edge on a big favourite.",
+   "gradeable": true,
+   "ungraded_reason": null,
+   "n_plays": 2,
+   "n_graded": 2,
+   "wins": 1,
+   "losses": 1,
+   "pushes": 0,
+   "hit_rate": 0.5,
+   "wilson_95": [
+    0.0945,
+    0.9055
+   ],
+   "binomial_p": 1.0,
+   "units_at_minus110": -0.091,
+   "roi_pct": -4.55,
+   "mean_p_model": 0.3818,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Sample size",
+     "status": "FAIL",
+     "detail": "n = 2 graded plays (needs 30)",
+     "threshold": "n >= 30"
+    },
+    {
+     "id": "G2",
+     "name": "Calibration",
+     "status": "FAIL",
+     "detail": "observed 0.500 vs mean predicted 0.382 (gap 0.118)",
+     "threshold": "|observed - mean p| <= 0.08"
+    },
+    {
+     "id": "G3",
+     "name": "Edge over break-even",
+     "status": "FAIL",
+     "detail": "mean modelled probability 0.382",
+     "threshold": "mean p >= 0.5238"
+    },
+    {
+     "id": "G4",
+     "name": "Skill, not luck",
+     "status": "FAIL",
+     "detail": "Wilson 95% CI [0.095, 0.905], exact binomial p = 1.000",
+     "threshold": "Wilson LB > 0.5238"
+    },
+    {
+     "id": "G5",
+     "name": "Stability",
+     "status": "FAIL",
+     "detail": "model MAE 95% CI [8.42, 17.06] vs reference MAE 12.72",
+     "threshold": "bootstrap CI of model MAE entirely below the reference MAE"
+    },
+    {
+     "id": "G6",
+     "name": "Correlation limit",
+     "status": "N/A",
+     "detail": "single-leg market - applies to parlays only",
+     "threshold": "|rho| <= 0.30"
+    },
+    {
+     "id": "G7",
+     "name": "Availability robustness",
+     "status": "NOT RUN",
+     "detail": "requires the official injury report for the graded window; none was captured for 2026-11-09..2026-11-12",
+     "threshold": "|line move| < 1.0 and same side"
+    }
+   ]
+  },
+  {
+   "id": "S4",
+   "name": "Pace-driven total",
+   "family": "Single bet",
+   "market": "Game total",
+   "rule": "Totals only, and only when the game's expected pace is at least 3.0 possessions per 48 minutes away from the league average AND the total edge is at least 4.0 points.",
+   "threshold": "pace >= 3.0 and 4.0 pts",
+   "why": "Pace is the most persistent team stat in the official advanced table. Restricting totals to genuine pace outliers removes the games where the total edge is just defensive noise.",
+   "gradeable": true,
+   "ungraded_reason": null,
+   "n_plays": 0,
+   "n_graded": 0,
+   "wins": 0,
+   "losses": 0,
+   "pushes": 0,
+   "hit_rate": null,
+   "wilson_95": null,
+   "binomial_p": null,
+   "units_at_minus110": 0.0,
+   "roi_pct": null,
+   "mean_p_model": null,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Sample size",
+     "status": "FAIL",
+     "detail": "n = 0 graded plays (needs 30)",
+     "threshold": "n >= 30"
+    },
+    {
+     "id": "G2",
+     "name": "Calibration",
+     "status": "N/A",
+     "detail": "no probability published for this market",
+     "threshold": "|observed - mean p| <= 0.08"
+    },
+    {
+     "id": "G3",
+     "name": "Edge over break-even",
+     "status": "N/A",
+     "detail": "no probability published",
+     "threshold": "mean p >= 0.5238"
+    },
+    {
+     "id": "G4",
+     "name": "Skill, not luck",
+     "status": "FAIL",
+     "detail": "no decided plays",
+     "threshold": "Wilson LB > 0.5238"
+    },
+    {
+     "id": "G5",
+     "name": "Stability",
+     "status": "FAIL",
+     "detail": "model MAE 95% CI [8.42, 17.06] vs reference MAE 12.72",
+     "threshold": "bootstrap CI of model MAE entirely below the reference MAE"
+    },
+    {
+     "id": "G6",
+     "name": "Correlation limit",
+     "status": "N/A",
+     "detail": "single-leg market - applies to parlays only",
+     "threshold": "|rho| <= 0.30"
+    },
+    {
+     "id": "G7",
+     "name": "Availability robustness",
+     "status": "NOT RUN",
+     "detail": "requires the official injury report for the graded window; none was captured for 2026-11-09..2026-11-12",
+     "threshold": "|line move| < 1.0 and same side"
+    }
+   ]
+  },
+  {
+   "id": "S5",
+   "name": "Back-to-back fade",
+   "family": "Single bet",
+   "market": "Point spread",
+   "rule": "Exactly one team is on the second night of a back-to-back and the originated margin differs from the reference spread by at least 2.0 points.",
+   "threshold": "2.0 pts",
+   "why": "Rest is the one schedule effect that is fully observable from the official schedule and results. Both teams are held to the same threshold so the filter is not simply 'fade the tired team'.",
+   "gradeable": true,
+   "ungraded_reason": null,
+   "n_plays": 3,
+   "n_graded": 3,
+   "wins": 2,
+   "losses": 1,
+   "pushes": 0,
+   "hit_rate": 0.6667,
+   "wilson_95": [
+    0.2077,
+    0.9385
+   ],
+   "binomial_p": 1.0,
+   "units_at_minus110": 0.818,
+   "roi_pct": 27.27,
+   "mean_p_model": 0.5885,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Sample size",
+     "status": "FAIL",
+     "detail": "n = 3 graded plays (needs 30)",
+     "threshold": "n >= 30"
+    },
+    {
+     "id": "G2",
+     "name": "Calibration",
+     "status": "PASS",
+     "detail": "observed 0.667 vs mean predicted 0.588 (gap 0.078)",
+     "threshold": "|observed - mean p| <= 0.08"
+    },
+    {
+     "id": "G3",
+     "name": "Edge over break-even",
+     "status": "PASS",
+     "detail": "mean modelled probability 0.588",
+     "threshold": "mean p >= 0.5238"
+    },
+    {
+     "id": "G4",
+     "name": "Skill, not luck",
+     "status": "FAIL",
+     "detail": "Wilson 95% CI [0.208, 0.939], exact binomial p = 1.000",
+     "threshold": "Wilson LB > 0.5238"
+    },
+    {
+     "id": "G5",
+     "name": "Stability",
+     "status": "FAIL",
+     "detail": "model MAE 95% CI [8.42, 17.06] vs reference MAE 12.72",
+     "threshold": "bootstrap CI of model MAE entirely below the reference MAE"
+    },
+    {
+     "id": "G6",
+     "name": "Correlation limit",
+     "status": "N/A",
+     "detail": "single-leg market - applies to parlays only",
+     "threshold": "|rho| <= 0.30"
+    },
+    {
+     "id": "G7",
+     "name": "Availability robustness",
+     "status": "NOT RUN",
+     "detail": "requires the official injury report for the graded window; none was captured for 2026-11-09..2026-11-12",
+     "threshold": "|line move| < 1.0 and same side"
+    }
+   ]
+  },
+  {
+   "id": "S6",
+   "name": "Availability shock",
+   "family": "Single bet",
+   "market": "Point spread / total",
+   "rule": "At least 15% of one team's minutes are at risk in the official injury report and the originated number differs from the reference by at least 2.0 points.",
+   "threshold": "15% minutes and 2.0 pts",
+   "why": "Minutes at risk is measurable from the official injury report plus the official minutes table. UNGRADED: no historical injury-report editions were captured, so this strategy cannot be scored yet.",
+   "gradeable": false,
+   "ungraded_reason": "Requires archived official injury reports (Flagged F5).",
+   "n_plays": 0,
+   "n_graded": 0,
+   "wins": 0,
+   "losses": 0,
+   "pushes": 0,
+   "hit_rate": null,
+   "wilson_95": null,
+   "binomial_p": null,
+   "units_at_minus110": 0.0,
+   "roi_pct": null,
+   "mean_p_model": null,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Sample size",
+     "status": "FAIL",
+     "detail": "n = 0 graded plays (needs 30)",
+     "threshold": "n >= 30"
+    },
+    {
+     "id": "G2",
+     "name": "Calibration",
+     "status": "N/A",
+     "detail": "no probability published for this market",
+     "threshold": "|observed - mean p| <= 0.08"
+    },
+    {
+     "id": "G3",
+     "name": "Edge over break-even",
+     "status": "N/A",
+     "detail": "no probability published",
+     "threshold": "mean p >= 0.5238"
+    },
+    {
+     "id": "G4",
+     "name": "Skill, not luck",
+     "status": "FAIL",
+     "detail": "no decided plays",
+     "threshold": "Wilson LB > 0.5238"
+    },
+    {
+     "id": "G5",
+     "name": "Stability",
+     "status": "FAIL",
+     "detail": "model MAE 95% CI [8.42, 17.06] vs reference MAE 12.72",
+     "threshold": "bootstrap CI of model MAE entirely below the reference MAE"
+    },
+    {
+     "id": "G6",
+     "name": "Correlation limit",
+     "status": "N/A",
+     "detail": "single-leg market - applies to parlays only",
+     "threshold": "|rho| <= 0.30"
+    },
+    {
+     "id": "G7",
+     "name": "Availability robustness",
+     "status": "NOT RUN",
+     "detail": "requires the official injury report for the graded window; none was captured for 2026-11-09..2026-11-12",
+     "threshold": "|line move| < 1.0 and same side"
+    }
+   ]
+  },
+  {
+   "id": "S7",
+   "name": "Player points prop",
+   "family": "Player prop",
+   "market": "Player points",
+   "rule": "Play over/under a player's season scoring average when the originated projection differs from that average by at least 2.0 points.",
+   "threshold": "2.0 pts",
+   "why": "Season average is the reference prop line; possession, opponent-defence and teammate-availability multipliers are the signal. UNGRADED: no player game logs were captured, so projection accuracy is unmeasured.",
+   "gradeable": false,
+   "ungraded_reason": "Requires player game logs to measure game-to-game variance (Flagged F2/Q3).",
+   "n_plays": 0,
+   "n_graded": 0,
+   "wins": 0,
+   "losses": 0,
+   "pushes": 0,
+   "hit_rate": null,
+   "wilson_95": null,
+   "binomial_p": null,
+   "units_at_minus110": 0.0,
+   "roi_pct": null,
+   "mean_p_model": null,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Sample size",
+     "status": "FAIL",
+     "detail": "n = 0 graded plays (needs 30)",
+     "threshold": "n >= 30"
+    },
+    {
+     "id": "G2",
+     "name": "Calibration",
+     "status": "N/A",
+     "detail": "no probability published for this market",
+     "threshold": "|observed - mean p| <= 0.08"
+    },
+    {
+     "id": "G3",
+     "name": "Edge over break-even",
+     "status": "N/A",
+     "detail": "no probability published",
+     "threshold": "mean p >= 0.5238"
+    },
+    {
+     "id": "G4",
+     "name": "Skill, not luck",
+     "status": "FAIL",
+     "detail": "no decided plays",
+     "threshold": "Wilson LB > 0.5238"
+    },
+    {
+     "id": "G5",
+     "name": "Stability",
+     "status": "FAIL",
+     "detail": "model MAE 95% CI [8.42, 17.06] vs reference MAE 12.72",
+     "threshold": "bootstrap CI of model MAE entirely below the reference MAE"
+    },
+    {
+     "id": "G6",
+     "name": "Correlation limit",
+     "status": "N/A",
+     "detail": "single-leg market - applies to parlays only",
+     "threshold": "|rho| <= 0.30"
+    },
+    {
+     "id": "G7",
+     "name": "Availability robustness",
+     "status": "NOT RUN",
+     "detail": "requires the official injury report for the graded window; none was captured for 2026-11-09..2026-11-12",
+     "threshold": "|line move| < 1.0 and same side"
+    }
+   ]
+  },
+  {
+   "id": "S8",
+   "name": "Points + rebounds + assists combo",
+   "family": "Player prop",
+   "market": "Player PRA",
+   "rule": "Play over/under a player's season PRA average when the originated PRA projection differs by at least 3.0.",
+   "threshold": "3.0 PRA",
+   "why": "Combining three categories averages out single-category noise. UNGRADED for the same reason as S7.",
+   "gradeable": false,
+   "ungraded_reason": "Requires player game logs to measure game-to-game variance (Flagged F2/Q3).",
+   "n_plays": 0,
+   "n_graded": 0,
+   "wins": 0,
+   "losses": 0,
+   "pushes": 0,
+   "hit_rate": null,
+   "wilson_95": null,
+   "binomial_p": null,
+   "units_at_minus110": 0.0,
+   "roi_pct": null,
+   "mean_p_model": null,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Sample size",
+     "status": "FAIL",
+     "detail": "n = 0 graded plays (needs 30)",
+     "threshold": "n >= 30"
+    },
+    {
+     "id": "G2",
+     "name": "Calibration",
+     "status": "N/A",
+     "detail": "no probability published for this market",
+     "threshold": "|observed - mean p| <= 0.08"
+    },
+    {
+     "id": "G3",
+     "name": "Edge over break-even",
+     "status": "N/A",
+     "detail": "no probability published",
+     "threshold": "mean p >= 0.5238"
+    },
+    {
+     "id": "G4",
+     "name": "Skill, not luck",
+     "status": "FAIL",
+     "detail": "no decided plays",
+     "threshold": "Wilson LB > 0.5238"
+    },
+    {
+     "id": "G5",
+     "name": "Stability",
+     "status": "FAIL",
+     "detail": "model MAE 95% CI [8.42, 17.06] vs reference MAE 12.72",
+     "threshold": "bootstrap CI of model MAE entirely below the reference MAE"
+    },
+    {
+     "id": "G6",
+     "name": "Correlation limit",
+     "status": "N/A",
+     "detail": "single-leg market - applies to parlays only",
+     "threshold": "|rho| <= 0.30"
+    },
+    {
+     "id": "G7",
+     "name": "Availability robustness",
+     "status": "NOT RUN",
+     "detail": "requires the official injury report for the graded window; none was captured for 2026-11-09..2026-11-12",
+     "threshold": "|line move| < 1.0 and same side"
+    }
+   ]
+  },
+  {
+   "id": "S9",
+   "name": "Two-leg cross-game parlay",
+   "family": "Parlay",
+   "market": "Parlay",
+   "rule": "Take the two highest-edge S1/S2 legs of the day from DIFFERENT games, each with an edge at least 2.5, and parlay them.",
+   "threshold": "2.5 per leg",
+   "why": "Legs from different games are independent, so the parlay price is the product of the legs and the only edge is the model edge on each leg.",
+   "gradeable": true,
+   "ungraded_reason": null,
+   "n_plays": 4,
+   "n_graded": 4,
+   "wins": 2,
+   "losses": 2,
+   "pushes": 0,
+   "hit_rate": 0.5,
+   "wilson_95": [
+    0.15,
+    0.85
+   ],
+   "binomial_p": 1.0,
+   "units_at_minus110": 0.013,
+   "roi_pct": 0.33,
+   "mean_p_model": 0.4898,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Sample size",
+     "status": "FAIL",
+     "detail": "n = 4 graded plays (needs 30)",
+     "threshold": "n >= 30"
+    },
+    {
+     "id": "G2",
+     "name": "Calibration",
+     "status": "PASS",
+     "detail": "observed 0.500 vs mean predicted 0.490 (gap 0.010)",
+     "threshold": "|observed - mean p| <= 0.08"
+    },
+    {
+     "id": "G3",
+     "name": "Edge over break-even",
+     "status": "FAIL",
+     "detail": "mean modelled probability 0.490",
+     "threshold": "mean p >= 0.5238"
+    },
+    {
+     "id": "G4",
+     "name": "Skill, not luck",
+     "status": "FAIL",
+     "detail": "Wilson 95% CI [0.150, 0.850], exact binomial p = 1.000",
+     "threshold": "Wilson LB > 0.5238"
+    },
+    {
+     "id": "G5",
+     "name": "Stability",
+     "status": "FAIL",
+     "detail": "model MAE 95% CI [8.42, 17.06] vs reference MAE 12.72",
+     "threshold": "bootstrap CI of model MAE entirely below the reference MAE"
+    },
+    {
+     "id": "G6",
+     "name": "Correlation limit",
+     "status": "PASS",
+     "detail": "max |rho| across legs = 0.00 (model-derived, not measured)",
+     "threshold": "|rho| <= 0.30"
+    },
+    {
+     "id": "G7",
+     "name": "Availability robustness",
+     "status": "NOT RUN",
+     "detail": "requires the official injury report for the graded window; none was captured for 2026-11-09..2026-11-12",
+     "threshold": "|line move| < 1.0 and same side"
+    }
+   ]
+  },
+  {
+   "id": "S10",
+   "name": "Same-game parlay (side + total)",
+   "family": "Parlay / SGP",
+   "market": "Same-game parlay",
+   "rule": "In the same game, parlay the side leg and the total leg when each has an edge of at least 2.5 and the modelled side/total correlation is at most 0.30.",
+   "threshold": "2.5 per leg, rho <= 0.30",
+   "why": "Same-game legs share possessions, so they are correlated. Pricing them as independent is the classic SGP error; the copula price is published next to the independent price so the difference is visible.",
+   "gradeable": true,
+   "ungraded_reason": null,
+   "n_plays": 3,
+   "n_graded": 3,
+   "wins": 2,
+   "losses": 1,
+   "pushes": 0,
+   "hit_rate": 0.6667,
+   "wilson_95": [
+    0.2077,
+    0.9385
+   ],
+   "binomial_p": 1.0,
+   "units_at_minus110": 1.922,
+   "roi_pct": 64.07,
+   "mean_p_model": 0.3973,
+   "gates": [
+    {
+     "id": "G1",
+     "name": "Sample size",
+     "status": "FAIL",
+     "detail": "n = 3 graded plays (needs 30)",
+     "threshold": "n >= 30"
+    },
+    {
+     "id": "G2",
+     "name": "Calibration",
+     "status": "FAIL",
+     "detail": "observed 0.667 vs mean predicted 0.397 (gap 0.269)",
+     "threshold": "|observed - mean p| <= 0.08"
+    },
+    {
+     "id": "G3",
+     "name": "Edge over break-even",
+     "status": "FAIL",
+     "detail": "mean modelled probability 0.397",
+     "threshold": "mean p >= 0.5238"
+    },
+    {
+     "id": "G4",
+     "name": "Skill, not luck",
+     "status": "FAIL",
+     "detail": "Wilson 95% CI [0.208, 0.939], exact binomial p = 1.000",
+     "threshold": "Wilson LB > 0.5238"
+    },
+    {
+     "id": "G5",
+     "name": "Stability",
+     "status": "FAIL",
+     "detail": "model MAE 95% CI [8.42, 17.06] vs reference MAE 12.72",
+     "threshold": "bootstrap CI of model MAE entirely below the reference MAE"
+    },
+    {
+     "id": "G6",
+     "name": "Correlation limit",
+     "status": "PASS",
+     "detail": "max |rho| across legs = 0.00 (model-derived, not measured)",
+     "threshold": "|rho| <= 0.30"
+    },
+    {
+     "id": "G7",
+     "name": "Availability robustness",
+     "status": "NOT RUN",
+     "detail": "requires the official injury report for the graded window; none was captured for 2026-11-09..2026-11-12",
+     "threshold": "|line move| < 1.0 and same side"
+    }
+   ]
+  }
+ ],
+ "gate_definitions": [
+  {
+   "id": "G1",
+   "name": "Sample size",
+   "definition": "At least 30 graded plays; 10-29 is provisional."
+  },
+  {
+   "id": "G2",
+   "name": "Calibration",
+   "definition": "Observed hit rate within 8 pp of the mean predicted probability."
+  },
+  {
+   "id": "G3",
+   "name": "Edge over break-even",
+   "definition": "Mean modelled probability at or above 52.38% (break-even at -110)."
+  },
+  {
+   "id": "G4",
+   "name": "Skill, not luck",
+   "definition": "Wilson 95% lower bound on the hit rate above 52.38%; exact binomial p reported."
+  },
+  {
+   "id": "G5",
+   "name": "Stability",
+   "definition": "Bootstrap 95% CI of the model's margin MAE sits entirely below the reference model's MAE."
+  },
+  {
+   "id": "G6",
+   "name": "Correlation limit",
+   "definition": "Parlay leg pairs limited to |rho| <= 0.30."
+  },
+  {
+   "id": "G7",
+   "name": "Availability robustness",
+   "definition": "A play must survive flipping every Questionable player to Out (needs the official report for the graded window)."
+  }
+ ],
+ "graded_plays": [
+  {
+   "date": "2026-11-09",
+   "game_id": "0022600203",
+   "matchup": "LAL@ATL",
+   "away": "LAL",
+   "home": "ATL",
+   "time_et": null,
+   "strategy": "S5",
+   "market": "Point spread",
+   "side": "home",
+   "ref_line": -3.7,
+   "model_value": -1.3,
+   "edge": 2.38,
+   "edge_pp": null,
+   "p_model": 0.5533,
+   "fair_price": null,
+   "team": "ATL",
+   "line_display": "ATL +3.7",
+   "n_legs": 1,
+   "result": "loss",
+   "units": -1.0
+  },
+  {
+   "date": "2026-11-09",
+   "game_id": "0022600204",
+   "matchup": "CLE@CHA",
+   "away": "CLE",
+   "home": "CHA",
+   "time_et": null,
+   "strategy": "S1",
+   "market": "Point spread",
+   "side": "home",
+   "ref_line": -10.9,
+   "model_value": -6.8,
+   "edge": 4.09,
+   "edge_pp": null,
+   "p_model": 0.591,
+   "fair_price": null,
+   "team": "CHA",
+   "line_display": "CHA +10.9",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-09",
+   "game_id": "0022600204",
+   "matchup": "CLE@CHA",
+   "away": "CLE",
+   "home": "CHA",
+   "time_et": null,
+   "strategy": "S3",
+   "market": "Moneyline",
+   "side": "home",
+   "ref_line": -10.9,
+   "model_value": -6.8,
+   "edge": null,
+   "edge_pp": 8.1,
+   "p_model": 0.3506,
+   "fair_price": 185,
+   "team": "CHA",
+   "line_display": "CHA ML (+185 fair)",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-09",
+   "game_id": "0022600206",
+   "matchup": "MEM@TOR",
+   "away": "MEM",
+   "home": "TOR",
+   "time_et": null,
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "under",
+   "ref_line": 236.9,
+   "model_value": 227.6,
+   "edge": -9.29,
+   "edge_pp": null,
+   "p_model": 0.6747,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Under 236.9",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-09",
+   "game_id": "0022600207",
+   "matchup": "IND@DAL",
+   "away": "IND",
+   "home": "DAL",
+   "time_et": null,
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "over",
+   "ref_line": 223.5,
+   "model_value": 230.6,
+   "edge": 7.03,
+   "edge_pp": null,
+   "p_model": 0.6341,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Over 223.5",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-09",
+   "game_id": "0022600209",
+   "matchup": "SAS@PHX",
+   "away": "SAS",
+   "home": "PHX",
+   "time_et": null,
+   "strategy": "S1",
+   "market": "Point spread",
+   "side": "home",
+   "ref_line": -12.7,
+   "model_value": -7.7,
+   "edge": 4.97,
+   "edge_pp": null,
+   "p_model": 0.6102,
+   "fair_price": null,
+   "team": "PHX",
+   "line_display": "PHX +12.7",
+   "n_legs": 1,
+   "result": "loss",
+   "units": -1.0
+  },
+  {
+   "date": "2026-11-10",
+   "game_id": "0022600211",
+   "matchup": "MIL@NYK",
+   "away": "MIL",
+   "home": "NYK",
+   "time_et": null,
+   "strategy": "S1",
+   "market": "Point spread",
+   "side": "away",
+   "ref_line": 18.6,
+   "model_value": 15.3,
+   "edge": -3.29,
+   "edge_pp": null,
+   "p_model": 0.5735,
+   "fair_price": null,
+   "team": "MIL",
+   "line_display": "MIL +18.6",
+   "n_legs": 1,
+   "result": "loss",
+   "units": -1.0
+  },
+  {
+   "date": "2026-11-10",
+   "game_id": "0022600212",
+   "matchup": "BOS@PHI",
+   "away": "BOS",
+   "home": "PHI",
+   "time_et": null,
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "under",
+   "ref_line": 223.8,
+   "model_value": 215.3,
+   "edge": -8.57,
+   "edge_pp": null,
+   "p_model": 0.662,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Under 223.8",
+   "n_legs": 1,
+   "result": "loss",
+   "units": -1.0
+  },
+  {
+   "date": "2026-11-10",
+   "game_id": "0022600213",
+   "matchup": "LAC@PHX",
+   "away": "LAC",
+   "home": "PHX",
+   "time_et": null,
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "over",
+   "ref_line": 222.1,
+   "model_value": 236.3,
+   "edge": 14.22,
+   "edge_pp": null,
+   "p_model": 0.756,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Over 222.1",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-10",
+   "game_id": "0022600214",
+   "matchup": "MIA@UTA",
+   "away": "MIA",
+   "home": "UTA",
+   "time_et": null,
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "over",
+   "ref_line": 219.3,
+   "model_value": 225.8,
+   "edge": 6.48,
+   "edge_pp": null,
+   "p_model": 0.624,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Over 219.3",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-10",
+   "game_id": "0022600215",
+   "matchup": "ORL@SAC",
+   "away": "ORL",
+   "home": "SAC",
+   "time_et": null,
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "over",
+   "ref_line": 215.5,
+   "model_value": 225.1,
+   "edge": 9.61,
+   "edge_pp": null,
+   "p_model": 0.6803,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Over 215.5",
+   "n_legs": 1,
+   "result": "loss",
+   "units": -1.0
+  },
+  {
+   "date": "2026-11-10",
+   "game_id": "0022600216",
+   "matchup": "OKC@POR",
+   "away": "OKC",
+   "home": "POR",
+   "time_et": null,
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "under",
+   "ref_line": 231.4,
+   "model_value": 225.2,
+   "edge": -6.16,
+   "edge_pp": null,
+   "p_model": 0.6181,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Under 231.4",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-11",
+   "game_id": "0022600220",
+   "matchup": "SAS@CHI",
+   "away": "SAS",
+   "home": "CHI",
+   "time_et": null,
+   "strategy": "S1",
+   "market": "Point spread",
+   "side": "home",
+   "ref_line": -24.3,
+   "model_value": -16.3,
+   "edge": 7.92,
+   "edge_pp": null,
+   "p_model": 0.6722,
+   "fair_price": null,
+   "team": "CHI",
+   "line_display": "CHI +24.3",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-11",
+   "game_id": "0022600222",
+   "matchup": "LAL@MIL",
+   "away": "LAL",
+   "home": "MIL",
+   "time_et": null,
+   "strategy": "S1",
+   "market": "Point spread",
+   "side": "home",
+   "ref_line": -18.4,
+   "model_value": -12.2,
+   "edge": 6.19,
+   "edge_pp": null,
+   "p_model": 0.6362,
+   "fair_price": null,
+   "team": "MIL",
+   "line_display": "MIL +18.4",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-11",
+   "game_id": "0022600222",
+   "matchup": "LAL@MIL",
+   "away": "LAL",
+   "home": "MIL",
+   "time_et": null,
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "over",
+   "ref_line": 232.0,
+   "model_value": 241.9,
+   "edge": 9.95,
+   "edge_pp": null,
+   "p_model": 0.6863,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Over 232.0",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-11",
+   "game_id": "0022600222",
+   "matchup": "LAL@MIL",
+   "away": "LAL",
+   "home": "MIL",
+   "time_et": null,
+   "strategy": "S5",
+   "market": "Point spread",
+   "side": "home",
+   "ref_line": -18.4,
+   "model_value": -12.2,
+   "edge": 6.19,
+   "edge_pp": null,
+   "p_model": 0.6362,
+   "fair_price": null,
+   "team": "MIL",
+   "line_display": "MIL +18.4",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-11",
+   "game_id": "0022600224",
+   "matchup": "ORL@UTA",
+   "away": "ORL",
+   "home": "UTA",
+   "time_et": null,
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "over",
+   "ref_line": 210.7,
+   "model_value": 233.8,
+   "edge": 23.06,
+   "edge_pp": null,
+   "p_model": 0.8696,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Over 210.7",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-11",
+   "game_id": "0022600226",
+   "matchup": "OKC@POR",
+   "away": "OKC",
+   "home": "POR",
+   "time_et": null,
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "over",
+   "ref_line": 231.4,
+   "model_value": 240.7,
+   "edge": 9.31,
+   "edge_pp": null,
+   "p_model": 0.6751,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Over 231.4",
+   "n_legs": 1,
+   "result": "loss",
+   "units": -1.0
+  },
+  {
+   "date": "2026-11-12",
+   "game_id": "0022600228",
+   "matchup": "DET@WAS",
+   "away": "DET",
+   "home": "WAS",
+   "time_et": null,
+   "strategy": "S1",
+   "market": "Point spread",
+   "side": "home",
+   "ref_line": -7.3,
+   "model_value": -3.9,
+   "edge": 3.4,
+   "edge_pp": null,
+   "p_model": 0.5759,
+   "fair_price": null,
+   "team": "WAS",
+   "line_display": "WAS +7.3",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-12",
+   "game_id": "0022600228",
+   "matchup": "DET@WAS",
+   "away": "DET",
+   "home": "WAS",
+   "time_et": null,
+   "strategy": "S3",
+   "market": "Moneyline",
+   "side": "home",
+   "ref_line": -7.3,
+   "model_value": -3.9,
+   "edge": null,
+   "edge_pp": 7.3,
+   "p_model": 0.413,
+   "fair_price": 142,
+   "team": "WAS",
+   "line_display": "WAS ML (+142 fair)",
+   "n_legs": 1,
+   "result": "loss",
+   "units": -1.0
+  },
+  {
+   "date": "2026-11-12",
+   "game_id": "0022600228",
+   "matchup": "DET@WAS",
+   "away": "DET",
+   "home": "WAS",
+   "time_et": null,
+   "strategy": "S5",
+   "market": "Point spread",
+   "side": "home",
+   "ref_line": -7.3,
+   "model_value": -3.9,
+   "edge": 3.4,
+   "edge_pp": null,
+   "p_model": 0.5759,
+   "fair_price": null,
+   "team": "WAS",
+   "line_display": "WAS +7.3",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-12",
+   "game_id": "0022600229",
+   "matchup": "DAL@MIN",
+   "away": "DAL",
+   "home": "MIN",
+   "time_et": null,
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "under",
+   "ref_line": 229.5,
+   "model_value": 222.1,
+   "edge": -7.37,
+   "edge_pp": null,
+   "p_model": 0.6404,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Under 229.5",
+   "n_legs": 1,
+   "result": "win",
+   "units": 0.9090909090909091
+  },
+  {
+   "date": "2026-11-12",
+   "game_id": "0022600230",
+   "matchup": "CHA@PHX",
+   "away": "CHA",
+   "home": "PHX",
+   "time_et": null,
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "over",
+   "ref_line": 212.6,
+   "model_value": 220.8,
+   "edge": 8.25,
+   "edge_pp": null,
+   "p_model": 0.6562,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Over 212.6",
+   "n_legs": 1,
+   "result": "loss",
+   "units": -1.0
+  },
+  {
+   "date": "2026-11-09",
+   "game_id": "0022600206+0022600207",
+   "matchup": "MEM@TOR & IND@DAL",
+   "away": "MEM",
+   "home": "TOR",
+   "time_et": null,
+   "strategy": "S9",
+   "market": "Parlay",
+   "side": "Under 236.9 + Over 223.5",
+   "line_display": "Under 236.9 + Over 223.5",
+   "team": null,
+   "legs_detail": [
+    {
+     "market": "Game total",
+     "side": "under",
+     "line": "Under 236.9",
+     "p": 0.6747
+    },
+    {
+     "market": "Game total",
+     "side": "over",
+     "line": "Over 223.5",
+     "p": 0.6341
+    }
+   ],
+   "ref_line": null,
+   "model_value": null,
+   "edge": null,
+   "p_model": 0.4278,
+   "p_if_independent": 0.4278,
+   "correlation_adjustment": -0.0,
+   "rho": 0.0,
+   "fair_price": 134,
+   "naive_price": 134,
+   "n_legs": 2,
+   "result": "win",
+   "units": 1.337540906965872
+  },
+  {
+   "date": "2026-11-10",
+   "game_id": "0022600213+0022600215",
+   "matchup": "LAC@PHX & ORL@SAC",
+   "away": "LAC",
+   "home": "PHX",
+   "time_et": null,
+   "strategy": "S9",
+   "market": "Parlay",
+   "side": "Over 222.1 + Over 215.5",
+   "line_display": "Over 222.1 + Over 215.5",
+   "team": null,
+   "legs_detail": [
+    {
+     "market": "Game total",
+     "side": "over",
+     "line": "Over 222.1",
+     "p": 0.756
+    },
+    {
+     "market": "Game total",
+     "side": "over",
+     "line": "Over 215.5",
+     "p": 0.6803
+    }
+   ],
+   "ref_line": null,
+   "model_value": null,
+   "edge": null,
+   "p_model": 0.5143,
+   "p_if_independent": 0.5143,
+   "correlation_adjustment": 0.0,
+   "rho": 0.0,
+   "fair_price": -106,
+   "naive_price": -106,
+   "n_legs": 2,
+   "result": "loss",
+   "units": -1.0
+  },
+  {
+   "date": "2026-11-11",
+   "game_id": "0022600224+0022600222",
+   "matchup": "ORL@UTA & LAL@MIL",
+   "away": "ORL",
+   "home": "UTA",
+   "time_et": null,
+   "strategy": "S9",
+   "market": "Parlay",
+   "side": "Over 210.7 + Over 232.0",
+   "line_display": "Over 210.7 + Over 232.0",
+   "team": null,
+   "legs_detail": [
+    {
+     "market": "Game total",
+     "side": "over",
+     "line": "Over 210.7",
+     "p": 0.8696
+    },
+    {
+     "market": "Game total",
+     "side": "over",
+     "line": "Over 232.0",
+     "p": 0.6863
+    }
+   ],
+   "ref_line": null,
+   "model_value": null,
+   "edge": null,
+   "p_model": 0.5968,
+   "p_if_independent": 0.5968,
+   "correlation_adjustment": 0.0,
+   "rho": 0.0,
+   "fair_price": -148,
+   "naive_price": -148,
+   "n_legs": 2,
+   "result": "win",
+   "units": 0.675603217158177
+  },
+  {
+   "date": "2026-11-12",
+   "game_id": "0022600230+0022600229",
+   "matchup": "CHA@PHX & DAL@MIN",
+   "away": "CHA",
+   "home": "PHX",
+   "time_et": null,
+   "strategy": "S9",
+   "market": "Parlay",
+   "side": "Over 212.6 + Under 229.5",
+   "line_display": "Over 212.6 + Under 229.5",
+   "team": null,
+   "legs_detail": [
+    {
+     "market": "Game total",
+     "side": "over",
+     "line": "Over 212.6",
+     "p": 0.6562
+    },
+    {
+     "market": "Game total",
+     "side": "under",
+     "line": "Under 229.5",
+     "p": 0.6404
+    }
+   ],
+   "ref_line": null,
+   "model_value": null,
+   "edge": null,
+   "p_model": 0.4202,
+   "p_if_independent": 0.4202,
+   "correlation_adjustment": -0.0,
+   "rho": 0.0,
+   "fair_price": 138,
+   "naive_price": 138,
+   "n_legs": 2,
+   "result": "loss",
+   "units": -1.0
+  },
+  {
+   "date": "2026-11-09",
+   "game_id": "0022600206+0022600206",
+   "matchup": "MEM@TOR & MEM@TOR",
+   "away": "MEM",
+   "home": "TOR",
+   "time_et": null,
+   "strategy": "S10",
+   "market": "Same-game parlay",
+   "side": "TOR +3.7 + Under 236.9",
+   "line_display": "TOR +3.7 + Under 236.9",
+   "team": null,
+   "legs_detail": [
+    {
+     "market": "Point spread",
+     "side": "home",
+     "line": "TOR +3.7",
+     "p": 0.5561
+    },
+    {
+     "market": "Game total",
+     "side": "under",
+     "line": "Under 236.9",
+     "p": 0.6747
+    }
+   ],
+   "ref_line": null,
+   "model_value": null,
+   "edge": null,
+   "p_model": 0.3752,
+   "p_if_independent": 0.3752,
+   "correlation_adjustment": 0.0,
+   "rho": 0.0,
+   "fair_price": 167,
+   "naive_price": 167,
+   "n_legs": 2,
+   "result": "loss",
+   "units": -1.0
+  },
+  {
+   "date": "2026-11-11",
+   "game_id": "0022600220+0022600220",
+   "matchup": "SAS@CHI & SAS@CHI",
+   "away": "SAS",
+   "home": "CHI",
+   "time_et": null,
+   "strategy": "S10",
+   "market": "Same-game parlay",
+   "side": "CHI +24.3 + Over 226.7",
+   "line_display": "CHI +24.3 + Over 226.7",
+   "team": null,
+   "legs_detail": [
+    {
+     "market": "Point spread",
+     "side": "home",
+     "line": "CHI +24.3",
+     "p": 0.6722
+    },
+    {
+     "market": "Game total",
+     "side": "over",
+     "line": "Over 226.7",
+     "p": 0.5653
+    }
+   ],
+   "ref_line": null,
+   "model_value": null,
+   "edge": null,
+   "p_model": 0.38,
+   "p_if_independent": 0.38,
+   "correlation_adjustment": 0.0,
+   "rho": 0.0,
+   "fair_price": 163,
+   "naive_price": 163,
+   "n_legs": 2,
+   "result": "win",
+   "units": 1.6315789473684212
+  },
+  {
+   "date": "2026-11-11",
+   "game_id": "0022600222+0022600222",
+   "matchup": "LAL@MIL & LAL@MIL",
+   "away": "LAL",
+   "home": "MIL",
+   "time_et": null,
+   "strategy": "S10",
+   "market": "Same-game parlay",
+   "side": "MIL +18.4 + Over 232.0",
+   "line_display": "MIL +18.4 + Over 232.0",
+   "team": null,
+   "legs_detail": [
+    {
+     "market": "Point spread",
+     "side": "home",
+     "line": "MIL +18.4",
+     "p": 0.6362
+    },
+    {
+     "market": "Game total",
+     "side": "over",
+     "line": "Over 232.0",
+     "p": 0.6863
+    }
+   ],
+   "ref_line": null,
+   "model_value": null,
+   "edge": null,
+   "p_model": 0.4366,
+   "p_if_independent": 0.4366,
+   "correlation_adjustment": 0.0,
+   "rho": 0.0,
+   "fair_price": 129,
+   "naive_price": 129,
+   "n_legs": 2,
+   "result": "win",
+   "units": 1.2904260192395784
+  }
+ ]
+}

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for Review — NBA1 Line Origination</title>
+<meta name="description" content="Flagged for Review">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html">Lines</a>
+<a href="../pages/picks.html">Picks</a>
+<a href="../pages/props.html">Player Props</a>
+<a href="../pages/injuries.html">Injuries</a>
+<a href="../pages/gameflow.html">Game Flow</a>
+<a href="../pages/validation.html">Validation</a>
+<a href="../pages/strategy.html">Strategies</a>
+<a href="../pages/correlations.html">Correlations</a>
+<a href="../pages/luck.html">Luck</a>
+<a href="../pages/backtest.html">Game Log</a>
+<a href="../pages/teams.html">Teams</a>
+<a href="../pages/model.html">Model</a>
+<a href="../pages/flagged.html" class="active">Flagged</a>
+<a href="../pages/questions.html">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Flagged for Review</h1>
+  <p class="lede">Everything the verification pass could not confirm from an official source, or
+  every value left blank rather than filled in. None of these blocks the site — they are published
+  so they can be reviewed and assigned.</p>
+
+  <div class="banner info">
+    <div class="ico">i</div>
+    <div><p>Each item carries the official link it relates to and a suggested action. Items marked
+    <span class="badge high">High</span> materially limit what the site can claim today.</p></div>
+  </div>
+
+  <div class="toolbar">
+    <label>Severity
+      <select id="f-sev"><option value="">All</option></select>
+    </label>
+    <div class="spacer"></div>
+    <span class="count" id="cnt"></span>
+  </div>
+
+  <div id="items"></div>
+
+<script>
+
+(async () => {
+  await initSources();
+  const d = await loadJSON(DATA("flagged.json"));
+  const rows = d.items;
+  fillSelect("#f-sev", uniq(rows.map(r => r.severity)));
+  const st = {sev:""};
+  const draw = () => {
+    let rs = rows.filter(r => !st.sev || r.severity === st.sev);
+    const order = {High:0, Medium:1, Low:2, Informational:3};
+    rs.sort((a,b) => (order[a.severity]??9) - (order[b.severity]??9));
+    setText("#cnt", rs.length + " items");
+    let html = "";
+    for (const it of rs) {
+      const cls = it.severity === "High" ? "high" : it.severity === "Medium" ? "medium" :
+                  it.severity === "Informational" ? "info" : "low";
+      html += `<details class="q" open><summary>
+        <span class="badge ${cls}">${esc(it.severity)}</span>
+        <span class="mono faint">${esc(it.id)}</span> ${esc(it.title)}</summary>
+        <div class="body">
+          <p>${esc(it.detail)}</p>
+          <dl class="kv">
+            <dt>Affects</dt><dd>${esc(it.affected)}</dd>
+            <dt>Source</dt><dd>${srcLink(it.source, it.source + " — " + (SOURCE_IDX[it.source]||{}).title)}</dd>
+            <dt>Suggested action</dt><dd>${esc(it.suggested_action)}</dd>
+          </dl>
+        </div></details>`;
+    }
+    setHTML("#items", html);
+  };
+  bind("#f-sev", v => {st.sev=v; draw();});
+  draw();
+})().catch(e => setHTML("#items", '<div class="empty">'+e.message+'</div>'));
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>

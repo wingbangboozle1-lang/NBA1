@@ -1,0 +1,83 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify the site data matches the committed snapshots
+        run: |
+          python3 - <<'PY'
+          import json, os, sys
+          need = ["meta.json","sources.json","teams.json","lines.json","picks.json",
+                  "props.json","injuries.json","gameflow.json","backtest.json",
+                  "validation.json","leaderboard.json","correlations.json","luck.json",
+                  "flagged.json","questions.json","suggestions.json","executive.json"]
+          missing = [f for f in need if not os.path.exists(os.path.join("docs","data",f))]
+          if missing:
+              print("MISSING site data:", missing); sys.exit(1)
+          for f in need:
+              with open(os.path.join("docs","data",f)) as fh:
+                  json.load(fh)
+          if not os.path.exists("docs/.nojekyll"):
+              open("docs/.nojekyll","w").close()
+          print("All site data files present and valid JSON.")
+          PY
+
+      - name: Check for broken internal links
+        run: |
+          python3 - <<'PY'
+          import os, re, sys
+          root = "docs"
+          pages, assets = [], set()
+          for dirpath, _, files in os.walk(root):
+              for f in files:
+                  p = os.path.join(dirpath, f)
+                  rel = os.path.relpath(p, root)
+                  if f.endswith(".html"): pages.append(p)
+                  else: assets.add(rel)
+          bad = []
+          for p in pages:
+              html = open(p, encoding="utf-8").read()
+              base = os.path.relpath(os.path.dirname(p), root)
+              for m in re.finditer(r'(?:href|src)="([^"#][^"]*)"', html):
+                  h = m.group(1)
+                  if re.match(r'^(https?:|mailto:|//)', h): continue
+                  target = os.path.normpath(os.path.join(base, h))
+                  if not os.path.exists(os.path.join(root, target)):
+                      bad.append((p, h, target))
+          if bad:
+              for b in bad: print("BROKEN:", b)
+              sys.exit(1)
+          print(f"Checked {len(pages)} pages, no broken internal links.")
+          PY
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

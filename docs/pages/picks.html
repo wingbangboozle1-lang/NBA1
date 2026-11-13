@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Picks — NBA1 Line Origination</title>
+<meta name="description" content="Picks">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html">Lines</a>
+<a href="../pages/picks.html" class="active">Picks</a>
+<a href="../pages/props.html">Player Props</a>
+<a href="../pages/injuries.html">Injuries</a>
+<a href="../pages/gameflow.html">Game Flow</a>
+<a href="../pages/validation.html">Validation</a>
+<a href="../pages/strategy.html">Strategies</a>
+<a href="../pages/correlations.html">Correlations</a>
+<a href="../pages/luck.html">Luck</a>
+<a href="../pages/backtest.html">Game Log</a>
+<a href="../pages/teams.html">Teams</a>
+<a href="../pages/model.html">Model</a>
+<a href="../pages/flagged.html">Flagged</a>
+<a href="../pages/questions.html">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Picks</h1>
+  <p class="lede">Every play the strategy library generates for the upcoming slates: singles,
+  parlays, same-game parlays and player-prop combos. Each row names the strategy that produced it
+  and the reference number it is being measured against.</p>
+
+  <div class="banner warn">
+    <div class="ico">!</div>
+    <div><p><strong>No strategy is funded.</strong> Every strategy is capped at quarter-unit or
+    research-only because none has cleared the 30-play sample gate — see the
+    <a href="validation.html">Validation</a> page and <a href="flagged.html">F8</a>.
+    These plays are what the system produces; they are not recommendations to stake.</p></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="chipbar" id="f-date"></div>
+    <div class="spacer"></div>
+    <label>Market
+      <select id="f-market"><option value="">All markets</option></select>
+    </label>
+    <label>Strategy
+      <select id="f-strat"><option value="">All strategies</option></select>
+    </label>
+    <div class="spacer"></div>
+    <span class="count" id="cnt"></span>
+  </div>
+
+  <div id="tbl"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h3>How parlays are priced</h3>
+  <p class="small">Two-leg parlays show both the probability under the modelled correlation and the
+  probability you would get by naively multiplying the legs. Where they differ, the difference is
+  the amount you would overpay by pricing correlated legs as independent. The correlation values
+  themselves are model-derived, not measured — see <a href="correlations.html">Correlations</a>
+  and <a href="flagged.html">F6</a>.</p>
+
+<script>
+
+(async () => {
+  await initSources();
+  const [d, lb, vd] = await Promise.all([
+    loadJSON(DATA("picks.json")),
+    loadJSON(DATA("leaderboard.json")),
+    loadJSON(DATA("validation.json"))
+  ]);
+  const rows = d.rows;
+  const tier = {};
+  for (const r of lb.rows) tier[r.id] = r;
+  // link each single-game play to its own official game page; parlays link to the first leg
+  for (const r of rows) r.src = "S8_" + String(r.game_id).split("+")[0];
+  const dates = uniq(rows.map(r => r.date)).sort();
+  const markets = uniq(rows.map(r => r.market)).sort();
+  fillChipbar("#f-date", dates, v => {st.date=v; draw();}, "All dates");
+  fillSelect("#f-market", markets);
+  fillSelect("#f-strat", uniq(rows.map(r => r.strategy)).sort());
+
+  const st = {date:"", market:"", strat:""};
+  const draw = () => {
+    let rs = rows.filter(r =>
+      (!st.date || r.date === st.date) &&
+      (!st.market || r.market === st.market) &&
+      (!st.strat || r.strategy === st.strat));
+    rs = sortBy(rs, "date");
+    setText("#cnt", rs.length + " of " + rows.length + " plays");
+    const cols = [
+      {key:"date", label:"Date", cls:"date"},
+      {key:"time_et", label:"Tip (ET)"},
+      {key:"strategy", label:"Strat", fmt: v => {
+        const t = tier[v];
+        const cls = t ? (t.tier.startsWith("Tier 1") ? "t1" : t.tier.startsWith("Tier 2") ? "t2" :
+                         t.tier.startsWith("Tier 3") ? "t3" : "t0") : "na";
+        return `<span class="badge ${cls}" title="${esc(t?t.tier:"")}">${esc(v)}</span>`;
+      }},
+      {key:"market", label:"Market"},
+      {key:"matchup", label:"Game", cls:"lbl"},
+      {key:"line_display", label:"Play", cls:"lbl"},
+      {key:"ref_line", label:"Ref line", num:true, d:1, cls:"muted"},
+      {key:"model_value", label:"Model", num:true, d:1, cls:"muted"},
+      {key:"edge", label:"Gap", num:true, signed:true, d:2},
+      {key:"p_model", label:"P(model)", fmt: v => pct(v)},
+      {key:"p_if_independent", label:"P(if indep.)", fmt: v => pct(v)},
+      {key:"fair_price", label:"Fair price", fmt: v => price(v)},
+      {key:"rho", label:"rho", num:true, d:2, cls:"muted"},
+      {key:"status", label:"Status", fmt: v => badge(v, "na")},
+      {key:"src", label:"Src", src:true},
+    ];
+    setHTML("#tbl", table(cols, rs, {thin:true}));
+  };
+  bind("#f-market", v => {st.market=v; draw();});
+  bind("#f-strat", v => {st.strat=v; draw();});
+  draw();
+})().catch(e => setHTML("#tbl", '<div class="empty">Failed to load: '+e.message+'</div>'));
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>
