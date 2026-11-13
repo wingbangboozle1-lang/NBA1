@@ -1,0 +1,85 @@
+{
+ "status": "No strategy has been evaluated. No verified odds, game logs, or player-prop data were available to this session.",
+ "families": [
+  {
+   "family": "Single bets (moneyline, spread, total)",
+   "status": "Not evaluated",
+   "blocked_by": "Q-06, Q-07"
+  },
+  {
+   "family": "Parlays (2–4 legs)",
+   "status": "Not evaluated",
+   "blocked_by": "Q-06, Q-07, correlation values"
+  },
+  {
+   "family": "Player prop combinations",
+   "status": "Not evaluated",
+   "blocked_by": "Q-06, Q-08"
+  },
+  {
+   "family": "Injury-driven adjustments",
+   "status": "Not evaluated",
+   "blocked_by": "Q-08 (minutes/production)"
+  }
+ ],
+ "gates": [
+  {
+   "id": "G1",
+   "name": "Data provenance",
+   "proposal": "Every input traced to an official or licensed source with a link.",
+   "status": "Defined; no inputs yet"
+  },
+  {
+   "id": "G2",
+   "name": "Minimum sample size",
+   "proposal": "Threshold set per strategy (proposed default to be decided; see Q-09).",
+   "status": "Not set"
+  },
+  {
+   "id": "G3",
+   "name": "Time-based out-of-sample test",
+   "proposal": "Fit on earlier seasons, test on later ones. No random splits.",
+   "status": "Not run"
+  },
+  {
+   "id": "G4",
+   "name": "Beat a no-skill baseline",
+   "proposal": "Compare to the implied probability of the market price (requires odds; Q-07).",
+   "status": "Blocked"
+  },
+  {
+   "id": "G5",
+   "name": "Closing-line value",
+   "proposal": "Measure whether originated prices beat the closing market price (requires odds; Q-07).",
+   "status": "Blocked"
+  },
+  {
+   "id": "G6",
+   "name": "Multiple-testing control",
+   "proposal": "Correct significance for the number of strategies on the leaderboard.",
+   "status": "Not set"
+  },
+  {
+   "id": "G7",
+   "name": "Measured correlation for parlays",
+   "proposal": "Joint frequencies measured from game logs; independence assumed only where tested.",
+   "status": "Blocked (Q-06)"
+  },
+  {
+   "id": "G8",
+   "name": "Stability across windows",
+   "proposal": "Result holds across at least two separate time windows.",
+   "status": "Not run"
+  },
+  {
+   "id": "G9",
+   "name": "Legal / compliance",
+   "proposal": "No public betting-related output until the legal review (Q-04) is complete.",
+   "status": "Open (Q-04)"
+  }
+ ],
+ "leaderboard": [],
+ "correlation_values": [],
+ "picks": [],
+ "note": "Gate definitions are this project's proposals (methodology), not facts from an external source. They are marked as proposals on the site."
+}

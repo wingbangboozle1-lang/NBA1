@@ -29,3 +29,15 @@ The site is plain static HTML/CSS/JS and can be served from the repository root 
 ## Verification
 
 Static navigation targets and table row links were checked against the HTML; local serving and HTTP response are validated as part of this task. Verify external links and Pages deployment in the browser/GitHub before relying on them. Official-source URLs do not certify that a value is current or have been copied into the site.
+
+## Official-source research dashboard (`docs/`)
+
+Added by session `arena-83ba89cf`. A multi-page static site built from `data/*.json`:
+
+- Schedule for Nov 13–15, 2026 (23 games) from NBA.com games pages.
+- Injury rows (75) from the official 11/13/26 12:00 PM injury-report PDF, with rows that lack a printed reason or team flagged or excluded.
+- Strategies, validation gates, questions, suggestions, flagged items, and sources.
+
+Rebuild: `python3 scripts/build_site.py`. The build fails on any data row without an official source link, on a disallowed host, or on a broken internal link. No picks, correlation values, or leaderboard results are produced. The required verified inputs are missing (see the Questions page).
+
+Pages URL for this section: https://wingbangboozle1-lang.github.io/NBA1/docs/

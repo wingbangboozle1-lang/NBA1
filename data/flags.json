@@ -1,0 +1,128 @@
+[
+ {
+  "id": "F-01",
+  "category": "Repository",
+  "item": "Repo contents",
+  "detail": "The repo held only README.md ('# NBA1') and a single commit ('Initial commit'). No code, data, license, .gitignore, or COORDINATION.md existed before this session.",
+  "severity": "info",
+  "source_url": "https://github.com/wingbangboozle1-lang/NBA1",
+  "status": "needs review"
+ },
+ {
+  "id": "F-02",
+  "category": "Injury data",
+  "item": "Rows with no printed reason (7)",
+  "detail": "Golden State Warriors (Bassey, Butler III, Curry, Moody, Porzingis, Williams) and San Antonio Spurs (Fox, De'Aaron) rows have no reason in the extracted text. Reason left blank.",
+  "severity": "high",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf",
+  "status": "needs review"
+ },
+ {
+  "id": "F-03",
+  "category": "Injury data",
+  "item": "Rows with no printed team (14) — excluded",
+  "detail": "Excluded because the team cannot be confirmed from the row: Flemings, Kingston; Gilbert, Keshon; Gueye, Mouhamed; Landale, Jock; Newell, Asa; Veesaar, Henri; Wilson, Jalen (section with no team column); Harris, Tobias; Quaintance, Jayden; Vassell, Devin; Topic, Nikola; Wallace, Cason; Williams, Jalen; Williams, Jaylin. One orphan reason line ('Injury/Illness - Left Patellar Tendon Repair / Surgery') has no player name and is also excluded.",
+  "severity": "high",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf",
+  "status": "needs review"
+ },
+ {
+  "id": "F-04",
+  "category": "Injury data",
+  "item": "Text extracted from PDF",
+  "detail": "Injury rows come from the PDF's text layer, which splits some tables across pages and drops column values. Each row must be spot-checked against the PDF before any decision uses it.",
+  "severity": "high",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf",
+  "status": "needs review"
+ },
+ {
+  "id": "F-05",
+  "category": "Injury data",
+  "item": "Rows marked 'NOT YET SUBMITTED' for 11/14 (9)",
+  "detail": "Denver, New Orleans, Dallas, Cleveland, Brooklyn, Memphis, Chicago, Minnesota, Detroit rows are 'NOT YET SUBMITTED' in the 11/13 report. Excluded.",
+  "severity": "medium",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf",
+  "status": "needs review"
+ },
+ {
+  "id": "F-06",
+  "category": "Injury data",
+  "item": "Matchup implied for 'LA Clippers', 'Chicago Bulls', 'Miami Heat' rows",
+  "detail": "These rows print a team but no matchup. The matchup is set from the official schedule, where each of these teams plays exactly one game on 11/13. Flagged as 'implied' in the table.",
+  "severity": "low",
+  "source_url": "https://www.nba.com/games?date=2026-11-13",
+  "status": "needs review"
+ },
+ {
+  "id": "F-07",
+  "category": "Injury data",
+  "item": "Stray orphan reason line",
+  "detail": "Text 'Injury/Illness - Left Patellar Tendon Repair / Surgery' appears between the Spurs and Harris rows with no player or team. Excluded (see F-03).",
+  "severity": "medium",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf",
+  "status": "needs review"
+ },
+ {
+  "id": "F-08",
+  "category": "Schedule",
+  "item": "Records are as displayed at retrieval",
+  "detail": "Team records on the NBA.com games page are shown without a per-row timestamp. They reflect the time of retrieval, not a fixed as-of date. 11/14 and 11/15 games: records blank where not displayed.",
+  "severity": "low",
+  "source_url": "https://www.nba.com/games?date=2026-11-13",
+  "status": "needs review"
+ },
+ {
+  "id": "F-09",
+  "category": "Schedule",
+  "item": "Official schedule JSON not reachable",
+  "detail": "cdn.nba.com scheduleLeagueV2.json returned HTTP 500 at retrieval. The schedule was taken from the NBA.com games HTML pages instead.",
+  "severity": "medium",
+  "source_url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
+  "status": "needs review"
+ },
+ {
+  "id": "F-10",
+  "category": "Odds",
+  "item": "Odds toggle present but no odds values captured",
+  "detail": "The NBA.com games page includes a 'HIDE ODDS' control. Odds values were not extracted and the odds provider is not identified on the page. No odds are used anywhere in this project.",
+  "severity": "high",
+  "source_url": "https://www.nba.com/games?date=2026-11-13",
+  "status": "needs review"
+ },
+ {
+  "id": "F-11",
+  "category": "Source link",
+  "item": "Injury-rules page title mismatch",
+  "detail": "The URL official.nba.com/nba-injury-report-2025-26-season/ redirected to the 2026-27 page. The 2026-27 page is the one cited.",
+  "severity": "low",
+  "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+  "status": "needs review"
+ },
+ {
+  "id": "F-12",
+  "category": "Legal",
+  "item": "Gambling licensing (NL) — not legal advice",
+  "detail": "Ksa states that only operators with a Koa licence (art. 31a Wet op de kansspelen) may offer online sports wagers in NL. Whether publishing lines, picks, or a prize leaderboard counts as offering wagers is NOT determined here and needs a qualified legal review.",
+  "severity": "high",
+  "source_url": "https://kansspelautoriteit.nl/online-kansspel-aanbieden",
+  "status": "needs review"
+ },
+ {
+  "id": "F-13",
+  "category": "Source link",
+  "item": "Ksa licence register not fetched",
+  "detail": "Ksa's home page links to a list of granted licences ('Verleende vergunningen'). That list was not retrieved, so no operator is verified.",
+  "severity": "low",
+  "source_url": "https://kansspelautoriteit.nl/",
+  "status": "needs review"
+ },
+ {
+  "id": "F-14",
+  "category": "Schedule",
+  "item": "Away/home order is an assumption",
+  "detail": "The games page lists teams in an order and the injury report uses 'AWAY@HOME' codes (e.g., MIL@ORL). The table treats the first-listed team as away. This matches the injury-report codes where both are printed, but it was not confirmed on a separate official page.",
+  "severity": "low",
+  "source_url": "https://www.nba.com/games?date=2026-11-13",
+  "status": "needs review"
+ }
+]

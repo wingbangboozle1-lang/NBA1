@@ -1,0 +1,11 @@
+{
+ "headline": "Foundation and site built on official data. No originated lines, strategy results, correlations, or picks have been produced yet, because the required verified data is missing.",
+ "bullets": [
+  "Scope: 23 NBA games are scheduled Nov 13–15, 2026 (9 / 5 / 9), per the official NBA games pages.",
+  "Injuries: 75 rows from the official 11/13/26 12:00 PM game-day report are included. 7 rows lack a printed reason and 14 rows lack a printed team (excluded). Text was extracted from a PDF, so rows need spot-checking.",
+  "Rotation minutes and production impact are NOT computed. Verified minutes and player data have not been collected.",
+  "Strategies, leaderboard, correlation values, and picks: not produced. Blocked by missing verified odds and game logs (Q-06 to Q-08).",
+  "Legal: Ksa states that only licensed operators (Koa licence) may offer online sports wagers in NL. Whether publishing lines, picks, or a prize leaderboard counts as offering wagers is open and needs legal review (Q-04). This is not legal advice.",
+  "Next steps (choose on the Suggestions page): automate the data refresh (S-01), harden injury parsing (S-02), set up a legal gate (S-03), collect game logs (S-04), and choose an odds source (S-05)."
+ ]
+}

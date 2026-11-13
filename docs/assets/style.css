@@ -1,0 +1,32 @@
+:root{--ink:#1d2430;--muted:#5b6575;--line:#e3e7ee;--bg:#f7f9fc;--card:#fff;--accent:#1f6feb;--warn:#9a6700;--warnbg:#fff8c5;--ok:#1a7f37}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+header.top{background:#fff;border-bottom:1px solid var(--line);padding:12px 20px;position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.brand a{font-weight:700;font-size:18px;color:var(--ink);text-decoration:none}
+.brand span{color:var(--muted);font-size:13px}
+nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+nav a{padding:5px 10px;border-radius:999px;background:#eef2f8;color:var(--ink);text-decoration:none;font-size:13px}
+nav a.active,nav a:hover{background:var(--accent);color:#fff}
+main{max-width:1200px;margin:0 auto;padding:20px}
+h1{font-size:24px;margin:8px 0 4px}
+h2{font-size:18px;margin:26px 0 8px}
+.lead{color:var(--muted);margin:0 0 16px}
+.status{background:var(--warnbg);border:1px solid #f2d774;color:#4d3b00;padding:12px 14px;border-radius:10px;margin:8px 0 16px}
+.note{color:var(--muted);font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;color:var(--ink);text-decoration:none;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.card:hover{border-color:var(--accent)}
+.card h3{margin:0 0 6px;font-size:16px}
+.card p{margin:0;color:var(--muted);font-size:13px}
+.tablewrap{overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:10px;max-height:70vh}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{position:sticky;top:0;background:#f0f4fa;font-weight:600;z-index:1}
+tr:hover td{background:#fafcff}
+a{color:var(--accent)}
+.filter{width:100%;max-width:340px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;margin:6px 0 10px;font:inherit}
+.flag{color:var(--warn);background:var(--warnbg);padding:1px 6px;border-radius:6px;font-size:12.5px}
+.tag{color:#6b3fa0;background:#f1e9fb;padding:1px 6px;border-radius:6px;font-size:12px}
+.bullets li{margin:4px 0}
+footer{max-width:1200px;margin:24px auto;padding:0 20px 30px;color:var(--muted);font-size:12.5px}
