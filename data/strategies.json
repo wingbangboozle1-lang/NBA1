@@ -1,25 +1,25 @@
 {
- "status": "No strategy has been evaluated. No verified odds, game logs, or player-prop data were available to this session.",
+ "status": "Framework defined and inputs sourced. Five strategies are registered as PAPER/GATED on lines.html (model RecordLine-1, official schedule + injury + leader inputs). No settled results yet: odds feed and game logs are still missing (Q-06, Q-07), so no strategy has cleared its gates.",
  "families": [
   {
    "family": "Single bets (moneyline, spread, total)",
-   "status": "Not evaluated",
-   "blocked_by": "Q-06, Q-07"
+   "status": "PAPER — model picks published on lines.html; not evaluated",
+   "blocked_by": "Q-06, Q-07 (market gates G4/G5); totals need pace inputs"
   },
   {
    "family": "Parlays (2–4 legs)",
-   "status": "Not evaluated",
-   "blocked_by": "Q-06, Q-07, correlation values"
+   "status": "GATED — exact Frechet joint/ρ bounds published on lines.html; empirical ρ pending",
+   "blocked_by": "Q-06, Q-07, empirical correlation values (G7)"
   },
   {
    "family": "Player prop combinations",
-   "status": "Not evaluated",
-   "blocked_by": "Q-06, Q-08"
+   "status": "GATED — combos and official statuses published on lines.html; no market number",
+   "blocked_by": "Q-06, Q-08 (game-log variance + market number)"
   },
   {
    "family": "Injury-driven adjustments",
-   "status": "Not evaluated",
-   "blocked_by": "Q-08 (minutes/production)"
+   "status": "Context published on gameflow.html; minutes/production impact NOT computed",
+   "blocked_by": "Q-08 (minutes/production feed)"
   }
  ],
  "gates": [
@@ -27,7 +27,7 @@
    "id": "G1",
    "name": "Data provenance",
    "proposal": "Every input traced to an official or licensed source with a link.",
-   "status": "Defined; no inputs yet"
+   "status": "Pass for Edge Lab inputs — every row source-linked (schedule pages, official PDF, leader tables)"
   },
   {
    "id": "G2",
@@ -63,7 +63,7 @@
    "id": "G7",
    "name": "Measured correlation for parlays",
    "proposal": "Joint frequencies measured from game logs; independence assumed only where tested.",
-   "status": "Blocked (Q-06)"
+   "status": "Bounds computed from marginals on lines.html; empirical joint frequencies blocked (Q-06)"
   },
   {
    "id": "G8",

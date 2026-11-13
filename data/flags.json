@@ -48,10 +48,10 @@
   "id": "F-06",
   "category": "Injury data",
   "item": "Matchup implied for 'LA Clippers', 'Chicago Bulls', 'Miami Heat' rows",
-  "detail": "These rows print a team but no matchup. The matchup is set from the official schedule, where each of these teams plays exactly one game on 11/13. Flagged as 'implied' in the table.",
+  "detail": "These rows print a team but no matchup. The matchup had been set from the official schedule (each team plays exactly one game on 11/13). Per the no-inference rule requested in COORDINATION.md, the matchup cells are now left blank and tagged 'not printed'; team, player, status and reason remain as printed. See E-09.",
   "severity": "low",
   "source_url": "https://www.nba.com/games?date=2026-11-13",
-  "status": "needs review"
+  "status": "resolved — blanked; needs review of PDF print state"
  },
  {
   "id": "F-07",
@@ -123,6 +123,96 @@
   "detail": "The games page lists teams in an order and the injury report uses 'AWAY@HOME' codes (e.g., MIL@ORL). The table treats the first-listed team as away. This matches the injury-report codes where both are printed, but it was not confirmed on a separate official page.",
   "severity": "low",
   "source_url": "https://www.nba.com/games?date=2026-11-13",
+  "status": "needs review"
+ },
+ {
+  "id": "E-01",
+  "category": "Model",
+  "item": "RecordLine-1 parameters are project assumptions",
+  "detail": "Smoothing +3/+6, home court +2.5, K=35.0, sigma=11.0, pick gate 3.0 are documented assumptions, not official NBA values. Lines/picks shift if parameters change.",
+  "severity": "high",
+  "source_url": "https://www.nba.com/games?date=2026-11-13",
+  "status": "needs review"
+ },
+ {
+  "id": "E-02",
+  "category": "Picks",
+  "item": "Paper picks are not market-validated",
+  "detail": "26 model picks for Nov 13-16 exist on lines.html; settled record and ROI are blank. Gates G4/G5 blocked (no odds feed).",
+  "severity": "high",
+  "source_url": "https://www.nba.com/games?date=2026-11-13",
+  "status": "needs review"
+ },
+ {
+  "id": "E-03",
+  "category": "Model",
+  "item": "Team totals not originated",
+  "detail": "Record-only model has no pace/efficiency inputs; over/under columns intentionally blank.",
+  "severity": "medium",
+  "source_url": "https://www.nba.com/stats/teams/advanced",
+  "status": "needs review"
+ },
+ {
+  "id": "E-04",
+  "category": "Injury data",
+  "item": "5:15 PM report — 20 rows with blank team cells",
+  "detail": "Page-boundary text extraction dropped Team cells; rows listed with blank team on gameflow.html and excluded from analysis. No team inferred.",
+  "severity": "high",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+  "status": "needs review"
+ },
+ {
+  "id": "E-05",
+  "category": "Injury data",
+  "item": "11/14 submissions incomplete + extraction discrepancy",
+  "detail": "Denver, New Orleans, Memphis, Chicago, Miami read NOT YET SUBMITTED. One PDF pass rendered a Cleveland 'NOT YET SUBMITTED' line where another rendered 'Martin, Caleb — Available' (kept).",
+  "severity": "medium",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+  "status": "needs review"
+ },
+ {
+  "id": "E-06",
+  "category": "Injury data",
+  "item": "11/15-11/16 reports not yet published",
+  "detail": "Report hub lists 11/13 reports only at retrieval; day-before deadlines apply. G-INJ stays closed for those slates.",
+  "severity": "medium",
+  "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+  "status": "needs review"
+ },
+ {
+  "id": "E-07",
+  "category": "Schedule",
+  "item": "Nov-15 records rendered '-' on the slate page",
+  "detail": "Records for all nine 11/15 games were taken from the official game-page schedule strip (cross-checked on two game pages).",
+  "severity": "medium",
+  "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+  "status": "needs review"
+ },
+ {
+  "id": "E-08",
+  "category": "Stats",
+  "item": "LAL, CHA, TOR season-leader stats blank",
+  "detail": "The official 11/15 slate page displayed '-' in those leader tables; PPG/RPG/APG and combo lines left blank on lines.html.",
+  "severity": "medium",
+  "source_url": "https://www.nba.com/games?date=2026-11-15",
+  "status": "needs review"
+ },
+ {
+  "id": "E-09",
+  "category": "Injury data",
+  "item": "13 inferred matchup values blanked in the 12:00 PM dataset",
+  "detail": "Matchup cells that were schedule-implied (not printed) in data/injuries.json are now blank and tagged 'not printed', per the no-inference rule requested by two sessions.",
+  "severity": "medium",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf",
+  "status": "needs review"
+ },
+ {
+  "id": "E-10",
+  "category": "Injury data",
+  "item": "PDF text extraction is lossy in both reports",
+  "detail": "Tables split across pages drop column cells. Only printed cells are transcribed; everything else blank + flagged (same rule as F-04).",
+  "severity": "high",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
   "status": "needs review"
  }
 ]
