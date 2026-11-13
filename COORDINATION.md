@@ -1,4 +1,32 @@
-# COORDINATION.md — shared task board
+# Coordination board
+
+This repository had no coordination board or other active task claims at session start. The current Arena-managed branch `arena/0684edd4-nba1` is fixed for this session; no other branches/worktrees are created.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Build verified NBA lines research/dashboard, methodology, decision questions, and review flags | done | arena session (current session) | `index.html`, `styles.css`, `app.js`, `README.md`, `COORDINATION.md`, `.github/workflows/pages.yml` |
+
+## Source and verification log
+- Official NBA Stats glossary: https://www.nba.com/stats/help/glossary (fetched and checked; official stats terms).
+- NBA Stats FAQ: https://www.nba.com/stats/help/faq; team/player stats https://www.nba.com/stats/teams/advanced and https://www.nba.com/stats/players; schedule https://www.nba.com/schedule.
+- Current official injury report page verified at https://official.nba.com/nba-injury-report-2026-27-season/ (fetched; report cadence described there). No report data ingested.
+- Verification: internal HTML anchors checked (none broken); source links added to displayed research rows; `git diff --check` passed; static HTTP requests for `/`, `/index.html`, `/styles.css`, `/app.js` returned 200; GitHub Pages deployment workflow 43518760512 completed successfully; public URL https://wingbangboozle1-lang.github.io/NBA1/.
+- PR #1 https://github.com/wingbangboozle1-lang/NBA1/pull/1 merged 2026-11-13 (merge commit).
+
+## Irregularities
+- Initial repository contained only a six-byte README; no application, data, task board, or existing source material was present. No verified current-game, injury, odds, or historical bet dataset is available, so none will be invented.
+- No additional agent session/claim information is available in this checkout; this work is scoped to the current Arena branch.
+
+---
+
+# Session arena-83ba89cf — task board (added after merge with main)
+
+Session `arena-83ba89cf` works on branch `arena/83ba89cf-nba1` (base `f73edd2`). It merged `origin/main` (PRs #1 and #2 from `arena/0684edd4-nba1`) on 2026-11-13 and kept that session's root dashboard unchanged.
+
+**Coordination log**
+- 2026-11-13: `main` gained the root dashboard and Pages workflow from `arena/0684edd4-nba1` after this branch was cut. Merge conflicts were in `COORDINATION.md` and `README.md` only. Resolution: both sections kept, nothing from the other session deleted. Merge commit used instead of rebase because the conflict had to be resolved once for both sides.
+- Scope split: the other session owns the root (`index.html`, `styles.css`, `app.js`, `README.md`, `.github/workflows/pages.yml`). This session owns `data/`, `scripts/`, `docs/`, and its own sections of this file.
+- Request logged (not implemented): two landing pages now exist (root "NBA Edge Lab" and this session's `docs/` site). Consolidating them into one landing page needs your decision; see Suggestion S-11 on the Suggestions page.
 
 Repo: `wingbangboozle1-lang/NBA1` · Working branch: `arena/83ba89cf-nba1` (base `main` @ `f73edd2`)
 Session ID: `arena-83ba89cf` (single session running this board; no parallel sessions were detected in this checkout)

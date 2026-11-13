@@ -88,5 +88,14 @@
   "effort": "Low",
   "risk": "Link accuracy.",
   "decision": "pending"
+ },
+ {
+  "id": "S-11",
+  "title": "Consolidate the two landing pages into one",
+  "detail": "Two sites now exist: the root 'NBA Edge Lab' dashboard (from another session, PRs #1 and #2) and this session's multi-page site in docs/. Pick one landing page and link the other as a subpage. Nothing was changed on the root site.",
+  "benefit": "One clear entry point; one navigation structure.",
+  "effort": "Medium",
+  "risk": "Touches another session's files, so it needs your decision and that session's agreement.",
+  "decision": "pending"
  }
 ]
