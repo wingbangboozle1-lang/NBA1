@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # COORDINATION — Shared Task Board
 
 **Repo:** `wingbangboozle1-lang/NBA1`
@@ -173,7 +172,9 @@ _None._
 | GitHub Pages | `https://wingbangboozle1-lang.github.io/NBA1/` |
 | Publish path | `.github/workflows/pages.yml` (from the parallel session) publishes `docs/`; this branch's dashboard lives there, so the workflow serves it rather than the root pages |
 | Verification at merge | `verify_data.py` errors=0 · `verify_inline.py` 18/18 · `check_links.py` PASS (24 pages, 667 rows, 0 unsourced, 0 ragged, 0 broken, 0 bad hosts) |
-=======
+
+---
+
 # Coordination board
 
 This board aggregates logs from several Arena sessions. The opening note below describes the earlier `arena/0684edd4-nba1` session at its start; the current integration work was performed on `arena/4f997533-nba1`, without switching branches. This repository had no coordination board on the initial checkout.
@@ -345,7 +346,6 @@ See `data/flags.json`. Highlights:
 - Merge result: **MERGED** 2026-11-13 (merge commit `d36a00b`). GitHub Pages status: `built`;
   site live at https://wingbangboozle1.github.io/NBA1/ — Publish workflow run 43520919372
   completed (success).
->>>>>>> origin/main
 # Session arena-549550e3 — task board and log
 
 Session `arena-549550e3` works on branch `arena/549550e3-nba1` (base `f73edd2`). Rebased onto `origin/main` (`c6e4be9`) on 2026-11-13; the COORDINATION.md add/add conflict was resolved by keeping the full upstream board (all sessions' sections) and appending this section. No upstream section or file was deleted.
