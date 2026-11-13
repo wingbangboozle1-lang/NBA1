@@ -1,0 +1,100 @@
+{
+ "_meta": {
+  "title": "Glossary",
+  "source_url": "https://www.nba.com/stats/help/glossary",
+  "retrieved_utc": "2026-11-13",
+  "note": "Definitions follow the official NBA.com stats glossary. Where a term has a project-specific meaning, that meaning is stated separately."
+ },
+ "terms": [
+  {
+   "term": "Pace",
+   "official_definition": "Possessions per 48 minutes.",
+   "project_use": "Used to project a game's possession count as pace_home + pace_away - league_pace.",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  },
+  {
+   "term": "POSS",
+   "official_definition": "Possessions.",
+   "project_use": "The denominator for ratings; verified against pace x minutes / 48 in verify_data.py.",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  },
+  {
+   "term": "OffRtg",
+   "official_definition": "Offensive Rating: points scored per 100 possessions.",
+   "project_use": "Multiplied by the opponent's DefRtg and divided by the league average to project points.",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  },
+  {
+   "term": "DefRtg",
+   "official_definition": "Defensive Rating: points allowed per 100 possessions.",
+   "project_use": "Same as above, in the opponent's direction.",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  },
+  {
+   "term": "NetRtg",
+   "official_definition": "Net Rating: 100 x (points - points allowed) / possessions.",
+   "project_use": "Identical to OffRtg - DefRtg. Treated as structural, not a signal.",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  },
+  {
+   "term": "TS%",
+   "official_definition": "True Shooting Percentage: a measure of shooting efficiency that accounts for two- and three-point field goals and free throws.",
+   "project_use": "Correlated against OffRtg as a descriptive check.",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  },
+  {
+   "term": "eFG%",
+   "official_definition": "Effective Field Goal Percentage: adjusts a field-goal percentage so that a three-point field goal is worth one and a half field goals.",
+   "project_use": "Correlated against OffRtg (r=0.819 across 30 teams).",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  },
+  {
+   "term": "TOV%",
+   "official_definition": "Turnover Percentage: turnovers per 100 plays.",
+   "project_use": "Correlated against OffRtg (negative, as expected).",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  },
+  {
+   "term": "OREB%",
+   "official_definition": "Offensive Rebound Percentage: the share of available offensive rebounds a team grabs.",
+   "project_use": "Correlated against OffRtg.",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  },
+  {
+   "term": "AST%",
+   "official_definition": "Assist Percentage: the share of a team's field goals that are assisted while a player is on the floor.",
+   "project_use": "Tested against pace; no relationship found (r=0.062).",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  },
+  {
+   "term": "Originated line",
+   "official_definition": "Not an official NBA term.",
+   "project_use": "A line this project computes itself from official inputs. Never a sportsbook price.",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  },
+  {
+   "term": "Half-line",
+   "official_definition": "Not an official NBA term.",
+   "project_use": "A prop line set at .5 so that no push is possible.",
+   "source_url": "https://www.nba.com/stats/help/glossary"
+  },
+  {
+   "term": "NEW_ABSENCE",
+   "official_definition": "Not an official NBA term.",
+   "project_use": "A player who last appeared on 11/10 or later, so his absence is not yet inside his team's season stats.",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/"
+  },
+  {
+   "term": "ALREADY_BAKED_IN",
+   "official_definition": "Not an official NBA term.",
+   "project_use": "A player whose absence is already reflected in team form because he missed several prior games.",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/"
+  },
+  {
+   "term": "Look-ahead bias",
+   "official_definition": "Not an official NBA term.",
+   "project_use": "Using information that was not available before the event being predicted, e.g. season stats that include the game itself.",
+   "source_url": "https://www.nba.com/games"
+  }
+ ]
+}

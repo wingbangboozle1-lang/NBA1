@@ -1,0 +1,674 @@
+{
+ "_meta": {
+  "title": "Strategy ledger and leaderboard",
+  "generated_by": "scripts/strategies.py",
+  "generated_utc": "2026-11-13",
+  "competition_rule": "A strategy is ranked by gates passed, then by ROI. Ranking is cosmetic: no reward is payable unless status is VALIDATED.",
+  "validated_count": 0,
+  "headline_finding": "Zero of eight strategies are validated. The binding constraint is sample size: the largest graded set is 14 bets against a floor of 100. This is reported as the result, not worked around.",
+  "reward_policy": "Rewards are only payable to VALIDATED strategies. Because none are validated, the current reward allocation is zero and the leaderboard is informational only.",
+  "sample_note": "The 14 graded games are also look-ahead contaminated (see backtest.py). Even the numerical hit rates are inflated and are not evidence of skill.",
+  "grading_convention": "Wins pay +100/110 units, losses pay -1 unit. No sportsbook price was observable in this environment, so the standard -110 price is assumed and disclosed rather than presented as observed.",
+  "gates_are_not_all_equally_strong": "G3 (bootstrap), G4 (stability) and G5 (fragility) are all satisfiable by luck when n is tiny. The NULL CONTROL demonstrates this: a coin-flip strategy passed 4 of 6 gates on these 14 games. The only gates that cannot be gamed at small n are G1 (sample floor) and G2 (Bonferroni-corrected significance), which is precisely why G1 is the first gate. A reader should treat any 'gates passed' count below 6 as meaningless — the conjunction is what matters.",
+  "bonferroni_note": "8 strategies were tested in this batch, so every p-value is multiplied by 8 before comparison with 0.05."
+ },
+ "leaderboard": [
+  {
+   "name": "High-confidence moneyline",
+   "n_graded": 7,
+   "wins": 7,
+   "losses": 0,
+   "hit_rate": 1.0,
+   "roi_at_minus110": 0.9091,
+   "gates": {
+    "G1_sample_floor": {
+     "requirement": "n >= 100 graded bets",
+     "observed": 7,
+     "passed": false,
+     "shortfall": 93
+    },
+    "G2_significance": {
+     "requirement": "one-sided binomial p < 0.05 after Bonferroni correction",
+     "observed_wins": 7,
+     "observed_n": 7,
+     "hit_rate": 1.0,
+     "hit_rate_95ci": [
+      0.6457,
+      1.0
+     ],
+     "p_raw": 0.007812,
+     "p_bonferroni": 0.0625,
+     "breakeven_rate_at_minus110": 0.5238,
+     "passed": false
+    },
+    "G3_luck_bootstrap": {
+     "requirement": "5th percentile of bootstrap ROI > 0",
+     "draws": 10000,
+     "roi_at_minus110": 0.9091,
+     "roi_5th_percentile": 0.9091,
+     "passed": true
+    },
+    "G4_stability": {
+     "requirement": "profitable in both disjoint halves",
+     "first_half_hit_rate": 1.0,
+     "second_half_hit_rate": 1.0,
+     "passed": true
+    },
+    "G5_fragility": {
+     "requirement": "still profitable after removing the best 5% of bets",
+     "removed_bets": 1,
+     "roi_after_trim": 0.9091,
+     "passed": true
+    },
+    "G6_provenance": {
+     "requirement": "every driving input from an approved official host",
+     "approved_hosts": [
+      "www.nba.com",
+      "official.nba.com",
+      "ak-static.cms.nba.com"
+     ],
+     "passed": true,
+     "note": "Inputs are the NBA.com team ratings and official final scores; all pass."
+    }
+   },
+   "gates_passed": 4,
+   "gates_total": 6,
+   "failed_gates": [
+    "G1_sample_floor",
+    "G2_significance"
+   ],
+   "status": "NOT VALIDATED",
+   "blocking_reason": "fails G1_sample_floor, G2_significance",
+   "id": "S01",
+   "market": "single",
+   "rule": "Bet the model's pick straight up when its win probability is at least 0.65.",
+   "why_it_might_work": "A large rating gap is the only signal the model has that is not noise-dominated at n=14. If the model has any real information, it shows up here first.",
+   "inputs": [
+    "team OffRtg/DefRtg/pace",
+    "originated win probability"
+   ],
+   "rank": 1
+  },
+  {
+   "name": "Extreme-confidence moneyline",
+   "n_graded": 4,
+   "wins": 4,
+   "losses": 0,
+   "hit_rate": 1.0,
+   "roi_at_minus110": 0.9091,
+   "gates": {
+    "G1_sample_floor": {
+     "requirement": "n >= 100 graded bets",
+     "observed": 4,
+     "passed": false,
+     "shortfall": 96
+    },
+    "G2_significance": {
+     "requirement": "one-sided binomial p < 0.05 after Bonferroni correction",
+     "observed_wins": 4,
+     "observed_n": 4,
+     "hit_rate": 1.0,
+     "hit_rate_95ci": [
+      0.5101,
+      1.0
+     ],
+     "p_raw": 0.0625,
+     "p_bonferroni": 0.5,
+     "breakeven_rate_at_minus110": 0.5238,
+     "passed": false
+    },
+    "G3_luck_bootstrap": {
+     "requirement": "5th percentile of bootstrap ROI > 0",
+     "draws": 10000,
+     "roi_at_minus110": 0.9091,
+     "roi_5th_percentile": 0.9091,
+     "passed": true
+    },
+    "G4_stability": {
+     "requirement": "profitable in both disjoint halves",
+     "first_half_hit_rate": 1.0,
+     "second_half_hit_rate": 1.0,
+     "passed": true
+    },
+    "G5_fragility": {
+     "requirement": "still profitable after removing the best 5% of bets",
+     "removed_bets": 1,
+     "roi_after_trim": 0.9091,
+     "passed": true
+    },
+    "G6_provenance": {
+     "requirement": "every driving input from an approved official host",
+     "approved_hosts": [
+      "www.nba.com",
+      "official.nba.com",
+      "ak-static.cms.nba.com"
+     ],
+     "passed": true,
+     "note": "Inputs are the NBA.com team ratings and official final scores; all pass."
+    }
+   },
+   "gates_passed": 4,
+   "gates_total": 6,
+   "failed_gates": [
+    "G1_sample_floor",
+    "G2_significance"
+   ],
+   "status": "NOT VALIDATED",
+   "blocking_reason": "fails G1_sample_floor, G2_significance",
+   "id": "S02",
+   "market": "single",
+   "rule": "Bet the model's pick straight up when its win probability is at least 0.75.",
+   "why_it_might_work": "A stricter cut than S01: fewer bets, larger gaps, less noise per bet but far fewer observations.",
+   "inputs": [
+    "team OffRtg/DefRtg/pace",
+    "originated win probability"
+   ],
+   "rank": 2
+  },
+  {
+   "name": "NULL CONTROL — coin flip",
+   "n_graded": 14,
+   "wins": 11,
+   "losses": 3,
+   "hit_rate": 0.7857,
+   "roi_at_minus110": 0.5,
+   "gates": {
+    "G1_sample_floor": {
+     "requirement": "n >= 100 graded bets",
+     "observed": 14,
+     "passed": false,
+     "shortfall": 86
+    },
+    "G2_significance": {
+     "requirement": "one-sided binomial p < 0.05 after Bonferroni correction",
+     "observed_wins": 11,
+     "observed_n": 14,
+     "hit_rate": 0.7857,
+     "hit_rate_95ci": [
+      0.5241,
+      0.9243
+     ],
+     "p_raw": 0.028687,
+     "p_bonferroni": 0.229492,
+     "breakeven_rate_at_minus110": 0.5238,
+     "passed": false
+    },
+    "G3_luck_bootstrap": {
+     "requirement": "5th percentile of bootstrap ROI > 0",
+     "draws": 10000,
+     "roi_at_minus110": 0.5,
+     "roi_5th_percentile": 0.0909,
+     "passed": true
+    },
+    "G4_stability": {
+     "requirement": "profitable in both disjoint halves",
+     "first_half_hit_rate": 0.7143,
+     "second_half_hit_rate": 0.8571,
+     "passed": true
+    },
+    "G5_fragility": {
+     "requirement": "still profitable after removing the best 5% of bets",
+     "removed_bets": 1,
+     "roi_after_trim": 0.4685,
+     "passed": true
+    },
+    "G6_provenance": {
+     "requirement": "every driving input from an approved official host",
+     "approved_hosts": [
+      "www.nba.com",
+      "official.nba.com",
+      "ak-static.cms.nba.com"
+     ],
+     "passed": true,
+     "note": "Inputs are the NBA.com team ratings and official final scores; all pass."
+    }
+   },
+   "gates_passed": 4,
+   "gates_total": 6,
+   "failed_gates": [
+    "G1_sample_floor",
+    "G2_significance"
+   ],
+   "status": "NOT VALIDATED",
+   "blocking_reason": "fails G1_sample_floor, G2_significance",
+   "id": "S08",
+   "market": "control",
+   "rule": "Bet a coin flip on every game in the backtest sample.",
+   "why_it_might_work": "It cannot. It exists to prove the gates reject noise, so a passing grade elsewhere means something.",
+   "inputs": [
+    "random"
+   ],
+   "rank": 3
+  },
+  {
+   "name": "Total deviation fade",
+   "n_graded": 8,
+   "wins": 6,
+   "losses": 2,
+   "hit_rate": 0.75,
+   "roi_at_minus110": 0.4318,
+   "gates": {
+    "G1_sample_floor": {
+     "requirement": "n >= 100 graded bets",
+     "observed": 8,
+     "passed": false,
+     "shortfall": 92
+    },
+    "G2_significance": {
+     "requirement": "one-sided binomial p < 0.05 after Bonferroni correction",
+     "observed_wins": 6,
+     "observed_n": 8,
+     "hit_rate": 0.75,
+     "hit_rate_95ci": [
+      0.4093,
+      0.9285
+     ],
+     "p_raw": 0.144531,
+     "p_bonferroni": 1.0,
+     "breakeven_rate_at_minus110": 0.5238,
+     "passed": false
+    },
+    "G3_luck_bootstrap": {
+     "requirement": "5th percentile of bootstrap ROI > 0",
+     "draws": 10000,
+     "roi_at_minus110": 0.4318,
+     "roi_5th_percentile": -0.0455,
+     "passed": false
+    },
+    "G4_stability": {
+     "requirement": "profitable in both disjoint halves",
+     "first_half_hit_rate": 1.0,
+     "second_half_hit_rate": 0.5,
+     "passed": false
+    },
+    "G5_fragility": {
+     "requirement": "still profitable after removing the best 5% of bets",
+     "removed_bets": 1,
+     "roi_after_trim": 0.3636,
+     "passed": true
+    },
+    "G6_provenance": {
+     "requirement": "every driving input from an approved official host",
+     "approved_hosts": [
+      "www.nba.com",
+      "official.nba.com",
+      "ak-static.cms.nba.com"
+     ],
+     "passed": true,
+     "note": "Inputs are the NBA.com team ratings and official final scores; all pass."
+    }
+   },
+   "gates_passed": 2,
+   "gates_total": 6,
+   "failed_gates": [
+    "G1_sample_floor",
+    "G2_significance",
+    "G3_luck_bootstrap",
+    "G4_stability"
+   ],
+   "status": "NOT VALIDATED",
+   "blocking_reason": "fails G1_sample_floor, G2_significance, G3_luck_bootstrap, G4_stability",
+   "id": "S03",
+   "market": "single",
+   "rule": "When the model's projected total sits more than 6 points away from the league-average total, take that side of the baseline and grade against the realised total.",
+   "why_it_might_work": "Pace drives totals with r=0.79 across teams, so a large projected deviation is the model's most defensible claim.",
+   "inputs": [
+    "pace",
+    "OffRtg/DefRtg",
+    "measured total dispersion"
+   ],
+   "rank": 4
+  },
+  {
+   "name": "Two-leg moneyline parlay, cross-game",
+   "n_graded": 0,
+   "wins": 0,
+   "losses": 0,
+   "hit_rate": null,
+   "roi_at_minus110": null,
+   "gates": {
+    "G1_sample_floor": {
+     "requirement": "n >= 100 graded bets",
+     "observed": 0,
+     "passed": false,
+     "shortfall": 100
+    },
+    "G2_significance": {
+     "requirement": "one-sided binomial p < 0.05 after Bonferroni correction",
+     "observed_wins": 0,
+     "observed_n": 0,
+     "hit_rate": null,
+     "hit_rate_95ci": [
+      null,
+      null
+     ],
+     "p_raw": null,
+     "p_bonferroni": null,
+     "breakeven_rate_at_minus110": 0.5238,
+     "passed": false
+    },
+    "G3_luck_bootstrap": {
+     "requirement": "5th percentile of bootstrap ROI > 0",
+     "draws": 10000,
+     "roi_at_minus110": null,
+     "roi_5th_percentile": null,
+     "passed": false
+    },
+    "G4_stability": {
+     "requirement": "profitable in both disjoint halves",
+     "first_half_hit_rate": null,
+     "second_half_hit_rate": null,
+     "passed": false
+    },
+    "G5_fragility": {
+     "requirement": "still profitable after removing the best 5% of bets",
+     "removed_bets": 0,
+     "roi_after_trim": null,
+     "passed": false
+    },
+    "G6_provenance": {
+     "requirement": "every driving input from an approved official host",
+     "approved_hosts": [
+      "www.nba.com",
+      "official.nba.com",
+      "ak-static.cms.nba.com"
+     ],
+     "passed": true,
+     "note": "Inputs are the NBA.com team ratings and official final scores; all pass."
+    }
+   },
+   "gates_passed": 1,
+   "gates_total": 6,
+   "failed_gates": [
+    "G1_sample_floor",
+    "G2_significance",
+    "G3_luck_bootstrap",
+    "G4_stability",
+    "G5_fragility"
+   ],
+   "status": "UNGRADED",
+   "blocking_reason": "No slate produced two picks at the required confidence with both games finished. Cross-game leg correlation is also unmeasured (correlations.json tier C), so the independence assumption behind the parlay price would itself be unverified.",
+   "id": "S04",
+   "market": "parlay",
+   "rule": "Combine the two highest-confidence moneyline picks on a slate.",
+   "why_it_might_work": "If leg win probabilities are informative, compounding two of them raises the payout faster than it raises the variance.",
+   "inputs": [
+    "originated win probability"
+   ],
+   "rank": 5
+  },
+  {
+   "name": "Player prop over, half-line",
+   "n_graded": 0,
+   "wins": 0,
+   "losses": 0,
+   "hit_rate": null,
+   "roi_at_minus110": null,
+   "gates": {
+    "G1_sample_floor": {
+     "requirement": "n >= 100 graded bets",
+     "observed": 0,
+     "passed": false,
+     "shortfall": 100
+    },
+    "G2_significance": {
+     "requirement": "one-sided binomial p < 0.05 after Bonferroni correction",
+     "observed_wins": 0,
+     "observed_n": 0,
+     "hit_rate": null,
+     "hit_rate_95ci": [
+      null,
+      null
+     ],
+     "p_raw": null,
+     "p_bonferroni": null,
+     "breakeven_rate_at_minus110": 0.5238,
+     "passed": false
+    },
+    "G3_luck_bootstrap": {
+     "requirement": "5th percentile of bootstrap ROI > 0",
+     "draws": 10000,
+     "roi_at_minus110": null,
+     "roi_5th_percentile": null,
+     "passed": false
+    },
+    "G4_stability": {
+     "requirement": "profitable in both disjoint halves",
+     "first_half_hit_rate": null,
+     "second_half_hit_rate": null,
+     "passed": false
+    },
+    "G5_fragility": {
+     "requirement": "still profitable after removing the best 5% of bets",
+     "removed_bets": 0,
+     "roi_after_trim": null,
+     "passed": false
+    },
+    "G6_provenance": {
+     "requirement": "every driving input from an approved official host",
+     "approved_hosts": [
+      "www.nba.com",
+      "official.nba.com",
+      "ak-static.cms.nba.com"
+     ],
+     "passed": true,
+     "note": "Inputs are the NBA.com team ratings and official final scores; all pass."
+    }
+   },
+   "gates_passed": 1,
+   "gates_total": 6,
+   "failed_gates": [
+    "G1_sample_floor",
+    "G2_significance",
+    "G3_luck_bootstrap",
+    "G4_stability",
+    "G5_fragility"
+   ],
+   "status": "UNGRADED",
+   "blocking_reason": "The per-game sigma used for props is a modelled estimate, not a measured distribution, and no finished prop outcomes were captured to grade against. Grading without real outcomes is impossible, so this stays ungraded.",
+   "id": "S05",
+   "market": "prop",
+   "rule": "Take the over on a player prop line set half a point below his season average, when the normal-approximation probability clears 0.55.",
+   "why_it_might_work": "Season-average anchoring with a half-line buffer avoids pushes, and the prop lines are derived from the same verified player table.",
+   "inputs": [
+    "player per-game points",
+    "player game-to-game sigma"
+   ],
+   "rank": 6
+  },
+  {
+   "name": "Same-game parlay: player points + team total",
+   "n_graded": 0,
+   "wins": 0,
+   "losses": 0,
+   "hit_rate": null,
+   "roi_at_minus110": null,
+   "gates": {
+    "G1_sample_floor": {
+     "requirement": "n >= 100 graded bets",
+     "observed": 0,
+     "passed": false,
+     "shortfall": 100
+    },
+    "G2_significance": {
+     "requirement": "one-sided binomial p < 0.05 after Bonferroni correction",
+     "observed_wins": 0,
+     "observed_n": 0,
+     "hit_rate": null,
+     "hit_rate_95ci": [
+      null,
+      null
+     ],
+     "p_raw": null,
+     "p_bonferroni": null,
+     "breakeven_rate_at_minus110": 0.5238,
+     "passed": false
+    },
+    "G3_luck_bootstrap": {
+     "requirement": "5th percentile of bootstrap ROI > 0",
+     "draws": 10000,
+     "roi_at_minus110": null,
+     "roi_5th_percentile": null,
+     "passed": false
+    },
+    "G4_stability": {
+     "requirement": "profitable in both disjoint halves",
+     "first_half_hit_rate": null,
+     "second_half_hit_rate": null,
+     "passed": false
+    },
+    "G5_fragility": {
+     "requirement": "still profitable after removing the best 5% of bets",
+     "removed_bets": 0,
+     "roi_after_trim": null,
+     "passed": false
+    },
+    "G6_provenance": {
+     "requirement": "every driving input from an approved official host",
+     "approved_hosts": [
+      "www.nba.com",
+      "official.nba.com",
+      "ak-static.cms.nba.com"
+     ],
+     "passed": true,
+     "note": "Inputs are the NBA.com team ratings and official final scores; all pass."
+    }
+   },
+   "gates_passed": 1,
+   "gates_total": 6,
+   "failed_gates": [
+    "G1_sample_floor",
+    "G2_significance",
+    "G3_luck_bootstrap",
+    "G4_stability",
+    "G5_fragility"
+   ],
+   "status": "UNGRADED",
+   "blocking_reason": "This is exactly the correlation that could not be measured (correlations.json tier C). Without the joint distribution, the parlay price is a guess, so the strategy cannot be validated — only asserted. Left ungraded deliberately.",
+   "id": "S06",
+   "market": "parlay",
+   "rule": "Pair a player-points over with the same game's total over.",
+   "why_it_might_work": "Both legs lean on pace, so the combination could be positively correlated in a way a book might under-price.",
+   "inputs": [
+    "player props",
+    "originated total"
+   ],
+   "rank": 7
+  },
+  {
+   "name": "Injury-fade total under",
+   "n_graded": 0,
+   "wins": 0,
+   "losses": 0,
+   "hit_rate": null,
+   "roi_at_minus110": null,
+   "gates": {
+    "G1_sample_floor": {
+     "requirement": "n >= 100 graded bets",
+     "observed": 0,
+     "passed": false,
+     "shortfall": 100
+    },
+    "G2_significance": {
+     "requirement": "one-sided binomial p < 0.05 after Bonferroni correction",
+     "observed_wins": 0,
+     "observed_n": 0,
+     "hit_rate": null,
+     "hit_rate_95ci": [
+      null,
+      null
+     ],
+     "p_raw": null,
+     "p_bonferroni": null,
+     "breakeven_rate_at_minus110": 0.5238,
+     "passed": false
+    },
+    "G3_luck_bootstrap": {
+     "requirement": "5th percentile of bootstrap ROI > 0",
+     "draws": 10000,
+     "roi_at_minus110": null,
+     "roi_5th_percentile": null,
+     "passed": false
+    },
+    "G4_stability": {
+     "requirement": "profitable in both disjoint halves",
+     "first_half_hit_rate": null,
+     "second_half_hit_rate": null,
+     "passed": false
+    },
+    "G5_fragility": {
+     "requirement": "still profitable after removing the best 5% of bets",
+     "removed_bets": 0,
+     "roi_after_trim": null,
+     "passed": false
+    },
+    "G6_provenance": {
+     "requirement": "every driving input from an approved official host",
+     "approved_hosts": [
+      "www.nba.com",
+      "official.nba.com",
+      "ak-static.cms.nba.com"
+     ],
+     "passed": true,
+     "note": "Inputs are the NBA.com team ratings and official final scores; all pass."
+    }
+   },
+   "gates_passed": 1,
+   "gates_total": 6,
+   "failed_gates": [
+    "G1_sample_floor",
+    "G2_significance",
+    "G3_luck_bootstrap",
+    "G4_stability",
+    "G5_fragility"
+   ],
+   "status": "UNGRADED",
+   "blocking_reason": "The first qualifying games (CLE@MIA, GSW@SAS on 11/13) have not been played. No outcome exists to grade.",
+   "id": "S07",
+   "market": "single",
+   "rule": "Take the under when a NEW absence removes at least 12 expected points from one side.",
+   "why_it_might_work": "A genuinely new absence is information the season-long ratings cannot contain, which is the one place the model can beat a rating-only baseline.",
+   "inputs": [
+    "official injury report",
+    "verified player minutes and points",
+    "absence classification"
+   ],
+   "rank": 8
+  }
+ ],
+ "gates_definition": {
+  "G1_sample_floor": "n >= 100 graded bets",
+  "G2_significance": "one-sided binomial p < 0.05, Bonferroni-corrected",
+  "G3_luck_bootstrap": "5th percentile of 10000-draw bootstrap ROI > 0",
+  "G4_stability": "profitable in both disjoint halves",
+  "G5_fragility": "profitable after removing the best 5% of bets",
+  "G6_provenance": "all driving inputs from approved official hosts",
+  "conjunction": "ALL gates must pass. There is no partial credit."
+ },
+ "what_would_unblock_each_strategy": [
+  {
+   "id": "S01/S02",
+   "need": "At least 100 completed games with pre-game ratings captured before tip-off, so no look-ahead bias."
+  },
+  {
+   "id": "S03",
+   "need": "Same, plus point-in-time totals so the deviation is not measured against the game it is predicting."
+  },
+  {
+   "id": "S04",
+   "need": "A licensed two-sided price to parlay against, and a measured cross-game correlation."
+  },
+  {
+   "id": "S05",
+   "need": "Per-game player logs to estimate sigma empirically, plus recorded prop outcomes."
+  },
+  {
+   "id": "S06",
+   "need": "The joint player-points/game-total distribution (correlations tier C)."
+  },
+  {
+   "id": "S07",
+   "need": "Outcomes for the 11/13 games plus a full injury report for each slate."
+  }
+ ]
+}

@@ -1,0 +1,122 @@
+{
+ "_meta": {
+  "title": "Open questions — what must be resolved before any betting decision",
+  "purpose": "Everything here is a question whose answer changes a decision. Each entry states what is known, what is missing, why it blocks, and how to obtain the missing information.",
+  "status_legend": {
+   "BLOCKING": "no decision can be made until answered",
+   "IMPORTANT": "materially changes sizing or selection",
+   "INFORMATIONAL": "affects presentation, not decisions"
+  },
+  "retrieved_utc": "2026-11-13"
+ },
+ "questions": [
+  {
+   "id": "Q01",
+   "priority": "BLOCKING",
+   "question": "What price can the bets actually be placed at?",
+   "known": "No sportsbook or exchange price was observable anywhere in this environment. Every ROI figure in this project assumes a standard -110 price.",
+   "missing": "A licensed two-sided price feed, or the account's actual available odds.",
+   "why_it_blocks": "An edge measured against an assumed price is not an edge. A strategy that returns +4% at -110 can be -3% at -105. Until real prices exist, no strategy can be validated, sized, or rewarded.",
+   "how_to_get": "Licensed odds API (e.g. a paid sportsbook feed) or a manual export of account odds. This is the single largest blocker in the project."
+  },
+  {
+   "id": "Q02",
+   "priority": "BLOCKING",
+   "question": "How many graded bets are needed, and how long will it take?",
+   "known": "The gate floor is 100 graded bets. The largest sample available here is 14 games.",
+   "missing": "A forward-tested sample. No amount of analysis on 14 games substitutes for it.",
+   "why_it_blocks": "Statistical gates cannot be met by re-analysis. The only route is passing time with logged pre-game predictions.",
+   "how_to_get": "Run the pipeline daily before tip-off, log every originated line and every pick, and grade them after the finals. At roughly 8 games a night and one pick per game, 100 graded bets is about two weeks."
+  },
+  {
+   "id": "Q03",
+   "priority": "BLOCKING",
+   "question": "Were the team ratings captured before or after the games being predicted?",
+   "known": "They were captured on 11/13 and therefore include the 11/11 and 11/12 games used in the backtest.",
+   "missing": "Point-in-time snapshots of every team's rating as of the morning of each game.",
+   "why_it_blocks": "The current backtest is look-ahead contaminated. Its 78.6% straight-up rate is inflated and cannot be presented as skill.",
+   "how_to_get": "Snapshot the team stats tables each morning into a dated file. This project already writes dated data files, so the change is to keep one per day."
+  },
+  {
+   "id": "Q04",
+   "priority": "IMPORTANT",
+   "question": "What is the real game-to-game dispersion of totals and margins?",
+   "known": "Measured from 14 games: total sd 17.13, margin sd 16.13, mean total 226.31.",
+   "missing": "A few hundred games, and ideally a per-team split, since fast teams have wider totals than slow ones.",
+   "why_it_blocks": "A 14-game standard deviation has enormous sampling error. Every probability in the model scales off it.",
+   "how_to_get": "Accumulate finals from official box scores. 200 games would give a usable estimate; the same logger that solves Q02 solves this."
+  },
+  {
+   "id": "Q05",
+   "priority": "IMPORTANT",
+   "question": "How much of a missing player's production actually leaves the team?",
+   "known": "The model assumes 55% transfers away, with a sensitivity band from 35% to 75%.",
+   "missing": "A measured value, ideally split by player archetype (creator, rim protector, shooter).",
+   "why_it_blocks": "On 11/13 the assumption alone moves GSW@SAS from 218.5 to 207.3 in total, and the spread from 13.3 to 24.5. That range is wider than any plausible edge.",
+   "how_to_get": "For players who missed games, compare team OffRtg in games with and without them, using official team game logs. Requires the per-game data the project cannot yet pull."
+  },
+  {
+   "id": "Q06",
+   "priority": "IMPORTANT",
+   "question": "What is the home-court advantage for this season?",
+   "known": "Net zero in the 14-game sample (mean home margin -0.14), which is pure noise at that size.",
+   "missing": "A season-level HCA estimate, and ideally a per-team one.",
+   "why_it_blocks": "The model applies no HCA at all. That systematically underprices every home team, which is a bias, not a neutral choice.",
+   "how_to_get": "Regress margin on a home indicator over several hundred games, using the same finals corpus."
+  },
+  {
+   "id": "Q07",
+   "priority": "IMPORTANT",
+   "question": "Do same-game parlay legs actually co-move, and by how much?",
+   "known": "Six candidate correlations were identified and left explicitly null (correlations.json tier C). Only cross-team season aggregates could be measured here.",
+   "missing": "A player game-log corpus joined to final scores.",
+   "why_it_blocks": "Without the joint distribution, any same-game parlay price is invented. Publishing one would be fabrication.",
+   "how_to_get": "Pull per-game player box scores for the season (NBA.com publishes them per player), join to finals, and compute the pairwise correlations directly."
+  },
+  {
+   "id": "Q08",
+   "priority": "IMPORTANT",
+   "question": "Which players on the injury report have already been out for a while?",
+   "known": "Ten players were verified individually. Eight players on the report have verified minutes; the remaining 78 report rows have no captured minutes at all.",
+   "missing": "Last-appearance dates and season minutes for the rest of the report.",
+   "why_it_blocks": "Treating a nine-game absence as new information double-counts it and produces a false signal. Getting this wrong in the other direction ignores genuine news.",
+   "how_to_get": "Systematically read the 'Last 5 Games' table on each player page, or use the official per-game logs."
+  },
+  {
+   "id": "Q09",
+   "priority": "IMPORTANT",
+   "question": "Why do several players appear on new teams this season?",
+   "known": "Jaylen Brown is listed under PHI, Trae Young under WAS, Darius Garland under LAC, Tyler Herro under MIL, Ty Jerome under MEM, Jaren Jackson Jr. under UTA.",
+   "missing": "Confirmation that these rosters are correct and current, rather than a data-extraction error on my side.",
+   "why_it_blocks": "If the extraction is wrong, every team-level player mapping inherits the error. If it is right, the roster churn explains a lot of the rating instability.",
+   "how_to_get": "Open each team roster page and confirm membership. Two rosters were checked here (ATL, OKC) for a different purpose and matched."
+  },
+  {
+   "id": "Q10",
+   "priority": "IMPORTANT",
+   "question": "Is the injury report complete for the slates beyond 11/13?",
+   "known": "At the 11/13 03:00 PM ET edition, 11/14 still read NOT YET SUBMITTED. 11/15 and 11/16 cannot have reports yet.",
+   "missing": "Later editions of the report.",
+   "why_it_blocks": "Picks for 11/14-11/16 are made without injury information, which is the single most informative pre-game input after the ratings.",
+   "how_to_get": "Re-read the official PDF index on the morning of each slate. The report refreshes every 15 minutes from 11 AM local."
+  },
+  {
+   "id": "Q11",
+   "priority": "INFORMATIONAL",
+   "question": "Should the NBA Cup games be treated differently?",
+   "known": "All nine games on 11/13 are Emirates NBA Cup group play.",
+   "missing": "Any evidence that Cup games differ in pace, effort, or rotation.",
+   "why_it_blocks": "It does not block, but if Cup games differ, pooling them with regular games biases the dispersion estimate.",
+   "how_to_get": "Compare scoring and pace in Cup vs non-Cup games once both samples exist."
+  },
+  {
+   "id": "Q12",
+   "priority": "INFORMATIONAL",
+   "question": "Are the rotation minutes for teams correct at 240 per game?",
+   "known": "240 is 5 players x 48 minutes, fixed by Rules 3 and 5.",
+   "missing": "Nothing on the rule side. What is missing is the actual distribution of those minutes across each roster.",
+   "why_it_blocks": "It does not block the current model, which redistributes proportionally. It would block any attempt to forecast individual player minutes.",
+   "how_to_get": "Official per-game box scores give every player's minutes directly."
+  }
+ ]
+}

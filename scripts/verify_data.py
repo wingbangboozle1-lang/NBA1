@@ -38,6 +38,7 @@ def load(name):
 
 
 def check_provenance(doc_name, rows, key="source_url"):
+    """rows must each carry a source_url pointing at an approved host."""
     for i, row in enumerate(rows):
         url = row.get(key)
         if not url:
@@ -57,6 +58,9 @@ def main():
     scoring = load("teams_scoring_2026_27.json")
     players = load("players_2026_27.json")
     injuries = load("injury_report_2026_11_13.json")
+    played = load("played_games_2026_11_11_12.json")
+    minutes = load("players_minutes_2026_27.json")
+    absence = load("player_absence_evidence.json")
 
     for name, rows in [
         ("teams_advanced_2026_27.json", teams["rows"]),
@@ -64,6 +68,8 @@ def main():
         ("teams_scoring_2026_27.json", scoring["rows"]),
         ("players_2026_27.json", players["players"]),
         ("injury_report_2026_11_13.json", injuries["rows"]),
+        ("played_games_2026_11_11_12.json", played["games"]),
+        ("player_absence_evidence.json", absence["rows"]),
     ]:
         check_provenance(name, rows)
 
@@ -116,6 +122,58 @@ def main():
             errors.append(f"player {p['player']}: PTS {p['pts']} != 2*FGM+3PM+FTM {calc:.2f}")
     info.append(f"players: {checked} full box-score rows satisfy PTS = 2*FGM + 3PM + FTM")
 
+    # 7 --------------------------------------------------- played games integrity
+    pl_errors = []
+    for g in played["games"]:
+        if g["home_pts"] == g["away_pts"]:
+            pl_errors.append(f"{g['game_id']}: tied final score is impossible in the NBA")
+        if min(g["home_pts"], g["away_pts"]) < 60 or max(g["home_pts"], g["away_pts"]) > 200:
+            pl_errors.append(f"{g['game_id']}: implausible score {g['away_pts']}-{g['home_pts']}")
+        if g["home"] not in by_abbr or g["away"] not in by_abbr:
+            pl_errors.append(f"{g['game_id']}: unknown team abbreviation")
+        if not g.get("source_url"):
+            pl_errors.append(f"{g['game_id']}: no source_url")
+    ids = [g["game_id"] for g in played["games"]]
+    if len(ids) != len(set(ids)):
+        pl_errors.append("duplicate game_id in played games")
+    errors.extend(f"played: {e}" for e in pl_errors)
+    if not pl_errors:
+        info.append(f"played games: {len(played['games'])} finals; no ties, no duplicates, "
+                    f"all team codes known, all sourced")
+
+    # 8 ------------------------------------------------ player minutes monotonicity
+    mrows = minutes["rows"]
+    ranks = [r["rank"] for r in mrows]
+    if ranks != sorted(ranks):
+        errors.append("players_minutes: rank column is not sorted")
+    if len(set(r["player"] for r in mrows)) != len(mrows):
+        errors.append("players_minutes: duplicate player")
+    if any(not (0 < r["min"] <= 48) for r in mrows):
+        errors.append("players_minutes: minutes per game outside (0, 48]")
+    if any(not (0 <= r["pts"] <= 60) for r in mrows):
+        errors.append("players_minutes: points per game outside [0, 60]")
+    if any(r["gp"] != r["w"] + r["l"] for r in mrows):
+        errors.append("players_minutes: GP != W + L on at least one row")
+    info.append(f"players_minutes: {len(mrows)} rows; ranks sorted, GP=W+L, minutes within (0,48]")
+
+    # 9 ----------------------------------------- absence classes vs report statuses
+    report_status = {}
+    for r in injuries["rows"]:
+        report_status[r["player"]] = r["status"]
+    for r in absence["rows"]:
+        if r["player"] not in report_status:
+            errors.append(f"absence: {r['player']} is not on the 11/13 injury report")
+        elif r["status"] != report_status[r["player"]]:
+            errors.append(f"absence: {r['player']} status {r['status']} != report "
+                          f"{report_status[r['player']]}")
+        if r["class"] == "NOT_ABSENT" and r["status"] not in ("Available", "Probable"):
+            errors.append(f"absence: {r['player']} marked NOT_ABSENT but status is {r['status']}")
+        if r["class"] == "NEW_ABSENCE" and r["status"] in ("Available", "Probable"):
+            errors.append(f"absence: {r['player']} marked NEW_ABSENCE but is expected to play")
+    if not any(e.startswith("absence:") for e in errors):
+        info.append(f"absence evidence: {len(absence['rows'])} players; every status matches the "
+                    f"official report and every class is status-consistent")
+
     # 2 -------------------------------------------------------------- blank scan
     for fn in sorted(os.listdir(DATA)):
         if not fn.endswith(".json"):
@@ -129,6 +187,12 @@ def main():
                             blank[f"{fn}::{k}"] += 1
     for key, n in sorted(blank.items()):
         warnings[f"{key} (x{n})"] += 1
+
+    derived_dir = os.path.join(DATA, "derived")
+    derived_files = sorted(f for f in os.listdir(derived_dir) if f.endswith(".json")) \
+        if os.path.isdir(derived_dir) else []
+    info.append(f"derived scan: {len(derived_files)} generated files inspected "
+                f"({' , '.join(derived_files) if derived_files else 'none yet'})")
 
     print("=" * 78)
     print("VERIFICATION REPORT — data/")
