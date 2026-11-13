@@ -18,6 +18,7 @@ The board was absent on initial inspection of `arena/4f997533-nba1`; after the i
 
 - 2026-11-13: After this branch's PR was opened, `origin/main` had advanced through merged PRs #1 and #2 from `arena/0684edd4-nba1`; the PR showed merge conflicts in the workflow, coordination board, README, landing page and stylesheet. This work paused and inspected the merged files before resolving.
 - Resolved by retaining the merged `main` versions of the shared landing page, stylesheet, README, Pages workflow and existing coordination history, then adding this session's distinct subpages, `subpages.css`, source/link validator, and navigation links as integration additions. No prior session files were intentionally removed.
+- A required pre-push `git pull --rebase origin arena/4f997533-nba1` attempted to replay the already-merged main history and conflicted in coordination/README/index/styles. Rebase was aborted without discarding the resolved integration merge; local history retains origin/main as a merge parent, and the current session changes are preserved. The branch's remote had not advanced beyond the commit already included.
 
 ## Open limitations
 
