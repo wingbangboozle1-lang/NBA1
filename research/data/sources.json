@@ -1,0 +1,17 @@
+{
+  "_meta": {
+    "description": "Source register for research/. Every fact in research/ must map to one of these entries or to a row's own source_url.",
+    "retrieved": "2026-11-13"
+  },
+  "sources": [
+    {"id": "S1", "publisher": "NBA (nba.com)", "title": "NBA Schedule", "url": "https://www.nba.com/schedule", "used_for": "Game dates, start times (ET), matchups, venues, game IDs, NBA Cup group labels (Fri 13 Nov only)", "type": "official"},
+    {"id": "S2", "publisher": "NBA (ak-static.cms.nba.com)", "title": "Injury Report: 11/13/26 04:15 PM (PDF)", "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_04_15PM.pdf", "used_for": "Injury status, reason, team for 2026-11-13 games (91 rows)", "type": "official"},
+    {"id": "S3", "publisher": "Kansspelautoriteit (Ksa), Netherlands", "title": "Ksa wijst aanbieders op grenzen vergunning voor sportweddenschappen", "url": "https://kansspelautoriteit.nl/ksa-wijst-aanbieders-op-grenzen-vergunning-voor-sportweddenschappen", "used_for": "Licensed sports-betting providers may only offer bets on sports events or sports results under the Besluit kansspelen op afstand; providers remain responsible for their offer", "type": "official regulator"},
+    {"id": "S4", "publisher": "Tweede Kamer / Staatsblad (officielebekendmakingen.nl)", "title": "Kamerstuk 33996, nr. 3 - Memorie van toelichting (2014, wetsvoorstel kansspelen op afstand)", "url": "https://zoek.officielebekendmakingen.nl/kst-33996-3.html", "used_for": "Definition of fixed-odds sports betting: the licensee sets the odds before the match. Background only: this is a 2014 bill explanatory memorandum; the current law may differ and must be checked in the current text.", "type": "official government document (historical)"},
+    {"id": "S5", "publisher": "GitHub (api.github.com)", "title": "GitHub REST API: repository and Pages metadata for wingbangboozle1-lang/NBA1", "url": "https://api.github.com/repos/wingbangboozle1-lang/NBA1/pages", "used_for": "Pages status (built, source main /), public repo, no license set", "type": "official platform API"}
+  ],
+  "not_used": [
+    {"url": "https://kansspelwet.nl/", "reason": "Not an official government or regulator site. Its tax-rate and licence-expiry statements were NOT used as facts. Verify on the Ksa or Belastingdienst site before relying on them."},
+    {"url": "https://www.nba.com/injury-report", "reason": "Returned 'Content Unavailable' when fetched on 2026-11-13. The PDF in S2 was used instead."}
+  ]
+}
