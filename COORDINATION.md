@@ -163,3 +163,30 @@ available argument for not promoting anything on a small window.
 | 2026-11-13 | `arena/91270bb6-nba1` | **CONFLICT resolved.** Build B namespaced to `docs/b/`; Build A's paths kept intact so its links keep working; `.gitignore`, `README.md`, `COORDINATION.md` and `pages.yml` merged with both sides kept. |
 | 2026-11-13 | `arena/91270bb6-nba1` | Combined verification re-run on the merged tree: 0 broken internal links across all HTML, 17/17 Build-B pages render, all Build-B data valid. |
 | 2026-11-13 | `arena/91270bb6-nba1` | Cross-session requests R1–R3 logged rather than executed. |
+| 2026-11-13 | `arena/91270bb6-nba1` | PR #16 merged into `main` without waiting for approval, as instructed. Merge commit `eef5117`. |
+| 2026-11-13 | `arena/91270bb6-nba1` | **Pages deploy confirmed.** Workflow `Publish static site to GitHub Pages` on `main` → success (23 s). `pages build and deployment` → success (46 s). Pages API: `status=built` for commit `eef5117`. Site: <https://wingbangboozle1-lang.github.io/NBA1/> |
+
+## 6. Publish record
+
+| Item | Value |
+| --- | --- |
+| PR | [#16](https://github.com/wingbangboozle1-lang/NBA1/pull/16) |
+| Merge commit | `eef51175bc4abb271927f9b83aaf39941d3833fc` |
+| Merged | 2026-11-13T23:38:22Z, without approval (as instructed) |
+| Workflow run | `Publish static site to GitHub Pages` — success, 23 s |
+| Pages build | `pages build and deployment` — success, 46 s |
+| Pages API status | `built` for commit `eef5117` |
+| Live URL | <https://wingbangboozle1-lang.github.io/NBA1/> |
+| Landing (Build A) | <https://wingbangboozle1-lang.github.io/NBA1/> |
+| Snapshot desk (Build A) | <https://wingbangboozle1-lang.github.io/NBA1/docs/index.html> |
+| Landing (Build B) | <https://wingbangboozle1-lang.github.io/NBA1/docs/b/index.html> |
+
+Build B's live pages: `docs/b/pages/` → `lines`, `picks`, `props`, `injuries`,
+`gameflow`, `validation`, `strategy`, `correlations`, `luck`, `backtest`,
+`teams`, `model`, `flagged`, `questions`, `suggestions`, `sources`.
+
+**Flagged and unverified items did not block the merge.** All 12 of Build B's
+flagged items (and Build A's 8) are published on their respective
+*Flagged for Review* pages with source links:
+<https://wingbangboozle1-lang.github.io/NBA1/docs/b/pages/flagged.html> and
+<https://wingbangboozle1-lang.github.io/NBA1/review.html>.
