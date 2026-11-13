@@ -56,3 +56,9 @@ See `data/flags.json`. Highlights:
 - F-03: 14 injury rows have no printed team, so they are excluded from the table.
 - F-04: 75 injury rows are text-extracted from a PDF. Spot-check against the PDF before relying on them.
 - F-05: 9 rows dated 11/14 are "NOT YET SUBMITTED" and are excluded.
+
+## Pull request
+
+- PR: https://github.com/wingbangboozle1-lang/NBA1/pull/5 (`arena/83ba89cf-nba1` → `main`)
+- Local verification before PR: `python3 scripts/build_site.py` → built 10 pages; games=23, injuries=75, flags=14; no build errors, no broken internal links.
+- Merge result and Pages deploy status: recorded on PR #5 (see its comments).
