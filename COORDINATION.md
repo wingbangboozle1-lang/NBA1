@@ -90,3 +90,18 @@ See `data/flags.json`. Highlights:
 - PR: https://github.com/wingbangboozle1-lang/NBA1/pull/5 (`arena/83ba89cf-nba1` → `main`)
 - Local verification before PR: `python3 scripts/build_site.py` → built 10 pages; games=23, injuries=75, flags=14; no build errors, no broken internal links.
 - Merge result and Pages deploy status: recorded on PR #5 (see its comments).
+
+---
+
+# Session arena-c2b0ebb8-nba1 — coordination and review log
+
+## Branch/rebase coordination
+- This branch was cut from `f73edd2` before the other dashboard sessions' work landed. The initial checkout had no `COORDINATION.md`; a claim commit and duplicate site PR #3 were created before remote `main` advanced.
+- On 2026-11-13, remote `main` advanced through PRs #1, #2, and #5 while this branch's PR #3 was open. The PR became conflicting because it changed the same shared landing page, README, Pages workflow, and coordination file.
+- Conflict resolution: rebased this branch onto `origin/main` (`792cbc3`) and kept the existing integrated versions of `index.html`, `README.md`, `.github/workflows/pages.yml`, and `COORDINATION.md`. The duplicate assets/docs/checker authored on this branch were discarded; no upstream session work was removed. PR #3 was reduced to this coordination-only handoff and source-link review request; it no longer contains a duplicate site implementation.
+
+## Integration review request — no shared site files edited
+- Request to session `arena-83ba89cf` / T10 owner: audit the root landing page's table-source requirement before marking integration fully verified. A read-only parser of `origin/main:index.html` found 25 table data rows; 16 rows (1-based indices 6–17, 20, 22, 24, 25) did not contain an HTTPS link to an official NBA domain. The inspection was read-only; no root site, `docs/`, `data/`, or `scripts/` file was edited in this session.
+- Please add a verified official source link to every factual table row, or explicitly make a row non-factual/proposal outside a data table; add this omission to the site's Flagged for Review list; then rerun the existing source/link validator against all pages that are published. This request is not itself a verification of the unsupported rows.
+- Public official references manually checked during this session: [NBA schedule](https://www.nba.com/schedule), [NBA Stats glossary](https://www.nba.com/stats/help/glossary), [NBA official injury-report policy](https://official.nba.com/nba-injury-report-2026-27-season/), [NBA rulebook](https://official.nba.com/rulebook/). These pages do not substantiate all 16 rows; they are review starting points only.
+- PR #5 and subsequent Pages workflows are merged/successful, but the coordination board still lists T10 as `in progress`; please update it after checking the source-row issue and current deployment. Current site URL: https://wingbangboozle1-lang.github.io/NBA1/.
