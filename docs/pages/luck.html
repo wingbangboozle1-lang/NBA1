@@ -92,11 +92,11 @@ z            = luck ÷ √(games × pythag × (1 − pythag))</div>
       {key:"netr", label:"Net rtg", num:true, signed:true, d:1},
       {key:"ortg", label:"Off rtg", num:true, d:1, cls:"muted"},
       {key:"drtg", label:"Def rtg", num:true, d:1, cls:"muted"},
-      {key:"pyth_win_pct", label:"Pythag", num:true, d:3, cls:"muted"},
-      {key:"expected_wins", label:"Exp W", num:true, d:2, cls:"muted"},
-      {key:"actual_wins", label:"Act W", num:true, d:0},
-      {key:"luck_wins", label:"Luck (W)", num:true, signed:true, d:2},
-      {key:"luck_z", label:"z", fmt: v => `${signed(v,2)}${bar(Math.min(100, Math.abs(v)/2.5*100), v>0?"good":"bad")}`},
+      {key:"pyth_win_pct", label:"Pythag", num:true, d:3, cls:"muted", prov:"derived"},
+      {key:"expected_wins", label:"Exp W", num:true, d:2, cls:"muted", prov:"derived"},
+      {key:"actual_wins", label:"Act W", num:true, d:0, prov:"official"},
+      {key:"luck_wins", label:"Luck (W)", num:true, signed:true, d:2, prov:"derived"},
+      {key:"luck_z", label:"z", prov:"derived", fmt: v => `${signed(v,2)}${bar(Math.min(100, Math.abs(v)/2.5*100), v>0?"good":"bad")}`},
       {key:"src", label:"Src", src:true},
     ];
     setHTML("#tbl", table(cols, rs, {thin:true}));

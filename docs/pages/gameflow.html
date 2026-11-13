@@ -85,12 +85,12 @@
       {key:"away_rest_days", label:"Away rest", num:true, d:0, cls:"muted"},
       {key:"possessions", label:"Poss", num:true, d:1},
       {key:"pace_vs_league", label:"Pace vs Lg", num:true, signed:true, d:1},
-      {key:"expected_total", label:"Exp total", num:true, d:1},
-      {key:"expected_margin_home", label:"Exp margin (home)", num:true, signed:true, d:1},
-      {key:"p_home_win", label:"P(home)", fmt: v => pct(v) + bar(v*100, v>0.5?"good":"bad")},
-      {key:"p_margin_within_5", label:"P(within 5)", fmt: v => pct(v)},
-      {key:"p_margin_20plus", label:"P(20+)", fmt: v => pct(v)},
-      {key:"p_overtime_approx", label:"P(OT)", fmt: v => pct(v,2)},
+      {key:"expected_total", label:"Exp total", num:true, d:1, prov:"derived"},
+      {key:"expected_margin_home", label:"Exp margin (home)", num:true, signed:true, d:1, prov:"derived"},
+      {key:"p_home_win", label:"P(home)", fmt: v => pct(v) + bar(v*100, v>0.5?"good":"bad"), prov:"derived"},
+      {key:"p_margin_within_5", label:"P(within 5)", fmt: v => pct(v), prov:"derived"},
+      {key:"p_margin_20plus", label:"P(20+)", fmt: v => pct(v), prov:"derived"},
+      {key:"p_overtime_approx", label:"P(OT)", fmt: v => pct(v,2), prov:"derived"},
       {key:"src", label:"Src", src:true},
     ];
     setHTML("#tbl", table(cols, rs, {thin:true}));

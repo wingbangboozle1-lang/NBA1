@@ -99,9 +99,10 @@ function table(cols, rows, opts = {}) {
   if (!rows.length) {
     return `<div class="empty">${esc(opts.empty || "No rows match the current filter.")}</div>`;
   }
-  const head = "<thead><tr>" + cols.map((c) =>
-    `<th class="${c.num ? "num" : ""}" ${c.width ? `style="width:${c.width}"` : ""}>${esc(c.label)}</th>`
-  ).join("") + "</tr></thead>";
+  const head = "<thead><tr>" + cols.map((c) => {
+    const chip = c.prov ? " " + prov(c.prov, PROV_SHORT[c.prov]) : "";
+    return `<th class="${c.num ? "num" : ""}" ${c.width ? `style="width:${c.width}"` : ""}>${esc(c.label)}${chip}</th>`;
+  }).join("") + "</tr></thead>";
   const body = "<tbody>" + rows.map((r) => "<tr>" + cols.map((c) => {
     const v = r[c.key];
     let html;
@@ -158,6 +159,8 @@ function el(html) {
   d.innerHTML = html.trim();
   return d.firstElementChild;
 }
+
+const PROV_SHORT = { official: "OFF", derived: "DER", assumption: "ASSUM", unverified: "UNVER" };
 
 function gateBadge(status) {
   const map = { PASS: "pass", FAIL: "fail", PROVISIONAL: "prov", "N/A": "na", "NOT RUN": "na" };

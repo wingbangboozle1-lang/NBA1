@@ -372,6 +372,7 @@ def main():
                     "season_min": d["season_min"],
                     "minutes_share": d["minutes_share"],
                     "weighted_share": d["weighted_share"],
+                    "team_listed": rep["listed"],
                     "team_weighted_lost_share": rep["weighted_lost_share"],
                     "team_impact_net_rating": rep["impact_net_rating"],
                     "impact_sensitivity": rep["impact_sensitivity"],

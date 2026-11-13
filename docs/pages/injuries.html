@@ -110,12 +110,12 @@ impact (net rating points per 100) = 15.0 × weighted minutes at risk</div>
       {key:"date", label:"Date", cls:"date"},
       {key:"matchup", label:"Game", cls:"lbl"},
       {key:"team", label:"Team", cls:"lbl"},
-      {key:"listed", label:"Listed", num:true, d:0, cls:"muted"},
-      {key:"team_weighted_lost_share", label:"Min at risk",
+      {key:"team_listed", label:"Listed", num:true, d:0, cls:"muted"},
+      {key:"team_weighted_lost_share", label:"Min at risk", prov:"assumption",
         fmt: v => v === null || v === undefined
           ? '<span class="blank" title="No entry in this edition">n/a</span>'
           : `<span class="num ${v>=0.15?"neg":v>0?"muted":"muted"}">${(v*100).toFixed(1)}%</span>`},
-      {key:"team_impact_net_rating", label:"Impact (net rtg)",
+      {key:"team_impact_net_rating", label:"Impact (net rtg)", prov:"assumption",
         fmt: v => v === null || v === undefined
           ? '<span class="blank" title="No entry in this edition">n/a</span>'
           : `<span class="num ${v>0?"neg":"muted"}">${(-v).toFixed(2)}</span>`},
@@ -131,7 +131,8 @@ impact (net rating points per 100) = 15.0 × weighted minutes at risk</div>
       {key:"confidence", label:"Confidence", fmt: v => {
         if (!v) return "";
         const k = v.startsWith("HIGH") ? "pass" : v.startsWith("MEDIUM") ? "prov" : v.startsWith("LOW") ? "prov" : "na";
-        return badge(v.split(" - ")[0], k) + (v.includes(" - ") ? `<div class="small faint">${esc(v.split(" - ")[1])}</div>` : "");
+        const parts = v.split(" - ");
+        return badge(parts[0], k) + (parts.length > 1 ? `<div class="small faint">${esc(parts.slice(1).join(" - "))}</div>` : "");
       }},
       {key:"src", label:"Src", src:true},
     ];
