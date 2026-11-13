@@ -166,6 +166,20 @@ never filled in. Season 2026-27.
 """
 
 
+def table_row_count():
+    """Count data rows across the generated pages, so the prose cannot drift from the artefact."""
+    total = 0
+    for base, _, files in os.walk(DOCS):
+        for f in files:
+            if not f.endswith(".html"):
+                continue
+            with open(os.path.join(base, f), encoding="utf-8") as fh:
+                txt = fh.read()
+            for tb in re.findall(r"<tbody>(.*?)</tbody>", txt, re.S):
+                total += len(re.findall(r"<tr>", tb))
+    return total
+
+
 def card(k, v, s="", cls=""):
     return (f'<div class="card {cls}"><div class="k">{E(k)}</div>'
             f'<div class="v">{v}</div><div class="s">{E(s)}</div></div>')
@@ -224,7 +238,7 @@ result is that <b>no strategy is validated yet</b>, and the pages explain exactl
 would change that.</p>
 
 <div class="grid">
-{card("Games covered", "31", "11/13 &ndash; 11/16")}
+{card("Games covered", "31", "11/13 to 11/16")}
 {card("Game lines originated", len(lines["games"]), "totals, spreads, moneylines")}
 {card("Player prop lines", len(lines["props"]), "half-lines, no pushes")}
 {card("Strategies validated", f"{len(validated)} of {len(strat['leaderboard'])}", "six gates, no partial credit", "bad" if not validated else "good")}
@@ -397,7 +411,7 @@ model. Passing them off as selections would ignore every gate on the
 they are.</div>
 
 <div class="grid">
-{card("Slates covered", "4", "11/13 &ndash; 11/16")}
+{card("Slates covered", "4", "11/13 to 11/16")}
 {card("Games", len(lines["games"]), "all sourced")}
 {card("With real injury data", str(sum(1 for g in lines['games'] if g['date']=='2026-11-13')), "11/13 only", "warn")}
 {card("Injury-adjusted picks", str(len(moved)), "see injuries page", "warn")}
@@ -523,7 +537,7 @@ A strategy that only works because one 40-point underdog landed fails here.</p>
 {str(E(strat['_meta']['gates_are_not_all_equally_strong']))}</div>
 
 <h2>Why the gates were not loosened</h2>
-<p>Once the null control started passing four of six gates, the tempting move was to relax G3&ndash;G5 so
+<p>Once the null control started passing three of six gates, the tempting move was to relax G3&ndash;G5 so
 the real strategies would look better. That is backwards: the control revealed that those gates are
 <i>already</i> too permissive at small n, so loosening them further would convert noise into a
 leaderboard. They were left exactly as they were, and G1 was left first in the chain.</p>
@@ -844,7 +858,7 @@ of 100, those 14 games are look-ahead contaminated, and no real betting price wa
 against.</div>
 
 <div class="grid">
-{card("Games covered", "31", "11/13 &ndash; 11/16")}
+{card("Games covered", "31", "11/13 to 11/16")}
 {card("Lines originated", len(lines["games"]), "totals, spreads, moneylines")}
 {card("Prop lines", len(lines["props"]), "half-lines")}
 {card("Strategies validated", f"{len(validated)} of {len(strat['leaderboard'])}", "six conjoined gates", "bad")}
@@ -858,14 +872,14 @@ against.</div>
 checks pass with zero errors: provenance hosts, schedule W-L reconciliation, pace against possessions, ratings
 against scoring, the scoring identity, played-game integrity, minutes monotonicity and absence-class
 consistency.</li>
-<li><b>Dispersion is measured, not assumed.</b> Total standard deviation {disp['total_sd']} and margin standard
-deviation {disp['margin_sd']} points, taken from real finals. An earlier version guessed these and produced
+<li><b>Dispersion is measured, not assumed.</b> Total standard deviation {disp['total_sd']:.1f} and margin standard
+deviation {disp['margin_sd']:.1f} points, taken from real finals. An earlier version guessed these and produced
 30-point spreads and 99.9% win probabilities.</li>
 <li><b>Ten team-level correlations are measured</b> with p-values, led by pace against game total (r=0.792) and
 eFG% against offensive rating (r=0.819).</li>
 <li><b>The injury logic avoids the classic double-count.</b> Season ratings already exclude games a player
 missed, so only genuinely new absences move a line. This was measured per player, not assumed.</li>
-<li><b>The site is fully generated from the data</b>, with 486 table rows and a source link on every one.</li>
+<li><b>The site is fully generated from the data</b>, with a source link on every one of its {table_row_count()} table rows.</li>
 </ul>
 
 <h2>What is not solid</h2>
@@ -878,9 +892,10 @@ predict, so the 78.6% straight-up rate is inflated. It is labelled, not hidden, 
 9 verified players out of 88 report rows.</li>
 <li><b>Six parlay and prop correlations are unmeasured</b> and left null. Any same-game parlay price would
 therefore be an assertion, so none is published.</li>
-<li><b>The gates are weak at this sample size.</b> A coin-flip control passes four of six. That is documented
+<li><b>The gates are weak at this sample size.</b> A coin-flip control passes three of six. That is documented
 rather than exploited.</li>
-<li><b>Three absences among nine verified players are genuinely new</b> (Mobley, Curry), and the assumption
+<li><b>{len(new_abs)} absences among {len(absence["rows"])} verified players are genuinely new</b>
+({", ".join(p["player"] for p in new_abs)}), and the assumption
 governing their impact spans 11 points of total &mdash; wider than any plausible edge.</li>
 </ul>
 
@@ -1049,7 +1064,7 @@ a daily pre-tip-off snapshot.</p>
         ["No price source", "No sportsbook or exchange quote was reachable from this environment.",
          "Every ROI on the site assumes &minus;110. No edge can be called real until a price is observed.",
          '<span class="chip bad">blocking</span>', src("https://www.nba.com/games")],
-        ["Weak gates at small n", "The coin-flip null control passes 4 of the 6 validation gates.",
+        ["Weak gates at small n", "The coin-flip null control passes 3 of the 6 validation gates.",
          "Documented on the gates page. The gates were not loosened; G1 remains first in the chain.",
          '<span class="chip warn">known limitation</span>', '<a href="gates.html">gates page</a>'],
         ["Unverified player minutes", "79 of the 88 injury-report rows have no captured minutes or points.",
