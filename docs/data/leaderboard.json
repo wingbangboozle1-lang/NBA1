@@ -9,122 +9,122 @@
  "formula": "LBS = 100 x (0.20*sample + 0.25*edge + 0.15*calibration + 0.25*result + 0.15*gates)",
  "rows": [
   {
-   "id": "S2",
-   "name": "Total edge vs reference",
-   "family": "Single bet",
-   "components": {
-    "sample": 0.4,
-    "edge": 1.0,
-    "calibration": 0.902,
-    "result": 1.0,
-    "gates": 0.5
-   },
-   "lbs": 79.0,
-   "tier": "Tier 3 - Quarter unit",
-   "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
-   "n_graded": 12,
-   "record": "8-4",
-   "units": 3.273,
-   "status": "GRADED",
-   "rank": 1
-  },
-  {
    "id": "S1",
    "name": "Side edge vs reference",
    "family": "Single bet",
    "components": {
-    "sample": 0.2,
+    "sample": 0.767,
     "edge": 1.0,
-    "calibration": 0.621,
+    "calibration": 0.567,
     "result": 1.0,
-    "gates": 0.4
+    "gates": 0.5
    },
-   "lbs": 69.3,
+   "lbs": 81.3,
    "tier": "Tier 3 - Quarter unit",
    "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
-   "n_graded": 6,
-   "record": "4-2",
-   "units": 1.636,
+   "n_graded": 23,
+   "record": "16-7",
+   "units": 7.545,
    "status": "GRADED",
-   "rank": 2
+   "rank": 1
   },
   {
    "id": "S5",
    "name": "Back-to-back fade",
    "family": "Single bet",
    "components": {
-    "sample": 0.1,
+    "sample": 0.4,
     "edge": 1.0,
-    "calibration": 0.479,
+    "calibration": 0.807,
     "result": 1.0,
-    "gates": 0.4
+    "gates": 0.5
    },
-   "lbs": 65.2,
+   "lbs": 77.6,
    "tier": "Tier 3 - Quarter unit",
    "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
-   "n_graded": 3,
-   "record": "2-1",
-   "units": 0.818,
+   "n_graded": 12,
+   "record": "8-4",
+   "units": 3.273,
    "status": "GRADED",
-   "rank": 3
-  },
-  {
-   "id": "S10",
-   "name": "Same-game parlay (side + total)",
-   "family": "Parlay / SGP",
-   "components": {
-    "sample": 0.1,
-    "edge": 0.0,
-    "calibration": 0.0,
-    "result": 1.0,
-    "gates": 0.167
-   },
-   "lbs": 29.5,
-   "tier": "Tier 3 - Quarter unit",
-   "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
-   "n_graded": 3,
-   "record": "2-1",
-   "units": 1.922,
-   "status": "GRADED",
-   "rank": 4
-  },
-  {
-   "id": "S9",
-   "name": "Two-leg cross-game parlay",
-   "family": "Parlay",
-   "components": {
-    "sample": 0.133,
-    "edge": 0.0,
-    "calibration": 0.932,
-    "result": 0.0,
-    "gates": 0.333
-   },
-   "lbs": 21.6,
-   "tier": "Tier 3 - Quarter unit",
-   "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
-   "n_graded": 4,
-   "record": "2-2",
-   "units": 0.013,
-   "status": "GRADED",
-   "rank": 5
+   "rank": 2
   },
   {
    "id": "S3",
    "name": "Moneyline value",
    "family": "Single bet",
    "components": {
-    "sample": 0.067,
-    "edge": 0.0,
-    "calibration": 0.212,
+    "sample": 0.467,
+    "edge": 0.693,
+    "calibration": 0.631,
     "result": 0.0,
-    "gates": 0.0
+    "gates": 0.5
    },
-   "lbs": 4.5,
+   "lbs": 43.6,
    "tier": "Tier 3 - Quarter unit",
    "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
-   "n_graded": 2,
-   "record": "1-1",
-   "units": -0.091,
+   "n_graded": 14,
+   "record": "7-7",
+   "units": -0.636,
+   "status": "GRADED",
+   "rank": 3
+  },
+  {
+   "id": "S2",
+   "name": "Total edge vs reference",
+   "family": "Single bet",
+   "components": {
+    "sample": 0.333,
+    "edge": 1.0,
+    "calibration": 0.0,
+    "result": 0.0,
+    "gates": 0.3
+   },
+   "lbs": 36.2,
+   "tier": "Tier 3 - Quarter unit",
+   "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
+   "n_graded": 10,
+   "record": "5-5",
+   "units": -0.455,
+   "status": "GRADED",
+   "rank": 4
+  },
+  {
+   "id": "S10",
+   "name": "Same-game parlay (side + total)",
+   "family": "Parlay / SGP",
+   "components": {
+    "sample": 0.633,
+    "edge": 0.0,
+    "calibration": 0.637,
+    "result": 0.0,
+    "gates": 0.417
+   },
+   "lbs": 28.5,
+   "tier": "Tier 3 - Quarter unit",
+   "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
+   "n_graded": 19,
+   "record": "8-11",
+   "units": 2.919,
+   "status": "GRADED",
+   "rank": 5
+  },
+  {
+   "id": "S9",
+   "name": "Two-leg cross-game parlay",
+   "family": "Parlay",
+   "components": {
+    "sample": 0.233,
+    "edge": 0.0,
+    "calibration": 0.806,
+    "result": 0.0,
+    "gates": 0.333
+   },
+   "lbs": 21.8,
+   "tier": "Tier 3 - Quarter unit",
+   "tier_note": "Directional evidence only; stake capped until the sample grows. - capped by G4 (skill, not luck) failed.",
+   "n_graded": 7,
+   "record": "3-4",
+   "units": -0.147,
    "status": "GRADED",
    "rank": 6
   },

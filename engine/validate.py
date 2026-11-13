@@ -19,7 +19,7 @@ from common import (bootstrap_ci, mean, norm_cdf, pearson, rnd, stdev,
 from model_core import (ASSUMPTIONS, RatingTable, base_line, model_line,
                         reference_line, cover_probability, total_probability)
 
-HOLDOUT_START = "2026-11-09"
+HOLDOUT_START = "2026-11-06"
 HOLDOUT_END = "2026-11-12"
 BREAKEVEN = 0.5238095238095238   # -110: 110/210
 
@@ -180,7 +180,7 @@ def run(train_block, season_block, completed, train_src, season_src):
             "game": g, "base": base, "ref": ref,
             "home_b2b": hb, "away_b2b": ab,
             "home_rest_days": hrest, "away_rest_days": arest,
-            "rest_known": known,
+            "rest_known": known, "neutral": int(g.get("neutral") or 0),
             "actual_margin": actual_margin,
             "actual_total": actual_total,
             "resid_margin": actual_margin - base["margin"],
@@ -188,7 +188,9 @@ def run(train_block, season_block, completed, train_src, season_src):
         })
 
     # ---- fit HCA and the B2B penalty on the holdout residuals (disclosed in-sample)
-    X = [[1.0, float(r["home_b2b"] - r["away_b2b"])] for r in rows]
+    # HCA is not applied at a neutral site, so the intercept is dropped for those rows
+    X = [[1.0 if not r["neutral"] else 0.0, float(r["home_b2b"] - r["away_b2b"])]
+         for r in rows]
     y = [r["resid_margin"] for r in rows]
     b, se, t, resid, s2, dof = ols(X, y)
     hca, hca_se, hca_t = b[0], se[0], t[0]
@@ -223,6 +225,11 @@ def run(train_block, season_block, completed, train_src, season_src):
                                 shrink_k=k)
         r["model"]["total"] += params["total_bias"] + \
             params["total_b2b_coef"] * (r["home_b2b"] + r["away_b2b"])
+        if r["neutral"]:
+            r["model"]["margin"] -= params["hca"]      # no home edge at a neutral site
+            r["hca_applied"] = 0.0
+        else:
+            r["hca_applied"] = params["hca"]
         r["model_total_final"] = r["model"]["total"]
         r["model_margin_final"] = r["model"]["margin"]
         r["err_margin_model"] = r["actual_margin"] - r["model_margin_final"]
@@ -269,7 +276,7 @@ def run(train_block, season_block, completed, train_src, season_src):
     for r in rows:
         ml = model_line(train, r["game"]["home"], r["game"]["away"], params0,
                         home_b2b=r["home_b2b"], away_b2b=r["away_b2b"], shrink_k=k)
-        em0.append(r["actual_margin"] - ml["margin"])
+        em0.append(r["actual_margin"] - (0.0 if r["neutral"] else ml["margin"]))
 
     metrics = {
         "n_games": len(rows),
@@ -312,7 +319,7 @@ def run(train_block, season_block, completed, train_src, season_src):
             hb, ab = rest_flags(g, last_played)[:2]
             b = base_line(train, g["home"], g["away"], shrink_k=(kk or None))
             bases.append((b, hb, ab))
-            Xs.append([1.0, float(hb - ab)])
+            Xs.append([1.0 if not g.get("neutral") else 0.0, float(hb - ab)])
             ys.append((g["home_pts"] - g["away_pts"]) - b["margin"])
         bk, sek, tk_, residk, s2k, dofk = ols(Xs, ys)
         hca_k = bk[0]
@@ -320,7 +327,7 @@ def run(train_block, season_block, completed, train_src, season_src):
         sig_k = math.sqrt(s2k)
         errs, brier_k = [], 0.0
         for (b, hb, ab), g in zip(bases, holdout):
-            pred = b["margin"] + hca_k - b2b_k * (hb - ab)
+            pred = b["margin"] + (0.0 if g.get("neutral") else hca_k) - b2b_k * (hb - ab)
             am = g["home_pts"] - g["away_pts"]
             errs.append(am - pred)
             brier_k += (norm_cdf(pred / sig_k) - (1 if am > 0 else 0)) ** 2
@@ -352,9 +359,11 @@ def run(train_block, season_block, completed, train_src, season_src):
                                          "set to 0 unless |t| >= 1"},
         "b2b_detected_home": sum(r["home_b2b"] for r in rows),
         "b2b_detected_away": sum(r["away_b2b"] for r in rows),
+        "neutral_site_games": sum(r["neutral"] for r in rows),
         "b2b_caveat": "A back-to-back is only flagged when the previous day's game is present "
-                      "in the captured results. Games on 2026-11-06 and 2026-11-07 were not "
-                      "captured, so back-to-backs running into 2026-11-09 are under-counted.",
+                      "in the captured results. Results now run from 2026-11-06, so "
+                      "back-to-backs running into 2026-11-09 and later are fully detected; "
+                      "back-to-backs running into 2026-11-06 itself are not.",
     }
 
     return {

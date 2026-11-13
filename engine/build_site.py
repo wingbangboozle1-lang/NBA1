@@ -124,7 +124,7 @@ def p_index(meta, ex):
       <div class="card"><h4>Upcoming games</h4><div class="kpi">{counts['upcoming_games']}</div>
         <div class="kpi-sub">2026-11-13 through 2026-11-15</div></div>
       <div class="card"><h4>Out-of-sample games</h4><div class="kpi">{counts['out_of_sample_games']}</div>
-        <div class="kpi-sub">2026-11-09 to 2026-11-12, ratings from 11-05 or earlier</div></div>
+        <div class="kpi-sub">2026-11-06 to 2026-11-12, ratings from 11-05 or earlier</div></div>
       <div class="card"><h4>Official sources</h4><div class="kpi">{n_sources}</div>
         <div class="kpi-sub">nba.com, official.nba.com, league injury PDFs</div></div>
     </div>"""
@@ -419,8 +419,9 @@ def p_validation():
 
   <div class="banner info">
     <div class="ico">i</div>
-    <div><p><strong>Information discipline.</strong> The test window is 2026-11-09 to 2026-11-12
-    (28 games). Ratings come only from 2026-10-20 to 2026-11-05, so no test game contributes to
+    <div><p><strong>Information discipline.</strong> The test window is 2026-11-06 to 2026-11-12
+    (51 games — every completed game captured, and all of them after the ratings cut-off).
+    Ratings come only from 2026-10-20 to 2026-11-05, so no test game contributes to
     the ratings that predict it. Two parameters — home court and the back-to-back penalty — are
     fitted <em>on the test window</em>; that is disclosed on every row they touch, and a
     zeroed-parameter variant is published below so you can see how much they matter.</p></div>
@@ -570,14 +571,17 @@ z            = luck ÷ √(games × pythag × (1 − pythag))</div>
 def p_backtest():
     return f"""
   <h1>Out-of-Sample Game Log</h1>
-  <p class="lede">All 28 games in the test window, with the actual official final score next to both
+  <p class="lede">All 51 games in the test window, with the actual official final score next to both
   the reference forecast and the model forecast.</p>
 
   <div class="banner info">
     <div class="ico">i</div>
     <div><p><strong>Ratings window.</strong> Every forecast on this page was produced from team
     ratings computed on 2026-10-20 to 2026-11-05 only. No game on this page contributed to those
-    ratings. The final scores are official.</p></div>
+    ratings. The final scores are official. One game — Denver 114, Indiana 102 on 2026-11-07 —
+    was the NBA Mexico City Game, labelled "Neutral Site" by the official page; home-court
+    advantage is set to zero for it in both the forecast and the HCA regression
+    (<a href="flagged.html">F12</a>).</p></div>
   </div>
 
   <div class="toolbar">
@@ -1390,6 +1394,7 @@ SCRIPTS = {
       {key:"away_pts", label:"Away", num:true, d:0, cls:"muted"},
       {key:"home_pts", label:"Home", num:true, d:0, cls:"muted"},
       {key:"ot", label:"OT", num:true, d:0, cls:"muted"},
+      {key:"neutral", label:"Neutral", fmt: v => v ? badge("neutral site","prov") : ""},
       {key:"actual_margin_home", label:"Act margin", num:true, signed:true, d:0, cls:"strong"},
       {key:"ref_spread_home", label:"Ref", num:true, signed:true, d:1, cls:"muted"},
       {key:"model_spread_home", label:"Model", num:true, signed:true, d:1, cls:"muted"},

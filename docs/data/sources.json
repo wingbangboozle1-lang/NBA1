@@ -14,6 +14,18 @@
    "publisher": "NBA.com (official)",
    "used_for": "Training-window team ratings for the out-of-sample test (no game after 2026-11-05 contributes to these numbers)."
   },
+  "S3_2026-11-06": {
+   "title": "NBA.com Games & Scores - November 6, 2026",
+   "url": "https://www.nba.com/games?date=2026-11-06",
+   "publisher": "NBA.com (official)",
+   "used_for": "Final scores (out-of-sample test games); also rest flags for 2026-11-07."
+  },
+  "S3_2026-11-07": {
+   "title": "NBA.com Games & Scores - November 7, 2026",
+   "url": "https://www.nba.com/games?date=2026-11-07",
+   "publisher": "NBA.com (official)",
+   "used_for": "Final scores (out-of-sample test games); also rest flags for 2026-11-08. Includes the NBA Mexico City Game (DEN vs IND) played at a neutral site."
+  },
   "S3_2026-11-08": {
    "title": "NBA.com Games & Scores - November 8, 2026",
    "url": "https://www.nba.com/games?date=2026-11-08",
@@ -67,6 +79,12 @@
    "url": "https://www.nba.com/stats/players/traditional",
    "publisher": "NBA.com (official)",
    "used_for": "Per-game player averages (page 1 of 10 = top 50 scorers). Player-prop baselines only; no player outside this page is modelled."
+  },
+  "S9": {
+   "title": "NBA.com Standings",
+   "url": "https://www.nba.com/standings",
+   "publisher": "NBA.com (official)",
+   "used_for": "CONSULTED BUT NOT USABLE: the standings table is rendered client-side and does not appear in the page source available to a plain HTTP fetch (only the tie-break procedure text is present). Won-lost records were therefore taken from S1 and the S8 game pages instead. See Flagged for Review F1."
   },
   "S8_0022600034": {
    "title": "NBA.com game page - Knicks at Pacers, 2026-11-13",
@@ -205,12 +223,6 @@
    "url": "https://www.nba.com/game/okc-vs-sac-0022600244",
    "publisher": "NBA.com (official)",
    "used_for": "Current records for both teams."
-  },
-  "S9": {
-   "title": "NBA.com Standings",
-   "url": "https://www.nba.com/standings",
-   "publisher": "NBA.com (official)",
-   "used_for": "CONSULTED BUT NOT USABLE: the standings table is rendered client-side and does not appear in the page source available to a plain HTTP fetch (only the tie-break procedure text is present). Won-lost records were therefore taken from S1 and the S8 game pages instead. See Flagged for Review F1."
   }
  }
 }

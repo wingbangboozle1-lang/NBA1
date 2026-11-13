@@ -5,26 +5,26 @@
     {
       "id": "A1",
       "question": "Do the model's refinements beat a naive net-rating line at predicting the margin?",
-      "answer": "Marginally, and not significantly. On the 28-game out-of-sample window the model's mean absolute margin error is 12.56 points against 12.72 for the naive reference, and its RMSE is 17.21 against 17.35. The bootstrap 95% interval on the model's MAE is 8.42-17.06, so the two are statistically indistinguishable.",
+      "answer": "Yes, slightly, on 51 out-of-sample games. Mean absolute margin error 12.89 points against 13.19 for the naive reference; RMSE 17.10 against 17.70. The model is better on both. But the bootstrap 95% interval on the model's MAE is 9.80-16.14 and the reference's is 10.05-16.53, so the two overlap almost completely - the improvement is not statistically established.",
       "source": "S2",
       "source_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
-      "confidence": "Low - n = 28, see F8"
+      "confidence": "Low-to-medium - direction is consistent on two metrics, but the intervals overlap"
     },
     {
       "id": "A2",
       "question": "Does the model beat the naive reference at predicting game totals?",
-      "answer": "Yes, slightly. Mean absolute total error is 14.50 against 14.75; RMSE 19.76 against 19.91. The reference total ignores defence entirely, so this is the opponent-adjustment signal doing the work. Again within noise.",
+      "answer": "No, not now. Mean absolute total error is 14.86 against 14.75 for the reference, and RMSE 19.88 against 19.59. The reference is better on both, reversing what the 28-game window suggested. The reference total is simply the two teams' published scoring averages added together; the model's opponent-adjustment and pace adjustments are not improving on it on this sample.",
       "source": "S2",
       "source_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
-      "confidence": "Low - n = 28"
+      "confidence": "Low - the sign flipped when the window grew, which is itself evidence the earlier reading was noise"
     },
     {
       "id": "A3",
       "question": "Does the model beat the reference at picking winners?",
-      "answer": "No, not on this window. Straight up the model went 20-8 and the naive reference 21-7. Brier score 0.1992 for the model against 0.1893 for the reference; log loss 0.5848 against 0.5606. The reference is better on both probability metrics.",
+      "answer": "No. Both went 37-14 straight up on the 51-game window. On the probability metrics the reference is better: Brier 0.1970 for the model against 0.1889, log loss 0.5768 against 0.5567. The model's refinements do not translate into better win probabilities.",
       "source": "S3_2026-11-12",
       "source_url": "https://www.nba.com/games?date=2026-11-12",
-      "confidence": "Low - n = 28 and one 51-point game dominates the probability metrics"
+      "confidence": "Medium - the direction is consistent across two metrics and two window sizes"
     },
     {
       "id": "A4",
@@ -37,7 +37,7 @@
     {
       "id": "A5",
       "question": "Is there a real home-court advantage in this season's data?",
-      "answer": "The point estimate on the out-of-sample window is +2.95 points with a standard error of 3.42 (t = 0.86). It is not distinguishable from zero on 28 games. The flat +2.0 used by the reference line sits inside that interval, so the two are not in conflict.",
+      "answer": "The point estimate is +2.79 points with a standard error of 2.48 (t = 1.12) across 51 games, one of which was at a neutral site and excluded from the intercept. It is consistent with the historical NBA range but not statistically distinguishable from zero on this sample. The flat +2.0 the reference uses sits inside the interval.",
       "source": "S3_2026-11-12",
       "source_url": "https://www.nba.com/games?date=2026-11-12",
       "confidence": "Low - disclosed as estimated on the test window"
@@ -45,15 +45,15 @@
     {
       "id": "A6",
       "question": "Is there a measurable back-to-back penalty?",
-      "answer": "The point estimate is -3.33 points on the home margin with a standard error of 5.73 (t = -0.58). Because |t| < 1 the model applies 0.00 rather than the estimate, and the estimate is published with its standard error so the decision is visible. Detection is also incomplete for 2026-11-09 (F9).",
+      "answer": "The estimate is -6.10 points on the home margin with a standard error of 4.87 (t = -1.25). Because |t| >= 1 the model applies the full 6.10 penalty rather than zeroing it. That is a large number and the standard error is most of it, so it should be read as suggestive rather than established - and the detection is still incomplete for 2026-11-06 (F9), which biases it toward zero.",
       "source": "S3_2026-11-11",
       "source_url": "https://www.nba.com/games?date=2026-11-11",
-      "confidence": "None - not distinguishable from zero"
+      "confidence": "Low - not significant at conventional thresholds"
     },
     {
       "id": "A7",
       "question": "How much should ratings be shrunk at this point in the season?",
-      "answer": "The empirical-Bayes derivation on the Validation page gives k = 2.8, i.e. a weight of 0.745 on each team's observed net rating with the rest going to the league average. The fixed-k sweep shows the margin MAE barely moves between k = 0 (12.96) and k = 4 (12.58), so the choice is not doing much on this window - but k = 8 and above is clearly too aggressive.",
+      "answer": "The empirical-Bayes derivation gives k = 2.9, weighting each team's observed net rating at 0.739 with the rest going to the league average. The fixed-k sweep shows the margin MAE falling from 13.28 at k = 0 to 12.91 at k = 4, then rising to 13.65 by k = 20 - the curve is flat in the useful region and clearly worse under heavy shrinkage, so the choice is not carrying much risk either way.",
       "source": "S2",
       "source_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
       "confidence": "Low - the noise term is estimated on the test window, see F4"
@@ -61,7 +61,7 @@
     {
       "id": "A8",
       "question": "Which upcoming games have a measurable availability issue?",
-      "answer": "On the 2026-11-13 slate, Orlando (0.141 weighted minutes at risk), Chicago (0.170), Indiana (0.138) and Golden State (0.110) have measured availability losses; the impact is a floor because minutes are only known for top-50 scorers (F2). Five of the ten 2026-11-14 team-reports were marked NOT YET SUBMITTED at capture, and no 2026-11-15 report existed at all.",
+      "answer": "On the 2026-11-13 slate, Orlando (14.1% of minutes at risk), Chicago (17.0%), Indiana (13.8%) and Golden State (11.0%) have measured availability losses; the impact is a floor because minutes are only known for top-50 scorers (F2). Five of the ten 2026-11-14 team-reports were marked NOT YET SUBMITTED at capture, and no 2026-11-15 report existed at all.",
       "source": "S6",
       "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
       "confidence": "Medium for 2026-11-13, none for 2026-11-15"
@@ -69,7 +69,7 @@
     {
       "id": "A9",
       "question": "Which team statistics actually move together in the official data?",
-      "answer": "See the Correlations page. The measured table is computed on all 30 teams from the official advanced table, with r, r-squared and a p-value for each pair. The strongest relationships are the mechanical ones - OffRtg against eFG%, TS% and points per game - while pace is close to unrelated to net rating.",
+      "answer": "See the Correlations page. Thirteen pairs were measured directly on all 30 teams from the official advanced table, with r, r-squared and a p-value each. Net rating explains 87% of the variation in win percentage and PIE 84%. Pace is close to unrelated to net rating (r = -0.34, p = 0.063), and assist percentage is unrelated to offensive efficiency (r = 0.02, p = 0.92) - the two results most likely to surprise.",
       "source": "S1",
       "source_url": "https://www.nba.com/stats/teams/advanced",
       "confidence": "High for the measured table (n = 30, computed directly), none for the model-derived parlay values"
@@ -81,6 +81,14 @@
       "source": "S4",
       "source_url": "https://www.nba.com/schedule",
       "confidence": "High - derived only from published dates and results"
+    },
+    {
+      "id": "A11",
+      "question": "Does the best strategy's record look like skill or like luck?",
+      "answer": "It cannot be separated yet. S1 (side edge vs reference) is 16-7 on 23 graded plays, worth +7.55 model units and a 32.8% return at -110. The exact binomial p-value against a 50% null is 0.093, and the Wilson 95% interval on the hit rate is 0.491 to 0.844. The lower bound sits below the 0.5238 break-even, so the skill gate fails - a 16-7 run is well within what a coin-flip bettor produces often enough to see.",
+      "source": "S3_2026-11-12",
+      "source_url": "https://www.nba.com/games?date=2026-11-12",
+      "confidence": "Medium - the arithmetic is exact; the interpretation is that 23 plays is simply not enough"
     }
   ],
   "open": [
@@ -94,9 +102,9 @@
     },
     {
       "id": "Q2",
-      "question": "Are the gate results real, or an artefact of a 28-game sample?",
-      "what_is_missing": "Results for 2026-10-20 through 2026-11-08. The season started 2026-10-20 and the window used here starts 2026-11-09, so roughly 200 games of the current season are not in the dataset.",
-      "how_to_answer": "Add a backfill job that walks the official games page one date at a time and stores every final score. That single change takes the out-of-sample window from 28 games to the full season and is the highest-value task on this list.",
+      "question": "Can the out-of-sample window grow any further?",
+      "what_is_missing": "Results for 2026-10-20 through 2026-11-05. Those games exist and are officially published, but they are currently the ratings window, so moving them into the test set requires a different split - for example ratings from the first 40 games of the season and testing on everything after.",
+      "how_to_answer": "Backfill 2026-10-20 to 2026-11-05 results, then re-cut the split so the ratings window is earlier and the test window is longer. This is now the only way to grow the sample, since every game from 2026-11-06 onward is already in it.",
       "blocks": "Passing or failing any strategy; promoting anything past Tier 3",
       "priority": 2
     },
@@ -127,16 +135,16 @@
     {
       "id": "Q6",
       "question": "Does the Emirates NBA Cup change how teams play?",
-      "what_is_missing": "Any measurement. The 2026-11-13 slate is entirely Cup games (group play), and point differential is the Cup tiebreaker, which plausibly changes late-game behaviour in blowouts - but nothing in the captured data measures it.",
-      "how_to_answer": "Compare Cup games to non-Cup games once the results backfill (Q2) exists, matching on the same team ratings and looking at fourth-quarter scoring in decided games.",
+      "what_is_missing": "Any measurement. Twenty-five of the 51 games in the test window were Cup group games, and point differential is the Cup tiebreaker, which plausibly changes late-game behaviour in blowouts - but nothing in the captured data measures it.",
+      "how_to_answer": "Compare Cup games to non-Cup games within the existing window, matching on the same team ratings and looking at whether decided games run up bigger margins. The sample is already large enough to attempt this.",
       "blocks": "Applying a Cup adjustment, or safely ignoring one",
       "priority": 6
     },
     {
       "id": "Q7",
-      "question": "How should the model treat overtime and the 2026-11-12 Detroit-Washington double-overtime game?",
-      "what_is_missing": "A decision. That game produced a 284-point total, which inflates the fitted total-error spread on a 28-game sample.",
-      "how_to_answer": "Either model regulation separately from overtime, or winsorise. Both need the results backfill to evaluate.",
+      "question": "How should the model treat overtime?",
+      "what_is_missing": "A decision. The window contains a 284-point double-overtime game (Detroit 144, Washington 140 on 2026-11-12) and one single-OT game, both of which inflate the fitted total-error spread.",
+      "how_to_answer": "Either model regulation separately from overtime, or winsorise the residuals when fitting. Both can be evaluated on the existing 51-game sample.",
       "blocks": "Total-market calibration",
       "priority": 7
     },

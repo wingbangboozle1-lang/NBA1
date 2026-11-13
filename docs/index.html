@@ -38,13 +38,13 @@
   <div class="wrap">
 
   <h1>Executive Summary</h1>
-  <p class="lede">The system is built, the lines are live for the next three days, and every claim on this site carries a source link. What it does not yet have is a large enough sample to prove anything. That is stated plainly rather than papered over.</p>
+  <p class="lede">The system is built and every line for the next three days is live, with a source link on every row. The out-of-sample window is now 51 games rather than 28. The honest read on it: the model has a small edge on the margin, no edge on totals or winners, and one strategy whose good record is still well inside what luck produces.</p>
 
   <div class="banner danger">
     <div class="ico">⚠</div>
     <div>
-      <p><strong>Verdict: PROVISIONAL - not funded.</strong> The model beats the naive reference on margin and total accuracy but loses to it on picking winners, and no strategy reaches the 30-play sample gate. Every strategy is capped at research-only or quarter-unit until the sample grows.</p>
-      <p class="small">A 28-game window with a 17.8-point residual standard deviation cannot separate skill from luck. The bootstrap 95% interval on the model's margin error is 8.4 to 17.1 points, which comfortably contains the naive reference's 12.7.</p>
+      <p><strong>Verdict: PROVISIONAL - not funded.</strong> The model beats the naive reference on margin accuracy and loses to it on totals and on picking winners. The best strategy is 16-7, worth +7.55 model units - but with an exact p-value of 0.093 and a Wilson lower bound of 0.491 against a 0.524 break-even, it fails the skill gate. Every strategy stays at quarter-unit or research-only.</p>
+      <p class="small">Fifty-one games with a 17.4-point residual standard deviation narrows the uncertainty a lot but does not remove it. On 23 graded plays, a 16-7 run happens often enough by chance that it cannot be called skill.</p>
     </div>
   </div>
 
@@ -60,60 +60,60 @@
         <div class="kpi-sub">singles, parlays, SGPs, prop combos</div></div>
       <div class="card"><h4>Upcoming games</h4><div class="kpi">23</div>
         <div class="kpi-sub">2026-11-13 through 2026-11-15</div></div>
-      <div class="card"><h4>Out-of-sample games</h4><div class="kpi">28</div>
-        <div class="kpi-sub">2026-11-09 to 2026-11-12, ratings from 11-05 or earlier</div></div>
-      <div class="card"><h4>Official sources</h4><div class="kpi">35</div>
+      <div class="card"><h4>Out-of-sample games</h4><div class="kpi">51</div>
+        <div class="kpi-sub">2026-11-06 to 2026-11-12, ratings from 11-05 or earlier</div></div>
+      <div class="card"><h4>Official sources</h4><div class="kpi">37</div>
         <div class="kpi-sub">nba.com, official.nba.com, league injury PDFs</div></div>
     </div>
 
   <h2>What the data says</h2>
-  <p class="small">Ten strategies were written, ten sets of validation gates were defined, and all ten were run against a strictly out-of-sample window: 28 completed games from 2026-11-09 to 2026-11-12, predicted using team ratings computed only from 2026-10-20 to 2026-11-05. No game in the test window contributes to the ratings that predict it.</p>
+  <p class="small">Ten strategies were written, seven validation gates were defined, and all ten were run against a strictly out-of-sample window: all 51 completed games from 2026-11-06 to 2026-11-12, every one of them predicted using team ratings computed only from 2026-10-20 to 2026-11-05. No game in the test window contributes to the ratings that predict it.</p>
   <details class="q">
-  <summary>1. The model is a small improvement on the margin and total, and a small regression on picking winners</summary>
+  <summary>1. The model wins on the margin and loses on totals and winners</summary>
   <div class="body">
-    <p>Mean absolute margin error 12.56 points for the model against 12.72 for the naive reference; RMSE 17.21 against 17.35; totals MAE 14.50 against 14.75. But straight up the model went 20-8 while the reference went 21-7, with a worse Brier score (0.1992 vs 0.1893) and worse log loss (0.5848 vs 0.5606).</p>
-    <p class="small"><strong>Reading:</strong> The refinements are doing real but tiny work, and the probability calibration is not yet good enough to trust over the raw number.</p>
+    <p>Margin: MAE 12.89 against 13.19 for the naive reference, RMSE 17.10 against 17.70 - the model is better on both. Totals: MAE 14.86 against 14.75, RMSE 19.88 against 19.59 - the reference is better on both. Straight up both went 37-14, but the reference has the better Brier score (0.1889 against 0.1970) and the better log loss (0.5567 against 0.5768).</p>
+    <p class="small"><strong>Reading:</strong> The refinements buy a real but tiny margin improvement and nothing else. The probability calibration is the weakest part of the model, and it is where the remaining work should go.</p>
   </div>
 </details>
 <details class="q">
-  <summary>2. The single biggest limitation is 28 games, and it is fixable</summary>
+  <summary>2. Growing the window from 28 games to 51 changed a conclusion - which is the most useful thing that happened</summary>
   <div class="body">
-    <p>The season began 2026-10-20. Only 2026-11-08 onward was captured, so roughly 200 games that have already been played and officially published are not in the dataset. Adding them is a single script and it unblocks four other open questions at once.</p>
-    <p class="small"><strong>Reading:</strong> This is the highest-value action available and it costs almost nothing.</p>
+    <p>On the 28-game window the model beat the reference on totals (MAE 14.50 against 14.75). On 51 games it does not (14.86 against 14.75). The sign flipped. That is exactly the failure mode the sample gate exists to catch, and it is why nothing here is being promoted on the earlier reading.</p>
+    <p class="small"><strong>Reading:</strong> Any single-window result at this sample size should be treated as a hypothesis, not a finding.</p>
   </div>
 </details>
 <details class="q">
-  <summary>3. No strategy passes every gate, and none of them should yet</summary>
+  <summary>3. The best strategy is 16-7, and that is not enough</summary>
   <div class="body">
-    <p>The best-graded strategy is S2 (total edge vs reference) at 8-4 on 12 plays, worth +3.27 model units. Its Wilson 95% interval on the hit rate is wide enough to contain break-even, so it fails the skill gate. Everything else has fewer than 10 graded plays.</p>
-    <p class="small"><strong>Reading:</strong> The leaderboard is honest about this: an 8-4 run on 12 plays is information about luck. Every strategy is capped at quarter-unit or research-only regardless of its score.</p>
+    <p>S1 (side edge vs the reference spread) produced 23 graded plays at 16-7, worth +7.55 model units and a 32.8% return at -110. Its exact binomial p-value against a coin flip is 0.093. The Wilson 95% interval on its hit rate is 0.491 to 0.844, and the lower bound is below the 0.5238 break-even, so the skill gate fails. S5 (back-to-back fade) is 8-4 on 12 plays, also short.</p>
+    <p class="small"><strong>Reading:</strong> A 69.6% hit rate on 23 plays is a promising signal and nothing more. The leaderboard caps it at quarter-unit regardless of its score, which is the designed behaviour.</p>
   </div>
 </details>
 <details class="q">
-  <summary>4. Home court and back-to-back are not measurable on this sample</summary>
+  <summary>4. Home court looks normal; the back-to-back penalty is large but uncertain</summary>
   <div class="body">
-    <p>Home-court advantage estimates at +2.95 points with a standard error of 3.42 (t = 0.86). The back-to-back penalty estimates at -3.33 points with a standard error of 5.73 (t = -0.58), so the model applies 0.00 rather than the estimate. Both are published with their standard errors.</p>
-    <p class="small"><strong>Reading:</strong> The honest move is to apply zero until the estimate is reliable, and to show the estimate anyway so the choice is visible.</p>
+    <p>Home-court advantage estimates at +2.79 points with a standard error of 2.48 (t = 1.12), squarely in the historical NBA range. The back-to-back penalty estimates at -6.10 points with a standard error of 4.87 (t = -1.25); because |t| >= 1 the model applies the full 6.10, but the standard error is most of the estimate and detection is still incomplete for 2026-11-06, which biases it toward zero.</p>
+    <p class="small"><strong>Reading:</strong> Both are published with their standard errors and both are fitted on the test window, which is disclosed on every row they touch.</p>
   </div>
 </details>
 <details class="q">
-  <summary>5. Shrinkage was derived rather than guessed, and it barely matters on this window</summary>
+  <summary>5. Shrinkage was derived rather than guessed, and the curve is flat where it matters</summary>
   <div class="body">
-    <p>An empirical-Bayes reliability calculation gives k = 2.8, weighting each team's observed net rating at 0.745 with the rest going to the league average. A fixed-k sweep shows the margin MAE moving only from 12.96 at k = 0 to 12.58 at k = 4 - but degrading to 13.64 by k = 20, so heavy shrinkage is clearly wrong.</p>
-    <p class="small"><strong>Reading:</strong> The constant is now defensible and its sensitivity is published, which is the best that can be done on 8 games per team.</p>
+    <p>The empirical-Bayes calculation gives k = 2.9, weighting each team's observed net rating at 0.739. The fixed-k sweep shows margin MAE moving only from 13.28 at k = 0 to 12.91 at k = 4, then degrading to 13.65 by k = 20. Heavy shrinkage is clearly wrong; the choice between light and none barely matters.</p>
+    <p class="small"><strong>Reading:</strong> The constant is defensible, its sensitivity is published, and it is not a source of hidden risk.</p>
   </div>
 </details>
 <details class="q">
   <summary>6. Availability impact is a measured floor, not an estimate</summary>
   <div class="body">
-    <p>Minutes are only known for the 50 players in the captured official table. Players outside it contribute 0.00 to the impact number, so several teams that are plainly missing rotation players show zero. The minutes-coverage column sits next to every impact figure so a 0.00 is never read as 'healthy'.</p>
+    <p>Minutes are only known for the 50 players in the captured official table. Players outside it contribute 0.00 to the impact, so teams missing rotation players who are not top-50 scorers show a smaller number than the truth - sometimes zero. The minutes-coverage column sits next to every figure so a 0.00 is never read as 'healthy'.</p>
     <p class="small"><strong>Reading:</strong> Correct but incomplete - the Injuries page says so on every row rather than hiding it.</p>
   </div>
 </details>
 <details class="q">
   <summary>7. Correlation is measured where it can be and flagged where it cannot</summary>
   <div class="body">
-    <p>Thirteen team-statistic pairs were measured directly on all 30 teams from the official advanced table, with r, r-squared and a p-value each. The parlay and same-game-parlay correlations that drive pricing are model-derived, not measured, and are labelled as such everywhere they appear.</p>
+    <p>Thirteen team-statistic pairs were measured directly on all 30 teams from the official advanced table. Net rating explains 87% of the variation in win percentage; pace is nearly unrelated to net rating (r = -0.34, p = 0.063) and assist percentage is unrelated to offensive efficiency (r = 0.02, p = 0.92). The parlay and same-game-parlay correlations that drive pricing are model-derived and labelled as such.</p>
     <p class="small"><strong>Reading:</strong> The distinction matters most for parlays, because pricing correlated legs as independent is the classic way to overpay.</p>
   </div>
 </details>
@@ -130,18 +130,21 @@
 <li>43 picks from the strategy library, each tagged with its strategy, its market, the reference number it is betting against, the model's number and the gap.</li>
 <li>Player projections for the top-50 scorers, with the possession, opponent-defence and teammate-availability factors broken out separately.</li>
 <li>The official injury report for 2026-11-13 and 2026-11-14, transcribed row by row with each player's status and the team's published reason.</li>
-<li>Game-flow read-outs built from official pace and efficiency inputs, including probability of a close game, a blowout and overtime.</li></ul>
+<li>Game-flow read-outs built from official pace and efficiency inputs, including probability of a close game, a blowout and overtime.</li>
+<li>The full 51-game out-of-sample log, with the official final score next to both forecasts.</li></ul>
 
   <h2>Recommended next actions</h2>
   <div class="tablewrap"><table class="thin">
     <thead><tr><th class="num">#</th><th>Action</th><th>Why</th></tr></thead>
-    <tbody><tr><td class="num strong">1</td><td>Backfill results for 2026-10-20 to 2026-11-08</td>
-            <td class="small">Takes the out-of-sample window from 28 games to the full season. Cheap, additive, unblocks four open questions.</td></tr>
-<tr><td class="num strong">2</td><td>Log real closing prices</td>
-            <td class="small">Until this exists, nothing here can be called profitable - only better than a naive model.</td></tr>
-<tr><td class="num strong">3</td><td>Complete the player-minutes table</td>
+    <tbody><tr><td class="num strong">1</td><td>Log real closing prices</td>
+            <td class="small">Until this exists, nothing here can be called profitable - only better than a naive model. Everything else is optimisation of an unvalidated target.</td></tr>
+<tr><td class="num strong">2</td><td>Backfill results for 2026-10-20 to 2026-11-05 and re-cut the split</td>
+            <td class="small">Every game from 2026-11-06 onward is already in the test window, so this is now the only way to grow the sample. It would let the ratings window move earlier and the test window roughly double again.</td></tr>
+<tr><td class="num strong">3</td><td>Work on probability calibration rather than point accuracy</td>
+            <td class="small">The model is better on MAE and RMSE and worse on Brier and log loss. The gap between those two facts is where the leverage is.</td></tr>
+<tr><td class="num strong">4</td><td>Complete the player-minutes table</td>
             <td class="small">Turns the availability impact from a floor into a real number and lets the prop strategies be graded.</td></tr>
-<tr><td class="num strong">4</td><td>Archive every injury-report edition</td>
+<tr><td class="num strong">5</td><td>Archive every injury-report edition</td>
             <td class="small">The only way to grade the availability strategy or to run the robustness gate.</td></tr></tbody>
   </table></div>
 
@@ -160,7 +163,7 @@
   </div>
 
   <h2>Bottom line</h2>
-  <p>Everything asked for exists and is live: originated lines for every upcoming slate up to three days ahead, singles, parlays and same-game parlays, player-prop combos, a validation gate set, correlation values, a luck decomposition, injury and rotation tracking, game-flow analysis, a leaderboard with reward tiers, a suggestions page with decision paths, and a questions page split by what is known and what is not. What it does not claim is that any of it makes money - because on 28 games, against a model standing in for the market, that claim cannot be tested yet, and saying so is the point.</p>
+  <p>Everything asked for exists and is live: originated lines for every upcoming slate up to three days ahead, singles, parlays and same-game parlays, player-prop combos, a validation gate set, correlation values, a luck decomposition, injury and rotation tracking, game-flow analysis, a leaderboard with reward tiers, a suggestions page with decision paths, and a questions page split by what is known and what is not. The window grew from 28 games to 51 during this build and one conclusion flipped as a result - which is the clearest possible demonstration of why nothing here is being promoted yet.</p>
 
   <div class="toc" style="margin-top:18px">
     <a href="pages/lines.html">Originated lines →</a>

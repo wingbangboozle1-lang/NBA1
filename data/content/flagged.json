@@ -1,116 +1,126 @@
 {
-  "title": "Flagged for Review",
-  "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to.",
-  "items": [
-    {
-      "id": "F1",
-      "severity": "Medium",
-      "title": "NBA.com standings table is not machine-readable",
-      "detail": "The official standings page renders its table client-side; a plain fetch returns only the tie-break procedure text, not the table. Won-lost records were therefore taken from the official Stats > Teams Advanced table and from each game's own NBA.com game page instead. Every record on this site has one of those two links.",
-      "affected": "Team records on the Lines and Picks pages",
-      "source": "S9",
-      "source_url": "https://www.nba.com/standings",
-      "suggested_action": "Add a headless-browser capture to the refresh job if the standings table itself is ever needed; today it is not."
-    },
-    {
-      "id": "F2",
-      "severity": "High",
-      "title": "Player minutes are only known for 50 of 465 players",
-      "detail": "The official Players Traditional table publishes 465 rows across 10 pages; only page 1 (the 50 highest scorers) is present in the page source available to a plain fetch. Minutes for the other 415 players were left blank, not estimated. Two consequences: (a) the availability impact on the Injuries page is a measured LOWER BOUND and is 0.00 for several teams whose injured players fall outside the top 50; (b) player-prop coverage is limited to those 50 players.",
-      "affected": "Injuries page impact column; Picks page player props (S7, S8)",
-      "source": "S7",
-      "source_url": "https://www.nba.com/stats/players/traditional",
-      "suggested_action": "Backfill per-team minutes from the same official table filtered by team, or from official box scores. Until then, treat the impact column as a floor and read the minutes-coverage column next to it."
-    },
-    {
-      "id": "F3",
-      "severity": "High",
-      "title": "No official-book price exists, so 'the line we bet against' is a model, not a market",
-      "detail": "No sportsbook price is published by an NBA-operated source, so no official link can be attached to one. The site therefore bets the originated line against a deliberately naive REFERENCE line built from the same official ratings. A 'win' here means the model beat the naive model, not that it beat a book. Real expected value cannot be stated untilmarket prices are logged.",
-      "affected": "Every strategy result, the leaderboard, and the word 'edge' throughout",
-      "source": "S1",
-      "source_url": "https://www.nba.com/stats/teams/advanced",
-      "suggested_action": "Log closing prices from a licensed odds source into data/raw/market.json with a per-row source field. Until then, read 'units' as model-vs-naive-model units."
-    },
-    {
-      "id": "F4",
-      "severity": "Medium",
-      "title": "Five modelling constants are choices, not official measurements",
-      "detail": "Shrinkage constant k, the offense/defence split of an availability loss (alpha = 0.60), the availability impact coefficient (15.0 net-rating points per 100 possessions at 100% minutes lost), the status weights (Out 1.00 / Doubtful 0.70 / Questionable 0.35 / Probable 0.10), and the three player-prop multipliers are all modelling choices. k is now derived by an empirical-Bayes reliability calculation, but the single-game noise term in that calculation is estimated on the test window, so k is partly test-informed. A fixed-k sensitivity sweep is published on the Validation page.",
-      "affected": "Model page; every originated number",
-      "source": "S1",
-      "source_url": "https://www.nba.com/stats/teams/advanced",
-      "suggested_action": "Re-estimate all five on a full season of game logs once the backfill exists; until then they are published with their derivation, not hidden."
-    },
-    {
-      "id": "F5",
-      "severity": "High",
-      "title": "No archived injury reports, so the availability strategy is ungraded",
-      "detail": "Only the 2026-11-13 05:15 PM edition of the official injury report was captured. Strategy S6 (availability shock) and gate G7 (flip every Questionable player to Out) therefore have no graded record. They are shown as UNGRADED / NOT RUN rather than being scored with substituted data.",
-      "affected": "S6, gate G7",
-      "source": "S5",
-      "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
-      "suggested_action": "The refresh job should archive every edition it sees; grading can then start once ~30 graded S6 plays exist."
-    },
-    {
-      "id": "F6",
-      "severity": "Medium",
-      "title": "Parlay and same-game-parlay correlations are model-derived, not measured",
-      "detail": "Measuring the correlation between two legs needs play-by-play, which was not captured. The rho values used to price S9 and S10 are derived from the structure of the model, not from data. The side/total value of 0.00 is a mathematical property of the additive model under equal team-score variances; the player-market values are estimates.",
-      "affected": "Correlations page; S9 and S10 pricing",
-      "source": "S1",
-      "source_url": "https://www.nba.com/stats/teams/advanced",
-      "suggested_action": "Estimate empirical correlations from a season of play-by-play or from official box scores; they are labelled MODEL-DERIVED everywhere until then."
-    },
-    {
-      "id": "F7",
-      "severity": "Medium",
-      "title": "The automated refresh script has never been executed",
-      "detail": "engine/fetch_official.py was written in a sandbox with outbound network access restricted to github.com, npm and pypi, so it could not be run against nba.com. The GitHub Actions workflow calls it with continue-on-error and only commits when the data actually changes, so a failure cannot break the published site - but it also means the first live run is the first real test.",
-      "affected": "Daily refresh job",
-      "source": "S4",
-      "source_url": "https://www.nba.com/schedule",
-      "suggested_action": "Watch the first scheduled run; if it fails, the workflow log is the place to fix it. The committed snapshot stays live regardless."
-    },
-    {
-      "id": "F8",
-      "severity": "High",
-      "title": "The out-of-sample window is 28 games and is unusually volatile",
-      "detail": "The residual standard deviation of the game margin on the 2026-11-09..2026-11-12 window is 17.8 points, well above what a full NBA season typically produces, and the window contains a 51-point game and several 20-plus-point upsets. With n = 28 the bootstrap 95% interval on the model's margin MAE is roughly 8.4 to 17.1 points - wide enough that the model and the naive reference are statistically indistinguishable. No strategy clears the 30-play sample gate.",
-      "affected": "Every gate result on the Validation page",
-      "source": "S3_2026-11-12",
-      "source_url": "https://www.nba.com/games?date=2026-11-12",
-      "suggested_action": "Treat every result as provisional. Extend the window by backfilling 2026-10-20..2026-11-08 results, which is the single highest-value data task on the list."
-    },
-    {
-      "id": "F9",
-      "severity": "Low",
-      "title": "Back-to-back detection is incomplete for 2026-11-09",
-      "detail": "Rest flags are computed only from games present in the captured results (2026-11-08 onward). Games on 2026-11-06 and 2026-11-07 were not captured, so a team entering 2026-11-09 off a back-to-back would not be flagged. The detection is precise (never a false positive) but incomplete, which biases the estimated B2B effect toward zero.",
-      "affected": "S5 and the fitted B2B coefficient",
-      "source": "S3_2026-11-08",
-      "source_url": "https://www.nba.com/games?date=2026-11-08",
-      "suggested_action": "Falls away automatically once the results backfill covers the whole season."
-    },
-    {
-      "id": "F10",
-      "severity": "Low",
-      "title": "Two teams have no entry in the captured injury report edition",
-      "detail": "The 2026-11-13 05:15 PM ET edition contains no rows for the New York Knicks (NYK@IND) or the Milwaukee Bucks (MIL@ORL), and no 2026-11-15 game appears at all. That is recorded as a fact about the source. It is NOT read as 'those teams are healthy', and no value was substituted. The same applies to the six 2026-11-14 teams marked NOT YET SUBMITTED.",
-      "affected": "Injuries page rows for NYK@IND and MIL@ORL, and the whole 2026-11-15 slate",
-      "source": "S6",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
-      "suggested_action": "Re-read the newest edition before acting on any 2026-11-15 play; the refresh job overwrites this file several times a day."
-    },
-    {
-      "id": "F11",
-      "severity": "Informational",
-      "title": "The 2026-11-15 slate has no injury report yet",
-      "detail": "The league publishes reports the day before a game (and on game day), so at capture time there was no official report for 2026-11-15. Every availability number for that slate is blank and flagged, exactly as the verification rule requires.",
-      "affected": "Picks page rows dated 2026-11-15",
-      "source": "S5",
-      "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
-      "suggested_action": "None - this is correct behaviour. The page shows the flag rather than a zero."
-    }
-  ]
+ "title": "Flagged for Review",
+ "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to.",
+ "items": [
+  {
+   "id": "F1",
+   "severity": "Medium",
+   "title": "NBA.com standings table is not machine-readable",
+   "detail": "The official standings page renders its table client-side; a plain fetch returns only the tie-break procedure text, not the table. Won-lost records were therefore taken from the official Stats > Teams Advanced table and from each game's own NBA.com game page instead. Every record on this site has one of those two links.",
+   "affected": "Team records on the Lines and Picks pages",
+   "source": "S9",
+   "source_url": "https://www.nba.com/standings",
+   "suggested_action": "Add a headless-browser capture to the refresh job if the standings table itself is ever needed; today it is not."
+  },
+  {
+   "id": "F2",
+   "severity": "High",
+   "title": "Player minutes are only known for 50 of 465 players",
+   "detail": "The official Players Traditional table publishes 465 rows across 10 pages; only page 1 (the 50 highest scorers) is present in the page source available to a plain fetch. Minutes for the other 415 players were left blank, not estimated. Two consequences: (a) the availability impact on the Injuries page is a measured LOWER BOUND and is 0.00 for several teams whose injured players fall outside the top 50; (b) player-prop coverage is limited to those 50 players.",
+   "affected": "Injuries page impact column; Picks page player props (S7, S8)",
+   "source": "S7",
+   "source_url": "https://www.nba.com/stats/players/traditional",
+   "suggested_action": "Backfill per-team minutes from the same official table filtered by team, or from official box scores. Until then, treat the impact column as a floor and read the minutes-coverage column next to it."
+  },
+  {
+   "id": "F3",
+   "severity": "High",
+   "title": "No official-book price exists, so 'the line we bet against' is a model, not a market",
+   "detail": "No sportsbook price is published by an NBA-operated source, so no official link can be attached to one. The site therefore bets the originated line against a deliberately naive REFERENCE line built from the same official ratings. A 'win' here means the model beat the naive model, not that it beat a book. Real expected value cannot be stated untilmarket prices are logged.",
+   "affected": "Every strategy result, the leaderboard, and the word 'edge' throughout",
+   "source": "S1",
+   "source_url": "https://www.nba.com/stats/teams/advanced",
+   "suggested_action": "Log closing prices from a licensed odds source into data/raw/market.json with a per-row source field. Until then, read 'units' as model-vs-naive-model units."
+  },
+  {
+   "id": "F4",
+   "severity": "Medium",
+   "title": "Five modelling constants are choices, not official measurements",
+   "detail": "Shrinkage constant k, the offense/defence split of an availability loss (alpha = 0.60), the availability impact coefficient (15.0 net-rating points per 100 possessions at 100% minutes lost), the status weights (Out 1.00 / Doubtful 0.70 / Questionable 0.35 / Probable 0.10), and the three player-prop multipliers are all modelling choices. k is now derived by an empirical-Bayes reliability calculation, but the single-game noise term in that calculation is estimated on the test window, so k is partly test-informed. A fixed-k sensitivity sweep is published on the Validation page.",
+   "affected": "Model page; every originated number",
+   "source": "S1",
+   "source_url": "https://www.nba.com/stats/teams/advanced",
+   "suggested_action": "Re-estimate all five on a full season of game logs once the backfill exists; until then they are published with their derivation, not hidden."
+  },
+  {
+   "id": "F5",
+   "severity": "High",
+   "title": "No archived injury reports, so the availability strategy is ungraded",
+   "detail": "Only the 2026-11-13 05:15 PM edition of the official injury report was captured. Strategy S6 (availability shock) and gate G7 (flip every Questionable player to Out) therefore have no graded record. They are shown as UNGRADED / NOT RUN rather than being scored with substituted data.",
+   "affected": "S6, gate G7",
+   "source": "S5",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "suggested_action": "The refresh job should archive every edition it sees; grading can then start once ~30 graded S6 plays exist."
+  },
+  {
+   "id": "F6",
+   "severity": "Medium",
+   "title": "Parlay and same-game-parlay correlations are model-derived, not measured",
+   "detail": "Measuring the correlation between two legs needs play-by-play, which was not captured. The rho values used to price S9 and S10 are derived from the structure of the model, not from data. The side/total value of 0.00 is a mathematical property of the additive model under equal team-score variances; the player-market values are estimates.",
+   "affected": "Correlations page; S9 and S10 pricing",
+   "source": "S1",
+   "source_url": "https://www.nba.com/stats/teams/advanced",
+   "suggested_action": "Estimate empirical correlations from a season of play-by-play or from official box scores; they are labelled MODEL-DERIVED everywhere until then."
+  },
+  {
+   "id": "F7",
+   "severity": "Medium",
+   "title": "The automated refresh script has never been executed",
+   "detail": "engine/fetch_official.py was written in a sandbox with outbound network access restricted to github.com, npm and pypi, so it could not be run against nba.com. The GitHub Actions workflow calls it with continue-on-error and only commits when the data actually changes, so a failure cannot break the published site - but it also means the first live run is the first real test.",
+   "affected": "Daily refresh job",
+   "source": "S4",
+   "source_url": "https://www.nba.com/schedule",
+   "suggested_action": "Watch the first scheduled run; if it fails, the workflow log is the place to fix it. The committed snapshot stays live regardless."
+  },
+  {
+   "id": "F8",
+   "severity": "Medium",
+   "title": "Every strategy is still short of the 30-play sample gate",
+   "detail": "The out-of-sample window is now 51 games (2026-11-06 to 2026-11-12), all of them predicted from ratings computed on 2026-10-20 to 2026-11-05. The best-graded strategy, S1, has 23 graded plays at 16-7 (+7.55 model units, 32.8% ROI at -110). Its exact binomial p-value is 0.093 and the Wilson 95% interval on its hit rate is [0.491, 0.844] - the lower bound sits below the 0.5238 break-even, so the skill gate fails. Every other strategy has fewer graded plays. The residual standard deviation of the game margin is 17.4 points, so a swing of three or four games is well inside chance.",
+   "affected": "Every gate result on the Validation page",
+   "source": "S3_2026-11-12",
+   "source_url": "https://www.nba.com/games?date=2026-11-12",
+   "suggested_action": "Treat every result as provisional. The window cannot grow further without backfilling 2026-10-20 to 2026-11-05 results - which would then have to be split into a new training period and test period."
+  },
+  {
+   "id": "F9",
+   "severity": "Informational",
+   "title": "Back-to-back detection is complete from 2026-11-07 onward",
+   "detail": "Rest flags are computed from the captured results, which now begin 2026-11-06. Back-to-backs running into 2026-11-07 and later are therefore fully detected (12 home, 9 away across the window). Back-to-backs running into 2026-11-06 itself are still not detected, because no game before 2026-11-06 was captured. The bias this leaves is toward zero, so the fitted penalty of 6.10 points is if anything understated.",
+   "affected": "S5 and the fitted B2B coefficient",
+   "source": "S3_2026-11-06",
+   "source_url": "https://www.nba.com/games?date=2026-11-06",
+   "suggested_action": "Falls away automatically once a results backfill covers the whole season."
+  },
+  {
+   "id": "F10",
+   "severity": "Low",
+   "title": "Two teams have no entry in the captured injury report edition",
+   "detail": "The 2026-11-13 05:15 PM ET edition contains no rows for the New York Knicks (NYK@IND) or the Milwaukee Bucks (MIL@ORL), and no 2026-11-15 game appears at all. That is recorded as a fact about the source. It is NOT read as 'those teams are healthy', and no value was substituted. The same applies to the six 2026-11-14 teams marked NOT YET SUBMITTED.",
+   "affected": "Injuries page rows for NYK@IND and MIL@ORL, and the whole 2026-11-15 slate",
+   "source": "S6",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "suggested_action": "Re-read the newest edition before acting on any 2026-11-15 play; the refresh job overwrites this file several times a day."
+  },
+  {
+   "id": "F11",
+   "severity": "Informational",
+   "title": "The 2026-11-15 slate has no injury report yet",
+   "detail": "The league publishes reports the day before a game (and on game day), so at capture time there was no official report for 2026-11-15. Every availability number for that slate is blank and flagged, exactly as the verification rule requires.",
+   "affected": "Picks page rows dated 2026-11-15",
+   "source": "S5",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "suggested_action": "None - this is correct behaviour. The page shows the flag rather than a zero."
+  },
+  {
+   "id": "F12",
+   "severity": "Informational",
+   "title": "One game in the window was played at a neutral site",
+   "detail": "The 2026-11-07 Denver-Indiana game was the NBA Mexico City Game; the official page labels the venue 'Neutral Site' rather than naming a home arena. Home-court advantage is set to zero for that game in both the forecast and the HCA regression (its intercept column is 0 for that row). It is one game out of 51, so the effect on the fitted HCA is small, but leaving it in as a home game would have been wrong.",
+   "affected": "HCA estimate and one row of the game log",
+   "source": "S3_2026-11-07",
+   "source_url": "https://www.nba.com/games?date=2026-11-07",
+   "suggested_action": "None - handled. Watch for more neutral-site games as the season goes on."
+  }
+ ]
 }
