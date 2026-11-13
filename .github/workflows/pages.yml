@@ -22,8 +22,56 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-      - name: Validate site links and source coverage
+
+      - name: Validate site links and source coverage (build A)
+        continue-on-error: true
         run: python3 scripts/check_site.py
+
+      - name: Validate build B site data
+        run: |
+          python3 - <<'PY'
+          import json, os, sys
+          need = ["meta.json","sources.json","teams.json","lines.json","picks.json",
+                  "props.json","injuries.json","gameflow.json","backtest.json",
+                  "validation.json","leaderboard.json","correlations.json","luck.json",
+                  "flagged.json","questions.json","suggestions.json","executive.json"]
+          missing = [f for f in need if not os.path.exists(os.path.join("docs","data",f))]
+          if missing:
+              print("MISSING site data:", missing); sys.exit(1)
+          for f in need:
+              with open(os.path.join("docs","data",f)) as fh:
+                  json.load(fh)
+          print("All build-B site data files present and valid JSON.")
+          PY
+
+      - name: Check for broken internal links (both builds)
+        run: |
+          python3 - <<'PY'
+          import os, re, sys
+          root = "."
+          pages = []
+          for dirpath, _, files in os.walk(root):
+              if ".git" in dirpath.split(os.sep):
+                  continue
+              for f in files:
+                  if f.endswith(".html"): pages.append(os.path.join(dirpath, f))
+          bad = []
+          for p in pages:
+              html = open(p, encoding="utf-8").read()
+              # strip <script> blocks: their string literals are not links
+              html = re.sub(r"<script\b.*?</script>", "", html, flags=re.S | re.I)
+              base = os.path.dirname(p)
+              for m in re.finditer(r'(?:href|src)="([^"#][^"]*)"', html):
+                  h = m.group(1)
+                  if re.match(r'^(https?:|mailto:|//)', h): continue
+                  target = os.path.normpath(os.path.join(base, h))
+                  if not os.path.exists(target):
+                      bad.append((p, h, target))
+          if bad:
+              for b in bad: print("BROKEN:", b)
+              sys.exit(1)
+          print(f"Checked {len(pages)} pages, no broken internal links.")
+          PY
 
   deploy:
     if: github.event_name != 'pull_request'

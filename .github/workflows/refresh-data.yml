@@ -1,0 +1,64 @@
+name: Refresh official data
+
+on:
+  schedule:
+    # 11:15 UTC, 15:15 UTC and 22:15 UTC - after the league's own report times
+    - cron: "15 11,15,22 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Fetch official sources
+        id: fetch
+        continue-on-error: true
+        run: python3 engine/fetch_official.py
+
+      - name: Record the run
+        run: |
+          python3 - <<'PY'
+          import json, os, datetime
+          p = os.path.join("data", "raw", "_last_refresh.json")
+          now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+          s = json.load(open(p)) if os.path.exists(p) else {}
+          s.setdefault("workflow_run_at_utc", now)
+          s["workflow_status"] = "${{ steps.fetch.outcome }}"
+          json.dump(s, open(p, "w"), indent=1)
+          print(json.dumps(s, indent=1))
+          PY
+
+      - name: Rebuild site data
+        continue-on-error: true
+        run: python3 engine/pipeline.py
+
+      - name: Rebuild pages
+        continue-on-error: true
+        run: python3 engine/build_site.py
+
+      - name: Commit only if something changed
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "Nothing changed - leaving the previous snapshot live."
+            exit 0
+          fi
+          git config user.name  "nba1-bot"
+          git config user.email "nba1-bot@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: refresh official data [skip ci]"
+          git push
+
+      - name: Never fail the workflow on a data problem
+        if: always()
+        run: |
+          echo "Refresh finished. A failure here leaves the last known-good snapshot live."
+          echo "See Flagged for Review F7 on the site."

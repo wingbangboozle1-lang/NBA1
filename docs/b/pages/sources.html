@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sources — NBA1 Line Origination</title>
+<meta name="description" content="Sources">
+<link rel="stylesheet" href="../../assets/site.css">
+<script src="../../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html">Lines</a>
+<a href="../pages/picks.html">Picks</a>
+<a href="../pages/props.html">Player Props</a>
+<a href="../pages/injuries.html">Injuries</a>
+<a href="../pages/gameflow.html">Game Flow</a>
+<a href="../pages/validation.html">Validation</a>
+<a href="../pages/strategy.html">Strategies</a>
+<a href="../pages/correlations.html">Correlations</a>
+<a href="../pages/luck.html">Luck</a>
+<a href="../pages/backtest.html">Game Log</a>
+<a href="../pages/teams.html">Teams</a>
+<a href="../pages/model.html">Model</a>
+<a href="../pages/flagged.html">Flagged</a>
+<a href="../pages/questions.html">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html" class="active">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Sources</h1>
+  <p class="lede">Every official source this site uses, and exactly what each one was used for.
+  Each table row on the site links back to one of these.</p>
+
+  <div class="banner info">
+    <div class="ico">i</div>
+    <div><p><strong>Verification rule.</strong> Every value published here is traceable to one of
+    the sources below. Where a source could not supply a value, the cell is left blank and the gap
+    is recorded on the <a href="flagged.html">Flagged for Review</a> page. Nothing is inferred and
+    nothing is filled in.</p></div>
+  </div>
+
+  <div id="tbl"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h2>Data files</h2>
+  <p class="small">The raw snapshots behind every number are committed to the repository under
+  <code>data/raw/</code>, each with the exact URL and capture time inside it:</p>
+  <ul class="plain small">
+    <li><code>team_advanced.json</code> — official team advanced stats, season to date and the 2026-10-20…2026-11-05 window</li>
+    <li><code>games_completed.json</code> — official final scores</li>
+    <li><code>schedule_upcoming.json</code> — official schedule, venues, tip times</li>
+    <li><code>injuries.json</code> — the official league injury report, transcribed row by row</li>
+    <li><code>players_traditional.json</code> — official player per-game averages</li>
+    <li><code>sources.json</code> — this page, in machine-readable form</li>
+  </ul>
+
+  <h2>Refresh</h2>
+  <p class="small">A scheduled job re-fetches the schedule, results and the newest injury report and
+  commits only when something actually changed. If the job fails, the previously committed snapshot
+  stays live — a failure cannot break the site. See <a href="flagged.html">F7</a>.</p>
+
+<script>
+
+(async () => {
+  await initSources();
+  const rows = Object.entries(SOURCES.sources).map(([id,s]) => ({id, ...s}));
+  setHTML("#tbl", table([
+    {key:"id", label:"ID", cls:"lbl mono"},
+    {key:"title", label:"Source", fmt:(v,r)=>`<a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(v)}</a>
+       <div class="small faint mono">${esc(r.url)}</div>`},
+    {key:"publisher", label:"Publisher"},
+    {key:"used_for", label:"Used for", fmt: v => `<span class="small">${esc(v)}</span>`},
+  ], rows, {thin:true}));
+})().catch(e => setHTML("#tbl", '<div class="empty">'+e.message+'</div>'));
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>

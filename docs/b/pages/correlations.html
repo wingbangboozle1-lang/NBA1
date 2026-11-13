@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correlations — NBA1 Line Origination</title>
+<meta name="description" content="Correlations">
+<link rel="stylesheet" href="../../assets/site.css">
+<script src="../../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html">Lines</a>
+<a href="../pages/picks.html">Picks</a>
+<a href="../pages/props.html">Player Props</a>
+<a href="../pages/injuries.html">Injuries</a>
+<a href="../pages/gameflow.html">Game Flow</a>
+<a href="../pages/validation.html">Validation</a>
+<a href="../pages/strategy.html">Strategies</a>
+<a href="../pages/correlations.html" class="active">Correlations</a>
+<a href="../pages/luck.html">Luck</a>
+<a href="../pages/backtest.html">Game Log</a>
+<a href="../pages/teams.html">Teams</a>
+<a href="../pages/model.html">Model</a>
+<a href="../pages/flagged.html">Flagged</a>
+<a href="../pages/questions.html">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Correlations</h1>
+  <p class="lede">Two deliberately separate tables: what was measured from official data, and what
+  had to be derived from the model.</p>
+
+  <h2>Measured on official data</h2>
+  <p class="small">Pearson correlations computed across all 30 teams from the official advanced
+  table. Every pair reports r, r² and a two-sided p-value. These are reproducible from the source
+  link on each row.</p>
+  <div id="tbl-measured"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h2>Model-derived, for parlay pricing</h2>
+  <div class="banner danger">
+    <div class="ico">!</div>
+    <div><p><strong>These are not measurements.</strong> Correlations between bet legs need
+    play-by-play, which was not captured. The values below follow from the structure of the model,
+    not from data. They are labelled MODEL-DERIVED everywhere they appear and must not be quoted as
+    official. The side/total value of 0.00 is a mathematical property of the additive model under
+    equal team-score variances; the player-market values are estimates. See
+    <a href="flagged.html">F6</a>.</p></div>
+  </div>
+  <div id="tbl-derived"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h2>What correlation does to a two-leg price</h2>
+  <p class="small">Holding both leg probabilities fixed, the table shows how the true joint
+  probability moves with rho, and how much you overpay by pricing the legs as independent.
+  Positive rho helps the bettor and hurts the book; negative rho does the opposite.</p>
+  <div class="toolbar">
+    <label>Leg probability
+      <select id="f-p"><option value="">All</option></select>
+    </label>
+    <div class="spacer"></div>
+    <span class="count" id="cnt"></span>
+  </div>
+  <div id="tbl-grid"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+<script>
+
+(async () => {
+  await initSources();
+  const d = await loadJSON(DATA("correlations.json"));
+  const meas = sortBy(d.measured, "r", -1);
+  setHTML("#tbl-measured", table([
+    {key:"x", label:"Variable A", cls:"lbl"},
+    {key:"y", label:"Variable B", cls:"lbl"},
+    {key:"r", label:"r", num:true, signed:true, d:3},
+    {key:"r_squared", label:"r²", num:true, d:3, cls:"muted"},
+    {key:"p_value", label:"p (two-sided)", fmt: v =>
+      `<span class="num ${v<0.05?"pos":"muted"}">${v<0.0001?"<0.0001":v.toFixed(4)}</span>`},
+    {key:"n", label:"n", num:true, d:0, cls:"muted"},
+    {key:"status", label:"Provenance", fmt: v => prov("official","official")},
+    {key:"why", label:"Why it matters", fmt: v => `<span class="small faint">${esc(v)}</span>`},
+  ], meas, {thin:true}));
+
+  setHTML("#tbl-derived", table([
+    {key:"leg_1", label:"Leg 1", cls:"lbl"},
+    {key:"leg_2", label:"Leg 2", cls:"lbl"},
+    {key:"rho_model", label:"rho", num:true, signed:true, d:2},
+    {key:"status", label:"Provenance", fmt: v => prov("assumption","model-derived")},
+    {key:"derivation", label:"Where it comes from", fmt: v => `<span class="small faint">${esc(v)}</span>`},
+  ], d.model_derived, {thin:true}));
+
+  const g = d.parlay_pricing_grid;
+  fillSelect("#f-p", uniq(g.map(r => r.leg_prob)).sort((a,b)=>a-b));
+  const st = {p:""};
+  const draw = () => {
+    let rs = g.filter(r => st.p === "" || Math.abs(r.leg_prob - st.p) < 1e-9);
+    setText("#cnt", rs.length + " rows");
+    setHTML("#tbl-grid", table([
+      {key:"leg_prob", label:"Leg prob", num:true, d:2, cls:"muted"},
+      {key:"rho", label:"rho", num:true, signed:true, d:2},
+      {key:"true_joint_prob", label:"True joint P", num:true, d:4},
+      {key:"independent_product", label:"If priced independent", num:true, d:4, cls:"muted"},
+      {key:"difference", label:"Difference", num:true, signed:true, d:4},
+      {key:"fair_price_true", label:"Fair price", fmt: v => price(v)},
+      {key:"price_if_priced_independent", label:"Naive price", fmt: v => price(v)},
+      {key:"bettor_edge_if_priced_independent_pct", label:"Bettor edge if mispriced",
+       num:true, signed:true, d:2},
+      {key:"rho", label:"Provenance", fmt: v => prov("assumption","model-derived")},
+    ], rs, {thin:true}));
+  };
+  bind("#f-p", v => {st.p = v === "" ? "" : parseFloat(v); draw();});
+  draw();
+})().catch(e => setHTML("#tbl-measured", '<div class="empty">'+e.message+'</div>'));
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>

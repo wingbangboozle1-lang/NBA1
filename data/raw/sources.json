@@ -1,0 +1,228 @@
+{
+ "captured_at_utc": "2026-11-13T22:30:00Z",
+ "rule": "Every table row published on the site carries one of these source ids. A value that cannot be traced to one of these URLs is left blank and flagged - it is never inferred.",
+ "sources": {
+  "S1": {
+   "title": "NBA.com Stats - Teams Advanced (2026-27 Regular Season, season to date)",
+   "url": "https://www.nba.com/stats/teams/advanced",
+   "publisher": "NBA.com (official)",
+   "used_for": "Team efficiency ratings (OffRtg, DefRtg, NetRtg, Pace, eFG%, TS%, TOV%, REB%, PIE) and won-lost records, through the games of 2026-11-12."
+  },
+  "S2": {
+   "title": "NBA.com Stats - Teams Advanced, date range 10/20/2026 to 11/05/2026",
+   "url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
+   "publisher": "NBA.com (official)",
+   "used_for": "Training-window team ratings for the out-of-sample test (no game after 2026-11-05 contributes to these numbers)."
+  },
+  "S3_2026-11-06": {
+   "title": "NBA.com Games & Scores - November 6, 2026",
+   "url": "https://www.nba.com/games?date=2026-11-06",
+   "publisher": "NBA.com (official)",
+   "used_for": "Final scores (out-of-sample test games); also rest flags for 2026-11-07."
+  },
+  "S3_2026-11-07": {
+   "title": "NBA.com Games & Scores - November 7, 2026",
+   "url": "https://www.nba.com/games?date=2026-11-07",
+   "publisher": "NBA.com (official)",
+   "used_for": "Final scores (out-of-sample test games); also rest flags for 2026-11-08. Includes the NBA Mexico City Game (DEN vs IND) played at a neutral site."
+  },
+  "S3_2026-11-08": {
+   "title": "NBA.com Games & Scores - November 8, 2026",
+   "url": "https://www.nba.com/games?date=2026-11-08",
+   "publisher": "NBA.com (official)",
+   "used_for": "Final scores; also used to establish which teams played on 2026-11-08 (rest/B2B flag for 2026-11-09 games)."
+  },
+  "S3_2026-11-09": {
+   "title": "NBA.com Games & Scores - November 9, 2026",
+   "url": "https://www.nba.com/games?date=2026-11-09",
+   "publisher": "NBA.com (official)",
+   "used_for": "Final scores (out-of-sample test game 1 of 28)."
+  },
+  "S3_2026-11-10": {
+   "title": "NBA.com Games & Scores - November 10, 2026",
+   "url": "https://www.nba.com/games?date=2026-11-10",
+   "publisher": "NBA.com (official)",
+   "used_for": "Final scores (out-of-sample test games)."
+  },
+  "S3_2026-11-11": {
+   "title": "NBA.com Games & Scores - November 11, 2026",
+   "url": "https://www.nba.com/games?date=2026-11-11",
+   "publisher": "NBA.com (official)",
+   "used_for": "Final scores (out-of-sample test games)."
+  },
+  "S3_2026-11-12": {
+   "title": "NBA.com Games & Scores - November 12, 2026",
+   "url": "https://www.nba.com/games?date=2026-11-12",
+   "publisher": "NBA.com (official)",
+   "used_for": "Final scores (out-of-sample test games); also rest flags for 2026-11-13."
+  },
+  "S4": {
+   "title": "NBA.com Schedule",
+   "url": "https://www.nba.com/schedule",
+   "publisher": "NBA.com (official)",
+   "used_for": "Upcoming slate: dates, tip times (ET), venues, game ids, Emirates NBA Cup group labels."
+  },
+  "S5": {
+   "title": "NBA Injury Report: 2026-27 Season (index of every published edition)",
+   "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "publisher": "official.nba.com (official)",
+   "used_for": "Index of the league's official injury report PDFs and the reporting deadlines that govern them."
+  },
+  "S6": {
+   "title": "NBA Official Injury Report PDF - 11/13/26 05:15 PM ET edition",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "publisher": "ak-static.cms.nba.com (NBA official static CMS)",
+   "used_for": "Player participation status (Out / Doubtful / Questionable / Probable / Available / NOT YET SUBMITTED) and the reason published by the team."
+  },
+  "S7": {
+   "title": "NBA.com Stats - Players Traditional (2026-27 Regular Season)",
+   "url": "https://www.nba.com/stats/players/traditional",
+   "publisher": "NBA.com (official)",
+   "used_for": "Per-game player averages (page 1 of 10 = top 50 scorers). Player-prop baselines only; no player outside this page is modelled."
+  },
+  "S9": {
+   "title": "NBA.com Standings",
+   "url": "https://www.nba.com/standings",
+   "publisher": "NBA.com (official)",
+   "used_for": "CONSULTED BUT NOT USABLE: the standings table is rendered client-side and does not appear in the page source available to a plain HTTP fetch (only the tie-break procedure text is present). Won-lost records were therefore taken from S1 and the S8 game pages instead. See Flagged for Review F1."
+  },
+  "S8_0022600034": {
+   "title": "NBA.com game page - Knicks at Pacers, 2026-11-13",
+   "url": "https://www.nba.com/game/nyk-vs-ind-0022600034",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600035": {
+   "title": "NBA.com game page - Bucks at Magic, 2026-11-13",
+   "url": "https://www.nba.com/game/mil-vs-orl-0022600035",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600036": {
+   "title": "NBA.com game page - Cavaliers at Heat, 2026-11-13",
+   "url": "https://www.nba.com/game/cle-vs-mia-0022600036",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600037": {
+   "title": "NBA.com game page - Hawks at Bulls, 2026-11-13",
+   "url": "https://www.nba.com/game/atl-vs-chi-0022600037",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600038": {
+   "title": "NBA.com game page - Grizzlies at Pelicans, 2026-11-13",
+   "url": "https://www.nba.com/game/mem-vs-nop-0022600038",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600039": {
+   "title": "NBA.com game page - Jazz at Rockets, 2026-11-13",
+   "url": "https://www.nba.com/game/uta-vs-hou-0022600039",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600040": {
+   "title": "NBA.com game page - Warriors at Spurs, 2026-11-13",
+   "url": "https://www.nba.com/game/gsw-vs-sas-0022600040",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600041": {
+   "title": "NBA.com game page - Trail Blazers at Kings, 2026-11-13",
+   "url": "https://www.nba.com/game/por-vs-sac-0022600041",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600042": {
+   "title": "NBA.com game page - Thunder at Clippers, 2026-11-13",
+   "url": "https://www.nba.com/game/okc-vs-lac-0022600042",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600231": {
+   "title": "NBA.com game page - Nuggets at Pelicans, 2026-11-14",
+   "url": "https://www.nba.com/game/den-vs-nop-0022600231",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600232": {
+   "title": "NBA.com game page - Mavericks at Cavaliers, 2026-11-14",
+   "url": "https://www.nba.com/game/dal-vs-cle-0022600232",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600233": {
+   "title": "NBA.com game page - Pistons at Heat, 2026-11-14",
+   "url": "https://www.nba.com/game/det-vs-mia-0022600233",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600234": {
+   "title": "NBA.com game page - Nets at Grizzlies, 2026-11-14",
+   "url": "https://www.nba.com/game/bkn-vs-mem-0022600234",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600235": {
+   "title": "NBA.com game page - Bulls at Timberwolves, 2026-11-14",
+   "url": "https://www.nba.com/game/chi-vs-min-0022600235",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600236": {
+   "title": "NBA.com game page - Pacers at 76ers, 2026-11-15",
+   "url": "https://www.nba.com/game/ind-vs-phi-0022600236",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600237": {
+   "title": "NBA.com game page - Lakers at Suns, 2026-11-15",
+   "url": "https://www.nba.com/game/lal-vs-phx-0022600237",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600238": {
+   "title": "NBA.com game page - Hornets at Clippers, 2026-11-15",
+   "url": "https://www.nba.com/game/cha-vs-lac-0022600238",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600239": {
+   "title": "NBA.com game page - Spurs at Jazz, 2026-11-15",
+   "url": "https://www.nba.com/game/sas-vs-uta-0022600239",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600240": {
+   "title": "NBA.com game page - Mavericks at Celtics, 2026-11-15",
+   "url": "https://www.nba.com/game/dal-vs-bos-0022600240",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600241": {
+   "title": "NBA.com game page - Knicks at Raptors, 2026-11-15",
+   "url": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+   "publisher": "NBA.com (official)",
+   "used_for": "Venue, tip time, Knicks record. Raptors record cross-checked against S1."
+  },
+  "S8_0022600242": {
+   "title": "NBA.com game page - Rockets at Wizards, 2026-11-15",
+   "url": "https://www.nba.com/game/hou-vs-was-0022600242",
+   "publisher": "NBA.com (official)",
+   "used_for": "Venue, tip time, Rockets record. Wizards record cross-checked against S1."
+  },
+  "S8_0022600243": {
+   "title": "NBA.com game page - Hawks at Bucks, 2026-11-15",
+   "url": "https://www.nba.com/game/atl-vs-mil-0022600243",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  },
+  "S8_0022600244": {
+   "title": "NBA.com game page - Thunder at Kings, 2026-11-15",
+   "url": "https://www.nba.com/game/okc-vs-sac-0022600244",
+   "publisher": "NBA.com (official)",
+   "used_for": "Current records for both teams."
+  }
+ }
+}

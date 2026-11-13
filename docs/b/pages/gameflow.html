@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game Flow — NBA1 Line Origination</title>
+<meta name="description" content="Game Flow">
+<link rel="stylesheet" href="../../assets/site.css">
+<script src="../../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html">Lines</a>
+<a href="../pages/picks.html">Picks</a>
+<a href="../pages/props.html">Player Props</a>
+<a href="../pages/injuries.html">Injuries</a>
+<a href="../pages/gameflow.html" class="active">Game Flow</a>
+<a href="../pages/validation.html">Validation</a>
+<a href="../pages/strategy.html">Strategies</a>
+<a href="../pages/correlations.html">Correlations</a>
+<a href="../pages/luck.html">Luck</a>
+<a href="../pages/backtest.html">Game Log</a>
+<a href="../pages/teams.html">Teams</a>
+<a href="../pages/model.html">Model</a>
+<a href="../pages/flagged.html">Flagged</a>
+<a href="../pages/questions.html">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Game Flow</h1>
+  <p class="lede">What the official pace and efficiency data says about how each game should be
+  played, and the probabilities that follow from the fitted outcome spread.</p>
+
+  <div class="banner info">
+    <div class="ico">i</div>
+    <div><p><strong>Scope limit.</strong> Possession-level flow — runs, timeout patterns, quarter
+    splits — needs play-by-play data, which was not captured. Nothing of that kind is published
+    here. Everything below follows from official pace and efficiency inputs plus the fitted spread
+    of game margins. See <a href="questions.html">Q5</a>.</p></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="chipbar" id="f-date"></div>
+    <div class="spacer"></div>
+    <span class="count" id="cnt"></span>
+  </div>
+
+  <div id="tbl"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h3>Reading the probabilities</h3>
+  <dl class="kv">
+    <dt>Within 5</dt><dd>Probability the final home margin lands between −5 and +5 — a one-possession game.</dd>
+    <dt>20+</dt><dd>Probability either side wins by 20 or more. Relevant to the NBA Cup, where point differential is a tiebreaker.</dd>
+    <dt>P(OT)</dt><dd>Approximate probability the game is tied after regulation, from the density of the margin distribution at zero.</dd>
+    <dt>Pace vs league</dt><dd>Expected possessions per 48 minutes minus the league average of 99.85.</dd>
+  </dl>
+
+<script>
+
+(async () => {
+  await initSources();
+  const d = await loadJSON(DATA("gameflow.json"));
+  const rows = d.rows;
+  const dates = uniq(rows.map(r => r.date)).sort();
+  fillChipbar("#f-date", dates, v => {st.date=v; draw();}, "All dates");
+  const st = {date:""};
+  const draw = () => {
+    let rs = rows.filter(r => !st.date || r.date === st.date);
+    setText("#cnt", rs.length + " games");
+    const cols = [
+      {key:"date", label:"Date", cls:"date"},
+      {key:"time_et", label:"Tip (ET)"},
+      {key:"matchup", label:"Matchup", cls:"lbl"},
+      {key:"home_rest_days", label:"Home rest", num:true, d:0, cls:"muted"},
+      {key:"away_rest_days", label:"Away rest", num:true, d:0, cls:"muted"},
+      {key:"possessions", label:"Poss", num:true, d:1},
+      {key:"pace_vs_league", label:"Pace vs Lg", num:true, signed:true, d:1},
+      {key:"expected_total", label:"Exp total", num:true, d:1, prov:"derived"},
+      {key:"expected_margin_home", label:"Exp margin (home)", num:true, signed:true, d:1, prov:"derived"},
+      {key:"p_home_win", label:"P(home)", fmt: v => pct(v) + bar(v*100, v>0.5?"good":"bad"), prov:"derived"},
+      {key:"p_margin_within_5", label:"P(within 5)", fmt: v => pct(v), prov:"derived"},
+      {key:"p_margin_20plus", label:"P(20+)", fmt: v => pct(v), prov:"derived"},
+      {key:"p_overtime_approx", label:"P(OT)", fmt: v => pct(v,2), prov:"derived"},
+      {key:"src", label:"Src", src:true},
+    ];
+    setHTML("#tbl", table(cols, rs, {thin:true}));
+  };
+  draw();
+})().catch(e => setHTML("#tbl", '<div class="empty">'+e.message+'</div>'));
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>

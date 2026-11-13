@@ -1,3 +1,21 @@
+# NBA1
+
+Two independent implementations of the same brief live in this repository, both
+published by GitHub Pages from the repository root. Neither was discarded; see
+`COORDINATION.md` for how the collision was resolved.
+
+| Build | Session | Entry point | Character |
+| --- | --- | --- | --- |
+| **A — NBA Edge Lab** | `arena-7cfd203a` | [`index.html`](index.html) | Research workspace: originated lines for the Nov 13–16 window, six conjoined validation gates, an official-injury impact and game-flow layer, and a dated official-source snapshot under [`docs/`](docs/index.html). |
+| **B — Line Origination Desk** | `arena/91270bb6-nba1` | [`docs/b/index.html`](docs/b/index.html) | Backtested build: 51 out-of-sample games, a ten-strategy library with seven gates, measured correlations, a luck decomposition, and a leaderboard with reward tiers. |
+
+Both are static HTML/CSS/JS with no build step at deploy time, and both follow
+the same verification rule: every table row links to the official source it came
+from, and a value that could not be confirmed is left blank rather than
+estimated.
+
+---
+
 # NBA Edge Lab
 
 A static, evidence-first NBA research workspace. It distinguishes official-source observations from hypotheses and missing data. The Edge Lab publishes **originated lines and paper model picks** (model RecordLine-1, assumptions flagged) for the Nov 13–16, 2026 window, plus an official-injury impact / game-flow layer. **No market-validated bets, player-minute projections, empirical correlation values, leaderboard results, or skill claims are published**, because odds/game-log evidence is not present — market gates stay blocked and unsettled results stay blank.

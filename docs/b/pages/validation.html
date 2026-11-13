@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validation & Leaderboard — NBA1 Line Origination</title>
+<meta name="description" content="Validation & Leaderboard">
+<link rel="stylesheet" href="../../assets/site.css">
+<script src="../../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html">Lines</a>
+<a href="../pages/picks.html">Picks</a>
+<a href="../pages/props.html">Player Props</a>
+<a href="../pages/injuries.html">Injuries</a>
+<a href="../pages/gameflow.html">Game Flow</a>
+<a href="../pages/validation.html" class="active">Validation</a>
+<a href="../pages/strategy.html">Strategies</a>
+<a href="../pages/correlations.html">Correlations</a>
+<a href="../pages/luck.html">Luck</a>
+<a href="../pages/backtest.html">Game Log</a>
+<a href="../pages/teams.html">Teams</a>
+<a href="../pages/model.html">Model</a>
+<a href="../pages/flagged.html">Flagged</a>
+<a href="../pages/questions.html">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Validation &amp; Leaderboard</h1>
+  <p class="lede">Out-of-sample results, the gate set every strategy has to clear, and the
+  leaderboard that scores them.</p>
+
+  <div class="banner info">
+    <div class="ico">i</div>
+    <div><p><strong>Information discipline.</strong> The test window is 2026-11-06 to 2026-11-12
+    (51 games — every completed game captured, and all of them after the ratings cut-off).
+    Ratings come only from 2026-10-20 to 2026-11-05, so no test game contributes to
+    the ratings that predict it. Two parameters — home court and the back-to-back penalty — are
+    fitted <em>on the test window</em>; that is disclosed on every row they touch, and a
+    zeroed-parameter variant is published below so you can see how much they matter.</p></div>
+  </div>
+
+  <h2>Headline metrics</h2>
+  <div id="kpis"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h2>Leaderboard</h2>
+  <div class="tablewrap"><table id="lb" class="thin"></table></div>
+  <p class="small" id="lbnote"></p>
+
+  <h2>Gate results by strategy</h2>
+  <div class="toolbar">
+    <label>Strategy
+      <select id="f-strat"><option value="">All strategies</option></select>
+    </label>
+    <div class="spacer"></div>
+    <span class="count" id="cnt"></span>
+  </div>
+  <div id="tbl-gates"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h2>Gate definitions</h2>
+  <div id="gatedefs"></div>
+
+  <h2>Gate detail by strategy</h2>
+  <div id="gatedef"></div>
+
+  <h2>Fitted parameters</h2>
+  <div id="fit"></div>
+
+  <h2>Shrinkage sensitivity</h2>
+  <p class="small">The shrinkage constant is derived rather than guessed; the single-game noise term
+  it depends on is estimated on the test window, so it is partly test-informed. This sweep refits
+  home court and the back-to-back term at each fixed value of k.</p>
+  <div id="sweep"></div>
+
+  <h2>Luck decomposition of the model's own record</h2>
+  <div id="luckbox"></div>
+
+<script>
+
+(async () => {
+  await initSources();
+  const [vd, lb, bt] = await Promise.all([
+    loadJSON(DATA("validation.json")),
+    loadJSON(DATA("leaderboard.json")),
+    loadJSON(DATA("backtest.json"))
+  ]);
+  const m = vd.metrics;
+
+  const kpi = (label, val, sub, cls) =>
+    `<div class="card"><h4>${label}</h4><div class="kpi ${cls||""}">${val}</div>
+     <div class="kpi-sub">${sub}</div></div>`;
+  const better = (a,b) => a < b ? "good" : a > b ? "bad" : "";
+  setHTML("#kpis", `<div class="grid k4">
+    ${kpi("Margin MAE", m.mae_margin_model, `reference ${m.mae_margin_ref}`, better(m.mae_margin_model, m.mae_margin_ref))}
+    ${kpi("Total MAE", m.mae_total_model, `reference ${m.mae_total_ref}`, better(m.mae_total_model, m.mae_total_ref))}
+    ${kpi("Brier (win prob)", m.brier_model, `reference ${m.brier_ref} - lower is better`, better(m.brier_model, m.brier_ref))}
+    ${kpi("Straight up", m.straight_up_model, `reference ${m.straight_up_ref}`, "")}
+    ${kpi("Test games", m.n_games, m.window, "")}
+    ${kpi("Margin RMSE", m.rmse_margin_model, `reference ${m.rmse_margin_ref}`, better(m.rmse_margin_model, m.rmse_margin_ref))}
+    ${kpi("Residual SD", m.sigma_margin, "points of game margin", "")}
+    ${kpi("Zeroed params", m.mae_margin_zeroed_params, "MAE with HCA and B2B set to 0", "")}
+  </div>`);
+
+  // leaderboard
+  const lcols = [
+    {key:"rank", label:"#", num:true, d:0, cls:"strong"},
+    {key:"id", label:"Strat", cls:"lbl"},
+    {key:"name", label:"Strategy"},
+    {key:"family", label:"Family"},
+    {key:"lbs", label:"LBS", num:true, d:1, cls:"strong"},
+    {key:"tier", label:"Tier", fmt: v => {
+      const cls = v.startsWith("Tier 1")?"t1":v.startsWith("Tier 2")?"t2":v.startsWith("Tier 3")?"t3":"t0";
+      return badge(v, cls);
+    }},
+    {key:"n_graded", label:"Graded", num:true, d:0},
+    {key:"record", label:"Record"},
+    {key:"units", label:"Units", num:true, signed:true, d:2},
+    {key:"components", label:"Components (samp/edge/calib/result/gates)", fmt: v =>
+      `<span class="num muted mono">${v.sample.toFixed(2)} ${v.edge.toFixed(2)} ${v.calibration.toFixed(2)} ${v.result.toFixed(2)} ${v.gates.toFixed(2)}</span>`},
+  ];
+  document.querySelector("#lb").innerHTML =
+    "<thead><tr>" + lcols.map(c=>`<th class="${c.num?"num":""}">${c.label}</th>`).join("") +
+    "</tr></thead><tbody>" + lb.rows.map(r =>
+      "<tr>" + lcols.map(c => {
+        const v = r[c.key];
+        const html = c.fmt ? c.fmt(v,r) : c.num ? num(v,c.d,c.cls) : esc(v ?? "—");
+        return `<td class="${c.num?"num":""}">${html}</td>`;
+      }).join("") + "</tr>").join("") + "</tbody>";
+  setHTML("#lbnote", `<strong>Formula:</strong> <code>${esc(lb.formula)}</code>.
+    <strong>Hard cap:</strong> a strategy that fails G4 (skill, not luck) or has not passed G1
+    (sample size) cannot be promoted past Tier 3 regardless of its score — an 8-4 run on 12 plays
+    is information about luck, not skill.`);
+
+  // gates
+  fillSelect("#f-strat", vd.strategies.map(s => ({v:s.id, l:s.id + " " + s.name})));
+  const st = {strat:""};
+  const draw = () => {
+    let ss = vd.strategies.filter(s => !st.strat || s.id === st.strat);
+    setText("#cnt", ss.length + " strategies");
+    const cols = [
+      {key:"id", label:"Strat", cls:"lbl"},
+      {key:"name", label:"Strategy"},
+      {key:"rule", label:"Rule", fmt: v => `<span class="small">${esc(v)}</span>`},
+      {key:"threshold", label:"Threshold", cls:"mono"},
+      {key:"n_graded", label:"Graded", num:true, d:0},
+      {key:"record", label:"Record", fmt:(v,r)=>`${r.wins}-${r.losses}${r.pushes?"-"+r.pushes:""}`},
+      {key:"hit_rate", label:"Hit rate", fmt: v => v===null?'<span class="blank">n/a</span>':pct(v)},
+      {key:"wilson_95", label:"Wilson 95%", fmt: v => v ? `<span class="num muted mono">${pct(v[0],3)} – ${pct(v[1],3)}</span>` : ""},
+      {key:"binomial_p", label:"Exact p", num:true, d:3, cls:"muted"},
+      {key:"units_at_minus110", label:"Units", num:true, signed:true, d:2},
+      {key:"gates", label:"Gates", fmt: v => `<div class="pill-row">` +
+        v.map(g => `${gateBadge(g.status)}<span class="small faint">${g.id}</span>`).join("") + `</div>`},
+    ];
+    setHTML("#tbl-gates", table(cols, ss, {thin:true}));
+    // detail rows
+    let html = "";
+    for (const s of ss) {
+      html += `<details class="q"><summary>${esc(s.id)} — ${esc(s.name)}: gate detail</summary><div class="body">`;
+      html += `<p class="small"><strong>Why this might work:</strong> ${esc(s.why)}</p>`;
+      html += `<div class="tablewrap"><table class="thin"><thead><tr>
+        <th>Gate</th><th>Name</th><th>Status</th><th>Detail</th><th>Threshold</th></tr></thead><tbody>`;
+      for (const g of s.gates) {
+        html += `<tr><td class="lbl">${esc(g.id)}</td><td>${esc(g.name)}</td>
+          <td>${gateBadge(g.status)}</td><td class="small">${esc(g.detail)}</td>
+          <td class="small faint mono">${esc(g.threshold)}</td></tr>`;
+      }
+      html += `</tbody></table></div>`;
+      if (!s.gradeable) html += `<p class="small"><span class="badge fail">UNGRADED</span> ${esc(s.ungraded_reason||"")}</p>`;
+      html += `</div></details>`;
+    }
+    setHTML("#gatedef", html);
+  };
+  bind("#f-strat", v => {st.strat=v; draw();});
+  draw();
+
+  // gate definitions (rendered once, in their own container)
+  setHTML("#gatedefs", `<div class="tablewrap"><table class="thin"><thead><tr>
+    <th>Gate</th><th>Name</th><th>Definition</th></tr></thead><tbody>` +
+    vd.gate_definitions.map(g => `<tr><td class="lbl">${esc(g.id)}</td><td>${esc(g.name)}</td>
+      <td class="small">${esc(g.definition)}</td></tr>`).join("") + `</tbody></table></div>`);
+
+  // fit
+  const f = vd.fit;
+  const frow = (k, o) => `<tr><td class="lbl">${k}</td>
+    <td class="num ${o.est>0?"pos":"neg"}">${o.est}</td>
+    <td class="num muted">${o.se}</td><td class="num muted">${o.t}</td>
+    <td>${o.used===true?badge("used","pass"):o.used===false?badge("set to 0","fail"):badge(String(o.used),"na")}</td>
+    <td class="small faint">${esc(o.disclosure||"")}</td></tr>`;
+  setHTML("#fit", `<div class="tablewrap"><table class="thin"><thead><tr>
+    <th>Parameter</th><th class="num">Estimate</th><th class="num">Std err</th>
+    <th class="num">t</th><th>Applied?</th><th>Disclosure</th></tr></thead><tbody>
+    ${frow("Home court advantage", f.hca)}
+    ${frow("B2B effect on home margin", f.b2b_coef_on_home_margin)}
+    ${frow("Totals bias", f.total_bias)}
+    ${frow("Totals B2B coefficient", f.total_b2b_coef)}
+    </tbody></table></div>
+    <p class="small">n = ${f.n}. Back-to-backs detected: ${f.b2b_detected_home} home,
+    ${f.b2b_detected_away} away. <span class="faint">${esc(f.b2b_caveat)}</span></p>`);
+
+  // sweep
+  const sd = f.shrink_derivation;
+  const sw = `<div class="tablewrap"><table class="thin"><thead><tr>
+    <th class="num">k</th><th class="num">HCA</th><th class="num">B2B applied</th>
+    <th class="num">Residual SD</th><th class="num">Margin MAE</th><th class="num">Margin RMSE</th>
+    <th class="num">Brier</th><th>Selected</th></tr></thead><tbody>` +
+    f.shrink_sweep.map(s => `<tr>
+      <td class="num ${s.selected?"strong":"muted"}">${s.k}</td>
+      <td class="num muted">${s.hca}</td><td class="num muted">${s.b2b_penalty_applied}</td>
+      <td class="num muted">${s.sigma_margin}</td>
+      <td class="num ${s.selected?"strong":"muted"}">${s.mae_margin}</td>
+      <td class="num muted">${s.rmse_margin}</td><td class="num muted">${s.brier}</td>
+      <td>${s.selected?badge("selected","pass"):""}</td></tr>`).join("") + `</tbody></table></div>`;
+  setHTML("#sweep", `
+    <div class="grid k4" style="margin-bottom:12px">
+      <div class="card"><h4>Derived k</h4><div class="kpi">${sd.shrink_k_derived}</div>
+        <div class="kpi-sub">weight ${sd.shrink_weight_at_G} on the observed rating</div></div>
+      <div class="card"><h4>Games per rating</h4><div class="kpi">${sd.games_behind_each_rating_G}</div>
+        <div class="kpi-sub">G in the training window</div></div>
+      <div class="card"><h4>Single-game noise (s)</h4><div class="kpi">${sd.implied_single_game_team_noise_s}</div>
+        <div class="kpi-sub">net rating points per 100</div></div>
+      <div class="card"><h4>Implied true spread</h4><div class="kpi">${sd.implied_var_of_true_net_rating}</div>
+        <div class="kpi-sub">variance of true net rating</div></div>
+    </div>
+    <p class="small"><code>${esc(sd.formula)}</code> — ${esc(sd.disclosure)}</p>
+    ${sw}`);
+
+  // luck decomposition of the record
+  const dec = bt.rows.length;
+  const wins = bt.rows.filter(r => r.home_won === 1).length;
+  setHTML("#luckbox", `<p class="small">The model's straight-up record on the test window was
+    <strong>${m.straight_up_model}</strong> against the reference's
+    <strong>${m.straight_up_ref}</strong>. With a residual standard deviation of
+    ${m.sigma_margin} points and only ${dec} games, a swing of two or three games is well inside
+    one standard deviation of pure chance — which is precisely why gate G4 exists and why nothing
+    here is promoted on the strength of this window. See
+    <a href="flagged.html">F8</a>.</p>`);
+})().catch(e => setHTML("#kpis", '<div class="empty">'+e.message+'</div>'));
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Player Props — NBA1 Line Origination</title>
+<meta name="description" content="Player Props">
+<link rel="stylesheet" href="../../assets/site.css">
+<script src="../../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html">Lines</a>
+<a href="../pages/picks.html">Picks</a>
+<a href="../pages/props.html" class="active">Player Props</a>
+<a href="../pages/injuries.html">Injuries</a>
+<a href="../pages/gameflow.html">Game Flow</a>
+<a href="../pages/validation.html">Validation</a>
+<a href="../pages/strategy.html">Strategies</a>
+<a href="../pages/correlations.html">Correlations</a>
+<a href="../pages/luck.html">Luck</a>
+<a href="../pages/backtest.html">Game Log</a>
+<a href="../pages/teams.html">Teams</a>
+<a href="../pages/model.html">Model</a>
+<a href="../pages/flagged.html">Flagged</a>
+<a href="../pages/questions.html">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Player Props</h1>
+  <p class="lede">Per-game projections for every player in the captured official minutes table,
+  shown against their own season average, with each adjustment broken out separately.</p>
+
+  <div class="banner danger">
+    <div class="ico">!</div>
+    <div><p><strong>No probability is published here, on purpose.</strong> The model can produce a
+    projection, but game-to-game variance has never been measured — that needs player game logs,
+    which were not captured. Publishing a probability without a measured variance would be
+    inventing a number, so the column is left blank. See
+    <a href="flagged.html">F2</a> and <a href="questions.html">Q3</a>.</p></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="chipbar" id="f-date"></div>
+    <div class="spacer"></div>
+    <label>Team
+      <select id="f-team"><option value="">All teams</option></select>
+    </label>
+    <label>Stat
+      <select id="f-stat">
+        <option value="pts">Points</option><option value="reb">Rebounds</option>
+        <option value="ast">Assists</option><option value="fg3m">3-pointers made</option>
+        <option value="pts_reb_ast">PRA</option>
+      </select>
+    </label>
+    <label>Min |change|
+      <select id="f-delta">
+        <option value="0">Any</option><option value="1">1.0+</option>
+        <option value="2">2.0+</option><option value="3">3.0+</option>
+      </select>
+    </label>
+    <div class="spacer"></div>
+    <span class="count" id="cnt"></span>
+  </div>
+
+  <div id="tbl"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h3>What each factor does</h3>
+  <dl class="kv">
+    <dt>Possessions</dt><dd>Expected game possessions ÷ the team's season pace.</dd>
+    <dt>Opponent defence</dt><dd>1 + (opponent DefRtg − league average) ÷ league average. Applies to points, assists and threes.</dd>
+    <dt>Rebound rate</dt><dd>1 − 0.5 × (opponent DREB% − league average) ÷ league average.</dd>
+    <dt>Usage</dt><dd>1 + 0.35 × (teammate minutes unavailable). Only counted when the minutes are known, so it is a floor.</dd>
+    <dt>Season avg</dt><dd>The player's own official per-game average. This is the number being projected away from.</dd>
+  </dl>
+  <p class="small faint">The three multipliers are modelling choices, not official measurements —
+  see <a href="flagged.html">F4</a>.</p>
+
+<script>
+
+(async () => {
+  await initSources();
+  const d = await loadJSON(DATA("props.json"));
+  const rows = d.rows;
+  const dates = uniq(rows.map(r => r.date)).sort();
+  fillChipbar("#f-date", dates, v => {st.date=v; draw();}, "All dates");
+  fillSelect("#f-team", uniq(rows.map(r => r.team)).sort());
+  const st = {date:"", team:"", stat:"pts", delta:0};
+  const S = {pts:["pts","Points"], reb:["reb","Rebounds"], ast:["ast","Assists"],
+             fg3m:["fg3m","3PM"], pts_reb_ast:["pts_reb_ast","PRA"]};
+  const draw = () => {
+    const [k, label] = S[st.stat];
+    let rs = rows.filter(r =>
+      (!st.date || r.date === st.date) &&
+      (!st.team || r.team === st.team) &&
+      Math.abs(Number(r["delta_"+k] ?? 0)) >= st.delta);
+    rs = sortBy(rs, "delta_"+k, -1);
+    setText("#cnt", rs.length + " of " + rows.length + " player games");
+    const cols = [
+      {key:"date", label:"Date", cls:"date"},
+      {key:"matchup", label:"Game", cls:"lbl"},
+      {key:"player", label:"Player", cls:"lbl"},
+      {key:"team", label:"TM"},
+      {key:"opponent", label:"vs"},
+      {key:"gp", label:"GP", num:true, d:0, cls:"muted"},
+      {key:"season_min", label:"MPG", num:true, d:1, cls:"muted"},
+      {key:"season_avg", label:"Season avg", num:true, d:1, cls:"muted",
+        fmt:(v,r)=>num(r["baseline_"+st.stat],1,"muted")},
+      {key:"proj", label:"Projection", num:true, d:1, cls:"strong", prov:"derived",
+        fmt:(v,r)=>num(r["proj_"+st.stat],1,"strong")},
+      {key:"delta", label:"Change", num:true, signed:true, d:2, prov:"derived",
+        fmt:(v,r)=>signed(r["delta_"+st.stat],2)},
+      {key:"poss_factor", label:"Poss", num:true, d:3, cls:"muted", prov:"derived"},
+      {key:"def_factor", label:"Opp def", num:true, d:3, cls:"muted", prov:"derived"},
+      {key:"reb_factor", label:"Reb", num:true, d:3, cls:"muted", prov:"derived"},
+      {key:"usage_factor", label:"Usage", num:true, d:3, cls:"muted", prov:"derived"},
+      {key:"probability", label:"P(over)", fmt: v =>
+        v === null ? '<span class="blank" title="No measured variance - see F2/Q3">n/a</span>' : pct(v)},
+      {key:"src_baseline", label:"Src", src:true},
+    ];
+    setHTML("#tbl", table(cols, rs, {thin:true}));
+  };
+  bind("#f-team", v => {st.team=v; draw();});
+  bind("#f-stat", v => {st.stat=v; draw();});
+  bind("#f-delta", v => {st.delta=parseFloat(v)||0; draw();});
+  draw();
+})().catch(e => setHTML("#tbl", '<div class="empty">Failed to load: '+e.message+'</div>'));
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Out-of-Sample Game Log — NBA1 Line Origination</title>
+<meta name="description" content="Out-of-Sample Game Log">
+<link rel="stylesheet" href="../../assets/site.css">
+<script src="../../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html">Lines</a>
+<a href="../pages/picks.html">Picks</a>
+<a href="../pages/props.html">Player Props</a>
+<a href="../pages/injuries.html">Injuries</a>
+<a href="../pages/gameflow.html">Game Flow</a>
+<a href="../pages/validation.html">Validation</a>
+<a href="../pages/strategy.html">Strategies</a>
+<a href="../pages/correlations.html">Correlations</a>
+<a href="../pages/luck.html">Luck</a>
+<a href="../pages/backtest.html" class="active">Game Log</a>
+<a href="../pages/teams.html">Teams</a>
+<a href="../pages/model.html">Model</a>
+<a href="../pages/flagged.html">Flagged</a>
+<a href="../pages/questions.html">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Out-of-Sample Game Log</h1>
+  <p class="lede">All 51 games in the test window, with the actual official final score next to both
+  the reference forecast and the model forecast.</p>
+
+  <div class="banner info">
+    <div class="ico">i</div>
+    <div><p><strong>Ratings window.</strong> Every forecast on this page was produced from team
+    ratings computed on 2026-10-20 to 2026-11-05 only. No game on this page contributed to those
+    ratings. The final scores are official. One game — Denver 114, Indiana 102 on 2026-11-07 —
+    was the NBA Mexico City Game, labelled "Neutral Site" by the official page; home-court
+    advantage is set to zero for it in both the forecast and the HCA regression
+    (<a href="flagged.html">F12</a>).</p></div>
+  </div>
+
+  <div class="toolbar">
+    <div class="chipbar" id="f-date"></div>
+    <div class="spacer"></div>
+    <label>Show
+      <select id="f-show">
+        <option value="all">All games</option>
+        <option value="model_better">Model beat the reference (margin)</option>
+        <option value="ref_better">Reference beat the model (margin)</option>
+        <option value="big">Absolute margin error 20+</option>
+      </select>
+    </label>
+    <div class="spacer"></div>
+    <span class="count" id="cnt"></span>
+  </div>
+
+  <div id="tbl"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h2>Error distribution</h2>
+  <div id="dist"></div>
+
+<script>
+
+(async () => {
+  await initSources();
+  const d = await loadJSON(DATA("backtest.json"));
+  const rows = d.rows;
+  const dates = uniq(rows.map(r => r.date)).sort();
+  fillChipbar("#f-date", dates, v => {st.date=v; draw();}, "All dates");
+  const st = {date:"", show:"all"};
+  const draw = () => {
+    let rs = rows.filter(r => {
+      if (st.date && r.date !== st.date) return false;
+      if (st.show === "model_better") return Math.abs(r.err_model_margin) < Math.abs(r.err_ref_margin);
+      if (st.show === "ref_better") return Math.abs(r.err_model_margin) > Math.abs(r.err_ref_margin);
+      if (st.show === "big") return Math.abs(r.err_model_margin) >= 20;
+      return true;
+    });
+    setText("#cnt", rs.length + " games");
+    const cols = [
+      {key:"date", label:"Date", cls:"date"},
+      {key:"matchup", label:"Matchup", cls:"lbl"},
+      {key:"away_pts", label:"Away", num:true, d:0, cls:"muted"},
+      {key:"home_pts", label:"Home", num:true, d:0, cls:"muted"},
+      {key:"ot", label:"OT", num:true, d:0, cls:"muted"},
+      {key:"neutral", label:"Neutral", fmt: v => v ? badge("neutral site","prov") : ""},
+      {key:"actual_margin_home", label:"Act margin", num:true, signed:true, d:0, cls:"strong", prov:"official"},
+      {key:"ref_spread_home", label:"Ref", num:true, signed:true, d:1, cls:"muted", prov:"derived"},
+      {key:"model_spread_home", label:"Model", num:true, signed:true, d:1, cls:"muted", prov:"derived"},
+      {key:"err_ref_margin", label:"Ref err", num:true, signed:true, d:1, cls:"muted"},
+      {key:"err_model_margin", label:"Model err", num:true, signed:true, d:1, prov:"derived"},
+      {key:"actual_total", label:"Act total", num:true, d:0, cls:"strong", prov:"official"},
+      {key:"ref_total", label:"Ref T", num:true, d:1, cls:"muted", prov:"derived"},
+      {key:"model_total", label:"Model T", num:true, d:1, cls:"muted", prov:"derived"},
+      {key:"err_model_total", label:"Model err T", num:true, signed:true, d:1, prov:"derived"},
+      {key:"home_b2b", label:"H B2B", num:true, d:0, cls:"muted"},
+      {key:"away_b2b", label:"A B2B", num:true, d:0, cls:"muted"},
+      {key:"src", label:"Src", src:true},
+    ];
+    setHTML("#tbl", table(cols, rs, {thin:true}));
+
+    // error distribution
+    const buckets = [0,5,10,15,20,25,30];
+    let html = `<div class="tablewrap"><table class="thin"><thead><tr>
+      <th>Absolute margin error</th><th class="num">Model</th><th class="num">Reference</th>
+      <th class="num">Model share</th><th class="num">Reference share</th></tr></thead><tbody>`;
+    for (let i=0;i<buckets.length;i++){
+      const lo = buckets[i], hi = i+1<buckets.length ? buckets[i+1] : 1e9;
+      const m = rows.filter(r => Math.abs(r.err_model_margin)>=lo && Math.abs(r.err_model_margin)<hi).length;
+      const f = rows.filter(r => Math.abs(r.err_ref_margin)>=lo && Math.abs(r.err_ref_margin)<hi).length;
+      html += `<tr><td class="lbl">${lo} – ${hi===1e9?"∞":hi}</td>
+        <td class="num">${m}</td><td class="num muted">${f}</td>
+        <td class="num muted">${(100*m/rows.length).toFixed(0)}%</td>
+        <td class="num muted">${(100*f/rows.length).toFixed(0)}%</td></tr>`;
+    }
+    html += `</tbody></table></div>
+      <p class="small">n = ${rows.length}. Mean absolute margin error: model
+      ${d.metrics.mae_margin_model}, reference ${d.metrics.mae_margin_ref}.
+      Bias (mean signed error): ${d.metrics.bias_margin_model}.</p>`;
+    setHTML("#dist", html);
+  };
+  bind("#f-show", v => {st.show=v; draw();});
+  draw();
+})().catch(e => setHTML("#tbl", '<div class="empty">'+e.message+'</div>'));
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>

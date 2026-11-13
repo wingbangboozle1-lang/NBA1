@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Originated Lines — NBA1 Line Origination</title>
+<meta name="description" content="Originated Lines">
+<link rel="stylesheet" href="../../assets/site.css">
+<script src="../../assets/site.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <a class="brand" href="../index.html">NBA<span>1</span></a>
+    <nav class="main">
+<a href="../index.html">Overview</a>
+<a href="../pages/lines.html" class="active">Lines</a>
+<a href="../pages/picks.html">Picks</a>
+<a href="../pages/props.html">Player Props</a>
+<a href="../pages/injuries.html">Injuries</a>
+<a href="../pages/gameflow.html">Game Flow</a>
+<a href="../pages/validation.html">Validation</a>
+<a href="../pages/strategy.html">Strategies</a>
+<a href="../pages/correlations.html">Correlations</a>
+<a href="../pages/luck.html">Luck</a>
+<a href="../pages/backtest.html">Game Log</a>
+<a href="../pages/teams.html">Teams</a>
+<a href="../pages/model.html">Model</a>
+<a href="../pages/flagged.html">Flagged</a>
+<a href="../pages/questions.html">Questions</a>
+<a href="../pages/suggestions.html">Suggestions</a>
+<a href="../pages/sources.html">Sources</a>
+    </nav>
+    <span class="stamp">as of 2026-11-13</span>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+
+  <h1>Originated Lines</h1>
+  <p class="lede">Spreads, totals and moneylines produced by the model for every game on the next
+  three slates, shown next to the naive reference line they are being tested against.</p>
+
+  <div class="banner info">
+    <div class="ico">i</div>
+    <div><p><strong>"Reference" is a deliberately naive model, not a sportsbook.</strong>
+    No book price is published by an NBA-operated source, so none can be linked. The reference is
+    raw net rating + a flat +2.0 home edge for the side, and the two teams' published scoring
+    averages added together for the total. <em>Model gap</em> is the difference between the two
+    models — it is not edge against a market. See
+    <a href="flagged.html">F3</a>.</p></div>
+  </div>
+
+  <div class="toolbar">
+    <label>Slate
+      <select id="f-date"><option value="">All dates</option></select>
+    </label>
+    <label>Team
+      <select id="f-team"><option value="">All teams</option></select>
+    </label>
+    <label>Min |model gap|
+      <select id="f-edge">
+        <option value="0">Any</option><option value="2">2.0+</option>
+        <option value="3">3.0+</option><option value="5">5.0+</option>
+      </select>
+    </label>
+    <div class="spacer"></div>
+    <span class="count" id="cnt"></span>
+  </div>
+
+  <div id="tbl"><div class="empty" id="loadmsg">Still loading…</div></div>
+
+  <h3>Column notes</h3>
+  <dl class="kv">
+    <dt>Ref spread</dt><dd>Naive reference home spread. Negative = home favoured.</dd>
+    <dt>Model spread</dt><dd>Originated home spread: efficiency + shrinkage + home court + rest + availability.</dd>
+    <dt>Gap</dt><dd>Model minus reference. Positive = the model likes the home side more than the reference does.</dd>
+    <dt>P(home cover)</dt><dd>Probability the home side covers the reference spread, from the fitted margin spread.</dd>
+    <dt>P(over)</dt><dd>Probability the game goes over the reference total.</dd>
+    <dt>Fair ML</dt><dd>Vig-free American price implied by the model win probability.</dd>
+    <dt>Avail. loss</dt><dd>Net-rating points per 100 possessions removed for official injury-report
+      unavailability. A floor — see <a href="flagged.html">F2</a>.</dd>
+  </dl>
+
+<script>
+
+(async () => {
+  await initSources();
+  const d = await loadJSON(DATA("lines.json"));
+  const rows = d.rows;
+  const dates = uniq(rows.map(r => r.date)).sort();
+  const teams = uniq(rows.flatMap(r => [r.home, r.away])).sort();
+  fillSelect("#f-date", dates);
+  fillSelect("#f-team", teams);
+
+  const st = {date:"", team:"", edge:0};
+  const draw = () => {
+    let rs = rows.filter(r =>
+      (!st.date || r.date === st.date) &&
+      (!st.team || r.home === st.team || r.away === st.team) &&
+      (Math.abs(r.spread_edge) >= st.edge || Math.abs(r.total_edge) >= st.edge));
+    rs = sortBy(rs, "date");
+    setText("#cnt", rs.length + " of " + rows.length + " games");
+    const cols = [
+      {key:"date", label:"Date", cls:"date"},
+      {key:"time_et", label:"Tip (ET)"},
+      {key:"matchup", label:"Matchup", cls:"lbl"},
+      {key:"away_rec", label:"Away rec"},
+      {key:"home_rec", label:"Home rec"},
+      {key:"ref_spread_home", label:"Ref spread", num:true, signed:true, d:1, prov:"derived"},
+      {key:"model_spread_home", label:"Model spread", num:true, signed:true, d:1, prov:"derived"},
+      {key:"spread_edge", label:"Gap", num:true, signed:true, d:2, prov:"derived"},
+      {key:"ref_total", label:"Ref total", num:true, d:1, prov:"derived"},
+      {key:"model_total", label:"Model total", num:true, d:1, prov:"derived"},
+      {key:"total_edge", label:"Gap", num:true, signed:true, d:2, prov:"derived"},
+      {key:"model_possessions", label:"Poss", num:true, d:1, cls:"muted", prov:"derived"},
+      {key:"p_home_cover_ref", label:"P(home cover)", fmt: v => pct(v), prov:"derived"},
+      {key:"p_over_ref_total", label:"P(over)", fmt: v => pct(v), prov:"derived"},
+      {key:"ml_home_fair", label:"Fair ML home", fmt: v => price(v), prov:"derived"},
+      {key:"ml_away_fair", label:"Fair ML away", fmt: v => price(v), prov:"derived"},
+      {key:"home_availability_loss", label:"Home avail.", num:true, d:2, cls:"muted", prov:"assumption"},
+      {key:"away_availability_loss", label:"Away avail.", num:true, d:2, cls:"muted", prov:"assumption"},
+      {key:"cup_group", label:"Cup"},
+      {key:"venue", label:"Venue"},
+      {key:"src", label:"Src", src:true},
+    ];
+    setHTML("#tbl", table(cols, rs, {thin:true}));
+  };
+  bind("#f-date", v => {st.date=v; draw();});
+  bind("#f-team", v => {st.team=v; draw();});
+  bind("#f-edge", v => {st.edge=parseFloat(v)||0; draw();});
+  draw();
+})().catch(e => setHTML("#tbl", '<div class="empty">Failed to load: '+e.message+'</div>'));
+
+</script>
+
+  </div>
+</main>
+<footer class="bot">
+  <div class="wrap">
+    <p><strong>NBA1</strong> — original NBA line origination, validation and analysis.
+    Every table row on this site links to the official source it came from. Values that
+    could not be confirmed are left blank and listed on the
+    <a href="../pages/flagged.html">Flagged for Review</a> page — they are never inferred.</p>
+    <p>Not affiliated with or endorsed by the National Basketball Association.
+    Data © NBA; used here with attribution and links to the official pages.</p>
+  </div>
+</footer>
+</body>
+</html>
