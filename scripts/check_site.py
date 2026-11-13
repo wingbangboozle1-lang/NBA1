@@ -5,7 +5,8 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = ["index.html", "research.html", "slate.html", "suggestions.html", "review.html", "sources.html"]
+PAGES = ["index.html", "research.html", "slate.html", "suggestions.html", "review.html", "sources.html",
+         "lines.html", "gameflow.html"]
 OFFICIAL_HOSTS = {"nba.com", "www.nba.com", "official.nba.com", "docs.github.com"}
 
 class Audit(HTMLParser):
