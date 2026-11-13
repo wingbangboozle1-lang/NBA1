@@ -364,7 +364,7 @@ Session `arena-549550e3` works on branch `arena/549550e3-nba1` (base `f73edd2`).
 | V5 | Correlation values (Fréchet bounds from marginals; empirical rho pending, flagged) | done | docs/strategies.html (new section) / generated pages | no invented numbers |
 | V6 | Injury rotation/production impact + game-flow factors (rest/b2b from official schedule) | done | generated pages | only officially-known PPG summed; unknowns blank |
 | V7 | Re-verify combined data line-by-line; confirm site builds; no broken links | done | scripts/verify_all.py | logged below |
-| V8 | Final PR to main, merge, confirm Pages deploy, record links here | done | COORDINATION.md | recorded at end of file |
+| V8 | Final PR to main, merge, confirm Pages deploy, record links here | done | COORDINATION.md | PR #15 MERGED (`740ef2c`); Pages `built` at that commit; details in "Final integration record" below |
 
 ## Verification log (session arena-549550e3)
 
@@ -377,3 +377,14 @@ Session `arena-549550e3` works on branch `arena/549550e3-nba1` (base `f73edd2`).
 ## Conflict log (session arena-549550e3)
 
 - 2026-11-13: rebasing this session's COORDINATION.md claim onto `origin/main` produced an add/add conflict because other sessions had already created the board on main. Resolution: upstream file kept in full, this section appended. No other session's content removed.
+- 2026-11-13 (second rebase, onto `d7f21b6`): session `arena-7cfd203a` (PRs #10/#12/#13) had rewritten `scripts/build_site.py` (+1604 lines), added `docs/pages/*` and the `data/derived/*` analytics layer. Resolution: took `main`'s `build_site.py` and `docs/index.html`, `docs/strategies.html`, `docs/summary.html`; kept this session's data edits (`data/injuries.json` blanking, `flags/sources/strategies/summary` updates), root pages (`lines.html`, `gameflow.html`, `index.html`, `review.html`), `README.md`, `scripts/check_site.py`, and the legacy flat `docs/{flagged,injuries,picks,sources}.html` this session regenerated. Nothing from either side discarded.
+- 2026-11-13: `origin/main`'s `COORDINATION.md` itself contained committed `<<<<<<< / ======= / >>>>>>>` conflict markers (two full boards trapped inside one marker block). Resolved as a strict union: both boards (`arena-7cfd203a`'s "Shared Task Board" and the earlier aggregated "Coordination board" with all session sections) kept verbatim, markers stripped. Logged as an irregularity fixed during integration.
+- Parallel overlap note: sessions `arena-7cfd203a` (calibrated origination desk under `docs/pages/`, `data/derived/lines.json`) and this session (`RecordLine-1` root Edge Lab pages) independently originated lines for the same window. Both are published, clearly separated (root `lines.html` vs `docs/pages/lines.html`), neither market-validated; their `known_gaps` (no rest adjustment) can be filled from this session's rest matrix (`data/slate_full.json`, `gameflow.html`).
+
+## Final integration record (session arena-549550e3)
+
+- **PR:** https://github.com/wingbangboozle1-lang/NBA1/pull/15 — state **MERGED** 2026-11-13/14, merge commit `740ef2c7877d076bd057d2a1b3299134cc1716a0` (merge commit, no approval wait, per brief).
+- **Verification before merge (all exit 0):** `scripts/verify_all.py` (builders + source-per-row checker + data audits) · `scripts/build_site.py` (15 pages, root staleness clean) · `scripts/check_site.py` (8 pages, 270 rows, every row officially sourced, no broken links) · `scripts/check_links.py` PASS · `scripts/verify_data.py` errors=0 · `scripts/verify_inline.py` 20/20 · local HTTP smoke test 17×200.
+- **GitHub Pages:** workflow "Publish static site to GitHub Pages" run `43526957551` → success (deploy job); "pages build and deployment" run `43526956226` → success; repository Pages API status **`built`** at commit `740ef2c`; live URL https://wingbangboozle1-lang.github.io/NBA1/ — fetched after deploy: landing page serves the integrated hero/links (26 paper picks, Nov 13–16 slate, 18 open flags), `lines.html` serves the full four-slate pick tables with per-row official sources.
+- **Post-deploy fix:** live-page readback exposed one rendering defect (pick cells emitting literal `<strong>` markup); fixed in `scripts/build_edge_site.py` (raw-cell prefix list), rebuilt, `verify_all.py` green — carried in the follow-up record PR for this file.
+- **Flagged, non-blocking (published on `review.html` E-01…E-10):** model parameters are assumptions; paper picks not market-validated; no team totals; 20 blank-team injury rows; 11/14 partial submissions + CLE extraction discrepancy; 11/15–16 reports unpublished; Nov-15 records from game-page strip only; LAL/CHA/TOR leader blanks; 13 implied matchups blanked; PDF text extraction lossy.
