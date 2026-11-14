@@ -129,3 +129,21 @@ code{font-family:var(--mono);font-size:.92em;background:#eef1f5;padding:1px 5px;
   .side-note{grid-column:1/-1}
   .topbar-in{height:auto;flex-direction:column;align-items:flex-start;gap:8px;padding:10px 0}
 }
+
+/* decision workspace + verification chips (session arena/cc5a6652-nba1) */
+.chip{display:inline-block;padding:1px 7px;border-radius:9px;font-size:11px;font-weight:700;
+  letter-spacing:.02em;white-space:nowrap}
+.chip.ok{background:var(--ok-soft);color:var(--ok)}
+.chip.bad{background:#fdeaea;color:#a32020}
+.chip.warn{background:#fdf3e2;color:#8a5a00}
+.chip.info{background:#e8f0fb;color:#1b4b8f}
+.bad{color:#a32020;font-weight:700}
+.dz{display:grid;grid-template-columns:1fr;gap:14px;margin:10px 0 4px}
+.dcard{border:1px solid var(--line,#e3e8ef);border-radius:10px;padding:12px 14px;background:#fff}
+.dcard h3{margin:0 0 4px;font-size:15px}
+.dline{font-size:12.5px;color:#55606e;margin:2px 0}
+.dline b{color:#1d2733}
+.steps{counter-reset:s;list-style:none;padding:0;margin:6px 0}
+.steps li{counter-increment:s;margin:6px 0;padding-left:26px;position:relative;font-size:13px}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:18px;height:18px;
+  border-radius:50%;background:#1b4b8f;color:#fff;font-size:11px;text-align:center;line-height:18px}
