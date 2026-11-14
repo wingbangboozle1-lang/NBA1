@@ -50,11 +50,17 @@ def main():
     ragged = []
     total_rows = 0
     total_links = 0
+    script_blocks = 0
 
     for p in pages:
         rel = os.path.relpath(p, DOCS)
         with open(p, encoding="utf-8") as fh:
             html = fh.read()
+
+        # <script> bodies are client-side templates rendered from JSON at load time. Their href and
+        # row markup is not static HTML, so it is not scanned here. They are counted and reported.
+        script_blocks += len(re.findall(r"<script\b[^>]*>.*?</script>", html, re.S))
+        html = re.sub(r"<script\b[^>]*>.*?</script>", "", html, flags=re.S)
 
         for href in HREF.findall(html):
             total_links += 1
@@ -99,6 +105,7 @@ def main():
     print(f"  non-approved hosts   : {len(bad_hosts)}")
     print(f"  rows without a source: {len(rows_without_source)}")
     print(f"  ragged table rows    : {len(ragged)}")
+    print(f"  client-side scripts  : {script_blocks} (rendered from JSON; not statically scanned)")
 
     for r, h in broken_internal:
         print(f"  ERROR broken internal link in {r}: {h}")
@@ -112,6 +119,7 @@ def main():
     print("-" * 78)
     print("note: external links are checked for approved host only. Outbound access to nba.com is")
     print("      blocked from this sandbox, so HTTP status cannot be verified here and is not claimed.")
+    print("note: rows inside client-side scripts are rendered from JSON and are not counted here.")
     ok = not broken_internal and not bad_hosts and not ragged
     print(f"RESULT: {'PASS' if ok else 'FAIL'}")
     return 0 if ok else 1

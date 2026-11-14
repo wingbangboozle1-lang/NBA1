@@ -212,7 +212,10 @@ def build():
     scoring = load("teams_scoring_2026_27.json")
     players = load("players_2026_27.json")
     mins = load("players_minutes_2026_27.json")
-    report = load("injury_report_2026_11_13.json")
+    report = load("injury_report_2026_11_13.json")       # archived 03:00 PM edition (comparison only)
+    off = load("injuries_0515.json")                      # latest official edition: 05:15 PM ET
+    with open(os.path.join(DATA, "audit", "injury_edition_diff.json"), encoding="utf-8") as _f:
+        edition_changes = json.load(_f)["status_changes"]
     absence = load("player_absence_evidence.json")
     rules = load("rules.json")
     gloss = load("glossary.json")
@@ -374,10 +377,10 @@ prop strategy is ungraded &mdash; see <a href="strategies.html">Strategies</a>.<
         has_report = any(avail.get((g["game_id"], g["home"]), {}).get("status") == "REPORTED"
                          for g in by_date[date])
         note = ("" if has_report else
-                '<div class="note"><b>No injury report yet.</b> The official league PDF read '
-                '<i>NOT YET SUBMITTED</i> for 11/14 at the 11/13 03:00 PM ET edition, and no report '
-                'can exist yet for 11/15 or 11/16. Injury status below is <b>unknown</b>, not absent. '
-                'These are rating-only projections.</div>')
+                '<div class="note"><b>Injury adjustment not applied to this game.</b> This layer adjusts '
+                '11/13 games only. The 05:15 PM ET official edition prints some 11/14 rows (see the injuries '
+                'page), and no report exists yet for 11/15 or 11/16. Injury status below is <b>unknown</b>, '
+                'not absent. These are rating-only projections.</div>')
         rows = []
         for g in by_date[date]:
             a = adj[g["game_id"]]
@@ -614,32 +617,38 @@ column is null on purpose.</p>
             E(p["last_game_date"] or DASH),
             num(p["expected_points_removed"], 2),
             src(p.get("absence_evidence_url") or
-                "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_03_00PM.pdf"),
+                "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf"),
         ])
+    # players counted per team = the impact population (05:15 PM edition, 11/13 games)
     reported_by_team = {}
-    for r in report["rows"]:
-        ab = next((k for k, v in {
-            "Atlanta Hawks":"ATL","Boston Celtics":"BOS","Brooklyn Nets":"BKN","Charlotte Hornets":"CHA",
-            "Chicago Bulls":"CHI","Cleveland Cavaliers":"CLE","Dallas Mavericks":"DAL","Denver Nuggets":"DEN",
-            "Detroit Pistons":"DET","Golden State Warriors":"GSW","Houston Rockets":"HOU",
-            "Indiana Pacers":"IND","LA Clippers":"LAC","Los Angeles Lakers":"LAL","Memphis Grizzlies":"MEM",
-            "Miami Heat":"MIA","Milwaukee Bucks":"MIL","Minnesota Timberwolves":"MIN",
-            "New Orleans Pelicans":"NOP","New York Knicks":"NYK","Oklahoma City Thunder":"OKC",
-            "Orlando Magic":"ORL","Philadelphia 76ers":"PHI","Phoenix Suns":"PHX",
-            "Portland Trail Blazers":"POR","Sacramento Kings":"SAC","San Antonio Spurs":"SAS",
-            "Toronto Raptors":"TOR","Utah Jazz":"UTA","Washington Wizards":"WAS"}.items() if v == r["team"]), None)
-        if ab:
-            reported_by_team[ab] = reported_by_team.get(ab, 0) + 1
+    for p_ in inj["players"]:
+        reported_by_team[p_["team"]] = reported_by_team.get(p_["team"], 0) + 1
     rrows = [[E(r["team"]), str(reported_by_team.get(r["team"], 0)),
               num(r["minutes_vacated_by_new_absences"], 1),
               num(r["minutes_vacated_by_new_absences"], 1),
               num(r["regulation_minutes_available"], 0), src(r["minutes_available_source"])]
              for r in inj["rotation"]]
+    # Full table = every row of the 05:15 PM edition (printed rows, NOT YET SUBMITTED included),
+    # with the 03:00 PM status beside it. Team cells lost in PDF extraction are shown as lost, and the
+    # team the impact layer carried forward is shown with its source, never silently filled in.
+    team_by_player = {p_["player"]: p_["team"] for p_ in inj["players"]}
+    prev_status = {r_["player"]: r_["status"] for r_ in report["rows"] if r_.get("player")}
+    off_rows = off["rows"] + off["unattributed_rows"]
     all_report = []
-    for r in report["rows"]:
-        all_report.append([E(r["team"]), E(r["player"]), E(r["status"]),
-                           E(r["status_12pm"]) if r["status_12pm"] else '<span class="flag">not in 12:00 PM edition</span>',
-                           E(r["reason"]), src(r["source_url"])])
+    for r in off_rows:
+        if r.get("team"):
+            team_cell = E(r["team"])
+        elif r.get("player") in team_by_player:
+            team_cell = (E(team_by_player[r["player"]]) +
+                         ' <span class="flag">carried from 03:00 PM edition</span>')
+        else:
+            team_cell = '<span class="flag">team cell not printed &mdash; not inferred</span>'
+        player_cell = E(r["player"]) if r.get("player") else "<i>NOT YET SUBMITTED</i>"
+        before = prev_status.get(r.get("player")) if r.get("player") else None
+        before_cell = E(before) if before else '<span class="flag">not in 03:00 PM edition</span>'
+        all_report.append([E(r["game_date"]), team_cell, player_cell, E(r["status"]), before_cell,
+                           E(r.get("reason") or DASH),
+                           src("https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf")])
     moved_rows = []
     for a in inj["lines_injury_adjusted"]:
         if not a["applies"]:
@@ -647,7 +656,7 @@ column is null on purpose.</p>
         moved_rows.append([E(a["matchup"]), num(a["originated_total"]), num(a["home_points_removed"], 2),
                            num(a["away_points_removed"], 2), num(a["injury_adjusted_total"]),
                            f'{a["originated_spread"]:+.1f}', f'{a["injury_adjusted_spread"]:+.1f}',
-                           src("https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_03_00PM.pdf")])
+                           src("https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf")])
     sens = {}
     for s in inj["sensitivity"]:
         sens.setdefault(s["matchup"], []).append(s)
@@ -658,7 +667,7 @@ column is null on purpose.</p>
             cells.append(f'{s["total"]:.1f}')
         for s in sorted(lst, key=lambda x: x["production_transfer"]):
             cells.append(f'{s["spread"]:+.1f}')
-        cells.append(src("https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_03_00PM.pdf"))
+        cells.append(src("https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf"))
         srows.append(cells)
 
     body = f"""
@@ -674,7 +683,7 @@ player is therefore classified before any adjustment is made, and only <b>NEW_AB
 line.</div>
 
 <div class="grid">
-{card("Report rows captured", len(report["rows"]), "official 03:00 PM ET PDF")}
+{card("Report rows printed", len(off_rows), "official 05:15 PM ET PDF")}
 {card("Players individually verified", len(absence["rows"]), "last game + season stats")}
 {card("New absences moving a line", len(new_abs), "11/13 only", "warn")}
 {card("Games with a shifted line", len(moved), "of 9 on 11/13", "warn")}
@@ -693,6 +702,13 @@ happened without him.</li>
 <li><b>SEASON_LONG</b> &mdash; no 2026-27 appearances at all.</li>
 <li><b>NOT_ABSENT</b> &mdash; listed Available or Probable, so no absence is modelled.</li>
 </ul>
+
+<h2>What changed between the 03:00 PM and 05:15 PM editions</h2>
+<p class="lede">The impact layer uses the 05:15 PM edition. These statuses moved between the two editions.
+None of these five moved a line, because none of the five carries a measured production adjustment.</p>
+{table(["Player","Team","Status 03:00 PM","Status 05:15 PM","Adjustment (pts)","Source"],
+       [[E(c["player"]), E(c["team"]), E(c["status_0300pm"]), E(c["status_0515pm"]), num(c["points_removed"], 2),
+         src("https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf")] for c in edition_changes], numeric=(4,))}
 
 <h2>{len(moved)} games moved on 11/13</h2>
 <p class="lede">Spread is home minus away, so a rising home spread means the home team got stronger relative
@@ -714,16 +730,18 @@ for 48 minutes. Overtime adds five minutes per player per extra period.</p>
 {table(["Team","Reported players","Expected minutes lost","Vacated of 240","Regulation minutes","Rule source"],
        rrows, numeric=(1,2,3,4))}
 
-<h2>The full official report &mdash; all {len(report['rows'])} rows</h2>
-<p class="lede">Every row as published, with the 12:00 PM status beside the 03:00 PM status so movement is
-visible. Three report rows are withheld from this table because their team could not be attributed from the
-PDF extraction; they are listed on the <a href="flagged.html">flagged page</a> rather than guessed.</p>
-{table(["Team","Player","Status 03:00 PM","Status 12:00 PM","Reason","Source"], all_report)}
+<h2>The full official report &mdash; all {len(off_rows)} printed rows (05:15 PM edition)</h2>
+<p class="lede">Every row of the latest official edition, with the 03:00 PM status beside it so movement is
+visible. Where the PDF text lost a team cell, the team is marked as not printed, or carried forward from the
+03:00 PM edition and labelled as such. Rows that stay unattributed are on the <a href="flagged.html">flagged
+page</a>; nothing is inferred.</p>
+{table(["Game date","Team","Player","Status 05:15 PM","Status 03:00 PM","Reason","Source"], all_report)}
 
-<div class="note"><b>Why 11/14&ndash;11/16 carry no injury adjustment.</b> The official PDF read
-<i>NOT YET SUBMITTED</i> for 11/14 at the 11/13 03:00 PM edition, and no report can exist yet for the later
-dates. Those games are rating-only projections with injury status marked <i>unknown</i> rather than blank,
-because a blank cell reads as a claim of no injuries.</div>
+<div class="note"><b>Why 11/14&ndash;11/16 carry no injury adjustment.</b> The 05:15 PM edition prints
+11/14 rows for DAL@CLE, BKN@MEM, CHI@MIN and DET@MIA, and DEN@NOP reads <i>NOT YET SUBMITTED</i> for both
+teams. This layer adjusts 11/13 games only, so those rows are shown above but drive no line. No report
+exists yet for 11/15 or 11/16. Those games are rating-only projections with injury status marked
+<i>unknown</i> rather than blank, because a blank cell reads as a claim of no injuries.</div>
 """
     write(os.path.join(PAGES, "injuries.html"), page("Injuries", "injuries.html", body), "../assets/style.css")
 
@@ -1040,15 +1058,14 @@ a daily pre-tip-off snapshot.</p>
     write(os.path.join(PAGES, "suggestions.html"), page("Suggestions", "suggestions.html", body), "../assets/style.css")
 
     # ----------------------------------------------------------------- FLAGGED
-    withheld = [
-        ("Udeh, Jr., Ernest", "Out", "G League - Two-Way", "Team column dropped at a PDF page break."),
-        ("Pierre Jr., Jaron", "Available", "G League - Two-Way", "Team column dropped at a PDF page break."),
-        ("Williams, Brandon", "Out", "Injury/Illness - Left Hamstring Strain",
-         "Team column dropped at a PDF page break."),
-    ]
+    # Unattributed rows of the 05:15 PM edition whose team is not carried from the 03:00 PM edition.
+    _named = {p_["player"] for p_ in inj["players"]}
+    withheld = [(r_["player"], r_["status"], r_.get("reason") or DASH,
+                 "Team column dropped at a PDF page break.")
+                for r_ in off["unattributed_rows"] if r_.get("player") and r_["player"] not in _named]
     wrows = [[E(a), E(b), E(c), e_wrap(d),
               '<span class="flag">withheld &mdash; team not attributable</span>',
-              src("https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_03_00PM.pdf")]
+              src("https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf")]
              for a, b, c, d in withheld]
     frows = [
         ["Self-caught error", "A Darius Garland (LAC) absence row was drafted into the injury evidence file.",
@@ -1056,7 +1073,7 @@ a daily pre-tip-off snapshot.</p>
          "Miller and Niederhauser. The row was removed by a cross-check and the retraction is recorded in the "
          "data file.",
          '<span class="chip good">fixed</span>',
-         src("https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_03_00PM.pdf")],
+         src("https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf")],
         ["Look-ahead bias", "The 14-game backtest uses season-to-date ratings that include the tested games.",
          "Kept and labelled CONTAMINATED rather than recomputed, so the inflated 78.6% figure cannot be "
          "quoted without its warning.", '<span class="chip warn">open</span>',
@@ -1101,7 +1118,7 @@ blocks the build: the site is published with these items visible precisely so a 
 {table(["Type","What was found","Disposition","Status","Source"], ftab)}
 
 <h2>Rows withheld from the injury table</h2>
-<p class="lede">These three rows appear on the official PDF but the text extraction dropped the
+<p class="lede">These {len(withheld)} rows appear on the official 05:15 PM PDF but the text extraction dropped the
 <b>Team</b> column at a page break. Team was <i>not</i> inferred from row position, because neighbouring rows
 can belong to a different team. They are listed here with everything that is known.</p>
 {table(["Player","Status","Reason","Why withheld","Disposition","Report"], wrows)}
@@ -1147,7 +1164,9 @@ the definition column so they can never be mistaken for league terminology.</div
          "https://www.nba.com/games?date=2026-11-12"),
         ("Injury report policy", "Deadlines and publication cadence",
          "https://official.nba.com/nba-injury-report-2026-27-season/"),
-        ("Injury report 03:00 PM ET", "The report used for every status on this site",
+        ("Injury report 05:15 PM ET", "Latest official edition; used for every status and impact on this site",
+         "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf"),
+        ("Injury report 03:00 PM ET", "Earlier official edition; compared with 05:15 PM on the injuries page",
          "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_03_00PM.pdf"),
         ("Injury report 12:00 PM ET", "Earlier edition, used to show status movement",
          "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf"),
@@ -1195,6 +1214,17 @@ validations, double-counted injuries, unsaturated probabilities and implausible 
         f.write(CSS)
     reconcile_legacy_pages(strat, bt, inj, absence, report)
     n_fix = ensure_row_sources()
+    # The summary's row count was rendered before later pages were written, so it drifted from the
+    # artefact (C04 / F-C11). Recount once every page exists and sync the sentence to that count.
+    final_rows = table_row_count()
+    spath = os.path.join(PAGES, "summary.html")
+    with open(spath, encoding="utf-8") as f:
+        stxt = f.read()
+    stxt2 = re.sub(r"its \d+ table rows", f"its {final_rows} table rows", stxt)
+    if stxt2 != stxt:
+        with open(spath, "w", encoding="utf-8") as f:
+            f.write(stxt2)
+    print(f"summary row count synced to {final_rows}")
     if n_fix:
         print(f"   legacy pages: appended an official source cell to {n_fix} previously unsourced rows")
     print(f"wrote {len(NAV)} pages")
@@ -1304,7 +1334,7 @@ def ensure_row_sources():
         "stats": '<a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season" target="_blank" rel="noopener">NBA stats</a>',
         "gates": '<a href="pages/gates.html">gate design</a>',
         "ledger": '<a href="pages/strategies.html">strategy ledger</a>',
-        "report": '<a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_03_00PM.pdf" target="_blank" rel="noopener">official injury report</a>',
+        "report": '<a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf" target="_blank" rel="noopener">official injury report</a>',
         "issues": '<a href="https://github.com/wingbangboozle1-lang/NBA1/issues" target="_blank" rel="noopener">decision tracker</a>',
         "rules": '<a href="https://official.nba.com/rulebook/" target="_blank" rel="noopener">NBA rulebook</a>',
     }

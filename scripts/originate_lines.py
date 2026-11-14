@@ -55,12 +55,47 @@ def norm_cdf(z):
     return 0.5 * (1.0 + math.erf(z / math.sqrt(2.0)))
 
 
+
+OFFICIAL_EDITION_FILE = "injuries_0515.json"   # NBA injury report 11/13/26 05:15 PM ET (newest official edition in repo)
+OFFICIAL_EDITION_URL = "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf"
+
+
+def load_official_injuries():
+    """Rows of the latest official injury-report edition that this layer may use.
+
+    Replaces the 03:00 PM edition (injury_report_2026_11_13.json), which was stale: five statuses
+    changed by 05:15 PM (see data/audit/injury_edition_diff.json).
+    Excluded, never inferred: rows with no player (NOT YET SUBMITTED) and rows whose team cell was
+    lost in PDF extraction (unless a roster-verified team exists, see below). Only 11/13 rows are used: these layers apply adjustments to 11/13 games
+    only; 11/14 rows stay in injuries_0515.json for the Edge Lab.
+    """
+    doc = load(OFFICIAL_EDITION_FILE)
+    rows = doc["rows"] + doc.get("unattributed_rows", [])
+    # 05:15 PM extraction lost the Team cell on some rows. The 03:00 PM edition printed or roster-verified
+    # the team for those players. Carry that team forward ONLY where the 05:15 PM team is missing and
+    # record its source; the status always stays the 05:15 PM status.
+    roster_ref = {r["player"]: r for r in load("injury_report_2026_11_13.json")["rows"]
+                  if r.get("team") and r.get("player")}
+    out = []
+    for r in rows:
+        if not r.get("player") or r.get("game_date") != "2026-11-13":
+            continue
+        if not r.get("team") and r["player"] in roster_ref:
+            ref = roster_ref[r["player"]]
+            r = dict(r, team=ref["team"], matchup=r.get("matchup") or ref.get("matchup"),
+                     team_source="carried from 03:00 PM edition (%s); 05:15 PM team cell lost" % ref.get("team_source", "pdf"),
+                     team_source_url=ref.get("team_source_url") or ref.get("source_url"))
+        if r.get("team"):
+            out.append(r)
+    return out
+
+
 def main():
     teams = load("teams_advanced_2026_27.json")["rows"]
     scoring = {r["abbr"]: r for r in load("teams_scoring_2026_27.json")["rows"]}
     sched = load("schedule_2026_11_13_to_16.json")["games"]
     players = load("players_2026_27.json")["players"]
-    inj = load("injury_report_2026_11_13.json")["rows"]
+    inj = load_official_injuries()
 
     adv = {t["abbr"]: t for t in teams}
 

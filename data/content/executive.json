@@ -68,11 +68,43 @@
     "The full 51-game out-of-sample log, with the official final score next to both forecasts."
   ],
   "recommended_next_actions": [
-    {"rank": 1, "action": "Log real closing prices", "why": "Until this exists, nothing here can be called profitable - only better than a naive model. Everything else is optimisation of an unvalidated target."},
-    {"rank": 2, "action": "Backfill results for 2026-10-20 to 2026-11-05 and re-cut the split", "why": "Every game from 2026-11-06 onward is already in the test window, so this is now the only way to grow the sample. It would let the ratings window move earlier and the test window roughly double again."},
-    {"rank": 3, "action": "Work on probability calibration rather than point accuracy", "why": "The model is better on MAE and RMSE and worse on Brier and log loss. The gap between those two facts is where the leverage is."},
-    {"rank": 4, "action": "Complete the player-minutes table", "why": "Turns the availability impact from a floor into a real number and lets the prop strategies be graded."},
-    {"rank": 5, "action": "Archive every injury-report edition", "why": "The only way to grade the availability strategy or to run the robustness gate."}
+    {
+      "rank": 1,
+      "action": "Log real closing prices",
+      "why": "Until this exists, nothing here can be called profitable - only better than a naive model. Everything else is optimisation of an unvalidated target.",
+      "source_url": null,
+      "source_label": null,
+      "source_note": "No official price source is available in this repository; a methodological action, flagged unverified."
+    },
+    {
+      "rank": 2,
+      "action": "Backfill results for 2026-10-20 to 2026-11-05 and re-cut the split",
+      "why": "Every game from 2026-11-06 onward is already in the test window, so this is now the only way to grow the sample. It would let the ratings window move earlier and the test window roughly double again.",
+      "source_url": "https://www.nba.com/schedule",
+      "source_label": "NBA schedule (dated results)"
+    },
+    {
+      "rank": 3,
+      "action": "Work on probability calibration rather than point accuracy",
+      "why": "The model is better on MAE and RMSE and worse on Brier and log loss. The gap between those two facts is where the leverage is.",
+      "source_url": null,
+      "source_label": null,
+      "source_note": "Methodological action (calibration metrics are not NBA statistics); flagged unverified."
+    },
+    {
+      "rank": 4,
+      "action": "Complete the player-minutes table",
+      "why": "Turns the availability impact from a floor into a real number and lets the prop strategies be graded.",
+      "source_url": "https://www.nba.com/stats/players",
+      "source_label": "NBA player statistics"
+    },
+    {
+      "rank": 5,
+      "action": "Archive every injury-report edition",
+      "why": "The only way to grade the availability strategy or to run the robustness gate.",
+      "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+      "source_label": "NBA official injury report policy"
+    }
   ],
   "bottom_line": "Everything asked for exists and is live: originated lines for every upcoming slate up to three days ahead, singles, parlays and same-game parlays, player-prop combos, a validation gate set, correlation values, a luck decomposition, injury and rotation tracking, game-flow analysis, a leaderboard with reward tiers, a suggestions page with decision paths, and a questions page split by what is known and what is not. The window grew from 28 games to 51 during this build and one conclusion flipped as a result - which is the clearest possible demonstration of why nothing here is being promoted yet."
 }
