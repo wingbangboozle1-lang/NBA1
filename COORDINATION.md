@@ -1624,3 +1624,35 @@ file, `pages.yml`, the probe files, or `audit/**`.
 **Open PRs at close (all CONFLICTING with current `main`; branches untouched per the no-edit rule — owners, please rebase):** #36 (`arena/458a6570-nba1`, CI-gate fix — note main's gate is already green via #47/#49/#52, so check whether this is still needed), #37 (`arena/2509073f-nba1`, coord record), #42 (`arena/2edb85af-nba1`, integration-desk follow-up), #45 (`arena/e32856d8-nba1`, origination-pages render fix — active), #53 (`arena/159ed109-nba1`, audit docs — active). Requests logged, not edited.
 
 **Other cross-session notes:** (1) `build_dashboard.py`'s flag intro range was corrected in content to F13–F25 — dashboard owner should keep the range in sync when adding flags; (2) F-C03 recheck ≥17:00 UTC today — the cron's 22:15 UTC run will capture whatever edition exists; (3) scheduled refresh runs now open capture-only PRs to `main` — reviewer checks the official URL inside the PR before merging, then promotes verified rows separately; (4) `render_check.mjs`'s `jsdom` dependency is now declared in the repo-root `package.json` (was undeclared).
+
+---
+
+## 20. Final integration + refresh session `arena/254dd8bb-nba1` (claimed 2026-11-14 09:40 UTC)
+
+Branch `arena/254dd8bb-nba1`, base `45c0287` (tip of `main` at claim time). The
+Arena harness fixes one branch per session, so the `session-<id>/<task>`
+naming convention is satisfied by this single pre-named branch (same deviation
+already logged by `arena-0de855e5` and `arena/e32856d8-nba1`).
+
+**Role:** final integration session for the 2026-11-14 working day. All earlier
+sessions' claims are closed or more than 60 minutes stale with no commits
+(open PRs #37/#42/#45/#53 date from 01:12–02:16 UTC; ground rule 5 applies).
+The 2026-11-13 slate is now final (games ended ~01:00–03:00 UTC), so the two
+gaps the whole board keeps flagging — F13 / F-C01 (11/13 finals) and stale
+records — are now closable with evidence rather than assumption.
+
+| # | Task | Status | File scope (exclusive) | Plan |
+| --- | --- | --- | --- | --- |
+| S01 | Board sync + claim | done | `COORDINATION.md` (this §20 only) | This row; pushed immediately. |
+| S02 | Line-by-line verification of the tree at `45c0287` | in progress | none (read-only + `data/raw/s14/verification.json`) | Run every gate script (`verify_all`, `verify_integration`, `check_site`, `check_links`, `check_rendered`, `render_check.mjs`) and independently re-read published values against their cited official URLs via the web-fetch channel. |
+| S03 | Capture 2026-11-13 finals + current official records | in progress | `data/raw/s14/**` (new namespace) | nba.com/games per-date pages + standings; structured rows with capture UTC and source URL per row. Closes F13/F-C01 **only** for rows this capture confirms. |
+| S04 | Injury-report status capture for the 11/14–11/17 window | in progress | `data/raw/s14/**` | Official index + newest editions; 11/14 editions publish ≥16:30 UTC — record availability evidence, never infer contents. |
+| S05 | Settle the 11/13 paper picks; update records, leaderboard, luck decomposition | in progress | `data/raw/s14/**`, `data/content/**` (flag/executive updates), regenerated `docs/data/**`, `site/data/**` | Settlement only from captured finals. Regenerate through the existing builders; no methodology change, no gate loosened. |
+| S06 | Open-PR triage (#37, #42, #45, #53) | in progress | `COORDINATION.md` (§20 log) | Authors idle > 60 min → takeover permitted. Merge what verifies clean; close as superseded with content preserved; never discard another session's work. |
+| S07 | Final integration: PR → `main`, merge, Pages confirm, record | not started | whole repo (integration seat) | All gates green before merge; broken site is never merged. |
+
+**Integration-seat note:** per the brief, shared outputs (`index.html` landing,
+site navigation, README, `COORDINATION.md`) are owned by this final integration
+session. Archive namespaces (`docs/`, `docs/b/`, `command-center/`, `desk*.html`,
+`origination/`, `edge-lab/`, `audit/`, `integration/`) are **not** rewritten —
+they carry their own data cut and say so.
