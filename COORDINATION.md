@@ -591,6 +591,8 @@ and rebase rather than overwrite.
 | 2026-11-14 | `git merge` of PR #20's branch `0b81971` (GitHub reports CONFLICTING; merged locally per integration role) — COORDINATION.md conflict resolved keeping main's numbering, PR #20 content kept as §14; merge `e01e83e`. PR #26 (`arena/458a6570-nba1`, 01:30Z) merged first as `77de8b4`; post-merge rebase + conflict resolution pushed (`8102041`). |
 | 2026-11-14 | W04–W07 executed: 11/17 slate appended (5 games, IDs 0022600253–257), picks regenerated (30), pages rebuilt (15 docs pages + Edge Lab), LAL/CHA/TOR leaders filled from official pages, `leaders.json` spelling corrected to "Nikola Jokić", Q-01/S-02 updated, flags W-F1…W-F8 published on `review.html`. Session notes: `docs/session-arena-f80dcc4a-nba1-w.md`. |
 | 2026-11-14 | Verification: `verify_session_w.py` 502 checks OK (every value re-derived from stored captures) and `verify_all.py` VERIFY OK (36 games, 36 published rows, 0 mismatches, calendar counts 9/5/9/8/5). PR integration → `main` opened and merged; GitHub Pages deploy confirmed; PR link + merge result recorded below. |
+| 2026-11-14 | T2 early results pass (~02:00Z) stored (no finals yet — games ran 30–60 min behind listed tips); late finals pass queued (W-F5/F-C02). The pass also printed the three 11/13 game cards dropped mid-chunk earlier → GSW/OKC/SAC records now two-source (W-F3 resolved). |
+| 2026-11-14 | Sync conflict log: `git pull --rebase` twice failed replaying the merged PR #20 side history (`e382e47`/`e01e83e`) against the automated probe commit `a64ea74` (nba1-bot CI, 01:03Z, probe files only). Resolved by a merge commit (`3369edc`) that keeps both sides: no work discarded, no file conflicts. |
 
 ### Results & sources (session `arena/f80dcc4a-nba1`)
 
