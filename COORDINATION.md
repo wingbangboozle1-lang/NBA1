@@ -2869,3 +2869,29 @@ idempotence (0 dirty lines after regeneration), the Command Center 17-page/data 
 - **Pages check (§25.2):** [PR #76](https://github.com/wingbangboozle1-lang/NBA1/pull/76) merged at `7e01041`; Pages build for `7e01041` reported `built` at 12:48 UTC; the live site serves current `main`. Earlier `errored` builds came from main-push churn, not a confirmed content fault. No config change was made.
 - **Not done by this session:** no `workflow_dispatch` (HTTP 403 for this session's token); PR #70 closed at 11:25 UTC during a metadata edit (not intended), replaced by #76.
 - **Suggestions for the integration session:** (1) add X01-F1 to F5 to the Flagged register; (2) set the injury page to cite the 04:30 AM ET 11/14 edition (X01-F1); (3) reduce Pages churn: the probe workflow runs on every push to `arena/**` and holds runners, and it pushes record commits that make open PRs `CONFLICTING`; (4) dedupe the §25 section on `main` (X01-F6, logged here).
+
+## 30. Session `arena/c1d69228-nba1` — final integration audit takeover (claimed 2026-11-14 18:40 UTC)
+
+Branch: `arena/c1d69228-nba1`, pinned by Arena at `203833304a2d16594aac6d30802b5d0939106adc` (`main`). This session will not switch, create, or rename branches.
+
+### Claim and handoff
+
+Read the current board and checked the open PRs before editing. Taking over the **final integration audit** from session `arena/934ca56f-nba1` / PR #66 under ground rule 5: PR #66's last commit is `20f7c6014a` at 2026-11-14T10:54:07Z, more than seven hours before this claim, with no later commit at claim time. The open PR is `DIRTY` against current `main`; this is a handoff of the integration task, not an assumption that its diff can be merged as-is. Its evidence and work will be rechecked against the current tree before any adoption.
+
+Other open PRs are recorded but **not** taken over by this claim: #63 (last commit 12:06:29Z), #75 (11:39:48Z), and #80 (12:58:00Z). Their last commits are over 60 minutes old at claim time, but they own separate scopes. They will not be edited or merged blindly; any needed handoff/adoption will be logged before touching those scopes. PR #65 is the predecessor of #75 and is not an independent deliverable.
+
+### Initial scope (exclusive)
+
+| Task | Status | File scope |
+| --- | --- | --- |
+| I01 | in progress | `COORDINATION.md` (this section only), `audit/session-c1d69228/**` (new independent review artifacts only) |
+| I02 | blocked pending I01 and ownership reconciliation | Shared integration outputs (`index.html`, `site/**`, shared generated data, builders, and README/summary). These remain untouched until the overlapping stale/open claims are reconciled in this section and the combined tree is independently verified. |
+
+### Plan
+
+1. Inspect the current published/build inputs and independently rerun the repository checks; distinguish structural source-link checks from actual row-value verification.
+2. Reconcile the outstanding PR work by reviewing each diff and its current-tree relevance; preserve source evidence, never import stale snapshots just to make a PR clean.
+3. Rebuild and verify the single landing/navigation and decision pages only after the integration scope is clear. Keep unverifiable facts blank and publish them on Flagged for Review with their source context.
+4. Record the verification commands, results, official sources used, unresolved irregularities, PR/merge and GitHub Pages deployment evidence here.
+
+No site, model, or NBA-data values were changed in the claim commit.
