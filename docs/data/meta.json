@@ -1,22 +1,23 @@
 {
- "generated_at_utc": "2026-11-13T23:25:15Z",
+ "generated_at_utc": "2026-11-14T00:45:15Z",
  "season": "2026-27",
- "as_of": "2026-11-13",
+ "as_of": "2026-11-14",
  "data_windows": {
   "ratings_season_to_date": "2026-27 Regular Season, season to date (through games of 2026-11-12)",
   "ratings_training_window": "2026-27 Regular Season, Date From 10/20/2026 To 11/05/2026 (training window for the out-of-sample test)",
   "results_captured": "2026-11-06 .. 2026-11-12 (51 games, all of them out-of-sample)",
   "out_of_sample_window": "2026-11-06 .. 2026-11-12 (51 games)",
-  "upcoming_slates": "2026-11-13, 2026-11-14, 2026-11-15 (23 games)",
-  "injury_report": "NBA Official Injury Report, 11/13/26 05:15 PM ET edition"
+  "upcoming_slates": "2026-11-14, 2026-11-15, 2026-11-16 (22 games, maximum horizon 3 days)",
+  "in_progress_at_capture": "9 games on 2026-11-13 were live at the data cut; they feed rest maths only and are not pickable",
+  "injury_report": "NBA Official Injury Report, 11/13/26 07:30 PM ET edition"
  },
  "counts": {
   "teams": 30,
   "completed_games_captured": 51,
   "out_of_sample_games": 51,
-  "upcoming_games": 23,
+  "upcoming_games": 22,
   "players_captured": 50,
-  "injury_rows": 119,
+  "injury_rows": 122,
   "strategies": 10
  },
  "league_averages": {

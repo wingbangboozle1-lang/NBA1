@@ -42,7 +42,7 @@ NAV = [
     ("sources", "pages/sources.html", "Sources"),
 ]
 
-STAMP = "2026-11-13"
+STAMP = "2026-11-14"
 
 
 def nav_html(active, depth):
@@ -134,15 +134,19 @@ def p_index(meta, ex):
 
     counts = meta["counts"]
     n_sources = len(read_json(os.path.join(OUT, "sources.json"))["sources"])
+    # Window labels come from the data cut, never from a literal in this file.
+    slate_label = meta["data_windows"]["upcoming_slates"]
+    results_label = (meta["data_windows"]["out_of_sample_window"]
+                     .replace(" .. ", " to ").split(" (")[0])
     edge_note = next((f for f in ex["findings"] if f["title"].startswith("The word")), None)
     kpis = f"""
     <div class="grid k4" style="margin-bottom:16px">
       <div class="card"><h4>Strategies</h4><div class="kpi">{counts['strategies']}</div>
         <div class="kpi-sub">singles, parlays, SGPs, prop combos</div></div>
       <div class="card"><h4>Upcoming games</h4><div class="kpi">{counts['upcoming_games']}</div>
-        <div class="kpi-sub">2026-11-13 through 2026-11-15</div></div>
+        <div class="kpi-sub">{slate_label}</div></div>
       <div class="card"><h4>Out-of-sample games</h4><div class="kpi">{counts['out_of_sample_games']}</div>
-        <div class="kpi-sub">2026-11-06 to 2026-11-12, ratings from 11-05 or earlier</div></div>
+        <div class="kpi-sub">{results_label}, ratings from 11-05 or earlier</div></div>
       <div class="card"><h4>Official sources</h4><div class="kpi">{n_sources}</div>
         <div class="kpi-sub">nba.com, official.nba.com, league injury PDFs</div></div>
     </div>"""
