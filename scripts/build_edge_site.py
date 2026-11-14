@@ -21,6 +21,7 @@ host is outside the allow-list, or when a rendered table row lacks an official l
 import html
 import json
 import math
+import glob
 import os
 import re
 import sys
@@ -510,6 +511,14 @@ def verify_row_links(html_text, name):
 
 
 # ------------------------------------------------------------ lines.html
+# Settlement overlay: data/settled_picks_<date>.json, written by
+# scripts/settle_results.py from promoted official finals only (arena/ef6ff2a4-nba1).
+settled_lookup = {}
+for _sp in sorted(glob.glob(os.path.join(DATA, "settled_picks_*.json"))):
+    with open(_sp, encoding="utf-8") as _fh:
+        for _r in json.load(_fh).get("rows", []):
+            settled_lookup[(_r["date"], _r["matchup"])] = _r
+
 slate_blocks = []
 for s in slate["slates"]:
     rows = []
@@ -530,16 +539,25 @@ for s in slate["slates"]:
                 pick = '<span class="flag">PASS — gate G-CFG</span>'
             else:
                 pick = f'<strong>{esc(m["pick_line"])}</strong> <span class="tag">paper</span>'
+        st = settled_lookup.get((g["date"], f"{g['away']}@{g['home']}"))
+        if st is None:
+            result_cell = '<span class="flag">— (not settled: no promoted final yet)</span>'
+        elif not st.get("settled"):
+            result_cell = '<span class="flag">— (not settled: no promoted final yet)</span>'
+        else:
+            tag = {"WIN": "tag", "LOSS": "flag"}.get(st.get("result", ""), "flag")
+            result_cell = (f'<strong class="{tag}">{esc(st.get("result", "—"))}</strong> '
+                           f'{esc(st.get("final_score", ""))}')
         rows.append([
             esc(g["time_et"]),
             f"{esc(g['away'])} ({esc(g['away_record'])}) @ {esc(g['home'])} ({esc(g['home_record'])})",
-            esc(rest_cell), esc(spread), esc(pcell), esc(ml), pick,
+            esc(rest_cell), esc(spread), esc(pcell), esc(ml), pick, result_cell,
             a(g["slate_url"], "slate"), a(g["preview_url"], "game"),
         ])
     slate_blocks.append(
         f"<h3>{esc(s['date'])} — {len(rows)} games</h3>" +
         table(["Time (ET)", "Matchup (records)", "Rest away / home", "Originated spread (home)",
-               "P(home win)", "Fair ML decimal", "Model pick", "Slate source", "Game source"],
+               "P(home win)", "Fair ML decimal", "Model pick", "Result (settled)", "Slate source", "Game source"],
               rows, f"slate-{s['date']}"))
 
 parlay_tbl = table(

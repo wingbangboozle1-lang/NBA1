@@ -1104,115 +1104,109 @@
    "note": "Graded against our own number. Correct here is ~50% by construction, not evidence of edge."
   }
  ],
- "cannot_settle": [
+ "settled_late": [
   {
    "date": "2026-11-13",
    "matchup": "NYK@IND",
    "game_id": "0022600034",
-   "state": "IN PROGRESS",
-   "detail": "Q2 9:44 remaining, NYK 31 - IND 31 (scoreboard, 00:47Z). At 00:37Z the same card read Q1 :52, NYK 25 - IND 24.",
    "cup_group": "East Group B",
-   "settled": false,
-   "reason": "the official card did not read FINAL when it was captured — non-FINAL rows are unusable as results",
-   "source_url": "https://www.nba.com/game/cha-vs-phx-0022600230/box-score",
-   "action": "re-fetch the same date page after the games end and re-run settle.py"
+   "settled": true,
+   "final_score": "NYK 104 @ IND 106",
+   "reason": "official FINAL promoted after two agreeing reads of https://www.nba.com/games?date=2026-11-13",
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "desk_pick": "none — the desk slate cut starts 2026-11-14; this row is a settled result, not a settled pick"
   },
   {
    "date": "2026-11-13",
    "matchup": "MIL@ORL",
    "game_id": "0022600035",
-   "state": "IN PROGRESS",
-   "detail": "Q2 8:39 remaining, MIL 17 - ORL 34 (scoreboard, 00:47Z). At 00:37Z the same card read END Q1, MIL 15 - ORL 23.",
    "cup_group": "East Group A",
-   "settled": false,
-   "reason": "the official card did not read FINAL when it was captured — non-FINAL rows are unusable as results",
-   "source_url": "https://www.nba.com/game/cha-vs-phx-0022600230/box-score",
-   "action": "re-fetch the same date page after the games end and re-run settle.py"
+   "settled": true,
+   "final_score": "MIL 99 @ ORL 107",
+   "reason": "official FINAL promoted after two agreeing reads of https://www.nba.com/games?date=2026-11-13",
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "desk_pick": "none — the desk slate cut starts 2026-11-14; this row is a settled result, not a settled pick"
   },
   {
    "date": "2026-11-13",
    "matchup": "CLE@MIA",
    "game_id": "0022600036",
-   "state": "PREGAME",
-   "detail": "Card still displayed the pre-game records 6-6 / 5-6 with an 8:00 PM ET tip.",
    "cup_group": "East Group B",
-   "settled": false,
-   "reason": "the official card did not read FINAL when it was captured — non-FINAL rows are unusable as results",
-   "source_url": "https://www.nba.com/game/cha-vs-phx-0022600230/box-score",
-   "action": "re-fetch the same date page after the games end and re-run settle.py"
+   "settled": true,
+   "final_score": "CLE 121 @ MIA 133",
+   "reason": "official FINAL promoted after two agreeing reads of https://www.nba.com/games?date=2026-11-13",
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "desk_pick": "none — the desk slate cut starts 2026-11-14; this row is a settled result, not a settled pick"
   },
   {
    "date": "2026-11-13",
    "matchup": "ATL@CHI",
    "game_id": "0022600037",
-   "state": "PREGAME",
-   "detail": "7-5 / 1-9, 8:00 PM ET tip.",
    "cup_group": "East Group C",
-   "settled": false,
-   "reason": "the official card did not read FINAL when it was captured — non-FINAL rows are unusable as results",
-   "source_url": "https://www.nba.com/game/cha-vs-phx-0022600230/box-score",
-   "action": "re-fetch the same date page after the games end and re-run settle.py"
+   "settled": true,
+   "final_score": "ATL 117 @ CHI 125 (OT)",
+   "reason": "official FINAL promoted after two agreeing reads of https://www.nba.com/games?date=2026-11-13",
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "desk_pick": "none — the desk slate cut starts 2026-11-14; this row is a settled result, not a settled pick"
   },
   {
    "date": "2026-11-13",
    "matchup": "MEM@NOP",
    "game_id": "0022600038",
-   "state": "PREGAME",
-   "detail": "7-4 / 4-8, 8:00 PM ET tip.",
    "cup_group": "West Group B",
-   "settled": false,
-   "reason": "the official card did not read FINAL when it was captured — non-FINAL rows are unusable as results",
-   "source_url": "https://www.nba.com/game/cha-vs-phx-0022600230/box-score",
-   "action": "re-fetch the same date page after the games end and re-run settle.py"
+   "settled": true,
+   "final_score": "MEM 142 @ NOP 111",
+   "reason": "official FINAL promoted after two agreeing reads of https://www.nba.com/games?date=2026-11-13",
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "desk_pick": "none — the desk slate cut starts 2026-11-14; this row is a settled result, not a settled pick"
   },
   {
    "date": "2026-11-13",
    "matchup": "UTA@HOU",
    "game_id": "0022600039",
-   "state": "PREGAME",
-   "detail": "1-11 / 9-3, 8:30 PM ET tip.",
    "cup_group": "West Group A",
-   "settled": false,
-   "reason": "the official card did not read FINAL when it was captured — non-FINAL rows are unusable as results",
-   "source_url": "https://www.nba.com/game/cha-vs-phx-0022600230/box-score",
-   "action": "re-fetch the same date page after the games end and re-run settle.py"
+   "settled": true,
+   "final_score": "UTA 118 @ HOU 125",
+   "reason": "official FINAL promoted after two agreeing reads of https://www.nba.com/games?date=2026-11-13",
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "desk_pick": "none — the desk slate cut starts 2026-11-14; this row is a settled result, not a settled pick"
   },
   {
    "date": "2026-11-13",
    "matchup": "GSW@SAS",
    "game_id": "0022600040",
-   "state": "NOT TIPPED",
-   "detail": "9:30 PM ET tip.",
    "cup_group": "West Group C",
-   "settled": false,
-   "reason": "the official card did not read FINAL when it was captured — non-FINAL rows are unusable as results",
-   "source_url": "https://www.nba.com/game/cha-vs-phx-0022600230/box-score",
-   "action": "re-fetch the same date page after the games end and re-run settle.py"
+   "settled": true,
+   "final_score": "GSW 85 @ SAS 123",
+   "reason": "official FINAL promoted after two agreeing reads of https://www.nba.com/games?date=2026-11-13",
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "desk_pick": "none — the desk slate cut starts 2026-11-14; this row is a settled result, not a settled pick"
   },
   {
    "date": "2026-11-13",
    "matchup": "POR@SAC",
    "game_id": "0022600041",
-   "state": "NOT TIPPED",
-   "detail": "10:00 PM ET tip.",
    "cup_group": "West Group C",
-   "settled": false,
-   "reason": "the official card did not read FINAL when it was captured — non-FINAL rows are unusable as results",
-   "source_url": "https://www.nba.com/game/cha-vs-phx-0022600230/box-score",
-   "action": "re-fetch the same date page after the games end and re-run settle.py"
+   "settled": true,
+   "final_score": "POR 120 @ SAC 107",
+   "reason": "official FINAL promoted after two agreeing reads of https://www.nba.com/games?date=2026-11-13",
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "desk_pick": "none — the desk slate cut starts 2026-11-14; this row is a settled result, not a settled pick"
   },
   {
    "date": "2026-11-13",
    "matchup": "OKC@LAC",
    "game_id": "0022600042",
-   "state": "NOT TIPPED",
-   "detail": "10:30 PM ET tip.",
    "cup_group": "West Group B",
-   "settled": false,
-   "reason": "the official card did not read FINAL when it was captured — non-FINAL rows are unusable as results",
-   "source_url": "https://www.nba.com/game/cha-vs-phx-0022600230/box-score",
-   "action": "re-fetch the same date page after the games end and re-run settle.py"
-  },
+   "settled": true,
+   "final_score": "OKC 112 @ LAC 113",
+   "reason": "official FINAL promoted after two agreeing reads of https://www.nba.com/games?date=2026-11-13",
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "desk_pick": "none — the desk slate cut starts 2026-11-14; this row is a settled result, not a settled pick"
+  }
+ ],
+ "settled_late_count": 9,
+ "cannot_settle": [
   {
    "date": "2026-11-14",
    "matchup": "DEN@NOP",
@@ -1478,10 +1472,11 @@
    "action": "this is a forward pick, not a result; it enters the ledger once FINAL"
   }
  ],
- "cannot_settle_count": 31,
+ "cannot_settle_count": 22,
  "graded_count": 51,
  "provenance": {
   "results_file": "data/raw/games_completed.json",
+  "late_finals_file": "data/raw/games_completed_2026-11-13.json (promoted after two agreeing official reads; absent until then)",
   "in_progress_file": "data/live/results_2026_11_13_in_progress.json",
   "note": "Both are transcriptions of official NBA.com pages; see data/live/capture_meta.json for the retrieval times."
  }

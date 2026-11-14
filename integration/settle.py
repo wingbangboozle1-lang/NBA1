@@ -68,14 +68,39 @@ def main():
     w_side = wilson(side_wins, n_side)
 
     # ---------------- what refuses to settle, and why (blank cells, never estimates)
-    blocked = []
+    # A game captured while in progress can settle later: if the promoted
+    # official-finals snapshot (scripts/promote_finals.py) now covers its
+    # game_id, it leaves this blocked list and enters settled_late with the
+    # FINAL score and its official source. Nothing is graded from the
+    # in-progress card itself. (arena/ef6ff2a4-nba1, 2026-11-14.)
+    late = {}
+    late_path = os.path.join(OUT, "..", "..", "data", "raw", "games_completed_2026-11-13.json")
+    if os.path.exists(late_path):
+        for r in load("data", "raw", "games_completed_2026-11-13.json")["rows"]:
+            late[r[7]] = {"away": r[1], "away_pts": r[2], "home": r[3],
+                          "home_pts": r[4], "ot": r[5]}
+    blocked, settled_late = [], []
     for g in inprog["games"]:
+        f = late.get(g.get("game_id"))
+        if f is not None:
+            settled_late.append({
+                "date": g.get("date", "2026-11-13"), "matchup": g.get("matchup"),
+                "game_id": g.get("game_id"), "cup_group": g.get("cup_group"),
+                "settled": True,
+                "final_score": f"{f['away']} {f['away_pts']} @ {f['home']} {f['home_pts']}"
+                               + (" (OT)" if f["ot"] else ""),
+                "reason": "official FINAL promoted after two agreeing reads of "
+                          "https://www.nba.com/games?date=2026-11-13",
+                "source_url": "https://www.nba.com/games?date=2026-11-13",
+                "desk_pick": "none \u2014 the desk slate cut starts 2026-11-14; this row is a "
+                             "settled result, not a settled pick",
+            })
+            continue
         blocked.append({
             "date": g.get("date", "2026-11-13"), "matchup": g.get("matchup"),
             "game_id": g.get("game_id"), "state": g.get("state"), "detail": g.get("detail"),
-            "cup_group": g.get("cup_group"),
-            "settled": False,
-            "reason": "the official card did not read FINAL when it was captured — non-FINAL "
+            "cup_group": g.get("cup_group"), "settled": False,
+            "reason": "the official card did not read FINAL when it was captured \u2014 non-FINAL "
                       "rows are unusable as results",
             "source_url": g.get("source_url", inprog.get("source_url")),
             "action": "re-fetch the same date page after the games end and re-run settle.py",
@@ -114,11 +139,14 @@ def main():
                     "is what has to beat the spread to make money",
         },
         "rows": graded,
+        "settled_late": settled_late,
+        "settled_late_count": len(settled_late),
         "cannot_settle": blocked,
         "cannot_settle_count": len(blocked),
         "graded_count": len(graded),
         "provenance": {
             "results_file": "data/raw/games_completed.json",
+            "late_finals_file": "data/raw/games_completed_2026-11-13.json (promoted after two agreeing official reads; absent until then)",
             "in_progress_file": "data/live/results_2026_11_13_in_progress.json",
             "note": "Both are transcriptions of official NBA.com pages; see "
                     "data/live/capture_meta.json for the retrieval times.",
