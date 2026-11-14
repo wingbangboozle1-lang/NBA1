@@ -325,7 +325,7 @@ be trusted at this size &mdash; and both fail.</li>
 <h2>Where to start</h2>
 <div class="grid">
 <a class="card" href="pages/lines.html"><div class="k">Markets</div><div class="v">Lines</div>
-<div class="s">31 games, formulas printed</div></a>
+<div class="s">36 games, formulas printed</div></a>
 <a class="card" href="pages/picks.html"><div class="k">Slates</div><div class="v">Picks</div>
 <div class="s">3 days ahead, injuries marked</div></a>
 <a class="card" href="pages/strategies.html"><div class="k">Competition</div><div class="v">Leaderboard</div>
@@ -1303,7 +1303,7 @@ def reconcile_legacy_pages(strat, bt, inj, absence, report):
             f.write(txt)
         edits.append(f"{fn}: {note}")
 
-    n_games = 36
+    n_games = len(json.loads(open(os.path.join(DER, "lines.json")).read())["games"])
     n_strat = len(strat["leaderboard"])
     n_valid = sum(1 for e in strat["leaderboard"] if e["status"] == "VALIDATED")
 
@@ -1332,6 +1332,19 @@ def reconcile_legacy_pages(strat, bt, inj, absence, report):
           f' &mdash; {n_strat} graded, {n_valid} validated. No verified odds were available, so every ROI '
           f'assumes &minus;110.</td>',
           "strategies-evaluated row now points at the real ledger")
+    # 2026-11-14 refresh: second-stage patches for the 11/16 -> 11/17 window extension.
+    patch("summary.html", "<td>31</td>", "<td>36</td>",
+          "3-day game count 31 -> 36 (window now runs to 11/17)")
+    patch("summary.html",
+          "Scope: 31 NBA games are scheduled Nov 13–16, 2026 (9 / 5 / 9 / 8)",
+          "Scope: 36 NBA games are scheduled Nov 13–17, 2026 (9 / 5 / 9 / 8 / 5)",
+          "scope sentence updated to the 11/17 slate")
+    patch("summary.html", "<td>Picks generated</td><td>31</td>",
+          "<td>Picks generated</td><td>36</td>",
+          "picks-generated count 31 -> 36")
+    patch("summary.html", "NBA.com games pages (Nov 13, 14, 15)",
+          "NBA.com games pages (Nov 13–17)",
+          "basis link text now names the full window")
     patch("summary.html",
           "<td>Picks generated</td><td>0</td><td>Blocked (Q-04, Q-06, Q-07)</td>",
           f'<td>Picks generated</td><td>{len(json.loads(open(os.path.join(DER, "lines.json")).read())["games"])}</td>'
