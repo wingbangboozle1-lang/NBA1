@@ -1,0 +1,1015 @@
+{
+ "_meta": {
+  "session": "arena/e06aed97-nba1",
+  "checked_at_utc": "2026-11-14T19:00:00Z",
+  "method": "Every published horizon row was compared field by field with the fresh official capture; every record cell was then compared against a SECOND official source (the standings page) so a single page's print error cannot pass as verified.",
+  "result": {
+   "horizon_rows_verified": 27,
+   "horizon_rows_mismatched": 0,
+   "finals_verified": 9,
+   "finals_checked": 9,
+   "record_cells_checked": 54,
+   "record_cells_two_sources_agree": 54,
+   "calendar_days_match": true
+  }
+ },
+ "horizon": [
+  {
+   "game_id": "0022600231",
+   "date": "2026-11-14",
+   "matchup": "DEN@NOP",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "game_id": "0022600232",
+   "date": "2026-11-14",
+   "matchup": "DAL@CLE",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "game_id": "0022600233",
+   "date": "2026-11-14",
+   "matchup": "DET@MIA",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "game_id": "0022600234",
+   "date": "2026-11-14",
+   "matchup": "BKN@MEM",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "game_id": "0022600235",
+   "date": "2026-11-14",
+   "matchup": "CHI@MIN",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "game_id": "0022600236",
+   "date": "2026-11-15",
+   "matchup": "IND@PHI",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "game_id": "0022600237",
+   "date": "2026-11-15",
+   "matchup": "LAL@PHX",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "game_id": "0022600238",
+   "date": "2026-11-15",
+   "matchup": "CHA@LAC",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "game_id": "0022600239",
+   "date": "2026-11-15",
+   "matchup": "SAS@UTA",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "game_id": "0022600240",
+   "date": "2026-11-15",
+   "matchup": "DAL@BOS",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "game_id": "0022600241",
+   "date": "2026-11-15",
+   "matchup": "NYK@TOR",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "game_id": "0022600242",
+   "date": "2026-11-15",
+   "matchup": "HOU@WAS",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "game_id": "0022600243",
+   "date": "2026-11-15",
+   "matchup": "ATL@MIL",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "game_id": "0022600244",
+   "date": "2026-11-15",
+   "matchup": "OKC@SAC",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "game_id": "0022600245",
+   "date": "2026-11-16",
+   "matchup": "ORL@BOS",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "game_id": "0022600246",
+   "date": "2026-11-16",
+   "matchup": "CHI@CLE",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "game_id": "0022600247",
+   "date": "2026-11-16",
+   "matchup": "MEM@WAS",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "game_id": "0022600248",
+   "date": "2026-11-16",
+   "matchup": "PHI@BKN",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "game_id": "0022600249",
+   "date": "2026-11-16",
+   "matchup": "HOU@MIA",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "game_id": "0022600250",
+   "date": "2026-11-16",
+   "matchup": "POR@MIN",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "game_id": "0022600251",
+   "date": "2026-11-16",
+   "matchup": "GSW@NOP",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "game_id": "0022600252",
+   "date": "2026-11-16",
+   "matchup": "PHX@DEN",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "game_id": "0022600253",
+   "date": "2026-11-17",
+   "matchup": "NYK@TOR",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "game_id": "0022600254",
+   "date": "2026-11-17",
+   "matchup": "POR@MIN",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "game_id": "0022600255",
+   "date": "2026-11-17",
+   "matchup": "DET@SAS",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "game_id": "0022600256",
+   "date": "2026-11-17",
+   "matchup": "CHA@LAL",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "game_id": "0022600257",
+   "date": "2026-11-17",
+   "matchup": "UTA@LAC",
+   "result": "VERIFIED",
+   "fields_checked": [
+    "away_record",
+    "date",
+    "home_record",
+    "matchup",
+    "tip"
+   ],
+   "mismatches": {},
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  }
+ ],
+ "finals": [
+  {
+   "game_id": "0022600034",
+   "matchup": "NYK@IND",
+   "site": "NYK 104 - IND 106 (Final)",
+   "official": "NYK 104 - IND 106 (Final)",
+   "result": "VERIFIED",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "game_id": "0022600035",
+   "matchup": "MIL@ORL",
+   "site": "MIL 99 - ORL 107 (Final)",
+   "official": "MIL 99 - ORL 107 (Final)",
+   "result": "VERIFIED",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "game_id": "0022600036",
+   "matchup": "CLE@MIA",
+   "site": "CLE 121 - MIA 133 (Final)",
+   "official": "CLE 121 - MIA 133 (Final)",
+   "result": "VERIFIED",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "game_id": "0022600037",
+   "matchup": "ATL@CHI",
+   "site": "ATL 117 - CHI 125 (Final/OT)",
+   "official": "ATL 117 - CHI 125 (Final/OT)",
+   "result": "VERIFIED",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "game_id": "0022600038",
+   "matchup": "MEM@NOP",
+   "site": "MEM 142 - NOP 111 (Final)",
+   "official": "MEM 142 - NOP 111 (Final)",
+   "result": "VERIFIED",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "game_id": "0022600039",
+   "matchup": "UTA@HOU",
+   "site": "UTA 118 - HOU 125 (Final)",
+   "official": "UTA 118 - HOU 125 (Final)",
+   "result": "VERIFIED",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "game_id": "0022600040",
+   "matchup": "GSW@SAS",
+   "site": "GSW 85 - SAS 123 (Final)",
+   "official": "GSW 85 - SAS 123 (Final)",
+   "result": "VERIFIED",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "game_id": "0022600041",
+   "matchup": "POR@SAC",
+   "site": "POR 120 - SAC 107 (Final)",
+   "official": "POR 120 - SAC 107 (Final)",
+   "result": "VERIFIED",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "game_id": "0022600042",
+   "matchup": "OKC@LAC",
+   "site": "OKC 112 - LAC 113 (Final)",
+   "official": "OKC 112 - LAC 113 (Final)",
+   "result": "VERIFIED",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  }
+ ],
+ "calendar": [
+  {
+   "date": "2026-11-14",
+   "official_calendar_badge": 5,
+   "rows_captured": 5,
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "date": "2026-11-15",
+   "official_calendar_badge": 9,
+   "rows_captured": 9,
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-16",
+   "official_calendar_badge": 8,
+   "rows_captured": 8,
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-17",
+   "official_calendar_badge": 5,
+   "rows_captured": 5,
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  }
+ ],
+ "records": [
+  {
+   "team": "DEN",
+   "date": "2026-11-14",
+   "record_games_page": "6-4",
+   "record_standings": "6-4",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-14",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "NOP",
+   "date": "2026-11-14",
+   "record_games_page": "4-9",
+   "record_standings": "4-9",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-14",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "DAL",
+   "date": "2026-11-14",
+   "record_games_page": "7-5",
+   "record_standings": "7-5",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-14",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "CLE",
+   "date": "2026-11-14",
+   "record_games_page": "6-7",
+   "record_standings": "6-7",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-14",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "DET",
+   "date": "2026-11-14",
+   "record_games_page": "8-3",
+   "record_standings": "8-3",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-14",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "MIA",
+   "date": "2026-11-14",
+   "record_games_page": "6-6",
+   "record_standings": "6-6",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-14",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "BKN",
+   "date": "2026-11-14",
+   "record_games_page": "3-8",
+   "record_standings": "3-8",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-14",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "MEM",
+   "date": "2026-11-14",
+   "record_games_page": "8-4",
+   "record_standings": "8-4",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-14",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "CHI",
+   "date": "2026-11-14",
+   "record_games_page": "2-9",
+   "record_standings": "2-9",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-14",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "MIN",
+   "date": "2026-11-14",
+   "record_games_page": "9-3",
+   "record_standings": "9-3",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-14",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "IND",
+   "date": "2026-11-15",
+   "record_games_page": "5-8",
+   "record_standings": "5-8",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "PHI",
+   "date": "2026-11-15",
+   "record_games_page": "10-3",
+   "record_standings": "10-3",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "LAL",
+   "date": "2026-11-15",
+   "record_games_page": "11-2",
+   "record_standings": "11-2",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "PHX",
+   "date": "2026-11-15",
+   "record_games_page": "5-6",
+   "record_standings": "5-6",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "CHA",
+   "date": "2026-11-15",
+   "record_games_page": "4-8",
+   "record_standings": "4-8",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "LAC",
+   "date": "2026-11-15",
+   "record_games_page": "3-8",
+   "record_standings": "3-8",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "SAS",
+   "date": "2026-11-15",
+   "record_games_page": "11-2",
+   "record_standings": "11-2",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "UTA",
+   "date": "2026-11-15",
+   "record_games_page": "1-12",
+   "record_standings": "1-12",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "DAL",
+   "date": "2026-11-15",
+   "record_games_page": "7-5",
+   "record_standings": "7-5",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "BOS",
+   "date": "2026-11-15",
+   "record_games_page": "10-2",
+   "record_standings": "10-2",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "NYK",
+   "date": "2026-11-15",
+   "record_games_page": "6-6",
+   "record_standings": "6-6",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "TOR",
+   "date": "2026-11-15",
+   "record_games_page": "5-7",
+   "record_standings": "5-7",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "HOU",
+   "date": "2026-11-15",
+   "record_games_page": "10-3",
+   "record_standings": "10-3",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "WAS",
+   "date": "2026-11-15",
+   "record_games_page": "4-9",
+   "record_standings": "4-9",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "ATL",
+   "date": "2026-11-15",
+   "record_games_page": "7-6",
+   "record_standings": "7-6",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "MIL",
+   "date": "2026-11-15",
+   "record_games_page": "1-12",
+   "record_standings": "1-12",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "OKC",
+   "date": "2026-11-15",
+   "record_games_page": "8-5",
+   "record_standings": "8-5",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "SAC",
+   "date": "2026-11-15",
+   "record_games_page": "1-11",
+   "record_standings": "1-11",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-15",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "ORL",
+   "date": "2026-11-16",
+   "record_games_page": "5-7",
+   "record_standings": "5-7",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "BOS",
+   "date": "2026-11-16",
+   "record_games_page": "10-2",
+   "record_standings": "10-2",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "CHI",
+   "date": "2026-11-16",
+   "record_games_page": "2-9",
+   "record_standings": "2-9",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "CLE",
+   "date": "2026-11-16",
+   "record_games_page": "6-7",
+   "record_standings": "6-7",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "MEM",
+   "date": "2026-11-16",
+   "record_games_page": "8-4",
+   "record_standings": "8-4",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "WAS",
+   "date": "2026-11-16",
+   "record_games_page": "4-9",
+   "record_standings": "4-9",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "PHI",
+   "date": "2026-11-16",
+   "record_games_page": "10-3",
+   "record_standings": "10-3",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "BKN",
+   "date": "2026-11-16",
+   "record_games_page": "3-8",
+   "record_standings": "3-8",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "HOU",
+   "date": "2026-11-16",
+   "record_games_page": "10-3",
+   "record_standings": "10-3",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "MIA",
+   "date": "2026-11-16",
+   "record_games_page": "6-6",
+   "record_standings": "6-6",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "POR",
+   "date": "2026-11-16",
+   "record_games_page": "9-3",
+   "record_standings": "9-3",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "MIN",
+   "date": "2026-11-16",
+   "record_games_page": "9-3",
+   "record_standings": "9-3",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "GSW",
+   "date": "2026-11-16",
+   "record_games_page": "8-5",
+   "record_standings": "8-5",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "NOP",
+   "date": "2026-11-16",
+   "record_games_page": "4-9",
+   "record_standings": "4-9",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "PHX",
+   "date": "2026-11-16",
+   "record_games_page": "5-6",
+   "record_standings": "5-6",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "DEN",
+   "date": "2026-11-16",
+   "record_games_page": "6-4",
+   "record_standings": "6-4",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-16",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "NYK",
+   "date": "2026-11-17",
+   "record_games_page": "6-6",
+   "record_standings": "6-6",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-17",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "TOR",
+   "date": "2026-11-17",
+   "record_games_page": "5-7",
+   "record_standings": "5-7",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-17",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "POR",
+   "date": "2026-11-17",
+   "record_games_page": "9-3",
+   "record_standings": "9-3",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-17",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "MIN",
+   "date": "2026-11-17",
+   "record_games_page": "9-3",
+   "record_standings": "9-3",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-17",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "DET",
+   "date": "2026-11-17",
+   "record_games_page": "8-3",
+   "record_standings": "8-3",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-17",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "SAS",
+   "date": "2026-11-17",
+   "record_games_page": "11-2",
+   "record_standings": "11-2",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-17",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "CHA",
+   "date": "2026-11-17",
+   "record_games_page": "4-8",
+   "record_standings": "4-8",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-17",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "LAL",
+   "date": "2026-11-17",
+   "record_games_page": "11-2",
+   "record_standings": "11-2",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-17",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "UTA",
+   "date": "2026-11-17",
+   "record_games_page": "1-12",
+   "record_standings": "1-12",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-17",
+   "source_standings": "https://www.nba.com/standings"
+  },
+  {
+   "team": "LAC",
+   "date": "2026-11-17",
+   "record_games_page": "3-8",
+   "record_standings": "3-8",
+   "agree": true,
+   "source_games": "https://www.nba.com/games?date=2026-11-17",
+   "source_standings": "https://www.nba.com/standings"
+  }
+ ]
+}
