@@ -16,8 +16,26 @@ OUT = os.path.join(HERE, "data")
 
 MIN_HISTORY = 4      # games a team must have played before its rating is used
 K_SHRINK = 3.0       # league-average games added to a team's mean margin as a prior
-COMMIT = os.environ.get("S26_COMMIT", "7623c02")
+COMMIT = os.environ.get("S28_COMMIT") or "unknown"
 SESSION = "arena/a3e092a2-nba1"
+
+
+def _head_commit():
+    """The commit these numbers were built from, stamped into every page footer.
+
+    Read from git rather than hard-coded, because a stale stamp is the kind of claim a
+    reader cannot check and this repository's rule is that every number must be.
+    """
+    try:
+        import subprocess
+        r = subprocess.run(["git", "-C", ROOT, "rev-parse", "--short", "HEAD"],
+                           capture_output=True, text=True, timeout=15)
+        return (r.stdout or "").strip() or "unknown"
+    except Exception:
+        return "unknown"
+
+
+COMMIT = os.environ.get("S28_COMMIT") or _head_commit()
 
 
 def load(*parts):

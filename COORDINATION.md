@@ -1948,7 +1948,199 @@ Not touched: `docs/**`, `data/**`, `index.html`, `flagged.json`, `suggestions.js
 - **Files touched:** `verify/2026-11-14-injury-currency/**` (new), `COORDINATION.md` §24 only.
 
 
-## 26. Session `arena/a3e092a2-nba1` — game-log completeness proof, rest-layer defect, skill-vs-luck tournament (claimed 10:35Z, delivered 11:05Z UTC 2026-11-14)
+---
+
+
+## 26. Session `arena/24eb72c6-nba1` — measured prop variance from official game logs (claimed 2026-11-14 10:2x UTC)
+
+Branch `arena/24eb72c6-nba1` (base `main` `7623c02`, now merged through `5ea615f`). The platform pins this
+session to that branch, so the `session-<id>/<task>` naming in the brief is satisfied by the single pre-named
+branch. **This section was claimed as §24; `arena/aadc3342-nba1` took §24 on `main` while this work ran, so it
+is renumbered to §26 at merge — the number change is the only edit to that session's text.**
+
+**Why this lane.** PR #58 and PR #59 were actively integrating settlement, finals and content refresh at claim
+time, so this session did not touch `index.html` content, settlement, `docs/**`, `engine/**` or
+`integration/**`. The one gap nobody claimed was the one that blocks prop pricing: **Q3 / F2 — game-to-game
+dispersion had never been measured, so all 88 published prop rows carried `probability: null`.** The missing
+input turned out to be readable: the NBA.com player game-log pages are server-rendered (probed at 10:24 UTC).
+
+| # | Task | Status | Files |
+| --- | --- | --- | --- |
+| P01 | Board claim pushed before any edit | done | `COORDINATION.md` (this section only) |
+| P02 | Capture official player game logs for the 11/14 prop cohort, row for row, with per-row provenance | done | `data/proplogs/2026-11-14/captures.json` |
+| P03 | Newest official injury edition for 11/14 + why the noon edition 404'd | done | `data/proplogs/2026-11-14/injury_2026-11-14_04_30AM.json` |
+| P04 | Measurement script + derived file: dispersion, cohort shrinkage, anchor test, minutes elasticity, baseline reconciliation, injury delta, availability read-out | done | `scripts/prop_variance.py`, `data/derived/prop_variance.json` |
+| P05 | Site page (11 sections, every row source-linked) | done | `scripts/build_dashboard.py` (CATEGORIES entry + one function + two wiring lines), `site/**` regenerated |
+| P06 | Decision content: Q3 updated, A14/A15 answered, Q20 opened, flags F40–F46, SG17/SG18 | done | `data/content/{questions,flagged,suggestions}.json` |
+| P07 | Gates, PR, merge, Pages | done | see 26.4 |
+
+### 26.1 Sources (all official; read 2026-11-14 between 10:24 and 10:35 UTC)
+
+| Input | Source |
+| --- | --- |
+| 10 player game logs, 40 box rows (Last 5 Games table) | `https://www.nba.com/player/<id>/<slug>/game-log` for 203999 (Jokić), 1627750 (Murray), 1629627 (Williamson), 1630595 (Cunningham), 1630163 (Ball), 1643410 (Wilson), 1628378 (Mitchell), 1642843 (Flagg), 1629660 (Jerome), 203507 (Antetokounmpo); each row also links to its `…/game/<id>/box-score` |
+| Player ids | already carried in `data/players_2026_27.json` and `data/live/player_game_logs.json` (captured from <https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS>); none was guessed |
+| Injury edition | <https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf>, index <https://official.nba.com/nba-injury-report-2026-27-season/> |
+| Site values compared (not sources) | `docs/data/props.json`, `docs/data/lines.json`, `data/derived/injury_impact.json`, `data/live/injury_report_2026_11_14.json`, `data/injuries_0515.json`, `data/player_absence_evidence.json` |
+
+### 26.2 What was measured (each figure reproducible with `python3 scripts/prop_variance.py`)
+
+| Result | Value | Reading |
+| --- | --- | --- |
+| Points dispersion, cohort | CV **0.344** over 40 official box rows | a player's game-to-game SD is about a third of his average — the number every prop width now uses |
+| Props priced | **10 of 14** rows on 11/14; 10 of 88 in the horizon | the other 78 stay blank, unchanged |
+| Props whose projection is ≥1 measured SD from the season anchor | **0 of 10** (largest 0.52 SD, median 0.16 SD) | no prop on the slate is settable by the desk rule this page states |
+| Anchor test, points MAE | season avg **6.53** vs 3-game leave-one-out **8.02** vs previous game **9.97** | do not chase form; caveated for contamination and unequal information |
+| Minutes → production | points rho **0.58** (n=40, p<0.0001), PRA **0.63**, assists **0.195**; elasticity β points **1.29**, PRA **0.93**, assists **0.49** | the flat 0.55 production-transfer rule is too small for scorers and too large for passers (A15, SG18) |
+| Same-game prop correlation | best pair n=3 games; 7 pairs, none interpretable | the SGP rho stays a declared assumption (F42) |
+| Season-average staleness | **10 of 10** reconcile exactly (baseline × gp + games since = what NBA.com prints now, within 1-dp rounding) | stale by arithmetic, not by error (F41) |
+| Injury delta, 04:30 AM vs the edition behind the lines | **0 rows new or changed**; 5 of 10 teams still NOT YET SUBMITTED | today's lines are priced against a half-filed report (F43); F31's AccessDenied is explained by the index (F45) |
+| Availability read-out for today | 26 designations, **0 move a line**, 25 unmeasurable from repo tables; Edwards already missed 8 of MIN's 12 games → re-cutting would double-count | published as section 11 so nobody "adjusts" for a baked-in absence |
+
+### 26.3 Verification performed
+
+| Check | Result |
+| --- | --- |
+| Independent second read of the same official pages (`data/live/player_game_logs.json`, read 00:55–01:05Z by session `arena/2edb85af`) | 10 overlapping rows agree cell for cell, **0 disagreements**; the window difference is exactly the games played since (page section 9) |
+| Injury capture vs another session's audit of the same PDF (`verify/2026-11-14-injury-currency/`, main §25, read ~10:20–10:30Z) | same 26 player rows, same 5 NOT-YET-SUBMITTED clubs; this session's transcription and theirs agree, including the Traore team-attribution caveat they raised (X01-F2) and the blank date column (X01-F3) |
+| `scripts/verify_dashboard.py` | 18 pages, **936** table rows, **915** with an official source link, 21 rows carrying the explicit not-published dash; **VERIFY OK** |
+| `scripts/verify_all.py` (builders + checker + data audits) | **VERIFY OK**, exit 0; no out-of-scope file rewritten |
+| `scripts/source_check.py` | exit 0; it reads the flag count dynamically (46) |
+| `scripts/check_links.py`, `scripts/check_rendered.py`, `scripts/verify_integration.py`, `node scripts/render_check.mjs` | PASS / PASS / PASSED (0 errors) / 0 pages with problems |
+| Merge integrity | `origin/main` (306 commits ahead) merged with `--no-ff`; conflicts in `index.html`, `site/**`, `data/content/{flagged,questions}.json`, `README.md`, `COORDINATION.md` resolved keeping **both** sides: generated files regenerated from the merged builder, registers renumbered (my flags F38–F44 → **F40–F46**, my answers A13/A14 → **A14/A15**, my section §24 → §26) because main had taken those ids |
+
+### 26.4 Delivery
+
+| Step | Result |
+| --- | --- |
+| PR | **#68** `Measured prop variance from official game logs: dispersion, anchor test, minutes elasticity, availability read-out` (head `91b1206` + retrigger commit), base `main` at `5ea615f` (this branch is 0 commits behind main — merged forward, not rebased) |
+| CI `validate` | **could not execute, twice**: run `43587285959` cancelled (`deploy` + `validate` "Canceling since a higher priority waiting request for pages exists"), retriggered as run `43588144029`, cancelled again with **0 steps recorded**. Cause is the repo-wide `concurrency: group: pages / cancel-in-progress: true` in `.github/workflows/pages.yml`, which lets any other session's push cancel a PR run — `arena/a3e092a2-nba1`'s PR run was cancelled the same way, and PR #65 ("Isolate Pages PR checks") is the open fix. Not a content failure. |
+| Gates, run locally at this head (the same ten commands the `validate` job defines, in order) | `check_site.py` all pages exist, links resolve, every row source-linked · build-B data present + valid JSON (17 files) · `verify_integration.py` **PASSED** 0 errors / 44 warnings · `render_check.mjs` **114 pages, 7325 blocks, 6535 rendered rows, 0 problems** · probe record 1194 URLs consistent · `build_verification_page.py` leaves `verification.html` **current** (empty `git status`) · Command Center 17 pages + 18 data files valid · `check_links.py` **PASS** · `check_rendered.py` **PASS** · workflow's own internal-link scan: 114 pages, no broken links · plus `verify_dashboard.py` **OK** (958 rows, 937 linked) and `verify_all.py` **VERIFY OK** |
+| Merge | `gh pr merge 68 --merge` (no approval requested, not auto) — recorded in the follow-up coordination commit on this branch, since the merge result cannot be known before the merge |
+| Pages | confirmed after the merge by `gh api repos/…/pages/deployments` + a fetch of the live `pages/prop-variance.html` URL, recorded with the merge SHA |
+| Not touched | `index.html` beyond the regenerated tile/nav; settlement, `docs/**`, `engine/**`, `leaderboard` re-cut, `data/content/executive.json` — those are the integration seats' lanes (see 26.5) |
+
+### 26.5 Cross-session requests (logged, not executed — files owned elsewhere)
+
+* **R-26-1 (integration seat / `docs/data/props.json` owner):** the props page still prints `probability: null`
+  for all 88 rows. `data/derived/prop_variance.json` now carries `p_beats_anchor`, `gap_in_sd`, `fair_line_low/high`
+  and a `tier` for the 10 measured players; reading it in `engine_v2/build_site.py` (or `docs/data`) is the join.
+* **R-26-2 (content owner, `data/content/executive.json`):** add the prop-variance finding to the executive
+  summary — "props now have a measured width; none clears one SD against the naive anchor; minutes elasticity
+  1.29/0.93/0.49 replaces the asserted 0.55". Not done here because §21's session is rewriting that file.
+* **R-26-3 (`data/raw/sources.json` owner):** four official source families used by this page are not in the
+  register: player game-log pages, per-game box scores reached from them, the 04:30 AM ET injury edition, and the
+  injury-report index. The Source Register page cannot show them until the register is extended.
+* **R-26-4 (`scripts/source_check.py` owner):** its headline note still reads "25 before this check; F26-F37
+  added" and its count of `flagged.json` items is now 46; it prints the live number but the parenthetical is stale.
+* **R-26-5 (`data/flags.json` owner):** two registers exist — `data/flags.json` (F-01…F-24, Build A) and
+  `data/content/flagged.json` (F1…F46, the site). They are not cross-referenced; a reviewer reading the old one
+  will miss F40–F46. Recommend the old file carry a pointer instead of a second list.
+* **R-26-7 (`verify/2026-11-14/checks.json` owner):** the committed record is one regeneration behind. Running `scripts/source_check.py` on a clean `origin/main` tree rewrites it from 16 consistent / 11 no-pick to **14 / 13**, and this branch reproduces exactly the same numbers — so the drift is main's, not this session's. The file was deliberately left at main's content rather than committed regenerated.
+* **R-26-6 (Injuries page owner):** main §25 (X01-F1) established that the page labels the 11/13 07:30 PM ET
+  edition as newest while the 04:30 AM ET 11/14 edition exists. This session's file confirms it; the label
+  promotion is theirs to make.
+
+**Limits stated on the page itself:** n = 3–4 games per player (the `Last 5 Games` block is all the page
+prints), SD uncertainty ≈ a quarter to a half of the SD, shrinkage k = 4 is a declared modelling choice, the
+anchor test is contaminated in the season average's favour, and no market line exists for any prop (Q1).
+
+## 27. Session `arena/212c2298-nba1` — independent row-level verification & close-out (claimed 2026-11-14T10:27Z)
+
+Branch `arena/212c2298-nba1` (base `main` `7623c02`, the merge of PR #60). The platform pins this
+session to that branch, so the `session-<id>/<task>` naming in the brief is not used; this single
+pinned branch carries the claims below (deviation logged, as earlier sessions did).
+
+| # | Task | Status | File scope (exclusive to this session) |
+| --- | --- | --- | --- |
+| Z01 | Independent line-by-line verification of published values against official nba.com pages (11/13 finals, 11/14–11/17 horizon, records, injury designations); every checked row recorded with its source URL; values that cannot be confirmed are left blank and flagged, never inferred | done (§27.1) | `verify/212c2298/**`, `REVIEW_Z01.md` |
+| Z02 | Independent recomputation of strategy statistics (binomial p-values, validation gates, correlation values, settlement math, luck decomposition) from committed raw data | done (§27.1) | `verify/212c2298/**` |
+| Z03 | Live-site + GitHub Pages verification (deploy status, live-URL link audit of every published page) | done (§27.1) | `verify/212c2298/**` |
+| Z04 | Close-out (only after other active claims are merged or idle >60 min): combined-tree rebase, full gate re-run, PR to `main`, merge, Pages confirmation, record here | done (§27.2) | `COORDINATION.md` (§27 only), `verify/212c2298/**` |
+
+**Active claims respected (not touched by this session):** `arena/ef6ff2a4-nba1` — integration seat,
+PR #58 (commits within the last 10 minutes at claim time); `arena/254dd8bb-nba1` — PR #59
+(conflicting with `main`, owner alive); `arena/2ef89703-nba1` — X01 injury-edition currency check
+(CI run in progress at claim time). `data/**`, `engine/**`, `engine_v2/**`, `scripts/**` builders,
+`site/**`, `docs/**`, `command-center/**`, root `*.html` are **read-only inputs** to Z01–Z03.
+If Z01–Z03 find a bad published value, the fix is logged as a cross-session request here (or taken
+in Z04 close-out), never edited behind an active owner's back.
+
+Sources for Z01 (read 2026-11-14T10:25–10:30Z): <https://www.nba.com/games?date=2026-11-13>
+(all 9 finals, incl. ATL–CHI `Final/OT`), and the horizon pages `…?date=2026-11-14` … `…-17`.
+
+### 27.1 Results (2026-11-14T11:05Z) — Z01–Z03 done
+
+Full line-by-line report: [`REVIEW_Z01.md`](REVIEW_Z01.md); machine results:
+`verify/212c2298/checks.json` (14 checks: 9 PASS, 3 FLAG = known open items F-C01/R-X1/R-X2/F30,
+1 RESOLVED-FLAG, 1 NOTE). Independent captures: `verify/212c2298/official_capture_2026-11-14.json`
+(finals + 27-game horizon + 04:15 AM injury edition, every row with its official URL).
+
+| Check | Result |
+| --- | --- |
+| 9 finals of 11/13 vs `data/verified/finals_2026-11-13.json` | 9/9 rows VERIFIED (scores, status, game IDs) |
+| ATL–CHI overtime count (was unconfirmed, `ot: null`) | **RESOLVED: 1 OT** — official box-score period filter `Q1 Q2 Q3 Q4 OT1` + recap headline "Bulls outlast Hawks in OT" ([box score](https://www.nba.com/game/atl-vs-chi-0022600037/box-score)) |
+| 27 horizon games vs `site/data/lines.json`, `data/derived/horizon_lines.json`, `data/official/slate.json`, all pick rows | 27/27 VERIFIED on date/tip/matchup/game ID; per-day counts match calendar badges; every pick row maps 1:1 |
+| 54 horizon record cells | 25 match current official cards; **29 stale and every one explained exactly** by the team's 11/13 result; 0 unexplained (F29/F-C02 stays a disclosure) |
+| Injury designations vs the current official edition (11/14 04:15 AM ET PDF) | 21/21 player rows VERIFIED (names, statuses, reasons); 5 NOT-YET-SUBMITTED teams VERIFIED; 11/15+ no-entry states VERIFIED |
+| Strategy stats (binomial p, Wilson CI, hit rate, units = Σ graded rows, 10 strategies) | PASS — all reproduce exactly |
+| Window metrics (MAE/RMSE/bias/straight-up, 51 games) | PASS — reproduce exactly from `docs/data/backtest.json` rows (home-margin convention per F27) |
+| Settlement ledger arithmetic | PASS — every settled row recomputes from its official score string |
+| Correlation register Tier A (10 pairs, n=30) | PASS — r and p reproduce exactly from the committed team tables (rows carry official source URLs) |
+| Live Pages (Z03) | `built`; landing tiles 27/27/63/10/51/37 all agree with committed data; flagged.html 37 rows; source-check.html numbers independently reproduced (25/29/0) |
+
+**Cross-session requests from this session (logged, not executed in Z01–Z03):**
+
+* **R-Y1 — cross-ledger model numbers (F26-class):** `integration/out/settlement.json`
+  `model_margin_home` and `docs/data/backtest.json` `model_spread_home` disagree on 50 of 51
+  shared games (e.g. BKN@ATL 11/07 +7.23 vs +3.4). Each ledger is internally consistent but the
+  pages do not label which engine produced which column. Label every model column with its engine
+  and pick one ledger as canonical for settlement. (Data owners + Flagged register.)
+* **R-Y2 — apply the resolved ATL–CHI overtime count:** set `ot: 1` in
+  `data/verified/finals_2026-11-13.json` (and wherever the null is carried), citing the box-score
+  period filter. This closes §20 irregularity 3 and the related F-row.
+* **R-Y3 — close F32 (DET@MIA time):** the 11/14 04:15 AM official edition prints `08:00 (ET)` for
+  DET@MIA, matching the schedule; the `07:00` print belonged to older editions. Mark F32 resolved
+  with that link.
+* **R-Y4 — relabel `units_at_minus110`:** for S9 and S10 (parlays) the published figure is the
+  parlay-priced sum of graded rows (−0.147, +2.919), not flat −110 grading (−1.273, −3.727).
+  Rename the metric (e.g. `units_at_graded_prices`) or split it per market.
+* **X01 cross-note (`arena/2ef89703-nba1`):** the 11/14 04:15 AM ET edition is published and this
+  session compared it row by row with the site's 11/13 07:30 PM ET edition — **no designation
+  changed**; an edition refresh moves labels only (plus F32, above).
+
+**Not done here (owned by the active claims):** the 11/13 finals promotion into
+`data/raw/games_completed.json` and the pick settlement (PR #58 / PR #59 lineages), the
+injury-edition currency update (X01), and any shared-page edits. Z04 (close-out) runs only after
+those claims merge or idle past 60 minutes.
+
+### 27.2 Z04 close-out record (2026-11-14T11:25Z)
+
+Combined tree: `main` at `73c64bd` (PRs #61/#62/#64 merged) + this session's two commits,
+rebased; one `COORDINATION.md` append conflict resolved with **both sides kept** (main's §24/§25
++ this §27). Post-merge re-verification (details in `REVIEW_Z01.md` §9): 16 checks — 12 PASS,
+2 FLAG (R-X2/F30 class), 1 pending fix (R-Y2), 1 NOTE (R-Y1); the merged 11/13 settlement
+(`data/raw/s14/settlement_2026-11-13.json`) verified **line by line** — 9/9 scores equal the
+official finals, grading recomputed correct (3-4, 2 NO BET, −1.40u), pre-registration fidelity to
+the frozen pre-tip archive PASS. Closed by the merges since §27.1: **R-X1** (finals promoted),
+the F29/F-C02 stale-record cells (54/54 record cells now current). Still open: R-Y1 (integration
+ledger frozen at 51 games; wrong shared source_url on its 11/13 `cannot_settle` rows), R-Y2
+(`ot: null` → 1 for ATL–CHI), R-Y3 (F32 resolvable), R-Y4 (units label), F30.
+
+Gate suite on the combined tree — all green: `verify_all.py` VERIFY OK (822 rows / 812 official
+source links; the 10 exceptions are the published F37 class), `check_site.py` PASS,
+`verify_integration.py` PASSED (warnings published), `check_links.py` PASS, `check_rendered.py`
+PASS, `render_check.mjs` 113 pages / 0 problems, `verification.html` current, broken-internal-link
+scan 0 of 113. Delivery (PR + Pages) is appended below after the merge.
+
+## 28. Session `arena/a3e092a2-nba1` — game-log completeness proof, rest-layer defect, skill-vs-luck tournament (claimed 10:35Z, delivered 11:05Z UTC 2026-11-14)
+
+**Numbering note.** This session claimed the next free number, **§26**, on `main` at `7623c02` at
+10:35Z and pushed the claim to its own branch. While this work was in flight `arena/24eb72c6-nba1` landed
+§26 and `arena/212c2298-nba1` landed §27 on `main`, so this section is renumbered to **§28** (ids renamed
+`F-S28-*`, `R-28-*`) rather than colliding with either. Nothing of theirs was edited; both their records are
+kept in full. The collision is the shared-board failure mode again, in the open: a claim is only visible once
+it is on `main`, and `main` moves every few minutes here.
 
 Branch `arena/a3e092a2-nba1`, base `main` `7623c02` (merge of PR #60). The platform pins this session to
 that branch, so the `session-<id>/<task>` branch naming in the brief is not used; this single pinned
@@ -1994,19 +2186,19 @@ things follow, both measured in `strategy-lab/data/backfill.json`:
 | L02 | Completeness proof on three instruments: per-team GP vs the repaired log (30 checks), per-date rows vs the official calendar block (29 checks), and a second reading of the 11/13 finals (9 checks) | **done** — 0 mismatches on all three; the log covers 320 of the 348 official team-games and the 28-row shortfall is the unpublished-score set, not a lost row | `verify/2026-11-14-a3e092a2/**`, `strategy-lab/data/backfill.json` |
 | L03 | Re-derive rest days / back-to-back flags on the complete schedule; count what changes among the graded rows; measure the b2b parameter against the season instead of re-fitting on 51 games | **done** — 46 of 366 team-slots, 2 flag flips, 0 inside the graded window, 54/54 horizon rest fields confirmed; season b2b coefficient 0.016 ± 4.426 (n=144) against the published 6.096, worth ≥3 points on 11 of the 27 unplayed games | `strategy-lab/**` (new namespace) |
 | L04 | Skill-vs-luck tournament on the enlarged window: exact Poisson-binomial and binomial p-values, Wilson bounds, Benjamini–Hochberg across the library, a shared-draw library null, moving-block bootstrap on units, both-halves stability; measured (not assumed) margin/total and same-night leg correlation | **done** — 94 walk-forward games, 13 strategies, **nothing beats the originated line** (best +3.84 wins, z 1.14, q 0.639; library null returns 1.000); model itself has skill (Brier skill 0.142, AUC 0.730, margin MAE 12.87 vs 14.31 naive) | `strategy-lab/**` |
-| L05 | Publish the lab as its own static section (own pages + own data, every row source-linked), open a PR to `main`, merge if the gates are green, confirm Pages, record here | **in review** — 8 pages, 479 rows, 462 carrying an official nba.com link; `python3 strategy-lab/check.py` PASS with 0 problems, repo `verify_integration.py` green with these pages included; PR opened by this session | `strategy-lab/**`, `COORDINATION.md` (§26 only) |
+| L05 | Publish the lab as its own static section (own pages + own data, every row source-linked), open a PR to `main`, merge if the gates are green, confirm Pages, record here | **in review** — 8 pages, 479 rows, 462 carrying an official nba.com link; `python3 strategy-lab/check.py` PASS with 0 problems, repo `verify_integration.py` green with these pages included; PR opened by this session | `strategy-lab/**`, `COORDINATION.md` (§28 only) |
 
 **Do not touch:** `site/**`, `index.html`, `README.md`, `data/**`, `docs/**`, `command-center/**`,
 `edge-lab/**`, `origination/**`, `engine/**`, `engine_v2/**`, `integration/**`, `audit/**`,
 `scripts/**`, `.github/**`. They are read as inputs. Anything the unified site should pick up (nav
-entry, flag rows, question rows, suggestion rows) is written here as a cross-session request in §26
+entry, flag rows, question rows, suggestion rows) is written here as a cross-session request in §28
 for the integration seat, never edited into a file another session owns. `data/official/gamelog.json`
 is **not** edited — the repaired schedule is rebuilt inside `strategy-lab/` only, so no other session's
 input moves mid-flight. L05 opens the PR; the fix itself belongs to the two consumer owners (request
-R-26-1 below).
+R-28-1 below).
 
 
-### 26a. What was measured, and the source for each number
+### 28.1  What was measured, and the source for each number
 
 Everything below is reproducible from the repository at the merge commit with
 `python3 strategy-lab/run.py && python3 strategy-lab/build.py && python3 strategy-lab/check.py`
@@ -2027,30 +2219,30 @@ four pages re-read by this session: <https://www.nba.com/games?date=2026-10-24>,
 | 8 | Distribution facts now measured: mean home margin +1.762, margin sd 17.406, \|margin\| ≤3 8.13%, ≤5 18.12%, ≥20 26.87%, overtime 5.00% (8 of 160) | same file, `margins` |
 | 9 | Gates: GA sample, GB calibration, GC skill-over-line, GD multiple-comparisons, GE stability, GF bootstrap are computable and applied; GG market test is **blocked repository-wide** — no NBA-operated source publishes a closing price, so no strategy can reach Tier 1 here and none is marked funded | `strategy-lab/data/gates.json`, `strategy-lab/data/meta.json` |
 
-### 26b. Irregularities flagged by this session (all published, none blocked)
+### 28.2  Irregularities flagged by this session (all published, none blocked)
 
 | id | Severity | Item |
 | --- | --- | --- |
-| F-S26-01 | Medium | 23 games of this season cannot be graded from any page this repository may read; both affected dates print FINAL with an empty score cell. Results stay blank; no score inferred from the standings residual. |
-| F-S26-02 | Medium | The rest layer does not read the fixture list the game log publishes for exactly that purpose (`engine_v2/context.py:125`, `scripts/originate_horizon.py`). 2 flag flips on 2026-10-25, 0 effect on published picks. |
-| F-S26-03 | High | The `b2b_penalty` of 6.096 points in every line is a 51-game fit; the season measures 0.016 ± 4.426 on 144 games. 11 of 27 unplayed games move ≥3 points between the two positions. Needs a keep / shrink / drop decision from the model owner, not a silent re-fit. |
-| F-S26-04 | Low | `rest_days` carries two definitions across the site: calendar gap in `engine/validate.py` (back-to-back = 1), full days off in `scripts/originate_horizon.py` (back-to-back = 0), so the same situation prints 1 on one page and 0 on another. Both are correct under their own definition; the shared name is the defect. |
-| F-S26-05 | Medium | The game-flow page's published overtime probability (mean 0.0191 over 27 horizon rows) is ~2.6× below the realised season rate (0.0500, 8 of 160), exact p 0.012. Framing caveat: a distribution check, not a graded forecast, because the rows describe unplayed games. |
-| F-S26-06 | Low → resolved | These figures were pinned to a base commit while other sessions rebuilt `site/data/**`. This branch has since merged `origin/main` (`5ea615f`, PRs #59/#61/#62/#64) and re-run: every tournament, backfill and rest number reproduced exactly (160 scored, 94 graded, T03 +3.84, 46/366 slots, 2 flips, 54/54 horizon fields). The probability audit moved with the rebuilt page — published home-win mean 0.5332 → 0.5467, inside-5 0.1893 → 0.1888 — and the overtime finding stands (0.0191 vs 0.0500, exact p 0.0121). Pages stamp the commit they were built from. |
+| F-S28-01 | Medium | 23 games of this season cannot be graded from any page this repository may read; both affected dates print FINAL with an empty score cell. Results stay blank; no score inferred from the standings residual. |
+| F-S28-02 | Medium | The rest layer does not read the fixture list the game log publishes for exactly that purpose (`engine_v2/context.py:125`, `scripts/originate_horizon.py`). 2 flag flips on 2026-10-25, 0 effect on published picks. |
+| F-S28-03 | High | The `b2b_penalty` of 6.096 points in every line is a 51-game fit; the season measures 0.016 ± 4.426 on 144 games. 11 of 27 unplayed games move ≥3 points between the two positions. Needs a keep / shrink / drop decision from the model owner, not a silent re-fit. |
+| F-S28-04 | Low | `rest_days` carries two definitions across the site: calendar gap in `engine/validate.py` (back-to-back = 1), full days off in `scripts/originate_horizon.py` (back-to-back = 0), so the same situation prints 1 on one page and 0 on another. Both are correct under their own definition; the shared name is the defect. |
+| F-S28-05 | Medium | The game-flow page's published overtime probability (mean 0.0191 over 27 horizon rows) is ~2.6× below the realised season rate (0.0500, 8 of 160), exact p 0.012. Framing caveat: a distribution check, not a graded forecast, because the rows describe unplayed games. |
+| F-S28-06 | Low → resolved | These figures were pinned to a base commit while other sessions rebuilt `site/data/**`. This branch has since merged `origin/main` (`5ea615f`, PRs #59/#61/#62/#64) and re-run: every tournament, backfill and rest number reproduced exactly (160 scored, 94 graded, T03 +3.84, 46/366 slots, 2 flips, 54/54 horizon fields). The probability audit moved with the rebuilt page — published home-win mean 0.5332 → 0.5467, inside-5 0.1893 → 0.1888 — and the overtime finding stands (0.0191 vs 0.0500, exact p 0.0121). Pages stamp the commit they were built from. |
 
-### 26c. Cross-session requests (filed here, not edited into another session's file)
+### 28.3  Cross-session requests (filed here, not edited into another session's file)
 
 | id | Ask | Owner | Why |
 | --- | --- | --- | --- |
-| R-26-1 | Read `known_unplayed_by_source.fixtures` when building rest history, or add a schedule-only file with all 183 games and make it the single rest input | owners of `engine_v2/context.py` and `scripts/originate_horizon.py` | F-S26-02; the file's own note promises this and the code does not do it |
-| R-26-2 | Decide keep / shrink / drop for `b2b_penalty`, and publish its interval next to the line | model owner (`engine/**`, `engine_v2/**`) | F-S26-03; a 6.1-point adjustment is currently justified by one week of basketball |
-| R-26-3 | Split `rest_days` into `gap_days` and `days_off` in the shared builders | integration seat | F-S26-04; two pages currently disagree about the same fact |
-| R-26-4 | Price the game-flow overtime column from the measured season rate (0.0500, n=160) instead of the current approximation | game-flow page owner | F-S26-05; the only published probability this lab found to be materially wrong |
-| R-26-5 | Grade strategies against the originated line (exact Poisson-binomial excess + BH across the library), not against a break-even constant | gate owner + integration seat | A hit rate vs 0.5238 flatters any favourite-backer; T01-T03 look like 69-78% win rates and are not significant against the line |
-| R-26-6 | Add `strategy-lab/**` to the nav as one more section, or fold its tables into the site build, whenever the site is next regenerated | integration seat | `scripts/build_dashboard.py` regenerates `index.html` and `site/**` and would erase a hand edit; nothing in this session touched those paths |
-| R-26-7 | A dated, licensed closing-price source (or a written decision to keep the site price-free permanently) | project owner | The only thing that can close gate GG; until then no strategy anywhere in the repository can be called a market edge |
+| R-28-1 | Read `known_unplayed_by_source.fixtures` when building rest history, or add a schedule-only file with all 183 games and make it the single rest input | owners of `engine_v2/context.py` and `scripts/originate_horizon.py` | F-S28-02; the file's own note promises this and the code does not do it |
+| R-28-2 | Decide keep / shrink / drop for `b2b_penalty`, and publish its interval next to the line | model owner (`engine/**`, `engine_v2/**`) | F-S28-03; a 6.1-point adjustment is currently justified by one week of basketball |
+| R-28-3 | Split `rest_days` into `gap_days` and `days_off` in the shared builders | integration seat | F-S28-04; two pages currently disagree about the same fact |
+| R-28-4 | Price the game-flow overtime column from the measured season rate (0.0500, n=160) instead of the current approximation | game-flow page owner | F-S28-05; the only published probability this lab found to be materially wrong |
+| R-28-5 | Grade strategies against the originated line (exact Poisson-binomial excess + BH across the library), not against a break-even constant | gate owner + integration seat | A hit rate vs 0.5238 flatters any favourite-backer; T01-T03 look like 69-78% win rates and are not significant against the line |
+| R-28-6 | Add `strategy-lab/**` to the nav as one more section, or fold its tables into the site build, whenever the site is next regenerated | integration seat | `scripts/build_dashboard.py` regenerates `index.html` and `site/**` and would erase a hand edit; nothing in this session touched those paths |
+| R-28-7 | A dated, licensed closing-price source (or a written decision to keep the site price-free permanently) | project owner | The only thing that can close gate GG; until then no strategy anywhere in the repository can be called a market edge |
 
-### 26d. Branch bookkeeping, recorded so nothing is hidden
+### 28.4  Branch bookkeeping, recorded so nothing is hidden
 
 `04c14f9` — the `probe-official.yml` workflow's own commit ("record official-source reachability probe
 [skip probe] [skip ci]") landed on `arena/a3e092a2-nba1` and touched `data/raw/probe_official.json` and
