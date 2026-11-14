@@ -372,6 +372,24 @@
    "source": null,
    "source_url": "https://www.nba.com/games",
    "suggested_action": "Reviewer: decide, row by row, whether each one should link to an official page, stay marked as internal, or be removed. No values were changed to make the count pass."
+  },
+  {
+   "id": "F38",
+   "severity": "High",
+   "title": "A leaderboard tier label could claim funding while gates had failed (defect found and fixed) (flag F26 in the 2026-11-14 refresh script; renumbered F38 at the merge of the official-source check's F26-F37)",
+   "detail": "The line-by-line review on 2026-11-14 found that the leaderboard's score-based tiering could assign the label 'Tier 1 - Funded - passed every applicable gate' to a strategy whose gate matrix still showed failures (S1 at 23-9 passed G1/G3/G4 but failed the calibration gate G2 and the stability gate G5). The tier ceilings were corrected the same day so that no tier above 'quarter unit' can be reached while any applicable gate is failed or unrun; the score weights were not touched. Published here so the change can be reviewed against engine/leaderboard.py.",
+   "affected": "The Strategies & Leaderboard and Validation pages (every tier label)",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/leaderboard.py",
+   "suggested_action": "Review the ceiling rules in engine/leaderboard.py and the tier notes on the leaderboard page."
+  },
+  {
+   "id": "F39",
+   "severity": "Low",
+   "title": "One injury row lost its Team cell in the official PDF render (attributed, not printed) (flag F27 in the 2026-11-14 refresh script; renumbered F39 at the merge of the official-source check's F26-F37)",
+   "detail": "In the 11/14/26 04:15 AM ET edition, the row 'Traore, Nolan | Probable | Injury/Illness - Right Calf Tightness / Soreness' rendered without its Team cell. The player is listed on the official Brooklyn Nets roster (Nolan Traore, #10), and the row sits inside the BKN@MEM block of the report, so it is transcribed with team 'Brooklyn Nets' and an explicit attribution note - it is recorded as attribution, not as printed.",
+   "affected": "One row of the injury transcription (data/raw/s14/injury_report_2026-11-14_0415ET.json)",
+   "source_url": "https://www.nba.com/team/1610612751/nets",
+   "suggested_action": "Confirm against a later edition of the same PDF, where the cell is expected to render."
   }
  ]
 }

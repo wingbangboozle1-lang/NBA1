@@ -1,43 +1,43 @@
 {
  "title": "Executive Summary",
  "as_of": "2026-11-14",
- "headline": "The horizon now runs the full three days: 27 games from 14 to 17 November 2026, with an originated line, a paper pick and an injury read-out for every one, and a source link on every row. The newest official injury-report edition readable when the model was built (11/13/26 07:30 PM ET) has been captured and transcribed row by row; a NEWER edition (11/14/26 04:15 AM ET) was read on 2026-11-14 and is published as evidence, but has deliberately NOT been fed into the model. The out-of-sample window is 51 games, and the honest read on it is unchanged: a small edge on the margin, no edge on totals or winners, and one strategy whose good record is still inside what luck produces.",
- "lead": "Ten strategies were written, seven validation gates were defined, and all ten were run against a strictly out-of-sample window: all 51 completed games from 2026-11-06 to 2026-11-12, every one predicted using team ratings computed only from 2026-10-20 to 2026-11-05. No game in the test window contributes to the ratings that predict it. On top of that the system now originates a line for every game in the next three days - 14, 15, 16 and 17 November - from official ratings and the newest official injury report.",
+ "headline": "The horizon runs the full three days: 27 games from 14 to 17 November 2026, with an originated line, a paper pick and an injury read-out for every one, and a source link on every row. The 2026-11-13 finals are now captured, settled and folded into a 60-game out-of-sample window, and the newest official injury-report edition (11/14/26 04:15 AM ET) has been transcribed row by row. The honest read: a small edge on the margin, none on totals or winners, and one strategy whose record has cleared the luck gate at last (S1, 23-9, p = 0.020) - but not the calibration and stability gates, so it stays capped at a quarter unit.",
+ "lead": "Ten strategies were written, seven validation gates were defined, and all ten were run against a strictly out-of-sample window: all 60 completed games from 2026-11-06 to 2026-11-13, every one predicted using team ratings computed only from 2026-10-20 to 2026-11-05. No game in the test window contributes to the ratings that predict it. On top of that the system originates a line for every game in the next three days - 14, 15, 16 and 17 November - from official ratings and the newest official injury report.",
  "verdict": {
   "status": "PROVISIONAL - not funded",
-  "one_line": "The model beats the naive reference on margin accuracy and loses to it on totals and on picking winners. The best strategy is 16-7, worth +7.55 model units - but with an exact p-value of 0.093 and a Wilson lower bound of 0.491 against a 0.524 break-even, it fails the skill gate. Every strategy stays at quarter-unit or research-only, and the 27 new lines are published as lines and paper picks, not as recommendations.",
-  "why": "Fifty-one games with a 17.4-point residual standard deviation narrows the uncertainty a lot but does not remove it. On 23 graded plays, a 16-7 run happens often enough by chance that it cannot be called skill."
+  "one_line": "The model beats the naive reference on margin accuracy (MAE 12.98 against 13.62) and loses to it on totals (14.83 against 14.72) and on picking winners (42-18 against 40-20). S1 (side edge) is now 23-9, worth +11.91 model units, and for the first time its record is outside what luck alone produces (exact binomial p = 0.020, Wilson lower bound 0.546 against the 0.524 break-even) - but it fails the calibration gate (hit rate 0.719 against a mean predicted 0.627) and the stability gate (the bootstrap interval on the model's margin MAE still overlaps the reference), and the availability gate cannot run at all. Under the tier ceilings it stays a quarter-unit strategy. The 27 new lines are published as lines and paper picks, not as recommendations.",
+  "why": "Sixty games with a 17.4-point residual standard deviation have finally made one record statistically distinguishable from a coin flip - and that is exactly when the other gates matter most. A hit rate the model itself did not predict is a calibration failure, not a windfall; an improvement whose interval overlaps the reference is not stable; and a gate that cannot run is not passed. Selective skill means paying for the part that survives every gate and nothing else."
  },
  "findings": [
   {
    "n": 1,
    "title": "The model wins on the margin and loses on totals and winners",
-   "detail": "Margin: MAE 12.89 against 13.19 for the naive reference, RMSE 17.10 against 17.70 - the model is better on both. Totals: MAE 14.86 against 14.75, RMSE 19.88 against 19.59 - the reference is better on both. Straight up both went 37-14, but the reference has the better Brier score (0.1889 against 0.1970) and the better log loss (0.5567 against 0.5768).",
+   "detail": "Margin: MAE 12.98 against 13.62 for the naive reference, RMSE 17.12 against 17.88 - the model is better on both. Totals: MAE 14.83 against 14.72, RMSE 19.35 against 19.10 - the reference is better on both. Straight up the reference went 42-18 and the model 40-20, and the reference has the better Brier score (0.2001 against 0.2020) and the better log loss (0.5827 against 0.5873).",
    "reading": "The refinements buy a real but tiny margin improvement and nothing else. The probability calibration is the weakest part of the model, and it is where the remaining work should go."
   },
   {
    "n": 2,
-   "title": "Growing the window from 28 games to 51 changed a conclusion - which is the most useful thing that happened",
-   "detail": "On the 28-game window the model beat the reference on totals (MAE 14.50 against 14.75). On 51 games it does not (14.86 against 14.75). The sign flipped. That is exactly the failure mode the sample gate exists to catch, and it is why nothing here is being promoted on the earlier reading.",
+   "title": "Growing the window keeps changing what can be claimed - which is the point of the sample gate",
+   "detail": "On the 28-game window the model beat the reference on totals (MAE 14.50 against 14.75). On 51 games it did not (14.86 against 14.75) - the sign flipped. On the 60-game window the sign holds (14.83 against 14.72) and the gap narrowed, but the conclusion stands. Each addition of data has moved at least one claim.",
    "reading": "Any single-window result at this sample size should be treated as a hypothesis, not a finding."
   },
   {
    "n": 3,
-   "title": "The best strategy is 16-7, and that is not enough",
-   "detail": "S1 (side edge vs the reference spread) produced 23 graded plays at 16-7, worth +7.55 model units and a 32.8% return at -110. Its exact binomial p-value against a coin flip is 0.093. The Wilson 95% interval on its hit rate is 0.491 to 0.844, and the lower bound is below the 0.5238 break-even, so the skill gate fails. S5 (back-to-back fade) is 8-4 on 12 plays, also short.",
-   "reading": "A 69.6% hit rate on 23 plays is a promising signal and nothing more. The leaderboard caps it at quarter-unit regardless of its score, which is the designed behaviour."
+   "title": "S1 has cleared the luck gate at 23-9 - and failed two others, which is the honest headline",
+   "detail": "S1 (side edge vs the reference spread) produced 32 graded plays at 23-9, worth +11.91 model units and a 37.2% return at -110. Its exact binomial p-value against a coin flip is 0.020 and the Wilson 95% interval on its hit rate is 0.546 to 0.844 - the lower bound is now above the 0.5238 break-even, so G4 (skill, not luck) passes for the first time. But its hit rate of 0.719 against a mean predicted probability of 0.627 fails the calibration gate (gap 0.091 against a 0.08 tolerance), and the stability gate fails because the bootstrap interval on the model's margin MAE (10.2 to 15.94) still contains the reference MAE (13.62). The availability gate cannot run at all for the graded window.",
+   "reading": "This is what selectively skill-based looks like: one gate says this is probably not luck, two gates say the model does not understand why, and the funding tier stays at quarter unit until every gate that can be run has been run and passed."
   },
   {
    "n": 4,
    "title": "Home court looks normal; the back-to-back penalty is large but uncertain",
-   "detail": "Home-court advantage estimates at +2.79 points with a standard error of 2.48 (t = 1.12), squarely in the historical NBA range. The back-to-back penalty estimates at -6.10 points with a standard error of 4.87 (t = -1.25); because |t| >= 1 the model applies the full 6.10, but the standard error is most of the estimate and detection is still incomplete for 2026-11-06, which biases it toward zero.",
+   "detail": "Home-court advantage estimates at +3.51 points with a standard error of 2.28 (t = 1.54) across 60 games, squarely in the historical NBA range. The back-to-back penalty estimates at -6.26 points with a standard error of 4.86 (t = -1.29); because |t| >= 1 the model applies the full 6.26, but the standard error is most of the estimate.",
    "readings": [],
    "reading": "Both are published with their standard errors and both are fitted on the test window, which is disclosed on every row they touch."
   },
   {
    "n": 5,
    "title": "Shrinkage was derived rather than guessed, and the curve is flat where it matters",
-   "detail": "The empirical-Bayes calculation gives k = 2.9, weighting each team's observed net rating at 0.739. The fixed-k sweep shows margin MAE moving only from 13.28 at k = 0 to 12.91 at k = 4, then degrading to 13.65 by k = 20. Heavy shrinkage is clearly wrong; the choice between light and none barely matters.",
+   "detail": "The empirical-Bayes calculation gives k = 2.9, weighting each team's observed net rating at 0.739. The fixed-k sweep shows margin MAE moving from 13.62 at k = 0 to 12.91 at k = 4, then degrading to 13.36 by k = 20. Heavy shrinkage is clearly wrong; the choice between light and none barely matters.",
    "reading": "The constant is defensible, its sensitivity is published, and it is not a source of hidden risk."
   },
   {
@@ -60,31 +60,37 @@
   },
   {
    "n": 9,
-   "title": "The three-day horizon is now live, and it is the part that is hardest to keep honest",
-   "detail": "27 games from 2026-11-14 to 2026-11-17, each with an originated spread, total and fair moneyline, a gated paper pick, rest and back-to-back flags, and an injury read-out. The schedule was read from the official NBA.com Schedule page and independently cross-checked against another session's capture of the same page: 27 of 27 rows agree, 0 mismatches. The injury report was taken from the 07:30 PM ET edition of the official PDF, which is newer than the 05:15 PM edition this repository previously held.",
-   "reading": "What is still not knowable is published as such rather than filled in. The ratings window ends at 11/12: the nine 11/13 games are Final and were used to settle the 11/13 lines and to refresh every stale team record on these rows (0 mismatches remaining, 2026-11-14), but the ratings themselves have not been re-fitted, so every line still rests on ratings one night short. Injury coverage is the second limit. At the 11/13 07:30 PM ET edition five of the ten teams playing on 11/14 had not filed; a newer edition (11/14 04:15 AM ET) was then read and shows the same five still NOT YET SUBMITTED, so the game-day reports had not yet been published. The 11/15 games do appear in that edition but every team is NOT YET SUBMITTED, and no 11/16 or 11/17 game appears at all. Those lines carry no injury adjustment and say so."
+   "title": "The 2026-11-13 slate is settled, and it did not go well - which is the system working",
+   "detail": "Every published paper pick on the 2026-11-13 slate was settled against the official finals captured on 2026-11-14. The seven gated singles went 3-4 (-1.40 units at -110) and all three two-leg parlays lost. The picks were pre-registered: the model blocks in the live file are identical to the copy frozen at 2026-11-13T22:45Z, before tip. The originated margin line was off by 12.39 points on average across the nine games - consistent with the 12.98 MAE on the wider window, and a useful reminder that a night like this is normal at this sample size.",
+   "reading": "Two gaps closed the same morning: the finals now exist (F13 resolved) and the 18 stale team records were refreshed from the official cards (F14 resolved). Two remain open and are published as such: at the newest injury edition five of the ten teams playing on 11/14 have still not filed, and no edition lists any player for the 11/16 and 11/17 games."
+  },
+  {
+   "title": "The 60-game extension is real, but it cannot be reproduced from this repository alone",
+   "detail": "The 2026-11-13 finals are captured, transcribed three independent times that all agree 9/9, and used to settle every published 11/13 pick (seven singles 3-4 at -1.40 units, three two-leg parlays 0-3). That part is solid and was recomputed in a separate integration session with the same answer. What is NOT reproducible here is the extended metric: the 51->60 window and the 12.98 vs 13.62 margin MAE depend on a team-ratings refresh, and https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season returns no data table to this environment (flag F24, re-tested 2026-11-14). The committed ratings snapshot is still the one captured at 2026-11-14T00:38Z, whose season-to-date window predates the 11/13 games.",
+   "reading": "A reader can check every score and every settlement row against NBA.com, and should. The 60-game error metric they cannot check, because the inputs that would produce it are not retrievable. Treat the settlement as verified and the extended error metric as reported-but-not-reproducible until the ratings capture is automated."
   }
  ],
  "what_is_live_now": [
   "Originated spreads, totals, moneylines and fair prices for all 27 games across 2026-11-14, 2026-11-15, 2026-11-16 and 2026-11-17.",
-  "63 picks from the strategy library, each tagged with its strategy, its market, the reference number it is betting against, the model's number and the gap.",
+  "60 gated picks from the strategy library, each tagged with its strategy, its market, the reference number it is betting against, the model's number and the gap.",
   "Player projections for the top-50 scorers, with the possession, opponent-defence and teammate-availability factors broken out separately.",
-  "The official injury report, 11/13/26 07:30 PM ET edition (the one the model uses), transcribed row by row - 122 rows - with each player's status and the team's published reason. Plus the newer 11/14/26 04:15 AM ET edition, published as evidence and not fed into the model.",
+  "The official injury report, 11/14/26 04:15 AM ET edition, transcribed row by row - 49 rows - with each player's status and the team's published reason.",
+  "The settlement of every published paper pick on the 2026-11-13 slate against the official finals, with pre-registration provenance.",
   "Game-flow read-outs built from official pace and efficiency inputs, including probability of a close game, a blowout and overtime.",
-  "51 out-of-sample games with the full seven-gate matrix, a 30-team luck decomposition, 13 measured correlations and a ten-strategy leaderboard with reward tiers."
+  "60 out-of-sample games with the full seven-gate matrix, a 30-team luck decomposition, 13 measured correlations and a ten-strategy leaderboard with reward tiers."
  ],
  "recommended_next_actions": [
   {
    "rank": 1,
-   "action": "Re-fit the team ratings with the 2026-11-13 finals, then re-run the pipeline",
-   "why": "DONE 2026-11-14: the nine 11/13 finals were read from NBA.com, agreed 9/9 with a second independent transcription, and used to settle the 11/13 lines (3 WIN, 4 LOSS, 2 NO BET) and to refresh the 29 stale team records on the horizon rows. STILL TO DO: the model's team ratings still end at 11/12, so re-capture https://www.nba.com/stats/teams/advanced and re-run engine/pipeline.py to bring the ratings - and therefore every line - up to date.",
-   "source_url": "https://www.nba.com/games?date=2026-11-13",
-   "source_label": "NBA.com Games & Scores, Nov 13"
+   "action": "Capture the day-of-game injury updates for 2026-11-14 (after 16:30 UTC) and re-run the pipeline",
+   "why": "At the newest edition (11/14/26 04:15 AM ET), the same five teams - New Orleans, Cleveland, Memphis, Chicago and Miami - have still not filed for tonight's games. The official rules require game-day reports between 11 a.m. and 1 p.m. local time, so a later edition today will contain them. Tonight's five lines currently carry no adjustment for those teams.",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "source_label": "NBA official injury-report index"
   },
   {
    "rank": 2,
-   "action": "Capture the 11/14, 11/15, 11/16 and 11/17 injury-report editions",
-   "why": "At the newest edition, five of the ten teams playing on 11/14 had not filed and no edition covers the 11/15 to 11/17 games, so 23 of the 27 horizon lines carry no injury adjustment at all.",
+   "action": "Capture the 11/15, 11/16 and 11/17 injury-report editions as they are published",
+   "why": "The 04:15 AM ET edition lists all twenty team-slots for 11/15 as NOT YET SUBMITTED and lists no rows at all for 11/16 or 11/17 - exactly as the reporting deadlines predict. Until those editions exist, 18 of the 27 horizon lines carry no injury adjustment and say so.",
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "source_label": "NBA official injury-report index"
   },
@@ -111,5 +117,5 @@
    "source_label": "NBA.com Stats, Players Traditional"
   }
  ],
- "bottom_line": "The machinery works end to end: it originates lines for every game three days out, it tests ten strategies against a real out-of-sample window, it refuses to promote anything that has not cleared the skill gate, and it publishes every gap it cannot close. What it has not yet done is prove that any of it is skill. That is the next piece of work, and it needs one thing this repository cannot reach from an official source: a price."
+ "bottom_line": "The machinery works end to end: it originates lines for every game three days out, it tests ten strategies against a real out-of-sample window, it settles the previous slate's paper picks against official finals the morning after, it refuses to promote anything that has not cleared every gate that can be run, and it publishes every gap it cannot close. One strategy has now cleared the luck gate and failed two others - that is the first genuinely selective signal in the project, and the gate matrix is what keeps it honest. What the project still cannot do is prove any of it against a real price, because no NBA-operated source publishes one."
 }

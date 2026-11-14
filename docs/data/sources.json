@@ -303,10 +303,10 @@
    "used_for": "Official game page for game 0022600257: tip time, venue, records and the game identifier."
   },
   "S3_2026-11-13": {
-   "title": "NBA.com Games & Scores - November 13, 2026 (in progress at capture)",
+   "title": "NBA.com Games & Scores - November 13, 2026",
    "url": "https://www.nba.com/games?date=2026-11-13",
    "publisher": "NBA.com (official)",
-   "used_for": "The nine fixtures' existence and tip times, for rest / back-to-back arithmetic only. No score is published: the games were live, not final."
+   "used_for": "Final scores for the nine 2026-11-13 games (captured 2026-11-14T10:10Z, all Final); also rest flags for 2026-11-14."
   },
   "S11_2026-11-14": {
    "title": "NBA.com Games & Scores - 2026/11/14",
@@ -345,10 +345,10 @@
    "used_for": "Slate listing, tip times, venues and the teams' won-lost records for 2026-11-17. Read 2026-11-14T01:20Z."
   },
   "S12": {
-   "title": "NBA.com team roster page - Cleveland Cavaliers",
-   "url": "https://www.nba.com/team/1610612739/cavaliers/roster",
+   "title": "NBA.com - Brooklyn Nets roster",
+   "url": "https://www.nba.com/team/1610612751/nets",
    "publisher": "NBA.com (official)",
-   "used_for": "Corroborating the team printed for Ernest Udeh, Jr. in the 07:30 PM injury report, whose row falls inside the Cleveland Cavaliers block but whose Team cell was blank."
+   "used_for": "Roster corroboration for one injury row (Traore, Nolan) whose Team cell dropped in the PDF render."
   },
   "S13": {
    "title": "NBA.com team roster page - Dallas Mavericks",
@@ -390,7 +390,19 @@
    "title": "NBA.com Games & Scores - November 13, 2026",
    "url": "https://www.nba.com/games?date=2026-11-13",
    "publisher": "NBA.com (official)",
-   "used_for": "The 2026-11-13 slate. At capture time the games were still in progress, so it holds no final score."
+   "used_for": "The 2026-11-13 slate. Read at capture while the games were under way, then re-read on 2026-11-14 when all nine games were Final; the finals are transcribed in verify/2026-11-14/official_finals_2026-11-13_s934ca56f.json and used for the 11/13 settlement."
+  },
+  "S2_2026-11-14": {
+   "title": "NBA.com Standings - 2026-27 Regular Season",
+   "url": "https://www.nba.com/standings",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official W-L records for all 30 teams through the games of 2026-11-13, captured 2026-11-14T10:10Z; used to cross-check every printed record cell."
+  },
+  "S10_2026-11-14-0415AM": {
+   "title": "NBA Official Injury Report, 11/14/26 04:15 AM ET edition",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+   "publisher": "NBA.com (official)",
+   "used_for": "Participation status for the 2026-11-14 and 2026-11-15 games; transcribed row by row in data/raw/s14/injury_report_2026-11-14_0415ET.json."
   }
  },
  "refresh_2026-11-14": {
@@ -407,6 +419,11 @@
    "as_of": "2026-11-14",
    "what_changed": "Season-to-date team table and training window re-captured; upcoming window rolled from 11/13-11/15 to 11/14-11/16 (22 games); 11/13 games moved to schedule_in_progress (rest maths only); injury report moved from the 17:15 ET to the 19:30 ET edition.",
    "previous_capture_utc": "2026-11-13T23:40:00Z"
+  },
+  {
+   "at_utc": "2026-11-14T10:10:00Z",
+   "session": "arena/254dd8bb-nba1",
+   "did": "Captured the 2026-11-13 finals (9 games), standings through 11/13 (30 rows), the 27 horizon cards with refreshed records, and the 11/14/26 04:15 AM ET injury edition. Cross-checks and record changes are in data/raw/s14/."
   }
  ],
  "merge_2026-11-14": "union of both captures (arena/2329cb68-nba1 + main sessions); shared ids prefer the main-side entry"

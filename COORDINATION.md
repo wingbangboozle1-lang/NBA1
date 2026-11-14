@@ -1891,3 +1891,28 @@ games and reports a better margin MAE (12.98 vs 13.62). This session does **not*
 figure, because the ratings refresh it depends on cannot be performed from this environment
 (F24) and the number would therefore rest on a ratings window the site cannot reproduce. It is
 logged here so the owner can land it deliberately with its own verification.
+
+
+### 25.4 Merge with `main` at PR #59 (`564c2cd`)
+
+`main` advanced while this session worked: PR #59 (session `arena/254dd8bb-nba1`) merged at
+`564c2cd`, and PR #61 after it. This branch was merged forward and the conflicts resolved as
+follows. **Nothing from either side was reverted.**
+
+| File | Resolution |
+| --- | --- |
+| `data/raw/schedule_upcoming.json` | Ours. PR #59 had refreshed the same 27 rows to the same values — **0 of 27 rows differed**. That is an independent confirmation of this session's record refresh, not a conflict. Re-checked after resolution: `verify_horizon_s934ca56f.py` RESULT OK. |
+| `data/content/flagged.json` | **Union.** Main's F38/F39 kept (this session had no such ids); this session's F13/F14/F28/F29 closures and F15/F27/F31 corrections kept. 39 items. |
+| `data/content/questions.json` | Main's A13 (which carries the 60-game extension and the parlay result). This session's **caveat appended to A13**: the extension's inputs cannot be reproduced from this environment (F24). |
+| `data/content/executive.json` | Main's narrative (60-game window, S1 23-9 p=0.020) kept, plus **a tenth finding** stating plainly that the settlement is independently verified three times over while the extended error metric is reported-but-not-reproducible. |
+| `data/raw/sources.json` | Main's version, with this session's "read again when final" corrections re-applied. |
+| `README.md` | Main's "Known limits" (accurate and newer), plus this session's "Start here" pointer to `EXECUTIVE_SUMMARY.md`. |
+| `docs/**`, `site/**`, `index.html` | **Regenerated** from the resolved source files, never hand-merged. |
+
+**One thing to be explicit about.** PR #59's headline is that S1 is now 23-9 with p = 0.020 and
+has "cleared the luck gate at last". This session does not dispute the arithmetic; it disputes
+that the number can be checked. `data/raw/team_advanced.json` is still the capture from
+`2026-11-14T00:38Z`, whose season-to-date window predates the 11/13 games, and the official
+advanced table returns no data to this environment (F24, re-tested 2026-11-14). So the 60-game
+window and its 12.98 vs 13.62 margin MAE are published, and they are labelled as not
+independently reproducible here rather than presented as if they had been re-derived.

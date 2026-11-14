@@ -411,6 +411,24 @@
 <td>Reviewer: decide, row by row, whether each one should link to an official page, stay marked as internal, or be removed. No values were changed to make the count pass.</td>
 <td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">link</a></td>
 </tr>
+<tr>
+<td>F38</td>
+<td>High</td>
+<td><b>A leaderboard tier label could claim funding while gates had failed (defect found and fixed) (flag F26 in the 2026-11-14 refresh script; renumbered F38 at the merge of the official-source check's F26-F37)</b></td>
+<td>The line-by-line review on 2026-11-14 found that the leaderboard's score-based tiering could assign the label 'Tier 1 - Funded - passed every applicable gate' to a strategy whose gate matrix still showed failures (S1 at 23-9 passed G1/G3/G4 but failed the calibration gate G2 and the stability gate G5). The tier ceilings were corrected the same day so that no tier above 'quarter unit' can be reached while any applicable gate is failed or unrun; the score weights were not touched. Published here so the change can be reviewed against engine/leaderboard.py.</td>
+<td>The Strategies &amp; Leaderboard and Validation pages (every tier label)</td>
+<td>Review the ceiling rules in engine/leaderboard.py and the tier notes on the leaderboard page.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/leaderboard.py" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F39</td>
+<td>Low</td>
+<td><b>One injury row lost its Team cell in the official PDF render (attributed, not printed) (flag F27 in the 2026-11-14 refresh script; renumbered F39 at the merge of the official-source check's F26-F37)</b></td>
+<td>In the 11/14/26 04:15 AM ET edition, the row 'Traore, Nolan | Probable | Injury/Illness - Right Calf Tightness / Soreness' rendered without its Team cell. The player is listed on the official Brooklyn Nets roster (Nolan Traore, #10), and the row sits inside the BKN@MEM block of the report, so it is transcribed with team 'Brooklyn Nets' and an explicit attribution note - it is recorded as attribution, not as printed.</td>
+<td>One row of the injury transcription (data/raw/s14/injury_report_2026-11-14_0415ET.json)</td>
+<td>Confirm against a later edition of the same PDF, where the cell is expected to render.</td>
+<td class="src"><a href="https://www.nba.com/team/1610612751/nets" target="_blank" rel="noopener">link</a></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
