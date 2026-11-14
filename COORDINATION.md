@@ -3058,6 +3058,54 @@ section numbers) folded into the F02/F04 worklist below.
 
 ---
 
+
+### 35.5 What actually happened after the claim (2026-11-14 19:0x–20:1x UTC)
+
+The five stale PRs were taken over in order — #63 (`532eebc`), #80 (`d9b61f8`), #75 (`510cb1e`),
+#66 (`cbd138e`) — each merged with the probe pair kept from `main` (rule: `main`'s
+`2026-11-14T12:58:07Z` capture beats every PR copy), carried sections renumbered (ecd5bb53 → §32,
+2dc33eb3 → §33, 934ca56f → §34), and the unified site regenerated from the merged builder rather
+than hand-merged. Every stale PR then CLOSED on `main` by a parallel integration cohort while this
+session worked: `arena/a39b9370-nba1` merged #66/#80/#63/#75 content directly (`6e07c29`,
+`5116c9f`, `f614e7c`, `4912185`, PR #87) — a second independent rule-5 takeover of the same five
+PRs, done in parallel. Both lifts are the same source branches, so nothing conflicts and nothing
+is lost; this session's record of the takeovers stands as the second, independent one.
+
+While the takeovers were in progress a cohort of new sessions landed on `main`: PR #85/#82
+(e812a9ed's QA), PR #89 (`arena/95c1cb23-nba1`: game-day injury refresh — 01:30 PM ET edition,
+F47–F52, A16–A17, SG19–SG22, the Game-Day Read page), PR #90 (`arena/428e6264-nba1`: the
+`verified/` row-level verification section, 8 pages), plus F53/SG23 (Pages deploy cancels).
+
+**Dedup decisions at the merge (`e3fee94`), stated so nobody has to guess:**
+
+| This session's draft | Disposition |
+| --- | --- |
+| F47 (edition drift: 4 clubs filed, 4 status changes) | **dropped** — A16/F47 on `main` carry the same measurements from the 01:30 PM capture; this session's 01:45 PM capture independently confirms all six facts and is kept as `verify/f7f6c46e/injury_compare.json` + `REPORT.md` |
+| F48/F49 (continuation rows: no team / no date) | **dropped** — `main` F50 covers both with a documented block-position method |
+| F50 → **F54** (two official tip-time formats) | kept, renumbered; unique |
+| F51 → **F55** (15-minute game-day cadence, point-in-time labels) | kept, renumbered; unique |
+| SG19 (archive editions + pre-tip re-price) | **dropped** — `main` SG19/SG21 cover the decision and the timeline |
+| SG20 → **SG24** (promotion only through the gate suite, R-A6) | kept, renumbered; unique |
+| Q14 observation, Executive headline edit | **dropped** — `main`'s A16 answer and refreshed headline are newer and fuller |
+| F34/F37 count updates, README R26-1 row, sidebar reading rule R26-4, clickable context URLs R26-2, `S10_2026-11-14-0145PM` source | kept — none of these were on `main` |
+| My §31 claim, carried §32 | **renumbered §35, §36** — `main` had taken §31 (`arena/95c1cb23-nba1`) and §32 (`arena/428e6264-nba1`), and PRs #88/#84 claimed §31/§32/§33 again while this merge was open; §33 (2dc33eb3) and §34 (934ca56f) do not collide and were left as carried |
+| Stray `=======`/`>>>>>>>` markers inside `COORDINATION.md` arriving from `main` | removed in this merge — `main` itself still carries one `=======` at its §30 region; PR #84 (`arena/140a10aa-nba1`) exists to remove them at source and has not merged yet |
+
+**Gates on the merged tree (all run 2026-11-14 20:0x UTC, all green):** check_site, build-B data
+parse, verify_integration (0 errors, 44 warnings — all already published), render_check
+(132 pages / 8756 blocks / 7649 rows / 0 problems), probe assert, verification.html idempotent,
+Command Center (17 pages / 18 files), check_links, check_rendered, broken-internal-link scan
+(132 pages), strategy-lab check (0 problems), verify_dashboard (20 pages / 1163 rows / 1138
+linked / 25 explained / 0 unmarked), verify_all (VERIFY OK). Independent verification artifacts:
+`verify/f7f6c46e/` (horizon 27/27 id+matchup+tip+record match; injury 01:45 PM capture + drift
+diff).
+
+**Left open on purpose (not this session's to close):** PR #88 (`arena/e06aed97-nba1`, CONFLICTING,
+last push 19:31Z) and PR #84 (`arena/140a10aa-nba1`, last push 19:31Z) — both sessions inside the
+60-minute ground-rule-5 window at the time of this record; re-assess after 20:31Z. e812a9ed's
+R-A1/R-A5/R-A6 requests: R-A1 reviewed (no stale "validated" claim found on the current tree),
+R-A5 stays a published limitation, R-A6 published as SG24.
+
 ## 36. Session `arena/ecd5bb53-nba1` — source-gate wording and exception counts (claimed 2026-11-14 UTC)
 
 Claimed on `main` at `7623c02`. At that cut, the dashboard checker reported 800 rows, 790 with an allowed official-source link, but its success line said every row was linked. After rebasing onto `origin/main` at `a29e721` (PRs #59 and #61 merged), that build reported 822 rows: 812 with an allowed official-source link, 7 explicit text explanations, 3 approved URL pointers in title attributes only, and 0 unmarked or unexplained gaps. After PRs #68 and #67 were merged through `main` at `55d0266`, verification reported 958 rows: 937 with an allowed official-source link, 18 explanatory no-source marks, 3 approved URL pointers in title attributes only, and 0 unmarked or unexplained gaps. PR #72 then merged as `c00a6ed` (adding the root `.nojekyll` and delivery/review notes but no dashboard content); the full local verification on that current base reproduces the same 958-row counts. The 3 values remain blank/unverified. This scope improves the gate's accounting; it does not claim to verify that a linked source agrees with a published value.
