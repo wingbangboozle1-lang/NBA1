@@ -553,6 +553,15 @@
 <td>Fill the two dates once readable, then rebuild the rest layer.</td>
 <td class="src"><span class="na" title="source id S_GAMES14 is not in the register">&mdash;</span></td>
 </tr>
+<tr>
+<td>F53</td>
+<td>High</td>
+<td><b>The same-game correlation was being reported as one pair's value; no pooled correlation exists</b></td>
+<td>data/derived/prop_variance.json carries pooled_pairwise_rho_points = 0.82. Read against its own source rows, that value is the correlation for one pair - Jamal Murray and Nikola Jokic, across 3 shared games - which the study's own reading cell labels 'not interpretable - n=3'. Every other same-game pair in the file shares 1 game or fewer and carries a null. A draft of the new product-comparison page quoted the 0.82 as a pooled same-game correlation; that was wrong and the page now states what the source states, with the full pair table published. The value in the JSON is not altered here: it is another session's file and changing the name or the value is their call. What is published is the correction and the reason.</td>
+<td>data/derived/prop_variance.json (field name), the props and prop-variance pages, and any same-game parlay reasoning</td>
+<td>Rename the field to reflect what it is (for example single_pair_rho_max_with_n), or pool properly across pairs with more shared games once the logs provide them. Until then no page should quote a pooled same-game correlation.</td>
+<td class="src"><span class="na" title="source id S_PV is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the

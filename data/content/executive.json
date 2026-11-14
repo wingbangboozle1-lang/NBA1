@@ -36,8 +36,8 @@
   {
    "n": 5,
    "title": "Single bets, parlays and prop combos are not the same product, and the data says which is which",
-   "detail": "A single bet needs its edge to survive one variance term. A parlay needs every leg to survive one, and the measured same-game pairwise correlation in points is 0.82 - much higher than independence - so same-game legs compound in a direction the pricing intuition usually gets backwards. Props are the thinnest of the three: only 10 of 88 rows have a measured dispersion, and none of those 10 clears one measured SD against the player's own season average (the median gap is 0.16 SD).",
-   "reading": "The product ranking that the evidence supports is single bets first, cross-game parlays second and conditional, same-game combos third, props last until a measured line exists. The site previously implied this; it now states it with the measured correlations and the unpriced count attached."
+   "detail": "A single bet needs its edge to survive one variance term. A parlay needs every leg to survive one, and the variance multiplies while the edge does not, so a parlay is a larger bet on the same edge rather than a better one. Same-game combos are the worst-served case in this repository: the joint probability is not the product of the legs, and the measured correlation that would correct it cannot be estimated here - the only same-game pair with more than one shared game is one pair over three games, which the source study itself calls not interpretable. Props are the thinnest of the three: 10 of 88 rows have a measured dispersion, and none of those 10 clears one measured SD against the player's own season average.",
+   "reading": "The product ranking the evidence supports is single bets first, cross-game parlays second and only with the variance understood, same-game combos third and not with a naive multiplication, props last until a measured line exists. The correction matters: a draft of this page stated a pooled same-game correlation of 0.82, which is one pair at n=3, and the page now says what the source says instead. That correction is flag F53."
   },
   {
    "n": 6,

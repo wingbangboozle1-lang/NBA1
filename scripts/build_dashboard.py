@@ -1740,7 +1740,7 @@ def build_execution():
         ("Questions still open", len(qs["open"]), "each with its missing input"),
         ("Suggestions on the table", len(sug["items"]), "%d new in this pass" % sum(1 for i in sug["items"] if i["id"] in
             ["SG19","SG20","SG21","SG22","SG23","SG24","SG25","SG26"])),
-        ("Flagged items", len(fl["items"]), "%d new in this pass" % sum(1 for i in fl["items"] if i["id"] >= "F47")),
+        ("Flagged items", len(fl["items"]), "%d new in this pass" % sum(1 for i in fl["items"] if i["id"].startswith("F5") or i["id"] in ("F47","F48","F49"))),
         ("Horizon rows verified", "%d/%d" % (ver["_meta"]["result"]["horizon_rows_verified"], len(ver["horizon"])),
          "field by field against nba.com on 2026-11-14"),
         ("Games missing from the log", st["_meta"]["result"]["games_missing"], "uniform across all 30 teams"),
@@ -1981,7 +1981,8 @@ def build_props_s30():
         ("Unpriced", pm["unpriced"], "no measured input - left blank, never estimated"),
         ("Clearing one measured SD", hl["props_clearing_one_sd"], "of the %d measured props" % hl["props_now_priced"]),
         ("Median gap to the anchor", "%s SD" % hl["median_abs_gap_in_sd"], "how close our number is to the player's own average"),
-        ("Same-game pairwise rho (points)", pv["pooled_pairwise_rho_points"], "measured, not assumed independent"),
+        ("Same-game pairs with >1 game", sum(1 for x in pv["same_game_correlations"] if x["games_shared"] > 1),
+         "of %d pairs - the rest cannot be estimated" % len(pv["same_game_correlations"])),
     ]))
 
     b.append(h2("1. Single bet",
@@ -2009,15 +2010,30 @@ def build_props_s30():
              '</ul>')
 
     b.append(h2("3. Same-game parlay and prop combos",
-                "Legs in the same game, which is where the correlation assumption usually goes wrong."))
-    b.append('<p class="secsub">The measured same-game pairwise correlation in points is <b>%s</b> across the captured game logs. '
-             'That is far above independence (0), and it runs in the direction that hurts: legs in the same game move together, so '
-             'a same-game combo is <i>more</i> correlated than a cross-game parlay and its true joint probability is further from the '
-             'product of its legs than an independent model would say. A pricing engine that multiplies leg probabilities without a '
-             'rho term overstates the chance of losing and understates the chance of winning together - either way the number is wrong, '
-             'and it is wrong in a direction that depends on the price. The site therefore does not publish a same-game joint '
-             'probability at all; it publishes the measured rho and says the joint number requires the price, which does not exist here.'
-             % esc(pv["pooled_pairwise_rho_points"]))
+                "Legs in the same game, which is where the correlation assumption usually goes wrong - and where this site "
+                "currently cannot estimate the correction at all."))
+    b.append(banner("warn", "The same-game correlation cannot be estimated from the data this project holds",
+                    "A draft of this page said the measured same-game correlation is 0.82. That was wrong, and the source file "
+                    "says so in its own words: 0.82 is the correlation for <b>one pair, Jamal Murray and Nikola Jokic, across %d "
+                    "shared games</b>, and the study's own reading of that row is &ldquo;not interpretable - n=3&rdquo;. Every "
+                    "other pair in the study shares 1 game or fewer and carries a null. There is no pooled same-game correlation "
+                    "in this repository, none is published here, and the correction is recorded as flag F53."
+                    % int(pv["same_game_correlations"][0]["games_shared"])))
+    b.append('<p class="secsub">What that means in practice is the useful part. A same-game combo\'s joint probability is not '
+             'the product of its legs - teammates\' production moves together because minutes, pace and game script move '
+             'together - so multiplying leg probabilities is known to be wrong in direction and unknown in size. This site '
+             'therefore publishes no same-game joint probability and no rho it cannot estimate. Anyone pricing a same-game combo '
+             'with this repository\'s data is guessing, and that guess is labelled here rather than elsewhere.</p>')
+    b.append(table(["Leg A", "Leg B", "Relationship", "Shared games", "rho (points)", "The study's own reading"],
+                   [[esc(x["leg_a"]), esc(x["leg_b"]), esc(x["relationship"]), esc(x["games_shared"]),
+                     num(x["rho_points"], 3) if x["rho_points"] is not None
+                     else nomark("null in the source file: not estimable at one shared game"),
+                     esc(x["reading"]),
+                     srclink_url("https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+                                 "&PerMode=PerGame&dir=-1&sort=PTS", "player logs")]
+                    for x in pv["same_game_correlations"]],
+                   note="Every same-game pair in the captured logs. A dash is a null in the source file, not a zero. Reducing "
+                        "this table to a single headline number is exactly the error the page used to make."))
 
     b.append(h2("4. Every prop row, and what happened to it",
                 "The published props table and the measured study, side by side. This is flag F50: the site publishes 0 priced rows "

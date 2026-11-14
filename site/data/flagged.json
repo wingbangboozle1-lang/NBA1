@@ -512,6 +512,16 @@
    "source": "S_GAMES14",
    "source_url": "https://www.nba.com/games?date=2026-11-14",
    "suggested_action": "Fill the two dates once readable, then rebuild the rest layer."
+  },
+  {
+   "id": "F53",
+   "severity": "High",
+   "title": "The same-game correlation was being reported as one pair's value; no pooled correlation exists",
+   "detail": "data/derived/prop_variance.json carries pooled_pairwise_rho_points = 0.82. Read against its own source rows, that value is the correlation for one pair - Jamal Murray and Nikola Jokic, across 3 shared games - which the study's own reading cell labels 'not interpretable - n=3'. Every other same-game pair in the file shares 1 game or fewer and carries a null. A draft of the new product-comparison page quoted the 0.82 as a pooled same-game correlation; that was wrong and the page now states what the source states, with the full pair table published. The value in the JSON is not altered here: it is another session's file and changing the name or the value is their call. What is published is the correction and the reason.",
+   "affected": "data/derived/prop_variance.json (field name), the props and prop-variance pages, and any same-game parlay reasoning",
+   "source": "S_PV",
+   "source_url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS",
+   "suggested_action": "Rename the field to reflect what it is (for example single_pair_rho_max_with_n), or pool properly across pairs with more shared games once the logs provide them. Until then no page should quote a pooled same-game correlation."
   }
  ],
  "_session_note": "Items F47-F52 were added by session arena/e06aed97-nba1 (COORDINATION section 30) from a fresh read of official sources on 2026-11-14 between 18:40Z and 19:10Z. F1-F46 are unchanged."
