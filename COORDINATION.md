@@ -1783,3 +1783,43 @@ Irregularities met during delivery (not flags, logged here):
 - **`gh pr edit` fails** on the deprecated Projects (classic) GraphQL field. The body was updated through `gh api PATCH repos/…/pulls/57` instead.
 - **PR #56** merged to `main` (`4e4d0b0`) during this session. Its finals were cross-checked (9 / 9 agree) before the merge.
 
+
+---
+
+## 26. Session `arena/a3e092a2-nba1` — season game-log completeness backfill, rest/b2b re-fit, skill-vs-luck tournament (CLAIMED 2026-11-14 10:35Z UTC)
+
+Branch `arena/a3e092a2-nba1`, base `main` `7623c02` (merge of PR #60). The platform pins this session to
+that branch, so the `session-<id>/<task>` branch naming in the brief is not used; this single pinned
+branch carries the claims below. Deviation logged here, as earlier sessions logged it.
+
+**Why this lane.** The board read before claiming showed the integration seat taken (§25,
+`arena/934ca56f-nba1`, 10:25Z) and injury-edition currency taken (§24, `arena/2ef89703-nba1`), with
+integration PRs #58/#59 open. Nothing on the board covers the *completeness of the season game log*
+that every backtest, rest flag and leaderboard number is built from. A local arithmetic check on
+`main` at `7623c02` found it is short:
+
+| Check | Official value | Repository value | Gap |
+| --- | --- | --- | --- |
+| Team-games played, 2026-10-20 .. 2026-11-12 | 348 (Σ GP over 30 teams, `site/data/teams.json` ← S1 NBA.com Stats Teams Advanced) | 302 (`data/official/gamelog.json`, 151 games) | **46 team-games = 23 games** |
+| Per-team deficits | — | — | 15 teams short 2 games, 15 teams short 1 game; **no team has 0** |
+| Dates present in the log | — | 21 dates | **`2026-10-24` and `2026-11-02` have no rows at all**; the official calendar block on <https://www.nba.com/games?date=2026-11-14> prints "2 → 15 GAMES" for 11/02 |
+
+Consequence, not cosmetics: `docs/data/backtest.json` and `engine/validate.py` derive `home_b2b` /
+`away_b2b` / rest days from that log, and the fitted `b2b_penalty` (6.096) and the 51-game
+out-of-sample metrics are conditioned on those flags. A missing slate day corrupts rest flags for the
+teams either side of it (11/01 → 11/04 looks like 3 days rest, not 2; 10/23 → 10/25 likewise).
+
+| # | Task | Status | File scope (exclusive to this session) |
+| --- | --- | --- | --- |
+| L01 | Backfill the two missing dates from the official day pages, row by row with a source URL per row | claimed | `verify/2026-11-14/s26_official_*.json` |
+| L02 | Completeness proof: per-team GP (official S1 capture) vs the repaired log, 30 checks, plus Σ wins = Σ losses = games | claimed | `verify/2026-11-14/s26_completeness.json` |
+| L03 | Re-derive rest days / back-to-back flags on the complete log; measure how many of the 51 OOS rows change flag; re-fit HCA and b2b penalty on the repaired inputs | claimed | `strategy-lab/**` (new namespace) |
+| L04 | Skill-vs-luck tournament on the enlarged window: exact binomial p-values, Wilson bounds, Benjamini–Hochberg FDR across the library, block-bootstrap CIs on units, deflated-Sharpe/PBO-style overfitting control; measured (not assumed) leg correlations from the complete log | claimed | `strategy-lab/**` |
+| L05 | Publish the lab as its own static section (own page + own data, every row source-linked), open a PR to `main`, merge if the gates are green, confirm Pages, record here | claimed | `strategy-lab/**`, `COORDINATION.md` (§26 only) |
+
+**Do not touch:** `site/**`, `index.html`, `README.md`, `data/**`, `docs/**`, `command-center/**`,
+`edge-lab/**`, `origination/**`, `engine/**`, `engine_v2/**`, `integration/**`, `audit/**`,
+`scripts/**`, `.github/**`. They are read as inputs. Anything the unified site should pick up (nav
+entry, flag rows, question rows, suggestion rows) is written here as a cross-session request in §26
+for the integration seat, never edited into a file another session owns. `data/official/gamelog.json`
+is **not** edited — the repair is published in `strategy-lab/` so no other session's input changes mid-flight.
