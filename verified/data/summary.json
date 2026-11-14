@@ -1,0 +1,195 @@
+{
+  "meta": {
+    "title": "Executive summary \u2014 2026-11-14",
+    "audience": "The project owner, in ten minutes, before any decision",
+    "generated_utc": "2026-11-14T19:50Z",
+    "sections": "What this build did \u00b7 What is true \u00b7 What is not true \u00b7 What changed today \u00b7 What the numbers say \u00b7 What to decide \u00b7 What is still unknown"
+  },
+  "headline": {
+    "one_sentence": "The repository's engineering is sound and reproducible, its official-data lineage checks out row by row, and its strongest performance claim does not survive a multiple-testing correction \u2014 while the one layer that changes fastest during a game day, injuries, is fifteen hours stale at first tip.",
+    "state": "No strategy is funded. No strategy can be shown to beat a market, because no market price exists in the project.",
+    "confidence": "High for the data checks (they were read off official pages in this session), medium for the statistics (recomputed from the repository's own play list, which was itself checked against official scores for the games that could be read)."
+  },
+  "what_this_build_did": [
+    "Claimed its own scope on the coordination board and pushed the claim before touching anything (COORDINATION.md \u00a730).",
+    "Read 19 official NBA pages in this session and compared them, row by row, with what the repository publishes: 28 verification rows covering 3,873 compared values.",
+    "Re-graded the only graded result the project has (the 2026-11-13 slate) against the official finals: 9 of 9 scores match, and the published 3-4 record reproduces exactly.",
+    "Recomputed every published statistic that can be recomputed without a market price: exact binomial p-values, Wilson bounds, the luck decomposition, 13 correlation coefficients, and the model's error statistics.",
+    "Found five defects that change decisions (F-01 prop lines stale, F-03/F-04 injury layer stale, F-05 headline overstated, F-12 rest field wrong) and ten housekeeping items.",
+    "Wrote the decision layer that was missing: this summary, 12 questions with the step that answers each, and 12 options for someone to choose between."
+  ],
+  "what_is_true": [
+    {
+      "claim": "The published site is generated and reproducible, not hand-edited",
+      "evidence": "Running the repository's own gate re-creates the site byte for byte: the working tree is clean afterwards, 18 pages and 958 rows checked, 0 broken internal links.",
+      "strength": "Strong \u2014 executed in this session"
+    },
+    {
+      "claim": "The team ratings every line is built from are the official values",
+      "evidence": "All 30 teams match NBA.com Teams Advanced on GP, W, L, OffRtg, DefRtg, NetRtg, PACE, eFG%, TS%, TOV% and PIE; two teams were confirmed again on their own team pages.",
+      "strength": "Strong \u2014 30/30 rows, 0 differing cells"
+    },
+    {
+      "claim": "The 2026-11-13 settlement is correct",
+      "evidence": "All nine finals match NBA.com; re-grading the seven paper picks against their own originated spreads gives 3 wins and 4 losses, which is -1.40 units at the stated -110 convention.",
+      "strength": "Strong \u2014 the only graded result in the project, and it holds"
+    },
+    {
+      "claim": "The out-of-sample window is complete",
+      "evidence": "The 60 games in the corpus match the official month calendar date by date (9+7+7+8+6+10+4+9).",
+      "strength": "Strong for completeness; see the caveat on score-level verification below"
+    },
+    {
+      "claim": "The model is slightly ahead of a naive benchmark on margin and behind on totals",
+      "evidence": "Margin MAE 12.98 vs 13.62 benchmark; total MAE 14.83 vs 14.72 benchmark; both recomputed from the 60 stored forecasts.",
+      "strength": "Moderate \u2014 the benchmark is the project's own construction, not a market"
+    },
+    {
+      "claim": "The correlation work is real work and it reproduces",
+      "evidence": "13 published coefficients recompute from official columns to within 0.0005.",
+      "strength": "Strong \u2014 arithmetic on official inputs"
+    }
+  ],
+  "what_is_not_true": [
+    {
+      "claim_as_published": "\"For the first time one strategy has cleared the luck gate\"",
+      "why_not": "True as a raw p-value, false as a skill claim. Across the six strategies that were tested on the same 60 games, Benjamini-Hochberg puts S1's q at 0.120 \u2014 it does not survive correction. And S1's win rate barely improves as its edge grows (11/16 on the smallest disagreements, 12/16 on the largest; r = 0.051), which is not what a real edge looks like.",
+      "instead": "One strategy is nominally ahead after 32 picks and is unproven. It should be pre-registered, not funded.",
+      "flag": "F-05"
+    },
+    {
+      "claim_as_published": "\"Picks are generated for every upcoming slate using our originated lines\" with totals and player props",
+      "why_not": "Totals and prop lines are not market lines and not originated numbers of the same kind as the spread. The prop 'line' is the player's own season average \u2014 sometimes one game stale \u2014 so three of the four props re-checked have a side that is flattered or reversed by the stale number.",
+      "instead": "Spreads are originated from a stated formula. Totals and props are projections compared against a non-market reference. The three should be labelled differently, because they are.",
+      "flag": "F-01, Q-07"
+    },
+    {
+      "claim_as_published": "\"Five of the ten teams playing on 11/14 have still not filed\"",
+      "why_not": "True of the 04:15 AM edition the page cites, false as of the 1:30 PM edition: all ten teams had filed, and 22 designations had changed.",
+      "instead": "The injury layer is 15 hours stale on a game day and the page does not say so.",
+      "flag": "F-03, F-04"
+    },
+    {
+      "claim_as_published": "Rest and back-to-back context is published for every horizon game",
+      "why_not": "The horizon builder computes 'days since the previous game' against a fixture list that includes future dates, so 26 of 27 rows store a negative value, and the game-flow page and the picks page disagree with each other about the same game.",
+      "instead": "There is no trustworthy rest field in the project today.",
+      "flag": "F-12"
+    },
+    {
+      "claim_as_published": "\"Every table row links to the official source it came from\"",
+      "why_not": "78 of 978 data rows carry no official link under an independent parse. The build's own audit counts rows under a narrower definition.",
+      "instead": "Most rows are source-linked; the sentence needs the definition attached.",
+      "flag": "F-10"
+    }
+  ],
+  "what_changed_today": [
+    {
+      "change": "Six teams filed their first injury report for 11/14 between 04:15 and 13:30 ET",
+      "detail": "Cleveland, New Orleans, Chicago and Miami filed new rows; Memphis is still NOT YET SUBMITTED. Max Christie moved Questionable to Doubtful.",
+      "consequence": "Any line priced before 1:00 PM ET on 11/14 was priced without knowing whether Evan Mobley, Trey Murphy III, Dejounte Murray, Trendon Watford, Jalen Duren or Anthony Edwards would play.",
+      "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf"
+    },
+    {
+      "change": "Anthony Edwards (MIN) and Donte DiVincenzo (MIN) are Out; Evan Mobley (CLE) is Out; three New Orleans starters are Out",
+      "detail": "Read from the 1:30 PM edition.",
+      "consequence": "Four of the five games on the 11/14 slate have a rotation-level absence that the published injury layer does not carry.",
+      "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf"
+    },
+    {
+      "change": "The team ratings table moved one game forward for every team that played 11/13",
+      "detail": "The stored snapshot stops at games through 11/12; the live page now includes 11/13.",
+      "consequence": "Every horizon line is built on ratings that are one game stale. Disclosed by the repository, not corrected.",
+      "source": "https://www.nba.com/stats/teams/advanced"
+    },
+    {
+      "change": "No strategy's status changed",
+      "detail": "No pick has been graded since the 11/13 settlement.",
+      "consequence": "The leaderboard is unchanged and no gate changed state today.",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/validation.json"
+    }
+  ],
+  "what_the_numbers_say": [
+    {
+      "number": "60",
+      "reading": "Games in the out-of-sample window, 11/06 to 11/13. Complete against the official calendar.",
+      "caveat": "15 of the 60 final scores were re-read from NBA.com in this session; 45 were not.",
+      "source": "https://www.nba.com/games?date=2026-11-13"
+    },
+    {
+      "number": "32",
+      "reading": "Graded picks for S1, the best strategy. 23-9.",
+      "caveat": "At 32 bets the design can only detect a very large edge. Roughly 250-300 picks would be needed to separate 55% from 52.4% at 80% power.",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/validation.json"
+    },
+    {
+      "number": "0.020 / 0.120",
+      "reading": "S1's raw p-value / its Benjamini-Hochberg q-value across the six tested strategies.",
+      "caveat": "The first number is the one on the site. The second is the one that decides whether it is real.",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/validation.json"
+    },
+    {
+      "number": "12.98 vs 13.62",
+      "reading": "Model vs naive benchmark, margin mean absolute error. The model wins by 0.64 points.",
+      "caveat": "The benchmark is the project's own construction. This is not a market result.",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json"
+    },
+    {
+      "number": "14.83 vs 14.72",
+      "reading": "Model vs naive benchmark, total mean absolute error. The model loses by 0.11 points.",
+      "caveat": "Totals are the weaker half of the model and there is no decomposed error to say why.",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json"
+    },
+    {
+      "number": "-1.40",
+      "reading": "Units on the 2026-11-13 paper slate at the -110 convention (3-4). Parlays 0-3.",
+      "caveat": "The best available evidence so far says the picks did not win money on the one day they were graded.",
+      "source": "https://www.nba.com/games?date=2026-11-13"
+    },
+    {
+      "number": "22",
+      "reading": "Injury designations that changed between 12:00 PM and 1:30 PM on 11/14.",
+      "caveat": "None of them is reflected anywhere in the repository.",
+      "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf"
+    },
+    {
+      "number": "3 of 4",
+      "reading": "Prop players whose published line is below their own official season average.",
+      "caveat": "Small sample; the direction of the defect is consistent, which is the worrying part.",
+      "source": "https://www.nba.com/player/203507"
+    }
+  ],
+  "what_to_decide": [
+    {
+      "decision": "Is this a market-beating project or a model-quality project?",
+      "why_now": "Nothing can be called validated until this is answered; every gate that needs a price is blocked.",
+      "options": "Licensed price feed (expensive, unlocks the real test) or a written 'model quality only' statement (free, honest, ends the ambiguity).",
+      "question": "Q-01"
+    },
+    {
+      "decision": "Fund S1, pre-register it, or drop it?",
+      "why_now": "The site's headline invites a funding decision the statistics do not support.",
+      "options": "Pre-register and wait for 250-300 picks (recommended); or publish the corrected q-value and keep it at quarter size; or remove it from the leaderboard.",
+      "question": "Q-03"
+    },
+    {
+      "decision": "Which build is the product?",
+      "why_now": "Six codebases, one origin, contradictory numbers. Every fix costs five times as much until this is settled.",
+      "options": "Root site/ (recommended: it is the only build whose gate passes and whose output is reproducible), or the Integration Desk.",
+      "question": "Q-06"
+    },
+    {
+      "decision": "Does the injury layer become automated before the next slate?",
+      "why_now": "It is the fastest-moving input and currently the stalest part of the site.",
+      "options": "Wire the existing refresh workflow to ingest the newest edition and publish the diff (2-3 days), or mark the injury layer as a snapshot and stop presenting it as current.",
+      "question": "Q-04"
+    }
+  ],
+  "what_is_still_unknown": [
+    "Whether any strategy beats a market: untestable today, no price source exists.",
+    "Whether S1 is real: needs about 250-300 graded picks and a pre-registered rule.",
+    "How much a designation like 'Questionable' actually costs in minutes: never measured.",
+    "Which rho values are right for parlay legs: five of them are asserted, none measured for a player leg.",
+    "Whether the 45 unre-read final scores are correct: completeness is proven, correctness is not.",
+    "What rights the project has to publish derived NBA content: not stated anywhere in the repository."
+  ]
+}

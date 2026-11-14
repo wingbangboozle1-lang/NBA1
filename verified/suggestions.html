@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions &middot; NBA1 verified</title>
+<meta name="description" content="Independent row-level verification and decision layer for the NBA1 line-origination project. No manual input, no inferred values.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html">
+      <span class="tick">&#10003;</span>
+      <span>NBA1 verified<small>independent check &middot; 14 Nov 2026</small></span>
+    </a>
+    <nav class="topnav" aria-label="Sections"><a href="index.html">Overview</a><a href="summary.html">Executive summary</a><a href="verification.html">Verification</a><a href="review.html">Repo review</a><a href="questions.html">Questions</a><a href="suggestions.html" aria-current="page">Suggestions</a><a href="flagged.html">Flagged</a><a href="sources.html">Sources</a></nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap">
+
+<h1>Suggestions — review, then choose</h1>
+<p class="lede">12 options for improving the project, ordered by what unblocks the most. This is a
+decision board, not a backlog: nothing here has been implemented, and nothing should be implemented until
+one path is chosen.</p>
+
+<div class="banner"><b>How to use this page.</b> Read the summary table, pick the row that fixes the thing
+that is actually costing you a decision, and set its status to <em>accepted</em> with an owner and a
+definition of done. A suggestion without a definition of done is how a wishlist becomes a backlog.
+Statuses are <em>proposed &rarr; accepted &rarr; done</em>, or <em>rejected</em> &mdash; and a rejected row
+keeps its reason so it is not proposed again.</div>
+
+<h2>Summary — pick one row at a time</h2>
+<div class="tablewrap"><table><thead><tr><th class="n">Order</th><th>Suggestion</th><th>Fixes</th><th>Effort</th><th>Risk</th><th>Unlocks</th><th>Status</th><th>Evidence</th></tr></thead><tbody><tr><td class="n"><span class="mono">1</span></td><td><strong>S-01</strong><div class="tiny" style="margin-top:3px">Make one build the product and archive the other five</div></td><td>Six live builds that disagree with each other (F-09, Q-06)</td><td>Half a day</td><td>Low — nothing is deleted; every old build stays reachable under /archive/.</td><td>Every other fix lands once, in one place, instead of five times.</td><td><span class="pill mut">proposed</span><div class="tiny">unclaimed</div></td><td><span class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/README.md" rel="noopener">main/README.md</a></span></td></tr><tr><td class="n"><span class="mono">2</span></td><td><strong>S-02</strong><div class="tiny" style="margin-top:3px">Put the edition stamp and the capture time on every number, not in the JSON</div></td><td>Stale injury layer (F-03, F-04), stale prop lines (F-01), unstated star-signal staleness</td><td>1-2 days</td><td>Low — additive. A row with no stamp is marked unverified rather than hidden.</td><td>A reader can tell, without opening anything, whether a line is still live. This is the single highest-value UI change in the project.</td><td><span class="pill mut">proposed</span><div class="tiny">unclaimed</div></td><td><span class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" rel="noopener">ak-static.cms.nba.com</a></span></td></tr><tr><td class="n"><span class="mono">3</span></td><td><strong>S-03</strong><div class="tiny" style="margin-top:3px">Publish corrected statistics next to every raw one</div></td><td>The S1 headline (F-05)</td><td>Half a day</td><td>Low, and it will make the headline worse. That is the point.</td><td>The project can be defended. A raw p-value with no multiplicity correction is the first thing a statistically literate reader will challenge.</td><td><span class="pill mut">proposed</span><div class="tiny">unclaimed</div></td><td><span class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/validation.json" rel="noopener">data/validation.json</a></span></td></tr><tr><td class="n"><span class="mono">4</span></td><td><strong>S-04</strong><div class="tiny" style="margin-top:3px">Fix the rest/back-to-back field and make both builders read one table</div></td><td>F-12 — 26 of 27 horizon rows carry a negative rest value; two pages disagree</td><td>Half a day</td><td>Low — a pure bug fix with an assertion that makes regression impossible.</td><td>Rest becomes a usable signal (Q-09), and the game-flow page stops printing &#x27;B2B&#x27; for almost every game.</td><td><span class="pill mut">proposed</span><div class="tiny">unclaimed</div></td><td><span class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py" rel="noopener">scripts/originate_horizon.py</a></span></td></tr><tr><td class="n"><span class="mono">5</span></td><td><strong>S-05</strong><div class="tiny" style="margin-top:3px">Auto-ingest the latest injury edition instead of a hand-captured one</div></td><td>F-03, F-04, Q-04</td><td>2-3 days (the refresh workflow already exists and already reaches the official hosts from GitHub&#x27;s runners)</td><td>Medium — a bad parse could move lines. Mitigation: publish the diff, keep the previous edition, and never let a parse failure move a line.</td><td>Injury-driven rotation minutes and production, which is an explicit requirement of the brief and is currently a lower bound on stale data.</td><td><span class="pill mut">proposed</span><div class="tiny">unclaimed</div></td><td><span class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" rel="noopener">nba-injury-report-2026-27-season</a></span></td></tr><tr><td class="n"><span class="mono">6</span></td><td><strong>S-06</strong><div class="tiny" style="margin-top:3px">Pre-register S1 and stop adding strategies until it resolves</div></td><td>Q-03</td><td>One hour to write, 60 games to resolve</td><td>Low. It costs nothing and it is the only path to a defensible claim.</td><td>Either a funded strategy or an honest &#x27;no&#x27;. Both are better than a headline that cannot survive correction.</td><td><span class="pill mut">proposed</span><div class="tiny">unclaimed</div></td><td><span class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/validation.json" rel="noopener">data/validation.json</a></span></td></tr><tr><td class="n"><span class="mono">7</span></td><td><strong>S-07</strong><div class="tiny" style="margin-top:3px">Add a &#x27;decision&#x27; layer to the landing page</div></td><td>The navigation problem (R-18): a reader cannot tell what to do with six builds and 978 table rows</td><td>1 day</td><td>Low</td><td>The site becomes usable by someone who has ten minutes, not ten hours.</td><td><span class="pill mut">proposed</span><div class="tiny">unclaimed</div></td><td><span class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/index.html" rel="noopener">main/index.html</a></span></td></tr><tr><td class="n"><span class="mono">8</span></td><td><strong>S-08</strong><div class="tiny" style="margin-top:3px">Collect official player game logs for the whole window</div></td><td>Q-08, and the prop variance work</td><td>2-3 days</td><td>Low — read-only official data.</td><td>Measured parlay correlations instead of assumed ones; prop uncertainty bands that are measured rather than modelled.</td><td><span class="pill mut">proposed</span><div class="tiny">unclaimed</div></td><td><span class="src"><a href="https://www.nba.com/stats/players/traditional" rel="noopener">traditional</a></span></td></tr><tr><td class="n"><span class="mono">9</span></td><td><strong>S-09</strong><div class="tiny" style="margin-top:3px">Decide the odds question in writing</div></td><td>Q-01, F-15</td><td>One decision, one paragraph</td><td>None. Doing nothing keeps the question open forever, which is the current state.</td><td>Either a real market test (with a licensed feed) or a permanently honest framing.</td><td><span class="pill mut">proposed</span><div class="tiny">unclaimed</div></td><td><span class="src"><a href="https://www.nba.com/stats/help/glossary" rel="noopener">glossary</a></span></td></tr><tr><td class="n"><span class="mono">10</span></td><td><strong>S-10</strong><div class="tiny" style="margin-top:3px">Give every row one source link, or an in-row &#x27;no official source&#x27; mark</div></td><td>F-10</td><td>1-2 days</td><td>Low</td><td>The brief&#x27;s own rule becomes true as a reader would test it.</td><td><span class="pill mut">proposed</span><div class="tiny">unclaimed</div></td><td><span class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_dashboard.py" rel="noopener">scripts/verify_dashboard.py</a></span></td></tr><tr><td class="n"><span class="mono">11</span></td><td><strong>S-11</strong><div class="tiny" style="margin-top:3px">De-duplicate the coordination board and make claims atomic</div></td><td>F-13</td><td>2 hours</td><td>Low if the pair is confirmed identical before the earlier copy is removed.</td><td>Parallel sessions stop colliding.</td><td><span class="pill mut">proposed</span><div class="tiny">unclaimed</div></td><td><span class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md" rel="noopener">main/COORDINATION.md</a></span></td></tr><tr><td class="n"><span class="mono">12</span></td><td><strong>S-12</strong><div class="tiny" style="margin-top:3px">Give the leaderboard a reason to exist beyond ranking</div></td><td>Q-12</td><td>Design decision</td><td>Medium — reward structures invite people to game the metric. If a reward is offered, the metric has to be pre-registered and the sample-size floor has to be enforced.</td><td>The competition the brief describes.</td><td><span class="pill mut">proposed</span><div class="tiny">unclaimed</div></td><td><span class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/leaderboard.json" rel="noopener">data/leaderboard.json</a></span></td></tr></tbody></table></div>
+
+<h2>The options in full</h2>
+
+<div class="card open" id="S-01">
+  <h3>S-01 &middot; Make one build the product and archive the other five</h3>
+  <dl class="kv">
+    <dt>Fixes</dt><dd>Six live builds that disagree with each other (F-09, Q-06)</dd>
+    <dt>Evidence</dt><dd>Six entry points are published from one origin; two of them report different error statistics for the same 60 games.</dd>
+    <dt>Effort</dt><dd>Half a day</dd>
+    <dt>Risk</dt><dd>Low — nothing is deleted; every old build stays reachable under /archive/.</dd>
+    <dt>Unlocks</dt><dd>Every other fix lands once, in one place, instead of five times.</dd>
+    <dt>Cost</dt><dd>none</dd>
+    <dt>Done when</dt><dd>Root landing page names one current build; the other five are reachable under /archive/ with a dated banner saying which build superseded them and when.</dd>
+    <dt>Status</dt><dd><span class="pill mut">proposed</span> &middot; owner: unclaimed</dd>
+  </dl>
+</div>
+<div class="card open" id="S-02">
+  <h3>S-02 &middot; Put the edition stamp and the capture time on every number, not in the JSON</h3>
+  <dl class="kv">
+    <dt>Fixes</dt><dd>Stale injury layer (F-03, F-04), stale prop lines (F-01), unstated star-signal staleness</dd>
+    <dt>Evidence</dt><dd>The injury page cites the 04:15 AM edition while the official index offers 1:30 PM; three of four prop lines are below the current official average.</dd>
+    <dt>Effort</dt><dd>1-2 days</dd>
+    <dt>Risk</dt><dd>Low — additive. A row with no stamp is marked unverified rather than hidden.</dd>
+    <dt>Unlocks</dt><dd>A reader can tell, without opening anything, whether a line is still live. This is the single highest-value UI change in the project.</dd>
+    <dt>Cost</dt><dd>none</dd>
+    <dt>Done when</dt><dd>Every table that shows a derived or captured number carries an &#x27;as of&#x27; column or a page-level stamp; a build fails if the stamp is older than the latest official edition on the index page.</dd>
+    <dt>Status</dt><dd><span class="pill mut">proposed</span> &middot; owner: unclaimed</dd>
+  </dl>
+</div>
+<div class="card open" id="S-03">
+  <h3>S-03 &middot; Publish corrected statistics next to every raw one</h3>
+  <dl class="kv">
+    <dt>Fixes</dt><dd>The S1 headline (F-05)</dd>
+    <dt>Evidence</dt><dd>BH q = 0.120 across six tested strategies; edge-size gradient r = 0.051 on n = 32.</dd>
+    <dt>Effort</dt><dd>Half a day</dd>
+    <dt>Risk</dt><dd>Low, and it will make the headline worse. That is the point.</dd>
+    <dt>Unlocks</dt><dd>The project can be defended. A raw p-value with no multiplicity correction is the first thing a statistically literate reader will challenge.</dd>
+    <dt>Cost</dt><dd>none</dd>
+    <dt>Done when</dt><dd>Each strategy row shows: record, raw p, BH q, and the edge-size gradient. The landing page headline reads from the corrected figure.</dd>
+    <dt>Status</dt><dd><span class="pill mut">proposed</span> &middot; owner: unclaimed</dd>
+  </dl>
+</div>
+<div class="card open" id="S-04">
+  <h3>S-04 &middot; Fix the rest/back-to-back field and make both builders read one table</h3>
+  <dl class="kv">
+    <dt>Fixes</dt><dd>F-12 — 26 of 27 horizon rows carry a negative rest value; two pages disagree</dd>
+    <dt>Evidence</dt><dd>Read from scripts/originate_horizon.py and confirmed in data/derived/picks_d.json vs site/data/lines.json for the same game.</dd>
+    <dt>Effort</dt><dd>Half a day</dd>
+    <dt>Risk</dt><dd>Low — a pure bug fix with an assertion that makes regression impossible.</dd>
+    <dt>Unlocks</dt><dd>Rest becomes a usable signal (Q-09), and the game-flow page stops printing &#x27;B2B&#x27; for almost every game.</dd>
+    <dt>Cost</dt><dd>none</dd>
+    <dt>Done when</dt><dd>rest_days &gt;= 0 for every row, asserted in the builder; one shared rest table consumed by both pages; the two pages agree game by game.</dd>
+    <dt>Status</dt><dd><span class="pill mut">proposed</span> &middot; owner: unclaimed</dd>
+  </dl>
+</div>
+<div class="card open" id="S-05">
+  <h3>S-05 &middot; Auto-ingest the latest injury edition instead of a hand-captured one</h3>
+  <dl class="kv">
+    <dt>Fixes</dt><dd>F-03, F-04, Q-04</dd>
+    <dt>Evidence</dt><dd>The official index publishes every 15 minutes on a game day; 22 designations changed between 12:00 PM and 1:30 PM on 11/14.</dd>
+    <dt>Effort</dt><dd>2-3 days (the refresh workflow already exists and already reaches the official hosts from GitHub&#x27;s runners)</dd>
+    <dt>Risk</dt><dd>Medium — a bad parse could move lines. Mitigation: publish the diff, keep the previous edition, and never let a parse failure move a line.</dd>
+    <dt>Unlocks</dt><dd>Injury-driven rotation minutes and production, which is an explicit requirement of the brief and is currently a lower bound on stale data.</dd>
+    <dt>Cost</dt><dd>none</dd>
+    <dt>Done when</dt><dd>Every refresh stores the edition stamp, the parsed rows and the diff; the site shows &#x27;changed since last edition&#x27;; the build refuses an edition that is not the newest on the index.</dd>
+    <dt>Status</dt><dd><span class="pill mut">proposed</span> &middot; owner: unclaimed</dd>
+  </dl>
+</div>
+<div class="card open" id="S-06">
+  <h3>S-06 &middot; Pre-register S1 and stop adding strategies until it resolves</h3>
+  <dl class="kv">
+    <dt>Fixes</dt><dd>Q-03</dd>
+    <dt>Evidence</dt><dd>Six strategies have been tested on the same 60 games. Each additional test raises the bar for all of them.</dd>
+    <dt>Effort</dt><dd>One hour to write, 60 games to resolve</dd>
+    <dt>Risk</dt><dd>Low. It costs nothing and it is the only path to a defensible claim.</dd>
+    <dt>Unlocks</dt><dd>Either a funded strategy or an honest &#x27;no&#x27;. Both are better than a headline that cannot survive correction.</dd>
+    <dt>Cost</dt><dd>none</dd>
+    <dt>Done when</dt><dd>A dated file states S1&#x27;s exact rule, its grading convention and the number of picks required; the site shows progress against it and refuses to add a strategy before that count is reached.</dd>
+    <dt>Status</dt><dd><span class="pill mut">proposed</span> &middot; owner: unclaimed</dd>
+  </dl>
+</div>
+<div class="card open" id="S-07">
+  <h3>S-07 &middot; Add a &#x27;decision&#x27; layer to the landing page</h3>
+  <dl class="kv">
+    <dt>Fixes</dt><dd>The navigation problem (R-18): a reader cannot tell what to do with six builds and 978 table rows</dd>
+    <dt>Evidence</dt><dd>The current landing page leads with status tiles and a category index; there is no &#x27;what changed, what needs your decision&#x27; block.</dd>
+    <dt>Effort</dt><dd>1 day</dd>
+    <dt>Risk</dt><dd>Low</dd>
+    <dt>Unlocks</dt><dd>The site becomes usable by someone who has ten minutes, not ten hours.</dd>
+    <dt>Cost</dt><dd>none</dd>
+    <dt>Done when</dt><dd>Landing page opens with: one sentence of state, three things that changed since the last build, and the open decisions with links. Everything else moves below it.</dd>
+    <dt>Status</dt><dd><span class="pill mut">proposed</span> &middot; owner: unclaimed</dd>
+  </dl>
+</div>
+<div class="card open" id="S-08">
+  <h3>S-08 &middot; Collect official player game logs for the whole window</h3>
+  <dl class="kv">
+    <dt>Fixes</dt><dd>Q-08, and the prop variance work</dd>
+    <dt>Evidence</dt><dd>The repository holds game logs for 3 players. Every prop-combination price depends on correlations that are currently guessed.</dd>
+    <dt>Effort</dt><dd>2-3 days</dd>
+    <dt>Risk</dt><dd>Low — read-only official data.</dd>
+    <dt>Unlocks</dt><dd>Measured parlay correlations instead of assumed ones; prop uncertainty bands that are measured rather than modelled.</dd>
+    <dt>Cost</dt><dd>none</dd>
+    <dt>Done when</dt><dd>Every player who appears in a published prop pick has his official game log in the repository, with per-game source URLs, and the parlay rho table is measured rather than assumed.</dd>
+    <dt>Status</dt><dd><span class="pill mut">proposed</span> &middot; owner: unclaimed</dd>
+  </dl>
+</div>
+<div class="card open" id="S-09">
+  <h3>S-09 &middot; Decide the odds question in writing</h3>
+  <dl class="kv">
+    <dt>Fixes</dt><dd>Q-01, F-15</dd>
+    <dt>Evidence</dt><dd>No price source exists anywhere in the repository, and every gate that would need one is marked blocked.</dd>
+    <dt>Effort</dt><dd>One decision, one paragraph</dd>
+    <dt>Risk</dt><dd>None. Doing nothing keeps the question open forever, which is the current state.</dd>
+    <dt>Unlocks</dt><dd>Either a real market test (with a licensed feed) or a permanently honest framing.</dd>
+    <dt>Cost</dt><dd>none (option B) / licensed feed (option A)</dd>
+    <dt>Done when</dt><dd>One paragraph on the landing page and in the README stating which of the two paths the project is on, dated.</dd>
+    <dt>Status</dt><dd><span class="pill mut">proposed</span> &middot; owner: unclaimed</dd>
+  </dl>
+</div>
+<div class="card open" id="S-10">
+  <h3>S-10 &middot; Give every row one source link, or an in-row &#x27;no official source&#x27; mark</h3>
+  <dl class="kv">
+    <dt>Fixes</dt><dd>F-10</dd>
+    <dt>Evidence</dt><dd>78 of 978 data rows carry no official link; the build audit uses a narrower row definition than the reader does.</dd>
+    <dt>Effort</dt><dd>1-2 days</dd>
+    <dt>Risk</dt><dd>Low</dd>
+    <dt>Unlocks</dt><dd>The brief&#x27;s own rule becomes true as a reader would test it.</dd>
+    <dt>Cost</dt><dd>none</dd>
+    <dt>Done when</dt><dd>Independent HTML parse reports 0 unlinked data rows, or every unlinked row carries a visible &#x27;no official source exists&#x27; mark and appears on the Flagged page.</dd>
+    <dt>Status</dt><dd><span class="pill mut">proposed</span> &middot; owner: unclaimed</dd>
+  </dl>
+</div>
+<div class="card open" id="S-11">
+  <h3>S-11 &middot; De-duplicate the coordination board and make claims atomic</h3>
+  <dl class="kv">
+    <dt>Fixes</dt><dd>F-13</dd>
+    <dt>Evidence</dt><dd>Seven sections appear twice; two section numbers are shared by different sessions.</dd>
+    <dt>Effort</dt><dd>2 hours</dd>
+    <dt>Risk</dt><dd>Low if the pair is confirmed identical before the earlier copy is removed.</dd>
+    <dt>Unlocks</dt><dd>Parallel sessions stop colliding.</dd>
+    <dt>Cost</dt><dd>none</dd>
+    <dt>Done when</dt><dd>Every section number appears once; each claim is one commit that only appends; the file has a header explaining the numbering rule.</dd>
+    <dt>Status</dt><dd><span class="pill mut">proposed</span> &middot; owner: unclaimed</dd>
+  </dl>
+</div>
+<div class="card open" id="S-12">
+  <h3>S-12 &middot; Give the leaderboard a reason to exist beyond ranking</h3>
+  <dl class="kv">
+    <dt>Fixes</dt><dd>Q-12</dd>
+    <dt>Evidence</dt><dd>The leaderboard ranks 10 strategies; 4 have no graded plays at all and none is funded.</dd>
+    <dt>Effort</dt><dd>Design decision</dd>
+    <dt>Risk</dt><dd>Medium — reward structures invite people to game the metric. If a reward is offered, the metric has to be pre-registered and the sample-size floor has to be enforced.</dd>
+    <dt>Unlocks</dt><dd>The competition the brief describes.</dd>
+    <dt>Cost</dt><dd>owner&#x27;s decision</dd>
+    <dt>Done when</dt><dd>Written rules: entry condition, metric, minimum sample, tie-break, and what the reward is.</dd>
+    <dt>Status</dt><dd><span class="pill mut">proposed</span> &middot; owner: unclaimed</dd>
+  </dl>
+</div>
+
+<h2>If you only do three things</h2>
+<ol class="steps">
+<li><strong>S-03 &mdash; publish the corrected statistics next to the raw ones.</strong> It costs half a
+day, it makes the headline worse, and it is the difference between a defensible project and one that
+falls apart under the first competent question.</li>
+<li><strong>S-02 + S-05 &mdash; put a timestamp on every number and automate the injury edition.</strong>
+This is the fastest-moving input in the whole system and the only part of the brief that is currently
+served by a stale snapshot.</li>
+<li><strong>S-01 &mdash; make one build the product.</strong> Six live builds that disagree with each
+other make every other fix five times more expensive and make the site impossible to read.</li>
+</ol>
+
+<h2>What this session did not do</h2>
+<p class="sub">No suggestion here was implemented. The scope this session claimed on the coordination
+board was deliberately limited to new files, so that six other sessions' work could not be disturbed.
+Any of these options can be executed by whoever owns the target build, without re-reading this
+analysis.</p>
+<footer class="foot"><p><strong>How this section is made.</strong> Every number on these pages was read from an NBA-operated page during 2026-11-14 18:38&ndash;19:45 UTC and compared with what the repository publishes. Where an official read was impossible the value is published as unverified and listed on <a href="flagged.html">Flagged for review</a> &mdash; it is never filled in. Generated by <code>scripts/build_verified.py</code> from <code>verified/data/*.json</code>; rebuilt and checked by <code>scripts/verify_verified.py</code>.</p></footer>
+
+</div>
+</main>
+</body>
+</html>
