@@ -1,6 +1,6 @@
 {
  "probe": {
-  "probed_at_utc": "2026-11-14T01:04:25Z",
+  "probed_at_utc": "2026-11-14T01:08:19Z",
   "runner": "Linux/ubuntu26",
   "urls_probed": 100,
   "ok": 3,
@@ -15,55 +15,55 @@
   {
    "url": "https://www.nba.com/stats/teams/advanced",
    "http_status": 200,
-   "ms": 141,
-   "bytes": 322493,
+   "ms": 208,
+   "bytes": 322462,
    "error": null,
-   "sha256": "d13e00d5345473d3e7d6d88a16bbd8a11093d02f6f40460be602749ee800c341"
+   "sha256": "6f31d4f91438eb6becc9ce4403e1be2d05ec91383ef117c0df080f5849e532f2"
   },
   {
    "url": "https://www.nba.com/stats/players/traditional",
    "http_status": 200,
-   "ms": 163,
-   "bytes": 400367,
+   "ms": 431,
+   "bytes": 400207,
    "error": null,
-   "sha256": "60a3f85c3bb1185609ce1dbd9973acc5bd01344ae42cf54b2458924dc862930e"
+   "sha256": "f692da7e3e2f4654fad2c48b12cc4e97ecfd6ea2e0875d3a26d19d86024c8b28"
   },
   {
    "url": "https://www.nba.com/schedule",
    "http_status": 200,
-   "ms": 139,
-   "bytes": 231997,
+   "ms": 374,
+   "bytes": 232087,
    "error": null,
-   "sha256": "83b4ada5d9113efb97a5668acffc1da3343269367c90355aa1f0305f5f261688"
+   "sha256": "01a94ab20ac877544ee84aed2acc5a6d0fd014db5c903cc623c66a7fc1b8df95"
   },
   {
    "url": "https://www.nba.com/games?date=2026-11-13",
    "http_status": 200,
-   "ms": 193,
-   "bytes": 485199,
+   "ms": 239,
+   "bytes": 487498,
    "error": null,
-   "sha256": "70d386dcdca92311afb944bfaf63e41a027bf20614c4e63ec59f98c5d5498288"
+   "sha256": "6b5aaea679238e2c3876a1fa7e3b0660a49a56aca9ef8650d61b93336d30dd14"
   },
   {
    "url": "https://www.nba.com/game/atl-vs-chi-0022600037",
    "http_status": 200,
-   "ms": 129,
-   "bytes": 301727,
+   "ms": 793,
+   "bytes": 301717,
    "error": null,
-   "sha256": "6354f9466dfb464f6cc623992fa350e951ceddb051ddccc6965a1bfdb0cb29c0"
+   "sha256": "fce674c670f5088db03d3bd2b3ab3cc5f2c7ac8c51d449e7e1f784f37fcb4431"
   },
   {
    "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "http_status": 200,
-   "ms": 140,
+   "ms": 289,
    "bytes": 46536,
    "error": null,
-   "sha256": "0d0146bc957adb1a3078b973d358e964d2fee1c73c360b480f0079e4efc10edb"
+   "sha256": "2fcc069247c1d129ab299d78e7896d90a7d95c6d11a42546dd449dd7d944ba69"
   },
   {
    "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
    "http_status": 200,
-   "ms": 66,
+   "ms": 253,
    "bytes": 101887,
    "error": null,
    "sha256": "502024cff353efce6225d48fef7516b58e8e3c2671368b7983ac3b87a4e541f6"
@@ -71,29 +71,29 @@
   {
    "url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
    "http_status": 403,
-   "ms": 64,
+   "ms": 163,
    "bytes": 0,
    "error": "HTTP 403 Forbidden"
   },
   {
    "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf",
    "http_status": 403,
-   "ms": 313,
+   "ms": 344,
    "bytes": 0,
    "error": "HTTP 403 Forbidden"
   },
   {
    "url": "https://official.nba.com/rule-no-3-players-substitutes-and-coaches/",
    "http_status": 200,
-   "ms": 298,
-   "bytes": 125542,
+   "ms": 141,
+   "bytes": 44108,
    "error": null,
-   "sha256": "67c98a0098711ef6e761b7d7e810d9f9191ff9b297afd5b65772ed83a9ace74d"
+   "sha256": "40921bfb016df614be4a5f79fa08d90faae0e03c0dac92d901f6a06f1c9c10b3"
   },
   {
    "url": "https://www.nba.com/",
    "http_status": 403,
-   "ms": 65,
+   "ms": 198,
    "bytes": 0,
    "error": "HTTP 403 Forbidden"
   }
@@ -223,7 +223,7 @@
   {
    "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_03_00PM.pdf",
    "http_status": 200,
-   "ms": 132,
+   "ms": 261,
    "bytes": 98508,
    "content_type": "application/pdf",
    "sha256": "2c24df70af627c81eaec56747d914df73267c1b225638175b23fca4300d1520f",
@@ -246,7 +246,7 @@
   {
    "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
    "http_status": 200,
-   "ms": 61,
+   "ms": 162,
    "bytes": 101887,
    "content_type": "application/pdf",
    "sha256": "502024cff353efce6225d48fef7516b58e8e3c2671368b7983ac3b87a4e541f6",
@@ -291,7 +291,7 @@
   {
    "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf",
    "http_status": 200,
-   "ms": 63,
+   "ms": 170,
    "bytes": 98329,
    "content_type": "application/pdf",
    "sha256": "e908ddf60445282e573450ad5c774f2e4b7844234b821fb494a41bd690df08a9",
@@ -317,7 +317,7 @@
   {
    "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf",
    "http_status": 403,
-   "ms": 256,
+   "ms": 147,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -333,7 +333,7 @@
   {
    "url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
    "http_status": 403,
-   "ms": 60,
+   "ms": 209,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -349,7 +349,7 @@
   {
    "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "http_status": 403,
-   "ms": 118,
+   "ms": 210,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -402,7 +402,7 @@
   {
    "url": "https://official.nba.com/rule-no-3-players-substitutes-and-coaches/",
    "http_status": 403,
-   "ms": 80,
+   "ms": 141,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -421,7 +421,7 @@
   {
    "url": "https://official.nba.com/rule-no-5-scoring-and-timing/",
    "http_status": 403,
-   "ms": 75,
+   "ms": 104,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -444,7 +444,7 @@
   {
    "url": "https://official.nba.com/rule-no-7-24-second-clock/",
    "http_status": 403,
-   "ms": 125,
+   "ms": 104,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -460,7 +460,7 @@
   {
    "url": "https://official.nba.com/rulebook/",
    "http_status": 403,
-   "ms": 100,
+   "ms": 94,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -475,7 +475,7 @@
   {
    "url": "https://www.nba.com/",
    "http_status": 403,
-   "ms": 55,
+   "ms": 198,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -493,7 +493,7 @@
   {
    "url": "https://www.nba.com/game/atl-vs-chi-0022600037",
    "http_status": 403,
-   "ms": 43,
+   "ms": 90,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -518,7 +518,7 @@
   {
    "url": "https://www.nba.com/game/atl-vs-mil-0022600243",
    "http_status": 403,
-   "ms": 51,
+   "ms": 84,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -542,7 +542,7 @@
   {
    "url": "https://www.nba.com/game/bkn-vs-mem-0022600234",
    "http_status": 403,
-   "ms": 44,
+   "ms": 96,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -566,7 +566,7 @@
   {
    "url": "https://www.nba.com/game/cha-vs-lac-0022600238",
    "http_status": 403,
-   "ms": 42,
+   "ms": 76,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -590,7 +590,7 @@
   {
    "url": "https://www.nba.com/game/cha-vs-lal-0022600256",
    "http_status": 403,
-   "ms": 42,
+   "ms": 78,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -604,7 +604,7 @@
   {
    "url": "https://www.nba.com/game/chi-vs-cle-0022600246",
    "http_status": 403,
-   "ms": 43,
+   "ms": 88,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -624,7 +624,7 @@
   {
    "url": "https://www.nba.com/game/chi-vs-min-0022600235",
    "http_status": 403,
-   "ms": 45,
+   "ms": 78,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -649,7 +649,7 @@
   {
    "url": "https://www.nba.com/game/cle-vs-mia-0022600036",
    "http_status": 403,
-   "ms": 43,
+   "ms": 88,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -673,7 +673,7 @@
   {
    "url": "https://www.nba.com/game/dal-vs-bos-0022600240",
    "http_status": 403,
-   "ms": 43,
+   "ms": 84,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -697,7 +697,7 @@
   {
    "url": "https://www.nba.com/game/dal-vs-cle-0022600232",
    "http_status": 403,
-   "ms": 42,
+   "ms": 101,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -721,7 +721,7 @@
   {
    "url": "https://www.nba.com/game/den-vs-nop-0022600231",
    "http_status": 403,
-   "ms": 43,
+   "ms": 84,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -745,7 +745,7 @@
   {
    "url": "https://www.nba.com/game/det-vs-mia-0022600233",
    "http_status": 403,
-   "ms": 48,
+   "ms": 94,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -769,7 +769,7 @@
   {
    "url": "https://www.nba.com/game/det-vs-sas-0022600255",
    "http_status": 403,
-   "ms": 43,
+   "ms": 86,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -783,7 +783,7 @@
   {
    "url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
    "http_status": 403,
-   "ms": 46,
+   "ms": 99,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -803,7 +803,7 @@
   {
    "url": "https://www.nba.com/game/gsw-vs-sas-0022600040",
    "http_status": 403,
-   "ms": 56,
+   "ms": 82,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -827,7 +827,7 @@
   {
    "url": "https://www.nba.com/game/hou-vs-mia-0022600249",
    "http_status": 403,
-   "ms": 44,
+   "ms": 79,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -847,7 +847,7 @@
   {
    "url": "https://www.nba.com/game/hou-vs-was-0022600242",
    "http_status": 403,
-   "ms": 45,
+   "ms": 83,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -871,7 +871,7 @@
   {
    "url": "https://www.nba.com/game/ind-vs-phi-0022600236",
    "http_status": 403,
-   "ms": 47,
+   "ms": 101,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -895,7 +895,7 @@
   {
    "url": "https://www.nba.com/game/lal-vs-phx-0022600237",
    "http_status": 403,
-   "ms": 72,
+   "ms": 95,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -919,7 +919,7 @@
   {
    "url": "https://www.nba.com/game/mem-vs-nop-0022600038",
    "http_status": 403,
-   "ms": 43,
+   "ms": 80,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -943,7 +943,7 @@
   {
    "url": "https://www.nba.com/game/mem-vs-was-0022600247",
    "http_status": 403,
-   "ms": 44,
+   "ms": 147,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -963,7 +963,7 @@
   {
    "url": "https://www.nba.com/game/mil-vs-orl-0022600035",
    "http_status": 403,
-   "ms": 71,
+   "ms": 99,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -987,7 +987,7 @@
   {
    "url": "https://www.nba.com/game/nyk-vs-ind-0022600034",
    "http_status": 403,
-   "ms": 43,
+   "ms": 79,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1011,7 +1011,7 @@
   {
    "url": "https://www.nba.com/game/nyk-vs-tor-0022600241",
    "http_status": 403,
-   "ms": 44,
+   "ms": 83,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1040,7 +1040,7 @@
   {
    "url": "https://www.nba.com/game/nyk-vs-tor-0022600253",
    "http_status": 403,
-   "ms": 45,
+   "ms": 86,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1054,7 +1054,7 @@
   {
    "url": "https://www.nba.com/game/okc-vs-lac-0022600042",
    "http_status": 403,
-   "ms": 51,
+   "ms": 83,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1078,7 +1078,7 @@
   {
    "url": "https://www.nba.com/game/okc-vs-sac-0022600244",
    "http_status": 403,
-   "ms": 48,
+   "ms": 78,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1102,7 +1102,7 @@
   {
    "url": "https://www.nba.com/game/orl-vs-bos-0022600245",
    "http_status": 403,
-   "ms": 64,
+   "ms": 135,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1122,7 +1122,7 @@
   {
    "url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
    "http_status": 403,
-   "ms": 41,
+   "ms": 84,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1142,7 +1142,7 @@
   {
    "url": "https://www.nba.com/game/phx-vs-den-0022600252",
    "http_status": 403,
-   "ms": 43,
+   "ms": 172,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1162,7 +1162,7 @@
   {
    "url": "https://www.nba.com/game/por-vs-min-0022600250",
    "http_status": 403,
-   "ms": 45,
+   "ms": 90,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1182,7 +1182,7 @@
   {
    "url": "https://www.nba.com/game/por-vs-min-0022600254",
    "http_status": 403,
-   "ms": 44,
+   "ms": 80,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1196,7 +1196,7 @@
   {
    "url": "https://www.nba.com/game/por-vs-sac-0022600041",
    "http_status": 403,
-   "ms": 46,
+   "ms": 164,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1220,7 +1220,7 @@
   {
    "url": "https://www.nba.com/game/sas-vs-uta-0022600239",
    "http_status": 403,
-   "ms": 64,
+   "ms": 112,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1244,7 +1244,7 @@
   {
    "url": "https://www.nba.com/game/uta-vs-hou-0022600039",
    "http_status": 403,
-   "ms": 42,
+   "ms": 78,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1268,7 +1268,7 @@
   {
    "url": "https://www.nba.com/game/uta-vs-lac-0022600257",
    "http_status": 403,
-   "ms": 50,
+   "ms": 85,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1282,7 +1282,7 @@
   {
    "url": "https://www.nba.com/game/{away.lower(",
    "http_status": 403,
-   "ms": 56,
+   "ms": 85,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1295,7 +1295,7 @@
   {
    "url": "https://www.nba.com/games",
    "http_status": 403,
-   "ms": 42,
+   "ms": 93,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1319,7 +1319,7 @@
   {
    "url": "https://www.nba.com/games?date=2026-11-06",
    "http_status": 403,
-   "ms": 53,
+   "ms": 78,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1335,7 +1335,7 @@
   {
    "url": "https://www.nba.com/games?date=2026-11-07",
    "http_status": 403,
-   "ms": 51,
+   "ms": 92,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1351,7 +1351,7 @@
   {
    "url": "https://www.nba.com/games?date=2026-11-08",
    "http_status": 403,
-   "ms": 44,
+   "ms": 138,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1365,7 +1365,7 @@
   {
    "url": "https://www.nba.com/games?date=2026-11-09",
    "http_status": 403,
-   "ms": 45,
+   "ms": 89,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1382,7 +1382,7 @@
   {
    "url": "https://www.nba.com/games?date=2026-11-10",
    "http_status": 403,
-   "ms": 41,
+   "ms": 127,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1398,7 +1398,7 @@
   {
    "url": "https://www.nba.com/games?date=2026-11-11",
    "http_status": 403,
-   "ms": 43,
+   "ms": 75,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1425,7 +1425,7 @@
   {
    "url": "https://www.nba.com/games?date=2026-11-12",
    "http_status": 403,
-   "ms": 63,
+   "ms": 101,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1457,7 +1457,7 @@
   {
    "url": "https://www.nba.com/games?date=2026-11-13",
    "http_status": 403,
-   "ms": 65,
+   "ms": 75,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1495,7 +1495,7 @@
   {
    "url": "https://www.nba.com/games?date=2026-11-14",
    "http_status": 403,
-   "ms": 45,
+   "ms": 112,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1521,7 +1521,7 @@
   {
    "url": "https://www.nba.com/games?date=2026-11-15",
    "http_status": 403,
-   "ms": 48,
+   "ms": 82,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1548,7 +1548,7 @@
   {
    "url": "https://www.nba.com/games?date=2026-11-16",
    "http_status": 403,
-   "ms": 45,
+   "ms": 83,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1569,7 +1569,7 @@
   {
    "url": "https://www.nba.com/games?date=2026-11-17",
    "http_status": 403,
-   "ms": 55,
+   "ms": 129,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1582,7 +1582,7 @@
   {
    "url": "https://www.nba.com/games?date=YYYY-MM-DD",
    "http_status": 403,
-   "ms": 45,
+   "ms": 93,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1596,7 +1596,7 @@
   {
    "url": "https://www.nba.com/games?date={d",
    "http_status": 403,
-   "ms": 80,
+   "ms": 173,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1609,7 +1609,7 @@
   {
    "url": "https://www.nba.com/player/1628374/lauri-markkanen",
    "http_status": 403,
-   "ms": 48,
+   "ms": 108,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1624,7 +1624,7 @@
   {
    "url": "https://www.nba.com/player/1630169/tyrese-haliburton",
    "http_status": 403,
-   "ms": 53,
+   "ms": 78,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1639,7 +1639,7 @@
   {
    "url": "https://www.nba.com/player/1630596/evan-mobley",
    "http_status": 403,
-   "ms": 50,
+   "ms": 85,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1654,7 +1654,7 @@
   {
    "url": "https://www.nba.com/player/1631094/paolo-banchero",
    "http_status": 403,
-   "ms": 48,
+   "ms": 76,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1669,7 +1669,7 @@
   {
    "url": "https://www.nba.com/player/1631096/chet-holmgren",
    "http_status": 403,
-   "ms": 48,
+   "ms": 91,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1684,7 +1684,7 @@
   {
    "url": "https://www.nba.com/player/1631101/miles-bridges",
    "http_status": 403,
-   "ms": 48,
+   "ms": 141,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1699,7 +1699,7 @@
   {
    "url": "https://www.nba.com/player/1631114/jalen-williams",
    "http_status": 403,
-   "ms": 49,
+   "ms": 74,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1714,7 +1714,7 @@
   {
    "url": "https://www.nba.com/player/201939/stephen-curry",
    "http_status": 403,
-   "ms": 48,
+   "ms": 133,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1729,7 +1729,7 @@
   {
    "url": "https://www.nba.com/schedule",
    "http_status": 403,
-   "ms": 47,
+   "ms": 74,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1772,7 +1772,7 @@
   {
    "url": "https://www.nba.com/standings",
    "http_status": 403,
-   "ms": 49,
+   "ms": 143,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1788,7 +1788,7 @@
   {
    "url": "https://www.nba.com/stats/",
    "http_status": 403,
-   "ms": 86,
+   "ms": 94,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1804,7 +1804,7 @@
   {
    "url": "https://www.nba.com/stats/help/faq",
    "http_status": 403,
-   "ms": 60,
+   "ms": 79,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1818,7 +1818,7 @@
   {
    "url": "https://www.nba.com/stats/help/glossary",
    "http_status": 403,
-   "ms": 51,
+   "ms": 81,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1845,7 +1845,7 @@
   {
    "url": "https://www.nba.com/stats/player/1630596/traditional",
    "http_status": 403,
-   "ms": 48,
+   "ms": 98,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1859,7 +1859,7 @@
   {
    "url": "https://www.nba.com/stats/player/201939/traditional",
    "http_status": 403,
-   "ms": 101,
+   "ms": 89,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1873,7 +1873,7 @@
   {
    "url": "https://www.nba.com/stats/players",
    "http_status": 403,
-   "ms": 46,
+   "ms": 133,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1891,7 +1891,7 @@
   {
    "url": "https://www.nba.com/stats/players/boxscores",
    "http_status": 403,
-   "ms": 47,
+   "ms": 104,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1913,7 +1913,7 @@
   {
    "url": "https://www.nba.com/stats/players/traditional",
    "http_status": 403,
-   "ms": 81,
+   "ms": 95,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1934,7 +1934,7 @@
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame",
    "http_status": 403,
-   "ms": 49,
+   "ms": 184,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1947,7 +1947,7 @@
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=MIN",
    "http_status": 403,
-   "ms": 52,
+   "ms": 78,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1963,7 +1963,7 @@
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS",
    "http_status": 403,
-   "ms": 49,
+   "ms": 93,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1977,7 +1977,7 @@
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&sort=PTS",
    "http_status": 403,
-   "ms": 52,
+   "ms": 112,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1992,7 +1992,7 @@
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame",
    "http_status": 403,
-   "ms": 56,
+   "ms": 95,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2005,7 +2005,7 @@
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=MIN",
    "http_status": 403,
-   "ms": 50,
+   "ms": 109,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2018,7 +2018,7 @@
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS",
    "http_status": 403,
-   "ms": 51,
+   "ms": 163,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2031,7 +2031,7 @@
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;sort=PTS",
    "http_status": 403,
-   "ms": 60,
+   "ms": 80,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2044,7 +2044,7 @@
   {
    "url": "https://www.nba.com/stats/teams/advanced",
    "http_status": 403,
-   "ms": 64,
+   "ms": 88,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2073,7 +2073,7 @@
   {
    "url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
    "http_status": 403,
-   "ms": 47,
+   "ms": 173,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2090,7 +2090,7 @@
   {
    "url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "http_status": 403,
-   "ms": 57,
+   "ms": 162,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2109,7 +2109,7 @@
   {
    "url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season",
    "http_status": 403,
-   "ms": 47,
+   "ms": 114,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2126,7 +2126,7 @@
   {
    "url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame",
    "http_status": 403,
-   "ms": 49,
+   "ms": 77,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2140,7 +2140,7 @@
   {
    "url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame",
    "http_status": 403,
-   "ms": 50,
+   "ms": 314,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2153,7 +2153,7 @@
   {
    "url": "https://www.nba.com/stats/teams/traditional",
    "http_status": 403,
-   "ms": 49,
+   "ms": 80,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2168,7 +2168,7 @@
   {
    "url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame",
    "http_status": 403,
-   "ms": 62,
+   "ms": 280,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2184,7 +2184,7 @@
   {
    "url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame",
    "http_status": 403,
-   "ms": 51,
+   "ms": 83,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2199,7 +2199,7 @@
   {
    "url": "https://www.nba.com/team/1610612737/hawks/roster",
    "http_status": 403,
-   "ms": 50,
+   "ms": 91,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2212,7 +2212,7 @@
   {
    "url": "https://www.nba.com/team/1610612760/thunder/roster",
    "http_status": 403,
-   "ms": 57,
+   "ms": 278,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
