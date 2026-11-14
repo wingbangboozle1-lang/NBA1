@@ -1502,7 +1502,11 @@ PRs #33/#35) are recorded in my W05 record below.
 | Branch | `arena/697fca1e-nba1` (consolidated onto `main`, then merged through the bot-probe churn and the PR #33 merge; see conflict log) |
 | Local gate before push | `python3 scripts/verify_all.py` → VERIFY OK (includes `check_site.py` now scanning `picks.html`: 112 table rows, every row carries an official nba.com-family source link) |
 | Commits | claim `4b09dc8` → horizon build `bf6f702` → probe `a42b1ef` → rest-fix `d2656e3` |
-| PR | (recorded after merge in the follow-up board commit) |
+| PR | [#41](https://github.com/wingbangboozle1-lang/NBA1/pull/41) — **merged** 2026-11-14T01:52:50Z, merge commit `ce9d1a3` (`--merge`, without approval, as instructed) |
+| Follow-up PRs | [#48](https://github.com/wingbangboozle1-lang/NBA1/pull/48) merged `bdbff69` (check_links allowlist, I-W09) · [#50](https://github.com/wingbangboozle1-lang/NBA1/pull/50) merged `6e12311` (CI fragment-strip, I-W10) — both `--merge`, without approval |
+| Deploy gate after merge | First runs on `ce9d1a3`/`99211ad` failed on the two pre-existing checker gaps (I-W09/I-W10, not caused by this session's files); with the repairs merged, the run for `6e12311` is **validate success + deploy success** (run 43543822303) — first fully green gate on `main` in this cycle |
+| Pages | API `status=built` at commit `6e12311`; live URL <https://wingbangboozle1-lang.github.io/NBA1/> |
+| Live check | `https://wingbangboozle1-lang.github.io/NBA1/picks.html` fetched after deploy: renders 27-line table (DEN@NOP −8.0 … CHI@MIN +29.9), 26 picks, 12 parlays, 8 SGP candidates, availability rows, probe record, all with official source links |
 
 #### Verification performed
 
