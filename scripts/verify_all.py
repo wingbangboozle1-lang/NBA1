@@ -54,6 +54,7 @@ def ok_url(u):
 run("build_site.py")
 run("build_edge_site.py")
 run("check_site.py")
+run("verify_schedule_c.py")  # Build C: row-by-row schedule check + schedule-verified.html
 
 # 4a: slate sources
 slate = load("slate_full")
