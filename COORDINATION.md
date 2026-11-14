@@ -352,6 +352,14 @@ The active Arena branch is fixed as `arena/e38f7e38-nba1`; work remains on that 
 
 | # | Task | Status | File scope | Result |
 | --- | --- | --- | --- | --- |
-| W01 | Audit CI publish gate and harden failure behavior | in progress | `.github/workflows/pages.yml`, `COORDINATION.md` §11 | Claim only. Verify existing validators, remove any soft-fail behavior that permits a broken site to deploy, and record exact checks and limitations. |
+| W01 | Audit CI publish gate and harden failure behavior | done | `.github/workflows/pages.yml`, `COORDINATION.md` §11 | Removed `continue-on-error` from the build-A site validation step, so a failing `scripts/check_site.py` now fails the required validation job and blocks the deploy job. |
 
-Claimed after reading this board and confirming no active task owns these files. Source/verification findings will be recorded before marking done. No external NBA fact is changed by this task.
+### Verification and limits
+
+- `python3 scripts/verify_all.py` — PASS. Builders and site/data audits completed; 31 published schedule rows compared with 0 mismatches; 18 teams have stale records in the current horizon and remain flagged.
+- `python3 scripts/check_links.py` — PASS: 41 docs pages, 0 broken internal links, 0 non-approved hosts, 0 ragged rows. It reports 2 unlinked methodology rows on Build B's executive page; these are already visibly identified as no-source methodology proposals, not values, and remain a flagged limitation (see `docs/b/index.html`).
+- `git diff --check` — PASS. The build produced no generated-file changes.
+- The checker allowlists official hosts; this is not an HTTP reachability check. It explicitly records that external source availability cannot be tested from this environment. Client-rendered script templates are also outside `check_links.py`'s static HTML row scan.
+- Rationale/source: GitHub documents step-level `continue-on-error` as allowing the step to continue despite a failure; removing it ensures the validation exit status participates in job success: <https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idstepscontinue-on-error>. No NBA data or model claim was changed.
+
+Claimed after reading this board and confirming no active task owns these files. No external NBA fact was changed by this task.
