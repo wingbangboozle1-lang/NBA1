@@ -172,8 +172,8 @@
    "id": "R16",
    "severity": "LOW",
    "area": "Data completeness",
-   "title": "Merge-session flags: 11/17 venues blank on purpose, repeat matchups on the official pages",
-   "detail": "The merge session appended five verified 2026-11-17 games (0022600253-0022600257; the official game-page titles read 'Nov 17, 2026') and left their venue/city fields blank on purpose - the official 11/17 slate page does not print venues and nothing is ever inferred. The official pages also publish repeat matchups (NYK@TOR 0022600241/0022600253, POR@MIN 0022600250/0022600254) and the 12:00 PM injury PDF prints 'Suggs, Jalan' for 'Suggs, Jalen'. All left exactly as published.",
+   "title": "Merge-session flags: 11/17 competition labels blank, repeat matchups on the official pages",
+   "detail": "The merge session appended five verified 2026-11-17 games (0022600253-0022600257; the official game-page titles read 'Nov 17, 2026') and their venue/city cells were first published blank (the games page does not print them) and were then verified from https://www.nba.com/schedule by session arena/f80dcc4a-nba1; the competition labels remain blank as published. The official pages also publish repeat matchups (NYK@TOR 0022600241/0022600253, POR@MIN 0022600250/0022600254) and the 12:00 PM injury PDF prints 'Suggs, Jalan' for 'Suggs, Jalen'. All left exactly as published.",
    "how_it_was_verified": "nba.com/games?date=2026-11-17 and the five official game pages; see data/refresh_2026_11_14/official_captures_2026-11-14.json and review.html F13-F15.",
    "action": "Ask the stats feed whether 11/17 venues exist before filling any cell."
   }

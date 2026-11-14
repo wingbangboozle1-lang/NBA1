@@ -50,13 +50,14 @@ Sources re-read (all official):
 
 ## Irregularities flagged (none corrected, all published for review)
 
-1. **Repeat matchups (F13)** — NBA.com publishes NYK@TOR on 11/15 and 11/17 and
+1. **Repeat matchups (F21)** — NBA.com publishes NYK@TOR on 11/15 and 11/17 and
    POR@MIN on 11/16 and 11/17 (same arenas, distinct game ids). Confirmed on the
    official game-page titles. Left exactly as published.
    Review: <https://www.nba.com/games?date=2026-11-17>
-2. **11/17 venues/competition blank (F14)** — not printed on the official slate page
-   and therefore never inferred. Review: <https://www.nba.com/games?date=2026-11-17>
-3. **Official PDF typo + extraction quirks (F15)** — the 12:00 PM edition prints
+2. **11/17 competition labels blank (F23)** — not printed on the official pages and
+   therefore never inferred (venues/cities were later verified from https://www.nba.com/schedule
+   by session arena/f80dcc4a-nba1 and filled with that source). Review: <https://www.nba.com/games?date=2026-11-17>
+3. **Official PDF typo + extraction quirks (F22)** — the 12:00 PM edition prints
    'Suggs, Jalan'; some continuation rows lose reason cells in text extraction. Both
    transcriptions normalise the name and keep printed reasons where legible.
    Review: <https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf>
@@ -72,7 +73,7 @@ Sources re-read (all official):
 
 - 2 of 88 Build A rows have no `status_12pm` cell (they are outside the 12:00 PM
   edition or unattributed) — left blank.
-- 11/17 venues, cities and competition labels — blank (F14).
+- 11/17 competition labels — blank (F23); venues/cities verified from the official schedule page.
 - All settled-record/ROI columns for 11/13-11/17 — blank pending official finals.
 - Player per-game stats and market prices — not machine-readable from an official
   source from this environment (F1/F3); never inferred.

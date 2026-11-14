@@ -221,11 +221,16 @@ def main():
             })
 
     os.makedirs(OUT, exist_ok=True)
+    _dates = sorted({g["date"] for g in sched})
     payload = {
         "_meta": {
-            "title": "Originated lines — 2026-11-13 through 2026-11-16 slate",
+            "title": f"Originated lines — {_dates[0]} through {_dates[-1]} slate",
             "generated_by": "scripts/originate_lines.py",
-            "generated_utc": "2026-11-13",
+            "generated_utc": "2026-11-14",
+            "window_note": ("Rows for 2026-11-17 were appended to the schedule input on 2026-11-14 "
+                            "(arena/f80dcc4a-nba1, session W) from the official slate page "
+                            "https://www.nba.com/games?date=2026-11-17; model inputs (team ratings) are the "
+                            "same captured snapshot as the 11/13 build, so the 11/13 rows reproduce exactly."),
             "empirical_dispersion": {
                 "margin_sd": round(margin_sd_emp, 3),
                 "total_sd": round(total_sd_emp, 3),

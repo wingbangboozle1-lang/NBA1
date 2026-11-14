@@ -72,7 +72,7 @@ for s in slate["slates"]:
         if not (g["away_record"] and g["home_record"]):
             errors.append(f"game {s['date']} {g['away']}@{g['home']}: blank record")
 if n_games != 36:
-    errors.append(f"expected 36 window games (11/13-11/17), found {n_games}")
+    errors.append(f"expected 36 window games (11/13–11/17), found {n_games}")
 
 # prior games (rest inputs) must all carry official slate URLs
 for p in slate["prior_games"]:
@@ -97,6 +97,18 @@ for r in arch["rows"]:
         errors.append(f"archived injury row still has implied matchup: {r.get('player')}")
     if not ok_url(r.get("source_url")):
         errors.append(f"archived injury row bad source: {r.get('player')}")
+
+# 4b2: session-W capture of the 11/13 08:00 PM ET edition (covers the 11/14 slate)
+with open(os.path.join(ROOT, "data", "raw", "injury_report_2026-11-13_08_00PM.json"), encoding="utf-8") as _f:
+    inj8 = json.load(_f)
+if not ok_url(inj8["source_url"]):
+    errors.append("injury_report_2026-11-13_08_00PM: bad source_url")
+for r in inj8["rows"]:
+    if not r.get("team"):
+        errors.append(f"08:00 PM edition row without team in main table: {r.get('player')}")
+for r in inj8["unattributed_rows"]:
+    if r.get("team"):
+        errors.append(f"08:00 PM unattributed row unexpectedly has team: {r.get('player')}")
 
 # 4c: leaders
 leaders = load("leaders")

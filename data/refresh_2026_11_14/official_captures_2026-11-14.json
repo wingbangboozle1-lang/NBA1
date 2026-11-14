@@ -17,7 +17,8 @@
    "game_253": "https://www.nba.com/game/nyk-vs-tor-0022600253",
    "game_254": "https://www.nba.com/game/por-vs-min-0022600254",
    "injury_report_2026-11-13_0730pm": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf (122 rows; edition that data/raw/injuries.json transcribes)"
-  }
+  },
+  "venues_11_17_resolved": "11/17 venues/cities were blank on the nba.com/games slate page (originally flag F14 of this session, republished as F23 after the id merge) and were verified from https://www.nba.com/schedule (which prints them) by session arena/f80dcc4a-nba1; competition/cup labels remain blank everywhere as published."
  },
  "slate_rows": [
   {
@@ -370,7 +371,10 @@
    "home_rec": "5-7",
    "game_id": "0022600253",
    "cup_group": "",
-   "source": "datepage"
+   "source": "datepage",
+   "venue": "Scotiabank Arena",
+   "city": "Toronto, ON",
+   "venue_source": "https://www.nba.com/schedule read 2026-11-14 (session arena/f80dcc4a-nba1 capture; see data/raw/official_schedule_capture_2026-11-14.json)"
   },
   {
    "date": "2026-11-17",
@@ -381,7 +385,10 @@
    "home_rec": "10-2",
    "game_id": "0022600255",
    "cup_group": "",
-   "source": "datepage"
+   "source": "datepage",
+   "venue": "Frost Bank Center",
+   "city": "San Antonio, TX",
+   "venue_source": "https://www.nba.com/schedule read 2026-11-14 (session arena/f80dcc4a-nba1 capture; see data/raw/official_schedule_capture_2026-11-14.json)"
   },
   {
    "date": "2026-11-17",
@@ -392,7 +399,10 @@
    "home_rec": "9-3",
    "game_id": "0022600254",
    "cup_group": "",
-   "source": "datepage"
+   "source": "datepage",
+   "venue": "Target Center",
+   "city": "Minneapolis, MN",
+   "venue_source": "https://www.nba.com/schedule read 2026-11-14 (session arena/f80dcc4a-nba1 capture; see data/raw/official_schedule_capture_2026-11-14.json)"
   },
   {
    "date": "2026-11-17",
@@ -403,7 +413,10 @@
    "home_rec": "2-8",
    "game_id": "0022600257",
    "cup_group": "",
-   "source": "datepage"
+   "source": "datepage",
+   "venue": "Intuit Dome",
+   "city": "Inglewood, CA",
+   "venue_source": "https://www.nba.com/schedule read 2026-11-14 (session arena/f80dcc4a-nba1 capture; see data/raw/official_schedule_capture_2026-11-14.json)"
   },
   {
    "date": "2026-11-17",
@@ -414,7 +427,10 @@
    "home_rec": "11-2",
    "game_id": "0022600256",
    "cup_group": "",
-   "source": "datepage"
+   "source": "datepage",
+   "venue": "Crypto.com Arena",
+   "city": "Los Angeles, CA",
+   "venue_source": "https://www.nba.com/schedule read 2026-11-14 (session arena/f80dcc4a-nba1 capture; see data/raw/official_schedule_capture_2026-11-14.json)"
   }
  ],
  "slate_notes": [

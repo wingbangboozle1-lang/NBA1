@@ -186,10 +186,38 @@ def name_key(name):
     return frozenset(p for p in parts if p)
 
 
+# Latest official edition per game date (session arena/f80dcc4a-nba1, W05):
+#   2026-11-13 games -> the 05:15 PM ET edition (inj) — FROZEN basis of the published 11/13 batch
+#   2026-11-14 games -> the 08:00 PM ET edition (inj0800), the newest published edition at 2026-11-14T01:12Z,
+#                       which prints status rows for all five 11/14 games (source: its hub listing)
+#   2026-11-15..17   -> no report published yet at capture time; rows stay gated (G-INJ)
+with open(os.path.join(DATA, "raw", "injury_report_2026-11-13_08_00PM.json"), encoding="utf-8") as _f:
+    inj0800 = json.load(_f)
+check_url(inj0800["source_url"], "injury report 8:00 PM edition")
+
 status_index = {}  # (date, team, namekey) -> (status, reason)
+nys_teams = set()  # (date, team) pairs whose submission read NOT YET SUBMITTED
 for r in inj["rows"]:
     if r["player"]:
         status_index[(r["game_date"], r["team"], name_key(r["player"]))] = (r["status"], r["reason"])
+    elif r.get("team") and r["status"] == "NOT YET SUBMITTED":
+        nys_teams.add((r["game_date"], r["team"]))
+for r in inj0800["rows"]:
+    if r["game_date"] != "2026-11-14":
+        continue  # 11/13 rows of this edition are informational only; 11/13 stays on the frozen 05:15 PM basis
+    if r["player"] and r.get("team"):
+        status_index[(r["game_date"], r["team"], name_key(r["player"]))] = (r["status"], r["reason"])
+    elif r.get("team") and r["status"] == "NOT YET SUBMITTED":
+        nys_teams.add((r["game_date"], r["team"]))
+
+
+def edition_for(date_str):
+    """Which official injury-report edition covers this game date at build time."""
+    if date_str == "2026-11-13":
+        return inj
+    if date_str == "2026-11-14":
+        return inj0800
+    return None  # day-before reports for 11/15-11/17 not yet published at capture (flag W-F2)
 
 team_abbr_to_name = {}
 for g in games:
@@ -216,16 +244,22 @@ for g in games:
                 "player": None, "ppg": None, "rpg": None, "apg": None, "line": None,
                 "status": None, "status_reason": None,
                 "signal": "BLANK — leader stats not displayed on official page (flagged)",
-                "src_leader": src, "src_inj": inj["source_url"],
+                "src_leader": src, "src_inj": (edition_for(g["date"]) or inj)["source_url"] if edition_for(g["date"]) else inj["hub_url"],
                 "blank": lg.get("blank_reason"),
             })
             continue
         combo = round((lg["ppg"] + lg["rpg"] + lg["apg"]) / PROP_ROUND) * PROP_ROUND
         st = status_index.get((g["date"], team_name, name_key(lg["player"])))
-        if g["date"] != "2026-11-13":
+        ed = edition_for(g["date"])
+        src_inj = ed["source_url"] if ed else inj["hub_url"]
+        if ed is None:
             status = "Report not yet published for this date"
             status_reason = None
             sig = "BLOCKED — status report not yet due/published (G-INJ)"
+        elif st is None and (g["date"], team_name) in nys_teams:
+            status = "Team report NOT YET SUBMITTED"
+            status_reason = None
+            sig = "BLOCKED — team report not yet submitted (G-INJ)"
         elif st is None:
             status = "Not listed on report"
             status_reason = None
@@ -242,7 +276,7 @@ for g in games:
             "date": g["date"], "game": f"{g['away']}@{g['home']}", "team": team_name,
             "player": lg["player"], "ppg": lg["ppg"], "rpg": lg["rpg"], "apg": lg["apg"],
             "line": combo, "status": status, "status_reason": status_reason,
-            "signal": sig, "src_leader": src, "src_inj": inj["source_url"], "blank": None,
+            "signal": sig, "src_leader": src, "src_inj": src_inj, "blank": None,
         })
 
 # ------------------------------------------------- parlays (Fréchet bounds)
@@ -298,12 +332,13 @@ full_to_abbr = name_to_abbr
 
 inj_impact = []
 for g in games:
+    ed = edition_for(g["date"])
     entry = {"date": g["date"], "game": f"{g['away']}@{g['home']}", "preview": g["preview_url"],
              "slate": g["slate_url"], "teams": []}
     for side in ("away", "home"):
         abbr = g[side]
         team_name = g[f"{side}_name"]
-        rows = [r for r in inj["rows"] if r["team"] == team_name and r["game_date"] == g["date"]]
+        rows = [r for r in (ed["rows"] if ed else []) if r["team"] == team_name and r["game_date"] == g["date"]]
         outs = [r for r in rows if r["status"] == "Out" and r["player"]]
         doubtful = [r for r in rows if r["status"] == "Doubtful"]
         quest = [r for r in rows if r["status"] == "Questionable"]
@@ -320,11 +355,11 @@ for g in games:
         entry["teams"].append({
             "team": team_name, "n_out": len(outs), "doubtful": len(doubtful),
             "questionable": len(quest), "probable": len(prob),
-            "nys": nys,
+            "nys": nys, "no_report": ed is None,
             "known_out_ppg": known_out_ppg,
             "unknown_out": unknown_out,
             "out_names": [r["player"] for r in outs],
-            "src": inj["source_url"],
+            "src": ed["source_url"] if ed else inj["hub_url"],
         })
     inj_impact.append(entry)
 
@@ -338,6 +373,14 @@ audit = {
         "note": "All parameters are this project's assumptions, not official values. "
                 "Totals are not originated (no pace/efficiency inputs). Market comparison "
                 "gates (G4/G5) are blocked: no odds feed is connected.",
+    },
+    "inputs_basis": {
+        "records": "per-slate records_as_of stamps in data/slate_full.json (11/13 rows frozen at 2026-11-13T22:45Z pick basis; 11/14-11/17 re-verified against official slate pages 2026-11-14T00:52-01:32Z — see data/raw/records_2026-11-14.json)",
+        "injury_editions": {
+            "2026-11-13": "injuries_0515.json (official PDF 11/13/26 05:15 PM ET) — frozen basis of the published 11/13 batch",
+            "2026-11-14": "data/raw/injury_report_2026-11-13_08_00PM.json (official PDF 11/13/26 08:00 PM ET, newest published edition at capture 2026-11-14T01:12Z; prints rows for all five 11/14 games)",
+            "2026-11-15..17": "no edition published at capture time (day-before deadlines not reached) — prop/impact rows gated G-INJ, hub: https://official.nba.com/nba-injury-report-2026-27-season/",
+        },
     },
     "generated_at_utc": slate["as_of_utc"],
     "games": [
@@ -549,7 +592,7 @@ board_rows = [
      "G1 pass · G-PROP blocked (no market number / no game logs)", "", "",
      a("https://official.nba.com/nba-injury-report-2026-27-season/", "status rules")],
     ["S-05", "Injury-availability prop filter", "GATED",
-     "G1 pass · G-INJ blocked for 11/15–16 (reports not yet published)", "", "",
+     "G1 pass · G-INJ blocked for 11/15–17 (reports not yet published)", "", "",
      a("https://official.nba.com/nba-injury-report-2026-27-season/", "status rules")],
 ]
 leaderboard = table(
@@ -563,7 +606,7 @@ leaderboard = leaderboard.replace("<td></td>", '<td><span class="flag">blank —
 lines_body = f"""
 <p class="crumb">Workspace / Originated lines & picks</p>
 <header class="page-head"><div class="kicker">Edge Lab</div><h1>Originated lines & picks</h1>
-<p>Our own lines for every game of the Nov 13–17, 2026 window (refreshed 2026-11-14; slates through 11/17 = 3 days ahead), generated by model <strong>RecordLine-1</strong> from official NBA records. These are <em>our</em> numbers — not sportsbook prices. Every pick is a paper record gated behind the validation framework.</p></header>
+<p>Our own lines for every game in the window (Nov 13–17, 2026), generated by model <strong>RecordLine-1</strong> from official NBA records. The Nov 13 rows are the frozen pick basis published before that slate tipped; the Nov 14–17 rows are today's slate plus the maximum three days ahead the brief asks for. These are <em>our</em> numbers — not sportsbook prices. Every pick is a paper record gated behind the validation framework.</p></header>
 
 <div class="notice warn"><strong>Read this first.</strong> Model parameters below are documented assumptions, not official values. No market odds feed is connected, so market-comparison gates (G4 closing-line value, G5 price edge) are <strong>blocked</strong> — nothing here is a validated bet or betting advice. Player totals (over/under team totals) are not originated: pace/efficiency inputs are missing. See <a href="review.html" target="_blank" rel="noopener">Flagged for review</a>.</div>
 
@@ -578,7 +621,7 @@ lines_body = f"""
 </ul>
 
 <h2>Picks by slate (Nov 13–17, 2026)</h2>
-<p class="note">Rest = days off before the game, computed only from official NBA schedule pages for Nov 9–17 (B2B = back-to-back). Records as displayed 2026-11-13, re-verified 2026-11-14. "Paper" = model pick, not market-validated.</p>
+<p class="note">Rest = days off before the game, computed only from official NBA schedule pages for Nov 9–17 (B2B = back-to-back). Record basis: the Nov 13 rows use the records as displayed 2026-11-13 pre-tip (frozen); the Nov 14–17 rows use records re-read from the official slate pages 2026-11-14T00:52–01:32Z (transcripts in <code>data/raw/captures/session-w/</code>), when the Nov 13 games were still in progress and therefore not yet included in any record. "Paper" = model pick, not market-validated.</p>
 {"".join(slate_blocks)}
 
 <h2>Parlay cards (cross-game, 2 legs) — correlation as bounds, not guesses</h2>
@@ -586,7 +629,7 @@ lines_body = f"""
 {parlay_tbl}
 
 <h2>Player prop combos (Pts + Reb + Ast)</h2>
-<p class="note">Originated line = official season PPG+RPG+APG (sum, rounded to 0.5) from NBA.com leader tables; status from the official 5:15 PM ET injury report. No market number exists to beat, so every signal stays gated: Out/Doubtful → NO BET; Questionable → PASS; otherwise BLOCKED pending market number + game-log variance. LAL/CHA/TOR leader cells are blank (official page displayed "-").</p>
+<p class="note">Originated line = official season PPG+RPG+APG (sum, rounded to 0.5) from NBA.com leader tables; status from the official injury-report edition covering each game date (11/13 games: the 5:15 PM ET edition; 11/14 games: the 8:00 PM ET edition of 11/13, the newest published at capture; 11/15–11/17: no report published yet at capture → gated). No market number exists to beat, so every signal stays gated: Out/Doubtful → NO BET; Questionable → PASS; otherwise BLOCKED pending market number + game-log variance. The LAL/CHA/TOR leader cells that read "-" on the 2026-11-13 capture are now displayed on the official pages and were filled from them (2026-11-14T01:31Z read).</p>
 {prop_tbl}
 
 <h2>Correlation values — what is determined and what is blank</h2>
@@ -603,7 +646,10 @@ impact_blocks = []
 for e in inj_impact:
     rows = []
     for t in e["teams"]:
-        if t["nys"]:
+        if t.get("no_report"):
+            out_cell = '<span class="flag">report not yet published (G-INJ)</span>'
+            known = "—"
+        elif t["nys"]:
             out_cell = '<span class="flag">NOT YET SUBMITTED</span>'
             known = "—"
         else:
@@ -613,9 +659,11 @@ for e in inj_impact:
             else:
                 known = '<span class="flag">blank — leader PPG unknown</span>' if t["n_out"] else "—"
         rows.append([
-            esc(t["team"]), out_cell, fmt(t["doubtful"], 0), fmt(t["questionable"], 0),
-            fmt(t["probable"], 0), known,
-            esc(", ".join(t["out_names"])) if t["out_names"] and not t["nys"] else "—",
+            esc(t["team"]), out_cell,
+            "—" if t.get("no_report") else fmt(t["doubtful"], 0),
+            "—" if t.get("no_report") else fmt(t["questionable"], 0),
+            "—" if t.get("no_report") else fmt(t["probable"], 0), known,
+            esc(", ".join(t["out_names"])) if t["out_names"] and not t["nys"] and not t.get("no_report") else "—",
             a(t["src"], "report"), a(e["preview"], "game"),
         ])
     impact_blocks.append(
@@ -624,12 +672,14 @@ for e in inj_impact:
                "Known PPG of officially-out leader", "Out players (as printed)", "Report source", "Game source"],
               rows, f"impact-{e['date']}-{e['game'].replace('@','-')}"))
 
+unattr_all = [(r, inj["source_url"], "05:15 PM ET edition") for r in inj["unattributed_rows"]] + \
+             [(r, inj0800["source_url"], "08:00 PM ET edition") for r in inj0800["unattributed_rows"]]
 unattr_tbl = table(
-    ["Date", "Player", "Status", "Reason (as printed)", "Team", "Source"],
+    ["Date", "Player", "Status", "Reason (as printed)", "Team", "Edition", "Source"],
     [[esc(r["game_date"]), esc(r["player"]), esc(r["status"]), esc(r["reason"]),
       '<span class="flag">blank — team cell not printed (flagged)</span>',
-      a(inj["source_url"], "PDF")]
-     for r in inj["unattributed_rows"]],
+      esc(edition_label), a(src_url, "PDF")]
+     for r, src_url, edition_label in unattr_all],
     "unattributed")
 
 rest_rows = []
@@ -651,33 +701,35 @@ rest_tbl = table(["Date", "Time (ET)", "Matchup", "Away rest", "Home rest",
 gf_body = f"""
 <p class="crumb">Workspace / Injuries & game flow</p>
 <header class="page-head"><div class="kicker">Edge Lab</div><h1>Injury impact & game flow</h1>
-<p>Official 5:15 PM ET injury report (newer than the archived 12:00 PM snapshot), rotation-impact context built only from officially printed values, and schedule-derived rest/fatigue factors for all 36 games.</p></header>
+<p>Official injury reports (the 5:15 PM ET edition for the Nov 13 games; the 8:00 PM ET edition of Nov 13 for the Nov 14 games — the newest published at capture time), rotation-impact context built only from officially printed values, and schedule-derived rest/fatigue factors for all 36 games.</p></header>
 
 <div class="notice warn"><strong>Quantified minutes/production impact is blocked.</strong> The NBA does not publish projected minutes in the injury report, and no verified game-log/minutes feed is connected in this project. What can be stated officially: who is Out/Doubtful/Questionable/Probable, and how much scoring the officially-out <em>team leader</em> accounts for (blank where the leader's PPG is not on an official page). Everything else is left blank and flagged — no minutes are invented.</div>
 
 <h2>Report coverage</h2>
 <ul class="bullets">
-<li>Source: <a href="{esc(inj['source_url'])}" target="_blank" rel="noopener">official PDF 11/13/26 05:15 PM ET</a> (hub: <a href="{esc(inj['hub_url'])}" target="_blank" rel="noopener">official.nba.com</a>). {len(inj['rows'])} attributed rows, {len(inj['unattributed_rows'])} rows with blank team (flagged below).</li>
-<li>11/14: five team submissions still "NOT YET SUBMITTED" (Denver, New Orleans, Memphis, Chicago, Miami) — policy deadlines are day-before 5 p.m. local (source: hub).</li>
-<li>11/15 and 11/16: reports not yet published at retrieval — injury columns for those slates stay gated (G-INJ).</li>
-<li>Status changes vs the archived 12:00 PM report are real (e.g., Curry reason now printed "Right Oblique Tear"; Giannis now Available; Klay now Probable) — always use the latest timestamped report.</li>
+<li>11/13 games — source: <a href="{esc(inj['source_url'])}" target="_blank" rel="noopener">official PDF 11/13/26 05:15 PM ET</a> (frozen basis of the published 11/13 batch). {len(inj['rows'])} attributed rows, {len(inj['unattributed_rows'])} rows with blank team (flagged below).</li>
+<li>11/14 games — source: <a href="{esc(inj0800['source_url'])}" target="_blank" rel="noopener">official PDF 11/13/26 08:00 PM ET</a>, the newest edition listed on the <a href="{esc(inj0800['hub_url'])}" target="_blank" rel="noopener">official hub</a> at capture (2026-11-14T01:12Z). It prints rows for all five 11/14 games: {len([r for r in inj0800['rows'] if r['game_date']=='2026-11-14'])} attributed rows plus five NOT YET SUBMITTED team submissions (New Orleans, Cleveland, Memphis, Chicago, Miami — day-before deadlines not yet due). {len(inj0800['unattributed_rows'])} rows have blank team and are flagged below.</li>
+<li>11/15, 11/16 and 11/17: day-before reports were not yet published at capture — injury columns for those slates stay gated (G-INJ) and show <i>unknown</i>, never "no injuries".</li>
+<li>The 11/14-dated report editions do not exist yet at capture (they publish on 11/14); the earlier AccessDenied on the 11/14 12:00 PM URL is consistent with a not-yet-published file. Tracked as flag W-F2.</li>
+<li>Always use the latest timestamped report — statuses move between editions (five status changes between the 3:00 PM and 5:15 PM editions are recorded in <code>data/audit/injury_edition_diff.json</code>).</li>
 </ul>
 
-<h2>Per-game injury impact (Nov 13–14)</h2>
+<h2>Per-game injury impact (all games, Nov 13–17)</h2>
 {"".join(impact_blocks)}
 
 <h2>Rows with no printed team — blank, flagged, excluded from analysis</h2>
 {unattr_tbl}
 
 <h2>Rest & schedule fatigue (all 36 games, Nov 9–17 official schedule)</h2>
-<p class="note">Rest days computed strictly from official NBA.com slate pages (Nov 9 through Nov 17): days off = calendar days between last scheduled game and this game minus 1. B2B = back-to-back. Every team in the window has a prior game inside Nov 9–12.</p>
+<p class="note">Rest days computed strictly from official NBA.com slate pages (Nov 9 through Nov 17): days off = calendar days between last scheduled game and this game minus 1. B2B = back-to-back. Every team in the window has a prior game inside Nov 9–13.</p>
 {rest_tbl}
 
 <h2>Game-flow notes (officially grounded)</h2>
 <ul class="bullets">
-<li><strong>Back-to-backs on 11/14:</strong> New Orleans, Cleveland, Memphis and Chicago all play 11/13 and 11/14 (0 days rest) — from the official schedule above.</li>
+<li><strong>Back-to-backs on 11/14:</strong> New Orleans, Cleveland, Miami, Memphis and Chicago all play 11/13 and 11/14 (0 days rest) — from the official schedule above. (An earlier draft of this note omitted Miami; corrected 2026-11-14 and flagged W-F8.)</li>
 <li><strong>Back-to-backs on 11/15:</strong> Dallas only (11/14 → 11/15).</li>
 <li><strong>Back-to-backs on 11/16:</strong> Boston, Philadelphia, Washington, Houston and Phoenix (all play 11/15 and 11/16).</li>
+<li><strong>Back-to-backs on 11/17:</strong> Portland and Minnesota (both play 11/16 and 11/17, both at Target Center — the POR@MIN matchup repeats inside 48 hours; flagged W-F6).</li>
 <li><strong>OT fatigue:</strong> Detroit beat Washington 144–140 in double OT on 11/12 (<a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">official slate</a>); Detroit then plays 11/14 (1 day off), Washington 11/15 (2 days off).</li>
 <li><strong>NBA Cup context (11/13 slate only):</strong> group labels are printed on the official game cards (East A/B/C, West A/B/C) — shown in the picks table's game links; Cup games add travel/urgency context but no verified numeric adjustment is applied to the model.</li>
 <li><strong>Attrition example (official rows only):</strong> Golden State lists Curry, Butler III, Porzingis, Moody and Williams as Out at 5:15 PM; San Antonio lists Harris and Quaintance Out with Fox and Vassell Questionable — usage shifts are directionally obvious but <em>not quantified</em> (no minutes feed).</li>

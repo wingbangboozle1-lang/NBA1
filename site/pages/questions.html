@@ -154,13 +154,6 @@
 <td>High for the schedule and the injury rows, both read directly from official pages. Low for the lines themselves, because they rest on ratings that end at 11/12 and on an injury report that covers half of the 11/14 teams and none of the later games.</td>
 <td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">S4</a></td>
 </tr>
-<tr>
-<td>A8</td>
-<td><b>Which upcoming games have a measurable availability issue?</b></td>
-<td>On the 2026-11-13 slate, Orlando (14.1% of minutes at risk), Chicago (17.0%), Indiana (13.8%) and Golden State (11.0%) have measured availability losses; the impact is a floor because minutes are only known for top-50 scorers (F2). Five of the ten 2026-11-14 team-reports were marked NOT YET SUBMITTED at capture, and no 2026-11-15 report existed at all.</td>
-<td>Medium for 2026-11-13, none for 2026-11-15</td>
-<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf" target="_blank" rel="noopener">S6</a></td>
-</tr>
 </tbody></table></div>
 <h2 class="sec">Open</h2><p class="secsub">Questions that cannot be answered yet. Nothing on this site is decided on an open question.</p>
 <div class="tablewrap">
@@ -293,79 +286,7 @@
 <td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>
 </tr>
 <tr>
-<td>Q1</td>
-<td><b>Does any strategy actually beat a real sportsbook?</b></td>
-<td>Closing prices. No book price is published by an NBA-operated source, so no official link can be attached to one (F3). Without it, 'units won' measures the model against a naive model, not against a market.</td>
-<td>Log closing spread, total and price for every graded play into data/raw/market.json with a per-row source field, then recompute. Close-vs-model comparison is the only honest measure of betting value.</td>
-<td>Any statement about profitability; the whole point of the leaderboard's reward tiers</td>
-<td>1</td>
-<td class="src"><span class="na" title="no official source exists">&mdash;</span></td>
-</tr>
-<tr>
-<td>Q2</td>
-<td><b>Can the out-of-sample window grow any further?</b></td>
-<td>Results for 2026-10-20 through 2026-11-05. Those games exist and are officially published, but they are currently the ratings window, so moving them into the test set requires a different split - for example ratings from the first 40 games of the season and testing on everything after.</td>
-<td>Backfill 2026-10-20 to 2026-11-05 results, then re-cut the split so the ratings window is earlier and the test window is longer. This is now the only way to grow the sample, since every game from 2026-11-06 onward is already in it.</td>
-<td>Passing or failing any strategy; promoting anything past Tier 3</td>
-<td>2</td>
-<td class="src"><span class="na" title="no official source exists">&mdash;</span></td>
-</tr>
-<tr>
-<td>Q3</td>
-<td><b>Are the player-prop projections any good?</b></td>
-<td>Player game logs. The model can produce a projection (possession factor, opponent-defence factor, teammate-availability factor) but game-to-game variance has never been measured, so no probability is published and no prop has ever been graded.</td>
-<td>Capture official box scores for the top-50 players and store per-game minutes and counting stats; then measure each projection's error and standard deviation and replace the blank probability column with a real one.</td>
-<td>Pricing S7 and S8; including props in parlays</td>
-<td>3</td>
-<td class="src"><span class="na" title="no official source exists">&mdash;</span></td>
-</tr>
-<tr>
-<td>Q4</td>
-<td><b>How much of a team does an injury actually cost?</b></td>
-<td>Minutes for the 415 players outside the captured top-50 table (F2), and archived injury reports (F5) to fit the impact coefficient against.</td>
-<td>Two steps: backfill minutes so the minutes-at-risk number is complete, and archive every injury-report edition so the coefficient can be fitted on actual outcomes instead of being a declared modelling choice.</td>
-<td>Trusting the availability column; grading S6; running gate G7</td>
-<td>4</td>
-<td class="src"><span class="na" title="no official source exists">&mdash;</span></td>
-</tr>
-<tr>
-<td>Q5</td>
-<td><b>What are the real same-game correlations?</b></td>
-<td>Play-by-play or box scores. Every rho used to price S9 and S10 is derived from the structure of the model, not measured (F6).</td>
-<td>Estimate empirical correlations from a season of official box scores - player-stat pairs for the same game, and side/total from final scores - then replace the MODEL-DERIVED block on the Correlations page.</td>
-<td>Trusting parlay and SGP prices, which is where correlation risk actually bites</td>
-<td>5</td>
-<td class="src"><span class="na" title="no official source exists">&mdash;</span></td>
-</tr>
-<tr>
-<td>Q6</td>
-<td><b>Does the Emirates NBA Cup change how teams play?</b></td>
-<td>Any measurement. Twenty-five of the 51 games in the test window were Cup group games, and point differential is the Cup tiebreaker, which plausibly changes late-game behaviour in blowouts - but nothing in the captured data measures it.</td>
-<td>Compare Cup games to non-Cup games within the existing window, matching on the same team ratings and looking at whether decided games run up bigger margins. The sample is already large enough to attempt this.</td>
-<td>Applying a Cup adjustment, or safely ignoring one</td>
-<td>6</td>
-<td class="src"><span class="na" title="no official source exists">&mdash;</span></td>
-</tr>
-<tr>
-<td>Q7</td>
-<td><b>How should the model treat overtime?</b></td>
-<td>A decision. The window contains a 284-point double-overtime game (Detroit 144, Washington 140 on 2026-11-12) and one single-OT game, both of which inflate the fitted total-error spread.</td>
-<td>Either model regulation separately from overtime, or winsorise the residuals when fitting. Both can be evaluated on the existing 51-game sample.</td>
-<td>Total-market calibration</td>
-<td>7</td>
-<td class="src"><span class="na" title="no official source exists">&mdash;</span></td>
-</tr>
-<tr>
-<td>Q8</td>
-<td><b>Should the reference line be replaced by a real market line once prices are logged?</b></td>
-<td>The prices themselves (Q1). Once they exist the reference model can be retired and every strategy re-graded against something real.</td>
-<td>Run both in parallel for a month - model-vs-reference and model-vs-market - and keep whichever grading set is more predictive of market performance.</td>
-<td>The final meaning of the leaderboard</td>
-<td>8</td>
-<td class="src"><span class="na" title="no official source exists">&mdash;</span></td>
-</tr>
-<tr>
-<td>Q9</td>
+<td>Q14</td>
 <td><b>Which injury-report edition is authoritative at tip-off, and what did the intra-day movements actually cost?</b></td>
 <td>The official league publishes multiple editions per day (12:00, 3:00, 5:00/5:15 PM ET and game-day reports). The 2026-11-13 chain was captured and every movement verified (9 status changes 12:00-&gt;3:00 PM, 5 more 3:00-&gt;5:15 PM), but no gameday edition is archived and no box-score starters are joined, so a movement's effect on minutes and production cannot be measured.</td>
 <td>Archive every edition of every report (the URLs follow the ak-static.cms.nba.com/referee/injury/Injury-Report_&lt;date&gt;_&lt;time&gt;PM.pdf pattern), diff statuses between editions, then join official box scores (nba.com/game/&lt;id&gt;/box-score) to see who actually started and played. Verified on 2026-11-14: https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf</td>
@@ -374,7 +295,7 @@
 <td class="src"><span class="na" title="https://official.nba.com/nba-injury-report-2026-27-season/">&mdash;</span></td>
 </tr>
 <tr>
-<td>Q10</td>
+<td>Q15</td>
 <td><b>Do the repeat matchups on the official slate pages mean anything for modelling?</b></td>
 <td>NBA.com publishes NYK@TOR twice in three days (0022600241 on 11/15, 0022600253 on 11/17) and POR@MIN on consecutive nights (0022600250 on 11/16, 0022600254 on 11/17), each with its own game id and its own official page. Whether these are ordinary schedule quirks, a neutral-site arrangement or something else is not stated on the pages; the model currently treats them as independent games.</td>
 <td>Read the official game pages and NBA.com news for those ids before tip; if the league prints an explanation, record it. Until then the rows are published exactly as the official slate pages print them and flagged. Confirmed 2026-11-14: https://www.nba.com/game/nyk-vs-tor-0022600253 and https://www.nba.com/game/por-vs-min-0022600254</td>
@@ -383,7 +304,7 @@
 <td class="src"><span class="na" title="https://www.nba.com/games?date=2026-11-17">&mdash;</span></td>
 </tr>
 <tr>
-<td>Q11</td>
+<td>Q16</td>
 <td><b>How much do the nine verified 12:00 PM -&gt; 3:00 PM status movements change minutes and production?</b></td>
 <td>Every movement in the 2026-11-13 report chain is now verified row by row (Wilson Jalen Doubtful-&gt;Out, Antetokounmpo Probable-&gt;Available, Larsson Questionable-&gt;Doubtful, Thompson Questionable-&gt;Probable, Dia Questionable-&gt;Available, Mathurin Doubtful-&gt;Questionable, McGowens/Missi/Murphy Doubtful-&gt;Out), but no minutes model exists to price them (F2), so the injury layer publishes direction only.</td>
 <td>Once the player-minutes table is completed (SG3), re-run the availability shock strategy (S6) over archived edition diffs and measure the distribution of teammate usage shifts. Movement log: data/refresh_2026_11_14/official_captures_2026-11-14.json</td>

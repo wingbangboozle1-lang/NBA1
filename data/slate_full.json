@@ -1,8 +1,8 @@
 {
- "as_of_utc": "2026-11-13T22:45Z",
- "window": "2026-11-13 through 2026-11-17 (extended 2026-11-14: slates through today plus maximum 3 days ahead)",
- "records_note": "Records as displayed on official NBA.com pages at retrieval (2026-11-13, before the 7:00 PM ET slate). Blank = not displayed. Times are ET as printed. Away@home order per NBA.com game cards and injury-report matchup codes.",
- "verification": "Each game was read from the official NBA.com slate page for its date and cross-checked against the schedule strip on the official game page (example: https://www.nba.com/game/nyk-vs-tor-0022600241). The Nov-15 slate page rendered records as '-', so Nov-15 records were taken from the game-page schedule strip, which prints them.",
+ "as_of_utc": "2026-11-14T01:32Z (slate rows for 11/14-11/17 re-verified/captured; 11/13 rows frozen at 2026-11-13T22:45Z pick basis)",
+ "window": "2026-11-13 through 2026-11-17 — 11/13 rows are the frozen basis of the published 11/13 pick batch; 2026-11-14 through 2026-11-17 is today plus maximum 3 days ahead (today = 2026-11-14 UTC)",
+ "records_note": "Records as displayed on official NBA.com pages at each slate row's records_as_of stamp. Blank = not displayed. Times are ET as printed. Away@home order per NBA.com game cards. At every 2026-11-14 capture the 11/13 slate was still in progress (two games at Q2, rest pregame), so no record includes a 11/13 result; the values therefore equal the 2026-11-13 pre-tip capture. Post-11/13-final refresh is tracked as flag W-F5. Source: data/raw/records_2026-11-14.json and the transcripts in data/raw/captures/session-w/.",
+ "verification": "Each game was read from the official NBA.com slate page for its date (transcripts in data/raw/captures/session-w/, one file per date read) and cross-checked against the schedule capture data/raw/official_schedule_capture_2026-11-14.json (36 games 11/13-11/17 from https://www.nba.com/schedule). The 11/17 slate was appended 2026-11-14 by arena/f80dcc4a-nba1 from https://www.nba.com/games?date=2026-11-17 (5 games, ids 0022600253-257). NYK@TOR and POR@MIN each appear twice in the window (11/15 & 11/17, 11/16 & 11/17) with distinct official game ids; both rows kept as scheduled and flagged W-F6 for review.",
  "slates": [
   {
    "date": "2026-11-13",
@@ -116,7 +116,8 @@
      "cup": "West Group B",
      "preview_url": "https://www.nba.com/game/okc-vs-lac-0022600042"
     }
-   ]
+   ],
+   "records_as_of": "2026-11-13T22:45Z (pre-tip of the 7:00 PM ET slate) — frozen pick basis for the published 11/13 batch"
   },
   {
    "date": "2026-11-14",
@@ -182,7 +183,9 @@
      "cup": null,
      "preview_url": "https://www.nba.com/game/chi-vs-min-0022600235"
     }
-   ]
+   ],
+   "records_as_of": "values re-verified against the official slate page read 2026-11-14T00:52-01:32Z; identical to the 22:45Z capture (no 11/13 game had gone final)",
+   "records_verified_utc": "2026-11-14T01:32Z"
   },
   {
    "date": "2026-11-15",
@@ -296,7 +299,9 @@
      "cup": null,
      "preview_url": "https://www.nba.com/game/okc-vs-sac-0022600244"
     }
-   ]
+   ],
+   "records_as_of": "values re-verified against the official slate page read 2026-11-14T00:52-01:32Z; identical to the 22:45Z capture (no 11/13 game had gone final)",
+   "records_verified_utc": "2026-11-14T01:32Z"
   },
   {
    "date": "2026-11-16",
@@ -398,11 +403,15 @@
      "cup": null,
      "preview_url": "https://www.nba.com/game/phx-vs-den-0022600252"
     }
-   ]
+   ],
+   "records_as_of": "values re-verified against the official slate page read 2026-11-14T00:52-01:32Z; identical to the 22:45Z capture (no 11/13 game had gone final)",
+   "records_verified_utc": "2026-11-14T01:32Z"
   },
   {
    "date": "2026-11-17",
    "slate_url": "https://www.nba.com/games?date=2026-11-17",
+   "records_as_of": "captured from the official slate page read 2026-11-14T01:09Z (11/13 games in progress; records exclude those results)",
+   "records_verified_utc": "2026-11-14T01:09Z",
    "games": [
     {
      "away": "NYK",
@@ -413,7 +422,7 @@
      "home_record": "5-7",
      "time_et": "7:30 PM",
      "game_id": "0022600253",
-     "cup": "",
+     "cup": null,
      "preview_url": "https://www.nba.com/game/nyk-vs-tor-0022600253"
     },
     {
@@ -425,7 +434,7 @@
      "home_record": "10-2",
      "time_et": "8:00 PM",
      "game_id": "0022600255",
-     "cup": "",
+     "cup": null,
      "preview_url": "https://www.nba.com/game/det-vs-sas-0022600255"
     },
     {
@@ -437,7 +446,7 @@
      "home_record": "9-3",
      "time_et": "8:00 PM",
      "game_id": "0022600254",
-     "cup": "",
+     "cup": null,
      "preview_url": "https://www.nba.com/game/por-vs-min-0022600254"
     },
     {
@@ -449,7 +458,7 @@
      "home_record": "2-8",
      "time_et": "10:30 PM",
      "game_id": "0022600257",
-     "cup": "",
+     "cup": null,
      "preview_url": "https://www.nba.com/game/uta-vs-lac-0022600257"
     },
     {
@@ -461,7 +470,7 @@
      "home_record": "11-2",
      "time_et": "11:00 PM",
      "game_id": "0022600256",
-     "cup": "",
+     "cup": null,
      "preview_url": "https://www.nba.com/game/cha-vs-lal-0022600256"
     }
    ]
@@ -662,5 +671,5 @@
    ]
   }
  ],
- "refresh_2026-11-14": "11/17 slate appended by session arena/2329cb68-nba1 after verification against https://www.nba.com/games?date=2026-11-17 and the official game pages 0022600253 / 0022600254 (titles read 'Nov 17, 2026'). Records and tip times exactly as printed at 2026-11-14T00:45Z. Cup label blank as published. NYK@TOR and POR@MIN each appear twice in the window (11/15+11/17, 11/16+11/17) exactly as the official slate pages publish; flagged for review, not corrected."
+ "refresh_2026-11-14": "11/17 slate appended by session arena/2329cb68-nba1 after verification against https://www.nba.com/games?date=2026-11-17 and the official game pages 0022600253 / 0022600254 (titles read 'Nov 17, 2026'). Records and tip times exactly as printed at 2026-11-14T00:45Z. Cup label blank as published. NYK@TOR and POR@MIN each appear twice in the window (11/15+11/17, 11/16+11/17) exactly as the official slate pages publish; flagged for review, not corrected. | MERGE NOTE: session W later filled 11/17 venues from https://www.nba.com/schedule (see data/raw/official_schedule_capture_2026-11-14.json); competition labels remain blank as published."
 }
