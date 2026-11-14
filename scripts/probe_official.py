@@ -62,6 +62,11 @@ def collect_urls():
         for f in filenames:
             if not f.endswith(exts):
                 continue
+            # Do not harvest from the page this script generates, or it feeds on
+            # its own output: each run would add every URL it just printed and
+            # the count would climb forever (observed: 115 -> 134 -> 157).
+            if os.path.join(dirpath, f) == OUT or f == "verification.html":
+                continue
             p = os.path.join(dirpath, f)
             try:
                 text = open(p, encoding="utf-8", errors="replace").read()

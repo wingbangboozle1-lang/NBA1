@@ -65,13 +65,15 @@ jobs:
           print("probe record:", d["probe"]["urls_probed"], "URLs,", d["probe"]["probed_at_utc"])
           PY
 
-      - name: Regenerate the verification page and require it to be current
+      - name: Regenerate the derived verification page
         run: |
+          # verification.html is derived from data/raw/probe_official.json. The
+          # probe runs on its own schedule and commits asynchronously, so a
+          # committed copy can legitimately lag by one run. Regenerating it here
+          # means the deployed page always matches the committed evidence, and a
+          # timestamp race can never fail the build. Deliberately not a staleness
+          # assertion: that turned a correct gate into a flaky one.
           python3 scripts/build_verification_page.py
-          if [ -n "$(git status --porcelain verification.html)" ]; then
-            echo "verification.html is stale - regenerate and commit it"
-            exit 1
-          fi
 
       - name: Check for broken internal links (both builds)
         run: |
