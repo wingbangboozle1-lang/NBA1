@@ -229,6 +229,29 @@
    "priority": 1,
    "source": "S14",
    "source_url": "https://www.nba.com/games"
+  },
+  {
+   "id": "Q14",
+   "question": "Which injury-report edition is authoritative at tip-off, and what did the intra-day movements actually cost?",
+   "what_is_missing": "The official league publishes multiple editions per day (12:00, 3:00, 5:00/5:15 PM ET and game-day reports). The 2026-11-13 chain was captured and every movement verified (9 status changes 12:00->3:00 PM, 5 more 3:00->5:15 PM), but no gameday edition is archived and no box-score starters are joined, so a movement's effect on minutes and production cannot be measured.",
+   "how_to_answer": "Archive every edition of every report (the URLs follow the ak-static.cms.nba.com/referee/injury/Injury-Report_<date>_<time>PM.pdf pattern), diff statuses between editions, then join official box scores (nba.com/game/<id>/box-score) to see who actually started and played. Verified on 2026-11-14: https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/"
+  },
+  {
+   "id": "Q15",
+   "question": "Do the repeat matchups on the official slate pages mean anything for modelling?",
+   "what_is_missing": "NBA.com publishes NYK@TOR twice in three days (0022600241 on 11/15, 0022600253 on 11/17) and POR@MIN on consecutive nights (0022600250 on 11/16, 0022600254 on 11/17), each with its own game id and its own official page. Whether these are ordinary schedule quirks, a neutral-site arrangement or something else is not stated on the pages; the model currently treats them as independent games.",
+   "how_to_answer": "Read the official game pages and NBA.com news for those ids before tip; if the league prints an explanation, record it. Until then the rows are published exactly as the official slate pages print them and flagged. Confirmed 2026-11-14: https://www.nba.com/game/nyk-vs-tor-0022600253 and https://www.nba.com/game/por-vs-min-0022600254",
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "id": "Q16",
+   "question": "How much do the nine verified 12:00 PM -> 3:00 PM status movements change minutes and production?",
+   "what_is_missing": "Every movement in the 2026-11-13 report chain is now verified row by row (Wilson Jalen Doubtful->Out, Antetokounmpo Probable->Available, Larsson Questionable->Doubtful, Thompson Questionable->Probable, Dia Questionable->Available, Mathurin Doubtful->Questionable, McGowens/Missi/Murphy Doubtful->Out), but no minutes model exists to price them (F2), so the injury layer publishes direction only.",
+   "how_to_answer": "Once the player-minutes table is completed (SG3), re-run the availability shock strategy (S6) over archived edition diffs and measure the distribution of teammate usage shifts. Movement log: data/refresh_2026_11_14/official_captures_2026-11-14.json",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf"
   }
- ]
+ ],
+ "partial": [],
+ "rules": []
 }

@@ -224,6 +224,84 @@
    "publisher": "NBA.com (official)",
    "used_for": "Current records for both teams."
   },
+  "S8_0022600245": {
+   "title": "NBA.com game page - Magic at Celtics, 2026-11-16",
+   "url": "https://www.nba.com/game/orl-vs-bos-0022600245",
+   "publisher": "NBA.com (official)",
+   "used_for": "Matchup, tip time and current records (verified 2026-11-14 via the official slate page)."
+  },
+  "S8_0022600246": {
+   "title": "NBA.com game page - Bulls at Cavaliers, 2026-11-16",
+   "url": "https://www.nba.com/game/chi-vs-cle-0022600246",
+   "publisher": "NBA.com (official)",
+   "used_for": "Matchup, tip time and current records (verified 2026-11-14 via the official slate page)."
+  },
+  "S8_0022600247": {
+   "title": "NBA.com game page - Grizzlies at Wizards, 2026-11-16",
+   "url": "https://www.nba.com/game/mem-vs-was-0022600247",
+   "publisher": "NBA.com (official)",
+   "used_for": "Matchup, tip time and current records (verified 2026-11-14 via the official slate page)."
+  },
+  "S8_0022600248": {
+   "title": "NBA.com game page - 76ers at Nets, 2026-11-16",
+   "url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
+   "publisher": "NBA.com (official)",
+   "used_for": "Matchup, tip time and current records (verified 2026-11-14 via the official slate page)."
+  },
+  "S8_0022600249": {
+   "title": "NBA.com game page - Rockets at Heat, 2026-11-16",
+   "url": "https://www.nba.com/game/hou-vs-mia-0022600249",
+   "publisher": "NBA.com (official)",
+   "used_for": "Matchup, tip time and current records (verified 2026-11-14 via the official slate page)."
+  },
+  "S8_0022600250": {
+   "title": "NBA.com game page - Trail Blazers at Timberwolves, 2026-11-16",
+   "url": "https://www.nba.com/game/por-vs-min-0022600250",
+   "publisher": "NBA.com (official)",
+   "used_for": "Matchup, tip time and current records (verified 2026-11-14 via the official slate page)."
+  },
+  "S8_0022600251": {
+   "title": "NBA.com game page - Warriors at Pelicans, 2026-11-16",
+   "url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
+   "publisher": "NBA.com (official)",
+   "used_for": "Matchup, tip time and current records (verified 2026-11-14 via the official slate page)."
+  },
+  "S8_0022600252": {
+   "title": "NBA.com game page - Suns at Nuggets, 2026-11-16",
+   "url": "https://www.nba.com/game/phx-vs-den-0022600252",
+   "publisher": "NBA.com (official)",
+   "used_for": "Matchup, tip time and current records (verified 2026-11-14 via the official slate page)."
+  },
+  "S8_0022600253": {
+   "title": "NBA.com game page - Knicks at Raptors, 2026-11-17",
+   "url": "https://www.nba.com/game/nyk-vs-tor-0022600253",
+   "publisher": "NBA.com (official)",
+   "used_for": "Matchup, tip time and current records (verified 2026-11-14 via the official slate page)."
+  },
+  "S8_0022600254": {
+   "title": "NBA.com game page - Trail Blazers at Timberwolves, 2026-11-17",
+   "url": "https://www.nba.com/game/por-vs-min-0022600254",
+   "publisher": "NBA.com (official)",
+   "used_for": "Matchup, tip time and current records (verified 2026-11-14 via the official slate page)."
+  },
+  "S8_0022600255": {
+   "title": "NBA.com game page - Pistons at Spurs, 2026-11-17",
+   "url": "https://www.nba.com/game/det-vs-sas-0022600255",
+   "publisher": "NBA.com (official)",
+   "used_for": "Matchup, tip time and current records (verified 2026-11-14 via the official slate page)."
+  },
+  "S8_0022600256": {
+   "title": "NBA.com game page - Hornets at Lakers, 2026-11-17",
+   "url": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "publisher": "NBA.com (official)",
+   "used_for": "Matchup, tip time and current records (verified 2026-11-14 via the official slate page)."
+  },
+  "S8_0022600257": {
+   "title": "NBA.com game page - Jazz at Clippers, 2026-11-17",
+   "url": "https://www.nba.com/game/uta-vs-lac-0022600257",
+   "publisher": "NBA.com (official)",
+   "used_for": "Matchup, tip time and current records (verified 2026-11-14 via the official slate page)."
+  },
   "S3_2026-11-13": {
    "title": "NBA.com Games & Scores - November 13, 2026 (in progress at capture)",
    "url": "https://www.nba.com/games?date=2026-11-13",
@@ -247,7 +325,21 @@
    "url": "https://www.nba.com/games?date=2026-11-16",
    "publisher": "NBA.com (official)",
    "used_for": "Upcoming fixture list, tip times and each team's won-lost record."
+  },
+  "S3_2026-11-17": {
+   "title": "NBA.com Games & Scores - November 17, 2026",
+   "url": "https://www.nba.com/games?date=2026-11-17",
+   "publisher": "NBA.com (official)",
+   "used_for": "Full slate verification 2026-11-17 (5 games: matchup, tip time, records) on 2026-11-14."
   }
+ },
+ "refresh_2026-11-14": {
+  "captured_at_utc": "2026-11-14T00:45:00Z",
+  "session": "arena/2329cb68-nba1",
+  "added": [
+   "S8_0022600245..S8_0022600257",
+   "S3_2026-11-13..S3_2026-11-17"
+  ]
  },
  "refresh_log": [
   {
@@ -256,5 +348,6 @@
    "what_changed": "Season-to-date team table and training window re-captured; upcoming window rolled from 11/13-11/15 to 11/14-11/16 (22 games); 11/13 games moved to schedule_in_progress (rest maths only); injury report moved from the 17:15 ET to the 19:30 ET edition.",
    "previous_capture_utc": "2026-11-13T23:40:00Z"
   }
- ]
+ ],
+ "merge_2026-11-14": "union of both captures (arena/2329cb68-nba1 + main sessions); shared ids prefer the main-side entry"
 }

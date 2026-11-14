@@ -56,7 +56,7 @@
      "unlocks": "Honesty"
     }
    ],
-   "recommendation": "Both: let it accumulate, and backfill only with strictly point-in-time ratings. Until then, present the leaderboard as 'not yet rankable' rather than numbering it \u2014 the tier cap already implies that.",
+   "recommendation": "Both: let it accumulate, and backfill only with strictly point-in-time ratings. Until then, present the leaderboard as 'not yet rankable' rather than numbering it — the tier cap already implies that.",
    "ref": "S1"
   },
   {
@@ -168,7 +168,7 @@
      "unlocks": "Nothing"
     }
    ],
-   "recommendation": "Do both. Adjustment is a one-line change to the validation output and pre-registration is a text file committed before tip \u2014 neither is expensive, and together they are the difference between a lab and a lottery.",
+   "recommendation": "Do both. Adjustment is a one-line change to the validation output and pre-registration is a text file committed before tip — neither is expensive, and together they are the difference between a lab and a lottery.",
    "ref": "S1"
   },
   {
@@ -282,6 +282,50 @@
    ],
    "recommendation": "Gate-first tiers, published with a written retire rule ('no qualifying play for 30 days, or a gate regression, retires the strategy'). Publish retired strategies too; a leaderboard that only shows live winners is not a leaderboard.",
    "ref": "S5"
+  },
+  {
+   "id": "S11",
+   "cat": "Data operations",
+   "title": "Edition-chain automation for future injury refreshes",
+   "problem": "The 2026-11-13 injury report exists in five official editions and statuses moved twice during the day (9 moves 12PM->3PM, 8 moves 5:15->7:30 PM). This session discovered that manually; the repo has no runner that probes for new editions or diffs them.",
+   "options": [
+    {
+     "name": "Probe-and-diff runner in GitHub Actions",
+     "effort": "M",
+     "risk": "Edition URLs can move; needs a hub-page parser",
+     "unlocks": "Automatic edition chains and mixed-edition detection"
+    },
+    {
+     "name": "Manual edition log per refresh (what this session did)",
+     "effort": "S",
+     "risk": "Forgets to look; slow",
+     "unlocks": "Same evidence, more work"
+    }
+   ],
+   "recommendation": "Add the probe to the existing refresh workflow; keep the manual log until it is proven.",
+   "ref": "S5"
+  },
+  {
+   "id": "S12",
+   "cat": "Data operations",
+   "title": "Keep the verified capture recipe for tomorrow's refresh",
+   "problem": "Several official endpoints do not render server-side (stats.nba.com player pages) and one JSON endpoint returns 500. The working routes were found by trial this session and only live in a JSON note.",
+   "options": [
+    {
+     "name": "Turn data/refresh_2026_11_14/official_captures_2026-11-14.json notes into a runbook",
+     "effort": "S",
+     "risk": "Routes may change without notice",
+     "unlocks": "Fast, reliable daily refresh"
+    },
+    {
+     "name": "Keep re-discovering routes per session",
+     "effort": "S",
+     "risk": "Wasted effort, missed data",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Runbook it; the capture file already lists every working URL.",
+   "ref": "S4"
   }
  ]
 }

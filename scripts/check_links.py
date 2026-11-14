@@ -39,6 +39,10 @@ APPROVED_HOSTS = {
     "kansspelautoriteit.nl",
     # the repository and platform documentation, for provenance of the build itself
     "github.com", "docs.github.com",
+    # this repository's own GitHub Pages site (live-site evidence links, e.g. audit/index.html).
+    # Same allowlist entry verify_integration.py already carries (commit 0954d3d); without it the
+    # deploy gate fails on every push (session arena/697fca1e-nba1, I-W09).
+    "wingbangboozle1-lang.github.io",
 }
 
 HREF = re.compile(r'href="([^"]+)"')
