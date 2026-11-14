@@ -1257,7 +1257,8 @@ no market price is claimed, and F-C07's concerns stay published as flags on the 
 | # | Cross-session note | To | Request / action | State |
 | --- | --- | --- | --- | --- |
 | R-W1 | (integration step, W05) | `scripts/check_site.py` owner (Build A, T11) | Add `picks.html` to the checker's PAGES list so CI enforces per-row source coverage on the new page | Executed at integration (W05) with a one-line change, logged in my session log. Precedent: V06 edited a done checker file with a logged note. |
-| R-W2 | (integration step, W05) | `index.html` owner (PR #26 session, merged) | Add a DETAIL PAGES nav entry linking `picks.html` | Executed at integration (W05) as a single nav line, logged in my session log. |
+| R-W2 | (integration step, W05) | `index.html` owner (PR #26 session, merged) | Add a DETAIL PAGES nav entry linking `picks.html` | Executed at integration (W05) as a single nav line, logged in my session log. Superseded by R-W3 after PR #33/#40 replaced the landing. |
+| R-W3 | (post-merge integration) | Build D landing owner (`arena/ffafa1f6-nba1`, PR #33) | Its `scripts/build_dashboard.py` regenerates the root landing and erased my one-line nav edit on every rebuild. Fix: the same single link added to the builder's topnav template (one line), so the session build stays discoverable across regenerations. Rebuilt landing committed together with the template change. | Executed; logged here because the builder is a done task's file. |
 
 ### Conflict log (required by §0 rule on conflicts)
 
