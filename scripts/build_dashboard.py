@@ -489,10 +489,13 @@ def main():
         ])
     body.append(h2("Horizon at a glance", "Every game in the window, with the originated line, the reference line and the difference between them."))
     body.append(table(
-        ["Date", "Tip ET", "Matchup", "Away rec", "Home rec", "Model spread", "Model total",
+        ["Date", "Tip ET", "Matchup", "Away rec", "Home rec", "Model home margin", "Model total",
          "Spread edge", "Total edge", "P(home)", "Rest", "Source"],
         glance,
-        note="Spread and total are the originated lines (model). Edge is the model minus the naive reference line "
+        note="SIGN CONVENTION (read this once): 'Model spread' is the projected home margin, i.e. home points minus "
+             "away points. A NEGATIVE number means the home team is projected to LOSE by that many points. That is the "
+             "opposite of the way a book prints a home spread, and the two must not be mixed up (flag F27). Spread and "
+             "total are the originated lines (model). Edge is the model minus the naive reference line "
              "built from the same official ratings; positive spread edge means the model likes the home side more "
              "than the reference does. Rest flags a back-to-back. Every row links to the official NBA.com game page."))
 
@@ -571,11 +574,14 @@ def main():
             srclink(sources, r["src"]),
         ])
     b.append(table(
-        ["Date", "Tip ET", "Matchup", "Away", "Home", "Venue", "Ref spread", "Model spread",
+        ["Date", "Tip ET", "Matchup", "Away", "Home", "Venue", "Ref home margin", "Model home margin",
          "Spread edge", "Ref total", "Model total", "Total edge", "P(home)", "Fair ML home",
          "Fair ML away", "Rest days H/A", "Home injury status", "Away injury status", "Source"],
         rows,
-        note="A negative spread means the home team is favoured. Fair moneyline is the model's own break-even "
+        note="SIGN CONVENTION: 'Ref spread' and 'Model spread' are both the projected HOME MARGIN (home minus away), "
+             "not a book-style home spread. A NEGATIVE value means the home team is projected to lose by that many "
+             "points (flag F27: Build A's stored field uses the opposite sign, and the two builds are not comparable "
+             "cell for cell). Fair moneyline is the model's own break-even "
              "price (no market price is used). Rest days: number of days since that team's previous game, taken "
              "from the official schedule; a blank means the team's previous game falls outside the captured "
              "window. Injury status is the official report read-out for that team on that date."))

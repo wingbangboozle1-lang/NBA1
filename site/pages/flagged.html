@@ -312,11 +312,11 @@
 </tr>
 <tr>
 <td>F27</td>
-<td>Medium</td>
-<td><b>'Spread (home)' fields hold the home margin, with the opposite sign to a book spread</b></td>
-<td>In Build B (site/data/lines.json: ref_spread_home, model_spread_home) and Build D (line_spread_home) the stored value is the home team's projected margin: a negative value means the home team is projected to lose. Build A's originated_spread_home uses the conventional sign. Example: DEN@NOP, model_spread_home -9.6, is the projected home margin, so DEN (away) is projected to win by 9.6. Test: the S1 side agrees with the home-margin reading in 16 of 16 Build B rows and with the conventional reading in 0 of 16. The same site therefore shows two sign conventions under similar labels.</td>
+<td>Resolved (was Medium)</td>
+<td><b>'Spread (home)' fields hold the home margin, the opposite sign to a book spread — LABELLED 2026-11-14</b></td>
+<td>CONFIRMED and now labelled. Verified from the data, not from memory: in site/data/lines.json DEN@NOP has model_spread_home = -9.6 with p_home_win = 0.291, and in data/derived/horizon_lines.json line_spread_home = -8.0 equals proj_home_pts 113.6 minus proj_away_pts 121.6. So the field is the projected HOME MARGIN (home minus away): negative means the home team is projected to lose. Build A's data/originated_lines.json uses the opposite sign (NYK@IND: originated_spread_home 2.5 against expected_margin_home -2.4). The pages now say 'Model home margin' / 'Ref home margin' in the column headers and carry a SIGN CONVENTION note, so the field can no longer be read as a book-style home spread. The stored field names themselves are unchanged, because renaming them would silently break the Build A cross-check; that rename is left as a suggestion.</td>
 <td>Landing-page 'Ref spread' and 'Model spread' columns; Build D line_spread_home</td>
-<td>Rename the field (for example home_margin_proj) or flip the sign and keep the label. Print the sign convention above every table that shows a spread.</td>
+<td>If the stored keys are ever renamed, do it in one commit across engine/pipeline.py, scripts/originate_horizon.py and every reader, and re-run scripts/verify_all.py plus the Build A fidelity check.</td>
 <td class="src"><a href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
