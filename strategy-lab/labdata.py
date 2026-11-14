@@ -42,6 +42,27 @@ def load(*parts):
         return json.load(f)
 
 
+def site_fit():
+    """The model parameters the site currently publishes, read from site/data/backtest.json.
+
+    Read at run time rather than hard-coded: another session re-fitted and re-published this
+    file mid-flight (the back-to-back penalty moved from 6.096 on 51 games to 6.262 on 60),
+    and a page that quotes a stale parameter is the exact defect class I2/I6 exist to catch.
+    """
+    bt = load("site", "data", "backtest.json")
+    fit = bt.get("fit") or {}
+    b2b = fit.get("b2b_coef_on_home_margin") or {}
+    win = sorted({r["date"] for r in bt.get("rows", []) if isinstance(r, dict) and r.get("date")})
+    return {
+        "b2b_penalty_applied": b2b.get("penalty_applied"),
+        "b2b_est": b2b.get("est"), "b2b_se": b2b.get("se"), "b2b_t": b2b.get("t"),
+        "b2b_disclosure": b2b.get("disclosure"), "b2b_used": b2b.get("used"),
+        "hca": fit.get("hca"), "n_games": fit.get("n") or len(win),
+        "window_first": win[0] if win else None, "window_last": win[-1] if win else None,
+        "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json",
+    }
+
+
 def d(s):
     return dt.date(*[int(p) for p in s.split("-")])
 
