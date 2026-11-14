@@ -4,7 +4,9 @@ Information discipline
 ----------------------
 Holdout window       : all completed games after the training cut-off (driven by
                        HOLDOUT_START / HOLDOUT_END below, currently 2026-11-06 ..
-                       2026-11-12 = 51 games, sources S3_*)
+                       2026-11-13 = 60 games, sources S3_*; the end date moved
+                       2026-11-12 -> 2026-11-13 on 2026-11-14 when the finals of
+                       the 2026-11-13 slate were captured - the rule is unchanged)
 Ratings used for it  : the 2026-10-20 .. 2026-11-05 window ONLY (source S2)
 So no game in the test window contributes to the ratings that predict it.
 
@@ -22,7 +24,7 @@ from model_core import (ASSUMPTIONS, RatingTable, base_line, model_line,
                         reference_line, cover_probability, total_probability)
 
 HOLDOUT_START = "2026-11-06"
-HOLDOUT_END = "2026-11-12"
+HOLDOUT_END = "2026-11-13"
 BREAKEVEN = 0.5238095238095238   # -110: 110/210
 
 

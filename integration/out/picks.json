@@ -1,6 +1,6 @@
 {
  "rule": {
-  "sigma_margin_measured": 17.4,
+  "sigma_margin_measured": 17.392,
   "min_edge_points": 8.7,
   "criteria": [
    "R1 verified ratings window",
@@ -36,11 +36,11 @@
    "tier": "REJECTED-DATA",
    "reasons": [
     "R3 asymmetric availability: DEN=SUBMITTED vs NOP=NOT YET SUBMITTED — one side's absences are known and the other's are not, which biases the adjustment instead of removing it",
-    "R2 |margin -5.8| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)"
+    "R2 |margin -5.8| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)"
    ],
    "line_spread_home": 5.8,
    "line_total": 233.46,
-   "p_home_win_model": 0.369,
+   "p_home_win_model": 0.3689,
    "lean": "AWAY DEN",
    "lean_margin_points": 5.8,
    "records_as_displayed": {
@@ -203,7 +203,7 @@
    "tier": "REJECTED-DATA",
    "reasons": [
     "R3 asymmetric availability: DAL=SUBMITTED vs CLE=NOT YET SUBMITTED — one side's absences are known and the other's are not, which biases the adjustment instead of removing it",
-    "R2 |margin +1.6| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)"
+    "R2 |margin +1.6| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)"
    ],
    "line_spread_home": -1.6,
    "line_total": 227.61,
@@ -345,7 +345,7 @@
    ],
    "line_spread_home": 9.1,
    "line_total": 225.27,
-   "p_home_win_model": 0.3013,
+   "p_home_win_model": 0.3012,
    "lean": "AWAY DET",
    "lean_margin_points": 9.1,
    "records_as_displayed": {
@@ -469,7 +469,7 @@
    ],
    "line_spread_home": -9.3,
    "line_total": 225.2,
-   "p_home_win_model": 0.7041,
+   "p_home_win_model": 0.7042,
    "lean": "HOME MEM",
    "lean_margin_points": 9.3,
    "records_as_displayed": {
@@ -663,7 +663,7 @@
    ],
    "line_spread_home": -27.9,
    "line_total": 233.36,
-   "p_home_win_model": 0.9453,
+   "p_home_win_model": 0.9454,
    "lean": "HOME MIN",
    "lean_margin_points": 27.9,
    "records_as_displayed": {
@@ -812,7 +812,7 @@
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin +5.3| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R2 |margin +5.3| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
     "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear"
    ],
    "line_spread_home": -5.3,
@@ -922,12 +922,12 @@
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin -7.1| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R2 |margin -7.1| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
     "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear"
    ],
    "line_spread_home": 7.1,
    "line_total": 236.82,
-   "p_home_win_model": 0.3412,
+   "p_home_win_model": 0.3411,
    "lean": "AWAY LAL",
    "lean_margin_points": 7.1,
    "records_as_displayed": {
@@ -1030,12 +1030,12 @@
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin +7.0| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R2 |margin +7.0| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
     "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear"
    ],
    "line_spread_home": -7.0,
    "line_total": 214.51,
-   "p_home_win_model": 0.6567,
+   "p_home_win_model": 0.6568,
    "lean": "HOME LAC",
    "lean_margin_points": 7.0,
    "records_as_displayed": {
@@ -1144,7 +1144,7 @@
    ],
    "line_spread_home": 15.9,
    "line_total": 221.57,
-   "p_home_win_model": 0.1803,
+   "p_home_win_model": 0.1801,
    "lean": "AWAY SAS",
    "lean_margin_points": 15.9,
    "records_as_displayed": {
@@ -1254,7 +1254,7 @@
    ],
    "line_spread_home": -13.3,
    "line_total": 219.01,
-   "p_home_win_model": 0.777,
+   "p_home_win_model": 0.7771,
    "lean": "HOME BOS",
    "lean_margin_points": 13.3,
    "records_as_displayed": {
@@ -1357,12 +1357,12 @@
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin -1.4| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R2 |margin -1.4| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
     "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear"
    ],
    "line_spread_home": 1.4,
    "line_total": 220.45,
-   "p_home_win_model": 0.4682,
+   "p_home_win_model": 0.4681,
    "lean": "AWAY NYK",
    "lean_margin_points": 1.4,
    "records_as_displayed": {
@@ -1471,7 +1471,7 @@
    ],
    "line_spread_home": 9.4,
    "line_total": 221.79,
-   "p_home_win_model": 0.2949,
+   "p_home_win_model": 0.2948,
    "lean": "AWAY HOU",
    "lean_margin_points": 9.4,
    "records_as_displayed": {
@@ -1580,7 +1580,7 @@
    ],
    "line_spread_home": 11.3,
    "line_total": 231.76,
-   "p_home_win_model": 0.2578,
+   "p_home_win_model": 0.2577,
    "lean": "AWAY ATL",
    "lean_margin_points": 11.3,
    "records_as_displayed": {
@@ -1690,7 +1690,7 @@
    ],
    "line_spread_home": 10.6,
    "line_total": 222.26,
-   "p_home_win_model": 0.2706,
+   "p_home_win_model": 0.2705,
    "lean": "AWAY OKC",
    "lean_margin_points": 10.6,
    "records_as_displayed": {
@@ -1800,7 +1800,7 @@
    ],
    "line_spread_home": -13.7,
    "line_total": 216.61,
-   "p_home_win_model": 0.7846,
+   "p_home_win_model": 0.7848,
    "lean": "HOME BOS",
    "lean_margin_points": 13.7,
    "records_as_displayed": {
@@ -1909,7 +1909,7 @@
    ],
    "line_spread_home": -16.3,
    "line_total": 238.71,
-   "p_home_win_model": 0.826,
+   "p_home_win_model": 0.8261,
    "lean": "HOME CLE",
    "lean_margin_points": 16.3,
    "records_as_displayed": {
@@ -2019,7 +2019,7 @@
    ],
    "line_spread_home": 8.7,
    "line_total": 224.34,
-   "p_home_win_model": 0.3085,
+   "p_home_win_model": 0.3084,
    "lean": "AWAY MEM",
    "lean_margin_points": 8.7,
    "records_as_displayed": {
@@ -2124,7 +2124,7 @@
    "source_url": "https://www.nba.com/games?date=2026-11-16",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin -0.9| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R2 |margin -0.9| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
     "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear"
    ],
    "line_spread_home": 0.9,
@@ -2232,12 +2232,12 @@
    "source_url": "https://www.nba.com/games?date=2026-11-16",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin -6.7| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R2 |margin -6.7| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
     "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear"
    ],
    "line_spread_home": 6.7,
    "line_total": 228.8,
-   "p_home_win_model": 0.3499,
+   "p_home_win_model": 0.3498,
    "lean": "AWAY HOU",
    "lean_margin_points": 6.7,
    "records_as_displayed": {
@@ -2343,12 +2343,12 @@
    "source_url": "https://www.nba.com/games?date=2026-11-16",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin +7.8| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R2 |margin +7.8| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
     "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear"
    ],
    "line_spread_home": -7.8,
    "line_total": 227.35,
-   "p_home_win_model": 0.6726,
+   "p_home_win_model": 0.6727,
    "lean": "HOME MIN",
    "lean_margin_points": 7.8,
    "records_as_displayed": {
@@ -2457,7 +2457,7 @@
    ],
    "line_spread_home": 9.5,
    "line_total": 234.77,
-   "p_home_win_model": 0.2927,
+   "p_home_win_model": 0.2926,
    "lean": "AWAY GSW",
    "lean_margin_points": 9.5,
    "records_as_displayed": {
@@ -2563,12 +2563,12 @@
    "source_url": "https://www.nba.com/games?date=2026-11-16",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin +8.0| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R2 |margin +8.0| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
     "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear"
    ],
    "line_spread_home": -8.0,
    "line_total": 229.73,
-   "p_home_win_model": 0.6778,
+   "p_home_win_model": 0.6779,
    "lean": "HOME DEN",
    "lean_margin_points": 8.0,
    "records_as_displayed": {

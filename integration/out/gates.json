@@ -1,102 +1,102 @@
 {
  "naive_baselines": {
-  "margin_constant_zero": 15.255,
-  "margin_constant_sample_mean": 15.276,
-  "margin_model": 12.787,
-  "total_constant_sample_mean": 14.375,
-  "total_model": 14.693,
+  "margin_constant_zero": 14.967,
+  "margin_constant_sample_mean": 14.886,
+  "margin_model": 12.913,
+  "total_constant_sample_mean": 14.658,
+  "total_model": 14.636,
   "definition": "the yardstick that costs nothing to reproduce: predict one number for every game (0 for the margin, the sample mean for the total). Any model that cannot beat this has no information, whatever its MAE looks like.",
-  "margin_improvement": 2.489,
-  "total_improvement": -0.318
+  "margin_improvement": 1.973,
+  "total_improvement": 0.022
  },
  "base_model": {
-  "n": 51,
-  "mae_margin": 12.836,
-  "mae_total": 14.693,
-  "sd_margin": 11.655,
-  "straight_up": "36-15"
+  "n": 60,
+  "mae_margin": 12.955,
+  "mae_total": 14.636,
+  "sd_margin": 11.539,
+  "straight_up": "41-19"
  },
  "ablations": {
   "hca_off": {
-   "n": 51,
-   "mae_margin": 12.888,
-   "mae_total": 14.693,
-   "sd_margin": 11.826,
-   "straight_up": "36-15",
+   "n": 60,
+   "mae_margin": 13.207,
+   "mae_total": 14.636,
+   "sd_margin": 11.649,
+   "straight_up": "41-19",
    "component": "home court of 2.5 points",
    "change": "removed",
-   "delta_mae_vs_full_model": 0.052,
-   "verdict": "NO MEASURABLE EFFECT — Δ +0.05 points of MAE sits inside the ±2.786 95% interval on the base model's own error. Neither credit nor blame can be assigned at n=51.",
+   "delta_mae_vs_full_model": 0.252,
+   "verdict": "NO MEASURABLE EFFECT — Δ +0.25 points of MAE sits inside the ±2.491 95% interval on the base model's own error. Neither credit nor blame can be assigned at n=60.",
    "honest_note": "One number moved at a time, everything else frozen; the interval quoted is the base model's own MAE interval, so this is a screening test, not an experiment with a designed power."
   },
   "hca_double": {
-   "n": 51,
-   "mae_margin": 13.275,
-   "mae_total": 14.693,
-   "sd_margin": 11.467,
-   "straight_up": "32-19",
+   "n": 60,
+   "mae_margin": 13.146,
+   "mae_total": 14.636,
+   "sd_margin": 11.466,
+   "straight_up": "37-23",
    "component": "home court of 2.5 points",
    "change": "doubled to 5.0",
-   "delta_mae_vs_full_model": 0.439,
-   "verdict": "NO MEASURABLE EFFECT — Δ +0.44 points of MAE sits inside the ±2.786 95% interval on the base model's own error. Neither credit nor blame can be assigned at n=51.",
+   "delta_mae_vs_full_model": 0.191,
+   "verdict": "NO MEASURABLE EFFECT — Δ +0.19 points of MAE sits inside the ±2.491 95% interval on the base model's own error. Neither credit nor blame can be assigned at n=60.",
    "honest_note": "One number moved at a time, everything else frozen; the interval quoted is the base model's own MAE interval, so this is a screening test, not an experiment with a designed power."
   },
   "b2b_off": {
-   "n": 51,
-   "mae_margin": 12.849,
-   "mae_total": 14.693,
-   "sd_margin": 11.862,
-   "straight_up": "36-15",
+   "n": 60,
+   "mae_margin": 12.966,
+   "mae_total": 14.636,
+   "sd_margin": 11.717,
+   "straight_up": "41-19",
    "component": "back-to-back penalty of 2.0 points",
    "change": "removed",
-   "delta_mae_vs_full_model": 0.013,
-   "verdict": "NO MEASURABLE EFFECT — Δ +0.01 points of MAE sits inside the ±2.786 95% interval on the base model's own error. Neither credit nor blame can be assigned at n=51.",
+   "delta_mae_vs_full_model": 0.011,
+   "verdict": "NO MEASURABLE EFFECT — Δ +0.01 points of MAE sits inside the ±2.491 95% interval on the base model's own error. Neither credit nor blame can be assigned at n=60.",
    "honest_note": "One number moved at a time, everything else frozen; the interval quoted is the base model's own MAE interval, so this is a screening test, not an experiment with a designed power."
   },
   "b2b_double": {
-   "n": 51,
-   "mae_margin": 12.875,
-   "mae_total": 14.693,
-   "sd_margin": 11.474,
-   "straight_up": "35-16",
+   "n": 60,
+   "mae_margin": 12.988,
+   "mae_total": 14.636,
+   "sd_margin": 11.384,
+   "straight_up": "40-20",
    "component": "back-to-back penalty of 2.0 points",
    "change": "doubled to 4.0",
-   "delta_mae_vs_full_model": 0.039,
-   "verdict": "NO MEASURABLE EFFECT — Δ +0.04 points of MAE sits inside the ±2.786 95% interval on the base model's own error. Neither credit nor blame can be assigned at n=51.",
+   "delta_mae_vs_full_model": 0.033,
+   "verdict": "NO MEASURABLE EFFECT — Δ +0.03 points of MAE sits inside the ±2.491 95% interval on the base model's own error. Neither credit nor blame can be assigned at n=60.",
    "honest_note": "One number moved at a time, everything else frozen; the interval quoted is the base model's own MAE interval, so this is a screening test, not an experiment with a designed power."
   },
   "no_shrinkage": {
-   "n": 51,
-   "mae_margin": 13.194,
-   "mae_total": 15.225,
-   "sd_margin": 11.702,
-   "straight_up": "36-15",
+   "n": 60,
+   "mae_margin": 13.584,
+   "mae_total": 15.089,
+   "sd_margin": 11.495,
+   "straight_up": "41-19",
    "component": "shrinkage of team net ratings toward the league mean",
    "change": "removed",
-   "delta_mae_vs_full_model": 0.358,
-   "verdict": "NO MEASURABLE EFFECT — Δ +0.36 points of MAE sits inside the ±2.786 95% interval on the base model's own error. Neither credit nor blame can be assigned at n=51.",
+   "delta_mae_vs_full_model": 0.629,
+   "verdict": "NO MEASURABLE EFFECT — Δ +0.63 points of MAE sits inside the ±2.491 95% interval on the base model's own error. Neither credit nor blame can be assigned at n=60.",
    "honest_note": "One number moved at a time, everything else frozen; the interval quoted is the base model's own MAE interval, so this is a screening test, not an experiment with a designed power."
   }
  },
  "halves": {
-  "split_date": "2026-11-09",
+  "split_date": "2026-11-10",
   "first_half": {
-   "n": 23,
-   "mae_margin": 12.893,
-   "straight_up": "11-12"
+   "n": 31,
+   "mae_margin": 13.141,
+   "straight_up": "16-15"
   },
   "second_half": {
-   "n": 28,
-   "mae_margin": 12.7,
-   "straight_up": "14-14"
+   "n": 29,
+   "mae_margin": 12.669,
+   "straight_up": "16-13"
   },
   "minimum_per_half": 20,
   "note": "A component that only works in one half is a schedule artefact, not a model."
  },
  "scope": "margin/total engine only — see V13 for the absence term",
  "bootstrap_mae_margin_95": [
-  10.0735,
-  15.6461
+  10.5173,
+  15.4998
  ],
  "diagnostics": {
   "k_fit": 2.894,
@@ -105,20 +105,20 @@
   "var_true": 49.274
  },
  "settlement_cross_check": {
-  "mae_margin": 12.787,
+  "mae_margin": 12.913,
   "mae_margin_ci_95": [
-   10.073,
-   15.646
+   10.517,
+   15.5
   ],
-  "sd_margin": 17.4,
-  "bias_margin": -0.146,
-  "mae_total": 14.693,
+  "sd_margin": 17.392,
+  "bias_margin": 0.617,
+  "mae_total": 14.636,
   "mae_total_ci_95": [
-   11.306,
-   18.526
+   11.982,
+   17.314
   ],
-  "sd_total": 19.971,
-  "bias_total": 1.702,
+  "sd_total": 19.375,
+  "bias_total": 1.729,
   "unit": "points per game; MAE is the number a bettor actually cares about because it is what has to beat the spread to make money"
  },
  "gates": [
@@ -136,9 +136,9 @@
    "id": "V2",
    "name": "Sample floor",
    "threshold": "n >= 100 graded games",
-   "measured": 51,
+   "measured": 60,
    "status": "FAIL",
-   "detail": "n=51. Every interval below is wide for the reason this gate exists: a 51-game window cannot separate a 12.79 MAE from a 13.19 MAE. This gate FAILS and the desk says so instead of reporting the difference as skill.",
+   "detail": "n=60. Every interval below is wide for the reason this gate exists: a 51-game window cannot separate a 12.79 MAE from a 13.19 MAE. This gate FAILS and the desk says so instead of reporting the difference as skill.",
    "missing_input": null,
    "source_url": null
   },
@@ -146,9 +146,9 @@
    "id": "V3",
    "name": "Beat a constant on the margin",
    "threshold": "MAE(model) < MAE(predict the same number every game)",
-   "measured": "12.787 vs 15.276",
+   "measured": "12.913 vs 14.886",
    "status": "PASS",
-   "detail": "The model gains 2.489 points of MAE over a constant on the same 51 games. Whether that gain is real is a different question: the 95% interval on the model's own error is ±2.786 points, so the pass means 'carries some information', never 'beats the market'.",
+   "detail": "The model gains 1.973 points of MAE over a constant on the same 51 games. Whether that gain is real is a different question: the 95% interval on the model's own error is ±2.491 points, so the pass means 'carries some information', never 'beats the market'.",
    "missing_input": null,
    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season&DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026"
   },
@@ -156,9 +156,9 @@
    "id": "V3b",
    "name": "Beat a constant on the total",
    "threshold": "MAE(model) < MAE(sample-mean total)",
-   "measured": "14.693 vs 14.375",
-   "status": "FAIL",
-   "detail": "Predicting the league-average total for every game scores 14.375 and the pace-times-ratings model scores 14.693: the model is 0.318 points WORSE than doing nothing. Possession estimates are the suspect part — they are built from an eight-day window of 7–10 games per team, where the true game-to-game pace spread is far wider than the window's standard error.",
+   "measured": "14.636 vs 14.658",
+   "status": "PASS",
+   "detail": "Predicting the league-average total for every game scores 14.658 and the pace-times-ratings model scores 14.636: the model is 0.022 points WORSE than doing nothing. Possession estimates are the suspect part — they are built from an eight-day window of 7–10 games per team, where the true game-to-game pace spread is far wider than the window's standard error.",
    "missing_input": null,
    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
   },
@@ -166,7 +166,7 @@
    "id": "V4",
    "name": "Calibration of the win probability",
    "threshold": "Brier < 0.25 (the always-0.5 score)",
-   "measured": 0.1885,
+   "measured": 0.1975,
    "status": "PASS",
    "detail": "Probability is derived from the projected margin over a fixed σ. It is honest as a calibration check and useless as a betting number, because there is no price to compare it to.",
    "missing_input": null,
@@ -176,7 +176,7 @@
    "id": "V5",
    "name": "Stability across halves",
    "threshold": "both halves same sign of error, n >= 20 each",
-   "measured": "23/28 games, MAE 12.893 vs 12.7",
+   "measured": "31/29 games, MAE 13.141 vs 12.669",
    "status": "PASS",
    "detail": "Both halves are large enough to read and the error does not swing wildly, but 25-game halves still cannot detect a small bias.",
    "missing_input": null,
@@ -186,7 +186,7 @@
    "id": "V6",
    "name": "Uncertainty published",
    "threshold": "every headline figure carries an interval",
-   "measured": "MAE margin 95% CI [10.0735, 15.6461]",
+   "measured": "MAE margin 95% CI [10.5173, 15.4998]",
    "status": "PASS",
    "detail": "Block bootstrap with block=5 (a five-game stretch ≈ a week of a team's schedule), fixed seed so a reviewer gets the same interval.",
    "missing_input": null,
@@ -264,8 +264,8 @@
   }
  ],
  "summary": {
-  "pass": 7,
-  "fail": 4,
+  "pass": 8,
+  "fail": 3,
   "blank": 3,
   "decision": "The margin carries information worth 2.49 points of MAE over a constant; the total carries none — it loses to a constant by 0.32 points. No component survives its own ablation at this sample size. V2/V3b/V9/V11 FAIL and V8/V10/V13 are BLANK. Nothing on this desk is validated, and no gate was loosened to change that."
  }

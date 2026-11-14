@@ -80,7 +80,10 @@ def main():
             late[r[7]] = {"away": r[1], "away_pts": r[2], "home": r[3],
                           "home_pts": r[4], "ot": r[5]}
     blocked, settled_late = [], []
+    graded_ids = {r.get("game_id") for r in graded}
     for g in inprog["games"]:
+        if g.get("game_id") in graded_ids:
+            continue  # already graded in the backtest table above - list once only
         f = late.get(g.get("game_id"))
         if f is not None:
             settled_late.append({

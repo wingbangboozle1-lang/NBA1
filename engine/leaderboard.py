@@ -16,9 +16,9 @@ WEIGHTS = {"sample": 0.20, "edge": 0.25, "calibration": 0.15,
            "result": 0.25, "gates": 0.15}
 
 TIERS = [
-    (70.0, "Tier 1 - Funded", "Full unit. Passed every applicable gate on real, graded plays."),
-    (50.0, "Tier 2 - Half unit", "Passed the edge and calibration gates; sample still short of 30."),
-    (30.0, "Tier 3 - Quarter unit", "Directional evidence only; stake capped until the sample grows."),
+    (70.0, "Tier 1 - Funded", "Full unit. Passed every gate that can be run on real, graded plays."),
+    (50.0, "Tier 2 - Half unit", "No gate failed, but either the sample is still short of 30 plays or a gate could not be run."),
+    (30.0, "Tier 3 - Quarter unit", "Directional evidence only; stake capped. At least one applicable gate failed."),
     (0.0, "Not funded - research only", "No graded record yet, or a hard gate failure."),
 ]
 
@@ -61,21 +61,31 @@ def score(summary):
             tier_name, tier_note = name, note
             break
 
-    # Hard override: a strategy that has not cleared the sample gate cannot be
-    # promoted past Tier 3 no matter how good its small-sample record looks.
-    # A 12-4 run on a 28-game window is information about luck, not skill.
+    # Hard overrides. The tier label is a funding claim, and the brief requires
+    # every strategy to pass the validation gates before it is funded - so the
+    # score alone can never promote a strategy past its gate ceiling:
+    #   * any applicable gate FAILED  -> at most Tier 3 (stake capped),
+    #   * a gate could not be run     -> at most Tier 2 (half unit),
+    #   * sample gate not passed      -> at most Tier 2 (half unit),
+    #   * never graded                -> research only.
     gate_status = {g["id"]: g["status"] for g in summary["gates"]}
     cap_reason = None
-    if gate_status.get("G4") == "FAIL":
-        cap_reason = "G4 (skill, not luck) failed"
-    elif gate_status.get("G1") != "PASS":
-        cap_reason = "G1 (sample size) not passed"
+    failed = [g["id"] for g in applicable if g["status"] == "FAIL"]
+    not_run = [g["id"] for g in summary["gates"] if g["status"] == "NOT RUN"]
     if n == 0:
         floor, tier_name, tier_note = TIERS[3]
         tier_note = tier_note + " - never graded."
-    elif cap_reason:
+    elif failed:
         floor, tier_name, tier_note = TIERS[2]
-        tier_note = tier_note + f" - capped by {cap_reason}."
+        tier_note = tier_note + " - capped because gate " + ", ".join(failed) + " failed."
+    elif not_run or gate_status.get("G1") != "PASS":
+        floor, tier_name, tier_note = TIERS[1]
+        why = []
+        if gate_status.get("G1") != "PASS":
+            why.append("sample still short of 30 (G1)")
+        if not_run:
+            why.append("gate " + ", ".join(not_run) + " could not be run")
+        tier_note = tier_note + " - capped: " + "; ".join(why) + "."
 
     return {
         "id": summary["id"],

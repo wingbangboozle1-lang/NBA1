@@ -456,8 +456,8 @@ def p_validation():
 
   <div class="banner info">
     <div class="ico">i</div>
-    <div><p><strong>Information discipline.</strong> The test window is 2026-11-06 to 2026-11-12
-    (51 games — every completed game captured, and all of them after the ratings cut-off).
+    <div><p><strong>Information discipline.</strong> The test window is 2026-11-06 to 2026-11-13
+    (60 games — every completed game captured, and all of them after the ratings cut-off).
     Ratings come only from 2026-10-20 to 2026-11-05, so no test game contributes to
     the ratings that predict it. Two parameters — home court and the back-to-back penalty — are
     fitted <em>on the test window</em>; that is disclosed on every row they touch, and a
@@ -608,7 +608,7 @@ z            = luck ÷ √(games × pythag × (1 − pythag))</div>
 def p_backtest():
     return f"""
   <h1>Out-of-Sample Game Log</h1>
-  <p class="lede">All 51 games in the test window, with the actual official final score next to both
+  <p class="lede">All 60 games in the test window, with the actual official final score next to both
   the reference forecast and the model forecast.</p>
 
   <div class="banner info">
