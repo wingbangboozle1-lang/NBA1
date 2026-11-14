@@ -1,8 +1,8 @@
 {
- "captured_at_utc": "2026-11-14T01:50:38Z",
+ "captured_at_utc": "2026-11-14T01:55:55Z",
  "source_url": "https://www.nba.com/games?date=2026-11-06",
- "page_bytes": 559908,
- "page_sha256": "0e047d2335cf4c56f3d5b3098ba82fe2f2b5b4a6ef4d0f14423fee4d1c7d91da",
+ "page_bytes": 559998,
+ "page_sha256": "bd7faa894498b75fbbb20ef248a35b4054ba8adebf75ae06d3c6f7238abf7a0c",
  "page_indicators": {
   "__NEXT_DATA__": 1,
   "clean_gameId": 0,
@@ -10,92 +10,145 @@
   "FINAL_word": 9
  },
  "parse": {
-  "strategy": "score-card text",
-  "finals_rows": [],
-  "not_final": [],
-  "unparsed": [
+  "strategy": "embedded JSON",
+  "finals_rows": [
    {
     "game_id": "0022600025",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "WAS",
+    "home": "ATL",
+    "away_pts": 132,
+    "home_pts": 139,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "4-5 (1-1)",
+    "home_record_printed": "6-4 (1-0)",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    },
    {
     "game_id": "0022600026",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "BOS",
+    "home": "CHA",
+    "away_pts": 119,
+    "home_pts": 80,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "7-2 (2-0)",
+    "home_record_printed": "3-7 (0-2)",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    },
    {
     "game_id": "0022600027",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "PHI",
+    "home": "CLE",
+    "away_pts": 95,
+    "home_pts": 119,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "8-2 (1-1)",
+    "home_record_printed": "5-4 (1-0)",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    },
    {
     "game_id": "0022600028",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "UTA",
+    "home": "DAL",
+    "away_pts": 100,
+    "home_pts": 112,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "1-8 (0-1)",
+    "home_record_printed": "5-4 (2-0)",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    },
    {
     "game_id": "0022600029",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
-   },
-   {
-    "game_id": "0022600031",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "OKC",
+    "home": "MEM",
+    "away_pts": 128,
+    "home_pts": 97,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "7-2 (1-0)",
+    "home_record_printed": "6-3 (0-1)",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    },
    {
     "game_id": "0022600030",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "TOR",
+    "home": "MIL",
+    "away_pts": 121,
+    "home_pts": 107,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "5-4 (1-1)",
+    "home_record_printed": "1-8 (0-1)",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600031",
+    "away": "MIN",
+    "home": "NOP",
+    "away_pts": 115,
+    "home_pts": 109,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "7-3 (2-0)",
+    "home_record_printed": "4-5 (0-1)",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    },
    {
     "game_id": "0022600032",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "POR",
+    "home": "LAL",
+    "away_pts": 118,
+    "home_pts": 124,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "6-2 (0-1)",
+    "home_record_printed": "8-2 (1-1)",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    },
    {
     "game_id": "0022600033",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "SAS",
+    "home": "SAC",
+    "away_pts": 124,
+    "home_pts": 109,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "7-2 (1-0)",
+    "home_record_printed": "1-8 (0-1)",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    }
   ],
+  "not_final": [],
+  "unparsed": [],
   "link_occurrences": {
-   "0022600025": 8,
-   "0022600026": 8,
-   "0022600027": 8,
-   "0022600028": 8,
-   "0022600029": 8,
-   "0022600031": 8,
-   "0022600030": 8,
-   "0022600032": 8,
-   "0022600033": 8
+   "0022600025": 1,
+   "0022600026": 1,
+   "0022600027": 1,
+   "0022600028": 1,
+   "0022600029": 1,
+   "0022600030": 1,
+   "0022600031": 1,
+   "0022600032": 1,
+   "0022600033": 1
   }
  },
  "snapshot_comparison": {
   "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
   "mismatches": [],
   "promotion_candidates": [],
-  "committed_finals_missed": [
-   "0022600025",
-   "0022600026",
-   "0022600027",
-   "0022600028",
-   "0022600029",
-   "0022600030",
-   "0022600031",
-   "0022600032",
-   "0022600033"
-  ]
+  "committed_finals_missed": []
  },
- "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected.",
- "failure_evidence": [
-  {
-   "around": "0022600025",
-   "excerpt": "ePickerCalendar_dpCell__hDgTc\"><button data-track=\"click\" data-type=\"date\" data-id=\"nba:games:main:select-date:date\" data-text=\"2 Games\" data-content=\"2026-12-05\" data-section=\"calendar\" type=\"button\" class=\"DayButton_button__XpDyL DatePickerCalendar_dayBtn__z9fcG DatePickerCalendar_diffMonth__h_uio\" disabled=\"\" data-has-games=\"true\"><p class=\"DatePickerCalendar_date__kxaDx\">5</p><p class=\"DatePickerCalendar_count__gd40Y\">2</p><p class=\"DatePickerCalendar_gamesText__VMWqY\">GAMES</p></button></td></tr></tbody></table><div class=\"DatePickerCalendar_inner__cJ9k9\"></div></div></div></div></section><div class=\"GamesView_gameCardsContainer__OdzwI\"><div class=\"GameCard_gc__2CXKT GameCardsMapper_gamecard__VWHxm\" data-is-post=\"true\"><section class=\"GameCard_gcMain__H3JPd\"><a href=\"/game/was-vs-atl-0022600025\" data-track=\"click\" data-type=\"card\" data-id=\"nba:games:main:game:card\" data-content=\"WAS @ ATL, 2026-11-06\" class=\"GameCard_gcm__qKHKr GameCardMatchup_gameCardMatchup__cEO1O\"><p class=\"GameCardMatchup_gamePlayoffRoundText__FEiQY\"><span>Emirates NBA Cup</span><span class=\"GameCardPlayoffRoundText_seriesGameNumberWithDot__uaa__\">East Group C</span></p><div class=\"GameCardMatchup_wrapper__cX0Pf\"><article class=\"GameCardMatchup_article__PZbG8\"><figure class=\"MatchupCardTeamLogo_base__nIvay GameCardMatchup_matchupCardTeamLogo__lTPMa\"><div class=\"TeamLogo_block__gA6vI\"><img src=\"https://cdn.nba.com/logos/nba/1610612764/primary/L/logo.svg\" title=\" Logo\" alt=\" Logo\" class=\"TeamLogo_logo__8OGEP\" loading=\"lazy\"/></div></figure><div class=\"MatchupCardTeamName_base__y5qi_\" data-team-id=\"1610612764\"><span class=\"MatchupCardTeamName_teamName__0cu0j\">Wizards</span></div><p class=\"MatchupCardTeamRecord_record__X8sj8\">-</p></article><div class=\"GameCardMatchup_statusWrapper__T4NkW\"><div class=\"GameCardMatchup_matchupScoreCardWrapper__JH_GG\"></div><div class=\"GameCardMatchup_gameCardMatchupStatusWrapper__1MrnK\"><div><div class=\"GameCardMatchupStatusText_gcs__N9wVb\" data-is-preseason=\"false\" data-game-status=\"3\"><p data-testid=\"game-status\" data-is-live=\"false\" class=\"GameCardMatchupStatusText_gcsText__L1K1e\">FINAL</p></div></div><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"7\" height=\"12\" viewBox=\"0 0 7 12\" class=\"GameCardMatchup_awayWin___7FSg\" data-no-icon=\"left\" role=\"presentation\"><path fill=\"currentColor\" d=\"m.5 6 6 5.5V.5z\"></path></svg><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"7\" height=\"12\" viewBox=\"0 0 7 12\" class=\"GameCardMatchup_homeWin__Y9GkS\" data-no-icon=\"right\" role=\"presentation\"><path fill=\"currentColor\" d=\"m.5 6 6 5.5V.5z\"></path></svg></div><div class=\"GameCardMatchup_matchScorecardAlignRight__yrSF2\"></div></div><article class=\"GameCardMatchup_article__PZbG8\"><figure class=\"MatchupCardTeamLogo_base__nIvay GameCardMatchup_matchupCardTeamLogo__lTPMa\"><div class=\"TeamLogo_block__gA6vI\"><img src=\"https://cdn.nba.com/logos/nba/1610612737/primary/L/logo.svg\" title=\" Logo\" alt=\" Logo\" class=\"TeamLogo_logo__8OGEP\" loading=\"lazy\"/></div></figure><div class=\"MatchupCardTeamName_base__y5qi_\" data-team-id=\"1610612737\"><span class=\"MatchupCardTeamName_teamName__0cu0j\">Hawks</span></div><p class=\"MatchupCardTeamRecord_record__X8sj8\">-</p></article></div></a><ul class=\"Tabs_tab__nSWFu\" data-show-border=\"true\" data-has-rounded-ctas=\"true\"><li class=\"TabLink_tab__b31E3\"><a href=\"/game/was-vs-atl-0022600025?watchFullGame\" class=\"Anchor_anchor__wnmj2 TabLink_link___23UW\" data-is-external=\"false\" data-has-more=\"false\" data-has-children=\"true\" data-track=\"video\" data-id=\"nba:games:watch:cta\" data-content=\"0022600025\" data-text=\"WAS @ ATL, 2026-11-06\" data-section=\"games\" data-premium=\"true\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"16\" fill=\"none\" viewBox=\"0 0 17 16\" class=\"RoundedChevronIcon_chevron__EMetX\" data-no-icon=\"true\" role=\"presentation\"><path fill=\"currentColor\" d=\"M13.334 7.134a1 1 0 0 1 0 1.732l-7 4.042a1 1 0 0 1-1.5-.867V3.96a1 1 0 0 1 1.5-.866z\"></path></svg>Watch</a></li><li class=\"TabLink_tab__b31E3\"><a href=\"/"
-  },
-  {
-   "around": "First 'Final' in raw HTML",
-   "excerpt": "- Nov. 6, 2026\",\"status\":\"publish\",\"slug\":\"g-league-westchester-maine\",\"permalink\":\"https://www.nba.com/watch/event/g-league-westchester-maine\",\"excerpt\":\"G League: Westchester @ Maine\",\"timestamp\":1793721177000,\"date\":\"2026-11-03T15:52:57Z\",\"modified\":\"2026-11-06T20:58:40Z\",\"featuredImage\":\"https://cdn.nba.com/manage/2026/11/NBAGL_Logo_1920x1080.jpg\",\"category\":\"\",\"shortTitle\":\"Westchester Knicks @ Maine Celtics\",\"collectionSlug\":\"\",\"datetimeUtc\":1794009600,\"productionStatus\":[{\"id\":\"e0022690190e1000784\",\"status\":\"Over\"}],\"endeavorExternalId\":\"\",\"endeavorSeoName\":\"\",\"entitlements\":\"free\",\"isAllDay\":false,\"isLive\":false,\"eventId\":\"0022690190\",\"showGamesPageWeb\":false,\"branchUrl\":\"https://nba.smart.link/7vazukjxt?eventid=2417295\",\"adfuelTargetEvent\":\"\",\"adsKvpTargetEvent\":\"\",\"eventStatus\":\"Final\",\"featuredProduction\":\"\",\"gmsKvpData\":[]},{\"id\":2415539,\"type\":\"event\",\"name\":\"g-league-capital-city-delaware\",\"title\":\"G League: Capital City Go-Go @ Delaware Blue Coats - Nov. 6, 2026\",\"status\":\"publish\",\"slug\":\"g-league-capital-city-delaware\",\"permalink\":\"https://www.nba.com/watch/event/g-league-capital-city-delaware\",\"excerpt\":\"G League: Capital City @ Delaware\",\"timestamp\":1793717447000,\"date\":\"2026-11-03T14:50:47Z\",\"modified\":\"2026-11-06T00:56:21Z\",\"featuredImage\":\"https://cdn.nba.com/manage/2026/11/NBAGL_Logo_1920x1080-1.jpg\",\"category\":\"\",\"shortTitle\":\"Capital City Go-Go @ Delaware Blue Coats\",\"collectionSlug\":\"\",\"datetimeUtc\":1794009600,\"productionStatus\":[{\"id\":\"e0022690092e1000784\",\"status\":\"Over\"}],\"endeavorExternalId\":\"\",\"endeavorSeoName\":\"\",\"entitlements\":\"free\",\"isAllDay\":false,\"isLive\":false,\"eventId\":\"0022690092\",\"showGamesPageWeb\":false,\"branchUrl\":\"https://nba.smart.link/7vazukjxt?eventid=2415539\",\"adfuelTargetEvent\":\"\",\"adsKvpTargetEvent\":\"\",\"eventStatus\":\"Scheduled\",\"featuredProduction\":\"\",\"gmsKvpData\":[]},{\"id\":2415540,\"type\":\"event\",\"name\":\"g-league-long-island-greensboro\",\"title\":\"G League: Long Island Nets @ Greensboro Swarm - Nov. 6, 2026\",\"status\":\"publish\",\"slug\":\"g-league-long-island-greensboro\",\"permalink\":\"https://www.nba.com/watch/event/g-league-long-island-greensboro\",\"excerpt\":\"G League Long Island @ Greensboro\",\"timestamp\":1793716433000,\"date\":\"2026-11-03T14:33:53Z\",\"modified\":\"2026-11-06T01:06:42Z\",\"featuredImage\":\"https://cdn.nba.com/manage/2026/11/NBAGL_Logo_1920x1080-1.jpg\",\"category\":\"\",\"shortTitle\":\"Long Island Nets @ Greensboro Swarm\",\"collectionSlug\":\"\",\"datetimeUtc\":1794009600,\"productionStatus\":[{\"id\":\"e0022690093e1000784\",\"status\":\"Over\"}],\"endeavorExternalId\":\"\",\"endeavorSeoName\":\"\",\"entitlements\":\"free\",\"isAllDay\":false,\"isLive\":false,\"eventId\":\"0022690093\",\"showGamesPageWeb\":false,\"branchUrl\":\"https://nba.smart.link/7vazukjxt?eventid=2415540\",\"adfuelTargetEvent\":\"\",\"adsKvpTargetEvent\":\"\",\"eventStatus\":\"Scheduled\",\"featuredProduction\":\"\",\"gmsKvpData\":[]},{\"id\":2415553,\"type\":\"event\",\"name\":\"g-league-noblesville-windy-city\",\"title\":\"G League: Noblesville Boom @ Windy City Bulls - Nov. 6, 2026\",\"status\":\"publish\",\"slug\":\"g-league-noblesville-windy-city\",\"permalink\":\"https://www.nba.com/watch/event/g-league-noblesville-windy-city\",\"excerpt\":\"G League: Noblesville @ Windy City\",\"timestamp\":1793717944000,\"date\":\"2026-11-03T14:59:04Z\",\"modified\":\"2026-11-06T00:56:33Z\",\"featuredImage\":\"https://cdn.nba.com/manage/2026/11/NBAGL_Logo_1920x1080-1.jpg\",\"category\":\"\",\"shortTitle\":\"Noblesville Boom @ Windy City Bulls\",\"collectionSlug\":\"\",\"datetimeUtc\":1794013200,\"productionStatus\":[{\"id\":\"e0022690096e1000784\",\"status\":\"Over\"}],\"endeavorExternalId\":\"\",\"endeavorSeoName\":\"\",\"entitlements\":\"free\",\"isAllDay\":false,\"isLive\":false,\"eventId\":\"0022690096\",\"showGamesPageWeb\":false,\"branchUrl\":\"https://nba.smart.link/7vazukjxt?eventid=2415553\",\"adfuelTargetEvent\":\"\",\"adsKvpTargetEvent\":\"\",\"eventStatus\":\"Scheduled\",\"featuredProduction\":\"\",\"gmsKvpData\":[]},{\"id\":2415550,\"type\":\"event\",\"name\":\"g-league-mexico-city-oklahoma-city\",\"title\":\"G League: Mexico City Capitanes @ Oklahoma City Blue - Nov. 6, 2026\",\"status\":\"p"
-  },
-  {
-   "around": "gameStatusText",
-   "excerpt": "s://www.nba.com/watch/video/game-recap-hawks-139-wizards-132-nov-6\",\"videoDuration\":\"2:13\",\"adMetaData\":{\"cType\":\"nbaVod\",\"caid\":\"nba-manage-prod-1-2422648\",\"showPreviewAds\":false,\"adfuelTarget\":\"\"},\"taxonomy\":{\"categories\":{\"emirates-nba-cup-2026\":\"Emirates NBA Cup 2026\",\"game-recap\":\"Game Recap\"},\"tags\":{\"2026-emirates-nba-cup\":\"2026 Emirates NBA Cup\",\"atlanta-hawks\":\"Atlanta Hawks\",\"game-recap\":\"game recap\",\"highlights\":\"highlights\",\"kyshawn-george\":\"Kyshawn George\",\"luguentz-dort\":\"Luguentz Dort\",\"nickeil-alexander-walker\":\"Nickeil Alexander-Walker\",\"recap\":\"recap\",\"trae-young\":\"Trae Young\",\"washington-wizards\":\"Washington Wizards\"},\"games\":{\"0022600025\":\"WAS @ ATL (0022600025)\"},\"teams\":{\"1610612737\":\"Atlanta Hawks\",\"1610612764\":\"Washington Wizards\"},\"players\":{},\"videoFranchises\":{\"game-recap\":\"Game Recap\"},\"videoFranchisesName\":{\"2-min-game-recap\":\"2 Minute Game Recap\"},\"videoCategories\":{\"recaps\":\"Recaps\"},\"videoTypes\":{\"highlights\":\"Highlights\"},\"videoNumPlays\":0,\"videoPlayTypes\":{},\"videoFrequency\":{\"game\":\"Game\"},\"videoPublisher\":{\"nbae\":\"NBAE\"}},\"image\":{\"imageUrl\":\"https://cdn.nba.com/manage/2026/11/WAS_ATL_RECAP_110626.jpg\"}},\"headlineNoSpoilers\":\"Wizards @ Hawks\"},\"gameId\":\"0022600025\",\"leagueId\":\"00\",\"seasonYear\":\"2026-27\",\"seasonType\":\"Regular Season\",\"dailyGameRank\":null,\"period\":4,\"homeTeam\":{\"teamId\":1610612737,\"teamName\":\"Hawks\",\"wins\":6,\"losses\":4,\"teamSubtitle\":\"6-4 (1-0)\",\"score\":139,\"timeoutsRemaining\":1,\"inBonus\":false,\"teamTricode\":\"ATL\",\"teamSlug\":\"hawks\",\"specialInfoPrefix\":null,\"marqueePlayer\":\"1630552\",\"periods\":[{\"period\":1,\"score\":28},{\"period\":2,\"score\":38},{\"period\":3,\"score\":39},{\"period\":4,\"score\":34}],\"teamLeader\":{\"personId\":1629652,\"name\":\"Luguentz Dort\",\"jerseyNum\":\"0\",\"position\":\"PF\",\"teamTricode\":\"ATL\",\"playerSlug\":\"luguentz-dort\",\"points\":\"25\",\"rebounds\":\"7\",\"assists\":\"4\",\"blocks\":\"0\",\"steals\":\"2\"}},\"awayTeam\":{\"teamId\":1610612764,\"teamName\":\"Wizards\",\"wins\":4,\"losses\":5,\"teamSubtitle\":\"4-5 (1-1)\",\"score\":132,\"timeoutsRemaining\":0,\"inBonus\":false,\"teamTricode\":\"WAS\",\"teamSlug\":\"wizards\",\"specialInfoPrefix\":null,\"marqueePlayer\":\"1642259\",\"periods\":[{\"period\":1,\"score\":32},{\"period\":2,\"score\":27},{\"period\":3,\"score\":35},{\"period\":4,\"score\":38}],\"teamLeader\":{\"personId\":1642273,\"name\":\"Kyshawn George\",\"jerseyNum\":\"18\",\"position\":\"SF\",\"teamTricode\":\"WAS\",\"playerSlug\":\"kyshawn-george\",\"points\":\"33\",\"rebounds\":\"4\",\"assists\":\"8\",\"blocks\":\"2\",\"steals\":\"1\"}},\"seasonLeadersFlag\":0,\"gameClock\":\"PT00M00.00S\",\"gameStatus\":3,\"gameStatusText\":\"Final\",\"gameBreakStatus\":\"Final\",\"gameState\":3,\"duration\":0,\"gameTimeEastern\":\"2026-11-06T19:00:00Z\",\"gameTimeUtc\":\"2026-11-07T00:00:00Z\",\"info\":\"East Group C\",\"subInfo\":\"\",\"gameDetailsHeader\":{\"spoilerHeader\":\"East Group C\",\"nonSpoilerHeader\":\"East Group C\"},\"actions\":[{\"title\":\"Watch\",\"resourceLocator\":{\"resourceUrl\":\"/game/was-vs-atl-0022600025?watch\",\"resourceId\":\"0022600025\",\"resourceType\":\"game\"}},{\"title\":\"Box Score\",\"resourceLocator\":{\"resourceUrl\":\"/game/was-vs-atl-0022600025/box-score\",\"resourceId\":\"0022600025\",\"resourceType\":\"game\"}},{\"title\":\"Game Details\",\"resourceLocator\":{\"resourceUrl\":\"/game/was-vs-atl-0022600025\",\"resourceId\":\"0022600025\",\"resourceType\":\"game\"}}],\"images\":{\"1920x1080\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/was-atl/1920x1080.png\",\"1280x720\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/was-atl/1280x720.png\",\"640x360\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/was-atl/640x360.png\",\"480x270\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/was-atl/480x270.png\",\"320x180\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/was-atl/320x180.png\",\"160x90\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/was-atl/160x90.png\"},\"ifNecessary\":false,\"cardId\":\"\",\"contentAccess\":{\"isMemberGated\":false,\"isVivoContent\":false,\"cmsEntitlement\":null,\"isNikeGated\":false},\"shareUrl\":\"https://www.nba.com/game/was-vs-atl-0022600025\",\"ticketUrl\":null,\"isTntOT\":false,\"cardHat\":\"Emirates NBA Cup\",\"broadcasters\":{\"nationalBroadcasters\":[],\"homeTvBroadcasters\":[],\"homeRadioBroadcasters\":[{\"broadcasterId\":1491,\"broadcasterScope\":null,\"broadcasterDisplayName\":\"WZGC\",\"broadcasterLogoUrl\":null,\"broadcasterVideoLink\":\"\",\"broadcasterDescription\":\"\",\"broadcasterTeamId\":1610612737,\"broadcasterRanking\":null,\"broadcasterLocalizationRegion\":\"\"}],\"awayTvBroadcasters\":[],\"awayRadioBroadcasters\":[{\"broadcasterId\":1001849,\"broadcasterScope\":null,\"broadcasterDisplayName\":\"106.7 The Fan/The Team 980 AM/Bloomberg 99.1\",\"broadcasterLogoUrl\":null,\"broadcasterVideoLink\":\"\",\"broadcasterDescription\":\"\",\"broadcasterTeamId\":1610612764,\"broadcasterRanking\":null,\"broadcasterLocalizationRegion\":\"\"}],\"intlRadioBroadcasters\":[],\"intlTvBroadcasters\":[],\"homeOttBroadcasters\":[],\"awayOttBroadcasters\":[],\"intlOttBroadcasters\":[],\"nationalOttBroadcasters\":[],\"nationalRadioBroadcasters\":[],\"subscriptionBroadcasters\":[{\"broadcasterId\":0,\"broadcasterScope\":null,\""
-  },
-  {
-   "around": "<script id=",
-   "excerpt": "<!DOCTYPE html><html lang=\"en\" data-version=\"5.6.5\" data-client=\"NBA\" data-theme=\"light\"><head><meta charSet=\"utf-8\"/><script id=\"user-consent\" defer=\"\" src=\"https://cdn.nba.com/user-consent/index-gam.min.js\"></script><link rel=\"manifest\" href=\"/site-manifest.json\"/><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no\"/><script id=\"theme-loader\" src=\"/theme-loader.js\"></script><title>NBA Games - All NBA matchups | NBA.com</title><meta name=\"description\" content=\"Watch NBA Games - Follow the game, scores and stats for NBA matchups.\"/><link rel=\"icon\" href=\"/favicon.ico\"/><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon-32x32.png\"/><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon-16x16.png\"/><link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\"/><link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png\"/><link rel=\"apple-touch-icon\" sizes=\"120x120\" href=\"/apple-touch-icon.png\"/><link href=\"/apple-touch-icon.png\"/><meta name=\"msapplication-TileColor\" content=\"#da532c\"/><meta property=\"og:site_name\" content=\"NBA.com\"/><meta name=\"twitter:site\" content=\"@NBA\"/><link rel=\"mask-icon\" href=\"/safari-pinned-tab.svg\" color=\"#051c2d\"/><link rel=\"canonical\" href=\"https://www.nba.com/games\"/><meta property=\"og:image\" content=\"https://cdn.nba.com/logos/nba/fallback/NBA.Com-National-Basketball-Association.png\"/><meta property=\"twitter:image\" content=\"https://cdn.nba.com/logos/nba/fallback/NBA.Com-National-Basketball-Association.png\"/><script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://www.nba.com\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"NBA Games\",\"item\":\"https://www.nba.com/games\"}]}</script><meta name=\"next-head-count\" content=\"22\"/><meta name=\"theme-color\" content=\"#000000\"/><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin /><link rel=\"preload\" href=\"/_next/static/css/421ad19a36793d1d.css\" as=\"style\"/><link rel=\"stylesheet\" href=\"/_next/static/css/421ad19a36793d1d.css\" data-n-g=\"\"/><link rel=\"preload\" href=\"/_next/static/css/7e7db5cbfe4f54c8.css\" as=\"style\"/><link rel=\"stylesheet\" href=\"/_next/static/css/7e7db5cbfe4f54c8.css\" data-n-p=\"\"/><link rel=\"preload\" href=\"/_next/static/css/4081b71015e19f33.css\" as=\"style\"/><link rel=\"stylesheet\" href=\"/_next/static/css/4081b71015e19f33.css\" data-n-p=\"\"/><link rel=\"preload\" href=\"/_next/static/css/3df777da467aa5ab.css\" as=\"style\"/><link rel=\"stylesheet\" href=\"/_next/static/css/3df777da467aa5ab.css\" data-n-p=\"\"/><noscript data-n-css=\"\"></noscript><script defer=\"\" nomodule=\"\" src=\"/_next/static/chunks/polyfills-42372ed130431b0a.js\"></script><script src=\"/_next/static/chunks/webpack-0531fdfe285dfe91.js\" defer=\"\"></script><script src=\"/_next/static/chunks/framework-ad7abf312d5d61d4.js\" defer=\"\"></script><script src=\"/_next/static/chunks/main-196c53f13b153e43.js\" defer=\"\"></script><script src=\"/_next/static/chunks/pages/_app-60c5a1a654889eaa.js\" defer=\"\"></script><script src=\"/_next/static/chunks/94a0e8c7-68ed20b657542157.js\" defer=\"\"></script><script src=\"/_next/static/chunks/73379-7fd339df2cabc588.js\" defer=\"\"></script><script src=\"/_next/static/chunks/2425-ae77b5ec6c5d9fcb.js\" defer=\"\"></script><script src=\"/_next/static/chunks/92590-4117aaa2b753056c.js\" defer=\"\"></script><script src=\"/_next/static/chunks/18376-1ea766a09181258a.js\" defer=\"\"></script><script src=\"/_next/static/chunks/22403-d57624ffbb5be632.js\" defer=\"\"></script><script src=\"/_next/static/chunks/50153-1db38881640cfb85.js\" defer=\"\"></script><script src=\"/_next/static/chunks/16019-d6d9381a6ec8a985.js\" defer=\"\"></script><script src=\"/_next/static/chunks/33858-2a2a450bf7de92fd.js\" defer=\"\"></script><script src=\"/_next/static/chunks/20893-ee7f4da6f01d3288.js\" defer=\"\"></script><script src=\"/_next/static/chunks/45389-ddcc5ec950b6ed21.js\" defer=\"\"></script><script src=\"/_next/static/chunks/pages/games-6a08f34ae07f7d28.js\" defer=\"\"></script><script src=\"/_next/static/p-O0M8vhp3pvOSjD0LhgI/_buildManifest.js\" defer=\"\"></script><script src=\"/_next/static/p-O0M8vhp3pvOSjD0LhgI/_ssgManifest.js\" defer=\"\"></script><style data-href=\"https://fonts.googleapis.com/css?family=Roboto:300,400,700,900|Roboto+Condensed:400,700|Roboto+Slab:400,700&display=swap\">@font-face{font-family:'Roboto';font-style:normal;font-weight:300;font-stretch:normal;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v51/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWuaabVmUiAw.woff) format('woff')}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:normal;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v51/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWubEbVmUiAw.woff) format('woff')}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:normal;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v51/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC8"
-  }
- ]
+ "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected."
 }

@@ -1,8 +1,8 @@
 {
- "captured_at_utc": "2026-11-14T01:50:38Z",
+ "captured_at_utc": "2026-11-14T01:55:55Z",
  "source_url": "https://www.nba.com/games?date=2026-11-13",
- "page_bytes": 490038,
- "page_sha256": "7a2e3c4b99cdd1a69457b1be6543a297eaedb10c267ab65b4cadfe2b77eb6206",
+ "page_bytes": 490163,
+ "page_sha256": "7b673f88feda41f87fd8e282bde256199c3c614bfd92ee1b1704799775046292",
  "page_indicators": {
   "__NEXT_DATA__": 1,
   "clean_gameId": 0,
@@ -10,7 +10,7 @@
   "FINAL_word": 0
  },
  "parse": {
-  "strategy": "score-card text",
+  "strategy": "embedded JSON",
   "finals_rows": [],
   "not_final": [
    "0022600034",
@@ -25,15 +25,15 @@
   ],
   "unparsed": [],
   "link_occurrences": {
-   "0022600034": 7,
-   "0022600035": 7,
-   "0022600036": 7,
-   "0022600037": 7,
-   "0022600038": 7,
-   "0022600039": 7,
-   "0022600040": 6,
-   "0022600041": 5,
-   "0022600042": 5
+   "0022600034": 1,
+   "0022600035": 1,
+   "0022600036": 1,
+   "0022600037": 1,
+   "0022600038": 1,
+   "0022600039": 1,
+   "0022600040": 1,
+   "0022600041": 1,
+   "0022600042": 1
   }
  },
  "snapshot_comparison": {

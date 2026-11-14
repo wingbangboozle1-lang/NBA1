@@ -1,8 +1,8 @@
 {
- "captured_at_utc": "2026-11-14T01:50:38Z",
+ "captured_at_utc": "2026-11-14T01:55:55Z",
  "source_url": "https://www.nba.com/games?date=2026-11-07",
- "page_bytes": 500555,
- "page_sha256": "6d9dcda84ed705e9d9e96324124110c22313d1e2cb25d4e0d5f8e79ce3e028fc",
+ "page_bytes": 500645,
+ "page_sha256": "6e7fb3b112ad87e9881833cf2136d478bacd485c221d9d194709edf8326e7f93",
  "page_indicators": {
   "__NEXT_DATA__": 1,
   "clean_gameId": 0,
@@ -10,80 +10,117 @@
   "FINAL_word": 7
  },
  "parse": {
-  "strategy": "score-card text",
-  "finals_rows": [],
-  "not_final": [],
-  "unparsed": [
+  "strategy": "embedded JSON",
+  "finals_rows": [
    {
     "game_id": "0022600189",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "DEN",
+    "home": "IND",
+    "away_pts": 114,
+    "home_pts": 102,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "5-3",
+    "home_record_printed": "3-7",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    },
    {
     "game_id": "0022600190",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "BKN",
+    "home": "ATL",
+    "away_pts": 121,
+    "home_pts": 124,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "2-7",
+    "home_record_printed": "7-4",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    },
    {
     "game_id": "0022600191",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "NYK",
+    "home": "CLE",
+    "away_pts": 109,
+    "home_pts": 97,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "5-4",
+    "home_record_printed": "5-5",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    },
    {
     "game_id": "0022600192",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "WAS",
+    "home": "OKC",
+    "away_pts": 75,
+    "home_pts": 114,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "4-6",
+    "home_record_printed": "8-2",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    },
    {
     "game_id": "0022600193",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "ORL",
+    "home": "GSW",
+    "away_pts": 119,
+    "home_pts": 126,
+    "status": "Final/OT",
+    "ot": 1,
+    "away_record_printed": "2-7",
+    "home_record_printed": "7-3",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    },
    {
     "game_id": "0022600194",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "HOU",
+    "home": "PHX",
+    "away_pts": 99,
+    "home_pts": 102,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "7-3",
+    "home_record_printed": "3-5",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    },
    {
     "game_id": "0022600195",
-    "reason": "final status present but a score could not be read (before=[], after=[])"
+    "away": "SAS",
+    "home": "POR",
+    "away_pts": 125,
+    "home_pts": 103,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "8-2",
+    "home_record_printed": "6-3",
+    "snapshot_match": true,
+    "source": "embedded JSON"
    }
   ],
+  "not_final": [],
+  "unparsed": [],
   "link_occurrences": {
-   "0022600189": 8,
-   "0022600190": 8,
-   "0022600191": 8,
-   "0022600192": 8,
-   "0022600193": 8,
-   "0022600194": 8,
-   "0022600195": 8
+   "0022600189": 1,
+   "0022600190": 1,
+   "0022600191": 1,
+   "0022600192": 1,
+   "0022600193": 1,
+   "0022600194": 1,
+   "0022600195": 1
   }
  },
  "snapshot_comparison": {
   "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
   "mismatches": [],
   "promotion_candidates": [],
-  "committed_finals_missed": [
-   "0022600189",
-   "0022600190",
-   "0022600191",
-   "0022600192",
-   "0022600193",
-   "0022600194",
-   "0022600195"
-  ]
+  "committed_finals_missed": []
  },
- "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected.",
- "failure_evidence": [
-  {
-   "around": "0022600189",
-   "excerpt": "ePickerCalendar_dpCell__hDgTc\"><button data-track=\"click\" data-type=\"date\" data-id=\"nba:games:main:select-date:date\" data-text=\"2 Games\" data-content=\"2026-12-05\" data-section=\"calendar\" type=\"button\" class=\"DayButton_button__XpDyL DatePickerCalendar_dayBtn__z9fcG DatePickerCalendar_diffMonth__h_uio\" disabled=\"\" data-has-games=\"true\"><p class=\"DatePickerCalendar_date__kxaDx\">5</p><p class=\"DatePickerCalendar_count__gd40Y\">2</p><p class=\"DatePickerCalendar_gamesText__VMWqY\">GAMES</p></button></td></tr></tbody></table><div class=\"DatePickerCalendar_inner__cJ9k9\"></div></div></div></div></section><div class=\"GamesView_gameCardsContainer__OdzwI\"><div class=\"GameCard_gc__2CXKT GameCardsMapper_gamecard__VWHxm\" data-is-post=\"true\"><section class=\"GameCard_gcMain__H3JPd\"><a href=\"/game/den-vs-ind-0022600189\" data-track=\"click\" data-type=\"card\" data-id=\"nba:games:main:game:card\" data-content=\"DEN @ IND, 2026-11-07\" class=\"GameCard_gcm__qKHKr GameCardMatchup_gameCardMatchup__cEO1O\"><p class=\"GameCardMatchup_gamePlayoffRoundText__FEiQY\"><span>NBA Mexico City Game</span></p><div class=\"GameCardMatchup_wrapper__cX0Pf\"><article class=\"GameCardMatchup_article__PZbG8\"><figure class=\"MatchupCardTeamLogo_base__nIvay GameCardMatchup_matchupCardTeamLogo__lTPMa\"><div class=\"TeamLogo_block__gA6vI\"><img src=\"https://cdn.nba.com/logos/nba/1610612743/primary/L/logo.svg\" title=\" Logo\" alt=\" Logo\" class=\"TeamLogo_logo__8OGEP\" loading=\"lazy\"/></div></figure><div class=\"MatchupCardTeamName_base__y5qi_\" data-team-id=\"1610612743\"><span class=\"MatchupCardTeamName_teamName__0cu0j\">Nuggets</span></div><p class=\"MatchupCardTeamRecord_record__X8sj8\">-</p></article><div class=\"GameCardMatchup_statusWrapper__T4NkW\"><div class=\"GameCardMatchup_matchupScoreCardWrapper__JH_GG\"></div><div class=\"GameCardMatchup_gameCardMatchupStatusWrapper__1MrnK\"><div><div class=\"GameCardMatchupStatusText_gcs__N9wVb\" data-is-preseason=\"false\" data-game-status=\"3\"><p data-testid=\"game-status\" data-is-live=\"false\" class=\"GameCardMatchupStatusText_gcsText__L1K1e\">FINAL</p></div></div><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"7\" height=\"12\" viewBox=\"0 0 7 12\" class=\"GameCardMatchup_awayWin___7FSg\" data-no-icon=\"left\" role=\"presentation\"><path fill=\"currentColor\" d=\"m.5 6 6 5.5V.5z\"></path></svg><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"7\" height=\"12\" viewBox=\"0 0 7 12\" class=\"GameCardMatchup_homeWin__Y9GkS\" data-no-icon=\"right\" role=\"presentation\"><path fill=\"currentColor\" d=\"m.5 6 6 5.5V.5z\"></path></svg></div><div class=\"GameCardMatchup_matchScorecardAlignRight__yrSF2\"></div></div><article class=\"GameCardMatchup_article__PZbG8\"><figure class=\"MatchupCardTeamLogo_base__nIvay GameCardMatchup_matchupCardTeamLogo__lTPMa\"><div class=\"TeamLogo_block__gA6vI\"><img src=\"https://cdn.nba.com/logos/nba/1610612754/primary/L/logo.svg\" title=\" Logo\" alt=\" Logo\" class=\"TeamLogo_logo__8OGEP\" loading=\"lazy\"/></div></figure><div class=\"MatchupCardTeamName_base__y5qi_\" data-team-id=\"1610612754\"><span class=\"MatchupCardTeamName_teamName__0cu0j\">Pacers</span></div><p class=\"MatchupCardTeamRecord_record__X8sj8\">-</p></article></div></a><ul class=\"Tabs_tab__nSWFu\" data-show-border=\"true\" data-has-rounded-ctas=\"true\"><li class=\"TabLink_tab__b31E3\"><a href=\"/game/den-vs-ind-0022600189?watchFullGame\" class=\"Anchor_anchor__wnmj2 TabLink_link___23UW\" data-is-external=\"false\" data-has-more=\"false\" data-has-children=\"true\" data-track=\"video\" data-id=\"nba:games:watch:cta\" data-content=\"0022600189\" data-text=\"DEN @ IND, 2026-11-07\" data-section=\"games\" data-premium=\"true\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"16\" fill=\"none\" viewBox=\"0 0 17 16\" class=\"RoundedChevronIcon_chevron__EMetX\" data-no-icon=\"true\" role=\"presentation\"><path fill=\"currentColor\" d=\"M13.334 7.134a1 1 0 0 1 0 1.732l-7 4.042a1 1 0 0 1-1.5-.867V3.96a1 1 0 0 1 1.5-.866z\"></path></svg>Watch</a></li><li class=\"TabLink_tab__b31E3\"><a href=\"/game/den-vs-ind-0022600189/box-score#box-score\" class=\"Anchor_anchor__wnmj2 TabLink_"
-  },
-  {
-   "around": "First 'Final' in raw HTML",
-   "excerpt": ":\"Pascal Siakam\",\"jerseyNum\":\"43\",\"position\":\"PF\",\"teamTricode\":\"IND\",\"playerSlug\":\"pascal-siakam\",\"points\":\"23\",\"rebounds\":\"2\",\"assists\":\"5\",\"blocks\":\"0\",\"steals\":\"0\"}},\"awayTeam\":{\"teamId\":1610612743,\"teamName\":\"Nuggets\",\"wins\":5,\"losses\":3,\"teamSubtitle\":\"5-3\",\"score\":114,\"timeoutsRemaining\":1,\"inBonus\":false,\"teamTricode\":\"DEN\",\"teamSlug\":\"nuggets\",\"specialInfoPrefix\":null,\"marqueePlayer\":\"203999\",\"periods\":[{\"period\":1,\"score\":27},{\"period\":2,\"score\":37},{\"period\":3,\"score\":26},{\"period\":4,\"score\":24}],\"teamLeader\":{\"personId\":203999,\"name\":\"Nikola Joki\u0107\",\"jerseyNum\":\"15\",\"position\":\"C\",\"teamTricode\":\"DEN\",\"playerSlug\":\"nikola-joki\u0107\",\"points\":\"19\",\"rebounds\":\"13\",\"assists\":\"8\",\"blocks\":\"1\",\"steals\":\"1\"}},\"seasonLeadersFlag\":0,\"gameClock\":\"PT00M00.00S\",\"gameStatus\":3,\"gameStatusText\":\"Final\",\"gameBreakStatus\":\"Final\",\"gameState\":3,\"duration\":0,\"gameTimeEastern\":\"2026-11-07T17:00:00Z\",\"gameTimeUtc\":\"2026-11-07T22:00:00Z\",\"info\":\"\",\"subInfo\":\"Neutral Site\",\"gameDetailsHeader\":{\"spoilerHeader\":\"\",\"nonSpoilerHeader\":\"\"},\"actions\":[{\"title\":\"Watch\",\"resourceLocator\":{\"resourceUrl\":\"/game/den-vs-ind-0022600189?watch\",\"resourceId\":\"0022600189\",\"resourceType\":\"game\"}},{\"title\":\"Box Score\",\"resourceLocator\":{\"resourceUrl\":\"/game/den-vs-ind-0022600189/box-score\",\"resourceId\":\"0022600189\",\"resourceType\":\"game\"}},{\"title\":\"Game Details\",\"resourceLocator\":{\"resourceUrl\":\"/game/den-vs-ind-0022600189\",\"resourceId\":\"0022600189\",\"resourceType\":\"game\"}}],\"images\":{\"1920x1080\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/1920x1080.png\",\"1280x720\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/1280x720.png\",\"640x360\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/640x360.png\",\"480x270\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/480x270.png\",\"320x180\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/320x180.png\",\"160x90\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/160x90.png\"},\"ifNecessary\":false,\"cardId\":\"\",\"contentAccess\":{\"isMemberGated\":false,\"isVivoContent\":false,\"cmsEntitlement\":null,\"isNikeGated\":false},\"shareUrl\":\"https://www.nba.com/game/den-vs-ind-0022600189\",\"ticketUrl\":null,\"isTntOT\":false,\"cardHat\":\"NBA Mexico City Game\",\"broadcasters\":{\"nationalBroadcasters\":[{\"broadcasterId\":7,\"broadcasterScope\":null,\"broadcasterDisplayName\":\"NBA TV\",\"broadcasterLogoUrl\":null,\"broadcasterVideoLink\":\"\",\"broadcasterDescription\":\"\",\"broadcasterTeamId\":null,\"broadcasterRanking\":null,\"broadcasterLocalizationRegion\":\"\",\"broadcasterLogoUrlDarkLg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/120h/nbatv.png\",\"broadcasterLogoUrlLightLg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/120h/nbatv.png\",\"broadcasterLogoUrlDarkSm\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/40h/nbatv.png\",\"broadcasterLogoUrlLightSm\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/40h/nbatv.png\",\"broadcasterLogoUrlLightSvg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/120h/nbatv.svg\",\"broadcasterLogoUrlDarkSvg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/120h/nbatv.svg\",\"broadcasterLogoIcon1x1\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/dtc-icons/square/nbatv.png\",\"broadcasterLogoIcon1x1Svg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/dtc-icons/square/nbatv.svg\",\"broadcasterLogoIcon16x9\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/dtc-icons/16x9/nbatv.png\",\"broadcasterLogoIcon16x9Svg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/dtc-icons/16x9/nbatv.svg\"}],\"homeTvBroadcasters\":[],\"homeRadioBroadcasters\":[{\"broadcasterId\":1641,\"broadcasterScope\":null,\"broadcasterDisplayName\":\"93.5/107.5 The Fan\",\"broadcasterLogoUrl\":null,\"broadcasterVideoLink\":\"\",\"broadcasterDescription\":\"\",\"broadcasterTeamId\":1610612754,\"broadcasterRanking\":null,\"broadcasterLocalizationRegion\":\"\"}],\"awayTvBroadcasters\":[],\"awayRadioBroadcasters\":[{\"broadcasterId\":1730,\"broadcasterScope\":null,\"broadcasterDisplayN"
-  },
-  {
-   "around": "gameStatusText",
-   "excerpt": "l to 3-7.\",\"shortTitle\":null,\"shareUrl\":\"https://www.nba.com/watch/video/game-recap-nuggets-114-pacers-102-nov-7\",\"videoDuration\":\"2:39\",\"adMetaData\":{\"cType\":\"nbaVod\",\"caid\":\"nba-manage-prod-1-2423611\",\"showPreviewAds\":false,\"adfuelTarget\":\"\"},\"taxonomy\":{\"categories\":{\"game-recap\":\"Game Recap\",\"mexico-city-game\":\"Mexico City Game\"},\"tags\":{\"cameron-johnson\":\"Cameron Johnson\",\"denver-nuggets\":\"Denver Nuggets\",\"game-recap\":\"game recap\",\"highlights\":\"highlights\",\"indiana-pacers\":\"Indiana Pacers\",\"larry-nance-jr\":\"Larry Nance Jr.\",\"nba-mexico-city-game-2026\":\"NBA Mexico City Game 2026\",\"nikola-jokic\":\"Nikola Jokic\",\"pascal-siakam\":\"Pascal Siakam\",\"recap\":\"recap\"},\"games\":{\"0022600189\":\"DEN @ IND (0022600189)\"},\"teams\":{\"1610612743\":\"Denver Nuggets\",\"1610612754\":\"Indiana Pacers\"},\"players\":{},\"videoFranchises\":{\"game-recap\":\"Game Recap\"},\"videoFranchisesName\":{\"2-min-game-recap\":\"2 Minute Game Recap\"},\"videoCategories\":{\"recaps\":\"Recaps\"},\"videoTypes\":{\"highlights\":\"Highlights\"},\"videoNumPlays\":0,\"videoPlayTypes\":{},\"videoFrequency\":{\"game\":\"Game\"},\"videoPublisher\":{\"nbae\":\"NBAE\"}},\"image\":{\"imageUrl\":\"https://cdn.nba.com/manage/2026/11/DEN_IND_1107.jpg\"}},\"headlineNoSpoilers\":\"Nuggets vs Pacers\"},\"gameId\":\"0022600189\",\"leagueId\":\"00\",\"seasonYear\":\"2026-27\",\"seasonType\":\"Regular Season\",\"dailyGameRank\":\"1\",\"period\":4,\"homeTeam\":{\"teamId\":1610612754,\"teamName\":\"Pacers\",\"wins\":3,\"losses\":7,\"teamSubtitle\":\"3-7\",\"score\":102,\"timeoutsRemaining\":1,\"inBonus\":false,\"teamTricode\":\"IND\",\"teamSlug\":\"pacers\",\"specialInfoPrefix\":null,\"marqueePlayer\":\"1630169\",\"periods\":[{\"period\":1,\"score\":19},{\"period\":2,\"score\":22},{\"period\":3,\"score\":37},{\"period\":4,\"score\":24}],\"teamLeader\":{\"personId\":1627783,\"name\":\"Pascal Siakam\",\"jerseyNum\":\"43\",\"position\":\"PF\",\"teamTricode\":\"IND\",\"playerSlug\":\"pascal-siakam\",\"points\":\"23\",\"rebounds\":\"2\",\"assists\":\"5\",\"blocks\":\"0\",\"steals\":\"0\"}},\"awayTeam\":{\"teamId\":1610612743,\"teamName\":\"Nuggets\",\"wins\":5,\"losses\":3,\"teamSubtitle\":\"5-3\",\"score\":114,\"timeoutsRemaining\":1,\"inBonus\":false,\"teamTricode\":\"DEN\",\"teamSlug\":\"nuggets\",\"specialInfoPrefix\":null,\"marqueePlayer\":\"203999\",\"periods\":[{\"period\":1,\"score\":27},{\"period\":2,\"score\":37},{\"period\":3,\"score\":26},{\"period\":4,\"score\":24}],\"teamLeader\":{\"personId\":203999,\"name\":\"Nikola Joki\u0107\",\"jerseyNum\":\"15\",\"position\":\"C\",\"teamTricode\":\"DEN\",\"playerSlug\":\"nikola-joki\u0107\",\"points\":\"19\",\"rebounds\":\"13\",\"assists\":\"8\",\"blocks\":\"1\",\"steals\":\"1\"}},\"seasonLeadersFlag\":0,\"gameClock\":\"PT00M00.00S\",\"gameStatus\":3,\"gameStatusText\":\"Final\",\"gameBreakStatus\":\"Final\",\"gameState\":3,\"duration\":0,\"gameTimeEastern\":\"2026-11-07T17:00:00Z\",\"gameTimeUtc\":\"2026-11-07T22:00:00Z\",\"info\":\"\",\"subInfo\":\"Neutral Site\",\"gameDetailsHeader\":{\"spoilerHeader\":\"\",\"nonSpoilerHeader\":\"\"},\"actions\":[{\"title\":\"Watch\",\"resourceLocator\":{\"resourceUrl\":\"/game/den-vs-ind-0022600189?watch\",\"resourceId\":\"0022600189\",\"resourceType\":\"game\"}},{\"title\":\"Box Score\",\"resourceLocator\":{\"resourceUrl\":\"/game/den-vs-ind-0022600189/box-score\",\"resourceId\":\"0022600189\",\"resourceType\":\"game\"}},{\"title\":\"Game Details\",\"resourceLocator\":{\"resourceUrl\":\"/game/den-vs-ind-0022600189\",\"resourceId\":\"0022600189\",\"resourceType\":\"game\"}}],\"images\":{\"1920x1080\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/1920x1080.png\",\"1280x720\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/1280x720.png\",\"640x360\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/640x360.png\",\"480x270\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/480x270.png\",\"320x180\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/320x180.png\",\"160x90\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/160x90.png\"},\"ifNecessary\":false,\"cardId\":\"\",\"contentAccess\":{\"isMemberGated\":false,\"isVivoContent\":false,\"cmsEntitlement\":null,\"isNikeGated\":false},\"shareUrl\":\"https://www.nba.com/game/den-vs-ind-0022600189\",\"ticketUrl\":null,\"isTntOT\":false,\"cardHat\":\"NBA Mexico City Game\",\"broadcasters\":{\"nationalBroadcasters\":[{\"broadcasterId\":7,\"broadcasterScope\":null,\"broadcasterDisplayName\":\"NBA TV\",\"broadcasterLogoUrl\":null,\"broadcasterVideoLink\":\"\",\"broadcasterDescription\":\"\",\"broadcasterTeamId\":null,\"broadcasterRanking\":null,\"broadcasterLocalizationRegion\":\"\",\"broadcasterLogoUrlDarkLg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/120h/nbatv.png\",\"broadcasterLogoUrlLightLg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/120h/nbatv.png\",\"broadcasterLogoUrlDarkSm\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/40h/nbatv.png\",\"broadcasterLogoUrlLightSm\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/40h/nbatv.png\",\"broadcasterLogoUrlLightSvg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/120h/nbatv.svg\",\"broadcasterLogoUrlDarkSvg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/120h/nbatv.svg\",\"broadcasterLogoIcon1x1\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/dtc-icons/square/nbatv.png\",\"broadcasterLogoIcon1x1Sv"
-  },
-  {
-   "around": "<script id=",
-   "excerpt": "<!DOCTYPE html><html lang=\"en\" data-version=\"5.6.5\" data-client=\"NBA\" data-theme=\"light\"><head><meta charSet=\"utf-8\"/><script id=\"user-consent\" defer=\"\" src=\"https://cdn.nba.com/user-consent/index-gam.min.js\"></script><link rel=\"manifest\" href=\"/site-manifest.json\"/><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no\"/><script id=\"theme-loader\" src=\"/theme-loader.js\"></script><title>NBA Games - All NBA matchups | NBA.com</title><meta name=\"description\" content=\"Watch NBA Games - Follow the game, scores and stats for NBA matchups.\"/><link rel=\"icon\" href=\"/favicon.ico\"/><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon-32x32.png\"/><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon-16x16.png\"/><link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\"/><link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png\"/><link rel=\"apple-touch-icon\" sizes=\"120x120\" href=\"/apple-touch-icon.png\"/><link href=\"/apple-touch-icon.png\"/><meta name=\"msapplication-TileColor\" content=\"#da532c\"/><meta property=\"og:site_name\" content=\"NBA.com\"/><meta name=\"twitter:site\" content=\"@NBA\"/><link rel=\"mask-icon\" href=\"/safari-pinned-tab.svg\" color=\"#051c2d\"/><link rel=\"canonical\" href=\"https://www.nba.com/games\"/><meta property=\"og:image\" content=\"https://cdn.nba.com/logos/nba/fallback/NBA.Com-National-Basketball-Association.png\"/><meta property=\"twitter:image\" content=\"https://cdn.nba.com/logos/nba/fallback/NBA.Com-National-Basketball-Association.png\"/><script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://www.nba.com\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"NBA Games\",\"item\":\"https://www.nba.com/games\"}]}</script><meta name=\"next-head-count\" content=\"22\"/><meta name=\"theme-color\" content=\"#000000\"/><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin /><link rel=\"preload\" href=\"/_next/static/css/421ad19a36793d1d.css\" as=\"style\"/><link rel=\"stylesheet\" href=\"/_next/static/css/421ad19a36793d1d.css\" data-n-g=\"\"/><link rel=\"preload\" href=\"/_next/static/css/7e7db5cbfe4f54c8.css\" as=\"style\"/><link rel=\"stylesheet\" href=\"/_next/static/css/7e7db5cbfe4f54c8.css\" data-n-p=\"\"/><link rel=\"preload\" href=\"/_next/static/css/4081b71015e19f33.css\" as=\"style\"/><link rel=\"stylesheet\" href=\"/_next/static/css/4081b71015e19f33.css\" data-n-p=\"\"/><link rel=\"preload\" href=\"/_next/static/css/3df777da467aa5ab.css\" as=\"style\"/><link rel=\"stylesheet\" href=\"/_next/static/css/3df777da467aa5ab.css\" data-n-p=\"\"/><noscript data-n-css=\"\"></noscript><script defer=\"\" nomodule=\"\" src=\"/_next/static/chunks/polyfills-42372ed130431b0a.js\"></script><script src=\"/_next/static/chunks/webpack-0531fdfe285dfe91.js\" defer=\"\"></script><script src=\"/_next/static/chunks/framework-ad7abf312d5d61d4.js\" defer=\"\"></script><script src=\"/_next/static/chunks/main-196c53f13b153e43.js\" defer=\"\"></script><script src=\"/_next/static/chunks/pages/_app-60c5a1a654889eaa.js\" defer=\"\"></script><script src=\"/_next/static/chunks/94a0e8c7-68ed20b657542157.js\" defer=\"\"></script><script src=\"/_next/static/chunks/73379-7fd339df2cabc588.js\" defer=\"\"></script><script src=\"/_next/static/chunks/2425-ae77b5ec6c5d9fcb.js\" defer=\"\"></script><script src=\"/_next/static/chunks/92590-4117aaa2b753056c.js\" defer=\"\"></script><script src=\"/_next/static/chunks/18376-1ea766a09181258a.js\" defer=\"\"></script><script src=\"/_next/static/chunks/22403-d57624ffbb5be632.js\" defer=\"\"></script><script src=\"/_next/static/chunks/50153-1db38881640cfb85.js\" defer=\"\"></script><script src=\"/_next/static/chunks/16019-d6d9381a6ec8a985.js\" defer=\"\"></script><script src=\"/_next/static/chunks/33858-2a2a450bf7de92fd.js\" defer=\"\"></script><script src=\"/_next/static/chunks/20893-ee7f4da6f01d3288.js\" defer=\"\"></script><script src=\"/_next/static/chunks/45389-ddcc5ec950b6ed21.js\" defer=\"\"></script><script src=\"/_next/static/chunks/pages/games-6a08f34ae07f7d28.js\" defer=\"\"></script><script src=\"/_next/static/p-O0M8vhp3pvOSjD0LhgI/_buildManifest.js\" defer=\"\"></script><script src=\"/_next/static/p-O0M8vhp3pvOSjD0LhgI/_ssgManifest.js\" defer=\"\"></script><style data-href=\"https://fonts.googleapis.com/css?family=Roboto:300,400,700,900|Roboto+Condensed:400,700|Roboto+Slab:400,700&display=swap\">@font-face{font-family:'Roboto';font-style:normal;font-weight:300;font-stretch:normal;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v51/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWuaabVmUiAw.woff) format('woff')}@font-face{font-family:'Roboto';font-style:normal;font-weight:400;font-stretch:normal;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v51/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC89YmC2DPNWubEbVmUiAw.woff) format('woff')}@font-face{font-family:'Roboto';font-style:normal;font-weight:700;font-stretch:normal;font-display:swap;src:url(https://fonts.gstatic.com/s/roboto/v51/KFOMCnqEu92Fr1ME7kSn66aGLdTylUAMQXC8"
-  }
- ]
+ "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected."
 }
