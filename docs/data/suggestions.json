@@ -1,6 +1,6 @@
 {
  "title": "Suggestions",
- "intro": "Improvements and process changes, each written as options with effort, risk and what it unlocks, so a reviewer can pick a path before anything is implemented. Nothing on this page has been implemented unless the row says so. The decision index below the table lists, in one place, every decision this site is waiting on.",
+ "intro": "Improvements to the site and to the decision-making process, written so a reviewer can pick a path rather than inherit one. Each suggestion states the problem, the options with their cost and what they unlock, and a recommendation. Nothing here has been implemented.",
  "items": [
   {
    "id": "SG1",
@@ -402,67 +402,188 @@
   },
   {
    "id": "SG17",
-   "title": "Add a single decision log so a choice, once made, cannot be re-litigated by accident",
-   "category": "Process",
-   "problem": "Nothing in the repository records which suggestions were actually chosen, by whom, or when. A reviewer can pick a path on this page, but the next session has no way to know a decision was taken, so the same question gets re-opened and sometimes re-answered differently. Two builds already exist for exactly this reason.",
+   "title": "Finish the game-log capture so props stop being a point estimate with no width",
+   "category": "Data and model",
+   "problem": "Ten players now have measured dispersion; 78 horizon prop rows still publish no probability (Q3, F40, F42). The projection and the anchor differ by at most 0.52 of a measured SD, so nothing is settable - and that verdict rests on three or four games a player.",
    "options": [
     {
-     "option": "A DECISIONS.md file: one row per decision (id, date, decision, evidence link, owner), updated when a suggestion is accepted or rejected",
-     "effort": "Low - one file and one paragraph in COORDINATION.md",
-     "risk": "Low",
-     "unlocks": "A durable trail; a new session can read what was decided instead of guessing"
+     "option": "Capture the full horizon: every player on every prop row, each morning of the slate, into data/proplogs/<date>/, and let scripts/prop_variance.py price all of them",
+     "effort": "Medium - one page read per player, 50 players a day; the parser and the gates already exist",
+     "risk": "Low - a failed read leaves the row blank, as it is now",
+     "unlocks": "A probability column on every prop row, a settable/unsettable split per slate, and a grading history from the next day onward"
     },
     {
-     "option": "Fold the decision state into suggestions.json as a status field and render it on this page",
-     "effort": "Low-medium - one field and one column",
-     "risk": "Low",
-     "unlocks": "The decision shows on the page the reviewer reads"
+     "option": "Go deep instead of wide: a season-long game log for one fixed cohort of 15-20 parlay-eligible players, refreshed weekly",
+     "effort": "High once, low after - the first pull is 40+ games a player",
+     "risk": "Medium - the cohort ages out of the slate",
+     "unlocks": "The one thing a Last-5 window cannot give: a measurable prop-prop correlation (F42) and a usable parlay rho instead of a declared one"
     },
     {
-     "option": "Keep using COORDINATION.md only",
+     "option": "Stop originating props until either of the above exists",
      "effort": "None",
-     "risk": "Medium - the task board is long and is organised by session, not by decision",
-     "unlocks": "Nothing new"
+     "risk": "Low - the page already publishes no funded prop",
+     "unlocks": "Nothing, and it removes the only place the desk learns what a prop needs"
     }
    ],
-   "recommendation": "Option 2, plus a one-line pointer at the top of COORDINATION.md. The page a reviewer actually reads is the right place for the state of a decision.",
-   "decision_needed": "Whether decisions are tracked on the site, in the repo, or both; and who has authority to mark one accepted.",
-   "source": "S1"
+   "recommendation": "Option 1 first, then option 2 for the parlay cohort. Option 1 is what turns 78 blank cells into numbers with sources; option 2 is the only route to a measured rho, and it is worth doing after the desk has a week of graded props to judge.",
+   "decision_needed": "Reviewer: pick 1, 2 or 1+2 in that order. Nothing on the site changes until the capture runs, because the script already reads whatever is in data/proplogs/.",
+   "source": "S20"
   },
   {
    "id": "SG18",
-   "title": "Discover missing information systematically instead of discovering it by accident",
-   "category": "Process",
-   "problem": "Every gap closed so far was found by someone noticing it, not by a method that looks for gaps. The repository has 37 flags and 18 open questions, and nothing that says which ones are cheap to close, which are expensive, or which are blocking a decision. Missing information is therefore discovered at the speed of luck.",
+   "title": "Replace the flat 0.55 production-transfer rule with per-stat minutes elasticities",
+   "category": "Model",
+   "problem": "scripts/injury_impact.py and originate_horizon.py move a line by a declared constant (production_transfer = 0.55) for any absent player, whatever the stat. Measured on 40 official box scores, points move at about 1.29x their minutes share and assists at 0.49x - one flat number is wrong in both directions (A15).",
    "options": [
     {
-     "option": "A gap-closure triage: for every open question and flag, record cost to close (minutes/hours), what it blocks, and whether an official source exists at all. Sort by (blocks a decision) / (cost).",
-     "effort": "Low - a one-off pass over the existing 18 questions and 37 flags",
-     "risk": "Low",
-     "unlocks": "A ranked list of what to find next; the top item is almost certainly the injury editions for 11/15-11/17"
+     "option": "Fit per-stat betas (points, rebounds, assists, PRA) on the season-long logs once SG17 option 2 exists, and let the injury module use the stat-specific figure",
+     "effort": "Medium - the regression is 20 lines of the existing script",
+     "risk": "Low - the declared constant stays as the fallback where a beta is not yet fitted",
+     "unlocks": "An injury adjustment with a measured coefficient instead of an asserted one, which is what gate G7 needs to stop being un-runnable"
     },
     {
-     "option": "A source-reachability probe run on a schedule: for every official URL the site relies on, record whether this environment can read it, when it was last read, and what it returned",
-     "effort": "Medium - scripts/probe_official.py already exists and records reachability; it needs to be surfaced per source",
-     "risk": "Low",
-     "unlocks": "Turns 'the fetch tool returned AccessDenied' into a dated fact per source"
-    },
-    {
-     "option": "A coverage table for every official table the model depends on: how many rows are published, how many were captured, and which players or teams are missing",
-     "effort": "Medium",
-     "risk": "Low",
-     "unlocks": "Makes the 50-of-465 player-minutes gap and similar ones visible rather than buried in a flag"
-    },
-    {
-     "option": "Ask the reviewer directly what a decision would need",
+     "option": "Keep 0.55 and publish this measurement beside it as a caveat",
      "effort": "None",
-     "risk": "Low",
-     "unlocks": "The one gap no scrape can find"
+     "risk": "Medium - the number keeps moving lines while being known to be flat",
+     "unlocks": "Nothing"
+    },
+    {
+     "option": "Re-fit now on the 40 captured rows",
+     "effort": "Low",
+     "risk": "High - n=40 from 10 players over one week, and the page itself says so (F44); a line moved on it is moved on noise",
+     "unlocks": "A demonstration, not a decision"
     }
    ],
-   "recommendation": "Options 1 and 3 first, because both are cheap and both turn a known unknown into a ranked, dated item. Option 2 makes the refresh honest over time. Option 4 should run alongside every time, since a reviewer's real question is the one input the data cannot supply.",
-   "decision_needed": "Whether an explicit triage pass is worth a session, and which of the three mechanisms to add first.",
-   "source": "S1"
+   "recommendation": "Option 1, sequenced behind SG17 option 2. Do not re-fit on this week's sample to move a live line.",
+   "decision_needed": "Reviewer: approve the per-stat direction now (so the module's declared assumption is on the record as unmeasured) and schedule the fit for when the sample exists.",
+   "source": "S7"
+  },
+  {
+   "id": "SG19",
+   "category": "Operations / model",
+   "title": "Cut the pickable horizon against the game-day edition, and freeze at that cut",
+   "problem": "The pipeline currently originates and publishes lines against whatever edition the overnight capture found. For a 7:00 PM ET slate that is up to fifteen hours before the league's own game-day window closes, and the measured consequence is on the site: four clubs filed in the meantime and the model line for their games moved by 0.0 to 2.6 points only because the rest of the names could not be priced at all.",
+   "options": [
+    {
+     "option": "Add a 15:15 UTC scheduled capture immediately before the first 7:00 PM ET tip, and let that cut be the published line set for the day",
+     "effort": "Low - the refresh workflow already runs at 15:15 UTC; the change is which edition it treats as final",
+     "risk": "Low - additive; earlier lines stay archived and graded, they are not rewritten",
+     "unlocks": "Q10, Q14 (now answered), Q18 (now answered); every pick then reflects what a person watching the report at 3 p.m. ET could see"
+    },
+    {
+     "option": "Keep the overnight cut as the official line set and publish only the game-day delta, as the Game-Day Read page does now",
+     "effort": "None - this is the current behaviour",
+     "risk": "Low, but the published number is knowingly stale by one filing window",
+     "unlocks": "Nothing new; it preserves pre-registration purity at the cost of usefulness"
+    },
+    {
+     "option": "Re-price the published lines in place when a newer edition arrives",
+     "effort": "Low",
+     "risk": "Fatal for the leaderboard - it puts information published after the cut inside a line that will later be graded, which is the look-ahead error this repository has already been burned by",
+     "unlocks": "Nothing; rejected and recorded so nobody re-proposes it"
+    }
+   ],
+   "recommendation": "Option A, with the frozen copy kept and diffed. Publish a line, then a delta, never a mutated line.",
+   "decision_needed": "Which edition is the day's official cut, and what time the scheduler should fire.",
+   "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf"
+  },
+  {
+   "id": "SG20",
+   "category": "Data / model",
+   "title": "Either give every listed player a minutes row or stop printing 0.00 for an unknown",
+   "problem": "The availability impact is computed as (status weight x minutes share) x 15.0, and a player with no minutes row contributes 0.00 - indistinguishable in the table from a player whose absence costs nothing. Tonight that is 20 of the 24 rows the game-day edition added and 45 of the 50 rows it lists for the five games - it is the difference between a line that moved and a line that did not.",
+   "options": [
+    {
+     "option": "Capture minutes per club from the official team pages (30 URLs) instead of the paginated top-50 league table",
+     "effort": "Medium - one fetch per club plus a parser; no new permission or vendor needed",
+     "risk": "Low - additive; the existing table stays as the cross-check",
+     "unlocks": "Q12, Q3, Q20 and F47; prop projections stop being a point estimate with no width"
+    },
+    {
+     "option": "Render a dash, not 0.00, wherever minutes are unknown, and exclude the row from the team total with the exclusion counted in the header",
+     "effort": "Low - one formatting rule and one counter",
+     "risk": "Low, but it makes published impacts smaller-looking because fewer players count at all",
+     "unlocks": "Removes a misleading zero from every table today, including this one"
+    },
+    {
+     "option": "Do nothing and keep the lower-bound note",
+     "effort": "None",
+     "risk": "Medium - the note is correct and unread; readers keep seeing 0.00 as 'healthy'",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Both of the first two: the dash is a one-line honesty fix that should ship now, the per-club capture is the actual repair.",
+   "decision_needed": "Whether the reviewer wants a data project (option A) or a display fix (option B) this week.",
+   "source": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "id": "SG21",
+   "category": "Site / UI",
+   "title": "Show an edition timeline per game: what the model knew, and when",
+   "problem": "Every table on the site carries a source id, so a reader can find WHERE a value came from, but nothing shows WHEN a row ceased to be the newest word. Today the gap between the edition behind the lines and the newest published edition was nine hours and seventeen minutes, and it could only be discovered by opening two PDFs.",
+   "options": [
+    {
+     "option": "A per-game timeline strip on the Game-Day Read page: each edition, its timestamp, the number of rows it added or changed, and whether the site's line was cut before or after it",
+     "effort": "Low - the data already exists in data/derived/gameday_read.json",
+     "risk": "Low",
+     "unlocks": "Makes staleness visible at a glance, which is the single decision-support gap this session found"
+    },
+    {
+     "option": "A single 'age of newest edition' badge in the header of every page",
+     "effort": "Low",
+     "risk": "Low",
+     "unlocks": "Coarser, but it is impossible to miss"
+    }
+   ],
+   "recommendation": "Option A first; the badge follows for free.",
+   "decision_needed": "None technically - a reviewer only has to say whether per-game or global.",
+   "source": "https://official.nba.com/nba-injury-report-2026-27-season/"
+  },
+  {
+   "id": "SG22",
+   "category": "Site / data",
+   "title": "Never display a season leader without the report's verdict on him",
+   "problem": "The official game cards print a season leader for each club that is a pure season-average read-out. On 2026-11-16 that widget shows Anthony Edwards for Minnesota while the report rules him out, and on 11/14 it shows Caleb Wilson for Chicago, also out (F49). Any prop table or card copy that inherits that name is quoting a player who is not playing.",
+   "options": [
+    {
+     "option": "Join the leader line to the current report at render time and mark a ruled-out leader in place, keeping the published value visible next to the mark",
+     "effort": "Low - the join key already exists in the capture",
+     "risk": "Low",
+     "unlocks": "Removes the most likely way a confident-looking wrong name gets onto a pick slip"
+    },
+    {
+     "option": "Drop the leader widget from the capture entirely and derive leaders from the players table only",
+     "effort": "Medium",
+     "risk": "Low",
+     "unlocks": "One fewer source of unprefixed third-party-looking numbers, at the cost of context"
+    }
+   ],
+   "recommendation": "Option A. The card is official and should stay cited; it should stop being unqualified.",
+   "decision_needed": "Whether a marked leader may still be shown as the leader.",
+   "source": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "id": "SG23",
+   "category": "Repo / CI",
+   "title": "Do not let a follow-up commit cancel the deploy it is describing",
+   "problem": "The Pages workflow now isolates PR runs from production runs (PR #75), but production still cancels in progress. A seat that merges a change and then pushes a board-record commit within a minute cancels its own deploy and leaves a `cancelled` badge on the merge commit. Two seats have now reported a Pages deploy as 'confirmed' off a run id, and a cancelled run is not a deploy.",
+   "options": [
+    {
+     "option": "`cancel-in-progress: false` on the production group only, keeping the PR behaviour as is",
+     "effort": "Low - one line in .github/workflows/pages.yml",
+     "risk": "Low - a queued production run waits instead of being replaced; the queue already serialises them",
+     "unlocks": "Every deploy claim in COORDINATION.md points at a run that actually finished"
+    },
+    {
+     "option": "Commit convention: fold the delivery record into the merge commit, so main sees one push per change",
+     "effort": "Zero code, but it constrains how seats write the board",
+     "risk": "Low",
+     "unlocks": "Also removes most of the COORDINATION.md collision churn that forced four renumberings"
+    }
+   ],
+   "recommendation": "Option A, because it makes the badge truthful rather than asking every session to remember a convention. Option B costs nothing and can be adopted today.",
+   "decision_needed": "Whether the project wants a superseded production deploy to be cancelled (cheap) or to finish (auditable).",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/pages.yml"
   }
  ]
 }

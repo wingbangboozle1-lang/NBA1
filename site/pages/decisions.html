@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decisions: pick a path &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="decisions.html">Decisions</a>
+      <a href="suggestions.html">Suggestions</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="prop-variance.html">Prop Variance &amp; Rotation</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameday.html">Game-Day Injury Read</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="leaderboard.html">Leaderboard &amp; Rewards</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+<a href="official-verify.html">Live Re-verification</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="decisions.html">Decisions: pick a path</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 14 NOV</h3>
+<a href="../../verified/index.html">&#10003; What is actually true</a>
+<a href="../../verified/summary.html">Executive summary</a>
+<a href="../../verified/verification.html">Row-level verification</a>
+<a href="../../verified/review.html">Repo review</a>
+<a href="../../verified/flagged.html">Flagged (17)</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row links to the official source it
+      came from. A blank cell means the value could not be confirmed from an official
+      source &mdash; it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Decisions: pick a path</h1>
+      <p class="sub">Six decisions in dependency order, the 19 open questions mapped to the decision that closes each one, and the 18 suggestions ranked for review. Nothing here is implemented unless it says so.</p>
+    </div>
+    <div class="banner info"><div class="b-t">What this page is for</div><div class="b-b"><p>Six decisions, in the order they unblock each other. Each one states what is actually known, the options with their real cost, which open questions it answers, which suggestions it consumes, and what a reviewer has to decide before any of it can be built. <strong>Nothing on this page has been implemented</strong> except where a row says so.</p><p>The evidence behind every claim is on the pages linked in each row. The open questions and the suggestion catalogue are unchanged and stay published in full on <a href="questions.html">Open Questions</a> and <a href="suggestions.html">Suggestions</a>; this page is the reading order, not a replacement.</p></div></div>
+<h2 class="sec">Pick a path</h2><p class="secsub">In dependency order. P1 is cheap and unblocks nothing; P2 unblocks the leaderboard; P3 is the only one that needs money; P4 and P5 are the two that change what the site publishes; P6 is the one that makes the rest stay true.</p>
+<div class="dcard"><h3>P1 &mdash; Decide whether the hour of the capture is part of the product</h3><div class="dline"><b>Why it is a decision:</b> The 18:40Z re-read found the site pricing from a 04:15 AM ET injury edition while the 01:30 PM ET edition was published and four of the five teams it called unfiled had filed. Nothing about the model is wrong; the site simply had no rule for how old a capture may be before it must be labelled or refreshed. This is the cheapest decision here and it is the one that keeps every other number honest.</div><table class="t"><thead><tr><th style="width:22%">Option</th><th>What it means</th><th style="width:8%">Effort</th><th style="width:15%">What it unlocks</th><th style="width:11%">Source</th></tr></thead><tbody><tr><td><b>Ship a freshness label on every derived row (what this session did)</b></td><td>Done in this session: <code>inventory_status</code> on all 27 lines, the edition named on every availability column, and a Live Re-verification page that shows the diff.</td><td>Low</td><td>Already in the tree</td><td><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">official page</a></td></tr><tr><td><b>Re-price the lines from the 01:30 PM ET edition and the 11/13 ratings</b></td><td>The ratings model would have to be re-run and every pick re-cut. That changes what the site publishes, so it needs a decision, not a patch.</td><td>Medium</td><td>Blocked on P2: nobody can say which of the two line sets is the official one</td><td><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">official page</a></td></tr><tr><td><b>Automate a refresh before each slate and keep the label only as a fallback</b></td><td>The refresh path exists (F7) but is manual. Worth it only after P2.</td><td>High</td><td>Blocked on P2</td><td><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">official page</a></td></tr></tbody></table><div class="dline" style="margin-top:8px"><b>Recommended:</b> Option 1 now, and decide between options 2 and 3 only once P2 is settled. A labelled stale number is defensible; an unlabelled one is not, and that was the actual defect found today.</div><div class="dline"><b>Questions it moves:</b> <a href="questions.html#Q17">Q17</a> <span class="chip warn">open</span>, <a href="questions.html#Q19">Q19</a> <span class="chip warn">open</span> &nbsp;&middot;&nbsp; <b>Suggestion it consumes:</b> <a href="suggestions.html#SG10">SG10</a>, <a href="suggestions.html#SG16">SG16</a></div><div class="dline"><b>What has to be decided:</b> One rule, written down: how old a capture may be, and what the site must print when it is older than that.</div></div>
+<div class="dcard"><h3>P2 &mdash; Say which line set is official</h3><div class="dline"><b>Why it is a decision:</b> Two projection sets on this site disagree about the same games (F26, F27, F35) and the live re-read found a third number that matters: the published ratings are through 11/13, and 19 of 30 teams moved when the 11/13 finals were folded in. Every page that quotes a spread is quoting a number computed from a window the other page may not use. Until one set is named official, no gate result can be compared across pages.</div><table class="t"><thead><tr><th style="width:22%">Option</th><th>What it means</th><th style="width:8%">Effort</th><th style="width:15%">What it unlocks</th><th style="width:11%">Source</th></tr></thead><tbody><tr><td><b>Nominate one line set, one ratings window and one sign convention (SG15)</b></td><td>The Source Check page's section 5 becomes empty because there is nothing left to reconcile. This is a documentation and wiring change, not a modelling one.</td><td>Medium</td><td>Unblocks P1 option 2, the leaderboard's comparability, and every cross-page claim</td><td><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">official page</a></td></tr><tr><td><b>Keep both sets and print the window beside every line</b></td><td>Cheaper today, but the reader has to do the reconciliation the site should have done.</td><td>Low</td><td>Nothing structural; the ambiguity survives</td><td><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">official page</a></td></tr></tbody></table><div class="dline" style="margin-top:8px"><b>Recommended:</b> Option 1. It is the only item on this page that makes the leaderboard mean something, and it is a prerequisite for the two most valuable data suggestions (SG1, SG17).</div><div class="dline"><b>Questions it moves:</b> <a href="questions.html#Q2">Q2</a> <span class="chip warn">open</span> &nbsp;&middot;&nbsp; <b>Suggestion it consumes:</b> <a href="suggestions.html#SG15">SG15</a>, <a href="suggestions.html#SG6">SG6</a>, <a href="suggestions.html#SG12">SG12</a></div><div class="dline"><b>What has to be decided:</b> A decision on which window the public line uses, written into the build so it cannot drift again.</div></div>
+<div class="dcard"><h3>P3 &mdash; Buy or refuse a price feed</h3><div class="dline"><b>Why it is a decision:</b> Every 'edge' on this site is the model against a naive reference, because no NBA-operated source publishes a price (F3, Q1). The leaderboard can therefore never say whether anything is profitable, and gate GG can never close. This is not a data gap that more scraping fixes: it is a licensing decision.</div><table class="t"><thead><tr><th style="width:22%">Option</th><th>What it means</th><th style="width:8%">Effort</th><th style="width:15%">What it unlocks</th><th style="width:11%">Source</th></tr></thead><tbody><tr><td><b>License a closing-price feed and log it per play (SG2, option 1)</b></td><td>Makes ROI a real number and closing-line value measurable. Introduces a non-NBA source, so every row needs its own source link and the site's one-rule guarantee has to be extended to it explicitly.</td><td>Medium (build) / commercial (licence)</td><td>Q1, Q8, the reward tiers, gate GG</td><td><a href="https://www.nba.com/games" target="_blank" rel="noopener">official page</a></td></tr><tr><td><b>Manual closing-line log as a stopgap (SG2, option 2)</b></td><td>No licence needed. Human transcription error is the risk, and it is daily work.</td><td>Low per day</td><td>The same answers, more slowly and less reliably</td><td><a href="https://www.nba.com/games" target="_blank" rel="noopener">official page</a></td></tr><tr><td><b>Refuse, and keep the model-vs-reference framing permanently (SG2, option 3)</b></td><td>Defensible and honest. The cost is that nothing on this site can ever be called a market edge, and the leaderboard stays a research ranking.</td><td>None</td><td>Nothing, but nothing is claimed either</td><td><a href="https://www.nba.com/games" target="_blank" rel="noopener">official page</a></td></tr></tbody></table><div class="dline" style="margin-top:8px"><b>Recommended:</b> Option 3 is the only one available today, because no licence exists and no NBA-operated price is published. If a feed is bought, take option 1 and not option 2: a manual log cannot be audited row by row, which is the rule the rest of the site runs on.</div><div class="dline"><b>Questions it moves:</b> <a href="questions.html#Q1">Q1</a> <span class="chip warn">open</span>, <a href="questions.html#Q8">Q8</a> <span class="chip warn">open</span> &nbsp;&middot;&nbsp; <b>Suggestion it consumes:</b> <a href="suggestions.html#SG2">SG2</a>, <a href="suggestions.html#SG5">SG5</a></div><div class="dline"><b>What has to be decided:</b> A yes/no on the licence, and if yes, the retention and attribution terms.</div></div>
+<div class="dcard"><h3>P4 &mdash; Let the sample grow, or stop running strategies</h3><div class="dline"><b>Why it is a decision:</b> Every graded strategy sits under the 30-play sample gate except S1, which has 32 plays and fails calibration and stability. The out-of-sample window is now 60 games and cannot grow from the current split, because 2026-10-20 to 2026-11-05 is the ratings window. Running more strategies on the same 60 games raises the multiple-comparison problem, not the evidence (Q2, Q3, F8).</div><table class="t"><thead><tr><th style="width:22%">Option</th><th>What it means</th><th style="width:8%">Effort</th><th style="width:15%">What it unlocks</th><th style="width:11%">Source</th></tr></thead><tbody><tr><td><b>Backfill 2026-10-20 to 2026-11-05 and re-cut the split (SG1)</b></td><td>The only way to lengthen the test window. The games are officially published; the work is a walk over the day pages and a re-fit.</td><td>Low-Medium</td><td>Q2, F8, F9; every gate result becomes meaningful</td><td><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official page</a></td></tr><tr><td><b>Freeze the strategy library at ten and wait for games to accumulate</b></td><td>No new claims, no new risk of a lucky cell. Roughly two months at 60 games per week.</td><td>None</td><td>Nothing new, nothing false</td><td><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official page</a></td></tr><tr><td><b>Keep adding strategies on 60 games</b></td><td>Each new cell is another multiple comparison. This is how a lucky cell gets promoted.</td><td>Low</td><td>A false positive, eventually</td><td><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official page</a></td></tr></tbody></table><div class="dline" style="margin-top:8px"><b>Recommended:</b> Option 1, and freeze the library while it runs. The power calculation already on the site says the effect sizes involved need several hundred games; adding strategies to 60 games does not substitute for adding games.</div><div class="dline"><b>Questions it moves:</b> <a href="questions.html#Q2">Q2</a> <span class="chip warn">open</span>, <a href="questions.html#Q3">Q3</a> <span class="chip warn">open</span>, <a href="questions.html#Q5">Q5</a> <span class="chip warn">open</span> &nbsp;&middot;&nbsp; <b>Suggestion it consumes:</b> <a href="suggestions.html#SG1">SG1</a>, <a href="suggestions.html#SG7">SG7</a></div><div class="dline"><b>What has to be decided:</b> Approval to spend the run, and a rule for the multiple-comparison correction before any new strategy is added.</div></div>
+<div class="dcard"><h3>P5 &mdash; Decide what the injury report is allowed to move</h3><div class="dline"><b>Why it is a decision:</b> Availability is a measured floor, not an estimate: minutes are known for 50 of the 465 players in the official table, so a team missing rotation players who are not top-50 scorers shows 0.00 (F2, F4). Today's re-read adds a second problem: 33 status lines changed in nine hours, so the adjustment depends on when you read it. An adjustment that is both incomplete and time-dependent should not silently move a line.</div><table class="t"><thead><tr><th style="width:22%">Option</th><th>What it means</th><th style="width:8%">Effort</th><th style="width:15%">What it unlocks</th><th style="width:11%">Source</th></tr></thead><tbody><tr><td><b>Neutralise availability in the published line and publish the statuses beside it</b></td><td>The line becomes reproducible from the ratings alone. The injury work becomes evidence, not an input.</td><td>Low</td><td>A line anyone can recompute; the props page keeps its own measured widths</td><td><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">official page</a></td></tr><tr><td><b>Complete the minutes table, then price availability properly (SG3)</b></td><td>The official Players Traditional table has 465 players; 415 of them lack a captured minutes value. That is a capture job, not a model job.</td><td>Medium</td><td>Q4, a trustworthy availability column, and grading strategy S6</td><td><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">official page</a></td></tr><tr><td><b>Keep the current partial adjustment and label it</b></td><td>What the site does now. Defensible only while every row says so.</td><td>None</td><td>Nothing</td><td><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">official page</a></td></tr></tbody></table><div class="dline" style="margin-top:8px"><b>Recommended:</b> Option 2 if the capture can be run, option 1 until then. Option 3 is what is live today and it is the weakest of the three.</div><div class="dline"><b>Questions it moves:</b> <a href="questions.html#Q4">Q4</a> <span class="chip warn">open</span>, <a href="questions.html#Q5">Q5</a> <span class="chip warn">open</span>, <a href="questions.html#Q12">Q12</a> <span class="chip warn">open</span> &nbsp;&middot;&nbsp; <b>Suggestion it consumes:</b> <a href="suggestions.html#SG3">SG3</a>, <a href="suggestions.html#SG18">SG18</a></div><div class="dline"><b>What has to be decided:</b> A decision on whether an unmeasured adjustment may move a published number at all.</div></div>
+<div class="dcard"><h3>P6 &mdash; Make the verification independent of this repository</h3><div class="dline"><b>Why it is a decision:</b> The gate that runs in CI checks structure: that a row has a source link, that a link resolves, that a table has the right number of cells (F34). It does not check that the value is right. Today's 185-row re-read exists only because a session chose to do it, and its artifact is a JSON file in &lt;code&gt;verify/&lt;/code&gt; that nothing re-runs.</div><table class="t"><thead><tr><th style="width:22%">Option</th><th>What it means</th><th style="width:8%">Effort</th><th style="width:15%">What it unlocks</th><th style="width:11%">Source</th></tr></thead><tbody><tr><td><b>Make the live re-read a scheduled job that writes the artifact and fails on a new differ (SG16)</b></td><td>The 185 checks already exist and already carry their own URLs. The job is to run them on a schedule and publish the diff instead of discovering it by hand.</td><td>Medium</td><td>Q17; a gate that tests values, not only structure</td><td><a href="https://www.nba.com/standings" target="_blank" rel="noopener">official page</a></td></tr><tr><td><b>Keep the manual re-read, and publish each one as a dated artifact</b></td><td>What exists now. Cheap, but it depends on somebody choosing to do it.</td><td>Low</td><td>A record, not a guarantee</td><td><a href="https://www.nba.com/standings" target="_blank" rel="noopener">official page</a></td></tr></tbody></table><div class="dline" style="margin-top:8px"><b>Recommended:</b> Option 1. It is the highest-leverage change on this page that costs no money and no licence, and it converts today's one-off audit into a standing test.</div><div class="dline"><b>Questions it moves:</b> <a href="questions.html#Q17">Q17</a> <span class="chip warn">open</span> &nbsp;&middot;&nbsp; <b>Suggestion it consumes:</b> <a href="suggestions.html#SG14">SG14</a>, <a href="suggestions.html#SG16">SG16</a>, <a href="suggestions.html#SG10">SG10</a></div><div class="dline"><b>What has to be decided:</b> A decision on whether a red live-check may block a merge, given that the pages it reads change every 15 minutes by design.</div></div>
+<h2 class="sec">Every open question, and what would answer it</h2><p class="secsub">The 19 open questions verbatim from the repository, each mapped to the decision above that closes it and to the concrete step that produces the missing information.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>ID</th>
+<th>Question</th>
+<th>What is missing</th>
+<th>How to answer it</th>
+<th>Decision</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr id="Q1">
+<td>Q1</td>
+<td>Does any strategy actually beat a real sportsbook?</td>
+<td>Closing prices. No book price is published by an NBA-operated source, so no official link can be attached to one (F3). Without it, 'units won' measures the model against a naive model, not against a market.</td>
+<td>Log closing spread, total and price for every graded play into data/raw/market.json with a per-row source field, then recompute. Close-vs-model comparison is the only honest measure of betting value.</td>
+<td><span class="chip info">P3</span></td>
+<td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
+</tr>
+<tr id="Q10">
+<td>Q10</td>
+<td>Which players are actually available for the 27 games in the horizon?</td>
+<td>Availability for the 2026-11-15, 11-16 and 11-17 games. 2026-11-14 is answered: the 01:30 PM ET game-day edition is transcribed row by row on the Game-Day Read page, with Memphis the one club still inside its filing window. Nothing later than 11/14 can be answered today because no club has filed for 11/15 yet - the first edition that will contain them is 11/14 evening, and the report never lists a game more than one day ahead (F52).</td>
+<td>Capture the official injury-report index (https://official.nba.com/nba-injury-report-2026-27-season/) on each of 11/14 (after 16:30 UTC, when the game-day reports are due), 11/15, 11/16 and 11/17 and add each published edition to the refresh job.</td>
+<td><span class="chip info">P6</span></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">S10</a></td>
+</tr>
+<tr id="Q11">
+<td>Q11</td>
+<td>Do the fresh 27 lines hold up once a real closing price is available?</td>
+<td>No official price feed. Every edge on the site is model-against-reference-model (F3), so nothing here has been tested against a market.</td>
+<td>Log the closing spread, total and price for each of the 27 games into data/raw/market.json with a per-row source field, then re-grade. Until that file exists this question cannot be answered by any amount of modelling.</td>
+<td><span class="chip info">P6</span></td>
+<td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
+</tr>
+<tr id="Q12">
+<td>Q12</td>
+<td>Is the availability impact still a lower bound once the Players table is complete?</td>
+<td>Minutes for the 415 players outside the captured top-50 table. This is no longer a theoretical worry: on the 2026-11-14 game-day report 20 of the 24 rows a club added have no minutes row, so a club can rule out two rotation pieces and the originated line will not move (F47). Across tonight's five games the figure is 45 of 50 listed rows. Until the table is complete, the impact column is a floor and not an estimate.</td>
+<td>Capture pages 2 to 10 of the official Players Traditional table, or build the minutes table from official box scores, then re-run and compare the impact column before and after.</td>
+<td><span class="chip info">P5</span></td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">S7</a></td>
+</tr>
+<tr id="Q13">
+<td>Q13</td>
+<td>Which of the ten strategies is actually skill rather than luck?</td>
+<td>A sample large enough. The skill gate (G4) needs a Wilson lower bound above 52.38%; the best strategy has a lower bound of 0.491 on 23 plays. The gate has not been weakened and will not be.</td>
+<td>Extend the out-of-sample window. The window is 51 games because only 6 to 12 November was captured; the season began 20 October, so roughly 200 earlier games are available from the same official pages.</td>
+<td><span class="chip info">P6</span></td>
+<td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>
+</tr>
+<tr id="Q15">
+<td>Q15</td>
+<td>Do the repeat matchups on the official slate pages mean anything for modelling?</td>
+<td>NBA.com publishes NYK@TOR twice in three days (0022600241 on 11/15, 0022600253 on 11/17) and POR@MIN on consecutive nights (0022600250 on 11/16, 0022600254 on 11/17), each with its own game id and its own official page. Whether these are ordinary schedule quirks, a neutral-site arrangement or something else is not stated on the pages; the model currently treats them as independent games.</td>
+<td>Read the official game pages and NBA.com news for those ids before tip; if the league prints an explanation, record it. Until then the rows are published exactly as the official slate pages print them and flagged. Confirmed 2026-11-14: https://www.nba.com/game/nyk-vs-tor-0022600253 and https://www.nba.com/game/por-vs-min-0022600254</td>
+<td><span class="chip info">P6</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">official page</a></td>
+</tr>
+<tr id="Q16">
+<td>Q16</td>
+<td>How much do the nine verified 12:00 PM -&gt; 3:00 PM status movements change minutes and production?</td>
+<td>Every movement in the 2026-11-13 report chain is now verified row by row (Wilson Jalen Doubtful-&gt;Out, Antetokounmpo Probable-&gt;Available, Larsson Questionable-&gt;Doubtful, Thompson Questionable-&gt;Probable, Dia Questionable-&gt;Available, Mathurin Doubtful-&gt;Questionable, McGowens/Missi/Murphy Doubtful-&gt;Out), but no minutes model exists to price them (F2), so the injury layer publishes direction only.</td>
+<td>Once the player-minutes table is completed (SG3), re-run the availability shock strategy (S6) over archived edition diffs and measure the distribution of teammate usage shifts. Movement log: data/refresh_2026_11_14/official_captures_2026-11-14.json</td>
+<td><span class="chip info">P6</span></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf" target="_blank" rel="noopener">official page</a></td>
+</tr>
+<tr id="Q17">
+<td>Q17</td>
+<td>Which ratings window and which line set feed the published horizon picks?</td>
+<td>Two projection sets with different ratings windows sit on the same site, and they disagree on every game that carries a Build B point-spread pick (F26). The site does not say which one the picks use.</td>
+<td>Pick one set, regenerate every page from it, and print its ratings window on each page. Re-run scripts/source_check.py afterwards and confirm the cross-build table is empty.</td>
+<td><span class="chip info">P1</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr id="Q19">
+<td>Q19</td>
+<td>Are the repeated pairings (NYK@TOR on 11/15 and 11/17; POR@MIN on 11/16 and 11/17) separate games as NBA.com prints them?</td>
+<td>Both are printed with distinct game IDs. Nothing on the page explains them (F33).</td>
+<td>Check each game page and the official schedule on its date; record the result next to each row.</td>
+<td><span class="chip info">P1</span></td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600253" target="_blank" rel="noopener">S8_0022600253</a></td>
+</tr>
+<tr id="Q2">
+<td>Q2</td>
+<td>Can the out-of-sample window grow any further?</td>
+<td>Results for 2026-10-20 through 2026-11-05. Those games exist and are officially published, but they are currently the ratings window, so moving them into the test set requires a different split - for example ratings from the first 40 games of the season and testing on everything after. (The window grew from 51 to 60 games on 2026-11-14 when the 2026-11-13 finals were captured; that growth path is now exhausted.)</td>
+<td>Backfill 2026-10-20 to 2026-11-05 results, then re-cut the split so the ratings window is earlier and the test window is longer. This is now the only way to grow the sample, since every game from 2026-11-06 onward is already in it.</td>
+<td><span class="chip info">P2</span></td>
+<td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>
+</tr>
+<tr id="Q20">
+<td>Q20</td>
+<td>Can a prop edge ever be big enough to bet, given the noise?</td>
+<td>Measured dispersion puts the answer in reach: on 2026-11-14 the largest gap between our projection and the player's own season average is 0.52 of a measured SD, and the median is 0.16 SD. With a points CV of 0.344, a prop needs roughly a 7-9 point projection edge to be one SD away from the anchor - larger than any factor this model applies. What is missing is the thing no official source publishes: the line a market would actually hang. Without it, the question 'is our number better than theirs' cannot be asked of props any more than of spreads (Q1).</td>
+<td>Either (a) log real prop lines and closes in data/raw/market.json with per-row sources and compare, or (b) accept the desk rule this page prints - publish a prop only when our projection is at least one measured SD from the naive anchor - and let the count of publishable props stay near zero while the model is what it is.</td>
+<td><span class="chip info">P6</span></td>
+<td class="src"><span class="na" title="No NBA-operated source publishes a prop line (same limit as F3)">&mdash;</span></td>
+</tr>
+<tr id="Q3">
+<td>Q3</td>
+<td>Are the player-prop projections any good?</td>
+<td>PARTIALLY ANSWERED 2026-11-14. Game-to-game dispersion is now measured for 10 players of the 11/14 cohort from official NBA.com game logs (points CV 0.344 over 40 box scores). What is still missing: (a) the same capture for the other 78 horizon prop rows - 4 of the 14 players on 11/14 have no NBA.com player id in any committed capture (F40); (b) any graded prop at all - no prop has yet been settled against a final box; (c) a shared-game window long enough to measure a prop-prop correlation (F42).</td>
+<td>Repeat the capture for every player on the horizon (ids for most are already in data/players_2026_27.json; the rest come from one roster-page read per team), then settle every published prop against its official box score after the game. scripts/prop_variance.py needs no change - it reads whatever is in data/proplogs/.</td>
+<td><span class="chip info">P4</span></td>
+<td class="src"><a href="https://www.nba.com/stats/players/boxscores" target="_blank" rel="noopener">S20</a></td>
+</tr>
+<tr id="Q4">
+<td>Q4</td>
+<td>How much of a team does an injury actually cost?</td>
+<td>Minutes for the 415 players outside the captured top-50 table (F2), and archived injury reports (F5) to fit the impact coefficient against.</td>
+<td>Two steps: backfill minutes so the minutes-at-risk number is complete, and archive every injury-report edition so the coefficient can be fitted on actual outcomes instead of being a declared modelling choice.</td>
+<td><span class="chip info">P5</span></td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">S7</a></td>
+</tr>
+<tr id="Q5">
+<td>Q5</td>
+<td>What are the real same-game correlations?</td>
+<td>Play-by-play or box scores. Every rho used to price S9 and S10 is derived from the structure of the model, not measured (F6).</td>
+<td>Estimate empirical correlations from a season of official box scores - player-stat pairs for the same game, and side/total from final scores - then replace the MODEL-DERIVED block on the Correlations page.</td>
+<td><span class="chip info">P4</span></td>
+<td class="src"><a href="https://www.nba.com/stats/players/boxscores" target="_blank" rel="noopener">S20</a></td>
+</tr>
+<tr id="Q6">
+<td>Q6</td>
+<td>Does the Emirates NBA Cup change how teams play?</td>
+<td>Any measurement. Twenty-five of the 51 games in the test window were Cup group games, and point differential is the Cup tiebreaker, which plausibly changes late-game behaviour in blowouts - but nothing in the captured data measures it.</td>
+<td>Compare Cup games to non-Cup games within the existing window, matching on the same team ratings and looking at whether decided games run up bigger margins. The sample is already large enough to attempt this.</td>
+<td><span class="chip info">P5</span></td>
+<td class="src"><a href="https://www.nba.com/nba-cup/2026" target="_blank" rel="noopener">S18</a></td>
+</tr>
+<tr id="Q7">
+<td>Q7</td>
+<td>How should the model treat overtime?</td>
+<td>A decision. The window contains a 284-point double-overtime game (Detroit 144, Washington 140 on 2026-11-12) and one single-OT game, both of which inflate the fitted total-error spread.</td>
+<td>Either model regulation separately from overtime, or winsorise the residuals when fitting. Both can be evaluated on the existing 51-game sample.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">S3_2026-11-12</a></td>
+</tr>
+<tr id="Q8">
+<td>Q8</td>
+<td>Should the reference line be replaced by a real market line once prices are logged?</td>
+<td>The prices themselves (Q1). Once they exist the reference model can be retired and every strategy re-graded against something real.</td>
+<td>Run both in parallel for a month - model-vs-reference and model-vs-market - and keep whichever grading set is more predictive of market performance.</td>
+<td><span class="chip info">P3</span></td>
+<td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
+</tr>
+</tbody></table></div>
+<p class="fine">17 open, 17 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
+<h2 class="sec">The suggestion catalogue, ranked for review</h2><p class="secsub">18 suggestions as they exist in the repository, with the recommendation the repository already makes and the decision it belongs to. Nothing has been implemented.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>ID</th>
+<th>Category</th>
+<th>Suggestion</th>
+<th>The problem it fixes</th>
+<th>What the repo recommends</th>
+<th>Decision</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>SG1</td>
+<td><span class="chip info">Data</span></td>
+<td><b>Add a results backfill covering the whole season</b></td>
+<td>The out-of-sample window is 28 games because only 2026-11-08 onward was captured. The season began 2026-10-20, so roughly 200 games are missing and no strategy can reach the 30-play sample gate.</td>
+<td>Take option 1. It is the cheapest change on this list and it is a prerequisite for four other items.</td>
+<td><span class="chip info">P4</span></td>
+<td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>
+</tr>
+<tr>
+<td>SG2</td>
+<td><span class="chip info">Data</span></td>
+<td><b>Log real closing prices</b></td>
+<td>Every 'edge' on the site is edge against a naive model standing in for the market (F3). Without real prices there is no way to say whether any of this is profitable.</td>
+<td>Option 1 if a licensed feed is available, option 2 as a stopgap. Until either happens, the site should keep saying 'model-vs-reference units' rather than 'profit'.</td>
+<td><span class="chip info">P3</span></td>
+<td class="src"><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">S15</a></td>
+</tr>
+<tr>
+<td>SG3</td>
+<td><span class="chip info">Data</span></td>
+<td><b>Complete the player-minutes table</b></td>
+<td>Minutes are known for 50 of 465 players (F2). The availability impact is therefore a floor and is 0.00 for several teams that are clearly missing rotation players.</td>
+<td>Option 1 or 2. If neither is taken, the Injuries page must keep the coverage column and confidence label visible so a 0.00 is never read as healthy.</td>
+<td><span class="chip info">P5</span></td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">S7</a></td>
+</tr>
+<tr>
+<td>SG4</td>
+<td><span class="chip ok">Site / UI</span></td>
+<td><b>Show the confidence label next to every derived number</b></td>
+<td>The site mixes three kinds of number - official values, arithmetic on official values, and modelling choices. They look identical in a table.</td>
+<td>Option 1. The whole verification rule depends on the reader being able to tell these apart at a glance.</td>
+<td>&mdash;</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>SG5</td>
+<td><span class="chip ok">Site / UI</span></td>
+<td><b>Add a graded-results page that updates itself</b></td>
+<td>Picks are published as PENDING and nothing currently grades them once games finish.</td>
+<td>Option 1, and it should be automatic - grading must not depend on anyone remembering.</td>
+<td><span class="chip info">P3</span></td>
+<td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>
+</tr>
+<tr>
+<td>SG6</td>
+<td><span class="chip ok">Site / UI</span></td>
+<td><b>Separate the two meanings of 'edge' everywhere in the UI</b></td>
+<td>'Edge' currently means the gap between the originated number and the reference line. A reader will assume it means edge against a book.</td>
+<td>Option 1, and reserve the word 'edge' for a market comparison once SG2 lands.</td>
+<td><span class="chip info">P2</span></td>
+<td class="src"><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">S15</a></td>
+</tr>
+<tr>
+<td>SG7</td>
+<td><span class="chip warn">Model</span></td>
+<td><b>Make the gates do something</b></td>
+<td>Gates are currently reported but not enforced: a strategy that fails G1 still appears on the Picks page.</td>
+<td>Option 1. Tier-driven staking keeps the information visible while making the status unambiguous.</td>
+<td><span class="chip info">P4</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">S2</a></td>
+</tr>
+<tr>
+<td>SG8</td>
+<td><span class="chip warn">Model</span></td>
+<td><b>Handle overtime and extreme games explicitly</b></td>
+<td>A 284-point double-overtime game sits in a 28-game sample and inflates the fitted total-error spread, which in turn flattens every probability the model produces.</td>
+<td>Option 2 as a stopgap alongside SG1; revisit option 1 once the sample is large enough to evaluate it.</td>
+<td>&mdash;</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">S3_2026-11-12</a></td>
+</tr>
+<tr>
+<td>SG9</td>
+<td><span class="chip warn">Model</span></td>
+<td><b>Add an Emirates NBA Cup adjustment - but only after measuring it</b></td>
+<td>The 2026-11-13 slate is entirely Cup group play. Point differential is the Cup tiebreaker, which could change late-game behaviour, but nothing in the data measures it (Q6).</td>
+<td>Option 1. Do not add it until it is measured.</td>
+<td>&mdash;</td>
+<td class="src"><a href="https://www.nba.com/nba-cup/2026" target="_blank" rel="noopener">S18</a></td>
+</tr>
+<tr>
+<td>SG10</td>
+<td><span class="chip info">Operations</span></td>
+<td><b>Publish the daily refresh log on the site</b></td>
+<td>The refresh job has never run (F7), and if it fails silently the site will quietly go stale while still looking current.</td>
+<td>Option 1. A stale data set presented as current is the worst failure mode this site has.</td>
+<td><span class="chip info">P1</span></td>
+<td class="src"><a href="https://docs.github.com/en/actions" target="_blank" rel="noopener">S19</a></td>
+</tr>
+<tr>
+<td>SG11</td>
+<td><span class="chip ok">Site</span></td>
+<td><b>Make the horizon the centre of the site, not a page inside it</b></td>
+<td>The repository had grown two complete sites plus three sets of pages, and the landing page led with a research narrative rather than with the next three days of games. A decision-maker opening the site had to find the picks page before finding out what was on tonight.</td>
+<td>Option 1. It is what this build did. The earlier builds are preserved and linked as archives rather than deleted.</td>
+<td>&mdash;</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">S4</a></td>
+</tr>
+<tr>
+<td>SG12</td>
+<td><span class="chip info">Decision support</span></td>
+<td><b>Put the unverified column on every table instead of only on the flags page</b></td>
+<td>A reader who lands on the Picks page sees numbers. The fact that the ratings end at 11/12, that five of ten teams had not filed an injury report, and that no price feed exists is on a different page. That is a decision-making risk: a number that is a lower bound looks like a number that is a fact.</td>
+<td>Option 1, and it is already in place on this build: every table that cannot be sourced says so in the row itself.</td>
+<td><span class="chip info">P2</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>SG13</td>
+<td><span class="chip info">Decision support</span></td>
+<td><b>Add a one-screen answer to 'what should I look at tonight'</b></td>
+<td>The site publishes 27 games and 63 paper picks. Nothing ranks them, because ranking on a model edge that has not cleared the skill gate would be misleading. The reader is left to do the sorting themselves.</td>
+<td>Option 1, but only once the price feed in SG2 exists. Before then any ranking is a ranking of model noise, and a shortlist that looks like a recommendation is the most dangerous thing this site could publish.</td>
+<td>&mdash;</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">S4</a></td>
+</tr>
+<tr>
+<td>SG14</td>
+<td><span class="chip bad">Trust</span></td>
+<td><b>Make the verification reproducible by anyone, not only by this repository</b></td>
+<td>Every number on the site is meant to be checkable against an official page, and each row carries its link. But a reviewer who wants to confirm the build itself has to read five Python scripts and know which raw file feeds which output.</td>
+<td>Option 1. The mapping is already in the code; it needs a page.</td>
+<td><span class="chip info">P6</span></td>
+<td class="src"><a href="https://docs.github.com/en/actions" target="_blank" rel="noopener">S19</a></td>
+</tr>
+<tr>
+<td>SG15</td>
+<td><span class="chip warn">Data and model</span></td>
+<td><b>Publish one line set, one ratings window, one sign convention</b></td>
+<td>Two projection sets with different ratings windows are published together, and they disagree on every game with a Build B point-spread pick (F26). Their 'spread (home)' fields use opposite sign conventions under similar labels (F27).</td>
+<td>Option 1. The newer ratings use every official game through 11/12. Adopt the sign convention of Build A (home spread = minus the projected home margin) on every page.</td>
+<td><span class="chip info">P2</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>SG16</td>
+<td><span class="chip bad">Verification</span></td>
+<td><b>Make the official-value check part of the gate</b></td>
+<td>VERIFY OK checks that links resolve and rows have sources, not that values match NBA.com (F34). The conflicts in F26, F27 and F29 passed it.</td>
+<td>Option 1. The check takes seconds, and it is the only check on this list that would have caught the conflicts before publication.</td>
+<td><span class="chip info">P1</span></td>
+<td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>
+</tr>
+<tr>
+<td>SG17</td>
+<td><span class="chip warn">Data and model</span></td>
+<td><b>Finish the game-log capture so props stop being a point estimate with no width</b></td>
+<td>Ten players now have measured dispersion; 78 horizon prop rows still publish no probability (Q3, F40, F42). The projection and the anchor differ by at most 0.52 of a measured SD, so nothing is settable - and that verdict rests on three or four games a player.</td>
+<td>Option 1 first, then option 2 for the parlay cohort. Option 1 is what turns 78 blank cells into numbers with sources; option 2 is the only route to a measured rho, and it is worth doing after the desk has a week of graded props to judge.</td>
+<td>&mdash;</td>
+<td class="src"><a href="https://www.nba.com/stats/players/boxscores" target="_blank" rel="noopener">S20</a></td>
+</tr>
+<tr>
+<td>SG18</td>
+<td><span class="chip warn">Model</span></td>
+<td><b>Replace the flat 0.55 production-transfer rule with per-stat minutes elasticities</b></td>
+<td>scripts/injury_impact.py and originate_horizon.py move a line by a declared constant (production_transfer = 0.55) for any absent player, whatever the stat. Measured on 40 official box scores, points move at about 1.29x their minutes share and assists at 0.49x - one flat number is wrong in both directions (A15).</td>
+<td>Option 1, sequenced behind SG17 option 2. Do not re-fit on this week's sample to move a live line.</td>
+<td><span class="chip info">P5</span></td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">S7</a></td>
+</tr>
+<tr>
+<td>SG19</td>
+<td><span class="chip info">Operations / model</span></td>
+<td><b>Cut the pickable horizon against the game-day edition, and freeze at that cut</b></td>
+<td>The pipeline currently originates and publishes lines against whatever edition the overnight capture found. For a 7:00 PM ET slate that is up to fifteen hours before the league's own game-day window closes, and the measured consequence is on the site: four clubs filed in the meantime and the model line for their games moved by 0.0 to 2.6 points only because the rest of the names could not be priced at all.</td>
+<td>Option A, with the frozen copy kept and diffed. Publish a line, then a delta, never a mutated line.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG20</td>
+<td><span class="chip info">Data / model</span></td>
+<td><b>Either give every listed player a minutes row or stop printing 0.00 for an unknown</b></td>
+<td>The availability impact is computed as (status weight x minutes share) x 15.0, and a player with no minutes row contributes 0.00 - indistinguishable in the table from a player whose absence costs nothing. Tonight that is 20 of the 24 rows the game-day edition added and 45 of the 50 rows it lists for the five games - it is the difference between a line that moved and a line that did not.</td>
+<td>Both of the first two: the dash is a one-line honesty fix that should ship now, the per-club capture is the actual repair.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG21</td>
+<td><span class="chip ok">Site / UI</span></td>
+<td><b>Show an edition timeline per game: what the model knew, and when</b></td>
+<td>Every table on the site carries a source id, so a reader can find WHERE a value came from, but nothing shows WHEN a row ceased to be the newest word. Today the gap between the edition behind the lines and the newest published edition was nine hours and seventeen minutes, and it could only be discovered by opening two PDFs.</td>
+<td>Option A first; the badge follows for free.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG22</td>
+<td><span class="chip info">Site / data</span></td>
+<td><b>Never display a season leader without the report's verdict on him</b></td>
+<td>The official game cards print a season leader for each club that is a pure season-average read-out. On 2026-11-16 that widget shows Anthony Edwards for Minnesota while the report rules him out, and on 11/14 it shows Caleb Wilson for Chicago, also out (F49). Any prop table or card copy that inherits that name is quoting a player who is not playing.</td>
+<td>Option A. The card is official and should stay cited; it should stop being unqualified.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG23</td>
+<td><span class="chip info">Repo / CI</span></td>
+<td><b>Do not let a follow-up commit cancel the deploy it is describing</b></td>
+<td>The Pages workflow now isolates PR runs from production runs (PR #75), but production still cancels in progress. A seat that merges a change and then pushes a board-record commit within a minute cancels its own deploy and leaves a `cancelled` badge on the merge commit. Two seats have now reported a Pages deploy as 'confirmed' off a run id, and a cancelled run is not a deploy.</td>
+<td>Option A, because it makes the badge truthful rather than asking every session to remember a convention. Option B costs nothing and can be adopted today.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Sources are the official pages the suggestion is built on. A suggestion that adds a source is the only kind that can add a link here, which is why the rows for licensed-price work point at the NBA page that shows the gap.</p>
+<h2 class="sec">What the 2026-11-14 18:40Z re-read changed, and what it did not</h2><p class="secsub">Recorded here because a decision page that hides its own findings is not a decision page.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Finding</th>
+<th>What was done about it</th>
+<th>Status</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>The site published 39 flags, 13 answered + 18 open questions and 16 suggestions while the repository held 46, 15 + 19 and 18</td>
+<td>FIXED in this session: <code>build_dashboard.py</code> now copies the authored files from <code>data/content</code> on every build and fails loudly if one is missing.</td>
+<td><span class="chip ok">fixed</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/flagged.json" target="_blank" rel="noopener">diff</a></td>
+</tr>
+<tr>
+<td>The site prices availability from the 04:15 AM ET injury edition; the newest published is 01:30 PM ET, and 33 status lines changed in between</td>
+<td>LABELLED, not re-priced: every line now carries the edition it came from and says NOT RE-PRICED. Re-pricing needs decision P1.</td>
+<td><span class="chip warn">labelled</span></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">official PDF</a></td>
+</tr>
+<tr>
+<td>Four of the five teams the site marks 'had not filed' had filed by 01:30 PM ET</td>
+<td>CORRECTED in the data: the listing count and the report status on all 27 lines now come from the 01:30 PM ET edition.</td>
+<td><span class="chip ok">fixed</span></td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">official index</a></td>
+</tr>
+<tr>
+<td>19 of 30 teams moved between the published ratings window and the live Teams Advanced page</td>
+<td>NOT CHANGED BY DESIGN: the lines were computed from the published window, so re-basing the ratings table alone would make two pages disagree. The live value is shown beside the published one. Which set is official is decision P2.</td>
+<td><span class="chip warn">needs P2</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">official page</a></td>
+</tr>
+<tr>
+<td>The 18:40Z standings read disagreed with the committed copy on 18 of 30 teams</td>
+<td>NO DEFECT: the committed capture was taken at 00:45Z, before the 11/13 finals, and the site table already carried the finals. Verified, not assumed.</td>
+<td><span class="chip ok">verified</span></td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">official page</a></td>
+</tr>
+<tr>
+<td>All 18 published backtest metrics and the S1 record were re-derived from the repository's own rows</td>
+<td>NO DEFECT: 18 of 18 reproduce exactly (MAE, RMSE, bias, Brier, log loss, straight-up, and 23-9 = +11.909 units at -110, Wilson 95% [0.5463, 0.8444], exact binomial p = 0.0201).</td>
+<td><span class="chip ok">verified</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">input page</a></td>
+</tr>
+</tbody></table></div>
+<h2 class="sec">How to use this page</h2><p class="secsub">Three steps, in order.</p>
+<ol class="steps"><li>Read P1 and P6 first. Both are cheap, neither needs money, and together they stop the site from publishing a number that is older than it says it is.</li><li>Answer P3 (price feed) before reading the leaderboard as anything other than a research ranking. Until it is answered, no strategy on this site can be called a market edge, and that is not a defect - it is the missing input.</li><li>Treat P2, P4 and P5 as one decision about what the published line means. Changing any one of them changes what every page quotes.</li></ol>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

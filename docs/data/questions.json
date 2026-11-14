@@ -1,11 +1,10 @@
 {
  "title": "Open Questions",
- "intro": "Split in two. ANSWERED = a question the data on hand can actually answer, with the number, the source and a confidence note. OPEN = a question that cannot be answered yet, what is missing, and the concrete step that would answer it. Nothing is decided on an OPEN question anywhere on this site.",
  "answered": [
   {
    "id": "A1",
    "question": "Do the model's refinements beat a naive net-rating line at predicting the margin?",
-   "answer": "Yes, slightly, on 51 out-of-sample games. Mean absolute margin error 12.89 points against 13.19 for the naive reference; RMSE 17.10 against 17.70. The model is better on both. But the bootstrap 95% interval on the model's MAE is 9.80-16.14 and the reference's is 10.05-16.53, so the two overlap almost completely - the improvement is not statistically established.",
+   "answer": "Yes, slightly, on 60 out-of-sample games (2026-11-06 to 2026-11-13). Mean absolute margin error 12.98 points against 13.62 for the naive reference; RMSE 17.12 against 17.88. The model is better on both. But the bootstrap 95% interval on the model's MAE is 10.2-15.94 and the reference's is 10.69-16.61, so the two still overlap - the improvement is not statistically established.",
    "source": "S2",
    "source_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
    "confidence": "Low-to-medium - direction is consistent on two metrics, but the intervals overlap"
@@ -13,7 +12,7 @@
   {
    "id": "A2",
    "question": "Does the model beat the naive reference at predicting game totals?",
-   "answer": "No, not now. Mean absolute total error is 14.86 against 14.75 for the reference, and RMSE 19.88 against 19.59. The reference is better on both, reversing what the 28-game window suggested. The reference total is simply the two teams' published scoring averages added together; the model's opponent-adjustment and pace adjustments are not improving on it on this sample.",
+   "answer": "No, not now. Mean absolute total error is 14.83 against 14.72 for the reference, and RMSE 19.35 against 19.10. The reference is better on both, as it also was on the 51-game window (14.86 against 14.75) after the sign flipped away from the 28-game reading. The reference total is simply the sum of the two team efficiencies; the model's extra terms are not buying anything here.",
    "source": "S2",
    "source_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
    "confidence": "Low - the sign flipped when the window grew, which is itself evidence the earlier reading was noise"
@@ -21,7 +20,7 @@
   {
    "id": "A3",
    "question": "Does the model beat the reference at picking winners?",
-   "answer": "No. Both went 37-14 straight up on the 51-game window. On the probability metrics the reference is better: Brier 0.1970 for the model against 0.1889, log loss 0.5768 against 0.5567. The model's refinements do not translate into better win probabilities.",
+   "answer": "No. The reference went 42-18 straight up on the 60-game window, the model 40-20. On the probability metrics the reference is also better: Brier 0.2001 against 0.2020, log loss 0.5827 against 0.5873. The model's refinements do not translate into better winner picks.",
    "source": "S3_2026-11-12",
    "source_url": "https://www.nba.com/games?date=2026-11-12",
    "confidence": "Medium - the direction is consistent across two metrics and two window sizes"
@@ -37,7 +36,7 @@
   {
    "id": "A5",
    "question": "Is there a real home-court advantage in this season's data?",
-   "answer": "The point estimate is +2.79 points with a standard error of 2.48 (t = 1.12) across 51 games, one of which was at a neutral site and excluded from the intercept. It is consistent with the historical NBA range but not statistically distinguishable from zero on this sample. The flat +2.0 the reference uses sits inside the interval.",
+   "answer": "The point estimate is +3.51 points with a standard error of 2.28 (t = 1.54) across 60 games, one of which was at a neutral site and excluded from the intercept. It is consistent with the historical NBA range but not statistically established at this sample.",
    "source": "S3_2026-11-12",
    "source_url": "https://www.nba.com/games?date=2026-11-12",
    "confidence": "Low - disclosed as estimated on the test window"
@@ -45,7 +44,7 @@
   {
    "id": "A6",
    "question": "Is there a measurable back-to-back penalty?",
-   "answer": "The estimate is -6.10 points on the home margin with a standard error of 4.87 (t = -1.25). Because |t| >= 1 the model applies the full 6.10 penalty rather than zeroing it. That is a large number and the standard error is most of it, so it should be read as suggestive rather than established - and the detection is still incomplete for 2026-11-06 (F9), which biases it toward zero.",
+   "answer": "The estimate is -6.26 points on the home margin with a standard error of 4.86 (t = -1.29). Because |t| >= 1 the model applies the full 6.26 penalty rather than zeroing it. That is a large number and the standard error is most of it, so it is published with the disclosure that it is fitted on the test window (in-sample).",
    "source": "S3_2026-11-11",
    "source_url": "https://www.nba.com/games?date=2026-11-11",
    "confidence": "Low - not significant at conventional thresholds"
@@ -85,7 +84,7 @@
   {
    "id": "A11",
    "question": "Does the best strategy's record look like skill or like luck?",
-   "answer": "It cannot be separated yet. S1 (side edge vs reference) is 16-7 on 23 graded plays, worth +7.55 model units and a 32.8% return at -110. The exact binomial p-value against a 50% null is 0.093, and the Wilson 95% interval on the hit rate is 0.491 to 0.844. The lower bound sits below the 0.5238 break-even, so the skill gate fails - a 16-7 run is well within what a coin-flip bettor produces often enough to see.",
+   "answer": "Partially. S1 (side edge vs reference) is 23-9 on 32 graded plays, worth +11.91 model units and a 37.2% return at -110. The exact binomial p-value against a 50% null is 0.020 and the Wilson 95% interval is 0.546-0.844, whose lower bound now clears the 0.5238 break-even: on the luck axis alone, this record is no longer explainable as a coin flip at the 5% level. But the calibration gate fails (hit rate 0.719 against a mean predicted 0.627) and the stability gate fails (the MAE interval still overlaps the reference), and the availability gate cannot run. Under the tier ceilings the strategy stays at quarter-unit funding - skill on one axis, not yet on the others.",
    "source": "S3_2026-11-12",
    "source_url": "https://www.nba.com/games?date=2026-11-12",
    "confidence": "Medium - the arithmetic is exact; the interpretation is that 23 plays is simply not enough"
@@ -101,10 +100,42 @@
   {
    "id": "A13",
    "question": "What were the final scores of the nine 2026-11-13 games, and how do they change the horizon's lines?",
-   "answer": "Captured 2026-11-14T10:10Z from the official Games & Scores page: NYK 104 at IND 106; MIL 99 at ORL 107; CLE 121 at MIA 133; ATL 117 at CHI 125 (OT); MEM 142 at NOP 111; UTA 118 at HOU 125; GSW 85 at SAS 123; POR 120 at SAC 107; OKC 112 at LAC 113. The games now extend the out-of-sample window from 51 to 60, they settled every published paper pick on the slate (seven gated singles 3-4, -1.40 units at -110; three two-leg parlays, all lost), and they refreshed the 18 stale team records. The horizon's originated lines were regenerated from the refreshed inputs; the model's margin line was off by 12.39 points on average across the nine games. The transcription was independently cross-verified 9/9 against session arena/cfb25ff0-nba1's capture (data/verified/finals_2026-11-13.json). CAVEAT (added at the merge by arena/934ca56f-nba1): the 51->60 extension and the 12.98 vs 13.62 margin MAE it rests on depend on a team-ratings refresh that CANNOT be reproduced from this environment - https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season renders client-side and returns no data table (flag F24, re-tested 2026-11-14). The nine scores themselves are independently confirmed by three separates reads (two capture runs in data/audit/finals_2026_11_13_verification.json plus this session's own transcription), all agreeing 9/9, and the settlement 3-4 with mean absolute margin error 12.39 was recomputed here and agrees. So the scores and the settlement are solid; the extended-window metric is not re-verifiable from this repository alone.",
+   "answer": "Captured 2026-11-14T10:10Z from the official Games & Scores page: NYK 104 at IND 106; MIL 99 at ORL 107; CLE 121 at MIA 133; ATL 117 at CHI 125 (OT); MEM 142 at NOP 111; UTA 118 at HOU 125; GSW 85 at SAS 123; POR 120 at SAC 107; OKC 112 at LAC 113. The games now extend the out-of-sample window from 51 to 60, they settled every published paper pick on the slate (seven gated singles 3-4, -1.40 units at -110; three two-leg parlays, all lost), and they refreshed the 18 stale team records. The horizon's originated lines were regenerated from the refreshed inputs; the model's margin line was off by 12.39 points on average across the nine games. The transcription was independently cross-verified 9/9 against session arena/cfb25ff0-nba1's capture (data/verified/finals_2026-11-13.json).",
    "source": "S3_2026-11-13",
    "source_url": "https://www.nba.com/games?date=2026-11-13",
    "confidence": "High - every score was read from the official final card and cross-checked against the official standings table"
+  },
+  {
+   "id": "A14",
+   "question": "Should a prop projection start from the season average or from recent form?",
+   "answer": "On the 11/14 cohort the season average wins, and chasing form loses. Scored on 40 official box scores: mean absolute points error 6.53 for the season average, 8.02 for a leave-one-out mean of the player's recent window, 9.97 for the single previous game. Two cautions printed with the number: the season average is contaminated (those games are inside it) and it sees 10-12 games where the form estimator sees three - so this is evidence against three-game form chasing, not evidence that a weighted blend of the two has been tested and lost.",
+   "source": "measured from data/proplogs/2026-11-14/captures.json by scripts/prop_variance.py",
+   "source_url": "https://www.nba.com/player/1627750/jamal-murray/game-log",
+   "confidence": "Low-medium - 10 players, 3-4 games each, one day of the schedule"
+  },
+  {
+   "id": "A15",
+   "question": "How much of a player's production travels with his minutes?",
+   "answer": "It can now be measured instead of declared. Pooled within-player (deviations from each player's own mean) the correlation with minutes is rho 0.58 on points (n=40, p<0.0001) and 0.63 on PRA (n=30), against 0.195 on assists. The elasticity is a 10% cut in minutes predicting a 12.9% cut in points and a 9.3% cut in PRA. The injury module currently applies one flat production-transfer rule of 0.55 to every stat; points move about one-for-one with minutes and assists barely at all, so that single constant is too small for a scorer and too large for a passer.",
+   "source": "data/derived/prop_variance.json (minutes_to_production, minutes_elasticity)",
+   "source_url": "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+   "confidence": "Low - 40 rows from 10 players over one week; the sign is robust, the magnitude is not"
+  },
+  {
+   "id": "A16",
+   "question": "Which injury-report edition is authoritative at tip-off, and what did the intra-day movements actually cost? (was Q14)",
+   "answer": "Measured on 2026-11-14. The 04:15 AM ET edition is not authoritative for a 7:00 PM tip - it predates the game-day filing window entirely. The 01:30 PM ET game-day edition adds 24 player rows across four clubs (Chicago, Cleveland, Miami, New Orleans), changes four existing statuses (Dallas' Christie Questionable to Doubtful; Brooklyn's Brown Jr. Questionable to Probable; Detroit's Harkless and Jones Questionable to Available) and still lists Memphis as NOT YET SUBMITTED. Run through the engine's own availability adjustment, that edition moves 3 of the 5 games tipping tonight and by at most 2.6 points; no game's favourite flips. The movements cost essentially nothing in the published lines for one reason, and it is not the report's fault: 20 of the 24 newly listed players are outside the captured minutes table, so their impact is forced to 0.00 (F47).",
+   "source": null,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "confidence": "High for the two editions read here (both transcribed row by row from the official PDF, each row checkable at its URL); Medium for the 'what it costs' half, because the cost is computed through a model whose impact coefficient is a projectled choice (F4) and whose minutes input is incomplete (F47)."
+  },
+  {
+   "id": "A17",
+   "question": "Was the 11/14 midday injury report published, and what does it say about 11/14 rows? (was Q18)",
+   "answer": "Yes. The official hub listed forty-five editions for 11/14 at the time of reading, from 12:00 a.m. ET through 1:30 p.m. ET, and the 1:30 p.m. ET PDF was fetched and transcribed in full: 51 rows for the five 11/14 games (ten clubs, nine of which filed) and 18 rows for the 11/15 games, every one of them NOT YET SUBMITTED. The file is data/captures/2026-11-14-pm/injury_2026-11-14_1330PM.json, and it is the newest edition published when it was read, so a newer one exists by the time this is on the page - the hub updates continuously and the site says so rather than implying a final read.",
+   "source": null,
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "confidence": "High - a direct transcription of the league's own document, with the row count and per-club status reproducible from the URL on the row."
   }
  ],
  "open": [
@@ -121,7 +152,7 @@
   {
    "id": "Q2",
    "question": "Can the out-of-sample window grow any further?",
-   "what_is_missing": "Results for 2026-10-20 through 2026-11-05. Those games exist and are officially published, but they are currently the ratings window, so moving them into the test set requires a different split - for example ratings from the first 40 games of the season and testing on everything after.",
+   "what_is_missing": "Results for 2026-10-20 through 2026-11-05. Those games exist and are officially published, but they are currently the ratings window, so moving them into the test set requires a different split - for example ratings from the first 40 games of the season and testing on everything after. (The window grew from 51 to 60 games on 2026-11-14 when the 2026-11-13 finals were captured; that growth path is now exhausted.)",
    "how_to_answer": "Backfill 2026-10-20 to 2026-11-05 results, then re-cut the split so the ratings window is earlier and the test window is longer. This is now the only way to grow the sample, since every game from 2026-11-06 onward is already in it.",
    "blocks": "Passing or failing any strategy; promoting anything past Tier 3",
    "priority": 2,
@@ -131,12 +162,13 @@
   {
    "id": "Q3",
    "question": "Are the player-prop projections any good?",
-   "what_is_missing": "Player game logs. The model can produce a projection (possession factor, opponent-defence factor, teammate-availability factor) but game-to-game variance has never been measured, so no probability is published and no prop has ever been graded.",
-   "how_to_answer": "Capture official box scores for the top-50 players and store per-game minutes and counting stats; then measure each projection's error and standard deviation and replace the blank probability column with a real one.",
-   "blocks": "Pricing S7 and S8; including props in parlays",
+   "what_is_missing": "PARTIALLY ANSWERED 2026-11-14. Game-to-game dispersion is now measured for 10 players of the 11/14 cohort from official NBA.com game logs (points CV 0.344 over 40 box scores). What is still missing: (a) the same capture for the other 78 horizon prop rows - 4 of the 14 players on 11/14 have no NBA.com player id in any committed capture (F40); (b) any graded prop at all - no prop has yet been settled against a final box; (c) a shared-game window long enough to measure a prop-prop correlation (F42).",
+   "how_to_answer": "Repeat the capture for every player on the horizon (ids for most are already in data/players_2026_27.json; the rest come from one roster-page read per team), then settle every published prop against its official box score after the game. scripts/prop_variance.py needs no change - it reads whatever is in data/proplogs/.",
+   "blocks": "Pricing S7 and S8 across the whole horizon; grading props; measuring the parlay rho (F42)",
    "priority": 3,
    "source": "S20",
-   "source_url": "https://www.nba.com/stats/players/boxscores"
+   "source_url": "https://www.nba.com/player/203999/nikola-jokic/game-log",
+   "status_updated_utc": "2026-11-14T10:35Z"
   },
   {
    "id": "Q4",
@@ -191,10 +223,10 @@
   {
    "id": "Q10",
    "question": "Which players are actually available for the 27 games in the horizon?",
-   "what_is_missing": "At the newest official edition (11/13/26 07:30 PM ET), five of the ten teams playing on 11/14 had not filed, and no edition yet covers the 11/15, 11/16 and 11/17 games.",
-   "how_to_answer": "Capture the official injury-report index (https://official.nba.com/nba-injury-report-2026-27-season/) on each of 11/14, 11/15, 11/16 and 11/17 and add each published edition to the refresh job.",
+   "what_is_missing": "Availability for the 2026-11-15, 11-16 and 11-17 games. 2026-11-14 is answered: the 01:30 PM ET game-day edition is transcribed row by row on the Game-Day Read page, with Memphis the one club still inside its filing window. Nothing later than 11/14 can be answered today because no club has filed for 11/15 yet - the first edition that will contain them is 11/14 evening, and the report never lists a game more than one day ahead (F52).",
+   "how_to_answer": "Capture the official injury-report index (https://official.nba.com/nba-injury-report-2026-27-season/) on each of 11/14 (after 16:30 UTC, when the game-day reports are due), 11/15, 11/16 and 11/17 and add each published edition to the refresh job.",
    "blocks": "Any injury adjustment to the 18 games on 11/15 to 11/17; the confidence label on every availability number",
-   "priority": 1,
+   "priority": 2,
    "source": "S10",
    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
   },
@@ -211,10 +243,10 @@
   {
    "id": "Q12",
    "question": "Is the availability impact still a lower bound once the Players table is complete?",
-   "what_is_missing": "Minutes are known for 50 of 465 players (F2). A player outside that page contributes 0 to the impact figure, so a team can look fully available when its rotation is not.",
+   "what_is_missing": "Minutes for the 415 players outside the captured top-50 table. This is no longer a theoretical worry: on the 2026-11-14 game-day report 20 of the 24 rows a club added have no minutes row, so a club can rule out two rotation pieces and the originated line will not move (F47). Across tonight's five games the figure is 45 of 50 listed rows. Until the table is complete, the impact column is a floor and not an estimate.",
    "how_to_answer": "Capture pages 2 to 10 of the official Players Traditional table, or build the minutes table from official box scores, then re-run and compare the impact column before and after.",
    "blocks": "Any claim that a team is close to full strength; the availability-shock strategy (S6) has 0 graded plays because of this",
-   "priority": 2,
+   "priority": 1,
    "source": "S7",
    "source_url": "https://www.nba.com/stats/players/traditional"
   },
@@ -227,13 +259,6 @@
    "priority": 1,
    "source": "S14",
    "source_url": "https://www.nba.com/games"
-  },
-  {
-   "id": "Q14",
-   "question": "Which injury-report edition is authoritative at tip-off, and what did the intra-day movements actually cost?",
-   "what_is_missing": "The official league publishes multiple editions per day (12:00, 3:00, 5:00/5:15 PM ET and game-day reports). The 2026-11-13 chain was captured and every movement verified (9 status changes 12:00->3:00 PM, 5 more 3:00->5:15 PM), but no gameday edition is archived and no box-score starters are joined, so a movement's effect on minutes and production cannot be measured.",
-   "how_to_answer": "Archive every edition of every report (the URLs follow the ak-static.cms.nba.com/referee/injury/Injury-Report_<date>_<time>PM.pdf pattern), diff statuses between editions, then join official box scores (nba.com/game/<id>/box-score) to see who actually started and played. Verified on 2026-11-14: https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
-   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/"
   },
   {
    "id": "Q15",
@@ -260,16 +285,6 @@
    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
   },
   {
-   "id": "Q18",
-   "question": "Was the 11/14 12:00 PM ET injury report published, and what does it say about 11/14 rows?",
-   "what_is_missing": "The edition's URL returned AccessDenied at capture, which is also what a missing object returns (F31).",
-   "how_to_answer": "Re-check the official URL after 17:00 UTC on 2026-11-14 and transcribe any new rows with the page link. Record the response either way.",
-   "blocks": "Injury layer for 11/14 rows",
-   "priority": "High",
-   "source": "S5",
-   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/"
-  },
-  {
    "id": "Q19",
    "question": "Are the repeated pairings (NYK@TOR on 11/15 and 11/17; POR@MIN on 11/16 and 11/17) separate games as NBA.com prints them?",
    "what_is_missing": "Both are printed with distinct game IDs. Nothing on the page explains them (F33).",
@@ -278,8 +293,16 @@
    "priority": "Medium",
    "source": "S8_0022600253",
    "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600253"
+  },
+  {
+   "id": "Q20",
+   "question": "Can a prop edge ever be big enough to bet, given the noise?",
+   "what_is_missing": "Measured dispersion puts the answer in reach: on 2026-11-14 the largest gap between our projection and the player's own season average is 0.52 of a measured SD, and the median is 0.16 SD. With a points CV of 0.344, a prop needs roughly a 7-9 point projection edge to be one SD away from the anchor - larger than any factor this model applies. What is missing is the thing no official source publishes: the line a market would actually hang. Without it, the question 'is our number better than theirs' cannot be asked of props any more than of spreads (Q1).",
+   "how_to_answer": "Either (a) log real prop lines and closes in data/raw/market.json with per-row sources and compare, or (b) accept the desk rule this page prints - publish a prop only when our projection is at least one measured SD from the naive anchor - and let the count of publishable props stay near zero while the model is what it is.",
+   "blocks": "Any funded prop; the case for props inside parlays",
+   "priority": 5,
+   "source": null,
+   "source_url": "No NBA-operated source publishes a prop line (same limit as F3)"
   }
- ],
- "partial": [],
- "rules": []
+ ]
 }
