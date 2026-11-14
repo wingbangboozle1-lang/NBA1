@@ -595,3 +595,25 @@ No value was inferred. Venue names `Rocket Arena` (Cleveland) and `Mortgage Matc
 | Merge | `--merge` at 2026-11-14T01:01:40Z, merge commit `fec27bd86f497135fb2a9057f5166cf9142f851c` |
 | Pages deploy | pending — the CI `validate` job's "Regenerate the verification page" step failed on `main` (PR #29 committed a stale `verification.html` that no longer matches `scripts/build_verification_page.py` output). Fix: regenerated `verification.html` from `data/raw/probe_official.json` on this branch; PR #31 will carry the fix. |
 | Live URL | https://wingbangboozle1-lang.github.io/NBA1/ |
+
+---
+
+## 14. Current session `arena-159ed109` — independent audit and integration handoff
+
+| # | Task | Status | File scope | Notes |
+| --- | --- | --- | --- | --- |
+| Z01 | Independently audit the current merged tree, document refresh-pipeline limits, and hand off non-overlapping findings to the active integration session | in progress | `COORDINATION.md`, `FINAL_AUDIT.md` (new) | The current main already includes PR #26/#27/#29/#30 integration work. PR #31 (`arena/0de855e5-nba1`) is open and owns the current fresh-slate/site integration. This session will not duplicate its slate work or edit its site, data, scripts, or workflow files. |
+
+### Rebase conflicts and scope update
+
+Before the initial push, `git pull --rebase origin main` advanced the base from
+`9ccccb2` to `a17b19a` (PR #27) and produced a `COORDINATION.md` append conflict.
+Both the W01 record and this session's claim were preserved. Before the next
+push, a second `git pull --rebase origin main` advanced the base to `57b4284`
+(PR #30's integration plus later main updates) and conflicted at the same
+append-only board area. The current-main board is retained in full; this session
+was moved to §14. No files from the other sessions' scopes were changed.
+
+This session now audits only the merged current tree and records requests for
+active integration owners. It does not claim that PR #31's unmerged slate values
+or pending deployment have been independently verified.
