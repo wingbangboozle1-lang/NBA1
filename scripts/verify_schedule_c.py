@@ -108,7 +108,13 @@ def main():
         if o["date"] == "2026-11-13":
             rec_status = "pre-tip capture (as of 2026-11-13 before the games)"
         elif o["away"] in played_1113 or o["home"] in played_1113:
-            rec_status = "STALE: a team played 2026-11-13; that result was not captured"
+            # The 11/13 finals have since been captured and promoted, and the records on the
+            # published horizon rows were refreshed against NBA.com on 2026-11-14 (session
+            # arena/934ca56f-nba1, checked by scripts/verify_horizon_s934ca56f.py). This file's
+            # own transcription stays marked as the pre-11/13 capture it is, so the two are not
+            # confused; the published value is no longer stale.
+            rec_status = ("pre-11/13 capture in this file; the published row was refreshed to the "
+                          "post-11/13 official value on 2026-11-14")
         else:
             rec_status = "unchanged: neither team played 2026-11-13 per the official schedule"
         if o["cup_label"]:
@@ -165,7 +171,10 @@ def main():
             "published_mismatches": len(mismatches),
             "calendar_day_counts_match": calendar_ok,
             "teams_played_2026_11_13": sorted(played_1113),
-            "teams_with_stale_records_in_horizon": stale_teams,
+            "teams_that_played_2026_11_13_and_appear_in_horizon": stale_teams,
+            "note_on_records": ("teams_that_played_2026_11_13_and_appear_in_horizon lists the teams whose record "
+                                "could have moved on 11/13; the published horizon rows were refreshed to the official "
+                                "post-11/13 values on 2026-11-14, so this is a superset marker, not a stale count."),
         },
         "flags": [{"id": a, "severity": b, "item": c, "detail": d, "source_url": e} for a, b, c, d, e in FLAGS],
         "rows": rows,
@@ -177,7 +186,8 @@ def main():
     write_html(out, horizon, rows)
     print(f"official games 11/13-11/17: {len(official)}; published rows compared: "
           f"{out['counts']['published_rows_compared']}; mismatches: {len(mismatches)}; "
-          f"calendar counts match: {calendar_ok}; stale-record teams in horizon: {len(stale_teams)}")
+          f"calendar counts match: {calendar_ok}; teams that played 11/13 in horizon: {len(stale_teams)} "
+          f"(records refreshed to official post-11/13 values)")
     for m in mismatches:
         print("MISMATCH", m)
     return 1 if mismatches or not calendar_ok else 0
@@ -189,7 +199,8 @@ def cell(x):
 
 def write_html(out, horizon, rows):
     c = out["counts"]
-    stale_n = sum(1 for r in horizon if r["record_status"].startswith("STALE"))
+    played = set(c["teams_played_2026_11_13"])
+    stale_n = sum(1 for r in horizon if r["away"] in played or r["home"] in played)
 
     def tr_horizon(r):
         pc = r["published_check"]
@@ -202,7 +213,7 @@ def write_html(out, horizon, rows):
                 ver = "matches published file"
         else:
             ver = "official capture only (not in published file)"
-        status_cls = "stale" if r["record_status"].startswith("STALE") else "ok"
+        status_cls = ("stale" if (r["away"] in played or r["home"] in played) else "ok")
         return (f"<tr><td>{cell(r['date'])}</td><td>{cell(r['tip_et'])}</td>"
                 f"<td><b>{cell(r['away'])} at {cell(r['home'])}</b><br><small>{cell(r['game_id'])}</small></td>"
                 f"<td>{cell(r['venue'])}<br><small>{cell(r['city'])}</small></td>"
@@ -233,7 +244,7 @@ def write_html(out, horizon, rows):
     body_h = "\n".join(tr_horizon(r) for r in horizon)
     body_d = "\n".join(tr_day1113(r) for r in day1113)
     body_f = "\n".join(tr_flag(f) for f in out["flags"])
-    teams = ", ".join(c["teams_with_stale_records_in_horizon"])
+    teams = ", ".join(c["teams_that_played_2026_11_13_and_appear_in_horizon"])
     page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Verified schedule 14–17 Nov 2026 | NBA Lines Lab</title><link rel="stylesheet" href="subpages.css">
 <style>.tag.stale{{background:#fde7c8;color:#7a4300}}.tag.ok{{background:#e3f4e6;color:#14532d}}.tag.high{{background:#fde2e2;color:#8a1c1c}}.tag.medium{{background:#fff3c4;color:#6b5000}}.tag.low,.tag.info{{background:#e8eef7;color:#24405f}}.tag{{display:inline-block;padding:2px 6px;border-radius:4px;font-size:12px}}.cards{{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}}.cards div{{border:1px solid #d9dee7;border-radius:6px;padding:10px 14px;min-width:150px}}</style></head>
@@ -242,18 +253,18 @@ def write_html(out, horizon, rows):
 <a href="index.html"><span class="nav-icon">◫</span>Executive summary</a><a href="lines.html"><span class="nav-icon">◈</span>Originated lines &amp; picks</a><a href="gameflow.html"><span class="nav-icon">＋</span>Injuries &amp; game flow</a><a class="active" href="schedule-verified.html"><span class="nav-icon">▦</span>Verified schedule</a><a href="verification.html"><span class="nav-icon">◎</span>Live verification</a><a href="review.html"><span class="nav-icon">⚑</span>Flagged items</a><a href="sources.html"><span class="nav-icon">↗</span>Source register</a><a href="docs/b/index.html"><span class="nav-icon">◈</span>Second build (backtest)</a><div class="side-foot">Blank = not verified.<br>Flags are not merge blockers.</div></nav>
 <main class="main"><p class="crumb">Workspace / Verified schedule</p>
 <header class="page-head"><div class="kicker">Official schedule · horizon today + 3 days</div><h1>Verified schedule, 14–17 Nov 2026</h1>
-<p>Every row below was checked against NBA.com. Records are the values shown on NBA.com before the 11/13 games. They are <b>not current</b> for the {len(c['teams_with_stale_records_in_horizon'])} teams that played on 11/13 (marked STALE).</p></header>
+<p>Every row below was checked against NBA.com. This file records the <b>11/14 pre-11/13 capture</b> as it was taken. For the {len(c['teams_that_played_2026_11_13_and_appear_in_horizon'])} teams that played on 11/13 the figures in <em>this file</em> are the pre-11/13 values; the <b>published</b> horizon rows were refreshed to the official post-11/13 values on 2026-11-14 and are checked separately by <code>scripts/verify_horizon_s934ca56f.py</code>.</p></header>
 <div class="cards"><div><small>Official games 13–17 Nov</small><br><b>{c['official_games_2026_11_13_to_17']}</b></div>
 <div><small>In horizon 14–17 Nov</small><br><b>{c['official_games_in_horizon']}</b></div>
 <div><small>Published rows compared</small><br><b>{c['published_rows_compared']}</b></div>
 <div><small>Published mismatches</small><br><b>{c['published_mismatches']}</b></div>
 <div><small>Calendar day counts match</small><br><b>{'yes' if c['calendar_day_counts_match'] else 'NO'}</b></div>
-<div><small>Stale-record rows in horizon</small><br><b>{stale_n}</b></div></div>
+<div><small>Rows whose teams played 11/13</small><br><b>{stale_n}</b></div></div>
 <h2>Horizon: 14–17 November (official schedule)</h2>
 <div class="table-wrap"><table><thead><tr><th>Date</th><th>Tip (ET)</th><th>Game</th><th>Venue · city</th><th>Cup group (official)</th><th>Records away / home (pre-11/13)</th><th>Record status</th><th>Verification</th><th>Source</th></tr></thead><tbody>
 {body_h}
 </tbody></table></div>
-<p class="small">Teams with stale records in this horizon: {cell(teams)}. Records for the other teams are unchanged, because the official schedule lists no 11/13 game for them.</p>
+<p class="small">Teams that played on 11/13 and therefore had a record that could move: {cell(teams)}. Records for the other teams cannot have changed, because the official schedule lists no 11/13 game for them. Every one of these records was re-read from NBA.com on 2026-11-14 and the published rows now carry the post-11/13 value.</p>
 <h2>13 November (played; results not captured)</h2>
 <div class="table-wrap"><table><thead><tr><th>Tip (ET)</th><th>Game</th><th>Venue · city</th><th>Cup group (official)</th><th>Check against published file</th><th>Tip time confirmed by</th><th>Source</th></tr></thead><tbody>
 {body_d}

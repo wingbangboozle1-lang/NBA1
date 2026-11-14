@@ -1,6 +1,6 @@
 {
   "title": "Suggestions",
-  "intro": "Improvements to the site and to the decision-making process, written so a reviewer can pick a path rather than inherit one. Each suggestion states the problem, the options with their cost and what they unlock, and a recommendation. Nothing here has been implemented.",
+  "intro": "Improvements and process changes, each written as options with effort, risk and what it unlocks, so a reviewer can pick a path before anything is implemented. Nothing on this page has been implemented unless the row says so. The decision index below the table lists, in one place, every decision this site is waiting on.",
   "items": [
     {
       "id": "SG1",
@@ -399,6 +399,70 @@
       "recommendation": "Option 1. The check takes seconds, and it is the only check on this list that would have caught the conflicts before publication.",
       "decision_needed": "Reviewer: approve adding the checker to the gate.",
       "source": "S14"
+    },
+    {
+      "id": "SG17",
+      "title": "Add a single decision log so a choice, once made, cannot be re-litigated by accident",
+      "category": "Process",
+      "problem": "Nothing in the repository records which suggestions were actually chosen, by whom, or when. A reviewer can pick a path on this page, but the next session has no way to know a decision was taken, so the same question gets re-opened and sometimes re-answered differently. Two builds already exist for exactly this reason.",
+      "options": [
+        {
+          "option": "A DECISIONS.md file: one row per decision (id, date, decision, evidence link, owner), updated when a suggestion is accepted or rejected",
+          "effort": "Low - one file and one paragraph in COORDINATION.md",
+          "risk": "Low",
+          "unlocks": "A durable trail; a new session can read what was decided instead of guessing"
+        },
+        {
+          "option": "Fold the decision state into suggestions.json as a status field and render it on this page",
+          "effort": "Low-medium - one field and one column",
+          "risk": "Low",
+          "unlocks": "The decision shows on the page the reviewer reads"
+        },
+        {
+          "option": "Keep using COORDINATION.md only",
+          "effort": "None",
+          "risk": "Medium - the task board is long and is organised by session, not by decision",
+          "unlocks": "Nothing new"
+        }
+      ],
+      "recommendation": "Option 2, plus a one-line pointer at the top of COORDINATION.md. The page a reviewer actually reads is the right place for the state of a decision.",
+      "decision_needed": "Whether decisions are tracked on the site, in the repo, or both; and who has authority to mark one accepted.",
+      "source": "S1"
+    },
+    {
+      "id": "SG18",
+      "title": "Discover missing information systematically instead of discovering it by accident",
+      "category": "Process",
+      "problem": "Every gap closed so far was found by someone noticing it, not by a method that looks for gaps. The repository has 37 flags and 18 open questions, and nothing that says which ones are cheap to close, which are expensive, or which are blocking a decision. Missing information is therefore discovered at the speed of luck.",
+      "options": [
+        {
+          "option": "A gap-closure triage: for every open question and flag, record cost to close (minutes/hours), what it blocks, and whether an official source exists at all. Sort by (blocks a decision) / (cost).",
+          "effort": "Low - a one-off pass over the existing 18 questions and 37 flags",
+          "risk": "Low",
+          "unlocks": "A ranked list of what to find next; the top item is almost certainly the injury editions for 11/15-11/17"
+        },
+        {
+          "option": "A source-reachability probe run on a schedule: for every official URL the site relies on, record whether this environment can read it, when it was last read, and what it returned",
+          "effort": "Medium - scripts/probe_official.py already exists and records reachability; it needs to be surfaced per source",
+          "risk": "Low",
+          "unlocks": "Turns 'the fetch tool returned AccessDenied' into a dated fact per source"
+        },
+        {
+          "option": "A coverage table for every official table the model depends on: how many rows are published, how many were captured, and which players or teams are missing",
+          "effort": "Medium",
+          "risk": "Low",
+          "unlocks": "Makes the 50-of-465 player-minutes gap and similar ones visible rather than buried in a flag"
+        },
+        {
+          "option": "Ask the reviewer directly what a decision would need",
+          "effort": "None",
+          "risk": "Low",
+          "unlocks": "The one gap no scrape can find"
+        }
+      ],
+      "recommendation": "Options 1 and 3 first, because both are cheap and both turn a known unknown into a ranked, dated item. Option 2 makes the refresh honest over time. Option 4 should run alongside every time, since a reviewer's real question is the one input the data cannot supply.",
+      "decision_needed": "Whether an explicit triage pass is worth a session, and which of the three mechanisms to add first.",
+      "source": "S1"
     }
   ]
 }

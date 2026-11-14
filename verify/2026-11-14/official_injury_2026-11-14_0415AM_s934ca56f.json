@@ -1,0 +1,503 @@
+{
+ "file": "verify/2026-11-14/official_injury_2026-11-14_0415AM_s934ca56f.json",
+ "purpose": "Transcription of the official NBA injury-report edition of 11/14/26 04:15 AM ET, the newest edition this session could actually read. It is newer than the 11/13/26 07:30 PM ET edition the published site is still built on, so it is captured here as evidence for correcting the 'newest edition' claim. It has NOT been fed into the model: doing so would change every originated line and would need a full re-validation, which is a reviewer decision.",
+ "captured_by": "arena/934ca56f-nba1",
+ "captured_at_utc": "2026-11-14T10:52Z",
+ "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+ "index_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "reading_rule": "Read directly from the official PDF. Only what the PDF prints is recorded. A row printed as NOT YET SUBMITTED is recorded as that, with no player and no status invented. The PDF is paginated and the page-break continuation drops the date/game columns; where a row's team is not printed on the continuation, the team is NOT inferred - it is recorded as 'team not printed on this page'.",
+ "edition": "11/14/26 04:15 AM ET",
+ "retrieval_results_this_session": {
+  "Injury-Report_2026-11-14_04_15AM.pdf": "read successfully",
+  "Injury-Report_2026-11-14_12_00PM.pdf": "AccessDenied (same response a missing object returns on this host, so it does not prove the edition is unpublished)"
+ },
+ "games_listed": [
+  "2026-11-14: DEN@NOP",
+  "2026-11-14: DAL@CLE",
+  "2026-11-14: BKN@MEM",
+  "2026-11-14: CHI@MIN",
+  "2026-11-14: DET@MIA",
+  "2026-11-15: IND@PHI",
+  "2026-11-15: LAL@PHX",
+  "2026-11-15: CHA@LAC",
+  "2026-11-15: SAS@UTA",
+  "2026-11-15: DAL@BOS",
+  "2026-11-15: NYK@TOR",
+  "2026-11-15: HOU@WAS",
+  "2026-11-15: ATL@MIL",
+  "2026-11-15: OKC@SAC"
+ ],
+ "note_on_coverage": "This edition DOES list the 11/15 games - the published site says no edition covers 11/15-11/17, which is inaccurate. What is true is that every 11/15 team in this edition prints NOT YET SUBMITTED, so there is no player-level status for any 11/15 game. No 11/16 or 11/17 game appears in this edition at all.",
+ "rows": [
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "07:00",
+   "matchup": "DEN@NOP",
+   "team": "Denver Nuggets",
+   "player": "Holmes II, DaRon",
+   "status": "Out",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "07:00",
+   "matchup": "DEN@NOP",
+   "team": "Denver Nuggets",
+   "player": "Nembhard, Ryan",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "07:00",
+   "matchup": "DEN@NOP",
+   "team": "Denver Nuggets",
+   "player": "Strawther, Julian",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Sprain"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "07:00",
+   "matchup": "DEN@NOP",
+   "team": "Denver Nuggets",
+   "player": "Whitmore, Cam",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "07:00",
+   "matchup": "DEN@NOP",
+   "team": "New Orleans Pelicans",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "07:30",
+   "matchup": "DAL@CLE",
+   "team": "Dallas Mavericks",
+   "player": "Biberovic, Tarik",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Heel Bursitis"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "07:30",
+   "matchup": "DAL@CLE",
+   "team": "Dallas Mavericks",
+   "player": "Christie, Max",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Ankle Sprain"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "07:30",
+   "matchup": "DAL@CLE",
+   "team": "Dallas Mavericks",
+   "player": "de Larrea, Sergio",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Sprain"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "07:30",
+   "matchup": "DAL@CLE",
+   "team": "Dallas Mavericks",
+   "player": "Johnson Jr., Morez",
+   "status": "Probable",
+   "reason": "Injury/Illness - Left Shin / Tibia Contusion"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "07:30",
+   "matchup": "DAL@CLE",
+   "team": "Dallas Mavericks",
+   "player": "Lively II, Dereck",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Surgery"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "07:30",
+   "matchup": "DAL@CLE",
+   "team": "Dallas Mavericks",
+   "player": "Martin, Caleb",
+   "status": "Available",
+   "reason": "Injury/Illness - Right Thumb Splint"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "07:30",
+   "matchup": "DAL@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "08:00",
+   "matchup": "BKN@MEM",
+   "team": "Brooklyn Nets",
+   "player": "Bilodeau, Tyler",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "08:00",
+   "matchup": "BKN@MEM",
+   "team": "Brooklyn Nets",
+   "player": "Brown Jr., Mikel",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Illness"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "08:00",
+   "matchup": "BKN@MEM",
+   "team": "Brooklyn Nets",
+   "player": "Jefferson, Joshua",
+   "status": "Out",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "08:00",
+   "matchup": "BKN@MEM",
+   "team": "Brooklyn Nets",
+   "player": "Nelson, Grant",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "08:00",
+   "matchup": "BKN@MEM",
+   "team": "Brooklyn Nets",
+   "player": "Saraf, Ben",
+   "status": "Out",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "game_date": null,
+   "game_time_et": null,
+   "matchup": "BKN@MEM",
+   "team": "team not printed on this page (page-break continuation of the Brooklyn Nets block)",
+   "player": "Traore, Nolan",
+   "status": "Probable",
+   "reason": "Injury/Illness - Right Calf Tightness / Soreness",
+   "irregularity": "The PDF page break drops the date, game and team cells for this row. The team is NOT inferred here. The row sits between the Brooklyn Nets block and the Memphis Grizzlies NOT YET SUBMITTED line, so it is most likely Brooklyn, but 'most likely' is not a source."
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": "08:00",
+   "matchup": "BKN@MEM",
+   "team": "Memphis Grizzlies",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": null,
+   "matchup": "CHI@MIN",
+   "team": "Chicago Bulls",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": null,
+   "matchup": "CHI@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "Beringer, Joan",
+   "status": "Available",
+   "reason": "Injury/Illness - Face Mask"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": null,
+   "matchup": "CHI@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "DiVincenzo, Donte",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Achilles Tendon Repair / Surgery"
+  },
+  {
+   "game_date": "2026-11-14",
+   "game_time_et": null,
+   "matchup": "CHI@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "Edwards, Anthony",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Arthroscopy"
+  },
+  {
+   "game_date": null,
+   "game_time_et": null,
+   "matchup": "DET@MIA",
+   "team": "Detroit Pistons",
+   "player": "Duren, Jalen",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hamstring Strain"
+  },
+  {
+   "game_date": null,
+   "game_time_et": null,
+   "matchup": "DET@MIA",
+   "team": "Detroit Pistons",
+   "player": "Harkless, Elijah",
+   "status": "Questionable",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": null,
+   "game_time_et": null,
+   "matchup": "DET@MIA",
+   "team": "Detroit Pistons",
+   "player": "Joe, Isaiah",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hip Contusion"
+  },
+  {
+   "game_date": null,
+   "game_time_et": null,
+   "matchup": "DET@MIA",
+   "team": "Detroit Pistons",
+   "player": "Jones, Isaac",
+   "status": "Questionable",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": null,
+   "game_time_et": null,
+   "matchup": "DET@MIA",
+   "team": "Detroit Pistons",
+   "player": "Lanier, Chaz",
+   "status": "Out",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "game_date": null,
+   "game_time_et": null,
+   "matchup": "DET@MIA",
+   "team": "Detroit Pistons",
+   "player": "Okorie, Ebuka",
+   "status": "Out",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "game_date": null,
+   "game_time_et": null,
+   "matchup": "DET@MIA",
+   "team": "Detroit Pistons",
+   "player": "Onyenso, Ugonna",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": null,
+   "game_time_et": null,
+   "matchup": "DET@MIA",
+   "team": "Miami Heat",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": "2026-11-15",
+   "game_time_et": "01:00",
+   "matchup": "IND@PHI",
+   "team": "Indiana Pacers",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": "2026-11-15",
+   "game_time_et": "01:00",
+   "matchup": "IND@PHI",
+   "team": "Philadelphia 76ers",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": "2026-11-15",
+   "game_time_et": "04:00",
+   "matchup": "LAL@PHX",
+   "team": "Los Angeles Lakers",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": "2026-11-15",
+   "game_time_et": "04:00",
+   "matchup": "LAL@PHX",
+   "team": "Phoenix Suns",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": null,
+   "game_time_et": "04:30",
+   "matchup": "CHA@LAC",
+   "team": "Charlotte Hornets",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": null,
+   "game_time_et": "04:30",
+   "matchup": "CHA@LAC",
+   "team": "LA Clippers",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": null,
+   "game_time_et": "05:00",
+   "matchup": "SAS@UTA",
+   "team": "San Antonio Spurs",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": null,
+   "game_time_et": "05:00",
+   "matchup": "SAS@UTA",
+   "team": "Utah Jazz",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": null,
+   "game_time_et": "06:00",
+   "matchup": "DAL@BOS",
+   "team": "Dallas Mavericks",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": null,
+   "game_time_et": "06:00",
+   "matchup": "DAL@BOS",
+   "team": "Boston Celtics",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": null,
+   "game_time_et": "06:00",
+   "matchup": "NYK@TOR",
+   "team": "New York Knicks",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": null,
+   "game_time_et": "06:00",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": null,
+   "game_time_et": "07:00",
+   "matchup": "HOU@WAS",
+   "team": "Houston Rockets",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": null,
+   "game_time_et": "07:00",
+   "matchup": "HOU@WAS",
+   "team": "Washington Wizards",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": null,
+   "game_time_et": "08:00",
+   "matchup": "ATL@MIL",
+   "team": "Atlanta Hawks",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": null,
+   "game_time_et": "08:00",
+   "matchup": "ATL@MIL",
+   "team": "Milwaukee Bucks",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": null,
+   "game_time_et": "09:00",
+   "matchup": "OKC@SAC",
+   "team": "Oklahoma City Thunder",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  },
+  {
+   "game_date": null,
+   "game_time_et": "09:00",
+   "matchup": "OKC@SAC",
+   "team": "Sacramento Kings",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "reason": null
+  }
+ ],
+ "summary": {
+  "rows_transcribed": 49,
+  "rows_with_a_player_and_status": 26,
+  "rows_not_yet_submitted": 23,
+  "teams_that_filed_for_a_2026_11_14_game": [
+   "Denver Nuggets",
+   "Dallas Mavericks",
+   "Brooklyn Nets",
+   "Minnesota Timberwolves",
+   "Detroit Pistons"
+  ],
+  "teams_not_yet_submitted_for_a_2026_11_14_game": [
+   "New Orleans Pelicans",
+   "Cleveland Cavaliers",
+   "Memphis Grizzlies",
+   "Chicago Bulls",
+   "Miami Heat"
+  ],
+  "note": "The same five-of-ten split as the 11/13/26 07:30 PM ET edition, now one edition later and five and a half hours closer to tip. The 11/14 game-day reports (due 11-1 PM local, i.e. the 12:00 PM ET edition and later) had not been published or were not readable when this was captured.",
+  "comparison_note": "This edition is 11/14/26 04:15 AM ET; the published site uses 11/13/26 07:30 PM ET. It is therefore newer, and the site's claim that the 07:30 PM edition is 'the newest official edition' is out of date (flag F15/F31).",
+  "status_totals": {
+   "Out": 18,
+   "NOT YET SUBMITTED": 23,
+   "Questionable": 4,
+   "Probable": 2,
+   "Available": 2
+  }
+ }
+}

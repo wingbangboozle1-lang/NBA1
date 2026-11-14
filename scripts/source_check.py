@@ -229,9 +229,13 @@ def main():
          "observed": f"{len(flagged)} items in site/data/flagged.json (25 before this check; F26-F37 added)",
          "status": "INTERNAL_COUNT", "official_source": None},
         {"claim": "Known limits: the 2026-11-13 slate was still in progress; no final score exists for it",
-         "site_location": "README.md 'Known limits'; index.html via Source-of-truth text",
-         "observed": f"{sum(1 for r in fin['rows'] if r['status'].startswith('Final'))} of {len(fin['rows'])} 11/13 games show Final on the official page at capture",
-         "status": "STALE", "official_source": "https://www.nba.com/games?date=2026-11-13"},
+         "site_location": "README.md 'Known limits' (was stale; rewritten 2026-11-14 by arena/934ca56f-nba1)",
+         "observed": (f"{sum(1 for r in fin['rows'] if r['status'].startswith('Final'))} of {len(fin['rows'])} "
+                      f"11/13 games show Final on the official page. The README now says so, records the 3 WIN / 4 LOSS / "
+                      f"2 NO BET settlement, and keeps the separately-true limit that the ratings window ends 2026-11-12. "
+                      f"Re-read from the file rather than assumed: 'still in progress' appears in README.md = "
+                      f"{'still in progress' in open(os.path.join(ROOT,'README.md'),encoding='utf-8').read()}"),
+         "status": "RESOLVED_ON_SITE", "official_source": "https://www.nba.com/games?date=2026-11-13"},
         {"claim": "Official 11/13 injury report edition: 07:30 PM ET is the newest",
          "site_location": "data/official/injuries.json source_url",
          "observed": "NOT RE-CHECKED in this session (11/14 noon edition returned AccessDenied at capture)",

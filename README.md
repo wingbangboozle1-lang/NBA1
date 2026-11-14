@@ -135,6 +135,13 @@ available, that the data may be used, or that any model result is correct.
 
 ---
 
+## Start here
+
+**[EXECUTIVE_SUMMARY.md](EXECUTIVE_SUMMARY.md)** is the one-document picture: what was
+verified and how, what the model has and has not shown, the limits that matter, and the
+decisions waiting on a reviewer before anything else can sensibly proceed. It is linked
+from every page of the site.
+
 ## Known limits
 
 - The team ratings remain the official Teams Advanced capture through the games
