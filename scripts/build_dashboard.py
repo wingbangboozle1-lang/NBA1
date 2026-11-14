@@ -431,12 +431,18 @@ def main():
     horizon = sorted({r["date"] for r in lines})
     n_games = len(lines)
     n_picks = len(picks["rows"])
+    n_singles = sum(1 for r in picks["rows"] if r["n_legs"] == 1)
+    n_leg_combo = n_picks - n_singles
+    n_games_with_pick = len({(r["date"], r["matchup"]) for r in picks["rows"]
+                             if " & " not in r["matchup"]})
     n_flags = len(flagged["items"])
     body = []
     body.append(tiles([
         ("Games in horizon", n_games, "14&ndash;17 Nov 2026 (today + 3 days)"),
         ("Originated lines", n_games, "spread, total and fair moneyline per game"),
-        ("Paper picks", n_picks, "gated; none is market-validated"),
+        ("Paper picks, single-leg", n_singles,
+         "%d of %d games &middot; +%d two-leg combos = %d plays; none market-validated"
+         % (n_games_with_pick, n_games, n_leg_combo, n_picks)),
         ("Strategies tested", len(lb["rows"]), "%d capped at a quarter unit &middot; %d research-only"
          % (sum(1 for r in lb["rows"] if "Not funded" not in r["tier"]),
             sum(1 for r in lb["rows"] if "Not funded" in r["tier"]))),

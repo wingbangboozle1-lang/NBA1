@@ -321,11 +321,11 @@
 </tr>
 <tr>
 <td>F28</td>
-<td>Medium</td>
-<td><b>'Paper picks: 63' mixes markets and does not match the other pick counts</b></td>
-<td>The landing tile reads 63 from site/data/picks.json. All 63 rows are PENDING and span every market: 26 point spreads, 9 game totals, 8 moneylines, 6 player-points rows, 2 player-PRA rows, 4 parlays and 8 same-game parlays. The Build D files report 27 horizon singles and 26 model picks (data/derived/horizon_picks.json) and 23 model picks (data/derived/picks_d.json). The unit that is being counted is not defined on the page.</td>
+<td>Resolved (was Medium)</td>
+<td><b>'Paper picks: 63' mixed markets and did not match the other pick counts — RESOLVED 2026-11-14</b></td>
+<td>RESOLVED. The landing tile now reads 'Paper picks, single-leg: 51' with the sub-label '23 of 27 games + 12 two-leg combos = 63 plays; none market-validated', so the composition is stated instead of a bare total. The underlying figures, from site/data/picks.json: 63 rows, all PENDING; 51 single-leg (26 point spread, 9 game total, 8 moneyline, 6 player points, 2 player PRA) and 12 two-leg (8 same-game parlay, 4 cross-game parlay). Build D's independent count in data/derived/picks_d.json is n_model_picks = 23 because it applies an extra per-market gate and counts games rather than plays; the two are now labelled so they cannot be read as the same number.</td>
 <td>Landing tile 'Paper picks'; the Picks page header</td>
-<td>Define a pick (one side of one market for one game, parlays counted separately) and show one count per market on the landing page.</td>
+<td>Keep the composition in the sub-label whenever the count changes.</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
