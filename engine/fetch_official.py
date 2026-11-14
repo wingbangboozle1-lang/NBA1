@@ -45,6 +45,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.request
 
@@ -229,6 +230,15 @@ def parse_injury_index(text):
 
 
 # ---------------------------------------------------------------- game results
+def excerpt_around(text, needle, before=800, span=4000):
+    """Bounded raw-text excerpt around the first occurrence of `needle`."""
+    i = text.find(needle)
+    if i < 0:
+        return None
+    start = max(0, i - before)
+    return text[start:start + span]
+
+
 def parse_games_page(text, known):
     """Parse one https://www.nba.com/games?date=... page into finals rows.
 
@@ -236,42 +246,46 @@ def parse_games_page(text, known):
     (data/raw/games_completed.json + data/raw/schedule_upcoming.json).
 
     Rules:
-      * a game is read only from the text inside its own /game/<away>-vs-<home>-<id>
-        anchor, with tags and hrefs stripped;
-      * the status word "Final" (or "Final/OTn") must be present - a game that
-        is live or scheduled is recorded as not_final, never guessed;
+      * a game id can occur several times in the raw HTML (card link, box
+        score link, embedded schedule JSON). EVERY occurrence is tried; a
+        game counts as final only when one of its own slices contains the
+        status word - the first-executed run showed that trusting the first
+        occurrence alone misses the score card entirely;
+      * tags and hrefs are stripped before reading, so attributes cannot be
+        mistaken for text;
+      * the status word "Final" (or "Final/OTn") must be present - a game
+        that is live or scheduled is recorded as not_final, never guessed;
       * the away score is the last integer before the status, the home score
         the first integer after it; records (6-5) are removed first so they
         cannot be mistaken for scores;
       * anything that does not satisfy these rules lands in `unparsed` with a
         reason. No score is ever inferred.
 
-    Returns (rows, not_final, unparsed, excerpt).
+    Returns (rows, not_final, unparsed, occurrences).
     """
     rows, not_final, unparsed = [], [], []
-    seen = set()
+    parsed = {}          # gid -> row
+    final_seen = set()   # gid had Final in at least one slice
+    occurrences = {}     # gid -> number of times linked
     matches = list(GAME_LINK_RE.finditer(text))
-    first_final_pos = None
     for i, m in enumerate(matches):
         away, home, gid = m.group(1).upper(), m.group(2).upper(), m.group(3)
+        occurrences[gid] = occurrences.get(gid, 0) + 1
+        if gid in parsed:
+            continue
         end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
         # The slice is bounded by the next /game/ link, which for a finished
-        # game is that same game's "Box score" link - i.e. the slice covers the
-        # score card and nothing after it.
+        # game is commonly that same game's "Box score" link - i.e. the slice
+        # covers one card-shaped region of the page.
         slice_ = text[m.start():min(end, m.start() + 6000)]
-        if gid in seen:
-            continue
-        seen.add(gid)
         body = HREF_ATTR_RE.sub(" ", slice_)
         body = TAG_RE.sub(" ", body)
         body = html.unescape(body)
         body = re.sub(r"\s+", " ", body).strip()
         fin = FINAL_RE.search(body)
         if not fin:
-            not_final.append(gid)
-            continue
-        if first_final_pos is None:
-            first_final_pos = (m.start(), fin.start())
+            continue          # try this game's other occurrences
+        final_seen.add(gid)
         no_rec = RECORD_RE.sub(" ", body)
         fin2 = FINAL_RE.search(no_rec)
         before = no_rec[:fin2.start()]
@@ -301,18 +315,24 @@ def parse_games_page(text, known):
         snapshot_match = None
         if k is not None:
             snapshot_match = (k["away"] == away and k["home"] == home)
-        rows.append({
+        parsed[gid] = {
             "game_id": gid, "away": away, "home": home,
             "away_pts": a_pts, "home_pts": h_pts,
             "status": status, "ot": ot,
             "away_record_printed": away_rec, "home_record_printed": home_rec,
             "snapshot_match": snapshot_match,
-        })
-    excerpt = None
-    if first_final_pos is not None:
-        start = max(0, first_final_pos[0] - 200)
-        excerpt = text[start:start + 4000]
-    return rows, not_final, unparsed, excerpt
+        }
+    for gid in occurrences:
+        if gid in parsed:
+            rows.append(parsed[gid])
+        elif gid in final_seen:
+            pass  # already recorded in unparsed with a reason
+        else:
+            not_final.append(gid)
+    rows.sort(key=lambda r: r["game_id"])
+    not_final.sort()
+    return rows, not_final, unparsed, occurrences
+
 
 
 def compare_to_snapshot(rows, known, committed_by_id):
@@ -377,24 +397,35 @@ def capture_results(now, changed, failed, known, committed):
             failed.append((f"results {d}", f"fetch failed: {exc}"))
             continue
         text = as_text(raw)
-        rows, not_final, unparsed, excerpt = parse_games_page(text, known)
+        rows, not_final, unparsed, occurrences = parse_games_page(text, known)
+        # dedupe unparsed reasons per game (a game can fail on several slices)
+        seen_unparsed = set()
+        unparsed = [u for u in unparsed
+                    if not (u["game_id"] in seen_unparsed
+                            or seen_unparsed.add(u["game_id"]))]
         mismatches, candidates = compare_to_snapshot(rows, known, committed)
+        parsed_ids = {r["game_id"] for r in rows}
+        missed = sorted(gid for gid, c in committed.items()
+                        if c["date"] == d and gid not in parsed_ids)
         log(f"  {d}: {len(rows)} finals, {len(not_final)} not final, "
-            f"{len(unparsed)} unparsed, {len(mismatches)} snapshot mismatches")
+            f"{len(unparsed)} unparsed, {len(mismatches)} snapshot mismatches, "
+            f"{len(missed)} committed finals missed")
         payload = {
             "captured_at_utc": now,
             "source_url": url,
             "page_bytes": len(raw),
             "page_sha256": hashlib.sha256(raw).hexdigest(),
-            "parse": {"strategy": "anchor-text v1",
+            "parse": {"strategy": "anchor-text v2 (every link occurrence tried)",
                       "finals_rows": rows,
                       "not_final": not_final,
-                      "unparsed": unparsed},
+                      "unparsed": unparsed,
+                      "link_occurrences": occurrences},
             "snapshot_comparison": {
                 "checked_against": "data/raw/games_completed.json + "
                                    "data/raw/schedule_upcoming.json",
                 "mismatches": mismatches,
                 "promotion_candidates": candidates,
+                "committed_finals_missed": missed,
             },
             "note": ("Capture only: this file never overwrites a committed "
                      "snapshot. A promotion_candidate is a final the official "
@@ -403,10 +434,26 @@ def capture_results(now, changed, failed, known, committed):
                      "session promotes it. A mismatch is logged, never "
                      "silently corrected."),
         }
-        # Keep a bounded HTML excerpt only when it is evidence: parsing missed
-        # finals, or the page disagrees with the committed snapshot.
-        if excerpt and (unparsed or mismatches):
-            payload["html_excerpt_around_first_final"] = excerpt
+        # Failure evidence, bounded: if the committed snapshot says this page
+        # should show finals but none parsed, store exactly what the parser
+        # saw so the next iteration can be written against ground truth
+        # instead of a guess. Also stored when a slice had Final but no score.
+        evidence = []
+        if missed:
+            e1 = excerpt_around(text, missed[0])
+            if e1:
+                evidence.append({"around": missed[0], "excerpt": e1})
+            fi = text.find("Final")
+            if fi >= 0:
+                evidence.append({"around": "First 'Final' in raw HTML",
+                                 "excerpt": text[max(0, fi - 800):fi + 3200]})
+        elif unparsed or mismatches:
+            e1 = excerpt_around(text, "Final")
+            if e1:
+                evidence.append({"around": "First 'Final' in raw HTML",
+                                 "excerpt": e1})
+        if evidence:
+            payload["failure_evidence"] = evidence[:2]
         if write_if_changed(os.path.join(RAW, f"_capture_results_{d}.json"),
                             payload):
             changed.append(f"results {d}")
@@ -434,25 +481,37 @@ def capture_injury(now, changed, failed, index_editions):
     for edition in candidates[:12]:
         url = INJURY_HOST + edition
         rec = {"edition": edition, "url": url, "http_status": None,
-               "bytes": 0, "sha256": None}
-        try:
-            raw = get(url, timeout=30)
-            rec["http_status"] = 200
-            rec["bytes"] = len(raw)
-            rec["sha256"] = hashlib.sha256(raw).hexdigest()
-            if write_if_changed(os.path.join(RAW, f"_capture_injury_pdf_{edition}.json"),
-                                {"captured_at_utc": now, "source_url": url,
-                                 "bytes": len(raw), "sha256": rec["sha256"],
-                                 "content_type": "application/pdf"}):
-                changed.append(f"injury pdf {edition}")
-            log(f"  injury {edition}: 200, {len(raw)} bytes")
-        except urllib.error.HTTPError as exc:
-            rec["http_status"] = exc.code
-            log(f"  injury {edition}: HTTP {exc.code}")
-        except Exception as exc:                       # noqa: BLE001
-            rec["error"] = f"{type(exc).__name__}: {exc}"
-            log(f"  injury {edition}: {rec['error']}")
+               "bytes": 0, "sha256": None, "attempts": 0}
+        # The first executed run saw 200,200 then 403,403... on a tight loop
+        # over ak-static - the shape of a rate limit, not of absent files.
+        # Space the requests and retry a 403 once before recording it.
+        for attempt in (1, 2):
+            rec["attempts"] = attempt
+            try:
+                raw = get(url, timeout=30)
+                rec["http_status"] = 200
+                rec["bytes"] = len(raw)
+                rec["sha256"] = hashlib.sha256(raw).hexdigest()
+                if write_if_changed(os.path.join(RAW, f"_capture_injury_pdf_{edition}.json"),
+                                    {"captured_at_utc": now, "source_url": url,
+                                     "bytes": len(raw), "sha256": rec["sha256"],
+                                     "content_type": "application/pdf"}):
+                    changed.append(f"injury pdf {edition}")
+                log(f"  injury {edition}: 200, {len(raw)} bytes (attempt {attempt})")
+                break
+            except urllib.error.HTTPError as exc:
+                rec["http_status"] = exc.code
+                log(f"  injury {edition}: HTTP {exc.code} (attempt {attempt})")
+                if exc.code in (403, 429) and attempt == 1:
+                    time.sleep(8)
+                    continue
+                break
+            except Exception as exc:                   # noqa: BLE001
+                rec["error"] = f"{type(exc).__name__}: {exc}"
+                log(f"  injury {edition}: {rec['error']}")
+                break
         results.append(rec)
+        time.sleep(1.5)
     if write_if_changed(os.path.join(RAW, "_capture_injury_probe.json"),
                         {"captured_at_utc": now,
                          "results": results,
@@ -489,6 +548,18 @@ def main():
             if len(rows) != 30:
                 failed.append((key, f"expected 30 team rows, parsed {len(rows)}"))
                 log(f"  SKIPPED: parsed {len(rows)} rows - keeping the existing snapshot")
+                needles = ['"rowSet"', '"resultSets"', "Boston Celtics"]
+                if write_if_changed(
+                        os.path.join(RAW, f"_capture_evidence_{key}.json"),
+                        {"captured_at_utc": now, "source_url": url,
+                         "status": "parse_failed",
+                         "indicators": {n: text.count(n) for n in needles},
+                         "failure_evidence": [
+                             {"around": n, "excerpt": e} for n in needles
+                             for e in [excerpt_around(text, n)] if e][:2],
+                         "note": "Bounded raw-HTML evidence for the next parser "
+                                 "iteration. The committed snapshot is untouched."}):
+                    changed.append(f"evidence {key}")
                 continue
             log(f"  parsed {len(rows)} team rows")
             # A full rewrite of team_advanced.json needs the window metadata and
@@ -510,6 +581,18 @@ def main():
             log(f"  parsed {len(games)} game links")
             if not games:
                 failed.append((key, "no game links found"))
+                needles = ["/game/", '"gameId"', "Friday, November"]
+                if write_if_changed(
+                        os.path.join(RAW, f"_capture_evidence_{key}.json"),
+                        {"captured_at_utc": now, "source_url": url,
+                         "status": "parse_failed",
+                         "indicators": {n: text.count(n) for n in needles},
+                         "failure_evidence": [
+                             {"around": n, "excerpt": e} for n in needles
+                             for e in [excerpt_around(text, n)] if e][:2],
+                         "note": "Bounded raw-HTML evidence for the next parser "
+                                 "iteration. The committed snapshot is untouched."}):
+                    changed.append(f"evidence {key}")
                 continue
             if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"),
                                 {"captured_at_utc": now, "source_url": url,
