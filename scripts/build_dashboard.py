@@ -146,9 +146,11 @@ def page(title, sub, body, depth=1, extra_head=""):
     <div class="side-h">Sections</div>
     %(nav)s
     <div class="side-note">
-      <strong>Reading rule.</strong> Every table row links to the official source it
-      came from. A blank cell means the value could not be confirmed from an official
-      source &mdash; it is never filled in by guesswork. See
+      <strong>Reading rule.</strong> Every table row either links to the official source
+      it came from or carries an explicit no-source mark with a stated reason (the mark
+      explains why no official source exists or could confirm the cell). A blank or
+      dashed cell means the value could not be confirmed from an official source &mdash;
+      it is never filled in by guesswork. See
       <a href="%(navbase)sflagged.html">Flagged for Review</a>.
     </div>
   </aside>
@@ -232,7 +234,17 @@ def srclink_url(url, label):
 
 
 def nomark(reason):
-    """An explicit 'there is no official source for this' marker."""
+    """An explicit 'there is no official source for this' marker.
+
+    When the reason is itself an approved official HTTPS URL (the Q14-Q16 pattern:
+    the answer is unverified, the URL is context), render that URL as a clickable
+    link next to the marker instead of hiding it in the title attribute only
+    (COORDINATION section 32.2, R26-2).
+    """
+    if reason and reason.startswith("https://"):
+        return ('<span class="na" title="%s">&mdash;</span> '
+                '<a href="%s" target="_blank" rel="noopener">context</a>'
+                % (esc(reason), esc(reason)))
     return '<span class="na" title="%s">&mdash;</span>' % esc(reason)
 
 

@@ -112,7 +112,7 @@ Supporting scripts:
 | Script | Purpose |
 | --- | --- |
 | `scripts/build_dashboard.py` | Generates the unified site |
-| `scripts/verify_dashboard.py` | Every row source-linked, every link resolves, every row's column count matches its header |
+| `scripts/verify_dashboard.py` | Every row either carries an allowed official source link or an explicit no-source mark with a reason/approved URL; every internal link resolves (measured 2026-11-14 19:40 UTC: 1041 rows, 1023 linked, 18 explained, 0 unmarked, 0 title-only) |
 | `scripts/verify_all.py` | The end-to-end gate |
 | `scripts/verify_integration.py` | Repository-wide audit: every JSON, every HTML page, every link, every data row's source |
 | `scripts/originate_lines.py`, `scripts/strategies.py`, `scripts/compute_correlations.py`, `scripts/injury_impact.py`, `scripts/backtest.py` | The earlier build's pipeline |

@@ -55,9 +55,11 @@
 <a href="repo-review.html">Repo Review</a>
 </div>
     <div class="side-note">
-      <strong>Reading rule.</strong> Every table row links to the official source it
-      came from. A blank cell means the value could not be confirmed from an official
-      source &mdash; it is never filled in by guesswork. See
+      <strong>Reading rule.</strong> Every table row either links to the official source
+      it came from or carries an explicit no-source mark with a stated reason (the mark
+      explains why no official source exists or could confirm the cell). A blank or
+      dashed cell means the value could not be confirmed from an official source &mdash;
+      it is never filled in by guesswork. See
       <a href="flagged.html">Flagged for Review</a>.
     </div>
   </aside>
@@ -307,11 +309,11 @@
 <tr>
 <td>Q14</td>
 <td><b>Which injury-report edition is authoritative at tip-off, and what did the intra-day movements actually cost?</b></td>
-<td>The official league publishes multiple editions per day (12:00, 3:00, 5:00/5:15 PM ET and game-day reports). The 2026-11-13 chain was captured and every movement verified (9 status changes 12:00-&gt;3:00 PM, 5 more 3:00-&gt;5:15 PM), but no gameday edition is archived and no box-score starters are joined, so a movement's effect on minutes and production cannot be measured.</td>
+<td>The official league publishes multiple editions per day (12:00, 3:00, 5:00/5:15 PM ET and game-day reports). The 2026-11-13 chain was captured and every movement verified (9 status changes 12:00-&gt;3:00 PM, 5 more 3:00-&gt;5:15 PM), but no gameday edition is archived and no box-score starters are joined, so a movement's effect on minutes and production cannot be measured. OBSERVED 2026-11-14 19:15 UTC (section 31): the game-day index itself follows a 15-minute cadence (editions listed through 01:45 PM ET); comparing the site's 04:15 AM rows against the 01:45 PM edition found 4 status changes and 4 late filings among the day's teams (F47), so the intra-day movement is measurable now for status, still not for minutes/production.</td>
 <td>Archive every edition of every report (the URLs follow the ak-static.cms.nba.com/referee/injury/Injury-Report_&lt;date&gt;_&lt;time&gt;PM.pdf pattern), diff statuses between editions, then join official box scores (nba.com/game/&lt;id&gt;/box-score) to see who actually started and played. Verified on 2026-11-14: https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><span class="na" title="https://official.nba.com/nba-injury-report-2026-27-season/">&mdash;</span></td>
+<td class="src"><span class="na" title="https://official.nba.com/nba-injury-report-2026-27-season/">&mdash;</span> <a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">context</a></td>
 </tr>
 <tr>
 <td>Q15</td>
@@ -320,7 +322,7 @@
 <td>Read the official game pages and NBA.com news for those ids before tip; if the league prints an explanation, record it. Until then the rows are published exactly as the official slate pages print them and flagged. Confirmed 2026-11-14: https://www.nba.com/game/nyk-vs-tor-0022600253 and https://www.nba.com/game/por-vs-min-0022600254</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><span class="na" title="https://www.nba.com/games?date=2026-11-17">&mdash;</span></td>
+<td class="src"><span class="na" title="https://www.nba.com/games?date=2026-11-17">&mdash;</span> <a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">context</a></td>
 </tr>
 <tr>
 <td>Q16</td>
@@ -329,7 +331,7 @@
 <td>Once the player-minutes table is completed (SG3), re-run the availability shock strategy (S6) over archived edition diffs and measure the distribution of teammate usage shifts. Movement log: data/refresh_2026_11_14/official_captures_2026-11-14.json</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><span class="na" title="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf">&mdash;</span></td>
+<td class="src"><span class="na" title="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf">&mdash;</span> <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf" target="_blank" rel="noopener">context</a></td>
 </tr>
 <tr>
 <td>Q17</td>

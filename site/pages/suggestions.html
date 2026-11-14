@@ -55,9 +55,11 @@
 <a href="repo-review.html">Repo Review</a>
 </div>
     <div class="side-note">
-      <strong>Reading rule.</strong> Every table row links to the official source it
-      came from. A blank cell means the value could not be confirmed from an official
-      source &mdash; it is never filled in by guesswork. See
+      <strong>Reading rule.</strong> Every table row either links to the official source
+      it came from or carries an explicit no-source mark with a stated reason (the mark
+      explains why no official source exists or could confirm the cell). A blank or
+      dashed cell means the value could not be confirmed from an official source &mdash;
+      it is never filled in by guesswork. See
       <a href="flagged.html">Flagged for Review</a>.
     </div>
   </aside>
@@ -254,11 +256,31 @@
 <td>SG18</td>
 <td>Process</td>
 <td><b>Discover missing information systematically instead of discovering it by accident</b></td>
-<td>Every gap closed so far was found by someone noticing it, not by a method that looks for gaps. The repository has 37 flags and 18 open questions, and nothing that says which ones are cheap to close, which are expensive, or which are blocking a decision. Missing information is therefore discovered at the speed of luck.</td>
+<td>Every gap closed so far was found by someone noticing it, not by a method that looks for gaps. The repository carries 51 flags and 18 open questions (counts at 2026-11-14 19:40 UTC; it had 37 flags when this item was written), and nothing that says which ones are cheap to close, which are expensive, or which are blocking a decision. Missing information is therefore discovered at the speed of luck.</td>
 <td>- A gap-closure triage: for every open question and flag, record cost to close (minutes/hours), what it blocks, and whether an official source exists at all. Sort by (blocks a decision) / (cost). <span class='fine'>(effort: Low - a one-off pass over the existing 18 questions and 37 flags; risk: Low; unlocks: A ranked list of what to find next; the top item is almost certainly the injury editions for 11/15-11/17)</span><br>- A source-reachability probe run on a schedule: for every official URL the site relies on, record whether this environment can read it, when it was last read, and what it returned <span class='fine'>(effort: Medium - scripts/probe_official.py already exists and records reachability; it needs to be surfaced per source; risk: Low; unlocks: Turns 'the fetch tool returned AccessDenied' into a dated fact per source)</span><br>- A coverage table for every official table the model depends on: how many rows are published, how many were captured, and which players or teams are missing <span class='fine'>(effort: Medium; risk: Low; unlocks: Makes the 50-of-465 player-minutes gap and similar ones visible rather than buried in a flag)</span><br>- Ask the reviewer directly what a decision would need <span class='fine'>(effort: None; risk: Low; unlocks: The one gap no scrape can find)</span></td>
 <td>Options 1 and 3 first, because both are cheap and both turn a known unknown into a ranked, dated item. Option 2 makes the refresh honest over time. Option 4 should run alongside every time, since a reviewer's real question is the one input the data cannot supply.</td>
 <td>Whether an explicit triage pass is worth a session, and which of the three mechanisms to add first.</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>SG19</td>
+<td>Data freshness</td>
+<td><b>Archive every injury edition on game days and re-price the slate on the last pre-tip edition</b></td>
+<td>The official index publishes a new injury edition about every 15 minutes on game days. The published 11/14 lines were priced on the 04:15 AM ET edition; by 01:45 PM ET four statuses had changed and four of five unfiled clubs had filed (F47). Nothing archives the intervening editions, and no pick carries the edition it was priced against after the fact.</td>
+<td>- A. Refresh job captures every edition listed on the index (URL pattern is fixed), stores them under data/live/injury/, and re-runs the pricing step from the newest captured edition at a cutoff (default: 60 minutes before first tip of the slate). <span class='fine'>(effort: Medium - the fetch path and parser already exist for single editions; this adds a loop and a cutoff; risk: Low - captures are additive; published picks are replaced only at the cutoff, then frozen and labelled; unlocks: A price that reflects the last filed report before tip, plus a complete edition archive for measuring what intra-day movement costs (Q14, Q16))</span><br>- B. Keep single captures but label every pick with its pricing edition and a live count of editions published after it, and re-price manually when a status change exceeds a threshold (e.g. any Out &lt;-&gt; Available move). <span class='fine'>(effort: Low - label plus counter; risk: Low; unlocks: Reader can see staleness; still misses most movement)</span><br>- C. Do nothing until the minutes model exists (F2) so movements can be priced, not just detected. <span class='fine'>(effort: None now; risk: High - the 11/14 drift is already measurable without a minutes model (4 status changes, 4 filings); unlocks: Nothing now; leaves F47-class drift unpublishable and Q14 unanswered)</span></td>
+<td>A with a 60-minute cutoff; B as the interim if A cannot land before tonight's tips.</td>
+<td>Choose A, B or C, and set the re-price cutoff (A) or the manual threshold (B).</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>SG20</td>
+<td>Process</td>
+<td><b>Promote refreshed captures into published picks only through the gate suite, never by hand or silently</b></td>
+<td>The scheduled refresh captures official data into capture-only branches/PRs, but promotion into published picks is a separate manual step; a refresh can therefore sit unpromoted (stale site) or be promoted without the gates having run on it (unchecked site). Requested by the independent audit (COORDINATION section 33, R-A6).</td>
+<td>- A. A promotion workflow: merge a capture PR only when verify_all + check_site + verify_dashboard + render_check pass on the merged tree, then regenerate picks in the same run; otherwise keep the prior slate with an explicit stale marker. <span class='fine'>(effort: Medium - the gates already run in CI; wiring them to the capture PR is mostly configuration; risk: Low - gates can only block, never invent; unlocks: Refreshed data reaches the site on a measured path; staleness becomes visible instead of silent)</span><br>- B. Manual promotion with a required checklist recorded in COORDINATION.md. <span class='fine'>(effort: Low; risk: Medium - depends on a human remembering; two of today's staleness flags came from exactly that; unlocks: Nothing new)</span></td>
+<td>A.</td>
+<td>A or B, and who signs the promotion record.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
 </tr>
 </tbody></table></div>
 <h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>
