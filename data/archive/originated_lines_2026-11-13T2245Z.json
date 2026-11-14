@@ -1,0 +1,2276 @@
+{
+ "model": "RecordLine-1",
+ "assumptions": {
+  "smoothing": "+3 wins / +6 games toward .500",
+  "home_court_points": 2.5,
+  "scale_K": 35.0,
+  "sigma": 11.0,
+  "pick_gate_margin": 3.0,
+  "note": "All parameters are this project's assumptions, not official values. Totals are not originated (no pace/efficiency inputs). Market comparison gates (G4/G5) are blocked: no odds feed is connected."
+ },
+ "generated_at_utc": "2026-11-13T22:45Z",
+ "games": [
+  {
+   "date": "2026-11-13",
+   "matchup": "NYK@IND",
+   "time_et": "7:00 PM",
+   "away_record": "6-5",
+   "home_record": "4-8",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "model": {
+    "p_home_smoothed": 0.389,
+    "p_away_smoothed": 0.529,
+    "expected_margin_home": -2.4,
+    "originated_spread_home": 2.5,
+    "p_home_win": 0.445,
+    "ml_home_decimal": 2.25,
+    "ml_away_decimal": 1.8,
+    "pick_side": "PASS",
+    "pick_line": null,
+    "gate": "G-CFG fail (|margin| < 3.0) — no bet"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/nyk-vs-ind-0022600034"
+   ]
+  },
+  {
+   "date": "2026-11-13",
+   "matchup": "MIL@ORL",
+   "time_et": "7:00 PM",
+   "away_record": "1-11",
+   "home_record": "4-7",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "model": {
+    "p_home_smoothed": 0.412,
+    "p_away_smoothed": 0.222,
+    "expected_margin_home": 9.1,
+    "originated_spread_home": -9.0,
+    "p_home_win": 0.696,
+    "ml_home_decimal": 1.44,
+    "ml_away_decimal": 3.29,
+    "pick_side": "HOME",
+    "pick_line": "ORL -9.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/mil-vs-orl-0022600035"
+   ]
+  },
+  {
+   "date": "2026-11-13",
+   "matchup": "CLE@MIA",
+   "time_et": "8:00 PM",
+   "away_record": "6-6",
+   "home_record": "5-6",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "b2b": false,
+    "last_date": "2026-11-10",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-10"
+   },
+   "model": {
+    "p_home_smoothed": 0.471,
+    "p_away_smoothed": 0.5,
+    "expected_margin_home": 1.5,
+    "originated_spread_home": -1.5,
+    "p_home_win": 0.533,
+    "ml_home_decimal": 1.87,
+    "ml_away_decimal": 2.14,
+    "pick_side": "PASS",
+    "pick_line": null,
+    "gate": "G-CFG fail (|margin| < 3.0) — no bet"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/cle-vs-mia-0022600036"
+   ]
+  },
+  {
+   "date": "2026-11-13",
+   "matchup": "ATL@CHI",
+   "time_et": "8:00 PM",
+   "away_record": "7-5",
+   "home_record": "1-9",
+   "rest_away": {
+    "rest_days": 3,
+    "b2b": false,
+    "last_date": "2026-11-09",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-09"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "model": {
+    "p_home_smoothed": 0.25,
+    "p_away_smoothed": 0.556,
+    "expected_margin_home": -8.2,
+    "originated_spread_home": 8.0,
+    "p_home_win": 0.322,
+    "ml_home_decimal": 3.11,
+    "ml_away_decimal": 1.47,
+    "pick_side": "AWAY",
+    "pick_line": "ATL -8.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/atl-vs-chi-0022600037"
+   ]
+  },
+  {
+   "date": "2026-11-13",
+   "matchup": "MEM@NOP",
+   "time_et": "8:00 PM",
+   "away_record": "7-4",
+   "home_record": "4-8",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "model": {
+    "p_home_smoothed": 0.389,
+    "p_away_smoothed": 0.588,
+    "expected_margin_home": -4.5,
+    "originated_spread_home": 4.5,
+    "p_home_win": 0.4,
+    "ml_home_decimal": 2.5,
+    "ml_away_decimal": 1.67,
+    "pick_side": "AWAY",
+    "pick_line": "MEM -4.5",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/mem-vs-nop-0022600038"
+   ]
+  },
+  {
+   "date": "2026-11-13",
+   "matchup": "UTA@HOU",
+   "time_et": "8:30 PM",
+   "away_record": "1-11",
+   "home_record": "9-3",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "model": {
+    "p_home_smoothed": 0.667,
+    "p_away_smoothed": 0.222,
+    "expected_margin_home": 18.1,
+    "originated_spread_home": -18.0,
+    "p_home_win": 0.838,
+    "ml_home_decimal": 1.19,
+    "ml_away_decimal": 6.16,
+    "pick_side": "HOME",
+    "pick_line": "HOU -18.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/uta-vs-hou-0022600039"
+   ]
+  },
+  {
+   "date": "2026-11-13",
+   "matchup": "GSW@SAS",
+   "time_et": "9:30 PM",
+   "away_record": "8-4",
+   "home_record": "10-2",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "model": {
+    "p_home_smoothed": 0.722,
+    "p_away_smoothed": 0.611,
+    "expected_margin_home": 6.4,
+    "originated_spread_home": -6.5,
+    "p_home_win": 0.641,
+    "ml_home_decimal": 1.56,
+    "ml_away_decimal": 2.79,
+    "pick_side": "HOME",
+    "pick_line": "SAS -6.5",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/gsw-vs-sas-0022600040"
+   ]
+  },
+  {
+   "date": "2026-11-13",
+   "matchup": "POR@SAC",
+   "time_et": "10:00 PM",
+   "away_record": "8-3",
+   "home_record": "1-10",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "b2b": false,
+    "last_date": "2026-11-10",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-10"
+   },
+   "model": {
+    "p_home_smoothed": 0.235,
+    "p_away_smoothed": 0.647,
+    "expected_margin_home": -11.9,
+    "originated_spread_home": 12.0,
+    "p_home_win": 0.253,
+    "ml_home_decimal": 3.95,
+    "ml_away_decimal": 1.34,
+    "pick_side": "AWAY",
+    "pick_line": "POR -12.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/por-vs-sac-0022600041"
+   ]
+  },
+  {
+   "date": "2026-11-13",
+   "matchup": "OKC@LAC",
+   "time_et": "10:30 PM",
+   "away_record": "8-4",
+   "home_record": "2-8",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "b2b": false,
+    "last_date": "2026-11-10",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-10"
+   },
+   "model": {
+    "p_home_smoothed": 0.312,
+    "p_away_smoothed": 0.611,
+    "expected_margin_home": -8.0,
+    "originated_spread_home": 8.0,
+    "p_home_win": 0.327,
+    "ml_home_decimal": 3.06,
+    "ml_away_decimal": 1.49,
+    "pick_side": "AWAY",
+    "pick_line": "OKC -8.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/okc-vs-lac-0022600042"
+   ]
+  },
+  {
+   "date": "2026-11-14",
+   "matchup": "DEN@NOP",
+   "time_et": "7:00 PM",
+   "away_record": "6-4",
+   "home_record": "4-8",
+   "rest_away": {
+    "rest_days": 2,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "rest_home": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "model": {
+    "p_home_smoothed": 0.389,
+    "p_away_smoothed": 0.562,
+    "expected_margin_home": -3.6,
+    "originated_spread_home": 3.5,
+    "p_home_win": 0.419,
+    "ml_home_decimal": 2.38,
+    "ml_away_decimal": 1.72,
+    "pick_side": "AWAY",
+    "pick_line": "DEN -3.5",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-14",
+    "https://www.nba.com/game/den-vs-nop-0022600231"
+   ]
+  },
+  {
+   "date": "2026-11-14",
+   "matchup": "DAL@CLE",
+   "time_et": "7:30 PM",
+   "away_record": "7-5",
+   "home_record": "6-6",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-12",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-12"
+   },
+   "rest_home": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "model": {
+    "p_home_smoothed": 0.5,
+    "p_away_smoothed": 0.556,
+    "expected_margin_home": 0.6,
+    "originated_spread_home": -0.5,
+    "p_home_win": 0.513,
+    "ml_home_decimal": 1.95,
+    "ml_away_decimal": 2.05,
+    "pick_side": "PASS",
+    "pick_line": null,
+    "gate": "G-CFG fail (|margin| < 3.0) — no bet"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-14",
+    "https://www.nba.com/game/dal-vs-cle-0022600232"
+   ]
+  },
+  {
+   "date": "2026-11-14",
+   "matchup": "DET@MIA",
+   "time_et": "8:00 PM",
+   "away_record": "8-3",
+   "home_record": "5-6",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-12",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-12"
+   },
+   "rest_home": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "model": {
+    "p_home_smoothed": 0.471,
+    "p_away_smoothed": 0.647,
+    "expected_margin_home": -3.7,
+    "originated_spread_home": 3.5,
+    "p_home_win": 0.417,
+    "ml_home_decimal": 2.4,
+    "ml_away_decimal": 1.72,
+    "pick_side": "AWAY",
+    "pick_line": "DET -3.5",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-14",
+    "https://www.nba.com/game/det-vs-mia-0022600233"
+   ]
+  },
+  {
+   "date": "2026-11-14",
+   "matchup": "BKN@MEM",
+   "time_et": "8:00 PM",
+   "away_record": "3-8",
+   "home_record": "7-4",
+   "rest_away": {
+    "rest_days": 2,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "rest_home": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "model": {
+    "p_home_smoothed": 0.588,
+    "p_away_smoothed": 0.353,
+    "expected_margin_home": 10.7,
+    "originated_spread_home": -10.5,
+    "p_home_win": 0.726,
+    "ml_home_decimal": 1.38,
+    "ml_away_decimal": 3.65,
+    "pick_side": "HOME",
+    "pick_line": "MEM -10.5",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-14",
+    "https://www.nba.com/game/bkn-vs-mem-0022600234"
+   ]
+  },
+  {
+   "date": "2026-11-14",
+   "matchup": "CHI@MIN",
+   "time_et": "8:00 PM",
+   "away_record": "1-9",
+   "home_record": "9-3",
+   "rest_away": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-12",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-12"
+   },
+   "model": {
+    "p_home_smoothed": 0.667,
+    "p_away_smoothed": 0.25,
+    "expected_margin_home": 17.1,
+    "originated_spread_home": -17.0,
+    "p_home_win": 0.825,
+    "ml_home_decimal": 1.21,
+    "ml_away_decimal": 5.73,
+    "pick_side": "HOME",
+    "pick_line": "MIN -17.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-14",
+    "https://www.nba.com/game/chi-vs-min-0022600235"
+   ]
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "IND@PHI",
+   "time_et": "1:00 PM",
+   "away_record": "4-8",
+   "home_record": "10-3",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "b2b": false,
+    "last_date": "2026-11-12",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-12"
+   },
+   "model": {
+    "p_home_smoothed": 0.684,
+    "p_away_smoothed": 0.389,
+    "expected_margin_home": 12.8,
+    "originated_spread_home": -13.0,
+    "p_home_win": 0.763,
+    "ml_home_decimal": 1.31,
+    "ml_away_decimal": 4.21,
+    "pick_side": "HOME",
+    "pick_line": "PHI -13.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-15",
+    "https://www.nba.com/game/ind-vs-phi-0022600236"
+   ]
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "LAL@PHX",
+   "time_et": "4:00 PM",
+   "away_record": "11-2",
+   "home_record": "5-6",
+   "rest_away": {
+    "rest_days": 3,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "b2b": false,
+    "last_date": "2026-11-12",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-12"
+   },
+   "model": {
+    "p_home_smoothed": 0.471,
+    "p_away_smoothed": 0.737,
+    "expected_margin_home": -6.8,
+    "originated_spread_home": 7.0,
+    "p_home_win": 0.35,
+    "ml_home_decimal": 2.86,
+    "ml_away_decimal": 1.54,
+    "pick_side": "AWAY",
+    "pick_line": "LAL -7.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-15",
+    "https://www.nba.com/game/lal-vs-phx-0022600237"
+   ]
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "CHA@LAC",
+   "time_et": "4:30 PM",
+   "away_record": "4-8",
+   "home_record": "2-8",
+   "rest_away": {
+    "rest_days": 2,
+    "b2b": false,
+    "last_date": "2026-11-12",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-12"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "model": {
+    "p_home_smoothed": 0.312,
+    "p_away_smoothed": 0.389,
+    "expected_margin_home": -0.2,
+    "originated_spread_home": 0.0,
+    "p_home_win": 0.496,
+    "ml_home_decimal": 2.02,
+    "ml_away_decimal": 1.98,
+    "pick_side": "PASS",
+    "pick_line": null,
+    "gate": "G-CFG fail (|margin| < 3.0) — no bet"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-15",
+    "https://www.nba.com/game/cha-vs-lac-0022600238"
+   ]
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "SAS@UTA",
+   "time_et": "5:00 PM",
+   "away_record": "10-2",
+   "home_record": "1-11",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "model": {
+    "p_home_smoothed": 0.222,
+    "p_away_smoothed": 0.722,
+    "expected_margin_home": -15.0,
+    "originated_spread_home": 15.0,
+    "p_home_win": 0.204,
+    "ml_home_decimal": 4.91,
+    "ml_away_decimal": 1.26,
+    "pick_side": "AWAY",
+    "pick_line": "SAS -15.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-15",
+    "https://www.nba.com/game/sas-vs-uta-0022600239"
+   ]
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "DAL@BOS",
+   "time_et": "6:00 PM",
+   "away_record": "7-5",
+   "home_record": "10-2",
+   "rest_away": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-14",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-14"
+   },
+   "rest_home": {
+    "rest_days": 3,
+    "b2b": false,
+    "last_date": "2026-11-11",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-11"
+   },
+   "model": {
+    "p_home_smoothed": 0.722,
+    "p_away_smoothed": 0.556,
+    "expected_margin_home": 8.3,
+    "originated_spread_home": -8.5,
+    "p_home_win": 0.681,
+    "ml_home_decimal": 1.47,
+    "ml_away_decimal": 3.13,
+    "pick_side": "HOME",
+    "pick_line": "BOS -8.5",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-15",
+    "https://www.nba.com/game/dal-vs-bos-0022600240"
+   ]
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "NYK@TOR",
+   "time_et": "6:00 PM",
+   "away_record": "6-5",
+   "home_record": "5-7",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "b2b": false,
+    "last_date": "2026-11-12",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-12"
+   },
+   "model": {
+    "p_home_smoothed": 0.444,
+    "p_away_smoothed": 0.529,
+    "expected_margin_home": -0.5,
+    "originated_spread_home": 0.5,
+    "p_home_win": 0.489,
+    "ml_home_decimal": 2.04,
+    "ml_away_decimal": 1.96,
+    "pick_side": "PASS",
+    "pick_line": null,
+    "gate": "G-CFG fail (|margin| < 3.0) — no bet"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-15",
+    "https://www.nba.com/game/nyk-vs-tor-0022600241"
+   ]
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "HOU@WAS",
+   "time_et": "7:00 PM",
+   "away_record": "9-3",
+   "home_record": "4-9",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "b2b": false,
+    "last_date": "2026-11-12",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-12"
+   },
+   "model": {
+    "p_home_smoothed": 0.368,
+    "p_away_smoothed": 0.667,
+    "expected_margin_home": -7.9,
+    "originated_spread_home": 8.0,
+    "p_home_win": 0.327,
+    "ml_home_decimal": 3.06,
+    "ml_away_decimal": 1.49,
+    "pick_side": "AWAY",
+    "pick_line": "HOU -8.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-15",
+    "https://www.nba.com/game/hou-vs-was-0022600242"
+   ]
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "ATL@MIL",
+   "time_et": "8:00 PM",
+   "away_record": "7-5",
+   "home_record": "1-11",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "model": {
+    "p_home_smoothed": 0.222,
+    "p_away_smoothed": 0.556,
+    "expected_margin_home": -9.2,
+    "originated_spread_home": 9.0,
+    "p_home_win": 0.303,
+    "ml_home_decimal": 3.3,
+    "ml_away_decimal": 1.43,
+    "pick_side": "AWAY",
+    "pick_line": "ATL -9.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-15",
+    "https://www.nba.com/game/atl-vs-mil-0022600243"
+   ]
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "OKC@SAC",
+   "time_et": "9:00 PM",
+   "away_record": "8-4",
+   "home_record": "1-10",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "model": {
+    "p_home_smoothed": 0.235,
+    "p_away_smoothed": 0.611,
+    "expected_margin_home": -10.7,
+    "originated_spread_home": 10.5,
+    "p_home_win": 0.275,
+    "ml_home_decimal": 3.63,
+    "ml_away_decimal": 1.38,
+    "pick_side": "AWAY",
+    "pick_line": "OKC -10.5",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-15",
+    "https://www.nba.com/game/okc-vs-sac-0022600244"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "ORL@BOS",
+   "time_et": "7:00 PM",
+   "away_record": "4-7",
+   "home_record": "10-2",
+   "rest_away": {
+    "rest_days": 2,
+    "b2b": false,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "rest_home": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-15",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-15"
+   },
+   "model": {
+    "p_home_smoothed": 0.722,
+    "p_away_smoothed": 0.412,
+    "expected_margin_home": 13.4,
+    "originated_spread_home": -13.5,
+    "p_home_win": 0.771,
+    "ml_home_decimal": 1.3,
+    "ml_away_decimal": 4.37,
+    "pick_side": "HOME",
+    "pick_line": "BOS -13.5",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/game/orl-vs-bos-0022600245"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "CHI@CLE",
+   "time_et": "7:00 PM",
+   "away_record": "1-9",
+   "home_record": "6-6",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-14",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-14"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-14",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-14"
+   },
+   "model": {
+    "p_home_smoothed": 0.5,
+    "p_away_smoothed": 0.25,
+    "expected_margin_home": 11.2,
+    "originated_spread_home": -11.0,
+    "p_home_win": 0.736,
+    "ml_home_decimal": 1.36,
+    "ml_away_decimal": 3.78,
+    "pick_side": "HOME",
+    "pick_line": "CLE -11.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/game/chi-vs-cle-0022600246"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "MEM@WAS",
+   "time_et": "7:00 PM",
+   "away_record": "7-4",
+   "home_record": "4-9",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-14",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-14"
+   },
+   "rest_home": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-15",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-15"
+   },
+   "model": {
+    "p_home_smoothed": 0.368,
+    "p_away_smoothed": 0.588,
+    "expected_margin_home": -5.2,
+    "originated_spread_home": 5.0,
+    "p_home_win": 0.384,
+    "ml_home_decimal": 2.6,
+    "ml_away_decimal": 1.62,
+    "pick_side": "AWAY",
+    "pick_line": "MEM -5.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/game/mem-vs-was-0022600247"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "PHI@BKN",
+   "time_et": "7:30 PM",
+   "away_record": "10-3",
+   "home_record": "3-8",
+   "rest_away": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-15",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-15"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-14",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-14"
+   },
+   "model": {
+    "p_home_smoothed": 0.353,
+    "p_away_smoothed": 0.684,
+    "expected_margin_home": -9.1,
+    "originated_spread_home": 9.0,
+    "p_home_win": 0.304,
+    "ml_home_decimal": 3.29,
+    "ml_away_decimal": 1.44,
+    "pick_side": "AWAY",
+    "pick_line": "PHI -9.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/game/phi-vs-bkn-0022600248"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "HOU@MIA",
+   "time_et": "7:30 PM",
+   "away_record": "9-3",
+   "home_record": "5-6",
+   "rest_away": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-15",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-15"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-14",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-14"
+   },
+   "model": {
+    "p_home_smoothed": 0.471,
+    "p_away_smoothed": 0.667,
+    "expected_margin_home": -4.4,
+    "originated_spread_home": 4.5,
+    "p_home_win": 0.402,
+    "ml_home_decimal": 2.49,
+    "ml_away_decimal": 1.67,
+    "pick_side": "AWAY",
+    "pick_line": "HOU -4.5",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/game/hou-vs-mia-0022600249"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "POR@MIN",
+   "time_et": "8:00 PM",
+   "away_record": "8-3",
+   "home_record": "9-3",
+   "rest_away": {
+    "rest_days": 2,
+    "b2b": false,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-14",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-14"
+   },
+   "model": {
+    "p_home_smoothed": 0.667,
+    "p_away_smoothed": 0.647,
+    "expected_margin_home": 3.2,
+    "originated_spread_home": -3.0,
+    "p_home_win": 0.572,
+    "ml_home_decimal": 1.75,
+    "ml_away_decimal": 2.34,
+    "pick_side": "HOME",
+    "pick_line": "MIN -3.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/game/por-vs-min-0022600250"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "GSW@NOP",
+   "time_et": "8:00 PM",
+   "away_record": "8-4",
+   "home_record": "4-8",
+   "rest_away": {
+    "rest_days": 2,
+    "b2b": false,
+    "last_date": "2026-11-13",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-14",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-14"
+   },
+   "model": {
+    "p_home_smoothed": 0.389,
+    "p_away_smoothed": 0.611,
+    "expected_margin_home": -5.3,
+    "originated_spread_home": 5.5,
+    "p_home_win": 0.382,
+    "ml_home_decimal": 2.62,
+    "ml_away_decimal": 1.62,
+    "pick_side": "AWAY",
+    "pick_line": "GSW -5.5",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/game/gsw-vs-nop-0022600251"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "PHX@DEN",
+   "time_et": "9:00 PM",
+   "away_record": "5-6",
+   "home_record": "6-4",
+   "rest_away": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-15",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-15"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-14",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-14"
+   },
+   "model": {
+    "p_home_smoothed": 0.562,
+    "p_away_smoothed": 0.471,
+    "expected_margin_home": 5.7,
+    "originated_spread_home": -5.5,
+    "p_home_win": 0.627,
+    "ml_home_decimal": 1.59,
+    "ml_away_decimal": 2.68,
+    "pick_side": "HOME",
+    "pick_line": "DEN -5.5",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/game/phx-vs-den-0022600252"
+   ]
+  }
+ ],
+ "parlays": [
+  {
+   "date": "2026-11-13",
+   "leg1": "UTA@HOU — HOU -18.0",
+   "leg2": "POR@SAC — POR -12.0",
+   "p1": 0.838,
+   "p2": 0.747,
+   "joint_lb": 0.585,
+   "joint_ub": 0.747,
+   "rho_lb": -0.256,
+   "rho_ub": 0.756,
+   "fair_odds_lb": 1.34,
+   "fair_odds_ub": 1.71,
+   "src1": "https://www.nba.com/game/uta-vs-hou-0022600039",
+   "src2": "https://www.nba.com/game/por-vs-sac-0022600041"
+  },
+  {
+   "date": "2026-11-13",
+   "leg1": "UTA@HOU — HOU -18.0",
+   "leg2": "MIL@ORL — ORL -9.0",
+   "p1": 0.838,
+   "p2": 0.696,
+   "joint_lb": 0.534,
+   "joint_ub": 0.696,
+   "rho_lb": -0.291,
+   "rho_ub": 0.665,
+   "fair_odds_lb": 1.44,
+   "fair_odds_ub": 1.87,
+   "src1": "https://www.nba.com/game/uta-vs-hou-0022600039",
+   "src2": "https://www.nba.com/game/mil-vs-orl-0022600035"
+  },
+  {
+   "date": "2026-11-13",
+   "leg1": "POR@SAC — POR -12.0",
+   "leg2": "MIL@ORL — ORL -9.0",
+   "p1": 0.747,
+   "p2": 0.696,
+   "joint_lb": 0.443,
+   "joint_ub": 0.696,
+   "rho_lb": -0.385,
+   "rho_ub": 0.881,
+   "fair_odds_lb": 1.44,
+   "fair_odds_ub": 2.26,
+   "src1": "https://www.nba.com/game/por-vs-sac-0022600041",
+   "src2": "https://www.nba.com/game/mil-vs-orl-0022600035"
+  },
+  {
+   "date": "2026-11-14",
+   "leg1": "CHI@MIN — MIN -17.0",
+   "leg2": "BKN@MEM — MEM -10.5",
+   "p1": 0.825,
+   "p2": 0.726,
+   "joint_lb": 0.551,
+   "joint_ub": 0.726,
+   "rho_lb": -0.283,
+   "rho_ub": 0.75,
+   "fair_odds_lb": 1.38,
+   "fair_odds_ub": 1.81,
+   "src1": "https://www.nba.com/game/chi-vs-min-0022600235",
+   "src2": "https://www.nba.com/game/bkn-vs-mem-0022600234"
+  },
+  {
+   "date": "2026-11-14",
+   "leg1": "CHI@MIN — MIN -17.0",
+   "leg2": "DET@MIA — DET -3.5",
+   "p1": 0.825,
+   "p2": 0.583,
+   "joint_lb": 0.408,
+   "joint_ub": 0.583,
+   "rho_lb": -0.39,
+   "rho_ub": 0.545,
+   "fair_odds_lb": 1.72,
+   "fair_odds_ub": 2.45,
+   "src1": "https://www.nba.com/game/chi-vs-min-0022600235",
+   "src2": "https://www.nba.com/game/det-vs-mia-0022600233"
+  },
+  {
+   "date": "2026-11-14",
+   "leg1": "BKN@MEM — MEM -10.5",
+   "leg2": "DET@MIA — DET -3.5",
+   "p1": 0.726,
+   "p2": 0.583,
+   "joint_lb": 0.309,
+   "joint_ub": 0.583,
+   "rho_lb": -0.52,
+   "rho_ub": 0.726,
+   "fair_odds_lb": 1.72,
+   "fair_odds_ub": 3.24,
+   "src1": "https://www.nba.com/game/bkn-vs-mem-0022600234",
+   "src2": "https://www.nba.com/game/det-vs-mia-0022600233"
+  },
+  {
+   "date": "2026-11-15",
+   "leg1": "SAS@UTA — SAS -15.0",
+   "leg2": "IND@PHI — PHI -13.0",
+   "p1": 0.796,
+   "p2": 0.763,
+   "joint_lb": 0.559,
+   "joint_ub": 0.763,
+   "rho_lb": -0.282,
+   "rho_ub": 0.908,
+   "fair_odds_lb": 1.31,
+   "fair_odds_ub": 1.79,
+   "src1": "https://www.nba.com/game/sas-vs-uta-0022600239",
+   "src2": "https://www.nba.com/game/ind-vs-phi-0022600236"
+  },
+  {
+   "date": "2026-11-15",
+   "leg1": "SAS@UTA — SAS -15.0",
+   "leg2": "OKC@SAC — OKC -10.5",
+   "p1": 0.796,
+   "p2": 0.725,
+   "joint_lb": 0.521,
+   "joint_ub": 0.725,
+   "rho_lb": -0.312,
+   "rho_ub": 0.822,
+   "fair_odds_lb": 1.38,
+   "fair_odds_ub": 1.92,
+   "src1": "https://www.nba.com/game/sas-vs-uta-0022600239",
+   "src2": "https://www.nba.com/game/okc-vs-sac-0022600244"
+  },
+  {
+   "date": "2026-11-15",
+   "leg1": "IND@PHI — PHI -13.0",
+   "leg2": "OKC@SAC — OKC -10.5",
+   "p1": 0.763,
+   "p2": 0.725,
+   "joint_lb": 0.488,
+   "joint_ub": 0.725,
+   "rho_lb": -0.343,
+   "rho_ub": 0.905,
+   "fair_odds_lb": 1.38,
+   "fair_odds_ub": 2.05,
+   "src1": "https://www.nba.com/game/ind-vs-phi-0022600236",
+   "src2": "https://www.nba.com/game/okc-vs-sac-0022600244"
+  },
+  {
+   "date": "2026-11-16",
+   "leg1": "ORL@BOS — BOS -13.5",
+   "leg2": "CHI@CLE — CLE -11.0",
+   "p1": 0.771,
+   "p2": 0.736,
+   "joint_lb": 0.507,
+   "joint_ub": 0.736,
+   "rho_lb": -0.326,
+   "rho_ub": 0.91,
+   "fair_odds_lb": 1.36,
+   "fair_odds_ub": 1.97,
+   "src1": "https://www.nba.com/game/orl-vs-bos-0022600245",
+   "src2": "https://www.nba.com/game/chi-vs-cle-0022600246"
+  },
+  {
+   "date": "2026-11-16",
+   "leg1": "ORL@BOS — BOS -13.5",
+   "leg2": "PHI@BKN — PHI -9.0",
+   "p1": 0.771,
+   "p2": 0.696,
+   "joint_lb": 0.467,
+   "joint_ub": 0.696,
+   "rho_lb": -0.36,
+   "rho_ub": 0.825,
+   "fair_odds_lb": 1.44,
+   "fair_odds_ub": 2.14,
+   "src1": "https://www.nba.com/game/orl-vs-bos-0022600245",
+   "src2": "https://www.nba.com/game/phi-vs-bkn-0022600248"
+  },
+  {
+   "date": "2026-11-16",
+   "leg1": "CHI@CLE — CLE -11.0",
+   "leg2": "PHI@BKN — PHI -9.0",
+   "p1": 0.736,
+   "p2": 0.696,
+   "joint_lb": 0.432,
+   "joint_ub": 0.696,
+   "rho_lb": -0.396,
+   "rho_ub": 0.906,
+   "fair_odds_lb": 1.44,
+   "fair_odds_ub": 2.31,
+   "src1": "https://www.nba.com/game/chi-vs-cle-0022600246",
+   "src2": "https://www.nba.com/game/phi-vs-bkn-0022600248"
+  }
+ ],
+ "prop_rows": [
+  {
+   "date": "2026-11-13",
+   "game": "NYK@IND",
+   "team": "New York Knicks",
+   "player": "Karl-Anthony Towns",
+   "ppg": 20.9,
+   "rpg": 13.5,
+   "apg": 3.5,
+   "line": 38.0,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "NYK@IND",
+   "team": "Indiana Pacers",
+   "player": "Pascal Siakam",
+   "ppg": 22.7,
+   "rpg": 6.9,
+   "apg": 4.4,
+   "line": 34.0,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "MIL@ORL",
+   "team": "Milwaukee Bucks",
+   "player": "Tyler Herro",
+   "ppg": 21.9,
+   "rpg": 4.4,
+   "apg": 4.5,
+   "line": 31.0,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "MIL@ORL",
+   "team": "Orlando Magic",
+   "player": "Franz Wagner",
+   "ppg": 23.5,
+   "rpg": 6.5,
+   "apg": 7.9,
+   "line": 38.0,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "CLE@MIA",
+   "team": "Cleveland Cavaliers",
+   "player": "Donovan Mitchell",
+   "ppg": 22.8,
+   "rpg": 5.0,
+   "apg": 5.5,
+   "line": 33.5,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "CLE@MIA",
+   "team": "Miami Heat",
+   "player": "Giannis Antetokounmpo",
+   "ppg": 27.7,
+   "rpg": 12.6,
+   "apg": 5.2,
+   "line": 45.5,
+   "status": "Available",
+   "status_reason": "Injury/Illness - Right Wrist Sprain",
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "ATL@CHI",
+   "team": "Atlanta Hawks",
+   "player": "Jalen Johnson",
+   "ppg": 19.2,
+   "rpg": 8.6,
+   "apg": 7.2,
+   "line": 35.0,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "ATL@CHI",
+   "team": "Chicago Bulls",
+   "player": "Caleb Wilson",
+   "ppg": 18.9,
+   "rpg": 6.2,
+   "apg": 1.9,
+   "line": 27.0,
+   "status": "Out",
+   "status_reason": "Injury/Illness - Right Metacarpal Fracture",
+   "signal": "NO BET — officially out/doubtful",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "MEM@NOP",
+   "team": "Memphis Grizzlies",
+   "player": "Ty Jerome",
+   "ppg": 26.2,
+   "rpg": 3.5,
+   "apg": 4.9,
+   "line": 34.5,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "MEM@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Zion Williamson",
+   "ppg": 21.7,
+   "rpg": 5.2,
+   "apg": 2.6,
+   "line": 29.5,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "UTA@HOU",
+   "team": "Utah Jazz",
+   "player": "Keyonte George",
+   "ppg": 20.4,
+   "rpg": 4.5,
+   "apg": 6.5,
+   "line": 31.5,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "UTA@HOU",
+   "team": "Houston Rockets",
+   "player": "Alperen Sengun",
+   "ppg": 21.1,
+   "rpg": 9.4,
+   "apg": 7.9,
+   "line": 38.5,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "GSW@SAS",
+   "team": "Golden State Warriors",
+   "player": "Stephen Curry",
+   "ppg": 27.8,
+   "rpg": 3.7,
+   "apg": 3.9,
+   "line": 35.5,
+   "status": "Out",
+   "status_reason": "Injury/Illness - Right Oblique Tear",
+   "signal": "NO BET — officially out/doubtful",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "GSW@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Victor Wembanyama",
+   "ppg": 30.3,
+   "rpg": 11.7,
+   "apg": 2.8,
+   "line": 45.0,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "POR@SAC",
+   "team": "Portland Trail Blazers",
+   "player": "Deni Avdija",
+   "ppg": 23.0,
+   "rpg": 6.1,
+   "apg": 6.5,
+   "line": 35.5,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "POR@SAC",
+   "team": "Sacramento Kings",
+   "player": "Darius Acuff Jr.",
+   "ppg": 26.2,
+   "rpg": 3.8,
+   "apg": 7.3,
+   "line": 37.5,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "OKC@LAC",
+   "team": "Oklahoma City Thunder",
+   "player": "Shai Gilgeous-Alexander",
+   "ppg": 29.7,
+   "rpg": 4.3,
+   "apg": 4.5,
+   "line": 38.5,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-13",
+   "game": "OKC@LAC",
+   "team": "LA Clippers",
+   "player": "Darius Garland",
+   "ppg": 20.4,
+   "rpg": 1.8,
+   "apg": 6.9,
+   "line": 29.0,
+   "status": "Not listed on report",
+   "status_reason": null,
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-14",
+   "game": "DEN@NOP",
+   "team": "Denver Nuggets",
+   "player": "Nikola Jokic",
+   "ppg": 23.5,
+   "rpg": 10.8,
+   "apg": 9.0,
+   "line": 43.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-14",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-14",
+   "game": "DEN@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Zion Williamson",
+   "ppg": 21.7,
+   "rpg": 5.2,
+   "apg": 2.6,
+   "line": 29.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-14",
+   "game": "DAL@CLE",
+   "team": "Dallas Mavericks",
+   "player": "Cooper Flagg",
+   "ppg": 24.6,
+   "rpg": 6.9,
+   "apg": 6.5,
+   "line": 38.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-14",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-14",
+   "game": "DAL@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Donovan Mitchell",
+   "ppg": 22.8,
+   "rpg": 5.0,
+   "apg": 5.5,
+   "line": 33.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-14",
+   "game": "DET@MIA",
+   "team": "Detroit Pistons",
+   "player": "Cade Cunningham",
+   "ppg": 25.0,
+   "rpg": 5.2,
+   "apg": 7.9,
+   "line": 38.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-14",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-14",
+   "game": "DET@MIA",
+   "team": "Miami Heat",
+   "player": "Giannis Antetokounmpo",
+   "ppg": 27.7,
+   "rpg": 12.6,
+   "apg": 5.2,
+   "line": 45.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-14",
+   "game": "BKN@MEM",
+   "team": "Brooklyn Nets",
+   "player": "Julius Randle",
+   "ppg": 19.7,
+   "rpg": 6.5,
+   "apg": 5.0,
+   "line": 31.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-14",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-14",
+   "game": "BKN@MEM",
+   "team": "Memphis Grizzlies",
+   "player": "Ty Jerome",
+   "ppg": 26.2,
+   "rpg": 3.5,
+   "apg": 4.9,
+   "line": 34.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-14",
+   "game": "CHI@MIN",
+   "team": "Chicago Bulls",
+   "player": "Caleb Wilson",
+   "ppg": 18.9,
+   "rpg": 6.2,
+   "apg": 1.9,
+   "line": 27.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-14",
+   "game": "CHI@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "LaMelo Ball",
+   "ppg": 18.6,
+   "rpg": 3.3,
+   "apg": 6.3,
+   "line": 28.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-14",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "IND@PHI",
+   "team": "Indiana Pacers",
+   "player": "Pascal Siakam",
+   "ppg": 22.7,
+   "rpg": 6.9,
+   "apg": 4.4,
+   "line": 34.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "IND@PHI",
+   "team": "Philadelphia 76ers",
+   "player": "Tyrese Maxey",
+   "ppg": 26.7,
+   "rpg": 3.4,
+   "apg": 5.5,
+   "line": 35.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-16",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "LAL@PHX",
+   "team": "Los Angeles Lakers",
+   "player": null,
+   "ppg": null,
+   "rpg": null,
+   "apg": null,
+   "line": null,
+   "status": null,
+   "status_reason": null,
+   "signal": "BLANK — leader stats not displayed on official page (flagged)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-15",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": "Season-leader table on the official Nov-15 slate page displayed '-' — no value inferred"
+  },
+  {
+   "date": "2026-11-15",
+   "game": "LAL@PHX",
+   "team": "Phoenix Suns",
+   "player": "Devin Booker",
+   "ppg": 25.5,
+   "rpg": 2.5,
+   "apg": 5.0,
+   "line": 33.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-16",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "CHA@LAC",
+   "team": "Charlotte Hornets",
+   "player": null,
+   "ppg": null,
+   "rpg": null,
+   "apg": null,
+   "line": null,
+   "status": null,
+   "status_reason": null,
+   "signal": "BLANK — leader stats not displayed on official page (flagged)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-15",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": "Season-leader table on the official Nov-15 slate page displayed '-' — no value inferred"
+  },
+  {
+   "date": "2026-11-15",
+   "game": "CHA@LAC",
+   "team": "LA Clippers",
+   "player": "Darius Garland",
+   "ppg": 20.4,
+   "rpg": 1.8,
+   "apg": 6.9,
+   "line": 29.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "SAS@UTA",
+   "team": "San Antonio Spurs",
+   "player": "Victor Wembanyama",
+   "ppg": 30.3,
+   "rpg": 11.7,
+   "apg": 2.8,
+   "line": 45.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "SAS@UTA",
+   "team": "Utah Jazz",
+   "player": "Keyonte George",
+   "ppg": 20.4,
+   "rpg": 4.5,
+   "apg": 6.5,
+   "line": 31.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "DAL@BOS",
+   "team": "Dallas Mavericks",
+   "player": "Cooper Flagg",
+   "ppg": 24.6,
+   "rpg": 6.9,
+   "apg": 6.5,
+   "line": 38.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-14",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "DAL@BOS",
+   "team": "Boston Celtics",
+   "player": "Jayson Tatum",
+   "ppg": 26.3,
+   "rpg": 6.1,
+   "apg": 7.5,
+   "line": 40.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-16",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "NYK@TOR",
+   "team": "New York Knicks",
+   "player": "Karl-Anthony Towns",
+   "ppg": 20.9,
+   "rpg": 13.5,
+   "apg": 3.5,
+   "line": 38.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "player": null,
+   "ppg": null,
+   "rpg": null,
+   "apg": null,
+   "line": null,
+   "status": null,
+   "status_reason": null,
+   "signal": "BLANK — leader stats not displayed on official page (flagged)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-15",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": "Season-leader table on the official Nov-15 slate page displayed '-' — no value inferred"
+  },
+  {
+   "date": "2026-11-15",
+   "game": "HOU@WAS",
+   "team": "Houston Rockets",
+   "player": "Alperen Sengun",
+   "ppg": 21.1,
+   "rpg": 9.4,
+   "apg": 7.9,
+   "line": 38.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "HOU@WAS",
+   "team": "Washington Wizards",
+   "player": "Anthony Davis",
+   "ppg": 25.6,
+   "rpg": 10.5,
+   "apg": 2.0,
+   "line": 38.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-16",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "ATL@MIL",
+   "team": "Atlanta Hawks",
+   "player": "Jalen Johnson",
+   "ppg": 19.2,
+   "rpg": 8.6,
+   "apg": 7.2,
+   "line": 35.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "ATL@MIL",
+   "team": "Milwaukee Bucks",
+   "player": "Tyler Herro",
+   "ppg": 21.9,
+   "rpg": 4.4,
+   "apg": 4.5,
+   "line": 31.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "OKC@SAC",
+   "team": "Oklahoma City Thunder",
+   "player": "Shai Gilgeous-Alexander",
+   "ppg": 29.7,
+   "rpg": 4.3,
+   "apg": 4.5,
+   "line": 38.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-15",
+   "game": "OKC@SAC",
+   "team": "Sacramento Kings",
+   "player": "Darius Acuff Jr.",
+   "ppg": 26.2,
+   "rpg": 3.8,
+   "apg": 7.3,
+   "line": 37.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "ORL@BOS",
+   "team": "Orlando Magic",
+   "player": "Franz Wagner",
+   "ppg": 23.5,
+   "rpg": 6.5,
+   "apg": 7.9,
+   "line": 38.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "ORL@BOS",
+   "team": "Boston Celtics",
+   "player": "Jayson Tatum",
+   "ppg": 26.3,
+   "rpg": 6.1,
+   "apg": 7.5,
+   "line": 40.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-16",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "player": "Caleb Wilson",
+   "ppg": 18.9,
+   "rpg": 6.2,
+   "apg": 1.9,
+   "line": 27.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Donovan Mitchell",
+   "ppg": 22.8,
+   "rpg": 5.0,
+   "apg": 5.5,
+   "line": 33.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Ty Jerome",
+   "ppg": 26.2,
+   "rpg": 3.5,
+   "apg": 4.9,
+   "line": 34.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Anthony Davis",
+   "ppg": 25.6,
+   "rpg": 10.5,
+   "apg": 2.0,
+   "line": 38.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-16",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "player": "Tyrese Maxey",
+   "ppg": 26.7,
+   "rpg": 3.4,
+   "apg": 5.5,
+   "line": 35.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-16",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "player": "Julius Randle",
+   "ppg": 19.7,
+   "rpg": 6.5,
+   "apg": 5.0,
+   "line": 31.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-14",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "HOU@MIA",
+   "team": "Houston Rockets",
+   "player": "Alperen Sengun",
+   "ppg": 21.1,
+   "rpg": 9.4,
+   "apg": 7.9,
+   "line": 38.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "HOU@MIA",
+   "team": "Miami Heat",
+   "player": "Giannis Antetokounmpo",
+   "ppg": 27.7,
+   "rpg": 12.6,
+   "apg": 5.2,
+   "line": 45.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "player": "Deni Avdija",
+   "ppg": 23.0,
+   "rpg": 6.1,
+   "apg": 6.5,
+   "line": 35.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "LaMelo Ball",
+   "ppg": 18.6,
+   "rpg": 3.3,
+   "apg": 6.3,
+   "line": 28.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-14",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Stephen Curry",
+   "ppg": 27.8,
+   "rpg": 3.7,
+   "apg": 3.9,
+   "line": 35.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Zion Williamson",
+   "ppg": 21.7,
+   "rpg": 5.2,
+   "apg": 2.6,
+   "line": 29.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "PHX@DEN",
+   "team": "Phoenix Suns",
+   "player": "Devin Booker",
+   "ppg": 25.5,
+   "rpg": 2.5,
+   "apg": 5.0,
+   "line": 33.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-16",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  },
+  {
+   "date": "2026-11-16",
+   "game": "PHX@DEN",
+   "team": "Denver Nuggets",
+   "player": "Nikola Jokic",
+   "ppg": 23.5,
+   "rpg": 10.8,
+   "apg": 9.0,
+   "line": 43.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-14",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "blank": null
+  }
+ ],
+ "n_model_picks": 26
+}

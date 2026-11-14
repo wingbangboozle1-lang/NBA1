@@ -10,7 +10,7 @@
  "counts": {
   "official_games_2026_11_13_to_17": 36,
   "official_games_in_horizon": 27,
-  "published_rows_compared": 31,
+  "published_rows_compared": 36,
   "published_mismatches": 0,
   "calendar_day_counts_match": true,
   "teams_played_2026_11_13": [
@@ -984,10 +984,19 @@
    "home_record_pre_11_13": "5-7",
    "record_status": "STALE: a team played 2026-11-13; that result was not captured",
    "tip_confirmed_by": "schedule",
-   "in_published_file": false,
+   "in_published_file": true,
    "source_game": "https://www.nba.com/game/nyk-vs-tor-0022600253",
    "source_schedule": "https://www.nba.com/schedule",
-   "published_check": {}
+   "published_check": {
+    "date": true,
+    "matchup": true,
+    "tip_et": true,
+    "venue": true,
+    "city": true,
+    "away_record": true,
+    "home_record": true,
+    "competition": "unverified: label not printed on official schedule (published: None)"
+   }
   },
   {
    "date": "2026-11-17",
@@ -1002,10 +1011,19 @@
    "home_record_pre_11_13": "9-3",
    "record_status": "STALE: a team played 2026-11-13; that result was not captured",
    "tip_confirmed_by": "schedule",
-   "in_published_file": false,
+   "in_published_file": true,
    "source_game": "https://www.nba.com/game/por-vs-min-0022600254",
    "source_schedule": "https://www.nba.com/schedule",
-   "published_check": {}
+   "published_check": {
+    "date": true,
+    "matchup": true,
+    "tip_et": true,
+    "venue": true,
+    "city": true,
+    "away_record": true,
+    "home_record": true,
+    "competition": "unverified: label not printed on official schedule (published: None)"
+   }
   },
   {
    "date": "2026-11-17",
@@ -1020,10 +1038,19 @@
    "home_record_pre_11_13": "10-2",
    "record_status": "STALE: a team played 2026-11-13; that result was not captured",
    "tip_confirmed_by": "schedule",
-   "in_published_file": false,
+   "in_published_file": true,
    "source_game": "https://www.nba.com/game/det-vs-sas-0022600255",
    "source_schedule": "https://www.nba.com/schedule",
-   "published_check": {}
+   "published_check": {
+    "date": true,
+    "matchup": true,
+    "tip_et": true,
+    "venue": true,
+    "city": true,
+    "away_record": true,
+    "home_record": true,
+    "competition": "unverified: label not printed on official schedule (published: None)"
+   }
   },
   {
    "date": "2026-11-17",
@@ -1038,10 +1065,19 @@
    "home_record_pre_11_13": "11-2",
    "record_status": "unchanged: neither team played 2026-11-13 per the official schedule",
    "tip_confirmed_by": "schedule",
-   "in_published_file": false,
+   "in_published_file": true,
    "source_game": "https://www.nba.com/game/cha-vs-lal-0022600256",
    "source_schedule": "https://www.nba.com/schedule",
-   "published_check": {}
+   "published_check": {
+    "date": true,
+    "matchup": true,
+    "tip_et": true,
+    "venue": true,
+    "city": true,
+    "away_record": true,
+    "home_record": true,
+    "competition": "unverified: label not printed on official schedule (published: None)"
+   }
   },
   {
    "date": "2026-11-17",
@@ -1056,10 +1092,19 @@
    "home_record_pre_11_13": "2-8",
    "record_status": "STALE: a team played 2026-11-13; that result was not captured",
    "tip_confirmed_by": "schedule",
-   "in_published_file": false,
+   "in_published_file": true,
    "source_game": "https://www.nba.com/game/uta-vs-lac-0022600257",
    "source_schedule": "https://www.nba.com/schedule",
-   "published_check": {}
+   "published_check": {
+    "date": true,
+    "matchup": true,
+    "tip_et": true,
+    "venue": true,
+    "city": true,
+    "away_record": true,
+    "home_record": true,
+    "competition": "unverified: label not printed on official schedule (published: None)"
+   }
   }
  ]
 }
