@@ -487,6 +487,30 @@ def main():
             ("B2B" if (r["home_b2b"] or r["away_b2b"]) else ""),
             srclink(sources, r["src"]),
         ])
+    # Which line is authoritative? Two models exist and they disagree; say so where the
+    # numbers are shown rather than only on a subpage. The counts are read from the
+    # cross-build comparison, not typed.
+    xcb = None
+    try:
+        xcb = load(os.path.join(ROOT, "verify", "2026-11-14", "checks.json"))["cross_build_summary"]
+    except (OSError, KeyError):
+        pass
+    if xcb:
+        body.append(banner("warn", "Two models, two different lines - which one is authoritative?",
+            "<p>Every game below carries a line from the <b>validated model</b> "
+            "(<code>engine/pipeline.py</code>, the one tested on 51 out-of-sample games). A second, independent "
+            "line-origination model (<code>RecordLine-1</code>, <code>scripts/originate_horizon.py</code>) produces "
+            "its own spread for the same games. They are <b>different models, not two renderings of one number</b>: "
+            "on the %d games they share they differ on %d, and on %d of those the two disagree about which team is "
+            "the favourite (largest gap %.1f points).</p>"
+            "<p><b>The line shown on this page is the authoritative one</b> because it is the only one whose error has "
+            "been measured out of sample. Do not average the two and do not treat the second as a second opinion on "
+            "the same estimate - it is a different, unmeasured model. The full row-by-row comparison is in "
+            "<a href=\"site/pages/source-check.html\">Official Source Check</a>, section 5. Choosing between them, or "
+            "retiring one, is an open decision (flag F26, suggestion SG15).</p>"
+            % (xcb["matchups_compared"], xcb["disagree_over_0.5"], xcb["opposite_favourite"],
+               xcb["max_abs_difference"])))
+
     body.append(h2("Horizon at a glance", "Every game in the window, with the originated line, the reference line and the difference between them."))
     body.append(table(
         ["Date", "Tip ET", "Matchup", "Away rec", "Home rec", "Model home margin", "Model total",
