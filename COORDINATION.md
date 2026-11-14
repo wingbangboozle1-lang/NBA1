@@ -190,3 +190,20 @@ flagged items (and Build A's 8) are published on their respective
 *Flagged for Review* pages with source links:
 <https://wingbangboozle1-lang.github.io/NBA1/docs/b/pages/flagged.html> and
 <https://wingbangboozle1-lang.github.io/NBA1/review.html>.
+
+---
+
+## 7. Build C — session `arena/afbb836e-nba1` (claimed 2026-11-14)
+
+Scope of this session: refresh the horizon to today + 3 days (2026-11-14 .. 2026-11-17), re-verify the
+published schedule row by row against NBA.com, fix a reproducibility defect, close stale board items,
+and integrate. Single branch only (`arena/afbb836e-nba1`); no other branch is created or pushed.
+
+| # | Task | Status | File scope | Notes |
+| --- | --- | --- | --- | --- |
+| C01 | Board reconciliation + claim | in progress | `COORDINATION.md` (§7 only) | Claimed 2026-11-14. Stale items found: U14 still "in progress" although PR #16 merged; R1 unresolved; PRs #11 and #14 open and unmerged (logged, not touched). |
+| C02 | Horizon refresh 11/14–11/17 (today + 3 days) | unclaimed | `data/raw/schedule_2026-11-14_to_17.json` | 11/13 finals NOT captured: cached NBA.com pages for 11/13 show mid-game states. |
+| C03 | Line-by-line verification of all 31 schedule rows in `data/schedule_2026_11_13_to_16.json` | unclaimed | `data/raw/verification_c03.json` | Each row checked against the NBA.com per-date Games page and the per-game page URL. |
+| C04 | Reproducibility defect: `docs/pages/summary.html` (682 vs 693 rows) | unclaimed | `scripts/build_site.py`, `docs/pages/summary.html` | `verify_all.py` rewrote this page on a clean checkout. |
+| C05 | Root nav link to Build B (R1) | unclaimed | `index.html` | Requested in §4 R1; Build A is done. |
+| C06 | Integration, PR #→main, merge, Pages confirm | unclaimed | whole repo | Only after C01–C05 are verified. |
