@@ -1376,7 +1376,7 @@ Single-branch session: `arena/ebdf1d21-nba1` (Arena pins the session to one bran
 
 | Check | Result |
 | --- | --- |
-| `scripts/generate_picks_d.py` self-audit | VERIFY OK: 27 games; fresh-vs-capture 10/10 games match; leaders 3 fills + all overlapping values match; fidelity 22/22 overlapping games reproduce the archived Edge Lab artifact exactly; every page row carries an official source link |
+| `scripts/generate_picks_d.py` self-audit | VERIFY OK: 27 games; fresh-vs-capture 10/10 games match; leaders 3 fills + all overlapping values match; fidelity 27/27 horizon games reproduce the archived artifact exactly (22/22 at claim time; another session later extended `data/originated_lines.json` to 11/17 and filled the CHA/LAL/TOR leader gaps, so regeneration now covers all 27 with 0 leader fills); every page row carries an official source link |
 | `scripts/verify_all.py` (CI gate; now includes the Build D builder after `build_edge_site.py`) | VERIFY OK — builders, checker, data audits all pass |
 | `scripts/check_site.py` (now includes `picks-2026-11-14.html`) | 148 rows checked, pass |
 | `scripts/check_links.py` | PASS |
