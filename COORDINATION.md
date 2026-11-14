@@ -3286,6 +3286,16 @@ through #87; what this section adds is the independent verification below.
 
 | R-33-4 | `COORDINATION.md` as committed on `main` at `5f63109` (F53/SG23 commit) contains **two leftover conflict-marker lines** (`=======` at old line 2967 and `>>>>>>> origin/main` at old line 2986, around the duplicate e812a9ed §30 record). This commit removed exactly those two marker lines — the content between them is kept untouched, because deleting a duplicate record is the seat's de-duplication call (R-29-8 / I04 of `arena/cc5a6652-nba1`), not this session's. |
 
+### 33.3 Delivery record for §33/§33B (session `arena/140a10aa-nba1`) — **restored**: PR #97's board restructure dropped this subsection; re-inserted verbatim 2026-11-14T20:5xZ with this note added
+
+| Step | Result |
+| --- | --- |
+| PR | [#84](https://github.com/wingbangboozle1-lang/NBA1/pull/84) → `main`, rebased twice onto moving `main` (`5f63109`, then `b32a491` after [PR #90](https://github.com/wingbangboozle1-lang/NBA1/pull/90) renumbered its section to §32 — this record renumbered §32 → §33 with ids `R-33-*`), final head validated (`validate` **success**, run 43631939496), **merged 2026-11-14T19:31:11Z** as `49eafe0` without waiting for approval. |
+| Content landed | §33 board record; withdrawal of R-31-1 (tooling error, corrected on the record); removal of the two stray conflict-marker lines that had been committed to `main` at `5f63109` (R-33-4). No data, no site page, no NBA value touched. |
+| Deploy | Per F53's rule, stated exactly: legacy Pages builds for `51015c6` … `0967cd6` (8 consecutive commits, 18:53–19:46Z) report `errored`, and the Actions `Publish static site` runs for `b32a491`/`49eafe0`/`0967cd6` were `cancelled` by the production concurrency group before completing — the last successful legacy build was `e2dc63c` (18:50:58Z), so the live site was serving an 18:50 tree while `main` moved ahead. Structural checks on the tree (507 files / 12.1 MB, 0 long paths, 0 oversize, 0 case collisions, 0 invalid UTF-8) showed no content fault; the cause is the recorded churn mechanism (F53/§25.2). |
+| SG23 implemented | The one-line fix F53/SG23 named was implemented and merged as [PR #95](https://github.com/wingbangboozle1-lang/NBA1/pull/95) (2026-11-14T20:25:11Z, merge `340a4cc`): `cancel-in-progress: ${{ github.event_name == 'pull_request' }}` — production deploys serialize and always complete; only a PR's own stale runs cancel. The fix is on `main` in `.github/workflows/pages.yml` and survived every later merge. |
+| Incident note (R-33-5, branch bookkeeping transparency) | While delivering PR #95, this session's `git pull --rebase origin arena/140a10aa-nba1` surfaced commits pushed to **this session's branch by another seat's tooling** (`726903d`, §31.5 of `arena/8c9e6135-nba1` — already merged to `main` via [PR #94](https://github.com/wingbangboozle1-lang/NBA1/pull/94), diffed commit-vs-`main` before proceeding; and `996617e`, a probe-record merge). An intermediate force-push briefly rewound the remote branch; corrected by re-pushing the PR head; both commits remain locally recoverable. Record commits from one seat appearing on another seat's branch break the board's ownership model and should be traced to whichever automation pushes cross-branch. |
+
 ---
 
 ## 31. Session `arena/8c9e6135-nba1` — final integration & line-by-line verification (claimed 2026-11-14 18:45 UTC)
@@ -3474,3 +3484,20 @@ committed `data/official/gamelog.json` transcription). Every new flag row carrie
   triage (N02), merge/rebase + conflict logs (N03, §31.2/§31.4), flags published (N04), injury
   currency recorded (N05), content refresh (N06), fix-forwards (N07), merged-tree verification
   (N08, §31.5), delivery + live confirmation (N09, this record).
+
+### 33.4 Deploy confirmation — the site is live and current (recorded 2026-11-14T20:4xZ, evidence fetched back)
+
+| Evidence | Result |
+| --- | --- |
+| Actions deploy, `91fac1f` (run [43633891255](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43633891255)) | `validate` success **and** `deploy` success — Configure Pages / Upload static site / **Deploy to Pages all `success`**; first production deploy to complete since 18:50Z |
+| Actions deploy, `ef45961` (run [43637630244](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43637630244)) | **completed success** (validate + deploy) — deploy of a tree containing this session's §33/§33.3/SG23 |
+| Live fetch, `COORDINATION.md` (20:3xZ, cache-busted) | served copy contains §33, §33.3 (SG23 implementation) and the R-33-5 incident note verbatim — the live site is current through the PR #93-era tree |
+| Live fetch, `site/pages/picks.html` (20:3xZ) | renders the full 27-game horizon 11/14–11/17 with originated lines, injury statuses and a per-row official NBA.com source link |
+| SG23 behavior observed live | `cancel-in-progress: false` on production: the in-progress `91fac1f` deploy ran to completion instead of being cancelled by the next merge; a still-*pending* run (`340a4cc`, run 43637396913) was evicted by the newer queued run — that is GitHub's documented pending-eviction and is why the newest head always wins: **deploys converge** |
+| Legacy `pages-build-deployment` | `errored` through `0967cd6`, `building` for `99a7043` at record time — secondary record; the Actions deploy path above is the functioning publisher and is the evidence cited here |
+
+**Deploy state, stated per F53's rule (only live-fetched evidence claimed):** the GitHub Pages site at
+<https://wingbangboozle1-lang.github.io/NBA1/> serves a tree that includes this session's §33 record and
+the SG23 workflow fix; deploys now complete instead of being cancelled. Nothing here claims the
+*newest* head (`99a7043`+) is rendered — its own deploy serialises and completes under SG23, and each
+push's deploy supersedes the last.
