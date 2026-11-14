@@ -1783,3 +1783,19 @@ Irregularities met during delivery (not flags, logged here):
 - **`gh pr edit` fails** on the deprecated Projects (classic) GraphQL field. The body was updated through `gh api PATCH repos/…/pulls/57` instead.
 - **PR #56** merged to `main` (`4e4d0b0`) during this session. Its finals were cross-checked (9 / 9 agree) before the merge.
 
+---
+
+## 24. Session `arena/aadc3342-nba1` — GitHub Pages entry URL correction (claimed 2026-11-14 UTC)
+
+The platform pins this session to `arena/aadc3342-nba1`, branched from `main` at
+`2450e99ec8e88e442bebfd7f016a247dd68cc364`; no other branch will be created or used.
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| A01 | Correct the README's public-site URL to the GitHub Pages URL configured for this repository | in progress | `README.md`, `COORDINATION.md` (§24 only) |
+| A02 | Verify change, site checks, record evidence | not started | `COORDINATION.md` (§24 only) |
+
+Claim evidence: `gh api repos/wingbangboozle1-lang/NBA1/pages` returned
+`html_url=https://wingbangboozle1-lang.github.io/NBA1/`, with Pages source branch
+`main`, path `/`, and `https_enforced=true`. This is GitHub configuration evidence,
+not an NBA data source. No data, model, or generated-site files are in scope.
