@@ -2869,3 +2869,9 @@ idempotence (0 dirty lines after regeneration), the Command Center 17-page/data 
 - **Pages check (§25.2):** [PR #76](https://github.com/wingbangboozle1-lang/NBA1/pull/76) merged at `7e01041`; Pages build for `7e01041` reported `built` at 12:48 UTC; the live site serves current `main`. Earlier `errored` builds came from main-push churn, not a confirmed content fault. No config change was made.
 - **Not done by this session:** no `workflow_dispatch` (HTTP 403 for this session's token); PR #70 closed at 11:25 UTC during a metadata edit (not intended), replaced by #76.
 - **Suggestions for the integration session:** (1) add X01-F1 to F5 to the Flagged register; (2) set the injury page to cite the 04:30 AM ET 11/14 edition (X01-F1); (3) reduce Pages churn: the probe workflow runs on every push to `arena/**` and holds runners, and it pushes record commits that make open PRs `CONFLICTING`; (4) dedupe the §25 section on `main` (X01-F6, logged here).
+
+## 30. Session `arena/bca884e9-nba1` — independent integration verification (claimed 2026-11-14 UTC)
+
+| # | Task | Status | File scope | Notes |
+| --- | --- | --- | --- | --- |
+| B01 | Re-run static-build, provenance-structure, and link checks across the originating-line site and integrated site; document what these checks do and do not prove | in progress | `COORDINATION.md`, `verify/2026-11-14-bca884e9/**` | No source data or shared site pages edited. This branch is pinned by Arena; work stays on `arena/bca884e9-nba1`. |
