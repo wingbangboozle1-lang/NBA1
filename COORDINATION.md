@@ -1650,3 +1650,21 @@ GitHub Actions runners.
 | A02 | Open-PR triage #36/#37/#42/#45/#53: assess mergeability + content; superseded → close with comment; clean+green → recommend merge to the integration sessions; conflicting-needed → flag. Dispositions logged here. No branch of another session is pushed to. | in progress | GitHub PR operations only; `COORDINATION.md` (§24) |
 | A03 | Independent row-by-row verification of the **published site's horizon pages** (27 games 11/14–11/17, `site/pages/picks.html` Build D + root `picks.html`/`slate.html`) against official pages re-read this session. Findings in `notes/verification-a5bc1975-11-14.md` (new file, this session's only new repo file) + §24. | in progress | `notes/verification-a5bc1975-11-14.md` (new), `COORDINATION.md` (§24) |
 | A04 | Injury-report freshness check: official index re-read; newest 11/14 edition transcribed into the notes file with per-row source links; deltas vs the repo's newest captured edition (11/13 07:30 PM) recorded. **No shared data file is edited** — a cross-session request is logged instead (register files owned by other sessions). | in progress | `notes/verification-a5bc1975-11-14.md`, `COORDINATION.md` (§24) |
+
+### 24.1 Completion record (2026-11-14, ~10:15 UTC)
+
+| Task | Result |
+| --- | --- |
+| A01 | done — this §24 registered; takeover of `arena/2edb85af-nba1` V01–V05 recorded (idle >60 min per rule 5); integration deferred to the two sessions that claimed it. |
+| A02 | done — PR dispositions: **#36** already CLOSED by its owner (02:34Z). **#37** CLOSED by this session (stale bookkeeping; content preserved in the closing comment; PRs #30/#32 it records are merged and verified on main). **#42** CLOSED by this session (diff is probe churn only; the substantive follow-up items in its title landed on main via #39). **#45** left OPEN + flagged with a comment: the `engine_v2/build_site.py` builder-fidelity fix is still missing from main (FINAL_AUDIT.md's rebuild-fidelity caveat), while its page/allowlist parts are superseded by PRs #44/#47. **#53** CLOSED; its `FINAL_AUDIT.md` landed byte-identical to branch tip `d14efad` on this branch (commit `docs: land FINAL_AUDIT.md from PR #53…`) with the owner session's authorship preserved in the commit message. **#56** (11/13 finals closure) is open from its ACTIVE owner session — not touched. No branch of any other session was pushed to. |
+| A03 | done — 27/27 horizon fixtures + tip times on `site/pages/picks.html` match the official pages re-read this session; 22 of 27 rows carry records stale by exactly the 11/13 finals (every delta mapped to a verified final; extent re-measured for R-A2); F13 repeat matchups (NYK@TOR 11/15+11/17, POR@MIN 11/16+11/17, distinct game IDs) re-confirmed on today's official pages. Full evidence: `notes/verification-a5bc1975-11-14.md` (§1–§3, every row source-linked). |
+| A04 | done — official injury index re-read; newest 11/14 edition = 04:15 AM ET PDF, fetched and transcribed in full; **zero status movement** vs the repo's 11/13 07:30 PM capture; the 5 NOT-YET-SUBMITTED teams are exactly the 5 back-to-back teams (policy-consistent per the index page's rules); the DET@MIA 07:00-vs-08:00 conflict recorded in FINAL_AUDIT.md is resolved in this edition (prints 08:00 ET, matching the schedule page). Evidence: `notes/verification-a5bc1975-11-14.md` §4. |
+| Commits | `coord: claim §24…` → `docs: land FINAL_AUDIT.md from PR #53…` → `verify: §24 A03/A04 evidence + completion record` (this commit) |
+
+**Requests logged (not executed):** R-A1 archive the 04:15 AM edition bytes at the next refresh
+cron; R-A2 flagged-register owners update the stale-records extent + DET@MIA resolution; R-A3
+integration sessions handle PR #56 (owner active) and the PR #45 builder-fidelity fix.
+
+**Not done by this session (claimed elsewhere):** 11/13 finals capture + settlement (§20, PR #56),
+official-source re-check (§23), final integration / PR-to-main / merge / Pages confirmation
+(`arena/ef6ff2a4-nba1`, `arena/254dd8bb-nba1`). This session pushes only to its own branch.
