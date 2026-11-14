@@ -7,6 +7,7 @@ time and no framework: GitHub Pages serves docs/ as-is.
 """
 
 import datetime
+import html
 import os
 import sys
 
@@ -120,9 +121,16 @@ def p_index(meta, ex):
 </details>""" for i in ex["findings"])
 
     live = "\n".join(f"<li>{x}</li>" for x in ex["what_is_live_now"])
+    def _action_source(a):
+        # every row carries an official link, or is flagged unverified (never a guessed link)
+        if a.get("source_url"):
+            return (f'<a class="srclink" href="{html.escape(a["source_url"])}" target="_blank" '
+                    f'rel="noopener">{html.escape(a["source_label"])}</a>')
+        return ('<span class="flag">unverified</span> <span class="small">'
+                f'{html.escape(a.get("source_note", "no official source recorded"))}</span>')
     actions = "\n".join(
         f"""<tr><td class="num strong">{a['rank']}</td><td>{a['action']}</td>
-            <td class="small">{a['why']}</td></tr>""" for a in ex["recommended_next_actions"])
+            <td class="small">{a['why']}</td><td>{_action_source(a)}</td></tr>""" for a in ex["recommended_next_actions"])
 
     counts = meta["counts"]
     n_sources = len(read_json(os.path.join(OUT, "sources.json"))["sources"])
@@ -168,7 +176,7 @@ def p_index(meta, ex):
 
   <h2>Recommended next actions</h2>
   <div class="tablewrap"><table class="thin">
-    <thead><tr><th class="num">#</th><th>Action</th><th>Why</th></tr></thead>
+    <thead><tr><th class="num">#</th><th>Action</th><th>Why</th><th>Official source</th></tr></thead>
     <tbody>{actions}</tbody>
   </table></div>
 
