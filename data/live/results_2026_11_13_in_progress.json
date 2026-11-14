@@ -1,0 +1,28 @@
+{
+  "title": "2026-11-13 slate at capture — in progress, NOT settleable",
+  "captured_at_utc": "2026-11-14T00:47Z",
+  "captured_at_et": "2026-11-13 20:47 ET",
+  "source_url": "https://www.nba.com/game/cha-vs-phx-0022600230/box-score",
+  "source_name": "NBA.com live scoreboard block, rendered on the game pages (official)",
+  "slate_page_urls": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/games?date=2026-11-14"
+  ],
+  "why_this_file_exists": "Every paper pick published by the earlier builds of this repo is dated 11/13 or later. Whether those picks can be scored at all depends on whether the league has declared those games final. This file records the official state at capture so the desk shows 'pending' instead of inventing a settlement.",
+  "games": [
+    {"matchup": "NYK@IND", "game_id": "0022600034", "state": "IN PROGRESS", "detail": "Q2 9:44 remaining, NYK 31 - IND 31 (scoreboard, 00:47Z). At 00:37Z the same card read Q1 :52, NYK 25 - IND 24.", "settled": false, "cup_group": "East Group B"},
+    {"matchup": "MIL@ORL", "game_id": "0022600035", "state": "IN PROGRESS", "detail": "Q2 8:39 remaining, MIL 17 - ORL 34 (scoreboard, 00:47Z). At 00:37Z the same card read END Q1, MIL 15 - ORL 23.", "settled": false, "cup_group": "East Group A"},
+    {"matchup": "CLE@MIA", "game_id": "0022600036", "state": "PREGAME", "detail": "Card still displayed the pre-game records 6-6 / 5-6 with an 8:00 PM ET tip.", "settled": false, "cup_group": "East Group B"},
+    {"matchup": "ATL@CHI", "game_id": "0022600037", "state": "PREGAME", "detail": "7-5 / 1-9, 8:00 PM ET tip.", "settled": false, "cup_group": "East Group C"},
+    {"matchup": "MEM@NOP", "game_id": "0022600038", "state": "PREGAME", "detail": "7-4 / 4-8, 8:00 PM ET tip.", "settled": false, "cup_group": "West Group B"},
+    {"matchup": "UTA@HOU", "game_id": "0022600039", "state": "PREGAME", "detail": "1-11 / 9-3, 8:30 PM ET tip.", "settled": false, "cup_group": "West Group A"},
+    {"matchup": "GSW@SAS", "game_id": "0022600040", "state": "NOT TIPPED", "detail": "9:30 PM ET tip.", "settled": false, "cup_group": "West Group C"},
+    {"matchup": "POR@SAC", "game_id": "0022600041", "state": "NOT TIPPED", "detail": "10:00 PM ET tip.", "settled": false, "cup_group": "West Group C"},
+    {"matchup": "OKC@LAC", "game_id": "0022600042", "state": "NOT TIPPED", "detail": "10:30 PM ET tip.", "settled": false, "cup_group": "West Group B"}
+  ],
+  "consequence_for_the_desk": [
+    "Zero of the nine 11/13 games is final. No pick dated 11/13 can be graded, so every 11/13 result column on the site is blank and labelled pending.",
+    "Two 11/13 cards had already moved against the lines published before tip-off (New York led 25-24 then 31-31; Milwaukee trailed 15-23 then 17-34). Live in-slate movement is recorded here as evidence that a line published pre-tip must be versioned, not overwritten.",
+    "Emirates NBA Cup group-play labels are printed on all nine 11/13 cards and on none of the 11/14-16 cards. Group-play results change the displayed record in parentheses, e.g. '6-5 (0-1)'. Any model that ingests the plain record is ingesting a number that already includes Cup group games."
+  ]
+}

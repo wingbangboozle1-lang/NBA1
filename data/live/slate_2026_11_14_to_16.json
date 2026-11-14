@@ -1,0 +1,193 @@
+{
+  "title": "NBA slate, 2026-11-14 through 2026-11-16 — verbatim transcription of NBA.com Games & Scores",
+  "captured_by_session": "arena/2edb85af-nba1",
+  "retrieved_utc": "2026-11-14T00:37Z to 2026-11-14T00:52Z",
+  "source_name": "NBA.com Games & Scores (official)",
+  "reading_note": "On NBA.com game cards the first club listed is the AWAY team and the second is the HOME team. That ordering is confirmed independently by the URL pattern nba.com/game/<away>-vs-<home>-<game_id>, which is recorded per row below.",
+  "record_caveat": "Records are copied exactly as displayed at retrieval. The 2026-11-13 slate was in progress while these pages were read (see results_2026_11_13_in_progress.json), so every Nov 14/15/16 card still displays the records as they stood BEFORE 11/13 tip-off. NBA.com does not advance a team's displayed record until the game is final. Any feature that reads 'record' off a slate page is therefore lagging by one league day mid-slate — recorded as irregularity IR-05.",
+  "games": [
+    {
+      "date": "2026-11-14", "time_et": "7:00 PM", "away": "DEN", "home": "NOP",
+      "away_record": "6-4", "home_record": "4-8", "game_id": "0022600231",
+      "game_url": "https://www.nba.com/game/den-vs-nop-0022600231",
+      "source_url": "https://www.nba.com/games?date=2026-11-14",
+      "leaders_away": {"player": "Nikola Jokić", "ppg": 23.5, "rpg": 10.8, "apg": 9.0},
+      "leaders_home": {"player": "Zion Williamson", "ppg": 21.7, "rpg": 5.2, "apg": 2.6}
+    },
+    {
+      "date": "2026-11-14", "time_et": "7:30 PM", "away": "DAL", "home": "CLE",
+      "away_record": "7-5", "home_record": "6-6", "game_id": "0022600232",
+      "game_url": "https://www.nba.com/game/dal-vs-cle-0022600232",
+      "source_url": "https://www.nba.com/games?date=2026-11-14",
+      "leaders_away": {"player": "Cooper Flagg", "ppg": 24.6, "rpg": 6.9, "apg": 6.5},
+      "leaders_home": {"player": "Donovan Mitchell", "ppg": 22.8, "rpg": 5.0, "apg": 5.5}
+    },
+    {
+      "date": "2026-11-14", "time_et": "8:00 PM", "away": "DET", "home": "MIA",
+      "away_record": "8-3", "home_record": "5-6", "game_id": "0022600233",
+      "game_url": "https://www.nba.com/game/det-vs-mia-0022600233",
+      "source_url": "https://www.nba.com/games?date=2026-11-14",
+      "leaders_away": {"player": "Cade Cunningham", "ppg": 25.0, "rpg": 5.2, "apg": 7.9},
+      "leaders_home": {"player": "Giannis Antetokounmpo", "ppg": 27.7, "rpg": 12.6, "apg": 5.2}
+    },
+    {
+      "date": "2026-11-14", "time_et": "8:00 PM", "away": "BKN", "home": "MEM",
+      "away_record": "3-8", "home_record": "7-4", "game_id": "0022600234",
+      "game_url": "https://www.nba.com/game/bkn-vs-mem-0022600234",
+      "source_url": "https://www.nba.com/games?date=2026-11-14",
+      "leaders_away": {"player": "Julius Randle", "ppg": 19.7, "rpg": 6.5, "apg": 5.0},
+      "leaders_home": {"player": "Ty Jerome", "ppg": 26.2, "rpg": 3.5, "apg": 4.9}
+    },
+    {
+      "date": "2026-11-14", "time_et": "8:00 PM", "away": "CHI", "home": "MIN",
+      "away_record": "1-9", "home_record": "9-3", "game_id": "0022600235",
+      "game_url": "https://www.nba.com/game/chi-vs-min-0022600235",
+      "source_url": "https://www.nba.com/games?date=2026-11-14",
+      "leaders_away": {"player": "Caleb Wilson", "ppg": 18.9, "rpg": 6.2, "apg": 1.9},
+      "leaders_home": {"player": "LaMelo Ball", "ppg": 18.6, "rpg": 3.3, "apg": 6.3}
+    },
+    {
+      "date": "2026-11-15", "time_et": "1:00 PM", "away": "IND", "home": "PHI",
+      "away_record": "4-8", "home_record": "10-3", "game_id": "0022600236",
+      "game_url": "https://www.nba.com/game/ind-vs-phi-0022600236",
+      "source_url": "https://www.nba.com/games?date=2026-11-15",
+      "leaders_away": {"player": "Pascal Siakam", "ppg": 22.7, "rpg": 6.9, "apg": 4.4},
+      "leaders_home": {"player": "Tyrese Maxey", "ppg": 26.7, "rpg": 3.4, "apg": 5.5}
+    },
+    {
+      "date": "2026-11-15", "time_et": "4:00 PM", "away": "LAL", "home": "PHX",
+      "away_record": "11-2", "home_record": "5-6", "game_id": "0022600237",
+      "game_url": "https://www.nba.com/game/lal-vs-phx-0022600237",
+      "source_url": "https://www.nba.com/games?date=2026-11-15",
+      "leaders_away": {"player": "Luka Dončić", "ppg": 38.6, "rpg": 7.5, "apg": 7.6},
+      "leaders_home": {"player": "Devin Booker", "ppg": 25.5, "rpg": 2.5, "apg": 5.0}
+    },
+    {
+      "date": "2026-11-15", "time_et": "4:30 PM", "away": "CHA", "home": "LAC",
+      "away_record": "4-8", "home_record": "2-8", "game_id": "0022600238",
+      "game_url": "https://www.nba.com/game/cha-vs-lac-0022600238",
+      "source_url": "https://www.nba.com/games?date=2026-11-15",
+      "leaders_away": {"player": "Naz Reid", "ppg": 17.3, "rpg": 8.5, "apg": 2.2},
+      "leaders_home": {"player": "Darius Garland", "ppg": 20.4, "rpg": 1.8, "apg": 6.9}
+    },
+    {
+      "date": "2026-11-15", "time_et": "5:00 PM", "away": "SAS", "home": "UTA",
+      "away_record": "10-2", "home_record": "1-11", "game_id": "0022600239",
+      "game_url": "https://www.nba.com/game/sas-vs-uta-0022600239",
+      "source_url": "https://www.nba.com/games?date=2026-11-15",
+      "leaders_away": {"player": "Victor Wembanyama", "ppg": 30.3, "rpg": 11.7, "apg": 2.8},
+      "leaders_home": {"player": "Keyonte George", "ppg": 20.4, "rpg": 4.5, "apg": 6.5}
+    },
+    {
+      "date": "2026-11-15", "time_et": "6:00 PM", "away": "DAL", "home": "BOS",
+      "away_record": "7-5", "home_record": "10-2", "game_id": "0022600240",
+      "game_url": "https://www.nba.com/game/dal-vs-bos-0022600240",
+      "source_url": "https://www.nba.com/games?date=2026-11-15",
+      "leaders_away": {"player": "Cooper Flagg", "ppg": 24.6, "rpg": 6.9, "apg": 6.5},
+      "leaders_home": {"player": "Jayson Tatum", "ppg": 26.3, "rpg": 6.1, "apg": 7.5}
+    },
+    {
+      "date": "2026-11-15", "time_et": "6:00 PM", "away": "NYK", "home": "TOR",
+      "away_record": "6-5", "home_record": "5-7", "game_id": "0022600241",
+      "game_url": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+      "source_url": "https://www.nba.com/games?date=2026-11-15",
+      "leaders_away": {"player": "Karl-Anthony Towns", "ppg": 20.9, "rpg": 13.5, "apg": 3.5},
+      "leaders_home": {"player": "RJ Barrett", "ppg": 21.3, "rpg": 6.7, "apg": 4.1}
+    },
+    {
+      "date": "2026-11-15", "time_et": "7:00 PM", "away": "HOU", "home": "WAS",
+      "away_record": "9-3", "home_record": "4-9", "game_id": "0022600242",
+      "game_url": "https://www.nba.com/game/hou-vs-was-0022600242",
+      "source_url": "https://www.nba.com/games?date=2026-11-15",
+      "leaders_away": {"player": "Alperen Sengun", "ppg": 21.1, "rpg": 9.4, "apg": 7.9},
+      "leaders_home": {"player": "Anthony Davis", "ppg": 25.6, "rpg": 10.5, "apg": 2.0}
+    },
+    {
+      "date": "2026-11-15", "time_et": "8:00 PM", "away": "ATL", "home": "MIL",
+      "away_record": "7-5", "home_record": "1-11", "game_id": "0022600243",
+      "game_url": "https://www.nba.com/game/atl-vs-mil-0022600243",
+      "source_url": "https://www.nba.com/games?date=2026-11-15",
+      "leaders_away": {"player": "Jalen Johnson", "ppg": 19.2, "rpg": 8.6, "apg": 7.2},
+      "leaders_home": {"player": "Tyler Herro", "ppg": 21.9, "rpg": 4.4, "apg": 4.5}
+    },
+    {
+      "date": "2026-11-15", "time_et": "9:00 PM", "away": "OKC", "home": "SAC",
+      "away_record": "8-4", "home_record": "1-10", "game_id": "0022600244",
+      "game_url": "https://www.nba.com/game/okc-vs-sac-0022600244",
+      "source_url": "https://www.nba.com/games?date=2026-11-15",
+      "leaders_away": {"player": "Shai Gilgeous-Alexander", "ppg": 29.7, "rpg": 4.3, "apg": 4.5},
+      "leaders_home": {"player": "Darius Acuff Jr.", "ppg": 26.2, "rpg": 3.8, "apg": 7.3}
+    },
+    {
+      "date": "2026-11-16", "time_et": "7:00 PM", "away": "ORL", "home": "BOS",
+      "away_record": "4-7", "home_record": "10-2", "game_id": "0022600245",
+      "game_url": "https://www.nba.com/game/orl-vs-bos-0022600245",
+      "source_url": "https://www.nba.com/games?date=2026-11-16",
+      "leaders_away": {"player": "Franz Wagner", "ppg": 23.5, "rpg": 6.5, "apg": 7.9},
+      "leaders_home": {"player": "Jayson Tatum", "ppg": 26.3, "rpg": 6.1, "apg": 7.5}
+    },
+    {
+      "date": "2026-11-16", "time_et": "7:00 PM", "away": "CHI", "home": "CLE",
+      "away_record": "1-9", "home_record": "6-6", "game_id": "0022600246",
+      "game_url": "https://www.nba.com/game/chi-vs-cle-0022600246",
+      "source_url": "https://www.nba.com/games?date=2026-11-16",
+      "leaders_away": {"player": "Caleb Wilson", "ppg": 18.9, "rpg": 6.2, "apg": 1.9},
+      "leaders_home": {"player": "Donovan Mitchell", "ppg": 22.8, "rpg": 5.0, "apg": 5.5}
+    },
+    {
+      "date": "2026-11-16", "time_et": "7:00 PM", "away": "MEM", "home": "WAS",
+      "away_record": "7-4", "home_record": "4-9", "game_id": "0022600247",
+      "game_url": "https://www.nba.com/game/mem-vs-was-0022600247",
+      "source_url": "https://www.nba.com/games?date=2026-11-16",
+      "leaders_away": {"player": "Ty Jerome", "ppg": 26.2, "rpg": 3.5, "apg": 4.9},
+      "leaders_home": {"player": "Anthony Davis", "ppg": 25.6, "rpg": 10.5, "apg": 2.0}
+    },
+    {
+      "date": "2026-11-16", "time_et": "7:30 PM", "away": "PHI", "home": "BKN",
+      "away_record": "10-3", "home_record": "3-8", "game_id": "0022600248",
+      "game_url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
+      "source_url": "https://www.nba.com/games?date=2026-11-16",
+      "leaders_away": {"player": "Tyrese Maxey", "ppg": 26.7, "rpg": 3.4, "apg": 5.5},
+      "leaders_home": {"player": "Julius Randle", "ppg": 19.7, "rpg": 6.5, "apg": 5.0}
+    },
+    {
+      "date": "2026-11-16", "time_et": "7:30 PM", "away": "HOU", "home": "MIA",
+      "away_record": "9-3", "home_record": "5-6", "game_id": "0022600249",
+      "game_url": "https://www.nba.com/game/hou-vs-mia-0022600249",
+      "source_url": "https://www.nba.com/games?date=2026-11-16",
+      "leaders_away": {"player": "Alperen Sengun", "ppg": 21.1, "rpg": 9.4, "apg": 7.9},
+      "leaders_home": {"player": "Giannis Antetokounmpo", "ppg": 27.7, "rpg": 12.6, "apg": 5.2}
+    },
+    {
+      "date": "2026-11-16", "time_et": "8:00 PM", "away": "POR", "home": "MIN",
+      "away_record": "8-3", "home_record": "9-3", "game_id": "0022600250",
+      "game_url": "https://www.nba.com/game/por-vs-min-0022600250",
+      "source_url": "https://www.nba.com/games?date=2026-11-16",
+      "leaders_away": {"player": "Deni Avdija", "ppg": 23.0, "rpg": 6.1, "apg": 6.5},
+      "leaders_home": {"player": "LaMelo Ball", "ppg": 18.6, "rpg": 3.3, "apg": 6.3}
+    },
+    {
+      "date": "2026-11-16", "time_et": "8:00 PM", "away": "GSW", "home": "NOP",
+      "away_record": "8-4", "home_record": "4-8", "game_id": "0022600251",
+      "game_url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
+      "source_url": "https://www.nba.com/games?date=2026-11-16",
+      "leaders_away": {"player": "Stephen Curry", "ppg": 27.8, "rpg": 3.7, "apg": 3.9},
+      "leaders_home": {"player": "Zion Williamson", "ppg": 21.7, "rpg": 5.2, "apg": 2.6}
+    },
+    {
+      "date": "2026-11-16", "time_et": "9:00 PM", "away": "PHX", "home": "DEN",
+      "away_record": "5-6", "home_record": "6-4", "game_id": "0022600252",
+      "game_url": "https://www.nba.com/game/phx-vs-den-0022600252",
+      "source_url": "https://www.nba.com/games?date=2026-11-16",
+      "leaders_away": {"player": "Devin Booker", "ppg": 25.5, "rpg": 2.5, "apg": 5.0},
+      "leaders_home": {"player": "Nikola Jokić", "ppg": 23.5, "rpg": 10.8, "apg": 9.0}
+    }
+  ],
+  "slate_counts_cross_check": {
+    "claim": "The NBA.com month calendar printed game counts per day: 14 Nov = 5 games, 15 Nov = 9 games, 16 Nov = 8 games.",
+    "transcribed_here": {"2026-11-14": 5, "2026-11-15": 9, "2026-11-16": 8},
+    "result": "match",
+    "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  "game_id_block_note": "Game IDs for this window run 0022600231-0022600252, contiguous. The 2026-11-13 slate carries IDs 0022600034-0022600042 (Emirates NBA Cup group-play cards) and 2026-11-07 onward runs 0022600189+. The league therefore numbers Cup group-play cards in a separate low block. Flagged as irregularity IR-04 so no join is ever made on game_id across Cup and non-Cup dates."
+}

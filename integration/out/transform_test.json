@@ -1,0 +1,108 @@
+{
+ "note": "the same projected margins, converted by two link functions across a σ grid, scored against 51 official finals",
+ "sigma_measured_from_error": 17.4,
+ "results": {
+  "normal_sigma_6": {
+   "brier": 0.2004,
+   "logloss": 0.6117,
+   "mean_p_home": 0.5664
+  },
+  "logistic_sigma_6": {
+   "brier": 0.189,
+   "logloss": 0.5548,
+   "mean_p_home": 0.5455
+  },
+  "normal_sigma_8": {
+   "brier": 0.1922,
+   "logloss": 0.565,
+   "mean_p_home": 0.5537
+  },
+  "logistic_sigma_8": {
+   "brier": 0.1892,
+   "logloss": 0.5579,
+   "mean_p_home": 0.5355
+  },
+  "normal_sigma_10": {
+   "brier": 0.1889,
+   "logloss": 0.5535,
+   "mean_p_home": 0.5446
+  },
+  "logistic_sigma_10": {
+   "brier": 0.1924,
+   "logloss": 0.5679,
+   "mean_p_home": 0.5289
+  },
+  "normal_sigma_11": {
+   "brier": 0.1884,
+   "logloss": 0.5531,
+   "mean_p_home": 0.541
+  },
+  "logistic_sigma_11": {
+   "brier": 0.1943,
+   "logloss": 0.5733,
+   "mean_p_home": 0.5265
+  },
+  "normal_sigma_12": {
+   "brier": 0.1885,
+   "logloss": 0.5544,
+   "mean_p_home": 0.5379
+  },
+  "logistic_sigma_12": {
+   "brier": 0.1963,
+   "logloss": 0.5787,
+   "mean_p_home": 0.5244
+  },
+  "normal_sigma_14": {
+   "brier": 0.1898,
+   "logloss": 0.5596,
+   "mean_p_home": 0.5329
+  },
+  "logistic_sigma_14": {
+   "brier": 0.2003,
+   "logloss": 0.5886,
+   "mean_p_home": 0.5211
+  },
+  "normal_sigma_17.4": {
+   "brier": 0.1937,
+   "logloss": 0.5714,
+   "mean_p_home": 0.5269
+  },
+  "logistic_sigma_17.4": {
+   "brier": 0.2064,
+   "logloss": 0.6027,
+   "mean_p_home": 0.5171
+  },
+  "normal_sigma_21": {
+   "brier": 0.1983,
+   "logloss": 0.5835,
+   "mean_p_home": 0.5224
+  },
+  "logistic_sigma_21": {
+   "brier": 0.2117,
+   "logloss": 0.6145,
+   "mean_p_home": 0.5142
+  },
+  "normal_sigma_25": {
+   "brier": 0.2031,
+   "logloss": 0.5952,
+   "mean_p_home": 0.519
+  },
+  "logistic_sigma_25": {
+   "brier": 0.2163,
+   "logloss": 0.6246,
+   "mean_p_home": 0.512
+  },
+  "flat_coin": {
+   "brier": 0.25,
+   "logloss": 0.6931,
+   "mean_p_home": 0.5
+  }
+ },
+ "best_by_brier": {
+  "name": "normal_sigma_11",
+  "brier": 0.1884
+ },
+ "home_win_rate_actual": 0.4902,
+ "reading": "the calibration claim that a hard-coded σ=11 makes the model overconfident is NOT supported: on this window a normal link near σ=11–12 scores the best Brier, and the error-dispersion σ (17.4) scores worse. The reason is that mean absolute error is dragged up by a handful of blowouts while the typical game is much tighter, so a σ taken from error dispersion overstates uncertainty for the median game. The real defect in scripts/build_edge_site.py is that the constant and the link are typed rather than fitted, not that the value is wrong — and the bias that does survive every variant is the home-court term: mean P(home) sits above the actual home win rate in all of them.",
+ "caveat": "choosing the best σ from this table IS in-sample selection on 51 games; it is printed to correct an assertion, not to set a parameter"
+}
