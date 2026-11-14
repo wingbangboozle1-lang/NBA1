@@ -311,7 +311,7 @@
 <td>Archive every edition of every report (the URLs follow the ak-static.cms.nba.com/referee/injury/Injury-Report_&lt;date&gt;_&lt;time&gt;PM.pdf pattern), diff statuses between editions, then join official box scores (nba.com/game/&lt;id&gt;/box-score) to see who actually started and played. Verified on 2026-11-14: https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><span class="na" title="https://official.nba.com/nba-injury-report-2026-27-season/">&mdash;</span></td>
+<td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">context</a></td>
 </tr>
 <tr>
 <td>Q15</td>
@@ -320,7 +320,7 @@
 <td>Read the official game pages and NBA.com news for those ids before tip; if the league prints an explanation, record it. Until then the rows are published exactly as the official slate pages print them and flagged. Confirmed 2026-11-14: https://www.nba.com/game/nyk-vs-tor-0022600253 and https://www.nba.com/game/por-vs-min-0022600254</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><span class="na" title="https://www.nba.com/games?date=2026-11-17">&mdash;</span></td>
+<td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">context</a></td>
 </tr>
 <tr>
 <td>Q16</td>
@@ -329,7 +329,7 @@
 <td>Once the player-minutes table is completed (SG3), re-run the availability shock strategy (S6) over archived edition diffs and measure the distribution of teammate usage shifts. Movement log: data/refresh_2026_11_14/official_captures_2026-11-14.json</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><span class="na" title="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf">&mdash;</span></td>
+<td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf" target="_blank" rel="noopener">context</a></td>
 </tr>
 <tr>
 <td>Q17</td>
@@ -366,6 +366,15 @@
 <td>Any funded prop; the case for props inside parlays</td>
 <td>5</td>
 <td class="src"><span class="na" title="No NBA-operated source publishes a prop line (same limit as F3)">&mdash;</span></td>
+</tr>
+<tr>
+<td>Q21</td>
+<td><b>Does the strategy library need a registered multiplicity-correction gate before any record is called skill?</b></td>
+<td>The registered gate set (engine/strategies.py G1-G7) tests each strategy's record against a break-even hit rate with no correction for how many strategies, lines and variants were tried. The second build's gate set has a Sidak gate (G7_sidak) but the funded lineage does not. S1's p = 0.020 is uncorrected; across a 10-strategy library the Sidak-adjusted threshold is much stricter.</td>
+<td>Register a multiplicity gate (Sidak or Benjamini-Hochberg across the library at promotion time), re-grade the leaderboard with it, and publish both the uncorrected and corrected verdicts.</td>
+<td>Promotion of S1 (or anything else) past quarter-unit funding; the banner/executive verdict (F52).</td>
+<td>High</td>
+<td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/strategies.py" target="_blank" rel="noopener">context</a></td>
 </tr>
 </tbody></table></div>
 <p class="tnote">Where a row says no official source exists, that is the honest answer: no NBA-operated page publishes the missing item (a closing price, for instance).</p>
