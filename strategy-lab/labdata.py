@@ -16,7 +16,6 @@ OUT = os.path.join(HERE, "data")
 
 MIN_HISTORY = 4      # games a team must have played before its rating is used
 K_SHRINK = 3.0       # league-average games added to a team's mean margin as a prior
-COMMIT = os.environ.get("S28_COMMIT") or "unknown"
 SESSION = "arena/a3e092a2-nba1"
 
 
