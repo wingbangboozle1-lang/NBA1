@@ -30,9 +30,12 @@
     <div class="nav-group"><h3>HORIZON</h3>
 <a href="picks.html">Lines &amp; Picks</a>
 <a href="props.html">Player Props</a>
+<a href="props-s30.html">Single Bets vs Parlays vs Props</a>
 <a href="prop-variance.html">Prop Variance &amp; Rotation</a>
 <a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="injuries-s30.html">Injuries &mdash; 01:30 PM ET Edition</a>
 <a href="gameflow.html">Game Flow</a>
+<a href="gameflow-s30.html">Game Flow &mdash; Rest &amp; Density</a>
 </div>
 <div class="nav-group"><h3>EVIDENCE</h3>
 <a href="strategies.html">Strategies &amp; Leaderboard</a>
@@ -40,13 +43,16 @@
 <a href="leaderboard.html">Leaderboard &amp; Rewards</a>
 <a href="correlations.html">Correlations</a>
 <a href="luck.html">Luck &amp; Skill</a>
+<a href="luck-s30.html">Luck &mdash; Official Record</a>
 <a href="backtest.html">Out-of-Sample Backtest</a>
 <a href="model.html">Model &amp; Teams</a>
 </div>
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
+<a href="verification-s30.html">2026-11-14 Re-read</a>
 </div>
 <div class="nav-group"><h3>DECISION</h3>
+<a href="execution.html">Decision Register</a>
 <a href="questions.html">Open Questions</a>
 <a href="suggestions.html">Suggestions</a>
 <a href="flagged.html">Flagged for Review</a>
@@ -259,6 +265,86 @@
 <td>Option 1, sequenced behind SG17 option 2. Do not re-fit on this week's sample to move a live line.</td>
 <td>Reviewer: approve the per-stat direction now (so the module's declared assumption is on the record as unmeasured) and schedule the fit for when the sample exists.</td>
 <td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">S7</a></td>
+</tr>
+<tr>
+<td>SG19</td>
+<td>Decision support</td>
+<td><b>State every block as a named missing input (the decision index)</b></td>
+<td>The site carries 19 open questions, 52 flags and 18 earlier suggestions, and a reader cannot tell which decision is blocked by which missing fact. The result is that effort goes to whatever is most visible (a page redesign) instead of whatever is actually blocking (a source that does not exist).</td>
+<td>- Add a Decision Index page: one row per decision the project needs, with the missing input, the official source that would supply it, whether that source is reachable today, and the cheapest test that would close it <span class='fine'>(effort: Low - one page, one data file, static; risk: Low - additive; nothing existing changes; unlocks: Makes the whole backlog reviewable in one screen; turns 'we should improve X' into 'X is blocked on Y, which arrives on Z')</span><br>- Leave the questions, flags and suggestions as three separate lists and keep reading across them <span class='fine'>(effort: None; risk: High - the same items are re-litigated every session, which is exactly what the board shows happened five times; unlocks: Nothing)</span></td>
+<td>Take option 1. It is this page's companion page (Decision Register) and it costs nothing that is not already written down.</td>
+<td>Confirm the index becomes the single place a reviewer looks before authorising any build work.</td>
+<td class="src"><span class="na" title="source id S_GAMES14 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG20</td>
+<td>Model</td>
+<td><b>Make the single-bet / parlay / prop-combo comparison explicit and costed</b></td>
+<td>The brief asks for single bets, parlays and player-prop combinations to be judged side by side. Today the strategies page ranks ten cells but never states the arithmetic that makes a parlay a worse bet than its legs unless the legs are genuinely correlated - and the measured correlations (pooled pairwise rho 0.82 on points) suggest same-game legs are MORE correlated than independent, not less.</td>
+<td>- Show, for each product type, the break-even probability at a stated price and the measured or model-derived correlation penalty - with no price used, express it as 'legs needed to reach the same variance' <span class='fine'>(effort: Medium - one page section, arithmetic on existing data; risk: Medium - the temptation to soften the result; the correlation finding is unflattering to parlays; unlocks: A defensible answer to 'should I bet a parlay', which today the site implies but never states)</span><br>- Keep the leaderboard as the only comparison and let the reader infer it <span class='fine'>(effort: None; risk: The inference the reader makes will be wrong, because parlays look attractive when stake, not variance, is held constant; unlocks: Nothing)</span></td>
+<td>Take option 1 with the unattractive result intact. A leaderboard that hides why its worst category is worst is not a leaderboard.</td>
+<td>Confirm that the parlay verdict may be published as negative, given the measured rho.</td>
+<td class="src"><span class="na" title="source id S_PV is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG21</td>
+<td>Model</td>
+<td><b>Replace the flat 0.55 production-transfer rule with the measured elasticities</b></td>
+<td>The injury module converts a lost minute into lost production with a single declared constant of 0.55 for every stat. This session's measured elasticity from official game logs is 1.288 for points (+/- 0.296), 0.626 for rebounds, 0.485 for assists and 0.934 for PRA. The constant is materially wrong for points in particular: it halves the effect of a lost rotation minute on scoring.</td>
+<td>- Adopt per-stat elasticities with their standard errors, and re-derive every injury-adjusted line <span class='fine'>(effort: Medium - one module change, then a full rebuild of lines and picks; risk: HIGH - this moves published lines. It is a model change, not a data refresh, and must be a separately recorded decision; unlocks: Sizes injuries honestly; makes the availability gate meaningful)</span><br>- Publish both the current constant and the measured elasticities side by side and change nothing yet <span class='fine'>(effort: Low; risk: Low - no line moves; unlocks: The decision, without taking it)</span></td>
+<td>Take option 2 now and option 1 only after the minutes coverage problem (SG3) is fixed. Changing the transfer rule while only 50 of 465 players have measured minutes would scale a wrong input more precisely.</td>
+<td>Explicit sign-off to move published lines under option 1, and the window in which the old and new lines coexist.</td>
+<td class="src"><span class="na" title="source id S_PV is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG22</td>
+<td>Operations</td>
+<td><b>Capture the newest official injury edition on every build and stamp it in the header</b></td>
+<td>The published injury data was built from the 11/13 07:30 PM ET edition while the official index already carried the 11/14 01:30 PM ET edition. Four of the five teams that had not filed overnight had filed by the afternoon. A reader cannot see the edition timestamp without opening a footnote.</td>
+<td>- Add an edition-resolver step: read the index, take the newest published edition, capture it, and print the stamp in every page header that uses it <span class='fine'>(effort: Medium - one capture step plus a header field; risk: Low - additive; older editions are kept; unlocks: Closes the whole class of F47, and makes 'as of' verifiable on the page itself)</span><br>- Keep the manual capture and add a visible 'edition behind: N hours' badge <span class='fine'>(effort: Low; risk: Low, but the staleness stays; unlocks: Honesty without the fix)</span></td>
+<td>Take option 1. The index is stable and the naming pattern is documented; the resolver is a loop over the published list.</td>
+<td>Confirm the build may make a network read of the official index at build time, or that a scheduled job must supply the file instead.</td>
+<td class="src"><span class="na" title="source id S_IR_0130 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG23</td>
+<td>Data</td>
+<td><b>Close the 23-game hole in the official game log, then rebuild every season figure</b></td>
+<td>The official game log is exactly 23 games short of the official standings - 320 team-games against 366 - and it is short uniformly: 14 teams by 1, 16 by 2, none by 0 and none by 3 or more. The two missing dates (2026-10-24 and 2026-11-02) print no result rows on the official page, so the fixtures cannot currently be named from an official source.</td>
+<td>- Find an official route to those two dates' results (the schedule page's own result cards, or a per-game page) and capture them <span class='fine'>(effort: Medium - a capture path, not a model change; risk: Low if the values are read from an official page; HIGH if they are reconstructed from the standings residual, which the brief forbids; unlocks: A calendar-complete rest layer and a full-season record; closes F49 and F52)</span><br>- Leave the gap and keep labelling rest as a lower bound <span class='fine'>(effort: None; risk: Every season figure stays 23 games short, and a back-to-back flag near either date can be wrong; unlocks: Nothing)</span></td>
+<td>Take option 1, and only by reading an official page. The standings residual determines the results arithmetically, and using it would be inference, so it is explicitly excluded.</td>
+<td>Confirm that a result read from a second official page (not the result card) is acceptable evidence, or that the gap stays open.</td>
+<td class="src"><span class="na" title="source id S_STAND is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG24</td>
+<td>Trust</td>
+<td><b>Publish a public scoreboard for the strategy leaderboard: units, rank movement and a pre-registered window</b></td>
+<td>The brief asks for a leaderboard competition with rewards for top-performing strategies. Today the leaderboard is a table with 0 funded strategies and no notion of a competition: no rank movement, no window, no reward that a reader can check, and no statement of what a strategy must do to win.</td>
+<td>- Define the competition explicitly: the window, the metric (units at a stated price convention), the reward tiers, and the pre-registered rule for promotion - then publish rank movement game by game <span class='fine'>(effort: Medium; risk: Medium - a public scoreboard creates pressure to promote a lucky strategy; the gate must be automated and unoverrideable; unlocks: Makes 'selectively skill based' measurable rather than aspirational)</span><br>- Keep the static table <span class='fine'>(effort: None; risk: The leaderboard stays decorative; unlocks: Nothing)</span></td>
+<td>Take option 1 only after the price problem (SG2/Q1) has a resolution, because 'units' with no market price is a model-vs-model score and must be labelled as one in every rank cell.</td>
+<td>Confirm the metric and the promotion rule in writing before the first ranking is published.</td>
+<td class="src"><span class="na" title="source id S_GAMES14 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG25</td>
+<td>Operations</td>
+<td><b>Add a staleness budget per page and fail the build when it is exceeded</b></td>
+<td>Three separate flags on this site (F47, plus the earlier F29 and X01-F1 classes) have the same shape: a page keeps publishing yesterday's official data while the official source has moved on. Nothing in the build fails when a page is stale, so staleness is discovered by a human reading an official page by hand - which is exactly what happened again today.</td>
+<td>- Declare, per page, the maximum age of each official input in hours, and fail the build when an input exceeds it <span class='fine'>(effort: Low - a table of limits plus one check; risk: Low, with one caveat: a build that fails on staleness cannot publish anything, so the check must warn loudly first and hard-fail only after a stated grace period; unlocks: Turns staleness from a discovery into a build error; closes the whole class)</span><br>- Keep the manual read-back <span class='fine'>(effort: None; risk: The same class recurs; unlocks: Nothing)</span></td>
+<td>Take option 1 with a two-stage gate: warn at the limit, fail at twice the limit.</td>
+<td>Choose the limits. Proposed: injury data 6 hours, slate data 12 hours, team ratings 24 hours, season game log 24 hours.</td>
+<td class="src"><span class="na" title="source id S_IR_0130 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG26</td>
+<td>Decision support</td>
+<td><b>Settle every published pick automatically and publish the running hit rate with its interval</b></td>
+<td>The 11/13 slate was settled by hand into a ledger. The 11/14 slate will have to be settled the same way tomorrow, and each hand settlement is a place where a result can be entered wrongly. At the same time the published hit rate carries no interval, so a 3-4 day is read as a verdict when it is noise.</td>
+<td>- A settlement step that reads each pick's game id, matches it against the official final, grades it under the declared convention, and refuses any row that is not FINAL on the official page <span class='fine'>(effort: Medium; risk: Low - the refusal rule is the safety property; it must refuse rather than assume; unlocks: A daily, auditable record; makes the sample gate reachable)</span><br>- Continue hand settlement <span class='fine'>(effort: None; risk: One transcription error silently changes a strategy's rank; unlocks: Nothing)</span></td>
+<td>Take option 1, and copy the existing refuse-if-not-FINAL rule from integration/settle.py rather than rewriting it.</td>
+<td>Confirm the price convention used for grading, since no market price exists (the site uses -110 as a stated convention, not a quote).</td>
+<td class="src"><span class="na" title="source id S_GAMES13 is not in the register">&mdash;</span></td>
 </tr>
 </tbody></table></div>
 <h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>

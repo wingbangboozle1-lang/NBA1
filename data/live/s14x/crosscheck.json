@@ -1,0 +1,852 @@
+{
+ "_meta": {
+  "session": "arena/e06aed97-nba1",
+  "generated_utc": "2026-11-14T19:40Z",
+  "title": "Did the live horizon rows start moving toward the naive reference?",
+  "why_this_exists": "Two independent reads of the same live official pages (this session and PR #86, both at 18:40Z-19:10Z) found that 18 of 30 team records were one game light in the published capture (the 11/13 finals) and that 19 of 30 team advanced-rating rows had moved. The natural question is whether the live ratings have drifted away from the naive reference that the model is supposed to beat. This file measures that directly, and separately states why it cannot be read as a performance result.",
+  "method": "model_spread_home minus ref_spread_home on every horizon row (live ratings) and on every out-of-sample row (frozen ratings), compared on the same statistic. No model was re-fitted and no line was re-cut.",
+  "what_this_proves": "Whether the live line set and the reference line disagree by more or less than they did on the out-of-sample window.",
+  "what_this_does_NOT_prove": "Anything about skill. The live horizon rows carry ratings that may have seen results the out-of-sample rows never saw, and none of the live games has been played yet, so there is no outcome to grade against. A larger gap on unplayed games is not an edge and is not published as one."
+ },
+ "walk_forward_window": {
+  "n_games": 60,
+  "gap": {
+   "n": 60,
+   "mean_abs": 3.71,
+   "median_abs": 3.4,
+   "max_abs": 9.3
+  },
+  "actual_margin_mean_abs": 14.97
+ },
+ "live_horizon": {
+  "n_games": 27,
+  "gap": {
+   "n": 27,
+   "mean_abs": 3.76,
+   "median_abs": 3.2,
+   "max_abs": 10.5
+  },
+  "games_where_model_above_ref": 18,
+  "games_where_model_below_ref": 9
+ },
+ "rating_windows": {
+  "published_out_of_sample": {
+   "ratings_season_to_date": "2026-27 Regular Season, season to date (through games of 2026-11-12)",
+   "ratings_training_window": "2026-27 Regular Season, Date From 10/20/2026 To 11/05/2026 (training window for the out-of-sample test)",
+   "results_captured": "2026-11-06 .. 2026-11-13 (60 games, all of them out-of-sample)",
+   "out_of_sample_window": "2026-11-06 .. 2026-11-13 (60 games)",
+   "upcoming_slates": "2026-11-14, 2026-11-15, 2026-11-16, 2026-11-17 (27 games, maximum horizon 3 days)",
+   "in_progress_at_capture": "9 games on 2026-11-13 were live at the data cut; they feed rest maths only and are not pickable",
+   "injury_report": "NBA Official Injury Report, 11/14/26 04:15 AM ET edition"
+  },
+  "live_ratings_as_of": null
+ },
+ "rows_live": [
+  {
+   "matchup": "DEN@NOP",
+   "date": "2026-11-14",
+   "live_model_spread_home": -9.1,
+   "ref_spread_home": -5.9,
+   "live_minus_ref": -3.2,
+   "model_within_ref_distance": 3.2,
+   "live_total": 236.0,
+   "ref_total": 227.0,
+   "live_minus_ref_total": 9.0,
+   "source_url": "https://www.nba.com/game/0022600231"
+  },
+  {
+   "matchup": "DAL@CLE",
+   "date": "2026-11-14",
+   "live_model_spread_home": -1.8,
+   "ref_spread_home": 3.2,
+   "live_minus_ref": -5.0,
+   "model_within_ref_distance": 5.0,
+   "live_total": 229.9,
+   "ref_total": 228.4,
+   "live_minus_ref_total": 1.5,
+   "source_url": "https://www.nba.com/game/0022600232"
+  },
+  {
+   "matchup": "DET@MIA",
+   "date": "2026-11-14",
+   "live_model_spread_home": -12.2,
+   "ref_spread_home": -9.9,
+   "live_minus_ref": -2.3,
+   "model_within_ref_distance": 2.3,
+   "live_total": 227.2,
+   "ref_total": 227.6,
+   "live_minus_ref_total": -0.4,
+   "source_url": "https://www.nba.com/game/0022600233"
+  },
+  {
+   "matchup": "BKN@MEM",
+   "date": "2026-11-14",
+   "live_model_spread_home": 5.9,
+   "ref_spread_home": 12.9,
+   "live_minus_ref": -7.0,
+   "model_within_ref_distance": 7.0,
+   "live_total": 227.6,
+   "ref_total": 225.8,
+   "live_minus_ref_total": 1.8,
+   "source_url": "https://www.nba.com/game/0022600234"
+  },
+  {
+   "matchup": "CHI@MIN",
+   "date": "2026-11-14",
+   "live_model_spread_home": 30.6,
+   "ref_spread_home": 31.1,
+   "live_minus_ref": -0.5,
+   "model_within_ref_distance": 0.5,
+   "live_total": 235.0,
+   "ref_total": 231.8,
+   "live_minus_ref_total": 3.2,
+   "source_url": "https://www.nba.com/game/0022600235"
+  },
+  {
+   "matchup": "IND@PHI",
+   "date": "2026-11-15",
+   "live_model_spread_home": 6.3,
+   "ref_spread_home": 5.4,
+   "live_minus_ref": 0.9,
+   "model_within_ref_distance": 0.9,
+   "live_total": 221.5,
+   "ref_total": 222.9,
+   "live_minus_ref_total": -1.4,
+   "source_url": "https://www.nba.com/game/0022600236"
+  },
+  {
+   "matchup": "LAL@PHX",
+   "date": "2026-11-15",
+   "live_model_spread_home": -6.0,
+   "ref_spread_home": -9.7,
+   "live_minus_ref": 3.7,
+   "model_within_ref_distance": 3.7,
+   "live_total": 238.1,
+   "ref_total": 234.2,
+   "live_minus_ref_total": 3.9,
+   "source_url": "https://www.nba.com/game/0022600237"
+  },
+  {
+   "matchup": "CHA@LAC",
+   "date": "2026-11-15",
+   "live_model_spread_home": 8.0,
+   "ref_spread_home": 7.3,
+   "live_minus_ref": 0.7,
+   "model_within_ref_distance": 0.7,
+   "live_total": 216.2,
+   "ref_total": 209.7,
+   "live_minus_ref_total": 6.5,
+   "source_url": "https://www.nba.com/game/0022600238"
+  },
+  {
+   "matchup": "SAS@UTA",
+   "date": "2026-11-15",
+   "live_model_spread_home": -14.7,
+   "ref_spread_home": -20.6,
+   "live_minus_ref": 5.9,
+   "model_within_ref_distance": 5.9,
+   "live_total": 222.8,
+   "ref_total": 222.6,
+   "live_minus_ref_total": 0.2,
+   "source_url": "https://www.nba.com/game/0022600239"
+  },
+  {
+   "matchup": "DAL@BOS",
+   "date": "2026-11-15",
+   "live_model_spread_home": 18.4,
+   "ref_spread_home": 12.8,
+   "live_minus_ref": 5.6,
+   "model_within_ref_distance": 5.6,
+   "live_total": 222.1,
+   "ref_total": 226.5,
+   "live_minus_ref_total": -4.4,
+   "source_url": "https://www.nba.com/game/0022600240"
+  },
+  {
+   "matchup": "NYK@TOR",
+   "date": "2026-11-15",
+   "live_model_spread_home": -0.3,
+   "ref_spread_home": -2.9,
+   "live_minus_ref": 2.6,
+   "model_within_ref_distance": 2.6,
+   "live_total": 222.8,
+   "ref_total": 224.4,
+   "live_minus_ref_total": -1.6,
+   "source_url": "https://www.nba.com/game/0022600241"
+  },
+  {
+   "matchup": "HOU@WAS",
+   "date": "2026-11-15",
+   "live_model_spread_home": -8.3,
+   "ref_spread_home": -12.6,
+   "live_minus_ref": 4.3,
+   "model_within_ref_distance": 4.3,
+   "live_total": 223.6,
+   "ref_total": 223.7,
+   "live_minus_ref_total": -0.1,
+   "source_url": "https://www.nba.com/game/0022600242"
+  },
+  {
+   "matchup": "ATL@MIL",
+   "date": "2026-11-15",
+   "live_model_spread_home": -10.1,
+   "ref_spread_home": -14.9,
+   "live_minus_ref": 4.8,
+   "model_within_ref_distance": 4.8,
+   "live_total": 232.0,
+   "ref_total": 225.0,
+   "live_minus_ref_total": 7.0,
+   "source_url": "https://www.nba.com/game/0022600243"
+  },
+  {
+   "matchup": "OKC@SAC",
+   "date": "2026-11-15",
+   "live_model_spread_home": -9.4,
+   "ref_spread_home": -14.3,
+   "live_minus_ref": 4.9,
+   "model_within_ref_distance": 4.9,
+   "live_total": 223.4,
+   "ref_total": 219.6,
+   "live_minus_ref_total": 3.8,
+   "source_url": "https://www.nba.com/game/0022600244"
+  },
+  {
+   "matchup": "ORL@BOS",
+   "date": "2026-11-16",
+   "live_model_spread_home": 10.5,
+   "ref_spread_home": 18.3,
+   "live_minus_ref": -7.8,
+   "model_within_ref_distance": 7.8,
+   "live_total": 220.2,
+   "ref_total": 221.2,
+   "live_minus_ref_total": -1.0,
+   "source_url": "https://www.nba.com/game/0022600245"
+  },
+  {
+   "matchup": "CHI@CLE",
+   "date": "2026-11-16",
+   "live_model_spread_home": 16.9,
+   "ref_spread_home": 19.3,
+   "live_minus_ref": -2.4,
+   "model_within_ref_distance": 2.4,
+   "live_total": 238.8,
+   "ref_total": 228.7,
+   "live_minus_ref_total": 10.1,
+   "source_url": "https://www.nba.com/game/0022600246"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "date": "2026-11-16",
+   "live_model_spread_home": -11.9,
+   "ref_spread_home": -9.4,
+   "live_minus_ref": -2.5,
+   "model_within_ref_distance": 2.5,
+   "live_total": 226.8,
+   "ref_total": 225.0,
+   "live_minus_ref_total": 1.8,
+   "source_url": "https://www.nba.com/game/0022600247"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "date": "2026-11-16",
+   "live_model_spread_home": 4.5,
+   "ref_spread_home": -4.6,
+   "live_minus_ref": 9.1,
+   "model_within_ref_distance": 9.1,
+   "live_total": 222.1,
+   "ref_total": 220.2,
+   "live_minus_ref_total": 1.9,
+   "source_url": "https://www.nba.com/game/0022600248"
+  },
+  {
+   "matchup": "HOU@MIA",
+   "date": "2026-11-16",
+   "live_model_spread_home": -1.3,
+   "ref_spread_home": -11.8,
+   "live_minus_ref": 10.5,
+   "model_within_ref_distance": 10.5,
+   "live_total": 231.1,
+   "ref_total": 229.9,
+   "live_minus_ref_total": 1.2,
+   "source_url": "https://www.nba.com/game/0022600249"
+  },
+  {
+   "matchup": "POR@MIN",
+   "date": "2026-11-16",
+   "live_model_spread_home": 8.7,
+   "ref_spread_home": 8.4,
+   "live_minus_ref": 0.3,
+   "model_within_ref_distance": 0.3,
+   "live_total": 228.1,
+   "ref_total": 238.0,
+   "live_minus_ref_total": -9.9,
+   "source_url": "https://www.nba.com/game/0022600250"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "date": "2026-11-16",
+   "live_model_spread_home": -8.3,
+   "ref_spread_home": -12.7,
+   "live_minus_ref": 4.4,
+   "model_within_ref_distance": 4.4,
+   "live_total": 235.5,
+   "ref_total": 232.1,
+   "live_minus_ref_total": 3.4,
+   "source_url": "https://www.nba.com/game/0022600251"
+  },
+  {
+   "matchup": "PHX@DEN",
+   "date": "2026-11-16",
+   "live_model_spread_home": 13.2,
+   "ref_spread_home": 6.5,
+   "live_minus_ref": 6.7,
+   "model_within_ref_distance": 6.7,
+   "live_total": 233.0,
+   "ref_total": 225.1,
+   "live_minus_ref_total": 7.9,
+   "source_url": "https://www.nba.com/game/0022600252"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "date": "2026-11-17",
+   "live_model_spread_home": 8.4,
+   "ref_spread_home": 7.8,
+   "live_minus_ref": 0.6,
+   "model_within_ref_distance": 0.6,
+   "live_total": 223.1,
+   "ref_total": 215.6,
+   "live_minus_ref_total": 7.5,
+   "source_url": "https://www.nba.com/game/0022600257"
+  },
+  {
+   "matchup": "CHA@LAL",
+   "date": "2026-11-17",
+   "live_model_spread_home": 18.9,
+   "ref_spread_home": 21.0,
+   "live_minus_ref": -2.1,
+   "model_within_ref_distance": 2.1,
+   "live_total": 223.4,
+   "ref_total": 220.9,
+   "live_minus_ref_total": 2.5,
+   "source_url": "https://www.nba.com/game/0022600256"
+  },
+  {
+   "matchup": "NYK@TOR",
+   "date": "2026-11-17",
+   "live_model_spread_home": -0.3,
+   "ref_spread_home": -2.9,
+   "live_minus_ref": 2.6,
+   "model_within_ref_distance": 2.6,
+   "live_total": 222.8,
+   "ref_total": 224.4,
+   "live_minus_ref_total": -1.6,
+   "source_url": "https://www.nba.com/game/0022600253"
+  },
+  {
+   "matchup": "POR@MIN",
+   "date": "2026-11-17",
+   "live_model_spread_home": 8.7,
+   "ref_spread_home": 8.4,
+   "live_minus_ref": 0.3,
+   "model_within_ref_distance": 0.3,
+   "live_total": 230.6,
+   "ref_total": 238.0,
+   "live_minus_ref_total": -7.4,
+   "source_url": "https://www.nba.com/game/0022600254"
+  },
+  {
+   "matchup": "DET@SAS",
+   "date": "2026-11-17",
+   "live_model_spread_home": 6.6,
+   "ref_spread_home": 5.8,
+   "live_minus_ref": 0.8,
+   "model_within_ref_distance": 0.8,
+   "live_total": 222.9,
+   "ref_total": 231.2,
+   "live_minus_ref_total": -8.3,
+   "source_url": "https://www.nba.com/game/0022600255"
+  }
+ ],
+ "rows_walk_forward": [
+  {
+   "matchup": "WAS@ATL",
+   "date": "2026-11-06",
+   "oos_model_spread_home": 5.5,
+   "ref_spread_home": 4.6,
+   "oos_minus_ref": 0.9,
+   "actual_margin_home": 7
+  },
+  {
+   "matchup": "BOS@CHA",
+   "date": "2026-11-06",
+   "oos_model_spread_home": -9.5,
+   "ref_spread_home": -15.2,
+   "oos_minus_ref": 5.7,
+   "actual_margin_home": -39
+  },
+  {
+   "matchup": "PHI@CLE",
+   "date": "2026-11-06",
+   "oos_model_spread_home": 0.8,
+   "ref_spread_home": -1.5,
+   "oos_minus_ref": 2.3,
+   "actual_margin_home": 24
+  },
+  {
+   "matchup": "UTA@DAL",
+   "date": "2026-11-06",
+   "oos_model_spread_home": 11.6,
+   "ref_spread_home": 13.0,
+   "oos_minus_ref": -1.4,
+   "actual_margin_home": 12
+  },
+  {
+   "matchup": "OKC@MEM",
+   "date": "2026-11-06",
+   "oos_model_spread_home": 10.4,
+   "ref_spread_home": 11.4,
+   "oos_minus_ref": -1.0,
+   "actual_margin_home": -31
+  },
+  {
+   "matchup": "TOR@MIL",
+   "date": "2026-11-06",
+   "oos_model_spread_home": -8.9,
+   "ref_spread_home": -14.9,
+   "oos_minus_ref": 6.0,
+   "actual_margin_home": -14
+  },
+  {
+   "matchup": "MIN@NOP",
+   "date": "2026-11-06",
+   "oos_model_spread_home": -3.2,
+   "ref_spread_home": -6.8,
+   "oos_minus_ref": 3.6,
+   "actual_margin_home": -6
+  },
+  {
+   "matchup": "POR@LAL",
+   "date": "2026-11-06",
+   "oos_model_spread_home": 2.3,
+   "ref_spread_home": -0.2,
+   "oos_minus_ref": 2.5,
+   "actual_margin_home": 6
+  },
+  {
+   "matchup": "SAS@SAC",
+   "date": "2026-11-06",
+   "oos_model_spread_home": -12.0,
+   "ref_spread_home": -19.2,
+   "oos_minus_ref": 7.2,
+   "actual_margin_home": -15
+  },
+  {
+   "matchup": "DEN@IND",
+   "date": "2026-11-07",
+   "oos_model_spread_home": -2.0,
+   "ref_spread_home": -0.6,
+   "oos_minus_ref": -1.4,
+   "actual_margin_home": -12
+  },
+  {
+   "matchup": "BKN@ATL",
+   "date": "2026-11-07",
+   "oos_model_spread_home": 3.9,
+   "ref_spread_home": 11.1,
+   "oos_minus_ref": -7.2,
+   "actual_margin_home": 3
+  },
+  {
+   "matchup": "NYK@CLE",
+   "date": "2026-11-07",
+   "oos_model_spread_home": -4.9,
+   "ref_spread_home": -0.9,
+   "oos_minus_ref": -4.0,
+   "actual_margin_home": -12
+  },
+  {
+   "matchup": "WAS@OKC",
+   "date": "2026-11-07",
+   "oos_model_spread_home": 4.2,
+   "ref_spread_home": 2.9,
+   "oos_minus_ref": 1.3,
+   "actual_margin_home": 39
+  },
+  {
+   "matchup": "ORL@GSW",
+   "date": "2026-11-07",
+   "oos_model_spread_home": 13.4,
+   "ref_spread_home": 15.3,
+   "oos_minus_ref": -1.9,
+   "actual_margin_home": 7
+  },
+  {
+   "matchup": "HOU@PHX",
+   "date": "2026-11-07",
+   "oos_model_spread_home": -9.0,
+   "ref_spread_home": -14.9,
+   "oos_minus_ref": 5.9,
+   "actual_margin_home": 3
+  },
+  {
+   "matchup": "SAS@POR",
+   "date": "2026-11-07",
+   "oos_model_spread_home": 5.0,
+   "ref_spread_home": 4.4,
+   "oos_minus_ref": 0.6,
+   "actual_margin_home": -22
+  },
+  {
+   "matchup": "PHI@CHI",
+   "date": "2026-11-08",
+   "oos_model_spread_home": -13.9,
+   "ref_spread_home": -21.6,
+   "oos_minus_ref": 7.7,
+   "actual_margin_home": -6
+  },
+  {
+   "matchup": "LAL@DET",
+   "date": "2026-11-08",
+   "oos_model_spread_home": 4.2,
+   "ref_spread_home": 3.2,
+   "oos_minus_ref": 1.0,
+   "actual_margin_home": -5
+  },
+  {
+   "matchup": "UTA@MIN",
+   "date": "2026-11-08",
+   "oos_model_spread_home": 20.1,
+   "ref_spread_home": 24.3,
+   "oos_minus_ref": -4.2,
+   "actual_margin_home": 15
+  },
+  {
+   "matchup": "BKN@DAL",
+   "date": "2026-11-08",
+   "oos_model_spread_home": 14.3,
+   "ref_spread_home": 8.2,
+   "oos_minus_ref": 6.1,
+   "actual_margin_home": 37
+  },
+  {
+   "matchup": "BOS@MIL",
+   "date": "2026-11-08",
+   "oos_model_spread_home": -10.1,
+   "ref_spread_home": -16.5,
+   "oos_minus_ref": 6.4,
+   "actual_margin_home": -20
+  },
+  {
+   "matchup": "NOP@LAC",
+   "date": "2026-11-08",
+   "oos_model_spread_home": -2.8,
+   "ref_spread_home": -6.6,
+   "oos_minus_ref": 3.8,
+   "actual_margin_home": 16
+  },
+  {
+   "matchup": "MIA@SAC",
+   "date": "2026-11-08",
+   "oos_model_spread_home": -0.9,
+   "ref_spread_home": -4.3,
+   "oos_minus_ref": 3.4,
+   "actual_margin_home": -6
+  },
+  {
+   "matchup": "LAL@ATL",
+   "date": "2026-11-09",
+   "oos_model_spread_home": 5.6,
+   "ref_spread_home": -3.7,
+   "oos_minus_ref": 9.3,
+   "actual_margin_home": -10
+  },
+  {
+   "matchup": "CLE@CHA",
+   "date": "2026-11-09",
+   "oos_model_spread_home": -6.2,
+   "ref_spread_home": -10.9,
+   "oos_minus_ref": 4.7,
+   "actual_margin_home": 12
+  },
+  {
+   "matchup": "WAS@DET",
+   "date": "2026-11-09",
+   "oos_model_spread_home": 4.1,
+   "ref_spread_home": 11.3,
+   "oos_minus_ref": -7.2,
+   "actual_margin_home": 11
+  },
+  {
+   "matchup": "MEM@TOR",
+   "date": "2026-11-09",
+   "oos_model_spread_home": -0.7,
+   "ref_spread_home": -3.7,
+   "oos_minus_ref": 3.0,
+   "actual_margin_home": -16
+  },
+  {
+   "matchup": "IND@DAL",
+   "date": "2026-11-09",
+   "oos_model_spread_home": -1.0,
+   "ref_spread_home": 4.3,
+   "oos_minus_ref": -5.3,
+   "actual_margin_home": 3
+  },
+  {
+   "matchup": "DEN@HOU",
+   "date": "2026-11-09",
+   "oos_model_spread_home": 11.2,
+   "ref_spread_home": 12.1,
+   "oos_minus_ref": -0.9,
+   "actual_margin_home": 10
+  },
+  {
+   "matchup": "SAS@PHX",
+   "date": "2026-11-09",
+   "oos_model_spread_home": -7.1,
+   "ref_spread_home": -12.7,
+   "oos_minus_ref": 5.6,
+   "actual_margin_home": -26
+  },
+  {
+   "matchup": "NOP@GSW",
+   "date": "2026-11-09",
+   "oos_model_spread_home": 11.6,
+   "ref_spread_home": 4.2,
+   "oos_minus_ref": 7.4,
+   "actual_margin_home": 51
+  },
+  {
+   "matchup": "MIL@NYK",
+   "date": "2026-11-10",
+   "oos_model_spread_home": 15.7,
+   "ref_spread_home": 18.6,
+   "oos_minus_ref": -2.9,
+   "actual_margin_home": 32
+  },
+  {
+   "matchup": "BOS@PHI",
+   "date": "2026-11-10",
+   "oos_model_spread_home": 2.8,
+   "ref_spread_home": 0.8,
+   "oos_minus_ref": 2.0,
+   "actual_margin_home": -22
+  },
+  {
+   "matchup": "LAC@PHX",
+   "date": "2026-11-10",
+   "oos_model_spread_home": -3.0,
+   "ref_spread_home": 1.4,
+   "oos_minus_ref": -4.4,
+   "actual_margin_home": 23
+  },
+  {
+   "matchup": "MIA@UTA",
+   "date": "2026-11-10",
+   "oos_model_spread_home": 0.4,
+   "ref_spread_home": -2.5,
+   "oos_minus_ref": 2.9,
+   "actual_margin_home": -6
+  },
+  {
+   "matchup": "ORL@SAC",
+   "date": "2026-11-10",
+   "oos_model_spread_home": 0.6,
+   "ref_spread_home": -2.0,
+   "oos_minus_ref": 2.6,
+   "actual_margin_home": -7
+  },
+  {
+   "matchup": "OKC@POR",
+   "date": "2026-11-10",
+   "oos_model_spread_home": 10.2,
+   "ref_spread_home": 11.5,
+   "oos_minus_ref": -1.3,
+   "actual_margin_home": 20
+  },
+  {
+   "matchup": "WAS@IND",
+   "date": "2026-11-11",
+   "oos_model_spread_home": 1.6,
+   "ref_spread_home": -0.5,
+   "oos_minus_ref": 2.1,
+   "actual_margin_home": 13
+  },
+  {
+   "matchup": "CLE@NYK",
+   "date": "2026-11-11",
+   "oos_model_spread_home": -0.6,
+   "ref_spread_home": 4.9,
+   "oos_minus_ref": -5.5,
+   "actual_margin_home": -8
+  },
+  {
+   "matchup": "BOS@TOR",
+   "date": "2026-11-11",
+   "oos_model_spread_home": 8.4,
+   "ref_spread_home": 0.1,
+   "oos_minus_ref": 8.3,
+   "actual_margin_home": -5
+  },
+  {
+   "matchup": "SAS@CHI",
+   "date": "2026-11-11",
+   "oos_model_spread_home": -15.7,
+   "ref_spread_home": -24.3,
+   "oos_minus_ref": 8.6,
+   "actual_margin_home": -5
+  },
+  {
+   "matchup": "DEN@MEM",
+   "date": "2026-11-11",
+   "oos_model_spread_home": 11.0,
+   "ref_spread_home": 12.2,
+   "oos_minus_ref": -1.2,
+   "actual_margin_home": -5
+  },
+  {
+   "matchup": "LAL@MIL",
+   "date": "2026-11-11",
+   "oos_model_spread_home": -18.0,
+   "ref_spread_home": -18.4,
+   "oos_minus_ref": 0.4,
+   "actual_margin_home": -11
+  },
+  {
+   "matchup": "BKN@NOP",
+   "date": "2026-11-11",
+   "oos_model_spread_home": 10.0,
+   "ref_spread_home": 10.8,
+   "oos_minus_ref": -0.8,
+   "actual_margin_home": -34
+  },
+  {
+   "matchup": "ORL@UTA",
+   "date": "2026-11-11",
+   "oos_model_spread_home": 1.8,
+   "ref_spread_home": -0.3,
+   "oos_minus_ref": 2.1,
+   "actual_margin_home": -15
+  },
+  {
+   "matchup": "GSW@HOU",
+   "date": "2026-11-11",
+   "oos_model_spread_home": 8.0,
+   "ref_spread_home": 7.9,
+   "oos_minus_ref": 0.1,
+   "actual_margin_home": 7
+  },
+  {
+   "matchup": "OKC@POR",
+   "date": "2026-11-11",
+   "oos_model_spread_home": 10.2,
+   "ref_spread_home": 11.5,
+   "oos_minus_ref": -1.3,
+   "actual_margin_home": 10
+  },
+  {
+   "matchup": "TOR@PHI",
+   "date": "2026-11-12",
+   "oos_model_spread_home": 10.5,
+   "ref_spread_home": 2.7,
+   "oos_minus_ref": 7.8,
+   "actual_margin_home": 11
+  },
+  {
+   "matchup": "DET@WAS",
+   "date": "2026-11-12",
+   "oos_model_spread_home": -9.6,
+   "ref_spread_home": -7.3,
+   "oos_minus_ref": -2.3,
+   "actual_margin_home": -4
+  },
+  {
+   "matchup": "DAL@MIN",
+   "date": "2026-11-12",
+   "oos_model_spread_home": 11.9,
+   "ref_spread_home": 13.1,
+   "oos_minus_ref": -1.2,
+   "actual_margin_home": 39
+  },
+  {
+   "matchup": "CHA@PHX",
+   "date": "2026-11-12",
+   "oos_model_spread_home": 7.1,
+   "ref_spread_home": 6.3,
+   "oos_minus_ref": 0.8,
+   "actual_margin_home": 5
+  },
+  {
+   "matchup": "NYK@IND",
+   "date": "2026-11-13",
+   "oos_model_spread_home": -1.9,
+   "ref_spread_home": -5.3,
+   "oos_minus_ref": 3.4,
+   "actual_margin_home": 2
+  },
+  {
+   "matchup": "MIL@ORL",
+   "date": "2026-11-13",
+   "oos_model_spread_home": 5.7,
+   "ref_spread_home": 4.9,
+   "oos_minus_ref": 0.8,
+   "actual_margin_home": 8
+  },
+  {
+   "matchup": "CLE@MIA",
+   "date": "2026-11-13",
+   "oos_model_spread_home": -3.2,
+   "ref_spread_home": -6.9,
+   "oos_minus_ref": 3.7,
+   "actual_margin_home": 12
+  },
+  {
+   "matchup": "ATL@CHI",
+   "date": "2026-11-13",
+   "oos_model_spread_home": -11.8,
+   "ref_spread_home": -19.0,
+   "oos_minus_ref": 7.2,
+   "actual_margin_home": 8
+  },
+  {
+   "matchup": "MEM@NOP",
+   "date": "2026-11-13",
+   "oos_model_spread_home": -2.5,
+   "ref_spread_home": -6.2,
+   "oos_minus_ref": 3.7,
+   "actual_margin_home": -31
+  },
+  {
+   "matchup": "UTA@HOU",
+   "date": "2026-11-13",
+   "oos_model_spread_home": 19.6,
+   "ref_spread_home": 23.5,
+   "oos_minus_ref": -3.9,
+   "actual_margin_home": 7
+  },
+  {
+   "matchup": "GSW@SAS",
+   "date": "2026-11-13",
+   "oos_model_spread_home": 6.0,
+   "ref_spread_home": 5.5,
+   "oos_minus_ref": 0.5,
+   "actual_margin_home": 38
+  },
+  {
+   "matchup": "POR@SAC",
+   "date": "2026-11-13",
+   "oos_model_spread_home": -13.6,
+   "ref_spread_home": -21.8,
+   "oos_minus_ref": 8.2,
+   "actual_margin_home": -13
+  },
+  {
+   "matchup": "OKC@LAC",
+   "date": "2026-11-13",
+   "oos_model_spread_home": -1.6,
+   "ref_spread_home": -5.0,
+   "oos_minus_ref": 3.4,
+   "actual_margin_home": 1
+  }
+ ]
+}

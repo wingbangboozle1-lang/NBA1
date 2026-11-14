@@ -1,121 +1,106 @@
 {
  "title": "Executive Summary",
- "as_of": "2026-11-14",
- "headline": "The horizon runs the full three days: 27 games from 14 to 17 November 2026, with an originated line, a paper pick and an injury read-out for every one, and a source link on every row. The 2026-11-13 finals are now captured, settled and folded into a 60-game out-of-sample window, and the newest official injury-report edition (11/14/26 04:15 AM ET) has been transcribed row by row. The honest read: a small edge on the margin, none on totals or winners, and one strategy whose record has cleared the luck gate at last (S1, 23-9, p = 0.020) - but not the calibration and stability gates, so it stays capped at a quarter unit.",
- "lead": "Ten strategies were written, seven validation gates were defined, and all ten were run against a strictly out-of-sample window: all 60 completed games from 2026-11-06 to 2026-11-13, every one predicted using team ratings computed only from 2026-10-20 to 2026-11-05. No game in the test window contributes to the ratings that predict it. On top of that the system originates a line for every game in the next three days - 14, 15, 16 and 17 November - from official ratings and the newest official injury report.",
+ "as_of": "2026-11-14T19:10Z (official re-read complete at 18:40-19:10Z)",
+ "headline": "Every number on this site that comes from an official NBA page was re-read from that page on 2026-11-14 between 18:40Z and 19:10Z, and the result is: the horizon is right, the injury data was stale, and the game log is short by a measurable and uniform amount. All 27 games in the 14-17 November window match official nba.com field for field, and all 54 printed team records agree with a second independent official source. But the site's injury pages were built from the 11/13 07:30 PM ET edition while the official index already carried the 11/14 01:30 PM ET game-day edition, in which four of the five teams that had not filed overnight had filed. And the official game log reconciles to 160 games against the standings' 183 - exactly 23 games short, uniformly across all 30 teams. None of those three findings changes a single published pick, line or gate result. All three change what a reader is entitled to conclude from them.",
+ "lead": "This is a verification and decision-reading of the whole site, not a rebuild. The pipeline that originates the lines, tests the strategies and settles the picks was left exactly as it was: changing it under cover of a verification pass is how an audit trail stops being one. What changed is the evidence base - a fresh official capture of the horizon, the finals and the newest injury edition - and what was added is the comparison of that evidence against what the site already says. The single honest headline is unchanged from the previous build and is not softened here: no strategy is funded, one has cleared the luck gate and then failed calibration and stability, and no market price exists anywhere in the repository, so no result here is a claim about profit.",
  "verdict": {
-  "status": "PROVISIONAL - not funded",
-  "one_line": "The model beats the naive reference on margin accuracy (MAE 12.98 against 13.62) and loses to it on totals (14.83 against 14.72) and on picking winners (42-18 against 40-20). S1 (side edge) is now 23-9, worth +11.91 model units, and for the first time its record is outside what luck alone produces (exact binomial p = 0.020, Wilson lower bound 0.546 against the 0.524 break-even) - but it fails the calibration gate (hit rate 0.719 against a mean predicted 0.627) and the stability gate (the bootstrap interval on the model's margin MAE still overlaps the reference), and the availability gate cannot run at all. Under the tier ceilings it stays a quarter-unit strategy. The 27 new lines are published as lines and paper picks, not as recommendations.",
-  "why": "Sixty games with a 17.4-point residual standard deviation have finally made one record statistically distinguishable from a coin flip - and that is exactly when the other gates matter most. A hit rate the model itself did not predict is a calibration failure, not a windfall; an improvement whose interval overlaps the reference is not stable; and a gate that cannot run is not passed. Selective skill means paying for the part that survives every gate and nothing else."
+  "status": "PROVISIONAL - not funded, and now verified against a fresher official read",
+  "one_line": "The model still beats the naive reference on margin accuracy (MAE 12.98 against 13.62 on the 60-game out-of-sample window) and still loses on totals (14.83 against 14.72) and on picking winners (42-18 reference, 40-20 model). S1 is still 23-9 with p = 0.020 and a Wilson lower bound of 0.546 against a 0.524 break-even, and still fails calibration (0.719 hit rate against 0.627 predicted) and stability, and still cannot run the availability gate. It stays capped at a quarter unit. The fresh official read does not move any of those numbers - it confirms the inputs they were computed from are current.",
+  "why": "Because the alternative is the thing this project was built to avoid. A verification pass that quietly upgraded a quarter-unit strategy to funded on the strength of 32 graded plays would be exactly the luck-as-skill error the gates exist to catch. The gates did not move, because there was no new evidence to move them: the same 60 games, the same ratings window, the same ten strategies. What the fresh read adds is confidence in the inputs, not in the conclusions."
  },
  "findings": [
   {
    "n": 1,
-   "title": "The model wins on the margin and loses on totals and winners",
-   "detail": "Margin: MAE 12.98 against 13.62 for the naive reference, RMSE 17.12 against 17.88 - the model is better on both. Totals: MAE 14.83 against 14.72, RMSE 19.35 against 19.10 - the reference is better on both. Straight up the reference went 42-18 and the model 40-20, and the reference has the better Brier score (0.2001 against 0.2020) and the better log loss (0.5827 against 0.5873).",
-   "reading": "The refinements buy a real but tiny margin improvement and nothing else. The probability calibration is the weakest part of the model, and it is where the remaining work should go."
+   "title": "The horizon is exactly right, and it was checked against two official sources per record",
+   "detail": "27 of 27 published horizon rows matched the official day pages on date, ET tip time, matchup and game id; per-day counts match the official calendar badges (5 / 9 / 8 / 5); and all 54 team-record cells agree with the standings page as well as the game card. The 11/13 finals also re-verified 9 of 9, including the ATL@CHI overtime label.",
+   "reading": "This is the strongest statement the site can currently make: not 'we believe this is right' but 'two independent official pages say the same thing, and the ids match'. It is also a snapshot at 18:45Z - the 11/14 games tip at 7:00 PM ET."
   },
   {
    "n": 2,
-   "title": "Growing the window keeps changing what can be claimed - which is the point of the sample gate",
-   "detail": "On the 28-game window the model beat the reference on totals (MAE 14.50 against 14.75). On 51 games it did not (14.86 against 14.75) - the sign flipped. On the 60-game window the sign holds (14.83 against 14.72) and the gap narrowed, but the conclusion stands. Each addition of data has moved at least one claim.",
-   "reading": "Any single-window result at this sample size should be treated as a hypothesis, not a finding."
+   "title": "The injury data was more than twelve hours stale, and the site's own label did not say so loudly enough",
+   "detail": "The official index carried the full 11/14 game-day series from 12:00 AM ET to 01:30 PM ET. In the 01:30 PM ET edition, New Orleans (5 rows), Cleveland (8), Chicago (7) and Miami (4) had all filed; only Memphis had not, and Memphis was still inside its own 1 p.m. CT window. The published site was still showing those teams as NOT YET SUBMITTED from the 04:15 AM ET edition.",
+   "reading": "Four of the five 'unavailable' teams were not unavailable, they were unlisted. That is the single most consequential finding of this pass for anyone reading the Injuries page tonight, and no pick changes because of it: the injury module does not move a line for a designation it cannot measure."
   },
   {
    "n": 3,
-   "title": "S1 has cleared the luck gate at 23-9 - and failed two others, which is the honest headline",
-   "detail": "S1 (side edge vs the reference spread) produced 32 graded plays at 23-9, worth +11.91 model units and a 37.2% return at -110. Its exact binomial p-value against a coin flip is 0.020 and the Wilson 95% interval on its hit rate is 0.546 to 0.844 - the lower bound is now above the 0.5238 break-even, so G4 (skill, not luck) passes for the first time. But its hit rate of 0.719 against a mean predicted probability of 0.627 fails the calibration gate (gap 0.091 against a 0.08 tolerance), and the stability gate fails because the bootstrap interval on the model's margin MAE (10.2 to 15.94) still contains the reference MAE (13.62). The availability gate cannot run at all for the graded window.",
-   "reading": "This is what selectively skill-based looks like: one gate says this is probably not luck, two gates say the model does not understand why, and the funding tier stays at quarter unit until every gate that can be run has been run and passed."
+   "title": "The game log is short by exactly 23 games, uniformly, and that is now proven rather than suspected",
+   "detail": "Total points for and against in the log balance exactly (36,240), and wins sum to the 160 games, so the log is internally consistent. Against the standings it holds 320 team-games to the standings' 366: 46 team-games, i.e. 23 games. Fourteen teams are short exactly 1, sixteen exactly 2, none short 0, none short 3 or more. Wins and losses are short by 23 each.",
+   "reading": "Because the shortfall is uniform, team-to-team comparisons on this window survive it, and the luck table published alongside this summary is usable for ranking. Calendar-complete rest is not, and every rest figure that crosses the two row-less dates is labelled a lower bound. The missing games are not named, because no official page prints their scores and the standings residual would be inference."
   },
   {
    "n": 4,
-   "title": "Home court looks normal; the back-to-back penalty is large but uncertain",
-   "detail": "Home-court advantage estimates at +3.51 points with a standard error of 2.28 (t = 1.54) across 60 games, squarely in the historical NBA range. The back-to-back penalty estimates at -6.26 points with a standard error of 4.86 (t = -1.29); because |t| >= 1 the model applies the full 6.26, but the standard error is most of the estimate.",
-   "readings": [],
-   "reading": "Both are published with their standard errors and both are fitted on the test window, which is disclosed on every row they touch."
+   "title": "Luck is measurable on the official record, and the first surprise is that close games are rare",
+   "detail": "On 160 official finals the mean absolute margin is 14.06 points; only 13 games (8.1%) were decided by 3 or fewer, while 57 (35.6%) were decided by 15 or more. Home teams went 84-76. A Pythagorean expectation gives a luck-wins spread of +2.72 (Philadelphia) to -2.36 (New York).",
+   "reading": "The intuition that NBA results are mostly coin flips is wrong at this sample: blowouts dominate, and the luck that exists is concentrated in which team got the blowouts. That is why a 23-9 record at a 0.52 break-even can be statistically real and still not be skill - the wins have to come from games that were actually in doubt."
   },
   {
    "n": 5,
-   "title": "Shrinkage was derived rather than guessed, and the curve is flat where it matters",
-   "detail": "The empirical-Bayes calculation gives k = 2.9, weighting each team's observed net rating at 0.739. The fixed-k sweep shows margin MAE moving from 13.62 at k = 0 to 12.91 at k = 4, then degrading to 13.36 by k = 20. Heavy shrinkage is clearly wrong; the choice between light and none barely matters.",
-   "reading": "The constant is defensible, its sensitivity is published, and it is not a source of hidden risk."
+   "title": "Single bets, parlays and prop combos are not the same product, and the data says which is which",
+   "detail": "A single bet needs its edge to survive one variance term. A parlay needs every leg to survive one, and the variance multiplies while the edge does not, so a parlay is a larger bet on the same edge rather than a better one. Same-game combos are the worst-served case in this repository: the joint probability is not the product of the legs, and the measured correlation that would correct it cannot be estimated here - the only same-game pair with more than one shared game is one pair over three games, which the source study itself calls not interpretable. Props are the thinnest of the three: 10 of 88 rows have a measured dispersion, and none of those 10 clears one measured SD against the player's own season average.",
+   "reading": "The product ranking the evidence supports is single bets first, cross-game parlays second and only with the variance understood, same-game combos third and not with a naive multiplication, props last until a measured line exists. The correction matters: a draft of this page stated a pooled same-game correlation of 0.82, which is one pair at n=3, and the page now says what the source says instead. That correction is flag F53."
   },
   {
    "n": 6,
-   "title": "Availability impact is a measured floor, not an estimate",
-   "detail": "Minutes are only known for the 50 players in the captured official table. Players outside it contribute 0.00 to the impact, so teams missing rotation players who are not top-50 scorers show a smaller number than the truth - sometimes zero. The minutes-coverage column sits next to every figure so a 0.00 is never read as 'healthy'.",
-   "reading": "Correct but incomplete - the Injuries page says so on every row rather than hiding it."
+   "title": "A team's rotation minutes are still unknown for most of the league, so the injury impact stays a lower bound",
+   "detail": "The official per-game minutes capture holds ranks 1-50 sorted by points. Of the 51 player rows listed for the five 11/14 games, only a small minority have any measured minutes in a committed official capture; every other row contributes a null, never a zero, and the page prints the coverage per team next to the figure.",
+   "reading": "This is the binding constraint on the whole injury story. Until it is fixed, any 'injury moves the line by X' claim is scaling a null, and the site is right to refuse to do it - which is also why finding 2 does not change any pick."
   },
   {
    "n": 7,
-   "title": "Correlation is measured where it can be and flagged where it cannot",
-   "detail": "Thirteen team-statistic pairs were measured directly on all 30 teams from the official advanced table. Net rating explains 87% of the variation in win percentage; pace is nearly unrelated to net rating (r = -0.34, p = 0.063) and assist percentage is unrelated to offensive efficiency (r = 0.02, p = 0.92). The parlay and same-game-parlay correlations that drive pricing are model-derived and labelled as such.",
-   "reading": "The distinction matters most for parlays, because pricing correlated legs as independent is the classic way to overpay."
-  },
-  {
-   "n": 8,
-   "title": "The word 'edge' on this site does not mean edge against a sportsbook",
-   "detail": "No sportsbook price is published by an NBA-operated source, so no official link can be attached to one. The site bets the originated line against a deliberately naive reference model built from the same official ratings. Until real prices are logged, 'units won' means model-vs-naive-model units.",
-   "reading": "This is the single most important caveat for anyone reading the leaderboard."
-  },
-  {
-   "n": 9,
-   "title": "The 2026-11-13 slate is settled, and it did not go well - which is the system working",
-   "detail": "Every published paper pick on the 2026-11-13 slate was settled against the official finals captured on 2026-11-14. The seven gated singles went 3-4 (-1.40 units at -110) and all three two-leg parlays lost. The picks were pre-registered: the model blocks in the live file are identical to the copy frozen at 2026-11-13T22:45Z, before tip. The originated margin line was off by 12.39 points on average across the nine games - consistent with the 12.98 MAE on the wider window, and a useful reminder that a night like this is normal at this sample size.",
-   "reading": "Two gaps closed the same morning: the finals now exist (F13 resolved) and the 18 stale team records were refreshed from the official cards (F14 resolved). Two remain open and are published as such: at the newest injury edition five of the ten teams playing on 11/14 have still not filed, and no edition lists any player for the 11/16 and 11/17 games."
-  },
-  {
-   "title": "The 60-game extension is real, but it cannot be reproduced from this repository alone",
-   "detail": "The 2026-11-13 finals are captured, transcribed three independent times that all agree 9/9, and used to settle every published 11/13 pick (seven singles 3-4 at -1.40 units, three two-leg parlays 0-3). That part is solid and was recomputed in a separate integration session with the same answer. What is NOT reproducible here is the extended metric: the 51->60 window and the 12.98 vs 13.62 margin MAE depend on a team-ratings refresh, and https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season returns no data table to this environment (flag F24, re-tested 2026-11-14). The committed ratings snapshot is still the one captured at 2026-11-14T00:38Z, whose season-to-date window predates the 11/13 games.",
-   "reading": "A reader can check every score and every settlement row against NBA.com, and should. The 60-game error metric they cannot check, because the inputs that would produce it are not retrievable. Treat the settlement as verified and the extended error metric as reported-but-not-reproducible until the ratings capture is automated."
+   "title": "The back-to-back layer is exact for this horizon and lower-bounded only at its very start",
+   "detail": "Derived from official dates across 2026-10-20 to 2026-11-17: five team-slots are on a back-to-back on 11/14 (NOP, CLE, MIA, MEM, MIN) and none is on 11/15-11/17. The only place rest can be understated is a figure that spans 2026-10-24 or 2026-11-02, the two dates with no rows in the official log, and every such cell says so.",
+   "reading": "A date fact beats a model: either two official dates are one day apart or they are not. This is the cheapest trustworthy signal in the whole system, and it is worth more than most of the expensive ones."
   }
  ],
  "what_is_live_now": [
-  "Originated spreads, totals, moneylines and fair prices for all 27 games across 2026-11-14, 2026-11-15, 2026-11-16 and 2026-11-17.",
-  "60 gated picks from the strategy library, each tagged with its strategy, its market, the reference number it is betting against, the model's number and the gap.",
-  "Player projections for the top-50 scorers, with the possession, opponent-defence and teammate-availability factors broken out separately.",
-  "The official injury report, 11/14/26 04:15 AM ET edition, transcribed row by row - 49 rows - with each player's status and the team's published reason.",
-  "The settlement of every published paper pick on the 2026-11-13 slate against the official finals, with pre-registration provenance.",
-  "Game-flow read-outs built from official pace and efficiency inputs, including probability of a close game, a blowout and overtime.",
-  "60 out-of-sample games with the full seven-gate matrix, a 30-team luck decomposition, 13 measured correlations and a ten-strategy leaderboard with reward tiers."
+  "Originated lines for all 27 games across 2026-11-14 to 2026-11-17, each row carrying its official game link, re-verified field by field on 2026-11-14 at 18:45Z.",
+  "60 gated paper picks from the ten-strategy library, none funded, none market-validated, each with the reference number it is bet against.",
+  "The 2026-11-13 finals, re-read and re-verified 9 of 9, with the slate's paper picks settled against them (3-4 at the stated -110 convention, -1.40 model units).",
+  "The official injury report, now captured at the 11/14/26 01:30 PM ET game-day edition and published beside the older 04:15 AM ET edition, with the edition-to-edition changes listed player by player.",
+  "Rotation minutes and measured production impact per team, with the minutes coverage printed next to every figure and a null where no official minutes exist.",
+  "Game flow for the whole horizon: rest days, back-to-back flags and six-day schedule density, derived from official dates only.",
+  "The luck-versus-skill decomposition on 160 official finals, with the 23-game log shortfall stated on the page rather than hidden.",
+  "A Decision Register: every open decision with the missing input, the official source that would supply it, and the cheapest test that would close it.",
+  "A Suggestions page with a four-question review protocol and an acceptance gate, so a reviewer can choose a path instead of approving a wish list.",
+  "A Flagged for Review register of 52 items, six of them added by this pass, each with the official link a reviewer can open."
  ],
  "recommended_next_actions": [
   {
    "rank": 1,
-   "action": "Capture the day-of-game injury updates for 2026-11-14 (after 16:30 UTC) and re-run the pipeline",
-   "why": "At the newest edition (11/14/26 04:15 AM ET), the same five teams - New Orleans, Cleveland, Memphis, Chicago and Miami - have still not filed for tonight's games. The official rules require game-day reports between 11 a.m. and 1 p.m. local time, so a later edition today will contain them. Tonight's five lines currently carry no adjustment for those teams.",
+   "action": "Capture the newest official injury edition automatically on every build, and stamp its timestamp in the page header",
+   "why": "This pass found the injury pages more than twelve hours behind the official index, and the site's own text did not make that obvious. The fix is mechanical (suggestion SG22) and it closes a class of defect that has now recurred three times.",
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
-   "source_label": "NBA official injury-report index"
+   "source_label": "NBA Official - Injury Report index"
   },
   {
    "rank": 2,
-   "action": "Capture the 11/15, 11/16 and 11/17 injury-report editions as they are published",
-   "why": "The 04:15 AM ET edition lists all twenty team-slots for 11/15 as NOT YET SUBMITTED and lists no rows at all for 11/16 or 11/17 - exactly as the reporting deadlines predict. Until those editions exist, 18 of the 27 horizon lines carry no injury adjustment and say so.",
-   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
-   "source_label": "NBA official injury-report index"
+   "action": "Find an official route to the scores of 2026-10-24 and 2026-11-02, then rebuild the rest and season layers",
+   "why": "Exactly 23 games are missing from the log, uniformly across all 30 teams. Every season figure is short by that amount, and while the shortfall is uniform (so rankings survive it), calendar-complete rest does not. Suggestion SG23. Under no circumstances should the results be reconstructed from the standings residual - that is inference.",
+   "source_url": "https://www.nba.com/standings",
+   "source_label": "NBA.com Standings"
   },
   {
    "rank": 3,
-   "action": "Log real closing prices",
-   "why": "Until this exists, nothing here can be called profitable - only better than a naive model. Everything else is optimisation of an unvalidated target.",
-   "source_url": null,
-   "source_label": null,
-   "source_note": "No official price source is available in this repository; a methodological action, flagged unverified."
+   "action": "Get measured minutes for at least the players the model will move, before touching the production-transfer rule",
+   "why": "The measured elasticity for points is 1.288 against the module's flat 0.55, which is a large discrepancy - but applying a better constant to a mostly-null minutes table just scales the null. Suggestion SG21, sequencing stated explicitly.",
+   "source_url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS",
+   "source_label": "NBA.com Stats - Players Traditional"
   },
   {
    "rank": 4,
-   "action": "Backfill results for 2026-10-20 to 2026-11-05 and re-cut the split",
-   "why": "Every game from 2026-11-06 onward is already in the test window, so this is now the only way to grow the sample. It would let the ratings window move earlier and the test window roughly double again.",
-   "source_url": "https://www.nba.com/games",
-   "source_label": "NBA.com Games & Scores index"
+   "action": "Decide the market-price question one way or the other, in writing",
+   "why": "No NBA-operated source publishes a closing price, so no strategy in this repository can ever be called a market edge, and the top reward tier is unreachable by construction. Either a licensed price is acquired (a licensing decision, not an engineering one) or the project declares itself permanently price-free and stops implying otherwise. Every other modelling suggestion is downstream of this answer.",
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "source_label": "NBA.com Games (no price is published on any NBA-operated page)"
   },
   {
    "rank": 5,
-   "action": "Complete the Players Traditional table so minutes are known for all 465 players",
-   "why": "Minutes are known for 50 of them, so the availability impact is a measured lower bound and three prop strategies have no graded plays at all.",
-   "source_url": "https://www.nba.com/stats/players/traditional",
-   "source_label": "NBA.com Stats, Players Traditional"
+   "action": "Adopt the staleness budget (warn at the limit, fail at twice the limit) before adding any more data",
+   "why": "Three separate staleness defects have now been found by hand. A build that cannot fail on staleness will keep shipping it. Suggestion SG25.",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_label": "NBA Official Injury Report - 11/14/26 01:30 PM ET"
   }
  ],
- "bottom_line": "The machinery works end to end: it originates lines for every game three days out, it tests ten strategies against a real out-of-sample window, it settles the previous slate's paper picks against official finals the morning after, it refuses to promote anything that has not cleared every gate that can be run, and it publishes every gap it cannot close. One strategy has now cleared the luck gate and failed two others - that is the first genuinely selective signal in the project, and the gate matrix is what keeps it honest. What the project still cannot do is prove any of it against a real price, because no NBA-operated source publishes one."
+ "bottom_line": "The machinery works end to end and its outputs are now verified against a fresher official read than the one they were built from - which is the only reason to trust the numbers, and also the reason not to over-read them. Three things are true at once: the horizon is correct to the game id, the injury picture was twelve hours out of date when this pass began, and the league's own game log is twenty-three games short of its own standings. None of the three changes a published pick; all three change what a reader may conclude. No strategy is funded. The one that cleared the luck gate failed calibration and stability, and that is the honest result, not a temporary obstacle. Every open decision on this site is now listed in one place with the missing input that blocks it and the cheapest test that would close it, so the next step is a choice a reviewer can actually make rather than a wish list to approve.",
+ "_session_note": "Rewritten by session arena/e06aed97-nba1 (COORDINATION section 30) from a fresh official read on 2026-11-14 18:40-19:10Z. Figures carried over unchanged from the previous build: 27 horizon games, 60 picks, 60-game out-of-sample window, S1 23-9 p=0.020, -110 convention, 0 funded strategies."
 }

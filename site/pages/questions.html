@@ -30,9 +30,12 @@
     <div class="nav-group"><h3>HORIZON</h3>
 <a href="picks.html">Lines &amp; Picks</a>
 <a href="props.html">Player Props</a>
+<a href="props-s30.html">Single Bets vs Parlays vs Props</a>
 <a href="prop-variance.html">Prop Variance &amp; Rotation</a>
 <a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="injuries-s30.html">Injuries &mdash; 01:30 PM ET Edition</a>
 <a href="gameflow.html">Game Flow</a>
+<a href="gameflow-s30.html">Game Flow &mdash; Rest &amp; Density</a>
 </div>
 <div class="nav-group"><h3>EVIDENCE</h3>
 <a href="strategies.html">Strategies &amp; Leaderboard</a>
@@ -40,13 +43,16 @@
 <a href="leaderboard.html">Leaderboard &amp; Rewards</a>
 <a href="correlations.html">Correlations</a>
 <a href="luck.html">Luck &amp; Skill</a>
+<a href="luck-s30.html">Luck &mdash; Official Record</a>
 <a href="backtest.html">Out-of-Sample Backtest</a>
 <a href="model.html">Model &amp; Teams</a>
 </div>
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
+<a href="verification-s30.html">2026-11-14 Re-read</a>
 </div>
 <div class="nav-group"><h3>DECISION</h3>
+<a href="execution.html">Decision Register</a>
 <a href="questions.html">Open Questions</a>
 <a href="suggestions.html">Suggestions</a>
 <a href="flagged.html">Flagged for Review</a>
@@ -182,6 +188,34 @@
 <td>Low - 40 rows from 10 players over one week; the sign is robust, the magnitude is not</td>
 <td class="src"><span class="na" title="source id data/derived/prop_variance.json (minutes_to_production, minutes_elasticity) is not in the register">&mdash;</span></td>
 </tr>
+<tr>
+<td>A16</td>
+<td><b>Was the 11/14 game-day official injury report published, and what changed between the overnight and afternoon editions?</b></td>
+<td>Yes. The official index now lists the 11/14 series from 12:00 AM ET through 01:30 PM ET. Re-read at 18:50Z, the 01:30 PM ET edition carries 51 player rows across the five 11/14 games plus 18 NOT YET SUBMITTED stubs for 11/15, and no rows at all for 11/16 or 11/17. Four of the five teams that were NOT YET SUBMITTED at 04:15 AM ET had filed by 01:30 PM ET (New Orleans 5 rows, Cleveland 8, Chicago 7, Miami 4); Memphis had not, and at 1:30 PM ET was still inside its own 1 p.m. CT local window, so that is not a late filing. Inside teams that had already filed, exactly three player designations moved: Brooklyn's Mikel Brown Jr. Questionable to Probable, and Detroit's Elijah Harkless and Isaac Jones Questionable to Available.</td>
+<td>High - the edition was read twice independently, and the team attribution on the two page-break blocks was confirmed against official roster pages</td>
+<td class="src"><span class="na" title="source id S_IR_0130 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>A17</td>
+<td><b>Is the 27-game horizon still correct on 2026-11-14, and are the printed team records current?</b></td>
+<td>Yes to both, on this read. All 27 published horizon rows matched the official day pages field by field - date, tip time in ET, matchup, game id, and both team records - with zero mismatches. That is 54 record cells, and every one agrees with a SECOND official source (the standings page), so a single misprinted card cannot pass as verified. The per-day counts also match the official calendar badges: 11/14 = 5, 11/15 = 9, 11/16 = 8, 11/17 = 5. Note what this does and does not mean: it closes the stale-record class for this horizon, but it is a snapshot at 18:45Z, and the 11/14 games tip at 7:00 PM ET.</td>
+<td>High - two independent official sources agreed on every record, and the game ids matched exactly</td>
+<td class="src"><span class="na" title="source id S_GAMES14 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>A18</td>
+<td><b>Does the official game log reconcile with the official standings?</b></td>
+<td>No, and the size of the gap is now exact. Recomputing every team's record from the log (160 scored games, 2026-10-20 to 2026-11-13 after this session's 11/13 read) gives 320 team-games against the standings' 366: 23 games missing. The log is internally consistent - total points for and against balance exactly at 36,240, and wins sum to the 160 games - so it is short, not corrupt. The gap is uniform: 14 teams are short exactly 1 game, 16 exactly 2, none short 0 and none short 3 or more, with 23 missing wins and 23 missing losses balancing. The two dates with no rows (2026-10-24 and 2026-11-02) are the known F1 class. The missing fixtures are therefore NOT named here: the standings residual would determine them arithmetically, and that is inference, which the brief forbids.</td>
+<td>High on the arithmetic (it reconciles three ways); the identity of the 23 missing games is unknown and stays unknown</td>
+<td class="src"><span class="na" title="source id S_STAND is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>A19</td>
+<td><b>How much of the league's win-loss record is luck, measured rather than asserted?</b></td>
+<td>On 160 official finals, the win-loss record is close to a coin flip at the league level but not at the team level. Mean absolute margin is 14.06 points, mean margin +1.76 (home teams 84-76). Only 13 of 160 games (8.1%) were decided by 3 or fewer, so one-possession luck is NOT the main driver - blowouts are (57 of 160 decided by 15 or more). A Pythagorean expectation on points for and against gives a luck-wins spread from +2.72 (Philadelphia) to -2.36 (New York), and the 30 luck figures sum to -1.21 rather than 0 because the exponent does not force them to sum to zero. Read that as: the teams at the top of the luck column are winning games by margins their point differential does not support, and that is a description of variance, not a forecast.</td>
+<td>Medium - it is arithmetic on official scores, but the Pythagorean exponent is an outside convention (F51), the window is 23 games short (F49), and no opponent strength, rest or injury adjustment is applied</td>
+<td class="src"><span class="na" title="source id S_STAND is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Open</h2><p class="secsub">Questions that cannot be answered yet. Nothing on this site is decided on an open question.</p>
 <div class="tablewrap">
@@ -307,7 +341,7 @@
 <tr>
 <td>Q14</td>
 <td><b>Which injury-report edition is authoritative at tip-off, and what did the intra-day movements actually cost?</b></td>
-<td>The official league publishes multiple editions per day (12:00, 3:00, 5:00/5:15 PM ET and game-day reports). The 2026-11-13 chain was captured and every movement verified (9 status changes 12:00-&gt;3:00 PM, 5 more 3:00-&gt;5:15 PM), but no gameday edition is archived and no box-score starters are joined, so a movement's effect on minutes and production cannot be measured.</td>
+<td>Partly answered. The 01:30 PM ET edition is the newest on the index at 18:50Z and every edition timestamp is printed on the index itself, so 'which is authoritative at tip-off' has a mechanical answer: the last edition published before tip. What is still missing is the intra-day movement record for a full day at a fixed cadence, which needs the resolver in SG22.</td>
 <td>Archive every edition of every report (the URLs follow the ak-static.cms.nba.com/referee/injury/Injury-Report_&lt;date&gt;_&lt;time&gt;PM.pdf pattern), diff statuses between editions, then join official box scores (nba.com/game/&lt;id&gt;/box-score) to see who actually started and played. Verified on 2026-11-14: https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
@@ -343,10 +377,10 @@
 <tr>
 <td>Q18</td>
 <td><b>Was the 11/14 12:00 PM ET injury report published, and what does it say about 11/14 rows?</b></td>
-<td>The edition's URL returned AccessDenied at capture, which is also what a missing object returns (F31).</td>
-<td>Re-check the official URL after 17:00 UTC on 2026-11-14 and transcribe any new rows with the page link. Record the response either way.</td>
+<td>ANSWERED by session arena/e06aed97-nba1: yes, it was published. The 11/14 series runs from 12:00 AM ET to 01:30 PM ET on the official index; see A16 and data/live/s14x/. The remaining question is not whether it exists but whether the site captures the newest edition automatically - which is SG22.</td>
+<td>Now a build-automation question, not a data question: see A16 and suggestion SG22.</td>
 <td>Injury layer for 11/14 rows</td>
-<td>High</td>
+<td>2</td>
 <td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
 </tr>
 <tr>

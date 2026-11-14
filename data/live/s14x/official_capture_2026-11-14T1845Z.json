@@ -1,0 +1,432 @@
+{
+ "_meta": {
+  "session": "arena/e06aed97-nba1",
+  "purpose": "Fresh independent read of the official nba.com game pages for the horizon (11/14-11/17) and the 2026-11-13 finals, taken at the start of this session so the published site data can be re-verified line by line.",
+  "read_at_utc": "2026-11-14T18:45:00Z",
+  "method": "Each day page https://www.nba.com/games?date=YYYY-MM-DD was read in full (the tool returns the page as a table/card listing). Every value below was copied from that listing: tip time as printed, team tri-codes from the card, the game id from the card's game link, and each team's record as printed next to its logo. The per-day game counts come from the calendar badges on the same page.",
+  "not_read": [
+   "No venue, attendance, or box-score detail was read for the horizon - only what the card prints.",
+   "No odds or price of any kind exists on these pages; none was looked for.",
+   "The 11/13 venue and overtime flag are not re-derived here; only the score, the status label and the game id are captured. The status label 'Final/OT' is what the card prints for ATL@CHI."
+  ],
+  "verification_against_existing_capture": "The same page-reading method was first validated against data/raw/s14/injury_report_2026-11-14_0415ET.json: re-reading the 11/14 04:15 AM ET injury PDF reproduced that committed transcription row for row, including every NOT YET SUBMITTED stub. Method validated before use."
+ },
+ "calendar_game_counts": {
+  "2026-11-14": {
+   "games": 5,
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  "2026-11-15": {
+   "games": 9,
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  "2026-11-16": {
+   "games": 8,
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  "2026-11-17": {
+   "games": 5,
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  }
+ },
+ "horizon": [
+  {
+   "date": "2026-11-14",
+   "tip_et": "7:00 PM ET",
+   "matchup": "DEN@NOP",
+   "away": "DEN",
+   "home": "NOP",
+   "game_id": "0022600231",
+   "away_record": "6-4",
+   "home_record": "4-9",
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "date": "2026-11-14",
+   "tip_et": "7:30 PM ET",
+   "matchup": "DAL@CLE",
+   "away": "DAL",
+   "home": "CLE",
+   "game_id": "0022600232",
+   "away_record": "7-5",
+   "home_record": "6-7",
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "date": "2026-11-14",
+   "tip_et": "8:00 PM ET",
+   "matchup": "DET@MIA",
+   "away": "DET",
+   "home": "MIA",
+   "game_id": "0022600233",
+   "away_record": "8-3",
+   "home_record": "6-6",
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "date": "2026-11-14",
+   "tip_et": "8:00 PM ET",
+   "matchup": "BKN@MEM",
+   "away": "BKN",
+   "home": "MEM",
+   "game_id": "0022600234",
+   "away_record": "3-8",
+   "home_record": "8-4",
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "date": "2026-11-14",
+   "tip_et": "8:00 PM ET",
+   "matchup": "CHI@MIN",
+   "away": "CHI",
+   "home": "MIN",
+   "game_id": "0022600235",
+   "away_record": "2-9",
+   "home_record": "9-3",
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "date": "2026-11-15",
+   "tip_et": "1:00 PM ET",
+   "matchup": "IND@PHI",
+   "away": "IND",
+   "home": "PHI",
+   "game_id": "0022600236",
+   "away_record": "5-8",
+   "home_record": "10-3",
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "tip_et": "4:00 PM ET",
+   "matchup": "LAL@PHX",
+   "away": "LAL",
+   "home": "PHX",
+   "game_id": "0022600237",
+   "away_record": "11-2",
+   "home_record": "5-6",
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "tip_et": "4:30 PM ET",
+   "matchup": "CHA@LAC",
+   "away": "CHA",
+   "home": "LAC",
+   "game_id": "0022600238",
+   "away_record": "4-8",
+   "home_record": "3-8",
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "tip_et": "5:00 PM ET",
+   "matchup": "SAS@UTA",
+   "away": "SAS",
+   "home": "UTA",
+   "game_id": "0022600239",
+   "away_record": "11-2",
+   "home_record": "1-12",
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "tip_et": "6:00 PM ET",
+   "matchup": "DAL@BOS",
+   "away": "DAL",
+   "home": "BOS",
+   "game_id": "0022600240",
+   "away_record": "7-5",
+   "home_record": "10-2",
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "tip_et": "6:00 PM ET",
+   "matchup": "NYK@TOR",
+   "away": "NYK",
+   "home": "TOR",
+   "game_id": "0022600241",
+   "away_record": "6-6",
+   "home_record": "5-7",
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "tip_et": "7:00 PM ET",
+   "matchup": "HOU@WAS",
+   "away": "HOU",
+   "home": "WAS",
+   "game_id": "0022600242",
+   "away_record": "10-3",
+   "home_record": "4-9",
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "tip_et": "8:00 PM ET",
+   "matchup": "ATL@MIL",
+   "away": "ATL",
+   "home": "MIL",
+   "game_id": "0022600243",
+   "away_record": "7-6",
+   "home_record": "1-12",
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "tip_et": "9:00 PM ET",
+   "matchup": "OKC@SAC",
+   "away": "OKC",
+   "home": "SAC",
+   "game_id": "0022600244",
+   "away_record": "8-5",
+   "home_record": "1-11",
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-16",
+   "tip_et": "7:00 PM ET",
+   "matchup": "ORL@BOS",
+   "away": "ORL",
+   "home": "BOS",
+   "game_id": "0022600245",
+   "away_record": "5-7",
+   "home_record": "10-2",
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-16",
+   "tip_et": "7:00 PM ET",
+   "matchup": "CHI@CLE",
+   "away": "CHI",
+   "home": "CLE",
+   "game_id": "0022600246",
+   "away_record": "2-9",
+   "home_record": "6-7",
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-16",
+   "tip_et": "7:00 PM ET",
+   "matchup": "MEM@WAS",
+   "away": "MEM",
+   "home": "WAS",
+   "game_id": "0022600247",
+   "away_record": "8-4",
+   "home_record": "4-9",
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-16",
+   "tip_et": "7:30 PM ET",
+   "matchup": "PHI@BKN",
+   "away": "PHI",
+   "home": "BKN",
+   "game_id": "0022600248",
+   "away_record": "10-3",
+   "home_record": "3-8",
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-16",
+   "tip_et": "7:30 PM ET",
+   "matchup": "HOU@MIA",
+   "away": "HOU",
+   "home": "MIA",
+   "game_id": "0022600249",
+   "away_record": "10-3",
+   "home_record": "6-6",
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-16",
+   "tip_et": "8:00 PM ET",
+   "matchup": "POR@MIN",
+   "away": "POR",
+   "home": "MIN",
+   "game_id": "0022600250",
+   "away_record": "9-3",
+   "home_record": "9-3",
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-16",
+   "tip_et": "8:00 PM ET",
+   "matchup": "GSW@NOP",
+   "away": "GSW",
+   "home": "NOP",
+   "game_id": "0022600251",
+   "away_record": "8-5",
+   "home_record": "4-9",
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-16",
+   "tip_et": "9:00 PM ET",
+   "matchup": "PHX@DEN",
+   "away": "PHX",
+   "home": "DEN",
+   "game_id": "0022600252",
+   "away_record": "5-6",
+   "home_record": "6-4",
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-17",
+   "tip_et": "7:30 PM ET",
+   "matchup": "NYK@TOR",
+   "away": "NYK",
+   "home": "TOR",
+   "game_id": "0022600253",
+   "away_record": "6-6",
+   "home_record": "5-7",
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "date": "2026-11-17",
+   "tip_et": "8:00 PM ET",
+   "matchup": "POR@MIN",
+   "away": "POR",
+   "home": "MIN",
+   "game_id": "0022600254",
+   "away_record": "9-3",
+   "home_record": "9-3",
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "date": "2026-11-17",
+   "tip_et": "8:00 PM ET",
+   "matchup": "DET@SAS",
+   "away": "DET",
+   "home": "SAS",
+   "game_id": "0022600255",
+   "away_record": "8-3",
+   "home_record": "11-2",
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "date": "2026-11-17",
+   "tip_et": "11:00 PM ET",
+   "matchup": "CHA@LAL",
+   "away": "CHA",
+   "home": "LAL",
+   "game_id": "0022600256",
+   "away_record": "4-8",
+   "home_record": "11-2",
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "date": "2026-11-17",
+   "tip_et": "10:30 PM ET",
+   "matchup": "UTA@LAC",
+   "away": "UTA",
+   "home": "LAC",
+   "game_id": "0022600257",
+   "away_record": "1-12",
+   "home_record": "3-8",
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  }
+ ],
+ "finals_2026_11_13": [
+  {
+   "date": "2026-11-13",
+   "away": "NYK",
+   "away_pts": 104,
+   "home": "IND",
+   "home_pts": 106,
+   "status_label": "Final",
+   "game_id": "0022600034",
+   "cup_group_printed": "East Group B",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "date": "2026-11-13",
+   "away": "MIL",
+   "away_pts": 99,
+   "home": "ORL",
+   "home_pts": 107,
+   "status_label": "Final",
+   "game_id": "0022600035",
+   "cup_group_printed": "East Group A",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "date": "2026-11-13",
+   "away": "CLE",
+   "away_pts": 121,
+   "home": "MIA",
+   "home_pts": 133,
+   "status_label": "Final",
+   "game_id": "0022600036",
+   "cup_group_printed": "East Group B",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "date": "2026-11-13",
+   "away": "ATL",
+   "away_pts": 117,
+   "home": "CHI",
+   "home_pts": 125,
+   "status_label": "Final/OT",
+   "game_id": "0022600037",
+   "cup_group_printed": "East Group C",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "date": "2026-11-13",
+   "away": "MEM",
+   "away_pts": 142,
+   "home": "NOP",
+   "home_pts": 111,
+   "status_label": "Final",
+   "game_id": "0022600038",
+   "cup_group_printed": "West Group B",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "date": "2026-11-13",
+   "away": "UTA",
+   "away_pts": 118,
+   "home": "HOU",
+   "home_pts": 125,
+   "status_label": "Final",
+   "game_id": "0022600039",
+   "cup_group_printed": "West Group A",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "date": "2026-11-13",
+   "away": "GSW",
+   "away_pts": 85,
+   "home": "SAS",
+   "home_pts": 123,
+   "status_label": "Final",
+   "game_id": "0022600040",
+   "cup_group_printed": "West Group C",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "date": "2026-11-13",
+   "away": "POR",
+   "away_pts": 120,
+   "home": "SAC",
+   "home_pts": 107,
+   "status_label": "Final",
+   "game_id": "0022600041",
+   "cup_group_printed": "West Group C",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "date": "2026-11-13",
+   "away": "OKC",
+   "away_pts": 112,
+   "home": "LAC",
+   "home_pts": 113,
+   "status_label": "Final",
+   "game_id": "0022600042",
+   "cup_group_printed": "West Group B",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  }
+ ]
+}

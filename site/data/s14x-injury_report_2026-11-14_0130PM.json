@@ -1,0 +1,1188 @@
+{
+ "_meta": {
+  "session": "arena/e06aed97-nba1",
+  "report": "NBA Official Injury Report, 11/14/26 01:30 PM ET edition",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+  "index_source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+  "edition_published": "YES. The official index lists the 11/14 series from 12:00 AM ET to 01:30 PM ET; 01:30 PM ET is the newest edition on the index at read time.",
+  "read_at_utc": "2026-11-14T18:50:00Z",
+  "supersedes_for_currency": "data/raw/s14/injury_report_2026-11-14_0415ET.json (04:15 AM ET) and data/proplogs/2026-11-14/injury_2026-11-14_04_30AM.json (04:30 AM ET). Those files are NOT modified or deleted by this session; this file is the newer edition kept beside them.",
+  "method": "The PDF was read twice, independently, and the two reads are byte-identical. The reading method was validated first on the 04:15 AM ET edition: re-reading that PDF reproduced data/raw/s14/injury_report_2026-11-14_0415ET.json row for row, including every NOT YET SUBMITTED stub.",
+  "cell_semantics": "An empty player cell with status NOT YET SUBMITTED is the PDF's own stub row for a team that had not filed when this edition was published. It is not a missing value and not a zero.",
+  "page_break_note": "The PDF is multi-page and the reader drops the leading columns on pages 2-5. Every row therefore carries read_page and a team_basis cell stating exactly what the attribution rests on. Two blocks needed independent evidence (see team_basis) and are flagged.",
+  "deadline_note": "Official rule, quoted from the index page: game-day reports are due between 11 a.m. and 1 p.m. local time (8-10 a.m. for tip-offs at 5 p.m. or earlier), except for the second game of a back-to-back, which is due by 1 p.m. local time on the day of the game. MEM's 8:00 PM ET tip is 7:00 PM CT, so Memphis was still inside its local window when this edition was published at 1:30 PM ET (12:30 PM CT). NOT YET SUBMITTED at that hour is NOT a deadline violation and is not reported as one.",
+  "no_rows_for_dates": [
+   "2026-11-16",
+   "2026-11-17"
+  ],
+  "cols": [
+   "game_date",
+   "game_time_et",
+   "matchup",
+   "team",
+   "player",
+   "status",
+   "reason",
+   "read_page",
+   "team_basis"
+  ],
+  "rows": [
+   [
+    "2026-11-14",
+    "07:00",
+    "DEN@NOP",
+    "Denver Nuggets",
+    "Holmes II, DaRon",
+    "Out",
+    "G League - On Assignment",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:00",
+    "DEN@NOP",
+    "Denver Nuggets",
+    "Nembhard, Ryan",
+    "Out",
+    "G League - Two-Way",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:00",
+    "DEN@NOP",
+    "Denver Nuggets",
+    "Strawther, Julian",
+    "Out",
+    "Injury/Illness - Left Knee Sprain",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:00",
+    "DEN@NOP",
+    "Denver Nuggets",
+    "Whitmore, Cam",
+    "Out",
+    "G League - Two-Way",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:00",
+    "DEN@NOP",
+    "New Orleans Pelicans",
+    "McGowens, Bryce",
+    "Out",
+    "Injury/Illness - Left Elbow Infection",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:00",
+    "DEN@NOP",
+    "New Orleans Pelicans",
+    "Missi, Yves",
+    "Probable",
+    "Injury/Illness - Left Knee Contusion / Bone Bruise",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:00",
+    "DEN@NOP",
+    "New Orleans Pelicans",
+    "Murphy III, Trey",
+    "Out",
+    "Injury/Illness - Bilateral Patellar Tendinopathy",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:00",
+    "DEN@NOP",
+    "New Orleans Pelicans",
+    "Murray, Dejounte",
+    "Out",
+    "Injury/Illness - Left Ankle Sprain",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:00",
+    "DEN@NOP",
+    "New Orleans Pelicans",
+    "Watford, Trendon",
+    "Out",
+    "Injury/Illness - Right Ankle Sprain",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:30",
+    "DAL@CLE",
+    "Dallas Mavericks",
+    "Biberovic, Tarik",
+    "Out",
+    "Injury/Illness - Right Heel Bursitis",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:30",
+    "DAL@CLE",
+    "Dallas Mavericks",
+    "Christie, Max",
+    "Doubtful",
+    "Injury/Illness - Left Ankle Sprain",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:30",
+    "DAL@CLE",
+    "Dallas Mavericks",
+    "de Larrea, Sergio",
+    "Out",
+    "Injury/Illness - Right Knee Sprain",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:30",
+    "DAL@CLE",
+    "Dallas Mavericks",
+    "Johnson Jr., Morez",
+    "Probable",
+    "Injury/Illness - Left Shin / Tibia Contusion",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:30",
+    "DAL@CLE",
+    "Dallas Mavericks",
+    "Lively II, Dereck",
+    "Out",
+    "Injury/Illness - Right Foot Surgery",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:30",
+    "DAL@CLE",
+    "Dallas Mavericks",
+    "Martin, Caleb",
+    "Available",
+    "Injury/Illness - Right Thumb Splint",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:30",
+    "DAL@CLE",
+    "Cleveland Cavaliers",
+    "Allen, Jarrett",
+    "Questionable",
+    "Injury/Illness - Right Knee Injury",
+    1,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "07:30",
+    "DAL@CLE",
+    "Cleveland Cavaliers",
+    "Harden, James",
+    "Questionable",
+    "Injury/Illness - Left Lower Leg/Calf Tightness",
+    2,
+    "team cell not printed on this line (page-break fragment); the row sits inside the Cleveland block opened on page 1 and closed by the BKN@MEM block; the Cavaliers team cell is printed on page 2 against 'Minnesota Timberwolves' only because the reader shifted columns, so attribution rests on the block position, not on that print. Flagged F-S30-3."
+   ],
+   [
+    "2026-11-14",
+    "07:30",
+    "DAL@CLE",
+    "Cleveland Cavaliers",
+    "Merrill, Sam",
+    "Out",
+    "Injury/Illness - Right Elbow Injury Management",
+    2,
+    "team cell not printed on this line (page-break fragment); the row sits inside the Cleveland block opened on page 1 and closed by the BKN@MEM block; the Cavaliers team cell is printed on page 2 against 'Minnesota Timberwolves' only because the reader shifted columns, so attribution rests on the block position, not on that print. Flagged F-S30-3."
+   ],
+   [
+    "2026-11-14",
+    "07:30",
+    "DAL@CLE",
+    "Cleveland Cavaliers",
+    "Mitchell, Donovan",
+    "Questionable",
+    "Injury/Illness - Left Knee Contusion/Injury Management",
+    2,
+    "team cell not printed on this line (page-break fragment); the row sits inside the Cleveland block opened on page 1 and closed by the BKN@MEM block; the Cavaliers team cell is printed on page 2 against 'Minnesota Timberwolves' only because the reader shifted columns, so attribution rests on the block position, not on that print. Flagged F-S30-3."
+   ],
+   [
+    "2026-11-14",
+    "07:30",
+    "DAL@CLE",
+    "Cleveland Cavaliers",
+    "Mobley, Evan",
+    "Out",
+    "Injury/Illness - Left Great Toe Sprain",
+    2,
+    "team cell not printed on this line (page-break fragment); the row sits inside the Cleveland block opened on page 1 and closed by the BKN@MEM block; the Cavaliers team cell is printed on page 2 against 'Minnesota Timberwolves' only because the reader shifted columns, so attribution rests on the block position, not on that print. Flagged F-S30-3."
+   ],
+   [
+    "2026-11-14",
+    "07:30",
+    "DAL@CLE",
+    "Cleveland Cavaliers",
+    "Tomlin, Nae'Qwan",
+    "Out",
+    "Injury/Illness - Low Back Stress Reaction",
+    2,
+    "team cell not printed on this line (page-break fragment); the row sits inside the Cleveland block opened on page 1 and closed by the BKN@MEM block; the Cavaliers team cell is printed on page 2 against 'Minnesota Timberwolves' only because the reader shifted columns, so attribution rests on the block position, not on that print. Flagged F-S30-3."
+   ],
+   [
+    "2026-11-14",
+    "07:30",
+    "DAL@CLE",
+    "Cleveland Cavaliers",
+    "Udeh, Jr., Ernest",
+    "Out",
+    "G League - Two-Way",
+    2,
+    "team cell not printed on this line (page-break fragment); the row sits inside the Cleveland block opened on page 1 and closed by the BKN@MEM block; the Cavaliers team cell is printed on page 2 against 'Minnesota Timberwolves' only because the reader shifted columns, so attribution rests on the block position, not on that print. Flagged F-S30-3."
+   ],
+   [
+    "2026-11-14",
+    "07:30",
+    "DAL@CLE",
+    "Cleveland Cavaliers",
+    "Watson, Peyton",
+    "Questionable",
+    "Injury/Illness - Right Hamstring Injury Management",
+    2,
+    "team cell not printed on this line (page-break fragment); the row sits inside the Cleveland block opened on page 1 and closed by the BKN@MEM block; the Cavaliers team cell is printed on page 2 against 'Minnesota Timberwolves' only because the reader shifted columns, so attribution rests on the block position, not on that print. Flagged F-S30-3."
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "BKN@MEM",
+    "Brooklyn Nets",
+    "Bilodeau, Tyler",
+    "Out",
+    "G League - Two-Way",
+    2,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "BKN@MEM",
+    "Brooklyn Nets",
+    "Brown Jr., Mikel",
+    "Probable",
+    "Injury/Illness - Illness",
+    2,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "BKN@MEM",
+    "Brooklyn Nets",
+    "Jefferson, Joshua",
+    "Out",
+    "G League - On Assignment",
+    2,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "BKN@MEM",
+    "Brooklyn Nets",
+    "Nelson, Grant",
+    "Out",
+    "G League - Two-Way",
+    2,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "BKN@MEM",
+    "Brooklyn Nets",
+    "Saraf, Ben",
+    "Out",
+    "G League - On Assignment",
+    2,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "BKN@MEM",
+    "Brooklyn Nets",
+    "Traore, Nolan",
+    "Probable",
+    "Injury/Illness - Right Calf Tightness / Soreness",
+    2,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "BKN@MEM",
+    "Memphis Grizzlies",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    2,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "CHI@MIN",
+    "Chicago Bulls",
+    "Awaka, Tobe",
+    "Out",
+    "Injury/Illness - Disc Irritation",
+    2,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "CHI@MIN",
+    "Minnesota Timberwolves",
+    "Beringer, Joan",
+    "Available",
+    "Injury/Illness - Face Mask",
+    2,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "CHI@MIN",
+    "Minnesota Timberwolves",
+    "DiVincenzo, Donte",
+    "Out",
+    "Injury/Illness - Right Achilles Tendon Repair / Surgery",
+    2,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "CHI@MIN",
+    "Minnesota Timberwolves",
+    "Edwards, Anthony",
+    "Out",
+    "Injury/Illness - Right Knee Arthroscopy",
+    2,
+    "as printed: the team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "DET@MIA",
+    "Detroit Pistons",
+    "Duren, Jalen",
+    "Out",
+    "Injury/Illness - Right Hamstring Strain",
+    3,
+    "as printed: matchup and team cells are on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "DET@MIA",
+    "Detroit Pistons",
+    "Harkless, Elijah",
+    "Available",
+    "G League - Two-Way",
+    3,
+    "as printed: matchup and team cells are on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "DET@MIA",
+    "Detroit Pistons",
+    "Joe, Isaiah",
+    "Out",
+    "Injury/Illness - Right Hip Contusion",
+    3,
+    "as printed: matchup and team cells are on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "DET@MIA",
+    "Detroit Pistons",
+    "Jones, Isaac",
+    "Available",
+    "G League - Two-Way",
+    3,
+    "as printed: matchup and team cells are on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "DET@MIA",
+    "Detroit Pistons",
+    "Lanier, Chaz",
+    "Out",
+    "G League - On Assignment",
+    3,
+    "as printed: matchup and team cells are on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "DET@MIA",
+    "Detroit Pistons",
+    "Okorie, Ebuka",
+    "Out",
+    "G League - On Assignment",
+    3,
+    "as printed: matchup and team cells are on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "DET@MIA",
+    "Detroit Pistons",
+    "Onyenso, Ugonna",
+    "Out",
+    "G League - Two-Way",
+    3,
+    "as printed: matchup and team cells are on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "CHI@MIN",
+    "Chicago Bulls",
+    "Claxton, Nic",
+    "Questionable",
+    "Injury/Illness - Left Hamstring Injury Management",
+    3,
+    "team cell NOT printed on page 3 for these rows; attributed to the Chicago Bulls by independent official evidence - each of the six names appears on the official Bulls roster (https://www.nba.com/bulls/roster, read 2026-11-14T18:55Z) and none appears on the Nets roster. The block sits between the Brooklyn Nets block (closed by the NOT YET SUBMITTED Memphis row) and the Minnesota Timberwolves block, i.e. inside CHI@MIN. Flagged F-S30-2."
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "CHI@MIN",
+    "Chicago Bulls",
+    "Powell, Norman",
+    "Questionable",
+    "Injury/Illness - Low Back Injury Management",
+    3,
+    "team cell NOT printed on page 3 for these rows; attributed to the Chicago Bulls by independent official evidence - each of the six names appears on the official Bulls roster (https://www.nba.com/bulls/roster, read 2026-11-14T18:55Z) and none appears on the Nets roster. The block sits between the Brooklyn Nets block (closed by the NOT YET SUBMITTED Memphis row) and the Minnesota Timberwolves block, i.e. inside CHI@MIN. Flagged F-S30-2."
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "CHI@MIN",
+    "Chicago Bulls",
+    "Sellers, Jaylin",
+    "Out",
+    "G League - Two-Way",
+    3,
+    "team cell NOT printed on page 3 for these rows; attributed to the Chicago Bulls by independent official evidence - each of the six names appears on the official Bulls roster (https://www.nba.com/bulls/roster, read 2026-11-14T18:55Z) and none appears on the Nets roster. The block sits between the Brooklyn Nets block (closed by the NOT YET SUBMITTED Memphis row) and the Minnesota Timberwolves block, i.e. inside CHI@MIN. Flagged F-S30-2."
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "CHI@MIN",
+    "Chicago Bulls",
+    "Smith, Jalen",
+    "Questionable",
+    "Injury/Illness - Left Finger Sprain",
+    3,
+    "team cell NOT printed on page 3 for these rows; attributed to the Chicago Bulls by independent official evidence - each of the six names appears on the official Bulls roster (https://www.nba.com/bulls/roster, read 2026-11-14T18:55Z) and none appears on the Nets roster. The block sits between the Brooklyn Nets block (closed by the NOT YET SUBMITTED Memphis row) and the Minnesota Timberwolves block, i.e. inside CHI@MIN. Flagged F-S30-2."
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "CHI@MIN",
+    "Chicago Bulls",
+    "Swain, Dailyn",
+    "Out",
+    "G League - On Assignment",
+    3,
+    "team cell NOT printed on page 3 for these rows; attributed to the Chicago Bulls by independent official evidence - each of the six names appears on the official Bulls roster (https://www.nba.com/bulls/roster, read 2026-11-14T18:55Z) and none appears on the Nets roster. The block sits between the Brooklyn Nets block (closed by the NOT YET SUBMITTED Memphis row) and the Minnesota Timberwolves block, i.e. inside CHI@MIN. Flagged F-S30-2."
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "CHI@MIN",
+    "Chicago Bulls",
+    "Wilson, Caleb",
+    "Out",
+    "Injury/Illness - Right Metacarpal Fracture",
+    3,
+    "team cell NOT printed on page 3 for these rows; attributed to the Chicago Bulls by independent official evidence - each of the six names appears on the official Bulls roster (https://www.nba.com/bulls/roster, read 2026-11-14T18:55Z) and none appears on the Nets roster. The block sits between the Brooklyn Nets block (closed by the NOT YET SUBMITTED Memphis row) and the Minnesota Timberwolves block, i.e. inside CHI@MIN. Flagged F-S30-2."
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "DET@MIA",
+    "Miami Heat",
+    "Antetokounmpo, Giannis",
+    "Probable",
+    "Injury/Illness - Right Wrist Sprain",
+    4,
+    "as printed: the Miami Heat team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "DET@MIA",
+    "Miami Heat",
+    "Goldin, Vladislav",
+    "Out",
+    "G League - Two-Way",
+    4,
+    "as printed: the Miami Heat team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "DET@MIA",
+    "Miami Heat",
+    "Larsson, Pelle",
+    "Doubtful",
+    "Injury/Illness - Illness",
+    4,
+    "as printed: the Miami Heat team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-14",
+    "08:00",
+    "DET@MIA",
+    "Miami Heat",
+    "Thompson, Klay",
+    "Probable",
+    "Injury/Illness - Left Ankle Sprain",
+    4,
+    "as printed: the Miami Heat team cell is on the same PDF line"
+   ],
+   [
+    "2026-11-15",
+    "01:00",
+    "IND@PHI",
+    "Indiana Pacers",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    4,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "01:00",
+    "IND@PHI",
+    "Philadelphia 76ers",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    4,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "04:00",
+    "LAL@PHX",
+    "Los Angeles Lakers",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    4,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "04:00",
+    "LAL@PHX",
+    "Phoenix Suns",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    4,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "04:30",
+    "CHA@LAC",
+    "Charlotte Hornets",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    4,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "04:30",
+    "CHA@LAC",
+    "LA Clippers",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    4,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "05:00",
+    "SAS@UTA",
+    "San Antonio Spurs",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    4,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "05:00",
+    "SAS@UTA",
+    "Utah Jazz",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    4,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "06:00",
+    "DAL@BOS",
+    "Dallas Mavericks",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    4,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "06:00",
+    "DAL@BOS",
+    "Boston Celtics",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    4,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "06:00",
+    "NYK@TOR",
+    "New York Knicks",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    4,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "06:00",
+    "NYK@TOR",
+    "Toronto Raptors",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    4,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "07:00",
+    "HOU@WAS",
+    "Houston Rockets",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    4,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "07:00",
+    "HOU@WAS",
+    "Washington Wizards",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    4,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "08:00",
+    "ATL@MIL",
+    "Atlanta Hawks",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    5,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "08:00",
+    "ATL@MIL",
+    "Milwaukee Bucks",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    5,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "09:00",
+    "OKC@SAC",
+    "Oklahoma City Thunder",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    5,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ],
+   [
+    "2026-11-15",
+    "09:00",
+    "OKC@SAC",
+    "Sacramento Kings",
+    "",
+    "NOT YET SUBMITTED",
+    "",
+    5,
+    "as printed (stub row: the team had not filed when this edition was published)"
+   ]
+  ]
+ },
+ "teams_2026_11_14": [
+  {
+   "team": "Denver Nuggets",
+   "players_listed": 4,
+   "designations": {
+    "Out": 4
+   },
+   "filed": "yes",
+   "rows": [
+    "Holmes II, DaRon — Out — G League - On Assignment",
+    "Nembhard, Ryan — Out — G League - Two-Way",
+    "Strawther, Julian — Out — Injury/Illness - Left Knee Sprain",
+    "Whitmore, Cam — Out — G League - Two-Way"
+   ],
+   "roster_source": ""
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "players_listed": 5,
+   "designations": {
+    "Out": 4,
+    "Probable": 1
+   },
+   "filed": "yes",
+   "rows": [
+    "McGowens, Bryce — Out — Injury/Illness - Left Elbow Infection",
+    "Missi, Yves — Probable — Injury/Illness - Left Knee Contusion / Bone Bruise",
+    "Murphy III, Trey — Out — Injury/Illness - Bilateral Patellar Tendinopathy",
+    "Murray, Dejounte — Out — Injury/Illness - Left Ankle Sprain",
+    "Watford, Trendon — Out — Injury/Illness - Right Ankle Sprain"
+   ],
+   "roster_source": ""
+  },
+  {
+   "team": "Dallas Mavericks",
+   "players_listed": 6,
+   "designations": {
+    "Out": 3,
+    "Doubtful": 1,
+    "Probable": 1,
+    "Available": 1
+   },
+   "filed": "yes",
+   "rows": [
+    "Biberovic, Tarik — Out — Injury/Illness - Right Heel Bursitis",
+    "Christie, Max — Doubtful — Injury/Illness - Left Ankle Sprain",
+    "de Larrea, Sergio — Out — Injury/Illness - Right Knee Sprain",
+    "Johnson Jr., Morez — Probable — Injury/Illness - Left Shin / Tibia Contusion",
+    "Lively II, Dereck — Out — Injury/Illness - Right Foot Surgery",
+    "Martin, Caleb — Available — Injury/Illness - Right Thumb Splint"
+   ],
+   "roster_source": ""
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "players_listed": 8,
+   "designations": {
+    "Questionable": 4,
+    "Out": 4
+   },
+   "filed": "yes",
+   "rows": [
+    "Allen, Jarrett — Questionable — Injury/Illness - Right Knee Injury",
+    "Harden, James — Questionable — Injury/Illness - Left Lower Leg/Calf Tightness",
+    "Merrill, Sam — Out — Injury/Illness - Right Elbow Injury Management",
+    "Mitchell, Donovan — Questionable — Injury/Illness - Left Knee Contusion/Injury Management",
+    "Mobley, Evan — Out — Injury/Illness - Left Great Toe Sprain",
+    "Tomlin, Nae'Qwan — Out — Injury/Illness - Low Back Stress Reaction",
+    "Udeh, Jr., Ernest — Out — G League - Two-Way",
+    "Watson, Peyton — Questionable — Injury/Illness - Right Hamstring Injury Management"
+   ],
+   "roster_source": ""
+  },
+  {
+   "team": "Brooklyn Nets",
+   "players_listed": 6,
+   "designations": {
+    "Out": 4,
+    "Probable": 2
+   },
+   "filed": "yes",
+   "rows": [
+    "Bilodeau, Tyler — Out — G League - Two-Way",
+    "Brown Jr., Mikel — Probable — Injury/Illness - Illness",
+    "Jefferson, Joshua — Out — G League - On Assignment",
+    "Nelson, Grant — Out — G League - Two-Way",
+    "Saraf, Ben — Out — G League - On Assignment",
+    "Traore, Nolan — Probable — Injury/Illness - Right Calf Tightness / Soreness"
+   ],
+   "roster_source": "https://www.nba.com/nets/roster"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "players_listed": 0,
+   "designations": {},
+   "filed": "no",
+   "rows": [],
+   "roster_source": ""
+  },
+  {
+   "team": "Chicago Bulls",
+   "players_listed": 7,
+   "designations": {
+    "Out": 4,
+    "Questionable": 3
+   },
+   "filed": "yes",
+   "rows": [
+    "Awaka, Tobe — Out — Injury/Illness - Disc Irritation",
+    "Claxton, Nic — Questionable — Injury/Illness - Left Hamstring Injury Management",
+    "Powell, Norman — Questionable — Injury/Illness - Low Back Injury Management",
+    "Sellers, Jaylin — Out — G League - Two-Way",
+    "Smith, Jalen — Questionable — Injury/Illness - Left Finger Sprain",
+    "Swain, Dailyn — Out — G League - On Assignment",
+    "Wilson, Caleb — Out — Injury/Illness - Right Metacarpal Fracture"
+   ],
+   "roster_source": "https://www.nba.com/bulls/roster"
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "players_listed": 3,
+   "designations": {
+    "Available": 1,
+    "Out": 2
+   },
+   "filed": "yes",
+   "rows": [
+    "Beringer, Joan — Available — Injury/Illness - Face Mask",
+    "DiVincenzo, Donte — Out — Injury/Illness - Right Achilles Tendon Repair / Surgery",
+    "Edwards, Anthony — Out — Injury/Illness - Right Knee Arthroscopy"
+   ],
+   "roster_source": ""
+  },
+  {
+   "team": "Detroit Pistons",
+   "players_listed": 7,
+   "designations": {
+    "Out": 5,
+    "Available": 2
+   },
+   "filed": "yes",
+   "rows": [
+    "Duren, Jalen — Out — Injury/Illness - Right Hamstring Strain",
+    "Harkless, Elijah — Available — G League - Two-Way",
+    "Joe, Isaiah — Out — Injury/Illness - Right Hip Contusion",
+    "Jones, Isaac — Available — G League - Two-Way",
+    "Lanier, Chaz — Out — G League - On Assignment",
+    "Okorie, Ebuka — Out — G League - On Assignment",
+    "Onyenso, Ugonna — Out — G League - Two-Way"
+   ],
+   "roster_source": ""
+  },
+  {
+   "team": "Miami Heat",
+   "players_listed": 4,
+   "designations": {
+    "Probable": 2,
+    "Out": 1,
+    "Doubtful": 1
+   },
+   "filed": "yes",
+   "rows": [
+    "Antetokounmpo, Giannis — Probable — Injury/Illness - Right Wrist Sprain",
+    "Goldin, Vladislav — Out — G League - Two-Way",
+    "Larsson, Pelle — Doubtful — Injury/Illness - Illness",
+    "Thompson, Klay — Probable — Injury/Illness - Left Ankle Sprain"
+   ],
+   "roster_source": ""
+  }
+ ],
+ "change_vs_0415_edition": {
+  "description": "Status changes between the 04:15 AM ET edition and this 01:30 PM ET edition, for players listed in both.",
+  "moved": [
+   [
+    "New Orleans Pelicans",
+    "McGowens, Bryce",
+    "NOT YET SUBMITTED (team)",
+    "Out — Left Elbow Infection"
+   ],
+   [
+    "New Orleans Pelicans",
+    "Missi, Yves",
+    "NOT YET SUBMITTED (team)",
+    "Probable — Left Knee Contusion / Bone Bruise"
+   ],
+   [
+    "New Orleans Pelicans",
+    "Murphy III, Trey",
+    "NOT YET SUBMITTED (team)",
+    "Out — Bilateral Patellar Tendinopathy"
+   ],
+   [
+    "New Orleans Pelicans",
+    "Murray, Dejounte",
+    "NOT YET SUBMITTED (team)",
+    "Out — Left Ankle Sprain"
+   ],
+   [
+    "New Orleans Pelicans",
+    "Watford, Trendon",
+    "NOT YET SUBMITTED (team)",
+    "Out — Right Ankle Sprain"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Allen, Jarrett",
+    "NOT YET SUBMITTED (team)",
+    "Questionable — Right Knee Injury"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Harden, James",
+    "NOT YET SUBMITTED (team)",
+    "Questionable — Left Lower Leg/Calf Tightness"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Merrill, Sam",
+    "NOT YET SUBMITTED (team)",
+    "Out — Right Elbow Injury Management"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Mitchell, Donovan",
+    "NOT YET SUBMITTED (team)",
+    "Questionable — Left Knee Contusion/Injury Management"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Mobley, Evan",
+    "NOT YET SUBMITTED (team)",
+    "Out — Left Great Toe Sprain"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Tomlin, Nae'Qwan",
+    "NOT YET SUBMITTED (team)",
+    "Out — Low Back Stress Reaction"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Udeh, Jr., Ernest",
+    "NOT YET SUBMITTED (team)",
+    "Out — G League Two-Way"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Watson, Peyton",
+    "NOT YET SUBMITTED (team)",
+    "Questionable — Right Hamstring Injury Management"
+   ],
+   [
+    "Chicago Bulls",
+    "Awaka, Tobe",
+    "NOT YET SUBMITTED (team)",
+    "Out — Disc Irritation"
+   ],
+   [
+    "Chicago Bulls",
+    "Claxton, Nic",
+    "NOT YET SUBMITTED (team)",
+    "Questionable — Left Hamstring Injury Management"
+   ],
+   [
+    "Chicago Bulls",
+    "Powell, Norman",
+    "NOT YET SUBMITTED (team)",
+    "Questionable — Low Back Injury Management"
+   ],
+   [
+    "Chicago Bulls",
+    "Sellers, Jaylin",
+    "NOT YET SUBMITTED (team)",
+    "Out — G League Two-Way"
+   ],
+   [
+    "Chicago Bulls",
+    "Smith, Jalen",
+    "NOT YET SUBMITTED (team)",
+    "Questionable — Left Finger Sprain"
+   ],
+   [
+    "Chicago Bulls",
+    "Swain, Dailyn",
+    "NOT YET SUBMITTED (team)",
+    "Out — G League On Assignment"
+   ],
+   [
+    "Chicago Bulls",
+    "Wilson, Caleb",
+    "NOT YET SUBMITTED (team)",
+    "Out — Right Metacarpal Fracture"
+   ],
+   [
+    "Miami Heat",
+    "Antetokounmpo, Giannis",
+    "NOT YET SUBMITTED (team)",
+    "Probable — Right Wrist Sprain"
+   ],
+   [
+    "Miami Heat",
+    "Goldin, Vladislav",
+    "NOT YET SUBMITTED (team)",
+    "Out — G League Two-Way"
+   ],
+   [
+    "Miami Heat",
+    "Larsson, Pelle",
+    "NOT YET SUBMITTED (team)",
+    "Doubtful — Illness"
+   ],
+   [
+    "Miami Heat",
+    "Thompson, Klay",
+    "NOT YET SUBMITTED (team)",
+    "Probable — Left Ankle Sprain"
+   ],
+   [
+    "Brooklyn Nets",
+    "Brown Jr., Mikel",
+    "Questionable — Illness",
+    "Probable — Illness"
+   ],
+   [
+    "Detroit Pistons",
+    "Harkless, Elijah",
+    "Questionable — G League Two-Way",
+    "Available — G League Two-Way"
+   ],
+   [
+    "Detroit Pistons",
+    "Jones, Isaac",
+    "Questionable — G League Two-Way",
+    "Available — G League Two-Way"
+   ],
+   [
+    "Memphis Grizzlies",
+    "(team)",
+    "NOT YET SUBMITTED",
+    "NOT YET SUBMITTED"
+   ]
+  ],
+  "teams_that_filed_between_editions": [
+   "New Orleans Pelicans",
+   "Cleveland Cavaliers",
+   "Chicago Bulls",
+   "Miami Heat"
+  ],
+  "teams_still_not_filed": [
+   "Memphis Grizzlies"
+  ],
+  "reading": "Four of the five 11/14 teams that had not filed at 04:15 AM ET filed by 01:30 PM ET (New Orleans, Cleveland, Chicago, Miami). Memphis had not filed and, at 1:30 PM ET, was still inside its local 1 p.m. CT window, so this is not a deadline violation. Inside the teams that had already filed, exactly two player-level designations moved: Brooklyn's Mikel Brown Jr. Questionable to Probable and Detroit's Elijah Harkless and Isaac Jones Questionable to Available (three player rows across two teams). Every other already-filed row is identical between the two editions.",
+  "unchanged_on_both_editions": [
+   [
+    "Brooklyn Nets",
+    "Traore, Nolan",
+    "Probable — Right Calf Tightness / Soreness",
+    "Probable — Right Calf Tightness / Soreness"
+   ],
+   [
+    "Minnesota Timberwolves",
+    "Beringer, Joan",
+    "Available — Injury/Illness - Face Mask",
+    "Available — Injury/Illness - Face Mask"
+   ],
+   [
+    "Minnesota Timberwolves",
+    "DiVincenzo, Donte",
+    "Out",
+    "Out"
+   ],
+   [
+    "Minnesota Timberwolves",
+    "Edwards, Anthony",
+    "Out",
+    "Out"
+   ],
+   [
+    "All four Denver Nuggets rows",
+    "Holmes II / Nembhard / Strawther / Whitmore",
+    "Out",
+    "Out"
+   ],
+   [
+    "All six Dallas Mavericks rows",
+    "Biberovic / Christie / de Larrea / Johnson Jr. / Lively II / Martin",
+    "same designation",
+    "same designation"
+   ],
+   [
+    "Memphis Grizzlies",
+    "(team)",
+    "NOT YET SUBMITTED",
+    "NOT YET SUBMITTED"
+   ]
+  ]
+ }
+}

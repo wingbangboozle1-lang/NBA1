@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Single bets, parlays and prop combos &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="suggestions.html">Decision</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="props-s30.html">Single Bets vs Parlays vs Props</a>
+<a href="prop-variance.html">Prop Variance &amp; Rotation</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="injuries-s30.html">Injuries &mdash; 01:30 PM ET Edition</a>
+<a href="gameflow.html">Game Flow</a>
+<a href="gameflow-s30.html">Game Flow &mdash; Rest &amp; Density</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="leaderboard.html">Leaderboard &amp; Rewards</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="luck-s30.html">Luck &mdash; Official Record</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+<a href="verification-s30.html">2026-11-14 Re-read</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="execution.html">Decision Register</a>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row links to the official source it
+      came from. A blank cell means the value could not be confirmed from an official
+      source &mdash; it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Single bets, parlays and prop combos</h1>
+      <p class="sub">The three products compared on the same evidence, with the arithmetic stated and no market price invented: what a hit rate is worth, why a parlay multiplies variance rather than edge, and what the measured same-game correlation does to a combo.</p>
+    </div>
+    <div class="banner info"><div class="b-t">What this page compares</div><div class="b-b">Three product types, judged on the same evidence and without a market price anywhere. A prop 'probability' on this site is the chance that our projection beats the player's own published season average under a normal model with a measured dispersion. It is not the chance of beating a book, because no NBA-operated source publishes a line.</div></div>
+<div class="tiles">
+<div class="tile"><div class="tile-v">88</div><div class="tile-l">Prop rows published</div><div class="tile-s">site/data/props.json</div></div>
+<div class="tile"><div class="tile-v">0</div><div class="tile-l">Priced with measured dispersion</div><div class="tile-s">rows that have a measured input</div></div>
+<div class="tile"><div class="tile-v">88</div><div class="tile-l">Unpriced</div><div class="tile-s">no measured input - left blank, never estimated</div></div>
+<div class="tile"><div class="tile-v">0</div><div class="tile-l">Clearing one measured SD</div><div class="tile-s">of the 10 measured props</div></div>
+<div class="tile"><div class="tile-v">0.161 SD</div><div class="tile-l">Median gap to the anchor</div><div class="tile-s">how close our number is to the player's own average</div></div>
+<div class="tile"><div class="tile-v">1</div><div class="tile-l">Same-game pairs with >1 game</div><div class="tile-s">of 7 pairs - the rest cannot be estimated</div></div>
+</div>
+<h2 class="sec">1. Single bet</h2><p class="secsub">One leg, one variance term. This is the only product where a hit rate can be compared with a stated break-even without also explaining a correlation.</p>
+<ul class="plain"><li><b>What has to be true:</b> our number must be better than the number it is bet against. On this site the opponent is a naive reference model built from the same official ratings, never a book.</li><li><b>What the data says:</b> the model beats the reference on margin accuracy (MAE 12.98 against 13.62 over 60 out-of-sample games) and the best single strategy is 23-9 with an exact binomial p of 0.020 - but it fails calibration and stability, so it stays at a quarter unit.</li><li><b>Break-even at the stated convention:</b> 0.5238 at -110. That is a convention, not a quote, and the site never labels it otherwise.</li></ul>
+<h2 class="sec">2. Cross-game parlay</h2><p class="secsub">Legs in different games. The variance multiplies; the edge does not.</p>
+<ul class="plain"><li><b>The arithmetic:</b> two legs each with probability p and independent outcomes have probability p&sup2;. At a 0.5238 per-leg break-even the two-leg break-even is 0.274 and the stated price convention pays about 2.6 to 1, so the parlay is neither better nor worse than its legs <i>in expectation</i> - it is simply a larger variance on the same edge, which is why a parlay bankroll behaves nothing like a singles bankroll.</li><li><b>Why it is not free:</b> the same edge, compounded, needs a much larger sample before it is distinguishable from luck. A 0.02 edge per leg that is 23-9 as singles becomes a coin flip on whether a 30-parlay sample is even informative.</li></ul>
+<h2 class="sec">3. Same-game parlay and prop combos</h2><p class="secsub">Legs in the same game, which is where the correlation assumption usually goes wrong - and where this site currently cannot estimate the correction at all.</p>
+<div class="banner warn"><div class="b-t">The same-game correlation cannot be estimated from the data this project holds</div><div class="b-b">A draft of this page said the measured same-game correlation is 0.82. That was wrong, and the source file says so in its own words: 0.82 is the correlation for <b>one pair, Jamal Murray and Nikola Jokic, across 3 shared games</b>, and the study's own reading of that row is &ldquo;not interpretable - n=3&rdquo;. Every other pair in the study shares 1 game or fewer and carries a null. There is no pooled same-game correlation in this repository, none is published here, and the correction is recorded as flag F53.</div></div>
+<p class="secsub">What that means in practice is the useful part. A same-game combo's joint probability is not the product of its legs - teammates' production moves together because minutes, pace and game script move together - so multiplying leg probabilities is known to be wrong in direction and unknown in size. This site therefore publishes no same-game joint probability and no rho it cannot estimate. Anyone pricing a same-game combo with this repository's data is guessing, and that guess is labelled here rather than elsewhere.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Leg A</th>
+<th>Leg B</th>
+<th>Relationship</th>
+<th>Shared games</th>
+<th>rho (points)</th>
+<th>The study's own reading</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Jamal Murray</td>
+<td>Nikola Jokic</td>
+<td>same team</td>
+<td>3</td>
+<td>0.820</td>
+<td>not interpretable - n=3</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">player logs</a></td>
+</tr>
+<tr>
+<td>Ty Jerome</td>
+<td>Zion Williamson</td>
+<td>opponents</td>
+<td>1</td>
+<td><span class="na" title="null in the source file: not estimable at one shared game">&mdash;</span></td>
+<td>not interpretable - n=1</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">player logs</a></td>
+</tr>
+<tr>
+<td>Jamal Murray</td>
+<td>Ty Jerome</td>
+<td>opponents</td>
+<td>1</td>
+<td><span class="na" title="null in the source file: not estimable at one shared game">&mdash;</span></td>
+<td>not interpretable - n=1</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">player logs</a></td>
+</tr>
+<tr>
+<td>Nikola Jokic</td>
+<td>Ty Jerome</td>
+<td>opponents</td>
+<td>1</td>
+<td><span class="na" title="null in the source file: not estimable at one shared game">&mdash;</span></td>
+<td>not interpretable - n=1</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">player logs</a></td>
+</tr>
+<tr>
+<td>Cooper Flagg</td>
+<td>LaMelo Ball</td>
+<td>opponents</td>
+<td>1</td>
+<td><span class="na" title="null in the source file: not estimable at one shared game">&mdash;</span></td>
+<td>not interpretable - n=1</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">player logs</a></td>
+</tr>
+<tr>
+<td>LaMelo Ball</td>
+<td>Zion Williamson</td>
+<td>opponents</td>
+<td>1</td>
+<td><span class="na" title="null in the source file: not estimable at one shared game">&mdash;</span></td>
+<td>not interpretable - n=1</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">player logs</a></td>
+</tr>
+<tr>
+<td>Donovan Mitchell</td>
+<td>Giannis Antetokounmpo</td>
+<td>opponents</td>
+<td>1</td>
+<td><span class="na" title="null in the source file: not estimable at one shared game">&mdash;</span></td>
+<td>not interpretable - n=1</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">player logs</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Every same-game pair in the captured logs. A dash is a null in the source file, not a zero. Reducing this table to a single headline number is exactly the error the page used to make.</p>
+<h2 class="sec">4. Every prop row, and what happened to it</h2><p class="secsub">The published props table and the measured study, side by side. This is flag F50: the site publishes 0 priced rows while the study prices 10.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Player</th>
+<th>Team</th>
+<th>Stat</th>
+<th>Projection</th>
+<th>Model probability</th>
+<th>Status</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-14</td>
+<td><b>Zion Williamson</b></td>
+<td>NOP</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>Jamal Murray</b></td>
+<td>DEN</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>Nikola Jokic</b></td>
+<td>DEN</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>Donovan Mitchell</b></td>
+<td>CLE</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>Cooper Flagg</b></td>
+<td>DAL</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>Kyrie Irving</b></td>
+<td>DAL</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>Giannis Antetokounmpo</b></td>
+<td>MIA</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>Cade Cunningham</b></td>
+<td>DET</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>Ty Jerome</b></td>
+<td>MEM</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>Michael Porter Jr.</b></td>
+<td>BKN</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>Julius Randle</b></td>
+<td>BKN</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>LaMelo Ball</b></td>
+<td>MIN</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>Norman Powell</b></td>
+<td>CHI</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>Caleb Wilson</b></td>
+<td>CHI</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Tyrese Maxey</b></td>
+<td>PHI</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Jaylen Brown</b></td>
+<td>PHI</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Pascal Siakam</b></td>
+<td>IND</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Tyrese Haliburton</b></td>
+<td>IND</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Devin Booker</b></td>
+<td>PHX</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Luka Doncic</b></td>
+<td>LAL</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Austin Reaves</b></td>
+<td>LAL</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Darius Garland</b></td>
+<td>LAC</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Brandon Miller</b></td>
+<td>CHA</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Keyonte George</b></td>
+<td>UTA</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Victor Wembanyama</b></td>
+<td>SAS</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Jayson Tatum</b></td>
+<td>BOS</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Paul George</b></td>
+<td>BOS</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Cooper Flagg</b></td>
+<td>DAL</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Kyrie Irving</b></td>
+<td>DAL</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Scottie Barnes</b></td>
+<td>TOR</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>RJ Barrett</b></td>
+<td>TOR</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Kawhi Leonard</b></td>
+<td>TOR</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Jalen Brunson</b></td>
+<td>NYK</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Karl-Anthony Towns</b></td>
+<td>NYK</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Anthony Davis</b></td>
+<td>WAS</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Trae Young</b></td>
+<td>WAS</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Alperen Sengun</b></td>
+<td>HOU</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Kevin Durant</b></td>
+<td>HOU</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Tyler Herro</b></td>
+<td>MIL</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Nickeil Alexander-Walker</b></td>
+<td>ATL</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Jalen Johnson</b></td>
+<td>ATL</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Darius Acuff Jr.</b></td>
+<td>SAC</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Zach LaVine</b></td>
+<td>SAC</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Shai Gilgeous-Alexander</b></td>
+<td>OKC</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>Ajay Mitchell</b></td>
+<td>OKC</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Jayson Tatum</b></td>
+<td>BOS</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Paul George</b></td>
+<td>BOS</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Paolo Banchero</b></td>
+<td>ORL</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Franz Wagner</b></td>
+<td>ORL</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Donovan Mitchell</b></td>
+<td>CLE</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Norman Powell</b></td>
+<td>CHI</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Caleb Wilson</b></td>
+<td>CHI</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Anthony Davis</b></td>
+<td>WAS</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Trae Young</b></td>
+<td>WAS</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Ty Jerome</b></td>
+<td>MEM</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Michael Porter Jr.</b></td>
+<td>BKN</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Julius Randle</b></td>
+<td>BKN</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Tyrese Maxey</b></td>
+<td>PHI</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Jaylen Brown</b></td>
+<td>PHI</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>Giannis Antetokounmpo</b></td>
+<td>MIA</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="no measured dispersion for this player, so no probability is computed">&mdash;</span></td>
+<td>not priced (no measured input)</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">stats</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Showing the first 60 of 88 rows. An em dash in the probability column is a missing measured input, not a zero probability.</p>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

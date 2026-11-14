@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luck and skill on the official record &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="suggestions.html">Decision</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="props-s30.html">Single Bets vs Parlays vs Props</a>
+<a href="prop-variance.html">Prop Variance &amp; Rotation</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="injuries-s30.html">Injuries &mdash; 01:30 PM ET Edition</a>
+<a href="gameflow.html">Game Flow</a>
+<a href="gameflow-s30.html">Game Flow &mdash; Rest &amp; Density</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="leaderboard.html">Leaderboard &amp; Rewards</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="luck-s30.html">Luck &mdash; Official Record</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+<a href="verification-s30.html">2026-11-14 Re-read</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="execution.html">Decision Register</a>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row links to the official source it
+      came from. A blank cell means the value could not be confirmed from an official
+      source &mdash; it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Luck and skill on the official record</h1>
+      <p class="sub">Arithmetic on 160 official finals: how many games were actually in doubt, which teams are winning games their point differential does not support, and why that decides what a hit rate is worth.</p>
+    </div>
+    <div class="banner info"><div class="b-t">The question this page answers</div><div class="b-b">How much of the win-loss record is luck? The answer here is arithmetic on official final scores only: points for, points against, wins, and a Pythagorean expectation. It describes variance. It does not forecast, it does not adjust for opponent strength, rest or injury, and it is not a model.</div></div>
+<div class="tiles">
+<div class="tile"><div class="tile-v">160</div><div class="tile-l">Games in the record</div><div class="tile-s">official finals, 2026-10-20 to 2026-11-13</div></div>
+<div class="tile"><div class="tile-v">13 (8.1%)</div><div class="tile-l">Decided by 3 or fewer</div><div class="tile-s">the games that are close to coin flips</div></div>
+<div class="tile"><div class="tile-v">57</div><div class="tile-l">Decided by 15 or more</div><div class="tile-s">blowouts dominate, not coin flips</div></div>
+<div class="tile"><div class="tile-v">14.06</div><div class="tile-l">Mean absolute margin</div><div class="tile-s">points</div></div>
+<div class="tile"><div class="tile-v">84-76</div><div class="tile-l">Home record</div><div class="tile-s">home wins - road wins</div></div>
+<div class="tile"><div class="tile-v">23.0</div><div class="tile-l">Log shortfall</div><div class="tile-s">games missing from the official log</div></div>
+</div>
+<div class="banner warn"><div class="b-t">The record is 23 games short, and that is measured, not estimated</div><div class="b-b">Recomputing every team's record from the official game log gives 320 team-games against the standings' 366. The gap is uniform: 14 teams are short exactly 1 game, 16 exactly 2, and none is short 0 or 3 or more. Because the shortfall is the same for everyone, team-to-team comparisons on this page survive it. A full-season record does not, and the page says so rather than rounding it away. WHICH games are missing. The official day pages for 2026-10-24 and 2026-11-02 print no result rows (flag F1), so the missing fixtures cannot be named from an official source. They are therefore NOT named, NOT inferred from the standings residual, and NOT scored.</div></div>
+<h2 class="sec">Luck, team by team</h2><p class="secsub">Luck wins = actual wins minus Pythagorean expectation. Sorted by luck, because that is the interesting end. The exponent is an outside published convention, not an NBA.com figure (flag F51), and the 30 figures sum to -1.21 rather than 0 because the exponent does not force them to.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Team</th>
+<th>G</th>
+<th>W-L</th>
+<th>Point diff</th>
+<th>Avg margin</th>
+<th>Expected wins</th>
+<th>Luck wins</th>
+<th>Won by 3 or fewer</th>
+<th>Won by 15+</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>PHI</td>
+<td>11</td>
+<td>8-3</td>
+<td>-7</td>
+<td>-0.64</td>
+<td>5.28</td>
+<td><b>+2.72</b></td>
+<td>0 of 0</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>LAL</td>
+<td>12</td>
+<td>10-2</td>
+<td>+82</td>
+<td>6.83</td>
+<td>8.3</td>
+<td><b>+1.70</b></td>
+<td>0 of 0</td>
+<td>2</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>10</td>
+<td>6-4</td>
+<td>-9</td>
+<td>-0.9</td>
+<td>4.74</td>
+<td><b>+1.26</b></td>
+<td>1 of 1</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>PHX</td>
+<td>9</td>
+<td>4-5</td>
+<td>-54</td>
+<td>-6</td>
+<td>2.9</td>
+<td><b>+1.10</b></td>
+<td>1 of 1</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>CHA</td>
+<td>10</td>
+<td>3-7</td>
+<td>-104</td>
+<td>-10.4</td>
+<td>1.97</td>
+<td><b>+1.03</b></td>
+<td>0 of 0</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>ORL</td>
+<td>11</td>
+<td>5-6</td>
+<td>-44</td>
+<td>-4</td>
+<td>4.16</td>
+<td><b>+0.84</b></td>
+<td>0 of 0</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>10</td>
+<td>7-3</td>
+<td>+43</td>
+<td>4.3</td>
+<td>6.29</td>
+<td><b>+0.71</b></td>
+<td>1 of 2</td>
+<td>3</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>BOS</td>
+<td>11</td>
+<td>10-1</td>
+<td>+150</td>
+<td>13.64</td>
+<td>9.35</td>
+<td><b>+0.65</b></td>
+<td>1 of 1</td>
+<td>4</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>8</td>
+<td>5-3</td>
+<td>+14</td>
+<td>1.75</td>
+<td>4.44</td>
+<td><b>+0.56</b></td>
+<td>0 of 0</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>NOP</td>
+<td>11</td>
+<td>3-8</td>
+<td>-114</td>
+<td>-10.36</td>
+<td>2.51</td>
+<td><b>+0.49</b></td>
+<td>0 of 2</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td>9</td>
+<td>2-7</td>
+<td>-124</td>
+<td>-13.78</td>
+<td>1.54</td>
+<td><b>+0.46</b></td>
+<td>0 of 0</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>10</td>
+<td>7-3</td>
+<td>+52</td>
+<td>5.2</td>
+<td>6.56</td>
+<td><b>+0.44</b></td>
+<td>0 of 0</td>
+<td>2</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>POR</td>
+<td>11</td>
+<td>8-3</td>
+<td>+85</td>
+<td>7.73</td>
+<td>7.88</td>
+<td><b>+0.12</b></td>
+<td>0 of 0</td>
+<td>3</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>SAS</td>
+<td>11</td>
+<td>9-2</td>
+<td>+134</td>
+<td>12.18</td>
+<td>8.99</td>
+<td><b>+0.01</b></td>
+<td>1 of 1</td>
+<td>5</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>ATL</td>
+<td>11</td>
+<td>6-5</td>
+<td>+20</td>
+<td>1.82</td>
+<td>6.08</td>
+<td><b>-0.08</b></td>
+<td>2 of 2</td>
+<td>2</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>11</td>
+<td>8-3</td>
+<td>+91</td>
+<td>8.27</td>
+<td>8.1</td>
+<td><b>-0.10</b></td>
+<td>0 of 1</td>
+<td>3</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>MEM</td>
+<td>11</td>
+<td>8-3</td>
+<td>+98</td>
+<td>8.91</td>
+<td>8.22</td>
+<td><b>-0.22</b></td>
+<td>1 of 1</td>
+<td>5</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>12</td>
+<td>5-7</td>
+<td>-23</td>
+<td>-1.92</td>
+<td>5.29</td>
+<td><b>-0.29</b></td>
+<td>2 of 3</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>BKN</td>
+<td>9</td>
+<td>3-6</td>
+<td>-39</td>
+<td>-4.33</td>
+<td>3.33</td>
+<td><b>-0.33</b></td>
+<td>0 of 2</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>GSW</td>
+<td>11</td>
+<td>7-4</td>
+<td>+62</td>
+<td>5.64</td>
+<td>7.33</td>
+<td><b>-0.33</b></td>
+<td>0 of 1</td>
+<td>4</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>OKC</td>
+<td>12</td>
+<td>7-5</td>
+<td>+44</td>
+<td>3.67</td>
+<td>7.38</td>
+<td><b>-0.38</b></td>
+<td>0 of 1</td>
+<td>2</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>10</td>
+<td>3-7</td>
+<td>-51</td>
+<td>-5.1</td>
+<td>3.5</td>
+<td><b>-0.50</b></td>
+<td>1 of 2</td>
+<td>2</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>MIL</td>
+<td>11</td>
+<td>1-10</td>
+<td>-160</td>
+<td>-14.55</td>
+<td>1.57</td>
+<td><b>-0.57</b></td>
+<td>0 of 0</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>CLE</td>
+<td>11</td>
+<td>5-6</td>
+<td>+14</td>
+<td>1.27</td>
+<td>5.92</td>
+<td><b>-0.92</b></td>
+<td>1 of 2</td>
+<td>2</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>WAS</td>
+<td>11</td>
+<td>2-9</td>
+<td>-88</td>
+<td>-8</td>
+<td>3</td>
+<td><b>-1.00</b></td>
+<td>0 of 0</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>11</td>
+<td>8-3</td>
+<td>+149</td>
+<td>13.55</td>
+<td>9.25</td>
+<td><b>-1.25</b></td>
+<td>0 of 1</td>
+<td>6</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>SAC</td>
+<td>11</td>
+<td>0-11</td>
+<td>-168</td>
+<td>-15.27</td>
+<td>1.5</td>
+<td><b>-1.50</b></td>
+<td>0 of 0</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>UTA</td>
+<td>12</td>
+<td>1-11</td>
+<td>-123</td>
+<td>-10.25</td>
+<td>2.66</td>
+<td><b>-1.66</b></td>
+<td>1 of 1</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>TOR</td>
+<td>11</td>
+<td>4-7</td>
+<td>+10</td>
+<td>0.91</td>
+<td>5.81</td>
+<td><b>-1.81</b></td>
+<td>0 of 0</td>
+<td>2</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>NYK</td>
+<td>11</td>
+<td>5-6</td>
+<td>+60</td>
+<td>5.45</td>
+<td>7.36</td>
+<td><b>-2.36</b></td>
+<td>0 of 1</td>
+<td>2</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Expected wins uses the Pythagorean formula with exponent 13.91. A high luck figure means a team is winning by margins its point differential does not support; it is a description of the past, not a prediction of a correction.</p>
+<h2 class="sec">Live lines versus out-of-sample lines: two different questions</h2><p class="secsub">The site carries two line sets. They are both true and they may not be added together, so the difference is published as a number instead of being left for a reader to trip over.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Line set</th>
+<th>Games</th>
+<th>Mean |model &minus; reference|</th>
+<th>Median</th>
+<th>Largest</th>
+<th>What it may be used for</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Out-of-sample walk-forward</td>
+<td>60</td>
+<td>3.71</td>
+<td>3.4</td>
+<td>9.3</td>
+<td>the only window a skill claim may be made on: every prediction was fitted on earlier games</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">walk-forward rows</a></td>
+</tr>
+<tr>
+<td>Live horizon (unplayed)</td>
+<td>27</td>
+<td>3.76</td>
+<td>3.2</td>
+<td>10.5</td>
+<td>pricing the next three days only: no outcome exists yet, so it cannot support a performance claim</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">live horizon rows</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Anything about skill. The live horizon rows carry ratings that may have seen results the out-of-sample rows never saw, and none of the live games has been played yet, so there is no outcome to grade against. A larger gap on unplayed games is not an edge and is not published as one.</p>
+<p class="secsub">Live ratings now include the 11/13 finals, so a live row may carry a rating that has seen a result the out-of-sample rows never saw. That is why the two gaps above are close in size and still not comparable: one set is scored, the other is not. The reconciliation is generated by <code>scripts/s14x_crosscheck.py</code> and published as <code>site/data/s14x-crosscheck.json</code>.</p>
+<h2 class="sec">Why this matters for the strategies</h2><p class="secsub">A strategy's record is only meaningful against the number of games that were actually in doubt.</p>
+<p class="secsub">On this sample 13 of 160 games (8.1%) were decided by 3 or fewer points, so a hit rate is being earned mostly in games that were not coin flips. That is the opposite of the usual intuition and it cuts both ways: a strategy that wins close games is beating luck, and a strategy that wins blowouts is riding a team quality the ratings already know about. The site reports both, and the gates are what decide which one a result is.</p>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>
