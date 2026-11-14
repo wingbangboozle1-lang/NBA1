@@ -442,7 +442,12 @@ def p_gameflow():
   <dl class="kv">
     <dt>Within 5</dt><dd>Probability the final home margin lands between −5 and +5 — a one-possession game.</dd>
     <dt>20+</dt><dd>Probability either side wins by 20 or more. Relevant to the NBA Cup, where point differential is a tiebreaker.</dd>
-    <dt>P(OT)</dt><dd>Approximate probability the game is tied after regulation, from the density of the margin distribution at zero.</dd>
+    <dt>P(OT)</dt><dd>Approximate probability the game is tied after regulation, from the density of
+    the margin distribution at zero. <strong>This per-game approximation is materially miscalibrated on
+    this season</strong> &mdash; its mean is about 0.019 against a realised 0.050 (8 of 160 completed games
+    went to overtime; exact test p = 0.012, strategy-lab probability audit). The consolidated site's
+    Game Flow page prices its P(OT) column from the measured season rate (0.0500) instead; this archive
+    page keeps its own data cut and shows the approximation, labelled as such. See flag F64.</dd>
     <dt>Pace vs league</dt><dd>Expected possessions per 48 minutes minus the league average of 99.85.</dd>
   </dl>
 """
@@ -1119,7 +1124,7 @@ SCRIPTS = {
       {key:"p_home_win", label:"P(home)", fmt: v => pct(v) + bar(v*100, v>0.5?"good":"bad"), prov:"derived"},
       {key:"p_margin_within_5", label:"P(within 5)", fmt: v => pct(v), prov:"derived"},
       {key:"p_margin_20plus", label:"P(20+)", fmt: v => pct(v), prov:"derived"},
-      {key:"p_overtime_approx", label:"P(OT)", fmt: v => pct(v,2), prov:"derived"},
+      {key:"p_overtime_approx", label:"P(OT) approx", fmt: v => pct(v,2), prov:"derived"},
       {key:"src", label:"Src", src:true},
     ];
     setHTML("#tbl", table(cols, rs, {thin:true}));

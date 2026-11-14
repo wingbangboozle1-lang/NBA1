@@ -322,9 +322,59 @@
 </tr>
 <tr>
 <td>SG24</td>
+<td>Site</td>
+<td><b>Classify every table row without an NBA link as fact, derived or repository-internal</b></td>
+<td>207 of 5,940 HTML table rows carry no official NBA link (F66). Some state NBA facts, some are methodology or repository-internal rows where no NBA source applies. The blanket rule cannot be satisfied honestly without a classification.</td>
+<td>- (a) rows that state an NBA fact must link nba.com/official.nba.com <span class='fine'>(effort: one classification pass over the register; risk: low - nothing is deleted; unlocks: an honest strict count that can only go to zero for real)</span><br>- (b) rows derived from linked inputs carry a visible 'derived - inputs linked' mark <span class='fine'>(effort: builder change plus row labels; risk: low; unlocks: derived numbers stop looking like captured facts)</span><br>- (c) repository-internal rows carry a visible non-NBA label <span class='fine'>(effort: builder change; risk: low; unlocks: methodology rows can never masquerade as verified NBA facts)</span></td>
+<td>Adopt (a)+(b)+(c) as the written policy, then work the register in one pass; the strict counts stay published until then.</td>
+<td>Reviewer, row by row on the Flagged register - no count may be closed by inference.</td>
+<td class="src"><span class="na" title="source id https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_integration.py is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG25</td>
+<td>Model</td>
+<td><b>Calibrate a per-game overtime probability instead of a flat measured rate</b></td>
+<td>After F53 the P(OT) column prices the measured season rate (0.0500, 8/160) for every game. That is honest but coarse: a projected one-possession game and a projected 15-point spread show the same number.</td>
+<td>- (a) scale the margin-density approximation so its season mean matches the measured rate <span class='fine'>(effort: one fitted multiplier plus a disclosure; risk: medium - a fudge factor on a thin sample; unlocks: per-game P(OT) differentiation today)</span><br>- (b) wait for 200+ games and fit a logistic on |expected margin| <span class='fine'>(effort: data collection only; risk: low; unlocks: a defensible per-game estimator)</span><br>- (c) capture play-by-play and model overtime directly <span class='fine'>(effort: new data pipeline; risk: blocked by Q5; unlocks: real game-flow metrics)</span></td>
+<td>(a) as an interim, published next to the measured rate with both labelled; (b) as the real fix. Until then the flat rate is the honest price.</td>
+<td>Model owner, when the sample supports it.</td>
+<td class="src"><span class="na" title="source id https://www.nba.com/games?date=2026-10-20 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG26</td>
+<td>Data</td>
+<td><b>Split rest_days into gap_days and days_off in the shared builders (R-29-3)</b></td>
+<td>One field name carries two definitions: engine/validate.py counts calendar gap (back-to-back = 1), scripts/originate_horizon.py counts full days off (back-to-back = 0). Two published pages therefore disagree about the same team-night. Both definitions are correct; the shared name is the defect (F-S29-04).</td>
+<td>- (a) publish both columns with distinct names (gap_days, days_off) and keep b2b as a derived flag <span class='fine'>(effort: builder field rename plus page relabels; risk: low - no value changes; unlocks: both conventions readable; the same team-night can never disagree with itself)</span><br>- (b) standardise on one definition and relabel the other page <span class='fine'>(effort: smaller diff, loses information; risk: medium - one page silently changes meaning; unlocks: a single number per team-night)</span></td>
+<td>(a): nothing is lost, nothing is silently reinterpreted, and readers can see both conventions.</td>
+<td>Integration seat + engine owners; affects both builders' outputs.</td>
+<td class="src"><span class="na" title="source id https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/validate.py is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG27</td>
+<td>Decision</td>
+<td><b>Get a dated, licensed closing-price source - or write down that the site stays price-free (R-29-7)</b></td>
+<td>No NBA-operated source publishes a sportsbook price, so the market-edge gate (GG) cannot run and no strategy anywhere in the repository can be called a market edge (I-30-3, F3). 'Edge' remains model-vs-naive-reference.</td>
+<td>- (a) license a dated closing-price feed and log prices at tip <span class='fine'>(effort: vendor, budget, storage; risk: licensing terms; unlocks: the market-edge gate (GG) can run; strategies can be called market edges)</span><br>- (b) declare the site permanently price-free and drop market claims everywhere <span class='fine'>(effort: one written decision; risk: none; unlocks: honest scope forever; no gate GG by construction)</span><br>- (c) manual price logging by a human <span class='fine'>(effort: ongoing manual work; risk: violates the no-manual-input rule unless someone owns it; unlocks: slow price history)</span></td>
+<td>Decide explicitly; until then keep every edge claim scoped to model-vs-reference, as the site already does.</td>
+<td>Project owner (human) - this is a licensing and budget decision, not a modelling one.</td>
+<td class="src"><span class="na" title="source id https://official.nba.com/nba-injury-report-2026-27-season/ is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG28</td>
+<td>CI</td>
+<td><b>Stop the probe workflow from pushing record commits onto open session branches</b></td>
+<td>probe-official.yml commits its record to arena/** branches and main after each run, which made every open PR CONFLICTING today and churned Pages builds (F68). The pages.yml concurrency fix stopped runs cancelling each other; the record commits still dirty branches.</td>
+<td>- (a) probe commits carry [skip ci] and target main only <span class='fine'>(effort: workflow one-liner; risk: low; unlocks: session branches stop getting dirty probe commits)</span><br>- (b) probe writes an Actions artifact; a scheduled job commits the record to main <span class='fine'>(effort: small workflow restructure; risk: low; unlocks: the same, with cleaner separation)</span></td>
+<td>(a) or (b); the probe record's job is to evidence reachability, not to ride every session branch.</td>
+<td>Workflow owner.</td>
+<td class="src"><span class="na" title="source id https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/probe-official.yml is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG29</td>
 <td>Process</td>
 <td><b>Promote refreshed captures into published picks only through the gate suite, never by hand or silently</b></td>
-<td>The scheduled refresh captures official data into capture-only branches/PRs, but promotion into published picks is a separate manual step; a refresh can therefore sit unpromoted (stale site) or be promoted without the gates having run on it (unchecked site). Requested by the independent audit (COORDINATION section 33 of the carried record, R-A6).</td>
+<td>The scheduled refresh captures official data into capture-only branches/PRs, but promotion into published picks is a separate manual step; a refresh can therefore sit unpromoted (stale site) or be promoted without the gates having run on it (unchecked site). Requested by the independent audit (COORDINATION R-A6).</td>
 <td>- A. A promotion workflow: merge a capture PR only when verify_all + check_site + verify_dashboard + render_check pass on the merged tree, then regenerate picks in the same run; otherwise keep the prior slate with an explicit stale marker. <span class='fine'>(effort: Medium - the gates already run in CI; wiring them to the capture PR is mostly configuration; risk: Low - gates can only block, never invent; unlocks: Refreshed data reaches the site on a measured path; staleness becomes visible instead of silent)</span><br>- B. Manual promotion with a required checklist recorded in COORDINATION.md. <span class='fine'>(effort: Low; risk: Medium - depends on a human remembering; today's staleness flags came from exactly that; unlocks: Nothing new)</span></td>
 <td>A.</td>
 <td>A or B, and who signs the promotion record.</td>
@@ -430,6 +480,8 @@
       <a href="../../desk.html">Integration Desk</a> &middot;
       <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
       <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../origination/index.html">Origination build &mdash; 22 lines for 14&ndash;16 Nov, 101-game walk-forward</a> &middot;
+      <a href="../../strategy-lab/index.html">Strategy Lab &mdash; season-wide audit on 160 games</a> &middot;
       <a href="../../schedule-verified.html">verified schedule</a> &middot;
       <a href="../../verification.html">live verification</a>.</p>
     </footer>

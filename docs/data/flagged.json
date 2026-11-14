@@ -1,6 +1,6 @@
 {
   "title": "Flagged for Review",
-  "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link. Items F54 and F55 were added on 2026-11-14 (UTC) by the independent re-read of the 01:45 PM ET edition (COORDINATION section 35): the two official tip-time formats and the 15-minute game-day publication cadence.",
+  "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link.",
   "items": [
     {
       "id": "F1",
@@ -329,7 +329,7 @@
       "id": "F34",
       "severity": "Medium",
       "title": "The repository's gate checks structure, not values",
-      "detail": "scripts/verify_dashboard.py now reports four separate counts and only fails on an unmarked row: on the merged tree at 2026-11-14 20:05 UTC it prints 20 pages, 1163 table rows, 1138 with an allowed official source link, 25 no-source marks with an explanatory title, 0 title-only pointers (the three approved context URLs are now rendered as clickable links, R26-2) and 0 unmarked rows. The check remains structural: it validates hosts, markers and internal links; it does not fetch any NBA page or compare a published value with its source (scripts/source_check.py is the row-value spot-check). The original finding stands: a link is not a value check.",
+      "detail": "The dashboard gate is structural, not a value check: scripts/verify_dashboard.py counts four categories separately — rows with an allowed official source link, explicit no-source marks with an explanatory title, marks whose title carries an approved official URL (rendered as a clickable context link since 2026-11-14), and unmarked rows — and fails only on the last category. It never fetches an NBA page and never compares a published value with its source; scripts/source_check.py is the row-value spot-check, and both were run on the merged tree before every merge (COORDINATION section 35). The original finding stands: a link is not a value check.",
       "affected": "Trust in 'VERIFY OK' and in every 'verified' label on the site",
       "source": null,
       "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_all.py",
@@ -359,7 +359,7 @@
       "id": "F37",
       "severity": "Medium",
       "title": "Rows without an official NBA.com link on five earlier pages",
-      "detail": "Counted 2026-11-14 UTC with a strict test (a row needs a link to nba.com or official.nba.com). Questions: 6 rows, each marked 'no official source exists'. Repo review: 7 rows. Sources: 1 row. Suggestions: 2 rows. Flagged for Review: 2 rows (F34, F35), which link to repository files because no official source applies to them. The new Source Check page has 4 rows that are internal counts and are marked as such. scripts/verify_all.py reports these as linked because it also accepts GitHub links; the strict count is the one this register uses. UPDATE 2026-11-14 20:05 UTC (integration seat, section 35): whole-site counts on the merged tree are 20 pages, 1163 rows, 1138 allowed links, 25 explanatory no-source marks, 0 title-only pointers, 0 unmarked gaps. The per-page figures above were the state at first count on 2026-11-14 and are kept as the historical record; current counts are printed by scripts/verify_dashboard.py.",
+      "detail": "Counted 2026-11-14 UTC with a strict test (a row needs a link to nba.com or official.nba.com). Questions: 6 rows, each marked 'no official source exists'. Repo review: 7 rows. Sources: 1 row. Suggestions: 2 rows. Flagged for Review: 2 rows (F34, F35), which link to repository files because no official source applies to them. The new Source Check page has 4 rows that are internal counts and are marked as such. scripts/verify_all.py reports these as linked because it also accepts GitHub links; the strict count is the one this register uses. UPDATE 2026-11-14 (COORDINATION section 35): the historical per-page figures above stand as first-count; current whole-site counts are printed by scripts/verify_dashboard.py on every run and are never inlined here again, so this item cannot go stale the way the first count did.",
       "affected": "Questions, Repo review, Sources, Suggestions and Flagged pages",
       "source": null,
       "source_url": "https://www.nba.com/games",
@@ -524,24 +524,114 @@
       "suggested_action": "SG23: `cancel-in-progress: false` for the production group, or batch board-record commits with the merge that they describe instead of pushing them separately. Meanwhile: state a deploy claim against the run for the CURRENT `main` head, never a superseded sha."
     },
     {
-      "id": "F54",
-      "severity": "Low",
-      "title": "Two official formats for one fact: the injury PDF prints 07:00 (ET), the schedule prints 7:00 PM ET",
-      "detail": "The injury-report PDF prints tip times as 07:00 (ET); the NBA.com schedule/day pages print 7:00 PM ET. Both are official and both are correct; a string comparison of the two disagrees even when the times agree. All 27 horizon tip times matched after normalising the two formats in the independent 19:20 UTC re-read (session arena/f7f6c46e-nba1): verify/f7f6c46e/horizon_compare.json, tip_mismatch=0.",
-      "affected": "Any automated tip-time consistency check between the injury report and the schedule",
-      "source": "S10_2026-11-14-0145PM",
-      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_45PM.pdf",
-      "suggested_action": "Normalise to one internal representation (minutes since midnight ET) at ingest; keep the printed string of both sources on the row for manual review."
+      "id": "F58",
+      "severity": "Medium",
+      "title": "Injury page cites the 11/13 07:30 PM ET edition as its source while newer 11/14 editions exist (X01-F1)",
+      "detail": "The injury-edition currency audit (verify/2026-11-14-injury-currency/) confirmed all 26 site rows match the official 11/14 04:30 AM ET edition, but the page's source label still cites the 11/13 07:30 PM ET edition as newest. A later 01:30 PM ET edition was captured at 18:40Z (verify/2026-11-14-cc5a6652/) and changes 33 status lines; nothing has been re-priced from it (see the decision P1/P2 on the Decisions page). Published as a source-label defect, not a value error: no row was altered.",
+      "affected": "Injuries page source label; any line priced from an older edition",
+      "source": "Injury-Report_2026-11-14_04_30AM.pdf",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf",
+      "suggested_action": "Relabel the page to the edition actually used and follow decision P1/P2 before re-pricing."
     },
     {
-      "id": "F55",
+      "id": "F59",
+      "severity": "Low",
+      "title": "Page-break rows in the official PDF print no team or matchup (X01-F2)",
+      "detail": "In the 11/14 04:30 AM ET edition, the Traore and Nolan rows sit at a page break with a blank team/matchup cell. Team attribution must not be inferred from position in the file; the earlier Traore attribution to Brooklyn was verified separately against the official roster page and is recorded as an attribution, not a printed value.",
+      "affected": "Injury table rows for players whose page-break row loses its team cell",
+      "source": "Injury-Report_2026-11-14_04_30AM.pdf",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf",
+      "suggested_action": "Injury parser: never assign team or matchup to continuation rows without printed values; verify attributions against official roster pages."
+    },
+    {
+      "id": "F60",
+      "severity": "Low",
+      "title": "Eleven continuation rows in the official injury PDF print no date (X01-F3)",
+      "detail": "Continuation rows carry the date of the block above them by position only; the cell is blank as published. Rows are stored with the block date and the blank cell is preserved verbatim in the transcriptions.",
+      "affected": "Injury report transcription for continuation rows",
+      "source": "Injury-Report_2026-11-14_04_30AM.pdf",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf",
+      "suggested_action": "Keep the verbatim blank and the block-date inference clearly labelled in data; no change needed to values."
+    },
+    {
+      "id": "F61",
+      "severity": "Low",
+      "title": "Game time printed as 07:00 (ET) in the injury report and 7:00 PM ET on the schedule (X01-F4)",
+      "detail": "The official injury report prints game times as 24-hour-with-zone (07:00 (ET)); the official schedule prints 12-hour (7:00 PM ET). One DET@MIA row differs only in format, not in instant. Both formats are preserved as published where captured.",
+      "affected": "Cross-page joins on game time",
+      "source": "Injury-Report_2026-11-14_04_30AM.pdf",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf",
+      "suggested_action": "Normalise on game id when joining; display each source's own format with its source link."
+    },
+    {
+      "id": "F62",
       "severity": "Medium",
-      "title": "Game-day injury editions publish every 15 minutes, so any 'newest edition' label is point-in-time",
-      "detail": "The official index (read 2026-11-14 19:15 UTC by session arena/f7f6c46e-nba1) lists 56 editions for 11/14 at 15-minute intervals, running through 01:45 PM ET; the index page states that reports are updated continually throughout the day, and the league rule requires game-day reports between 11 a.m. and 1 p.m. local (8-10 a.m. for early tips). A page that says 'newest edition' without a capture timestamp is stale within 15 minutes on game day. Independent second read: the 01:45 PM ET edition (Injury-Report_2026-11-14_01_45PM.pdf) confirms the four late filings and four status changes already published as F47/A16 from the 01:30 PM capture.",
-      "affected": "Every page that names an injury edition: Injuries, Game-Day Read, Props, Prop Variance, Lines, Picks, Executive Summary",
-      "source": "S5",
+      "title": "11/14 game-day injury editions arrive in stages; the site snapshot is behind the newest (X01-F5, time-sensitive)",
+      "detail": "Reports publish on the official policy schedule (day-before 5 p.m. local, game-day 11 a.m.-1 p.m. local). At the 04:15 AM ET edition five of the ten teams playing 11/14 had not filed; by the 01:30 PM ET edition four of those five had filed and 33 status lines changed (verify/2026-11-14-cc5a6652/). A 05:00 PM ET game-day edition is expected around 22:00 UTC. This entry is a standing reminder that an injury snapshot is a dated capture, never a forecast.",
+      "affected": "Every 11/14 line and pick priced from a pre-game-day edition",
+      "source": "Official injury-report policy index",
       "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
-      "suggested_action": "Print the captured-at timestamp next to every edition label, archive every edition the refresh job sees, and treat 'newest' as 'newest as of <time>' (SG21 is the reader-facing version of this)."
+      "suggested_action": "Capture each edition as it publishes, diff against the priced edition, and route any line change through decision P1/P2 rather than silent re-pricing."
+    },
+    {
+      "id": "F63",
+      "severity": "Medium",
+      "title": "Root banner and executive summary disagreed about S1's luck-gate result (fixed in the 2026-11-14 19:13Z pass)",
+      "detail": "The banner said the best strategy was 'inside what luck alone produces' while the executive said its record is outside luck and G4 passes. The registered G4 test is the Wilson 95% lower bound above the 52.38% break-even (engine/strategies.py GATES): S1 at 23-9 has Wilson LB 0.546 and exact binomial p = 0.020, so G4 passes as registered. The banner now says exactly that, and names the caveats: the p-value is uncorrected for the number of strategies tried, this gate set registers no multiplicity gate (open Q21), G2 calibration and G5 stability fail, and G7 availability cannot run - so the strategy stays unfunded at a quarter unit. Kept on the register as a resolved contradiction, not deleted.",
+      "affected": "index.html banner; executive summary",
+      "source": null,
+      "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/strategies.py",
+      "suggested_action": "Reviewer: confirm the reconciled wording matches the registered tests; decide Q21 (multiplicity gate)."
+    },
+    {
+      "id": "F64",
+      "severity": "Medium",
+      "title": "Game-flow P(OT) column repriced from the measured season rate (R-29-4)",
+      "detail": "The published overtime column used the model's per-game normal approximation, which averages about 0.019 on this season against a realised 0.050 (8 of 160 completed games went to overtime; strategy-lab probability audit, exact test p = 0.012). The site's Game Flow column now prices the measured rate 0.0500 read at build time from data/derived/ot_rate.json (reproduced by scripts/measure_ot_rate.py). The archive build (docs/b) keeps its own data cut and shows the approximation, relabelled 'P(OT) approx' with a disclosure. No other model output changed.",
+      "affected": "site/pages/gameflow.html P(OT) column; docs/b Game Flow disclosure",
+      "source": null,
+      "source_url": "https://www.nba.com/games?date=2026-10-20",
+      "suggested_action": "Model owner: decide whether to calibrate a per-game estimator (suggestion SG25); until then the constant measured rate is the honest price."
+    },
+    {
+      "id": "F65",
+      "severity": "Medium",
+      "title": "Multiple site builds report different windows and models; dated entry links added (QA finding 2)",
+      "detail": "The root dashboard (27-game 14-17 Nov horizon, 60-game out-of-sample window), the Origination build (22 lines 14-16 Nov, 101-game walk-forward), the Command Center (22-game horizon) and strategy-lab (season-wide 160 games) are separately dated research products. Their metrics must never be merged into one result. The landing navigation now carries dated entry links for origination/ and strategy-lab/ alongside the existing build links; labels summarise each window.",
+      "affected": "Landing page navigation; any reader comparing numbers across builds",
+      "source": null,
+      "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/README.md",
+      "suggested_action": "Reviewer: confirm the labels make the window and model version of each build obvious at the entry point."
+    },
+    {
+      "id": "F66",
+      "severity": "Medium",
+      "title": "207 of 5,940 HTML table rows carry no official NBA link; classification policy needed (QA finding 3)",
+      "detail": "The repository-wide integration checker counts every HTML table data row. Its 207 rows without an NBA link include genuine methodology, repository-review and suggestion rows where no NBA source applies, mixed with rows that may state NBA facts without a link. The blanket row-source standard needs an explicit classification: NBA fact (must link nba.com/official.nba.com), derived from linked rows (mark the inputs), or repository-internal (visible non-NBA label). Nothing is inferred to close a count.",
+      "affected": "Repo-review, sources, suggestions, questions and decision pages across builds",
+      "source": null,
+      "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_integration.py",
+      "suggested_action": "Reviewer: adopt suggestion SG24 (row-classification policy) and work the register row by row."
+    },
+    {
+      "id": "F67",
+      "severity": "Low",
+      "title": "Three leaked bare 'None' strings replaced with explicit text (QA finding 4, fixed in the 19:13Z pass)",
+      "detail": "slate.html carried two bare 'None' badges where the intended meaning was 'no injury designations exist because the reports are not due yet', and docs/pages/strategies.html carried a bare 'None' where the meaning was 'no reward is payable because no strategy is validated'. The strings now read 'None - day-before reports not yet due' and 'None payable'. No value was imputed; the underlying facts are unchanged.",
+      "affected": "slate.html; docs/pages/strategies.html",
+      "source": null,
+      "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/build_slate_refresh.py",
+      "suggested_action": "None; kept for the record. Builder templates fixed at source."
+    },
+    {
+      "id": "F68",
+      "severity": "Medium",
+      "title": "The probe workflow's own commits to session branches make every PR conflict and churn Pages builds (I-30-2)",
+      "detail": "probe-official.yml commits data/raw/probe_official.json and verification.html to arena/** branches and to main after each run. That is why every open PR was CONFLICTING today and why several Pages builds were cancelled mid-run. The pages.yml concurrency group is now isolated per PR number / per ref (ported from PR #75/#65 with credit), which stops runs cancelling each other; the probe-record churn itself remains. Each merge today kept the newest probe record + regenerated verification.html as a consistent pair.",
+      "affected": "CI on every push; PR mergeability; Pages build churn",
+      "source": null,
+      "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/probe-official.yml",
+      "suggested_action": "Workflow owner: make the probe commit [skip ci] on session branches too, or push probe records only to main; see suggestion SG28."
     }
   ]
 }
