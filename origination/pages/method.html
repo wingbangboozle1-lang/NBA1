@@ -82,6 +82,22 @@
   </ol>
 </section>
 <section class="card">
+  <h3>Parameter register (value and provenance)</h3>
+  <p>Every number the model is built on, with where it comes from. Rows whose value is a project assumption
+  are marked as such &mdash; no assumption is presented as a measured quantity.</p>
+  <div class="tablewrap"><table class="tbl" data-sortable><thead><tr><th>Parameter</th><th>Value</th><th>Provenance</th><th>Source</th></tr></thead><tbody>
+  <tr><td>Team ratings (margin)</td><td>Simple Rating System: average margin + average opponent rating, solved by iteration</td><td>Computed from official final scores (151 verified games)</td><td><a class="src" href="https://www.nba.com/schedule" target="_blank" rel="noopener">nba.com/schedule</a></td></tr>
+  <tr><td>Team ratings (total)</td><td>Opponent-adjusted points scored / allowed, solved by iteration</td><td>Computed from official final scores</td><td><a class="src" href="https://www.nba.com/schedule" target="_blank" rel="noopener">nba.com/schedule</a></td></tr>
+  <tr><td>Home-court advantage</td><td>2.21 points</td><td>Estimated from the same official results (0 for neutral-site games)</td><td><a class="src" href="https://www.nba.com/schedule" target="_blank" rel="noopener">nba.com/schedule</a></td></tr>
+  <tr><td>Rating shrinkage (margin)</td><td>4 pseudo-games toward zero</td><td>Project assumption &mdash; no official source exists for a shrinkage prior</td><td><a class="src" href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/integration/REPO_REVIEW.md" target="_blank" rel="noopener">repo review</a></td></tr>
+  <tr><td>Rating shrinkage (total)</td><td>6 pseudo-games toward the league mean</td><td>Project assumption &mdash; no official source exists for a shrinkage prior</td><td><a class="src" href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/integration/REPO_REVIEW.md" target="_blank" rel="noopener">repo review</a></td></tr>
+  <tr><td>Residual SD, margin</td><td>15.87 points</td><td>Measured out-of-sample on the official game log</td><td><a class="src" href="https://www.nba.com/schedule" target="_blank" rel="noopener">nba.com/schedule</a></td></tr>
+  <tr><td>Residual SD, total</td><td>19.27 points</td><td>Measured out-of-sample on the official game log</td><td><a class="src" href="https://www.nba.com/schedule" target="_blank" rel="noopener">nba.com/schedule</a></td></tr>
+  <tr><td>Normal CDF pricing</td><td>probability = P(margin &gt; 0) around the point prediction</td><td>Model choice &mdash; standard construction, stated openly</td><td><a class="src" href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/integration/REPO_REVIEW.md" target="_blank" rel="noopener">repo review</a></td></tr>
+  <tr><td>Odds margin (vig)</td><td>0.00</td><td>Deliberate choice: lines are originated, not booked</td><td><a class="src" href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/integration/REPO_REVIEW.md" target="_blank" rel="noopener">repo review</a></td></tr>
+  </tbody></table></div>
+</section>
+<section class="card">
   <h3>How a strategy can beat the line</h3>
   <p>A bettor using the same information as the line cannot beat it, by construction. So each strategy is required
   to add one input the line does not use &mdash; rest days, back-to-back status or schedule density, all read from
