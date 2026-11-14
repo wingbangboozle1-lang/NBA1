@@ -5,7 +5,8 @@ Runs, in order, and fails on the first error:
   1. scripts/build_site.py        — docs/ snapshot build (source/link validation)
   2. scripts/build_edge_site.py   — Edge Lab pages + originated-lines audit record
   3. scripts/check_site.py        — root pages: local links + official source per table row
-  4. Data audits (this file):
+  4. The unified dashboard build + its source/link audit
+  5. Data audits (this file):
        - every slate/game row has an allowed official source URL
        - every injury row carries the official PDF source; team/matchup blanking rules hold
        - every leader row has an allowed official source URL
@@ -55,6 +56,8 @@ run("build_site.py")
 run("build_edge_site.py")
 run("check_site.py")
 run("verify_schedule_c.py")  # Build C: row-by-row schedule check + schedule-verified.html
+run("build_dashboard.py")    # Build D: regenerate the unified site (index.html + site/**)
+run("verify_dashboard.py")   # Build D: every row source-linked, every internal link resolves
 
 # 4a: slate sources
 slate = load("slate_full")

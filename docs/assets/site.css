@@ -237,3 +237,9 @@ footer.bot a { color: var(--txt-dim); }
 
 .scroll-x { overflow-x: auto; }
 .chart { width: 100%; }
+
+/* -- sibling-build switch in the header ------------------------------------------------ */
+nav.main .navsep{display:inline-block;width:1px;height:16px;background:rgba(255,255,255,.22);
+  margin:0 6px;vertical-align:-3px}
+nav.main a.sib{opacity:.82;font-size:12.5px;letter-spacing:.02em}
+nav.main a.sib:hover{opacity:1;text-decoration:underline}

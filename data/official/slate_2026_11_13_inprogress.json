@@ -1,0 +1,72 @@
+{
+ "captured_at_utc": "2026-11-14T00:42:00Z",
+ "status_at_capture": "IN PROGRESS - the 2026-11-13 page showed quarter-by-quarter scores, not finals.",
+ "source_url": "https://www.nba.com/games?date=2026-11-13",
+ "game_id_source": "https://official.nba.com/nba-injury-report-2026-27-season/ (the 11/13/26 07:30 PM edition prints the matchup and tip time for all nine 2026-11-13 games; the first six game_ids were read from the nba.com Games & Scores page).",
+ "note": "Listed so the rest/back-to-back layer is complete for the 2026-11-14 slate. No score is recorded because none had been published at capture time. game_id is null for the three late games: the value was not visible in the captured page source and is NOT guessed.",
+ "matchups": [
+  {
+   "away": "NYK",
+   "home": "IND",
+   "game_id": "0022600034",
+   "tip_et": "07:00 (ET)",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "away": "MIL",
+   "home": "ORL",
+   "game_id": "0022600035",
+   "tip_et": "07:00 (ET)",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "away": "CLE",
+   "home": "MIA",
+   "game_id": "0022600036",
+   "tip_et": "07:30 (ET)",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "away": "ATL",
+   "home": "CHI",
+   "game_id": "0022600037",
+   "tip_et": "08:00 (ET)",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "away": "MEM",
+   "home": "NOP",
+   "game_id": "0022600038",
+   "tip_et": "08:00 (ET)",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "away": "UTA",
+   "home": "HOU",
+   "game_id": "0022600039",
+   "tip_et": "08:30 (ET)",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "away": "GSW",
+   "home": "SAS",
+   "game_id": null,
+   "tip_et": "09:30 (ET)",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "away": "POR",
+   "home": "SAC",
+   "game_id": null,
+   "tip_et": "10:00 (ET)",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "away": "OKC",
+   "home": "LAC",
+   "game_id": null,
+   "tip_et": "10:30 (ET)",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  }
+ ]
+}
