@@ -32,11 +32,11 @@ What remains is the tail below.
 | # | Task | Status | File scope (exclusive) |
 | --- | --- | --- | --- |
 | E01 | Board sync + claim + ground-rule-5 handoff (this block) | done (pushed before other edits) | `COORDINATION.md` (this block + §20 at end) |
-| E02 | Take over PR #45: fix two origination pages rendering no table; `verify_integration.py` allowlist + I6 scoping | in progress | `engine_v2/build_site.py`, `origination/pages/method.html`, `origination/pages/props.html`, `scripts/verify_integration.py` |
-| E03 | Take over PR #53: `FINAL_AUDIT.md` integration audit doc | unclaimed → this session | `FINAL_AUDIT.md` |
-| E04 | Fresh official capture + settlement of 11/13 finals + horizon refresh (11/14–11/17) via the hardened refresh path (`refresh-data.yml` dispatch) | unclaimed → this session | `data/raw/**`, `data/derived/**`, builder-emitted pages under `site/**`, `picks.html`, `slate.html` |
-| E05 | Full-tree verification (verify_all, verify_integration, render_check, check_links, JSON validity, live smoke test) | unclaimed → this session | verification outputs recorded in `COORDINATION.md` §20 |
-| E06 | PR → `main`, merge without approval, Pages deploy confirmation, record; close superseded PRs #37/#42/#45/#53 | unclaimed → this session | whole repo (integration seat) |
+| E02 | Take over PR #45: fix two origination pages rendering no table; `verify_integration.py` allowlist + I6 scoping | done | `engine_v2/build_site.py`, `origination/pages/method.html`, `origination/pages/props.html`, `scripts/verify_integration.py` |
+| E03 | Take over PR #53: `FINAL_AUDIT.md` integration audit doc | done | `FINAL_AUDIT.md` |
+| E04 | Fresh official capture + settlement of 11/13 finals + horizon refresh (11/14–11/17) via the hardened refresh path (`refresh-data.yml` dispatch) | done | `data/raw/**`, `data/derived/**`, builder-emitted pages under `site/**`, `picks.html`, `slate.html` |
+| E05 | Full-tree verification (verify_all, verify_integration, render_check, check_links, JSON validity, live smoke test) | done (live smoke test lands with E06 deploy) | verification outputs recorded in `COORDINATION.md` §20 |
+| E06 | PR → `main`, merge without approval, Pages deploy confirmation, record; close superseded PRs #37/#42/#45/#53 | in progress | whole repo (integration seat) |
 
 **Do not touch while I am working:** no other session is currently active (all
 claims >60 min idle). If a new session appears, claim a row here and keep to it.
@@ -1675,3 +1675,54 @@ ACTIVE CLAIM block at the top of this file; this section holds the log.
 | #53 | Re-apply `FINAL_AUDIT.md` (E03), then close PR as superseded with credit to `arena/159ed109-nba1` | audit content preserved |
 | #37 | Coordination-record updates reviewed; any still-factual rows folded into this record; close as superseded | `arena/2509073f-nba1` |
 | #42 | Final diff is probe churn only; superseded by `main`'s newer probe; close as superseded | `arena/2edb85af-nba1` |
+
+### 20.2 Completion record (2026-11-14T10:45Z, UTC)
+
+| Task | Result |
+| --- | --- |
+| E01 | Claim + ground-rule-5 handoff written and pushed before any other edit (`9869ade`). Staleness evidence: PRs #37/#42/#45/#53 last commits 01:13–02:25Z vs claim time 09:40Z. |
+| E02 | PR #45's content taken over and improved (`e506c65`, credit `arena/e32856d8-nba1`): `engine_v2/build_site.py` now generates the *Parameter register* and *Required input* tables that existed only as manual page edits (a rebuild used to delete them — the FINAL_AUDIT's "rebuild fidelity caveat"), plus PR #45's *Declared constants* and *What a prop line needs* sections. Every value reads from `data/derived/engine_v2.json` (captured_games=151, hca=2.2067→2.21, sigma 15.87/19.27), nothing hardcoded. Rebuild diff on those pages: zero. |
+| E03 | `FINAL_AUDIT.md` taken over (`5070663`, credit `arena/159ed109-nba1`) with a dated postscript recording that its rebuild-fidelity caveat is resolved and listing what stayed open. |
+| E04 | 11/13 finals captured, verified twice, promoted, and used to settle every published 11/13 paper pick; fetch window gap closed; nav/`None` irregularities fixed (see 20.3). |
+| E05 | Full-tree gates all green on the final tree (see 20.4). |
+
+#### 20.3 Irregularities found, and their state
+
+| # | Irregularity | State |
+| --- | --- | --- |
+| I-E01 | The refresh fetch loop only visited dates present in `games_completed.json` ∪ `schedule_upcoming.json` ∪ {today}; a slate that went final overnight (11/13) fell between the graded window (11/06–11/12) and the horizon (11/14+) and was never re-read after tip-off. | **Fixed** (`1255b40`): `engine/fetch_official.py` also captures yesterday (UTC), generically. |
+| I-E02 | Root switcher said "four implementations", README said "five", README matrix had six rows, and the `origination/` build was missing from the root switcher/footer; Command Center prose said 22 games 14–16 Nov while its `command-center/data/meta.json` says 27 games 14–17. | **Fixed** (`e8b708c`): both surfaces now say eight and enumerate the same eight builds; Command Center horizon corrected to its metadata value; `origination/` registered in switcher + footer + README matrix. Value read from `meta.json`, not inferred. |
+| I-E03 | `slate.html` rendered bare Python-style "None" badges for 11/16–11/17 injury editions where 11/15 said "None — day-before reports not yet due" (FINAL_AUDIT literal-None findings). | **Fixed** (`72fe88f`): consistent wording. `docs/pages/strategies.html` "Reward payable: None" is deliberate English — left unchanged (scan false positive). |
+| I-E04 | Committed `origination/pages/method.html` and `props.html` contained tables no builder generated — any rebuild silently deleted 27 lines (discovered while taking over PR #45; matches FINAL_AUDIT's caveat). No branch contained the generating code. | **Fixed** (`e506c65`): builder generates the tables from engine state; content parity checked cell-by-cell against the previously committed HTML. |
+| I-E05 | The desk's `settle.py` kept the 11/13 in-progress rows in `cannot_settle` with "re-fetch after the games end and re-run" — the re-fetch path did not exist (I-E01). | **Fixed** with E04: promoted finals + `settled_late` ledger + rendered card on `desk-validation.html`. |
+| I-E06 | `workflow_dispatch` on `refresh-data.yml` returns HTTP 403 on session tokens (documented). | **Works via the documented push-fallback**; every refresh need was met by a path-filtered push. Left as is. |
+
+#### 20.4 E05 verification performed (all against the final tree)
+
+| Check | Result |
+| --- | --- |
+| `python3 scripts/verify_all.py` | VERIFY OK (builders + checker + data audits; 690 dashboard rows, 684 explicitly sourced, rest marked not-published) |
+| `python3 scripts/verify_integration.py` | PASSED — 202 JSON valid, 112 HTML, 10,5xx links, 4603/4775 rows official-sourced, **0 errors**, 42 warnings (published on the Flagged for Review page; down from 44 after I-E03) |
+| `python3 scripts/check_links.py` | PASS (0 broken internal links, 0 unapproved hosts) |
+| `node scripts/render_check.mjs` | 112 pages, 6841 content blocks, 6119 rendered table rows, **0 problems** |
+| `git diff --check` | clean |
+| Builder determinism | every builder re-run leaves a zero diff (`git status` empty after verify_all) |
+| 11/13 finals promotion | 9/9 games, promoted only after **two independent reads** of `https://www.nba.com/games?date=2026-11-13` agreed on every field (runs 43582803797 + 43583126263, embedded-JSON parse, 0 unparsed, page sha256s recorded in `data/audit/finals_2026_11_13_verification.json`) |
+| Settlement arithmetic | all 9 rows hand-recomputed against the finals (side 5-2, spread 3-4, 2 PASS); PASS never counted win/loss |
+
+#### 20.5 Sources used (official)
+
+| Input | Source |
+| --- | --- |
+| 11/13 finals (9 games) | https://www.nba.com/games?date=2026-11-13 (read twice, 2026-11-14T09:55:30Z and 10:00:01Z; page sha256 in the evidence file) |
+| Per-game provenance | https://www.nba.com/game/<away>-vs-<home>-<id> links carried on every settled row |
+| Injury editions | https://official.nba.com/nba-injury-report-2026-27-season/ + ak-static.cms.nba.com PDFs (captured by the refresh workflow; newest edition recorded per page) |
+| Command Center horizon value | `command-center/data/meta.json` (committed metadata, generated from nba.com/schedule captures) |
+| Everything else | unchanged committed captures re-verified by the gate suite; no new value entered the tree without an official URL |
+
+#### 20.6 Open items handed on (do not block; published as flags)
+
+1. **Ratings/records window still ends 11/12** on the horizon pages (F-C02): the 11/13 finals are now promoted (`data/raw/games_completed_2026-11-13.json`) and can feed the next ratings refresh; the horizon lines keep their stale-record flags until a model re-run is deliberately taken. Choice between the two published postures (abstention vs gated picks) remains a reviewer decision (suggestions.html item 9).
+2. **42 verify_integration warnings** (161 broad-scan row-triage items): published on the Flagged page; they must never be silenced by inferring values.
+3. **`docs/pages/strategies.html` "Reward payable: None"** — deliberate English; scan false positive.
+4. **PRs #37/#42/#45/#53 closed as superseded** with credit (content taken over per 20.1/20.2); PR #11-era collisions and F-C06 model outlier (CHI@MIN) remain flagged, untouched.
