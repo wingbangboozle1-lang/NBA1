@@ -16,6 +16,7 @@ Run:  python3 scripts/build_dashboard.py
 import json
 import os
 import shutil
+from urllib.parse import urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "docs", "data")
@@ -191,6 +192,8 @@ def page(title, sub, body, depth=1, extra_head=""):
       <a href="%(repo)sdesk.html">Integration Desk</a> &middot;
       <a href="%(repo)sdocs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
       <a href="%(repo)sdocs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="%(repo)sorigination/index.html">Origination build &mdash; 22 lines for 14&ndash;16 Nov, 101-game walk-forward</a> &middot;
+      <a href="%(repo)sstrategy-lab/index.html">Strategy Lab &mdash; season-wide audit on 160 games</a> &middot;
       <a href="%(repo)sschedule-verified.html">verified schedule</a> &middot;
       <a href="%(repo)sverification.html">live verification</a>.</p>
     </footer>
@@ -254,6 +257,28 @@ def srclink_url(url, label):
 def nomark(reason):
     """An explicit 'there is no official source for this' marker."""
     return '<span class="na" title="%s">&mdash;</span>' % esc(reason)
+
+
+def nomark_link(reason):
+    """Explicit 'value left blank' marker. When the reason is an https URL on an
+    approved official host, render it as a visible link as well (R26-2): the value
+    stays blank and unverified, but the context source is one click away instead of
+    hidden in a title attribute."""
+    if reason.startswith("https://") and is_official_url(reason):
+        return ('<span class="na" title="value left blank - not published by an official source; '
+                'context source linked">&mdash;</span> '
+                '<a href="%s" target="_blank" rel="noopener">context</a>' % esc(reason))
+    return nomark(reason)
+
+
+def is_official_url(url):
+    """Hosts this site treats as official for row sources (mirrors verify_dashboard)."""
+    try:
+        host = urlparse(url).netloc.lower()
+    except Exception:
+        return False
+    return (host.endswith("nba.com") or host == "nba.com"
+            or host.endswith("github.com") and url.startswith("https://github.com/wingbangboozle1-lang/NBA1"))
 
 
 def card(title, body, cls=""):
@@ -1040,6 +1065,7 @@ def main():
     props = load(os.path.join(DATA, "props.json"))["rows"]
     injs = load(os.path.join(DATA, "injuries.json"))
     flow = load(os.path.join(DATA, "gameflow.json"))["rows"]
+    ot_rate = load(os.path.join(ROOT, "data", "derived", "ot_rate.json"))
     back = load(os.path.join(DATA, "backtest.json"))
     val = load(os.path.join(DATA, "validation.json"))
     corr = load(os.path.join(DATA, "correlations.json"))
@@ -1081,12 +1107,15 @@ def main():
     ]))
 
     body.append(banner("warn", "What this site is, and what it is not",
-                       "<p>This is an <strong>origination and research</strong> workspace. It produces its own "
-                       "lines from official NBA data and then tries hard to prove that those lines carry skill. "
-                       "As of this build <strong>no strategy has cleared the skill gate</strong>: the best one is "
-                       "%s at %s, which is inside what luck alone produces. Every strategy is therefore capped at a "
-                       "quarter unit or held back as research-only, and that is the result, not an obstacle to be "
-                       "worked around.</p>"
+                     "<p>This is an <strong>origination and research</strong> workspace. It produces its own "
+                     "lines from official NBA data and then tries hard to prove that those lines carry skill. "
+                     "As of this build <strong>no strategy is funded</strong>. The best one &mdash; %s at %s &mdash; "
+                     "has cleared the registered luck gate G4 (Wilson 95%% lower bound on its hit rate above the "
+                     "52.38%% break-even; the exact binomial p = 0.020 is uncorrected for the number of strategies "
+                     "tried, and this gate set registers no multiplicity gate), but it fails the calibration and "
+                     "stability gates and the availability gate cannot run, so it stays capped at a quarter unit. "
+                     "Every strategy is therefore capped at a quarter unit or held back as research-only, and that "
+                     "is the result, not an obstacle to be worked around.</p>"
                        "<p>No sportsbook price is used anywhere, because no NBA-operated source publishes one. "
                        "&ldquo;Edge&rdquo; on this site means <em>the model against a deliberately naive reference "
                        "model built from the same official ratings</em>. It does not mean an edge against a book.</p>"
@@ -1391,7 +1420,7 @@ def main():
             num(r["possessions"]), num(r["pace_vs_league"]),
             num(r["expected_total"]), num(r["expected_margin_home"]),
             num(r["p_home_win"], 3), num(r["p_margin_within_5"], 3),
-            num(r["p_margin_20plus"], 3), num(r["p_overtime_approx"], 4),
+            num(r["p_margin_20plus"], 3), num(ot_rate["rate"], 4),
             ("H " + num(r["home_rest_days"], 0) + "d / A " + num(r["away_rest_days"], 0) + "d")
             if (r["home_rest_days"] is not None or r["away_rest_days"] is not None) else NA,
             ("B2B" if (r["home_b2b"] or r["away_b2b"]) else "-"),
@@ -1400,13 +1429,19 @@ def main():
     b.append(table(
         ["Date", "Tip ET", "Matchup", "Away", "Home", "Possessions", "Pace vs lg",
          "Exp total", "Exp margin (home)", "P(home win)", "P(margin &le;5)", "P(margin &ge;20)",
-         "P(OT)", "Rest", "B2B", "Source"],
+         "P(OT) measured", "Rest", "B2B", "Source"],
         rows,
         note="Expected margin is from the home team's point of view: positive means the home team is favoured. "
              "P(margin &le;5) is the probability the game is decided by five points or fewer; P(margin &ge;20) is "
-             "the probability of a twenty-point blow-out; P(OT) is the model's overtime probability. These come "
-             "from official pace and efficiency inputs plus the fitted outcome spread &mdash; no play-by-play "
-             "input exists, so no run, timeout or quarter-split metric is published."))
+             "the probability of a twenty-point blow-out. P(OT) is the <b>measured season overtime rate</b>: "
+             "%s of %s completed games went to overtime (rate %s, window %s) &mdash; priced from the measurement "
+             "instead of the model's per-game approximation (0.005&ndash;0.023 on this slate), which the season "
+             "shows is materially miscalibrated (realised 0.050 vs ~0.019 mean, exact test p = 0.012; see the "
+             "strategy-lab probability audit and flag F64). The un-calibrated per-game approximation is kept in "
+             "<code>docs/data/gameflow.json</code> as <code>p_overtime_approx</code> for research. Margin and "
+             "total probabilities come from official pace and efficiency inputs plus the fitted outcome spread "
+             "&mdash; no play-by-play input exists, so no run, timeout or quarter-split metric is published."
+             % (esc(ot_rate["ot_games"]), esc(ot_rate["n"]), esc(ot_rate["rate"]), esc(ot_rate["window"]))))
     built["gameflow.html"] = page("Game flow analysis",
                                   "Pace, expected score, blow-out and overtime probability, and the rest and "
                                   "back-to-back context for every game in the horizon.", "\n".join(b))
@@ -1771,7 +1806,7 @@ def main():
                      esc(q.get("how_to_answer")), esc(q.get("blocks")),
                      esc(q.get("priority")),
                      srclink(sources, q.get("source")) if q.get("source")
-                     else nomark(q.get("source_url") or "no official source exists")])
+                     else nomark_link(q.get("source_url") or "no official source exists")])
     b.append(table(["ID", "Question", "What is missing", "How to answer it",
                      "What it blocks", "Priority", "Source"], rows,
                    note="Where a row says no official source exists, that is the honest answer: no NBA-operated "

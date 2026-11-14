@@ -512,7 +512,7 @@ current reward allocation is zero.</p>
 {card("Strategies entered", len(strat['leaderboard']))}
 {card("Validated", len(validated), "needs all six gates", "bad")}
 {card("Ungraded", str(sum(1 for e in strat['leaderboard'] if e['status']=='UNGRADED')), "no outcomes to grade", "warn")}
-{card("Reward payable", "None", "no validated strategy", "bad")}
+{card("Reward payable", "None payable", "no validated strategy", "bad")}
 </div>
 
 <div class="note bad"><b>Zero of eight validated, and that is the finding.</b> The binding constraint is not
