@@ -3216,7 +3216,7 @@ the retrieval timestamp. Nothing is marked verified because a URL "looks right".
    source exists — that stays an open question, not a hole to fill with a book's data).
 4. Small, frequent commits; `git pull --rebase` before every push.
 
-### 30.3 Progress report — verification and decision layer shipped
+### 32.3 Progress report — verification and decision layer shipped
 
 **Scope note (amended).** The claim in §30 named `verified/**`, `verify/…428e/**`,
 `scripts/build_verified.py`, `scripts/verify_verified.py` and `COORDINATION.md`. One
@@ -3274,3 +3274,51 @@ were not read); they are marked unverified rather than assumed. Cooper Flagg's p
 average is published as unverified because two official reads disagree (21.0 and 24.6) and
 choosing one would be a guess. No odds source exists, so no strategy is funded — that is
 F-15 and Q-02, not an oversight.
+
+### 32.4 Delivery record
+
+| Item | Value |
+| --- | --- |
+| PR | [#90](https://github.com/wingbangboozle1-lang/NBA1/pull/90) — "§32 Independent re-verification + decision layer: 3,873 values checked, 3 decision-changing findings" |
+| Merged | 2026-11-14T19:14:32Z, merge commit `b32a491` (merge, no approval waited for, per the delivery instruction) |
+| Merged into | `main` at the time of merge; the branch was rebased onto `origin/main` four times during this session, ending at `f3fc086` |
+| Re-verified on merged `main` | `verify_verified.py` PASS (8 pages, 127 data rows, all sourced) and `verify_all.py` PASS, run in a clean worktree of `origin/main` after the merge — not on the feature branch |
+| Deletions to existing site content | 0 lines in `index.html` and `site/**`; the regenerated pages are `origin/main`'s own builder output plus the nav block |
+| **Deploy** | **Not confirmed — queued, not failed.** The post-merge Pages run (43631011466 on `b32a491`) is `pending`; the older run triggered by the pre-merge branch push (43630975663 on `5bca853`) is `queued`. |
+
+**Deploy status, stated precisely.** Two facts, both verified rather than assumed:
+
+1. The live site is up and serving: `https://wingbangboozle1-lang.github.io/NBA1/` returns the
+   full landing page (read this session), and the last successful Pages run is
+   43628871996 on `e2dc63ca`, at 18:51Z — about 23 minutes before the merge.
+2. `https://wingbangboozle1-lang.github.io/NBA1/verified/` returns **404** as of this writing,
+   because that build predates the merge. The section exists in `main` and is green there;
+   it is not yet served.
+
+The cause is a repository-wide Actions runner backlog, not a site failure: as of 19:26Z no
+workflow of any kind had completed successfully since 18:51Z, and 12+ runs were queued
+including `pages build and deployment` runs from 19:06Z, 19:10Z and 19:12Z. The Pages
+workflow's job is `pending`, i.e. waiting for a runner it has not been given. This is the
+same backlog already recorded by session `arena/95c1cb23-nba1` in §31.3 and by §F53/SG23
+on `main` (back-to-back pushes cancelling each other's deploys). Nothing in the merged tree
+fails a check: every gate the Pages workflow runs was executed locally on the merged tree
+and passed.
+
+**Therefore this session does not claim a successful deploy.** What it claims is: merged,
+re-verified on `main`, deploy queued. When the queue drains, the pending run will publish
+`b32a491` and `verified/` will appear; if that run fails, the failure will be in the
+workflow's own steps, all of which passed locally on the same tree.
+
+### 32.5 Open carry-forward for the next seat
+
+1. **Confirm the Pages deploy of `b32a491`** once runners are available, and check
+   `.../NBA1/verified/` returns the page rather than 404. If the queue never drains, the
+   fallback is to re-run the workflow manually after capacity returns; the tree needs no change.
+2. **§31 was taken twice on `main`** (`arena/95c1cb23-nba1` and `arena/a39b9370-nba1`, plus a
+   third §30 block from `arena/e812a9ed-nba1`). This section is §32 to avoid a fourth
+   collision. The numbering is now collision-prone; a monotonic claim counter maintained in
+   one place would fix it (suggestion S-11).
+3. The three decision-changing findings (F-04 injury-edition currency, F-05 the S1 headline,
+   F-12 the rest field) are published and unowned. They are not this session's files to fix
+   under the coordination rules, so they are left with owners named on
+   `verified/flagged.html` rather than edited.
