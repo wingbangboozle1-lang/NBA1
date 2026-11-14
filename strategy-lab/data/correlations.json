@@ -133,34 +133,34 @@
   "rows": [
    {
     "quantity": "home win",
-    "mean_model_probability_published": 0.5332,
+    "mean_model_probability_published": 0.5467,
     "realised_rate_on_completed_games": 0.525,
     "realised_count": 84,
     "games": 160,
-    "gap_points": -0.82,
-    "p_exact_vs_model": 0.87419,
+    "gap_points": -2.17,
+    "p_exact_vs_model": 0.57955,
     "source_url": "https://www.nba.com/games?date=2026-10-20",
     "page_under_test": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/gameflow.json"
    },
    {
     "quantity": "margin inside 5",
-    "mean_model_probability_published": 0.1893,
+    "mean_model_probability_published": 0.1888,
     "realised_rate_on_completed_games": 0.1812,
     "realised_count": 29,
     "games": 160,
-    "gap_points": -0.8,
-    "p_exact_vs_model": 0.91956,
+    "gap_points": -0.75,
+    "p_exact_vs_model": 0.9195,
     "source_url": "https://www.nba.com/games?date=2026-10-20",
     "page_under_test": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/gameflow.json"
    },
    {
     "quantity": "margin 20 or more",
-    "mean_model_probability_published": 0.3372,
+    "mean_model_probability_published": 0.3386,
     "realised_rate_on_completed_games": 0.2687,
     "realised_count": 43,
     "games": 160,
-    "gap_points": -6.84,
-    "p_exact_vs_model": 0.07868,
+    "gap_points": -6.99,
+    "p_exact_vs_model": 0.06602,
     "source_url": "https://www.nba.com/games?date=2026-10-20",
     "page_under_test": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/gameflow.json"
    },
@@ -171,7 +171,7 @@
     "realised_count": 8,
     "games": 160,
     "gap_points": 3.09,
-    "p_exact_vs_model": 0.01233,
+    "p_exact_vs_model": 0.01213,
     "source_url": "https://www.nba.com/games?date=2026-10-20",
     "page_under_test": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/gameflow.json"
    }
