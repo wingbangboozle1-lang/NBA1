@@ -162,6 +162,7 @@ def page(title, sub, body, depth=1, extra_head=""):
       Earlier builds, kept as archives:
       <a href="%(repo)scommand-center/index.html">Command Center</a> &middot;
       <a href="%(repo)sedge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="%(repo)sdesk.html">Integration Desk</a> &middot;
       <a href="%(repo)sdocs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
       <a href="%(repo)sdocs/b/index.html">Build B &mdash; backtested desk</a> &middot;
       <a href="%(repo)sschedule-verified.html">verified schedule</a> &middot;
@@ -367,7 +368,11 @@ def main():
                      '(<code>check_rendered.py</code>), which this build does not have.</li>'
                      '<li><a href="edge-lab/index.html">Edge Lab</a> &mdash; Build A, the original decision '
                      'dashboard, frozen at the 11/13 data cut and archived unchanged under '
-                     '<code>edge-lab/</code>.</li>'
+                     '<code>edge-lab/</code>. It carries the Integration Desk section added by session '
+                     '<code>arena/2edb85af-nba1</code>.</li>'
+                     '<li><a href="desk.html">Integration Desk</a> &mdash; the origination, gate, settlement '
+                     'and prop pipeline published at the repository root by session '
+                     '<code>arena/2edb85af-nba1</code>, with its own cross-check and settlement scripts.</li>'
                      '<li><a href="docs/index.html">Dated NBA data snapshot</a> &mdash; Build A\'s dated '
                      '13&ndash;15 Nov schedule and 12:00 PM injury-report transcription with every source link.</li>'
                      '<li><a href="docs/b/index.html">Line Origination Desk</a> &mdash; Build B, the earlier '

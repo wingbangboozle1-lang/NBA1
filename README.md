@@ -55,7 +55,7 @@ an edge against a book, and no pick is described as market-validated.
 
 ## Every build in this repository
 
-Four implementations of the same brief live here. All are preserved and all
+Five implementations of the same brief live here. All are preserved and all
 are online, so the audit trail stays intact. They read the same official
 captures and differ in presentation, data cut, and how much of the pipeline
 they exercise:
@@ -65,6 +65,7 @@ they exercise:
 | **Build D — this build** | [`index.html`](index.html) → [`site/`](site/pages/picks.html) | 27 games, 14–17 Nov | The current build: landing page, 15 category pages, 63 paper picks |
 | **Command Center** | [`command-center/index.html`](command-center/index.html) | 22 games, 14–16 Nov | A second consolidated site, built in session `arena/791c9114-nba1` from the same captures, with its own rendered-page checks |
 | **A — NBA Edge Lab** | [`edge-lab/index.html`](edge-lab/index.html) | 23 games, 13–15 Nov | Build A's original decision dashboard, frozen at the 11/13 cut and archived unchanged |
+| **Integration Desk** | [`desk.html`](desk.html) | 14–16 Nov | The origination, gate, settlement and prop pipeline published at the repository root by session `arena/2edb85af-nba1` |
 | **A — dated NBA snapshot** | [`docs/index.html`](docs/index.html) | 13–15 Nov | The dated official schedule and 12:00 PM injury-report transcription, source-linked |
 | **B — Line Origination Desk** | [`docs/b/index.html`](docs/b/index.html) | — | The earlier backtested build: 51 out-of-sample games, ten strategies, seven gates |
 
