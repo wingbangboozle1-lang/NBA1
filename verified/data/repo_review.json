@@ -1,0 +1,256 @@
+{
+  "meta": {
+    "title": "Line-by-line repository review, 2026-11-14 (session arena/428e6264-nba1)",
+    "method": "Each row is one load-bearing statement made by the repository (README, a page headline, or a build note). The claim is quoted or paraphrased, then tested: against an official NBA page read in this session, against the repository's own data files, or against its own code. The test and its result are printed with the row.",
+    "scale": "1,500+ files and 12 MB of content, six builds of the same brief. This review covers the statements a decision would actually rest on, not every line of every page. Coverage is stated per row so nothing is implied to be complete where it is not.",
+    "statuses": [
+      "CONFIRMED",
+      "CONFIRMED WITH CAVEAT",
+      "OVERSTATED",
+      "WRONG",
+      "UNVERIFIABLE"
+    ],
+    "not_edited": "No file owned by another session was changed. Every defect found is recorded here and on the Flagged page with the fixing suggestion; none was patched in place."
+  },
+  "counts": {
+    "rows": 20,
+    "by_status": {
+      "CONFIRMED": 5,
+      "CONFIRMED WITH CAVEAT": 4,
+      "OVERSTATED": 3,
+      "WRONG NOW": 1,
+      "WRONG": 4,
+      "OUTSTANDING": 1,
+      "PARTIALLY WRONG": 1,
+      "UNVERIFIABLE": 1
+    },
+    "by_severity": {
+      "\u2014": 5,
+      "Low": 5,
+      "High": 5,
+      "Medium": 5
+    }
+  },
+  "rows": [
+    {
+      "id": "R-01",
+      "area": "Headline",
+      "claim": "\"As of this build no strategy is funded, and for the first time one has cleared the luck gate.\" (README)",
+      "test": "Recounted the graded plays and re-ran the exact binomial test on S1's 32 picks.",
+      "result": "23/32 = 0.7188; exact two-sided p = 0.0201; Wilson 95% lower bound 0.5463 against the 0.5238 break-even. The claim is arithmetically true.",
+      "status": "CONFIRMED",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/validation.json",
+      "severity": "\u2014",
+      "note": "True as stated. See R-08 for why the sentence still misleads."
+    },
+    {
+      "id": "R-02",
+      "area": "Headline",
+      "claim": "S1's hit rate of 0.719 against a mean predicted 0.627 is \"a gap the model cannot explain\" (README, calibration gate)",
+      "test": "Compared the mean predicted probability to the observed rate.",
+      "result": "Mean p_model = 0.6273, observed 0.7188, gap of 9.1 percentage points against a gate threshold of 8 pp. The gate does fail, narrowly.",
+      "status": "CONFIRMED",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/validation.json",
+      "severity": "\u2014",
+      "note": "The gate is applied consistently. The word 'cannot explain' is fair."
+    },
+    {
+      "id": "R-03",
+      "area": "Settlement",
+      "claim": "\"settled against the official finals on the morning of 2026-11-14: gated singles 3-4 (-1.40 units at -110), two-leg parlays 0-3\" (README)",
+      "test": "Re-read all nine 11/13 finals from NBA.com and re-graded every published pick against its own line.",
+      "result": "All nine scores match exactly. Re-grading gives 3 wins, 4 losses, 0 pushes; 3 x 1.00 - 4 x 1.10 = -1.40 units. Both parlay sets lose at least one leg.",
+      "status": "CONFIRMED",
+      "source": "https://www.nba.com/games?date=2026-11-13",
+      "severity": "\u2014",
+      "note": "This is the only graded result on the site and it is correct."
+    },
+    {
+      "id": "R-04",
+      "area": "Privacy of the record",
+      "claim": "\"The picks are pre-registration-auditable against the copy frozen before tip\" (README)",
+      "test": "Checked that the frozen archive exists and that the live file matches it.",
+      "result": "data/archive/originated_lines_2026-11-13T2245Z.json exists and predates the 23:00Z tip-offs; the settlement record states the model blocks are identical to the live file.",
+      "status": "CONFIRMED WITH CAVEAT",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/s14/settlement_2026-11-13.json",
+      "severity": "Low",
+      "note": "The archive is inside the same repository and the same git history, so a reader can confirm that the file was committed before tip \u2014 not that the numbers in it were produced before tip. Only an external timestamp would close that. Not alleged: nothing suggests the record was altered."
+    },
+    {
+      "id": "R-05",
+      "area": "Provenance",
+      "claim": "\"Every table row links to the official source it came from\" (README, build audit)",
+      "test": "Parsed all 17 pages of the main site and counted data rows with and without an *.nba.com link.",
+      "result": "978 data rows; 900 carry an official link in the row; 78 do not (prop-variance 19, repo-review 10, source-check 10, questions 8, backtest 4, correlations 4, flagged 4, model 2, picks 2, sources 2, strategies 3, suggestions 3, validation 3, injuries 1, luck 1, props 1, gameflow 1).",
+      "status": "OVERSTATED",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_dashboard.py",
+      "severity": "Low",
+      "note": "The build's own audit counts rows under a narrower definition (it excludes some tables), so it is not a false statement under that definition \u2014 but the sentence is published without the definition. Flagged F-10."
+    },
+    {
+      "id": "R-06",
+      "area": "Provenance",
+      "claim": "Team ratings are the official Teams Advanced capture through 2026-11-12 (README 'known limits')",
+      "test": "Compared the stored 30-team table with a fresh read of the official page (which now runs through 11/13).",
+      "result": "All 30 rows match the stored snapshot exactly; the live page has since moved one game further for the teams that played 11/13.",
+      "status": "CONFIRMED",
+      "source": "https://www.nba.com/stats/teams/advanced",
+      "severity": "\u2014",
+      "note": "The staleness is disclosed, which is the right way to handle it."
+    },
+    {
+      "id": "R-07",
+      "area": "Injury layer",
+      "claim": "\"At the newest official injury-report edition (11/14/26 04:15 AM ET), five of the ten teams playing on 11/14 have still not filed\" (README)",
+      "test": "Read the 04:15 AM, 12:00 PM, 1:00 PM and 1:30 PM editions of 11/14.",
+      "result": "True of the 04:15 AM edition. By 1:00 PM ET eight of ten had filed; by 1:30 PM ET all ten had. Twenty-two designations changed across that span.",
+      "status": "WRONG NOW",
+      "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+      "severity": "High",
+      "note": "The statement is correct for the edition it names and false as a description of the current state. On a game day that matters: the rotation-minute and production layer is built on a report that is fifteen hours old by the first tip. Flagged F-03/F-04."
+    },
+    {
+      "id": "R-08",
+      "area": "Statistics",
+      "claim": "S1 \"cleared the luck gate\" \u2014 the site presents this as the strongest positive result in the repository",
+      "test": "Applied Benjamini-Hochberg across the six strategies that have graded plays, and tested whether S1's edge size predicts its wins.",
+      "result": "BH q for S1 = 0.120 (does not survive at 0.05 across six tests). Splitting S1 at the median |edge| of 5.70: 11/16 on small edges vs 12/16 on large edges, point-biserial r = 0.051.",
+      "status": "OVERSTATED",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/validation.json",
+      "severity": "High",
+      "note": "Two independent reasons to doubt the headline: it does not survive multiple testing, and it does not strengthen with edge size. Neither is disclosed. This is the single most important correction in this review. Flagged F-05."
+    },
+    {
+      "id": "R-09",
+      "area": "Statistics",
+      "claim": "The seven gates make a strategy prove skill, not luck",
+      "test": "Read the gate definitions and checked which are actually computable.",
+      "result": "G1-G6 are defined and applied. G7 (a market/price gate) cannot run: no NBA-operated odds source exists, and no licensed feed is connected. The repository says so.",
+      "status": "CONFIRMED WITH CAVEAT",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/validation.json",
+      "severity": "Medium",
+      "note": "Every result on the site is therefore model-vs-model. That is disclosed repeatedly, which is honest \u2014 but it means the project's stated goal (beat the market) is currently untestable by construction. This is the central open question, Q-01."
+    },
+    {
+      "id": "R-10",
+      "area": "Prop lines",
+      "claim": "Player prop lines are the official season averages (props page, src_baseline = S7)",
+      "test": "Re-read four of the eight prop players on their official player pages.",
+      "result": "Murray 26.2 vs published 26.2 (match). Giannis 28.5 vs 27.7. SGA 30.5 vs 29.7. Mitchell 23.0 vs 22.8. Three of four disagree.",
+      "status": "WRONG",
+      "source": "https://www.nba.com/player/203507",
+      "severity": "High",
+      "note": "A prop line 0.3-0.8 below the player's own season average flips the side of the bet. The capture is stamped 2026-11-13, so the values may simply be one game stale \u2014 but they are published as if current. Flagged F-01."
+    },
+    {
+      "id": "R-11",
+      "area": "Injury impact",
+      "claim": "\"Player minutes are known for 50 of the 465 players in the official Players Traditional table, so the availability impact is a measured lower bound\" (README)",
+      "test": "Opened data/players_minutes_2026_27.json and the players table capture.",
+      "result": "The minutes file has 24 rows, not 50; its own _meta says 'ranks 1-24 by minutes per game'. The capture file data/raw/_capture_S7_players.json contains a URL and a SHA-256 but zero rows.",
+      "status": "WRONG",
+      "source": "https://www.nba.com/stats/players/traditional",
+      "severity": "Medium",
+      "note": "The direction of the statement (it is a lower bound) is right; the number is not, and the underlying capture holds no data to check it against. Flagged F-11."
+    },
+    {
+      "id": "R-12",
+      "area": "Rest and back-to-backs",
+      "claim": "The game-flow page publishes 'Rest' and 'B2B' for every horizon game, and the picks page lists rest as '2d / 0d \u2014 B2B'",
+      "test": "Traced the rest computation in scripts/originate_horizon.py and compared the two pages for the same game.",
+      "result": "rest_days is computed as (game_date - previous game_date) - 1. For the first game of a horizon the previous game is a FUTURE date, so 26 of 27 games in data/derived/picks_d.json store a negative rest value (e.g. DEN@NOP rest_days = -3 with last_date 2026-11-16) and b2b = false. The site's own lines.json, built by a different builder, stores positive values for the same games (DEN 3d, NOP 1d with home_b2b = 1). Two pages therefore publish contradictory rest and B2B flags for the same game.",
+      "status": "WRONG",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py",
+      "severity": "High",
+      "note": "Practical effect: the game-flow table shows 'B2B' for essentially every horizon game because the builder ORs the two b2b flags, while the picks page shows almost none. Neither page can be trusted for rest until the defect is fixed. Flagged F-12; this is the clearest code bug found in the session."
+    },
+    {
+      "id": "R-13",
+      "area": "Cross-build consistency",
+      "claim": "One project, one answer",
+      "test": "Compared the error statistics of the two builds over the same 60-game window.",
+      "result": "Site build: margin MAE 12.98, total MAE 14.83. Integration Desk: margin MAE 12.913, total MAE 14.636. Both reproduce from their own stored forecasts.",
+      "status": "OVERSTATED",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/integration/out/settlement.json",
+      "severity": "Medium",
+      "note": "Two different forecast series, not one arithmetic error \u2014 but neither page acknowledges the other, so a reader comparing them sees a contradiction with no explanation. Flagged F-09."
+    },
+    {
+      "id": "R-14",
+      "area": "Reproducibility",
+      "claim": "\"verify_all.py ... fails on the first problem ... VERIFY OK\" (README)",
+      "test": "Ran python3 scripts/verify_all.py on the tip of main in this session.",
+      "result": "Exit 0, VERIFY OK. The full rebuild leaves the working tree clean (git status --porcelain empty), 18 pages, 958 rows checked, 0 broken internal links.",
+      "status": "CONFIRMED",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_all.py",
+      "severity": "\u2014",
+      "note": "The build is genuinely idempotent and the gate genuinely runs. This is the repository's strongest asset."
+    },
+    {
+      "id": "R-15",
+      "area": "Coordination",
+      "claim": "COORDINATION.md is the shared task board and sections are not duplicated",
+      "test": "Walked every '## ' heading in the file and diffed repeated ones.",
+      "result": "2,871 lines. Sections 15, 20, 21, 23, 24, 25 and 26 each appear twice; sections 18 and 28 are each used by more than one session; \u00a725.3 and \u00a725.2 blocks are repeated verbatim.",
+      "status": "WRONG",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md",
+      "severity": "Medium",
+      "note": "The board itself flagged this as R-29-8 and it is still open. This session appended \u00a730 only and deleted nothing. Flagged F-13."
+    },
+    {
+      "id": "R-16",
+      "area": "Coordination",
+      "claim": "Open pull requests are triaged",
+      "test": "Listed open PRs and their mergeable state.",
+      "result": "Five PRs are open: #80, #75, #66, #65, #63. None has been merged or closed; #75 supersedes #65 on the same subject and both remain open.",
+      "status": "OUTSTANDING",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/pulls",
+      "severity": "Low",
+      "note": "Not a data defect. Logged so the owner knows five PRs are waiting and two of them overlap. This session does not touch them: PR #80 edits strategy-lab/, PR #66 edits shared site files."
+    },
+    {
+      "id": "R-17",
+      "area": "Automation",
+      "claim": "The scheduled refresh opens a pull request instead of pushing to main",
+      "test": "Listed the refresh branches and checked for a matching PR.",
+      "result": "Two refresh branches exist (auto/refresh-20261114-115209, auto/refresh-20261114-154721) and NO pull request exists for either. The 15:47 run's commits are on its branch only.",
+      "status": "PARTIALLY WRONG",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/tree/main/.github/workflows/refresh-data.yml",
+      "severity": "Low",
+      "note": "The workflow's push guard is doing its job (nothing landed on main unreviewed), but the PR-creation step silently failed and the run only warned. Captures are therefore accumulating on orphan branches. Flagged F-14."
+    },
+    {
+      "id": "R-18",
+      "area": "Site structure",
+      "claim": "The repository publishes one site",
+      "test": "Read the root index.html and the README build table.",
+      "result": "Six builds are published from the same origin: root site/ (Build D), command-center/, edge-lab/, docs/, docs/b/, origination/, plus five root-level desk-*.html pages and nine root-level standalone pages.",
+      "status": "CONFIRMED WITH CAVEAT",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/README.md",
+      "severity": "Medium",
+      "note": "All preserved, as the brief required, and the switcher links them. The cost is that a reader cannot tell which build is current without reading the README. This is the main navigation problem on the site and the basis for suggestions S-01/S-02."
+    },
+    {
+      "id": "R-19",
+      "area": "Horizon coverage",
+      "claim": "Picks are generated for every upcoming slate up to a maximum of 3 days in advance",
+      "test": "Compared the horizon dates with the official schedule.",
+      "result": "The horizon is 11/14 to 11/17 \u2014 four calendar dates covering 27 games. 11/17 is 3 days after the 11/14 build, so the window is 'today + 3' (120 hours of games), which satisfies the brief under one reading and exceeds 'a maximum of 3 days' under another.",
+      "status": "CONFIRMED WITH CAVEAT",
+      "source": "https://www.nba.com/schedule?date=2026-11-15",
+      "severity": "Low",
+      "note": "The 11/17 rows are the ones with no injury report at all (all 28 team-slots NOT YET SUBMITTED). Worth stating on the page rather than leaving to arithmetic. Question Q-05."
+    },
+    {
+      "id": "R-20",
+      "area": "Data licence",
+      "claim": "Official NBA data is used for the whole project",
+      "test": "Checked for any statement of the terms under which the data is used.",
+      "result": "No page states the terms. The repository's own README says its checks 'do not verify ... that the data may be used'.",
+      "status": "UNVERIFIABLE",
+      "source": "https://www.nba.com/termsofuse",
+      "severity": "High",
+      "note": "NBA.com's terms are the owner's own to review; this session cannot confirm what they permit for a published derived-lines site. It is listed as an open question (Q-02) because a distribution decision depends on it. Not alleged to be a violation."
+    }
+  ]
+}

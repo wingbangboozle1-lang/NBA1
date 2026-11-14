@@ -32,6 +32,7 @@
 <a href="props.html">Player Props</a>
 <a href="prop-variance.html">Prop Variance &amp; Rotation</a>
 <a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameday.html">Game-Day Injury Read</a>
 <a href="gameflow.html">Game Flow</a>
 </div>
 <div class="nav-group"><h3>EVIDENCE</h3>
@@ -53,6 +54,13 @@
 <a href="sources.html">Source Register</a>
 <a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
 <a href="repo-review.html">Repo Review</a>
+</div>
+<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 14 NOV</h3>
+<a href="../../verified/index.html">&#10003; What is actually true</a>
+<a href="../../verified/summary.html">Executive summary</a>
+<a href="../../verified/verification.html">Row-level verification</a>
+<a href="../../verified/review.html">Repo review</a>
+<a href="../../verified/flagged.html">Flagged (17)</a>
 </div>
     <div class="side-note">
       <strong>Reading rule.</strong> Every table row links to the official source it
@@ -495,6 +503,69 @@
 </tr>
 <tr>
 <td>F47</td>
+<td>High</td>
+<td><b>The availability layer cannot see most of the game-day report: 20 of the 24 player rows the new edition added contribute 0.00 net-rating points</b></td>
+<td>Between the 04:15 AM ET edition the published lines were built from and the 01:30 PM ET game-day edition, four clubs filed (New Orleans, Cleveland, Chicago, Miami) and 24 player rows appeared. Only the players who are inside the captured top-50 minutes table can move the model, so 20 of those rows contribute exactly 0.00 and 2 of the 5 games tipping tonight have a model line that does not move at all. New Orleans is the clearest case: the Pelicans ruled out Trey Murphy III and Dejounte Murray on the same report that gave the model five names it cannot price, and DEN@NOP is unchanged at -9.1. Across the whole slate for tonight the figure is 45 of 50 listed rows without a minutes value.</td>
+<td>Injuries &amp; Rotation page; every originated spread and total for 2026-11-14; the prop teammate-availability factor</td>
+<td>Reviewer decision (SG20): either complete the minutes source so every listed player has a minutes value, or stop rendering 0.00 for 'unknown' and render a dash instead. The second option is one line of code and is the honest default until the first is done.</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F48</td>
+<td>Low</td>
+<td><b>Memphis had not filed at the newest edition - but its deadline had not passed</b></td>
+<td>At the 01:30 PM ET edition the report prints NOT YET SUBMITTED for the Memphis Grizzlies. The league's game-day window is 11 a.m. to 1 p.m. LOCAL time, and Memphis is on Central time, so for an 8:00 PM ET tip the window closed at 2:00 PM ET, thirty-two minutes after this capture. The site must not render that row as a missed filing.</td>
+<td>Game-Day Read page; the BKN@MEM row</td>
+<td>No action. Recorded so that a reader who compares capture time with deadline time does not conclude the source was ignored.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F49</td>
+<td>Medium</td>
+<td><b>The official game card's 'Season Leaders' widget is not injury-aware</b></td>
+<td>The 2026-11-16 card for POR@MIN displays Anthony Edwards (33.3 PPG) as Minnesota's leader while the 2026-11-14 game-day report rules him Out with a right knee arthroscopy. The 11/14 card for CHI@MIN shows the same widget showing Caleb Wilson, also ruled out. The widget is a season-average read-out and nothing in it reflects availability.</td>
+<td>Any prop or leader table that reads the card's leader line; Player Props page</td>
+<td>SG22: intersect the leader line with the current report before it is displayed, and mark any leader who is ruled out. The card value itself stays exactly as published, beside the flag.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F50</td>
+<td>Medium</td>
+<td><b>The injury PDF's table re-flows, so 18 of the game-day rows carry their club by block position rather than by a printed team cell</b></td>
+<td>Pages 2 to 4 of the report repeat the table without the Game Date / Game Time / Matchup / Team columns. Club for those rows was taken from the block label that opens the block and from the league's alphabetical-within-club ordering, never from the player's name. 4 of the rows could then be cross-checked against the official minutes table's club column and all 4 agree; 14 could not be cross-checked because the player is outside that table and no second official source in this repository prints a club for him.</td>
+<td>Every row of the game-day capture, and by extension the edition delta</td>
+<td>A reviewer who wants these rows confirmed should read them against a team roster page (30 official URLs, one per club). The transcription records which rows are affected: attribution == 'block' in data/captures/2026-11-14-pm/injury_2026-11-14_1330PM.json.</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F51</td>
+<td>Medium</td>
+<td><b>Two injury editions are live on the site at once, deliberately</b></td>
+<td>The Injuries &amp; Rotation page still shows the 04:15 AM ET edition, because that is the edition every published line and pick was built from; the Game-Day Read page shows the 01:30 PM ET edition and what it would do to those lines. Rolling the older page forward would make the site look current and make the graded window a lie, so it was not done.</td>
+<td>Injuries &amp; Rotation page header; Game-Day Read page</td>
+<td>Keep. If the reviewer prefers one edition per day, the change belongs in the capture step (SG19), not in the published table.</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F52</td>
+<td>Medium</td>
+<td><b>The report never covers the third day of the horizon, so 13 of 27 games have no availability input at all</b></td>
+<td>Every edition read today - 04:15 AM ET and 01:30 PM ET - lists games on 11/14 and 11/15 and nothing for 11/16 or 11/17. That is the league's own cadence (a club files the evening before, or the day of for the second night of a back-to-back), not a capture failure. It means the three-day horizon the brief asks for is an injury-informed horizon for two of its four dates and a ratings-only horizon for the other two.</td>
+<td>Lines &amp; Picks page: the 2026-11-16 and 2026-11-17 rows</td>
+<td>Label the T+2 and T+3 rows as 'no availability input exists' wherever an availability column is shown, or shorten the pickable window to T+1 and publish T+2/T+3 as schedule only. Reviewer's call (SG19, option C).</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F53</td>
+<td>Low</td>
+<td><b>A second push to `main` cancels the first push's Pages deploy, by configuration</b></td>
+<td>PR #75 (carried from #65) split the Pages concurrency group so PR validation can no longer cancel a production deployment, and that part works. But the block still sets `cancel-in-progress: true` on the production group `pages-refs/heads/main`, so two pushes to `main` inside one deploy window cancel each other's run. Observed twice on 2026-11-14: this session's merge of PR #89 (`688fd2d`, run 43630239526) came back `completed/cancelled` sixty seconds after it queued, because a board-record commit (`1aee2dd`) reused the same group; and the earlier merge `51015c6` (run 43629118603) was cancelled the same way by a push this session did not make. Neither is a failure - the newest run for the current head is the one that deploys, and it eventually ran - but a red `cancelled` badge on a merged commit reads as a broken site, and a session that claims a deploy by citing the superseded run id would be citing a run that never published anything.</td>
+<td>`.github/workflows/pages.yml` (concurrency block); any session record that claims a deploy by pointing at a run for a superseded sha</td>
+<td>SG23: `cancel-in-progress: false` for the production group, or batch board-record commits with the merge that they describe instead of pushing them separately. Meanwhile: state a deploy claim against the run for the CURRENT `main` head, never a superseded sha.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43630239526" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F58</td>
 <td>Medium</td>
 <td><b>Injury page cites the 11/13 07:30 PM ET edition as its source while newer 11/14 editions exist (X01-F1)</b></td>
 <td>The injury-edition currency audit (verify/2026-11-14-injury-currency/) confirmed all 26 site rows match the official 11/14 04:30 AM ET edition, but the page's source label still cites the 11/13 07:30 PM ET edition as newest. A later 01:30 PM ET edition was captured at 18:40Z (verify/2026-11-14-cc5a6652/) and changes 33 status lines; nothing has been re-priced from it (see the decision P1/P2 on the Decisions page). Published as a source-label defect, not a value error: no row was altered.</td>
@@ -503,7 +574,7 @@
 <td class="src"><span class="na" title="source id Injury-Report_2026-11-14_04_30AM.pdf is not in the register">&mdash;</span></td>
 </tr>
 <tr>
-<td>F48</td>
+<td>F59</td>
 <td>Low</td>
 <td><b>Page-break rows in the official PDF print no team or matchup (X01-F2)</b></td>
 <td>In the 11/14 04:30 AM ET edition, the Traore and Nolan rows sit at a page break with a blank team/matchup cell. Team attribution must not be inferred from position in the file; the earlier Traore attribution to Brooklyn was verified separately against the official roster page and is recorded as an attribution, not a printed value.</td>
@@ -512,7 +583,7 @@
 <td class="src"><span class="na" title="source id Injury-Report_2026-11-14_04_30AM.pdf is not in the register">&mdash;</span></td>
 </tr>
 <tr>
-<td>F49</td>
+<td>F60</td>
 <td>Low</td>
 <td><b>Eleven continuation rows in the official injury PDF print no date (X01-F3)</b></td>
 <td>Continuation rows carry the date of the block above them by position only; the cell is blank as published. Rows are stored with the block date and the blank cell is preserved verbatim in the transcriptions.</td>
@@ -521,7 +592,7 @@
 <td class="src"><span class="na" title="source id Injury-Report_2026-11-14_04_30AM.pdf is not in the register">&mdash;</span></td>
 </tr>
 <tr>
-<td>F50</td>
+<td>F61</td>
 <td>Low</td>
 <td><b>Game time printed as 07:00 (ET) in the injury report and 7:00 PM ET on the schedule (X01-F4)</b></td>
 <td>The official injury report prints game times as 24-hour-with-zone (07:00 (ET)); the official schedule prints 12-hour (7:00 PM ET). One DET@MIA row differs only in format, not in instant. Both formats are preserved as published where captured.</td>
@@ -530,7 +601,7 @@
 <td class="src"><span class="na" title="source id Injury-Report_2026-11-14_04_30AM.pdf is not in the register">&mdash;</span></td>
 </tr>
 <tr>
-<td>F51</td>
+<td>F62</td>
 <td>Medium</td>
 <td><b>11/14 game-day injury editions arrive in stages; the site snapshot is behind the newest (X01-F5, time-sensitive)</b></td>
 <td>Reports publish on the official policy schedule (day-before 5 p.m. local, game-day 11 a.m.-1 p.m. local). At the 04:15 AM ET edition five of the ten teams playing 11/14 had not filed; by the 01:30 PM ET edition four of those five had filed and 33 status lines changed (verify/2026-11-14-cc5a6652/). A 05:00 PM ET game-day edition is expected around 22:00 UTC. This entry is a standing reminder that an injury snapshot is a dated capture, never a forecast.</td>
@@ -539,7 +610,7 @@
 <td class="src"><span class="na" title="source id Official injury-report policy index is not in the register">&mdash;</span></td>
 </tr>
 <tr>
-<td>F52</td>
+<td>F63</td>
 <td>Medium</td>
 <td><b>Root banner and executive summary disagreed about S1's luck-gate result (fixed in the 2026-11-14 19:13Z pass)</b></td>
 <td>The banner said the best strategy was 'inside what luck alone produces' while the executive said its record is outside luck and G4 passes. The registered G4 test is the Wilson 95% lower bound above the 52.38% break-even (engine/strategies.py GATES): S1 at 23-9 has Wilson LB 0.546 and exact binomial p = 0.020, so G4 passes as registered. The banner now says exactly that, and names the caveats: the p-value is uncorrected for the number of strategies tried, this gate set registers no multiplicity gate (open Q21), G2 calibration and G5 stability fail, and G7 availability cannot run - so the strategy stays unfunded at a quarter unit. Kept on the register as a resolved contradiction, not deleted.</td>
@@ -548,16 +619,16 @@
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/strategies.py" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
-<td>F53</td>
+<td>F64</td>
 <td>Medium</td>
 <td><b>Game-flow P(OT) column repriced from the measured season rate (R-29-4)</b></td>
 <td>The published overtime column used the model's per-game normal approximation, which averages about 0.019 on this season against a realised 0.050 (8 of 160 completed games went to overtime; strategy-lab probability audit, exact test p = 0.012). The site's Game Flow column now prices the measured rate 0.0500 read at build time from data/derived/ot_rate.json (reproduced by scripts/measure_ot_rate.py). The archive build (docs/b) keeps its own data cut and shows the approximation, relabelled 'P(OT) approx' with a disclosure. No other model output changed.</td>
 <td>site/pages/gameflow.html P(OT) column; docs/b Game Flow disclosure</td>
-<td>Model owner: decide whether to calibrate a per-game estimator (suggestion SG20); until then the constant measured rate is the honest price.</td>
+<td>Model owner: decide whether to calibrate a per-game estimator (suggestion SG25); until then the constant measured rate is the honest price.</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-10-20" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
-<td>F54</td>
+<td>F65</td>
 <td>Medium</td>
 <td><b>Multiple site builds report different windows and models; dated entry links added (QA finding 2)</b></td>
 <td>The root dashboard (27-game 14-17 Nov horizon, 60-game out-of-sample window), the Origination build (22 lines 14-16 Nov, 101-game walk-forward), the Command Center (22-game horizon) and strategy-lab (season-wide 160 games) are separately dated research products. Their metrics must never be merged into one result. The landing navigation now carries dated entry links for origination/ and strategy-lab/ alongside the existing build links; labels summarise each window.</td>
@@ -566,16 +637,16 @@
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/README.md" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
-<td>F55</td>
+<td>F66</td>
 <td>Medium</td>
 <td><b>207 of 5,940 HTML table rows carry no official NBA link; classification policy needed (QA finding 3)</b></td>
 <td>The repository-wide integration checker counts every HTML table data row. Its 207 rows without an NBA link include genuine methodology, repository-review and suggestion rows where no NBA source applies, mixed with rows that may state NBA facts without a link. The blanket row-source standard needs an explicit classification: NBA fact (must link nba.com/official.nba.com), derived from linked rows (mark the inputs), or repository-internal (visible non-NBA label). Nothing is inferred to close a count.</td>
 <td>Repo-review, sources, suggestions, questions and decision pages across builds</td>
-<td>Reviewer: adopt suggestion SG19 (row-classification policy) and work the register row by row.</td>
+<td>Reviewer: adopt suggestion SG24 (row-classification policy) and work the register row by row.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_integration.py" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
-<td>F56</td>
+<td>F67</td>
 <td>Low</td>
 <td><b>Three leaked bare 'None' strings replaced with explicit text (QA finding 4, fixed in the 19:13Z pass)</b></td>
 <td>slate.html carried two bare 'None' badges where the intended meaning was 'no injury designations exist because the reports are not due yet', and docs/pages/strategies.html carried a bare 'None' where the meaning was 'no reward is payable because no strategy is validated'. The strings now read 'None - day-before reports not yet due' and 'None payable'. No value was imputed; the underlying facts are unchanged.</td>
@@ -584,12 +655,12 @@
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/build_slate_refresh.py" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
-<td>F57</td>
+<td>F68</td>
 <td>Medium</td>
 <td><b>The probe workflow's own commits to session branches make every PR conflict and churn Pages builds (I-30-2)</b></td>
 <td>probe-official.yml commits data/raw/probe_official.json and verification.html to arena/** branches and to main after each run. That is why every open PR was CONFLICTING today and why several Pages builds were cancelled mid-run. The pages.yml concurrency group is now isolated per PR number / per ref (ported from PR #75/#65 with credit), which stops runs cancelling each other; the probe-record churn itself remains. Each merge today kept the newest probe record + regenerated verification.html as a consistent pair.</td>
 <td>CI on every push; PR mergeability; Pages build churn</td>
-<td>Workflow owner: make the probe commit [skip ci] on session branches too, or push probe records only to main; see suggestion SG23.</td>
+<td>Workflow owner: make the probe commit [skip ci] on session branches too, or push probe records only to main; see suggestion SG28.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/probe-official.yml" target="_blank" rel="noopener">link</a></td>
 </tr>
 </tbody></table></div>

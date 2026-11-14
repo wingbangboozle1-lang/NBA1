@@ -32,6 +32,7 @@
 <a href="props.html">Player Props</a>
 <a href="prop-variance.html">Prop Variance &amp; Rotation</a>
 <a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameday.html">Game-Day Injury Read</a>
 <a href="gameflow.html">Game Flow</a>
 </div>
 <div class="nav-group"><h3>EVIDENCE</h3>
@@ -53,6 +54,13 @@
 <a href="sources.html">Source Register</a>
 <a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
 <a href="repo-review.html">Repo Review</a>
+</div>
+<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 14 NOV</h3>
+<a href="../../verified/index.html">&#10003; What is actually true</a>
+<a href="../../verified/summary.html">Executive summary</a>
+<a href="../../verified/verification.html">Row-level verification</a>
+<a href="../../verified/review.html">Repo review</a>
+<a href="../../verified/flagged.html">Flagged (17)</a>
 </div>
     <div class="side-note">
       <strong>Reading rule.</strong> Every table row links to the official source it
@@ -575,7 +583,7 @@
 <td class="src"><a href="https://www.nba.com/game/uta-vs-lac-0022600257" target="_blank" rel="noopener">S8_0022600257</a></td>
 </tr>
 </tbody></table></div>
-<p class="tnote">Expected margin is from the home team's point of view: positive means the home team is favoured. P(margin &le;5) is the probability the game is decided by five points or fewer; P(margin &ge;20) is the probability of a twenty-point blow-out. P(OT) is the <b>measured season overtime rate</b>: 8 of 160 completed games went to overtime (rate 0.05, window 2026-10-20..2026-11-13) &mdash; priced from the measurement instead of the model's per-game approximation (0.005&ndash;0.023 on this slate), which the season shows is materially miscalibrated (realised 0.050 vs ~0.019 mean, exact test p = 0.012; see the strategy-lab probability audit and flag F53). The un-calibrated per-game approximation is kept in <code>docs/data/gameflow.json</code> as <code>p_overtime_approx</code> for research. Margin and total probabilities come from official pace and efficiency inputs plus the fitted outcome spread &mdash; no play-by-play input exists, so no run, timeout or quarter-split metric is published.</p>
+<p class="tnote">Expected margin is from the home team's point of view: positive means the home team is favoured. P(margin &le;5) is the probability the game is decided by five points or fewer; P(margin &ge;20) is the probability of a twenty-point blow-out. P(OT) is the <b>measured season overtime rate</b>: 8 of 160 completed games went to overtime (rate 0.05, window 2026-10-20..2026-11-13) &mdash; priced from the measurement instead of the model's per-game approximation (0.005&ndash;0.023 on this slate), which the season shows is materially miscalibrated (realised 0.050 vs ~0.019 mean, exact test p = 0.012; see the strategy-lab probability audit and flag F64). The un-calibrated per-game approximation is kept in <code>docs/data/gameflow.json</code> as <code>p_overtime_approx</code> for research. Margin and total probabilities come from official pace and efficiency inputs plus the fitted outcome spread &mdash; no play-by-play input exists, so no run, timeout or quarter-split metric is published.</p>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
       signal is skill or luck. Nothing on this site is a betting recommendation, and no

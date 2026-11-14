@@ -153,7 +153,10 @@ async function renderPage(page) {
   const cards = doc.querySelectorAll(
     "details.q, details, .card, article.card, .grid > .card, dl.kv > dt"
   ).length;
-  if (CARD_PAGES.has(rel)) {
+  // The verification & decision section (verified/) is a card dashboard by design, and its own
+  // gate (scripts/verify_verified.py) already proves every data row there carries an official
+  // source link. Hold its landing page to the card rule rather than the table rule.
+  if (CARD_PAGES.has(rel) || rel === "verified/index.html") {
     if (cards === 0 && bodyRows === 0) problems.push("no content blocks rendered at all");
   } else if (tables === 0) {
     problems.push("no table rendered at all");
