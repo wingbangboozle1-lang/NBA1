@@ -43,6 +43,35 @@ jobs:
           print("All build-B site data files present and valid JSON.")
           PY
 
+      - name: Independent integration verification
+        run: python3 scripts/verify_integration.py
+
+      - name: Render every page in a headless DOM
+        run: |
+          npm install --no-save jsdom >/dev/null 2>&1
+          node scripts/render_check.mjs
+
+      - name: Probe record present and valid
+        run: |
+          python3 - <<'PY'
+          import json, os, sys
+          p = "data/raw/probe_official.json"
+          if not os.path.exists(p):
+              print("no probe record; skipping (the probe workflow writes it)")
+              raise SystemExit(0)
+          d = json.load(open(p))
+          assert d["probe"]["urls_probed"] == len(d["results"]), "probe count mismatch"
+          print("probe record:", d["probe"]["urls_probed"], "URLs,", d["probe"]["probed_at_utc"])
+          PY
+
+      - name: Regenerate the verification page and require it to be current
+        run: |
+          python3 scripts/build_verification_page.py
+          if [ -n "$(git status --porcelain verification.html)" ]; then
+            echo "verification.html is stale - regenerate and commit it"
+            exit 1
+          fi
+
       - name: Check for broken internal links (both builds)
         run: |
           python3 - <<'PY'
