@@ -657,6 +657,6 @@ No value was inferred. Venue names `Rocket Arena` (Cleveland) and `Mortgage Matc
 | Base | `main` at `9ccccb2` |
 | Local gate | `python3 scripts/verify_all.py` → VERIFY OK |
 | PR | [#30](https://github.com/wingbangboozle1-lang/NBA1/pull/30), `arena/2509073f-nba1` → `main` |
-| Merge | pending (conflict resolved; re-pushing branch) |
-| Pages deploy | pending |
+| Merge | `--merge` at 2026-11-14T01:01:40Z, merge commit `fec27bd86f497135fb2a9057f5166cf9142f851c` |
+| Pages deploy | pending — the CI `validate` job's "Regenerate the verification page" step failed on `main` (PR #29 committed a stale `verification.html` that no longer matches `scripts/build_verification_page.py` output). Fix: regenerated `verification.html` from `data/raw/probe_official.json` on this branch; PR #31 will carry the fix. |
 | Live URL | https://wingbangboozle1-lang.github.io/NBA1/ |
