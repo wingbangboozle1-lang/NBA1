@@ -1932,5 +1932,6 @@ The platform pins this session to that branch; the requested `session-<id>/<task
 | # | Task | Status | File scope (exclusive to this session) |
 | --- | --- | --- | --- |
 | A01 | Independently audit the current published tree and open integration PRs #58/#59; document source, validation, freshness and overlap risks without editing either PR's files | in progress | `COORDINATION.md`, `audit/session-2dc33eb3/ACTIVE_PR_REVIEW.md` |
+| A02 | Isolate pull-request Pages checks from the main-branch deploy concurrency group; verify the published deployment after the change | in progress | `.github/workflows/pages.yml`, `COORDINATION.md` |
 
 Scope rule: PR #59 merged while this branch was being reviewed; PR #58 remains open and conflicting, and PR #62 is an active injury-edition audit. Do not edit other sessions’ claimed/generated files; log any cross-scope request here. The independent review is under `audit/session-2dc33eb3/`.
