@@ -1,0 +1,189 @@
+{
+  "_meta": {
+    "title": "Official NBA capture — upcoming slate window 2026-11-14 through 2026-11-17 (maximum 3 days ahead)",
+    "captured_utc": "2026-11-14T00:48:22Z",
+    "captured_by_session": "arena-0de855e5",
+    "window_rule": "Brief: generate picks for every upcoming slate up to a maximum of 3 days in advance. Window = games of 2026-11-14 (day 0) through 2026-11-17 (day 3).",
+    "no_inference_rule": "Every value below was read from an official NBA.com page at capture time. A value that could not be read is null/blank and flagged. Nothing is inferred, interpolated, or carried over from other editions.",
+    "capture_caveats": [
+      "Capture occurred at 2026-11-14T00:48Z (7:48 PM ET on 2026-11-13), while the nine 2026-11-13 games had tipped (two were LIVE 1st quarter) and none had finished. Team records displayed on the official games pages therefore include completed games through 2026-11-12 only. RecordLine-1 outputs on the slate page are computed on those records and are one day stale by design-honesty, not by inference.",
+      "The 2026-11-13 07:30 PM ET injury-report edition is the latest edition indexed on official.nba.com at capture time; it already carries the first designations for the five 2026-11-14 games. Five teams (New Orleans, Cleveland, Memphis, Chicago, Miami) still read NOT YET SUBMITTED in that edition.",
+      "No injury designations exist yet for 2026-11-15, 11-16 and 11-17 games (day-before reports are due 5 p.m. local the day before a game; second-day-of-back-to-back reports by 1 p.m. local game day). Those slates carry zero injury information and are flagged.",
+      "POR@MIN appears on BOTH 2026-11-16 and 2026-11-17 (different game ids 0022600250 and 0022600254, same venue). Transcribed verbatim from the official schedule and games pages; the 11-17 game is the second night of a back-to-back for both teams. This unusual pattern is recorded here for review, not corrected.",
+      "PDF-to-text extraction loses the Team cell on rows that begin a new PDF page (same known defect recorded in data/injury_report_2026_11_13.json). Ten 11/14 rows lost their team cell in extraction; each was attributed ONLY after confirmation against the team's official roster page (team_source=roster with team_source_url). No attribution was inferred from context alone."
+    ],
+    "cross_checks_performed": [
+      "Game counts per date on the official schedule page (Nov 14: 5, Nov 15: 9, Nov 16: 8, Nov 17: 5) match the per-date games pages and the November calendar strip (27 games total in window).",
+      "Team records are consistent across every official games page on which a team appears (e.g. DAL 7-5 on the 11/14 and 11/15 pages; BOS 10-2 on the 11/15, 11/16 and 11/17 pages; MIN 9-3 on the 11/14, 11/16 and 11/17 pages; POR 8-3 on the 11/16 and 11/17 pages).",
+      "DAL official team page independently shows '7-5, 10th in Western' (PPG 113.2, 17th; OPPG 112.2, 12th); DET official team page independently shows '8-3, 3rd in Eastern' (PPG 115.5, 11th; OPPG 107.8, 6th). Both corroborate the games-page records.",
+      "DAL team page 'Upcoming Games' strip independently lists DAL@CLE Nov 14 7:30 pm ET, DAL@BOS Nov 15 6:00 pm ET; DET team page lists DET@MIA Nov 14 8:00 pm ET, DET@SAS Nov 17 8:00 pm ET."
+    ],
+    "source_index": {
+      "schedule": {
+        "title": "NBA.com Schedule (all weeks; week headers 'Week 4 (Nov 9 - Nov 15)' and 'Week 5 (Nov 16 - Nov 22)')",
+        "url": "https://www.nba.com/schedule",
+        "publisher": "NBA.com (official)"
+      },
+      "games_2026-11-14": {
+        "title": "NBA.com Games & Scores — November 14, 2026 (records, tip times, season leaders)",
+        "url": "https://www.nba.com/games?date=2026-11-14",
+        "publisher": "NBA.com (official)"
+      },
+      "games_2026-11-15": {
+        "title": "NBA.com Games & Scores — November 15, 2026 (records, tip times, season leaders)",
+        "url": "https://www.nba.com/games?date=2026-11-15",
+        "publisher": "NBA.com (official)"
+      },
+      "games_2026-11-16": {
+        "title": "NBA.com Games & Scores — November 16, 2026 (records, tip times, season leaders)",
+        "url": "https://www.nba.com/games?date=2026-11-16",
+        "publisher": "NBA.com (official)"
+      },
+      "games_2026-11-17": {
+        "title": "NBA.com Games & Scores — November 17, 2026 (records, tip times, season leaders)",
+        "url": "https://www.nba.com/games?date=2026-11-17",
+        "publisher": "NBA.com (official)"
+      },
+      "injury_report_2026-11-13_0730pm": {
+        "title": "NBA Official Injury Report — 11/13/26 07:30 PM ET edition (league-issued PDF)",
+        "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf",
+        "publisher": "NBA (official league report)"
+      },
+      "injury_report_hub": {
+        "title": "NBA Injury Report: 2026-27 Season (official index of league-issued editions)",
+        "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+        "publisher": "NBA (official)"
+      },
+      "roster_dal": {
+        "title": "Dallas Mavericks official roster page (team-cell confirmation for 4 injury rows)",
+        "url": "https://www.nba.com/team/1610612742/mavericks/roster",
+        "publisher": "NBA.com (official)"
+      },
+      "roster_det": {
+        "title": "Detroit Pistons official roster page (team-cell confirmation for 6 injury rows)",
+        "url": "https://www.nba.com/team/1610612765/pistons/roster",
+        "publisher": "NBA.com (official)"
+      }
+    }
+  },
+  "prior_slate_2026_11_13": {
+    "source_url": "https://www.nba.com/schedule",
+    "games": [
+      {"away": "NYK", "home": "IND"},
+      {"away": "MIL", "home": "ORL"},
+      {"away": "CLE", "home": "MIA"},
+      {"away": "ATL", "home": "CHI"},
+      {"away": "MEM", "home": "NOP"},
+      {"away": "UTA", "home": "HOU"},
+      {"away": "GSW", "home": "SAS"},
+      {"away": "POR", "home": "SAC"},
+      {"away": "OKC", "home": "LAC"}
+    ]
+  },
+  "games": [
+    {"date": "2026-11-14", "time_et": "7:00 PM", "away": "DEN", "home": "NOP", "away_name": "Denver Nuggets", "home_name": "New Orleans Pelicans", "away_record": "6-4", "home_record": "4-8", "venue": "Smoothie King Center, New Orleans, LA", "cup": null, "preview_url": "https://www.nba.com/game/den-vs-nop-0022600231", "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"date": "2026-11-14", "time_et": "7:30 PM", "away": "DAL", "home": "CLE", "away_name": "Dallas Mavericks", "home_name": "Cleveland Cavaliers", "away_record": "7-5", "home_record": "6-6", "venue": "Rocket Arena, Cleveland, OH", "cup": null, "preview_url": "https://www.nba.com/game/dal-vs-cle-0022600232", "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"date": "2026-11-14", "time_et": "8:00 PM", "away": "DET", "home": "MIA", "away_name": "Detroit Pistons", "home_name": "Miami Heat", "away_record": "8-3", "home_record": "5-6", "venue": "Kaseya Center, Miami, FL", "cup": null, "preview_url": "https://www.nba.com/game/det-vs-mia-0022600233", "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"date": "2026-11-14", "time_et": "8:00 PM", "away": "BKN", "home": "MEM", "away_name": "Brooklyn Nets", "home_name": "Memphis Grizzlies", "away_record": "3-8", "home_record": "7-4", "venue": "FedExForum, Memphis, TN", "cup": null, "preview_url": "https://www.nba.com/game/bkn-vs-mem-0022600234", "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"date": "2026-11-14", "time_et": "8:00 PM", "away": "CHI", "home": "MIN", "away_name": "Chicago Bulls", "home_name": "Minnesota Timberwolves", "away_record": "1-9", "home_record": "9-3", "venue": "Target Center, Minneapolis, MN", "cup": null, "preview_url": "https://www.nba.com/game/chi-vs-min-0022600235", "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"date": "2026-11-15", "time_et": "1:00 PM", "away": "IND", "home": "PHI", "away_name": "Indiana Pacers", "home_name": "Philadelphia 76ers", "away_record": "4-8", "home_record": "10-3", "venue": "Xfinity Mobile Arena, Philadelphia, PA", "cup": null, "preview_url": "https://www.nba.com/game/ind-vs-phi-0022600236", "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"date": "2026-11-15", "time_et": "4:00 PM", "away": "LAL", "home": "PHX", "away_name": "Los Angeles Lakers", "home_name": "Phoenix Suns", "away_record": "11-2", "home_record": "5-6", "venue": "Mortgage Matchup Center, Phoenix, AZ", "cup": null, "preview_url": "https://www.nba.com/game/lal-vs-phx-0022600237", "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"date": "2026-11-15", "time_et": "4:30 PM", "away": "CHA", "home": "LAC", "away_name": "Charlotte Hornets", "home_name": "LA Clippers", "away_record": "4-8", "home_record": "2-8", "venue": "Intuit Dome, Inglewood, CA", "cup": null, "preview_url": "https://www.nba.com/game/cha-vs-lac-0022600238", "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"date": "2026-11-15", "time_et": "5:00 PM", "away": "SAS", "home": "UTA", "away_name": "San Antonio Spurs", "home_name": "Utah Jazz", "away_record": "10-2", "home_record": "1-11", "venue": "Delta Center, Salt Lake City, UT", "cup": null, "preview_url": "https://www.nba.com/game/sas-vs-uta-0022600239", "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"date": "2026-11-15", "time_et": "6:00 PM", "away": "DAL", "home": "BOS", "away_name": "Dallas Mavericks", "home_name": "Boston Celtics", "away_record": "7-5", "home_record": "10-2", "venue": "TD Garden, Boston, MA", "cup": null, "preview_url": "https://www.nba.com/game/dal-vs-bos-0022600240", "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"date": "2026-11-15", "time_et": "6:00 PM", "away": "NYK", "home": "TOR", "away_name": "New York Knicks", "home_name": "Toronto Raptors", "away_record": "6-5", "home_record": "5-7", "venue": "Scotiabank Arena, Toronto, ON", "cup": null, "preview_url": "https://www.nba.com/game/nyk-vs-tor-0022600241", "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"date": "2026-11-15", "time_et": "7:00 PM", "away": "HOU", "home": "WAS", "away_name": "Houston Rockets", "home_name": "Washington Wizards", "away_record": "9-3", "home_record": "4-9", "venue": "Capital One Arena, Washington, DC", "cup": null, "preview_url": "https://www.nba.com/game/hou-vs-was-0022600242", "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"date": "2026-11-15", "time_et": "8:00 PM", "away": "ATL", "home": "MIL", "away_name": "Atlanta Hawks", "home_name": "Milwaukee Bucks", "away_record": "7-5", "home_record": "1-11", "venue": "Fiserv Forum, Milwaukee, WI", "cup": null, "preview_url": "https://www.nba.com/game/atl-vs-mil-0022600243", "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"date": "2026-11-15", "time_et": "9:00 PM", "away": "OKC", "home": "SAC", "away_name": "Oklahoma City Thunder", "home_name": "Sacramento Kings", "away_record": "8-4", "home_record": "1-10", "venue": "Golden 1 Center, Sacramento, CA", "cup": null, "preview_url": "https://www.nba.com/game/okc-vs-sac-0022600244", "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"date": "2026-11-16", "time_et": "7:00 PM", "away": "ORL", "home": "BOS", "away_name": "Orlando Magic", "home_name": "Boston Celtics", "away_record": "4-7", "home_record": "10-2", "venue": "TD Garden, Boston, MA", "cup": null, "preview_url": "https://www.nba.com/game/orl-vs-bos-0022600245", "source_url": "https://www.nba.com/games?date=2026-11-16"},
+    {"date": "2026-11-16", "time_et": "7:00 PM", "away": "CHI", "home": "CLE", "away_name": "Chicago Bulls", "home_name": "Cleveland Cavaliers", "away_record": "1-9", "home_record": "6-6", "venue": "Rocket Arena, Cleveland, OH", "cup": null, "preview_url": "https://www.nba.com/game/chi-vs-cle-0022600246", "source_url": "https://www.nba.com/games?date=2026-11-16"},
+    {"date": "2026-11-16", "time_et": "7:00 PM", "away": "MEM", "home": "WAS", "away_name": "Memphis Grizzlies", "home_name": "Washington Wizards", "away_record": "7-4", "home_record": "4-9", "venue": "Capital One Arena, Washington, DC", "cup": null, "preview_url": "https://www.nba.com/game/mem-vs-was-0022600247", "source_url": "https://www.nba.com/games?date=2026-11-16"},
+    {"date": "2026-11-16", "time_et": "7:30 PM", "away": "PHI", "home": "BKN", "away_name": "Philadelphia 76ers", "home_name": "Brooklyn Nets", "away_record": "10-3", "home_record": "3-8", "venue": "Barclays Center, Brooklyn, NY", "cup": null, "preview_url": "https://www.nba.com/game/phi-vs-bkn-0022600248", "source_url": "https://www.nba.com/games?date=2026-11-16"},
+    {"date": "2026-11-16", "time_et": "7:30 PM", "away": "HOU", "home": "MIA", "away_name": "Houston Rockets", "home_name": "Miami Heat", "away_record": "9-3", "home_record": "5-6", "venue": "Kaseya Center, Miami, FL", "cup": null, "preview_url": "https://www.nba.com/game/hou-vs-mia-0022600249", "source_url": "https://www.nba.com/games?date=2026-11-16"},
+    {"date": "2026-11-16", "time_et": "8:00 PM", "away": "POR", "home": "MIN", "away_name": "Portland Trail Blazers", "home_name": "Minnesota Timberwolves", "away_record": "8-3", "home_record": "9-3", "venue": "Target Center, Minneapolis, MN", "cup": null, "preview_url": "https://www.nba.com/game/por-vs-min-0022600250", "source_url": "https://www.nba.com/games?date=2026-11-16"},
+    {"date": "2026-11-16", "time_et": "8:00 PM", "away": "GSW", "home": "NOP", "away_name": "Golden State Warriors", "home_name": "New Orleans Pelicans", "away_record": "8-4", "home_record": "4-8", "venue": "Smoothie King Center, New Orleans, LA", "cup": null, "preview_url": "https://www.nba.com/game/gsw-vs-nop-0022600251", "source_url": "https://www.nba.com/games?date=2026-11-16"},
+    {"date": "2026-11-16", "time_et": "9:00 PM", "away": "PHX", "home": "DEN", "away_name": "Phoenix Suns", "home_name": "Denver Nuggets", "away_record": "5-6", "home_record": "6-4", "venue": "Ball Arena, Denver, CO", "cup": null, "preview_url": "https://www.nba.com/game/phx-vs-den-0022600252", "source_url": "https://www.nba.com/games?date=2026-11-16"},
+    {"date": "2026-11-17", "time_et": "7:30 PM", "away": "NYK", "home": "TOR", "away_name": "New York Knicks", "home_name": "Toronto Raptors", "away_record": "6-5", "home_record": "5-7", "venue": "Scotiabank Arena, Toronto, ON", "cup": null, "preview_url": "https://www.nba.com/game/nyk-vs-tor-0022600253", "source_url": "https://www.nba.com/games?date=2026-11-17"},
+    {"date": "2026-11-17", "time_et": "8:00 PM", "away": "POR", "home": "MIN", "away_name": "Portland Trail Blazers", "home_name": "Minnesota Timberwolves", "away_record": "8-3", "home_record": "9-3", "venue": "Target Center, Minneapolis, MN", "cup": null, "preview_url": "https://www.nba.com/game/por-vs-min-0022600254", "source_url": "https://www.nba.com/games?date=2026-11-17"},
+    {"date": "2026-11-17", "time_et": "8:00 PM", "away": "DET", "home": "SAS", "away_name": "Detroit Pistons", "home_name": "San Antonio Spurs", "away_record": "8-3", "home_record": "10-2", "venue": "Frost Bank Center, San Antonio, TX", "cup": null, "preview_url": "https://www.nba.com/game/det-vs-sas-0022600255", "source_url": "https://www.nba.com/games?date=2026-11-17"},
+    {"date": "2026-11-17", "time_et": "10:30 PM", "away": "UTA", "home": "LAC", "away_name": "Utah Jazz", "home_name": "LA Clippers", "away_record": "1-11", "home_record": "2-8", "venue": "Intuit Dome, Inglewood, CA", "cup": null, "preview_url": "https://www.nba.com/game/uta-vs-lac-0022600257", "source_url": "https://www.nba.com/games?date=2026-11-17"},
+    {"date": "2026-11-17", "time_et": "11:00 PM", "away": "CHA", "home": "LAL", "away_name": "Charlotte Hornets", "home_name": "Los Angeles Lakers", "away_record": "4-8", "home_record": "11-2", "venue": "Crypto.com Arena, Los Angeles, CA", "cup": null, "preview_url": "https://www.nba.com/game/cha-vs-lal-0022600256", "source_url": "https://www.nba.com/games?date=2026-11-17"}
+  ],
+  "leaders": [
+    {"team": "DEN", "player": "Nikola Jokic", "player_ref": "Nikola Jokić", "ppg": 23.5, "rpg": 10.8, "apg": 9.0, "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"team": "NOP", "player": "Zion Williamson", "ppg": 21.7, "rpg": 5.2, "apg": 2.6, "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"team": "DAL", "player": "Cooper Flagg", "ppg": 24.6, "rpg": 6.9, "apg": 6.5, "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"team": "CLE", "player": "Donovan Mitchell", "ppg": 22.8, "rpg": 5.0, "apg": 5.5, "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"team": "DET", "player": "Cade Cunningham", "ppg": 25.0, "rpg": 5.2, "apg": 7.9, "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"team": "MIA", "player": "Giannis Antetokounmpo", "ppg": 27.7, "rpg": 12.6, "apg": 5.2, "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"team": "BKN", "player": "Julius Randle", "ppg": 19.7, "rpg": 6.5, "apg": 5.0, "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"team": "MEM", "player": "Ty Jerome", "ppg": 26.2, "rpg": 3.5, "apg": 4.9, "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"team": "CHI", "player": "Caleb Wilson", "ppg": 18.9, "rpg": 6.2, "apg": 1.9, "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"team": "MIN", "player": "LaMelo Ball", "ppg": 18.6, "rpg": 3.3, "apg": 6.3, "source_url": "https://www.nba.com/games?date=2026-11-14"},
+    {"team": "IND", "player": "Pascal Siakam", "ppg": 22.7, "rpg": 6.9, "apg": 4.4, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "PHI", "player": "Tyrese Maxey", "ppg": 26.7, "rpg": 3.4, "apg": 5.5, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "LAL", "player": "Luka Doncic", "player_ref": "Luka Dončić", "ppg": 38.6, "rpg": 7.5, "apg": 7.6, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "PHX", "player": "Devin Booker", "ppg": 25.5, "rpg": 2.5, "apg": 5.0, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "CHA", "player": "Naz Reid", "ppg": 17.3, "rpg": 8.5, "apg": 2.2, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "LAC", "player": "Darius Garland", "ppg": 20.4, "rpg": 1.8, "apg": 6.9, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "SAS", "player": "Victor Wembanyama", "ppg": 30.3, "rpg": 11.7, "apg": 2.8, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "UTA", "player": "Keyonte George", "ppg": 20.4, "rpg": 4.5, "apg": 6.5, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "NYK", "player": "Karl-Anthony Towns", "ppg": 20.9, "rpg": 13.5, "apg": 3.5, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "TOR", "player": "RJ Barrett", "ppg": 21.3, "rpg": 6.7, "apg": 4.1, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "BOS", "player": "Jayson Tatum", "ppg": 26.3, "rpg": 6.1, "apg": 7.5, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "HOU", "player": "Alperen Sengun", "player_ref": "Alperen Şengün", "ppg": 21.1, "rpg": 9.4, "apg": 7.9, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "WAS", "player": "Anthony Davis", "ppg": 25.6, "rpg": 10.5, "apg": 2.0, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "ATL", "player": "Jalen Johnson", "ppg": 19.2, "rpg": 8.6, "apg": 7.2, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "MIL", "player": "Tyler Herro", "ppg": 21.9, "rpg": 4.4, "apg": 4.5, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "OKC", "player": "Shai Gilgeous-Alexander", "ppg": 29.7, "rpg": 4.3, "apg": 4.5, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "SAC", "player": "Darius Acuff Jr.", "ppg": 26.2, "rpg": 3.8, "apg": 7.3, "source_url": "https://www.nba.com/games?date=2026-11-15"},
+    {"team": "ORL", "player": "Franz Wagner", "ppg": 23.5, "rpg": 6.5, "apg": 7.9, "source_url": "https://www.nba.com/games?date=2026-11-16"},
+    {"team": "POR", "player": "Deni Avdija", "ppg": 23.0, "rpg": 6.1, "apg": 6.5, "source_url": "https://www.nba.com/games?date=2026-11-16"},
+    {"team": "GSW", "player": "Stephen Curry", "ppg": 27.8, "rpg": 3.7, "apg": 3.9, "source_url": "https://www.nba.com/games?date=2026-11-16"}
+  ],
+  "injuries_2026_11_14": {
+    "meta": {
+      "title": "NBA official injury report — games of 2026-11-14, as first designated in the 11/13/26 07:30 PM ET edition",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf",
+      "source_index_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+      "retrieved_utc": "2026-11-14T00:48:22Z",
+      "reporting_rules": "Teams must report by 5 p.m. local time the day before a game (other than the second day of a back-to-back); second-day-of-back-to-back reports by 1 p.m. local on game day; game-day reports between 11 a.m. and 1 p.m. local (8-10 a.m. for tip-offs 5 p.m. or earlier). Reports update continually throughout the day. Source: https://official.nba.com/nba-injury-report-2026-27-season/",
+      "extraction_note": "The PDF-to-text extraction loses the Team cell on rows that begin a new PDF page (known defect, same as data/injury_report_2026_11_13.json). Ten rows lost the team cell; each was attributed only after confirmation against the team's official roster page (team_source='roster' with team_source_url). No row was attributed by inference from context.",
+      "coverage_note": "This edition covers 2026-11-14 games only. Five teams read NOT YET SUBMITTED at capture: New Orleans, Cleveland, Memphis, Chicago, Miami. No designations exist for 2026-11-15/16/17 games yet (deadlines not reached).",
+      "status_vocabulary": ["Out", "Doubtful", "Questionable", "Probable", "Available"]
+    },
+    "rows": [
+      {"game_date": "2026-11-14", "matchup": "DEN@NOP", "team": "Denver Nuggets", "player": "Holmes II, DaRon", "status": "Out", "reason": "G League - On Assignment", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DEN@NOP", "team": "Denver Nuggets", "player": "Nembhard, Ryan", "status": "Out", "reason": "G League - Two-Way", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DEN@NOP", "team": "Denver Nuggets", "player": "Strawther, Julian", "status": "Out", "reason": "Injury/Illness - Left Knee Sprain", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DEN@NOP", "team": "Denver Nuggets", "player": "Whitmore, Cam", "status": "Out", "reason": "G League - Two-Way", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DEN@NOP", "team": "New Orleans Pelicans", "player": null, "status": "NOT YET SUBMITTED", "reason": null, "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DAL@CLE", "team": "Dallas Mavericks", "player": "Biberovic, Tarik", "status": "Out", "reason": "Injury/Illness - Right Heel Bursitis", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DAL@CLE", "team": "Dallas Mavericks", "player": "Christie, Max", "status": "Questionable", "reason": "Injury/Illness - Left Ankle Sprain", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DAL@CLE", "team": "Dallas Mavericks", "player": "de Larrea, Sergio", "status": "Out", "reason": "Injury/Illness - Right Knee Sprain", "team_source": "roster", "team_source_url": "https://www.nba.com/team/1610612742/mavericks/roster", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DAL@CLE", "team": "Dallas Mavericks", "player": "Johnson Jr., Morez", "status": "Probable", "reason": "Injury/Illness - Left Shin / Tibia Contusion", "team_source": "roster", "team_source_url": "https://www.nba.com/team/1610612742/mavericks/roster", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DAL@CLE", "team": "Dallas Mavericks", "player": "Lively II, Dereck", "status": "Out", "reason": "Injury/Illness - Right Foot Surgery", "team_source": "roster", "team_source_url": "https://www.nba.com/team/1610612742/mavericks/roster", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DAL@CLE", "team": "Dallas Mavericks", "player": "Martin, Caleb", "status": "Available", "reason": "Injury/Illness - Right Thumb Splint", "team_source": "roster", "team_source_url": "https://www.nba.com/team/1610612742/mavericks/roster", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DAL@CLE", "team": "Cleveland Cavaliers", "player": null, "status": "NOT YET SUBMITTED", "reason": null, "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DET@MIA", "team": "Detroit Pistons", "player": "Duren, Jalen", "status": "Out", "reason": "Injury/Illness - Right Hamstring Strain", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DET@MIA", "team": "Detroit Pistons", "player": "Harkless, Elijah", "status": "Questionable", "reason": "G League - Two-Way", "team_source": "roster", "team_source_url": "https://www.nba.com/team/1610612765/pistons/roster", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DET@MIA", "team": "Detroit Pistons", "player": "Joe, Isaiah", "status": "Out", "reason": "Injury/Illness - Right Hip Contusion", "team_source": "roster", "team_source_url": "https://www.nba.com/team/1610612765/pistons/roster", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DET@MIA", "team": "Detroit Pistons", "player": "Jones, Isaac", "status": "Questionable", "reason": "G League - Two-Way", "team_source": "roster", "team_source_url": "https://www.nba.com/team/1610612765/pistons/roster", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DET@MIA", "team": "Detroit Pistons", "player": "Lanier, Chaz", "status": "Out", "reason": "G League - On Assignment", "team_source": "roster", "team_source_url": "https://www.nba.com/team/1610612765/pistons/roster", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DET@MIA", "team": "Detroit Pistons", "player": "Okorie, Ebuka", "status": "Out", "reason": "G League - On Assignment", "team_source": "roster", "team_source_url": "https://www.nba.com/team/1610612765/pistons/roster", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DET@MIA", "team": "Detroit Pistons", "player": "Onyenso, Ugonna", "status": "Out", "reason": "G League - Two-Way", "team_source": "roster", "team_source_url": "https://www.nba.com/team/1610612765/pistons/roster", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "DET@MIA", "team": "Miami Heat", "player": null, "status": "NOT YET SUBMITTED", "reason": null, "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "BKN@MEM", "team": "Brooklyn Nets", "player": "Bilodeau, Tyler", "status": "Out", "reason": "G League - Two-Way", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "BKN@MEM", "team": "Brooklyn Nets", "player": "Brown Jr., Mikel", "status": "Questionable", "reason": "Injury/Illness - Illness", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "BKN@MEM", "team": "Brooklyn Nets", "player": "Jefferson, Joshua", "status": "Out", "reason": "G League - On Assignment", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "BKN@MEM", "team": "Brooklyn Nets", "player": "Nelson, Grant", "status": "Out", "reason": "G League - Two-Way", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "BKN@MEM", "team": "Brooklyn Nets", "player": "Saraf, Ben", "status": "Out", "reason": "G League - On Assignment", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "BKN@MEM", "team": "Brooklyn Nets", "player": "Traore, Nolan", "status": "Probable", "reason": "Injury/Illness - Right Calf Tightness / Soreness", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "BKN@MEM", "team": "Memphis Grizzlies", "player": null, "status": "NOT YET SUBMITTED", "reason": null, "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "CHI@MIN", "team": "Chicago Bulls", "player": null, "status": "NOT YET SUBMITTED", "reason": null, "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "CHI@MIN", "team": "Minnesota Timberwolves", "player": "Beringer, Joan", "status": "Available", "reason": "Injury/Illness - Face Mask", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "CHI@MIN", "team": "Minnesota Timberwolves", "player": "DiVincenzo, Donte", "status": "Out", "reason": "Injury/Illness - Right Achilles Tendon Repair / Surgery", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"},
+      {"game_date": "2026-11-14", "matchup": "CHI@MIN", "team": "Minnesota Timberwolves", "player": "Edwards, Anthony", "status": "Out", "reason": "Injury/Illness - Right Knee Arthroscopy", "team_source": "pdf", "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"}
+    ]
+  }
+}
