@@ -919,6 +919,40 @@ def build_method(eng):
   </ol>
 </section>
 <section class="card">
+  <h3>Parameter register (value and provenance)</h3>
+  <p>Every number the model is built on, with where it comes from. Rows whose value is a project assumption
+  are marked as such &mdash; no assumption is presented as a measured quantity.</p>
+  {table(["Parameter", "Value", "Provenance", "Source"], [
+      ["Team ratings (margin)", "Simple Rating System: average margin + average opponent rating, solved by iteration",
+       f'Computed from official final scores ({m["captured_games"]} verified games)',
+       srclink("https://www.nba.com/schedule", "nba.com/schedule")],
+      ["Team ratings (total)", "Opponent-adjusted points scored / allowed, solved by iteration",
+       "Computed from official final scores",
+       srclink("https://www.nba.com/schedule", "nba.com/schedule")],
+      ["Home-court advantage", f'{eng["ratings"][0]["hca"]:.2f} points',
+       "Estimated from the same official results (0 for neutral-site games)",
+       srclink("https://www.nba.com/schedule", "nba.com/schedule")],
+      ["Rating shrinkage (margin)", f'{K_MARGIN:.0f} pseudo-games toward zero',
+       "Project assumption &mdash; no official source exists for a shrinkage prior",
+       srclink("https://github.com/wingbangboozle1-lang/NBA1/blob/main/integration/REPO_REVIEW.md", "repo review")],
+      ["Rating shrinkage (total)", f'{K_TOTAL:.0f} pseudo-games toward the league mean',
+       "Project assumption &mdash; no official source exists for a shrinkage prior",
+       srclink("https://github.com/wingbangboozle1-lang/NBA1/blob/main/integration/REPO_REVIEW.md", "repo review")],
+      ["Residual SD, margin", f'{m["sigma_margin"]:.2f} points',
+       "Measured out-of-sample on the official game log",
+       srclink("https://www.nba.com/schedule", "nba.com/schedule")],
+      ["Residual SD, total", f'{m["sigma_total"]:.2f} points',
+       "Measured out-of-sample on the official game log",
+       srclink("https://www.nba.com/schedule", "nba.com/schedule")],
+      ["Normal CDF pricing", "probability = P(margin &gt; 0) around the point prediction",
+       "Model choice &mdash; standard construction, stated openly",
+       srclink("https://github.com/wingbangboozle1-lang/NBA1/blob/main/integration/REPO_REVIEW.md", "repo review")],
+      ["Odds margin (vig)", "0.00",
+       "Deliberate choice: lines are originated, not booked",
+       srclink("https://github.com/wingbangboozle1-lang/NBA1/blob/main/integration/REPO_REVIEW.md", "repo review")],
+  ])}
+</section>
+<section class="card">
   <h3>How a strategy can beat the line</h3>
   <p>A bettor using the same information as the line cannot beat it, by construction. So each strategy is required
   to add one input the line does not use &mdash; rest days, back-to-back status or schedule density, all read from
@@ -935,6 +969,34 @@ def build_method(eng):
   baseline), the 95th percentile (the luck line), and p<sub>null</sub> (how often pure luck did at least this
   well). A separate power calculation reports the smallest true ROI this sample could detect at all.</p>
   <p>Random seed {20261114}; every figure on this site is reproducible from the repository.</p>
+</section>
+<section class="card">
+  <h3>Declared constants</h3>
+  <p>Every number here was chosen before any result was seen, and none of them comes from an official
+  source &mdash; they are this project&rsquo;s settings. Where a value could be tuned, the tuning is reported as a
+  sensitivity table rather than rolled into the headline; see the
+  <a href="pages/teams.html">ratings page</a>.</p>
+  {table(["Constant", "Value", "What it controls", "Was it tuned on the results?"], [
+      ["K (margin)", f'{K_MARGIN:.0f} pseudo-games',
+       "How far each team's margin rating is shrunk toward zero.",
+       "No &mdash; declared, then swept over {1, 2, 4, 8, 16, 32} and reported."],
+      ["K (total)", f'{K_TOTAL:.0f} pseudo-games',
+       "How far each team's scoring rating is shrunk toward the league mean.", "No &mdash; declared."],
+      ["Minimum bets (G1)", f'{eng["min_bets"]}',
+       "The smallest sample a strategy must reach before it can be ranked at all.",
+       "No &mdash; set from the power calculation, which shows ~340 games are needed for the strongest signal."],
+      ["Significance level", "&alpha; = 0.05", "G3, before multiple-comparison correction.", "No &mdash; conventional."],
+      ["Corrected level (G7)", f'&alpha; = {eng["sidak_alpha"]:.5f}',
+       "Šidák across every cell that reaches the sample floor.", "Derived, not chosen."],
+      ["Bet triggers", ", ".join(f'{t:.2f}' for t in eng["edge_triggers"]),
+       "The smallest probability edge a strategy will bet on.",
+       "No &mdash; all three are run and published; none is selected after the fact."],
+      ["Monte-Carlo repetitions", f'{eng["null_reps"]:,}', "Resolution of the no-skill null.", "No."],
+      ["Random seed", "20261114", "Makes every simulation reproducible.", "No."],
+      ["Training start", eng["meta"]["train_start"],
+       "The first date used to fit ratings.", "No &mdash; the earliest captured date."],
+  ], caption="Definitions, not data: these are this project's own settings, so no external source applies.",
+     definitions=True)}
 </section>
 <section class="card">
   <h3>Reproduce it</h3>
@@ -1042,12 +1104,75 @@ def build_props(ctx):
   but not for players.</p>
 </section>
 <section class="card">
+  <h3>What a prop line needs, and what exists</h3>
+  {table(["Requirement", "Needed to originate a prop line", "What is actually available", "Status",
+          "Official page that would carry it"], [
+      ["Player game log",
+       "Every game the player has played this season, with minutes and each counting statistic.",
+       "Not published by any official page reachable here. Two partial season-average leaderboards exist "
+       "(50 scorers, 24 by minutes) and neither is a game log.",
+       badge("missing", "bad"),
+       srclink("https://www.nba.com/stats/players/boxscores", "box scores")],
+      ["Distribution shape",
+       "The spread and skew of the player's game-by-game results, not just the mean.",
+       "Not derivable from an average. No official page publishes per-game player rows.",
+       badge("missing", "bad"),
+       srclink("https://www.nba.com/stats/players/boxscores", "box scores")],
+      ["Rotation context",
+       "Minutes with and without each teammate, so an absence can be propagated.",
+       "Not published. This site does not estimate replacement minutes anywhere.",
+       badge("missing", "bad"),
+       srclink("https://www.nba.com/stats/players/traditional", "player stats")],
+      ["Opponent scheme and pace",
+       "How the opponent concedes rebounds, assists and points, and how fast it plays.",
+       "Possessions are not published (F5), so pace is unavailable even at team level.",
+       badge("missing", "bad"),
+       srclink("https://www.nba.com/stats/teams/advanced", "team advanced")],
+      ["Leg correlation",
+       "Measured correlation between the legs of a combo, to price it correctly.",
+       "Measurable for team outcomes &mdash; see the correlations page &mdash; but not for player legs, because "
+       "there are no player rows to correlate.",
+       badge("missing", "bad"),
+       srclink("https://www.nba.com/stats/players/traditional", "player stats")],
+  ], caption="A gap register: each row states what is missing and links to the official page that would "
+             "carry it. Nothing in this table is filled in.")}
+</section>
+<section class="card">
   <h3>What is available</h3>
   <p>Two partial official leaderboards, {cov["minutes_leaderboard_size"]} players by minutes and
   {cov["scoring_leaderboard_size"]} by scoring, listed in full on the
   <a href="{BASE_URL}pages/injuries.html">injuries page</a>. They are enough to size the production at risk for
   {cov["players_with_verified_season_average"]} of the {cov["players_in_latest_report"]} players in the latest
   injury report. They are not enough to originate a single prop line.</p>
+  <p>The table below states, for each input a prop line requires, the official page that publishes it
+  (or the closest official page that exists), whether it is reachable from this environment, and what
+  this site is therefore able to publish. Blank value cells are deliberate: nothing is inferred.</p>
+  {table(["Required input", "Closest official source", "Reachable here?", "Value published on this site"], [
+      ["Game-by-game player log",
+       srclink("https://www.nba.com/players", "nba.com/players"),
+       "No &mdash; season averages only; the game-by-game distribution is not retrievable",
+       "(blank &mdash; blocked, flagged)"],
+      ["Rotation minutes by game",
+       srclink("https://www.nba.com/stats/players/traditional", "nba.com/stats/players/traditional"),
+       "No &mdash; season totals only, not per-game rotation context",
+       "(blank &mdash; blocked, flagged)"],
+      ["Opponent scheme and pace",
+       srclink("https://www.nba.com/stats/teams/traditional", "nba.com/stats/teams/traditional"),
+       "No &mdash; team season table, not a per-opponent scheme measure",
+       "(blank &mdash; blocked, flagged)"],
+      ["Same-player / cross-player leg correlations",
+       srclink("https://www.nba.com/stats", "nba.com/stats"),
+       "No official page publishes player-level outcome correlations",
+       "(blank &mdash; no measurement exists)"],
+      ["Availability (partial)",
+       srclink("https://official.nba.com/nba-injury-report-2026-27-season/", "official.nba.com injury report"),
+       "Yes &mdash; PDF editions, captured and transcribed",
+       "Status only (Out / Questionable / Probable / Available) &mdash; no minutes derived"],
+      ["Season leaderboards (partial)",
+       srclink("https://www.nba.com/stats/players/traditional", "nba.com/stats/players/traditional"),
+       f'Yes &mdash; {cov["minutes_leaderboard_size"]} players by minutes, {cov["scoring_leaderboard_size"]} by scoring',
+       f'Used only to size production at risk for {cov["players_with_verified_season_average"]} of the {cov["players_in_latest_report"]} reported players'],
+  ])}
 </section>
 <section class="card">
   <h3>What would unblock it</h3>
