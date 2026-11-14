@@ -1881,7 +1881,7 @@ def main():
     # === prop variance (session arena/24eb72c6-nba1, COORDINATION section 24) =====
     built["prop-variance.html"] = build_prop_variance()
 
-    # === game-day read (session arena/95c1cb23-nba1, COORDINATION section 30) =====
+    # === game-day read (session arena/95c1cb23-nba1, COORDINATION section 31) =====
     built["gameday.html"] = build_gameday(sources)
 
     # ------------------------------------------------------------------ write

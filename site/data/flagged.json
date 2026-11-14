@@ -456,8 +456,8 @@
   {
    "id": "F47",
    "severity": "High",
-   "title": "The availability layer cannot see most of the game-day report: 45 of the 24 newly filed player rows contribute 0.00 net-rating points",
-   "detail": "Between the 04:15 AM ET edition the published lines were built from and the 01:30 PM ET game-day edition, four clubs filed (New Orleans, Cleveland, Chicago, Miami) and 24 player rows appeared. Only the players who are inside the captured top-50 minutes table can move the model, so 45 of those rows contribute exactly 0.00 and 2 of the 5 games tipping tonight have a model line that does not move at all. New Orleans is the clearest case: the Pelicans ruled out Trey Murphy III and Dejounte Murray on the same report that gave the model five names it cannot price, and DEN@NOP is unchanged at -9.1.",
+   "title": "The availability layer cannot see most of the game-day report: 20 of the 24 player rows the new edition added contribute 0.00 net-rating points",
+   "detail": "Between the 04:15 AM ET edition the published lines were built from and the 01:30 PM ET game-day edition, four clubs filed (New Orleans, Cleveland, Chicago, Miami) and 24 player rows appeared. Only the players who are inside the captured top-50 minutes table can move the model, so 20 of those rows contribute exactly 0.00 and 2 of the 5 games tipping tonight have a model line that does not move at all. New Orleans is the clearest case: the Pelicans ruled out Trey Murphy III and Dejounte Murray on the same report that gave the model five names it cannot price, and DEN@NOP is unchanged at -9.1. Across the whole slate for tonight the figure is 45 of 50 listed rows without a minutes value.",
    "affected": "Injuries & Rotation page; every originated spread and total for 2026-11-14; the prop teammate-availability factor",
    "source": null,
    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",

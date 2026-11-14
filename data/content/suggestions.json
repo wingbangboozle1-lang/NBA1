@@ -491,7 +491,7 @@
    "id": "SG20",
    "category": "Data / model",
    "title": "Either give every listed player a minutes row or stop printing 0.00 for an unknown",
-   "problem": "The availability impact is computed as (status weight x minutes share) x 15.0, and a player with no minutes row contributes 0.00 - indistinguishable in the table from a player whose absence costs nothing. Tonight that is 45 of 24 newly filed rows, and it is the difference between a line that moved and a line that did not.",
+   "problem": "The availability impact is computed as (status weight x minutes share) x 15.0, and a player with no minutes row contributes 0.00 - indistinguishable in the table from a player whose absence costs nothing. Tonight that is 20 of the 24 rows the game-day edition added and 45 of the 50 rows it lists for the five games - it is the difference between a line that moved and a line that did not.",
    "options": [
     {
      "option": "Capture minutes per club from the official team pages (30 URLs) instead of the paginated top-50 league table",

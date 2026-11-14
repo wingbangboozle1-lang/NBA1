@@ -3036,3 +3036,50 @@ the only part of the brief that changes by the hour.
 `command-center/**`, `origination/**`, `audit/**`, `verify/**`, `engine/**`,
 `engine_v2/**`, `integration/**`, `scripts/**`, `desk*.html` and the legacy root
 pages. They are read-only inputs. Nothing is deleted.
+
+### 31.1 Delivery record (2026-11-14 20:05Z)
+
+| # | Task | Outcome |
+| --- | --- | --- |
+| G01 | Game-day capture | **done** - four verbatim transcriptions in `data/captures/2026-11-14-pm/`: the 04:15 AM ET and 01:30 PM ET injury editions (49 and 73 player rows), the 27-game slate 11/14-11/17, and the 30-club standings read at 18:56Z (Utah 19:14Z). Three source ids in `data/raw/sources.json` plus a `refresh_2026-11-14-pm` block naming the run window. |
+| G02 | Row-level re-verification | **done** - **27/27** slate rows AGREE on matchup, date, tip time, game id and both displayed records (records cross-read twice: game card and standings page); **31/31** published 11/14 injury rows AGREE on status and reason against a fresh re-transcription of the 04:15 AM PDF, with no row on the site missing from the report. Zero disagreements to correct. |
+| G03 | Edition delta and re-price | **done** - CHI, CLE, MIA and NOP filed after the cut (24 rows added, 4 status changes); MEMPHIS was still inside its window, which is recorded as inside-window rather than missed. Re-run through the engine's own rule the edition moves **3 of 5** lines tonight, the largest by **2.6 points**, with **0** favourite flips and every published pick still on the model's side. The published lines were **not** rewritten - re-pricing a frozen line would put post-cut information into a graded number - so both editions' numbers sit side by side. |
+| G04 | Flagged for Review | **done** - **F47-F52** (High: 20 of the 24 newly filed rows, and 45 of the 50 rows listed for tonight, contribute 0.00 net-rating points; Low: Memphis inside its window; Medium: the card's Season Leaders widget is not injury-aware, PDF block attribution on re-flowed pages, two editions live deliberately, and the report never covering T+2/T+3). |
+| G05 | Exec summary, questions, suggestions | **done** - **A16/A17** posted and Q14/Q18 closed, Q10/Q12 re-scoped to what the data can actually answer, **SG19-SG22**, finding **#11**, and a new **Game-Day Read** page (`site/pages/gameday.html`, 117 rows, every row carrying an outbound official link) with a banner on the Injuries page pointing at it. |
+| G06 | Open-PR triage | **closed out by another seat** - all five were still `mergeable=UNKNOWN` when read here (4 of 5 rewrite `data/raw/probe_official.json` and this board, which is why GitHub would not compute a verdict). #65 and #75 overlap file for file, so #75 was the one to merge; #66 rewrites the same `data/content/*` files this branch changed, so it was the one predicted to conflict. #66/#63/#75/#80 were merged at 18:53:45Z and #65 closed as superseded before this session reached the merge; no merge, close, rebase or comment was executed here. |
+| G07 | PR to main | this PR. |
+
+**Board collision, recorded as an irregularity rather than quietly resolved.** This session
+claimed **§30** on `2038333` and pushed the claim at once; `arena/a39b9370-nba1` landed its
+own §30 on `main` while this work was in flight. That is the fourth such collision on this
+board and the evidence for **R-29-9** (claim by atomic commit and renumber once at fusion,
+instead of each seat re-reading a file that another seat can overwrite between the read and
+the write). Resolution here: rebase onto `51015c6`, keep their §30 untouched, renumber this
+section to **§31**, and re-derive the generated tree rather than hand-merging builder output
+(`index.html`, `site/**` are written only by `scripts/build_dashboard.py`).
+
+**Two defects found in this session's own draft, both fixed here rather than published.**
+First, the executive `lead` sentence was appended three times: the idempotence guard tested
+for a phrase the appended text did not contain. Second, a sentence compared two different
+populations as if they were one and printed "45 of the 24 newly listed players" - 45 counts
+rows listed for tonight, 24 counts rows the new edition added. The fix is structural, not
+cosmetic: `data/derived/gameday_read.json` now carries an explicit `summary.counts` block
+and the prose interpolates from it, so no sentence re-derives a denominator; the guards key
+on a phrase that is inside the text they guard; and `flagged.json` / `suggestions.json`
+merges became replace-by-id, because the original guard computed its "already present" set
+before removing and silently dropped the section on a second run. Both defects are the kind
+no validator catches - `check_site.py`, `check_links.py` and `render_check.mjs` all passed on
+a page whose table was missing a row and whose sentence said 45 of 24 - so the check that
+caught them is now part of the routine: dump the rendered `<tbody>` and read the prose.
+
+**Not touched:** `docs/data/**` (the §21 seat's exclusive scope - no line, pick or graded
+result was edited; `docs/data/picks.json` is still 60 rows, all `PENDING`),
+`strategy-lab/**`, `engine/**`, `command-center/**`. Everything published here is written
+from `data/content/*.json`, `data/raw/sources.json` and `data/derived/`.
+
+**Verification after the rebuild:** `check_site.py` PASS · `check_links.py` RESULT: PASS
+(0 broken internal links, 0 non-approved hosts, 0 source-less rows) ·
+`verify_integration.py` PASSED (0 errors, 44 published warnings) ·
+`build_verification_page.py` idempotent (0 changed lines) · `check_rendered.py` PASS ·
+`verify_all.py` VERIFY OK · `render_check.mjs` 124 pages / 7503 rendered rows / 0 pages with
+problems · `gameday_content_2026_11_14.py` re-run twice with no diff (idempotent).

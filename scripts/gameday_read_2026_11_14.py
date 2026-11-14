@@ -321,8 +321,23 @@ for r in inj_new["rows"]:
         "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season",
     })
 
+# exact counts, so no sentence on the site has to estimate
+tonight_listed = sum(g["gameday"]["home_listed"] + g["gameday"]["away_listed"] for g in readout)
+tonight_blind = sum(len(g["gameday"]["home_unknown_players"]) + len(g["gameday"]["away_unknown_players"])
+                    for g in readout)
+newly_filed = sum(d["n_added"] for d in delta_rows)
+newly_known = 0
+for _d in delta_rows:
+    for _a in _d["added"]:
+        if _norm(_a["player"]) in avail_new.players_by_key:
+            newly_known += 1
+
 summary = {
     "generated_utc": "2026-11-14T19:20Z",
+    "counts": {"tonight_listed_rows": tonight_listed, "tonight_rows_without_minutes": tonight_blind,
+               "rows_added_by_the_game_day_edition": newly_filed,
+               "added_rows_with_a_minutes_value": newly_known,
+               "added_rows_without_a_minutes_value": newly_filed - newly_known},
     "session": "arena/95c1cb23-nba1",
     "edition_published_by_site": pub_inj["report"],
     "edition_gameday": inj_new["report"],

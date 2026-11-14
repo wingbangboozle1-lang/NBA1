@@ -46,9 +46,15 @@ def save(p, obj):
 
 
 # how many newly-filed rows the engine can actually see, and how many it cannot
-new_rows = sum(d["n_added"] for d in READ["edition_delta"])
-blind = sum(len(g["gameday"]["home_unknown_players"]) + len(g["gameday"]["away_unknown_players"])
-            for g in READ["gameday_readout"])
+# All five figures come from the read artifact's own `counts` block. They are different
+# populations - rows listed for tonight vs rows the new edition added - and prose that
+# reuses one for the other reads as "45 of 24", which an earlier draft of this script did.
+CT = S["counts"]
+new_rows = CT["rows_added_by_the_game_day_edition"]
+added_blind = CT["added_rows_without_a_minutes_value"]
+added_known = CT["added_rows_with_a_minutes_value"]
+listed_tonight = CT["tonight_listed_rows"]
+blind = CT["tonight_rows_without_minutes"]
 moved = S["games_repriced"]
 games_today = len(READ["gameday_readout"])
 slate_ok, slate_n = S["slate_rows_agree"], S["slate_rows_checked"]
@@ -103,16 +109,17 @@ have = {i["id"] for i in fl["items"]}
 new_flags = [
     {
         "id": "F47", "severity": "High",
-        "title": "The availability layer cannot see most of the game-day report: %d of the %d newly "
-                 "filed player rows contribute 0.00 net-rating points" % (blind, new_rows),
+        "title": "The availability layer cannot see most of the game-day report: %d of the %d player rows "
+                 "the new edition added contribute 0.00 net-rating points" % (added_blind, new_rows),
         "detail": "Between the 04:15 AM ET edition the published lines were built from and the 01:30 PM ET "
                   "game-day edition, four clubs filed (New Orleans, Cleveland, Chicago, Miami) and %d player "
                   "rows appeared. Only the players who are inside the captured top-50 minutes table can move "
                   "the model, so %d of those rows contribute exactly 0.00 and %d of the %d games tipping "
                   "tonight have a model line that does not move at all. New Orleans is the clearest case: the "
                   "Pelicans ruled out Trey Murphy III and Dejounte Murray on the same report that gave the "
-                  "model five names it cannot price, and DEN@NOP is unchanged at -9.1."
-                  % (new_rows, blind, games_today - moved, games_today),
+                  "model five names it cannot price, and DEN@NOP is unchanged at -9.1. Across the whole slate "
+                  "for tonight the figure is %d of %d listed rows without a minutes value."
+                  % (new_rows, added_blind, games_today - moved, games_today, blind, listed_tonight),
         "affected": "Injuries & Rotation page; every originated spread and total for 2026-11-14; the prop "
                     "teammate-availability factor",
         "source": None,
@@ -199,8 +206,10 @@ new_flags = [
                             "T+2/T+3 as schedule only. Reviewer's call (SG19, option C).",
     },
 ]
-fl["items"] = [i for i in fl["items"] if i["id"] not in {n["id"] for n in new_flags}] + \
-              [n for n in new_flags if n["id"] not in have]
+# replace-by-id, so a second run reproduces the same file instead of dropping the
+# section it just added (the `have` set is computed before the removal, which made the
+# original guard skip the re-add).
+fl["items"] = [i for i in fl["items"] if i["id"] not in {n["id"] for n in new_flags}] + new_flags
 save(os.path.join(CONTENT, "flagged.json"), fl)
 
 # --------------------------------------------------------------- questions.json
@@ -222,7 +231,7 @@ new_answered = [
                   "favourite flips. The movements cost essentially nothing in the published lines for one "
                   "reason, and it is not the report's fault: %d of the %d newly listed players are outside the "
                   "captured minutes table, so their impact is forced to 0.00 (F47)."
-                  % (new_rows, moved, games_today, blind, new_rows),
+                  % (new_rows, moved, games_today, added_blind, new_rows),
         "source": None,
         "source_url": PDF_1330,
         "confidence": "High for the two editions read here (both transcribed row by row from the official PDF, "
@@ -262,9 +271,10 @@ for q in qs["open"]:
     if q["id"] == "Q12":
         q["what_is_missing"] = (
             "Minutes for the 415 players outside the captured top-50 table. This is no longer a theoretical "
-            "worry: on the 2026-11-14 game-day report %d of the %d newly listed players have no minutes row, "
-            "so a club can rule out two rotation pieces and the originated line will not move (F47). Until the "
-            "table is complete, the impact column is a floor and not an estimate." % (blind, new_rows))
+            "worry: on the 2026-11-14 game-day report %d of the %d rows a club added have no minutes row, so "
+            "a club can rule out two rotation pieces and the originated line will not move (F47). Across "
+            "tonight's five games the figure is %d of %d listed rows. Until the table is complete, the impact "
+            "column is a floor and not an estimate." % (added_blind, new_rows, blind, listed_tonight))
         q["priority"] = 1
 save(os.path.join(CONTENT, "questions.json"), qs)
 
@@ -310,8 +320,9 @@ new_sg = [
         "title": "Either give every listed player a minutes row or stop printing 0.00 for an unknown",
         "problem": "The availability impact is computed as (status weight x minutes share) x 15.0, and a "
                    "player with no minutes row contributes 0.00 - indistinguishable in the table from a "
-                   "player whose absence costs nothing. Tonight that is %d of %d newly filed rows, and it is "
-                   "the difference between a line that moved and a line that did not." % (blind, new_rows),
+                   "player whose absence costs nothing. Tonight that is %d of the %d rows the game-day edition "
+                   "added and %d of the %d rows it lists for the five games - it is the difference between a "
+                   "line that moved and a line that did not." % (added_blind, new_rows, blind, listed_tonight),
         "options": [
             {"option": "Capture minutes per club from the official team pages (30 URLs) instead of the "
                        "paginated top-50 league table",
@@ -381,72 +392,102 @@ new_sg = [
         "source": "https://www.nba.com/games?date=2026-11-16",
     },
 ]
-sg["items"] += [n for n in new_sg if n["id"] not in have_sg]
+sg["items"] = [i for i in sg["items"] if i["id"] not in {n["id"] for n in new_sg}] + new_sg
 save(os.path.join(CONTENT, "suggestions.json"), sg)
 
 # --------------------------------------------------------------- executive.json
 ex = load(os.path.join(CONTENT, "executive.json"))
+moves = [g for g in READ["gameday_readout"] if g["delta"]["changed"]]
+move_txt = "; ".join("%s %s to %s" % (g["matchup"], round(g["published"]["model_spread_home"], 1),
+                                      round(g["gameday"]["model_spread_home"], 1)) for g in moves)
+still_txt = ", ".join(g["matchup"] for g in READ["gameday_readout"] if not g["delta"]["changed"]) or "none"
+
 ex["headline"] = (
     "The horizon runs the full three days: 27 games from 14 to 17 November 2026, with an originated line, a "
     "paper pick and an injury read-out for every one - and, as of 19:20 UTC on 11/14, a game-day injury "
     "refresh that re-verifies every published row against the official page it came from (%d of %d slate rows "
-    "and %d of %d published report rows agree) and prices the five clubs that filed since the lines were cut."
+    "and %d of %d published report rows agree) and re-prices tonight's five games against the four clubs "
+    "that filed since the lines were cut."
     % (slate_ok, slate_n, inj_ok, inj_n))
-ex["lead"] = (
-    ex["lead"].rstrip() + " The morning's next action - capture the day-of-game injury updates for 2026-11-14 "
-    "and re-run against them - has been executed: the 01:30 PM ET game-day edition is transcribed row by row "
-    "on the new Game-Day Read page, four clubs' filings are diffed against the edition the lines were built "
-    "from, and the lines themselves are left exactly as published, because a line re-priced after the cut "
-    "cannot be graded. What that exercise found is not a small print: the game-day report moved three of "
-    "tonight's five games by at most 2.6 points, and it could not move the other two at all because %d of the "
-    "%d players the clubs newly ruled in or out have no minutes row anywhere in this project's inputs (F47)."
-    % (blind, new_rows))
-ex["findings"].append({
+if "day-of-game injury updates" not in ex["lead"]:
+    ex["lead"] = (
+        ex["lead"].rstrip() + " The morning's top next action - capture the day-of-game injury updates for "
+        "2026-11-14 and re-run against them - has been executed: the 01:30 PM ET game-day edition is "
+        "transcribed row by row on the new Game-Day Read page, four clubs' filings are diffed against the "
+        "edition the lines were built from, and the lines themselves are left exactly as published, because "
+        "a line re-priced after the cut cannot be graded. What that exercise found is not a small print: the "
+        "game-day report moved %d of tonight's %d games, and the lines that did not move each have a reason: "
+        "Memphis had not filed yet, while New Orleans filed five names that have no minutes row anywhere in "
+        "this project's inputs, so %d of the %d rows listed for tonight contribute 0.00 (F47)."
+        % (moved, games_today, blind, listed_tonight))
+_gday_finding = {
     "n": len(ex["findings"]) + 1,
     "title": "The game-day edition arrived, and it moved the model far less than it should have",
-    "detail": "New Orleans, Cleveland, Chicago and Miami all filed between the 04:15 AM ET edition the "
-              "horizon was cut from and the 01:30 PM ET game-day edition, adding %d player rows and changing "
-              "four statuses; Memphis was still inside its window. Re-run through the engine's own availability "
-              "adjustment, CHI@MIN moves from 30.6 to 33.2, DAL@CLE from -1.8 to -2.5 and DET@MIA from -12.2 "
-              "to -12.4, and DEN@NOP and BKN@MEM do not move at all. No favourite flips and no published pick "
-              "changes side." % new_rows,
-    "reading": "Two readings are available and the site publishes both. The charitable one: the report's "
-               "intra-day churn is usually noise, and a model that lurched on every status label would be "
-               "worse. The uncomfortable one: the reason it cannot move New Orleans is that the Pelicans' "
-               "five listed names are not in the minutes table, so the model is not judging them, it is blind "
-               "to them. That is F47, and it is the highest-value fix in the register.",
-})
+    "detail": "New Orleans, Cleveland, Chicago and Miami filed between the 04:15 AM ET edition the horizon "
+              "was cut from and the 01:30 PM ET game-day edition, adding %d player rows and changing four "
+              "statuses; Memphis was still inside its filing window. Re-run through the engine's own "
+              "availability adjustment, that edition moves %d of the %d games tipping tonight (%s) and leaves "
+              "%s unchanged. No favourite flips and no published pick changes side."
+              % (new_rows, moved, games_today, move_txt, still_txt),
+    "reading": "Two readings are available and the site publishes both. The charitable one: intra-day report "
+               "churn is usually noise, and a model that lurched on every status label would be worse. The "
+               "uncomfortable one: the reason it cannot move New Orleans is that the Pelicans' five listed "
+               "names are not in the minutes table, so the model is not judging them, it is blind to them. "
+               "That is F47, and it is the highest-value item in the register.",
+}
+if not any("game-day edition arrived" in (f.get("title") or "") for f in ex["findings"]):
+    ex["findings"].append(_gday_finding)
 ex["what_is_live_now"] = [t for t in ex["what_is_live_now"] if "Game-Day Read" not in t] + [
     "Game-Day Read: the 01:30 PM ET official edition transcribed row by row, the diff against the edition "
     "the lines were cut from, the re-priced model line beside the published one for all five 11/14 games, "
     "and the %d-of-%d row-level verification of the whole 27-game horizon against NBA.com."
     % (slate_ok, slate_n),
 ]
+_old_actions = list(ex.get("recommended_next_actions", []))
+
+
+def _carry(keyword, fallback):
+    for a in _old_actions:
+        if keyword.lower() in (str(a.get("action", "")) + str(a.get("why", ""))).lower():
+            return a["why"]
+    return fallback
+
+
 ex["recommended_next_actions"] = [
     {"rank": 1,
-     "action": "DONE 2026-11-14T19:20Z: capture the day-of-game injury updates and re-price. The published "
-               "lines were deliberately not rewritten.",
-     "why": "Executed by session arena/95c1cb23-nba1. Results on the Game-Day Read page; the two editions, "
-            "the diff, the impact re-computation and the row-level verification are all in "
-            "data/derived/gameday_read.json with a source URL per row. The residual finding is F47, not F13."},
+     "action": "DONE 2026-11-14T19:20Z: capture the day-of-game injury updates and re-price against them. "
+               "The published lines were deliberately not rewritten.",
+     "why": "Executed by session arena/95c1cb23-nba1. The two editions, the diff, the impact re-computation "
+            "and the row-level verification are in data/derived/gameday_read.json, one source URL per row. "
+            "The residual finding is F47: the availability layer cannot see most of what was filed."},
     {"rank": 2,
      "action": "Complete the minutes input, per club, so the availability layer can see a rotation instead "
                 "of a top-50 slice",
-     "why": "It is what turns tonight's 0.00 columns into numbers and unlocks Q3, Q12 and Q20 (SG20, F47)."},
+     "why": "It is what turns tonight's 0.00 columns into numbers, and it unlocks Q3, Q12 and Q20 "
+            "(SG20, F47)."},
     {"rank": 3,
      "action": "Capture the 11/15, 11/16 and 11/17 injury-report editions as they are published",
-     "why": ex["recommended_next_actions"][1]["why"]},
+     "why": _carry("editions as they are published",
+                   "The game-day edition lists every 11/15 club as NOT YET SUBMITTED and prints no rows at "
+                   "all for 11/16 or 11/17, so the horizon's last two dates carry no availability input "
+                   "(F52).")},
     {"rank": 4,
      "action": "Log real closing prices",
-     "why": ex["recommended_next_actions"][2]["why"]},
+     "why": _carry("closing prices",
+                   "Until this exists, nothing here can be called profitable - only better than a naive "
+                   "model. Everything else is optimisation of an unvalidated target.")},
     {"rank": 5,
      "action": "Backfill results for 2026-10-20 to 2026-11-05 and re-cut the split",
-     "why": ex["recommended_next_actions"][3]["why"]},
+     "why": _carry("re-cut the split",
+                   "Every game from 2026-11-06 onward is already in the test window, so this is the only "
+                   "way to grow the sample.")},
 ]
-ex["bottom_line"] = (
-    ex["bottom_line"].rstrip() + " The game-day pass added the one thing the site did not have: a measured "
-    "answer to 'how much did we miss by cutting the line before the clubs filed?' - three of five games moved, "
-    "two could not, and the reason two could not is a data gap with a name and a size, not bad luck.")
+if "game-day pass" not in ex["bottom_line"]:
+    ex["bottom_line"] = (
+        ex["bottom_line"].rstrip() + " The game-day pass added the one thing the site did not have: a "
+        "measured answer to 'what did we miss by cutting the line before the clubs filed?' - %d of five "
+        "games moved, the rest could not, and the reason they could not is a data gap with a name and a "
+        "size, not bad luck." % moved)
 save(os.path.join(CONTENT, "executive.json"), ex)
 
 print("sources +%d | flags %d -> %d | questions open %d answered %d | suggestions %d -> %d | findings -> %d"
