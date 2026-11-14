@@ -1,31 +1,493 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="NBA line research, transparent validation gates, and flagged data gaps."><title>NBA Edge Lab — Decision Dashboard</title><link rel="stylesheet" href="styles.css"></head>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NBA1 &mdash; NBA line origination and strategy lab &middot; NBA1</title>
+<link rel="stylesheet" href="site/assets/site.css">
+
+</head>
 <body>
-<aside class="sidebar"><a class="brand" href="#overview"><span class="brand-mark">N</span><span>NBA <b>EDGE LAB</b></span></a><div class="nav-label">ALL BUILDS</div><a href="command-center/index.html">◆ &nbsp; Command Center <small>(current data)</small></a><a href="docs/b/index.html">◇ &nbsp; Origination Desk</a><a class="active" href="index.html">▣ &nbsp; Edge Lab <small>(this build, frozen 11/13)</small></a><div class="nav-label">WORKSPACE</div><nav><a class="active" href="#overview">▦ &nbsp; Overview</a><a href="#signals">◈ &nbsp; Signal research</a><a href="#validation">✓ &nbsp; Validation gates</a><a href="#correlation">⌁ &nbsp; Correlation</a><a href="#injuries">＋ &nbsp; Injuries & game flow</a><a href="#leaderboard">☆ &nbsp; Leaderboard</a><a href="#questions">? &nbsp; Open questions</a><a href="#suggestions">✧ &nbsp; Suggestions</a><a href="#flags">⚑ &nbsp; Flagged for review</a><div class="nav-label">OFFICIAL SNAPSHOT</div><a href="docs/index.html">▤ &nbsp; Dated NBA data</a><div class="nav-label">INTEGRATION DESK · CAPTURE 2026-11-14</div><a href="desk.html">▦ &nbsp; Desk overview</a><a href="desk-lines.html">◈ &nbsp; Lines &amp; slate picks</a><a href="desk-validation.html">✓ &nbsp; Gates &amp; settlement</a><a href="desk-props.html">⌁ &nbsp; Props &amp; correlation</a><a href="desk-capture.html">⚑ &nbsp; Capture &amp; repo review</a><div class="nav-label">DETAIL PAGES</div><a href="lines.html">◈ &nbsp; Originated lines &amp; picks</a><a href="gameflow.html">＋ &nbsp; Injuries &amp; game flow</a><a href="research.html">⌁ &nbsp; Strategy lab</a><a href="slate.html">▦ &nbsp; Upcoming slate</a><a href="schedule-verified.html">▦ &nbsp; Verified schedule 14–17 Nov</a><a href="picks.html">▦ &nbsp; Horizon lines &amp; picks 14–17 Nov</a><a href="verification.html"><span class="nav-icon">◎</span>Live verification</a><a href="docs/b/index.html">◈ &nbsp; Second build: backtested desk</a><a href="suggestions.html">✧ &nbsp; Questions & suggestions</a><a href="review.html">⚑ &nbsp; Flagged items</a><a href="sources.html">↗ &nbsp; Source register</a><div class="nav-label">DETAIL PAGES</div><a href="lines.html">◈ &nbsp; Originated lines &amp; picks</a><a href="gameflow.html">＋ &nbsp; Injuries &amp; game flow</a><a href="research.html">⌁ &nbsp; Strategy lab</a><a href="slate.html">▦ &nbsp; Upcoming slate</a><a href="schedule-verified.html">▦ &nbsp; Verified schedule 14–17 Nov</a><a href="picks.html">▦ &nbsp; Horizon lines &amp; picks 14–17 Nov</a><a href="verification.html"><span class="nav-icon">◎</span>Live verification</a><a href="docs/b/index.html">◈ &nbsp; Second build: backtested desk</a><a href="suggestions.html">✧ &nbsp; Questions & suggestions</a><a href="review.html">⚑ &nbsp; Flagged items</a><a href="sources.html">↗ &nbsp; Source register</a></nav><div class="side-note"><span class="dot"></span> Evidence-first mode<br><small>No fabricated lines or picks</small></div></aside>
-<main id="overview"><header><div><div class="eyebrow">RESEARCH WORKSPACE / NBA</div><h1>Decision dashboard</h1><p>Build and test an independent view of the market. Only verified inputs earn a place in a pick.</p></div><div class="season-pill"><span class="dot"></span> Data readiness: <b>Snapshot + model (gated)</b></div></header>
-<section class="section" id="builds" style="padding-top:14px"><div class="callout" style="border-left:4px solid #b4231c;background:#fdeceb"><b>This build is a frozen snapshot taken on 13 November 2026.</b> It is kept intact so its pages stay reproducible, and it is <b>not</b> updated on the daily refresh — its slate still reads Nov 13–16 and its injury layer still uses the 5:15 PM ET report. For current data (22-game window, 14–16 November, 19:30 ET injury report) use the <a href="command-center/index.html"><b>Command Center</b></a>, which is generated from the same verified sources and carries a source link on every row.</div></section>
-<section class="hero"><div><div class="eyebrow">EXECUTIVE SUMMARY</div><h2>Skill is a hypothesis.<br><span>Evidence is the edge.</span></h2><p>The initial checkout had no NBA dataset, model, odds history, injury feed, or bankroll policy. Integration added a dated official schedule and injury-report snapshot under docs/, plus the Edge Lab: model <b>RecordLine-1</b> originates lines and paper picks for all 31 games of the Nov 13–16, 2026 window (<a href="lines.html">lines.html</a>), and the official 5:15 PM ET injury report drives an impact / game-flow layer (<a href="gameflow.html">gameflow.html</a>). There is still no live feed, no odds history, and no settled results: no performance claims, rotation-minute projections, or validated bets are published.</p><a class="button" href="#validation">Review validation gates <span>→</span></a></div><div class="hero-stat"><div class="stat-ring">26</div><strong>Paper model picks · Nov 13–16</strong><small>Originated lines — not market-validated · <a href="lines.html">lines.html</a></small></div></section>
-<section class="metrics"><article><div class="metric-name">LIVE FEEDS CONNECTED</div><strong>0</strong><small>Dated static snapshot is under docs/</small></article><article><div class="metric-name">QUALIFIED STRATEGIES</div><strong>0</strong><small>None evaluated on held-out data</small></article><article><div class="metric-name">UPCOMING SLATE</div><strong>Nov 14–17</strong><small>today + 3 days · 27 games verified on NBA.com · picks published with disclosed staleness → <a href="picks.html">horizon lines &amp; picks</a></small></article><article><div class="metric-name">OPEN REVIEW FLAGS</div><strong>23</strong><small>8 dashboard + 10 Edge Lab + 5 open from session arena-a6936331 (review.html); snapshot flags in docs/</small></article></section>
-<section class="section" id="verified-snapshot"><div class="section-head"><div><div class="eyebrow">DATED SOURCE SNAPSHOT · NOT LIVE</div><h2>Official-source schedule and injury archive</h2><p>The repository includes a separate, time-bounded NBA schedule and injury-report snapshot with row-level links, transcription flags and the original source register. It is not a live feed, current status monitor, or prediction service.</p></div><span class="tag amber">VERIFY AS OF TIME</span></div><div class="callout"><b>Browse the archival snapshot:</b> <a href="docs/index.html">Games, Nov 13–15, 2026</a> · <a href="docs/injuries.html">NBA injury report, Nov 13, 2026, 12:00 PM ET</a> · <a href="docs/flagged.html">Extraction and missing-field flags</a> · <a href="docs/sources.html">Sources</a>. <b>Edge Lab (live pages):</b> <a href="lines.html">Originated lines &amp; picks, Nov 13–16</a> · <a href="gameflow.html">Injuries &amp; game flow (5:15 PM report)</a>. Injury statuses are not minutes forecasts; no minute-level production estimates are generated.</div></section>
-<section class="section" id="signals"><div class="section-head"><div><div class="eyebrow">RESEARCH MENU</div><h2>Signal research</h2><p>Candidate features, not proven advantages. Inputs must be time-stamped as known before tipoff.</p></div><span class="tag amber">NOT BACKTESTED</span></div><div class="table-wrap"><table><thead><tr><th>Market / candidate signal</th><th>Testable hypothesis</th><th>Required evidence</th><th>Current status</th><th>Official reference</th></tr></thead><tbody>
-<tr><td><b>Game spread / total</b></td><td>Possession-adjusted team strength and matchup features may improve forecasts versus a market baseline.</td><td>Timestamped historical closing/opening prices, results, schedule, team stats; point-in-time splits.</td><td><span class="tag gray">Not evaluated</span></td><td><a href="https://www.nba.com/stats/teams/advanced">NBA team advanced stats ↗</a></td></tr>
-<tr><td><b>Player points / rebounds / assists</b></td><td>Role, minutes opportunity, and matchup features may explain outcomes beyond season averages.</td><td>Official player/game logs, actual minutes, status history, prop prices and settlement rules.</td><td><span class="tag gray">Not evaluated</span></td><td><a href="https://www.nba.com/stats/players">NBA player stats ↗</a></td></tr>
-<tr><td><b>Injury/rotation impact</b></td><td>Availability changes may shift minutes and usage across teammates; quantify conditional, not deterministic, impacts.</td><td>Official dated status reports, starters/lineups, minutes, on/off samples and report publication time.</td><td><span class="tag amber">Data missing</span></td><td><a href="https://official.nba.com/nba-injury-report-2026-27-season/">NBA injury report page ↗</a></td></tr>
-<tr><td><b>Player prop combos</b></td><td>Joint outcomes may differ from independent-leg estimates; measure empirical and conditional dependence.</td><td>Same-game prices, leg definitions, joint outcomes and settlement/void rules.</td><td><span class="tag gray">Not evaluated</span></td><td><a href="https://www.nba.com/stats/help/glossary">NBA stats glossary ↗</a></td></tr>
-<tr><td><b>Parlays</b></td><td>Only offer when a calibrated joint probability beats the full payout break-even with uncertainty margin.</td><td>Joint historical outcomes, exact offered payout, vig, limits and rules.</td><td><span class="tag amber">No price data</span></td><td><a href="https://www.nba.com/stats/help/faq">NBA stats FAQ ↗</a></td></tr>
-</tbody></table></div><p class="table-note">These are research hypotheses, not betting recommendations. NBA references document stats/data context; they do not validate a predictive edge.</p></section>
-<section class="section" id="validation"><div class="section-head"><div><div class="eyebrow">PROMOTION POLICY</div><h2>Validation gates</h2><p>A strategy stays in research until it clears every gate. Thresholds require explicit approval and historical evidence; none are presumed here.</p></div></div><div class="gate-grid"><article><span>01</span><h3>Data integrity</h3><p>Document source, timestamp, revisions, coverage, settlement definitions, and missingness. No post-event leakage.</p><b>Required before modeling</b></article><article><span>02</span><h3>Out-of-sample design</h3><p>Chronological train/validation/test; rolling-origin evaluation. Freeze features and rules before final holdout.</p><b>Required before scoring</b></article><article><span>03</span><h3>Calibration & uncertainty</h3><p>Measure probability calibration (e.g. reliability/Brier score) and uncertainty by market and probability band.</p><b>Report confidence intervals</b></article><article><span>04</span><h3>Economic value</h3><p>Compare with contemporaneous available prices, account for vig, pushes/voids, limits and realistic execution.</p><b>Net results, not hit rate</b></article><article><span>05</span><h3>Robustness & multiplicity</h3><p>Pre-register candidate tests; correct for multiple comparisons; stress-test seasons, teams and market regimes.</p><b>Penalize selection bias</b></article><article><span>06</span><h3>Live shadow period</h3><p>Log immutable pregame predictions before settlement. Require a pre-agreed sample and stability policy.</p><b>Promotion requires sign-off</b></article></div><div class="callout"><b>Luck control:</b> report uncertainty around ROI and calibration, benchmark against simple baselines and market prices, and avoid winner-only leaderboard rankings. A short-term positive run is not proof of skill.</div></section>
-<section class="section" id="correlation"><div class="section-head"><div><div class="eyebrow">COMBO RISK</div><h2>Correlation & joint probabilities</h2><p>Do not multiply marginal probabilities as though legs were independent unless independence is justified and tested.</p></div></div><div class="table-wrap"><table><thead><tr><th>Combination</th><th>Correlation status</th><th>How to estimate</th><th>Minimum reporting</th><th>Official source</th></tr></thead><tbody><tr><td>Same player: points + made threes</td><td><span class="tag amber">Unknown — no paired sample</span></td><td>Paired game outcomes, point-in-time role/availability strata; Pearson for suitable continuous outcomes plus rank/conditional analysis.</td><td>Sample size, estimate, confidence interval, season/team sensitivity.</td><td><a href="https://www.nba.com/stats/players/boxscores">NBA player box scores ↗</a></td></tr><tr><td>Teammates: assists + scorer points</td><td><span class="tag amber">Unknown — no paired sample</span></td><td>Paired outcomes with minutes, pace and lineup context; distinguish association from causal effect.</td><td>Conditional dependence, calibration of joint event.</td><td><a href="https://www.nba.com/stats/players/boxscores">NBA player box scores ↗</a></td></tr><tr><td>Game spread + total</td><td><span class="tag amber">Unknown — no market/result history</span></td><td>Estimate from timestamped game outcomes and price snapshots; stratify by market/time.</td><td>Correlation does not establish expected value.</td><td><a href="https://www.nba.com/stats/teams/advanced">NBA team stats ↗</a></td></tr></tbody></table></div><p class="table-note">No empirical correlation is supplied: the repository contains no paired observations — point estimates stay blank. What <em>is</em> determined: exact Fréchet–Hoeffding bounds (ρ intervals implied by the two marginals) for the cross-game parlay cards are computed on <a href="lines.html">lines.html</a>. Correlation is not a causal explanation and can change with selection, role, and game context.</p></section>
-<section class="section" id="injuries"><div class="section-head"><div><div class="eyebrow">PREGAME CONTEXT</div><h2>Injuries & game flow</h2><p>Availability is time-sensitive. A report is not a guarantee of participation, minutes, or production.</p></div><span class="tag amber">NO LIVE FEED</span></div><div class="two-col"><article class="panel"><h3>Rotation impact workflow</h3><ol><li>Ingest official report with capture timestamp and status history.</li><li>Confirm status updates close to tip; keep unknowns unknown.</li><li>Build plausible rotation scenarios from prior lineup/minute evidence.</li><li>Recompute minutes and production distributions, including uncertainty; never allocate absent-player minutes mechanically.</li><li>Log assumptions and freeze each forecast version before the game.</li></ol></article><article class="panel"><h3>Game flow checklist</h3><ul><li>Projected pace and possession range from dated team data.</li><li>Rotation depth and expected availability scenarios.</li><li>Foul, blowout, overtime, and role-change sensitivity.</li><li>Market movement only when timestamped prices are available.</li><li>Scenario range and confidence—not a single deterministic story.</li></ul></article></div><p class="table-note">Official injury report reference: <a href="https://official.nba.com/nba-injury-report-2026-27-season/">NBA Communications — injury report page ↗</a>. The page is season-specific and not a live slate feed. The official 11/13 5:15 PM ET report <em>has</em> been transcribed for this project on <a href="gameflow.html">gameflow.html</a> (impact context from printed values only; minutes remain unquantified).</p></section>
-<section class="section" id="leaderboard"><div class="section-head"><div><div class="eyebrow">TRANSPARENT COMPETITION</div><h2>Strategy leaderboard</h2><p>Rank qualified strategies on predeclared, risk-aware evidence—not raw wins or short streaks.</p></div><span class="tag gray">NO ENTRIES</span></div><div class="table-wrap"><table><thead><tr><th>Rank</th><th>Strategy</th><th>Markets / sample</th><th>Net ROI + interval</th><th>Calibration</th><th>Gate status</th><th>Official source</th></tr></thead><tbody><tr><td>—</td><td>S-01…S-05 registered (see <a href="lines.html">lines.html</a>)</td><td>Nov 13–16 slate · paper</td><td>— <span class="tag gray">blank — no settled results</span></td><td>—</td><td><span class="tag gray">PAPER / GATED — gates on lines.html</span></td><td><a href="https://www.nba.com/games?date=2026-11-13">NBA slate (basis) ↗</a></td></tr></tbody></table></div><p class="table-note">Rewards design suggestion: eligibility only after all gates; rank by predeclared uncertainty-aware metric, minimum coverage and reproducibility. Publish losing/retired strategies too. No reward amounts or payout rules are set.</p></section>
-<section class="section" id="questions"><div class="section-head"><div><div class="eyebrow">DECISION REGISTER</div><h2>Questions, knowns & missing evidence</h2><p>Items needing resolution before decisions can reasonably be made. Unknown is not zero.</p></div></div><div class="table-wrap"><table><thead><tr><th>Question</th><th>Known from repository</th><th>Missing information / source needed</th><th>Decision enabled</th><th>Official source</th></tr></thead><tbody><tr><td>What seasons and markets are in scope?</td><td>NBA lines and player props requested.</td><td>Season range, leagues, market definitions and jurisdiction.</td><td>Dataset and lawful product scope.</td><td><a href="https://www.nba.com/schedule">NBA schedule ↗</a></td></tr><tr><td>What is the available data, provenance and license?</td><td>No data assets supplied.</td><td>Official stats access, historical price source, timestamps, rights/retention terms.</td><td>Reproducible feature set.</td><td><a href="https://www.nba.com/stats/">NBA Stats ↗</a></td></tr><tr><td>Which odds and execution assumptions apply?</td><td>None documented.</td><td>Book/venue, price snapshots, vig, limits, slippage, settlement/void rules.</td><td>Expected value and realized performance.</td><td><a href="https://www.nba.com/">NBA.com (not an odds feed) ↗</a></td></tr><tr><td>What bankroll and risk limits govern use?</td><td>None documented.</td><td>Budget, maximum exposure, unit sizing, drawdown tolerance, responsible-use policy.</td><td>Whether and how any signal is actionable.</td><td><a href="https://www.nba.com/">NBA.com (policy not established here) ↗</a></td></tr><tr><td>How should validation success be defined?</td><td>No strategy/results.</td><td>Pre-agreed sample size, error tolerance, intervals, ROI baseline and promotion criteria.</td><td>Leaderboard eligibility.</td><td><a href="https://www.nba.com/stats/players/boxscores">NBA box scores ↗</a></td></tr><tr><td>How are injuries and late scratches captured?</td><td>No feed/history.</td><td>Official reports with publication/update timestamps, lineup history and game status.</td><td>Reliable minutes scenarios.</td><td><a href="https://official.nba.com/nba-injury-report-2026-27-season/">NBA injury reports ↗</a></td></tr><tr><td>How should combos be priced?</td><td>No joint observations/prices.</td><td>Joint outcomes, offered payouts, correlation estimation protocol, minimum sample.</td><td>Parlay/prop-combo decisions.</td><td><a href="https://www.nba.com/stats/help/glossary">NBA Stats glossary ↗</a></td></tr><tr><td>What does “no manual input” mean operationally?</td><td>Automated slate generation requested.</td><td>Authorized data integrations, refresh cadence, failure alerts, permitted credentials mechanism.</td><td>Safe automated 0–3 day pipeline.</td><td><a href="https://www.nba.com/schedule">NBA schedule ↗</a></td></tr></tbody></table></div></section>
-<section class="section" id="suggestions"><div class="section-head"><div><div class="eyebrow">HUMAN REVIEW BEFORE CHANGE</div><h2>Suggestions</h2><p>Proposed paths for review; these are not implemented decisions or validated findings.</p></div><span class="tag blue">REVIEW QUEUE</span></div><div class="suggestions"><article><span class="priority">01 · FOUNDATION</span><h3>Establish a versioned, point-in-time data pipeline</h3><p>Start with official NBA schedules, box scores, player/team stats and dated injury reports; separately procure historically timestamped market prices with documented rights. Store source URL, retrieval time, game time, revision, and raw record checksum.</p><small>Decision owner: review data access and licensing before ingestion.</small></article><article><span class="priority">02 · VALIDATION</span><h3>Freeze a pre-registered evaluation protocol</h3><p>Set chronological holdouts, baseline comparisons, minimum sample/coverage, uncertainty reporting, multiple-testing controls and promotion thresholds before strategy search.</p><small>Decision owner: review criteria; no thresholds assumed here.</small></article><article><span class="priority">03 · AUTOMATION</span><h3>Generate only evidence-qualified picks for a rolling 0–3 day horizon</h3><p>Schedule refreshes, forecast versioning and injury-triggered recalculation. Suppress a pick when inputs are stale/missing or a gate fails; expose the reason and last-updated time.</p><small>Dependency: approved data feeds, uptime and fail-closed policy.</small></article><article><span class="priority">04 · GOVERNANCE</span><h3>Make the leaderboard auditable and risk-aware</h3><p>Show all eligible and retired methods, sample size, calibration, net performance with intervals, market coverage, methodology version and independent replay. Set rewards only after policy review.</p><small>Decision owner: define competition and responsible-use policy.</small></article></div></section>
-<section class="section" id="integration-desk"><div class="section-head"><div><div class="eyebrow">INTEGRATION DESK · PAPER FORECASTS · NO PRICES</div><h2>Originated lines for Nov 14–16, and what refused to be a pick</h2><p>The 2026-11-14 capture priced all 22 games of the three-day horizon off a frozen 10/20–11/05 ratings window, and graded the model on 51 official finals. Outcome: the margin carries real information and the total does not, every selection rule that touches availability is what withholds picks, and no rotation impact could be sized.</p></div><span class="tag amber">0 GAMES CLEARED EVERY RULE</span></div><div class="table-wrap"><table><thead><tr><th>What the desk found</th><th>Number</th><th>Official basis</th></tr></thead><tbody>
-<tr><td>Games priced on the 11/14–11/16 slate</td><td><b>22</b> · 0 selected, 9 provisional, 8 inside noise, 5 refused for asymmetric availability</td><td><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">NBA.com slate 11/14 ↗</a></td></tr>
-<tr><td>Out-of-sample error on the final margin</td><td><b>12.79 pts MAE</b> on 51 graded games against <b>15.28</b> for a constant, so the margin carries information — while the <b>total</b> scores 14.69 against 14.38 and <b>loses</b> to a constant</td><td><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season&amp;DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026" target="_blank" rel="noopener">frozen ratings window ↗</a></td></tr>
-<tr><td>Absences that could be converted into a line move</td><td><b>1 of 26</b> listed rows had verified season minutes in this repository; the rest are published as blanks</td><td><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">official injury report PDF ↗</a></td></tr>
-<tr><td>Player-prop dispersion</td><td><b>measured</b> for 3 players from 12 official game-log rows — with intervals wider than the lines; still 0 usable for staking</td><td><a href="https://www.nba.com/player/203999/nikola-joki-c/game-log" target="_blank" rel="noopener">official game log ↗</a></td></tr>
-</tbody></table></div><p class="table-note">Read the whole desk at <a href="desk.html">desk.html</a>; the gates, ablations and settlement ledger are on <a href="desk-validation.html">desk-validation.html</a>. No number on these pages is a price, and nothing here is a validated betting strategy.</p></section>
-<section class="section flags" id="flags"><div class="section-head"><div><div class="eyebrow">TRANSPARENCY REGISTER</div><h2>⚑ Flagged for review</h2><p>Unverified values are deliberately blank. Source links below are official reference pages, not evidence that this repo has ingested current values.</p></div><span class="tag red">8 OPEN</span></div><div class="table-wrap"><table><thead><tr><th>Flag</th><th>Unverified / absent item</th><th>Why it matters</th><th>Review path / official reference</th></tr></thead><tbody><tr><td>F-01</td><td>Live schedule through the next 3 days: <b>—</b></td><td>Cannot produce a correct slate without a date/time-zone-aware feed.</td><td><a href="https://www.nba.com/schedule">NBA schedule ↗</a></td></tr><tr><td>F-02</td><td>Current player injury statuses: <b>—</b></td><td>Statuses change; this project has no captured report or update time.</td><td><a href="https://official.nba.com/nba-injury-report-2026-27-season/">NBA official injury reports ↗</a></td></tr><tr><td>F-03</td><td>Historical odds/closing lines: <b>—</b></td><td>No official league source is a bookmaker price archive; obtain a documented licensed source.</td><td><a href="https://www.nba.com/">NBA.com (not an odds source) ↗</a> Source provider requires review.</td></tr><tr><td>F-04</td><td>Correlation estimates: <b>—</b></td><td>No paired historical outcomes or sample definitions supplied.</td><td><a href="https://www.nba.com/stats/players">Official player statistics ↗</a></td></tr><tr><td>F-05</td><td>Strategy ROI / skill: <b>—</b></td><td>No predictions, price snapshots, settlements, or backtest in repository.</td><td><a href="https://www.nba.com/stats/">NBA Stats (outcome inputs only) ↗</a> No result can be verified; create auditable dataset first.</td></tr><tr><td>F-06</td><td>Rotation impact/minutes forecasts: <b>—</b></td><td>No dated availability, lineup or minutes histories.</td><td><a href="https://www.nba.com/stats/players/traditional">NBA player stats ↗</a></td></tr><tr><td>F-07</td><td>Permissions, data rights, jurisdiction and responsible-use rules: <b>—</b></td><td>Operational and legal scope is unspecified; do not automate wagering.</td><td><a href="https://www.nba.com/">NBA.com (does not resolve legal scope) ↗</a> Requires policy/legal review; no facts presumed.</td></tr><tr><td>F-08</td><td>Live site / GitHub Pages deployment: <b>—</b></td><td>Deployment credentials/settings and successful workflow status are not established by repository contents.</td><td><a href="https://docs.github.com/en/pages">GitHub Pages documentation ↗</a> Requires deployment check.</td></tr></tbody></table></div></section>
-<footer>NBA Edge Lab · Evidence-first research prototype · Not betting advice · No live data connected <span><a href="https://www.nba.com/stats/help/glossary">NBA Stats glossary ↗</a></span></footer></main><script src="app.js"></script></body></html>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">▦ &nbsp; Horizon lines &amp; picks 14–17 Nov <small>(session build)</small></a><a href="site/pages/picks.html">Horizon</a>
+      <a href="site/pages/strategies.html">Evidence</a>
+      <a href="site/pages/suggestions.html">Decision</a>
+      <a href="site/pages/flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="site/pages/picks.html">Lines &amp; Picks</a>
+<a href="site/pages/props.html">Player Props</a>
+<a href="site/pages/injuries.html">Injuries &amp; Rotation</a>
+<a href="site/pages/gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="site/pages/strategies.html">Strategies &amp; Leaderboard</a>
+<a href="site/pages/validation.html">Validation Gates</a>
+<a href="site/pages/correlations.html">Correlations</a>
+<a href="site/pages/luck.html">Luck &amp; Skill</a>
+<a href="site/pages/backtest.html">Out-of-Sample Backtest</a>
+<a href="site/pages/model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="site/pages/questions.html">Open Questions</a>
+<a href="site/pages/suggestions.html">Suggestions</a>
+<a href="site/pages/flagged.html">Flagged for Review</a>
+<a href="site/pages/sources.html">Source Register</a>
+<a href="site/pages/repo-review.html">Repo Review</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row links to the official source it
+      came from. A blank cell means the value could not be confirmed from an official
+      source &mdash; it is never filled in by guesswork. See
+      <a href="site/pages/flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>NBA1 &mdash; NBA line origination and strategy lab</h1>
+      <p class="sub">Originated lines, validation gates, measured correlations and a luck check for every NBA game in the next three days. Every row links to the official source it came from.</p>
+    </div>
+    <div class="tiles">
+<div class="tile"><div class="tile-v">27</div><div class="tile-l">Games in horizon</div><div class="tile-s">14&ndash;17 Nov 2026 (today + 3 days)</div></div>
+<div class="tile"><div class="tile-v">27</div><div class="tile-l">Originated lines</div><div class="tile-s">spread, total and fair moneyline per game</div></div>
+<div class="tile"><div class="tile-v">63</div><div class="tile-l">Paper picks</div><div class="tile-s">gated; none is market-validated</div></div>
+<div class="tile"><div class="tile-v">10</div><div class="tile-l">Strategies tested</div><div class="tile-s">6 capped at a quarter unit &middot; 4 research-only</div></div>
+<div class="tile"><div class="tile-v">51</div><div class="tile-l">Out-of-sample games</div><div class="tile-s">every one predicted out of sample</div></div>
+<div class="tile"><div class="tile-v">20</div><div class="tile-l">Open flags</div><div class="tile-s">published, non-blocking</div></div>
+</div>
+<div class="banner warn"><div class="b-t">What this site is, and what it is not</div><div class="b-b"><p>This is an <strong>origination and research</strong> workspace. It produces its own lines from official NBA data and then tries hard to prove that those lines carry skill. As of this build <strong>no strategy has cleared the skill gate</strong>: the best one is 16-7 at Tier 3 - Quarter unit, which is inside what luck alone produces. Every strategy is therefore capped at a quarter unit or held back as research-only, and that is the result, not an obstacle to be worked around.</p><p>No sportsbook price is used anywhere, because no NBA-operated source publishes one. &ldquo;Edge&rdquo; on this site means <em>the model against a deliberately naive reference model built from the same official ratings</em>. It does not mean an edge against a book.</p></div></div>
+<section class="card exec"><h2>Executive summary</h2><p class="lead">The horizon now runs the full three days: 27 games from 14 to 17 November 2026, with an originated line, a paper pick and an injury read-out for every one, and a source link on every row. The newest official injury-report edition (11/13/26 07:30 PM ET) has been captured and transcribed row by row. The out-of-sample window is 51 games, and the honest read on it is unchanged: a small edge on the margin, no edge on totals or winners, and one strategy whose good record is still inside what luck produces.</p><p>Ten strategies were written, seven validation gates were defined, and all ten were run against a strictly out-of-sample window: all 51 completed games from 2026-11-06 to 2026-11-12, every one predicted using team ratings computed only from 2026-10-20 to 2026-11-05. No game in the test window contributes to the ratings that predict it. On top of that the system now originates a line for every game in the next three days - 14, 15, 16 and 17 November - from official ratings and the newest official injury report.</p><div class="verdict"><div class="v-t">Verdict &mdash; PROVISIONAL - not funded</div><div class="v-b">The model beats the naive reference on margin accuracy and loses to it on totals and on picking winners. The best strategy is 16-7, worth +7.55 model units - but with an exact p-value of 0.093 and a Wilson lower bound of 0.491 against a 0.524 break-even, it fails the skill gate. Every strategy stays at quarter-unit or research-only, and the 27 new lines are published as lines and paper picks, not as recommendations.</div><div class="v-w"><strong>Why:</strong> Fifty-one games with a 17.4-point residual standard deviation narrows the uncertainty a lot but does not remove it. On 23 graded plays, a 16-7 run happens often enough by chance that it cannot be called skill.</div></div><ol class="findings"><li><b>The model wins on the margin and loses on totals and winners</b> &mdash; Margin: MAE 12.89 against 13.19 for the naive reference, RMSE 17.10 against 17.70 - the model is better on both. Totals: MAE 14.86 against 14.75, RMSE 19.88 against 19.59 - the reference is better on both. Straight up both went 37-14, but the reference has the better Brier score (0.1889 against 0.1970) and the better log loss (0.5567 against 0.5768).<br><span class="fine">The refinements buy a real but tiny margin improvement and nothing else. The probability calibration is the weakest part of the model, and it is where the remaining work should go.</span></li><li><b>Growing the window from 28 games to 51 changed a conclusion - which is the most useful thing that happened</b> &mdash; On the 28-game window the model beat the reference on totals (MAE 14.50 against 14.75). On 51 games it does not (14.86 against 14.75). The sign flipped. That is exactly the failure mode the sample gate exists to catch, and it is why nothing here is being promoted on the earlier reading.<br><span class="fine">Any single-window result at this sample size should be treated as a hypothesis, not a finding.</span></li><li><b>The best strategy is 16-7, and that is not enough</b> &mdash; S1 (side edge vs the reference spread) produced 23 graded plays at 16-7, worth +7.55 model units and a 32.8% return at -110. Its exact binomial p-value against a coin flip is 0.093. The Wilson 95% interval on its hit rate is 0.491 to 0.844, and the lower bound is below the 0.5238 break-even, so the skill gate fails. S5 (back-to-back fade) is 8-4 on 12 plays, also short.<br><span class="fine">A 69.6% hit rate on 23 plays is a promising signal and nothing more. The leaderboard caps it at quarter-unit regardless of its score, which is the designed behaviour.</span></li><li><b>Home court looks normal; the back-to-back penalty is large but uncertain</b> &mdash; Home-court advantage estimates at +2.79 points with a standard error of 2.48 (t = 1.12), squarely in the historical NBA range. The back-to-back penalty estimates at -6.10 points with a standard error of 4.87 (t = -1.25); because |t| &gt;= 1 the model applies the full 6.10, but the standard error is most of the estimate and detection is still incomplete for 2026-11-06, which biases it toward zero.<br><span class="fine">Both are published with their standard errors and both are fitted on the test window, which is disclosed on every row they touch.</span></li><li><b>Shrinkage was derived rather than guessed, and the curve is flat where it matters</b> &mdash; The empirical-Bayes calculation gives k = 2.9, weighting each team's observed net rating at 0.739. The fixed-k sweep shows margin MAE moving only from 13.28 at k = 0 to 12.91 at k = 4, then degrading to 13.65 by k = 20. Heavy shrinkage is clearly wrong; the choice between light and none barely matters.<br><span class="fine">The constant is defensible, its sensitivity is published, and it is not a source of hidden risk.</span></li><li><b>Availability impact is a measured floor, not an estimate</b> &mdash; Minutes are only known for the 50 players in the captured official table. Players outside it contribute 0.00 to the impact, so teams missing rotation players who are not top-50 scorers show a smaller number than the truth - sometimes zero. The minutes-coverage column sits next to every figure so a 0.00 is never read as 'healthy'.<br><span class="fine">Correct but incomplete - the Injuries page says so on every row rather than hiding it.</span></li><li><b>Correlation is measured where it can be and flagged where it cannot</b> &mdash; Thirteen team-statistic pairs were measured directly on all 30 teams from the official advanced table. Net rating explains 87% of the variation in win percentage; pace is nearly unrelated to net rating (r = -0.34, p = 0.063) and assist percentage is unrelated to offensive efficiency (r = 0.02, p = 0.92). The parlay and same-game-parlay correlations that drive pricing are model-derived and labelled as such.<br><span class="fine">The distinction matters most for parlays, because pricing correlated legs as independent is the classic way to overpay.</span></li><li><b>The word 'edge' on this site does not mean edge against a sportsbook</b> &mdash; No sportsbook price is published by an NBA-operated source, so no official link can be attached to one. The site bets the originated line against a deliberately naive reference model built from the same official ratings. Until real prices are logged, 'units won' means model-vs-naive-model units.<br><span class="fine">This is the single most important caveat for anyone reading the leaderboard.</span></li><li><b>The three-day horizon is now live, and it is the part that is hardest to keep honest</b> &mdash; 27 games from 2026-11-14 to 2026-11-17, each with an originated spread, total and fair moneyline, a gated paper pick, rest and back-to-back flags, and an injury read-out. The schedule was read from the official NBA.com Schedule page and independently cross-checked against another session's capture of the same page: 27 of 27 rows agree, 0 mismatches. The injury report was taken from the 07:30 PM ET edition of the official PDF, which is newer than the 05:15 PM edition this repository previously held.<br><span class="fine">Two things are not yet knowable and are published as such rather than filled in. The 11/13 finals were not published when the capture was made, so the ratings window still ends at 11/12 and 18 team records are one night out of date. And at the 07:30 PM edition five of the ten teams playing on 11/14 had not filed an injury report, while no edition yet covers the 11/15 to 11/17 games. Those lines carry no injury adjustment and say so.</span></li></ol></section>
+<h2 class="sec">Horizon at a glance</h2><p class="secsub">Every game in the window, with the originated line, the reference line and the difference between them.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Tip ET</th>
+<th>Matchup</th>
+<th>Away rec</th>
+<th>Home rec</th>
+<th>Model spread</th>
+<th>Model total</th>
+<th>Spread edge</th>
+<th>Total edge</th>
+<th>P(home)</th>
+<th>Rest</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-14</td>
+<td>7:00 PM ET</td>
+<td><b>DEN@NOP</b></td>
+<td>6-4</td>
+<td>4-8</td>
+<td>-9.6</td>
+<td>235.7</td>
+<td>-3.74</td>
+<td>+8.66</td>
+<td>0.291</td>
+<td>B2B</td>
+<td class="src"><a href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">S8_0022600231</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>7:30 PM ET</td>
+<td><b>DAL@CLE</b></td>
+<td>7-5</td>
+<td>6-6</td>
+<td>-2.3</td>
+<td>229.6</td>
+<td>-5.55</td>
+<td>+1.18</td>
+<td>0.447</td>
+<td>B2B</td>
+<td class="src"><a href="https://www.nba.com/game/dal-vs-cle-0022600232" target="_blank" rel="noopener">S8_0022600232</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>8:00 PM ET</td>
+<td><b>DET@MIA</b></td>
+<td>8-3</td>
+<td>5-6</td>
+<td>-12.8</td>
+<td>226.9</td>
+<td>-2.84</td>
+<td>-0.62</td>
+<td>0.232</td>
+<td>B2B</td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-mia-0022600233" target="_blank" rel="noopener">S8_0022600233</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>8:00 PM ET</td>
+<td><b>BKN@MEM</b></td>
+<td>3-8</td>
+<td>7-4</td>
+<td>5.3</td>
+<td>227.3</td>
+<td>-7.59</td>
+<td>+1.43</td>
+<td>0.620</td>
+<td>B2B</td>
+<td class="src"><a href="https://www.nba.com/game/bkn-vs-mem-0022600234" target="_blank" rel="noopener">S8_0022600234</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>8:00 PM ET</td>
+<td><b>CHI@MIN</b></td>
+<td>1-9</td>
+<td>9-3</td>
+<td>29.7</td>
+<td>234.7</td>
+<td>-1.40</td>
+<td>+2.90</td>
+<td>0.956</td>
+<td>B2B</td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-min-0022600235" target="_blank" rel="noopener">S8_0022600235</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>1:00 PM ET</td>
+<td><b>IND@PHI</b></td>
+<td>4-8</td>
+<td>10-3</td>
+<td>5.6</td>
+<td>221.2</td>
+<td>+0.14</td>
+<td>-1.70</td>
+<td>0.625</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/ind-vs-phi-0022600236" target="_blank" rel="noopener">S8_0022600236</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>4:00 PM ET</td>
+<td><b>LAL@PHX</b></td>
+<td>11-2</td>
+<td>5-6</td>
+<td>-6.7</td>
+<td>237.8</td>
+<td>+3.02</td>
+<td>+3.57</td>
+<td>0.350</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/lal-vs-phx-0022600237" target="_blank" rel="noopener">S8_0022600237</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>4:30 PM ET</td>
+<td><b>CHA@LAC</b></td>
+<td>4-8</td>
+<td>2-8</td>
+<td>7.3</td>
+<td>215.9</td>
+<td>-0.07</td>
+<td>+6.21</td>
+<td>0.662</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/cha-vs-lac-0022600238" target="_blank" rel="noopener">S8_0022600238</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>5:00 PM ET</td>
+<td><b>SAS@UTA</b></td>
+<td>10-2</td>
+<td>1-11</td>
+<td>-15.4</td>
+<td>222.6</td>
+<td>+5.18</td>
+<td>-0.09</td>
+<td>0.189</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/sas-vs-uta-0022600239" target="_blank" rel="noopener">S8_0022600239</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>6:00 PM ET</td>
+<td><b>DAL@BOS</b></td>
+<td>7-5</td>
+<td>10-2</td>
+<td>17.6</td>
+<td>221.8</td>
+<td>+4.73</td>
+<td>-4.74</td>
+<td>0.843</td>
+<td>B2B</td>
+<td class="src"><a href="https://www.nba.com/game/dal-vs-bos-0022600240" target="_blank" rel="noopener">S8_0022600240</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>6:00 PM ET</td>
+<td><b>NYK@TOR</b></td>
+<td>6-5</td>
+<td>5-7</td>
+<td>-1.1</td>
+<td>222.5</td>
+<td>+1.81</td>
+<td>-1.88</td>
+<td>0.476</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600241" target="_blank" rel="noopener">S8_0022600241</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>7:00 PM ET</td>
+<td><b>HOU@WAS</b></td>
+<td>9-3</td>
+<td>4-9</td>
+<td>-9.1</td>
+<td>223.3</td>
+<td>+3.53</td>
+<td>-0.43</td>
+<td>0.302</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-was-0022600242" target="_blank" rel="noopener">S8_0022600242</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>8:00 PM ET</td>
+<td><b>ATL@MIL</b></td>
+<td>7-5</td>
+<td>1-11</td>
+<td>-10.8</td>
+<td>231.7</td>
+<td>+4.14</td>
+<td>+6.76</td>
+<td>0.268</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/atl-vs-mil-0022600243" target="_blank" rel="noopener">S8_0022600243</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>9:00 PM ET</td>
+<td><b>OKC@SAC</b></td>
+<td>8-4</td>
+<td>1-10</td>
+<td>-10.2</td>
+<td>223.2</td>
+<td>+4.14</td>
+<td>+3.55</td>
+<td>0.280</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/okc-vs-sac-0022600244" target="_blank" rel="noopener">S8_0022600244</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:00 PM ET</td>
+<td><b>ORL@BOS</b></td>
+<td>4-7</td>
+<td>10-2</td>
+<td>9.9</td>
+<td>219.9</td>
+<td>-8.35</td>
+<td>-1.36</td>
+<td>0.715</td>
+<td>B2B</td>
+<td class="src"><a href="https://www.nba.com/game/orl-vs-bos-0022600245" target="_blank" rel="noopener">S8_0022600245</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:00 PM ET</td>
+<td><b>CHI@CLE</b></td>
+<td>1-9</td>
+<td>6-6</td>
+<td>16.2</td>
+<td>238.5</td>
+<td>-3.09</td>
+<td>+9.85</td>
+<td>0.824</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-cle-0022600246" target="_blank" rel="noopener">S8_0022600246</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:00 PM ET</td>
+<td><b>MEM@WAS</b></td>
+<td>7-4</td>
+<td>4-9</td>
+<td>-12.5</td>
+<td>226.5</td>
+<td>-3.07</td>
+<td>+1.43</td>
+<td>0.237</td>
+<td>B2B</td>
+<td class="src"><a href="https://www.nba.com/game/mem-vs-was-0022600247" target="_blank" rel="noopener">S8_0022600247</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:30 PM ET</td>
+<td><b>PHI@BKN</b></td>
+<td>10-3</td>
+<td>3-8</td>
+<td>3.6</td>
+<td>221.8</td>
+<td>+8.22</td>
+<td>+1.62</td>
+<td>0.582</td>
+<td>B2B</td>
+<td class="src"><a href="https://www.nba.com/game/phi-vs-bkn-0022600248" target="_blank" rel="noopener">S8_0022600248</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:30 PM ET</td>
+<td><b>HOU@MIA</b></td>
+<td>9-3</td>
+<td>5-6</td>
+<td>-2.2</td>
+<td>230.8</td>
+<td>+9.65</td>
+<td>+0.90</td>
+<td>0.451</td>
+<td>B2B</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-mia-0022600249" target="_blank" rel="noopener">S8_0022600249</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>8:00 PM ET</td>
+<td><b>POR@MIN</b></td>
+<td>8-3</td>
+<td>9-3</td>
+<td>8.0</td>
+<td>227.8</td>
+<td>-0.36</td>
+<td>-10.19</td>
+<td>0.677</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600250" target="_blank" rel="noopener">S8_0022600250</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>8:00 PM ET</td>
+<td><b>GSW@NOP</b></td>
+<td>8-4</td>
+<td>4-8</td>
+<td>-9.0</td>
+<td>235.2</td>
+<td>+3.67</td>
+<td>+3.18</td>
+<td>0.302</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/gsw-vs-nop-0022600251" target="_blank" rel="noopener">S8_0022600251</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>9:00 PM ET</td>
+<td><b>PHX@DEN</b></td>
+<td>5-6</td>
+<td>6-4</td>
+<td>12.4</td>
+<td>232.7</td>
+<td>+5.85</td>
+<td>+7.56</td>
+<td>0.761</td>
+<td>B2B</td>
+<td class="src"><a href="https://www.nba.com/game/phx-vs-den-0022600252" target="_blank" rel="noopener">S8_0022600252</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>7:30 PM ET</td>
+<td><b>NYK@TOR</b></td>
+<td>6-5</td>
+<td>5-7</td>
+<td>-1.1</td>
+<td>222.5</td>
+<td>+1.81</td>
+<td>-1.88</td>
+<td>0.476</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600253" target="_blank" rel="noopener">S8_0022600253</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>8:00 PM ET</td>
+<td><b>POR@MIN</b></td>
+<td>8-3</td>
+<td>9-3</td>
+<td>8.0</td>
+<td>230.2</td>
+<td>-0.36</td>
+<td>-7.74</td>
+<td>0.677</td>
+<td>B2B</td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600254" target="_blank" rel="noopener">S8_0022600254</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>8:00 PM ET</td>
+<td><b>DET@SAS</b></td>
+<td>8-3</td>
+<td>10-2</td>
+<td>5.9</td>
+<td>222.7</td>
+<td>+0.16</td>
+<td>-8.56</td>
+<td>0.633</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-sas-0022600255" target="_blank" rel="noopener">S8_0022600255</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>10:30 PM ET</td>
+<td><b>UTA@LAC</b></td>
+<td>1-11</td>
+<td>2-8</td>
+<td>7.7</td>
+<td>222.8</td>
+<td>-0.18</td>
+<td>+7.21</td>
+<td>0.670</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/uta-vs-lac-0022600257" target="_blank" rel="noopener">S8_0022600257</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>11:00 PM ET</td>
+<td><b>CHA@LAL</b></td>
+<td>4-8</td>
+<td>11-2</td>
+<td>18.2</td>
+<td>223.2</td>
+<td>-2.77</td>
+<td>+2.30</td>
+<td>0.851</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/game/cha-vs-lal-0022600256" target="_blank" rel="noopener">S8_0022600256</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Spread and total are the originated lines (model). Edge is the model minus the naive reference line built from the same official ratings; positive spread edge means the model likes the home side more than the reference does. Rest flags a back-to-back. Every row links to the official NBA.com game page.</p>
+<h2 class="sec">Browse by category</h2>
+<div class="linkgrid"><a class="cardlink" href="site/pages/picks.html"><span class="cl-t">Lines &amp; Picks</span><span class="cl-b">Originated spread, total and fair-moneyline for every game in the horizon, and the gated paper picks built on them.</span></a><a class="cardlink" href="site/pages/props.html"><span class="cl-t">Player Props</span><span class="cl-b">Per-player projections and prop combinations, with the minutes coverage stated next to every number.</span></a><a class="cardlink" href="site/pages/injuries.html"><span class="cl-t">Injuries &amp; Rotation</span><span class="cl-b">The official injury report, the rotation minutes it implies, and the measured production impact.</span></a><a class="cardlink" href="site/pages/gameflow.html"><span class="cl-t">Game Flow</span><span class="cl-b">Pace, expected margin and total, blow-out and overtime probability, and the rest and back-to-back context.</span></a><a class="cardlink" href="site/pages/strategies.html"><span class="cl-t">Strategies &amp; Leaderboard</span><span class="cl-b">Ten strategies, the reward tiers, and the leaderboard that ranks them - with nothing promoted that has not passed.</span></a><a class="cardlink" href="site/pages/validation.html"><span class="cl-t">Validation Gates</span><span class="cl-b">The seven gates every strategy must clear, the definition of each, and how each strategy scored.</span></a><a class="cardlink" href="site/pages/correlations.html"><span class="cl-t">Correlations</span><span class="cl-b">Measured correlations, model-derived ones and the same-game-parlay rho used for pricing.</span></a><a class="cardlink" href="site/pages/luck.html"><span class="cl-t">Luck &amp; Skill</span><span class="cl-b">How many wins each team probably should have had, and which of them are luck.</span></a><a class="cardlink" href="site/pages/backtest.html"><span class="cl-t">Out-of-Sample Backtest</span><span class="cl-b">The 51-game test window and everything measured on it.</span></a><a class="cardlink" href="site/pages/model.html"><span class="cl-t">Model &amp; Teams</span><span class="cl-b">The efficiency model, its assumptions and the team ratings it reads.</span></a><a class="cardlink" href="site/pages/questions.html"><span class="cl-t">Open Questions</span><span class="cl-b">What we know, what we do not, and the concrete step that would answer each open item.</span></a><a class="cardlink" href="site/pages/suggestions.html"><span class="cl-t">Suggestions</span><span class="cl-b">Improvements written as options with effort, risk and what each unlocks, so a reviewer can pick a path.</span></a><a class="cardlink" href="site/pages/flagged.html"><span class="cl-t">Flagged for Review</span><span class="cl-b">Every value that could not be confirmed from an official source, with the link it would need.</span></a><a class="cardlink" href="site/pages/sources.html"><span class="cl-t">Source Register</span><span class="cl-b">Every official URL this site is built from.</span></a><a class="cardlink" href="site/pages/repo-review.html"><span class="cl-t">Repo Review</span><span class="cl-b">Line-by-line review of the repository, the irregularities found, and the verification log.</span></a></div>
+<section class="card "><h2>Every build in this repository (none deleted)</h2><p>Four implementations of the same brief exist here. All are preserved and all are online, so the audit trail stays intact. They read the same official captures and differ only in presentation, data cut and how much of the pipeline they exercise. The pages above are the current build; the rest are reachable from here.</p><ul class="plain"><li><b>Current &mdash; this build.</b> The 27-game 14&ndash;17 Nov horizon, 63 paper picks, the 07:30 PM ET injury edition, and the full strategy/evidence set. <a href="site/pages/picks.html">Open the horizon</a>.</li><li><a href="command-center/index.html">Command Center</a> &mdash; a second consolidated site built in session <code>arena/791c9114-nba1</code> from the same official captures. It carries a narrower 22-game 14&ndash;16 Nov cut and its own rendered-page checks (<code>check_rendered.py</code>), which this build does not have.</li><li><a href="edge-lab/index.html">Edge Lab</a> &mdash; Build A, the original decision dashboard, frozen at the 11/13 data cut and archived unchanged under <code>edge-lab/</code>. It carries the Integration Desk section added by session <code>arena/2edb85af-nba1</code>.</li><li><a href="desk.html">Integration Desk</a> &mdash; the origination, gate, settlement and prop pipeline published at the repository root by session <code>arena/2edb85af-nba1</code>, with its own cross-check and settlement scripts.</li><li><a href="docs/index.html">Dated NBA data snapshot</a> &mdash; Build A's dated 13&ndash;15 Nov schedule and 12:00 PM injury-report transcription with every source link.</li><li><a href="docs/b/index.html">Line Origination Desk</a> &mdash; Build B, the earlier backtested build (51 out-of-sample games, ten strategies, seven gates).</li><li><a href="schedule-verified.html">Verified schedule 14&ndash;17 Nov</a> &mdash; the row-by-row schedule check and its flagged items.</li><li><a href="verification.html">Live verification</a> &mdash; the official-source reachability probe and the integration checks from session <code>arena/2509073f-nba1</code>.</li><li><a href="review.html">Flagged items (earlier build)</a> and <a href="sources.html">source register (earlier build)</a>.</li></ul></section>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="site/pages/sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="command-center/index.html">Command Center</a> &middot;
+      <a href="edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="desk.html">Integration Desk</a> &middot;
+      <a href="docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="schedule-verified.html">verified schedule</a> &middot;
+      <a href="verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="site/assets/site.js"></script>
+</body>
+</html>

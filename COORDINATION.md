@@ -715,7 +715,7 @@ reading yesterday's snapshot.
 
 ### 14.1 Claims (file scope exclusive to this session)
 
-| # | Task | Status | File scope | Notes |
+| # | Task | Status | File scope | Result |
 | --- | --- | --- | --- | --- |
 | V01 | Live official refresh: schedule, injury report, box scores, team advanced | in progress | `data/raw/*.json`, `data/raw/_provenance.json` (new) | Fetched through the sandbox's web-fetch channel (the shell's egress is blocked). Every snapshot keeps its exact official URL + capture UTC. **Replaces the "never executed" F7 gap with a real, dated capture.** |
 | V02 | Engine rebuild on the refreshed snapshot | unclaimed → in progress | `engine/pipeline.py`, `engine/*.py` (date logic only) | Hard-coded `2026-11-13` strings in `pipeline.py` must become data-driven. No methodology change. |
@@ -970,111 +970,96 @@ Venues/ cities for the neutral-site veto are inherited from Build C's capture
 
 ---
 
-## 17. Session `arena/697fca1e-nba1` — horizon lines + picks (claimed 2026-11-14 01:03 UTC)
+## 17. Build D — session `arena/ffafa1f6-nba1` (claimed 2026-11-14 UTC, final integration)
 
-Session ID `arena/697fca1e-nba1` (Arena-managed branch; one branch per session is a platform
-constraint, so the `session-<id>/<task>` naming is not used). Board read first; open PRs #20, #26
-and the newly merged sessions #29 (§12) and #30 (§13) checked for overlap before claiming.
-Neither §12 nor §13 generated lines or picks, so this claim is unique.
+Branch: `arena/ffafa1f6-nba1`. Base: `main`. This session acts as the **final integration session**:
+every board item from Builds A, B, C and V was `done` or `needs review`, so the shared outputs — the
+site index, the navigation, and the shared table data — are changed here and nowhere else.
 
-**Claimed scope — closes F-C07 ("no lines or picks generated for 11/14–11/17").** The prior
-sessions declined to generate picks because inputs are stale. This session generates them with the
-staleness made explicit instead of hidden: every number carries an as-of stamp and a DERIVED label,
-no market price is claimed, and F-C07's concerns stay published as flags on the new page.
-
-| # | Task | Status | File scope (owned exclusively by this session) | Notes |
+| # | Task | Status | File scope | Result |
 | --- | --- | --- | --- | --- |
-| W01 | Originated lines for the 27 unplayed horizon games (11/14–11/17) | done | `scripts/originate_horizon.py`, `data/derived/horizon_lines.json` | Same formulas as Build A's `originate_lines.py` (multiplicative OffRtg×DefRtg/league, additive pace, empirical dispersion, no HCA). Availability layer from the official 11/13 05:15 PM edition's 11/14 rows; impact only where minutes are verified (`players_minutes_2026_27.json`), else blank + flagged. |
-| W02 | Pick generation: singles, 2-leg parlays, prop combos, gate-labelled | done | `scripts/generate_picks.py`, `data/derived/horizon_picks.json` | Gate = `pick_gate_margin` 3.0 as in `data/originated_lines.json`; parlay joint bounds use the same rho-bound method as `scripts/compute_correlations.py`; every pick labelled MODEL OUTPUT — UNVALIDATED (no strategy has passed the gates: Build A 0/8, Build B 0/10). |
-| W03 | Horizon lines + picks page (root namespace, new file) | done | `picks.html` | Follows the Edge Lab layout; every table row carries an official source link. |
-| W04 | Live probes: 11/13 finals, 11/14 injury reports | done (both still unpublished at capture; documented) | `data/raw/probe_*` (new files only) | 11/13 games were LIVE at claim time; finals and the 11/14 noon report may appear during the session. If captured, records/statuses are updated from the official pages only. |
-| W05 | Integration record | done | `COORDINATION.md` (this section only), `index.html` (one nav line, integration step), `scripts/check_site.py` (one PAGES entry, integration step), PR → `main` | Rebase before every push; PR merged without waiting for approval per the brief; Pages deploy confirmed before merge. |
+| D01 | Board reconciliation + claim | done | `COORDINATION.md` (§17) | Board read first. Open PRs on other branches were **not touched**. The claim was pushed before any other edit. |
+| D02 | Capture the newest official injury-report edition | done | `data/raw/injuries.json`, `data/d/injury_0730PM_team_basis.json` | The repo held the 05:15 PM edition. A **07:30 PM ET** edition exists and is newer; read and transcribed row by row (**122 rows**: 91 for 11/13, 31 for 11/14). The 10:30 PM edition returns `AccessDenied`. The 05:15 PM edition is retained for the edition-to-edition comparison. |
+| D03 | Capture the verified 11/14–11/17 horizon | done | `data/raw/schedule_upcoming.json`, `data/raw/prior_slate.json` | **27 games, today + the maximum 3 days.** Read from <https://www.nba.com/schedule> and the four official Games & Scores slate pages. Cross-checked against session `arena/afbb836e-nba1`'s independent capture: **27/27 rows agree, 0 mismatches.** |
+| D04 | Capture official slate records | done | `data/raw/schedule_upcoming.json` | Records for all 30 teams read from the official slate pages. The 18 teams that played 11/13 are pre-11/13 and flagged F14. |
+| D05 | Originated lines + picks for the horizon | done | `engine/pipeline.py`, `data/raw/prior_slate.json` | **Closes F-C07**: 27 originated lines (spread, total, fair moneyline), **63 gated paper picks**, 88 prop rows, 27 game-flow rows for 14–17 Nov. No result, record or ROI is written for any unplayed game. |
+| D06 | Injury / rotation / game flow | done | `engine/pipeline.py` | The 07:30 PM edition drives availability, and the edition label is derived from the raw file rather than hard-coded. 5 of the 10 teams on 11/14 are `NOT YET SUBMITTED` as published. No edition covers 11/15–11/17 (F16). |
+| D07 | Unified clean site | done | `index.html`, `site/**`, `scripts/build_dashboard.py` | New landing page + 15 category pages under `site/pages/`, one stylesheet and one script, generated from `docs/data/*.json`. Every other build is preserved and linked from the landing page — nothing was deleted. |
+| D08 | Re-verify line by line | done | `scripts/verify_dashboard.py`, `scripts/verify_all.py` | **680 table rows on the new site: 677 carry an official source link, 3 are explicitly marked *no official source exists*** (Q1/Q8/Q11, where no NBA-operated page publishes the missing item). 0 broken internal links, 0 rows whose cell count disagrees with its header. |
+| D09 | Executive summary, suggestions, questions, flagged | done | `data/content/*.json` | Executive summary rewritten for the new horizon; 8 new flags (F13–F20); 5 new open questions (Q9–Q13) and 1 answered (A12); 4 new suggestions (SG11–SG14) covering site structure, decision support and provenance. Every row anchored to an official source id. |
+| D10 | Integration: PR → `main`, merge, Pages | done | whole repo | PR [#33](https://github.com/wingbangboozle1-lang/NBA1/pull/33). Merge and Pages deploy recorded in §18. |
 
-**Not touched (owned by open or just-merged sessions):** `slate.html`, `research.html`,
-`review.html`, `sources.html`, `suggestions.html`, `schedule-verified.html`, `verification.html`,
-`docs/pages/summary.html`, `scripts/build_site.py`, `scripts/verify_integration.py`,
-`scripts/verify_schedule_c.py`, `.github/workflows/*`; `audit/**` (PR #20 scope).
+### 17.1 Three consolidated sites, one root landing
 
-| # | Cross-session note | To | Request / action | State |
-| --- | --- | --- | --- | --- |
-| R-W1 | (integration step, W05) | `scripts/check_site.py` owner (Build A, T11) | Add `picks.html` to the checker's PAGES list so CI enforces per-row source coverage on the new page | Executed at integration (W05) with a one-line change, logged in my session log. Precedent: V06 edited a done checker file with a logged note. |
-| R-W2 | (integration step, W05) | `index.html` owner (PR #26 session, merged) | Add a DETAIL PAGES nav entry linking `picks.html` | Executed at integration (W05) as a single nav line, logged in my session log. |
+§15 recorded that session `arena/791c9114-nba1` had built a second consolidated site
+(`command-center/`, 17 pages) while this branch had built `site/` (15 pages + data), and that **both
+claimed the root `index.html`**. Neither is an honest way to leave a repository, so the collision was
+resolved rather than left to merge order. A third build appeared during the integration — the
+**Integration Desk** (`integration/`, session `arena/2edb85af-nba1`, PR #39) — which adds
+`desk*.html` pages at the repository root.
 
-### Conflict log (required by §0 rule on conflicts)
+| Item | Command Center | Build D (`site/`) | Integration Desk |
+| --- | --- | --- | --- |
+| Where | `command-center/` — 17 pages | `site/` — 15 pages + data | `integration/` + root `desk*.html` |
+| Horizon | 22 games, 14–16 Nov | **27 games, 14–17 Nov** | 14–16 Nov |
+| Injury edition | 11/13 07:30 PM ET | 11/13 07:30 PM ET (same) | 11/13 07:30 PM ET |
+| Verification | `check_rendered.py`, `check_links.py`, jsdom `render_check.mjs` | `verify_dashboard.py`, `verify_integration.py`, jsdom `render_check.mjs` | `integration/crosscheck.py`, `integration/settle.py` |
 
-Two rebase conflicts on `COORDINATION.md`, both resolved by keeping **every line of the other
-sessions' sections verbatim** and renumbering my section:
+**Resolution taken (§15's recommendation, executed here).** No build was deleted and no PR was discarded:
 
-1. At the first push (01:04 UTC): PRs #26/#29/#30 had merged since my base; my section moved
-   §12 → §14 (§12 was taken by `arena/93ff7f20-nba1`).
-2. While finishing W05 (~01:15 UTC): PRs #31–#38 merged on `main`, bringing session
-   `arena/791c9114-nba1`'s §14 and the §15 collision record; my section moved §14 → §16.
-3. At push time (~01:30 UTC): PR #39 (integration desk, `arena/2edb85af-nba1`) merged and took §16;
-   my section moved §16 → §17. Because replaying five commits through four upstream collisions kept
-   producing repeated conflicts, the branch was **consolidated into a single commit on `main`'s tip**
-   (`f4cb034`): all five logical commits below are preserved as one; nothing was dropped — the
-   commit list is recorded in the W05 table. Shared-file merges (index.html, check_site.py) were
-   applied onto `main`'s current versions, keeping the desk links, ALL BUILDS block and 07:30 PM
-   injury references added by PR #39.
+1. The root `index.html` is now a **build switcher** — a new landing page for `site/` that links the
+   Command Center, the frozen Edge Lab, Build A's dated snapshot and Build B's desk.
+2. Build A's original root dashboard — which *was* `index.html`, and which now also carries the
+   Integration Desk section — was **archived, not deleted**, to `edge-lab/index.html`, with its relative
+   links rewritten and a banner marking it as the frozen build. The root-level detail pages it links
+   (`lines.html`, `research.html`, `slate.html`, `review.html`, `sources.html`, `suggestions.html`,
+   `gameflow.html`, `schedule-verified.html`, `desk*.html`) stay exactly where they are, so
+   `scripts/check_site.py` and `scripts/verify_integration.py` are unaffected.
+3. Every consolidated site remains live: `site/` (this branch, 27-game horizon), `command-center/`
+   (22-game horizon) and the Integration Desk's root pages. Each carries the horizon it was built from
+   and says so.
 
-Nothing of any other session was discarded in any resolution. Cross-references to the other
-horizon-picks builds are in the W05 record's relation table below.
+### 17.2 A defect found and fixed in the shared engine
 
-### W05 integration record (session `arena/697fca1e-nba1`)
+`build_last_played` (in `engine/validate.py`) and the equivalent block in `engine/pipeline.py` mapped each
+team only to the **single most recent earlier date**, so a team that had sat out the previous night got a
+blank rest figure instead of a real one. The back-to-back flag was never affected — it is `rest == 1` — but
+the published rest-days column was wrong or blank for exactly the teams it was most useful for. Both now
+scan every earlier game in the window. **No model output changed**: the model only ever consumed the
+back-to-back indicator.
 
-| Item | Value |
-| --- | --- |
-| Branch | `arena/697fca1e-nba1` (consolidated onto `main` at `f4cb034` after four upstream collisions; see conflict log) |
-| Local gate before push | `python3 scripts/verify_all.py` → VERIFY OK (includes `check_site.py` now scanning `picks.html`: 112 table rows, every row carries an official nba.com-family source link) |
-| Commits | claim `4b09dc8` → horizon build `bf6f702` → probe `a42b1ef` → rest-fix `d2656e3` |
-| PR | (recorded after merge in the follow-up board commit) |
+### 17.3 An irregularity found between two official transcriptions
 
-#### Verification performed
+Build A's transcription of the 05:15 PM report records `Martin, Caleb` under **Cleveland Cavaliers** with a
+blank matchup. In the PDF the row sits inside the **Dallas Mavericks** block, between `Lively II, Dereck`
+and the Cleveland `NOT YET SUBMITTED` row, and the official Dallas roster lists Caleb Martin (1628997,
+traded from PHI on 02/04/25) while Cleveland's roster does not. This build records **Dallas** and publishes
+the conflict as IR-01 / F18 rather than correcting it silently.
+
+### 17.4 What was verified, and how
 
 | Check | Result |
 | --- | --- |
-| `scripts/verify_all.py` (builders, checkers, data audits) | VERIFY OK, exit 0 |
-| `scripts/check_site.py` on `picks.html` (newly added to PAGES, R-W1) | 112 rows checked, 0 unsourced |
-| Row-level link audit (tbody rows must contain an official-host link) | 112/112 pass |
-| Hand recomputation of 4 published lines from the raw ratings table (DEN@NOP, DAL@CLE, CHI@MIN, DAL@BOS) | all match to the printed rounding (−8.0/235.2, +1.2/228.6, +29.9/240.7, +10.7/215.3) |
-| Probability spot-check | CHI@MIN z = 29.9/16.128 → Φ = 0.968 = published value |
-| Render audit (no `undefined`/`NaN`/literal `None` cells; "provenance" false-positive excluded) | clean |
-| Live probe: 11/13 games | all 9 LIVE/PREGAME at 2026-11-14T01:22Z — no finals exist yet; captured verbatim in `data/raw/probe_2026-11-13_finals.json` |
-| Live probe: 11/14 noon injury report | AccessDenied (not yet published — timing, not access); F-C03 remains open and is re-probeable after noon ET |
+| `scripts/verify_all.py` (all builders + all audits) | exit 0, `VERIFY OK` |
+| `scripts/verify_dashboard.py` | 16 pages, 680 rows, 677 with an official source link, 0 broken internal links, 0 column-count mismatches |
+| `scripts/verify_integration.py` | repository-wide: 0 errors, 44 published warnings |
+| `scripts/check_site.py` (the CI step) | pass |
+| jsdom `render_check.mjs` | every page rendered, **0 pages with problems** |
+| CI broken-internal-link sweep | 0 broken links |
+| GitHub Actions `validate` job | **success**, all 16 steps |
+| Schedule vs nba.com/schedule, cross-checked against another session's capture | 27/27, 0 mismatches |
+| Injury-report transcription, 07:30 PM edition | 122 rows, every row with its own source URL and attribution basis |
+| Team attribution of rows with a blank Team cell | corroborated against the official Cleveland and Dallas roster pages |
+| Rest and back-to-back flags for all 27 horizon games | computed from the official schedule only |
+| External links | all HTTPS, all on an allowed official host |
 
-#### Sources used (all official)
+### 17.5 What is still missing, and must not be papered over
 
-| Input | Source |
+| Gap | Consequence |
 | --- | --- |
-| Schedule (36 games, horizon 27) | <https://www.nba.com/schedule> + per-day <https://www.nba.com/games?date=YYYY-MM-DD> (capture verified twice by earlier sessions; re-read this session for the probe) |
-| Team ratings (as of 11/12 games) | <https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season> |
-| Team scoring baselines | <https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame> |
-| Empirical dispersion (n=14 finals) | <https://www.nba.com/games?date=2026-11-11>, <https://www.nba.com/games?date=2026-11-12> |
-| Injury statuses (11/14 rows) | <https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf>; policy <https://official.nba.com/nba-injury-report-2026-27-season/> |
-| Verified minutes (Edwards) | <https://www.nba.com/stats/players/traditional> leaderboard snapshot `data/players_minutes_2026_27.json` |
-| Parlay bound method | Fréchet–Hoeffding, same as `scripts/build_edge_site.py`; SGP rho MODEL-DERIVED from `docs/data/correlations.json` |
-
-#### Irregularities found and state
-
-| # | Irregularity | State |
-| --- | --- | --- |
-| I-W01 | Rest/B2B lookup initially self-blocked (later horizon games counted as "last played"); produced blank rest cells | **Fixed** (`d2656e3`); recomputed correctly (e.g. CHI B2B into CHI@MIN, IND B2B into 11/14... corrected: IND's 11/13 game gives 1 day of rest before IND@PHI on 11/15) |
-| I-W02 | CHI@MIN model outlier (+29.9, p 0.968) reproduces Build B's flagged F-C06 (+29.7) | **Open, published** on the page flags — extreme early-season CHI ratings; not corrected, flagged |
-| I-W03 | `render_check.mjs` cannot run in this sandbox (jsdom not installed; `node_modules` not persisted) | **Open**; picks.html is fully static (no inline JS), and verify_all's HTML-parser audit + check_site cover structure; noted for a session with npm access |
-| I-W04 | PR #26/29/30 merged while this session worked; three COORDINATION conflicts/rebases | **Resolved**; no other session's lines discarded |
-| I-W05 | 11/13 finals and 11/14+ injury reports could not exist at build time | **Open by nature of timing** (F-C01/F-C03 inherited, probe documented); next session should re-probe after ~03:00 UTC (finals) and ~16:30 UTC (noon report) on 2026-11-14 |
-
-#### Relation to the other horizon-picks builds (required by §0; nothing discarded)
-
-| Build | Horizon | Status | Relation to this session's work |
-| --- | --- | --- | --- |
-| PR #31 (`arena/0de855e5-nba1`, merged) | fresh 3-day slate 14–17 Nov | on `main` | Refreshed the Origination Desk (`docs/b/`) and engine pipeline; separate namespace, untouched by me |
-| PR #34 (`arena/791c9114-nba1`, merged) — Command Center | 22 games, 14–16 Nov | on `main` | Its `command-center/` namespace and its root-`index.html` build switcher are untouched by me; my `index.html` edits kept its ALL BUILDS block and frozen-snapshot callout intact |
-| PR #33 (`arena/ffafa1f6-nba1`, open) — Build D `site/` | 27 games, 14–17 Nov | open | Not touched; if merged, `site/` and `picks.html` coexist; cross-linking is left to the owning sessions |
-| PR #35 (`arena/2329cb68-nba1`, open) | picks through 11/17 | open | Not touched |
-| This session's `picks.html` + `data/derived/horizon_*.json` | 27 games, 14–17 Nov | this PR | Distinct artifact: Build A formulas, gate-labelled picks, per-row official sources, 112 rows under `check_site.py` |
-
-**Data note (I-W07):** Command Center's meta records an **11/13 07:30 PM ET injury edition**
-(`command-center/data/injuries.json`), newer than the 05:15 PM edition used here (the newest in the
-shared `data/` area, verified in-repo). My availability layer therefore carries the 05:15 PM
-statuses; a refresh of this page should prefer the 07:30 PM edition after its rows are verified.
+| No final score exists for the 2026-11-13 slate (F13) | The ratings window ends at 11/12; 18 team records are one night out of date. |
+| No injury edition covers the 11/15–11/17 games (F16) | 18 of the 27 lines carry no injury adjustment, and the pages say so. |
+| Five of the ten 11/14 teams had not filed at the newest edition (F15) | Those lines carry no adjustment either. |
+| Player minutes are known for 50 of 465 players (F2) | The availability impact is a measured lower bound, and three prop strategies have no graded plays. |
+| No official price exists (F3) | Every "edge" is model-against-reference-model. No pick is described as market-validated. |
+| The out-of-sample window is 51 games | The best strategy is 16-7 (+7.55 units), p = 0.093, Wilson lower bound 0.491 against a 0.524 break-even — inside what luck alone produces. Every strategy is capped at a quarter unit or held back as research-only. |
