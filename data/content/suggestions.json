@@ -399,6 +399,64 @@
       "recommendation": "Option 1. The check takes seconds, and it is the only check on this list that would have caught the conflicts before publication.",
       "decision_needed": "Reviewer: approve adding the checker to the gate.",
       "source": "S14"
+    },
+    {
+      "id": "SG17",
+      "title": "Finish the game-log capture so props stop being a point estimate with no width",
+      "category": "Data and model",
+      "problem": "Ten players now have measured dispersion; 78 horizon prop rows still publish no probability (Q3, F40, F42). The projection and the anchor differ by at most 0.52 of a measured SD, so nothing is settable - and that verdict rests on three or four games a player.",
+      "options": [
+        {
+          "option": "Capture the full horizon: every player on every prop row, each morning of the slate, into data/proplogs/<date>/, and let scripts/prop_variance.py price all of them",
+          "effort": "Medium - one page read per player, 50 players a day; the parser and the gates already exist",
+          "risk": "Low - a failed read leaves the row blank, as it is now",
+          "unlocks": "A probability column on every prop row, a settable/unsettable split per slate, and a grading history from the next day onward"
+        },
+        {
+          "option": "Go deep instead of wide: a season-long game log for one fixed cohort of 15-20 parlay-eligible players, refreshed weekly",
+          "effort": "High once, low after - the first pull is 40+ games a player",
+          "risk": "Medium - the cohort ages out of the slate",
+          "unlocks": "The one thing a Last-5 window cannot give: a measurable prop-prop correlation (F42) and a usable parlay rho instead of a declared one"
+        },
+        {
+          "option": "Stop originating props until either of the above exists",
+          "effort": "None",
+          "risk": "Low - the page already publishes no funded prop",
+          "unlocks": "Nothing, and it removes the only place the desk learns what a prop needs"
+        }
+      ],
+      "recommendation": "Option 1 first, then option 2 for the parlay cohort. Option 1 is what turns 78 blank cells into numbers with sources; option 2 is the only route to a measured rho, and it is worth doing after the desk has a week of graded props to judge.",
+      "decision_needed": "Reviewer: pick 1, 2 or 1+2 in that order. Nothing on the site changes until the capture runs, because the script already reads whatever is in data/proplogs/.",
+      "source": "S20"
+    },
+    {
+      "id": "SG18",
+      "title": "Replace the flat 0.55 production-transfer rule with per-stat minutes elasticities",
+      "category": "Model",
+      "problem": "scripts/injury_impact.py and originate_horizon.py move a line by a declared constant (production_transfer = 0.55) for any absent player, whatever the stat. Measured on 40 official box scores, points move at about 1.29x their minutes share and assists at 0.49x - one flat number is wrong in both directions (A15).",
+      "options": [
+        {
+          "option": "Fit per-stat betas (points, rebounds, assists, PRA) on the season-long logs once SG17 option 2 exists, and let the injury module use the stat-specific figure",
+          "effort": "Medium - the regression is 20 lines of the existing script",
+          "risk": "Low - the declared constant stays as the fallback where a beta is not yet fitted",
+          "unlocks": "An injury adjustment with a measured coefficient instead of an asserted one, which is what gate G7 needs to stop being un-runnable"
+        },
+        {
+          "option": "Keep 0.55 and publish this measurement beside it as a caveat",
+          "effort": "None",
+          "risk": "Medium - the number keeps moving lines while being known to be flat",
+          "unlocks": "Nothing"
+        },
+        {
+          "option": "Re-fit now on the 40 captured rows",
+          "effort": "Low",
+          "risk": "High - n=40 from 10 players over one week, and the page itself says so (F44); a line moved on it is moved on noise",
+          "unlocks": "A demonstration, not a decision"
+        }
+      ],
+      "recommendation": "Option 1, sequenced behind SG17 option 2. Do not re-fit on this week's sample to move a live line.",
+      "decision_needed": "Reviewer: approve the per-stat direction now (so the module's declared assumption is on the record as unmeasured) and schedule the fit for when the sample exists.",
+      "source": "S7"
     }
   ]
 }

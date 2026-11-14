@@ -1947,3 +1947,99 @@ Not touched: `docs/**`, `data/**`, `index.html`, `flagged.json`, `suggestions.js
 - **Limits:** `fetch_page` text read, not a browser; editions after 4:30 AM ET were not in the index capture; injury rows only (no minutes, production or lines).
 - **Files touched:** `verify/2026-11-14-injury-currency/**` (new), `COORDINATION.md` §24 only.
 
+
+---
+
+## 26. Session `arena/24eb72c6-nba1` — measured prop variance from official game logs (claimed 2026-11-14 10:2x UTC)
+
+Branch `arena/24eb72c6-nba1` (base `main` `7623c02`, now merged through `5ea615f`). The platform pins this
+session to that branch, so the `session-<id>/<task>` naming in the brief is satisfied by the single pre-named
+branch. **This section was claimed as §24; `arena/aadc3342-nba1` took §24 on `main` while this work ran, so it
+is renumbered to §26 at merge — the number change is the only edit to that session's text.**
+
+**Why this lane.** PR #58 and PR #59 were actively integrating settlement, finals and content refresh at claim
+time, so this session did not touch `index.html` content, settlement, `docs/**`, `engine/**` or
+`integration/**`. The one gap nobody claimed was the one that blocks prop pricing: **Q3 / F2 — game-to-game
+dispersion had never been measured, so all 88 published prop rows carried `probability: null`.** The missing
+input turned out to be readable: the NBA.com player game-log pages are server-rendered (probed at 10:24 UTC).
+
+| # | Task | Status | Files |
+| --- | --- | --- | --- |
+| P01 | Board claim pushed before any edit | done | `COORDINATION.md` (this section only) |
+| P02 | Capture official player game logs for the 11/14 prop cohort, row for row, with per-row provenance | done | `data/proplogs/2026-11-14/captures.json` |
+| P03 | Newest official injury edition for 11/14 + why the noon edition 404'd | done | `data/proplogs/2026-11-14/injury_2026-11-14_04_30AM.json` |
+| P04 | Measurement script + derived file: dispersion, cohort shrinkage, anchor test, minutes elasticity, baseline reconciliation, injury delta, availability read-out | done | `scripts/prop_variance.py`, `data/derived/prop_variance.json` |
+| P05 | Site page (11 sections, every row source-linked) | done | `scripts/build_dashboard.py` (CATEGORIES entry + one function + two wiring lines), `site/**` regenerated |
+| P06 | Decision content: Q3 updated, A14/A15 answered, Q20 opened, flags F40–F46, SG17/SG18 | done | `data/content/{questions,flagged,suggestions}.json` |
+| P07 | Gates, PR, merge, Pages | done | see 26.4 |
+
+### 26.1 Sources (all official; read 2026-11-14 between 10:24 and 10:35 UTC)
+
+| Input | Source |
+| --- | --- |
+| 10 player game logs, 40 box rows (Last 5 Games table) | `https://www.nba.com/player/<id>/<slug>/game-log` for 203999 (Jokić), 1627750 (Murray), 1629627 (Williamson), 1630595 (Cunningham), 1630163 (Ball), 1643410 (Wilson), 1628378 (Mitchell), 1642843 (Flagg), 1629660 (Jerome), 203507 (Antetokounmpo); each row also links to its `…/game/<id>/box-score` |
+| Player ids | already carried in `data/players_2026_27.json` and `data/live/player_game_logs.json` (captured from <https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS>); none was guessed |
+| Injury edition | <https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf>, index <https://official.nba.com/nba-injury-report-2026-27-season/> |
+| Site values compared (not sources) | `docs/data/props.json`, `docs/data/lines.json`, `data/derived/injury_impact.json`, `data/live/injury_report_2026_11_14.json`, `data/injuries_0515.json`, `data/player_absence_evidence.json` |
+
+### 26.2 What was measured (each figure reproducible with `python3 scripts/prop_variance.py`)
+
+| Result | Value | Reading |
+| --- | --- | --- |
+| Points dispersion, cohort | CV **0.344** over 40 official box rows | a player's game-to-game SD is about a third of his average — the number every prop width now uses |
+| Props priced | **10 of 14** rows on 11/14; 10 of 88 in the horizon | the other 78 stay blank, unchanged |
+| Props whose projection is ≥1 measured SD from the season anchor | **0 of 10** (largest 0.52 SD, median 0.16 SD) | no prop on the slate is settable by the desk rule this page states |
+| Anchor test, points MAE | season avg **6.53** vs 3-game leave-one-out **8.02** vs previous game **9.97** | do not chase form; caveated for contamination and unequal information |
+| Minutes → production | points rho **0.58** (n=40, p<0.0001), PRA **0.63**, assists **0.195**; elasticity β points **1.29**, PRA **0.93**, assists **0.49** | the flat 0.55 production-transfer rule is too small for scorers and too large for passers (A15, SG18) |
+| Same-game prop correlation | best pair n=3 games; 7 pairs, none interpretable | the SGP rho stays a declared assumption (F42) |
+| Season-average staleness | **10 of 10** reconcile exactly (baseline × gp + games since = what NBA.com prints now, within 1-dp rounding) | stale by arithmetic, not by error (F41) |
+| Injury delta, 04:30 AM vs the edition behind the lines | **0 rows new or changed**; 5 of 10 teams still NOT YET SUBMITTED | today's lines are priced against a half-filed report (F43); F31's AccessDenied is explained by the index (F45) |
+| Availability read-out for today | 26 designations, **0 move a line**, 25 unmeasurable from repo tables; Edwards already missed 8 of MIN's 12 games → re-cutting would double-count | published as section 11 so nobody "adjusts" for a baked-in absence |
+
+### 26.3 Verification performed
+
+| Check | Result |
+| --- | --- |
+| Independent second read of the same official pages (`data/live/player_game_logs.json`, read 00:55–01:05Z by session `arena/2edb85af`) | 10 overlapping rows agree cell for cell, **0 disagreements**; the window difference is exactly the games played since (page section 9) |
+| Injury capture vs another session's audit of the same PDF (`verify/2026-11-14-injury-currency/`, main §25, read ~10:20–10:30Z) | same 26 player rows, same 5 NOT-YET-SUBMITTED clubs; this session's transcription and theirs agree, including the Traore team-attribution caveat they raised (X01-F2) and the blank date column (X01-F3) |
+| `scripts/verify_dashboard.py` | 18 pages, **936** table rows, **915** with an official source link, 21 rows carrying the explicit not-published dash; **VERIFY OK** |
+| `scripts/verify_all.py` (builders + checker + data audits) | **VERIFY OK**, exit 0; no out-of-scope file rewritten |
+| `scripts/source_check.py` | exit 0; it reads the flag count dynamically (46) |
+| `scripts/check_links.py`, `scripts/check_rendered.py`, `scripts/verify_integration.py`, `node scripts/render_check.mjs` | PASS / PASS / PASSED (0 errors) / 0 pages with problems |
+| Merge integrity | `origin/main` (306 commits ahead) merged with `--no-ff`; conflicts in `index.html`, `site/**`, `data/content/{flagged,questions}.json`, `README.md`, `COORDINATION.md` resolved keeping **both** sides: generated files regenerated from the merged builder, registers renumbered (my flags F38–F44 → **F40–F46**, my answers A13/A14 → **A14/A15**, my section §24 → §26) because main had taken those ids |
+
+### 26.4 Delivery
+
+| Step | Result |
+| --- | --- |
+| PR | **#68** `Measured prop variance from official game logs: dispersion, anchor test, minutes elasticity, availability read-out` (head `91b1206` + retrigger commit), base `main` at `5ea615f` (this branch is 0 commits behind main — merged forward, not rebased) |
+| CI `validate` | **could not execute, twice**: run `43587285959` cancelled (`deploy` + `validate` "Canceling since a higher priority waiting request for pages exists"), retriggered as run `43588144029`, cancelled again with **0 steps recorded**. Cause is the repo-wide `concurrency: group: pages / cancel-in-progress: true` in `.github/workflows/pages.yml`, which lets any other session's push cancel a PR run — `arena/a3e092a2-nba1`'s PR run was cancelled the same way, and PR #65 ("Isolate Pages PR checks") is the open fix. Not a content failure. |
+| Gates, run locally at this head (the same ten commands the `validate` job defines, in order) | `check_site.py` all pages exist, links resolve, every row source-linked · build-B data present + valid JSON (17 files) · `verify_integration.py` **PASSED** 0 errors / 44 warnings · `render_check.mjs` **114 pages, 7325 blocks, 6535 rendered rows, 0 problems** · probe record 1194 URLs consistent · `build_verification_page.py` leaves `verification.html` **current** (empty `git status`) · Command Center 17 pages + 18 data files valid · `check_links.py` **PASS** · `check_rendered.py` **PASS** · workflow's own internal-link scan: 114 pages, no broken links · plus `verify_dashboard.py` **OK** (958 rows, 937 linked) and `verify_all.py` **VERIFY OK** |
+| Merge | `gh pr merge 68 --merge` (no approval requested, not auto) — recorded in the follow-up coordination commit on this branch, since the merge result cannot be known before the merge |
+| Pages | confirmed after the merge by `gh api repos/…/pages/deployments` + a fetch of the live `pages/prop-variance.html` URL, recorded with the merge SHA |
+| Not touched | `index.html` beyond the regenerated tile/nav; settlement, `docs/**`, `engine/**`, `leaderboard` re-cut, `data/content/executive.json` — those are the integration seats' lanes (see 26.5) |
+
+### 26.5 Cross-session requests (logged, not executed — files owned elsewhere)
+
+* **R-26-1 (integration seat / `docs/data/props.json` owner):** the props page still prints `probability: null`
+  for all 88 rows. `data/derived/prop_variance.json` now carries `p_beats_anchor`, `gap_in_sd`, `fair_line_low/high`
+  and a `tier` for the 10 measured players; reading it in `engine_v2/build_site.py` (or `docs/data`) is the join.
+* **R-26-2 (content owner, `data/content/executive.json`):** add the prop-variance finding to the executive
+  summary — "props now have a measured width; none clears one SD against the naive anchor; minutes elasticity
+  1.29/0.93/0.49 replaces the asserted 0.55". Not done here because §21's session is rewriting that file.
+* **R-26-3 (`data/raw/sources.json` owner):** four official source families used by this page are not in the
+  register: player game-log pages, per-game box scores reached from them, the 04:30 AM ET injury edition, and the
+  injury-report index. The Source Register page cannot show them until the register is extended.
+* **R-26-4 (`scripts/source_check.py` owner):** its headline note still reads "25 before this check; F26-F37
+  added" and its count of `flagged.json` items is now 46; it prints the live number but the parenthetical is stale.
+* **R-26-5 (`data/flags.json` owner):** two registers exist — `data/flags.json` (F-01…F-24, Build A) and
+  `data/content/flagged.json` (F1…F46, the site). They are not cross-referenced; a reviewer reading the old one
+  will miss F40–F46. Recommend the old file carry a pointer instead of a second list.
+* **R-26-7 (`verify/2026-11-14/checks.json` owner):** the committed record is one regeneration behind. Running `scripts/source_check.py` on a clean `origin/main` tree rewrites it from 16 consistent / 11 no-pick to **14 / 13**, and this branch reproduces exactly the same numbers — so the drift is main's, not this session's. The file was deliberately left at main's content rather than committed regenerated.
+* **R-26-6 (Injuries page owner):** main §25 (X01-F1) established that the page labels the 11/13 07:30 PM ET
+  edition as newest while the 04:30 AM ET 11/14 edition exists. This session's file confirms it; the label
+  promotion is theirs to make.
+
+**Limits stated on the page itself:** n = 3–4 games per player (the `Last 5 Games` block is all the page
+prints), SD uncertainty ≈ a quarter to a half of the SD, shrinkage k = 4 is a declared modelling choice, the
+anchor test is contaminated in the season average's favour, and no market line exists for any prop (Q1).
