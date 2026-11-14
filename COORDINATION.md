@@ -2869,3 +2869,21 @@ idempotence (0 dirty lines after regeneration), the Command Center 17-page/data 
 - **Pages check (§25.2):** [PR #76](https://github.com/wingbangboozle1-lang/NBA1/pull/76) merged at `7e01041`; Pages build for `7e01041` reported `built` at 12:48 UTC; the live site serves current `main`. Earlier `errored` builds came from main-push churn, not a confirmed content fault. No config change was made.
 - **Not done by this session:** no `workflow_dispatch` (HTTP 403 for this session's token); PR #70 closed at 11:25 UTC during a metadata edit (not intended), replaced by #76.
 - **Suggestions for the integration session:** (1) add X01-F1 to F5 to the Flagged register; (2) set the injury page to cite the 04:30 AM ET 11/14 edition (X01-F1); (3) reduce Pages churn: the probe workflow runs on every push to `arena/**` and holds runners, and it pushes record commits that make open PRs `CONFLICTING`; (4) dedupe the §25 section on `main` (X01-F6, logged here).
+
+## 30. Session `arena/e812a9ed-nba1` — independent site QA and discrepancy register (claimed 2026-11-14 UTC)
+
+Branch `arena/e812a9ed-nba1`, based on `2038333` (`main`). This session does not claim the integration seat and does not edit shared site/navigation/data/build files. It owns only the new `verify/2026-11-14-e812a9ed/**` audit artifact plus this §30 record.
+
+| # | Task | Status | File scope | Plan |
+| --- | --- | --- | --- | --- |
+| E01 | Re-run repository/site checks; independently record site status, official-source boundaries, and actionable irregularities without changing another session's scope | **done** — `verify/2026-11-14-e812a9ed/REPORT.md` | `verify/2026-11-14-e812a9ed/**`; `COORDINATION.md` (§30 only) | Re-ran seven validators; 0 checker errors, but integration check has 207/5,940 rows without NBA links and 44 warnings; deployment is built. Exact scope, findings and manual source links are in the report. |
+
+**Do not touch:** root `index.html`, `site/**`, `data/**`, `docs/**`, `command-center/**`, `origination/**`, `strategy-lab/**`, `scripts/**`, `engine*/**`, `.github/**`, or any shared site/content output. The final integration seat and other sessions own those paths. The claim commit contains only this board entry; no site changes precede the claim.
+
+### 30.1 E01 completion record (2026-11-14 UTC)
+
+- **Verification:** `scripts/check_site.py` (15 pages, 1,264 rows, scoped checks pass); `scripts/verify_integration.py` (202 JSON, 122 HTML, 11,918 links, 5,733/5,940 sourced, 0 errors, 44 warnings); `scripts/check_links.py` (59 pages, 879 rows, pass); `scripts/check_rendered.py` (17 pages, 707 rendered rows, pass); `strategy-lab/check.py` (8 pages, 479/479 sourced, pass); `python3 -m engine_v2.check_site` (20 pages, pass); `scripts/verify_all.py` (pass).
+- **Sources:** official source register `data/raw/sources.json`; official NBA schedule <https://www.nba.com/schedule>; NBA game calendar <https://www.nba.com/games?date=2026-11-14>; NBA advanced statistics <https://www.nba.com/stats/teams/advanced>; official injury-report index <https://official.nba.com/nba-injury-report-2026-27-season/>. These are published source links, not claimed as freshly fetched by this audit.
+- **Irregularities / integration requests:** inconsistent S1 banner versus detailed G4 result; different horizons and samples across visible site builds; 207 HTML table rows without official NBA links under the repository-wide checker; three leaked `None` strings; repeated coordination section numbers. Details are recorded in `verify/2026-11-14-e812a9ed/REPORT.md`. No model value was altered and no other session's scope was edited.
+- **Deploy:** GitHub Pages API reported `built`; Pages run <https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43597387021> succeeded for `203833304a2d16594aac6d30802b5d0939106adc`. This confirms GitHub deployment state, not fresh browser access to every page or external NBA URLs.
+- **PR/merge:** no final-integration PR or merge was attempted by this audit-only task. At review time PRs #63, #65, #66, #75 and #80 were open and `DIRTY`; #66 owns final integration. Do not treat this record as the final integration close-out.
