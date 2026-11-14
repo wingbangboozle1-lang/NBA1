@@ -1,8 +1,8 @@
 # NBA1 — independent audit and handoff
 
 **Audit date:** 2026-11-14 UTC  
-**Tree audited:** `main` at `57b4284` (the current branch is rebased on that tree; this audit adds no NBA data).  
-**Scope:** Re-ran repository checks and reviewed the static refresh path on `57b4284`. I did not edit or re-verify the unmerged changes in PR [#31](https://github.com/wingbangboozle1-lang/NBA1/pull/31) or PR [#33](https://github.com/wingbangboozle1-lang/NBA1/pull/33). Main advanced afterward; current deployment state is recorded below separately.
+**Tree audited:** `main` at `76e9632` (current merged tree; this audit adds no NBA data).  
+**Scope:** Re-ran repository checks and reviewed the static refresh path on `76e9632`. I did not edit or re-verify the unmerged changes in PR [#31](https://github.com/wingbangboozle1-lang/NBA1/pull/31) or PR [#33](https://github.com/wingbangboozle1-lang/NBA1/pull/33).
 
 ## Executive summary
 
@@ -15,8 +15,8 @@ The code and site should continue to label existing outputs as dated research/pa
 ## Checks actually run
 
 - `python3 scripts/verify_all.py` — **PASS**. Both site builders, row/source checks, and data audits completed. The build reported 31 games, 26 model picks, 12 parlays, 62 props, and 62 impact rows, including 20 unattributed impact rows. The schedule verifier compared 31 published rows with the local official capture of 36 games for 13–17 Nov: 0 mismatches; it separately reports 18 teams with stale records in that horizon.
-- `python3 scripts/verify_integration.py` — **0 errors, 42 warnings**. It parsed 61 JSON files and 51 HTML files and checked 2,404 static links. It reports 1,202 of 1,270 table/data rows with an official source link; the remaining 68 are not sourced by that check and must remain visibly identified as methodology/decision rows or be flagged, not assigned invented NBA sources. It also flagged a literal `None` in `docs/pages/strategies.html`.
-- `node scripts/render_check.mjs` — **51/51 pages rendered, 0 page problems**, 2,363 content blocks and 1,918 rendered table rows. The first local attempt could not import `jsdom`; after installing the CI dependency into ignored `node_modules` (no tracked dependency files), the render check passed.
+- `python3 scripts/verify_integration.py` — **0 errors, 42 warnings**. It parsed 97 JSON files and 51 HTML files and checked 2,432 static links. It reports 1,230 of 1,298 table/data rows with an official source link; the remaining 68 are not sourced by that check and must remain visibly identified as methodology/decision rows or be flagged, not assigned invented NBA sources. It also flagged a literal `None` in `docs/pages/strategies.html`.
+- `node scripts/render_check.mjs` — **51/51 pages rendered, 0 page problems**, 2,391 content blocks and 1,946 rendered table rows. The first local attempt could not import `jsdom`; after installing the CI dependency into ignored `node_modules` (no tracked dependency files), the render check passed.
 - `python3 scripts/check_links.py` — **0 broken internal links, 0 unapproved external hosts, 0 ragged rows** across 41 `docs/` pages. It counted 725 static rows and 2 rows without source links on `docs/b/index.html` (the two methodology proposals about closing prices and probability calibration). The script also reports 42 client-side scripts that its static table scan does not inspect.
 - `python3 scripts/verify_data.py` — **0 errors; 15 checks passed**. It lists 41 groups of blank/null fields as `UNVERIFIED`; those are field groups, not a count of all missing cells. Blanks must stay blank until their source is confirmed.
 - `python3 scripts/verify_inline.py` — **20/20 checks passed**, including row/source provenance, arithmetic, probabilities, correlations, injury double-counting, and the strategy gates. The ledger has 0 validated Build A strategies.

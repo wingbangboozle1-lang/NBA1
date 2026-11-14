@@ -602,7 +602,7 @@ No value was inferred. Venue names `Rocket Arena` (Cleveland) and `Mortgage Matc
 
 | # | Task | Status | File scope | Notes |
 | --- | --- | --- | --- | --- |
-| Z01 | Independently audit the merged tree, document refresh-pipeline limits, and hand off non-overlapping findings | done | `COORDINATION.md` §14, `FINAL_AUDIT.md` | Tests were rerun on `57b4284`; findings and limits are in `FINAL_AUDIT.md`. No NBA data or another session's site/engine/workflow files were changed. |
+| Z01 | Independently audit the merged tree, document refresh-pipeline limits, and hand off non-overlapping findings | done | `COORDINATION.md` §14, `FINAL_AUDIT.md` | Tests were rerun on `76e9632`; findings and limits are in `FINAL_AUDIT.md`. No NBA data or another session's site/engine/workflow files were changed. |
 
 ### Rebase conflicts and scope update
 
@@ -612,7 +612,10 @@ Both the W01 record and this session's claim were preserved. Before the next
 push, a second `git pull --rebase origin main` advanced the base to `57b4284`
 (PR #30's integration plus later main updates) and conflicted at the same
 append-only board area. The current-main board was retained in full; this session
-was moved to §14. No files from the other sessions' scopes were changed.
+was moved to §14. Before the audit commit was pushed, a third `git pull --rebase`
+advanced `57b4284` to `76e9632` (PR #32 and the probe record); it applied cleanly.
+The verification suite was rerun on `76e9632`. No files from the other sessions'
+scopes were changed.
 
 ### Verification performed and handoff requests
 
