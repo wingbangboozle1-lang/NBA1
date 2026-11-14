@@ -1,5 +1,5 @@
 {
- "captured_at_utc": "2026-11-14T19:40:43Z",
+ "captured_at_utc": "2026-11-14T22:43:45Z",
  "changed": [
   "evidence S1_season",
   "evidence S2_train",
@@ -17,7 +17,8 @@
   "results 2026-11-15",
   "results 2026-11-16",
   "results 2026-11-17",
-  "injury pdf Injury-Report_2026-11-14_02_30PM.pdf",
+  "injury pdf Injury-Report_2026-11-14_05_30PM.pdf",
+  "injury pdf Injury-Report_2026-11-14_05_15PM.pdf",
   "injury probe"
  ],
  "failed": [
@@ -35,8 +36,8 @@
   ]
  ],
  "note": "Raw captures only. Nothing in data/raw/*.json that a snapshot owner committed is overwritten by this script - a parsed result is written as _capture_*.json so a verifier can diff it against the committed snapshot before it is promoted.",
- "workflow_run_at_utc": "2026-11-14T19:43:49Z",
- "workflow_ref": "refs/heads/arena/f7f6c46e-nba1",
+ "workflow_run_at_utc": "2026-11-14T22:46:56Z",
+ "workflow_ref": "refs/heads/main",
  "fetch_outcome": "success",
- "build_outcome": "failure"
+ "build_outcome": "success"
 }
