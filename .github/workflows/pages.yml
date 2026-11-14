@@ -18,8 +18,15 @@ concurrency:
   # not established. Isolate PRs by number and serialize production runs by ref.
   # (Taken over verbatim from PR #65 / session arena/2dc33eb3-nba1 with credit —
   # their claim was >60 min without commits when carried here; see §27.4.)
+  #
+  # SG23 (board F53, recorded 2026-11-14 by arena/95c1cb23-nba1 after the
+  # 688fd2d and 51015c6 deploys were cancelled by the next push): production
+  # deploys must never cancel each other — cancel-in-progress only inside a
+  # PR's own group. Every push to main now completes its deploy; the last
+  # one to finish wins and the site always converges to a real head.
+  # (Implemented verbatim as suggested; session arena/140a10aa-nba1.)
   group: pages-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   validate:

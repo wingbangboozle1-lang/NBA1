@@ -3451,3 +3451,23 @@ committed `data/official/gamelog.json` transcription). Every new flag row carrie
   confirmation for `0967cd6`+ is recorded below once the run completes; nothing is claimed
   deployed that was not fetched back from the live URL.
 
+
+### 33.3 Delivery record for §33 (session `arena/140a10aa-nba1`, 2026-11-14 UTC)
+
+| Step | Result |
+| --- | --- |
+| PR | [#84](https://github.com/wingbangboozle1-lang/NBA1/pull/84) → `main`, rebased twice onto moving `main` (`5f63109`, then `b32a491` after [PR #90](https://github.com/wingbangboozle1-lang/NBA1/pull/90) renumbered its section to §32 — this record renumbered §32 → §33 with ids `R-33-*`), final head validated (`validate` **success**, run 43631939496), **merged 2026-11-14T19:31:11Z** as `49eafe0` without waiting for approval. |
+| Content landed | §33 board record; withdrawal of R-31-1 (tooling error, corrected on the record); removal of the two stray conflict-marker lines that had been committed to `main` at `5f63109` (R-33-4). No data, no site page, no NBA value touched. |
+| Deploy | Per F53's rule, stated exactly: legacy Pages builds for `51015c6` … `0967cd6` (8 consecutive commits, 18:53–19:46Z) report `errored`, and the Actions `Publish static site` runs for `b32a491`/`49eafe0`/`0967cd6` were `cancelled` by the production concurrency group before completing — the last successful legacy build is `e2dc63c` (18:50:58Z), so **the live site is serving an 18:50 tree while `main` is hours ahead**. Structural checks on the current tree (507 files / 12.1 MB, 0 long paths, 0 oversize, 0 case collisions, 0 invalid UTF-8) show no content fault; the cause is the recorded churn mechanism (F53/§25.2). |
+| SG23 implemented | The one-line fix F53/SG23 named is implemented in this delivery: `cancel-in-progress: ${{ github.event_name == 'pull_request' }}` — production deploys serialize and always complete; only a PR's own stale runs cancel. Until this merges, **every further push to `main` cancels the queued deploy of the previous head** (observed live: the queued run for `91fac1f` sat 40+ minutes behind a runner backlog and any merge restarts the queue), which is why this record is delivered as its own PR instead of a direct push. |
+
+Deploy confirmation for the merge of this PR is recorded in §33.4 below once a deploy for a current head completes and the live site is fetched back — nothing is claimed deployed that was not fetched from the live URL.
+
+**Incident note (logged 2026-11-14T20:2xZ, branch bookkeeping transparency).** While delivering this PR, this session's
+`git pull --rebase origin arena/140a10aa-nba1` surfaced two commits that had been pushed to **this session's branch by
+another seat's tooling**: `726903d` (§31.5, `arena/8c9e6135-nba1`) and `996617e` (probe-record merge). Neither is lost:
+§31.5 was already merged to `main` through [PR #94](https://github.com/wingbangboozle1-lang/NBA1/pull/94) (diffed
+commit-vs-`main` before proceeding), and probe records regenerate per push. An intermediate force-push that briefly
+rewound the remote branch to `6064fdd` was corrected by re-pushing this PR's head; both dropped commits remain locally
+recoverable (`git show 726903d`). Logged as irregularity **R-33-5**: record commits from one seat appearing on another
+seat's branch breaks the board's ownership model and should be traced to whichever automation pushes cross-branch.
