@@ -1,0 +1,29 @@
+{
+ "_meta": {
+  "what": "Live probes executed by session arena/697fca1e-nba1 (task W04) at build time",
+  "captured_utc": "2026-11-14T01:22Z",
+  "probe_tool": "fetch_page (HTTP), verbatim transcription, no inference",
+  "sources": {
+   "games_2026-11-13": "https://www.nba.com/games?date=2026-11-13",
+   "injury_report_2026-11-14_12_00PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf"
+  }
+ },
+ "note": "The 2026-11-13 games were LIVE or PREGAME at capture time, so no 11/13 final score existed yet (F-C01 stays open at build time). The 2026-11-14 noon injury report returned AccessDenied because it had not been published yet (noon ET is ~15.6 hours after this capture) - F-C03's blocker is timing, not access.",
+ "rows": [
+  {"matchup": "NYK @ IND", "status": "LIVE Q2 1:05", "score": "44-57 (NYK-IND)", "source_url": "https://www.nba.com/game/nyk-vs-ind-0022600034"},
+  {"matchup": "MIL @ ORL", "status": "LIVE Q2 :00.0", "score": "37-52 (MIL-ORL)", "source_url": "https://www.nba.com/game/mil-vs-orl-0022600035"},
+  {"matchup": "CLE @ MIA", "status": "LIVE Q1 10:56", "score": "0-2 (CLE-MIA)", "source_url": "https://www.nba.com/game/cle-vs-mia-0022600036"},
+  {"matchup": "ATL @ CHI", "status": "LIVE Q1 10:00", "score": "4-4 (ATL-CHI)", "source_url": "https://www.nba.com/game/atl-vs-chi-0022600037"},
+  {"matchup": "MEM @ NOP", "status": "LIVE Q1 9:58", "score": "6-6 (MEM-NOP)", "source_url": "https://www.nba.com/game/mem-vs-nop-0022600038"},
+  {"matchup": "UTA @ HOU", "status": "PREGAME (8:30 PM ET tip)", "score": null, "source_url": "https://www.nba.com/game/uta-vs-hou-0022600039"},
+  {"matchup": "GSW @ SAS", "status": "PREGAME (9:30 PM ET tip)", "score": null, "source_url": "https://www.nba.com/game/gsw-vs-sas-0022600040"},
+  {"matchup": "POR @ SAC", "status": "PREGAME (10:00 PM ET tip)", "score": null, "source_url": "https://www.nba.com/game/por-vs-sac-0022600041"},
+  {"matchup": "OKC @ LAC", "status": "PREGAME (10:30 PM ET tip)", "score": null, "source_url": "https://www.nba.com/game/okc-vs-lac-0022600042"}
+ ],
+ "injury_report_probe": {
+  "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf",
+  "result": "AccessDenied (document not yet published at capture time)",
+  "captured_utc": "2026-11-14T01:22Z",
+  "interpretation": "Confirms F-C03 at build time; the 11/14 05:15 PM ET edition (and possibly a noon edition) should be re-probed after it is published."
+ }
+}

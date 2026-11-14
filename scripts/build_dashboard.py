@@ -128,6 +128,7 @@ def page(title, sub, body, depth=1, extra_head=""):
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
+      <a href="picks.html">Horizon 14–17 (session build)</a>
       <a href="%(navbase)spicks.html">Horizon</a>
       <a href="%(navbase)sstrategies.html">Evidence</a>
       <a href="%(navbase)ssuggestions.html">Decision</a>
