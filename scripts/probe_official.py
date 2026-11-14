@@ -160,7 +160,17 @@ def main():
 
     # Second attempt only on the URLs the first attempt was refused, and only a
     # sample, so the probe stays a polite client.
-    retry_targets = [r["url"] for r in results if r["http_status"] in (401, 403, 429)][:6]
+    # Sample across every host, not just the first few: whether www.nba.com
+    # answers a well-behaved client is the single most load-bearing fact for
+    # anyone planning the automated pipeline, so it must be tested explicitly.
+    by_host = {}
+    for r in results:
+        if r["http_status"] in (401, 403, 429):
+            host = r["url"].split("/")[2]
+            by_host.setdefault(host, []).append(r["url"])
+    retry_targets = []
+    for host, urls in sorted(by_host.items()):
+        retry_targets.extend(urls[:3])
     retried = []
     for u in retry_targets:
         rec = probe_xhr(u)
