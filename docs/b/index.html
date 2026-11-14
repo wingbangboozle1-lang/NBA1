@@ -135,17 +135,17 @@
 
   <h2>Recommended next actions</h2>
   <div class="tablewrap"><table class="thin">
-    <thead><tr><th class="num">#</th><th>Action</th><th>Why</th></tr></thead>
+    <thead><tr><th class="num">#</th><th>Action</th><th>Why</th><th>Official source</th></tr></thead>
     <tbody><tr><td class="num strong">1</td><td>Log real closing prices</td>
-            <td class="small">Until this exists, nothing here can be called profitable - only better than a naive model. Everything else is optimisation of an unvalidated target.</td></tr>
+            <td class="small">Until this exists, nothing here can be called profitable - only better than a naive model. Everything else is optimisation of an unvalidated target.</td><td><span class="flag">unverified</span> <span class="small">No official price source is available in this repository; a methodological action, flagged unverified.</span></td></tr>
 <tr><td class="num strong">2</td><td>Backfill results for 2026-10-20 to 2026-11-05 and re-cut the split</td>
-            <td class="small">Every game from 2026-11-06 onward is already in the test window, so this is now the only way to grow the sample. It would let the ratings window move earlier and the test window roughly double again.</td></tr>
+            <td class="small">Every game from 2026-11-06 onward is already in the test window, so this is now the only way to grow the sample. It would let the ratings window move earlier and the test window roughly double again.</td><td><a class="srclink" href="https://www.nba.com/schedule" target="_blank" rel="noopener">NBA schedule (dated results)</a></td></tr>
 <tr><td class="num strong">3</td><td>Work on probability calibration rather than point accuracy</td>
-            <td class="small">The model is better on MAE and RMSE and worse on Brier and log loss. The gap between those two facts is where the leverage is.</td></tr>
+            <td class="small">The model is better on MAE and RMSE and worse on Brier and log loss. The gap between those two facts is where the leverage is.</td><td><span class="flag">unverified</span> <span class="small">Methodological action (calibration metrics are not NBA statistics); flagged unverified.</span></td></tr>
 <tr><td class="num strong">4</td><td>Complete the player-minutes table</td>
-            <td class="small">Turns the availability impact from a floor into a real number and lets the prop strategies be graded.</td></tr>
+            <td class="small">Turns the availability impact from a floor into a real number and lets the prop strategies be graded.</td><td><a class="srclink" href="https://www.nba.com/stats/players" target="_blank" rel="noopener">NBA player statistics</a></td></tr>
 <tr><td class="num strong">5</td><td>Archive every injury-report edition</td>
-            <td class="small">The only way to grade the availability strategy or to run the robustness gate.</td></tr></tbody>
+            <td class="small">The only way to grade the availability strategy or to run the robustness gate.</td><td><a class="srclink" href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">NBA official injury report policy</a></td></tr></tbody>
   </table></div>
 
   <h2>How to read this site</h2>
