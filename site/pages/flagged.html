@@ -548,6 +548,15 @@
 <td>Label the T+2 and T+3 rows as 'no availability input exists' wherever an availability column is shown, or shorten the pickable window to T+1 and publish T+2/T+3 as schedule only. Reviewer's call (SG19, option C).</td>
 <td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
 </tr>
+<tr>
+<td>F53</td>
+<td>Low</td>
+<td><b>A second push to `main` cancels the first push's Pages deploy, by configuration</b></td>
+<td>PR #75 (carried from #65) split the Pages concurrency group so PR validation can no longer cancel a production deployment, and that part works. But the block still sets `cancel-in-progress: true` on the production group `pages-refs/heads/main`, so two pushes to `main` inside one deploy window cancel each other's run. Observed twice on 2026-11-14: this session's merge of PR #89 (`688fd2d`, run 43630239526) came back `completed/cancelled` sixty seconds after it queued, because a board-record commit (`1aee2dd`) reused the same group; and the earlier merge `51015c6` (run 43629118603) was cancelled the same way by a push this session did not make. Neither is a failure - the newest run for the current head is the one that deploys, and it eventually ran - but a red `cancelled` badge on a merged commit reads as a broken site, and a session that claims a deploy by citing the superseded run id would be citing a run that never published anything.</td>
+<td>`.github/workflows/pages.yml` (concurrency block); any session record that claims a deploy by pointing at a run for a superseded sha</td>
+<td>SG23: `cancel-in-progress: false` for the production group, or batch board-record commits with the merge that they describe instead of pushing them separately. Meanwhile: state a deploy claim against the run for the CURRENT `main` head, never a superseded sha.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43630239526" target="_blank" rel="noopener">link</a></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the

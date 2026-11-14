@@ -3114,3 +3114,15 @@ is a rebuild (`python3 scripts/build_dashboard.py`) rather than a hand-edit of `
    validator passed on the incomplete page. When a rendered table is meant to enumerate a
    population, iterate the population and append the rows the delta omits, then dump the
    rendered `<tbody>` and read it.
+
+**One more irregularity, found while checking whether the deploy landed.** `688fd2d`'s Pages run
+(43630239526) is `completed/cancelled`, and so is `51015c6`'s (43629118603). Not a broken
+build: the workflow's production group still sets `cancel-in-progress: true`, so the next push to
+`main` within the deploy window cancels the previous run - my own board-record commit sixty
+seconds later is what cancelled this one, and another seat's push is what cancelled `51015c6`.
+Recorded as **F53** and **SG23** (the fix is one line: `cancel-in-progress: false` for
+production only). Consequence for every seat, including this one: **a deploy claim must cite the
+run for the current `main` head, never a superseded sha** - the claim in §31.2 above was written
+before this was understood and is therefore restated here as *not confirmed*: at 20:31Z the run
+for `1aee2dd` was still `queued` behind a runner backlog, and the live site is not fetchable from
+this sandbox, so nothing here asserts that `gameday.html` is visible on Pages yet.

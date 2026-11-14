@@ -301,6 +301,16 @@
 <td>Whether a marked leader may still be shown as the leader.</td>
 <td class="src"><span class="na" title="source id https://www.nba.com/games?date=2026-11-16 is not in the register">&mdash;</span></td>
 </tr>
+<tr>
+<td>SG23</td>
+<td>Repo / CI</td>
+<td><b>Do not let a follow-up commit cancel the deploy it is describing</b></td>
+<td>The Pages workflow now isolates PR runs from production runs (PR #75), but production still cancels in progress. A seat that merges a change and then pushes a board-record commit within a minute cancels its own deploy and leaves a `cancelled` badge on the merge commit. Two seats have now reported a Pages deploy as 'confirmed' off a run id, and a cancelled run is not a deploy.</td>
+<td>- `cancel-in-progress: false` on the production group only, keeping the PR behaviour as is <span class='fine'>(effort: Low - one line in .github/workflows/pages.yml; risk: Low - a queued production run waits instead of being replaced; the queue already serialises them; unlocks: Every deploy claim in COORDINATION.md points at a run that actually finished)</span><br>- Commit convention: fold the delivery record into the merge commit, so main sees one push per change <span class='fine'>(effort: Zero code, but it constrains how seats write the board; risk: Low; unlocks: Also removes most of the COORDINATION.md collision churn that forced four renumberings)</span></td>
+<td>Option A, because it makes the badge truthful rather than asking every session to remember a convention. Option B costs nothing and can be adopted today.</td>
+<td>Whether the project wants a superseded production deploy to be cancelled (cheap) or to finish (auditable).</td>
+<td class="src"><span class="na" title="source id https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/pages.yml is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>
 <div class="tablewrap">
