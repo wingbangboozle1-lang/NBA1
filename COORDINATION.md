@@ -1854,3 +1854,40 @@ the model's team ratings end at 2026-11-12 (F19) — the 11/13 finals settle the
 11/13 lines and refresh the records, but the ratings, and therefore every
 forward line, have not been re-fitted; the 11/14+ injury editions (F15/Q10); the
 one-line-set decision (F26/SG15); and the 44 `verify_integration` warnings.
+
+### 25.3 Cross-session triage of the two conflicting integration PRs
+
+Both were `CONFLICTING` against `main` when this session claimed the seat, neither
+could merge, and neither owner had committed since 10:19Z. Neither is discarded:
+each finding was re-verified from the official source and, where still true, is now
+on this branch. Nothing was reverted.
+
+**#58 — `arena/ef6ff2a4-nba1` (head `fc65c16`)**
+
+| Its finding | Re-verified here | Outcome |
+| --- | --- | --- |
+| `engine/fetch_official.py` never re-fetches a slate that went final overnight | Confirmed by reading the code: `dates` came from the committed snapshots only, which cover 11/06–11/12 and 11/14+ | **Adopted.** Yesterday (UTC) is now always captured and `dates` is iterated sorted. Only the behavioural change and its rationale were taken; its session-specific workflow-trigger comments were not. |
+| 11/13 finals captured twice, both reads agree | Its `data/audit/finals_2026_11_13_verification.json` was read and both runs compared with this session's own transcription | **Adopted as evidence.** run_1 9/9 agree, run_2 9/9 agree — three independent reads of the same official page, all agreeing on all 9 games. |
+| 11/13 paper picks settled | Its settlement agrees with this session's: 3 WIN, 4 LOSS, 2 NO BET | Already published; no conflict |
+| Builder-fidelity and nav fixes | Not reached — different file scope | **Left to its owner.** Not reverted, not duplicated. |
+
+**#59 — `arena/254dd8bb-nba1` (head `b9922df`)**
+
+| Its finding | Re-verified here | Outcome |
+| --- | --- | --- |
+| 11/13 finals 0022600034–042, cross-verified 9/9 | Agrees with this session's independent capture | Already published |
+| Settlement: singles 3-4 (−1.40u), MAE 12.39; parlays 0-3, 2 no-bets | Recomputed from the verified finals with the repo's stated grading rule | **Matches exactly.** The parlay 0-3 was missing from this site and is now published, recomputed rather than copied. |
+| Newest injury edition is 11/14/26 04:15 AM ET, 49 rows | Read the same PDF independently and transcribed 49 rows | **Matches exactly** — 49/49 rows, and identical status totals (23 NOT YET SUBMITTED, 18 Out, 4 Questionable, 2 Probable, 2 Available). Two sessions, same edition, same transcription. |
+| Holdout extended 51 → 60 games, margin MAE 12.98 vs naive 13.62 | **Not adopted.** This changes the out-of-sample claim on every page and needs the ratings refresh that F24 shows is not retrievable here | **Left to its owner.** The 51-game figure stands and is labelled as such. |
+| Leaderboard tier-ceiling defect | Partially superseded: this session's Leaderboard page names the **binding** gate per strategy, which surfaces the same problem (a strategy cannot look fundable while G4 fails) | **Partially adopted** in a different form |
+
+**Actions taken:** both PRs are closed with a comment naming what was adopted and where,
+so the work is credited rather than silently dropped. Applying PR #58's fetch fix and this
+session's record refresh together is what makes the 11/13→11/14 transition correct; neither
+alone would have.
+
+**One disagreement left open and published:** #59 extends the out-of-sample window to 60
+games and reports a better margin MAE (12.98 vs 13.62). This session does **not** publish that
+figure, because the ratings refresh it depends on cannot be performed from this environment
+(F24) and the number would therefore rest on a ratings window the site cannot reproduce. It is
+logged here so the owner can land it deliberately with its own verification.
