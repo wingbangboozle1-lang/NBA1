@@ -1,24 +1,32 @@
 {
- "captured_at_utc": "2026-11-14T01:27:52Z",
+ "captured_at_utc": "2026-11-14T01:35:08Z",
  "source_url": "https://www.nba.com/games?date=2026-11-14",
- "page_bytes": 334359,
- "page_sha256": "5abd3b9c188b75636a980c019056f22573b24e20a3669eec03b4970589f7fdb9",
+ "page_bytes": 334304,
+ "page_sha256": "bd6f7c6d36ee7a615ae3140b56ea70d43617639ff2fed8c493ee455f35dc8aac",
  "parse": {
-  "strategy": "anchor-text v1",
+  "strategy": "anchor-text v2 (every link occurrence tried)",
   "finals_rows": [],
   "not_final": [
    "0022600231",
    "0022600232",
-   "0022600234",
    "0022600233",
+   "0022600234",
    "0022600235"
   ],
-  "unparsed": []
+  "unparsed": [],
+  "link_occurrences": {
+   "0022600231": 5,
+   "0022600232": 5,
+   "0022600234": 5,
+   "0022600233": 5,
+   "0022600235": 5
+  }
  },
  "snapshot_comparison": {
   "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
   "mismatches": [],
-  "promotion_candidates": []
+  "promotion_candidates": [],
+  "committed_finals_missed": []
  },
  "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected."
 }

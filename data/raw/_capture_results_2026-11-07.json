@@ -1,10 +1,10 @@
 {
- "captured_at_utc": "2026-11-14T01:27:52Z",
+ "captured_at_utc": "2026-11-14T01:35:08Z",
  "source_url": "https://www.nba.com/games?date=2026-11-07",
- "page_bytes": 497552,
- "page_sha256": "44f12945bcc35718a17a5ed726c70dc616e0524804dd2a41be407507e2a6fe7f",
+ "page_bytes": 500528,
+ "page_sha256": "d84d7e2753c89d5dfe907507977830df5b64cc61717fa1f519ef866490a34714",
  "parse": {
-  "strategy": "anchor-text v1",
+  "strategy": "anchor-text v2 (every link occurrence tried)",
   "finals_rows": [],
   "not_final": [
    "0022600189",
@@ -15,12 +15,40 @@
    "0022600194",
    "0022600195"
   ],
-  "unparsed": []
+  "unparsed": [],
+  "link_occurrences": {
+   "0022600189": 8,
+   "0022600190": 8,
+   "0022600191": 8,
+   "0022600192": 8,
+   "0022600193": 8,
+   "0022600194": 8,
+   "0022600195": 8
+  }
  },
  "snapshot_comparison": {
   "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
   "mismatches": [],
-  "promotion_candidates": []
+  "promotion_candidates": [],
+  "committed_finals_missed": [
+   "0022600189",
+   "0022600190",
+   "0022600191",
+   "0022600192",
+   "0022600193",
+   "0022600194",
+   "0022600195"
+  ]
  },
- "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected."
+ "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected.",
+ "failure_evidence": [
+  {
+   "around": "0022600189",
+   "excerpt": "ePickerCalendar_dpCell__hDgTc\"><button data-track=\"click\" data-type=\"date\" data-id=\"nba:games:main:select-date:date\" data-text=\"2 Games\" data-content=\"2026-12-05\" data-section=\"calendar\" type=\"button\" class=\"DayButton_button__XpDyL DatePickerCalendar_dayBtn__z9fcG DatePickerCalendar_diffMonth__h_uio\" disabled=\"\" data-has-games=\"true\"><p class=\"DatePickerCalendar_date__kxaDx\">5</p><p class=\"DatePickerCalendar_count__gd40Y\">2</p><p class=\"DatePickerCalendar_gamesText__VMWqY\">GAMES</p></button></td></tr></tbody></table><div class=\"DatePickerCalendar_inner__cJ9k9\"></div></div></div></div></section><div class=\"GamesView_gameCardsContainer__OdzwI\"><div class=\"GameCard_gc__2CXKT GameCardsMapper_gamecard__VWHxm\" data-is-post=\"true\"><section class=\"GameCard_gcMain__H3JPd\"><a href=\"/game/den-vs-ind-0022600189\" data-track=\"click\" data-type=\"card\" data-id=\"nba:games:main:game:card\" data-content=\"DEN @ IND, 2026-11-07\" class=\"GameCard_gcm__qKHKr GameCardMatchup_gameCardMatchup__cEO1O\"><p class=\"GameCardMatchup_gamePlayoffRoundText__FEiQY\"><span>NBA Mexico City Game</span></p><div class=\"GameCardMatchup_wrapper__cX0Pf\"><article class=\"GameCardMatchup_article__PZbG8\"><figure class=\"MatchupCardTeamLogo_base__nIvay GameCardMatchup_matchupCardTeamLogo__lTPMa\"><div class=\"TeamLogo_block__gA6vI\"><img src=\"https://cdn.nba.com/logos/nba/1610612743/primary/L/logo.svg\" title=\" Logo\" alt=\" Logo\" class=\"TeamLogo_logo__8OGEP\" loading=\"lazy\"/></div></figure><div class=\"MatchupCardTeamName_base__y5qi_\" data-team-id=\"1610612743\"><span class=\"MatchupCardTeamName_teamName__0cu0j\">Nuggets</span></div><p class=\"MatchupCardTeamRecord_record__X8sj8\">-</p></article><div class=\"GameCardMatchup_statusWrapper__T4NkW\"><div class=\"GameCardMatchup_matchupScoreCardWrapper__JH_GG\"></div><div class=\"GameCardMatchup_gameCardMatchupStatusWrapper__1MrnK\"><div><div class=\"GameCardMatchupStatusText_gcs__N9wVb\" data-is-preseason=\"false\" data-game-status=\"3\"><p data-testid=\"game-status\" data-is-live=\"false\" class=\"GameCardMatchupStatusText_gcsText__L1K1e\">FINAL</p></div></div><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"7\" height=\"12\" viewBox=\"0 0 7 12\" class=\"GameCardMatchup_awayWin___7FSg\" data-no-icon=\"left\" role=\"presentation\"><path fill=\"currentColor\" d=\"m.5 6 6 5.5V.5z\"></path></svg><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"7\" height=\"12\" viewBox=\"0 0 7 12\" class=\"GameCardMatchup_homeWin__Y9GkS\" data-no-icon=\"right\" role=\"presentation\"><path fill=\"currentColor\" d=\"m.5 6 6 5.5V.5z\"></path></svg></div><div class=\"GameCardMatchup_matchScorecardAlignRight__yrSF2\"></div></div><article class=\"GameCardMatchup_article__PZbG8\"><figure class=\"MatchupCardTeamLogo_base__nIvay GameCardMatchup_matchupCardTeamLogo__lTPMa\"><div class=\"TeamLogo_block__gA6vI\"><img src=\"https://cdn.nba.com/logos/nba/1610612754/primary/L/logo.svg\" title=\" Logo\" alt=\" Logo\" class=\"TeamLogo_logo__8OGEP\" loading=\"lazy\"/></div></figure><div class=\"MatchupCardTeamName_base__y5qi_\" data-team-id=\"1610612754\"><span class=\"MatchupCardTeamName_teamName__0cu0j\">Pacers</span></div><p class=\"MatchupCardTeamRecord_record__X8sj8\">-</p></article></div></a><ul class=\"Tabs_tab__nSWFu\" data-show-border=\"true\" data-has-rounded-ctas=\"true\"><li class=\"TabLink_tab__b31E3\"><a href=\"/game/den-vs-ind-0022600189?watchFullGame\" class=\"Anchor_anchor__wnmj2 TabLink_link___23UW\" data-is-external=\"false\" data-has-more=\"false\" data-has-children=\"true\" data-track=\"video\" data-id=\"nba:games:watch:cta\" data-content=\"0022600189\" data-text=\"DEN @ IND, 2026-11-07\" data-section=\"games\" data-premium=\"true\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"16\" fill=\"none\" viewBox=\"0 0 17 16\" class=\"RoundedChevronIcon_chevron__EMetX\" data-no-icon=\"true\" role=\"presentation\"><path fill=\"currentColor\" d=\"M13.334 7.134a1 1 0 0 1 0 1.732l-7 4.042a1 1 0 0 1-1.5-.867V3.96a1 1 0 0 1 1.5-.866z\"></path></svg>Watch</a></li><li class=\"TabLink_tab__b31E3\"><a href=\"/game/den-vs-ind-0022600189/box-score#box-score\" class=\"Anchor_anchor__wnmj2 TabLink_"
+  },
+  {
+   "around": "First 'Final' in raw HTML",
+   "excerpt": ":\"Pascal Siakam\",\"jerseyNum\":\"43\",\"position\":\"PF\",\"teamTricode\":\"IND\",\"playerSlug\":\"pascal-siakam\",\"points\":\"23\",\"rebounds\":\"2\",\"assists\":\"5\",\"blocks\":\"0\",\"steals\":\"0\"}},\"awayTeam\":{\"teamId\":1610612743,\"teamName\":\"Nuggets\",\"wins\":5,\"losses\":3,\"teamSubtitle\":\"5-3\",\"score\":114,\"timeoutsRemaining\":1,\"inBonus\":false,\"teamTricode\":\"DEN\",\"teamSlug\":\"nuggets\",\"specialInfoPrefix\":null,\"marqueePlayer\":\"203999\",\"periods\":[{\"period\":1,\"score\":27},{\"period\":2,\"score\":37},{\"period\":3,\"score\":26},{\"period\":4,\"score\":24}],\"teamLeader\":{\"personId\":203999,\"name\":\"Nikola Joki\u0107\",\"jerseyNum\":\"15\",\"position\":\"C\",\"teamTricode\":\"DEN\",\"playerSlug\":\"nikola-joki\u0107\",\"points\":\"19\",\"rebounds\":\"13\",\"assists\":\"8\",\"blocks\":\"1\",\"steals\":\"1\"}},\"seasonLeadersFlag\":0,\"gameClock\":\"PT00M00.00S\",\"gameStatus\":3,\"gameStatusText\":\"Final\",\"gameBreakStatus\":\"Final\",\"gameState\":3,\"duration\":0,\"gameTimeEastern\":\"2026-11-07T17:00:00Z\",\"gameTimeUtc\":\"2026-11-07T22:00:00Z\",\"info\":\"\",\"subInfo\":\"Neutral Site\",\"gameDetailsHeader\":{\"spoilerHeader\":\"\",\"nonSpoilerHeader\":\"\"},\"actions\":[{\"title\":\"Watch\",\"resourceLocator\":{\"resourceUrl\":\"/game/den-vs-ind-0022600189?watch\",\"resourceId\":\"0022600189\",\"resourceType\":\"game\"}},{\"title\":\"Box Score\",\"resourceLocator\":{\"resourceUrl\":\"/game/den-vs-ind-0022600189/box-score\",\"resourceId\":\"0022600189\",\"resourceType\":\"game\"}},{\"title\":\"Game Details\",\"resourceLocator\":{\"resourceUrl\":\"/game/den-vs-ind-0022600189\",\"resourceId\":\"0022600189\",\"resourceType\":\"game\"}}],\"images\":{\"1920x1080\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/1920x1080.png\",\"1280x720\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/1280x720.png\",\"640x360\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/640x360.png\",\"480x270\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/480x270.png\",\"320x180\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/320x180.png\",\"160x90\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/den-ind/160x90.png\"},\"ifNecessary\":false,\"cardId\":\"\",\"contentAccess\":{\"isMemberGated\":false,\"isVivoContent\":false,\"cmsEntitlement\":null,\"isNikeGated\":false},\"shareUrl\":\"https://www.nba.com/game/den-vs-ind-0022600189\",\"ticketUrl\":null,\"isTntOT\":false,\"cardHat\":\"NBA Mexico City Game\",\"broadcasters\":{\"nationalBroadcasters\":[{\"broadcasterId\":7,\"broadcasterScope\":null,\"broadcasterDisplayName\":\"NBA TV\",\"broadcasterLogoUrl\":null,\"broadcasterVideoLink\":\"\",\"broadcasterDescription\":\"\",\"broadcasterTeamId\":null,\"broadcasterRanking\":null,\"broadcasterLocalizationRegion\":\"\",\"broadcasterLogoUrlDarkLg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/120h/nbatv.png\",\"broadcasterLogoUrlLightLg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/120h/nbatv.png\",\"broadcasterLogoUrlDarkSm\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/40h/nbatv.png\",\"broadcasterLogoUrlLightSm\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/40h/nbatv.png\",\"broadcasterLogoUrlLightSvg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/120h/nbatv.svg\",\"broadcasterLogoUrlDarkSvg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/120h/nbatv.svg\",\"broadcasterLogoIcon1x1\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/dtc-icons/square/nbatv.png\",\"broadcasterLogoIcon1x1Svg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/dtc-icons/square/nbatv.svg\",\"broadcasterLogoIcon16x9\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/dtc-icons/16x9/nbatv.png\",\"broadcasterLogoIcon16x9Svg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/D/dtc-icons/16x9/nbatv.svg\"}],\"homeTvBroadcasters\":[],\"homeRadioBroadcasters\":[{\"broadcasterId\":1641,\"broadcasterScope\":null,\"broadcasterDisplayName\":\"93.5/107.5 The Fan\",\"broadcasterLogoUrl\":null,\"broadcasterVideoLink\":\"\",\"broadcasterDescription\":\"\",\"broadcasterTeamId\":1610612754,\"broadcasterRanking\":null,\"broadcasterLocalizationRegion\":\"\"}],\"awayTvBroadcasters\":[],\"awayRadioBroadcasters\":[{\"broadcasterId\":1730,\"broadcasterScope\":null,\"broadcasterDisplayN"
+  }
+ ]
 }

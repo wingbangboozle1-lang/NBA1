@@ -1,10 +1,10 @@
 {
- "captured_at_utc": "2026-11-14T01:27:52Z",
+ "captured_at_utc": "2026-11-14T01:35:08Z",
  "source_url": "https://www.nba.com/games?date=2026-11-12",
- "page_bytes": 403656,
- "page_sha256": "be013cc4ec039208f075a5eabacaed41508c5193b12147ac7eef67139dce7d39",
+ "page_bytes": 403684,
+ "page_sha256": "d4f08940604e2c7c5920ad822f1815fd66ff6e9fc5261a65af5aedddb8b5163c",
  "parse": {
-  "strategy": "anchor-text v1",
+  "strategy": "anchor-text v2 (every link occurrence tried)",
   "finals_rows": [],
   "not_final": [
    "0022600227",
@@ -12,12 +12,34 @@
    "0022600229",
    "0022600230"
   ],
-  "unparsed": []
+  "unparsed": [],
+  "link_occurrences": {
+   "0022600227": 8,
+   "0022600228": 8,
+   "0022600229": 8,
+   "0022600230": 8
+  }
  },
  "snapshot_comparison": {
   "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
   "mismatches": [],
-  "promotion_candidates": []
+  "promotion_candidates": [],
+  "committed_finals_missed": [
+   "0022600227",
+   "0022600228",
+   "0022600229",
+   "0022600230"
+  ]
  },
- "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected."
+ "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected.",
+ "failure_evidence": [
+  {
+   "around": "0022600227",
+   "excerpt": "ePickerCalendar_dpCell__hDgTc\"><button data-track=\"click\" data-type=\"date\" data-id=\"nba:games:main:select-date:date\" data-text=\"2 Games\" data-content=\"2026-12-05\" data-section=\"calendar\" type=\"button\" class=\"DayButton_button__XpDyL DatePickerCalendar_dayBtn__z9fcG DatePickerCalendar_diffMonth__h_uio\" disabled=\"\" data-has-games=\"true\"><p class=\"DatePickerCalendar_date__kxaDx\">5</p><p class=\"DatePickerCalendar_count__gd40Y\">2</p><p class=\"DatePickerCalendar_gamesText__VMWqY\">GAMES</p></button></td></tr></tbody></table><div class=\"DatePickerCalendar_inner__cJ9k9\"></div></div></div></div></section><div class=\"GamesView_gameCardsContainer__OdzwI\"><div class=\"GameCard_gc__2CXKT GameCardsMapper_gamecard__VWHxm\" data-is-post=\"true\"><section class=\"GameCard_gcMain__H3JPd\"><a href=\"/game/tor-vs-phi-0022600227\" data-track=\"click\" data-type=\"card\" data-id=\"nba:games:main:game:card\" data-content=\"TOR @ PHI, 2026-11-12\" class=\"GameCard_gcm__qKHKr GameCardMatchup_gameCardMatchup__cEO1O\"><div class=\"GameCardMatchup_wrapper__cX0Pf\"><article class=\"GameCardMatchup_article__PZbG8\"><figure class=\"MatchupCardTeamLogo_base__nIvay GameCardMatchup_matchupCardTeamLogo__lTPMa\"><div class=\"TeamLogo_block__gA6vI\"><img src=\"https://cdn.nba.com/logos/nba/1610612761/primary/L/logo.svg\" title=\" Logo\" alt=\" Logo\" class=\"TeamLogo_logo__8OGEP\" loading=\"lazy\"/></div></figure><div class=\"MatchupCardTeamName_base__y5qi_\" data-team-id=\"1610612761\"><span class=\"MatchupCardTeamName_teamName__0cu0j\">Raptors</span></div><p class=\"MatchupCardTeamRecord_record__X8sj8\">-</p></article><div class=\"GameCardMatchup_statusWrapper__T4NkW\"><div class=\"GameCardMatchup_matchupScoreCardWrapper__JH_GG\"></div><div class=\"GameCardMatchup_gameCardMatchupStatusWrapper__1MrnK\"><div><div class=\"GameCardMatchupStatusText_gcs__N9wVb\" data-is-preseason=\"false\" data-game-status=\"3\"><p data-testid=\"game-status\" data-is-live=\"false\" class=\"GameCardMatchupStatusText_gcsText__L1K1e\">FINAL</p></div></div><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"7\" height=\"12\" viewBox=\"0 0 7 12\" class=\"GameCardMatchup_awayWin___7FSg\" data-no-icon=\"left\" role=\"presentation\"><path fill=\"currentColor\" d=\"m.5 6 6 5.5V.5z\"></path></svg><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"7\" height=\"12\" viewBox=\"0 0 7 12\" class=\"GameCardMatchup_homeWin__Y9GkS\" data-no-icon=\"right\" role=\"presentation\"><path fill=\"currentColor\" d=\"m.5 6 6 5.5V.5z\"></path></svg></div><div class=\"GameCardMatchup_matchScorecardAlignRight__yrSF2\"></div></div><article class=\"GameCardMatchup_article__PZbG8\"><figure class=\"MatchupCardTeamLogo_base__nIvay GameCardMatchup_matchupCardTeamLogo__lTPMa\"><div class=\"TeamLogo_block__gA6vI\"><img src=\"https://cdn.nba.com/logos/nba/1610612755/primary/L/logo.svg\" title=\" Logo\" alt=\" Logo\" class=\"TeamLogo_logo__8OGEP\" loading=\"lazy\"/></div></figure><div class=\"MatchupCardTeamName_base__y5qi_\" data-team-id=\"1610612755\"><span class=\"MatchupCardTeamName_teamName__0cu0j\">76ers</span></div><p class=\"MatchupCardTeamRecord_record__X8sj8\">-</p></article></div></a><ul class=\"Tabs_tab__nSWFu\" data-show-border=\"true\" data-has-rounded-ctas=\"true\"><li class=\"TabLink_tab__b31E3\"><a href=\"/game/tor-vs-phi-0022600227?watchFullGame\" class=\"Anchor_anchor__wnmj2 TabLink_link___23UW\" data-is-external=\"false\" data-has-more=\"false\" data-has-children=\"true\" data-track=\"video\" data-id=\"nba:games:watch:cta\" data-content=\"0022600227\" data-text=\"TOR @ PHI, 2026-11-12\" data-section=\"games\" data-premium=\"true\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"16\" fill=\"none\" viewBox=\"0 0 17 16\" class=\"RoundedChevronIcon_chevron__EMetX\" data-no-icon=\"true\" role=\"presentation\"><path fill=\"currentColor\" d=\"M13.334 7.134a1 1 0 0 1 0 1.732l-7 4.042a1 1 0 0 1-1.5-.867V3.96a1 1 0 0 1 1.5-.866z\"></path></svg>Watch</a></li><li class=\"TabLink_tab__b31E3\"><a href=\"/game/tor-vs-phi-0022600227/box-score#box-score\" class=\"Anchor_anchor__wnmj2 TabLink_link___23UW\" data-is-external=\"false\" data-has-more=\"false\" data-has-children=\"true\" data-tra"
+  },
+  {
+   "around": "First 'Final' in raw HTML",
+   "excerpt": "ersonId\":1630178,\"name\":\"Tyrese Maxey\",\"jerseyNum\":\"0\",\"position\":\"PG\",\"teamTricode\":\"PHI\",\"playerSlug\":null,\"points\":\"27\",\"rebounds\":\"2\",\"assists\":\"8\",\"blocks\":\"1\",\"steals\":\"2\"}},\"awayTeam\":{\"teamId\":1610612761,\"teamName\":\"Raptors\",\"wins\":5,\"losses\":7,\"teamSubtitle\":\"5-7\",\"score\":112,\"timeoutsRemaining\":0,\"inBonus\":false,\"teamTricode\":\"TOR\",\"teamSlug\":\"raptors\",\"specialInfoPrefix\":null,\"marqueePlayer\":\"1630567\",\"periods\":[{\"period\":1,\"score\":33},{\"period\":2,\"score\":27},{\"period\":3,\"score\":27},{\"period\":4,\"score\":25}],\"teamLeader\":{\"personId\":1629628,\"name\":\"RJ Barrett\",\"jerseyNum\":\"9\",\"position\":\"SF\",\"teamTricode\":\"TOR\",\"playerSlug\":null,\"points\":\"31\",\"rebounds\":\"14\",\"assists\":\"5\",\"blocks\":\"0\",\"steals\":\"0\"}},\"seasonLeadersFlag\":0,\"gameClock\":\"PT00M00.00S\",\"gameStatus\":3,\"gameStatusText\":\"Final\",\"gameBreakStatus\":\"Final\",\"gameState\":3,\"duration\":0,\"gameTimeEastern\":\"2026-11-12T19:00:00Z\",\"gameTimeUtc\":\"2026-11-13T00:00:00Z\",\"info\":\"\",\"subInfo\":\"\",\"gameDetailsHeader\":{\"spoilerHeader\":\"\",\"nonSpoilerHeader\":\"\"},\"actions\":[{\"title\":\"Watch\",\"resourceLocator\":{\"resourceUrl\":\"/game/tor-vs-phi-0022600227?watch\",\"resourceId\":\"0022600227\",\"resourceType\":\"game\"}},{\"title\":\"Box Score\",\"resourceLocator\":{\"resourceUrl\":\"/game/tor-vs-phi-0022600227/box-score\",\"resourceId\":\"0022600227\",\"resourceType\":\"game\"}},{\"title\":\"Game Details\",\"resourceLocator\":{\"resourceUrl\":\"/game/tor-vs-phi-0022600227\",\"resourceId\":\"0022600227\",\"resourceType\":\"game\"}}],\"images\":{\"1920x1080\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/tor-phi/1920x1080.png\",\"1280x720\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/tor-phi/1280x720.png\",\"640x360\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/tor-phi/640x360.png\",\"480x270\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/tor-phi/480x270.png\",\"320x180\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/tor-phi/320x180.png\",\"160x90\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/tor-phi/160x90.png\"},\"ifNecessary\":false,\"cardId\":\"\",\"contentAccess\":{\"isMemberGated\":false,\"isVivoContent\":false,\"cmsEntitlement\":null,\"isNikeGated\":false},\"shareUrl\":\"https://www.nba.com/game/tor-vs-phi-0022600227\",\"ticketUrl\":null,\"isTntOT\":false,\"cardHat\":null,\"broadcasters\":{\"nationalBroadcasters\":[],\"homeTvBroadcasters\":[],\"homeRadioBroadcasters\":[{\"broadcasterId\":1434,\"broadcasterScope\":null,\"broadcasterDisplayName\":\"97.5 The Fanatic\",\"broadcasterLogoUrl\":null,\"broadcasterVideoLink\":\"\",\"broadcasterDescription\":\"\",\"broadcasterTeamId\":1610612755,\"broadcasterRanking\":null,\"broadcasterLocalizationRegion\":\"\"}],\"awayTvBroadcasters\":[],\"awayRadioBroadcasters\":[],\"intlRadioBroadcasters\":[],\"intlTvBroadcasters\":[],\"homeOttBroadcasters\":[],\"awayOttBroadcasters\":[],\"intlOttBroadcasters\":[],\"nationalOttBroadcasters\":[],\"nationalRadioBroadcasters\":[],\"subscriptionBroadcasters\":[{\"broadcasterId\":0,\"broadcasterScope\":null,\"broadcasterDisplayName\":\"League Pass\",\"broadcasterLogoUrl\":null,\"broadcasterVideoLink\":null,\"broadcasterDescription\":null,\"broadcasterTeamId\":null,\"broadcasterRanking\":null,\"broadcasterLocalizationRegion\":null,\"broadcasterLogoIcon1x1\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/dtc-icons/square/league-pass.png\",\"broadcasterLogoIcon1x1Svg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/dtc-icons/square/league-pass.svg\",\"broadcasterLogoIcon16x9\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/dtc-icons/16x9/league-pass.png\",\"broadcasterLogoIcon16x9Svg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/dtc-icons/16x9/league-pass.svg\"}]},\"showPostGameBroadcasters\":true,\"streamOrder\":[{\"rank\":0,\"type\":\"production\",\"productionId\":\"g0022600227tor1000475phi\",\"mediaKindVideoId\":null,\"uniqueName\":\"NSS-Team-TOR\",\"status\":\"Over\",\"isRadio\":false,\"inMarketTeamTricode\":\"TOR\",\"logoMapping\":\"https://cdn.nba.com/logos/nba/streams/L/nss-team-tor.png\",\"logoMap\":{\"logoMappingDark\":\"https://cdn.nba.com/logos/nba/streams/D/nss-team-tor.png\",\"logoMa"
+  }
+ ]
 }

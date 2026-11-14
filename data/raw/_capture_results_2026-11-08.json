@@ -1,10 +1,10 @@
 {
- "captured_at_utc": "2026-11-14T01:27:52Z",
+ "captured_at_utc": "2026-11-14T01:35:08Z",
  "source_url": "https://www.nba.com/games?date=2026-11-08",
- "page_bytes": 492412,
- "page_sha256": "f316b13895550c6039e40e329096ebdc7ea02a2f1df970a0849dbef5bc1f8152",
+ "page_bytes": 492357,
+ "page_sha256": "3883a1f3de4bd635b8782973dcd42cbd9eec0528286e7a169272d4f8bf5c0e43",
  "parse": {
-  "strategy": "anchor-text v1",
+  "strategy": "anchor-text v2 (every link occurrence tried)",
   "finals_rows": [],
   "not_final": [
    "0022600196",
@@ -15,12 +15,40 @@
    "0022600201",
    "0022600202"
   ],
-  "unparsed": []
+  "unparsed": [],
+  "link_occurrences": {
+   "0022600196": 8,
+   "0022600197": 8,
+   "0022600198": 8,
+   "0022600199": 8,
+   "0022600200": 8,
+   "0022600201": 8,
+   "0022600202": 8
+  }
  },
  "snapshot_comparison": {
   "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
   "mismatches": [],
-  "promotion_candidates": []
+  "promotion_candidates": [],
+  "committed_finals_missed": [
+   "0022600196",
+   "0022600197",
+   "0022600198",
+   "0022600199",
+   "0022600200",
+   "0022600201",
+   "0022600202"
+  ]
  },
- "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected."
+ "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected.",
+ "failure_evidence": [
+  {
+   "around": "0022600196",
+   "excerpt": "ePickerCalendar_dpCell__hDgTc\"><button data-track=\"click\" data-type=\"date\" data-id=\"nba:games:main:select-date:date\" data-text=\"2 Games\" data-content=\"2026-12-05\" data-section=\"calendar\" type=\"button\" class=\"DayButton_button__XpDyL DatePickerCalendar_dayBtn__z9fcG DatePickerCalendar_diffMonth__h_uio\" disabled=\"\" data-has-games=\"true\"><p class=\"DatePickerCalendar_date__kxaDx\">5</p><p class=\"DatePickerCalendar_count__gd40Y\">2</p><p class=\"DatePickerCalendar_gamesText__VMWqY\">GAMES</p></button></td></tr></tbody></table><div class=\"DatePickerCalendar_inner__cJ9k9\"></div></div></div></div></section><div class=\"GamesView_gameCardsContainer__OdzwI\"><div class=\"GameCard_gc__2CXKT GameCardsMapper_gamecard__VWHxm\" data-is-post=\"true\"><section class=\"GameCard_gcMain__H3JPd\"><a href=\"/game/phi-vs-chi-0022600196\" data-track=\"click\" data-type=\"card\" data-id=\"nba:games:main:game:card\" data-content=\"PHI @ CHI, 2026-11-08\" class=\"GameCard_gcm__qKHKr GameCardMatchup_gameCardMatchup__cEO1O\"><div class=\"GameCardMatchup_wrapper__cX0Pf\"><article class=\"GameCardMatchup_article__PZbG8\"><figure class=\"MatchupCardTeamLogo_base__nIvay GameCardMatchup_matchupCardTeamLogo__lTPMa\"><div class=\"TeamLogo_block__gA6vI\"><img src=\"https://cdn.nba.com/logos/nba/1610612755/primary/L/logo.svg\" title=\" Logo\" alt=\" Logo\" class=\"TeamLogo_logo__8OGEP\" loading=\"lazy\"/></div></figure><div class=\"MatchupCardTeamName_base__y5qi_\" data-team-id=\"1610612755\"><span class=\"MatchupCardTeamName_teamName__0cu0j\">76ers</span></div><p class=\"MatchupCardTeamRecord_record__X8sj8\">-</p></article><div class=\"GameCardMatchup_statusWrapper__T4NkW\"><div class=\"GameCardMatchup_matchupScoreCardWrapper__JH_GG\"></div><div class=\"GameCardMatchup_gameCardMatchupStatusWrapper__1MrnK\"><div><div class=\"GameCardMatchupStatusText_gcs__N9wVb\" data-is-preseason=\"false\" data-game-status=\"3\"><p data-testid=\"game-status\" data-is-live=\"false\" class=\"GameCardMatchupStatusText_gcsText__L1K1e\">FINAL</p></div></div><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"7\" height=\"12\" viewBox=\"0 0 7 12\" class=\"GameCardMatchup_awayWin___7FSg\" data-no-icon=\"left\" role=\"presentation\"><path fill=\"currentColor\" d=\"m.5 6 6 5.5V.5z\"></path></svg><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"7\" height=\"12\" viewBox=\"0 0 7 12\" class=\"GameCardMatchup_homeWin__Y9GkS\" data-no-icon=\"right\" role=\"presentation\"><path fill=\"currentColor\" d=\"m.5 6 6 5.5V.5z\"></path></svg></div><div class=\"GameCardMatchup_matchScorecardAlignRight__yrSF2\"></div></div><article class=\"GameCardMatchup_article__PZbG8\"><figure class=\"MatchupCardTeamLogo_base__nIvay GameCardMatchup_matchupCardTeamLogo__lTPMa\"><div class=\"TeamLogo_block__gA6vI\"><img src=\"https://cdn.nba.com/logos/nba/1610612741/primary/L/logo.svg\" title=\" Logo\" alt=\" Logo\" class=\"TeamLogo_logo__8OGEP\" loading=\"lazy\"/></div></figure><div class=\"MatchupCardTeamName_base__y5qi_\" data-team-id=\"1610612741\"><span class=\"MatchupCardTeamName_teamName__0cu0j\">Bulls</span></div><p class=\"MatchupCardTeamRecord_record__X8sj8\">-</p></article></div></a><ul class=\"Tabs_tab__nSWFu\" data-show-border=\"true\" data-has-rounded-ctas=\"true\"><li class=\"TabLink_tab__b31E3\"><a href=\"/game/phi-vs-chi-0022600196?watchFullGame\" class=\"Anchor_anchor__wnmj2 TabLink_link___23UW\" data-is-external=\"false\" data-has-more=\"false\" data-has-children=\"true\" data-track=\"video\" data-id=\"nba:games:watch:cta\" data-content=\"0022600196\" data-text=\"PHI @ CHI, 2026-11-08\" data-section=\"games\" data-premium=\"true\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"17\" height=\"16\" fill=\"none\" viewBox=\"0 0 17 16\" class=\"RoundedChevronIcon_chevron__EMetX\" data-no-icon=\"true\" role=\"presentation\"><path fill=\"currentColor\" d=\"M13.334 7.134a1 1 0 0 1 0 1.732l-7 4.042a1 1 0 0 1-1.5-.867V3.96a1 1 0 0 1 1.5-.866z\"></path></svg>Watch</a></li><li class=\"TabLink_tab__b31E3\"><a href=\"/game/phi-vs-chi-0022600196/box-score#box-score\" class=\"Anchor_anchor__wnmj2 TabLink_link___23UW\" data-is-external=\"false\" data-has-more=\"false\" data-has-children=\"true\" data-track"
+  },
+  {
+   "around": "First 'Final' in raw HTML",
+   "excerpt": "\"name\":\"Josh Giddey\",\"jerseyNum\":\"3\",\"position\":\"PG\",\"teamTricode\":\"CHI\",\"playerSlug\":\"josh-giddey\",\"points\":\"19\",\"rebounds\":\"7\",\"assists\":\"15\",\"blocks\":\"0\",\"steals\":\"1\"}},\"awayTeam\":{\"teamId\":1610612755,\"teamName\":\"76ers\",\"wins\":9,\"losses\":2,\"teamSubtitle\":\"9-2\",\"score\":127,\"timeoutsRemaining\":1,\"inBonus\":false,\"teamTricode\":\"PHI\",\"teamSlug\":\"sixers\",\"specialInfoPrefix\":null,\"marqueePlayer\":\"1630178\",\"periods\":[{\"period\":1,\"score\":34},{\"period\":2,\"score\":34},{\"period\":3,\"score\":31},{\"period\":4,\"score\":28}],\"teamLeader\":{\"personId\":1627759,\"name\":\"Jaylen Brown\",\"jerseyNum\":\"7\",\"position\":\"SF\",\"teamTricode\":\"PHI\",\"playerSlug\":\"jaylen-brown\",\"points\":\"29\",\"rebounds\":\"7\",\"assists\":\"4\",\"blocks\":\"0\",\"steals\":\"1\"}},\"seasonLeadersFlag\":0,\"gameClock\":\"PT00M00.00S\",\"gameStatus\":3,\"gameStatusText\":\"Final\",\"gameBreakStatus\":\"Final\",\"gameState\":3,\"duration\":0,\"gameTimeEastern\":\"2026-11-08T15:30:00Z\",\"gameTimeUtc\":\"2026-11-08T20:30:00Z\",\"info\":\"\",\"subInfo\":\"\",\"gameDetailsHeader\":{\"spoilerHeader\":\"\",\"nonSpoilerHeader\":\"\"},\"actions\":[{\"title\":\"Watch\",\"resourceLocator\":{\"resourceUrl\":\"/game/phi-vs-chi-0022600196?watch\",\"resourceId\":\"0022600196\",\"resourceType\":\"game\"}},{\"title\":\"Box Score\",\"resourceLocator\":{\"resourceUrl\":\"/game/phi-vs-chi-0022600196/box-score\",\"resourceId\":\"0022600196\",\"resourceType\":\"game\"}},{\"title\":\"Game Details\",\"resourceLocator\":{\"resourceUrl\":\"/game/phi-vs-chi-0022600196\",\"resourceId\":\"0022600196\",\"resourceType\":\"game\"}}],\"images\":{\"1920x1080\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/phi-chi/1920x1080.png\",\"1280x720\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/phi-chi/1280x720.png\",\"640x360\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/phi-chi/640x360.png\",\"480x270\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/phi-chi/480x270.png\",\"320x180\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/phi-chi/320x180.png\",\"160x90\":\"https://cdn.nba.com/davinci/images/team-matchups/nba/latest/ced/phi-chi/160x90.png\"},\"ifNecessary\":false,\"cardId\":\"\",\"contentAccess\":{\"isMemberGated\":false,\"isVivoContent\":false,\"cmsEntitlement\":null,\"isNikeGated\":false},\"shareUrl\":\"https://www.nba.com/game/phi-vs-chi-0022600196\",\"ticketUrl\":null,\"isTntOT\":false,\"cardHat\":null,\"broadcasters\":{\"nationalBroadcasters\":[],\"homeTvBroadcasters\":[],\"homeRadioBroadcasters\":[{\"broadcasterId\":1001893,\"broadcasterScope\":null,\"broadcasterDisplayName\":\"104.3 The Score / S: Bulls.Com\",\"broadcasterLogoUrl\":null,\"broadcasterVideoLink\":\"\",\"broadcasterDescription\":\"\",\"broadcasterTeamId\":1610612741,\"broadcasterRanking\":null,\"broadcasterLocalizationRegion\":\"\"}],\"awayTvBroadcasters\":[],\"awayRadioBroadcasters\":[{\"broadcasterId\":1434,\"broadcasterScope\":null,\"broadcasterDisplayName\":\"97.5 The Fanatic\",\"broadcasterLogoUrl\":null,\"broadcasterVideoLink\":\"\",\"broadcasterDescription\":\"\",\"broadcasterTeamId\":1610612755,\"broadcasterRanking\":null,\"broadcasterLocalizationRegion\":\"\"}],\"intlRadioBroadcasters\":[],\"intlTvBroadcasters\":[],\"homeOttBroadcasters\":[],\"awayOttBroadcasters\":[],\"intlOttBroadcasters\":[],\"nationalOttBroadcasters\":[],\"nationalRadioBroadcasters\":[],\"subscriptionBroadcasters\":[{\"broadcasterId\":0,\"broadcasterScope\":null,\"broadcasterDisplayName\":\"League Pass\",\"broadcasterLogoUrl\":null,\"broadcasterVideoLink\":null,\"broadcasterDescription\":null,\"broadcasterTeamId\":null,\"broadcasterRanking\":null,\"broadcasterLocalizationRegion\":null,\"broadcasterLogoIcon1x1\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/dtc-icons/square/league-pass.png\",\"broadcasterLogoIcon1x1Svg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/dtc-icons/square/league-pass.svg\",\"broadcasterLogoIcon16x9\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/dtc-icons/16x9/league-pass.png\",\"broadcasterLogoIcon16x9Svg\":\"https://cdn.nba.com/logos/nba/broadcast_logos/L/dtc-icons/16x9/league-pass.svg\"}]},\"showPostGameBroadcasters\":true,\"streamOrder\":[{\"rank\":0,\"type\":\"production\",\"productionId\":\"g0022600196phi1000452chi\",\""
+  }
+ ]
 }
