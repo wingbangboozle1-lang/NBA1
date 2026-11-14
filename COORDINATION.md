@@ -363,3 +363,36 @@ The active Arena branch is fixed as `arena/e38f7e38-nba1`; work remains on that 
 - Rationale/source: GitHub documents step-level `continue-on-error` as allowing the step to continue despite a failure; removing it ensures the validation exit status participates in job success: <https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idstepscontinue-on-error>. No NBA data or model claim was changed.
 
 Claimed after reading this board and confirming no active task owns these files. No external NBA fact was changed by this task.
+
+---
+
+## 11. Build D — session `arena/18a41aba-nba1` (claimed 2026-11-14, UTC)
+
+Scope: move the published window to **today + 3 days (2026-11-14 .. 2026-11-17)**, capture the
+official 11/13 finals as soon as the games are final, regenerate originated lines / picks / props /
+parlays for the new window, re-verify every published row against an official source, and publish.
+
+Single branch (`arena/18a41aba-nba1`); no other branch is created or pushed. Shared outputs (the data
+files, the site index and navigation) are changed by this session because it is the final integration
+session; every other open item is either merged here or left untouched and logged.
+
+| # | Task | Status | File scope | Result |
+| --- | --- | --- | --- | --- |
+| D01 | Board reconciliation + claim | done | `COORDINATION.md` (§11) | Claim pushed first. `main` had moved to `a17b19a` (PR #27, CI deploy gate); this branch was rebased onto it. PR #20 (session `arena/9abdf3f7`) is still open and is reviewed in D09. |
+| D02 | Official schedule + records for 11/14–11/17 | in progress | `data/slate_full.json`, `data/raw/*` | Captured from `https://www.nba.com/games?date=…` (11/14, 11/15, 11/16, 11/17): 27 games, tip time, game ID, records, season-leader capsules. |
+| D03 | 11/13 finals capture | in progress | `data/played_games_2026_11_11_12.json` → new file | The 11/13 games were still in progress at 00:57 UTC 2026-11-14 (NBA.com showed Q2). Final scores are captured from the official box-score pages once final; until then the window uses the last completed slate and says so. |
+| D04 | Latest official injury edition | done | `data/injuries_0515.json` | The 11/13 05:15 PM ET edition is still the newest **published** edition: every 11/14 edition URL returns `AccessDenied` (S3, object not yet published). Verified by direct fetch. |
+| D05 | Regenerate lines, props, picks, parlays | pending | `scripts/originate_lines.py`, `scripts/build_edge_site.py`, `data/derived/*` | |
+| D06 | Strategy leaderboard, gates, correlations, backtest | pending | `scripts/strategies.py`, `scripts/compute_correlations.py`, `scripts/backtest.py` | |
+| D07 | Repo review, line by line | pending | `REPO_REVIEW.md`, `docs/audit/*` | |
+| D08 | Site rebuild + link/row verification | pending | `docs/**`, `*.html`, `scripts/check_*.py` | |
+| D09 | Review and integrate PR #20 | pending | `audit/**` (owned by `arena/9abdf3f7`) | |
+| D10 | Integration: PR → main, merge, Pages | pending | whole repo | |
+
+### 11.1 Status notes
+
+* `main` at claim time: `a17b19a` (PR #27 — Pages deploy is now blocked when site validation fails).
+* Open PRs not owned by this session: #20 (`arena/9abdf3f7`, audit of 51 official scores + team
+  stats). #11 and #14 were closed by their authors.
+* F-C01 (11/13 finals), F-C02 (stale records), F-C03 (11/14 injury report) and F-C07 (no picks for
+  11/14–11/17) are the open items this build works on.
