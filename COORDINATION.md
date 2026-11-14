@@ -336,4 +336,8 @@ pass on the shared data, because the other tasks on the board were `done` or `ne
 | Branch | `arena/a6936331-nba1` |
 | Base | `main` at `ddbaba6` (after Build C PR #19 and PR #22; rebased twice) |
 | Local gate | `python3 scripts/verify_all.py` → VERIFY OK |
-| PR / merge / Pages | recorded below after merge |
+| PR | [#21](https://github.com/wingbangboozle1-lang/NBA1/pull/21), `arena/a6936331-nba1` → `main`. Head `9985102`, Pages validation run `43536521553` success |
+| Merge | `--merge` at 2026-11-14 00:47:54 UTC, merge commit `cabade9`. Head verified before merge (`--match-head-commit`). |
+| Pages | Publish run `43536662146` on `cabade9`: validate success, deploy success. Pages API `built` on `cabade9`. |
+| Live check | `docs/pages/summary.html` shows 731 table rows. `docs/b/index.html` shows the Official source column with the unverified row. |
+| Open after merge | V-01…V-07 on `review.html` (non-blocking). PRs #11 and #14 untouched. Team W-L records and schedule chunks 3–8 not re-verified. |
