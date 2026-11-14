@@ -53,7 +53,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from common import ABBR, RAW, ROOT, read_json, rows_by_cols, write_json
 
-ALLOWED_HOSTS = {"www.nba.com", "official.nba.com", "ak-static.cms.nba.com"}
+# stats.nba.com is the NBA's own stats service - it is the data layer behind
+# the cited www.nba.com/stats pages (evidence: the page's own JS chunk calls
+# resource "leaguedashteamstats"; recorded in
+# data/raw/_capture_evidence_S1_season.json). No third-party host is used.
+ALLOWED_HOSTS = {"www.nba.com", "official.nba.com", "ak-static.cms.nba.com",
+                 "stats.nba.com"}
 
 # The web-client header set proven by data/raw/probe_official.json
 # (`retried_with_browser_headers`): HTTP 200 on www.nba.com/stats/...,
@@ -115,6 +120,91 @@ RECORD_RE = re.compile(r"\b\d{1,2}-\d{1,2}\b")
 # and for some clients, so 403 is never treated as proof of absence.
 INJURY_EDITION_TIMES = ("12_00PM", "03_00PM", "05_15PM", "07_30PM")
 INJURY_HOST = "https://ak-static.cms.nba.com/referee/injury/"
+
+# The stats API behind the cited team-advanced page. The resource name and
+# the LeagueDashTeamStats result-set name come from the page's own JS chunk
+# (excerpt stored in data/raw/_capture_evidence_S1_season.json), not from
+# guesswork. DateFrom/DateTo reproduce the two windows the committed
+# snapshot stores (season-to-date and the 10/20-11/05 training window).
+STATS_API = ("https://stats.nba.com/stats/leaguedashteamstats"
+             "?LeagueID=00&Season=2026-27&SeasonType=Regular+Season"
+             "&MeasureType=Advanced&PerMode=Totals&Scope=Season"
+             "&LastNGames=0&Month=0&OpponentTeamID=0"
+             "&DateFrom={df}&DateTo={dt}")
+
+# Our committed schema (data/raw/team_advanced.json cols) -> the API's
+# header names, normalised (non-alphanumerics stripped, upper-cased).
+STATS_API_WANT = {
+    "team": "TEAMNAME", "gp": "GP", "w": "W", "l": "L", "min": "MIN",
+    "ortg": "OFFRTG", "drtg": "DEFRTG", "netr": "NETRTG",
+    "ast_pct": "ASTPCT", "ast_to": "ASTTO", "ast_ratio": "ASTRATIO",
+    "oreb_pct": "OREBPCT", "dreb_pct": "DREBPCT", "reb_pct": "REBPCT",
+    "tov_pct": "TOVPCT", "efg_pct": "EFGPCT", "ts_pct": "TSPCT",
+    "pace": "PACE", "pie": "PIE", "poss": "POSS",
+}
+STATS_API_INT = {"gp", "w", "l", "poss"}
+STATS_COLS = ["team", "gp", "w", "l", "min", "ortg", "drtg", "netr",
+              "ast_pct", "ast_to", "ast_ratio", "oreb_pct", "dreb_pct",
+              "reb_pct", "tov_pct", "efg_pct", "ts_pct", "pace", "pie", "poss"]
+
+
+def parse_stats_api(payload):
+    """Map the official stats API response onto our committed schema.
+
+    Returns (rows, note). rows is [] and note explains why on any problem -
+    the response's own header list is the only authority for column names,
+    so a header we do not recognise fails the parse instead of being guessed.
+    """
+    rs = None
+    for rset in payload.get("resultSets", []) or []:
+        if rset.get("name") == "LeagueDashTeamStats":
+            rs = rset
+            break
+    if rs is None:
+        names = [r.get("name") for r in payload.get("resultSets", []) or []]
+        return [], f"no LeagueDashTeamStats result set (found: {names})"
+    headers = rs.get("headers") or rs.get("labels") or []
+    raw_rows = rs.get("rowSet") or rs.get("rows") or []
+    norm = {re.sub(r"[^A-Za-z0-9]", "", str(h)).upper(): i
+            for i, h in enumerate(headers)}
+    missing = [f"{k}->{v}" for k, v in STATS_API_WANT.items() if v not in norm]
+    if missing:
+        return [], (f"headers not recognised: {missing}; "
+                    f"response headers = {headers}")
+    out = []
+    problems = []
+    for rr in raw_rows:
+        row = []
+        for col in STATS_COLS:
+            v = rr[norm[STATS_API_WANT[col]]]
+            if col == "team":
+                row.append(str(v))
+                continue
+            try:
+                row.append(int(float(v)) if col in STATS_API_INT else float(v))
+            except (TypeError, ValueError):
+                row.append(None)
+        team, gp, w, l = row[0], row[1], row[2], row[3]
+        if team not in ABBR:
+            problems.append(f"unexpected team {team!r}")
+            continue
+        if None in row[1:]:
+            problems.append(f"{team}: non-numeric cell {row}")
+            continue
+        ortg, pace, poss = row[5], row[17], row[19]
+        if w + l != gp:
+            problems.append(f"{team}: W+L {w}+{l} != GP {gp}")
+            continue
+        if not (1 <= gp <= 40) or not (70 <= ortg <= 150) \
+                or not (85 <= pace <= 120) or not (100 <= poss <= 3000):
+            problems.append(f"{team}: out-of-range values {row}")
+            continue
+        out.append(row)
+    if problems:
+        return [], f"{len(problems)} row problems, first: {problems[0]}"
+    if len(out) != 30:
+        return [], f"expected 30 rows, got {len(out)}"
+    return out, "ok"
 
 
 def get(url, timeout=45):
@@ -725,6 +815,35 @@ def main():
 
         if kind == "teams_advanced":
             rows = parse_teams_advanced(text)
+            fetched_from = url
+            api_evidence = None
+            if len(rows) != 30:
+                # The cited page renders its table in the browser; fall back
+                # to the official stats API behind it (resource name taken
+                # from the page's own JS chunk - see chunk_probe below).
+                if key == "S1_season":
+                    df, dt = "", ""
+                else:
+                    df, dt = "10%2F20%2F2026", "11%2F05%2F2026"
+                api_url = STATS_API.format(df=df, dt=dt)
+                api_evidence = {"url": api_url}
+                try:
+                    raw2 = get(api_url, timeout=45)
+                    api_evidence["http_status"] = 200
+                    api_evidence["bytes"] = len(raw2)
+                    rows, note = parse_stats_api(json.loads(as_text(raw2)))
+                    api_evidence["parse_note"] = note
+                    if len(rows) == 30:
+                        fetched_from = api_url
+                        log(f"  stats API fallback parsed {len(rows)} rows ({note})")
+                except urllib.error.HTTPError as exc:
+                    api_evidence["http_status"] = exc.code
+                    api_evidence["parse_note"] = f"HTTP {exc.code}"
+                    rows = []
+                except Exception as exc:              # noqa: BLE001
+                    api_evidence["parse_note"] = f"{type(exc).__name__}: {exc}"
+                    rows = []
+                time.sleep(1.0)
             if len(rows) != 30:
                 failed.append((key, f"expected 30 team rows, parsed {len(rows)}"))
                 log(f"  SKIPPED: parsed {len(rows)} rows - keeping the existing snapshot")
@@ -762,15 +881,16 @@ def main():
                         os.path.join(RAW, f"_capture_evidence_{key}.json"),
                         {"captured_at_utc": now, "source_url": url,
                          "status": "parse_failed",
+                         "api_attempt": api_evidence,
                          "indicators": {n: text.count(n) for n in needles},
                          "failure_evidence": [
                              {"around": n, "excerpt": e} for n in needles
                              for e in [excerpt_around(text, n)] if e][:2],
                          "document_tail": text[-6000:],
                          "chunk_probe": chunk_probe,
-                         "note": "Bounded raw-HTML/JS evidence for the next "
-                                 "parser iteration. The committed snapshot is "
-                                 "untouched."}):
+                         "note": "Bounded raw-HTML/JS/API evidence for the "
+                                 "next parser iteration. The committed "
+                                 "snapshot is untouched."}):
                     changed.append(f"evidence {key}")
                 continue
             log(f"  parsed {len(rows)} team rows")
@@ -779,6 +899,7 @@ def main():
             # re-fetching. This never overwrites the committed snapshot itself.
             if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"),
                                 {"captured_at_utc": now, "source_url": url,
+                                 "fetched_from": fetched_from,
                                  "row_count": len(rows),
                                  "cols": ["team", "gp", "w", "l", "min", "ortg",
                                           "drtg", "netr", "ast_pct", "ast_to",
