@@ -2132,3 +2132,40 @@ source links; the 10 exceptions are the published F37 class), `check_site.py` PA
 `verify_integration.py` PASSED (warnings published), `check_links.py` PASS, `check_rendered.py`
 PASS, `render_check.mjs` 113 pages / 0 problems, `verification.html` current, broken-internal-link
 scan 0 of 113. Delivery (PR + Pages) is appended below after the merge.
+
+### 27.3 Delivery record (Z04) — PR #67 merged; deploy state and the two open defects
+
+| Step | Result |
+| --- | --- |
+| PR | [#67](https://github.com/wingbangboozle1-lang/NBA1/pull/67) `arena/212c2298-nba1` → `main`, "Independent line-by-line verification & close-out" |
+| Pre-merge validate on the final head | **validate PASS (1m10s)** on run 43588688922 (deploy job correctly `skipping` on the PR event); earlier attempts on this PR were **cancelled, 0 steps executed**, by the shared `pages` concurrency group (annotation: "Canceling since a higher priority waiting request for pages exists") — retried until green, per the brief |
+| Merge | `gh pr merge 67 --merge` → merge commit `55d0266` (2026-11-14T11:1xZ) |
+| Two probe-churn conflicts during the PR's life | resolved twice by merging `main` in and keeping both sides (probe pair: kept the newer `probe_official.json` — 10:55:34Z over 10:42:58Z — and regenerated `verification.html` from it; COORDINATION.md §26/§27 appends kept both) |
+| Pages deploy of `55d0266` | run 43589034134 **cancelled** by the same concurrency group before any step ran. Pages API status at 11:20Z: `errored`. The live URL serves content but it is the **PR #57-era artifact** (51-game window) — stale vs `main` |
+
+**Two open defects block a successful deploy of current `main`; both have owner-authored fix PRs open:**
+
+1. **Concurrency storm** — `pages.yml` puts PR validation and main deploys in one
+   `concurrency: group: pages, cancel-in-progress: true` group, so every PR run cancels any
+   in-progress main deploy and vice versa; with many parallel sessions, 7 consecutive main deploys
+   (PRs #59/#60/#61/#62/#64/#67/#68) were cancelled, 0 steps executed. Fix: PR #65
+   (`arena/2dc33eb3-nba1`, "Isolate Pages PR checks", validate green on its head, currently
+   CONFLICTING with `main` after the #68 merge).
+2. **Legacy Pages build error** — the branch build reports `errored` for every `main` commit since
+   PR #59; the site is static and does not use Jekyll. Fix: PR #70 (`arena/2ef89703-nba1`, root
+   `.nojekyll`, owner's honest label: "most likely fix, not a confirmed diagnosis").
+
+This session's mandate is "retry until the site is live"; the retry loop (PR → merge → deploy) is
+recorded in §27.4 below. Nothing in either defect touches NBA data; the data itself is verified
+line by line (§27.1/§27.2, `REVIEW_Z01.md`).
+
+### 27.4 Deploy retry loop (live-verification, per the brief's "fix and retry until the site is live")
+
+| # | Action | Result |
+| --- | --- | --- |
+| 1 | PR #67 merged (`55d0266`) | pages run 43589034134 **cancelled** by the `pages` concurrency group, 0 steps; Pages API `errored` (legacy build failing since PR #59) |
+| 2 | `.nojekyll` taken over from PR #70 (`arena/2ef89703-nba1`) with credit — their PR is CONFLICTING on COORDINATION.md through no fault of theirs and site liveness is the critical path; the file is empty and inert. Their PR #70 can be closed by its owner as landed-elsewhere | this commit |
+| 3+ | each retry (bookkeeping PR → merge → watch the `pages` run of the merge commit) is appended here with its run ID and outcome until `pages` reports `built` and the live landing page shows the current window | appended below |
+
+The deployment loop entries are appended in the follow-up delivery commits of this session; the
+data verification in §27.1/§27.2 does not depend on them.
