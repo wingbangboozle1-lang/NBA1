@@ -178,3 +178,13 @@ re-run leaves `verification.html` current; inline broken-internal-link scan 0 of
 (aadc3342). Open at close-out and untouched here: #63 (`arena/ecd5bb53-nba1`), #65
 (`arena/2dc33eb3-nba1`), plus the live `arena/934ca56f-nba1` integration lineage — all owned by
 active sessions.
+
+## 10. Delivery (Z04) — PR #67 and the deploy retry loop
+
+PR [#67](https://github.com/wingbangboozle1-lang/NBA1/pull/67) merged to `main` as `55d0266`
+(pre-merge validate green on the final head after two concurrency-group cancellations and two
+probe-churn conflict resolutions, both sides kept). The full details, including the two
+infrastructure defects that then blocked the Pages deploy of `main` (shared `pages` concurrency
+group cancelling every main deploy; legacy Pages build `errored` since PR #59), are recorded in
+COORDINATION.md §27.3–§27.4. Every retry of the deploy loop is logged there with run IDs; the NBA
+data on `main` is verified line by line regardless (§2–§9 above).
