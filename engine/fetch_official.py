@@ -18,6 +18,11 @@ Design rules, in order:
    snapshot before anything is promoted. Promotion is a separate, verified
    step and never happens here.
 
+SECOND VERIFICATION FETCH (session `arena/ef6ff2a4-nba1`, 2026-11-14T10:2xZ):
+re-running the capture so the 2026-11-13 finals are read from the official page
+a second time; the two runs' finals rows must match exactly before promotion
+(evidence: data/audit/finals_2026_11_13_verification.json).
+
 REFRESH TRIGGER (session `arena/ef6ff2a4-nba1`, 2026-11-14T09:58Z): this
 comment change is intentional and exists to trigger the refresh-data.yml
 push-fallback (workflow_dispatch returns HTTP 403 on session tokens, observed

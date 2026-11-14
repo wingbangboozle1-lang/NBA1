@@ -1,0 +1,158 @@
+{
+ "purpose": "Verification evidence for the 2026-11-13 finals promotion (arena/ef6ff2a4-nba1 E04).",
+ "run_1": {
+  "workflow_run": "https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43582803797",
+  "committed_as": "26548a4",
+  "captured_at_utc": "2026-11-14T09:55:30Z",
+  "source_url": "https://www.nba.com/games?date=2026-11-13",
+  "page_sha256": "ce810ad43be2f47013315ac9bde20d462251bc8983bbe266a047368fb207750c",
+  "page_bytes": 569981,
+  "strategy": "embedded JSON",
+  "finals_rows": [
+   {
+    "game_id": "0022600034",
+    "away": "NYK",
+    "home": "IND",
+    "away_pts": 104,
+    "home_pts": 106,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "6-6 (0-2)",
+    "home_record_printed": "5-8 (1-1)",
+    "snapshot_match": null,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600035",
+    "away": "MIL",
+    "home": "ORL",
+    "away_pts": 99,
+    "home_pts": 107,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "1-12 (0-2)",
+    "home_record_printed": "5-7 (2-0)",
+    "snapshot_match": null,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600036",
+    "away": "CLE",
+    "home": "MIA",
+    "away_pts": 121,
+    "home_pts": 133,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "6-7 (1-1)",
+    "home_record_printed": "6-6 (2-0)",
+    "snapshot_match": null,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600037",
+    "away": "ATL",
+    "home": "CHI",
+    "away_pts": 117,
+    "home_pts": 125,
+    "status": "Final/OT",
+    "ot": 1,
+    "away_record_printed": "7-6 (1-1)",
+    "home_record_printed": "2-9 (1-1)",
+    "snapshot_match": null,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600038",
+    "away": "MEM",
+    "home": "NOP",
+    "away_pts": 142,
+    "home_pts": 111,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "8-4 (1-1)",
+    "home_record_printed": "4-9 (0-2)",
+    "snapshot_match": null,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600039",
+    "away": "UTA",
+    "home": "HOU",
+    "away_pts": 118,
+    "home_pts": 125,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "1-12 (0-2)",
+    "home_record_printed": "10-3 (1-1)",
+    "snapshot_match": null,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600040",
+    "away": "GSW",
+    "home": "SAS",
+    "away_pts": 85,
+    "home_pts": 123,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "8-5 (1-1)",
+    "home_record_printed": "11-2 (2-0)",
+    "snapshot_match": null,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600041",
+    "away": "POR",
+    "home": "SAC",
+    "away_pts": 120,
+    "home_pts": 107,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "9-3 (1-1)",
+    "home_record_printed": "1-11 (0-2)",
+    "snapshot_match": null,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600042",
+    "away": "OKC",
+    "home": "LAC",
+    "away_pts": 112,
+    "home_pts": 113,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "8-5 (1-1)",
+    "home_record_printed": "3-8 (1-1)",
+    "snapshot_match": null,
+    "source": "embedded JSON"
+   }
+  ],
+  "not_final": [],
+  "unparsed": [],
+  "snapshot_comparison": {
+   "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
+   "mismatches": [],
+   "promotion_candidates": [
+    "0022600034",
+    "0022600035",
+    "0022600036",
+    "0022600037",
+    "0022600038",
+    "0022600039",
+    "0022600040",
+    "0022600041",
+    "0022600042"
+   ],
+   "committed_finals_missed": []
+  }
+ },
+ "run_2": {
+  "status": "pending second independent fetch"
+ },
+ "checks_planned": [
+  "run 1 parse: 9/9 FINAL, 0 unparsed (done)",
+  "run 2 independent re-fetch of the same official URL; finals rows must match run 1 exactly (pending)",
+  "in-progress capture (data/live/results_2026_11_13_in_progress.json) teams/game_ids must match finals set (done: 9/9 same game_ids)",
+  "promotion only after both runs agree; each promoted row carries its official source URL"
+ ]
+}
