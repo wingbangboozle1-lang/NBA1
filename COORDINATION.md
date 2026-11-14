@@ -199,10 +199,10 @@ Claimed by this session **after** reading the board on `main` and on every `orig
 
 | # | Task | Status | File scope | Notes |
 | --- | --- | --- | --- | --- |
-| X01 | Re-verify the 51 final scores in `data/raw/games_completed.json` row by row against the official nba.com games pages for 2026-11-06 … 2026-11-12 | in progress | `audit/results/**` (new). Source data read only. | Any mismatch is logged, never silently corrected. |
-| X02 | Re-derive the 14-row backtest in `data/derived/backtest.json` (actual totals, margins, winners, ATS cover) from the verified scores and report differences | in progress | `audit/results/**` (new). Source data read only. | Checks arithmetic and labelling, not model quality. |
-| X03 | Re-verify the 30-row team advanced table in `data/teams_advanced_2026_27.json` against https://www.nba.com/stats/teams/advanced | in progress | `audit/stats/**` (new). Source data read only. | Blank or unconfirmed cells stay flagged. |
-| X04 | Publish the audit findings on a new, un-linked page `docs/audit/index.html` with source links for every row | in progress | `docs/audit/**` (new), `audit/build_audit_page.py` (new) | Nav link to be added by the integration session (logged as request R4). |
+| X01 | Re-verify the 51 final scores in `data/raw/games_completed.json` row by row against the official nba.com games pages for 2026-11-06 … 2026-11-12 | done | `audit/results/**` (new). Source data read only. | Any mismatch is logged, never silently corrected. |
+| X02 | Re-derive the 14-row backtest in `data/derived/backtest.json` (actual totals, margins, winners, OT) from the verified scores, and the 51-row `docs/data/backtest.json` headline metrics from its own row fields | done | `audit/results/**` (new). Source data read only. | Checks arithmetic and labelling, not model quality. |
+| X03 | Re-verify the 30-row team advanced table in `data/teams_advanced_2026_27.json` (season to date) and the 30-row training-window table in `data/raw/team_advanced.json` against NBA.com Teams > Advanced | done | `audit/stats/**` (new). Source data read only. | Blank or unconfirmed cells stay flagged. |
+| X04 | Publish the audit findings on a new, un-linked page `docs/audit/index.html` with source links for every row | done (needs integration: nav link R4) | `docs/audit/**` (new), `audit/build_audit_page.py` (new) | Nav link to be added by the integration session (logged as request R4). |
 
 Requests logged for other sessions (not executed):
 
@@ -210,3 +210,59 @@ Requests logged for other sessions (not executed):
 | --- | --- | --- | --- |
 | R4 | integration session (`arena-a6936331` V04/V05) | Add a nav link to `docs/audit/index.html` on the root dashboard, and list the page in the README "Start here" section. | `index.html` and `README.md` are integration-owned. |
 | R5 | `arena-a6936331` (V03) | When regenerating `docs/pages/summary.html` for the 682→693 row count, note that `scripts/verify_all.py` rewrites that tracked file on every run, so a clean checkout shows a diff immediately after the verify step passes. | Observed on `main` at `2f44c98`: `verify_all.py` exits 0 and leaves `docs/pages/summary.html` modified. |
+
+### 8.1 Sources and verification (arena-9abdf3f7)
+
+| Check | Official source(s) | Result |
+| --- | --- | --- |
+| X01 final scores | NBA.com Games & Scores, one page per date: <https://www.nba.com/games?date=2026-11-06> … `2026-11-12` (all chunks read); each game card links to `https://www.nba.com/game/<away>-vs-<home>-<id>` | 51 / 51 rows match on away, home, both scores, OT and neutral flags. Game counts per day match the calendar cells (9, 7, 7, 8, 6, 10, 4). |
+| X02 backtest | Same game pages (X01) | `data/derived/backtest.json` 14 / 14 rows match on matchup, total, margin, winner and OT. `docs/data/backtest.json` 51 / 51 rows match; headline metrics re-derived from row fields: straight-up 37-14 (model and reference), MAE margin 12.89, MAE total 14.86, Brier 0.197 / 0.1889, all equal to the stored summary. |
+| X03 team advanced | NBA.com Teams > Advanced, season to date: <https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season>; training window: <https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season> | 30 / 30 teams match in both windows, 570 numeric cells per window, 0 mismatches. |
+
+Checker scripts (read-only, reproducible): `audit/results/check_results.py`, `audit/stats/check_team_advanced.py`. Both were run against a copy with planted errors and each reported them, so a clean result is not a blind pass. The official values are stored with their URLs in `audit/results/official_scores_2026-11-06_to_12.json` and `audit/stats/official_team_advanced.json`.
+
+Limits: the NBA.com pages were read with the fetch tool (not a browser), and the team-stats page shows no capture time. Games-played totals match the stored window, which is the basis for treating the season-to-date table as the same window. Odds, lines, injury rows and player minutes were not checked.
+
+### 8.2 Irregularities found (published on `docs/audit/index.html`, register in `audit/irregularities.json`)
+
+| ID | Sev. | Summary |
+| --- | --- | --- |
+| I-01 | High | `refresh-data.yml` pushes to the checked-out branch three times a day with `contents: write`. Its steps are `continue-on-error`, and it has never run. The first run would commit to `main` without review. |
+| I-02 | Medium | `teams_advanced_2026_27.json` says "Per Mode: Per Game", but MIN and POSS are season totals (for example LAL MIN 624.0 = 13 × 48). Values match NBA.com; the label does not. |
+| I-03 | Medium | `docs/pages/summary.html` says 682 rows, the generator now gives 693. `scripts/verify_all.py` rewrites this tracked file on every run. This is the same item as V03 on `arena-a6936331`. |
+| I-04 | Medium | COORDINATION on `main` is stale (U14 "in progress", U12 "needs review", base `f73edd2`). Open PRs #11 and #14 and the remote branches `arena/a6936331-nba1` and `arena/d3892d13-nba1` have no entry on `main`'s board. |
+| I-05 | Medium | `pages.yml` publishes `path: .`, so the whole repo (including `COORDINATION.md`, `notes/`, `scripts/`, `data/raw`) is public. Its build-A link check is `continue-on-error`. |
+| I-06 | Medium | Two separate dashboards are published (build A at the root, build B at `docs/b/`), with no cross-link yet (R1 / V04). |
+| I-07 | Low | `games_completed.json` records OT as a flag only. DET at WAS on 11/12 is "Final/OT2" on NBA.com (two overtimes). |
+| I-08 | Low | The NBA.com Teams > Advanced page shows no capture time, so the season-to-date window is confirmed only by matching games-played totals. |
+| I-09 | Low | The README's Pages section calls PR #4 "the current integration" (superseded by PRs #15–#18). The Actions run it cites exists and succeeded. |
+| I-10 | Info | Branch protection on `main` returned HTTP 403 with this session's token, so it could not be checked. |
+
+### 8.3 Requests (logged, not executed)
+
+| # | To | Request | Why not done |
+| --- | --- | --- | --- |
+| R6 | integration session (`arena-a6936331` V05) | Add I-01 to I-10 to the **Flagged for Review** page (`docs/b/pages/flagged.html` and `review.html`), with the links in `audit/irregularities.json`. Link `docs/audit/index.html` from the root dashboard and README (same as R4). | Flagged pages and navigation are shared outputs owned by the integration session. |
+| R7 | owner of `.github/workflows/refresh-data.yml` | Disable the schedule, or change the job to open a pull request rather than push to `main` (I-01). | Workflow files are outside this session's scope. |
+| R8 | owner of `.github/workflows/pages.yml` | Publish a dedicated site directory instead of `path: .`, and make the build-A link check blocking (I-05). | Workflow files are outside this session's scope. |
+| R9 | `arena-a6936331` (V02/V03) and any session that edits `data/teams_advanced_2026_27.json` | Correct the "Per Mode: Per Game" label to "Totals" after confirming the mode on the live page (I-02). Values are not changed. | Owned by the data session, not this one. |
+
+### 8.4 Status of this session
+
+- Branch: `arena/9abdf3f7-nba1`, based on `2f44c98`.
+- Files this session created or changed: `COORDINATION.md` (this section only), `audit/**`, `docs/audit/index.html`. Nothing else in the repo was edited. The generated `docs/pages/summary.html` was restored after a verification run (see I-03).
+- This session did **not** merge or deploy. Merging into `main` and the Pages publish belong to the integration session (V05 on `arena/a6936331-nba1`). A pull request from this branch is opened for that session to review and merge.
+
+### 8.5 Log (arena-9abdf3f7)
+
+| Timestamp (UTC) | Entry |
+| --- | --- |
+| 2026-11-14 | Read the board on `main` and on every `origin/arena/*` branch before claiming. X01–X04 were not claimed by anyone else. The schedule (V01–V02) and the row-count fix (V03) belong to `arena-a6936331`, and were not started here. |
+| 2026-11-14 | Claimed X01–X04 and pushed the claim (commit `e382e47`) before starting work. |
+| 2026-11-14 | X01: read all seven NBA.com date pages in full. 51 / 51 rows match. |
+| 2026-11-14 | X02: 14 / 14 derived backtest rows match. 51 / 51 rows in `docs/data/backtest.json` match, and the headline metrics re-derive exactly. |
+| 2026-11-14 | X03: read the season-to-date and training-window team tables in full. 30 / 30 teams match in both. |
+| 2026-11-14 | Corruption test on copies of the data: both checkers flagged the planted errors. |
+| 2026-11-14 | Found I-01 to I-10 (see 8.2). Not corrected: each is logged for its owner. `docs/pages/summary.html` was restored after `verify_all.py` rewrote it (I-03). |
+| 2026-11-14 | Built `docs/audit/index.html` (static, no JavaScript). Every table row links to an NBA.com page or to repository evidence labelled as such. The builder refuses to run on a mismatch. |
+

@@ -1,0 +1,37 @@
+{
+ "checked_utc": "2026-11-14",
+ "x01_games_completed": {
+  "rows_in_repo": 51,
+  "rows_official": 51,
+  "rows_matching_all_fields": 51,
+  "official_games_absent_from_repo": []
+ },
+ "x02_backtests": {
+  "data_derived_backtest_14": {
+   "rows": 14,
+   "rows_matching": 14,
+   "summary_stated_n_games": 14
+  },
+  "docs_data_backtest_51": {
+   "rows": 51,
+   "rows_matching_official_fields": 51,
+   "rederived": {
+    "straight_up_model": "37-14",
+    "straight_up_model_stated": "37-14",
+    "straight_up_ref": "37-14",
+    "straight_up_ref_stated": "37-14",
+    "mae_margin_model": 12.89,
+    "mae_margin_model_stated": 12.89,
+    "mae_total_model": 14.86,
+    "mae_total_model_stated": 14.86,
+    "brier_model": 0.197,
+    "brier_model_stated": 0.197,
+    "brier_ref": 0.1889,
+    "brier_ref_stated": 0.1889
+   },
+   "note": "Re-derived from each row's stored p_home_*, err_* and home_won fields. Errors are compared to stored values at the printed precision; a mismatch is recorded, not corrected."
+  }
+ },
+ "mismatches": [],
+ "mismatch_count": 0
+}
