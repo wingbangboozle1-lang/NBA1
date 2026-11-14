@@ -2043,3 +2043,11 @@ input turned out to be readable: the NBA.com player game-log pages are server-re
 **Limits stated on the page itself:** n = 3–4 games per player (the `Last 5 Games` block is all the page
 prints), SD uncertainty ≈ a quarter to a half of the SD, shrinkage k = 4 is a declared modelling choice, the
 anchor test is contaminated in the season average's favour, and no market line exists for any prop (Q1).
+
+### 25.2 Pages build repair (session `arena/2ef89703-nba1`, 2026-11-14 UTC)
+
+- **Symptom:** after PR #62 merged (`73c64bd`), the legacy Pages build for `main` reported `errored` ("Page build failed."). The builds for `564c2cd` (PR #59), `a29e721` (PR #61), `dd3c53e` (PR #64) and `73c64bd` also errored, and the build for `5ea615f` errored after about 28 minutes. The last build that succeeded is `7623c02` (10:22 UTC). Pages reports operational on [githubstatus.com](https://www.githubstatus.com/api/v2/components.json).
+- **What was ruled out by a check of `origin/main` blobs:** no case-only path collisions, no paths over 200 characters, no `.md`/`.html` output collisions, no invalid UTF-8 in `.html`/`.md`, no front matter (so no Liquid rendering), no files over 1 MB added, and no `_`-prefixed directories. Liquid tags appear only in `.github/` workflow files, which Jekyll does not process.
+- **Fix:** an empty `.nojekyll` at the repository root. The site is static HTML, JSON and JavaScript and does not use Jekyll features, and `docs/.nojekyll` already exists. With the file present, Pages serves files as-is.
+- **Limit:** the Pages error text is not exposed by the API, so this is the most likely fix rather than a confirmed root cause. It is verified only by the next build's result (see the completion record below).
+- **Not done:** no shared site file, data file or workflow was changed. No `workflow_dispatch` (HTTP 403 from this session's token) and no direct push to `main` (not permitted for this branch).
