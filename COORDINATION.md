@@ -193,7 +193,59 @@ flagged items (and Build A's 8) are published on their respective
 
 ---
 
-## 7. Task board — Integration session `arena/458a6570-nba1` (final integration)
+## 7. Build C — session `arena/afbb836e-nba1` (claimed 2026-11-14, UTC)
+
+Scope: refresh the horizon to today + 3 days (2026-11-14 .. 2026-11-17), re-verify the published schedule
+row by row against NBA.com, fix a reproducibility defect, close stale board items, and integrate. Single branch
+(`arena/afbb836e-nba1`); no other branch was created or pushed. Shared outputs were changed only by this
+integration session, as §0 requires.
+
+| # | Task | Status | File scope | Result |
+| --- | --- | --- | --- | --- |
+| C01 | Board reconciliation + claim | done | `COORDINATION.md` (§7 only) | Claim pushed first (`fbb3e5d`). Stale items fixed: U14 was "in progress" although PR #16 merged. R1 closed by C05. PRs #11 and #14 still open, logged (F-C10), not touched. |
+| C02 | Horizon refresh 11/14–11/17 (today + 3 days) | done, partial | `data/raw/official_schedule_capture_2026-11-14.json` | 36 official games 11/13–11/17 captured; 27 in horizon. **11/13 finals NOT captured** (F-C01). |
+| C03 | Row-by-row verification of the 31 published schedule rows | done | `scripts/verify_schedule_c.py`, `data/raw/verification_c03.json` | 31 rows compared: **0 mismatches**; calendar cells 9/5/9/8/5 match. Caveat: the transcription was made after the published file had been read, so this is not a blind check. Records for 18 teams are STALE (F-C02). |
+| C04 | Reproducibility defect in `docs/pages/summary.html` | done | `docs/pages/summary.html` (rebuilt by `scripts/build_site.py`) | Committed text said 682 table rows; the builder generates 693. Regenerated; no other page changed. Logged as F-C11. |
+| C05 | Root nav link to Build B (R1) + link to the new page | done | `index.html` | Added `docs/b/index.html` and `schedule-verified.html` under DETAIL PAGES. |
+| C06 | Integration: `verify_all.py`, PR, merge, Pages | in progress | whole repo | See §8. |
+
+### 7.1 What was verified, and how
+
+* **Official schedule (NBA.com/schedule):** all 36 games 11/13–11/17 (tip time ET, venue, city, Emirates NBA Cup
+  group where printed). Source: <https://www.nba.com/schedule>.
+* **Records:** NBA.com Games pages for 11/13–11/17. These captures predate the 11/13 results (see F-C02).
+* **Tip times for NYK at IND and MIL at ORL (11/13):** the schedule capture showed them as LIVE. 7:00 PM ET
+  comes from the game-time column of the official injury report, <https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf>.
+* **Calendar cells** on <https://www.nba.com/games?date=2026-11-15>: 13 Nov 9 · 14 Nov 5 · 15 Nov 9 · 16 Nov 8 · 17 Nov 5.
+* **Not verified:** 11/13 final scores; 11/14 injury report (<https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf> returned AccessDenied); any stats or ratings after 11/12.
+
+### 7.2 Flagged for review (published on `schedule-verified.html`, and listed in `data/raw/verification_c03.json`)
+
+F-C01 11/13 finals not captured · F-C02 18 teams have pre-11/13 records in the horizon · F-C03 11/14 injury report
+not retrievable · F-C04 injury layer for later games uses the 11/13 report (game date 11/13) · F-C05 "Regular
+Season" label is not printed by NBA.com for 11/14–11/16 · F-C06 model outlier CHI at MIN (expected margin +29.7,
+p = 0.956) · F-C07 no lines or picks generated for 11/14–11/17 · F-C08 venue flags resolved by the official page ·
+F-C09 11/13 tip times resolved · F-C10 open PRs #11 and #14 · F-C11 summary row-count drift fixed.
+
+### 7.3 Decision: why no new picks were generated
+
+Picks need ratings and injury inputs that are current. Here the ratings run through 11/12, the 11/13 results are
+missing, and no 11/14 injury report is verifiable (F-C03). Producing picks for 11/14–11/17 would present stale
+inputs as current. This is a data-access blocker, not a modelling choice. Unblocking it requires a verifiable
+source for the 11/13 results and for the 11/14 injury reports, plus a team-stats snapshot dated after 11/13.
+
+## 8. Build C integration record (session `arena/afbb836e-nba1`)
+
+| Item | Value |
+| --- | --- |
+| Branch | `arena/afbb836e-nba1` |
+| Base | `main` at `2f44c98` (PR #18) |
+| Local gate | `python3 scripts/verify_all.py` → `VERIFY OK` (includes the new `verify_schedule_c.py`) |
+| PR / merge / Pages | recorded below after merge |
+
+---
+
+## 9. Task board — Final integration session `arena/458a6570-nba1`
 
 Cloned from `main` at `2f44c980e38a1e89dad0d1ae76c957c96f347aa3`, which already
 contains both builds (A at the repository root, B under `docs/b/`). This session
