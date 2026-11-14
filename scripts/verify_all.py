@@ -54,6 +54,7 @@ def ok_url(u):
 # 1–3: builders + checker
 run("build_site.py")
 run("build_edge_site.py")
+run("generate_picks_d.py")  # Build D: live-horizon lines & picks (11/14-11/17)
 run("check_site.py")
 run("verify_schedule_c.py")  # Build C: row-by-row schedule check + schedule-verified.html
 run("build_dashboard.py")    # Build D: regenerate the unified site (index.html + site/**)
