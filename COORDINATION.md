@@ -3140,3 +3140,78 @@ shows every one, and the tree is verified by the checkers above. (2) Under F53 e
 session: the content of the site does not change between `5f63109` and here, and pushing again to
 say so would cancel the very run being waited on. G07 is therefore recorded as **merged, built
 cleanly in the tree, deploy queued and unconfirmed** rather than as done.
+
+## 32. Session `arena/428e6264-nba1` — independent re-verification + decision layer (claimed 2026-11-14 18:40 UTC)
+
+Branch `arena/428e6264-nba1`, base `2038333` (tip of `main` when the session opened,
+2026-11-14 12:58 UTC). No earlier claim is held by this session; nothing here is a takeover.
+
+**Why this claim exists.** The board's own open requests (R-29-1…R-29-9) and the
+Flagged-for-Review backlog are all verification-shaped: the site asserts numbers
+that a reader cannot check without opening the official page. This session does the
+checking itself, records each comparison with the official link, and publishes the
+result — including a decision layer (executive summary, Q&A register, suggestions
+board) so a human can act on the findings without re-reading 4,000 lines of board.
+
+**Scope — new files only, plus one append (this one).** No file owned by another
+session is edited.
+
+| Path | Status | What it is |
+| --- | --- | --- |
+| `verified/**` | in progress | New self-contained section: landing, executive summary, row-level verification, Q&A register, decision board, flagged register, source register |
+| `verify/2026-11-14-session-428e/**` | in progress | Raw official captures (with retrieval time and URL) that the comparison ran against |
+| `scripts/build_verified.py`, `scripts/verify_verified.py` | in progress | Builder + checker for the new section |
+| `COORDINATION.md` | this append + delivery record | Claim, sources used, verification performed, irregularities, PR/merge record |
+
+**Explicitly NOT claimed / not edited:** `index.html`, `site/**`, `docs/**`,
+`command-center/**`, `origination/**`, `strategy-lab/**`, `edge-lab/**`, `data/**`
+snapshots, `engine/**`, `engine_v2/**`, `integration/**`, `.github/workflows/**`,
+`review.html`, `verification.html`, `slate.html`, `research.html`,
+`desk*.html`, `picks*.html`, `lines.html`, `gameflow.html`, `schedule-verified.html`,
+`sources.html`, `suggestions.html`. Those belong to other sessions or are shared
+outputs; where this session finds a defect in one of them it is **logged in §32.4
+and on the new Flagged page with the official source**, not patched in place.
+
+**Root `index.html` link (`§30 Delivery`).** Arena pins this session to a single
+branch, so the "final integration session" step (merge + publish) is executed from
+this branch after all of this session's tasks are done, per the brief's PULL REQUEST
+AND MERGE section. A single additive nav entry in `index.html` pointing at
+`verified/index.html` is therefore held to the END of the session (after PR merge
+of everything else) so it cannot half-land; if another session regenerates
+`index.html` from `scripts/build_dashboard.py` in the meantime, that session's
+version wins and this session logs it rather than fighting it.
+
+**Network reality recorded up front (affects how verification is done).** In this
+session's sandbox, `curl` to `*.nba.com` fails (`SSL_ERROR_SYSCALL`) — the allow-list
+is github/npm/pypi, exactly as the probe workflow's own header comment describes for
+earlier sessions. The session's *web-fetch tool* does reach `www.nba.com`,
+`official.nba.com` and `ak-static.cms.nba.com` (proved this session: the 11/14/26
+12:00 PM injury PDF and the Teams Advanced table both came back with content), so
+row-level verification is done through that tool and every row records the URL plus
+the retrieval timestamp. Nothing is marked verified because a URL "looks right".
+
+### 32.1 Task board — this session
+
+| # | Task | Status | Deliverable |
+| --- | --- | --- | --- |
+| S30-1 | Claim + push | done | this section |
+| S30-2 | Fresh official captures for the open window (11/14 12:00 PM injury edition, Teams Advanced, 11/13 finals, 11/14–11/17 schedule) | in progress | `verify/2026-11-14-session-428e/captures/*.json` |
+| S30-3 | Row-level comparison of every published value this session can reach vs. those captures; counts + every mismatch | in progress | `verified/data/verification.json` → `verified/verification.html` |
+| S30-4 | Line-by-line review of the repository's load-bearing claims (formulas, gates, settlement, source coverage, board integrity) with the official or code citation for each | in progress | `verified/data/repo_review.json` → `verified/review.html` |
+| S30-5 | Decision layer: executive summary, Q&A register (what is missing and how to discover it), suggestions board with a review/choose workflow | in progress | `verified/summary.html`, `verified/questions.html`, `verified/suggestions.html` |
+| S30-6 | Flagged register: every unverified/mismatched value, source-linked | in progress | `verified/flagged.html` |
+| S30-7 | Build + check (links, row sources, no placeholders), then PR → merge → Pages confirmation → delivery record | unclaimed→in progress | PR link below |
+
+### 32.2 Standing rules this session follows
+
+1. A number is **verified** only if this session read it on an official page during
+   this session and the read is quoted or dated in the evidence file. Otherwise it is
+   **unverified** and published as such — never silently filled.
+2. A published value that contradicts the official capture is a **mismatch**, listed
+   with both values. Mismatches are not corrected in another session's file; they are
+   published and flagged, and the fix is written as a suggestion with an owner.
+3. "Official" means an NBA-operated host: `www.nba.com`, `official.nba.com`,
+   `ak-static.cms.nba.com`, `stats.nba.com` / `cdn.nba.com`. No third-party site is
+   ever used as the confirming source, including for odds (no NBA-operated odds
+   source exists — that stays an open question, not a hole to fill with a book's data).
+4. Small, frequent commits; `git pull --rebase` before every push.
