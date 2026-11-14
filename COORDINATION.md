@@ -83,7 +83,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | V02 | Execute cross-session request R1 (nav link from root dashboard to `docs/b/index.html`) | done (superseded by Build C C05) | `index.html` (root) | During this session's merge it was found that Build C's C05 had already added the R1 link (plus `schedule-verified.html`) on `main`. This session's duplicate edit was dropped in favour of main's version; nothing lost. |
 | V03 | Fresh official slate capture for the current 3-day window (2026-11-14 → 2026-11-17) from nba.com | done | `data/slate_2026_11_14.json`, `slate.html`, `scripts/build_slate_refresh.py`, `data/originated_lines_refresh.json` | 27 games, records, venues, season leaders, first 11/14 injury designations (07:30 PM ET edition). RecordLine-1 (unchanged constants) + engine-v0 totals → 23 paper picks. All 30 captured records cross-checked against teams_advanced (independent official capture) — exact match. |
 | V04 | Full-tree verification re-run (all verify scripts, link checks, JSON validity, live-site smoke test) | done | verification outputs in `COORDINATION.md` | `scripts/verify_all.py` PASS (builders + checker + data audits; 132 slate rows sourced). |
-| V05 | Final integration PR → `main`, merge, confirm Pages deploy, record publish result | in progress | PR from `arena/0de855e5-nba1` | Flagged/unverified items do not block the merge. |
+| V05 | Final integration PR → `main`, merge, confirm Pages deploy, record publish result | done | PR [#31](https://github.com/wingbangboozle1-lang/NBA1/pull/31) | **Merged 2026-11-14T01:14:06Z** as commit `35f05a8798c064353fbfee398ccc16121c6c6c20` after resolving three waves of concurrent-main conflicts (PRs #19–#34 landed during the PR's lifetime; all resolved with both sides kept — see log). Validate passed; Pages API `built` for `35f05a8`; live slate.html smoke-tested. Record in §6.3. |
 
 ## 4b. Open-PR triage (2026-11-14, `arena-0de855e5`)
 
@@ -103,7 +103,7 @@ to other sessions' branches, so neither could be rebased/merged directly.
 - `main` gained a **Live verification page** (`verification.html`) built from an executed official-source reachability probe (`.github/workflows/probe-official.yml`), and a nav link was added to generated pages so builders cannot drop it. This session's populated `slate.html` was re-united with those nav links, and `scripts/build_slate_refresh.py` now emits them (mirroring commit `8410a2d`'s builder-cannot-drop principle).
 - `main`'s summary row count is now a derived value that no longer claims every row has a source (`0c32bc7`, `ec08216`) — consistent with this session's no-claims-without-evidence stance.
 
-**Still-open PRs as of this merge:** #31 (this session — merging now), #20 (`arena/9abdf3f7-nba1`, independent audit X01–X04 — conflicting, not touched), #33 (`arena/ffafa1f6-nba1`, **Build D: "unified NBA1 site, 27-game 14-17 Nov horizon"** — a fourth parallel build that overlaps this session's slate work; conflicting, NOT touched and NOT merged by this session; same recommended namespacing/rebase path as PR #11).
+**PR state updates (as of 2026-11-14T01:15Z):** #31 (this session) **MERGED** at 01:14:06Z. PR #14 was closed (its content landed on `main` with corrected counts). Still open and NOT touched by this session: #20 (`arena/9abdf3f7-nba1`, independent audit X01–X04), #33 (`arena/ffafa1f6-nba1`, **Build D: "unified NBA1 site"** — overlaps this session's slate work), #35 (`arena/2329cb68-nba1`, another overlapping integration pass: "picks through 11/17"), #36 (`arena/458a6570-nba1`, fixes the probe/validate self-commit race this session also hit), #37 (`arena/2509073f-nba1`, bookkeeping). Reviewer should pick ONE integration lineage to avoid a fifth duplicate.
 
 - Build C (§7) chose **abstention** for the 11/14–11/17 window (F-C07: picks would present stale inputs as current). This session publishes **gated paper picks with explicit staleness flags** instead (records through 11/12 — E-09; provisional where the opposing report is missing). Both postures are now visible: `schedule-verified.html` (no picks) and `slate.html` (paper picks, gates + provenance). Which posture becomes the default is a reviewer decision — see `suggestions.html` item 9.
 - Build C's F-C06 model outlier (CHI@MIN, v0 margin ≈ +29.7): this session's re-run gives v0 spread −29.9 (home MIN) and RecordLine-1 margin +17.1 — same outlier, two engines. Recorded on `slate.html` cross-checks.
@@ -227,6 +227,7 @@ available argument for not promoting anything on a small window.
 | 2026-11-14T01:00Z | `arena-0de855e5` | V01/V02/V04: PR #14 content incorporated (§6.1; close-as-superseded to follow after this merge); PR #11 left open and flagged; integration addenda published on `review.html` (E-09–E-12 + PR-triage card) and `suggestions.html` (items 7–9); `scripts/verify_all.py` PASS on the full tree. Correction: R1 was ALREADY done on `main` by Build C's C05 — this session's duplicate nav link was dropped during the merge in favour of main's version. |
 | 2026-11-14T01:10Z | `arena-0de855e5` | **CONFLICT detected & resolved.** `main` had moved on (PRs #19–#29 from four other sessions) while this session's PR #31 was open. Conflicts in `COORDINATION.md`, `index.html`, `docs/pages/summary.html`, `review.html` resolved with both sides kept: main's V-01..V-07 review section + this session's PR-triage card on `review.html`; main's self-syncing summary count kept; R1 kept as C05 delivered it. Nothing discarded. |
 | 2026-11-14T01:15Z | `arena-0de855e5` | Post-merge verification re-run on the union tree (build_slate_refresh → build_site → verify_all); results recorded in the PR #31 merge record. |
+| 2026-11-14T01:40Z | `arena-0de855e5` | Third conflict wave (PR #34 command-center build + two probe-bot self-commits racing validate; one validate run was cancelled mid-flight, not failed). Resolved; final verify_all VERIFY OK; PR #31 merged 01:14:06Z (`35f05a8`); Pages deploy success confirmed; live slate.html smoke-tested. V01–V05 all done. |
 | 2026-11-14T01:35Z | `arena-0de855e5` | **Second CONFLICT wave detected & resolved.** `main` moved again (PRs #26/#30) while PR #31 was open; `slate.html` conflicted (main still carried the pre-population shell plus the new Live-verification nav links). Resolved keeping this session's populated page AND main's nav links; generator updated so rebuilds preserve them. COORDINATION.md auto-merged; duplicate §6.1 (verbatim PR #14 copy) replaced by a pointer to main's corrected recovery. |
 
 ## 6. Publish record
@@ -300,6 +301,21 @@ literal text inside a card, and full float precision (`17.126`) leaking into pro
 **Lesson recorded for any future session:** a green test suite says the artefacts agree with each other.
 It does not say the prose agrees with the artefacts. Reading the rendered output is a separate check and
 it has now found six defects that no automated gate caught.
+
+### 6.3 PR #31 integration record (session `arena-0de855e5`)
+
+| Item | Value |
+| --- | --- |
+| PR | [#31](https://github.com/wingbangboozle1-lang/NBA1/pull/31) |
+| Merged | 2026-11-14T01:14:06Z without approval (as instructed), merge commit `35f05a8798c064353fbfee398ccc16121c6c6c20` |
+| Content | Fresh 3-day slate 11/14–11/17 (27 games, records, leaders, 11/14 injury designations from the 07:30 PM ET PDF) + RecordLine-1/engine-v0 originated lines → 23 gated paper picks on `slate.html`; R1 duplicate dropped in favour of C05; PR #14 triage + defect-log incorporation; integration addenda on `review.html`/`suggestions.html`; `scripts/build_slate_refresh.py` + audit JSON |
+| Conflict resolution | Three waves of concurrent-`main` merges (PRs #19–#34 from five other sessions) resolved with both sides kept; probe-bot self-commits to the branch pulled each time; duplicate §6.1 replaced by pointer to the corrected recovery |
+| Local gate | `scripts/verify_all.py` VERIFY OK on the final union tree (132 slate rows sourced; 31 schedule rows 0 mismatches; summary count synced) |
+| PR validate check | pass (pre-merge); post-merge `Publish static site to GitHub Pages` run 43539334673 — **success** (1m13s) |
+| Pages | API `status=built` for `35f05a8`; `pages build and deployment` run 43539334100 **success** |
+| Live smoke test | <https://wingbangboozle1-lang.github.io/NBA1/slate.html> renders the populated 27-game table with picks and sources; root dashboard live |
+| Sources used | nba.com schedule + games pages (11/14–11/17), official injury-report PDF 11/13 07:30 PM ET + report hub, DAL/DET roster pages, pre-existing in-repo official captures |
+| Irregularities logged | E-09–E-12 (review.html) + §4b reconciliation notes — none blocking |
 
 ## 7. Build C — session `arena/afbb836e-nba1` (claimed 2026-11-14, UTC)
 
