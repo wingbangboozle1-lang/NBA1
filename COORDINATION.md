@@ -1704,7 +1704,7 @@ Other sessions: the claims in this table are the only files this session edits.
 | S01 | Transcribe official nba.com values for the 27-game horizon (11/14–11/17) and the 9 official finals of 11/13, each row with its source URL | done | `verify/2026-11-14/official_*.json` |
 | S02 | Checker: compare site data with the official transcription; settle the 9 published 11/13 lines against finals; audit headline counts and the spread sign convention | done | `scripts/source_check.py`, `verify/2026-11-14/checks.json`, `verify/2026-11-14/cross_check_finals_cfb25ff0.json` |
 | S03 | Source Check page + Flagged-for-Review entries for every irregularity found | done | `scripts/build_dashboard.py` (new page + CATEGORIES entry only), `site/**` (regenerated), `data/content/flagged.json` (append only), `data/content/questions.json` (append only), `data/content/suggestions.json` (append only), `README.md` (one table row, one Known-limits bullet) |
-| S04 | Verify (existing gates + new checker), PR to `main`, merge, Pages confirmation, record here | in progress | `COORDINATION.md` (§23 only) |
+| S04 | Verify (existing gates + new checker), PR to `main`, merge, Pages confirmation, record here | done | PR #57 merged at `2450e99`; Pages run `43584765326` success (validate + deploy); `COORDINATION.md` (§23 only) |
 
 Scope notes: `docs/**`, `command-center/**`, `edge-lab/**`, `audit/**`, `engine/**`, `engine_v2/**`, `origination/**` are not edited.
 `data/**` is read, never written, except the new `verify/` folder.
@@ -1763,4 +1763,23 @@ Notes on the gate: `verify_all.py` prints "every table row is source-linked" whi
 
 ### 23.5 Status
 
-- Scope: S01–S03 done. S04 (PR, merge, Pages confirmation) is recorded in §23.6 when it completes.
+- Scope: S01–S04 done. **§23 is marked done.**
+
+### 23.6 Delivery (S04)
+
+| Step | Result |
+| --- | --- |
+| PR | #57 `arena/b0f2cc98-nba1` → `main`, title "Official-source check…"; body lists sources, verification and F26–F37 |
+| Pre-merge gates on the final tree | `verify_all.py` VERIFY OK (exit 0); `check_site.py`, `verify_integration.py` (PASSED, warnings published), `check_links.py` PASS, `check_rendered.py` PASS, `render_check.mjs` 113 pages / 0 problems, inline broken-link scan 0 of 113 |
+| Pre-merge CI | `validate` pass on the final head (`d790098`); `deploy` skipped on PRs, which is expected |
+| Merge | `gh pr merge 57 --merge`, no approval, not auto. Merge commit `2450e99` |
+| Pages (main) | run `43584765326`: validate success, deploy success, pages-build-deployment success |
+| Live check | `…/NBA1/site/pages/source-check.html` shows 27 horizon rows; `…/NBA1/site/pages/flagged.html` shows 37 rows (F1–F37); landing page "Open flags" tile 37 |
+| Pages URL note | Pages publishes the repository root, so pages are at `…/NBA1/site/pages/…`. The README live-URL line (F-item from the earlier review) still omits `.github.io`. Not changed this session. |
+
+Irregularities met during delivery (not flags, logged here):
+
+- **Probe churn.** The probe workflow commits `data/raw/probe_official.json` and `verification.html` to `main` and to the branch after each push. That made PR #57 conflict twice (`DIRTY`), so the branch was merged with `main` and both files were regenerated. Resolved without discarding any work. Each push re-triggers the probe, which can dirty the PR again. Owner: whoever owns `probe-official.yml`.
+- **`gh pr edit` fails** on the deprecated Projects (classic) GraphQL field. The body was updated through `gh api PATCH repos/…/pulls/57` instead.
+- **PR #56** merged to `main` (`4e4d0b0`) during this session. Its finals were cross-checked (9 / 9 agree) before the merge.
+
