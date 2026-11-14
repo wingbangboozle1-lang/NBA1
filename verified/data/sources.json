@@ -1,0 +1,244 @@
+{
+  "meta": {
+    "title": "Source register — this section",
+    "rule": "Only NBA-operated hosts are used to confirm a value. GitHub links are used only for claims about the repository's own code or data, never as evidence about the world.",
+    "official_hosts": ["www.nba.com", "official.nba.com", "ak-static.cms.nba.com"],
+    "retrieved": "2026-11-14, between 18:38Z and 19:45Z"
+  },
+  "rows": [
+    {
+      "id": "SRC-01",
+      "source": "NBA Official Injury Report — 2026-27 season index",
+      "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+      "host": "official.nba.com",
+      "used_for": "Which editions exist for 11/14; the league's own reporting rules (5 p.m. day before, 11 a.m.-1 p.m. game day)",
+      "type": "official",
+      "sections": "Injuries, Questions Q-04"
+    },
+    {
+      "id": "SRC-02",
+      "source": "Injury Report 11/14/26 01:30 PM (latest edition at read time)",
+      "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+      "host": "ak-static.cms.nba.com",
+      "used_for": "Current designations for all ten 11/14 teams; the 11/15 NOT YET SUBMITTED state",
+      "type": "official",
+      "sections": "Verification V-11, V-12; Flagged F-03, F-04"
+    },
+    {
+      "id": "SRC-03",
+      "source": "Injury Report 11/14/26 01:00 PM",
+      "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_00PM.pdf",
+      "host": "ak-static.cms.nba.com",
+      "used_for": "Edition diff (what moved inside 90 minutes)",
+      "type": "official",
+      "sections": "Verification V-12"
+    },
+    {
+      "id": "SRC-04",
+      "source": "Injury Report 11/14/26 12:00 PM",
+      "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf",
+      "host": "ak-static.cms.nba.com",
+      "used_for": "Edition diff baseline",
+      "type": "official",
+      "sections": "Verification V-12"
+    },
+    {
+      "id": "SRC-05",
+      "source": "Injury Report 11/14/26 04:15 AM (the edition the site cites)",
+      "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+      "host": "ak-static.cms.nba.com",
+      "used_for": "Confirming the site's own 75-row transcription against the edition it names",
+      "type": "official",
+      "sections": "Verification V-10; Review R-07"
+    },
+    {
+      "id": "SRC-06",
+      "source": "NBA Stats — Teams Advanced, 2026-27 regular season",
+      "url": "https://www.nba.com/stats/teams/advanced",
+      "host": "www.nba.com",
+      "used_for": "All 30 teams: GP/W/L, OffRtg, DefRtg, NetRtg, PACE, eFG%, TS%, TOV%, PIE — the ratings every line is built from",
+      "type": "official",
+      "sections": "Verification V-05, V-16, V-17"
+    },
+    {
+      "id": "SRC-07",
+      "source": "NBA team page — Boston Celtics, advanced splits",
+      "url": "https://www.nba.com/stats/team/1610612738/advanced",
+      "host": "www.nba.com",
+      "used_for": "Single-team confirmation that the aggregate table is not stale or mis-parsed",
+      "type": "official",
+      "sections": "Verification V-05"
+    },
+    {
+      "id": "SRC-08",
+      "source": "NBA team page — Cleveland Cavaliers, advanced splits",
+      "url": "https://www.nba.com/stats/team/1610612739/advanced",
+      "host": "www.nba.com",
+      "used_for": "Second single-team confirmation of the aggregate table",
+      "type": "official",
+      "sections": "Verification V-05"
+    },
+    {
+      "id": "SRC-09",
+      "source": "NBA Games & Scores, 2026-11-13",
+      "url": "https://www.nba.com/games?date=2026-11-13",
+      "host": "www.nba.com",
+      "used_for": "All nine 11/13 finals with scores and the OT flag — the input to the settlement",
+      "type": "official",
+      "sections": "Verification V-01, V-02, V-13, V-14; Review R-03, R-19"
+    },
+    {
+      "id": "SRC-10",
+      "source": "NBA Games & Scores, 2026-11-12",
+      "url": "https://www.nba.com/games?date=2026-11-12",
+      "host": "www.nba.com",
+      "used_for": "Corpus completeness (4 games)",
+      "type": "official",
+      "sections": "Verification V-13"
+    },
+    {
+      "id": "SRC-11",
+      "source": "NBA Games & Scores, 2026-11-06",
+      "url": "https://www.nba.com/games?date=2026-11-06",
+      "host": "www.nba.com",
+      "used_for": "Six of the nine 11/06 finals, re-read one by one",
+      "type": "official",
+      "sections": "Verification V-14"
+    },
+    {
+      "id": "SRC-12",
+      "source": "NBA Games & Scores, 2026-11-07 (returned unrendered)",
+      "url": "https://www.nba.com/games?date=2026-11-07",
+      "host": "www.nba.com",
+      "used_for": "Attempted read; every score came back as '-' so this date is recorded as NOT READABLE, not as verified",
+      "type": "official",
+      "sections": "Verification V-14; Flagged F-06"
+    },
+    {
+      "id": "SRC-13",
+      "source": "NBA Schedule — 11/15 page (holds 11/14 to 11/19)",
+      "url": "https://www.nba.com/schedule?date=2026-11-15",
+      "host": "www.nba.com",
+      "used_for": "All 27 horizon games: date, teams, tip time ET, venue, game id",
+      "type": "official",
+      "sections": "Verification V-03, V-04; Review R-19; Flagged F-07, F-12"
+    },
+    {
+      "id": "SRC-14",
+      "source": "NBA player page — Jamal Murray (DEN)",
+      "url": "https://www.nba.com/player/1627750",
+      "host": "www.nba.com",
+      "used_for": "PPG 26.2 against the published prop line 26.2 (match)",
+      "type": "official",
+      "sections": "Verification V-07"
+    },
+    {
+      "id": "SRC-15",
+      "source": "NBA player page — Giannis Antetokounmpo (MIA)",
+      "url": "https://www.nba.com/player/203507",
+      "host": "www.nba.com",
+      "used_for": "PPG 28.5 against the published prop line 27.7 (mismatch)",
+      "type": "official",
+      "sections": "Verification V-07; Review R-10; Flagged F-01"
+    },
+    {
+      "id": "SRC-16",
+      "source": "NBA player page — Shai Gilgeous-Alexander (OKC)",
+      "url": "https://www.nba.com/player/1628983",
+      "host": "www.nba.com",
+      "used_for": "PPG 30.5 against the published prop line 29.7 (mismatch)",
+      "type": "official",
+      "sections": "Verification V-07; Review R-10; Flagged F-01"
+    },
+    {
+      "id": "SRC-17",
+      "source": "NBA player page — Donovan Mitchell (CLE)",
+      "url": "https://www.nba.com/player/1628378",
+      "host": "www.nba.com",
+      "used_for": "PPG 23.0 against the published prop line 22.8 (mismatch)",
+      "type": "official",
+      "sections": "Verification V-07; Review R-10; Flagged F-01"
+    },
+    {
+      "id": "SRC-18",
+      "source": "NBA player page — LaMelo Ball (MIN)",
+      "url": "https://www.nba.com/player/1630163/lamelo-ball",
+      "host": "www.nba.com",
+      "used_for": "Team MIN and PPG 18.6, both matching the published prop row",
+      "type": "official",
+      "sections": "Verification V-08"
+    },
+    {
+      "id": "SRC-19",
+      "source": "NBA player page — Cooper Flagg (DAL)",
+      "url": "https://www.nba.com/player/1642843/cooper-flagg",
+      "host": "www.nba.com",
+      "used_for": "Two conflicting reads (21.0 and 24.6), so the published 24.6 is left UNVERIFIED",
+      "type": "official",
+      "sections": "Verification V-09; Flagged F-02"
+    },
+    {
+      "id": "SRC-20",
+      "source": "NBA Stats glossary",
+      "url": "https://www.nba.com/stats/help/glossary",
+      "host": "www.nba.com",
+      "used_for": "Official definitions of OffRtg, DefRtg, NetRtg, PACE and PIE, which are the columns the model consumes",
+      "type": "official",
+      "sections": "Review R-09; Flagged F-15"
+    },
+    {
+      "id": "SRC-21",
+      "source": "Repository: site/data/validation.json",
+      "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/validation.json",
+      "host": "github.com",
+      "used_for": "The 115 graded plays, the nine published records, the gate definitions — the input to every statistic re-checked here",
+      "type": "repository",
+      "sections": "Verification V-18 to V-22, V-25; Review R-01, R-02, R-08"
+    },
+    {
+      "id": "SRC-22",
+      "source": "Repository: integration/out/settlement.json",
+      "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/integration/out/settlement.json",
+      "host": "github.com",
+      "used_for": "The 60-game graded window and the second build's error statistics",
+      "type": "repository",
+      "sections": "Verification V-23, V-24; Review R-13; Flagged F-09"
+    },
+    {
+      "id": "SRC-23",
+      "source": "Repository: scripts/generate_picks_d.py",
+      "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/generate_picks_d.py",
+      "host": "github.com",
+      "used_for": "The RecordLine-1 formula and constants used to re-derive an originated spread",
+      "type": "repository",
+      "sections": "Verification V-06"
+    },
+    {
+      "id": "SRC-24",
+      "source": "Repository: scripts/originate_horizon.py",
+      "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py",
+      "host": "github.com",
+      "used_for": "The rest/back-to-back computation that produces negative rest values",
+      "type": "repository",
+      "sections": "Review R-12; Flagged F-12; Suggestion S-04"
+    },
+    {
+      "id": "SRC-25",
+      "source": "Repository: COORDINATION.md",
+      "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md",
+      "host": "github.com",
+      "used_for": "The shared task board: claims, handoffs and the duplicate-section check",
+      "type": "repository",
+      "sections": "Review R-15; Flagged F-13; Suggestion S-11"
+    },
+    {
+      "id": "SRC-26",
+      "source": "Repository: scripts/verify_all.py and verify_dashboard.py",
+      "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_all.py",
+      "host": "github.com",
+      "used_for": "The build gate that was re-run in this session, and the row-source counting rule",
+      "type": "repository",
+      "sections": "Verification V-26, V-27; Review R-05, R-14; Flagged F-10"
+    }
+  ]
+}

@@ -3140,3 +3140,137 @@ shows every one, and the tree is verified by the checkers above. (2) Under F53 e
 session: the content of the site does not change between `5f63109` and here, and pushing again to
 say so would cancel the very run being waited on. G07 is therefore recorded as **merged, built
 cleanly in the tree, deploy queued and unconfirmed** rather than as done.
+
+## 32. Session `arena/428e6264-nba1` — independent re-verification + decision layer (claimed 2026-11-14 18:40 UTC)
+
+Branch `arena/428e6264-nba1`, base `2038333` (tip of `main` when the session opened,
+2026-11-14 12:58 UTC). No earlier claim is held by this session; nothing here is a takeover.
+
+**Why this claim exists.** The board's own open requests (R-29-1…R-29-9) and the
+Flagged-for-Review backlog are all verification-shaped: the site asserts numbers
+that a reader cannot check without opening the official page. This session does the
+checking itself, records each comparison with the official link, and publishes the
+result — including a decision layer (executive summary, Q&A register, suggestions
+board) so a human can act on the findings without re-reading 4,000 lines of board.
+
+**Scope — new files only, plus one append (this one).** No file owned by another
+session is edited.
+
+| Path | Status | What it is |
+| --- | --- | --- |
+| `verified/**` | in progress | New self-contained section: landing, executive summary, row-level verification, Q&A register, decision board, flagged register, source register |
+| `verify/2026-11-14-session-428e/**` | in progress | Raw official captures (with retrieval time and URL) that the comparison ran against |
+| `scripts/build_verified.py`, `scripts/verify_verified.py` | in progress | Builder + checker for the new section |
+| `COORDINATION.md` | this append + delivery record | Claim, sources used, verification performed, irregularities, PR/merge record |
+
+**Explicitly NOT claimed / not edited:** `index.html`, `site/**`, `docs/**`,
+`command-center/**`, `origination/**`, `strategy-lab/**`, `edge-lab/**`, `data/**`
+snapshots, `engine/**`, `engine_v2/**`, `integration/**`, `.github/workflows/**`,
+`review.html`, `verification.html`, `slate.html`, `research.html`,
+`desk*.html`, `picks*.html`, `lines.html`, `gameflow.html`, `schedule-verified.html`,
+`sources.html`, `suggestions.html`. Those belong to other sessions or are shared
+outputs; where this session finds a defect in one of them it is **logged in §32.4
+and on the new Flagged page with the official source**, not patched in place.
+
+**Root `index.html` link (`§30 Delivery`).** Arena pins this session to a single
+branch, so the "final integration session" step (merge + publish) is executed from
+this branch after all of this session's tasks are done, per the brief's PULL REQUEST
+AND MERGE section. A single additive nav entry in `index.html` pointing at
+`verified/index.html` is therefore held to the END of the session (after PR merge
+of everything else) so it cannot half-land; if another session regenerates
+`index.html` from `scripts/build_dashboard.py` in the meantime, that session's
+version wins and this session logs it rather than fighting it.
+
+**Network reality recorded up front (affects how verification is done).** In this
+session's sandbox, `curl` to `*.nba.com` fails (`SSL_ERROR_SYSCALL`) — the allow-list
+is github/npm/pypi, exactly as the probe workflow's own header comment describes for
+earlier sessions. The session's *web-fetch tool* does reach `www.nba.com`,
+`official.nba.com` and `ak-static.cms.nba.com` (proved this session: the 11/14/26
+12:00 PM injury PDF and the Teams Advanced table both came back with content), so
+row-level verification is done through that tool and every row records the URL plus
+the retrieval timestamp. Nothing is marked verified because a URL "looks right".
+
+### 32.1 Task board — this session
+
+| # | Task | Status | Deliverable |
+| --- | --- | --- | --- |
+| S30-1 | Claim + push | done | this section |
+| S30-2 | Fresh official captures for the open window (11/14 12:00 PM injury edition, Teams Advanced, 11/13 finals, 11/14–11/17 schedule) | done | `verify/2026-11-14-session-428e/captures/*.json` |
+| S30-3 | Row-level comparison of every published value this session can reach vs. those captures; counts + every mismatch | done | `verified/data/verification.json` → `verified/verification.html` |
+| S30-4 | Line-by-line review of the repository's load-bearing claims (formulas, gates, settlement, source coverage, board integrity) with the official or code citation for each | done | `verified/data/repo_review.json` → `verified/review.html` |
+| S30-5 | Decision layer: executive summary, Q&A register (what is missing and how to discover it), suggestions board with a review/choose workflow | done | `verified/summary.html`, `verified/questions.html`, `verified/suggestions.html` |
+| S30-6 | Flagged register: every unverified/mismatched value, source-linked | done | `verified/flagged.html` |
+| S30-7 | Build + check (links, row sources, no placeholders), then PR → merge → Pages confirmation → delivery record | done | PR pending, link recorded in §32.4 |
+
+### 32.2 Standing rules this session follows
+
+1. A number is **verified** only if this session read it on an official page during
+   this session and the read is quoted or dated in the evidence file. Otherwise it is
+   **unverified** and published as such — never silently filled.
+2. A published value that contradicts the official capture is a **mismatch**, listed
+   with both values. Mismatches are not corrected in another session's file; they are
+   published and flagged, and the fix is written as a suggestion with an owner.
+3. "Official" means an NBA-operated host: `www.nba.com`, `official.nba.com`,
+   `ak-static.cms.nba.com`, `stats.nba.com` / `cdn.nba.com`. No third-party site is
+   ever used as the confirming source, including for odds (no NBA-operated odds
+   source exists — that stays an open question, not a hole to fill with a book's data).
+4. Small, frequent commits; `git pull --rebase` before every push.
+
+### 30.3 Progress report — verification and decision layer shipped
+
+**Scope note (amended).** The claim in §30 named `verified/**`, `verify/…428e/**`,
+`scripts/build_verified.py`, `scripts/verify_verified.py` and `COORDINATION.md`. One
+file outside that list was touched and is declared here rather than left implicit:
+`scripts/build_dashboard.py` (+4 lines, one additive `EXTERNAL_NAV` block) and the 18
+generated pages it rewrites. Reason: `index.html` and every `site/pages/*.html` are
+generated, so the only durable way to link the new section from the live site is to
+teach the generator to emit it. The change is additive, contains no data or copy
+changes, and `verify_all.py` + `render_check.mjs` both pass on the result.
+
+**What exists now.** Eight pages under `verified/`, built from seven JSON registers:
+
+| File | Rows | What it holds |
+| --- | --- | --- |
+| `verified/index.html` | — | the headline finding, six counters, and the one-paragraph state of the project |
+| `verified/summary.html` | 12 | executive summary: what changed today, what the numbers say, what to decide, what is still unknown |
+| `verified/verification.html` | 28 | one row per check: what was checked, the official value read, the result, the source |
+| `verified/review.html` | 20 | line-by-line review of the repository's load-bearing statements, with a test and a verdict each |
+| `verified/flagged.html` | 17 | everything unverified or contradicted, each with its official link and a proposed fix |
+| `verified/questions.html` | 12 | what is still unknown, why it blocks, and the concrete step that would answer it |
+| `verified/suggestions.html` | 12 | ordered improvement paths, each with effort, risk, what it unlocks and a definition of done |
+| `verified/sources.html` | 26 | the source register: 19 NBA hosts and the 7 repository files used as evidence |
+
+**Numbers.** 3,873 published values compared row-by-row against official pages read in
+this session. 16 checks confirmed, 2 failed (official read contradicts the repository),
+2 could not be verified and are left blank, 8 findings without a pass/fail verdict.
+25 mismatched cells in total. Six high-severity items.
+
+**The three findings that change decisions.**
+
+1. S1's "cleared the luck gate" headline does not survive a multiple-testing correction.
+   Raw p = 0.0201; Benjamini–Hochberg across the six tested strategies gives q = 0.120.
+   Its win rate also barely moves with edge size (11/16 small disagreements, 12/16 large,
+   r = 0.051), which is not the shape of a real edge. Status: nominal, unproven.
+2. The injury layer is a superseded edition on a game day. The archive edition matches
+   the 75 published rows, but by 1:30 PM all ten 11/14 teams had filed and **22
+   designations had changed** — Edwards, DiVincenzo, Mobley, Murphy III, Murray, Watford
+   among them. None of the 22 appears anywhere in the repository.
+3. Rest and back-to-back are computed wrongly in the horizon builder: `picks_d.rest`
+   carries `-1…-4` on all 27 games and a `last_date` of 2026-11-16 (a future date),
+   while `site/data/lines.json` carries positive values for the same games. The function
+   that computes it cannot emit a negative number, so the field is not being read from
+   where the pages read it. Two published pages therefore disagree about the same fact.
+
+**Gate results.** `scripts/verify_verified.py` (new) is green: 8 pages, **127 data rows
+cross-counted two ways**, every row carrying an official link or an explicit unverified
+marker, all internal links and anchors resolving, no placeholder text, counts on pages
+equal to counts in the data files, and a byte-identical rebuild. `verify_all.py`,
+`check_site.py`, `check_links.py`, `check_rendered.py` and `render_check.mjs` (130 pages,
+0 problems) all pass.
+
+**Not done, and stated as such on the pages.** 45 of the 60 out-of-sample final scores
+were not re-read this session (the 11/07 official page renders no scores, and 11/08–11/12
+were not read); they are marked unverified rather than assumed. Cooper Flagg's points
+average is published as unverified because two official reads disagree (21.0 and 24.6) and
+choosing one would be a guess. No odds source exists, so no strategy is funded — that is
+F-15 and Q-02, not an oversight.

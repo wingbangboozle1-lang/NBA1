@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questions &middot; NBA1 verified</title>
+<meta name="description" content="Independent row-level verification and decision layer for the NBA1 line-origination project. No manual input, no inferred values.">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="index.html">
+      <span class="tick">&#10003;</span>
+      <span>NBA1 verified<small>independent check &middot; 14 Nov 2026</small></span>
+    </a>
+    <nav class="topnav" aria-label="Sections"><a href="index.html">Overview</a><a href="summary.html">Executive summary</a><a href="verification.html">Verification</a><a href="review.html">Repo review</a><a href="questions.html" aria-current="page">Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged</a><a href="sources.html">Sources</a></nav>
+  </div>
+</header>
+<main id="main">
+<div class="wrap">
+
+<h1>Questions that block a decision</h1>
+<p class="lede">The brief asked for a clear list of what still needs to be answered before a reasonable
+decision can be made, and for a way to discover what is missing. This is that list. Every question names
+the cheapest concrete step that would answer it &mdash; in most cases that step costs nothing.</p>
+
+<div class="kpis"><div class="kpi bad"><div class="v">4</div><div class="k">P1 questions</div><div class="s">blocking now</div></div><div class="kpi warn"><div class="v">5</div><div class="k">P2 questions</div><div class="s">block the next build</div></div><div class="kpi "><div class="v">3</div><div class="k">P3 questions</div><div class="s">no decision depends yet</div></div><div class="kpi "><div class="v">12</div><div class="k">total</div><div class="s">each with a discovery step</div></div></div>
+
+<h2>Summary table</h2>
+<div class="tablewrap"><table><thead><tr><th>#</th><th>Priority</th><th>Question</th><th>What is missing</th><th>How to find out</th><th>Evidence</th></tr></thead><tbody><tr><td>Q-01</td><td><span class="p1">P1</span></td><td>Is this project trying to beat a market, or to measure model quality?</td><td>A decision, plus — if the answer is &#x27;beat a market&#x27; — a dated, licensed closing-price source per game.</td><td>Either (a) buy a licensed historical + closing-line feed and backfill the 60-game window, or (b) publish one sentence on the landing page: &#x27;this project measures model quality; no market edge is claimed or measurable&#x27;. Option (b) costs nothing and can be done today.</td><td><span class="src"><a href="https://www.nba.com/stats/help/glossary" rel="noopener">glossary</a></span></td></tr><tr><td>Q-02</td><td><span class="p1">P1</span></td><td>Do NBA.com&#x27;s terms permit publishing derived lines and a paid reward structure?</td><td>A reading of NBA.com&#x27;s terms of use for derived commercial content. This session can read the page but cannot give a legal opinion, and nothing in the repository states the terms under which the data is used.</td><td>Read https://www.nba.com/termsofuse and, if the reward structure is real money, take one hour of legal advice. Record the conclusion in the repository so the next session does not re-litigate it.</td><td><span class="src"><a href="https://www.nba.com/termsofuse" rel="noopener">termsofuse</a></span></td></tr><tr><td>Q-03</td><td><span class="p1">P1</span></td><td>Is S1 real, or is it the best of six lottery tickets?</td><td>A corrected significance figure and a pre-registered replication. BH across the six tested strategies gives q = 0.120, and S1&#x27;s win rate barely changes with edge size (r = 0.051).</td><td>Pre-register S1 exactly as it stands, then grade the next 60 games with no changes. At 32 games the design can only detect a very large edge; about 250-300 graded picks are needed to separate 55% from 52.4% at 80% power.</td><td><span class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/validation.json" rel="noopener">data/validation.json</a></span></td></tr><tr><td>Q-04</td><td><span class="p1">P1</span></td><td>What is the true injury-driven minutes and production impact, and how do we keep it current?</td><td>A per-team minutes distribution (all rotation players, not the top 24 league-wide), and an ingestion path that picks up the latest edition instead of a hand-captured one.</td><td>Pull each team&#x27;s official roster minutes from the Players Traditional table filtered by team (30 requests, all official), then re-price every game against the latest edition and compare before/after.</td><td><span class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" rel="noopener">ak-static.cms.nba.com</a></span></td></tr><tr><td>Q-05</td><td><span class="p2">P2</span></td><td>Does &#x27;3 days in advance&#x27; mean today+3 calendar dates, or a 72-hour window?</td><td>A stated rule. The two readings differ by one slate (five games on 11/17).</td><td>State the rule on the picks page in one sentence and in the builder&#x27;s header. No data collection needed.</td><td><span class="src"><a href="https://www.nba.com/schedule?date=2026-11-15" rel="noopener">schedule?date=2026-11-15</a></span></td></tr><tr><td>Q-06</td><td><span class="p2">P2</span></td><td>Which of the six published builds is the product?</td><td>A designation of one current build, and a decision about whether the others are archive.</td><td>Pick the build whose pipeline the next session should extend (the root site is the only one that rebuilds idempotently and passes its own gate), and move the rest under a single /archive/ path with a banner. No data work needed.</td><td><span class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/README.md" rel="noopener">main/README.md</a></span></td></tr><tr><td>Q-07</td><td><span class="p2">P2</span></td><td>For player props, what exactly is the &#x27;line&#x27; being bet against?</td><td>A stated definition. A season average is not a market line: it has no juice, no half-point, and no closing value.</td><td>Either define a fixed convention (e.g. &#x27;line = season average rounded to 0.5, graded at even money&#x27;) and publish it, or drop prop picks until a real line source exists.</td><td><span class="src"><a href="https://www.nba.com/player/1627750" rel="noopener">1627750</a></span></td></tr><tr><td>Q-08</td><td><span class="p2">P2</span></td><td>How should correlated legs be priced across a parlay?</td><td>A measured rho for any parlay pair that involves a player, which needs a player game-log corpus. The repository holds game logs for 3 players.</td><td>Collect official player game logs for the 60-game window (one request per player per season via the official stats pages), then measure pairwise rho directly instead of assuming it.</td><td><span class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/correlations.json" rel="noopener">data/correlations.json</a></span></td></tr><tr><td>Q-09</td><td><span class="p2">P2</span></td><td>Is the rest signal real, and can we trust the field that carries it?</td><td>A correct rest table across the season, and enough games to detect an effect that small.</td><td>Fix the rest computation (F-12), widen the corpus to the full season from the official schedule, then re-estimate.</td><td><span class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py" rel="noopener">scripts/originate_horizon.py</a></span></td></tr><tr><td>Q-10</td><td><span class="p3">P3</span></td><td>Which official injury designations actually move a line?</td><td>Any measured relationship between a designation and the player&#x27;s actual minutes. The weights are asserted, not fitted.</td><td>Join the official injury reports (every edition for a fortnight) to the box scores of those games and measure realised minutes by designation. That is a self-contained, entirely official dataset.</td><td><span class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" rel="noopener">ak-static.cms.nba.com</a></span></td></tr><tr><td>Q-11</td><td><span class="p3">P3</span></td><td>How much of the model&#x27;s error is pace, and how much is efficiency?</td><td>An error decomposition. No page separates &#x27;we got the pace wrong&#x27; from &#x27;we got the shooting wrong&#x27;.</td><td>Regress total error on predicted pace and predicted offensive rating across the 60 games. Both series already exist in the repository.</td><td><span class="src"><a href="https://www.nba.com/stats/teams/advanced" rel="noopener">advanced</a></span></td></tr><tr><td>Q-12</td><td><span class="p3">P3</span></td><td>What does a &#x27;reward&#x27; for a top strategy actually consist of?</td><td>Whether rewards are money, ranking only, or nothing, and who funds them.</td><td>Decide and write it down. No data needed.</td><td><span class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/README.md" rel="noopener">main/README.md</a></span></td></tr></tbody></table></div>
+
+<p class="sub" style="margin-top:22px">The same questions in full, with what is known, what is missing
+and why the answer changes a decision.</p>
+
+<h2>P1 &mdash; blocks a decision being made now</h2>
+<div class="card qa p1" id="q-01">
+  <h3>q-01 &middot; Is this project trying to beat a market, or to measure model quality? <span class="pill mut">P1</span></h3>
+  <dl class="kv">
+    <dt>What we know</dt><dd>No licensed odds feed is connected and no NBA-operated price exists. Every edge on the site is model-vs-naive-model at a -110 convention chosen by the repository.</dd>
+    <dt>What is missing</dt><dd>A decision, plus — if the answer is &#x27;beat a market&#x27; — a dated, licensed closing-price source per game.</dd>
+    <dt>Why it decides</dt><dd>It changes what &#x27;validated&#x27; means. Against a market, S1 must beat a real price and pay real vig. Against a naive model, S1 is already mildly ahead on margin (MAE 12.98 vs 13.62) and behind on totals (14.83 vs 14.72).</dd>
+    <dt>How to find out</dt><dd>Either (a) buy a licensed historical + closing-line feed and backfill the 60-game window, or (b) publish one sentence on the landing page: &#x27;this project measures model quality; no market edge is claimed or measurable&#x27;. Option (b) costs nothing and can be done today.</dd>
+    <dt>Owner</dt><dd>Project owner</dd>
+    <dt>Blocks</dt><dd>Gate G7, the leaderboard&#x27;s meaning, and every &#x27;edge&#x27; label on the site</dd>
+  </dl>
+</div>
+<div class="card qa p1" id="q-02">
+  <h3>q-02 &middot; Do NBA.com&#x27;s terms permit publishing derived lines and a paid reward structure? <span class="pill mut">P1</span></h3>
+  <dl class="kv">
+    <dt>What we know</dt><dd>The site publishes derived numbers built on official data, and the brief describes rewards for top strategies.</dd>
+    <dt>What is missing</dt><dd>A reading of NBA.com&#x27;s terms of use for derived commercial content. This session can read the page but cannot give a legal opinion, and nothing in the repository states the terms under which the data is used.</dd>
+    <dt>Why it decides</dt><dd>If derived commercial use is not permitted, the reward/leaderboard framing has to change before it is built, not after.</dd>
+    <dt>How to find out</dt><dd>Read https://www.nba.com/termsofuse and, if the reward structure is real money, take one hour of legal advice. Record the conclusion in the repository so the next session does not re-litigate it.</dd>
+    <dt>Owner</dt><dd>Project owner</dd>
+    <dt>Blocks</dt><dd>Any monetised leaderboard, and the site&#x27;s public framing</dd>
+  </dl>
+</div>
+<div class="card qa p1" id="q-03">
+  <h3>q-03 &middot; Is S1 real, or is it the best of six lottery tickets? <span class="pill mut">P1</span></h3>
+  <dl class="kv">
+    <dt>What we know</dt><dd>23-9, p = 0.020 against a coin flip, Wilson lower bound 0.546. It fails calibration and stability.</dd>
+    <dt>What is missing</dt><dd>A corrected significance figure and a pre-registered replication. BH across the six tested strategies gives q = 0.120, and S1&#x27;s win rate barely changes with edge size (r = 0.051).</dd>
+    <dt>Why it decides</dt><dd>It is the difference between &#x27;one strategy shows a signal worth funding at quarter size&#x27; and &#x27;nothing has demonstrated skill yet&#x27;.</dd>
+    <dt>How to find out</dt><dd>Pre-register S1 exactly as it stands, then grade the next 60 games with no changes. At 32 games the design can only detect a very large edge; about 250-300 graded picks are needed to separate 55% from 52.4% at 80% power.</dd>
+    <dt>Owner</dt><dd>Gate owner</dd>
+    <dt>Blocks</dt><dd>Any funding decision</dd>
+  </dl>
+</div>
+<div class="card qa p1" id="q-04">
+  <h3>q-04 &middot; What is the true injury-driven minutes and production impact, and how do we keep it current? <span class="pill mut">P1</span></h3>
+  <dl class="kv">
+    <dt>What we know</dt><dd>The injury layer exists and is rule-based, but it is built on the 04:15 AM edition on a game day. Twenty-two designations changed by 1:30 PM. Minutes are known for only 24 players in the repository.</dd>
+    <dt>What is missing</dt><dd>A per-team minutes distribution (all rotation players, not the top 24 league-wide), and an ingestion path that picks up the latest edition instead of a hand-captured one.</dd>
+    <dt>Why it decides</dt><dd>The brief asks specifically for injury-driven rotation and production analysis. Right now the impact number is a lower bound computed over a small slice of players, on a stale report.</dd>
+    <dt>How to find out</dt><dd>Pull each team&#x27;s official roster minutes from the Players Traditional table filtered by team (30 requests, all official), then re-price every game against the latest edition and compare before/after.</dd>
+    <dt>Owner</dt><dd>Injury/impact builder</dd>
+    <dt>Blocks</dt><dd>The props layer and any availability-based strategy (S6, S7, S8)</dd>
+  </dl>
+</div><h2>P2 &mdash; blocks a decision in the next build</h2>
+<div class="card qa p2" id="q-05">
+  <h3>q-05 &middot; Does &#x27;3 days in advance&#x27; mean today+3 calendar dates, or a 72-hour window? <span class="pill mut">P2</span></h3>
+  <dl class="kv">
+    <dt>What we know</dt><dd>The build publishes 11/14 through 11/17 — 27 games, four calendar dates.</dd>
+    <dt>What is missing</dt><dd>A stated rule. The two readings differ by one slate (five games on 11/17).</dd>
+    <dt>Why it decides</dt><dd>The 11/17 games have no injury report at all (all 28 team-slots NOT YET SUBMITTED), so they are the lowest-information picks on the page. Whether they belong in the horizon is a product decision, not a technical one.</dd>
+    <dt>How to find out</dt><dd>State the rule on the picks page in one sentence and in the builder&#x27;s header. No data collection needed.</dd>
+    <dt>Owner</dt><dd>Project owner</dd>
+    <dt>Blocks</dt><dd>Horizon scope and the pick count headline</dd>
+  </dl>
+</div>
+<div class="card qa p2" id="q-06">
+  <h3>q-06 &middot; Which of the six published builds is the product? <span class="pill mut">P2</span></h3>
+  <dl class="kv">
+    <dt>What we know</dt><dd>Root site/ (Build D), command-center/, edge-lab/, docs/, docs/b/, origination/, plus five desk pages — all live, all linked from a switcher.</dd>
+    <dt>What is missing</dt><dd>A designation of one current build, and a decision about whether the others are archive.</dd>
+    <dt>Why it decides</dt><dd>Every improvement spends effort on one of six codebases. Fixing S1&#x27;s statistics in one build leaves five other pages saying something different.</dd>
+    <dt>How to find out</dt><dd>Pick the build whose pipeline the next session should extend (the root site is the only one that rebuilds idempotently and passes its own gate), and move the rest under a single /archive/ path with a banner. No data work needed.</dd>
+    <dt>Owner</dt><dd>Project owner</dd>
+    <dt>Blocks</dt><dd>All engineering suggestions S-01 to S-06</dd>
+  </dl>
+</div>
+<div class="card qa p2" id="q-07">
+  <h3>q-07 &middot; For player props, what exactly is the &#x27;line&#x27; being bet against? <span class="pill mut">P2</span></h3>
+  <dl class="kv">
+    <dt>What we know</dt><dd>Prop lines are the players&#x27; official season averages, sometimes one game stale, and the model&#x27;s projection is that average adjusted for pace and opponent.</dd>
+    <dt>What is missing</dt><dd>A stated definition. A season average is not a market line: it has no juice, no half-point, and no closing value.</dd>
+    <dt>Why it decides</dt><dd>With an average as the line, an &#x27;over&#x27; pick is close to a coin flip by construction unless the adjustment is genuinely predictive. That is why S7 and S8 have zero graded plays.</dd>
+    <dt>How to find out</dt><dd>Either define a fixed convention (e.g. &#x27;line = season average rounded to 0.5, graded at even money&#x27;) and publish it, or drop prop picks until a real line source exists.</dd>
+    <dt>Owner</dt><dd>Props builder</dd>
+    <dt>Blocks</dt><dd>Player props, prop combos, same-game parlays</dd>
+  </dl>
+</div>
+<div class="card qa p2" id="q-08">
+  <h3>q-08 &middot; How should correlated legs be priced across a parlay? <span class="pill mut">P2</span></h3>
+  <dl class="kv">
+    <dt>What we know</dt><dd>Thirteen correlations among official team stats are measured and reproduce exactly. The same-game-parlay rho values are model guesses (0.0, 0.25, 0.30, -0.20, 0.05) and the site labels them as guesses.</dd>
+    <dt>What is missing</dt><dd>A measured rho for any parlay pair that involves a player, which needs a player game-log corpus. The repository holds game logs for 3 players.</dd>
+    <dt>Why it decides</dt><dd>Parlay pricing is the whole of the brief&#x27;s &#x27;parlay and prop combo&#x27; section. With guessed rho, a parlay price is a guess with extra steps.</dd>
+    <dt>How to find out</dt><dd>Collect official player game logs for the 60-game window (one request per player per season via the official stats pages), then measure pairwise rho directly instead of assuming it.</dd>
+    <dt>Owner</dt><dd>Props/correlation build</dd>
+    <dt>Blocks</dt><dd>Parlay and prop-combo strategies</dd>
+  </dl>
+</div>
+<div class="card qa p2" id="q-09">
+  <h3>q-09 &middot; Is the rest signal real, and can we trust the field that carries it? <span class="pill mut">P2</span></h3>
+  <dl class="kv">
+    <dt>What we know</dt><dd>The repository reports a rest-day differential worth about +2.82 points per game at p = 0.130, needing roughly 340 games. The field itself is currently computed wrongly in the horizon build (26 of 27 rows negative).</dd>
+    <dt>What is missing</dt><dd>A correct rest table across the season, and enough games to detect an effect that small.</dd>
+    <dt>Why it decides</dt><dd>Rest is one of the few signals that is not just a re-expression of team quality, so it is worth getting right — but only after the field is correct.</dd>
+    <dt>How to find out</dt><dd>Fix the rest computation (F-12), widen the corpus to the full season from the official schedule, then re-estimate.</dd>
+    <dt>Owner</dt><dd>Game-flow build</dd>
+    <dt>Blocks</dt><dd>Rest/back-to-back strategies (S5 is already 8-4 on this basis and unvalidated)</dd>
+  </dl>
+</div><h2>P3 &mdash; worth knowing, no decision depends on it yet</h2>
+<div class="card qa p3" id="q-10">
+  <h3>q-10 &middot; Which official injury designations actually move a line? <span class="pill mut">P3</span></h3>
+  <dl class="kv">
+    <dt>What we know</dt><dd>Statuses are mapped to weights (Out 1.0, Doubtful, Questionable 0.35, Probable, Available) and to a 15 net-rating-points-per-100-possessions impact if a full team of minutes were lost.</dd>
+    <dt>What is missing</dt><dd>Any measured relationship between a designation and the player&#x27;s actual minutes. The weights are asserted, not fitted.</dd>
+    <dt>Why it decides</dt><dd>If &#x27;Questionable&#x27; means a 70% chance of playing 34 minutes, weighting it at 0.35 mis-prices the game. Nothing in the repository tests this.</dd>
+    <dt>How to find out</dt><dd>Join the official injury reports (every edition for a fortnight) to the box scores of those games and measure realised minutes by designation. That is a self-contained, entirely official dataset.</dd>
+    <dt>Owner</dt><dd>Injury build</dd>
+    <dt>Blocks</dt><dd>Availability strategies (S6)</dd>
+  </dl>
+</div>
+<div class="card qa p3" id="q-11">
+  <h3>q-11 &middot; How much of the model&#x27;s error is pace, and how much is efficiency? <span class="pill mut">P3</span></h3>
+  <dl class="kv">
+    <dt>What we know</dt><dd>Totals are the weak spot: model MAE 14.83 vs naive 14.72, while margin MAE is 12.98 vs 13.62. The model uses PACE and OffRtg/DefRtg scaled by league averages.</dd>
+    <dt>What is missing</dt><dd>An error decomposition. No page separates &#x27;we got the pace wrong&#x27; from &#x27;we got the shooting wrong&#x27;.</dd>
+    <dt>Why it decides</dt><dd>It tells the next build whether to spend effort on pace modelling or on efficiency modelling — a fork in the road with very different data requirements.</dd>
+    <dt>How to find out</dt><dd>Regress total error on predicted pace and predicted offensive rating across the 60 games. Both series already exist in the repository.</dd>
+    <dt>Owner</dt><dd>Model build</dd>
+    <dt>Blocks</dt><dd>Totals model improvement</dd>
+  </dl>
+</div>
+<div class="card qa p3" id="q-12">
+  <h3>q-12 &middot; What does a &#x27;reward&#x27; for a top strategy actually consist of? <span class="pill mut">P3</span></h3>
+  <dl class="kv">
+    <dt>What we know</dt><dd>The brief describes a leaderboard competition with rewards. The repository publishes reward tiers and caps (a quarter unit for an unvalidated strategy).</dd>
+    <dt>What is missing</dt><dd>Whether rewards are money, ranking only, or nothing, and who funds them.</dd>
+    <dt>Why it decides</dt><dd>If money, every statistical claim becomes a conduct question (and Q-02 becomes urgent). If ranking only, the leaderboard is a research artefact and can be simpler.</dd>
+    <dt>How to find out</dt><dd>Decide and write it down. No data needed.</dd>
+    <dt>Owner</dt><dd>Project owner</dd>
+    <dt>Blocks</dt><dd>Leaderboard design</dd>
+  </dl>
+</div>
+<footer class="foot"><p><strong>How this section is made.</strong> Every number on these pages was read from an NBA-operated page during 2026-11-14 18:38&ndash;19:45 UTC and compared with what the repository publishes. Where an official read was impossible the value is published as unverified and listed on <a href="flagged.html">Flagged for review</a> &mdash; it is never filled in. Generated by <code>scripts/build_verified.py</code> from <code>verified/data/*.json</code>; rebuilt and checked by <code>scripts/verify_verified.py</code>.</p></footer>
+
+</div>
+</main>
+</body>
+</html>
