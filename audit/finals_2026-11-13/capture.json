@@ -1,0 +1,72 @@
+{
+  "task": "X02 — 2026-11-13 official finals, read by session arena/cfb25ff0-nba1",
+  "captured_by": "arena/cfb25ff0-nba1 (fetch_page, NBA.com public pages)",
+  "method": "Each value below was copied from the fetch_page output for the URL named in schedule_url or game_url. Nothing was inferred. Game-page linescores were read from the LINESCORES table of the last chunk of each game page.",
+  "schedule_url": "https://www.nba.com/schedule",
+  "schedule_read_utc": "2026-11-14 (session time, see COORDINATION.md §20)",
+  "games": [
+    {
+      "game_id": "0022600034", "date": "2026-11-13", "away": "NYK", "home": "IND",
+      "venue": "Gainbridge Fieldhouse, Indianapolis, IN", "cup_group": "East Group B",
+      "schedule_card": {"status": "Final", "away_pts": 104, "home_pts": 106},
+      "game_url": "https://www.nba.com/game/nyk-vs-ind-0022600034",
+      "game_page": {"title": "New York Knicks vs Indiana Pacers Nov 13, 2026 Game Summary | NBA.com", "linescore_away": [27, 22, 35, 20], "linescore_home": [26, 32, 27, 21], "final_away": 104, "final_home": 106, "ot_label": null}
+    },
+    {
+      "game_id": "0022600035", "date": "2026-11-13", "away": "MIL", "home": "ORL",
+      "venue": "Kia Center, Orlando, FL", "cup_group": "East Group A",
+      "schedule_card": {"status": "Final", "away_pts": 99, "home_pts": 107},
+      "game_url": "https://www.nba.com/game/mil-vs-orl-0022600035",
+      "game_page": {"title": "Milwaukee Bucks vs Orlando Magic Nov 13, 2026 Game Summary | NBA.com", "linescore_away": [15, 22, 35, 27], "linescore_home": [23, 29, 32, 23], "final_away": 99, "final_home": 107, "ot_label": null}
+    },
+    {
+      "game_id": "0022600036", "date": "2026-11-13", "away": "CLE", "home": "MIA",
+      "venue": "Kaseya Center, Miami, FL", "cup_group": "East Group B",
+      "schedule_card": {"status": "Final", "away_pts": 121, "home_pts": 133},
+      "game_url": "https://www.nba.com/game/cle-vs-mia-0022600036",
+      "game_page": {"title": "Cleveland Cavaliers vs Miami Heat Nov 13, 2026 Game Summary | NBA.com", "linescore_away": [27, 30, 34, 30], "linescore_home": [29, 25, 38, 41], "final_away": 121, "final_home": 133, "ot_label": null}
+    },
+    {
+      "game_id": "0022600037", "date": "2026-11-13", "away": "ATL", "home": "CHI",
+      "venue": "United Center, Chicago, IL", "cup_group": "East Group C",
+      "schedule_card": {"status": "Final/OT", "away_pts": 117, "home_pts": 125},
+      "game_url": "https://www.nba.com/game/atl-vs-chi-0022600037",
+      "game_page": {"title": "Atlanta Hawks vs Chicago Bulls Nov 13, 2026 Game Summary | NBA.com", "linescore_away": null, "linescore_home": null, "final_away": null, "final_home": null, "ot_label": "Final/OT", "note": "fetch_page returned the page header only (one chunk, no LINESCORES table, no recap)"}
+    },
+    {
+      "game_id": "0022600038", "date": "2026-11-13", "away": "MEM", "home": "NOP",
+      "venue": "Smoothie King Center, New Orleans, LA", "cup_group": "West Group B",
+      "schedule_card": {"status": "Final", "away_pts": 142, "home_pts": 111},
+      "game_url": "https://www.nba.com/game/mem-vs-nop-0022600038",
+      "game_page": {"title": "Memphis Grizzlies vs New Orleans Pelicans Nov 13, 2026 Game Summary | NBA.com", "linescore_away": [35, 35, 35, 37], "linescore_home": [28, 30, 28, 25], "final_away": 142, "final_home": 111, "ot_label": null}
+    },
+    {
+      "game_id": "0022600039", "date": "2026-11-13", "away": "UTA", "home": "HOU",
+      "venue": "Toyota Center, Houston, TX", "cup_group": "West Group A",
+      "schedule_card": {"status": "Final", "away_pts": 118, "home_pts": 125},
+      "game_url": "https://www.nba.com/game/uta-vs-hou-0022600039",
+      "game_page": {"title": "Utah Jazz vs Houston Rockets Nov 13, 2026 Game Summary | NBA.com", "linescore_away": [27, 26, 36, 29], "linescore_home": [27, 36, 29, 33], "final_away": 118, "final_home": 125, "ot_label": null}
+    },
+    {
+      "game_id": "0022600040", "date": "2026-11-13", "away": "GSW", "home": "SAS",
+      "venue": "Frost Bank Center, San Antonio, TX", "cup_group": "West Group C",
+      "schedule_card": {"status": "Final", "away_pts": 85, "home_pts": 123},
+      "game_url": "https://www.nba.com/game/gsw-vs-sas-0022600040",
+      "game_page": {"title": "Golden State Warriors vs San Antonio Spurs Nov 13, 2026 Game Summary | NBA.com", "linescore_away": [14, 19, 27, 25], "linescore_home": [38, 25, 34, 26], "final_away": 85, "final_home": 123, "ot_label": null}
+    },
+    {
+      "game_id": "0022600041", "date": "2026-11-13", "away": "POR", "home": "SAC",
+      "venue": "Golden 1 Center, Sacramento, CA", "cup_group": "West Group C",
+      "schedule_card": {"status": "Final", "away_pts": 120, "home_pts": 107},
+      "game_url": "https://www.nba.com/game/por-vs-sac-0022600041",
+      "game_page": {"title": "Portland Trail Blazers vs Sacramento Kings Nov 13, 2026 Game Summary | NBA.com", "linescore_away": null, "linescore_home": null, "final_away": null, "final_home": null, "ot_label": null, "note": "fetch_page returned the page header only (one chunk, no LINESCORES table, no recap)"}
+    },
+    {
+      "game_id": "0022600042", "date": "2026-11-13", "away": "OKC", "home": "LAC",
+      "venue": "Intuit Dome, Inglewood, CA", "cup_group": "West Group B",
+      "schedule_card": {"status": "Final", "away_pts": 112, "home_pts": 113},
+      "game_url": "https://www.nba.com/game/okc-vs-lac-0022600042",
+      "game_page": {"title": "Oklahoma City Thunder vs LA Clippers Nov 13, 2026 Game Summary | NBA.com", "linescore_away": [27, 17, 40, 28], "linescore_home": [33, 24, 25, 31], "final_away": 112, "final_home": 113, "ot_label": null}
+    }
+  ]
+}

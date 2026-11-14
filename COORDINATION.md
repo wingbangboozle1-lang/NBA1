@@ -1641,11 +1641,53 @@ schedule (https://www.nba.com/schedule), while the refresh capture at 02:05Z rec
 | # | Task | Status | File scope (exclusive) |
 | --- | --- | --- | --- |
 | X01 | Board read + claim, pushed before any edit | done | `COORDINATION.md` (§20 only) |
-| X02 | Capture the 9 finals from two official pages each: the NBA.com schedule and each game page | in progress | `audit/finals_2026-11-13/**` |
-| X03 | Write a row-level verified finals file, one row per game, with both official URLs and the page read | not started | `data/verified/finals_2026-11-13.json` |
-| X04 | Cross-check against the committed snapshot and against any published pick for these games | not started | `audit/finals_2026-11-13/**` |
-| X05 | Record the result and request promotion into the shared snapshot and settlement (integration seat) | not started | `COORDINATION.md` (§20 only) |
+| X02 | Capture the 9 finals from two official pages each: the NBA.com schedule and each game page | done (7 two-source, 2 single-source) | `audit/finals_2026-11-13/**` |
+| X03 | Write a row-level verified finals file, one row per game, with both official URLs and the page read | done | `data/verified/finals_2026-11-13.json` |
+| X04 | Cross-check against the committed snapshot and against any published pick for these games | done (no published pick on these games; 11/13 records checked for 18 teams) | `audit/finals_2026-11-13/**` |
+| X05 | Record the result and request promotion into the shared snapshot and settlement (integration seat) | done (requests R-X1 to R-X4 below) | `COORDINATION.md` (§20 only) |
 
 **Not touched on purpose:** `data/raw/**`, `data/derived/**`, `data/games.json`, `integration/**`,
 `docs/**`, `site/**`, root `*.html`, `scripts/**`, `engine/**`. Promotion into the shared
 snapshot and settlement belongs to the integration session, as the ground rules require.
+
+### 20.1 Completion record (session `arena/cfb25ff0-nba1`, 2026-11-14 UTC)
+
+**Sources.** Official nba.com pages, read with the page-fetch tool: the schedule
+<https://www.nba.com/schedule> (Week 4, Fri Nov 13) and the nine game pages
+`https://www.nba.com/game/<away>-vs-<home>-<game_id>` (listed in `audit/finals_2026-11-13/README.md`).
+
+**Verification performed.** `audit/finals_2026-11-13/check.py`: 41 checks over 9 games, 0 failed.
+C1 schedule card == game-page final (where the game page returned a linescore); C2 quarter sums == final;
+C3 status label is Final or Final/OT; C4 URL slug == away/home/game ID; C5 not yet in the committed snapshot.
+`audit/finals_2026-11-13/records_check.py`: post-11/13 records for the 18 teams that played; 11 agree
+with an official card read in this session, 0 disagree, 7 derived only.
+
+**Result.** Data file: `data/verified/finals_2026-11-13.json` (9 rows, each with two source URLs, or one
+where the game page returned no linescore; the ATL–CHI OT count is null because it is not confirmed).
+No shared file was edited: `data/raw/**`, `integration/**`, `site/**`, `docs/**` and root `*.html` are untouched.
+
+**Irregularities (publish on Flagged for Review; non-blocking):**
+
+1. `integration/out/settlement.json`: all 9 `cannot_settle` rows for 2026-11-13 carry the same
+   `source_url` (`https://www.nba.com/game/cha-vs-phx-0022600230/box-score`), which is a different game.
+2. `data/raw/games_completed.json` still stops at 2026-11-12. F-C01 stays open until promotion.
+3. ATL–CHI and POR–SAC: second official page not readable through the fetch tool; ATL–CHI OT count not stated.
+4. Seven horizon team records (ORL, ATL, GSW, POR, SAC, OKC; MIL via the game-page recap only) are derived
+   from pre-game record + result, not read from an official card in this session.
+5. CLE–MIA nba.com recap text says "Tuesday night" for a Friday game; the scores on the same page agree with
+   the schedule, so no value is affected.
+
+**Requests to the integration seat (logged, not executed):**
+
+* **R-X1 — promote the nine 11/13 finals** from `data/verified/finals_2026-11-13.json` into
+  `data/raw/games_completed.json` (same column order), and re-run `settle.py` so the `cannot_settle` rows
+  for 11/13 become settled or stay blocked with the reason.
+* **R-X2 — fix the nine `source_url` values** in `integration/out/settlement.json` (irregularity 1).
+* **R-X3 — refresh the horizon records** for the 18 teams that played on 11/13, from the table in
+  `audit/finals_2026-11-13/README.md` §3. Confirm the seven derived-only records against an official card first.
+* **R-X4 — publish irregularities 1–5** on the Flagged for Review register, with the links above.
+
+**Not done here (out of this session's claim):** the other horizon, lines and picks work, the
+Flagged-for-Review register, the Command Center, and the rest of the brief. Those are owned by the sessions
+listed in §0b and by the integration seat.
+
