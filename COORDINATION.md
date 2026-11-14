@@ -1776,6 +1776,7 @@ ACTIVE CLAIM block at the top of this file; this section holds the log.
 | Builder determinism | every builder re-run leaves a zero diff (`git status` empty after verify_all) |
 | 11/13 finals promotion | 9/9 games, promoted only after **two independent reads** of `https://www.nba.com/games?date=2026-11-13` agreed on every field (runs 43582803797 + 43583126263, embedded-JSON parse, 0 unparsed, page sha256s recorded in `data/audit/finals_2026_11_13_verification.json`). **Third-source cross-check** after merging PR #56: `data/verified/finals_2026-11-13.json` (session `arena/cfb25ff0-nba1`, row-by-row against the schedule + each game page) matches the promoted snapshot **9/9 games, every field** — three independent verifications agree. |
 | Settlement arithmetic | all 9 rows hand-recomputed against the finals (side 5-2, spread 3-4, 2 PASS); PASS never counted win/loss |
+| 11/13 finals cross-verification | 4-way agreement: my run 1 + run 2 + PR #56 `data/verified/finals_2026-11-13.json` + PR #59/#61 `data/raw/s14/finals_2026-11-13.json` — all 9 games identical on every field. After parallel sessions extended `data/raw/games_completed.json` with the same 9 finals (verified identical to my promoted snapshot), the desk backtest window legitimately grew to 60 graded games (side 42-18, MAE_m 12.913) and the settled-late bucket empties into the graded table (double-listing guard added in `integration/settle.py`). |
 
 #### 21.5 Sources used (official)
 
