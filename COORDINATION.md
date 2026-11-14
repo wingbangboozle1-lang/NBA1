@@ -1520,7 +1520,11 @@ PRs #33/#35) are recorded in my W05 record below.
 | Branch | `arena/697fca1e-nba1` (consolidated onto `main`, then merged through the bot-probe churn and the PR #33 merge; see conflict log) |
 | Local gate before push | `python3 scripts/verify_all.py` → VERIFY OK (includes `check_site.py` now scanning `picks.html`: 112 table rows, every row carries an official nba.com-family source link) |
 | Commits | claim `4b09dc8` → horizon build `bf6f702` → probe `a42b1ef` → rest-fix `d2656e3` |
-| PR | (recorded after merge in the follow-up board commit) |
+| PR | [#41](https://github.com/wingbangboozle1-lang/NBA1/pull/41) — **merged** 2026-11-14T01:52:50Z, merge commit `ce9d1a3` (`--merge`, without approval, as instructed) |
+| Follow-up PRs | [#48](https://github.com/wingbangboozle1-lang/NBA1/pull/48) merged `bdbff69` (check_links allowlist, I-W09) · [#50](https://github.com/wingbangboozle1-lang/NBA1/pull/50) merged `6e12311` (CI fragment-strip, I-W10) — both `--merge`, without approval |
+| Deploy gate after merge | First runs on `ce9d1a3`/`99211ad` failed on the two pre-existing checker gaps (I-W09/I-W10, not caused by this session's files); with the repairs merged, the run for `6e12311` is **validate success + deploy success** (run 43543822303) — first fully green gate on `main` in this cycle |
+| Pages | API `status=built` at commit `6e12311`; live URL <https://wingbangboozle1-lang.github.io/NBA1/> |
+| Live check | `https://wingbangboozle1-lang.github.io/NBA1/picks.html` fetched after deploy: renders 27-line table (DEN@NOP −8.0 … CHI@MIN +29.9), 26 picks, 12 parlays, 8 SGP candidates, availability rows, probe record, all with official source links |
 
 #### Verification performed
 
@@ -1555,6 +1559,7 @@ PRs #33/#35) are recorded in my W05 record below.
 | I-W02 | CHI@MIN model outlier (+29.9, p 0.968) reproduces Build B's flagged F-C06 (+29.7) | **Open, published** on the page flags — extreme early-season CHI ratings; not corrected, flagged |
 | I-W03 | `render_check.mjs` cannot run in this sandbox (jsdom not installed; `node_modules` not persisted) | **Open**; picks.html is fully static (no inline JS), and verify_all's HTML-parser audit + check_site cover structure; noted for a session with npm access |
 | I-W04 | PR #26/29/30 merged while this session worked; three COORDINATION conflicts/rebases | **Resolved**; no other session's lines discarded |
+| I-W10 | The CI inline link scan (`.github/workflows/pages.yml` last validate step) did not strip `#fragment` before its existence check, so PR #40's deep-anchor links (`flagged.html#F1`…) failed the gate on every push | **Fixed on this branch** (fragment stripped before `exists()`, matching `scripts/verify_all.py` 4e; anchors preserved — they point at real ids). Logged here because the workflow file is a done task's file. |
 | I-W09 | `check_links.py` (PR #26's checker) still rejects the repo's own Pages host, so the main deploy gate stayed red after the `audit/` evidence links landed (PR #20/#33). `verify_integration.py` had been allowlisted (0954d3d) but this second checker had not | **Fixed on this branch** (one allowlist entry, comment cites 0954d3d); `check_links.py` → PASS. Deploy gate expected green on the next main run |
 | I-W05 | 11/13 finals and 11/14+ injury reports could not exist at build time | **Open by nature of timing** (F-C01/F-C03 inherited, probe documented); next session should re-probe after ~03:00 UTC (finals) and ~16:30 UTC (noon report) on 2026-11-14 |
 

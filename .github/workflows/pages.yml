@@ -120,7 +120,11 @@ jobs:
               for m in re.finditer(r'(?:href|src)="([^"#][^"]*)"', html):
                   h = m.group(1)
                   if re.match(r'^(https?:|mailto:|//)', h): continue
-                  target = os.path.normpath(os.path.join(base, h))
+                  # strip the #fragment before the existence check (deep anchors like
+                  # pages/flagged.html#F2 are legitimate; scripts/verify_all.py 4e already
+                  # strips the fragment — this scan did not, so PR #40's anchor links
+                  # tripped it. Session arena/697fca1e-nba1, I-W10.)
+                  target = os.path.normpath(os.path.join(base, h.split("#")[0]))
                   if not os.path.exists(target):
                       bad.append((p, h, target))
           if bad:
