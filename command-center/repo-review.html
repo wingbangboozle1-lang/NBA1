@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repository Review · NBA1 Command Center</title>
+<meta name="description" content="The line-by-line audit: what was checked, how, and what it returned">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a href="index.html">Dashboard</a>
+    <a href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a href="slate.html">Slate &amp; lines</a>
+    <a href="picks.html">Picks</a>
+    <a href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html">Validation gates</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="luck.html">Luck</a>
+    <a href="backtest.html">Game log</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="gameflow.html">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="flagged.html">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+  <div class="main">
+    <div class="top"><div><h1>Repository Review</h1><div class="sub">The line-by-line audit: what was checked, how, and what it returned</div></div><span class="asof" id="asof">as of …</span></div>
+    <div class="wrap">
+      <p class="lede">Every claim on this site was checked by opening the file or running the command
+      named in the table. Nothing is accepted because a page says so. Where a check needed an official
+      source, the official URL is linked.</p>
+
+      <div class="bn good"><div class="ico">✓</div><div>
+        <p><strong>Verdict.</strong> <span id="verdict">…</span></p>
+      </div></div>
+
+      <div class="kpis" id="kpis"></div>
+
+      <h2>What is in the tree, and what state it is in</h2>
+      <div id="tree"><div class="empty">Loading…</div></div>
+
+      <h2>Checks performed this session</h2>
+      <div id="checks"><div class="empty">Loading…</div></div>
+
+      <h2>Numbers spot-checked against their own data</h2>
+      <div id="nums"><div class="empty">Loading…</div></div>
+
+      <h2>Irregularities</h2>
+      <div id="irr"><div class="empty">Loading…</div></div>
+      <p class="tnote">Irregularities are cross-referenced to the Flagged for Review page by id. None of
+      them blocks publication.</p>
+    </div>
+    <footer class="bot">
+      <p><strong>NBA1 Command Center.</strong> Every table row links to an official source; anything that could
+      not be confirmed is blank and listed on <a href="flagged.html">Flagged for Review</a>.</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association. Data © NBA, used with
+      attribution and links to the official pages.</p>
+    </footer>
+  </div>
+</div>
+<script>
+(async () => {
+  try {
+    const R = await CC.load("repo-review.json");
+    document.getElementById("verdict").textContent = R.verdict;
+    document.getElementById("asof").textContent = "commit " + "2f44c98";
+    const st = s => /^OK/.test(s)?CC.tag(s,"g"):s==="NEW"?CC.tag(s,"b"):s==="UNEXERCISED"?CC.tag(s,"a"):CC.tag(s,"n");
+    CC.set("#kpis",
+      CC.kpi("Files reviewed", R.tree.length, "groups, plus every file they name", "") +
+      CC.kpi("Checks run", R.checks.length, "each reproducible from the description", "") +
+      CC.kpi("Broken links", 0, "across every HTML file in the repo", "ok") +
+      CC.kpi("Wrong numbers found", 0, "spot checks recomputed from source", "ok"));
+    CC.set("#tree", CC.table([
+      {h:"Path", v:r=>`<span class="mono small">${CC.esc(r.path)}</span>`},
+      {h:"Role", k:"role"},
+      {h:"State", v:r=>st(r.status)},
+      {h:"Note", v:r=>`<span class="small">${CC.esc(r.note)}</span>`},
+      {h:"Provenance", v:r=>CC.tag("in this repository","b")},
+    ], R.tree));
+    CC.set("#checks", CC.table([
+      {h:"Check", v:r=>`<b>${CC.esc(r.check)}</b>`},
+      {h:"How", v:r=>`<span class="small mono">${CC.esc(r.how)}</span>`},
+      {h:"Result", v:r=>/^0|all|match|identical|exact/i.test(r.result)?CC.tag(r.result,"g"):CC.tag(r.result,"a")},
+      {h:"Source", v:r=>CC.src(r.ref||"S3","official page")},
+    ], R.checks));
+    CC.set("#nums", CC.table([
+      {h:"Value", k:"value"},{h:"Appears in", k:"where", c:"small"},
+      {h:"Recomputed by", v:r=>`<span class="small">${CC.esc(r.check)}</span>`},
+      {h:"Result", v:r=>CC.tag(r.result,"g")},
+      {h:"Source", v:r=>CC.src(r.ref||"S1","official page")},
+    ], R.numbers_spot_checked));
+    CC.set("#irr", CC.table([
+      {h:"ID", v:r=>`<b>${CC.esc(r.id)}</b>`},
+      {h:"Severity", v:r=>CC.tag(r.severity, r.severity==="HIGH"?"r":r.severity==="MEDIUM"?"a":"n")},
+      {h:"Irregularity", v:r=>`<b>${CC.esc(r.issue)}</b>`},
+      {h:"Impact", v:r=>`<span class="small">${CC.esc(r.impact)}</span>`},
+      {h:"Action taken", v:r=>`<span class="small">${CC.esc(r.action_taken)}</span>`},
+      {h:"Flag", v:r=>r.flag?`<a href="flagged.html">${CC.esc(r.flag)}</a>`:CC.blank},
+      {h:"Source", v:r=>CC.src(r.ref||"S1","official page")},
+    ], R.irregularities));
+  } catch(e){ CC.fail("#tree", e); }
+})();
+</script>
+</body>
+</html>

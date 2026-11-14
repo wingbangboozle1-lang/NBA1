@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game Log · NBA1 Command Center</title>
+<meta name="description" content="All 51 out-of-sample games: what the model said before tip, and what actually happened">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a href="index.html">Dashboard</a>
+    <a href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a href="slate.html">Slate &amp; lines</a>
+    <a href="picks.html">Picks</a>
+    <a href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html">Validation gates</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="luck.html">Luck</a>
+    <a href="backtest.html" class="on">Game log</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="gameflow.html">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="flagged.html">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+  <div class="main">
+    <div class="top"><div><h1>Game Log</h1><div class="sub">All 51 out-of-sample games: what the model said before tip, and what actually happened</div></div><span class="asof" id="asof">as of …</span></div>
+    <div class="wrap">
+      <p class="lede">This is the evidence the whole verdict rests on. Every game below was predicted
+      with team ratings built only from 2026-10-20 to 2026-11-05, so no game in this window contributes
+      to the ratings that predict it.</p>
+
+      <div class="bn info"><div class="ico">i</div><div>
+        <p><strong>Why the error column can look large.</strong> A single NBA game's margin is a
+        high-variance quantity: the residual standard deviation here is about 17.4 points. An average
+        absolute error near 13 points is normal and is not a defect — which is exactly why one game
+        proves nothing and 51 games barely prove anything.</p>
+      </div></div>
+
+      <div class="kpis" id="kpis"></div>
+
+      <div class="tools">
+        <label>Date <select id="f-date"><option value="">All dates</option></select></label>
+        <label>Show <select id="f-side">
+          <option value="">All games</option>
+          <option value="model">Model beat reference on margin</option>
+          <option value="ref">Reference beat model on margin</option>
+        </select></label>
+        <span class="count" id="cnt"></span>
+      </div>
+      <div id="tbl"><div class="empty">Loading…</div></div>
+      <p class="tnote"><b>Sign convention.</b> A published margin is from the home team's point of
+      view, so a positive number means the home side is favoured. Every error column is <b>signed</b>:
+      <span class="mono">actual − predicted</span>. A negative error therefore means the home team did
+      worse than predicted, not that the prediction was better — a −40 is a 40-point miss. The
+      <em>Show</em> filter compares absolute errors, and the averages on the Validation page are means
+      of absolute values. Each row links to the official game page; a large total error on both sides of
+      the same game is typical of an overtime or a blowout.</p>
+    </div>
+    <footer class="bot">
+      <p><strong>NBA1 Command Center.</strong> Every table row links to an official source; anything that could
+      not be confirmed is blank and listed on <a href="flagged.html">Flagged for Review</a>.</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association. Data © NBA, used with
+      attribution and links to the official pages.</p>
+    </footer>
+  </div>
+</div>
+<script>
+(async () => {
+  try {
+    const [B, meta] = await Promise.all([CC.load("backtest.json"), fetch("data/meta.json").then(r=>r.json())]);
+    document.getElementById("asof").textContent = "as of " + meta.as_of;
+    document.getElementById("cut").textContent = meta.generated_at_utc;
+    const m = B.metrics, P = B.params;
+    CC.set("#kpis",
+      CC.kpi("Games", B.rows.length, m.window, "") +
+      CC.kpi("Margin MAE", m.mae_margin_model, "vs " + m.mae_margin_ref + " reference", m.mae_margin_model<m.mae_margin_ref?"ok":"bad") +
+      CC.kpi("Total MAE", m.mae_total_model, "vs " + m.mae_total_ref + " reference", m.mae_total_model<m.mae_total_ref?"ok":"bad") +
+      CC.kpi("Winners", m.straight_up_model, "reference also " + m.straight_up_ref, ""));
+    const dates = [...new Set(B.rows.map(r=>r.date))].sort();
+    const dsel=document.getElementById("f-date");
+    dates.forEach(d=>dsel.insertAdjacentHTML("beforeend",`<option value="${d}">${d}</option>`));
+    const cols=[
+      {h:"Date", v:r=>CC.games(r.date)},
+      {h:"Game", v:r=>`<span class="mono">${CC.esc(r.matchup)}</span>`},
+      {h:"Result", v:r=>`<span class="mono">${r.away_pts}–${r.home_pts}${r.ot?" OT":""}</span>`},
+      {h:"Our spread", n:1, v:r=>CC.num(r.model_spread_home,1)},
+      {h:"Ref spread", n:1, v:r=>CC.num(r.ref_spread_home,1)},
+      {h:"Actual margin", n:1, v:r=>CC.num(r.actual_margin_home,1)},
+      {h:"Err model", n:1, v:r=>CC.num(r.err_model_margin,2)},
+      {h:"Err ref", n:1, v:r=>CC.num(r.err_ref_margin,2)},
+      {h:"Our total", n:1, v:r=>CC.num(r.model_total,1)},
+      {h:"Actual total", n:1, v:r=>CC.num(r.actual_total,1)},
+      {h:"Err model", n:1, v:r=>CC.num(r.err_model_total,2)},
+      {h:"Err ref", n:1, v:r=>CC.num(r.err_ref_total,2)},
+      {h:"P(home) model", n:1, v:r=>CC.pct(r.p_home_model,1)},
+      {h:"Home won", v:r=>r.home_won===1?CC.tag("yes","g"):CC.tag("no","r")},
+      {h:"Neutral", v:r=>r.neutral?CC.tag("neutral site","a"):`<span class="blankdash">—</span>`},
+      {h:"Source", v:r=>CC.games(r.date)},
+    ];
+    let date="", side="";
+    function render(){
+      const rows = B.rows.filter(r=> (!date||r.date===date) &&
+        (side==="" || (side==="model"
+            ? Math.abs(r.err_model_margin) < Math.abs(r.err_ref_margin)
+            : Math.abs(r.err_model_margin) > Math.abs(r.err_ref_margin))));
+      CC.set("#tbl", CC.table(cols, rows));
+      document.getElementById("cnt").textContent = rows.length + " of " + B.rows.length + " games";
+    }
+    dsel.onchange=e=>{date=e.target.value;render();};
+    document.getElementById("f-side").onchange=e=>{side=e.target.value;render();};
+    render();
+  } catch(e){ CC.fail("#tbl", e); }
+})();
+</script>
+</body>
+</html>

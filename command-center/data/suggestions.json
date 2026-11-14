@@ -1,0 +1,287 @@
+{
+ "title": "Suggestions",
+ "intro": "Improvements to the site and to the decision process, written so a reviewer can choose a path rather than inherit one. Each card states the problem, the options with effort and risk, what each option unlocks, and a recommendation. Nothing here is implemented; each card ends in the decision a reviewer has to make.",
+ "scoring_note": "Effort: S = a day or less, M = a week, L = a month or a data purchase. Impact: how much it changes a decision. Risk: what could go wrong or be misread. Recommendation is the author's, and it is the shortest path to a decision, not the most impressive one.",
+ "items": [
+  {
+   "id": "S01",
+   "cat": "Decision quality",
+   "title": "Score against a real price instead of the reference line",
+   "problem": "Every economic gate compares the model with a naive reference line built from the same inputs. That measures whether the model's refinements bite, not whether it beats a market. A +3.0 'edge' can be entirely an artefact of the reference being naive.",
+   "options": [
+    {
+     "name": "Licensed odds archive",
+     "effort": "L",
+     "risk": "Cost, licensing scope, survivorship of closing lines",
+     "unlocks": "True closing-line value, real ROI, real G3/G4"
+    },
+    {
+     "name": "Dated manual quote snapshots",
+     "effort": "S",
+     "risk": "Human transcription error, limited coverage, timezone mistakes",
+     "unlocks": "A defensible first price series you can audit line by line"
+    },
+    {
+     "name": "Keep the reference line and rename the metric",
+     "effort": "S",
+     "risk": "None, but no economic claim is possible",
+     "unlocks": "Clarity only"
+    }
+   ],
+   "recommendation": "Start with dated manual snapshots (S) to prove the pipeline end-to-end, and run the archive purchase in parallel. Never call a reference-line difference an edge in the UI; the site already avoids that, and it is the right call.",
+   "ref": "S1"
+  },
+  {
+   "id": "S02",
+   "cat": "Evidence",
+   "title": "Grow the out-of-sample window past 100 graded games before reading anything into the leaderboard",
+   "problem": "The top strategy has 23 graded plays. At that size a 16-7 run happens by chance often enough that the exact p is 0.093. The ranking is therefore not informative, and any ranking shown at n = 23 is a false signal.",
+   "options": [
+    {
+     "name": "Let the daily refresh accumulate",
+     "effort": "S",
+     "risk": "Slow; the league plays ~6-8 games a night across a 3-day horizon",
+     "unlocks": "A clean, uncontaminated sample"
+    },
+    {
+     "name": "Backfill earlier games",
+     "effort": "M",
+     "risk": "Ratings would have to be rebuilt point-in-time or look-ahead leaks in",
+     "unlocks": "A faster sample"
+    },
+    {
+     "name": "Show the leaderboard only as a queue",
+     "effort": "S",
+     "risk": "The page looks emptier",
+     "unlocks": "Honesty"
+    }
+   ],
+   "recommendation": "Both: let it accumulate, and backfill only with strictly point-in-time ratings. Until then, present the leaderboard as 'not yet rankable' rather than numbering it \u2014 the tier cap already implies that.",
+   "ref": "S1"
+  },
+  {
+   "id": "S03",
+   "cat": "Data",
+   "title": "Capture the full 465-row player table, not the top 50",
+   "problem": "Injury impact is a lower bound because minutes are known for 50 of 465 players. Roster minutes coverage sits at 27-30%, so most absences are counted as zero impact. That is honest but nearly useless for the games where the absent player is a bench starter.",
+   "options": [
+    {
+     "name": "Capture all 10 pages of the players table",
+     "effort": "M",
+     "risk": "Ten fetches per refresh; markup fragility",
+     "unlocks": "Real minute shares, real availability deltas"
+    },
+    {
+     "name": "Capture per-game box scores",
+     "effort": "L",
+     "risk": "Many more requests",
+     "unlocks": "Minutes distributions, not just averages"
+    },
+    {
+     "name": "Leave the bound and label it",
+     "effort": "S",
+     "risk": "The layer stays decorative",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Capture all 10 pages first: it is the cheapest large improvement in the whole repository and it turns a lower bound into a number.",
+   "ref": "S7"
+  },
+  {
+   "id": "S04",
+   "cat": "Data",
+   "title": "Move injury capture to a pre-tip cadence and record the report version",
+   "problem": "This session saw seven status changes between the 17:15 and 19:30 ET editions. A once-daily snapshot at 17:30 ET would have published four Questionables as likely participants and one Probable as playing.",
+   "options": [
+    {
+     "name": "Two sweeps a day (mid-afternoon, 2h before first tip)",
+     "effort": "S",
+     "risk": "More snapshots to reconcile",
+     "unlocks": "Status change history, which is itself a signal"
+    },
+    {
+     "name": "Poll every 15 minutes",
+     "effort": "M",
+     "risk": "Rate limits, storage",
+     "unlocks": "A near-real-time availability curve"
+    },
+    {
+     "name": "Keep one snapshot but timestamp it loudly",
+     "effort": "S",
+     "risk": "Known-stale data in a fast-moving market",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Two sweeps, and publish the status *history* (the diff between editions) as a first-class table. The diff is more informative than either snapshot.",
+   "ref": "S7"
+  },
+  {
+   "id": "S05",
+   "cat": "Modelling",
+   "title": "Fit the availability coefficient empirically instead of assuming 15 net-rating points",
+   "problem": "The injury impact coefficient (15 points per 100 possessions if a team's whole rotation were out) and the 0.6 offense share are modelling choices. A sensitivity band is published, but the headline number is still an assumption.",
+   "options": [
+    {
+     "name": "Regress team net rating on unavailable minute share",
+     "effort": "M",
+     "risk": "Confounded by who the unavailable player is",
+     "unlocks": "An estimated coefficient with a standard error"
+    },
+    {
+     "name": "Use on/off splits per player",
+     "effort": "L",
+     "risk": "Small samples per player, lineup collinearity",
+     "unlocks": "Player-specific impact"
+    },
+    {
+     "name": "Keep the band",
+     "effort": "S",
+     "risk": "A wide interval that cannot price anything",
+     "unlocks": "Honesty"
+    }
+   ],
+   "recommendation": "Estimate the team-level coefficient first; it is a single number and it immediately converts an assumption into a measured quantity with an interval.",
+   "ref": "S1"
+  },
+  {
+   "id": "S06",
+   "cat": "Model selection",
+   "title": "Pre-register strategies and correct for multiplicity",
+   "problem": "Ten strategies were evaluated. At alpha = 0.05 across ten tests, roughly half a false positive is expected even if none of them works. The reported p-values are unadjusted.",
+   "options": [
+    {
+     "name": "Publish Benjamini-Hochberg adjusted p-values",
+     "effort": "S",
+     "risk": "Some p-values will become unflattering",
+     "unlocks": "A defensible multiple-testing claim"
+    },
+    {
+     "name": "Pre-register before each week's games",
+     "effort": "S",
+     "risk": "Needs discipline and a fixed rule",
+     "unlocks": "Freedom from post-hoc selection"
+    },
+    {
+     "name": "Nothing",
+     "effort": "S",
+     "risk": "The leaderboard rewards luck",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Do both. Adjustment is a one-line change to the validation output and pre-registration is a text file committed before tip \u2014 neither is expensive, and together they are the difference between a lab and a lottery.",
+   "ref": "S1"
+  },
+  {
+   "id": "S07",
+   "cat": "Site design",
+   "title": "Make the gate status the primary visual, not the record",
+   "problem": "A reader scanning a leaderboard sees 16-7 and +7.55 units first. That is the most misleading pair of numbers on the site, because n = 23 and the skill gate fails.",
+   "options": [
+    {
+     "name": "Sort by gate status, then by score",
+     "effort": "S",
+     "risk": "The flashiest strategy is not on top",
+     "unlocks": "Readers seeing the verdict before the record"
+    },
+    {
+     "name": "Show record only inside a closed detail row",
+     "effort": "S",
+     "risk": "Feels like hiding data",
+     "unlocks": "Less anchoring"
+    },
+    {
+     "name": "Keep the current ordering",
+     "effort": "S",
+     "risk": "Anchoring on luck",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Sort by gate count passed, then by score, and put the record beside the sample size in the same cell. This exact change is implemented on the new Command Center leaderboard page so it can be judged side by side with the old one.",
+   "ref": "S1"
+  },
+  {
+   "id": "S08",
+   "cat": "Site design",
+   "title": "One command center, two labs, no dead ends",
+   "problem": "The repository now contains two independently built labs (one at the root, one under docs/b) and neither linked to the other. A reviewer had no way in.",
+   "options": [
+    {
+     "name": "A single navigation shell over both",
+     "effort": "S",
+     "risk": "Two visual languages on one site",
+     "unlocks": "Findability"
+    },
+    {
+     "name": "Merge the two labs into one",
+     "effort": "L",
+     "risk": "Losing work; large rewrites",
+     "unlocks": "A single codebase"
+    },
+    {
+     "name": "Keep them separate and document it",
+     "effort": "S",
+     "risk": "Nobody finds the second one",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "A nav shell now (implemented), a merge later only if the second lab earns its place. The shell is a one-file change per page and it buys the whole site.",
+   "ref": "S1"
+  },
+  {
+   "id": "S09",
+   "cat": "Process",
+   "title": "Add a settlement ledger so every pick is graded against what was actually available",
+   "problem": "Every upcoming pick is PENDING and nothing in the repository grades a real price. Without a ledger the site can never compute a live ROI, so the competition cannot pay out.",
+   "options": [
+    {
+     "name": "Append-only settlement file per play",
+     "effort": "M",
+     "risk": "Manual entry, disputed prices",
+     "unlocks": "Live ROI, closing-line value, a real leaderboard"
+    },
+    {
+     "name": "Waiting for a licensed feed",
+     "effort": "L",
+     "risk": "Blocked indefinitely",
+     "unlocks": "The same, later"
+    },
+    {
+     "name": "Grade only the model, never a price",
+     "effort": "S",
+     "risk": "No economic claim ever",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "An append-only settlement ledger keyed by game id and market, written before tip and locked after. It is the minimum viable thing that makes the competition real.",
+   "ref": "S3"
+  },
+  {
+   "id": "S10",
+   "cat": "Governance",
+   "title": "Define the reward schedule and retire rule in writing",
+   "problem": "The leaderboard has tiers but no rewards, and four strategies generate zero plays. Both are policy gaps, not code gaps, and they will be filled by accident if nobody decides.",
+   "options": [
+    {
+     "name": "Gate-first payout tiers, published before launch",
+     "effort": "S",
+     "risk": "Fewer payouts than a naive design",
+     "unlocks": "A competition that rewards skill"
+    },
+    {
+     "name": "Flat reward per qualified week",
+     "effort": "S",
+     "risk": "Rewards activity over accuracy",
+     "unlocks": "Engagement"
+    },
+    {
+     "name": "No rewards until 100 graded games",
+     "effort": "S",
+     "risk": "Nobody engages early",
+     "unlocks": "Purity"
+    }
+   ],
+   "recommendation": "Gate-first tiers, published with a written retire rule ('no qualifying play for 30 days, or a gate regression, retires the strategy'). Publish retired strategies too; a leaderboard that only shows live winners is not a leaderboard.",
+   "ref": "S5"
+  }
+ ]
+}

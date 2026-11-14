@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for Review · NBA1 Command Center</title>
+<meta name="description" content="Everything this session could not confirm from an official source, and every irregularity found">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a href="index.html">Dashboard</a>
+    <a href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a href="slate.html">Slate &amp; lines</a>
+    <a href="picks.html">Picks</a>
+    <a href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html">Validation gates</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="luck.html">Luck</a>
+    <a href="backtest.html">Game log</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="gameflow.html">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="flagged.html" class="on">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+  <div class="main">
+    <div class="top"><div><h1>Flagged for Review</h1><div class="sub">Everything this session could not confirm from an official source, and every irregularity found</div></div><span class="asof" id="asof">as of …</span></div>
+    <div class="wrap">
+      <p class="lede">Nothing on this list blocks publication; everything on it limits what can be
+      claimed. Each item names what is affected, where it lives in the repository, and the action that
+      would resolve it.</p>
+
+      <div class="bn warn"><div class="ico">!</div><div>
+        <p><strong>This page is the reverse of a disclaimer.</strong> A site that claims nothing is
+        unverified is usually hiding something. These are the specific things that are unresolved, in
+        the order a reviewer should look at them.</p>
+      </div></div>
+
+      <div class="tools">
+        <label>Severity <select id="f-sev">
+          <option value="">All</option><option value="HIGH">High</option>
+          <option value="MEDIUM">Medium</option><option value="LOW">Low</option></select></label>
+        <label>Area <select id="f-area"><option value="">All areas</option></select></label>
+        <span class="count" id="cnt"></span>
+      </div>
+      <div id="list"><div class="empty">Loading…</div></div>
+      <p class="tnote" id="legend"></p>
+    </div>
+    <footer class="bot">
+      <p><strong>NBA1 Command Center.</strong> Every table row links to an official source; anything that could
+      not be confirmed is blank and listed on <a href="flagged.html">Flagged for Review</a>.</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association. Data © NBA, used with
+      attribution and links to the official pages.</p>
+    </footer>
+  </div>
+</div>
+<script>
+(async () => {
+  try {
+    const F = await CC.load("flagged.json");
+    document.getElementById("legend").textContent = F.severity_legend;
+    const areas=[...new Set(F.items.map(i=>i.area))].sort();
+    const asel=document.getElementById("f-area");
+    areas.forEach(a=>asel.insertAdjacentHTML("beforeend",`<option>${CC.esc(a)}</option>`));
+    let sev="", area="";
+    function card(i){
+      const k=i.severity==="HIGH"?"r":i.severity==="MEDIUM"?"a":"n";
+      return `<details><summary><b>${CC.esc(i.id)}</b> ${CC.esc(i.title)}
+        ${CC.tag(i.severity,k)} <span class="tag n">${CC.esc(i.area)}</span></summary>
+        <div class="body">
+          <p>${CC.esc(i.detail)}</p>
+          <dl class="dl">
+            <dt>Affected</dt><dd>${CC.esc(i.affected)}</dd>
+            <dt>Suggested action</dt><dd>${CC.esc(i.suggested_action)}</dd>
+            <dt>Source</dt><dd><a href="${CC.esc(i.source_url)}" rel="noopener" target="_blank">${CC.esc(i.source)} ↗</a></dd>
+          </dl>
+        </div></details>`;
+    }
+    function render(){
+      const xs=F.items.filter(i=>(!sev||i.severity===sev)&&(!area||i.area===area));
+      CC.set("#list", xs.map(card).join(""));
+      document.getElementById("cnt").textContent = xs.length + " of " + F.items.length + " items";
+    }
+    document.getElementById("f-sev").onchange=e=>{sev=e.target.value;render();};
+    asel.onchange=e=>{area=e.target.value;render();};
+    render();
+  } catch(e){ CC.fail("#list", e); }
+})();
+</script>
+</body>
+</html>
