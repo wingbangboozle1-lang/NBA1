@@ -1,6 +1,6 @@
 {
  "title": "Suggestions",
- "intro": "Improvements and process changes, each written as options with effort, risk and what it unlocks, so a reviewer can pick a path before anything is implemented. Nothing on this page has been implemented unless the row says so. The decision index below the table lists, in one place, every decision this site is waiting on.",
+ "intro": "Improvements to the site and to the decision-making process, written so a reviewer can pick a path rather than inherit one. Each suggestion states the problem, the options with their cost and what they unlock, and a recommendation. Nothing here has been implemented.",
  "items": [
   {
    "id": "SG1",
@@ -402,67 +402,308 @@
   },
   {
    "id": "SG17",
-   "title": "Add a single decision log so a choice, once made, cannot be re-litigated by accident",
-   "category": "Process",
-   "problem": "Nothing in the repository records which suggestions were actually chosen, by whom, or when. A reviewer can pick a path on this page, but the next session has no way to know a decision was taken, so the same question gets re-opened and sometimes re-answered differently. Two builds already exist for exactly this reason.",
+   "title": "Finish the game-log capture so props stop being a point estimate with no width",
+   "category": "Data and model",
+   "problem": "Ten players now have measured dispersion; 78 horizon prop rows still publish no probability (Q3, F40, F42). The projection and the anchor differ by at most 0.52 of a measured SD, so nothing is settable - and that verdict rests on three or four games a player.",
    "options": [
     {
-     "option": "A DECISIONS.md file: one row per decision (id, date, decision, evidence link, owner), updated when a suggestion is accepted or rejected",
-     "effort": "Low - one file and one paragraph in COORDINATION.md",
-     "risk": "Low",
-     "unlocks": "A durable trail; a new session can read what was decided instead of guessing"
+     "option": "Capture the full horizon: every player on every prop row, each morning of the slate, into data/proplogs/<date>/, and let scripts/prop_variance.py price all of them",
+     "effort": "Medium - one page read per player, 50 players a day; the parser and the gates already exist",
+     "risk": "Low - a failed read leaves the row blank, as it is now",
+     "unlocks": "A probability column on every prop row, a settable/unsettable split per slate, and a grading history from the next day onward"
     },
     {
-     "option": "Fold the decision state into suggestions.json as a status field and render it on this page",
-     "effort": "Low-medium - one field and one column",
-     "risk": "Low",
-     "unlocks": "The decision shows on the page the reviewer reads"
+     "option": "Go deep instead of wide: a season-long game log for one fixed cohort of 15-20 parlay-eligible players, refreshed weekly",
+     "effort": "High once, low after - the first pull is 40+ games a player",
+     "risk": "Medium - the cohort ages out of the slate",
+     "unlocks": "The one thing a Last-5 window cannot give: a measurable prop-prop correlation (F42) and a usable parlay rho instead of a declared one"
     },
     {
-     "option": "Keep using COORDINATION.md only",
+     "option": "Stop originating props until either of the above exists",
      "effort": "None",
-     "risk": "Medium - the task board is long and is organised by session, not by decision",
-     "unlocks": "Nothing new"
+     "risk": "Low - the page already publishes no funded prop",
+     "unlocks": "Nothing, and it removes the only place the desk learns what a prop needs"
     }
    ],
-   "recommendation": "Option 2, plus a one-line pointer at the top of COORDINATION.md. The page a reviewer actually reads is the right place for the state of a decision.",
-   "decision_needed": "Whether decisions are tracked on the site, in the repo, or both; and who has authority to mark one accepted.",
-   "source": "S1"
+   "recommendation": "Option 1 first, then option 2 for the parlay cohort. Option 1 is what turns 78 blank cells into numbers with sources; option 2 is the only route to a measured rho, and it is worth doing after the desk has a week of graded props to judge.",
+   "decision_needed": "Reviewer: pick 1, 2 or 1+2 in that order. Nothing on the site changes until the capture runs, because the script already reads whatever is in data/proplogs/.",
+   "source": "S20"
   },
   {
    "id": "SG18",
-   "title": "Discover missing information systematically instead of discovering it by accident",
-   "category": "Process",
-   "problem": "Every gap closed so far was found by someone noticing it, not by a method that looks for gaps. The repository has 37 flags and 18 open questions, and nothing that says which ones are cheap to close, which are expensive, or which are blocking a decision. Missing information is therefore discovered at the speed of luck.",
+   "title": "Replace the flat 0.55 production-transfer rule with per-stat minutes elasticities",
+   "category": "Model",
+   "problem": "scripts/injury_impact.py and originate_horizon.py move a line by a declared constant (production_transfer = 0.55) for any absent player, whatever the stat. Measured on 40 official box scores, points move at about 1.29x their minutes share and assists at 0.49x - one flat number is wrong in both directions (A15).",
    "options": [
     {
-     "option": "A gap-closure triage: for every open question and flag, record cost to close (minutes/hours), what it blocks, and whether an official source exists at all. Sort by (blocks a decision) / (cost).",
-     "effort": "Low - a one-off pass over the existing 18 questions and 37 flags",
-     "risk": "Low",
-     "unlocks": "A ranked list of what to find next; the top item is almost certainly the injury editions for 11/15-11/17"
+     "option": "Fit per-stat betas (points, rebounds, assists, PRA) on the season-long logs once SG17 option 2 exists, and let the injury module use the stat-specific figure",
+     "effort": "Medium - the regression is 20 lines of the existing script",
+     "risk": "Low - the declared constant stays as the fallback where a beta is not yet fitted",
+     "unlocks": "An injury adjustment with a measured coefficient instead of an asserted one, which is what gate G7 needs to stop being un-runnable"
     },
     {
-     "option": "A source-reachability probe run on a schedule: for every official URL the site relies on, record whether this environment can read it, when it was last read, and what it returned",
-     "effort": "Medium - scripts/probe_official.py already exists and records reachability; it needs to be surfaced per source",
-     "risk": "Low",
-     "unlocks": "Turns 'the fetch tool returned AccessDenied' into a dated fact per source"
-    },
-    {
-     "option": "A coverage table for every official table the model depends on: how many rows are published, how many were captured, and which players or teams are missing",
-     "effort": "Medium",
-     "risk": "Low",
-     "unlocks": "Makes the 50-of-465 player-minutes gap and similar ones visible rather than buried in a flag"
-    },
-    {
-     "option": "Ask the reviewer directly what a decision would need",
+     "option": "Keep 0.55 and publish this measurement beside it as a caveat",
      "effort": "None",
-     "risk": "Low",
-     "unlocks": "The one gap no scrape can find"
+     "risk": "Medium - the number keeps moving lines while being known to be flat",
+     "unlocks": "Nothing"
+    },
+    {
+     "option": "Re-fit now on the 40 captured rows",
+     "effort": "Low",
+     "risk": "High - n=40 from 10 players over one week, and the page itself says so (F44); a line moved on it is moved on noise",
+     "unlocks": "A demonstration, not a decision"
     }
    ],
-   "recommendation": "Options 1 and 3 first, because both are cheap and both turn a known unknown into a ranked, dated item. Option 2 makes the refresh honest over time. Option 4 should run alongside every time, since a reviewer's real question is the one input the data cannot supply.",
-   "decision_needed": "Whether an explicit triage pass is worth a session, and which of the three mechanisms to add first.",
-   "source": "S1"
+   "recommendation": "Option 1, sequenced behind SG17 option 2. Do not re-fit on this week's sample to move a live line.",
+   "decision_needed": "Reviewer: approve the per-stat direction now (so the module's declared assumption is on the record as unmeasured) and schedule the fit for when the sample exists.",
+   "source": "S7"
+  },
+  {
+   "id": "SG19",
+   "title": "State every block as a named missing input (the decision index)",
+   "category": "Decision support",
+   "problem": "The site carries 19 open questions, 52 flags and 18 earlier suggestions, and a reader cannot tell which decision is blocked by which missing fact. The result is that effort goes to whatever is most visible (a page redesign) instead of whatever is actually blocking (a source that does not exist).",
+   "options": [
+    {
+     "option": "Add a Decision Index page: one row per decision the project needs, with the missing input, the official source that would supply it, whether that source is reachable today, and the cheapest test that would close it",
+     "effort": "Low - one page, one data file, static",
+     "risk": "Low - additive; nothing existing changes",
+     "unlocks": "Makes the whole backlog reviewable in one screen; turns 'we should improve X' into 'X is blocked on Y, which arrives on Z'"
+    },
+    {
+     "option": "Leave the questions, flags and suggestions as three separate lists and keep reading across them",
+     "effort": "None",
+     "risk": "High - the same items are re-litigated every session, which is exactly what the board shows happened five times",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Take option 1. It is this page's companion page (Decision Register) and it costs nothing that is not already written down.",
+   "decision_needed": "Confirm the index becomes the single place a reviewer looks before authorising any build work.",
+   "must_be_true_first": "Nothing - it is a presentation of facts that are already verified.",
+   "smallest_test": "A reader can answer 'what is blocking Q1' in under 30 seconds from one screen.",
+   "if_wrong": "It goes stale. Mitigation: it reads the questions and flags files at build time rather than being hand-written.",
+   "source": "S_GAMES14",
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "id": "SG20",
+   "title": "Make the single-bet / parlay / prop-combo comparison explicit and costed",
+   "category": "Model",
+   "problem": "The brief asks for single bets, parlays and player-prop combinations to be judged side by side. Today the strategies page ranks ten cells but never states the arithmetic that makes a parlay a worse bet than its legs unless the legs are genuinely correlated - and the measured correlations (pooled pairwise rho 0.82 on points) suggest same-game legs are MORE correlated than independent, not less.",
+   "options": [
+    {
+     "option": "Show, for each product type, the break-even probability at a stated price and the measured or model-derived correlation penalty - with no price used, express it as 'legs needed to reach the same variance'",
+     "effort": "Medium - one page section, arithmetic on existing data",
+     "risk": "Medium - the temptation to soften the result; the correlation finding is unflattering to parlays",
+     "unlocks": "A defensible answer to 'should I bet a parlay', which today the site implies but never states"
+    },
+    {
+     "option": "Keep the leaderboard as the only comparison and let the reader infer it",
+     "effort": "None",
+     "risk": "The inference the reader makes will be wrong, because parlays look attractive when stake, not variance, is held constant",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Take option 1 with the unattractive result intact. A leaderboard that hides why its worst category is worst is not a leaderboard.",
+   "decision_needed": "Confirm that the parlay verdict may be published as negative, given the measured rho.",
+   "must_be_true_first": "The measured same-game rho (data/derived/prop_variance.json) must be cited, not the model-derived one.",
+   "smallest_test": "Reproduce the published break-even and correlation penalty from the committed JSON in under ten lines of arithmetic.",
+   "if_wrong": "The rho is measured on 30 rows from 10 players, so it is uncertain; the page must print its interval, not a point.",
+   "source": "S_PV",
+   "source_url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+  },
+  {
+   "id": "SG21",
+   "title": "Replace the flat 0.55 production-transfer rule with the measured elasticities",
+   "category": "Model",
+   "problem": "The injury module converts a lost minute into lost production with a single declared constant of 0.55 for every stat. This session's measured elasticity from official game logs is 1.288 for points (+/- 0.296), 0.626 for rebounds, 0.485 for assists and 0.934 for PRA. The constant is materially wrong for points in particular: it halves the effect of a lost rotation minute on scoring.",
+   "options": [
+    {
+     "option": "Adopt per-stat elasticities with their standard errors, and re-derive every injury-adjusted line",
+     "effort": "Medium - one module change, then a full rebuild of lines and picks",
+     "risk": "HIGH - this moves published lines. It is a model change, not a data refresh, and must be a separately recorded decision",
+     "unlocks": "Sizes injuries honestly; makes the availability gate meaningful"
+    },
+    {
+     "option": "Publish both the current constant and the measured elasticities side by side and change nothing yet",
+     "effort": "Low",
+     "risk": "Low - no line moves",
+     "unlocks": "The decision, without taking it"
+    }
+   ],
+   "recommendation": "Take option 2 now and option 1 only after the minutes coverage problem (SG3) is fixed. Changing the transfer rule while only 50 of 465 players have measured minutes would scale a wrong input more precisely.",
+   "decision_needed": "Explicit sign-off to move published lines under option 1, and the window in which the old and new lines coexist.",
+   "must_be_true_first": "Option 1 requires measured minutes for the players it will move. That is not true today.",
+   "smallest_test": "Recompute the 11/14 lines under both rules and publish the delta without replacing the published line.",
+   "if_wrong": "The elasticities come from 30-40 game rows across 10 players; they are measured, not established.",
+   "source": "S_PV",
+   "source_url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+  },
+  {
+   "id": "SG22",
+   "title": "Capture the newest official injury edition on every build and stamp it in the header",
+   "category": "Operations",
+   "problem": "The published injury data was built from the 11/13 07:30 PM ET edition while the official index already carried the 11/14 01:30 PM ET edition. Four of the five teams that had not filed overnight had filed by the afternoon. A reader cannot see the edition timestamp without opening a footnote.",
+   "options": [
+    {
+     "option": "Add an edition-resolver step: read the index, take the newest published edition, capture it, and print the stamp in every page header that uses it",
+     "effort": "Medium - one capture step plus a header field",
+     "risk": "Low - additive; older editions are kept",
+     "unlocks": "Closes the whole class of F47, and makes 'as of' verifiable on the page itself"
+    },
+    {
+     "option": "Keep the manual capture and add a visible 'edition behind: N hours' badge",
+     "effort": "Low",
+     "risk": "Low, but the staleness stays",
+     "unlocks": "Honesty without the fix"
+    }
+   ],
+   "recommendation": "Take option 1. The index is stable and the naming pattern is documented; the resolver is a loop over the published list.",
+   "decision_needed": "Confirm the build may make a network read of the official index at build time, or that a scheduled job must supply the file instead.",
+   "must_be_true_first": "The build must not silently publish a partial edition; a failed read must keep the previous edition and say so.",
+   "smallest_test": "Two consecutive builds, six hours apart, print different edition stamps that both match the index.",
+   "if_wrong": "A build-time network read makes the site's reproducibility depend on the network. Mitigation: the captured PDF and its hash are committed, exactly as the earlier sessions did.",
+   "source": "S_IR_0130",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf"
+  },
+  {
+   "id": "SG23",
+   "title": "Close the 23-game hole in the official game log, then rebuild every season figure",
+   "category": "Data",
+   "problem": "The official game log is exactly 23 games short of the official standings - 320 team-games against 366 - and it is short uniformly: 14 teams by 1, 16 by 2, none by 0 and none by 3 or more. The two missing dates (2026-10-24 and 2026-11-02) print no result rows on the official page, so the fixtures cannot currently be named from an official source.",
+   "options": [
+    {
+     "option": "Find an official route to those two dates' results (the schedule page's own result cards, or a per-game page) and capture them",
+     "effort": "Medium - a capture path, not a model change",
+     "risk": "Low if the values are read from an official page; HIGH if they are reconstructed from the standings residual, which the brief forbids",
+     "unlocks": "A calendar-complete rest layer and a full-season record; closes F49 and F52"
+    },
+    {
+     "option": "Leave the gap and keep labelling rest as a lower bound",
+     "effort": "None",
+     "risk": "Every season figure stays 23 games short, and a back-to-back flag near either date can be wrong",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Take option 1, and only by reading an official page. The standings residual determines the results arithmetically, and using it would be inference, so it is explicitly excluded.",
+   "decision_needed": "Confirm that a result read from a second official page (not the result card) is acceptable evidence, or that the gap stays open.",
+   "must_be_true_first": "An official page that actually prints the score must be found first. This session could not reach one.",
+   "smallest_test": "23 captured games whose scores reproduce the standings' 23 missing wins and 23 missing losses exactly.",
+   "if_wrong": "A wrong score propagates into every rating. Mitigation: each captured game must reconcile both teams' W/L and its own point totals.",
+   "source": "S_STAND",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "id": "SG24",
+   "title": "Publish a public scoreboard for the strategy leaderboard: units, rank movement and a pre-registered window",
+   "category": "Trust",
+   "problem": "The brief asks for a leaderboard competition with rewards for top-performing strategies. Today the leaderboard is a table with 0 funded strategies and no notion of a competition: no rank movement, no window, no reward that a reader can check, and no statement of what a strategy must do to win.",
+   "options": [
+    {
+     "option": "Define the competition explicitly: the window, the metric (units at a stated price convention), the reward tiers, and the pre-registered rule for promotion - then publish rank movement game by game",
+     "effort": "Medium",
+     "risk": "Medium - a public scoreboard creates pressure to promote a lucky strategy; the gate must be automated and unoverrideable",
+     "unlocks": "Makes 'selectively skill based' measurable rather than aspirational"
+    },
+    {
+     "option": "Keep the static table",
+     "effort": "None",
+     "risk": "The leaderboard stays decorative",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Take option 1 only after the price problem (SG2/Q1) has a resolution, because 'units' with no market price is a model-vs-model score and must be labelled as one in every rank cell.",
+   "decision_needed": "Confirm the metric and the promotion rule in writing before the first ranking is published.",
+   "must_be_true_first": "A pre-registered rule that cannot be edited after seeing results. Without that, a scoreboard measures the editor, not the strategies.",
+   "smallest_test": "Re-rank the ten existing strategies under the declared rule and check that no strategy moves tier.",
+   "if_wrong": "The reward tiers will be read as a promise of profit. Every tier label must say 'model units, no market price'.",
+   "source": "S_GAMES14",
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "id": "SG25",
+   "title": "Add a staleness budget per page and fail the build when it is exceeded",
+   "category": "Operations",
+   "problem": "Three separate flags on this site (F47, plus the earlier F29 and X01-F1 classes) have the same shape: a page keeps publishing yesterday's official data while the official source has moved on. Nothing in the build fails when a page is stale, so staleness is discovered by a human reading an official page by hand - which is exactly what happened again today.",
+   "options": [
+    {
+     "option": "Declare, per page, the maximum age of each official input in hours, and fail the build when an input exceeds it",
+     "effort": "Low - a table of limits plus one check",
+     "risk": "Low, with one caveat: a build that fails on staleness cannot publish anything, so the check must warn loudly first and hard-fail only after a stated grace period",
+     "unlocks": "Turns staleness from a discovery into a build error; closes the whole class"
+    },
+    {
+     "option": "Keep the manual read-back",
+     "effort": "None",
+     "risk": "The same class recurs",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Take option 1 with a two-stage gate: warn at the limit, fail at twice the limit.",
+   "decision_needed": "Choose the limits. Proposed: injury data 6 hours, slate data 12 hours, team ratings 24 hours, season game log 24 hours.",
+   "must_be_true_first": "Every page must name the input files it reads, or the check cannot compute an age.",
+   "smallest_test": "Freeze an input at an old timestamp and confirm the build warns, then fails, at the declared limits.",
+   "if_wrong": "A legitimate slow source (the injury index overnight) would fail a build. Mitigation: the limit is per input, and the overnight window is declared rather than discovered.",
+   "source": "S_IR_0130",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/"
+  },
+  {
+   "id": "SG26",
+   "title": "Settle every published pick automatically and publish the running hit rate with its interval",
+   "category": "Decision support",
+   "problem": "The 11/13 slate was settled by hand into a ledger. The 11/14 slate will have to be settled the same way tomorrow, and each hand settlement is a place where a result can be entered wrongly. At the same time the published hit rate carries no interval, so a 3-4 day is read as a verdict when it is noise.",
+   "options": [
+    {
+     "option": "A settlement step that reads each pick's game id, matches it against the official final, grades it under the declared convention, and refuses any row that is not FINAL on the official page",
+     "effort": "Medium",
+     "risk": "Low - the refusal rule is the safety property; it must refuse rather than assume",
+     "unlocks": "A daily, auditable record; makes the sample gate reachable"
+    },
+    {
+     "option": "Continue hand settlement",
+     "effort": "None",
+     "risk": "One transcription error silently changes a strategy's rank",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Take option 1, and copy the existing refuse-if-not-FINAL rule from integration/settle.py rather than rewriting it.",
+   "decision_needed": "Confirm the price convention used for grading, since no market price exists (the site uses -110 as a stated convention, not a quote).",
+   "must_be_true_first": "Every pick must carry its official game id. On this site they do.",
+   "smallest_test": "Re-settle the 11/13 slate and reproduce the hand ledger's 3-4 / -1.40 exactly.",
+   "if_wrong": "Grades a pick against the wrong game. Mitigation: match on game id, never on team names or dates.",
+   "source": "S_GAMES13",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
   }
- ]
+ ],
+ "review_protocol": {
+  "title": "How to review a suggestion and choose a path",
+  "why": "A list of ideas is not a decision. This section makes every option reviewable on the same four questions, and it defines the gate a change must pass before anyone builds it.",
+  "four_questions": [
+   [
+    "What does it change, in one sentence?",
+    "If the sentence needs an 'and', it is two suggestions. Split it."
+   ],
+   [
+    "What must be true first?",
+    "The dependency. Most options here are blocked on a missing official input, not on effort. An option whose dependency is unmet is 'not ready', not 'low priority'."
+   ],
+   [
+    "What is the smallest test that would tell you it worked?",
+    "Not the full build - the cheapest measurement that moves the answer. Every row below names one."
+   ],
+   [
+    "What does it cost you if it is wrong?",
+    "Risk stated as the thing that breaks, not as a rating."
+   ]
+  ],
+  "acceptance_gate": [
+   "The change is additive: a new file or a new column. Nothing already published is overwritten, so the audit trail survives.",
+   "The change can be re-derived from an official source by someone who has not read the code. If it cannot, it is a model assumption and must be declared as one.",
+   "The change has a stated failure condition - a number that would prove it wrong - written down BEFORE it is run.",
+   "The change does not move a published line, pick or gate result without the owner saying so explicitly on this page first.",
+   "The change leaves the verification suite green: check_site.py, check_links.py, verify_all.py, render_check.mjs and the broken-link scan."
+  ],
+  "how_to_choose": "Read the three sections in this order. Section A closes a missing official input - none of it is optional for a real edge and all of it is blocked on sources that do not exist in a usable form yet. Section B is about decision quality on the site itself and is cheap. Section C is model work that should not start until Section A has landed. Then, for any option you pick, fill the four questions and the gate above on the Flagged for Review page so the next session inherits a decision rather than an opinion."
+ },
+ "_session_note": "Items SG19-SG26 and the review protocol were added by session arena/e06aed97-nba1 (COORDINATION section 30). SG1-SG18 are unchanged. Every new item cites an official source and states what must be true before it can be built."
 }
