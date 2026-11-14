@@ -1,0 +1,292 @@
+{
+ "title": "NBA.com Teams Advanced — LIVE window refreshed through 2026-11-13",
+ "source_name": "NBA.com Stats, Teams Advanced (official), Date To filter 11/13/2026",
+ "captured_by_session": "arena/df3fed12-nba1",
+ "retrieved_utc": "2026-11-14T10:40Z",
+ "supersedes_for_live_pricing": "window_live inside data/live/team_windows.json (through 11/12, captured 00:40Z) — that file is kept unchanged, including window_fit, which must stay frozen for the backtest",
+ "why": "The 2026-11-13 finals are now included in the league's aggregates (the earlier capture ran while those games were unfinished, so it saw through 11/12 only). The live slate is re-priced from this window; the FIT window is untouched.",
+ "window_live": {
+  "label": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
+  "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season&DateTo=11%2F13%2F2026",
+  "as_of_note": "Read after all nine 11/13 games printed Final; every team's GP includes its 11/13 game.",
+  "row_count_check": "30 Rows printed by the page; 30 rows transcribed; every gp equals w + l.",
+  "teams": {
+   "LAL": {
+    "gp": 13,
+    "w": 11,
+    "l": 2,
+    "ortg": 121.6,
+    "drtg": 113.6,
+    "netrtg": 8.0,
+    "pace": 100.5
+   },
+   "SAS": {
+    "gp": 13,
+    "w": 11,
+    "l": 2,
+    "ortg": 119.6,
+    "drtg": 106.6,
+    "netrtg": 13.0,
+    "pace": 98.94
+   },
+   "BOS": {
+    "gp": 12,
+    "w": 10,
+    "l": 2,
+    "ortg": 117.4,
+    "drtg": 105.6,
+    "netrtg": 11.7,
+    "pace": 96.62
+   },
+   "HOU": {
+    "gp": 13,
+    "w": 10,
+    "l": 3,
+    "ortg": 119.3,
+    "drtg": 110.2,
+    "netrtg": 9.1,
+    "pace": 97.42
+   },
+   "PHI": {
+    "gp": 13,
+    "w": 10,
+    "l": 3,
+    "ortg": 111.0,
+    "drtg": 109.5,
+    "netrtg": 1.5,
+    "pace": 100.04
+   },
+   "MIN": {
+    "gp": 12,
+    "w": 9,
+    "l": 3,
+    "ortg": 117.2,
+    "drtg": 103.8,
+    "netrtg": 13.4,
+    "pace": 101.08
+   },
+   "POR": {
+    "gp": 12,
+    "w": 9,
+    "l": 3,
+    "ortg": 118.8,
+    "drtg": 111.1,
+    "netrtg": 7.7,
+    "pace": 100.67
+   },
+   "DET": {
+    "gp": 11,
+    "w": 8,
+    "l": 3,
+    "ortg": 114.1,
+    "drtg": 106.9,
+    "netrtg": 7.2,
+    "pace": 99.17
+   },
+   "GSW": {
+    "gp": 13,
+    "w": 8,
+    "l": 5,
+    "ortg": 116.1,
+    "drtg": 112.0,
+    "netrtg": 4.1,
+    "pace": 99.66
+   },
+   "MEM": {
+    "gp": 12,
+    "w": 8,
+    "l": 4,
+    "ortg": 117.8,
+    "drtg": 110.0,
+    "netrtg": 7.8,
+    "pace": 100.87
+   },
+   "OKC": {
+    "gp": 13,
+    "w": 8,
+    "l": 5,
+    "ortg": 112.7,
+    "drtg": 109.0,
+    "netrtg": 3.7,
+    "pace": 98.58
+   },
+   "ATL": {
+    "gp": 13,
+    "w": 7,
+    "l": 6,
+    "ortg": 113.3,
+    "drtg": 111.9,
+    "netrtg": 1.4,
+    "pace": 103.55
+   },
+   "DAL": {
+    "gp": 12,
+    "w": 7,
+    "l": 5,
+    "ortg": 112.5,
+    "drtg": 111.7,
+    "netrtg": 0.8,
+    "pace": 100.5
+   },
+   "CLE": {
+    "gp": 13,
+    "w": 6,
+    "l": 7,
+    "ortg": 116.1,
+    "drtg": 115.2,
+    "netrtg": 0.9,
+    "pace": 99.7
+   },
+   "DEN": {
+    "gp": 10,
+    "w": 6,
+    "l": 4,
+    "ortg": 115.9,
+    "drtg": 115.1,
+    "netrtg": 0.7,
+    "pace": 97.58
+   },
+   "MIA": {
+    "gp": 12,
+    "w": 6,
+    "l": 6,
+    "ortg": 113.2,
+    "drtg": 116.4,
+    "netrtg": -3.2,
+    "pace": 102.44
+   },
+   "NYK": {
+    "gp": 12,
+    "w": 6,
+    "l": 6,
+    "ortg": 114.5,
+    "drtg": 108.6,
+    "netrtg": 5.9,
+    "pace": 95.63
+   },
+   "IND": {
+    "gp": 13,
+    "w": 5,
+    "l": 8,
+    "ortg": 110.1,
+    "drtg": 111.7,
+    "netrtg": -1.5,
+    "pace": 101.15
+   },
+   "ORL": {
+    "gp": 12,
+    "w": 5,
+    "l": 7,
+    "ortg": 109.7,
+    "drtg": 113.4,
+    "netrtg": -3.7,
+    "pace": 98.23
+   },
+   "PHX": {
+    "gp": 11,
+    "w": 5,
+    "l": 6,
+    "ortg": 113.8,
+    "drtg": 117.6,
+    "netrtg": -3.8,
+    "pace": 98.45
+   },
+   "TOR": {
+    "gp": 12,
+    "w": 5,
+    "l": 7,
+    "ortg": 114.5,
+    "drtg": 112.8,
+    "netrtg": 1.7,
+    "pace": 99.88
+   },
+   "CHA": {
+    "gp": 12,
+    "w": 4,
+    "l": 8,
+    "ortg": 101.8,
+    "drtg": 113.0,
+    "netrtg": -11.2,
+    "pace": 96.92
+   },
+   "NOP": {
+    "gp": 13,
+    "w": 4,
+    "l": 9,
+    "ortg": 111.4,
+    "drtg": 120.2,
+    "netrtg": -8.8,
+    "pace": 102.08
+   },
+   "WAS": {
+    "gp": 13,
+    "w": 4,
+    "l": 9,
+    "ortg": 108.7,
+    "drtg": 114.3,
+    "netrtg": -5.5,
+    "pace": 99.63
+   },
+   "BKN": {
+    "gp": 11,
+    "w": 3,
+    "l": 8,
+    "ortg": 109.3,
+    "drtg": 114.4,
+    "netrtg": -5.2,
+    "pace": 99.83
+   },
+   "LAC": {
+    "gp": 11,
+    "w": 3,
+    "l": 8,
+    "ortg": 110.7,
+    "drtg": 115.8,
+    "netrtg": -5.1,
+    "pace": 100.55
+   },
+   "CHI": {
+    "gp": 11,
+    "w": 2,
+    "l": 9,
+    "ortg": 109.0,
+    "drtg": 122.0,
+    "netrtg": -12.9,
+    "pace": 103.83
+   },
+   "MIL": {
+    "gp": 13,
+    "w": 1,
+    "l": 12,
+    "ortg": 105.7,
+    "drtg": 120.0,
+    "netrtg": -14.2,
+    "pace": 100.31
+   },
+   "SAC": {
+    "gp": 12,
+    "w": 1,
+    "l": 11,
+    "ortg": 107.3,
+    "drtg": 119.5,
+    "netrtg": -12.2,
+    "pace": 101.0
+   },
+   "UTA": {
+    "gp": 13,
+    "w": 1,
+    "l": 12,
+    "ortg": 105.0,
+    "drtg": 116.4,
+    "netrtg": -11.3,
+    "pace": 100.5
+   }
+  }
+ },
+ "integrity_checks_run": [
+  "30 rows, one per NBA team, no duplicate abbreviations.",
+  "gp == w + l for all 30 teams.",
+  "W-L cross-checked against the records printed on the NBA.com schedule cards for the same clubs on 2026-11-14..17 read 2026-11-14 ~09:50Z: 30 of 30 agree, 0 disagree.",
+  "Compared with the previous window_live (through 11/12): only the 18 teams that played on 11/13 changed (each +1 GP and the result); the other 12 rows are identical."
+ ]
+}
