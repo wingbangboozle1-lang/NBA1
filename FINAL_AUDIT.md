@@ -1,7 +1,7 @@
 # NBA1 — independent audit and handoff
 
 **Audit date:** 2026-11-14 UTC  
-**Tree audited:** `main` at `76e9632` (current merged tree; this audit adds no NBA data).  
+**Tree audited:** `main` at `76e9632` (current merged tree; this audit adds no NBA data).
 **Scope:** Re-ran repository checks and reviewed the static refresh path on `76e9632`. I did not edit or re-verify the unmerged changes in PR [#31](https://github.com/wingbangboozle1-lang/NBA1/pull/31) or PR [#33](https://github.com/wingbangboozle1-lang/NBA1/pull/33).
 
 ## Executive summary
