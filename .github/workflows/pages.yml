@@ -13,7 +13,12 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  # The previous global group (`pages`) was shared by every run. A main
+  # deployment was cancelled while PR validation ran, although causation was
+  # not established. Isolate PRs by number and serialize production runs by ref.
+  # (Taken over verbatim from PR #65 / session arena/2dc33eb3-nba1 with credit —
+  # their claim was >60 min without commits when carried here; see §27.4.)
+  group: pages-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
