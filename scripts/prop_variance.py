@@ -486,6 +486,78 @@ def main():
                      "reading": ("a 10%% cut in minutes predicts a %.1f%% cut in %s"
                                  % (abs(beta or 0) * 10, stat.upper()))})
 
+
+    # ------------------------------------- today's designations, sized and classed
+    # The desk question behind an injury report is never "who is out" but "does it move
+    # a line". Under this repo's canonical rule only a verifiable NEW_ABSENCE moves one,
+    # because a player who has already missed most of the sample is inside the team's own
+    # season ratings. Every input here is official: the designation from the report, the
+    # player's games played from the captured season table, and his team's record from the
+    # line printed for the same game on this site.
+    def _abbr_lookup(doc_rows):
+        m = {}
+        for g in doc_rows:
+            mu = "%s@%s" % (g.get("away"), g.get("home"))
+            m[mu] = (g.get("away"), g.get("home"), g.get("away_rec"), g.get("home_rec"))
+        return m
+
+    game_codes = _abbr_lookup([g for g in lines if g.get("date") == "2026-11-14"])
+    season_by_lastfirst = {}
+    for pl, row in season.items():
+        nm = row["player"]
+        parts = nm.split(" ")
+        season_by_lastfirst[("%s, %s" % (parts[-1], " ".join(parts[:-1])))] = row
+    evidence_idx = {r["player"]: r for r in load("data", "player_absence_evidence.json")["rows"]}
+
+    teams_in_order = {}
+    for r in new_inj["rows"]:
+        mu = r.get("matchup")
+        tm = r.get("team_printed")
+        if mu and tm and tm not in teams_in_order.setdefault(mu, []):
+            teams_in_order[mu].append(tm)
+    readout = []
+    for r in new_inj["rows"]:
+        if not r.get("player"):
+            continue
+        mu = r["matchup"]
+        codes = game_codes.get(mu)
+        uniq = teams_in_order.get(mu, [])
+        is_away = bool(codes) and r.get("team_printed") == uniq[0] if uniq else False
+        abbr = (codes[0] if is_away else codes[1]) if codes else None
+        rec = (codes[2] if is_away else codes[3]) if codes else None
+        try:
+            team_games = sum(int(x) for x in str(rec).split("-"))
+        except Exception:
+            team_games = None
+        prow = season_by_lastfirst.get(r["player"])
+        ev = evidence_idx.get(r["player"])
+        gp = (prow or {}).get("gp")
+        missed = None if (gp is None or team_games is None) else team_games - gp
+        play_prob = {"Out": 0.0, "Doubtful": 0.25, "Questionable": 0.5,
+                     "Probable": 0.8, "Available": 1.0}.get(r["status"])
+        cls = ev["class"] if ev else ("UNKNOWN - no in-repo evidence of his last played game"
+                                     if prow else "UNMEASURABLE - the player is outside every captured player table")
+        moves = "no"
+        why = ("absence class is not a verified NEW_ABSENCE, so the canonical rule leaves the line alone"
+               if cls != "NEW_ABSENCE" else "verified NEW_ABSENCE - the line would move")
+        if prow and missed is not None and missed >= max(1, int(0.5 * (team_games or 1))):
+            why += ("; he has already missed %d of his team's %d games, so his absence is inside the "
+                    "season numbers the line was built from (re-cutting for it would double-count)"
+                    % (missed, team_games))
+        readout.append({"matchup": mu, "team": abbr or r.get("team_printed"), "player": r["player"],
+                        "status": r["status"], "reason": r.get("reason"),
+                        "team_record_printed": rec, "team_games": team_games,
+                        "season_gp": gp, "games_already_missed": missed,
+                        "season_min": (prow or {}).get("min"), "season_pts": (prow or {}).get("pts"),
+                        "play_probability": play_prob, "absence_class": cls,
+                        "line_moves": moves, "why": why,
+                        "injured_source": new_inj["source_url"],
+                        "player_source": (prow or {}).get("source_url") or
+                                         "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=MIN",
+                        "evidence_url": (ev or {}).get("evidence_url")})
+    n_moves = sum(1 for x in readout if x["line_moves"] == "yes")
+    n_unmeas = sum(1 for x in readout if x["season_gp"] is None)
+
     # ------------------------------------------------------------- headline block
     priced = [s for s in signals if s["status"] == "MEASURED"]
     settable = [s for s in priced if s["tier"] == "settable"]
@@ -501,6 +573,8 @@ def main():
         "median_abs_gap_in_sd": r3(mean(sorted(abs(s["gap_in_sd"]) for s in priced))) if priced else None,
         "best_pair_games_for_rho": max([c["games_shared"] for c in correlations] or [0]),
         "injury_rows_changed_since_the_lines_edition": len(changed),
+        "designations_today": len(readout), "lines_that_move_today": n_moves,
+        "designations_unmeasurable": n_unmeas,
         "cross_check_rows_agreeing": sum(c.get("rows_compared_and_agreeing", 0) for c in cross),
         "cross_check_disagreements": sum(len(c.get("disagreements", [])) for c in cross),
     }
@@ -529,6 +603,7 @@ def main():
                                  "now have one; the other 78 prop rows are unchanged and still publish no probability.",
         },
         "headline": headline,
+        "availability_readout": readout,
         "minutes_to_production": minutes_link,
         "minutes_elasticity": elas,
         "cohort_dispersion": cohort,
@@ -554,6 +629,7 @@ def main():
     print("elasticity beta         : " + ", ".join("%s %s (se %s, t %s)" % (e["stat"], e["beta_minutes_to_production"], e["standard_error"], e["t_statistic"]) for e in elas))
     print("minutes->production     : " + ", ".join("%s rho=%s (n=%s)" % (m["stat"], m["rho"], m["n_rows"]) for m in minutes_link))
     print("props clearing 1 SD     : %d of %d priced" % (len(settable), len(priced)))
+    print("today\'s designations   : %d rows, %d would move a line, %d unmeasurable from repo data" % (len(readout), n_moves, n_unmeas))
     print("captured players      : %d (games %d, complete rows %d)" % (
         len(per_player), sum(len(p["games"]) for p in per_player),
         sum(p["n_games_full"] for p in per_player)))

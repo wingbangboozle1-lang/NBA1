@@ -677,6 +677,36 @@ def build_prop_variance():
                         "them with no further work. The 36 remaining horizon prop rows fail for the same reason "
                         "plus volume, not method."))
 
+
+    b.append(h2("11. Today&#39;s designations, sized against the rule that moves a line",
+                "The desk question is not who is out, it is whether the originated line should change. Under this "
+                "repo&#39;s canonical rule only a verifiable NEW_ABSENCE moves one, because a player already missing "
+                "for most of the sample is inside the team&#39;s own season numbers."))
+    rows = []
+    for x in v["availability_readout"]:
+        rows.append([esc(x["matchup"]), esc(x["team"]), esc(x["player"]), esc(x["status"]),
+                     esc(x["reason"]), esc(x["team_record_printed"]), num(x["team_games"], 0),
+                     num(x["season_gp"], 0), num(x["games_already_missed"], 0),
+                     num(x["season_min"]), num(x["season_pts"]),
+                     num(x["play_probability"], 2), esc(x["absence_class"]),
+                     '<b>%s</b>' % esc(x["line_moves"]),
+                     srclink_url(x["injured_source"], "official report")])
+    b.append(table(["Game", "Team", "Player", "Status", "Reason", "Team record", "Team games", "Player GP",
+                    "Games already missed", "Season min", "Season pts", "P(play)", "Absence class",
+                    "Line moves", "Source"], rows,
+                    note="%d designations printed for the 2026-11-14 games. <b>%d of them move a line, and %d "
+                         "cannot be sized at all</b> because the player sits outside every captured player table - "
+                         "the official Per Game table in this repo covers 50 names, and a two-way or G-League "
+                         "assignment is not in it. The one fully measurable case is Anthony Edwards (Out, right knee "
+                         "arthroscopy): he has played 4 of Minnesota&#39;s 12 games, so his absence is already inside "
+                         "the season ratings the CHI@MIN line was built from, and re-cutting the line for him would "
+                         "count the same absence twice. That is the whole reason this report does not move today&#39;s "
+                         "lines - it is not a claim that he is replaceable. Where a measured figure is wanted for a "
+                         "genuinely new absence, section 5&#39;s elasticity is the number to use: losing a full "
+                         "minutes share predicts about 1.29x his own scoring loss, not the flat 0.55 the injury "
+                         "module carries today."
+                         % (hl["designations_today"], hl["lines_that_move_today"],
+                            hl["designations_unmeasurable"])))
     b.append(banner("info", "Files behind this page",
                     "<ul>"
                     "<li><code>data/proplogs/2026-11-14/captures.json</code> - the row-for-row transcription, one "

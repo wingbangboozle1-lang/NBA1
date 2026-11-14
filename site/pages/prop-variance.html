@@ -62,7 +62,7 @@
   <main id="main">
     <div class="page-head">
       <h1>Prop variance and rotation</h1>
-      <p class="sub">Game-to-game dispersion measured from official NBA.com game logs for the 2026-11-14 slate cohort: the uncertainty behind every prop, the minutes-to-production elasticity, and the injury delta between editions. Read 2026-11-14T10:35Z.</p>
+      <p class="sub">Game-to-game dispersion measured from official NBA.com game logs for the 2026-11-14 slate cohort: the uncertainty behind every prop, the minutes-to-production elasticity, and the injury delta between editions. Read 2026-11-14T10:44Z.</p>
     </div>
     <div class="tiles">
 <div class="tile"><div class="tile-v">10</div><div class="tile-l">Players measured</div><div class="tile-s">of 14 prop rows published for 2026-11-14</div></div>
@@ -1466,6 +1466,471 @@
 </tr>
 </tbody></table></div>
 <p class="tnote">The blocker for the four 11/14 players is not the game-log page, it is the player id: no committed capture in this repo carries an NBA.com id for them, and this session does not guess one. The fix is one roster-page read per team, after which the same script prices them with no further work. The 36 remaining horizon prop rows fail for the same reason plus volume, not method.</p>
+<h2 class="sec">11. Today&#39;s designations, sized against the rule that moves a line</h2><p class="secsub">The desk question is not who is out, it is whether the originated line should change. Under this repo&#39;s canonical rule only a verifiable NEW_ABSENCE moves one, because a player already missing for most of the sample is inside the team&#39;s own season numbers.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Game</th>
+<th>Team</th>
+<th>Player</th>
+<th>Status</th>
+<th>Reason</th>
+<th>Team record</th>
+<th>Team games</th>
+<th>Player GP</th>
+<th>Games already missed</th>
+<th>Season min</th>
+<th>Season pts</th>
+<th>P(play)</th>
+<th>Absence class</th>
+<th>Line moves</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>DEN@NOP</td>
+<td>DEN</td>
+<td>Holmes II, DaRon</td>
+<td>Out</td>
+<td>G League - On Assignment</td>
+<td>6-4</td>
+<td>10</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DEN@NOP</td>
+<td>DEN</td>
+<td>Nembhard, Ryan</td>
+<td>Out</td>
+<td>G League - Two-Way</td>
+<td>6-4</td>
+<td>10</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DEN@NOP</td>
+<td>DEN</td>
+<td>Strawther, Julian</td>
+<td>Out</td>
+<td>Injury/Illness - Left Knee Sprain</td>
+<td>6-4</td>
+<td>10</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DEN@NOP</td>
+<td>DEN</td>
+<td>Whitmore, Cam</td>
+<td>Out</td>
+<td>G League - Two-Way</td>
+<td>6-4</td>
+<td>10</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DAL@CLE</td>
+<td>DAL</td>
+<td>Biberovic, Tarik</td>
+<td>Out</td>
+<td>Injury/Illness - Right Heel Bursitis</td>
+<td>7-5</td>
+<td>12</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DAL@CLE</td>
+<td>DAL</td>
+<td>Christie, Max</td>
+<td>Questionable</td>
+<td>Injury/Illness - Left Ankle Sprain</td>
+<td>7-5</td>
+<td>12</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.50</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DAL@CLE</td>
+<td>DAL</td>
+<td>de Larrea, Sergio</td>
+<td>Out</td>
+<td>Injury/Illness - Right Knee Sprain</td>
+<td>7-5</td>
+<td>12</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DAL@CLE</td>
+<td>DAL</td>
+<td>Johnson Jr., Morez</td>
+<td>Probable</td>
+<td>Injury/Illness - Left Shin / Tibia Contusion</td>
+<td>7-5</td>
+<td>12</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.80</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DAL@CLE</td>
+<td>DAL</td>
+<td>Lively II, Dereck</td>
+<td>Out</td>
+<td>Injury/Illness - Right Foot Surgery</td>
+<td>7-5</td>
+<td>12</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DAL@CLE</td>
+<td>DAL</td>
+<td>Martin, Caleb</td>
+<td>Available</td>
+<td>Injury/Illness - Right Thumb Splint</td>
+<td>7-5</td>
+<td>12</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>1.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>BKN@MEM</td>
+<td>BKN</td>
+<td>Bilodeau, Tyler</td>
+<td>Out</td>
+<td>G League - Two-Way</td>
+<td>3-8</td>
+<td>11</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>BKN@MEM</td>
+<td>BKN</td>
+<td>Brown Jr., Mikel</td>
+<td>Questionable</td>
+<td>Injury/Illness - Illness</td>
+<td>3-8</td>
+<td>11</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.50</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>BKN@MEM</td>
+<td>BKN</td>
+<td>Jefferson, Joshua</td>
+<td>Out</td>
+<td>G League - On Assignment</td>
+<td>3-8</td>
+<td>11</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>BKN@MEM</td>
+<td>BKN</td>
+<td>Nelson, Grant</td>
+<td>Out</td>
+<td>G League - Two-Way</td>
+<td>3-8</td>
+<td>11</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>BKN@MEM</td>
+<td>BKN</td>
+<td>Saraf, Ben</td>
+<td>Out</td>
+<td>G League - On Assignment</td>
+<td>3-8</td>
+<td>11</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>BKN@MEM</td>
+<td>BKN</td>
+<td>Traore, Nolan</td>
+<td>Probable</td>
+<td>Injury/Illness - Right Calf Tightness / Soreness</td>
+<td>3-8</td>
+<td>11</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.80</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>CHI@MIN</td>
+<td>MIN</td>
+<td>Beringer, Joan</td>
+<td>Available</td>
+<td>Injury/Illness - Face Mask</td>
+<td>9-3</td>
+<td>12</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>1.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>CHI@MIN</td>
+<td>MIN</td>
+<td>DiVincenzo, Donte</td>
+<td>Out</td>
+<td>Injury/Illness - Right Achilles Tendon Repair / Surgery</td>
+<td>9-3</td>
+<td>12</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>CHI@MIN</td>
+<td>MIN</td>
+<td>Edwards, Anthony</td>
+<td>Out</td>
+<td>Injury/Illness - Right Knee Arthroscopy</td>
+<td>9-3</td>
+<td>12</td>
+<td>4</td>
+<td>8</td>
+<td>33.7</td>
+<td>33.3</td>
+<td>0.00</td>
+<td>UNKNOWN - no in-repo evidence of his last played game</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DET@MIA</td>
+<td>DET</td>
+<td>Duren, Jalen</td>
+<td>Out</td>
+<td>Injury/Illness - Right Hamstring Strain</td>
+<td>8-3</td>
+<td>11</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DET@MIA</td>
+<td>DET</td>
+<td>Harkless, Elijah</td>
+<td>Questionable</td>
+<td>G League - Two-Way</td>
+<td>8-3</td>
+<td>11</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.50</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DET@MIA</td>
+<td>DET</td>
+<td>Joe, Isaiah</td>
+<td>Out</td>
+<td>Injury/Illness - Right Hip Contusion</td>
+<td>8-3</td>
+<td>11</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DET@MIA</td>
+<td>DET</td>
+<td>Jones, Isaac</td>
+<td>Questionable</td>
+<td>G League - Two-Way</td>
+<td>8-3</td>
+<td>11</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.50</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DET@MIA</td>
+<td>DET</td>
+<td>Lanier, Chaz</td>
+<td>Out</td>
+<td>G League - On Assignment</td>
+<td>8-3</td>
+<td>11</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DET@MIA</td>
+<td>DET</td>
+<td>Okorie, Ebuka</td>
+<td>Out</td>
+<td>G League - On Assignment</td>
+<td>8-3</td>
+<td>11</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>DET@MIA</td>
+<td>DET</td>
+<td>Onyenso, Ugonna</td>
+<td>Out</td>
+<td>G League - Two-Way</td>
+<td>8-3</td>
+<td>11</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>0.00</td>
+<td>UNMEASURABLE - the player is outside every captured player table</td>
+<td><b>no</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">26 designations printed for the 2026-11-14 games. <b>0 of them move a line, and 25 cannot be sized at all</b> because the player sits outside every captured player table - the official Per Game table in this repo covers 50 names, and a two-way or G-League assignment is not in it. The one fully measurable case is Anthony Edwards (Out, right knee arthroscopy): he has played 4 of Minnesota&#39;s 12 games, so his absence is already inside the season ratings the CHI@MIN line was built from, and re-cutting the line for him would count the same absence twice. That is the whole reason this report does not move today&#39;s lines - it is not a claim that he is replaceable. Where a measured figure is wanted for a genuinely new absence, section 5&#39;s elasticity is the number to use: losing a full minutes share predicts about 1.29x his own scoring loss, not the flat 0.55 the injury module carries today.</p>
 <div class="banner info"><div class="b-t">Files behind this page</div><div class="b-b"><ul><li><code>data/proplogs/2026-11-14/captures.json</code> - the row-for-row transcription, one source URL per player and per game.</li><li><code>data/proplogs/2026-11-14/injury_2026-11-14_04_30AM.json</code> - the newest official injury edition, 31 printed rows for the 11/14 slate.</li><li><code>data/derived/prop_variance.json</code> - everything rendered above, as data.</li><li><code>scripts/prop_variance.py</code> - the computation, with its declared modelling choices at the top of the file.</li></ul></div></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
