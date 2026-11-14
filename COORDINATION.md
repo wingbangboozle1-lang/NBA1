@@ -3423,3 +3423,31 @@ committed `data/official/gamelog.json` transcription). Every new flag row carrie
 - **Gates re-run on the merged tree:** verify_all VERIFY OK · verify_integration 0 errors /
   41 warnings · render_check **132 pages / 0 problems** · check_links + check_rendered PASS ·
   verification.html regeneration idempotent · broken-link scan 0.
+
+### 31.5 Delivery record (PR #92 and the Pages state, 2026-11-14 19:3x–19:5x UTC)
+
+- **PR:** [PR #92](https://github.com/wingbangboozle1-lang/NBA1/pull/92) — "Final integration
+  (arena/8c9e6135-nba1): merged-tree verification, QA fixes, flags F58-F68, measured P(OT)
+  reprice" — opened from `arena/8c9e6135-nba1` to `main` and **merged without waiting for
+  approval** at `0967cd6` (2026-11-14 19:35Z). The PR body carries the summary, the official
+  sources, and the flagged irregularities list in full.
+- **Verification carried in the PR:** all eleven CI gate steps green on the merged tree
+  (verify_all OK · verify_integration 0 errors/41 warnings · render_check 132 pages/0 problems ·
+  check_links + check_rendered PASS · verification.html idempotent vs the 19:31:21Z probe
+  record (1,541 URLs) · broken-link scan 0). Fresh official spot re-read via the web-fetch
+  channel: 11/13 finals rows NYK 104–106 IND and MIL 99–107 ORL match NBA.com exactly; the
+  official calendar's per-day game counts (5/9/8/5) match the 27-game horizon window.
+- **Pages deployment — incident and honest state:** the merge's `pages-build-deployment` run
+  ([43632962316](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43632962316),
+  head `0967cd6`) entered the queue at 19:35Z and was still queued after 12 minutes; every
+  deployment attempt for main since 18:51Z was **cancelled** by the next push to main
+  (today's multi-session merge storm — the churn already documented as F68/SG28), and a
+  cancelled mid-deploy attempt is what the Pages API reports as `status: errored`. The last
+  **successful** deployment is `e2dc63ca` (18:51Z), which is what
+  <https://wingbangboozle1-lang.github.io/NBA1/> serves now (verified by live fetch at 19:47Z:
+  it shows the 46-flag build, i.e. main as of #85/#89, structurally healthy, no broken page).
+  Retry policy per the brief: each subsequent push to main re-queues the newest deployment;
+  this board record is delivered as its own PR precisely to force that re-queue. The live-site
+  confirmation for `0967cd6`+ is recorded below once the run completes; nothing is claimed
+  deployed that was not fetched back from the live URL.
+
