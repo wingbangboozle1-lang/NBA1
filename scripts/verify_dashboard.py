@@ -2,11 +2,15 @@
 """verify_dashboard.py — audit the unified site (index.html + site/pages/**).
 
 Checks, and fails on the first problem found:
-  1. every table row on every generated page carries a source cell, and that cell
-     contains a link to an allowed official host (or an explicit "not published" mark);
+  1. every table row on every generated page has a source link in its last cell,
+     or explicitly marks the value as unavailable with non-empty explanatory text or
+     an HTTPS URL pointer on an allowed official host;
   2. every internal link and asset reference resolves to a file that exists;
   3. every external link is https and on an allowed official host;
   4. no unresolved merge markers and no empty page.
+
+This is a structural/provenance check. It does not fetch sources or verify that
+published values agree with the linked pages.
 
 Exit 0 = pass.
 """
@@ -56,13 +60,21 @@ class TableScan(HTMLParser):
             self._row = []
             self._row_is_header = self._in_head
         elif tag in ("td", "th") and self._row is not None:
-            self._cell = {"text": "", "links": [], "cls": d.get("class", ""), "na": False}
+            classes = (d.get("class", "") or "").split()
+            self._cell = {
+                "text": "",
+                "links": [],
+                "cls": d.get("class", ""),
+                "na": "na" in classes,
+                "na_reason": d.get("title", "").strip(),
+            }
         elif tag == "a" and self._cell is not None:
             href = d.get("href", "")
             self._cell["links"].append(href)
         elif tag == "span" and self._cell is not None:
             if "na" in (d.get("class", "") or "").split():
                 self._cell["na"] = True
+                self._cell["na_reason"] = d.get("title", "").strip() or self._cell["na_reason"]
 
     def handle_data(self, data):
         if self._cell is not None:
@@ -94,6 +106,10 @@ def is_official(url):
 def main():
     total_rows = 0
     sourced_rows = 0
+    explicit_no_source_rows = 0
+    no_source_url_pointer_rows = 0
+    unexplained_markers = 0
+    unmarked_missing_rows = 0
     for path in PAGES:
         rel = os.path.relpath(path, ROOT)
         text = open(path, encoding="utf-8").read()
@@ -127,7 +143,24 @@ def main():
             marked = last.get("na") or ("na" in (last.get("cls") or "").split())
             if off:
                 sourced_rows += 1
-            elif not marked:
+            elif marked:
+                reason = (last.get("na_reason") or "").strip()
+                pointer = urlparse(reason)
+                if pointer.scheme or pointer.netloc:
+                    if is_official(reason):
+                        no_source_url_pointer_rows += 1
+                    else:
+                        unexplained_markers += 1
+                        errors.append("%s: table row %d has an unapproved or insecure URL in its no-source marker: %r"
+                                      % (rel, i + 1, reason))
+                elif reason:
+                    explicit_no_source_rows += 1
+                else:
+                    unexplained_markers += 1
+                    errors.append("%s: table row %d marks its source as unavailable without an explanation"
+                                  % (rel, i + 1))
+            else:
+                unmarked_missing_rows += 1
                 errors.append("%s: table row %d has no official source link in its last cell: %r"
                               % (rel, i + 1, last["text"][:60]))
 
@@ -146,15 +179,22 @@ def main():
             if not os.path.exists(resolved):
                 errors.append("%s: broken internal link -> %s" % (rel, href))
 
-    print("pages checked        : %d" % len(PAGES))
-    print("table rows checked   : %d" % total_rows)
-    print("rows with an official source link : %d" % sourced_rows)
+    print("pages checked                         : %d" % len(PAGES))
+    print("table rows checked                    : %d" % total_rows)
+    print("rows with an allowed official source link       : %d / %d" % (sourced_rows, total_rows))
+    print("no-source marks with explanatory text           : %d / %d" % (explicit_no_source_rows, total_rows))
+    print("no-source marks with approved URL in title only : %d / %d" % (no_source_url_pointer_rows, total_rows))
+    print("unmarked rows without an official link           : %d" % unmarked_missing_rows)
+    print("no-source markers without a reason/pointer       : %d" % unexplained_markers)
     if errors:
         print("\nVERIFY FAILED")
         for e in errors:
             print(" -", e)
         sys.exit(1)
-    print("\nVERIFY OK - every table row is source-linked, every internal link resolves.")
+    print("\nVERIFY OK - every row has an allowed source link or an explicit no-source mark with an explanation or approved URL pointer; all internal links resolve.")
+    if no_source_url_pointer_rows:
+        print("NOTE - %d approved URLs appear only in no-source title attributes, not as clickable links; the row values remain blank/unverified." % no_source_url_pointer_rows)
+    print("NOTE - this checks provenance/link structure only; it does not fetch sources or compare their values to the published rows.")
 
 
 if __name__ == "__main__":
