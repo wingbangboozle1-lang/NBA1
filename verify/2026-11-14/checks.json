@@ -1,0 +1,1697 @@
+{
+ "generated_utc": "2026-11-14T09:55:44Z",
+ "build_b_sign_convention": {
+  "counts": {
+   "home_margin_consistent": 16,
+   "standard_consistent": 0,
+   "no_s1_pick": 11,
+   "s1_value_equals_stored_home_field": 16
+  },
+  "rows": [
+   {
+    "matchup": "DEN@NOP",
+    "ref_spread_home": -5.9,
+    "model_spread_home": -9.6,
+    "s1_side": "away",
+    "s1_model_value": -9.6,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "DAL@CLE",
+    "ref_spread_home": 3.2,
+    "model_spread_home": -2.3,
+    "s1_side": "away",
+    "s1_model_value": -2.3,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "BKN@MEM",
+    "ref_spread_home": 12.9,
+    "model_spread_home": 5.3,
+    "s1_side": "away",
+    "s1_model_value": 5.3,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "LAL@PHX",
+    "ref_spread_home": -9.7,
+    "model_spread_home": -6.7,
+    "s1_side": "home",
+    "s1_model_value": -6.7,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "SAS@UTA",
+    "ref_spread_home": -20.6,
+    "model_spread_home": -15.4,
+    "s1_side": "home",
+    "s1_model_value": -15.4,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "DAL@BOS",
+    "ref_spread_home": 12.8,
+    "model_spread_home": 17.6,
+    "s1_side": "home",
+    "s1_model_value": 17.6,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "HOU@WAS",
+    "ref_spread_home": -12.6,
+    "model_spread_home": -9.1,
+    "s1_side": "home",
+    "s1_model_value": -9.1,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "ATL@MIL",
+    "ref_spread_home": -14.9,
+    "model_spread_home": -10.8,
+    "s1_side": "home",
+    "s1_model_value": -10.8,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "OKC@SAC",
+    "ref_spread_home": -14.3,
+    "model_spread_home": -10.2,
+    "s1_side": "home",
+    "s1_model_value": -10.2,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "ORL@BOS",
+    "ref_spread_home": 18.3,
+    "model_spread_home": 9.9,
+    "s1_side": "away",
+    "s1_model_value": 9.9,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "CHI@CLE",
+    "ref_spread_home": 19.3,
+    "model_spread_home": 16.2,
+    "s1_side": "away",
+    "s1_model_value": 16.2,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "MEM@WAS",
+    "ref_spread_home": -9.4,
+    "model_spread_home": -12.5,
+    "s1_side": "away",
+    "s1_model_value": -12.5,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "PHI@BKN",
+    "ref_spread_home": -4.6,
+    "model_spread_home": 3.6,
+    "s1_side": "home",
+    "s1_model_value": 3.6,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "HOU@MIA",
+    "ref_spread_home": -11.8,
+    "model_spread_home": -2.2,
+    "s1_side": "home",
+    "s1_model_value": -2.2,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "GSW@NOP",
+    "ref_spread_home": -12.7,
+    "model_spread_home": -9.0,
+    "s1_side": "home",
+    "s1_model_value": -9.0,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   },
+   {
+    "matchup": "PHX@DEN",
+    "ref_spread_home": 6.5,
+    "model_spread_home": 12.4,
+    "s1_side": "home",
+    "s1_model_value": 12.4,
+    "consistent_with_home_margin": true,
+    "consistent_with_standard": false
+   }
+  ]
+ },
+ "build_b_horizon_match": {
+  "site_lines_rows": 27,
+  "matched_official": 27
+ },
+ "generated_by": "scripts/source_check.py",
+ "official_capture_utc": "2026-11-14",
+ "horizon": [
+  {
+   "game_id": "0022600231",
+   "date": "2026-11-14",
+   "matchup": "DEN@NOP",
+   "official_tip_et": "7:00 PM ET",
+   "official_source": "https://www.nba.com/game/den-vs-nop-0022600231",
+   "site_matchup": "DEN@NOP",
+   "site_tip_et": "7:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600232",
+   "date": "2026-11-14",
+   "matchup": "DAL@CLE",
+   "official_tip_et": "7:30 PM ET",
+   "official_source": "https://www.nba.com/game/dal-vs-cle-0022600232",
+   "site_matchup": "DAL@CLE",
+   "site_tip_et": "7:30 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600234",
+   "date": "2026-11-14",
+   "matchup": "BKN@MEM",
+   "official_tip_et": "8:00 PM ET",
+   "official_source": "https://www.nba.com/game/bkn-vs-mem-0022600234",
+   "site_matchup": "BKN@MEM",
+   "site_tip_et": "8:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600233",
+   "date": "2026-11-14",
+   "matchup": "DET@MIA",
+   "official_tip_et": "8:00 PM ET",
+   "official_source": "https://www.nba.com/game/det-vs-mia-0022600233",
+   "site_matchup": "DET@MIA",
+   "site_tip_et": "8:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600235",
+   "date": "2026-11-14",
+   "matchup": "CHI@MIN",
+   "official_tip_et": "8:00 PM ET",
+   "official_source": "https://www.nba.com/game/chi-vs-min-0022600235",
+   "site_matchup": "CHI@MIN",
+   "site_tip_et": "8:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600236",
+   "date": "2026-11-15",
+   "matchup": "IND@PHI",
+   "official_tip_et": "1:00 PM ET",
+   "official_source": "https://www.nba.com/game/ind-vs-phi-0022600236",
+   "site_matchup": "IND@PHI",
+   "site_tip_et": "1:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600237",
+   "date": "2026-11-15",
+   "matchup": "LAL@PHX",
+   "official_tip_et": "4:00 PM ET",
+   "official_source": "https://www.nba.com/game/lal-vs-phx-0022600237",
+   "site_matchup": "LAL@PHX",
+   "site_tip_et": "4:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600238",
+   "date": "2026-11-15",
+   "matchup": "CHA@LAC",
+   "official_tip_et": "4:30 PM ET",
+   "official_source": "https://www.nba.com/game/cha-vs-lac-0022600238",
+   "site_matchup": "CHA@LAC",
+   "site_tip_et": "4:30 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600239",
+   "date": "2026-11-15",
+   "matchup": "SAS@UTA",
+   "official_tip_et": "5:00 PM ET",
+   "official_source": "https://www.nba.com/game/sas-vs-uta-0022600239",
+   "site_matchup": "SAS@UTA",
+   "site_tip_et": "5:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600240",
+   "date": "2026-11-15",
+   "matchup": "DAL@BOS",
+   "official_tip_et": "6:00 PM ET",
+   "official_source": "https://www.nba.com/game/dal-vs-bos-0022600240",
+   "site_matchup": "DAL@BOS",
+   "site_tip_et": "6:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600241",
+   "date": "2026-11-15",
+   "matchup": "NYK@TOR",
+   "official_tip_et": "6:00 PM ET",
+   "official_source": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+   "site_matchup": "NYK@TOR",
+   "site_tip_et": "6:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600242",
+   "date": "2026-11-15",
+   "matchup": "HOU@WAS",
+   "official_tip_et": "7:00 PM ET",
+   "official_source": "https://www.nba.com/game/hou-vs-was-0022600242",
+   "site_matchup": "HOU@WAS",
+   "site_tip_et": "7:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600243",
+   "date": "2026-11-15",
+   "matchup": "ATL@MIL",
+   "official_tip_et": "8:00 PM ET",
+   "official_source": "https://www.nba.com/game/atl-vs-mil-0022600243",
+   "site_matchup": "ATL@MIL",
+   "site_tip_et": "8:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600244",
+   "date": "2026-11-15",
+   "matchup": "OKC@SAC",
+   "official_tip_et": "9:00 PM ET",
+   "official_source": "https://www.nba.com/game/okc-vs-sac-0022600244",
+   "site_matchup": "OKC@SAC",
+   "site_tip_et": "9:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600245",
+   "date": "2026-11-16",
+   "matchup": "ORL@BOS",
+   "official_tip_et": "7:00 PM ET",
+   "official_source": "https://www.nba.com/game/orl-vs-bos-0022600245",
+   "site_matchup": "ORL@BOS",
+   "site_tip_et": "7:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600246",
+   "date": "2026-11-16",
+   "matchup": "CHI@CLE",
+   "official_tip_et": "7:00 PM ET",
+   "official_source": "https://www.nba.com/game/chi-vs-cle-0022600246",
+   "site_matchup": "CHI@CLE",
+   "site_tip_et": "7:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600247",
+   "date": "2026-11-16",
+   "matchup": "MEM@WAS",
+   "official_tip_et": "7:00 PM ET",
+   "official_source": "https://www.nba.com/game/mem-vs-was-0022600247",
+   "site_matchup": "MEM@WAS",
+   "site_tip_et": "7:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600248",
+   "date": "2026-11-16",
+   "matchup": "PHI@BKN",
+   "official_tip_et": "7:30 PM ET",
+   "official_source": "https://www.nba.com/game/phi-vs-bkn-0022600248",
+   "site_matchup": "PHI@BKN",
+   "site_tip_et": "7:30 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600249",
+   "date": "2026-11-16",
+   "matchup": "HOU@MIA",
+   "official_tip_et": "7:30 PM ET",
+   "official_source": "https://www.nba.com/game/hou-vs-mia-0022600249",
+   "site_matchup": "HOU@MIA",
+   "site_tip_et": "7:30 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600250",
+   "date": "2026-11-16",
+   "matchup": "POR@MIN",
+   "official_tip_et": "8:00 PM ET",
+   "official_source": "https://www.nba.com/game/por-vs-min-0022600250",
+   "site_matchup": "POR@MIN",
+   "site_tip_et": "8:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600251",
+   "date": "2026-11-16",
+   "matchup": "GSW@NOP",
+   "official_tip_et": "8:00 PM ET",
+   "official_source": "https://www.nba.com/game/gsw-vs-nop-0022600251",
+   "site_matchup": "GSW@NOP",
+   "site_tip_et": "8:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600252",
+   "date": "2026-11-16",
+   "matchup": "PHX@DEN",
+   "official_tip_et": "9:00 PM ET",
+   "official_source": "https://www.nba.com/game/phx-vs-den-0022600252",
+   "site_matchup": "PHX@DEN",
+   "site_tip_et": "9:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": true,
+   "slate_capture_status": "MATCH"
+  },
+  {
+   "game_id": "0022600253",
+   "date": "2026-11-17",
+   "matchup": "NYK@TOR",
+   "official_tip_et": "7:30 PM ET",
+   "official_source": "https://www.nba.com/game/nyk-vs-tor-0022600253",
+   "site_matchup": "NYK@TOR",
+   "site_tip_et": "7:30 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": false,
+   "slate_capture_status": "ABSENT_FROM_SLATE_CAPTURE"
+  },
+  {
+   "game_id": "0022600254",
+   "date": "2026-11-17",
+   "matchup": "POR@MIN",
+   "official_tip_et": "8:00 PM ET",
+   "official_source": "https://www.nba.com/game/por-vs-min-0022600254",
+   "site_matchup": "POR@MIN",
+   "site_tip_et": "8:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": false,
+   "slate_capture_status": "ABSENT_FROM_SLATE_CAPTURE"
+  },
+  {
+   "game_id": "0022600255",
+   "date": "2026-11-17",
+   "matchup": "DET@SAS",
+   "official_tip_et": "8:00 PM ET",
+   "official_source": "https://www.nba.com/game/det-vs-sas-0022600255",
+   "site_matchup": "DET@SAS",
+   "site_tip_et": "8:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": false,
+   "slate_capture_status": "ABSENT_FROM_SLATE_CAPTURE"
+  },
+  {
+   "game_id": "0022600256",
+   "date": "2026-11-17",
+   "matchup": "CHA@LAL",
+   "official_tip_et": "11:00 PM ET",
+   "official_source": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "site_matchup": "CHA@LAL",
+   "site_tip_et": "11:00 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": false,
+   "slate_capture_status": "ABSENT_FROM_SLATE_CAPTURE"
+  },
+  {
+   "game_id": "0022600257",
+   "date": "2026-11-17",
+   "matchup": "UTA@LAC",
+   "official_tip_et": "10:30 PM ET",
+   "official_source": "https://www.nba.com/game/uta-vs-lac-0022600257",
+   "site_matchup": "UTA@LAC",
+   "site_tip_et": "10:30 PM ET",
+   "status": "MATCH",
+   "in_slate_capture": false,
+   "slate_capture_status": "ABSENT_FROM_SLATE_CAPTURE"
+  }
+ ],
+ "horizon_summary": {
+  "official_games": 27,
+  "site_horizon_games": 27,
+  "matched": 27,
+  "mismatched": 0,
+  "absent_in_site": 0,
+  "site_only_game_ids": [],
+  "in_slate_capture": 22,
+  "absent_from_slate_capture": 5,
+  "slate_capture_mismatches": 0,
+  "calendar_counts_official": {
+   "2026-11-14": 5,
+   "2026-11-15": 9,
+   "2026-11-16": 8,
+   "2026-11-17": 5
+  }
+ },
+ "records": [
+  {
+   "game_id": "0022600231",
+   "matchup": "DEN@NOP",
+   "side": "away",
+   "team": "DEN",
+   "site_record_pre_11_13": "6-4",
+   "official_record_at_capture": "6-4",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/den-vs-nop-0022600231"
+  },
+  {
+   "game_id": "0022600231",
+   "matchup": "DEN@NOP",
+   "side": "home",
+   "team": "NOP",
+   "site_record_pre_11_13": "4-8",
+   "official_record_at_capture": "4-9",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/den-vs-nop-0022600231"
+  },
+  {
+   "game_id": "0022600232",
+   "matchup": "DAL@CLE",
+   "side": "away",
+   "team": "DAL",
+   "site_record_pre_11_13": "7-5",
+   "official_record_at_capture": "7-5",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/dal-vs-cle-0022600232"
+  },
+  {
+   "game_id": "0022600232",
+   "matchup": "DAL@CLE",
+   "side": "home",
+   "team": "CLE",
+   "site_record_pre_11_13": "6-6",
+   "official_record_at_capture": "6-7",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/dal-vs-cle-0022600232"
+  },
+  {
+   "game_id": "0022600234",
+   "matchup": "BKN@MEM",
+   "side": "away",
+   "team": "BKN",
+   "site_record_pre_11_13": "3-8",
+   "official_record_at_capture": "3-8",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/bkn-vs-mem-0022600234"
+  },
+  {
+   "game_id": "0022600234",
+   "matchup": "BKN@MEM",
+   "side": "home",
+   "team": "MEM",
+   "site_record_pre_11_13": "7-4",
+   "official_record_at_capture": "8-4",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/bkn-vs-mem-0022600234"
+  },
+  {
+   "game_id": "0022600233",
+   "matchup": "DET@MIA",
+   "side": "away",
+   "team": "DET",
+   "site_record_pre_11_13": "8-3",
+   "official_record_at_capture": "8-3",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/det-vs-mia-0022600233"
+  },
+  {
+   "game_id": "0022600233",
+   "matchup": "DET@MIA",
+   "side": "home",
+   "team": "MIA",
+   "site_record_pre_11_13": "5-6",
+   "official_record_at_capture": "6-6",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/det-vs-mia-0022600233"
+  },
+  {
+   "game_id": "0022600235",
+   "matchup": "CHI@MIN",
+   "side": "away",
+   "team": "CHI",
+   "site_record_pre_11_13": "1-9",
+   "official_record_at_capture": "2-9",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/chi-vs-min-0022600235"
+  },
+  {
+   "game_id": "0022600235",
+   "matchup": "CHI@MIN",
+   "side": "home",
+   "team": "MIN",
+   "site_record_pre_11_13": "9-3",
+   "official_record_at_capture": "9-3",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/chi-vs-min-0022600235"
+  },
+  {
+   "game_id": "0022600236",
+   "matchup": "IND@PHI",
+   "side": "away",
+   "team": "IND",
+   "site_record_pre_11_13": "4-8",
+   "official_record_at_capture": "5-8",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/ind-vs-phi-0022600236"
+  },
+  {
+   "game_id": "0022600236",
+   "matchup": "IND@PHI",
+   "side": "home",
+   "team": "PHI",
+   "site_record_pre_11_13": "10-3",
+   "official_record_at_capture": "10-3",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/ind-vs-phi-0022600236"
+  },
+  {
+   "game_id": "0022600237",
+   "matchup": "LAL@PHX",
+   "side": "away",
+   "team": "LAL",
+   "site_record_pre_11_13": "11-2",
+   "official_record_at_capture": "11-2",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/lal-vs-phx-0022600237"
+  },
+  {
+   "game_id": "0022600237",
+   "matchup": "LAL@PHX",
+   "side": "home",
+   "team": "PHX",
+   "site_record_pre_11_13": "5-6",
+   "official_record_at_capture": "5-6",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/lal-vs-phx-0022600237"
+  },
+  {
+   "game_id": "0022600238",
+   "matchup": "CHA@LAC",
+   "side": "away",
+   "team": "CHA",
+   "site_record_pre_11_13": "4-8",
+   "official_record_at_capture": "4-8",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/cha-vs-lac-0022600238"
+  },
+  {
+   "game_id": "0022600238",
+   "matchup": "CHA@LAC",
+   "side": "home",
+   "team": "LAC",
+   "site_record_pre_11_13": "2-8",
+   "official_record_at_capture": "3-8",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/cha-vs-lac-0022600238"
+  },
+  {
+   "game_id": "0022600239",
+   "matchup": "SAS@UTA",
+   "side": "away",
+   "team": "SAS",
+   "site_record_pre_11_13": "10-2",
+   "official_record_at_capture": "11-2",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/sas-vs-uta-0022600239"
+  },
+  {
+   "game_id": "0022600239",
+   "matchup": "SAS@UTA",
+   "side": "home",
+   "team": "UTA",
+   "site_record_pre_11_13": "1-11",
+   "official_record_at_capture": "1-12",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/sas-vs-uta-0022600239"
+  },
+  {
+   "game_id": "0022600240",
+   "matchup": "DAL@BOS",
+   "side": "away",
+   "team": "DAL",
+   "site_record_pre_11_13": "7-5",
+   "official_record_at_capture": "7-5",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/dal-vs-bos-0022600240"
+  },
+  {
+   "game_id": "0022600240",
+   "matchup": "DAL@BOS",
+   "side": "home",
+   "team": "BOS",
+   "site_record_pre_11_13": "10-2",
+   "official_record_at_capture": "10-2",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/dal-vs-bos-0022600240"
+  },
+  {
+   "game_id": "0022600241",
+   "matchup": "NYK@TOR",
+   "side": "away",
+   "team": "NYK",
+   "site_record_pre_11_13": "6-5",
+   "official_record_at_capture": "6-6",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/nyk-vs-tor-0022600241"
+  },
+  {
+   "game_id": "0022600241",
+   "matchup": "NYK@TOR",
+   "side": "home",
+   "team": "TOR",
+   "site_record_pre_11_13": "5-7",
+   "official_record_at_capture": "5-7",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/nyk-vs-tor-0022600241"
+  },
+  {
+   "game_id": "0022600242",
+   "matchup": "HOU@WAS",
+   "side": "away",
+   "team": "HOU",
+   "site_record_pre_11_13": "9-3",
+   "official_record_at_capture": "10-3",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/hou-vs-was-0022600242"
+  },
+  {
+   "game_id": "0022600242",
+   "matchup": "HOU@WAS",
+   "side": "home",
+   "team": "WAS",
+   "site_record_pre_11_13": "4-9",
+   "official_record_at_capture": "4-9",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/hou-vs-was-0022600242"
+  },
+  {
+   "game_id": "0022600243",
+   "matchup": "ATL@MIL",
+   "side": "away",
+   "team": "ATL",
+   "site_record_pre_11_13": "7-5",
+   "official_record_at_capture": "7-6",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/atl-vs-mil-0022600243"
+  },
+  {
+   "game_id": "0022600243",
+   "matchup": "ATL@MIL",
+   "side": "home",
+   "team": "MIL",
+   "site_record_pre_11_13": "1-11",
+   "official_record_at_capture": "1-12",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/atl-vs-mil-0022600243"
+  },
+  {
+   "game_id": "0022600244",
+   "matchup": "OKC@SAC",
+   "side": "away",
+   "team": "OKC",
+   "site_record_pre_11_13": "8-4",
+   "official_record_at_capture": "8-5",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/okc-vs-sac-0022600244"
+  },
+  {
+   "game_id": "0022600244",
+   "matchup": "OKC@SAC",
+   "side": "home",
+   "team": "SAC",
+   "site_record_pre_11_13": "1-10",
+   "official_record_at_capture": "1-11",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/okc-vs-sac-0022600244"
+  },
+  {
+   "game_id": "0022600245",
+   "matchup": "ORL@BOS",
+   "side": "away",
+   "team": "ORL",
+   "site_record_pre_11_13": "4-7",
+   "official_record_at_capture": "5-7",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/orl-vs-bos-0022600245"
+  },
+  {
+   "game_id": "0022600245",
+   "matchup": "ORL@BOS",
+   "side": "home",
+   "team": "BOS",
+   "site_record_pre_11_13": "10-2",
+   "official_record_at_capture": "10-2",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/orl-vs-bos-0022600245"
+  },
+  {
+   "game_id": "0022600246",
+   "matchup": "CHI@CLE",
+   "side": "away",
+   "team": "CHI",
+   "site_record_pre_11_13": "1-9",
+   "official_record_at_capture": "2-9",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/chi-vs-cle-0022600246"
+  },
+  {
+   "game_id": "0022600246",
+   "matchup": "CHI@CLE",
+   "side": "home",
+   "team": "CLE",
+   "site_record_pre_11_13": "6-6",
+   "official_record_at_capture": "6-7",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/chi-vs-cle-0022600246"
+  },
+  {
+   "game_id": "0022600247",
+   "matchup": "MEM@WAS",
+   "side": "away",
+   "team": "MEM",
+   "site_record_pre_11_13": "7-4",
+   "official_record_at_capture": "8-4",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/mem-vs-was-0022600247"
+  },
+  {
+   "game_id": "0022600247",
+   "matchup": "MEM@WAS",
+   "side": "home",
+   "team": "WAS",
+   "site_record_pre_11_13": "4-9",
+   "official_record_at_capture": "4-9",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/mem-vs-was-0022600247"
+  },
+  {
+   "game_id": "0022600248",
+   "matchup": "PHI@BKN",
+   "side": "away",
+   "team": "PHI",
+   "site_record_pre_11_13": "10-3",
+   "official_record_at_capture": "10-3",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/phi-vs-bkn-0022600248"
+  },
+  {
+   "game_id": "0022600248",
+   "matchup": "PHI@BKN",
+   "side": "home",
+   "team": "BKN",
+   "site_record_pre_11_13": "3-8",
+   "official_record_at_capture": "3-8",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/phi-vs-bkn-0022600248"
+  },
+  {
+   "game_id": "0022600249",
+   "matchup": "HOU@MIA",
+   "side": "away",
+   "team": "HOU",
+   "site_record_pre_11_13": "9-3",
+   "official_record_at_capture": "10-3",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/hou-vs-mia-0022600249"
+  },
+  {
+   "game_id": "0022600249",
+   "matchup": "HOU@MIA",
+   "side": "home",
+   "team": "MIA",
+   "site_record_pre_11_13": "5-6",
+   "official_record_at_capture": "6-6",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/hou-vs-mia-0022600249"
+  },
+  {
+   "game_id": "0022600250",
+   "matchup": "POR@MIN",
+   "side": "away",
+   "team": "POR",
+   "site_record_pre_11_13": "8-3",
+   "official_record_at_capture": "9-3",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/por-vs-min-0022600250"
+  },
+  {
+   "game_id": "0022600250",
+   "matchup": "POR@MIN",
+   "side": "home",
+   "team": "MIN",
+   "site_record_pre_11_13": "9-3",
+   "official_record_at_capture": "9-3",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/por-vs-min-0022600250"
+  },
+  {
+   "game_id": "0022600251",
+   "matchup": "GSW@NOP",
+   "side": "away",
+   "team": "GSW",
+   "site_record_pre_11_13": "8-4",
+   "official_record_at_capture": "8-5",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/gsw-vs-nop-0022600251"
+  },
+  {
+   "game_id": "0022600251",
+   "matchup": "GSW@NOP",
+   "side": "home",
+   "team": "NOP",
+   "site_record_pre_11_13": "4-8",
+   "official_record_at_capture": "4-9",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/gsw-vs-nop-0022600251"
+  },
+  {
+   "game_id": "0022600252",
+   "matchup": "PHX@DEN",
+   "side": "away",
+   "team": "PHX",
+   "site_record_pre_11_13": "5-6",
+   "official_record_at_capture": "5-6",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/phx-vs-den-0022600252"
+  },
+  {
+   "game_id": "0022600252",
+   "matchup": "PHX@DEN",
+   "side": "home",
+   "team": "DEN",
+   "site_record_pre_11_13": "6-4",
+   "official_record_at_capture": "6-4",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/phx-vs-den-0022600252"
+  },
+  {
+   "game_id": "0022600253",
+   "matchup": "NYK@TOR",
+   "side": "away",
+   "team": "NYK",
+   "site_record_pre_11_13": "6-5",
+   "official_record_at_capture": "6-6",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/nyk-vs-tor-0022600253"
+  },
+  {
+   "game_id": "0022600253",
+   "matchup": "NYK@TOR",
+   "side": "home",
+   "team": "TOR",
+   "site_record_pre_11_13": "5-7",
+   "official_record_at_capture": "5-7",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/nyk-vs-tor-0022600253"
+  },
+  {
+   "game_id": "0022600254",
+   "matchup": "POR@MIN",
+   "side": "away",
+   "team": "POR",
+   "site_record_pre_11_13": "8-3",
+   "official_record_at_capture": "9-3",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/por-vs-min-0022600254"
+  },
+  {
+   "game_id": "0022600254",
+   "matchup": "POR@MIN",
+   "side": "home",
+   "team": "MIN",
+   "site_record_pre_11_13": "9-3",
+   "official_record_at_capture": "9-3",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/por-vs-min-0022600254"
+  },
+  {
+   "game_id": "0022600255",
+   "matchup": "DET@SAS",
+   "side": "away",
+   "team": "DET",
+   "site_record_pre_11_13": "8-3",
+   "official_record_at_capture": "8-3",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/det-vs-sas-0022600255"
+  },
+  {
+   "game_id": "0022600255",
+   "matchup": "DET@SAS",
+   "side": "home",
+   "team": "SAS",
+   "site_record_pre_11_13": "10-2",
+   "official_record_at_capture": "11-2",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/det-vs-sas-0022600255"
+  },
+  {
+   "game_id": "0022600256",
+   "matchup": "CHA@LAL",
+   "side": "away",
+   "team": "CHA",
+   "site_record_pre_11_13": "4-8",
+   "official_record_at_capture": "4-8",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/cha-vs-lal-0022600256"
+  },
+  {
+   "game_id": "0022600256",
+   "matchup": "CHA@LAL",
+   "side": "home",
+   "team": "LAL",
+   "site_record_pre_11_13": "11-2",
+   "official_record_at_capture": "11-2",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/game/cha-vs-lal-0022600256"
+  },
+  {
+   "game_id": "0022600257",
+   "matchup": "UTA@LAC",
+   "side": "away",
+   "team": "UTA",
+   "site_record_pre_11_13": "1-11",
+   "official_record_at_capture": "1-12",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/uta-vs-lac-0022600257"
+  },
+  {
+   "game_id": "0022600257",
+   "matchup": "UTA@LAC",
+   "side": "home",
+   "team": "LAC",
+   "site_record_pre_11_13": "2-8",
+   "official_record_at_capture": "3-8",
+   "status": "STALE_TEAM_PLAYED_11_13",
+   "official_source": "https://www.nba.com/game/uta-vs-lac-0022600257"
+  }
+ ],
+ "record_summary": {
+  "MATCH": 25,
+  "STALE_TEAM_PLAYED_11_13": 29,
+  "UNEXPLAINED_MISMATCH": 0,
+  "SITE_BLANK": 0
+ },
+ "sign_convention": {
+  "standard": 0,
+  "margin": 27,
+  "zero_or_other": 0
+ },
+ "sign_convention_games": [
+  {
+   "game_id": "0022600231",
+   "matchup": "DEN@NOP",
+   "line_spread_home": -8.0,
+   "proj_home_minus_away": -8.0,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600232",
+   "matchup": "DAL@CLE",
+   "line_spread_home": 1.2,
+   "proj_home_minus_away": 1.2,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600233",
+   "matchup": "DET@MIA",
+   "line_spread_home": -12.0,
+   "proj_home_minus_away": -12.0,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600234",
+   "matchup": "BKN@MEM",
+   "line_spread_home": 10.9,
+   "proj_home_minus_away": 10.9,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600235",
+   "matchup": "CHI@MIN",
+   "line_spread_home": 29.9,
+   "proj_home_minus_away": 29.9,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600236",
+   "matchup": "IND@PHI",
+   "line_spread_home": 3.4,
+   "proj_home_minus_away": 3.4,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600237",
+   "matchup": "LAL@PHX",
+   "line_spread_home": -12.0,
+   "proj_home_minus_away": -12.0,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600238",
+   "matchup": "CHA@LAC",
+   "line_spread_home": 5.6,
+   "proj_home_minus_away": 5.6,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600239",
+   "matchup": "SAS@UTA",
+   "line_spread_home": -22.4,
+   "proj_home_minus_away": -22.4,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600240",
+   "matchup": "DAL@BOS",
+   "line_spread_home": 10.7,
+   "proj_home_minus_away": 10.7,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600241",
+   "matchup": "NYK@TOR",
+   "line_spread_home": -4.8,
+   "proj_home_minus_away": -4.8,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600242",
+   "matchup": "HOU@WAS",
+   "line_spread_home": -14.3,
+   "proj_home_minus_away": -14.3,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600243",
+   "matchup": "ATL@MIL",
+   "line_spread_home": -17.3,
+   "proj_home_minus_away": -17.3,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600244",
+   "matchup": "OKC@SAC",
+   "line_spread_home": -16.0,
+   "proj_home_minus_away": -16.0,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600245",
+   "matchup": "ORL@BOS",
+   "line_spread_home": 15.7,
+   "proj_home_minus_away": 15.7,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600246",
+   "matchup": "CHI@CLE",
+   "line_spread_home": 18.0,
+   "proj_home_minus_away": 18.0,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600247",
+   "matchup": "MEM@WAS",
+   "line_spread_home": -11.4,
+   "proj_home_minus_away": -11.4,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600248",
+   "matchup": "PHI@BKN",
+   "line_spread_home": -6.5,
+   "proj_home_minus_away": -6.5,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600249",
+   "matchup": "HOU@MIA",
+   "line_spread_home": -14.0,
+   "proj_home_minus_away": -14.0,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600250",
+   "matchup": "POR@MIN",
+   "line_spread_home": 6.9,
+   "proj_home_minus_away": 6.9,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600251",
+   "matchup": "GSW@NOP",
+   "line_spread_home": -15.1,
+   "proj_home_minus_away": -15.1,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600252",
+   "matchup": "PHX@DEN",
+   "line_spread_home": 4.5,
+   "proj_home_minus_away": 4.5,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600253",
+   "matchup": "NYK@TOR",
+   "line_spread_home": -4.8,
+   "proj_home_minus_away": -4.8,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600254",
+   "matchup": "POR@MIN",
+   "line_spread_home": 6.9,
+   "proj_home_minus_away": 6.9,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600255",
+   "matchup": "DET@SAS",
+   "line_spread_home": 3.4,
+   "proj_home_minus_away": 3.4,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600256",
+   "matchup": "CHA@LAL",
+   "line_spread_home": 18.8,
+   "proj_home_minus_away": 18.8,
+   "convention": "margin"
+  },
+  {
+   "game_id": "0022600257",
+   "matchup": "UTA@LAC",
+   "line_spread_home": 6.1,
+   "proj_home_minus_away": 6.1,
+   "convention": "margin"
+  }
+ ],
+ "settlement_2026_11_13": [
+  {
+   "matchup": "ATL@CHI",
+   "date": "2026-11-13",
+   "originated_spread_home": 8.0,
+   "model_expected_margin_home": -8.2,
+   "pick_side": "AWAY",
+   "pick_line": "ATL -8.0",
+   "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/atl-vs-chi-0022600037"
+   ],
+   "official_away": "ATL",
+   "official_away_score": 117,
+   "official_home": "CHI",
+   "official_home_score": 125,
+   "official_status": "Final/OT",
+   "official_home_margin": 8,
+   "official_source": "https://www.nba.com/game/atl-vs-chi-0022600037",
+   "model_error_margin": 16.2,
+   "result": "LOSS",
+   "cover_margin_pts": -16.0
+  },
+  {
+   "matchup": "CLE@MIA",
+   "date": "2026-11-13",
+   "originated_spread_home": -1.5,
+   "model_expected_margin_home": 1.5,
+   "pick_side": "PASS",
+   "pick_line": null,
+   "gate": "G-CFG fail (|margin| < 3.0) — no bet",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/cle-vs-mia-0022600036"
+   ],
+   "official_away": "CLE",
+   "official_away_score": 121,
+   "official_home": "MIA",
+   "official_home_score": 133,
+   "official_status": "Final",
+   "official_home_margin": 12,
+   "official_source": "https://www.nba.com/game/cle-vs-mia-0022600036",
+   "model_error_margin": 10.5,
+   "result": "NO_BET"
+  },
+  {
+   "matchup": "GSW@SAS",
+   "date": "2026-11-13",
+   "originated_spread_home": -6.5,
+   "model_expected_margin_home": 6.4,
+   "pick_side": "HOME",
+   "pick_line": "SAS -6.5",
+   "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/gsw-vs-sas-0022600040"
+   ],
+   "official_away": "GSW",
+   "official_away_score": 85,
+   "official_home": "SAS",
+   "official_home_score": 123,
+   "official_status": "Final",
+   "official_home_margin": 38,
+   "official_source": "https://www.nba.com/game/gsw-vs-sas-0022600040",
+   "model_error_margin": 31.6,
+   "result": "WIN",
+   "cover_margin_pts": 31.5
+  },
+  {
+   "matchup": "MEM@NOP",
+   "date": "2026-11-13",
+   "originated_spread_home": 4.5,
+   "model_expected_margin_home": -4.5,
+   "pick_side": "AWAY",
+   "pick_line": "MEM -4.5",
+   "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/mem-vs-nop-0022600038"
+   ],
+   "official_away": "MEM",
+   "official_away_score": 142,
+   "official_home": "NOP",
+   "official_home_score": 111,
+   "official_status": "Final",
+   "official_home_margin": -31,
+   "official_source": "https://www.nba.com/game/mem-vs-nop-0022600038",
+   "model_error_margin": 26.5,
+   "result": "WIN",
+   "cover_margin_pts": 26.5
+  },
+  {
+   "matchup": "MIL@ORL",
+   "date": "2026-11-13",
+   "originated_spread_home": -9.0,
+   "model_expected_margin_home": 9.1,
+   "pick_side": "HOME",
+   "pick_line": "ORL -9.0",
+   "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/mil-vs-orl-0022600035"
+   ],
+   "official_away": "MIL",
+   "official_away_score": 99,
+   "official_home": "ORL",
+   "official_home_score": 107,
+   "official_status": "Final",
+   "official_home_margin": 8,
+   "official_source": "https://www.nba.com/game/mil-vs-orl-0022600035",
+   "model_error_margin": 1.1,
+   "result": "LOSS",
+   "cover_margin_pts": -1.0
+  },
+  {
+   "matchup": "NYK@IND",
+   "date": "2026-11-13",
+   "originated_spread_home": 2.5,
+   "model_expected_margin_home": -2.4,
+   "pick_side": "PASS",
+   "pick_line": null,
+   "gate": "G-CFG fail (|margin| < 3.0) — no bet",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/nyk-vs-ind-0022600034"
+   ],
+   "official_away": "NYK",
+   "official_away_score": 104,
+   "official_home": "IND",
+   "official_home_score": 106,
+   "official_status": "Final",
+   "official_home_margin": 2,
+   "official_source": "https://www.nba.com/game/nyk-vs-ind-0022600034",
+   "model_error_margin": 4.4,
+   "result": "NO_BET"
+  },
+  {
+   "matchup": "OKC@LAC",
+   "date": "2026-11-13",
+   "originated_spread_home": 8.0,
+   "model_expected_margin_home": -8.0,
+   "pick_side": "AWAY",
+   "pick_line": "OKC -8.0",
+   "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/okc-vs-lac-0022600042"
+   ],
+   "official_away": "OKC",
+   "official_away_score": 112,
+   "official_home": "LAC",
+   "official_home_score": 113,
+   "official_status": "Final",
+   "official_home_margin": 1,
+   "official_source": "https://www.nba.com/game/okc-vs-lac-0022600042",
+   "model_error_margin": 9.0,
+   "result": "LOSS",
+   "cover_margin_pts": -9.0
+  },
+  {
+   "matchup": "POR@SAC",
+   "date": "2026-11-13",
+   "originated_spread_home": 12.0,
+   "model_expected_margin_home": -11.9,
+   "pick_side": "AWAY",
+   "pick_line": "POR -12.0",
+   "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/por-vs-sac-0022600041"
+   ],
+   "official_away": "POR",
+   "official_away_score": 120,
+   "official_home": "SAC",
+   "official_home_score": 107,
+   "official_status": "Final",
+   "official_home_margin": -13,
+   "official_source": "https://www.nba.com/game/por-vs-sac-0022600041",
+   "model_error_margin": 1.1,
+   "result": "WIN",
+   "cover_margin_pts": 1.0
+  },
+  {
+   "matchup": "UTA@HOU",
+   "date": "2026-11-13",
+   "originated_spread_home": -18.0,
+   "model_expected_margin_home": 18.1,
+   "pick_side": "HOME",
+   "pick_line": "HOU -18.0",
+   "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/uta-vs-hou-0022600039"
+   ],
+   "official_away": "UTA",
+   "official_away_score": 118,
+   "official_home": "HOU",
+   "official_home_score": 125,
+   "official_status": "Final",
+   "official_home_margin": 7,
+   "official_source": "https://www.nba.com/game/uta-vs-hou-0022600039",
+   "model_error_margin": 11.1,
+   "result": "LOSS",
+   "cover_margin_pts": -11.0
+  }
+ ],
+ "settlement_summary": {
+  "WIN": 3,
+  "LOSS": 4,
+  "PUSH": 0,
+  "NO_BET": 2,
+  "UNSETTLED": 0,
+  "n": 9,
+  "mean_abs_margin_error": 12.39,
+  "max_gap_spread_vs_minus_expected_margin": 0.2
+ },
+ "headline_audit": [
+  {
+   "claim": "Originated lines: 27",
+   "site_location": "index.html tile 'Originated lines'",
+   "observed": "27 rows in data/derived/horizon_lines.json; 27 official games",
+   "status": "MATCH",
+   "official_source": "https://www.nba.com/schedule"
+  },
+  {
+   "claim": "Paper picks: 63",
+   "site_location": "index.html tile 'Paper picks' (site/data/picks.json, Build B)",
+   "observed": "63 rows, all PENDING, across 34 matchups and 62 strategy-game pairs; Build D horizon: 27 singles, 26 model picks (horizon_picks.json); picks_d.json n_model_picks = 23",
+   "status": "COUNT_DEFINITION_CONFLICT",
+   "official_source": null
+  },
+  {
+   "claim": "Strategies tested: 10",
+   "site_location": "index.html tile 'Strategies tested'",
+   "observed": "10 strategies in leaderboard (site/data/leaderboard.json)",
+   "status": "INTERNAL_COUNT",
+   "official_source": null
+  },
+  {
+   "claim": "Out-of-sample games: 51",
+   "site_location": "index.html tile",
+   "observed": "docs/data/backtest.json metrics.n_games = 51",
+   "status": "INTERNAL_COUNT",
+   "official_source": null
+  },
+  {
+   "claim": "Open flags (landing tile = items in flagged.json)",
+   "site_location": "index.html tile 'Open flags'",
+   "observed": "37 items in site/data/flagged.json (25 before this check; F26-F37 added)",
+   "status": "INTERNAL_COUNT",
+   "official_source": null
+  },
+  {
+   "claim": "Known limits: the 2026-11-13 slate was still in progress; no final score exists for it",
+   "site_location": "README.md 'Known limits'; index.html via Source-of-truth text",
+   "observed": "9 of 9 11/13 games show Final on the official page at capture",
+   "status": "STALE",
+   "official_source": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "claim": "Official 11/13 injury report edition: 07:30 PM ET is the newest",
+   "site_location": "data/official/injuries.json source_url",
+   "observed": "NOT RE-CHECKED in this session (11/14 noon edition returned AccessDenied at capture)",
+   "status": "UNVERIFIED_THIS_SESSION",
+   "official_source": "https://official.nba.com/nba-injury-report-2026-27-season/"
+  }
+ ],
+ "cross_build": [
+  {
+   "matchup": "DEN@NOP",
+   "build_b_model_home_margin": -9.6,
+   "build_d_model_home_margin": -8.0,
+   "difference": -1.6,
+   "build_b_line_display": "DEN -5.9",
+   "build_b_ref_line": -5.9,
+   "build_d_line_spread_home": -8.0,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "DAL@CLE",
+   "build_b_model_home_margin": -2.3,
+   "build_d_model_home_margin": 1.2,
+   "difference": -3.5,
+   "build_b_line_display": "DAL +3.2",
+   "build_b_ref_line": 3.2,
+   "build_d_line_spread_home": 1.2,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "DET@MIA",
+   "build_b_model_home_margin": -12.8,
+   "build_d_model_home_margin": -12.0,
+   "difference": -0.8,
+   "build_b_line_display": "DET -9.9",
+   "build_b_ref_line": -9.9,
+   "build_d_line_spread_home": -12.0,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "BKN@MEM",
+   "build_b_model_home_margin": 5.3,
+   "build_d_model_home_margin": 10.9,
+   "difference": -5.6,
+   "build_b_line_display": "BKN +12.9",
+   "build_b_ref_line": 12.9,
+   "build_d_line_spread_home": 10.9,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "LAL@PHX",
+   "build_b_model_home_margin": -6.7,
+   "build_d_model_home_margin": -12.0,
+   "difference": 5.3,
+   "build_b_line_display": "PHX +9.7",
+   "build_b_ref_line": -9.7,
+   "build_d_line_spread_home": -12.0,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "SAS@UTA",
+   "build_b_model_home_margin": -15.4,
+   "build_d_model_home_margin": -22.4,
+   "difference": 7.0,
+   "build_b_line_display": "UTA +20.6",
+   "build_b_ref_line": -20.6,
+   "build_d_line_spread_home": -22.4,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "DAL@BOS",
+   "build_b_model_home_margin": 17.6,
+   "build_d_model_home_margin": 10.7,
+   "difference": 6.9,
+   "build_b_line_display": "BOS -12.8",
+   "build_b_ref_line": 12.8,
+   "build_d_line_spread_home": 10.7,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "HOU@WAS",
+   "build_b_model_home_margin": -9.1,
+   "build_d_model_home_margin": -14.3,
+   "difference": 5.2,
+   "build_b_line_display": "WAS +12.6",
+   "build_b_ref_line": -12.6,
+   "build_d_line_spread_home": -14.3,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "ATL@MIL",
+   "build_b_model_home_margin": -10.8,
+   "build_d_model_home_margin": -17.3,
+   "difference": 6.5,
+   "build_b_line_display": "MIL +14.9",
+   "build_b_ref_line": -14.9,
+   "build_d_line_spread_home": -17.3,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "OKC@SAC",
+   "build_b_model_home_margin": -10.2,
+   "build_d_model_home_margin": -16.0,
+   "difference": 5.8,
+   "build_b_line_display": "SAC +14.3",
+   "build_b_ref_line": -14.3,
+   "build_d_line_spread_home": -16.0,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "ORL@BOS",
+   "build_b_model_home_margin": 9.9,
+   "build_d_model_home_margin": 15.7,
+   "difference": -5.8,
+   "build_b_line_display": "ORL +18.3",
+   "build_b_ref_line": 18.3,
+   "build_d_line_spread_home": 15.7,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "CHI@CLE",
+   "build_b_model_home_margin": 16.2,
+   "build_d_model_home_margin": 18.0,
+   "difference": -1.8,
+   "build_b_line_display": "CHI +19.3",
+   "build_b_ref_line": 19.3,
+   "build_d_line_spread_home": 18.0,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "build_b_model_home_margin": -12.5,
+   "build_d_model_home_margin": -11.4,
+   "difference": -1.1,
+   "build_b_line_display": "MEM -9.4",
+   "build_b_ref_line": -9.4,
+   "build_d_line_spread_home": -11.4,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "build_b_model_home_margin": 3.6,
+   "build_d_model_home_margin": -6.5,
+   "difference": 10.1,
+   "build_b_line_display": "BKN +4.6",
+   "build_b_ref_line": -4.6,
+   "build_d_line_spread_home": -6.5,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "HOU@MIA",
+   "build_b_model_home_margin": -2.2,
+   "build_d_model_home_margin": -14.0,
+   "difference": 11.8,
+   "build_b_line_display": "MIA +11.8",
+   "build_b_ref_line": -11.8,
+   "build_d_line_spread_home": -14.0,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "build_b_model_home_margin": -9.0,
+   "build_d_model_home_margin": -15.1,
+   "difference": 6.1,
+   "build_b_line_display": "NOP +12.7",
+   "build_b_ref_line": -12.7,
+   "build_d_line_spread_home": -15.1,
+   "status": "DISAGREE"
+  },
+  {
+   "matchup": "PHX@DEN",
+   "build_b_model_home_margin": 12.4,
+   "build_d_model_home_margin": 4.5,
+   "difference": 7.9,
+   "build_b_line_display": "DEN -6.5",
+   "build_b_ref_line": 6.5,
+   "build_d_line_spread_home": 4.5,
+   "status": "DISAGREE"
+  }
+ ],
+ "cross_build_summary": {
+  "matchups_compared": 17,
+  "opposite_favourite": 2,
+  "max_abs_difference": 11.8,
+  "disagree_over_0.5": 17,
+  "not_in_horizon": 0
+ }
+}

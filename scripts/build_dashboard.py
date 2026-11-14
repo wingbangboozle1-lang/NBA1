@@ -71,6 +71,8 @@ CATEGORIES = [
     ("Luck &amp; Skill", "luck.html", "How many wins each team probably should have had, and which of them are luck."),
     ("Out-of-Sample Backtest", "backtest.html", "The 51-game test window and everything measured on it."),
     ("Model &amp; Teams", "model.html", "The efficiency model, its assumptions and the team ratings it reads."),
+    ("VERIFICATION", None, "Checked line by line against NBA.com on the day of capture. Mismatches are listed, not corrected."),
+    ("Official Source Check", "source-check.html", "Every horizon game and every 11/13 final compared with NBA.com, the 11/13 settlement, and the conflicts between builds."),
     ("DECISION", None, "What is still open, what could be improved, and what could not be verified."),
     ("Open Questions", "questions.html", "What we know, what we do not, and the concrete step that would answer each open item."),
     ("Suggestions", "suggestions.html", "Improvements written as options with effort, risk and what each unlocks, so a reviewer can pick a path."),
@@ -252,6 +254,150 @@ def banner(kind, title, body):
 
 def h2(title, sub=""):
     return '<h2 class="sec">%s</h2>%s' % (title, ('<p class="secsub">%s</p>' % sub) if sub else "")
+
+
+# ------------------------------------------------- official source check page
+def build_source_check(sources):
+    """Render verify/2026-11-14/checks.json (written by scripts/source_check.py). Nothing is inferred here."""
+    vdir = os.path.join(ROOT, "verify", "2026-11-14")
+    chk = load(os.path.join(vdir, "checks.json"))
+    off = load(os.path.join(vdir, "official_horizon.json"))
+    fin = load(os.path.join(vdir, "official_finals_2026-11-13.json"))
+    off_by_id = {r["game_id"]: r for r in off["rows"]}
+    hs = chk["horizon_summary"]
+    rs = chk["record_summary"]
+    ss = chk["settlement_summary"]
+    cs = chk["cross_build_summary"]
+    cb = chk["build_b_sign_convention"]["counts"]
+    xc = load(os.path.join(vdir, "cross_check_finals_cfb25ff0.json"))
+
+    def link(url, label):
+        return srclink_url(url, label)
+
+    b = [banner("info", "What this page checks",
+                "On 2026-11-14 (UTC) every game on the official NBA.com Games &amp; Scores pages for 11/13–11/17 "
+                "was transcribed and compared with the site's data, and the nine official finals of 11/13 were "
+                "used to settle the lines that were published for them. The transcription, the checker "
+                "(<code>scripts/source_check.py</code>) and every raw value are in "
+                "<code>verify/2026-11-14/</code>. Where the site and NBA.com disagree, the row says so and the item is on "
+                "<a href=\"flagged.html\">Flagged for Review</a>.")]
+    b.append(tiles([
+        ("Official games 11/14–11/17", hs["official_games"], "%d matched to the site's horizon" % hs["matched"]),
+        ("Missing from slate capture", hs["absent_from_slate_capture"], "11/17 games not in data/official/slate.json"),
+        ("11/13 finals on NBA.com", "%d / %d" % (sum(1 for r in fin["rows"] if r["status"].startswith("Final")), len(fin["rows"])), "all shown as Final at capture"),
+        ("11/13 settled (WIN / LOSS / NO BET)", "%d / %d / %d" % (ss["WIN"], ss["LOSS"], ss["NO_BET"]), "mean |model &minus; final| margin %s pts" % ss["mean_abs_margin_error"]),
+        ("Cross-build disagreements", "%d of %d" % (cs["disagree_over_0.5"], cs["matchups_compared"]), "%d pick opposite favourites" % cs["opposite_favourite"]),
+    ]))
+
+    # 1. horizon schedule
+    b.append(h2("1. The 27-game horizon, official vs site",
+                "One row per official game. Tip times and pairings are compared with the site's horizon lines and the verbatim slate capture."))
+    rows = []
+    for h in chk["horizon"]:
+        o = off_by_id[h["game_id"]]
+        rows.append([esc(h["date"]), '<b>%s</b>' % esc(h["matchup"]), esc(h["official_tip_et"]),
+                     esc(h["status"]), esc(h["slate_capture_status"]),
+                     link(h["official_source"], h["game_id"])])
+    b.append(table(["Date", "Game (away@home)", "Tip (official)", "Site horizon", "Slate capture file", "Source"], rows,
+                   note="Official counts per day: %s. Site horizon: %d games. The slate capture file holds %d of the 27 games; "
+                        "the 5 missing are the 11/17 games." % (
+                            ", ".join("%s = %s" % (k[5:], v) for k, v in sorted(hs["calendar_counts_official"].items())),
+                            hs["site_horizon_games"], hs["in_slate_capture"])))
+
+    # 2. records
+    stale = [r for r in chk["records"] if r["status"] == "STALE_TEAM_PLAYED_11_13"]
+    b.append(h2("2. Records on the horizon rows",
+                "The site prints each team's record from before 11/13. A team that played on 11/13 has a newer "
+                "record on NBA.com. %d of 54 printed records match NBA.com; %d differ, every one of them for a team that "
+                "played on 11/13; %d are unexplained." % (rs["MATCH"], rs["STALE_TEAM_PLAYED_11_13"], rs["UNEXPLAINED_MISMATCH"])))
+    rows = []
+    for r in stale:
+        rows.append([esc(r["matchup"]), '<b>%s</b>' % esc(r["team"]), esc(r["site_record_pre_11_13"]),
+                     esc(r["official_record_at_capture"]), esc(r["status"]),
+                     link(r["official_source"], r["game_id"])])
+    b.append(table(["Game", "Team", "Site record (pre-11/13)", "NBA.com record at capture", "Status", "Source"], rows))
+
+    # 3. 11/13 settlement
+    b.append(h2("3. The nine 11/13 games, settled against the official finals",
+                "These are the lines published for 11/13 on the root <code>lines.html</code>, built from <code>data/originated_lines.json</code> (Build A data). The spread is read as a "
+                "standard home spread: in all nine rows it equals minus the model's expected home margin, to within "
+                "%s points (the largest gap). A pick covers when the picked side's margin, after the line, is above zero. "
+                "The nine finals were also read independently by another session (PR #56, merged to main at 4e4d0b0): "
+                "%d of %d agree, see <code>verify/2026-11-14/cross_check_finals_cfb25ff0.json</code>."
+                % (ss["max_gap_spread_vs_minus_expected_margin"], xc["result"]["agree"], xc["result"]["games"])))
+    rows = []
+    for r in chk["settlement_2026_11_13"]:
+        final = "%s %s &ndash; %s %s" % (r.get("official_away", ""), r.get("official_away_score", ""),
+                                         r.get("official_home", ""), r.get("official_home_score", ""))
+        pick = ("%s" % esc(r.get("pick_line"))) if r.get("pick_line") else "no pick (gate)"
+        rows.append([
+            '<b>%s</b>' % esc(r["matchup"]), final,
+            num(r.get("official_home_margin"), 0) if r.get("official_home_margin") is not None else NA,
+            num(r.get("originated_spread_home"), 1), num(r.get("model_expected_margin_home"), 1),
+            pick, esc(r.get("result")),
+            num(r.get("model_error_margin"), 1) if r.get("model_error_margin") is not None else NA,
+            link(r.get("official_source"), "final") if r.get("official_source") else NA])
+    b.append(table(["Game", "Official final (away &ndash; home)", "Official home margin", "Published spread (home)",
+                    "Model expected home margin", "Pick", "Result", "|model &minus; final|", "Source"], rows,
+                   note="Tally: %d WIN, %d LOSS, %d PUSH, %d NO BET. Mean absolute margin error %s points over %d games. "
+                        "Nine games is far too few to measure skill; this is a single-night check, not a validation."
+                        % (ss["WIN"], ss["LOSS"], ss["PUSH"], ss["NO_BET"], ss["mean_abs_margin_error"], ss["n"])))
+
+    # 4. headline numbers
+    b.append(h2("4. Numbers on the landing page",
+                "Each headline figure, the place it comes from, and what the underlying data says."))
+    rows = []
+    for h in chk["headline_audit"]:
+        rows.append([esc(h["claim"]), esc(h["site_location"]), esc(h["observed"]), '<b>%s</b>' % esc(h["status"]),
+                     link(h["official_source"], "NBA.com") if h.get("official_source")
+                     else nomark("internal count: no official source applies")])
+    b.append(table(["Claim", "Where it appears", "What the data says", "Status", "Source"], rows,
+                   note="Counts that describe this repository's own outputs have no official source; they are marked "
+                        "internal rather than linked. Only the game, injury and final-score claims are checked against NBA.com."))
+
+    # 5. cross-build
+    b.append(h2("5. Two builds, two answers for the same game",
+                "Build B (the site's landing page and Lines page) and Build D (the horizon lines) both project a home margin "
+                "for the same game. They use different ratings windows, so they disagree. Each cell is a projected home margin: "
+                "negative means the home team is projected to lose. Build B's stored <code>model_spread_home</code> holds the "
+                "home margin in %d of 16 rows where a strategy pick exists; the standard home-spread reading fits 0 of them. "
+                "Build D's <code>line_spread_home</code> equals the projected home margin in all 27 rows."
+                % cb["home_margin_consistent"]))
+    rows = []
+    for c in chk["cross_build"]:
+        if "difference" not in c:
+            continue
+        gid = next((g for g, o in off_by_id.items() if o["matchup"] == c["matchup"]), None)
+        src = off_by_id[gid]["source_url"] if gid else None
+        rows.append([
+            '<b>%s</b>' % esc(c["matchup"]), num(c["build_b_model_home_margin"], 1),
+            num(c["build_d_model_home_margin"], 1), num(c["difference"], 1),
+            "yes" if (c["build_b_model_home_margin"] > 0) != (c["build_d_model_home_margin"] > 0) else "no",
+            link(src, "game") if src else NA])
+    b.append(table(["Game", "Build B home margin (landing page)", "Build D home margin (horizon)", "Difference (pts)",
+                    "Opposite favourite?", "Source"], rows,
+                   note="Build B: ratings training window 10/20–11/05/2026 per site/data/meta.json, with the season-to-date "
+                        "ratings through 11/12 also listed there; the page does not say which one the horizon lines use. "
+                        "Build D: team ratings through games of 11/12."))
+
+    # 6. open questions
+    b.append(h2("6. What this check could not answer",
+                "Each item has the official source that would answer it. None of these is filled in by guesswork."))
+    rows = [
+        ["Is the 11/14 noon injury report published?", "The 11/14 12:00 PM ET edition URL returned AccessDenied at capture. The site's newest edition is 11/13 07:30 PM ET.",
+         "Re-check after 17:00 UTC on 2026-11-14", link("https://official.nba.com/nba-injury-report-2026-27-season/", "NBA injury report policy")],
+        ["Which ratings window do the landing-page lines use?", "site/data/meta.json lists two windows; the page does not say which one feeds the horizon lines.",
+         "Ask the build owner; then state it on the page", link("https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season", "NBA.com team advanced stats")],
+        ["Are the repeated pairings (NYK@TOR 11/15 and 11/17; POR@MIN 11/16 and 11/17) real?", "Both are printed on NBA.com with distinct game IDs. They are carried as printed.",
+         "Confirm on the official schedule on each date", link("https://www.nba.com/games?date=2026-11-15", "NBA.com 11/15")],
+        ["Did the 9 games of 11/13 settle the model's margin well?", "9 games, mean absolute margin error %s points. Too few to say." % ss["mean_abs_margin_error"],
+         "Settle every new slate against official finals, with the sample stated", link("https://www.nba.com/games?date=2026-11-13", "NBA.com 11/13")],
+    ]
+    b.append(table(["Question", "What the check found", "What would answer it", "Source"], rows))
+
+    return page("Official source check",
+                "Line-by-line comparison of the site with NBA.com on 2026-11-14 (UTC): the horizon, the nine 11/13 finals and "
+                "the settlement of the lines published for them.", "\n".join(b))
 
 
 # ------------------------------------------------------------------------- main
@@ -859,6 +1005,9 @@ def main():
                                      "Line-by-line review of the repository and every official capture behind "
                                      "it, with the irregularities listed and the links to review them.",
                                      "\n".join(b))
+
+    # === official source check (session arena/b0f2cc98-nba1, COORDINATION §23) =====
+    built["source-check.html"] = build_source_check(sources)
 
     # ------------------------------------------------------------------ write
     for name, html in built.items():
