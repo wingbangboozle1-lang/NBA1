@@ -599,7 +599,7 @@ and rebase rather than overwrite.
 - **Sources used:** `https://www.nba.com/games?date=2026-11-13` (00:55Z state), `?date=2026-11-14/15/16/17` (00:52–01:32Z), `https://official.nba.com/nba-injury-report-2026-27-season/` (hub, 01:08Z), `https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_08_00PM.pdf` (newest published edition at capture).
 - **Verification performed:** `python3 scripts/verify_session_w.py` (502 checks) and `python3 scripts/verify_all.py`; every table row on `lines.html`/`gameflow.html`/`review.html` carries an official source link (checker-enforced).
 - **Irregularities (flagged, published on review.html, none blocking):** W-F1 mixed pick bases (frozen 11/13 vs re-stamped 11/14–17), W-F2 11/14 injury basis = 11/13 08:00 PM ET edition (game-day editions later will supersede), W-F4 20+11 page-break rows kept unattributed, W-F5 post-final record refresh queued (T2 early pass stored, no finals at capture; late pass ≈03:30–05:30Z), W-F6 NYK@TOR + POR@MIN duplicate matchups inside 48h as officially scheduled, W-F7 Martin, Caleb team conflict (cross-source CLE wins), W-F8 11/14 B2B list corrected (Miami was missing). W-F3 (GSW/OKC/SAC single-source) resolved at the T2 early pass — all 30 teams now have two official sources.
-- **PR:** (filled at close-out below).
+- **PR:** https://github.com/wingbangboozle1-lang/NBA1/pull/43 (integration → main). Merge result + Pages status recorded at close-out below.
 
 ---
 
