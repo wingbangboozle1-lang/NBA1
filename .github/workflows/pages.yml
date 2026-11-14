@@ -72,6 +72,34 @@ jobs:
             exit 1
           fi
 
+      - name: Validate the Command Center renders every page from its data
+        run: |
+          python3 - <<'PY'
+          import json, os, sys
+          need = ["meta.json","sources.json","lines.json","picks.json","props.json",
+                  "injuries.json","gameflow.json","backtest.json","validation.json",
+                  "leaderboard.json","correlations.json","luck.json","teams.json",
+                  "flagged.json","questions.json","suggestions.json","executive.json",
+                  "repo-review.json"]
+          d = os.path.join("command-center", "data")
+          missing = [f for f in need if not os.path.exists(os.path.join(d, f))]
+          if missing:
+              print("MISSING Command Center data:", missing); sys.exit(1)
+          for f in need:
+              with open(os.path.join(d, f)) as fh:
+                  json.load(fh)
+          pages = [f for f in os.listdir("command-center") if f.endswith(".html")]
+          if len(pages) != 17:
+              print("Expected 17 Command Center pages, found", len(pages)); sys.exit(1)
+          print(f"Command Center: {len(need)} data files valid, {len(pages)} pages present.")
+          PY
+
+      - name: Static link and source check across every build
+        run: python3 scripts/check_links.py
+
+      - name: Execute every Command Center page against its data
+        run: python3 scripts/check_rendered.py
+
       - name: Check for broken internal links (both builds)
         run: |
           python3 - <<'PY'
@@ -92,7 +120,11 @@ jobs:
               for m in re.finditer(r'(?:href|src)="([^"#][^"]*)"', html):
                   h = m.group(1)
                   if re.match(r'^(https?:|mailto:|//)', h): continue
-                  target = os.path.normpath(os.path.join(base, h))
+                  # strip the #fragment before the existence check (deep anchors like
+                  # pages/flagged.html#F2 are legitimate; scripts/verify_all.py 4e already
+                  # strips the fragment — this scan did not, so PR #40's anchor links
+                  # tripped it. Session arena/697fca1e-nba1, I-W10.)
+                  target = os.path.normpath(os.path.join(base, h.split("#")[0]))
                   if not os.path.exists(target):
                       bad.append((p, h, target))
           if bad:

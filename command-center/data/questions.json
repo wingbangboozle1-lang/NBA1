@@ -1,0 +1,284 @@
+{
+ "title": "Questions and Answers Register",
+ "intro": "Every question a reasonable person would need answered before deciding anything here, split by whether the information on hand can already answer it. Each row states what is known, what is still missing, exactly how to obtain the missing piece, and what decision it blocks. A question is never marked answered on the strength of an inference.",
+ "rules": [
+  "ANSWERED means the number or fact is in this repository and traceable to an official URL.",
+  "PARTIAL means one side is evidence-backed and the other side is missing; both facts are shown.",
+  "OPEN means nothing in this repository can answer it yet, so the row says what artefact would.",
+  "A blank in the 'Known' column is a gap, never a zero."
+ ],
+ "answered": [
+  {
+   "id": "Q01",
+   "q": "Is the model better than a naive baseline at predicting the margin?",
+   "answer": "Yes, by a small margin. Out of sample over 51 games, mean absolute error on the margin is 12.89 for the model against 13.19 for the reference, and RMSE is 17.10 against 17.70.",
+   "known": "validation.json metrics, all 51 out-of-sample rows",
+   "still_missing": "Whether a small MAE gain survives a larger sample, and whether it survives against a real market price rather than a naive baseline.",
+   "how_to_get": "Let the daily refresh accumulate 100+ graded games, then re-run the bootstrap interval on the MAE difference.",
+   "blocks": "Ranking the model above the baseline in any commercial sense.",
+   "source": "S1",
+   "evidence": "51-game out-of-sample window 2026-11-06..2026-11-12, ratings frozen at 2026-11-05."
+  },
+  {
+   "id": "Q02",
+   "q": "Is the model better at totals?",
+   "answer": "No. It is slightly worse out of sample: MAE 14.86 for the model against 14.73 for the reference. On the earlier 28-game window the sign was the other way, which is exactly why the window was extended.",
+   "known": "validation.json metrics",
+   "still_missing": "Nothing methodological; the finding is negative and that is the answer.",
+   "how_to_get": "n/a — the negative result is retained on purpose.",
+   "blocks": "Any totals-based product claim. S2 (total edge) is correctly gated off.",
+   "source": "S1",
+   "evidence": "Same 51-game window; the sign flip is recorded in the executive summary."
+  },
+  {
+   "id": "Q03",
+   "q": "Does any strategy clear a skill gate?",
+   "answer": "No. Zero of ten. The best is S1 at 16-7 over 23 graded plays, exact binomial p = 0.093, Wilson 95% CI [0.491, 0.844] against a 0.524 break-even. Its lower bound is below break-even, so G4 fails.",
+   "known": "validation.json strategies[] plus leaderboard.json tiers",
+   "still_missing": "About 60-100 more graded plays on the same rule to move the Wilson lower bound above break-even, if the true edge is what the point estimate suggests.",
+   "how_to_get": "Run the refresh daily and let the pre-registered rule generate plays without changing the rule after seeing results.",
+   "blocks": "Funding, promotion above Tier 3, and any reward payout.",
+   "source": "S1",
+   "evidence": "Exact binomial test and Wilson interval recomputed from the graded play list."
+  },
+  {
+   "id": "Q04",
+   "q": "Is the win-loss record on the site consistent with the official standings?",
+   "answer": "Yes. Every team's games played in the season table reconciles exactly to training-window games plus completed results (246 + 102 = 348 team-games), and total wins equal total losses (174 = 174).",
+   "known": "data/raw/team_advanced.json, data/raw/games_completed.json",
+   "still_missing": "Nothing for internal consistency. External standings beyond 2026-11-12 are not captured because the 11/13 games were live at capture.",
+   "how_to_get": "Re-capture nba.com/stats/teams/advanced after the 11/13 games finalise.",
+   "blocks": "Nothing.",
+   "source": "S1",
+   "evidence": "Per-team reconciliation performed cell by cell for all 30 teams."
+  },
+  {
+   "id": "Q05",
+   "q": "Are the injuries used the latest official edition?",
+   "answer": "Yes as of the cut: the 11/13/26 07:30 PM ET edition, which supersedes the 17:15 ET edition. Between those two editions seven statuses changed.",
+   "known": "injuries.json (122 rows) with the PDF URL",
+   "still_missing": "Any pre-tip edition published after 19:30 ET, and all 11/15 and 11/16 entries, which that edition does not yet contain.",
+   "how_to_get": "Capture the last edition before each tip and the first edition after it, daily.",
+   "blocks": "Pricing availability for 11/15 and 11/16 games (the impact is currently computed with no report entries for those dates and says so).",
+   "source": "S6",
+   "evidence": "The report's own header line and the official injury-report index page."
+  },
+  {
+   "id": "Q06",
+   "q": "Can a rotation-minute change be quantified for an injured player?",
+   "answer": "Only as a lower bound. Minutes are known for the 50 players in the captured official per-game table; for everyone else the impact is counted as zero and the row says 'minutes unavailable'. Roster minutes coverage is 27-30%.",
+   "known": "players/traditional page 1, 50 players",
+   "still_missing": "Minutes for the other 415 players in the league table.",
+   "how_to_get": "Capture all 10 pages of nba.com/stats/players/traditional (465 rows) instead of page 1, or capture per-game box scores.",
+   "blocks": "Any claim that an injury impact has been sized rather than bounded.",
+   "source": "S7",
+   "evidence": "coverage_note in data/raw/players_traditional.json."
+  },
+  {
+   "id": "Q07",
+   "q": "Are the parlay correlations measured or assumed?",
+   "answer": "Split. Thirteen correlations between official statistics are measured (e.g. NetRtg vs win% r = 0.931 on n = 30). The rho values used to price same-game parlays are not measured; they are labelled MODEL-DERIVED in the data file and on the page.",
+   "known": "correlations.json measured[] vs model_derived[]",
+   "still_missing": "Paired bet-outcome data to measure dependence between legs of a parlay.",
+   "how_to_get": "Log every leg outcome per game, then compute leg-pair correlations once n >= 30 pairs.",
+   "blocks": "Any claim that a parlay edge is real rather than an artefact of an assumed rho.",
+   "source": "S7",
+   "evidence": "The measured/model_derived split is explicit in the data file and rendered on the Correlations page."
+  },
+  {
+   "id": "Q08",
+   "q": "Is the reference line a market line?",
+   "answer": "No. It is a naive model of the same inputs with a flat 2.0-point home-court advantage. No sportsbook price is used anywhere in the repository.",
+   "known": "model_core.reference_line",
+   "still_missing": "Any licensed price history.",
+   "how_to_get": "Buy or license an odds archive, or record a dated manual quote snapshot per game with its timestamp.",
+   "blocks": "Every economic gate. A '3-point edge vs the reference' is not a 3-point edge vs the market.",
+   "source": "S1",
+   "evidence": "reference_line(..., flat_hca=2.0) is a modelling construction, flagged as such."
+  },
+  {
+   "id": "Q09",
+   "q": "Is the home-court advantage estimated or measured?",
+   "answer": "Estimated on the same window it is tested on, and disclosed as such. A zeroed-parameter variant is published beside it: margin MAE 12.88 with the parameters zeroed against 12.89 with them fitted, i.e. the fitted parameters add nothing measurable.",
+   "known": "validation.json metrics.mae_margin_zeroed_params",
+   "still_missing": "An HCA estimated on prior seasons only.",
+   "how_to_get": "Capture 2025-26 team data and fit HCA out of sample.",
+   "blocks": "Claiming the rest/HCA refinements are load-bearing. They are not, on this sample.",
+   "source": "S2",
+   "evidence": "The zeroed variant is computed on the same 51 games."
+  },
+  {
+   "id": "Q10",
+   "q": "Are any results settled against a real price?",
+   "answer": "No. Zero settled bets against a market. Every 'units' figure is a hypothetical at a flat -110 with pushes voided.",
+   "known": "roi_units in strategies.py, applied to graded plays",
+   "still_missing": "Real prices and real settlement rules (limits, voids, pushes, alternate lines).",
+   "how_to_get": "The price feed from Q08 plus a settlement rule table per market.",
+   "blocks": "Any ROI, bankroll or reward claim.",
+   "source": "S1",
+   "evidence": "picks.json: every upcoming play has result = null and status = PENDING."
+  },
+  {
+   "id": "Q11",
+   "q": "Does the repository publish a pick for every game in the window?",
+   "answer": "Every game has an originated line. Picks are conditional on a strategy threshold, so a game with no qualifying edge correctly has no pick rather than a forced one.",
+   "known": "lines.json 22 rows; picks.json 59 rows",
+   "still_missing": "Nothing.",
+   "how_to_get": "n/a",
+   "blocks": "Nothing; a pick per game would be worse, not better.",
+   "source": "S4",
+   "evidence": "Row counts reconcile: 22 lines, 59 picks, all dated inside the window."
+  }
+ ],
+ "partial": [
+  {
+   "id": "Q12",
+   "q": "What is the true break-even price?",
+   "known": "-110 is assumed, giving 52.38%.",
+   "still_missing": "The prices actually available for these games.",
+   "how_to_get": "A licensed price snapshot per game, timestamped before tip.",
+   "blocks": "G3 and G4 thresholds, and the leaderboard ordering.",
+   "source": null,
+   "evidence": "BREAKEVEN constant in engine/validate.py is 110/210, an assumption."
+  },
+  {
+   "id": "Q13",
+   "q": "How much of the leaderboard ordering is sample noise?",
+   "known": "Each row publishes n, the Wilson interval and the exact binomial p.",
+   "still_missing": "A multiplicity-adjusted ranking across ten strategies.",
+   "how_to_get": "Apply a Benjamini-Hochberg or Bonferroni correction across the ten strategy p-values and publish the adjusted column.",
+   "blocks": "Saying strategy A is better than strategy B.",
+   "source": null,
+   "evidence": "Ten strategies were tested; at alpha = 0.05 about 0.5 false positives are expected by chance alone."
+  },
+  {
+   "id": "Q14",
+   "q": "How sensitive is the verdict to the injury-impact coefficient?",
+   "known": "A 10/15/20 sensitivity band is published beside the headline 15.",
+   "still_missing": "An empirical estimate of that coefficient from on/off minutes data.",
+   "how_to_get": "Capture lineup and on/off data; regress team net rating on the minute share of unavailable players.",
+   "blocks": "Trusting the size of an availability-driven line move.",
+   "source": "S7",
+   "evidence": "meta.json assumptions.injury_impact_coef is labelled a modelling choice."
+  },
+  {
+   "id": "Q15",
+   "q": "Do the player-prop baselines have a measured error?",
+   "known": "Baselines are season per-game averages adjusted for pace and opponent.",
+   "still_missing": "Game-to-game variance for props, so no probability is published with any prop.",
+   "how_to_get": "Capture per-game player logs (not season averages) and measure the residual standard deviation per stat.",
+   "blocks": "Turning prop baselines into priced props.",
+   "source": "S7",
+   "evidence": "props.json rows carry a baseline and an explicit note that no probability is published."
+  }
+ ],
+ "open": [
+  {
+   "id": "Q16",
+   "q": "Is there a legal, licensed way to price these bets in the operator's jurisdiction?",
+   "known": "The operator's location is the Netherlands, per the session context; the repository itself makes no claim about legal scope.",
+   "still_missing": "Legal review, a licensed data source, and the operator's own permissions.",
+   "how_to_get": "Legal opinion plus a data-vendor contract; the national regulator for gambling in the Netherlands is the Kansspelautoriteit.",
+   "blocks": "Any operational use, and any claim that the work is commercially viable.",
+   "source": null,
+   "evidence": "No sportsbook terms, licences or prices exist in the repository."
+  },
+  {
+   "id": "Q17",
+   "q": "What bankroll and staking policy would apply if something were funded?",
+   "known": "Plays are expressed in units at quarter-unit sizing for the top tier.",
+   "still_missing": "Kelly or fixed-fraction policy, drawdown limits, and the operator's risk appetite.",
+   "how_to_get": "A written policy decision, then a backtest of that policy on the same window.",
+   "blocks": "Translating a unit figure into money.",
+   "source": null,
+   "evidence": "No staking policy file exists."
+  },
+  {
+   "id": "Q18",
+   "q": "What is the reward schedule for the leaderboard competition?",
+   "known": "Tier structure exists (Tier 1 down to 'not funded').",
+   "still_missing": "Actual rewards, qualification windows and a payout rule for ties.",
+   "how_to_get": "A written product decision; the site's Suggestions page proposes a gate-first design.",
+   "blocks": "Launching the competition as an actual product.",
+   "source": null,
+   "evidence": "leaderboard.json tiers are labels only; no amounts are set anywhere."
+  },
+  {
+   "id": "Q19",
+   "q": "Are the official pages stable enough to keep scraping, and is that permitted?",
+   "known": "The project only reads public nba.com and official.nba.com pages and links to them.",
+   "still_missing": "The NBA's terms for automated retrieval, and a fallback if the page markup changes.",
+   "how_to_get": "Review nba.com terms of use; add a markup-change alarm to the refresh job.",
+   "blocks": "Unattended automation.",
+   "source": null,
+   "evidence": "engine/fetch_official.py has never been executed against the live site from the sandbox (flagged F7)."
+  },
+  {
+   "id": "Q20",
+   "q": "Does a lineup or rotation source exist that is official and machine-readable?",
+   "known": "None is captured.",
+   "still_missing": "Starting-lineup confirmation before tip.",
+   "how_to_get": "The official box score's starting-lineup field once a game starts, or a licensed feed pre-tip.",
+   "blocks": "Distinguishing a starter's absence from a bench player's absence.",
+   "source": null,
+   "evidence": "The injury report gives status, not role."
+  },
+  {
+   "id": "Q21",
+   "q": "Can the 11/13 results be added, and would they change the verdict?",
+   "known": "No: the games were live at capture and are not published as results here.",
+   "still_missing": "Final scores for the nine 11/13 games.",
+   "how_to_get": "Capture nba.com/games?date=2026-11-13 after the games finalise, then re-run the backtest with the extended window.",
+   "blocks": "Nothing, but it is the cheapest way to grow the sample.",
+   "source": "S4",
+   "evidence": "schedule_in_progress.json deliberately carries no scores."
+  },
+  {
+   "id": "Q22",
+   "q": "Is the neutral-site adjustment correct?",
+   "known": "One neutral-site game is identified (2026-11-07 DEN@IND, NBA Mexico City Game) and its home-court advantage is zeroed.",
+   "still_missing": "Confirmation that no other game in the window was neutral or at a temporary venue.",
+   "how_to_get": "Check each venue on the official schedule against the home team's usual building.",
+   "blocks": "The margin fit, marginally.",
+   "source": "S4",
+   "evidence": "games_completed.json neutral column, one row set to 1."
+  },
+  {
+   "id": "Q23",
+   "q": "What happens when the sample floor and the window length disagree?",
+   "known": "The 51-game window is fixed to dates, not to a play count, so adding games adds plays but not days.",
+   "still_missing": "A stated policy for when the training cut-off should roll forward.",
+   "how_to_get": "A written decision: rolling-origin refit vs frozen ratings. The site proposes rolling-origin.",
+   "blocks": "Comparing this backtest with any future one.",
+   "source": null,
+   "evidence": "validate.py HOLDOUT_START/END are constants."
+  },
+  {
+   "id": "Q24",
+   "q": "Which of the ten strategies should be retired?",
+   "known": "Four generate zero plays on this window (S4, S6, S7, S8) and are marked not funded.",
+   "still_missing": "A retire/keep rule and how long a zero-play strategy stays registered.",
+   "how_to_get": "A written rule, e.g. 'retire after 30 days with no qualifying play'.",
+   "blocks": "Keeping the leaderboard honest as the library grows.",
+   "source": null,
+   "evidence": "leaderboard.json shows four rows at composite 0.0."
+  },
+  {
+   "id": "Q25",
+   "q": "Is anything on the site unverified?",
+   "known": "Yes, and it is listed rather than hidden.",
+   "still_missing": "Reviewer sign-off on each flagged item.",
+   "how_to_get": "Read the Flagged for Review page; every item carries a source link and a suggested action.",
+   "blocks": "Treating the site as fully verified.",
+   "source": null,
+   "evidence": "flagged.json plus the repository review page."
+  },
+  {
+   "id": "Q26",
+   "q": "Which injury-report edition is authoritative for a published page?",
+   "known": "Five official 2026-11-13 editions exist (12:00/03:00/05:00/05:15/07:30 PM ET); nine statuses moved 12PM->3PM and eight moved 5:15->7:30 PM. Every build now publishes one named edition with its exact URL and no row mixes editions.",
+   "still_missing": "A written league rule naming the authoritative edition per publication time.",
+   "how_to_get": "Ask league communications; read the NBA media/operations handbook; log the answer in COORDINATION.md. Edition URLs are in data/refresh_2026_11_14/official_captures_2026-11-14.json."
+  }
+ ]
+}

@@ -8,7 +8,15 @@
   "pick_gate_margin": 3.0,
   "note": "All parameters are this project's assumptions, not official values. Totals are not originated (no pace/efficiency inputs). Market comparison gates (G4/G5) are blocked: no odds feed is connected."
  },
- "generated_at_utc": "2026-11-13T22:45Z",
+ "inputs_basis": {
+  "records": "per-slate records_as_of stamps in data/slate_full.json (11/13 rows frozen at 2026-11-13T22:45Z pick basis; 11/14-11/17 re-verified against official slate pages 2026-11-14T00:52-01:32Z — see data/raw/records_2026-11-14.json)",
+  "injury_editions": {
+   "2026-11-13": "injuries_0515.json (official PDF 11/13/26 05:15 PM ET) — frozen basis of the published 11/13 batch",
+   "2026-11-14": "data/raw/injury_report_2026-11-13_08_00PM.json (official PDF 11/13/26 08:00 PM ET, newest published edition at capture 2026-11-14T01:12Z; prints rows for all five 11/14 games)",
+   "2026-11-15..17": "no edition published at capture time (day-before deadlines not reached) — prop/impact rows gated G-INJ, hub: https://official.nba.com/nba-injury-report-2026-27-season/"
+  }
+ },
+ "generated_at_utc": "2026-11-14T01:32Z (slate rows for 11/14-11/17 re-verified/captured; 11/13 rows frozen at 2026-11-13T22:45Z pick basis)",
  "games": [
   {
    "date": "2026-11-13",
@@ -1094,6 +1102,181 @@
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/game/phx-vs-den-0022600252"
    ]
+  },
+  {
+   "date": "2026-11-17",
+   "matchup": "NYK@TOR",
+   "time_et": "7:30 PM",
+   "away_record": "6-5",
+   "home_record": "5-7",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-15",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-15"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-15",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-15"
+   },
+   "model": {
+    "p_home_smoothed": 0.444,
+    "p_away_smoothed": 0.529,
+    "expected_margin_home": -0.5,
+    "originated_spread_home": 0.5,
+    "p_home_win": 0.489,
+    "ml_home_decimal": 2.04,
+    "ml_away_decimal": 1.96,
+    "pick_side": "PASS",
+    "pick_line": null,
+    "gate": "G-CFG fail (|margin| < 3.0) — no bet"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/game/nyk-vs-tor-0022600253"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "matchup": "DET@SAS",
+   "time_et": "8:00 PM",
+   "away_record": "8-3",
+   "home_record": "10-2",
+   "rest_away": {
+    "rest_days": 2,
+    "b2b": false,
+    "last_date": "2026-11-14",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-14"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-15",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-15"
+   },
+   "model": {
+    "p_home_smoothed": 0.722,
+    "p_away_smoothed": 0.647,
+    "expected_margin_home": 5.1,
+    "originated_spread_home": -5.0,
+    "p_home_win": 0.615,
+    "ml_home_decimal": 1.63,
+    "ml_away_decimal": 2.59,
+    "pick_side": "HOME",
+    "pick_line": "SAS -5.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/game/det-vs-sas-0022600255"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "matchup": "POR@MIN",
+   "time_et": "8:00 PM",
+   "away_record": "8-3",
+   "home_record": "9-3",
+   "rest_away": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-16",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-16"
+   },
+   "rest_home": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-16",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-16"
+   },
+   "model": {
+    "p_home_smoothed": 0.667,
+    "p_away_smoothed": 0.647,
+    "expected_margin_home": 3.2,
+    "originated_spread_home": -3.0,
+    "p_home_win": 0.572,
+    "ml_home_decimal": 1.75,
+    "ml_away_decimal": 2.34,
+    "pick_side": "HOME",
+    "pick_line": "MIN -3.0",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/game/por-vs-min-0022600254"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "matchup": "UTA@LAC",
+   "time_et": "10:30 PM",
+   "away_record": "1-11",
+   "home_record": "2-8",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-15",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-15"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-15",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-15"
+   },
+   "model": {
+    "p_home_smoothed": 0.312,
+    "p_away_smoothed": 0.222,
+    "expected_margin_home": 5.7,
+    "originated_spread_home": -5.5,
+    "p_home_win": 0.626,
+    "ml_home_decimal": 1.6,
+    "ml_away_decimal": 2.67,
+    "pick_side": "HOME",
+    "pick_line": "LAC -5.5",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/game/uta-vs-lac-0022600257"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "matchup": "CHA@LAL",
+   "time_et": "11:00 PM",
+   "away_record": "4-8",
+   "home_record": "11-2",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-15",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-15"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-15",
+    "last_slate_url": "https://www.nba.com/games?date=2026-11-15"
+   },
+   "model": {
+    "p_home_smoothed": 0.737,
+    "p_away_smoothed": 0.389,
+    "expected_margin_home": 14.7,
+    "originated_spread_home": -14.5,
+    "p_home_win": 0.792,
+    "ml_home_decimal": 1.26,
+    "ml_away_decimal": 4.8,
+    "pick_side": "HOME",
+    "pick_line": "LAL -14.5",
+    "gate": "G-CFG pass (|margin| ≥ 3.0); paper pick — G4/G5 market gates blocked"
+   },
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/game/cha-vs-lal-0022600256"
+   ]
   }
  ],
  "parlays": [
@@ -1276,6 +1459,51 @@
    "fair_odds_ub": 2.31,
    "src1": "https://www.nba.com/game/chi-vs-cle-0022600246",
    "src2": "https://www.nba.com/game/phi-vs-bkn-0022600248"
+  },
+  {
+   "date": "2026-11-17",
+   "leg1": "CHA@LAL — LAL -14.5",
+   "leg2": "UTA@LAC — LAC -5.5",
+   "p1": 0.792,
+   "p2": 0.626,
+   "joint_lb": 0.418,
+   "joint_ub": 0.626,
+   "rho_lb": -0.396,
+   "rho_ub": 0.663,
+   "fair_odds_lb": 1.6,
+   "fair_odds_ub": 2.39,
+   "src1": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "src2": "https://www.nba.com/game/uta-vs-lac-0022600257"
+  },
+  {
+   "date": "2026-11-17",
+   "leg1": "CHA@LAL — LAL -14.5",
+   "leg2": "DET@SAS — SAS -5.0",
+   "p1": 0.792,
+   "p2": 0.615,
+   "joint_lb": 0.407,
+   "joint_ub": 0.615,
+   "rho_lb": -0.405,
+   "rho_ub": 0.648,
+   "fair_odds_lb": 1.63,
+   "fair_odds_ub": 2.46,
+   "src1": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "src2": "https://www.nba.com/game/det-vs-sas-0022600255"
+  },
+  {
+   "date": "2026-11-17",
+   "leg1": "UTA@LAC — LAC -5.5",
+   "leg2": "DET@SAS — SAS -5.0",
+   "p1": 0.626,
+   "p2": 0.615,
+   "joint_lb": 0.241,
+   "joint_ub": 0.615,
+   "rho_lb": -0.612,
+   "rho_ub": 0.977,
+   "fair_odds_lb": 1.63,
+   "fair_odds_ub": 4.15,
+   "src1": "https://www.nba.com/game/uta-vs-lac-0022600257",
+   "src2": "https://www.nba.com/game/det-vs-sas-0022600255"
   }
  ],
  "prop_rows": [
@@ -1571,16 +1799,16 @@
    "date": "2026-11-14",
    "game": "DEN@NOP",
    "team": "Denver Nuggets",
-   "player": "Nikola Jokic",
+   "player": "Nikola Jokić",
    "ppg": 23.5,
    "rpg": 10.8,
    "apg": 9.0,
    "line": 43.5,
-   "status": "Report not yet published for this date",
+   "status": "Team report NOT YET SUBMITTED",
    "status_reason": null,
-   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "signal": "BLOCKED — team report not yet submitted (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-14",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_08_00PM.pdf",
    "blank": null
   },
   {
@@ -1592,11 +1820,11 @@
    "rpg": 5.2,
    "apg": 2.6,
    "line": 29.5,
-   "status": "Report not yet published for this date",
+   "status": "Team report NOT YET SUBMITTED",
    "status_reason": null,
-   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "signal": "BLOCKED — team report not yet submitted (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_08_00PM.pdf",
    "blank": null
   },
   {
@@ -1608,11 +1836,11 @@
    "rpg": 6.9,
    "apg": 6.5,
    "line": 38.0,
-   "status": "Report not yet published for this date",
+   "status": "Not listed on report",
    "status_reason": null,
-   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
    "src_leader": "https://www.nba.com/games?date=2026-11-14",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_08_00PM.pdf",
    "blank": null
   },
   {
@@ -1624,11 +1852,11 @@
    "rpg": 5.0,
    "apg": 5.5,
    "line": 33.5,
-   "status": "Report not yet published for this date",
+   "status": "Team report NOT YET SUBMITTED",
    "status_reason": null,
-   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "signal": "BLOCKED — team report not yet submitted (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_08_00PM.pdf",
    "blank": null
   },
   {
@@ -1640,11 +1868,11 @@
    "rpg": 5.2,
    "apg": 7.9,
    "line": 38.0,
-   "status": "Report not yet published for this date",
+   "status": "Not listed on report",
    "status_reason": null,
-   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
    "src_leader": "https://www.nba.com/games?date=2026-11-14",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_08_00PM.pdf",
    "blank": null
   },
   {
@@ -1656,11 +1884,11 @@
    "rpg": 12.6,
    "apg": 5.2,
    "line": 45.5,
-   "status": "Report not yet published for this date",
+   "status": "Team report NOT YET SUBMITTED",
    "status_reason": null,
-   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "signal": "BLOCKED — team report not yet submitted (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_08_00PM.pdf",
    "blank": null
   },
   {
@@ -1672,11 +1900,11 @@
    "rpg": 6.5,
    "apg": 5.0,
    "line": 31.0,
-   "status": "Report not yet published for this date",
+   "status": "Not listed on report",
    "status_reason": null,
-   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
    "src_leader": "https://www.nba.com/games?date=2026-11-14",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_08_00PM.pdf",
    "blank": null
   },
   {
@@ -1688,11 +1916,11 @@
    "rpg": 3.5,
    "apg": 4.9,
    "line": 34.5,
-   "status": "Report not yet published for this date",
+   "status": "Team report NOT YET SUBMITTED",
    "status_reason": null,
-   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "signal": "BLOCKED — team report not yet submitted (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_08_00PM.pdf",
    "blank": null
   },
   {
@@ -1704,11 +1932,11 @@
    "rpg": 6.2,
    "apg": 1.9,
    "line": 27.0,
-   "status": "Report not yet published for this date",
+   "status": "Team report NOT YET SUBMITTED",
    "status_reason": null,
-   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "signal": "BLOCKED — team report not yet submitted (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_08_00PM.pdf",
    "blank": null
   },
   {
@@ -1720,11 +1948,11 @@
    "rpg": 3.3,
    "apg": 6.3,
    "line": 28.0,
-   "status": "Report not yet published for this date",
+   "status": "Not listed on report",
    "status_reason": null,
-   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "signal": "BLOCKED — no market number, no game-log variance (G-PROP)",
    "src_leader": "https://www.nba.com/games?date=2026-11-14",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_08_00PM.pdf",
    "blank": null
   },
   {
@@ -1740,7 +1968,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -1756,24 +1984,24 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-16",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
    "date": "2026-11-15",
    "game": "LAL@PHX",
    "team": "Los Angeles Lakers",
-   "player": null,
-   "ppg": null,
-   "rpg": null,
-   "apg": null,
-   "line": null,
-   "status": null,
+   "player": "Luka Dončić",
+   "ppg": 38.6,
+   "rpg": 7.5,
+   "apg": 7.6,
+   "line": 53.5,
+   "status": "Report not yet published for this date",
    "status_reason": null,
-   "signal": "BLANK — leader stats not displayed on official page (flagged)",
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-15",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
-   "blank": "Season-leader table on the official Nov-15 slate page displayed '-' — no value inferred"
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "blank": null
   },
   {
    "date": "2026-11-15",
@@ -1788,24 +2016,24 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-16",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
    "date": "2026-11-15",
    "game": "CHA@LAC",
    "team": "Charlotte Hornets",
-   "player": null,
-   "ppg": null,
-   "rpg": null,
-   "apg": null,
-   "line": null,
-   "status": null,
+   "player": "Naz Reid",
+   "ppg": 17.3,
+   "rpg": 8.5,
+   "apg": 2.2,
+   "line": 28.0,
+   "status": "Report not yet published for this date",
    "status_reason": null,
-   "signal": "BLANK — leader stats not displayed on official page (flagged)",
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-15",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
-   "blank": "Season-leader table on the official Nov-15 slate page displayed '-' — no value inferred"
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "blank": null
   },
   {
    "date": "2026-11-15",
@@ -1820,7 +2048,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -1836,7 +2064,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -1852,7 +2080,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -1868,7 +2096,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-14",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -1884,7 +2112,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-16",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -1900,24 +2128,24 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
    "date": "2026-11-15",
    "game": "NYK@TOR",
    "team": "Toronto Raptors",
-   "player": null,
-   "ppg": null,
-   "rpg": null,
-   "apg": null,
-   "line": null,
-   "status": null,
+   "player": "RJ Barrett",
+   "ppg": 21.3,
+   "rpg": 6.7,
+   "apg": 4.1,
+   "line": 32.0,
+   "status": "Report not yet published for this date",
    "status_reason": null,
-   "signal": "BLANK — leader stats not displayed on official page (flagged)",
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-15",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
-   "blank": "Season-leader table on the official Nov-15 slate page displayed '-' — no value inferred"
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "blank": null
   },
   {
    "date": "2026-11-15",
@@ -1932,7 +2160,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -1948,7 +2176,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-16",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -1964,7 +2192,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -1980,7 +2208,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -1996,7 +2224,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2012,7 +2240,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2028,7 +2256,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2044,7 +2272,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-16",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2060,7 +2288,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2076,7 +2304,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2092,7 +2320,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2108,7 +2336,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-16",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2124,7 +2352,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-16",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2140,7 +2368,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-14",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2156,7 +2384,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2172,7 +2400,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2188,7 +2416,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2204,7 +2432,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-14",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2220,7 +2448,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2236,7 +2464,7 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-13",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
@@ -2252,14 +2480,14 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-16",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   },
   {
    "date": "2026-11-16",
    "game": "PHX@DEN",
    "team": "Denver Nuggets",
-   "player": "Nikola Jokic",
+   "player": "Nikola Jokić",
    "ppg": 23.5,
    "rpg": 10.8,
    "apg": 9.0,
@@ -2268,9 +2496,169 @@
    "status_reason": null,
    "signal": "BLOCKED — status report not yet due/published (G-INJ)",
    "src_leader": "https://www.nba.com/games?date=2026-11-14",
-   "src_inj": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "blank": null
+  },
+  {
+   "date": "2026-11-17",
+   "game": "NYK@TOR",
+   "team": "New York Knicks",
+   "player": "Karl-Anthony Towns",
+   "ppg": 20.9,
+   "rpg": 13.5,
+   "apg": 3.5,
+   "line": 38.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "blank": null
+  },
+  {
+   "date": "2026-11-17",
+   "game": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "player": "RJ Barrett",
+   "ppg": 21.3,
+   "rpg": 6.7,
+   "apg": 4.1,
+   "line": 32.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-15",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "blank": null
+  },
+  {
+   "date": "2026-11-17",
+   "game": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Cade Cunningham",
+   "ppg": 25.0,
+   "rpg": 5.2,
+   "apg": 7.9,
+   "line": 38.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-14",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "blank": null
+  },
+  {
+   "date": "2026-11-17",
+   "game": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Victor Wembanyama",
+   "ppg": 30.3,
+   "rpg": 11.7,
+   "apg": 2.8,
+   "line": 45.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "blank": null
+  },
+  {
+   "date": "2026-11-17",
+   "game": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "player": "Deni Avdija",
+   "ppg": 23.0,
+   "rpg": 6.1,
+   "apg": 6.5,
+   "line": 35.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "blank": null
+  },
+  {
+   "date": "2026-11-17",
+   "game": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "LaMelo Ball",
+   "ppg": 18.6,
+   "rpg": 3.3,
+   "apg": 6.3,
+   "line": 28.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-14",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "blank": null
+  },
+  {
+   "date": "2026-11-17",
+   "game": "UTA@LAC",
+   "team": "Utah Jazz",
+   "player": "Keyonte George",
+   "ppg": 20.4,
+   "rpg": 4.5,
+   "apg": 6.5,
+   "line": 31.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "blank": null
+  },
+  {
+   "date": "2026-11-17",
+   "game": "UTA@LAC",
+   "team": "LA Clippers",
+   "player": "Darius Garland",
+   "ppg": 20.4,
+   "rpg": 1.8,
+   "apg": 6.9,
+   "line": 29.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-13",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "blank": null
+  },
+  {
+   "date": "2026-11-17",
+   "game": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "player": "Naz Reid",
+   "ppg": 17.3,
+   "rpg": 8.5,
+   "apg": 2.2,
+   "line": 28.0,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-15",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "blank": null
+  },
+  {
+   "date": "2026-11-17",
+   "game": "CHA@LAL",
+   "team": "Los Angeles Lakers",
+   "player": "Luka Dončić",
+   "ppg": 38.6,
+   "rpg": 7.5,
+   "apg": 7.6,
+   "line": 53.5,
+   "status": "Report not yet published for this date",
+   "status_reason": null,
+   "signal": "BLOCKED — status report not yet due/published (G-INJ)",
+   "src_leader": "https://www.nba.com/games?date=2026-11-15",
+   "src_inj": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "blank": null
   }
  ],
- "n_model_picks": 26
+ "n_model_picks": 30
 }

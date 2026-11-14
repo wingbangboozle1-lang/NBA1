@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions &middot; NBA Line Origination Desk</title>
+<meta name="description" content="NBA lines originated from official NBA.com final scores, with a gated strategy leaderboard.">
+<link rel="stylesheet" href="../assets/style.css">
+
+</head><body>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html"><span class="dot"></span>NBA&nbsp;Line&nbsp;Origination&nbsp;Desk</a>
+  <div class="cap">Official capture 2026-11-14 00:42 UTC</div>
+  <nav><div class="navgroup"><h4>Overview</h4><ul>
+<li><a href="../index.html">Executive dashboard</a></li>
+</ul></div>
+<div class="navgroup"><h4>Lines and game flow</h4><ul>
+<li><a href="lines.html">Originated lines</a></li>
+<li><a href="gameflow.html">Game flow and rest</a></li>
+</ul></div>
+<div class="navgroup"><h4>Strategy lab</h4><ul>
+<li><a href="strategies.html">Strategy library</a></li>
+<li><a href="leaderboard.html">Leaderboard and rewards</a></li>
+<li><a href="gates.html">Validation gates</a></li>
+<li><a href="luck.html">Luck removal and power</a></li>
+<li><a href="signals.html">Signal study</a></li>
+</ul></div>
+<div class="navgroup"><h4>Model and data</h4><ul>
+<li><a href="teams.html">Team ratings</a></li>
+<li><a href="backtest.html">Walk-forward backtest</a></li>
+<li><a href="gamelog.html">Official game log</a></li>
+<li><a href="correlations.html">Correlations and parlays</a></li>
+<li><a href="method.html">Method</a></li>
+</ul></div>
+<div class="navgroup"><h4>Availability</h4><ul>
+<li><a href="injuries.html">Injuries and rotation</a></li>
+<li><a href="props.html">Player props</a></li>
+</ul></div>
+<div class="navgroup"><h4>Governance</h4><ul>
+<li><a href="questions.html">Open questions</a></li>
+<li><a class="active" href="suggestions.html">Suggestions</a></li>
+<li><a href="sources.html">Source register</a></li>
+<li><a href="flagged.html">Flagged for review</a></li>
+<li><a href="repo-review.html">Repository review</a></li>
+</ul></div></nav>
+  <div class="sidenote">
+    Every table row links to the official page it was read from.
+    A dash means the value is not published, not that it is zero.
+  </div>
+</aside>
+<main class="main">
+  <header class="top">
+    <h1>Suggestions</h1>
+    <p class="sub">12 ranked options for improving the site and the decision-making, none implemented.</p>
+  </header>
+  <div class="banner">
+    <strong>No strategy is funded.</strong> All 12 flagged items and every unvalidated number are published
+    <a href="flagged.html">here</a>. There is no market odds feed, so nothing on this site is a claim of real-world profit.
+  </div>
+  
+<section class="card">
+  <h3>Suggestions, ranked &mdash; none implemented</h3>
+  <p>This page exists so that a change is chosen before it is made. Nothing here has been built: the whole point
+  is that these are options for someone to review and pick between. Each row states what it unlocks, what it
+  costs, what could go wrong, and what the recommendation would be.</p>
+</section>
+<section class="card">
+  <div class="tablewrap"><table class="tbl" data-sortable><thead><tr><th>Suggestion</th><th>Area</th><th>Impact</th><th>Effort</th><th>Risk</th><th>Unlocks</th><th>Detail</th><th>Recommendation</th><th>Source</th></tr></thead><tbody><tr><td><a id="G1"></a><strong>G1. Extend the game log first, before anything else</strong></td><td>Data</td><td><span class="badge b-high">High</span> impact</td><td><span class="badge b-low">Low</span> effort</td><td><span class="badge b-minimal">Minimal</span> risk</td><td>Statistical power. Every other improvement here is worth less than a bigger sample.</td><td>151 of 174 games are captured, 23 are published without scores, and the season will add roughly 7 games a day. The rest signal needs about 340 games to resolve; at the current rate that is another two months. Nothing else on this list moves the conclusion as much.</td><td><strong>Recommendation:</strong> Do this first. Automate a daily capture of nba.com/games?date=&lt;yesterday&gt; and re-fetch the 23 missing fixtures each run.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="G10"></a><strong>G10. Set a bankroll, a unit and an exposure cap</strong></td><td>Risk</td><td><span class="badge b-high">High</span> impact</td><td><span class="badge b-low">Low</span> effort</td><td><span class="badge b-minimal">Minimal</span> risk</td><td>Meaningful staking. &#x27;One unit&#x27; is currently undefined.</td><td>The tier system specifies half and full units but no bankroll exists. Until one is set, the reward structure is decorative.</td><td><strong>Recommendation:</strong> Set it before any tier reaches &#x27;funded&#x27;. Express every stake in currency on the site, not in units.</td><td><a class="src" href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="G2"></a><strong>G2. Decide the odds question explicitly, in writing</strong></td><td>Strategy</td><td><span class="badge b-high">High</span> impact</td><td><span class="badge b-low">Low</span> effort</td><td><span class="badge b-minimal">Minimal</span> risk</td><td>A defensible definition of &#x27;edge&#x27;.</td><td>Right now &#x27;edge&#x27; means &#x27;beats our own number&#x27;. That is a useful internal measure and a meaningless external one. Half the questions on the questions page collapse once this is answered.</td><td><strong>Recommendation:</strong> Answer it this week. If no feed: rename the leaderboard&#x27;s ROI column to &#x27;skill score vs own line&#x27; everywhere, and remove every sentence that could be read as a profit claim.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="G3"></a><strong>G3. Publish the power table next to the leaderboard, always</strong></td><td>Governance</td><td><span class="badge b-high">High</span> impact</td><td><span class="badge b-low">Low</span> effort</td><td><span class="badge b-minimal">Minimal</span> risk</td><td>Prevents the single most likely failure mode: promoting noise because the number looked good.</td><td>A +23% ROI on 13 bets looks like a winner and is not distinguishable from luck. Showing the minimum detectable ROI (79%) beside it makes the correct reading unavoidable.</td><td><strong>Recommendation:</strong> Permanent. Make &#x27;minimum detectable ROI&#x27; a required column on the leaderboard, not a footnote.</td><td><a class="src" href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="G7"></a><strong>G7. Add possessions and pace when a box-score feed exists</strong></td><td>Model</td><td><span class="badge b-high">High</span> impact</td><td><span class="badge b-medium">Medium</span> effort</td><td><span class="badge b-medium">Medium</span> risk</td><td>True efficiency ratings, real totals modelling, and player props.</td><td>The current model is points-per-game based because possessions are not published on any page reachable here. Pace differences between teams are large and currently unmodelled, which is a plausible reason the totals model shows no signal at all.</td><td><strong>Recommendation:</strong> Do it, but only with a head-to-head walk-forward against the current model. Switch only if it wins out of sample.</td><td><a class="src" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="G11"></a><strong>G11. Consolidate the three site builds into one</strong></td><td>Site</td><td><span class="badge b-medium">Medium</span> impact</td><td><span class="badge b-medium">Medium</span> effort</td><td><span class="badge b-low">Low</span> risk</td><td>A single source of truth.</td><td>The repository contains three complete sites built by different sessions: the root dashboard, docs/, and docs/b/. This build publishes a fourth, unified entry point and links the earlier three as an archive. They are preserved, not deleted, but they will drift apart if all four keep being edited.</td><td><strong>Recommendation:</strong> Freeze the two legacy builds. Keep them readable at their existing URLs, add a pointer at the top of each saying it is an archive, and make this build the only one that is edited.</td><td><a class="src" href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="G12"></a><strong>G12. Show a confidence column beside every originated line</strong></td><td>Site</td><td><span class="badge b-medium">Medium</span> impact</td><td><span class="badge b-low">Low</span> effort</td><td><span class="badge b-minimal">Minimal</span> risk</td><td>Honest reading of the lines page.</td><td>A spread of MIN -22.5 and a spread of DAL -0.8 are presented identically today, but one rests on a far shakier rating. Games played, rating gap and the shrinkage sensitivity all already exist in the data.</td><td><strong>Recommendation:</strong> Add games-played and a simple confidence band derived from the out-of-sample sigma to every line row. Cheap, and it stops the widest numbers being read as the strongest opinions.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="G4"></a><strong>G4. Add a paper-trading tier</strong></td><td>Leaderboard</td><td><span class="badge b-medium">Medium</span> impact</td><td><span class="badge b-low">Low</span> effort</td><td><span class="badge b-low">Low</span> risk</td><td>A live competition while the sample is still too small to fund anything.</td><td>Every live cell is currently Tier 0 or 1, so the leaderboard ranks nothing. A nominal 0.1-unit paper tier lets strategies be ranked, tracked and compared in public without any claim of an edge.</td><td><strong>Recommendation:</strong> Do it. Rank by score, not by stake, and keep the funded tiers behind the conjoined gates exactly as they are.</td><td><a class="src" href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="G5"></a><strong>G5. Tag every game with NBA Cup status</strong></td><td>Data</td><td><span class="badge b-medium">Medium</span> impact</td><td><span class="badge b-low">Low</span> effort</td><td><span class="badge b-minimal">Minimal</span> risk</td><td>The ability to test whether Cup games behave differently.</td><td>The official schedule already labels Cup games with a group name. Capturing that flag costs one field and enables a clean test later.</td><td><strong>Recommendation:</strong> Add it to the capture now, while it is free. Do not act on it until the test is run.</td><td><a class="src" href="https://www.nba.com/nba-cup/2026" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="G6"></a><strong>G6. Pre-register the rest signal as the primary hypothesis</strong></td><td>Research</td><td><span class="badge b-medium">Medium</span> impact</td><td><span class="badge b-low">Low</span> effort</td><td><span class="badge b-minimal">Minimal</span> risk</td><td>Protection against the garden of forking paths.</td><td>Rest days is the only signal here that is not obviously zero (p = 0.130). If it is chased informally across ten variants, one of them will look significant by chance.</td><td><strong>Recommendation:</strong> Write down the exact test, the exact sample at which it will be evaluated, and the exact decision rule. Then run it. Add no new signals until it resolves.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="G8"></a><strong>G8. Make the refresh workflow actually run</strong></td><td>Ops</td><td><span class="badge b-medium">Medium</span> impact</td><td><span class="badge b-medium">Medium</span> effort</td><td><span class="badge b-low">Low</span> risk</td><td>A site that is current rather than a snapshot.</td><td>The workflow exists and has never been executed. It is written defensively (continue-on-error), so a failure leaves the last snapshot live instead of blanking the site.</td><td><strong>Recommendation:</strong> Run it manually once, confirm the commit it produces, and only then trust the schedule. Add a visible &#x27;last refreshed&#x27; timestamp to every page.</td><td><a class="src" href="https://github.com/wingbangboozle1-lang/NBA1/actions" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="G9"></a><strong>G9. Split the evaluation and pricing windows</strong></td><td>Method</td><td><span class="badge b-medium">Medium</span> impact</td><td><span class="badge b-medium">Medium</span> effort</td><td><span class="badge b-low">Low</span> risk</td><td>An unbiased read on strategy performance.</td><td>Sigma is measured across the walk-forward window and then reused to price bets inside that same window, which biases results slightly optimistic. Harmless today because nothing is close to passing; not harmless the day something is.</td><td><strong>Recommendation:</strong> Do it before the first strategy is funded. Measure sigma on the window before the trading window.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">official source</a></td></tr></tbody></table></div>
+  <p class="tn">Ranked by impact, then effort. The top three are the ones that change what this project can
+  conclude; the rest change how well it concludes it.</p>
+</section>
+
+  <footer class="foot">
+    <p>Session <code>arena/e32856d8-nba1</code>. Official capture 2026-11-14 00:42 UTC.
+    Model inputs: official NBA.com final scores and schedule only.
+    <a href="sources.html">Source register</a> &middot;
+    <a href="method.html">Method</a> &middot;
+    <a href="flagged.html">Flagged for review</a> &middot;
+    <a href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">Repository</a></p>
+  </footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correlations &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="suggestions.html">Decision</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row links to the official source it
+      came from. A blank cell means the value could not be confirmed from an official
+      source &mdash; it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Correlations</h1>
+      <p class="sub">Measured correlations on official data, the model-derived ones it prices with, and the parlay rho table.</p>
+    </div>
+    <h2 class="sec">Measured correlations</h2><p class="secsub">Computed across the 30-team official cross-section. The p-value is reported so a marginal result can be judged.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>X</th>
+<th>Y</th>
+<th>r</th>
+<th>r&sup2;</th>
+<th>p (two-sided)</th>
+<th>n</th>
+<th>What it answers</th>
+<th>Status</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>NetRtg</td>
+<td>Win pct</td>
+<td>0.931</td>
+<td>0.867</td>
+<td>0.0000</td>
+<td>30</td>
+<td>Does the efficiency rating actually track the standings?</td>
+<td>MEASURED from official data</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>OffRtg</td>
+<td>DefRtg</td>
+<td>-0.529</td>
+<td>0.280</td>
+<td>0.0027</td>
+<td>30</td>
+<td>Are good offenses and good defenses independent?</td>
+<td>MEASURED from official data</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>OffRtg</td>
+<td>Pace</td>
+<td>-0.158</td>
+<td>0.025</td>
+<td>0.4052</td>
+<td>30</td>
+<td>Does playing faster raise offensive efficiency?</td>
+<td>MEASURED from official data</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>DefRtg</td>
+<td>Pace</td>
+<td>0.451</td>
+<td>0.203</td>
+<td>0.0124</td>
+<td>30</td>
+<td>Does playing faster hurt defensive efficiency?</td>
+<td>MEASURED from official data</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>Pace</td>
+<td>Points per game</td>
+<td>0.297</td>
+<td>0.088</td>
+<td>0.1107</td>
+<td>30</td>
+<td>How much of scoring volume is just pace?</td>
+<td>MEASURED from official data</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>eFG%</td>
+<td>OffRtg</td>
+<td>0.819</td>
+<td>0.671</td>
+<td>0.0000</td>
+<td>30</td>
+<td>How much of offensive efficiency is shot quality?</td>
+<td>MEASURED from official data</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>TS%</td>
+<td>OffRtg</td>
+<td>0.808</td>
+<td>0.653</td>
+<td>0.0000</td>
+<td>30</td>
+<td>Same, including free throws.</td>
+<td>MEASURED from official data</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>TOV%</td>
+<td>OffRtg</td>
+<td>-0.473</td>
+<td>0.224</td>
+<td>0.0082</td>
+<td>30</td>
+<td>Does turning it over actually depress efficiency?</td>
+<td>MEASURED from official data</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>OREB%</td>
+<td>OffRtg</td>
+<td>0.372</td>
+<td>0.138</td>
+<td>0.0432</td>
+<td>30</td>
+<td>Do offensive rebounds buy efficiency?</td>
+<td>MEASURED from official data</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>DREB%</td>
+<td>DefRtg</td>
+<td>-0.431</td>
+<td>0.186</td>
+<td>0.0175</td>
+<td>30</td>
+<td>Does ending possessions with a rebound help defence?</td>
+<td>MEASURED from official data</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>AST%</td>
+<td>OffRtg</td>
+<td>0.020</td>
+<td>0.000</td>
+<td>0.9160</td>
+<td>30</td>
+<td>Does ball movement track efficiency?</td>
+<td>MEASURED from official data</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>Pace</td>
+<td>NetRtg</td>
+<td>-0.343</td>
+<td>0.118</td>
+<td>0.0631</td>
+<td>30</td>
+<td>Is there a style edge, or is pace neutral?</td>
+<td>MEASURED from official data</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>PIE</td>
+<td>Win pct</td>
+<td>0.919</td>
+<td>0.844</td>
+<td>0.0000</td>
+<td>30</td>
+<td>Does the league's own all-in-one metric track winning?</td>
+<td>MEASURED from official data</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">A p-value of 0.0000 means below the reporting precision, not exactly zero. With 13 pairs tested, roughly 0.65 false positives are expected by chance alone at a 5% level, so no single marginal result here is treated as independently confirmed.</p>
+<h2 class="sec">Model-derived correlations</h2><p class="secsub">Not measured on data. These are structural values the model assumes, and they are priced with them.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>X</th>
+<th>Y</th>
+<th>rho</th>
+<th>Why it matters</th>
+<th>Status</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>MODEL-DERIVED - not measured (F6)</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>MODEL-DERIVED - not measured (F6)</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>MODEL-DERIVED - not measured (F6)</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>MODEL-DERIVED - not measured (F6)</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>MODEL-DERIVED - not measured (F6)</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+</tbody></table></div>
+<h2 class="sec">Same-game-parlay rho</h2><p class="secsub">The correlation values used to price a two-leg same-game parlay.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Leg pair</th>
+<th>rho</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>side total</td>
+<td>0.00</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>player total same team</td>
+<td>0.30</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>player side same team</td>
+<td>0.25</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>two teammates</td>
+<td>-0.20</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>two opponents</td>
+<td>0.05</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+</tbody></table></div>
+<h2 class="sec">Parlay pricing grid</h2><p class="secsub">Joint probability against a supplied margin of safety, so a parlay can be priced rather than guessed.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Leg prob</th>
+<th>rho</th>
+<th>True joint</th>
+<th>Independent</th>
+<th>Difference</th>
+<th>Fair price (true)</th>
+<th>Price if priced independent</th>
+<th>Bettor edge %</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>0.550</td>
+<td>-0.30</td>
+<td>0.2549</td>
+<td>0.3025</td>
+<td>-0.0476</td>
+<td>292</td>
+<td>231</td>
+<td>-15.73</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.550</td>
+<td>-0.20</td>
+<td>0.2710</td>
+<td>0.3025</td>
+<td>-0.0315</td>
+<td>269</td>
+<td>231</td>
+<td>-10.41</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.550</td>
+<td>-0.10</td>
+<td>0.2868</td>
+<td>0.3025</td>
+<td>-0.0157</td>
+<td>249</td>
+<td>231</td>
+<td>-5.18</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.550</td>
+<td>0.00</td>
+<td>0.3025</td>
+<td>0.3025</td>
+<td>0.0000</td>
+<td>231</td>
+<td>231</td>
+<td>0.00</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.550</td>
+<td>0.10</td>
+<td>0.3182</td>
+<td>0.3025</td>
+<td>0.0157</td>
+<td>214</td>
+<td>231</td>
+<td>5.19</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.550</td>
+<td>0.20</td>
+<td>0.3341</td>
+<td>0.3025</td>
+<td>0.0316</td>
+<td>199</td>
+<td>231</td>
+<td>10.44</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.550</td>
+<td>0.30</td>
+<td>0.3503</td>
+<td>0.3025</td>
+<td>0.0478</td>
+<td>185</td>
+<td>231</td>
+<td>15.81</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.600</td>
+<td>-0.30</td>
+<td>0.3151</td>
+<td>0.3600</td>
+<td>-0.0449</td>
+<td>217</td>
+<td>178</td>
+<td>-12.48</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.600</td>
+<td>-0.20</td>
+<td>0.3302</td>
+<td>0.3600</td>
+<td>-0.0298</td>
+<td>203</td>
+<td>178</td>
+<td>-8.29</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.600</td>
+<td>-0.10</td>
+<td>0.3451</td>
+<td>0.3600</td>
+<td>-0.0149</td>
+<td>190</td>
+<td>178</td>
+<td>-4.14</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.600</td>
+<td>0.00</td>
+<td>0.3600</td>
+<td>0.3600</td>
+<td>-0.0000</td>
+<td>178</td>
+<td>178</td>
+<td>-0.00</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.600</td>
+<td>0.10</td>
+<td>0.3750</td>
+<td>0.3600</td>
+<td>0.0150</td>
+<td>167</td>
+<td>178</td>
+<td>4.17</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.600</td>
+<td>0.20</td>
+<td>0.3902</td>
+<td>0.3600</td>
+<td>0.0302</td>
+<td>156</td>
+<td>178</td>
+<td>8.40</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.600</td>
+<td>0.30</td>
+<td>0.4058</td>
+<td>0.3600</td>
+<td>0.0458</td>
+<td>146</td>
+<td>178</td>
+<td>12.74</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.650</td>
+<td>-0.30</td>
+<td>0.3819</td>
+<td>0.4225</td>
+<td>-0.0406</td>
+<td>162</td>
+<td>137</td>
+<td>-9.62</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.650</td>
+<td>-0.20</td>
+<td>0.3953</td>
+<td>0.4225</td>
+<td>-0.0272</td>
+<td>153</td>
+<td>137</td>
+<td>-6.43</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.650</td>
+<td>-0.10</td>
+<td>0.4089</td>
+<td>0.4225</td>
+<td>-0.0136</td>
+<td>145</td>
+<td>137</td>
+<td>-3.23</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.650</td>
+<td>0.00</td>
+<td>0.4225</td>
+<td>0.4225</td>
+<td>-0.0000</td>
+<td>137</td>
+<td>137</td>
+<td>-0.00</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.650</td>
+<td>0.10</td>
+<td>0.4363</td>
+<td>0.4225</td>
+<td>0.0138</td>
+<td>129</td>
+<td>137</td>
+<td>3.28</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.650</td>
+<td>0.20</td>
+<td>0.4505</td>
+<td>0.4225</td>
+<td>0.0280</td>
+<td>122</td>
+<td>137</td>
+<td>6.63</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>0.650</td>
+<td>0.30</td>
+<td>0.4651</td>
+<td>0.4225</td>
+<td>0.0426</td>
+<td>115</td>
+<td>137</td>
+<td>10.08</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">A negative difference means the true joint probability is lower than the product of the legs, so a parlay priced as if the legs were independent gives the bettor less than it looks. This is the arithmetic behind the correlation limit gate (G6).</p>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

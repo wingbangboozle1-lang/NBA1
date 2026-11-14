@@ -1,0 +1,391 @@
+{
+ "measured": [
+  {
+   "x": "NetRtg",
+   "y": "Win pct",
+   "r": 0.931,
+   "p_value": 0.0,
+   "n": 30,
+   "why": "Does the efficiency rating actually track the standings?",
+   "r_squared": 0.867,
+   "status": "MEASURED from official data"
+  },
+  {
+   "x": "OffRtg",
+   "y": "DefRtg",
+   "r": -0.529,
+   "p_value": 0.0027,
+   "n": 30,
+   "why": "Are good offenses and good defenses independent?",
+   "r_squared": 0.28,
+   "status": "MEASURED from official data"
+  },
+  {
+   "x": "OffRtg",
+   "y": "Pace",
+   "r": -0.158,
+   "p_value": 0.4052,
+   "n": 30,
+   "why": "Does playing faster raise offensive efficiency?",
+   "r_squared": 0.025,
+   "status": "MEASURED from official data"
+  },
+  {
+   "x": "DefRtg",
+   "y": "Pace",
+   "r": 0.451,
+   "p_value": 0.0124,
+   "n": 30,
+   "why": "Does playing faster hurt defensive efficiency?",
+   "r_squared": 0.203,
+   "status": "MEASURED from official data"
+  },
+  {
+   "x": "Pace",
+   "y": "Points per game",
+   "r": 0.297,
+   "p_value": 0.1107,
+   "n": 30,
+   "why": "How much of scoring volume is just pace?",
+   "r_squared": 0.088,
+   "status": "MEASURED from official data"
+  },
+  {
+   "x": "eFG%",
+   "y": "OffRtg",
+   "r": 0.819,
+   "p_value": 0.0,
+   "n": 30,
+   "why": "How much of offensive efficiency is shot quality?",
+   "r_squared": 0.671,
+   "status": "MEASURED from official data"
+  },
+  {
+   "x": "TS%",
+   "y": "OffRtg",
+   "r": 0.808,
+   "p_value": 0.0,
+   "n": 30,
+   "why": "Same, including free throws.",
+   "r_squared": 0.653,
+   "status": "MEASURED from official data"
+  },
+  {
+   "x": "TOV%",
+   "y": "OffRtg",
+   "r": -0.473,
+   "p_value": 0.0082,
+   "n": 30,
+   "why": "Does turning it over actually depress efficiency?",
+   "r_squared": 0.224,
+   "status": "MEASURED from official data"
+  },
+  {
+   "x": "OREB%",
+   "y": "OffRtg",
+   "r": 0.372,
+   "p_value": 0.0432,
+   "n": 30,
+   "why": "Do offensive rebounds buy efficiency?",
+   "r_squared": 0.138,
+   "status": "MEASURED from official data"
+  },
+  {
+   "x": "DREB%",
+   "y": "DefRtg",
+   "r": -0.431,
+   "p_value": 0.0175,
+   "n": 30,
+   "why": "Does ending possessions with a rebound help defence?",
+   "r_squared": 0.186,
+   "status": "MEASURED from official data"
+  },
+  {
+   "x": "AST%",
+   "y": "OffRtg",
+   "r": 0.02,
+   "p_value": 0.916,
+   "n": 30,
+   "why": "Does ball movement track efficiency?",
+   "r_squared": 0.0,
+   "status": "MEASURED from official data"
+  },
+  {
+   "x": "Pace",
+   "y": "NetRtg",
+   "r": -0.343,
+   "p_value": 0.0631,
+   "n": 30,
+   "why": "Is there a style edge, or is pace neutral?",
+   "r_squared": 0.118,
+   "status": "MEASURED from official data"
+  },
+  {
+   "x": "PIE",
+   "y": "Win pct",
+   "r": 0.919,
+   "p_value": 0.0,
+   "n": 30,
+   "why": "Does the league's own all-in-one metric track winning?",
+   "r_squared": 0.844,
+   "status": "MEASURED from official data"
+  }
+ ],
+ "model_derived": [
+  {
+   "leg_1": "Side (team A covers)",
+   "leg_2": "Game total",
+   "rho_model": 0.0,
+   "derivation": "Under the additive model the two team scores share the same possession count but the margin is a difference and the total is a sum; with equal team-score variances their covariance is zero. This is a derived property of the model, not a measurement.",
+   "status": "MODEL-DERIVED - not measured (F6)"
+  },
+  {
+   "leg_1": "Player over (team A)",
+   "leg_2": "Team A total",
+   "rho_model": 0.3,
+   "derivation": "A player's production is part of his team's total, so the two must move together. The magnitude is a model estimate.",
+   "status": "MODEL-DERIVED - not measured (F6)"
+  },
+  {
+   "leg_1": "Player over (team A)",
+   "leg_2": "Team A covers",
+   "rho_model": 0.25,
+   "derivation": "Same mechanism, weaker because covering depends on the opponent too.",
+   "status": "MODEL-DERIVED - not measured (F6)"
+  },
+  {
+   "leg_1": "Player over (team A)",
+   "leg_2": "Teammate over (team A)",
+   "rho_model": -0.2,
+   "derivation": "Teammates compete for the same possessions and shots, so the sign should be negative. Magnitude is a model estimate.",
+   "status": "MODEL-DERIVED - not measured (F6)"
+  },
+  {
+   "leg_1": "Player over (team A)",
+   "leg_2": "Opponent player over",
+   "rho_model": 0.05,
+   "derivation": "Only linked through game pace and game script, so close to zero. Model estimate.",
+   "status": "MODEL-DERIVED - not measured (F6)"
+  }
+ ],
+ "sgp_rho": {
+  "side_total": 0.0,
+  "player_total_same_team": 0.3,
+  "player_side_same_team": 0.25,
+  "two_teammates": -0.2,
+  "two_opponents": 0.05
+ },
+ "parlay_pricing_grid": [
+  {
+   "leg_prob": 0.55,
+   "rho": -0.3,
+   "true_joint_prob": 0.2549,
+   "independent_product": 0.3025,
+   "difference": -0.0476,
+   "fair_price_true": 292,
+   "price_if_priced_independent": 231,
+   "bettor_edge_if_priced_independent_pct": -15.73
+  },
+  {
+   "leg_prob": 0.55,
+   "rho": -0.2,
+   "true_joint_prob": 0.271,
+   "independent_product": 0.3025,
+   "difference": -0.0315,
+   "fair_price_true": 269,
+   "price_if_priced_independent": 231,
+   "bettor_edge_if_priced_independent_pct": -10.41
+  },
+  {
+   "leg_prob": 0.55,
+   "rho": -0.1,
+   "true_joint_prob": 0.2868,
+   "independent_product": 0.3025,
+   "difference": -0.0157,
+   "fair_price_true": 249,
+   "price_if_priced_independent": 231,
+   "bettor_edge_if_priced_independent_pct": -5.18
+  },
+  {
+   "leg_prob": 0.55,
+   "rho": 0.0,
+   "true_joint_prob": 0.3025,
+   "independent_product": 0.3025,
+   "difference": 0.0,
+   "fair_price_true": 231,
+   "price_if_priced_independent": 231,
+   "bettor_edge_if_priced_independent_pct": 0.0
+  },
+  {
+   "leg_prob": 0.55,
+   "rho": 0.1,
+   "true_joint_prob": 0.3182,
+   "independent_product": 0.3025,
+   "difference": 0.0157,
+   "fair_price_true": 214,
+   "price_if_priced_independent": 231,
+   "bettor_edge_if_priced_independent_pct": 5.19
+  },
+  {
+   "leg_prob": 0.55,
+   "rho": 0.2,
+   "true_joint_prob": 0.3341,
+   "independent_product": 0.3025,
+   "difference": 0.0316,
+   "fair_price_true": 199,
+   "price_if_priced_independent": 231,
+   "bettor_edge_if_priced_independent_pct": 10.44
+  },
+  {
+   "leg_prob": 0.55,
+   "rho": 0.3,
+   "true_joint_prob": 0.3503,
+   "independent_product": 0.3025,
+   "difference": 0.0478,
+   "fair_price_true": 185,
+   "price_if_priced_independent": 231,
+   "bettor_edge_if_priced_independent_pct": 15.81
+  },
+  {
+   "leg_prob": 0.6,
+   "rho": -0.3,
+   "true_joint_prob": 0.3151,
+   "independent_product": 0.36,
+   "difference": -0.0449,
+   "fair_price_true": 217,
+   "price_if_priced_independent": 178,
+   "bettor_edge_if_priced_independent_pct": -12.48
+  },
+  {
+   "leg_prob": 0.6,
+   "rho": -0.2,
+   "true_joint_prob": 0.3302,
+   "independent_product": 0.36,
+   "difference": -0.0298,
+   "fair_price_true": 203,
+   "price_if_priced_independent": 178,
+   "bettor_edge_if_priced_independent_pct": -8.29
+  },
+  {
+   "leg_prob": 0.6,
+   "rho": -0.1,
+   "true_joint_prob": 0.3451,
+   "independent_product": 0.36,
+   "difference": -0.0149,
+   "fair_price_true": 190,
+   "price_if_priced_independent": 178,
+   "bettor_edge_if_priced_independent_pct": -4.14
+  },
+  {
+   "leg_prob": 0.6,
+   "rho": 0.0,
+   "true_joint_prob": 0.36,
+   "independent_product": 0.36,
+   "difference": -0.0,
+   "fair_price_true": 178,
+   "price_if_priced_independent": 178,
+   "bettor_edge_if_priced_independent_pct": -0.0
+  },
+  {
+   "leg_prob": 0.6,
+   "rho": 0.1,
+   "true_joint_prob": 0.375,
+   "independent_product": 0.36,
+   "difference": 0.015,
+   "fair_price_true": 167,
+   "price_if_priced_independent": 178,
+   "bettor_edge_if_priced_independent_pct": 4.17
+  },
+  {
+   "leg_prob": 0.6,
+   "rho": 0.2,
+   "true_joint_prob": 0.3902,
+   "independent_product": 0.36,
+   "difference": 0.0302,
+   "fair_price_true": 156,
+   "price_if_priced_independent": 178,
+   "bettor_edge_if_priced_independent_pct": 8.4
+  },
+  {
+   "leg_prob": 0.6,
+   "rho": 0.3,
+   "true_joint_prob": 0.4058,
+   "independent_product": 0.36,
+   "difference": 0.0458,
+   "fair_price_true": 146,
+   "price_if_priced_independent": 178,
+   "bettor_edge_if_priced_independent_pct": 12.74
+  },
+  {
+   "leg_prob": 0.65,
+   "rho": -0.3,
+   "true_joint_prob": 0.3819,
+   "independent_product": 0.4225,
+   "difference": -0.0406,
+   "fair_price_true": 162,
+   "price_if_priced_independent": 137,
+   "bettor_edge_if_priced_independent_pct": -9.62
+  },
+  {
+   "leg_prob": 0.65,
+   "rho": -0.2,
+   "true_joint_prob": 0.3953,
+   "independent_product": 0.4225,
+   "difference": -0.0272,
+   "fair_price_true": 153,
+   "price_if_priced_independent": 137,
+   "bettor_edge_if_priced_independent_pct": -6.43
+  },
+  {
+   "leg_prob": 0.65,
+   "rho": -0.1,
+   "true_joint_prob": 0.4089,
+   "independent_product": 0.4225,
+   "difference": -0.0136,
+   "fair_price_true": 145,
+   "price_if_priced_independent": 137,
+   "bettor_edge_if_priced_independent_pct": -3.23
+  },
+  {
+   "leg_prob": 0.65,
+   "rho": 0.0,
+   "true_joint_prob": 0.4225,
+   "independent_product": 0.4225,
+   "difference": -0.0,
+   "fair_price_true": 137,
+   "price_if_priced_independent": 137,
+   "bettor_edge_if_priced_independent_pct": -0.0
+  },
+  {
+   "leg_prob": 0.65,
+   "rho": 0.1,
+   "true_joint_prob": 0.4363,
+   "independent_product": 0.4225,
+   "difference": 0.0138,
+   "fair_price_true": 129,
+   "price_if_priced_independent": 137,
+   "bettor_edge_if_priced_independent_pct": 3.28
+  },
+  {
+   "leg_prob": 0.65,
+   "rho": 0.2,
+   "true_joint_prob": 0.4505,
+   "independent_product": 0.4225,
+   "difference": 0.028,
+   "fair_price_true": 122,
+   "price_if_priced_independent": 137,
+   "bettor_edge_if_priced_independent_pct": 6.63
+  },
+  {
+   "leg_prob": 0.65,
+   "rho": 0.3,
+   "true_joint_prob": 0.4651,
+   "independent_product": 0.4225,
+   "difference": 0.0426,
+   "fair_price_true": 115,
+   "price_if_priced_independent": 137,
+   "bettor_edge_if_priced_independent_pct": 10.08
+  }
+ ],
+ "src": "S1"
+}

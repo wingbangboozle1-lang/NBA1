@@ -1,101 +1,675 @@
 {
-  "as_of_utc": "2026-11-13T22:45Z",
-  "window": "2026-11-13 through 2026-11-16 (today plus maximum 3 days ahead)",
-  "records_note": "Records as displayed on official NBA.com pages at retrieval (2026-11-13, before the 7:00 PM ET slate). Blank = not displayed. Times are ET as printed. Away@home order per NBA.com game cards and injury-report matchup codes.",
-  "verification": "Each game was read from the official NBA.com slate page for its date and cross-checked against the schedule strip on the official game page (example: https://www.nba.com/game/nyk-vs-tor-0022600241). The Nov-15 slate page rendered records as '-', so Nov-15 records were taken from the game-page schedule strip, which prints them.",
-  "slates": [
+ "as_of_utc": "2026-11-14T01:32Z (slate rows for 11/14-11/17 re-verified/captured; 11/13 rows frozen at 2026-11-13T22:45Z pick basis)",
+ "window": "2026-11-13 through 2026-11-17 — 11/13 rows are the frozen basis of the published 11/13 pick batch; 2026-11-14 through 2026-11-17 is today plus maximum 3 days ahead (today = 2026-11-14 UTC)",
+ "records_note": "Records as displayed on official NBA.com pages at each slate row's records_as_of stamp. Blank = not displayed. Times are ET as printed. Away@home order per NBA.com game cards. At every 2026-11-14 capture the 11/13 slate was still in progress (two games at Q2, rest pregame), so no record includes a 11/13 result; the values therefore equal the 2026-11-13 pre-tip capture. Post-11/13-final refresh is tracked as flag W-F5. Source: data/raw/records_2026-11-14.json and the transcripts in data/raw/captures/session-w/.",
+ "verification": "Each game was read from the official NBA.com slate page for its date (transcripts in data/raw/captures/session-w/, one file per date read) and cross-checked against the schedule capture data/raw/official_schedule_capture_2026-11-14.json (36 games 11/13-11/17 from https://www.nba.com/schedule). The 11/17 slate was appended 2026-11-14 by arena/f80dcc4a-nba1 from https://www.nba.com/games?date=2026-11-17 (5 games, ids 0022600253-257). NYK@TOR and POR@MIN each appear twice in the window (11/15 & 11/17, 11/16 & 11/17) with distinct official game ids; both rows kept as scheduled and flagged W-F6 for review.",
+ "slates": [
+  {
+   "date": "2026-11-13",
+   "slate_url": "https://www.nba.com/games?date=2026-11-13",
+   "games": [
     {
-      "date": "2026-11-13",
-      "slate_url": "https://www.nba.com/games?date=2026-11-13",
-      "games": [
-        {"away": "NYK", "away_name": "New York Knicks", "away_record": "6-5", "home": "IND", "home_name": "Indiana Pacers", "home_record": "4-8", "time_et": "7:00 PM", "game_id": "0022600034", "cup": "East Group B", "preview_url": "https://www.nba.com/game/nyk-vs-ind-0022600034"},
-        {"away": "MIL", "away_name": "Milwaukee Bucks", "away_record": "1-11", "home": "ORL", "home_name": "Orlando Magic", "home_record": "4-7", "time_et": "7:00 PM", "game_id": "0022600035", "cup": "East Group A", "preview_url": "https://www.nba.com/game/mil-vs-orl-0022600035"},
-        {"away": "CLE", "away_name": "Cleveland Cavaliers", "away_record": "6-6", "home": "MIA", "home_name": "Miami Heat", "home_record": "5-6", "time_et": "8:00 PM", "game_id": "0022600036", "cup": "East Group B", "preview_url": "https://www.nba.com/game/cle-vs-mia-0022600036"},
-        {"away": "ATL", "away_name": "Atlanta Hawks", "away_record": "7-5", "home": "CHI", "home_name": "Chicago Bulls", "home_record": "1-9", "time_et": "8:00 PM", "game_id": "0022600037", "cup": "East Group C", "preview_url": "https://www.nba.com/game/atl-vs-chi-0022600037"},
-        {"away": "MEM", "away_name": "Memphis Grizzlies", "away_record": "7-4", "home": "NOP", "home_name": "New Orleans Pelicans", "home_record": "4-8", "time_et": "8:00 PM", "game_id": "0022600038", "cup": "West Group B", "preview_url": "https://www.nba.com/game/mem-vs-nop-0022600038"},
-        {"away": "UTA", "away_name": "Utah Jazz", "away_record": "1-11", "home": "HOU", "home_name": "Houston Rockets", "home_record": "9-3", "time_et": "8:30 PM", "game_id": "0022600039", "cup": "West Group A", "preview_url": "https://www.nba.com/game/uta-vs-hou-0022600039"},
-        {"away": "GSW", "away_name": "Golden State Warriors", "away_record": "8-4", "home": "SAS", "home_name": "San Antonio Spurs", "home_record": "10-2", "time_et": "9:30 PM", "game_id": "0022600040", "cup": "West Group C", "preview_url": "https://www.nba.com/game/gsw-vs-sas-0022600040"},
-        {"away": "POR", "away_name": "Portland Trail Blazers", "away_record": "8-3", "home": "SAC", "home_name": "Sacramento Kings", "home_record": "1-10", "time_et": "10:00 PM", "game_id": "0022600041", "cup": "West Group C", "preview_url": "https://www.nba.com/game/por-vs-sac-0022600041"},
-        {"away": "OKC", "away_name": "Oklahoma City Thunder", "away_record": "8-4", "home": "LAC", "home_name": "LA Clippers", "home_record": "2-8", "time_et": "10:30 PM", "game_id": "0022600042", "cup": "West Group B", "preview_url": "https://www.nba.com/game/okc-vs-lac-0022600042"}
-      ]
+     "away": "NYK",
+     "away_name": "New York Knicks",
+     "away_record": "6-5",
+     "home": "IND",
+     "home_name": "Indiana Pacers",
+     "home_record": "4-8",
+     "time_et": "7:00 PM",
+     "game_id": "0022600034",
+     "cup": "East Group B",
+     "preview_url": "https://www.nba.com/game/nyk-vs-ind-0022600034"
     },
     {
-      "date": "2026-11-14",
-      "slate_url": "https://www.nba.com/games?date=2026-11-14",
-      "games": [
-        {"away": "DEN", "away_name": "Denver Nuggets", "away_record": "6-4", "home": "NOP", "home_name": "New Orleans Pelicans", "home_record": "4-8", "time_et": "7:00 PM", "game_id": "0022600231", "cup": null, "preview_url": "https://www.nba.com/game/den-vs-nop-0022600231"},
-        {"away": "DAL", "away_name": "Dallas Mavericks", "away_record": "7-5", "home": "CLE", "home_name": "Cleveland Cavaliers", "home_record": "6-6", "time_et": "7:30 PM", "game_id": "0022600232", "cup": null, "preview_url": "https://www.nba.com/game/dal-vs-cle-0022600232"},
-        {"away": "DET", "away_name": "Detroit Pistons", "away_record": "8-3", "home": "MIA", "home_name": "Miami Heat", "home_record": "5-6", "time_et": "8:00 PM", "game_id": "0022600233", "cup": null, "preview_url": "https://www.nba.com/game/det-vs-mia-0022600233"},
-        {"away": "BKN", "away_name": "Brooklyn Nets", "away_record": "3-8", "home": "MEM", "home_name": "Memphis Grizzlies", "home_record": "7-4", "time_et": "8:00 PM", "game_id": "0022600234", "cup": null, "preview_url": "https://www.nba.com/game/bkn-vs-mem-0022600234"},
-        {"away": "CHI", "away_name": "Chicago Bulls", "away_record": "1-9", "home": "MIN", "home_name": "Minnesota Timberwolves", "home_record": "9-3", "time_et": "8:00 PM", "game_id": "0022600235", "cup": null, "preview_url": "https://www.nba.com/game/chi-vs-min-0022600235"}
-      ]
+     "away": "MIL",
+     "away_name": "Milwaukee Bucks",
+     "away_record": "1-11",
+     "home": "ORL",
+     "home_name": "Orlando Magic",
+     "home_record": "4-7",
+     "time_et": "7:00 PM",
+     "game_id": "0022600035",
+     "cup": "East Group A",
+     "preview_url": "https://www.nba.com/game/mil-vs-orl-0022600035"
     },
     {
-      "date": "2026-11-15",
-      "slate_url": "https://www.nba.com/games?date=2026-11-15",
-      "games": [
-        {"away": "IND", "away_name": "Indiana Pacers", "away_record": "4-8", "home": "PHI", "home_name": "Philadelphia 76ers", "home_record": "10-3", "time_et": "1:00 PM", "game_id": "0022600236", "cup": null, "preview_url": "https://www.nba.com/game/ind-vs-phi-0022600236"},
-        {"away": "LAL", "away_name": "Los Angeles Lakers", "away_record": "11-2", "home": "PHX", "home_name": "Phoenix Suns", "home_record": "5-6", "time_et": "4:00 PM", "game_id": "0022600237", "cup": null, "preview_url": "https://www.nba.com/game/lal-vs-phx-0022600237"},
-        {"away": "CHA", "away_name": "Charlotte Hornets", "away_record": "4-8", "home": "LAC", "home_name": "LA Clippers", "home_record": "2-8", "time_et": "4:30 PM", "game_id": "0022600238", "cup": null, "preview_url": "https://www.nba.com/game/cha-vs-lac-0022600238"},
-        {"away": "SAS", "away_name": "San Antonio Spurs", "away_record": "10-2", "home": "UTA", "home_name": "Utah Jazz", "home_record": "1-11", "time_et": "5:00 PM", "game_id": "0022600239", "cup": null, "preview_url": "https://www.nba.com/game/sas-vs-uta-0022600239"},
-        {"away": "DAL", "away_name": "Dallas Mavericks", "away_record": "7-5", "home": "BOS", "home_name": "Boston Celtics", "home_record": "10-2", "time_et": "6:00 PM", "game_id": "0022600240", "cup": null, "preview_url": "https://www.nba.com/game/dal-vs-bos-0022600240"},
-        {"away": "NYK", "away_name": "New York Knicks", "away_record": "6-5", "home": "TOR", "home_name": "Toronto Raptors", "home_record": "5-7", "time_et": "6:00 PM", "game_id": "0022600241", "cup": null, "preview_url": "https://www.nba.com/game/nyk-vs-tor-0022600241"},
-        {"away": "HOU", "away_name": "Houston Rockets", "away_record": "9-3", "home": "WAS", "home_name": "Washington Wizards", "home_record": "4-9", "time_et": "7:00 PM", "game_id": "0022600242", "cup": null, "preview_url": "https://www.nba.com/game/hou-vs-was-0022600242"},
-        {"away": "ATL", "away_name": "Atlanta Hawks", "away_record": "7-5", "home": "MIL", "home_name": "Milwaukee Bucks", "home_record": "1-11", "time_et": "8:00 PM", "game_id": "0022600243", "cup": null, "preview_url": "https://www.nba.com/game/atl-vs-mil-0022600243"},
-        {"away": "OKC", "away_name": "Oklahoma City Thunder", "away_record": "8-4", "home": "SAC", "home_name": "Sacramento Kings", "home_record": "1-10", "time_et": "9:00 PM", "game_id": "0022600244", "cup": null, "preview_url": "https://www.nba.com/game/okc-vs-sac-0022600244"}
-      ]
+     "away": "CLE",
+     "away_name": "Cleveland Cavaliers",
+     "away_record": "6-6",
+     "home": "MIA",
+     "home_name": "Miami Heat",
+     "home_record": "5-6",
+     "time_et": "8:00 PM",
+     "game_id": "0022600036",
+     "cup": "East Group B",
+     "preview_url": "https://www.nba.com/game/cle-vs-mia-0022600036"
     },
     {
-      "date": "2026-11-16",
-      "slate_url": "https://www.nba.com/games?date=2026-11-16",
-      "games": [
-        {"away": "ORL", "away_name": "Orlando Magic", "away_record": "4-7", "home": "BOS", "home_name": "Boston Celtics", "home_record": "10-2", "time_et": "7:00 PM", "game_id": "0022600245", "cup": null, "preview_url": "https://www.nba.com/game/orl-vs-bos-0022600245"},
-        {"away": "CHI", "away_name": "Chicago Bulls", "away_record": "1-9", "home": "CLE", "home_name": "Cleveland Cavaliers", "home_record": "6-6", "time_et": "7:00 PM", "game_id": "0022600246", "cup": null, "preview_url": "https://www.nba.com/game/chi-vs-cle-0022600246"},
-        {"away": "MEM", "away_name": "Memphis Grizzlies", "away_record": "7-4", "home": "WAS", "home_name": "Washington Wizards", "home_record": "4-9", "time_et": "7:00 PM", "game_id": "0022600247", "cup": null, "preview_url": "https://www.nba.com/game/mem-vs-was-0022600247"},
-        {"away": "PHI", "away_name": "Philadelphia 76ers", "away_record": "10-3", "home": "BKN", "home_name": "Brooklyn Nets", "home_record": "3-8", "time_et": "7:30 PM", "game_id": "0022600248", "cup": null, "preview_url": "https://www.nba.com/game/phi-vs-bkn-0022600248"},
-        {"away": "HOU", "away_name": "Houston Rockets", "away_record": "9-3", "home": "MIA", "home_name": "Miami Heat", "home_record": "5-6", "time_et": "7:30 PM", "game_id": "0022600249", "cup": null, "preview_url": "https://www.nba.com/game/hou-vs-mia-0022600249"},
-        {"away": "POR", "away_name": "Portland Trail Blazers", "away_record": "8-3", "home": "MIN", "home_name": "Minnesota Timberwolves", "home_record": "9-3", "time_et": "8:00 PM", "game_id": "0022600250", "cup": null, "preview_url": "https://www.nba.com/game/por-vs-min-0022600250"},
-        {"away": "GSW", "away_name": "Golden State Warriors", "away_record": "8-4", "home": "NOP", "home_name": "New Orleans Pelicans", "home_record": "4-8", "time_et": "8:00 PM", "game_id": "0022600251", "cup": null, "preview_url": "https://www.nba.com/game/gsw-vs-nop-0022600251"},
-        {"away": "PHX", "away_name": "Phoenix Suns", "away_record": "5-6", "home": "DEN", "home_name": "Denver Nuggets", "home_record": "6-4", "time_et": "9:00 PM", "game_id": "0022600252", "cup": null, "preview_url": "https://www.nba.com/game/phx-vs-den-0022600252"}
-      ]
+     "away": "ATL",
+     "away_name": "Atlanta Hawks",
+     "away_record": "7-5",
+     "home": "CHI",
+     "home_name": "Chicago Bulls",
+     "home_record": "1-9",
+     "time_et": "8:00 PM",
+     "game_id": "0022600037",
+     "cup": "East Group C",
+     "preview_url": "https://www.nba.com/game/atl-vs-chi-0022600037"
+    },
+    {
+     "away": "MEM",
+     "away_name": "Memphis Grizzlies",
+     "away_record": "7-4",
+     "home": "NOP",
+     "home_name": "New Orleans Pelicans",
+     "home_record": "4-8",
+     "time_et": "8:00 PM",
+     "game_id": "0022600038",
+     "cup": "West Group B",
+     "preview_url": "https://www.nba.com/game/mem-vs-nop-0022600038"
+    },
+    {
+     "away": "UTA",
+     "away_name": "Utah Jazz",
+     "away_record": "1-11",
+     "home": "HOU",
+     "home_name": "Houston Rockets",
+     "home_record": "9-3",
+     "time_et": "8:30 PM",
+     "game_id": "0022600039",
+     "cup": "West Group A",
+     "preview_url": "https://www.nba.com/game/uta-vs-hou-0022600039"
+    },
+    {
+     "away": "GSW",
+     "away_name": "Golden State Warriors",
+     "away_record": "8-4",
+     "home": "SAS",
+     "home_name": "San Antonio Spurs",
+     "home_record": "10-2",
+     "time_et": "9:30 PM",
+     "game_id": "0022600040",
+     "cup": "West Group C",
+     "preview_url": "https://www.nba.com/game/gsw-vs-sas-0022600040"
+    },
+    {
+     "away": "POR",
+     "away_name": "Portland Trail Blazers",
+     "away_record": "8-3",
+     "home": "SAC",
+     "home_name": "Sacramento Kings",
+     "home_record": "1-10",
+     "time_et": "10:00 PM",
+     "game_id": "0022600041",
+     "cup": "West Group C",
+     "preview_url": "https://www.nba.com/game/por-vs-sac-0022600041"
+    },
+    {
+     "away": "OKC",
+     "away_name": "Oklahoma City Thunder",
+     "away_record": "8-4",
+     "home": "LAC",
+     "home_name": "LA Clippers",
+     "home_record": "2-8",
+     "time_et": "10:30 PM",
+     "game_id": "0022600042",
+     "cup": "West Group B",
+     "preview_url": "https://www.nba.com/game/okc-vs-lac-0022600042"
     }
-  ],
-  "prior_games": [
-    {"date": "2026-11-09", "slate_url": "https://www.nba.com/games?date=2026-11-09", "games": [
-      {"away": "LAL", "home": "ATL", "away_score": 124, "home_score": 114},
-      {"away": "WAS", "home": "DET", "away_score": 111, "home_score": 122},
-      {"away": "CLE", "home": "CHA", "away_score": 112, "home_score": 124},
-      {"away": "MEM", "home": "TOR", "away_score": 118, "home_score": 102},
-      {"away": "IND", "home": "DAL", "away_score": 122, "home_score": 125},
-      {"away": "DEN", "home": "HOU", "away_score": 100, "home_score": 110},
-      {"away": "SAS", "home": "PHX", "away_score": 122, "home_score": 96},
-      {"away": "NOP", "home": "GSW", "away_score": 87, "home_score": 138}
-    ]},
-    {"date": "2026-11-10", "slate_url": "https://www.nba.com/games?date=2026-11-10", "games": [
-      {"away": "MIL", "home": "NYK", "away_score": 85, "home_score": 117},
-      {"away": "BOS", "home": "PHI", "away_score": 123, "home_score": 101},
-      {"away": "LAC", "home": "PHX", "away_score": 110, "home_score": 133},
-      {"away": "MIA", "home": "UTA", "away_score": 115, "home_score": 109},
-      {"away": "ORL", "home": "SAC", "away_score": 107, "home_score": 100},
-      {"away": "OKC", "home": "POR", "away_score": 103, "home_score": 123}
-    ]},
-    {"date": "2026-11-11", "slate_url": "https://www.nba.com/games?date=2026-11-11", "games": [
-      {"away": "CLE", "home": "NYK", "away_score": 115, "home_score": 107},
-      {"away": "BOS", "home": "TOR", "away_score": 98, "home_score": 93},
-      {"away": "WAS", "home": "IND", "away_score": 101, "home_score": 114},
-      {"away": "LAL", "home": "MIL", "away_score": 123, "home_score": 112},
-      {"away": "BKN", "home": "NOP", "away_score": 145, "home_score": 111},
-      {"away": "DEN", "home": "MEM", "away_score": 123, "home_score": 118},
-      {"away": "SAS", "home": "CHI", "away_score": 124, "home_score": 119},
-      {"away": "ORL", "home": "UTA", "away_score": 123, "home_score": 108},
-      {"away": "GSW", "home": "HOU", "away_score": 108, "home_score": 115},
-      {"away": "OKC", "home": "POR", "away_score": 108, "home_score": 118}
-    ]},
-    {"date": "2026-11-12", "slate_url": "https://www.nba.com/games?date=2026-11-12", "games": [
-      {"away": "TOR", "home": "PHI", "away_score": 112, "home_score": 123},
-      {"away": "DET", "home": "WAS", "away_score": 144, "home_score": 140, "note": "Final/OT2 (double overtime), as printed on NBA.com"},
-      {"away": "DAL", "home": "MIN", "away_score": 94, "home_score": 133},
-      {"away": "CHA", "home": "PHX", "away_score": 96, "home_score": 101}
-    ]}
-  ]
+   ],
+   "records_as_of": "2026-11-13T22:45Z (pre-tip of the 7:00 PM ET slate) — frozen pick basis for the published 11/13 batch"
+  },
+  {
+   "date": "2026-11-14",
+   "slate_url": "https://www.nba.com/games?date=2026-11-14",
+   "games": [
+    {
+     "away": "DEN",
+     "away_name": "Denver Nuggets",
+     "away_record": "6-4",
+     "home": "NOP",
+     "home_name": "New Orleans Pelicans",
+     "home_record": "4-8",
+     "time_et": "7:00 PM",
+     "game_id": "0022600231",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/den-vs-nop-0022600231"
+    },
+    {
+     "away": "DAL",
+     "away_name": "Dallas Mavericks",
+     "away_record": "7-5",
+     "home": "CLE",
+     "home_name": "Cleveland Cavaliers",
+     "home_record": "6-6",
+     "time_et": "7:30 PM",
+     "game_id": "0022600232",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/dal-vs-cle-0022600232"
+    },
+    {
+     "away": "DET",
+     "away_name": "Detroit Pistons",
+     "away_record": "8-3",
+     "home": "MIA",
+     "home_name": "Miami Heat",
+     "home_record": "5-6",
+     "time_et": "8:00 PM",
+     "game_id": "0022600233",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/det-vs-mia-0022600233"
+    },
+    {
+     "away": "BKN",
+     "away_name": "Brooklyn Nets",
+     "away_record": "3-8",
+     "home": "MEM",
+     "home_name": "Memphis Grizzlies",
+     "home_record": "7-4",
+     "time_et": "8:00 PM",
+     "game_id": "0022600234",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/bkn-vs-mem-0022600234"
+    },
+    {
+     "away": "CHI",
+     "away_name": "Chicago Bulls",
+     "away_record": "1-9",
+     "home": "MIN",
+     "home_name": "Minnesota Timberwolves",
+     "home_record": "9-3",
+     "time_et": "8:00 PM",
+     "game_id": "0022600235",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/chi-vs-min-0022600235"
+    }
+   ],
+   "records_as_of": "values re-verified against the official slate page read 2026-11-14T00:52-01:32Z; identical to the 22:45Z capture (no 11/13 game had gone final)",
+   "records_verified_utc": "2026-11-14T01:32Z"
+  },
+  {
+   "date": "2026-11-15",
+   "slate_url": "https://www.nba.com/games?date=2026-11-15",
+   "games": [
+    {
+     "away": "IND",
+     "away_name": "Indiana Pacers",
+     "away_record": "4-8",
+     "home": "PHI",
+     "home_name": "Philadelphia 76ers",
+     "home_record": "10-3",
+     "time_et": "1:00 PM",
+     "game_id": "0022600236",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/ind-vs-phi-0022600236"
+    },
+    {
+     "away": "LAL",
+     "away_name": "Los Angeles Lakers",
+     "away_record": "11-2",
+     "home": "PHX",
+     "home_name": "Phoenix Suns",
+     "home_record": "5-6",
+     "time_et": "4:00 PM",
+     "game_id": "0022600237",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/lal-vs-phx-0022600237"
+    },
+    {
+     "away": "CHA",
+     "away_name": "Charlotte Hornets",
+     "away_record": "4-8",
+     "home": "LAC",
+     "home_name": "LA Clippers",
+     "home_record": "2-8",
+     "time_et": "4:30 PM",
+     "game_id": "0022600238",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/cha-vs-lac-0022600238"
+    },
+    {
+     "away": "SAS",
+     "away_name": "San Antonio Spurs",
+     "away_record": "10-2",
+     "home": "UTA",
+     "home_name": "Utah Jazz",
+     "home_record": "1-11",
+     "time_et": "5:00 PM",
+     "game_id": "0022600239",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/sas-vs-uta-0022600239"
+    },
+    {
+     "away": "DAL",
+     "away_name": "Dallas Mavericks",
+     "away_record": "7-5",
+     "home": "BOS",
+     "home_name": "Boston Celtics",
+     "home_record": "10-2",
+     "time_et": "6:00 PM",
+     "game_id": "0022600240",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/dal-vs-bos-0022600240"
+    },
+    {
+     "away": "NYK",
+     "away_name": "New York Knicks",
+     "away_record": "6-5",
+     "home": "TOR",
+     "home_name": "Toronto Raptors",
+     "home_record": "5-7",
+     "time_et": "6:00 PM",
+     "game_id": "0022600241",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/nyk-vs-tor-0022600241"
+    },
+    {
+     "away": "HOU",
+     "away_name": "Houston Rockets",
+     "away_record": "9-3",
+     "home": "WAS",
+     "home_name": "Washington Wizards",
+     "home_record": "4-9",
+     "time_et": "7:00 PM",
+     "game_id": "0022600242",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/hou-vs-was-0022600242"
+    },
+    {
+     "away": "ATL",
+     "away_name": "Atlanta Hawks",
+     "away_record": "7-5",
+     "home": "MIL",
+     "home_name": "Milwaukee Bucks",
+     "home_record": "1-11",
+     "time_et": "8:00 PM",
+     "game_id": "0022600243",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/atl-vs-mil-0022600243"
+    },
+    {
+     "away": "OKC",
+     "away_name": "Oklahoma City Thunder",
+     "away_record": "8-4",
+     "home": "SAC",
+     "home_name": "Sacramento Kings",
+     "home_record": "1-10",
+     "time_et": "9:00 PM",
+     "game_id": "0022600244",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/okc-vs-sac-0022600244"
+    }
+   ],
+   "records_as_of": "values re-verified against the official slate page read 2026-11-14T00:52-01:32Z; identical to the 22:45Z capture (no 11/13 game had gone final)",
+   "records_verified_utc": "2026-11-14T01:32Z"
+  },
+  {
+   "date": "2026-11-16",
+   "slate_url": "https://www.nba.com/games?date=2026-11-16",
+   "games": [
+    {
+     "away": "ORL",
+     "away_name": "Orlando Magic",
+     "away_record": "4-7",
+     "home": "BOS",
+     "home_name": "Boston Celtics",
+     "home_record": "10-2",
+     "time_et": "7:00 PM",
+     "game_id": "0022600245",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/orl-vs-bos-0022600245"
+    },
+    {
+     "away": "CHI",
+     "away_name": "Chicago Bulls",
+     "away_record": "1-9",
+     "home": "CLE",
+     "home_name": "Cleveland Cavaliers",
+     "home_record": "6-6",
+     "time_et": "7:00 PM",
+     "game_id": "0022600246",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/chi-vs-cle-0022600246"
+    },
+    {
+     "away": "MEM",
+     "away_name": "Memphis Grizzlies",
+     "away_record": "7-4",
+     "home": "WAS",
+     "home_name": "Washington Wizards",
+     "home_record": "4-9",
+     "time_et": "7:00 PM",
+     "game_id": "0022600247",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/mem-vs-was-0022600247"
+    },
+    {
+     "away": "PHI",
+     "away_name": "Philadelphia 76ers",
+     "away_record": "10-3",
+     "home": "BKN",
+     "home_name": "Brooklyn Nets",
+     "home_record": "3-8",
+     "time_et": "7:30 PM",
+     "game_id": "0022600248",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/phi-vs-bkn-0022600248"
+    },
+    {
+     "away": "HOU",
+     "away_name": "Houston Rockets",
+     "away_record": "9-3",
+     "home": "MIA",
+     "home_name": "Miami Heat",
+     "home_record": "5-6",
+     "time_et": "7:30 PM",
+     "game_id": "0022600249",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/hou-vs-mia-0022600249"
+    },
+    {
+     "away": "POR",
+     "away_name": "Portland Trail Blazers",
+     "away_record": "8-3",
+     "home": "MIN",
+     "home_name": "Minnesota Timberwolves",
+     "home_record": "9-3",
+     "time_et": "8:00 PM",
+     "game_id": "0022600250",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/por-vs-min-0022600250"
+    },
+    {
+     "away": "GSW",
+     "away_name": "Golden State Warriors",
+     "away_record": "8-4",
+     "home": "NOP",
+     "home_name": "New Orleans Pelicans",
+     "home_record": "4-8",
+     "time_et": "8:00 PM",
+     "game_id": "0022600251",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/gsw-vs-nop-0022600251"
+    },
+    {
+     "away": "PHX",
+     "away_name": "Phoenix Suns",
+     "away_record": "5-6",
+     "home": "DEN",
+     "home_name": "Denver Nuggets",
+     "home_record": "6-4",
+     "time_et": "9:00 PM",
+     "game_id": "0022600252",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/phx-vs-den-0022600252"
+    }
+   ],
+   "records_as_of": "values re-verified against the official slate page read 2026-11-14T00:52-01:32Z; identical to the 22:45Z capture (no 11/13 game had gone final)",
+   "records_verified_utc": "2026-11-14T01:32Z"
+  },
+  {
+   "date": "2026-11-17",
+   "slate_url": "https://www.nba.com/games?date=2026-11-17",
+   "records_as_of": "captured from the official slate page read 2026-11-14T01:09Z (11/13 games in progress; records exclude those results)",
+   "records_verified_utc": "2026-11-14T01:09Z",
+   "games": [
+    {
+     "away": "NYK",
+     "away_name": "New York Knicks",
+     "away_record": "6-5",
+     "home": "TOR",
+     "home_name": "Toronto Raptors",
+     "home_record": "5-7",
+     "time_et": "7:30 PM",
+     "game_id": "0022600253",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/nyk-vs-tor-0022600253"
+    },
+    {
+     "away": "DET",
+     "away_name": "Detroit Pistons",
+     "away_record": "8-3",
+     "home": "SAS",
+     "home_name": "San Antonio Spurs",
+     "home_record": "10-2",
+     "time_et": "8:00 PM",
+     "game_id": "0022600255",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/det-vs-sas-0022600255"
+    },
+    {
+     "away": "POR",
+     "away_name": "Portland Trail Blazers",
+     "away_record": "8-3",
+     "home": "MIN",
+     "home_name": "Minnesota Timberwolves",
+     "home_record": "9-3",
+     "time_et": "8:00 PM",
+     "game_id": "0022600254",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/por-vs-min-0022600254"
+    },
+    {
+     "away": "UTA",
+     "away_name": "Utah Jazz",
+     "away_record": "1-11",
+     "home": "LAC",
+     "home_name": "LA Clippers",
+     "home_record": "2-8",
+     "time_et": "10:30 PM",
+     "game_id": "0022600257",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/uta-vs-lac-0022600257"
+    },
+    {
+     "away": "CHA",
+     "away_name": "Charlotte Hornets",
+     "away_record": "4-8",
+     "home": "LAL",
+     "home_name": "Los Angeles Lakers",
+     "home_record": "11-2",
+     "time_et": "11:00 PM",
+     "game_id": "0022600256",
+     "cup": null,
+     "preview_url": "https://www.nba.com/game/cha-vs-lal-0022600256"
+    }
+   ]
+  }
+ ],
+ "prior_games": [
+  {
+   "date": "2026-11-09",
+   "slate_url": "https://www.nba.com/games?date=2026-11-09",
+   "games": [
+    {
+     "away": "LAL",
+     "home": "ATL",
+     "away_score": 124,
+     "home_score": 114
+    },
+    {
+     "away": "WAS",
+     "home": "DET",
+     "away_score": 111,
+     "home_score": 122
+    },
+    {
+     "away": "CLE",
+     "home": "CHA",
+     "away_score": 112,
+     "home_score": 124
+    },
+    {
+     "away": "MEM",
+     "home": "TOR",
+     "away_score": 118,
+     "home_score": 102
+    },
+    {
+     "away": "IND",
+     "home": "DAL",
+     "away_score": 122,
+     "home_score": 125
+    },
+    {
+     "away": "DEN",
+     "home": "HOU",
+     "away_score": 100,
+     "home_score": 110
+    },
+    {
+     "away": "SAS",
+     "home": "PHX",
+     "away_score": 122,
+     "home_score": 96
+    },
+    {
+     "away": "NOP",
+     "home": "GSW",
+     "away_score": 87,
+     "home_score": 138
+    }
+   ]
+  },
+  {
+   "date": "2026-11-10",
+   "slate_url": "https://www.nba.com/games?date=2026-11-10",
+   "games": [
+    {
+     "away": "MIL",
+     "home": "NYK",
+     "away_score": 85,
+     "home_score": 117
+    },
+    {
+     "away": "BOS",
+     "home": "PHI",
+     "away_score": 123,
+     "home_score": 101
+    },
+    {
+     "away": "LAC",
+     "home": "PHX",
+     "away_score": 110,
+     "home_score": 133
+    },
+    {
+     "away": "MIA",
+     "home": "UTA",
+     "away_score": 115,
+     "home_score": 109
+    },
+    {
+     "away": "ORL",
+     "home": "SAC",
+     "away_score": 107,
+     "home_score": 100
+    },
+    {
+     "away": "OKC",
+     "home": "POR",
+     "away_score": 103,
+     "home_score": 123
+    }
+   ]
+  },
+  {
+   "date": "2026-11-11",
+   "slate_url": "https://www.nba.com/games?date=2026-11-11",
+   "games": [
+    {
+     "away": "CLE",
+     "home": "NYK",
+     "away_score": 115,
+     "home_score": 107
+    },
+    {
+     "away": "BOS",
+     "home": "TOR",
+     "away_score": 98,
+     "home_score": 93
+    },
+    {
+     "away": "WAS",
+     "home": "IND",
+     "away_score": 101,
+     "home_score": 114
+    },
+    {
+     "away": "LAL",
+     "home": "MIL",
+     "away_score": 123,
+     "home_score": 112
+    },
+    {
+     "away": "BKN",
+     "home": "NOP",
+     "away_score": 145,
+     "home_score": 111
+    },
+    {
+     "away": "DEN",
+     "home": "MEM",
+     "away_score": 123,
+     "home_score": 118
+    },
+    {
+     "away": "SAS",
+     "home": "CHI",
+     "away_score": 124,
+     "home_score": 119
+    },
+    {
+     "away": "ORL",
+     "home": "UTA",
+     "away_score": 123,
+     "home_score": 108
+    },
+    {
+     "away": "GSW",
+     "home": "HOU",
+     "away_score": 108,
+     "home_score": 115
+    },
+    {
+     "away": "OKC",
+     "home": "POR",
+     "away_score": 108,
+     "home_score": 118
+    }
+   ]
+  },
+  {
+   "date": "2026-11-12",
+   "slate_url": "https://www.nba.com/games?date=2026-11-12",
+   "games": [
+    {
+     "away": "TOR",
+     "home": "PHI",
+     "away_score": 112,
+     "home_score": 123
+    },
+    {
+     "away": "DET",
+     "home": "WAS",
+     "away_score": 144,
+     "home_score": 140,
+     "note": "Final/OT2 (double overtime), as printed on NBA.com"
+    },
+    {
+     "away": "DAL",
+     "home": "MIN",
+     "away_score": 94,
+     "home_score": 133
+    },
+    {
+     "away": "CHA",
+     "home": "PHX",
+     "away_score": 96,
+     "home_score": 101
+    }
+   ]
+  }
+ ],
+ "refresh_2026-11-14": "11/17 slate appended by session arena/2329cb68-nba1 after verification against https://www.nba.com/games?date=2026-11-17 and the official game pages 0022600253 / 0022600254 (titles read 'Nov 17, 2026'). Records and tip times exactly as printed at 2026-11-14T00:45Z. Cup label blank as published. NYK@TOR and POR@MIN each appear twice in the window (11/15+11/17, 11/16+11/17) exactly as the official slate pages publish; flagged for review, not corrected. | MERGE NOTE: session W later filled 11/17 venues from https://www.nba.com/schedule (see data/raw/official_schedule_capture_2026-11-14.json); competition labels remain blank as published."
 }

@@ -29,6 +29,17 @@ const CARD_PAGES = new Set([
   "docs/b/pages/questions.html", // <details> per question
   "docs/b/pages/strategy.html",  // one .card per strategy
   "docs/pages/suggestions.html", // decision cards
+  // Command Center pages that present findings as one <details> card per item rather than a table:
+  // a flag, a question, a suggestion. The rule they are held to is the same one: they must render
+  // something substantive, with an official link, and never a loader message.
+  "command-center/flagged.html",
+  "command-center/questions.html",
+  "command-center/suggestions.html",
+  // Origination desk pages whose findings are one .card per section rather than a table.
+  // Same rule: substantive content, official links, no loader message. (Adding these two
+  // unblocked main's Pages gate after PR #40 shipped them card-shaped.)
+  "origination/pages/method.html",
+  "origination/pages/props.html",
 ]);
 
 const only = process.argv[2] ? path.resolve(process.argv[2]) : null;

@@ -1,5 +1,5 @@
 {
- "captured_at_utc": "2026-11-13T22:30:00Z",
+ "captured_at_utc": "2026-11-14T01:20:00Z",
  "rule": "Every table row published on the site carries one of these source ids. A value that cannot be traced to one of these URLs is left blank and flagged - it is never inferred.",
  "sources": {
   "S1": {
@@ -72,7 +72,7 @@
    "title": "NBA Official Injury Report PDF - 11/13/26 05:15 PM ET edition",
    "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
    "publisher": "ak-static.cms.nba.com (NBA official static CMS)",
-   "used_for": "Player participation status (Out / Doubtful / Questionable / Probable / Available / NOT YET SUBMITTED) and the reason published by the team."
+   "used_for": "Superseded: the 11/13/26 05:15 PM ET injury-report edition. Retained for the edition-to-edition diff. The live edition is S10 (07:30 PM ET)."
   },
   "S7": {
    "title": "NBA.com Stats - Players Traditional (2026-27 Regular Season)",
@@ -223,6 +223,191 @@
    "url": "https://www.nba.com/game/okc-vs-sac-0022600244",
    "publisher": "NBA.com (official)",
    "used_for": "Current records for both teams."
+  },
+  "S8_0022600245": {
+   "title": "NBA.com game page - Magic at Celtics, 2026-11-16",
+   "url": "https://www.nba.com/game/orl-vs-bos-0022600245",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official game page for game 0022600245: tip time, venue, records and the game identifier."
+  },
+  "S8_0022600246": {
+   "title": "NBA.com game page - Bulls at Cavaliers, 2026-11-16",
+   "url": "https://www.nba.com/game/chi-vs-cle-0022600246",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official game page for game 0022600246: tip time, venue, records and the game identifier."
+  },
+  "S8_0022600247": {
+   "title": "NBA.com game page - Grizzlies at Wizards, 2026-11-16",
+   "url": "https://www.nba.com/game/mem-vs-was-0022600247",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official game page for game 0022600247: tip time, venue, records and the game identifier."
+  },
+  "S8_0022600248": {
+   "title": "NBA.com game page - 76ers at Nets, 2026-11-16",
+   "url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official game page for game 0022600248: tip time, venue, records and the game identifier."
+  },
+  "S8_0022600249": {
+   "title": "NBA.com game page - Rockets at Heat, 2026-11-16",
+   "url": "https://www.nba.com/game/hou-vs-mia-0022600249",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official game page for game 0022600249: tip time, venue, records and the game identifier."
+  },
+  "S8_0022600250": {
+   "title": "NBA.com game page - Trail Blazers at Timberwolves, 2026-11-16",
+   "url": "https://www.nba.com/game/por-vs-min-0022600250",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official game page for game 0022600250: tip time, venue, records and the game identifier."
+  },
+  "S8_0022600251": {
+   "title": "NBA.com game page - Warriors at Pelicans, 2026-11-16",
+   "url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official game page for game 0022600251: tip time, venue, records and the game identifier."
+  },
+  "S8_0022600252": {
+   "title": "NBA.com game page - Suns at Nuggets, 2026-11-16",
+   "url": "https://www.nba.com/game/phx-vs-den-0022600252",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official game page for game 0022600252: tip time, venue, records and the game identifier."
+  },
+  "S8_0022600253": {
+   "title": "NBA.com game page - Knicks at Raptors, 2026-11-17",
+   "url": "https://www.nba.com/game/nyk-vs-tor-0022600253",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official game page for game 0022600253: tip time, venue, records and the game identifier."
+  },
+  "S8_0022600254": {
+   "title": "NBA.com game page - Trail Blazers at Timberwolves, 2026-11-17",
+   "url": "https://www.nba.com/game/por-vs-min-0022600254",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official game page for game 0022600254: tip time, venue, records and the game identifier."
+  },
+  "S8_0022600255": {
+   "title": "NBA.com game page - Pistons at Spurs, 2026-11-17",
+   "url": "https://www.nba.com/game/det-vs-sas-0022600255",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official game page for game 0022600255: tip time, venue, records and the game identifier."
+  },
+  "S8_0022600256": {
+   "title": "NBA.com game page - Hornets at Lakers, 2026-11-17",
+   "url": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official game page for game 0022600256: tip time, venue, records and the game identifier."
+  },
+  "S8_0022600257": {
+   "title": "NBA.com game page - Jazz at Clippers, 2026-11-17",
+   "url": "https://www.nba.com/game/uta-vs-lac-0022600257",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official game page for game 0022600257: tip time, venue, records and the game identifier."
+  },
+  "S3_2026-11-13": {
+   "title": "NBA.com Games & Scores - November 13, 2026 (in progress at capture)",
+   "url": "https://www.nba.com/games?date=2026-11-13",
+   "publisher": "NBA.com (official)",
+   "used_for": "The nine fixtures' existence and tip times, for rest / back-to-back arithmetic only. No score is published: the games were live, not final."
+  },
+  "S11_2026-11-14": {
+   "title": "NBA.com Games & Scores - 2026/11/14",
+   "url": "https://www.nba.com/games?date=2026-11-14",
+   "publisher": "NBA.com (official)",
+   "used_for": "Slate listing, tip times, venues and the teams' won-lost records for 2026-11-14. Read 2026-11-14T01:20Z."
+  },
+  "S11_2026-11-15": {
+   "title": "NBA.com Games & Scores - 2026/11/15",
+   "url": "https://www.nba.com/games?date=2026-11-15",
+   "publisher": "NBA.com (official)",
+   "used_for": "Slate listing, tip times, venues and the teams' won-lost records for 2026-11-15. Read 2026-11-14T01:20Z."
+  },
+  "S11_2026-11-16": {
+   "title": "NBA.com Games & Scores - 2026/11/16",
+   "url": "https://www.nba.com/games?date=2026-11-16",
+   "publisher": "NBA.com (official)",
+   "used_for": "Slate listing, tip times, venues and the teams' won-lost records for 2026-11-16. Read 2026-11-14T01:20Z."
+  },
+  "S3_2026-11-17": {
+   "title": "NBA.com Games & Scores - November 17, 2026",
+   "url": "https://www.nba.com/games?date=2026-11-17",
+   "publisher": "NBA.com (official)",
+   "used_for": "Full slate verification 2026-11-17 (5 games: matchup, tip time, records) on 2026-11-14."
+  },
+  "S10": {
+   "title": "NBA Official Injury Report PDF - 11/13/26 07:30 PM ET edition",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf",
+   "publisher": "NBA.com (official, published by the NBA's official communications site)",
+   "used_for": "The newest official injury-report edition available at capture time: player status and reason for the 2026-11-13 and 2026-11-14 games. 122 rows transcribed; the team cell is printed once per team block, so continuation rows carry the team of their block (basis recorded row by row in data/d/injury_0730PM_team_basis.json)."
+  },
+  "S11_2026-11-17": {
+   "title": "NBA.com Games & Scores - 2026/11/17",
+   "url": "https://www.nba.com/games?date=2026-11-17",
+   "publisher": "NBA.com (official)",
+   "used_for": "Slate listing, tip times, venues and the teams' won-lost records for 2026-11-17. Read 2026-11-14T01:20Z."
+  },
+  "S12": {
+   "title": "NBA.com team roster page - Cleveland Cavaliers",
+   "url": "https://www.nba.com/team/1610612739/cavaliers/roster",
+   "publisher": "NBA.com (official)",
+   "used_for": "Corroborating the team printed for Ernest Udeh, Jr. in the 07:30 PM injury report, whose row falls inside the Cleveland Cavaliers block but whose Team cell was blank."
+  },
+  "S13": {
+   "title": "NBA.com team roster page - Dallas Mavericks",
+   "url": "https://www.nba.com/team/1610612742/mavericks/roster",
+   "publisher": "NBA.com (official)",
+   "used_for": "Corroborating the team printed for Caleb Martin in the 07:30 PM injury report, whose row falls inside the Dallas Mavericks block but whose Team cell was blank. Build A's 05:15 PM transcription had recorded this player under Cleveland; the official roster page shows he is on Dallas. Flagged as an irregularity."
+  },
+  "S14": {
+   "title": "NBA.com Games & Scores (all dates)",
+   "url": "https://www.nba.com/games",
+   "publisher": "NBA.com (official)",
+   "used_for": "The official index of every game's final score. The source a results backfill would walk, one date at a time, to extend the out-of-sample window."
+  },
+  "S15": {
+   "title": "NBA.com Stats glossary",
+   "url": "https://www.nba.com/stats/help/glossary",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official definitions of every statistic used on this site, including the pace, efficiency and shooting numbers the model reads."
+  },
+  "S18": {
+   "title": "NBA Cup 2026 - official competition page",
+   "url": "https://www.nba.com/nba-cup/2026",
+   "publisher": "NBA.com (official)",
+   "used_for": "The Emirates NBA Cup competition itself: format, group play and the tiebreaker rules that would make a Cup adjustment worth measuring."
+  },
+  "S19": {
+   "title": "GitHub Actions documentation",
+   "url": "https://docs.github.com/en/actions",
+   "publisher": "GitHub (official documentation)",
+   "used_for": "The scheduled-refresh workflow that fetches the official snapshots, and the log that would publish whether it succeeded."
+  },
+  "S20": {
+   "title": "NBA.com Stats - Players Box Scores",
+   "url": "https://www.nba.com/stats/players/boxscores",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official per-game box scores. The source that would supply player game logs and the minutes needed to measure game-to-game variance."
+  },
+  "S11_2026-11-13": {
+   "title": "NBA.com Games & Scores - November 13, 2026",
+   "url": "https://www.nba.com/games?date=2026-11-13",
+   "publisher": "NBA.com (official)",
+   "used_for": "The 2026-11-13 slate. At capture time the games were still in progress, so it holds no final score."
   }
- }
+ },
+ "refresh_2026-11-14": {
+  "captured_at_utc": "2026-11-14T00:45:00Z",
+  "session": "arena/2329cb68-nba1",
+  "added": [
+   "S8_0022600245..S8_0022600257",
+   "S3_2026-11-13..S3_2026-11-17"
+  ]
+ },
+ "refresh_log": [
+  {
+   "captured_at_utc": "2026-11-14T00:38:00Z",
+   "as_of": "2026-11-14",
+   "what_changed": "Season-to-date team table and training window re-captured; upcoming window rolled from 11/13-11/15 to 11/14-11/16 (22 games); 11/13 games moved to schedule_in_progress (rest maths only); injury report moved from the 17:15 ET to the 19:30 ET edition.",
+   "previous_capture_utc": "2026-11-13T23:40:00Z"
+  }
+ ],
+ "merge_2026-11-14": "union of both captures (arena/2329cb68-nba1 + main sessions); shared ids prefer the main-side entry"
 }

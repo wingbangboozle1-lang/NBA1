@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategies &amp; Leaderboard · NBA1 Command Center</title>
+<meta name="description" content="The ten strategies, the seven gates, and a leaderboard that is capped by gates rather than by score.">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a href="index.html">Dashboard</a>
+    <a href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a href="slate.html">Slate &amp; lines</a>
+    <a href="picks.html">Picks</a>
+    <a class="on" href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html">Validation gates</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="luck.html">Luck</a>
+    <a href="backtest.html">Game log</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="gameflow.html">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="flagged.html">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+  <div class="main">
+    <div class="top"><div><h1>Strategies &amp; leaderboard</h1><div class="sub">Gate-first ordering: a score cannot buy its way past a failed gate</div></div><span class="asof" id="asof">as of …</span></div>
+    <div class="wrap">
+      <div class="bn info"><div class="ico">i</div><div>
+        <p><strong>Read the gate column before the record column.</strong> This table is deliberately
+        ordered by gates passed, then by composite score — the opposite of the usual leaderboard, which
+        puts the most eye-catching win-loss record on top. On 23 graded plays, 16-7 is the most
+        eye-catching record on the site and the least trustworthy one.</p>
+      </div></div>
+
+      <h2>The leaderboard</h2>
+      <div id="lb"><div class="empty">Loading…</div></div>
+      <p class="tnote" id="lbnote"></p>
+
+      <h2>The seven gates</h2>
+      <div id="gates"><div class="empty">Loading…</div></div>
+
+      <h2>Every strategy in detail</h2>
+      <div id="strat"><div class="empty">Loading…</div></div>
+    </div>
+    <footer class="bot">
+      <p><strong>Reward design.</strong> Tiers are gate-first: a strategy cannot reach a paying tier
+      without passing the skill gate, whatever its score. No reward amounts are set anywhere on this
+      site — that is a policy decision, not a code one (see <a href="suggestions.html">S10</a>).</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association.</p>
+    </footer>
+  </div>
+</div>
+<script>
+(async () => {
+  try {
+    const [LB, V, meta] = await Promise.all([
+      CC.load("leaderboard.json"), CC.load("validation.json"),
+      fetch("data/meta.json").then(r=>r.json())]);
+    document.getElementById("asof").textContent = "as of " + meta.as_of;
+
+    const S = {}; V.strategies.forEach(s => S[s.id] = s);
+    const tierKind = t => /Tier 1|Tier 2/.test(t) ? "g" : /Tier 3/.test(t) ? "a" : "n";
+
+    const rows = LB.rows.slice().sort((a,b) => {
+      const ga = (S[a.id]?.gates||[]).filter(g=>g.status==="PASS").length;
+      const gb = (S[b.id]?.gates||[]).filter(g=>g.status==="PASS").length;
+      return gb - ga || (b.score||0) - (a.score||0);
+    });
+
+    CC.set("#lb", CC.table([
+      {h:"#", n:1, v:(r)=>rows.indexOf(r)+1},
+      {h:"Strategy", v:r=>`<b>${CC.esc(r.id)}</b> ${CC.esc(r.name||S[r.id]?.name||"")}`},
+      {h:"Family", v:r=>`<span class="small">${CC.esc(S[r.id]?.family||"—")}</span>`},
+      {h:"Gates passed", n:1, v:r=>{
+        const gs=(S[r.id]?.gates||[]);
+        const p=gs.filter(g=>g.status==="PASS").length;
+        return `<b>${p}</b><span class="small"> / 7</span>`;
+      }},
+      {h:"Record", v:r=>{
+        const s=S[r.id]; if(!s) return CC.blank;
+        return `<span class="mono">${s.wins}–${s.losses}${s.pushes?`–${s.pushes}`:""}</span>`;
+      }},
+      {h:"n", n:1, v:r=>S[r.id]?.n_graded ?? CC.blank},
+      {h:"Hit rate", n:1, v:r=>CC.pct(S[r.id]?.hit_rate,1)},
+      {h:"p (exact)", n:3, v:r=>S[r.id]?.binomial_p==null?CC.blank:CC.n(S[r.id].binomial_p,3)},
+      {h:"Units @ -110", n:1, v:r=>CC.num(S[r.id]?.units_at_minus110,2)},
+      {h:"Composite", n:1, v:r=>CC.n(r.score,1)},
+      {h:"Tier", v:r=>CC.tag(r.tier, tierKind(r.tier))},
+      {h:"Blocking gate", v:r=>{
+        const f=(S[r.id]?.gates||[]).find(g=>g.status==="FAIL");
+        return f ? `<span class="small"><b>${CC.esc(f.id)}</b> ${CC.esc(f.name)}</span>` : `<span class="small faint">none</span>`;
+      }},
+      {h:"Source", v:r=>CC.src(r.id==="S1"?"S2":"S3", r.id==="S1" ? "training window" : "games & scores")},
+    ], rows));
+    document.getElementById("lbnote").textContent =
+      "Composite weights: " + JSON.stringify(LB.weights) + ". Formula: " + LB.formula +
+      " A failed gate caps the tier regardless of score.";
+
+    CC.set("#gates", CC.table([
+      {h:"Gate", v:r=>`<b>${CC.esc(r.id)}</b>`},
+      {h:"Name", k:"name"},
+      {h:"What it requires", k:"definition"},
+      {h:"Strategies passing", n:1, v:r=>{
+        const n = V.strategies.filter(s => (s.gates||[]).some(g=>g.id===r.id && g.status==="PASS")).length;
+        return `<b>${n}</b><span class="small"> / ${V.strategies.length}</span>`;
+      }},
+      {h:"Verdict", v:r=>{
+        const n = V.strategies.filter(s => (s.gates||[]).some(g=>g.id===r.id && g.status==="PASS")).length;
+        return n===0 ? CC.tag("nothing passes","r") : n===V.strategies.length ? CC.tag("all pass","g") : CC.tag("partial","a");
+      }},
+      {h:"Source", v:()=>CC.src("S2","training window")},
+    ], V.gate_definitions));
+
+    CC.set("#strat", V.strategies.map(s => `
+      <details><summary><b>${CC.esc(s.id)}</b> ${CC.esc(s.name)}
+        <span class="tag n">${CC.esc(s.family||"")}</span>
+        <span class="mono small">${s.wins}–${s.losses} · n=${s.n_graded}</span>
+        <span class="tag ${s.gates.some(g=>g.status==="FAIL")?"r":"a"}">${s.gates.filter(g=>g.status==="PASS").length}/7</span>
+        <span class="tag n">${CC.esc(s.gradeable?"gradeable":"ungradeable")}</span>
+        </summary>
+      <div class="body">
+        <p><strong>Rule.</strong> ${CC.esc(s.rule||"")}</p>
+        <p><strong>Rationale.</strong> ${CC.esc(s.why||"")}</p>
+        <dl class="dl">
+          <dt>Market / threshold</dt><dd>${CC.esc(s.market||"—")} · ${CC.esc(s.threshold||"—")}</dd>
+          <dt>Graded plays</dt><dd>${s.n_graded} of ${s.n_plays} generated${s.gradeable?"":" <span class='tag a'>ungraded: "+(s.ungraded_reason||"reason not stated")+"</span>"}</dd>
+          <dt>Hit rate</dt><dd>${CC.pct(s.hit_rate,1)} · Wilson 95% [${CC.n(s.wilson_95?.[0],3)}, ${CC.n(s.wilson_95?.[1],3)}]</dd>
+          <dt>Exact binomial p</dt><dd>${CC.n(s.binomial_p,4)} against a fair coin</dd>
+          <dt>Units at −110</dt><dd>${CC.num(s.units_at_minus110,3)} · ROI ${CC.n(s.roi_pct,1)}%</dd>
+          <dt>Mean model probability</dt><dd>${CC.pct(s.mean_p_model,1)} (break-even is 52.38%)</dd>
+        </dl>
+        <div class="tw" style="margin-top:10px"><table class="thin">
+          <thead><tr><th>Gate</th><th>Requirement</th><th>Result this run</th><th>Status</th><th>Source</th></tr></thead>
+          <tbody>${(s.gates||[]).map(g=>`<tr>
+            <td><b>${CC.esc(g.id)}</b> ${CC.esc(g.name)}</td>
+            <td class="small">${CC.esc(g.threshold)}</td>
+            <td class="small">${CC.esc(g.detail)}</td>
+            <td>${g.status==="PASS"?CC.tag("PASS","g"):g.status==="FAIL"?CC.tag("FAIL","r"):CC.tag(g.status,"n")}</td>
+            <td class="small">${CC.src(s.id==="S1"?"S2":"S3", s.id==="S1" ? "training window" : "games & scores")}</td>
+          </tr>`).join("")}</tbody>
+        </table></div>
+      </div></details>`).join(""));
+  } catch (e) { CC.fail("#lb", e); }
+})();
+</script>
+</body>
+</html>

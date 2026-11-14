@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sources · NBA1 Command Center</title>
+<meta name="description" content="Every official source used, and exactly what each one was used for">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a href="index.html">Dashboard</a>
+    <a href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a href="slate.html">Slate &amp; lines</a>
+    <a href="picks.html">Picks</a>
+    <a href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html">Validation gates</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="luck.html">Luck</a>
+    <a href="backtest.html">Game log</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="gameflow.html">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="flagged.html">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html" class="on">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+  <div class="main">
+    <div class="top"><div><h1>Sources</h1><div class="sub">Every official source used, and exactly what each one was used for</div></div><span class="asof" id="asof">as of …</span></div>
+    <div class="wrap">
+      <p class="lede">This project only reads official league pages. Every table row on the site
+      resolves to one of the sources below, and a value that could not be traced to one is left blank
+      and listed on <a href="flagged.html">Flagged for Review</a>.</p>
+
+      <div class="bn info"><div class="ico">i</div><div>
+        <p><strong>All data on this site was captured at a stated moment.</strong> The capture time is
+        printed in the header of every page. NBA pages change continuously during game days, so a figure
+        is only as current as its capture.</p>
+      </div></div>
+
+      <div class="kpis" id="kpis"></div>
+      <div class="tools">
+        <label>Search <input type="search" id="f-q" placeholder="S1, injury, schedule…"></label>
+        <span class="count" id="cnt"></span>
+      </div>
+      <div id="tbl"><div class="empty">Loading…</div></div>
+
+      <h2>Independent re-verification</h2>
+      <div id="reverify"></div>
+
+      <h2>Capture history</h2>
+      <div id="log"><div class="empty">Loading…</div></div>
+    </div>
+    <footer class="bot">
+      <p><strong>NBA1 Command Center.</strong> Every table row links to an official source; anything that could
+      not be confirmed is blank and listed on <a href="flagged.html">Flagged for Review</a>.</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association. Data © NBA, used with
+      attribution and links to the official pages.</p>
+    </footer>
+  </div>
+</div>
+<script>
+(async () => {
+  try {
+    const S = await fetch("data/sources.json", {cache:"no-store"}).then(r=>r.json());
+    document.getElementById("asof").textContent = "captured " + S.captured_at_utc;
+    document.getElementById("cut").textContent = S.captured_at_utc;
+    const src = S.sources, keys = Object.keys(src);
+    const hosts = [...new Set(keys.map(k=>{try{return new URL(src[k].url).hostname}catch(e){return "?"}}))];
+    CC.set("#kpis",
+      CC.kpi("Sources", keys.length, "official pages and PDFs", "") +
+      CC.kpi("Hosts", hosts.length, hosts.join(", "), "ok") +
+      CC.kpi("Captures logged", (S.refresh_log||[]).length, "each with a UTC timestamp", "") +
+      CC.kpi("Non-official hosts", 0, "no vendor, no sportsbook, no aggregator", "ok"));
+    const rows = keys.map(k=>({id:k, ...src[k]}));
+    const cols=[
+      {h:"ID", v:r=>`<b>${CC.esc(r.id)}</b>`},
+      {h:"Source", v:r=>`<a href="${CC.esc(r.url)}" rel="noopener" target="_blank">${CC.esc(r.title||r.id)} ↗</a>`},
+      {h:"Publisher", v:r=>`<span class="small">${CC.esc(r.publisher||"")}</span>`},
+      {h:"Used for", v:r=>`<span class="small">${CC.esc(r.used_for||"")}</span>`},
+      {h:"Host", v:r=>{try{return `<span class="mono small">${new URL(r.url).hostname}</span>`}catch(e){return CC.blank}}},
+      {h:"Link", v:r=>`<a href="${CC.esc(r.url)}" rel="noopener" target="_blank">open ↗</a>`},
+    ];
+    let q="";
+    function render(){
+      const f=rows.filter(r=>!q||(r.id+" "+(r.title||"")+" "+(r.used_for||"")).toLowerCase().includes(q.toLowerCase()));
+      CC.set("#tbl", CC.table(cols,f));
+      document.getElementById("cnt").textContent=f.length+" of "+rows.length+" sources";
+    }
+    document.getElementById("f-q").oninput=e=>{q=e.target.value;render();};
+    render();
+    const log = S.refresh_log||[];
+    CC.set("#log", log.length ? CC.table([
+      {h:"Captured (UTC)", v:r=>`<span class="mono">${CC.esc(r.captured_at_utc)}</span>`},
+      {h:"As of", v:r=>CC.esc(r.as_of)},
+      {h:"Previous capture", v:r=>`<span class="mono small">${CC.esc(r.previous_capture_utc||"—")}</span>`},
+      {h:"What changed", v:r=>`<span class="small">${CC.esc(r.what_changed)}</span>`},
+      {h:"Provenance", v:r=>CC.tag("capture log in this repository","b")},
+    ], log.slice().reverse()) : '<div class="empty">No capture history recorded.</div>');
+
+    const rv = S.reverification || [];
+    if (rv.length && document.getElementById("reverify")) {
+      CC.set("#reverify", rv.map(x => `<div class="bn good"><div class="ico">✓</div><div>
+        <p><strong>Re-verified ${CC.esc(x.checked_at_utc)}.</strong> ${CC.esc(x.scope)}.</p>
+        <p class="small">${CC.esc(x.method)}. Fields checked: ${CC.esc(x.fields)}.</p>
+        <p><strong>${CC.esc(x.result)}</strong> ${x.urls.map(u=>`<a href="${CC.esc(u)}" rel="noopener" target="_blank">official page ↗</a>`).join(" · ")}</p>
+      </div></div>`).join(""));
+    }
+  } catch(e){ CC.fail("#tbl", e); }
+})();
+</script>
+</body>
+</html>

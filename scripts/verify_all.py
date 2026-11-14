@@ -5,7 +5,8 @@ Runs, in order, and fails on the first error:
   1. scripts/build_site.py        — docs/ snapshot build (source/link validation)
   2. scripts/build_edge_site.py   — Edge Lab pages + originated-lines audit record
   3. scripts/check_site.py        — root pages: local links + official source per table row
-  4. Data audits (this file):
+  4. The unified dashboard build + its source/link audit
+  5. Data audits (this file):
        - every slate/game row has an allowed official source URL
        - every injury row carries the official PDF source; team/matchup blanking rules hold
        - every leader row has an allowed official source URL
@@ -53,8 +54,11 @@ def ok_url(u):
 # 1–3: builders + checker
 run("build_site.py")
 run("build_edge_site.py")
+run("generate_picks_d.py")  # Build D: live-horizon lines & picks (11/14-11/17)
 run("check_site.py")
 run("verify_schedule_c.py")  # Build C: row-by-row schedule check + schedule-verified.html
+run("build_dashboard.py")    # Build D: regenerate the unified site (index.html + site/**)
+run("verify_dashboard.py")   # Build D: every row source-linked, every internal link resolves
 
 # 4a: slate sources
 slate = load("slate_full")
@@ -68,8 +72,8 @@ for s in slate["slates"]:
             errors.append(f"game {s['date']} {g['away']}@{g['home']}: bad preview_url")
         if not (g["away_record"] and g["home_record"]):
             errors.append(f"game {s['date']} {g['away']}@{g['home']}: blank record")
-if n_games != 31:
-    errors.append(f"expected 31 window games, found {n_games}")
+if n_games != 36:
+    errors.append(f"expected 36 window games (11/13–11/17), found {n_games}")
 
 # prior games (rest inputs) must all carry official slate URLs
 for p in slate["prior_games"]:
@@ -94,6 +98,18 @@ for r in arch["rows"]:
         errors.append(f"archived injury row still has implied matchup: {r.get('player')}")
     if not ok_url(r.get("source_url")):
         errors.append(f"archived injury row bad source: {r.get('player')}")
+
+# 4b2: session-W capture of the 11/13 08:00 PM ET edition (covers the 11/14 slate)
+with open(os.path.join(ROOT, "data", "raw", "injury_report_2026-11-13_08_00PM.json"), encoding="utf-8") as _f:
+    inj8 = json.load(_f)
+if not ok_url(inj8["source_url"]):
+    errors.append("injury_report_2026-11-13_08_00PM: bad source_url")
+for r in inj8["rows"]:
+    if not r.get("team"):
+        errors.append(f"08:00 PM edition row without team in main table: {r.get('player')}")
+for r in inj8["unattributed_rows"]:
+    if r.get("team"):
+        errors.append(f"08:00 PM unattributed row unexpectedly has team: {r.get('player')}")
 
 # 4c: leaders
 leaders = load("leaders")

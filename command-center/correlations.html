@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correlations · NBA1 Command Center</title>
+<meta name="description" content="What is measured on official data, and what is only modelled — kept apart on purpose">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a href="index.html">Dashboard</a>
+    <a href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a href="slate.html">Slate &amp; lines</a>
+    <a href="picks.html">Picks</a>
+    <a href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html">Validation gates</a>
+    <a href="correlations.html" class="on">Correlations</a>
+    <a href="luck.html">Luck</a>
+    <a href="backtest.html">Game log</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="gameflow.html">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="flagged.html">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+  <div class="main">
+    <div class="top"><div><h1>Correlations</h1><div class="sub">What is measured on official data, and what is only modelled — kept apart on purpose</div></div><span class="asof" id="asof">as of …</span></div>
+    <div class="wrap">
+      <p class="lede">Two different things share the word "correlation" here and conflating them is
+      the usual way a parlay gets mispriced. <b>Measured</b> means computed from official NBA data with
+      a stated sample. <b>Model-derived</b> means assumed, and every parlay that depends on it is
+      labelled accordingly.</p>
+
+      <div class="bn warn"><div class="ico">!</div><div>
+        <p><strong>No same-game-parlay rho in this build is measured.</strong> Measuring leg dependence
+        needs paired <em>bet outcome</em> data, which does not exist in this repository. The five rho
+        values below are assumptions with a stated direction and a plausible size — not estimates.</p>
+      </div></div>
+
+      <h2>Measured correlations between official statistics</h2>
+      <div id="meas"><div class="empty">Loading…</div></div>
+
+      <h2>Assumed correlations used to price parlays</h2>
+      <div id="mod"><div class="empty">Loading…</div></div>
+
+      <h2>Parlay pricing grid</h2>
+      <p class="small">How the assumed rho moves a two-leg parlay's joint probability away from the
+      independence shortcut, holding both leg probabilities fixed. A positive rho <em>reduces</em> the
+      joint probability of two overs, which is why multiplying marginals is the wrong default even when
+      each leg looks good. Prices are fair American prices with no vig, so they are what the joint
+      probability is worth — not what a book would offer. The last column is the edge a bettor gets if a
+      book prices the two legs as independent: negative means the independent price is the generous one.</p>
+      <div id="grid"><div class="empty">Loading…</div></div>
+    </div>
+    <footer class="bot">
+      <p><strong>NBA1 Command Center.</strong> Every table row links to an official source; anything that could
+      not be confirmed is blank and listed on <a href="flagged.html">Flagged for Review</a>.</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association. Data © NBA, used with
+      attribution and links to the official pages.</p>
+    </footer>
+  </div>
+</div>
+<script>
+(async () => {
+  try {
+    const [C, meta] = await Promise.all([CC.load("correlations.json"), fetch("data/meta.json").then(r=>r.json())]);
+    document.getElementById("asof").textContent = "as of " + meta.as_of;
+    document.getElementById("cut").textContent = meta.generated_at_utc;
+    CC.set("#meas", CC.table([
+      {h:"Variable", v:r=>`<b>${CC.esc(r.x)}</b>`},
+      {h:"Against", v:r=>`<b>${CC.esc(r.y)}</b>`},
+      {h:"r", n:2, v:r=>CC.n(r.r,3)},
+      {h:"r²", n:2, v:r=>CC.n(r.r_squared,3)},
+      {h:"n", n:1, v:r=>r.n},
+      {h:"p", n:3, v:r=>CC.n(r.p_value,3)},
+      {h:"Question it answers", v:r=>`<span class="small">${CC.esc(r.why)}</span>`},
+      {h:"Status", v:r=>CC.tag(r.status,"g")},
+      {h:"Source", v:()=>CC.src("S1","team stats")},
+    ], C.measured));
+
+    CC.set("#mod", CC.table([
+      {h:"Leg 1", v:r=>`<b>${CC.esc(r.leg_1)}</b>`},
+      {h:"Leg 2", v:r=>`<b>${CC.esc(r.leg_2)}</b>`},
+      {h:"Assumed rho", n:2, v:r=>CC.num(r.rho_model,2)},
+      {h:"Direction", v:r=>r.rho_model>0?CC.tag("positive","a"):r.rho_model<0?CC.tag("negative","b"):CC.tag("none","n")},
+      {h:"Derivation", v:r=>`<span class="small">${CC.esc(r.derivation)}</span>`},
+      {h:"Status", v:r=>CC.tag("model-derived","r")},
+      {h:"Source", v:()=>CC.src(C.src||"S1","team stats")},
+    ], C.model_derived || []));
+
+    const g = C.parlay_pricing_grid || [];
+    if (g.length) {
+      const keys = Object.keys(g[0]);
+      const label = {
+        leg_prob:"Leg probability", rho:"Assumed rho", true_joint_prob:"True joint",
+        independent_product:"Priced as independent", difference:"Difference",
+        fair_price_true:"Fair price, true joint (American)",
+        price_if_priced_independent:"Fair price, priced independent (American)",
+        bettor_edge_if_priced_independent_pct:"Edge if priced independent %"
+      };
+      const gcols = keys.map(k=>({h:label[k]||k, n:1, v:r=>{
+        if (r[k]===null||r[k]===undefined) return CC.blank;
+        if (!CC.isNum(r[k])) return CC.esc(r[k]);
+        // American prices are signed integers; showing "292" without the + reads as a probability.
+        if (/price/.test(k)) {
+          const v = Number(r[k]);
+          return `<b class="mono">${v > 0 ? "+" : ""}${v}</b>`;
+        }
+        return CC.n(r[k], /prob|product|difference/.test(k) ? 4 : 2);
+      }}));
+      gcols.push({h:"Source", v:()=>CC.src(C.src||"S1","measured inputs")});
+      CC.set("#grid", CC.table(gcols, g));
+    } else {
+      CC.set("#grid", '<div class="empty">No grid published in this data file.</div>');
+    }
+  } catch(e){ CC.fail("#meas", e); }
+})();
+</script>
+</body>
+</html>

@@ -24,7 +24,7 @@ DER = os.path.join(DATA, "derived")
 DOCS = os.path.join(ROOT, "docs")
 PAGES = os.path.join(DOCS, "pages")
 
-GENERATED = "2026-11-13"
+GENERATED = "2026-11-14"
 E = html.escape
 DASH = "&mdash;"
 
@@ -276,7 +276,7 @@ result is that <b>no strategy is validated yet</b>, and the pages explain exactl
 would change that.</p>
 
 <div class="grid">
-{card("Games covered", "31", "11/13 to 11/16")}
+{card("Games covered", str(len(lines["games"])), "11/13 to 11/17")}
 {card("Game lines originated", len(lines["games"]), "totals, spreads, moneylines")}
 {card("Player prop lines", len(lines["props"]), "half-lines, no pushes")}
 {card("Strategies validated", f"{len(validated)} of {len(strat['leaderboard'])}", "six gates, no partial credit", "bad" if not validated else "good")}
@@ -291,7 +291,7 @@ until something passes, the gates were left alone and the result is reported as 
 
 <h2>What was built</h2>
 <div class="tblwrap"><table><tbody>
-<tr><td><b>Originated lines</b></td><td class="wrap">Totals, spreads and moneylines for all 31 games, computed from
+<tr><td><b>Originated lines</b></td><td class="wrap">Totals, spreads and moneylines for all 36 games (11/13&ndash;11/17), computed from
 offensive/defensive ratings and pace. No sportsbook price is used anywhere, because none was reachable.</td>
 <td>{src("https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season","nba.com")}</td></tr>
 <tr><td><b>Validation gates</b></td><td class="wrap">Six gates applied as a conjunction, including a bootstrap
@@ -325,7 +325,7 @@ be trusted at this size &mdash; and both fail.</li>
 <h2>Where to start</h2>
 <div class="grid">
 <a class="card" href="pages/lines.html"><div class="k">Markets</div><div class="v">Lines</div>
-<div class="s">31 games, formulas printed</div></a>
+<div class="s">36 games, formulas printed</div></a>
 <a class="card" href="pages/picks.html"><div class="k">Slates</div><div class="v">Picks</div>
 <div class="s">3 days ahead, injuries marked</div></a>
 <a class="card" href="pages/strategies.html"><div class="k">Competition</div><div class="v">Leaderboard</div>
@@ -368,7 +368,7 @@ recompute any row by hand.</p>
 {disp['n_total_games']} and {disp['n_margin_games']} real finals. An earlier version of this model
 guessed a dispersion figure and produced 99.9% win probabilities and 30-point spreads; that guess is gone.</div>
 
-<h2>Game lines &mdash; {len(lines['games'])} games, 11/13 to 11/16</h2>
+<h2>Game lines &mdash; {len(lines['games'])} games, 11/13 to 11/17</h2>
 {table(["Date","Matchup","Competition","Poss","Home pts","Away pts","Total","Spread","Home ML","Tip","Source"],
        rows, numeric=(3,4,5,6,7,8))}
 
@@ -413,8 +413,9 @@ prop strategy is ungraded &mdash; see <a href="strategies.html">Strategies</a>.<
                          for g in by_date[date])
         note = ("" if has_report else
                 '<div class="note"><b>Injury adjustment not applied to this game.</b> This layer adjusts '
-                '11/13 games only. The 05:15 PM ET official edition prints some 11/14 rows (see the injuries '
-                'page), and no report exists yet for 11/15 or 11/16. Injury status below is <b>unknown</b>, '
+                '11/13 games only. The 05:15 PM ET and 08:00 PM ET official editions of 11/13 print 11/14 rows '
+                '(see the injuries page and the Edge Lab gameflow page), and no report exists yet for '
+                '11/15&ndash;11/17. Injury status below is <b>unknown</b>, '
                 'not absent. These are rating-only projections.</div>')
         rows = []
         for g in by_date[date]:
@@ -439,9 +440,10 @@ prop strategy is ungraded &mdash; see <a href="strategies.html">Strategies</a>.<
 
     body = f"""
 <h1>Picks by slate</h1>
-<p class="lede">All {len(lines['games'])} games from 11/13 through 11/16, which is the three-day window
-the brief asks for. The pick is simply the side the originated spread favours &mdash; it is not a
-recommendation, because no strategy has passed validation.</p>
+<p class="lede">All {len(lines['games'])} games from 11/13 through 11/17 &mdash; the frozen 11/13 pick
+basis plus today (11/14) through 11/17, the maximum three days ahead the brief asks for. The pick is
+simply the side the originated spread favours &mdash; it is not a recommendation, because no strategy
+has passed validation.</p>
 
 <div class="note bad"><b>Read this before the table.</b> These picks are the raw output of an unvalidated
 model. Passing them off as selections would ignore every gate on the
@@ -449,9 +451,9 @@ model. Passing them off as selections would ignore every gate on the
 they are.</div>
 
 <div class="grid">
-{card("Slates covered", "4", "11/13 to 11/16")}
+{card("Slates covered", str(len({g['date'] for g in lines['games']})), "11/13 to 11/17")}
 {card("Games", len(lines["games"]), "all sourced")}
-{card("With real injury data", str(sum(1 for g in lines['games'] if g['date']=='2026-11-13')), "11/13 only", "warn")}
+{card("With real injury data", str(sum(1 for g in lines['games'] if g['date']=='2026-11-13')), "11/13 adjustment layer; 11/14 statuses on gameflow page", "warn")}
 {card("Injury-adjusted picks", str(len(moved)), "see injuries page", "warn")}
 </div>
 {''.join(sections)}
@@ -772,11 +774,13 @@ visible. Where the PDF text lost a team cell, the team is marked as not printed,
 page</a>; nothing is inferred.</p>
 {table(["Game date","Team","Player","Status 05:15 PM","Status 03:00 PM","Reason","Source"], all_report)}
 
-<div class="note"><b>Why 11/14&ndash;11/16 carry no injury adjustment.</b> The 05:15 PM edition prints
-11/14 rows for DAL@CLE, BKN@MEM, CHI@MIN and DET@MIA, and DEN@NOP reads <i>NOT YET SUBMITTED</i> for both
-teams. This layer adjusts 11/13 games only, so those rows are shown above but drive no line. No report
-exists yet for 11/15 or 11/16. Those games are rating-only projections with injury status marked
-<i>unknown</i> rather than blank, because a blank cell reads as a claim of no injuries.</div>
+<div class="note"><b>Why 11/14&ndash;11/17 carry no injury adjustment in this layer.</b> The 5:15 PM ET edition prints
+11/14 rows for DAL@CLE, BKN@MEM, CHI@MIN and DET@MIA, and the 8:00 PM ET edition of 11/13 &mdash; the newest
+published at the 2026-11-14 capture &mdash; prints rows for all five 11/14 games (used on the Edge Lab
+gameflow page). This adjustment layer computes line moves for 11/13 games only, so those rows drive no line
+here. No report exists yet for 11/15, 11/16 or 11/17 (day-before deadlines). Those games are rating-only
+projections with injury status marked <i>unknown</i> rather than blank, because a blank cell reads as a claim
+of no injuries.</div>
 """
     write(os.path.join(PAGES, "injuries.html"), page("Injuries", "injuries.html", body), "../assets/style.css")
 
@@ -905,13 +909,13 @@ what would change the answer. Read this instead of the other thirteen pages if y
 
 <h2>The finding in one sentence</h2>
 <div class="note bad"><b>Lines can be originated from official data, but no strategy has demonstrated skill.</b>
-The model produces all 31 game lines and 92 prop lines, and its totals are plausible. Zero of eight betting
+The model produces all 36 game lines and 92 prop lines, and its totals are plausible. Zero of eight betting
 strategies pass the validation gates, because the largest graded sample available is 14 games against a floor
 of 100, those 14 games are look-ahead contaminated, and no real betting price was reachable to measure an edge
 against.</div>
 
 <div class="grid">
-{card("Games covered", "31", "11/13 to 11/16")}
+{card("Games covered", str(len(lines["games"])), "11/13 to 11/17")}
 {card("Lines originated", len(lines["games"]), "totals, spreads, moneylines")}
 {card("Prop lines", len(lines["props"]), "half-lines")}
 {card("Strategies validated", f"{len(validated)} of {len(strat['leaderboard'])}", "six conjoined gates", "bad")}
@@ -1191,7 +1195,7 @@ the definition column so they can never be mistaken for league terminology.</div
          "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&sort=PTS"),
         ("Player minutes leaderboard", "Minutes per game, used to size vacated rotation slots",
          "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=MIN"),
-        ("Schedule", "Dates, tip times, venues and game IDs for 11/13&ndash;11/16",
+        ("Schedule", "Dates, tip times, venues and game IDs for 11/13&ndash;11/17",
          "https://www.nba.com/schedule"),
         ("Finals 11/11", "Ten completed games used for dispersion and backtesting",
          "https://www.nba.com/games?date=2026-11-11"),
@@ -1299,15 +1303,28 @@ def reconcile_legacy_pages(strat, bt, inj, absence, report):
             f.write(txt)
         edits.append(f"{fn}: {note}")
 
-    n_games = 31
+    n_games = len(json.loads(open(os.path.join(DER, "lines.json")).read())["games"])
     n_strat = len(strat["leaderboard"])
     n_valid = sum(1 for e in strat["leaderboard"] if e["status"] == "VALIDATED")
 
-    patch("summary.html", "<td>23</td>", f"<td>{n_games}</td>",
-          "3-day game count 23 -> 31 (window now runs to 11/16)")
-    patch("summary.html", "Scope: 23 NBA games are scheduled Nov 13–15, 2026 (9 / 5 / 9)",
-          f"Scope: {n_games} NBA games are scheduled Nov 13–16, 2026 (9 / 5 / 9 / 8)",
-          "scope sentence updated to the 11/16 slate")
+    # Needles below match the CURRENT text of docs/summary.html (already patched through the 11/16
+    # window by earlier sessions). Each patch is one-shot and idempotent: after it applies, the
+    # needle no longer exists and a re-run leaves the file unchanged.
+    patch("summary.html",
+          "No originated lines, strategy results, correlations, or picks have been produced yet, because the required verified data is missing.",
+          "Originated lines and paper picks now exist for every game of the 11/13&ndash;11/17 window "
+          "(see the Edge Lab pages at the repository root and <a href=\"pages/picks.html\">Picks by slate</a>). "
+          "No strategy has passed the validation gates yet and no verified odds feed exists, so nothing here is a recommendation.",
+          "headline status sentence corrected — it claimed no lines or picks existed")
+    patch("summary.html", "Scope: 31 NBA games are scheduled Nov 13–16, 2026 (9 / 5 / 9 / 8)",
+          f"Scope: {n_games} NBA games are scheduled Nov 13–17, 2026 (9 / 5 / 9 / 8 / 5)",
+          "scope sentence updated to the 11/17 slate")
+    patch("summary.html", "<td>Games in 3-day window</td><td>31</td>",
+          f"<td>Games in 3-day window</td><td>{n_games}</td>",
+          "3-day game count 31 -> 36 (window now runs to 11/17)")
+    patch("summary.html", "NBA.com games pages (Nov 13, 14, 15)",
+          "NBA.com games pages (Nov 13&ndash;17)",
+          "games-page label updated to the 11/17 window")
     patch("summary.html",
           "<td>Strategies evaluated</td><td>0</td><td>Blocked: no verified odds or game logs (Q-06, Q-07)</td>",
           f'<td>Strategies evaluated</td><td>{n_strat}</td><td>'
@@ -1315,12 +1332,29 @@ def reconcile_legacy_pages(strat, bt, inj, absence, report):
           f' &mdash; {n_strat} graded, {n_valid} validated. No verified odds were available, so every ROI '
           f'assumes &minus;110.</td>',
           "strategies-evaluated row now points at the real ledger")
+    # 2026-11-14 refresh: second-stage patches for the 11/16 -> 11/17 window extension.
+    patch("summary.html", "<td>31</td>", "<td>36</td>",
+          "3-day game count 31 -> 36 (window now runs to 11/17)")
+    patch("summary.html",
+          "Scope: 31 NBA games are scheduled Nov 13–16, 2026 (9 / 5 / 9 / 8)",
+          "Scope: 36 NBA games are scheduled Nov 13–17, 2026 (9 / 5 / 9 / 8 / 5)",
+          "scope sentence updated to the 11/17 slate")
+    patch("summary.html", "<td>Picks generated</td><td>31</td>",
+          "<td>Picks generated</td><td>36</td>",
+          "picks-generated count 31 -> 36")
+    patch("summary.html", "NBA.com games pages (Nov 13, 14, 15)",
+          "NBA.com games pages (Nov 13–17)",
+          "basis link text now names the full window")
     patch("summary.html",
           "<td>Picks generated</td><td>0</td><td>Blocked (Q-04, Q-06, Q-07)</td>",
           f'<td>Picks generated</td><td>{len(json.loads(open(os.path.join(DER, "lines.json")).read())["games"])}</td>'
           '<td><a href="pages/picks.html">Rating-only projections</a> for every game in the window. '
           'Not recommendations: no strategy has passed the gates.</td>',
           "picks-generated row now points at the real projections")
+    patch("summary.html",
+          "<td>Picks generated</td><td>31</td>",
+          f'<td>Picks generated</td><td>{len(json.loads(open(os.path.join(DER, "lines.json")).read())["games"])}</td>',
+          "picks-generated count 31 -> 36 (window now runs to 11/17)")
 
     # Two decision rows and two governance suggestions legitimately have no official NBA source, because
     # they are choices, not facts. An unsourced row is not acceptable, so point them at the evidence each
@@ -1367,6 +1401,18 @@ def ensure_row_sources():
     targets = ["summary.html", "slate.html", "suggestions.html", "review.html", "sources.html",
                "research.html", "strategies.html", "games.html", "injuries.html", "picks.html",
                "questions.html", "flagged.html"]
+    # A page-level truth banner, injected on every generated page so it survives a rebuild. The
+    # snapshot is frozen on purpose: its figures were true at the 13 November cut, and nothing on
+    # these pages is regenerated from the refreshed data.
+    banner = (
+        '<div class="note" style="border-left:4px solid #b4231c;background:#fdeceb;padding:10px 14px;'
+        'margin:0 0 16px">'
+        '<strong>Frozen snapshot, 13 November 2026.</strong> Every figure on this page was true at the '
+        '13 November data cut and is deliberately not rewritten, so the snapshot stays reproducible. '
+        'The current window is <strong>14\u201316 November (22 games)</strong> with the 19:30 ET injury '
+        'report \u2014 see the <a href="../command-center/index.html">Command Center</a>.'
+        '</div>'
+    )
     links = {
         "outcomes": '<a href="https://www.nba.com/games" target="_blank" rel="noopener">NBA game outcomes</a>',
         "stats": '<a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season" target="_blank" rel="noopener">NBA stats</a>',
@@ -1421,6 +1467,22 @@ def ensure_row_sources():
             pos = m.end()
         out.append(txt[pos:])
         txt = "".join(out)
+        # Prepend the frozen-snapshot banner once. Idempotent: a file that already carries it is
+        # left alone, so repeated builds cannot stack banners.
+        if "Frozen snapshot, 13 November 2026" not in txt:
+            mh = re.search(r"<h1[^>]*>.*?</h1>\s*", txt, re.S)
+            if mh:
+                txt = txt[:mh.end()] + banner + "\n" + txt[mh.end():]
+            else:
+                mm = re.search(r"<main[^>]*>\s*", txt, re.S)
+                if mm:
+                    txt = txt[:mm.end()] + banner + "\n" + txt[mm.end():]
+                else:
+                    mw = re.search(r'<div class="wrap">\s*', txt, re.S)
+                    if mw:
+                        txt = txt[:mw.end()] + banner + "\n" + txt[mw.end():]
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(txt)
         if fixed_here:
             # Give EVERY table in this file that gained a cell a matching header. The callback must
             # return the whole match including the closing tag, or the thead is left malformed.

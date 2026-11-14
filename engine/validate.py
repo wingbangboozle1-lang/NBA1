@@ -2,7 +2,9 @@
 
 Information discipline
 ----------------------
-Holdout window       : 2026-11-09 .. 2026-11-12  (28 completed games, sources S3_*)
+Holdout window       : all completed games after the training cut-off (driven by
+                       HOLDOUT_START / HOLDOUT_END below, currently 2026-11-06 ..
+                       2026-11-12 = 51 games, sources S3_*)
 Ratings used for it  : the 2026-10-20 .. 2026-11-05 window ONLY (source S2)
 So no game in the test window contributes to the ratings that predict it.
 
@@ -27,18 +29,25 @@ BREAKEVEN = 0.5238095238095238   # -110: 110/210
 # --------------------------------------------------------------------- schedule
 
 def build_last_played(completed):
-    """date -> {team: previous game date} using only games present in the data."""
+    """date -> {team: the most recent EARLIER date that team played}.
+
+    Built from every game present in the data, not only from the single most
+    recent earlier date: a team that sat out the night before still has a real
+    rest figure, and without that the published rest-days column would be blank
+    for exactly the teams it is most useful for.
+    """
     dates = sorted({g["date"] for g in completed})
+    played = {}
+    for g in completed:
+        played.setdefault(g["home"], set()).add(g["date"])
+        played.setdefault(g["away"], set()).add(g["date"])
     out = {}
     for d in dates:
-        prev = [x for x in dates if x < d]
         prev_map = {}
-        if prev:
-            last = max(prev)
-            for g in completed:
-                if g["date"] == last:
-                    prev_map[g["home"]] = last
-                    prev_map[g["away"]] = last
+        for team, ds in played.items():
+            earlier = [x for x in ds if x < d]
+            if earlier:
+                prev_map[team] = max(earlier)
         out[d] = prev_map
     return out
 
