@@ -10,13 +10,14 @@ No network access is used here - every number comes from a captured snapshot.
 import datetime
 import json
 import os
+import re
 import shutil
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from common import (ABBR, OUT, RAW, TEAM_NAME, american_from_prob, mean,
-                    norm_cdf, read_json, rnd, write_json)
+                    norm_cdf, read_json, rnd, rows_by_cols, write_json)
 from correlate import (measured_correlations, model_derived_correlations,
                        parlay_pricing_grid)
 from injuries import Availability
@@ -28,6 +29,17 @@ from strategies import (SGP_RHO, STRATEGIES, build_plays, grade_play,
 from validate import luck_table, run as run_backtest
 
 CONTENT = os.path.join(os.path.dirname(RAW), "content")
+
+# The official injury-report edition in use. Both are read from the captured raw file so
+# that a new edition changes the label everywhere without a second edit.
+EDITION_SHORT = "11/13/26 07:30 PM ET EDITION"
+EDITION_SRC = "S10"
+
+
+def _edition_short(report):
+    """'NBA Official Injury Report, 11/13/26 07:30 PM ET edition' -> '11/13/26 07:30 PM ET EDITION'."""
+    m = re.search(r"(\d{1,2}/\d{1,2}/\d{2,4}[^,]*)", report)
+    return (m.group(1).strip() if m else report).upper()
 GENERATED_AT = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
@@ -48,6 +60,9 @@ def main():
     ip_path = os.path.join(RAW, "schedule_in_progress.json")
     ip_raw = read_json(ip_path) if os.path.exists(ip_path) else {"rows": [], "cols": []}
     inj_raw = read_json(os.path.join(RAW, "injuries.json"))
+    global EDITION_SHORT, EDITION_SRC
+    EDITION_SHORT = _edition_short(inj_raw["report"])
+    EDITION_SRC = inj_raw.get("source_id", "S10")
     pl_raw = read_json(os.path.join(RAW, "players_traditional.json"))
     sources = read_json(os.path.join(RAW, "sources.json"))
 
@@ -90,7 +105,13 @@ def main():
         status_map.setdefault((r["game_date"], ab), {})[_norm(r["player"])] = r["status"]
 
     # ------------------------------------------------- rest / B2B for all games
+    # The prior slate (the night before the horizon) is carried for rest / back-to-back
+    # flags only. Its games had no published final score when the snapshot was read, so
+    # none is used as an outcome and none is inferred.
+    prior_raw = read_json(os.path.join(RAW, "prior_slate.json"))
+    prior = rows_by_cols(prior_raw)
     all_games = [{"date": g["date"], "home": g["home"], "away": g["away"]} for g in completed]
+    all_games += [{"date": g["date"], "home": g["home"], "away": g["away"]} for g in prior]
     all_games += [{"date": g["date"], "home": g["home"], "away": g["away"]} for g in scheduled]
     all_games += [{"date": g["date"], "home": g["home"], "away": g["away"]} for g in in_progress]
     dates = sorted({g["date"] for g in all_games})
@@ -372,11 +393,11 @@ def main():
                 inj_rows.append({
                     "date": c["date"], "matchup": c["matchup"], "game_id": c["game_id"],
                     "team": c[side], "side": side, "listed": None,
-                    "status": "NO ENTRY IN THIS EDITION",
+                    "status": f"NO ENTRY IN THE {EDITION_SHORT}",
                     "weighted_lost_share": None, "impact_net_rating": None,
                     "minutes_coverage": None,
                     "confidence": "NONE - no entry in this edition of the report",
-                    "src": "S6",
+                    "src": EDITION_SRC,
                 })
                 continue
             for d in rep["detail"]:
@@ -395,18 +416,18 @@ def main():
                     "impact_sensitivity": rep["impact_sensitivity"],
                     "minutes_coverage": rep["minutes_coverage"],
                     "confidence": rep["confidence"],
-                    "src": "S6",
+                    "src": EDITION_SRC,
                 })
             if rep["not_submitted"]:
                 inj_rows.append({
                     "date": c["date"], "matchup": c["matchup"], "game_id": c["game_id"],
                     "team": c[side], "side": side, "player": None,
                     "status": "NOT YET SUBMITTED",
-                    "reason": "Team had not filed at the " + inj_raw["report"].split(", ")[-1],
-                    "src": "S6",
+                    "reason": f"Team had not filed at the {EDITION_SHORT}",
+                    "src": EDITION_SRC,
                 })
     write_json(os.path.join(OUT, "injuries.json"), {
-        "rows": inj_rows, "src": "S6",
+        "rows": inj_rows, "src": EDITION_SRC,
         "report": inj_raw["report"],
         "method": ASSUMPTIONS["injury_impact_coef"],
         "lower_bound_note": "Minutes are only known for players in the captured official "
@@ -551,11 +572,11 @@ def main():
 
 def _report_status(rep):
     if not rep:
-        return "NO ENTRY IN THIS EDITION"
+        return f"NO ENTRY IN THE {EDITION_SHORT}"
     if rep.get("not_submitted"):
         return "NOT YET SUBMITTED"
     if rep.get("no_entry_in_report"):
-        return "NO ENTRY IN THIS EDITION"
+        return f"NO ENTRY IN THE {EDITION_SHORT}"
     return f'{rep["listed"]} player(s) listed'
 
 

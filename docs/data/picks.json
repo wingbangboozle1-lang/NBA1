@@ -1,9 +1,10 @@
 {
- "generated_at_utc": "2026-11-14T01:04:40Z",
+ "generated_at_utc": "2026-11-14T00:59:52Z",
  "slate_dates": [
   "2026-11-14",
   "2026-11-15",
-  "2026-11-16"
+  "2026-11-16",
+  "2026-11-17"
  ],
  "rows": [
   {
@@ -1079,6 +1080,72 @@
    "status": "PENDING"
   },
   {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "matchup": "POR@MIN",
+   "away": "POR",
+   "home": "MIN",
+   "time_et": "8:00 PM ET",
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "under",
+   "ref_line": 238.0,
+   "model_value": 230.2,
+   "edge": -7.74,
+   "edge_pp": null,
+   "p_model": 0.6485,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Under 238.0",
+   "n_legs": 1,
+   "result": null,
+   "status": "PENDING"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "matchup": "DET@SAS",
+   "away": "DET",
+   "home": "SAS",
+   "time_et": "8:00 PM ET",
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "under",
+   "ref_line": 231.2,
+   "model_value": 222.7,
+   "edge": -8.56,
+   "edge_pp": null,
+   "p_model": 0.6636,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Under 231.2",
+   "n_legs": 1,
+   "result": null,
+   "status": "PENDING"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "matchup": "UTA@LAC",
+   "away": "UTA",
+   "home": "LAC",
+   "time_et": "10:30 PM ET",
+   "strategy": "S2",
+   "market": "Game total",
+   "side": "over",
+   "ref_line": 215.6,
+   "model_value": 222.8,
+   "edge": 7.21,
+   "edge_pp": null,
+   "p_model": 0.6388,
+   "fair_price": null,
+   "team": null,
+   "line_display": "Over 215.6",
+   "n_legs": 1,
+   "result": null,
+   "status": "PENDING"
+  },
+  {
    "date": "2026-11-14",
    "game_id": "0022600231+0022600234",
    "matchup": "DEN@NOP & BKN@MEM",
@@ -1191,6 +1258,45 @@
    "rho": 0.0,
    "fair_price": 110,
    "naive_price": 110,
+   "n_legs": 2,
+   "result": null,
+   "status": "PENDING"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255+0022600254",
+   "matchup": "DET@SAS & POR@MIN",
+   "away": "DET",
+   "home": "SAS",
+   "time_et": "8:00 PM ET",
+   "strategy": "S9",
+   "market": "Parlay",
+   "side": "Under 231.2 + Under 238.0",
+   "line_display": "Under 231.2 + Under 238.0",
+   "team": null,
+   "legs_detail": [
+    {
+     "market": "Game total",
+     "side": "under",
+     "line": "Under 231.2",
+     "p": 0.6636
+    },
+    {
+     "market": "Game total",
+     "side": "under",
+     "line": "Under 238.0",
+     "p": 0.6485
+    }
+   ],
+   "ref_line": null,
+   "model_value": null,
+   "edge": null,
+   "p_model": 0.4303,
+   "p_if_independent": 0.4303,
+   "correlation_adjustment": -0.0,
+   "rho": 0.0,
+   "fair_price": 132,
+   "naive_price": 132,
    "n_legs": 2,
    "result": null,
    "status": "PENDING"
