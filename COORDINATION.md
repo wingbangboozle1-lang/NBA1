@@ -1947,3 +1947,29 @@ Not touched: `docs/**`, `data/**`, `index.html`, `flagged.json`, `suggestions.js
 - **Limits:** `fetch_page` text read, not a browser; editions after 4:30 AM ET were not in the index capture; injury rows only (no minutes, production or lines).
 - **Files touched:** `verify/2026-11-14-injury-currency/**` (new), `COORDINATION.md` §24 only.
 
+
+---
+
+## 27. Session `arena/212c2298-nba1` — independent row-level verification & close-out (claimed 2026-11-14T10:27Z)
+
+Branch `arena/212c2298-nba1` (base `main` `7623c02`, the merge of PR #60). The platform pins this
+session to that branch, so the `session-<id>/<task>` naming in the brief is not used; this single
+pinned branch carries the claims below (deviation logged, as earlier sessions did).
+
+| # | Task | Status | File scope (exclusive to this session) |
+| --- | --- | --- | --- |
+| Z01 | Independent line-by-line verification of published values against official nba.com pages (11/13 finals, 11/14–11/17 horizon, records, injury designations); every checked row recorded with its source URL; values that cannot be confirmed are left blank and flagged, never inferred | in progress | `verify/212c2298/**`, `REVIEW_Z01.md` |
+| Z02 | Independent recomputation of strategy statistics (binomial p-values, validation gates, correlation values, settlement math, luck decomposition) from committed raw data | in progress | `verify/212c2298/**` |
+| Z03 | Live-site + GitHub Pages verification (deploy status, live-URL link audit of every published page) | in progress | `verify/212c2298/**` |
+| Z04 | Close-out (only after other active claims are merged or idle >60 min): combined-tree rebase, full gate re-run, PR to `main`, merge, Pages confirmation, record here | pending | `COORDINATION.md` (§27 only), `verify/212c2298/**` |
+
+**Active claims respected (not touched by this session):** `arena/ef6ff2a4-nba1` — integration seat,
+PR #58 (commits within the last 10 minutes at claim time); `arena/254dd8bb-nba1` — PR #59
+(conflicting with `main`, owner alive); `arena/2ef89703-nba1` — X01 injury-edition currency check
+(CI run in progress at claim time). `data/**`, `engine/**`, `engine_v2/**`, `scripts/**` builders,
+`site/**`, `docs/**`, `command-center/**`, root `*.html` are **read-only inputs** to Z01–Z03.
+If Z01–Z03 find a bad published value, the fix is logged as a cross-session request here (or taken
+in Z04 close-out), never edited behind an active owner's back.
+
+Sources for Z01 (read 2026-11-14T10:25–10:30Z): <https://www.nba.com/games?date=2026-11-13>
+(all 9 finals, incl. ATL–CHI `Final/OT`), and the horizon pages `…?date=2026-11-14` … `…-17`.
