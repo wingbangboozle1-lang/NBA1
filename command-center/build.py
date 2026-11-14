@@ -174,7 +174,7 @@ PAGES["validation"] = dict(
     title="Validation Gates",
     desc="The seven gates and the strictly out-of-sample verdict for all ten strategies",
     body='''      <p class="lede">The out-of-sample window is every completed game after the ratings cut-off:
-      <b>51 games from 2026-11-06 to 2026-11-12</b>, each predicted with team ratings built only from
+      <b>60 games from 2026-11-06 to 2026-11-13</b>, each predicted with team ratings built only from
       2026-10-20 to 2026-11-05. No game in the window contributes to the ratings that predict it.</p>
 
       <div class="bn info"><div class="ico">i</div><div>
@@ -186,7 +186,7 @@ PAGES["validation"] = dict(
 
       <div class="kpis" id="kpis"></div>
 
-      <h2>Model against the naive reference, on the same 51 games</h2>
+      <h2>Model against the naive reference, on the same 60 games</h2>
       <div id="cmp"><div class="empty">Loading…</div></div>
 
       <h2>Parameter fit</h2>
@@ -460,7 +460,7 @@ print("chunk1 ok")
 # ---------------------------------------------------------------- backtest
 PAGES["backtest"] = dict(
     title="Game Log",
-    desc="All 51 out-of-sample games: what the model said before tip, and what actually happened",
+    desc="All 60 out-of-sample games: what the model said before tip, and what actually happened",
     body='''      <p class="lede">This is the evidence the whole verdict rests on. Every game below was predicted
       with team ratings built only from 2026-10-20 to 2026-11-05, so no game in this window contributes
       to the ratings that predict it.</p>
@@ -469,7 +469,7 @@ PAGES["backtest"] = dict(
         <p><strong>Why the error column can look large.</strong> A single NBA game's margin is a
         high-variance quantity: the residual standard deviation here is about 17.4 points. An average
         absolute error near 13 points is normal and is not a defect — which is exactly why one game
-        proves nothing and 51 games barely prove anything.</p>
+        proves nothing and 60 games barely prove anything.</p>
       </div></div>
 
       <div class="kpis" id="kpis"></div>
