@@ -1,8 +1,8 @@
 {
- "captured_at_utc": "2026-11-14T10:51:04Z",
+ "captured_at_utc": "2026-11-14T18:53:02Z",
  "source_url": "https://www.nba.com/games?date=2026-11-13",
- "page_bytes": 567901,
- "page_sha256": "bfd0877198f2e21df657aca68a8ccc07775590dc8821471dce01e795a66ea64c",
+ "page_bytes": 570154,
+ "page_sha256": "e295cc0d578c77c2bb80a3967a6c8f4956635d38a6041214ea096bba58df8f82",
  "page_indicators": {
   "__NEXT_DATA__": 1,
   "clean_gameId": 0,
@@ -22,7 +22,7 @@
     "ot": 0,
     "away_record_printed": "6-6 (0-2)",
     "home_record_printed": "5-8 (1-1)",
-    "snapshot_match": null,
+    "snapshot_match": true,
     "source": "embedded JSON"
    },
    {
@@ -35,7 +35,7 @@
     "ot": 0,
     "away_record_printed": "1-12 (0-2)",
     "home_record_printed": "5-7 (2-0)",
-    "snapshot_match": null,
+    "snapshot_match": true,
     "source": "embedded JSON"
    },
    {
@@ -48,7 +48,7 @@
     "ot": 0,
     "away_record_printed": "6-7 (1-1)",
     "home_record_printed": "6-6 (2-0)",
-    "snapshot_match": null,
+    "snapshot_match": true,
     "source": "embedded JSON"
    },
    {
@@ -61,7 +61,7 @@
     "ot": 1,
     "away_record_printed": "7-6 (1-1)",
     "home_record_printed": "2-9 (1-1)",
-    "snapshot_match": null,
+    "snapshot_match": true,
     "source": "embedded JSON"
    },
    {
@@ -74,7 +74,7 @@
     "ot": 0,
     "away_record_printed": "8-4 (1-1)",
     "home_record_printed": "4-9 (0-2)",
-    "snapshot_match": null,
+    "snapshot_match": true,
     "source": "embedded JSON"
    },
    {
@@ -87,7 +87,7 @@
     "ot": 0,
     "away_record_printed": "1-12 (0-2)",
     "home_record_printed": "10-3 (1-1)",
-    "snapshot_match": null,
+    "snapshot_match": true,
     "source": "embedded JSON"
    },
    {
@@ -100,7 +100,7 @@
     "ot": 0,
     "away_record_printed": "8-5 (1-1)",
     "home_record_printed": "11-2 (2-0)",
-    "snapshot_match": null,
+    "snapshot_match": true,
     "source": "embedded JSON"
    },
    {
@@ -113,7 +113,7 @@
     "ot": 0,
     "away_record_printed": "9-3 (1-1)",
     "home_record_printed": "1-11 (0-2)",
-    "snapshot_match": null,
+    "snapshot_match": true,
     "source": "embedded JSON"
    },
    {
@@ -126,7 +126,7 @@
     "ot": 0,
     "away_record_printed": "8-5 (1-1)",
     "home_record_printed": "3-8 (1-1)",
-    "snapshot_match": null,
+    "snapshot_match": true,
     "source": "embedded JSON"
    }
   ],
@@ -147,17 +147,7 @@
  "snapshot_comparison": {
   "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
   "mismatches": [],
-  "promotion_candidates": [
-   "0022600034",
-   "0022600035",
-   "0022600036",
-   "0022600037",
-   "0022600038",
-   "0022600039",
-   "0022600040",
-   "0022600041",
-   "0022600042"
-  ],
+  "promotion_candidates": [],
   "committed_finals_missed": []
  },
  "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected."
