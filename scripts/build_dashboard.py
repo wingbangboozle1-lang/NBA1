@@ -1398,10 +1398,24 @@ def main():
     shutil.copyfile(os.path.join(ROOT, "scripts", "assets", "site.js"),
                     os.path.join(ASSETS, "site.js"))
     # data
+    # R-30-1: three decision files had gone stale in docs/data. data/content is the authored
+    # source (build_site.py writes it) and the site had been publishing an older copy: 39 flags
+    # against 46, 13 answered + 18 open questions against 15 + 19, 16 suggestions against 18.
+    # The site must not silently publish less than the repository holds, so the authored copy wins
+    # every time the site is built. Each file is named explicitly so a failure is loud.
+    for _f in ("flagged.json", "questions.json", "suggestions.json", "executive.json"):
+        _src = os.path.join(CONTENT, _f)
+        if not os.path.exists(_src):
+            raise SystemExit("missing authored content file: %s" % _src)
+        shutil.copyfile(_src, os.path.join(DATA, _f))
+        shutil.copyfile(_src, os.path.join(SITE_DATA, _f))
+        _d = json.load(open(_src))
+        _n = (len(_d["items"]) if "items" in _d
+              else len(_d["answered"]) + len(_d["open"]) if "answered" in _d
+              else len(_d.get("sections", [])) or 1)
+        print("content: %-16s %3d items  (data/content -> docs/data + site/data)" % (_f, _n))
     for f in os.listdir(DATA):
         shutil.copyfile(os.path.join(DATA, f), os.path.join(SITE_DATA, f))
-    for f in os.listdir(CONTENT):
-        shutil.copyfile(os.path.join(CONTENT, f), os.path.join(SITE_DATA, f))
     shutil.copyfile(os.path.join(RAW, "sources.json"), os.path.join(SITE_DATA, "sources.json"))
     shutil.copyfile(os.path.join(ROOT, "data", "d", "repo_review.json"),
                     os.path.join(SITE_DATA, "repo_review.json"))

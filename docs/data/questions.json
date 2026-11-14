@@ -104,6 +104,22 @@
       "source": "S3_2026-11-13",
       "source_url": "https://www.nba.com/games?date=2026-11-13",
       "confidence": "High - every score was read from the official final card and cross-checked against the official standings table"
+    },
+    {
+      "id": "A14",
+      "question": "Should a prop projection start from the season average or from recent form?",
+      "answer": "On the 11/14 cohort the season average wins, and chasing form loses. Scored on 40 official box scores: mean absolute points error 6.53 for the season average, 8.02 for a leave-one-out mean of the player's recent window, 9.97 for the single previous game. Two cautions printed with the number: the season average is contaminated (those games are inside it) and it sees 10-12 games where the form estimator sees three - so this is evidence against three-game form chasing, not evidence that a weighted blend of the two has been tested and lost.",
+      "source": "measured from data/proplogs/2026-11-14/captures.json by scripts/prop_variance.py",
+      "source_url": "https://www.nba.com/player/1627750/jamal-murray/game-log",
+      "confidence": "Low-medium - 10 players, 3-4 games each, one day of the schedule"
+    },
+    {
+      "id": "A15",
+      "question": "How much of a player's production travels with his minutes?",
+      "answer": "It can now be measured instead of declared. Pooled within-player (deviations from each player's own mean) the correlation with minutes is rho 0.58 on points (n=40, p<0.0001) and 0.63 on PRA (n=30), against 0.195 on assists. The elasticity is a 10% cut in minutes predicting a 12.9% cut in points and a 9.3% cut in PRA. The injury module currently applies one flat production-transfer rule of 0.55 to every stat; points move about one-for-one with minutes and assists barely at all, so that single constant is too small for a scorer and too large for a passer.",
+      "source": "data/derived/prop_variance.json (minutes_to_production, minutes_elasticity)",
+      "source_url": "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+      "confidence": "Low - 40 rows from 10 players over one week; the sign is robust, the magnitude is not"
     }
   ],
   "open": [
@@ -130,12 +146,13 @@
     {
       "id": "Q3",
       "question": "Are the player-prop projections any good?",
-      "what_is_missing": "Player game logs. The model can produce a projection (possession factor, opponent-defence factor, teammate-availability factor) but game-to-game variance has never been measured, so no probability is published and no prop has ever been graded.",
-      "how_to_answer": "Capture official box scores for the top-50 players and store per-game minutes and counting stats; then measure each projection's error and standard deviation and replace the blank probability column with a real one.",
-      "blocks": "Pricing S7 and S8; including props in parlays",
+      "what_is_missing": "PARTIALLY ANSWERED 2026-11-14. Game-to-game dispersion is now measured for 10 players of the 11/14 cohort from official NBA.com game logs (points CV 0.344 over 40 box scores). What is still missing: (a) the same capture for the other 78 horizon prop rows - 4 of the 14 players on 11/14 have no NBA.com player id in any committed capture (F40); (b) any graded prop at all - no prop has yet been settled against a final box; (c) a shared-game window long enough to measure a prop-prop correlation (F42).",
+      "how_to_answer": "Repeat the capture for every player on the horizon (ids for most are already in data/players_2026_27.json; the rest come from one roster-page read per team), then settle every published prop against its official box score after the game. scripts/prop_variance.py needs no change - it reads whatever is in data/proplogs/.",
+      "blocks": "Pricing S7 and S8 across the whole horizon; grading props; measuring the parlay rho (F42)",
       "priority": 3,
       "source": "S20",
-      "source_url": "https://www.nba.com/stats/players/boxscores"
+      "source_url": "https://www.nba.com/player/203999/nikola-jokic/game-log",
+      "status_updated_utc": "2026-11-14T10:35Z"
     },
     {
       "id": "Q4",
@@ -277,6 +294,16 @@
       "priority": "Medium",
       "source": "S8_0022600253",
       "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600253"
+    },
+    {
+      "id": "Q20",
+      "question": "Can a prop edge ever be big enough to bet, given the noise?",
+      "what_is_missing": "Measured dispersion puts the answer in reach: on 2026-11-14 the largest gap between our projection and the player's own season average is 0.52 of a measured SD, and the median is 0.16 SD. With a points CV of 0.344, a prop needs roughly a 7-9 point projection edge to be one SD away from the anchor - larger than any factor this model applies. What is missing is the thing no official source publishes: the line a market would actually hang. Without it, the question 'is our number better than theirs' cannot be asked of props any more than of spreads (Q1).",
+      "how_to_answer": "Either (a) log real prop lines and closes in data/raw/market.json with per-row sources and compare, or (b) accept the desk rule this page prints - publish a prop only when our projection is at least one measured SD from the naive anchor - and let the count of publishable props stay near zero while the model is what it is.",
+      "blocks": "Any funded prop; the case for props inside parlays",
+      "priority": 5,
+      "source": null,
+      "source_url": "No NBA-operated source publishes a prop line (same limit as F3)"
     }
   ]
 }
