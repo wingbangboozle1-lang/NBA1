@@ -175,8 +175,43 @@ def table_row_count():
                 continue
             with open(os.path.join(base, f), encoding="utf-8") as fh:
                 txt = fh.read()
+            # Strip <script> blocks first. A few Build B pages build their tables
+            # in JavaScript, so their <tr> strings are templates, not rows that
+            # exist in the document. Counting them inflated this number by 6
+            # (731 vs the 725 rows actually present) and that inflated number is
+            # what the executive summary published. scripts/verify_integration.py
+            # recomputes it with the same definition and fails if they disagree.
+            txt = re.sub(r"<script\b.*?</script>", "", txt, flags=re.S | re.I)
             for tb in re.findall(r"<tbody>(.*?)</tbody>", txt, re.S):
-                total += len(re.findall(r"<tr>", tb))
+                total += len(re.findall(r"<tr\b[^>]*>", tb))
+    return total
+
+
+APPLIED_RE = re.compile(r"https?://([\w.\-]*\.)?nba\.com/")
+
+
+def sourced_row_count():
+    """Rows that carry an official nba.com link, counted the same way as
+    table_row_count so the two numbers in one sentence are always comparable.
+
+    This exists because the earlier wording ("a source link on every one of its
+    N table rows") was true of the data tables but not of the whole set: design
+    registers (gates, suggestions, open questions, legal scope) legitimately cite
+    no NBA value because they state no NBA value. Asserting "every row" made the
+    page overclaim by 56 rows. Both numbers are derived here, never typed.
+    """
+    total = 0
+    for base, _, files in os.walk(DOCS):
+        for f in files:
+            if not f.endswith(".html"):
+                continue
+            with open(os.path.join(base, f), encoding="utf-8") as fh:
+                txt = fh.read()
+            txt = re.sub(r"<script\b.*?</script>", "", txt, flags=re.S | re.I)
+            for tb in re.findall(r"<tbody>(.*?)</tbody>", txt, re.S):
+                for row in re.findall(r"<tr\b[^>]*>.*?</tr>", tb, re.S):
+                    if APPLIED_RE.search(row):
+                        total += 1
     return total
 
 
@@ -897,7 +932,7 @@ deviation {disp['margin_sd']:.1f} points, taken from real finals. An earlier ver
 eFG% against offensive rating (r=0.819).</li>
 <li><b>The injury logic avoids the classic double-count.</b> Season ratings already exclude games a player
 missed, so only genuinely new absences move a line. This was measured per player, not assumed.</li>
-<li><b>The site is fully generated from the data</b>, with a source link on every one of its {table_row_count()} table rows.</li>
+<li><b>The site is fully generated from the data.</b> Of its {table_row_count()} table rows, {sourced_row_count()} carry a direct link to the official NBA source the values came from. The remaining {table_row_count() - sourced_row_count()} are design registers &mdash; validation gates, improvement proposals, open questions and legal scope &mdash; which state no NBA value and therefore cite none. No data row is published without a source.</li>
 </ul>
 
 <h2>What is not solid</h2>
@@ -1220,7 +1255,10 @@ validations, double-counted injuries, unsaturated probabilities and implausible 
     spath = os.path.join(PAGES, "summary.html")
     with open(spath, encoding="utf-8") as f:
         stxt = f.read()
-    stxt2 = re.sub(r"its \d+ table rows", f"its {final_rows} table rows", stxt)
+    stxt2 = re.sub(r"Of its \d+ table rows, \d+ carry", 
+                   f"Of its {final_rows} table rows, {sourced_row_count()} carry", stxt)
+    stxt2 = re.sub(r"remaining \d+ are design registers",
+                   f"remaining {final_rows - sourced_row_count()} are design registers", stxt2)
     if stxt2 != stxt:
         with open(spath, "w", encoding="utf-8") as f:
             f.write(stxt2)

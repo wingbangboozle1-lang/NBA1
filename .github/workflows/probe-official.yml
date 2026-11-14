@@ -1,0 +1,96 @@
+name: Probe official source reachability
+
+# Purpose: settle one open question with evidence instead of an assumption.
+#
+# The build sessions ran in a sandbox whose outbound network was restricted to
+# github.com / npm / pypi, so `engine/fetch_official.py` has never been executed
+# against nba.com (Flagged F7). A reader cannot tell from the repository whether
+# the refresh path works or is simply untested.
+#
+# This workflow answers that from GitHub's own runners, which have normal
+# outbound internet. It fetches every official URL the site cites, records
+# HTTP status, latency, content length and a SHA-256 of the bytes, then commits
+# the result to `data/raw/probe_official.json`.
+#
+# Allowed to fail: a blocked or broken source is a FINDING, not a build error.
+# The step that uploads the artifact runs on `always()` and the commit step is
+# guarded, so a probe never breaks the published site.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, "arena/**"]
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    if: "!contains(github.event.head_commit.message, '[skip probe]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Probe every official source the site cites
+        id: probe
+        continue-on-error: true
+        run: python3 scripts/probe_official.py
+
+      - name: Show the result table
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, os
+          p = "data/raw/probe_official.json"
+          if not os.path.exists(p):
+              print("probe produced no file"); raise SystemExit(0)
+          d = json.load(open(p))
+          print(f"probed {d['probe']['urls_probed']} URLs at {d['probe']['probed_at_utc']}")
+          for r in d["results"]:
+              print(f"  {str(r['http_status']):>4} {r['ms']:>6}ms {r['bytes']:>9}B  {r['url']}")
+          for f in d["findings"]:
+              print("  FINDING:", f["detail"])
+          PY
+
+      - name: Rebuild the verification page from the new record
+        if: always()
+        continue-on-error: true
+        run: python3 scripts/build_verification_page.py
+
+      - name: Upload the probe record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-source-probe
+          path: data/raw/probe_official.json
+          if-no-files-found: warn
+
+      - name: Commit the probe record
+        if: always() && github.event_name == 'push'
+        run: |
+          if [ -z "$(git status --porcelain data/raw/probe_official.json verification.html)" ]; then
+            echo "probe record unchanged"; exit 0
+          fi
+          git config user.name  "nba1-bot"
+          git config user.email "nba1-bot@users.noreply.github.com"
+          git add data/raw/probe_official.json verification.html
+          git commit -m "chore: record official-source reachability probe [skip probe] [skip ci]"
+          # A concurrent push to this branch (or a human/session push) can land
+          # between checkout and push. That is not a data problem, so retry with
+          # a rebase a few times before giving up. If it still fails, the probe
+          # record is still uploaded as an artifact, so the evidence is not lost.
+          for i in 1 2 3 4 5; do
+            if git push; then
+              echo "probe record pushed on attempt $i"
+              exit 0
+            fi
+            echo "push raced with another commit; rebasing and retrying ($i/5)"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            sleep $((i * 5))
+          done
+          echo "::warning::could not push the probe record after 5 attempts; it is in the run artifact"
+          exit 0
