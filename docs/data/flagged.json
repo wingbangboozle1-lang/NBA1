@@ -121,6 +121,27 @@
    "source": "S3_2026-11-07",
    "source_url": "https://www.nba.com/games?date=2026-11-07",
    "suggested_action": "None - handled. Watch for more neutral-site games as the season goes on."
+  },
+  {
+   "id": "F13",
+   "severity": "Medium",
+   "title": "Official slate pages publish two matchups twice inside three days",
+   "detail": "NBA.com lists NYK@TOR on 2026-11-15 (0022600241) and again on 2026-11-17 (0022600253), and POR@MIN on 2026-11-16 (0022600250) and 2026-11-17 (0022600254) - same home arena each time. Both dates are confirmed by the official game-page titles ('Nov 17, 2026'). This is exactly as published; it is flagged because repeat matchups within 72 hours are unusual and the model treats them as independent games (Q10).",
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "id": "F14",
+   "severity": "Low",
+   "title": "2026-11-17 venues and competition labels are blank on purpose",
+   "detail": "The official games date page prints matchup, tip time and records but not arenas; the arena is not on the rendered game-page text either. Per the no-inference rule the venue/city/competition cells for the five 11/17 games are left blank across the repo rather than guessed.",
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "id": "F15",
+   "severity": "Low",
+   "title": "Official 12:00 PM PDF prints 'Suggs, Jalan' and drops reason cells during extraction",
+   "detail": "The 11/13/26 12:00 PM edition misspells Jalen Suggs as 'Jalan' in the player column, and several continuation rows lose their Reason cell in text extraction (the reason reappears as loose text on the same page). Both transcriptions in this repo normalise the name and keep the printed reason where it is legible; the source files remain authoritative. Recorded so a reviewer comparing the PDF to the tables is not surprised.",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf"
   }
  ]
 }

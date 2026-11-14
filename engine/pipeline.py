@@ -193,7 +193,8 @@ def main():
     for g in scheduled:
         src = g["source_id"]
         ctx = build_ctx(g["date"], g["away"], g["home"], time_et=g["time_et"],
-                        venue=f'{g["venue"]}, {g["city"]}', game_id=g["game_id"],
+                        venue=", ".join(x for x in (g["venue"], g["city"]) if x),
+                        game_id=g["game_id"],
                         extra={
                             "away_rec": g["away_rec"], "home_rec": g["home_rec"],
                             "cup_group": g["cup_group"], "src": src,
@@ -221,13 +222,15 @@ def main():
     meta = {
         "generated_at_utc": GENERATED_AT,
         "season": "2026-27",
-        "as_of": "2026-11-13",
+        "as_of": "2026-11-14",
         "data_windows": {
             "ratings_season_to_date": season_block["label"],
             "ratings_training_window": train_block["label"],
             "results_captured": "2026-11-06 .. 2026-11-12 (51 games, all of them out-of-sample)",
             "out_of_sample_window": "2026-11-06 .. 2026-11-12 (51 games)",
-            "upcoming_slates": "2026-11-13, 2026-11-14, 2026-11-15 (23 games)",
+            "upcoming_slates": "2026-11-13 (in progress at capture) .. 2026-11-17 "
+                               "(36 games; slates published through 2026-11-17 = 3 days ahead "
+                               "of the 2026-11-14 refresh)",
             "injury_report": inj_raw["report"],
         },
         "counts": {

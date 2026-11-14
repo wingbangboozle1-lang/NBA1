@@ -67,8 +67,8 @@ for s in slate["slates"]:
             errors.append(f"game {s['date']} {g['away']}@{g['home']}: bad preview_url")
         if not (g["away_record"] and g["home_record"]):
             errors.append(f"game {s['date']} {g['away']}@{g['home']}: blank record")
-if n_games != 31:
-    errors.append(f"expected 31 window games, found {n_games}")
+if n_games != 36:
+    errors.append(f"expected 36 window games (11/13-11/17), found {n_games}")
 
 # prior games (rest inputs) must all carry official slate URLs
 for p in slate["prior_games"]:
