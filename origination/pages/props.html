@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Player props &middot; NBA Line Origination Desk</title>
+<meta name="description" content="NBA lines originated from official NBA.com final scores, with a gated strategy leaderboard.">
+<link rel="stylesheet" href="../assets/style.css">
+
+</head><body>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html"><span class="dot"></span>NBA&nbsp;Line&nbsp;Origination&nbsp;Desk</a>
+  <div class="cap">Official capture 2026-11-14 00:42 UTC</div>
+  <nav><div class="navgroup"><h4>Overview</h4><ul>
+<li><a href="../index.html">Executive dashboard</a></li>
+</ul></div>
+<div class="navgroup"><h4>Lines and game flow</h4><ul>
+<li><a href="lines.html">Originated lines</a></li>
+<li><a href="gameflow.html">Game flow and rest</a></li>
+</ul></div>
+<div class="navgroup"><h4>Strategy lab</h4><ul>
+<li><a href="strategies.html">Strategy library</a></li>
+<li><a href="leaderboard.html">Leaderboard and rewards</a></li>
+<li><a href="gates.html">Validation gates</a></li>
+<li><a href="luck.html">Luck removal and power</a></li>
+<li><a href="signals.html">Signal study</a></li>
+</ul></div>
+<div class="navgroup"><h4>Model and data</h4><ul>
+<li><a href="teams.html">Team ratings</a></li>
+<li><a href="backtest.html">Walk-forward backtest</a></li>
+<li><a href="gamelog.html">Official game log</a></li>
+<li><a href="correlations.html">Correlations and parlays</a></li>
+<li><a href="method.html">Method</a></li>
+</ul></div>
+<div class="navgroup"><h4>Availability</h4><ul>
+<li><a href="injuries.html">Injuries and rotation</a></li>
+<li><a class="active" href="props.html">Player props</a></li>
+</ul></div>
+<div class="navgroup"><h4>Governance</h4><ul>
+<li><a href="questions.html">Open questions</a></li>
+<li><a href="suggestions.html">Suggestions</a></li>
+<li><a href="sources.html">Source register</a></li>
+<li><a href="flagged.html">Flagged for review</a></li>
+<li><a href="repo-review.html">Repository review</a></li>
+</ul></div></nav>
+  <div class="sidenote">
+    Every table row links to the official page it was read from.
+    A dash means the value is not published, not that it is zero.
+  </div>
+</aside>
+<main class="main">
+  <header class="top">
+    <h1>Player props</h1>
+    <p class="sub">What is missing, why it is missing, and what it would take to unblock.</p>
+  </header>
+  <div class="banner">
+    <strong>No strategy is funded.</strong> All 12 flagged items and every unvalidated number are published
+    <a href="flagged.html">here</a>. There is no market odds feed, so nothing on this site is a claim of real-world profit.
+  </div>
+  
+<section class="card">
+  <h3>Status: blocked, not started</h3>
+  <p>Player props are the largest part of the modern betting menu and the entire basis of same-game-parlay demand.
+  They are also the one part of this brief that cannot be attempted honestly with the data available.</p>
+  <p class="warnbox">A season average is not a game log. Originating a player-prop line needs the game-by-game distribution behind the average, which no official page reachable here publishes. Rotation minutes for a replacement player are therefore not estimated anywhere on this site.</p>
+</section>
+<section class="card">
+  <h3>What originating a prop line actually requires</h3>
+  <ol class="plain">
+    <li><strong>A game-by-game log for that player.</strong> A prop line is a point on a distribution, so the
+        distribution is the input. A season average of 27.8 points tells you nothing about the shape &mdash; and the
+        shape is what decides whether over 25.5 is a good bet.</li>
+    <li><strong>Minutes, with the rotation context.</strong> A player averaging 32 minutes in games he starts is
+        a different proposition the night a teammate returns.</li>
+    <li><strong>The opponent&rsquo;s scheme and pace.</strong> Rebounds and assists are strongly opponent-dependent.</li>
+    <li><strong>Correlations between the legs of a combo.</strong> Points and rebounds for the same player are
+        positively correlated; points and assists for two players on the same team often are not. Pricing a combo
+        at independence would be wrong, and by how much is exactly what needs measuring.</li>
+  </ol>
+  <p>None of the four is available from an official source here. Item 4 is partly available for
+  <em>team</em> outcomes &mdash; see the <a href="correlations.html">correlations page</a> &mdash;
+  but not for players.</p>
+</section>
+<section class="card">
+  <h3>What is available</h3>
+  <p>Two partial official leaderboards, 24 players by minutes and
+  50 by scoring, listed in full on the
+  <a href="injuries.html">injuries page</a>. They are enough to size the production at risk for
+  8 of the 117 players in the latest
+  injury report. They are not enough to originate a single prop line.</p>
+</section>
+<section class="card">
+  <h3>What would unblock it</h3>
+  <p>A game-by-game box-score feed. One exists for money; the NBA stats API would also serve if it were reachable
+  from this environment, which it is not. Until one is licensed this workstream should be formally closed rather
+  than left open &mdash; see <a href="questions.html#Q3">Q3</a>.</p>
+</section>
+
+  <footer class="foot">
+    <p>Session <code>arena/e32856d8-nba1</code>. Official capture 2026-11-14 00:42 UTC.
+    Model inputs: official NBA.com final scores and schedule only.
+    <a href="sources.html">Source register</a> &middot;
+    <a href="method.html">Method</a> &middot;
+    <a href="flagged.html">Flagged for review</a> &middot;
+    <a href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">Repository</a></p>
+  </footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>
