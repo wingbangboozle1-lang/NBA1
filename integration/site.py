@@ -456,6 +456,22 @@ def page_validation(D, stamp):
                              "subset was graded: every game in the capture window appears either "
                              "here or in the graded table above, never in neither.")
 
+    # Games captured while in progress that have since settled from promoted
+    # official finals (scripts/promote_finals.py, two agreeing official reads).
+    # arena/ef6ff2a4-nba1, 2026-11-14.
+    late_rows = []
+    for b in st.get("settled_late", []):
+        late_rows.append([
+            f'<a href="{esc(b["source_url"])}" target="_blank" rel="noopener">{esc(b["date"])}</a>',
+            f'<a href="{esc(b["source_url"])}" target="_blank" rel="noopener">{esc(b["matchup"])}</a>',
+            esc(b.get("final_score", "")), esc(b.get("reason", "")), esc(b.get("desk_pick", "")),
+        ])
+    late_tbl = table(["Date", "Matchup", "Official final", "How it settled", "Desk pick?"], late_rows,
+                     note="Captured while in progress, graded only after the official page read "
+                          "FINAL and two independent reads agreed. No desk pick existed on these "
+                          "games (the desk slate cut starts 2026-11-14); the rows are settled "
+                          "results, kept so the ledger shows every game exactly once.") if late_rows else ""
+
     anchors = {
         "INT-1": D["windows"]["window_fit"]["source_url"],
         "INT-2": D["windows"]["window_fit"]["source_url"],
@@ -521,6 +537,8 @@ def page_validation(D, stamp):
                tr_tbl)
         + card("Settlement ledger — graded", "The graded games, in full.", set_tbl)
         + card("Settlement ledger — refused", "Games this desk was not allowed to grade.", blocked_tbl)
+        + (card("Settlement ledger — settled late", "Games captured in progress that later "
+                "settled from promoted official finals.", late_tbl) if late_tbl else "")
         + card("Leaderboard", esc(lb["ranking_basis"]), lb_tbl)
         + card("Where the registers disagree", "Not averaged away.", dis_tbl)
     )
