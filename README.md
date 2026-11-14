@@ -6,7 +6,7 @@ moneyline from official NBA data, runs a library of strategies against a
 strictly out-of-sample window, and publishes every gap it cannot close.
 
 The live site is published by GitHub Pages from the repository root:
-**<https://wingbangboozle1-lang/NBA1/>**
+**<https://wingbangboozle1-lang.github.io/NBA1/>**
 
 ---
 
