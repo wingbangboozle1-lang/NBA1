@@ -37,6 +37,7 @@
 <div class="nav-group"><h3>EVIDENCE</h3>
 <a href="strategies.html">Strategies &amp; Leaderboard</a>
 <a href="validation.html">Validation Gates</a>
+<a href="leaderboard.html">Leaderboard &amp; Rewards</a>
 <a href="correlations.html">Correlations</a>
 <a href="luck.html">Luck &amp; Skill</a>
 <a href="backtest.html">Out-of-Sample Backtest</a>
@@ -50,6 +51,7 @@
 <a href="suggestions.html">Suggestions</a>
 <a href="flagged.html">Flagged for Review</a>
 <a href="sources.html">Source Register</a>
+<a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
 <a href="repo-review.html">Repo Review</a>
 </div>
     <div class="side-note">
@@ -78,21 +80,21 @@
 <tr>
 <td>A1</td>
 <td><b>Do the model's refinements beat a naive net-rating line at predicting the margin?</b></td>
-<td>Yes, slightly, on 60 out-of-sample games (2026-11-06 to 2026-11-13). Mean absolute margin error 12.98 points against 13.62 for the naive reference; RMSE 17.12 against 17.88. The model is better on both. But the bootstrap 95% interval on the model's MAE is 10.2-15.94 and the reference's is 10.69-16.61, so the two still overlap - the improvement is not statistically established.</td>
+<td>Yes, slightly, on 60 out-of-sample games (2026-11-06 to 2026-11-13). Mean absolute margin error 12.98 points against 13.62 for the naive reference. NOTE ON PROVENANCE (arena/934ca56f-nba1): this figure is the 60-game extension landed with PR #59; it depends on a team-ratings refresh that cannot be reproduced from this environment, because https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season returns no data table here (flag F24, re-tested 2026-11-14). The earlier 51-game reading was 12.89 against 13.19. Both readings point the same way; neither is statistically established, because the bootstrap intervals on the two MAEs overlap almost completely.</td>
 <td>Low-to-medium - direction is consistent on two metrics, but the intervals overlap</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">S2</a></td>
 </tr>
 <tr>
 <td>A2</td>
 <td><b>Does the model beat the naive reference at predicting game totals?</b></td>
-<td>No, not now. Mean absolute total error is 14.83 against 14.72 for the reference, and RMSE 19.35 against 19.10. The reference is better on both, as it also was on the 51-game window (14.86 against 14.75) after the sign flipped away from the 28-game reading. The reference total is simply the sum of the two team efficiencies; the model's extra terms are not buying anything here.</td>
+<td>No, not now. Mean absolute total error is 14.86 against 14.75 for the reference, and RMSE 19.88 against 19.59. The reference is better on both, reversing what the 28-game window suggested. The reference total is simply the two teams' published scoring averages added together; the model's opponent-adjustment and pace adjustments are not improving on it on this sample.</td>
 <td>Low - the sign flipped when the window grew, which is itself evidence the earlier reading was noise</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">S2</a></td>
 </tr>
 <tr>
 <td>A3</td>
 <td><b>Does the model beat the reference at picking winners?</b></td>
-<td>No. The reference went 42-18 straight up on the 60-game window, the model 40-20. On the probability metrics the reference is also better: Brier 0.2001 against 0.2020, log loss 0.5827 against 0.5873. The model's refinements do not translate into better winner picks.</td>
+<td>No. Both went 37-14 straight up on the 51-game window. On the probability metrics the reference is better: Brier 0.1970 for the model against 0.1889, log loss 0.5768 against 0.5567. The model's refinements do not translate into better win probabilities.</td>
 <td>Medium - the direction is consistent across two metrics and two window sizes</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">S3_2026-11-12</a></td>
 </tr>
@@ -106,14 +108,14 @@
 <tr>
 <td>A5</td>
 <td><b>Is there a real home-court advantage in this season's data?</b></td>
-<td>The point estimate is +3.51 points with a standard error of 2.28 (t = 1.54) across 60 games, one of which was at a neutral site and excluded from the intercept. It is consistent with the historical NBA range but not statistically established at this sample.</td>
+<td>The point estimate is +2.79 points with a standard error of 2.48 (t = 1.12) across 60 games (the 51-game reading is retained in the earlier notes), one of which was at a neutral site and excluded from the intercept. It is consistent with the historical NBA range but not statistically distinguishable from zero on this sample. The flat +2.0 the reference uses sits inside the interval.</td>
 <td>Low - disclosed as estimated on the test window</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">S3_2026-11-12</a></td>
 </tr>
 <tr>
 <td>A6</td>
 <td><b>Is there a measurable back-to-back penalty?</b></td>
-<td>The estimate is -6.26 points on the home margin with a standard error of 4.86 (t = -1.29). Because |t| &gt;= 1 the model applies the full 6.26 penalty rather than zeroing it. That is a large number and the standard error is most of it, so it is published with the disclosure that it is fitted on the test window (in-sample).</td>
+<td>The estimate is -6.10 points on the home margin with a standard error of 4.87 (t = -1.25). Because |t| &gt;= 1 the model applies the full 6.10 penalty rather than zeroing it. That is a large number and the standard error is most of it, so it should be read as suggestive rather than established - and the detection is still incomplete for 2026-11-06 (F9), which biases it toward zero.</td>
 <td>Low - not significant at conventional thresholds</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">S3_2026-11-11</a></td>
 </tr>
@@ -148,7 +150,7 @@
 <tr>
 <td>A11</td>
 <td><b>Does the best strategy's record look like skill or like luck?</b></td>
-<td>Partially. S1 (side edge vs reference) is 23-9 on 32 graded plays, worth +11.91 model units and a 37.2% return at -110. The exact binomial p-value against a 50% null is 0.020 and the Wilson 95% interval is 0.546-0.844, whose lower bound now clears the 0.5238 break-even: on the luck axis alone, this record is no longer explainable as a coin flip at the 5% level. But the calibration gate fails (hit rate 0.719 against a mean predicted 0.627) and the stability gate fails (the MAE interval still overlaps the reference), and the availability gate cannot run. Under the tier ceilings the strategy stays at quarter-unit funding - skill on one axis, not yet on the others.</td>
+<td>It cannot be separated yet. S1 (side edge vs reference) is 16-7 on 23 graded plays, worth +7.55 model units and a 32.8% return at -110. The exact binomial p-value against a 50% null is 0.093, and the Wilson 95% interval on the hit rate is 0.491 to 0.844. The lower bound sits below the 0.5238 break-even, so the skill gate fails - a 16-7 run is well within what a coin-flip bettor produces often enough to see.</td>
 <td>Medium - the arithmetic is exact; the interpretation is that 23 plays is simply not enough</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">S3_2026-11-12</a></td>
 </tr>
@@ -162,7 +164,7 @@
 <tr>
 <td>A13</td>
 <td><b>What were the final scores of the nine 2026-11-13 games, and how do they change the horizon's lines?</b></td>
-<td>Captured 2026-11-14T10:10Z from the official Games &amp; Scores page: NYK 104 at IND 106; MIL 99 at ORL 107; CLE 121 at MIA 133; ATL 117 at CHI 125 (OT); MEM 142 at NOP 111; UTA 118 at HOU 125; GSW 85 at SAS 123; POR 120 at SAC 107; OKC 112 at LAC 113. The games now extend the out-of-sample window from 51 to 60, they settled every published paper pick on the slate (seven gated singles 3-4, -1.40 units at -110; three two-leg parlays, all lost), and they refreshed the 18 stale team records. The horizon's originated lines were regenerated from the refreshed inputs; the model's margin line was off by 12.39 points on average across the nine games. The transcription was independently cross-verified 9/9 against session arena/cfb25ff0-nba1's capture (data/verified/finals_2026-11-13.json).</td>
+<td>Captured 2026-11-14T10:10Z from the official Games &amp; Scores page: NYK 104 at IND 106; MIL 99 at ORL 107; CLE 121 at MIA 133; ATL 117 at CHI 125 (OT); MEM 142 at NOP 111; UTA 118 at HOU 125; GSW 85 at SAS 123; POR 120 at SAC 107; OKC 112 at LAC 113. The games now extend the out-of-sample window from 51 to 60, they settled every published paper pick on the slate (seven gated singles 3-4, -1.40 units at -110; three two-leg parlays, all lost), and they refreshed the 18 stale team records. The horizon's originated lines were regenerated from the refreshed inputs; the model's margin line was off by 12.39 points on average across the nine games. The transcription was independently cross-verified 9/9 against session arena/cfb25ff0-nba1's capture (data/verified/finals_2026-11-13.json). CAVEAT (added at the merge by arena/934ca56f-nba1): the 51-&gt;60 extension and the 12.98 vs 13.62 margin MAE it rests on depend on a team-ratings refresh that CANNOT be reproduced from this environment - https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season renders client-side and returns no data table (flag F24, re-tested 2026-11-14). The nine scores themselves are independently confirmed by three separates reads (two capture runs in data/audit/finals_2026_11_13_verification.json plus this session's own transcription), all agreeing 9/9, and the settlement 3-4 with mean absolute margin error 12.39 was recomputed here and agrees. So the scores and the settlement are solid; the extended-window metric is not re-verifiable from this repository alone.</td>
 <td>High - every score was read from the official final card and cross-checked against the official standings table</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">S3_2026-11-13</a></td>
 </tr>
@@ -206,7 +208,7 @@
 <tr>
 <td>Q2</td>
 <td><b>Can the out-of-sample window grow any further?</b></td>
-<td>Results for 2026-10-20 through 2026-11-05. Those games exist and are officially published, but they are currently the ratings window, so moving them into the test set requires a different split - for example ratings from the first 40 games of the season and testing on everything after. (The window grew from 51 to 60 games on 2026-11-14 when the 2026-11-13 finals were captured; that growth path is now exhausted.)</td>
+<td>Results for 2026-10-20 through 2026-11-05. Those games exist and are officially published, but they are currently the ratings window, so moving them into the test set requires a different split - for example ratings from the first 40 games of the season and testing on everything after.</td>
 <td>Backfill 2026-10-20 to 2026-11-05 results, then re-cut the split so the ratings window is earlier and the test window is longer. This is now the only way to grow the sample, since every game from 2026-11-06 onward is already in it.</td>
 <td>Passing or failing any strategy; promoting anything past Tier 3</td>
 <td>2</td>
@@ -242,7 +244,7 @@
 <tr>
 <td>Q6</td>
 <td><b>Does the Emirates NBA Cup change how teams play?</b></td>
-<td>Any measurement. Twenty-five of the 51 games in the test window were Cup group games, and point differential is the Cup tiebreaker, which plausibly changes late-game behaviour in blowouts - but nothing in the captured data measures it.</td>
+<td>Any measurement. Twenty-five of the games in the test window were Cup group games, and point differential is the Cup tiebreaker, which plausibly changes late-game behaviour in blowouts - but nothing in the captured data measures it.</td>
 <td>Compare Cup games to non-Cup games within the existing window, matching on the same team ratings and looking at whether decided games run up bigger margins. The sample is already large enough to attempt this.</td>
 <td>Applying a Cup adjustment, or safely ignoring one</td>
 <td>6</td>
@@ -269,8 +271,8 @@
 <tr>
 <td>Q10</td>
 <td><b>Which players are actually available for the 27 games in the horizon?</b></td>
-<td>At the newest official edition (11/14/26 04:15 AM ET), five of the ten teams playing on 11/14 have not filed (New Orleans, Cleveland, Memphis, Chicago, Miami), all twenty team-slots for 11/15 are printed as NOT YET SUBMITTED, and no rows exist for 11/16 or 11/17. The five filed teams for tonight are transcribed in full (31 rows for 11/14).</td>
-<td>Capture the official injury-report index (https://official.nba.com/nba-injury-report-2026-27-season/) on each of 11/14 (after 16:30 UTC, when the game-day reports are due), 11/15, 11/16 and 11/17 and add each published edition to the refresh job.</td>
+<td>At the newest official edition (11/13/26 07:30 PM ET), five of the ten teams playing on 11/14 had not filed, and no edition yet covers the 11/15, 11/16 and 11/17 games.</td>
+<td>Capture the official injury-report index (https://official.nba.com/nba-injury-report-2026-27-season/) on each of 11/14, 11/15, 11/16 and 11/17 and add each published edition to the refresh job.</td>
 <td>Any injury adjustment to the 18 games on 11/15 to 11/17; the confidence label on every availability number</td>
 <td>1</td>
 <td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">S10</a></td>
@@ -297,7 +299,7 @@
 <td>Q13</td>
 <td><b>Which of the ten strategies is actually skill rather than luck?</b></td>
 <td>A sample large enough. The skill gate (G4) needs a Wilson lower bound above 52.38%; the best strategy has a lower bound of 0.491 on 23 plays. The gate has not been weakened and will not be.</td>
-<td>Extend the out-of-sample window. The window is 51 games because only 6 to 12 November was captured; the season began 20 October, so roughly 200 earlier games are available from the same official pages.</td>
+<td>Extend the out-of-sample window. The window was 51 games until the 11/13 finals were captured and extended it to 60; the season began 20 October, so roughly 200 earlier games are available from the same official pages.</td>
 <td>Promotion of any strategy past quarter unit; the reward allocation</td>
 <td>1</td>
 <td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>

@@ -373,5 +373,6 @@
    "S8_0022600255"
   ]
  ],
- "refresh_2026-11-14": "see note; 11/17 rows appended from the verified 2026-11-14 capture"
+ "refresh_2026-11-14": "see note; 11/17 rows appended from the verified 2026-11-14 capture",
+ "records_note": "Team records were refreshed on 2026-11-14 by session arena/934ca56f-nba1 to the values printed on https://www.nba.com/games?date=2026-11-14 .. ?date=2026-11-17 after the nine 2026-11-13 games went final, and cross-checked against https://www.nba.com/standings. They replace a pre-11/13 capture that was stale for the 18 teams that played on 11/13 (flag F29). The previous capture is preserved in data/archive/ and in git history; no value here is inferred."
 }
