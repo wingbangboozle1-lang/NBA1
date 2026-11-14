@@ -111,6 +111,41 @@ def probe(url, timeout=30):
     return rec
 
 
+def probe_xhr(url, timeout=30):
+    """Second attempt with nba.com's public web client headers.
+
+    www.nba.com's stats front-end reads from the same endpoints with these
+    headers. Probing both ways separates "the source is closed to scripts" from
+    "the source needs specific headers", which are very different conclusions
+    for anyone planning an automated pipeline."""
+    started = time.time()
+    req = urllib.request.Request(url, headers={
+        "User-Agent": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                       "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"),
+        "Accept": "application/json,text/plain,*/*",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Referer": "https://www.nba.com/",
+        "Origin": "https://www.nba.com",
+        "x-nba-stats-origin": "stats",
+        "x-nba-stats-token": "true",
+        "Connection": "keep-alive",
+    })
+    rec = {"url": url, "http_status": None, "ms": None, "bytes": 0, "error": None}
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as fh:
+            body = fh.read()
+            rec["http_status"] = fh.status
+            rec["bytes"] = len(body)
+            rec["sha256"] = hashlib.sha256(body).hexdigest()
+    except urllib.error.HTTPError as e:
+        rec["http_status"] = e.code
+        rec["error"] = f"HTTP {e.code} {e.reason}"
+    except Exception as e:  # noqa: BLE001
+        rec["error"] = f"{type(e).__name__}: {e}"
+    rec["ms"] = int((time.time() - started) * 1000)
+    return rec
+
+
 def main():
     urls = collect_urls()
     log(f"{len(urls)} distinct official URLs cited in the repository")
@@ -122,6 +157,15 @@ def main():
         status = rec["http_status"] if rec["http_status"] is not None else "ERR"
         log(f"{i:>3}/{len(urls)}  {status:>4}  {rec['ms']:>6}ms  {rec['bytes']:>9}B  {url}")
         time.sleep(0.4)  # be a polite client; nba.com is not ours
+
+    # Second attempt only on the URLs the first attempt was refused, and only a
+    # sample, so the probe stays a polite client.
+    retry_targets = [r["url"] for r in results if r["http_status"] in (401, 403, 429)][:6]
+    retried = []
+    for u in retry_targets:
+        rec = probe_xhr(u)
+        retried.append(rec)
+        log(f"retry-with-browser-headers  {rec['http_status']}  {u}")
 
     ok = [r for r in results if r["http_status"] and 200 <= r["http_status"] < 300]
     redirect = [r for r in results if r["http_status"] and 300 <= r["http_status"] < 400]
@@ -161,6 +205,25 @@ def main():
                       f"final_url so the register can be updated.",
             "urls": [r["url"] for r in redirect],
         })
+    opened = [r for r in retried if r["http_status"] and 200 <= r["http_status"] < 300]
+    if retried and opened:
+        findings.append({
+            "id": "P5",
+            "severity": "Informational",
+            "detail": f"{len(opened)}/{len(retried)} refused URL(s) answer when sent nba.com's own "
+                      f"web-client headers. Those sources are script-readable with the right client, "
+                      f"so an automated pipeline is possible for them.",
+            "urls": [r["url"] for r in opened],
+        })
+    elif retried:
+        findings.append({
+            "id": "P5",
+            "severity": "High",
+            "detail": f"All {len(retried)} retried URL(s) stayed refused even with nba.com's own "
+                      f"web-client headers. These sources are not machine-readable as-shipped; "
+                      f"any pipeline must assume a human-in-the-loop or a licensed feed.",
+            "urls": [r["url"] for r in retried],
+        })
     if not findings:
         findings.append({
             "id": "P0",
@@ -187,6 +250,7 @@ def main():
             "or that the source will still exist tomorrow. Reachability and currency are "
             "separate claims."
         ),
+        "retried_with_browser_headers": retried,
         "findings": findings,
         "results": results,
     }
