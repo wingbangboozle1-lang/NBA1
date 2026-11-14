@@ -58,7 +58,7 @@ run("generate_picks_d.py")  # Build D: live-horizon lines & picks (11/14-11/17)
 run("check_site.py")
 run("verify_schedule_c.py")  # Build C: row-by-row schedule check + schedule-verified.html
 run("build_dashboard.py")    # Build D: regenerate the unified site (index.html + site/**)
-run("verify_dashboard.py")   # Build D: every row source-linked, every internal link resolves
+run("verify_dashboard.py")   # Build D: sourced or reasoned no-source rows; links checked, values not re-fetched
 
 # 4a: slate sources
 slate = load("slate_full")
