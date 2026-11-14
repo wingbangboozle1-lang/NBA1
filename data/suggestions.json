@@ -1,101 +1,101 @@
 [
- {
-  "id": "S-01",
-  "title": "Automate the data refresh from official NBA sources",
-  "detail": "A script re-pulls the games page and injury PDF each run, and writes a timestamp and checksum per file.",
-  "benefit": "Repeatable, auditable data; removes manual copy errors.",
-  "effort": "Medium",
-  "risk": "Scraping may break when pages change. Needs monitoring.",
-  "decision": "pending"
- },
- {
-  "id": "S-02",
-  "title": "Parse the injury PDF with a table-aware tool and cross-check",
-  "detail": "Use a PDF table extractor, then compare each row with the text extraction. Mismatches go to Flagged for Review.",
-  "benefit": "Fixes F-02 to F-07 at the source.",
-  "effort": "Medium",
-  "risk": "Layout changes between reports.",
-  "decision": "pending"
- },
- {
-  "id": "S-03",
-  "title": "Add a legal review gate before any betting-related output",
-  "detail": "Nothing that looks like a wager, line, or prize leaderboard is published until a qualified Dutch legal review (Q-04) is done.",
-  "benefit": "Avoids regulatory exposure in NL.",
-  "effort": "Low (process), external cost for counsel",
-  "risk": "Delays launch of strategy content.",
-  "decision": "pending"
- },
- {
-  "id": "S-04",
-  "title": "Source historical game logs and minutes from official NBA stats",
-  "detail": "Collect per-game box scores and minutes for the past seasons to support correlation and backtest work (Q-06, Q-08).",
-  "benefit": "Enables validation; without it no strategy can pass gates.",
-  "effort": "High",
-  "risk": "Volume and rate limits; must verify each row.",
-  "decision": "pending"
- },
- {
-  "id": "S-05",
-  "title": "Pick an odds source with clear license terms before modelling prices",
-  "detail": "Identify a licensed odds provider or an open dataset with explicit reuse rights (Q-07). Record the terms on the Sources page.",
-  "benefit": "Makes the originated-lines comparison and CLV measurable.",
-  "effort": "Medium",
-  "risk": "Paid data and licensing cost.",
-  "decision": "pending"
- },
- {
-  "id": "S-06",
-  "title": "Add per-row 'as of' timestamps to every table",
-  "detail": "Show when each row was retrieved, so records and injury statuses can be read in context (F-08).",
-  "benefit": "Clearer decision-making; avoids stale data.",
-  "effort": "Low",
-  "risk": "None significant.",
-  "decision": "pending"
- },
- {
-  "id": "S-07",
-  "title": "Add filter, search, and CSV export on each table",
-  "detail": "Let users filter by date, team, or status, and download the table.",
-  "benefit": "Simpler review of large tables.",
-  "effort": "Low",
-  "risk": "None significant.",
-  "decision": "pending"
- },
- {
-  "id": "S-08",
-  "title": "Add a Dutch / English language switch",
-  "detail": "The user is in the Netherlands; a language toggle would help non-English reviewers.",
-  "benefit": "Broader audience.",
-  "effort": "Medium",
-  "risk": "Translation must be verified.",
-  "decision": "pending"
- },
- {
-  "id": "S-09",
-  "title": "Track suggestions and decisions in GitHub Issues",
-  "detail": "Use an issue template per suggestion with a 'decision' label, instead of editing this static page.",
-  "benefit": "Clear audit trail of what was chosen and why.",
-  "effort": "Low",
-  "risk": "Requires GitHub access for reviewers.",
-  "decision": "pending"
- },
- {
-  "id": "S-10",
-  "title": "Add responsible-gambling information if any betting content is shown",
-  "detail": "Ksa runs responsible-gambling campaigns (Gokstop). Add links only after the exact official URLs are verified.",
-  "benefit": "Safer presentation of any betting-related content.",
-  "effort": "Low",
-  "risk": "Link accuracy.",
-  "decision": "pending"
- },
- {
-  "id": "S-11",
-  "title": "Consolidate the two landing pages into one",
-  "detail": "Two sites now exist: the root 'NBA Edge Lab' dashboard (from another session, PRs #1 and #2) and this session's multi-page site in docs/. Pick one landing page and link the other as a subpage. Nothing was changed on the root site.",
-  "benefit": "One clear entry point; one navigation structure.",
-  "effort": "Medium",
-  "risk": "Touches another session's files, so it needs your decision and that session's agreement.",
-  "decision": "pending"
- }
+  {
+    "id": "S-01",
+    "title": "Automate the data refresh from official NBA sources",
+    "detail": "A script re-pulls the games page and injury PDF each run, and writes a timestamp and checksum per file.",
+    "benefit": "Repeatable, auditable data; removes manual copy errors.",
+    "effort": "Medium",
+    "risk": "Scraping may break when pages change. Needs monitoring.",
+    "decision": "pending"
+  },
+  {
+    "id": "S-02",
+    "title": "Parse the injury PDF with a table-aware tool and cross-check",
+    "detail": "Use a PDF table extractor, then compare each row with the text extraction. Mismatches go to Flagged for Review. Session W evidence (2026-11-14): both the 05:15 PM and 08:00 PM ET editions lose leading cells at page breaks — 20 + 11 rows respectively currently show no printed team. A per-row carry-provenance rule (only from an earlier edition that printed the row) is already implemented in data/raw/injury_report_2026-11-13_08_00PM.json and is the minimum a parser must preserve; anything else is inference.",
+    "benefit": "Fixes F-02 to F-07 at the source and closes flags W-F4/W-F7 (see review.html) without inferring team cells.",
+    "effort": "Medium",
+    "risk": "Layout changes between reports.",
+    "decision": "pending"
+  },
+  {
+    "id": "S-03",
+    "title": "Add a legal review gate before any betting-related output",
+    "detail": "Nothing that looks like a wager, line, or prize leaderboard is published until a qualified Dutch legal review (Q-04) is done.",
+    "benefit": "Avoids regulatory exposure in NL.",
+    "effort": "Low (process), external cost for counsel",
+    "risk": "Delays launch of strategy content.",
+    "decision": "pending"
+  },
+  {
+    "id": "S-04",
+    "title": "Source historical game logs and minutes from official NBA stats",
+    "detail": "Collect per-game box scores and minutes for the past seasons to support correlation and backtest work (Q-06, Q-08).",
+    "benefit": "Enables validation; without it no strategy can pass gates.",
+    "effort": "High",
+    "risk": "Volume and rate limits; must verify each row.",
+    "decision": "pending"
+  },
+  {
+    "id": "S-05",
+    "title": "Pick an odds source with clear license terms before modelling prices",
+    "detail": "Identify a licensed odds provider or an open dataset with explicit reuse rights (Q-07). Record the terms on the Sources page.",
+    "benefit": "Makes the originated-lines comparison and CLV measurable.",
+    "effort": "Medium",
+    "risk": "Paid data and licensing cost.",
+    "decision": "pending"
+  },
+  {
+    "id": "S-06",
+    "title": "Add per-row 'as of' timestamps to every table",
+    "detail": "Show when each row was retrieved, so records and injury statuses can be read in context (F-08).",
+    "benefit": "Clearer decision-making; avoids stale data.",
+    "effort": "Low",
+    "risk": "None significant.",
+    "decision": "pending"
+  },
+  {
+    "id": "S-07",
+    "title": "Add filter, search, and CSV export on each table",
+    "detail": "Let users filter by date, team, or status, and download the table.",
+    "benefit": "Simpler review of large tables.",
+    "effort": "Low",
+    "risk": "None significant.",
+    "decision": "pending"
+  },
+  {
+    "id": "S-08",
+    "title": "Add a Dutch / English language switch",
+    "detail": "The user is in the Netherlands; a language toggle would help non-English reviewers.",
+    "benefit": "Broader audience.",
+    "effort": "Medium",
+    "risk": "Translation must be verified.",
+    "decision": "pending"
+  },
+  {
+    "id": "S-09",
+    "title": "Track suggestions and decisions in GitHub Issues",
+    "detail": "Use an issue template per suggestion with a 'decision' label, instead of editing this static page.",
+    "benefit": "Clear audit trail of what was chosen and why.",
+    "effort": "Low",
+    "risk": "Requires GitHub access for reviewers.",
+    "decision": "pending"
+  },
+  {
+    "id": "S-10",
+    "title": "Add responsible-gambling information if any betting content is shown",
+    "detail": "Ksa runs responsible-gambling campaigns (Gokstop). Add links only after the exact official URLs are verified.",
+    "benefit": "Safer presentation of any betting-related content.",
+    "effort": "Low",
+    "risk": "Link accuracy.",
+    "decision": "pending"
+  },
+  {
+    "id": "S-11",
+    "title": "Consolidate the two landing pages into one",
+    "detail": "Two sites now exist: the root 'NBA Edge Lab' dashboard (from another session, PRs #1 and #2) and this session's multi-page site in docs/. Pick one landing page and link the other as a subpage. Nothing was changed on the root site.",
+    "benefit": "One clear entry point; one navigation structure.",
+    "effort": "Medium",
+    "risk": "Touches another session's files, so it needs your decision and that session's agreement.",
+    "decision": "pending"
+  }
 ]

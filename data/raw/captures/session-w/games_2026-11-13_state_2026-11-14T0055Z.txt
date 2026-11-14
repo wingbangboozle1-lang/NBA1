@@ -1,0 +1,59 @@
+URL: https://www.nba.com/games?date=2026-11-13
+READ_UTC: 2026-11-14T00:55Z (session arena/f80dcc4a-nba1, fetch tool, chunks 0-1 of 2)
+FORMAT: date strip + game cards + leader tables as returned by the fetch tool.
+        Navigation chrome elided [nav elided]. No data row is removed.
+
+[nav elided]
+
+# NBA Games & Scores
+
+November2026
+
+Sun8Mon9Tue10Wed11Thu12Fri13Sat14
+
+HIDE SCORES
+HIDE ODDS
+
+November 2026
+TODAY
+
+Calendar cells (as printed): 8 Nov 7 GAMES | 9 Nov 8 GAMES | 10 Nov 6 GAMES | 11 Nov 10 GAMES | 12 Nov 4 GAMES | 13 Nov 9 GAMES | 14 Nov 5 GAMES
+
+[game card 1 — Emirates NBA Cup East Group B]
+Knicks 6-5 (0-1) | 35 | Q2 4:51 | 44 | Pacers 4-8 (0-1)
+link: https://www.nba.com/game/nyk-vs-ind-0022600034
+Game Leaders: Karl-Anthony Towns (NYK) 14 PTS 5 REB 3 AST; Pascal Siakam (IND) 11 PTS 2 REB 0 AST
+
+[game card 2 — Emirates NBA Cup East Group A]
+Bucks 1-11 (0-1) | 33 | Q2 :53.6 | 49 | Magic 4-7 (1-0)
+link: https://www.nba.com/game/mil-vs-orl-0022600035
+Game Leaders: Myles Turner (MIL) 12 PTS 8 REB 0 AST; Franz Wagner (ORL) 18 PTS 5 REB 6 AST
+
+[game card 3 — Emirates NBA Cup East Group B]
+Cavaliers 6-6 (1-0) | PREGAME | Heat 5-6 (1-0)
+link: https://www.nba.com/game/cle-vs-mia-0022600036
+Season Leaders: Donovan Mitchell (CLE) 22.8 5.0 5.5; Giannis Antetokounmpo (MIA) 27.7 12.6 5.2
+
+[game card 4 — Emirates NBA Cup East Group C]
+Hawks 7-5 (1-0) | PREGAME | Bulls 1-9 (0-1)
+link: https://www.nba.com/game/atl-vs-chi-0022600037
+Season Leaders: Jalen Johnson (ATL) 19.2 8.6 7.2; Caleb Wilson (CHI) 18.9 6.2 1.9
+
+[game card 5 — Emirates NBA Cup West Group B]
+Grizzlies 7-4 (0-1) | PREGAME | Pelicans 4-8 (0-1)
+link: https://www.nba.com/game/mem-vs-nop-0022600038
+Season Leaders: Ty Jerome (MEM) 26.2 3.5 4.9; Zion Williamson (NOP) 21.7 5.2 2.6
+
+[game card 6 — Emirates NBA Cup West Group A]
+Jazz 1-11 (0-1) | PREGAME | Rockets 9-3 (0-1)
+link: https://www.nba.com/game/uta-vs-hou-0022600039
+Season Leaders: Keyonte George (UTA) 20.4 4.5 6.5; Alperen [text of the HOU leader row was cut off by the fetch chunk boundary]
+
+[gap in fetch output: the game cards for GSW@SAS (0022600040) and POR@SAC (0022600041) were not present in either returned chunk. They are listed on the official schedule capture (data/raw/official_schedule_capture_2026-11-14.json) and are re-read from their game pages at results capture time.]
+
+[chunk 1 tail]
+042)
+link: https://www.nba.com/game/okc-vs-lac-0022600042 (Oklahoma City Thunder at LA Clippers)
+RADIO AM 570 LA Sports / 1330 AM (S) WWLS 98.1FM OKC
+
+[season leader rows seen elsewhere on this page at 00:55Z, from the in-progress cards' Game Leaders tables only — see cards above]

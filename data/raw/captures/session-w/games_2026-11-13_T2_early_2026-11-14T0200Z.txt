@@ -1,0 +1,62 @@
+URL: https://www.nba.com/games?date=2026-11-13
+READ_UTC: 2026-11-14T~02:00Z (session arena/f80dcc4a-nba1, fetch tool, chunks 0-1 of 2) — T2 early results pass.
+FORMAT: date strip + game cards as returned by the fetch tool. Navigation chrome elided [nav elided].
+        No data row is removed. Scores/states are as printed at read time.
+
+[nav elided]
+
+# NBA Games & Scores
+November 2026 date strip: Fri13 9 GAMES | Sat14 5 GAMES (calendar cells as printed)
+
+[game card 1] Emirates NBA Cup East Group B
+Knicks 6-5 (0-1) | 49 | Q3 11:39 | 58 | Pacers 4-8 (0-1)
+link: https://www.nba.com/game/nyk-vs-ind-0022600034
+Game Leaders: Karl-Anthony Towns (NYK) 14 9 3; Pascal Siakam (IND) 13 2 0
+
+[game card 2] Emirates NBA Cup East Group A
+Bucks 1-11 (0-1) | 52 | Q3 6:26 | 65 | Magic 4-7 (1-0)
+link: https://www.nba.com/game/mil-vs-orl-0022600035
+Game Leaders: Myles Turner (MIL) 14 8 2; Franz Wagner (ORL) 23 5 8
+
+[game card 3] Emirates NBA Cup East Group B
+Cavaliers 6-6 (1-0) | 17 | Q1 2:51 | 19 | Heat 5-6 (1-0)
+link: https://www.nba.com/game/cle-vs-mia-0022600036
+Game Leaders: Tyrese Proctor (CLE) 6 1 0; Davion Mitchell (MIA) 5 2 2
+
+[game card 4] Emirates NBA Cup East Group B
+Hawks 7-5 (1-0) | 18 | Q1 1:46 | 31 | Bulls 1-9 (0-1)
+link: https://www.nba.com/game/atl-vs-chi-0022600037
+Game Leaders: Onyeka Okongwu (ATL) 3 2 0; Patrick Williams (CHI) 6 3 2
+
+[game card 5] Emirates NBA Cup West Group B
+Grizzlies 7-4 (0-1) | 29 | Q1 1:57 | 21 | Pelicans 4-8 (0-1)
+link: https://www.nba.com/game/mem-vs-nop-0022600038
+Game Leaders: Isaiah Stewart (MEM) 4 2 0; Zion Williamson (NOP) 9 3 1
+
+[game card 6] Emirates NBA Cup West Group A
+Jazz 1-11 (0-1) | PREGAME | Rockets 9-3 (0-1)
+link: https://www.nba.com/game/uta-vs-hou-0022600039
+Season Leaders: Keyonte George (UTA) 20.4 4.5 6.5; Alperen Sengun (HOU) 21.1 9.4 7.9
+
+[chunk 1]
+[game card 7] Emirates NBA Cup West Group C
+Warriors 8-4 (1-0) | 9:30 PM ET | Spurs 10-2 (1-0)
+link: https://www.nba.com/game/gsw-vs-sas-0022600040
+Season Leaders: Stephen Curry (GSW) 27.8 3.7 3.9; Victor Wembanyama (SAS) 30.3 11.7 2.8
+
+[game card 8] Emirates NBA Cup West Group C
+Trail Blazers 8-3 (0-1) | 10:00 PM ET | Kings 1-10 (0-1)
+link: https://www.nba.com/game/por-vs-sac-0022600041
+Season Leaders: Deni Avdija (POR) 23.0 6.1 6.5; Darius Acuff Jr. (SAC) 26.2 3.8 7.3
+
+[game card 9] Emirates NBA Cup West Group B
+Thunder 8-4 (1-0) | 10:30 PM ET | Clippers 2-8 (0-1)
+link: https://www.nba.com/game/okc-vs-lac-0022600042
+Season Leaders: Shai Gilgeous-Alexander (OKC) 29.7 4.3 4.5; Darius Garland (LAC) 20.4 1.8 6.9
+
+NOTES (as recorded, no inference):
+- No game was FINAL at read time. Games ran roughly 30-60 minutes behind the listed tip times.
+- This pass printed the GSW@SAS / POR@SAC / OKC@LAC cards that the 00:55Z capture dropped mid-chunk;
+  their record strings (GSW 8-4, SAC 1-10, OKC 8-4) match the slate-page cards read earlier, giving those
+  three teams a second independent official source (records_2026-11-14.json updated; flag W-F3 resolved).
+- Finals capture continues at the queued late pass (~03:30-05:30Z) — flags W-F5 / F-C02 stay open until then.
