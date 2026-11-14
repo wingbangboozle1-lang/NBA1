@@ -31,7 +31,7 @@ What remains is the tail below.
 
 | # | Task | Status | File scope (exclusive) |
 | --- | --- | --- | --- |
-| E01 | Board sync + claim + ground-rule-5 handoff (this block) | done (pushed before other edits) | `COORDINATION.md` (this block + §20 at end) |
+| E01 | Board sync + claim + ground-rule-5 handoff (this block) | done (pushed before other edits) | `COORDINATION.md` (this block + §21 at end) |
 | E02 | Take over PR #45: fix two origination pages rendering no table; `verify_integration.py` allowlist + I6 scoping | done | `engine_v2/build_site.py`, `origination/pages/method.html`, `origination/pages/props.html`, `scripts/verify_integration.py` |
 | E03 | Take over PR #53: `FINAL_AUDIT.md` integration audit doc | done | `FINAL_AUDIT.md` |
 | E04 | Fresh official capture + settlement of 11/13 finals + horizon refresh (11/14–11/17) via the hardened refresh path (`refresh-data.yml` dispatch) | done | `data/raw/**`, `data/derived/**`, builder-emitted pages under `site/**`, `picks.html`, `slate.html` |
@@ -1654,7 +1654,74 @@ file, `pages.yml`, the probe files, or `audit/**`.
 
 ---
 
-## 20. Session `arena/ef6ff2a4-nba1` — final integration + stale-PR takeover (claimed 2026-11-14T09:40Z, UTC)
+## 20. Session `arena/cfb25ff0-nba1` — 2026-11-13 official finals closure (claimed 2026-11-14 UTC)
+
+Branch `arena/cfb25ff0-nba1`, base `main` at `45c0287`. Claimed after reading this board and
+listing every remote branch (only `main` and this branch exist on `origin`; no open session
+holds the finals or settlement files).
+
+Why this task: the committed finals snapshot (`data/raw/games_completed.json`) stops at
+2026-11-12. The 2026-11-13 slate (game IDs 0022600034–0022600042) is Final on the official
+schedule (https://www.nba.com/schedule), while the refresh capture at 02:05Z recorded all nine as
+`not_final` (in progress). Flag F-C01 is therefore still open in the committed data.
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| X01 | Board read + claim, pushed before any edit | done | `COORDINATION.md` (§20 only) |
+| X02 | Capture the 9 finals from two official pages each: the NBA.com schedule and each game page | done (7 two-source, 2 single-source) | `audit/finals_2026-11-13/**` |
+| X03 | Write a row-level verified finals file, one row per game, with both official URLs and the page read | done | `data/verified/finals_2026-11-13.json` |
+| X04 | Cross-check against the committed snapshot and against any published pick for these games | done (no published pick on these games; 11/13 records checked for 18 teams) | `audit/finals_2026-11-13/**` |
+| X05 | Record the result and request promotion into the shared snapshot and settlement (integration seat) | done (requests R-X1 to R-X4 below) | `COORDINATION.md` (§20 only) |
+
+**Not touched on purpose:** `data/raw/**`, `data/derived/**`, `data/games.json`, `integration/**`,
+`docs/**`, `site/**`, root `*.html`, `scripts/**`, `engine/**`. Promotion into the shared
+snapshot and settlement belongs to the integration session, as the ground rules require.
+
+### 20.1 Completion record (session `arena/cfb25ff0-nba1`, 2026-11-14 UTC)
+
+**Sources.** Official nba.com pages, read with the page-fetch tool: the schedule
+<https://www.nba.com/schedule> (Week 4, Fri Nov 13) and the nine game pages
+`https://www.nba.com/game/<away>-vs-<home>-<game_id>` (listed in `audit/finals_2026-11-13/README.md`).
+
+**Verification performed.** `audit/finals_2026-11-13/check.py`: 41 checks over 9 games, 0 failed.
+C1 schedule card == game-page final (where the game page returned a linescore); C2 quarter sums == final;
+C3 status label is Final or Final/OT; C4 URL slug == away/home/game ID; C5 not yet in the committed snapshot.
+`audit/finals_2026-11-13/records_check.py`: post-11/13 records for the 18 teams that played; 11 agree
+with an official card read in this session, 0 disagree, 7 derived only.
+
+**Result.** Data file: `data/verified/finals_2026-11-13.json` (9 rows, each with two source URLs, or one
+where the game page returned no linescore; the ATL–CHI OT count is null because it is not confirmed).
+No shared file was edited: `data/raw/**`, `integration/**`, `site/**`, `docs/**` and root `*.html` are untouched.
+
+**Irregularities (publish on Flagged for Review; non-blocking):**
+
+1. `integration/out/settlement.json`: all 9 `cannot_settle` rows for 2026-11-13 carry the same
+   `source_url` (`https://www.nba.com/game/cha-vs-phx-0022600230/box-score`), which is a different game.
+2. `data/raw/games_completed.json` still stops at 2026-11-12. F-C01 stays open until promotion.
+3. ATL–CHI and POR–SAC: second official page not readable through the fetch tool; ATL–CHI OT count not stated.
+4. Seven horizon team records (ORL, ATL, GSW, POR, SAC, OKC; MIL via the game-page recap only) are derived
+   from pre-game record + result, not read from an official card in this session.
+5. CLE–MIA nba.com recap text says "Tuesday night" for a Friday game; the scores on the same page agree with
+   the schedule, so no value is affected.
+
+**Requests to the integration seat (logged, not executed):**
+
+* **R-X1 — promote the nine 11/13 finals** from `data/verified/finals_2026-11-13.json` into
+  `data/raw/games_completed.json` (same column order), and re-run `settle.py` so the `cannot_settle` rows
+  for 11/13 become settled or stay blocked with the reason.
+* **R-X2 — fix the nine `source_url` values** in `integration/out/settlement.json` (irregularity 1).
+* **R-X3 — refresh the horizon records** for the 18 teams that played on 11/13, from the table in
+  `audit/finals_2026-11-13/README.md` §3. Confirm the seven derived-only records against an official card first.
+* **R-X4 — publish irregularities 1–5** on the Flagged for Review register, with the links above.
+
+**Not done here (out of this session's claim):** the other horizon, lines and picks work, the
+Flagged-for-Review register, the Command Center, and the rest of the brief. Those are owned by the sessions
+listed in §0b and by the integration seat.
+
+
+---
+
+## 21. Session `arena/ef6ff2a4-nba1` — final integration + stale-PR takeover (claimed 2026-11-14T09:40Z, UTC)
 
 Single-branch session on `arena/ef6ff2a4-nba1` (base `45c0287` = tip of `main`).
 Takes the integration seat under ground rule 5: every other claim and every open
@@ -1667,7 +1734,7 @@ ACTIVE CLAIM block at the top of this file; this section holds the log.
   commits 01:13Z–02:25Z vs now 09:36Z), wrote the ACTIVE CLAIM block and this
   section, committed and pushed before any other edit.
 
-### 20.1 Stale-PR takeover plan (recorded at claim time)
+### 21.1 Stale-PR takeover plan (recorded at claim time)
 
 | PR | Action | Credit |
 | --- | --- | --- |
@@ -1676,17 +1743,17 @@ ACTIVE CLAIM block at the top of this file; this section holds the log.
 | #37 | Coordination-record updates reviewed; any still-factual rows folded into this record; close as superseded | `arena/2509073f-nba1` |
 | #42 | Final diff is probe churn only; superseded by `main`'s newer probe; close as superseded | `arena/2edb85af-nba1` |
 
-### 20.2 Completion record (2026-11-14T10:45Z, UTC)
+### 21.2 Completion record (2026-11-14T10:45Z, UTC)
 
 | Task | Result |
 | --- | --- |
 | E01 | Claim + ground-rule-5 handoff written and pushed before any other edit (`9869ade`). Staleness evidence: PRs #37/#42/#45/#53 last commits 01:13–02:25Z vs claim time 09:40Z. |
 | E02 | PR #45's content taken over and improved (`e506c65`, credit `arena/e32856d8-nba1`): `engine_v2/build_site.py` now generates the *Parameter register* and *Required input* tables that existed only as manual page edits (a rebuild used to delete them — the FINAL_AUDIT's "rebuild fidelity caveat"), plus PR #45's *Declared constants* and *What a prop line needs* sections. Every value reads from `data/derived/engine_v2.json` (captured_games=151, hca=2.2067→2.21, sigma 15.87/19.27), nothing hardcoded. Rebuild diff on those pages: zero. |
 | E03 | `FINAL_AUDIT.md` taken over (`5070663`, credit `arena/159ed109-nba1`) with a dated postscript recording that its rebuild-fidelity caveat is resolved and listing what stayed open. |
-| E04 | 11/13 finals captured, verified twice, promoted, and used to settle every published 11/13 paper pick; fetch window gap closed; nav/`None` irregularities fixed (see 20.3). |
-| E05 | Full-tree gates all green on the final tree (see 20.4). |
+| E04 | 11/13 finals captured, verified twice, promoted, and used to settle every published 11/13 paper pick; fetch window gap closed; nav/`None` irregularities fixed (see 21.3). |
+| E05 | Full-tree gates all green on the final tree (see 21.4). |
 
-#### 20.3 Irregularities found, and their state
+#### 21.3 Irregularities found, and their state
 
 | # | Irregularity | State |
 | --- | --- | --- |
@@ -1697,7 +1764,7 @@ ACTIVE CLAIM block at the top of this file; this section holds the log.
 | I-E05 | The desk's `settle.py` kept the 11/13 in-progress rows in `cannot_settle` with "re-fetch after the games end and re-run" — the re-fetch path did not exist (I-E01). | **Fixed** with E04: promoted finals + `settled_late` ledger + rendered card on `desk-validation.html`. |
 | I-E06 | `workflow_dispatch` on `refresh-data.yml` returns HTTP 403 on session tokens (documented). | **Works via the documented push-fallback**; every refresh need was met by a path-filtered push. Left as is. |
 
-#### 20.4 E05 verification performed (all against the final tree)
+#### 21.4 E05 verification performed (all against the final tree)
 
 | Check | Result |
 | --- | --- |
@@ -1707,10 +1774,10 @@ ACTIVE CLAIM block at the top of this file; this section holds the log.
 | `node scripts/render_check.mjs` | 112 pages, 6841 content blocks, 6119 rendered table rows, **0 problems** |
 | `git diff --check` | clean |
 | Builder determinism | every builder re-run leaves a zero diff (`git status` empty after verify_all) |
-| 11/13 finals promotion | 9/9 games, promoted only after **two independent reads** of `https://www.nba.com/games?date=2026-11-13` agreed on every field (runs 43582803797 + 43583126263, embedded-JSON parse, 0 unparsed, page sha256s recorded in `data/audit/finals_2026_11_13_verification.json`) |
+| 11/13 finals promotion | 9/9 games, promoted only after **two independent reads** of `https://www.nba.com/games?date=2026-11-13` agreed on every field (runs 43582803797 + 43583126263, embedded-JSON parse, 0 unparsed, page sha256s recorded in `data/audit/finals_2026_11_13_verification.json`). **Third-source cross-check** after merging PR #56: `data/verified/finals_2026-11-13.json` (session `arena/cfb25ff0-nba1`, row-by-row against the schedule + each game page) matches the promoted snapshot **9/9 games, every field** — three independent verifications agree. |
 | Settlement arithmetic | all 9 rows hand-recomputed against the finals (side 5-2, spread 3-4, 2 PASS); PASS never counted win/loss |
 
-#### 20.5 Sources used (official)
+#### 21.5 Sources used (official)
 
 | Input | Source |
 | --- | --- |
@@ -1720,9 +1787,9 @@ ACTIVE CLAIM block at the top of this file; this section holds the log.
 | Command Center horizon value | `command-center/data/meta.json` (committed metadata, generated from nba.com/schedule captures) |
 | Everything else | unchanged committed captures re-verified by the gate suite; no new value entered the tree without an official URL |
 
-#### 20.6 Open items handed on (do not block; published as flags)
+#### 21.6 Open items handed on (do not block; published as flags)
 
 1. **Ratings/records window still ends 11/12** on the horizon pages (F-C02): the 11/13 finals are now promoted (`data/raw/games_completed_2026-11-13.json`) and can feed the next ratings refresh; the horizon lines keep their stale-record flags until a model re-run is deliberately taken. Choice between the two published postures (abstention vs gated picks) remains a reviewer decision (suggestions.html item 9).
 2. **42 verify_integration warnings** (161 broad-scan row-triage items): published on the Flagged page; they must never be silenced by inferring values.
 3. **`docs/pages/strategies.html` "Reward payable: None"** — deliberate English; scan false positive.
-4. **PRs #37/#42/#45/#53 closed as superseded** with credit (content taken over per 20.1/20.2); PR #11-era collisions and F-C06 model outlier (CHI@MIN) remain flagged, untouched.
+4. **PRs #37/#42/#45/#53 closed as superseded** with credit (content taken over per 21.1/21.2); PR #11-era collisions and F-C06 model outlier (CHI@MIN) remain flagged, untouched.
