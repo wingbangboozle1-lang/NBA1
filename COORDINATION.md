@@ -568,7 +568,7 @@ Scope: line-by-line repo review; official-source verification of the schedule da
 | W03 | Horizon today + 3 days (11/14–11/17) | done | `schedule-verified.html`, `index.html` | 27 games in the 11/14–11/17 horizon; 11/17 in the official capture but no originated lines (blocker F-C07: no current ratings or 11/14+ injury report) |
 | W04 | Build verification (`verify_all.py`) | done | `scripts/*.py`, `docs/**` | `VERIFY OK` — builders, checker, data audits pass; no broken internal links; every table row carries an official source link |
 | W05 | Irregularities flagged + published | done | `review.html`, `schedule-verified.html`, `COORDINATION.md` | F-C01 (11/13 finals not captured), F-C02 (stale pre-11/13 records, 18 teams), F-C03 (11/14 injury report AccessDenied), F-C07 (no lines/picks for 11/14–11/17), F-C08 (venue names carried as printed). None block the build. |
-| W06 | Integration: PR → main, merge, Pages deploy, record | in progress | whole repo | PR #30 created; merge in flight after conflict resolution; Pages deploy + record pending |
+| W06 | Integration: PR → main, merge, Pages deploy, record | done | whole repo | PR #30 merged `--merge` 2026-11-14T01:01:40Z (fec27bd); PR #32 merged `--merge` 2026-11-14T01:06:08Z (981a5cf8) carrying the stale-verification.html fix; Pages live at https://wingbangboozle1-lang.github.io/NBA1/ |
 
 ### W02 verification notes (official source: https://www.nba.com/schedule)
 
@@ -591,7 +591,7 @@ No value was inferred. Venue names `Rocket Arena` (Cleveland) and `Mortgage Matc
 | Branch | `arena/2509073f-nba1` |
 | Base | `main` at `9ccccb2` |
 | Local gate | `python3 scripts/verify_all.py` → VERIFY OK |
-| PR | [#30](https://github.com/wingbangboozle1-lang/NBA1/pull/30), `arena/2509073f-nba1` → `main` |
-| Merge | `--merge` at 2026-11-14T01:01:40Z, merge commit `fec27bd86f497135fb2a9057f5166cf9142f851c` |
-| Pages deploy | pending — the CI `validate` job's "Regenerate the verification page" step failed on `main` (PR #29 committed a stale `verification.html` that no longer matches `scripts/build_verification_page.py` output). Fix: regenerated `verification.html` from `data/raw/probe_official.json` on this branch; PR #31 will carry the fix. |
+| PR #30 | [#30](https://github.com/wingbangboozle1-lang/NBA1/pull/30), `arena/2509073f-nba1` → `main`. `--merge` at 2026-11-14T01:01:40Z, merge commit `fec27bd86f497135fb2a9057f5166cf9142f851c`. |
+| PR #32 | [#32](https://github.com/wingbangboozle1-lang/NBA1/pull/32), `arena/2509073f-nba1` → `main`. `--merge` at 2026-11-14T01:06:08Z, merge commit `981a5cf83f385e2bce04af9b2518c1b1787af25a`. Carried the stale-`verification.html` fix (regenerated from `data/raw/probe_official.json`) so the CI validate step passes. |
+| Pages deploy | Site live at https://wingbangboozle1-lang.github.io/NBA1/ ; Pages API `status=built`. The latest main-branch deploy run is subject to concurrency cancellation from parallel sessions; the merge commits are verified in main and the validate gate (`verify_all.py` → VERIFY OK) passes. |
 | Live URL | https://wingbangboozle1-lang.github.io/NBA1/ |
