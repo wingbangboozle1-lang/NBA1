@@ -2049,3 +2049,14 @@ four pages re-read by this session: <https://www.nba.com/games?date=2026-10-24>,
 | R-26-5 | Grade strategies against the originated line (exact Poisson-binomial excess + BH across the library), not against a break-even constant | gate owner + integration seat | A hit rate vs 0.5238 flatters any favourite-backer; T01-T03 look like 69-78% win rates and are not significant against the line |
 | R-26-6 | Add `strategy-lab/**` to the nav as one more section, or fold its tables into the site build, whenever the site is next regenerated | integration seat | `scripts/build_dashboard.py` regenerates `index.html` and `site/**` and would erase a hand edit; nothing in this session touched those paths |
 | R-26-7 | A dated, licensed closing-price source (or a written decision to keep the site price-free permanently) | project owner | The only thing that can close gate GG; until then no strategy anywhere in the repository can be called a market edge |
+
+### 26d. Branch bookkeeping, recorded so nothing is hidden
+
+`04c14f9` — the `probe-official.yml` workflow's own commit ("record official-source reachability probe
+[skip probe] [skip ci]") landed on `arena/a3e092a2-nba1` and touched `data/raw/probe_official.json` and
+`verification.html`, both outside this session's scope. It is **not** carried into the PR: `origin/main`
+already has a newer probe record (`5ea615f`), so merging the branch's copy would push a stale capture into
+two shared files that other sessions and the workflow own. The branch was therefore updated by force-push
+with `--force-with-lease`, dropping that one CI commit and nothing else; no session's record was discarded,
+and the dropped commit remains reachable on `origin/arena/a3e092a2-nba1`'s reflog history until the next
+push. This is the same `probe-official.yml` interference §18 and §21 logged.
