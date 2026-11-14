@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repository review &middot; NBA Line Origination Desk</title>
+<meta name="description" content="NBA lines originated from official NBA.com final scores, with a gated strategy leaderboard.">
+<link rel="stylesheet" href="../assets/style.css">
+
+</head><body>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html"><span class="dot"></span>NBA&nbsp;Line&nbsp;Origination&nbsp;Desk</a>
+  <div class="cap">Official capture 2026-11-14 00:42 UTC</div>
+  <nav><div class="navgroup"><h4>Overview</h4><ul>
+<li><a href="../index.html">Executive dashboard</a></li>
+</ul></div>
+<div class="navgroup"><h4>Lines and game flow</h4><ul>
+<li><a href="lines.html">Originated lines</a></li>
+<li><a href="gameflow.html">Game flow and rest</a></li>
+</ul></div>
+<div class="navgroup"><h4>Strategy lab</h4><ul>
+<li><a href="strategies.html">Strategy library</a></li>
+<li><a href="leaderboard.html">Leaderboard and rewards</a></li>
+<li><a href="gates.html">Validation gates</a></li>
+<li><a href="luck.html">Luck removal and power</a></li>
+<li><a href="signals.html">Signal study</a></li>
+</ul></div>
+<div class="navgroup"><h4>Model and data</h4><ul>
+<li><a href="teams.html">Team ratings</a></li>
+<li><a href="backtest.html">Walk-forward backtest</a></li>
+<li><a href="gamelog.html">Official game log</a></li>
+<li><a href="correlations.html">Correlations and parlays</a></li>
+<li><a href="method.html">Method</a></li>
+</ul></div>
+<div class="navgroup"><h4>Availability</h4><ul>
+<li><a href="injuries.html">Injuries and rotation</a></li>
+<li><a href="props.html">Player props</a></li>
+</ul></div>
+<div class="navgroup"><h4>Governance</h4><ul>
+<li><a href="questions.html">Open questions</a></li>
+<li><a href="suggestions.html">Suggestions</a></li>
+<li><a href="sources.html">Source register</a></li>
+<li><a href="flagged.html">Flagged for review</a></li>
+<li><a class="active" href="repo-review.html">Repository review</a></li>
+</ul></div></nav>
+  <div class="sidenote">
+    Every table row links to the official page it was read from.
+    A dash means the value is not published, not that it is zero.
+  </div>
+</aside>
+<main class="main">
+  <header class="top">
+    <h1>Repository review</h1>
+    <p class="sub">A line-by-line read of the repository at the base commit, with links for manual review.</p>
+  </header>
+  <div class="banner">
+    <strong>No strategy is funded.</strong> All 12 flagged items and every unvalidated number are published
+    <a href="flagged.html">here</a>. There is no market odds feed, so nothing on this site is a claim of real-world profit.
+  </div>
+  
+<section class="card">
+  <h3>Repository review</h3>
+  <h2>Repository review — line by line, against official sources</h2>
+<p>Reviewing session: <code>arena/e32856d8-nba1</code>. Base reviewed: <code>main</code> @ <code>2f44c98</code> (2026-11-14).</p>
+<p>Official capture window: 2026-11-14 00:30–00:50 UTC.</p>
+<h3>1. How this review was done</h3>
+<p>Every file in the repository was opened and read. Every data file was parsed and its</p>
+<p>contents compared against the official page it claims to come from. Where a value in the</p>
+<p>repository could be traced to an official page and matched, it is marked <strong>verified</strong>. Where</p>
+<p>it could be traced but did not match, or where the claimed source does not publish that</p>
+<p>value, it is marked <strong>unverified</strong> and listed in §4. Nothing was inferred to fill a gap.</p>
+<p>Official hosts used for verification:</p>
+<ul class="plain">
+<li><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">https://www.nba.com/games?date=YYYY-MM-DD</a> — final scores, game IDs, tip times, printed records</li>
+<li><a href="https://www.nba.com/standings" target="_blank" rel="noopener">https://www.nba.com/standings</a> — official wins and losses</li>
+<li><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">https://official.nba.com/nba-injury-report-2026-27-season/</a> — injury report index and reporting policy</li>
+<li><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">https://www.nba.com/stats/players/traditional</a> — player season averages (partially readable)</li>
+</ul>
+<p>Sources that could <strong>not</strong> be re-read and are therefore treated as unverifiable this session:</p>
+<p>stats.nba.com JSON endpoints (blocked), and all NBA.com Stats HTML tables (rendered</p>
+<p>client-side; only page chrome is returned). This is an environment limitation, not a claim</p>
+<p>that the earlier captures were wrong — but it does mean nothing in this build may depend on</p>
+<p>them.</p>
+<h3>2. Inventory and verdict</h3>
+<h4>2.1 Root HTML (Build A, session `arena-7cfd203a`)</h4>
+<div class="tablewrap"><table class="tbl" data-sortable><thead><tr><th>File</th><th>Lines</th><th>Verdict</th><th>Note</th><th>Source</th></tr></thead><tbody><tr><td><code>index.html</code></td><td>22 KB</td><td>verified as of capture</td><td>Dashboard shell. Every internal link resolves, including the &amp;quot;OFFICIAL SNAPSHOT&amp;quot; link to <code>docs/index.html</code>, which does exist. Left in place by this build.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/index.html" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>lines.html</code></td><td>60 KB</td><td>partially verified</td><td>Originated lines and parlays. Parlay joint probabilities are bounds, not measurements (R7).</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/lines.html" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>gameflow.html</code></td><td>61 KB</td><td>partially verified</td><td>Rest and schedule density are correct; &amp;quot;rotation impact&amp;quot; figures are modelled, not official (R5).</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/gameflow.html" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>research.html</code></td><td>14 KB</td><td>verified</td><td>Methods narrative consistent with the data files.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/research.html" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>slate.html</code></td><td>6 KB</td><td>verified</td><td></td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/slate.html" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>review.html</code></td><td>16 KB</td><td>superseded by this document</td><td></td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/review.html" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>sources.html</code></td><td>7 KB</td><td>verified</td><td>All links resolve to official hosts.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/sources.html" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>suggestions.html</code></td><td>13 KB</td><td>verified</td><td></td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/suggestions.html" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>app.js</code> / <code>styles.css</code> / <code>subpages.css</code></td><td>small</td><td>verified</td><td>No external requests; safe in a sandboxed iframe.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/app.js" target="_blank" rel="noopener">file</a></td></tr></tbody></table></div>
+<h4>2.2 Build B (`docs/b/`, session `arena/91270bb6-nba1`)</h4>
+<p>17 pages and 17 JSON data files under <code>docs/data/</code>. Pages render and internal links resolve.</p>
+<p>Two data problems: <code>docs/data/backtest.json</code> is explicitly labelled &quot;CONTAMINATED — inputs are</p>
+<p>season-to-date and include the tested games&quot;, which is the honest and correct label (R8); and</p>
+<p>the totals conclusion flips when the evaluation window grows from 28 to 51 games, which is</p>
+<p>recorded in the build&#x27;s own notes and is a genuine instability, not an error.</p>
+<h4>2.3 Data files</h4>
+<div class="tablewrap"><table class="tbl" data-sortable><thead><tr><th>File</th><th>Verdict</th><th>Note</th><th>Source</th></tr></thead><tbody><tr><td><code>data/games.json</code> (23 fixtures, 11-13 to 11-15)</td><td><strong>verified</strong></td><td>Every game ID, tip time and printed record matches the official schedule page.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/games.json" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>data/played_games_2026_11_11_12.json</code></td><td><strong>verified</strong></td><td>Scores re-checked against <code>?date=2026-11-11</code> and <code>?date=2026-11-12</code>.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/played_games_2026_11_11_12.json" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>data/raw/games_completed.json</code> (51 games)</td><td><strong>verified</strong></td><td>All 51 scores this session re-read from the official pages matched exactly.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/games_completed.json" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>data/raw/sources.json</code> (S1-S37 register)</td><td><strong>verified</strong></td><td>All hosts official.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/sources.json" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>data/raw/players_traditional.json</code></td><td><strong>unverifiable</strong></td><td>Page 1 only: 50 of 465 players. Not usable as a population.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/players_traditional.json" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>data/raw/team_advanced.json</code></td><td><strong>unverifiable</strong></td><td>Two windows captured. Efficiency is per-100-possession; possessions are not published on any page reachable here.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/team_advanced.json" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>data/raw/injuries.json</code></td><td><strong>superseded</strong></td><td>11/13/26 05:15 PM edition. A newer edition (07:30 PM, 122 rows) exists and is what this build uses.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/injuries.json" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>data/derived/injury_impact.json</code></td><td><strong>unverified, flagged</strong></td><td>Contains assumed constants (<code>production_transfer = 0.55</code>, a <code>status</code> to <code>probability</code> mapping). These are not official values and the output rows do not label them as assumptions. See R5.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/injury_impact.json" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>data/derived/backtest.json</code></td><td><strong>unverified, flagged</strong></td><td>Self-labelled contaminated (look-ahead bias). See R8.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/backtest.json" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>data/derived/lines.json</code></td><td><strong>partially verified</strong></td><td>62 prop rows, all correctly marked <code>BLOCKED</code>.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/lines.json" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>data/derived/correlations.json</code></td><td><strong>verified as far as it goes</strong></td><td>Correctly separates measured (Tier A), structural (Tier B) and not-computable (Tier C) values. This separation is the right discipline and is carried forward.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/correlations.json" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>data/originated_lines.json</code></td><td><strong>partially verified</strong></td><td><code>home_court_points = 2.5</code>, <code>sigma = 11.0</code>, <code>smoothing</code> and <code>scale_K</code> are this project&amp;#x27;s assumptions and the file says so. Good labelling; keep it.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/originated_lines.json" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>data/flags.json</code> (24 items)</td><td><strong>verified</strong></td><td>Superseded by the 12-item set on the new site, which was re-derived.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/flags.json" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>data/summary.json</code>, <code>data/content/*.json</code></td><td><strong>verified</strong></td><td>Narrative content, consistent.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/summary.json" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>data/teams_scoring_2026_27.json</code>, <code>data/teams_advanced_2026_27.json</code></td><td><strong>unverifiable</strong></td><td>Client-side tables. Not used by this build.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/teams_advanced_2026_27.json" target="_blank" rel="noopener">file</a></td></tr></tbody></table></div>
+<h4>2.4 Code</h4>
+<div class="tablewrap"><table class="tbl" data-sortable><thead><tr><th>Path</th><th>Verdict</th><th>Note</th><th>Source</th></tr></thead><tbody><tr><td><code>scripts/*.py</code> (Build A, 12 files)</td><td><strong>reviewed</strong></td><td><code>injury_impact.py</code> hard-codes the assumed constants in R5. <code>verify_*.py</code> check internal consistency, not external truth.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>engine/*.py</code> (Build B, 10 files)</td><td><strong>reviewed</strong></td><td><code>model_core.py</code> walk-forward is correctly specified; <code>validate.py</code> gates are conjoined. <code>fetch_official.py</code> is unreachable from this sandbox, so <code>refresh-data.yml</code> has never run (R9).</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>.github/workflows/pages.yml</code></td><td><strong>verified</strong></td><td>Deploys from the repository root, path <code>.</code>. This is why this build renders <code>index.html</code> at the root.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/pages.yml" target="_blank" rel="noopener">file</a></td></tr><tr><td><code>.github/workflows/refresh-data.yml</code></td><td><strong>never executed</strong></td><td>R9.</td><td><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml" target="_blank" rel="noopener">file</a></td></tr></tbody></table></div>
+<h3>3. What this review confirms is sound</h3>
+<p>1. <strong>Source discipline.</strong> Every data file carries a <code>source_url</code> or <code>src_*</code> field pointing at</p>
+<p>   an official host. No file cites a non-official source as if it were official. This is the</p>
+<p>   single most important property of the repository and it holds throughout.</p>
+<p>2. <strong>Honest self-labelling.</strong> Three separate places label their own output as not valid</p>
+<p>   (<code>backtest.json</code> &quot;CONTAMINATED&quot;, <code>derived/lines.json</code> props &quot;BLOCKED&quot;,</p>
+<p>   <code>originated_lines.json</code> &quot;all parameters are this project&#x27;s assumptions&quot;). A reviewer can</p>
+<p>   tell what is a measurement and what is an assumption without reading the code.</p>
+<p>3. <strong>Correlation discipline.</strong> <code>derived/correlations.json</code> separates what was measured from</p>
+<p>   what was derived from marginals from what cannot be computed at all. Most projects blur</p>
+<p>   these three. This one does not.</p>
+<p>4. <strong>No fabricated results.</strong> Across both prior builds, no strategy is reported as validated.</p>
+<p>   Given the sample sizes available, that is the correct answer.</p>
+<h3>4. Irregularities</h3>
+<p>Severity: <strong>High</strong> = a published number could mislead; <strong>Medium</strong> = a limitation that must be</p>
+<p>stated; <strong>Low</strong> = housekeeping.</p>
+<h4>R1 — High — 23 games are published by NBA.com as fixtures with no score</h4>
+<p><code>?date=2026-10-24</code> (8 games, IDs <code>0022600104</code>–<code>0022600111</code>) and <code>?date=2026-11-02</code></p>
+<p>(15 games, IDs <code>0022600158</code>–<code>0022600172</code>) render as FINAL with a dash in every score, record</p>
+<p>and leader cell, and with no HIDE SCORES / HIDE ODDS toggles present. Reproduced twice,</p>
+<p>40 minutes apart, across every chunk. Link:</p>
+<p><a href="https://www.nba.com/games?date=2026-10-24" target="_blank" rel="noopener">?date=2026-10-24</a> ·</p>
+<p><a href="https://www.nba.com/games?date=2026-11-02" target="_blank" rel="noopener">?date=2026-11-02</a>.</p>
+<p>These 23 results are <strong>determinable</strong> from the official standings residual (see R3) but are</p>
+<p><strong>not published</strong>, so this project records them as fixtures with blank scores. Any other</p>
+<p>project filling them in from the standings would be inferring an official value, which this</p>
+<p>project does not do. Cross-references F1.</p>
+<h4>R2 — Medium — five or more parallel builds now occupy one repository, most of them reachable</h4>
+<p>At <code>2f44c98</code> there was a dated-snapshot build at the repository root and in <code>docs/</code>, and a</p>
+<p>second build under <code>docs/b/</code>. <code>pages.yml</code> deploys from the repository root, so the root build</p>
+<p>is what the public URL serves. While this review was being written, <code>main</code> advanced 91 commits</p>
+<p>across at least six further sessions, adding <code>command-center/</code>, <code>integration/</code>, <code>desk*.html</code>,</p>
+<p><code>verification.html</code> and <code>schedule-verified.html</code> to the same root.</p>
+<p>This is the single biggest risk in the repository: several sessions are writing the same paths</p>
+<p>with different numbers, and nothing arbitrates between them. **This build therefore claims one</p>
+<p>namespace, <code>origination/</code>, and leaves the root exactly as it found it.** An earlier draft that</p>
+<p>moved the root pages to <code>archive/build-a/</code> was reverted, because those files are owned by</p>
+<p>sessions whose pull requests are still open. See suggestion G10.</p>
+<h4>R3 — Medium (positive finding, recorded for audit) — the game log reconciles exactly</h4>
+<p>151 captured final scores plus the 23 unpublished fixtures = 174 games, which equals the sum</p>
+<p>of official wins across all 30 teams on</p>
+<p><a href="https://www.nba.com/standings" target="_blank" rel="noopener">the standings page</a>. Per-team game counts reconstructed from</p>
+<p>the log match the standings for all 30 teams. This is the strongest available evidence that</p>
+<p>the log is complete and correctly oriented, and it is the anchor for every number on the new</p>
+<p>site.</p>
+<h4>R4 — High — no market odds exist from any official source</h4>
+<p><code>data/strategies.json</code> gates G4 (beat a no-skill baseline) and G5 (closing-line value) are</p>
+<p>marked <strong>Blocked</strong>, correctly. No official NBA property publishes betting prices. Every &quot;ROI&quot;</p>
+<p>anywhere in this repository — in either build — is therefore ROI against <strong>our own</strong> price,</p>
+<p>not against a market. Cross-references F2.</p>
+<h4>R5 — High — injury impact is modelled with assumed constants, and the output rows do not say so</h4>
+<p><code>data/derived/injury_impact.json</code> and <code>scripts/injury_impact.py</code> apply a</p>
+<p><code>status → probability of playing</code> mapping (<code>Out</code> 0.00, <code>Doubtful</code> 0.25, <code>Questionable</code> 0.50,</p>
+<p><code>Probable</code> 0.80, <code>Available</code> 1.00) and a <code>production_transfer</code> of 0.55, redistributing minutes</p>
+<p>proportionally to teammates&#x27; existing minutes. None of those five numbers appears on any</p>
+<p>official page. The sensitivity table shows how much they matter: for GSW@SAS the originated</p>
+<p>spread moves from 13.3 to 18.9 points as <code>production_transfer</code> goes 0.35 → 0.55. That is a</p>
+<p>6.6-point swing driven entirely by an invented parameter. This build therefore applies</p>
+<p><strong>no</strong> injury adjustment to any originated line and states that on the lines page.</p>
+<p>Cross-references F8.</p>
+<h4>R6 — High — player production is not available in game-by-game form</h4>
+<p>The only player data in the repository is two partial season-average leaderboards: 50 players</p>
+<p>by scoring and 24 by minutes, out of 465. Neither is a game log. A prop line is a point on a</p>
+<p>distribution, and a season average says nothing about the shape of that distribution, so no</p>
+<p>prop line can be originated honestly. Both prior builds correctly mark props as blocked.</p>
+<p>Cross-references F3.</p>
+<h4>R7 — Medium — parlay joint probabilities are bounds, not measurements</h4>
+<p><code>data/originated_lines.json</code> parlays carry <code>joint_lb</code> and <code>joint_ub</code> computed from the</p>
+<p>marginals via Fréchet–Hoeffding bounds — for example a two-leg parlay at p1 = 0.838,</p>
+<p>p2 = 0.747 gives a joint between 0.585 and 0.747, i.e. fair odds anywhere from 1.34 to 1.71.</p>
+<p>That is a correct and honest computation, but the range is wide enough to be unpriceable.</p>
+<p>This build measures the joint directly instead; see the correlations page. Cross-references</p>
+<p>F9.</p>
+<h4>R8 — Medium — the Build A backtest is contaminated, and says so</h4>
+<p><code>data/derived/backtest.json</code> reports MAE 14.06 on totals and 12.36 on margin over 14 games,</p>
+<p>and labels itself &quot;CONTAMINATED — inputs are season-to-date and include the tested games&quot;,</p>
+<p>with the verdict &quot;NOT VALIDATION. Look-ahead bias is present&quot;. Correctly labelled. This build</p>
+<p>replaces it with a walk-forward backtest in which every forecast is fitted only on strictly</p>
+<p>earlier games (G5, mechanically enforced).</p>
+<h4>R9 — Low — the scheduled refresh has never run</h4>
+<p><code>.github/workflows/refresh-data.yml</code> is scheduled but <code>engine/fetch_official.py</code> cannot reach</p>
+<p>the network from this sandbox, and the workflow has no recorded successful run. Every figure</p>
+<p>on the new site is from a single manual capture at 2026-11-14 00:42 UTC. Cross-references F7.</p>
+<h4>R10 — Low — roster/leader attributions that look like errors but are not</h4>
+<p>The captured leader tables attribute Anthony Davis to WAS, Giannis Antetokounmpo to MIA,</p>
+<p>LaMelo Ball to MIN, Naz Reid to CHA, Darius Garland to LAC, Paul George to PHI, Kevin Durant</p>
+<p>to HOU and Damian Lillard to POR. These come from official pages as captured and are recorded</p>
+<p>as captured; they are not corrected, because correcting them would be an inference. Flagged</p>
+<p>for a human to sanity-check against the actual roster pages. Cross-references F11.</p>
+<h4>R11 — Low — a neutral-site game is mixed into the home/away log</h4>
+<p>2026-11-07 DEN@IND was played in Mexico City. The model zeroes home-court advantage for it.</p>
+<p>Cross-references F12.</p>
+<h4>R12 — Medium — this build deliberately does not own the root</h4>
+<p>The root build&#x27;s pages (<code>lines.html</code>, <code>gameflow.html</code>, <code>sources.html</code> and so on) sit at the</p>
+<p>same paths GitHub Pages serves from, and other sessions are editing them right now. Rather</p>
+<p>than displace them, this build publishes under <code>origination/</code> and touches no shared path.</p>
+<p>The cost is that the public landing page at <code>/NBA1/</code> is not this build; the benefit is that</p>
+<p>nothing here can break another session&#x27;s site. Resolving that is a coordination decision,</p>
+<p>not a technical one — see suggestion G10.</p>
+<h3>5. What this build changes</h3>
+<ul class="plain">
+<li>Replaces both prior backtests with one walk-forward evaluation over 101 out-of-sample games.</li>
+<li>Replaces assumed injury adjustments with no adjustment at all, and says so.</li>
+<li>Replaces parlay bounds with a measured joint probability and a measured same-slate</li>
+<p>  correlation.</p>
+<li>Adds a Monte-Carlo null for every strategy and a statistical power calculation for every</li>
+<p>  signal, so that &quot;not significant&quot; is distinguished from &quot;not enough data&quot;.</p>
+<li>Publishes a 12-item flagged register, a 14-item question register split by known/unknown,</li>
+<p>  and a 12-item ranked suggestions list.</p>
+<li>Publishes under <code>origination/</code> and leaves every shared path untouched, so that it can be</li>
+<p>  merged without displacing any other session&#x27;s root build.</p>
+</ul>
+</section>
+
+  <footer class="foot">
+    <p>Session <code>arena/e32856d8-nba1</code>. Official capture 2026-11-14 00:42 UTC.
+    Model inputs: official NBA.com final scores and schedule only.
+    <a href="sources.html">Source register</a> &middot;
+    <a href="method.html">Method</a> &middot;
+    <a href="flagged.html">Flagged for review</a> &middot;
+    <a href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">Repository</a></p>
+  </footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

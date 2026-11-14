@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open questions &middot; NBA Line Origination Desk</title>
+<meta name="description" content="NBA lines originated from official NBA.com final scores, with a gated strategy leaderboard.">
+<link rel="stylesheet" href="../assets/style.css">
+
+</head><body>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html"><span class="dot"></span>NBA&nbsp;Line&nbsp;Origination&nbsp;Desk</a>
+  <div class="cap">Official capture 2026-11-14 00:42 UTC</div>
+  <nav><div class="navgroup"><h4>Overview</h4><ul>
+<li><a href="../index.html">Executive dashboard</a></li>
+</ul></div>
+<div class="navgroup"><h4>Lines and game flow</h4><ul>
+<li><a href="lines.html">Originated lines</a></li>
+<li><a href="gameflow.html">Game flow and rest</a></li>
+</ul></div>
+<div class="navgroup"><h4>Strategy lab</h4><ul>
+<li><a href="strategies.html">Strategy library</a></li>
+<li><a href="leaderboard.html">Leaderboard and rewards</a></li>
+<li><a href="gates.html">Validation gates</a></li>
+<li><a href="luck.html">Luck removal and power</a></li>
+<li><a href="signals.html">Signal study</a></li>
+</ul></div>
+<div class="navgroup"><h4>Model and data</h4><ul>
+<li><a href="teams.html">Team ratings</a></li>
+<li><a href="backtest.html">Walk-forward backtest</a></li>
+<li><a href="gamelog.html">Official game log</a></li>
+<li><a href="correlations.html">Correlations and parlays</a></li>
+<li><a href="method.html">Method</a></li>
+</ul></div>
+<div class="navgroup"><h4>Availability</h4><ul>
+<li><a href="injuries.html">Injuries and rotation</a></li>
+<li><a href="props.html">Player props</a></li>
+</ul></div>
+<div class="navgroup"><h4>Governance</h4><ul>
+<li><a class="active" href="questions.html">Open questions</a></li>
+<li><a href="suggestions.html">Suggestions</a></li>
+<li><a href="sources.html">Source register</a></li>
+<li><a href="flagged.html">Flagged for review</a></li>
+<li><a href="repo-review.html">Repository review</a></li>
+</ul></div></nav>
+  <div class="sidenote">
+    Every table row links to the official page it was read from.
+    A dash means the value is not published, not that it is zero.
+  </div>
+</aside>
+<main class="main">
+  <header class="top">
+    <h1>Open questions</h1>
+    <p class="sub">14 decisions blocked by missing information, each with a way to unblock it.</p>
+  </header>
+  <div class="banner">
+    <strong>No strategy is funded.</strong> All 12 flagged items and every unvalidated number are published
+    <a href="flagged.html">here</a>. There is no market odds feed, so nothing on this site is a claim of real-world profit.
+  </div>
+  
+<section class="card">
+  <h3>Decisions that cannot be made yet</h3>
+  <p>Every row states what is known, what is not, why the gap blocks a decision, and the cheapest way to close it.
+  &ldquo;Known&rdquo; is limited to what an official source publishes. Where the answer would require inference the
+  row says so instead of offering one.</p>
+</section>
+<section class="card">
+  <div class="tablewrap"><table class="tbl" data-sortable><thead><tr><th></th><th>Question</th><th>What we know</th><th>What we do not know</th><th>Why it blocks a decision</th><th>How to find out</th><th>Source</th></tr></thead><tbody><tr><td><span class="badge b-blocking">Blocking</span></td><td><a id="Q1"></a><strong>Q1. Is there any market price to beat?</strong></td><td>We can originate a line. We have no sportsbook price for any game, from any official source, at any point in time.</td><td>The closing spread, total and moneyline for every game we score; the vig; whether our line would even be off-market.</td><td>Every claim of edge on this site is measured against our own number. Without a market price we cannot know whether our line is better or worse than the one a bettor could actually take.</td><td>Decide whether to buy an odds feed. If not, reframe the whole project explicitly as an internal signal lab and stop using the word &#x27;profitable&#x27;.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official source</a></td></tr><tr><td><span class="badge b-blocking">Blocking</span></td><td><a id="Q2"></a><strong>Q2. How many games do we need before a strategy can be promoted?</strong></td><td>101 out-of-sample games; minimum detectable ROI at 80% power of 79-118% depending on the strategy.</td><td>The sample at which the rest signal (currently p = 0.130, about 340 games needed) would resolve.</td><td>Promoting anything on this sample is promoting noise. The power table is the answer to &#x27;when is it safe to fund?&#x27;</td><td>Fix the promotion threshold now, in public, from the power table: no strategy is funded below the sample at which its own minimum detectable ROI falls under its observed ROI.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">official source</a></td></tr><tr><td><span class="badge b-high">High</span></td><td><a id="Q3"></a><strong>Q3. Do we have player-level data at all, and if not, do we want props?</strong></td><td>Two partial official leaderboards: top 50 scorers (season averages) and top 24 by minutes. No game log.</td><td>Every per-game player outcome. Whether a paid box-score feed is in scope.</td><td>Player props are roughly half the modern betting menu and 100% of same-game-parlay demand. We cannot originate a single one without a game log.</td><td>Price a box-score feed. If declined, close the props workstream rather than leaving it open, and say so on the site.</td><td><a class="src" href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">official source</a></td></tr><tr><td><span class="badge b-high">High</span></td><td><a id="Q4"></a><strong>Q4. What are the 23 missing scores worth chasing?</strong></td><td>The fixtures for 2026-10-24 and 2026-11-02 are official; the results are not published on the pages we can read. The standings residual does determine them, but using it would be inference.</td><td>Whether NBA.com will republish the scores, and whether any other official page carries them.</td><td>23 games is 13% of the season to date. It is the single cheapest available increase in statistical power.</td><td>Re-fetch both dates daily for a week. If they never appear, try the box-score page for each of the 23 game IDs, then record them permanently as unavailable.</td><td><a class="src" href="https://www.nba.com/games?date=2026-10-24" target="_blank" rel="noopener">official source</a></td></tr><tr><td><span class="badge b-high">High</span></td><td><a id="Q5"></a><strong>Q5. Should the model use possessions when they become available?</strong></td><td>Current ratings are points-per-game scale with opponent adjustment; they beat a naive baseline on MAE (12.43 vs 14.28) and Brier (0.206 vs 0.250).</td><td>Whether a possessions-based rating would beat the points-based one out of sample.</td><td>Pace is a real, large effect. A team that plays fast scores more without being better, and a points-per-game model mis-reads that.</td><td>Add possessions to the raw capture, then run the same walk-forward against the current model and publish the comparison before switching.</td><td><a class="src" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">official source</a></td></tr><tr><td><span class="badge b-medium">Medium</span></td><td><a id="Q6"></a><strong>Q6. Is a 4-percentage-point edge the right trigger to trade?</strong></td><td>The full grid (2 / 3 / 4 points) is published. Smaller triggers produce more bets and thinner edges; larger triggers produce almost no bets at all on this sample.</td><td>The realised relationship between trigger size and edge at a sample large enough to measure it.</td><td>The trigger decides how much of the season is traded. Get it wrong and a real signal is either diluted below noise or never traded at all.</td><td>Fix the trigger by rule, not by result: choose the smallest trigger whose minimum detectable ROI at the current sample is below the plausible true edge. Revisit only when the sample triples.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">official source</a></td></tr><tr><td><span class="badge b-medium">Medium</span></td><td><a id="Q7"></a><strong>Q7. How should the leaderboard reward a strategy that is merely unproven?</strong></td><td>Four reward tiers are defined; every live cell is currently in Tier 0 or Tier 1. The gates are conjoined - failing any one blocks promotion.</td><td>Whether the tiers produce the behaviour we want once a strategy is genuinely close to passing.</td><td>A leaderboard that only ever says &#x27;no&#x27; stops being a competition. A leaderboard that promotes on noise is worse than none.</td><td>Add a paper-trading tier with a fixed nominal stake so unproven strategies are still ranked and tracked, and keep real staking behind the conjoined gates.</td><td><a class="src" href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">official source</a></td></tr><tr><td><span class="badge b-medium">Medium</span></td><td><a id="Q8"></a><strong>Q8. Do we treat the NBA Cup as a different competition?</strong></td><td>The official schedule labels certain 2026-11-13 games &#x27;Emirates NBA Cup&#x27; with group names, and the standings table carries an NBA Cup section.</td><td>Whether Cup games are played at different intensity, and whether the ratings should be fitted on them separately.</td><td>If Cup games differ, mixing them into one rating set adds noise to every future line.</td><td>Tag every game with its Cup status in the raw capture, then test whether Cup games have a different residual distribution before deciding.</td><td><a class="src" href="https://www.nba.com/nba-cup/2026" target="_blank" rel="noopener">official source</a></td></tr><tr><td><span class="badge b-medium">Medium</span></td><td><a id="Q9"></a><strong>Q9. How do we handle a team whose rating rests on very few games?</strong></td><td>Ratings shrink toward zero with 4 pseudo-games; the sensitivity table over K = 1..32 is published and K = 4 is the best of that grid on MAE.</td><td>The right shrinkage once teams have played 30, 50 or 82 games.</td><td>Early-season lines are the ones most likely to be wrong, and they are the ones being published now.</td><td>Re-run the sensitivity sweep monthly and publish it. Keep the declared value fixed between sweeps.</td><td><a class="src" href="https://www.nba.com/standings" target="_blank" rel="noopener">official source</a></td></tr><tr><td><span class="badge b-medium">Medium</span></td><td><a id="Q10"></a><strong>Q10. What is the actual cost of a wrong line?</strong></td><td>Staking rules exist (half unit / full unit by tier). No bankroll, no stake size and no risk limit has been set.</td><td>Bankroll size, maximum exposure per slate, maximum drawdown tolerance.</td><td>Without a bankroll the tier system has no meaning: &#x27;one unit&#x27; is undefined.</td><td>Set a bankroll, a unit size and a per-slate exposure cap, then restate the tier stakes as currency rather than units.</td><td><a class="src" href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">official source</a></td></tr><tr><td><span class="badge b-medium">Medium</span></td><td><a id="Q11"></a><strong>Q11. Should injuries move the line at all, given what we can measure?</strong></td><td>122 official injury rows exist for the 11-13 and 11-14 slates. We have verified season averages for at most 24 players by minutes and 50 by scoring.</td><td>Minutes and usage for the overwhelming majority of the players listed, and therefore how much production any absence actually removes.</td><td>An injury adjustment that is not grounded in measured minutes is a guess wearing a lab coat.</td><td>Publish the injury table as context with an explicit &#x27;no line adjustment applied&#x27; label until minutes data exists. Do not let it into the number.</td><td><a class="src" href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">official source</a></td></tr><tr><td><span class="badge b-medium">Medium</span></td><td><a id="Q12"></a><strong>Q12. Is the rest signal real?</strong></td><td>Rest-day differential regressed on out-of-sample margin error gives +2.82 points per day (t = 1.53, p = 0.130, n = 101). Back-to-back differential gives +2.88 (p = 0.398). Four-day density gives +0.51 (p = 0.849).</td><td>Whether any of those survive a proper sample.</td><td>This is the only candidate signal in the whole study that is not obviously zero. It deserves to be the first thing re-tested when the sample grows.</td><td>Pre-register the rest signal as the primary hypothesis and re-test it at 250 and 400 games. Do not add new signals until it resolves.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">official source</a></td></tr><tr><td><span class="badge b-low">Low</span></td><td><a id="Q13"></a><strong>Q13. Are same-game parlays mispriced by correlation here?</strong></td><td>Measured P(home covers AND over) = 0.297 against an independence value of 0.250 (n = 101, not significant). Out-of-sample residual correlation between margin and total is +0.018. Same-slate cover correlation across different games is -0.030 (n = 750 ordered pairs).</td><td>Whether the 4.7-point gap in the joint is real or an artefact of 101 games.</td><td>If it is real it is the largest single edge anywhere in this study. If it is noise it will cost money every time it is priced in.</td><td>Re-measure the 2x2 table at 300+ games before it is used in any price. Until then price SGPs at independence and say so.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">official source</a></td></tr><tr><td><span class="badge b-low">Low</span></td><td><a id="Q14"></a><strong>Q14. Should the site keep publishing lines it knows are unvalidated?</strong></td><td>22 originated lines are published for 2026-11-14 to 2026-11-16. No strategy attached to them has passed a single gate.</td><td>Whether the user wants lines with no validated edge attached.</td><td>A line and a bet are different things. Confusing them is how a research project turns into a losses ledger.</td><td>Keep publishing lines - they are the research artefact - but keep the &#x27;no strategy funded&#x27; banner on every page that shows them.</td><td><a class="src" href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">official source</a></td></tr></tbody></table></div>
+</section>
+
+  <footer class="foot">
+    <p>Session <code>arena/e32856d8-nba1</code>. Official capture 2026-11-14 00:42 UTC.
+    Model inputs: official NBA.com final scores and schedule only.
+    <a href="sources.html">Source register</a> &middot;
+    <a href="method.html">Method</a> &middot;
+    <a href="flagged.html">Flagged for review</a> &middot;
+    <a href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">Repository</a></p>
+  </footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>
