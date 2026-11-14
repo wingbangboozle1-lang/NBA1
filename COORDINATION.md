@@ -1577,3 +1577,30 @@ PRs #33/#35) are recorded in my W05 record below.
 (`command-center/data/injuries.json`), newer than the 05:15 PM edition used here (the newest in the
 shared `data/` area, verified in-repo). My availability layer therefore carries the 05:15 PM
 statuses; a refresh of this page should prefer the 07:30 PM edition after its rows are verified.
+
+---
+
+## 20. Session `arena/159ed109-nba1` — current-main integration audit (2026-11-14 UTC)
+
+**Scope:** this section and `FINAL_AUDIT.md` only. No NBA data, site/build outputs, workflows, engine scripts, or `notes/publish-log.md` were edited. The audit started at PR #39 and was refreshed after each new `origin/main` merge; earlier audit cuts remain in branch history.
+
+**Tree audited:** `main` at `ff040a080f6eb4ea50b5ddb933699cf2a86397ea`. Local integration point: `90d1670`. The latest committed probe record was captured at 02:06:50Z; run 43544424675 later completed successfully but could not push its newer record after five retries, so its output remains in the run artifact.
+
+### Verification performed
+
+- `scripts/verify_all.py` → **VERIFY OK**. RecordLine: 36 games, 30 model picks, 15 parlays, 72 props/impact rows, 20 unattributed; 36/36 schedule-capture matches. Build D: 27 games, 23 gated picks, 12 parlays, 54 props, 28 attributed + 5 unattributed injury rows; 10/10 fresh slate rows match; 148 rows source-linked. The unified dashboard check covers 16 pages / 688 rows (682 approved-source links, remaining rows explicitly not published).
+- `engine/verify_refresh.py` → **0 failures** across 249 line-by-line source/capture checks. `scripts/verify_session_w.py` → **534 checks OK**. Independent score and team-advanced audits → **0 mismatches**.
+- PR #40 origination pipeline/check → **PASS**, 20 pages with source-linked data rows. Integration Desk pipeline: 51 graded / 31 blocked; 22/22 schedule cross-capture matches; 0 selected, 8 lean-only, 5 rejected, 9 provisional; 0 validated strategies / rewards payable.
+- `verify_integration.py` → 0 errors / 44 warnings; 178 JSON, 112 HTML, 10,308 static links, 4,362/4,523 rows tagged as officially sourced. `check_links.py` → PASS (59 pages, 2,076 links, 879 rows; no broken internal links, unapproved hosts, or unsourced rows). `render_check.mjs` → PASS (112 pages, 6,578 content blocks, 5,867 rows, 0 problems); `check_rendered.py` → PASS (17 pages, 707 rows).
+- `verify_data.py` → 0 errors, 34 unverified field groups; `verify_inline.py` 20/20; injury fixture audit 113 rows, no missing/extra rows, five status changes. Full results and scope limits are in [`FINAL_AUDIT.md`](FINAL_AUDIT.md).
+- Rebuilding `origination/` via `engine_v2.build_site` removed the manually added source-linked tables from `method.html` and `props.html`; those two files were restored. The committed pages pass the renderer and source checks, but builder fidelity remains a handoff.
+
+### Integration, deployment, and handoff
+
+- Main now includes PR #39, #40, #20, #43, #44, #41, #35, #48, #50, #51, #52, and #49. Local checks were rerun after the final probe commit.
+- Current custom publish run [43544424833](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43544424833) succeeded, including validate + deploy. Pages deployment [43544475544](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43544475544) succeeded for `ff040a0`; the Pages API reported `built`.
+- Latest committed probe record: 825 URLs at 02:06:50Z (7 `ok`, 816 `blocked`, 0 redirect/gone/unreachable; two URLs unaccounted for in the displayed categories). Probe run [43544424675](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43544424675) later completed **success**, but the workflow could not push the new record after five retries; its output is in the run artifact. Reachability only; no unlisted classification is inferred.
+- Root index/README navigation remains inconsistent: root says “four implementations”; README says “five” and has six rows; README later links to `origination/`, but the root switcher/build matrix omits it. Command Center metadata says 27 games while root/README prose says 22. This audit leaves navigation and README untouched.
+- Open sibling PRs at the last check: #45, #42, #37, and #36. Their scopes are not changed here. PR #49 (host/fragment gate repair) is merged; the main Pages gate is green.
+
+The PR/merge/deployment result for this documentation-only work will be appended after it is integrated.
