@@ -16,7 +16,7 @@ python3 strategy-lab/check.py     # the repository's own page gates, applied to 
 
 No network access at run time. A clean checkout at the commit stamped in each page footer reproduces every
 table. Nothing here is a build step for `site/**`; folding it into the site nav is cross-session request
-R-28-6 in `COORDINATION.md`.
+R-29-6 in `COORDINATION.md`.
 
 ## The verdict, in three sentences
 
@@ -59,4 +59,4 @@ R-28-6 in `COORDINATION.md`.
 * A value the official page did not publish is printed as an em dash. It never means zero, and it is never
   filled in from an adjacent quantity.
 * `GG`, the market gate, is **blocked for the whole repository**: no NBA-operated source publishes a closing
-  price. Nothing here claims a market edge, and no strategy can be marked funded until R-28-7 is resolved.
+  price. Nothing here claims a market edge, and no strategy can be marked funded until R-29-7 is resolved.

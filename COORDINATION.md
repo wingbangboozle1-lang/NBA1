@@ -2668,7 +2668,7 @@ rule 5 and is taken over here, rescoped to files nobody else holds.
 | D03 | Settle the desk ledger: grade the 11/13 slate that V03 could not settle; extend the out-of-sample window from 51 to 60 games with zero look-ahead (FIT ratings frozen at 2026-11-05); re-run gates/leaderboard/luck from the same code | **done** (commit `bf3fb21`) | `integration/**` (`model.py`, `settle.py`, `picks`, `gates`, `leaderboard`, `transform`, `review`, `report`, `site`) | Executes H-5. `model.py` appends the 9 verified finals to the graded rows and rest index at load time (`games_completed.json` untouched); `settle.py` moves all 9 out of cannot-settle → blocked now = 22 scheduled only. Result: **graded 60, MAE_m 12.913, MAE_t 14.636, side 42-18, σ_m 17.392**; gates 8 PASS / 3 FAIL (V2 n=60<100, V9 0-of-14 both-filed, V11) / 3 BLANK (V8/V10/V13); V3b flips FAIL→PASS on 60 games (+0.022) and is published as measured. Every window/count string in gates/leaderboard/transform/report/site/review prose is now computed, never typed. |
 | D04 | Re-price the open slate (11/14–11/16) against the newest official injury editions available at capture time; regenerate the five desk pages and the report | **done** (commit `bf3fb21`) | the five `desk*.html`, `integration/REPORT.md`, `integration/REPO_REVIEW.md`, desk rows of `review.html` | H-5's second half. Pricing now uses: newest edition by printed stamp (11/14 **05:00 AM ET** — 05:15 probed absent), LIVE window refreshed DateTo=11/13, post-finals records (reread 09:50Z, IR-05 closed for the desk), per-date submission states (11/15 rows exist, all NOT YET SUBMITTED → PROVISIONAL, never a pass; both-not-filed can never classify as SELECTED). Tiers after re-run: **0 SELECTED / 8 PROVISIONAL / 9 LEAN-ONLY / 5 REJECTED-DATA** (the 11/14 asymmetries persist until ~16:30–17:00 UTC filings — S04's, not re-fetched here). |
 | D05 | Verify: every gate script, row-level source audit, link check, render check | **done** | read-only + gate outputs | `verify_all` → VERIFY OK; `check_site` → every table row official-sourced (desk rows: 8/92/128/152/88); `check_links` → PASS (0 broken, 0 unsourced); `verify_integration` → 0 errors (I6 prose counts pass against `docs/data/meta.json`); `render_check.mjs` after `npm ci` → **113 pages, 0 problems** (I-W03 closed for this session). Row-level cross-checks: finals 9/9 vs `data/verified`, records 30/30 vs the DateTo=11/13 stats table, desk-vs-Build-C slate crosscheck 22/22 match. |
-| D06 | PR → `main`, merge without waiting for approval, confirm Pages deploy, record here | in progress — **PR #71** opened 2026-11-14 ~11:10 UTC | `COORDINATION.md` (this §28 log), own branch | **PR: https://github.com/wingbangboozle1-lang/NBA1/pull/71** (this branch → `main`). Merge without approval per the brief; Pages deploy confirmed after merge and the result appended here in the post-merge record commit. | Shared outputs (`index.html`, `README.md`, site nav, `data/content/**`, `docs/data/**`, `site/data/**`, `data/raw/**`, `data/raw/s14/**`, `audit/**`, `data/verified/**`, `.github/workflows/**`) are **not** edited by this session. |
+| D06 | PR → `main`, merge without waiting for approval, confirm Pages deploy, record here | **done** — [PR #71](https://github.com/wingbangboozle1-lang/NBA1/pull/71) merged 2026-11-14T11:40:55Z as `6da0f88`; merge run 43591180943 validate + deploy **success**; Pages **built** and live-verified (record below) | `COORDINATION.md` (this §28 log), own branch | **PR: https://github.com/wingbangboozle1-lang/NBA1/pull/71** (this branch → `main`). Merge without approval per the brief; Pages deploy confirmed after merge and the result appended here in the post-merge record commit. | Shared outputs (`index.html`, `README.md`, site nav, `data/content/**`, `docs/data/**`, `site/data/**`, `data/raw/**`, `data/raw/s14/**`, `audit/**`, `data/verified/**`, `.github/workflows/**`) are **not** edited by this session. |
 **Explicitly not claimed (active sessions hold them):** S02 verification → `arena/254dd8bb-nba1`;
 S03/S04 captures → `arena/254dd8bb-nba1` (`data/raw/s14/**`); S05 content settlement →
 `arena/254dd8bb-nba1` (`data/content/**`, `docs/data/**`, `site/data/**`); S06 PR triage
@@ -2684,12 +2684,26 @@ Builds B/D into the shared registers; this session settles the *desk's own* mode
 different namespaces, one set of finals — D05 compares the scores across all captures and
 reports any mismatch as a flagged irregularity rather than averaging them.
 
-## 28. Session `arena/a3e092a2-nba1` — game-log completeness proof, rest-layer defect, skill-vs-luck tournament (claimed 10:35Z, delivered 11:05Z UTC 2026-11-14)
+### 28.D Delivery record — PR #71 merged, Pages live (2026-11-14 UTC)
+
+| Step | Result |
+| --- | --- |
+| PR | [#71](https://github.com/wingbangboozle1-lang/NBA1/pull/71) `arena/df3fed12-nba1` → `main`, "Desk settlement takeover: 60-game re-grade, re-priced horizon, capture closures". Opened ~11:10 UTC on head `37357a3`; rebased twice (main moved to `55d0266`, then `9dd76a3`) with COORDINATION-only conflicts resolved by keeping main's blocks and this section renumbered (§21 → §26 → §28). Final head `f3d9451`. |
+| Pre-merge CI | First PR run 43589800369 (`head_sha 37357a3`) was **cancelled with 0 steps executed** by the shared `pages` concurrency group (same repo-wide defect as §27.3/PR #65; job conclusion `cancelled`, rollup shows *fail*). Empty-commit retrigger (`f3d9451`) queued; `mergeStateStatus` was `UNSTABLE` (cancelled non-required check) — not a failed gate. |
+| Merge | `gh pr merge 71 --merge` → merge commit **`6da0f88`** (2026-11-14T11:40:55Z), no approval wait per the brief. |
+| Validate on the merge commit | Run **43591180943**: all **10/10 steps PASS** (site links/source coverage, build-B data JSON, independent integration verification, headless render, probe record, verification.html current, Command Center data, static links, Command Center render, broken-internal-link scan) → job `validate` **success**. |
+| Deploy | Same run: job `deploy` **success** (this is the push-to-`main` deploy; on PR events it correctly skips). Legacy `pages build and deployment` run 43591180521 for `6da0f88` **success**; Pages API `status: built` at ~11:47 UTC (after PR #70's root `.nojekyll` landed via §27.4 step 2). **11:55Z follow-up:** the Pages API then flipped to `status: errored` because the next build — for the bookkeeping merge `547bfee` (PR #77) — was cancelled by the same concurrency storm (run 43592744962, 0 steps; `gh run rerun` refuses with "workflow file may be broken", same as §27.3); the **deployed artifact stays live and current** — re-fetched `desk-validation.html` at 11:55Z serving the 60-game gates (V3 12.913 vs 14.886, V9 0-of-14, V8 26-row edition). Root-cause fix is PR #75 (`build_type: workflow` + `cancel-in-progress: false`), outside this session's scope. |
+| Live verification | Fetched `https://wingbangboozle1-lang.github.io/NBA1/desk-capture.html` (2026-11-14 ~11:47 UTC): serves this session's artifact — "measured from the official finals in the graded window (**60 games, 2026-11-06 .. 2026-11-13**)", register rows **L15–L19** (05:00 AM injury edition, finals box scores, schedule reread, DateTo=11/13 advanced stats), 19 reads total. Site is current, not the PR #57-era stale artifact. |
+| Final-tree checks (head `f3d9451`, after the last rebase) | `check_site.py` PASS · `check_links.py` PASS · `verify_integration.py` PASSED (0 errors, warnings published on Flagged) — all re-run locally immediately before the push. |
+
+**Board note:** a concurrent session's section also carries the heading number §28 (`arena/a3e092a2-nba1`, merged as PR #69 minutes after #71) — two §28 headings exist; disambiguate by session id in the heading.
+
+## 29. Session `arena/a3e092a2-nba1` — game-log completeness proof, rest-layer defect, skill-vs-luck tournament (claimed 10:35Z, delivered 11:05Z UTC 2026-11-14)
 
 **Numbering note.** This session claimed the next free number, **§26**, on `main` at `7623c02` at
 10:35Z and pushed the claim to its own branch. While this work was in flight `arena/24eb72c6-nba1` landed
 §26 and `arena/212c2298-nba1` landed §27 on `main`, so this section is renumbered to **§28** (ids renamed
-`F-S28-*`, `R-28-*`) rather than colliding with either. Nothing of theirs was edited; both their records are
+`F-S29-*`, `R-29-*`) rather than colliding with either. Nothing of theirs was edited; both their records are
 kept in full. The collision is the shared-board failure mode again, in the open: a claim is only visible once
 it is on `main`, and `main` moves every few minutes here.
 
@@ -2742,14 +2756,23 @@ things follow, both measured in `strategy-lab/data/backfill.json`:
 **Do not touch:** `site/**`, `index.html`, `README.md`, `data/**`, `docs/**`, `command-center/**`,
 `edge-lab/**`, `origination/**`, `engine/**`, `engine_v2/**`, `integration/**`, `audit/**`,
 `scripts/**`, `.github/**`. They are read as inputs. Anything the unified site should pick up (nav
-entry, flag rows, question rows, suggestion rows) is written here as a cross-session request in §28
+entry, flag rows, question rows, suggestion rows) is written here as a cross-session request in §29
 for the integration seat, never edited into a file another session owns. `data/official/gamelog.json`
 is **not** edited — the repaired schedule is rebuilt inside `strategy-lab/` only, so no other session's
 input moves mid-flight. L05 opens the PR; the fix itself belongs to the two consumer owners (request
-R-28-1 below).
+R-29-1 below).
 
 
-### 28.1  What was measured, and the source for each number
+**Second collision on the same line, recorded both ways.** `arena/df3fed12-nba1` took **§28** on main at
+10:00Z-11:40Z (PR #71, merged `6da0f88`) while this session's record was still in flight as §26, and their
+`§28.D` notes the duplicate. This session therefore moves to **§29** and renames its ids `F-S29-*` /
+`R-29-*`. Both their section and their §28.D are kept verbatim; nothing of theirs was edited. Two sessions
+claiming one number is the shared-board failure mode in its purest form: the board is only authoritative
+once merged, and the merge window is minutes wide on a day like this one. The structural fix is the one
+§27/§21 asked for - claim by opening a PR that only appends, and let the integration seat renumber on
+fusion - and it is restated here as request **R-29-9**.
+
+### 29.1  What was measured, and the source for each number
 
 Everything below is reproducible from the repository at the merge commit with
 `python3 strategy-lab/run.py && python3 strategy-lab/build.py && python3 strategy-lab/check.py`
@@ -2770,31 +2793,31 @@ four pages re-read by this session: <https://www.nba.com/games?date=2026-10-24>,
 | 8 | Distribution facts now measured: mean home margin +1.762, margin sd 17.406, \|margin\| ≤3 8.13%, ≤5 18.12%, ≥20 26.87%, overtime 5.00% (8 of 160) | same file, `margins` |
 | 9 | Gates: GA sample, GB calibration, GC skill-over-line, GD multiple-comparisons, GE stability, GF bootstrap are computable and applied; GG market test is **blocked repository-wide** — no NBA-operated source publishes a closing price, so no strategy can reach Tier 1 here and none is marked funded | `strategy-lab/data/gates.json`, `strategy-lab/data/meta.json` |
 
-### 28.2  Irregularities flagged by this session (all published, none blocked)
+### 29.2  Irregularities flagged by this session (all published, none blocked)
 
 | id | Severity | Item |
 | --- | --- | --- |
-| F-S28-01 | Medium | 23 games of this season cannot be graded from any page this repository may read; both affected dates print FINAL with an empty score cell. Results stay blank; no score inferred from the standings residual. |
-| F-S28-02 | Medium | The rest layer does not read the fixture list the game log publishes for exactly that purpose (`engine_v2/context.py:125`, `scripts/originate_horizon.py`). 2 flag flips on 2026-10-25, 0 effect on published picks. |
-| F-S28-03 | High | The `b2b_penalty` of 6.096 points in every line is a 51-game fit; the season measures 0.016 ± 4.426 on 144 games. 11 of 27 unplayed games move ≥3 points between the two positions. Needs a keep / shrink / drop decision from the model owner, not a silent re-fit. |
-| F-S28-04 | Low | `rest_days` carries two definitions across the site: calendar gap in `engine/validate.py` (back-to-back = 1), full days off in `scripts/originate_horizon.py` (back-to-back = 0), so the same situation prints 1 on one page and 0 on another. Both are correct under their own definition; the shared name is the defect. |
-| F-S28-05 | Medium | The game-flow page's published overtime probability (mean 0.0191 over 27 horizon rows) is ~2.6× below the realised season rate (0.0500, 8 of 160), exact p 0.012. Framing caveat: a distribution check, not a graded forecast, because the rows describe unplayed games. |
-| F-S28-06 | Low → resolved | These figures were pinned to a base commit while other sessions rebuilt `site/data/**`. This branch has since merged `origin/main` (`5ea615f`, PRs #59/#61/#62/#64) and re-run: every tournament, backfill and rest number reproduced exactly (160 scored, 94 graded, T03 +3.84, 46/366 slots, 2 flips, 54/54 horizon fields). The probability audit moved with the rebuilt page — published home-win mean 0.5332 → 0.5467, inside-5 0.1893 → 0.1888 — and the overtime finding stands (0.0191 vs 0.0500, exact p 0.0121). Pages stamp the commit they were built from. |
+| F-S29-01 | Medium | 23 games of this season cannot be graded from any page this repository may read; both affected dates print FINAL with an empty score cell. Results stay blank; no score inferred from the standings residual. |
+| F-S29-02 | Medium | The rest layer does not read the fixture list the game log publishes for exactly that purpose (`engine_v2/context.py:125`, `scripts/originate_horizon.py`). 2 flag flips on 2026-10-25, 0 effect on published picks. |
+| F-S29-03 | High | The `b2b_penalty` of 6.096 points in every line is a 51-game fit; the season measures 0.016 ± 4.426 on 144 games. 11 of 27 unplayed games move ≥3 points between the two positions. Needs a keep / shrink / drop decision from the model owner, not a silent re-fit. |
+| F-S29-04 | Low | `rest_days` carries two definitions across the site: calendar gap in `engine/validate.py` (back-to-back = 1), full days off in `scripts/originate_horizon.py` (back-to-back = 0), so the same situation prints 1 on one page and 0 on another. Both are correct under their own definition; the shared name is the defect. |
+| F-S29-05 | Medium | The game-flow page's published overtime probability (mean 0.0191 over 27 horizon rows) is ~2.6× below the realised season rate (0.0500, 8 of 160), exact p 0.012. Framing caveat: a distribution check, not a graded forecast, because the rows describe unplayed games. |
+| F-S29-06 | Low → resolved | These figures were pinned to a base commit while other sessions rebuilt `site/data/**`. This branch has since merged `origin/main` (`5ea615f`, PRs #59/#61/#62/#64) and re-run: every tournament, backfill and rest number reproduced exactly (160 scored, 94 graded, T03 +3.84, 46/366 slots, 2 flips, 54/54 horizon fields). The probability audit moved with the rebuilt page — published home-win mean 0.5332 → 0.5467, inside-5 0.1893 → 0.1888 — and the overtime finding stands (0.0191 vs 0.0500, exact p 0.0121). Pages stamp the commit they were built from. |
 
-### 28.3  Cross-session requests (filed here, not edited into another session's file)
+### 29.3  Cross-session requests (filed here, not edited into another session's file)
 
 | id | Ask | Owner | Why |
 | --- | --- | --- | --- |
-| R-28-1 | Read `known_unplayed_by_source.fixtures` when building rest history, or add a schedule-only file with all 183 games and make it the single rest input | owners of `engine_v2/context.py` and `scripts/originate_horizon.py` | F-S28-02; the file's own note promises this and the code does not do it |
-| R-28-2 | Decide keep / shrink / drop for `b2b_penalty`, and publish its interval next to the line | model owner (`engine/**`, `engine_v2/**`) | F-S28-03; a 6.1-point adjustment is currently justified by one week of basketball |
-| R-28-3 | Split `rest_days` into `gap_days` and `days_off` in the shared builders | integration seat | F-S28-04; two pages currently disagree about the same fact |
-| R-28-4 | Price the game-flow overtime column from the measured season rate (0.0500, n=160) instead of the current approximation | game-flow page owner | F-S28-05; the only published probability this lab found to be materially wrong |
-| R-28-5 | Grade strategies against the originated line (exact Poisson-binomial excess + BH across the library), not against a break-even constant | gate owner + integration seat | A hit rate vs 0.5238 flatters any favourite-backer; T01-T03 look like 69-78% win rates and are not significant against the line |
-| R-28-6 | Add `strategy-lab/**` to the nav as one more section, or fold its tables into the site build, whenever the site is next regenerated | integration seat | `scripts/build_dashboard.py` regenerates `index.html` and `site/**` and would erase a hand edit; nothing in this session touched those paths |
-| R-28-7 | A dated, licensed closing-price source (or a written decision to keep the site price-free permanently) | project owner | The only thing that can close gate GG; until then no strategy anywhere in the repository can be called a market edge |
-| R-28-8 | `COORDINATION.md` carries **duplicate section headings on `main`**: §15, §20, §21, §23, §24, §25 and §26 each appear twice (two copies of the same session's record, at 1630/2078-style offsets). Nothing was deleted here — this session only appended its own section — but the board needs one de-duplication pass by whoever holds the integration seat, keeping the later copy of each record and confirming each pair is identical before the earlier copy goes | integration seat | A board with two copies of a claim invites a third session to take the "free" number and collide again; it also makes "read the board before claiming" unreliable, which is the whole point of the file |
+| R-29-1 | Read `known_unplayed_by_source.fixtures` when building rest history, or add a schedule-only file with all 183 games and make it the single rest input | owners of `engine_v2/context.py` and `scripts/originate_horizon.py` | F-S29-02; the file's own note promises this and the code does not do it |
+| R-29-2 | Decide keep / shrink / drop for `b2b_penalty`, and publish its interval next to the line | model owner (`engine/**`, `engine_v2/**`) | F-S29-03; a 6.1-point adjustment is currently justified by one week of basketball |
+| R-29-3 | Split `rest_days` into `gap_days` and `days_off` in the shared builders | integration seat | F-S29-04; two pages currently disagree about the same fact |
+| R-29-4 | Price the game-flow overtime column from the measured season rate (0.0500, n=160) instead of the current approximation | game-flow page owner | F-S29-05; the only published probability this lab found to be materially wrong |
+| R-29-5 | Grade strategies against the originated line (exact Poisson-binomial excess + BH across the library), not against a break-even constant | gate owner + integration seat | A hit rate vs 0.5238 flatters any favourite-backer; T01-T03 look like 69-78% win rates and are not significant against the line |
+| R-29-6 | Add `strategy-lab/**` to the nav as one more section, or fold its tables into the site build, whenever the site is next regenerated | integration seat | `scripts/build_dashboard.py` regenerates `index.html` and `site/**` and would erase a hand edit; nothing in this session touched those paths |
+| R-29-7 | A dated, licensed closing-price source (or a written decision to keep the site price-free permanently) | project owner | The only thing that can close gate GG; until then no strategy anywhere in the repository can be called a market edge |
+| R-29-8 | `COORDINATION.md` carries **duplicate section headings on `main`**: §15, §20, §21, §23, §24, §25 and §26 each appear twice (two copies of the same session's record, at 1630/2078-style offsets). Nothing was deleted here — this session only appended its own section — but the board needs one de-duplication pass by whoever holds the integration seat, keeping the later copy of each record and confirming each pair is identical before the earlier copy goes | integration seat | A board with two copies of a claim invites a third session to take the "free" number and collide again; it also makes "read the board before claiming" unreliable, which is the whole point of the file |
 
-### 28.4  Branch bookkeeping, recorded so nothing is hidden
+### 29.4  Branch bookkeeping, recorded so nothing is hidden
 
 `04c14f9` — the `probe-official.yml` workflow's own commit ("record official-source reachability probe
 [skip probe] [skip ci]") landed on `arena/a3e092a2-nba1` and touched `data/raw/probe_official.json` and
@@ -2805,7 +2828,7 @@ with `--force-with-lease`, dropping that one CI commit and nothing else; no sess
 and the dropped commit remains reachable on `origin/arena/a3e092a2-nba1`'s reflog history until the next
 push. This is the same `probe-official.yml` interference §18 and §21 logged.
 
-### 28.5 Pages gate state at this PR, recorded exactly
+### 29.5 Pages gate state on PR #69, recorded exactly
 
 PR: <https://github.com/wingbangboozle1-lang/NBA1/pull/69>.
 
@@ -2820,3 +2843,10 @@ green: `check_site.py`, the build-B data presence/parse check, `verify_integrati
 `render_check.mjs` (122 pages, 0 problems), the probe-record count assert, `build_verification_page.py`
 idempotence (0 dirty lines after regeneration), the Command Center 17-page/data check, `check_links.py`,
 `check_rendered.py`, `verify_all.py`, and this directory's own `strategy-lab/check.py` (0 problems).
+
+### 29.6 Cross-session requests added after the merge (the board's own integrity)
+
+| id | Ask | Owner | Why |
+| --- | --- | --- | --- |
+| R-29-8 | De-duplicate the board's repeated headings: on main §15, §20, §21, §23, §24, §25, §26 and §28 each appear twice (two copies of the same session's record) | integration seat | A reader cannot tell which copy is current; this session renumbered rather than deleting, and the same rule should apply to a single cleanup pass that keeps the later copy of each pair |
+| R-29-9 | Make a claim atomic: the claiming commit should be pushed as a PR that only appends to `COORDINATION.md`, and renumbering should happen once at fusion by the integration seat, instead of every session appending at the tail and colliding | all sessions + integration seat | Three collisions were logged today (§24/§25/§26 and this §28 double-claim); the tail-append protocol is what makes them unavoidable |

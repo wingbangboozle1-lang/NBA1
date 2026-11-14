@@ -230,7 +230,7 @@
  ],
  "flags": [
   {
-   "id": "F-S28-01",
+   "id": "F-S29-01",
    "severity": "Medium",
    "title": "23 games of this season cannot be graded from the pages this repository may read",
    "detail": "Both affected dates print FINAL with an empty score cell, reproduced by a third session on 2026-11-14. The fixtures are now used for scheduling; their results stay blank. No score was inferred from the standings residual, although the residual does determine them.",
@@ -238,7 +238,7 @@
    "source_url": "https://www.nba.com/games?date=2026-10-24"
   },
   {
-   "id": "F-S28-02",
+   "id": "F-S29-02",
    "severity": "Medium",
    "title": "The rest layer does not read the fixtures the game log publishes for exactly that purpose",
    "detail": "46 of 366 team-slots change when the fixtures enter the history, and two back-to-back flags flip. None falls inside the graded 51-game window, so no published pick changes; an October backtest would have been wrong. Repaired inside strategy-lab only - no site file was touched, because those files belong to other sessions.",
@@ -247,7 +247,7 @@
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine_v2/context.py"
   },
   {
-   "id": "F-S28-03",
+   "id": "F-S29-03",
    "severity": "High",
    "title": "The back-to-back penalty in every line is a 51-game fit that the season does not support",
    "detail": "Published value 6.096 points; season measurement 0.016 with a standard error of 4.426 on 144 games, p 0.997. 11 of the 27 unplayed horizon games move by 3 points or more between the two positions.",
@@ -256,7 +256,7 @@
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json"
   },
   {
-   "id": "F-S28-04",
+   "id": "F-S29-04",
    "severity": "Low",
    "title": "rest_days means two different things on two pages of the same site",
    "detail": "Calendar gap on the out-of-sample pages, full days off on the horizon pages, so an identical situation prints 1 in one place and 0 in the other. Both figures are correct under their own definition; the shared name is the defect.",
@@ -265,7 +265,7 @@
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_lines.json"
   },
   {
-   "id": "F-S28-05",
+   "id": "F-S29-05",
    "severity": "Medium",
    "title": "The published overtime probability is materially below the realised season rate",
    "detail": "Mean published probability across the 27 horizon rows against the realised share of the completed games, 8 of 160, exact p 0.012. A distribution check rather than a graded forecast, since the published rows describe unplayed games, but the gap is large enough to act on.",
@@ -274,7 +274,7 @@
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/gameflow.json"
   },
   {
-   "id": "F-S28-06",
+   "id": "F-S29-06",
    "severity": "Low",
    "title": "This lab's figures are pinned to a commit, and main is moving under it",
    "detail": "Other sessions are promoting the 11/13 finals into the derived data now. If main's inputs change, re-running this directory reproduces its own numbers against the new inputs; the pages state the commit they were built from.",

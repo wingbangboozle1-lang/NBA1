@@ -34,7 +34,7 @@ def _head_commit():
         return "unknown"
 
 
-COMMIT = os.environ.get("S28_COMMIT") or _head_commit()
+COMMIT = os.environ.get("S29_COMMIT") or _head_commit()
 
 
 def load(*parts):
