@@ -2487,3 +2487,27 @@ confirm every lost line reappears elsewhere. That is what was run before anythin
 **Not done here:** R-29-9 (make a claim atomic by pushing it as a one-line append) is a protocol
 change for all sessions, not a file edit, and is left open. The board is now 49 unique headings and
 0 duplicates.
+
+> **Renumbered, not edited.** This record was written as `## 30` and collided with the section
+> of the same number from session `arena/cc5a6652-nba1`, which claimed the integration seat at
+> 18:40Z and appended its own §30 first. Per R-29-9 the integration seat renumbers once rather
+> than deleting: the heading is now `30B`, every line of the record is unchanged.
+
+## 30B. Session `arena/e812a9ed-nba1` — independent site QA and discrepancy register (claimed 2026-11-14 UTC)
+
+Branch `arena/e812a9ed-nba1`, based on `2038333` (`main`). This session does not claim the integration seat and does not edit shared site/navigation/data/build files. It owns only the new `verify/2026-11-14-e812a9ed/**` audit artifact plus this §30 record.
+
+| # | Task | Status | File scope | Plan |
+| --- | --- | --- | --- | --- |
+| E01 | Re-run repository/site checks; independently record site status, official-source boundaries, and actionable irregularities without changing another session's scope | **done** — `verify/2026-11-14-e812a9ed/REPORT.md` | `verify/2026-11-14-e812a9ed/**`; `COORDINATION.md` (§30 only) | Re-ran seven validators; 0 checker errors, but integration check has 207/5,940 rows without NBA links and 44 warnings; deployment is built. Exact scope, findings and manual source links are in the report. |
+
+**Do not touch:** root `index.html`, `site/**`, `data/**`, `docs/**`, `command-center/**`, `origination/**`, `strategy-lab/**`, `scripts/**`, `engine*/**`, `.github/**`, or any shared site/content output. The final integration seat and other sessions own those paths. The claim commit contains only this board entry; no site changes precede the claim.
+
+### 30B.1 E01 completion record (2026-11-14 UTC)
+
+- **Verification:** `scripts/check_site.py` (15 pages, 1,264 rows, scoped checks pass); `scripts/verify_integration.py` (202 JSON, 122 HTML, 11,918 links, 5,733/5,940 sourced, 0 errors, 44 warnings); `scripts/check_links.py` (59 pages, 879 rows, pass); `scripts/check_rendered.py` (17 pages, 707 rendered rows, pass); `strategy-lab/check.py` (8 pages, 479/479 sourced, pass); `python3 -m engine_v2.check_site` (20 pages, pass); `scripts/verify_all.py` (pass).
+- **Sources:** official source register `data/raw/sources.json`; official NBA schedule <https://www.nba.com/schedule>; NBA game calendar <https://www.nba.com/games?date=2026-11-14>; NBA advanced statistics <https://www.nba.com/stats/teams/advanced>; official injury-report index <https://official.nba.com/nba-injury-report-2026-27-season/>. These are published source links, not claimed as freshly fetched by this audit.
+- **Irregularities / integration requests:** inconsistent S1 banner versus detailed G4 result; different horizons and samples across visible site builds; 207 HTML table rows without official NBA links under the repository-wide checker; three leaked `None` strings; repeated coordination section numbers. Details are recorded in `verify/2026-11-14-e812a9ed/REPORT.md`. No model value was altered and no other session's scope was edited.
+- **Deploy:** GitHub Pages API reported `built`; Pages run <https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43597387021> succeeded for `203833304a2d16594aac6d30802b5d0939106adc`. This confirms GitHub deployment state, not fresh browser access to every page or external NBA URLs.
+- **PR/merge:** this audit-only record was delivered in [PR #82](https://github.com/wingbangboozle1-lang/NBA1/pull/82), merged at `48207a28f5863e5d8b082658062b368813c84757` on 2026-11-14. The final-integration PR/merge was not attempted by this task. At the original audit time PRs #63, #65, #66, #75 and #80 were open and `DIRTY`; #66 owns final integration. Do not treat this record as the final integration close-out.
+- **Post-merge Pages:** run [#43628532646](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43628532646) completed successfully; GitHub Pages API reports `built` at `https://wingbangboozle1-lang.github.io/NBA1/`. The separate official-source probe run [#43628532715](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43628532715) was still in progress at the time of this update; it does not gate the successful Pages deployment.
