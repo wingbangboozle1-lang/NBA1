@@ -1,84 +1,108 @@
 {
  "probe": {
-  "probed_at_utc": "2026-11-14T00:46:01Z",
+  "probed_at_utc": "2026-11-14T00:47:37Z",
   "runner": "Linux/ubuntu26",
-  "urls_probed": 100,
+  "urls_probed": 115,
   "ok": 3,
   "redirect": 0,
   "gone": 0,
-  "blocked": 97,
+  "blocked": 112,
   "unreachable": 0,
   "user_agent": "Mozilla/5.0 (compatible; NBA1-probe/1.0; +https://github.com/wingbangboozle1-lang/NBA1)"
  },
  "what_this_proves": "That these URLs answered at this instant from this runner. It does NOT prove that any number in this repository is current, that a value was parsed correctly, or that the source will still exist tomorrow. Reachability and currency are separate claims.",
  "retried_with_browser_headers": [
   {
-   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf",
-   "http_status": 403,
-   "ms": 99,
-   "bytes": 0,
-   "error": "HTTP 403 Forbidden"
-  },
-  {
-   "url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
-   "http_status": 403,
-   "ms": 28,
-   "bytes": 0,
-   "error": "HTTP 403 Forbidden"
-  },
-  {
-   "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "url": "https://www.nba.com/stats/teams/advanced",
    "http_status": 200,
-   "ms": 38,
-   "bytes": 46270,
+   "ms": 393,
+   "bytes": 322483,
    "error": null,
-   "sha256": "c1c5d0a264bd56ef00810235ea0909ac5513262f779612c1151040fa08812e01"
+   "sha256": "45f5a7eae421816f1df17f50f07d084900cd634d9e9abf79e69988b063cc067f"
   },
   {
-   "url": "https://official.nba.com/rule-no-3-players-substitutes-and-coaches/",
+   "url": "https://www.nba.com/stats/players/traditional",
    "http_status": 200,
-   "ms": 68,
-   "bytes": 44108,
+   "ms": 195,
+   "bytes": 400147,
    "error": null,
-   "sha256": "ad2f15bef7fc49f12674e3dc373fccbb17ff7a15e03dba94a5ba326c094dc138"
+   "sha256": "4b3d821ad331b37aba5ad2d29a5a934a98593188551f9c80729fc8e6ebbeb7a3"
   },
   {
-   "url": "https://official.nba.com/rule-no-5-scoring-and-timing/",
+   "url": "https://www.nba.com/schedule",
    "http_status": 200,
-   "ms": 345,
-   "bytes": 47727,
+   "ms": 213,
+   "bytes": 232207,
    "error": null,
-   "sha256": "2d72a03f76a97dc34899ca6cac5670dd9b6f67b8d3a65df9b8f1dfee45767cfa"
+   "sha256": "dc13113b0c40621fcac8d2490b4095e0392101a090ca78cce88968e9812fa34e"
   },
   {
-   "url": "https://www.nba.com/",
-   "http_status": 403,
-   "ms": 26,
-   "bytes": 0,
-   "error": "HTTP 403 Forbidden"
+   "url": "https://www.nba.com/games?date=2026-11-13",
+   "http_status": 200,
+   "ms": 233,
+   "bytes": 487326,
+   "error": null,
+   "sha256": "fa255866f16b7b826e544d213d9caf94513f1555f544b66734e0b2be54277663"
   },
   {
    "url": "https://www.nba.com/game/atl-vs-chi-0022600037",
    "http_status": 200,
-   "ms": 72,
-   "bytes": 301707,
+   "ms": 1204,
+   "bytes": 301813,
    "error": null,
-   "sha256": "97de29014e20c50d046d5d5fb8e6a92170bbeac4dc1865edcb0a09eb0e9fe87c"
+   "sha256": "ed5338b4e35f11d347856509a304832ae79535b2d00885724b1b32b775b70d71"
   },
   {
-   "url": "https://www.nba.com/game/atl-vs-mil-0022600243",
+   "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "http_status": 200,
-   "ms": 954,
-   "bytes": 253822,
+   "ms": 259,
+   "bytes": 46403,
    "error": null,
-   "sha256": "841933e0bd542cb403aefcb1d892ff9bdf6df252edd083947231f25884edb2c6"
+   "sha256": "24c176653e6a1cccc989ff706030f8dc52b0f0aea03217552dc52e90e3cf10ce"
+  },
+  {
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "http_status": 200,
+   "ms": 166,
+   "bytes": 101887,
+   "error": null,
+   "sha256": "502024cff353efce6225d48fef7516b58e8e3c2671368b7983ac3b87a4e541f6"
+  },
+  {
+   "url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
+   "http_status": 403,
+   "ms": 166,
+   "bytes": 0,
+   "error": "HTTP 403 Forbidden"
+  },
+  {
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf",
+   "http_status": 403,
+   "ms": 122,
+   "bytes": 0,
+   "error": "HTTP 403 Forbidden"
+  },
+  {
+   "url": "https://official.nba.com/rule-no-3-players-substitutes-and-coaches/",
+   "http_status": 200,
+   "ms": 572,
+   "bytes": 44108,
+   "error": null,
+   "sha256": "49ad73ee28ee79fee48b6fac1c260792d738e9f1d7fde307a5bddffa1b6644f3"
+  },
+  {
+   "url": "https://www.nba.com/",
+   "http_status": 403,
+   "ms": 168,
+   "bytes": 0,
+   "error": "HTTP 403 Forbidden"
   }
  ],
  "findings": [
   {
    "id": "P2",
    "severity": "Medium",
-   "detail": "97 cited URL(s) are refused to a non-browser client (401/403/429). Those values can only be checked by a human in a browser.",
+   "detail": "112 cited URL(s) are refused to a non-browser client (401/403/429). Those values can only be checked by a human in a browser.",
    "urls": [
     "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf",
     "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
@@ -162,19 +186,34 @@
     "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=MIN",
     "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS",
     "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&sort=PTS",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=P",
     "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame",
     "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=MIN",
     "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS",
     "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;sort=PTS",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;P",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;PerMode=PerGame",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;PerMode=PerGame&amp;amp;dir=-1&amp;amp;sort=MIN",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;PerMode=PerGame&amp;amp;dir=-1&amp;amp;sort=PTS",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;PerMode=PerGame&amp;amp;sort=PTS",
     "https://www.nba.com/stats/teams/advanced",
     "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
+    "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonTyp",
+    "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonType=Regular+Season",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;amp;SeasonType=Regular+Season",
     "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame",
+    "https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGam",
     "https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame",
+    "https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;PerMod",
+    "https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;PerMode=PerGame",
     "https://www.nba.com/stats/teams/traditional",
     "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame",
+    "https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=Per",
     "https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame",
+    "https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;Per",
+    "https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;PerMode=PerGame",
     "https://www.nba.com/team/1610612737/hawks/roster",
     "https://www.nba.com/team/1610612760/thunder/roster"
    ]
@@ -182,13 +221,16 @@
   {
    "id": "P5",
    "severity": "Informational",
-   "detail": "5/8 refused URL(s) answer when sent nba.com's own web-client headers. Those sources are script-readable with the right client, so an automated pipeline is possible for them.",
+   "detail": "8/11 refused URL(s) answer when sent nba.com's own web-client headers. Those sources are script-readable with the right client, so an automated pipeline is possible for them.",
    "urls": [
-    "https://official.nba.com/nba-injury-report-2026-27-season/",
-    "https://official.nba.com/rule-no-3-players-substitutes-and-coaches/",
-    "https://official.nba.com/rule-no-5-scoring-and-timing/",
+    "https://www.nba.com/stats/teams/advanced",
+    "https://www.nba.com/stats/players/traditional",
+    "https://www.nba.com/schedule",
+    "https://www.nba.com/games?date=2026-11-13",
     "https://www.nba.com/game/atl-vs-chi-0022600037",
-    "https://www.nba.com/game/atl-vs-mil-0022600243"
+    "https://official.nba.com/nba-injury-report-2026-27-season/",
+    "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+    "https://official.nba.com/rule-no-3-players-substitutes-and-coaches/"
    ]
   }
  ],
@@ -196,7 +238,7 @@
   {
    "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_03_00PM.pdf",
    "http_status": 200,
-   "ms": 122,
+   "ms": 398,
    "bytes": 98508,
    "content_type": "application/pdf",
    "sha256": "2c24df70af627c81eaec56747d914df73267c1b225638175b23fca4300d1520f",
@@ -212,13 +254,14 @@
     "docs/pages/sources.html",
     "docs/strategies.html",
     "scripts/build_site.py",
-    "scripts/injury_impact.py"
+    "scripts/injury_impact.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
    "http_status": 200,
-   "ms": 72,
+   "ms": 87,
    "bytes": 101887,
    "content_type": "application/pdf",
    "sha256": "502024cff353efce6225d48fef7516b58e8e3c2671368b7983ac3b87a4e541f6",
@@ -246,13 +289,15 @@
     "lines.html",
     "review.html",
     "schedule-verified.html",
-    "scripts/verify_schedule_c.py"
+    "scripts/probe_official.py",
+    "scripts/verify_schedule_c.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf",
    "http_status": 200,
-   "ms": 63,
+   "ms": 124,
    "bytes": 98329,
    "content_type": "application/pdf",
    "sha256": "e908ddf60445282e573450ad5c774f2e4b7844234b821fb494a41bd690df08a9",
@@ -273,13 +318,14 @@
     "docs/sources.html",
     "docs/summary.html",
     "review.html",
-    "scripts/build_site.py"
+    "scripts/build_site.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf",
    "http_status": 403,
-   "ms": 108,
+   "ms": 228,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -287,6 +333,7 @@
    "final_url": null,
    "cited_in": [
     "COORDINATION.md",
+    "data/raw/probe_official.json",
     "data/raw/verification_c03.json",
     "schedule-verified.html",
     "scripts/verify_schedule_c.py"
@@ -295,7 +342,7 @@
   {
    "url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
    "http_status": 403,
-   "ms": 34,
+   "ms": 226,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -304,13 +351,15 @@
    "cited_in": [
     "data/flags.json",
     "data/raw/probe_official.json",
-    "docs/flagged.html"
+    "docs/flagged.html",
+    "scripts/probe_official.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "http_status": 403,
-   "ms": 43,
+   "ms": 126,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -350,15 +399,17 @@
     "scripts/build_edge_site.py",
     "scripts/build_site.py",
     "scripts/injury_impact.py",
+    "scripts/probe_official.py",
     "slate.html",
     "sources.html",
-    "suggestions.html"
+    "suggestions.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://official.nba.com/rule-no-3-players-substitutes-and-coaches/",
    "http_status": 403,
-   "ms": 37,
+   "ms": 111,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -372,13 +423,14 @@
     "docs/pages/injuries.html",
     "docs/pages/sources.html",
     "scripts/build_site.py",
-    "scripts/injury_impact.py"
+    "scripts/injury_impact.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://official.nba.com/rule-no-5-scoring-and-timing/",
    "http_status": 403,
-   "ms": 44,
+   "ms": 75,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -396,13 +448,14 @@
     "scripts/build_site.py",
     "scripts/compute_correlations.py",
     "scripts/injury_impact.py",
-    "sources.html"
+    "sources.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://official.nba.com/rule-no-7-24-second-clock/",
    "http_status": 403,
-   "ms": 30,
+   "ms": 76,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -413,13 +466,14 @@
     "data/rules.json",
     "docs/pages/gameflow.html",
     "docs/pages/sources.html",
-    "scripts/build_site.py"
+    "scripts/build_site.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://official.nba.com/rulebook/",
    "http_status": 403,
-   "ms": 43,
+   "ms": 112,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -429,13 +483,14 @@
     "data/raw/probe_official.json",
     "data/rules.json",
     "docs/pages/sources.html",
-    "scripts/build_site.py"
+    "scripts/build_site.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/",
    "http_status": 403,
-   "ms": 25,
+   "ms": 104,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -448,148 +503,14 @@
     "review.html",
     "scripts/probe_official.py",
     "slate.html",
-    "suggestions.html"
+    "suggestions.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/atl-vs-chi-0022600037",
    "http_status": 403,
-   "ms": 24,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/derived/lines.json",
-    "data/games.json",
-    "data/originated_lines.json",
-    "data/raw/probe_official.json",
-    "data/raw/sources.json",
-    "data/raw/verification_c03.json",
-    "data/schedule_2026_11_13_to_16.json",
-    "data/slate_full.json",
-    "docs/data/sources.json",
-    "docs/games.html",
-    "gameflow.html",
-    "lines.html",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/atl-vs-mil-0022600243",
-   "http_status": 403,
-   "ms": 27,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/derived/lines.json",
-    "data/games.json",
-    "data/originated_lines.json",
-    "data/raw/probe_official.json",
-    "data/raw/sources.json",
-    "data/raw/verification_c03.json",
-    "data/schedule_2026_11_13_to_16.json",
-    "data/slate_full.json",
-    "docs/data/sources.json",
-    "docs/games.html",
-    "gameflow.html",
-    "lines.html",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/bkn-vs-mem-0022600234",
-   "http_status": 403,
-   "ms": 22,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/derived/lines.json",
-    "data/games.json",
-    "data/originated_lines.json",
-    "data/raw/probe_official.json",
-    "data/raw/sources.json",
-    "data/raw/verification_c03.json",
-    "data/schedule_2026_11_13_to_16.json",
-    "data/slate_full.json",
-    "docs/data/sources.json",
-    "docs/games.html",
-    "gameflow.html",
-    "lines.html",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/cha-vs-lac-0022600238",
-   "http_status": 403,
-   "ms": 24,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/derived/lines.json",
-    "data/games.json",
-    "data/originated_lines.json",
-    "data/raw/probe_official.json",
-    "data/raw/sources.json",
-    "data/raw/verification_c03.json",
-    "data/schedule_2026_11_13_to_16.json",
-    "data/slate_full.json",
-    "docs/data/sources.json",
-    "docs/games.html",
-    "gameflow.html",
-    "lines.html",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/cha-vs-lal-0022600256",
-   "http_status": 403,
-   "ms": 31,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/raw/verification_c03.json",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/chi-vs-cle-0022600246",
-   "http_status": 403,
-   "ms": 25,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/derived/lines.json",
-    "data/originated_lines.json",
-    "data/raw/probe_official.json",
-    "data/raw/verification_c03.json",
-    "data/schedule_2026_11_13_to_16.json",
-    "data/slate_full.json",
-    "gameflow.html",
-    "lines.html",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/chi-vs-min-0022600235",
-   "http_status": 403,
-   "ms": 22,
+   "ms": 78,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -609,242 +530,154 @@
     "gameflow.html",
     "lines.html",
     "schedule-verified.html",
-    "scripts/verify_schedule_c.py"
+    "scripts/probe_official.py",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/atl-vs-mil-0022600243",
+   "http_status": 403,
+   "ms": 67,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/derived/lines.json",
+    "data/games.json",
+    "data/originated_lines.json",
+    "data/raw/probe_official.json",
+    "data/raw/sources.json",
+    "data/raw/verification_c03.json",
+    "data/schedule_2026_11_13_to_16.json",
+    "data/slate_full.json",
+    "docs/data/sources.json",
+    "docs/games.html",
+    "gameflow.html",
+    "lines.html",
+    "schedule-verified.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/bkn-vs-mem-0022600234",
+   "http_status": 403,
+   "ms": 68,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/derived/lines.json",
+    "data/games.json",
+    "data/originated_lines.json",
+    "data/raw/probe_official.json",
+    "data/raw/sources.json",
+    "data/raw/verification_c03.json",
+    "data/schedule_2026_11_13_to_16.json",
+    "data/slate_full.json",
+    "docs/data/sources.json",
+    "docs/games.html",
+    "gameflow.html",
+    "lines.html",
+    "schedule-verified.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/cha-vs-lac-0022600238",
+   "http_status": 403,
+   "ms": 67,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/derived/lines.json",
+    "data/games.json",
+    "data/originated_lines.json",
+    "data/raw/probe_official.json",
+    "data/raw/sources.json",
+    "data/raw/verification_c03.json",
+    "data/schedule_2026_11_13_to_16.json",
+    "data/slate_full.json",
+    "docs/data/sources.json",
+    "docs/games.html",
+    "gameflow.html",
+    "lines.html",
+    "schedule-verified.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "http_status": 403,
+   "ms": 119,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/raw/probe_official.json",
+    "data/raw/verification_c03.json",
+    "schedule-verified.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/chi-vs-cle-0022600246",
+   "http_status": 403,
+   "ms": 115,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/derived/lines.json",
+    "data/originated_lines.json",
+    "data/raw/probe_official.json",
+    "data/raw/verification_c03.json",
+    "data/schedule_2026_11_13_to_16.json",
+    "data/slate_full.json",
+    "gameflow.html",
+    "lines.html",
+    "schedule-verified.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/chi-vs-min-0022600235",
+   "http_status": 403,
+   "ms": 88,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/derived/lines.json",
+    "data/games.json",
+    "data/originated_lines.json",
+    "data/raw/probe_official.json",
+    "data/raw/sources.json",
+    "data/raw/verification_c03.json",
+    "data/schedule_2026_11_13_to_16.json",
+    "data/slate_full.json",
+    "docs/data/sources.json",
+    "docs/games.html",
+    "gameflow.html",
+    "lines.html",
+    "schedule-verified.html",
+    "scripts/verify_schedule_c.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/cle-vs-mia-0022600036",
-   "http_status": 403,
-   "ms": 24,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/derived/lines.json",
-    "data/games.json",
-    "data/originated_lines.json",
-    "data/raw/probe_official.json",
-    "data/raw/sources.json",
-    "data/raw/verification_c03.json",
-    "data/schedule_2026_11_13_to_16.json",
-    "data/slate_full.json",
-    "docs/data/sources.json",
-    "docs/games.html",
-    "gameflow.html",
-    "lines.html",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/dal-vs-bos-0022600240",
-   "http_status": 403,
-   "ms": 27,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/derived/lines.json",
-    "data/games.json",
-    "data/originated_lines.json",
-    "data/raw/probe_official.json",
-    "data/raw/sources.json",
-    "data/raw/verification_c03.json",
-    "data/schedule_2026_11_13_to_16.json",
-    "data/slate_full.json",
-    "docs/data/sources.json",
-    "docs/games.html",
-    "gameflow.html",
-    "lines.html",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/dal-vs-cle-0022600232",
-   "http_status": 403,
-   "ms": 23,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/derived/lines.json",
-    "data/games.json",
-    "data/originated_lines.json",
-    "data/raw/probe_official.json",
-    "data/raw/sources.json",
-    "data/raw/verification_c03.json",
-    "data/schedule_2026_11_13_to_16.json",
-    "data/slate_full.json",
-    "docs/data/sources.json",
-    "docs/games.html",
-    "gameflow.html",
-    "lines.html",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/den-vs-nop-0022600231",
-   "http_status": 403,
-   "ms": 24,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/derived/lines.json",
-    "data/games.json",
-    "data/originated_lines.json",
-    "data/raw/probe_official.json",
-    "data/raw/sources.json",
-    "data/raw/verification_c03.json",
-    "data/schedule_2026_11_13_to_16.json",
-    "data/slate_full.json",
-    "docs/data/sources.json",
-    "docs/games.html",
-    "gameflow.html",
-    "lines.html",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/det-vs-mia-0022600233",
-   "http_status": 403,
-   "ms": 22,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/derived/lines.json",
-    "data/games.json",
-    "data/originated_lines.json",
-    "data/raw/probe_official.json",
-    "data/raw/sources.json",
-    "data/raw/verification_c03.json",
-    "data/schedule_2026_11_13_to_16.json",
-    "data/slate_full.json",
-    "docs/data/sources.json",
-    "docs/games.html",
-    "gameflow.html",
-    "lines.html",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/det-vs-sas-0022600255",
-   "http_status": 403,
-   "ms": 23,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/raw/verification_c03.json",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
-   "http_status": 403,
-   "ms": 44,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/derived/lines.json",
-    "data/originated_lines.json",
-    "data/raw/probe_official.json",
-    "data/raw/verification_c03.json",
-    "data/schedule_2026_11_13_to_16.json",
-    "data/slate_full.json",
-    "gameflow.html",
-    "lines.html",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/gsw-vs-sas-0022600040",
-   "http_status": 403,
-   "ms": 27,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/derived/lines.json",
-    "data/games.json",
-    "data/originated_lines.json",
-    "data/raw/probe_official.json",
-    "data/raw/sources.json",
-    "data/raw/verification_c03.json",
-    "data/schedule_2026_11_13_to_16.json",
-    "data/slate_full.json",
-    "docs/data/sources.json",
-    "docs/games.html",
-    "gameflow.html",
-    "lines.html",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/hou-vs-mia-0022600249",
-   "http_status": 403,
-   "ms": 26,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/derived/lines.json",
-    "data/originated_lines.json",
-    "data/raw/probe_official.json",
-    "data/raw/verification_c03.json",
-    "data/schedule_2026_11_13_to_16.json",
-    "data/slate_full.json",
-    "gameflow.html",
-    "lines.html",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/hou-vs-was-0022600242",
-   "http_status": 403,
-   "ms": 23,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/derived/lines.json",
-    "data/games.json",
-    "data/originated_lines.json",
-    "data/raw/probe_official.json",
-    "data/raw/sources.json",
-    "data/raw/verification_c03.json",
-    "data/schedule_2026_11_13_to_16.json",
-    "data/slate_full.json",
-    "docs/data/sources.json",
-    "docs/games.html",
-    "gameflow.html",
-    "lines.html",
-    "schedule-verified.html"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/game/ind-vs-phi-0022600236",
    "http_status": 403,
    "ms": 66,
    "bytes": 0,
@@ -865,13 +698,255 @@
     "docs/games.html",
     "gameflow.html",
     "lines.html",
+    "schedule-verified.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/dal-vs-bos-0022600240",
+   "http_status": 403,
+   "ms": 103,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/derived/lines.json",
+    "data/games.json",
+    "data/originated_lines.json",
+    "data/raw/probe_official.json",
+    "data/raw/sources.json",
+    "data/raw/verification_c03.json",
+    "data/schedule_2026_11_13_to_16.json",
+    "data/slate_full.json",
+    "docs/data/sources.json",
+    "docs/games.html",
+    "gameflow.html",
+    "lines.html",
+    "schedule-verified.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/dal-vs-cle-0022600232",
+   "http_status": 403,
+   "ms": 108,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/derived/lines.json",
+    "data/games.json",
+    "data/originated_lines.json",
+    "data/raw/probe_official.json",
+    "data/raw/sources.json",
+    "data/raw/verification_c03.json",
+    "data/schedule_2026_11_13_to_16.json",
+    "data/slate_full.json",
+    "docs/data/sources.json",
+    "docs/games.html",
+    "gameflow.html",
+    "lines.html",
+    "schedule-verified.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/den-vs-nop-0022600231",
+   "http_status": 403,
+   "ms": 88,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/derived/lines.json",
+    "data/games.json",
+    "data/originated_lines.json",
+    "data/raw/probe_official.json",
+    "data/raw/sources.json",
+    "data/raw/verification_c03.json",
+    "data/schedule_2026_11_13_to_16.json",
+    "data/slate_full.json",
+    "docs/data/sources.json",
+    "docs/games.html",
+    "gameflow.html",
+    "lines.html",
+    "schedule-verified.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/det-vs-mia-0022600233",
+   "http_status": 403,
+   "ms": 80,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/derived/lines.json",
+    "data/games.json",
+    "data/originated_lines.json",
+    "data/raw/probe_official.json",
+    "data/raw/sources.json",
+    "data/raw/verification_c03.json",
+    "data/schedule_2026_11_13_to_16.json",
+    "data/slate_full.json",
+    "docs/data/sources.json",
+    "docs/games.html",
+    "gameflow.html",
+    "lines.html",
+    "schedule-verified.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/det-vs-sas-0022600255",
+   "http_status": 403,
+   "ms": 72,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/raw/probe_official.json",
+    "data/raw/verification_c03.json",
     "schedule-verified.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
+   "http_status": 403,
+   "ms": 88,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/derived/lines.json",
+    "data/originated_lines.json",
+    "data/raw/probe_official.json",
+    "data/raw/verification_c03.json",
+    "data/schedule_2026_11_13_to_16.json",
+    "data/slate_full.json",
+    "gameflow.html",
+    "lines.html",
+    "schedule-verified.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/gsw-vs-sas-0022600040",
+   "http_status": 403,
+   "ms": 89,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/derived/lines.json",
+    "data/games.json",
+    "data/originated_lines.json",
+    "data/raw/probe_official.json",
+    "data/raw/sources.json",
+    "data/raw/verification_c03.json",
+    "data/schedule_2026_11_13_to_16.json",
+    "data/slate_full.json",
+    "docs/data/sources.json",
+    "docs/games.html",
+    "gameflow.html",
+    "lines.html",
+    "schedule-verified.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/hou-vs-mia-0022600249",
+   "http_status": 403,
+   "ms": 66,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/derived/lines.json",
+    "data/originated_lines.json",
+    "data/raw/probe_official.json",
+    "data/raw/verification_c03.json",
+    "data/schedule_2026_11_13_to_16.json",
+    "data/slate_full.json",
+    "gameflow.html",
+    "lines.html",
+    "schedule-verified.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/hou-vs-was-0022600242",
+   "http_status": 403,
+   "ms": 66,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/derived/lines.json",
+    "data/games.json",
+    "data/originated_lines.json",
+    "data/raw/probe_official.json",
+    "data/raw/sources.json",
+    "data/raw/verification_c03.json",
+    "data/schedule_2026_11_13_to_16.json",
+    "data/slate_full.json",
+    "docs/data/sources.json",
+    "docs/games.html",
+    "gameflow.html",
+    "lines.html",
+    "schedule-verified.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/game/ind-vs-phi-0022600236",
+   "http_status": 403,
+   "ms": 69,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/derived/lines.json",
+    "data/games.json",
+    "data/originated_lines.json",
+    "data/raw/probe_official.json",
+    "data/raw/sources.json",
+    "data/raw/verification_c03.json",
+    "data/schedule_2026_11_13_to_16.json",
+    "data/slate_full.json",
+    "docs/data/sources.json",
+    "docs/games.html",
+    "gameflow.html",
+    "lines.html",
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/lal-vs-phx-0022600237",
    "http_status": 403,
-   "ms": 21,
+   "ms": 64,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -890,13 +965,14 @@
     "docs/games.html",
     "gameflow.html",
     "lines.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/mem-vs-nop-0022600038",
    "http_status": 403,
-   "ms": 27,
+   "ms": 128,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -915,13 +991,14 @@
     "docs/games.html",
     "gameflow.html",
     "lines.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/mem-vs-was-0022600247",
    "http_status": 403,
-   "ms": 25,
+   "ms": 196,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -936,13 +1013,14 @@
     "data/slate_full.json",
     "gameflow.html",
     "lines.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/mil-vs-orl-0022600035",
    "http_status": 403,
-   "ms": 26,
+   "ms": 95,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -961,13 +1039,14 @@
     "docs/games.html",
     "gameflow.html",
     "lines.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/nyk-vs-ind-0022600034",
    "http_status": 403,
-   "ms": 25,
+   "ms": 70,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -986,13 +1065,14 @@
     "docs/games.html",
     "gameflow.html",
     "lines.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/nyk-vs-tor-0022600241",
    "http_status": 403,
-   "ms": 22,
+   "ms": 75,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1016,19 +1096,21 @@
     "gameflow.html",
     "lines.html",
     "review.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/nyk-vs-tor-0022600253",
    "http_status": 403,
-   "ms": 20,
+   "ms": 92,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
    "error": "HTTP 403 Forbidden",
    "final_url": null,
    "cited_in": [
+    "data/raw/probe_official.json",
     "data/raw/verification_c03.json",
     "schedule-verified.html"
    ]
@@ -1036,7 +1118,7 @@
   {
    "url": "https://www.nba.com/game/okc-vs-lac-0022600042",
    "http_status": 403,
-   "ms": 25,
+   "ms": 65,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1055,13 +1137,14 @@
     "docs/games.html",
     "gameflow.html",
     "lines.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/okc-vs-sac-0022600244",
    "http_status": 403,
-   "ms": 23,
+   "ms": 69,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1080,13 +1163,14 @@
     "docs/games.html",
     "gameflow.html",
     "lines.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/orl-vs-bos-0022600245",
    "http_status": 403,
-   "ms": 26,
+   "ms": 106,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1101,13 +1185,14 @@
     "data/slate_full.json",
     "gameflow.html",
     "lines.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
    "http_status": 403,
-   "ms": 23,
+   "ms": 71,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1122,13 +1207,14 @@
     "data/slate_full.json",
     "gameflow.html",
     "lines.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/phx-vs-den-0022600252",
    "http_status": 403,
-   "ms": 23,
+   "ms": 65,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1143,13 +1229,14 @@
     "data/slate_full.json",
     "gameflow.html",
     "lines.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/por-vs-min-0022600250",
    "http_status": 403,
-   "ms": 24,
+   "ms": 82,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1164,19 +1251,21 @@
     "data/slate_full.json",
     "gameflow.html",
     "lines.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/por-vs-min-0022600254",
    "http_status": 403,
-   "ms": 23,
+   "ms": 99,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
    "error": "HTTP 403 Forbidden",
    "final_url": null,
    "cited_in": [
+    "data/raw/probe_official.json",
     "data/raw/verification_c03.json",
     "schedule-verified.html"
    ]
@@ -1184,7 +1273,7 @@
   {
    "url": "https://www.nba.com/game/por-vs-sac-0022600041",
    "http_status": 403,
-   "ms": 22,
+   "ms": 99,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1203,13 +1292,14 @@
     "docs/games.html",
     "gameflow.html",
     "lines.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/sas-vs-uta-0022600239",
    "http_status": 403,
-   "ms": 27,
+   "ms": 73,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1228,13 +1318,14 @@
     "docs/games.html",
     "gameflow.html",
     "lines.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/uta-vs-hou-0022600039",
    "http_status": 403,
-   "ms": 27,
+   "ms": 65,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1253,19 +1344,21 @@
     "docs/games.html",
     "gameflow.html",
     "lines.html",
-    "schedule-verified.html"
+    "schedule-verified.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/game/uta-vs-lac-0022600257",
    "http_status": 403,
-   "ms": 25,
+   "ms": 90,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
    "error": "HTTP 403 Forbidden",
    "final_url": null,
    "cited_in": [
+    "data/raw/probe_official.json",
     "data/raw/verification_c03.json",
     "schedule-verified.html"
    ]
@@ -1273,20 +1366,21 @@
   {
    "url": "https://www.nba.com/game/{away.lower(",
    "http_status": 403,
-   "ms": 44,
+   "ms": 63,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
    "error": "HTTP 403 Forbidden",
    "final_url": null,
    "cited_in": [
+    "data/raw/probe_official.json",
     "scripts/verify_schedule_c.py"
    ]
   },
   {
    "url": "https://www.nba.com/games",
    "http_status": 403,
-   "ms": 25,
+   "ms": 83,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1305,13 +1399,14 @@
     "docs/pages/glossary.html",
     "docs/pages/questions.html",
     "scripts/build_site.py",
-    "scripts/compute_correlations.py"
+    "scripts/compute_correlations.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/games?date=2026-11-06",
    "http_status": 403,
-   "ms": 27,
+   "ms": 84,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1322,13 +1417,14 @@
     "data/raw/probe_official.json",
     "data/raw/sources.json",
     "docs/data/flagged.json",
-    "docs/data/sources.json"
+    "docs/data/sources.json",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/games?date=2026-11-07",
    "http_status": 403,
-   "ms": 23,
+   "ms": 99,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1339,13 +1435,14 @@
     "data/raw/probe_official.json",
     "data/raw/sources.json",
     "docs/data/flagged.json",
-    "docs/data/sources.json"
+    "docs/data/sources.json",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/games?date=2026-11-08",
    "http_status": 403,
-   "ms": 25,
+   "ms": 72,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1354,13 +1451,14 @@
    "cited_in": [
     "data/raw/probe_official.json",
     "data/raw/sources.json",
-    "docs/data/sources.json"
+    "docs/data/sources.json",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/games?date=2026-11-09",
    "http_status": 403,
-   "ms": 23,
+   "ms": 214,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1372,13 +1470,14 @@
     "data/raw/sources.json",
     "data/slate_full.json",
     "docs/data/sources.json",
-    "gameflow.html"
+    "gameflow.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/games?date=2026-11-10",
    "http_status": 403,
-   "ms": 22,
+   "ms": 109,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1389,13 +1488,14 @@
     "data/raw/probe_official.json",
     "data/raw/sources.json",
     "data/slate_full.json",
-    "docs/data/sources.json"
+    "docs/data/sources.json",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/games?date=2026-11-11",
    "http_status": 403,
-   "ms": 21,
+   "ms": 87,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1417,13 +1517,14 @@
     "gameflow.html",
     "scripts/backtest.py",
     "scripts/build_site.py",
-    "scripts/originate_lines.py"
+    "scripts/originate_lines.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/games?date=2026-11-12",
    "http_status": 403,
-   "ms": 23,
+   "ms": 98,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1450,13 +1551,14 @@
     "scripts/backtest.py",
     "scripts/build_edge_site.py",
     "scripts/build_site.py",
-    "scripts/originate_lines.py"
+    "scripts/originate_lines.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/games?date=2026-11-13",
    "http_status": 403,
-   "ms": 22,
+   "ms": 68,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1487,13 +1589,15 @@
     "review.html",
     "schedule-verified.html",
     "scripts/build_edge_site.py",
-    "scripts/verify_schedule_c.py"
+    "scripts/probe_official.py",
+    "scripts/verify_schedule_c.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/games?date=2026-11-14",
    "http_status": 403,
-   "ms": 27,
+   "ms": 65,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1514,13 +1618,14 @@
     "gameflow.html",
     "lines.html",
     "schedule-verified.html",
-    "scripts/verify_schedule_c.py"
+    "scripts/verify_schedule_c.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/games?date=2026-11-15",
    "http_status": 403,
-   "ms": 25,
+   "ms": 128,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1542,13 +1647,14 @@
     "docs/sources.html",
     "gameflow.html",
     "lines.html",
-    "review.html"
+    "review.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/games?date=2026-11-16",
    "http_status": 403,
-   "ms": 22,
+   "ms": 91,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1564,26 +1670,14 @@
     "docs/picks.html",
     "docs/sources.html",
     "gameflow.html",
-    "lines.html"
+    "lines.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/games?date=2026-11-17",
    "http_status": 403,
-   "ms": 21,
-   "bytes": 0,
-   "content_type": null,
-   "sha256": null,
-   "error": "HTTP 403 Forbidden",
-   "final_url": null,
-   "cited_in": [
-    "data/raw/official_schedule_capture_2026-11-14.json"
-   ]
-  },
-  {
-   "url": "https://www.nba.com/games?date=YYYY-MM-DD",
-   "http_status": 403,
-   "ms": 21,
+   "ms": 65,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1591,13 +1685,28 @@
    "final_url": null,
    "cited_in": [
     "data/raw/official_schedule_capture_2026-11-14.json",
+    "data/raw/probe_official.json"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/games?date=YYYY-MM-DD",
+   "http_status": 403,
+   "ms": 64,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "data/raw/official_schedule_capture_2026-11-14.json",
+    "data/raw/probe_official.json",
     "data/raw/verification_c03.json"
    ]
   },
   {
    "url": "https://www.nba.com/games?date={d",
    "http_status": 403,
-   "ms": 22,
+   "ms": 93,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1605,13 +1714,14 @@
    "final_url": null,
    "cited_in": [
     "data/raw/probe_official.json",
-    "engine/fetch_official.py"
+    "engine/fetch_official.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/player/1628374/lauri-markkanen",
    "http_status": 403,
-   "ms": 45,
+   "ms": 63,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1621,13 +1731,14 @@
     "data/derived/injury_impact.json",
     "data/player_absence_evidence.json",
     "data/raw/probe_official.json",
-    "docs/pages/injuries.html"
+    "docs/pages/injuries.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/player/1630169/tyrese-haliburton",
    "http_status": 403,
-   "ms": 21,
+   "ms": 95,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1637,13 +1748,14 @@
     "data/derived/injury_impact.json",
     "data/player_absence_evidence.json",
     "data/raw/probe_official.json",
-    "docs/pages/injuries.html"
+    "docs/pages/injuries.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/player/1630596/evan-mobley",
    "http_status": 403,
-   "ms": 33,
+   "ms": 89,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1653,13 +1765,14 @@
     "data/derived/injury_impact.json",
     "data/player_absence_evidence.json",
     "data/raw/probe_official.json",
-    "docs/pages/injuries.html"
+    "docs/pages/injuries.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/player/1631094/paolo-banchero",
    "http_status": 403,
-   "ms": 28,
+   "ms": 71,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1669,13 +1782,14 @@
     "data/derived/injury_impact.json",
     "data/player_absence_evidence.json",
     "data/raw/probe_official.json",
-    "docs/pages/injuries.html"
+    "docs/pages/injuries.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/player/1631096/chet-holmgren",
    "http_status": 403,
-   "ms": 22,
+   "ms": 65,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1685,13 +1799,14 @@
     "data/derived/injury_impact.json",
     "data/player_absence_evidence.json",
     "data/raw/probe_official.json",
-    "docs/pages/injuries.html"
+    "docs/pages/injuries.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/player/1631101/miles-bridges",
    "http_status": 403,
-   "ms": 25,
+   "ms": 73,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1701,13 +1816,14 @@
     "data/derived/injury_impact.json",
     "data/player_absence_evidence.json",
     "data/raw/probe_official.json",
-    "docs/pages/injuries.html"
+    "docs/pages/injuries.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/player/1631114/jalen-williams",
    "http_status": 403,
-   "ms": 25,
+   "ms": 91,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1717,13 +1833,14 @@
     "data/derived/injury_impact.json",
     "data/player_absence_evidence.json",
     "data/raw/probe_official.json",
-    "docs/pages/injuries.html"
+    "docs/pages/injuries.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/player/201939/stephen-curry",
    "http_status": 403,
-   "ms": 23,
+   "ms": 80,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1733,13 +1850,14 @@
     "data/derived/injury_impact.json",
     "data/player_absence_evidence.json",
     "data/raw/probe_official.json",
-    "docs/pages/injuries.html"
+    "docs/pages/injuries.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/schedule",
    "http_status": 403,
-   "ms": 20,
+   "ms": 85,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1769,16 +1887,18 @@
     "review.html",
     "schedule-verified.html",
     "scripts/build_site.py",
+    "scripts/probe_official.py",
     "scripts/verify_schedule_c.py",
     "slate.html",
     "sources.html",
-    "suggestions.html"
+    "suggestions.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/standings",
    "http_status": 403,
-   "ms": 23,
+   "ms": 72,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1789,13 +1909,14 @@
     "data/raw/probe_official.json",
     "data/raw/sources.json",
     "docs/data/flagged.json",
-    "docs/data/sources.json"
+    "docs/data/sources.json",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/",
    "http_status": 403,
-   "ms": 23,
+   "ms": 79,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1806,13 +1927,14 @@
     "index.html",
     "research.html",
     "review.html",
-    "slate.html"
+    "slate.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/help/faq",
    "http_status": 403,
-   "ms": 39,
+   "ms": 102,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1821,13 +1943,14 @@
    "cited_in": [
     "README.md",
     "data/raw/probe_official.json",
-    "index.html"
+    "index.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/help/glossary",
    "http_status": 403,
-   "ms": 21,
+   "ms": 68,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1849,13 +1972,14 @@
     "scripts/compute_correlations.py",
     "slate.html",
     "sources.html",
-    "suggestions.html"
+    "suggestions.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/player/1630596/traditional",
    "http_status": 403,
-   "ms": 36,
+   "ms": 167,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1864,13 +1988,14 @@
    "cited_in": [
     "data/derived/injury_impact.json",
     "data/player_absence_evidence.json",
-    "data/raw/probe_official.json"
+    "data/raw/probe_official.json",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/player/201939/traditional",
    "http_status": 403,
-   "ms": 25,
+   "ms": 61,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1879,13 +2004,14 @@
    "cited_in": [
     "data/derived/injury_impact.json",
     "data/player_absence_evidence.json",
-    "data/raw/probe_official.json"
+    "data/raw/probe_official.json",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/players",
    "http_status": 403,
-   "ms": 24,
+   "ms": 97,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1894,13 +2020,14 @@
    "cited_in": [
     "README.md",
     "data/raw/probe_official.json",
-    "index.html"
+    "index.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/players/boxscores",
    "http_status": 403,
-   "ms": 23,
+   "ms": 91,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1917,13 +2044,14 @@
     "scripts/build_site.py",
     "scripts/compute_correlations.py",
     "sources.html",
-    "suggestions.html"
+    "suggestions.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/players/traditional",
    "http_status": 403,
-   "ms": 27,
+   "ms": 92,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1937,13 +2065,15 @@
     "docs/data/flagged.json",
     "docs/data/sources.json",
     "engine/fetch_official.py",
-    "index.html"
+    "index.html",
+    "scripts/probe_official.py",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame",
    "http_status": 403,
-   "ms": 21,
+   "ms": 86,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1957,7 +2087,7 @@
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=MIN",
    "http_status": 403,
-   "ms": 25,
+   "ms": 82,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1974,7 +2104,7 @@
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS",
    "http_status": 403,
-   "ms": 21,
+   "ms": 62,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -1989,7 +2119,7 @@
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&sort=PTS",
    "http_status": 403,
-   "ms": 22,
+   "ms": 92,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2003,9 +2133,22 @@
    ]
   },
   {
+   "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=P",
+   "http_status": 403,
+   "ms": 84,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
+   ]
+  },
+  {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame",
    "http_status": 403,
-   "ms": 38,
+   "ms": 76,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2013,13 +2156,14 @@
    "final_url": null,
    "cited_in": [
     "data/raw/probe_official.json",
-    "docs/pages/flagged.html"
+    "docs/pages/flagged.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=MIN",
    "http_status": 403,
-   "ms": 27,
+   "ms": 114,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2027,13 +2171,14 @@
    "final_url": null,
    "cited_in": [
     "data/raw/probe_official.json",
-    "docs/pages/sources.html"
+    "docs/pages/sources.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS",
    "http_status": 403,
-   "ms": 25,
+   "ms": 75,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2041,13 +2186,14 @@
    "final_url": null,
    "cited_in": [
     "data/raw/probe_official.json",
-    "docs/pages/lines.html"
+    "docs/pages/lines.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;sort=PTS",
    "http_status": 403,
-   "ms": 31,
+   "ms": 78,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2055,13 +2201,79 @@
    "final_url": null,
    "cited_in": [
     "data/raw/probe_official.json",
-    "docs/pages/sources.html"
+    "docs/pages/sources.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;P",
+   "http_status": 403,
+   "ms": 82,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;PerMode=PerGame",
+   "http_status": 403,
+   "ms": 69,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;PerMode=PerGame&amp;amp;dir=-1&amp;amp;sort=MIN",
+   "http_status": 403,
+   "ms": 98,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;PerMode=PerGame&amp;amp;dir=-1&amp;amp;sort=PTS",
+   "http_status": 403,
+   "ms": 122,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;PerMode=PerGame&amp;amp;sort=PTS",
+   "http_status": 403,
+   "ms": 172,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/teams/advanced",
    "http_status": 403,
-   "ms": 26,
+   "ms": 73,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2083,13 +2295,15 @@
     "index.html",
     "research.html",
     "review.html",
-    "sources.html"
+    "scripts/probe_official.py",
+    "sources.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
    "http_status": 403,
-   "ms": 33,
+   "ms": 64,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2105,9 +2319,35 @@
    ]
   },
   {
+   "url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonTyp",
+   "http_status": 403,
+   "ms": 92,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonType=Regular+Season",
+   "http_status": 403,
+   "ms": 68,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
+   ]
+  },
+  {
    "url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "http_status": 403,
-   "ms": 23,
+   "ms": 93,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2127,7 +2367,7 @@
   {
    "url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season",
    "http_status": 403,
-   "ms": 33,
+   "ms": 70,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2139,13 +2379,27 @@
     "docs/pages/correlations.html",
     "docs/pages/flagged.html",
     "docs/pages/sources.html",
-    "docs/pages/strategies.html"
+    "docs/pages/strategies.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;amp;SeasonType=Regular+Season",
+   "http_status": 403,
+   "ms": 66,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame",
    "http_status": 403,
-   "ms": 28,
+   "ms": 64,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2158,9 +2412,22 @@
    ]
   },
   {
+   "url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGam",
+   "http_status": 403,
+   "ms": 102,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
+   ]
+  },
+  {
    "url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame",
    "http_status": 403,
-   "ms": 25,
+   "ms": 84,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2168,13 +2435,40 @@
    "final_url": null,
    "cited_in": [
     "data/raw/probe_official.json",
-    "docs/pages/sources.html"
+    "docs/pages/sources.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;PerMod",
+   "http_status": 403,
+   "ms": 91,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;PerMode=PerGame",
+   "http_status": 403,
+   "ms": 71,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/teams/traditional",
    "http_status": 403,
-   "ms": 34,
+   "ms": 64,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2184,13 +2478,14 @@
     "data/questions.json",
     "data/raw/probe_official.json",
     "docs/pages/questions.html",
-    "docs/questions.html"
+    "docs/questions.html",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame",
    "http_status": 403,
-   "ms": 29,
+   "ms": 65,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2205,9 +2500,22 @@
    ]
   },
   {
+   "url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=Per",
+   "http_status": 403,
+   "ms": 81,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
+   ]
+  },
+  {
    "url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame",
    "http_status": 403,
-   "ms": 22,
+   "ms": 85,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2217,13 +2525,40 @@
     "data/raw/probe_official.json",
     "docs/pages/correlations.html",
     "docs/pages/flagged.html",
-    "docs/pages/sources.html"
+    "docs/pages/sources.html",
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;Per",
+   "http_status": 403,
+   "ms": 96,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
+   ]
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;amp;SeasonType=Regular+Season&amp;amp;PerMode=PerGame",
+   "http_status": 403,
+   "ms": 73,
+   "bytes": 0,
+   "content_type": null,
+   "sha256": null,
+   "error": "HTTP 403 Forbidden",
+   "final_url": null,
+   "cited_in": [
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/team/1610612737/hawks/roster",
    "http_status": 403,
-   "ms": 27,
+   "ms": 85,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2231,13 +2566,14 @@
    "final_url": null,
    "cited_in": [
     "data/injury_report_2026_11_13.json",
-    "data/raw/probe_official.json"
+    "data/raw/probe_official.json",
+    "verification.html"
    ]
   },
   {
    "url": "https://www.nba.com/team/1610612760/thunder/roster",
    "http_status": 403,
-   "ms": 23,
+   "ms": 90,
    "bytes": 0,
    "content_type": null,
    "sha256": null,
@@ -2245,7 +2581,8 @@
    "final_url": null,
    "cited_in": [
     "data/injury_report_2026_11_13.json",
-    "data/raw/probe_official.json"
+    "data/raw/probe_official.json",
+    "verification.html"
    ]
   }
  ]
