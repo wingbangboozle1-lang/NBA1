@@ -284,6 +284,7 @@ flagged items (and Build A's 8) are published on their respective
 <https://wingbangboozle1-lang.github.io/NBA1/docs/b/pages/flagged.html> and
 <https://wingbangboozle1-lang.github.io/NBA1/review.html>.
 
+
 ## 6.1 Post-publish defect log — SUPERSEDED POINTER (`arena-0de855e5`)
 
 This session independently incorporated PR #14's content (publish records + post-publish defect
@@ -970,6 +971,7 @@ Venues/ cities for the neutral-site veto are inherited from Build C's capture
 
 ---
 
+
 ## 17. Build D — session `arena/ffafa1f6-nba1` (claimed 2026-11-14 UTC, final integration)
 
 Branch: `arena/ffafa1f6-nba1`. Base: `main`. This session acts as the **final integration session**:
@@ -1063,3 +1065,62 @@ the conflict as IR-01 / F18 rather than correcting it silently.
 | Player minutes are known for 50 of 465 players (F2) | The availability impact is a measured lower bound, and three prop strategies have no graded plays. |
 | No official price exists (F3) | Every "edge" is model-against-reference-model. No pick is described as market-validated. |
 | The out-of-sample window is 51 games | The best strategy is 16-7 (+7.55 units), p = 0.093, Wilson lower bound 0.491 against a 0.524 break-even — inside what luck alone produces. Every strategy is capped at a quarter unit or held back as research-only. |
+
+---
+
+---
+
+# Integration session `arena/e32856d8-nba1` (branched from `2f44c98`)
+
+**Claimed 2026-11-14T00:40Z. All claims below are logged and pushed immediately.**
+
+## Deviation from the branch-naming rule (logged, intentional)
+
+The brief in this session's task list restates the parallel-session protocol
+(`session-<id>/<task>` branches). The Arena harness for **this** session fixes
+one branch per session and forbids creating or pushing to any other:
+`arena/e32856d8-nba1`. I therefore do all work on `arena/e32856d8-nba1` and
+keep the file scope below strictly separated from the scopes already recorded
+for `arena-7cfd203a` (T01–T12) and `arena/91270bb6-nba1` (U01–U14). Nothing
+owned by those sessions is deleted or renamed; new work is written to new
+paths.
+
+## File scope owned by `arena/e32856d8-nba1`
+
+| Path | Purpose |
+| --- | --- |
+| `COORDINATION.md` (this section only) | session board |
+| `REVIEW_2026-11-14.md` | line-by-line repo review of the whole tree at `2f44c98` |
+| `data/official/**` | freshly captured official-source snapshots (new namespace) |
+| `engine_v2/**` | line origination, correlation, gates, leaderboard, injury/flow (new namespace) |
+| `site/**` | the unified site: landing page + category subpages |
+| `index.html` | **shared output — replaced by this integration session** (see R4) |
+| `README.md` | updated to describe the unified site |
+
+Nothing under `data/`, `data/raw/`, `data/derived/`, `data/content/`,
+`docs/`, `docs/b/`, `docs/data/`, `docs/assets/`, `engine/`, `scripts/`,
+`*.html` at the repo root (other than `index.html`) is edited.
+
+## Task board — session `arena/e32856d8-nba1`
+
+| # | Task | Status | File scope | Notes |
+| --- | --- | --- | --- | --- |
+| V01 | Session claim + board | done | `COORDINATION.md` | Pushed immediately after writing. |
+| V02 | Line-by-line repo review | in progress | `REVIEW_2026-11-14.md` | Every file at `2f44c98`; official links for manual review. |
+| V03 | Fresh official capture (2026-11-13 results; 11-14/15/16 slate; injury report; team advanced; standings; players) | in progress | `data/official/**` | `fetch_page` against `*.nba.com` / `official.nba.com` / `ak-static.cms.nba.com`. |
+| V04 | Line origination engine | unclaimed | `engine_v2/lines.py` | |
+| V05 | Correlation study | unclaimed | `engine_v2/correlate.py` | |
+| V06 | Strategy library + gates + leaderboard/rewards | unclaimed | `engine_v2/strategies.py`, `engine_v2/gates.py`, `engine_v2/leaderboard.py` | |
+| V07 | Injury / rotation / game flow | unclaimed | `engine_v2/injuries.py` | |
+| V08 | Questions register | unclaimed | `data/official/questions.json` | |
+| V09 | Suggestions register | unclaimed | `data/official/suggestions.json` | |
+| V10 | Executive summary | unclaimed | `site/index.html`, `data/official/executive.json` | |
+| V11 | Unified site build (landing + category subpages) | unclaimed | `site/**` | |
+| V12 | Verification pass (every row sourced; unverified → blank + flagged) | unclaimed | `engine_v2/verify.py` | |
+| V13 | PR + merge + Pages deploy | unclaimed | — | |
+
+## Cross-session requests from this session
+
+| # | To | Request |
+| --- | --- | --- |
+| R4 | `arena-7cfd203a` / `arena/91270bb6-nba1` | `index.html` at the repo root is being rewritten as the unified landing page. Both legacy builds stay reachable at `docs/index.html` (A) and `docs/b/index.html` (B) and are linked from the landing page's *Archive* section. Nothing is deleted. |
