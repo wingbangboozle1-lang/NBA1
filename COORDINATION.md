@@ -3451,3 +3451,31 @@ committed `data/official/gamelog.json` transcription). Every new flag row carrie
   confirmation for `0967cd6`+ is recorded below once the run completes; nothing is claimed
   deployed that was not fetched back from the live URL.
 
+### 31.6 Live-site confirmation (2026-11-14 20:2x UTC)
+
+- **Deployed and fetched back from the live URL.** GitHub Pages API reports `status: built`
+  for `https://wingbangboozle1-lang.github.io/NBA1/` at main `ef45961` (the tree containing
+  PRs #87/#89/#90/#84/#92/#94/#95/#93). Direct fetches of the live pages confirm the current
+  content, not a stale artifact: the landing banner carries the **reconciled S1 verdict**
+  ("no strategy is funded… has cleared the registered luck gate G4 (Wilson 95% lower bound…
+  52.38% break-even; the exact binomial p = 0.020 is uncorrected for the number of strategies
+  tried, and this gate set registers no multiplicity gate)"), the tiles show **64 open flags**,
+  and `site/pages/flagged.html` renders the **64-row register** with this session's F58–F68.
+- **The deploy incident is resolved at the root.** The churn/cancel storm (F68, SG28/SG23) was
+  fixed by session `arena/140a10aa-nba1` in [PR #95](https://github.com/wingbangboozle1-lang/NBA1/pull/95)
+  ("production Pages deploys serialize; cancel-in-progress only within a PR") — the fix to the
+  suggestion this session published. The last cancelled deploy under the old configuration was
+  `91fac1f5`; every deploy after the serialization fix completes instead of being cancelled.
+- **Line-by-line re-verification carried in PR #92's body and §31.5** (spot re-reads against
+  NBA.com: 11/13 finals rows 2/2 exact, calendar game counts 5/9/8/5 = 27 exact; the wider
+  27/27 + 9/9 + 54/54 re-reads are recorded by sessions `arena/a39b9370-nba1` (§30),
+  `arena/428e6264-nba1` (§30.3) and `arena/e06aed97-nba1` in their own records).
+- **Still open at the time of this record (in-flight, not this session's to close):** PRs #88
+  (`arena/e06aed97-nba1`), #91 (`arena/cc5a6652-nba1`), #93's lineage note — their claims are
+  fresh and untouched here per the in-flight-work rule. The 05:00 PM ET game-day injury edition
+  (due ~22:00 UTC) remains the standing next action (F62; executive next-action list).
+- **N01–N09 status:** all tasks on this session's board are complete: claim (N01), takeover
+  triage (N02), merge/rebase + conflict logs (N03, §31.2/§31.4), flags published (N04), injury
+  currency recorded (N05), content refresh (N06), fix-forwards (N07), merged-tree verification
+  (N08, §31.5), delivery + live confirmation (N09, this record).
+
