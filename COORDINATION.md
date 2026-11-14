@@ -602,7 +602,7 @@ No value was inferred. Venue names `Rocket Arena` (Cleveland) and `Mortgage Matc
 
 | # | Task | Status | File scope | Notes |
 | --- | --- | --- | --- | --- |
-| Z01 | Independently audit the current merged tree, document refresh-pipeline limits, and hand off non-overlapping findings to the active integration session | in progress | `COORDINATION.md`, `FINAL_AUDIT.md` (new) | The current main already includes PR #26/#27/#29/#30 integration work. PR #31 (`arena/0de855e5-nba1`) is open and owns the current fresh-slate/site integration. This session will not duplicate its slate work or edit its site, data, scripts, or workflow files. |
+| Z01 | Independently audit the merged tree, document refresh-pipeline limits, and hand off non-overlapping findings | done | `COORDINATION.md` §14, `FINAL_AUDIT.md` | Tests were rerun on `57b4284`; findings and limits are in `FINAL_AUDIT.md`. No NBA data or another session's site/engine/workflow files were changed. |
 
 ### Rebase conflicts and scope update
 
@@ -611,9 +611,29 @@ Before the initial push, `git pull --rebase origin main` advanced the base from
 Both the W01 record and this session's claim were preserved. Before the next
 push, a second `git pull --rebase origin main` advanced the base to `57b4284`
 (PR #30's integration plus later main updates) and conflicted at the same
-append-only board area. The current-main board is retained in full; this session
+append-only board area. The current-main board was retained in full; this session
 was moved to §14. No files from the other sessions' scopes were changed.
 
-This session now audits only the merged current tree and records requests for
-active integration owners. It does not claim that PR #31's unmerged slate values
-or pending deployment have been independently verified.
+### Verification performed and handoff requests
+
+| Check / finding | Result |
+| --- | --- |
+| `python3 scripts/verify_all.py` | PASS; 31 published schedule rows vs 36 local official-capture rows, 0 mismatches; 18 stale-record teams. |
+| `python3 scripts/verify_integration.py` | 0 errors; 42 warnings; 1,202/1,270 rows carry an official link; one `None` rendered on `docs/pages/strategies.html`. |
+| `node scripts/render_check.mjs` | 51/51 pages render; 1,918 rendered table rows; 0 problems (after installing the ignored CI `jsdom` dependency). |
+| `python3 scripts/check_links.py` | 41 docs pages; 1,485 links; 0 broken / unapproved / ragged; two methodology rows unsourced; client-side templates not in its static scan. |
+| `python3 scripts/verify_data.py` / `verify_inline.py` | 0 data errors, 41 blank-field groups marked `UNVERIFIED`; 20/20 derived checks pass, 0 Build A strategies validated. |
+| `python3 scripts/audit_injury_editions.py` | 113 report rows compared, 93 team-attributed + 20 team-not-printed; 0 missing/extra; 5 status changes. |
+| Refresh workflow source review | Confirmed workflow continues on fetch/build errors; fetcher writes `_capture_*` summaries only, while the model pipeline reads the older committed raw snapshots. No end-to-end refresh was run. |
+
+Environment limitation: the local link checker reports that outbound `nba.com` access is blocked, so this session checked source provenance/approved hosts, not live NBA HTTP status. The current site PRs' NBA claims are not independently adopted by this session.
+
+| # | From | To | Request | State |
+| --- | --- | --- | --- | --- |
+| R4 | `arena-159ed109` | PR #31 (`arena/0de855e5-nba1`) and PR #33 (`arena/ffafa1f6-nba1`) | Both open PRs describe final integration and overlap on the 14–17 Nov shared slate/site. Coordinate which is canonical, compare source/row coverage and line generation, and do not merge competing snapshots independently. | Sent as comments on both PRs; their owners remain active. |
+| R5 | `arena-159ed109` | PR #31 and PR #33 integration owners | Review the refresh path: `refresh-data.yml` continues after fetch/pipeline/build errors; `fetch_official.py` writes metadata summaries rather than promoting official values; `pipeline.py` reads existing raw snapshots. Add a clearly sourced Flagged-for-Review item and keep automation marked incomplete until an end-to-end parser/promotion test works. | Sent as comments on both PRs; no files in their scopes edited. |
+| R6 | `arena-159ed109` | PR #31 and PR #33 integration owners | Preserve `verify_integration.py` warnings: 68/1,270 rows have no link according to the independent check, and one `None` is rendered in Build A's strategy page. Label non-data/methodology rows and blank/flag any unverified NBA value; do not invent links or values. | Included with R5 in the PR comments; no site files edited. |
+| R7 | `arena-159ed109` | PR #31 / current integration owner | The merged §13 entry still says PR #30 merge and Pages deployment are pending, although #30 is merged. Update that historical integration record against the actual Actions/Pages result. | Included in the PR #31 comment; no prior session section edited. |
+
+This session does not claim that PR #31 or PR #33's unmerged values are verified,
+that either PR's final checks passed, or that the latest Pages build is deployed.
