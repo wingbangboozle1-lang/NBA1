@@ -25,6 +25,7 @@ The live site is published by GitHub Pages from the repository root:
 | Evidence | [`site/pages/luck.html`](site/pages/luck.html) | Luck decomposition: expected wins vs actual, per team |
 | Evidence | [`site/pages/backtest.html`](site/pages/backtest.html) | The 51-game out-of-sample window, game by game |
 | Evidence | [`site/pages/model.html`](site/pages/model.html) | Team ratings and every model assumption |
+| Verification | [`site/pages/source-check.html`](site/pages/source-check.html) | Every horizon game and every 11/13 final compared with NBA.com on 2026-11-14, the 11/13 settlement, and the conflicts between builds |
 | Decision | [`site/pages/questions.html`](site/pages/questions.html) | Answered and open questions |
 | Decision | [`site/pages/suggestions.html`](site/pages/suggestions.html) | Improvements as options with effort, risk and what each unlocks |
 | Decision | [`site/pages/flagged.html`](site/pages/flagged.html) | Everything that could not be confirmed from an official source |
@@ -124,8 +125,10 @@ available, that the data may be used, or that any model result is correct.
 ## Known limits
 
 - The 2026-11-13 slate was still in progress when the data was captured, so no
-  final score exists for it; the ratings window ends at 2026-11-12 and 18 team
-  records are one night out of date.
+  final score exists in the site's data. As of the 2026-11-14 UTC source check, NBA.com
+  shows all nine 11/13 games as Final; the site has not been rebuilt with them
+  (flag F29, [Source Check](site/pages/source-check.html)). The ratings window ends at
+  2026-11-12 and 18 team records are one night out of date.
 - At the newest official injury-report edition (11/13/26 07:30 PM ET), five of
   the ten teams playing on 11/14 had not filed, and no edition covers the games
   on 11/15–11/17. Those lines carry no injury adjustment and say so.

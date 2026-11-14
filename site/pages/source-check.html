@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Official source check &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="suggestions.html">Decision</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row links to the official source it
+      came from. A blank cell means the value could not be confirmed from an official
+      source &mdash; it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Official source check</h1>
+      <p class="sub">Line-by-line comparison of the site with NBA.com on 2026-11-14 (UTC): the horizon, the nine 11/13 finals and the settlement of the lines published for them.</p>
+    </div>
+    <div class="banner info"><div class="b-t">What this page checks</div><div class="b-b">On 2026-11-14 (UTC) every game on the official NBA.com Games &amp; Scores pages for 11/13–11/17 was transcribed and compared with the site's data, and the nine official finals of 11/13 were used to settle the lines that were published for them. The transcription, the checker (<code>scripts/source_check.py</code>) and every raw value are in <code>verify/2026-11-14/</code>. Where the site and NBA.com disagree, the row says so and the item is on <a href="flagged.html">Flagged for Review</a>.</div></div>
+<div class="tiles">
+<div class="tile"><div class="tile-v">27</div><div class="tile-l">Official games 11/14–11/17</div><div class="tile-s">27 matched to the site's horizon</div></div>
+<div class="tile"><div class="tile-v">5</div><div class="tile-l">Missing from slate capture</div><div class="tile-s">11/17 games not in data/official/slate.json</div></div>
+<div class="tile"><div class="tile-v">9 / 9</div><div class="tile-l">11/13 finals on NBA.com</div><div class="tile-s">all shown as Final at capture</div></div>
+<div class="tile"><div class="tile-v">3 / 4 / 2</div><div class="tile-l">11/13 settled (WIN / LOSS / NO BET)</div><div class="tile-s">mean |model &minus; final| margin 12.39 pts</div></div>
+<div class="tile"><div class="tile-v">17 of 17</div><div class="tile-l">Cross-build disagreements</div><div class="tile-s">2 pick opposite favourites</div></div>
+</div>
+<h2 class="sec">1. The 27-game horizon, official vs site</h2><p class="secsub">One row per official game. Tip times and pairings are compared with the site's horizon lines and the verbatim slate capture.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Game (away@home)</th>
+<th>Tip (official)</th>
+<th>Site horizon</th>
+<th>Slate capture file</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-14</td>
+<td><b>DEN@NOP</b></td>
+<td>7:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">0022600231</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>DAL@CLE</b></td>
+<td>7:30 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/dal-vs-cle-0022600232" target="_blank" rel="noopener">0022600232</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>BKN@MEM</b></td>
+<td>8:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/bkn-vs-mem-0022600234" target="_blank" rel="noopener">0022600234</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>DET@MIA</b></td>
+<td>8:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-mia-0022600233" target="_blank" rel="noopener">0022600233</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><b>CHI@MIN</b></td>
+<td>8:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-min-0022600235" target="_blank" rel="noopener">0022600235</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>IND@PHI</b></td>
+<td>1:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/ind-vs-phi-0022600236" target="_blank" rel="noopener">0022600236</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>LAL@PHX</b></td>
+<td>4:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/lal-vs-phx-0022600237" target="_blank" rel="noopener">0022600237</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>CHA@LAC</b></td>
+<td>4:30 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/cha-vs-lac-0022600238" target="_blank" rel="noopener">0022600238</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>SAS@UTA</b></td>
+<td>5:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/sas-vs-uta-0022600239" target="_blank" rel="noopener">0022600239</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>DAL@BOS</b></td>
+<td>6:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/dal-vs-bos-0022600240" target="_blank" rel="noopener">0022600240</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>NYK@TOR</b></td>
+<td>6:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600241" target="_blank" rel="noopener">0022600241</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>HOU@WAS</b></td>
+<td>7:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-was-0022600242" target="_blank" rel="noopener">0022600242</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>ATL@MIL</b></td>
+<td>8:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/atl-vs-mil-0022600243" target="_blank" rel="noopener">0022600243</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>OKC@SAC</b></td>
+<td>9:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/okc-vs-sac-0022600244" target="_blank" rel="noopener">0022600244</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>ORL@BOS</b></td>
+<td>7:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/orl-vs-bos-0022600245" target="_blank" rel="noopener">0022600245</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>CHI@CLE</b></td>
+<td>7:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-cle-0022600246" target="_blank" rel="noopener">0022600246</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>MEM@WAS</b></td>
+<td>7:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/mem-vs-was-0022600247" target="_blank" rel="noopener">0022600247</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>PHI@BKN</b></td>
+<td>7:30 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/phi-vs-bkn-0022600248" target="_blank" rel="noopener">0022600248</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>HOU@MIA</b></td>
+<td>7:30 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-mia-0022600249" target="_blank" rel="noopener">0022600249</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>POR@MIN</b></td>
+<td>8:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600250" target="_blank" rel="noopener">0022600250</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>GSW@NOP</b></td>
+<td>8:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/gsw-vs-nop-0022600251" target="_blank" rel="noopener">0022600251</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>PHX@DEN</b></td>
+<td>9:00 PM ET</td>
+<td>MATCH</td>
+<td>MATCH</td>
+<td class="src"><a href="https://www.nba.com/game/phx-vs-den-0022600252" target="_blank" rel="noopener">0022600252</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>NYK@TOR</b></td>
+<td>7:30 PM ET</td>
+<td>MATCH</td>
+<td>ABSENT_FROM_SLATE_CAPTURE</td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600253" target="_blank" rel="noopener">0022600253</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>POR@MIN</b></td>
+<td>8:00 PM ET</td>
+<td>MATCH</td>
+<td>ABSENT_FROM_SLATE_CAPTURE</td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600254" target="_blank" rel="noopener">0022600254</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>DET@SAS</b></td>
+<td>8:00 PM ET</td>
+<td>MATCH</td>
+<td>ABSENT_FROM_SLATE_CAPTURE</td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-sas-0022600255" target="_blank" rel="noopener">0022600255</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>CHA@LAL</b></td>
+<td>11:00 PM ET</td>
+<td>MATCH</td>
+<td>ABSENT_FROM_SLATE_CAPTURE</td>
+<td class="src"><a href="https://www.nba.com/game/cha-vs-lal-0022600256" target="_blank" rel="noopener">0022600256</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>UTA@LAC</b></td>
+<td>10:30 PM ET</td>
+<td>MATCH</td>
+<td>ABSENT_FROM_SLATE_CAPTURE</td>
+<td class="src"><a href="https://www.nba.com/game/uta-vs-lac-0022600257" target="_blank" rel="noopener">0022600257</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Official counts per day: 11-14 = 5, 11-15 = 9, 11-16 = 8, 11-17 = 5. Site horizon: 27 games. The slate capture file holds 22 of the 27 games; the 5 missing are the 11/17 games.</p>
+<h2 class="sec">2. Records on the horizon rows</h2><p class="secsub">The site prints each team's record from before 11/13. A team that played on 11/13 has a newer record on NBA.com. 25 of 54 printed records match NBA.com; 29 differ, every one of them for a team that played on 11/13; 0 are unexplained.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Game</th>
+<th>Team</th>
+<th>Site record (pre-11/13)</th>
+<th>NBA.com record at capture</th>
+<th>Status</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>DEN@NOP</td>
+<td><b>NOP</b></td>
+<td>4-8</td>
+<td>4-9</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">0022600231</a></td>
+</tr>
+<tr>
+<td>DAL@CLE</td>
+<td><b>CLE</b></td>
+<td>6-6</td>
+<td>6-7</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/dal-vs-cle-0022600232" target="_blank" rel="noopener">0022600232</a></td>
+</tr>
+<tr>
+<td>BKN@MEM</td>
+<td><b>MEM</b></td>
+<td>7-4</td>
+<td>8-4</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/bkn-vs-mem-0022600234" target="_blank" rel="noopener">0022600234</a></td>
+</tr>
+<tr>
+<td>DET@MIA</td>
+<td><b>MIA</b></td>
+<td>5-6</td>
+<td>6-6</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-mia-0022600233" target="_blank" rel="noopener">0022600233</a></td>
+</tr>
+<tr>
+<td>CHI@MIN</td>
+<td><b>CHI</b></td>
+<td>1-9</td>
+<td>2-9</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-min-0022600235" target="_blank" rel="noopener">0022600235</a></td>
+</tr>
+<tr>
+<td>IND@PHI</td>
+<td><b>IND</b></td>
+<td>4-8</td>
+<td>5-8</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/ind-vs-phi-0022600236" target="_blank" rel="noopener">0022600236</a></td>
+</tr>
+<tr>
+<td>CHA@LAC</td>
+<td><b>LAC</b></td>
+<td>2-8</td>
+<td>3-8</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/cha-vs-lac-0022600238" target="_blank" rel="noopener">0022600238</a></td>
+</tr>
+<tr>
+<td>SAS@UTA</td>
+<td><b>SAS</b></td>
+<td>10-2</td>
+<td>11-2</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/sas-vs-uta-0022600239" target="_blank" rel="noopener">0022600239</a></td>
+</tr>
+<tr>
+<td>SAS@UTA</td>
+<td><b>UTA</b></td>
+<td>1-11</td>
+<td>1-12</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/sas-vs-uta-0022600239" target="_blank" rel="noopener">0022600239</a></td>
+</tr>
+<tr>
+<td>NYK@TOR</td>
+<td><b>NYK</b></td>
+<td>6-5</td>
+<td>6-6</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600241" target="_blank" rel="noopener">0022600241</a></td>
+</tr>
+<tr>
+<td>HOU@WAS</td>
+<td><b>HOU</b></td>
+<td>9-3</td>
+<td>10-3</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-was-0022600242" target="_blank" rel="noopener">0022600242</a></td>
+</tr>
+<tr>
+<td>ATL@MIL</td>
+<td><b>ATL</b></td>
+<td>7-5</td>
+<td>7-6</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/atl-vs-mil-0022600243" target="_blank" rel="noopener">0022600243</a></td>
+</tr>
+<tr>
+<td>ATL@MIL</td>
+<td><b>MIL</b></td>
+<td>1-11</td>
+<td>1-12</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/atl-vs-mil-0022600243" target="_blank" rel="noopener">0022600243</a></td>
+</tr>
+<tr>
+<td>OKC@SAC</td>
+<td><b>OKC</b></td>
+<td>8-4</td>
+<td>8-5</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/okc-vs-sac-0022600244" target="_blank" rel="noopener">0022600244</a></td>
+</tr>
+<tr>
+<td>OKC@SAC</td>
+<td><b>SAC</b></td>
+<td>1-10</td>
+<td>1-11</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/okc-vs-sac-0022600244" target="_blank" rel="noopener">0022600244</a></td>
+</tr>
+<tr>
+<td>ORL@BOS</td>
+<td><b>ORL</b></td>
+<td>4-7</td>
+<td>5-7</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/orl-vs-bos-0022600245" target="_blank" rel="noopener">0022600245</a></td>
+</tr>
+<tr>
+<td>CHI@CLE</td>
+<td><b>CHI</b></td>
+<td>1-9</td>
+<td>2-9</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-cle-0022600246" target="_blank" rel="noopener">0022600246</a></td>
+</tr>
+<tr>
+<td>CHI@CLE</td>
+<td><b>CLE</b></td>
+<td>6-6</td>
+<td>6-7</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-cle-0022600246" target="_blank" rel="noopener">0022600246</a></td>
+</tr>
+<tr>
+<td>MEM@WAS</td>
+<td><b>MEM</b></td>
+<td>7-4</td>
+<td>8-4</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/mem-vs-was-0022600247" target="_blank" rel="noopener">0022600247</a></td>
+</tr>
+<tr>
+<td>HOU@MIA</td>
+<td><b>HOU</b></td>
+<td>9-3</td>
+<td>10-3</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-mia-0022600249" target="_blank" rel="noopener">0022600249</a></td>
+</tr>
+<tr>
+<td>HOU@MIA</td>
+<td><b>MIA</b></td>
+<td>5-6</td>
+<td>6-6</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-mia-0022600249" target="_blank" rel="noopener">0022600249</a></td>
+</tr>
+<tr>
+<td>POR@MIN</td>
+<td><b>POR</b></td>
+<td>8-3</td>
+<td>9-3</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600250" target="_blank" rel="noopener">0022600250</a></td>
+</tr>
+<tr>
+<td>GSW@NOP</td>
+<td><b>GSW</b></td>
+<td>8-4</td>
+<td>8-5</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/gsw-vs-nop-0022600251" target="_blank" rel="noopener">0022600251</a></td>
+</tr>
+<tr>
+<td>GSW@NOP</td>
+<td><b>NOP</b></td>
+<td>4-8</td>
+<td>4-9</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/gsw-vs-nop-0022600251" target="_blank" rel="noopener">0022600251</a></td>
+</tr>
+<tr>
+<td>NYK@TOR</td>
+<td><b>NYK</b></td>
+<td>6-5</td>
+<td>6-6</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600253" target="_blank" rel="noopener">0022600253</a></td>
+</tr>
+<tr>
+<td>POR@MIN</td>
+<td><b>POR</b></td>
+<td>8-3</td>
+<td>9-3</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600254" target="_blank" rel="noopener">0022600254</a></td>
+</tr>
+<tr>
+<td>DET@SAS</td>
+<td><b>SAS</b></td>
+<td>10-2</td>
+<td>11-2</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-sas-0022600255" target="_blank" rel="noopener">0022600255</a></td>
+</tr>
+<tr>
+<td>UTA@LAC</td>
+<td><b>UTA</b></td>
+<td>1-11</td>
+<td>1-12</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/uta-vs-lac-0022600257" target="_blank" rel="noopener">0022600257</a></td>
+</tr>
+<tr>
+<td>UTA@LAC</td>
+<td><b>LAC</b></td>
+<td>2-8</td>
+<td>3-8</td>
+<td>STALE_TEAM_PLAYED_11_13</td>
+<td class="src"><a href="https://www.nba.com/game/uta-vs-lac-0022600257" target="_blank" rel="noopener">0022600257</a></td>
+</tr>
+</tbody></table></div>
+<h2 class="sec">3. The nine 11/13 games, settled against the official finals</h2><p class="secsub">These are the lines published for 11/13 on the root <code>lines.html</code>, built from <code>data/originated_lines.json</code> (Build A data). The spread is read as a standard home spread: in all nine rows it equals minus the model's expected home margin, to within 0.2 points (the largest gap). A pick covers when the picked side's margin, after the line, is above zero. The nine finals were also read independently by another session (open PR #56, branch arena/cfb25ff0-nba1): 9 of 9 agree, see <code>verify/2026-11-14/cross_check_finals_cfb25ff0.json</code>.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Game</th>
+<th>Official final (away &ndash; home)</th>
+<th>Official home margin</th>
+<th>Published spread (home)</th>
+<th>Model expected home margin</th>
+<th>Pick</th>
+<th>Result</th>
+<th>|model &minus; final|</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td><b>ATL@CHI</b></td>
+<td>ATL 117 &ndash; CHI 125</td>
+<td>8</td>
+<td>8.0</td>
+<td>-8.2</td>
+<td>ATL -8.0</td>
+<td>LOSS</td>
+<td>16.2</td>
+<td class="src"><a href="https://www.nba.com/game/atl-vs-chi-0022600037" target="_blank" rel="noopener">final</a></td>
+</tr>
+<tr>
+<td><b>CLE@MIA</b></td>
+<td>CLE 121 &ndash; MIA 133</td>
+<td>12</td>
+<td>-1.5</td>
+<td>1.5</td>
+<td>no pick (gate)</td>
+<td>NO_BET</td>
+<td>10.5</td>
+<td class="src"><a href="https://www.nba.com/game/cle-vs-mia-0022600036" target="_blank" rel="noopener">final</a></td>
+</tr>
+<tr>
+<td><b>GSW@SAS</b></td>
+<td>GSW 85 &ndash; SAS 123</td>
+<td>38</td>
+<td>-6.5</td>
+<td>6.4</td>
+<td>SAS -6.5</td>
+<td>WIN</td>
+<td>31.6</td>
+<td class="src"><a href="https://www.nba.com/game/gsw-vs-sas-0022600040" target="_blank" rel="noopener">final</a></td>
+</tr>
+<tr>
+<td><b>MEM@NOP</b></td>
+<td>MEM 142 &ndash; NOP 111</td>
+<td>-31</td>
+<td>4.5</td>
+<td>-4.5</td>
+<td>MEM -4.5</td>
+<td>WIN</td>
+<td>26.5</td>
+<td class="src"><a href="https://www.nba.com/game/mem-vs-nop-0022600038" target="_blank" rel="noopener">final</a></td>
+</tr>
+<tr>
+<td><b>MIL@ORL</b></td>
+<td>MIL 99 &ndash; ORL 107</td>
+<td>8</td>
+<td>-9.0</td>
+<td>9.1</td>
+<td>ORL -9.0</td>
+<td>LOSS</td>
+<td>1.1</td>
+<td class="src"><a href="https://www.nba.com/game/mil-vs-orl-0022600035" target="_blank" rel="noopener">final</a></td>
+</tr>
+<tr>
+<td><b>NYK@IND</b></td>
+<td>NYK 104 &ndash; IND 106</td>
+<td>2</td>
+<td>2.5</td>
+<td>-2.4</td>
+<td>no pick (gate)</td>
+<td>NO_BET</td>
+<td>4.4</td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-ind-0022600034" target="_blank" rel="noopener">final</a></td>
+</tr>
+<tr>
+<td><b>OKC@LAC</b></td>
+<td>OKC 112 &ndash; LAC 113</td>
+<td>1</td>
+<td>8.0</td>
+<td>-8.0</td>
+<td>OKC -8.0</td>
+<td>LOSS</td>
+<td>9.0</td>
+<td class="src"><a href="https://www.nba.com/game/okc-vs-lac-0022600042" target="_blank" rel="noopener">final</a></td>
+</tr>
+<tr>
+<td><b>POR@SAC</b></td>
+<td>POR 120 &ndash; SAC 107</td>
+<td>-13</td>
+<td>12.0</td>
+<td>-11.9</td>
+<td>POR -12.0</td>
+<td>WIN</td>
+<td>1.1</td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-sac-0022600041" target="_blank" rel="noopener">final</a></td>
+</tr>
+<tr>
+<td><b>UTA@HOU</b></td>
+<td>UTA 118 &ndash; HOU 125</td>
+<td>7</td>
+<td>-18.0</td>
+<td>18.1</td>
+<td>HOU -18.0</td>
+<td>LOSS</td>
+<td>11.1</td>
+<td class="src"><a href="https://www.nba.com/game/uta-vs-hou-0022600039" target="_blank" rel="noopener">final</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Tally: 3 WIN, 4 LOSS, 0 PUSH, 2 NO BET. Mean absolute margin error 12.39 points over 9 games. Nine games is far too few to measure skill; this is a single-night check, not a validation.</p>
+<h2 class="sec">4. Numbers on the landing page</h2><p class="secsub">Each headline figure, the place it comes from, and what the underlying data says.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Claim</th>
+<th>Where it appears</th>
+<th>What the data says</th>
+<th>Status</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Originated lines: 27</td>
+<td>index.html tile 'Originated lines'</td>
+<td>27 rows in data/derived/horizon_lines.json; 27 official games</td>
+<td><b>MATCH</b></td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">NBA.com</a></td>
+</tr>
+<tr>
+<td>Paper picks: 63</td>
+<td>index.html tile 'Paper picks' (site/data/picks.json, Build B)</td>
+<td>63 rows, all PENDING, across 34 matchups and 62 strategy-game pairs; Build D horizon: 27 singles, 26 model picks (horizon_picks.json); picks_d.json n_model_picks = 23</td>
+<td><b>COUNT_DEFINITION_CONFLICT</b></td>
+<td class="src"><span class="na" title="internal count: no official source applies">&mdash;</span></td>
+</tr>
+<tr>
+<td>Strategies tested: 10</td>
+<td>index.html tile 'Strategies tested'</td>
+<td>10 strategies in leaderboard (site/data/leaderboard.json)</td>
+<td><b>INTERNAL_COUNT</b></td>
+<td class="src"><span class="na" title="internal count: no official source applies">&mdash;</span></td>
+</tr>
+<tr>
+<td>Out-of-sample games: 51</td>
+<td>index.html tile</td>
+<td>docs/data/backtest.json metrics.n_games = 51</td>
+<td><b>INTERNAL_COUNT</b></td>
+<td class="src"><span class="na" title="internal count: no official source applies">&mdash;</span></td>
+</tr>
+<tr>
+<td>Open flags (landing tile = items in flagged.json)</td>
+<td>index.html tile 'Open flags'</td>
+<td>36 items in site/data/flagged.json (25 before this check; F26-F37 added)</td>
+<td><b>INTERNAL_COUNT</b></td>
+<td class="src"><span class="na" title="internal count: no official source applies">&mdash;</span></td>
+</tr>
+<tr>
+<td>Known limits: the 2026-11-13 slate was still in progress; no final score exists for it</td>
+<td>README.md 'Known limits'; index.html via Source-of-truth text</td>
+<td>9 of 9 11/13 games show Final on the official page at capture</td>
+<td><b>STALE</b></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">NBA.com</a></td>
+</tr>
+<tr>
+<td>Official 11/13 injury report edition: 07:30 PM ET is the newest</td>
+<td>data/official/injuries.json source_url</td>
+<td>NOT RE-CHECKED in this session (11/14 noon edition returned AccessDenied at capture)</td>
+<td><b>UNVERIFIED_THIS_SESSION</b></td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">NBA.com</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Counts that describe this repository's own outputs have no official source; they are marked internal rather than linked. Only the game, injury and final-score claims are checked against NBA.com.</p>
+<h2 class="sec">5. Two builds, two answers for the same game</h2><p class="secsub">Build B (the site's landing page and Lines page) and Build D (the horizon lines) both project a home margin for the same game. They use different ratings windows, so they disagree. Each cell is a projected home margin: negative means the home team is projected to lose. Build B's stored <code>model_spread_home</code> holds the home margin in 16 of 16 rows where a strategy pick exists; the standard home-spread reading fits 0 of them. Build D's <code>line_spread_home</code> equals the projected home margin in all 27 rows.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Game</th>
+<th>Build B home margin (landing page)</th>
+<th>Build D home margin (horizon)</th>
+<th>Difference (pts)</th>
+<th>Opposite favourite?</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td><b>DEN@NOP</b></td>
+<td>-9.6</td>
+<td>-8.0</td>
+<td>-1.6</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>DAL@CLE</b></td>
+<td>-2.3</td>
+<td>1.2</td>
+<td>-3.5</td>
+<td>yes</td>
+<td class="src"><a href="https://www.nba.com/game/dal-vs-cle-0022600232" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>DET@MIA</b></td>
+<td>-12.8</td>
+<td>-12.0</td>
+<td>-0.8</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-mia-0022600233" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>BKN@MEM</b></td>
+<td>5.3</td>
+<td>10.9</td>
+<td>-5.6</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/bkn-vs-mem-0022600234" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>LAL@PHX</b></td>
+<td>-6.7</td>
+<td>-12.0</td>
+<td>5.3</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/lal-vs-phx-0022600237" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>SAS@UTA</b></td>
+<td>-15.4</td>
+<td>-22.4</td>
+<td>7.0</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/sas-vs-uta-0022600239" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>DAL@BOS</b></td>
+<td>17.6</td>
+<td>10.7</td>
+<td>6.9</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/dal-vs-bos-0022600240" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>HOU@WAS</b></td>
+<td>-9.1</td>
+<td>-14.3</td>
+<td>5.2</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-was-0022600242" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>ATL@MIL</b></td>
+<td>-10.8</td>
+<td>-17.3</td>
+<td>6.5</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/atl-vs-mil-0022600243" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>OKC@SAC</b></td>
+<td>-10.2</td>
+<td>-16.0</td>
+<td>5.8</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/okc-vs-sac-0022600244" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>ORL@BOS</b></td>
+<td>9.9</td>
+<td>15.7</td>
+<td>-5.8</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/orl-vs-bos-0022600245" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>CHI@CLE</b></td>
+<td>16.2</td>
+<td>18.0</td>
+<td>-1.8</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-cle-0022600246" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>MEM@WAS</b></td>
+<td>-12.5</td>
+<td>-11.4</td>
+<td>-1.1</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/mem-vs-was-0022600247" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>PHI@BKN</b></td>
+<td>3.6</td>
+<td>-6.5</td>
+<td>10.1</td>
+<td>yes</td>
+<td class="src"><a href="https://www.nba.com/game/phi-vs-bkn-0022600248" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>HOU@MIA</b></td>
+<td>-2.2</td>
+<td>-14.0</td>
+<td>11.8</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-mia-0022600249" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>GSW@NOP</b></td>
+<td>-9.0</td>
+<td>-15.1</td>
+<td>6.1</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/gsw-vs-nop-0022600251" target="_blank" rel="noopener">game</a></td>
+</tr>
+<tr>
+<td><b>PHX@DEN</b></td>
+<td>12.4</td>
+<td>4.5</td>
+<td>7.9</td>
+<td>no</td>
+<td class="src"><a href="https://www.nba.com/game/phx-vs-den-0022600252" target="_blank" rel="noopener">game</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Build B: ratings training window 10/20–11/05/2026 per site/data/meta.json, with the season-to-date ratings through 11/12 also listed there; the page does not say which one the horizon lines use. Build D: team ratings through games of 11/12.</p>
+<h2 class="sec">6. What this check could not answer</h2><p class="secsub">Each item has the official source that would answer it. None of these is filled in by guesswork.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Question</th>
+<th>What the check found</th>
+<th>What would answer it</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Is the 11/14 noon injury report published?</td>
+<td>The 11/14 12:00 PM ET edition URL returned AccessDenied at capture. The site's newest edition is 11/13 07:30 PM ET.</td>
+<td>Re-check after 17:00 UTC on 2026-11-14</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">NBA injury report policy</a></td>
+</tr>
+<tr>
+<td>Which ratings window do the landing-page lines use?</td>
+<td>site/data/meta.json lists two windows; the page does not say which one feeds the horizon lines.</td>
+<td>Ask the build owner; then state it on the page</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">NBA.com team advanced stats</a></td>
+</tr>
+<tr>
+<td>Are the repeated pairings (NYK@TOR 11/15 and 11/17; POR@MIN 11/16 and 11/17) real?</td>
+<td>Both are printed on NBA.com with distinct game IDs. They are carried as printed.</td>
+<td>Confirm on the official schedule on each date</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">NBA.com 11/15</a></td>
+</tr>
+<tr>
+<td>Did the 9 games of 11/13 settle the model's margin well?</td>
+<td>9 games, mean absolute margin error 12.39 points. Too few to say.</td>
+<td>Settle every new slate against official finals, with the sample stated</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">NBA.com 11/13</a></td>
+</tr>
+</tbody></table></div>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>
