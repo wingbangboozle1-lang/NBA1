@@ -715,7 +715,7 @@ reading yesterday's snapshot.
 
 ### 14.1 Claims (file scope exclusive to this session)
 
-| # | Task | Status | File scope | Notes |
+| # | Task | Status | File scope | Result |
 | --- | --- | --- | --- | --- |
 | V01 | Live official refresh: schedule, injury report, box scores, team advanced | in progress | `data/raw/*.json`, `data/raw/_provenance.json` (new) | Fetched through the sandbox's web-fetch channel (the shell's egress is blocked). Every snapshot keeps its exact official URL + capture UTC. **Replaces the "never executed" F7 gap with a real, dated capture.** |
 | V02 | Engine rebuild on the refreshed snapshot | unclaimed → in progress | `engine/pipeline.py`, `engine/*.py` (date logic only) | Hard-coded `2026-11-13` strings in `pipeline.py` must become data-driven. No methodology change. |
