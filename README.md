@@ -124,11 +124,17 @@ available, that the data may be used, or that any model result is correct.
 
 ## Known limits
 
-- The 2026-11-13 slate was still in progress when the data was captured, so no
-  final score exists in the site's data. As of the 2026-11-14 UTC source check, NBA.com
-  shows all nine 11/13 games as Final; the site has not been rebuilt with them
-  (flag F29, [Source Check](site/pages/source-check.html)). The ratings window ends at
-  2026-11-12 and 18 team records are one night out of date.
+- **Resolved 2026-11-14.** The nine 2026-11-13 games are Final. They were read from
+  <https://www.nba.com/games?date=2026-11-13>, transcribed independently by two
+  sessions that agree 9/9, and used to settle the nine published 11/13 lines
+  (3 WIN, 4 LOSS, 2 NO BET) and to refresh the 29 stale team records on the horizon
+  rows. `scripts/verify_horizon_s934ca56f.py` reports 0 record mismatches against
+  NBA.com. Flags F13, F14 and F29 are closed on
+  [Flagged for Review](site/pages/flagged.html).
+- **Still open: the ratings window ends at 2026-11-12.** The 11/13 finals have not
+  been fed back into the model's team ratings, so every originated line still rests
+  on ratings one night short (flag F19). This is the single most important limit on
+  the lines themselves.
 - At the newest official injury-report edition (11/13/26 07:30 PM ET), five of
   the ten teams playing on 11/14 had not filed, and no edition covers the games
   on 11/15–11/17. Those lines carry no injury adjustment and say so.

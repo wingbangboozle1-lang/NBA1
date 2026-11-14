@@ -62,7 +62,7 @@
    "n": 9,
    "title": "The three-day horizon is now live, and it is the part that is hardest to keep honest",
    "detail": "27 games from 2026-11-14 to 2026-11-17, each with an originated spread, total and fair moneyline, a gated paper pick, rest and back-to-back flags, and an injury read-out. The schedule was read from the official NBA.com Schedule page and independently cross-checked against another session's capture of the same page: 27 of 27 rows agree, 0 mismatches. The injury report was taken from the 07:30 PM ET edition of the official PDF, which is newer than the 05:15 PM edition this repository previously held.",
-   "reading": "Two things are not yet knowable and are published as such rather than filled in. The 11/13 finals were not published when the capture was made, so the ratings window still ends at 11/12 and 18 team records are one night out of date. And at the 07:30 PM edition five of the ten teams playing on 11/14 had not filed an injury report, while no edition yet covers the 11/15 to 11/17 games. Those lines carry no injury adjustment and say so."
+   "reading": "What is still not knowable is published as such rather than filled in. The ratings window ends at 11/12: the nine 11/13 games are Final and were used to settle the 11/13 lines and to refresh every stale team record on these rows (0 mismatches remaining, 2026-11-14), but the ratings themselves have not been re-fitted, so every line still rests on ratings one night short. And at the 07:30 PM edition five of the ten teams playing on 11/14 had not filed an injury report, while no edition yet covers the 11/15 to 11/17 games. Those lines carry no injury adjustment and say so."
   }
  ],
  "what_is_live_now": [
@@ -76,8 +76,8 @@
  "recommended_next_actions": [
   {
    "rank": 1,
-   "action": "Publish the 2026-11-13 final scores as soon as the official page publishes them, then re-run the pipeline",
-   "why": "The 11/13 slate was still in progress when the capture was made, so the ratings window ends at 11/12 and 18 team records are one night out of date. The nine games are already carried for rest flags; only the scores and the refreshed official ratings are missing.",
+   "action": "Re-fit the team ratings with the 2026-11-13 finals, then re-run the pipeline",
+   "why": "DONE 2026-11-14: the nine 11/13 finals were read from NBA.com, agreed 9/9 with a second independent transcription, and used to settle the 11/13 lines (3 WIN, 4 LOSS, 2 NO BET) and to refresh the 29 stale team records on the horizon rows. STILL TO DO: the model's team ratings still end at 11/12, so re-capture https://www.nba.com/stats/teams/advanced and re-run engine/pipeline.py to bring the ratings - and therefore every line - up to date.",
    "source_url": "https://www.nba.com/games?date=2026-11-13",
    "source_label": "NBA.com Games & Scores, Nov 13"
   },

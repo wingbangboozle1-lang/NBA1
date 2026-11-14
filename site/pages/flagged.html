@@ -78,9 +78,9 @@
 </tr></thead><tbody>
 <tr>
 <td>F1</td>
-<td>Medium</td>
+<td>Resolved (was Medium)</td>
 <td><b>NBA.com standings table is not machine-readable</b></td>
-<td>The official standings page renders its table client-side; a plain fetch returns only the tie-break procedure text, not the table. Won-lost records were therefore taken from the official Stats &gt; Teams Advanced table and from each game's own NBA.com game page instead. Every record on this site has one of those two links.</td>
+<td>The official standings page renders its table client-side; a plain fetch returns only the tie-break procedure text, not the table. Won-lost records were therefore taken from the official Stats &gt; Teams Advanced table and from each game's own NBA.com game page instead. Every record on this site has one of those two links. UPDATE 2026-11-14 (session arena/934ca56f-nba1): the standings table at https://www.nba.com/standings WAS readable through the page-fetch tool on this date — all 30 teams with W-L, home/road, last-10 and streak were returned as a table. The earlier claim that the page is not machine-readable was true of the tool used then, not of the page. All 27 refreshed horizon records were cross-checked against it and agree.</td>
 <td>Team records on the Lines and Picks pages</td>
 <td>Add a headless-browser capture to the refresh job if the standings table itself is ever needed; today it is not.</td>
 <td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">S9</a></td>
@@ -187,19 +187,19 @@
 <tr>
 <td>F13</td>
 <td>High</td>
-<td><b>No final score exists for the 2026-11-13 slate</b></td>
-<td>At capture time (2026-11-14T01:20Z, 21:20 ET on 11/13) the 11/13 games were still being played: the official Games &amp; Scores page shows NYK 35 - IND 40 at Q2 6:55 and MIL 30 - ORL 36 at Q2 4:48, with the other seven games marked PREGAME. No final score for any 11/13 game exists in any capture.</td>
+<td><b>No final score exists for the 2026-11-13 slate — RESOLVED 2026-11-14</b></td>
+<td>RESOLVED. All nine games are Final on https://www.nba.com/games?date=2026-11-13 and were transcribed twice by two independent sessions that agree 9/9 (this session's copy is verify/2026-11-14/official_finals_2026-11-13_s934ca56f.json). NYK 104 at IND 106; MIL 99 at ORL 107; CLE 121 at MIA 133; ATL 117 at CHI 125 (Final/OT); MEM 142 at NOP 111; UTA 118 at HOU 125; GSW 85 at SAS 123; POR 120 at SAC 107; OKC 112 at LAC 113. The nine published 11/13 lines were settled against them: 3 WIN, 4 LOSS, 2 NO BET.</td>
 <td>Ratings window (still ends 2026-11-12); team records for 18 teams; the backtest window</td>
-<td>Re-read the 11/13 slate page after the games settle and re-run the pipeline. The 9 games are already carried for rest flags, so only the scores are missing.</td>
+<td>Nothing further needed for the scores. The ratings re-fit is tracked by F19.</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">S11_2026-11-13</a></td>
 </tr>
 <tr>
 <td>F14</td>
-<td>Medium</td>
-<td><b>18 team records are one night out of date</b></td>
-<td>Records were read from the official slate pages before the 11/13 games finished. NYK, IND, MIL, ORL, CLE, MIA, ATL, CHI, MEM, NOP, UTA, HOU, GSW, SAS, POR, SAC, OKC and LAC each played on 11/13 and will each have a changed record.</td>
+<td>Resolved (was Medium)</td>
+<td><b>18 team records are one night out of date — RESOLVED 2026-11-14</b></td>
+<td>RESOLVED. The 27 horizon rows were re-read from https://www.nba.com/games?date=2026-11-14 .. ?date=2026-11-17 and cross-checked against https://www.nba.com/standings on 2026-11-14. 29 printed team records were stale and were corrected in data/raw/schedule_upcoming.json; docs/data/* were regenerated with engine/pipeline.py. scripts/verify_horizon_s934ca56f.py now reports 27/27 games, 0 game_id mismatches, 0 tip-time mismatches and 0 record mismatches.</td>
 <td>Away/home record columns on the Lines, Picks, Game Flow and Team pages</td>
-<td>The next capture corrects all 18 at once. No manual edit needed.</td>
+<td>Re-run scripts/verify_horizon_s934ca56f.py after any future capture; it exits non-zero on a mismatch.</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">S11_2026-11-14</a></td>
 </tr>
 <tr>
@@ -330,11 +330,11 @@
 </tr>
 <tr>
 <td>F29</td>
-<td>Medium</td>
-<td><b>The site still shows the 11/13 games as unfinished</b></td>
-<td>The README 'Known limits' and the ratings text say the 2026-11-13 slate was still in progress and that no final score exists. On the NBA.com games page for 2026-11-13, captured 2026-11-14 UTC, all nine games show Final (for example NYK 104 at IND 106; OKC 112 at LAC 113). The site has not been rebuilt with those finals. The horizon rows also still print pre-11/13 records: 29 of 54 printed team records belong to teams that played on 11/13 and differ from the NBA.com card (Source Check, section 2).</td>
+<td>Resolved (was Medium)</td>
+<td><b>The site showed the 11/13 games as unfinished — RESOLVED 2026-11-14</b></td>
+<td>Originally: the README 'Known limits' and the ratings text said the 2026-11-13 slate was still in progress and no final score existed, while NBA.com showed all nine games Final; the horizon rows also printed 29 pre-11/13 records. RESOLVED by session arena/934ca56f-nba1: the nine finals were re-read from https://www.nba.com/games?date=2026-11-13, agreed 9/9 with the independent transcription in data/verified/finals_2026-11-13.json, and the 27 horizon rows were refreshed to the post-11/13 official records (29 records corrected, 0 remaining mismatches, checked by scripts/verify_horizon_s934ca56f.py). STILL OPEN and tracked separately: the model's team ratings still end at 11/12, so the lines have not been re-fitted with the 11/13 results.</td>
 <td>README 'Known limits'; every horizon row's record column</td>
-<td>Re-run the capture after the games finish and rebuild. Update 'Known limits' with the capture time it describes.</td>
+<td>Re-capture https://www.nba.com/stats/teams/advanced after 11/13 and re-run engine/pipeline.py so the ratings, and therefore the lines, include the 11/13 games. Until then every line rests on ratings that stop one night short.</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
