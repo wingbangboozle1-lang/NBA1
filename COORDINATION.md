@@ -553,3 +553,37 @@ This session works on one branch only, as the session rules require.
 | Merge | `--merge` without approval (as instructed) |
 | Local gate | `python3 scripts/verify_all.py` → VERIFY OK before merge |
 | Pages | Live at https://wingbangboozle1-lang.github.io/NBA1/ |
+
+---
+
+## 13. Session `arena/f80dcc4a-nba1` (branch `arena/f80dcc4a-nba1`, base `9ccccb2` = PR #25 merge, claimed 2026-11-14 UTC)
+
+Role: **gap-closing build + final integration.** This session works on one branch only. It closes the
+data gaps the earlier sessions could not close (their sandboxes had no NBA.com access; this session's
+tooling can read the official pages directly and will record exactly what it read), generates the
+requested picks for the 11/14–11/17 slate from the originated lines, re-verifies the combined tree
+line by line against official sources, and integrates the two open PRs (#20, #26) that were explicitly
+left for an integration session.
+
+| # | Task | Status | File scope | Notes |
+| --- | --- | --- | --- | --- |
+| W01 | Board reconciliation + claim | in progress | `COORDINATION.md` (§13 + log) | Claim pushed first. Open PRs #20 (audit, left open for integration by its author) and #26 (final-integration verification layer, opened 00:57Z) logged; to be merged by this session as integration, per §0 rule that the integration session merges branches. |
+| W02 | Capture 2026-11-13 finals + current team records from NBA.com (closes F-C01, F-C02) | unclaimed→claimed | `data/raw/official_results_2026-11-13.json`, `data/raw/records_2026-11-14.json`, `scripts/capture_results_1113.py` (new) | Every row will carry the exact official URL it was read from and a UTC capture time. |
+| W03 | Capture the 2026-11-14 official injury report (F-C03) | unclaimed→claimed | `data/raw/injury_report_2026-11-14.json`, `scripts/capture_injuries_1114.py` (new) | If the official PDF/URL still refuses access, that is recorded as the result; no substitution. |
+| W04 | Originated lines + picks for the 11/14–11/17 slate (closes F-C07) | unclaimed→claimed | `data/slate_full.json`, `data/originated_lines.json`, `data/derived/lines.json`, `scripts/originate_lines.py`, `slate.html`, `lines.html` | Same RecordLine-1 assumptions as the 11/13 desk (record smoothing, HCA 2.5, σ 11, pick gate 3.0) so the series stays comparable; rest days recomputed per game; 11/13 results folded in. |
+| W05 | Injury / rotation / game-flow refresh for the new slate | unclaimed→claimed | `data/derived/injury_impact.json`, `gameflow.html`, `data/injuries.json` (append-only) | Only rows readable from official reports; unknowns stay unknown. |
+| W06 | Line-by-line verification + source-link audit of everything added | unclaimed→claimed | `scripts/verify_session_w.py` (new), `notes/session-w-verification.md` (new) | Each new/changed data row checked against the official URL recorded with it. |
+| W07 | Site pages for new content + executive summary touch-up | unclaimed→claimed | `docs/pages/picks.html` (via `scripts/build_site.py`), `docs/pages/summary.html` (regenerated), `review.html` (append flags only) | Regenerated pages only; no hand-typed figures. |
+| W08 | Integration: merge PRs #20/#26, re-verify combined tree, PR → `main`, merge, confirm Pages | unclaimed→claimed | whole repo (integration) | Runs `verify_all.py` + the integration verifier from #26 + `render_check.mjs` before and after merge. |
+
+**Coordination notes.** No task claimed by another session is taken: Build A/B/C and `arena-a6936331`
+items are all `done` or `needs review`. PR #20's author left it unmerged *for the integration session*;
+PR #26's scope (verification infra, `verification.html`, probe scripts) does not overlap W02–W07. If
+session `arena/458a6570-nba1` is still active and updates PR #26, this session will re-read the board
+and rebase rather than overwrite.
+
+### Log (session `arena/f80dcc4a-nba1`, UTC)
+
+| Time | Entry |
+| --- | --- |
+| 2026-11-14 | Board read in full; W01–W08 claimed (section renumbered to §13 after collision with section 11 on main); claim pushed before any task work. |
