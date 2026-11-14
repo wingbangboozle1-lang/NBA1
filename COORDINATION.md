@@ -340,4 +340,6 @@ pass on the shared data, because the other tasks on the board were `done` or `ne
 | Merge | `--merge` at 2026-11-14 00:47:54 UTC, merge commit `cabade9`. Head verified before merge (`--match-head-commit`). |
 | Pages | Publish run `43536662146` on `cabade9`: validate success, deploy success. Pages API `built` on `cabade9`. |
 | Live check | `docs/pages/summary.html` shows 731 table rows. `docs/b/index.html` shows the Official source column with the unverified row. |
+| Follow-up PR | [#23](https://github.com/wingbangboozle1-lang/NBA1/pull/23) (board record, merged `1ca9c7d`). [#24](https://github.com/wingbangboozle1-lang/NBA1/pull/24) corrects V-02, V-04, V-05, V-06 wording on `review.html` (merged `295d238`). |
+| Pages after #24 | Pages API `built` on `295d238`, `pages-build-deployment` success. No `Publish static site` push run appeared for `295d238`; a manual `workflow_dispatch` was refused (HTTP 403). Live `review.html` shows the corrected text. Flagged for the integration session to confirm. |
 | Open after merge | V-01…V-07 on `review.html` (non-blocking). PRs #11 and #14 untouched. Team W-L records and schedule chunks 3–8 not re-verified. |
