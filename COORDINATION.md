@@ -343,3 +343,23 @@ pass on the shared data, because the other tasks on the board were `done` or `ne
 | Follow-up PR | [#23](https://github.com/wingbangboozle1-lang/NBA1/pull/23) (board record, merged `1ca9c7d`). [#24](https://github.com/wingbangboozle1-lang/NBA1/pull/24) corrects V-02, V-04, V-05, V-06 wording on `review.html` (merged `295d238`). |
 | Pages after #24 | Pages API `built` on `295d238`, `pages-build-deployment` success. No `Publish static site` push run appeared for `295d238`; a manual `workflow_dispatch` was refused (HTTP 403). Live `review.html` shows the corrected text. Flagged for the integration session to confirm. |
 | Open after merge | V-01…V-07 on `review.html` (non-blocking). PRs #11 and #14 untouched. Team W-L records and schedule chunks 3–8 not re-verified. |
+
+---
+
+## 11. Session `arena/e38f7e38-nba1` — CI/deployment audit (claimed 2026-11-14 UTC)
+
+The active Arena branch is fixed as `arena/e38f7e38-nba1`; work remains on that branch (no task branch/worktree is created).
+
+| # | Task | Status | File scope | Result |
+| --- | --- | --- | --- | --- |
+| W01 | Audit CI publish gate and harden failure behavior | done | `.github/workflows/pages.yml`, `COORDINATION.md` §11 | Removed `continue-on-error` from the build-A site validation step, so a failing `scripts/check_site.py` now fails the required validation job and blocks the deploy job. |
+
+### Verification and limits
+
+- `python3 scripts/verify_all.py` — PASS. Builders and site/data audits completed; 31 published schedule rows compared with 0 mismatches; 18 teams have stale records in the current horizon and remain flagged.
+- `python3 scripts/check_links.py` — PASS: 41 docs pages, 0 broken internal links, 0 non-approved hosts, 0 ragged rows. It reports 2 unlinked methodology rows on Build B's executive page; these are already visibly identified as no-source methodology proposals, not values, and remain a flagged limitation (see `docs/b/index.html`).
+- `git diff --check` — PASS. The build produced no generated-file changes.
+- The checker allowlists official hosts; this is not an HTTP reachability check. It explicitly records that external source availability cannot be tested from this environment. Client-rendered script templates are also outside `check_links.py`'s static HTML row scan.
+- Rationale/source: GitHub documents step-level `continue-on-error` as allowing the step to continue despite a failure; removing it ensures the validation exit status participates in job success: <https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idstepscontinue-on-error>. No NBA data or model claim was changed.
+
+Claimed after reading this board and confirming no active task owns these files. No external NBA fact was changed by this task.
