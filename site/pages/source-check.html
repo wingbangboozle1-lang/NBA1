@@ -549,6 +549,37 @@
 </tr>
 </tbody></table></div>
 <h2 class="sec">3. The nine 11/13 games, settled against the official finals</h2><p class="secsub">These are the lines published for 11/13 on the root <code>lines.html</code>, built from <code>data/originated_lines.json</code> (Build A data). The spread is read as a standard home spread: in all nine rows it equals minus the model's expected home margin, to within 0.2 points (the largest gap). A pick covers when the picked side's margin, after the line, is above zero. The nine finals were also read independently by another session (PR #56, merged to main at 4e4d0b0): 9 of 9 agree, see <code>verify/2026-11-14/cross_check_finals_cfb25ff0.json</code>.</p>
+<h2 class="sec">The three two-leg parlay cards from 11/13, graded leg by leg</h2><p class="secsub">Settled against the same official finals. Recomputed here from the verified scores, not copied from another build; PR #59 reached the same answer independently.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Card</th>
+<th>Result</th>
+<th>Leg-by-leg</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>UTA@HOU — HOU -18.0 + POR@SAC — POR -12.0</td>
+<td><b>LOSS</b></td>
+<td>UTA@HOU — HOU -18.0 LOSS (team margin +7, line -18.0); POR@SAC — POR -12.0 WIN (team margin +13, line -12.0)</td>
+<td class="src"><a href="https://www.nba.com/game/uta-vs-hou-0022600039" target="_blank" rel="noopener">game 1</a></td>
+</tr>
+<tr>
+<td>UTA@HOU — HOU -18.0 + MIL@ORL — ORL -9.0</td>
+<td><b>LOSS</b></td>
+<td>UTA@HOU — HOU -18.0 LOSS (team margin +7, line -18.0); MIL@ORL — ORL -9.0 LOSS (team margin +8, line -9.0)</td>
+<td class="src"><a href="https://www.nba.com/game/uta-vs-hou-0022600039" target="_blank" rel="noopener">game 1</a></td>
+</tr>
+<tr>
+<td>POR@SAC — POR -12.0 + MIL@ORL — ORL -9.0</td>
+<td><b>LOSS</b></td>
+<td>POR@SAC — POR -12.0 WIN (team margin +13, line -12.0); MIL@ORL — ORL -9.0 LOSS (team margin +8, line -9.0)</td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-sac-0022600041" target="_blank" rel="noopener">game 1</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">A parlay card wins only if every leg wins. All three lost, and all three lost on the same leg: HOU -18.0 and ORL -9.0 both failed to cover. No unit figure is computed for parlays, because no market price exists for a two-leg card (F3).</p>
+<section class="card "><h2>What the parlay result adds</h2><p>Three cards, <b>0 won</b>. This is a small and one-sided sample and it proves nothing on its own, but it is worth stating plainly: the two-leg cards built on the same 11/13 lines that went 3-4 as singles also lost, and they lost because a large favourite failed to cover a large number (HOU -18.0 won by 7; ORL -9.0 won by 8). That is the failure mode a parlay amplifies: each leg is a separate chance to be wrong, and the joint probability is only as good as its weakest leg.</p></section>
 <div class="tablewrap">
 <table class="tbl "
 >

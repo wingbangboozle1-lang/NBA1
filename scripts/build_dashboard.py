@@ -339,6 +339,67 @@ def build_source_check(sources):
             pick, esc(r.get("result")),
             num(r.get("model_error_margin"), 1) if r.get("model_error_margin") is not None else NA,
             link(r.get("official_source"), "final") if r.get("official_source") else NA])
+    # ---- the 11/13 parlays, graded leg by leg against the same official finals ----
+    # The originated parlay cards are in data/originated_lines.json. Grading rule taken
+    # from that file and from PR #59's stated rule: a team covers iff (team margin) +
+    # (its printed line) > 0, because a favourite carries a negative line. Recomputed
+    # here from the verified finals rather than copied, so the number is checkable.
+    import re as _re
+    try:
+        _ol = load(os.path.join(ROOT, "data", "originated_lines.json"))
+        _fin = {("%s@%s" % (r["away"], r["home"])): r
+                for r in load(os.path.join(ROOT, "verify", "2026-11-14",
+                                           "official_finals_2026-11-13_s934ca56f.json"))["games"]}
+        _cards = []
+        for _p in _ol.get("parlays", []):
+            if _p.get("date") != "2026-11-13":
+                continue
+            _legs, _ok = [], True
+            for _leg in (_p["leg1"], _p["leg2"]):
+                _m = _re.match(r"(\w+)@(\w+) \u2014 (\w+) ([+-]?[\d.]+)", _leg)
+                if not _m:
+                    _ok = False
+                    break
+                _a, _h, _t, _ln = _m.group(1), _m.group(2), _m.group(3), float(_m.group(4))
+                _g = _fin.get("%s@%s" % (_a, _h))
+                if not _g:
+                    _ok = False
+                    break
+                _hm = _g["home_pts"] - _g["away_pts"]
+                _tm = _hm if _t == _h else -_hm
+                _v = _tm + _ln
+                _legs.append((_leg, "WIN" if _v > 0 else ("PUSH" if _v == 0 else "LOSS"), _tm, _ln,
+                              _g["game_url"]))
+            if _ok and _legs:
+                _cards.append((_legs, "WIN" if all(l[1] == "WIN" for l in _legs) else "LOSS"))
+        if _cards:
+            b.append(h2("The three two-leg parlay cards from 11/13, graded leg by leg",
+                        "Settled against the same official finals. Recomputed here from the verified scores, not "
+                        "copied from another build; PR #59 reached the same answer independently."))
+            _rows = []
+            for _legs, _card in _cards:
+                _desc = " + ".join(l[0] for l in _legs)
+                _detail = "; ".join("%s %s (team margin %+d, line %+.1f)" % (l[0], l[1], l[2], l[3])
+                                    for l in _legs)
+                _rows.append([esc(_desc), '<b>%s</b>' % esc(_card), esc(_detail),
+                              srclink_url(_legs[0][4], "game 1"), ])
+            b.append(table(["Card", "Result", "Leg-by-leg", "Source"], _rows,
+                           note="A parlay card wins only if every leg wins. All three lost, and all three lost on "
+                                "the same leg: HOU -18.0 and ORL -9.0 both failed to cover. No unit figure is "
+                                "computed for parlays, because no market price exists for a two-leg card (F3)."))
+            _won = sum(1 for _, c in _cards if c == "WIN")
+            b.append(card("What the parlay result adds",
+                          "<p>Three cards, <b>%d won</b>. This is a small and one-sided sample and it proves "
+                          "nothing on its own, but it is worth stating plainly: the two-leg cards built on the "
+                          "same 11/13 lines that went 3-4 as singles also lost, and they lost because a large "
+                          "favourite failed to cover a large number (HOU -18.0 won by 7; ORL -9.0 won by 8). That "
+                          "is the failure mode a parlay amplifies: each leg is a separate chance to be wrong, and "
+                          "the joint probability is only as good as its weakest leg.</p>" % _won))
+    except (OSError, KeyError) as _e:
+        b.append(banner("info", "Parlay settlement unavailable",
+                        "The parlay cards could not be graded from the committed data (%s). Nothing is inferred."
+                        % esc(str(_e))))
+
     b.append(table(["Game", "Official final (away &ndash; home)", "Official home margin", "Published spread (home)",
                     "Model expected home margin", "Pick", "Result", "|model &minus; final|", "Source"], rows,
                    note="Tally: %d WIN, %d LOSS, %d PUSH, %d NO BET. Mean absolute margin error %s points over %d games. "
