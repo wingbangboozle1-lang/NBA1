@@ -937,6 +937,34 @@ def build_method(eng):
   <p>Random seed {20261114}; every figure on this site is reproducible from the repository.</p>
 </section>
 <section class="card">
+  <h3>Declared constants</h3>
+  <p>Every number here was chosen before any result was seen, and none of them comes from an official
+  source &mdash; they are this project&rsquo;s settings. Where a value could be tuned, the tuning is reported as a
+  sensitivity table rather than rolled into the headline; see the
+  <a href="pages/teams.html">ratings page</a>.</p>
+  {table(["Constant", "Value", "What it controls", "Was it tuned on the results?"], [
+      ["K (margin)", f'{K_MARGIN:.0f} pseudo-games',
+       "How far each team's margin rating is shrunk toward zero.",
+       "No &mdash; declared, then swept over {1, 2, 4, 8, 16, 32} and reported."],
+      ["K (total)", f'{K_TOTAL:.0f} pseudo-games',
+       "How far each team's scoring rating is shrunk toward the league mean.", "No &mdash; declared."],
+      ["Minimum bets (G1)", f'{eng["min_bets"]}',
+       "The smallest sample a strategy must reach before it can be ranked at all.",
+       "No &mdash; set from the power calculation, which shows ~340 games are needed for the strongest signal."],
+      ["Significance level", "&alpha; = 0.05", "G3, before multiple-comparison correction.", "No &mdash; conventional."],
+      ["Corrected level (G7)", f'&alpha; = {eng["sidak_alpha"]:.5f}',
+       "Šidák across every cell that reaches the sample floor.", "Derived, not chosen."],
+      ["Bet triggers", ", ".join(f'{t:.2f}' for t in eng["edge_triggers"]),
+       "The smallest probability edge a strategy will bet on.",
+       "No &mdash; all three are run and published; none is selected after the fact."],
+      ["Monte-Carlo repetitions", f'{eng["null_reps"]:,}', "Resolution of the no-skill null.", "No."],
+      ["Random seed", "20261114", "Makes every simulation reproducible.", "No."],
+      ["Training start", eng["meta"]["train_start"],
+       "The first date used to fit ratings.", "No &mdash; the earliest captured date."],
+  ], caption="Definitions, not data: these are this project's own settings, so no external source applies.",
+     definitions=True)}
+</section>
+<section class="card">
   <h3>Reproduce it</h3>
   <pre class="code">python3 -m engine_v2.pipeline      # rebuild every number
 python3 -m engine_v2.build_site    # rebuild every page</pre>
@@ -1040,6 +1068,40 @@ def build_props(ctx):
   <p>None of the four is available from an official source here. Item 4 is partly available for
   <em>team</em> outcomes &mdash; see the <a href="{BASE_URL}pages/correlations.html">correlations page</a> &mdash;
   but not for players.</p>
+</section>
+<section class="card">
+  <h3>What a prop line needs, and what exists</h3>
+  {table(["Requirement", "Needed to originate a prop line", "What is actually available", "Status",
+          "Official page that would carry it"], [
+      ["Player game log",
+       "Every game the player has played this season, with minutes and each counting statistic.",
+       "Not published by any official page reachable here. Two partial season-average leaderboards exist "
+       "(50 scorers, 24 by minutes) and neither is a game log.",
+       badge("missing", "bad"),
+       srclink("https://www.nba.com/stats/players/boxscores", "box scores")],
+      ["Distribution shape",
+       "The spread and skew of the player's game-by-game results, not just the mean.",
+       "Not derivable from an average. No official page publishes per-game player rows.",
+       badge("missing", "bad"),
+       srclink("https://www.nba.com/stats/players/boxscores", "box scores")],
+      ["Rotation context",
+       "Minutes with and without each teammate, so an absence can be propagated.",
+       "Not published. This site does not estimate replacement minutes anywhere.",
+       badge("missing", "bad"),
+       srclink("https://www.nba.com/stats/players/traditional", "player stats")],
+      ["Opponent scheme and pace",
+       "How the opponent concedes rebounds, assists and points, and how fast it plays.",
+       "Possessions are not published (F5), so pace is unavailable even at team level.",
+       badge("missing", "bad"),
+       srclink("https://www.nba.com/stats/teams/advanced", "team advanced")],
+      ["Leg correlation",
+       "Measured correlation between the legs of a combo, to price it correctly.",
+       "Measurable for team outcomes &mdash; see the correlations page &mdash; but not for player legs, because "
+       "there are no player rows to correlate.",
+       badge("missing", "bad"),
+       srclink("https://www.nba.com/stats/players/traditional", "player stats")],
+  ], caption="A gap register: each row states what is missing and links to the official page that would "
+             "carry it. Nothing in this table is filled in.")}
 </section>
 <section class="card">
   <h3>What is available</h3>
