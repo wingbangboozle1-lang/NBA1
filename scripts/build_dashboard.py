@@ -64,6 +64,7 @@ CATEGORIES = [
     ("Player Props", "props.html", "Per-player projections and prop combinations, with the minutes coverage stated next to every number."),
     ("Prop Variance &amp; Rotation", "prop-variance.html", "Game-to-game dispersion measured from official game logs: the uncertainty behind every prop, the minutes-to-production elasticity, and what the injury report changed since the lines were cut."),
     ("Injuries &amp; Rotation", "injuries.html", "The official injury report, the rotation minutes it implies, and the measured production impact."),
+    ("Game-Day Injury Read", "gameday.html", "The newest official injury edition against the edition the lines were cut from: what four clubs filed, what it does to tonight's five lines, and every horizon row re-read from NBA.com today."),
     ("Game Flow", "gameflow.html", "Pace, expected margin and total, blow-out and overtime probability, and the rest and back-to-back context."),
     ("EVIDENCE", None, "Whether any of it is skill. The out-of-sample record, the gates, the correlations and the luck check."),
     ("Strategies &amp; Leaderboard", "strategies.html", "Ten strategies, the reward tiers, and the leaderboard that ranks them - with nothing promoted that has not passed."),
@@ -462,6 +463,224 @@ def build_source_check(sources):
     return page("Official source check",
                 "Line-by-line comparison of the site with NBA.com on 2026-11-14 (UTC): the horizon, the nine 11/13 finals and "
                 "the settlement of the lines published for them.", "\n".join(b))
+
+
+# ------------------------------------------- game-day injury read (session 95c1cb23)
+def build_gameday(sources):
+    """Render data/derived/gameday_read.json (scripts/gameday_read_2026_11_14.py).
+
+    The newest official injury edition, the diff against the edition the published lines
+    were cut from, and what that difference does to tonight's model lines. The published
+    lines are NOT modified by this page: they were frozen before tip and re-pricing them
+    afterwards would put post-cut information into a graded number. Both numbers are shown
+    side by side instead. Every row carries the official URL it was read from.
+    """
+    path = os.path.join(ROOT, "data", "derived", "gameday_read.json")
+    if not os.path.exists(path):
+        return page("Game-day read", "Newest injury edition, edition diff and re-priced horizon.",
+                    banner("warn", "No game-day capture file",
+                           "<code>data/derived/gameday_read.json</code> is not present. Read the newest "
+                           "official edition into <code>data/captures/</code> and run "
+                           "<code>python3 scripts/gameday_read_2026_11_14.py</code>."))
+    d = load(path)
+    s = d["summary"]
+    m = s["mechanism"]
+    b = [h2("Game-day read",
+            "What the league's newest injury report says, what the model was built on, and the gap "
+            "between them - row by row, with a source link on every row.")]
+    b.append(tiles([
+        ("Slate rows verified against NBA.com", "%d/%d" % (s["slate_rows_agree"], s["slate_rows_checked"]),
+         "every field of every horizon row re-read from the official page"),
+        ("Published report rows re-checked", "%d/%d" % (s["injury_rows_agree"], s["injury_rows_checked"]),
+         "independent re-transcription of the edition the lines cite"),
+        ("Clubs that filed since the cut", ", ".join(s["teams_that_filed_since"]) or "none",
+         "rows added to the report after the lines were frozen"),
+        ("Still unfiled at capture", ", ".join(s["teams_still_unfiled"]) or "none",
+         "inside the league's game-day window, not overdue"),
+        ("Games whose line moves", "%d of %d" % (s["games_repriced"], len(d["gameday_readout"])),
+         "re-priced with the engine's own adjustment rule"),
+        ("Favourite flips", len(s["favourite_flips"]), "games where the model changed its mind on a side"),
+    ]))
+    b.append(banner("info", "Editions on this page",
+                    "The site's published lines were cut from the <strong>%s</strong>. The newest edition "
+                    "when this was captured was the <strong>%s</strong>. The hub updates continuously, so a "
+                    "newer file may exist by the time you read this - the check is one click on the source "
+                    "link." % (esc(s["edition_published_by_site"]), esc(s["edition_gameday"]))))
+
+    # ---- 1. what changed between the two editions
+    b.append(h2("1. What the game-day report changed",
+                "One row per club whose listing moved between the two editions. Nothing is inferred: a club "
+                "that filed for the first time shows every row it added."))
+    rows = []
+    for x in d["edition_delta"]:
+        changes = []
+        for c in x["status_changes"]:
+            changes.append("<b>%s</b> %s &rarr; %s" % (esc(c["player"]), esc(c["from"]), esc(c["to"])))
+        for a in x["added"]:
+            changes.append("<b>%s</b> %s &middot; %s <span class=\"fine\">(new row)</span>"
+                           % (esc(a["player"]), esc(a["status"]), esc(a["reason"] or "")))
+        for a in x["removed"]:
+            changes.append("<b>%s</b> %s <span class=\"fine\">(no longer listed)</span>"
+                           % (esc(a["player"]), esc(a["status"])))
+        rows.append([
+            esc(x["date"]), esc(x["matchup"]), esc(x["team"]),
+            "yes" if x["filed_since"] else "no",
+            "NOT YET SUBMITTED" if x["was_not_yet_submitted"] else "already filed",
+            str(x["n_added"]), str(x["n_status_changes"]), str(x["n_removed"]),
+            "<br>".join(changes) if changes else "listing unchanged; status-only movement",
+            '<a href="%s" target="_blank" rel="noopener">01:30 PM ET PDF</a> &middot; '
+            '<a href="%s" target="_blank" rel="noopener">04:15 AM ET PDF</a>'
+            % (esc(x["source_new"]), esc(x["source_old"])),
+        ])
+    for g in d["gameday_readout"]:
+        for who in ("home", "away"):
+            if not g["gameday"][who + "_not_submitted"]:
+                continue
+            if any(x["team"] == g[who] for x in d["edition_delta"]):
+                continue
+            rows.append([
+                esc(g["date"]), esc(g["matchup"]), esc(g[who]), "no",
+                "NOT YET SUBMITTED", "0", "0", "0",
+                "still no filing at the game-day edition; its window (11 a.m. to 1 p.m. local for a %s ET "
+                "tip) had not closed when this was read, so this is not a missed deadline (F48)"
+                % esc(g["time_et"].replace(" ET", "")),
+                '<a href="%s" target="_blank" rel="noopener">01:30 PM ET PDF</a>'
+                % esc(g["sources"]["report_new"]),
+            ])
+    b.append(table(["Date", "Matchup", "Club", "Filed since the cut", "Previous edition", "Rows added",
+                    "Status changes", "Rows dropped", "Detail", "Source"], rows,
+                   note="Rows whose club was assigned from the PDF's block structure rather than a printed "
+                        "team cell are marked <code>attribution: block</code> in "
+                        "<code>data/captures/2026-11-14-pm/</code> and cross-checked in section 4 below."))
+
+    # ---- 2. the re-price
+    b.append(h2("2. What it does to tonight's lines",
+                "The published line, the same model re-run on the game-day edition, and the arithmetic "
+                "between them. Both numbers are kept; the published one stays graded."))
+    rows = []
+    for g in d["gameday_readout"]:
+        pub, gd, dl = g["published"], g["gameday"], g["delta"]
+        pick_txt = []
+        for p in g["picks"]:
+            pick_txt.append("%s &middot; %s &middot; %s &middot; side still model-backed: %s"
+                            % (esc(p["strategy"]), esc(p["market"]), esc(p["line_display"] or ""),
+                               "<b>yes</b>" if p["model_side_still_agrees"] else "<b>NO</b>"))
+        rows.append([
+            esc(g["time_et"]), "<b>%s</b>" % esc(g["matchup"]),
+            num(pub["model_spread_home"], 1), num(gd["model_spread_home"], 1),
+            ("+" if dl["spread_move"] >= 0 else "") + num(dl["spread_move"], 2),
+            num(pub["model_total"], 1), num(gd["model_total"], 1),
+            ("+" if dl["total_move"] >= 0 else "") + num(dl["total_move"], 2),
+            num(pub["p_home_win"], 3), num(gd["p_home_win"], 3),
+            "no" if not dl["favourite_flips"] else "YES",
+            "%s / %s listed &middot; %s / %s with known minutes" % (
+                gd["home_listed"], gd["away_listed"], gd["home_minutes_known"], gd["away_minutes_known"]),
+            ("<span class=\"fine\">%s</span>" % "<br>".join(pick_txt) if pick_txt
+             else '<span class="na" title="no published pick on this game">&mdash;</span>'),
+            '<a href="%s" target="_blank" rel="noopener">game card</a> &middot; '
+            '<a href="%s" target="_blank" rel="noopener">01:30 PM PDF</a>'
+            % (esc(g["sources"]["game_url"]), esc(g["sources"]["report_new"])),
+        ])
+    b.append(table(["Tip (ET)", "Matchup", "Published spread (home)", "Game-day spread", "Move",
+                    "Published total", "Game-day total", "Move", "P(home) pub.", "P(home) now",
+                    "Favourite flips", "Report listing H/A", "Published picks", "Source"], rows,
+                   note="Spread is the model's projected home margin in points (negative = the away club is "
+                        "the model's pick); it is the same field the Lines &amp; Picks page prints as "
+                        "<em>model spread</em>. Re-computation rule: <code>%s</code> "
+                        "(<code>%s</code>), with impact coefficient %s net-rating points per 100 possessions "
+                        "lost and alpha %s, both project choices (F4), and sigma_margin %s from the fitted "
+                        "backtest window." % (esc(m["rule"]), esc(m["rule_source"]), num(m["impact_coef_net_pts_per_100poss"], 1),
+                                              num(m["alpha_offense_share"], 2), num(m["sigma_margin"], 3))))
+    b.append(banner("warn", "Why two games do not move at all",
+                    "A listed player with no row in the captured minutes table contributes "
+                    "<strong>0.00</strong> net-rating points - that is a lower bound, not a verdict of "
+                    "'no impact'. New Orleans filed five names tonight and none of them are in that table, "
+                    "so DEN@NOP is printed unchanged. See <a href=\"flagged.html\">F47</a>."))
+
+    # ---- 3. rows the report cannot speak to yet
+    b.append(h2("3. The rest of the horizon",
+                "What the game-day edition does and does not say about the days after tonight."))
+    rows = []
+    for x in d["later_dates"]:
+        rows.append([
+            esc(x["date"]), esc(x["matchup"]),
+            "yes" if x["in_gameday_edition"] else "no",
+            str(x["player_rows_for_this_date"]), str(x["teams_not_yet_submitted"]),
+            esc(x["verdict"]), esc(x["note"]),
+            '<a href="%s" target="_blank" rel="noopener">%s</a>'
+            % (esc(x["source_url"]), "official report" if x["in_gameday_edition"] else "report hub"),
+        ])
+    b.append(table(["Date", "Matchup", "In this edition", "Player rows", "Clubs unfiled", "Verdict",
+                    "Note", "Source"], rows,
+                   note="The report covers the current day and the next. A horizon that runs three days "
+                        "out therefore has no availability input for its last two dates - that is the "
+                        "league's cadence, recorded as F52, not a capture that failed."))
+
+    # ---- 4. verification
+    b.append(h2("4. Row-by-row verification",
+                "Every published horizon row re-read from the official page, and every published injury row "
+                "re-transcribed from the PDF it cites. Disagreements are listed; nothing is corrected "
+                "silently."))
+    rows = []
+    for x in d["slate_verification"]:
+        f = x.get("fields", {})
+        detail = []
+        for name in ("date", "time_et", "matchup", "away", "home", "away_rec", "home_rec"):
+            if name in f:
+                ok = f[name]["agree"]
+                detail.append('%s %s <span class="fine">(site %s / official %s)</span>'
+                              % (name, "OK" if ok else "<b>MISMATCH</b>",
+                                 esc(f[name]["published"]), esc(f[name]["official"])))
+        rows.append([
+            esc(x["date"]), esc(x["matchup"]), esc(x["game_id"]),
+            "<b>%s</b>" % esc(x["verdict"]),
+            "; ".join(detail),
+            '<a href="%s" target="_blank" rel="noopener">slate page</a> &middot; '
+            '<a href="%s" target="_blank" rel="noopener">game card</a>'
+            % (esc(x["source_url"]), esc(x.get("game_url") or x["source_url"])),
+        ])
+    b.append(table(["Date", "Matchup", "Game id", "Verdict", "Fields compared", "Source"], rows,
+                   note="Records are checked twice: against the game card and against the official "
+                        "standings page, both read on 2026-11-14."))
+    rows = []
+    for x in d["injury_verification"]:
+        rows.append([
+            esc(x.get("team")), esc(x.get("player") or "(club row)"),
+            esc(x.get("published_status") or "not on the site"), esc(x.get("fresh_status") or "-"),
+            esc(x.get("published_reason") or "-"), esc(x.get("fresh_reason") or "-"),
+            "<b>%s</b>" % esc(x["verdict"]),
+            esc(x.get("attribution_in_pdf") or "-"),
+            '<a href="%s" target="_blank" rel="noopener">04:15 AM PDF</a>' % esc(x["source_url"]),
+        ])
+    b.append(table(["Club", "Player", "Site status", "Re-read status", "Site reason", "Re-read reason",
+                    "Verdict", "PDF cell", "Source"], rows,
+                   note="The <em>PDF cell</em> column says whether the club was printed in the table row or "
+                        "came from the block structure of a re-flowed page (F50)."))
+    rows = []
+    for x in d["attribution_cross_check"]:
+        rows.append([
+            esc(x["player"]), esc(x["team_in_pdf_block"]), esc(x["team_in_minutes_table"] or ""),
+            "<b>%s</b>" % esc(x["verdict"]),
+            '<a href="%s" target="_blank" rel="noopener">report</a> &middot; '
+            '<a href="%s" target="_blank" rel="noopener">players table</a>'
+            % (esc(x["source_url_pdf"]), esc(x["source_url_table"])),
+        ])
+    b.append(table(["Player", "Club per report block", "Club per official minutes table", "Verdict", "Source"],
+                   rows,
+                   note="<code>NO-CROSS-CHECK</code> means the player is outside the captured top-50 table, "
+                        "so no second official source in this repository prints a club for him. It is not a "
+                        "disagreement, and it is not filled in."))
+    b.append(banner("info", "Limits of this page",
+                    "<ul>%s</ul>" % "".join("<li>%s</li>" % esc(t) for t in s["honest_limits"])))
+    b.append(banner("info", "Files this page is built from",
+                    "<code>data/captures/2026-11-14-pm/</code> (the four official transcriptions), "
+                    "<code>data/derived/gameday_read.json</code> (the comparison and the re-price), "
+                    "<code>scripts/gameday_capture_2026_11_14.py</code> and "
+                    "<code>scripts/gameday_read_2026_11_14.py</code> (how both were produced)."))
+    return page("Game-day read",
+                "The newest official injury edition against the edition the published lines were built "
+                "from: the diff, the re-priced horizon, and the verification of every row on the horizon.",
+                "\n".join(b))
 
 
 # ------------------------------------------------------- prop variance (session 24eb72c6)
@@ -1131,6 +1350,14 @@ def main():
                      "%s. Source: %s. Rows for a team that had not filed at this edition are recorded with status "
                      "<em>NOT YET SUBMITTED</em> exactly as published; they are never filled in."
                      % (esc(injs["report"]), srclink(sources, injs["src"]))))
+    gd_path = os.path.join(ROOT, "data", "derived", "gameday_read.json")
+    if os.path.exists(gd_path):
+        b.insert(0, banner("warn", "There is a newer official edition than the one behind these numbers",
+                           "The rows below are the edition the published lines were cut from. The league "
+                           "has since published its game-day report, and four more clubs have filed. The "
+                           "diff, the re-priced lines and a row-by-row re-verification of the whole horizon "
+                           "are on <a href=\"gameday.html\">Game-Day Injury Read</a>. Those numbers do not "
+                           "replace the ones here: a line re-priced after it was frozen cannot be graded."))
     built["injuries.html"] = page("Injuries, rotation and production impact",
                                   "The official injury report for the horizon, what it does to rotation minutes, "
                                   "and the measured effect on a team's net rating.", "\n".join(b))
@@ -1653,6 +1880,9 @@ def main():
 
     # === prop variance (session arena/24eb72c6-nba1, COORDINATION section 24) =====
     built["prop-variance.html"] = build_prop_variance()
+
+    # === game-day read (session arena/95c1cb23-nba1, COORDINATION section 31) =====
+    built["gameday.html"] = build_gameday(sources)
 
     # ------------------------------------------------------------------ write
     for name, html in built.items():

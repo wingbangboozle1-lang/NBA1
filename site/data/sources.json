@@ -403,6 +403,24 @@
    "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
    "publisher": "NBA.com (official)",
    "used_for": "Participation status for the 2026-11-14 and 2026-11-15 games; transcribed row by row in data/raw/s14/injury_report_2026-11-14_0415ET.json."
+  },
+  "S10_2026-11-14-1330PM": {
+   "title": "NBA Official Injury Report, 11/14/26 01:30 PM ET edition (game-day report)",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "publisher": "NBA.com (official)",
+   "used_for": "The league's game-day participation report for the 2026-11-14 slate and the 2026-11-15 slate. Transcribed row by row in data/captures/2026-11-14-pm/injury_2026-11-14_1330PM.json and diffed against the 04:15 AM ET edition the published lines were built from."
+  },
+  "S8_2026-11-14-pm-slate": {
+   "title": "NBA.com Games & Scores, 2026-11-14 to 2026-11-17 (game-day read)",
+   "url": "https://www.nba.com/games?date=2026-11-14",
+   "publisher": "NBA.com (official)",
+   "used_for": "Matchup, tip time, game id, displayed club records and the displayed season-leader line for all 27 horizon games, read 2026-11-14 between 18:39Z and 19:10Z. Used to verify every published row in docs/data/lines.json; see data/captures/2026-11-14-pm/slate_2026-11-14_to_17.json."
+  },
+  "S2_2026-11-14-pm-standings": {
+   "title": "NBA.com 2026-27 Regular Season Standings (game-day read)",
+   "url": "https://www.nba.com/standings",
+   "publisher": "NBA.com (official)",
+   "used_for": "All 30 club records at 18:56Z on 2026-11-14 (Utah 19:14Z), used as the second official cross-read of the record fields that also appear on each game card."
   }
  },
  "refresh_2026-11-14": {
@@ -426,5 +444,29 @@
    "did": "Captured the 2026-11-13 finals (9 games), standings through 11/13 (30 rows), the 27 horizon cards with refreshed records, and the 11/14/26 04:15 AM ET injury edition. Cross-checks and record changes are in data/raw/s14/."
   }
  ],
- "merge_2026-11-14": "union of both captures (arena/2329cb68-nba1 + main sessions); shared ids prefer the main-side entry"
+ "merge_2026-11-14": "union of both captures (arena/2329cb68-nba1 + main sessions); shared ids prefer the main-side entry",
+ "refresh_2026-11-14-pm": {
+  "run_at_utc": "2026-11-14T18:38Z to 2026-11-14T19:20Z",
+  "session": "arena/95c1cb23-nba1",
+  "what": "Game-day injury refresh and row-level re-verification of the horizon. No published line, pick or graded result was edited: lines are pre-registered before tip and re-pricing them after a capture would contaminate the out-of-sample record.",
+  "outputs": [
+   "data/captures/2026-11-14-pm/",
+   "data/derived/gameday_read.json",
+   "site/pages/gameday.html"
+  ],
+  "result": {
+   "slate_rows_agree": "27/27",
+   "published_injury_rows_agree": "31/31",
+   "clubs_that_filed_since_the_models_edition": [
+    "CHI",
+    "CLE",
+    "MIA",
+    "NOP"
+   ],
+   "clubs_still_unfiled_at_capture": [
+    "Memphis Grizzlies"
+   ],
+   "games_whose_model_line_moves": 3
+  }
+ }
 }
