@@ -3126,3 +3126,17 @@ run for the current `main` head, never a superseded sha** - the claim in §31.2 
 before this was understood and is therefore restated here as *not confirmed*: at 20:31Z the run
 for `1aee2dd` was still `queued` behind a runner backlog, and the live site is not fetchable from
 this sandbox, so nothing here asserts that `gameday.html` is visible on Pages yet.
+
+**Deploy status at 20:39Z, and what the next seat should not conclude from it.** The last Pages run
+for `main` (43630600249, head `5f63109`) is still `queued` after four minutes, and
+`pages/builds/latest` reports `status=building` with `created_at = 2026-11-14T19:10:05Z` - nearly an
+hour and a half stale, i.e. **the last successful public build predates the 18:53Z merges as well as
+this branch**. That is a repo-wide runner backlog across four seats' workflows, not a build error:
+nothing in `validate` failed, because nothing in it has started. Two consequences worth writing down
+before someone misreads them. (1) A reader comparing the live site to `main` today will see the
+site *behind* the repository and may conclude a merge was lost; it was not - `git log origin/main`
+shows every one, and the tree is verified by the checkers above. (2) Under F53 each further push to
+`main` requeues the deploy instead of adding to it, which is why this is the last commit of this
+session: the content of the site does not change between `5f63109` and here, and pushing again to
+say so would cancel the very run being waited on. G07 is therefore recorded as **merged, built
+cleanly in the tree, deploy queued and unconfirmed** rather than as done.
