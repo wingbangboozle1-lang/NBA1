@@ -117,6 +117,28 @@ def main():
               "minimum_per_half": MIN_HALVES,
               "note": "A component that only works in one half is a schedule artefact, not a model."}
 
+    # ---- naive baselines, computed on the same 51 games (no fitting, no magic numbers)
+    am = [r["actual_margin_home"] for r in rows]
+    at = [r["actual_total"] for r in rows]
+    mm = [r["model_margin_home"] for r in rows]
+    mt = [r["model_total"] for r in rows]
+
+    def _mae(a, b):
+        return round(sum(abs(x - y) for x, y in zip(a, b)) / len(a), 3)
+
+    naive = {
+        "margin_constant_zero": _mae([0.0] * len(am), am),
+        "margin_constant_sample_mean": _mae([mean(am)] * len(am), am),
+        "margin_model": _mae(mm, am),
+        "total_constant_sample_mean": _mae([mean(at)] * len(at), at),
+        "total_model": _mae(mt, at),
+        "definition": "the yardstick that costs nothing to reproduce: predict one number for "
+                      "every game (0 for the margin, the sample mean for the total). Any model "
+                      "that cannot beat this has no information, whatever its MAE looks like.",
+    }
+    naive["margin_improvement"] = round(naive["margin_constant_sample_mean"] - naive["margin_model"], 3)
+    naive["total_improvement"] = round(naive["total_constant_sample_mean"] - naive["total_model"], 3)
+
     errs = [abs(r["err_margin"]) for r in rows]
     ci = block_bootstrap(errs)
     n = len(rows)
@@ -140,13 +162,23 @@ def main():
       f"n={n}. Every interval below is wide for the reason this gate exists: a 51-game window "
       "cannot separate a 12.79 MAE from a 13.19 MAE. This gate FAILS and the desk says so "
       "instead of reporting the difference as skill.")
-    g("V3", "Beat the naive baseline on margin", "MAE(model) < MAE(0.0-point home pick)",
-      base["mae_margin"],
-      "PASS" if base["mae_margin"] < 13.2 else "MARGINAL",
-      f"Model MAE {base['mae_margin']} against a pick-nothing baseline around 13.2 on the same "
-      "games; the gap is well inside the bootstrap interval, so this is a PASS only in the "
-      "'not obviously worse' sense.",
-      url="https://www.nba.com/stats/teams/advanced")
+    g("V3", "Beat a constant on the margin", "MAE(model) < MAE(predict the same number every game)",
+      f"{naive['margin_model']} vs {naive['margin_constant_sample_mean']}",
+      "PASS" if naive["margin_improvement"] > 0 else "FAIL",
+      f"The model gains {naive['margin_improvement']} points of MAE over a constant on the same 51 "
+      f"games. Whether that gain is real is a different question: the 95% interval on the model's "
+      f"own error is ±{noise} "
+      f"points, so the pass means 'carries some information', never 'beats the market'.",
+      url=src["windows"]["window_fit"]["source_url"])
+    g("V3b", "Beat a constant on the total", "MAE(model) < MAE(sample-mean total)",
+      f"{naive['total_model']} vs {naive['total_constant_sample_mean']}",
+      "FAIL" if naive["total_improvement"] <= 0 else "PASS",
+      f"Predicting the league-average total for every game scores {naive['total_constant_sample_mean']} "
+      f"and the pace-times-ratings model scores {naive['total_model']}: the model is "
+      f"{abs(naive['total_improvement'])} points WORSE than doing nothing. Possession estimates are "
+      "the suspect part — they are built from an eight-day window of 7–10 games per team, where the "
+      "true game-to-game pace spread is far wider than the window's standard error.",
+      url=src["windows"]["window_live"]["source_url"])
     g("V4", "Calibration of the win probability", "Brier < 0.25 (the always-0.5 score)",
       round(mean([( (1 if r["home_won"] else 0) - r["p_home_model"]) ** 2 for r in rows]), 4), "PASS",
       "Probability is derived from the projected margin over a fixed σ. It is honest as a "
@@ -205,7 +237,7 @@ def main():
       missing="back-copies of the NBA.com injury report (one PDF per day at the same URL pattern), "
               "or any archive of them")
 
-    out = {"base_model": base, "ablations": abl, "halves": halves,
+    out = {"naive_baselines": naive, "base_model": base, "ablations": abl, "halves": halves,
            "scope": "margin/total engine only — see V13 for the absence term",
            "bootstrap_mae_margin_95": [ci[0], ci[1]] if ci else None,
            "diagnostics": {"k_fit": diag_fit["k"], "L_fit": diag_fit["L"],
@@ -216,10 +248,11 @@ def main():
                "pass": sum(1 for x in gates if x["status"] == "PASS"),
                "fail": sum(1 for x in gates if x["status"] == "FAIL"),
                "blank": sum(1 for x in gates if x["status"] == "BLANK"),
-               "decision": "The line model is not worse than a naive pick and its components "
-                           "survive ablation on 51 games, but V2/V9/V11 FAIL and V8/V10 are "
-                           "BLANK. Nothing on this desk is validated, and no gate was loosened "
-                           "to change that."},
+               "decision": "The margin carries information worth 2.49 points of MAE over a "
+                           "constant; the total carries none — it loses to a constant by 0.32 "
+                           "points. No component survives its own ablation at this sample size. "
+                           "V2/V3b/V9/V11 FAIL and V8/V10/V13 are BLANK. Nothing on this desk is "
+                           "validated, and no gate was loosened to change that."},
            }
     dump("gates.json", out)
     print(f"gates · base MAE_m={base['mae_margin']} MAE_t={base['mae_total']} "

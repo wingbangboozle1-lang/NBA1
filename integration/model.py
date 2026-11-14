@@ -58,6 +58,13 @@ ASSUMPTIONS = {
     },
     "sigma_game_points": {
         "value": 12.0,
+        "used_for": "the win probabilities on the 51 graded games. The live slate's "
+                    "probabilities instead divide by the measured out-of-sample error σ (17.4), "
+                    "because once the error is known it is the honest scale. The two are not "
+                    "interchangeable and the difference is quantified in "
+                    "integration/out/transform_test.json: at σ=11 a normal link scores Brier "
+                    "0.1884 and a logistic one 0.1943, so what costs accuracy here is the link "
+                    "function in scripts/build_edge_site.py, not the size of σ.",
         "unit": "points, single-game scoring noise used to set the shrinkage constant",
         "status": "ROUND NUMBER, deliberately conservative. A larger noise term shrinks team "
                   "ratings harder, so this choice makes the model less bold, not more. The "
@@ -88,6 +95,14 @@ def load_inputs():
     meta = load("data", "live", "capture_meta.json")
     trad = load("data", "raw", "players_traditional.json")
     sched = load("data", "schedule_2026_11_13_to_16.json")
+    venue_by_id = {}
+    try:
+        cap = load("data", "raw", "official_schedule_capture_2026-11-14.json")
+        for row in cap["rows"]:
+            v = dict(zip(cap["cols"], row))
+            venue_by_id[str(v["game_id"])] = v
+    except (OSError, ValueError, KeyError):
+        pass                          # the venue layer is optional; its absence shows as a blank
 
     cols = trad["cols"]
     ip, it, igp, imin, ipts = (cols.index(k) for k in ("player", "team", "gp", "min", "pts"))
@@ -107,8 +122,24 @@ def load_inputs():
         played.setdefault(g["away"], set()).add(g["date"])
         played.setdefault(g["home"], set()).add(g["date"])
 
-    return dict(windows=windows, slate=slate, injury=injury, logs=logs, completed=completed,
+    return dict(venue_by_id=venue_by_id,
+                windows=windows, slate=slate, injury=injury, logs=logs, completed=completed,
                 meta=meta, player_season=player_season, played=played)
+
+
+def neutral_site(venue_row):
+    """False when the matched venue sits in a US city, None when we cannot tell.
+
+    The test is on the shape of the published city field (`, ST` suffix), which is what the
+    league's own schedule prints for domestic games; international venues (Paris, Mexico City,
+    Manila) do not carry a state suffix. Nothing is looked up in a table of known arenas, so
+    the rule cannot silently mis-classify a venue this repo has never seen.
+    """
+    import re as _re
+    city = (venue_row or {}).get("city")
+    if not city:
+        return None
+    return False if _re.search(r", [A-Z]{2}$", city) else True
 
 
 def day_index(dstr):
@@ -319,10 +350,18 @@ def main():
             "availability_away": det_a, "availability_home": det_h,
             "new_absences_away": new_a, "new_absences_home": new_h,
             "minute_share_vacated_away": sh_a, "minute_share_vacated_home": sh_h,
-            "neutral_site": None,
-            "neutral_site_reason": "the slate page capture carries no venue field, so neutrality "
-                                    "is unknown for these dates and is left blank, not defaulted "
-                                    "to a home game",
+            "venue": (src["venue_by_id"].get(str(g["game_id"])) or {}).get("venue"),
+            "city": (src["venue_by_id"].get(str(g["game_id"])) or {}).get("city"),
+            "venue_source_url": (src["venue_by_id"].get(str(g["game_id"])) or {}).get(
+                "_source", "https://www.nba.com/schedule"),
+            "venue_captured_by": "arena/afbb836e-nba1 — an independent capture of the same "
+                                 "official pages, not this session's read",
+            "neutral_site": neutral_site(src["venue_by_id"].get(str(g["game_id"])) or {}),
+            "neutral_site_reason": ("city carries a US state suffix, so the venue is the home "
+                                    "team's own building" if neutral_site(
+                                        src["venue_by_id"].get(str(g["game_id"])) or {}) is False
+                                    else "no venue row matched this game id in the independent "
+                                         "capture — neutrality is unknown, not absent"),
             "report_state_away": sub.get(away) if has_report else "no 11/15 or 11/16 edition exists yet",
             "report_state_home": sub.get(home) if has_report else "no 11/15 or 11/16 edition exists yet",
         })

@@ -70,8 +70,11 @@ def classify(g, sigma, thresh, report_exists):
     if g["rest_days_home"] is None or g["rest_days_away"] is None:
         blocking.append("R5 rest state not derivable from the captured schedule window")
     if g.get("neutral_site") is None:
-        provisional.append("R4 venue not captured for future dates, so neutrality is unverified "
-                           "(in the backtest window the neutral flag exists and was enforced)")
+        blocking.append("R4 no venue row matched this game id in the independent capture, so "
+                        "neutrality is unverified")
+    elif g["neutral_site"] is True:
+        blocking.append("R4 the matched venue is not a US-city home building, so the home-court "
+                        "term must be zeroed and the line re-priced before any lean")
     if abs(m) < thresh:
         thin.append(f"R2 |margin {m:+.1f}| is inside the ±{thresh} point cut "
                     f"(half of the measured σ_margin {sigma})")
@@ -168,7 +171,9 @@ def main():
             "ratings_window": g["ratings_window"],
             "ratings_shrunk_net": {"away": g["away_net_shrunk"], "home": g["home_net_shrunk"],
                                    "games_behind": {"away": g["away_gp"], "home": g["home_gp"]}},
-            "neutral_site": None,
+            "neutral_site": g.get("neutral_site"),
+            "venue": g.get("venue"), "city": g.get("city"),
+            "venue_captured_by": g.get("venue_captured_by"),
             "market_price": None, "edge_vs_market": None, "kelly_stake": None, "hold": None,
             "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — "
                                            "these four fields stay blank on every row, forever, "

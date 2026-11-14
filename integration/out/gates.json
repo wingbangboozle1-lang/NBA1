@@ -1,4 +1,14 @@
 {
+ "naive_baselines": {
+  "margin_constant_zero": 15.255,
+  "margin_constant_sample_mean": 15.276,
+  "margin_model": 12.787,
+  "total_constant_sample_mean": 14.375,
+  "total_model": 14.693,
+  "definition": "the yardstick that costs nothing to reproduce: predict one number for every game (0 for the margin, the sample mean for the total). Any model that cannot beat this has no information, whatever its MAE looks like.",
+  "margin_improvement": 2.489,
+  "total_improvement": -0.318
+ },
  "base_model": {
   "n": 51,
   "mae_margin": 12.836,
@@ -134,13 +144,23 @@
   },
   {
    "id": "V3",
-   "name": "Beat the naive baseline on margin",
-   "threshold": "MAE(model) < MAE(0.0-point home pick)",
-   "measured": 12.836,
+   "name": "Beat a constant on the margin",
+   "threshold": "MAE(model) < MAE(predict the same number every game)",
+   "measured": "12.787 vs 15.276",
    "status": "PASS",
-   "detail": "Model MAE 12.836 against a pick-nothing baseline around 13.2 on the same games; the gap is well inside the bootstrap interval, so this is a PASS only in the 'not obviously worse' sense.",
+   "detail": "The model gains 2.489 points of MAE over a constant on the same 51 games. Whether that gain is real is a different question: the 95% interval on the model's own error is ±2.786 points, so the pass means 'carries some information', never 'beats the market'.",
    "missing_input": null,
-   "source_url": "https://www.nba.com/stats/teams/advanced"
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season&DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026"
+  },
+  {
+   "id": "V3b",
+   "name": "Beat a constant on the total",
+   "threshold": "MAE(model) < MAE(sample-mean total)",
+   "measured": "14.693 vs 14.375",
+   "status": "FAIL",
+   "detail": "Predicting the league-average total for every game scores 14.375 and the pace-times-ratings model scores 14.693: the model is 0.318 points WORSE than doing nothing. Possession estimates are the suspect part — they are built from an eight-day window of 7–10 games per team, where the true game-to-game pace spread is far wider than the window's standard error.",
+   "missing_input": null,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
   },
   {
    "id": "V4",
@@ -245,8 +265,8 @@
  ],
  "summary": {
   "pass": 7,
-  "fail": 3,
+  "fail": 4,
   "blank": 3,
-  "decision": "The line model is not worse than a naive pick and its components survive ablation on 51 games, but V2/V9/V11 FAIL and V8/V10 are BLANK. Nothing on this desk is validated, and no gate was loosened to change that."
+  "decision": "The margin carries information worth 2.49 points of MAE over a constant; the total carries none — it loses to a constant by 0.32 points. No component survives its own ablation at this sample size. V2/V3b/V9/V11 FAIL and V8/V10/V13 are BLANK. Nothing on this desk is validated, and no gate was loosened to change that."
  }
 }
