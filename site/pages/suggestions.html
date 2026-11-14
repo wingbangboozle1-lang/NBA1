@@ -19,7 +19,8 @@
       <a href="picks.html">Horizon 14–17 (session build)</a>
       <a href="picks.html">Horizon</a>
       <a href="strategies.html">Evidence</a>
-      <a href="suggestions.html">Decision</a>
+      <a href="decisions.html">Decisions</a>
+      <a href="suggestions.html">Suggestions</a>
       <a href="flagged.html">Flagged</a>
     </nav>
   </div>
@@ -44,10 +45,12 @@
 </div>
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
+<a href="official-verify.html">Live Re-verification</a>
 </div>
 <div class="nav-group"><h3>DECISION</h3>
 <a href="questions.html">Open Questions</a>
 <a href="suggestions.html">Suggestions</a>
+<a href="decisions.html">Decisions: pick a path</a>
 <a href="flagged.html">Flagged for Review</a>
 <a href="sources.html">Source Register</a>
 <a href="repo-review.html">Repo Review</a>
@@ -78,7 +81,7 @@
 <th>Decision needed</th>
 <th class="src">Source</th>
 </tr></thead><tbody>
-<tr>
+<tr id="SG1">
 <td>SG1</td>
 <td>Data</td>
 <td><b>Add a results backfill covering the whole season</b></td>
@@ -88,7 +91,7 @@
 <td>Approve the backfill run and confirm the retention policy for historical snapshots.</td>
 <td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>
 </tr>
-<tr>
+<tr id="SG2">
 <td>SG2</td>
 <td>Data</td>
 <td><b>Log real closing prices</b></td>
@@ -98,7 +101,7 @@
 <td>Whether to introduce a non-NBA data source at all, and which one.</td>
 <td class="src"><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">S15</a></td>
 </tr>
-<tr>
+<tr id="SG3">
 <td>SG3</td>
 <td>Data</td>
 <td><b>Complete the player-minutes table</b></td>
@@ -108,7 +111,7 @@
 <td>Which capture path to fund.</td>
 <td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">S7</a></td>
 </tr>
-<tr>
+<tr id="SG4">
 <td>SG4</td>
 <td>Site / UI</td>
 <td><b>Show the confidence label next to every derived number</b></td>
@@ -118,7 +121,7 @@
 <td>Visual treatment and whether the chip applies to every table or only the derived ones.</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
-<tr>
+<tr id="SG5">
 <td>SG5</td>
 <td>Site / UI</td>
 <td><b>Add a graded-results page that updates itself</b></td>
@@ -128,7 +131,7 @@
 <td>Whether graded picks overwrite the published slate or are kept alongside it.</td>
 <td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>
 </tr>
-<tr>
+<tr id="SG6">
 <td>SG6</td>
 <td>Site / UI</td>
 <td><b>Separate the two meanings of 'edge' everywhere in the UI</b></td>
@@ -138,7 +141,7 @@
 <td>Wording only.</td>
 <td class="src"><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">S15</a></td>
 </tr>
-<tr>
+<tr id="SG7">
 <td>SG7</td>
 <td>Model</td>
 <td><b>Make the gates do something</b></td>
@@ -148,7 +151,7 @@
 <td>Unit sizes per tier, and whether paper-only plays are visually separated.</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">S2</a></td>
 </tr>
-<tr>
+<tr id="SG8">
 <td>SG8</td>
 <td>Model</td>
 <td><b>Handle overtime and extreme games explicitly</b></td>
@@ -158,7 +161,7 @@
 <td>Whether tail risk should be damped or modelled.</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">S3_2026-11-12</a></td>
 </tr>
-<tr>
+<tr id="SG9">
 <td>SG9</td>
 <td>Model</td>
 <td><b>Add an Emirates NBA Cup adjustment - but only after measuring it</b></td>
@@ -168,7 +171,7 @@
 <td>Whether to fund the measurement.</td>
 <td class="src"><a href="https://www.nba.com/nba-cup/2026" target="_blank" rel="noopener">S18</a></td>
 </tr>
-<tr>
+<tr id="SG10">
 <td>SG10</td>
 <td>Operations</td>
 <td><b>Publish the daily refresh log on the site</b></td>
@@ -178,7 +181,7 @@
 <td>Where the run record lives and how long it is retained.</td>
 <td class="src"><a href="https://docs.github.com/en/actions" target="_blank" rel="noopener">S19</a></td>
 </tr>
-<tr>
+<tr id="SG11">
 <td>SG11</td>
 <td>Site</td>
 <td><b>Make the horizon the centre of the site, not a page inside it</b></td>
@@ -188,7 +191,7 @@
 <td>Confirm that the earlier builds stay reachable as archives, and decide whether the root landing page should keep any pointer to them at all.</td>
 <td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">S4</a></td>
 </tr>
-<tr>
+<tr id="SG12">
 <td>SG12</td>
 <td>Decision support</td>
 <td><b>Put the unverified column on every table instead of only on the flags page</b></td>
@@ -198,7 +201,7 @@
 <td>Decide whether the hover text should be expanded into a visible column, which is friendlier on a phone and worse for scanning on a wide screen.</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
-<tr>
+<tr id="SG13">
 <td>SG13</td>
 <td>Decision support</td>
 <td><b>Add a one-screen answer to 'what should I look at tonight'</b></td>
@@ -208,7 +211,7 @@
 <td>Confirm the ordering rule, and confirm that no ranking appears until a strategy has cleared G4.</td>
 <td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">S4</a></td>
 </tr>
-<tr>
+<tr id="SG14">
 <td>SG14</td>
 <td>Trust</td>
 <td><b>Make the verification reproducible by anyone, not only by this repository</b></td>
@@ -218,7 +221,7 @@
 <td>Confirm the level of detail: one line per output file, or one line per individual table row.</td>
 <td class="src"><a href="https://docs.github.com/en/actions" target="_blank" rel="noopener">S19</a></td>
 </tr>
-<tr>
+<tr id="SG15">
 <td>SG15</td>
 <td>Data and model</td>
 <td><b>Publish one line set, one ratings window, one sign convention</b></td>
@@ -228,7 +231,7 @@
 <td>Reviewer: which line set is the published horizon. No pick should be published until this is decided.</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
-<tr>
+<tr id="SG16">
 <td>SG16</td>
 <td>Verification</td>
 <td><b>Make the official-value check part of the gate</b></td>
@@ -238,7 +241,7 @@
 <td>Reviewer: approve adding the checker to the gate.</td>
 <td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>
 </tr>
-<tr>
+<tr id="SG17">
 <td>SG17</td>
 <td>Data and model</td>
 <td><b>Finish the game-log capture so props stop being a point estimate with no width</b></td>
@@ -248,7 +251,7 @@
 <td>Reviewer: pick 1, 2 or 1+2 in that order. Nothing on the site changes until the capture runs, because the script already reads whatever is in data/proplogs/.</td>
 <td class="src"><a href="https://www.nba.com/stats/players/boxscores" target="_blank" rel="noopener">S20</a></td>
 </tr>
-<tr>
+<tr id="SG18">
 <td>SG18</td>
 <td>Model</td>
 <td><b>Replace the flat 0.55 production-transfer rule with per-stat minutes elasticities</b></td>

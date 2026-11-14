@@ -15,6 +15,7 @@ Run:  python3 scripts/build_dashboard.py
 """
 import json
 import os
+import re
 import shutil
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -74,9 +75,11 @@ CATEGORIES = [
     ("Model &amp; Teams", "model.html", "The efficiency model, its assumptions and the team ratings it reads."),
     ("VERIFICATION", None, "Checked line by line against NBA.com on the day of capture. Mismatches are listed, not corrected."),
     ("Official Source Check", "source-check.html", "Every horizon game and every 11/13 final compared with NBA.com, the 11/13 settlement, and the conflicts between builds."),
+    ("Live Re-verification", "official-verify.html", "Every official value on this site read again at 18:40Z on 2026-11-14 and compared with what was published: 185 checks, one row and one official link each."),
     ("DECISION", None, "What is still open, what could be improved, and what could not be verified."),
     ("Open Questions", "questions.html", "What we know, what we do not, and the concrete step that would answer each open item."),
     ("Suggestions", "suggestions.html", "Improvements written as options with effort, risk and what each unlocks, so a reviewer can pick a path."),
+    ("Decisions: pick a path", "decisions.html", "Six decisions in dependency order, every open question mapped to the decision that closes it, and every suggestion ranked against them. Start here before implementing anything."),
     ("Flagged for Review", "flagged.html", "Every value that could not be confirmed from an official source, with the link it would need."),
     ("Source Register", "sources.html", "Every official URL this site is built from."),
     ("Repo Review", "repo-review.html", "Line-by-line review of the repository, the irregularities found, and the verification log."),
@@ -134,7 +137,8 @@ def page(title, sub, body, depth=1, extra_head=""):
       <a href="picks.html">Horizon 14–17 (session build)</a>
       <a href="%(navbase)spicks.html">Horizon</a>
       <a href="%(navbase)sstrategies.html">Evidence</a>
-      <a href="%(navbase)ssuggestions.html">Decision</a>
+      <a href="%(navbase)sdecisions.html">Decisions</a>
+      <a href="%(navbase)ssuggestions.html">Suggestions</a>
       <a href="%(navbase)sflagged.html">Flagged</a>
     </nav>
   </div>
@@ -183,8 +187,14 @@ def page(title, sub, body, depth=1, extra_head=""):
 
 
 # --------------------------------------------------------------- table renderer
-def table(headers, rows, note=None, source_col="Source", cls="", table_id=None, src_header=None):
-    """rows: list of lists. A cell may be a raw HTML string (already escaped) or a value."""
+def table(headers, rows, note=None, source_col="Source", cls="", table_id=None, src_header=None,
+          anchor_pattern=None):
+    """rows: list of lists. A cell may be a raw HTML string (already escaped) or a value.
+
+    anchor_pattern: when set (e.g. r"^[A-Z]{1,2}\d+$"), the first cell of a row that matches it
+    becomes the row's DOM id, so another page can link straight to that row. Deep links into these
+    registers were being written as #SG10 / #Q17 and did not resolve, because the table renderer
+    emitted no ids at all."""
     out = ['<div class="tablewrap">', '<table class="tbl %s"' % cls]
     if table_id:
         out.append(' id="%s"' % table_id)
@@ -199,7 +209,12 @@ def table(headers, rows, note=None, source_col="Source", cls="", table_id=None, 
         out.append('<th class="src">%s</th>' % (src_header or source_col))
     out.append("</tr></thead><tbody>")
     for r in rows:
-        out.append("<tr>")
+        _rid = ""
+        if anchor_pattern and r:
+            _first = re.sub(r"<[^>]+>", "", str(r[0])).strip()
+            if re.match(anchor_pattern, _first):
+                _rid = ' id="%s"' % _first
+        out.append("<tr%s>" % _rid)
         cells = r[:-1] if source_col else r
         for c in cells:
             out.append("<td>%s</td>" % c)
@@ -402,6 +417,508 @@ def build_source_check(sources):
 
 
 # ------------------------------------------------------- prop variance (session 24eb72c6)
+
+
+_REG_CACHE = {}
+
+
+DECISION_PATHS = [
+    {
+        "id": "P1",
+        "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+        "title": "Decide whether the hour of the capture is part of the product",
+        "why": ("The 18:40Z re-read found the site pricing from a 04:15 AM ET injury edition while the "
+                "01:30 PM ET edition was published and four of the five teams it called unfiled had "
+                "filed. Nothing about the model is wrong; the site simply had no rule for how old a "
+                "capture may be before it must be labelled or refreshed. This is the cheapest decision "
+                "here and it is the one that keeps every other number honest."),
+        "options": [
+            ("Ship a freshness label on every derived row (what this session did)",
+             "Done in this session: <code>inventory_status</code> on all 27 lines, the edition named "
+             "on every availability column, and a Live Re-verification page that shows the diff.",
+             "Low", "Already in the tree"),
+            ("Re-price the lines from the 01:30 PM ET edition and the 11/13 ratings",
+             "The ratings model would have to be re-run and every pick re-cut. That changes what the "
+             "site publishes, so it needs a decision, not a patch.",
+             "Medium", "Blocked on P2: nobody can say which of the two line sets is the official one"),
+            ("Automate a refresh before each slate and keep the label only as a fallback",
+             "The refresh path exists (F7) but is manual. Worth it only after P2.",
+             "High", "Blocked on P2"),
+        ],
+        "recommend": ("Option 1 now, and decide between options 2 and 3 only once P2 is settled. A "
+                      "labelled stale number is defensible; an unlabelled one is not, and that was the "
+                      "actual defect found today."),
+        "questions": ["Q17", "Q18", "Q19"],
+        "suggestions": ["SG10", "SG16"],
+        "needs": "One rule, written down: how old a capture may be, and what the site must print when it "
+                 "is older than that.",
+    },
+    {
+        "id": "P2",
+        "source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+        "title": "Say which line set is official",
+        "why": ("Two projection sets on this site disagree about the same games (F26, F27, F35) and the "
+                "live re-read found a third number that matters: the published ratings are through "
+                "11/13, and 19 of 30 teams moved when the 11/13 finals were folded in. Every page that "
+                "quotes a spread is quoting a number computed from a window the other page may not use. "
+                "Until one set is named official, no gate result can be compared across pages."),
+        "options": [
+            ("Nominate one line set, one ratings window and one sign convention (SG15)",
+             "The Source Check page's section 5 becomes empty because there is nothing left to "
+             "reconcile. This is a documentation and wiring change, not a modelling one.",
+             "Medium", "Unblocks P1 option 2, the leaderboard's comparability, and every cross-page claim"),
+            ("Keep both sets and print the window beside every line",
+             "Cheaper today, but the reader has to do the reconciliation the site should have done.",
+             "Low", "Nothing structural; the ambiguity survives"),
+        ],
+        "recommend": ("Option 1. It is the only item on this page that makes the leaderboard mean "
+                      "something, and it is a prerequisite for the two most valuable data suggestions "
+                      "(SG1, SG17)."),
+        "questions": ["Q2", "Q9", "Q14"],
+        "suggestions": ["SG15", "SG6", "SG12"],
+        "needs": "A decision on which window the public line uses, written into the build so it cannot "
+                 "drift again.",
+    },
+    {
+        "id": "P3",
+        "source": "https://www.nba.com/games",
+        "title": "Buy or refuse a price feed",
+        "why": ("Every 'edge' on this site is the model against a naive reference, because no "
+                "NBA-operated source publishes a price (F3, Q1). The leaderboard can therefore never "
+                "say whether anything is profitable, and gate GG can never close. This is not a data "
+                "gap that more scraping fixes: it is a licensing decision."),
+        "options": [
+            ("License a closing-price feed and log it per play (SG2, option 1)",
+             "Makes ROI a real number and closing-line value measurable. Introduces a non-NBA source, "
+             "so every row needs its own source link and the site's one-rule guarantee has to be "
+             "extended to it explicitly.",
+             "Medium (build) / commercial (licence)", "Q1, Q8, the reward tiers, gate GG"),
+            ("Manual closing-line log as a stopgap (SG2, option 2)",
+             "No licence needed. Human transcription error is the risk, and it is daily work.",
+             "Low per day", "The same answers, more slowly and less reliably"),
+            ("Refuse, and keep the model-vs-reference framing permanently (SG2, option 3)",
+             "Defensible and honest. The cost is that nothing on this site can ever be called a "
+             "market edge, and the leaderboard stays a research ranking.",
+             "None", "Nothing, but nothing is claimed either"),
+        ],
+        "recommend": ("Option 3 is the only one available today, because no licence exists and no "
+                      "NBA-operated price is published. If a feed is bought, take option 1 and not "
+                      "option 2: a manual log cannot be audited row by row, which is the rule the "
+                      "rest of the site runs on."),
+        "questions": ["Q1", "Q8"],
+        "suggestions": ["SG2", "SG5"],
+        "needs": "A yes/no on the licence, and if yes, the retention and attribution terms.",
+    },
+    {
+        "id": "P4",
+        "source": "https://www.nba.com/games?date=2026-11-14",
+        "title": "Let the sample grow, or stop running strategies",
+        "why": ("Every graded strategy sits under the 30-play sample gate except S1, which has 32 plays "
+                "and fails calibration and stability. The out-of-sample window is now 60 games and "
+                "cannot grow from the current split, because 2026-10-20 to 2026-11-05 is the ratings "
+                "window. Running more strategies on the same 60 games raises the multiple-comparison "
+                "problem, not the evidence (Q2, Q3, F8)."),
+        "options": [
+            ("Backfill 2026-10-20 to 2026-11-05 and re-cut the split (SG1)",
+             "The only way to lengthen the test window. The games are officially published; the work "
+             "is a walk over the day pages and a re-fit.",
+             "Low-Medium", "Q2, F8, F9; every gate result becomes meaningful"),
+            ("Freeze the strategy library at ten and wait for games to accumulate",
+             "No new claims, no new risk of a lucky cell. Roughly two months at 60 games per week.",
+             "None", "Nothing new, nothing false"),
+            ("Keep adding strategies on 60 games",
+             "Each new cell is another multiple comparison. This is how a lucky cell gets promoted.",
+             "Low", "A false positive, eventually"),
+        ],
+        "recommend": ("Option 1, and freeze the library while it runs. The power calculation already on "
+                      "the site says the effect sizes involved need several hundred games; adding "
+                      "strategies to 60 games does not substitute for adding games."),
+        "questions": ["Q2", "Q3", "Q5"],
+        "suggestions": ["SG1", "SG7"],
+        "needs": "Approval to spend the run, and a rule for the multiple-comparison correction before "
+                 "any new strategy is added.",
+    },
+    {
+        "id": "P5",
+        "source": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season",
+        "title": "Decide what the injury report is allowed to move",
+        "why": ("Availability is a measured floor, not an estimate: minutes are known for 50 of the 465 "
+                "players in the official table, so a team missing rotation players who are not top-50 "
+                "scorers shows 0.00 (F2, F4). Today's re-read adds a second problem: 33 status lines "
+                "changed in nine hours, so the adjustment depends on when you read it. An adjustment "
+                "that is both incomplete and time-dependent should not silently move a line."),
+        "options": [
+            ("Neutralise availability in the published line and publish the statuses beside it",
+             "The line becomes reproducible from the ratings alone. The injury work becomes evidence, "
+             "not an input.",
+             "Low", "A line anyone can recompute; the props page keeps its own measured widths"),
+            ("Complete the minutes table, then price availability properly (SG3)",
+             "The official Players Traditional table has 465 players; 415 of them lack a captured "
+             "minutes value. That is a capture job, not a model job.",
+             "Medium", "Q4, a trustworthy availability column, and grading strategy S6"),
+            ("Keep the current partial adjustment and label it",
+             "What the site does now. Defensible only while every row says so.",
+             "None", "Nothing"),
+        ],
+        "recommend": ("Option 2 if the capture can be run, option 1 until then. Option 3 is what is "
+                      "live today and it is the weakest of the three."),
+        "questions": ["Q4", "Q5", "Q12"],
+        "suggestions": ["SG3", "SG18"],
+        "needs": "A decision on whether an unmeasured adjustment may move a published number at all.",
+    },
+    {
+        "id": "P6",
+        "source": "https://www.nba.com/standings",
+        "title": "Make the verification independent of this repository",
+        "why": ("The gate that runs in CI checks structure: that a row has a source link, that a link "
+                "resolves, that a table has the right number of cells (F34). It does not check that the "
+                "value is right. Today's 185-row re-read exists only because a session chose to do it, "
+                "and its artifact is a JSON file in <code>verify/</code> that nothing re-runs."),
+        "options": [
+            ("Make the live re-read a scheduled job that writes the artifact and fails on a new differ (SG16)",
+             "The 185 checks already exist and already carry their own URLs. The job is to run them on "
+             "a schedule and publish the diff instead of discovering it by hand.",
+             "Medium", "Q17; a gate that tests values, not only structure"),
+            ("Keep the manual re-read, and publish each one as a dated artifact",
+             "What exists now. Cheap, but it depends on somebody choosing to do it.",
+             "Low", "A record, not a guarantee"),
+        ],
+        "recommend": ("Option 1. It is the highest-leverage change on this page that costs no money and "
+                      "no licence, and it converts today's one-off audit into a standing test."),
+        "questions": ["Q17", "Q18"],
+        "suggestions": ["SG14", "SG16", "SG10"],
+        "needs": "A decision on whether a red live-check may block a merge, given that the pages it "
+                 "reads change every 15 minutes by design.",
+    },
+]
+
+
+def _qsrc(q):
+    """A question's source cell: the register id when there is one, otherwise an explicit marker.
+
+    Several open questions ask for information that no official source publishes (a book price, a
+    licensed feed). Those carry a sentence instead of a URL in source_url, and rendering that
+    sentence as a link produced a broken internal link. It is a "nothing to link to" fact and is
+    rendered as one."""
+    url = (q.get("source_url") or "")
+    if q.get("source"):
+        _e = _REG_CACHE.get(q["source"])
+        return srclink_url(_e["url"], q["source"]) if _e else nomark(
+            "source id %s is not in the register" % q["source"])
+    if url.startswith("https://"):
+        return srclink_url(url, "official page")
+    return nomark(url or "no official source exists for this item")
+
+
+def build_decisions(questions, suggestions):
+    """The path-picker: every suggestion and open question, arranged so a reviewer can choose.
+
+    Nothing here is new evidence. It is the decision layer over content that already exists in
+    data/content/{questions,suggestions}.json, plus what the 2026-11-14 18:40Z re-read measured."""
+    _REG_CACHE.update(load(os.path.join(RAW, "sources.json"))["sources"])
+    q_open = {q["id"]: q for q in questions["open"]}
+    q_ans = {q["id"]: q for q in questions["answered"]}
+    sg = {s["id"]: s for s in suggestions["items"]}
+
+    b = [banner("info", "What this page is for",
+                "<p>Six decisions, in the order they unblock each other. Each one states what is "
+                "actually known, the options with their real cost, which open questions it answers, "
+                "which suggestions it consumes, and what a reviewer has to decide before any of it "
+                "can be built. <strong>Nothing on this page has been implemented</strong> except "
+                "where a row says so.</p>"
+                "<p>The evidence behind every claim is on the pages linked in each row. The open "
+                "questions and the suggestion catalogue are unchanged and stay published in full on "
+                "<a href=\"questions.html\">Open Questions</a> and "
+                "<a href=\"suggestions.html\">Suggestions</a>; this page is the reading order, not a "
+                "replacement.</p>")]
+
+    b.append(h2("Pick a path",
+                "In dependency order. P1 is cheap and unblocks nothing; P2 unblocks the leaderboard; "
+                "P3 is the only one that needs money; P4 and P5 are the two that change what the site "
+                "publishes; P6 is the one that makes the rest stay true."))
+    for p in DECISION_PATHS:
+        opts = "".join(
+            "<tr><td><b>%s</b></td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>"
+            % (o[0], o[1], o[2], o[3], srclink_url(p["source"], "official page"))
+            for o in p["options"])
+        qs = ", ".join(
+            '<a href="questions.html#%s">%s</a> <span class="chip %s">%s</span>'
+            % (qid, qid,
+               "ok" if qid in q_ans else "warn",
+               "answered" if qid in q_ans else "open")
+            for qid in p["questions"] if qid in q_open or qid in q_ans)
+        sgs = ", ".join('<a href="suggestions.html#%s">%s</a>' % (sid, sid)
+                        for sid in p["suggestions"] if sid in sg)
+        b.append('<div class="dcard"><h3>%s &mdash; %s</h3>'
+                 '<div class="dline"><b>Why it is a decision:</b> %s</div>'
+                 '<table class="t"><thead><tr><th style="width:22%%">Option</th><th>What it means</th>'
+                 '<th style="width:8%%">Effort</th><th style="width:15%%">What it unlocks</th>'
+                 '<th style="width:11%%">Source</th></tr></thead><tbody>%s</tbody></table>'
+                 '<div class="dline" style="margin-top:8px"><b>Recommended:</b> %s</div>'
+                 '<div class="dline"><b>Questions it moves:</b> %s &nbsp;&middot;&nbsp; '
+                 '<b>Suggestion it consumes:</b> %s</div>'
+                 '<div class="dline"><b>What has to be decided:</b> %s</div></div>'
+                 % (esc(p["id"]), esc(p["title"]), esc(p["why"]), opts, esc(p["recommend"]),
+                    qs, sgs, esc(p["needs"])))
+
+    # ---- every open question, with the decision that answers it
+    b.append(h2("Every open question, and what would answer it",
+                "The 19 open questions verbatim from the repository, each mapped to the decision above "
+                "that closes it and to the concrete step that produces the missing information."))
+    ans_map = {"P1": ["Q17", "Q18", "Q19"], "P2": ["Q2", "Q9", "Q14"],
+               "P3": ["Q1", "Q8"], "P4": ["Q3", "Q5"], "P5": ["Q4", "Q6", "Q12"],
+               "P6": ["Q10", "Q11", "Q13", "Q15", "Q16", "Q20"]}
+    rows = []
+    for qid in sorted(q_open):
+        q = q_open[qid]
+        path = next((pid for pid, ids in ans_map.items() if qid in ids), None)
+        rows.append([esc(qid), esc(q.get("question")),
+                     esc(q.get("what_is_missing")),
+                     esc(q.get("how_to_answer")),
+                     ('<span class="chip info">%s</span>' % path) if path else
+                     '<span class="chip bad">no path</span>',
+                     _qsrc(q)])
+    b.append(table(["ID", "Question", "What is missing", "How to answer it", "Decision", "Source"],
+                   rows, anchor_pattern=r"^Q\d+$"))
+    b.append('<p class="fine">%d open, %d answered. An answered question is not re-opened here; it is '
+             'on the <a href="questions.html">Open Questions</a> page with its number.</p>'
+             % (len(q_open), len(q_ans)))
+
+    # ---- the suggestion catalogue, with effort/risk read off the repository
+    b.append(h2("The suggestion catalogue, ranked for review",
+                "18 suggestions as they exist in the repository, with the recommendation the "
+                "repository already makes and the decision it belongs to. Nothing has been "
+                "implemented."))
+    _sg_reg = load(os.path.join(RAW, "sources.json"))["sources"]
+    cat = {"Data": "info", "Model": "warn", "Site / UI": "ok", "Site": "ok",
+           "Operations": "info", "Trust": "bad", "Decision support": "info",
+           "Verification": "bad", "Data and model": "warn"}
+    rows = []
+    for s in suggestions["items"]:
+        path = next((pid for pid, p in [(p["id"], p) for p in DECISION_PATHS]
+                     if s["id"] in p["suggestions"]), None)
+        rows.append([esc(s["id"]),
+                     '<span class="chip %s">%s</span>' % (cat.get(s.get("category"), "info"),
+                                                         esc(s.get("category"))),
+                     '<b>%s</b>' % esc(s["title"]),
+                     esc(s.get("problem")),
+                     esc(s.get("recommendation")),
+                     ('<span class="chip info">%s</span>' % path) if path else "&mdash;",
+                     (srclink_url(_sg_reg[s["source"]]["url"], s["source"])
+                      if _sg_reg.get(s.get("source")) else
+                      nomark("no source id on this suggestion in the catalogue"))])
+    b.append(table(["ID", "Category", "Suggestion", "The problem it fixes", "What the repo recommends",
+                    "Decision", "Source"], rows,
+                   note=("Sources are the official pages the suggestion is built on. A suggestion that "
+                         "adds a source is the only kind that can add a link here, which is why the "
+                         "rows for licensed-price work point at the NBA page that shows the gap.")))
+
+    # ---- what was found and fixed today, and what was not
+    b.append(h2("What the 2026-11-14 18:40Z re-read changed, and what it did not",
+                "Recorded here because a decision page that hides its own findings is not a decision "
+                "page."))
+    rows = [
+        ["The site published 39 flags, 13 answered + 18 open questions and 16 suggestions while the "
+         "repository held 46, 15 + 19 and 18",
+         "FIXED in this session: <code>build_dashboard.py</code> now copies the authored files from "
+         "<code>data/content</code> on every build and fails loudly if one is missing.",
+         '<span class="chip ok">fixed</span>',
+         srclink_url("https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/flagged.json",
+                     "diff")],
+        ["The site prices availability from the 04:15 AM ET injury edition; the newest published is "
+         "01:30 PM ET, and 33 status lines changed in between",
+         "LABELLED, not re-priced: every line now carries the edition it came from and says NOT "
+         "RE-PRICED. Re-pricing needs decision P1.",
+         '<span class="chip warn">labelled</span>',
+         srclink_url("https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+                     "official PDF")],
+        ["Four of the five teams the site marks 'had not filed' had filed by 01:30 PM ET",
+         "CORRECTED in the data: the listing count and the report status on all 27 lines now come from "
+         "the 01:30 PM ET edition.",
+         '<span class="chip ok">fixed</span>',
+         srclink_url("https://official.nba.com/nba-injury-report-2026-27-season/", "official index")],
+        ["19 of 30 teams moved between the published ratings window and the live Teams Advanced page",
+         "NOT CHANGED BY DESIGN: the lines were computed from the published window, so re-basing the "
+         "ratings table alone would make two pages disagree. The live value is shown beside the "
+         "published one. Which set is official is decision P2.",
+         '<span class="chip warn">needs P2</span>',
+         srclink_url("https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+                     "official page")],
+        ["The 18:40Z standings read disagreed with the committed copy on 18 of 30 teams",
+         "NO DEFECT: the committed capture was taken at 00:45Z, before the 11/13 finals, and the site "
+         "table already carried the finals. Verified, not assumed.",
+         '<span class="chip ok">verified</span>',
+         srclink_url("https://www.nba.com/standings", "official page")],
+        ["All 18 published backtest metrics and the S1 record were re-derived from the repository's own rows",
+         "NO DEFECT: 18 of 18 reproduce exactly (MAE, RMSE, bias, Brier, log loss, straight-up, and "
+         "23-9 = +11.909 units at -110, Wilson 95% [0.5463, 0.8444], exact binomial p = 0.0201).",
+         '<span class="chip ok">verified</span>',
+         srclink_url("https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+                     "input page")],
+    ]
+    b.append(table(["Finding", "What was done about it", "Status", "Source"], rows))
+
+    b.append(h2("How to use this page",
+                "Three steps, in order."))
+    b.append('<ol class="steps">'
+             "<li>Read P1 and P6 first. Both are cheap, neither needs money, and together they stop the "
+             "site from publishing a number that is older than it says it is.</li>"
+             "<li>Answer P3 (price feed) before reading the leaderboard as anything other than a "
+             "research ranking. Until it is answered, no strategy on this site can be called a market "
+             "edge, and that is not a defect - it is the missing input.</li>"
+             "<li>Treat P2, P4 and P5 as one decision about what the published line means. Changing any "
+             "one of them changes what every page quotes.</li>"
+             "</ol>")
+    return page("Decisions: pick a path",
+                "Six decisions in dependency order, the 19 open questions mapped to the decision that "
+                "closes each one, and the 18 suggestions ranked for review. Nothing here is "
+                "implemented unless it says so.",
+                "\n".join(b))
+
+
+def build_official_verify():
+    """Render verify/2026-11-14-cc5a6652/compare.json (session arena/cc5a6652-nba1).
+
+    That file is written by verify/2026-11-14-cc5a6652/capture_live.py, which transcribed the
+    official pages live on 2026-11-14 18:40Z-19:10Z and compared each row with the copy
+    committed here. Every row on this page carries the official URL it was read from.
+    Nothing on this page is recomputed from the repository: it is the comparison itself."""
+    vp = os.path.join(ROOT, "verify", "2026-11-14-cc5a6652", "compare.json")
+    if not os.path.exists(vp):
+        return page("Live re-verification", "the artifact is missing",
+                    banner("warn", "Artifact missing",
+                           "<p><code>verify/2026-11-14-cc5a6652/compare.json</code> is not present. Run "
+                           "<code>python3 verify/2026-11-14-cc5a6652/capture_live.py</code>.</p>"))
+    cmp = load(vp)
+    chk = cmp["checks"]
+    cnt = cmp["counts"]
+
+    def sec(prefix):
+        return [c for c in chk if c["section"].startswith(prefix)]
+
+    def mark(ok):
+        return ('<span class="ok">match</span>' if ok
+                else '<span class="bad">differs</span>')
+
+    def row(c, name_hdr="Row"):
+        return [esc(c["item"]), esc(c["committed"]), esc(c["live"]), mark(c["match"]),
+                srclink_url(c["source_url"], "official page")]
+
+    b = [banner("info", "What this page is",
+                "<p>On <strong>2026-11-14, 18:40Z-19:10Z</strong> the official pages were read again, row "
+                "by row, and every value was compared with the copy this repository publishes. The "
+                "transcription and the diff are one artifact: "
+                "<code>verify/2026-11-14-cc5a6652/compare.json</code>, produced by "
+                "<code>capture_live.py</code> in the same directory. This page renders that file.</p>"
+                "<p><strong>%d checks, %d match, %d differ.</strong> A row that differs is not "
+                "automatically a defect: the repository is a dated snapshot, so a value that was right at "
+                "00:42Z and wrong at 19:10Z is a staleness finding and is reported as one. Where the live "
+                "value is a <em>newer edition of the same official fact</em>, the fix is either to publish "
+                "the newer edition or to label the old one; both are shown below.</p>"
+                % (cnt["checks"], cnt["match"], cnt["differ"]))]
+
+    b.append(h2("Summary by check",
+                "Every check on this page is one row of one official table compared with the copy in the "
+                "repository. Nothing is sampled and nothing is skipped."))
+    rows = []
+    seen = []
+    for c in chk:
+        if c["section"] in seen:
+            continue
+        seen.append(c["section"])
+        ss = sec(c["section"])
+        rows.append([esc(c["section"]), str(len(ss)),
+                     str(sum(1 for x in ss if x["match"])),
+                     str(sum(1 for x in ss if not x["match"])),
+                     srclink_url(ss[0]["source_url"], "official page")])
+    b.append(table(["Check", "Rows", "Match", "Differ", "Source"], rows))
+
+    # ---- A. finals
+    b.append(h2("A. The 2026-11-13 finals, 9 games",
+                "Each official final score compared with <code>data/verified/finals_2026-11-13.json</code>."))
+    b.append(table(["Game", "Committed", "Read live 18:40Z", "Result", "Source"],
+                   [row(c) for c in sec("A.")]))
+
+    # ---- B/C. horizon
+    b.append(h2("B. The horizon, 27 games",
+                "Matchup, date and tip time for every unplayed game in 11/14-11/17, compared with "
+                "<code>data/derived/horizon_lines.json</code>."))
+    b.append(table(["Game", "Committed", "Read live 18:40Z", "Result", "Source"],
+                   [row(c) for c in sec("B.")]))
+    b.append(h2("C. The records the site prints on those games",
+                "Every won-lost record on the Lines page, compared with the record printed on the "
+                "official game card for the same game."))
+    b.append(table(["Game", "Site row", "Official card", "Result", "Source"],
+                   [row(c) for c in sec("C.")]))
+
+    # ---- D. standings
+    b.append(h2("D. The standings page, all 30 teams",
+                "The repository's <code>data/official/standings.json</code> was captured at 00:45Z, before "
+                "the 11/13 finals. This is the same page read again at 18:40Z."))
+    b.append(table(["Team", "Committed 00:45Z", "Read live 18:40Z", "Result", "Source"],
+                   [row(c) for c in sec("D.")]))
+
+    # ---- E. ratings
+    b.append(h2("E. Teams Advanced, all 30 teams, every printed column",
+                "All nineteen columns the page prints were compared for each team. The repository's copy "
+                "runs through the games of 2026-11-12; the live page includes 2026-11-13."))
+    b.append(table(["Team", "Committed window", "Read live 18:40Z", "Result", "Source"],
+                   [row(c) for c in sec("E.")]))
+
+    # ---- F. injury drift
+    b.append(h2("F. What changed in the injury report between 04:15 AM ET and 01:30 PM ET",
+                "The site prices its availability adjustment from the 04:15 AM ET edition. The newest "
+                "edition published on the official index at read time is 01:30 PM ET. Every named row for "
+                "the eleven 11/14 games is compared below; a row that appears on only one side is a player "
+                "who was added or dropped between editions."))
+    b.append(table(["Matchup - team - player", "04:15 AM ET", "01:30 PM ET", "Result", "Source"],
+                   [row(c) for c in sec("F.")]))
+
+    # ---- G. currency
+    b.append(h2("G. Which edition the site actually uses",
+                "Two rows, both of which differ: the site is pricing from a superseded edition of an "
+                "official document that is still published and still correct for its time."))
+    b.append(table(["Item", "Site value", "Official value at read time", "Result", "Source"],
+                   [row(c) for c in sec("G.")]))
+
+    # ---- H. filed teams
+    b.append(h2("H. Teams the site marks 'had not filed'",
+                "Five teams had not filed at 04:15 AM ET. Four of them had filed by 01:30 PM ET. The "
+                "official submission rule is 11 a.m. to 1 p.m. local time on game day, so the site's "
+                "label was true when captured and is stale now."))
+    b.append(table(["Matchup - team", "Site value", "At 01:30 PM ET", "Result", "Source"],
+                   [row(c) for c in sec("H.")]))
+    b.append('<p class="fine">Submission rule, quoted from the official index page: '
+             '&ldquo;teams are required to submit a game-day injury report between 11 a.m. and 1 p.m. '
+             'local time (and between 8 and 10 a.m. for tip-offs 5 p.m. or earlier) on game days&rdquo; '
+             '&mdash; ' + srclink_url(cmp["sources"]["injury_index"], "official index") + '.</p>')
+
+    # ---- what this page does not check
+    b.append(h2("What this page does not check",
+                "Stated so the page cannot be read as a clean bill of health."))
+    b.append("<ul>"
+             "<li>It does not check any derived number. A spread, a total, a moneyline, a win "
+             "probability, an ROI, a p-value or a gate result is model output, and no official page "
+             "publishes a value to compare it against. Those numbers are checked on the "
+             '<a href="validation.html">Validation</a> and <a href="backtest.html">Backtest</a> '
+             "pages, and the ones that <em>can</em> be recomputed from this repository's own rows are "
+             "recomputed there.</li>"
+             "<li>It does not check that a page stays available. A 200 at read time is the only claim.</li>"
+             "<li>It does not settle anything. Settlement against the 11/13 finals is on the "
+             '<a href="picks.html">Lines &amp; Picks</a> page and in the settlement record.</li>'
+             "<li>It reads the pages once. Two readers an hour apart can disagree, and the "
+             "injury-report columns are exactly where that happens.</li>"
+             "</ul>")
+    b.append('<p class="fine">Read live: %s &middot; session <code>%s</code> &middot; artifact '
+             '<code>verify/2026-11-14-cc5a6652/compare.json</code>.</p>'
+             % (esc(cmp["read_at_utc"]), esc(cmp["session"])))
+    return page("Live re-verification, 2026-11-14 18:40Z",
+                "Every official value this site publishes, read again line by line and compared with what "
+                "was published. %d checks, %d match, %d differ, and the differences explained one at a "
+                "time." % (cnt["checks"], cnt["match"], cnt["differ"]),
+                "\n".join(b))
+
+
 def build_prop_variance():
     """Render data/derived/prop_variance.json (written by scripts/prop_variance.py).
 
@@ -795,6 +1312,62 @@ def main():
            "".join('<li><b>%s</b> &mdash; %s<br><span class="fine">%s</span></li>'
                    % (esc(f["title"]), esc(f["detail"]), esc(f["reading"]))
                    for f in execu["findings"]))
+    ), "exec"))
+
+    # ---- what the 18:40Z live re-read changed (session arena/cc5a6652-nba1) ----------
+    _cmp = load(os.path.join(ROOT, "verify", "2026-11-14-cc5a6652", "compare.json"))
+    _c = _cmp["counts"]
+    body.append(card("Verified again at 18:40Z today &mdash; what moved", (
+        '<p class="lead">Every official value this site publishes was read again on '
+        '2026-11-14 between 18:40Z and 19:10Z and compared, row by row, with what is published '
+        'here: <strong>%d checks, %d match, %d differ</strong>. The rows that differ are explained '
+        'one at a time on the <a href="site/pages/official-verify.html">Live Re-verification</a> '
+        'page, each with the official link it was read from.</p>'
+        '<ul class="findings">'
+        '<li><b>The nine 2026-11-13 finals, the 27 horizon games and every record printed on them '
+        '&mdash; all 63 rows match the official pages exactly.</b> No defect. '
+        '<span class="fine">Sections A, B and C of the verification page.</span></li>'
+        '<li><b>A real defect, found and fixed: the site was publishing an older copy of three '
+        'decision files.</b> It showed 39 flags, 13 answered + 18 open questions and 16 suggestions '
+        'while the repository held 46, 15 + 19 and 18. The build now copies the authored files from '
+        '<code>data/content</code> on every run and fails loudly if one is missing. '
+        '<span class="fine">R-30-1 in the task board.</span></li>'
+        '<li><b>The site prices availability from a nine-hour-old injury edition.</b> The newest '
+        'edition on the official index is 01:30 PM ET; the site uses 04:15 AM ET, and 33 status lines '
+        'changed in between. Four of the five teams the site marks &ldquo;had not filed&rdquo; had '
+        'filed. Every line now carries the edition it came from and says <em>not re-priced</em>. '
+        'Re-cutting them is decision <a href="site/pages/decisions.html">P1</a>.</li>'
+        '<li><b>19 of 30 teams moved between the published ratings window and the live Teams '
+        'Advanced page</b>, because the live page now includes 11/13. The lines were computed from '
+        'the older window, so re-basing the ratings alone would make two pages disagree: the live '
+        'value is published beside the used one and nothing was re-cut. Which set is official is '
+        'decision <a href="site/pages/decisions.html">P2</a>.</li>'
+        '<li><b>The 18:40Z standings read disagreed with the committed copy on 18 of 30 teams '
+        '&mdash; and the site was right.</b> The committed capture was taken at 00:45Z, before the '
+        '11/13 finals. Verified, not assumed.</li>'
+        '<li><b>All 18 published backtest metrics and the whole S1 headline were re-derived from '
+        'the repository\'s own rows: 18 of 18 reproduce exactly</b>, including 23-9 = +11.909 units '
+        'at -110, Wilson 95%% [0.5463, 0.8444] and an exact binomial p of 0.0201.</li>'
+        '</ul>'
+        '<p class="fine">Read live: %s. Artifact: '
+        '<code>verify/2026-11-14-cc5a6652/compare.json</code>.</p>'
+        % (_c["checks"], _c["match"], _c["differ"], esc(_cmp["read_at_utc"]))
+    ), "exec"))
+
+    body.append(card("Where to go next", (
+        '<p><b>If you are deciding what to build:</b> start at '
+        '<a href="site/pages/decisions.html">Decisions: pick a path</a> &mdash; six decisions in '
+        'dependency order, every open question mapped to the one that closes it, and every '
+        'suggestion ranked against them.</p>'
+        '<p><b>If you are checking a number:</b> <a href="site/pages/official-verify.html">Live '
+        'Re-verification</a> for official values, '
+        '<a href="site/pages/validation.html">Validation</a> for the gates and the statistics, '
+        '<a href="site/pages/flagged.html">Flagged for Review</a> for everything that could not be '
+        'confirmed.</p>'
+        '<p><b>If you want tonight\'s games:</b> <a href="site/pages/picks.html">Lines &amp; '
+        'Picks</a>, then <a href="site/pages/injuries.html">Injuries &amp; Rotation</a> for what '
+        'could change the rotation, then <a href="site/pages/gameflow.html">Game Flow</a> for pace '
+        'and blow-out risk. No pick on this site is a betting recommendation.</p>'
     ), "exec"))
 
     # horizon at a glance
@@ -1282,7 +1855,8 @@ def main():
     for q in questions["answered"]:
         rows.append([esc(q["id"]), '<b>%s</b>' % esc(q["question"]), esc(q.get("answer")),
                      esc(q.get("confidence")), srclink(sources, q.get("source"))])
-    b.append(table(["ID", "Question", "Answer", "Confidence", "Source"], rows))
+    b.append(table(["ID", "Question", "Answer", "Confidence", "Source"], rows,
+                   anchor_pattern=r"^A\d+$"))
     b.append(h2("Open", "Questions that cannot be answered yet. Nothing on this site is decided on an open question."))
     rows = []
     for q in questions["open"]:
@@ -1292,7 +1866,7 @@ def main():
                      srclink(sources, q.get("source")) if q.get("source")
                      else nomark(q.get("source_url") or "no official source exists")])
     b.append(table(["ID", "Question", "What is missing", "How to answer it",
-                     "What it blocks", "Priority", "Source"], rows,
+                     "What it blocks", "Priority", "Source"], rows, anchor_pattern=r"^Q\d+$",
                    note="Where a row says no official source exists, that is the honest answer: no NBA-operated "
                         "page publishes the missing item (a closing price, for instance)."))
     built["questions.html"] = page("Open questions",
@@ -1314,7 +1888,7 @@ def main():
                      esc(s.get("recommendation")), esc(s.get("decision_needed")),
                      srclink(sources, s.get("source"))])
     b.append(table(["ID", "Category", "Title", "Problem", "Options", "Recommendation",
-                    "Decision needed", "Source"], rows))
+                    "Decision needed", "Source"], rows, anchor_pattern=r"^SG\d+$"))
     built["suggestions.html"] = page("Suggestions",
                                      "Improvements to the site and to the decision-making process, written as "
                                      "options with effort, risk and what each unlocks.", "\n".join(b))
@@ -1383,6 +1957,12 @@ def main():
 
     # === prop variance (session arena/24eb72c6-nba1, COORDINATION section 24) =====
     built["prop-variance.html"] = build_prop_variance()
+
+    # === live re-verification (session arena/cc5a6652-nba1, COORDINATION section 30) ===
+    built["official-verify.html"] = build_official_verify()
+
+    # === decisions (session arena/cc5a6652-nba1) =================================
+    built["decisions.html"] = build_decisions(questions, suggestions)
 
     # ------------------------------------------------------------------ write
     for name, html in built.items():
