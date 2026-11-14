@@ -53,19 +53,28 @@ an edge against a book, and no pick is described as market-validated.
 
 ---
 
-## Earlier builds, kept
+## Every build in this repository
 
-Two earlier implementations of the same brief are preserved and still online,
-so the audit trail stays intact:
+Four implementations of the same brief live here. All are preserved and all
+are online, so the audit trail stays intact. They read the same official
+captures and differ in presentation, data cut, and how much of the pipeline
+they exercise:
 
-| Build | Entry point | Character |
-| --- | --- | --- |
-| **A — NBA Edge Lab** | [`docs/index.html`](docs/index.html) | Dated snapshot of the official NBA data, source-linked |
-| **B — Line Origination Desk** | [`docs/b/index.html`](docs/b/index.html) | The earlier backtested build: 51 out-of-sample games, ten strategies, seven gates |
+| Build | Entry point | Horizon | Character |
+| --- | --- | --- | --- |
+| **Build D — this build** | [`index.html`](index.html) → [`site/`](site/pages/picks.html) | 27 games, 14–17 Nov | The current build: landing page, 15 category pages, 63 paper picks |
+| **Command Center** | [`command-center/index.html`](command-center/index.html) | 22 games, 14–16 Nov | A second consolidated site, built in session `arena/791c9114-nba1` from the same captures, with its own rendered-page checks |
+| **A — NBA Edge Lab** | [`edge-lab/index.html`](edge-lab/index.html) | 23 games, 13–15 Nov | Build A's original decision dashboard, frozen at the 11/13 cut and archived unchanged |
+| **A — dated NBA snapshot** | [`docs/index.html`](docs/index.html) | 13–15 Nov | The dated official schedule and 12:00 PM injury-report transcription, source-linked |
+| **B — Line Origination Desk** | [`docs/b/index.html`](docs/b/index.html) | — | The earlier backtested build: 51 out-of-sample games, ten strategies, seven gates |
+
+The root `index.html` is a **switcher**: it links every one of them, so no
+build is hidden and none is deleted.
 
 Also live: [`schedule-verified.html`](schedule-verified.html) (row-by-row
-schedule check and its flags) and [`review.html`](review.html) (the earlier
-build's flagged register).
+schedule check and its flags), [`verification.html`](verification.html) (the
+official-source reachability probe) and [`review.html`](review.html) (the
+earlier build's flagged register).
 
 ---
 
@@ -90,6 +99,7 @@ Supporting scripts:
 | `scripts/build_dashboard.py` | Generates the unified site |
 | `scripts/verify_dashboard.py` | Every row source-linked, every link resolves, every row's column count matches its header |
 | `scripts/verify_all.py` | The end-to-end gate |
+| `scripts/verify_integration.py` | Repository-wide audit: every JSON, every HTML page, every link, every data row's source |
 | `scripts/originate_lines.py`, `scripts/strategies.py`, `scripts/compute_correlations.py`, `scripts/injury_impact.py`, `scripts/backtest.py` | The earlier build's pipeline |
 | `scripts/verify_data.py`, `scripts/verify_inline.py`, `scripts/check_site.py`, `scripts/check_links.py`, `scripts/verify_schedule_c.py` | The earlier build's audits |
 
