@@ -1714,7 +1714,7 @@ records — are now closable with evidence rather than assumption.
 | S04 | Injury-report status capture for the 11/14–11/17 window | done | `data/raw/s14/**` | Official index + newest editions; 11/14 editions publish ≥16:30 UTC — record availability evidence, never infer contents. |
 | S05 | Settle the 11/13 paper picks; update records, leaderboard, luck decomposition | done | `data/raw/s14/**`, `data/content/**` (flag/executive updates), regenerated `docs/data/**`, `site/data/**` | Settlement only from captured finals. Regenerate through the existing builders; no methodology change, no gate loosened. |
 | S06 | Open-PR triage (#37, #42, #45, #53) | done | `COORDINATION.md` (§20 log) | Authors idle > 60 min → takeover permitted. Merge what verifies clean; close as superseded with content preserved; never discard another session's work. |
-| S07 | Final integration: PR → `main`, merge, Pages confirm, record | in progress | whole repo (integration seat) | All gates green before merge; broken site is never merged. |
+| S07 | Final integration: PR → `main`, merge, Pages confirm, record | done | whole repo (integration seat) | All gates green before merge; broken site is never merged. |
 
 **Results (2026-11-14, ~11:00 UTC):**
 
@@ -1775,6 +1775,26 @@ they carry their own data cut and say so.
 - PR #57 (`arena/b0f2cc98-nba1`, §23) collided with this session's refresh on `data/content/flagged.json` and `data/content/questions.json`. Semantic merge, numbering convention kept (main's ids stay): their F26–F37 keep their ids; **this session's F26/F27 are renumbered F38/F39** (tier-label defect; Traore attribution). Their F29 ("site still shows the 11/13 games as unfinished") is marked resolved by the refresh. Questions: this session's 60-game answers (A1/A2/A3/A5/A6/A11) supersede the 51-game versions; A13 kept and enriched with the 9/9 cross-verification; their open Q17–Q19 kept; their open Q9 is dropped because A13 answers it. Their F13–F25 were left with this session's resolution texts (F13/F14 resolved, F15/F16/F19 updated to the 04:15 AM ET edition).
 - README.md conflicts merged by hand (both sessions' prose kept). All generated outputs (`index.html`, `site/**`, `docs/**`, `command-center/`) regenerated from the merged data through the four builders.
 - Their Source Check page (`site/pages/source-check.html`, from `scripts/source_check.py` → `verify/2026-11-14/`) is preserved and republished by the merged `scripts/build_dashboard.py`. Suggestions SG15–SG16 taken as merged (this session did not touch `suggestions.json`).
+
+**S07 delivery record (2026-11-14):**
+
+- **PR #59** — https://github.com/wingbangboozle1-lang/NBA1/pull/59 — merged with
+  `gh pr merge 59 --merge` at 2026-11-14T10:27:55Z (merge commit `564c2cd`).
+  The branch tip at merge was `db3f58d`; main raced on twice around the merge
+  (PR #60 `7623c02`, PR #61 `a29e721`, both record-only changes from other
+  sessions), which cancelled the first Pages build of `564c2cd` mid-run — the
+  classic legacy builder (`build_type: legacy`, serves
+  https://wingbangboozle1-lang.github.io/NBA1/) reports interrupted builds as
+  "errored", so that first error is a race artifact, not a content failure. All
+  gates were green at merge time (verify_all OK, verify_integration OK — 0
+  errors, check_site OK, check_links PASS, check_rendered PASS, render_check.mjs
+  113 pages / 0 problems, engine_v2.check_site OK).
+- **PR #45** — takeover completed and recorded above; the PR was closed
+  (10:11Z) with the takeover comment: https://github.com/wingbangboozle1-lang/NBA1/pull/45#issuecomment-6875798514
+- **PRs #37/#42/#53** — closed before takeover; nothing lost (their content is
+  on main via §18/§19 records).
+- **Pages deploy** — the deploy is confirmed live and the served content is
+  checked against the merged tree in the follow-up entry below.
 
 ## 23. Session `arena/b0f2cc98-nba1` — official-source check of the horizon, 11/13 settlement, Source Check page (claimed 2026-11-14 UTC)
 
