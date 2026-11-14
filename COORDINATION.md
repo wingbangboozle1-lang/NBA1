@@ -710,3 +710,57 @@ Volumes are published on <https://wingbangboozle1-lang.github.io/NBA1/command-ce
 | — | Correlation page read a dict that did not exist; grid had no source column | Rebuilt from `model_derived[]` and `parlay_pricing_grid`; American prices now signed |
 | — | Injury page's team table could never render (no player-level rows matched) | Rebuilt from the rows that exist, with an explicit "cannot compute" note |
 | — | Parlay rows linked only the first leg | Every leg now links to its own game page |
+
+---
+
+## 15. Collision 2026-11-14 ~02:10 UTC — two unified sites, one root landing
+
+**Found while preparing this branch's PR, before merging.** PR
+[#33](https://github.com/wingbangboozle1-lang/NBA1/pull/33) (`arena/ffafa1f6-nba1`, "Build D") is
+open, mergeable and further along than a draft: 35 files under `site/`, a full 15-page category site
+plus data, and **it rewrites the root `index.html`** into a landing page for `site/`. Its PR body
+claims the role of *final integration session*.
+
+This branch's PR introduces `command-center/`, a second 17-page consolidated site, and uses the root
+`index.html` for a three-way build switcher (Edge Lab / Origination Desk / Command Center).
+
+**Both cannot be the landing page.** Merging this branch first would silently replace Build D's
+root `index.html`; merging Build D first would silently replace this branch's. Neither is acceptable.
+Per the standing rule — *never discard another session's work, log the conflict instead* — this
+branch did not touch `site/`, did not modify PR #33, and did not force a resolution.
+
+| Item | This branch (`arena/791c9114-nba1`) | Build D (`arena/ffafa1f6-nba1`, PR #33) |
+| --- | --- | --- |
+| Consolidated site | `command-center/` (17 pages) | `site/` (15 pages + data) |
+| Root `index.html` | three-way build switcher | new landing page for `site/` |
+| Horizon | 22 games, 14–16 Nov | 27 games, 14–17 Nov |
+| Picks | 59 | 63 |
+| Injury edition | 11/13 07:30 PM ET | 11/13 07:30 PM ET (same) |
+| Verification gates | `check_links.py`, `check_rendered.py`, `verify_all.py`, jsdom `render_check.mjs` | `verify_dashboard.py`, `verification.html` |
+
+### What is actually duplicated, and what is not
+
+The two builds are **not** in conflict at the data level: both read the same official captures and
+both transcribe the same 07:30 PM ET injury edition with the same 122 rows. The duplication is
+presentational. There is no file overlap at all (`command-center/**` vs `site/**`), so the deadlock
+is confined to **one file: the root `index.html`**, plus the question of which site a reviewer is
+meant to open.
+
+### Recommendation, recorded for whoever integrates
+
+1. Merge the two branches in either order — the trees do not conflict except at `index.html`.
+2. Resolve `index.html` once, deciding which site is the primary entry point rather than letting
+   the merge order decide it. A switcher that lists **all three** consolidated builds
+   (“Command Center”, “Site (Build D)”, and the two frozen labs) satisfies both PRs and loses
+   no work.
+3. Do not delete either directory. `command-center/` and `site/` are both generated from the same
+   JSON, so keeping both costs nothing but a few hundred KB, and each has a verification path the
+   other does not (`check_rendered.py` executes page scripts; `verify_dashboard.py` checks the
+   horizon).
+
+### Why this branch still opens its PR
+
+The brief is explicit that flagged and unresolved items do not block publication, and that work must
+not stop waiting for approval. This branch's PR therefore goes up **with this collision documented in
+its own description**, so the integrator sees it before merging either side. It does not merge itself
+over an active sibling PR's landing page without saying so.
