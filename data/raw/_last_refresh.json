@@ -1,10 +1,9 @@
 {
- "captured_at_utc": "2026-11-14T02:05:32Z",
+ "captured_at_utc": "2026-11-14T11:49:06Z",
  "changed": [
   "evidence S1_season",
   "evidence S2_train",
   "S7_players",
-  "S5_injury_index",
   "results 2026-11-06",
   "results 2026-11-07",
   "results 2026-11-08",
@@ -15,7 +14,8 @@
   "results 2026-11-13",
   "results 2026-11-14",
   "results 2026-11-15",
-  "injury pdf Injury-Report_2026-11-13_09_00PM.pdf",
+  "results 2026-11-16",
+  "results 2026-11-17",
   "injury probe"
  ],
  "failed": [
@@ -30,11 +30,15 @@
   [
    "S4_schedule",
    "no game links found"
+  ],
+  [
+   "S5_injury_index",
+   "no injury-report links found"
   ]
  ],
  "note": "Raw captures only. Nothing in data/raw/*.json that a snapshot owner committed is overwritten by this script - a parsed result is written as _capture_*.json so a verifier can diff it against the committed snapshot before it is promoted.",
- "workflow_run_at_utc": "2026-11-14T02:08:37Z",
- "workflow_ref": "refs/heads/arena/d6918959-nba1",
+ "workflow_run_at_utc": "2026-11-14T11:52:07Z",
+ "workflow_ref": "refs/heads/main",
  "fetch_outcome": "success",
  "build_outcome": "success"
 }
