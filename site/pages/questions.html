@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open questions &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="suggestions.html">Decision</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row links to the official source it
+      came from. A blank cell means the value could not be confirmed from an official
+      source &mdash; it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Open questions</h1>
+      <p class="sub">What is already answered with a number, what is still open, and the concrete step that would answer each open item.</p>
+    </div>
+    <h2 class="sec">Answered</h2><p class="secsub">Questions the data on hand can actually answer, with the number and the confidence.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>ID</th>
+<th>Question</th>
+<th>Answer</th>
+<th>Confidence</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>A1</td>
+<td><b>Do the model's refinements beat a naive net-rating line at predicting the margin?</b></td>
+<td>Yes, slightly, on 51 out-of-sample games. Mean absolute margin error 12.89 points against 13.19 for the naive reference; RMSE 17.10 against 17.70. The model is better on both. But the bootstrap 95% interval on the model's MAE is 9.80-16.14 and the reference's is 10.05-16.53, so the two overlap almost completely - the improvement is not statistically established.</td>
+<td>Low-to-medium - direction is consistent on two metrics, but the intervals overlap</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">S2</a></td>
+</tr>
+<tr>
+<td>A2</td>
+<td><b>Does the model beat the naive reference at predicting game totals?</b></td>
+<td>No, not now. Mean absolute total error is 14.86 against 14.75 for the reference, and RMSE 19.88 against 19.59. The reference is better on both, reversing what the 28-game window suggested. The reference total is simply the two teams' published scoring averages added together; the model's opponent-adjustment and pace adjustments are not improving on it on this sample.</td>
+<td>Low - the sign flipped when the window grew, which is itself evidence the earlier reading was noise</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">S2</a></td>
+</tr>
+<tr>
+<td>A3</td>
+<td><b>Does the model beat the reference at picking winners?</b></td>
+<td>No. Both went 37-14 straight up on the 51-game window. On the probability metrics the reference is better: Brier 0.1970 for the model against 0.1889, log loss 0.5768 against 0.5567. The model's refinements do not translate into better win probabilities.</td>
+<td>Medium - the direction is consistent across two metrics and two window sizes</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">S3_2026-11-12</a></td>
+</tr>
+<tr>
+<td>A4</td>
+<td><b>How much of each team's record is luck rather than skill?</b></td>
+<td>See the Luck page. Pythagorean expectation from the official OffRtg and DefRtg gives each team an expected win total; the difference from actual wins, divided by the binomial standard deviation over games played, is the luck z-score. With 10-13 games played, roughly two thirds of the league sits inside one standard deviation, which is what you would expect this early.</td>
+<td>Medium - the method is standard; the sample per team is small</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>A5</td>
+<td><b>Is there a real home-court advantage in this season's data?</b></td>
+<td>The point estimate is +2.79 points with a standard error of 2.48 (t = 1.12) across 51 games, one of which was at a neutral site and excluded from the intercept. It is consistent with the historical NBA range but not statistically distinguishable from zero on this sample. The flat +2.0 the reference uses sits inside the interval.</td>
+<td>Low - disclosed as estimated on the test window</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">S3_2026-11-12</a></td>
+</tr>
+<tr>
+<td>A6</td>
+<td><b>Is there a measurable back-to-back penalty?</b></td>
+<td>The estimate is -6.10 points on the home margin with a standard error of 4.87 (t = -1.25). Because |t| &gt;= 1 the model applies the full 6.10 penalty rather than zeroing it. That is a large number and the standard error is most of it, so it should be read as suggestive rather than established - and the detection is still incomplete for 2026-11-06 (F9), which biases it toward zero.</td>
+<td>Low - not significant at conventional thresholds</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">S3_2026-11-11</a></td>
+</tr>
+<tr>
+<td>A7</td>
+<td><b>How much should ratings be shrunk at this point in the season?</b></td>
+<td>The empirical-Bayes derivation gives k = 2.9, weighting each team's observed net rating at 0.739 with the rest going to the league average. The fixed-k sweep shows the margin MAE falling from 13.28 at k = 0 to 12.91 at k = 4, then rising to 13.65 by k = 20 - the curve is flat in the useful region and clearly worse under heavy shrinkage, so the choice is not carrying much risk either way.</td>
+<td>Low - the noise term is estimated on the test window, see F4</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">S2</a></td>
+</tr>
+<tr>
+<td>A8</td>
+<td><b>Which upcoming games have a measurable availability issue?</b></td>
+<td>On the 2026-11-13 slate, Orlando (14.1% of minutes at risk), Chicago (17.0%), Indiana (13.8%) and Golden State (11.0%) have measured availability losses; the impact is a floor because minutes are only known for top-50 scorers (F2). Five of the ten 2026-11-14 team-reports were marked NOT YET SUBMITTED at capture, and no 2026-11-15 report existed at all.</td>
+<td>Medium for 2026-11-13, none for 2026-11-15</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">S10</a></td>
+</tr>
+<tr>
+<td>A9</td>
+<td><b>Which team statistics actually move together in the official data?</b></td>
+<td>See the Correlations page. Thirteen pairs were measured directly on all 30 teams from the official advanced table, with r, r-squared and a p-value each. Net rating explains 87% of the variation in win percentage and PIE 84%. Pace is close to unrelated to net rating (r = -0.34, p = 0.063), and assist percentage is unrelated to offensive efficiency (r = 0.02, p = 0.92) - the two results most likely to surprise.</td>
+<td>High for the measured table (n = 30, computed directly), none for the model-derived parlay values</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>A10</td>
+<td><b>Which teams are on the second night of a back-to-back in the next three days?</b></td>
+<td>Computed from the official schedule and results: on 2026-11-14 the home team is on a back-to-back in DEN@NOP, DAL@CLE, DET@MIA and BKN@MEM, and the away team is in CHI@MIN. On 2026-11-15 only Dallas (at Boston) is on a back-to-back. No 2026-11-13 game involves a back-to-back.</td>
+<td>High - derived only from published dates and results</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">S4</a></td>
+</tr>
+<tr>
+<td>A11</td>
+<td><b>Does the best strategy's record look like skill or like luck?</b></td>
+<td>It cannot be separated yet. S1 (side edge vs reference) is 16-7 on 23 graded plays, worth +7.55 model units and a 32.8% return at -110. The exact binomial p-value against a 50% null is 0.093, and the Wilson 95% interval on the hit rate is 0.491 to 0.844. The lower bound sits below the 0.5238 break-even, so the skill gate fails - a 16-7 run is well within what a coin-flip bettor produces often enough to see.</td>
+<td>Medium - the arithmetic is exact; the interpretation is that 23 plays is simply not enough</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">S3_2026-11-12</a></td>
+</tr>
+<tr>
+<td>A12</td>
+<td><b>Does the site now produce a line for every game in the next three days?</b></td>
+<td>Yes. 27 games from 2026-11-14 to 2026-11-17, each with an originated spread, total and fair moneyline, a gated paper pick, rest and back-to-back flags and an injury read-out. The schedule was read from the official NBA.com Schedule page and cross-checked against an independent capture of the same page made by another session: 27 of 27 rows agree on date, tip time, matchup, records and game id, 0 mismatches. The injury input is the newest official edition available, 11/13/26 07:30 PM ET, transcribed row by row.</td>
+<td>High for the schedule and the injury rows, both read directly from official pages. Low for the lines themselves, because they rest on ratings that end at 11/12 and on an injury report that covers half of the 11/14 teams and none of the later games.</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">S4</a></td>
+</tr>
+</tbody></table></div>
+<h2 class="sec">Open</h2><p class="secsub">Questions that cannot be answered yet. Nothing on this site is decided on an open question.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>ID</th>
+<th>Question</th>
+<th>What is missing</th>
+<th>How to answer it</th>
+<th>What it blocks</th>
+<th>Priority</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Q1</td>
+<td><b>Does any strategy actually beat a real sportsbook?</b></td>
+<td>Closing prices. No book price is published by an NBA-operated source, so no official link can be attached to one (F3). Without it, 'units won' measures the model against a naive model, not against a market.</td>
+<td>Log closing spread, total and price for every graded play into data/raw/market.json with a per-row source field, then recompute. Close-vs-model comparison is the only honest measure of betting value.</td>
+<td>Any statement about profitability; the whole point of the leaderboard's reward tiers</td>
+<td>1</td>
+<td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
+</tr>
+<tr>
+<td>Q2</td>
+<td><b>Can the out-of-sample window grow any further?</b></td>
+<td>Results for 2026-10-20 through 2026-11-05. Those games exist and are officially published, but they are currently the ratings window, so moving them into the test set requires a different split - for example ratings from the first 40 games of the season and testing on everything after.</td>
+<td>Backfill 2026-10-20 to 2026-11-05 results, then re-cut the split so the ratings window is earlier and the test window is longer. This is now the only way to grow the sample, since every game from 2026-11-06 onward is already in it.</td>
+<td>Passing or failing any strategy; promoting anything past Tier 3</td>
+<td>2</td>
+<td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>
+</tr>
+<tr>
+<td>Q3</td>
+<td><b>Are the player-prop projections any good?</b></td>
+<td>Player game logs. The model can produce a projection (possession factor, opponent-defence factor, teammate-availability factor) but game-to-game variance has never been measured, so no probability is published and no prop has ever been graded.</td>
+<td>Capture official box scores for the top-50 players and store per-game minutes and counting stats; then measure each projection's error and standard deviation and replace the blank probability column with a real one.</td>
+<td>Pricing S7 and S8; including props in parlays</td>
+<td>3</td>
+<td class="src"><a href="https://www.nba.com/stats/players/boxscores" target="_blank" rel="noopener">S20</a></td>
+</tr>
+<tr>
+<td>Q4</td>
+<td><b>How much of a team does an injury actually cost?</b></td>
+<td>Minutes for the 415 players outside the captured top-50 table (F2), and archived injury reports (F5) to fit the impact coefficient against.</td>
+<td>Two steps: backfill minutes so the minutes-at-risk number is complete, and archive every injury-report edition so the coefficient can be fitted on actual outcomes instead of being a declared modelling choice.</td>
+<td>Trusting the availability column; grading S6; running gate G7</td>
+<td>4</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">S7</a></td>
+</tr>
+<tr>
+<td>Q5</td>
+<td><b>What are the real same-game correlations?</b></td>
+<td>Play-by-play or box scores. Every rho used to price S9 and S10 is derived from the structure of the model, not measured (F6).</td>
+<td>Estimate empirical correlations from a season of official box scores - player-stat pairs for the same game, and side/total from final scores - then replace the MODEL-DERIVED block on the Correlations page.</td>
+<td>Trusting parlay and SGP prices, which is where correlation risk actually bites</td>
+<td>5</td>
+<td class="src"><a href="https://www.nba.com/stats/players/boxscores" target="_blank" rel="noopener">S20</a></td>
+</tr>
+<tr>
+<td>Q6</td>
+<td><b>Does the Emirates NBA Cup change how teams play?</b></td>
+<td>Any measurement. Twenty-five of the 51 games in the test window were Cup group games, and point differential is the Cup tiebreaker, which plausibly changes late-game behaviour in blowouts - but nothing in the captured data measures it.</td>
+<td>Compare Cup games to non-Cup games within the existing window, matching on the same team ratings and looking at whether decided games run up bigger margins. The sample is already large enough to attempt this.</td>
+<td>Applying a Cup adjustment, or safely ignoring one</td>
+<td>6</td>
+<td class="src"><a href="https://www.nba.com/nba-cup/2026" target="_blank" rel="noopener">S18</a></td>
+</tr>
+<tr>
+<td>Q7</td>
+<td><b>How should the model treat overtime?</b></td>
+<td>A decision. The window contains a 284-point double-overtime game (Detroit 144, Washington 140 on 2026-11-12) and one single-OT game, both of which inflate the fitted total-error spread.</td>
+<td>Either model regulation separately from overtime, or winsorise the residuals when fitting. Both can be evaluated on the existing 51-game sample.</td>
+<td>Total-market calibration</td>
+<td>7</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">S3_2026-11-12</a></td>
+</tr>
+<tr>
+<td>Q8</td>
+<td><b>Should the reference line be replaced by a real market line once prices are logged?</b></td>
+<td>The prices themselves (Q1). Once they exist the reference model can be retired and every strategy re-graded against something real.</td>
+<td>Run both in parallel for a month - model-vs-reference and model-vs-market - and keep whichever grading set is more predictive of market performance.</td>
+<td>The final meaning of the leaderboard</td>
+<td>8</td>
+<td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
+</tr>
+<tr>
+<td>Q9</td>
+<td><b>What were the final scores of the nine 2026-11-13 games, and how do they change the horizon's lines?</b></td>
+<td>The 11/13 slate was in progress at capture time (21:20 ET): two games were at Q2 and seven were PREGAME. No final score for any of them is published in any capture.</td>
+<td>Re-read https://www.nba.com/games?date=2026-11-13 after the slate settles, add the nine results to data/raw/games_completed.json, re-capture the official Teams Advanced table, and re-run the pipeline. The nine games are already carried for rest flags, so only the scores and the refreshed ratings are missing.</td>
+<td>Any line for 11/14 that depends on a 11/13 result; the correction of 18 team records; extending the out-of-sample window past 51 games</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">S11_2026-11-13</a></td>
+</tr>
+<tr>
+<td>Q10</td>
+<td><b>Which players are actually available for the 27 games in the horizon?</b></td>
+<td>At the newest official edition (11/13/26 07:30 PM ET), five of the ten teams playing on 11/14 had not filed, and no edition yet covers the 11/15, 11/16 and 11/17 games.</td>
+<td>Capture the official injury-report index (https://official.nba.com/nba-injury-report-2026-27-season/) on each of 11/14, 11/15, 11/16 and 11/17 and add each published edition to the refresh job.</td>
+<td>Any injury adjustment to the 18 games on 11/15 to 11/17; the confidence label on every availability number</td>
+<td>1</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">S10</a></td>
+</tr>
+<tr>
+<td>Q11</td>
+<td><b>Do the fresh 27 lines hold up once a real closing price is available?</b></td>
+<td>No official price feed. Every edge on the site is model-against-reference-model (F3), so nothing here has been tested against a market.</td>
+<td>Log the closing spread, total and price for each of the 27 games into data/raw/market.json with a per-row source field, then re-grade. Until that file exists this question cannot be answered by any amount of modelling.</td>
+<td>Any claim that the lines have betting value; the reward tier above quarter unit</td>
+<td>2</td>
+<td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
+</tr>
+<tr>
+<td>Q12</td>
+<td><b>Is the availability impact still a lower bound once the Players table is complete?</b></td>
+<td>Minutes are known for 50 of 465 players (F2). A player outside that page contributes 0 to the impact figure, so a team can look fully available when its rotation is not.</td>
+<td>Capture pages 2 to 10 of the official Players Traditional table, or build the minutes table from official box scores, then re-run and compare the impact column before and after.</td>
+<td>Any claim that a team is close to full strength; the availability-shock strategy (S6) has 0 graded plays because of this</td>
+<td>2</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">S7</a></td>
+</tr>
+<tr>
+<td>Q13</td>
+<td><b>Which of the ten strategies is actually skill rather than luck?</b></td>
+<td>A sample large enough. The skill gate (G4) needs a Wilson lower bound above 52.38%; the best strategy has a lower bound of 0.491 on 23 plays. The gate has not been weakened and will not be.</td>
+<td>Extend the out-of-sample window. The window is 51 games because only 6 to 12 November was captured; the season began 20 October, so roughly 200 earlier games are available from the same official pages.</td>
+<td>Promotion of any strategy past quarter unit; the reward allocation</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Where a row says no official source exists, that is the honest answer: no NBA-operated page publishes the missing item (a closing price, for instance).</p>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

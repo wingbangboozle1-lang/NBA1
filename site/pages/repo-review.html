@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repository review and irregularities &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="suggestions.html">Decision</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row links to the official source it
+      came from. A blank cell means the value could not be confirmed from an official
+      source &mdash; it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Repository review and irregularities</h1>
+      <p class="sub">Line-by-line review of the repository and every official capture behind it, with the irregularities listed and the links to review them.</p>
+    </div>
+    <h2 class="sec">What was reviewed</h2><p class="secsub">Line-by-line review of the NBA1 repository at merge commit 295d238 and of every official capture this build depends on. The repository was not empty: three earlier builds (A, B, C) plus one verification session (V) had already merged, and each had left a data file, a generator and a set of pages. This build re-verified the shared inputs, added the newest official injury-report edition, extended the slate to a full today-plus-three-days horizon, and produced the unified site. Every irregularity found is listed below with the official link that resolves or documents it.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Item</th>
+<th>Method</th>
+<th>Result</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Repository contents</td>
+<td>find over every tracked path, then git log / git branch -a / git ls-remote to list the branches and the open pull requests</td>
+<td>150 tracked files across data/, engine/, scripts/, docs/ and 8 root pages; 1 branch of this session (arena/ffafa1f6-nba1) plus 18 branches from earlier sessions; open pull requests #11, #14 and #20 belong to other sessions and were not touched</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>Coordination board</td>
+<td>Read COORDINATION.md in full before starting; every task board item from Builds A, B, C and V checked for status</td>
+<td>All items are done or needs-review, so this session acted as the final integration session and changed the shared index and navigation</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>Horizon schedule</td>
+<td>Read every game of 2026-11-14 to 2026-11-17 off the official NBA.com Schedule page (date, tip time ET, venue, city, NBA Cup label) and compared the 27 rows against the independent capture made by session arena/afbb836e-nba1</td>
+<td>27 of 27 rows agree on date, tip time, matchup, records and game id; 0 mismatches</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>Team records</td>
+<td>Read the won-lost record printed for every team on the official Games &amp; Scores slate page for each of the four dates</td>
+<td>All 30 teams' records read from the official slate pages; records for the 18 teams that played on 2026-11-13 do not yet include that night's result, because the slate was still in progress</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>Injury report edition</td>
+<td>Probed the official PDF path for every later edition of the 11/13/26 report, then read the newest one that exists</td>
+<td>The 07:30 PM ET edition exists and is newer than the 05:15 PM edition held in the repository; the 10:30 PM edition returns AccessDenied, i.e. it was not published at capture time</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>Injury report transcription</td>
+<td>Read the PDF text layer page by page and transcribed every row, keeping the printed Game Date, Game Time, Matchup, Team, Player, Status and Reason; the report's own team blocks were recorded as the attribution basis</td>
+<td>122 rows transcribed: 91 for 2026-11-13 and 31 for 2026-11-14; 5 teams on 11/14 are recorded as NOT YET SUBMITTED exactly as published</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>Team attribution of rows with a blank Team cell</td>
+<td>The PDF prints the Team cell once per team block. Where a row's cell is blank, the row was placed in the block whose Team cell the PDF printed, and the two cases where a block crosses a page break were corroborated against the official NBA.com team roster pages</td>
+<td>Caleb Martin confirmed on the Dallas Mavericks roster and Ernest Udeh, Jr. confirmed on the Cleveland Cavaliers roster; the attribution basis is stored row by row in data/d/injury_0730PM_team_basis.json</td>
+<td class="src"><a href="https://www.nba.com/team/1610612742/mavericks/roster" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>Ratings input</td>
+<td>Compared the season-to-date team table held in the repository against the wins and losses printed on the official team pages</td>
+<td>The snapshot covers games through 2026-11-12. The 2026-11-13 games were in progress at capture time, so the snapshot is the most recent complete set of official ratings available</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>Generated lines and picks</td>
+<td>Re-ran the whole pipeline from the captured snapshots and re-read every produced row</td>
+<td>27 originated lines and 63 paper picks for the horizon; no result, record or ROI value was written for any game that has not been played</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>Every published table row carries a source link</td>
+<td>A checker walks every generated page, finds every table row, and requires a link to an allowed official host</td>
+<td>0 rows without a source; values that could not be confirmed render as an em dash and are listed on the Flagged for Review page</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>Internal links</td>
+<td>Resolved every relative href and src in every HTML file in the repository against the file system</td>
+<td>0 broken internal links</td>
+<td class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages" target="_blank" rel="noopener">open</a></td>
+</tr>
+</tbody></table></div>
+<h2 class="sec">Irregularities found</h2><p class="secsub">Things a reviewer should look at. None of them is a fabricated value; each one is a documented gap or a conflict between two official readings.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>ID</th>
+<th>Severity</th>
+<th>Irregularity</th>
+<th>Detail</th>
+<th>Resolution</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>IR-01</td>
+<td>High</td>
+<td><b>Two transcriptions of the same official PDF disagree on one player's team</b></td>
+<td>Build A's transcription of the 11/13/26 05:15 PM injury report records 'Martin, Caleb' under Cleveland Cavaliers with a blank matchup. In the PDF the row sits inside the Dallas Mavericks block, between 'Lively II, Dereck' and the Cleveland Cavaliers 'NOT YET SUBMITTED' row, and the official Dallas roster lists Caleb Martin (1628997, traded from PHI on 02/04/25). Cleveland's official roster does not list him.</td>
+<td>This build records him as Dallas Mavericks, on the PDF's block structure and corroborated by the official roster page. Build A's page still shows the earlier attribution; the conflict is published rather than silently corrected.</td>
+<td class="src"><a href="https://www.nba.com/team/1610612742/mavericks/roster" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>IR-02</td>
+<td>High</td>
+<td><b>No final score exists for the 2026-11-13 slate</b></td>
+<td>At capture time (2026-11-14T01:20Z, 2026-11-13 21:20 ET) the 11/13 games were in progress: the official Games &amp; Scores page shows NYK 35 - IND 40 at Q2 6:55 and MIL 30 - ORL 36 at Q2 4:48, with the remaining seven games marked PREGAME. No final score for any 11/13 game is published anywhere in the captures.</td>
+<td>Left open. The 9 games are carried in data/raw/prior_slate.json for rest and back-to-back flags only, with no score and no inferred result. The ratings window therefore still ends at 2026-11-12.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>IR-03</td>
+<td>Medium</td>
+<td><b>18 team records are one night out of date</b></td>
+<td>Records are read from the official slate pages at capture time, before the 11/13 games finish. The 18 teams that played on 11/13 (NYK, IND, MIL, ORL, CLE, MIA, ATL, CHI, MEM, NOP, UTA, HOU, GSW, SAS, POR, SAC, OKC, LAC) will each have a changed record once that slate settles.</td>
+<td>Left open and published. The next capture of the slate pages resolves it automatically.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>IR-04</td>
+<td>High</td>
+<td><b>The 11/14 injury report covers only half the teams</b></td>
+<td>At the 07:30 PM ET edition, five of the ten teams playing on 11/14 had not filed: New Orleans, Cleveland, Memphis, Chicago and Miami are printed as NOT YET SUBMITTED. Only Denver, Dallas, Brooklyn, Minnesota and Detroit filed.</td>
+<td>Published as NOT YET SUBMITTED with the official PDF link. The availability impact for those five teams is unknown and is shown as such; it is never filled in.</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>IR-05</td>
+<td>Medium</td>
+<td><b>No injury-report edition yet covers the 11/15 to 11/17 games</b></td>
+<td>The 07:30 PM ET edition of the 11/13 report prints rows for the 11/13 and 11/14 games only. The official injury-report policy requires a report for each day's games, so editions for 11/15, 11/16 and 11/17 will be published later and do not exist at capture time.</td>
+<td>Those teams show as 'NO ENTRY IN THE 11/13/26 07:30 PM ET EDITION'. The lines for those games carry no injury adjustment, and that is stated on the page.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>IR-06</td>
+<td>Low</td>
+<td><b>The 10:30 PM ET edition of the 11/13 report returns AccessDenied</b></td>
+<td>The league publishes a report at 10:30 PM ET for late games. The path for that edition returns an AccessDenied error rather than a document, so it was not published at capture time (21:20 ET).</td>
+<td>The 07:30 PM ET edition is used as the newest available. The next capture will pick up the later edition automatically.</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_10_30PM.pdf" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>IR-07</td>
+<td>High</td>
+<td><b>Player minutes are known for 50 of 465 players</b></td>
+<td>The official Players Traditional table publishes 465 rows across ten pages and only page 1 - the 50 highest scorers - is present in the page source a plain fetch can read. Minutes for the other 415 players are unknown.</td>
+<td>Blank, not estimated. The availability impact column is therefore a measured lower bound, and the minutes-coverage column is printed next to every injury row so the reader can see how much of the rotation is actually known.</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>IR-08</td>
+<td>High</td>
+<td><b>No official price exists, so 'edge' is measured against a model</b></td>
+<td>No NBA-operated source publishes a sportsbook price. Every edge on this site is therefore the originated model against a deliberately naive reference model built from the same official ratings - not an edge against a book.</td>
+<td>Stated on the lines, picks, strategies and validation pages, and carried as flag F3. No pick is described as market-validated.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>IR-09</td>
+<td>Low</td>
+<td><b>Two conventions for a blank Team cell existed across builds</b></td>
+<td>Build A left every row whose Team cell was blank in the PDF unattributed and flagged it. Build B repeated the team of the block. Both are defensible readings of the same document, and they produce different answers for the same player.</td>
+<td>This build adopts one rule, states it on the page, records the basis row by row in data/d/injury_0730PM_team_basis.json, and corroborates the two page-break cases against official roster pages. IR-01 is the one place the two readings actually conflict.</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>IR-10</td>
+<td>Info</td>
+<td><b>Three pull requests from earlier sessions remain open</b></td>
+<td>PR #11 (arena/c7fbc064-nba1), PR #14 (arena/7cfd203a-nba1) and PR #20 (arena/9abdf3f7-nba1) are still open and belong to other branches. PR #20 audits official scores for 6-12 November and team advanced statistics, and may close IR-02 and IR-03 if it captures the 11/13 finals.</td>
+<td>Not touched by this session, which works on one branch only. Logged here so the reviewer can decide whether to merge them.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/pulls" target="_blank" rel="noopener">link</a></td>
+</tr>
+</tbody></table></div>
+<h2 class="sec">Verification log</h2><p class="secsub">What was checked, and what the check returned.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>When (UTC)</th>
+<th>Check</th>
+<th>Result</th>
+<th>Note</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-14 00:56Z</td>
+<td>Board and branch survey</td>
+<td>3 earlier builds merged, 1 verification session merged, 3 open pull requests found and left alone</td>
+<td>COORDINATION.md read in full before any file was touched</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>2026-11-14 01:05Z</td>
+<td>Official schedule read</td>
+<td>36 games 11/13-11/17 read from nba.com/schedule; 27 in the horizon</td>
+<td>tip time, venue, city and NBA Cup label as printed</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>2026-11-14 01:10Z</td>
+<td>Injury-report editions probed</td>
+<td>07:30 PM edition found and read; 10:30 PM edition not published</td>
+<td>122 rows transcribed</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>2026-11-14 01:12Z</td>
+<td>Slate records read</td>
+<td>records for all 30 teams read from the four official slate pages</td>
+<td>pre-11/13 values, recorded as such</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>2026-11-14 01:15Z</td>
+<td>Official rosters read</td>
+<td>Caleb Martin = Dallas, Ernest Udeh Jr. = Cleveland</td>
+<td>resolves the attribution conflict in IR-01 and IR-09</td>
+<td class="src"><a href="https://www.nba.com/team/1610612742/mavericks/roster" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>2026-11-14 01:18Z</td>
+<td>Independent schedule cross-check</td>
+<td>27/27 rows agree with session arena/afbb836e-nba1's capture, 0 mismatches</td>
+<td>two independent reads of the same official page</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>2026-11-14 01:22Z</td>
+<td>Pipeline re-run</td>
+<td>27 originated lines, 63 paper picks, 88 prop rows, 75 injury rows, 27 game-flow rows</td>
+<td>from the captured snapshots only; no network access in the pipeline</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>2026-11-14 01:35Z</td>
+<td>Site build</td>
+<td>unified site generated: 1 landing page + 15 category pages, all rows source-linked</td>
+<td>scripts/build_dashboard.py</td>
+<td class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages" target="_blank" rel="noopener">open</a></td>
+</tr>
+<tr>
+<td>2026-11-14 01:40Z</td>
+<td>Link and source audit</td>
+<td>0 broken internal links, 0 table rows without a source link</td>
+<td>scripts/verify_all.py</td>
+<td class="src"><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages" target="_blank" rel="noopener">open</a></td>
+</tr>
+</tbody></table></div>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>
