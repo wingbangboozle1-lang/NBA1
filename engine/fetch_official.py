@@ -102,7 +102,9 @@ DATE_RE = re.compile(r"(\d{4})-(\d{2})-(\d{2})")
 
 TAG_RE = re.compile(r"<[^>]+>")
 HREF_ATTR_RE = re.compile(r'\s+href="[^"]*"')
-FINAL_RE = re.compile(r"\bFinal(?:/OT\d*)?\b")
+# Case-insensitive: the score card prints "FINAL", the embedded JSON prints
+# "Final" - both were seen on the same executed run's pages.
+FINAL_RE = re.compile(r"\bFinal(?:/OT\d*)?\b", re.I)
 RECORD_RE = re.compile(r"\b\d{1,2}-\d{1,2}\b")
 
 # Injury-report editions are published at fixed times on game days. The first
@@ -173,22 +175,72 @@ def write_if_changed(path, payload):
 
 # -------------------------------------------------------------- team advanced
 def parse_teams_advanced(text):
-    """Pull the 30-team advanced table out of the rendered page.
+    """Pull the 30-team advanced table out of the raw stats page.
 
-    The nba.com stats pages embed their table data as JSON. We look for the
-    per-team rows rather than trying to scrape <td> cells, because the table is
-    client-rendered. If the JSON cannot be found, we return [] and the caller
-    leaves the existing file alone rather than writing garbage.
+    The executed run proved the table is server-rendered HTML (the pre-
+    execution code looked for an embedded `rowSet` JSON that the page does
+    not contain - indicators in _capture_evidence_S1_season.json show
+    `"rowSet": 0`). One <tr> per team: a link cell with the full team name,
+    then numeric cells. After the team cell we take the first 19 numbers -
+    GP, W, L, MIN, OffRtg ... POSS exactly as the committed schema in
+    data/raw/team_advanced.json - which keeps any trailing rank cells out.
+
+    Returns [] unless all 30 rows parse AND every row passes the integrity
+    checks (W+L == GP, ranges on ratings/pace/poss). A partial or wrong
+    table is worse than a stale snapshot, so any failure returns [] and the
+    caller keeps the committed file.
     """
+    cols = ["gp", "w", "l", "min", "ortg", "drtg", "netr", "ast_pct",
+            "ast_to", "ast_ratio", "oreb_pct", "dreb_pct", "reb_pct",
+            "tov_pct", "efg_pct", "ts_pct", "pace", "pie", "poss"]
+    int_cols = {"gp", "w", "l", "poss"}
     out = []
-    # The embedded payload lists resultSets[0].rowSet as [teamId, teamName, ...]
-    for m in re.finditer(r'"rowSet"\s*:\s*\[(.*?)\]\s*,\s*"name"\s*:', text, re.S):
-        body = m.group(1)
-        for row in re.finditer(r"\[(.*?)\]", body, re.S):
-            cells = re.findall(r'-?\d+\.?\d*|"([^"]*)"', row.group(1))
-            vals = [c if isinstance(c, str) else c for c in cells]
-            if len(vals) >= 26 and isinstance(vals[1], str) and vals[1] in ABBR:
-                out.append(vals)
+    problems = []
+    for tr in re.finditer(r"<tr[^>]*>(.*?)</tr>", text, re.S | re.I):
+        body = tr.group(1)
+        tm = re.search(r'href="/stats/team/\d+/[^"]*"[^>]*>\s*([^<]+?)\s*</a>',
+                       body, re.I)
+        if not tm:
+            continue
+        team = html.unescape(tm.group(1)).strip()
+        if team not in ABBR:
+            continue          # header/filter rows, not a data row
+        cells = re.findall(r"<td[^>]*>(.*?)</td>", body, re.S | re.I)
+        texts = []
+        for c in cells:
+            t = TAG_RE.sub(" ", c)
+            t = html.unescape(t).replace(",", "")
+            texts.append(re.sub(r"\s+", " ", t).strip())
+        try:
+            ti = next(i for i, t in enumerate(texts) if t == team)
+        except StopIteration:
+            problems.append(f"{team}: team cell not found verbatim")
+            continue
+        nums = [t for t in texts[ti + 1:] if re.fullmatch(r"-?\d+\.?\d*", t)]
+        if len(nums) < 19:
+            problems.append(f"{team}: only {len(nums)} numeric cells after team")
+            continue
+        row = [team]
+        try:
+            for name, raw in zip(cols, nums[:19]):
+                row.append(int(float(raw)) if name in int_cols else float(raw))
+        except ValueError:
+            problems.append(f"{team}: non-numeric cell in {nums[:19]}")
+            continue
+        gp, w, l = row[1], row[2], row[3]
+        ortg, pace, poss = row[5], row[17], row[19]
+        if w + l != gp:
+            problems.append(f"{team}: W+L {w}+{l} != GP {gp}")
+            continue
+        if not (1 <= gp <= 40) or not (70 <= ortg <= 150) \
+                or not (85 <= pace <= 120) or not (100 <= poss <= 3000):
+            problems.append(f"{team}: out-of-range values {row}")
+            continue
+        out.append(row)
+    if problems:
+        log(f"  team table: {len(problems)} row problems, first: {problems[0]}")
+    if len(out) != 30:
+        return []
     return out
 
 
@@ -239,34 +291,111 @@ def excerpt_around(text, needle, before=800, span=4000):
     return text[start:start + span]
 
 
+def extract_json_games(text):
+    """Pull finished-or-live game objects out of the page's clean JSON.
+
+    The games page embeds its data as real JSON (inside __NEXT_DATA__ and
+    related state), not as HTML cells. Every occurrence of {"gameId":"..."}
+    is tried as the start of a JSON object with raw_decode; only objects
+    that carry both team blocks are kept. Escaped payloads ({\\"gameId\\")
+    are deliberately not unescaped here - if the clean scan finds nothing,
+    the caller falls back to the card text and records evidence.
+    """
+    games = {}
+    for m in re.finditer(r'\{"gameId"\s*:\s*"(\d{10})"', text):
+        gid = m.group(1)
+        if gid in games:
+            continue
+        try:
+            obj, _ = json.JSONDecoder().raw_decode(text[m.start():])
+        except ValueError:
+            continue
+        if isinstance(obj.get("homeTeam"), dict) and isinstance(obj.get("awayTeam"), dict):
+            games[gid] = obj
+    return games
+
+
+def row_from_json_game(g, known):
+    """Convert one embedded game object into a row, not_final marker, or
+    unparsed reason. Never guesses: non-final statuses are not_final, missing
+    or non-integer scores are unparsed."""
+    gid = str(g.get("gameId"))
+    status = str(g.get("gameStatusText") or "")
+    away = g.get("awayTeam") or {}
+    home = g.get("homeTeam") or {}
+    if not re.match(r"final", status, re.I):
+        return ("not_final", gid)
+    try:
+        a_pts = int(away.get("score"))
+        h_pts = int(home.get("score"))
+    except (TypeError, ValueError):
+        return ("unparsed", {"game_id": gid,
+                             "reason": "Final status but score is not an integer "
+                                       f"(away={away.get('score')!r}, "
+                                       f"home={home.get('score')!r})"})
+    if not (0 <= a_pts <= 400 and 0 <= h_pts <= 400):
+        return ("unparsed", {"game_id": gid,
+                             "reason": f"implausible scores {a_pts}-{h_pts}"})
+    ot = 0
+    ot_m = re.search(r"/OT(\d*)", status, re.I)
+    if ot_m:
+        ot = int(ot_m.group(1)) if ot_m.group(1) else 1
+    away_tri = away.get("teamTricode")
+    home_tri = home.get("teamTricode")
+    k = known.get(gid)
+    snapshot_match = None
+    if k is not None:
+        snapshot_match = (k["away"] == away_tri and k["home"] == home_tri)
+    return ("row", {
+        "game_id": gid, "away": away_tri, "home": home_tri,
+        "away_pts": a_pts, "home_pts": h_pts,
+        "status": status, "ot": ot,
+        "away_record_printed": away.get("teamSubtitle"),
+        "home_record_printed": home.get("teamSubtitle"),
+        "snapshot_match": snapshot_match,
+        "source": "embedded JSON",
+    })
+
+
 def parse_games_page(text, known):
     """Parse one https://www.nba.com/games?date=... page into finals rows.
 
     `known` maps game_id -> {away, home, date} from the committed snapshots
     (data/raw/games_completed.json + data/raw/schedule_upcoming.json).
 
-    Rules:
-      * a game id can occur several times in the raw HTML (card link, box
-        score link, embedded schedule JSON). EVERY occurrence is tried; a
-        game counts as final only when one of its own slices contains the
-        status word - the first-executed run showed that trusting the first
-        occurrence alone misses the score card entirely;
-      * tags and hrefs are stripped before reading, so attributes cannot be
-        mistaken for text;
-      * the status word "Final" (or "Final/OTn") must be present - a game
-        that is live or scheduled is recorded as not_final, never guessed;
-      * the away score is the last integer before the status, the home score
-        the first integer after it; records (6-5) are removed first so they
-        cannot be mistaken for scores;
-      * anything that does not satisfy these rules lands in `unparsed` with a
-        reason. No score is ever inferred.
+    Two strategies, in order:
+      1. structured: every clean `{"gameId":...}` JSON object in the page
+         (the page's embedded state) - scores, status and records come from
+         typed fields, not from text position;
+      2. fallback: the score card's own text, trying EVERY link occurrence
+         (the first executed run showed the first occurrence is often not
+         the card), with tags and hrefs stripped.
 
-    Returns (rows, not_final, unparsed, occurrences).
+    Rules that never change between strategies: a game counts as final only
+    when its status says so; a score that cannot be read lands in `unparsed`
+    with a reason; nothing is inferred.
+
+    Returns (rows, not_final, unparsed, occurrences, source).
     """
     rows, not_final, unparsed = [], [], []
-    parsed = {}          # gid -> row
-    final_seen = set()   # gid had Final in at least one slice
-    occurrences = {}     # gid -> number of times linked
+    occurrences = {}
+
+    games = extract_json_games(text)
+    if games:
+        for gid in sorted(games):
+            occurrences[gid] = occurrences.get(gid, 0) + 1
+            kind, payload = row_from_json_game(games[gid], known)
+            if kind == "row":
+                rows.append(payload)
+            elif kind == "not_final":
+                not_final.append(gid)
+            else:
+                unparsed.append(payload)
+        return rows, not_final, unparsed, occurrences, "embedded JSON"
+
+    # ---- fallback: score-card text (see v2 notes) ----
+    parsed = {}
+    final_seen = set()
     matches = list(GAME_LINK_RE.finditer(text))
     for i, m in enumerate(matches):
         away, home, gid = m.group(1).upper(), m.group(2).upper(), m.group(3)
@@ -274,9 +403,6 @@ def parse_games_page(text, known):
         if gid in parsed:
             continue
         end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
-        # The slice is bounded by the next /game/ link, which for a finished
-        # game is commonly that same game's "Box score" link - i.e. the slice
-        # covers one card-shaped region of the page.
         slice_ = text[m.start():min(end, m.start() + 6000)]
         body = HREF_ATTR_RE.sub(" ", slice_)
         body = TAG_RE.sub(" ", body)
@@ -294,7 +420,7 @@ def parse_games_page(text, known):
         home_scores = re.findall(r"\b(\d{2,3})\b", after)
         status = fin2.group(0)
         ot = 0
-        ot_m = re.search(r"/OT(\d+)", status)
+        ot_m = re.search(r"/OT(\d+)", status, re.I)
         if ot_m:
             ot = int(ot_m.group(1))
         recs = RECORD_RE.findall(body)
@@ -321,6 +447,7 @@ def parse_games_page(text, known):
             "status": status, "ot": ot,
             "away_record_printed": away_rec, "home_record_printed": home_rec,
             "snapshot_match": snapshot_match,
+            "source": "score-card text",
         }
     for gid in occurrences:
         if gid in parsed:
@@ -331,7 +458,7 @@ def parse_games_page(text, known):
             not_final.append(gid)
     rows.sort(key=lambda r: r["game_id"])
     not_final.sort()
-    return rows, not_final, unparsed, occurrences
+    return rows, not_final, unparsed, occurrences, "score-card text"
 
 
 
@@ -397,7 +524,7 @@ def capture_results(now, changed, failed, known, committed):
             failed.append((f"results {d}", f"fetch failed: {exc}"))
             continue
         text = as_text(raw)
-        rows, not_final, unparsed, occurrences = parse_games_page(text, known)
+        rows, not_final, unparsed, occurrences, source = parse_games_page(text, known)
         # dedupe unparsed reasons per game (a game can fail on several slices)
         seen_unparsed = set()
         unparsed = [u for u in unparsed
@@ -407,15 +534,21 @@ def capture_results(now, changed, failed, known, committed):
         parsed_ids = {r["game_id"] for r in rows}
         missed = sorted(gid for gid, c in committed.items()
                         if c["date"] == d and gid not in parsed_ids)
-        log(f"  {d}: {len(rows)} finals, {len(not_final)} not final, "
-            f"{len(unparsed)} unparsed, {len(mismatches)} snapshot mismatches, "
-            f"{len(missed)} committed finals missed")
+        log(f"  {d}: source={source}, {len(rows)} finals, {len(not_final)} "
+            f"not final, {len(unparsed)} unparsed, {len(mismatches)} snapshot "
+            f"mismatches, {len(missed)} committed finals missed")
         payload = {
             "captured_at_utc": now,
             "source_url": url,
             "page_bytes": len(raw),
             "page_sha256": hashlib.sha256(raw).hexdigest(),
-            "parse": {"strategy": "anchor-text v2 (every link occurrence tried)",
+            "page_indicators": {
+                "__NEXT_DATA__": text.count("__NEXT_DATA__"),
+                "clean_gameId": len(re.findall(r'\{"gameId"\s*:', text)),
+                "escaped_gameId": len(re.findall(r'\{\\"gameId\\"', text)),
+                "FINAL_word": len(re.findall(r"\bFINAL\b", text)),
+            },
+            "parse": {"strategy": source,
                       "finals_rows": rows,
                       "not_final": not_final,
                       "unparsed": unparsed,
@@ -556,7 +689,7 @@ def main():
             if len(rows) != 30:
                 failed.append((key, f"expected 30 team rows, parsed {len(rows)}"))
                 log(f"  SKIPPED: parsed {len(rows)} rows - keeping the existing snapshot")
-                needles = ["rowSet", "resultSets", "Boston Celtics"]
+                needles = ["OffRtg", "<td", "stats/team/"]
                 if write_if_changed(
                         os.path.join(RAW, f"_capture_evidence_{key}.json"),
                         {"captured_at_utc": now, "source_url": url,
@@ -565,17 +698,24 @@ def main():
                          "failure_evidence": [
                              {"around": n, "excerpt": e} for n in needles
                              for e in [excerpt_around(text, n)] if e][:2],
+                         "document_tail": text[-6000:],
                          "note": "Bounded raw-HTML evidence for the next parser "
                                  "iteration. The committed snapshot is untouched."}):
                     changed.append(f"evidence {key}")
                 continue
             log(f"  parsed {len(rows)} team rows")
-            # A full rewrite of team_advanced.json needs the window metadata and
-            # every column; only rewrite when all 30 rows for both windows parse.
-            # Here we just record the raw capture for a human/verifier to diff.
+            # Capture the actual 30 rows (schema of data/raw/team_advanced.json)
+            # so a verifier can diff them against the committed snapshot without
+            # re-fetching. This never overwrites the committed snapshot itself.
             if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"),
                                 {"captured_at_utc": now, "source_url": url,
                                  "row_count": len(rows),
+                                 "cols": ["team", "gp", "w", "l", "min", "ortg",
+                                          "drtg", "netr", "ast_pct", "ast_to",
+                                          "ast_ratio", "oreb_pct", "dreb_pct",
+                                          "reb_pct", "tov_pct", "efg_pct",
+                                          "ts_pct", "pace", "pie", "poss"],
+                                 "rows": rows,
                                  "page_sha256": hashlib.sha256(raw).hexdigest()}):
                 changed.append(key)
         elif kind == "players":
