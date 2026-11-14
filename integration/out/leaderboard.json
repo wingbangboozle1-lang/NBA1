@@ -2,10 +2,10 @@
  "title": "Strategy leaderboard — integration desk",
  "ranking_basis": "hard gates passed → graded sample size → MAE. Gates are pass/fail with no weighting, so a cosmetic lead cannot be bought with a soft score.",
  "reward_policy": "No entry is VALIDATED, therefore no reward is payable to any of them. This table is informational, and the honest headline is that the best model on this desk is not distinguishable from a naive pick.",
- "hard_gates_passed": "7 of 14",
+ "hard_gates_passed": "8 of 14",
  "gate_ledger": {
-  "pass": 7,
-  "fail": 4,
+  "pass": 8,
+  "fail": 3,
   "blank": 3
  },
  "sample_floor": "n >= 100 graded games",
@@ -15,13 +15,13 @@
    "name": "Originated margin + total (no absence term)",
    "family": "Single bet",
    "register": "integration (this session)",
-   "n_graded": 51,
-   "record": "36-15",
-   "mae_margin": 12.836,
-   "mae_total": 14.693,
+   "n_graded": 60,
+   "record": "41-19",
+   "mae_margin": 12.955,
+   "mae_total": 14.636,
    "metric": "MAE in points against official FINAL scores, ratings fitted on an earlier window",
    "why": "The only candidate on this desk whose inputs are all official, all point-in-time and all out-of-sample. It is not worse than a naive pick, and that is the whole claim.",
-   "blocking_gates": "V2 sample floor (n=51 < 100), V9 availability, V13 absence term ungraded",
+   "blocking_gates": "V2 sample floor (n=60 < 100), V9 availability, V13 absence term ungraded",
    "blank_fields": [
     "odds",
     "break-even %",
@@ -31,7 +31,7 @@
     "edge vs close"
    ],
    "what_moves_it_up": "100+ graded games and any closing-price file; nothing else can promote it.",
-   "gates_passed_hard": 7,
+   "gates_passed_hard": 8,
    "validated": false,
    "reward_payable": false,
    "rank": 1
@@ -41,19 +41,19 @@
    "name": "Same, with rest / home-court adjustments on",
    "family": "Single bet",
    "register": "integration (this session)",
-   "n_graded": 51,
-   "record": "36-15",
-   "mae_margin": 12.836,
-   "mae_total": 14.693,
+   "n_graded": 60,
+   "record": "41-19",
+   "mae_margin": 12.955,
+   "mae_total": 14.636,
    "metric": "ΔMAE of each component, measured one at a time",
-   "why": "HCA is worth +0.05 MAE, back-to-back +0.01, shrinkage +0.36 — all inside a ±2.8 interval. The adjustments are kept because theory supports them, and flagged because this sample cannot confirm them.",
+   "why": "HCA +0.252, back-to-back +0.011, shrinkage +0.629 points of MAE — all inside a ±2.5 interval. The adjustments are kept because theory supports them, and flagged because this sample cannot confirm them.",
    "blocking_gates": "V2",
    "blank_fields": [
     "component p-values",
     "ROI"
    ],
    "what_moves_it_up": "A second and third graded week; the code path is unchanged meanwhile.",
-   "gates_passed_hard": 7,
+   "gates_passed_hard": 8,
    "validated": false,
    "reward_payable": false,
    "rank": 2
@@ -76,7 +76,7 @@
     "CLV"
    ],
    "what_moves_it_up": "Nothing inside the sandbox: it needs prices.",
-   "gates_passed_hard": 7,
+   "gates_passed_hard": 8,
    "validated": false,
    "reward_payable": false,
    "rank": 3
@@ -97,7 +97,7 @@
     "validated count"
    ],
    "what_moves_it_up": "Re-fit on a DateFrom/DateTo window (now proven reachable) — that is exactly what INT-1 does.",
-   "gates_passed_hard": 7,
+   "gates_passed_hard": 8,
    "validated": false,
    "reward_payable": false,
    "rank": 4
@@ -120,7 +120,7 @@
     "ROI"
    ],
    "what_moves_it_up": "Per-game logs for the players actually in the slate: one reachable page per player. This is the cheapest unblock on the list.",
-   "gates_passed_hard": 7,
+   "gates_passed_hard": 8,
    "validated": false,
    "reward_payable": false,
    "rank": 5
@@ -142,7 +142,7 @@
     "correlation parameter"
    ],
    "what_moves_it_up": "30+ logged player-games per player before a single-point correlation is defensible.",
-   "gates_passed_hard": 7,
+   "gates_passed_hard": 8,
    "validated": false,
    "reward_payable": false,
    "rank": 6
@@ -152,11 +152,11 @@
   {
    "topic": "how many graded games exist",
    "values": {
-    "integration (finals 11/06–11/12)": 51,
+    "integration (finals 11-06–11-13)": 60,
     "Build A ledger": 14,
     "Build B LBS": 23
    },
-   "resolution": "51 is the count this session could verify as FINAL with a clean pre-window fit. Build A's 14 were look-ahead contaminated by its own admission; Build B's 23 is a per-strategy graded-bet count, not a game count, so the two are not the same unit and were never divided into each other."
+   "resolution": "60 is the count this session could verify as FINAL with a clean pre-window fit (2026-11-06 .. 2026-11-13). Build A's 14 were look-ahead contaminated by its own admission; Build B's 23 is a per-strategy graded-bet count, not a game count, so the two are not the same unit and were never divided into each other."
   },
   {
    "topic": "whether props could be priced",
@@ -168,8 +168,8 @@
   }
  ],
  "not_a_gate_but_relevant": {
-  "settlement": "51 games graded, 31 cannot be settled yet",
-  "side_record_if_it_were_a_bet": "37-14",
+  "settlement": "60 games graded, 22 cannot be settled yet",
+  "side_record_if_it_were_a_bet": "42-18",
   "warning": "the record above is graded against the model's own number and is ~50% by construction; it is printed so nobody has to guess that it was hidden"
  }
 }

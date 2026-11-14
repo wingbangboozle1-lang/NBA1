@@ -14,8 +14,10 @@ so "we like Denver" and "we were not allowed to have an opinion" are never the s
 
 Selection rule, written before looking at which games it favours:
   R1 both teams' ratings must come from the verified window;
-  R2 |projected home margin| must clear half the measured out-of-sample σ_margin (≥ 8.7 pts);
-  R3 availability must be symmetric — one side filed, the other not is disqualifying;
+  R2 |projected home margin| must clear half the measured out-of-sample σ_margin (the cut is
+     computed in picks.json from the graded window, never typed here);
+  R3 availability must be symmetric — one side filed, the other not is disqualifying, and a
+     date where NOBODY has filed yet is provisional, not clear;
   R4 no pick on a neutral site or unverified venue;
   R5 rest state must be derivable from the captured schedule.
 """
@@ -24,19 +26,27 @@ from common import dump, load
 import model as M
 
 MIN_EDGE_SIGMA = 0.5    # |margin| must clear half of σ_margin to be published as a pick at all
-PRIOR_DATE_UNFINISHED = "2026-11-13"
+PRIOR_DATE = "2026-11-13"
 
 
 def teams_with_unconfirmed_prior():
-    """Abbrs whose most recent counted game was on a date that was never confirmed FINAL.
+    """Abbrs whose most recent counted game was on a date not yet confirmed FINAL.
 
     Rest days are counted from the schedule, not from verified completion, so a team credited
-    with a back-to-back off 11/13 may have had a bye. The set is small and it is printed on
-    every affected row instead of being corrected by guesswork.
+    with a back-to-back off a still-open date may have had a bye. Once the two-source finals
+    capture confirms every game of that date (data/live/results_2026_11_13_final.json), the
+    set is empty and no row carries the flag.
     """
-    res = load("data", "live", f"results_{PRIOR_DATE_UNFINISHED.replace('-', '_')}_in_progress.json")
+    res = load("data", "live", f"results_{PRIOR_DATE.replace('-', '_')}_in_progress.json")
+    try:
+        fin = load("data", "live", f"results_{PRIOR_DATE.replace('-', '_')}_final.json")
+        confirmed = {g.get("game_id") for g in fin.get("games", []) if g.get("settled")}
+    except FileNotFoundError:
+        confirmed = set()
     out = set()
     for g in res["games"]:
+        if g.get("game_id") in confirmed:
+            continue
         m = str(g.get("matchup", ""))
         if "@" in m:
             a, h = m.split("@", 1)
@@ -59,11 +69,18 @@ def classify(g, sigma, thresh, report_exists):
     m = g["projection"]["margin_home"]
     blocking, thin, provisional = [], [], []
     if report_exists:
-        if g["report_state_away"] != g["report_state_home"]:
+        sa, sh = g["report_state_away"], g["report_state_home"]
+        if sa != sh:
             blocking.append(
-                f"R3 asymmetric availability: {g['away']}={g['report_state_away']} vs "
-                f"{g['home']}={g['report_state_home']} — one side's absences are known and the "
-                f"other's are not, which biases the adjustment instead of removing it")
+                f"R3 asymmetric availability: {g['away']}={sa} vs {g['home']}={sh} — one side's "
+                f"absences are known and the other's are not, which biases the adjustment "
+                f"instead of removing it")
+        elif sa != "SUBMITTED":
+            # An edition exists for this date but neither side has actually filed (every row
+            # reads NOT YET SUBMITTED). That is unknown, not clear — the same PROVISIONAL
+            # semantics as a missing edition, never a pass.
+            provisional.append(f"R3 the {g['date']} edition exists but neither side has filed "
+                               f"(both: {sa}); availability is unknown, not clear")
     else:
         provisional.append(f"R3 no injury-report edition exists yet for {g['date']}; "
                            f"availability is unknown, not clear")
@@ -122,13 +139,11 @@ def game_flow(g, lines):
         "rest": {"away_days": g["rest_days_away"], "home_days": g["rest_days_home"],
                  "away_b2b": bool(g["b2b_away"]), "home_b2b": bool(g["b2b_home"]),
                  "note": g["rest_note"] or "both teams' previous games are inside the window",
-                 "caveat": ("a rest day counted from a game that never finished is wrong in the "
-                            "useful direction — the game is cheaper, not harder. The 11/13 slate "
-                            "was IN PROGRESS when captured, so any back-to-back flag built on it "
-                            "is provisional until those games are confirmed FINAL."),
-                 "provisional_prior_date": PRIOR_DATE_UNFINISHED,
-                 "teams_affected": sorted(t for t in teams_with_unconfirmed_prior()
-                                          if t in (g["away"], g["home"])) or None},
+                 "caveat": g.get("_prior_caveat")
+                           or "every prior date inside the window is confirmed FINAL, so no "
+                              "back-to-back flag on this row is provisional",
+                 "provisional_prior_date": g.get("_prior_date"),
+                 "teams_affected": g.get("_prior_affected")},
         "margin_path": {"raw_from_ratings": p["raw_margin_home"], "rest_adj": p["rest_adj"],
                         "availability_adj": p["avail_adj"],
                         "hca_points": lines["assumptions"]["hca_points"]["value"],
@@ -150,13 +165,28 @@ def main():
 
     tiers = ["SELECTED", "PROVISIONAL", "LEAN-ONLY", "REJECTED-DATA"]
     rows, by_tier = [], {t: 0 for t in tiers}
-    inj = load("data", "live", "injury_report_2026_11_14.json")
-    report_dates = {r["date"] for r in inj["rows"]}          # dates with a filed official edition
+    inj, inj_path = M.load_injury()
+    # Dates the newest edition actually covers: its submission-state map, not its player rows
+    # (a date whose teams have all filed nothing has a map and zero player rows).
+    sub_state = inj.get("submission_state") or {
+        "2026-11-14": inj.get("submission_state_2026_11_14", [])}
+    report_dates = set(sub_state)
+    prior_unconfirmed = teams_with_unconfirmed_prior()
+    prior_caveat = (
+        None if not prior_unconfirmed else
+        "a rest day counted from a game that was not yet confirmed FINAL is wrong in the "
+        "useful direction — the game is cheaper, not harder. These teams' most recent "
+        "captured game was not FINAL at read time, so their flag is provisional.")
+    prior_date = PRIOR_DATE if prior_unconfirmed else None
 
     for g in lines["live_lines"]:
         tier, reasons = classify(g, sigma, thresh, g["date"] in report_dates)
         by_tier[tier] += 1
         m = g["projection"]["margin_home"]
+        g["_prior_caveat"] = prior_caveat
+        g["_prior_date"] = prior_date
+        g["_prior_affected"] = sorted(t for t in prior_unconfirmed
+                                      if t in (g["away"], g["home"])) or None
         rows.append({
             "date": g["date"], "time_et": g["time_et"], "matchup": g["matchup"],
             "game_id": g["game_id"], "game_url": g["game_url"], "source_url": g["source_url"],
@@ -165,9 +195,15 @@ def main():
             "p_home_win_model": g["p_home_win"],
             "lean": ("HOME " + g["home"]) if m > 0 else ("AWAY " + g["away"]),
             "lean_margin_points": abs(round(m, 1)),
-            "records_as_displayed": {"away": g["away_record"], "home": g["home_record"],
-                                     "caveat": "copied exactly as displayed; the unfinished 11/13 "
-                                               "games mean every card lags one league day (IR-05)"},
+            "records_as_displayed": {
+                "away": g["away_record"], "home": g["home_record"],
+                "caveat": ("copied from the schedule card as re-read 2026-11-14 09:50Z, after "
+                           "the 11/13 finals — current (IR-05 closed for this desk)"
+                           if not g.get("record_lags_one_day") else
+                           "copied exactly as displayed; this card's read predates a final, "
+                           "so it may lag one league day (IR-05)"),
+                "source_url": g.get("record_source_url"),
+                "read_at_utc": g.get("record_read_at_utc")},
             "ratings_window": g["ratings_window"],
             "ratings_shrunk_net": {"away": g["away_net_shrunk"], "home": g["home_net_shrunk"],
                                    "games_behind": {"away": g["away_gp"], "home": g["home_gp"]}},
@@ -187,8 +223,8 @@ def main():
                  "criteria": ["R1 verified ratings window", f"R2 |margin| ≥ {thresh} (0.5·σ)",
                               "R3 symmetric availability filing", "R4 neutral-site veto",
                               "R5 rest state derivable"],
-                 "written_before": "the cut came from the 51-game backtest's own error, not from "
-                                    "these games"},
+                 "written_before": "the cut came from the graded window's own backtest error "
+                                   "(60 games, 2026-11-06 .. 2026-11-13), not from these games"},
         "slate": {"dates": sorted({r["date"] for r in rows}),
                   "games_priced": len(rows),
                   "tiers": by_tier},
@@ -197,9 +233,12 @@ def main():
                     f"The rule, not the model, is what is holding the desk back: on 11/14 the "
                     "official report had one side filed and the other NOT YET SUBMITTED in all "
                     "five games.",
-        "neutral_site_note": "R4 is inert on this slate because the capture has no venue column. "
-                             "The one neutral site in the backtest window (Indiana–Denver, Mexico "
-                             "City, 11/07) was zeroed there. Blank here, not assumed safe.",
+        "neutral_site_note": "R4 runs against the independent venue capture "
+                             "(data/raw/official_schedule_capture_2026-11-14.json): every "
+                             "11/14–16 game matched a US-city home building, so none is "
+                             "vetoed. The one neutral site in the graded window "
+                             "(Indiana–Denver, Mexico City, 11/07) was zeroed there. "
+                             "Blank here would mean no match — not assumed safe.",
         "not_a_bet": "Every row is a paper lean against our own number: no price, no hold, no "
                      "stake, no expectation of profit, and none of it clears the validation gates.",
     }

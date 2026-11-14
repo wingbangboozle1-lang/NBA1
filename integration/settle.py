@@ -18,7 +18,7 @@ import os
 from common import OUT, binom_two_sided, block_bootstrap, dump, load, mean, sd, wilson
 
 
-def grade_backtest(lines):
+def grade_backtest(lines, final_ids=frozenset()):
     rows = []
     for g in lines["backtest"]:
         margin = g["actual_margin_home"]
@@ -28,13 +28,18 @@ def grade_backtest(lines):
         pick_won = (1 if (margin > 0 and pick_side == "HOME") or (margin < 0 and pick_side == "AWAY")
                     else (0 if pick_side in ("HOME", "AWAY") else None))
         t_dir = "OVER" if total > pt else ("UNDER" if total < pt else "PUSH")
+        from_live_finals = g["game_id"] in final_ids
         rows.append({
             "date": g["date"], "matchup": g["matchup"], "game_id": g["game_id"],
             "source_url": g["source_url"],
             "final_score": f"{g['away']} {g['away_pts']} @ {g['home']} {g['home_pts']}"
                            + (" (OT)" if g["ot"] else "") + (" [neutral site]" if g["neutral"] else ""),
-            "settled": True, "settled_reason": "official FINAL score transcribed to "
-                                               "data/raw/games_completed.json",
+            "settled": True,
+            "settled_reason": (
+                "official FINAL score captured two-source by this session into "
+                "data/live/results_2026_11_13_final.json (schedule card + the game's own page)"
+                if from_live_finals else
+                "official FINAL score transcribed to data/raw/games_completed.json"),
             "model_margin_home": pm, "actual_margin_home": margin, "abs_err_margin": g["abs_err_margin"],
             "model_total": pt, "actual_total": total, "abs_err_total": g["abs_err_total"],
             "side_pick": pick_side, "side_pick_correct": pick_won,
@@ -50,11 +55,19 @@ def grade_backtest(lines):
 def main():
     lines = load("integration", "out", "lines.json")
     completed = load("data", "raw", "games_completed.json")
-    inprog_path = os.path.join(OUT, "..", "..", "data", "live", "results_2026_11_13_in_progress.json")
     inprog = load("data", "live", "results_2026_11_13_in_progress.json")
     slate = load("data", "live", "slate_2026_11_14_to_16.json")
+    # D03 (COORDINATION §21): the 11/13 slate is now final. Games confirmed FINAL in the
+    # two-source capture leave the "cannot settle" bucket and are graded with the backtest
+    # rows; anything still not final there would stay blocked with its own source link.
+    try:
+        final13 = load("data", "live", "results_2026_11_13_final.json")
+    except FileNotFoundError:
+        final13 = {"games": []}
+    final_ids = {g["game_id"] for g in final13["games"] if g.get("settled")}
+    final_by_id = {g["game_id"]: g for g in final13["games"]}
 
-    graded = grade_backtest(lines)
+    graded = grade_backtest(lines, final_ids)
     n_side = sum(1 for r in graded if r["side_pick_correct"] is not None)
     side_wins = sum(r["side_pick_correct"] or 0 for r in graded)
     errs_m = [r["abs_err_margin"] for r in graded]
@@ -70,14 +83,24 @@ def main():
     # ---------------- what refuses to settle, and why (blank cells, never estimates)
     blocked = []
     for g in inprog["games"]:
+        gid = g.get("game_id")
+        if gid in final_ids:
+            continue          # confirmed FINAL elsewhere — graded above, never double-listed
+        fin = final_by_id.get(gid)
         blocked.append({
             "date": g.get("date", "2026-11-13"), "matchup": g.get("matchup"),
-            "game_id": g.get("game_id"), "state": g.get("state"), "detail": g.get("detail"),
+            "game_id": gid, "state": g.get("state"), "detail": g.get("detail"),
             "cup_group": g.get("cup_group"),
             "settled": False,
-            "reason": "the official card did not read FINAL when it was captured — non-FINAL "
-                      "rows are unusable as results",
-            "source_url": g.get("source_url", inprog.get("source_url")),
+            "reason": ("still not FINAL in the two-source re-read either — non-FINAL rows are "
+                       "unusable as results" if fin is None else
+                       "the official card did not read FINAL when it was captured — non-FINAL "
+                       "rows are unusable as results"),
+            # Never fall back to the file-level URL: the earlier register pointed it at the
+            # CHA@PHX box score of a different game (request R-X2). A blocked row gets its
+            # own game page, or the date page, or nothing.
+            "source_url": (fin.get("game_url") if fin else None)
+                          or f"https://www.nba.com/games?date={g.get('date', '2026-11-13')}",
             "action": "re-fetch the same date page after the games end and re-run settle.py",
         })
     for g in slate["games"]:
@@ -119,9 +142,16 @@ def main():
         "graded_count": len(graded),
         "provenance": {
             "results_file": "data/raw/games_completed.json",
-            "in_progress_file": "data/live/results_2026_11_13_in_progress.json",
-            "note": "Both are transcriptions of official NBA.com pages; see "
-                    "data/live/capture_meta.json for the retrieval times.",
+            "finals_2026_11_13_file": "data/live/results_2026_11_13_final.json",
+            "finals_2026_11_13_appended_at_load": len(final_ids),
+            "in_progress_file": "data/live/results_2026_11_13_in_progress.json "
+                                "(kept as provenance of the 00:47Z read; no longer the "
+                                "settlement source for 11/13)",
+            "note": "All are transcriptions of official NBA.com pages; see "
+                    "data/live/capture_meta.json for the retrieval times. The 11/13 rows are "
+                    "appended to the graded window by integration/model.py at load time — "
+                    "data/raw/games_completed.json itself was not modified (request R-X1 "
+                    "remains with the integration seat).",
         },
     }
     dump("settlement.json", out)

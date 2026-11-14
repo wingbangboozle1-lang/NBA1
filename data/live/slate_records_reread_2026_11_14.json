@@ -1,0 +1,128 @@
+{
+ "title": "Slate records reread — NBA.com schedule cards, post-11/13-finals",
+ "captured_by_session": "arena/df3fed12-nba1",
+ "retrieved_utc": "2026-11-14T09:50Z to 2026-11-14T10:15Z",
+ "source_name": "NBA.com Schedule page (official)",
+ "source_url": "https://www.nba.com/schedule",
+ "why": "The records inside data/live/slate_2026_11_14_to_16.json were transcribed at 00:37Z while the 11/13 slate was still in progress, so every club that played 11/13 lags one league day (flag IR-05). This reread carries the records printed after those finals.",
+ "records": {
+  "2026-11-14": {
+   "0022600231": {
+    "away": "6-4",
+    "home": "4-9"
+   },
+   "0022600232": {
+    "away": "7-5",
+    "home": "6-7"
+   },
+   "0022600233": {
+    "away": "8-3",
+    "home": "6-6"
+   },
+   "0022600234": {
+    "away": "3-8",
+    "home": "8-4"
+   },
+   "0022600235": {
+    "away": "2-9",
+    "home": "9-3"
+   }
+  },
+  "2026-11-15": {
+   "0022600236": {
+    "away": "5-8",
+    "home": "10-3"
+   },
+   "0022600237": {
+    "away": "11-2",
+    "home": "5-6"
+   },
+   "0022600238": {
+    "away": "4-8",
+    "home": "3-8"
+   },
+   "0022600239": {
+    "away": "11-2",
+    "home": "1-12"
+   },
+   "0022600240": {
+    "away": "7-5",
+    "home": "10-2"
+   },
+   "0022600241": {
+    "away": "6-6",
+    "home": "5-7"
+   },
+   "0022600242": {
+    "away": "10-3",
+    "home": "4-9"
+   },
+   "0022600243": {
+    "away": "7-6",
+    "home": "1-12"
+   },
+   "0022600244": {
+    "away": "8-5",
+    "home": "1-11"
+   }
+  },
+  "2026-11-16": {
+   "0022600245": {
+    "away": "5-7",
+    "home": "10-2"
+   },
+   "0022600246": {
+    "away": "2-9",
+    "home": "6-7"
+   },
+   "0022600247": {
+    "away": "8-4",
+    "home": "4-9"
+   },
+   "0022600248": {
+    "away": "10-3",
+    "home": "3-8"
+   },
+   "0022600249": {
+    "away": "10-3",
+    "home": "6-6"
+   },
+   "0022600250": {
+    "away": "9-3",
+    "home": "9-3"
+   },
+   "0022600251": {
+    "away": "8-5",
+    "home": "4-9"
+   },
+   "0022600252": {
+    "away": "5-6",
+    "home": "6-4"
+   }
+  },
+  "2026-11-17": {
+   "0022600253": {
+    "away": "6-6",
+    "home": "5-7"
+   },
+   "0022600254": {
+    "away": "9-3",
+    "home": "9-3"
+   },
+   "0022600255": {
+    "away": "8-3",
+    "home": "11-2"
+   },
+   "0022600257": {
+    "away": "1-12",
+    "home": "3-8"
+   },
+   "0022600256": {
+    "away": "4-8",
+    "home": "11-2"
+   }
+  }
+ },
+ "cross_check": "Every one of the 30 clubs' W-L from this reread equals the W-L printed in the Teams Advanced table with Date To 11/13/2026 (data/live/team_windows_live_2026_11_13.json): 30 of 30 agree, 0 disagree.",
+ "not_included": "Season-leaders capsules were not re-read this session; the leaders inside the 00:37Z slate capture remain as-of that time and keep the IR-04 caveat."
+}
