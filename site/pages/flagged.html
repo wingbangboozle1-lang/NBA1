@@ -188,38 +188,38 @@
 <tr>
 <td>F13</td>
 <td>High</td>
-<td><b>No final score exists for the 2026-11-13 slate</b></td>
-<td>At capture time (2026-11-14T01:20Z, 21:20 ET on 11/13) the 11/13 games were still being played: the official Games &amp; Scores page shows NYK 35 - IND 40 at Q2 6:55 and MIL 30 - ORL 36 at Q2 4:48, with the other seven games marked PREGAME. No final score for any 11/13 game exists in any capture.</td>
-<td>Ratings window (still ends 2026-11-12); team records for 18 teams; the backtest window</td>
-<td>Re-read the 11/13 slate page after the games settle and re-run the pipeline. The 9 games are already carried for rest flags, so only the scores are missing.</td>
+<td><b>RESOLVED - the 2026-11-13 finals were captured and settled</b></td>
+<td>Resolved 2026-11-14T10:10Z. All nine games were Final on the official Games &amp; Scores page and were transcribed row by row (data/raw/s14/finals_2026-11-13.json). Every published paper pick on the slate was settled against them (3-4 singles, 0-3 parlays; data/raw/s14/settlement_2026-11-13.json), and the games now extend the out-of-sample window from 51 to 60. The pre-game picks are auditable: the model blocks in the live file are identical to the copy frozen at 2026-11-13T22:45Z.</td>
+<td>Closed. Ratings window now ends 2026-11-13; team records current; backtest window 60 games.</td>
+<td>None. Kept visible with its evidence for review.</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">S11_2026-11-13</a></td>
 </tr>
 <tr>
 <td>F14</td>
 <td>Medium</td>
-<td><b>18 team records are one night out of date</b></td>
-<td>Records were read from the official slate pages before the 11/13 games finished. NYK, IND, MIL, ORL, CLE, MIA, ATL, CHI, MEM, NOP, UTA, HOU, GSW, SAS, POR, SAC, OKC and LAC each played on 11/13 and will each have a changed record.</td>
-<td>Away/home record columns on the Lines, Picks, Game Flow and Team pages</td>
-<td>The next capture corrects all 18 at once. No manual edit needed.</td>
+<td><b>RESOLVED - team records refreshed from the official cards</b></td>
+<td>Resolved 2026-11-14T10:10Z. All 27 horizon rows were re-read from the official game cards and 22 record cells changed; every printed record was cross-checked against the official standings table through the games of 2026-11-13 (30 teams, wins = losses = 183, consistent with the 174 games previously captured plus the nine 2026-11-13 finals). See data/raw/s14/horizon_cards_2026-11-14.json and data/raw/s14/standings_2026-11-14.json.</td>
+<td>Closed. Record columns on the Lines, Picks, Game Flow and Team pages are current as of 2026-11-14T10:10Z.</td>
+<td>None. Kept visible with its evidence for review.</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">S11_2026-11-14</a></td>
 </tr>
 <tr>
 <td>F15</td>
 <td>High</td>
-<td><b>The 11/14 injury report covers only half the teams</b></td>
-<td>At the 07:30 PM ET edition, five of the ten teams playing on 11/14 had not filed: New Orleans Pelicans, Cleveland Cavaliers, Memphis Grizzlies, Chicago Bulls and Miami Heat are printed as NOT YET SUBMITTED. Only Denver, Dallas, Brooklyn, Minnesota and Detroit filed.</td>
-<td>Availability impact for 5 of the 10 teams on 2026-11-14</td>
-<td>Capture the next edition of the official report (a later 11/13 edition, or the first 11/14 edition) and re-run. The NOT YET SUBMITTED rows are published exactly as printed and are never filled in.</td>
-<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">S10</a></td>
+<td><b>The 11/14 injury report still covers only half the teams</b></td>
+<td>At the newest edition (11/14/26 04:15 AM ET), the same five of the ten teams playing on 11/14 are printed as NOT YET SUBMITTED: New Orleans Pelicans, Cleveland Cavaliers, Memphis Grizzlies, Chicago Bulls and Miami Heat. Only Denver, Dallas, Brooklyn, Minnesota and Detroit have filed. The official rules require game-day reports between 11 a.m. and 1 p.m. local time, so later editions today are expected to contain the missing five.</td>
+<td>Availability impact for 5 of the 10 teams on 2026-11-14 (5 of tonight's 5 games)</td>
+<td>Capture the day-of-game editions after 16:30 UTC and re-run. The NOT YET SUBMITTED rows are published exactly as printed and are never filled in.</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">S10_2026-11-14-0415AM</a></td>
 </tr>
 <tr>
 <td>F16</td>
 <td>High</td>
-<td><b>No injury-report edition yet covers the 11/15 to 11/17 games</b></td>
-<td>The newest official edition available (11/13/26 07:30 PM ET) prints rows for the 11/13 and 11/14 games only. Editions for the later dates are published later and do not exist at capture time.</td>
-<td>Availability impact for all 18 games on 11/15, 11/16 and 11/17; their lines carry no injury adjustment</td>
-<td>Add the 11/14, 11/15, 11/16 and 11/17 editions to the refresh job. The Lines page already states, per team, that there is no entry in this edition.</td>
-<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">S10</a></td>
+<td><b>No injury-report edition yet covers the 11/16 to 11/17 games</b></td>
+<td>The newest official edition (11/14/26 04:15 AM ET) now lists the 11/15 games - all twenty team-slots printed as NOT YET SUBMITTED, which is consistent with the 5 p.m. local filing deadline - but it lists no rows at all for the 11/16 and 11/17 games. Those editions do not exist yet.</td>
+<td>Availability impact for the 13 games on 11/16 and 11/17; their lines carry no injury adjustment</td>
+<td>Add the 11/15, 11/16 and 11/17 editions to the refresh job as they are published. The Lines page already states, per team, that there is no entry in this edition.</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">S10_2026-11-14-0415AM</a></td>
 </tr>
 <tr>
 <td>F17</td>
@@ -243,9 +243,9 @@
 <td>F19</td>
 <td>Medium</td>
 <td><b>Ratings cover games through 2026-11-12 only</b></td>
-<td>The season-to-date team ratings used by the model are the official NBA.com table as it stood after the games of 2026-11-12. The 11/13 games were in progress at capture time, so the ratings do not include them.</td>
-<td>Every line and pick for the horizon; the backtest window</td>
-<td>Re-capture the official Teams Advanced table once the 11/13 games are final and re-run the pipeline.</td>
+<td>The results window now runs through 2026-11-13, but the season-to-date team ratings used by the model remain the official NBA.com Teams Advanced table as it stood after the games of 2026-11-12. That table cannot be re-captured from the runners yet (F24), so the ratings are one night behind the results.</td>
+<td>Every line and pick for the horizon; the ratings input to the backtest</td>
+<td>Re-capture the official Teams Advanced table through 2026-11-13 when the runner access question (F24/Q1) is resolved, and re-run the pipeline.</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
@@ -332,8 +332,8 @@
 <tr>
 <td>F29</td>
 <td>Medium</td>
-<td><b>The site still shows the 11/13 games as unfinished</b></td>
-<td>The README 'Known limits' and the ratings text say the 2026-11-13 slate was still in progress and that no final score exists. On the NBA.com games page for 2026-11-13, captured 2026-11-14 UTC, all nine games show Final (for example NYK 104 at IND 106; OKC 112 at LAC 113). The site has not been rebuilt with those finals. The horizon rows also still print pre-11/13 records: 29 of 54 printed team records belong to teams that played on 11/13 and differ from the NBA.com card (Source Check, section 2).</td>
+<td><b>RESOLVED - the 2026-11-13 games are now settled and published as finals</b></td>
+<td>Resolved 2026-11-14 by the final integration refresh (COORDINATION.md S21/S05): the nine games were captured as final, the published picks were settled against them, and every build was regenerated (games_completed.json now carries 60 rows through 2026-11-13). Original report: The README 'Known limits' and the ratings text say the 2026-11-13 slate was still in progress and that no final score exists. On the NBA.com games page for 2026-11-13, captured 2026-11-14 UTC, all nine games show Final (for example NYK 104 at IND 106; OKC 112 at LAC 113). The site has not been rebuilt with those finals. The horizon rows also still print pre-11/13 records: 29 of 54 printed team records belong to teams that played on 11/13 and differ from the NBA.com card (Source Check, section 2).</td>
 <td>README 'Known limits'; every horizon row's record column</td>
 <td>Re-run the capture after the games finish and rebuild. Update 'Known limits' with the capture time it describes.</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">link</a></td>
@@ -412,6 +412,24 @@
 </tr>
 <tr>
 <td>F38</td>
+<td>High</td>
+<td><b>A leaderboard tier label could claim funding while gates had failed (defect found and fixed) (flag F26 in the 2026-11-14 refresh script; renumbered F38 at the merge of the official-source check's F26-F37)</b></td>
+<td>The line-by-line review on 2026-11-14 found that the leaderboard's score-based tiering could assign the label 'Tier 1 - Funded - passed every applicable gate' to a strategy whose gate matrix still showed failures (S1 at 23-9 passed G1/G3/G4 but failed the calibration gate G2 and the stability gate G5). The tier ceilings were corrected the same day so that no tier above 'quarter unit' can be reached while any applicable gate is failed or unrun; the score weights were not touched. Published here so the change can be reviewed against engine/leaderboard.py.</td>
+<td>The Strategies &amp; Leaderboard and Validation pages (every tier label)</td>
+<td>Review the ceiling rules in engine/leaderboard.py and the tier notes on the leaderboard page.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/leaderboard.py" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F39</td>
+<td>Low</td>
+<td><b>One injury row lost its Team cell in the official PDF render (attributed, not printed) (flag F27 in the 2026-11-14 refresh script; renumbered F39 at the merge of the official-source check's F26-F37)</b></td>
+<td>In the 11/14/26 04:15 AM ET edition, the row 'Traore, Nolan | Probable | Injury/Illness - Right Calf Tightness / Soreness' rendered without its Team cell. The player is listed on the official Brooklyn Nets roster (Nolan Traore, #10), and the row sits inside the BKN@MEM block of the report, so it is transcribed with team 'Brooklyn Nets' and an explicit attribution note - it is recorded as attribution, not as printed.</td>
+<td>One row of the injury transcription (data/raw/s14/injury_report_2026-11-14_0415ET.json)</td>
+<td>Confirm against a later edition of the same PDF, where the cell is expected to render.</td>
+<td class="src"><a href="https://www.nba.com/team/1610612751/nets" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F40</td>
 <td>Medium</td>
 <td><b>Four of the 14 published prop rows for 2026-11-14 cannot be measured - no NBA.com player id in the repo</b></td>
 <td>Julius Randle (BKN), Kyrie Irving (DAL), Michael Porter Jr. (BKN) and Norman Powell (CHI) appear on the props page, but no committed official capture in this repository carries an NBA.com player id for them, and the game-log page is addressed by id. The capture was not attempted by guessing an id: the page exists, the number for it does not. Their prop rows therefore still publish no probability, while the other ten rows on the same slate now do.</td>
@@ -420,7 +438,7 @@
 <td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
-<td>F39</td>
+<td>F41</td>
 <td>Medium</td>
 <td><b>Every prop baseline on the horizon is one to two games stale and the page does not say so</b></td>
 <td>The season averages behind the props were transcribed on 2026-11-13 from the official Per Game table. Recomputing each of the ten captured players (baseline x games played, plus the games since) reproduces what NBA.com prints now for 10 of 10, inside the rounding of a one-decimal average - so the figures are correct for the date they were taken and simply not current. Ty Jerome 26.2 -&gt; 25.4 and Giannis 27.7 -&gt; 28.5 are the largest moves; nothing was wrong and nothing has been refreshed.</td>
@@ -429,7 +447,7 @@
 <td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
-<td>F40</td>
+<td>F42</td>
 <td>High</td>
 <td><b>The same-game-parlay rho is still an assumption - a Last-5 window cannot measure it</b></td>
 <td>Seven pairs of captured players share at least one game. The best pair (Murray and Jokic) shares three, and reads rho 0.82 on points; pairs with one or two shared games cannot be read at all. Nothing about the pricing on the Correlations page changes as a result: it keeps its declared rho, and this is the measured evidence for why it must stay labelled an assumption. A usable estimate needs 30-50 shared games per pair, i.e. a season-long game-log capture for the players whose props get parlayed - not a Last-5 block.</td>
@@ -438,7 +456,7 @@
 <td class="src"><a href="https://www.nba.com/player/1627750/jamal-murray/game-log" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
-<td>F41</td>
+<td>F43</td>
 <td>Medium</td>
 <td><b>Today's lines and props are priced against a half-filed injury report</b></td>
 <td>The newest official edition at 10:30 UTC (11/14 04:30 AM ET) carries 26 named designations for the day, but five of the ten teams had NOT YET SUBMITTED: New Orleans, Cleveland, Memphis, Chicago and Miami. The league rule requires a game-day report between 11:00 and 13:00 local, which had not opened when this was read. The site's injury page and the horizon lines were cut against the 11/13 05:15 PM ET edition; comparing the two editions finds zero rows new or changed, so nothing stale was found - but nothing game-day was confirmable either.</td>
@@ -447,7 +465,7 @@
 <td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
-<td>F42</td>
+<td>F44</td>
 <td>Low</td>
 <td><b>Limits of the first measured prop variance - read before using any number on that page</b></td>
 <td>Three of the site's own making, published rather than smoothed over. (1) The window is 3-4 games per player: the standard deviation itself carries an uncertainty of about SD/sqrt(2(n-1)), i.e. roughly a quarter to a half of the SD, which is why the page prints it per row. (2) Per-player SDs are shrunk toward a cohort figure with k=4 - a modelling choice declared in the script, not an official quantity. (3) The anchor test is contaminated in the season average's favour, and unequal in information (11 games vs 3), so it licenses 'do not chase form' and nothing stronger.</td>
@@ -456,16 +474,16 @@
 <td class="src"><a href="https://www.nba.com/player/1629627/zion-williamson/game-log" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
-<td>F43</td>
+<td>F45</td>
 <td>Low</td>
 <td><b>F31 resolved: the 11/14 noon injury edition was unpublished, not missing</b></td>
 <td>The official index lists 2026-11-14 editions in 15-minute steps beginning 12:00 a.m. ET, and the newest one present when the index was read at 10:30 UTC was 04:30 a.m. ET. The AccessDenied response the earlier session got on the 12:00 PM ET URL is the response for a file the league has not written yet - which is exactly the ambiguity F31 recorded. This closes it: the fetch path works, the timing does not.</td>
 <td>Injuries page; the refresh cron's edition probing</td>
-<td>Register owner: mark F31 closed by F43 and have the cron read the index list first instead of guessing edition times.</td>
+<td>Register owner: mark F31 closed by F45 and have the cron read the index list first instead of guessing edition times.</td>
 <td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
-<td>F44</td>
+<td>F46</td>
 <td>Low</td>
 <td><b>The Prop Variance page marks 8 rows with the not-published dash rather than an official link</b></td>
 <td>The anchor-test and minutes tables aggregate across all ten players, so no single official URL is the source of a row; the cells say 'derived - every input cell is an official row of section 3' instead of linking to one. This is the same class as F34 and F37: the site's strict official-link count is 880 rows linked of 898 table rows, and these 8 are now part of that difference. No value was invented to close the count.</td>

@@ -116,6 +116,14 @@
   <p>Random seed 20261114; every figure on this site is reproducible from the repository.</p>
 </section>
 <section class="card">
+  <h3>Declared constants</h3>
+  <p>Every number here was chosen before any result was seen, and none of them comes from an official
+  source &mdash; they are this project&rsquo;s settings. Where a value could be tuned, the tuning is reported as a
+  sensitivity table rather than rolled into the headline; see the
+  <a href="teams.html">ratings page</a>.</p>
+  <div class="tablewrap"><table class="tbl  definitions" data-sortable><caption>Definitions, not data: these are this project's own settings, so no external source applies.</caption><thead><tr><th>Constant</th><th>Value</th><th>What it controls</th><th>Was it tuned on the results?</th></tr></thead><tbody><tr><td>K (margin)</td><td>4 pseudo-games</td><td>How far each team's margin rating is shrunk toward zero.</td><td>No &mdash; declared, then swept over {1, 2, 4, 8, 16, 32} and reported.</td></tr><tr><td>K (total)</td><td>6 pseudo-games</td><td>How far each team's scoring rating is shrunk toward the league mean.</td><td>No &mdash; declared.</td></tr><tr><td>Minimum bets (G1)</td><td>25</td><td>The smallest sample a strategy must reach before it can be ranked at all.</td><td>No &mdash; set from the power calculation, which shows ~340 games are needed for the strongest signal.</td></tr><tr><td>Significance level</td><td>&alpha; = 0.05</td><td>G3, before multiple-comparison correction.</td><td>No &mdash; conventional.</td></tr><tr><td>Corrected level (G7)</td><td>&alpha; = 0.01274</td><td>Šidák across every cell that reaches the sample floor.</td><td>Derived, not chosen.</td></tr><tr><td>Bet triggers</td><td>0.02, 0.03, 0.04</td><td>The smallest probability edge a strategy will bet on.</td><td>No &mdash; all three are run and published; none is selected after the fact.</td></tr><tr><td>Monte-Carlo repetitions</td><td>5,000</td><td>Resolution of the no-skill null.</td><td>No.</td></tr><tr><td>Random seed</td><td>20261114</td><td>Makes every simulation reproducible.</td><td>No.</td></tr><tr><td>Training start</td><td>2026-10-20</td><td>The first date used to fit ratings.</td><td>No &mdash; the earliest captured date.</td></tr></tbody></table></div>
+</section>
+<section class="card">
   <h3>Reproduce it</h3>
   <pre class="code">python3 -m engine_v2.pipeline      # rebuild every number
 python3 -m engine_v2.build_site    # rebuild every page</pre>
