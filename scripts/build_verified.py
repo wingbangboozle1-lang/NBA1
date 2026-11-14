@@ -193,6 +193,7 @@ def foot(extra=""):
 
 # --------------------------------------------------------------------------- pages
 def build_index(summary, ver, rev, fl, sug, qs):
+    n_flags = len(fl["rows"])
     c = ver["counts"]
     rc = rev["counts"]
     kp = "".join([
@@ -256,13 +257,13 @@ settled first and to the options on <a href="suggestions.html">Suggestions</a>.<
         "changed": changed,
         "falsy": falsy,
         "decisions": decisions,
-        "nav_cards": nav_cards(),
+        "nav_cards": nav_cards(len(fl["rows"])),
         "foot": foot(),
     }
     return page("Overview", "index.html", body)
 
 
-def nav_cards():
+def nav_cards(n_flags):
     items = [
         ("summary.html", "Executive summary",
          "The whole picture in ten minutes: what is true, what is not, what changed, what the numbers say, what to decide."),
@@ -275,7 +276,8 @@ def nav_cards():
         ("suggestions.html", "Suggestions",
          "12 options with effort, risk and what each unlocks, plus the review workflow so one path can be chosen before anything is built."),
         ("flagged.html", "Flagged for review",
-         "15 items this session could not confirm or that contradict an official source, each with the URL to check by hand."),
+         "%d items this session could not confirm or that contradict an official source, each with the URL to check by hand."
+         % n_flags),
         ("sources.html", "Sources",
          "26 sources: 19 official NBA URLs read in this session and 7 repository files used for claims about the code."),
     ]
