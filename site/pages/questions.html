@@ -41,6 +41,9 @@
 <a href="backtest.html">Out-of-Sample Backtest</a>
 <a href="model.html">Model &amp; Teams</a>
 </div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+</div>
 <div class="nav-group"><h3>DECISION</h3>
 <a href="questions.html">Open Questions</a>
 <a href="suggestions.html">Suggestions</a>
@@ -158,7 +161,7 @@
 <tr>
 <td>A13</td>
 <td><b>What were the final scores of the nine 2026-11-13 games, and how do they change the horizon's lines?</b></td>
-<td>Captured 2026-11-14T10:10Z from the official Games &amp; Scores page: NYK 104 at IND 106; MIL 99 at ORL 107; CLE 121 at MIA 133; ATL 117 at CHI 125 (OT); MEM 142 at NOP 111; UTA 118 at HOU 125; GSW 85 at SAS 123; POR 120 at SAC 107; OKC 112 at LAC 113. The games now extend the out-of-sample window from 51 to 60, they settled every published paper pick on the slate (seven gated singles 3-4, -1.40 units at -110; three two-leg parlays, all lost), and they refreshed the 18 stale team records. The horizon's originated lines were regenerated from the refreshed inputs; the model's margin line was off by 12.39 points on average across the nine games.</td>
+<td>Captured 2026-11-14T10:10Z from the official Games &amp; Scores page: NYK 104 at IND 106; MIL 99 at ORL 107; CLE 121 at MIA 133; ATL 117 at CHI 125 (OT); MEM 142 at NOP 111; UTA 118 at HOU 125; GSW 85 at SAS 123; POR 120 at SAC 107; OKC 112 at LAC 113. The games now extend the out-of-sample window from 51 to 60, they settled every published paper pick on the slate (seven gated singles 3-4, -1.40 units at -110; three two-leg parlays, all lost), and they refreshed the 18 stale team records. The horizon's originated lines were regenerated from the refreshed inputs; the model's margin line was off by 12.39 points on average across the nine games. The transcription was independently cross-verified 9/9 against session arena/cfb25ff0-nba1's capture (data/verified/finals_2026-11-13.json).</td>
 <td>High - every score was read from the official final card and cross-checked against the official standings table</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">S3_2026-11-13</a></td>
 </tr>
@@ -310,6 +313,33 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf">&mdash;</span></td>
+</tr>
+<tr>
+<td>Q17</td>
+<td><b>Which ratings window and which line set feed the published horizon picks?</b></td>
+<td>Two projection sets with different ratings windows sit on the same site, and they disagree on every game that carries a Build B point-spread pick (F26). The site does not say which one the picks use.</td>
+<td>Pick one set, regenerate every page from it, and print its ratings window on each page. Re-run scripts/source_check.py afterwards and confirm the cross-build table is empty.</td>
+<td>Every horizon pick and every headline count</td>
+<td>High</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>Q18</td>
+<td><b>Was the 11/14 12:00 PM ET injury report published, and what does it say about 11/14 rows?</b></td>
+<td>The edition's URL returned AccessDenied at capture, which is also what a missing object returns (F31).</td>
+<td>Re-check the official URL after 17:00 UTC on 2026-11-14 and transcribe any new rows with the page link. Record the response either way.</td>
+<td>Injury layer for 11/14 rows</td>
+<td>High</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>Q19</td>
+<td><b>Are the repeated pairings (NYK@TOR on 11/15 and 11/17; POR@MIN on 11/16 and 11/17) separate games as NBA.com prints them?</b></td>
+<td>Both are printed with distinct game IDs. Nothing on the page explains them (F33).</td>
+<td>Check each game page and the official schedule on its date; record the result next to each row.</td>
+<td>Four horizon rows</td>
+<td>Medium</td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600253" target="_blank" rel="noopener">S8_0022600253</a></td>
 </tr>
 </tbody></table></div>
 <p class="tnote">Where a row says no official source exists, that is the honest answer: no NBA-operated page publishes the missing item (a closing price, for instance).</p>

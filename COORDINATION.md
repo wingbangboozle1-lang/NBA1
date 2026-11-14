@@ -1767,3 +1767,83 @@ site navigation, README, `COORDINATION.md`) are owned by this final integration
 session. Archive namespaces (`docs/`, `docs/b/`, `command-center/`, `desk*.html`,
 `origination/`, `edge-lab/`, `audit/`, `integration/`) are **not** rewritten —
 they carry their own data cut and say so.
+
+**Merge log (2026-11-14, this section):**
+
+- `origin/main` moved four times during this session (probe-record commits from the official-source probe workflow, plus PRs #56 and #57). Each move was integrated with a merge commit (never a rebase), keeping the newest `data/raw/probe_official.json` + `verification.html` pair.
+- PR #56 (`arena/cfb25ff0-nba1`, §20): its independent 2026-11-13 finals transcription agrees 9/9 with this session's; both are kept (`data/raw/s14/finals_2026-11-13.json` and `data/verified/finals_2026-11-13.json`).
+- PR #57 (`arena/b0f2cc98-nba1`, §23) collided with this session's refresh on `data/content/flagged.json` and `data/content/questions.json`. Semantic merge, numbering convention kept (main's ids stay): their F26–F37 keep their ids; **this session's F26/F27 are renumbered F38/F39** (tier-label defect; Traore attribution). Their F29 ("site still shows the 11/13 games as unfinished") is marked resolved by the refresh. Questions: this session's 60-game answers (A1/A2/A3/A5/A6/A11) supersede the 51-game versions; A13 kept and enriched with the 9/9 cross-verification; their open Q17–Q19 kept; their open Q9 is dropped because A13 answers it. Their F13–F25 were left with this session's resolution texts (F13/F14 resolved, F15/F16/F19 updated to the 04:15 AM ET edition).
+- README.md conflicts merged by hand (both sessions' prose kept). All generated outputs (`index.html`, `site/**`, `docs/**`, `command-center/`) regenerated from the merged data through the four builders.
+- Their Source Check page (`site/pages/source-check.html`, from `scripts/source_check.py` → `verify/2026-11-14/`) is preserved and republished by the merged `scripts/build_dashboard.py`. Suggestions SG15–SG16 taken as merged (this session did not touch `suggestions.json`).
+
+## 23. Session `arena/b0f2cc98-nba1` — official-source check of the horizon, 11/13 settlement, Source Check page (claimed 2026-11-14 UTC)
+
+Branch `arena/b0f2cc98-nba1` (base `main` `45c0287`). The platform pins this session to that branch, so the
+`session-<id>/<task>` naming in the brief is not used; the single pinned branch carries the claims below.
+Other sessions: the claims in this table are the only files this session edits.
+
+| # | Task | Status | File scope (exclusive to this session) |
+| --- | --- | --- | --- |
+| S01 | Transcribe official nba.com values for the 27-game horizon (11/14–11/17) and the 9 official finals of 11/13, each row with its source URL | done | `verify/2026-11-14/official_*.json` |
+| S02 | Checker: compare site data with the official transcription; settle the 9 published 11/13 lines against finals; audit headline counts and the spread sign convention | done | `scripts/source_check.py`, `verify/2026-11-14/checks.json`, `verify/2026-11-14/cross_check_finals_cfb25ff0.json` |
+| S03 | Source Check page + Flagged-for-Review entries for every irregularity found | done | `scripts/build_dashboard.py` (new page + CATEGORIES entry only), `site/**` (regenerated), `data/content/flagged.json` (append only), `data/content/questions.json` (append only), `data/content/suggestions.json` (append only), `README.md` (one table row, one Known-limits bullet) |
+| S04 | Verify (existing gates + new checker), PR to `main`, merge, Pages confirmation, record here | in progress | `COORDINATION.md` (§23 only) |
+
+Scope notes: `docs/**`, `command-center/**`, `edge-lab/**`, `audit/**`, `engine/**`, `engine_v2/**`, `origination/**` are not edited.
+`data/**` is read, never written, except the new `verify/` folder.
+
+### 23.1 Sources used (all official unless stated; every value is in `verify/2026-11-14/`)
+
+| Input | Official source (read 2026-11-14 UTC) |
+| --- | --- |
+| 27 horizon games, tip times, pairings, printed records (11/14: 5, 11/15: 9, 11/16: 8, 11/17: 5) | <https://www.nba.com/games?date=2026-11-14>, `…2026-11-15`, `…2026-11-16`, `…2026-11-17` (chunks 0–1) |
+| Calendar badges (game counts per day) | same pages, calendar block |
+| 9 finals of 11/13 (score, status, OT, printed records after the game) | <https://www.nba.com/games?date=2026-11-13> (chunks 0–1); per-game links `…/game/<away>-vs-<home>-<gameid>` |
+| 11/14 noon injury report | <https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf> → AccessDenied at capture; policy index <https://official.nba.com/nba-injury-report-2026-27-season/> |
+| Independent second transcription of the 9 finals (for cross-check only; not merged) | `data/verified/finals_2026-11-13.json` on branch `arena/cfb25ff0-nba1` (PR #56, open) |
+| Site values compared (not sources) | `data/derived/horizon_lines.json`, `data/official/slate.json`, `data/originated_lines.json`, `site/data/*.json`, `docs/data/backtest.json`, `data/derived/horizon_picks.json`, `data/derived/picks_d.json` |
+
+### 23.2 Verification performed
+
+| Check | Result |
+| --- | --- |
+| Official horizon (27) vs `data/derived/horizon_lines.json` (matchup, date, tip) | 27 / 27 match, 0 mismatch |
+| Official horizon vs `site/data/lines.json` (the landing page's lines) | 27 / 27 match |
+| Official 11/14–11/16 vs `data/official/slate.json` (22 rows) | 22 / 22 match; 11/17 (5 games) absent from that file → F30 |
+| Printed records on the horizon rows vs NBA.com card at capture | 25 match; 29 differ, all for teams that played 11/13 (expected, F29); 0 unexplained |
+| 11/13 settlement: originated lines (`data/originated_lines.json`) vs official finals | 9 games: 3 WIN, 4 LOSS, 2 NO BET; mean \|model − final\| margin 12.39 pts; the largest gap between the published spread and minus the expected margin is 0.2 pts |
+| Independent cross-check of the 9 finals (PR #56 transcription, merged) | 9 / 9 agree on teams, scores and status |
+| Build B sign convention (`site/data/lines.json` vs its own S1 picks) | home-margin reading consistent in 16 / 16 rows; standard reading in 0 / 16 → F27 |
+| Cross-build (Build B vs Build D home margins, 17 shared games) | all 17 differ by more than 0.5 (0.8–11.8 pts); 2 pick opposite favourites (DAL@CLE, PHI@BKN) → F26 |
+| Headline numbers (landing tiles) | 27 games, 10 strategies, 51 out-of-sample games, 25 → 36 flags: match their data; "63 paper picks" counts mixed markets (F28); "Known limits" stale (F29) |
+| Gates after the change | `verify_all.py` VERIFY OK (exit 0); `check_site.py`, `verify_integration.py` (PASSED, 44 warnings published), `check_links.py` PASS, `check_rendered.py` PASS, `build_verification_page.py` (no diff), `render_check.mjs` 113 pages / 0 problems |
+
+Notes on the gate: `verify_all.py` prints "every table row is source-linked" while its own count reads 789 of 799 rows linked. Its test accepts GitHub links as sources. A strict test (nba.com or official.nba.com only) finds: 4 rows on the new Source Check page (internal counts, marked as such), 2 rows on Flagged for Review (F34, F35, repository-file links, no official source applies), and pre-existing rows on Questions (6), Repo review (7), Sources (1) and Suggestions (2). The pre-existing rows are logged as F37 and were not changed. The gate message overstates what it checks (F34).
+
+### 23.3 Irregularities (published on Flagged for Review, F26–F37)
+
+| ID | Severity | Item |
+| --- | --- | --- |
+| F26 | High | Build B (landing) and Build D (horizon) project different margins for the same games; 2 pick opposite favourites |
+| F27 | Medium | `spread_home` fields hold the home margin in Build B and D, the opposite sign to Build A's standard spread |
+| F28 | Medium | "Paper picks: 63" mixes markets and disagrees with Build D's 27 / 26 / 23 counts |
+| F29 | Medium | The site still says 11/13 is in progress; NBA.com shows 9 / 9 Final; 29 horizon records are stale |
+| F30 | Low | The 5 games of 11/17 are not in `data/official/slate.json` |
+| F31 | Medium | 11/14 noon injury report returned AccessDenied (same response as a missing object); not confirmed unpublished |
+| F32 | Low | DET@MIA time differs between the injury report (07:00) and the schedule (8:00 PM ET) |
+| F33 | Low | Repeated pairings NYK@TOR (11/15, 11/17) and POR@MIN (11/16, 11/17) printed with distinct game IDs |
+| F34 | Medium | The gate checks structure, not values; its "every row source-linked" message overstates its count |
+| F35 | Low | `horizon_lines.json` `_meta.generated_utc` is the placeholder `2026-11-14T01:xxZ` |
+| F36 | Medium | The 11/13 settlement is nine games; it cannot show skill (mean error 12.39 pts) |
+| F37 | Medium | Rows without an official nba.com link on five earlier pages (strict count) |
+
+### 23.4 Cross-session notes (logged, not executed)
+
+- **PR #56 (`arena/cfb25ff0-nba1`, merged to `main` at `4e4d0b0`)** verifies the same 11/13 finals row by row. This session read its `data/verified/finals_2026-11-13.json` (before the merge) and found 9 / 9 agreement; it did not edit that branch. Its owner may want to add the horizon check (S02) rather than repeat the finals work.
+- **Build B owner**: the landing page's lines come from `site/data/lines.json`; F26 and F27 need a decision before any new picks are published (suggestion SG15).
+- **Gate owner**: add `scripts/source_check.py` to `verify_all.py` (suggestion SG16) and correct the gate's wording.
+- **Branch naming**: the platform pins this session to `arena/b0f2cc98-nba1`, so the `session-<id>/<task>` naming in the brief is not used. Logged here as a deviation, as earlier sessions did.
+
+### 23.5 Status
+
+- Scope: S01–S03 done. S04 (PR, merge, Pages confirmation) is recorded in §23.6 when it completes.

@@ -25,6 +25,7 @@ The live site is published by GitHub Pages from the repository root:
 | Evidence | [`site/pages/luck.html`](site/pages/luck.html) | Luck decomposition: expected wins vs actual, per team |
 | Evidence | [`site/pages/backtest.html`](site/pages/backtest.html) | The 51-game out-of-sample window, game by game |
 | Evidence | [`site/pages/model.html`](site/pages/model.html) | Team ratings and every model assumption |
+| Verification | [`site/pages/source-check.html`](site/pages/source-check.html) | Every horizon game and every 11/13 final compared with NBA.com on 2026-11-14, the 11/13 settlement, and the conflicts between builds |
 | Decision | [`site/pages/questions.html`](site/pages/questions.html) | Answered and open questions |
 | Decision | [`site/pages/suggestions.html`](site/pages/suggestions.html) | Improvements as options with effort, risk and what each unlocks |
 | Decision | [`site/pages/flagged.html`](site/pages/flagged.html) | Everything that could not be confirmed from an official source |
@@ -73,7 +74,7 @@ they exercise:
 
 | Build | Entry point | Horizon | Character |
 | --- | --- | --- | --- |
-| **Build D — this build** | [`index.html`](index.html) → [`site/`](site/pages/picks.html) | 27 games, 14–17 Nov | The current build: landing page, 15 category pages, 60 gated paper picks |
+| **Build D — this build** | [`index.html`](index.html) → [`site/`](site/pages/picks.html) | 27 games, 14–17 Nov | The current build: landing page, 16 category pages, 60 gated paper picks |
 | **Command Center** | [`command-center/index.html`](command-center/index.html) | 22 games, 14–16 Nov | A second consolidated site, built in session `arena/791c9114-nba1` from the same captures, with its own rendered-page checks |
 | **A — NBA Edge Lab** | [`edge-lab/index.html`](edge-lab/index.html) | 23 games, 13–15 Nov | Build A's original decision dashboard, frozen at the 11/13 cut and archived unchanged |
 | **Integration Desk** | [`desk.html`](desk.html) | 14–16 Nov | The origination, gate, settlement and prop pipeline published at the repository root by session `arena/2edb85af-nba1` |
@@ -137,7 +138,10 @@ available, that the data may be used, or that any model result is correct.
 
 - The team ratings remain the official Teams Advanced capture through the games
   of 2026-11-12 (flag F19/F24); the results window now runs one game further,
-  through 2026-11-13.
+  through 2026-11-13, and the 11/13 slate's paper picks were settled against
+  those finals (backtest page, Settlement section). The row-by-row source audit
+  of the horizon and the finals is on the
+  [Source Check](site/pages/source-check.html) page.
 - At the newest official injury-report edition (11/14/26 04:15 AM ET), five of
   the ten teams playing on 11/14 have still not filed (New Orleans, Cleveland,
   Memphis, Chicago, Miami), all twenty team-slots for 11/15 are printed as NOT
