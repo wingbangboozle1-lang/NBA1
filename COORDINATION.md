@@ -3200,7 +3200,7 @@ the retrieval timestamp. Nothing is marked verified because a URL "looks right".
 | S30-4 | Line-by-line review of the repository's load-bearing claims (formulas, gates, settlement, source coverage, board integrity) with the official or code citation for each | done | `verified/data/repo_review.json` → `verified/review.html` |
 | S30-5 | Decision layer: executive summary, Q&A register (what is missing and how to discover it), suggestions board with a review/choose workflow | done | `verified/summary.html`, `verified/questions.html`, `verified/suggestions.html` |
 | S30-6 | Flagged register: every unverified/mismatched value, source-linked | done | `verified/flagged.html` |
-| S30-7 | Build + check (links, row sources, no placeholders), then PR → merge → Pages confirmation → delivery record | done | PR pending, link recorded in §30.4 |
+| S30-7 | Build + check (links, row sources, no placeholders), then PR → merge → Pages confirmation → delivery record | done | PR pending, link recorded in §32.4 |
 
 ### 32.2 Standing rules this session follows
 
