@@ -5,6 +5,34 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/2edb85af-nba1` (opened 2026-11-14, integration + refresh)
+
+Branch `arena/2edb85af-nba1`, based on `2f44c98` (tip of `main`, the merge of PR #18).
+
+This session takes the **integration seat** and the **data refresh**. Both prior
+sessions have merged (`arena-7cfd203a` → PRs #10/#13/#17, `arena/91270bb6-nba1` →
+PRs #16/#18) and are idle; U12 sits at `needs review` and U14 at `in progress`
+with no commits for more than 60 minutes, so under ground rule 5 the integration
+claim is taken over here and noted in §5.
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| V01 | Line-by-line review of the **merged** tree (both builds, not the empty base) | in progress | `COORDINATION.md`, `REPO_REVIEW.md`, `integration/REPORT.md` |
+| V02 | Fresh official capture, 2026-11-14: Nov 13 finals, Nov 14–16 slate, current injury report, team/player stats | in progress | `data/live/**` |
+| V03 | Settle every previously published paper pick against official finals; update leaderboard, gates, luck decomposition | in progress | `integration/settlement.json`, `integration/leaderboard.json` |
+| V04 | Single unified dashboard: one landing page, one nav, one Flagged-for-Review register, picks for the open window | in progress | `index.html`, `styles.css`, `app.js`, `desk/**` |
+| V05 | Verification (links, provenance, row-level sources), PR, merge, Pages confirmation | unclaimed | `.github/workflows/pages.yml`, `scripts/check_links.py` |
+
+**Do not touch while I am working:** `docs/**` (Build A archive), `docs/b/**`
+(Build B archive), `data/**` as it exists today, `scripts/**`, `engine/**`. They
+are read-only inputs to V01–V03. Legacy pages stay live and linked; nothing is
+deleted.
+
+Other sessions: claim a row here, commit and push the claim before editing.
+
+
+---
+
 ## ⚠ Read this first: two sessions, two builds, one repository
 
 Two sessions worked on this repository in parallel without seeing each other's
