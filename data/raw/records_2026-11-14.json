@@ -1,0 +1,387 @@
+{
+  "capture": "Team W-L records exactly as displayed on official NBA.com Games slate pages",
+  "captured_by": "arena/f80dcc4a-nba1 (session W, task W02)",
+  "captured_utc": "2026-11-14T00:52Z-01:32Z",
+  "sources": {
+    "2026-11-13": {
+      "url": "https://www.nba.com/games?date=2026-11-13",
+      "read_utc": "2026-11-14T00:55Z",
+      "transcript": "captures/session-w/games_2026-11-13_state_2026-11-14T0055Z.txt"
+    },
+    "2026-11-14": {
+      "url": "https://www.nba.com/games?date=2026-11-14",
+      "read_utc": "2026-11-14T00:52Z",
+      "transcript": "captures/session-w/games_2026-11-14_2026-11-14T0052Z.txt"
+    },
+    "2026-11-15": {
+      "url": "https://www.nba.com/games?date=2026-11-15",
+      "read_utc": "2026-11-14T01:31Z",
+      "transcript": "captures/session-w/games_2026-11-15_2026-11-14T0131Z.txt"
+    },
+    "2026-11-16": {
+      "url": "https://www.nba.com/games?date=2026-11-16",
+      "read_utc": "2026-11-14T01:32Z",
+      "transcript": "captures/session-w/games_2026-11-16_2026-11-14T0132Z.txt"
+    },
+    "2026-11-17": {
+      "url": "https://www.nba.com/games?date=2026-11-17",
+      "read_utc": "2026-11-14T01:09Z",
+      "transcript": "captures/session-w/games_2026-11-17_2026-11-14T0109Z.txt"
+    }
+  },
+  "basis_note": "Records shown on the official pages at capture time. The 2026-11-13 slate was in progress (two games at Q2, seven pregame/tip-off states) at capture, so NO team record here includes a 2026-11-13 result. Values are therefore identical to the pre-11/13 basis used in earlier captures. This is the pick basis for the 2026-11-14..17 line batch (see data/originated_lines.json generated_at_utc). A refresh is required after the 11/13 slate goes final — tracked as flag W-F5.",
+  "cols": [
+    "abbr",
+    "team",
+    "record",
+    "displayed_on_date_pages",
+    "source_url",
+    "cross_checked"
+  ],
+  "rows": [
+    [
+      "ATL",
+      "Atlanta Hawks",
+      "7-5",
+      [
+        "2026-11-13",
+        "2026-11-15"
+      ],
+      "https://www.nba.com/game/atl-vs-chi-0022600037",
+      true
+    ],
+    [
+      "BKN",
+      "Brooklyn Nets",
+      "3-8",
+      [
+        "2026-11-14",
+        "2026-11-16"
+      ],
+      "https://www.nba.com/game/bkn-vs-mem-0022600234",
+      true
+    ],
+    [
+      "BOS",
+      "Boston Celtics",
+      "10-2",
+      [
+        "2026-11-15",
+        "2026-11-16"
+      ],
+      "https://www.nba.com/game/dal-vs-bos-0022600240",
+      true
+    ],
+    [
+      "CHA",
+      "Charlotte Hornets",
+      "4-8",
+      [
+        "2026-11-15",
+        "2026-11-17"
+      ],
+      "https://www.nba.com/game/cha-vs-lac-0022600238",
+      true
+    ],
+    [
+      "CHI",
+      "Chicago Bulls",
+      "1-9",
+      [
+        "2026-11-13",
+        "2026-11-14",
+        "2026-11-16"
+      ],
+      "https://www.nba.com/game/atl-vs-chi-0022600037",
+      true
+    ],
+    [
+      "CLE",
+      "Cleveland Cavaliers",
+      "6-6",
+      [
+        "2026-11-13",
+        "2026-11-14",
+        "2026-11-16"
+      ],
+      "https://www.nba.com/game/cle-vs-mia-0022600036",
+      true
+    ],
+    [
+      "DAL",
+      "Dallas Mavericks",
+      "7-5",
+      [
+        "2026-11-14",
+        "2026-11-15"
+      ],
+      "https://www.nba.com/game/dal-vs-cle-0022600232",
+      true
+    ],
+    [
+      "DEN",
+      "Denver Nuggets",
+      "6-4",
+      [
+        "2026-11-14",
+        "2026-11-16"
+      ],
+      "https://www.nba.com/game/den-vs-nop-0022600231",
+      true
+    ],
+    [
+      "DET",
+      "Detroit Pistons",
+      "8-3",
+      [
+        "2026-11-14",
+        "2026-11-17"
+      ],
+      "https://www.nba.com/game/det-vs-mia-0022600233",
+      true
+    ],
+    [
+      "GSW",
+      "Golden State Warriors",
+      "8-4",
+      [
+        "2026-11-16",
+        "2026-11-13"
+      ],
+      "https://www.nba.com/games?date=2026-11-13",
+      true
+    ],
+    [
+      "HOU",
+      "Houston Rockets",
+      "9-3",
+      [
+        "2026-11-13",
+        "2026-11-15",
+        "2026-11-16"
+      ],
+      "https://www.nba.com/game/uta-vs-hou-0022600039",
+      true
+    ],
+    [
+      "IND",
+      "Indiana Pacers",
+      "4-8",
+      [
+        "2026-11-13",
+        "2026-11-15"
+      ],
+      "https://www.nba.com/game/nyk-vs-ind-0022600034",
+      true
+    ],
+    [
+      "LAC",
+      "LA Clippers",
+      "2-8",
+      [
+        "2026-11-15",
+        "2026-11-17"
+      ],
+      "https://www.nba.com/game/cha-vs-lac-0022600238",
+      true
+    ],
+    [
+      "LAL",
+      "Los Angeles Lakers",
+      "11-2",
+      [
+        "2026-11-15",
+        "2026-11-17"
+      ],
+      "https://www.nba.com/game/lal-vs-phx-0022600237",
+      true
+    ],
+    [
+      "MEM",
+      "Memphis Grizzlies",
+      "7-4",
+      [
+        "2026-11-13",
+        "2026-11-14",
+        "2026-11-16"
+      ],
+      "https://www.nba.com/game/mem-vs-nop-0022600038",
+      true
+    ],
+    [
+      "MIA",
+      "Miami Heat",
+      "5-6",
+      [
+        "2026-11-13",
+        "2026-11-14",
+        "2026-11-16"
+      ],
+      "https://www.nba.com/game/cle-vs-mia-0022600036",
+      true
+    ],
+    [
+      "MIL",
+      "Milwaukee Bucks",
+      "1-11",
+      [
+        "2026-11-13",
+        "2026-11-15"
+      ],
+      "https://www.nba.com/game/mil-vs-orl-0022600035",
+      true
+    ],
+    [
+      "MIN",
+      "Minnesota Timberwolves",
+      "9-3",
+      [
+        "2026-11-14",
+        "2026-11-16",
+        "2026-11-17"
+      ],
+      "https://www.nba.com/game/chi-vs-min-0022600235",
+      true
+    ],
+    [
+      "NOP",
+      "New Orleans Pelicans",
+      "4-8",
+      [
+        "2026-11-13",
+        "2026-11-14",
+        "2026-11-16"
+      ],
+      "https://www.nba.com/game/mem-vs-nop-0022600038",
+      true
+    ],
+    [
+      "NYK",
+      "New York Knicks",
+      "6-5",
+      [
+        "2026-11-13",
+        "2026-11-15",
+        "2026-11-17"
+      ],
+      "https://www.nba.com/game/nyk-vs-ind-0022600034",
+      true
+    ],
+    [
+      "OKC",
+      "Oklahoma City Thunder",
+      "8-4",
+      [
+        "2026-11-15",
+        "2026-11-13"
+      ],
+      "https://www.nba.com/games?date=2026-11-13",
+      true
+    ],
+    [
+      "ORL",
+      "Orlando Magic",
+      "4-7",
+      [
+        "2026-11-13",
+        "2026-11-16"
+      ],
+      "https://www.nba.com/game/mil-vs-orl-0022600035",
+      true
+    ],
+    [
+      "PHI",
+      "Philadelphia 76ers",
+      "10-3",
+      [
+        "2026-11-15",
+        "2026-11-16"
+      ],
+      "https://www.nba.com/game/ind-vs-phi-0022600236",
+      true
+    ],
+    [
+      "PHX",
+      "Phoenix Suns",
+      "5-6",
+      [
+        "2026-11-15",
+        "2026-11-16"
+      ],
+      "https://www.nba.com/game/lal-vs-phx-0022600237",
+      true
+    ],
+    [
+      "POR",
+      "Portland Trail Blazers",
+      "8-3",
+      [
+        "2026-11-16",
+        "2026-11-17"
+      ],
+      "https://www.nba.com/game/por-vs-min-0022600250",
+      true
+    ],
+    [
+      "SAC",
+      "Sacramento Kings",
+      "1-10",
+      [
+        "2026-11-15",
+        "2026-11-13"
+      ],
+      "https://www.nba.com/games?date=2026-11-13",
+      true
+    ],
+    [
+      "SAS",
+      "San Antonio Spurs",
+      "10-2",
+      [
+        "2026-11-15",
+        "2026-11-17"
+      ],
+      "https://www.nba.com/game/sas-vs-uta-0022600239",
+      true
+    ],
+    [
+      "TOR",
+      "Toronto Raptors",
+      "5-7",
+      [
+        "2026-11-15",
+        "2026-11-17"
+      ],
+      "https://www.nba.com/game/nyk-vs-tor-0022600241",
+      true
+    ],
+    [
+      "UTA",
+      "Utah Jazz",
+      "1-11",
+      [
+        "2026-11-13",
+        "2026-11-15",
+        "2026-11-17"
+      ],
+      "https://www.nba.com/game/uta-vs-hou-0022600039",
+      true
+    ],
+    [
+      "WAS",
+      "Washington Wizards",
+      "4-9",
+      [
+        "2026-11-15",
+        "2026-11-16"
+      ],
+      "https://www.nba.com/game/hou-vs-was-0022600242",
+      true
+    ]
+  ],
+  "cross_check_note": "cross_checked = true when the same record string appeared on two or more independently fetched pages. GSW, OKC and SAC were single-source at the 00:52-01:32Z capture (each had one game in the 11/14-11/16 window); the 2026-11-13 game cards on the T2 capture (https://www.nba.com/games?date=2026-11-13, records: GSW 8-4, OKC 8-4, SAC 1-10, POR 8-3, LAC 2-8) printed the same strings, so all 30 teams now have two independent official sources. Flag W-F3 updated accordingly.",
+  "not_included": [
+    "Any 2026-11-13 game result (all nine games were in progress or pregame at capture; none final).",
+    "Odds or prices of any kind (no authorized market feed; see flagged register)."
+  ]
+}

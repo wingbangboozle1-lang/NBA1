@@ -34,8 +34,8 @@ audit. Every one still has decision status <i>pending</i>, which is the correct 
 </dl>
 <h3>S-02 &middot; Parse the injury PDF with a table-aware tool and cross-check <span class="chip">Medium effort</span></h3>
 <dl class="kv">
-<dt>Proposal</dt><dd>Use a PDF table extractor, then compare each row with the text extraction. Mismatches go to Flagged for Review.</dd>
-<dt>Benefit</dt><dd>Fixes F-02 to F-07 at the source.</dd>
+<dt>Proposal</dt><dd>Use a PDF table extractor, then compare each row with the text extraction. Mismatches go to Flagged for Review. Session W evidence (2026-11-14): both the 05:15 PM and 08:00 PM ET editions lose leading cells at page breaks — 20 + 11 rows respectively currently show no printed team. A per-row carry-provenance rule (only from an earlier edition that printed the row) is already implemented in data/raw/injury_report_2026-11-13_08_00PM.json and is the minimum a parser must preserve; anything else is inference.</dd>
+<dt>Benefit</dt><dd>Fixes F-02 to F-07 at the source and closes flags W-F4/W-F7 (see review.html) without inferring team cells.</dd>
 <dt>Risk</dt><dd>Layout changes between reports.</dd>
 <dt>Decision</dt><dd><span class="flag">pending</span></dd>
 </dl>
@@ -190,7 +190,7 @@ a daily pre-tip-off snapshot.</p>
 
 </div></main>
 <footer><div class="wrap">
-Generated 2026-11-13 from <code>data/*.json</code> by <code>scripts/build_site.py</code>.
+Generated 2026-11-14 from <code>data/*.json</code> by <code>scripts/build_site.py</code>.
 Every figure traces to an official NBA source; unverifiable values are shown as an em dash and flagged,
 never filled in. Season 2026-27.
 </div></footer></body></html>

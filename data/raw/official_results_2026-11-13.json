@@ -1,0 +1,133 @@
+{
+  "capture": "State of the 2026-11-13 NBA slate as displayed on the official Games page at capture time",
+  "captured_by": "arena/f80dcc4a-nba1 (session W, task W02)",
+  "captured_utc": "2026-11-14T00:55Z",
+  "source_url": "https://www.nba.com/games?date=2026-11-13",
+  "transcript": "captures/session-w/games_2026-11-13_state_2026-11-14T0055Z.txt",
+  "state_note": "At capture, two games were in progress (second quarter) and four were at PREGAME; the page's later cards were only partially returned by the fetch tool (see per-row notes). NO game was final at capture time, so no final score is recorded here. This file closes F-C01 only for games that have gone final by the follow-up capture recorded in followup_captures (added at end of session).",
+  "cols": [
+    "game_id",
+    "matchup",
+    "state_at_capture",
+    "score_away_at_capture",
+    "score_home_at_capture",
+    "cup_group",
+    "source_url",
+    "capture_note"
+  ],
+  "rows": [
+    [
+      "0022600034",
+      "NYK@IND",
+      "Q2 4:51",
+      35,
+      44,
+      "East Group B",
+      "https://www.nba.com/game/nyk-vs-ind-0022600034",
+      "in progress at capture; records shown pre-game 6-5 (0-1) / 4-8 (0-1)"
+    ],
+    [
+      "0022600035",
+      "MIL@ORL",
+      "Q2 :53.6",
+      33,
+      49,
+      "East Group A",
+      "https://www.nba.com/game/mil-vs-orl-0022600035",
+      "in progress at capture; records shown pre-game 1-11 (0-1) / 4-7 (1-0)"
+    ],
+    [
+      "0022600036",
+      "CLE@MIA",
+      "PREGAME",
+      null,
+      null,
+      "East Group B",
+      "https://www.nba.com/game/cle-vs-mia-0022600036",
+      "pregame at capture; records shown pre-game 6-6 (1-0) / 5-6 (1-0)"
+    ],
+    [
+      "0022600037",
+      "ATL@CHI",
+      "PREGAME",
+      null,
+      null,
+      "East Group C",
+      "https://www.nba.com/game/atl-vs-chi-0022600037",
+      "pregame at capture; records shown pre-game 7-5 (1-0) / 1-9 (0-1)"
+    ],
+    [
+      "0022600038",
+      "MEM@NOP",
+      "PREGAME",
+      null,
+      null,
+      "West Group B",
+      "https://www.nba.com/game/mem-vs-nop-0022600038",
+      "pregame at capture; records shown pre-game 7-4 (0-1) / 4-8 (0-1)"
+    ],
+    [
+      "0022600039",
+      "UTA@HOU",
+      "PREGAME",
+      null,
+      null,
+      "West Group A",
+      "https://www.nba.com/game/uta-vs-hou-0022600039",
+      "pregame at capture; records shown pre-game 1-11 (0-1) / 9-3 (0-1)"
+    ],
+    [
+      "0022600040",
+      "GSW@SAS",
+      "not captured",
+      null,
+      null,
+      "West Group C",
+      "https://www.nba.com/game/gsw-vs-sas-0022600040",
+      "game card absent from the fetch output at capture (extraction gap); game id/matchup from data/raw/official_schedule_capture_2026-11-14.json; state read at follow-up capture"
+    ],
+    [
+      "0022600041",
+      "POR@SAC",
+      "not captured",
+      null,
+      null,
+      "West Group C",
+      "https://www.nba.com/game/por-vs-sac-0022600041",
+      "game card absent from the fetch output at capture (extraction gap); game id/matchup from data/raw/official_schedule_capture_2026-11-14.json; state read at follow-up capture"
+    ],
+    [
+      "0022600042",
+      "OKC@LAC",
+      "not captured",
+      null,
+      null,
+      "West Group C",
+      "https://www.nba.com/game/okc-vs-lac-0022600042",
+      "only the tail of this card was returned by the fetch tool (game id and preview link confirmed); state read at follow-up capture"
+    ]
+  ],
+  "finals_as_of_capture": [],
+  "followup_captures": [
+    {
+      "capture": "T2-early",
+      "source_url": "https://www.nba.com/games?date=2026-11-13",
+      "note": "Early results pass (~02:00Z 2026-11-14, page read as two chunks). No finals yet: games ran ~30-60 min behind listed tip times. States as printed: NYK@IND 49-58 Q3 11:39; MIL@ORL 52-65 Q3 6:26; CLE@MIA 17-19 Q1 2:51; ATL@CHI 18-31 Q1 1:46; MEM@NOP 29-21 Q1 1:57; UTA@HOU PREGAME; GSW@SAS 9:30 PM ET upcoming; POR@SAC 10:00 PM ET upcoming; OKC@LAC 10:30 PM ET upcoming. Side effect: this capture printed the 11/13 game cards for GSW@SAS/POR@SAC/OKC@LAC (dropped mid-chunk in the 00:55Z capture), giving GSW/OKC/SAC records a second official source (flag W-F3 resolved). Finals capture continues at the queued late pass (~03:30-05:30Z) — flag W-F5 / F-C02.",
+      "states": {
+        "0022600034": "NYK 49 - 58 IND, Q3 11:39",
+        "0022600035": "MIL 52 - 65 ORL, Q3 6:26",
+        "0022600036": "CLE 17 - 19 MIA, Q1 2:51",
+        "0022600037": "ATL 18 - 31 CHI, Q1 1:46",
+        "0022600038": "MEM 29 - 21 NOP, Q1 1:57",
+        "0022600039": "UTA@HOU PREGAME",
+        "0022600040": "GSW@SAS upcoming 9:30 PM ET",
+        "0022600041": "POR@SAC upcoming 10:00 PM ET",
+        "0022600042": "OKC@LAC upcoming 10:30 PM ET"
+      }
+    }
+  ],
+  "limits": [
+    "Scores shown for in-progress games are mid-game snapshots, not results.",
+    "No value in this file may be used as a final score unless state_at_capture is 'Final' in a follow-up capture entry."
+  ]
+}
