@@ -322,7 +322,7 @@ def build_source_check(sources):
                 "These are the lines published for 11/13 on the root <code>lines.html</code>, built from <code>data/originated_lines.json</code> (Build A data). The spread is read as a "
                 "standard home spread: in all nine rows it equals minus the model's expected home margin, to within "
                 "%s points (the largest gap). A pick covers when the picked side's margin, after the line, is above zero. "
-                "The nine finals were also read independently by another session (open PR #56, branch arena/cfb25ff0-nba1): "
+                "The nine finals were also read independently by another session (PR #56, merged to main at 4e4d0b0): "
                 "%d of %d agree, see <code>verify/2026-11-14/cross_check_finals_cfb25ff0.json</code>."
                 % (ss["max_gap_spread_vs_minus_expected_margin"], xc["result"]["agree"], xc["result"]["games"])))
     rows = []
