@@ -5,7 +5,25 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
-## 🔑 ACTIVE CLAIM — session `arena/df3fed12-nba1` (opened 2026-11-14 10:00 UTC, desk settlement takeover)
+## 🔑 ACTIVE CLAIM — session `arena/f7f6c46e-nba1` (opened 2026-11-14 18:45 UTC — final integration seat: stale-PR takeover, fresh official verification, gates, delivery)
+
+Branch `arena/f7f6c46e-nba1`, based on `main` `2038333` (tip at claim time). The platform pins
+this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this
+single pre-named branch (deviation logged, as earlier sessions logged it). Full claim, task table
+F01–F05 and file scopes are in **§31** at the tail of this board.
+
+**Board read before claiming (2026-11-14 18:41–18:45 UTC):** last merge to `main` was PR #81 at
+12:50 UTC; all five open PRs (#63, #65, #66, #75, #80) are CONFLICTING with `main` and every
+owning session has been idle ≥ 5.5 hours — far past ground rule 5's 60-minute threshold, so their
+scopes are open for takeover here (content carried onto this branch, never pushed to their
+branches). One session is **live**: `arena/e812a9ed-nba1` (audit-only, §30, PR #82, opened
+18:42 UTC — docs-only `verify/2026-11-14-e812a9ed/**` + §30 append; explicitly not taking the
+integration seat). The banner below (`arena/df3fed12-nba1`) **completed** D01–D06 (PR #71 merged
+11:40 UTC, record in §28/§28.D) and is preserved verbatim for history.
+
+---
+
+## 🔑 ACTIVE CLAIM — session `arena/df3fed12-nba1` (opened 2026-11-14 10:00 UTC, desk settlement takeover) — **COMPLETED, see §28/§28.D**
 
 Branch `arena/df3fed12-nba1`, based on `45c0287` (tip of `main` at claim time).
 
@@ -2869,3 +2887,42 @@ idempotence (0 dirty lines after regeneration), the Command Center 17-page/data 
 - **Pages check (§25.2):** [PR #76](https://github.com/wingbangboozle1-lang/NBA1/pull/76) merged at `7e01041`; Pages build for `7e01041` reported `built` at 12:48 UTC; the live site serves current `main`. Earlier `errored` builds came from main-push churn, not a confirmed content fault. No config change was made.
 - **Not done by this session:** no `workflow_dispatch` (HTTP 403 for this session's token); PR #70 closed at 11:25 UTC during a metadata edit (not intended), replaced by #76.
 - **Suggestions for the integration session:** (1) add X01-F1 to F5 to the Flagged register; (2) set the injury page to cite the 04:30 AM ET 11/14 edition (X01-F1); (3) reduce Pages churn: the probe workflow runs on every push to `arena/**` and holds runners, and it pushes record commits that make open PRs `CONFLICTING`; (4) dedupe the §25 section on `main` (X01-F6, logged here).
+
+---
+
+## 31. Session `arena/f7f6c46e-nba1` — final integration seat: stale-PR takeover, fresh official verification, gates, delivery (claimed 2026-11-14 18:45 UTC)
+
+Branch `arena/f7f6c46e-nba1`, based on `main` `2038333` (tip at claim time: the 12:58 UTC probe
+record commit). The platform pins this session to that branch, so the `session-<id>/<task>` naming
+in the brief is satisfied by this single pre-named branch (deviation logged, as earlier sessions
+logged it).
+
+**Board read before claiming (18:41–18:45 UTC).** Last merge to `main`: PR #81 at 12:50 UTC.
+Open PRs at claim time: #63 (12:06Z), #65 (10:55Z), #66 (10:54Z), #75 (11:39Z), #80 (12:58Z) —
+**all five CONFLICTING with `main`**, all owning sessions idle ≥ 5.5 hours → ground rule 5
+takeover applies to their file scopes (content carried onto this branch with credit; no push to
+any other session's branch; each PR closed as superseded-when-landed). Live session at claim time:
+`arena/e812a9ed-nba1` (§30, audit-only, PR #82, MERGEABLE — not the integration seat, scope
+`verify/2026-11-14-e812a9ed/**` + §30 append; theirs is merged, not taken over). The prior top
+banner (`arena/df3fed12-nba1`) completed D01–D06 and is preserved below.
+
+| # | Task | Status | File scope (exclusive) | Plan |
+| --- | --- | --- | --- | --- |
+| F01 | Board claim pushed before any other edit | **done** (this commit) | `COORDINATION.md` (top banner + this §31 only) | Claim first, work second. |
+| F02 | Triage and land the five stale CONFLICTING PRs, one at a time, both sides kept, smallest first: #63 (gate wording), #80 (strategy-lab param read), #75→#65 (Pages concurrency isolation + audit carry), #66 (executive summary / decision content — selective semantic merge only, never a revert of post-10:41 main content); close each PR as superseded with credit after its content lands here | unclaimed | `.github/workflows/pages.yml`, `scripts/verify_dashboard.py`, `scripts/verify_all.py`, `audit/session-2dc33eb3/**`, `strategy-lab/**`, `EXECUTIVE_SUMMARY.md`, selective `data/content/**` / `README.md` / `index.html` deltas from #66, `COORDINATION.md` (§31 log) | Ground-rule-5 handoffs logged per PR below as they land. |
+| F03 | Fresh official-source verification pass at current time (11/14 afternoon ET): newest injury-report edition for the 11/14–11/17 window; row-level spot-check of the horizon schedule, tip times and records against nba.com; every checked row carries its official URL; anything unconfirmable is left blank and flagged, never inferred | unclaimed | `verify/f7f6c46e/**` (new) | Independent of all prior passes; report published under the Flagged/verification links. |
+| F04 | Full gate suite on the final tree: the ten `validate` workflow steps in order + `verify_all.py` + `verify_dashboard.py` + strategy-lab check; regenerate `verification.html` if the probe record moved; fix anything red until green | unclaimed | `verification.html` (generated), read-only gates | "Do not merge a broken site." |
+| F05 | Integration PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy + live smoke test (landing page, picks, flagged, questions, suggestions), record PR link and merge result here | unclaimed | `COORDINATION.md` (§31 delivery log), own branch | Retry until live per the brief; flagged/unverified items do not block the merge. |
+
+**Shared outputs claimed as integration seat** (all prior owners idle ≥ 5.5 h): `index.html`,
+`site/**`, `data/content/**`, `docs/data/**`, `command-center/data/**`, `README.md`,
+`.github/workflows/**`, `verification.html`. Edits there happen only in F02/F04/F05 and are
+recorded here. **Not claimed / read-only:** `verify/2026-11-14-e812a9ed/**` (§30, live),
+`data/raw/probe_official.json` + probe workflow churn (keep the newer pair — §29.4 rule), other
+sessions' branches.
+
+**Coordination with the live session:** `arena/e812a9ed-nba1` opened PR #82 at 18:42 UTC with a
+docs-only §30 + `verify/2026-11-14-e812a9ed/REPORT.md`. This session treats #82 as an input:
+merged as part of F05's integration if it still verifies clean, its findings (207 unsourced rows
+under the repository-wide checker, S1 banner wording conflict, leaked `None` strings, duplicate
+section numbers) folded into the F02/F04 worklist below.
