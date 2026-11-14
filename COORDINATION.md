@@ -200,7 +200,7 @@ site tables) are in scope here.
 | V03 | Data refresh as of 2026-11-14 (injury report, 11/13 results, 11/14–11/17 schedule) | done | `data/refresh_2026_11_14/*`, `data/raw/*`, `docs/data/*.json` | Slates 11/16 (8 games) and 11/17 (5 games) appended after official-page verification; 11/13 finals were still in play at capture so result cells stay blank (never zero). |
 | V04 | Picks for upcoming slate 11/14–11/17 (≤ 3 days ahead) from originated lines | done | `docs/data/picks.json`, `data/derived/*` | 5 slates, 36 games, 81 strategy-gated pick rows (11/13 rows PENDING finals). Edge Lab mirrors 36 games / 30 model picks. |
 | V05 | Site integration: R1 nav link to Build B, dated-data labels, executive summary refresh | done | `index.html`, `docs/summary.html`, `scripts/*` | R1 executed (nav link under DETAIL PAGES). Window counts/labels updated everywhere; registers gained Q9–Q11, SG11–SG12, F13–F15. |
-| V06 | Full verification pass + PR → `main` + merge + Pages confirm | in progress | `COORDINATION.md` | `scripts/verify_all.py` VERIFY OK + `engine/verify_refresh.py` 0 failures before PR. |
+| V06 | Full verification pass + PR → `main` + merge + Pages confirm | in progress | `COORDINATION.md` | PR [#35](https://github.com/wingbangboozle1-lang/NBA1/pull/35). `scripts/verify_all.py` VERIFY OK + `engine/verify_refresh.py` 0 failures before PR. Merge + Pages recorded below when complete. |
 
 Build B's live pages: `docs/b/pages/` → `lines`, `picks`, `props`, `injuries`,
 `gameflow`, `validation`, `strategy`, `correlations`, `luck`, `backtest`,
