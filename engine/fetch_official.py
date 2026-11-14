@@ -18,6 +18,13 @@ Design rules, in order:
    snapshot before anything is promoted. Promotion is a separate, verified
    step and never happens here.
 
+REFRESH TRIGGER (session `arena/ef6ff2a4-nba1`, 2026-11-14T09:58Z): this
+comment change is intentional and exists to trigger the refresh-data.yml
+push-fallback (workflow_dispatch returns HTTP 403 on session tokens, observed
+again 2026-11-14T09:56Z). Goal of the run: capture the 2026-11-13 finals
+(games ended ~03:00Z) and the newest injury-report editions so the horizon
+picks can be settled and refreshed. No behaviour change below.
+
 NOTE ON TESTING (session `arena/d6918959-nba1`, 2026-11-14 UTC):
 
 * This script was originally written in a sandbox that could not reach
