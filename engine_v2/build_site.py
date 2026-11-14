@@ -565,7 +565,7 @@ def build_gates(eng):
 <section class="card">
   <h3>G6 &mdash; is the line worth testing against?</h3>
   {table(["Check", "Value", "Comparison", "Result", "Official games"], g6rows,
-         caption="Measured over the 101 out-of-sample forecasts; each of those games is listed with its "
+         caption="Measured over this build's walk-forward window; each of those games is listed with its "
                  "official game link on the backtest page.")}
   <p class="tn">Straight up {e(g6["straight_up"])} ({pct(g6["straight_up_pct"])}) against a home-team win rate of
   {pct(g6["home_win_rate"])}. Out-of-sample spread &sigma;<sub>margin</sub> = {g6["sigma_margin"]:.2f} points,
@@ -781,7 +781,7 @@ def build_backtest(eng):
 </section>
 """
     return page("Walk-forward backtest",
-                f'{g6["games"]} out-of-sample forecasts, each fitted only on earlier games.',
+                "This build's walk-forward window: every forecast fitted only on earlier games.",
                 body, "pages/backtest.html", depth=1)
 
 

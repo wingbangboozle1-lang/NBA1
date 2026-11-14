@@ -137,7 +137,7 @@ QUESTIONS = [
          url="https://www.nba.com/games?date=2026-11-14"),
     dict(id="Q2", priority="Blocking",
          question="How many games do we need before a strategy can be promoted?",
-         know="101 out-of-sample games; minimum detectable ROI at 80% power of 79-118% depending on the strategy.",
+         know="This build's walk-forward window covers 101 forecasts (2026-10-27 to 11-12); minimum detectable ROI at 80% power is 79-118% depending on the strategy.",
          unknown="The sample at which the rest signal (currently p = 0.130, about 340 games needed) would resolve.",
          why="Promoting anything on this sample is promoting noise. The power table is the answer to 'when is it safe to fund?'",
          how="Fix the promotion threshold now, in public, from the power table: no strategy is funded below the sample at which its own minimum detectable ROI falls under its observed ROI.",
