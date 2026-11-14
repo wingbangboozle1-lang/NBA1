@@ -256,18 +256,5 @@
    "what_changed": "Season-to-date team table and training window re-captured; upcoming window rolled from 11/13-11/15 to 11/14-11/16 (22 games); 11/13 games moved to schedule_in_progress (rest maths only); injury report moved from the 17:15 ET to the 19:30 ET edition.",
    "previous_capture_utc": "2026-11-13T23:40:00Z"
   }
- ],
- "reverification": [
-  {
-   "checked_at_utc": "2026-11-14T01:55:00Z",
-   "method": "Independent re-read of the live official game pages through the web-fetch channel, compared field by field against data/raw/schedule_upcoming.json",
-   "scope": "8 fixtures across the 11/14 and 11/15 slates: DEN@NOP, DAL@CLE, BKN@MEM, DET@MIA, CHI@MIN, HOU@WAS, ATL@MIL, OKC@SAC",
-   "fields": "tip time ET, away record, home record",
-   "result": "24 of 24 fields matched; no fixture had started at the time of the check",
-   "urls": [
-    "https://www.nba.com/games?date=2026-11-14",
-    "https://www.nba.com/games?date=2026-11-15"
-   ]
-  }
  ]
 }
