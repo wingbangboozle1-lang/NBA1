@@ -5,10 +5,15 @@ Every number this module publishes comes from one of two places:
   * an entry in ASSUMPTIONS, which is printed on the site as a choice, never as a fact.
 
 The out-of-sample test uses the FIT window (2026-10-20 .. 2026-11-05) to predict the
-51 finished games of 2026-11-06 .. 2026-11-12. Nothing from those 51 games is allowed to
+60 finished games of 2026-11-06 .. 2026-11-13. Nothing from those 60 games is allowed to
 touch the ratings, the shrinkage constant, home court or the availability weights. Where a
 component could not be estimated without looking forward, it is declared as an assumption
 and the look-ahead risk is printed on the page instead of being hidden.
+
+The 2026-11-13 finals enter through data/live/results_2026_11_13_final.json (two-source
+capture, session arena/df3fed12-nba1, COORDINATION §21 D03): they are appended to the
+graded rows and to the rest-day index at load time. data/raw/games_completed.json is NOT
+modified here — it is shared with builds outside this session's claim (request R-X1).
 """
 
 import json
@@ -37,7 +42,7 @@ def rnd(x, n=2):
 ASSUMPTIONS = {
     "hca_points": {
         "value": 2.5, "unit": "points added to the home margin",
-        "status": "ASSUMPTION, not measured here. Estimating it from the 51 out-of-sample "
+        "status": "ASSUMPTION, not measured here. Estimating it from the out-of-sample "
                   "games would be fitting on the test window, so it is held fixed and swept "
                   "at 0.0 / 2.5 / 5.0 on the Gates page instead.",
         "sensitivity": [0.0, 2.5, 5.0],
@@ -58,13 +63,13 @@ ASSUMPTIONS = {
     },
     "sigma_game_points": {
         "value": 12.0,
-        "used_for": "the win probabilities on the 51 graded games. The live slate's "
-                    "probabilities instead divide by the measured out-of-sample error σ (17.4), "
+        "used_for": "the win probabilities on the graded games. The live slate's "
+                    "probabilities instead divide by the measured out-of-sample error σ, "
                     "because once the error is known it is the honest scale. The two are not "
                     "interchangeable and the difference is quantified in "
-                    "integration/out/transform_test.json: at σ=11 a normal link scores Brier "
-                    "0.1884 and a logistic one 0.1943, so what costs accuracy here is the link "
-                    "function in scripts/build_edge_site.py, not the size of σ.",
+                    "integration/out/transform_test.json: on this window a normal link near "
+                    "σ=11–12 out-scores the measured error-σ, so what costs accuracy here is "
+                    "the link function in scripts/build_edge_site.py, not the size of σ.",
         "unit": "points, single-game scoring noise used to set the shrinkage constant",
         "status": "ROUND NUMBER, deliberately conservative. A larger noise term shrinks team "
                   "ratings harder, so this choice makes the model less bold, not more. The "
@@ -72,8 +77,9 @@ ASSUMPTIONS = {
     },
     "sigma_margin": {
         "value": None, "unit": "points",
-        "status": "MEASURED from the 51 official final scores in the out-of-sample window. Small "
-                  "sample; the number moves whenever the window grows.",
+        "status": "MEASURED from the official final scores in the out-of-sample window "
+                  "(60 games, 2026-11-06 .. 2026-11-13). Small sample; the number moves "
+                  "whenever the window grows.",
     },
     "price": {
         "value": None, "unit": "odds / juice",
@@ -86,15 +92,106 @@ ASSUMPTIONS = {
 
 
 # --------------------------------------------------------------------- loading
+def _stamp_key(inj):
+    """Sort key from an edition's own printed stamp, e.g. 'Injury Report: 11/14/26 05:00 AM'."""
+    import re
+    s = str(inj.get("report_stamp") or "")
+    m = re.search(r"(\d{1,2})/(\d{1,2})/(\d{2})\s+(\d{1,2}):(\d{2})\s*(AM|PM)", s)
+    if not m:
+        return (0, 0, 0, 0, 0, "")
+    mo, dy, yr, hh, mm, ap = m.groups()
+    hh = int(hh) % 12 + (12 if ap.upper() == "PM" else 0)
+    return (2000 + int(yr), int(mo), int(dy), hh, int(mm), s)
+
+
+def load_injury():
+    """The newest official edition present in data/live, chosen by its printed stamp.
+
+    Never overwrites: each edition is its own file. Returns (dict, path) for the file whose
+    report_stamp is latest, so pricing always uses the most recent league statement that
+    actually exists in the repository.
+    """
+    import glob
+    best = None
+    for path in sorted(glob.glob(os.path.join("data", "live", "injury_report_*.json"))):
+        try:
+            with open(path, encoding="utf-8") as fh:
+                inj = json.load(fh)
+        except (OSError, ValueError):
+            continue
+        if "report_stamp" not in inj or "rows" not in inj:
+            continue
+        key = _stamp_key(inj)
+        if best is None or key > best[0]:
+            best = (key, path, inj)
+    if best is None:
+        raise FileNotFoundError("no injury_report_*.json edition in data/live")
+    return best[2], best[1]
+
+
 def load_inputs():
     windows = load("data", "live", "team_windows.json")
     slate = load("data", "live", "slate_2026_11_14_to_16.json")
-    injury = load("data", "live", "injury_report_2026_11_14.json")
+    injury, injury_path = load_injury()
     logs = load("data", "live", "player_game_logs.json")
     completed = load("data", "raw", "games_completed.json")
     meta = load("data", "live", "capture_meta.json")
     trad = load("data", "raw", "players_traditional.json")
     sched = load("data", "schedule_2026_11_13_to_16.json")
+
+    # ---- D03 (COORDINATION §21): append the verified 11/13 finals to the graded rows and to
+    # the rest-day index. data/raw/games_completed.json stays untouched (shared with builds
+    # outside this claim; promotion is request R-X1 for the integration seat). FIT untouched.
+    final13 = None
+    try:
+        final13 = load("data", "live", "results_2026_11_13_final.json")
+    except FileNotFoundError:
+        final13 = None
+    appended = []
+    if final13:
+        have = {r[7] for r in completed["rows"]}          # game_id column
+        for g in final13["games"]:
+            if g["game_id"] in have or not g.get("settled"):
+                continue
+            appended.append([g["date"], g["away"], g["away_pts"], g["home"], g["home_pts"],
+                             int(g.get("ot") or 0), int(g.get("neutral") or 0), g["game_id"],
+                             "L15_2026-11-13"])
+        if appended:
+            completed = dict(completed)
+            completed["rows"] = list(completed["rows"]) + appended
+            completed["note"] = (
+                (completed.get("note") or "")
+                + f" | +{len(appended)} rows (2026-11-13) appended at load time from "
+                  "data/live/results_2026_11_13_final.json by integration/model.py; the raw "
+                  "file on disk is unmodified.")
+
+    # ---- D04: prefer the refreshed LIVE window (through 11/13) when that capture exists.
+    try:
+        windows = dict(windows)
+        windows["window_live"] = load("data", "live",
+                                      "team_windows_live_2026_11_13.json")["window_live"]
+    except (FileNotFoundError, KeyError):
+        pass
+    # ---- D04: post-finals record reread overlaid on the slate cards (IR-05 closure).
+    try:
+        records_reread = load("data", "live", "slate_records_reread_2026_11_14.json")["records"]
+    except (FileNotFoundError, KeyError):
+        records_reread = {}
+    for g in slate.get("games", []):
+        rr = (records_reread.get(g.get("date"), {}) or {}).get(str(g.get("game_id")))
+        if rr:
+            g["away_record_as_displayed"] = rr.get("away") or g.get("away_record")
+            g["home_record_as_displayed"] = rr.get("home") or g.get("home_record")
+            g["record_source_url"] = "https://www.nba.com/schedule"
+            g["record_read_at_utc"] = "2026-11-14T09:50Z"
+            g["record_lags_one_day"] = False
+        else:
+            g["away_record_as_displayed"] = g.get("away_record")
+            g["home_record_as_displayed"] = g.get("home_record")
+            g["record_source_url"] = g.get("source_url")
+            g["record_read_at_utc"] = slate.get("retrieved_utc")
+            g["record_lags_one_day"] = True
+
     venue_by_id = {}
     try:
         cap = load("data", "raw", "official_schedule_capture_2026-11-14.json")
@@ -123,7 +220,8 @@ def load_inputs():
         played.setdefault(g["home"], set()).add(g["date"])
 
     return dict(venue_by_id=venue_by_id,
-                windows=windows, slate=slate, injury=injury, logs=logs, completed=completed,
+                windows=windows, slate=slate, injury=injury, injury_path=injury_path,
+                logs=logs, completed=completed, final13=final13, appended_rows=appended,
                 meta=meta, player_season=player_season, played=played)
 
 
@@ -270,7 +368,7 @@ def main():
     rat_fit, diag_fit = build_ratings(fit_w)
     rat_live, diag_live = build_ratings(live_w)
 
-    # ---- out of sample: the 51 finished games, predicted from the FIT window and nothing else
+    # ---- out of sample: the 60 finished games (11/06..11/13), predicted from FIT and nothing else
     cols = src["completed"]["cols"]
     oos, margin_errs, total_errs = [], [], []
     for row in src["completed"]["rows"]:
@@ -319,8 +417,10 @@ def main():
         hr, hn = rest_state(src["played"], home, g["date"])
         ar, an = rest_state(src["played"], away, g["date"])
         matchup = f"{away}@{home}"
-        sub = {r["team"]: r["state"] for r in src["injury"]["submission_state_2026_11_14"]}
-        has_report = g["date"] == "2026-11-14"
+        sub_by_date = src["injury"].get("submission_state") or {
+            "2026-11-14": src["injury"].get("submission_state_2026_11_14", [])}
+        sub = {r["team"]: r["state"] for r in sub_by_date.get(g["date"], [])}
+        has_report = g["date"] in sub_by_date
         det_a, sh_a, new_a = availability_for(src["injury"], src["player_season"], rat_live,
                                                matchup, away) if has_report else ([], 0.0, 0)
         det_h, sh_h, new_h = availability_for(src["injury"], src["player_season"], rat_live,
@@ -334,7 +434,12 @@ def main():
         sigma = ASSUMPTIONS["sigma_margin"]["value"] or ASSUMPTIONS["sigma_game_points"]["value"]
         games.append({
             "date": g["date"], "time_et": g["time_et"], "away": away, "home": home,
-            "matchup": matchup, "away_record": g["away_record"], "home_record": g["home_record"],
+            "matchup": matchup,
+            "away_record": g["away_record_as_displayed"],
+            "home_record": g["home_record_as_displayed"],
+            "record_source_url": g.get("record_source_url"),
+            "record_read_at_utc": g.get("record_read_at_utc"),
+            "record_lags_one_day": g.get("record_lags_one_day"),
             "game_id": g["game_id"], "game_url": g["game_url"], "source_url": g["source_url"],
             "leaders_away": g["leaders_away"], "leaders_home": g["leaders_home"],
             "ratings_window": live_w["label"],
@@ -362,13 +467,26 @@ def main():
                                         src["venue_by_id"].get(str(g["game_id"])) or {}) is False
                                     else "no venue row matched this game id in the independent "
                                          "capture — neutrality is unknown, not absent"),
-            "report_state_away": sub.get(away) if has_report else "no 11/15 or 11/16 edition exists yet",
-            "report_state_home": sub.get(home) if has_report else "no 11/15 or 11/16 edition exists yet",
+            "report_state_away": (sub.get(away, "no row printed for this team") if has_report
+                                 else "no edition covers this date yet"),
+            "report_state_home": (sub.get(home, "no row printed for this team") if has_report
+                                  else "no edition covers this date yet"),
+            "report_edition": src.get("injury_path"),
+            "report_stamp": src["injury"].get("report_stamp"),
         })
 
     os.makedirs(OUT, exist_ok=True)
+    # Stamp discipline (gate V12): never read the wall clock. The register's latest recorded
+    # activity — the original capture time or the newest amendment — is the honest timestamp
+    # for a rebuild, and it stays diffable.
+    register_latest = max(
+        [str(src["meta"].get("captured_at_utc") or "")]
+        + [str(a.get("at") or "") for a in src["meta"].get("amendments", [])])
     out = {
-        "generated_utc": src["meta"]["captured_at_utc"],
+        "generated_utc": register_latest or src["meta"]["captured_at_utc"],
+        "rebuild_note": ("recomputed by integration/model.py after the 2026-11-13 settlement "
+                         "and the 11/14 05:00 AM injury edition; stamp = latest activity in "
+                         "data/live/capture_meta.json"),
         "capture_session": src["meta"]["captured_by_session"],
         "assumptions": ASSUMPTIONS,
         "diagnostics": {"fit": diag_fit, "live": diag_live,

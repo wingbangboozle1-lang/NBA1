@@ -1,6 +1,6 @@
 {
  "rule": {
-  "sigma_margin_measured": 17.4,
+  "sigma_margin_measured": 17.392,
   "min_edge_points": 8.7,
   "criteria": [
    "R1 verified ratings window",
@@ -9,7 +9,7 @@
    "R4 neutral-site veto",
    "R5 rest state derivable"
   ],
-  "written_before": "the cut came from the 51-game backtest's own error, not from these games"
+  "written_before": "the cut came from the graded window's own backtest error (60 games, 2026-11-06 .. 2026-11-13), not from these games"
  },
  "slate": {
   "dates": [
@@ -20,8 +20,8 @@
   "games_priced": 22,
   "tiers": {
    "SELECTED": 0,
-   "PROVISIONAL": 9,
-   "LEAN-ONLY": 8,
+   "PROVISIONAL": 8,
+   "LEAN-ONLY": 9,
    "REJECTED-DATA": 5
   }
  },
@@ -36,25 +36,27 @@
    "tier": "REJECTED-DATA",
    "reasons": [
     "R3 asymmetric availability: DEN=SUBMITTED vs NOP=NOT YET SUBMITTED — one side's absences are known and the other's are not, which biases the adjustment instead of removing it",
-    "R2 |margin -5.8| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)"
+    "R2 |margin -7.3| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)"
    ],
-   "line_spread_home": 5.8,
-   "line_total": 233.46,
-   "p_home_win_model": 0.369,
+   "line_spread_home": 7.3,
+   "line_total": 234.2,
+   "p_home_win_model": 0.3377,
    "lean": "AWAY DEN",
-   "lean_margin_points": 5.8,
+   "lean_margin_points": 7.3,
    "records_as_displayed": {
     "away": "6-4",
-    "home": "4-8",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "home": "4-9",
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 0.551,
-    "home": -5.791,
+    "away": 0.548,
+    "home": -7.249,
     "games_behind": {
      "away": 10,
-     "home": 12
+     "home": 13
     }
    },
    "neutral_site": false,
@@ -67,8 +69,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 99.61,
-    "pace_note": "DEN 97.58 / NOP 101.64 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 99.83,
+    "pace_note": "DEN 97.58 / NOP 102.08 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -77,18 +79,16 @@
      "away_b2b": false,
      "home_b2b": true,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "NOP"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": -6.32,
+     "raw_from_ratings": -7.78,
      "rest_adj": -2.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": -5.82,
+     "final": -7.28,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -116,7 +116,7 @@
         "minute_share": null,
         "classification": "SEASON DATA NOT CAPTURED",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
        },
        {
         "player": "Nembhard, Ryan",
@@ -130,7 +130,7 @@
         "minute_share": null,
         "classification": "SEASON DATA NOT CAPTURED",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
        },
        {
         "player": "Strawther, Julian",
@@ -144,7 +144,7 @@
         "minute_share": null,
         "classification": "SEASON DATA NOT CAPTURED",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
        },
        {
         "player": "Whitmore, Cam",
@@ -158,7 +158,7 @@
         "minute_share": null,
         "classification": "SEASON DATA NOT CAPTURED",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
        }
       ]
      },
@@ -203,25 +203,27 @@
    "tier": "REJECTED-DATA",
    "reasons": [
     "R3 asymmetric availability: DAL=SUBMITTED vs CLE=NOT YET SUBMITTED — one side's absences are known and the other's are not, which biases the adjustment instead of removing it",
-    "R2 |margin +1.6| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)"
+    "R2 |margin +0.6| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)"
    ],
-   "line_spread_home": -1.6,
-   "line_total": 227.61,
-   "p_home_win_model": 0.5357,
+   "line_spread_home": -0.6,
+   "line_total": 229.21,
+   "p_home_win_model": 0.5135,
    "lean": "HOME CLE",
-   "lean_margin_points": 1.6,
+   "lean_margin_points": 0.6,
    "records_as_displayed": {
     "away": "7-5",
-    "home": "6-6",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "home": "6-7",
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 0.653,
-    "home": 1.713,
+    "away": 0.65,
+    "home": 0.741,
     "games_behind": {
      "away": 12,
-     "home": 12
+     "home": 13
     }
    },
    "neutral_site": false,
@@ -234,8 +236,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 100.15,
-    "pace_note": "DAL 100.5 / CLE 99.8 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 100.1,
+    "pace_note": "DAL 100.5 / CLE 99.7 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -244,29 +246,27 @@
      "away_b2b": false,
      "home_b2b": true,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "CLE"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": 1.06,
+     "raw_from_ratings": 0.09,
      "rest_adj": -2.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": 1.56,
+     "final": 0.59,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
      "away": {
       "side": "AWAY",
       "team": "DAL",
-      "listed_absent_or_questioned": 2,
+      "listed_absent_or_questioned": 6,
       "report_state": "SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
-      "rows_unsizeable": 2,
+      "rows_unsizeable": 6,
       "minute_share_vacated": 0.0,
       "margin_points_applied": null,
       "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
@@ -283,7 +283,7 @@
         "minute_share": null,
         "classification": "SEASON DATA NOT CAPTURED",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
        },
        {
         "player": "Christie, Max",
@@ -297,7 +297,63 @@
         "minute_share": null,
         "classification": "SEASON DATA NOT CAPTURED",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
+       },
+       {
+        "player": "de Larrea, Sergio",
+        "status": "Out",
+        "reason": "Injury/Illness - Right Knee Sprain",
+        "printed_whole_row": true,
+        "team_abbr": "DAL",
+        "team_gp": 12,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
+       },
+       {
+        "player": "Johnson Jr., Morez",
+        "status": "Probable",
+        "reason": "Injury/Illness - Left Shin / Tibia Contusion",
+        "printed_whole_row": true,
+        "team_abbr": "DAL",
+        "team_gp": 12,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
+       },
+       {
+        "player": "Lively II, Dereck",
+        "status": "Out",
+        "reason": "Injury/Illness - Right Foot Surgery",
+        "printed_whole_row": true,
+        "team_abbr": "DAL",
+        "team_gp": 12,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
+       },
+       {
+        "player": "Martin, Caleb",
+        "status": "Available",
+        "reason": "Injury/Illness - Right Thumb Splint",
+        "printed_whole_row": true,
+        "team_abbr": "DAL",
+        "team_gp": 12,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
        }
       ]
      },
@@ -341,25 +397,28 @@
    "source_url": "https://www.nba.com/games?date=2026-11-14",
    "tier": "REJECTED-DATA",
    "reasons": [
-    "R3 asymmetric availability: DET=SUBMITTED vs MIA=NOT YET SUBMITTED — one side's absences are known and the other's are not, which biases the adjustment instead of removing it"
+    "R3 asymmetric availability: DET=SUBMITTED vs MIA=NOT YET SUBMITTED — one side's absences are known and the other's are not, which biases the adjustment instead of removing it",
+    "R2 |margin -7.9| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)"
    ],
-   "line_spread_home": 9.1,
-   "line_total": 225.27,
-   "p_home_win_model": 0.3013,
+   "line_spread_home": 7.9,
+   "line_total": 226.82,
+   "p_home_win_model": 0.3246,
    "lean": "AWAY DET",
-   "lean_margin_points": 9.1,
+   "lean_margin_points": 7.9,
    "records_as_displayed": {
     "away": "8-3",
-    "home": "5-6",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "home": "6-6",
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 5.776,
-    "home": -3.69,
+    "away": 5.747,
+    "home": -2.598,
     "games_behind": {
      "away": 11,
-     "home": 11
+     "home": 12
     }
    },
    "neutral_site": false,
@@ -372,8 +431,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 100.98,
-    "pace_note": "DET 99.17 / MIA 102.8 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 100.81,
+    "pace_note": "DET 99.17 / MIA 102.44 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -382,29 +441,27 @@
      "away_b2b": false,
      "home_b2b": true,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "MIA"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": -9.56,
+     "raw_from_ratings": -8.41,
      "rest_adj": -2.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": -9.06,
+     "final": -7.91,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
      "away": {
       "side": "AWAY",
       "team": "DET",
-      "listed_absent_or_questioned": 1,
+      "listed_absent_or_questioned": 7,
       "report_state": "SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
-      "rows_unsizeable": 1,
+      "rows_unsizeable": 7,
       "minute_share_vacated": 0.0,
       "margin_points_applied": null,
       "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
@@ -421,7 +478,91 @@
         "minute_share": null,
         "classification": "SEASON DATA NOT CAPTURED",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
+       },
+       {
+        "player": "Harkless, Elijah",
+        "status": "Questionable",
+        "reason": "G League - Two-Way",
+        "printed_whole_row": true,
+        "team_abbr": "DET",
+        "team_gp": 11,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
+       },
+       {
+        "player": "Joe, Isaiah",
+        "status": "Out",
+        "reason": "Injury/Illness - Right Hip Contusion",
+        "printed_whole_row": true,
+        "team_abbr": "DET",
+        "team_gp": 11,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
+       },
+       {
+        "player": "Jones, Isaac",
+        "status": "Questionable",
+        "reason": "G League - Two-Way",
+        "printed_whole_row": true,
+        "team_abbr": "DET",
+        "team_gp": 11,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
+       },
+       {
+        "player": "Lanier, Chaz",
+        "status": "Out",
+        "reason": "G League - On Assignment",
+        "printed_whole_row": true,
+        "team_abbr": "DET",
+        "team_gp": 11,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
+       },
+       {
+        "player": "Okorie, Ebuka",
+        "status": "Out",
+        "reason": "G League - On Assignment",
+        "printed_whole_row": true,
+        "team_abbr": "DET",
+        "team_gp": 11,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
+       },
+       {
+        "player": "Onyenso, Ugonna",
+        "status": "Out",
+        "reason": "G League - Two-Way",
+        "printed_whole_row": true,
+        "team_abbr": "DET",
+        "team_gp": 11,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
        }
       ]
      },
@@ -467,23 +608,25 @@
    "reasons": [
     "R3 asymmetric availability: BKN=SUBMITTED vs MEM=NOT YET SUBMITTED — one side's absences are known and the other's are not, which biases the adjustment instead of removing it"
    ],
-   "line_spread_home": -9.3,
-   "line_total": 225.2,
-   "p_home_win_model": 0.7041,
+   "line_spread_home": -11.0,
+   "line_total": 226.49,
+   "p_home_win_model": 0.7369,
    "lean": "HOME MEM",
-   "lean_margin_points": 9.3,
+   "lean_margin_points": 11.0,
    "records_as_displayed": {
     "away": "3-8",
-    "home": "7-4",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "home": "8-4",
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": -4.172,
-    "home": 4.653,
+    "away": -4.151,
+    "home": 6.333,
     "games_behind": {
      "away": 11,
-     "home": 11
+     "home": 12
     }
    },
    "neutral_site": false,
@@ -496,8 +639,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 100.06,
-    "pace_note": "BKN 99.83 / MEM 100.28 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 100.35,
+    "pace_note": "BKN 99.83 / MEM 100.87 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -506,29 +649,27 @@
      "away_b2b": false,
      "home_b2b": true,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "MEM"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": 8.83,
+     "raw_from_ratings": 10.52,
      "rest_adj": -2.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": 9.33,
+     "final": 11.02,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
      "away": {
       "side": "AWAY",
       "team": "BKN",
-      "listed_absent_or_questioned": 6,
+      "listed_absent_or_questioned": 5,
       "report_state": "SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
-      "rows_unsizeable": 6,
+      "rows_unsizeable": 5,
       "minute_share_vacated": 0.0,
       "margin_points_applied": null,
       "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
@@ -545,7 +686,7 @@
         "minute_share": null,
         "classification": "SEASON DATA NOT CAPTURED",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
        },
        {
         "player": "Brown Jr., Mikel",
@@ -559,7 +700,7 @@
         "minute_share": null,
         "classification": "SEASON DATA NOT CAPTURED",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
        },
        {
         "player": "Jefferson, Joshua",
@@ -573,7 +714,7 @@
         "minute_share": null,
         "classification": "SEASON DATA NOT CAPTURED",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
        },
        {
         "player": "Nelson, Grant",
@@ -587,7 +728,7 @@
         "minute_share": null,
         "classification": "SEASON DATA NOT CAPTURED",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
        },
        {
         "player": "Saraf, Ben",
@@ -601,21 +742,7 @@
         "minute_share": null,
         "classification": "SEASON DATA NOT CAPTURED",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
-       },
-       {
-        "player": "Traore, Nolan",
-        "status": "Probable",
-        "reason": "Injury/Illness - Right Calf Tightness / Soreness",
-        "printed_whole_row": true,
-        "team_abbr": "BKN",
-        "team_gp": 11,
-        "player_gp": null,
-        "minutes_per_game": null,
-        "minute_share": null,
-        "classification": "SEASON DATA NOT CAPTURED",
-        "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
        }
       ]
      },
@@ -661,22 +788,24 @@
    "reasons": [
     "R3 asymmetric availability: CHI=NOT YET SUBMITTED vs MIN=SUBMITTED — one side's absences are known and the other's are not, which biases the adjustment instead of removing it"
    ],
-   "line_spread_home": -27.9,
-   "line_total": 233.36,
-   "p_home_win_model": 0.9453,
+   "line_spread_home": -26.2,
+   "line_total": 231.56,
+   "p_home_win_model": 0.934,
    "lean": "HOME MIN",
-   "lean_margin_points": 27.9,
+   "lean_margin_points": 26.2,
    "records_as_displayed": {
-    "away": "1-9",
+    "away": "2-9",
     "home": "9-3",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": -11.879,
-    "home": 10.93,
+    "away": -10.297,
+    "home": 10.879,
     "games_behind": {
-     "away": 10,
+     "away": 11,
      "home": 12
     }
    },
@@ -690,8 +819,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 102.41,
-    "pace_note": "CHI 103.75 / MIN 101.08 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 102.45,
+    "pace_note": "CHI 103.83 / MIN 101.08 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -700,18 +829,16 @@
      "away_b2b": true,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "CHI"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": 23.36,
+     "raw_from_ratings": 21.7,
      "rest_adj": 2.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": 27.86,
+     "final": 26.2,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -752,7 +879,7 @@
         "minute_share": null,
         "classification": "SEASON DATA NOT CAPTURED",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
        },
        {
         "player": "DiVincenzo, Donte",
@@ -766,7 +893,7 @@
         "minute_share": null,
         "classification": "SEASON DATA NOT CAPTURED",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf"
        },
        {
         "player": "Edwards, Anthony",
@@ -780,7 +907,7 @@
         "minute_share": null,
         "classification": "ALREADY_IN_SAMPLE (4 of 12 games played)",
         "moves_the_line": false,
-        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf",
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_05_00AM.pdf",
         "season_source_url": "https://www.nba.com/stats/players/traditional"
        }
       ]
@@ -812,25 +939,27 @@
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin +5.3| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
-    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear"
+    "R2 |margin +5.0| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
+    "R3 the 2026-11-15 edition exists but neither side has filed (both: NOT YET SUBMITTED); availability is unknown, not clear"
    ],
-   "line_spread_home": -5.3,
-   "line_total": 220.49,
-   "p_home_win_model": 0.6199,
+   "line_spread_home": -5.0,
+   "line_total": 219.39,
+   "p_home_win_model": 0.6129,
    "lean": "HOME PHI",
-   "lean_margin_points": 5.3,
+   "lean_margin_points": 5.0,
    "records_as_displayed": {
-    "away": "4-8",
+    "away": "5-8",
     "home": "10-3",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": -1.55,
-    "home": 1.241,
+    "away": -1.236,
+    "home": 1.236,
     "games_behind": {
-     "away": 12,
+     "away": 13,
      "home": 13
     }
    },
@@ -845,7 +974,7 @@
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
     "projected_possessions": 100.59,
-    "pace_note": "IND 101.13 / PHI 100.04 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "pace_note": "IND 101.15 / PHI 100.04 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -854,18 +983,16 @@
      "away_b2b": false,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "IND"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": 2.81,
+     "raw_from_ratings": 2.49,
      "rest_adj": 0.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": 5.31,
+     "final": 4.99,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -873,7 +1000,7 @@
       "side": "AWAY",
       "team": "IND",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -886,7 +1013,7 @@
       "side": "HOME",
       "team": "PHI",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -922,23 +1049,25 @@
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin -7.1| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
-    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear"
+    "R2 |margin -7.1| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
+    "R3 the 2026-11-15 edition exists but neither side has filed (both: NOT YET SUBMITTED); availability is unknown, not clear"
    ],
    "line_spread_home": 7.1,
-   "line_total": 236.82,
-   "p_home_win_model": 0.3412,
+   "line_total": 236.72,
+   "p_home_win_model": 0.3422,
    "lean": "AWAY LAL",
    "lean_margin_points": 7.1,
    "records_as_displayed": {
     "away": "11-2",
     "home": "5-6",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 6.619,
-    "home": -3.049,
+    "away": 6.59,
+    "home": -3.033,
     "games_behind": {
      "away": 13,
      "home": 11
@@ -955,7 +1084,7 @@
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
     "projected_possessions": 99.47,
-    "pace_note": "LAL 100.5 / PHX 98.45 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "pace_note": "LAL 100.5 / PHX 98.45 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -964,16 +1093,16 @@
      "away_b2b": false,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
      "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": -9.62,
+     "raw_from_ratings": -9.57,
      "rest_adj": 0.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": -7.12,
+     "final": -7.07,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -981,7 +1110,7 @@
       "side": "AWAY",
       "team": "LAL",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -994,7 +1123,7 @@
       "side": "HOME",
       "team": "PHX",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1030,26 +1159,28 @@
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin +7.0| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
-    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear"
+    "R2 |margin +7.5| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
+    "R3 the 2026-11-15 edition exists but neither side has filed (both: NOT YET SUBMITTED); availability is unknown, not clear"
    ],
-   "line_spread_home": -7.0,
-   "line_total": 214.51,
-   "p_home_win_model": 0.6567,
+   "line_spread_home": -7.5,
+   "line_total": 214.63,
+   "p_home_win_model": 0.666,
    "lean": "HOME LAC",
-   "lean_margin_points": 7.0,
+   "lean_margin_points": 7.5,
    "records_as_displayed": {
     "away": "4-8",
-    "home": "2-8",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "home": "3-8",
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": -9.136,
-    "home": -4.563,
+    "away": -9.093,
+    "home": -4.071,
     "games_behind": {
      "away": 12,
-     "home": 10
+     "home": 11
     }
    },
    "neutral_site": false,
@@ -1062,8 +1193,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 98.94,
-    "pace_note": "CHA 96.92 / LAC 100.95 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 98.73,
+    "pace_note": "CHA 96.92 / LAC 100.55 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -1072,18 +1203,16 @@
      "away_b2b": false,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "LAC"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": 4.52,
+     "raw_from_ratings": 4.96,
      "rest_adj": 0.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": 7.02,
+     "final": 7.46,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -1091,7 +1220,7 @@
       "side": "AWAY",
       "team": "CHA",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1104,7 +1233,7 @@
       "side": "HOME",
       "team": "LAC",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1140,25 +1269,27 @@
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "tier": "PROVISIONAL",
    "reasons": [
-    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear"
+    "R3 the 2026-11-15 edition exists but neither side has filed (both: NOT YET SUBMITTED); availability is unknown, not clear"
    ],
-   "line_spread_home": 15.9,
-   "line_total": 221.57,
-   "p_home_win_model": 0.1803,
+   "line_spread_home": 17.5,
+   "line_total": 221.83,
+   "p_home_win_model": 0.1577,
    "lean": "AWAY SAS",
-   "lean_margin_points": 15.9,
+   "lean_margin_points": 17.5,
    "records_as_displayed": {
-    "away": "10-2",
-    "home": "1-11",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "away": "11-2",
+    "home": "1-12",
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 8.973,
-    "home": -9.462,
+    "away": 10.709,
+    "home": -9.309,
     "games_behind": {
-     "away": 12,
-     "home": 12
+     "away": 13,
+     "home": 13
     }
    },
    "neutral_site": false,
@@ -1171,8 +1302,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 99.86,
-    "pace_note": "SAS 98.97 / UTA 100.75 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 99.72,
+    "pace_note": "SAS 98.94 / UTA 100.5 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -1181,19 +1312,16 @@
      "away_b2b": false,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "SAS",
-      "UTA"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": -18.41,
+     "raw_from_ratings": -19.96,
      "rest_adj": 0.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": -15.91,
+     "final": -17.46,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -1201,7 +1329,7 @@
       "side": "AWAY",
       "team": "SAS",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1214,7 +1342,7 @@
       "side": "HOME",
       "team": "UTA",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1250,22 +1378,24 @@
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "tier": "PROVISIONAL",
    "reasons": [
-    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear"
+    "R3 the 2026-11-15 edition exists but neither side has filed (both: NOT YET SUBMITTED); availability is unknown, not clear"
    ],
-   "line_spread_home": -13.3,
-   "line_total": 219.01,
-   "p_home_win_model": 0.777,
+   "line_spread_home": -13.2,
+   "line_total": 218.98,
+   "p_home_win_model": 0.7764,
    "lean": "HOME BOS",
-   "lean_margin_points": 13.3,
+   "lean_margin_points": 13.2,
    "records_as_displayed": {
     "away": "7-5",
     "home": "10-2",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 0.653,
-    "home": 9.544,
+    "away": 0.65,
+    "home": 9.499,
     "games_behind": {
      "away": 12,
      "home": 12
@@ -1282,7 +1412,7 @@
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
     "projected_possessions": 98.56,
-    "pace_note": "DAL 100.5 / BOS 96.62 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "pace_note": "DAL 100.5 / BOS 96.62 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -1291,16 +1421,16 @@
      "away_b2b": true,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
      "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": 8.76,
+     "raw_from_ratings": 8.72,
      "rest_adj": 2.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": 13.26,
+     "final": 13.22,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -1308,7 +1438,7 @@
       "side": "AWAY",
       "team": "DAL",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1321,7 +1451,7 @@
       "side": "HOME",
       "team": "BOS",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1357,25 +1487,27 @@
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin -1.4| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
-    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear"
+    "R2 |margin -0.8| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
+    "R3 the 2026-11-15 edition exists but neither side has filed (both: NOT YET SUBMITTED); availability is unknown, not clear"
    ],
-   "line_spread_home": 1.4,
-   "line_total": 220.45,
-   "p_home_win_model": 0.4682,
+   "line_spread_home": 0.8,
+   "line_total": 219.73,
+   "p_home_win_model": 0.481,
    "lean": "AWAY NYK",
-   "lean_margin_points": 1.4,
+   "lean_margin_points": 0.8,
    "records_as_displayed": {
-    "away": "6-5",
+    "away": "6-6",
     "home": "5-7",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 5.375,
-    "home": 1.387,
+    "away": 4.79,
+    "home": 1.38,
     "games_behind": {
-     "away": 11,
+     "away": 12,
      "home": 12
     }
    },
@@ -1389,8 +1521,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 97.48,
-    "pace_note": "NYK 95.09 / TOR 99.88 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 97.75,
+    "pace_note": "NYK 95.63 / TOR 99.88 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -1399,18 +1531,16 @@
      "away_b2b": false,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "NYK"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": -3.89,
+     "raw_from_ratings": -3.33,
      "rest_adj": 0.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": -1.39,
+     "final": -0.83,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -1418,7 +1548,7 @@
       "side": "AWAY",
       "team": "NYK",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1431,7 +1561,7 @@
       "side": "HOME",
       "team": "TOR",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1467,24 +1597,26 @@
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "tier": "PROVISIONAL",
    "reasons": [
-    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear"
+    "R3 the 2026-11-15 edition exists but neither side has filed (both: NOT YET SUBMITTED); availability is unknown, not clear"
    ],
-   "line_spread_home": 9.4,
-   "line_total": 221.79,
-   "p_home_win_model": 0.2949,
+   "line_spread_home": 9.3,
+   "line_total": 223.15,
+   "p_home_win_model": 0.2954,
    "lean": "AWAY HOU",
-   "lean_margin_points": 9.4,
+   "lean_margin_points": 9.3,
    "records_as_displayed": {
-    "away": "9-3",
+    "away": "10-3",
     "home": "4-9",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 7.504,
-    "home": -4.551,
+    "away": 7.497,
+    "home": -4.531,
     "games_behind": {
-     "away": 12,
+     "away": 13,
      "home": 13
     }
    },
@@ -1499,7 +1631,7 @@
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
     "projected_possessions": 98.53,
-    "pace_note": "HOU 97.42 / WAS 99.63 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "pace_note": "HOU 97.42 / WAS 99.63 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -1508,18 +1640,16 @@
      "away_b2b": false,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "HOU"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": -11.88,
+     "raw_from_ratings": -11.85,
      "rest_adj": 0.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": -9.38,
+     "final": -9.35,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -1527,7 +1657,7 @@
       "side": "AWAY",
       "team": "HOU",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1540,7 +1670,7 @@
       "side": "HOME",
       "team": "WAS",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1576,25 +1706,27 @@
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "tier": "PROVISIONAL",
    "reasons": [
-    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear"
+    "R3 the 2026-11-15 edition exists but neither side has filed (both: NOT YET SUBMITTED); availability is unknown, not clear"
    ],
-   "line_spread_home": 11.3,
-   "line_total": 231.76,
-   "p_home_win_model": 0.2578,
+   "line_spread_home": 10.6,
+   "line_total": 229.52,
+   "p_home_win_model": 0.2711,
    "lean": "AWAY ATL",
-   "lean_margin_points": 11.3,
+   "lean_margin_points": 10.6,
    "records_as_displayed": {
-    "away": "7-5",
-    "home": "1-11",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "away": "7-6",
+    "home": "1-12",
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 1.713,
-    "home": -11.828,
+    "away": 1.153,
+    "home": -11.698,
     "games_behind": {
-     "away": 12,
-     "home": 12
+     "away": 13,
+     "home": 13
     }
    },
    "neutral_site": false,
@@ -1607,8 +1739,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 101.98,
-    "pace_note": "ATL 103.46 / MIL 100.5 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 101.93,
+    "pace_note": "ATL 103.55 / MIL 100.31 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -1617,19 +1749,16 @@
      "away_b2b": false,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "ATL",
-      "MIL"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": -13.81,
+     "raw_from_ratings": -13.1,
      "rest_adj": 0.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": -11.31,
+     "final": -10.6,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -1637,7 +1766,7 @@
       "side": "AWAY",
       "team": "ATL",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1650,7 +1779,7 @@
       "side": "HOME",
       "team": "MIL",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1686,25 +1815,27 @@
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "tier": "PROVISIONAL",
    "reasons": [
-    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear"
+    "R3 the 2026-11-15 edition exists but neither side has filed (both: NOT YET SUBMITTED); availability is unknown, not clear"
    ],
-   "line_spread_home": 10.6,
-   "line_total": 222.26,
-   "p_home_win_model": 0.2706,
+   "line_spread_home": 10.4,
+   "line_total": 222.72,
+   "p_home_win_model": 0.2743,
    "lean": "AWAY OKC",
-   "lean_margin_points": 10.6,
+   "lean_margin_points": 10.4,
    "records_as_displayed": {
-    "away": "8-4",
-    "home": "1-10",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "away": "8-5",
+    "home": "1-11",
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 3.426,
-    "home": -9.707,
+    "away": 3.048,
+    "home": -9.905,
     "games_behind": {
-     "away": 12,
-     "home": 11
+     "away": 13,
+     "home": 12
     }
    },
    "neutral_site": false,
@@ -1717,8 +1848,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 99.99,
-    "pace_note": "OKC 98.75 / SAC 101.23 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 99.79,
+    "pace_note": "OKC 98.58 / SAC 101.0 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -1727,19 +1858,16 @@
      "away_b2b": false,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "OKC",
-      "SAC"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": -13.13,
+     "raw_from_ratings": -12.93,
      "rest_adj": 0.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": -10.63,
+     "final": -10.43,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -1747,7 +1875,7 @@
       "side": "AWAY",
       "team": "OKC",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1760,7 +1888,7 @@
       "side": "HOME",
       "team": "SAC",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "NOT YET SUBMITTED",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1798,22 +1926,24 @@
    "reasons": [
     "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear"
    ],
-   "line_spread_home": -13.7,
-   "line_total": 216.61,
-   "p_home_win_model": 0.7846,
+   "line_spread_home": -12.7,
+   "line_total": 215.59,
+   "p_home_win_model": 0.767,
    "lean": "HOME BOS",
-   "lean_margin_points": 13.7,
+   "lean_margin_points": 12.7,
    "records_as_displayed": {
-    "away": "4-7",
+    "away": "5-7",
     "home": "10-2",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": -4.011,
-    "home": 9.544,
+    "away": -3.004,
+    "home": 9.499,
     "games_behind": {
-     "away": 11,
+     "away": 12,
      "home": 12
     }
    },
@@ -1827,8 +1957,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 97.44,
-    "pace_note": "ORL 98.25 / BOS 96.62 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 97.43,
+    "pace_note": "ORL 98.23 / BOS 96.62 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -1837,18 +1967,16 @@
      "away_b2b": false,
      "home_b2b": true,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "ORL"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": 13.21,
+     "raw_from_ratings": 12.18,
      "rest_adj": -2.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": 13.71,
+     "final": 12.68,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -1856,7 +1984,7 @@
       "side": "AWAY",
       "team": "ORL",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1869,7 +1997,7 @@
       "side": "HOME",
       "team": "BOS",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1907,23 +2035,25 @@
    "reasons": [
     "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear"
    ],
-   "line_spread_home": -16.3,
-   "line_total": 238.71,
-   "p_home_win_model": 0.826,
+   "line_spread_home": -13.7,
+   "line_total": 238.57,
+   "p_home_win_model": 0.7851,
    "lean": "HOME CLE",
-   "lean_margin_points": 16.3,
+   "lean_margin_points": 13.7,
    "records_as_displayed": {
-    "away": "1-9",
-    "home": "6-6",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "away": "2-9",
+    "home": "6-7",
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": -11.879,
-    "home": 1.713,
+    "away": -10.297,
+    "home": 0.741,
     "games_behind": {
-     "away": 10,
-     "home": 12
+     "away": 11,
+     "home": 13
     }
    },
    "neutral_site": false,
@@ -1936,8 +2066,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 101.78,
-    "pace_note": "CHI 103.75 / CLE 99.8 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 101.77,
+    "pace_note": "CHI 103.83 / CLE 99.7 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -1946,19 +2076,16 @@
      "away_b2b": false,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "CHI",
-      "CLE"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": 13.83,
+     "raw_from_ratings": 11.23,
      "rest_adj": 0.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": 16.33,
+     "final": 13.73,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -1966,7 +2093,7 @@
       "side": "AWAY",
       "team": "CHI",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -1979,7 +2106,7 @@
       "side": "HOME",
       "team": "CLE",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -2017,22 +2144,24 @@
    "reasons": [
     "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear"
    ],
-   "line_spread_home": 8.7,
-   "line_total": 224.34,
-   "p_home_win_model": 0.3085,
+   "line_spread_home": 10.4,
+   "line_total": 225.63,
+   "p_home_win_model": 0.2751,
    "lean": "AWAY MEM",
-   "lean_margin_points": 8.7,
+   "lean_margin_points": 10.4,
    "records_as_displayed": {
-    "away": "7-4",
+    "away": "8-4",
     "home": "4-9",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 4.653,
-    "home": -4.551,
+    "away": 6.333,
+    "home": -4.531,
     "games_behind": {
-     "away": 11,
+     "away": 12,
      "home": 13
     }
    },
@@ -2046,8 +2175,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 99.95,
-    "pace_note": "MEM 100.28 / WAS 99.63 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 100.25,
+    "pace_note": "MEM 100.87 / WAS 99.63 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -2056,18 +2185,16 @@
      "away_b2b": false,
      "home_b2b": true,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "MEM"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": -9.2,
+     "raw_from_ratings": -10.89,
      "rest_adj": -2.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": -8.7,
+     "final": -10.39,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -2075,7 +2202,7 @@
       "side": "AWAY",
       "team": "MEM",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -2088,7 +2215,7 @@
       "side": "HOME",
       "team": "WAS",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -2124,23 +2251,25 @@
    "source_url": "https://www.nba.com/games?date=2026-11-16",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin -0.9| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R2 |margin -0.9| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
     "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear"
    ],
    "line_spread_home": 0.9,
-   "line_total": 219.58,
-   "p_home_win_model": 0.4791,
+   "line_total": 219.57,
+   "p_home_win_model": 0.4798,
    "lean": "AWAY PHI",
    "lean_margin_points": 0.9,
    "records_as_displayed": {
     "away": "10-3",
     "home": "3-8",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 1.241,
-    "home": -4.172,
+    "away": 1.236,
+    "home": -4.151,
     "games_behind": {
      "away": 13,
      "home": 11
@@ -2157,7 +2286,7 @@
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
     "projected_possessions": 99.94,
-    "pace_note": "PHI 100.04 / BKN 99.83 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "pace_note": "PHI 100.04 / BKN 99.83 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -2166,16 +2295,16 @@
      "away_b2b": true,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
      "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": -5.41,
+     "raw_from_ratings": -5.38,
      "rest_adj": 2.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": -0.91,
+     "final": -0.88,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -2183,7 +2312,7 @@
       "side": "AWAY",
       "team": "PHI",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -2196,7 +2325,7 @@
       "side": "HOME",
       "team": "BKN",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -2232,26 +2361,28 @@
    "source_url": "https://www.nba.com/games?date=2026-11-16",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin -6.7| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R2 |margin -5.6| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
     "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear"
    ],
-   "line_spread_home": 6.7,
-   "line_total": 228.8,
-   "p_home_win_model": 0.3499,
+   "line_spread_home": 5.6,
+   "line_total": 231.72,
+   "p_home_win_model": 0.3739,
    "lean": "AWAY HOU",
-   "lean_margin_points": 6.7,
+   "lean_margin_points": 5.6,
    "records_as_displayed": {
-    "away": "9-3",
-    "home": "5-6",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "away": "10-3",
+    "home": "6-6",
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 7.504,
-    "home": -3.69,
+    "away": 7.497,
+    "home": -2.598,
     "games_behind": {
-     "away": 12,
-     "home": 11
+     "away": 13,
+     "home": 12
     }
    },
    "neutral_site": false,
@@ -2264,8 +2395,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 100.11,
-    "pace_note": "HOU 97.42 / MIA 102.8 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 99.93,
+    "pace_note": "HOU 97.42 / MIA 102.44 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -2274,19 +2405,16 @@
      "away_b2b": true,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "HOU",
-      "MIA"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": -11.21,
+     "raw_from_ratings": -10.09,
      "rest_adj": 2.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": -6.71,
+     "final": -5.59,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -2294,7 +2422,7 @@
       "side": "AWAY",
       "team": "HOU",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -2307,7 +2435,7 @@
       "side": "HOME",
       "team": "MIA",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -2343,25 +2471,27 @@
    "source_url": "https://www.nba.com/games?date=2026-11-16",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin +7.8| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R2 |margin +7.2| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
     "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear"
    ],
-   "line_spread_home": -7.8,
-   "line_total": 227.35,
-   "p_home_win_model": 0.6726,
+   "line_spread_home": -7.2,
+   "line_total": 227.16,
+   "p_home_win_model": 0.6599,
    "lean": "HOME MIN",
-   "lean_margin_points": 7.8,
+   "lean_margin_points": 7.2,
    "records_as_displayed": {
-    "away": "8-3",
+    "away": "9-3",
     "home": "9-3",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 5.696,
-    "home": 10.93,
+    "away": 6.251,
+    "home": 10.879,
     "games_behind": {
-     "away": 11,
+     "away": 12,
      "home": 12
     }
    },
@@ -2375,8 +2505,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 100.97,
-    "pace_note": "POR 100.86 / MIN 101.08 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 100.88,
+    "pace_note": "POR 100.67 / MIN 101.08 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -2385,18 +2515,16 @@
      "away_b2b": false,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "POR"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": 5.28,
+     "raw_from_ratings": 4.67,
      "rest_adj": 0.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": 7.78,
+     "final": 7.17,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -2404,7 +2532,7 @@
       "side": "AWAY",
       "team": "POR",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -2417,7 +2545,7 @@
       "side": "HOME",
       "team": "MIN",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -2451,27 +2579,30 @@
    "game_id": "0022600251",
    "game_url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
    "source_url": "https://www.nba.com/games?date=2026-11-16",
-   "tier": "PROVISIONAL",
+   "tier": "LEAN-ONLY",
    "reasons": [
+    "R2 |margin -8.2| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
     "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear"
    ],
-   "line_spread_home": 9.5,
-   "line_total": 234.77,
-   "p_home_win_model": 0.2927,
+   "line_spread_home": 8.2,
+   "line_total": 234.45,
+   "p_home_win_model": 0.3182,
    "lean": "AWAY GSW",
-   "lean_margin_points": 9.5,
+   "lean_margin_points": 8.2,
    "records_as_displayed": {
-    "away": "8-4",
-    "home": "4-8",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "away": "8-5",
+    "home": "4-9",
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": 6.118,
-    "home": -5.791,
+    "away": 3.378,
+    "home": -7.249,
     "games_behind": {
-     "away": 12,
-     "home": 12
+     "away": 13,
+     "home": 13
     }
    },
    "neutral_site": false,
@@ -2484,8 +2615,8 @@
    "hold": null,
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
-    "projected_possessions": 100.7,
-    "pace_note": "GSW 99.76 / NOP 101.64 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "projected_possessions": 100.87,
+    "pace_note": "GSW 99.66 / NOP 102.08 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -2494,19 +2625,16 @@
      "away_b2b": false,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
-     "teams_affected": [
-      "GSW",
-      "NOP"
-     ]
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
+     "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": -11.99,
+     "raw_from_ratings": -10.72,
      "rest_adj": 0.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": -9.49,
+     "final": -8.22,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -2514,7 +2642,7 @@
       "side": "AWAY",
       "team": "GSW",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -2527,7 +2655,7 @@
       "side": "HOME",
       "team": "NOP",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -2563,23 +2691,25 @@
    "source_url": "https://www.nba.com/games?date=2026-11-16",
    "tier": "LEAN-ONLY",
    "reasons": [
-    "R2 |margin +8.0| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R2 |margin +8.0| is inside the ±8.7 point cut (half of the measured σ_margin 17.392)",
     "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear"
    ],
    "line_spread_home": -8.0,
-   "line_total": 229.73,
-   "p_home_win_model": 0.6778,
+   "line_total": 229.64,
+   "p_home_win_model": 0.6775,
    "lean": "HOME DEN",
    "lean_margin_points": 8.0,
    "records_as_displayed": {
     "away": "5-6",
     "home": "6-4",
-    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+    "caveat": "copied from the schedule card as re-read 2026-11-14 09:50Z, after the 11/13 finals — current (IR-05 closed for this desk)",
+    "source_url": "https://www.nba.com/schedule",
+    "read_at_utc": "2026-11-14T09:50Z"
    },
-   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_window": "2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z",
    "ratings_shrunk_net": {
-    "away": -3.049,
-    "home": 0.551,
+    "away": -3.033,
+    "home": 0.548,
     "games_behind": {
      "away": 11,
      "home": 10
@@ -2596,7 +2726,7 @@
    "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
    "game_flow": {
     "projected_possessions": 98.02,
-    "pace_note": "PHX 98.45 / DEN 97.58 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "pace_note": "PHX 98.45 / DEN 97.58 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-13 (Regular Season, Date To 11/13/2026) as displayed 2026-11-14T10:40Z window",
     "first_half_share": null,
     "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
     "rest": {
@@ -2605,16 +2735,16 @@
      "away_b2b": true,
      "home_b2b": false,
      "note": "both teams' previous games are inside the window",
-     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
-     "provisional_prior_date": "2026-11-13",
+     "caveat": "every prior date inside the window is confirmed FINAL, so no back-to-back flag on this row is provisional",
+     "provisional_prior_date": null,
      "teams_affected": null
     },
     "margin_path": {
-     "raw_from_ratings": 3.53,
+     "raw_from_ratings": 3.51,
      "rest_adj": 2.0,
      "availability_adj": 0.0,
      "hca_points": 2.5,
-     "final": 8.03,
+     "final": 8.01,
      "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
     },
     "availability": {
@@ -2622,7 +2752,7 @@
       "side": "AWAY",
       "team": "PHX",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -2635,7 +2765,7 @@
       "side": "HOME",
       "team": "DEN",
       "listed_absent_or_questioned": 0,
-      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "report_state": "no edition covers this date yet",
       "rows_with_season_minutes_in_repo": 0,
       "rows_sized_by_the_model": 0,
       "rows_unsizeable": 0,
@@ -2664,6 +2794,6 @@
   }
  ],
  "headline": "22 games priced, 0 pass every selection rule. The rule, not the model, is what is holding the desk back: on 11/14 the official report had one side filed and the other NOT YET SUBMITTED in all five games.",
- "neutral_site_note": "R4 is inert on this slate because the capture has no venue column. The one neutral site in the backtest window (Indiana–Denver, Mexico City, 11/07) was zeroed there. Blank here, not assumed safe.",
+ "neutral_site_note": "R4 runs against the independent venue capture (data/raw/official_schedule_capture_2026-11-14.json): every 11/14–16 game matched a US-city home building, so none is vetoed. The one neutral site in the graded window (Indiana–Denver, Mexico City, 11/07) was zeroed there. Blank here would mean no match — not assumed safe.",
  "not_a_bet": "Every row is a paper lean against our own number: no price, no hold, no stake, no expectation of profit, and none of it clears the validation gates."
 }

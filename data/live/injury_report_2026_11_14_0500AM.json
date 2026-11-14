@@ -441,20 +441,6 @@
    "date": "2026-11-14",
    "time_et": null,
    "matchup": "CHI@MIN",
-   "team_printed": "Chicago Bulls",
-   "team_abbr": "CHI",
-   "printed_team": true,
-   "player": "",
-   "status": "",
-   "reason": "NOT YET SUBMITTED",
-   "date_printed": false,
-   "time_printed": false,
-   "matchup_printed": true
-  },
-  {
-   "date": "2026-11-14",
-   "time_et": null,
-   "matchup": "CHI@MIN",
    "team_printed": "Minnesota Timberwolves",
    "team_abbr": "MIN",
    "printed_team": true,
@@ -593,12 +579,13 @@
   }
  ],
  "coverage_audit": {
-  "player_rows_for_2026_11_14": 27,
+  "player_rows_for_2026_11_14": 26,
   "rows_where_team_cell_dropped_by_pagination": 1,
   "teams_submitted_1114": 5,
   "teams_not_yet_submitted_1114": 5,
   "teams_with_rows_1115": 0,
   "attribution_resolved_vs_0800pm_edition": "Okorie, Ebuka and Onyenso, Ugonna — unattributed in the 11/13 08:00 PM edition (D-03) — now print under Detroit Pistons in this edition and are attributed on that basis alone.",
-  "attribution_conflict_carried_forward": "Martin, Caleb printed under different clubs across the 11/13 12:00/05:15/08:00 PM editions (D-04). This edition prints Dallas Mavericks explicitly; the row is transcribed as printed and flagged here rather than silently trusted."
+  "attribution_conflict_carried_forward": "Martin, Caleb printed under different clubs across the 11/13 12:00/05:15/08:00 PM editions (D-04). This edition prints Dallas Mavericks explicitly; the row is transcribed as printed and flagged here rather than silently trusted.",
+  "nys_rows_kept_only_in_submission_state": 1
  }
 }
