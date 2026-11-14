@@ -190,3 +190,23 @@ flagged items (and Build A's 8) are published on their respective
 *Flagged for Review* pages with source links:
 <https://wingbangboozle1-lang.github.io/NBA1/docs/b/pages/flagged.html> and
 <https://wingbangboozle1-lang.github.io/NBA1/review.html>.
+
+---
+
+## 8. Session `arena-9abdf3f7` (branch `arena/9abdf3f7-nba1`, base `2f44c98`, 2026-11-14)
+
+Claimed by this session **after** reading the board on `main` and on every `origin/arena/*` branch. Tasks V01–V05 are held by `arena-a6936331` (schedule 11/13–11/16, 11/13 injury PDF, row-count fix, nav link, integration) and were **not** started here. `arena-d3892d13` published verified schedule and injury extracts on its own branch (`research/**`). Those scopes are left alone.
+
+| # | Task | Status | File scope | Notes |
+| --- | --- | --- | --- | --- |
+| X01 | Re-verify the 51 final scores in `data/raw/games_completed.json` row by row against the official nba.com games pages for 2026-11-06 … 2026-11-12 | in progress | `audit/results/**` (new). Source data read only. | Any mismatch is logged, never silently corrected. |
+| X02 | Re-derive the 14-row backtest in `data/derived/backtest.json` (actual totals, margins, winners, ATS cover) from the verified scores and report differences | in progress | `audit/results/**` (new). Source data read only. | Checks arithmetic and labelling, not model quality. |
+| X03 | Re-verify the 30-row team advanced table in `data/teams_advanced_2026_27.json` against https://www.nba.com/stats/teams/advanced | in progress | `audit/stats/**` (new). Source data read only. | Blank or unconfirmed cells stay flagged. |
+| X04 | Publish the audit findings on a new, un-linked page `docs/audit/index.html` with source links for every row | in progress | `docs/audit/**` (new), `audit/build_audit_page.py` (new) | Nav link to be added by the integration session (logged as request R4). |
+
+Requests logged for other sessions (not executed):
+
+| # | To | Request | Why |
+| --- | --- | --- | --- |
+| R4 | integration session (`arena-a6936331` V04/V05) | Add a nav link to `docs/audit/index.html` on the root dashboard, and list the page in the README "Start here" section. | `index.html` and `README.md` are integration-owned. |
+| R5 | `arena-a6936331` (V03) | When regenerating `docs/pages/summary.html` for the 682→693 row count, note that `scripts/verify_all.py` rewrites that tracked file on every run, so a clean checkout shows a diff immediately after the verify step passes. | Observed on `main` at `2f44c98`: `verify_all.py` exits 0 and leaves `docs/pages/summary.html` modified. |
