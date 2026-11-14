@@ -1,0 +1,116 @@
+{
+ "title": "Live capture — 2026-11-14 desk refresh",
+ "captured_by_session": "arena/2edb85af-nba1",
+ "captured_at_utc": "2026-11-14T00:37Z to 2026-11-14T01:05Z",
+ "captured_at_et": "2026-11-13 20:37 to 20:55 (ET). NBA league day is still Friday 13 November; the Nov 13 slate was in progress at capture (see results_2026_11_13_in_progress.json).",
+ "method": "Each file in this directory is a transcription of one official NBA property page or league PDF, fetched through the agent's page reader. The sandbox itself has no general outbound network (curl to nba.com returns 000), so every figure below carries the URL it was read from and the minute it was read.",
+ "allowed_official_hosts": [
+  "www.nba.com",
+  "official.nba.com",
+  "ak-static.cms.nba.com"
+ ],
+ "sources": [
+  {
+   "id": "L1",
+   "what": "NBA.com Games & Scores, slate of 2026-11-14 (also used for the Nov 13, Nov 15 and Nov 16 slates and for the month calendar of game counts)",
+   "url": "https://www.nba.com/games?date=2026-11-14",
+   "read_at_utc": "2026-11-14T00:37Z"
+  },
+  {
+   "id": "L2",
+   "what": "NBA.com Games & Scores, slate of 2026-11-15",
+   "url": "https://www.nba.com/games?date=2026-11-15",
+   "read_at_utc": "2026-11-14T00:44Z"
+  },
+  {
+   "id": "L3",
+   "what": "NBA.com Games & Scores, slate of 2026-11-16",
+   "url": "https://www.nba.com/games?date=2026-11-16",
+   "read_at_utc": "2026-11-14T00:41Z"
+  },
+  {
+   "id": "L4",
+   "what": "NBA.com Stats, Teams Advanced, 2026-27 Regular Season (all 30 rows)",
+   "url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "read_at_utc": "2026-11-14T00:40Z"
+  },
+  {
+   "id": "L5",
+   "what": "Official NBA Injury Report, games of 11/13 and 11/14, 07:30 PM ET edition (league PDF)",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf",
+   "read_at_utc": "2026-11-14T00:40Z"
+  },
+  {
+   "id": "L6",
+   "what": "Official NBA injury-report hub (report index + submission rules)",
+   "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "read_at_utc": "2026-11-14T00:39Z",
+   "note": "At read time the newest published edition was 'November 13: 7:30 p.m ET report'. No 11/14 game-day edition existed yet."
+  },
+  {
+   "id": "L7",
+   "what": "NBA.com box score page for game 0022600230 (CHA@PHX, 11/12) — used to spot-check the archived final scores the backtest is built on",
+   "url": "https://www.nba.com/game/cha-vs-phx-0022600230/box-score",
+   "read_at_utc": "2026-11-14T00:47Z"
+  },
+  {
+   "id": "L8",
+   "what": "NBA.com live scoreboard for the 11/13 slate (in-progress scores at capture)",
+   "url": "https://www.nba.com/game/bkn-vs-phi-0022600230/box-score",
+   "read_at_utc": "2026-11-14T00:47Z"
+  },
+  {
+   "id": "L9",
+   "what": "NBA.com Stats, Teams Advanced, date-filtered to the FIT window 10/20/2026–11/05/2026 (30 rows) — the ratings behind every graded prediction",
+   "url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season&DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026",
+   "read_at_utc": "2026-11-14T00:42Z",
+   "note": "Establishes that an official point-in-time window is obtainable, which is what makes a clean out-of-sample test possible. The earlier 14-game backtest in scripts/backtest.py is contaminated precisely because nobody had checked this."
+  },
+  {
+   "id": "L10",
+   "what": "NBA.com player game log — Nikola Jokić (profile + 'Last 5 Games')",
+   "url": "https://www.nba.com/player/203999/nikola-joki-c/game-log",
+   "read_at_utc": "2026-11-14T00:58Z"
+  },
+  {
+   "id": "L11",
+   "what": "NBA.com player game log — LaMelo Ball (profile + 'Last 5 Games')",
+   "url": "https://www.nba.com/player/1630163/lamelo-ball/game-log",
+   "read_at_utc": "2026-11-14T00:56Z"
+  },
+  {
+   "id": "L12",
+   "what": "NBA.com player game log — Giannis Antetokounmpo (profile + 'Last 5 Games')",
+   "url": "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+   "read_at_utc": "2026-11-14T01:02Z",
+   "url_verification": "copied verbatim from data/live/player_game_logs.json, which is the record of the page that was actually read. The numeric player id in an NBA.com URL is not derived or corrected here: if it differs from another source, both are printed and neither is silently fixed."
+  },
+  {
+   "id": "L13",
+   "what": "NBA.com Games & Scores, slate of 2026-11-12 — the four finals the backtest's last day rests on",
+   "url": "https://www.nba.com/games?date=2026-11-12",
+   "read_at_utc": "2026-11-14T00:45Z"
+  },
+  {
+   "id": "L14",
+   "what": "NBA.com play-by-play page for game 0022600230 (quarter timestamps; used to test whether game-flow data is reachable at all)",
+   "url": "https://www.nba.com/game/cha-vs-phx-0022600230/play-by-play",
+   "read_at_utc": "2026-11-14T00:50Z",
+   "note": "Readable from chunk 1 onward; chunk 0 is the global scoreboard module. Not used in any published number on this desk."
+  }
+ ],
+ "not_obtained": [
+  "Any sportsbook price: no odds feed is reachable from this sandbox and no official NBA property publishes one. Consequence: closing-line value, break-even and ROI cannot be computed, so no market gate can be passed. This is stated on every page that would otherwise show a number.",
+  "Final scores for the 11/13 slate: games were in progress while this capture ran (Milwaukee-Orlando Q2, New York-Indiana end of Q1, seven games still pregame). Recorded as pending, not as results.",
+  "Player game logs: OBTAINED IN PART since this register was first written. The official per-game log page is readable one player at a time, and 12 rows across 3 players are transcribed in player_game_logs.json. Still absent: logs for the other 462 players on the captured season page, which is what a slate-wide prop table needs.",
+  "Injury designations for the 11/15 and 11/16 slates: under the league rule the day-before deadline is 5 p.m. local the day before the game, so those rows did not exist at capture."
+ ],
+ "amendments": [
+  {
+   "at": "2026-11-14T01:10Z",
+   "by": "arena/2edb85af-nba1",
+   "what": "Added sources L9–L14 (the second, later part of the same capture session), corrected the game-log entry in not_obtained, and fixed captured_at_utc, which stopped at 00:55 while the logs were read until 01:05. Also corrected a stale filename reference: this file pointed at results_2026_11_13_partial.json while the file actually written is results_2026_11_13_in_progress.json."
+  }
+ ],
+ "host_note": "Sandbox egress is limited to github.com, npmjs and pypi; curl to nba.com returns HTTP 000. Every value in this directory therefore came through the agent's page reader, and only the URL is citable — not a reproducible HTTP fetch."
+}

@@ -1,0 +1,1854 @@
+{
+ "title": "Player props — measured dispersion, and why it is not yet bettable",
+ "sample": {
+  "players": [
+   "Nikola Jokić",
+   "Giannis Antetokounmpo",
+   "LaMelo Ball"
+  ],
+  "player_games": 12,
+  "complete_rows": 9,
+  "captured_utc": "2026-11-14T00:55Z to 2026-11-14T01:05Z",
+  "official_sources": [
+   "https://www.nba.com/player/203999/nikola-joki-c/game-log",
+   "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+   "https://www.nba.com/player/1630163/lamelo-ball/game-log"
+  ]
+ },
+ "irregularities_carried_from_capture": [
+  "Anthony Edwards is listed on Minnesota's slate card as OUT for 11/14 while LaMelo Ball is printed as the Timberwolves' leading scorer on the same official card — the 'Season Leaders' capsule is not re-derived after the injury report, so a leader shown on a game card is not evidence that the player plays.",
+  "Giannis Antetokounmpo appears on the Miami Heat roster with the same season averages the injury report lists as 'Available' despite a Right Wrist Sprain. An 'Available' status is a designation, not a minutes guarantee."
+ ],
+ "players": [
+  {
+   "player": "Nikola Jokić",
+   "team": "DEN",
+   "position": "C",
+   "player_page": "https://www.nba.com/player/203999/nikola-joki-c/game-log",
+   "header_line": {
+    "ppg": 23.5,
+    "rpg": 10.8,
+    "apg": 9.0
+   },
+   "games_transcribed": 4,
+   "stats": {
+    "pts": {
+     "label": "Points",
+     "n": 4,
+     "values": [
+      27,
+      25,
+      19,
+      32
+     ],
+     "games": [
+      "2026-11-11",
+      "2026-11-09",
+      "2026-11-07",
+      "2026-11-04"
+     ],
+     "mean": 25.75,
+     "sd": 5.38,
+     "cv": 0.209,
+     "ci_95_block_bootstrap": [
+      25.75,
+      25.75
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": 22.5,
+       "over_count": 3,
+       "n": 4,
+       "empirical_over_rate": 0.75,
+       "wilson_95_lo": 0.3006,
+       "wilson_95_hi": 0.9544,
+       "model_over_prob": 0.7272
+      },
+      {
+       "line": 24.5,
+       "over_count": 3,
+       "n": 4,
+       "empirical_over_rate": 0.75,
+       "wilson_95_lo": 0.3006,
+       "wilson_95_hi": 0.9544,
+       "model_over_prob": 0.5919
+      },
+      {
+       "line": 26.5,
+       "over_count": 2,
+       "n": 4,
+       "empirical_over_rate": 0.5,
+       "wilson_95_lo": 0.15,
+       "wilson_95_hi": 0.85,
+       "model_over_prob": 0.4445
+      },
+      {
+       "line": 27.5,
+       "over_count": 1,
+       "n": 4,
+       "empirical_over_rate": 0.25,
+       "wilson_95_lo": 0.0456,
+       "wilson_95_hi": 0.6994,
+       "model_over_prob": 0.3724
+      },
+      {
+       "line": 29.5,
+       "over_count": 1,
+       "n": 4,
+       "empirical_over_rate": 0.25,
+       "wilson_95_lo": 0.0456,
+       "wilson_95_hi": 0.6994,
+       "model_over_prob": 0.2428
+      },
+      {
+       "line": 31.5,
+       "over_count": 1,
+       "n": 4,
+       "empirical_over_rate": 0.25,
+       "wilson_95_lo": 0.0456,
+       "wilson_95_hi": 0.6994,
+       "model_over_prob": 0.1425
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=4 is below any threshold worth staking on; the 95% interval on the mean spans 25.8–25.8, which is wider than the line itself"
+    },
+    "reb": {
+     "label": "Rebounds",
+     "n": 3,
+     "values": [
+      11,
+      16,
+      13
+     ],
+     "games": [
+      "2026-11-11",
+      "2026-11-09",
+      "2026-11-07"
+     ],
+     "mean": 13.33,
+     "sd": 2.52,
+     "cv": 0.189,
+     "ci_95_block_bootstrap": [
+      13.33,
+      13.33
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": 8.5,
+       "over_count": 3,
+       "n": 3,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.4385,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 0.9726
+      },
+      {
+       "line": 10.5,
+       "over_count": 3,
+       "n": 3,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.4385,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 0.8699
+      },
+      {
+       "line": 12.5,
+       "over_count": 2,
+       "n": 3,
+       "empirical_over_rate": 0.6667,
+       "wilson_95_lo": 0.2077,
+       "wilson_95_hi": 0.9385,
+       "model_over_prob": 0.6297
+      },
+      {
+       "line": 13.5,
+       "over_count": 1,
+       "n": 3,
+       "empirical_over_rate": 0.3333,
+       "wilson_95_lo": 0.0615,
+       "wilson_95_hi": 0.7923,
+       "model_over_prob": 0.4736
+      },
+      {
+       "line": 15.5,
+       "over_count": 1,
+       "n": 3,
+       "empirical_over_rate": 0.3333,
+       "wilson_95_lo": 0.0615,
+       "wilson_95_hi": 0.7923,
+       "model_over_prob": 0.1946
+      },
+      {
+       "line": 17.5,
+       "over_count": 0,
+       "n": 3,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.5615,
+       "model_over_prob": 0.0489
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=3 is below any threshold worth staking on; the 95% interval on the mean spans 13.3–13.3, which is wider than the line itself"
+    },
+    "ast": {
+     "label": "Assists",
+     "n": 3,
+     "values": [
+      8,
+      9,
+      8
+     ],
+     "games": [
+      "2026-11-11",
+      "2026-11-09",
+      "2026-11-07"
+     ],
+     "mean": 8.33,
+     "sd": 0.58,
+     "cv": 0.069,
+     "ci_95_block_bootstrap": [
+      8.33,
+      8.33
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": 3.5,
+       "over_count": 3,
+       "n": 3,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.4385,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 1.0
+      },
+      {
+       "line": 5.5,
+       "over_count": 3,
+       "n": 3,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.4385,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 1.0
+      },
+      {
+       "line": 7.5,
+       "over_count": 3,
+       "n": 3,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.4385,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 0.9255
+      },
+      {
+       "line": 8.5,
+       "over_count": 1,
+       "n": 3,
+       "empirical_over_rate": 0.3333,
+       "wilson_95_lo": 0.0615,
+       "wilson_95_hi": 0.7923,
+       "model_over_prob": 0.3864
+      },
+      {
+       "line": 10.5,
+       "over_count": 0,
+       "n": 3,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.5615,
+       "model_over_prob": 0.0001
+      },
+      {
+       "line": 12.5,
+       "over_count": 0,
+       "n": 3,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.5615,
+       "model_over_prob": 0.0
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=3 is below any threshold worth staking on; the 95% interval on the mean spans 8.3–8.3, which is wider than the line itself"
+    },
+    "min": {
+     "label": "Minutes",
+     "n": 4,
+     "values": [
+      37,
+      39,
+      36,
+      30
+     ],
+     "games": [
+      "2026-11-11",
+      "2026-11-09",
+      "2026-11-07",
+      "2026-11-04"
+     ],
+     "mean": 35.5,
+     "sd": 3.87,
+     "cv": 0.109,
+     "ci_95_block_bootstrap": [
+      35.5,
+      35.5
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": 32.5,
+       "over_count": 3,
+       "n": 4,
+       "empirical_over_rate": 0.75,
+       "wilson_95_lo": 0.3006,
+       "wilson_95_hi": 0.9544,
+       "model_over_prob": 0.7807
+      },
+      {
+       "line": 34.5,
+       "over_count": 3,
+       "n": 4,
+       "empirical_over_rate": 0.75,
+       "wilson_95_lo": 0.3006,
+       "wilson_95_hi": 0.9544,
+       "model_over_prob": 0.6019
+      },
+      {
+       "line": 36.5,
+       "over_count": 2,
+       "n": 4,
+       "empirical_over_rate": 0.5,
+       "wilson_95_lo": 0.15,
+       "wilson_95_hi": 0.85,
+       "model_over_prob": 0.3981
+      },
+      {
+       "line": 37.5,
+       "over_count": 1,
+       "n": 4,
+       "empirical_over_rate": 0.25,
+       "wilson_95_lo": 0.0456,
+       "wilson_95_hi": 0.6994,
+       "model_over_prob": 0.3028
+      },
+      {
+       "line": 39.5,
+       "over_count": 0,
+       "n": 4,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.4899,
+       "model_over_prob": 0.1508
+      },
+      {
+       "line": 41.5,
+       "over_count": 0,
+       "n": 4,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.4899,
+       "model_over_prob": 0.0607
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=4 is below any threshold worth staking on; the 95% interval on the mean spans 35.5–35.5, which is wider than the line itself"
+    },
+    "fgm": {
+     "label": "Field goals made",
+     "n": 4,
+     "values": [
+      10,
+      11,
+      7,
+      13
+     ],
+     "games": [
+      "2026-11-11",
+      "2026-11-09",
+      "2026-11-07",
+      "2026-11-04"
+     ],
+     "mean": 10.25,
+     "sd": 2.5,
+     "cv": 0.244,
+     "ci_95_block_bootstrap": [
+      10.25,
+      10.25
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": 6.5,
+       "over_count": 4,
+       "n": 4,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.5101,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 0.9332
+      },
+      {
+       "line": 8.5,
+       "over_count": 3,
+       "n": 4,
+       "empirical_over_rate": 0.75,
+       "wilson_95_lo": 0.3006,
+       "wilson_95_hi": 0.9544,
+       "model_over_prob": 0.758
+      },
+      {
+       "line": 10.5,
+       "over_count": 2,
+       "n": 4,
+       "empirical_over_rate": 0.5,
+       "wilson_95_lo": 0.15,
+       "wilson_95_hi": 0.85,
+       "model_over_prob": 0.4602
+      },
+      {
+       "line": 11.5,
+       "over_count": 1,
+       "n": 4,
+       "empirical_over_rate": 0.25,
+       "wilson_95_lo": 0.0456,
+       "wilson_95_hi": 0.6994,
+       "model_over_prob": 0.3085
+      },
+      {
+       "line": 13.5,
+       "over_count": 0,
+       "n": 4,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.4899,
+       "model_over_prob": 0.0968
+      },
+      {
+       "line": 15.5,
+       "over_count": 0,
+       "n": 4,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.4899,
+       "model_over_prob": 0.0179
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=4 is below any threshold worth staking on; the 95% interval on the mean spans 10.2–10.2, which is wider than the line itself"
+    }
+   }
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "team": "MIA",
+   "position": "F",
+   "player_page": "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+   "header_line": {
+    "ppg": 27.7,
+    "rpg": 12.6,
+    "apg": 5.2
+   },
+   "games_transcribed": 4,
+   "stats": {
+    "pts": {
+     "label": "Points",
+     "n": 4,
+     "values": [
+      30,
+      29,
+      20,
+      27
+     ],
+     "games": [
+      "2026-11-10",
+      "2026-11-08",
+      "2026-11-05",
+      "2026-11-04"
+     ],
+     "mean": 26.5,
+     "sd": 4.51,
+     "cv": 0.17,
+     "ci_95_block_bootstrap": [
+      26.5,
+      26.5
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": 24.5,
+       "over_count": 3,
+       "n": 4,
+       "empirical_over_rate": 0.75,
+       "wilson_95_lo": 0.3006,
+       "wilson_95_hi": 0.9544,
+       "model_over_prob": 0.6713
+      },
+      {
+       "line": 26.5,
+       "over_count": 3,
+       "n": 4,
+       "empirical_over_rate": 0.75,
+       "wilson_95_lo": 0.3006,
+       "wilson_95_hi": 0.9544,
+       "model_over_prob": 0.5
+      },
+      {
+       "line": 28.5,
+       "over_count": 2,
+       "n": 4,
+       "empirical_over_rate": 0.5,
+       "wilson_95_lo": 0.15,
+       "wilson_95_hi": 0.85,
+       "model_over_prob": 0.3287
+      },
+      {
+       "line": 29.5,
+       "over_count": 1,
+       "n": 4,
+       "empirical_over_rate": 0.25,
+       "wilson_95_lo": 0.0456,
+       "wilson_95_hi": 0.6994,
+       "model_over_prob": 0.2529
+      },
+      {
+       "line": 31.5,
+       "over_count": 0,
+       "n": 4,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.4899,
+       "model_over_prob": 0.1338
+      },
+      {
+       "line": 33.5,
+       "over_count": 0,
+       "n": 4,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.4899,
+       "model_over_prob": 0.0603
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=4 is below any threshold worth staking on; the 95% interval on the mean spans 26.5–26.5, which is wider than the line itself"
+    },
+    "reb": {
+     "label": "Rebounds",
+     "n": 3,
+     "values": [
+      11,
+      14,
+      14
+     ],
+     "games": [
+      "2026-11-10",
+      "2026-11-08",
+      "2026-11-05"
+     ],
+     "mean": 13.0,
+     "sd": 1.73,
+     "cv": 0.133,
+     "ci_95_block_bootstrap": [
+      13.0,
+      13.0
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": 9.5,
+       "over_count": 3,
+       "n": 3,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.4385,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 0.9783
+      },
+      {
+       "line": 11.5,
+       "over_count": 2,
+       "n": 3,
+       "empirical_over_rate": 0.6667,
+       "wilson_95_lo": 0.2077,
+       "wilson_95_hi": 0.9385,
+       "model_over_prob": 0.8068
+      },
+      {
+       "line": 13.5,
+       "over_count": 2,
+       "n": 3,
+       "empirical_over_rate": 0.6667,
+       "wilson_95_lo": 0.2077,
+       "wilson_95_hi": 0.9385,
+       "model_over_prob": 0.3864
+      },
+      {
+       "line": 14.5,
+       "over_count": 0,
+       "n": 3,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.5615,
+       "model_over_prob": 0.1932
+      },
+      {
+       "line": 16.5,
+       "over_count": 0,
+       "n": 3,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.5615,
+       "model_over_prob": 0.0217
+      },
+      {
+       "line": 18.5,
+       "over_count": 0,
+       "n": 3,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.5615,
+       "model_over_prob": 0.0007
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=3 is below any threshold worth staking on; the 95% interval on the mean spans 13.0–13.0, which is wider than the line itself"
+    },
+    "ast": {
+     "label": "Assists",
+     "n": 3,
+     "values": [
+      4,
+      3,
+      4
+     ],
+     "games": [
+      "2026-11-10",
+      "2026-11-08",
+      "2026-11-05"
+     ],
+     "mean": 3.67,
+     "sd": 0.58,
+     "cv": 0.157,
+     "ci_95_block_bootstrap": [
+      3.67,
+      3.67
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": -0.5,
+       "over_count": 3,
+       "n": 3,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.4385,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 1.0
+      },
+      {
+       "line": 1.5,
+       "over_count": 3,
+       "n": 3,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.4385,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 0.9999
+      },
+      {
+       "line": 3.5,
+       "over_count": 2,
+       "n": 3,
+       "empirical_over_rate": 0.6667,
+       "wilson_95_lo": 0.2077,
+       "wilson_95_hi": 0.9385,
+       "model_over_prob": 0.6136
+      },
+      {
+       "line": 4.5,
+       "over_count": 0,
+       "n": 3,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.5615,
+       "model_over_prob": 0.0745
+      },
+      {
+       "line": 6.5,
+       "over_count": 0,
+       "n": 3,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.5615,
+       "model_over_prob": 0.0
+      },
+      {
+       "line": 8.5,
+       "over_count": 0,
+       "n": 3,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.5615,
+       "model_over_prob": 0.0
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=3 is below any threshold worth staking on; the 95% interval on the mean spans 3.7–3.7, which is wider than the line itself"
+    },
+    "min": {
+     "label": "Minutes",
+     "n": 4,
+     "values": [
+      31,
+      34,
+      31,
+      41
+     ],
+     "games": [
+      "2026-11-10",
+      "2026-11-08",
+      "2026-11-05",
+      "2026-11-04"
+     ],
+     "mean": 34.25,
+     "sd": 4.72,
+     "cv": 0.138,
+     "ci_95_block_bootstrap": [
+      34.25,
+      34.25
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": 29.5,
+       "over_count": 4,
+       "n": 4,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.5101,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 0.843
+      },
+      {
+       "line": 31.5,
+       "over_count": 2,
+       "n": 4,
+       "empirical_over_rate": 0.5,
+       "wilson_95_lo": 0.15,
+       "wilson_95_hi": 0.85,
+       "model_over_prob": 0.7201
+      },
+      {
+       "line": 33.5,
+       "over_count": 2,
+       "n": 4,
+       "empirical_over_rate": 0.5,
+       "wilson_95_lo": 0.15,
+       "wilson_95_hi": 0.85,
+       "model_over_prob": 0.5632
+      },
+      {
+       "line": 34.5,
+       "over_count": 1,
+       "n": 4,
+       "empirical_over_rate": 0.25,
+       "wilson_95_lo": 0.0456,
+       "wilson_95_hi": 0.6994,
+       "model_over_prob": 0.4789
+      },
+      {
+       "line": 36.5,
+       "over_count": 1,
+       "n": 4,
+       "empirical_over_rate": 0.25,
+       "wilson_95_lo": 0.0456,
+       "wilson_95_hi": 0.6994,
+       "model_over_prob": 0.3167
+      },
+      {
+       "line": 38.5,
+       "over_count": 1,
+       "n": 4,
+       "empirical_over_rate": 0.25,
+       "wilson_95_lo": 0.0456,
+       "wilson_95_hi": 0.6994,
+       "model_over_prob": 0.1838
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=4 is below any threshold worth staking on; the 95% interval on the mean spans 34.2–34.2, which is wider than the line itself"
+    },
+    "fgm": {
+     "label": "Field goals made",
+     "n": 4,
+     "values": [
+      12,
+      14,
+      7,
+      8
+     ],
+     "games": [
+      "2026-11-10",
+      "2026-11-08",
+      "2026-11-05",
+      "2026-11-04"
+     ],
+     "mean": 10.25,
+     "sd": 3.3,
+     "cv": 0.322,
+     "ci_95_block_bootstrap": [
+      10.25,
+      10.25
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": 7.5,
+       "over_count": 3,
+       "n": 4,
+       "empirical_over_rate": 0.75,
+       "wilson_95_lo": 0.3006,
+       "wilson_95_hi": 0.9544,
+       "model_over_prob": 0.7974
+      },
+      {
+       "line": 9.5,
+       "over_count": 2,
+       "n": 4,
+       "empirical_over_rate": 0.5,
+       "wilson_95_lo": 0.15,
+       "wilson_95_hi": 0.85,
+       "model_over_prob": 0.5898
+      },
+      {
+       "line": 11.5,
+       "over_count": 2,
+       "n": 4,
+       "empirical_over_rate": 0.5,
+       "wilson_95_lo": 0.15,
+       "wilson_95_hi": 0.85,
+       "model_over_prob": 0.3526
+      },
+      {
+       "line": 12.5,
+       "over_count": 1,
+       "n": 4,
+       "empirical_over_rate": 0.25,
+       "wilson_95_lo": 0.0456,
+       "wilson_95_hi": 0.6994,
+       "model_over_prob": 0.2479
+      },
+      {
+       "line": 14.5,
+       "over_count": 0,
+       "n": 4,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.4899,
+       "model_over_prob": 0.0992
+      },
+      {
+       "line": 16.5,
+       "over_count": 0,
+       "n": 4,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.4899,
+       "model_over_prob": 0.0293
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=4 is below any threshold worth staking on; the 95% interval on the mean spans 10.2–10.2, which is wider than the line itself"
+    }
+   }
+  },
+  {
+   "player": "LaMelo Ball",
+   "team": "MIN",
+   "position": "G",
+   "player_page": "https://www.nba.com/player/1630163/lamelo-ball/game-log",
+   "header_line": {
+    "ppg": 18.6,
+    "rpg": 3.3,
+    "apg": 6.3
+   },
+   "games_transcribed": 4,
+   "stats": {
+    "pts": {
+     "label": "Points",
+     "n": 4,
+     "values": [
+      22,
+      24,
+      22,
+      20
+     ],
+     "games": [
+      "2026-11-12",
+      "2026-11-08",
+      "2026-11-06",
+      "2026-11-04"
+     ],
+     "mean": 22.0,
+     "sd": 1.63,
+     "cv": 0.074,
+     "ci_95_block_bootstrap": [
+      22.0,
+      22.0
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": 17.5,
+       "over_count": 4,
+       "n": 4,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.5101,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 0.9971
+      },
+      {
+       "line": 19.5,
+       "over_count": 4,
+       "n": 4,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.5101,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 0.9371
+      },
+      {
+       "line": 21.5,
+       "over_count": 3,
+       "n": 4,
+       "empirical_over_rate": 0.75,
+       "wilson_95_lo": 0.3006,
+       "wilson_95_hi": 0.9544,
+       "model_over_prob": 0.6203
+      },
+      {
+       "line": 22.5,
+       "over_count": 1,
+       "n": 4,
+       "empirical_over_rate": 0.25,
+       "wilson_95_lo": 0.0456,
+       "wilson_95_hi": 0.6994,
+       "model_over_prob": 0.3797
+      },
+      {
+       "line": 24.5,
+       "over_count": 0,
+       "n": 4,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.4899,
+       "model_over_prob": 0.0629
+      },
+      {
+       "line": 26.5,
+       "over_count": 0,
+       "n": 4,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.4899,
+       "model_over_prob": 0.0029
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=4 is below any threshold worth staking on; the 95% interval on the mean spans 22.0–22.0, which is wider than the line itself"
+    },
+    "reb": {
+     "label": "Rebounds",
+     "n": 3,
+     "values": [
+      3,
+      3,
+      2
+     ],
+     "games": [
+      "2026-11-12",
+      "2026-11-08",
+      "2026-11-06"
+     ],
+     "mean": 2.67,
+     "sd": 0.58,
+     "cv": 0.217,
+     "ci_95_block_bootstrap": [
+      2.67,
+      2.67
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": -1.5,
+       "over_count": 3,
+       "n": 3,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.4385,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 1.0
+      },
+      {
+       "line": 0.5,
+       "over_count": 3,
+       "n": 3,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.4385,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 0.9999
+      },
+      {
+       "line": 2.5,
+       "over_count": 2,
+       "n": 3,
+       "empirical_over_rate": 0.6667,
+       "wilson_95_lo": 0.2077,
+       "wilson_95_hi": 0.9385,
+       "model_over_prob": 0.6136
+      },
+      {
+       "line": 3.5,
+       "over_count": 0,
+       "n": 3,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.5615,
+       "model_over_prob": 0.0745
+      },
+      {
+       "line": 5.5,
+       "over_count": 0,
+       "n": 3,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.5615,
+       "model_over_prob": 0.0
+      },
+      {
+       "line": 7.5,
+       "over_count": 0,
+       "n": 3,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.5615,
+       "model_over_prob": 0.0
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=3 is below any threshold worth staking on; the 95% interval on the mean spans 2.7–2.7, which is wider than the line itself"
+    },
+    "ast": {
+     "label": "Assists",
+     "n": 3,
+     "values": [
+      9,
+      5,
+      8
+     ],
+     "games": [
+      "2026-11-12",
+      "2026-11-08",
+      "2026-11-06"
+     ],
+     "mean": 7.33,
+     "sd": 2.08,
+     "cv": 0.284,
+     "ci_95_block_bootstrap": [
+      7.33,
+      7.33
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": 3.5,
+       "over_count": 3,
+       "n": 3,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.4385,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 0.9672
+      },
+      {
+       "line": 5.5,
+       "over_count": 2,
+       "n": 3,
+       "empirical_over_rate": 0.6667,
+       "wilson_95_lo": 0.2077,
+       "wilson_95_hi": 0.9385,
+       "model_over_prob": 0.8108
+      },
+      {
+       "line": 7.5,
+       "over_count": 2,
+       "n": 3,
+       "empirical_over_rate": 0.6667,
+       "wilson_95_lo": 0.2077,
+       "wilson_95_hi": 0.9385,
+       "model_over_prob": 0.4681
+      },
+      {
+       "line": 8.5,
+       "over_count": 1,
+       "n": 3,
+       "empirical_over_rate": 0.3333,
+       "wilson_95_lo": 0.0615,
+       "wilson_95_hi": 0.7923,
+       "model_over_prob": 0.2876
+      },
+      {
+       "line": 10.5,
+       "over_count": 0,
+       "n": 3,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.5615,
+       "model_over_prob": 0.0641
+      },
+      {
+       "line": 12.5,
+       "over_count": 0,
+       "n": 3,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.5615,
+       "model_over_prob": 0.0065
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=3 is below any threshold worth staking on; the 95% interval on the mean spans 7.3–7.3, which is wider than the line itself"
+    },
+    "min": {
+     "label": "Minutes",
+     "n": 4,
+     "values": [
+      25,
+      30,
+      35,
+      31
+     ],
+     "games": [
+      "2026-11-12",
+      "2026-11-08",
+      "2026-11-06",
+      "2026-11-04"
+     ],
+     "mean": 30.25,
+     "sd": 4.11,
+     "cv": 0.136,
+     "ci_95_block_bootstrap": [
+      30.25,
+      30.25
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": 26.5,
+       "over_count": 3,
+       "n": 4,
+       "empirical_over_rate": 0.75,
+       "wilson_95_lo": 0.3006,
+       "wilson_95_hi": 0.9544,
+       "model_over_prob": 0.819
+      },
+      {
+       "line": 28.5,
+       "over_count": 3,
+       "n": 4,
+       "empirical_over_rate": 0.75,
+       "wilson_95_lo": 0.3006,
+       "wilson_95_hi": 0.9544,
+       "model_over_prob": 0.6648
+      },
+      {
+       "line": 30.5,
+       "over_count": 2,
+       "n": 4,
+       "empirical_over_rate": 0.5,
+       "wilson_95_lo": 0.15,
+       "wilson_95_hi": 0.85,
+       "model_over_prob": 0.4758
+      },
+      {
+       "line": 31.5,
+       "over_count": 1,
+       "n": 4,
+       "empirical_over_rate": 0.25,
+       "wilson_95_lo": 0.0456,
+       "wilson_95_hi": 0.6994,
+       "model_over_prob": 0.3806
+      },
+      {
+       "line": 33.5,
+       "over_count": 1,
+       "n": 4,
+       "empirical_over_rate": 0.25,
+       "wilson_95_lo": 0.0456,
+       "wilson_95_hi": 0.6994,
+       "model_over_prob": 0.2147
+      },
+      {
+       "line": 35.5,
+       "over_count": 0,
+       "n": 4,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.4899,
+       "model_over_prob": 0.1009
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=4 is below any threshold worth staking on; the 95% interval on the mean spans 30.2–30.2, which is wider than the line itself"
+    },
+    "fgm": {
+     "label": "Field goals made",
+     "n": 4,
+     "values": [
+      8,
+      10,
+      7,
+      6
+     ],
+     "games": [
+      "2026-11-12",
+      "2026-11-08",
+      "2026-11-06",
+      "2026-11-04"
+     ],
+     "mean": 7.75,
+     "sd": 1.71,
+     "cv": 0.22,
+     "ci_95_block_bootstrap": [
+      7.75,
+      7.75
+     ],
+     "season_header_reference": null,
+     "ladder": [
+      {
+       "line": 3.5,
+       "over_count": 4,
+       "n": 4,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.5101,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 0.9936
+      },
+      {
+       "line": 5.5,
+       "over_count": 4,
+       "n": 4,
+       "empirical_over_rate": 1.0,
+       "wilson_95_lo": 0.5101,
+       "wilson_95_hi": 1.0,
+       "model_over_prob": 0.9062
+      },
+      {
+       "line": 7.5,
+       "over_count": 2,
+       "n": 4,
+       "empirical_over_rate": 0.5,
+       "wilson_95_lo": 0.15,
+       "wilson_95_hi": 0.85,
+       "model_over_prob": 0.5582
+      },
+      {
+       "line": 8.5,
+       "over_count": 1,
+       "n": 4,
+       "empirical_over_rate": 0.25,
+       "wilson_95_lo": 0.0456,
+       "wilson_95_hi": 0.6994,
+       "model_over_prob": 0.3303
+      },
+      {
+       "line": 10.5,
+       "over_count": 0,
+       "n": 4,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.4899,
+       "model_over_prob": 0.0537
+      },
+      {
+       "line": 12.5,
+       "over_count": 0,
+       "n": 4,
+       "empirical_over_rate": 0.0,
+       "wilson_95_lo": 0.0,
+       "wilson_95_hi": 0.4899,
+       "model_over_prob": 0.0027
+      }
+     ],
+     "usable_for_staking": false,
+     "flag": "n=4 is below any threshold worth staking on; the 95% interval on the mean spans 7.8–7.8, which is wider than the line itself"
+    }
+   }
+  }
+ ],
+ "within_player_correlation": [
+  {
+   "player": "Nikola Jokić",
+   "team": "DEN",
+   "pair": "Points × Rebounds",
+   "n": 3,
+   "pearson_r": -0.127,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-11",
+    "2026-11-09",
+    "2026-11-07"
+   ],
+   "source_url": "https://www.nba.com/player/203999/nikola-joki-c/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Nikola Jokić",
+   "team": "DEN",
+   "pair": "Points × Assists",
+   "n": 3,
+   "pearson_r": 0.277,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-11",
+    "2026-11-09",
+    "2026-11-07"
+   ],
+   "source_url": "https://www.nba.com/player/203999/nikola-joki-c/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Nikola Jokić",
+   "team": "DEN",
+   "pair": "Points × Minutes",
+   "n": 4,
+   "pearson_r": -0.616,
+   "fisher_95": [
+    -0.991,
+    0.846
+   ],
+   "dates": [
+    "2026-11-11",
+    "2026-11-09",
+    "2026-11-07",
+    "2026-11-04"
+   ],
+   "source_url": "https://www.nba.com/player/203999/nikola-joki-c/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Nikola Jokić",
+   "team": "DEN",
+   "pair": "Points × Field goals made",
+   "n": 4,
+   "pearson_r": 0.948,
+   "fisher_95": [
+    -0.143,
+    0.999
+   ],
+   "dates": [
+    "2026-11-11",
+    "2026-11-09",
+    "2026-11-07",
+    "2026-11-04"
+   ],
+   "source_url": "https://www.nba.com/player/203999/nikola-joki-c/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Nikola Jokić",
+   "team": "DEN",
+   "pair": "Rebounds × Assists",
+   "n": 3,
+   "pearson_r": 0.918,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-11",
+    "2026-11-09",
+    "2026-11-07"
+   ],
+   "source_url": "https://www.nba.com/player/203999/nikola-joki-c/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Nikola Jokić",
+   "team": "DEN",
+   "pair": "Rebounds × Minutes",
+   "n": 3,
+   "pearson_r": 0.737,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-11",
+    "2026-11-09",
+    "2026-11-07"
+   ],
+   "source_url": "https://www.nba.com/player/203999/nikola-joki-c/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Nikola Jokić",
+   "team": "DEN",
+   "pair": "Rebounds × Field goals made",
+   "n": 3,
+   "pearson_r": 0.35,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-11",
+    "2026-11-09",
+    "2026-11-07"
+   ],
+   "source_url": "https://www.nba.com/player/203999/nikola-joki-c/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Nikola Jokić",
+   "team": "DEN",
+   "pair": "Assists × Minutes",
+   "n": 3,
+   "pearson_r": 0.945,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-11",
+    "2026-11-09",
+    "2026-11-07"
+   ],
+   "source_url": "https://www.nba.com/player/203999/nikola-joki-c/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Nikola Jokić",
+   "team": "DEN",
+   "pair": "Assists × Field goals made",
+   "n": 3,
+   "pearson_r": 0.693,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-11",
+    "2026-11-09",
+    "2026-11-07"
+   ],
+   "source_url": "https://www.nba.com/player/203999/nikola-joki-c/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Nikola Jokić",
+   "team": "DEN",
+   "pair": "Minutes × Field goals made",
+   "n": 4,
+   "pearson_r": -0.499,
+   "fisher_95": [
+    -0.987,
+    0.888
+   ],
+   "dates": [
+    "2026-11-11",
+    "2026-11-09",
+    "2026-11-07",
+    "2026-11-04"
+   ],
+   "source_url": "https://www.nba.com/player/203999/nikola-joki-c/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "team": "MIA",
+   "pair": "Points × Rebounds",
+   "n": 3,
+   "pearson_r": -0.577,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-10",
+    "2026-11-08",
+    "2026-11-05"
+   ],
+   "source_url": "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "team": "MIA",
+   "pair": "Points × Assists",
+   "n": 3,
+   "pearson_r": -0.419,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-10",
+    "2026-11-08",
+    "2026-11-05"
+   ],
+   "source_url": "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "team": "MIA",
+   "pair": "Points × Minutes",
+   "n": 4,
+   "pearson_r": 0.196,
+   "fisher_95": [
+    -0.943,
+    0.974
+   ],
+   "dates": [
+    "2026-11-10",
+    "2026-11-08",
+    "2026-11-05",
+    "2026-11-04"
+   ],
+   "source_url": "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "team": "MIA",
+   "pair": "Points × Field goals made",
+   "n": 4,
+   "pearson_r": 0.794,
+   "fisher_95": [
+    -0.705,
+    0.996
+   ],
+   "dates": [
+    "2026-11-10",
+    "2026-11-08",
+    "2026-11-05",
+    "2026-11-04"
+   ],
+   "source_url": "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "team": "MIA",
+   "pair": "Rebounds × Assists",
+   "n": 3,
+   "pearson_r": -0.5,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-10",
+    "2026-11-08",
+    "2026-11-05"
+   ],
+   "source_url": "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "team": "MIA",
+   "pair": "Rebounds × Minutes",
+   "n": 3,
+   "pearson_r": 0.5,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-10",
+    "2026-11-08",
+    "2026-11-05"
+   ],
+   "source_url": "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "team": "MIA",
+   "pair": "Rebounds × Field goals made",
+   "n": 3,
+   "pearson_r": -0.24,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-10",
+    "2026-11-08",
+    "2026-11-05"
+   ],
+   "source_url": "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "team": "MIA",
+   "pair": "Assists × Minutes",
+   "n": 3,
+   "pearson_r": -1.0,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-10",
+    "2026-11-08",
+    "2026-11-05"
+   ],
+   "source_url": "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "team": "MIA",
+   "pair": "Assists × Field goals made",
+   "n": 3,
+   "pearson_r": -0.721,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-10",
+    "2026-11-08",
+    "2026-11-05"
+   ],
+   "source_url": "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "team": "MIA",
+   "pair": "Minutes × Field goals made",
+   "n": 4,
+   "pearson_r": -0.241,
+   "fisher_95": [
+    -0.976,
+    0.937
+   ],
+   "dates": [
+    "2026-11-10",
+    "2026-11-08",
+    "2026-11-05",
+    "2026-11-04"
+   ],
+   "source_url": "https://www.nba.com/player/203507/giannis-antetokounmpo/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "LaMelo Ball",
+   "team": "MIN",
+   "pair": "Points × Rebounds",
+   "n": 3,
+   "pearson_r": 0.5,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-12",
+    "2026-11-08",
+    "2026-11-06"
+   ],
+   "source_url": "https://www.nba.com/player/1630163/lamelo-ball/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "LaMelo Ball",
+   "team": "MIN",
+   "pair": "Points × Assists",
+   "n": 3,
+   "pearson_r": -0.971,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-12",
+    "2026-11-08",
+    "2026-11-06"
+   ],
+   "source_url": "https://www.nba.com/player/1630163/lamelo-ball/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "LaMelo Ball",
+   "team": "MIN",
+   "pair": "Points × Minutes",
+   "n": 4,
+   "pearson_r": -0.099,
+   "fisher_95": [
+    -0.968,
+    0.953
+   ],
+   "dates": [
+    "2026-11-12",
+    "2026-11-08",
+    "2026-11-06",
+    "2026-11-04"
+   ],
+   "source_url": "https://www.nba.com/player/1630163/lamelo-ball/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "LaMelo Ball",
+   "team": "MIN",
+   "pair": "Points × Field goals made",
+   "n": 4,
+   "pearson_r": 0.956,
+   "fisher_95": [
+    -0.061,
+    0.999
+   ],
+   "dates": [
+    "2026-11-12",
+    "2026-11-08",
+    "2026-11-06",
+    "2026-11-04"
+   ],
+   "source_url": "https://www.nba.com/player/1630163/lamelo-ball/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "LaMelo Ball",
+   "team": "MIN",
+   "pair": "Rebounds × Assists",
+   "n": 3,
+   "pearson_r": -0.277,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-12",
+    "2026-11-08",
+    "2026-11-06"
+   ],
+   "source_url": "https://www.nba.com/player/1630163/lamelo-ball/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "LaMelo Ball",
+   "team": "MIN",
+   "pair": "Rebounds × Minutes",
+   "n": 3,
+   "pearson_r": -0.866,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-12",
+    "2026-11-08",
+    "2026-11-06"
+   ],
+   "source_url": "https://www.nba.com/player/1630163/lamelo-ball/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "LaMelo Ball",
+   "team": "MIN",
+   "pair": "Rebounds × Field goals made",
+   "n": 3,
+   "pearson_r": 0.756,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-12",
+    "2026-11-08",
+    "2026-11-06"
+   ],
+   "source_url": "https://www.nba.com/player/1630163/lamelo-ball/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "LaMelo Ball",
+   "team": "MIN",
+   "pair": "Assists × Minutes",
+   "n": 3,
+   "pearson_r": -0.24,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-12",
+    "2026-11-08",
+    "2026-11-06"
+   ],
+   "source_url": "https://www.nba.com/player/1630163/lamelo-ball/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "LaMelo Ball",
+   "team": "MIN",
+   "pair": "Assists × Field goals made",
+   "n": 3,
+   "pearson_r": -0.839,
+   "fisher_95": [
+    null,
+    null
+   ],
+   "dates": [
+    "2026-11-12",
+    "2026-11-08",
+    "2026-11-06"
+   ],
+   "source_url": "https://www.nba.com/player/1630163/lamelo-ball/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  },
+  {
+   "player": "LaMelo Ball",
+   "team": "MIN",
+   "pair": "Minutes × Field goals made",
+   "n": 4,
+   "pearson_r": -0.32,
+   "fisher_95": [
+    -0.98,
+    0.926
+   ],
+   "dates": [
+    "2026-11-12",
+    "2026-11-08",
+    "2026-11-06",
+    "2026-11-04"
+   ],
+   "source_url": "https://www.nba.com/player/1630163/lamelo-ball/game-log",
+   "interpretation": "same-game co-movement inside 4–3 logged games; not a league correlation parameter"
+  }
+ ],
+ "sgp_bounds": [
+  {
+   "legs": "Jokić points O + Jokić rebounds O",
+   "p_a": 0.3724,
+   "p_b": 0.4736,
+   "independent": 0.1764,
+   "frechet_lo": 0.0,
+   "frechet_hi": 0.3724,
+   "measured_rho": -0.127,
+   "note": "The Fréchet bounds are what is certain without a correlation estimate; the measured ρ on 4 logged games is printed next to them to show how far from settled it is.",
+   "usable_for_staking": false
+  }
+ ],
+ "coverage_limit": {
+  "statement": "3 of 30 rosters' worth of star players, 4 games each. No role player, no teammate, no opponent-adjustment, no pace adjustment.",
+  "what_it_blocks": "Any slate-wide prop table, any 'every upcoming game' prop coverage, and any comparison against a market number.",
+  "what_would_fix_it": "The full per-game log for each player of interest (player game-log pages are readable one player at a time from this sandbox), plus a prices feed for the market side."
+ },
+ "verdict": "NOT USABLE FOR STAKING. Published so the number, its interval and its gap are all visible rather than quietly rounded into a pick."
+}
