@@ -147,13 +147,13 @@
   },
   {
    "id": "F15",
-   "severity": "High",
-   "title": "The 11/14 injury report covers only half the teams",
-   "detail": "At the 07:30 PM ET edition, five of the ten teams playing on 11/14 had not filed: New Orleans Pelicans, Cleveland Cavaliers, Memphis Grizzlies, Chicago Bulls and Miami Heat are printed as NOT YET SUBMITTED. Only Denver, Dallas, Brooklyn, Minnesota and Detroit filed.",
+   "severity": "Partly resolved (was High)",
+   "title": "The 11/14 injury report covered only half the teams — and an edition newer than the site's WAS readable",
+   "detail": "Originally: at the 11/13/26 07:30 PM ET edition five of the ten teams playing on 11/14 had not filed. UPDATE 2026-11-14 (session arena/934ca56f-nba1): the 11/14/26 04:15 AM ET edition WAS readable and has been transcribed to verify/2026-11-14/official_injury_2026-11-14_0415AM_s934ca56f.json (49 rows). It is NEWER than the edition the site is built on. The same five of ten 11/14 teams (New Orleans, Cleveland, Memphis, Chicago, Miami) still print NOT YET SUBMITTED, so the practical position is unchanged, but the reason is now known: the game-day reports (due 11-1 PM local) had not been published when this was read. It also shows the 11/15 games DO appear in the report as NOT YET SUBMITTED, which corrects the claim that no edition covers 11/15.",
    "affected": "Availability impact for 5 of the 10 teams on 2026-11-14",
    "source": "S10",
-   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf",
-   "suggested_action": "Capture the next edition of the official report (a later 11/13 edition, or the first 11/14 edition) and re-run. The NOT YET SUBMITTED rows are published exactly as printed and are never filled in."
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+   "suggested_action": "Re-read the 11/14 game-day editions (12:00 PM ET and later) before the 11/14 tip-offs. The 12:00 PM ET PDF still returns AccessDenied, so that edition needs a different retrieval path. Whether to adopt the 04:15 AM edition is a reviewer decision, because it moves every 11/14 line."
   },
   {
    "id": "F16",
@@ -303,13 +303,14 @@
   },
   {
    "id": "F31",
-   "severity": "Medium",
-   "title": "The 11/14 noon injury report could not be retrieved",
-   "detail": "The URL pattern for the 11/14 12:00 PM ET edition (ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf) returned AccessDenied at capture on 2026-11-14 UTC. The same response is returned for a missing object on this host, so it cannot be read as proof that the edition is unpublished. The site's newest edition is still the 11/13 07:30 PM ET edition.",
+   "severity": "Resolved / re-characterised (was Medium)",
+   "title": "The 11/14 noon injury report could not be retrieved — and a newer edition could",
+   "detail": "CONFIRMED and partly resolved. The 11/14 12:00 PM ET PDF (ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf) STILL returns AccessDenied, so that specific claim stands and is not evidence the edition is unpublished. But the 11/14/26 04:15 AM ET edition of the same host WAS readable on 2026-11-14 at 10:52Z, was transcribed row by row (49 rows), and is newer than the 11/13 07:30 PM ET edition the site is built on. The blanket statement 'the site's newest edition is still the 11/13 07:30 PM ET edition' was therefore wrong and has been corrected on the Injuries page.",
    "affected": "Injury layer of every 11/14 row; injuries.html",
    "source": null,
-   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
-   "suggested_action": "Re-check after 17:00 UTC on 2026-11-14 and record the edition found, or the response, on Source Check section 6."
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+   "suggested_action": "Keep a per-edition retrieval log (suggestion SG18) so 'AccessDenied' is recorded against one URL rather than generalised into 'no newer edition exists'.",
+   "resolved_utc": "2026-11-14"
   },
   {
    "id": "F32",

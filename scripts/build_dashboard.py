@@ -672,6 +672,50 @@ def main():
 
     # === injuries ==========================================================
     b = [h2("Injury report read-out", "One row per official injury-report line, with the minutes it implies and the impact it carries.")]
+
+    # The site's model is built on the 11/13 07:30 PM ET edition. A newer edition was
+    # read on 2026-11-14 and is strictly better information; it is shown here as a
+    # comparison, and deliberately NOT fed into the model, because doing so would move
+    # every 11/14 line. Say that plainly rather than silently using the older one.
+    try:
+        _newer = load(os.path.join(ROOT, "verify", "2026-11-14",
+                                   "official_injury_2026-11-14_0415AM_s934ca56f.json"))
+    except OSError:
+        _newer = None
+    if _newer:
+        _sm = _newer["summary"]
+        b.append(banner("warn", "A newer official injury edition exists than the one the model uses",
+            "<p>The lines on this site are built on the <b>11/13/26 07:30 PM ET</b> edition. On 2026-11-14 this "
+            "session read a newer one, the <b>11/14/26 04:15 AM ET</b> edition "
+            "(<a href=\"%s\">official PDF</a>), and transcribed all %d rows to "
+            "<code>verify/2026-11-14/official_injury_2026-11-14_0415AM_s934ca56f.json</code>. "
+            "It has deliberately <b>not</b> been fed into the model, because it would move every 11/14 line and that "
+            "is a reviewer decision, not an integration step.</p>"
+            "<p><b>What it changes in practice: very little.</b> The same five of the ten teams playing on 11/14 "
+            "(%s) still print <b>NOT YET SUBMITTED</b>; the teams that filed are %s. The %d player-level rows are "
+            "Denver, Dallas, Brooklyn, Minnesota and Detroit. The 11/15 games do appear in this edition but every "
+            "team is NOT YET SUBMITTED, and no 11/16 or 11/17 game appears at all. So the older edition was not "
+            "hiding a status change &mdash; it was simply one publication cycle behind.</p>"
+            % (_newer["source_url"], _sm["rows_transcribed"],
+               ", ".join(_sm["teams_not_yet_submitted_for_a_2026_11_14_game"]),
+               ", ".join(_sm["teams_that_filed_for_a_2026_11_14_game"]),
+               _sm["rows_with_a_player_and_status"])))
+        b.append(h2("The newer edition, row by row",
+                    "Transcribed from the official 11/14/26 04:15 AM ET PDF. NOT USED by any line on this site."))
+        _rows = []
+        for _r in _newer["rows"]:
+            _rows.append([
+                esc(_r.get("game_date")), esc(_r.get("matchup")), esc(_r.get("team")),
+                esc(_r.get("player")) if _r.get("player") else NA,
+                '<b>%s</b>' % esc(_r.get("status")), esc(_r.get("reason")) if _r.get("reason") else NA,
+                srclink_url(_newer["source_url"], "official PDF"),
+            ])
+        b.append(table(["Game date", "Matchup", "Team", "Player", "Status", "Reason printed", "Source"],
+                       _rows,
+                       note="Read directly from the official PDF on 2026-11-14. A row printed NOT YET SUBMITTED has "
+                            "no player and no status to report, so both are blank rather than guessed. One row "
+                            "(Traore, Nolan) lost its team cell to a PDF page break; the team is left blank and "
+                            "flagged, not inferred."))
     rows = []
     for r in injs["rows"]:
         rows.append([

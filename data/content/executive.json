@@ -1,7 +1,7 @@
 {
  "title": "Executive Summary",
  "as_of": "2026-11-14",
- "headline": "The horizon now runs the full three days: 27 games from 14 to 17 November 2026, with an originated line, a paper pick and an injury read-out for every one, and a source link on every row. The newest official injury-report edition (11/13/26 07:30 PM ET) has been captured and transcribed row by row. The out-of-sample window is 51 games, and the honest read on it is unchanged: a small edge on the margin, no edge on totals or winners, and one strategy whose good record is still inside what luck produces.",
+ "headline": "The horizon now runs the full three days: 27 games from 14 to 17 November 2026, with an originated line, a paper pick and an injury read-out for every one, and a source link on every row. The newest official injury-report edition readable when the model was built (11/13/26 07:30 PM ET) has been captured and transcribed row by row; a NEWER edition (11/14/26 04:15 AM ET) was read on 2026-11-14 and is published as evidence, but has deliberately NOT been fed into the model. The out-of-sample window is 51 games, and the honest read on it is unchanged: a small edge on the margin, no edge on totals or winners, and one strategy whose good record is still inside what luck produces.",
  "lead": "Ten strategies were written, seven validation gates were defined, and all ten were run against a strictly out-of-sample window: all 51 completed games from 2026-11-06 to 2026-11-12, every one predicted using team ratings computed only from 2026-10-20 to 2026-11-05. No game in the test window contributes to the ratings that predict it. On top of that the system now originates a line for every game in the next three days - 14, 15, 16 and 17 November - from official ratings and the newest official injury report.",
  "verdict": {
   "status": "PROVISIONAL - not funded",
@@ -62,14 +62,14 @@
    "n": 9,
    "title": "The three-day horizon is now live, and it is the part that is hardest to keep honest",
    "detail": "27 games from 2026-11-14 to 2026-11-17, each with an originated spread, total and fair moneyline, a gated paper pick, rest and back-to-back flags, and an injury read-out. The schedule was read from the official NBA.com Schedule page and independently cross-checked against another session's capture of the same page: 27 of 27 rows agree, 0 mismatches. The injury report was taken from the 07:30 PM ET edition of the official PDF, which is newer than the 05:15 PM edition this repository previously held.",
-   "reading": "What is still not knowable is published as such rather than filled in. The ratings window ends at 11/12: the nine 11/13 games are Final and were used to settle the 11/13 lines and to refresh every stale team record on these rows (0 mismatches remaining, 2026-11-14), but the ratings themselves have not been re-fitted, so every line still rests on ratings one night short. And at the 07:30 PM edition five of the ten teams playing on 11/14 had not filed an injury report, while no edition yet covers the 11/15 to 11/17 games. Those lines carry no injury adjustment and say so."
+   "reading": "What is still not knowable is published as such rather than filled in. The ratings window ends at 11/12: the nine 11/13 games are Final and were used to settle the 11/13 lines and to refresh every stale team record on these rows (0 mismatches remaining, 2026-11-14), but the ratings themselves have not been re-fitted, so every line still rests on ratings one night short. Injury coverage is the second limit. At the 11/13 07:30 PM ET edition five of the ten teams playing on 11/14 had not filed; a newer edition (11/14 04:15 AM ET) was then read and shows the same five still NOT YET SUBMITTED, so the game-day reports had not yet been published. The 11/15 games do appear in that edition but every team is NOT YET SUBMITTED, and no 11/16 or 11/17 game appears at all. Those lines carry no injury adjustment and say so."
   }
  ],
  "what_is_live_now": [
   "Originated spreads, totals, moneylines and fair prices for all 27 games across 2026-11-14, 2026-11-15, 2026-11-16 and 2026-11-17.",
   "63 picks from the strategy library, each tagged with its strategy, its market, the reference number it is betting against, the model's number and the gap.",
   "Player projections for the top-50 scorers, with the possession, opponent-defence and teammate-availability factors broken out separately.",
-  "The official injury report, 11/13/26 07:30 PM ET edition, transcribed row by row - 122 rows - with each player's status and the team's published reason.",
+  "The official injury report, 11/13/26 07:30 PM ET edition (the one the model uses), transcribed row by row - 122 rows - with each player's status and the team's published reason. Plus the newer 11/14/26 04:15 AM ET edition, published as evidence and not fed into the model.",
   "Game-flow read-outs built from official pace and efficiency inputs, including probability of a close game, a blowout and overtime.",
   "51 out-of-sample games with the full seven-gate matrix, a 30-team luck decomposition, 13 measured correlations and a ten-strategy leaderboard with reward tiers."
  ],
