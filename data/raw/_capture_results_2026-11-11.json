@@ -1,0 +1,29 @@
+{
+ "captured_at_utc": "2026-11-14T01:27:52Z",
+ "source_url": "https://www.nba.com/games?date=2026-11-11",
+ "page_bytes": 585196,
+ "page_sha256": "b6574073fc07e3b0c713bfe850c0c08883f2db968517ef1d00180e88bc14100d",
+ "parse": {
+  "strategy": "anchor-text v1",
+  "finals_rows": [],
+  "not_final": [
+   "0022600218",
+   "0022600219",
+   "0022600217",
+   "0022600222",
+   "0022600223",
+   "0022600221",
+   "0022600220",
+   "0022600224",
+   "0022600225",
+   "0022600226"
+  ],
+  "unparsed": []
+ },
+ "snapshot_comparison": {
+  "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
+  "mismatches": [],
+  "promotion_candidates": []
+ },
+ "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected."
+}
