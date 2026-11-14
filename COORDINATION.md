@@ -1792,10 +1792,29 @@ The platform pins this session to `arena/aadc3342-nba1`, branched from `main` at
 
 | # | Task | Status | File scope (exclusive) |
 | --- | --- | --- | --- |
-| A01 | Correct the README's public-site URL to the GitHub Pages URL configured for this repository | in progress | `README.md`, `COORDINATION.md` (§24 only) |
-| A02 | Verify change, site checks, record evidence | not started | `COORDINATION.md` (§24 only) |
+| A01 | Correct the README's public-site URL to the GitHub Pages URL configured for this repository | done | `README.md`, `COORDINATION.md` (§24 only) |
+| A02 | Verify change, site checks, record evidence | done | `COORDINATION.md` (§24 only) |
 
 Claim evidence: `gh api repos/wingbangboozle1-lang/NBA1/pages` returned
 `html_url=https://wingbangboozle1-lang.github.io/NBA1/`, with Pages source branch
 `main`, path `/`, and `https_enforced=true`. This is GitHub configuration evidence,
 not an NBA data source. No data, model, or generated-site files are in scope.
+
+### 24.1 Completion and verification
+
+- README link now exactly matches GitHub's configured Pages `html_url` above.
+- `python3 scripts/verify_all.py`: exit 0 (`VERIFY OK`); all builders, page checks,
+  row/link checks and data audits passed. This full run included official-source
+  cross-checks already in the repository (11/13–11/17); I did not add or modify
+  NBA values.
+- A direct assertion on the README URL matched the `gh api` Pages configuration;
+  `git diff --check` passed.
+- No NBA data or model claims were changed. No new irregularities found in this
+  narrowly scoped documentation fix. The broader existing warnings and flags are
+  unchanged and remain on the site's Flagged for Review page.
+- Integration note: the branch's initial claim commit was rebased onto the newer
+  `origin/main` (PR #60) after both had appended to the end of `COORDINATION.md`.
+  The conflict was resolved by retaining main's completed §23.6 record and this
+  session's §24 claim. No main content was removed.
+- Publish status: not yet submitted; a PR and the resulting Pages run will be
+  recorded here after the documentation commit is pushed.
