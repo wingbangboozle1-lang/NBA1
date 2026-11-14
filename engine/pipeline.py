@@ -115,15 +115,21 @@ def main():
     all_games += [{"date": g["date"], "home": g["home"], "away": g["away"]} for g in scheduled]
     all_games += [{"date": g["date"], "home": g["home"], "away": g["away"]} for g in in_progress]
     dates = sorted({g["date"] for g in all_games})
+    # For each date, the most recent EARLIER date each team played. Built from every
+    # game in the window, not only the single most recent earlier date, so a team that
+    # sat out the previous night still gets a real rest figure.
+    team_dates = {}
+    for g in all_games:
+        team_dates.setdefault(g["home"], set()).add(g["date"])
+        team_dates.setdefault(g["away"], set()).add(g["date"])
     last_by_date = {}
     for d in dates:
-        prev = [x for x in dates if x < d]
-        if not prev:
-            last_by_date[d] = {}
-            continue
-        last = max(prev)
-        last_by_date[d] = {g["home"]: last for g in all_games if g["date"] == last}
-        last_by_date[d].update({g["away"]: last for g in all_games if g["date"] == last})
+        prev_map = {}
+        for team, ds in team_dates.items():
+            earlier = [x for x in ds if x < d]
+            if earlier:
+                prev_map[team] = max(earlier)
+        last_by_date[d] = prev_map
 
     def days_between(a, b):
         da = datetime.date(*[int(x) for x in a.split("-")])

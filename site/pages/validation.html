@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validation gates &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="suggestions.html">Decision</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row links to the official source it
+      came from. A blank cell means the value could not be confirmed from an official
+      source &mdash; it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Validation gates</h1>
+      <p class="sub">The seven gates every strategy must clear, how each strategy scored, and the out-of-sample metrics the gates are read against.</p>
+    </div>
+    <h2 class="sec">The seven gates</h2><p class="secsub">Every strategy must clear all seven. A gate that has not been run is recorded as NOT RUN, never as a pass.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>ID</th>
+<th>Gate</th>
+<th>Definition</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>G1</td>
+<td><b>Sample size</b></td>
+<td>At least 30 graded plays; 10-29 is provisional.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>G2</td>
+<td><b>Calibration</b></td>
+<td>Observed hit rate within 8 pp of the mean predicted probability.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>G3</td>
+<td><b>Edge over break-even</b></td>
+<td>Mean modelled probability at or above 52.38% (break-even at -110).</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>G4</td>
+<td><b>Skill, not luck</b></td>
+<td>Wilson 95% lower bound on the hit rate above 52.38%; exact binomial p reported.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>G5</td>
+<td><b>Stability</b></td>
+<td>Bootstrap 95% CI of the model's margin MAE sits entirely below the reference model's MAE.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>G6</td>
+<td><b>Correlation limit</b></td>
+<td>Parlay leg pairs limited to |rho| &lt;= 0.30.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>G7</td>
+<td><b>Availability robustness</b></td>
+<td>A play must survive flipping every Questionable player to Out (needs the official report for the graded window).</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+</tbody></table></div>
+<h2 class="sec">Gate matrix</h2><p class="secsub">Each strategy against each gate. This is the table that decides what gets funded.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>ID</th>
+<th>Strategy</th>
+<th>G1</th>
+<th>G2</th>
+<th>G3</th>
+<th>G4</th>
+<th>G5</th>
+<th>G6</th>
+<th>G7</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>S1</td>
+<td>Side edge vs reference</td>
+<td><span class="g gprov">PROVISIONAL</span></td>
+<td><span class="g gp">PASS</span></td>
+<td><span class="g gp">PASS</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gnr">NOT RUN</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>S2</td>
+<td>Total edge vs reference</td>
+<td><span class="g gprov">PROVISIONAL</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gp">PASS</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gnr">NOT RUN</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>S3</td>
+<td>Moneyline value</td>
+<td><span class="g gprov">PROVISIONAL</span></td>
+<td><span class="g gp">PASS</span></td>
+<td><span class="g gp">PASS</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gnr">NOT RUN</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>S4</td>
+<td>Pace-driven total</td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gnr">NOT RUN</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>S5</td>
+<td>Back-to-back fade</td>
+<td><span class="g gprov">PROVISIONAL</span></td>
+<td><span class="g gp">PASS</span></td>
+<td><span class="g gp">PASS</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gnr">NOT RUN</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>S6</td>
+<td>Availability shock</td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gnr">NOT RUN</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>S7</td>
+<td>Player points prop</td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gnr">NOT RUN</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>S8</td>
+<td>Points + rebounds + assists combo</td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gna">N/A</span></td>
+<td><span class="g gnr">NOT RUN</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>S9</td>
+<td>Two-leg cross-game parlay</td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gp">PASS</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gp">PASS</span></td>
+<td><span class="g gnr">NOT RUN</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>S10</td>
+<td>Same-game parlay (side + total)</td>
+<td><span class="g gprov">PROVISIONAL</span></td>
+<td><span class="g gp">PASS</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gf">FAIL</span></td>
+<td><span class="g gp">PASS</span></td>
+<td><span class="g gnr">NOT RUN</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Hover a gate cell for the reason it was given. PASS = green, FAIL = red, PROVISIONAL = amber (passed, but the sample is too small to rely on), N/A = not applicable to this strategy, NOT RUN = could not be evaluated.</p>
+<h2 class="sec">Measured on the out-of-sample window</h2><p class="secsub">The model against the naive reference, on 51 games played after the ratings cut-off.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Metric</th>
+<th>Model</th>
+<th>Reference</th>
+<th>Reading</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Games in the window</td>
+<td>51</td>
+<td>2026-11-06 .. 2026-11-12</td>
+<td>2026-10-20..2026-11-05</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>Margin MAE</td>
+<td>12.89</td>
+<td>13.19</td>
+<td>model better</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>Margin RMSE</td>
+<td>17.10</td>
+<td>17.70</td>
+<td>model better</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>Total MAE</td>
+<td>14.86</td>
+<td>14.73</td>
+<td>reference better</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>Total RMSE</td>
+<td>19.88</td>
+<td>19.59</td>
+<td>reference better</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>Brier score</td>
+<td>0.1970</td>
+<td>0.1889</td>
+<td>reference better</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>Log loss</td>
+<td>0.5768</td>
+<td>0.5567</td>
+<td>reference better</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>Straight up</td>
+<td>37-14</td>
+<td>37-14</td>
+<td></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>Residual sigma (margin / total)</td>
+<td>17.44 / 20.28</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+</tbody></table></div>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

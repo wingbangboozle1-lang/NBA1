@@ -343,6 +343,42 @@
    "url": "https://www.nba.com/game/uta-vs-lac-0022600257",
    "publisher": "NBA.com (official)",
    "used_for": "Official game page for game 0022600257: tip time, venue, records and the game identifier."
+  },
+  "S14": {
+   "title": "NBA.com Games & Scores (all dates)",
+   "url": "https://www.nba.com/games",
+   "publisher": "NBA.com (official)",
+   "used_for": "The official index of every game's final score. The source a results backfill would walk, one date at a time, to extend the out-of-sample window."
+  },
+  "S15": {
+   "title": "NBA.com Stats glossary",
+   "url": "https://www.nba.com/stats/help/glossary",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official definitions of every statistic used on this site, including the pace, efficiency and shooting numbers the model reads."
+  },
+  "S18": {
+   "title": "NBA Cup 2026 - official competition page",
+   "url": "https://www.nba.com/nba-cup/2026",
+   "publisher": "NBA.com (official)",
+   "used_for": "The Emirates NBA Cup competition itself: format, group play and the tiebreaker rules that would make a Cup adjustment worth measuring."
+  },
+  "S19": {
+   "title": "GitHub Actions documentation",
+   "url": "https://docs.github.com/en/actions",
+   "publisher": "GitHub (official documentation)",
+   "used_for": "The scheduled-refresh workflow that fetches the official snapshots, and the log that would publish whether it succeeded."
+  },
+  "S20": {
+   "title": "NBA.com Stats - Players Box Scores",
+   "url": "https://www.nba.com/stats/players/boxscores",
+   "publisher": "NBA.com (official)",
+   "used_for": "Official per-game box scores. The source that would supply player game logs and the minutes needed to measure game-to-game variance."
+  },
+  "S11_2026-11-13": {
+   "title": "NBA.com Games & Scores - November 13, 2026",
+   "url": "https://www.nba.com/games?date=2026-11-13",
+   "publisher": "NBA.com (official)",
+   "used_for": "The 2026-11-13 slate. At capture time the games were still in progress, so it holds no final score."
   }
  }
 }
