@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source register &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="suggestions.html">Decision</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row links to the official source it
+      came from. A blank cell means the value could not be confirmed from an official
+      source &mdash; it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Source register</h1>
+      <p class="sub">Every official URL this site is built from, and what each one is used for.</p>
+    </div>
+    <div class="banner info"><div class="b-t">The rule</div><div class="b-b">Every table row published on the site carries one of these source ids. A value that cannot be traced to one of these URLs is left blank and flagged - it is never inferred.</div></div>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>ID</th>
+<th>Title</th>
+<th>Publisher</th>
+<th>Used for</th>
+<th class="src">Official URL</th>
+</tr></thead><tbody>
+<tr>
+<td>S1</td>
+<td><b>NBA.com Stats - Teams Advanced (2026-27 Regular Season, season to date)</b></td>
+<td>NBA.com (official)</td>
+<td>Team efficiency ratings (OffRtg, DefRtg, NetRtg, Pace, eFG%, TS%, TOV%, REB%, PIE) and won-lost records, through the games of 2026-11-12.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">https://www.nba.com/stats/teams/advanced</a></td>
+</tr>
+<tr>
+<td>S10</td>
+<td><b>NBA Official Injury Report PDF - 11/13/26 07:30 PM ET edition</b></td>
+<td>NBA.com (official, published by the NBA's official communications site)</td>
+<td>The newest official injury-report edition available at capture time: player status and reason for the 2026-11-13 and 2026-11-14 games. 122 rows transcribed; the team cell is printed once per team block, so continuation rows carry the team of their block (basis recorded row by row in data/d/injury_0730PM_team_basis.json).</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf</a></td>
+</tr>
+<tr>
+<td>S11_2026-11-13</td>
+<td><b>NBA.com Games &amp; Scores - November 13, 2026</b></td>
+<td>NBA.com (official)</td>
+<td>The 2026-11-13 slate. At capture time the games were still in progress, so it holds no final score.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-13</a></td>
+</tr>
+<tr>
+<td>S11_2026-11-14</td>
+<td><b>NBA.com Games &amp; Scores - 2026/11/14</b></td>
+<td>NBA.com (official)</td>
+<td>Slate listing, tip times, venues and the teams' won-lost records for 2026-11-14. Read 2026-11-14T01:20Z.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-14</a></td>
+</tr>
+<tr>
+<td>S11_2026-11-15</td>
+<td><b>NBA.com Games &amp; Scores - 2026/11/15</b></td>
+<td>NBA.com (official)</td>
+<td>Slate listing, tip times, venues and the teams' won-lost records for 2026-11-15. Read 2026-11-14T01:20Z.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-15</a></td>
+</tr>
+<tr>
+<td>S11_2026-11-16</td>
+<td><b>NBA.com Games &amp; Scores - 2026/11/16</b></td>
+<td>NBA.com (official)</td>
+<td>Slate listing, tip times, venues and the teams' won-lost records for 2026-11-16. Read 2026-11-14T01:20Z.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-16</a></td>
+</tr>
+<tr>
+<td>S11_2026-11-17</td>
+<td><b>NBA.com Games &amp; Scores - 2026/11/17</b></td>
+<td>NBA.com (official)</td>
+<td>Slate listing, tip times, venues and the teams' won-lost records for 2026-11-17. Read 2026-11-14T01:20Z.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-17</a></td>
+</tr>
+<tr>
+<td>S12</td>
+<td><b>NBA.com team roster page - Cleveland Cavaliers</b></td>
+<td>NBA.com (official)</td>
+<td>Corroborating the team printed for Ernest Udeh, Jr. in the 07:30 PM injury report, whose row falls inside the Cleveland Cavaliers block but whose Team cell was blank.</td>
+<td class="src"><a href="https://www.nba.com/team/1610612739/cavaliers/roster" target="_blank" rel="noopener">https://www.nba.com/team/1610612739/cavaliers/roster</a></td>
+</tr>
+<tr>
+<td>S13</td>
+<td><b>NBA.com team roster page - Dallas Mavericks</b></td>
+<td>NBA.com (official)</td>
+<td>Corroborating the team printed for Caleb Martin in the 07:30 PM injury report, whose row falls inside the Dallas Mavericks block but whose Team cell was blank. Build A's 05:15 PM transcription had recorded this player under Cleveland; the official roster page shows he is on Dallas. Flagged as an irregularity.</td>
+<td class="src"><a href="https://www.nba.com/team/1610612742/mavericks/roster" target="_blank" rel="noopener">https://www.nba.com/team/1610612742/mavericks/roster</a></td>
+</tr>
+<tr>
+<td>S14</td>
+<td><b>NBA.com Games &amp; Scores (all dates)</b></td>
+<td>NBA.com (official)</td>
+<td>The official index of every game's final score. The source a results backfill would walk, one date at a time, to extend the out-of-sample window.</td>
+<td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">https://www.nba.com/games</a></td>
+</tr>
+<tr>
+<td>S15</td>
+<td><b>NBA.com Stats glossary</b></td>
+<td>NBA.com (official)</td>
+<td>Official definitions of every statistic used on this site, including the pace, efficiency and shooting numbers the model reads.</td>
+<td class="src"><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">https://www.nba.com/stats/help/glossary</a></td>
+</tr>
+<tr>
+<td>S18</td>
+<td><b>NBA Cup 2026 - official competition page</b></td>
+<td>NBA.com (official)</td>
+<td>The Emirates NBA Cup competition itself: format, group play and the tiebreaker rules that would make a Cup adjustment worth measuring.</td>
+<td class="src"><a href="https://www.nba.com/nba-cup/2026" target="_blank" rel="noopener">https://www.nba.com/nba-cup/2026</a></td>
+</tr>
+<tr>
+<td>S19</td>
+<td><b>GitHub Actions documentation</b></td>
+<td>GitHub (official documentation)</td>
+<td>The scheduled-refresh workflow that fetches the official snapshots, and the log that would publish whether it succeeded.</td>
+<td class="src"><a href="https://docs.github.com/en/actions" target="_blank" rel="noopener">https://docs.github.com/en/actions</a></td>
+</tr>
+<tr>
+<td>S2</td>
+<td><b>NBA.com Stats - Teams Advanced, date range 10/20/2026 to 11/05/2026</b></td>
+<td>NBA.com (official)</td>
+<td>Training-window team ratings for the out-of-sample test (no game after 2026-11-05 contributes to these numbers).</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonType=Regular+Season</a></td>
+</tr>
+<tr>
+<td>S20</td>
+<td><b>NBA.com Stats - Players Box Scores</b></td>
+<td>NBA.com (official)</td>
+<td>Official per-game box scores. The source that would supply player game logs and the minutes needed to measure game-to-game variance.</td>
+<td class="src"><a href="https://www.nba.com/stats/players/boxscores" target="_blank" rel="noopener">https://www.nba.com/stats/players/boxscores</a></td>
+</tr>
+<tr>
+<td>S3_2026-11-06</td>
+<td><b>NBA.com Games &amp; Scores - November 6, 2026</b></td>
+<td>NBA.com (official)</td>
+<td>Final scores (out-of-sample test games); also rest flags for 2026-11-07.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-06" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-06</a></td>
+</tr>
+<tr>
+<td>S3_2026-11-07</td>
+<td><b>NBA.com Games &amp; Scores - November 7, 2026</b></td>
+<td>NBA.com (official)</td>
+<td>Final scores (out-of-sample test games); also rest flags for 2026-11-08. Includes the NBA Mexico City Game (DEN vs IND) played at a neutral site.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-07" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-07</a></td>
+</tr>
+<tr>
+<td>S3_2026-11-08</td>
+<td><b>NBA.com Games &amp; Scores - November 8, 2026</b></td>
+<td>NBA.com (official)</td>
+<td>Final scores; also used to establish which teams played on 2026-11-08 (rest/B2B flag for 2026-11-09 games).</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-08" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-08</a></td>
+</tr>
+<tr>
+<td>S3_2026-11-09</td>
+<td><b>NBA.com Games &amp; Scores - November 9, 2026</b></td>
+<td>NBA.com (official)</td>
+<td>Final scores (out-of-sample test game 1 of 28).</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-09" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-09</a></td>
+</tr>
+<tr>
+<td>S3_2026-11-10</td>
+<td><b>NBA.com Games &amp; Scores - November 10, 2026</b></td>
+<td>NBA.com (official)</td>
+<td>Final scores (out-of-sample test games).</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-10" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-10</a></td>
+</tr>
+<tr>
+<td>S3_2026-11-11</td>
+<td><b>NBA.com Games &amp; Scores - November 11, 2026</b></td>
+<td>NBA.com (official)</td>
+<td>Final scores (out-of-sample test games).</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-11</a></td>
+</tr>
+<tr>
+<td>S3_2026-11-12</td>
+<td><b>NBA.com Games &amp; Scores - November 12, 2026</b></td>
+<td>NBA.com (official)</td>
+<td>Final scores (out-of-sample test games); also rest flags for 2026-11-13.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-12</a></td>
+</tr>
+<tr>
+<td>S3_2026-11-13</td>
+<td><b>NBA.com Games &amp; Scores - November 13, 2026 (in progress at capture)</b></td>
+<td>NBA.com (official)</td>
+<td>The nine fixtures' existence and tip times, for rest / back-to-back arithmetic only. No score is published: the games were live, not final.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-13</a></td>
+</tr>
+<tr>
+<td>S3_2026-11-17</td>
+<td><b>NBA.com Games &amp; Scores - November 17, 2026</b></td>
+<td>NBA.com (official)</td>
+<td>Full slate verification 2026-11-17 (5 games: matchup, tip time, records) on 2026-11-14.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-17</a></td>
+</tr>
+<tr>
+<td>S4</td>
+<td><b>NBA.com Schedule</b></td>
+<td>NBA.com (official)</td>
+<td>Upcoming slate: dates, tip times (ET), venues, game ids, Emirates NBA Cup group labels.</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">https://www.nba.com/schedule</a></td>
+</tr>
+<tr>
+<td>S5</td>
+<td><b>NBA Injury Report: 2026-27 Season (index of every published edition)</b></td>
+<td>official.nba.com (official)</td>
+<td>Index of the league's official injury report PDFs and the reporting deadlines that govern them.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">https://official.nba.com/nba-injury-report-2026-27-season/</a></td>
+</tr>
+<tr>
+<td>S6</td>
+<td><b>NBA Official Injury Report PDF - 11/13/26 05:15 PM ET edition</b></td>
+<td>ak-static.cms.nba.com (NBA official static CMS)</td>
+<td>Superseded: the 11/13/26 05:15 PM ET injury-report edition. Retained for the edition-to-edition diff. The live edition is S10 (07:30 PM ET).</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf" target="_blank" rel="noopener">https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf</a></td>
+</tr>
+<tr>
+<td>S7</td>
+<td><b>NBA.com Stats - Players Traditional (2026-27 Regular Season)</b></td>
+<td>NBA.com (official)</td>
+<td>Per-game player averages (page 1 of 10 = top 50 scorers). Player-prop baselines only; no player outside this page is modelled.</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">https://www.nba.com/stats/players/traditional</a></td>
+</tr>
+<tr>
+<td>S8_0022600034</td>
+<td><b>NBA.com game page - Knicks at Pacers, 2026-11-13</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-ind-0022600034" target="_blank" rel="noopener">https://www.nba.com/game/nyk-vs-ind-0022600034</a></td>
+</tr>
+<tr>
+<td>S8_0022600035</td>
+<td><b>NBA.com game page - Bucks at Magic, 2026-11-13</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/mil-vs-orl-0022600035" target="_blank" rel="noopener">https://www.nba.com/game/mil-vs-orl-0022600035</a></td>
+</tr>
+<tr>
+<td>S8_0022600036</td>
+<td><b>NBA.com game page - Cavaliers at Heat, 2026-11-13</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/cle-vs-mia-0022600036" target="_blank" rel="noopener">https://www.nba.com/game/cle-vs-mia-0022600036</a></td>
+</tr>
+<tr>
+<td>S8_0022600037</td>
+<td><b>NBA.com game page - Hawks at Bulls, 2026-11-13</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/atl-vs-chi-0022600037" target="_blank" rel="noopener">https://www.nba.com/game/atl-vs-chi-0022600037</a></td>
+</tr>
+<tr>
+<td>S8_0022600038</td>
+<td><b>NBA.com game page - Grizzlies at Pelicans, 2026-11-13</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/mem-vs-nop-0022600038" target="_blank" rel="noopener">https://www.nba.com/game/mem-vs-nop-0022600038</a></td>
+</tr>
+<tr>
+<td>S8_0022600039</td>
+<td><b>NBA.com game page - Jazz at Rockets, 2026-11-13</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/uta-vs-hou-0022600039" target="_blank" rel="noopener">https://www.nba.com/game/uta-vs-hou-0022600039</a></td>
+</tr>
+<tr>
+<td>S8_0022600040</td>
+<td><b>NBA.com game page - Warriors at Spurs, 2026-11-13</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/gsw-vs-sas-0022600040" target="_blank" rel="noopener">https://www.nba.com/game/gsw-vs-sas-0022600040</a></td>
+</tr>
+<tr>
+<td>S8_0022600041</td>
+<td><b>NBA.com game page - Trail Blazers at Kings, 2026-11-13</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-sac-0022600041" target="_blank" rel="noopener">https://www.nba.com/game/por-vs-sac-0022600041</a></td>
+</tr>
+<tr>
+<td>S8_0022600042</td>
+<td><b>NBA.com game page - Thunder at Clippers, 2026-11-13</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/okc-vs-lac-0022600042" target="_blank" rel="noopener">https://www.nba.com/game/okc-vs-lac-0022600042</a></td>
+</tr>
+<tr>
+<td>S8_0022600231</td>
+<td><b>NBA.com game page - Nuggets at Pelicans, 2026-11-14</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">https://www.nba.com/game/den-vs-nop-0022600231</a></td>
+</tr>
+<tr>
+<td>S8_0022600232</td>
+<td><b>NBA.com game page - Mavericks at Cavaliers, 2026-11-14</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/dal-vs-cle-0022600232" target="_blank" rel="noopener">https://www.nba.com/game/dal-vs-cle-0022600232</a></td>
+</tr>
+<tr>
+<td>S8_0022600233</td>
+<td><b>NBA.com game page - Pistons at Heat, 2026-11-14</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-mia-0022600233" target="_blank" rel="noopener">https://www.nba.com/game/det-vs-mia-0022600233</a></td>
+</tr>
+<tr>
+<td>S8_0022600234</td>
+<td><b>NBA.com game page - Nets at Grizzlies, 2026-11-14</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/bkn-vs-mem-0022600234" target="_blank" rel="noopener">https://www.nba.com/game/bkn-vs-mem-0022600234</a></td>
+</tr>
+<tr>
+<td>S8_0022600235</td>
+<td><b>NBA.com game page - Bulls at Timberwolves, 2026-11-14</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-min-0022600235" target="_blank" rel="noopener">https://www.nba.com/game/chi-vs-min-0022600235</a></td>
+</tr>
+<tr>
+<td>S8_0022600236</td>
+<td><b>NBA.com game page - Pacers at 76ers, 2026-11-15</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/ind-vs-phi-0022600236" target="_blank" rel="noopener">https://www.nba.com/game/ind-vs-phi-0022600236</a></td>
+</tr>
+<tr>
+<td>S8_0022600237</td>
+<td><b>NBA.com game page - Lakers at Suns, 2026-11-15</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/lal-vs-phx-0022600237" target="_blank" rel="noopener">https://www.nba.com/game/lal-vs-phx-0022600237</a></td>
+</tr>
+<tr>
+<td>S8_0022600238</td>
+<td><b>NBA.com game page - Hornets at Clippers, 2026-11-15</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/cha-vs-lac-0022600238" target="_blank" rel="noopener">https://www.nba.com/game/cha-vs-lac-0022600238</a></td>
+</tr>
+<tr>
+<td>S8_0022600239</td>
+<td><b>NBA.com game page - Spurs at Jazz, 2026-11-15</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/sas-vs-uta-0022600239" target="_blank" rel="noopener">https://www.nba.com/game/sas-vs-uta-0022600239</a></td>
+</tr>
+<tr>
+<td>S8_0022600240</td>
+<td><b>NBA.com game page - Mavericks at Celtics, 2026-11-15</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/dal-vs-bos-0022600240" target="_blank" rel="noopener">https://www.nba.com/game/dal-vs-bos-0022600240</a></td>
+</tr>
+<tr>
+<td>S8_0022600241</td>
+<td><b>NBA.com game page - Knicks at Raptors, 2026-11-15</b></td>
+<td>NBA.com (official)</td>
+<td>Venue, tip time, Knicks record. Raptors record cross-checked against S1.</td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600241" target="_blank" rel="noopener">https://www.nba.com/game/nyk-vs-tor-0022600241</a></td>
+</tr>
+<tr>
+<td>S8_0022600242</td>
+<td><b>NBA.com game page - Rockets at Wizards, 2026-11-15</b></td>
+<td>NBA.com (official)</td>
+<td>Venue, tip time, Rockets record. Wizards record cross-checked against S1.</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-was-0022600242" target="_blank" rel="noopener">https://www.nba.com/game/hou-vs-was-0022600242</a></td>
+</tr>
+<tr>
+<td>S8_0022600243</td>
+<td><b>NBA.com game page - Hawks at Bucks, 2026-11-15</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/atl-vs-mil-0022600243" target="_blank" rel="noopener">https://www.nba.com/game/atl-vs-mil-0022600243</a></td>
+</tr>
+<tr>
+<td>S8_0022600244</td>
+<td><b>NBA.com game page - Thunder at Kings, 2026-11-15</b></td>
+<td>NBA.com (official)</td>
+<td>Current records for both teams.</td>
+<td class="src"><a href="https://www.nba.com/game/okc-vs-sac-0022600244" target="_blank" rel="noopener">https://www.nba.com/game/okc-vs-sac-0022600244</a></td>
+</tr>
+<tr>
+<td>S8_0022600245</td>
+<td><b>NBA.com game page - Magic at Celtics, 2026-11-16</b></td>
+<td>NBA.com (official)</td>
+<td>Official game page for game 0022600245: tip time, venue, records and the game identifier.</td>
+<td class="src"><a href="https://www.nba.com/game/orl-vs-bos-0022600245" target="_blank" rel="noopener">https://www.nba.com/game/orl-vs-bos-0022600245</a></td>
+</tr>
+<tr>
+<td>S8_0022600246</td>
+<td><b>NBA.com game page - Bulls at Cavaliers, 2026-11-16</b></td>
+<td>NBA.com (official)</td>
+<td>Official game page for game 0022600246: tip time, venue, records and the game identifier.</td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-cle-0022600246" target="_blank" rel="noopener">https://www.nba.com/game/chi-vs-cle-0022600246</a></td>
+</tr>
+<tr>
+<td>S8_0022600247</td>
+<td><b>NBA.com game page - Grizzlies at Wizards, 2026-11-16</b></td>
+<td>NBA.com (official)</td>
+<td>Official game page for game 0022600247: tip time, venue, records and the game identifier.</td>
+<td class="src"><a href="https://www.nba.com/game/mem-vs-was-0022600247" target="_blank" rel="noopener">https://www.nba.com/game/mem-vs-was-0022600247</a></td>
+</tr>
+<tr>
+<td>S8_0022600248</td>
+<td><b>NBA.com game page - 76ers at Nets, 2026-11-16</b></td>
+<td>NBA.com (official)</td>
+<td>Official game page for game 0022600248: tip time, venue, records and the game identifier.</td>
+<td class="src"><a href="https://www.nba.com/game/phi-vs-bkn-0022600248" target="_blank" rel="noopener">https://www.nba.com/game/phi-vs-bkn-0022600248</a></td>
+</tr>
+<tr>
+<td>S8_0022600249</td>
+<td><b>NBA.com game page - Rockets at Heat, 2026-11-16</b></td>
+<td>NBA.com (official)</td>
+<td>Official game page for game 0022600249: tip time, venue, records and the game identifier.</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-mia-0022600249" target="_blank" rel="noopener">https://www.nba.com/game/hou-vs-mia-0022600249</a></td>
+</tr>
+<tr>
+<td>S8_0022600250</td>
+<td><b>NBA.com game page - Trail Blazers at Timberwolves, 2026-11-16</b></td>
+<td>NBA.com (official)</td>
+<td>Official game page for game 0022600250: tip time, venue, records and the game identifier.</td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600250" target="_blank" rel="noopener">https://www.nba.com/game/por-vs-min-0022600250</a></td>
+</tr>
+<tr>
+<td>S8_0022600251</td>
+<td><b>NBA.com game page - Warriors at Pelicans, 2026-11-16</b></td>
+<td>NBA.com (official)</td>
+<td>Official game page for game 0022600251: tip time, venue, records and the game identifier.</td>
+<td class="src"><a href="https://www.nba.com/game/gsw-vs-nop-0022600251" target="_blank" rel="noopener">https://www.nba.com/game/gsw-vs-nop-0022600251</a></td>
+</tr>
+<tr>
+<td>S8_0022600252</td>
+<td><b>NBA.com game page - Suns at Nuggets, 2026-11-16</b></td>
+<td>NBA.com (official)</td>
+<td>Official game page for game 0022600252: tip time, venue, records and the game identifier.</td>
+<td class="src"><a href="https://www.nba.com/game/phx-vs-den-0022600252" target="_blank" rel="noopener">https://www.nba.com/game/phx-vs-den-0022600252</a></td>
+</tr>
+<tr>
+<td>S8_0022600253</td>
+<td><b>NBA.com game page - Knicks at Raptors, 2026-11-17</b></td>
+<td>NBA.com (official)</td>
+<td>Official game page for game 0022600253: tip time, venue, records and the game identifier.</td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600253" target="_blank" rel="noopener">https://www.nba.com/game/nyk-vs-tor-0022600253</a></td>
+</tr>
+<tr>
+<td>S8_0022600254</td>
+<td><b>NBA.com game page - Trail Blazers at Timberwolves, 2026-11-17</b></td>
+<td>NBA.com (official)</td>
+<td>Official game page for game 0022600254: tip time, venue, records and the game identifier.</td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600254" target="_blank" rel="noopener">https://www.nba.com/game/por-vs-min-0022600254</a></td>
+</tr>
+<tr>
+<td>S8_0022600255</td>
+<td><b>NBA.com game page - Pistons at Spurs, 2026-11-17</b></td>
+<td>NBA.com (official)</td>
+<td>Official game page for game 0022600255: tip time, venue, records and the game identifier.</td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-sas-0022600255" target="_blank" rel="noopener">https://www.nba.com/game/det-vs-sas-0022600255</a></td>
+</tr>
+<tr>
+<td>S8_0022600256</td>
+<td><b>NBA.com game page - Hornets at Lakers, 2026-11-17</b></td>
+<td>NBA.com (official)</td>
+<td>Official game page for game 0022600256: tip time, venue, records and the game identifier.</td>
+<td class="src"><a href="https://www.nba.com/game/cha-vs-lal-0022600256" target="_blank" rel="noopener">https://www.nba.com/game/cha-vs-lal-0022600256</a></td>
+</tr>
+<tr>
+<td>S8_0022600257</td>
+<td><b>NBA.com game page - Jazz at Clippers, 2026-11-17</b></td>
+<td>NBA.com (official)</td>
+<td>Official game page for game 0022600257: tip time, venue, records and the game identifier.</td>
+<td class="src"><a href="https://www.nba.com/game/uta-vs-lac-0022600257" target="_blank" rel="noopener">https://www.nba.com/game/uta-vs-lac-0022600257</a></td>
+</tr>
+<tr>
+<td>S9</td>
+<td><b>NBA.com Standings</b></td>
+<td>NBA.com (official)</td>
+<td>CONSULTED BUT NOT USABLE: the standings table is rendered client-side and does not appear in the page source available to a plain HTTP fetch (only the tie-break procedure text is present). Won-lost records were therefore taken from S1 and the S8 game pages instead. See Flagged for Review F1.</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">https://www.nba.com/standings</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Snapshot taken 2026-11-14T01:20:00Z. Every source id used by a table row on this site resolves to one of the URLs below.</p>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

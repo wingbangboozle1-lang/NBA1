@@ -22,7 +22,8 @@
     }
    ],
    "recommendation": "Take option 1. It is the cheapest change on this list and it is a prerequisite for four other items.",
-   "decision_needed": "Approve the backfill run and confirm the retention policy for historical snapshots."
+   "decision_needed": "Approve the backfill run and confirm the retention policy for historical snapshots.",
+   "source": "S14"
   },
   {
    "id": "SG2",
@@ -50,7 +51,8 @@
     }
    ],
    "recommendation": "Option 1 if a licensed feed is available, option 2 as a stopgap. Until either happens, the site should keep saying 'model-vs-reference units' rather than 'profit'.",
-   "decision_needed": "Whether to introduce a non-NBA data source at all, and which one."
+   "decision_needed": "Whether to introduce a non-NBA data source at all, and which one.",
+   "source": "S15"
   },
   {
    "id": "SG3",
@@ -78,7 +80,8 @@
     }
    ],
    "recommendation": "Option 1 or 2. If neither is taken, the Injuries page must keep the coverage column and confidence label visible so a 0.00 is never read as healthy.",
-   "decision_needed": "Which capture path to fund."
+   "decision_needed": "Which capture path to fund.",
+   "source": "S7"
   },
   {
    "id": "SG4",
@@ -100,7 +103,8 @@
     }
    ],
    "recommendation": "Option 1. The whole verification rule depends on the reader being able to tell these apart at a glance.",
-   "decision_needed": "Visual treatment and whether the chip applies to every table or only the derived ones."
+   "decision_needed": "Visual treatment and whether the chip applies to every table or only the derived ones.",
+   "source": "S1"
   },
   {
    "id": "SG5",
@@ -122,7 +126,8 @@
     }
    ],
    "recommendation": "Option 1, and it should be automatic - grading must not depend on anyone remembering.",
-   "decision_needed": "Whether graded picks overwrite the published slate or are kept alongside it."
+   "decision_needed": "Whether graded picks overwrite the published slate or are kept alongside it.",
+   "source": "S14"
   },
   {
    "id": "SG6",
@@ -144,7 +149,8 @@
     }
    ],
    "recommendation": "Option 1, and reserve the word 'edge' for a market comparison once SG2 lands.",
-   "decision_needed": "Wording only."
+   "decision_needed": "Wording only.",
+   "source": "S15"
   },
   {
    "id": "SG7",
@@ -172,7 +178,8 @@
     }
    ],
    "recommendation": "Option 1. Tier-driven staking keeps the information visible while making the status unambiguous.",
-   "decision_needed": "Unit sizes per tier, and whether paper-only plays are visually separated."
+   "decision_needed": "Unit sizes per tier, and whether paper-only plays are visually separated.",
+   "source": "S2"
   },
   {
    "id": "SG8",
@@ -200,7 +207,8 @@
     }
    ],
    "recommendation": "Option 2 as a stopgap alongside SG1; revisit option 1 once the sample is large enough to evaluate it.",
-   "decision_needed": "Whether tail risk should be damped or modelled."
+   "decision_needed": "Whether tail risk should be damped or modelled.",
+   "source": "S3_2026-11-12"
   },
   {
    "id": "SG9",
@@ -222,7 +230,8 @@
     }
    ],
    "recommendation": "Option 1. Do not add it until it is measured.",
-   "decision_needed": "Whether to fund the measurement."
+   "decision_needed": "Whether to fund the measurement.",
+   "source": "S18"
   },
   {
    "id": "SG10",
@@ -244,51 +253,100 @@
     }
    ],
    "recommendation": "Option 1. A stale data set presented as current is the worst failure mode this site has.",
-   "decision_needed": "Where the run record lives and how long it is retained."
+   "decision_needed": "Where the run record lives and how long it is retained.",
+   "source": "S19"
   },
   {
    "id": "SG11",
-   "title": "Automate the injury-report edition chain, not just the latest edition",
-   "category": "Data pipeline",
-   "problem": "Statuses move within hours of tip (five movements 3:00->5:15 PM on 11/13 alone, nine 12:00->3:00 PM). Only one edition per day is captured today.",
+   "title": "Make the horizon the centre of the site, not a page inside it",
+   "category": "Site",
+   "problem": "The repository had grown two complete sites plus three sets of pages, and the landing page led with a research narrative rather than with the next three days of games. A decision-maker opening the site had to find the picks page before finding out what was on tonight.",
    "options": [
     {
-     "option": "Fetch every published edition and diff statuses",
-     "effort": "Low - the PDF URLs are predictable (Injury-Report_<date>_<time>PM.pdf on ak-static.cms.nba.com)",
-     "risk": "Low",
-     "unlocks": "Late-scratch detection, a measured availability-shock strategy (S6), and the movement log Q11 needs"
+     "option": "Single generated site: one landing page that states the horizon, the status and the open flags, with one page per category and every row source-linked",
+     "effort": "Medium - one generator, no build step at deploy time",
+     "risk": "Low - additive; the two earlier builds stay online as archives",
+     "unlocks": "SG12, SG13; the site becomes usable without knowing the repository's history"
     },
     {
-     "option": "Keep one edition per day",
-     "effort": "None",
-     "risk": "Medium - late movements silently miss",
-     "unlocks": "Nothing new"
-    }
-   ],
-   "recommendation": "Fetch every edition and publish a movement table; the 2026-11-14 verification pass proved the URLs and the diff are reliable.",
-   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/"
-  },
-  {
-   "id": "SG12",
-   "title": "Teach the refresh workflow the fetch recipe that actually works",
-   "category": "Data pipeline",
-   "problem": "F7: the refresh workflow has never run because nba.com stats pages render client-side. The 2026-11-14 pass found endpoints that do work from a fetcher: www.nba.com/games?date=<date> (server-rendered slate with records, times, game ids), the ak-static injury PDFs, and nba.com/game/<slug>-<id> titles.",
-   "options": [
-    {
-     "option": "Rewrite fetch_official.py around the verified endpoints",
-     "effort": "Medium",
-     "risk": "Low - each endpoint was exercised on 2026-11-14 and is recorded in data/refresh_2026_11_14/official_captures_2026-11-14.json",
-     "unlocks": "Unattended 0-3 day pick generation, the daily refresh log (SG10), and continuous grading"
-    },
-    {
-     "option": "Keep the current script and refresh by hand",
-     "effort": "None",
-     "risk": "High - the brief forbids manual input",
+     "option": "Keep the two parallel builds and add a third landing that only links to them",
+     "effort": "Low",
+     "risk": "High - three navigation models, three data models, and the reader still has to know which one to trust",
      "unlocks": "Nothing"
     }
    ],
-   "recommendation": "Rewrite fetch_official.py around games?date= pages + injury PDFs + game-page titles; leave stats tables flagged as not machine-readable (F1).",
-   "source_url": "https://www.nba.com/games?date=2026-11-17"
+   "recommendation": "Option 1. It is what this build did. The earlier builds are preserved and linked as archives rather than deleted.",
+   "decision_needed": "Confirm that the earlier builds stay reachable as archives, and decide whether the root landing page should keep any pointer to them at all.",
+   "source": "S4"
+  },
+  {
+   "id": "SG12",
+   "title": "Put the unverified column on every table instead of only on the flags page",
+   "category": "Decision support",
+   "problem": "A reader who lands on the Picks page sees numbers. The fact that the ratings end at 11/12, that five of ten teams had not filed an injury report, and that no price feed exists is on a different page. That is a decision-making risk: a number that is a lower bound looks like a number that is a fact.",
+   "options": [
+    {
+     "option": "Render unconfirmed values as an em dash with a hover explanation, and print a coverage line under each table stating exactly what is missing",
+     "effort": "Low - a single rendering rule in the generator",
+     "risk": "None",
+     "unlocks": "A reader can tell an unverified value from a measured one without leaving the page"
+    },
+    {
+     "option": "Leave the flags page as the single place the gaps are recorded",
+     "effort": "None",
+     "risk": "Medium to high - the flags page is the least-read page on the site",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Option 1, and it is already in place on this build: every table that cannot be sourced says so in the row itself.",
+   "decision_needed": "Decide whether the hover text should be expanded into a visible column, which is friendlier on a phone and worse for scanning on a wide screen.",
+   "source": "S1"
+  },
+  {
+   "id": "SG13",
+   "title": "Add a one-screen answer to 'what should I look at tonight'",
+   "category": "Decision support",
+   "problem": "The site publishes 27 games and 63 paper picks. Nothing ranks them, because ranking on a model edge that has not cleared the skill gate would be misleading. The reader is left to do the sorting themselves.",
+   "options": [
+    {
+     "option": "Rank by the gates, not by the edge: surface the games whose edge survives the availability and stability checks, and show the gate status next to each one",
+     "effort": "Medium",
+     "risk": "Medium - any ranking risks being read as a recommendation, so it must carry the gate status inline",
+     "unlocks": "A shortlist that is defensible; SG14"
+    },
+    {
+     "option": "Publish an even slate with no ranking at all",
+     "effort": "None",
+     "risk": "Low",
+     "unlocks": "Nothing - it is what the site does today"
+    }
+   ],
+   "recommendation": "Option 1, but only once the price feed in SG2 exists. Before then any ranking is a ranking of model noise, and a shortlist that looks like a recommendation is the most dangerous thing this site could publish.",
+   "decision_needed": "Confirm the ordering rule, and confirm that no ranking appears until a strategy has cleared G4.",
+   "source": "S4"
+  },
+  {
+   "id": "SG14",
+   "title": "Make the verification reproducible by anyone, not only by this repository",
+   "category": "Trust",
+   "problem": "Every number on the site is meant to be checkable against an official page, and each row carries its link. But a reviewer who wants to confirm the build itself has to read five Python scripts and know which raw file feeds which output.",
+   "options": [
+    {
+     "option": "Publish a one-page provenance map: raw snapshot, the script that consumed it, the output file and the page it reached, with a link to each",
+     "effort": "Low - the mapping already exists in the code",
+     "risk": "None",
+     "unlocks": "Independent verification; SG15"
+    },
+    {
+     "option": "Leave provenance in the repository and in COORDINATION.md",
+     "effort": "None",
+     "risk": "Medium - a reviewer has to reconstruct it",
+     "unlocks": "Nothing"
+    }
+   ],
+   "recommendation": "Option 1. The mapping is already in the code; it needs a page.",
+   "decision_needed": "Confirm the level of detail: one line per output file, or one line per individual table row.",
+   "source": "S19"
   }
  ]
 }

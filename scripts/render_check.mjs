@@ -35,6 +35,11 @@ const CARD_PAGES = new Set([
   "command-center/flagged.html",
   "command-center/questions.html",
   "command-center/suggestions.html",
+  // Origination desk pages whose findings are one .card per section rather than a table.
+  // Same rule: substantive content, official links, no loader message. (Adding these two
+  // unblocked main's Pages gate after PR #40 shipped them card-shaped.)
+  "origination/pages/method.html",
+  "origination/pages/props.html",
 ]);
 
 const only = process.argv[2] ? path.resolve(process.argv[2]) : null;

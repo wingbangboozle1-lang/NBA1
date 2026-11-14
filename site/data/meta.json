@@ -1,0 +1,65 @@
+{
+ "generated_at_utc": "2026-11-14T01:44:14Z",
+ "season": "2026-27",
+ "as_of": "2026-11-14",
+ "data_windows": {
+  "ratings_season_to_date": "2026-27 Regular Season, season to date (through games of 2026-11-12)",
+  "ratings_training_window": "2026-27 Regular Season, Date From 10/20/2026 To 11/05/2026 (training window for the out-of-sample test)",
+  "results_captured": "2026-11-06 .. 2026-11-12 (51 games, all of them out-of-sample)",
+  "out_of_sample_window": "2026-11-06 .. 2026-11-12 (51 games)",
+  "upcoming_slates": "2026-11-14, 2026-11-15, 2026-11-16, 2026-11-17 (27 games, maximum horizon 3 days)",
+  "in_progress_at_capture": "9 games on 2026-11-13 were live at the data cut; they feed rest maths only and are not pickable",
+  "injury_report": "NBA Official Injury Report, 11/13/26 07:30 PM ET edition"
+ },
+ "counts": {
+  "teams": 30,
+  "completed_games_captured": 51,
+  "out_of_sample_games": 51,
+  "upcoming_games": 27,
+  "players_captured": 50,
+  "injury_rows": 122,
+  "strategies": 10
+ },
+ "league_averages": {
+  "off_rtg": 112.9,
+  "def_rtg": 112.98,
+  "L_used_in_model": 112.94,
+  "pace": 99.85,
+  "dreb_pct": 68.26
+ },
+ "assumptions": {
+  "shrink_k": {
+   "value": 2.8,
+   "unit": "league-average games added to each team's rating as a prior",
+   "status": "DERIVED, not guessed: an empirical-Bayes reliability calculation based on the spread of net ratings and the spread of forecast residuals. The single-game noise term in that calculation is estimated on the test window, so k is partly test-informed. A fixed-k sensitivity sweep is published on the Validation page. Flagged F4."
+  },
+  "alpha_offense_share": {
+   "value": 0.6,
+   "unit": "share of an availability loss that shows up in the team's own offense",
+   "status": "MODELLING CHOICE - not taken from any official source. Flagged F4."
+  },
+  "injury_impact_coef": {
+   "value": 15.0,
+   "unit": "net-rating points per 100 possessions lost if 100% of a team's minutes were unavailable",
+   "status": "MODELLING CHOICE - not taken from any official source. Sensitivity band 10 / 15 / 20 is published. Flagged F4."
+  },
+  "status_weight": {
+   "value": {
+    "Out": 1.0,
+    "Doubtful": 0.7,
+    "Questionable": 0.35,
+    "Probable": 0.1,
+    "Available": 0.0,
+    "NOT YET SUBMITTED": 0.0
+   },
+   "unit": "probability-ish weight applied to a player's minute share",
+   "status": "MODELLING CHOICE - not taken from any official source. Flagged F4."
+  },
+  "team_minutes_per_game": {
+   "value": 240.0,
+   "unit": "5 players x 48 minutes - used to turn a player's minutes into a share of team minutes",
+   "status": "ARITHMETIC from the published 48-minute regulation game."
+  }
+ },
+ "verification_rule": "Every published table row carries a source id. Anything that could not be traced to an official URL is left blank and appears on the Flagged for Review page."
+}

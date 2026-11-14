@@ -1,8 +1,12 @@
 {
- "captured_at_utc": "2026-11-14T00:38:00Z",
- "note": "Upcoming slate transcribed from the official NBA.com Games & Scores pages for 2026-11-14, 2026-11-15 and 2026-11-16 (tip times and each team's current won-lost record) and the official Schedule page (building and city). This is the whole of the 72-hour horizon: 5 + 9 + 8 = 22 games, matching the game counts the official schedule calendar prints for those dates. No Cup group label appears for any of these games on the official pages, so cup_group is null rather than carried over. | MERGE 2026-11-14 (arena/2329cb68-nba1): the 2026-11-13 games were live at the data cut and are recorded in schedule_in_progress.json (rest maths only, not pickable), matching the model adopted on main. The five 2026-11-17 games were appended after verification against https://www.nba.com/games?date=2026-11-17 and the official game pages (titles read 'Nov 17, 2026' for 0022600253 / 0022600254); 11/17 venues/cities left blank (not printed on the official page, never inferred). Evidence: data/refresh_2026_11_14/official_captures_2026-11-14.json.",
- "as_of": "2026-11-14",
- "window_days": 3,
+ "captured_at_utc": "2026-11-14T01:20:00Z",
+ "window": "2026-11-14 through 2026-11-17 (today + the maximum 3 days ahead). Today = 2026-11-14 (UTC).",
+ "note": "Upcoming slate transcribed from the NBA.com official Schedule page (Week 4: Nov 9 - Nov 15 and Week 5: Nov 16 - Nov 22) and cross-checked against each game's NBA.com game page and against the NBA.com Games & Scores slate page for that date, which prints both teams' current records. Tip times are ET as published. No Emirates NBA Cup group label is printed by NBA.com for any game in this window, so cup_group is null for every row - it is not inferred from the 2026-11-13 slate.",
+ "record_sources": {
+  "default": "The NBA.com Games & Scores slate page for the game's own date (https://www.nba.com/games?date=YYYY-MM-DD), which prints each team's record.",
+  "as_of": "Records are the values NBA.com displayed when this snapshot was read, 2026-11-14T01:20Z (2026-11-13 21:20 ET). The 2026-11-13 slate was still in progress at that moment, so records for the 18 teams that played on 2026-11-13 do NOT yet include that night's result. Flagged.",
+  "exceptions": {}
+ },
  "cols": [
   "date",
   "time_et",
@@ -310,8 +314,8 @@
    "1-11",
    "LAC",
    "2-8",
-   "",
-   "",
+   "Intuit Dome",
+   "Inglewood, CA",
    "",
    "0022600257",
    "S8_0022600257"
@@ -323,8 +327,8 @@
    "4-8",
    "LAL",
    "11-2",
-   "",
-   "",
+   "Crypto.com Arena",
+   "Los Angeles, CA",
    "",
    "0022600256",
    "S8_0022600256"
@@ -336,8 +340,8 @@
    "6-5",
    "TOR",
    "5-7",
-   "",
-   "",
+   "Scotiabank Arena",
+   "Toronto, ON",
    "",
    "0022600253",
    "S8_0022600253"
@@ -349,8 +353,8 @@
    "8-3",
    "MIN",
    "9-3",
-   "",
-   "",
+   "Target Center",
+   "Minneapolis, MN",
    "",
    "0022600254",
    "S8_0022600254"
@@ -362,8 +366,8 @@
    "8-3",
    "SAS",
    "10-2",
-   "",
-   "",
+   "Frost Bank Center",
+   "San Antonio, TX",
    "",
    "0022600255",
    "S8_0022600255"

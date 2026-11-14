@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method &middot; NBA Line Origination Desk</title>
+<meta name="description" content="NBA lines originated from official NBA.com final scores, with a gated strategy leaderboard.">
+<link rel="stylesheet" href="../assets/style.css">
+
+</head><body>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html"><span class="dot"></span>NBA&nbsp;Line&nbsp;Origination&nbsp;Desk</a>
+  <div class="cap">Official capture 2026-11-14 00:42 UTC</div>
+  <nav><div class="navgroup"><h4>Overview</h4><ul>
+<li><a href="../index.html">Executive dashboard</a></li>
+</ul></div>
+<div class="navgroup"><h4>Lines and game flow</h4><ul>
+<li><a href="lines.html">Originated lines</a></li>
+<li><a href="gameflow.html">Game flow and rest</a></li>
+</ul></div>
+<div class="navgroup"><h4>Strategy lab</h4><ul>
+<li><a href="strategies.html">Strategy library</a></li>
+<li><a href="leaderboard.html">Leaderboard and rewards</a></li>
+<li><a href="gates.html">Validation gates</a></li>
+<li><a href="luck.html">Luck removal and power</a></li>
+<li><a href="signals.html">Signal study</a></li>
+</ul></div>
+<div class="navgroup"><h4>Model and data</h4><ul>
+<li><a href="teams.html">Team ratings</a></li>
+<li><a href="backtest.html">Walk-forward backtest</a></li>
+<li><a href="gamelog.html">Official game log</a></li>
+<li><a href="correlations.html">Correlations and parlays</a></li>
+<li><a class="active" href="method.html">Method</a></li>
+</ul></div>
+<div class="navgroup"><h4>Availability</h4><ul>
+<li><a href="injuries.html">Injuries and rotation</a></li>
+<li><a href="props.html">Player props</a></li>
+</ul></div>
+<div class="navgroup"><h4>Governance</h4><ul>
+<li><a href="questions.html">Open questions</a></li>
+<li><a href="suggestions.html">Suggestions</a></li>
+<li><a href="sources.html">Source register</a></li>
+<li><a href="flagged.html">Flagged for review</a></li>
+<li><a href="repo-review.html">Repository review</a></li>
+</ul></div></nav>
+  <div class="sidenote">
+    Every table row links to the official page it was read from.
+    A dash means the value is not published, not that it is zero.
+  </div>
+</aside>
+<main class="main">
+  <header class="top">
+    <h1>Method</h1>
+    <p class="sub">Exactly how each number is produced, and what each one is allowed to claim.</p>
+  </header>
+  <div class="banner">
+    <strong>No strategy is funded.</strong> All 12 flagged items and every unvalidated number are published
+    <a href="flagged.html">here</a>. There is no market odds feed, so nothing on this site is a claim of real-world profit.
+  </div>
+  
+<section class="card">
+  <h3>Inputs</h3>
+  <p>One input only: the official final scores and schedule published by NBA.com. Every figure on this site
+  derives from 151 verified scores. There is no odds feed, no possession data, no play-by-play
+  and no player game log, because none is published by an official source that can be read here.</p>
+</section>
+<section class="card">
+  <h3>The line</h3>
+  <ol class="plain">
+    <li><strong>Margin.</strong> Simple Rating System: rating = average margin + average opponent rating, solved
+        by iteration, shrunk toward zero with 4 pseudo-games. Predicted home margin = rating difference +
+        home-court (2.21 points, estimated from the data; zero for neutral-site games).</li>
+    <li><strong>Total.</strong> Opponent-adjusted points scored and points allowed, solved by iteration, shrunk
+        toward the league mean with 6 pseudo-games. Predicted total = home offence + away defence &minus; league
+        mean, plus the mirror image, plus the home scoring edge.</li>
+    <li><strong>Probability.</strong> Normal CDF around the point prediction with the out-of-sample residual
+        standard deviation: 15.87 points for margin, 19.27 for total. These are
+        measured out of sample, not in sample. See <a href="flagged.html#F10">F10</a> for the one
+        caveat.</li>
+    <li><strong>Price.</strong> American odds = the reciprocal of the probability. No margin is added &mdash;
+        this desk originates lines, it does not make a book.</li>
+  </ol>
+</section>
+<section class="card">
+  <h3>How a strategy can beat the line</h3>
+  <p>A bettor using the same information as the line cannot beat it, by construction. So each strategy is required
+  to add one input the line does not use &mdash; rest days, back-to-back status or schedule density, all read from
+  consecutive official schedule dates. Each bet is then struck at the line&rsquo;s own fair price
+  (1 / p<sub>baseline</sub>) and settled there. A strategy profits only if its extra input genuinely moves the
+  probability in a direction reality confirms.</p>
+  <p>Each strategy is run at three trigger levels (0.02, 0.03, 0.04 probability
+  points) and every cell is published. The trigger is not tuned to the results.</p>
+</section>
+<section class="card">
+  <h3>Luck removal</h3>
+  <p>Each cell&rsquo;s ROI is compared against 5,000 Monte-Carlo simulations of a no-skill bettor
+  placing the identical bet list at the identical prices. Three things come out of it: the null median (the luck
+  baseline), the 95th percentile (the luck line), and p<sub>null</sub> (how often pure luck did at least this
+  well). A separate power calculation reports the smallest true ROI this sample could detect at all.</p>
+  <p>Random seed 20261114; every figure on this site is reproducible from the repository.</p>
+</section>
+<section class="card">
+  <h3>Reproduce it</h3>
+  <pre class="code">python3 -m engine_v2.pipeline      # rebuild every number
+python3 -m engine_v2.build_site    # rebuild every page</pre>
+</section>
+
+  <footer class="foot">
+    <p>Session <code>arena/e32856d8-nba1</code>. Official capture 2026-11-14 00:42 UTC.
+    Model inputs: official NBA.com final scores and schedule only.
+    <a href="sources.html">Source register</a> &middot;
+    <a href="method.html">Method</a> &middot;
+    <a href="flagged.html">Flagged for review</a> &middot;
+    <a href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">Repository</a></p>
+  </footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive dashboard &middot; NBA Line Origination Desk</title>
+<meta name="description" content="NBA lines originated from official NBA.com final scores, with a gated strategy leaderboard.">
+<link rel="stylesheet" href="assets/style.css">
+
+</head><body>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="index.html"><span class="dot"></span>NBA&nbsp;Line&nbsp;Origination&nbsp;Desk</a>
+  <div class="cap">Official capture 2026-11-14 00:42 UTC</div>
+  <nav><div class="navgroup"><h4>Overview</h4><ul>
+<li><a class="active" href="index.html">Executive dashboard</a></li>
+</ul></div>
+<div class="navgroup"><h4>Lines and game flow</h4><ul>
+<li><a href="pages/lines.html">Originated lines</a></li>
+<li><a href="pages/gameflow.html">Game flow and rest</a></li>
+</ul></div>
+<div class="navgroup"><h4>Strategy lab</h4><ul>
+<li><a href="pages/strategies.html">Strategy library</a></li>
+<li><a href="pages/leaderboard.html">Leaderboard and rewards</a></li>
+<li><a href="pages/gates.html">Validation gates</a></li>
+<li><a href="pages/luck.html">Luck removal and power</a></li>
+<li><a href="pages/signals.html">Signal study</a></li>
+</ul></div>
+<div class="navgroup"><h4>Model and data</h4><ul>
+<li><a href="pages/teams.html">Team ratings</a></li>
+<li><a href="pages/backtest.html">Walk-forward backtest</a></li>
+<li><a href="pages/gamelog.html">Official game log</a></li>
+<li><a href="pages/correlations.html">Correlations and parlays</a></li>
+<li><a href="pages/method.html">Method</a></li>
+</ul></div>
+<div class="navgroup"><h4>Availability</h4><ul>
+<li><a href="pages/injuries.html">Injuries and rotation</a></li>
+<li><a href="pages/props.html">Player props</a></li>
+</ul></div>
+<div class="navgroup"><h4>Governance</h4><ul>
+<li><a href="pages/questions.html">Open questions</a></li>
+<li><a href="pages/suggestions.html">Suggestions</a></li>
+<li><a href="pages/sources.html">Source register</a></li>
+<li><a href="pages/flagged.html">Flagged for review</a></li>
+<li><a href="pages/repo-review.html">Repository review</a></li>
+</ul></div></nav>
+  <div class="sidenote">
+    Every table row links to the official page it was read from.
+    A dash means the value is not published, not that it is zero.
+  </div>
+</aside>
+<main class="main">
+  <header class="top">
+    <h1>Executive dashboard</h1>
+    <p class="sub">Lines originated from official NBA.com final scores, and a strategy leaderboard that has not yet funded anything.</p>
+  </header>
+  <div class="banner">
+    <strong>No strategy is funded.</strong> All 12 flagged items and every unvalidated number are published
+    <a href="pages/flagged.html">here</a>. There is no market odds feed, so nothing on this site is a claim of real-world profit.
+  </div>
+  
+<section class="kpis"><div class="kpi"><div class="k-val">174</div><div class="k-lab">Games in window</div><div class="k-note">151 scores verified &middot; 23 published without scores</div></div><div class="kpi"><div class="k-val">22</div><div class="k-lab">Originated lines</div><div class="k-note">3-day slate 14&ndash;16 November 2026</div></div><div class="kpi"><div class="k-val">101</div><div class="k-lab">Out-of-sample games</div><div class="k-note">walk-forward, 2026-10-27 to 2026-11-12</div></div><div class="kpi"><div class="k-val">12.43</div><div class="k-lab">Model vs naive (MAE)</div><div class="k-note">naive 14.26 &middot; Brier 0.209 vs 0.249</div></div><div class="kpi"><div class="k-val">39</div><div class="k-lab">Strategy cells tested</div><div class="k-note">23 produced bets &middot; 3 blocked</div></div><div class="kpi"><div class="k-val">0</div><div class="k-lab">Strategies funded</div><div class="k-note">gate result, not a preference</div></div></section>
+
+<section class="card">
+  <h3>Executive summary</h3>
+  <p class="lede">This desk originates its own NBA lines from one input: the official final scores published by
+  NBA.com. It then runs a leaderboard competition in which every strategy must beat that originated line using
+  information the line itself does not use. Nothing is funded yet, and the reason is quantified rather than
+  asserted.</p>
+  <div class="finding"><h4>1. The game log is complete and verified.</h4><p>All 30 teams&rsquo; game counts reconstructed from the 151 captured scores plus the 23 unpublished fixtures equal the official standings exactly (174 games). This is the strongest available evidence that the log is complete and correctly oriented.</p></div><div class="finding"><h4>2. The line-generating model beats a naive baseline.</h4><p>Out-of-sample margin error 12.43 points against 14.26 for a naive constant, Brier 0.209 against 0.249, and 68-33 straight up (67.3%). The line is a credible baseline to test strategies against.</p></div><div class="finding"><h4>3. No strategy passes the gates, and the reason is sample size, not design.</h4><p>Only 4 of 39 cells reach the 25-bet floor. The best one shows 27.3% ROI on 11 bets, but a no-skill bettor beats 45.5% ROI 5% of the time at that sample. Observed performance is inside the luck band, not outside it.</p></div><div class="finding"><h4>4. One signal is worth keeping; three are dead.</h4><p>Rest-day differential moves the margin by +2.82 points per day (t = +1.53, p = 0.130, n = 101) &mdash; not significant, but the only candidate that is not obviously zero, and it would need about 340 games to resolve. Back-to-back, schedule density and every totals signal are indistinguishable from nothing.</p></div><div class="finding"><h4>5. Correlations are close to zero, which is itself the answer.</h4><p>Margin and total correlate at r = -0.030 over 151 games (p = 0.72), and the out-of-sample residual correlation is r = +0.018. Same-game parlays should be priced at independence until a much larger sample says otherwise.</p></div><div class="finding"><h4>6. Injuries are published as context, not baked into the number.</h4><p>117 players are listed in the latest official report; only 8 of them have a verified season average in the partial leaderboards available. Rotation minutes are not estimated anywhere.</p></div>
+  <h4>What would change the answer</h4>
+  <ol class="plain">
+    <li><strong>More games.</strong> The season adds roughly seven games a day. The rest signal needs about
+        340 games; there are 151 today.</li>
+    <li><strong>A market price.</strong> Without it, &ldquo;edge&rdquo; only ever means &ldquo;beats our own number&rdquo;.</li>
+    <li><strong>A player game log.</strong> It is the only thing standing between this desk and player props.</li>
+  </ol>
+</section>
+
+<section class="card">
+  <h3>Three-day slate at a glance &middot; 22 originated lines</h3>
+  <p>Spread is from the home team&rsquo;s point of view: a positive number means the home team is getting points.
+  Signal shift is the adjustment the rest and back-to-back strategies would apply; it is <em>not</em> included in
+  the spread shown, because no strategy has earned the right to move it.</p>
+  <div class="tablewrap"><table class="tbl" data-sortable><thead><tr><th>Date</th><th>Tip (ET)</th><th>Matchup</th><th>Home spread</th><th>Total</th><th>P(home)</th><th>ML home / away</th><th>Signal shift</th><th>Rest A/H</th><th>Official source</th></tr></thead><tbody><tr><td>2026-11-14</td><td>7:00 PM ET</td><td>DEN @ NOP</td><td>+6.7</td><td>229.8</td><td>33.5%</td><td>198 / -198</td><td>-2.7</td><td>3/1</td><td><a class="src" href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-14</td><td>7:30 PM ET</td><td>DAL @ CLE</td><td>+0.8</td><td>233.3</td><td>47.9%</td><td>109 / -109</td><td>-2.2</td><td>2/1</td><td><a class="src" href="https://www.nba.com/game/dal-vs-cle-0022600232" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-14</td><td>8:00 PM ET</td><td>DET @ MIA</td><td>+1.7</td><td>232.0</td><td>45.6%</td><td>119 / -119</td><td>-2.2</td><td>2/1</td><td><a class="src" href="https://www.nba.com/game/det-vs-mia-0022600233" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-14</td><td>8:00 PM ET</td><td>BKN @ MEM</td><td>-10.2</td><td>230.2</td><td>74.0%</td><td>-285 / 285</td><td>-2.7</td><td>3/1</td><td><a class="src" href="https://www.nba.com/game/bkn-vs-mem-0022600234" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-14</td><td>8:00 PM ET</td><td>CHI @ MIN</td><td>-22.5</td><td>239.1</td><td>92.2%</td><td>-1176 / 1176</td><td>+2.2</td><td>1/2</td><td><a class="src" href="https://www.nba.com/game/chi-vs-min-0022600235" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-15</td><td>1:00 PM ET</td><td>IND @ PHI</td><td>-4.7</td><td>220.6</td><td>61.6%</td><td>-160 / 160</td><td>+0.6</td><td>2/3</td><td><a class="src" href="https://www.nba.com/game/ind-vs-phi-0022600236" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-15</td><td>4:00 PM ET</td><td>LAL @ PHX</td><td>+5.6</td><td>232.0</td><td>36.1%</td><td>177 / -177</td><td>-0.6</td><td>4/3</td><td><a class="src" href="https://www.nba.com/game/lal-vs-phx-0022600237" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-15</td><td>4:30 PM ET</td><td>CHA @ LAC</td><td>-7.7</td><td>212.3</td><td>68.6%</td><td>-219 / 219</td><td>-0.6</td><td>3/2</td><td><a class="src" href="https://www.nba.com/game/cha-vs-lac-0022600238" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-15</td><td>5:00 PM ET</td><td>SAS @ UTA</td><td>+10.5</td><td>223.7</td><td>25.3%</td><td>295 / -295</td><td>+0.0</td><td>2/2</td><td><a class="src" href="https://www.nba.com/game/sas-vs-uta-0022600239" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-15</td><td>6:00 PM ET</td><td>DAL @ BOS</td><td>-4.4</td><td>221.8</td><td>60.9%</td><td>-155 / 155</td><td>+0.6</td><td>3/4</td><td><a class="src" href="https://www.nba.com/game/dal-vs-bos-0022600240" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-15</td><td>6:00 PM ET</td><td>NYK @ TOR</td><td>+0.4</td><td>215.5</td><td>49.1%</td><td>104 / -104</td><td>+0.6</td><td>2/3</td><td><a class="src" href="https://www.nba.com/game/nyk-vs-tor-0022600241" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-15</td><td>7:00 PM ET</td><td>HOU @ WAS</td><td>+12.9</td><td>226.1</td><td>20.8%</td><td>380 / -380</td><td>+0.6</td><td>2/3</td><td><a class="src" href="https://www.nba.com/game/hou-vs-was-0022600242" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-15</td><td>8:00 PM ET</td><td>ATL @ MIL</td><td>+8.2</td><td>232.4</td><td>30.3%</td><td>230 / -230</td><td>+0.0</td><td>2/2</td><td><a class="src" href="https://www.nba.com/game/atl-vs-mil-0022600243" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-15</td><td>9:00 PM ET</td><td>OKC @ SAC</td><td>+12.3</td><td>219.2</td><td>21.9%</td><td>356 / -356</td><td>+0.0</td><td>2/2</td><td><a class="src" href="https://www.nba.com/game/okc-vs-sac-0022600244" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-16</td><td>7:00 PM ET</td><td>ORL @ BOS</td><td>-11.8</td><td>221.7</td><td>77.2%</td><td>-338 / 338</td><td>+1.1</td><td>3/5</td><td><a class="src" href="https://www.nba.com/game/orl-vs-bos-0022600245" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-16</td><td>7:00 PM ET</td><td>CHI @ CLE</td><td>-13.4</td><td>246.2</td><td>80.1%</td><td>-402 / 402</td><td>+0.0</td><td>3/3</td><td><a class="src" href="https://www.nba.com/game/chi-vs-cle-0022600246" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-16</td><td>7:00 PM ET</td><td>MEM @ WAS</td><td>+8.6</td><td>229.3</td><td>29.3%</td><td>241 / -241</td><td>+0.6</td><td>3/4</td><td><a class="src" href="https://www.nba.com/game/mem-vs-was-0022600247" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-16</td><td>7:30 PM ET</td><td>PHI @ BKN</td><td>+1.5</td><td>224.5</td><td>46.2%</td><td>116 / -116</td><td>+0.6</td><td>4/5</td><td><a class="src" href="https://www.nba.com/game/phi-vs-bkn-0022600248" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-16</td><td>7:30 PM ET</td><td>HOU @ MIA</td><td>+7.1</td><td>228.9</td><td>32.7%</td><td>206 / -206</td><td>+0.0</td><td>3/3</td><td><a class="src" href="https://www.nba.com/game/hou-vs-mia-0022600249" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-16</td><td>8:00 PM ET</td><td>GSW @ NOP</td><td>+13.1</td><td>231.7</td><td>20.4%</td><td>390 / -390</td><td>+0.0</td><td>3/3</td><td><a class="src" href="https://www.nba.com/game/gsw-vs-nop-0022600251" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-16</td><td>8:00 PM ET</td><td>POR @ MIN</td><td>-7.0</td><td>229.4</td><td>67.1%</td><td>-204 / 204</td><td>+0.6</td><td>3/4</td><td><a class="src" href="https://www.nba.com/game/por-vs-min-0022600250" target="_blank" rel="noopener">nba.com</a></td></tr><tr><td>2026-11-16</td><td>9:00 PM ET</td><td>PHX @ DEN</td><td>-7.2</td><td>225.2</td><td>67.5%</td><td>-208 / 208</td><td>+0.6</td><td>4/5</td><td><a class="src" href="https://www.nba.com/game/phx-vs-den-0022600252" target="_blank" rel="noopener">nba.com</a></td></tr></tbody></table></div>
+  <p class="tn"><a href="pages/lines.html">Full lines page with model detail</a></p>
+</section>
+
+<section class="grid2">
+  <section class="card "><h3>Where to look next</h3>
+   <ul class="plain">
+     <li><a href="pages/lines.html">Originated lines</a> &mdash; all 22 games, 14&ndash;16 November.</li>
+     <li><a href="pages/leaderboard.html">Leaderboard</a> &mdash; every strategy cell ranked, with its luck line.</li>
+     <li><a href="pages/luck.html">Luck removal</a> &mdash; why a +23% ROI is not evidence.</li>
+     <li><a href="pages/signals.html">Signal study</a> &mdash; the only candidate signal, and what it needs.</li>
+     <li><a href="pages/questions.html">Open questions</a> &mdash; 14 decisions blocked by missing information.</li>
+     <li><a href="pages/suggestions.html">Suggestions</a> &mdash; 12 ranked options, none implemented.</li>
+   </ul></section>
+  <section class="card "><h3>Standing limitations</h3>
+   <ul class="plain">
+     <li>No market odds from any official source (<a href="pages/flagged.html#F2">F2</a>).</li>
+     <li>No verified player game log, so no props (<a href="pages/flagged.html#F3">F3</a>).</li>
+     <li>23 games published as fixtures without scores (<a href="pages/flagged.html#F1">F1</a>).</li>
+     <li>12 items total on the <a href="pages/flagged.html">flagged page</a>.</li>
+   </ul></section>
+</section>
+
+  <footer class="foot">
+    <p>Session <code>arena/e32856d8-nba1</code>. Official capture 2026-11-14 00:42 UTC.
+    Model inputs: official NBA.com final scores and schedule only.
+    <a href="pages/sources.html">Source register</a> &middot;
+    <a href="pages/method.html">Method</a> &middot;
+    <a href="pages/flagged.html">Flagged for review</a> &middot;
+    <a href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">Repository</a></p>
+  </footer>
+</main>
+</div>
+<script src="assets/app.js"></script>
+</body></html>

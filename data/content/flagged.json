@@ -1,6 +1,6 @@
 {
  "title": "Flagged for Review",
- "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to.",
+ "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F20 were added by the 2026-11-14 build and concern the fresh three-day horizon.",
  "items": [
   {
    "id": "F1",
@@ -124,24 +124,83 @@
   },
   {
    "id": "F13",
-   "severity": "Medium",
-   "title": "Official slate pages publish two matchups twice inside three days",
-   "detail": "NBA.com lists NYK@TOR on 2026-11-15 (0022600241) and again on 2026-11-17 (0022600253), and POR@MIN on 2026-11-16 (0022600250) and 2026-11-17 (0022600254) - same home arena each time. Both dates are confirmed by the official game-page titles ('Nov 17, 2026'). This is exactly as published; it is flagged because repeat matchups within 72 hours are unusual and the model treats them as independent games (Q10).",
-   "source_url": "https://www.nba.com/games?date=2026-11-17"
+   "severity": "High",
+   "title": "No final score exists for the 2026-11-13 slate",
+   "detail": "At capture time (2026-11-14T01:20Z, 21:20 ET on 11/13) the 11/13 games were still being played: the official Games & Scores page shows NYK 35 - IND 40 at Q2 6:55 and MIL 30 - ORL 36 at Q2 4:48, with the other seven games marked PREGAME. No final score for any 11/13 game exists in any capture.",
+   "affected": "Ratings window (still ends 2026-11-12); team records for 18 teams; the backtest window",
+   "source": "S11_2026-11-13",
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "suggested_action": "Re-read the 11/13 slate page after the games settle and re-run the pipeline. The 9 games are already carried for rest flags, so only the scores are missing."
   },
   {
    "id": "F14",
-   "severity": "Low",
-   "title": "2026-11-17 venues and competition labels are blank on purpose",
-   "detail": "The official games date page prints matchup, tip time and records but not arenas; the arena is not on the rendered game-page text either. Per the no-inference rule the venue/city/competition cells for the five 11/17 games are left blank across the repo rather than guessed.",
-   "source_url": "https://www.nba.com/games?date=2026-11-17"
+   "severity": "Medium",
+   "title": "18 team records are one night out of date",
+   "detail": "Records were read from the official slate pages before the 11/13 games finished. NYK, IND, MIL, ORL, CLE, MIA, ATL, CHI, MEM, NOP, UTA, HOU, GSW, SAS, POR, SAC, OKC and LAC each played on 11/13 and will each have a changed record.",
+   "affected": "Away/home record columns on the Lines, Picks, Game Flow and Team pages",
+   "source": "S11_2026-11-14",
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "suggested_action": "The next capture corrects all 18 at once. No manual edit needed."
   },
   {
    "id": "F15",
+   "severity": "High",
+   "title": "The 11/14 injury report covers only half the teams",
+   "detail": "At the 07:30 PM ET edition, five of the ten teams playing on 11/14 had not filed: New Orleans Pelicans, Cleveland Cavaliers, Memphis Grizzlies, Chicago Bulls and Miami Heat are printed as NOT YET SUBMITTED. Only Denver, Dallas, Brooklyn, Minnesota and Detroit filed.",
+   "affected": "Availability impact for 5 of the 10 teams on 2026-11-14",
+   "source": "S10",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf",
+   "suggested_action": "Capture the next edition of the official report (a later 11/13 edition, or the first 11/14 edition) and re-run. The NOT YET SUBMITTED rows are published exactly as printed and are never filled in."
+  },
+  {
+   "id": "F16",
+   "severity": "High",
+   "title": "No injury-report edition yet covers the 11/15 to 11/17 games",
+   "detail": "The newest official edition available (11/13/26 07:30 PM ET) prints rows for the 11/13 and 11/14 games only. Editions for the later dates are published later and do not exist at capture time.",
+   "affected": "Availability impact for all 18 games on 11/15, 11/16 and 11/17; their lines carry no injury adjustment",
+   "source": "S10",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf",
+   "suggested_action": "Add the 11/14, 11/15, 11/16 and 11/17 editions to the refresh job. The Lines page already states, per team, that there is no entry in this edition."
+  },
+  {
+   "id": "F17",
    "severity": "Low",
-   "title": "Official 12:00 PM PDF prints 'Suggs, Jalan' and drops reason cells during extraction",
-   "detail": "The 11/13/26 12:00 PM edition misspells Jalen Suggs as 'Jalan' in the player column, and several continuation rows lose their Reason cell in text extraction (the reason reappears as loose text on the same page). Both transcriptions in this repo normalise the name and keep the printed reason where it is legible; the source files remain authoritative. Recorded so a reviewer comparing the PDF to the tables is not surprised.",
-   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf"
+   "title": "The 10:30 PM ET edition of the 11/13 injury report is not published yet",
+   "detail": "The league publishes a late edition for late games. The path for the 10:30 PM edition returns an AccessDenied error rather than a document, because it had not been published at 21:20 ET.",
+   "affected": "Which injury-report edition is the newest available",
+   "source": "S5",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "suggested_action": "Nothing to do: the refresh job re-reads the official index of every published edition and will pick the later one up automatically."
+  },
+  {
+   "id": "F18",
+   "severity": "High",
+   "title": "Two transcriptions of the same official PDF disagree on one player's team",
+   "detail": "Build A's transcription of the 05:15 PM edition records 'Martin, Caleb' under Cleveland Cavaliers with a blank matchup. In the PDF the row sits inside the Dallas Mavericks block, between 'Lively II, Dereck' and the Cleveland 'NOT YET SUBMITTED' row, and the official Dallas roster lists Caleb Martin (1628997, traded from PHI on 02/04/25). Cleveland's official roster does not list him.",
+   "affected": "Availability impact for the 11/14 Dallas Mavericks; the 05:15 PM comparison on the earlier build's injuries page",
+   "source": "S13",
+   "source_url": "https://www.nba.com/team/1610612742/mavericks/roster",
+   "suggested_action": "This build records Dallas, on the PDF's block structure corroborated by the official roster page. The earlier build's page still shows the other attribution; the conflict is published rather than silently corrected."
+  },
+  {
+   "id": "F19",
+   "severity": "Medium",
+   "title": "Ratings cover games through 2026-11-12 only",
+   "detail": "The season-to-date team ratings used by the model are the official NBA.com table as it stood after the games of 2026-11-12. The 11/13 games were in progress at capture time, so the ratings do not include them.",
+   "affected": "Every line and pick for the horizon; the backtest window",
+   "source": "S1",
+   "source_url": "https://www.nba.com/stats/teams/advanced",
+   "suggested_action": "Re-capture the official Teams Advanced table once the 11/13 games are final and re-run the pipeline."
+  },
+  {
+   "id": "F20",
+   "severity": "Low",
+   "title": "Three pull requests from earlier sessions are still open",
+   "detail": "PR #11 (arena/c7fbc064-nba1), PR #14 (arena/7cfd203a-nba1) and PR #20 (arena/9abdf3f7-nba1) are open on other branches. PR #20 audits official scores for 6-12 November and team advanced statistics and may close F13 and F14 if it captures the 11/13 finals.",
+   "affected": "Nothing on this site; they are other branches' work",
+   "source": "S1",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/pulls",
+   "suggested_action": "A reviewer with authority over those branches can decide whether to merge them. This session works on one branch and did not touch them."
   }
  ]
 }
