@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Picks · NBA1 Command Center</title>
+<meta name="description" content="Every paper play generated for the upcoming slates: singles, parlays, same-game parlays and player-prop combos, with the rule that produced each.">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a href="index.html">Dashboard</a>
+    <a href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a href="slate.html">Slate &amp; lines</a>
+    <a class="on" href="picks.html">Picks</a>
+    <a href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html">Validation gates</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="luck.html">Luck</a>
+    <a href="backtest.html">Game log</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="gameflow.html">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="flagged.html">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+  <div class="main">
+    <div class="top"><div><h1>Picks by slate</h1><div class="sub" id="sub">—</div></div><span class="asof" id="asof">as of …</span></div>
+    <div class="wrap">
+      <div class="bn warn"><div class="ico">!</div><div>
+        <p><strong>Paper only.</strong> No play below has been settled, and none is priced against a
+        sportsbook. "Fair price" is the American odds implied by this model's own probability; if a
+        real book offers something longer than that, the difference would be the edge — but no book
+        is quoted here.</p>
+        <p class="small">Result and units are blank for every row on purpose. A blank is not a zero.</p>
+      </div></div>
+
+      <div class="kpis" id="kpis"></div>
+
+      <h2>All plays</h2>
+      <div class="chips" id="chips"></div>
+      <div class="tools">
+        <label>Slate <select id="f-date"><option value="">All dates</option></select></label>
+        <label>Market <select id="f-mkt"><option value="">All markets</option></select></label>
+        <label>Search <input type="search" id="f-q" placeholder="team or player"></label>
+        <span class="count" id="cnt"></span>
+      </div>
+      <div id="tbl"><div class="empty">Loading…</div></div>
+
+      <h2>What each strategy does</h2>
+      <div id="rules"><div class="empty">Loading…</div></div>
+    </div>
+    <footer class="bot">
+      <p><strong>How a pick is made.</strong> The model originates a spread and a total for every game.
+      A strategy is a published rule for when that origination is worth acting on; if the rule's
+      threshold is not met, the game gets no pick rather than a forced one.</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association.</p>
+    </footer>
+  </div>
+</div>
+<script>
+(async () => {
+  try {
+    const [P, V, meta] = await Promise.all([
+      CC.load("picks.json"), CC.load("validation.json"),
+      fetch("data/meta.json").then(r=>r.json())]);
+    document.getElementById("asof").textContent = "as of " + (P.slate_dates||[])[0];
+    document.getElementById("sub").textContent = P.rows.length + " paper plays · " + P.slate_dates.join(", ");
+    document.getElementById("cut").textContent = meta.generated_at_utc;
+
+    const byStrat = {};
+    P.rows.forEach(p => byStrat[p.strategy] = (byStrat[p.strategy]||0)+1);
+    const gateOf = {};
+    V.strategies.forEach(s => gateOf[s.id] = s.gates||[]);
+
+    function gateTag(id){
+      const gs = gateOf[id]||[];
+      if (!gs.length) return CC.tag("no gates","n");
+      const fail = gs.filter(g=>g.status==="FAIL").length;
+      const pass = gs.filter(g=>g.status==="PASS").length;
+      return fail ? CC.tag(pass+" pass · "+fail+" fail","r") : CC.tag(pass+" pass","a");
+    }
+
+    // KPIs
+    const mk = {}; P.rows.forEach(p=>mk[p.market]=(mk[p.market]||0)+1);
+    CC.set("#kpis",
+      CC.kpi("Paper plays", P.rows.length, "across " + Object.keys(byStrat).length + " strategies", "") +
+      CC.kpi("Settled", 0, "every row is PENDING", "bad") +
+      CC.kpi("Parlays & SGPs", (mk["Parlay"]||0)+(mk["Same-game parlay"]||0), "cross-game and same-game", "") +
+      CC.kpi("Prop plays", (mk["Player points"]||0)+(mk["Player PRA"]||0), "no probability published", "warn"));
+
+    // market select
+    const msel = document.getElementById("f-mkt");
+    Object.keys(mk).sort().forEach(m => msel.insertAdjacentHTML("beforeend", `<option>${m}</option>`));
+    const dsel = document.getElementById("f-date");
+    P.slate_dates.forEach(d => dsel.insertAdjacentHTML("beforeend", `<option>${d}</option>`));
+
+    // strategy chips
+    const chips = document.getElementById("chips");
+    chips.innerHTML = `<button class="on" data-s="">All strategies</button>` +
+      Object.keys(byStrat).sort().map(s=>`<button data-s="${s}">${s} (${byStrat[s]})</button>`).join("");
+    let strat = "";
+    chips.querySelectorAll("button").forEach(b => b.onclick = () => {
+      chips.querySelectorAll("button").forEach(x=>x.classList.remove("on"));
+      b.classList.add("on"); strat = b.dataset.s; render();
+    });
+
+    const cols = [
+      {h:"Date", v:r=>CC.games(r.date)},
+      {h:"Game", v:r=>`<span class="mono">${CC.esc(r.matchup)}</span>`},
+      {h:"Strategy", v:r=>`<b>${CC.esc(r.strategy)}</b>`},
+      {h:"Market", k:"market"},
+      {h:"Play", v:r=>`<b>${CC.esc(r.line_display || r.side)}</b>`},
+      {h:"Legs", n:1, v:r=>r.n_legs ?? 1},
+      {h:"Model P", n:1, v:r=>CC.pct(r.p_model,1)},
+      {h:"Fair price", n:1, v:r=>r.fair_price==null?CC.blank:`<span class="mono">${r.fair_price>0?"+":""}${r.fair_price}</span>`},
+      {h:"ρ adj.", n:1, v:r=>r.correlation_adjustment==null?CC.blank:CC.num(r.correlation_adjustment,3)},
+      {h:"Result", v:()=>`<span class="blankdash">—</span>`},
+      {h:"Gate status", v:r=>gateTag(r.strategy)},
+      {h:"Game", v:r=>{
+        // A parlay's id is the legs joined by "+". Link every leg, or a reader cannot check the row.
+        const ids = String(r.game_id||"").split("+").filter(Boolean);
+        if (!ids.length) return CC.blank;
+        return ids.map(id => CC.game(id, ids.length > 1 ? "leg " + (ids.indexOf(id)+1) : "official"))
+                  .join(" ");
+      }},
+    ];
+
+    let date="", mkt="", q="";
+    function render(){
+      const rows = P.rows.filter(r => (!strat || r.strategy===strat) && (!date || r.date===date)
+        && (!mkt || r.market===mkt) && (!q || (r.matchup+" "+(r.line_display||"")).toLowerCase().includes(q.toLowerCase())));
+      CC.set("#tbl", CC.table(cols, rows));
+      document.getElementById("cnt").textContent = rows.length + " of " + P.rows.length;
+    }
+    dsel.onchange = e => { date = e.target.value; render(); };
+    msel.onchange = e => { mkt = e.target.value; render(); };
+    document.getElementById("f-q").oninput = e => { q = e.target.value; render(); };
+    render();
+
+    // rules
+    CC.set("#rules", V.strategies.map(s => `
+      <details><summary><b>${CC.esc(s.id)}</b> ${CC.esc(s.name)}
+        <span class="tag n">${CC.esc(s.family||"")}</span>
+        <span class="tag n">n = ${s.n_graded}</span>
+        <span class="tag ${s.gates.some(g=>g.status==="FAIL")?"r":"a"}">${s.gates.filter(g=>g.status==="PASS").length}/7 gates pass</span></summary>
+        <div class="body">
+          <p><strong>Rule:</strong> ${CC.esc(s.rule||"")}</p>
+          <p><strong>Why:</strong> ${CC.esc(s.why||"")}</p>
+          <p class="small">Gates: ${s.gates.map(g=>`${CC.esc(g.id)} ${g.status}`).join(" · ")}</p>
+          <p class="small">${(s.gates||[]).filter(g=>g.status==="FAIL").map(g=>`<b>${CC.esc(g.id)} ${CC.esc(g.name)}</b>: ${CC.esc(g.detail)}`).join("<br>")}</p>
+        </div>
+      </details>`).join(""));
+  } catch (e) { CC.fail("#tbl", e); }
+})();
+</script>
+</body>
+</html>

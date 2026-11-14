@@ -29,6 +29,12 @@ const CARD_PAGES = new Set([
   "docs/b/pages/questions.html", // <details> per question
   "docs/b/pages/strategy.html",  // one .card per strategy
   "docs/pages/suggestions.html", // decision cards
+  // Command Center pages that present findings as one <details> card per item rather than a table:
+  // a flag, a question, a suggestion. The rule they are held to is the same one: they must render
+  // something substantive, with an official link, and never a loader message.
+  "command-center/flagged.html",
+  "command-center/questions.html",
+  "command-center/suggestions.html",
 ]);
 
 const only = process.argv[2] ? path.resolve(process.argv[2]) : null;

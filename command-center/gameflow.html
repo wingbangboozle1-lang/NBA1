@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game Flow · NBA1 Command Center</title>
+<meta name="description" content="Pace, rest, back-to-back and availability context for every upcoming game">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a href="index.html">Dashboard</a>
+    <a href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a href="slate.html">Slate &amp; lines</a>
+    <a href="picks.html">Picks</a>
+    <a href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html">Validation gates</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="luck.html">Luck</a>
+    <a href="backtest.html">Game log</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="gameflow.html" class="on">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="flagged.html">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+  <div class="main">
+    <div class="top"><div><h1>Game Flow</h1><div class="sub">Pace, rest, back-to-back and availability context for every upcoming game</div></div><span class="asof" id="asof">as of …</span></div>
+    <div class="wrap">
+      <p class="lede">Game flow is about how a game is likely to be shaped: how many possessions,
+      how tired each side is, and whether the rotation is intact. It is derived from official pace and
+      efficiency inputs plus the fitted outcome spread — not from play-by-play, which this repository
+      does not capture.</p>
+
+      <div class="bn warn"><div class="ico">!</div><div>
+        <p><strong>No possession-level metric is published.</strong> Runs, quarter splits and
+        timeout-adjusted flow all need play-by-play data. What is here is a pre-game distribution:
+        expected possessions, expected total and margin, and the probability the game stays close.</p>
+      </div></div>
+
+      <div class="tools">
+        <label>Slate <select id="f-date"><option value="">All dates</option></select></label>
+        <label>Filter <select id="f-rest">
+          <option value="">All games</option>
+          <option value="b2b">A back-to-back is involved</option>
+          <option value="unknown">Rest days not known</option>
+        </select></label>
+        <span class="count" id="cnt"></span>
+      </div>
+      <div id="tbl"><div class="empty">Loading…</div></div>
+
+      <h2>Rest and back-to-back matrix</h2>
+      <div id="rest"><div class="empty">Loading…</div></div>
+      <p class="tnote">A blank rest figure means the team's previous game is not in the captured
+      schedule — it is left blank rather than assumed to be a normal two-day break.</p>
+    </div>
+    <footer class="bot">
+      <p><strong>NBA1 Command Center.</strong> Every table row links to an official source; anything that could
+      not be confirmed is blank and listed on <a href="flagged.html">Flagged for Review</a>.</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association. Data © NBA, used with
+      attribution and links to the official pages.</p>
+    </footer>
+  </div>
+</div>
+<script>
+(async () => {
+  try {
+    const [G, meta] = await Promise.all([CC.load("gameflow.json"), fetch("data/meta.json").then(r=>r.json())]);
+    document.getElementById("asof").textContent = "as of " + meta.as_of;
+    document.getElementById("cut").textContent = meta.generated_at_utc;
+    const rows = G.rows;
+    const dsel=document.getElementById("f-date");
+    [...new Set(rows.map(r=>r.date))].sort().forEach(d=>dsel.insertAdjacentHTML("beforeend",`<option>${d}</option>`));
+
+    const cols=[
+      {h:"Date", v:r=>CC.games(r.date)},
+      {h:"Time ET", k:"time_et", c:"nowrap"},
+      {h:"Game", v:r=>`<b>${CC.esc(r.away)}</b> @ <b>${CC.esc(r.home)}</b>`},
+      {h:"Possessions", n:1, v:r=>CC.n(r.possessions,1)},
+      {h:"Pace vs league", n:2, v:r=>CC.num(r.pace_vs_league,2)},
+      {h:"Expected total", n:1, v:r=>CC.n(r.expected_total,1)},
+      {h:"Expected margin (home)", n:1, v:r=>CC.num(r.expected_margin_home,1)},
+      {h:"P(home win)", n:1, v:r=>CC.pct(r.p_home_win,1)},
+      {h:"P(within 5)", n:1, v:r=>CC.pct(r.p_margin_within_5,1)},
+      {h:"P(20+)", n:1, v:r=>CC.pct(r.p_margin_20plus,1)},
+      {h:"P(OT)", n:2, v:r=>CC.pct(r.p_overtime_approx,2)},
+      {h:"Rest H / A", v:r=>{
+        const h=r.home_rest_days, a=r.away_rest_days;
+        const f=x=>x===null||x===undefined?CC.blank:x+"d";
+        return `<span class="mono">${f(h)} / ${f(a)}</span>`;
+      }},
+      {h:"B2B", v:r=>{
+        const t=(r.home_b2b?CC.tag("H","a"):"")+(r.away_b2b?CC.tag("A","a"):"");
+        return t||`<span class="blankdash">—</span>`;
+      }},
+      {h:"Source", v:r=>CC.game(r.game_id,"game page")},
+    ];
+    let date="", rest="";
+    function render(){
+      const f = rows.filter(r=> (!date||r.date===date) && (
+        !rest || (rest==="b2b" ? (r.home_b2b||r.away_b2b) : (r.home_rest_days==null||r.away_rest_days==null)) ));
+      CC.set("#tbl", CC.table(cols, f));
+      document.getElementById("cnt").textContent = f.length + " of " + rows.length + " games";
+      CC.set("#rest", CC.table([
+        {h:"Game", v:r=>`<span class="mono">${CC.esc(r.matchup)}</span>`},
+        {h:"Home rest", v:r=>r.home_rest_days==null?CC.tag("unknown","n"):`<span class="mono">${r.home_rest_days}d</span>`},
+        {h:"Home B2B", v:r=>r.home_b2b?CC.tag("yes","a"):CC.tag("no","g")},
+        {h:"Away rest", v:r=>r.away_rest_days==null?CC.tag("unknown","n"):`<span class="mono">${r.away_rest_days}d</span>`},
+        {h:"Away B2B", v:r=>r.away_b2b?CC.tag("yes","a"):CC.tag("no","g")},
+        {h:"Total", v:r=>`<span class="mono">${CC.n(r.expected_total,1)}</span>`},
+        {h:"Margin", v:r=>`<span class="mono">${CC.n(r.expected_margin_home,1)}</span>`},
+        {h:"Source", v:r=>CC.src(r.src_ratings||"S1","team stats")},
+      ], f));
+    }
+    dsel.onchange=e=>{date=e.target.value;render();};
+    document.getElementById("f-rest").onchange=e=>{rest=e.target.value;render();};
+    render();
+  } catch(e){ CC.fail("#tbl", e); }
+})();
+</script>
+</body>
+</html>
