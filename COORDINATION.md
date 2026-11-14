@@ -2169,3 +2169,43 @@ line by line (§27.1/§27.2, `REVIEW_Z01.md`).
 
 The deployment loop entries are appended in the follow-up delivery commits of this session; the
 data verification in §27.1/§27.2 does not depend on them.
+
+---
+
+## 28. Session `arena/ecd5bb53-nba1` — source-gate wording and exception counts (claimed 2026-11-14 UTC)
+
+Claimed on `main` at `7623c02`. At that cut, the dashboard checker reported 800 rows, 790 with an allowed official-source link, but its success line said every row was linked. After rebasing onto `origin/main` at `a29e721` (PRs #59 and #61 merged), that build reported 822 rows: 812 with an allowed official-source link, 7 explicit text explanations, 3 approved URL pointers in title attributes only, and 0 unmarked or unexplained gaps. After PRs #68 and #67 were merged through `main` at `55d0266`, the current full verification reports 958 rows: 937 with an allowed official-source link, 18 explanatory no-source marks, 3 approved URL pointers in title attributes only, and 0 unmarked or unexplained gaps. The 3 values remain blank/unverified. This scope improves the gate's accounting; it does not claim to verify that a linked source agrees with a published value.
+
+| # | Task | Status | File scope (exclusive) | Notes |
+| --- | --- | --- | --- | --- |
+| X01 | Count linked rows, reasoned no-source rows, title-only URL pointers, and unmarked gaps separately; correct the success message | done | `scripts/verify_dashboard.py` | No-source rows need an explanatory title or an HTTPS URL on an allowed official host; insecure/unapproved pointers fail. |
+| X02 | Correct the `verify_all.py` invocation comment to describe the link-or-explicit-no-source rule and the no-refetch limitation | done | `scripts/verify_all.py` | Comment only; gate behavior is unchanged apart from X01. |
+| X03 | Re-run checks, document limits and record cross-session requests | done | `COORDINATION.md` (§28 only) | Full verification and outcomes in §28.1–§28.3. |
+
+The independent injury-currency audit in PR #62 (`arena/2ef89703-nba1`, its §25 and `verify/2026-11-14-injury-currency/**`) is out of scope and untouched. The merged PR #59/#61 site, content, builder and README are also not changed by this gate-only task.
+
+### 28.1 Verification performed
+
+| Check | Result |
+| --- | --- |
+| `python3 scripts/verify_all.py` | **PASS** (`VERIFY OK`); 958 dashboard rows, 937 allowed source links, 18 explanatory no-source marks, 3 approved URL pointers in title attributes only, 0 unmarked gaps, 0 markers without a reason/pointer. Builders and data audits pass. |
+| No-source marker behavior (temporary HTML cases) | explanatory text passes; approved HTTPS NBA URL is counted separately as a title-only pointer; insecure/unapproved URL and empty title both fail. |
+| `python3 scripts/verify_integration.py` | **0 errors, 44 warnings**; 224 JSON, 114 HTML, 11,041 static links; 4,988 / 5,178 rows have an official NBA data-host link. Existing warnings remain visible on the review register. |
+| `scripts/check_links.py`, `scripts/check_rendered.py`, `scripts/check_site.py` | **PASS**; 879 doc/Command Center rows, 0 unsourced, 0 broken internal links; 707 Command Center rendered rows, 0 missing links; root checks pass. |
+| `node scripts/render_check.mjs` | **PASS**; 114 pages, 7,325 content blocks, 6,535 rendered table rows, 0 problems. |
+| `python3 -m py_compile scripts/verify_dashboard.py scripts/verify_all.py`; `git diff --check` | **PASS**. |
+
+This gate checks allowed hosts, source-cell links/markers, page structure and internal links. It does **not** fetch the NBA pages or compare their contents with row values; the sandbox's broader integration audit likewise says NBA reachability cannot be verified here. No NBA source data, model result or generated page was changed in this task.
+
+### 28.2 Review items for final integration (requests, not edits)
+
+- **R26-1 — README wording:** `README.md`'s checker summary still says "Every row source-linked." Update it to reflect the current measured result: 937/958 allowed links, 18 explanatory no-source marks, 3 title-only approved URL pointers, 0 unexplained gaps. `README.md` is outside this task's claimed scope.
+- **R26-2 — three non-clickable context URLs:** `site/pages/questions.html` Q14–Q16 have an em dash in the source cell and an approved URL only in the `title` attribute. The answers remain blank/unverified; the URLs are not clickable links. In the final site integration, either render each approved context URL as a link while retaining the unverified marker, or make the no-source reason explicit and keep the value blank. The row IDs and URLs are in `data/content/questions.json`; no values were inferred here.
+- **R26-3 — F34 wording:** F34 still says the gate prints success only when every row has a link. Update it to the current rule and measured count (937/958 allowed links, 18 explanatory marks, 3 title-only approved URL pointers, 0 unexplained gaps); retain the limitation that the gate does not fetch or compare source values.
+- **R26-4 — reading rule and F37:** the dashboard builder's sidebar still says every row links to a source, although 21 rows are explicitly marked no-source (18 text explanations and 3 title-only URL pointers); F37's counts predate both the refreshed content and the new Prop Variance page. In final integration, update the rule and re-audit F37/F46 and the affected rows; do not fill blanks by inference.
+
+### 28.3 Conflict and coordination log
+
+On the first `git pull --rebase origin main`, main advanced from `7623c02` through PRs #59 and #61 to `a29e721`; the end-of-file conflict was resolved with both main's §24 and this session's section retained. The next rebase brought in PR #62 and its follow-up probe commit (`5ea615f`), retaining its §25 injury audit. Main later advanced through PR #68 (which occupies §26) and PR #67 (which occupies §27) to `55d0266`; this section is therefore numbered §28. The request IDs R26-1 through R26-4 are retained from the original claim for continuity; they refer to the gate-audit requests, not the new section number. The remote probe snapshot `38552f8` (10:49:57Z) was newer than the then-current main snapshot, but was superseded before this rebase by main's newer probe snapshot in `55d0266` (10:55:34Z); the newer main pair is retained. No upstream text was discarded and no files in PR #62's or PR #67's exclusive scope were modified.
+
+Publish status: PR #63 is open and unmerged. The local branch, rebased on `main` at `55d0266`, passes the full local verification suite. Current PR checks and successful Pages deployment/live-site confirmation remain pending; do not merge until both are confirmed.
