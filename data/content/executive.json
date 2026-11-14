@@ -1,6 +1,6 @@
 {
  "title": "Executive Summary",
- "as_of": "2026-11-14",
+ "as_of": "2026-11-14T19:13Z",
  "headline": "The horizon runs the full three days: 27 games from 14 to 17 November 2026, with an originated line, a paper pick and an injury read-out for every one, and a source link on every row. The 2026-11-13 finals are now captured, settled and folded into a 60-game out-of-sample window, and the newest official injury-report edition (11/14/26 04:15 AM ET) has been transcribed row by row. The honest read: a small edge on the margin, none on totals or winners, and one strategy whose record has cleared the luck gate at last (S1, 23-9, p = 0.020) - but not the calibration and stability gates, so it stays capped at a quarter unit.",
  "lead": "Ten strategies were written, seven validation gates were defined, and all ten were run against a strictly out-of-sample window: all 60 completed games from 2026-11-06 to 2026-11-13, every one predicted using team ratings computed only from 2026-10-20 to 2026-11-05. No game in the test window contributes to the ratings that predict it. On top of that the system originates a line for every game in the next three days - 14, 15, 16 and 17 November - from official ratings and the newest official injury report.",
  "verdict": {
@@ -65,6 +65,7 @@
    "reading": "Two gaps closed the same morning: the finals now exist (F13 resolved) and the 18 stale team records were refreshed from the official cards (F14 resolved). Two remain open and are published as such: at the newest injury edition five of the ten teams playing on 11/14 have still not filed, and no edition lists any player for the 11/16 and 11/17 games."
   },
   {
+   "n": 10,
    "title": "The 60-game extension is real, but it cannot be reproduced from this repository alone",
    "detail": "The 2026-11-13 finals are captured, transcribed three independent times that all agree 9/9, and used to settle every published 11/13 pick (seven singles 3-4 at -1.40 units, three two-leg parlays 0-3). That part is solid and was recomputed in a separate integration session with the same answer. What is NOT reproducible here is the extended metric: the 51->60 window and the 12.98 vs 13.62 margin MAE depend on a team-ratings refresh, and https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season returns no data table to this environment (flag F24, re-tested 2026-11-14). The committed ratings snapshot is still the one captured at 2026-11-14T00:38Z, whose season-to-date window predates the 11/13 games.",
    "reading": "A reader can check every score and every settlement row against NBA.com, and should. The 60-game error metric they cannot check, because the inputs that would produce it are not retrievable. Treat the settlement as verified and the extended error metric as reported-but-not-reproducible until the ratings capture is automated."
@@ -82,8 +83,8 @@
  "recommended_next_actions": [
   {
    "rank": 1,
-   "action": "Capture the day-of-game injury updates for 2026-11-14 (after 16:30 UTC) and re-run the pipeline",
-   "why": "At the newest edition (11/14/26 04:15 AM ET), the same five teams - New Orleans, Cleveland, Memphis, Chicago and Miami - have still not filed for tonight's games. The official rules require game-day reports between 11 a.m. and 1 p.m. local time, so a later edition today will contain them. Tonight's five lines currently carry no adjustment for those teams.",
+   "action": "Capture the remaining 2026-11-14 game-day injury editions as they publish (the 01:30 PM ET edition is captured; the 05:00 PM ET edition is due around 22:00 UTC) and route any line change through the re-price decision P1/P2 on the Decisions page",
+   "why": "The site prices from the 04:15 AM ET edition; the 01:30 PM ET capture (verify/2026-11-14-cc5a6652/) changed 33 status lines and four of the five previously unfiled clubs filed. The change is labelled, not applied: silently re-pricing a published line is exactly what the staleness flags exist to prevent. Official index: https://official.nba.com/nba-injury-report-2026-27-season/",
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "source_label": "NBA official injury-report index"
   },
