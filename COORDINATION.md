@@ -1627,7 +1627,72 @@ file, `pages.yml`, the probe files, or `audit/**`.
 
 ---
 
-## 20. Final integration + refresh session `arena/254dd8bb-nba1` (claimed 2026-11-14 09:40 UTC)
+## 20. Session `arena/cfb25ff0-nba1` — 2026-11-13 official finals closure (claimed 2026-11-14 UTC)
+
+Branch `arena/cfb25ff0-nba1`, base `main` at `45c0287`. Claimed after reading this board and
+listing every remote branch (only `main` and this branch exist on `origin`; no open session
+holds the finals or settlement files).
+
+Why this task: the committed finals snapshot (`data/raw/games_completed.json`) stops at
+2026-11-12. The 2026-11-13 slate (game IDs 0022600034–0022600042) is Final on the official
+schedule (https://www.nba.com/schedule), while the refresh capture at 02:05Z recorded all nine as
+`not_final` (in progress). Flag F-C01 is therefore still open in the committed data.
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| X01 | Board read + claim, pushed before any edit | done | `COORDINATION.md` (§20 only) |
+| X02 | Capture the 9 finals from two official pages each: the NBA.com schedule and each game page | done (7 two-source, 2 single-source) | `audit/finals_2026-11-13/**` |
+| X03 | Write a row-level verified finals file, one row per game, with both official URLs and the page read | done | `data/verified/finals_2026-11-13.json` |
+| X04 | Cross-check against the committed snapshot and against any published pick for these games | done (no published pick on these games; 11/13 records checked for 18 teams) | `audit/finals_2026-11-13/**` |
+| X05 | Record the result and request promotion into the shared snapshot and settlement (integration seat) | done (requests R-X1 to R-X4 below) | `COORDINATION.md` (§20 only) |
+
+**Not touched on purpose:** `data/raw/**`, `data/derived/**`, `data/games.json`, `integration/**`,
+`docs/**`, `site/**`, root `*.html`, `scripts/**`, `engine/**`. Promotion into the shared
+snapshot and settlement belongs to the integration session, as the ground rules require.
+
+### 20.1 Completion record (session `arena/cfb25ff0-nba1`, 2026-11-14 UTC)
+
+**Sources.** Official nba.com pages, read with the page-fetch tool: the schedule
+<https://www.nba.com/schedule> (Week 4, Fri Nov 13) and the nine game pages
+`https://www.nba.com/game/<away>-vs-<home>-<game_id>` (listed in `audit/finals_2026-11-13/README.md`).
+
+**Verification performed.** `audit/finals_2026-11-13/check.py`: 41 checks over 9 games, 0 failed.
+C1 schedule card == game-page final (where the game page returned a linescore); C2 quarter sums == final;
+C3 status label is Final or Final/OT; C4 URL slug == away/home/game ID; C5 not yet in the committed snapshot.
+`audit/finals_2026-11-13/records_check.py`: post-11/13 records for the 18 teams that played; 11 agree
+with an official card read in this session, 0 disagree, 7 derived only.
+
+**Result.** Data file: `data/verified/finals_2026-11-13.json` (9 rows, each with two source URLs, or one
+where the game page returned no linescore; the ATL–CHI OT count is null because it is not confirmed).
+No shared file was edited: `data/raw/**`, `integration/**`, `site/**`, `docs/**` and root `*.html` are untouched.
+
+**Irregularities (publish on Flagged for Review; non-blocking):**
+
+1. `integration/out/settlement.json`: all 9 `cannot_settle` rows for 2026-11-13 carry the same
+   `source_url` (`https://www.nba.com/game/cha-vs-phx-0022600230/box-score`), which is a different game.
+2. `data/raw/games_completed.json` still stops at 2026-11-12. F-C01 stays open until promotion.
+3. ATL–CHI and POR–SAC: second official page not readable through the fetch tool; ATL–CHI OT count not stated.
+4. Seven horizon team records (ORL, ATL, GSW, POR, SAC, OKC; MIL via the game-page recap only) are derived
+   from pre-game record + result, not read from an official card in this session.
+5. CLE–MIA nba.com recap text says "Tuesday night" for a Friday game; the scores on the same page agree with
+   the schedule, so no value is affected.
+
+**Requests to the integration seat (logged, not executed):**
+
+* **R-X1 — promote the nine 11/13 finals** from `data/verified/finals_2026-11-13.json` into
+  `data/raw/games_completed.json` (same column order), and re-run `settle.py` so the `cannot_settle` rows
+  for 11/13 become settled or stay blocked with the reason.
+* **R-X2 — fix the nine `source_url` values** in `integration/out/settlement.json` (irregularity 1).
+* **R-X3 — refresh the horizon records** for the 18 teams that played on 11/13, from the table in
+  `audit/finals_2026-11-13/README.md` §3. Confirm the seven derived-only records against an official card first.
+* **R-X4 — publish irregularities 1–5** on the Flagged for Review register, with the links above.
+
+**Not done here (out of this session's claim):** the other horizon, lines and picks work, the
+Flagged-for-Review register, the Command Center, and the rest of the brief. Those are owned by the sessions
+listed in §0b and by the integration seat.
+
+
+## 21. Final integration + refresh session `arena/254dd8bb-nba1` (claimed 2026-11-14 09:40 UTC)
 
 Branch `arena/254dd8bb-nba1`, base `45c0287` (tip of `main` at claim time). The
 Arena harness fixes one branch per session, so the `session-<id>/<task>`
@@ -1643,13 +1708,59 @@ records — are now closable with evidence rather than assumption.
 
 | # | Task | Status | File scope (exclusive) | Plan |
 | --- | --- | --- | --- | --- |
-| S01 | Board sync + claim | done | `COORDINATION.md` (this §20 only) | This row; pushed immediately. |
-| S02 | Line-by-line verification of the tree at `45c0287` | in progress | none (read-only + `data/raw/s14/verification.json`) | Run every gate script (`verify_all`, `verify_integration`, `check_site`, `check_links`, `check_rendered`, `render_check.mjs`) and independently re-read published values against their cited official URLs via the web-fetch channel. |
-| S03 | Capture 2026-11-13 finals + current official records | in progress | `data/raw/s14/**` (new namespace) | nba.com/games per-date pages + standings; structured rows with capture UTC and source URL per row. Closes F13/F-C01 **only** for rows this capture confirms. |
-| S04 | Injury-report status capture for the 11/14–11/17 window | in progress | `data/raw/s14/**` | Official index + newest editions; 11/14 editions publish ≥16:30 UTC — record availability evidence, never infer contents. |
-| S05 | Settle the 11/13 paper picks; update records, leaderboard, luck decomposition | in progress | `data/raw/s14/**`, `data/content/**` (flag/executive updates), regenerated `docs/data/**`, `site/data/**` | Settlement only from captured finals. Regenerate through the existing builders; no methodology change, no gate loosened. |
-| S06 | Open-PR triage (#37, #42, #45, #53) | in progress | `COORDINATION.md` (§20 log) | Authors idle > 60 min → takeover permitted. Merge what verifies clean; close as superseded with content preserved; never discard another session's work. |
-| S07 | Final integration: PR → `main`, merge, Pages confirm, record | not started | whole repo (integration seat) | All gates green before merge; broken site is never merged. |
+| S01 | Board sync + claim | done | `COORDINATION.md` (this §21 only) | This row; pushed immediately. |
+| S02 | Line-by-line verification of the tree at `45c0287` | done | none (read-only + `data/raw/s14/verification.json`) | Run every gate script (`verify_all`, `verify_integration`, `check_site`, `check_links`, `check_rendered`, `render_check.mjs`) and independently re-read published values against their cited official URLs via the web-fetch channel. |
+| S03 | Capture 2026-11-13 finals + current official records | done | `data/raw/s14/**` (new namespace) | nba.com/games per-date pages + standings; structured rows with capture UTC and source URL per row. Closes F13/F-C01 **only** for rows this capture confirms. |
+| S04 | Injury-report status capture for the 11/14–11/17 window | done | `data/raw/s14/**` | Official index + newest editions; 11/14 editions publish ≥16:30 UTC — record availability evidence, never infer contents. |
+| S05 | Settle the 11/13 paper picks; update records, leaderboard, luck decomposition | done | `data/raw/s14/**`, `data/content/**` (flag/executive updates), regenerated `docs/data/**`, `site/data/**` | Settlement only from captured finals. Regenerate through the existing builders; no methodology change, no gate loosened. |
+| S06 | Open-PR triage (#37, #42, #45, #53) | done | `COORDINATION.md` (§20 log) | Authors idle > 60 min → takeover permitted. Merge what verifies clean; close as superseded with content preserved; never discard another session's work. |
+| S07 | Final integration: PR → `main`, merge, Pages confirm, record | in progress | whole repo (integration seat) | All gates green before merge; broken site is never merged. |
+
+**Results (2026-11-14, ~11:00 UTC):**
+
+- **S02** — every gate script green on the final tree: `verify_all.py` OK (712
+  rows checked), `verify_integration.py` OK (0 errors; 4554/4718 rows carry an
+  official source link, the rest are flagged on the Flagged page),
+  `check_site.py` OK, `check_links.py` PASS, `check_rendered.py` PASS,
+  `render_check.mjs` 112 pages / 0 problems. Published values spot re-read
+  against their cited official URLs via the web-fetch channel (finals pages,
+  standings, injury PDFs, one game page, Nets roster). Independent cross-check:
+  session `arena/cfb25ff0-nba1`'s 2026-11-13 finals transcription
+  (`data/verified/finals_2026-11-13.json`) matches this session's
+  `data/raw/s14/finals_2026-11-13.json` **9/9 on scores and team codes**.
+- **S03** — `scripts/s14_capture.py` (reproducible) → `data/raw/s14/`:
+  finals 0022600034–042, standings (post-11/13 records; wins-sum check 183 =
+  174 + 9 finals), 27 horizon cards 11/14–11/17 with official game IDs and
+  printed records, `sources.json`. **F13 and F-C01 closed** (cross-verified).
+- **S04** — `data/raw/s14/injury_2026-11-14_0415AM_et.json` (49 rows; PDF rows
+  unmodified). Five of ten teams playing 11/14 still unfiled (NOP/CLE/MEM/CHI/
+  MIA), all 11/15 slots NOT YET SUBMITTED, 11/16–17 unlisted (F15/F16/F19
+  updated). **F27** Traore row → Brooklyn Nets, verified on the official roster
+  page (attribution, not a printed value). Game-day reports due 11 a.m.–1 p.m.
+  local → recheck after 16:30 UTC (next-actions rank 1).
+- **S05** — `scripts/s14_settle.py` → `data/raw/s14/settlement_2026-11-13.json`:
+  gated singles **3-4 (−1.40u at −110)**, two-leg parlays **0-3**, 2 no-bets
+  under the |margin| < 3.0 gate; pre-registration check passed (live model
+  blocks identical to the copy frozen at 2026-11-13T22:45Z). OOS window extended
+  51 → **60 games** (`engine/validate.py` HOLDOUT_END 2026-11-13); pipeline
+  re-run green: margin MAE 12.98 vs naive 13.62 (−4.7%), Brier 0.202 vs 0.200.
+  **Leaderboard tier-ceiling defect found and fixed** (`engine/leaderboard.py`):
+  a strategy with failed/unrun gates can no longer be labelled Tier 1/2 (F26).
+  S1 (23-9, binomial p = 0.020) is now the first strategy to clear G4 but fails
+  G2/G5 and G7 is unrun → stays Tier 3 capped at 0.25u. Executive summary,
+  flagged and questions content refreshed (`scripts/s14_content.py`);
+  Q9 answered (A13). Builders' stale window prose fixed (51 → 60 games,
+  11/12 → 11/13, injury edition 04:15 AM ET).
+- **S06** — #37, #42, #53 were closed (by their sessions/platform) before
+  takeover; their content is already recorded on main (§18/§19 records) —
+  SUPERSEDED, nothing lost. **#45**: the render-gate failure it fixes is
+  already on main via #44/#47; the still-missing `engine_v2/build_site.py`
+  builder-fidelity fix was **taken over** (ground rule 5, per §24 A02 triage
+  note) into this integration commit — `python3 -m engine_v2.build_site` now
+  reproduces the committed `method.html`/`props.html` tables. Closed with
+  content preserved.
+- **S07** — this section's PR; merge result and Pages record appended below as
+  a bookkeeping entry after the merge (established pattern).
 
 **Integration-seat note:** per the brief, shared outputs (`index.html` landing,
 site navigation, README, `COORDINATION.md`) are owned by this final integration
