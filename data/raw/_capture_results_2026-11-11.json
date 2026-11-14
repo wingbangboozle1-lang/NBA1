@@ -1,0 +1,168 @@
+{
+ "captured_at_utc": "2026-11-14T02:05:32Z",
+ "source_url": "https://www.nba.com/games?date=2026-11-11",
+ "page_bytes": 585040,
+ "page_sha256": "e1ec751e01466a7adc0300ca8e1ebce62079d59d797d816d6fd2928577586ecd",
+ "page_indicators": {
+  "__NEXT_DATA__": 1,
+  "clean_gameId": 0,
+  "escaped_gameId": 0,
+  "FINAL_word": 10
+ },
+ "parse": {
+  "strategy": "embedded JSON",
+  "finals_rows": [
+   {
+    "game_id": "0022600217",
+    "away": "WAS",
+    "home": "IND",
+    "away_pts": 101,
+    "home_pts": 114,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "4-8",
+    "home_record_printed": "4-8",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600218",
+    "away": "CLE",
+    "home": "NYK",
+    "away_pts": 115,
+    "home_pts": 107,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "6-6",
+    "home_record_printed": "6-5",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600219",
+    "away": "BOS",
+    "home": "TOR",
+    "away_pts": 98,
+    "home_pts": 93,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "10-2",
+    "home_record_printed": "5-6",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600220",
+    "away": "SAS",
+    "home": "CHI",
+    "away_pts": 124,
+    "home_pts": 119,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "10-2",
+    "home_record_printed": "1-9",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600221",
+    "away": "DEN",
+    "home": "MEM",
+    "away_pts": 123,
+    "home_pts": 118,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "6-4",
+    "home_record_printed": "7-4",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600222",
+    "away": "LAL",
+    "home": "MIL",
+    "away_pts": 123,
+    "home_pts": 112,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "11-2",
+    "home_record_printed": "1-11",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600223",
+    "away": "BKN",
+    "home": "NOP",
+    "away_pts": 145,
+    "home_pts": 111,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "3-8",
+    "home_record_printed": "4-8",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600224",
+    "away": "ORL",
+    "home": "UTA",
+    "away_pts": 123,
+    "home_pts": 108,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "4-7",
+    "home_record_printed": "1-11",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600225",
+    "away": "GSW",
+    "home": "HOU",
+    "away_pts": 108,
+    "home_pts": 115,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "8-4",
+    "home_record_printed": "9-3",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600226",
+    "away": "OKC",
+    "home": "POR",
+    "away_pts": 108,
+    "home_pts": 118,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "8-4",
+    "home_record_printed": "8-3",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   }
+  ],
+  "not_final": [],
+  "unparsed": [],
+  "link_occurrences": {
+   "0022600217": 1,
+   "0022600218": 1,
+   "0022600219": 1,
+   "0022600220": 1,
+   "0022600221": 1,
+   "0022600222": 1,
+   "0022600223": 1,
+   "0022600224": 1,
+   "0022600225": 1,
+   "0022600226": 1
+  }
+ },
+ "snapshot_comparison": {
+  "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
+  "mismatches": [],
+  "promotion_candidates": [],
+  "committed_finals_missed": []
+ },
+ "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected."
+}

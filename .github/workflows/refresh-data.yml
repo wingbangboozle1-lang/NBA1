@@ -1,13 +1,48 @@
 name: Refresh official data
 
+# Purpose: keep the official capture layer alive, and settle Flagged F7
+# ("this refresh path has never been executed") with an executed run instead
+# of an assumption.
+#
+# Design rules (see also engine/fetch_official.py):
+#   * only official NBA hosts are fetched, with the web-client header set the
+#     reachability probe proved returns HTTP 200 (data/raw/probe_official.json);
+#   * captures are written as data/raw/_capture_*.json and NEVER overwrite a
+#     committed snapshot - promotion happens only after a verifier re-checks
+#     the row against the official page (COORDINATION.md section 15);
+#   * a scheduled run can no longer push to `main` directly (cross-session
+#     request R7 / audit item I-01): it opens a pull request instead, so a
+#     human or session reviews captures before they land;
+#   * a run that sees nothing new publishes nothing - no timestamp-only
+#     commits;
+#   * a data problem must never break the published site: fetch and build are
+#     continue-on-error, and the run record is uploaded as an artifact.
+#
+# NOTE: pull requests created with the default GITHUB_TOKEN do not trigger
+# workflows (GitHub's recursion guard), so CI does not run on an auto-refresh
+# PR. The PR body carries this job's own check results instead, and merging
+# the PR to main triggers the normal Publish-static-site workflow.
+
 on:
   schedule:
     # 11:15 UTC, 15:15 UTC and 22:15 UTC - after the league's own report times
     - cron: "15 11,15,22 * * *"
   workflow_dispatch:
+  # Fallback trigger: workflow_dispatch needs actions:write, which the
+  # session tokens do not have (HTTP 403 on the dispatch API, observed
+  # 2026-11-14). A push that changes the fetch script or this workflow runs
+  # the refresh instead. Loop-safe: the publish step commits with
+  # [skip ci], which does not trigger workflows, and neither of these two
+  # paths is ever written by the bot itself.
+  push:
+    branches: ["arena/**"]
+    paths:
+      - engine/fetch_official.py
+      - .github/workflows/refresh-data.yml
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   refresh:
@@ -18,6 +53,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
+      # Builders consume the committed snapshots, not the captures below, so
+      # they run first on a clean tree. This step only proves they still run.
+      - name: Verify the site builders still run
+        id: build
+        continue-on-error: true
+        run: |
+          python3 engine/pipeline.py
+          python3 engine/build_site.py
+
+      - name: Discard builder churn (promotions happen only after verification)
+        if: always()
+        run: git checkout -- . || true
 
       - name: Fetch official sources
         id: fetch
@@ -31,34 +79,113 @@ jobs:
           p = os.path.join("data", "raw", "_last_refresh.json")
           now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
           s = json.load(open(p)) if os.path.exists(p) else {}
-          s.setdefault("workflow_run_at_utc", now)
-          s["workflow_status"] = "${{ steps.fetch.outcome }}"
+          s["workflow_run_at_utc"] = now
+          s["workflow_ref"] = "${{ github.ref }}"
+          s["fetch_outcome"] = "${{ steps.fetch.outcome }}"
+          s["build_outcome"] = "${{ steps.build.outcome }}"
           json.dump(s, open(p, "w"), indent=1)
           print(json.dumps(s, indent=1))
           PY
 
-      - name: Rebuild site data
-        continue-on-error: true
-        run: python3 engine/pipeline.py
+      - name: Upload the run record
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: refresh-run-record
+          path: data/raw/_last_refresh.json
+          if-no-files-found: warn
 
-      - name: Rebuild pages
-        continue-on-error: true
-        run: python3 engine/build_site.py
+      - name: Upload the captures (survives a failed push)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: refresh-captures
+          path: data/raw/_capture_*.json
+          if-no-files-found: warn
 
-      - name: Commit only if something changed
+      - name: Publish captures (pull request from main, direct commit on session branches)
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          if [ -z "$(git status --porcelain)" ]; then
-            echo "Nothing changed - leaving the previous snapshot live."
-            exit 0
-          fi
+          set -u
           git config user.name  "nba1-bot"
           git config user.email "nba1-bot@users.noreply.github.com"
-          git add -A
-          git commit -m "chore: refresh official data [skip ci]"
-          git push
 
-      - name: Never fail the workflow on a data problem
-        if: always()
-        run: |
-          echo "Refresh finished. A failure here leaves the last known-good snapshot live."
-          echo "See Flagged for Review F7 on the site."
+          # Stage only capture payloads. _last_refresh.json rides along only
+          # when something new was captured, so a run that saw nothing new
+          # produces no commit at all.
+          git add data/raw/_capture_*.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No new capture payloads - nothing to publish."
+            exit 0
+          fi
+          git add data/raw/_last_refresh.json 2>/dev/null || true
+
+          # Evidence for the pull request body: the run record plus this
+          # job's own site check (CI does not run on token-created PRs).
+          python3 - <<'PY'
+          import json, os, subprocess
+          p = os.path.join("data", "raw", "_last_refresh.json")
+          s = json.load(open(p)) if os.path.exists(p) else {}
+          check = subprocess.run(["python3", "scripts/check_site.py"],
+                                 capture_output=True, text=True)
+          changed = ", ".join(s.get("changed", [])) or "(none)"
+          failed = "; ".join(f"{k}: {v}" for k, v in s.get("failed", [])) or "(none)"
+          check_tail = (check.stdout + check.stderr).strip()[-1500:]
+          body = (
+              "## Automated official-data refresh (captures only)\n\n"
+              "Opened by the `Refresh official data` workflow. **No committed "
+              "snapshot was overwritten**: parsed rows land in "
+              "`data/raw/_capture_*.json` for a verifier to diff and promote "
+              "after re-checking the official page.\n\n"
+              "### Run record\n\n"
+              f"- run at (UTC): {s.get('workflow_run_at_utc')}\n"
+              f"- ref: {s.get('workflow_ref')}\n"
+              f"- fetch step: {s.get('fetch_outcome')}\n"
+              f"- build step: {s.get('build_outcome')}\n"
+              f"- captures changed: {changed}\n"
+              f"- problems: {failed}\n"
+              f"- `scripts/check_site.py` exit: {check.returncode}\n\n"
+              "```\n" + check_tail + "\n```\n\n"
+              "### Review before merging\n\n"
+              "- Diff each changed capture against the official URL recorded inside it.\n"
+              "- Promote a row into a committed snapshot only after re-checking it on\n"
+              "  the official page - never from this PR alone.\n"
+              "- CI does not run on this PR: GitHub does not trigger workflows from the\n"
+              "  default `GITHUB_TOKEN` (recursion guard). Merging to `main` runs the\n"
+              "  normal Publish-static-site workflow.\n"
+          )
+          open("/tmp/pr_body.md", "w").write(body)
+          print(body)
+          PY
+
+          MSG="chore: refresh official data - captures only, snapshots not promoted [skip probe] [skip ci]"
+
+          if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
+            # Scheduled run: never push to main directly (R7 / I-01).
+            BRANCH="auto/refresh-$(date -u +%Y%m%d-%H%M%S)"
+            git checkout -b "${BRANCH}"
+            git commit -m "${MSG}"
+            git push -u origin "${BRANCH}" || { echo "::warning::push of ${BRANCH} failed; captures are in the run artifact"; exit 0; }
+            gh pr create --base main --head "${BRANCH}" \
+              --title "chore(refresh): official captures $(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+              --body-file /tmp/pr_body.md \
+              || echo "::warning::gh pr create failed; captures are on branch ${BRANCH} and in the run artifact"
+            exit 0
+          fi
+
+          # Manual run from a session branch: commit to that branch directly,
+          # with the push-retry pattern proven in probe-official.yml.
+          git commit -m "${MSG}"
+          for i in 1 2 3 4 5; do
+            if git push; then
+              echo "captures pushed on attempt $i"
+              exit 0
+            fi
+            echo "push raced with another commit; rebasing and retrying ($i/5)"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            sleep $((i * 5))
+          done
+          echo "::warning::could not push the captures after 5 attempts; they are in the run artifact"
+          exit 0

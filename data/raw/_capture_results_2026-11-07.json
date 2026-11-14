@@ -1,0 +1,126 @@
+{
+ "captured_at_utc": "2026-11-14T02:05:32Z",
+ "source_url": "https://www.nba.com/games?date=2026-11-07",
+ "page_bytes": 500527,
+ "page_sha256": "fabe429bb18a0b80a181008b6345d8576c5a080f4c50b883be610c2d743749e7",
+ "page_indicators": {
+  "__NEXT_DATA__": 1,
+  "clean_gameId": 0,
+  "escaped_gameId": 0,
+  "FINAL_word": 7
+ },
+ "parse": {
+  "strategy": "embedded JSON",
+  "finals_rows": [
+   {
+    "game_id": "0022600189",
+    "away": "DEN",
+    "home": "IND",
+    "away_pts": 114,
+    "home_pts": 102,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "5-3",
+    "home_record_printed": "3-7",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600190",
+    "away": "BKN",
+    "home": "ATL",
+    "away_pts": 121,
+    "home_pts": 124,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "2-7",
+    "home_record_printed": "7-4",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600191",
+    "away": "NYK",
+    "home": "CLE",
+    "away_pts": 109,
+    "home_pts": 97,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "5-4",
+    "home_record_printed": "5-5",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600192",
+    "away": "WAS",
+    "home": "OKC",
+    "away_pts": 75,
+    "home_pts": 114,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "4-6",
+    "home_record_printed": "8-2",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600193",
+    "away": "ORL",
+    "home": "GSW",
+    "away_pts": 119,
+    "home_pts": 126,
+    "status": "Final/OT",
+    "ot": 1,
+    "away_record_printed": "2-7",
+    "home_record_printed": "7-3",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600194",
+    "away": "HOU",
+    "home": "PHX",
+    "away_pts": 99,
+    "home_pts": 102,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "7-3",
+    "home_record_printed": "3-5",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   },
+   {
+    "game_id": "0022600195",
+    "away": "SAS",
+    "home": "POR",
+    "away_pts": 125,
+    "home_pts": 103,
+    "status": "Final",
+    "ot": 0,
+    "away_record_printed": "8-2",
+    "home_record_printed": "6-3",
+    "snapshot_match": true,
+    "source": "embedded JSON"
+   }
+  ],
+  "not_final": [],
+  "unparsed": [],
+  "link_occurrences": {
+   "0022600189": 1,
+   "0022600190": 1,
+   "0022600191": 1,
+   "0022600192": 1,
+   "0022600193": 1,
+   "0022600194": 1,
+   "0022600195": 1
+  }
+ },
+ "snapshot_comparison": {
+  "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
+  "mismatches": [],
+  "promotion_candidates": [],
+  "committed_finals_missed": []
+ },
+ "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected."
+}

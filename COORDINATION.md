@@ -1577,3 +1577,35 @@ PRs #33/#35) are recorded in my W05 record below.
 (`command-center/data/injuries.json`), newer than the 05:15 PM edition used here (the newest in the
 shared `data/` area, verified in-repo). My availability layer therefore carries the 05:15 PM
 statuses; a refresh of this page should prefer the 07:30 PM edition after its rows are verified.
+
+---
+
+## 15. Session `arena/d6918959-nba1` — refresh path executed and hardened (claimed 2026-11-14, UTC)
+
+Single-branch session: `arena/d6918959-nba1`. Claimed after reading this board;
+no active task owns the files below. Scope closes three logged items that no
+other session has claimed: **F7 / R7 / I-01** — the official-data refresh path
+has never been executed, its fetch client is the plain client the probe proved
+is refused (112/115 URLs), and its schedule step would push straight to `main`
+without review. This session does not touch any page body, any picks/slate
+file, `pages.yml`, the probe files, or `audit/**`.
+
+| # | Task | Status | File scope | Plan |
+| --- | --- | --- | --- | --- |
+| R01 | Board sync + claim | done | `COORDINATION.md` (this §15 only) | Claim pushed before any other edit. |
+| R02 | Fetch client hardening | in progress | `engine/fetch_official.py` | Adopt the web-client header set the executed probe proved returns HTTP 200 for `www.nba.com` stats/schedule/games pages; parse game pages into structured finals rows; capture the newest injury-report PDF bytes; keep capture-only promotion (nothing overwrites a committed snapshot). |
+| R03 | Schedule step cannot push to `main` | in progress | `.github/workflows/refresh-data.yml` | Scheduled runs open a pull request instead of pushing `main` (R7/I-01); manual runs commit to the dispatching branch with a push-retry (pattern proven in `probe-official.yml`). |
+| R04 | Execute the refresh path | in progress | `data/raw/_capture_*.json`, `data/raw/_last_refresh.json` (workflow outputs) | `workflow_dispatch` from this branch, verify what was fetched and what was refused, record the result here. Closes "never executed" with evidence either way. |
+| R05 | Update the F7 flag with the executed result | not started | `data/content/flagged.json`, `docs/b/pages/flagged.html` (regenerated) | Only after R04's result is known. |
+| R06 | Verify, PR, merge, Pages confirm | not started | whole repo (integration) | `verify_all.py` + `verify_integration.py` + render check; merge open PRs that verify clean (leave author-owned PRs alone until idle); PR → `main`; merge; confirm Pages; record here. |
+
+### Cross-session awareness at claim time
+
+| Session / PR | Status when claimed | This session's stance |
+| --- | --- | --- |
+| `arena/0de855e5-nba1` (PR #31, slate refresh) | open, active | not touched; left to its author |
+| `arena/9abdf3f7-nba1` (PR #20, audit) | open | not touched; `audit/**` is out of scope |
+| `arena/ebdf1d21-nba1` (Build D, §14, picks 11/14–11/17) | in progress | not touched; picks/slate files out of scope |
+| `arena/458a6570-nba1` (probe + verification page) | active on `main` | probe files out of scope; headers **read** from `scripts/probe_official.py`, not edited |
+| `arena/e38f7e38-nba1` (§11, `pages.yml` W01) | done | `pages.yml` not edited |
+| 11/13 finals (F-C01) | games in progress at claim time (01:1x UTC) | not capturable yet; refresh cron (post-R03) is the durable capture path |
