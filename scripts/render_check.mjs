@@ -157,6 +157,7 @@ async function renderPage(page) {
     console.log(doc.querySelector("main")?.textContent.replace(/\s+/g, " ").slice(0, 600));
     window.close();
   }
+  globalThis.TOTAL_TR = (globalThis.TOTAL_TR || 0) + bodyRows;
   return { rel, rows: bodyRows + cards, tables, problems };
 }
 
@@ -175,5 +176,5 @@ for (const r of results) {
   );
 }
 console.log("-".repeat(92));
-console.log(`${results.length} pages, ${results.reduce((a, r) => a + r.rows, 0)} rendered table rows, ${failures} page(s) with problems`);
+console.log(`${results.length} pages, ${results.reduce((a, r) => a + r.rows, 0)} content blocks, ${globalThis.TOTAL_TR} rendered table rows, ${failures} page(s) with problems`);
 process.exit(failures > 0 ? 1 : 0);
