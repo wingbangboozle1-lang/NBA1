@@ -5,6 +5,15 @@ that re-running the analysis cannot leave a sentence quoting a stale figure.
 """
 import json
 import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from labdata import site_fit  # noqa: E402  (same inputs the tables are built from)
+
+_PUB = site_fit()
+_SITE_B2B = _PUB["b2b_penalty_applied"]
+_SITE_WIN = str(_PUB["n_games"]) + " games, " + str(_PUB["window_first"]) + ".." + str(_PUB["window_last"])
+_GRADE = str(_PUB["window_first"]) + ".." + str(_PUB["window_last"]) + ", " + str(_PUB["n_games"]) + " games"
 
 NBA_DAY = "https://www.nba.com/games?date="
 NBA_STATS = "https://www.nba.com/stats/teams/advanced"
@@ -24,8 +33,10 @@ CONTENT = {
      "confidence": "High - three independent official instruments agree.",
      "source_url": NBA_DAY + "2026-11-02"},
     {"id": "A2", "question": "Does that gap change any pick the site has already published?",
-     "answer": "No. Every affected team-slot sits on a date outside the graded 51-game window, so the leaderboard, the settled picks and the gates are unaffected. What the gap does invalidate is any October backtest, which is the work the next session should build on.",
-     "evidence": "Rest page: 'of them inside the graded 51-game window' reads zero.",
+     "answer": ("No. Every affected team-slot sits on a date outside the window the site grades on (" +
+                _GRADE + "), so the leaderboard, the settled picks and the gates are unaffected. What the gap "
+                "does invalidate is any October backtest, which is the base this lab used instead."),
+     "evidence": "Rest page KPI: 'of them inside the window the site grades on' reads zero, and the window it is measured against is read from site/data/backtest.json at build time.",
      "confidence": "High - recomputed slot by slot against the official schedule.",
      "source_url": "https://www.nba.com/games?date=2026-10-25"},
     {"id": "A3", "question": "Does any strategy in a season-wide library beat the originated line?",
@@ -117,7 +128,9 @@ CONTENT = {
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine_v2/context.py"},
   {"id": "SG-L2", "title": "Re-fit or shrink the back-to-back term against the season",
    "category": "Model",
-   "problem": "A 6.096-point term fitted on 51 games is applied to every line, while the season's own measurement of the same effect sits near zero with a wide interval.",
+   "problem": ("A " + str(_SITE_B2B) + "-point term fitted on " + _SITE_WIN + " in-sample is applied to every "
+               "line, while the season's own measurement of the same effect sits near zero with an interval of "
+               "the same width as the estimate."),
    "options": "(a) keep it and publish its interval next to each line; (b) shrink it toward the season estimate; (c) drop it until a season's worth of data says otherwise.",
    "cost": "One re-fit and a slate re-publication; 11 of 27 current games move by 3+ points.",
    "unlocks": "Lines whose adjustments are supported by the sample they are fitted on.",
@@ -182,13 +195,20 @@ CONTENT = {
    "source_url": NBA_DAY + "2026-10-24"},
   {"id": "F-S29-02", "severity": "Medium",
    "title": "The rest layer does not read the fixtures the game log publishes for exactly that purpose",
-   "detail": "46 of 366 team-slots change when the fixtures enter the history, and two back-to-back flags flip. None falls inside the graded 51-game window, so no published pick changes; an October backtest would have been wrong. Repaired inside strategy-lab only - no site file was touched, because those files belong to other sessions.",
+   "detail": ("46 of 366 team-slots change when the fixtures enter the history, and two back-to-back flags flip. "
+               "None falls inside the window the site grades on (" + _GRADE + "), so no published pick changes; an "
+               "October backtest would have been wrong. Repaired inside strategy-lab only - no site file was "
+               "touched, because those files belong to other sessions."),
    "status": "Open - fix proposed to the owners of the two consumers",
    "official_url": "https://www.nba.com/games?date=2026-10-25",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine_v2/context.py"},
   {"id": "F-S29-03", "severity": "High",
-   "title": "The back-to-back penalty in every line is a 51-game fit that the season does not support",
-   "detail": "Published value 6.096 points; season measurement 0.016 with a standard error of 4.426 on 144 games, p 0.997. 11 of the 27 unplayed horizon games move by 3 points or more between the two positions.",
+   "title": "The back-to-back penalty in every line is a short-window in-sample fit that the season does not support",
+   "detail": ("Published penalty " + str(_SITE_B2B) + " points, fitted on " + str(_PUB["n_games"]) +
+              " games and disclosed by the site itself as in-sample with its own standard error at " +
+              str(_PUB["b2b_se"]) + " (t = " + str(_PUB["b2b_t"]) + ", applied because |t| >= 1). The season "
+              "measurement of the same quantity is +0.016 with a standard error of 4.426 on 144 games, p 0.997. "
+              "11 of the 27 unplayed horizon games move by 3 points or more between the two positions."),
    "status": "Open - decision requested from the model owner",
    "official_url": "https://www.nba.com/games?date=2026-11-14",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json"},

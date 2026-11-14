@@ -25,9 +25,13 @@
     "source_url": "https://www.nba.com/games?date=2026-10-20"
    },
    "games_with_a_b2b_mismatch": 28,
-   "site_value": 6.096,
+   "site_value": 6.262,
+   "site_se": 4.857,
+   "site_t": -1.289,
+   "site_window": "2026-11-06..2026-11-13 (60 games)",
    "site_source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json",
-   "reading": "the published penalty is more than twice the full-season coefficient, and the full-season coefficient is not distinguishable from zero on this sample"
+   "site_disclosure": "estimated on the test window (in-sample); set to 0 unless |t| >= 1",
+   "reading": "the site applies the full 6.262 points because its own |t| = 1.289 clears 1; the season measurement of the same quantity is a fifth of that size with a standard error of the same width, so the term is inside noise on every sample available"
   },
   {
    "name": "Rest-gap effect, measured on the whole season",

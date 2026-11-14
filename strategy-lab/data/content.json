@@ -14,8 +14,8 @@
    {
     "id": "A2",
     "question": "Does that gap change any pick the site has already published?",
-    "answer": "No. Every affected team-slot sits on a date outside the graded 51-game window, so the leaderboard, the settled picks and the gates are unaffected. What the gap does invalidate is any October backtest, which is the work the next session should build on.",
-    "evidence": "Rest page: 'of them inside the graded 51-game window' reads zero.",
+    "answer": "No. Every affected team-slot sits on a date outside the window the site grades on (2026-11-06..2026-11-13, 60 games), so the leaderboard, the settled picks and the gates are unaffected. What the gap does invalidate is any October backtest, which is the base this lab used instead.",
+    "evidence": "Rest page KPI: 'of them inside the window the site grades on' reads zero, and the window it is measured against is read from site/data/backtest.json at build time.",
     "confidence": "High - recomputed slot by slot against the official schedule.",
     "source_url": "https://www.nba.com/games?date=2026-10-25"
    },
@@ -155,7 +155,7 @@
    "id": "SG-L2",
    "title": "Re-fit or shrink the back-to-back term against the season",
    "category": "Model",
-   "problem": "A 6.096-point term fitted on 51 games is applied to every line, while the season's own measurement of the same effect sits near zero with a wide interval.",
+   "problem": "A 6.262-point term fitted on 60 games, 2026-11-06..2026-11-13 in-sample is applied to every line, while the season's own measurement of the same effect sits near zero with an interval of the same width as the estimate.",
    "options": "(a) keep it and publish its interval next to each line; (b) shrink it toward the season estimate; (c) drop it until a season's worth of data says otherwise.",
    "cost": "One re-fit and a slate re-publication; 11 of 27 current games move by 3+ points.",
    "unlocks": "Lines whose adjustments are supported by the sample they are fitted on.",
@@ -241,7 +241,7 @@
    "id": "F-S29-02",
    "severity": "Medium",
    "title": "The rest layer does not read the fixtures the game log publishes for exactly that purpose",
-   "detail": "46 of 366 team-slots change when the fixtures enter the history, and two back-to-back flags flip. None falls inside the graded 51-game window, so no published pick changes; an October backtest would have been wrong. Repaired inside strategy-lab only - no site file was touched, because those files belong to other sessions.",
+   "detail": "46 of 366 team-slots change when the fixtures enter the history, and two back-to-back flags flip. None falls inside the window the site grades on (2026-11-06..2026-11-13, 60 games), so no published pick changes; an October backtest would have been wrong. Repaired inside strategy-lab only - no site file was touched, because those files belong to other sessions.",
    "status": "Open - fix proposed to the owners of the two consumers",
    "official_url": "https://www.nba.com/games?date=2026-10-25",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine_v2/context.py"
@@ -249,8 +249,8 @@
   {
    "id": "F-S29-03",
    "severity": "High",
-   "title": "The back-to-back penalty in every line is a 51-game fit that the season does not support",
-   "detail": "Published value 6.096 points; season measurement 0.016 with a standard error of 4.426 on 144 games, p 0.997. 11 of the 27 unplayed horizon games move by 3 points or more between the two positions.",
+   "title": "The back-to-back penalty in every line is a short-window in-sample fit that the season does not support",
+   "detail": "Published penalty 6.262 points, fitted on 60 games and disclosed by the site itself as in-sample with its own standard error at 4.857 (t = -1.289, applied because |t| >= 1). The season measurement of the same quantity is +0.016 with a standard error of 4.426 on 144 games, p 0.997. 11 of the 27 unplayed horizon games move by 3 points or more between the two positions.",
    "status": "Open - decision requested from the model owner",
    "official_url": "https://www.nba.com/games?date=2026-11-14",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json"

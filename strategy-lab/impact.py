@@ -4,8 +4,9 @@
 
     margin += HCA - b2b_penalty * (home_b2b - away_b2b)
 
-and `site/data/backtest.json` publishes the fitted value: 6.096 points, fitted on the
-51-game window. Measured on the 144 games of this season where both teams have a game on
+and `site/data/backtest.json` publishes the fitted value and the window it was fitted on, both
+read from that file at run time rather than quoted here. Measured on the 144 games of this season
+where both teams have a game on
 record, the same effect is 0.02 points with a standard error of 4.43 - a band wide enough to
 contain the site's number and too wide to justify spending 6.1 points of line on it.
 
@@ -14,14 +15,15 @@ decision is made with a number attached instead of an argument.
 """
 from __future__ import annotations
 
-from labdata import load, rest_maps, build_schedule
+from labdata import load, rest_maps, site_fit
 from statools import rnd
 
-SITE_B2B = 6.096
-SEASON_COEF = None      # filled in from correlations.json at run time
+
 
 
 def run(ctx, measured=None):
+    pub = site_fit()
+    SITE_B2B = pub["b2b_penalty_applied"] or 0.0
     season = {"coef": None, "se": None, "n": None}
     if measured:
         season = {"coef": measured["coef"], "se": measured["se"], "n": measured["n"],
@@ -53,8 +55,10 @@ def run(ctx, measured=None):
     disagree = [r["disagreement_points"] for r in rows]
     return {
         "published_parameter": {"b2b_penalty": SITE_B2B,
-                                "fitted_on": "51 games, 2026-11-06..2026-11-12",
-                                "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json"},
+                                "fitted_on": f'{pub["n_games"]} games, {pub["window_first"]}..{pub["window_last"]}',
+                                "site_se": pub["b2b_se"], "site_t": pub["b2b_t"],
+                                "site_disclosure": pub["b2b_disclosure"],
+                                "source_url": pub["source_url"]},
         "season_measurement": dict(season, source_url="https://www.nba.com/games?date=2026-10-20"),
         "rows": rows,
         "summary": {

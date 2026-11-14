@@ -20,8 +20,9 @@
    "2026-11-04",
    "2026-11-05"
   ],
-  "affected_inside_the_published_51_game_window": 0,
-  "materiality": "None of the affected slots falls in the 2026-11-06..11-12 window that the site's leaderboard was graded on, so no published pick changes today. The effect is on the October half of the season, which is where any future full-season backtest would live, and on the rest column shown for 2026-10-25 .. 2026-11-05.",
+  "affected_inside_the_graded_window": 0,
+  "graded_window": "2026-11-06..2026-11-13 (60 games, read from site/data/backtest.json)",
+  "materiality": "None of the affected slots falls inside the window the site's leaderboard is graded on (2026-11-06..2026-11-13), so no published pick changes today. The effect is on the October half of the season, which is where any full-season backtest would live, and on the rest column shown for 2026-10-25 .. 2026-11-05.",
   "cause": "engine_v2/context.py builds its team history from gamelog['games'] and scripts/originate_horizon.py from games that carry a score, so the 23 fixtures listed in the same file are never in either history, even though the file's note says they keep the rest layer complete."
  },
  "per_date": [

@@ -7,7 +7,7 @@ history - and publishing the difference team-slot by team-slot.
 """
 from __future__ import annotations
 
-from labdata import rest_maps, d
+from labdata import rest_maps, d, site_fit
 from statools import rnd
 
 DAY_PAGE = "https://www.nba.com/games?date="
@@ -44,7 +44,9 @@ def run(ctx):
             slot["b2b" if fa != fb else "rest_only"] += 1
 
     flips = sum(1 for c in changed if c["b2b_as_shipped"] != c["b2b_repaired"])
-    in_oos = sum(1 for c in changed if "2026-11-06" <= c["date"] <= "2026-11-12")
+    sfit = site_fit()          # 'pub' is taken: the horizon loop below reuses that name per side
+    w0, w1 = sfit["window_first"], sfit["window_last"]
+    in_oos = sum(1 for c in changed if w0 and w1 and w0 <= c["date"] <= w1)
 
     # the unplayed slate: same recomputation, compared with what the site published
     hz_rows, agree, mismatch = [], 0, 0
@@ -89,11 +91,13 @@ def run(ctx):
             "team_slots_affected_by_the_missing_fixtures": len(changed),
             "back_to_back_flags_that_flip": flips,
             "affected_dates": sorted(per_date),
-            "affected_inside_the_published_51_game_window": in_oos,
+            "affected_inside_the_graded_window": in_oos,
+            "graded_window": str(w0) + ".." + str(w1) + " (" + str(sfit["n_games"]) +
+                               " games, read from site/data/backtest.json)",
             "materiality": (
-                "None of the affected slots falls in the 2026-11-06..11-12 window that the site's "
-                "leaderboard was graded on, so no published pick changes today. The effect is on the "
-                "October half of the season, which is where any future full-season backtest would live, "
+                "None of the affected slots falls inside the window the site's leaderboard is graded on ("
+                + str(w0) + ".." + str(w1) + "), so no published pick changes today. The effect is on the "
+                "October half of the season, which is where any full-season backtest would live, "
                 "and on the rest column shown for 2026-10-25 .. 2026-11-05."
             ),
             "cause": ("engine_v2/context.py builds its team history from gamelog['games'] and "
