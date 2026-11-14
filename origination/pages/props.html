@@ -88,6 +88,17 @@
   <a href="injuries.html">injuries page</a>. They are enough to size the production at risk for
   8 of the 117 players in the latest
   injury report. They are not enough to originate a single prop line.</p>
+  <p>The table below states, for each input a prop line requires, the official page that publishes it
+  (or the closest official page that exists), whether it is reachable from this environment, and what
+  this site is therefore able to publish. Blank value cells are deliberate: nothing is inferred.</p>
+  <div class="tablewrap"><table class="tbl" data-sortable><thead><tr><th>Required input</th><th>Closest official source</th><th>Reachable here?</th><th>Value published on this site</th></tr></thead><tbody>
+  <tr><td>Game-by-game player log</td><td><a class="src" href="https://www.nba.com/players" target="_blank" rel="noopener">nba.com/players</a></td><td>No &mdash; season averages only; the game-by-game distribution is not retrievable</td><td>(blank &mdash; blocked, flagged)</td></tr>
+  <tr><td>Rotation minutes by game</td><td><a class="src" href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">nba.com/stats/players/traditional</a></td><td>No &mdash; season totals only, not per-game rotation context</td><td>(blank &mdash; blocked, flagged)</td></tr>
+  <tr><td>Opponent scheme and pace</td><td><a class="src" href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">nba.com/stats/teams/traditional</a></td><td>No &mdash; team season table, not a per-opponent scheme measure</td><td>(blank &mdash; blocked, flagged)</td></tr>
+  <tr><td>Same-player / cross-player leg correlations</td><td><a class="src" href="https://www.nba.com/stats" target="_blank" rel="noopener">nba.com/stats</a></td><td>No official page publishes player-level outcome correlations</td><td>(blank &mdash; no measurement exists)</td></tr>
+  <tr><td>Availability (partial)</td><td><a class="src" href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">official.nba.com injury report</a></td><td>Yes &mdash; PDF editions, captured and transcribed</td><td>Status only (Out / Questionable / Probable / Available) &mdash; no minutes derived</td></tr>
+  <tr><td>Season leaderboards (partial)</td><td><a class="src" href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">nba.com/stats/players/traditional</a></td><td>Yes &mdash; 24 players by minutes, 50 by scoring</td><td>Used only to size production at risk for 8 of 117 reported players</td></tr>
+  </tbody></table></div>
 </section>
 <section class="card">
   <h3>What would unblock it</h3>

@@ -1248,7 +1248,7 @@ left for an integration session.
 | W05 | Injury / rotation / game-flow refresh for the new slate | done | `gameflow.html`, `lines.html`, `data/derived/injury_impact.json`, `docs/session-arena-f80dcc4a-nba1-w.md` | Per-date edition stamps (11/13 → 05:15 PM ET; 11/14 → 08:00 PM ET; 11/15–17 → gated "report not yet published", never blank). 72 impact rows, 72 prop rows (zero blanks: LAL/CHA/TOR leaders now displayed officially and filled). B2B list corrected (Miami was missing on 11/14 — W-F8). Rotation layer keeps its 11/13-only adjustment semantics. |
 | W06 | Line-by-line verification + source-link audit of everything added | done | `scripts/verify_session_w.py` (new), `review.html` (W-F1…W-F8), `docs/session-arena-f80dcc4a-nba1-w.md` | 502 checks pass: every record/leader/injury line re-derived from stored captures; frozen rows byte-identical to the 22:45Z archive (one documented spelling correction: Jokić); every table row on lines/gameflow/review carries an official source link. Flags W-F1…W-F8 published (needs review, none blocking). |
 | W07 | Site pages for new content + executive summary touch-up | done | `scripts/build_site.py`, `docs/pages/*` (15 pages regenerated), `docs/summary.html` (patched), `data/questions.json`, `data/suggestions.json` | Counts/prose synced to 36 games / 5 slates / 11/13–11/17; stale headline on docs/summary.html corrected (it claimed no lines/picks existed); Q-01 window answer updated; S-02 carries the page-break evidence for the reviewer's choice. |
-| W08 | Integration: merge PRs #20/#26, re-verify combined tree, PR → `main`, merge, confirm Pages | in progress → closing | whole repo (integration) | #26 merged first (`77de8b4`); #20 content merged via `git merge` + COORDINATION conflict resolution (§14 kept as theirs, §13 renumbered); `verify_all.py` + `verify_session_w.py` pass on the combined tree. PR to `main` opened from this branch next; Pages confirmed after merge. |
+| W08 | Integration: merge PRs #20/#26, re-verify combined tree, PR → `main`, merge, confirm Pages | done | whole repo (integration) | #26 merged first (`77de8b4`); #20 content merged via `git merge` + COORDINATION conflict resolution; PR #43 (integration → main) MERGED 2026-11-14T01:46:26Z (`1457e1c`); main-conflict resolution during the PR cycle logged below; Pages build `1457e1c` **built**, live smoke-check passed. |
 
 **Coordination notes.** No task claimed by another session is taken: Build A/B/C and `arena-a6936331`
 items are all `done` or `needs review`. PR #20's author left it unmerged *for the integration session*;
@@ -1267,13 +1267,14 @@ and rebase rather than overwrite.
 | 2026-11-14 | Verification: `verify_session_w.py` 502 checks OK (every value re-derived from stored captures) and `verify_all.py` VERIFY OK (36 games, 36 published rows, 0 mismatches, calendar counts 9/5/9/8/5). PR integration → `main` opened and merged; GitHub Pages deploy confirmed; PR link + merge result recorded below. |
 | 2026-11-14 | T2 early results pass (~02:00Z) stored (no finals yet — games ran 30–60 min behind listed tips); late finals pass queued (W-F5/F-C02). The pass also printed the three 11/13 game cards dropped mid-chunk earlier → GSW/OKC/SAC records now two-source (W-F3 resolved). |
 | 2026-11-14 | Sync conflict log: `git pull --rebase` twice failed replaying the merged PR #20 side history (`e382e47`/`e01e83e`) against the automated probe commit `a64ea74` (nba1-bot CI, 01:03Z, probe files only). Resolved by a merge commit (`3369edc`) that keeps both sides: no work discarded, no file conflicts. |
+| 2026-11-14 | PR-cycle conflict log: PR #43 was CONFLICTING with `main` (main gained PR #40 — arena/e32856d8-nba1 line-origination desk + their §13–§17 board sections — plus running probe commits). Resolved on this branch by merging `origin/main` (`36bb90c`): both sessions' `build_edge_site.py`/`review.html`/`COORDINATION.md` work kept (my sections renumbered §18/§19 per board rule; generated probe snapshots taken from main each time, they are CI point-in-time records). Two more probe-commit merges during the cycle (`d5c1094`, `efba43d`) resolved the same way. |
 
 ### Results & sources (session `arena/f80dcc4a-nba1`)
 
 - **Sources used:** `https://www.nba.com/games?date=2026-11-13` (00:55Z state), `?date=2026-11-14/15/16/17` (00:52–01:32Z), `https://official.nba.com/nba-injury-report-2026-27-season/` (hub, 01:08Z), `https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_08_00PM.pdf` (newest published edition at capture).
 - **Verification performed:** `python3 scripts/verify_session_w.py` (502 checks) and `python3 scripts/verify_all.py`; every table row on `lines.html`/`gameflow.html`/`review.html` carries an official source link (checker-enforced).
 - **Irregularities (flagged, published on review.html, none blocking):** W-F1 mixed pick bases (frozen 11/13 vs re-stamped 11/14–17), W-F2 11/14 injury basis = 11/13 08:00 PM ET edition (game-day editions later will supersede), W-F4 20+11 page-break rows kept unattributed, W-F5 post-final record refresh queued (T2 early pass stored, no finals at capture; late pass ≈03:30–05:30Z), W-F6 NYK@TOR + POR@MIN duplicate matchups inside 48h as officially scheduled, W-F7 Martin, Caleb team conflict (cross-source CLE wins), W-F8 11/14 B2B list corrected (Miami was missing). W-F3 (GSW/OKC/SAC single-source) resolved at the T2 early pass — all 30 teams now have two official sources.
-- **PR:** https://github.com/wingbangboozle1-lang/NBA1/pull/43 (integration → main). Merge result + Pages status recorded at close-out below.
+- **PR:** https://github.com/wingbangboozle1-lang/NBA1/pull/43 (integration → main) — **MERGED 2026-11-14T01:46:26Z**, merge commit `1457e1c783aed048f28899cac0f38f23f4fc80e2`. GitHub Pages: latest build = that merge commit, status **built** (2026-11-14T01:46:27Z), live at https://wingbangboozle1-lang.github.io/NBA1/ — smoke-checked live: lines.html serves the Nov 13–17 / 36-game window and the corrected B2B notes.
 
 ---
 
@@ -1356,3 +1357,176 @@ Limits: the NBA.com pages were read with the fetch tool (not a browser), and the
 | 2026-11-14 | Built `docs/audit/index.html` (static, no JavaScript). Every table row links to an NBA.com page or to repository evidence labelled as such. The builder refuses to run on a mismatch. |
 | 2026-11-14 | Opened PR [#20](https://github.com/wingbangboozle1-lang/NBA1/pull/20) from `arena/9abdf3f7-nba1` into `main`, **not merged**, for the integration session to review and merge (see 14.4). |
 | 2026-11-14 | Merged `origin/main` (PR #19 and PR #22) into this branch; resolved the `COORDINATION.md` conflict by keeping both sides. Re-checked I-01 to I-10 against `main`; status column added to the audit page. |
+
+---
+
+## 18. Session `arena/ebdf1d21-nba1` — Build D: live-horizon lines & picks, newest injury edition (claimed 2026-11-14, UTC)
+
+Single-branch session: `arena/ebdf1d21-nba1` (Arena pins the session to one branch; no task branches or worktrees are created). Claimed after reading this board; no active task owns the files below beyond the single entry added to the root landing's build list. Board numbering: §17 belongs to `arena/ffafa1f6-nba1`, whose unified `site/` build (PR #33, merged) also publishes 14–17 Nov picks from the 07:30 PM ET edition. This session's distinct contributions: the **newest** official injury edition captured (11/13 **08:00 PM ET**, verified to exist after §17's cut), a fidelity-checked Build-A-style page (22/22 spread+pick reproduction against the archived Edge Lab artifact), CHA/LAL/TOR leader-gap fills, and flags D-01…D-11 including a report-vs-schedule time mismatch (D-11). Nothing was discarded anywhere; rebase conflicts in this append-only region were resolved by keeping every other session's section.
+
+| # | Task | Status | File scope | Result |
+| --- | --- | --- | --- | --- |
+| P01 | Board sync + claim | done | `COORDINATION.md` (this section only) | Branch synced to `origin/main`; append-only conflicts resolved keeping all other sessions' sections. |
+| P02 | Probe for newer official data | done | `data/raw/d/*.json` (new) | The [11/13 08:00 PM ET injury report](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_08_00PM.pdf) was verified to exist and captured verbatim (markdown + parsed JSON). It carries rows for **all five 11/14 games** (05:15 PM covered four; §17 used 07:30 PM). 11/13 finals did not exist yet (games in progress at build time); the 11/14 12:00 PM edition does not exist yet (policy: due 1 p.m. local day-of for B2B second games). Fresh captures of the official 11/14 and 11/17 slate pages stored with source URLs. |
+| P03 | Originate lines + picks for 11/14–11/17 | done | `scripts/generate_picks_d.py` (new), `data/derived/picks_d.json` (new) | RecordLine-1 (identical formulas/params to `scripts/build_edge_site.py`) applied to all 27 horizon games: **23 gated paper picks, 12 two-leg cross-game parlay cards (Fréchet bounds), 54 prop-combo rows**, injury layer from the 08:00 PM edition. Inputs as-of stamped per row (records pre-11/13; leader stats through 11/12; injury edition 08:00 PM ET). |
+| P04 | Publish picks page | done | `picks-2026-11-14.html` (new), `index.html` (one build-list entry) | 148 table rows, every row carrying an official `*.nba.com` source link; 11 flagged items (D-01…D-11) published on the page; working row filters added (prior pages' filter inputs were non-functional — `app.js` is a scrollspy only). |
+| P05 | Verify, PR, merge, Pages confirm | done | whole repo (integration) | See §18.3. |
+
+### 18.1 Verification performed (all reproducible from a clean checkout)
+
+| Check | Result |
+| --- | --- |
+| `scripts/generate_picks_d.py` self-audit | VERIFY OK: 27 games; fresh-vs-capture 10/10 games match; leaders 3 fills + all overlapping values match; fidelity 27/27 horizon games reproduce the archived artifact exactly (22/22 at claim time; another session later extended `data/originated_lines.json` to 11/17 and filled the CHA/LAL/TOR leader gaps, so regeneration now covers all 27 with 0 leader fills); every page row carries an official source link |
+| `scripts/verify_all.py` (CI gate; now includes the Build D builder after `build_edge_site.py`) | VERIFY OK — builders, checker, data audits all pass |
+| `scripts/check_site.py` (now includes `picks-2026-11-14.html`) | 148 rows checked, pass |
+| `scripts/check_links.py` | PASS |
+| `scripts/verify_integration.py` (independent audit) | PASSED, 0 errors |
+| Schedule vs fresh official pages | 11/14 (5/5) and 11/17 (5/5) re-verified against fresh `nba.com/games?date=…` captures |
+
+### 18.2 Findings and flagged items (published on `picks-2026-11-14.html`; non-blocking)
+
+| # | Finding |
+| --- | --- |
+| D-01 | 11/13 games were in progress at build time → all horizon records are pre-11/13 official values, stamped per row; picks regenerate by re-running the script once finals exist. |
+| D-02 | Injury reports for 11/15–11/17 not yet published (official policy timing); lines for those dates carry no injury adjustment, disclosed per game. |
+| D-03 | 5 rows of the 08:00 PM PDF lost their team cell (Udeh, Pierre Jr., B. Williams, Okorie, Onyenso) — kept in `unattributed_rows`, used in no signal; verbatim markdown stored beside the JSON. |
+| D-04 | "Martin, Caleb" attribution conflict across the 12:00/05:15/08:00 editions — left blank and excluded, manual review required. |
+| D-05 | RecordLine-1 parameters are project assumptions (HCA 2.5, K 35, SIGMA 11, +3/+6 smoothing, gate 3.0) — not official values. |
+| D-06 | No totals originated (records cannot separate pace/efficiency). |
+| D-07 | Market gates G4/G5 blocked (no odds feed); leaderboard stays at 0 funded strategies; picks are paper records. |
+| D-08 | 11/15–11/16 schedule rows rely on Build C's verified capture (not re-fetched here); 11/14 + 11/17 re-verified fresh. |
+| D-09 | Leader stats are season averages through 11/12; CHA/LAL/TOR blanks filled from the fresh 11/17 official capture. |
+| D-10 | Injury statuses are not minutes/production forecasts; no numeric shift derived. |
+| D-11 | **Irregularity:** the 08:00 PM report's game-time column prints 07:00 (ET) for DET@MIA while the schedule prints 8:00 PM ET; both official values preserved, schedule used for display, flagged for manual review. |
+
+Game-flow finding (GF-01): the five teams printing NOT YET SUBMITTED on 11/14 (New Orleans, Cleveland, Memphis, Chicago, Miami) are exactly the five 11/14 teams on the second night of a back-to-back — consistent with the official policy that second-game reports are due by 1 p.m. local on game day. Four of the five NS rows lost their date cell to PDF extraction, so they are not used as dated signals.
+
+### 18.3 Build D integration record
+
+| Item | Value |
+| --- | --- |
+| Branch | `arena/ebdf1d21-nba1` (single branch; rebased onto `origin/main` `095a0c1` before PR) |
+| Cross-session repair (logged, not silently done) | Main's Pages deploy was **failing** at `5372f45` (run 43541692057, job `validate`, step "Render every page in a headless DOM"): `origination/pages/method.html` and `origination/pages/props.html` (owned by `arena/e32856d8-nba1`, PR #40) rendered **no table at all**. Reproduced locally (2 of 109 pages with problems), fixed by adding honest, source-linked tables — a parameter register with provenance (measured vs assumption) to `method.html`, and a prop-input register (requirement → closest official source → reachable? → value published, blanks where blocked) to `props.html`. **No gate was loosened and no existing row or value was altered.** This repair is inside this PR; the owning session is informed here per the coordination rule. |
+| Local gate | `python3 scripts/verify_all.py` → VERIFY OK |
+| PR | [#44](https://github.com/wingbangboozle1-lang/NBA1/pull/44) — opened after 3 mid-run `main` movements (PRs #33/#40/#46 merged by other sessions); every conflict resolved append-only, nothing discarded |
+| Merge | **MERGED** as `60e90c5` (merge commit of PR #44), without waiting for approval |
+| Pages | First post-merge run 43543038722 **failed** at "Independent integration verification": `docs/audit/index.html` (owned by the X01–X04 audit session) links to this repo's own live Pages host as evidence, and `scripts/verify_integration.py` did not allowlist it. Fixed by allowlisting `wingbangboozle1-lang.github.io` (the repo's own published output) — see the follow-up PR; Pages re-run to be confirmed there |
+
+---
+
+## 18. Session `arena/697fca1e-nba1` — horizon lines + picks (claimed 2026-11-14 01:03 UTC)
+
+Session ID `arena/697fca1e-nba1` (Arena-managed branch; one branch per session is a platform
+constraint, so the `session-<id>/<task>` naming is not used). Board read first; open PRs #20, #26
+and the newly merged sessions #29 (§12) and #30 (§13) checked for overlap before claiming.
+Neither §12 nor §13 generated lines or picks, so this claim is unique.
+
+**Claimed scope — closes F-C07 ("no lines or picks generated for 11/14–11/17").** The prior
+sessions declined to generate picks because inputs are stale. This session generates them with the
+staleness made explicit instead of hidden: every number carries an as-of stamp and a DERIVED label,
+no market price is claimed, and F-C07's concerns stay published as flags on the new page.
+
+| # | Task | Status | File scope (owned exclusively by this session) | Notes |
+| --- | --- | --- | --- | --- |
+| W01 | Originated lines for the 27 unplayed horizon games (11/14–11/17) | done | `scripts/originate_horizon.py`, `data/derived/horizon_lines.json` | Same formulas as Build A's `originate_lines.py` (multiplicative OffRtg×DefRtg/league, additive pace, empirical dispersion, no HCA). Availability layer from the official 11/13 05:15 PM edition's 11/14 rows; impact only where minutes are verified (`players_minutes_2026_27.json`), else blank + flagged. |
+| W02 | Pick generation: singles, 2-leg parlays, prop combos, gate-labelled | done | `scripts/generate_picks.py`, `data/derived/horizon_picks.json` | Gate = `pick_gate_margin` 3.0 as in `data/originated_lines.json`; parlay joint bounds use the same rho-bound method as `scripts/compute_correlations.py`; every pick labelled MODEL OUTPUT — UNVALIDATED (no strategy has passed the gates: Build A 0/8, Build B 0/10). |
+| W03 | Horizon lines + picks page (root namespace, new file) | done | `picks.html` | Follows the Edge Lab layout; every table row carries an official source link. |
+| W04 | Live probes: 11/13 finals, 11/14 injury reports | done (both still unpublished at capture; documented) | `data/raw/probe_*` (new files only) | 11/13 games were LIVE at claim time; finals and the 11/14 noon report may appear during the session. If captured, records/statuses are updated from the official pages only. |
+| W05 | Integration record | done | `COORDINATION.md` (this section only), `index.html` (one nav line, integration step), `scripts/check_site.py` (one PAGES entry, integration step), PR → `main` | Rebase before every push; PR merged without waiting for approval per the brief; Pages deploy confirmed before merge. |
+
+**Not touched (owned by open or just-merged sessions):** `slate.html`, `research.html`,
+`review.html`, `sources.html`, `suggestions.html`, `schedule-verified.html`, `verification.html`,
+`docs/pages/summary.html`, `scripts/build_site.py`, `scripts/verify_integration.py`,
+`scripts/verify_schedule_c.py`, `.github/workflows/*`; `audit/**` (PR #20 scope).
+
+| # | Cross-session note | To | Request / action | State |
+| --- | --- | --- | --- | --- |
+| R-W1 | (integration step, W05) | `scripts/check_site.py` owner (Build A, T11) | Add `picks.html` to the checker's PAGES list so CI enforces per-row source coverage on the new page | Executed at integration (W05) with a one-line change, logged in my session log. Precedent: V06 edited a done checker file with a logged note. |
+| R-W2 | (integration step, W05) | `index.html` owner (PR #26 session, merged) | Add a DETAIL PAGES nav entry linking `picks.html` | Executed at integration (W05) as a single nav line, logged in my session log. Superseded by R-W3 after PR #33/#40 replaced the landing. |
+| R-W3 | (post-merge integration) | Build D landing owner (`arena/ffafa1f6-nba1`, PR #33) | Its `scripts/build_dashboard.py` regenerates the root landing and erased my one-line nav edit on every rebuild. Fix: the same single link added to the builder's topnav template (one line), so the session build stays discoverable across regenerations. Rebuilt landing committed together with the template change. | Executed; logged here because the builder is a done task's file. |
+
+### Conflict log (required by §0 rule on conflicts)
+
+Two rebase conflicts on `COORDINATION.md`, both resolved by keeping **every line of the other
+sessions' sections verbatim** and renumbering my section:
+
+1. At the first push (01:04 UTC): PRs #26/#29/#30 had merged since my base; my section moved
+   §12 → §14 (§12 was taken by `arena/93ff7f20-nba1`).
+2. While finishing W05 (~01:15 UTC): PRs #31–#38 merged on `main`, bringing session
+   `arena/791c9114-nba1`'s §14 and the §15 collision record; my section moved §14 → §16.
+3. At push time (~01:30 UTC): PR #39 (integration desk) merged and took §16; my section moved
+   §16 → §17 and the branch was consolidated into a single commit on `main`'s tip (`f4cb034`)
+   after repeated conflicts; shared-file merges (index.html, check_site.py) applied onto main's
+   current versions.
+4. At PR time (~01:45 UTC): the bot wrote further probe commits to this branch and to `main`
+   (newest kept each time; one textual merge had briefly unioned two probe runs — restored to a
+   single consistent record), and **PR #33 (Build D) merged**, taking §17 and replacing the root
+   landing with its four-build switcher while archiving the Edge Lab dashboard to `edge-lab/`.
+   My section moved §17 → §18. Resolutions: root `index.html` = Build D's landing + **one** added
+   link to my root `picks.html` (R-W2 update); probe record + verification page = newest consistent
+   run (439/439 @ 01:36:23Z) with the page regenerated by the current generator; my data files
+   (`data/derived/horizon_*.json`) never collided — Build D's picks live under `site/pages/` with
+   their own data.
+
+Nothing of any other session was discarded in any resolution. Cross-references to the
+other horizon-picks builds (PR #31's refreshed Origination Desk, Command Center §14, open
+PRs #33/#35) are recorded in my W05 record below.
+
+### W05 integration record (session `arena/697fca1e-nba1`)
+
+| Item | Value |
+| --- | --- |
+| Branch | `arena/697fca1e-nba1` (consolidated onto `main`, then merged through the bot-probe churn and the PR #33 merge; see conflict log) |
+| Local gate before push | `python3 scripts/verify_all.py` → VERIFY OK (includes `check_site.py` now scanning `picks.html`: 112 table rows, every row carries an official nba.com-family source link) |
+| Commits | claim `4b09dc8` → horizon build `bf6f702` → probe `a42b1ef` → rest-fix `d2656e3` |
+| PR | (recorded after merge in the follow-up board commit) |
+
+#### Verification performed
+
+| Check | Result |
+| --- | --- |
+| `scripts/verify_all.py` (builders, checkers, data audits) | VERIFY OK, exit 0 |
+| `scripts/check_site.py` on `picks.html` (newly added to PAGES, R-W1) | 112 rows checked, 0 unsourced |
+| Row-level link audit (tbody rows must contain an official-host link) | 112/112 pass |
+| Hand recomputation of 4 published lines from the raw ratings table (DEN@NOP, DAL@CLE, CHI@MIN, DAL@BOS) | all match to the printed rounding (−8.0/235.2, +1.2/228.6, +29.9/240.7, +10.7/215.3) |
+| Probability spot-check | CHI@MIN z = 29.9/16.128 → Φ = 0.968 = published value |
+| Render audit (no `undefined`/`NaN`/literal `None` cells; "provenance" false-positive excluded) | clean |
+| Live probe: 11/13 games | all 9 LIVE/PREGAME at 2026-11-14T01:22Z — no finals exist yet; captured verbatim in `data/raw/probe_2026-11-13_finals.json` |
+| Live probe: 11/14 noon injury report | AccessDenied (not yet published — timing, not access); F-C03 remains open and is re-probeable after noon ET |
+
+#### Sources used (all official)
+
+| Input | Source |
+| --- | --- |
+| Schedule (36 games, horizon 27) | <https://www.nba.com/schedule> + per-day <https://www.nba.com/games?date=YYYY-MM-DD> (capture verified twice by earlier sessions; re-read this session for the probe) |
+| Team ratings (as of 11/12 games) | <https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season> |
+| Team scoring baselines | <https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame> |
+| Empirical dispersion (n=14 finals) | <https://www.nba.com/games?date=2026-11-11>, <https://www.nba.com/games?date=2026-11-12> |
+| Injury statuses (11/14 rows) | <https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf>; policy <https://official.nba.com/nba-injury-report-2026-27-season/> |
+| Verified minutes (Edwards) | <https://www.nba.com/stats/players/traditional> leaderboard snapshot `data/players_minutes_2026_27.json` |
+| Parlay bound method | Fréchet–Hoeffding, same as `scripts/build_edge_site.py`; SGP rho MODEL-DERIVED from `docs/data/correlations.json` |
+
+#### Irregularities found and state
+
+| # | Irregularity | State |
+| --- | --- | --- |
+| I-W01 | Rest/B2B lookup initially self-blocked (later horizon games counted as "last played"); produced blank rest cells | **Fixed** (`d2656e3`); recomputed correctly (e.g. CHI B2B into CHI@MIN, IND B2B into 11/14... corrected: IND's 11/13 game gives 1 day of rest before IND@PHI on 11/15) |
+| I-W02 | CHI@MIN model outlier (+29.9, p 0.968) reproduces Build B's flagged F-C06 (+29.7) | **Open, published** on the page flags — extreme early-season CHI ratings; not corrected, flagged |
+| I-W03 | `render_check.mjs` cannot run in this sandbox (jsdom not installed; `node_modules` not persisted) | **Open**; picks.html is fully static (no inline JS), and verify_all's HTML-parser audit + check_site cover structure; noted for a session with npm access |
+| I-W04 | PR #26/29/30 merged while this session worked; three COORDINATION conflicts/rebases | **Resolved**; no other session's lines discarded |
+| I-W05 | 11/13 finals and 11/14+ injury reports could not exist at build time | **Open by nature of timing** (F-C01/F-C03 inherited, probe documented); next session should re-probe after ~03:00 UTC (finals) and ~16:30 UTC (noon report) on 2026-11-14 |
+
+#### Relation to the other horizon-picks builds (required by §0; nothing discarded)
+
+| Build | Horizon | Status | Relation to this session's work |
+| --- | --- | --- | --- |
+| PR #31 (`arena/0de855e5-nba1`, merged) | fresh 3-day slate 14–17 Nov | on `main` | Refreshed the Origination Desk (`docs/b/`) and engine pipeline; separate namespace, untouched by me |
+| PR #34 (`arena/791c9114-nba1`, merged) — Command Center | 22 games, 14–16 Nov | on `main` | Its `command-center/` namespace and its root-`index.html` build switcher are untouched by me; my `index.html` edits kept its ALL BUILDS block and frozen-snapshot callout intact |
+| PR #33 (`arena/ffafa1f6-nba1`, open) — Build D `site/` | 27 games, 14–17 Nov | open | Not touched; if merged, `site/` and `picks.html` coexist; cross-linking is left to the owning sessions |
+| PR #35 (`arena/2329cb68-nba1`, open) | picks through 11/17 | open | Not touched |
+| This session's `picks.html` + `data/derived/horizon_*.json` | 27 games, 14–17 Nov | this PR | Distinct artifact: Build A formulas, gate-labelled picks, per-row official sources, 112 rows under `check_site.py` |
+
+**Data note (I-W07):** Command Center's meta records an **11/13 07:30 PM ET injury edition**
+(`command-center/data/injuries.json`), newer than the 05:15 PM edition used here (the newest in the
+shared `data/` area, verified in-repo). My availability layer therefore carries the 05:15 PM
+statuses; a refresh of this page should prefer the 07:30 PM edition after its rows are verified.
