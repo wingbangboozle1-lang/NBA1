@@ -1,0 +1,1686 @@
+{
+ "generated_by": "verify/2026-11-14-cc5a6652/capture_live.py",
+ "session": "arena/cc5a6652-nba1",
+ "read_at_utc": "2026-11-14T18:40Z..19:10Z",
+ "method": "Each row is a verbatim transcription of the official page read live on 2026-11-14 between 18:40Z and 19:10Z, compared to the copy committed in this repository. No value is inferred; where a page does not print a value it is recorded as absent.",
+ "sources": {
+  "slate": "https://www.nba.com/games?date=<date>",
+  "standings": "https://www.nba.com/standings",
+  "teams_advanced": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+  "injury_newest": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+  "injury_site_edition": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+  "injury_index": "https://official.nba.com/nba-injury-report-2026-27-season/"
+ },
+ "counts": {
+  "checks": 185,
+  "match": 109,
+  "differ": 76
+ },
+ "checks": [
+  {
+   "section": "A. 2026-11-13 finals",
+   "item": "0022600034 NYK @ IND",
+   "committed": "Final 104-106 IND",
+   "live": "Final 104-106 IND",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "note": ""
+  },
+  {
+   "section": "A. 2026-11-13 finals",
+   "item": "0022600035 MIL @ ORL",
+   "committed": "Final 99-107 ORL",
+   "live": "Final 99-107 ORL",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "note": ""
+  },
+  {
+   "section": "A. 2026-11-13 finals",
+   "item": "0022600036 CLE @ MIA",
+   "committed": "Final 121-133 MIA",
+   "live": "Final 121-133 MIA",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "note": ""
+  },
+  {
+   "section": "A. 2026-11-13 finals",
+   "item": "0022600037 ATL @ CHI",
+   "committed": "Final/OT 117-125 CHI",
+   "live": "Final/OT 117-125 CHI",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "note": "OT counted separately"
+  },
+  {
+   "section": "A. 2026-11-13 finals",
+   "item": "0022600038 MEM @ NOP",
+   "committed": "Final 142-111 NOP",
+   "live": "Final 142-111 NOP",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "note": ""
+  },
+  {
+   "section": "A. 2026-11-13 finals",
+   "item": "0022600039 UTA @ HOU",
+   "committed": "Final 118-125 HOU",
+   "live": "Final 118-125 HOU",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "note": ""
+  },
+  {
+   "section": "A. 2026-11-13 finals",
+   "item": "0022600040 GSW @ SAS",
+   "committed": "Final 85-123 SAS",
+   "live": "Final 85-123 SAS",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "note": ""
+  },
+  {
+   "section": "A. 2026-11-13 finals",
+   "item": "0022600041 POR @ SAC",
+   "committed": "Final 120-107 SAC",
+   "live": "Final 120-107 SAC",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "note": ""
+  },
+  {
+   "section": "A. 2026-11-13 finals",
+   "item": "0022600042 OKC @ LAC",
+   "committed": "Final 112-113 LAC",
+   "live": "Final 112-113 LAC",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-13",
+   "note": ""
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600231 DEN @ NOP",
+   "committed": "DEN@NOP / 7:00 PM ET, 2026-11-14",
+   "live": "DEN@NOP, 7:00 PM ET, 2026-11-14",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600231 DEN @ NOP",
+   "committed": "6-4 / 4-9",
+   "live": "6-4 / 4-9",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600232 DAL @ CLE",
+   "committed": "DAL@CLE / 7:30 PM ET, 2026-11-14",
+   "live": "DAL@CLE, 7:30 PM ET, 2026-11-14",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600232 DAL @ CLE",
+   "committed": "7-5 / 6-7",
+   "live": "7-5 / 6-7",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600233 DET @ MIA",
+   "committed": "DET@MIA / 8:00 PM ET, 2026-11-14",
+   "live": "DET@MIA, 8:00 PM ET, 2026-11-14",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600233 DET @ MIA",
+   "committed": "8-3 / 6-6",
+   "live": "8-3 / 6-6",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600234 BKN @ MEM",
+   "committed": "BKN@MEM / 8:00 PM ET, 2026-11-14",
+   "live": "BKN@MEM, 8:00 PM ET, 2026-11-14",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600234 BKN @ MEM",
+   "committed": "3-8 / 8-4",
+   "live": "3-8 / 8-4",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600235 CHI @ MIN",
+   "committed": "CHI@MIN / 8:00 PM ET, 2026-11-14",
+   "live": "CHI@MIN, 8:00 PM ET, 2026-11-14",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600235 CHI @ MIN",
+   "committed": "2-9 / 9-3",
+   "live": "2-9 / 9-3",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600236 IND @ PHI",
+   "committed": "IND@PHI / 1:00 PM ET, 2026-11-15",
+   "live": "IND@PHI, 1:00 PM ET, 2026-11-15",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600236 IND @ PHI",
+   "committed": "5-8 / 10-3",
+   "live": "5-8 / 10-3",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600237 LAL @ PHX",
+   "committed": "LAL@PHX / 4:00 PM ET, 2026-11-15",
+   "live": "LAL@PHX, 4:00 PM ET, 2026-11-15",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600237 LAL @ PHX",
+   "committed": "11-2 / 5-6",
+   "live": "11-2 / 5-6",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600238 CHA @ LAC",
+   "committed": "CHA@LAC / 4:30 PM ET, 2026-11-15",
+   "live": "CHA@LAC, 4:30 PM ET, 2026-11-15",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600238 CHA @ LAC",
+   "committed": "4-8 / 3-8",
+   "live": "4-8 / 3-8",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600239 SAS @ UTA",
+   "committed": "SAS@UTA / 5:00 PM ET, 2026-11-15",
+   "live": "SAS@UTA, 5:00 PM ET, 2026-11-15",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600239 SAS @ UTA",
+   "committed": "11-2 / 1-12",
+   "live": "11-2 / 1-12",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600240 DAL @ BOS",
+   "committed": "DAL@BOS / 6:00 PM ET, 2026-11-15",
+   "live": "DAL@BOS, 6:00 PM ET, 2026-11-15",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600240 DAL @ BOS",
+   "committed": "7-5 / 10-2",
+   "live": "7-5 / 10-2",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600241 NYK @ TOR",
+   "committed": "NYK@TOR / 6:00 PM ET, 2026-11-15",
+   "live": "NYK@TOR, 6:00 PM ET, 2026-11-15",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600241 NYK @ TOR",
+   "committed": "6-6 / 5-7",
+   "live": "6-6 / 5-7",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600242 HOU @ WAS",
+   "committed": "HOU@WAS / 7:00 PM ET, 2026-11-15",
+   "live": "HOU@WAS, 7:00 PM ET, 2026-11-15",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600242 HOU @ WAS",
+   "committed": "10-3 / 4-9",
+   "live": "10-3 / 4-9",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600243 ATL @ MIL",
+   "committed": "ATL@MIL / 8:00 PM ET, 2026-11-15",
+   "live": "ATL@MIL, 8:00 PM ET, 2026-11-15",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600243 ATL @ MIL",
+   "committed": "7-6 / 1-12",
+   "live": "7-6 / 1-12",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600244 OKC @ SAC",
+   "committed": "OKC@SAC / 9:00 PM ET, 2026-11-15",
+   "live": "OKC@SAC, 9:00 PM ET, 2026-11-15",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600244 OKC @ SAC",
+   "committed": "8-5 / 1-11",
+   "live": "8-5 / 1-11",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600245 ORL @ BOS",
+   "committed": "ORL@BOS / 7:00 PM ET, 2026-11-16",
+   "live": "ORL@BOS, 7:00 PM ET, 2026-11-16",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600245 ORL @ BOS",
+   "committed": "5-7 / 10-2",
+   "live": "5-7 / 10-2",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600246 CHI @ CLE",
+   "committed": "CHI@CLE / 7:00 PM ET, 2026-11-16",
+   "live": "CHI@CLE, 7:00 PM ET, 2026-11-16",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600246 CHI @ CLE",
+   "committed": "2-9 / 6-7",
+   "live": "2-9 / 6-7",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600247 MEM @ WAS",
+   "committed": "MEM@WAS / 7:00 PM ET, 2026-11-16",
+   "live": "MEM@WAS, 7:00 PM ET, 2026-11-16",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600247 MEM @ WAS",
+   "committed": "8-4 / 4-9",
+   "live": "8-4 / 4-9",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600248 PHI @ BKN",
+   "committed": "PHI@BKN / 7:30 PM ET, 2026-11-16",
+   "live": "PHI@BKN, 7:30 PM ET, 2026-11-16",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600248 PHI @ BKN",
+   "committed": "10-3 / 3-8",
+   "live": "10-3 / 3-8",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600249 HOU @ MIA",
+   "committed": "HOU@MIA / 7:30 PM ET, 2026-11-16",
+   "live": "HOU@MIA, 7:30 PM ET, 2026-11-16",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600249 HOU @ MIA",
+   "committed": "10-3 / 6-6",
+   "live": "10-3 / 6-6",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600250 POR @ MIN",
+   "committed": "POR@MIN / 8:00 PM ET, 2026-11-16",
+   "live": "POR@MIN, 8:00 PM ET, 2026-11-16",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600250 POR @ MIN",
+   "committed": "9-3 / 9-3",
+   "live": "9-3 / 9-3",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600251 GSW @ NOP",
+   "committed": "GSW@NOP / 8:00 PM ET, 2026-11-16",
+   "live": "GSW@NOP, 8:00 PM ET, 2026-11-16",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600251 GSW @ NOP",
+   "committed": "8-5 / 4-9",
+   "live": "8-5 / 4-9",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600252 PHX @ DEN",
+   "committed": "PHX@DEN / 9:00 PM ET, 2026-11-16",
+   "live": "PHX@DEN, 9:00 PM ET, 2026-11-16",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600252 PHX @ DEN",
+   "committed": "5-6 / 6-4",
+   "live": "5-6 / 6-4",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600253 NYK @ TOR",
+   "committed": "NYK@TOR / 7:30 PM ET, 2026-11-17",
+   "live": "NYK@TOR, 7:30 PM ET, 2026-11-17",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600253 NYK @ TOR",
+   "committed": "6-6 / 5-7",
+   "live": "6-6 / 5-7",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600254 POR @ MIN",
+   "committed": "POR@MIN / 8:00 PM ET, 2026-11-17",
+   "live": "POR@MIN, 8:00 PM ET, 2026-11-17",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600254 POR @ MIN",
+   "committed": "9-3 / 9-3",
+   "live": "9-3 / 9-3",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600255 DET @ SAS",
+   "committed": "DET@SAS / 8:00 PM ET, 2026-11-17",
+   "live": "DET@SAS, 8:00 PM ET, 2026-11-17",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600255 DET @ SAS",
+   "committed": "8-3 / 11-2",
+   "live": "8-3 / 11-2",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600256 CHA @ LAL",
+   "committed": "CHA@LAL / 11:00 PM ET, 2026-11-17",
+   "live": "CHA@LAL, 11:00 PM ET, 2026-11-17",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600256 CHA @ LAL",
+   "committed": "4-8 / 11-2",
+   "live": "4-8 / 11-2",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "B. horizon schedule",
+   "item": "0022600257 UTA @ LAC",
+   "committed": "UTA@LAC / 10:30 PM ET, 2026-11-17",
+   "live": "UTA@LAC, 10:30 PM ET, 2026-11-17",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "note": "matchup + date + tip"
+  },
+  {
+   "section": "C. horizon records (site table)",
+   "item": "0022600257 UTA @ LAC",
+   "committed": "1-12 / 3-8",
+   "live": "1-12 / 3-8",
+   "match": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "note": "record printed on the official game card"
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Boston Celtics",
+   "committed": "10-2 (East)",
+   "live": "10-2 (East)",
+   "match": true,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Philadelphia 76ers",
+   "committed": "10-3 (East)",
+   "live": "10-3 (East)",
+   "match": true,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Detroit Pistons",
+   "committed": "8-3 (East)",
+   "live": "8-3 (East)",
+   "match": true,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Atlanta Hawks",
+   "committed": "7-5 (East)",
+   "live": "7-6 (East)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Miami Heat",
+   "committed": "5-6 (East)",
+   "live": "6-6 (East)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "New York Knicks",
+   "committed": "6-5 (East)",
+   "live": "6-6 (East)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Cleveland Cavaliers",
+   "committed": "6-6 (East)",
+   "live": "6-7 (East)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Toronto Raptors",
+   "committed": "5-7 (East)",
+   "live": "5-7 (East)",
+   "match": true,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Orlando Magic",
+   "committed": "4-7 (East)",
+   "live": "5-7 (East)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Indiana Pacers",
+   "committed": "4-8 (East)",
+   "live": "5-8 (East)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Charlotte Hornets",
+   "committed": "4-8 (East)",
+   "live": "4-8 (East)",
+   "match": true,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Washington Wizards",
+   "committed": "4-9 (East)",
+   "live": "4-9 (East)",
+   "match": true,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Brooklyn Nets",
+   "committed": "3-8 (East)",
+   "live": "3-8 (East)",
+   "match": true,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Chicago Bulls",
+   "committed": "1-9 (East)",
+   "live": "2-9 (East)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Milwaukee Bucks",
+   "committed": "1-11 (East)",
+   "live": "1-12 (East)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "San Antonio Spurs",
+   "committed": "10-2 (West)",
+   "live": "11-2 (West)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Los Angeles Lakers",
+   "committed": "11-2 (West)",
+   "live": "11-2 (West)",
+   "match": true,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Houston Rockets",
+   "committed": "9-3 (West)",
+   "live": "10-3 (West)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Portland Trail Blazers",
+   "committed": "8-3 (West)",
+   "live": "9-3 (West)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Minnesota Timberwolves",
+   "committed": "9-3 (West)",
+   "live": "9-3 (West)",
+   "match": true,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Memphis Grizzlies",
+   "committed": "7-4 (West)",
+   "live": "8-4 (West)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Golden State Warriors",
+   "committed": "8-4 (West)",
+   "live": "8-5 (West)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Oklahoma City Thunder",
+   "committed": "8-4 (West)",
+   "live": "8-5 (West)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Denver Nuggets",
+   "committed": "6-4 (West)",
+   "live": "6-4 (West)",
+   "match": true,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Dallas Mavericks",
+   "committed": "7-5 (West)",
+   "live": "7-5 (West)",
+   "match": true,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Phoenix Suns",
+   "committed": "5-6 (West)",
+   "live": "5-6 (West)",
+   "match": true,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "New Orleans Pelicans",
+   "committed": "4-8 (West)",
+   "live": "4-9 (West)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "LA Clippers",
+   "committed": "2-8 (West)",
+   "live": "3-8 (West)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Sacramento Kings",
+   "committed": "1-10 (West)",
+   "live": "1-11 (West)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "D. standings W-L",
+   "item": "Utah Jazz",
+   "committed": "1-11 (West)",
+   "live": "1-12 (West)",
+   "match": false,
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "LAL",
+   "committed": "30 teams in committed file",
+   "live": "LAL, no field differs",
+   "match": true,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "SAS",
+   "committed": "30 teams in committed file",
+   "live": "SAS, gp: 12 -> 13; w: 10 -> 11; min: 581.0 -> 629.0; off_rtg: 119.3 -> 119.6; def_rtg: 108.3 -> 106.6; net_rtg: 11.0 -> 13.0; ast_pct: 64.6 -> 65.4; ast_to: 2.22 -> 2.28; ast_ratio: 19.1 -> 19.4; dreb_pct: 70.9 -> 71.3; reb_pct: 52.3 -> 52.7; tov_pct: 12.4 -> 12.3; efg_pct: 53.2 -> 53.4; pace: 98.97 -> 98.94; pie: 55.4 -> 56.7; poss: 1199 -> 1298",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "BOS",
+   "committed": "30 teams in committed file",
+   "live": "BOS, no field differs",
+   "match": true,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "HOU",
+   "committed": "30 teams in committed file",
+   "live": "HOU, gp: 12 -> 13; w: 9 -> 10; min: 576.0 -> 624.0; off_rtg: 118.5 -> 119.3; def_rtg: 109.3 -> 110.2; net_rtg: 9.2 -> 9.1; ast_pct: 65.0 -> 64.4; ast_to: 1.79 -> 1.85; ast_ratio: 19.1 -> 19.0; oreb_pct: 35.1 -> 35.2; dreb_pct: 68.1 -> 67.8; reb_pct: 52.1 -> 52.0; tov_pct: 15.4 -> 14.8; efg_pct: 55.2 -> 55.1; poss: 1169 -> 1266",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "PHI",
+   "committed": "30 teams in committed file",
+   "live": "PHI, no field differs",
+   "match": true,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "MIN",
+   "committed": "30 teams in committed file",
+   "live": "MIN, no field differs",
+   "match": true,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "POR",
+   "committed": "30 teams in committed file",
+   "live": "POR, gp: 11 -> 12; w: 8 -> 9; min: 528.0 -> 576.0; off_rtg: 118.5 -> 118.8; def_rtg: 111.4 -> 111.1; net_rtg: 7.1 -> 7.7; ast_pct: 64.3 -> 63.7; ast_to: 1.58 -> 1.55; ast_ratio: 18.1 -> 17.9; oreb_pct: 33.9 -> 33.3; dreb_pct: 70.0 -> 70.2; reb_pct: 52.5 -> 52.4; tov_pct: 16.1 -> 16.2; efg_pct: 56.1 -> 56.3; ts_pct: 60.5 -> 60.9; pace: 100.86 -> 100.67; poss: 1110 -> 1208",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "DET",
+   "committed": "30 teams in committed file",
+   "live": "DET, no field differs",
+   "match": true,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "GSW",
+   "committed": "30 teams in committed file",
+   "live": "GSW, gp: 12 -> 13; l: 4 -> 5; min: 581.0 -> 629.0; off_rtg: 118.4 -> 116.1; def_rtg: 110.9 -> 112.0; net_rtg: 7.5 -> 4.1; ast_pct: 69.7 -> 70.0; ast_to: 1.76 -> 1.75; ast_ratio: 19.6 -> 19.4; oreb_pct: 33.5 -> 32.7; dreb_pct: 68.7 -> 68.5; reb_pct: 51.4 -> 50.7; tov_pct: 16.0 -> 15.9; efg_pct: 56.6 -> 55.4; ts_pct: 60.9 -> 59.5; pace: 99.76 -> 99.66; pie: 53.8 -> 51.8; poss: 1209 -> 1307",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "MEM",
+   "committed": "30 teams in committed file",
+   "live": "MEM, gp: 11 -> 12; w: 7 -> 8; min: 533.0 -> 581.0; off_rtg: 116.4 -> 117.8; def_rtg: 110.6 -> 110.0; net_rtg: 5.8 -> 7.8; ast_pct: 63.9 -> 65.5; ast_to: 1.62 -> 1.71; ast_ratio: 18.4 -> 18.8; oreb_pct: 33.9 -> 33.6; dreb_pct: 71.4 -> 71.8; reb_pct: 53.1 -> 53.2; tov_pct: 16.2 -> 15.7; efg_pct: 55.0 -> 55.3; ts_pct: 59.3 -> 59.8; pace: 100.28 -> 100.87; pie: 52.1 -> 53.2; poss: 1114 -> 1222",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "OKC",
+   "committed": "30 teams in committed file",
+   "live": "OKC, gp: 12 -> 13; l: 4 -> 5; min: 576.0 -> 624.0; off_rtg: 112.5 -> 112.7; def_rtg: 108.3 -> 109.0; net_rtg: 4.2 -> 3.7; ast_pct: 55.0 -> 55.5; ast_to: 1.69 -> 1.72; ast_ratio: 16.4 -> 16.6; oreb_pct: 31.4 -> 31.9; dreb_pct: 68.1 -> 68.5; reb_pct: 50.5 -> 50.8; efg_pct: 51.3 -> 51.4; ts_pct: 55.5 -> 55.4; pace: 98.75 -> 98.58; pie: 53.6 -> 53.3; poss: 1185 -> 1282",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "ATL",
+   "committed": "30 teams in committed file",
+   "live": "ATL, gp: 12 -> 13; l: 5 -> 6; min: 576.0 -> 629.0; off_rtg: 114.3 -> 113.3; def_rtg: 112.2 -> 111.9; net_rtg: 2.1 -> 1.4; ast_pct: 72.5 -> 71.6; ast_to: 2.1 -> 2.07; ast_ratio: 20.7 -> 20.5; oreb_pct: 33.3 -> 33.2; dreb_pct: 68.7 -> 69.2; reb_pct: 49.6 -> 49.7; efg_pct: 53.3 -> 52.8; ts_pct: 56.1 -> 55.7; pace: 103.46 -> 103.55; pie: 48.9 -> 48.5; poss: 1241 -> 1356",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "DAL",
+   "committed": "30 teams in committed file",
+   "live": "DAL, no field differs",
+   "match": true,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "CLE",
+   "committed": "30 teams in committed file",
+   "live": "CLE, gp: 12 -> 13; l: 6 -> 7; min: 581.0 -> 629.0; off_rtg: 115.6 -> 116.2; def_rtg: 113.6 -> 115.3; net_rtg: 2.1 -> 0.9; ast_pct: 64.6 -> 64.8; ast_to: 1.98 -> 2.02; ast_ratio: 18.8 -> 19.0; oreb_pct: 29.2 -> 28.7; dreb_pct: 67.9 -> 67.7; reb_pct: 49.2 -> 48.8; tov_pct: 13.4 -> 13.2; efg_pct: 55.0 -> 55.3; ts_pct: 58.4 -> 58.7; pace: 99.8 -> 99.62; pie: 51.4 -> 50.7; poss: 1208 -> 1306",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "DEN",
+   "committed": "30 teams in committed file",
+   "live": "DEN, no field differs",
+   "match": true,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "MIA",
+   "committed": "30 teams in committed file",
+   "live": "MIA, gp: 11 -> 12; w: 5 -> 6; min: 533.0 -> 581.0; off_rtg: 111.3 -> 113.2; def_rtg: 115.9 -> 116.4; net_rtg: -4.6 -> -3.2; ast_pct: 69.3 -> 70.3; ast_to: 1.93 -> 2.04; ast_ratio: 19.5 -> 19.9; oreb_pct: 29.2 -> 29.6; dreb_pct: 70.6 -> 71.2; reb_pct: 49.1 -> 49.7; tov_pct: 14.3 -> 13.9; efg_pct: 53.6 -> 54.0; ts_pct: 56.9 -> 57.5; pace: 102.8 -> 102.44; pie: 48.2 -> 49.0; poss: 1144 -> 1242",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "NYK",
+   "committed": "30 teams in committed file",
+   "live": "NYK, gp: 11 -> 12; l: 5 -> 6; min: 528.0 -> 576.0; off_rtg: 115.7 -> 114.5; def_rtg: 109.0 -> 108.6; net_rtg: 6.7 -> 5.9; ast_pct: 69.0 -> 69.2; ast_to: 1.88 -> 1.86; oreb_pct: 37.9 -> 37.3; dreb_pct: 72.6 -> 72.1; reb_pct: 54.9 -> 54.4; tov_pct: 14.9 -> 15.0; ts_pct: 55.8 -> 55.7; pace: 95.09 -> 95.63; pie: 53.6 -> 53.3; poss: 1048 -> 1150",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "IND",
+   "committed": "30 teams in committed file",
+   "live": "IND, gp: 12 -> 13; w: 4 -> 5; min: 576.0 -> 624.0; off_rtg: 110.6 -> 110.1; def_rtg: 112.5 -> 111.7; net_rtg: -1.9 -> -1.5; ast_pct: 68.7 -> 68.0; ast_to: 1.9 -> 1.85; ast_ratio: 19.8 -> 19.5; oreb_pct: 24.2 -> 24.9; dreb_pct: 67.6 -> 67.7; reb_pct: 46.6 -> 47.0; tov_pct: 14.5 -> 14.7; efg_pct: 53.9 -> 53.5; ts_pct: 57.5 -> 57.1; pace: 101.13 -> 101.15; poss: 1211 -> 1312",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "ORL",
+   "committed": "30 teams in committed file",
+   "live": "ORL, gp: 11 -> 12; w: 4 -> 5; min: 533.0 -> 581.0; def_rtg: 114.6 -> 113.4; net_rtg: -5.0 -> -3.7; ast_pct: 67.1 -> 67.7; ast_to: 1.51 -> 1.55; ast_ratio: 18.3 -> 18.5; oreb_pct: 32.7 -> 31.7; dreb_pct: 69.8 -> 70.2; tov_pct: 17.2 -> 17.0; ts_pct: 56.5 -> 56.6; pace: 98.25 -> 98.23; pie: 46.7 -> 47.6; poss: 1088 -> 1185",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "PHX",
+   "committed": "30 teams in committed file",
+   "live": "PHX, no field differs",
+   "match": true,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "TOR",
+   "committed": "30 teams in committed file",
+   "live": "TOR, no field differs",
+   "match": true,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "CHA",
+   "committed": "30 teams in committed file",
+   "live": "CHA, off_rtg: 101.8 -> 101.9; def_rtg: 113.0 -> 113.1; tov_pct: 20.3 -> 20.2; pace: 96.92 -> 96.83; poss: 1162 -> 1161",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "NOP",
+   "committed": "30 teams in committed file",
+   "live": "NOP, gp: 12 -> 13; l: 8 -> 9; min: 591.0 -> 639.0; off_rtg: 112.1 -> 111.4; def_rtg: 119.2 -> 120.2; net_rtg: -7.1 -> -8.8; ast_pct: 59.8 -> 60.1; oreb_pct: 30.2 -> 29.7; dreb_pct: 68.2 -> 68.3; reb_pct: 49.2 -> 49.0; tov_pct: 15.8 -> 15.7; efg_pct: 52.7 -> 52.2; ts_pct: 58.5 -> 58.2; pace: 101.64 -> 102.08; pie: 47.1 -> 46.2; poss: 1252 -> 1359",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "WAS",
+   "committed": "30 teams in committed file",
+   "live": "WAS, no field differs",
+   "match": true,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "BKN",
+   "committed": "30 teams in committed file",
+   "live": "BKN, no field differs",
+   "match": true,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "LAC",
+   "committed": "30 teams in committed file",
+   "live": "LAC, gp: 10 -> 11; w: 2 -> 3; min: 485.0 -> 533.0; off_rtg: 110.0 -> 110.7; net_rtg: -5.8 -> -5.1; ast_pct: 68.3 -> 68.4; ast_to: 1.44 -> 1.51; ast_ratio: 18.7 -> 18.8; oreb_pct: 30.8 -> 30.4; dreb_pct: 67.8 -> 67.2; reb_pct: 49.2 -> 48.8; tov_pct: 18.1 -> 17.6; efg_pct: 54.2 -> 54.3; pace: 100.95 -> 100.55; pie: 47.1 -> 47.4; poss: 1020 -> 1116",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "CHI",
+   "committed": "30 teams in committed file",
+   "live": "CHI, gp: 10 -> 11; w: 1 -> 2; min: 480.0 -> 533.0; off_rtg: 109.2 -> 109.0; def_rtg: 124.2 -> 122.0; net_rtg: -15.1 -> -12.9; ast_pct: 66.7 -> 67.6; ast_to: 1.59 -> 1.56; ast_ratio: 17.7 -> 18.1; oreb_pct: 31.3 -> 30.7; dreb_pct: 64.2 -> 64.6; reb_pct: 47.3 -> 47.5; tov_pct: 15.8 -> 16.4; efg_pct: 50.3 -> 51.3; ts_pct: 55.1 -> 55.8; pace: 103.75 -> 103.83; pie: 42.7 -> 44.0; poss: 1038 -> 1154",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "MIL",
+   "committed": "30 teams in committed file",
+   "live": "MIL, gp: 12 -> 13; l: 11 -> 12; min: 576.0 -> 624.0; off_rtg: 106.2 -> 105.7; def_rtg: 120.7 -> 120.0; net_rtg: -14.5 -> -14.2; ast_pct: 65.8 -> 65.6; ast_to: 1.51 -> 1.49; ast_ratio: 17.7 -> 17.5; oreb_pct: 30.9 -> 30.5; dreb_pct: 63.1 -> 64.3; reb_pct: 47.0 -> 47.3; efg_pct: 51.3 -> 51.1; ts_pct: 54.5 -> 54.3; pace: 100.5 -> 100.31; pie: 42.1 -> 42.0; poss: 1206 -> 1305",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "SAC",
+   "committed": "30 teams in committed file",
+   "live": "SAC, gp: 11 -> 12; l: 10 -> 11; min: 528.0 -> 576.0; off_rtg: 107.2 -> 107.3; def_rtg: 119.3 -> 119.5; net_rtg: -12.1 -> -12.2; ast_pct: 62.7 -> 63.7; ast_to: 1.41 -> 1.46; ast_ratio: 17.7 -> 17.9; oreb_pct: 28.5 -> 28.4; dreb_pct: 68.7 -> 69.1; reb_pct: 48.0 -> 48.1; tov_pct: 17.3 -> 16.9; efg_pct: 52.7 -> 52.6; ts_pct: 56.3 -> 56.2; pace: 101.23 -> 101.0; pie: 42.5 -> 42.8; poss: 1111 -> 1210",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "E. teams advanced",
+   "item": "UTA",
+   "committed": "30 teams in committed file",
+   "live": "UTA, gp: 12 -> 13; l: 11 -> 12; min: 586.0 -> 634.0; off_rtg: 103.8 -> 105.0; def_rtg: 115.4 -> 116.4; net_rtg: -11.6 -> -11.3; ast_pct: 64.9 -> 63.5; ast_to: 1.43 -> 1.44; ast_ratio: 17.2 -> 17.0; oreb_pct: 29.0 -> 29.5; dreb_pct: 69.3 -> 68.8; tov_pct: 16.6 -> 16.3; efg_pct: 50.1 -> 50.4; ts_pct: 54.4 -> 54.7; pace: 100.75 -> 100.5; pie: 45.4 -> 45.3; poss: 1232 -> 1330",
+   "match": false,
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "note": "all 19 printed columns compared"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "BKN@MEM Brooklyn Nets Bilodeau, Tyler",
+   "committed": "Out - G League - Two-Way",
+   "live": "Out - G League - Two-Way",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "BKN@MEM Brooklyn Nets Brown Jr., Mikel",
+   "committed": "Questionable - Injury/Illness - Illness",
+   "live": "Probable - Injury/Illness - Illness",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "BKN@MEM Brooklyn Nets Jefferson, Joshua",
+   "committed": "Out - G League - On Assignment",
+   "live": "Out - G League - On Assignment",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "BKN@MEM Brooklyn Nets Nelson, Grant",
+   "committed": "Out - G League - Two-Way",
+   "live": "Out - G League - Two-Way",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "BKN@MEM Brooklyn Nets Saraf, Ben",
+   "committed": "Out - G League - On Assignment",
+   "live": "Out - G League - On Assignment",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "BKN@MEM Brooklyn Nets Traore, Nolan",
+   "committed": "Probable - Injury/Illness - Right Calf Tightness / Soreness",
+   "live": "Probable - Injury/Illness - Right Calf Tightness / Soreness",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "BKN@MEM Memphis Grizzlies (team row)",
+   "committed": "NOT YET SUBMITTED - None",
+   "live": "absent",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "CHI@MIN Chicago Bulls Awaka, Tobe",
+   "committed": "absent",
+   "live": "Out - Injury/Illness - Disc Irritation",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "CHI@MIN Chicago Bulls Claxton, Nic",
+   "committed": "absent",
+   "live": "Questionable - Injury/Illness - Left Hamstring Injury Management",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "CHI@MIN Chicago Bulls (team row)",
+   "committed": "NOT YET SUBMITTED - None",
+   "live": "absent",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "CHI@MIN Chicago Bulls Powell, Norman",
+   "committed": "absent",
+   "live": "Questionable - Injury/Illness - Low Back Injury Management",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "CHI@MIN Chicago Bulls Sellers, Jaylin",
+   "committed": "absent",
+   "live": "Out - G League - Two-Way",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "CHI@MIN Chicago Bulls Smith, Jalen",
+   "committed": "absent",
+   "live": "Questionable - Injury/Illness - Left Finger Sprain",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "CHI@MIN Chicago Bulls Swain, Dailyn",
+   "committed": "absent",
+   "live": "Out - G League - On Assignment",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "CHI@MIN Chicago Bulls Wilson, Caleb",
+   "committed": "absent",
+   "live": "Out - Injury/Illness - Right Metacarpal Fracture",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "CHI@MIN Minnesota Timberwolves Beringer, Joan",
+   "committed": "Available - Injury/Illness - Face Mask",
+   "live": "Available - Injury/Illness - Face Mask",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "CHI@MIN Minnesota Timberwolves DiVincenzo, Donte",
+   "committed": "Out - Injury/Illness - Right Achilles Tendon Repair / Surgery",
+   "live": "Out - Injury/Illness - Right Achilles Tendon Repair / Surgery",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "CHI@MIN Minnesota Timberwolves Edwards, Anthony",
+   "committed": "Out - Injury/Illness - Right Knee Arthroscopy",
+   "live": "Out - Injury/Illness - Right Knee Arthroscopy",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Cleveland Cavaliers Allen, Jarrett",
+   "committed": "absent",
+   "live": "Questionable - Injury/Illness - Right Knee Injury",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Cleveland Cavaliers Harden, James",
+   "committed": "absent",
+   "live": "Questionable - Injury/Illness - Left Lower Leg/Calf Tightness",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Cleveland Cavaliers Merrill, Sam",
+   "committed": "absent",
+   "live": "Out - Injury/Illness - Right Elbow Injury Management",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Cleveland Cavaliers Mitchell, Donovan",
+   "committed": "absent",
+   "live": "Questionable - Injury/Illness - Left Knee Contusion/Injury Management",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Cleveland Cavaliers Mobley, Evan",
+   "committed": "absent",
+   "live": "Out - Injury/Illness - Left Great Toe Sprain",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Cleveland Cavaliers (team row)",
+   "committed": "NOT YET SUBMITTED - None",
+   "live": "absent",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Cleveland Cavaliers Tomlin, Nae'Qwan",
+   "committed": "absent",
+   "live": "Out - Injury/Illness - Low Back Stress Reaction",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Cleveland Cavaliers Udeh, Jr., Ernest",
+   "committed": "absent",
+   "live": "Out - G League - Two-Way",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Cleveland Cavaliers Watson, Peyton",
+   "committed": "absent",
+   "live": "Questionable - Injury/Illness - Right Hamstring Injury Management",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Dallas Mavericks Biberovic, Tarik",
+   "committed": "Out - Injury/Illness - Right Heel Bursitis",
+   "live": "Out - Injury/Illness - Right Heel Bursitis",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Dallas Mavericks Christie, Max",
+   "committed": "Questionable - Injury/Illness - Left Ankle Sprain",
+   "live": "Doubtful - Injury/Illness - Left Ankle Sprain",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Dallas Mavericks Johnson Jr., Morez",
+   "committed": "Probable - Injury/Illness - Left Shin / Tibia Contusion",
+   "live": "Probable - Injury/Illness - Left Shin / Tibia Contusion",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Dallas Mavericks Lively II, Dereck",
+   "committed": "Out - Injury/Illness - Right Foot Surgery",
+   "live": "Out - Injury/Illness - Right Foot Surgery",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Dallas Mavericks Martin, Caleb",
+   "committed": "Available - Injury/Illness - Right Thumb Splint",
+   "live": "Available - Injury/Illness - Right Thumb Splint",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DAL@CLE Dallas Mavericks de Larrea, Sergio",
+   "committed": "Out - Injury/Illness - Right Knee Sprain",
+   "live": "Out - Injury/Illness - Right Knee Sprain",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DEN@NOP Denver Nuggets Holmes II, DaRon",
+   "committed": "Out - G League - On Assignment",
+   "live": "Out - G League - On Assignment",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DEN@NOP Denver Nuggets Nembhard, Ryan",
+   "committed": "Out - G League - Two-Way",
+   "live": "Out - G League - Two-Way",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DEN@NOP Denver Nuggets Strawther, Julian",
+   "committed": "Out - Injury/Illness - Left Knee Sprain",
+   "live": "Out - Injury/Illness - Left Knee Sprain",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DEN@NOP Denver Nuggets Whitmore, Cam",
+   "committed": "Out - G League - Two-Way",
+   "live": "Out - G League - Two-Way",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DEN@NOP New Orleans Pelicans McGowens, Bryce",
+   "committed": "absent",
+   "live": "Out - Injury/Illness - Left Elbow Infection",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DEN@NOP New Orleans Pelicans Missi, Yves",
+   "committed": "absent",
+   "live": "Probable - Injury/Illness - Left Knee Contusion / Bone Bruise",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DEN@NOP New Orleans Pelicans Murphy III, Trey",
+   "committed": "absent",
+   "live": "Out - Injury/Illness - Bilateral Patellar Tendinopathy",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DEN@NOP New Orleans Pelicans Murray, Dejounte",
+   "committed": "absent",
+   "live": "Out - Injury/Illness - Left Ankle Sprain",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DEN@NOP New Orleans Pelicans (team row)",
+   "committed": "NOT YET SUBMITTED - None",
+   "live": "absent",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DEN@NOP New Orleans Pelicans Watford, Trendon",
+   "committed": "absent",
+   "live": "Out - Injury/Illness - Right Ankle Sprain",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DET@MIA Detroit Pistons Duren, Jalen",
+   "committed": "Out - Injury/Illness - Right Hamstring Strain",
+   "live": "Out - Injury/Illness - Right Hamstring Strain",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DET@MIA Detroit Pistons Harkless, Elijah",
+   "committed": "Questionable - G League - Two-Way",
+   "live": "Available - G League - Two-Way",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DET@MIA Detroit Pistons Joe, Isaiah",
+   "committed": "Out - Injury/Illness - Right Hip Contusion",
+   "live": "Out - Injury/Illness - Right Hip Contusion",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DET@MIA Detroit Pistons Jones, Isaac",
+   "committed": "Questionable - G League - Two-Way",
+   "live": "Available - G League - Two-Way",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DET@MIA Detroit Pistons Lanier, Chaz",
+   "committed": "Out - G League - On Assignment",
+   "live": "Out - G League - On Assignment",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DET@MIA Detroit Pistons Okorie, Ebuka",
+   "committed": "Out - G League - On Assignment",
+   "live": "Out - G League - On Assignment",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DET@MIA Detroit Pistons Onyenso, Ugonna",
+   "committed": "Out - G League - Two-Way",
+   "live": "Out - G League - Two-Way",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DET@MIA Miami Heat Antetokounmpo, Giannis",
+   "committed": "absent",
+   "live": "Probable - Injury/Illness - Right Wrist Sprain",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DET@MIA Miami Heat Goldin, Vladislav",
+   "committed": "absent",
+   "live": "Out - G League - Two-Way",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DET@MIA Miami Heat Larsson, Pelle",
+   "committed": "absent",
+   "live": "Doubtful - Injury/Illness - Illness",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DET@MIA Miami Heat (team row)",
+   "committed": "NOT YET SUBMITTED - None",
+   "live": "absent",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "F. injury status change 04:15 -> 01:30 PM ET",
+   "item": "DET@MIA Miami Heat Thompson, Klay",
+   "committed": "absent",
+   "live": "Probable - Injury/Illness - Left Ankle Sprain",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "a status or reason that moved between editions"
+  },
+  {
+   "section": "G. edition the site prices from",
+   "item": "site/data/injuries.json report stamp",
+   "committed": "NBA Official Injury Report, 11/14/26 04:15 AM ET edition",
+   "live": "Injury Report: 11/14/26 01:30 PM",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "the site uses 04:15 AM ET (S10); four newer editions exist, newest 01:30 PM ET"
+  },
+  {
+   "section": "G. edition the site prices from",
+   "item": "site/data/meta.json data_windows",
+   "committed": "NBA Official Injury Report, 11/14/26 04:15 AM ET edition",
+   "live": "11/14/26 01:30 PM ET edition",
+   "match": false,
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "note": "9h15m stale at read time"
+  },
+  {
+   "section": "H. teams that filed after 04:15 AM ET",
+   "item": "BKN@MEM Memphis Grizzlies",
+   "committed": "NOT YET SUBMITTED at 04:15 AM ET",
+   "live": "still NOT YET SUBMITTED",
+   "match": true,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "the site renders these as 'team had not filed'"
+  },
+  {
+   "section": "H. teams that filed after 04:15 AM ET",
+   "item": "CHI@MIN Chicago Bulls",
+   "committed": "NOT YET SUBMITTED at 04:15 AM ET",
+   "live": "filed: 7 player row(s) at 01:30 PM ET",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "the site renders these as 'team had not filed'"
+  },
+  {
+   "section": "H. teams that filed after 04:15 AM ET",
+   "item": "DAL@CLE Cleveland Cavaliers",
+   "committed": "NOT YET SUBMITTED at 04:15 AM ET",
+   "live": "filed: 8 player row(s) at 01:30 PM ET",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "the site renders these as 'team had not filed'"
+  },
+  {
+   "section": "H. teams that filed after 04:15 AM ET",
+   "item": "DEN@NOP New Orleans Pelicans",
+   "committed": "NOT YET SUBMITTED at 04:15 AM ET",
+   "live": "filed: 5 player row(s) at 01:30 PM ET",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "the site renders these as 'team had not filed'"
+  },
+  {
+   "section": "H. teams that filed after 04:15 AM ET",
+   "item": "DET@MIA Miami Heat",
+   "committed": "NOT YET SUBMITTED at 04:15 AM ET",
+   "live": "filed: 4 player row(s) at 01:30 PM ET",
+   "match": false,
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "the site renders these as 'team had not filed'"
+  }
+ ]
+}

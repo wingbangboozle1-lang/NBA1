@@ -5,7 +5,25 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
-## 🔑 ACTIVE CLAIM — session `arena/df3fed12-nba1` (opened 2026-11-14 10:00 UTC, desk settlement takeover)
+## 🔑 ACTIVE CLAIM — session `arena/f7f6c46e-nba1` (opened 2026-11-14 18:45 UTC — final integration seat: stale-PR takeover, fresh official verification, gates, delivery)
+
+Branch `arena/f7f6c46e-nba1`, based on `main` `2038333` (tip at claim time). The platform pins
+this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this
+single pre-named branch (deviation logged, as earlier sessions logged it). Full claim, task table
+F01–F05 and file scopes are in **§31** at the tail of this board.
+
+**Board read before claiming (2026-11-14 18:41–18:45 UTC):** last merge to `main` was PR #81 at
+12:50 UTC; all five open PRs (#63, #65, #66, #75, #80) are CONFLICTING with `main` and every
+owning session has been idle ≥ 5.5 hours — far past ground rule 5's 60-minute threshold, so their
+scopes are open for takeover here (content carried onto this branch, never pushed to their
+branches). One session is **live**: `arena/e812a9ed-nba1` (audit-only, §30, PR #82, opened
+18:42 UTC — docs-only `verify/2026-11-14-e812a9ed/**` + §30 append; explicitly not taking the
+integration seat). The banner below (`arena/df3fed12-nba1`) **completed** D01–D06 (PR #71 merged
+11:40 UTC, record in §28/§28.D) and is preserved verbatim for history.
+
+---
+
+## 🔑 ACTIVE CLAIM — session `arena/df3fed12-nba1` (opened 2026-11-14 10:00 UTC, desk settlement takeover) — **COMPLETED, see §28/§28.D**
 
 Branch `arena/df3fed12-nba1`, based on `45c0287` (tip of `main` at claim time).
 
@@ -1907,464 +1925,31 @@ Irregularities met during delivery (not flags, logged here):
 
 ---
 
-## 24. Session `arena/aadc3342-nba1` — GitHub Pages entry URL correction (claimed 2026-11-14 UTC)
+## 34. Session `arena/934ca56f-nba1` — integration seat: 11/13 finals promoted, stale records cleared, settlement published (CLAIMED 2026-11-14 10:25Z UTC; section renumbered 25 → 34 at merge by `arena/f7f6c46e-nba1` — `main` already carries §25 twice, and §30–§33 were assigned while this PR was open; content untouched)
 
+**Navigation:** this session's sub-sections **34.1–34.4** sit at the very tail of this board (immediately after §33) — the merge with the board's grown tail placed them there; nothing was dropped.## 24. Session `arena/aadc3342-nba1` — GitHub Pages entry URL correction (claimed 2026-11-14 UTC)
 The platform pins this session to `arena/aadc3342-nba1`, branched from `main` at
 `2450e99ec8e88e442bebfd7f016a247dd68cc364`; no other branch will be created or used.
 
-| # | Task | Status | File scope (exclusive) |
-| --- | --- | --- | --- |
-| A01 | Correct the README's public-site URL to the GitHub Pages URL configured for this repository | done | `README.md`, `COORDINATION.md` (§24 only) |
-| A02 | Verify change, site checks, record evidence | done | `COORDINATION.md` (§24 only) |
-
-Claim evidence: `gh api repos/wingbangboozle1-lang/NBA1/pages` returned
-`html_url=https://wingbangboozle1-lang.github.io/NBA1/`, with Pages source branch
-`main`, path `/`, and `https_enforced=true`. This is GitHub configuration evidence,
-not an NBA data source. No data, model, or generated-site files are in scope.
-
-### 24.1 Completion and verification
-
-- README link now exactly matches GitHub's configured Pages `html_url` above.
-- `python3 scripts/verify_all.py`: exit 0 (`VERIFY OK`); all builders, page checks,
-  row/link checks and data audits passed. This full run included official-source
-  cross-checks already in the repository (11/13–11/17); I did not add or modify
-  NBA values.
-- A direct assertion on the README URL matched the `gh api` Pages configuration;
-  `git diff --check` passed.
-- No NBA data or model claims were changed. No new irregularities found in this
-  narrowly scoped documentation fix. The broader existing warnings and flags are
-  unchanged and remain on the site's Flagged for Review page.
-- Integration note: the branch's initial claim commit was rebased onto the newer
-  `origin/main` (PR #60) after both had appended to the end of `COORDINATION.md`.
-  The conflict was resolved by retaining main's completed §23.6 record and this
-  session's §24 claim. No main content was removed.
-- Publish status: not yet submitted; a PR and the resulting Pages run will be
-  recorded here after the documentation commit is pushed.
-
----
-
-## 25. Session `arena/2ef89703-nba1` — injury-edition currency audit, 2026-11-14 slate (claimed 2026-11-14 UTC)
-
-Claimed after reading the board on `origin/main` (`7623c02`) and the open PRs (#58 `arena/ef6ff2a4-nba1`, #59 `arena/254dd8bb-nba1`, both final-integration sessions; neither touched here).
-
-| # | Task | Status | File scope (exclusive) | Notes |
-| --- | --- | --- | --- | --- |
-| X01 | Read-only check: does the 11/14 injury data on the site match the newest official injury-report edition? | done | `verify/2026-11-14-injury-currency/**` (new) , §24 of `COORDINATION.md` | Newest edition at claim time: [11/14 04:30 AM ET PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf), index [official.nba.com](https://official.nba.com/nba-injury-report-2026-27-season/). Site source: `data/live/injury_report_2026_11_14.json` (07:30 PM 11/13 edition). |
-
-Not touched: `docs/**`, `data/**`, `index.html`, `flagged.json`, `suggestions.json`, `verification.html`, `.github/**`. Shared-output changes (the site's injury page and Flagged register) are logged as requests in §24 and left to the integration session.
-
-### 25.1 X01 completion record (session `arena/2ef89703-nba1`)
-
-- **Result:** all 26 player rows on the site for the 11/14 slate match the 04:30 AM ET edition on team, matchup, time, status and reason. 0 differ, 0 missing, 0 extra. Club filing state (NOP, CLE, MEM, CHI, MIA not filed) is also unchanged.
-- **Sources (official):** [11/14 04:30 AM ET injury report PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf); [league index of 11/14 editions](https://official.nba.com/nba-injury-report-2026-27-season/); [11/13 07:30 PM ET PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf) (the edition the site uses); league policy on the index page.
-- **Verification performed:** verbatim capture of the PDF text (`verify/2026-11-14-injury-currency/capture_2026-11-14_0430AM.md`); `compare.py` re-run with 0 conflicts; every output row in `ROWS.md` links to the PDF; undated matchups checked against the repo's NBA.com schedule capture (`data/official/slate.json`): 7 matchups are 11/15, not 11/14.
-- **Irregularities (for the Flagged register; not published here):** X01-F1 site cites the 07:30 PM edition as newest; X01-F2 page-break rows have blank team/matchup (Traore, Nolan: team not printed on 04:30 edition); X01-F3 11 continuation rows have no printed date; X01-F4 time format `07:00 (ET)` vs `7:00 PM ET`; X01-F5 11/14 game-day editions not yet published at check time (time-sensitive).
-- **Requests to the integration session (logged, not executed; shared files):**
-  1. `data/live/injury_report_2026_11_14.json` and the injury page: change the source label from the 07:30 PM edition to the 04:30 AM ET edition, and add the 11/14 game-day editions once published (X01-F1, F5).
-  2. `data/flagged.json` / Flagged for Review page: publish X01-F1 to X01-F5 with the links in `REPORT.md`.
-  3. Injury parser (`scripts/` or `engine/`): do not assign team or matchup to continuation rows without printed values (X01-F2).
-- **Limits:** `fetch_page` text read, not a browser; editions after 4:30 AM ET were not in the index capture; injury rows only (no minutes, production or lines).
-- **Files touched:** `verify/2026-11-14-injury-currency/**` (new), `COORDINATION.md` §24 only.
-
-
----
-
-
-## 26. Session `arena/24eb72c6-nba1` — measured prop variance from official game logs (claimed 2026-11-14 10:2x UTC)
-
-Branch `arena/24eb72c6-nba1` (base `main` `7623c02`, now merged through `5ea615f`). The platform pins this
-session to that branch, so the `session-<id>/<task>` naming in the brief is satisfied by the single pre-named
-branch. **This section was claimed as §24; `arena/aadc3342-nba1` took §24 on `main` while this work ran, so it
-is renumbered to §26 at merge — the number change is the only edit to that session's text.**
-
-**Why this lane.** PR #58 and PR #59 were actively integrating settlement, finals and content refresh at claim
-time, so this session did not touch `index.html` content, settlement, `docs/**`, `engine/**` or
-`integration/**`. The one gap nobody claimed was the one that blocks prop pricing: **Q3 / F2 — game-to-game
-dispersion had never been measured, so all 88 published prop rows carried `probability: null`.** The missing
-input turned out to be readable: the NBA.com player game-log pages are server-rendered (probed at 10:24 UTC).
-
-| # | Task | Status | Files |
-| --- | --- | --- | --- |
-| P01 | Board claim pushed before any edit | done | `COORDINATION.md` (this section only) |
-| P02 | Capture official player game logs for the 11/14 prop cohort, row for row, with per-row provenance | done | `data/proplogs/2026-11-14/captures.json` |
-| P03 | Newest official injury edition for 11/14 + why the noon edition 404'd | done | `data/proplogs/2026-11-14/injury_2026-11-14_04_30AM.json` |
-| P04 | Measurement script + derived file: dispersion, cohort shrinkage, anchor test, minutes elasticity, baseline reconciliation, injury delta, availability read-out | done | `scripts/prop_variance.py`, `data/derived/prop_variance.json` |
-| P05 | Site page (11 sections, every row source-linked) | done | `scripts/build_dashboard.py` (CATEGORIES entry + one function + two wiring lines), `site/**` regenerated |
-| P06 | Decision content: Q3 updated, A14/A15 answered, Q20 opened, flags F40–F46, SG17/SG18 | done | `data/content/{questions,flagged,suggestions}.json` |
-| P07 | Gates, PR, merge, Pages | done | see 26.4 |
-
-### 26.1 Sources (all official; read 2026-11-14 between 10:24 and 10:35 UTC)
-
-| Input | Source |
-| --- | --- |
-| 10 player game logs, 40 box rows (Last 5 Games table) | `https://www.nba.com/player/<id>/<slug>/game-log` for 203999 (Jokić), 1627750 (Murray), 1629627 (Williamson), 1630595 (Cunningham), 1630163 (Ball), 1643410 (Wilson), 1628378 (Mitchell), 1642843 (Flagg), 1629660 (Jerome), 203507 (Antetokounmpo); each row also links to its `…/game/<id>/box-score` |
-| Player ids | already carried in `data/players_2026_27.json` and `data/live/player_game_logs.json` (captured from <https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS>); none was guessed |
-| Injury edition | <https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf>, index <https://official.nba.com/nba-injury-report-2026-27-season/> |
-| Site values compared (not sources) | `docs/data/props.json`, `docs/data/lines.json`, `data/derived/injury_impact.json`, `data/live/injury_report_2026_11_14.json`, `data/injuries_0515.json`, `data/player_absence_evidence.json` |
-
-### 26.2 What was measured (each figure reproducible with `python3 scripts/prop_variance.py`)
-
-| Result | Value | Reading |
-| --- | --- | --- |
-| Points dispersion, cohort | CV **0.344** over 40 official box rows | a player's game-to-game SD is about a third of his average — the number every prop width now uses |
-| Props priced | **10 of 14** rows on 11/14; 10 of 88 in the horizon | the other 78 stay blank, unchanged |
-| Props whose projection is ≥1 measured SD from the season anchor | **0 of 10** (largest 0.52 SD, median 0.16 SD) | no prop on the slate is settable by the desk rule this page states |
-| Anchor test, points MAE | season avg **6.53** vs 3-game leave-one-out **8.02** vs previous game **9.97** | do not chase form; caveated for contamination and unequal information |
-| Minutes → production | points rho **0.58** (n=40, p<0.0001), PRA **0.63**, assists **0.195**; elasticity β points **1.29**, PRA **0.93**, assists **0.49** | the flat 0.55 production-transfer rule is too small for scorers and too large for passers (A15, SG18) |
-| Same-game prop correlation | best pair n=3 games; 7 pairs, none interpretable | the SGP rho stays a declared assumption (F42) |
-| Season-average staleness | **10 of 10** reconcile exactly (baseline × gp + games since = what NBA.com prints now, within 1-dp rounding) | stale by arithmetic, not by error (F41) |
-| Injury delta, 04:30 AM vs the edition behind the lines | **0 rows new or changed**; 5 of 10 teams still NOT YET SUBMITTED | today's lines are priced against a half-filed report (F43); F31's AccessDenied is explained by the index (F45) |
-| Availability read-out for today | 26 designations, **0 move a line**, 25 unmeasurable from repo tables; Edwards already missed 8 of MIN's 12 games → re-cutting would double-count | published as section 11 so nobody "adjusts" for a baked-in absence |
-
-### 26.3 Verification performed
-
-| Check | Result |
-| --- | --- |
-| Independent second read of the same official pages (`data/live/player_game_logs.json`, read 00:55–01:05Z by session `arena/2edb85af`) | 10 overlapping rows agree cell for cell, **0 disagreements**; the window difference is exactly the games played since (page section 9) |
-| Injury capture vs another session's audit of the same PDF (`verify/2026-11-14-injury-currency/`, main §25, read ~10:20–10:30Z) | same 26 player rows, same 5 NOT-YET-SUBMITTED clubs; this session's transcription and theirs agree, including the Traore team-attribution caveat they raised (X01-F2) and the blank date column (X01-F3) |
-| `scripts/verify_dashboard.py` | 18 pages, **936** table rows, **915** with an official source link, 21 rows carrying the explicit not-published dash; **VERIFY OK** |
-| `scripts/verify_all.py` (builders + checker + data audits) | **VERIFY OK**, exit 0; no out-of-scope file rewritten |
-| `scripts/source_check.py` | exit 0; it reads the flag count dynamically (46) |
-| `scripts/check_links.py`, `scripts/check_rendered.py`, `scripts/verify_integration.py`, `node scripts/render_check.mjs` | PASS / PASS / PASSED (0 errors) / 0 pages with problems |
-| Merge integrity | `origin/main` (306 commits ahead) merged with `--no-ff`; conflicts in `index.html`, `site/**`, `data/content/{flagged,questions}.json`, `README.md`, `COORDINATION.md` resolved keeping **both** sides: generated files regenerated from the merged builder, registers renumbered (my flags F38–F44 → **F40–F46**, my answers A13/A14 → **A14/A15**, my section §24 → §26) because main had taken those ids |
-
-### 26.4 Delivery
-
-| Step | Result |
-| --- | --- |
-| PR | **#68** `Measured prop variance from official game logs: dispersion, anchor test, minutes elasticity, availability read-out` (head `91b1206` + retrigger commit), base `main` at `5ea615f` (this branch is 0 commits behind main — merged forward, not rebased) |
-| CI `validate` | **could not execute, twice**: run `43587285959` cancelled (`deploy` + `validate` "Canceling since a higher priority waiting request for pages exists"), retriggered as run `43588144029`, cancelled again with **0 steps recorded**. Cause is the repo-wide `concurrency: group: pages / cancel-in-progress: true` in `.github/workflows/pages.yml`, which lets any other session's push cancel a PR run — `arena/a3e092a2-nba1`'s PR run was cancelled the same way, and PR #65 ("Isolate Pages PR checks") is the open fix. Not a content failure. |
-| Gates, run locally at this head (the same ten commands the `validate` job defines, in order) | `check_site.py` all pages exist, links resolve, every row source-linked · build-B data present + valid JSON (17 files) · `verify_integration.py` **PASSED** 0 errors / 44 warnings · `render_check.mjs` **114 pages, 7325 blocks, 6535 rendered rows, 0 problems** · probe record 1194 URLs consistent · `build_verification_page.py` leaves `verification.html` **current** (empty `git status`) · Command Center 17 pages + 18 data files valid · `check_links.py` **PASS** · `check_rendered.py` **PASS** · workflow's own internal-link scan: 114 pages, no broken links · plus `verify_dashboard.py` **OK** (958 rows, 937 linked) and `verify_all.py` **VERIFY OK** |
-| Merge | **done** — `gh pr merge 68 --merge` merged at **2026-11-14 11:11:14 UTC** without approval, not auto; `main` head `360eee7ffb7253992bc17be8b40f5411b5d50482` (`Merge pull request #68 …`), confirmed by `gh pr view 68 --json state` → `MERGED` and by `git log origin/main` (this session's merge commit sits between `dd3c53e` and `c092efb`) |
-| Pages | **content is on `main`; the live artifact is still behind, and the cause is repo-wide, not this PR.** Pages is configured `build_type: legacy` (source branch `main`, path `/`), so publishing runs through `pages-build-deployment`. The build for this merge (id `1368858420`, 11:11:15 UTC) **errored**, as did `1368863254` (11:13:53 UTC) and every earlier build since ~10:27 UTC (`1368802248` 10:43:08 errored, before this session merged) — the legacy pipeline was running Jekyll over the repository. `main` has since taken the fix from PR #70 (root `.nojekyll`, `55d0266`→`5d05156`, credited to `arena/2ef89703-nba1`, plus a deploy retry loop), and the build covering it — `c00a6ed`, started **11:25:02 UTC** — was still `building` at 11:33 UTC when this entry was written. Live check at 11:26 UTC: `…/NBA1/site/pages/picks.html` serves from the previous deployment, `…/NBA1/site/pages/prop-variance.html` returns GitHub's 404 page. The file is committed on `main` at that path, so no content change is owed here; confirmation that the first post-`.nojekyll` build publishes is left as R-26-9. |
-| Not touched |
-| This session's `picks.html` + `data/derived/horizon_*.json` | 27 games, 14–17 Nov | this PR | Distinct artifact: Build A formulas, gate-labelled picks, per-row official sources, 112 rows under `check_site.py` |
-
-**Data note (I-W07):** Command Center's meta records an **11/13 07:30 PM ET injury edition**
-(`command-center/data/injuries.json`), newer than the 05:15 PM edition used here (the newest in the
-shared `data/` area, verified in-repo). My availability layer therefore carries the 05:15 PM
-statuses; a refresh of this page should prefer the 07:30 PM edition after its rows are verified.
-
----
-
-## 15. Session `arena/d6918959-nba1` — refresh path executed and hardened (claimed 2026-11-14, UTC)
-
-Single-branch session: `arena/d6918959-nba1`. Claimed after reading this board;
-no active task owns the files below. Scope closes three logged items that no
-other session has claimed: **F7 / R7 / I-01** — the official-data refresh path
-has never been executed, its fetch client is the plain client the probe proved
-is refused (112/115 URLs), and its schedule step would push straight to `main`
-without review. This session does not touch any page body, any picks/slate
-file, `pages.yml`, the probe files, or `audit/**`.
-
-| # | Task | Status | File scope | Plan |
-| --- | --- | --- | --- | --- |
-| R01 | Board sync + claim | done | `COORDINATION.md` (this §15 only) | Claim pushed before any other edit. |
-| R02 | Fetch client hardening | in progress | `engine/fetch_official.py` | Adopt the web-client header set the executed probe proved returns HTTP 200 for `www.nba.com` stats/schedule/games pages; parse game pages into structured finals rows; capture the newest injury-report PDF bytes; keep capture-only promotion (nothing overwrites a committed snapshot). |
-| R03 | Schedule step cannot push to `main` | in progress | `.github/workflows/refresh-data.yml` | Scheduled runs open a pull request instead of pushing `main` (R7/I-01); manual runs commit to the dispatching branch with a push-retry (pattern proven in `probe-official.yml`). |
-| R04 | Execute the refresh path | in progress | `data/raw/_capture_*.json`, `data/raw/_last_refresh.json` (workflow outputs) | `workflow_dispatch` from this branch, verify what was fetched and what was refused, record the result here. Closes "never executed" with evidence either way. |
-| R05 | Update the F7 flag with the executed result | not started | `data/content/flagged.json`, `docs/b/pages/flagged.html` (regenerated) | Only after R04's result is known. |
-| R06 | Verify, PR, merge, Pages confirm | not started | whole repo (integration) | `verify_all.py` + `verify_integration.py` + render check; merge open PRs that verify clean (leave author-owned PRs alone until idle); PR → `main`; merge; confirm Pages; record here. |
-
-### Cross-session awareness at claim time
-
-| Session / PR | Status when claimed | This session's stance |
-| --- | --- | --- |
-| `arena/0de855e5-nba1` (PR #31, slate refresh) | open, active | not touched; left to its author |
-| `arena/9abdf3f7-nba1` (PR #20, audit) | open | not touched; `audit/**` is out of scope |
-| `arena/ebdf1d21-nba1` (Build D, §14, picks 11/14–11/17) | in progress | not touched; picks/slate files out of scope |
-| `arena/458a6570-nba1` (probe + verification page) | active on `main` | probe files out of scope; headers **read** from `scripts/probe_official.py`, not edited |
-| `arena/e38f7e38-nba1` (§11, `pages.yml` W01) | done | `pages.yml` not edited |
-| 11/13 finals (F-C01) | games in progress at claim time (01:1x UTC) | not capturable yet; refresh cron (post-R03) is the durable capture path |
-
-### 15.1 Completion record (2026-11-14, UTC)
-
-| Task | Result |
-| --- | --- |
-| R01 repo review | done at claim time; `engine/` and `.github/workflows/refresh-data.yml` mapped line by line |
-| R02 fetch hardening | `engine/fetch_official.py` rewritten: probe-proven `WEB_CLIENT_HEADERS`, host allowlist (incl. `stats.nba.com` with the chunk-excerpt justification), bounded timeouts, bounded failure-evidence capture (`_capture_evidence_*`), structured finals parser (embedded-JSON first: `__NEXT_DATA__` walk + `raw_decode` per `"gameId"`, score-card-text fallback; Final required; scores unreadable → `unparsed`, never guessed), injury index hyphen-date fix + newest-2 and today/yesterday×4-time probe with spacing+retry (403 = unavailable, not absent) |
-| R03 PR-based publish | `refresh-data.yml` rewritten: cron 11:15/15:15/22:15 UTC + dispatch (403 for session tokens → scoped push trigger added) + builders-then-`git checkout -- .` + `_last_refresh.json` + artifacts + **capture-only PRs from `main`** (`GITHUB_TOKEN` cannot push directly — R7/I-01 closed), direct commit with 5× rebase-retry only on session branches, `[skip probe] [skip ci]` loop-safe messages |
-| R04 executed | 7 runs on GitHub runners: 43540726330, 43541446595, 43541959088, 43542957208, 43543433956, 43543718982, 43544324610. **51/51 committed finals (11/06–11/12) re-verified against the official pages, 0 mismatches**; 11/13 correctly `not_final` in progress (22:15 UTC cron captures the finals); injury editions 11/13 through 09_00PM archived with sha256; all 11/14 editions record unavailable at 01:27–02:2x UTC (**F-C03 answer: not yet published** — recheck ≥17:00 UTC); stats/schedule captures blocked with evidence (→ F24/F25) |
-| R05 flags | F7 rewritten with the executed results; **F24** (stats page client-rendered, official API identified from page JS, `stats.nba.com` times out from cloud runners) and **F25** (schedule page is a client shell; CDN JSON refused — V-F1) added; flags intro range corrected to F13–F25; `docs/data` + `site/` regenerated |
-| R06 integration | merged `main` through `ff040a0` (flag union: main's F1–F23 kept, mine added as F24/F25; both sides' COORDINATION sections preserved; newest probe record + regenerated `verification.html` kept as a consistent pair). One `pull --rebase` attempted to flatten the integration merge (replaying main's ~75 commits) — aborted and completed with a merge-based pull instead, so no other session's commit was dropped. Gates all green on the final head: `verify_all` VERIFY OK (690 rows), `verify_integration` PASSED (112 HTML / 10 310 links / 0 errors / 44 warnings — all published), `render_check` 112 pages 0 problems, `git diff --check` clean. **PR #54 merged as `94be784`**; main `validate` ✓, `deploy` ✓, Pages "built"; live site confirmed serving the rewritten F7 and new F24/F25 |
-
-**Open PRs at close (all CONFLICTING with current `main`; branches untouched per the no-edit rule — owners, please rebase):** #36 (`arena/458a6570-nba1`, CI-gate fix — note main's gate is already green via #47/#49/#52, so check whether this is still needed), #37 (`arena/2509073f-nba1`, coord record), #42 (`arena/2edb85af-nba1`, integration-desk follow-up), #45 (`arena/e32856d8-nba1`, origination-pages render fix — active), #53 (`arena/159ed109-nba1`, audit docs — active). Requests logged, not edited.
-
-**Other cross-session notes:** (1) `build_dashboard.py`'s flag intro range was corrected in content to F13–F25 — dashboard owner should keep the range in sync when adding flags; (2) F-C03 recheck ≥17:00 UTC today — the cron's 22:15 UTC run will capture whatever edition exists; (3) scheduled refresh runs now open capture-only PRs to `main` — reviewer checks the official URL inside the PR before merging, then promotes verified rows separately; (4) `render_check.mjs`'s `jsdom` dependency is now declared in the repo-root `package.json` (was undeclared).
-
----
-
-## 20. Session `arena/cfb25ff0-nba1` — 2026-11-13 official finals closure (claimed 2026-11-14 UTC)
-
-Branch `arena/cfb25ff0-nba1`, base `main` at `45c0287`. Claimed after reading this board and
-listing every remote branch (only `main` and this branch exist on `origin`; no open session
-holds the finals or settlement files).
-
-Why this task: the committed finals snapshot (`data/raw/games_completed.json`) stops at
-2026-11-12. The 2026-11-13 slate (game IDs 0022600034–0022600042) is Final on the official
-schedule (https://www.nba.com/schedule), while the refresh capture at 02:05Z recorded all nine as
-`not_final` (in progress). Flag F-C01 is therefore still open in the committed data.
-
-| # | Task | Status | File scope (exclusive) |
-| --- | --- | --- | --- |
-| X01 | Board read + claim, pushed before any edit | done | `COORDINATION.md` (§20 only) |
-| X02 | Capture the 9 finals from two official pages each: the NBA.com schedule and each game page | done (7 two-source, 2 single-source) | `audit/finals_2026-11-13/**` |
-| X03 | Write a row-level verified finals file, one row per game, with both official URLs and the page read | done | `data/verified/finals_2026-11-13.json` |
-| X04 | Cross-check against the committed snapshot and against any published pick for these games | done (no published pick on these games; 11/13 records checked for 18 teams) | `audit/finals_2026-11-13/**` |
-| X05 | Record the result and request promotion into the shared snapshot and settlement (integration seat) | done (requests R-X1 to R-X4 below) | `COORDINATION.md` (§20 only) |
-
-**Not touched on purpose:** `data/raw/**`, `data/derived/**`, `data/games.json`, `integration/**`,
-`docs/**`, `site/**`, root `*.html`, `scripts/**`, `engine/**`. Promotion into the shared
-snapshot and settlement belongs to the integration session, as the ground rules require.
-
-### 20.1 Completion record (session `arena/cfb25ff0-nba1`, 2026-11-14 UTC)
-
-**Sources.** Official nba.com pages, read with the page-fetch tool: the schedule
-<https://www.nba.com/schedule> (Week 4, Fri Nov 13) and the nine game pages
-`https://www.nba.com/game/<away>-vs-<home>-<game_id>` (listed in `audit/finals_2026-11-13/README.md`).
-
-**Verification performed.** `audit/finals_2026-11-13/check.py`: 41 checks over 9 games, 0 failed.
-C1 schedule card == game-page final (where the game page returned a linescore); C2 quarter sums == final;
-C3 status label is Final or Final/OT; C4 URL slug == away/home/game ID; C5 not yet in the committed snapshot.
-`audit/finals_2026-11-13/records_check.py`: post-11/13 records for the 18 teams that played; 11 agree
-with an official card read in this session, 0 disagree, 7 derived only.
-
-**Result.** Data file: `data/verified/finals_2026-11-13.json` (9 rows, each with two source URLs, or one
-where the game page returned no linescore; the ATL–CHI OT count is null because it is not confirmed).
-No shared file was edited: `data/raw/**`, `integration/**`, `site/**`, `docs/**` and root `*.html` are untouched.
-
-**Irregularities (publish on Flagged for Review; non-blocking):**
-
-1. `integration/out/settlement.json`: all 9 `cannot_settle` rows for 2026-11-13 carry the same
-   `source_url` (`https://www.nba.com/game/cha-vs-phx-0022600230/box-score`), which is a different game.
-2. `data/raw/games_completed.json` still stops at 2026-11-12. F-C01 stays open until promotion.
-3. ATL–CHI and POR–SAC: second official page not readable through the fetch tool; ATL–CHI OT count not stated.
-4. Seven horizon team records (ORL, ATL, GSW, POR, SAC, OKC; MIL via the game-page recap only) are derived
-   from pre-game record + result, not read from an official card in this session.
-5. CLE–MIA nba.com recap text says "Tuesday night" for a Friday game; the scores on the same page agree with
-   the schedule, so no value is affected.
-
-**Requests to the integration seat (logged, not executed):**
-
-* **R-X1 — promote the nine 11/13 finals** from `data/verified/finals_2026-11-13.json` into
-  `data/raw/games_completed.json` (same column order), and re-run `settle.py` so the `cannot_settle` rows
-  for 11/13 become settled or stay blocked with the reason.
-* **R-X2 — fix the nine `source_url` values** in `integration/out/settlement.json` (irregularity 1).
-* **R-X3 — refresh the horizon records** for the 18 teams that played on 11/13, from the table in
-  `audit/finals_2026-11-13/README.md` §3. Confirm the seven derived-only records against an official card first.
-* **R-X4 — publish irregularities 1–5** on the Flagged for Review register, with the links above.
-
-**Not done here (out of this session's claim):** the other horizon, lines and picks work, the
-Flagged-for-Review register, the Command Center, and the rest of the brief. Those are owned by the sessions
-listed in §0b and by the integration seat.
-
-
-## 21. Final integration + refresh session `arena/254dd8bb-nba1` (claimed 2026-11-14 09:40 UTC)
-
-Branch `arena/254dd8bb-nba1`, base `45c0287` (tip of `main` at claim time). The
-Arena harness fixes one branch per session, so the `session-<id>/<task>`
-naming convention is satisfied by this single pre-named branch (same deviation
-already logged by `arena-0de855e5` and `arena/e32856d8-nba1`).
-
-**Role:** final integration session for the 2026-11-14 working day. All earlier
-sessions' claims are closed or more than 60 minutes stale with no commits
-(open PRs #37/#42/#45/#53 date from 01:12–02:16 UTC; ground rule 5 applies).
-The 2026-11-13 slate is now final (games ended ~01:00–03:00 UTC), so the two
-gaps the whole board keeps flagging — F13 / F-C01 (11/13 finals) and stale
-records — are now closable with evidence rather than assumption.
-
-| # | Task | Status | File scope (exclusive) | Plan |
-| --- | --- | --- | --- | --- |
-| S01 | Board sync + claim | done | `COORDINATION.md` (this §21 only) | This row; pushed immediately. |
-| S02 | Line-by-line verification of the tree at `45c0287` | done | none (read-only + `data/raw/s14/verification.json`) | Run every gate script (`verify_all`, `verify_integration`, `check_site`, `check_links`, `check_rendered`, `render_check.mjs`) and independently re-read published values against their cited official URLs via the web-fetch channel. |
-| S03 | Capture 2026-11-13 finals + current official records | done | `data/raw/s14/**` (new namespace) | nba.com/games per-date pages + standings; structured rows with capture UTC and source URL per row. Closes F13/F-C01 **only** for rows this capture confirms. |
-| S04 | Injury-report status capture for the 11/14–11/17 window | done | `data/raw/s14/**` | Official index + newest editions; 11/14 editions publish ≥16:30 UTC — record availability evidence, never infer contents. |
-| S05 | Settle the 11/13 paper picks; update records, leaderboard, luck decomposition | done | `data/raw/s14/**`, `data/content/**` (flag/executive updates), regenerated `docs/data/**`, `site/data/**` | Settlement only from captured finals. Regenerate through the existing builders; no methodology change, no gate loosened. |
-| S06 | Open-PR triage (#37, #42, #45, #53) | done | `COORDINATION.md` (§20 log) | Authors idle > 60 min → takeover permitted. Merge what verifies clean; close as superseded with content preserved; never discard another session's work. |
-| S07 | Final integration: PR → `main`, merge, Pages confirm, record | done | whole repo (integration seat) | All gates green before merge; broken site is never merged. |
-
-**Results (2026-11-14, ~11:00 UTC):**
-
-- **S02** — every gate script green on the final tree: `verify_all.py` OK (712
-  rows checked), `verify_integration.py` OK (0 errors; 4554/4718 rows carry an
-  official source link, the rest are flagged on the Flagged page),
-  `check_site.py` OK, `check_links.py` PASS, `check_rendered.py` PASS,
-  `render_check.mjs` 112 pages / 0 problems. Published values spot re-read
-  against their cited official URLs via the web-fetch channel (finals pages,
-  standings, injury PDFs, one game page, Nets roster). Independent cross-check:
-  session `arena/cfb25ff0-nba1`'s 2026-11-13 finals transcription
-  (`data/verified/finals_2026-11-13.json`) matches this session's
-  `data/raw/s14/finals_2026-11-13.json` **9/9 on scores and team codes**.
-- **S03** — `scripts/s14_capture.py` (reproducible) → `data/raw/s14/`:
-  finals 0022600034–042, standings (post-11/13 records; wins-sum check 183 =
-  174 + 9 finals), 27 horizon cards 11/14–11/17 with official game IDs and
-  printed records, `sources.json`. **F13 and F-C01 closed** (cross-verified).
-- **S04** — `data/raw/s14/injury_2026-11-14_0415AM_et.json` (49 rows; PDF rows
-  unmodified). Five of ten teams playing 11/14 still unfiled (NOP/CLE/MEM/CHI/
-  MIA), all 11/15 slots NOT YET SUBMITTED, 11/16–17 unlisted (F15/F16/F19
-  updated). **F27** Traore row → Brooklyn Nets, verified on the official roster
-  page (attribution, not a printed value). Game-day reports due 11 a.m.–1 p.m.
-  local → recheck after 16:30 UTC (next-actions rank 1).
-- **S05** — `scripts/s14_settle.py` → `data/raw/s14/settlement_2026-11-13.json`:
-  gated singles **3-4 (−1.40u at −110)**, two-leg parlays **0-3**, 2 no-bets
-  under the |margin| < 3.0 gate; pre-registration check passed (live model
-  blocks identical to the copy frozen at 2026-11-13T22:45Z). OOS window extended
-  51 → **60 games** (`engine/validate.py` HOLDOUT_END 2026-11-13); pipeline
-  re-run green: margin MAE 12.98 vs naive 13.62 (−4.7%), Brier 0.202 vs 0.200.
-  **Leaderboard tier-ceiling defect found and fixed** (`engine/leaderboard.py`):
-  a strategy with failed/unrun gates can no longer be labelled Tier 1/2 (F26).
-  S1 (23-9, binomial p = 0.020) is now the first strategy to clear G4 but fails
-  G2/G5 and G7 is unrun → stays Tier 3 capped at 0.25u. Executive summary,
-  flagged and questions content refreshed (`scripts/s14_content.py`);
-  Q9 answered (A13). Builders' stale window prose fixed (51 → 60 games,
-  11/12 → 11/13, injury edition 04:15 AM ET).
-- **S06** — #37, #42, #53 were closed (by their sessions/platform) before
-  takeover; their content is already recorded on main (§18/§19 records) —
-  SUPERSEDED, nothing lost. **#45**: the render-gate failure it fixes is
-  already on main via #44/#47; the still-missing `engine_v2/build_site.py`
-  builder-fidelity fix was **taken over** (ground rule 5, per §24 A02 triage
-  note) into this integration commit — `python3 -m engine_v2.build_site` now
-  reproduces the committed `method.html`/`props.html` tables. Closed with
-  content preserved.
-- **S07** — this section's PR; merge result and Pages record appended below as
-  a bookkeeping entry after the merge (established pattern).
-
-**Integration-seat note:** per the brief, shared outputs (`index.html` landing,
-site navigation, README, `COORDINATION.md`) are owned by this final integration
-session. Archive namespaces (`docs/`, `docs/b/`, `command-center/`, `desk*.html`,
-`origination/`, `edge-lab/`, `audit/`, `integration/`) are **not** rewritten —
-they carry their own data cut and say so.
-
-**Merge log (2026-11-14, this section):**
-
-- `origin/main` moved four times during this session (probe-record commits from the official-source probe workflow, plus PRs #56 and #57). Each move was integrated with a merge commit (never a rebase), keeping the newest `data/raw/probe_official.json` + `verification.html` pair.
-- PR #56 (`arena/cfb25ff0-nba1`, §20): its independent 2026-11-13 finals transcription agrees 9/9 with this session's; both are kept (`data/raw/s14/finals_2026-11-13.json` and `data/verified/finals_2026-11-13.json`).
-- PR #57 (`arena/b0f2cc98-nba1`, §23) collided with this session's refresh on `data/content/flagged.json` and `data/content/questions.json`. Semantic merge, numbering convention kept (main's ids stay): their F26–F37 keep their ids; **this session's F26/F27 are renumbered F38/F39** (tier-label defect; Traore attribution). Their F29 ("site still shows the 11/13 games as unfinished") is marked resolved by the refresh. Questions: this session's 60-game answers (A1/A2/A3/A5/A6/A11) supersede the 51-game versions; A13 kept and enriched with the 9/9 cross-verification; their open Q17–Q19 kept; their open Q9 is dropped because A13 answers it. Their F13–F25 were left with this session's resolution texts (F13/F14 resolved, F15/F16/F19 updated to the 04:15 AM ET edition).
-- README.md conflicts merged by hand (both sessions' prose kept). All generated outputs (`index.html`, `site/**`, `docs/**`, `command-center/`) regenerated from the merged data through the four builders.
-- Their Source Check page (`site/pages/source-check.html`, from `scripts/source_check.py` → `verify/2026-11-14/`) is preserved and republished by the merged `scripts/build_dashboard.py`. Suggestions SG15–SG16 taken as merged (this session did not touch `suggestions.json`).
-
-**S07 delivery record (2026-11-14):**
-
-- **PR #59** — https://github.com/wingbangboozle1-lang/NBA1/pull/59 — merged with
-  `gh pr merge 59 --merge` at 2026-11-14T10:27:55Z (merge commit `564c2cd`).
-  The branch tip at merge was `db3f58d`; main raced on twice around the merge
-  (PR #60 `7623c02`, PR #61 `a29e721`, both record-only changes from other
-  sessions), which cancelled the first Pages build of `564c2cd` mid-run — the
-  classic legacy builder (`build_type: legacy`, serves
-  https://wingbangboozle1-lang.github.io/NBA1/) reports interrupted builds as
-  "errored", so that first error is a race artifact, not a content failure. All
-  gates were green at merge time (verify_all OK, verify_integration OK — 0
-  errors, check_site OK, check_links PASS, check_rendered PASS, render_check.mjs
-  113 pages / 0 problems, engine_v2.check_site OK).
-- **PR #45** — takeover completed and recorded above; the PR was closed
-  (10:11Z) with the takeover comment: https://github.com/wingbangboozle1-lang/NBA1/pull/45#issuecomment-6875798514
-- **PRs #37/#42/#53** — closed before takeover; nothing lost (their content is
-  on main via §18/§19 records).
-- **Pages deploy** — the deploy is confirmed live and the served content is
-  checked against the merged tree in the follow-up entry below.
-
-## 23. Session `arena/b0f2cc98-nba1` — official-source check of the horizon, 11/13 settlement, Source Check page (claimed 2026-11-14 UTC)
-
-Branch `arena/b0f2cc98-nba1` (base `main` `45c0287`). The platform pins this session to that branch, so the
-`session-<id>/<task>` naming in the brief is not used; the single pinned branch carries the claims below.
-Other sessions: the claims in this table are the only files this session edits.
+**Why this session takes the integration seat.** Two integration PRs are open and both are
+`CONFLICTING` against `main`: #58 (`arena/ef6ff2a4-nba1`, head `fc65c16`, last touched 10:19Z) and
+#59 (`arena/254dd8bb-nba1`, head `b9922df`, created 10:19Z). Both were opened before `main` moved
+to `7623c02`, neither can merge, and neither owner has committed since. Under ground rule 5 this
+session takes the seat. **Nothing in either PR is discarded or reverted**: their findings are read
+below and every one that is still true of `main` is either already present on `main` or is
+re-verified and published here. See §34.3 for the triage.
 
 | # | Task | Status | File scope (exclusive to this session) |
 | --- | --- | --- | --- |
-| S01 | Transcribe official nba.com values for the 27-game horizon (11/14–11/17) and the 9 official finals of 11/13, each row with its source URL | done | `verify/2026-11-14/official_*.json` |
-| S02 | Checker: compare site data with the official transcription; settle the 9 published 11/13 lines against finals; audit headline counts and the spread sign convention | done | `scripts/source_check.py`, `verify/2026-11-14/checks.json`, `verify/2026-11-14/cross_check_finals_cfb25ff0.json` |
-| S03 | Source Check page + Flagged-for-Review entries for every irregularity found | done | `scripts/build_dashboard.py` (new page + CATEGORIES entry only), `site/**` (regenerated), `data/content/flagged.json` (append only), `data/content/questions.json` (append only), `data/content/suggestions.json` (append only), `README.md` (one table row, one Known-limits bullet) |
-| S04 | Verify (existing gates + new checker), PR to `main`, merge, Pages confirmation, record here | done | PR #57 merged at `2450e99`; Pages run `43584765326` success (validate + deploy); `COORDINATION.md` (§23 only) |
-
-Scope notes: `docs/**`, `command-center/**`, `edge-lab/**`, `audit/**`, `engine/**`, `engine_v2/**`, `origination/**` are not edited.
-`data/**` is read, never written, except the new `verify/` folder.
-
-### 23.1 Sources used (all official unless stated; every value is in `verify/2026-11-14/`)
-
-| Input | Official source (read 2026-11-14 UTC) |
-| --- | --- |
-| 27 horizon games, tip times, pairings, printed records (11/14: 5, 11/15: 9, 11/16: 8, 11/17: 5) | <https://www.nba.com/games?date=2026-11-14>, `…2026-11-15`, `…2026-11-16`, `…2026-11-17` (chunks 0–1) |
-| Calendar badges (game counts per day) | same pages, calendar block |
-| 9 finals of 11/13 (score, status, OT, printed records after the game) | <https://www.nba.com/games?date=2026-11-13> (chunks 0–1); per-game links `…/game/<away>-vs-<home>-<gameid>` |
-| 11/14 noon injury report | <https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf> → AccessDenied at capture; policy index <https://official.nba.com/nba-injury-report-2026-27-season/> |
-| Independent second transcription of the 9 finals (for cross-check only; not merged) | `data/verified/finals_2026-11-13.json` on branch `arena/cfb25ff0-nba1` (PR #56, open) |
-| Site values compared (not sources) | `data/derived/horizon_lines.json`, `data/official/slate.json`, `data/originated_lines.json`, `site/data/*.json`, `docs/data/backtest.json`, `data/derived/horizon_picks.json`, `data/derived/picks_d.json` |
-
-### 23.2 Verification performed
-
-| Check | Result |
-| --- | --- |
-| Official horizon (27) vs `data/derived/horizon_lines.json` (matchup, date, tip) | 27 / 27 match, 0 mismatch |
-| Official horizon vs `site/data/lines.json` (the landing page's lines) | 27 / 27 match |
-| Official 11/14–11/16 vs `data/official/slate.json` (22 rows) | 22 / 22 match; 11/17 (5 games) absent from that file → F30 |
-| Printed records on the horizon rows vs NBA.com card at capture | 25 match; 29 differ, all for teams that played 11/13 (expected, F29); 0 unexplained |
-| 11/13 settlement: originated lines (`data/originated_lines.json`) vs official finals | 9 games: 3 WIN, 4 LOSS, 2 NO BET; mean \|model − final\| margin 12.39 pts; the largest gap between the published spread and minus the expected margin is 0.2 pts |
-| Independent cross-check of the 9 finals (PR #56 transcription, merged) | 9 / 9 agree on teams, scores and status |
-| Build B sign convention (`site/data/lines.json` vs its own S1 picks) | home-margin reading consistent in 16 / 16 rows; standard reading in 0 / 16 → F27 |
-| Cross-build (Build B vs Build D home margins, 17 shared games) | all 17 differ by more than 0.5 (0.8–11.8 pts); 2 pick opposite favourites (DAL@CLE, PHI@BKN) → F26 |
-| Headline numbers (landing tiles) | 27 games, 10 strategies, 51 out-of-sample games, 25 → 36 flags: match their data; "63 paper picks" counts mixed markets (F28); "Known limits" stale (F29) |
-| Gates after the change | `verify_all.py` VERIFY OK (exit 0); `check_site.py`, `verify_integration.py` (PASSED, 44 warnings published), `check_links.py` PASS, `check_rendered.py` PASS, `build_verification_page.py` (no diff), `render_check.mjs` 113 pages / 0 problems |
-
-Notes on the gate: `verify_all.py` prints "every table row is source-linked" while its own count reads 789 of 799 rows linked. Its test accepts GitHub links as sources. A strict test (nba.com or official.nba.com only) finds: 4 rows on the new Source Check page (internal counts, marked as such), 2 rows on Flagged for Review (F34, F35, repository-file links, no official source applies), and pre-existing rows on Questions (6), Repo review (7), Sources (1) and Suggestions (2). The pre-existing rows are logged as F37 and were not changed. The gate message overstates what it checks (F34).
-
-### 23.3 Irregularities (published on Flagged for Review, F26–F37)
-
-| ID | Severity | Item |
-| --- | --- | --- |
-| F26 | High | Build B (landing) and Build D (horizon) project different margins for the same games; 2 pick opposite favourites |
-| F27 | Medium | `spread_home` fields hold the home margin in Build B and D, the opposite sign to Build A's standard spread |
-| F28 | Medium | "Paper picks: 63" mixes markets and disagrees with Build D's 27 / 26 / 23 counts |
-| F29 | Medium | The site still says 11/13 is in progress; NBA.com shows 9 / 9 Final; 29 horizon records are stale |
-| F30 | Low | The 5 games of 11/17 are not in `data/official/slate.json` |
-| F31 | Medium | 11/14 noon injury report returned AccessDenied (same response as a missing object); not confirmed unpublished |
-| F32 | Low | DET@MIA time differs between the injury report (07:00) and the schedule (8:00 PM ET) |
-| F33 | Low | Repeated pairings NYK@TOR (11/15, 11/17) and POR@MIN (11/16, 11/17) printed with distinct game IDs |
-| F34 | Medium | The gate checks structure, not values; its "every row source-linked" message overstates its count |
-| F35 | Low | `horizon_lines.json` `_meta.generated_utc` is the placeholder `2026-11-14T01:xxZ` |
-| F36 | Medium | The 11/13 settlement is nine games; it cannot show skill (mean error 12.39 pts) |
-| F37 | Medium | Rows without an official nba.com link on five earlier pages (strict count) |
-
-### 23.4 Cross-session notes (logged, not executed)
-
-- **PR #56 (`arena/cfb25ff0-nba1`, merged to `main` at `4e4d0b0`)** verifies the same 11/13 finals row by row. This session read its `data/verified/finals_2026-11-13.json` (before the merge) and found 9 / 9 agreement; it did not edit that branch. Its owner may want to add the horizon check (S02) rather than repeat the finals work.
-- **Build B owner**: the landing page's lines come from `site/data/lines.json`; F26 and F27 need a decision before any new picks are published (suggestion SG15).
-- **Gate owner**: add `scripts/source_check.py` to `verify_all.py` (suggestion SG16) and correct the gate's wording.
-- **Branch naming**: the platform pins this session to `arena/b0f2cc98-nba1`, so the `session-<id>/<task>` naming in the brief is not used. Logged here as a deviation, as earlier sessions did.
-
-### 23.5 Status
-
-- Scope: S01–S04 done. **§23 is marked done.**
-
-### 23.6 Delivery (S04)
-
-| Step | Result |
-| --- | --- |
-| PR | #57 `arena/b0f2cc98-nba1` → `main`, title "Official-source check…"; body lists sources, verification and F26–F37 |
-| Pre-merge gates on the final tree | `verify_all.py` VERIFY OK (exit 0); `check_site.py`, `verify_integration.py` (PASSED, warnings published), `check_links.py` PASS, `check_rendered.py` PASS, `render_check.mjs` 113 pages / 0 problems, inline broken-link scan 0 of 113 |
-| Pre-merge CI | `validate` pass on the final head (`d790098`); `deploy` skipped on PRs, which is expected |
-| Merge | `gh pr merge 57 --merge`, no approval, not auto. Merge commit `2450e99` |
-| Pages (main) | run `43584765326`: validate success, deploy success, pages-build-deployment success |
-| Live check | `…/NBA1/site/pages/source-check.html` shows 27 horizon rows; `…/NBA1/site/pages/flagged.html` shows 37 rows (F1–F37); landing page "Open flags" tile 37 |
-| Pages URL note | Pages publishes the repository root, so pages are at `…/NBA1/site/pages/…`. The README live-URL line (F-item from the earlier review) still omits `.github.io`. Not changed this session. |
-
-Irregularities met during delivery (not flags, logged here):
-
-- **Probe churn.** The probe workflow commits `data/raw/probe_official.json` and `verification.html` to `main` and to the branch after each push. That made PR #57 conflict twice (`DIRTY`), so the branch was merged with `main` and both files were regenerated. Resolved without discarding any work. Each push re-triggers the probe, which can dirty the PR again. Owner: whoever owns `probe-official.yml`.
-- **`gh pr edit` fails** on the deprecated Projects (classic) GraphQL field. The body was updated through `gh api PATCH repos/…/pulls/57` instead.
-- **PR #56** merged to `main` (`4e4d0b0`) during this session. Its finals were cross-checked (9 / 9 agree) before the merge.
-
----
-
-## 24. Session `arena/aadc3342-nba1` — GitHub Pages entry URL correction (claimed 2026-11-14 UTC)
-
-The platform pins this session to `arena/aadc3342-nba1`, branched from `main` at
-`2450e99ec8e88e442bebfd7f016a247dd68cc364`; no other branch will be created or used.
-
-| # | Task | Status | File scope (exclusive) |
+| I01 | Independent official capture of the nine 11/13 finals, cross-checked against `data/verified/` | done | `verify/2026-11-14/official_finals_2026-11-13_s934ca56f.json` |
+| I02 | Promote the 11/13 finals into the game snapshot so settlement and records can use them | in progress | `data/raw/games_completed.json`, `data/derived/*.json` |
+| I03 | Settle every published 11/13 paper pick against the official finals; publish the result | in progress | `data/content/*.json`, `scripts/build_dashboard.py`, `site/**` |
+| I04 | Replace the 29 stale pre-11/13 records on the horizon rows with the post-11/13 official records | in progress | `data/derived/horizon_lines.json`, `data/derived/horizon_picks.json` |
+| I05 | Retire the "11/13 still in progress" prose that F29 flagged on every page that carries it | in progress | `data/content/*.json`, `scripts/build_dashboard.py`, `README.md` |
+| I06 | Verify the combined tree line by line, open the PR, merge, confirm Pages, record here | not started | `COORDINATION.md` (§34 only) || # | Task | Status | File scope (exclusive) |
 | --- | --- | --- | --- |
 | A01 | Correct the README's public-site URL to the GitHub Pages URL configured for this repository | done | `README.md`, `COORDINATION.md` (§24 only) |
 | A02 | Verify change, site checks, record evidence | done | `COORDINATION.md` (§24 only) |
-
 Claim evidence: `gh api repos/wingbangboozle1-lang/NBA1/pages` returned
 `html_url=https://wingbangboozle1-lang.github.io/NBA1/`, with Pages source branch
 `main`, path `/`, and `https_enforced=true`. This is GitHub configuration evidence,
@@ -2635,8 +2220,9 @@ line by line (§27.1/§27.2, `REVIEW_Z01.md`).
 | --- | --- | --- |
 | 1 | PR #67 merged (`55d0266`) | pages run 43589034134 **cancelled** by the `pages` concurrency group, 0 steps; Pages API `errored` (legacy build failing since PR #59) |
 | 2 | `.nojekyll` taken over from PR #70 (`arena/2ef89703-nba1`) with credit — their PR is CONFLICTING on COORDINATION.md through no fault of theirs and site liveness is the critical path; the file is empty and inert. Their PR #70 can be closed by its owner as landed-elsewhere | this commit |
-| 3+ | each retry (bookkeeping PR → merge → watch the `pages` run of the merge commit) is appended here with its run ID and outcome until `pages` reports `built` and the live landing page shows the current window | appended below |
-
+| 3 | PR #72 merged (`.nojekyll` + §27.3–§27.4 + REVIEW §10) | main pages run 43589919367 **cancelled** in the queue (0 steps) by another session's run in the global `pages` group; same fate for the PR #73 merge run 43590529504 |
+| 4 | **A02 takeover (ground rule 5)** — PR #65's claim (`arena/2dc33eb3-nba1`, Pages concurrency isolation) was >60 min old with no commits (last commit 10:25Z). Their workflow hunk applied **verbatim with credit** (`.github/workflows/pages.yml`: concurrency group `pages-${{ github.event.pull_request.number || github.ref }}`), their audit report carried to `audit/session-2dc33eb3/ACTIVE_PR_REVIEW.md`, and their §26 record carried verbatim as §33 (renumbered twice at merges: first for the §26 collision with `arena/24eb72c6-nba1`, again because `main` already carries two §28 records; sub-headings kept). PR #65 can be closed by its owner as landed-elsewhere | this commit |
+| 5+ | each retry appended below with run ID and outcome until `pages` reports `built` and the live landing page shows the current window | appended below || 3+ | each retry (bookkeeping PR → merge → watch the `pages` run of the merge commit) is appended here with its run ID and outcome until `pages` reports `built` and the live landing page shows the current window | appended below |
 The deployment loop entries are appended in the follow-up delivery commits of this session; the
 data verification in §27.1/§27.2 does not depend on them.
 
@@ -2870,7 +2456,78 @@ idempotence (0 dirty lines after regeneration), the Command Center 17-page/data 
 - **Not done by this session:** no `workflow_dispatch` (HTTP 403 for this session's token); PR #70 closed at 11:25 UTC during a metadata edit (not intended), replaced by #76.
 - **Suggestions for the integration session:** (1) add X01-F1 to F5 to the Flagged register; (2) set the injury page to cite the 04:30 AM ET 11/14 edition (X01-F1); (3) reduce Pages churn: the probe workflow runs on every push to `arena/**` and holds runners, and it pushes record commits that make open PRs `CONFLICTING`; (4) dedupe the §25 section on `main` (X01-F6, logged here).
 
-## 30. Session `arena/e812a9ed-nba1` — independent site QA and discrepancy register (claimed 2026-11-14 UTC)
+---
+
+## 30. Session `arena/cc5a6652-nba1` — final integration seat for 2026-11-14 18:40Z: fresh official re-verification, decision workspace, PR + merge + Pages (claimed 2026-11-14T18:40Z UTC)
+
+**Branch** `arena/cc5a6652-nba1`, base `2038333` (tip of `main` at claim time).
+**Claimed scope (exclusive):** `COORDINATION.md` (append only, plus the single de-duplication pass requested in R-29-8/R-29-9),
+`verify/2026-11-14-cc5a6652/**` (new namespace, nothing else writes here), `scripts/verify_official_live.py` (new file),
+`site/data/**` and `site/pages/**` **only insofar as they are regenerated by `scripts/build_dashboard.py`** after a
+verified capture — never hand-edited, `data/official/**` (re-capture written to new dated files), and the PR/merge/Pages record.
+
+**Why this session takes the integration seat (ground rule 5).** The open PRs that were holding parts of it have no
+commits and no pushes for more than 60 minutes at claim time, and none is mergeable against `main`:
+
+| PR | Branch | Last push | Mergeable |
+| --- | --- | --- | --- |
+| #80 | `arena/a3e092a2-nba1` | 2026-11-14T12:58Z (5h42m idle) | CONFLICTING |
+| #75 | `arena/212c2298-nba1` | 2026-11-14T11:40Z (7h00m idle) | CONFLICTING |
+| #66 | `arena/934ca56f-nba1` | 2026-11-14T10:54Z (7h46m idle) | CONFLICTING |
+| #65 | `arena/2dc33eb3-nba1` | 2026-11-14T10:55Z (7h45m idle) | CONFLICTING |
+| #63 | `arena/ecd5bb53-nba1` | 2026-11-14T12:06Z (6h34m idle) | CONFLICTING |
+
+No file owned by another live session is being edited. Their branches are left untouched and unmerged-but-preserved.
+
+| # | Task | Status | Scope |
+| --- | --- | --- | --- |
+| I01 | Claim recorded and pushed before any other edit | in progress | this section |
+| I02 | Fresh 2026-11-14 official capture at 18:40Z+: 11/13 finals (9 games), horizon 11/14–11/17 (31 games), injury edition, standings — every row fetched live and compared to the committed copy | in progress | `verify/2026-11-14-cc5a6652/**` |
+| I03 | Decision workspace: the suggestions reviewed against the open questions, as a path-picker a human can act on | unclaimed | `site/pages/suggestions.html` (generated) |
+| I04 | De-duplicate the repeated `##` sections on this board (R-29-8) | unclaimed | `COORDINATION.md` |
+| I05 | Re-run the whole gate locally, open the PR, merge, confirm Pages, record it here | unclaimed | PR record |
+
+---
+
+## 30.A Board de-duplication pass (R-29-8, closed in this session)
+
+Seven `##` headings appeared twice on this board. **Six of the seven blocks were byte-identical**
+(verified by SHA-256 over the section body, not by eye). The seventh — §26, session
+`arena/24eb72c6-nba1` — had a **later, longer copy**, so the later copy is the one kept and the
+earlier one was removed; that is the rule R-29-8 itself proposed.
+
+| Heading | Bytes removed | Removed block SHA-256 (first 16) | Copies identical? | Kept |
+| --- | --- | --- | --- | --- |
+| §15 `arena/d6918959-nba1` | 6815 | `50275e16cf` | yes | the later copy |
+| §20 `arena/cfb25ff0-nba1` | 4688 | `25d5f8f178` | yes | the later copy |
+| §21 `arena/254dd8bb-nba1` | 9131 | `39d239ecad` | yes | the later copy |
+| §23 `arena/b0f2cc98-nba1` | 9422 | `fd3b0d9eae` | yes | the later copy |
+| §24 `arena/aadc3342-nba1` | 1948 | `8acf145eab` | yes | the later copy |
+| §25 `arena/2ef89703-nba1` | 3294 | `5417aab9f9` | yes | the later copy |
+| §26 `arena/24eb72c6-nba1` | 10349 | `92ec87dd26` | **no — later copy is longer** | the later copy |
+
+**Nothing was silently lost.** 448 lines came out. Every non-blank line in them still appears
+somewhere else in this file except two, and both of those are superseded statements that the kept
+copy replaces:
+
+1. `| Pages | **content is on main; the live artifact is still behind...** |` — the earlier §26
+   copy's status row. The kept copy carries the newer status (*"partially landed, one confirmation
+   still owed"*, R-26-9), which is the later and more accurate statement of the same fact.
+2. `| Not touched |` — a table header cell in the same removed copy.
+
+The check that produced this is reproducible: group the `##` headings, hash each section body, and
+confirm every lost line reappears elsewhere. That is what was run before anything was deleted.
+
+**Not done here:** R-29-9 (make a claim atomic by pushing it as a one-line append) is a protocol
+change for all sessions, not a file edit, and is left open. The board is now 49 unique headings and
+0 duplicates.
+
+> **Renumbered, not edited.** This record was written as `## 30` and collided with the section
+> of the same number from session `arena/cc5a6652-nba1`, which claimed the integration seat at
+> 18:40Z and appended its own §30 first. Per R-29-9 the integration seat renumbers once rather
+> than deleting: the heading is now `30B`, every line of the record is unchanged.
+
+## 30B. Session `arena/e812a9ed-nba1` — independent site QA and discrepancy register (claimed 2026-11-14 UTC)
 
 Branch `arena/e812a9ed-nba1`, based on `2038333` (`main`). This session does not claim the integration seat and does not edit shared site/navigation/data/build files. It owns only the new `verify/2026-11-14-e812a9ed/**` audit artifact plus this §30 record.
 
@@ -2880,7 +2537,7 @@ Branch `arena/e812a9ed-nba1`, based on `2038333` (`main`). This session does not
 
 **Do not touch:** root `index.html`, `site/**`, `data/**`, `docs/**`, `command-center/**`, `origination/**`, `strategy-lab/**`, `scripts/**`, `engine*/**`, `.github/**`, or any shared site/content output. The final integration seat and other sessions own those paths. The claim commit contains only this board entry; no site changes precede the claim.
 
-### 30.1 E01 completion record (2026-11-14 UTC)
+### 30B.1 E01 completion record (2026-11-14 UTC)
 
 - **Verification:** `scripts/check_site.py` (15 pages, 1,264 rows, scoped checks pass); `scripts/verify_integration.py` (202 JSON, 122 HTML, 11,918 links, 5,733/5,940 sourced, 0 errors, 44 warnings); `scripts/check_links.py` (59 pages, 879 rows, pass); `scripts/check_rendered.py` (17 pages, 707 rendered rows, pass); `strategy-lab/check.py` (8 pages, 479/479 sourced, pass); `python3 -m engine_v2.check_site` (20 pages, pass); `scripts/verify_all.py` (pass).
 - **Sources:** official source register `data/raw/sources.json`; official NBA schedule <https://www.nba.com/schedule>; NBA game calendar <https://www.nba.com/games?date=2026-11-14>; NBA advanced statistics <https://www.nba.com/stats/teams/advanced>; official injury-report index <https://official.nba.com/nba-injury-report-2026-27-season/>. These are published source links, not claimed as freshly fetched by this audit.
@@ -2964,6 +2621,293 @@ left open; its content is fully carried by #75.
 
 Final integration PR opened from `arena/a39b9370-nba1` to `main`; merged without waiting for
 approval; GitHub Pages deploy confirmed `built`; PR link and merge result recorded in §30.6.
+## 35. Session `arena/f7f6c46e-nba1` — final integration seat: stale-PR takeover, fresh official verification, gates, delivery (claimed 2026-11-14 18:45 UTC)
+
+Branch `arena/f7f6c46e-nba1`, based on `main` `2038333` (tip at claim time: the 12:58 UTC probe
+record commit). The platform pins this session to that branch, so the `session-<id>/<task>` naming
+in the brief is satisfied by this single pre-named branch (deviation logged, as earlier sessions
+logged it).
+
+**Board read before claiming (18:41–18:45 UTC).** Last merge to `main`: PR #81 at 12:50 UTC.
+Open PRs at claim time: #63 (12:06Z), #65 (10:55Z), #66 (10:54Z), #75 (11:39Z), #80 (12:58Z) —
+**all five CONFLICTING with `main`**, all owning sessions idle ≥ 5.5 hours → ground rule 5
+takeover applies to their file scopes (content carried onto this branch with credit; no push to
+any other session's branch; each PR closed as superseded-when-landed). Live session at claim time:
+`arena/e812a9ed-nba1` (§30, audit-only, PR #82, MERGEABLE — not the integration seat, scope
+`verify/2026-11-14-e812a9ed/**` + §30 append; theirs is merged, not taken over). The prior top
+banner (`arena/df3fed12-nba1`) completed D01–D06 and is preserved below.
+
+| # | Task | Status | File scope (exclusive) | Plan |
+| --- | --- | --- | --- | --- |
+| F01 | Board claim pushed before any other edit | **done** (this commit) | `COORDINATION.md` (top banner + this §35 only) | Claim first, work second. |
+| F02 | Triage and land the five stale CONFLICTING PRs, one at a time, both sides kept, smallest first: #63 (gate wording), #80 (strategy-lab param read), #75→#65 (Pages concurrency isolation + audit carry), #66 (executive summary / decision content — selective semantic merge only, never a revert of post-10:41 main content); close each PR as superseded with credit after its content lands here | unclaimed | `.github/workflows/pages.yml`, `scripts/verify_dashboard.py`, `scripts/verify_all.py`, `audit/session-2dc33eb3/**`, `strategy-lab/**`, `EXECUTIVE_SUMMARY.md`, selective `data/content/**` / `README.md` / `index.html` deltas from #66, `COORDINATION.md` (§35 log) | Ground-rule-5 handoffs logged per PR below as they land. |
+| F03 | Fresh official-source verification pass at current time (11/14 afternoon ET): newest injury-report edition for the 11/14–11/17 window; row-level spot-check of the horizon schedule, tip times and records against nba.com; every checked row carries its official URL; anything unconfirmable is left blank and flagged, never inferred | unclaimed | `verify/f7f6c46e/**` (new) | Independent of all prior passes; report published under the Flagged/verification links. |
+| F04 | Full gate suite on the final tree: the ten `validate` workflow steps in order + `verify_all.py` + `verify_dashboard.py` + strategy-lab check; regenerate `verification.html` if the probe record moved; fix anything red until green | unclaimed | `verification.html` (generated), read-only gates | "Do not merge a broken site." |
+| F05 | Integration PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy + live smoke test (landing page, picks, flagged, questions, suggestions), record PR link and merge result here | unclaimed | `COORDINATION.md` (§35 delivery log), own branch | Retry until live per the brief; flagged/unverified items do not block the merge. |
+
+**Shared outputs claimed as integration seat** (all prior owners idle ≥ 5.5 h): `index.html`,
+`site/**`, `data/content/**`, `docs/data/**`, `command-center/data/**`, `README.md`,
+`.github/workflows/**`, `verification.html`. Edits there happen only in F02/F04/F05 and are
+recorded here. **Not claimed / read-only:** `verify/2026-11-14-e812a9ed/**` (§30, live),
+`data/raw/probe_official.json` + probe workflow churn (keep the newer pair — §29.4 rule), other
+sessions' branches.
+
+**Coordination with the live session:** `arena/e812a9ed-nba1` opened PR #82 at 18:42 UTC with a
+docs-only §30 + `verify/2026-11-14-e812a9ed/REPORT.md`. This session treats #82 as an input:
+merged as part of F05's integration if it still verifies clean, its findings (207 unsourced rows
+under the repository-wide checker, S1 banner wording conflict, leaked `None` strings, duplicate
+section numbers) folded into the F02/F04 worklist below.
+
+---
+
+---
+
+
+### 35.5 What actually happened after the claim (2026-11-14 19:0x–20:1x UTC)
+
+The five stale PRs were taken over in order — #63 (`532eebc`), #80 (`d9b61f8`), #75 (`510cb1e`),
+#66 (`cbd138e`) — each merged with the probe pair kept from `main` (rule: `main`'s
+`2026-11-14T12:58:07Z` capture beats every PR copy), carried sections renumbered (ecd5bb53 → §32,
+2dc33eb3 → §33, 934ca56f → §34), and the unified site regenerated from the merged builder rather
+than hand-merged. Every stale PR then CLOSED on `main` by a parallel integration cohort while this
+session worked: `arena/a39b9370-nba1` merged #66/#80/#63/#75 content directly (`6e07c29`,
+`5116c9f`, `f614e7c`, `4912185`, PR #87) — a second independent rule-5 takeover of the same five
+PRs, done in parallel. Both lifts are the same source branches, so nothing conflicts and nothing
+is lost; this session's record of the takeovers stands as the second, independent one.
+
+While the takeovers were in progress a cohort of new sessions landed on `main`: PR #85/#82
+(e812a9ed's QA), PR #89 (`arena/95c1cb23-nba1`: game-day injury refresh — 01:30 PM ET edition,
+F47–F52, A16–A17, SG19–SG22, the Game-Day Read page), PR #90 (`arena/428e6264-nba1`: the
+`verified/` row-level verification section, 8 pages), plus F53/SG23 (Pages deploy cancels).
+
+**Dedup decisions at the merge (`e3fee94`), stated so nobody has to guess:**
+
+| This session's draft | Disposition |
+| --- | --- |
+| F47 (edition drift: 4 clubs filed, 4 status changes) | **dropped** — A16/F47 on `main` carry the same measurements from the 01:30 PM capture; this session's 01:45 PM capture independently confirms all six facts and is kept as `verify/f7f6c46e/injury_compare.json` + `REPORT.md` |
+| F48/F49 (continuation rows: no team / no date) | **dropped** — `main` F50 covers both with a documented block-position method |
+| F50 → **F54** (two official tip-time formats) | kept, renumbered; unique |
+| F51 → **F55** (15-minute game-day cadence, point-in-time labels) | kept, renumbered; unique |
+| SG19 (archive editions + pre-tip re-price) | **dropped** — `main` SG19/SG21 cover the decision and the timeline |
+| SG20 → **SG24** (promotion only through the gate suite, R-A6) | kept, renumbered; unique |
+| Q14 observation, Executive headline edit | **dropped** — `main`'s A16 answer and refreshed headline are newer and fuller |
+| F34/F37 count updates, README R26-1 row, sidebar reading rule R26-4, clickable context URLs R26-2, `S10_2026-11-14-0145PM` source | kept — none of these were on `main` |
+| My §31 claim, carried §32 | **renumbered §35, §36** — `main` had taken §31 (`arena/95c1cb23-nba1`) and §32 (`arena/428e6264-nba1`), and PRs #88/#84 claimed §31/§32/§33 again while this merge was open; §33 (2dc33eb3) and §34 (934ca56f) do not collide and were left as carried |
+| Stray `=======`/`>>>>>>>` markers inside `COORDINATION.md` arriving from `main` | removed in this merge — `main` itself still carries one `=======` at its §30 region; PR #84 (`arena/140a10aa-nba1`) exists to remove them at source and has not merged yet. **Update 20:1x UTC:** PR #84 merged as `49eafe0` (its §33 claim now sits on `main`), so the carried 2dc33eb3 record was renumbered again §33 → §37 in this merge; `main`'s stray-marker cleanup landed with #84. |
+
+**Gates on the merged tree (all run 2026-11-14 20:0x UTC, all green):** check_site, build-B data
+parse, verify_integration (0 errors, 44 warnings — all already published), render_check
+(132 pages / 8756 blocks / 7649 rows / 0 problems), probe assert, verification.html idempotent,
+Command Center (17 pages / 18 files), check_links, check_rendered, broken-internal-link scan
+(132 pages), strategy-lab check (0 problems), verify_dashboard (20 pages / 1163 rows / 1138
+linked / 25 explained / 0 unmarked), verify_all (VERIFY OK). Independent verification artifacts:
+`verify/f7f6c46e/` (horizon 27/27 id+matchup+tip+record match; injury 01:45 PM capture + drift
+diff).
+
+**Left open on purpose (not this session's to close):** PR #88 (`arena/e06aed97-nba1`, CONFLICTING,
+last push 19:31Z) and PR #84 (`arena/140a10aa-nba1`, last push 19:31Z) — both sessions inside the
+60-minute ground-rule-5 window at the time of this record; re-assess after 20:31Z. e812a9ed's
+R-A1/R-A5/R-A6 requests: R-A1 reviewed (no stale "validated" claim found on the current tree),
+R-A5 stays a published limitation, R-A6 published as SG24.
+
+## 36. Session `arena/ecd5bb53-nba1` — source-gate wording and exception counts (claimed 2026-11-14 UTC)
+
+Claimed on `main` at `7623c02`. At that cut, the dashboard checker reported 800 rows, 790 with an allowed official-source link, but its success line said every row was linked. After rebasing onto `origin/main` at `a29e721` (PRs #59 and #61 merged), that build reported 822 rows: 812 with an allowed official-source link, 7 explicit text explanations, 3 approved URL pointers in title attributes only, and 0 unmarked or unexplained gaps. After PRs #68 and #67 were merged through `main` at `55d0266`, verification reported 958 rows: 937 with an allowed official-source link, 18 explanatory no-source marks, 3 approved URL pointers in title attributes only, and 0 unmarked or unexplained gaps. PR #72 then merged as `c00a6ed` (adding the root `.nojekyll` and delivery/review notes but no dashboard content); the full local verification on that current base reproduces the same 958-row counts. The 3 values remain blank/unverified. This scope improves the gate's accounting; it does not claim to verify that a linked source agrees with a published value.
+
+| # | Task | Status | File scope (exclusive) | Notes |
+| --- | --- | --- | --- | --- |
+| X01 | Count linked rows, reasoned no-source rows, title-only URL pointers, and unmarked gaps separately; correct the success message | done | `scripts/verify_dashboard.py` | No-source rows need an explanatory title or an HTTPS URL on an allowed official host; insecure/unapproved pointers fail. |
+| X02 | Correct the `verify_all.py` invocation comment to describe the link-or-explicit-no-source rule and the no-refetch limitation | done | `scripts/verify_all.py` | Comment only; gate behavior is unchanged apart from X01. |
+| X03 | Re-run checks, document limits and record cross-session requests | done | `COORDINATION.md` (§36 only) | Full verification and outcomes in §36.1–§36.3. |
+
+The independent injury-currency audit in PR #62 (`arena/2ef89703-nba1`, its §25 and `verify/2026-11-14-injury-currency/**`) is out of scope and untouched. The merged PR #59/#61 site, content, builder and README are also not changed by this gate-only task.
+
+### 36.1 Verification performed
+
+| Check | Result |
+| --- | --- |
+| `python3 scripts/verify_all.py` | **PASS** (`VERIFY OK`); 958 dashboard rows, 937 allowed source links, 18 explanatory no-source marks, 3 approved URL pointers in title attributes only, 0 unmarked gaps, 0 markers without a reason/pointer. Builders and data audits pass. |
+| No-source marker behavior (temporary HTML cases) | explanatory text passes; approved HTTPS NBA URL is counted separately as a title-only pointer; insecure/unapproved URL and empty title both fail. |
+| `python3 scripts/verify_integration.py` | **0 errors, 44 warnings**; 224 JSON, 114 HTML, 11,041 static links; 4,988 / 5,178 rows have an official NBA data-host link. Existing warnings remain visible on the review register. |
+| `scripts/check_links.py`, `scripts/check_rendered.py`, `scripts/check_site.py` | **PASS**; 879 doc/Command Center rows, 0 unsourced, 0 broken internal links; 707 Command Center rendered rows, 0 missing links; root checks pass. |
+| `node scripts/render_check.mjs` | **PASS**; 114 pages, 7,325 content blocks, 6,535 rendered table rows, 0 problems. |
+| `python3 -m py_compile scripts/verify_dashboard.py scripts/verify_all.py`; `git diff --check` | **PASS**. |
+
+This gate checks allowed hosts, source-cell links/markers, page structure and internal links. It does **not** fetch the NBA pages or compare their contents with row values; the sandbox's broader integration audit likewise says NBA reachability cannot be verified here. No NBA source data, model result or generated page was changed in this task.
+
+### 36.2 Review items for final integration (requests, not edits)
+
+- **R26-1 — README wording:** `README.md`'s checker summary still says "Every row source-linked." Update it to reflect the current measured result: 937/958 allowed links, 18 explanatory no-source marks, 3 title-only approved URL pointers, 0 unexplained gaps. `README.md` is outside this task's claimed scope.
+- **R26-2 — three non-clickable context URLs:** `site/pages/questions.html` Q14–Q16 have an em dash in the source cell and an approved URL only in the `title` attribute. The answers remain blank/unverified; the URLs are not clickable links. In the final site integration, either render each approved context URL as a link while retaining the unverified marker, or make the no-source reason explicit and keep the value blank. The row IDs and URLs are in `data/content/questions.json`; no values were inferred here.
+- **R26-3 — F34 wording:** F34 still says the gate prints success only when every row has a link. Update it to the current rule and measured count (937/958 allowed links, 18 explanatory marks, 3 title-only approved URL pointers, 0 unexplained gaps); retain the limitation that the gate does not fetch or compare source values.
+- **R26-4 — reading rule and F37:** the dashboard builder's sidebar still says every row links to a source, although 21 rows are explicitly marked no-source (18 text explanations and 3 title-only URL pointers); F37's counts predate both the refreshed content and the new Prop Variance page. In final integration, update the rule and re-audit F37/F46 and the affected rows; do not fill blanks by inference.
+
+### 36.3 Conflict and coordination log
+
+On the first `git pull --rebase origin main`, main advanced from `7623c02` through PRs #59 and #61 to `a29e721`; the end-of-file conflict was resolved with both main's §24 and this session's section retained. The next rebase brought in PR #62 and its follow-up probe commit (`5ea615f`), retaining its §25 injury audit. Main later advanced through PR #68 (§26) and PR #67 (§27) to `55d0266`; PR #72 then merged as `c00a6ed`, adding `.nojekyll`, `REVIEW_Z01.md`, and the §27.3–§27.4 delivery/deploy record. This source-gate section follows that complete main content and remains §36. The request IDs R26-1 through R26-4 are retained from the original claim for continuity; they refer to the gate-audit requests, not the new section number. The remote probe snapshot `38552f8` (10:49:57Z) was newer than the then-current main snapshot, but was superseded before this rebase by main's newer probe snapshot in `55d0266` (10:55:34Z); the newer main pair is retained. The rebase onto `c00a6ed` preserved all of main's §§25–27, `.nojekyll`, and `REVIEW_Z01.md`; no upstream text was discarded and no files in PR #62, #67, or #72's exclusive scopes were modified.
+
+Publish status (2026-11-14): PR #63 remains open and unmerged. This branch is rebased onto `main` at `c00a6ed` (PR #72), and the full local verification suite passes. Hosted validate run `43589858565` was cancelled before any steps ran by the shared `pages` concurrency group; the paired source probe `43589854602` is queued. The `c00a6ed` Pages build `43589919343` is building, so successful deployment/live-site confirmation is not yet available. Retry hosted checks when concurrency permits; do not merge until PR checks pass and conflicts are resolved.
+
+---
+
+---
+
+> **Carry note (session `arena/212c2298-nba1`, ground-rule-5 handoff):** the record below is
+> session `arena/2dc33eb3-nba1`'s §26 as it stands on PR #65 (head `105bac9`), carried verbatim
+> except for the section number (26 -> 33; the PR text said 28, but `main` already carries two
+> §28 records, so the integration seat renumbered once more at merge). Their branch is pinned by the platform and their claim was more
+> than 60 minutes old with no commits (last commit 10:25Z, handoff taken 11:35Z), so their
+> open-claim task A02 (Pages concurrency isolation) was taken over here: the workflow hunk is
+> applied verbatim in `.github/workflows/pages.yml` with credit, and their audit report is at
+> `audit/session-2dc33eb3/ACTIVE_PR_REVIEW.md`. Their PR #65 can be closed by its owner as
+> landed-elsewhere. Their sub-headings (26.1–26.4) keep their original numbers.
+
+## 37. Session `arena/2dc33eb3-nba1` (carried from PR #65; section number changed 26 -> 33 -> 37 across two merges because `main` already carries two §28 records (df3fed12, a3e092a2), a §29, then took §33 for `arena/140a10aa-nba1`; content verbatim) — independent integration-candidate audit (claimed 2026-11-14 UTC)
+
+Branch `arena/2dc33eb3-nba1`, based on `main` at `7623c0295b94fc993435b6d2fbf75191d11aaba5`.
+The platform pins this session to that branch; the requested `session-<id>/<task>` naming is not used.
+
+| # | Task | Status | File scope (exclusive to this session) |
+| --- | --- | --- | --- |
+| A01 | Independently audit the current published tree and integration PRs #58/#59; document source, validation, freshness and overlap risks without editing their files | done | `COORDINATION.md`, `audit/session-2dc33eb3/ACTIVE_PR_REVIEW.md` |
+| A02 | Isolate pull-request Pages checks from the main-branch deploy concurrency group; verify the published deployment after the change | in progress | `.github/workflows/pages.yml`, `COORDINATION.md` |
+
+Scope rule: PR #59 merged; PR #58 closed unmerged; PR #62 has since merged its injury-edition audit. Do not edit other sessions’ claimed/generated files; log any cross-scope request here. The independent review is under `audit/session-2dc33eb3/`.
+
+
+### 26.1 A01 completion — independent audit (2026-11-14T10:36Z)
+
+- **Report:** [`audit/session-2dc33eb3/ACTIVE_PR_REVIEW.md`](audit/session-2dc33eb3/ACTIVE_PR_REVIEW.md).
+- **Tree state reviewed:** PR #59 merged at 10:27:52Z (`564c2cd`); PR #61 is the later `main` tip (`a29e721`); PR #58 closed unmerged at 10:36Z; PR #62 remains open. No PR #58 changes are assumed to be on `main` unless separately present in the merged tree.
+- **Verification:** `scripts/verify_all.py` passed in a disposable copy; `verify_integration.py` reported 217 JSON, 113 HTML, 10,797 links, 0 errors, 4,795/4,974 NBA-sourced data rows, and 44 warnings; `check_site.py`, `verify_dashboard.py` (822 rows, 812 allowlisted-source links), `check_links.py` (59 pages/879 static rows), `check_rendered.py` (17 pages/707 rows), `node scripts/render_check.mjs` (113 pages/6,331 rows/0 problems), and `python3 -m engine_v2.check_site` (20 pages) passed. Full details and method limits are in the report.
+- **Official sources referenced:** NBA schedule/games pages for 2026-11-06 through 2026-11-17; NBA Teams Advanced; NBA Players Traditional; the NBA 2026–27 injury-report index and dated official PDFs. Source URLs are linked in the report and in committed capture rows.
+- **Limitation:** no live NBA fetch was made in this session because NBA hosts are outside the sandbox's outbound allowlist. No NBA values were added or changed; checks establish internal consistency of committed captures, not current external reachability.
+- **Important findings / cross-scope requests (not executed):**
+  - **R-A1:** correct the root banner's stale “inside what luck alone produces” statement; the same page's G4/P-value claim and `docs/data/validation.json` say S1 passes the nominal luck gate but fails calibration/stability and has G7 unrun. Clarify that no strategy is fully validated/funded.
+  - **R-A2:** reconcile Flag F28, which still says 63 paper picks, with the current 60-row pick data and headline; state per-market counts and resolve/update the old flag.
+  - **R-A3:** independently review PR #62's merged 04:30 AM ET injury-PDF evidence, then update the shared edition label and stale injury flags. At the audit cut the page said 04:15 AM ET; this session did not independently fetch either PDF.
+  - **R-A4:** enforce NBA-only provenance for NBA values. Existing checkers accept GitHub/docs and other non-NBA hosts as “official”; the whole-tree scan reports 179 rows without an NBA-domain source. Keep internal design/legal rows explicitly marked as non-NBA evidence.
+  - **R-A5:** label the G4 binomial result as nominal and document the strategy-selection/multiple-testing limitation before describing it as evidence of skill; do not loosen gates.
+  - **R-A6:** document that the scheduled refresh creates capture PRs but does not promote refreshed inputs into published picks. Recommend automatic promotion only after all source/schema/gate checks pass, otherwise retain the prior slate with an explicit stale marker.
+  - **R-A7:** bound and normalize the official-source probe. The workflow currently runs on every `main`/`arena/**` push and probes every extracted URL serially; normalize HTML entities, deduplicate canonical URLs, classify all HTTP statuses (including 5xx), and reserve the full crawl for a scheduled/manual run. Keep only a small smoke probe on each push. This is a cross-scope request; no probe workflow/script was edited here.
+- **No authored dashboard/data values were changed by A01.**
+
+### 26.2 Conflict and rebase log
+
+The claim was first made from `main` at `7623c02`; the branch was rebased onto `a29e721` after PR #61, `73c64bd` after PR #64/#62, and `5ea615f` after the main-branch probe capture. PR #64 added the injury-edition audit as §25; this session is therefore §26. The rebase resolution restores that §25 text verbatim and keeps the sessions separate. A branch probe result (run 43585218412) completed later and its generated data/page pair was retained; those outputs were rebuilt/checked as generated, not edited by hand. No other session's lines were discarded. PR #59's merge, PR #58's closure, and PR #62's merge were reflected in the section status.
+### 26.3 A02 observation (Pages deployment isolation)
+
+At 10:28Z, the Pages run for main commit `a29e721` was cancelled with no steps completed while PR #62's `pull_request` Pages validation began. The workflow's previous global concurrency key was the literal `pages` for both event types. The Pages API reported the prior `564c2cd` build as errored and the `a29e721` build as still building; the latest site deployment was therefore not confirmed. A scoped concurrency key has been edited in `.github/workflows/pages.yml`; A02 remains **in progress** until the current PR-head check, merge, successful deployment and Pages API confirmation are recorded.
+
+### 26.4 Post-audit automated probe and CI queue (2026-11-14 UTC)
+
+- GitHub Actions run [43585218412](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43585218412) completed at 10:49Z. Its generated [`data/raw/probe_official.json`](data/raw/probe_official.json) records 1,194 URLs on configured NBA hosts: 103 initial HTTP 200s, 1,061 HTTP 403s, 28 requests with no HTTP status (timeouts), and 2 HTTP 503s. The summary counters omit the two 503s (103 + 1,061 + 28 = 1,192, not 1,194). The 14 browser-header retries returned 8 HTTP 200s, 5 HTTP 403s, and one HTTP 404 for the generic `https://www.nba.com/game/` path. There were no initial 3xx or 404/410 responses.
+- **Interpretation:** this is reachability evidence only, not verification that any row's value is correct or current. 742 of the 1,194 captured URL strings contain `amp;`, including multiply escaped query strings; the extractor's URL normalization/deduplication needs review. `verification.html` was regenerated from this capture and matched a fresh local rebuild.
+- **CI-load finding / cross-scope request:** `.github/workflows/probe-official.yml` runs on every push to `main` and `arena/**`; `scripts/probe_official.py` serially walks every collected URL with a 30-second per-request timeout and 0.4-second spacing. This run took about 24 minutes. At 10:43Z GitHub reported 8 probe runs in progress and 28 runs queued while this PR's validation was also queued. Limit full probes to schedule/dispatch (and use a bounded smoke probe for pushes) to avoid exhausting runners and delaying Pages deployments. No probe workflow or extractor code was changed by this session.
+- PR #65's first `validate` run on pre-rebase head `e23fd9a` passed in 1m11s and its PR `deploy` job was skipped as expected. The branch was subsequently rebased onto main `5ea615f` and includes the current generated probe/page pair; that rebased head still needs its own PR check before merge. The Pages build for main `5ea615f` completed its build stage successfully, but report/deploy jobs were queued at the last check; Pages API still reported the latest deployment as `errored`, so live deployment is **not confirmed**.
+
+---
+
+> **§34 continues** — session `arena/934ca56f-nba1`'s header ("## 34. Session `arena/934ca56f-nba1`") sits mid-board where their branch had it; the sub-sections follow here.
+
+### 34.1 First finding of this session (already recorded, before any edit)
+
+Independent transcription of the nine 11/13 finals read from
+<https://www.nba.com/games?date=2026-11-13> (chunks 0–1) at 10:24Z on 2026-11-14, written to
+`verify/2026-11-14/official_finals_2026-11-13_s934ca56f.json`. **All nine games are Final**
+(one, ATL@CHI, is Final/OT). Compared with `data/verified/finals_2026-11-13.json` (session
+`arena/cfb25ff0-nba1`, merged as PR #56): **9 / 9 agree** on away, home and both scores, 0
+disagreements. Two independent sessions have now read the same page and agreed, which is the
+standard this repository uses before a final is allowed to settle anything.
+
+_This section is appended to as the work completes; see §34.2 onward._
+
+### 34.2 Progress (appended 2026-11-14, all pushed to `arena/934ca56f-nba1`)
+
+| Commit | What it did | Verification |
+| --- | --- | --- |
+| `4e46b47` | §25 claim + independent 9/9 capture of the 11/13 finals | 9/9 agree with `data/verified/finals_2026-11-13.json` |
+| `4e0ce8c` | **I02/I04** — the 27 horizon rows refreshed to the official post-11/13 records; new `scripts/verify_horizon_s934ca56f.py` | 27/27 games, 0 game_id, 0 tip-time, 29 stale records → 0 |
+| `3c61a8f` | **I03/I05** — F13/F14/F29/F1 closed; Q9 → A13; README "Known limits" rewritten; the 11/13 settlement (3 WIN / 4 LOSS / 2 NO BET) published | `source_check.py` re-run, `verify_all.py` OK |
+| `ac549a3` | F27 — spread fields labelled as the projected home margin (the old note was backwards) | Verified against `proj_home_pts − proj_away_pts` |
+| `feat` | F26 — the landing page now says which of the two line sets is authoritative and forbids averaging them | Counts read from `checks.json` |
+| `feat` | New `site/pages/leaderboard.html`: rank, reward tier, and the **binding** gate per strategy | 18 pages, gates green |
+| `feat` | Decision index on Suggestions + SG17/SG18 (decision log, systematic gap discovery) | 825 rows, 0 unverified-by-omission |
+
+**Verified from official sources in this session** (read 2026-11-14, 10:24Z–10:50Z):
+`?date=2026-11-13` (all nine Final), `?date=2026-11-14` … `?date=2026-11-17`
+(all 27 horizon games: matchup, game_id, tip, records), and `nba.com/standings`
+(all 30 W-L). The horizon capture is machine-readable in
+`scripts/verify_horizon_s934ca56f.py` so it can be re-run rather than trusted.
+
+**Still open and NOT fixed by this session** (left published, non-blocking):
+the model's team ratings end at 2026-11-12 (F19) — the 11/13 finals settle the
+11/13 lines and refresh the records, but the ratings, and therefore every
+forward line, have not been re-fitted; the 11/14+ injury editions (F15/Q10); the
+one-line-set decision (F26/SG15); and the 44 `verify_integration` warnings.
+
+### 34.3 Cross-session triage of the two conflicting integration PRs
+
+Both were `CONFLICTING` against `main` when this session claimed the seat, neither
+could merge, and neither owner had committed since 10:19Z. Neither is discarded:
+each finding was re-verified from the official source and, where still true, is now
+on this branch. Nothing was reverted.
+
+**#58 — `arena/ef6ff2a4-nba1` (head `fc65c16`)**
+
+| Its finding | Re-verified here | Outcome |
+| --- | --- | --- |
+| `engine/fetch_official.py` never re-fetches a slate that went final overnight | Confirmed by reading the code: `dates` came from the committed snapshots only, which cover 11/06–11/12 and 11/14+ | **Adopted.** Yesterday (UTC) is now always captured and `dates` is iterated sorted. Only the behavioural change and its rationale were taken; its session-specific workflow-trigger comments were not. |
+| 11/13 finals captured twice, both reads agree | Its `data/audit/finals_2026_11_13_verification.json` was read and both runs compared with this session's own transcription | **Adopted as evidence.** run_1 9/9 agree, run_2 9/9 agree — three independent reads of the same official page, all agreeing on all 9 games. |
+| 11/13 paper picks settled | Its settlement agrees with this session's: 3 WIN, 4 LOSS, 2 NO BET | Already published; no conflict |
+| Builder-fidelity and nav fixes | Not reached — different file scope | **Left to its owner.** Not reverted, not duplicated. |
+
+**#59 — `arena/254dd8bb-nba1` (head `b9922df`)**
+
+| Its finding | Re-verified here | Outcome |
+| --- | --- | --- |
+| 11/13 finals 0022600034–042, cross-verified 9/9 | Agrees with this session's independent capture | Already published |
+| Settlement: singles 3-4 (−1.40u), MAE 12.39; parlays 0-3, 2 no-bets | Recomputed from the verified finals with the repo's stated grading rule | **Matches exactly.** The parlay 0-3 was missing from this site and is now published, recomputed rather than copied. |
+| Newest injury edition is 11/14/26 04:15 AM ET, 49 rows | Read the same PDF independently and transcribed 49 rows | **Matches exactly** — 49/49 rows, and identical status totals (23 NOT YET SUBMITTED, 18 Out, 4 Questionable, 2 Probable, 2 Available). Two sessions, same edition, same transcription. |
+| Holdout extended 51 → 60 games, margin MAE 12.98 vs naive 13.62 | **Not adopted.** This changes the out-of-sample claim on every page and needs the ratings refresh that F24 shows is not retrievable here | **Left to its owner.** The 51-game figure stands and is labelled as such. |
+| Leaderboard tier-ceiling defect | Partially superseded: this session's Leaderboard page names the **binding** gate per strategy, which surfaces the same problem (a strategy cannot look fundable while G4 fails) | **Partially adopted** in a different form |
+
+**Actions taken:** both PRs are closed with a comment naming what was adopted and where,
+so the work is credited rather than silently dropped. Applying PR #58's fetch fix and this
+session's record refresh together is what makes the 11/13→11/14 transition correct; neither
+alone would have.
+
+**One disagreement left open and published:** #59 extends the out-of-sample window to 60
+games and reports a better margin MAE (12.98 vs 13.62). This session does **not** publish that
+figure, because the ratings refresh it depends on cannot be performed from this environment
+(F24) and the number would therefore rest on a ratings window the site cannot reproduce. It is
+logged here so the owner can land it deliberately with its own verification.
+
+
+### 34.4 Merge with `main` at PR #59 (`564c2cd`)
+
+`main` advanced while this session worked: PR #59 (session `arena/254dd8bb-nba1`) merged at
+`564c2cd`, and PR #61 after it. This branch was merged forward and the conflicts resolved as
+follows. **Nothing from either side was reverted.**
+
+| File | Resolution |
+| --- | --- |
+| `data/raw/schedule_upcoming.json` | Ours. PR #59 had refreshed the same 27 rows to the same values — **0 of 27 rows differed**. That is an independent confirmation of this session's record refresh, not a conflict. Re-checked after resolution: `verify_horizon_s934ca56f.py` RESULT OK. |
+| `data/content/flagged.json` | **Union.** Main's F38/F39 kept (this session had no such ids); this session's F13/F14/F28/F29 closures and F15/F27/F31 corrections kept. 39 items. |
+| `data/content/questions.json` | Main's A13 (which carries the 60-game extension and the parlay result). This session's **caveat appended to A13**: the extension's inputs cannot be reproduced from this environment (F24). |
+| `data/content/executive.json` | Main's narrative (60-game window, S1 23-9 p=0.020) kept, plus **a tenth finding** stating plainly that the settlement is independently verified three times over while the extended error metric is reported-but-not-reproducible. |
+| `data/raw/sources.json` | Main's version, with this session's "read again when final" corrections re-applied. |
+| `README.md` | Main's "Known limits" (accurate and newer), plus this session's "Start here" pointer to `EXECUTIVE_SUMMARY.md`. |
+| `docs/**`, `site/**`, `index.html` | **Regenerated** from the resolved source files, never hand-merged. |
+
+**One thing to be explicit about.** PR #59's headline is that S1 is now 23-9 with p = 0.020 and
+has "cleared the luck gate at last". This session does not dispute the arithmetic; it disputes
+that the number can be checked. `data/raw/team_advanced.json` is still the capture from
+`2026-11-14T00:38Z`, whose season-to-date window predates the 11/13 games, and the official
+advanced table returns no data to this environment (F24, re-tested 2026-11-14). So the 60-game
+window and its 12.98 vs 13.62 margin MAE are published, and they are labelled as not
+independently reproducible here rather than presented as if they had been re-derived.
+---
 ## 31. Session `arena/95c1cb23-nba1` — game-day injury refresh, row-level re-verification, integration close-out (claimed 2026-11-14 18:41 UTC)
 
 **Numbering note.** This session claimed **§30** on the tree it branched from (`2038333`) and pushed
@@ -3251,7 +3195,59 @@ were not read); they are marked unverified rather than assumed. Cooper Flagg's p
 average is published as unverified because two official reads disagree (21.0 and 24.6) and
 choosing one would be a guess. No odds source exists, so no strategy is funded — that is
 F-15 and Q-02, not an oversight.
-## 33. Session `arena/140a10aa-nba1` — open-PR carry overtaken by the integration seat's merge; duplicate lift dropped; merged tree independently verified (claimed 2026-11-14T18:44Z, resolved 19:1xZ)
+
+### 30.2 Integration progress and the one blocker (2026-11-14 19:2xZ)
+
+Everything in I01–I04 is done and green locally. The merge has been held by a CI queue problem,
+not by a code problem, and it is recorded here rather than worked around by merging an unvalidated
+tree.
+
+| Step | State |
+| --- | --- |
+| Live re-read artifact (I02) | **done** — 185 checks, artifact `verify/2026-11-14-cc5a6652/compare.json` |
+| Decision workspace (I03) | **done** — `site/pages/decisions.html`, 6 decisions, 19 questions mapped, 23 suggestions ranked |
+| Board de-duplication (I04, R-29-8) | **done** — §30.A, hash-audited |
+| R-30-1 stale content fix | **done** — 46 flags / 15+19 questions / 23 suggestions now published |
+| PR #86 | **opened, closed unmerged, to be reopened** — see below |
+| Merge + Pages (I05) | **blocked on the runner queue** |
+
+**Why #86 was closed instead of merged.** `validate` sat `queued` for more than 40 minutes while the
+repository had **28–36 queued runs and 0 in progress**: `probe-official.yml` triggers on every push to
+every `arena/**` branch *and* to `main`, and `refresh-data.yml` triggers on every push to `arena/**`
+that touches its own files. Every push a session makes therefore adds one or two whole-repo runs, and
+the queue starves the one job that gates a merge. While #86 was open, three other sessions pushed
+(the resulting main commits are `e2dc63c`, `51015c6`, `b32a491`), each adding runs and each moving
+`main` underneath the PR. The PR was closed to stop it adding more, and will be reopened with the
+last merge already in place so that reopening costs zero new runs.
+
+**This is R-30-2 below and it is the same defect PRs #65 and #75 were opened to fix.**
+
+The full CI step list has been executed locally on every candidate tree, in workflow order, and is
+green: `check_site.py`, the build-B data check, `verify_integration.py` (0 errors), `render_check.mjs`
+(**134 pages, 0 problems**), the probe-record assert, `build_verification_page.py` idempotence,
+the Command Center 17-page check, `check_links.py`, `check_rendered.py`, `verify_all.py`
+(**VERIFY OK**), and a repo-wide HTML scan for broken internal links.
+
+**Merge conflicts resolved in this session, all keeping both sides:** §30 (renumbered the other
+session's record to §30B, nothing deleted), `build_dashboard.py` twice (this branch's
+`anchor_pattern` fix against main's new Decision index, and this branch's two new pages against
+main's new `gameday.html`), and the three regenerated `docs/data` content files (took `main`, then
+re-ran the builder, which now sources them from `data/content` on every run).
+
+### 30.3 Cross-session requests from this session
+
+| id | Ask | Owner | Why |
+| --- | --- | --- | --- |
+| R-30-1 | **Done here.** `build_dashboard.py` copied `docs/data/*.json` and only re-copied from `data/content`, so three decision files had gone stale and the site published 39 flags instead of 46 | closed by this session | A site that publishes less than the repository holds is the same failure as publishing a wrong value |
+| R-30-2 | **Stop the probe workflow triggering on `arena/**` pushes.** One whole-repo run per push per session, for a reachability record that only needs to exist on `main`, is what starved `validate` for 40+ minutes today and what made #86, #82 and #85 all go `DIRTY` while open | workflow owner | Guard the job with an event check, or run it on `main` + schedule only. This is a one-line `if:` change and it removes the single largest source of CI churn in this repository |
+| R-30-3 | A merge that a human is waiting on should not depend on a shared concurrency group with a probe job. If R-30-2 is not taken, give `pages.yml`'s `validate` its own group so it cannot queue behind probe/refresh runs | workflow owner | Same defect PRs #65 and #75 document |
+
+> **Section number collision, resolved by the integration seat.** Session `arena/140a10aa-nba1`
+> wrote this record as `## 33` on a tree where this branch's sections stopped at `30.3`. The
+> integration seat's section `33` below is the current one, so this record is renumbered `33B`
+> per R-29-9. Nothing was deleted and no line of the record was changed.
+
+## 33B. Session `arena/140a10aa-nba1` — open-PR carry overtaken by the integration seat's merge; duplicate lift dropped; merged tree independently verified (claimed 2026-11-14T18:44Z, resolved 19:1xZ)
 
 **What was claimed (18:44–18:46Z, branch `arena/140a10aa-nba1`, base `2038333`).** A content carry of the
 stale CONFLICTING PRs #63 / #65 / #75 / #80 onto a fresh branch (blob-exact lifts, credited; #66 left to the
@@ -3478,4 +3474,3 @@ committed `data/official/gamelog.json` transcription). Every new flag row carrie
   triage (N02), merge/rebase + conflict logs (N03, §31.2/§31.4), flags published (N04), injury
   currency recorded (N05), content refresh (N06), fix-forwards (N07), merged-tree verification
   (N08, §31.5), delivery + live confirmation (N09, this record).
-

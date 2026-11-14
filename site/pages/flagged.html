@@ -19,7 +19,8 @@
       <a href="picks.html">Horizon 14–17 (session build)</a>
       <a href="picks.html">Horizon</a>
       <a href="strategies.html">Evidence</a>
-      <a href="suggestions.html">Decision</a>
+      <a href="decisions.html">Decisions</a>
+      <a href="suggestions.html">Suggestions</a>
       <a href="flagged.html">Flagged</a>
     </nav>
   </div>
@@ -46,10 +47,12 @@
 </div>
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
+<a href="official-verify.html">Live Re-verification</a>
 </div>
 <div class="nav-group"><h3>DECISION</h3>
 <a href="questions.html">Open Questions</a>
 <a href="suggestions.html">Suggestions</a>
+<a href="decisions.html">Decisions: pick a path</a>
 <a href="flagged.html">Flagged for Review</a>
 <a href="sources.html">Source Register</a>
 <a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
@@ -63,9 +66,11 @@
 <a href="../../verified/flagged.html">Flagged (17)</a>
 </div>
     <div class="side-note">
-      <strong>Reading rule.</strong> Every table row links to the official source it
-      came from. A blank cell means the value could not be confirmed from an official
-      source &mdash; it is never filled in by guesswork. See
+      <strong>Reading rule.</strong> Every table row either links to the official source
+      it came from or carries an explicit no-source mark with a stated reason (the mark
+      explains why no official source exists or could confirm the cell). A blank or
+      dashed cell means the value could not be confirmed from an official source &mdash;
+      it is never filled in by guesswork. See
       <a href="flagged.html">Flagged for Review</a>.
     </div>
   </aside>
@@ -388,7 +393,7 @@
 <td>F34</td>
 <td>Medium</td>
 <td><b>The repository's gate checks structure, not values</b></td>
-<td>scripts/verify_all.py prints VERIFY OK when every table row has a link and every internal link resolves. It does not compare any value with NBA.com. That is why the conflicts in F26, F27 and F29 passed the gate. scripts/source_check.py (added 2026-11-14, COORDINATION §23) compares values for the horizon and the nine 11/13 finals, from a transcription, not a live fetch. No official source applies to this statement; it describes the repository's own checks.</td>
+<td>The dashboard gate is structural, not a value check: scripts/verify_dashboard.py counts four categories separately — rows with an allowed official source link, explicit no-source marks with an explanatory title, marks whose title carries an approved official URL (rendered as a clickable context link since 2026-11-14), and unmarked rows — and fails only on the last category. It never fetches an NBA page and never compares a published value with its source; scripts/source_check.py is the row-value spot-check, and both were run on the merged tree before every merge (COORDINATION section 35). The original finding stands: a link is not a value check.</td>
 <td>Trust in 'VERIFY OK' and in every 'verified' label on the site</td>
 <td>Add source_check.py to the gate for the horizon and every finished game; fail the build on any mismatch that is not in the flagged register.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_all.py" target="_blank" rel="noopener">link</a></td>
@@ -415,7 +420,7 @@
 <td>F37</td>
 <td>Medium</td>
 <td><b>Rows without an official NBA.com link on five earlier pages</b></td>
-<td>Counted 2026-11-14 UTC with a strict test (a row needs a link to nba.com or official.nba.com). Questions: 6 rows, each marked 'no official source exists'. Repo review: 7 rows. Sources: 1 row. Suggestions: 2 rows. Flagged for Review: 2 rows (F34, F35), which link to repository files because no official source applies to them. The new Source Check page has 4 rows that are internal counts and are marked as such. scripts/verify_all.py reports these as linked because it also accepts GitHub links; the strict count is the one this register uses.</td>
+<td>Counted 2026-11-14 UTC with a strict test (a row needs a link to nba.com or official.nba.com). Questions: 6 rows, each marked 'no official source exists'. Repo review: 7 rows. Sources: 1 row. Suggestions: 2 rows. Flagged for Review: 2 rows (F34, F35), which link to repository files because no official source applies to them. The new Source Check page has 4 rows that are internal counts and are marked as such. scripts/verify_all.py reports these as linked because it also accepts GitHub links; the strict count is the one this register uses. UPDATE 2026-11-14 (COORDINATION section 35): the historical per-page figures above stand as first-count; current whole-site counts are printed by scripts/verify_dashboard.py on every run and are never inlined here again, so this item cannot go stale the way the first count did.</td>
 <td>Questions, Repo review, Sources, Suggestions and Flagged pages</td>
 <td>Reviewer: decide, row by row, whether each one should link to an official page, stay marked as internal, or be removed. No values were changed to make the count pass.</td>
 <td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">link</a></td>
