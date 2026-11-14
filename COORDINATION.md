@@ -1914,7 +1914,7 @@ Claimed after reading the board on `origin/main` (`7623c02`) and the open PRs (#
 
 Not touched: `docs/**`, `data/**`, `index.html`, `flagged.json`, `suggestions.json`, `verification.html`, `.github/**`. Shared-output changes (the site's injury page and Flagged register) are logged as requests in §24 and left to the integration session.
 
-### 24.1 X01 completion record (session `arena/2ef89703-nba1`)
+### 25.1 X01 completion record (session `arena/2ef89703-nba1`)
 
 - **Result:** all 26 player rows on the site for the 11/14 slate match the 04:30 AM ET edition on team, matchup, time, status and reason. 0 differ, 0 missing, 0 extra. Club filing state (NOP, CLE, MEM, CHI, MIA not filed) is also unchanged.
 - **Sources (official):** [11/14 04:30 AM ET injury report PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf); [league index of 11/14 editions](https://official.nba.com/nba-injury-report-2026-27-season/); [11/13 07:30 PM ET PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf) (the edition the site uses); league policy on the index page.
