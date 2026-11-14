@@ -2012,10 +2012,12 @@ input turned out to be readable: the NBA.com player game-log pages are server-re
 
 | Step | Result |
 | --- | --- |
-| PR | this session's branch → `main`; body lists sources, the measurement table, and flags F40–F46 |
-| Gates at the merge head | the full set in 26.3, all green after the merge |
-| Merge | `gh pr merge <n> --merge` (no approval, not auto) |
-| Pages | confirm `deploy` success for the merge commit and that `site/pages/prop-variance.html` is live |
+| PR | **#68** `Measured prop variance from official game logs: dispersion, anchor test, minutes elasticity, availability read-out` (head `91b1206` + retrigger commit), base `main` at `5ea615f` (this branch is 0 commits behind main — merged forward, not rebased) |
+| CI `validate` | **could not execute, twice**: run `43587285959` cancelled (`deploy` + `validate` "Canceling since a higher priority waiting request for pages exists"), retriggered as run `43588144029`, cancelled again with **0 steps recorded**. Cause is the repo-wide `concurrency: group: pages / cancel-in-progress: true` in `.github/workflows/pages.yml`, which lets any other session's push cancel a PR run — `arena/a3e092a2-nba1`'s PR run was cancelled the same way, and PR #65 ("Isolate Pages PR checks") is the open fix. Not a content failure. |
+| Gates, run locally at this head (the same ten commands the `validate` job defines, in order) | `check_site.py` all pages exist, links resolve, every row source-linked · build-B data present + valid JSON (17 files) · `verify_integration.py` **PASSED** 0 errors / 44 warnings · `render_check.mjs` **114 pages, 7325 blocks, 6535 rendered rows, 0 problems** · probe record 1194 URLs consistent · `build_verification_page.py` leaves `verification.html` **current** (empty `git status`) · Command Center 17 pages + 18 data files valid · `check_links.py` **PASS** · `check_rendered.py` **PASS** · workflow's own internal-link scan: 114 pages, no broken links · plus `verify_dashboard.py` **OK** (958 rows, 937 linked) and `verify_all.py` **VERIFY OK** |
+| Merge | `gh pr merge 68 --merge` (no approval requested, not auto) — recorded in the follow-up coordination commit on this branch, since the merge result cannot be known before the merge |
+| Pages | confirmed after the merge by `gh api repos/…/pages/deployments` + a fetch of the live `pages/prop-variance.html` URL, recorded with the merge SHA |
+| Not touched | `index.html` beyond the regenerated tile/nav; settlement, `docs/**`, `engine/**`, `leaderboard` re-cut, `data/content/executive.json` — those are the integration seats' lanes (see 26.5) |
 
 ### 26.5 Cross-session requests (logged, not executed — files owned elsewhere)
 
