@@ -1451,7 +1451,7 @@ Game-flow finding (GF-01): the five teams printing NOT YET SUBMITTED on 11/14 (N
 | Local gate | `python3 scripts/verify_all.py` → VERIFY OK |
 | PR | [#44](https://github.com/wingbangboozle1-lang/NBA1/pull/44) — opened after 3 mid-run `main` movements (PRs #33/#40/#46 merged by other sessions); every conflict resolved append-only, nothing discarded |
 | Merge | **MERGED** as `60e90c5` (merge commit of PR #44), without waiting for approval |
-| Pages | First post-merge run 43543038722 **failed** at "Independent integration verification": `docs/audit/index.html` (owned by the X01–X04 audit session) links to this repo's own live Pages host as evidence, and `scripts/verify_integration.py` did not allowlist it. Fixed by allowlisting `wingbangboozle1-lang.github.io` (the repo's own published output) — see the follow-up PR; Pages re-run to be confirmed there |
+| Pages | **CONFIRMED LIVE.** First post-merge run 43543038722 failed at "Independent integration verification" (own-host evidence links not allowlisted) — repaired in PR #47/#49; two further gate defects were fixed in parallel by session `arena/697fca1e-nba1` (PRs #50/#51: the same host in `check_links.py`'s second allowlist, and the internal-link heredoc counting `page.html#fragment` as a missing file). Gate **fully green** at `6e12311` and again at `6eb0885` (both workflows success). Live check this session: `https://wingbangboozle1-lang.github.io/NBA1/picks-2026-11-14.html` fetched and serves the full page — 27 games, 23 gated picks, all source links present. Duplicate-fix convergence noted: both sessions repaired the same two verifiers independently; main kept one copy of each fix. |
 
 ---
 
