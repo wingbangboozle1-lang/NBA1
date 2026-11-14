@@ -303,6 +303,16 @@
    "priority": 5,
    "source": null,
    "source_url": "No NBA-operated source publishes a prop line (same limit as F3)"
+  },
+  {
+   "id": "Q21",
+   "question": "Does the strategy library need a registered multiplicity-correction gate before any record is called skill?",
+   "what_is_missing": "The registered gate set (engine/strategies.py G1-G7) tests each strategy's record against a break-even hit rate with no correction for how many strategies, lines and variants were tried. The second build's gate set has a Sidak gate (G7_sidak) but the funded lineage does not. S1's p = 0.020 is uncorrected; across a 10-strategy library the Sidak-adjusted threshold is much stricter.",
+   "how_to_answer": "Register a multiplicity gate (Sidak or Benjamini-Hochberg across the library at promotion time), re-grade the leaderboard with it, and publish both the uncorrected and corrected verdicts.",
+   "blocks": "Promotion of S1 (or anything else) past quarter-unit funding; the banner/executive verdict (F63).",
+   "priority": "High",
+   "source": null,
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/strategies.py"
   }
  ]
 }
