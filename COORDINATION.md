@@ -1830,3 +1830,27 @@ disagreements. Two independent sessions have now read the same page and agreed, 
 standard this repository uses before a final is allowed to settle anything.
 
 _This section is appended to as the work completes; see §25.2 onward._
+
+### 25.2 Progress (appended 2026-11-14, all pushed to `arena/934ca56f-nba1`)
+
+| Commit | What it did | Verification |
+| --- | --- | --- |
+| `4e46b47` | §25 claim + independent 9/9 capture of the 11/13 finals | 9/9 agree with `data/verified/finals_2026-11-13.json` |
+| `4e0ce8c` | **I02/I04** — the 27 horizon rows refreshed to the official post-11/13 records; new `scripts/verify_horizon_s934ca56f.py` | 27/27 games, 0 game_id, 0 tip-time, 29 stale records → 0 |
+| `3c61a8f` | **I03/I05** — F13/F14/F29/F1 closed; Q9 → A13; README "Known limits" rewritten; the 11/13 settlement (3 WIN / 4 LOSS / 2 NO BET) published | `source_check.py` re-run, `verify_all.py` OK |
+| `ac549a3` | F27 — spread fields labelled as the projected home margin (the old note was backwards) | Verified against `proj_home_pts − proj_away_pts` |
+| `feat` | F26 — the landing page now says which of the two line sets is authoritative and forbids averaging them | Counts read from `checks.json` |
+| `feat` | New `site/pages/leaderboard.html`: rank, reward tier, and the **binding** gate per strategy | 18 pages, gates green |
+| `feat` | Decision index on Suggestions + SG17/SG18 (decision log, systematic gap discovery) | 825 rows, 0 unverified-by-omission |
+
+**Verified from official sources in this session** (read 2026-11-14, 10:24Z–10:50Z):
+`?date=2026-11-13` (all nine Final), `?date=2026-11-14` … `?date=2026-11-17`
+(all 27 horizon games: matchup, game_id, tip, records), and `nba.com/standings`
+(all 30 W-L). The horizon capture is machine-readable in
+`scripts/verify_horizon_s934ca56f.py` so it can be re-run rather than trusted.
+
+**Still open and NOT fixed by this session** (left published, non-blocking):
+the model's team ratings end at 2026-11-12 (F19) — the 11/13 finals settle the
+11/13 lines and refresh the records, but the ratings, and therefore every
+forward line, have not been re-fitted; the 11/14+ injury editions (F15/Q10); the
+one-line-set decision (F26/SG15); and the 44 `verify_integration` warnings.
