@@ -1,6 +1,6 @@
 # Session notes — arena/f80dcc4a-nba1 (task W01–W08, window 2026-11-13 → 2026-11-17)
 
-Session ID: `arena/f80dcc4a-nba1` · Branch: `arena/f80dcc4a-nba1` · Board: COORDINATION.md §13.
+Session ID: `arena/f80dcc4a-nba1` · Branch: `arena/f80dcc4a-nba1` · Board: COORDINATION.md §18 (renumbered from §13 in the ~02:2xZ merge with main).
 Data captured 2026-11-14T00:52–01:32Z. Every number below is re-derived from a stored capture by
 `python3 scripts/verify_session_w.py` (502 checks, all passing at publication).
 
