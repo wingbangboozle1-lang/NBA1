@@ -1783,3 +1783,40 @@ Irregularities met during delivery (not flags, logged here):
 - **`gh pr edit` fails** on the deprecated Projects (classic) GraphQL field. The body was updated through `gh api PATCH repos/…/pulls/57` instead.
 - **PR #56** merged to `main` (`4e4d0b0`) during this session. Its finals were cross-checked (9 / 9 agree) before the merge.
 
+
+---
+
+## 24. Session `arena/24eb72c6-nba1` — measured prop variance from official game logs (claimed 2026-11-14 10:2x UTC)
+
+Branch `arena/24eb72c6-nba1` (base `main` `7623c02`, the merge of PR #60). The platform pins this session to
+that branch, so the `session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch.
+
+**Why this task and nothing else.** Two sessions are actively integrating: PR #58 (`arena/ef6ff2a4-nba1`,
+finals settlement + nav/builder fidelity) and PR #59 (`arena/254dd8bb-nba1`, OOS extension + content refresh).
+Both are OPEN and CONFLICTING and both touch `index.html`, `site/**`, `docs/**`, `data/content/**`,
+`integration/**`, `engine/**`, `scripts/build_dashboard.py`, `scripts/build_slate_refresh.py`. This session
+therefore does **not** touch settlement, finals, the leaderboard re-cut, `docs/**`, `data/content/**` beyond
+append-only, `index.html`, or the root `*.html` desk pages. The one gap nobody has claimed is the one that
+blocks prop pricing: **Q3 / F2 — game-to-game dispersion has never been measured, so all 88 published prop
+rows carry `probability: null`** and props cannot enter parlays. The input that was missing (official player
+game logs) is now readable: `https://www.nba.com/player/<id>/<slug>/game-log` is server-rendered and returns
+the "Last 5 Games" table in plain text (verified by probe at 10:2x UTC; matches the 3-player sample capture in
+`data/live/player_game_logs.json`).
+
+| # | Task | Status | File scope (exclusive to this session) |
+| --- | --- | --- | --- |
+| P01 | Claim the board, push before editing | done | `COORDINATION.md` (§24 only) |
+| P02 | Capture official NBA.com player game-log pages for the 2026-11-14 slate cohort, one fetch per player, raw table text kept for provenance | in progress | `data/proplogs/2026-11-14/**` (new folder) |
+| P03 | Probe the 2026-11-14 injury-report editions through the official policy index (closes or updates F31) | unclaimed | `data/proplogs/2026-11-14/injury_probe.json` |
+| P04 | `scripts/prop_variance.py`: parse captures, measure per-player dispersion (mean, SD, n), shrink toward the cohort SD, compare season-average baseline vs last-5 form (a real out-of-sample check of the prop baseline), emit `data/derived/prop_variance.json` + measured same-game teammate correlation | unclaimed | `scripts/prop_variance.py`, `data/derived/prop_variance.json` |
+| P05 | Site: new "Prop Variance" page from the derived file, CATEGORIES entry + one loader/copy line in `scripts/build_dashboard.py`, `site/**` regenerated | unclaimed | `scripts/build_dashboard.py` (three additive edits only), `site/**` (regenerated) |
+| P06 | Content: Q3 status, new flags, one suggestion with the path to finish the remaining cohort — append only | unclaimed | `data/content/questions.json`, `data/content/flagged.json`, `data/content/suggestions.json` (append only) |
+| P07 | Verify (all repo gates), PR → `main`, merge, confirm Pages, record here | unclaimed | `COORDINATION.md` (§24 only) |
+
+**Requests to the integration seat (logged, not executed):** the same capture should be repeated for the
+11/15–11/17 cohorts (36 more players, IDs in `data/players_2026_27.json`); whoever owns `docs/data/props.json`
+should read `data/derived/prop_variance.json` instead of leaving `probability` null; `verify_all.py` should gain
+the new checker as a gate (SG16 already asks for the same for `source_check.py`).
+
+**Read-only inputs** (not edited): `data/players_2026_27.json`, `data/live/*`, `docs/data/props.json`,
+`docs/data/lines.json`, `data/derived/correlations.json`, `scripts/source_check.py`.
