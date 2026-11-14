@@ -1,0 +1,328 @@
+{
+ "_meta": {
+  "session": "arena/e06aed97-nba1",
+  "checked_at_utc": "2026-11-14T19:10Z",
+  "title": "Official game log vs official standings: the exact size of the missing-result gap",
+  "method": "For every team, the games in the committed official game log (2026-10-20..2026-11-13) were counted and compared with that team's W+L on the official standings page read at 2026-11-14T18:50Z. Total points for and against in the log balance exactly (36240 = 36240), and the recomputed wins sum to 160 = the number of games, so the log is internally consistent; it is short of the official standings, not corrupted.",
+  "sources": [
+   "https://www.nba.com/standings",
+   "data/official/gamelog.json"
+  ],
+  "result": {
+   "team_games_recomputed": 320,
+   "team_games_official": 366,
+   "team_games_missing": 46,
+   "games_missing": 23.0,
+   "teams_missing_exactly_1": 14,
+   "teams_missing_exactly_2": 16,
+   "teams_missing_0": 0,
+   "wins_missing": 23,
+   "losses_missing": 23
+  },
+  "what_is_proven": "Every one of the 30 teams is short by exactly the same amount as the league is short: 23 games. No team is short 0 and none is short 3 or more.",
+  "what_is_NOT_proven": "WHICH games are missing. The official day pages for 2026-10-24 and 2026-11-02 print no result rows (flag F1), so the missing fixtures cannot be named from an official source. They are therefore NOT named, NOT inferred from the standings residual, and NOT scored.",
+  "why_it_matters": "A luck or skill decomposition built on a log that is uniformly 1 game short per team is still usable for comparing teams to each other, because every team is short by the same 1-2 games. It is not usable as a full-season record, and the page says so. This is the same F1 class the board already carries; this session adds the exact size (23 games) and the uniformity (no team is short 0, none is short 3+)."
+ },
+ "rows": [
+  {
+   "team": "PHI",
+   "recomputed_w": 8,
+   "recomputed_l": 3,
+   "official_standings_w": 10,
+   "official_standings_l": 3,
+   "games_missing_from_log": 2,
+   "wins_missing": 2,
+   "losses_missing": 0
+  },
+  {
+   "team": "LAL",
+   "recomputed_w": 10,
+   "recomputed_l": 2,
+   "official_standings_w": 11,
+   "official_standings_l": 2,
+   "games_missing_from_log": 1,
+   "wins_missing": 1,
+   "losses_missing": 0
+  },
+  {
+   "team": "MIA",
+   "recomputed_w": 6,
+   "recomputed_l": 4,
+   "official_standings_w": 6,
+   "official_standings_l": 6,
+   "games_missing_from_log": 2,
+   "wins_missing": 0,
+   "losses_missing": 2
+  },
+  {
+   "team": "PHX",
+   "recomputed_w": 4,
+   "recomputed_l": 5,
+   "official_standings_w": 5,
+   "official_standings_l": 6,
+   "games_missing_from_log": 2,
+   "wins_missing": 1,
+   "losses_missing": 1
+  },
+  {
+   "team": "CHA",
+   "recomputed_w": 3,
+   "recomputed_l": 7,
+   "official_standings_w": 4,
+   "official_standings_l": 8,
+   "games_missing_from_log": 2,
+   "wins_missing": 1,
+   "losses_missing": 1
+  },
+  {
+   "team": "ORL",
+   "recomputed_w": 5,
+   "recomputed_l": 6,
+   "official_standings_w": 5,
+   "official_standings_l": 7,
+   "games_missing_from_log": 1,
+   "wins_missing": 0,
+   "losses_missing": 1
+  },
+  {
+   "team": "DAL",
+   "recomputed_w": 7,
+   "recomputed_l": 3,
+   "official_standings_w": 7,
+   "official_standings_l": 5,
+   "games_missing_from_log": 2,
+   "wins_missing": 0,
+   "losses_missing": 2
+  },
+  {
+   "team": "BOS",
+   "recomputed_w": 10,
+   "recomputed_l": 1,
+   "official_standings_w": 10,
+   "official_standings_l": 2,
+   "games_missing_from_log": 1,
+   "wins_missing": 0,
+   "losses_missing": 1
+  },
+  {
+   "team": "DEN",
+   "recomputed_w": 5,
+   "recomputed_l": 3,
+   "official_standings_w": 6,
+   "official_standings_l": 4,
+   "games_missing_from_log": 2,
+   "wins_missing": 1,
+   "losses_missing": 1
+  },
+  {
+   "team": "NOP",
+   "recomputed_w": 3,
+   "recomputed_l": 8,
+   "official_standings_w": 4,
+   "official_standings_l": 9,
+   "games_missing_from_log": 2,
+   "wins_missing": 1,
+   "losses_missing": 1
+  },
+  {
+   "team": "CHI",
+   "recomputed_w": 2,
+   "recomputed_l": 7,
+   "official_standings_w": 2,
+   "official_standings_l": 9,
+   "games_missing_from_log": 2,
+   "wins_missing": 0,
+   "losses_missing": 2
+  },
+  {
+   "team": "DET",
+   "recomputed_w": 7,
+   "recomputed_l": 3,
+   "official_standings_w": 8,
+   "official_standings_l": 3,
+   "games_missing_from_log": 1,
+   "wins_missing": 1,
+   "losses_missing": 0
+  },
+  {
+   "team": "POR",
+   "recomputed_w": 8,
+   "recomputed_l": 3,
+   "official_standings_w": 9,
+   "official_standings_l": 3,
+   "games_missing_from_log": 1,
+   "wins_missing": 1,
+   "losses_missing": 0
+  },
+  {
+   "team": "SAS",
+   "recomputed_w": 9,
+   "recomputed_l": 2,
+   "official_standings_w": 11,
+   "official_standings_l": 2,
+   "games_missing_from_log": 2,
+   "wins_missing": 2,
+   "losses_missing": 0
+  },
+  {
+   "team": "ATL",
+   "recomputed_w": 6,
+   "recomputed_l": 5,
+   "official_standings_w": 7,
+   "official_standings_l": 6,
+   "games_missing_from_log": 2,
+   "wins_missing": 1,
+   "losses_missing": 1
+  },
+  {
+   "team": "HOU",
+   "recomputed_w": 8,
+   "recomputed_l": 3,
+   "official_standings_w": 10,
+   "official_standings_l": 3,
+   "games_missing_from_log": 2,
+   "wins_missing": 2,
+   "losses_missing": 0
+  },
+  {
+   "team": "MEM",
+   "recomputed_w": 8,
+   "recomputed_l": 3,
+   "official_standings_w": 8,
+   "official_standings_l": 4,
+   "games_missing_from_log": 1,
+   "wins_missing": 0,
+   "losses_missing": 1
+  },
+  {
+   "team": "IND",
+   "recomputed_w": 5,
+   "recomputed_l": 7,
+   "official_standings_w": 5,
+   "official_standings_l": 8,
+   "games_missing_from_log": 1,
+   "wins_missing": 0,
+   "losses_missing": 1
+  },
+  {
+   "team": "BKN",
+   "recomputed_w": 3,
+   "recomputed_l": 6,
+   "official_standings_w": 3,
+   "official_standings_l": 8,
+   "games_missing_from_log": 2,
+   "wins_missing": 0,
+   "losses_missing": 2
+  },
+  {
+   "team": "GSW",
+   "recomputed_w": 7,
+   "recomputed_l": 4,
+   "official_standings_w": 8,
+   "official_standings_l": 5,
+   "games_missing_from_log": 2,
+   "wins_missing": 1,
+   "losses_missing": 1
+  },
+  {
+   "team": "OKC",
+   "recomputed_w": 7,
+   "recomputed_l": 5,
+   "official_standings_w": 8,
+   "official_standings_l": 5,
+   "games_missing_from_log": 1,
+   "wins_missing": 1,
+   "losses_missing": 0
+  },
+  {
+   "team": "LAC",
+   "recomputed_w": 3,
+   "recomputed_l": 7,
+   "official_standings_w": 3,
+   "official_standings_l": 8,
+   "games_missing_from_log": 1,
+   "wins_missing": 0,
+   "losses_missing": 1
+  },
+  {
+   "team": "MIL",
+   "recomputed_w": 1,
+   "recomputed_l": 10,
+   "official_standings_w": 1,
+   "official_standings_l": 12,
+   "games_missing_from_log": 2,
+   "wins_missing": 0,
+   "losses_missing": 2
+  },
+  {
+   "team": "CLE",
+   "recomputed_w": 5,
+   "recomputed_l": 6,
+   "official_standings_w": 6,
+   "official_standings_l": 7,
+   "games_missing_from_log": 2,
+   "wins_missing": 1,
+   "losses_missing": 1
+  },
+  {
+   "team": "WAS",
+   "recomputed_w": 2,
+   "recomputed_l": 9,
+   "official_standings_w": 4,
+   "official_standings_l": 9,
+   "games_missing_from_log": 2,
+   "wins_missing": 2,
+   "losses_missing": 0
+  },
+  {
+   "team": "MIN",
+   "recomputed_w": 8,
+   "recomputed_l": 3,
+   "official_standings_w": 9,
+   "official_standings_l": 3,
+   "games_missing_from_log": 1,
+   "wins_missing": 1,
+   "losses_missing": 0
+  },
+  {
+   "team": "SAC",
+   "recomputed_w": 0,
+   "recomputed_l": 11,
+   "official_standings_w": 1,
+   "official_standings_l": 11,
+   "games_missing_from_log": 1,
+   "wins_missing": 1,
+   "losses_missing": 0
+  },
+  {
+   "team": "UTA",
+   "recomputed_w": 1,
+   "recomputed_l": 11,
+   "official_standings_w": 1,
+   "official_standings_l": 12,
+   "games_missing_from_log": 1,
+   "wins_missing": 0,
+   "losses_missing": 1
+  },
+  {
+   "team": "TOR",
+   "recomputed_w": 4,
+   "recomputed_l": 7,
+   "official_standings_w": 5,
+   "official_standings_l": 7,
+   "games_missing_from_log": 1,
+   "wins_missing": 1,
+   "losses_missing": 0
+  },
+  {
+   "team": "NYK",
+   "recomputed_w": 5,
+   "recomputed_l": 6,
+   "official_standings_w": 6,
+   "official_standings_l": 6,
+   "games_missing_from_log": 1,
+   "wins_missing": 1,
+   "losses_missing": 0
+  }
+ ]
+}

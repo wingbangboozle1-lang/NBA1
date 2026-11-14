@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game flow &mdash; rest and schedule density &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="suggestions.html">Decision</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="props-s30.html">Single Bets vs Parlays vs Props</a>
+<a href="prop-variance.html">Prop Variance &amp; Rotation</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="injuries-s30.html">Injuries &mdash; 01:30 PM ET Edition</a>
+<a href="gameflow.html">Game Flow</a>
+<a href="gameflow-s30.html">Game Flow &mdash; Rest &amp; Density</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="luck-s30.html">Luck &mdash; Official Record</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+<a href="verification-s30.html">2026-11-14 Re-read</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="execution.html">Decision Register</a>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row links to the official source it
+      came from. A blank cell means the value could not be confirmed from an official
+      source &mdash; it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Game flow &mdash; rest and schedule density</h1>
+      <p class="sub">Rest days, back-to-back flags and six-day schedule density for every game in the horizon, derived from official dates only, with the two dates that have no rows stated instead of filled.</p>
+    </div>
+    <div class="banner info"><div class="b-t">The cheapest trustworthy signal in the system</div><div class="b-b">Rest is derived from official game DATES only: either two official dates are one day apart or they are not. No score, no rating and no estimate is involved. That is why this layer is published even while the model layers are still provisional.</div></div>
+<div class="tiles">
+<div class="tile"><div class="tile-v">27</div><div class="tile-l">Horizon games</div><div class="tile-s">2026-11-14 to 2026-11-17</div></div>
+<div class="tile"><div class="tile-v">5</div><div class="tile-l">Team-slots on a back-to-back</div><div class="tile-s">across the whole horizon</div></div>
+<div class="tile"><div class="tile-v">5</div><div class="tile-l">Games on 11/14</div><div class="tile-s">the day with the only back-to-backs</div></div>
+<div class="tile"><div class="tile-v">9</div><div class="tile-l">Games on 11/15</div><div class="tile-s">the busiest day of the window</div></div>
+</div>
+<div class="banner warn"><div class="b-t">Two dates have no rows in the official log, so some rest figures are lower bounds</div><div class="b-b">The official game log prints 2026-10-24 and 2026-11-02 with no rows at all (flag F1) and holds 23 fixtures with no score. Those two dates are missing from every rest figure, so a rest value that crosses one of them is measured from the previous dated game and is therefore a LOWER bound on days off. The row-level note says this; nothing is filled in.</div></div>
+<h2 class="sec">Every game in the horizon</h2><p class="secsub">rest_days = calendar days between a team's last official game and this one, minus one. A dash means the figure cannot be computed from the dates on record, and is never filled with a zero.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Tip ET</th>
+<th>Game</th>
+<th>Away rest</th>
+<th>Away B2B</th>
+<th>Home rest</th>
+<th>Home B2B</th>
+<th>Away games / 6d</th>
+<th>Home games / 6d</th>
+<th>Density edge (away)</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-14</td>
+<td>7:00 PM ET</td>
+<td><b>DEN@NOP</b></td>
+<td>2</td>
+<td></td>
+<td>0</td>
+<td>yes</td>
+<td>2</td>
+<td>4</td>
+<td>-2</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">0022600231</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>7:30 PM ET</td>
+<td><b>DAL@CLE</b></td>
+<td>1</td>
+<td></td>
+<td>0</td>
+<td>yes</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">0022600232</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>8:00 PM ET</td>
+<td><b>DET@MIA</b></td>
+<td>1</td>
+<td></td>
+<td>0</td>
+<td>yes</td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">0022600233</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>8:00 PM ET</td>
+<td><b>BKN@MEM</b></td>
+<td>2</td>
+<td></td>
+<td>0</td>
+<td>yes</td>
+<td>2</td>
+<td>3</td>
+<td>-1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">0022600234</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>8:00 PM ET</td>
+<td><b>CHI@MIN</b></td>
+<td>0</td>
+<td>yes</td>
+<td>1</td>
+<td></td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">0022600235</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>1:00 PM ET</td>
+<td><b>IND@PHI</b></td>
+<td>1</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">0022600236</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>4:00 PM ET</td>
+<td><b>LAL@PHX</b></td>
+<td>3</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>2</td>
+<td>3</td>
+<td>-1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">0022600237</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>4:30 PM ET</td>
+<td><b>CHA@LAC</b></td>
+<td>2</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">0022600238</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>5:00 PM ET</td>
+<td><b>SAS@UTA</b></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">0022600239</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>6:00 PM ET</td>
+<td><b>DAL@BOS</b></td>
+<td>2</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">0022600240</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>6:00 PM ET</td>
+<td><b>NYK@TOR</b></td>
+<td>1</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">0022600241</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>7:00 PM ET</td>
+<td><b>HOU@WAS</b></td>
+<td>1</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">0022600242</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>8:00 PM ET</td>
+<td><b>ATL@MIL</b></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>2</td>
+<td>3</td>
+<td>-1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">0022600243</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>9:00 PM ET</td>
+<td><b>OKC@SAC</b></td>
+<td>1</td>
+<td></td>
+<td>1</td>
+<td></td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">0022600244</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:00 PM ET</td>
+<td><b>ORL@BOS</b></td>
+<td>2</td>
+<td></td>
+<td>4</td>
+<td></td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">0022600245</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:00 PM ET</td>
+<td><b>CHI@CLE</b></td>
+<td>2</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">0022600246</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:00 PM ET</td>
+<td><b>MEM@WAS</b></td>
+<td>2</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">0022600247</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:30 PM ET</td>
+<td><b>PHI@BKN</b></td>
+<td>3</td>
+<td></td>
+<td>4</td>
+<td></td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">0022600248</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:30 PM ET</td>
+<td><b>HOU@MIA</b></td>
+<td>2</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">0022600249</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>8:00 PM ET</td>
+<td><b>POR@MIN</b></td>
+<td>2</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">0022600250</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>8:00 PM ET</td>
+<td><b>GSW@NOP</b></td>
+<td>2</td>
+<td></td>
+<td>2</td>
+<td></td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">0022600251</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>9:00 PM ET</td>
+<td><b>PHX@DEN</b></td>
+<td>3</td>
+<td></td>
+<td>4</td>
+<td></td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">0022600252</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>10:30 PM ET</td>
+<td><b>UTA@LAC</b></td>
+<td>3</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">0022600257</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>11:00 PM ET</td>
+<td><b>CHA@LAL</b></td>
+<td>4</td>
+<td></td>
+<td>5</td>
+<td></td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">0022600256</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>7:30 PM ET</td>
+<td><b>NYK@TOR</b></td>
+<td>3</td>
+<td></td>
+<td>4</td>
+<td></td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">0022600253</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>8:00 PM ET</td>
+<td><b>POR@MIN</b></td>
+<td>3</td>
+<td></td>
+<td>4</td>
+<td></td>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">0022600254</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>8:00 PM ET</td>
+<td><b>DET@SAS</b></td>
+<td>4</td>
+<td></td>
+<td>3</td>
+<td></td>
+<td>1</td>
+<td>2</td>
+<td>-1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">0022600255</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Density edge is the away team's games in the six days before tip minus the home team's. Positive means the away team has played more recently and more often.</p>
+<h2 class="sec">Games and back-to-backs per day</h2>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Games</th>
+<th>Team-slots on a back-to-back</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-14</td>
+<td>5</td>
+<td>5</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official day page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>9</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">official day page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>8</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">official day page</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>5</td>
+<td>0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">official day page</a></td>
+</tr>
+</tbody></table></div>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

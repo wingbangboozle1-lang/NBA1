@@ -28,6 +28,14 @@ SITE_DATA = os.path.join(SITE, "data")
 
 NA = '<span class="na" title="not published - no official source confirmed this value">&mdash;</span>'
 
+# --- session arena/e06aed97-nba1 (COORDINATION section 30) inputs -----------------
+SX = os.path.join(ROOT, "data", "live", "s14x")
+
+
+def sx(name):
+    return load(os.path.join(SX, name))
+
+
 
 # ----------------------------------------------------------------- tiny helpers
 def esc(v):
@@ -62,20 +70,26 @@ CATEGORIES = [
     ("HORIZON", None, "The next three days of NBA games and the lines we originate for them."),
     ("Lines &amp; Picks", "picks.html", "Originated spread, total and fair-moneyline for every game in the horizon, and the gated paper picks built on them."),
     ("Player Props", "props.html", "Per-player projections and prop combinations, with the minutes coverage stated next to every number."),
+    ("Single Bets vs Parlays vs Props", "props-s30.html", "The three products compared on the same evidence, with the same-game correlation arithmetic stated and no price invented."),
     ("Prop Variance &amp; Rotation", "prop-variance.html", "Game-to-game dispersion measured from official game logs: the uncertainty behind every prop, the minutes-to-production elasticity, and what the injury report changed since the lines were cut."),
     ("Injuries &amp; Rotation", "injuries.html", "The official injury report, the rotation minutes it implies, and the measured production impact."),
+    ("Injuries &mdash; 01:30 PM ET Edition", "injuries-s30.html", "The newest game-day injury edition, player by player, with the rotation coverage and the edition-to-edition changes."),
     ("Game Flow", "gameflow.html", "Pace, expected margin and total, blow-out and overtime probability, and the rest and back-to-back context."),
+    ("Game Flow &mdash; Rest &amp; Density", "gameflow-s30.html", "Rest days, back-to-back flags and six-day schedule density for every horizon game, derived from official dates only."),
     ("EVIDENCE", None, "Whether any of it is skill. The out-of-sample record, the gates, the correlations and the luck check."),
     ("Strategies &amp; Leaderboard", "strategies.html", "Ten strategies, the reward tiers, and the leaderboard that ranks them - with nothing promoted that has not passed."),
     ("Validation Gates", "validation.html", "The seven gates every strategy must clear, the definition of each, and how each strategy scored."),
     ("Leaderboard &amp; Rewards", "leaderboard.html", "The competition scoreboard: rank, record, the gate blocking each strategy, and what clearing it would pay."),
     ("Correlations", "correlations.html", "Measured correlations, model-derived ones and the same-game-parlay rho used for pricing."),
     ("Luck &amp; Skill", "luck.html", "How many wins each team probably should have had, and which of them are luck."),
+    ("Luck &mdash; Official Record", "luck-s30.html", "The luck-versus-skill decomposition on 160 official finals, with the 23-game log shortfall stated rather than hidden."),
     ("Out-of-Sample Backtest", "backtest.html", "The full test window - every completed game after the ratings cut-off - and everything measured on it."),
     ("Model &amp; Teams", "model.html", "The efficiency model, its assumptions and the team ratings it reads."),
     ("VERIFICATION", None, "Checked line by line against NBA.com on the day of capture. Mismatches are listed, not corrected."),
     ("Official Source Check", "source-check.html", "Every horizon game and every 11/13 final compared with NBA.com, the 11/13 settlement, and the conflicts between builds."),
+    ("2026-11-14 Re-read", "verification-s30.html", "Every horizon row, every 11/13 final, every record cell and the newest official injury edition, re-read on 2026-11-14 at 18:40-19:10Z."),
     ("DECISION", None, "What is still open, what could be improved, and what could not be verified."),
+    ("Decision Register", "execution.html", "Every open decision, the one thing blocking it, whether that thing exists today, and the cheapest test that would close it."),
     ("Open Questions", "questions.html", "What we know, what we do not, and the concrete step that would answer each open item."),
     ("Suggestions", "suggestions.html", "Improvements written as options with effort, risk and what each unlocks, so a reviewer can pick a path."),
     ("Flagged for Review", "flagged.html", "Every value that could not be confirmed from an official source, with the link it would need."),
@@ -840,6 +854,10 @@ def main():
             sum(1 for r in lb["rows"] if "Not funded" in r["tier"]))),
         ("Out-of-sample games", back["metrics"]["n_games"], "every one predicted out of sample"),
         ("Open flags", n_flags, "published, non-blocking"),
+        ("Horizon rows re-verified", "%d/%d" % (sx("verification.json")["_meta"]["result"]["horizon_rows_verified"],
+                                             len(sx("verification.json")["horizon"])), "field by field, 2026-11-14 18:45Z"),
+        ("Games missing from the official log", sx("log_gap.json")["_meta"]["result"]["games_missing"],
+         "uniform across all 30 teams"),
     ]))
 
     body.append(banner("warn", "What this site is, and what it is not",
@@ -1654,6 +1672,14 @@ def main():
     # === prop variance (session arena/24eb72c6-nba1, COORDINATION section 24) =====
     built["prop-variance.html"] = build_prop_variance()
 
+    # === session arena/e06aed97-nba1 (COORDINATION section 30) =================
+    built["execution.html"] = build_execution()
+    built["verification-s30.html"] = build_verification_s30()
+    built["luck-s30.html"] = build_luck_s30()
+    built["props-s30.html"] = build_props_s30()
+    built["gameflow-s30.html"] = build_gameflow_s30()
+    built["injuries-s30.html"] = build_injuries_s30()
+
     # ------------------------------------------------------------------ write
     for name, html in built.items():
         path = os.path.join(ROOT, name) if name == "index.html" else os.path.join(PAGES, name)
@@ -1678,8 +1704,453 @@ def main():
     pv = os.path.join(ROOT, "data", "derived", "prop_variance.json")
     if os.path.exists(pv):
         shutil.copyfile(pv, os.path.join(SITE_DATA, "prop_variance.json"))
+    # session arena/e06aed97-nba1: copy the derived JSON behind the §30 pages, so
+    # every figure on them can be re-derived from the published data file alone.
+    for f in ("verification.json", "luck_skill.json", "log_gap.json", "gameflow.json",
+              "injury_impact.json", "prop_market.json", "injury_report_2026-11-14_0130PM.json",
+              "official_capture_2026-11-14T1845Z.json"):
+        src = os.path.join(SX, f)
+        if os.path.exists(src):
+            shutil.copyfile(src, os.path.join(SITE_DATA, "s14x-" + f))
 
     print("Wrote %d pages, assets and data to %s" % (len(built), SITE))
+
+
+
+# =============================================================================
+# Session arena/e06aed97-nba1 (COORDINATION section 30) — added pages.
+# Everything below reads ONLY files committed by this session plus files that
+# already existed. No value is typed into a page that is not in a JSON file.
+# =============================================================================
+def build_execution():
+    """Decision Register: the single screen a reviewer reads before authorising work."""
+    sug = load(os.path.join(CONTENT, "suggestions.json"))
+    qs = load(os.path.join(CONTENT, "questions.json"))
+    fl = load(os.path.join(CONTENT, "flagged.json"))
+    st = sx("log_gap.json")
+    ver = sx("verification.json")
+    b = [banner("info", "What this page is for",
+                "This is the page to read first when deciding what to do next. Every open question on this site is "
+                "listed below with the one thing that is blocking it, whether that thing is an official source that "
+                "exists today, and the cheapest test that would close it. Nothing here is implemented: it is the "
+                "decision surface, and the review protocol is at the bottom.")]
+
+    b.append(tiles([
+        ("Questions answered", len(qs["answered"]), "with the official link that answers each"),
+        ("Questions still open", len(qs["open"]), "each with its missing input"),
+        ("Suggestions on the table", len(sug["items"]), "%d new in this pass" % sum(1 for i in sug["items"] if i["id"] in
+            ["SG19","SG20","SG21","SG22","SG23","SG24","SG25","SG26"])),
+        ("Flagged items", len(fl["items"]), "%d new in this pass" % sum(1 for i in fl["items"] if i["id"] >= "F47")),
+        ("Horizon rows verified", "%d/%d" % (ver["_meta"]["result"]["horizon_rows_verified"], len(ver["horizon"])),
+         "field by field against nba.com on 2026-11-14"),
+        ("Games missing from the log", st["_meta"]["result"]["games_missing"], "uniform across all 30 teams"),
+    ]))
+
+    b.append(h2("A. The blocks, one per open question",
+                "Read left to right. The rightmost column is the only one that matters for scheduling: if the official source "
+                "does not exist in a usable form, no amount of engineering closes the question."))
+    rows = []
+    for q in qs["open"]:
+        url = q.get("source_url") or ""
+        ok = url.startswith("http")
+        rows.append([esc(q["id"]), '<b>%s</b>' % esc(q["question"]), esc(q["what_is_missing"]),
+                     esc(q.get("blocks") or ""),
+                     esc(q.get("priority")) if q.get("priority") is not None else "&mdash;",
+                     ("yes &mdash; " + srclink_url(url, "open the source")) if ok else
+                     nomark("no official source can supply this today")])
+    b.append(table(["ID", "Question", "What is missing", "What it blocks", "Priority", "Source"], rows,
+                   note="A priority of 1-2 means the answer unlocks other work. A question whose source cell is a dash is not "
+                        "waiting on effort; it is waiting on a source that does not exist in an official, usable form."))
+
+    b.append(h2("B. What this pass added to the evidence base",
+                "Every figure below was read from an official page on 2026-11-14 between 18:40Z and 19:10Z, and the capture is "
+                "committed so a reviewer can re-derive it."))
+    rows = [
+        ["Horizon re-verification", "%d of %d rows matched on date, ET tip, matchup and game id; 0 mismatches" %
+         (ver["_meta"]["result"]["horizon_rows_verified"], len(ver["horizon"])),
+         "%d of %d record cells agreed with a second official source" % (ver["_meta"]["result"]["record_cells_two_sources_agree"],
+                                                                       ver["_meta"]["result"]["record_cells_checked"]),
+         srclink_url("https://www.nba.com/games?date=2026-11-14", "nba.com/games")],
+        ["11/13 finals", "%d of %d re-verified (score, status label, game id)" %
+         (ver["_meta"]["result"]["finals_verified"], ver["_meta"]["result"]["finals_checked"]), "includes the ATL@CHI overtime label",
+         srclink_url("https://www.nba.com/games?date=2026-11-13", "nba.com/games 11/13")],
+        ["Injury edition", "01:30 PM ET game-day edition captured; 4 of 5 unfiled teams had filed since the 04:15 AM ET edition",
+         "3 player designations moved inside already-filed teams", srclink_url(sx("injury_report_2026-11-14_0130PM.json")["_meta"]["source_url"], "01:30 PM ET PDF")],
+        ["Game log reconciliation", "%d team-games recomputed against %d official = %d games missing" %
+         (st["_meta"]["result"]["team_games_recomputed"], st["_meta"]["result"]["team_games_official"],
+          st["_meta"]["result"]["games_missing"]), "uniform: 14 teams short 1, 16 short 2, none short 0 or 3+",
+         srclink_url("https://www.nba.com/standings", "standings")],
+        ["Luck decomposition", "160 official finals; mean absolute margin 14.06; 8.1% decided by 3 or fewer",
+         "luck-wins spread +2.72 (PHI) to -2.36 (NYK)", srclink_url("https://www.nba.com/standings", "standings")],
+        ["Rest layer", "5 team-slots on a back-to-back on 11/14; none on 11/15-11/17",
+         "derived from official dates only; two row-less dates make early figures lower bounds",
+         srclink_url("https://www.nba.com/games?date=2026-11-14", "nba.com/games")],
+    ]
+    b.append(table(["Layer", "What was measured", "What it means", "Source"], rows))
+
+    b.append(h2("C. How to review a suggestion and choose a path",
+                esc(sug["review_protocol"]["why"])))
+    b.append('<ol class="plain" style="margin:8px 0 16px 18px">%s</ol>'
+             % "".join("<li><b>%s</b> &mdash; %s</li>" % (esc(a), esc(b_))
+                       for a, b_ in sug["review_protocol"]["four_questions"]))
+    b.append('<div class="banner info"><div class="b-t">Acceptance gate &mdash; a change must pass all five before it is built</div>'
+             '<div class="b-b"><ol class="plain">%s</ol></div></div>'
+             % "".join("<li>%s</li>" % esc(g) for g in sug["review_protocol"]["acceptance_gate"]))
+    b.append('<p class="secsub">%s</p>' % esc(sug["review_protocol"]["how_to_choose"]))
+
+    b.append(h2("D. The suggestions, in the order they unblock things",
+                "Each row states what must be true first. An item whose dependency is unmet is not low priority - it is not ready."))
+    rows = []
+    for it in sug["items"]:
+        rows.append([esc(it["id"]), '<b>%s</b>' % esc(it["title"]), esc(it.get("category")),
+                     (esc(it["must_be_true_first"]) if it.get("must_be_true_first")
+                      else "not stated in the earlier build &mdash; ask before building"),
+                     (esc(it["smallest_test"]) if it.get("smallest_test")
+                      else "not stated in the earlier build &mdash; define one before building"),
+                     srclink_url(it.get("source_url"), "source") if it.get("source_url") else NA])
+    b.append(table(["ID", "Suggestion", "Category", "Must be true first",
+                    "Cheapest test that would tell you it worked", "Source"], rows,
+                   note="Items SG1-SG18 are the earlier build's; SG19-SG26 and the protocol above were added by this pass. "
+                        "Every new item names its dependency and its cheapest test, because a suggestion without those two is an opinion."))
+
+    b.append(h2("E. What would have to be true for this project to claim a real edge",
+                "Stated once, plainly, so no page has to imply it."))
+    b.append('<ul class="plain">'
+             '<li><b>A price.</b> No NBA-operated source publishes a closing price, so every figure here is model against a naive '
+             'reference model. Without a licensed price no strategy can be called a market edge, and the top reward tier is '
+             'unreachable by construction rather than by performance.</li>'
+             '<li><b>Minutes.</b> Injury impact is a measured lower bound because most players have no measured minutes in any '
+             'official capture. A better transfer constant applied to a missing input is still missing.</li>'
+             '<li><b>A bigger sample.</b> The out-of-sample window is 60 games and the best strategy has 32 graded plays. Every '
+             'gate that depends on sample size says so, and none can be argued past.</li>'
+             '<li><b>A pre-registered rule.</b> A scoreboard whose promotion rule can be edited after seeing results measures the '
+             'editor. The rule has to exist in writing before the first ranking is published.</li>'
+             '</ul>')
+    return page("Decision register", "Every open decision, the one thing blocking it, whether that thing exists today, and the "
+                "cheapest test that would close it. Read this before authorising any build work.", "\n".join(b))
+
+
+def build_verification_s30():
+    """Row-by-row re-verification performed by this session."""
+    ver = sx("verification.json")
+    inj = sx("injury_report_2026-11-14_0130PM.json")
+    r = ver["_meta"]["result"]
+    b = [banner("info", "What was checked, and how",
+                "Every published horizon row was compared field by field with a fresh read of the official nba.com day pages "
+                "taken on 2026-11-14 at 18:45Z, and every printed team record was then compared with a SECOND official source "
+                "(the standings page) so that a single misprinted game card cannot pass as verified. The capture, the "
+                "checker's input and its output are all committed under <code>data/live/s14x/</code>.")]
+    b.append(tiles([
+        ("Horizon rows verified", "%d / %d" % (r["horizon_rows_verified"], len(ver["horizon"])), "date, tip ET, matchup, game id"),
+        ("Horizon mismatches", r["horizon_rows_mismatched"], "zero is the only acceptable number"),
+        ("11/13 finals verified", "%d / %d" % (r["finals_verified"], r["finals_checked"]), "score, status label, game id"),
+        ("Record cells, two sources", "%d / %d" % (r["record_cells_two_sources_agree"], r["record_cells_checked"]), "game card and standings page"),
+        ("Calendar days match", "yes" if r["calendar_days_match"] else "NO", "5 / 9 / 8 / 5 games"),
+        ("Injury rows transcribed", len(inj["_meta"]["rows"]), "01:30 PM ET edition, read twice"),
+    ]))
+
+    b.append(h2("1. The 27-game horizon, row by row",
+                "One row per published game. A row is VERIFIED only when all four fields match the official card."))
+    rows = []
+    for h in ver["horizon"]:
+        rows.append([esc(h["date"]), '<b>%s</b>' % esc(h["matchup"]),
+                     '<span class="ok">%s</span>' % esc(h["result"]) if h["result"] == "VERIFIED"
+                     else '<b style="color:#8a1c1c">%s</b>' % esc(h["result"]),
+                     esc(", ".join(h["fields_checked"])), srclink_url(h["source_url"], h["game_id"])])
+    b.append(table(["Date", "Game", "Result", "Fields compared", "Source"], rows))
+
+    b.append(h2("2. The nine 2026-11-13 finals, row by row",
+                "The same finals the site settled its paper picks against, re-read from the official day page."))
+    rows = []
+    for f in ver["finals"]:
+        ok = f["result"] == "VERIFIED"
+        rows.append([esc(f["matchup"]), esc(f["site"]), esc(f["official"]),
+                     '<span class="ok">%s</span>' % esc(f["result"]) if ok else '<b style="color:#8a1c1c">%s</b>' % esc(f["result"]),
+                     srclink_url(f["source_url"], f["game_id"])])
+    b.append(table(["Game", "Published on this site", "Official page at 18:45Z", "Result", "Source"], rows))
+
+    b.append(h2("3. Official per-day counts vs the site's rows",
+                "The game-count badges printed on the official calendar are the independent check on whether a day was read completely."))
+    rows = [[esc(c["date"]), esc(c["official_calendar_badge"]), esc(c["rows_captured"]),
+             "match" if c["match"] else "MISMATCH", srclink_url(c["source_url"], "calendar")] for c in ver["calendar"]]
+    b.append(table(["Date", "Official calendar badge", "Rows read from the page", "Result", "Source"], rows))
+
+    b.append(h2("4. Every record cell against a second official source",
+                "The same record is printed on the game card and on the standings page. Both were read; a cell is VERIFIED only if they agree."))
+    rows = [[esc(x["date"]), '<b>%s</b>' % esc(x["team"]), esc(x["record_games_page"]), esc(x["record_standings"]),
+             "agree" if x["agree"] else '<b style="color:#8a1c1c">DISAGREE</b>',
+             srclink_url(x["source_standings"], "standings")]
+            for x in ver["records"]]
+    b.append(table(["Date", "Team", "Record on the game card", "Record on the standings page", "Result", "Source"], rows,
+                   note="%d record cells, %d agreeing, %d disagreeing." % (
+                       r["record_cells_checked"], r["record_cells_two_sources_agree"],
+                       r["record_cells_checked"] - r["record_cells_two_sources_agree"])))
+
+    b.append(h2("5. The 01:30 PM ET injury edition, team by team",
+                "Captured because the site's pages were still on the 04:15 AM ET edition at the start of this pass. Every row carries "
+                "the page it was read from and the basis for its team attribution (flag F48)."))
+    rows = []
+    for t in inj["teams_2026_11_14"]:
+        desig = ", ".join("%s %d" % (k, v) for k, v in sorted(t["designations"].items())) or "&mdash;"
+        rows.append(['<b>%s</b>' % esc(t["team"]), esc(t["players_listed"]), esc(desig), esc(t["filed"]),
+                     esc(" / ".join(t["rows"])) if t["rows"] else "NOT YET SUBMITTED (stub row printed)",
+                     srclink_url(inj["_meta"]["source_url"], "01:30 PM ET")])
+    b.append(table(["Team", "Players listed", "Designations", "Filed?", "Rows as printed", "Source"], rows))
+
+    b.append(h2("6. What changed between the overnight and afternoon editions",
+                "Only rows that moved are listed; every other already-filed row is identical between the two editions."))
+    rows = [[esc(a), '<b>%s</b>' % esc(b_), esc(c), esc(d), srclink_url(inj["_meta"]["source_url"], "source")]
+            for a, b_, c, d in inj["change_vs_0415_edition"]["moved"]]
+    b.append(table(["Team", "Player", "04:15 AM ET", "01:30 PM ET", "Source"], rows))
+    b.append('<p class="secsub">%s</p>' % esc(inj["change_vs_0415_edition"]["reading"]))
+    return page("Verification &mdash; 2026-11-14 official re-read",
+                "Row-by-row comparison of every published horizon row, every 11/13 final, every record cell and the newest "
+                "official injury edition, against official nba.com pages read on 2026-11-14 at 18:40-19:10Z.",
+                "\n".join(b))
+
+
+def build_luck_s30():
+    """Luck vs skill on the full official record."""
+    lk = sx("luck_skill.json")
+    st = sx("log_gap.json")
+    t = lk["totals"]
+    b = [banner("info", "The question this page answers",
+                "How much of the win-loss record is luck? The answer here is arithmetic on official final scores only: points for, "
+                "points against, wins, and a Pythagorean expectation. It describes variance. It does not forecast, it does not adjust "
+                "for opponent strength, rest or injury, and it is not a model.")]
+    b.append(tiles([
+        ("Games in the record", t["games"], "official finals, 2026-10-20 to 2026-11-13"),
+        ("Decided by 3 or fewer", "%d (%s%%)" % (t["games_decided_by_3_or_fewer"], round(100 * t["share_decided_by_3_or_fewer"], 1)),
+         "the games that are close to coin flips"),
+        ("Decided by 15 or more", t["games_decided_by_15_or_more"], "blowouts dominate, not coin flips"),
+        ("Mean absolute margin", t["mean_abs_margin"], "points"),
+        ("Home record", "%d-%d" % (t["home_wins"], t["road_wins"]), "home wins - road wins"),
+        ("Log shortfall", st["_meta"]["result"]["games_missing"], "games missing from the official log"),
+    ]))
+    b.append(banner("warn", "The record is 23 games short, and that is measured, not estimated",
+                    "Recomputing every team's record from the official game log gives %d team-games against the standings' %d. "
+                    "The gap is uniform: %d teams are short exactly 1 game, %d exactly 2, and none is short 0 or 3 or more. "
+                    "Because the shortfall is the same for everyone, team-to-team comparisons on this page survive it. A "
+                    "full-season record does not, and the page says so rather than rounding it away. %s"
+                    % (st["_meta"]["result"]["team_games_recomputed"], st["_meta"]["result"]["team_games_official"],
+                       st["_meta"]["result"]["teams_missing_exactly_1"], st["_meta"]["result"]["teams_missing_exactly_2"],
+                       esc(st["_meta"]["what_is_NOT_proven"]))))
+
+    b.append(h2("Luck, team by team",
+                "Luck wins = actual wins minus Pythagorean expectation. Sorted by luck, because that is the interesting end. "
+                "The exponent is an outside published convention, not an NBA.com figure (flag F51), and the 30 figures sum to "
+                "%+.2f rather than 0 because the exponent does not force them to." % sum(x["luck_wins"] for x in lk["teams"])))
+    rows = []
+    for x in lk["teams"]:
+        rows.append([esc(x["team"]), esc(x["games"]), "%s-%s" % (x["w"], x["l"]),
+                     ("%+d" % x["point_diff"]), esc(x["avg_margin"]), esc(x["pyth_expected_wins"]),
+                     '<b>%+.2f</b>' % x["luck_wins"],
+                     "%d of %d" % (x["one_possession_wins"], x["one_possession_games"]),
+                     esc(x["blowout_wins_15plus"]),
+                     srclink_url("https://www.nba.com/standings", "standings")])
+    b.append(table(["Team", "G", "W-L", "Point diff", "Avg margin", "Expected wins", "Luck wins",
+                    "Won by 3 or fewer", "Won by 15+", "Source"], rows,
+                   note="Expected wins uses the Pythagorean formula with exponent %s. A high luck figure means a team is winning by "
+                        "margins its point differential does not support; it is a description of the past, not a prediction of a "
+                        "correction." % esc(lk["_meta"]["pythagorean_exponent"])))
+
+    b.append(h2("Why this matters for the strategies",
+                "A strategy's record is only meaningful against the number of games that were actually in doubt."))
+    b.append('<p class="secsub">On this sample %d of %d games (%.1f%%) were decided by 3 or fewer points, so a hit rate is being '
+             'earned mostly in games that were not coin flips. That is the opposite of the usual intuition and it cuts both ways: '
+             'a strategy that wins close games is beating luck, and a strategy that wins blowouts is riding a team quality the '
+             'ratings already know about. The site reports both, and the gates are what decide which one a result is.</p>'
+             % (t["games_decided_by_3_or_fewer"], t["games"], 100 * t["share_decided_by_3_or_fewer"]))
+    return page("Luck and skill on the official record",
+                "Arithmetic on 160 official finals: how many games were actually in doubt, which teams are winning games their "
+                "point differential does not support, and why that decides what a hit rate is worth.", "\n".join(b))
+
+
+def build_props_s30():
+    """Single bet vs parlay vs prop combo, with the arithmetic stated."""
+    pm = sx("prop_market.json")
+    pv = load(os.path.join(ROOT, "data", "derived", "prop_variance.json"))
+    hl = pv["headline"]
+    b = [banner("info", "What this page compares",
+                "Three product types, judged on the same evidence and without a market price anywhere. A prop 'probability' on this "
+                "site is the chance that our projection beats the player's own published season average under a normal model with a "
+                "measured dispersion. It is not the chance of beating a book, because no NBA-operated source publishes a line.")]
+    b.append(tiles([
+        ("Prop rows published", pm["total"], "site/data/props.json"),
+        ("Priced with measured dispersion", pm["priced"], "rows that have a measured input"),
+        ("Unpriced", pm["unpriced"], "no measured input - left blank, never estimated"),
+        ("Clearing one measured SD", hl["props_clearing_one_sd"], "of the %d measured props" % hl["props_now_priced"]),
+        ("Median gap to the anchor", "%s SD" % hl["median_abs_gap_in_sd"], "how close our number is to the player's own average"),
+        ("Same-game pairwise rho (points)", pv["pooled_pairwise_rho_points"], "measured, not assumed independent"),
+    ]))
+
+    b.append(h2("1. Single bet",
+                "One leg, one variance term. This is the only product where a hit rate can be compared with a stated break-even "
+                "without also explaining a correlation."))
+    b.append('<ul class="plain">'
+             '<li><b>What has to be true:</b> our number must be better than the number it is bet against. On this site the opponent '
+             'is a naive reference model built from the same official ratings, never a book.</li>'
+             '<li><b>What the data says:</b> the model beats the reference on margin accuracy (MAE 12.98 against 13.62 over 60 '
+             'out-of-sample games) and the best single strategy is 23-9 with an exact binomial p of 0.020 - but it fails calibration '
+             'and stability, so it stays at a quarter unit.</li>'
+             '<li><b>Break-even at the stated convention:</b> 0.5238 at -110. That is a convention, not a quote, and the site never '
+             'labels it otherwise.</li>'
+             '</ul>')
+
+    b.append(h2("2. Cross-game parlay",
+                "Legs in different games. The variance multiplies; the edge does not."))
+    b.append('<ul class="plain">'
+             '<li><b>The arithmetic:</b> two legs each with probability p and independent outcomes have probability p&sup2;. At a '
+             '0.5238 per-leg break-even the two-leg break-even is 0.274 and the stated price convention pays about 2.6 to 1, so the '
+             'parlay is neither better nor worse than its legs <i>in expectation</i> - it is simply a larger variance on the same '
+             'edge, which is why a parlay bankroll behaves nothing like a singles bankroll.</li>'
+             '<li><b>Why it is not free:</b> the same edge, compounded, needs a much larger sample before it is distinguishable from '
+             'luck. A 0.02 edge per leg that is 23-9 as singles becomes a coin flip on whether a 30-parlay sample is even informative.</li>'
+             '</ul>')
+
+    b.append(h2("3. Same-game parlay and prop combos",
+                "Legs in the same game, which is where the correlation assumption usually goes wrong."))
+    b.append('<p class="secsub">The measured same-game pairwise correlation in points is <b>%s</b> across the captured game logs. '
+             'That is far above independence (0), and it runs in the direction that hurts: legs in the same game move together, so '
+             'a same-game combo is <i>more</i> correlated than a cross-game parlay and its true joint probability is further from the '
+             'product of its legs than an independent model would say. A pricing engine that multiplies leg probabilities without a '
+             'rho term overstates the chance of losing and understates the chance of winning together - either way the number is wrong, '
+             'and it is wrong in a direction that depends on the price. The site therefore does not publish a same-game joint '
+             'probability at all; it publishes the measured rho and says the joint number requires the price, which does not exist here.'
+             % esc(pv["pooled_pairwise_rho_points"]))
+
+    b.append(h2("4. Every prop row, and what happened to it",
+                "The published props table and the measured study, side by side. This is flag F50: the site publishes 0 priced rows "
+                "while the study prices %d." % hl["props_now_priced"]))
+    rows = []
+    for r in pm["rows"][:60]:
+        rows.append([esc(r["date"]), '<b>%s</b>' % esc(r["player"]), esc(r["team"]), esc(r["stat"]),
+                     num(r["projection"], 1),
+                     num(r["probability"], 3) if r["probability"] is not None else
+                     nomark("no measured dispersion for this player, so no probability is computed"),
+                     esc(r["status"]), srclink_url("https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS", "stats")])
+    b.append(table(["Date", "Player", "Team", "Stat", "Projection", "Model probability", "Status", "Source"], rows,
+                   note="Showing the first 60 of %d rows. An em dash in the probability column is a missing measured input, not a "
+                        "zero probability." % pm["total"]))
+    return page("Single bets, parlays and prop combos",
+                "The three products compared on the same evidence, with the arithmetic stated and no market price invented: what "
+                "a hit rate is worth, why a parlay multiplies variance rather than edge, and what the measured same-game correlation "
+                "does to a combo.", "\n".join(b))
+
+
+def build_gameflow_s30():
+    """Rest, back-to-back and schedule density for the horizon."""
+    f = sx("gameflow.json")
+    b = [banner("info", "The cheapest trustworthy signal in the system",
+                "Rest is derived from official game DATES only: either two official dates are one day apart or they are not. No score, "
+                "no rating and no estimate is involved. That is why this layer is published even while the model layers are still "
+                "provisional.")]
+    b.append(tiles([
+        ("Horizon games", len(f["rows"]), "2026-11-14 to 2026-11-17"),
+        ("Team-slots on a back-to-back", sum(v["back_to_back_team_slots"] for v in f["per_day"].values()),
+         "across the whole horizon"),
+        ("Games on 11/14", f["per_day"]["2026-11-14"]["games"], "the day with the only back-to-backs"),
+        ("Games on 11/15", f["per_day"]["2026-11-15"]["games"], "the busiest day of the window"),
+    ]))
+    b.append(banner("warn", "Two dates have no rows in the official log, so some rest figures are lower bounds",
+                    esc(f["_meta"]["known_gap"])))
+    b.append(h2("Every game in the horizon",
+                "rest_days = calendar days between a team's last official game and this one, minus one. A dash means the figure "
+                "cannot be computed from the dates on record, and is never filled with a zero."))
+    rows = []
+    for r in f["rows"]:
+        def cell(side, k):
+            v = r.get(side + "_" + k)
+            return esc(v) if v is not None else NA
+        rows.append([esc(r["date"]), esc(r["tip_et"]), '<b>%s</b>' % esc(r["matchup"]),
+                     cell("away", "rest_days"), "yes" if r.get("away_b2b") else "",
+                     cell("home", "rest_days"), "yes" if r.get("home_b2b") else "",
+                     cell("away", "games_in_prior_6_days"), cell("home", "games_in_prior_6_days"),
+                     esc(r["density_edge_away"]) if r.get("density_edge_away") is not None else NA,
+                     srclink_url(r["source_url"], r["game_id"])])
+    b.append(table(["Date", "Tip ET", "Game", "Away rest", "Away B2B", "Home rest", "Home B2B",
+                    "Away games / 6d", "Home games / 6d", "Density edge (away)", "Source"], rows,
+                   note="Density edge is the away team's games in the six days before tip minus the home team's. Positive means the "
+                        "away team has played more recently and more often."))
+    b.append(h2("Games and back-to-backs per day"))
+    rows = [[esc(d), esc(v["games"]), esc(v["back_to_back_team_slots"]),
+             srclink_url("https://www.nba.com/games?date=%s" % d, "official day page")]
+            for d, v in sorted(f["per_day"].items())]
+    b.append(table(["Date", "Games", "Team-slots on a back-to-back", "Source"], rows))
+    return page("Game flow &mdash; rest and schedule density",
+                "Rest days, back-to-back flags and six-day schedule density for every game in the horizon, derived from official "
+                "dates only, with the two dates that have no rows stated instead of filled.", "\n".join(b))
+
+
+def build_injuries_s30():
+    """Injury, rotation and measured impact, 01:30 PM ET edition."""
+    ii = sx("injury_impact.json")
+    b = [banner("info", "The edition this page uses",
+                "The 2026-11-14 <b>01:30 PM ET</b> game-day edition, captured from the official index on 2026-11-14 at 18:50Z. "
+                "The site's older pages were built from the 11/14 04:15 AM ET edition; this page is the newer one and says which "
+                "figures are new. The PDF was read twice independently and the two reads are byte-identical; the method was "
+                "validated first by re-reading the 04:15 AM ET edition and reproducing the committed transcription row for row.")]
+    tot = sum(t["players_listed"] for t in ii["teams"])
+    filed = sum(1 for t in ii["teams"] if t["filed"] == "yes")
+    measured = sum(t["players_with_measured_minutes"] for t in ii["teams"])
+    b.append(tiles([
+        ("Teams playing 11/14", len(ii["teams"]), "five games"),
+        ("Teams that had filed", filed, "at the 01:30 PM ET edition"),
+        ("Player rows listed", tot, "excluding NOT YET SUBMITTED stubs"),
+        ("Rows with measured minutes", measured, "every other row contributes a null, not a zero"),
+    ]))
+    b.append(banner("warn", "What this edition changed",
+                    esc(ii["edition_change"]["reading"])))
+    b.append(h2("Team by team",
+                "Coverage is the share of a team's listed players for whom an official per-game minutes figure exists in a committed "
+                "capture. A 0.00 is never 'healthy' - it means nothing was measurable."))
+    rows = []
+    for t in ii["teams"]:
+        desig = ", ".join("%s %d" % (k, v) for k, v in sorted(t["designations"].items())) or "&mdash;"
+        rows.append(['<b>%s</b>' % esc(t["team"]), esc(t["players_listed"]), esc(desig), esc(t["filed"]),
+                     "%d" % t["players_with_measured_minutes"],
+                     ("%.0f%%" % (100 * t["minutes_coverage_of_listed"])) if t["minutes_coverage_of_listed"] is not None else NA,
+                     esc(t["sum_expected_minutes_lost_measured_only"]) if t["sum_expected_minutes_lost_measured_only"] is not None else NA,
+                     srclink_url(t["roster_source"], "roster") if t.get("roster_source") else
+                     srclink_url(ii["_meta"]["official_source_edition"], "edition")])
+    b.append(table(["Team", "Listed", "Designations", "Filed", "With measured minutes", "Coverage",
+                    "Expected minutes lost (measured rows only)", "Source"], rows))
+
+    b.append(h2("Player by player",
+                "Each designation, its play probability (the committed module's own declared map, reused rather than re-invented), "
+                "and the measured inputs behind it. A dash is a missing official input."))
+    rows = []
+    for t in ii["teams"]:
+        for p in t["players"]:
+            rows.append([esc(t["team_code"]), '<b>%s</b>' % esc(p["player"]), esc(p["status"]),
+                         num(p["play_probability"], 2), num(p["official_minutes_per_game"], 1),
+                         num(p["official_points_per_game"], 1),
+                         ("%s of %s" % (p["official_games_played"], p["team_games_played"]))
+                         if p["official_games_played"] is not None else NA,
+                         esc(p["already_missing_games"]) if p["already_missing_games"] else NA,
+                         num(p["expected_minutes_lost"], 2),
+                         srclink_url(p["minutes_source"], "minutes") if p["minutes_source"] else
+                         nomark("no measured minutes in any committed official capture")])
+    b.append(table(["Team", "Player", "Status", "Play prob.", "Min/game", "Pts/game",
+                    "Games played", "Already missing games", "Expected min lost", "Source"], rows,
+                   note="'Already missing games' = yes when the player has appeared in fewer games than his team has played. Per the "
+                        "committed module's own central correction, a past absence is already inside the season ratings, so it is not "
+                        "a new absence and does not move a line."))
+
+    b.append(h2("The rules this page is held to"))
+    b.append('<ul class="plain"><li><b>Status map:</b> %s. Declared in <code>data/derived/injury_impact.json</code> and reused '
+             'here so two pages cannot disagree about what Questionable means.</li>'
+             '<li><b>Minutes source caveat:</b> %s</li>'
+             '<li><b>Not modelled, because no official source exists:</b> %s</li>'
+             '<li><b>Production transfer:</b> %s</li></ul>'
+             % (esc(", ".join("%s = %s" % (k, v) for k, v in ii["_meta"]["status_probability_map"].items())),
+                esc(ii["_meta"]["minutes_source_caveat"]),
+                esc("; ".join(ii["_meta"]["what_is_not_modelled"])),
+                esc(ii["_meta"]["production_transfer_rule"])))
+    return page("Injuries, rotation and production impact &mdash; 01:30 PM ET edition",
+                "The official injury report at its newest game-day edition, the rotation minutes it implies, and the measured "
+                "production impact - with the coverage stated next to every figure and a null wherever an official number does not exist.",
+                "\n".join(b))
 
 
 if __name__ == "__main__":

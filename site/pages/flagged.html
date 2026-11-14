@@ -30,9 +30,12 @@
     <div class="nav-group"><h3>HORIZON</h3>
 <a href="picks.html">Lines &amp; Picks</a>
 <a href="props.html">Player Props</a>
+<a href="props-s30.html">Single Bets vs Parlays vs Props</a>
 <a href="prop-variance.html">Prop Variance &amp; Rotation</a>
 <a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="injuries-s30.html">Injuries &mdash; 01:30 PM ET Edition</a>
 <a href="gameflow.html">Game Flow</a>
+<a href="gameflow-s30.html">Game Flow &mdash; Rest &amp; Density</a>
 </div>
 <div class="nav-group"><h3>EVIDENCE</h3>
 <a href="strategies.html">Strategies &amp; Leaderboard</a>
@@ -40,13 +43,16 @@
 <a href="leaderboard.html">Leaderboard &amp; Rewards</a>
 <a href="correlations.html">Correlations</a>
 <a href="luck.html">Luck &amp; Skill</a>
+<a href="luck-s30.html">Luck &mdash; Official Record</a>
 <a href="backtest.html">Out-of-Sample Backtest</a>
 <a href="model.html">Model &amp; Teams</a>
 </div>
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
+<a href="verification-s30.html">2026-11-14 Re-read</a>
 </div>
 <div class="nav-group"><h3>DECISION</h3>
+<a href="execution.html">Decision Register</a>
 <a href="questions.html">Open Questions</a>
 <a href="suggestions.html">Suggestions</a>
 <a href="flagged.html">Flagged for Review</a>
@@ -492,6 +498,60 @@
 <td>Prop Variance page; the strict source-link count</td>
 <td>Reviewer: if per-row official links are wanted on aggregate tables, the fix is to explode those two tables to one row per player-game (40 rows each), which the derived file already supports.</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F47</td>
+<td>Medium</td>
+<td><b>The injury page's &quot;newest edition&quot; label is now more than 12 hours stale</b></td>
+<td>data/derived/injury_impact.json and the Injuries page are built from the 11/13 07:30 PM ET edition (and the prop page from the 11/14 04:30 AM ET edition). The official index now carries the 11/14 game-day series from 12:00 AM ET through 01:30 PM ET. Re-read at 2026-11-14T18:50Z, the 01:30 PM ET edition shows four of the five 11/14 teams that had NOT YET SUBMITTED at 04:15 AM ET had filed by the afternoon (New Orleans, Cleveland, Chicago, Miami); only Memphis had not. That means 24 hours of designation detail was missing from the published page at the moment of this check.</td>
+<td>Injuries page, prop-variance page, and any reader who took the published listing as current</td>
+<td>Re-capture the newest edition as part of every build, and print the edition timestamp in the page header rather than only in a footnote. This session captured the 01:30 PM ET edition into data/live/s14x/ and publishes it beside the older one; it did NOT regenerate the older pages' data, which would move every line.</td>
+<td class="src"><span class="na" title="source id S_IR_0130 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F48</td>
+<td>Low</td>
+<td><b>Two blocks of the 01:30 PM ET injury PDF lose their team column at a page break</b></td>
+<td>The PDF is multi-page and the text reader drops the leading columns on pages 2-5. Two blocks are affected: (1) seven Cleveland Cavaliers rows on page 2 print no team cell but sit inside the DAL@CLE block opened on page 1; (2) six Chicago Bulls rows on page 3 print no team cell. The six were attributed to Chicago on independent official evidence - every one of Claxton, Powell, Sellers, Smith, Swain and Wilson appears on the official Bulls roster (https://www.nba.com/bulls/roster) and none appears on the Nets roster - and the block sits inside CHI@MIN between the Nets block and the Timberwolves block. No name was guessed: a player whose team could not be established from an official page would have been left blank and flagged.</td>
+<td>data/live/s14x/injury_report_2026-11-14_0130PM.json (team attribution on 13 of 69 rows)</td>
+<td>Parse the PDF with a layout-preserving tool so the team column survives the page break; until then every row carries a team_basis cell.</td>
+<td class="src"><span class="na" title="source id S_IR_0130 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F49</td>
+<td>High</td>
+<td><b>The official game log is exactly 23 games short of the official standings, uniformly across all 30 teams</b></td>
+<td>Recomputing every team's record from data/official/gamelog.json (160 scored games, 2026-10-20..2026-11-13 after this session's 11/13 read) and comparing with the official standings page read at 18:50Z: total points for and against balance exactly (36,240 = 36,240) and wins sum to 160, so the log is internally consistent, but it holds 320 team-games against the standings' 366. The 46 team-games are 23 games. 14 teams are short exactly 1 game, 16 exactly 2, and NO team is short 0 or 3 or more. The 23 missing wins and 23 missing losses balance. The official day pages for 2026-10-24 and 2026-11-02 print no result rows (existing flag F1), so the missing fixtures cannot be named from an official source and are deliberately not named or scored.</td>
+<td>data/official/gamelog.json; every rest, luck and full-season figure that reads it</td>
+<td>Capture the two missing dates' results from an official source once they are readable, then rebuild. The gap is uniform, so team-to-team comparisons in data/live/s14x/luck_skill.json survive it; calendar-complete rest figures do not, and are labelled as lower bounds.</td>
+<td class="src"><span class="na" title="source id S_STAND is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F50</td>
+<td>Medium</td>
+<td><b>The published props table prices 0 of its 88 rows, while the measured prop-variance study priced 10</b></td>
+<td>site/data/props.json carries probability: null on all 88 rows, because the props page was built before the measured-dispersion study landed. data/derived/prop_variance.json now contains a measured normal-model probability for 10 of those 88 rows and describes the other 78 as unpriced for want of a measured input. Republished here as the exact split (10 priced / 78 unpriced) so the number is not read as 0 of 88 by a reader who never opens the variance page. This is the same request as R-26-1 on the board; it is restated because it is still true and because the decision it blocks (whether a prop is ever bettable) depends on it.</td>
+<td>Player Props page, and the 'single bet vs parlay vs prop combo' comparison</td>
+<td>Join prop_variance.json into the props table at build time; do not carry 0-of-88 forward as if it were a finding.</td>
+<td class="src"><span class="na" title="source id S_PV is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F51</td>
+<td>Medium</td>
+<td><b>data/live/s14x/luck_skill.json uses a Pythagorean exponent that is not an NBA.com value</b></td>
+<td>The luck decomposition computes each team's expected wins from points for and against with exponent 13.91, the value Basketball-Reference publishes for the NBA. That is a published outside convention, not an NBA-operated figure, so the column is labelled everywhere it appears. The exponent's effect is small (a change to 14.0 moves no team's luck figure by more than a hundredth of a win on this sample) but the provenance is stated rather than implied.</td>
+<td>data/live/s14x/luck_skill.json, Luck page</td>
+<td>If an NBA-operated source ever publishes an expected-win figure, replace this column with it and retire the outside convention.</td>
+<td class="src"><span class="na" title="source id S_BBR is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F52</td>
+<td>Informational</td>
+<td><b>The horizon's rest figures are lower bounds, because two official dates have no rows</b></td>
+<td>Rest is derived from official game DATES. The official log has no rows for 2026-10-24 and 2026-11-02, so a rest figure that spans either date is measured from the previous dated game and is therefore a LOWER bound on days off. This affects only the first days of the horizon; every 11/14-11/17 row whose last game is on or after 2026-11-06 is exact. Values that cannot be computed are left blank, never defaulted to 0.</td>
+<td>data/live/s14x/gameflow.json</td>
+<td>Fill the two dates once readable, then rebuild the rest layer.</td>
+<td class="src"><span class="na" title="source id S_GAMES14 is not in the register">&mdash;</span></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">

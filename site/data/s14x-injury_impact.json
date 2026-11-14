@@ -1,0 +1,1247 @@
+{
+ "_meta": {
+  "session": "arena/e06aed97-nba1",
+  "generated_by": "scripts/s14x_build.py",
+  "generated_utc": "2026-11-14T19:05:00Z",
+  "title": "Injury, rotation and measured production impact — 2026-11-14 slate, 01:30 PM ET edition",
+  "official_source_edition": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+  "edition_index": "https://official.nba.com/nba-injury-report-2026-27-season/",
+  "status_probability_map": {
+   "Out": 0.0,
+   "Doubtful": 0.25,
+   "Questionable": 0.5,
+   "Probable": 0.8,
+   "Available": 1.0
+  },
+  "status_probability_map_source": "data/derived/injury_impact.json -> _meta.model_assumptions (the committed module's own declared map; reused, not re-invented)",
+  "minutes_source": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS",
+  "minutes_source_caveat": "The ranking is sorted by POINTS per game and is truncated at 50 rows by the capture; if the NBA.com title reads '2026-27 REGULAR SEASON' then its sort key is points, not minutes. A player absent from this table has NO measured minutes here, whatever his true role — so every team's coverage figure below is a lower bound and a 0.00 is never 'healthy'.",
+  "production_transfer_rule": "Declared in the committed module as a flat 0.55 of a player's scoring. This session measured the minutes-to-production elasticity directly from official game logs (data/derived/prop_variance.json -> minutes_elasticity: PTS 1.288 +/- 0.296, REB 0.626 +/- 0.367, AST 0.485 +/- 0.488, PRA 0.934 +/- 0.250) and did NOT change the module — changing it would move every published line, which is a decision for the owner, not this session. It is recorded on the Suggestions page as an open option.",
+  "no_new_absence_test": "A player's season ratings already contain his past absences. games_played vs the team's games played (both from official tables) is the only official evidence available here that separates 'already priced in' from 'new absence'. Rows that cannot be separated say so.",
+  "what_is_not_modelled": [
+   "games-until-return by injury type",
+   "pace change when a creator is out",
+   "defensive rating change from a lost rim protector",
+   "replacement-player production quality"
+  ]
+ },
+ "games_2026_11_14": [
+  {
+   "matchup": "DEN@NOP",
+   "game_id": "0022600231",
+   "tip_et": "7:00 PM ET",
+   "away": "DEN",
+   "home": "NOP",
+   "away_listed": 4,
+   "home_listed": 5,
+   "away_measured_minutes_players": 0,
+   "home_measured_minutes_players": 0,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "report_state_at_line_build": {
+    "home_report_status_at_line_build": "NOT YET SUBMITTED",
+    "away_report_status_at_line_build": "4 player(s) listed"
+   }
+  },
+  {
+   "matchup": "DAL@CLE",
+   "game_id": "0022600232",
+   "tip_et": "7:30 PM ET",
+   "away": "DAL",
+   "home": "CLE",
+   "away_listed": 6,
+   "home_listed": 8,
+   "away_measured_minutes_players": 0,
+   "home_measured_minutes_players": 0,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "report_state_at_line_build": {
+    "home_report_status_at_line_build": "NOT YET SUBMITTED",
+    "away_report_status_at_line_build": "6 player(s) listed"
+   }
+  },
+  {
+   "matchup": "DET@MIA",
+   "game_id": "0022600233",
+   "tip_et": "8:00 PM ET",
+   "away": "DET",
+   "home": "MIA",
+   "away_listed": 7,
+   "home_listed": 4,
+   "away_measured_minutes_players": 0,
+   "home_measured_minutes_players": 0,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "report_state_at_line_build": {
+    "home_report_status_at_line_build": "NOT YET SUBMITTED",
+    "away_report_status_at_line_build": "7 player(s) listed"
+   }
+  },
+  {
+   "matchup": "BKN@MEM",
+   "game_id": "0022600234",
+   "tip_et": "8:00 PM ET",
+   "away": "BKN",
+   "home": "MEM",
+   "away_listed": 6,
+   "home_listed": 0,
+   "away_measured_minutes_players": 0,
+   "home_measured_minutes_players": 0,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "report_state_at_line_build": {
+    "home_report_status_at_line_build": "NOT YET SUBMITTED",
+    "away_report_status_at_line_build": "6 player(s) listed"
+   }
+  },
+  {
+   "matchup": "CHI@MIN",
+   "game_id": "0022600235",
+   "tip_et": "8:00 PM ET",
+   "away": "CHI",
+   "home": "MIN",
+   "away_listed": 7,
+   "home_listed": 3,
+   "away_measured_minutes_players": 0,
+   "home_measured_minutes_players": 1,
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "report_state_at_line_build": {
+    "home_report_status_at_line_build": "3 player(s) listed",
+    "away_report_status_at_line_build": "NOT YET SUBMITTED"
+   }
+  }
+ ],
+ "teams": [
+  {
+   "team": "Denver Nuggets",
+   "team_code": "DEN",
+   "filed": "yes",
+   "players_listed": 4,
+   "designations": {
+    "Out": 4
+   },
+   "players_with_measured_minutes": 0,
+   "minutes_coverage_of_listed": 0.0,
+   "sum_expected_minutes_lost_measured_only": null,
+   "players": [
+    {
+     "player": "Holmes II, DaRon",
+     "status": "Out",
+     "reason": "G League - On Assignment",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 10,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Nembhard, Ryan",
+     "status": "Out",
+     "reason": "G League - Two-Way",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 10,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Strawther, Julian",
+     "status": "Out",
+     "reason": "Injury/Illness - Left Knee Sprain",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 10,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Whitmore, Cam",
+     "status": "Out",
+     "reason": "G League - Two-Way",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 10,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    }
+   ],
+   "roster_source": null
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "team_code": "NOP",
+   "filed": "yes",
+   "players_listed": 5,
+   "designations": {
+    "Out": 4,
+    "Probable": 1
+   },
+   "players_with_measured_minutes": 0,
+   "minutes_coverage_of_listed": 0.0,
+   "sum_expected_minutes_lost_measured_only": null,
+   "players": [
+    {
+     "player": "McGowens, Bryce",
+     "status": "Out",
+     "reason": "Injury/Illness - Left Elbow Infection",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 13,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Missi, Yves",
+     "status": "Probable",
+     "reason": "Injury/Illness - Left Knee Contusion / Bone Bruise",
+     "play_probability": 0.8,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 13,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Murphy III, Trey",
+     "status": "Out",
+     "reason": "Injury/Illness - Bilateral Patellar Tendinopathy",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 13,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Murray, Dejounte",
+     "status": "Out",
+     "reason": "Injury/Illness - Left Ankle Sprain",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 13,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Watford, Trendon",
+     "status": "Out",
+     "reason": "Injury/Illness - Right Ankle Sprain",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 13,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    }
+   ],
+   "roster_source": null
+  },
+  {
+   "team": "Dallas Mavericks",
+   "team_code": "DAL",
+   "filed": "yes",
+   "players_listed": 6,
+   "designations": {
+    "Out": 3,
+    "Doubtful": 1,
+    "Probable": 1,
+    "Available": 1
+   },
+   "players_with_measured_minutes": 0,
+   "minutes_coverage_of_listed": 0.0,
+   "sum_expected_minutes_lost_measured_only": null,
+   "players": [
+    {
+     "player": "Biberovic, Tarik",
+     "status": "Out",
+     "reason": "Injury/Illness - Right Heel Bursitis",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 12,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Christie, Max",
+     "status": "Doubtful",
+     "reason": "Injury/Illness - Left Ankle Sprain",
+     "play_probability": 0.25,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 12,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "de Larrea, Sergio",
+     "status": "Out",
+     "reason": "Injury/Illness - Right Knee Sprain",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 12,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Johnson Jr., Morez",
+     "status": "Probable",
+     "reason": "Injury/Illness - Left Shin / Tibia Contusion",
+     "play_probability": 0.8,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 12,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Lively II, Dereck",
+     "status": "Out",
+     "reason": "Injury/Illness - Right Foot Surgery",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 12,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Martin, Caleb",
+     "status": "Available",
+     "reason": "Injury/Illness - Right Thumb Splint",
+     "play_probability": 1.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 12,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    }
+   ],
+   "roster_source": null
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "team_code": "CLE",
+   "filed": "yes",
+   "players_listed": 8,
+   "designations": {
+    "Questionable": 4,
+    "Out": 4
+   },
+   "players_with_measured_minutes": 0,
+   "minutes_coverage_of_listed": 0.0,
+   "sum_expected_minutes_lost_measured_only": null,
+   "players": [
+    {
+     "player": "Allen, Jarrett",
+     "status": "Questionable",
+     "reason": "Injury/Illness - Right Knee Injury",
+     "play_probability": 0.5,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 13,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Harden, James",
+     "status": "Questionable",
+     "reason": "Injury/Illness - Left Lower Leg/Calf Tightness",
+     "play_probability": 0.5,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 13,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Merrill, Sam",
+     "status": "Out",
+     "reason": "Injury/Illness - Right Elbow Injury Management",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 13,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Mitchell, Donovan",
+     "status": "Questionable",
+     "reason": "Injury/Illness - Left Knee Contusion/Injury Management",
+     "play_probability": 0.5,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 13,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Mobley, Evan",
+     "status": "Out",
+     "reason": "Injury/Illness - Left Great Toe Sprain",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 13,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Tomlin, Nae'Qwan",
+     "status": "Out",
+     "reason": "Injury/Illness - Low Back Stress Reaction",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 13,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Udeh, Jr., Ernest",
+     "status": "Out",
+     "reason": "G League - Two-Way",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 13,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Watson, Peyton",
+     "status": "Questionable",
+     "reason": "Injury/Illness - Right Hamstring Injury Management",
+     "play_probability": 0.5,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 13,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    }
+   ],
+   "roster_source": null
+  },
+  {
+   "team": "Brooklyn Nets",
+   "team_code": "BKN",
+   "filed": "yes",
+   "players_listed": 6,
+   "designations": {
+    "Out": 4,
+    "Probable": 2
+   },
+   "players_with_measured_minutes": 0,
+   "minutes_coverage_of_listed": 0.0,
+   "sum_expected_minutes_lost_measured_only": null,
+   "players": [
+    {
+     "player": "Bilodeau, Tyler",
+     "status": "Out",
+     "reason": "G League - Two-Way",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Brown Jr., Mikel",
+     "status": "Probable",
+     "reason": "Injury/Illness - Illness",
+     "play_probability": 0.8,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Jefferson, Joshua",
+     "status": "Out",
+     "reason": "G League - On Assignment",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Nelson, Grant",
+     "status": "Out",
+     "reason": "G League - Two-Way",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Saraf, Ben",
+     "status": "Out",
+     "reason": "G League - On Assignment",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Traore, Nolan",
+     "status": "Probable",
+     "reason": "Injury/Illness - Right Calf Tightness / Soreness",
+     "play_probability": 0.8,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    }
+   ],
+   "roster_source": "https://www.nba.com/nets/roster"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "team_code": "MEM",
+   "filed": "no",
+   "players_listed": 0,
+   "designations": {},
+   "players_with_measured_minutes": 0,
+   "minutes_coverage_of_listed": null,
+   "sum_expected_minutes_lost_measured_only": null,
+   "players": [],
+   "roster_source": null
+  },
+  {
+   "team": "Chicago Bulls",
+   "team_code": "CHI",
+   "filed": "yes",
+   "players_listed": 7,
+   "designations": {
+    "Out": 4,
+    "Questionable": 3
+   },
+   "players_with_measured_minutes": 0,
+   "minutes_coverage_of_listed": 0.0,
+   "sum_expected_minutes_lost_measured_only": null,
+   "players": [
+    {
+     "player": "Awaka, Tobe",
+     "status": "Out",
+     "reason": "Injury/Illness - Disc Irritation",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Claxton, Nic",
+     "status": "Questionable",
+     "reason": "Injury/Illness - Left Hamstring Injury Management",
+     "play_probability": 0.5,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Powell, Norman",
+     "status": "Questionable",
+     "reason": "Injury/Illness - Low Back Injury Management",
+     "play_probability": 0.5,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Sellers, Jaylin",
+     "status": "Out",
+     "reason": "G League - Two-Way",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Smith, Jalen",
+     "status": "Questionable",
+     "reason": "Injury/Illness - Left Finger Sprain",
+     "play_probability": 0.5,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Swain, Dailyn",
+     "status": "Out",
+     "reason": "G League - On Assignment",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Wilson, Caleb",
+     "status": "Out",
+     "reason": "Injury/Illness - Right Metacarpal Fracture",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    }
+   ],
+   "roster_source": "https://www.nba.com/bulls/roster"
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "team_code": "MIN",
+   "filed": "yes",
+   "players_listed": 3,
+   "designations": {
+    "Available": 1,
+    "Out": 2
+   },
+   "players_with_measured_minutes": 1,
+   "minutes_coverage_of_listed": 0.333,
+   "sum_expected_minutes_lost_measured_only": 33.7,
+   "players": [
+    {
+     "player": "Beringer, Joan",
+     "status": "Available",
+     "reason": "Injury/Illness - Face Mask",
+     "play_probability": 1.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 12,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "DiVincenzo, Donte",
+     "status": "Out",
+     "reason": "Injury/Illness - Right Achilles Tendon Repair / Surgery",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 12,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Edwards, Anthony",
+     "status": "Out",
+     "reason": "Injury/Illness - Right Knee Arthroscopy",
+     "play_probability": 0.0,
+     "official_minutes_per_game": 33.7,
+     "official_points_per_game": null,
+     "official_games_played": 4,
+     "team_games_played": 12,
+     "already_missing_games": "yes",
+     "expected_minutes_lost": 33.7,
+     "minutes_source": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS",
+     "stats_source": null,
+     "flag": null
+    }
+   ],
+   "roster_source": null
+  },
+  {
+   "team": "Detroit Pistons",
+   "team_code": "DET",
+   "filed": "yes",
+   "players_listed": 7,
+   "designations": {
+    "Out": 5,
+    "Available": 2
+   },
+   "players_with_measured_minutes": 0,
+   "minutes_coverage_of_listed": 0.0,
+   "sum_expected_minutes_lost_measured_only": null,
+   "players": [
+    {
+     "player": "Duren, Jalen",
+     "status": "Out",
+     "reason": "Injury/Illness - Right Hamstring Strain",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Harkless, Elijah",
+     "status": "Available",
+     "reason": "G League - Two-Way",
+     "play_probability": 1.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Joe, Isaiah",
+     "status": "Out",
+     "reason": "Injury/Illness - Right Hip Contusion",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Jones, Isaac",
+     "status": "Available",
+     "reason": "G League - Two-Way",
+     "play_probability": 1.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Lanier, Chaz",
+     "status": "Out",
+     "reason": "G League - On Assignment",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Okorie, Ebuka",
+     "status": "Out",
+     "reason": "G League - On Assignment",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Onyenso, Ugonna",
+     "status": "Out",
+     "reason": "G League - Two-Way",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 11,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    }
+   ],
+   "roster_source": null
+  },
+  {
+   "team": "Miami Heat",
+   "team_code": "MIA",
+   "filed": "yes",
+   "players_listed": 4,
+   "designations": {
+    "Probable": 2,
+    "Out": 1,
+    "Doubtful": 1
+   },
+   "players_with_measured_minutes": 0,
+   "minutes_coverage_of_listed": 0.0,
+   "sum_expected_minutes_lost_measured_only": null,
+   "players": [
+    {
+     "player": "Antetokounmpo, Giannis",
+     "status": "Probable",
+     "reason": "Injury/Illness - Right Wrist Sprain",
+     "play_probability": 0.8,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 12,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Goldin, Vladislav",
+     "status": "Out",
+     "reason": "G League - Two-Way",
+     "play_probability": 0.0,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 12,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Larsson, Pelle",
+     "status": "Doubtful",
+     "reason": "Injury/Illness - Illness",
+     "play_probability": 0.25,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 12,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    },
+    {
+     "player": "Thompson, Klay",
+     "status": "Probable",
+     "reason": "Injury/Illness - Left Ankle Sprain",
+     "play_probability": 0.8,
+     "official_minutes_per_game": null,
+     "official_points_per_game": null,
+     "official_games_played": null,
+     "team_games_played": 12,
+     "already_missing_games": null,
+     "expected_minutes_lost": null,
+     "minutes_source": null,
+     "stats_source": null,
+     "flag": "minutes not in any committed official capture -> contributes null, not 0"
+    }
+   ],
+   "roster_source": null
+  }
+ ],
+ "edition_change": {
+  "description": "Status changes between the 04:15 AM ET edition and this 01:30 PM ET edition, for players listed in both.",
+  "moved": [
+   [
+    "New Orleans Pelicans",
+    "McGowens, Bryce",
+    "NOT YET SUBMITTED (team)",
+    "Out — Left Elbow Infection"
+   ],
+   [
+    "New Orleans Pelicans",
+    "Missi, Yves",
+    "NOT YET SUBMITTED (team)",
+    "Probable — Left Knee Contusion / Bone Bruise"
+   ],
+   [
+    "New Orleans Pelicans",
+    "Murphy III, Trey",
+    "NOT YET SUBMITTED (team)",
+    "Out — Bilateral Patellar Tendinopathy"
+   ],
+   [
+    "New Orleans Pelicans",
+    "Murray, Dejounte",
+    "NOT YET SUBMITTED (team)",
+    "Out — Left Ankle Sprain"
+   ],
+   [
+    "New Orleans Pelicans",
+    "Watford, Trendon",
+    "NOT YET SUBMITTED (team)",
+    "Out — Right Ankle Sprain"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Allen, Jarrett",
+    "NOT YET SUBMITTED (team)",
+    "Questionable — Right Knee Injury"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Harden, James",
+    "NOT YET SUBMITTED (team)",
+    "Questionable — Left Lower Leg/Calf Tightness"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Merrill, Sam",
+    "NOT YET SUBMITTED (team)",
+    "Out — Right Elbow Injury Management"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Mitchell, Donovan",
+    "NOT YET SUBMITTED (team)",
+    "Questionable — Left Knee Contusion/Injury Management"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Mobley, Evan",
+    "NOT YET SUBMITTED (team)",
+    "Out — Left Great Toe Sprain"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Tomlin, Nae'Qwan",
+    "NOT YET SUBMITTED (team)",
+    "Out — Low Back Stress Reaction"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Udeh, Jr., Ernest",
+    "NOT YET SUBMITTED (team)",
+    "Out — G League Two-Way"
+   ],
+   [
+    "Cleveland Cavaliers",
+    "Watson, Peyton",
+    "NOT YET SUBMITTED (team)",
+    "Questionable — Right Hamstring Injury Management"
+   ],
+   [
+    "Chicago Bulls",
+    "Awaka, Tobe",
+    "NOT YET SUBMITTED (team)",
+    "Out — Disc Irritation"
+   ],
+   [
+    "Chicago Bulls",
+    "Claxton, Nic",
+    "NOT YET SUBMITTED (team)",
+    "Questionable — Left Hamstring Injury Management"
+   ],
+   [
+    "Chicago Bulls",
+    "Powell, Norman",
+    "NOT YET SUBMITTED (team)",
+    "Questionable — Low Back Injury Management"
+   ],
+   [
+    "Chicago Bulls",
+    "Sellers, Jaylin",
+    "NOT YET SUBMITTED (team)",
+    "Out — G League Two-Way"
+   ],
+   [
+    "Chicago Bulls",
+    "Smith, Jalen",
+    "NOT YET SUBMITTED (team)",
+    "Questionable — Left Finger Sprain"
+   ],
+   [
+    "Chicago Bulls",
+    "Swain, Dailyn",
+    "NOT YET SUBMITTED (team)",
+    "Out — G League On Assignment"
+   ],
+   [
+    "Chicago Bulls",
+    "Wilson, Caleb",
+    "NOT YET SUBMITTED (team)",
+    "Out — Right Metacarpal Fracture"
+   ],
+   [
+    "Miami Heat",
+    "Antetokounmpo, Giannis",
+    "NOT YET SUBMITTED (team)",
+    "Probable — Right Wrist Sprain"
+   ],
+   [
+    "Miami Heat",
+    "Goldin, Vladislav",
+    "NOT YET SUBMITTED (team)",
+    "Out — G League Two-Way"
+   ],
+   [
+    "Miami Heat",
+    "Larsson, Pelle",
+    "NOT YET SUBMITTED (team)",
+    "Doubtful — Illness"
+   ],
+   [
+    "Miami Heat",
+    "Thompson, Klay",
+    "NOT YET SUBMITTED (team)",
+    "Probable — Left Ankle Sprain"
+   ],
+   [
+    "Brooklyn Nets",
+    "Brown Jr., Mikel",
+    "Questionable — Illness",
+    "Probable — Illness"
+   ],
+   [
+    "Detroit Pistons",
+    "Harkless, Elijah",
+    "Questionable — G League Two-Way",
+    "Available — G League Two-Way"
+   ],
+   [
+    "Detroit Pistons",
+    "Jones, Isaac",
+    "Questionable — G League Two-Way",
+    "Available — G League Two-Way"
+   ],
+   [
+    "Memphis Grizzlies",
+    "(team)",
+    "NOT YET SUBMITTED",
+    "NOT YET SUBMITTED"
+   ]
+  ],
+  "teams_that_filed_between_editions": [
+   "New Orleans Pelicans",
+   "Cleveland Cavaliers",
+   "Chicago Bulls",
+   "Miami Heat"
+  ],
+  "teams_still_not_filed": [
+   "Memphis Grizzlies"
+  ],
+  "reading": "Four of the five 11/14 teams that had not filed at 04:15 AM ET filed by 01:30 PM ET (New Orleans, Cleveland, Chicago, Miami). Memphis had not filed and, at 1:30 PM ET, was still inside its local 1 p.m. CT window, so this is not a deadline violation. Inside the teams that had already filed, exactly two player-level designations moved: Brooklyn's Mikel Brown Jr. Questionable to Probable and Detroit's Elijah Harkless and Isaac Jones Questionable to Available (three player rows across two teams). Every other already-filed row is identical between the two editions.",
+  "unchanged_on_both_editions": [
+   [
+    "Brooklyn Nets",
+    "Traore, Nolan",
+    "Probable — Right Calf Tightness / Soreness",
+    "Probable — Right Calf Tightness / Soreness"
+   ],
+   [
+    "Minnesota Timberwolves",
+    "Beringer, Joan",
+    "Available — Injury/Illness - Face Mask",
+    "Available — Injury/Illness - Face Mask"
+   ],
+   [
+    "Minnesota Timberwolves",
+    "DiVincenzo, Donte",
+    "Out",
+    "Out"
+   ],
+   [
+    "Minnesota Timberwolves",
+    "Edwards, Anthony",
+    "Out",
+    "Out"
+   ],
+   [
+    "All four Denver Nuggets rows",
+    "Holmes II / Nembhard / Strawther / Whitmore",
+    "Out",
+    "Out"
+   ],
+   [
+    "All six Dallas Mavericks rows",
+    "Biberovic / Christie / de Larrea / Johnson Jr. / Lively II / Martin",
+    "same designation",
+    "same designation"
+   ],
+   [
+    "Memphis Grizzlies",
+    "(team)",
+    "NOT YET SUBMITTED",
+    "NOT YET SUBMITTED"
+   ]
+  ]
+ }
+}

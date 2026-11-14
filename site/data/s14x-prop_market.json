@@ -1,0 +1,895 @@
+{
+ "_meta": {
+  "session": "arena/e06aed97-nba1",
+  "generated_utc": "2026-11-14T19:05Z",
+  "title": "Player props: what can be priced, what cannot, and what a single bet, a parlay and a same-game combo are each worth",
+  "source": "site/data/props.json (88 rows) joined to data/derived/prop_variance.json",
+  "no_price_anywhere": "No sportsbook line exists in this repository and none is invented. A prop 'probability' on this site is the chance that our projection beats the player's own published season average under a normal model with a measured dispersion - it is not the chance of beating a book.",
+  "single_leg_value": "A prop is a single bet whose only measurable edge is (our projection - season average) / measured sd. data/derived/prop_variance.json -> anchor_test shows the season average already beats every form estimator this site has, so the honest ranking of the three product types is stated in the page, not assumed."
+ },
+ "rows": [
+  {
+   "date": "2026-11-14",
+   "player": "Zion Williamson",
+   "team": "NOP",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-14",
+   "player": "Jamal Murray",
+   "team": "DEN",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-14",
+   "player": "Nikola Jokic",
+   "team": "DEN",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-14",
+   "player": "Donovan Mitchell",
+   "team": "CLE",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-14",
+   "player": "Cooper Flagg",
+   "team": "DAL",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-14",
+   "player": "Kyrie Irving",
+   "team": "DAL",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-14",
+   "player": "Giannis Antetokounmpo",
+   "team": "MIA",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-14",
+   "player": "Cade Cunningham",
+   "team": "DET",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-14",
+   "player": "Ty Jerome",
+   "team": "MEM",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-14",
+   "player": "Michael Porter Jr.",
+   "team": "BKN",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-14",
+   "player": "Julius Randle",
+   "team": "BKN",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-14",
+   "player": "LaMelo Ball",
+   "team": "MIN",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-14",
+   "player": "Norman Powell",
+   "team": "CHI",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-14",
+   "player": "Caleb Wilson",
+   "team": "CHI",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Tyrese Maxey",
+   "team": "PHI",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Jaylen Brown",
+   "team": "PHI",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Pascal Siakam",
+   "team": "IND",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Tyrese Haliburton",
+   "team": "IND",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Devin Booker",
+   "team": "PHX",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Luka Doncic",
+   "team": "LAL",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Austin Reaves",
+   "team": "LAL",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Darius Garland",
+   "team": "LAC",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Brandon Miller",
+   "team": "CHA",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Keyonte George",
+   "team": "UTA",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Victor Wembanyama",
+   "team": "SAS",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Jayson Tatum",
+   "team": "BOS",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Paul George",
+   "team": "BOS",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Cooper Flagg",
+   "team": "DAL",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Kyrie Irving",
+   "team": "DAL",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Scottie Barnes",
+   "team": "TOR",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "RJ Barrett",
+   "team": "TOR",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Kawhi Leonard",
+   "team": "TOR",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Jalen Brunson",
+   "team": "NYK",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Karl-Anthony Towns",
+   "team": "NYK",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Anthony Davis",
+   "team": "WAS",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Trae Young",
+   "team": "WAS",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Alperen Sengun",
+   "team": "HOU",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Kevin Durant",
+   "team": "HOU",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Tyler Herro",
+   "team": "MIL",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Nickeil Alexander-Walker",
+   "team": "ATL",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Jalen Johnson",
+   "team": "ATL",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Darius Acuff Jr.",
+   "team": "SAC",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Zach LaVine",
+   "team": "SAC",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Shai Gilgeous-Alexander",
+   "team": "OKC",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-15",
+   "player": "Ajay Mitchell",
+   "team": "OKC",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Jayson Tatum",
+   "team": "BOS",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Paul George",
+   "team": "BOS",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Paolo Banchero",
+   "team": "ORL",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Franz Wagner",
+   "team": "ORL",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Donovan Mitchell",
+   "team": "CLE",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Norman Powell",
+   "team": "CHI",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Caleb Wilson",
+   "team": "CHI",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Anthony Davis",
+   "team": "WAS",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Trae Young",
+   "team": "WAS",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Ty Jerome",
+   "team": "MEM",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Michael Porter Jr.",
+   "team": "BKN",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Julius Randle",
+   "team": "BKN",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Tyrese Maxey",
+   "team": "PHI",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Jaylen Brown",
+   "team": "PHI",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Giannis Antetokounmpo",
+   "team": "MIA",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Alperen Sengun",
+   "team": "HOU",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Kevin Durant",
+   "team": "HOU",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Anthony Edwards",
+   "team": "MIN",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "LaMelo Ball",
+   "team": "MIN",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Deni Avdija",
+   "team": "POR",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Damian Lillard",
+   "team": "POR",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Zion Williamson",
+   "team": "NOP",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Stephen Curry",
+   "team": "GSW",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Yaxel Lendeborg",
+   "team": "GSW",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Jamal Murray",
+   "team": "DEN",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Nikola Jokic",
+   "team": "DEN",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-16",
+   "player": "Devin Booker",
+   "team": "PHX",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "Darius Garland",
+   "team": "LAC",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "Keyonte George",
+   "team": "UTA",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "Luka Doncic",
+   "team": "LAL",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "Austin Reaves",
+   "team": "LAL",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "Brandon Miller",
+   "team": "CHA",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "Scottie Barnes",
+   "team": "TOR",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "RJ Barrett",
+   "team": "TOR",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "Kawhi Leonard",
+   "team": "TOR",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "Jalen Brunson",
+   "team": "NYK",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "Karl-Anthony Towns",
+   "team": "NYK",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "Anthony Edwards",
+   "team": "MIN",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "LaMelo Ball",
+   "team": "MIN",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "Deni Avdija",
+   "team": "POR",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "Damian Lillard",
+   "team": "POR",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "Victor Wembanyama",
+   "team": "SAS",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  },
+  {
+   "date": "2026-11-17",
+   "player": "Cade Cunningham",
+   "team": "DET",
+   "stat": null,
+   "projection": null,
+   "probability": null,
+   "status": "not priced (no measured input)",
+   "source_id": ""
+  }
+ ],
+ "priced": 0,
+ "unpriced": 88,
+ "total": 88
+}
