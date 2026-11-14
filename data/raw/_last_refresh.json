@@ -1,5 +1,5 @@
 {
- "captured_at_utc": "2026-11-14T09:47:30Z",
+ "captured_at_utc": "2026-11-14T09:55:30Z",
  "changed": [
   "evidence S1_season",
   "evidence S2_train",
@@ -11,11 +11,11 @@
   "results 2026-11-10",
   "results 2026-11-11",
   "results 2026-11-12",
+  "results 2026-11-13",
   "results 2026-11-14",
   "results 2026-11-15",
   "results 2026-11-16",
-  "results 2026-11-17",
-  "injury probe"
+  "results 2026-11-17"
  ],
  "failed": [
   [
@@ -36,7 +36,7 @@
   ]
  ],
  "note": "Raw captures only. Nothing in data/raw/*.json that a snapshot owner committed is overwritten by this script - a parsed result is written as _capture_*.json so a verifier can diff it against the committed snapshot before it is promoted.",
- "workflow_run_at_utc": "2026-11-14T09:50:31Z",
+ "workflow_run_at_utc": "2026-11-14T09:58:31Z",
  "workflow_ref": "refs/heads/arena/ef6ff2a4-nba1",
  "fetch_outcome": "success",
  "build_outcome": "success"
