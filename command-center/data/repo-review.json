@@ -1,8 +1,8 @@
 {
  "title": "Repository Review",
- "scope": "Line-by-line review of wingbangboozle1-lang/NBA1 at commit 2f44c98 (main, after PR #18), plus every file this session added.",
- "method": "Every claim below was checked by opening the file or running the command named in the 'check' column. Nothing is accepted because a page says so. Where the check needed an official source, the official URL is given.",
- "verdict": "No incorrect number, broken link or fabricated source was found in the merged tree. The irregularities found are structural and are listed at the end: two labs with no shared navigation, stale dated counts in older authored pages, a refresh script that has never run, and eight pages whose data is a snapshot rather than a live feed.",
+ "scope": "183 tracked files at commit 2f44c98 plus this session's changes: three coexisting builds (root Edge Lab, docs/b Origination Desk, command-center), their generators in scripts/ and engine/, and the captured data under data/raw, data/derived and docs/data.",
+ "method": "Values were re-derived from the repository's own JSON rather than read from any page's prose. Each row of the checks table names the command or comparison used, so every result is reproducible. Static markup was checked with scripts/check_links.py; pages that build their tables in the browser were checked by scripts/check_rendered.py, which executes each page's own script against the real data files and inspects the output. Official sources were confirmed reachable from a GitHub-hosted runner, and the current slate was re-read independently hours after capture.",
+ "verdict": "No incorrect number, broken link or fabricated source was found in the merged tree. Every published metric recomputes from the repository's own data, and every rendered table row on the new Command Center links to an official source. Nine irregularities were found and are listed below; none of them blocks publication, and the three that matter are structural rather than numerical: no market price exists anywhere (I4), minutes cover 50 of 465 players (I5), and the refresh pipeline's parsers have never run end to end (I3). Two defects were found and fixed during this review: signed error columns were labelled as absolute values (I7), and one page claimed four strategies produced zero plays when two of them had upcoming plays (I6).",
  "tree": [
   {
    "path": "index.html",
@@ -285,6 +285,24 @@
    "impact": "A reader could read a 40-point miss as a 40-point hit. No published metric changes, because the averages were already means of absolute values.",
    "action_taken": "Relabelled the columns with the sign convention, switched the row filter to compare magnitudes, and flagged it as R13.",
    "flag": "R13",
+   "ref": "S3"
+  },
+  {
+   "id": "I8",
+   "severity": "LOW",
+   "issue": "A newer injury edition exists than the one this build quotes",
+   "impact": "Statuses could in principle differ between the 19:30 and 19:45 editions; every status spot-checked agreed, but no cell-by-cell PDF diff is published.",
+   "action_taken": "Disclosed beside the status table, spot-checked five statuses and the visible 11/14 block, flagged R14.",
+   "flag": "R14",
+   "ref": "S6"
+  },
+  {
+   "id": "I9",
+   "severity": "LOW",
+   "issue": "The refresh script duplicated its own capture-log entry on a second run",
+   "impact": "One capture appeared as two events on the Sources page.",
+   "action_taken": "Made the script idempotent, removed the duplicate by re-running it, flagged R15.",
+   "flag": "R15",
    "ref": "S3"
   }
  ]

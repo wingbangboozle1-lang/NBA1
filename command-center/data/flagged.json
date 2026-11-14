@@ -156,6 +156,17 @@
    "suggested_action": "Archive every edition under its own timestamp and diff consecutive editions, which is exactly suggestion S07. Until then, quote the edition time beside every status, as this site does.",
    "source": "NBA Official Injury Report, 11/13/26 07:45 PM ET edition (PDF)",
    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_45PM.pdf"
+  },
+  {
+   "id": "R15",
+   "severity": "LOW",
+   "area": "Reproducibility",
+   "title": "The refresh transcription script duplicated its own capture log on a second run",
+   "detail": "scripts_refresh/refresh_2026_11_13_t1938.py appended a new entry to sources.json's refresh_log every time it ran, without checking whether that capture time was already present. Running it twice wrote the same capture twice, and the Sources page then showed one capture as two separate events. The script is now idempotent (one entry per captured_at_utc, sorted oldest first), and the duplicate already in the data was removed by re-running it.",
+   "affected": "data/raw/sources.json, command-center/data/sources.json, the Sources page capture history.",
+   "suggested_action": "Any script that appends to an accumulated log must key on a unique field. This is the same class of defect as an append-only log with no de-duplication anywhere else in the pipeline.",
+   "source": "The script and its output in this repository",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts_refresh/refresh_2026_11_13_t1938.py"
   }
  ]
 }
