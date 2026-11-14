@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source register &middot; NBA Line Origination Desk</title>
+<meta name="description" content="NBA lines originated from official NBA.com final scores, with a gated strategy leaderboard.">
+<link rel="stylesheet" href="../assets/style.css">
+
+</head><body>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html"><span class="dot"></span>NBA&nbsp;Line&nbsp;Origination&nbsp;Desk</a>
+  <div class="cap">Official capture 2026-11-14 00:42 UTC</div>
+  <nav><div class="navgroup"><h4>Overview</h4><ul>
+<li><a href="../index.html">Executive dashboard</a></li>
+</ul></div>
+<div class="navgroup"><h4>Lines and game flow</h4><ul>
+<li><a href="lines.html">Originated lines</a></li>
+<li><a href="gameflow.html">Game flow and rest</a></li>
+</ul></div>
+<div class="navgroup"><h4>Strategy lab</h4><ul>
+<li><a href="strategies.html">Strategy library</a></li>
+<li><a href="leaderboard.html">Leaderboard and rewards</a></li>
+<li><a href="gates.html">Validation gates</a></li>
+<li><a href="luck.html">Luck removal and power</a></li>
+<li><a href="signals.html">Signal study</a></li>
+</ul></div>
+<div class="navgroup"><h4>Model and data</h4><ul>
+<li><a href="teams.html">Team ratings</a></li>
+<li><a href="backtest.html">Walk-forward backtest</a></li>
+<li><a href="gamelog.html">Official game log</a></li>
+<li><a href="correlations.html">Correlations and parlays</a></li>
+<li><a href="method.html">Method</a></li>
+</ul></div>
+<div class="navgroup"><h4>Availability</h4><ul>
+<li><a href="injuries.html">Injuries and rotation</a></li>
+<li><a href="props.html">Player props</a></li>
+</ul></div>
+<div class="navgroup"><h4>Governance</h4><ul>
+<li><a href="questions.html">Open questions</a></li>
+<li><a href="suggestions.html">Suggestions</a></li>
+<li><a class="active" href="sources.html">Source register</a></li>
+<li><a href="flagged.html">Flagged for review</a></li>
+<li><a href="repo-review.html">Repository review</a></li>
+</ul></div></nav>
+  <div class="sidenote">
+    Every table row links to the official page it was read from.
+    A dash means the value is not published, not that it is zero.
+  </div>
+</aside>
+<main class="main">
+  <header class="top">
+    <h1>Source register</h1>
+    <p class="sub">Every official source used, what it is used for, and what was deliberately left out.</p>
+  </header>
+  <div class="banner">
+    <strong>No strategy is funded.</strong> All 12 flagged items and every unvalidated number are published
+    <a href="flagged.html">here</a>. There is no market odds feed, so nothing on this site is a claim of real-world profit.
+  </div>
+  
+<section class="card">
+  <h3>Source register</h3>
+  <p>Every figure on this site traces to one of these. A value that cannot be traced to one of them is left blank
+  and flagged rather than estimated. All hosts are official NBA properties or GitHub.</p>
+  <div class="tablewrap"><table class="tbl" data-sortable><thead><tr><th>ID</th><th>Source</th><th>Publisher</th><th>What it is used for</th><th>Captured</th><th>Link</th></tr></thead><tbody><tr><td><code>S1</code></td><td>NBA.com Games &amp; Scores (by date)</td><td>NBA.com (official)</td><td>The complete game log: every final score from 2026-10-20 to 2026-11-12 (151 games), plus the three-day slate 2026-11-14 to 2026-11-16 (22 games) with tip times and the records printed on each game card.</td><td>2026-11-14T00:42Z</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">www.nba.com/games?date=2026-11-14</a></td></tr><tr><td><code>S2</code></td><td>NBA.com Standings 2026-27</td><td>NBA.com (official)</td><td>Won-lost records for all 30 teams through the games of 2026-11-12. Used as the independent check that the game log is complete and correctly oriented.</td><td>2026-11-14T00:45Z</td><td><a class="src" href="https://www.nba.com/standings" target="_blank" rel="noopener">www.nba.com/standings</a></td></tr><tr><td><code>S3</code></td><td>NBA Official Injury Report - 11/13/26 07:30 PM edition</td><td>NBA Official (official.nba.com)</td><td>Player participation status and reason for the 2026-11-13 and 2026-11-14 slates. 122 rows transcribed verbatim.</td><td>2026-11-14T00:44Z</td><td><a class="src" href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf</a></td></tr><tr><td><code>S4</code></td><td>NBA Injury Report index - 2026-27 season</td><td>NBA Official</td><td>The index of every published edition, used to identify the most recent edition at capture time; also the reporting-deadline policy.</td><td>2026-11-14T00:44Z</td><td><a class="src" href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">official.nba.com/nba-injury-report-2026-27-season/</a></td></tr><tr><td><code>S5</code></td><td>NBA.com Stats - Teams Advanced</td><td>NBA.com (official)</td><td>Referenced as the authoritative definition of the efficiency columns. NOT used as model input this session: the table is rendered client-side and returns no rows to a plain fetch, so no value from it is asserted here.</td><td>2026-11-14T00:47Z (attempted)</td><td><a class="src" href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">www.nba.com/stats/teams/advanced</a></td></tr><tr><td><code>S6</code></td><td>NBA.com Stats - Players Traditional (page 1)</td><td>NBA.com (official)</td><td>Season averages for the 50 highest scorers, captured by an earlier session on 2026-11-13. Used only to size the production at risk when an injured player appears in it. Not a game log.</td><td>2026-11-13T22:30Z by session arena-7cfd203a / arena/91270bb6-nba1</td><td><a class="src" href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">www.nba.com/stats/players/traditional</a></td></tr><tr><td><code>S7</code></td><td>NBA.com Stats - Players Traditional sorted by minutes</td><td>NBA.com (official)</td><td>Minutes per game for the 24 highest-usage players, captured by an earlier session on 2026-11-13. The only verified minutes data in the repository. Not a game log.</td><td>2026-11-13 by session arena-7cfd203a</td><td><a class="src" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=MIN" target="_blank" rel="noopener">www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=MIN</a></td></tr><tr><td><code>S8</code></td><td>NBA Rule No. 5 - Scoring and Timing</td><td>NBA Official</td><td>Confirms the game length (four 12-minute quarters, five-minute overtime) used to interpret the OT flag in the game log.</td><td>2026-11-14</td><td><a class="src" href="https://official.nba.com/rule-no-5-scoring-and-timing/" target="_blank" rel="noopener">official.nba.com/rule-no-5-scoring-and-timing/</a></td></tr><tr><td><code>S9</code></td><td>NBA.com Stats glossary</td><td>NBA.com (official)</td><td>Definitions of the efficiency terms used in the method notes.</td><td>2026-11-14</td><td><a class="src" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">www.nba.com/stats/help/glossary</a></td></tr><tr><td><code>S10</code></td><td>GitHub Docs - Using custom workflows with GitHub Pages</td><td>GitHub (official)</td><td>The publishing mechanism used by this repository&#x27;s Pages workflow.</td><td>2026-11-14</td><td><a class="src" href="https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages" target="_blank" rel="noopener">docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages</a></td></tr></tbody></table></div>
+</section>
+<section class="card">
+  <h3>What is deliberately not used</h3>
+  <ul class="plain">
+    <li><strong>Efficiency numbers from earlier sessions.</strong> They were captured from NBA.com Stats tables
+        that render client-side and could not be re-read here, so they could not be re-verified this session.
+        Nothing in this build depends on them.</li>
+    <li><strong>Any odds source.</strong> None is official.</li>
+    <li><strong>Any inferred result.</strong> The 23 games published without scores are listed as fixtures with
+        blank scores, even though the standings residual would determine them.</li>
+  </ul>
+</section>
+
+  <footer class="foot">
+    <p>Session <code>arena/e32856d8-nba1</code>. Official capture 2026-11-14 00:42 UTC.
+    Model inputs: official NBA.com final scores and schedule only.
+    <a href="sources.html">Source register</a> &middot;
+    <a href="method.html">Method</a> &middot;
+    <a href="flagged.html">Flagged for review</a> &middot;
+    <a href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">Repository</a></p>
+  </footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>

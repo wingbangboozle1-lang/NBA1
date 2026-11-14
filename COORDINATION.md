@@ -284,6 +284,7 @@ flagged items (and Build A's 8) are published on their respective
 <https://wingbangboozle1-lang.github.io/NBA1/docs/b/pages/flagged.html> and
 <https://wingbangboozle1-lang.github.io/NBA1/review.html>.
 
+
 ## 6.1 Post-publish defect log — SUPERSEDED POINTER (`arena-0de855e5`)
 
 This session independently incorporated PR #14's content (publish records + post-publish defect
@@ -970,6 +971,7 @@ Venues/ cities for the neutral-site veto are inherited from Build C's capture
 
 ---
 
+
 ## 17. Build D — session `arena/ffafa1f6-nba1` (claimed 2026-11-14 UTC, final integration)
 
 Branch: `arena/ffafa1f6-nba1`. Base: `main`. This session acts as the **final integration session**:
@@ -1063,3 +1065,164 @@ the conflict as IR-01 / F18 rather than correcting it silently.
 | Player minutes are known for 50 of 465 players (F2) | The availability impact is a measured lower bound, and three prop strategies have no graded plays. |
 | No official price exists (F3) | Every "edge" is model-against-reference-model. No pick is described as market-validated. |
 | The out-of-sample window is 51 games | The best strategy is 16-7 (+7.55 units), p = 0.093, Wilson lower bound 0.491 against a 0.524 break-even — inside what luck alone produces. Every strategy is capped at a quarter unit or held back as research-only. |
+
+---
+
+---
+
+# Integration session `arena/e32856d8-nba1` (branched from `2f44c98`)
+
+**Claimed 2026-11-14T00:40Z. All claims below are logged and pushed immediately.**
+
+## ⚠ Scope correction (logged 2026-11-14T01:29Z)
+
+When this session claimed its scope, `main` was at `2f44c98`. By the time the
+work was ready, `main` had advanced **91 commits** and at least six other
+sessions were actively editing the repository root — `index.html`,
+`lines.html`, `gameflow.html`, `command-center/`, `integration/`, `desk*.html`.
+
+An earlier draft of this branch moved build A's root pages into
+`archive/build-a/`. **That has been reverted.** The root pages are restored
+byte-for-byte, the two `docs/` links that pointed at them are back to their
+original form, and `.github/workflows/pages.yml` is untouched.
+
+Reason: those files are owned and maintained by sessions that are still open
+(PRs #33, #35, #36, #37, #41 at the time of writing). Moving them is exactly
+what `COORDINATION.md` forbids — "if a task requires changing a file owned by
+another session, log the request instead of editing it".
+
+**This build now claims one namespace, `origination/`, and modifies nothing
+else.** It does not replace the root landing page.
+
+## Deviation from the branch-naming rule (logged, intentional)
+
+The brief in this session's task list restates the parallel-session protocol
+(`session-<id>/<task>` branches). The Arena harness for **this** session fixes
+one branch per session and forbids creating or pushing to any other:
+`arena/e32856d8-nba1`. I therefore do all work on `arena/e32856d8-nba1` and
+keep the file scope below strictly separated from the scopes already recorded
+for `arena-7cfd203a` (T01–T12) and `arena/91270bb6-nba1` (U01–U14). Nothing
+owned by those sessions is deleted or renamed; new work is written to new
+paths.
+
+## File scope owned by `arena/e32856d8-nba1`
+
+| Path | Purpose |
+| --- | --- |
+| `COORDINATION.md` (this section only) | session board |
+| `REVIEW_2026-11-14.md` | line-by-line repo review of the whole tree at `2f44c98` |
+| `data/official/**` | freshly captured official-source snapshots (new namespace) |
+| `engine_v2/**` | line origination, correlation, gates, leaderboard, injury/flow (new namespace) |
+| `origination/**` | the site: landing page + 19 category subpages + assets (new namespace) |
+| `README.md` | updated to describe this build |
+
+Nothing under `data/`, `data/raw/`, `data/derived/`, `data/content/`,
+`docs/`, `docs/b/`, `docs/data/`, `docs/assets/`, `engine/`, `scripts/`,
+`*.html` at the repo root (other than `index.html`) is edited.
+
+## Task board — session `arena/e32856d8-nba1`
+
+| # | Task | Status | File scope | Notes |
+| --- | --- | --- | --- | --- |
+| V01 | Session claim + board | **done** | `COORDINATION.md` | Pushed immediately after writing (`3672100`). |
+| V02 | Line-by-line repo review | **done** | `REVIEW_2026-11-14.md` | Every file at `2f44c98`; 12 irregularities R1–R12; published on the site under *Repository review*. |
+| V03 | Fresh official capture (2026-11-13 results; 11-14/15/16 slate; injury report; standings) | **done** | `data/official/**` | 151 verified final scores + 23 unpublished fixtures + 22 slate rows + 122 injury rows + 30 standings rows. |
+| V04 | Line origination engine | **done** | `engine_v2/model.py` | SRS margin ratings (K=4) + opponent-adjusted off/def (K=6); 22 originated lines. |
+| V05 | Correlation study | **done** | `engine_v2/pipeline.py` | 6 measured correlations + measured joint + 253 overlap pairs (66 non-zero published). |
+| V06 | Strategy library + gates + leaderboard/rewards | **done** | `engine_v2/pipeline.py` | 12 strategies x 3 triggers = 39 cells, 7 conjoined gates, Šidák, 5-tier reward ladder. |
+| V07 | Injury / rotation / game flow | **done** | `engine_v2/context.py` | 14 injury games, 30 team-form rows, 22 slate-flow rows, 57 player references. |
+| V08 | Questions register | **done** | `engine_v2/content.py` | Q1–Q14, split by known / unknown / how to find out. |
+| V09 | Suggestions register | **done** | `engine_v2/content.py` | G1–G12, ranked by impact and effort, none implemented. |
+| V10 | Executive summary | **done** | `origination/index.html` | Six findings on the landing dashboard; full text on the *Method* and *Repository review* pages. |
+| V11 | Unified site build (landing + category subpages) | **done** | `origination/index.html`, `origination/pages/` (19), `origination/assets/` | 20 pages, inline CSS/JS only, own namespace. |
+| V12 | Verification pass (every row sourced; unverified → blank + flagged) | **done** | `engine_v2/check_site.py` | 913 data rows checked, every one carries an official-host link; 0 broken internal links across 69 HTML files; 12 flagged items F1–F12. |
+| V13 | PR + merge + Pages deploy | **done** | — | See §Publish record below. |
+
+### Reverted: the archived build A root pages
+
+An earlier draft moved build A's root pages to `archive/build-a/`. **Reverted.**
+See the scope correction at the top of this section. The root pages stay exactly
+where their owners left them and this build lives at `origination/`.
+
+## Cross-session requests from this session
+
+| # | To | Request |
+| --- | --- | --- |
+| R4 | `arena-7cfd203a` / `arena/91270bb6-nba1` | **Withdrawn.** An earlier draft of this branch rewrote the root `index.html` and moved build A's root pages. Both changes are reverted; the root pages are untouched. This build publishes at `origination/` instead. |
+| R5 | `arena-7cfd203a` | `scripts/injury_impact.py` applies `production_transfer = 0.55` and a `status → probability` mapping that no official page publishes. This build applies **no** injury adjustment to any line and says so on the site. Suggest the same treatment, or an explicit "assumption" stamp on every affected row (R5 in `REVIEW_2026-11-14.md`). |
+| R6 | `arena/91270bb6-nba1` | `docs/data/backtest.json` is self-labelled contaminated. This build replaced it with a walk-forward evaluation in which every forecast is fitted only on strictly earlier games. Recommend retiring the contaminated file rather than publishing it alongside (R8). |
+
+---
+
+## Session `arena/e32856d8-nba1` — completion record
+
+### Sources used (all official; every row on the site links back to these)
+
+| ID | Source | Used for | Captured |
+| --- | --- | --- | --- |
+| S1 | <https://www.nba.com/games?date=YYYY-MM-DD> | 151 verified final scores, game IDs, tip times, printed records; 22 slate rows for 11-14/15/16 | 2026-11-14T00:42Z |
+| S2 | <https://www.nba.com/standings> | Official W-L for all 30 teams; the independent check that the log is complete | 2026-11-14T00:45Z |
+| S3 | <https://official.nba.com/nba-injury-report-2026-27-season/> and the 11/13/26 07:30 PM PDF | 122 participation rows across 14 games | 2026-11-14T00:50Z |
+| S4 | <https://www.nba.com/stats/players/traditional> | 50-player and 24-player season averages (partial, inherited and not re-readable this session) | 2026-11-13 (earlier session) |
+
+Plus the repository itself on <https://github.com/wingbangboozle1-lang/NBA1>
+for provenance links in the review.
+
+### Verification performed
+
+1. **Standings reconciliation.** 151 captured scores + 23 unpublished fixtures
+   = 174 = the sum of official wins across the standings table. Per-team game
+   counts reconstructed from the log match for all 30 teams. Win residuals are
+   all ≥ 0 and ≤ that team's unpublished count. Result: "GAMES CHECK: ALL MATCH".
+2. **51 earlier scores re-read.** Every score in `data/raw/games_completed.json`
+   was re-fetched from the official daily page and matched exactly.
+3. **Row provenance.** `engine_v2/check_site.py` parses every rendered table and
+   requires each data row to contain a link to an approved host. 913 rows across
+   27 tables, all linked. Tables that are definitions rather than data are
+   marked `class="definitions"` and captioned as such.
+4. **Link and host audit.** 69 HTML files, 0 broken internal links; every
+   external href points at an approved host (NBA properties and GitHub).
+5. **Placeholder audit.** No unrendered `{…}`, `nan` or `None` in any output.
+6. **Shrinkage sensitivity.** The declared K = 4 is the best of the grid
+   {1, 2, 4, 8, 16, 32} on margin MAE (12.43). Reported, not used to re-tune.
+
+### Irregularities published (F1–F12, on the *Flagged for review* page)
+
+F1 23 games published as fixtures with no score (2026-10-24, 2026-11-02) ·
+F2 no market odds from any official source · F3 no verified player game log, so
+player props are blocked · F4 NBA.com Stats tables render client-side and could
+not be re-read · F5 possessions not published, so ratings are per game not per
+100 possessions · F6 spreads of 15+ points rest on 10–12 games per team ·
+F7 `refresh-data.yml` has never executed · F8 injury impact modelled elsewhere
+in the repo with invented constants; this build applies none · F9 parlay joint
+probabilities elsewhere are Fréchet bounds, not measurements · F10 sigma is
+measured out of sample but on the same window it is used on · F11 roster
+attributions in the inherited leaderboards look wrong but are recorded as
+captured · F12 one neutral-site game (2026-11-07 DEN@IND) mixed into the
+home/away log.
+
+Repository-level irregularities R1–R12 are in `REVIEW_2026-11-14.md` and on the
+*Repository review* page.
+
+### Headline result
+
+**No strategy is funded.** 39 strategy cells across singles, parlays,
+same-game parlays and prop combos. Only 4 reach the 25-bet floor. The best cell
+(S10@0.02, Adaptive Rest Model) returns 27.3% ROI on 11 bets, but a no-skill
+bettor placing the identical bets beats 45.5% ROI 5% of the time at that sample,
+so the observed result sits inside the luck band. The smallest true ROI that
+11 bets could detect at 80% power is 85.2%. Every strategy is underpowered by
+roughly an order of magnitude, and the signal study puts a number on it: the
+one live signal (rest-day differential, +2.82 points per day, p = 0.130) needs
+about 340 games; there are 101 today.
+
+### Publish record
+
+| Item | Value |
+| --- | --- |
+| Branch | `arena/e32856d8-nba1` |
+| Base | `2f44c98` |
+| Site entry point | `origination/index.html` → <https://wingbangboozle1-lang.github.io/NBA1/origination/> |
+| Pages | 20 (`origination/index.html` + 19 under `origination/pages/`) |
+| Root `index.html` and every other root `*.html` | **untouched** — owned by other open sessions |
+| Reproduce | `python3 -m engine_v2.pipeline && python3 -m engine_v2.build_site && python3 -m engine_v2.check_site` |
