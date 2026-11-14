@@ -1357,3 +1357,17 @@ Limits: the NBA.com pages were read with the fetch tool (not a browser), and the
 | 2026-11-14 | Built `docs/audit/index.html` (static, no JavaScript). Every table row links to an NBA.com page or to repository evidence labelled as such. The builder refuses to run on a mismatch. |
 | 2026-11-14 | Opened PR [#20](https://github.com/wingbangboozle1-lang/NBA1/pull/20) from `arena/9abdf3f7-nba1` into `main`, **not merged**, for the integration session to review and merge (see 14.4). |
 | 2026-11-14 | Merged `origin/main` (PR #19 and PR #22) into this branch; resolved the `COORDINATION.md` conflict by keeping both sides. Re-checked I-01 to I-10 against `main`; status column added to the audit page. |
+
+---
+
+## 18. Session `arena/ebdf1d21-nba1` — Build D: live-horizon lines & picks (claimed 2026-11-14, UTC)
+
+Single-branch session: `arena/ebdf1d21-nba1` (Arena pins the session to one branch; no task branches or worktrees are created). Claimed after reading this board; no active task owns the files below. Scope closes the last open brief requirement — **F-C07 / §7.3: no lines or picks exist for the 11/14–11/17 horizon** — without touching any file another session owns beyond a single nav entry on `index.html`.
+
+| # | Task | Status | File scope | Notes |
+| --- | --- | --- | --- | --- |
+| P01 | Board sync + claim | done | `COORDINATION.md` (this section only) | Branch synced to `origin/main`; PRs from other sessions confirmed open and left to their owners. |
+| P02 | Probe for newer official data | in progress | `data/raw/d/*.json` (new files) | Check whether any injury-report edition newer than the 11/13 05:15 PM PDF is retrievable, and the 11/13 scoreboard state; document what is still unavailable (11/13 finals, 11/14 reports). |
+| P03 | Originate lines + picks for 11/14–11/17 | in progress | `scripts/generate_picks_d.py` (new), `data/derived/picks_d.json` (new) | Reuse the existing verified inputs (official schedule capture, newest retrievable injury edition, team stats as of 11/12); every line and pick carries an as-of stamp; singles, parlays and prop combos pass the same style of gates as Builds A/B. |
+| P04 | Publish picks page + nav entry | not started | `picks-2026-11-14.html` (new), `index.html` (one entry only) | Every table row sourced; unverified values blank; Build D flags listed on the page itself. |
+| P05 | Verify, PR, merge, Pages confirm | not started | whole repo (integration) | `scripts/verify_all.py` + link checks; PR to `main`; merge without approval; confirm Pages deploy; record here. |
