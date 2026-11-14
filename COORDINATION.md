@@ -2740,3 +2740,19 @@ two shared files that other sessions and the workflow own. The branch was theref
 with `--force-with-lease`, dropping that one CI commit and nothing else; no session's record was discarded,
 and the dropped commit remains reachable on `origin/arena/a3e092a2-nba1`'s reflog history until the next
 push. This is the same `probe-official.yml` interference §18 and §21 logged.
+
+### 28.5 Pages gate state at this PR, recorded exactly
+
+PR: <https://github.com/wingbangboozle1-lang/NBA1/pull/69>.
+
+| Run | Head | `validate` | What it means |
+| --- | --- | --- | --- |
+| `43588041541` | `a2ab89f` (before the first merge of main) | **failed** | The branch was behind main, whose newer probe record made `verification.html` stale; the workflow's "require it to be current" step is what went red. Fixed by merging main and regenerating the page. |
+| `43589313097` | `99b9de2` | **passed, 1m17s** | All ten validate steps green with `strategy-lab/**` in the tree. |
+| `43590705185` | `72bc214` | **cancelled, not failed** (the rollup shows *fail*; the job conclusion is `cancelled`, and `deploy` is `cancelled` because it is gated on it) | The `pages.yml` `concurrency: pages` + `cancel-in-progress` group is shared by every PR and every push to `main`; main ran PR #71 and a scheduled refresh while this run was in flight, which killed it before it finished. `gh run rerun` refuses ("workflow file may be broken") because main's workflow file changed underneath the pinned run. This is the same repo-wide defect PR #65 documents and PR #75 is fixing, and the reason PR #68 records two cancelled runs. |
+
+Every validate step was therefore executed locally on this exact tree, in workflow order, and all are
+green: `check_site.py`, the build-B data presence/parse check, `verify_integration.py` (0 errors),
+`render_check.mjs` (122 pages, 0 problems), the probe-record count assert, `build_verification_page.py`
+idempotence (0 dirty lines after regeneration), the Command Center 17-page/data check, `check_links.py`,
+`check_rendered.py`, `verify_all.py`, and this directory's own `strategy-lab/check.py` (0 problems).
