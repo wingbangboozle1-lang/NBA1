@@ -1367,6 +1367,18 @@ def ensure_row_sources():
     targets = ["summary.html", "slate.html", "suggestions.html", "review.html", "sources.html",
                "research.html", "strategies.html", "games.html", "injuries.html", "picks.html",
                "questions.html", "flagged.html"]
+    # A page-level truth banner, injected on every generated page so it survives a rebuild. The
+    # snapshot is frozen on purpose: its figures were true at the 13 November cut, and nothing on
+    # these pages is regenerated from the refreshed data.
+    banner = (
+        '<div class="note" style="border-left:4px solid #b4231c;background:#fdeceb;padding:10px 14px;'
+        'margin:0 0 16px">'
+        '<strong>Frozen snapshot, 13 November 2026.</strong> Every figure on this page was true at the '
+        '13 November data cut and is deliberately not rewritten, so the snapshot stays reproducible. '
+        'The current window is <strong>14\u201316 November (22 games)</strong> with the 19:30 ET injury '
+        'report \u2014 see the <a href="../command-center/index.html">Command Center</a>.'
+        '</div>'
+    )
     links = {
         "outcomes": '<a href="https://www.nba.com/games" target="_blank" rel="noopener">NBA game outcomes</a>',
         "stats": '<a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season" target="_blank" rel="noopener">NBA stats</a>',
@@ -1421,6 +1433,22 @@ def ensure_row_sources():
             pos = m.end()
         out.append(txt[pos:])
         txt = "".join(out)
+        # Prepend the frozen-snapshot banner once. Idempotent: a file that already carries it is
+        # left alone, so repeated builds cannot stack banners.
+        if "Frozen snapshot, 13 November 2026" not in txt:
+            mh = re.search(r"<h1[^>]*>.*?</h1>\s*", txt, re.S)
+            if mh:
+                txt = txt[:mh.end()] + banner + "\n" + txt[mh.end():]
+            else:
+                mm = re.search(r"<main[^>]*>\s*", txt, re.S)
+                if mm:
+                    txt = txt[:mm.end()] + banner + "\n" + txt[mm.end():]
+                else:
+                    mw = re.search(r'<div class="wrap">\s*', txt, re.S)
+                    if mw:
+                        txt = txt[:mw.end()] + banner + "\n" + txt[mw.end():]
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(txt)
         if fixed_here:
             # Give EVERY table in this file that gained a cell a matching header. The callback must
             # return the whole match including the closing tag, or the thead is left malformed.

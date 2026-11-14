@@ -106,6 +106,7 @@
         const f=(S[r.id]?.gates||[]).find(g=>g.status==="FAIL");
         return f ? `<span class="small"><b>${CC.esc(f.id)}</b> ${CC.esc(f.name)}</span>` : `<span class="small faint">none</span>`;
       }},
+      {h:"Source", v:r=>CC.src(r.id==="S1"?"S2":"S3", r.id==="S1" ? "training window" : "games & scores")},
     ], rows));
     document.getElementById("lbnote").textContent =
       "Composite weights: " + JSON.stringify(LB.weights) + ". Formula: " + LB.formula +
@@ -123,6 +124,7 @@
         const n = V.strategies.filter(s => (s.gates||[]).some(g=>g.id===r.id && g.status==="PASS")).length;
         return n===0 ? CC.tag("nothing passes","r") : n===V.strategies.length ? CC.tag("all pass","g") : CC.tag("partial","a");
       }},
+      {h:"Source", v:()=>CC.src("S2","training window")},
     ], V.gate_definitions));
 
     CC.set("#strat", V.strategies.map(s => `
@@ -130,6 +132,7 @@
         <span class="tag n">${CC.esc(s.family||"")}</span>
         <span class="mono small">${s.wins}–${s.losses} · n=${s.n_graded}</span>
         <span class="tag ${s.gates.some(g=>g.status==="FAIL")?"r":"a"}">${s.gates.filter(g=>g.status==="PASS").length}/7</span>
+        <span class="tag n">${CC.esc(s.gradeable?"gradeable":"ungradeable")}</span>
         </summary>
       <div class="body">
         <p><strong>Rule.</strong> ${CC.esc(s.rule||"")}</p>
@@ -143,12 +146,13 @@
           <dt>Mean model probability</dt><dd>${CC.pct(s.mean_p_model,1)} (break-even is 52.38%)</dd>
         </dl>
         <div class="tw" style="margin-top:10px"><table class="thin">
-          <thead><tr><th>Gate</th><th>Requirement</th><th>Result this run</th><th>Status</th></tr></thead>
+          <thead><tr><th>Gate</th><th>Requirement</th><th>Result this run</th><th>Status</th><th>Source</th></tr></thead>
           <tbody>${(s.gates||[]).map(g=>`<tr>
             <td><b>${CC.esc(g.id)}</b> ${CC.esc(g.name)}</td>
             <td class="small">${CC.esc(g.threshold)}</td>
             <td class="small">${CC.esc(g.detail)}</td>
             <td>${g.status==="PASS"?CC.tag("PASS","g"):g.status==="FAIL"?CC.tag("FAIL","r"):CC.tag(g.status,"n")}</td>
+            <td class="small">${CC.src(s.id==="S1"?"S2":"S3", s.id==="S1" ? "training window" : "games & scores")}</td>
           </tr>`).join("")}</tbody>
         </table></div>
       </div></details>`).join(""));

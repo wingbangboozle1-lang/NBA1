@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions · NBA1 Command Center</title>
+<meta name="description" content="Ten decisions, each with options, effort, risk and what it unlocks">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a href="index.html">Dashboard</a>
+    <a href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a href="slate.html">Slate &amp; lines</a>
+    <a href="picks.html">Picks</a>
+    <a href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html">Validation gates</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="luck.html">Luck</a>
+    <a href="backtest.html">Game log</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="gameflow.html">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html" class="on">Suggestions</a>
+    <a href="flagged.html">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+  <div class="main">
+    <div class="top"><div><h1>Suggestions</h1><div class="sub">Ten decisions, each with options, effort, risk and what it unlocks</div></div><span class="asof" id="asof">as of …</span></div>
+    <div class="wrap">
+      <p class="lede">Suggestions are written as decisions, not as ideas. Each one states the problem,
+      the options with their effort and risk, what each option unlocks, and a recommendation — so a
+      reviewer can pick a path in one reading instead of commissioning an investigation.</p>
+
+      <div class="bn info"><div class="ico">i</div><div>
+        <p><strong>Nothing here has been implemented except where a card says so.</strong> Cards that
+        describe a change already made in this session say so explicitly and link to the page where it
+        can be judged.</p>
+      </div></div>
+
+      <div class="tools">
+        <label>Category <select id="f-cat"><option value="">All categories</option></select></label>
+        <span class="count" id="cnt"></span>
+      </div>
+      <div id="list"><div class="empty">Loading…</div></div>
+      <p class="tnote" id="scoring"></p>
+    </div>
+    <footer class="bot">
+      <p><strong>NBA1 Command Center.</strong> Every table row links to an official source; anything that could
+      not be confirmed is blank and listed on <a href="flagged.html">Flagged for Review</a>.</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association. Data © NBA, used with
+      attribution and links to the official pages.</p>
+    </footer>
+  </div>
+</div>
+<script>
+(async () => {
+  try {
+    const S = await CC.load("suggestions.json");
+    const cats = [...new Set(S.items.map(i=>i.cat))].sort();
+    const csel=document.getElementById("f-cat");
+    cats.forEach(c=>csel.insertAdjacentHTML("beforeend",`<option>${CC.esc(c)}</option>`));
+    document.getElementById("scoring").textContent = S.scoring_note;
+    let cat="";
+    function card(i){
+      return `<details><summary><b>${CC.esc(i.id)}</b> ${CC.esc(i.title)} <span class="tag n">${CC.esc(i.cat)}</span></summary>
+        <div class="body">
+          <p><strong>The problem.</strong> ${CC.esc(i.problem)}</p>
+          <div class="tw"><table class="thin"><thead><tr><th>Option</th><th>Effort</th><th>Risk</th><th>Unlocks</th><th>Reference</th></tr></thead>
+            <tbody>${i.options.map(o=>`<tr><td><b>${CC.esc(o.name)}</b></td>
+              <td>${CC.tag(o.effort, o.effort==="S"?"g":o.effort==="M"?"a":"r")}</td>
+              <td class="small">${CC.esc(o.risk)}</td><td class="small">${CC.esc(o.unlocks)}</td>
+              <td class="small">${CC.src(i.ref||"S7","stats")}</td></tr>`).join("")}</tbody>
+          </table></div>
+          <p style="margin-top:10px"><strong>Recommendation.</strong> ${CC.esc(i.recommendation)}</p>
+        </div></details>`;
+    }
+    function render(){
+      const xs = S.items.filter(i=>!cat||i.cat===cat);
+      CC.set("#list", xs.map(card).join(""));
+      document.getElementById("cnt").textContent = xs.length + " of " + S.items.length + " suggestions";
+    }
+    csel.onchange=e=>{cat=e.target.value;render();};
+    render();
+  } catch(e){ CC.fail("#list", e); }
+})();
+</script>
+</body>
+</html>

@@ -44,6 +44,17 @@ NAV = [
 
 STAMP = "2026-11-14"
 
+# Sibling builds. Build B is one of three entry points in this repository and a reader who lands
+# here has no way of knowing that, so the header carries an explicit switch between them.
+# Sibling builds live at the REPOSITORY root, not inside docs/b/, so their hrefs have to be built
+# from how far the page sits below the repo root: docs/b/index.html is two levels down and
+# docs/b/pages/*.html is three. Paths are given relative to the repo root and get that prefix.
+SIBLINGS = [
+    ("command-center/index.html", "Command Center", "current data, 14\u201316 Nov"),
+    ("index.html", "Edge Lab", "frozen 13 Nov snapshot"),
+]
+ROOT_PREFIX = {0: "../../", 1: "../../../"}
+
 
 def nav_html(active, depth):
     prefix = "" if depth == 0 else "../"
@@ -52,6 +63,10 @@ def nav_html(active, depth):
         href = prefix + (path if path else "index.html")
         cls = ' class="active"' if key == active else ""
         out.append(f'<a href="{href}"{cls}>{label}</a>')
+    out.append('<span class="navsep" aria-hidden="true"></span>')
+    root_prefix = ROOT_PREFIX[depth]
+    for href, label, note in SIBLINGS:
+        out.append(f'<a class="sib" href="{root_prefix}{href}" title="{note}">{label} \u2197</a>')
     return "\n".join(out)
 
 

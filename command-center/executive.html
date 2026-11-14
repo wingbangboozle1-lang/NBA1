@@ -69,7 +69,8 @@
     const live = ex.what_is_live_now.map(x => `<li>${CC.esc(x)}</li>`).join("");
     const notLive = ex.not_live_and_not_claimed.map(x => `<li>${CC.esc(x)}</li>`).join("");
     const acts = ex.recommended_next_actions.map(a =>
-      `<tr><td class="n">${a.rank}</td><td>${CC.esc(a.action)}</td><td class="small">${CC.esc(a.why)}</td></tr>`).join("");
+      `<tr><td class="n">${a.rank}</td><td>${CC.esc(a.action)}</td><td class="small">${CC.esc(a.why)}</td>
+        <td class="small">${CC.src(a.ref||"S1", a.ref_label||"stats")}</td></tr>`).join("");
 
     const m = val.metrics;
     CC.set("#body", `

@@ -131,7 +131,13 @@
       {h:"ρ adj.", n:1, v:r=>r.correlation_adjustment==null?CC.blank:CC.num(r.correlation_adjustment,3)},
       {h:"Result", v:()=>`<span class="blankdash">—</span>`},
       {h:"Gate status", v:r=>gateTag(r.strategy)},
-      {h:"Game", v:r=>CC.game((r.game_id||"").split("+")[0], "official")},
+      {h:"Game", v:r=>{
+        // A parlay's id is the legs joined by "+". Link every leg, or a reader cannot check the row.
+        const ids = String(r.game_id||"").split("+").filter(Boolean);
+        if (!ids.length) return CC.blank;
+        return ids.map(id => CC.game(id, ids.length > 1 ? "leg " + (ids.indexOf(id)+1) : "official"))
+                  .join(" ");
+      }},
     ];
 
     let date="", mkt="", q="";

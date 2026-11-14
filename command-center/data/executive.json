@@ -4,9 +4,9 @@
  "data_cut_et": "2026-11-13 19:38 ET",
  "headline": "Every line for the next three days is originated, gated and published from official data re-verified this session. Nothing is funded: the best strategy's record is still inside what luck produces.",
  "verdict": {
-  "status": "PROVISIONAL — NOT FUNDED",
+  "status": "PROVISIONAL \u2014 NOT FUNDED",
   "one_line": "Ten strategies, seven conformance gates, 51 strictly out-of-sample games. Zero strategies clear the skill gate; the leaderboard leader sits at Tier 3 (quarter-unit) because a gate, not a score, caps it.",
-  "why": "The model beats the naive reference on margin accuracy (MAE 12.89 vs 13.19) and loses on totals (14.86 vs 14.73) and on probability calibration (Brier 0.1970 vs 0.1889). The top strategy, S1, is 16-7 on 23 graded plays with an exact binomial p of 0.093 and a Wilson lower bound of 0.491 against a 0.524 break-even — a real run, not yet distinguishable from luck."
+  "why": "The model beats the naive reference on margin accuracy (MAE 12.89 vs 13.19) and loses on totals (14.86 vs 14.73) and on probability calibration (Brier 0.1970 vs 0.1889). The top strategy, S1, is 16-7 on 23 graded plays with an exact binomial p of 0.093 and a Wilson lower bound of 0.491 against a 0.524 break-even \u2014 a real run, not yet distinguishable from luck."
  },
  "what_changed_this_session": [
   {
@@ -43,7 +43,7 @@
  "what_is_live_now": [
   "Originated lines for all 22 upcoming games, each row carrying the game's own NBA.com link.",
   "59 paper picks across ten strategies, every one tagged with its strategy rule and gate status.",
-  "Player prop baselines for every captured player available on the three slates, with no probability attached (game-to-game variance is unmeasured — flagged F2/Q3).",
+  "Player prop baselines for every captured player available on the three slates, with no probability attached (game-to-game variance is unmeasured \u2014 flagged F2/Q3).",
   "Per-game injury impact with an explicit minutes-coverage figure beside every number, so a low-confidence row cannot be mistaken for a high-confidence one.",
   "25 open questions with the exact artefact that would close each one, and 8 suggestions each ending in a decision a reviewer can make.",
   "A line-by-line repository review with every claim tied to a file path, a commit or an official URL."
@@ -56,11 +56,41 @@
   "No betting recommendation. This is a research artefact."
  ],
  "recommended_next_actions": [
-  {"rank": 1, "action": "Instrument the engine with a price feed (or a dated manual quote table) and score against the market, not the reference line.", "why": "Every gate that matters economically (G3 edge, G4 skill) is currently measured against an unplayed reference line. That is the single biggest reason nothing can be funded."},
-  {"rank": 2, "action": "Extend the out-of-sample window past 100 games by letting the daily refresh run, and pre-register the gates before looking.", "why": "23 graded plays cannot separate skill from luck at any p threshold. The window is the binding constraint, not the model."},
-  {"rank": 3, "action": "Replace the daily injury snapshot with the pre-tip editions (the 19:30 ET report used here, plus a 2-hour-before-tip sweep).", "why": "Seven statuses changed between 17:15 and 19:30 ET. A stale availability number is worse than a blank one."},
-  {"rank": 4, "action": "Capture full-league minutes (all 465 player rows, not the top 50) so availability impact stops being a lower bound.", "why": "Minutes coverage per roster is 27-30%. Every injury impact figure is therefore an under-estimate, and the site says so on every row."},
-  {"rank": 5, "action": "Decide the retail price assumption explicitly (currently -110 flat) and publish a sensitivity band.", "why": "The break-even of 52.38% is an assumption, not a measurement. At -105 it is 51.2%; at -115 it is 53.5%. The verdicts are sensitive to it."}
+  {
+   "rank": 1,
+   "action": "Instrument the engine with a price feed (or a dated manual quote table) and score against the market, not the reference line.",
+   "why": "Every gate that matters economically (G3 edge, G4 skill) is currently measured against an unplayed reference line. That is the single biggest reason nothing can be funded.",
+   "ref": "S1",
+   "ref_label": "team stats"
+  },
+  {
+   "rank": 2,
+   "action": "Extend the out-of-sample window past 100 games by letting the daily refresh run, and pre-register the gates before looking.",
+   "why": "23 graded plays cannot separate skill from luck at any p threshold. The window is the binding constraint, not the model.",
+   "ref": "S3",
+   "ref_label": "games & scores"
+  },
+  {
+   "rank": 3,
+   "action": "Replace the daily injury snapshot with the pre-tip editions (the 19:30 ET report used here, plus a 2-hour-before-tip sweep).",
+   "why": "Seven statuses changed between 17:15 and 19:30 ET. A stale availability number is worse than a blank one.",
+   "ref": "S5",
+   "ref_label": "injury index"
+  },
+  {
+   "rank": 4,
+   "action": "Capture full-league minutes (all 465 player rows, not the top 50) so availability impact stops being a lower bound.",
+   "why": "Minutes coverage per roster is 27-30%. Every injury impact figure is therefore an under-estimate, and the site says so on every row.",
+   "ref": "S7",
+   "ref_label": "player stats"
+  },
+  {
+   "rank": 5,
+   "action": "Decide the retail price assumption explicitly (currently -110 flat) and publish a sensitivity band.",
+   "why": "The break-even of 52.38% is an assumption, not a measurement. At -105 it is 51.2%; at -115 it is 53.5%. The verdicts are sensitive to it.",
+   "ref": "S9",
+   "ref_label": "standings"
+  }
  ],
  "bottom_line": "The system does what was asked: it originates its own lines from official data, runs single bets, parlays, same-game parlays and player-prop combinations through conformance gates, measures correlations where it can and says where it cannot, removes luck with explicit binomial and bootstrap intervals, and publishes a reward-tiered leaderboard that refuses to promote anything on a short run. The honest result is that no strategy is funded, and the site says that on its front page rather than burying it.",
  "verification_rule": "Every published table row carries a source id or a direct official URL. A value that could not be traced to an official source is left blank and appears on the Flagged for Review page. Nothing is inferred, and a blank is never a zero."

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Injuries · NBA1 Command Center</title>
+<meta name="description" content="Every official status on the 19:30 ET report, with minutes-coverage confidence beside every impact figure">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a href="index.html">Dashboard</a>
+    <a href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a href="slate.html">Slate &amp; lines</a>
+    <a href="picks.html">Picks</a>
+    <a href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html">Validation gates</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="luck.html">Luck</a>
+    <a href="backtest.html">Game log</a>
+    <a href="injuries.html" class="on">Injuries</a>
+    <a href="gameflow.html">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="flagged.html">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+  <div class="main">
+    <div class="top"><div><h1>Injuries</h1><div class="sub">Every official status on the 19:30 ET report, with minutes-coverage confidence beside every impact figure</div></div><span class="asof" id="asof">as of …</span></div>
+    <div class="wrap">
+      <p class="lede">Transcribed row for row from the official NBA injury report, with the report's
+      own edition time. A status is what a team published about participation — not a forecast of
+      minutes, usage or production.</p>
+
+      <div class="bn bad"><div class="ico">!</div><div>
+        <p><strong>Read the confidence column before the impact column.</strong> The impact number needs
+        a player's minutes. Minutes are only known for the 50 players in the captured official player
+        table, so for everyone else the impact is counted as zero and the row says so. The figure is
+        therefore a <em>lower bound</em>, and a team with a low minutes-coverage percentage has a
+        near-meaningless impact number.</p>
+        <p class="small">An absent entry is not a healthy team. Where a team had not submitted a report,
+        the row reads "NOT YET SUBMITTED", exactly as published.</p>
+      </div></div>
+
+      <div class="kpis" id="kpis"></div>
+
+      <h2>Team-level availability, by game</h2>
+      <div id="teams"><div class="empty">Loading…</div></div>
+
+      <h2>Every listed player</h2>
+      <div class="tools">
+        <label>Date <select id="f-date"><option value="">All dates</option></select></label>
+        <label>Status <select id="f-status"><option value="">All statuses</option></select></label>
+        <label>Search <input type="search" id="f-q" placeholder="player or team"></label>
+        <span class="count" id="cnt"></span>
+      </div>
+      <div id="tbl"><div class="empty">Loading…</div></div>
+    </div>
+    <footer class="bot">
+      <p><strong>NBA1 Command Center.</strong> Every table row links to an official source; anything that could
+      not be confirmed is blank and listed on <a href="flagged.html">Flagged for Review</a>.</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association. Data © NBA, used with
+      attribution and links to the official pages.</p>
+    </footer>
+  </div>
+</div>
+<script>
+(async () => {
+  try {
+    const [I, meta] = await Promise.all([CC.load("injuries.json"), fetch("data/meta.json").then(r=>r.json())]);
+    document.getElementById("asof").textContent = I.report || meta.as_of;
+    document.getElementById("cut").textContent = meta.generated_at_utc;
+    const rows = I.rows;
+    const playerRows = rows.filter(r=>r.player);
+    const counts = {};
+    playerRows.forEach(r=>counts[r.status]=(counts[r.status]||0)+1);
+    const nys = rows.filter(r=>r.status==="NOT YET SUBMITTED").length;
+    const cov = playerRows.map(r=>r.minutes_coverage).filter(CC.isNum);
+    const avgCov = cov.length ? cov.reduce((a,b)=>a+b,0)/cov.length : null;
+    CC.set("#kpis",
+      CC.kpi("Listed players", playerRows.length, "across " + [...new Set(rows.map(r=>r.matchup))].length + " games", "") +
+      CC.kpi("Out", counts["Out"]||0, "official status", "bad") +
+      CC.kpi("Questionable / doubtful / probable", (counts["Questionable"]||0)+(counts["Doubtful"]||0)+(counts["Probable"]||0), "not the same as out", "warn") +
+      CC.kpi("Teams not submitted", nys, "recorded as published, not as healthy", nys?"warn":"ok"));
+
+    // Team-level impact exists only where the report lists a player whose minutes are in the
+    // captured top-50 table. Every such row today is 0.00 because no listed player is in it.
+    const seenTeam = new Set();
+    const teamRows = rows.filter(r=>{
+      if (r.team_impact_net_rating === undefined) return false;
+      const k = r.date + "|" + r.matchup + "|" + r.team;
+      if (seenTeam.has(k)) return false;
+      seenTeam.add(k);
+      return true;
+    });
+    CC.set("#teams", CC.table([
+      {h:"Date", v:r=>CC.games(r.date)},
+      {h:"Game", v:r=>`<span class="mono">${CC.esc(r.matchup)}</span>`},
+      {h:"Team", k:"team"},
+      {h:"Listed", n:1, v:r=>r.team_listed},
+      {h:"Weighted lost share", n:3, v:r=>CC.n(r.team_weighted_lost_share,3)},
+      {h:"Impact (net rtg)", n:2, v:r=>CC.num(r.team_impact_net_rating,2)},
+      {h:"Sensitivity 10/15/20", v:r=>{
+        const s=r.impact_sensitivity; if(!s) return CC.blank;
+        return `<span class="mono small">${CC.n(s["10"],2)} / ${CC.n(s["15"],2)} / ${CC.n(s["20"],2)}</span>`;
+      }},
+      {h:"Minutes coverage", n:1, v:r=>CC.pct(r.minutes_coverage,1)},
+      {h:"Confidence", v:r=>{
+        const c=String(r.confidence||"");
+        return /HIGH/i.test(c)?CC.tag(c,"g"):/LOW/i.test(c)?CC.tag(c,"a"):CC.tag(c,"r");
+      }},
+      {h:"Source", v:()=>CC.src("S6","report PDF")},
+    ], teamRows));
+    if (!teamRows.length) {
+      CC.set("#teams", `<div class="empty">No team-level impact row can be computed from this edition: none of the listed players appears in the captured official top-50 minutes table, so every impact would be a zero that means "unknown", not "no loss". This is the lower-bound problem above, stated numerically.</div>`);
+    }
+    const stat = [...new Set(rows.map(r=>r.status))].sort();
+    const ssel=document.getElementById("f-status");
+    stat.forEach(s=>ssel.insertAdjacentHTML("beforeend",`<option>${CC.esc(s)}</option>`));
+    const dsel=document.getElementById("f-date");
+    [...new Set(rows.map(r=>r.date))].sort().forEach(d=>dsel.insertAdjacentHTML("beforeend",`<option>${d}</option>`));
+
+    const cols=[
+      {h:"Date", v:r=>CC.games(r.date)},
+      {h:"Game", v:r=>`<span class="mono">${CC.esc(r.matchup)}</span>`},
+      {h:"Team", k:"team"},
+      {h:"Player", v:r=>r.player?`<b>${CC.esc(r.player)}</b>`:CC.blank},
+      {h:"Status", v:r=>{
+        const s=r.status;
+        return s==="Out"?CC.tag(s,"r"):s==="Available"?CC.tag(s,"g"):s==="NOT YET SUBMITTED"?CC.tag(s,"n"):CC.tag(s,"a");
+      }},
+      {h:"Reason as published", v:r=>`<span class="small">${CC.esc(r.reason||"—")}</span>`},
+      {h:"Source", v:()=>CC.src("S6","report PDF")},
+    ];
+    let date="", st="", q="";
+    function render(){
+      const f = rows.filter(r=> (!date||r.date===date) && (!st||r.status===st) &&
+        (!q || ((r.player||"")+" "+(r.team||"")).toLowerCase().includes(q.toLowerCase())));
+      CC.set("#tbl", CC.table(cols, f));
+      document.getElementById("cnt").textContent = f.length + " of " + rows.length + " rows";
+    }
+    dsel.onchange=e=>{date=e.target.value;render();};
+    ssel.onchange=e=>{st=e.target.value;render();};
+    document.getElementById("f-q").oninput=e=>{q=e.target.value;render();};
+    render();
+  } catch(e){ CC.fail("#teams", e); }
+})();
+</script>
+</body>
+</html>

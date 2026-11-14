@@ -427,7 +427,11 @@ def main():
             "publisher": "NBA.com (official)",
             "used_for": "Upcoming fixture list, tip times and each team's won-lost record.",
         }
-    sources["refresh_log"] = (sources.get("refresh_log") or []) + [{
+    # Idempotent: re-running this script must not append the same capture twice. One entry per
+    # captured_at_utc, and the list stays sorted oldest-first.
+    _log = [e for e in (sources.get("refresh_log") or [])
+            if e.get("captured_at_utc") != CAPTURED_UTC]
+    sources["refresh_log"] = sorted(_log + [{
         "captured_at_utc": CAPTURED_UTC,
         "as_of": AS_OF,
         "what_changed": "Season-to-date team table and training window re-captured; upcoming "
@@ -435,7 +439,7 @@ def main():
                         "moved to schedule_in_progress (rest maths only); injury report moved "
                         "from the 17:15 ET to the 19:30 ET edition.",
         "previous_capture_utc": "2026-11-13T23:40:00Z",
-    }]
+    }], key=lambda e: e["captured_at_utc"])
     write(src_path, sources)
 
 

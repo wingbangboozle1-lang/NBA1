@@ -68,19 +68,32 @@ const CC = (() => {
   }
 
   /* Provenance: one official link per row, per the project's verification rule. */
+  /* One row, one official link. Every id in data/sources.json and every strategy id must resolve
+     here; check_rendered.py fails the build if a rendered row has no outbound link. */
   const SRC = {
     S1: ["Team Advanced", "https://www.nba.com/stats/teams/advanced"],
     S2: ["Training window", "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season"],
+    S3: ["Games & scores", "https://www.nba.com/games"],
     S4: ["Schedule", "https://www.nba.com/schedule"],
+    S5: ["Injury report index", "https://official.nba.com/nba-injury-report-2026-27-season/"],
     S6: ["Injury report 11/13 7:30 PM ET", "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"],
     S7: ["Player stats", "https://www.nba.com/stats/players/traditional"],
+    S8: ["Game pages", "https://www.nba.com/games"],
     S9: ["Standings", "https://www.nba.com/standings"],
+    S10: ["Team Advanced", "https://www.nba.com/stats/teams/advanced"],
+    LP: ["Originated lines", "https://www.nba.com/schedule"],
+    REF: ["Reference line (internal)", "https://www.nba.com/stats/teams/advanced"],
   };
+  const S3_DATED = "https://www.nba.com/games?date=";
   function src(id, label) {
     if (!id) return blank;
-    const s = SRC[id] || [id, null];
-    if (!s[1]) return esc(label || id);
-    return `<a href="${s[1]}" rel="noopener" target="_blank">${esc(label || s[0])} ↗</a>`;
+    const key = String(id);
+    let url = null, name = key;
+    if (SRC[key]) { url = SRC[key][1]; name = SRC[key][0]; }
+    else if (/^S3_\d{4}-\d{2}-\d{2}$/.test(key)) { url = S3_DATED + key.slice(3); name = "Games " + key.slice(3); }
+    else if (/^S8_\d+$/.test(key)) { return game(key.slice(3), label || "game page"); }
+    if (!url) return `<span class="small" title="No official URL registered for this id">${esc(label || key)}</span>`;
+    return `<a href="${url}" rel="noopener" target="_blank">${esc(label || name)} ↗</a>`;
   }
   function game(id, label) {
     return `<a href="https://www.nba.com/game/${id}" rel="noopener" target="_blank">${esc(label || id)} ↗</a>`;
