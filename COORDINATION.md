@@ -2869,3 +2869,42 @@ idempotence (0 dirty lines after regeneration), the Command Center 17-page/data 
 - **Pages check (§25.2):** [PR #76](https://github.com/wingbangboozle1-lang/NBA1/pull/76) merged at `7e01041`; Pages build for `7e01041` reported `built` at 12:48 UTC; the live site serves current `main`. Earlier `errored` builds came from main-push churn, not a confirmed content fault. No config change was made.
 - **Not done by this session:** no `workflow_dispatch` (HTTP 403 for this session's token); PR #70 closed at 11:25 UTC during a metadata edit (not intended), replaced by #76.
 - **Suggestions for the integration session:** (1) add X01-F1 to F5 to the Flagged register; (2) set the injury page to cite the 04:30 AM ET 11/14 edition (X01-F1); (3) reduce Pages churn: the probe workflow runs on every push to `arena/**` and holds runners, and it pushes record commits that make open PRs `CONFLICTING`; (4) dedupe the §25 section on `main` (X01-F6, logged here).
+
+---
+
+## 30. Session `arena/8c9e6135-nba1` — final integration & line-by-line verification (claimed 2026-11-14 18:45 UTC)
+
+Branch `arena/8c9e6135-nba1`, base `main` at `2038333` (tip at claim time). The
+platform pins this session to one branch and forbids creating or pushing to any
+other, so the `session-<id>/<task>` naming convention is satisfied by this single
+pre-named branch (same deviation already logged in §21, §23, §24, §27, §28).
+
+**Role: integration seat for this window.** Every earlier board claim is `done`
+or `needs review`, and the five open PRs from other sessions (#63, #65, #66,
+#75, #80) were last touched 10:38–12:58 UTC — more than 60 minutes idle at
+claim time (18:45 UTC), so ground rule 5 applies and each is taken over here
+with credit to its authors, never discarding their work. PR #82
+(`arena/e812a9ed-nba1`, opened 18:42 UTC) is a **live, docs-only** audit claim:
+it is not touched by this session's file edits, and its own body states that
+final site integration remains with the integration owner on this board.
+
+### Task board — session `arena/8c9e6135-nba1`
+
+| # | Task | Status | File scope (exclusive) | Plan |
+| --- | --- | --- | --- | --- |
+| N01 | Board read + claim, pushed before any other edit | done | `COORDINATION.md` (§30 only) | This row; pushed immediately (ground rule 4). |
+| N02 | Open-PR triage + takeover (ground rule 5): #75/#65 Pages concurrency isolation; #63 gate-honesty fix; #80 strategy-lab b2b fix-forward; #66 independent integration lineage (salvage unique verified content, close as superseded with credit) | in progress | `.github/workflows/pages.yml`, `scripts/verify_all.py`, `scripts/verify_dashboard.py`, `strategy-lab/**` (port), `audit/session-2dc33eb3/**` (carry) | Nothing is discarded: each takeover is credited in the PR close comment and here. |
+| N03 | Board hygiene (R-29-8, X01-F6): de-duplicate `COORDINATION.md` repeated sections (§15, §20, §21, §23, §24, §25, §26, §28), keeping the later copy of each identical pair after a pair-by-pair diff proof | in progress | `COORDINATION.md` | Also refresh the stale ACTIVE-CLAIM header at the top of the board. |
+| N04 | Flag-register completion: publish X01-F1…F5 (§25.3 request to the integration seat) and this window's QA findings (leaked `None` strings, S1 luck/G4 wording conflict, cross-build data-window mismatch, 207/5940 unsourced-row recount) on the Flagged for Review register | in progress | `data/content/flagged.json` (append-only), regenerated site | Official source links where an official source applies; repo-file links otherwise. |
+| N05 | Currency: newest official 2026-11-14 injury-report edition and today's slate re-check via the web-fetch channel; re-price the open horizon only if a newer edition is readable; unreadable = evidence + flag, never inference | in progress | `data/raw/n14/**` (new namespace), regenerated site | Closes the §25.3 suggestion (2) where the evidence allows. |
+| N06 | Content refresh: executive summary as of this window, suggestions register (incl. site decision-making improvements), questions register (known / unknown / how to discover the missing information) | in progress | `data/content/{executive,suggestions,questions}.json` | Decision-path format preserved; every row source-linked or explicitly unverified. |
+| N07 | Fix-forward verified defects from QA (#82) and cross-session requests R-29-3 (rest-days disagreement), R-29-4 (overtime price from measured 0.0500 rate), R-29-6 (strategy-lab nav entry) | in progress | site builders, `index.html` (nav only), game-flow data | Every step gated; no methodology change without a flag. |
+| N08 | Line-by-line re-verification of the combined tree: every validator in CI order + independent spot re-reads of published values against their cited official URLs | in progress | `verify/2026-11-14-8c9e6135/**` (new namespace) | Values that cannot be confirmed stay blank and flagged (the brief's rule). |
+| N09 | Final integration: PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy + live smoke, delivery record appended here | unclaimed | whole repo (integration seat) | Broken site is never merged; deploy failures are fixed and retried. |
+
+**Scope note:** shared outputs (`index.html`, site navigation, `README.md`,
+`COORDINATION.md`, `data/content/**`, `data/raw/**`) belong to the integration
+seat per the brief. Archive namespaces (`docs/`, `docs/b/`, `command-center/`,
+`desk*.html`, `origination/`, `edge-lab/`, `audit/`, `integration/`,
+`strategy-lab/`) are not rewritten — except via credited takeover ports where
+their owning sessions are stale and a defect is proven (N02/N07).
