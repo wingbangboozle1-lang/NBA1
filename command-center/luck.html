@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luck Decomposition · NBA1 Command Center</title>
+<meta name="description" content="Which records are ahead of or behind what the teams' own point differentials imply">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a href="index.html">Dashboard</a>
+    <a href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a href="slate.html">Slate &amp; lines</a>
+    <a href="picks.html">Picks</a>
+    <a href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html">Validation gates</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="luck.html" class="on">Luck</a>
+    <a href="backtest.html">Game log</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="gameflow.html">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="flagged.html">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+  <div class="main">
+    <div class="top"><div><h1>Luck Decomposition</h1><div class="sub">Which records are ahead of or behind what the teams' own point differentials imply</div></div><span class="asof" id="asof">as of …</span></div>
+    <div class="wrap">
+      <p class="lede">A team's win-loss record is a noisy measurement of how good it is. Pythagorean
+      expectation converts a team's official offensive and defensive ratings into the win rate its
+      point differential implies; the gap between that and its actual wins is the part that came from
+      close-game outcomes. A large gap is not proof of luck, but it is a reason not to price a record.</p>
+
+      <div class="bn info"><div class="ico">i</div><div>
+        <p><strong>What this is and is not.</strong> Expected wins come from the official OffRtg and
+        DefRtg with a fixed exponent (13.91). The z-score divides the gap by the binomial standard
+        deviation over games played. Nothing here is a prediction.</p>
+      </div></div>
+
+      <div class="kpis" id="kpis"></div>
+
+      <div class="tools">
+        <label>Sort <select id="f-sort">
+          <option value="luck_desc">Luckiest first</option>
+          <option value="luck_asc">Unluckiest first</option>
+          <option value="z_desc">Largest z</option>
+          <option value="wins">Most wins</option>
+        </select></label>
+        <span class="count" id="cnt"></span>
+      </div>
+      <div id="tbl"><div class="empty">Loading…</div></div>
+      <p class="tnote">"Luck" is a statistical description of the gap between wins and point
+      differential — not a claim that a team is fortunate in a moral sense, and not a forecast. Regression
+      to the mean is the base case, not a certainty.</p>
+    </div>
+    <footer class="bot">
+      <p><strong>NBA1 Command Center.</strong> Every table row links to an official source; anything that could
+      not be confirmed is blank and listed on <a href="flagged.html">Flagged for Review</a>.</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association. Data © NBA, used with
+      attribution and links to the official pages.</p>
+    </footer>
+  </div>
+</div>
+<script>
+(async () => {
+  try {
+    const [Lk, meta] = await Promise.all([CC.load("luck.json"), fetch("data/meta.json").then(r=>r.json())]);
+    document.getElementById("asof").textContent = "as of " + meta.as_of;
+    document.getElementById("cut").textContent = meta.generated_at_utc;
+    const rows = Lk.rows;
+    const luckiest = rows.slice().sort((a,b)=>b.luck_wins-a.luck_wins)[0];
+    const unluckiest = rows.slice().sort((a,b)=>a.luck_wins-b.luck_wins)[0];
+    const biggestZ = rows.slice().sort((a,b)=>Math.abs(b.luck_z)-Math.abs(a.luck_z))[0];
+    CC.set("#kpis",
+      CC.kpi("Teams", rows.length, "season to date, 2026-11-12", "") +
+      CC.kpi("Luckiest", "+"+CC.n(luckiest.luck_wins,2), luckiest.team+" · z = "+CC.n(luckiest.luck_z,2), "warn") +
+      CC.kpi("Unluckiest", CC.n(unluckiest.luck_wins,2), unluckiest.team+" · z = "+CC.n(unluckiest.luck_z,2), "ok") +
+      CC.kpi("Largest |z|", CC.n(Math.abs(biggestZ.luck_z),2), biggestZ.name, ""));
+
+    const cols = [
+      {h:"Team", v:r=>`<b>${CC.esc(r.team)}</b>`},
+      {h:"GP", n:1, v:r=>r.gp},
+      {h:"W–L", v:r=>`<span class="mono">${r.w}–${r.l}</span>`},
+      {h:"OffRtg", n:1, v:r=>CC.n(r.ortg,1)},
+      {h:"DefRtg", n:1, v:r=>CC.n(r.drtg,1)},
+      {h:"NetRtg", n:1, v:r=>CC.num(r.netr,1)},
+      {h:"Pythag W%", n:1, v:r=>CC.pct(r.pyth_win_pct,1)},
+      {h:"Expected W", n:2, v:r=>CC.n(r.expected_wins,2)},
+      {h:"Actual W", n:1, v:r=>r.actual_wins},
+      {h:"Luck (wins)", n:2, v:r=>CC.num(r.luck_wins,2)},
+      {h:"SD", n:2, v:r=>CC.n(r.sd_wins,2)},
+      {h:"z", n:2, v:r=>{
+        const z=r.luck_z; if(!CC.isNum(z)) return CC.blank;
+        const cls=Math.abs(z)>=2?"neg":"";
+        return `<span class="${cls}">${CC.n(z,2)}</span>`;
+      }},
+      {h:"Source", v:()=>CC.src("S1","team stats")},
+    ];
+    let sort="luck_desc";
+    function render(){
+      const r = rows.slice().sort((a,b)=>
+        sort==="luck_desc"?b.luck_wins-a.luck_wins:
+        sort==="luck_asc"?a.luck_wins-b.luck_wins:
+        sort==="z_desc"?Math.abs(b.luck_z)-Math.abs(a.luck_z):b.w-a.w);
+      CC.set("#tbl", CC.table(cols, r));
+      document.getElementById("cnt").textContent = r.length + " teams";
+    }
+    document.getElementById("f-sort").onchange=e=>{sort=e.target.value;render();};
+    render();
+  } catch(e){ CC.fail("#tbl", e); }
+})();
+</script>
+</body>
+</html>

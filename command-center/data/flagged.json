@@ -1,0 +1,181 @@
+{
+ "title": "Flagged for Review",
+ "intro": "Everything this session could not confirm from an official source, plus every irregularity found while reviewing the repository line by line. Nothing here is a blocker for publication: it is a work queue. Each item states what is affected, how to resolve it, and where in the repository it lives. Items inherited from earlier sessions are kept, not deleted.",
+ "severity_legend": "HIGH = could change a decision or mislead a reader if left alone. MEDIUM = limits what can be claimed. LOW = cosmetic or documentation.",
+ "items": [
+  {
+   "id": "R01",
+   "severity": "MEDIUM",
+   "area": "Reproducibility",
+   "title": "The refresh pipeline has never run end to end, and no 11/14 injury PDF exists to fetch",
+   "detail": "Two separate gaps, and a GitHub-hosted probe settles the first. (1) On 2026-11-14 at 00:58 UTC a runner in this repository's own GitHub Actions probed every source the site cites: www.nba.com/stats/teams/advanced, /stats/players/traditional, /schedule, /games?date=2026-11-13, a game page, official.nba.com/nba-injury-report-2026-27-season/ and the 11/13 05:15PM injury PDF all returned HTTP 200 within 600 ms. So the network is not the obstacle to continuous refresh. What has still never run is engine/fetch_official.py end to end with its parsers writing the derived files — and this session could not dispatch that workflow to try (HTTP 403: the token may read runs but not trigger them). (2) The same probe asked for Injury-Report_2026-11-14_12_00PM.pdf and got HTTP 403, and the session's own capture of the official index found no 11/14 edition at all. No newer report therefore exists to fetch, which is why this build still carries the 11/13 19:30 ET edition.",
+   "affected": "The nightly refresh workflow, the currency of every page after 2026-11-14, and the injury layer on the 11/14 slate.",
+   "suggested_action": "Run the Refresh workflow once from the Actions tab (or with a token that has actions:write) and read the log. Separately, treat the absence of an 11/14 report as a data condition, not a bug: the site must show the edition it actually has, with its timestamp.",
+   "source": "GitHub Actions run of the reachability probe, 2026-11-14T00:58:11Z",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/actions"
+  },
+  {
+   "id": "R02",
+   "severity": "HIGH",
+   "area": "Provenance",
+   "title": "All data in this build was transcribed from official pages through a fetch channel, not by the repository's own fetcher",
+   "detail": "The sandbox shell cannot reach nba.com (DNS/egress blocked), so the official pages were read through the agent's web-fetch tool and transcribed into scripts_refresh/refresh_2026_11_13_t1938.py. That is still official-source data, but the mechanical chain differs from an unattended fetch. Mitigation: two independent transcriptions of the two team tables now agree on all 1,200 cells, all 30 teams reconcile to training + results, and all 51 results were re-read from the official pages.",
+   "affected": "data/raw/team_advanced.json, schedule_upcoming.json, schedule_in_progress.json, injuries.json",
+   "suggested_action": "Treat the transcription script as the audit trail (it names the exact URL and UTC capture for each block). When fetch_official.py is proven (R01), it should reproduce these files byte-for-byte; if it does not, the diff is the bug.",
+   "source": "NBA.com stats page used for the team tables",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "id": "R03",
+   "severity": "MEDIUM",
+   "area": "Data gap",
+   "title": "Minutes are known for 50 of 465 players, so every injury impact is a lower bound",
+   "detail": "The official players table paginates 50 rows per page and only page one (the 50 highest scorers) is captured. Availability impact for everyone else is counted as zero and the row states 'minutes unavailable'. Roster coverage is 27-30%.",
+   "affected": "Every injury impact figure on the Injuries and Lines pages.",
+   "suggested_action": "Capture all ten pages of nba.com/stats/players/traditional. This is suggestion S03 and is the highest value-per-effort item on the site.",
+   "source": "NBA player stats",
+   "source_url": "https://www.nba.com/stats/players/traditional"
+  },
+  {
+   "id": "R04",
+   "severity": "MEDIUM",
+   "area": "Provenance",
+   "title": "The reference line is not a market line",
+   "detail": "There is no licensed sportsbook price anywhere in this repository. 'ref_spread' and 'ref_total' come from a naive internal model with a flat 2.0-point home-court advantage. Any 'edge' shown is measured against that construction, never against a book.",
+   "affected": "lines.json edge columns, picks.json, every gate that depends on them.",
+   "suggested_action": "Either license a price archive or record dated manual quotes; until then the UI must never describe these numbers as market edges. It does not, and that must be preserved.",
+   "source": "Team advanced stats (the model's only inputs)",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "id": "R05",
+   "severity": "MEDIUM",
+   "area": "Data gap",
+   "title": "Eight of eleven 11/14 fixtures had not submitted an injury report at the cut",
+   "detail": "The 19:30 ET edition lists 'NOT YET SUBMITTED' for New Orleans, Cleveland, Memphis, Chicago, Miami and Brooklyn, and carries no entries at all for 11/15 or 11/16. This is a fact about the source, recorded verbatim — not a claim that those teams are healthy.",
+   "affected": "injuries.json, and the availability term in the 11/14-11/16 lines.",
+   "suggested_action": "Re-capture closer to tip. A team with no entry must never be treated as fully available in a price.",
+   "source": "Official injury report, 11/13/26 07:30 PM ET",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+  },
+  {
+   "id": "R06",
+   "severity": "MEDIUM",
+   "area": "Statistical inference",
+   "title": "Ten strategies were tested and no multiplicity correction is published",
+   "detail": "Reported p-values are per-strategy and unadjusted. With ten tests at alpha = 0.05, roughly half a false positive is expected by chance even if none of the strategies works. The top strategy's p is 0.093, so it would not survive any correction. A second consequence of testing ten rules is that play counts are severely uneven: six strategies produced graded plays (S1 23, S10 19, S3 14, S5 12, S2 10, S9 7) and four produced none, for three different reasons — S4's threshold the model never crossed, S6 and S8 ungradeable without archived injury reports and player game logs, and S7 ungradeable without player game logs. The ungraded rows therefore read as a mix of 'no edge' and 'cannot measure', which the Validation page separates explicitly.",
+   "affected": "Validation page, leaderboard ordering.",
+   "suggested_action": "Publish Benjamini-Hochberg adjusted p-values alongside the raw ones (suggestion S06), and report an explicit reason for every zero-play strategy rather than a shared footnote.",
+   "source": "Team advanced stats (input to the backtest)",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "id": "R07",
+   "severity": "MEDIUM",
+   "area": "Modelling",
+   "title": "Two parameters are fitted on the same window they are tested on",
+   "detail": "Home-court advantage and the back-to-back penalty are estimated on the 51-game test window. A zeroed variant is published beside the fitted one (12.88 vs 12.89 margin MAE), which shows the fitted parameters add nothing measurable — but the disclosure, not the fit, is what makes this acceptable.",
+   "affected": "validation.json fit block, model page.",
+   "suggested_action": "Fit HCA and the B2B penalty on prior-season data only, then re-run. Keep the zeroed variant either way.",
+   "source": "Training-window stats",
+   "source_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season"
+  },
+  {
+   "id": "R08",
+   "severity": "MEDIUM",
+   "area": "Modelling",
+   "title": "Parlay correlation values are model-derived, not measured",
+   "detail": "The rho values used to price same-game and cross-game parlays are assumptions. The data file and the page label them MODEL-DERIVED, and the measured correlations are a separate list of 13 statistic-to-statistic correlations that do not price any bet.",
+   "affected": "correlations.json sgp_rho, every parlay row on the Picks page.",
+   "suggested_action": "Log leg outcomes per game; once n >= 30 leg-pairs exist, replace the assumptions and show the interval.",
+   "source": "Player stats (the closest official input)",
+   "source_url": "https://www.nba.com/stats/players/traditional"
+  },
+  {
+   "id": "R09",
+   "severity": "LOW",
+   "area": "Data gap",
+   "title": "The nine 11/13 games were live at the data cut and their results are deliberately absent",
+   "detail": "schedule_in_progress.json records the nine fixtures for rest arithmetic only. No score for them is published anywhere, and they are not pickable. Their final scores are the cheapest way to grow the out-of-sample window.",
+   "affected": "Rest/back-to-back calculation for 11/14-11/16; the growth rate of the backtest sample.",
+   "suggested_action": "After the games finalise, capture nba.com/games?date=2026-11-13 and append the nine results.",
+   "source": "NBA games, 2026-11-13",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "id": "R10",
+   "severity": "LOW",
+   "area": "Repository",
+   "title": "Two independently built labs now coexist, and the older one is still the site root",
+   "detail": "Build A (root dashboard, index.html and its pages) and Build B (docs/b) were built in parallel sessions and collided; Build B was namespaced to docs/b. Neither linked to the other. This session added a shared navigation shell (command-center/) and left every existing page's content untouched.",
+   "affected": "index.html, docs/b/** — navigation only. No table row, number or claim of another session was edited.",
+   "suggested_action": "Review the Command Center and decide whether it becomes the site root at the next integration, or stays a third view. The decision is on the Suggestions page as S08.",
+   "source": "This repository",
+   "source_url": "https://github.com/wangbangboozle1-lang/NBA1"
+  },
+  {
+   "id": "R11",
+   "severity": "LOW",
+   "area": "Documentation",
+   "title": "The repo review found stale counts in older authored pages, left in place on purpose",
+   "detail": "Older pages still describe a 31-game Nov 13-16 window and a 12:00 PM ET 11/13 injury snapshot. Those statements were true of the capture they describe and are not false claims about the world; they are simply dated. Rewriting another session's pages was out of scope, so the new Command Center supersedes them with the current cut and labels its own capture time on every page.",
+   "affected": "docs/summary.html, docs/picks.html, index.html, lines.html",
+   "suggested_action": "At the next integration, regenerate or archive those pages so the site has exactly one description of the current slate.",
+   "source": "This repository",
+   "source_url": "https://github.com/wangbangboozle1-lang/NBA1"
+  },
+  {
+   "id": "R12",
+   "severity": "LOW",
+   "area": "Legal / scope",
+   "title": "No legal, licensing or jurisdictional review exists",
+   "detail": "The repository contains no sportsbook terms, no licence, and no legal opinion. It links only to public official NBA pages. Whether pricing bets is lawful or permitted for the operator is outside what any data source can answer.",
+   "affected": "Any operational use of the outputs.",
+   "suggested_action": "Obtain legal review before operational use. In the Netherlands the gambling regulator is the Kansspelautoriteit.",
+   "source": "Kansspelautoriteit",
+   "source_url": "https://kansspelautoriteit.nl/"
+  },
+  {
+   "id": "R13",
+   "severity": "MEDIUM",
+   "area": "Presentation",
+   "title": "Signed error columns were described as absolute values on the game log",
+   "detail": "backtest.json stores err_model_margin, err_ref_margin, err_model_total and err_ref_total as signed values (actual minus predicted). The game-log page labelled them absolute. Read literally, a -40.7 point error looked like a 40.7-point hit, and 28 of the 51 rows carried a negative 'error' that a reader would have taken as a good result. The columns are now labelled with the sign convention and the filter compares magnitudes; the arithmetic itself was always correct and the published averages were always means of absolute values, so no reported metric changes.",
+   "affected": "command-center/backtest.html, and the same reading risk in any table built directly from backtest.json.",
+   "suggested_action": "Keep the sign convention printed beside the columns. If a future build shows absolute error, publish a second column rather than relabelling the signed one.",
+   "source": "NBA games & scores (the actual results these errors are measured against)",
+   "source_url": "https://www.nba.com/games"
+  },
+  {
+   "id": "R14",
+   "severity": "LOW",
+   "area": "Provenance",
+   "title": "A 19:45 ET injury edition exists and post-dates the 19:30 edition this build uses",
+   "detail": "The official index lists editions of the 11/13 report through 07:45 PM ET; this build is transcribed from the 07:30 PM ET edition. The 19:45 edition was read during this review and every status it shows agreed with what is stored here — Giannis Antetokounmpo Available, Mathurin Available, Curry Out, Morant Out, Smart Out — and its visible 11/14 block listed the same five teams as NOT YET SUBMITTED plus the same Dallas, Brooklyn and Minnesota entries. What this build does NOT have is a cell-by-cell diff of the two PDFs: the extraction channel returns text in chunks that repeat the header and split tables mid-row, so a mechanical diff would be unreliable and was not claimed.",
+   "affected": "The injury layer, and indirectly the availability input to every originated line.",
+   "suggested_action": "Archive every edition under its own timestamp and diff consecutive editions, which is exactly suggestion S07. Until then, quote the edition time beside every status, as this site does.",
+   "source": "NBA Official Injury Report, 11/13/26 07:45 PM ET edition (PDF)",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_45PM.pdf"
+  },
+  {
+   "id": "R15",
+   "severity": "LOW",
+   "area": "Reproducibility",
+   "title": "The refresh transcription script duplicated its own capture log on a second run",
+   "detail": "scripts_refresh/refresh_2026_11_13_t1938.py appended a new entry to sources.json's refresh_log every time it ran, without checking whether that capture time was already present. Running it twice wrote the same capture twice, and the Sources page then showed one capture as two separate events. The script is now idempotent (one entry per captured_at_utc, sorted oldest first), and the duplicate already in the data was removed by re-running it.",
+   "affected": "data/raw/sources.json, command-center/data/sources.json, the Sources page capture history.",
+   "suggested_action": "Any script that appends to an accumulated log must key on a unique field. This is the same class of defect as an append-only log with no de-duplication anywhere else in the pipeline.",
+   "source": "The script and its output in this repository",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts_refresh/refresh_2026_11_13_t1938.py"
+  },
+  {
+   "id": "R16",
+   "severity": "LOW",
+   "area": "Data completeness",
+   "title": "Merge-session flags: 11/17 venues blank on purpose, repeat matchups on the official pages",
+   "detail": "The merge session appended five verified 2026-11-17 games (0022600253-0022600257; the official game-page titles read 'Nov 17, 2026') and left their venue/city fields blank on purpose - the official 11/17 slate page does not print venues and nothing is ever inferred. The official pages also publish repeat matchups (NYK@TOR 0022600241/0022600253, POR@MIN 0022600250/0022600254) and the 12:00 PM injury PDF prints 'Suggs, Jalan' for 'Suggs, Jalen'. All left exactly as published.",
+   "how_it_was_verified": "nba.com/games?date=2026-11-17 and the five official game pages; see data/refresh_2026_11_14/official_captures_2026-11-14.json and review.html F13-F15.",
+   "action": "Ask the stats feed whether 11/17 venues exist before filling any cell."
+  }
+ ]
+}

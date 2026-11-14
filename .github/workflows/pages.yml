@@ -24,7 +24,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Validate site links and source coverage (build A)
-        continue-on-error: true
         run: python3 scripts/check_site.py
 
       - name: Validate build B site data
@@ -43,6 +42,63 @@ jobs:
                   json.load(fh)
           print("All build-B site data files present and valid JSON.")
           PY
+
+      - name: Independent integration verification
+        run: python3 scripts/verify_integration.py
+
+      - name: Render every page in a headless DOM
+        run: |
+          npm install --no-save jsdom >/dev/null 2>&1
+          node scripts/render_check.mjs
+
+      - name: Probe record present and valid
+        run: |
+          python3 - <<'PY'
+          import json, os, sys
+          p = "data/raw/probe_official.json"
+          if not os.path.exists(p):
+              print("no probe record; skipping (the probe workflow writes it)")
+              raise SystemExit(0)
+          d = json.load(open(p))
+          assert d["probe"]["urls_probed"] == len(d["results"]), "probe count mismatch"
+          print("probe record:", d["probe"]["urls_probed"], "URLs,", d["probe"]["probed_at_utc"])
+          PY
+
+      - name: Regenerate the verification page and require it to be current
+        run: |
+          python3 scripts/build_verification_page.py
+          if [ -n "$(git status --porcelain verification.html)" ]; then
+            echo "verification.html is stale - regenerate and commit it"
+            exit 1
+          fi
+
+      - name: Validate the Command Center renders every page from its data
+        run: |
+          python3 - <<'PY'
+          import json, os, sys
+          need = ["meta.json","sources.json","lines.json","picks.json","props.json",
+                  "injuries.json","gameflow.json","backtest.json","validation.json",
+                  "leaderboard.json","correlations.json","luck.json","teams.json",
+                  "flagged.json","questions.json","suggestions.json","executive.json",
+                  "repo-review.json"]
+          d = os.path.join("command-center", "data")
+          missing = [f for f in need if not os.path.exists(os.path.join(d, f))]
+          if missing:
+              print("MISSING Command Center data:", missing); sys.exit(1)
+          for f in need:
+              with open(os.path.join(d, f)) as fh:
+                  json.load(fh)
+          pages = [f for f in os.listdir("command-center") if f.endswith(".html")]
+          if len(pages) != 17:
+              print("Expected 17 Command Center pages, found", len(pages)); sys.exit(1)
+          print(f"Command Center: {len(need)} data files valid, {len(pages)} pages present.")
+          PY
+
+      - name: Static link and source check across every build
+        run: python3 scripts/check_links.py
+
+      - name: Execute every Command Center page against its data
+        run: python3 scripts/check_rendered.py
 
       - name: Check for broken internal links (both builds)
         run: |

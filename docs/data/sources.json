@@ -1,5 +1,5 @@
 {
- "captured_at_utc": "2026-11-13T22:30:00Z",
+ "captured_at_utc": "2026-11-14T00:38:00Z",
  "rule": "Every table row published on the site carries one of these source ids. A value that cannot be traced to one of these URLs is left blank and flagged - it is never inferred.",
  "sources": {
   "S1": {
@@ -69,10 +69,10 @@
    "used_for": "Index of the league's official injury report PDFs and the reporting deadlines that govern them."
   },
   "S6": {
-   "title": "NBA Official Injury Report PDF - 11/13/26 05:15 PM ET edition",
-   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+   "title": "NBA Official Injury Report, 11/13/26 07:30 PM ET edition (PDF)",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf",
    "publisher": "ak-static.cms.nba.com (NBA official static CMS)",
-   "used_for": "Player participation status (Out / Doubtful / Questionable / Probable / Available / NOT YET SUBMITTED) and the reason published by the team."
+   "used_for": "Every injury status column on the site: player, team, status and reason, and the 11/14 'NOT YET SUBMITTED' rows."
   },
   "S7": {
    "title": "NBA.com Stats - Players Traditional (2026-27 Regular Season)",
@@ -303,28 +303,28 @@
    "used_for": "Matchup, tip time and current records (verified 2026-11-14 via the official slate page)."
   },
   "S3_2026-11-13": {
-   "title": "NBA.com Games & Scores - November 13, 2026",
+   "title": "NBA.com Games & Scores - November 13, 2026 (in progress at capture)",
    "url": "https://www.nba.com/games?date=2026-11-13",
    "publisher": "NBA.com (official)",
-   "used_for": "Full slate verification 2026-11-13 (9 games: matchup, tip time, records) on 2026-11-14."
+   "used_for": "The nine fixtures' existence and tip times, for rest / back-to-back arithmetic only. No score is published: the games were live, not final."
   },
   "S3_2026-11-14": {
-   "title": "NBA.com Games & Scores - November 14, 2026",
+   "title": "NBA.com Games & Scores - 2026-11-14",
    "url": "https://www.nba.com/games?date=2026-11-14",
    "publisher": "NBA.com (official)",
-   "used_for": "Full slate verification 2026-11-14 (5 games: matchup, tip time, records) on 2026-11-14."
+   "used_for": "Upcoming fixture list, tip times and each team's won-lost record."
   },
   "S3_2026-11-15": {
-   "title": "NBA.com Games & Scores - November 15, 2026",
+   "title": "NBA.com Games & Scores - 2026-11-15",
    "url": "https://www.nba.com/games?date=2026-11-15",
    "publisher": "NBA.com (official)",
-   "used_for": "Full slate verification 2026-11-15 (9 games: matchup, tip time, records) on 2026-11-14."
+   "used_for": "Upcoming fixture list, tip times and each team's won-lost record."
   },
   "S3_2026-11-16": {
-   "title": "NBA.com Games & Scores - November 16, 2026",
+   "title": "NBA.com Games & Scores - 2026-11-16",
    "url": "https://www.nba.com/games?date=2026-11-16",
    "publisher": "NBA.com (official)",
-   "used_for": "Full slate verification 2026-11-16 (8 games: matchup, tip time, records) on 2026-11-14."
+   "used_for": "Upcoming fixture list, tip times and each team's won-lost record."
   },
   "S3_2026-11-17": {
    "title": "NBA.com Games & Scores - November 17, 2026",
@@ -340,5 +340,14 @@
    "S8_0022600245..S8_0022600257",
    "S3_2026-11-13..S3_2026-11-17"
   ]
- }
+ },
+ "refresh_log": [
+  {
+   "captured_at_utc": "2026-11-14T00:38:00Z",
+   "as_of": "2026-11-14",
+   "what_changed": "Season-to-date team table and training window re-captured; upcoming window rolled from 11/13-11/15 to 11/14-11/16 (22 games); 11/13 games moved to schedule_in_progress (rest maths only); injury report moved from the 17:15 ET to the 19:30 ET edition.",
+   "previous_capture_utc": "2026-11-13T23:40:00Z"
+  }
+ ],
+ "merge_2026-11-14": "union of both captures (arena/2329cb68-nba1 + main sessions); shared ids prefer the main-side entry"
 }

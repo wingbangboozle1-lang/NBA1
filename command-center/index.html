@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NBA1 Command Center</title>
+<meta name="description" content="Originated NBA lines, gated strategies, correlations, luck decomposition, injuries and game flow — every row linked to its official source.">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a class="on" href="index.html">Dashboard</a>
+    <a href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a href="slate.html">Slate &amp; lines</a>
+    <a href="picks.html">Picks</a>
+    <a href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html">Validation gates</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="luck.html">Luck</a>
+    <a href="backtest.html">Game log</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="gameflow.html">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="flagged.html">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+
+  <div class="main">
+    <div class="top">
+      <div>
+        <h1>NBA1 Command Center</h1>
+        <div class="sub">Originated lines · gated strategies · correlations · luck · injuries &amp; game flow</div>
+      </div>
+      <span class="asof" id="asof">as of …</span>
+    </div>
+
+    <div class="wrap">
+      <p class="lede">An independent view of the NBA built only from official league data. Lines are
+      originated here, not copied from a book; every strategy has to clear seven gates before it is
+      allowed to matter; and every number on every page links to the official page it came from.
+      Where a number cannot be confirmed it is left blank and put on the
+      <a href="flagged.html">Flagged for Review</a> page.</p>
+
+      <div class="bn bad">
+        <div class="ico">!</div>
+        <div>
+          <p><strong>Verdict: provisional — nothing is funded.</strong> The model beats the naive
+          reference on margin accuracy, loses to it on totals and on probability calibration, and the
+          best strategy's 16-7 record is still well inside what luck produces on 23 graded plays
+          (exact binomial p = 0.093).</p>
+          <p class="small">This is the honest read, not a marketing line. The
+          <a href="executive.html">executive summary</a> and the
+          <a href="validation.html">validation page</a> show the arithmetic behind it.</p>
+        </div>
+      </div>
+
+      <div class="kpis" id="kpis"></div>
+
+      <h2>The two questions a dashboard has to answer</h2>
+      <div class="cards">
+        <div class="card">
+          <h4>What can I look at right now?</h4>
+          <p><b>22 games</b> over three days (11/14, 11/15, 11/16), each with an originated spread and
+          total, a fair price, a rest flag and an availability read-out.</p>
+          <p><a class="more" href="slate.html">Slate originations →</a></p>
+        </div>
+        <div class="card">
+          <h4>Should I believe any of it?</h4>
+          <p><b>Not yet</b> — and the site is built to show you why rather than ask you to trust it.
+          Ten strategies ran on a strictly out-of-sample window; zero cleared the skill gate.</p>
+          <p><a class="more" href="strategy.html">Gate results →</a> · <a class="more" href="luck.html">Luck decomposition →</a></p>
+        </div>
+        <div class="card">
+          <h4>What is missing?</h4>
+          <p><b>Market prices, full-league minutes, a settlement ledger.</b> Each gap is written down
+          with the exact artefact that would close it, in priority order.</p>
+          <p><a class="more" href="questions.html">25 open questions →</a> · <a class="more" href="flagged.html">12 flagged items →</a></p>
+        </div>
+      </div>
+
+      <h2>How to read this site</h2>
+      <div class="tw"><table>
+        <thead><tr><th>Page</th><th>What it answers</th><th>The one number to look at</th></tr></thead>
+        <tbody>
+          <tr><td><a href="executive.html">Executive summary</a></td><td>What happened, what changed, what is not claimed</td><td>0 strategies funded</td></tr>
+          <tr><td><a href="slate.html">Slate &amp; lines</a></td><td>Our line against the reference for every upcoming game</td><td>22 games, 3 days</td></tr>
+          <tr><td><a href="picks.html">Picks</a></td><td>Singles, parlays, same-game parlays and prop combos, with the rule that produced each</td><td>59 paper plays, 0 settled</td></tr>
+          <tr><td><a href="strategy.html">Strategies &amp; leaderboard</a></td><td>Which strategy clears which gate, and why the ordering is capped</td><td>Best: 16-7, p = 0.093</td></tr>
+          <tr><td><a href="validation.html">Validation gates</a></td><td>The seven gates and the out-of-sample verdict for all ten strategies</td><td>Margin MAE 12.89 vs 13.19</td></tr>
+          <tr><td><a href="correlations.html">Correlations</a></td><td>What is measured on official data and what is assumed for parlay pricing</td><td>13 measured, 5 model-derived</td></tr>
+          <tr><td><a href="luck.html">Luck</a></td><td>Which teams' records are ahead of or behind their own point differential</td><td>Luck in wins, with a z-score</td></tr>
+          <tr><td><a href="injuries.html">Injuries</a></td><td>Every official status, with the minutes-coverage confidence beside it</td><td>27-30% minutes coverage</td></tr>
+          <tr><td><a href="gameflow.html">Game flow</a></td><td>Pace, rest, back-to-back and availability context per game</td><td>Rest days known or blank</td></tr>
+          <tr><td><a href="questions.html">Questions &amp; answers</a></td><td>What must be answered before any decision, and how to get the missing part</td><td>11 answered, 4 partial, 10 open</td></tr>
+          <tr><td><a href="suggestions.html">Suggestions</a></td><td>Options with effort, risk and what each unlocks, each ending in a decision</td><td>10 decisions waiting</td></tr>
+          <tr><td><a href="repo-review.html">Repo review</a></td><td>The line-by-line audit: what was checked, how, and what it returned</td><td>0 broken links, 0 wrong numbers</td></tr>
+        </tbody>
+      </table></div>
+      <p class="tnote">Every page in this table is static HTML reading same-origin JSON. No external
+      call is made at runtime, so the site works offline once loaded.</p>
+
+      <h2>What this build does not do</h2>
+      <div class="bn warn">
+        <div class="ico">•</div>
+        <div>
+          <p>No licensed sportsbook price is used. The "reference line" is an internal naive model,
+          so an edge shown here is an edge against a construction, never against a book. No player
+          minutes are projected. No correlation between bets and results is measured. No play is
+          settled, so no ROI is claimed. This is a research artefact, not a betting service.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bot">
+      <p><strong>NBA1 Command Center</strong> — generated from official NBA data. Every table row links
+      to its official source; unconfirmed values are blank and listed on
+      <a href="flagged.html">Flagged for Review</a>.</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association. Data © NBA, used with
+      attribution and links to the official pages.</p>
+    </footer>
+  </div>
+</div>
+
+<script>
+(async () => {
+  try {
+    const [meta, val, lb, L, P] = await Promise.all([
+      fetch("data/meta.json", {cache:"no-store"}).then(r=>r.json()),
+      fetch("data/validation.json", {cache:"no-store"}).then(r=>r.json()),
+      fetch("data/leaderboard.json", {cache:"no-store"}).then(r=>r.json()),
+      fetch("data/lines.json", {cache:"no-store"}).then(r=>r.json()),
+      fetch("data/picks.json", {cache:"no-store"}).then(r=>r.json()),
+    ]);
+    document.getElementById("asof").textContent = "as of " + meta.as_of + " · cut " + meta.generated_at_utc;
+    document.getElementById("cut").textContent = meta.generated_at_utc;
+    const m = val.metrics;
+    const funded = lb.rows.filter(r => /Tier 1|Tier 2/.test(r.tier || "")).length;
+    const top = lb.rows[0];
+    const best = val.strategies.find(s => s.id === top.id) || {};
+    document.getElementById("kpis").innerHTML =
+      CC.kpi("Upcoming games", meta.counts.upcoming_games, "11/14–11/16 · three days", "ok") +
+      CC.kpi("Paper plays", P.rows.length, "across 10 strategies, none settled", "") +
+      CC.kpi("Strategies funded", funded, "top tier reached: " + CC.esc(top.tier || "—"), "bad") +
+      CC.kpi("Best record", (best.wins ?? "—") + "–" + (best.losses ?? "—"), "n = " + (best.n_graded ?? "—") + " graded · p = " + (best.binomial_p ?? "—"), "warn");
+  } catch (e) { CC.fail("#kpis", e); }
+})();
+</script>
+</body>
+</html>

@@ -15,11 +15,12 @@ records (slates) agree exactly after whitespace normalisation.
 
 Sources re-read (all official):
 
-- Injury reports 2026-11-13, three editions:
+- Injury reports 2026-11-13, five editions:
   [12:00 PM](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf),
   [3:00 PM](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_03_00PM.pdf),
   [5:00 PM](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_00PM.pdf),
-  [5:15 PM](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf)
+  [5:15 PM](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf),
+  [7:30 PM](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf)
   (hub: [official.nba.com injury reports](https://official.nba.com/nba-injury-report-2026-27-season/))
 - Slates: [11/13](https://www.nba.com/games?date=2026-11-13) (via live game-page strip),
   [11/14](https://www.nba.com/games?date=2026-11-14),
@@ -38,7 +39,8 @@ Sources re-read (all official):
   VERIFY OK; Build B data validated by the Pages workflow checks).
 - The three injury datasets that looked contradictory are three **different official
   editions** (12:00 PM = 75-row legacy page `docs/injuries.html`; 3:00 PM = 88-row
-  Build A data with a 12:00 PM movement column; 5:15 PM = 119-row Build B data). Each
+  Build A data with a 12:00 PM movement column; 5:15 PM = 119-row interim capture;
+  7:30 PM = 122-row Build B data). Each
   row-set verifies against its own edition, and every difference between editions is a
   documented status movement — no unexplained difference remains.
 - Build A and Build B use different transcription policies for PDF continuation rows
@@ -75,8 +77,8 @@ Sources re-read (all official):
 - Player per-game stats and market prices — not machine-readable from an official
   source from this environment (F1/F3); never inferred.
 
-## Injury rows — Build B `data/raw/injuries.json` vs 5:15 PM official PDF (119 rows)
-- PASS: all 119 rows match the independent 2026-11-14 transcription (player, status, reason, team, matchup), including the 6 NOT YET SUBMITTED team rows.
+## Injury rows — Build B `data/raw/injuries.json` vs 7:30 PM official PDF (122 rows)
+- PASS: all 122 rows match the independent 2026-11-14 transcription (player, status, reason, team, matchup), including the 5 NOT YET SUBMITTED team rows.
 
 ## Injury rows — Build A `data/injury_report_2026_11_13.json` vs 3:00 PM official PDF
 - PASS: all 88 attributed rows match the 3:00 PM transcription with the five documented edition deltas applied (Cain/da Silva/Suggs/Achiuwa/Murray).
@@ -85,17 +87,18 @@ Sources re-read (all official):
 - PASS: all 9 moved status_12pm cells match the 12:00 PM edition PDF re-fetched 2026-11-14 (9 status movements confirmed row by row).
 
 ## Slate rows — official NBA.com pages vs captured schedules (36 rows)
-- PASS: Build B: 36 rows match the official slate pages on date, matchup, tip time and both records.
-- PASS: Build A: 36 rows match the official slate pages on date, matchup, tip time and both records.
+- PASS: Build B upcoming: 27 rows match the official slate pages on date, matchup, tip time and records where carried.
+- PASS: Build B in-progress 11/13: 9 rows match the official slate pages on date, matchup, tip time and records where carried.
+- PASS: Build A: 36 rows match the official slate pages on date, matchup, tip time and records where carried.
 - PASS: every official slate row in the evidence file is present in the repo schedules.
 
 ## Cross-checks
 - PASS: NBA.com per-day game counts (9/5/9/8/5 for 11/13-11/17) equal the slate row counts captured.
 - PASS: NYK@TOR (11/15 & 11/17) and POR@MIN (11/16 & 11/17) repeat matchups confirmed on official game pages (titles read 'Nov 17, 2026' for 0022600253 / 0022600254). Flagged as an irregularity for human review, not corrected.
-- PASS: Injury report editions chain (03:00 -> 05:00 -> 05:15 PM) explains every status difference between the two transcriptions; no unexplained difference remains.
+- PASS: Injury report editions chain (12:00 -> 03:00 -> 05:00 -> 05:15 -> 07:30 PM) explains every status difference between the transcriptions (incl. 8 moves 5:15->7:30 PM and Denver's NYS team row replaced by 4 named players); no unexplained difference remains.
 
 ## Totals
 
 - Verifications failing: **0**
-- Rows re-verified line by line against official sources on 2026-11-14: 119 + 91 (injury rows, two editions) + 36 (slate rows) = **246**
+- Rows re-verified line by line against official sources on 2026-11-14: 122 + 91 (injury rows, two editions) + 36 (slate rows) = **249**
 - Sources: see `data/refresh_2026_11_14/official_captures_2026-11-14.json` → `meta.sources`.

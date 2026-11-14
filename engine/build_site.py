@@ -7,6 +7,7 @@ time and no framework: GitHub Pages serves docs/ as-is.
 """
 
 import datetime
+import html
 import os
 import sys
 
@@ -41,7 +42,18 @@ NAV = [
     ("sources", "pages/sources.html", "Sources"),
 ]
 
-STAMP = "2026-11-13"
+STAMP = "2026-11-14"
+
+# Sibling builds. Build B is one of three entry points in this repository and a reader who lands
+# here has no way of knowing that, so the header carries an explicit switch between them.
+# Sibling builds live at the REPOSITORY root, not inside docs/b/, so their hrefs have to be built
+# from how far the page sits below the repo root: docs/b/index.html is two levels down and
+# docs/b/pages/*.html is three. Paths are given relative to the repo root and get that prefix.
+SIBLINGS = [
+    ("command-center/index.html", "Command Center", "current data, 14\u201316 Nov"),
+    ("index.html", "Edge Lab", "frozen 13 Nov snapshot"),
+]
+ROOT_PREFIX = {0: "../../", 1: "../../../"}
 
 
 def nav_html(active, depth):
@@ -51,6 +63,10 @@ def nav_html(active, depth):
         href = prefix + (path if path else "index.html")
         cls = ' class="active"' if key == active else ""
         out.append(f'<a href="{href}"{cls}>{label}</a>')
+    out.append('<span class="navsep" aria-hidden="true"></span>')
+    root_prefix = ROOT_PREFIX[depth]
+    for href, label, note in SIBLINGS:
+        out.append(f'<a class="sib" href="{root_prefix}{href}" title="{note}">{label} \u2197</a>')
     return "\n".join(out)
 
 
@@ -120,21 +136,32 @@ def p_index(meta, ex):
 </details>""" for i in ex["findings"])
 
     live = "\n".join(f"<li>{x}</li>" for x in ex["what_is_live_now"])
+    def _action_source(a):
+        # every row carries an official link, or is flagged unverified (never a guessed link)
+        if a.get("source_url"):
+            return (f'<a class="srclink" href="{html.escape(a["source_url"])}" target="_blank" '
+                    f'rel="noopener">{html.escape(a["source_label"])}</a>')
+        return ('<span class="flag">unverified</span> <span class="small">'
+                f'{html.escape(a.get("source_note", "no official source recorded"))}</span>')
     actions = "\n".join(
         f"""<tr><td class="num strong">{a['rank']}</td><td>{a['action']}</td>
-            <td class="small">{a['why']}</td></tr>""" for a in ex["recommended_next_actions"])
+            <td class="small">{a['why']}</td><td>{_action_source(a)}</td></tr>""" for a in ex["recommended_next_actions"])
 
     counts = meta["counts"]
     n_sources = len(read_json(os.path.join(OUT, "sources.json"))["sources"])
+    # Window labels come from the data cut, never from a literal in this file.
+    slate_label = meta["data_windows"]["upcoming_slates"]
+    results_label = (meta["data_windows"]["out_of_sample_window"]
+                     .replace(" .. ", " to ").split(" (")[0])
     edge_note = next((f for f in ex["findings"] if f["title"].startswith("The word")), None)
     kpis = f"""
     <div class="grid k4" style="margin-bottom:16px">
       <div class="card"><h4>Strategies</h4><div class="kpi">{counts['strategies']}</div>
         <div class="kpi-sub">singles, parlays, SGPs, prop combos</div></div>
       <div class="card"><h4>Upcoming games</h4><div class="kpi">{counts['upcoming_games']}</div>
-        <div class="kpi-sub">2026-11-13 through 2026-11-15</div></div>
+        <div class="kpi-sub">{slate_label}</div></div>
       <div class="card"><h4>Out-of-sample games</h4><div class="kpi">{counts['out_of_sample_games']}</div>
-        <div class="kpi-sub">2026-11-06 to 2026-11-12, ratings from 11-05 or earlier</div></div>
+        <div class="kpi-sub">{results_label}, ratings from 11-05 or earlier</div></div>
       <div class="card"><h4>Official sources</h4><div class="kpi">{n_sources}</div>
         <div class="kpi-sub">nba.com, official.nba.com, league injury PDFs</div></div>
     </div>"""
@@ -168,7 +195,7 @@ def p_index(meta, ex):
 
   <h2>Recommended next actions</h2>
   <div class="tablewrap"><table class="thin">
-    <thead><tr><th class="num">#</th><th>Action</th><th>Why</th></tr></thead>
+    <thead><tr><th class="num">#</th><th>Action</th><th>Why</th><th>Official source</th></tr></thead>
     <tbody>{actions}</tbody>
   </table></div>
 

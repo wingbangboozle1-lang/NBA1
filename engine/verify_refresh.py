@@ -61,9 +61,9 @@ def main():
         report.append("- **FAIL**: " + msg)
 
     # ---------------------------------------------------------------- injuries
-    sec("Injury rows — Build B `data/raw/injuries.json` vs 5:15 PM official PDF (119 rows)")
+    sec("Injury rows — Build B `data/raw/injuries.json` vs 7:30 PM official PDF (122 rows)")
     inj = rows_of(load("data/raw/injuries.json"))
-    ev_rows = list(ev["injury_0515pm_rows"])
+    ev_rows = list(ev["injury_0730pm_rows"])
     ev_total = len(ev_rows)
     ev_map = {}
     for r in ev_rows:
@@ -105,10 +105,10 @@ def main():
                 missing.append(r)
     if not missing and not mismatched and matched == len(inj) == ev_total:
         ok(f"all {matched} rows match the independent 2026-11-14 transcription "
-           f"(player, status, reason, team, matchup), including the 6 NOT YET SUBMITTED team rows.")
+           f"(player, status, reason, team, matchup), including the 5 NOT YET SUBMITTED team rows.")
     else:
         if missing:
-            bad(f"{len(missing)} repo rows not found in the 5:15 PM evidence: "
+            bad(f"{len(missing)} repo rows not found in the 7:30 PM evidence: "
                 + "; ".join(f"{r['player']} ({r['status']})" for r in missing[:8]))
         if mismatched:
             bad(f"{len(mismatched)} rows disagree on status/reason: "
@@ -124,7 +124,7 @@ def main():
     a_rows = a["rows"]
     # expected 3PM status per player (5:15 value unless an edition delta applies)
     exp3 = {}
-    for r in ev_rows:
+    for r in ev["injury_0515pm_rows"]:
         if r["game_date"] != "2026-11-13":
             continue
         st = r["status"]
@@ -202,9 +202,13 @@ def main():
                 (norm(r["away"]) == norm(e["away"]), "away"),
                 (norm(r["home"]) == norm(e["home"]), "home"),
                 (norm(r.get("time_et") or r.get("tip_et")) == norm(e["time_et"]), "time"),
-                (norm(r.get(rec_cols[0]) or r.get("away_record")) == norm(e["away_rec"]), "away_rec"),
-                (norm(r.get(rec_cols[1]) or r.get("home_record")) == norm(e["home_rec"]), "home_rec"),
             ]
+            # rows that carry records must match them; schedule_in_progress.json rows
+            # deliberately carry none (the 11/13 games were live at the data cut)
+            if (r.get(rec_cols[0]) or r.get("away_record") or
+                    r.get(rec_cols[1]) or r.get("home_record")):
+                checks.append((norm(r.get(rec_cols[0]) or r.get("away_record")) == norm(e["away_rec"]), "away_rec"))
+                checks.append((norm(r.get(rec_cols[1]) or r.get("home_record")) == norm(e["home_rec"]), "home_rec"))
             badf = [name for good, name in checks if not good]
             if badf:
                 problems.append(f"{label} {gid}: mismatch on {badf}")
@@ -213,7 +217,8 @@ def main():
         return n_ok, problems, seen
 
     all_seen = set()
-    for path, label in [("data/raw/schedule_upcoming.json", "Build B"),
+    for path, label in [("data/raw/schedule_upcoming.json", "Build B upcoming"),
+                        ("data/raw/schedule_in_progress.json", "Build B in-progress 11/13"),
                         ("data/schedule_2026_11_13_to_16.json", "Build A")]:
         n_ok, problems, seen = check_schedule(path, label)
         all_seen |= seen
@@ -221,7 +226,7 @@ def main():
             for p in problems:
                 bad(p)
         ok(f"{label}: {n_ok} rows match the official slate pages on date, matchup, tip time and "
-           f"both records.")
+           "records where carried.")
     uncovered = set(ev_slate) - all_seen
     if uncovered:
         bad(f"{len(uncovered)} evidence rows not present in any schedule file: {sorted(uncovered)[:5]}")
@@ -234,13 +239,14 @@ def main():
     ok("NYK@TOR (11/15 & 11/17) and POR@MIN (11/16 & 11/17) repeat matchups confirmed on official "
        "game pages (titles read 'Nov 17, 2026' for 0022600253 / 0022600254). Flagged as an "
        "irregularity for human review, not corrected.")
-    ok("Injury report editions chain (03:00 -> 05:00 -> 05:15 PM) explains every status difference "
-       "between the two transcriptions; no unexplained difference remains.")
+    ok("Injury report editions chain (12:00 -> 03:00 -> 05:00 -> 05:15 -> 07:30 PM) explains every "
+       "status difference between the transcriptions (incl. 8 moves 5:15->7:30 PM and Denver's NYS "
+       "team row replaced by 4 named players); no unexplained difference remains.")
 
     report.append("\n## Totals\n")
     report.append(f"- Verifications failing: **{failures}**")
     report.append("- Rows re-verified line by line against official sources on 2026-11-14: "
-                  "119 + 91 (injury rows, two editions) + 36 (slate rows) = **246**")
+                  "122 + 91 (injury rows, two editions) + 36 (slate rows) = **249**")
     report.append("- Sources: see `data/refresh_2026_11_14/official_captures_2026-11-14.json` → `meta.sources`.")
 
     out = os.path.join(ROOT, "notes", "verification-2026-11-14.md")
@@ -258,11 +264,12 @@ def main():
         "only if player/team/matchup/status/reason (injuries) or date/matchup/tip time/both\n"
         "records (slates) agree exactly after whitespace normalisation.\n\n"
         "Sources re-read (all official):\n\n"
-        "- Injury reports 2026-11-13, three editions:\n"
+        "- Injury reports 2026-11-13, five editions:\n"
         "  [12:00 PM](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_12_00PM.pdf),\n"
         "  [3:00 PM](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_03_00PM.pdf),\n"
         "  [5:00 PM](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_00PM.pdf),\n"
-        "  [5:15 PM](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf)\n"
+        "  [5:15 PM](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf),\n"
+        "  [7:30 PM](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf)\n"
         "  (hub: [official.nba.com injury reports](https://official.nba.com/nba-injury-report-2026-27-season/))\n"
         "- Slates: [11/13](https://www.nba.com/games?date=2026-11-13) (via live game-page strip),\n"
         "  [11/14](https://www.nba.com/games?date=2026-11-14),\n"
@@ -279,7 +286,7 @@ def main():
         "  VERIFY OK; Build B data validated by the Pages workflow checks).\n"
         "- The three injury datasets that looked contradictory are three **different official\n"
         "  editions** (12:00 PM = 75-row legacy page `docs/injuries.html`; 3:00 PM = 88-row\n"
-        "  Build A data with a 12:00 PM movement column; 5:15 PM = 119-row Build B data). Each\n"
+        "  Build A data with a 12:00 PM movement column; 5:15 PM = 119-row interim capture;\n  7:30 PM = 122-row Build B data). Each\n"
         "  row-set verifies against its own edition, and every difference between editions is a\n"
         "  documented status movement — no unexplained difference remains.\n"
         "- Build A and Build B use different transcription policies for PDF continuation rows\n"

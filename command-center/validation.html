@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validation Gates · NBA1 Command Center</title>
+<meta name="description" content="The seven gates and the strictly out-of-sample verdict for all ten strategies">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a href="index.html">Dashboard</a>
+    <a href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a href="slate.html">Slate &amp; lines</a>
+    <a href="picks.html">Picks</a>
+    <a href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html" class="on">Validation gates</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="luck.html">Luck</a>
+    <a href="backtest.html">Game log</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="gameflow.html">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="flagged.html">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+  <div class="main">
+    <div class="top"><div><h1>Validation Gates</h1><div class="sub">The seven gates and the strictly out-of-sample verdict for all ten strategies</div></div><span class="asof" id="asof">as of …</span></div>
+    <div class="wrap">
+      <p class="lede">The out-of-sample window is every completed game after the ratings cut-off:
+      <b>51 games from 2026-11-06 to 2026-11-12</b>, each predicted with team ratings built only from
+      2026-10-20 to 2026-11-05. No game in the window contributes to the ratings that predict it.</p>
+
+      <div class="bn info"><div class="ico">i</div><div>
+        <p><strong>Two parameters are fitted on the test window</strong> — home-court advantage and the
+        back-to-back penalty. That is disclosed, and a zeroed variant is published beside the fitted
+        one so the reader can see how much of the result comes from those two numbers. Answer: almost
+        none (see the row below).</p>
+      </div></div>
+
+      <div class="kpis" id="kpis"></div>
+
+      <h2>Model against the naive reference, on the same 51 games</h2>
+      <div id="cmp"><div class="empty">Loading…</div></div>
+
+      <h2>Parameter fit</h2>
+      <div id="fit"><div class="empty">Loading…</div></div>
+
+      <h2>Gate-by-gate verdict for every strategy</h2>
+      <div id="matrix"><div class="empty">Loading…</div></div>
+      <p class="tnote">Legend — <b>pass</b>: cleared. <b>fail</b>: measured and missed. <b>prov</b>
+      (provisional): the sample is between 10 and 29 graded plays, so the gate is neither cleared nor
+      failed. <b>n/a</b>: the gate cannot apply to that strategy, e.g. a correlation limit on a
+      single-leg play. <b>not run</b>: the gate needs data this repository does not hold. A gate is only
+      marked pass when it was actually evaluated.</p>
+    </div>
+    <footer class="bot">
+      <p><strong>NBA1 Command Center.</strong> Every table row links to an official source; anything that could
+      not be confirmed is blank and listed on <a href="flagged.html">Flagged for Review</a>.</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association. Data © NBA, used with
+      attribution and links to the official pages.</p>
+    </footer>
+  </div>
+</div>
+<script>
+(async () => {
+  try {
+    const [V, meta] = await Promise.all([CC.load("validation.json"), fetch("data/meta.json").then(r=>r.json())]);
+    document.getElementById("asof").textContent = "as of " + meta.as_of;
+    document.getElementById("cut").textContent = meta.generated_at_utc;
+    const m = V.metrics;
+    CC.set("#kpis",
+      CC.kpi("Out-of-sample games", m.n_games, m.window, "") +
+      CC.kpi("Margin MAE", m.mae_margin_model, "reference " + m.mae_margin_ref, m.mae_margin_model<m.mae_margin_ref?"ok":"bad") +
+      CC.kpi("Total MAE", m.mae_total_model, "reference " + m.mae_total_ref, m.mae_total_model<m.mae_total_ref?"ok":"bad") +
+      CC.kpi("Straight up", m.straight_up_model, "reference " + m.straight_up_ref, ""));
+
+    const cols = [
+      {h:"Metric", v:r=>`<b>${CC.esc(r.k)}</b>`},
+      {h:"Model", n:1, v:r=>CC.esc(r.m)},
+      {h:"Reference", n:1, v:r=>CC.esc(r.r)},
+      {h:"Better", v:r=>r.win==null?CC.tag("no comparison","n"):r.win?CC.tag("model","g"):CC.tag("reference","r")},
+      {h:"What it measures", v:r=>`<span class="small">${CC.esc(r.note)}</span>`},
+      {h:"Source", v:r=>{
+        const id = r.src || "S2";
+        return CC.src(id, id === "S2" ? "training window" : "games & scores");
+      }},
+    ];
+    const better=(a,b,lower=true)=> lower? (a<b?a===b?null:true:false) : (a>b?a===b?null:true:false);
+    const rows = [
+      {src:"S2", k:"Margin MAE (pts)", m:m.mae_margin_model, r:m.mae_margin_ref, win:better(m.mae_margin_model,m.mae_margin_ref), note:"Average absolute error on the home margin. Lower is better."},
+      {k:"Margin RMSE (pts)", m:m.rmse_margin_model, r:m.rmse_margin_ref, win:better(m.rmse_margin_model,m.rmse_margin_ref), note:"Penalises large misses. Lower is better."},
+      {k:"Margin bias (pts)", m:m.bias_margin_model, r:null, win:null, note:"Mean signed error. Zero is unbiased."},
+      {k:"Total MAE (pts)", m:m.mae_total_model, r:m.mae_total_ref, win:better(m.mae_total_model,m.mae_total_ref), note:"Lower is better. This is the one the model loses."},
+      {k:"Total RMSE (pts)", m:m.rmse_total_model, r:m.rmse_total_ref, win:better(m.rmse_total_model,m.rmse_total_ref), note:"Lower is better."},
+      {k:"Brier score", m:m.brier_model, r:m.brier_ref, win:better(m.brier_model,m.brier_ref), note:"Probability calibration on the moneyline. Lower is better."},
+      {k:"Log loss", m:m.logloss_model, r:m.logloss_ref, win:better(m.logloss_model,m.logloss_ref), note:"Probability calibration, harsher on confident misses."},
+      {k:"Straight up", m:m.straight_up_model, r:m.straight_up_ref, win:null, note:"Winner picks. Identical record, so the tie is left as no comparison."},
+      {src:"S2", k:"Margin MAE, parameters zeroed", m:m.mae_margin_zeroed_params, r:m.mae_margin_model, win:better(m.mae_margin_zeroed_params,m.mae_margin_model), note:"The fitted HCA and B2B terms versus no parameters at all."},
+      {src:"S2", k:"Bootstrap 95% CI, model MAE", m:"["+m.bootstrap_mae_model_95.join(", ")+"]", r:"["+m.bootstrap_mae_ref_95.join(", ")+"]", win:null, note:"The two intervals overlap almost completely, which is why no stability claim is made."},
+    ];
+    CC.set("#cmp", CC.table(cols, rows));
+
+    const f = V.fit || {};
+    const P = v => (v === null || v === undefined) ? null : v;   // never render a nested object
+    function pv(o){ return o && typeof o === "object" ? o : {est:o}; }
+    const fitRows = [
+      ["Home-court advantage (pts)", pv(f.hca),
+       "Estimated on the test window and applied to every line. Disclosed as in-sample."],
+      ["Back-to-back coefficient, home margin", pv(f.b2b_coef_on_home_margin),
+       "Applied only when |t| ≥ 1; otherwise zeroed. The threshold is a rule, not a fit."],
+      ["Total bias (pts)", pv(f.total_bias),
+       "Added to every originated total."],
+      ["Total back-to-back coefficient", pv(f.total_b2b_coef),
+       "Set to zero here because |t| < 1. Shown so the decision is visible."],
+    ].map(([k,o,note])=>({
+      k, est:o.est, se:o.se, t:o.t,
+      used: o.used === undefined ? null : o.used,
+      note: note
+    }));
+    fitRows.push({k:"Fitted games (n)", est:f.n, se:null, t:null, used:null,
+      note:"Every completed game after the ratings cut-off."});
+    fitRows.push({k:"Back-to-backs detected (home / away)", est:(f.b2b_detected_home+" / "+f.b2b_detected_away), se:null, t:null, used:null,
+      note:f.b2b_caveat || "Detection is limited to the captured results window."});
+    fitRows.push({k:"Neutral-site games", est:f.neutral_site_games, se:null, t:null, used:null,
+      note:"Home-court advantage is not applied at a neutral site."});
+    fitRows.push({k:"Shrinkage k (games)", est:(f.shrink_derivation||{}).shrink_k_derived, se:null, t:null, used:null,
+      note:(f.shrink_derivation||{}).disclosure || ""});
+
+    CC.set("#fit", CC.table([
+      {h:"Parameter", v:r=>`<b>${CC.esc(r.k)}</b>`},
+      {h:"Estimate", n:1, v:r=>r.est===null||r.est===undefined?CC.blank:CC.esc(String(r.est))},
+      {h:"Std. error", n:2, v:r=>r.se===null||r.se===undefined?CC.blank:CC.n(r.se,2)},
+      {h:"t", n:2, v:r=>r.t===null||r.t===undefined?CC.blank:CC.num(r.t,2)},
+      {h:"Applied", v:r=>r.used===null?CC.blank:r.used?CC.tag("yes","g"):CC.tag("no — below |t| 1","n")},
+      {h:"Note", v:r=>`<span class="small">${CC.esc(r.note)}</span>`},
+      {h:"Source", v:()=>CC.src("S2","training window")},
+    ], fitRows));
+
+    // gate matrix
+    const gids = V.gate_definitions.map(g=>g.id);
+    const mcols = [{h:"Strategy", v:r=>`<b>${CC.esc(r.id)}</b> <span class="small">${CC.esc(r.name)}</span>`},
+      {h:"n", n:1, v:r=>r.n_graded},
+      {h:"Record", v:r=>`<span class="mono">${r.wins}–${r.losses}</span>`},
+      {h:"p", n:3, v:r=>CC.n(r.binomial_p,3)}];
+    gids.forEach(g=>mcols.push({h:g, v:r=>{
+      const x=(r.gates||[]).find(y=>y.id===g);
+      if(!x) return CC.blank;
+      return x.status==="PASS"?CC.tag("pass","g"):x.status==="FAIL"?CC.tag("fail","r"):
+        x.status==="PROVISIONAL"?CC.tag("prov","a"):CC.tag(x.status==="N/A"?"n/a":"not run","n");
+    }, c:"nowrap"}));
+    mcols.push({h:"Gates passed", n:1, v:r=>`<b>${(r.gates||[]).filter(g=>g.status==="PASS").length}</b>/7`});
+    mcols.push({h:"Source", v:r=>CC.src(r.id==="S1"?"S2":"S3",
+      r.id==="S1" ? "training window" : "games & scores")});
+    CC.set("#matrix", CC.table(mcols, V.strategies));
+
+  } catch(e){ CC.fail("#cmp", e); }
+})();
+</script>
+</body>
+</html>
