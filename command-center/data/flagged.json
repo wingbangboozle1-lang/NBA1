@@ -5,14 +5,14 @@
  "items": [
   {
    "id": "R01",
-   "severity": "HIGH",
+   "severity": "MEDIUM",
    "area": "Reproducibility",
-   "title": "The refresh script has still never been executed from a machine with direct NBA access",
-   "detail": "engine/fetch_official.py exists to re-fetch the official pages inside GitHub Actions. It was written in a sandbox whose outbound network was restricted. This session re-captured real live data \u2014 but through the agent's web-fetch channel and a transcription script, not through fetch_official.py. So the pipeline for *continuously* refreshing remains untested end to end.",
-   "affected": "The nightly refresh workflow (.github/workflows/refresh-data.yml), and therefore the long-term accuracy of every page.",
-   "suggested_action": "The workflow uses continue-on-error and only commits on change, so a failure leaves the last good snapshot live. Run it manually once (Actions -> Refresh official data -> Run workflow) and read the log; if the parsers fail, the site stays correct and the log says why.",
-   "source": "GitHub Actions",
-   "source_url": "https://github.com/wangbangboozle1-lang/NBA1/actions"
+   "title": "The refresh pipeline has never run end to end, and no 11/14 injury PDF exists to fetch",
+   "detail": "Two separate gaps, and a GitHub-hosted probe settles the first. (1) On 2026-11-14 at 00:58 UTC a runner in this repository's own GitHub Actions probed every source the site cites: www.nba.com/stats/teams/advanced, /stats/players/traditional, /schedule, /games?date=2026-11-13, a game page, official.nba.com/nba-injury-report-2026-27-season/ and the 11/13 05:15PM injury PDF all returned HTTP 200 within 600 ms. So the network is not the obstacle to continuous refresh. What has still never run is engine/fetch_official.py end to end with its parsers writing the derived files \u2014 and this session could not dispatch that workflow to try (HTTP 403: the token may read runs but not trigger them). (2) The same probe asked for Injury-Report_2026-11-14_12_00PM.pdf and got HTTP 403, and the session's own capture of the official index found no 11/14 edition at all. No newer report therefore exists to fetch, which is why this build still carries the 11/13 19:30 ET edition.",
+   "affected": "The nightly refresh workflow, the currency of every page after 2026-11-14, and the injury layer on the 11/14 slate.",
+   "suggested_action": "Run the Refresh workflow once from the Actions tab (or with a token that has actions:write) and read the log. Separately, treat the absence of an 11/14 report as a data condition, not a bug: the site must show the edition it actually has, with its timestamp.",
+   "source": "GitHub Actions run of the reachability probe, 2026-11-14T00:58:11Z",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/actions"
   },
   {
    "id": "R02",
@@ -145,6 +145,17 @@
    "suggested_action": "Keep the sign convention printed beside the columns. If a future build shows absolute error, publish a second column rather than relabelling the signed one.",
    "source": "NBA games & scores (the actual results these errors are measured against)",
    "source_url": "https://www.nba.com/games"
+  },
+  {
+   "id": "R14",
+   "severity": "LOW",
+   "area": "Provenance",
+   "title": "A 19:45 ET injury edition exists and post-dates the 19:30 edition this build uses",
+   "detail": "The official index lists editions of the 11/13 report through 07:45 PM ET; this build is transcribed from the 07:30 PM ET edition. The 19:45 edition was read during this review and every status it shows agreed with what is stored here \u2014 Giannis Antetokounmpo Available, Mathurin Available, Curry Out, Morant Out, Smart Out \u2014 and its visible 11/14 block listed the same five teams as NOT YET SUBMITTED plus the same Dallas, Brooklyn and Minnesota entries. What this build does NOT have is a cell-by-cell diff of the two PDFs: the extraction channel returns text in chunks that repeat the header and split tables mid-row, so a mechanical diff would be unreliable and was not claimed.",
+   "affected": "The injury layer, and indirectly the availability input to every originated line.",
+   "suggested_action": "Archive every edition under its own timestamp and diff consecutive editions, which is exactly suggestion S07. Until then, quote the edition time beside every status, as this site does.",
+   "source": "NBA Official Injury Report, 11/13/26 07:45 PM ET edition (PDF)",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_45PM.pdf"
   }
  ]
 }

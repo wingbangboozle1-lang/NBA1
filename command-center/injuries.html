@@ -53,6 +53,7 @@
         near-meaningless impact number.</p>
         <p class="small">An absent entry is not a healthy team. Where a team had not submitted a report,
         the row reads "NOT YET SUBMITTED", exactly as published.</p>
+        <p class="small" id="edition"></p>
       </div></div>
 
       <div class="kpis" id="kpis"></div>
@@ -85,6 +86,11 @@
     document.getElementById("cut").textContent = meta.generated_at_utc;
     const rows = I.rows;
     const playerRows = rows.filter(r=>r.player);
+    const ed = document.getElementById("edition");
+    if (ed) ed.innerHTML = "Edition in use: <b>" + CC.esc(I.report) + "</b>. A later edition of the same " +
+      "day (07:45 PM ET) exists on the official index and was spot-checked against this one during " +
+      "review; a cell-by-cell diff of the two PDFs is not published, so this build is honest about " +
+      "which edition it is quoting rather than claiming to be the last one (flagged R14).";
     const counts = {};
     playerRows.forEach(r=>counts[r.status]=(counts[r.status]||0)+1);
     const nys = rows.filter(r=>r.status==="NOT YET SUBMITTED").length;

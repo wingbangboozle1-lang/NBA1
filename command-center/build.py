@@ -554,6 +554,7 @@ PAGES["injuries"] = dict(
         near-meaningless impact number.</p>
         <p class="small">An absent entry is not a healthy team. Where a team had not submitted a report,
         the row reads "NOT YET SUBMITTED", exactly as published.</p>
+        <p class="small" id="edition"></p>
       </div></div>
 
       <div class="kpis" id="kpis"></div>
@@ -576,6 +577,11 @@ PAGES["injuries"] = dict(
     document.getElementById("cut").textContent = meta.generated_at_utc;
     const rows = I.rows;
     const playerRows = rows.filter(r=>r.player);
+    const ed = document.getElementById("edition");
+    if (ed) ed.innerHTML = "Edition in use: <b>" + CC.esc(I.report) + "</b>. A later edition of the same " +
+      "day (07:45 PM ET) exists on the official index and was spot-checked against this one during " +
+      "review; a cell-by-cell diff of the two PDFs is not published, so this build is honest about " +
+      "which edition it is quoting rather than claiming to be the last one (flagged R14).";
     const counts = {};
     playerRows.forEach(r=>counts[r.status]=(counts[r.status]||0)+1);
     const nys = rows.filter(r=>r.status==="NOT YET SUBMITTED").length;
@@ -999,6 +1005,9 @@ PAGES["sources"] = dict(
       </div>
       <div id="tbl"><div class="empty">Loading…</div></div>
 
+      <h2>Independent re-verification</h2>
+      <div id="reverify"></div>
+
       <h2>Capture history</h2>
       <div id="log"><div class="empty">Loading…</div></div>''',
     script='''(async () => {
@@ -1038,6 +1047,15 @@ PAGES["sources"] = dict(
       {h:"What changed", v:r=>`<span class="small">${CC.esc(r.what_changed)}</span>`},
       {h:"Provenance", v:r=>CC.tag("capture log in this repository","b")},
     ], log.slice().reverse()) : '<div class="empty">No capture history recorded.</div>');
+
+    const rv = S.reverification || [];
+    if (rv.length && document.getElementById("reverify")) {
+      CC.set("#reverify", rv.map(x => `<div class="bn good"><div class="ico">✓</div><div>
+        <p><strong>Re-verified ${CC.esc(x.checked_at_utc)}.</strong> ${CC.esc(x.scope)}.</p>
+        <p class="small">${CC.esc(x.method)}. Fields checked: ${CC.esc(x.fields)}.</p>
+        <p><strong>${CC.esc(x.result)}</strong> ${x.urls.map(u=>`<a href="${CC.esc(u)}" rel="noopener" target="_blank">official page ↗</a>`).join(" · ")}</p>
+      </div></div>`).join(""));
+    }
   } catch(e){ CC.fail("#tbl", e); }
 })();''')
 

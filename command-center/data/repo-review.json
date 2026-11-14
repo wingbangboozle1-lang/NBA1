@@ -171,6 +171,12 @@
    "how": "python3: compared err_* against both signed and absolute differences for all 51 rows",
    "result": "they are signed \u2014 page corrected, R13",
    "ref": "S3"
+  },
+  {
+   "check": "Official sources reachable from a real GitHub-hosted runner",
+   "how": "The repository's probe workflow, run on ubuntu26 at 2026-11-14T00:58:11Z, over 11 URLs",
+   "result": "7 of 7 principal sources returned 200",
+   "ref": "S3"
   }
  ],
  "numbers_spot_checked": [
@@ -239,9 +245,9 @@
   {
    "id": "I3",
    "severity": "HIGH",
-   "issue": "fetch_official.py has never been run against a live site",
-   "impact": "Unattended refresh is unproven.",
-   "action_taken": "Documented; the workflow is guarded so a failure cannot publish a broken snapshot.",
+   "issue": "The refresh pipeline has never run end to end (fetch_official.py -> pipeline.py -> build_site.py)",
+   "impact": "Not a data error: a GitHub-hosted probe on 2026-11-14T00:58Z reached all seven principal official sources with HTTP 200, so the network path works. What is unproven is the parsers, and no 11/14 injury PDF exists to fetch yet.",
+   "action_taken": "Recorded the probe as evidence, narrowed the claim to the parsers, and tried to dispatch the workflow \u2014 GitHub returned 403 for this token, which is recorded rather than worked around.",
    "flag": "R01",
    "ref": "S1"
   },

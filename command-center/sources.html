@@ -58,6 +58,9 @@
       </div>
       <div id="tbl"><div class="empty">Loading…</div></div>
 
+      <h2>Independent re-verification</h2>
+      <div id="reverify"></div>
+
       <h2>Capture history</h2>
       <div id="log"><div class="empty">Loading…</div></div>
     </div>
@@ -107,6 +110,15 @@
       {h:"What changed", v:r=>`<span class="small">${CC.esc(r.what_changed)}</span>`},
       {h:"Provenance", v:r=>CC.tag("capture log in this repository","b")},
     ], log.slice().reverse()) : '<div class="empty">No capture history recorded.</div>');
+
+    const rv = S.reverification || [];
+    if (rv.length && document.getElementById("reverify")) {
+      CC.set("#reverify", rv.map(x => `<div class="bn good"><div class="ico">✓</div><div>
+        <p><strong>Re-verified ${CC.esc(x.checked_at_utc)}.</strong> ${CC.esc(x.scope)}.</p>
+        <p class="small">${CC.esc(x.method)}. Fields checked: ${CC.esc(x.fields)}.</p>
+        <p><strong>${CC.esc(x.result)}</strong> ${x.urls.map(u=>`<a href="${CC.esc(u)}" rel="noopener" target="_blank">official page ↗</a>`).join(" · ")}</p>
+      </div></div>`).join(""));
+    }
   } catch(e){ CC.fail("#tbl", e); }
 })();
 </script>
