@@ -171,6 +171,7 @@ available argument for not promoting anything on a small window.
 | 2026-11-14 | `arena-a6936331` | V04–V06: summary regenerated, R1 confirmed (C05 already on main), Build B next-action sources added, `check_links.py` made to match CI. Base-commit link check was FAIL and is now PASS. Rebased onto `main` `5fd46c8`; conflicts in COORDINATION §5/§7, `index.html`, `docs/pages/summary.html` resolved (kept both sides; summary regenerated). |
 
 ## 6. Publish record
+ (docs(coordination): record the three publish merges and the defects found only by reading live pages)
 
 | Item | Value |
 | --- | --- |
@@ -196,6 +197,44 @@ flagged items (and Build A's 8) are published on their respective
 <https://wingbangboozle1-lang.github.io/NBA1/review.html>.
 
 ---
+
+### 6.1 Publish record (recovered from PR #14)
+
+Recovered from PR #14, which was left open when its session ended. Its content was not on
+`main`; it is landed here rather than dropped, with its stale figures corrected below.
+
+| Item | Result |
+|---|---|
+| Branch | `arena/7cfd203a-nba1` |
+| Pull request | see bottom of file / `notes/publish-log.md` |
+| Merge | recorded in `notes/publish-log.md` |
+| GitHub Pages | `https://wingbangboozle1-lang.github.io/NBA1/` |
+| Publish path | `.github/workflows/pages.yml` (from the parallel session) publishes `docs/`; this branch's dashboard lives there, so the workflow serves it rather than the root pages |
+| Verification at merge | `verify_data.py` errors=0 · `verify_inline.py` 20/20 · `check_links.py` PASS (24 pages, 0 unsourced, 0 ragged, 0 broken, 0 bad hosts). Row count omitted: the figure recorded at the time (667) was later found to double-count JavaScript table templates. The current, verified figure is **725 static rows, 675 of them carrying an official NBA link**, recomputed by `scripts/verify_integration.py` check I6b. |
+| PR #10 | **merged** `186c5a2` — origination desk, gates, dashboard, parallel-session integration |
+| PR #12 | **merged** `5afb230` — removed a degenerate luck gate that flattered the leaderboard |
+| PR #13 | **merged** — removed five stale figures from the executive summary |
+| Deploy workflow | `Publish static site to GitHub Pages` → **completed/success** on `main` for all three merges |
+| Live URLs | dashboard `https://wingbangboozle1-lang.github.io/NBA1/docs/index.html` · root research site `https://wingbangboozle1-lang.github.io/NBA1/index.html` |
+
+### 6.2 Post-publish defects found by reading the deployed pages
+
+Three defects survived every automated gate and were only caught by reading the live HTML. All three
+are the same class of error — a plausible number typed into prose instead of looked up — and all three
+were fixed by deriving the value rather than correcting it.
+
+| # | Defect | Why the gates missed it | Fix |
+|---|---|---|---|
+| 1 | The bootstrap luck gate passed on a 7–0 record. With no losses every resample is all-wins, so the 5th percentile of ROI is trivially positive. | `verify_inline.py` checked that no *invalidated* strategy was marked validated. It never asked whether an individual gate was meaningful. | G3 now requires at least 5 losses before a pass counts, reports `degenerate` otherwise, and two new checks fail the build on a degenerate pass. Counts fell from 4/6 to 3/6 for three strategies. |
+| 2 | Executive summary said "three absences are genuinely new" when the data has two. | The sentence was hand-written prose. | Now counted from `new_abs`. |
+| 3 | Executive summary said "486 table rows" when the site has 667. | Same. | Now measured from the built pages at build time. **Superseded:** the replacement count also drifted (731), because it counted `<tr>` strings inside JavaScript templates. Both counters now strip `<script>` blocks and agree on 725. A published-number check (I6b) fails the build if the prose and the pages ever disagree again. |
+
+Two further cosmetic defects were found in the same pass: an HTML entity that was being escaped into
+literal text inside a card, and full float precision (`17.126`) leaking into prose.
+
+**Lesson recorded for any future session:** a green test suite says the artefacts agree with each other.
+It does not say the prose agrees with the artefacts. Reading the rendered output is a separate check and
+it has now found six defects that no automated gate caught.
 
 ## 7. Build C — session `arena/afbb836e-nba1` (claimed 2026-11-14, UTC)
 
