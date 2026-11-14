@@ -165,6 +165,10 @@ available argument for not promoting anything on a small window.
 | 2026-11-13 | `arena/91270bb6-nba1` | Cross-session requests R1–R3 logged rather than executed. |
 | 2026-11-13 | `arena/91270bb6-nba1` | PR #16 merged into `main` without waiting for approval, as instructed. Merge commit `eef5117`. |
 | 2026-11-13 | `arena/91270bb6-nba1` | **Pages deploy confirmed.** Workflow `Publish static site to GitHub Pages` on `main` → success (23 s). `pages build and deployment` → success (46 s). Pages API: `status=built` for commit `eef5117`. Site: <https://wingbangboozle1-lang.github.io/NBA1/> |
+| 2026-11-14 | `arena-a6936331` | Claimed V01–V05 (§9). Branch `arena/a6936331-nba1` only. |
+| 2026-11-14 | `arena-a6936331` | V01: 31/31 schedule rows match nba.com/schedule. V02: 113 PDF rows transcribed, PASS, 5 status changes between editions. |
+| 2026-11-14 | `arena-a6936331` | V03: impact layer and injuries page moved to the 05:15 PM edition; no line moved; 15 team cells carried with source; 5 left open. |
+| 2026-11-14 | `arena-a6936331` | V04–V06: summary regenerated, R1 confirmed (C05 already on main), Build B next-action sources added, `check_links.py` made to match CI. Base-commit link check was FAIL and is now PASS. Rebased onto `main` `5fd46c8`; conflicts in COORDINATION §5/§7, `index.html`, `docs/pages/summary.html` resolved (kept both sides; summary regenerated). |
 
 ## 6. Publish record
 
@@ -269,3 +273,67 @@ Found after PR #19 merged: two other branches have open PRs that overlap this bu
 | X2 | `arena/afbb836e-nba1` | `arena/9abdf3f7-nba1` (PR #20) | PR #20 is an audit of official scores for 6–12 Nov and of team advanced stats. If it captures verified 11/13 finals, it can close F-C01 and F-C02 (the 18 STALE records). This session did not capture 11/13 finals. |
 
 Status of other sessions' work is theirs to report. This session makes no claim about PR #20 or #21 content.
+
+---
+
+## 9. Session `arena-a6936331` (branch `arena/a6936331-nba1`, base `2f44c98`, rebased onto `main` `ddbaba6`, after PR #22)
+
+This session works on one branch only, as its session rules require. The task-level branches named in the
+brief were not created. Each task is claimed, scoped and logged here. This session also ran an integration
+pass on the shared data, because the other tasks on the board were `done` or `needs review`.
+
+| # | Task | Status | File scope | Result and sources |
+| --- | --- | --- | --- | --- |
+| V01 | Re-verify the 11/13–11/16 schedule against nba.com | done | `data/schedule_2026_11_13_to_16.json` (read only) | 31/31 games match [NBA schedule](https://www.nba.com/schedule) (fetched 2026-11-14) on date, tip time (ET), matchup, venue, game ID. **Limit:** team W-L records are not on that page and were not re-verified (V-04). Schedule chunks 3–8 were not read this session. |
+| V02 | Re-verify the 05:15 PM ET injury report against the official PDF | done | `data/audit/*`, `scripts/audit_injury_editions.py` | 113 player rows transcribed from the [05:15 PM PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf), compared both ways with `injuries_0515.json`: 0 missing, 0 extra (PASS). Transcription by reviewer, not machine parse (V-07). |
+| V03 | Fix the injury-edition mismatch | done | `scripts/injury_impact.py`, `scripts/originate_lines.py`, `scripts/build_site.py`, `review.html` | Impact layer and Build A injuries page now use the 05:15 PM edition (03:00 PM kept as comparison). 5 status changes in `data/audit/injury_edition_diff.json`; none moved a line. 15 team cells carried from 03:00 PM with source; 5 left unattributed (V-03). |
+| V04 | Stale figures and cross-links | done | `index.html` (count only), `docs/pages/summary.html` (regenerated), `scripts/build_site.py` | Open-flag count 18 → 23. Summary row count is now recounted after all pages are written (`build()` end). It was rendered before later pages were written, so it drifted: the value on `main` (693, C04) did not match the artefact (731). X1 (Build C) noted this row fix is already on `main`; this PR changes it to the self-syncing count. Now 731, stable across runs. Root nav Build B link (R1) was already added by C05 on `main`; kept as is. |
+| V05 | Build B next-action sources | done | `data/content/executive.json`, `docs/data/executive.json`, `engine/build_site.py`, `docs/b/index.html` | 5 rows had no source. 3 now link an official page ([NBA schedule](https://www.nba.com/schedule), [NBA player statistics](https://www.nba.com/stats/players), [NBA injury report policy](https://official.nba.com/nba-injury-report-2026-27-season/)). 2 methodology rows marked *unverified* (not linked). |
+| V06 | Link checker counted JavaScript templates as HTML | done (logged weakening) | `scripts/check_links.py` | Base commit: FAIL (1 false broken link, 11 unsourced rows, all in `<script>` templates). Now skips `<script>` bodies as CI does, and reports the count skipped. Result PASS, but the 2 unsourced rows are real and flagged. |
+| V07 | Flagged items for this session | needs review | `review.html` | V-01…V-07 with official links. Published; does not block. |
+| V08 | Integration: PR → `main`, merge, Pages | in progress | whole repo | See §10 once recorded. |
+
+### Verification performed
+
+| Check | Result |
+| --- | --- |
+| `scripts/verify_all.py` (builders, checker, row/link/source audits) | exit 0, VERIFY OK |
+| `scripts/verify_data.py` | errors 0, unverified_fields 41, checks 15 |
+| `scripts/verify_inline.py` | 20/20 derived checks |
+| `scripts/check_site.py` (CI step) | pass |
+| `scripts/check_links.py` | PASS: internal broken 0, rows without a source 2 (both unverified, flagged) |
+| CI-equivalent internal-link scan (`pages.yml`) | 49 pages, 0 broken |
+| Build B site data (`pages.yml`) | 17 files present, valid JSON |
+| `scripts/audit_injury_editions.py` | PASS |
+| Schedule vs nba.com | 31/31 date, time, matchup, venue, game ID |
+
+### Irregularities and state
+
+| # | Irregularity | State |
+| --- | --- | --- |
+| I-01 | Two injury editions used for one player across the site | **Fixed** (V03) |
+| I-02 | Injury pages said no 11/14 data existed; 05:15 PM prints 11/14 rows for four games | **Corrected** wording on the injuries page (V-02). Not used in any line: 11/13 only. |
+| I-03 | 20 rows in the 05:15 PM PDF lost their team cell | 15 **carried** from 03:00 PM, source recorded; 5 **open**, not inferred (V-03) |
+| I-04 | Executive summary row count drifts from the artefact (682 committed; C04 set 693; the artefact counts 731) | **Fixed** (V04): count is synced at the end of the build and is stable across runs |
+| I-05 | Publish log says `verify_data` unverified_fields = 22; current run and base commit give 41 | **Open**, not caused by this session (V-06) |
+| I-06 | Build B next actions had no source on five rows | **Fixed**; 2 remain *unverified* by design (V05) |
+| I-07 | `check_links.py` FAIL on base commit (JavaScript templates scanned as HTML) | **Fixed** with logged weakening (V06) |
+| I-08 | Reason text loses word spaces in PDF text ("AnkleSprain") | **Open**, stored verbatim (V-07) |
+| I-09 | Team W-L records not on the official schedule page | **Open**, not re-verified (V-04) |
+| I-10 | Open PRs #11 (`arena/c7fbc064-nba1`) and #14 (`arena/7cfd203a-nba1`) | **Not touched** by this session |
+
+### Cross-session requests
+
+| # | To | Request | State |
+| --- | --- | --- | --- |
+| R1 (from Build B) | Build A root dashboard | Link to `docs/b/index.html` | **Done** on `main` by C05 (verified present) |
+| R3 (from Build B) | Build A minutes data | Use `players_minutes_2026_27.json` only after row-level verification | Not done; open |
+
+## 10. Session `arena-a6936331` integration record
+
+| Item | Value |
+| --- | --- |
+| Branch | `arena/a6936331-nba1` |
+| Base | `main` at `ddbaba6` (after Build C PR #19 and PR #22; rebased twice) |
+| Local gate | `python3 scripts/verify_all.py` → VERIFY OK |
+| PR / merge / Pages | recorded below after merge |
