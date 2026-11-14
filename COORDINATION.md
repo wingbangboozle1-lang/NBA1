@@ -1783,3 +1783,50 @@ Irregularities met during delivery (not flags, logged here):
 - **`gh pr edit` fails** on the deprecated Projects (classic) GraphQL field. The body was updated through `gh api PATCH repos/…/pulls/57` instead.
 - **PR #56** merged to `main` (`4e4d0b0`) during this session. Its finals were cross-checked (9 / 9 agree) before the merge.
 
+
+---
+
+## 25. Session `arena/934ca56f-nba1` — integration seat: 11/13 finals promoted, stale records cleared, settlement published (CLAIMED 2026-11-14 10:25Z UTC)
+
+Branch `arena/934ca56f-nba1`, base `main` `7623c02` (the merge of PR #60). The platform pins this
+session to that branch, so the `session-<id>/<task>` naming in the brief is again not used; this
+single pinned branch carries the claims below. This is a deviation, logged here as earlier
+sessions logged it.
+
+**Why this session takes the integration seat.** Two integration PRs are open and both are
+`CONFLICTING` against `main`: #58 (`arena/ef6ff2a4-nba1`, head `fc65c16`, last touched 10:19Z) and
+#59 (`arena/254dd8bb-nba1`, head `b9922df`, created 10:19Z). Both were opened before `main` moved
+to `7623c02`, neither can merge, and neither owner has committed since. Under ground rule 5 this
+session takes the seat. **Nothing in either PR is discarded or reverted**: their findings are read
+below and every one that is still true of `main` is either already present on `main` or is
+re-verified and published here. See §25.7 for the triage.
+
+| # | Task | Status | File scope (exclusive to this session) |
+| --- | --- | --- | --- |
+| I01 | Independent official capture of the nine 11/13 finals, cross-checked against `data/verified/` | done | `verify/2026-11-14/official_finals_2026-11-13_s934ca56f.json` |
+| I02 | Promote the 11/13 finals into the game snapshot so settlement and records can use them | in progress | `data/raw/games_completed.json`, `data/derived/*.json` |
+| I03 | Settle every published 11/13 paper pick against the official finals; publish the result | in progress | `data/content/*.json`, `scripts/build_dashboard.py`, `site/**` |
+| I04 | Replace the 29 stale pre-11/13 records on the horizon rows with the post-11/13 official records | in progress | `data/derived/horizon_lines.json`, `data/derived/horizon_picks.json` |
+| I05 | Retire the "11/13 still in progress" prose that F29 flagged on every page that carries it | in progress | `data/content/*.json`, `scripts/build_dashboard.py`, `README.md` |
+| I06 | Verify the combined tree line by line, open the PR, merge, confirm Pages, record here | not started | `COORDINATION.md` (§25 only) |
+
+**Do not touch while I am working:** `docs/**`, `docs/b/**`, `command-center/**`, `edge-lab/**`,
+`audit/**`, `engine/**`, `engine_v2/**`, `origination/**`, `integration/**`. These are read as
+inputs, never edited. No file is deleted, renamed or reverted.
+
+**Sources I will read, all official:** `https://www.nba.com/games?date=2026-11-13` and
+`…/2026-11-14` … `…/2026-11-17`; the per-game `https://www.nba.com/game/<away>-vs-<home>-<id>`
+pages; `https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season`;
+`https://official.nba.com/nba-injury-report-2026-27-season/`.
+
+### 25.1 First finding of this session (already recorded, before any edit)
+
+Independent transcription of the nine 11/13 finals read from
+<https://www.nba.com/games?date=2026-11-13> (chunks 0–1) at 10:24Z on 2026-11-14, written to
+`verify/2026-11-14/official_finals_2026-11-13_s934ca56f.json`. **All nine games are Final**
+(one, ATL@CHI, is Final/OT). Compared with `data/verified/finals_2026-11-13.json` (session
+`arena/cfb25ff0-nba1`, merged as PR #56): **9 / 9 agree** on away, home and both scores, 0
+disagreements. Two independent sessions have now read the same page and agreed, which is the
+standard this repository uses before a final is allowed to settle anything.
+
+_This section is appended to as the work completes; see §25.2 onward._
