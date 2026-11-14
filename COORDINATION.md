@@ -1786,7 +1786,7 @@ Irregularities met during delivery (not flags, logged here):
 
 ---
 
-## 26. Session `arena/a3e092a2-nba1` — season game-log completeness backfill, rest/b2b re-fit, skill-vs-luck tournament (CLAIMED 2026-11-14 10:35Z UTC)
+## 26. Session `arena/a3e092a2-nba1` — game-log completeness proof, rest-layer defect, skill-vs-luck tournament (claimed 10:35Z, delivered 11:05Z UTC 2026-11-14)
 
 Branch `arena/a3e092a2-nba1`, base `main` `7623c02` (merge of PR #60). The platform pins this session to
 that branch, so the `session-<id>/<task>` branch naming in the brief is not used; this single pinned
@@ -1796,7 +1796,7 @@ branch carries the claims below. Deviation logged here, as earlier sessions logg
 `arena/934ca56f-nba1`, 10:25Z) and injury-edition currency taken (§24, `arena/2ef89703-nba1`), with
 integration PRs #58/#59 open. Nothing on the board covers the *completeness of the season game log*
 that every backtest, rest flag and leaderboard number is built from. A local arithmetic check on
-`main` at `7623c02` found it is short:
+`main` at `7623c02` found a gap:
 
 | Check | Official value | Repository value | Gap |
 | --- | --- | --- | --- |
@@ -1804,22 +1804,86 @@ that every backtest, rest flag and leaderboard number is built from. A local ari
 | Per-team deficits | — | — | 15 teams short 2 games, 15 teams short 1 game; **no team has 0** |
 | Dates present in the log | — | 21 dates | **`2026-10-24` and `2026-11-02` have no rows at all**; the official calendar block on <https://www.nba.com/games?date=2026-11-14> prints "2 → 15 GAMES" for 11/02 |
 
-Consequence, not cosmetics: `docs/data/backtest.json` and `engine/validate.py` derive `home_b2b` /
-`away_b2b` / rest days from that log, and the fitted `b2b_penalty` (6.096) and the 51-game
-out-of-sample metrics are conditioned on those flags. A missing slate day corrupts rest flags for the
-teams either side of it (11/01 → 11/04 looks like 3 days rest, not 2; 10/23 → 10/25 likewise).
+**Correction to the framing above, made after reading the file line by line rather than only its
+arithmetic.** The 23 games are *not* completed results the log dropped. `data/official/gamelog.json`
+already lists all 23 under `known_unplayed_by_source.fixtures` with null scores, documents them as
+"the fixtures are what keep the rest and back-to-back layer complete", and reconciles
+151 scored + 23 unplayed = 174 = Σ official wins. The 46-team-game gap is therefore the log behaving
+as designed on a source that does not publish those results, and it is already shipped as flag F1. Two
+things follow, both measured in `strategy-lab/data/backfill.json`:
+
+* **The scores stay blank.** Reading the two day pages again on 2026-11-14 10:38–10:44Z returned FINAL
+  cards with `-` in every score, record and leader cell (third independent reproduction of F1). The
+  standings residual does determine each result, and using it would be inference from an
+  unofficial-value path, which the brief forbids. No score was filled in, here or in the lab.
+* **The schedule half of that promise is not kept by the consumers.** `engine_v2/context.py:125` and
+  `scripts/originate_horizon.py` build rest history from games carrying a *score*, so the fixtures in the
+  same file never enter either history. Consequence measured over the 160-game window
+  (`strategy-lab/data/rest-audit.json`): **46 of 366 team-slots** differ and **2 back-to-back flags flip**
+  (BKN, PHI, both on 2026-10-25, gaps 4→1 and 3→1). **Zero** of those fall inside the 51-game window the
+  site's leaderboard and `docs/data/backtest.json` were graded on — 0 flags flip there, all 30 differing
+  cells in that window are `*_rest_days = None` on 2026-11-06 — so **no published pick, line or gate
+  number changes today**. It is a data-completeness defect that would corrupt any full-season backtest,
+  which is exactly the base this lab used; it is not a defect in what is live.
 
 | # | Task | Status | File scope (exclusive to this session) |
 | --- | --- | --- | --- |
-| L01 | Backfill the two missing dates from the official day pages, row by row with a source URL per row | claimed | `verify/2026-11-14/s26_official_*.json` |
-| L02 | Completeness proof: per-team GP (official S1 capture) vs the repaired log, 30 checks, plus Σ wins = Σ losses = games | claimed | `verify/2026-11-14/s26_completeness.json` |
-| L03 | Re-derive rest days / back-to-back flags on the complete log; measure how many of the 51 OOS rows change flag; re-fit HCA and b2b penalty on the repaired inputs | claimed | `strategy-lab/**` (new namespace) |
-| L04 | Skill-vs-luck tournament on the enlarged window: exact binomial p-values, Wilson bounds, Benjamini–Hochberg FDR across the library, block-bootstrap CIs on units, deflated-Sharpe/PBO-style overfitting control; measured (not assumed) leg correlations from the complete log | claimed | `strategy-lab/**` |
-| L05 | Publish the lab as its own static section (own page + own data, every row source-linked), open a PR to `main`, merge if the gates are green, confirm Pages, record here | claimed | `strategy-lab/**`, `COORDINATION.md` (§26 only) |
+| L01 | Read the two missing dates off the official day pages again, row by row with a source URL per row, and compare with the committed copy | **done** — 23/23 rows agree, 0 disagreements; artifact moved to `verify/2026-11-14-a3e092a2/official_backfill_2026-10-24_2026-11-02.json` (an earlier copy of it was mis-filed in the shared `verify/2026-11-14/` and has been moved, not edited) | `verify/2026-11-14-a3e092a2/**` |
+| L02 | Completeness proof on three instruments: per-team GP vs the repaired log (30 checks), per-date rows vs the official calendar block (29 checks), and a second reading of the 11/13 finals (9 checks) | **done** — 0 mismatches on all three; the log covers 320 of the 348 official team-games and the 28-row shortfall is the unpublished-score set, not a lost row | `verify/2026-11-14-a3e092a2/**`, `strategy-lab/data/backfill.json` |
+| L03 | Re-derive rest days / back-to-back flags on the complete schedule; count what changes among the graded rows; measure the b2b parameter against the season instead of re-fitting on 51 games | **done** — 46 of 366 team-slots, 2 flag flips, 0 inside the graded window, 54/54 horizon rest fields confirmed; season b2b coefficient 0.016 ± 4.426 (n=144) against the published 6.096, worth ≥3 points on 11 of the 27 unplayed games | `strategy-lab/**` (new namespace) |
+| L04 | Skill-vs-luck tournament on the enlarged window: exact Poisson-binomial and binomial p-values, Wilson bounds, Benjamini–Hochberg across the library, a shared-draw library null, moving-block bootstrap on units, both-halves stability; measured (not assumed) margin/total and same-night leg correlation | **done** — 94 walk-forward games, 13 strategies, **nothing beats the originated line** (best +3.84 wins, z 1.14, q 0.639; library null returns 1.000); model itself has skill (Brier skill 0.142, AUC 0.730, margin MAE 12.87 vs 14.31 naive) | `strategy-lab/**` |
+| L05 | Publish the lab as its own static section (own pages + own data, every row source-linked), open a PR to `main`, merge if the gates are green, confirm Pages, record here | **in review** — 8 pages, 479 rows, 462 carrying an official nba.com link; `python3 strategy-lab/check.py` PASS with 0 problems, repo `verify_integration.py` green with these pages included; PR opened by this session | `strategy-lab/**`, `COORDINATION.md` (§26 only) |
 
 **Do not touch:** `site/**`, `index.html`, `README.md`, `data/**`, `docs/**`, `command-center/**`,
 `edge-lab/**`, `origination/**`, `engine/**`, `engine_v2/**`, `integration/**`, `audit/**`,
 `scripts/**`, `.github/**`. They are read as inputs. Anything the unified site should pick up (nav
 entry, flag rows, question rows, suggestion rows) is written here as a cross-session request in §26
 for the integration seat, never edited into a file another session owns. `data/official/gamelog.json`
-is **not** edited — the repair is published in `strategy-lab/` so no other session's input changes mid-flight.
+is **not** edited — the repaired schedule is rebuilt inside `strategy-lab/` only, so no other session's
+input moves mid-flight. L05 opens the PR; the fix itself belongs to the two consumer owners (request
+R-26-1 below).
+
+
+### 26a. What was measured, and the source for each number
+
+Everything below is reproducible from the repository at the merge commit with
+`python3 strategy-lab/run.py && python3 strategy-lab/build.py && python3 strategy-lab/check.py`
+(stdlib only, one fixed seed, no network at run time). The inputs are the committed official captures plus
+four pages re-read by this session: <https://www.nba.com/games?date=2026-10-24>,
+<https://www.nba.com/games?date=2026-11-02>, <https://www.nba.com/games?date=2026-11-14>,
+<https://www.nba.com/stats/teams/advanced>.
+
+| # | Result | Source for every row |
+| --- | --- | --- |
+| 1 | Log completeness: 23/23 fixture rows agree with the committed copy; 29/29 dates match the official calendar block; 30/30 teams match the official games-played column after the backfill; 9/9 of the 2026-11-13 finals agree with the merged transcription | `strategy-lab/data/backfill.json`, `verify/2026-11-14-a3e092a2/official_backfill_2026-10-24_2026-11-02.json` |
+| 2 | Rest layer: 46 of 366 team-slots change, 2 back-to-back flags flip (BKN, PHI, 2026-10-25), 0 inside the graded 51-game window, 54/54 horizon rest fields confirmed on the 27 unplayed games | `strategy-lab/data/rest-audit.json`; <https://www.nba.com/games?date=2026-10-25>, <https://www.nba.com/games?date=2026-11-14> |
+| 3 | Tournament: 160 scored games 2026-10-20..2026-11-13, 94 gradeable walk-forward games (≥4 prior games per team, shrink k=3, sigma from prior games only), 13 strategies | `strategy-lab/data/tournament.json`; day pages 2026-10-20 .. 2026-11-13 |
+| 4 | Best excess over the originated line is T03 (edge ≥5): 58 plays, 45-13, +3.84 wins, z 1.14, exact Poisson-binomial p 0.160; every strategy's Benjamini-Hochberg q is 0.639+; the shared-draw library null returns 1.000 | same file, `library_null` |
+| 5 | Rest-only and density rules lose: T05 (back the better-rested team) −0.31 wins, T07 (fade 3-in-4) −4.98 wins at z −1.90 — the published rule points the wrong way on a season, and flipping it after seeing that is what the gates exist to stop | same file, `strategies` |
+| 6 | Forecast skill is real even though no overlay on it is: margin MAE 12.867 vs 14.309 naive-zero (+10.07%), RMSE 16.711 vs 17.734, bias −2.400; Brier skill 0.1419, AUC 0.7303; favourites won 0.6915 against a 0.663 mean line probability (+0.0285, the line is mildly under-confident) | same file, `forecast_skill` |
+| 7 | Correlations measured on 160 games (regressions on the 144 where both teams have a prior game on record): the published b2b penalty is 6.096 points, the season measures **+0.016 ± 4.426** (p 0.997, 95% interval −8.66 to +8.69); rest-gap differential +1.91 ± 2.307 (p 0.409); home margin ↔ total r −0.0513 (p 0.519), which confirms the SGP zero-correlation assumption instead of asserting it; same-night leg joint 0.3182 vs independent product 0.2955 on 22 date-pairs (too small to reprice parlays on, published as a direction) | `strategy-lab/data/correlations.json`; <https://www.nba.com/games?date=2026-10-20> |
+| 8 | Distribution facts now measured: mean home margin +1.762, margin sd 17.406, \|margin\| ≤3 8.13%, ≤5 18.12%, ≥20 26.87%, overtime 5.00% (8 of 160) | same file, `margins` |
+| 9 | Gates: GA sample, GB calibration, GC skill-over-line, GD multiple-comparisons, GE stability, GF bootstrap are computable and applied; GG market test is **blocked repository-wide** — no NBA-operated source publishes a closing price, so no strategy can reach Tier 1 here and none is marked funded | `strategy-lab/data/gates.json`, `strategy-lab/data/meta.json` |
+
+### 26b. Irregularities flagged by this session (all published, none blocked)
+
+| id | Severity | Item |
+| --- | --- | --- |
+| F-S26-01 | Medium | 23 games of this season cannot be graded from any page this repository may read; both affected dates print FINAL with an empty score cell. Results stay blank; no score inferred from the standings residual. |
+| F-S26-02 | Medium | The rest layer does not read the fixture list the game log publishes for exactly that purpose (`engine_v2/context.py:125`, `scripts/originate_horizon.py`). 2 flag flips on 2026-10-25, 0 effect on published picks. |
+| F-S26-03 | High | The `b2b_penalty` of 6.096 points in every line is a 51-game fit; the season measures 0.016 ± 4.426 on 144 games. 11 of 27 unplayed games move ≥3 points between the two positions. Needs a keep / shrink / drop decision from the model owner, not a silent re-fit. |
+| F-S26-04 | Low | `rest_days` carries two definitions across the site: calendar gap in `engine/validate.py` (back-to-back = 1), full days off in `scripts/originate_horizon.py` (back-to-back = 0), so the same situation prints 1 on one page and 0 on another. Both are correct under their own definition; the shared name is the defect. |
+| F-S26-05 | Medium | The game-flow page's published overtime probability (mean 0.0191 over 27 horizon rows) is ~2.6× below the realised season rate (0.0500, 8 of 160), exact p 0.012. Framing caveat: a distribution check, not a graded forecast, because the rows describe unplayed games. |
+| F-S26-06 | Low | These figures are pinned to a base commit while §24/§25 promote the 11/13 finals into `data/derived/**`; re-running the lab against the new inputs reproduces its own numbers, and the pages state their commit. |
+
+### 26c. Cross-session requests (filed here, not edited into another session's file)
+
+| id | Ask | Owner | Why |
+| --- | --- | --- | --- |
+| R-26-1 | Read `known_unplayed_by_source.fixtures` when building rest history, or add a schedule-only file with all 183 games and make it the single rest input | owners of `engine_v2/context.py` and `scripts/originate_horizon.py` | F-S26-02; the file's own note promises this and the code does not do it |
+| R-26-2 | Decide keep / shrink / drop for `b2b_penalty`, and publish its interval next to the line | model owner (`engine/**`, `engine_v2/**`) | F-S26-03; a 6.1-point adjustment is currently justified by one week of basketball |
+| R-26-3 | Split `rest_days` into `gap_days` and `days_off` in the shared builders | integration seat | F-S26-04; two pages currently disagree about the same fact |
+| R-26-4 | Price the game-flow overtime column from the measured season rate (0.0500, n=160) instead of the current approximation | game-flow page owner | F-S26-05; the only published probability this lab found to be materially wrong |
+| R-26-5 | Grade strategies against the originated line (exact Poisson-binomial excess + BH across the library), not against a break-even constant | gate owner + integration seat | A hit rate vs 0.5238 flatters any favourite-backer; T01-T03 look like 69-78% win rates and are not significant against the line |
+| R-26-6 | Add `strategy-lab/**` to the nav as one more section, or fold its tables into the site build, whenever the site is next regenerated | integration seat | `scripts/build_dashboard.py` regenerates `index.html` and `site/**` and would erase a hand edit; nothing in this session touched those paths |
+| R-26-7 | A dated, licensed closing-price source (or a written decision to keep the site price-free permanently) | project owner | The only thing that can close gate GG; until then no strategy anywhere in the repository can be called a market edge |
