@@ -146,6 +146,21 @@ def probe_xhr(url, timeout=30):
     return rec
 
 
+# The handful of URLs the whole project actually depends on. These are always
+# retried with browser headers, because "can a script read the team advanced
+# stats?" decides whether an automated origination pipeline is even possible.
+PRIORITY_URLS = [
+    "https://www.nba.com/stats/teams/advanced",
+    "https://www.nba.com/stats/players/traditional",
+    "https://www.nba.com/schedule",
+    "https://www.nba.com/games?date=2026-11-13",
+    "https://www.nba.com/game/atl-vs-chi-0022600037",
+    "https://official.nba.com/nba-injury-report-2026-27-season/",
+    "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf",
+    "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json",
+]
+
+
 def main():
     urls = collect_urls()
     log(f"{len(urls)} distinct official URLs cited in the repository")
@@ -168,9 +183,11 @@ def main():
         if r["http_status"] in (401, 403, 429):
             host = r["url"].split("/")[2]
             by_host.setdefault(host, []).append(r["url"])
-    retry_targets = []
+    retry_targets = list(PRIORITY_URLS)
     for host, urls in sorted(by_host.items()):
-        retry_targets.extend(urls[:3])
+        for u in urls[:2]:
+            if u not in retry_targets:
+                retry_targets.append(u)
     retried = []
     for u in retry_targets:
         rec = probe_xhr(u)
