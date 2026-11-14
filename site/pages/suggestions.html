@@ -41,6 +41,9 @@
 <a href="backtest.html">Out-of-Sample Backtest</a>
 <a href="model.html">Model &amp; Teams</a>
 </div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+</div>
 <div class="nav-group"><h3>DECISION</h3>
 <a href="questions.html">Open Questions</a>
 <a href="suggestions.html">Suggestions</a>
@@ -213,6 +216,26 @@
 <td>Option 1. The mapping is already in the code; it needs a page.</td>
 <td>Confirm the level of detail: one line per output file, or one line per individual table row.</td>
 <td class="src"><a href="https://docs.github.com/en/actions" target="_blank" rel="noopener">S19</a></td>
+</tr>
+<tr>
+<td>SG15</td>
+<td>Data and model</td>
+<td><b>Publish one line set, one ratings window, one sign convention</b></td>
+<td>Two projection sets with different ratings windows are published together, and they disagree on every game with a Build B point-spread pick (F26). Their 'spread (home)' fields use opposite sign conventions under similar labels (F27).</td>
+<td>- Keep the Build D horizon (ratings through games of 11/12), regenerate the landing page and picks from it, and retire the Build B horizon lines <span class='fine'>(effort: Medium - one builder change and a regenerated site; risk: Medium - Build B's 63 rows must be re-derived; the settled 11/13 record is unaffected; unlocks: One set of lines for every page; Source Check section 5 becomes empty)</span><br>- Keep Build B (ratings through 11/05) and state its window everywhere <span class='fine'>(effort: Low - labels only; risk: High - the ratings are a week older than the latest official games; unlocks: A stable reference, but a known-stale one)</span><br>- Keep both, label each by its ratings window, and never put them in one table <span class='fine'>(effort: Low; risk: Medium - two numbers for one game remain on the site; unlocks: Transparency without a decision)</span></td>
+<td>Option 1. The newer ratings use every official game through 11/12. Adopt the sign convention of Build A (home spread = minus the projected home margin) on every page.</td>
+<td>Reviewer: which line set is the published horizon. No pick should be published until this is decided.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>SG16</td>
+<td>Verification</td>
+<td><b>Make the official-value check part of the gate</b></td>
+<td>VERIFY OK checks that links resolve and rows have sources, not that values match NBA.com (F34). The conflicts in F26, F27 and F29 passed it.</td>
+<td>- Run scripts/source_check.py inside scripts/verify_all.py and fail on any horizon or finished-game mismatch that is not listed in the flagged register <span class='fine'>(effort: Low - the checker exists and reads committed files; risk: Low - the failure is visible and the register is the escape hatch; unlocks: A gate that tests values, not only structure)</span><br>- Keep the structural gate and review values by hand before each publish <span class='fine'>(effort: None now; a manual step later; risk: High - manual review is what missed these items; unlocks: Nothing new)</span></td>
+<td>Option 1. The check takes seconds, and it is the only check on this list that would have caught the conflicts before publication.</td>
+<td>Reviewer: approve adding the checker to the gate.</td>
+<td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">

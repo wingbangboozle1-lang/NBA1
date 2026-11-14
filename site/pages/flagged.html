@@ -41,6 +41,9 @@
 <a href="backtest.html">Out-of-Sample Backtest</a>
 <a href="model.html">Model &amp; Teams</a>
 </div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+</div>
 <div class="nav-group"><h3>DECISION</h3>
 <a href="questions.html">Open Questions</a>
 <a href="suggestions.html">Suggestions</a>
@@ -297,6 +300,114 @@
 <td>Refresh of data/raw/schedule_upcoming.json</td>
 <td>If an automated schedule refresh is wanted, add a headless browser step to the workflow or an official JSON endpoint that answers to scripts; keep the row-by-row verification either way.</td>
 <td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">S4</a></td>
+</tr>
+<tr>
+<td>F26</td>
+<td>High</td>
+<td><b>Two projection sets disagree on the same games</b></td>
+<td>The landing-page lines (site/data/lines.json, Build B) and the horizon lines (data/derived/horizon_lines.json, Build D) project different home margins for the same games. On the 17 games that carry a Build B point-spread pick, the two margins differ by 0.8 to 11.8 points (all 17 differ by more than 0.5), and 2 of the 17 name opposite favourites (DAL@CLE, PHI@BKN). Build B's ratings training window is 10/20-11/05/2026 per site/data/meta.json; Build D uses team ratings through games of 11/12. The site does not say which set feeds the horizon. Checked 2026-11-14 UTC by scripts/source_check.py (Source Check, section 5).</td>
+<td>Landing-page lines, Lines and Picks pages, Build D horizon picks</td>
+<td>Choose one ratings window and one line set, regenerate every page from it, and print the window on each page. Until then, treat neither set as the published line.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F27</td>
+<td>Medium</td>
+<td><b>'Spread (home)' fields hold the home margin, with the opposite sign to a book spread</b></td>
+<td>In Build B (site/data/lines.json: ref_spread_home, model_spread_home) and Build D (line_spread_home) the stored value is the home team's projected margin: a negative value means the home team is projected to lose. Build A's originated_spread_home uses the conventional sign. Example: DEN@NOP, model_spread_home -9.6, is the projected home margin, so DEN (away) is projected to win by 9.6. Test: the S1 side agrees with the home-margin reading in 16 of 16 Build B rows and with the conventional reading in 0 of 16. The same site therefore shows two sign conventions under similar labels.</td>
+<td>Landing-page 'Ref spread' and 'Model spread' columns; Build D line_spread_home</td>
+<td>Rename the field (for example home_margin_proj) or flip the sign and keep the label. Print the sign convention above every table that shows a spread.</td>
+<td class="src"><a href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F28</td>
+<td>Medium</td>
+<td><b>'Paper picks: 63' mixes markets and does not match the other pick counts</b></td>
+<td>The landing tile reads 63 from site/data/picks.json. All 63 rows are PENDING and span every market: 26 point spreads, 9 game totals, 8 moneylines, 6 player-points rows, 2 player-PRA rows, 4 parlays and 8 same-game parlays. The Build D files report 27 horizon singles and 26 model picks (data/derived/horizon_picks.json) and 23 model picks (data/derived/picks_d.json). The unit that is being counted is not defined on the page.</td>
+<td>Landing tile 'Paper picks'; the Picks page header</td>
+<td>Define a pick (one side of one market for one game, parlays counted separately) and show one count per market on the landing page.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F29</td>
+<td>Medium</td>
+<td><b>The site still shows the 11/13 games as unfinished</b></td>
+<td>The README 'Known limits' and the ratings text say the 2026-11-13 slate was still in progress and that no final score exists. On the NBA.com games page for 2026-11-13, captured 2026-11-14 UTC, all nine games show Final (for example NYK 104 at IND 106; OKC 112 at LAC 113). The site has not been rebuilt with those finals. The horizon rows also still print pre-11/13 records: 29 of 54 printed team records belong to teams that played on 11/13 and differ from the NBA.com card (Source Check, section 2).</td>
+<td>README 'Known limits'; every horizon row's record column</td>
+<td>Re-run the capture after the games finish and rebuild. Update 'Known limits' with the capture time it describes.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F30</td>
+<td>Low</td>
+<td><b>The five 11/17 games are missing from the verbatim slate capture</b></td>
+<td>data/official/slate.json describes itself as a verbatim transcription of NBA.com. It holds 22 rows: 5 for 11/14, 9 for 11/15 and 8 for 11/16. NBA.com shows 5 games for 11/17 (calendar badge and game list). Those five appear in the site's horizon lines and match NBA.com 5 of 5, but they are not in the capture file.</td>
+<td>data/official/slate.json; any table built from it</td>
+<td>Add the 11/17 transcription to the capture file so that the file and the horizon agree.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F31</td>
+<td>Medium</td>
+<td><b>The 11/14 noon injury report could not be retrieved</b></td>
+<td>The URL pattern for the 11/14 12:00 PM ET edition (ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf) returned AccessDenied at capture on 2026-11-14 UTC. The same response is returned for a missing object on this host, so it cannot be read as proof that the edition is unpublished. The site's newest edition is still the 11/13 07:30 PM ET edition.</td>
+<td>Injury layer of every 11/14 row; injuries.html</td>
+<td>Re-check after 17:00 UTC on 2026-11-14 and record the edition found, or the response, on Source Check section 6.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F32</td>
+<td>Low</td>
+<td><b>DET@MIA: injury report prints a different tip time from the schedule</b></td>
+<td>The 11/13 injury-report rows for DET@MIA print 07:00 (ET). NBA.com lists the 11/14 DET@MIA game at 8:00 PM ET. Both are official; the difference is recorded, not resolved.</td>
+<td>DET@MIA rows on injuries.html and picks pages</td>
+<td>Use the schedule time as the tip and note the injury-report time separately.</td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-mia-0022600233" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F33</td>
+<td>Low</td>
+<td><b>Two pairings are printed twice within three days</b></td>
+<td>NBA.com prints NYK@TOR on 11/15 (game 0022600241) and 11/17 (game 0022600253), and POR@MIN on 11/16 (0022600250) and 11/17 (0022600254), each with its own game ID. Both are carried as printed. We cannot tell from the page whether this is intended, so it is not corrected.</td>
+<td>Horizon rows for NYK@TOR and POR@MIN</td>
+<td>Confirm each of the four games on the official schedule on its date and record the result.</td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600253" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F34</td>
+<td>Medium</td>
+<td><b>The repository's gate checks structure, not values</b></td>
+<td>scripts/verify_all.py prints VERIFY OK when every table row has a link and every internal link resolves. It does not compare any value with NBA.com. That is why the conflicts in F26, F27 and F29 passed the gate. scripts/source_check.py (added 2026-11-14, COORDINATION §23) compares values for the horizon and the nine 11/13 finals, from a transcription, not a live fetch. No official source applies to this statement; it describes the repository's own checks.</td>
+<td>Trust in 'VERIFY OK' and in every 'verified' label on the site</td>
+<td>Add source_check.py to the gate for the horizon and every finished game; fail the build on any mismatch that is not in the flagged register.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_all.py" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F35</td>
+<td>Low</td>
+<td><b>horizon_lines.json carries a placeholder timestamp</b></td>
+<td>The _meta.generated_utc field of data/derived/horizon_lines.json reads '2026-11-14T01:xxZ', which is a literal placeholder, not a time. No official source applies; this is a statement about the file.</td>
+<td>Provenance of the Build D horizon lines</td>
+<td>Write the real generation time from the build run.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_lines.json" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F36</td>
+<td>Medium</td>
+<td><b>The 11/13 check covers one night and cannot show skill</b></td>
+<td>Settling the nine published 11/13 lines against the official finals gives 3 wins, 4 losses and 2 no-bets, with a mean absolute margin error of 12.39 points. The model's expected margin was wrong by more than 10 points in five of the nine games. Nine games cannot separate skill from luck, and the page says so.</td>
+<td>Any claim that the lines 'work' on the 11/13 slate</td>
+<td>Settle every finished game on each slate as it is published, and keep the sample size next to every result.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F37</td>
+<td>Medium</td>
+<td><b>Rows without an official NBA.com link on five earlier pages</b></td>
+<td>Counted 2026-11-14 UTC with a strict test (a row needs a link to nba.com or official.nba.com). Questions: 6 rows, each marked 'no official source exists'. Repo review: 7 rows. Sources: 1 row. Suggestions: 2 rows. Flagged for Review: 2 rows (F34, F35), which link to repository files because no official source applies to them. The new Source Check page has 4 rows that are internal counts and are marked as such. scripts/verify_all.py reports these as linked because it also accepts GitHub links; the strict count is the one this register uses.</td>
+<td>Questions, Repo review, Sources, Suggestions and Flagged pages</td>
+<td>Reviewer: decide, row by row, whether each one should link to an official page, stay marked as internal, or be removed. No values were changed to make the count pass.</td>
+<td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">link</a></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">
