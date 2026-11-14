@@ -343,3 +343,15 @@ pass on the shared data, because the other tasks on the board were `done` or `ne
 | Follow-up PR | [#23](https://github.com/wingbangboozle1-lang/NBA1/pull/23) (board record, merged `1ca9c7d`). [#24](https://github.com/wingbangboozle1-lang/NBA1/pull/24) corrects V-02, V-04, V-05, V-06 wording on `review.html` (merged `295d238`). |
 | Pages after #24 | Pages API `built` on `295d238`, `pages-build-deployment` success. No `Publish static site` push run appeared for `295d238`; a manual `workflow_dispatch` was refused (HTTP 403). Live `review.html` shows the corrected text. Flagged for the integration session to confirm. |
 | Open after merge | V-01…V-07 on `review.html` (non-blocking). PRs #11 and #14 untouched. Team W-L records and schedule chunks 3–8 not re-verified. |
+
+---
+
+## 11. Session `arena/e38f7e38-nba1` — CI/deployment audit (claimed 2026-11-14 UTC)
+
+The active Arena branch is fixed as `arena/e38f7e38-nba1`; work remains on that branch (no task branch/worktree is created).
+
+| # | Task | Status | File scope | Result |
+| --- | --- | --- | --- | --- |
+| W01 | Audit CI publish gate and harden failure behavior | in progress | `.github/workflows/pages.yml`, `COORDINATION.md` §11 | Claim only. Verify existing validators, remove any soft-fail behavior that permits a broken site to deploy, and record exact checks and limitations. |
+
+Claimed after reading this board and confirming no active task owns these files. Source/verification findings will be recorded before marking done. No external NBA fact is changed by this task.
