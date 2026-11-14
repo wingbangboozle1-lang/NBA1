@@ -730,6 +730,34 @@ def main():
                 log(f"  SKIPPED: parsed {len(rows)} rows - keeping the existing snapshot")
                 needles = ["stats.nba.com", "/stats/api", "leaguedash",
                            "graphql", "<td"]
+                # The table is client-rendered and the data URL is not in the
+                # HTML. Look inside a bounded number of the page's own JS
+                # chunks for the endpoint the browser calls, and record what
+                # is found - evidence, not values.
+                chunk_probe = []
+                chunks = list(dict.fromkeys(
+                    re.findall(r'/_next/static/chunks/[^"\']+\.js', text)))
+                # Page-specific chunks are listed last; probe the tail first.
+                for c in (chunks[-6:] if len(chunks) > 6 else chunks):
+                    entry = {"chunk": c, "hits": {}}
+                    try:
+                        js = as_text(get("https://www.nba.com" + c, timeout=30))
+                    except Exception as exc:          # noqa: BLE001
+                        entry["error"] = f"{type(exc).__name__}: {exc}"
+                        chunk_probe.append(entry)
+                        continue
+                    for n in ("leaguedash", "stats.nba.com", "/stats/api",
+                              "MeasureType", "DateFrom"):
+                        cnt = js.count(n)
+                        if cnt:
+                            entry["hits"][n] = cnt
+                            ev = excerpt_around(js, n, before=300, span=1200)
+                            if ev and "excerpt" not in entry:
+                                entry["excerpt"] = ev
+                    chunk_probe.append(entry)
+                    if any(entry["hits"].values()):
+                        break
+                    time.sleep(0.5)
                 if write_if_changed(
                         os.path.join(RAW, f"_capture_evidence_{key}.json"),
                         {"captured_at_utc": now, "source_url": url,
@@ -739,8 +767,10 @@ def main():
                              {"around": n, "excerpt": e} for n in needles
                              for e in [excerpt_around(text, n)] if e][:2],
                          "document_tail": text[-6000:],
-                         "note": "Bounded raw-HTML evidence for the next parser "
-                                 "iteration. The committed snapshot is untouched."}):
+                         "chunk_probe": chunk_probe,
+                         "note": "Bounded raw-HTML/JS evidence for the next "
+                                 "parser iteration. The committed snapshot is "
+                                 "untouched."}):
                     changed.append(f"evidence {key}")
                 continue
             log(f"  parsed {len(rows)} team rows")
