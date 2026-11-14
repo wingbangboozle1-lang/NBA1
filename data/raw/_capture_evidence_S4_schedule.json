@@ -1,12 +1,14 @@
 {
- "captured_at_utc": "2026-11-14T01:35:08Z",
+ "captured_at_utc": "2026-11-14T01:40:17Z",
  "source_url": "https://www.nba.com/schedule",
  "status": "parse_failed",
  "indicators": {
-  "/game/": 0,
-  "\"gameId\"": 0,
+  "JSON.parse(": 0,
+  "window.__": 0,
+  "gameId": 0,
   "Friday, November": 0
  },
  "failure_evidence": [],
+ "document_head": "<!DOCTYPE html><html lang=\"en\" data-version=\"5.6.5\" data-client=\"NBA\" data-theme=\"light\"><head><meta charSet=\"utf-8\"/><script id=\"user-consent\" defer=\"\" src=\"https://cdn.nba.com/user-consent/index-gam.min.js\"></script><link rel=\"manifest\" href=\"/site-manifest.json\"/><meta name=\"viewport\" content=\"width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no\"/><script id=\"theme-loader\" src=\"/theme-loader.js\"></script><title>NBA Schedule - NBA Games &amp; Events | NBA.com</title><meta name=\"description\" content=\"NBA Schedule: Official source of NBA games schedule. Check your team&#x27;s schedule, game times and opponents for the season.\"/><link rel=\"icon\" href=\"/favicon.ico\"/><link rel=\"icon\" type=\"image/png\" sizes=\"32x32\" href=\"/favicon-32x32.png\"/><link rel=\"icon\" type=\"image/png\" sizes=\"16x16\" href=\"/favicon-16x16.png\"/><link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\"/><link rel=\"apple-touch-icon\" sizes=\"180x180\" href=\"/apple-touch-icon.png\"/><link rel=\"apple-touch-icon\" sizes=\"120x120\" href=\"/apple-touch-icon.png\"/><link href=\"/apple-touch-icon.png\"/><meta name=\"msapplication-TileColor\" content=\"#da532c\"/><meta property=\"og:site_name\" content=\"NBA.com\"/><meta name=\"twitter:site\" content=\"@NBA\"/><link rel=\"mask-icon\" href=\"/safari-pinned-tab.svg\" color=\"#051c2d\"/><link rel=\"canonical\" href=\"https://www.nba.com/schedule\"/><meta property=\"og:image\" content=\"https://cdn.nba.com/logos/nba/fallback/NBA.Com-National-Basketball-Association.png\"/><meta property=\"twitter:image\" content=\"https://cdn.nba.com/logos/nba/fallback/NBA.Com-National-Basketball-Association.png\"/><script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://www.nba.com\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"NBA Schedule\",\"item\":\"https://www.nba.com/schedule\"}]}</script><meta name=\"next-head-count\" content=\"22\"/><meta name=\"theme-color\" content=\"#000000\"/><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin /><link rel=\"preload\" href=\"/_next/static/css/421ad19a36793d1d.css\" as=\"style\"/><link rel=\"stylesheet\" href=\"/_next/static/css/421ad19a36793d1d.css\" data-n-g=\"\"/><link rel=\"preload\" href=\"/_next/static/css/7e7db5cbfe4f54c8.css\" as=\"style\"/><link rel=\"stylesheet\" href=\"/_next/static/css/7e7db5cbfe4f54c8.css\" data-n-p=\"\"/><link rel=\"preload\" href=\"/_next/static/css/1a99409381cf10db.css\" as=\"style\"/><link rel=\"stylesheet\" href=\"/_n",
  "note": "Bounded raw-HTML evidence for the next parser iteration. The committed snapshot is untouched."
 }
