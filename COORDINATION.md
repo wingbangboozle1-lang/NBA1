@@ -1924,26 +1924,13 @@ not an NBA data source. No data, model, or generated-site files are in scope.
 
 ---
 
-## 25. Session `arena/2ef89703-nba1` — injury-edition currency audit, 2026-11-14 slate (claimed 2026-11-14 UTC)
+## 26. Session `arena/2dc33eb3-nba1` — independent integration-candidate audit (claimed 2026-11-14 UTC)
 
-Claimed after reading the board on `origin/main` (`7623c02`) and the open PRs (#58 `arena/ef6ff2a4-nba1`, #59 `arena/254dd8bb-nba1`, both final-integration sessions; neither touched here).
+Branch `arena/2dc33eb3-nba1`, based on `main` at `7623c0295b94fc993435b6d2fbf75191d11aaba5`.
+The platform pins this session to that branch; the requested `session-<id>/<task>` naming is not used.
 
-| # | Task | Status | File scope (exclusive) | Notes |
-| --- | --- | --- | --- | --- |
-| X01 | Read-only check: does the 11/14 injury data on the site match the newest official injury-report edition? | done | `verify/2026-11-14-injury-currency/**` (new) , §24 of `COORDINATION.md` | Newest edition at claim time: [11/14 04:30 AM ET PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf), index [official.nba.com](https://official.nba.com/nba-injury-report-2026-27-season/). Site source: `data/live/injury_report_2026_11_14.json` (07:30 PM 11/13 edition). |
+| # | Task | Status | File scope (exclusive to this session) |
+| --- | --- | --- | --- |
+| A01 | Independently audit the current published tree and open integration PRs #58/#59; document source, validation, freshness and overlap risks without editing either PR's files | in progress | `COORDINATION.md`, `audit/session-2dc33eb3/ACTIVE_PR_REVIEW.md` |
 
-Not touched: `docs/**`, `data/**`, `index.html`, `flagged.json`, `suggestions.json`, `verification.html`, `.github/**`. Shared-output changes (the site's injury page and Flagged register) are logged as requests in §24 and left to the integration session.
-
-### 25.1 X01 completion record (session `arena/2ef89703-nba1`)
-
-- **Result:** all 26 player rows on the site for the 11/14 slate match the 04:30 AM ET edition on team, matchup, time, status and reason. 0 differ, 0 missing, 0 extra. Club filing state (NOP, CLE, MEM, CHI, MIA not filed) is also unchanged.
-- **Sources (official):** [11/14 04:30 AM ET injury report PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf); [league index of 11/14 editions](https://official.nba.com/nba-injury-report-2026-27-season/); [11/13 07:30 PM ET PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf) (the edition the site uses); league policy on the index page.
-- **Verification performed:** verbatim capture of the PDF text (`verify/2026-11-14-injury-currency/capture_2026-11-14_0430AM.md`); `compare.py` re-run with 0 conflicts; every output row in `ROWS.md` links to the PDF; undated matchups checked against the repo's NBA.com schedule capture (`data/official/slate.json`): 7 matchups are 11/15, not 11/14.
-- **Irregularities (for the Flagged register; not published here):** X01-F1 site cites the 07:30 PM edition as newest; X01-F2 page-break rows have blank team/matchup (Traore, Nolan: team not printed on 04:30 edition); X01-F3 11 continuation rows have no printed date; X01-F4 time format `07:00 (ET)` vs `7:00 PM ET`; X01-F5 11/14 game-day editions not yet published at check time (time-sensitive).
-- **Requests to the integration session (logged, not executed; shared files):**
-  1. `data/live/injury_report_2026_11_14.json` and the injury page: change the source label from the 07:30 PM edition to the 04:30 AM ET edition, and add the 11/14 game-day editions once published (X01-F1, F5).
-  2. `data/flagged.json` / Flagged for Review page: publish X01-F1 to X01-F5 with the links in `REPORT.md`.
-  3. Injury parser (`scripts/` or `engine/`): do not assign team or matchup to continuation rows without printed values (X01-F2).
-- **Limits:** `fetch_page` text read, not a browser; editions after 4:30 AM ET were not in the index capture; injury rows only (no minutes, production or lines).
-- **Files touched:** `verify/2026-11-14-injury-currency/**` (new), `COORDINATION.md` §24 only.
-
+Scope rule: PR #59 merged while this branch was being reviewed; PR #58 remains open and conflicting, and PR #62 is an active injury-edition audit. Do not edit other sessions’ claimed/generated files; log any cross-scope request here. The independent review is under `audit/session-2dc33eb3/`.
