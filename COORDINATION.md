@@ -363,3 +363,14 @@ The active Arena branch is fixed as `arena/e38f7e38-nba1`; work remains on that 
 - Rationale/source: GitHub documents step-level `continue-on-error` as allowing the step to continue despite a failure; removing it ensures the validation exit status participates in job success: <https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idstepscontinue-on-error>. No NBA data or model claim was changed.
 
 Claimed after reading this board and confirming no active task owns these files. No external NBA fact was changed by this task.
+
+### W01 integration record
+
+| Item | Result |
+| --- | --- |
+| PR | [#27](https://github.com/wingbangboozle1-lang/NBA1/pull/27) |
+| Merge | Merged with `--merge` at 2026-11-14T00:57:38Z; merge commit `a17b19afd5647297bfbcfce0a917a354cce8923b`. |
+| PR validation | `Publish static site to GitHub Pages` run [43537517752](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43537517752) — success. |
+| GitHub Pages deployment | `pages-build-deployment` run [43537567065](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43537567065) — build and deploy jobs succeeded for the merge commit. |
+| Live check | <https://wingbangboozle1-lang.github.io/NBA1/> fetched after deployment; dashboard content and links render. It still clearly describes the data as dated/static, not live. |
+| Deployment annotations | Non-blocking platform warnings: `actions/upload-artifact@v4` Node.js 20 deprecation and planned `ubuntu-latest` migration. These are GitHub runner/toolchain notices; no deployment failure. |
