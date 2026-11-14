@@ -447,13 +447,21 @@ def capture_results(now, changed, failed, known, committed):
             if fi >= 0:
                 evidence.append({"around": "First 'Final' in raw HTML",
                                  "excerpt": text[max(0, fi - 800):fi + 3200]})
+            # Where does the embedded payload live? The card carries the
+            # status but not the scores; the scores sit in an escaped JSON
+            # blob. Find its opener so the next parser can load it as JSON
+            # instead of guessing at text.
+            for n in ("JSON.parse(", "window.__", "gameStatusText", "<script id="):
+                e = excerpt_around(text, n, before=2500, span=5000)
+                if e:
+                    evidence.append({"around": n, "excerpt": e})
         elif unparsed or mismatches:
             e1 = excerpt_around(text, "Final")
             if e1:
                 evidence.append({"around": "First 'Final' in raw HTML",
                                  "excerpt": e1})
         if evidence:
-            payload["failure_evidence"] = evidence[:2]
+            payload["failure_evidence"] = evidence[:5]
         if write_if_changed(os.path.join(RAW, f"_capture_results_{d}.json"),
                             payload):
             changed.append(f"results {d}")
@@ -548,7 +556,7 @@ def main():
             if len(rows) != 30:
                 failed.append((key, f"expected 30 team rows, parsed {len(rows)}"))
                 log(f"  SKIPPED: parsed {len(rows)} rows - keeping the existing snapshot")
-                needles = ['"rowSet"', '"resultSets"', "Boston Celtics"]
+                needles = ["rowSet", "resultSets", "Boston Celtics"]
                 if write_if_changed(
                         os.path.join(RAW, f"_capture_evidence_{key}.json"),
                         {"captured_at_utc": now, "source_url": url,
@@ -581,7 +589,7 @@ def main():
             log(f"  parsed {len(games)} game links")
             if not games:
                 failed.append((key, "no game links found"))
-                needles = ["/game/", '"gameId"', "Friday, November"]
+                needles = ["JSON.parse(", "window.__", "gameId", "Friday, November"]
                 if write_if_changed(
                         os.path.join(RAW, f"_capture_evidence_{key}.json"),
                         {"captured_at_utc": now, "source_url": url,
@@ -590,6 +598,7 @@ def main():
                          "failure_evidence": [
                              {"around": n, "excerpt": e} for n in needles
                              for e in [excerpt_around(text, n)] if e][:2],
+                         "document_head": text[:2500],
                          "note": "Bounded raw-HTML evidence for the next parser "
                                  "iteration. The committed snapshot is untouched."}):
                     changed.append(f"evidence {key}")
