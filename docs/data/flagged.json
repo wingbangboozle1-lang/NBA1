@@ -65,12 +65,12 @@
   {
    "id": "F7",
    "severity": "Medium",
-   "title": "The automated refresh script has never been executed",
-   "detail": "engine/fetch_official.py was written in a sandbox with outbound network access restricted to github.com, npm and pypi, so it could not be run against nba.com. The GitHub Actions workflow calls it with continue-on-error and only commits when the data actually changes, so a failure cannot break the published site - but it also means the first live run is the first real test.",
-   "affected": "Daily refresh job",
+   "title": "Refresh path executed - and what it proved",
+   "detail": "Executed on 2026-11-14 by session arena/d6918959-nba1 via seven workflow runs (43540726330, 43541446595, 43541959088, 43542957208, 43543433956, 43543718982, 43544324610) on GitHub's runners, after the fetch client was given the web-client header set the reachability probe proved returns HTTP 200. Results: (1) the finals capture now parses the pages' embedded JSON and re-verified all 51 committed finals for 2026-11-06..11-12 against the official pages with 0 mismatches; (2) injury-report editions are discovered and archived with SHA-256, and the 2026-11-14 editions correctly record as unavailable at capture time; (3) scheduled runs no longer push to main - they open a pull request (cross-session request R7 / audit item I-01); (4) the team-advanced and schedule captures are still blocked - see F13 and F14. Captures never overwrite a committed snapshot; promotion stays a separate verified step.",
+   "affected": "Daily refresh job; F13 and F14 are the remaining blocks",
    "source": "S4",
    "source_url": "https://www.nba.com/schedule",
-   "suggested_action": "Watch the first scheduled run; if it fails, the workflow log is the place to fix it. The committed snapshot stays live regardless."
+   "suggested_action": "The 11:15/15:15/22:15 UTC cron now produces capture-only pull requests; review each against the official URL inside it before merging, then promote verified rows into the committed snapshots."
   },
   {
    "id": "F8",
@@ -121,6 +121,26 @@
    "source": "S3_2026-11-07",
    "source_url": "https://www.nba.com/games?date=2026-11-07",
    "suggested_action": "None - handled. Watch for more neutral-site games as the season goes on."
+  },
+  {
+   "id": "F13",
+   "severity": "Medium",
+   "title": "Team-advanced stats cannot be refreshed from the runner yet",
+   "detail": "The cited page www.nba.com/stats/teams/advanced renders its table in the browser: the raw HTML has no OffRtg text and no stats/team links (indicators in data/raw/_capture_evidence_S1_season.json). The page's own JS chunk calls the resource leaguedashteamstats (chunk excerpt recorded there), and the official stats API stats.nba.com/stats/leaguedashteamstats answered with a read timeout from the Actions runner even with the full web-client header set, while www.nba.com pages returned 200 from the same runner. The committed data/raw/team_advanced.json therefore stays live; the refresh records the block instead of guessing values.",
+   "affected": "Refresh of data/raw/team_advanced.json (both windows)",
+   "source": "S4",
+   "source_url": "https://www.nba.com/stats/teams/advanced",
+   "suggested_action": "Re-test stats.nba.com from a different network, or capture the table with a headless browser in the workflow. Until a capture passes the W+L==GP integrity gate, do not promote."
+  },
+  {
+   "id": "F14",
+   "severity": "Low",
+   "title": "The schedule page serves no server-side schedule data",
+   "detail": "Raw HTML of www.nba.com/schedule contains zero /game/ links, zero gameId occurrences and no date headers (evidence: data/raw/_capture_evidence_S4_schedule.json) - the page is a client shell, and the CDN JSON the browser would load (cdn.nba.com/static/json/staticData/scheduleLeagueV2.json) is refused to scripts (flag V-F1). Schedule rows in this repository are therefore transcribed through the fetch tool from the rendered page (data/raw/official_schedule_capture_2026-11-14.json) and verified row by row by sessions; the automated refresh cannot update them.",
+   "affected": "Refresh of data/raw/schedule_upcoming.json",
+   "source": "S4",
+   "source_url": "https://www.nba.com/schedule",
+   "suggested_action": "If an automated schedule refresh is wanted, add a headless browser step to the workflow or an official JSON endpoint that answers to scripts; keep the row-by-row verification either way."
   }
  ]
 }
