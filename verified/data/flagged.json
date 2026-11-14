@@ -1,0 +1,196 @@
+{
+  "meta": {
+    "title": "Flagged for review \u2014 2026-11-14 (session arena/428e6264-nba1)",
+    "rule": "An item is here because this session could not confirm it from an official NBA source, or because the official source and the repository disagree. Nothing on this page is corrected anywhere else. Every item carries the official URL to check it by hand and a concrete proposal for closing it.",
+    "important": "Being on this page does not mean a value is wrong. It means the value is not proven. The largest items (F-01, F-03, F-04, F-05, F-12) do change decisions; the rest are housekeeping."
+  },
+  "rows": [
+    {
+      "id": "F-01",
+      "topic": "Player prop lines are stale",
+      "detail": "Three of the four prop lines re-checked sit below the player's official season average: Giannis 27.7 vs 28.5, Shai 29.7 vs 30.5, Mitchell 22.8 vs 23.0. Murray 26.2 matches.",
+      "why_it_matters": "A prop line set below the true average turns an 'under' pick into a losing side and an 'over' into a flattering one. Three of eight published prop picks are affected by side.",
+      "official_url": "https://www.nba.com/player/203507",
+      "verified_how": "Each player's own official page read this session; PPG shown at the top of the page.",
+      "proposed_fix": "Re-capture the prop baselines at build time from the same page the line is published against, and stamp the capture inside the prop row instead of only in the JSON.",
+      "severity": "High",
+      "owner": "Build D builder (scripts/build_dashboard.py + props data)"
+    },
+    {
+      "id": "F-02",
+      "topic": "Cooper Flagg's points average is not stable across reads",
+      "detail": "Two reads of the same official player page returned 21.0 and 24.6 points per game. The published prop line is 24.6 with an 'under' pick.",
+      "why_it_matters": "If the current figure is 24.6 the under pick is at the number; if it is 21.0 the pick is against the player's own average. The two readings imply opposite conclusions, so the row is published as unverified rather than guessed.",
+      "official_url": "https://www.nba.com/player/1642843/cooper-flagg",
+      "verified_how": "Player page read twice through two paths (direct page, search-indexed copy).",
+      "proposed_fix": "Read the value from the stats table with an explicit 'as of' date and store that date in the prop row; if two reads disagree, publish both and block the pick.",
+      "severity": "Medium",
+      "owner": "Build D builder"
+    },
+    {
+      "id": "F-03",
+      "topic": "The injury layer cites a superseded edition on a game day",
+      "detail": "The site's injury page is built on the 11/14/26 04:15 AM ET edition. The official index now publishes editions every 15 minutes through 01:30 PM ET, and all ten 11/14 teams have filed by 1:30 PM.",
+      "why_it_matters": "Rotation minutes and the availability adjustment are the part of the brief that changes most during a game day. Fifteen hours behind at first tip means the layer is describing a different slate of available players.",
+      "official_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+      "verified_how": "Four editions of 11/14 read in full (04:15 AM, 12:00 PM, 1:00 PM, 1:30 PM) and diffed.",
+      "proposed_fix": "Make the edition a build input: publish the edition stamp next to every designation, fail the build if the stamp is older than the last official edition listed on the index page, and re-price the availability layer on every refresh.",
+      "severity": "High",
+      "owner": "Refresh workflow + injuries builder"
+    },
+    {
+      "id": "F-04",
+      "topic": "Twenty-two injury designations changed and nothing on the site reflects them",
+      "detail": "Between 12:00 PM and 1:30 PM: Christie Questionable->Doubtful; Brown Jr. Questionable->Probable; Harkless and Isaac Jones Questionable->Available. Cleveland, New Orleans, Chicago and Miami all filed for the first time (22 player rows). Memphis is still NOT YET SUBMITTED.",
+      "why_it_matters": "Anthony Edwards (MIN) and Donte DiVincenzo (MIN) are Out; Evan Mobley (CLE) is Out; Trey Murphy III, Dejounte Murray and Trendon Watford (NOP) are Out; Jalen Duren (DET) is Out. Those are rotation-level absences on games the site prices.",
+      "official_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+      "verified_how": "Row-by-row diff of the 12:00 PM and 1:30 PM editions.",
+      "proposed_fix": "Same as F-03, plus publish the diff ('what changed since the last edition') as its own table so a reader sees the movement rather than a snapshot.",
+      "severity": "High",
+      "owner": "Refresh workflow + injuries builder"
+    },
+    {
+      "id": "F-05",
+      "topic": "S1's 'cleared the luck gate' headline does not survive multiple testing or an edge-size test",
+      "detail": "Across the six strategies with graded plays, Benjamini-Hochberg gives S1 q = 0.120. Splitting S1 at the median |edge| of 5.70 points gives 11/16 on small edges and 12/16 on large edges, point-biserial r = 0.051.",
+      "why_it_matters": "This is the one positive result the whole project rests on. If it is luck, the honest headline is 'no strategy has demonstrated skill', which is a different executive decision.",
+      "official_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/validation.json",
+      "verified_how": "Recomputed independently in this session from the published play list (exact binomial, BH, median split).",
+      "proposed_fix": "Publish the corrected q-value and the edge-size gradient next to the raw p-value, and add both as gate conditions (G8 multiplicity, G9 monotonicity).",
+      "severity": "High",
+      "owner": "Gate owner + site build"
+    },
+    {
+      "id": "F-06",
+      "topic": "45 of the 60 out-of-sample final scores were not re-read this session",
+      "detail": "Nine 11/13 finals and six 11/06 finals were re-read one by one and all matched. The 11/07 page returned every score unrendered ('-'), so that date could not be read at all; 11/08-11/12 were not read.",
+      "why_it_matters": "Everything the site says about model error rests on these 60 scores. Fifteen of them are now independently confirmed; forty-five are not.",
+      "official_url": "https://www.nba.com/games?date=2026-11-07",
+      "verified_how": "Date-by-date page reads; calendar counts for all eight dates match the official month calendar, which proves completeness but not correctness.",
+      "proposed_fix": "Have the refresh workflow re-read every completed date nightly and diff the scores into the corpus, recording per-date 'read at' stamps on the backtest page.",
+      "severity": "Medium",
+      "owner": "Refresh workflow"
+    },
+    {
+      "id": "F-07",
+      "topic": "DET@MIA tip time is printed differently by two official pages",
+      "detail": "The injury-report PDFs print 07:00 (ET) for DET@MIA on 11/14; the schedule page prints 8:00 PM ET. The repository already logs this in its own build notes.",
+      "why_it_matters": "Low, but a wrong tip time is how a reader decides whether a line is still live.",
+      "official_url": "https://www.nba.com/schedule?date=2026-11-15",
+      "verified_how": "Both pages read this session.",
+      "proposed_fix": "Publish the schedule page as the authority and show the conflict in a footnote rather than silently choosing one.",
+      "severity": "Low",
+      "owner": "Horizon builder"
+    },
+    {
+      "id": "F-08",
+      "topic": "The published residual sigma does not reproduce exactly",
+      "detail": "Stored residuals give sigma 17.12 (population) or 17.26 (sample) for margin; the site publishes 17.41. MAE and bias reproduce exactly.",
+      "why_it_matters": "Low today, because no published decision is close enough to a threshold for 0.15-0.29 points of sigma to flip it. It matters if sigma is used to price a line.",
+      "official_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json",
+      "verified_how": "Recomputed from the 60 stored forecasts.",
+      "proposed_fix": "Print the estimator next to the statistic (population vs sample denominator, and whether the fit window differs from the reported window).",
+      "severity": "Low",
+      "owner": "Backtest builder"
+    },
+    {
+      "id": "F-09",
+      "topic": "Two builds publish different error statistics for the same 60 games",
+      "detail": "Site build: margin MAE 12.98 / total MAE 14.83. Integration Desk: 12.913 / 14.636. Both reproduce from their own stored forecasts.",
+      "why_it_matters": "A reader who compares the two pages sees a contradiction with no explanation and has to guess which build is current.",
+      "official_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/integration/out/settlement.json",
+      "verified_how": "Both files recomputed row by row.",
+      "proposed_fix": "Either merge the two forecast series or print, on both pages, that two builds exist and why their numbers differ.",
+      "severity": "Medium",
+      "owner": "Integration seat"
+    },
+    {
+      "id": "F-10",
+      "topic": "78 of 978 published data rows carry no official link in the row",
+      "detail": "Concentrated in prop-variance (19), repo-review (10), source-check (10), questions (8).",
+      "why_it_matters": "The brief's rule is that every table row has a source link. The build's audit uses a narrower definition of a data row, so the published sentence is true under its own definition and misleading to a reader.",
+      "official_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_dashboard.py",
+      "verified_how": "Independent HTML parse of all 17 pages.",
+      "proposed_fix": "Change the sentence to state the definition, and add the missing per-row links where one exists; if no official source exists for a row, mark it in the row.",
+      "severity": "Low",
+      "owner": "Site build"
+    },
+    {
+      "id": "F-11",
+      "topic": "The minutes-coverage number in the README does not match the data file",
+      "detail": "README says minutes are known for 50 of 465 players; data/players_minutes_2026_27.json holds 24 rows and its own header says 'ranks 1-24'. The raw players capture holds a URL and a hash but zero rows.",
+      "why_it_matters": "The availability impact is described as a measured lower bound; the size of that lower bound is the thing that decides whether it is usable.",
+      "official_url": "https://www.nba.com/stats/players/traditional?PerMode=PerGame&dir=-1&sort=MIN",
+      "verified_how": "Counted the rows in both files.",
+      "proposed_fix": "Correct the number to the file's own count, and have the builder compute it instead of hard-coding it in prose.",
+      "severity": "Medium",
+      "owner": "Injury/impact builder + README"
+    },
+    {
+      "id": "F-12",
+      "topic": "Rest and back-to-back are computed wrongly in the horizon build, and two pages disagree",
+      "detail": "In scripts/originate_horizon.py the 'previous game' is chosen from all fixtures with a date earlier than the horizon game, which includes fixtures later in the horizon. For the first game of each slate the previous game is in the future, so 26 of 27 rows store a negative rest value (e.g. -3) and b2b = false. The site's other builder stores positive values for the same games, including home_b2b = 1 for NOP on 11/14.",
+      "why_it_matters": "The game-flow table prints 'B2B' for basically every horizon game because it ORs two flags; the picks page prints almost none. Rest is one of the signals the brief asks to be analysed, and right now it is not usable from either page.",
+      "official_url": "https://www.nba.com/schedule?date=2026-11-15",
+      "verified_how": "Read the code, then read both published outputs for the same game (DEN@NOP 11/14).",
+      "proposed_fix": "Restrict the prior-game search to dates at least one day before the horizon start, assert rest_days >= 0 for every row, and make the two builders read one shared rest table.",
+      "severity": "High",
+      "owner": "Game flow / horizon builders"
+    },
+    {
+      "id": "F-13",
+      "topic": "COORDINATION.md has duplicated and colliding sections",
+      "detail": "Sections 15, 20, 21, 23, 24, 25 and 26 each appear twice; 18 and 28 are each used by two different sessions.",
+      "why_it_matters": "The board is the only way parallel sessions avoid colliding. A duplicated section invites a new session to take a 'free' number and collide again.",
+      "official_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md",
+      "verified_how": "Every '## ' heading walked; repeated blocks diffed.",
+      "proposed_fix": "One de-duplication pass by the integration seat, keeping the later copy of each pair after confirming the pair is identical. Already requested as R-29-8.",
+      "severity": "Medium",
+      "owner": "Integration seat"
+    },
+    {
+      "id": "F-14",
+      "topic": "The refresh workflow's pull requests are not being created",
+      "detail": "Two auto/refresh branches exist and no pull request exists for either.",
+      "why_it_matters": "Captures accumulate on orphan branches, so the 'keep the official capture layer alive' path is only half working and nothing shows it in the UI.",
+      "official_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml",
+      "verified_how": "Listed branches and searched for matching PRs through the GitHub API.",
+      "proposed_fix": "Fail the job (not warn) when the PR cannot be created, and surface the branch name in the run summary.",
+      "severity": "Low",
+      "owner": "Workflow owner"
+    },
+    {
+      "id": "F-15",
+      "topic": "No odds source exists, so no pick can be called a market edge",
+      "detail": "Every 'edge' on the site is the originated model against a naive reference model built from the same official ratings. No sportsbook price is used anywhere.",
+      "why_it_matters": "This is the project's founding question. Until a licensed, dated closing price exists, the honest state is 'the model is internally consistent and out-of-sample slightly ahead of a naive benchmark on margin, behind on totals' \u2014 not 'we have an edge'.",
+      "official_url": "https://www.nba.com/stats/help/glossary",
+      "verified_how": "Searched the repository for any price source; there is none, and the site says so on every relevant page.",
+      "proposed_fix": "Decide the question explicitly (Q-01): a licensed feed, or a permanent written statement that the project measures model quality only.",
+      "severity": "High",
+      "owner": "Project owner"
+    },
+    {
+      "id": "F-16",
+      "topic": "The site's own injury text contradicts itself about the same game",
+      "detail": "scripts/build_dashboard.py carries an availability text that states 'statuses from the official 11/13 05:15 PM ET edition (11/14 rows)' and concludes 'no NEW_ABSENCE verifiable -> no line adjustment', while the injuries page is built from the 11/14/26 04:15 AM ET edition. Two captures of the same fact, three hours apart, published on the same site.",
+      "why_it_matters": "A reader cannot tell which edition a given row came from, and the two statements imply different conclusions about whether anything changed. It is also the mechanism by which F-03/F-04 went unnoticed: nothing on the page forces one edition to be named in one place.",
+      "official_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+      "verified_how": "Read the build's availability string, then read the injury page header and the JSON source stamp.",
+      "proposed_fix": "One edition per build, named once, referenced by every row; the build fails if two editions appear.",
+      "severity": "Medium",
+      "owner": "Site build + injuries builder"
+    },
+    {
+      "id": "F-17",
+      "topic": "Four of the ten published strategies have never had a graded play",
+      "detail": "S4 (pace-driven total), S6 (availability shock), S7 (player points prop) and S8 (PRA combo) show 0-0. The leaderboard nevertheless ranks them alongside strategies with 8 to 32 graded plays.",
+      "why_it_matters": "Ranking a 0-0 strategy is presenting an unmeasured thing as measured. A reader comparing ranks will not see that four rows are empty.",
+      "official_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/validation.json",
+      "verified_how": "Counted graded_plays[] by strategy: S1 32, S3 22, S10 26, S2 15, S5 12, S9 8, S4/S6/S7/S8 0.",
+      "proposed_fix": "Give ungraded strategies their own table ('not yet measurable') instead of a rank, and state the pick count needed before a first grading.",
+      "severity": "Low",
+      "owner": "Leaderboard build"
+    }
+  ]
+}
