@@ -1,0 +1,183 @@
+{
+ "window": "2026-10-20 .. 2026-11-13",
+ "games": 160,
+ "regression_sample": {
+  "games_with_a_known_prior_game_for_both_teams": 144,
+  "dropped_no_prior_game_on_record": 16,
+  "why_dropped": "a team with no earlier game on record has no rest figure; treating that as zero rest would fabricate a comparison"
+ },
+ "regressions": [
+  {
+   "name": "Back-to-back fatigue, measured on the whole season",
+   "measured": {
+    "term": "back-to-back differential on the home margin",
+    "coef": 0.016,
+    "se": 4.426,
+    "t": 0.0,
+    "n": 144,
+    "dof": 141,
+    "unit": "points",
+    "ci95": [
+     -8.66,
+     8.69
+    ],
+    "p_two_sided": 0.9971,
+    "source_url": "https://www.nba.com/games?date=2026-10-20"
+   },
+   "games_with_a_b2b_mismatch": 28,
+   "site_value": 6.096,
+   "site_source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json",
+   "reading": "the published penalty is more than twice the full-season coefficient, and the full-season coefficient is not distinguishable from zero on this sample"
+  },
+  {
+   "name": "Rest-gap effect, measured on the whole season",
+   "measured": {
+    "term": "rest-gap differential on the home margin",
+    "coef": 1.91,
+    "se": 2.307,
+    "t": 0.83,
+    "n": 144,
+    "dof": 141,
+    "unit": "points per extra calendar day",
+    "ci95": [
+     -2.61,
+     6.43
+    ],
+    "p_two_sided": 0.409,
+    "source_url": "https://www.nba.com/games?date=2026-10-20"
+   },
+   "site_value": null,
+   "site_source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json",
+   "reading": "no rest effect beyond the back-to-back flag shows up here; the rest-edge strategies inherit that"
+  },
+  {
+   "name": "Back-to-back effect on scoring, measured",
+   "measured": {
+    "term": "back-to-back differential on the game total",
+    "coef": 4.018,
+    "se": 4.893,
+    "t": 0.82,
+    "n": 144,
+    "dof": 141,
+    "unit": "points",
+    "ci95": [
+     -5.57,
+     13.61
+    ],
+    "p_two_sided": 0.4129,
+    "source_url": "https://www.nba.com/games?date=2026-10-20"
+   },
+   "site_value": 0.0,
+   "site_source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json",
+   "reading": "the site's totals carry no back-to-back term; the season estimate is positive but inside noise"
+  }
+ ],
+ "correlations": [
+  {
+   "x": "home margin",
+   "y": "game total",
+   "r": -0.0513,
+   "t": -0.65,
+   "p": 0.5194,
+   "n": 160,
+   "site_assumption": 0.0,
+   "meaning": "the correlation the same-game-parlay pricing assumes to be zero; a value near zero here is the assumption being confirmed rather than asserted",
+   "source_url": "https://www.nba.com/games?date=2026-10-20"
+  },
+  {
+   "x": "went to overtime",
+   "y": "absolute margin",
+   "r": -0.2108,
+   "p": 0.0075,
+   "n": 160,
+   "site_assumption": "not published",
+   "meaning": "how strongly close games predict overtime, the input the game-flow page models instead of measures",
+   "source_url": "https://www.nba.com/games?date=2026-10-20"
+  }
+ ],
+ "margins": {
+  "mean_home": 1.762,
+  "sd": 17.406,
+  "within_3": 0.0813,
+  "within_5": 0.1812,
+  "twenty_plus": 0.2687,
+  "ot_rate": 0.05,
+  "ot_games": 8,
+  "source_url": "https://www.nba.com/games?date=2026-10-20"
+ },
+ "totals": {
+  "mean": 226.5,
+  "sd": 18.819,
+  "regulation_only_mean": 225.49,
+  "source_url": "https://www.nba.com/games?date=2026-10-20"
+ },
+ "leg_correlation": {
+  "date_pairs": 22,
+  "leg_a_home_win": 0.5909,
+  "leg_b_home_win": 0.5,
+  "measured_joint": 0.3182,
+  "independent_product": 0.2955,
+  "difference": 0.0227,
+  "ratio_true_to_independent": 1.0769,
+  "meaning": "a same-night double priced as the product of its legs is off by this much on this sample; with only two dozen date-pairs the band is wide, which is the honest answer",
+  "warning": "n = 22 date-pairs is far too small to reprice parlays on; treat as a direction, not a number",
+  "side_vs_ot_correlation": {
+   "r": 0.0459,
+   "p": 0.564
+  },
+  "source_url": "https://www.nba.com/games?date=2026-10-20"
+ },
+ "probability_audit": {
+  "games": 160,
+  "window": "2026-10-20 .. 2026-11-13",
+  "rows": [
+   {
+    "quantity": "home win",
+    "mean_model_probability_published": 0.5467,
+    "realised_rate_on_completed_games": 0.525,
+    "realised_count": 84,
+    "games": 160,
+    "gap_points": -2.17,
+    "p_exact_vs_model": 0.57955,
+    "source_url": "https://www.nba.com/games?date=2026-10-20",
+    "page_under_test": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/gameflow.json"
+   },
+   {
+    "quantity": "margin inside 5",
+    "mean_model_probability_published": 0.1888,
+    "realised_rate_on_completed_games": 0.1812,
+    "realised_count": 29,
+    "games": 160,
+    "gap_points": -0.75,
+    "p_exact_vs_model": 0.9195,
+    "source_url": "https://www.nba.com/games?date=2026-10-20",
+    "page_under_test": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/gameflow.json"
+   },
+   {
+    "quantity": "margin 20 or more",
+    "mean_model_probability_published": 0.3386,
+    "realised_rate_on_completed_games": 0.2687,
+    "realised_count": 43,
+    "games": 160,
+    "gap_points": -6.99,
+    "p_exact_vs_model": 0.06602,
+    "source_url": "https://www.nba.com/games?date=2026-10-20",
+    "page_under_test": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/gameflow.json"
+   },
+   {
+    "quantity": "goes to overtime",
+    "mean_model_probability_published": 0.0191,
+    "realised_rate_on_completed_games": 0.05,
+    "realised_count": 8,
+    "games": 160,
+    "gap_points": 3.09,
+    "p_exact_vs_model": 0.01213,
+    "source_url": "https://www.nba.com/games?date=2026-10-20",
+    "page_under_test": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/gameflow.json"
+   }
+  ],
+  "caveat": "the predicted column is the mean of the 27 published horizon rows, which describe games that have not been played; comparing them with the completed games is a distribution check, not a graded forecast",
+  "away_win_rate": 0.475,
+  "home_win_rate": 0.525
+ }
+}

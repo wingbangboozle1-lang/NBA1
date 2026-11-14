@@ -1,0 +1,998 @@
+{
+ "as_of": "2026-11-14",
+ "summary": {
+  "scored_games": 160,
+  "fixtures_without_published_scores": 23,
+  "unplayed_horizon_games": 27,
+  "fixture_rows_compared": 23,
+  "fixture_rows_matching_repo": 23,
+  "fixture_rows_disagreeing": 0,
+  "dates_checked": 29,
+  "dates_mismatched": 0,
+  "dates_mismatched_list": [],
+  "teams_checked": 30,
+  "teams_mismatched": 0,
+  "teams_mismatched_list": [],
+  "finals_11_13_agreeing": 9,
+  "finals_11_13_disagreeing": 0,
+  "log_rows_before_this_session": 151,
+  "team_slots_the_log_covers": 320,
+  "team_slots_the_official_table_implies": 366
+ },
+ "fixture_rows": [
+  {
+   "date": "2026-10-24",
+   "game_id": "0022600104",
+   "fixture": "MIA@CHA",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/mia-vs-cha-0022600104",
+   "day_page": "https://www.nba.com/games?date=2026-10-24"
+  },
+  {
+   "date": "2026-10-24",
+   "game_id": "0022600105",
+   "fixture": "BKN@CLE",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/bkn-vs-cle-0022600105",
+   "day_page": "https://www.nba.com/games?date=2026-10-24"
+  },
+  {
+   "date": "2026-10-24",
+   "game_id": "0022600106",
+   "fixture": "MIL@PHI",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/mil-vs-phi-0022600106",
+   "day_page": "https://www.nba.com/games?date=2026-10-24"
+  },
+  {
+   "date": "2026-10-24",
+   "game_id": "0022600107",
+   "fixture": "HOU@ATL",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/hou-vs-atl-0022600107",
+   "day_page": "https://www.nba.com/games?date=2026-10-24"
+  },
+  {
+   "date": "2026-10-24",
+   "game_id": "0022600108",
+   "fixture": "WAS@CHI",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/was-vs-chi-0022600108",
+   "day_page": "https://www.nba.com/games?date=2026-10-24"
+  },
+  {
+   "date": "2026-10-24",
+   "game_id": "0022600109",
+   "fixture": "SAS@DAL",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/sas-vs-dal-0022600109",
+   "day_page": "https://www.nba.com/games?date=2026-10-24"
+  },
+  {
+   "date": "2026-10-24",
+   "game_id": "0022600110",
+   "fixture": "NOP@DEN",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/nop-vs-den-0022600110",
+   "day_page": "https://www.nba.com/games?date=2026-10-24"
+  },
+  {
+   "date": "2026-10-24",
+   "game_id": "0022600111",
+   "fixture": "GSW@PHX",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/gsw-vs-phx-0022600111",
+   "day_page": "https://www.nba.com/games?date=2026-10-24"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600158",
+   "fixture": "OKC@CLE",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/okc-vs-cle-0022600158",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600159",
+   "fixture": "DET@CHA",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/det-vs-cha-0022600159",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600160",
+   "fixture": "ATL@IND",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/atl-vs-ind-0022600160",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600161",
+   "fixture": "BKN@NYK",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/bkn-vs-nyk-0022600161",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600162",
+   "fixture": "WAS@ORL",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/was-vs-orl-0022600162",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600163",
+   "fixture": "CHI@PHI",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/chi-vs-phi-0022600163",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600164",
+   "fixture": "SAC@DAL",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/sac-vs-dal-0022600164",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600165",
+   "fixture": "NOP@MEM",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/nop-vs-mem-0022600165",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600166",
+   "fixture": "MIL@MIN",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/mil-vs-min-0022600166",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600167",
+   "fixture": "BOS@HOU",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/bos-vs-hou-0022600167",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600168",
+   "fixture": "UTA@SAS",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/uta-vs-sas-0022600168",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600169",
+   "fixture": "POR@DEN",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/por-vs-den-0022600169",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600170",
+   "fixture": "PHX@GSW",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/phx-vs-gsw-0022600170",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600171",
+   "fixture": "TOR@LAC",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/tor-vs-lac-0022600171",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600172",
+   "fixture": "MIA@LAL",
+   "status_printed": "FINAL",
+   "score_this_session": "printed as '-'",
+   "score_in_repo": "absent from the log",
+   "verdict": "MATCH",
+   "source_url": "https://www.nba.com/game/mia-vs-lal-0022600172",
+   "day_page": "https://www.nba.com/games?date=2026-11-02"
+  }
+ ],
+ "date_rows": [
+  {
+   "date": "2026-10-20",
+   "official_calendar_count": 3,
+   "scored_rows": 3,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 3,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-10-20"
+  },
+  {
+   "date": "2026-10-21",
+   "official_calendar_count": 11,
+   "scored_rows": 11,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-10-21"
+  },
+  {
+   "date": "2026-10-22",
+   "official_calendar_count": 2,
+   "scored_rows": 2,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 2,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-10-22"
+  },
+  {
+   "date": "2026-10-23",
+   "official_calendar_count": 12,
+   "scored_rows": 12,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 12,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-10-23"
+  },
+  {
+   "date": "2026-10-24",
+   "official_calendar_count": 8,
+   "scored_rows": 0,
+   "fixture_rows": 8,
+   "unplayed_rows": 0,
+   "rows_total": 8,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-10-24"
+  },
+  {
+   "date": "2026-10-25",
+   "official_calendar_count": 7,
+   "scored_rows": 7,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 7,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-10-25"
+  },
+  {
+   "date": "2026-10-26",
+   "official_calendar_count": 9,
+   "scored_rows": 9,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 9,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-10-26"
+  },
+  {
+   "date": "2026-10-27",
+   "official_calendar_count": 4,
+   "scored_rows": 4,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 4,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-10-27"
+  },
+  {
+   "date": "2026-10-28",
+   "official_calendar_count": 12,
+   "scored_rows": 12,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 12,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-10-28"
+  },
+  {
+   "date": "2026-10-29",
+   "official_calendar_count": 3,
+   "scored_rows": 3,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 3,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-10-29"
+  },
+  {
+   "date": "2026-10-30",
+   "official_calendar_count": 10,
+   "scored_rows": 10,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 10,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-10-30"
+  },
+  {
+   "date": "2026-10-31",
+   "official_calendar_count": 7,
+   "scored_rows": 7,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 7,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-10-31"
+  },
+  {
+   "date": "2026-11-01",
+   "official_calendar_count": 4,
+   "scored_rows": 4,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 4,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-01"
+  },
+  {
+   "date": "2026-11-02",
+   "official_calendar_count": 15,
+   "scored_rows": 0,
+   "fixture_rows": 15,
+   "unplayed_rows": 0,
+   "rows_total": 15,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "date": "2026-11-03",
+   "official_calendar_count": 0,
+   "scored_rows": 0,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 0,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-03"
+  },
+  {
+   "date": "2026-11-04",
+   "official_calendar_count": 14,
+   "scored_rows": 14,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 14,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-04"
+  },
+  {
+   "date": "2026-11-05",
+   "official_calendar_count": 2,
+   "scored_rows": 2,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 2,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-05"
+  },
+  {
+   "date": "2026-11-06",
+   "official_calendar_count": 9,
+   "scored_rows": 9,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 9,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-06"
+  },
+  {
+   "date": "2026-11-07",
+   "official_calendar_count": 7,
+   "scored_rows": 7,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 7,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-07"
+  },
+  {
+   "date": "2026-11-08",
+   "official_calendar_count": 7,
+   "scored_rows": 7,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 7,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-08"
+  },
+  {
+   "date": "2026-11-09",
+   "official_calendar_count": 8,
+   "scored_rows": 8,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 8,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-09"
+  },
+  {
+   "date": "2026-11-10",
+   "official_calendar_count": 6,
+   "scored_rows": 6,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 6,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-10"
+  },
+  {
+   "date": "2026-11-11",
+   "official_calendar_count": 10,
+   "scored_rows": 10,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 10,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-11"
+  },
+  {
+   "date": "2026-11-12",
+   "official_calendar_count": 4,
+   "scored_rows": 4,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 4,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-12"
+  },
+  {
+   "date": "2026-11-13",
+   "official_calendar_count": 9,
+   "scored_rows": 9,
+   "fixture_rows": 0,
+   "unplayed_rows": 0,
+   "rows_total": 9,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "date": "2026-11-14",
+   "official_calendar_count": 5,
+   "scored_rows": 0,
+   "fixture_rows": 0,
+   "unplayed_rows": 5,
+   "rows_total": 5,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "date": "2026-11-15",
+   "official_calendar_count": 9,
+   "scored_rows": 0,
+   "fixture_rows": 0,
+   "unplayed_rows": 9,
+   "rows_total": 9,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-16",
+   "official_calendar_count": 8,
+   "scored_rows": 0,
+   "fixture_rows": 0,
+   "unplayed_rows": 8,
+   "rows_total": 8,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-17",
+   "official_calendar_count": 5,
+   "scored_rows": 0,
+   "fixture_rows": 0,
+   "unplayed_rows": 5,
+   "rows_total": 5,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/games?date=2026-11-17"
+  }
+ ],
+ "team_rows": [
+  {
+   "team": "ATL",
+   "name": "Atlanta Hawks",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 1,
+   "expected_rows": 13,
+   "rows_in_repaired_log": 13,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "BKN",
+   "name": "Brooklyn Nets",
+   "official_gp_through_11_12": 11,
+   "finals_11_13": 0,
+   "expected_rows": 11,
+   "rows_in_repaired_log": 11,
+   "scored_rows_only": 9,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "BOS",
+   "name": "Boston Celtics",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 0,
+   "expected_rows": 12,
+   "rows_in_repaired_log": 12,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "CHA",
+   "name": "Charlotte Hornets",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 0,
+   "expected_rows": 12,
+   "rows_in_repaired_log": 12,
+   "scored_rows_only": 10,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "CHI",
+   "name": "Chicago Bulls",
+   "official_gp_through_11_12": 10,
+   "finals_11_13": 1,
+   "expected_rows": 11,
+   "rows_in_repaired_log": 11,
+   "scored_rows_only": 9,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "CLE",
+   "name": "Cleveland Cavaliers",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 1,
+   "expected_rows": 13,
+   "rows_in_repaired_log": 13,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "DAL",
+   "name": "Dallas Mavericks",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 0,
+   "expected_rows": 12,
+   "rows_in_repaired_log": 12,
+   "scored_rows_only": 10,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "DEN",
+   "name": "Denver Nuggets",
+   "official_gp_through_11_12": 10,
+   "finals_11_13": 0,
+   "expected_rows": 10,
+   "rows_in_repaired_log": 10,
+   "scored_rows_only": 8,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "DET",
+   "name": "Detroit Pistons",
+   "official_gp_through_11_12": 11,
+   "finals_11_13": 0,
+   "expected_rows": 11,
+   "rows_in_repaired_log": 11,
+   "scored_rows_only": 10,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "GSW",
+   "name": "Golden State Warriors",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 1,
+   "expected_rows": 13,
+   "rows_in_repaired_log": 13,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "HOU",
+   "name": "Houston Rockets",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 1,
+   "expected_rows": 13,
+   "rows_in_repaired_log": 13,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "IND",
+   "name": "Indiana Pacers",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 1,
+   "expected_rows": 13,
+   "rows_in_repaired_log": 13,
+   "scored_rows_only": 12,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "LAC",
+   "name": "LA Clippers",
+   "official_gp_through_11_12": 10,
+   "finals_11_13": 1,
+   "expected_rows": 11,
+   "rows_in_repaired_log": 11,
+   "scored_rows_only": 10,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "LAL",
+   "name": "Los Angeles Lakers",
+   "official_gp_through_11_12": 13,
+   "finals_11_13": 0,
+   "expected_rows": 13,
+   "rows_in_repaired_log": 13,
+   "scored_rows_only": 12,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "MEM",
+   "name": "Memphis Grizzlies",
+   "official_gp_through_11_12": 11,
+   "finals_11_13": 1,
+   "expected_rows": 12,
+   "rows_in_repaired_log": 12,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "MIA",
+   "name": "Miami Heat",
+   "official_gp_through_11_12": 11,
+   "finals_11_13": 1,
+   "expected_rows": 12,
+   "rows_in_repaired_log": 12,
+   "scored_rows_only": 10,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "MIL",
+   "name": "Milwaukee Bucks",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 1,
+   "expected_rows": 13,
+   "rows_in_repaired_log": 13,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "MIN",
+   "name": "Minnesota Timberwolves",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 0,
+   "expected_rows": 12,
+   "rows_in_repaired_log": 12,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "NOP",
+   "name": "New Orleans Pelicans",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 1,
+   "expected_rows": 13,
+   "rows_in_repaired_log": 13,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "NYK",
+   "name": "New York Knicks",
+   "official_gp_through_11_12": 11,
+   "finals_11_13": 1,
+   "expected_rows": 12,
+   "rows_in_repaired_log": 12,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "OKC",
+   "name": "Oklahoma City Thunder",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 1,
+   "expected_rows": 13,
+   "rows_in_repaired_log": 13,
+   "scored_rows_only": 12,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "ORL",
+   "name": "Orlando Magic",
+   "official_gp_through_11_12": 11,
+   "finals_11_13": 1,
+   "expected_rows": 12,
+   "rows_in_repaired_log": 12,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "PHI",
+   "name": "Philadelphia 76ers",
+   "official_gp_through_11_12": 13,
+   "finals_11_13": 0,
+   "expected_rows": 13,
+   "rows_in_repaired_log": 13,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "PHX",
+   "name": "Phoenix Suns",
+   "official_gp_through_11_12": 11,
+   "finals_11_13": 0,
+   "expected_rows": 11,
+   "rows_in_repaired_log": 11,
+   "scored_rows_only": 9,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "POR",
+   "name": "Portland Trail Blazers",
+   "official_gp_through_11_12": 11,
+   "finals_11_13": 1,
+   "expected_rows": 12,
+   "rows_in_repaired_log": 12,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "SAC",
+   "name": "Sacramento Kings",
+   "official_gp_through_11_12": 11,
+   "finals_11_13": 1,
+   "expected_rows": 12,
+   "rows_in_repaired_log": 12,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "SAS",
+   "name": "San Antonio Spurs",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 1,
+   "expected_rows": 13,
+   "rows_in_repaired_log": 13,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "TOR",
+   "name": "Toronto Raptors",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 0,
+   "expected_rows": 12,
+   "rows_in_repaired_log": 12,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "UTA",
+   "name": "Utah Jazz",
+   "official_gp_through_11_12": 12,
+   "finals_11_13": 1,
+   "expected_rows": 13,
+   "rows_in_repaired_log": 13,
+   "scored_rows_only": 12,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "team": "WAS",
+   "name": "Washington Wizards",
+   "official_gp_through_11_12": 13,
+   "finals_11_13": 0,
+   "expected_rows": 13,
+   "rows_in_repaired_log": 13,
+   "scored_rows_only": 11,
+   "verdict": "match",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  }
+ ],
+ "finals_rows": [
+  {
+   "game_id": "0022600034",
+   "fixture": "NYK@IND",
+   "read_by_this_session": "104-106",
+   "in_repo_transcription": "104-106",
+   "cup_group_printed": "East Group B",
+   "verdict": "agree",
+   "source_url": "https://www.nba.com/game/nyk-vs-ind-0022600034"
+  },
+  {
+   "game_id": "0022600035",
+   "fixture": "MIL@ORL",
+   "read_by_this_session": "99-107",
+   "in_repo_transcription": "99-107",
+   "cup_group_printed": "East Group A",
+   "verdict": "agree",
+   "source_url": "https://www.nba.com/game/mil-vs-orl-0022600035"
+  },
+  {
+   "game_id": "0022600036",
+   "fixture": "CLE@MIA",
+   "read_by_this_session": "121-133",
+   "in_repo_transcription": "121-133",
+   "cup_group_printed": "East Group B",
+   "verdict": "agree",
+   "source_url": "https://www.nba.com/game/cle-vs-mia-0022600036"
+  },
+  {
+   "game_id": "0022600037",
+   "fixture": "ATL@CHI",
+   "read_by_this_session": "117-125",
+   "in_repo_transcription": "117-125",
+   "cup_group_printed": "East Group C",
+   "verdict": "agree",
+   "source_url": "https://www.nba.com/game/atl-vs-chi-0022600037"
+  },
+  {
+   "game_id": "0022600038",
+   "fixture": "MEM@NOP",
+   "read_by_this_session": "142-111",
+   "in_repo_transcription": "142-111",
+   "cup_group_printed": "West Group B",
+   "verdict": "agree",
+   "source_url": "https://www.nba.com/game/mem-vs-nop-0022600038"
+  },
+  {
+   "game_id": "0022600039",
+   "fixture": "UTA@HOU",
+   "read_by_this_session": "118-125",
+   "in_repo_transcription": "118-125",
+   "cup_group_printed": "West Group A",
+   "verdict": "agree",
+   "source_url": "https://www.nba.com/game/uta-vs-hou-0022600039"
+  },
+  {
+   "game_id": "0022600040",
+   "fixture": "GSW@SAS",
+   "read_by_this_session": "85-123",
+   "in_repo_transcription": "85-123",
+   "cup_group_printed": "West Group C",
+   "verdict": "agree",
+   "source_url": "https://www.nba.com/game/gsw-vs-sas-0022600040"
+  },
+  {
+   "game_id": "0022600041",
+   "fixture": "POR@SAC",
+   "read_by_this_session": "120-107",
+   "in_repo_transcription": "120-107",
+   "cup_group_printed": "West Group C",
+   "verdict": "agree",
+   "source_url": "https://www.nba.com/game/por-vs-sac-0022600041"
+  },
+  {
+   "game_id": "0022600042",
+   "fixture": "OKC@LAC",
+   "read_by_this_session": "112-113",
+   "in_repo_transcription": "112-113",
+   "cup_group_printed": "West Group B",
+   "verdict": "agree",
+   "source_url": "https://www.nba.com/game/okc-vs-lac-0022600042"
+  }
+ ],
+ "sources": {
+  "day_pages": [
+   "https://www.nba.com/games?date=2026-10-24",
+   "https://www.nba.com/games?date=2026-11-02"
+  ],
+  "calendar_block": [
+   "https://www.nba.com/games?date=2026-10-24",
+   "https://www.nba.com/games?date=2026-11-14"
+  ],
+  "team_table": "https://www.nba.com/stats/teams/advanced",
+  "log_in_repo": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/gamelog.json"
+ },
+ "method_note": "The official day page for an archived date renders the fixture (both teams, a game id, the word FINAL) and prints '-' in every score, record and leader cell. The same page for a recent date prints the score. That asymmetry is the reason 23 games of this season cannot be graded from official pages: the results exist, the page this repository is allowed to read does not show them. The fixtures are therefore used to repair the SCHEDULE layer and never to supply a score.",
+ "irregularity": "Reproduced a third time by a different session on 2026-11-14 at 10:38-10:44 UTC: 8 games on 2026-10-24 and 15 on 2026-11-02, all FINAL, all with an empty score cell. No score inferred."
+}

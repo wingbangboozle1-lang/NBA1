@@ -1,0 +1,80 @@
+{
+  "title": "Session S26 official transcription of the two game-log dates that the repository carries as fixtures without results",
+  "session": "arena/a3e092a2-nba1",
+  "captured_utc": "2026-11-14T10:38:00Z to 2026-11-14T10:44:00Z",
+  "method": "fetch_page of the official NBA.com Games & Scores day pages, read line by line. Every row below is what the page printed at capture time. A '-' printed by the page is transcribed as null; nothing is inferred from the standings residual, from a box-score search result, or from any other site.",
+  "why_this_file_exists": "data/official/gamelog.json holds 151 scored games for 2026-10-20..2026-11-12 while the official team table (site/data/teams.json, source S1) sums to 348 team-games = 174 games. The 23-game difference is the two dates below. This file is an independent, second reading of those two official pages, taken on a different day and at a different hour from the session that first recorded them, so the 'fixture without a result' claim is now reproduced twice by two different sessions.",
+  "day_pages": {
+    "2026-10-24": {
+      "url": "https://www.nba.com/games?date=2026-10-24",
+      "page_title": "NBA Games - All NBA matchups | NBA.com",
+      "calendar_badge_games": 8,
+      "games_rendered": 8,
+      "score_cells_printed": "-",
+      "record_cells_printed": "-",
+      "game_leaders_printed": "-",
+      "hide_scores_toggle_present": true
+    },
+    "2026-11-02": {
+      "url": "https://www.nba.com/games?date=2026-11-02",
+      "page_title": "NBA Games - All NBA matchups | NBA.com",
+      "calendar_badge_games": 15,
+      "games_rendered": 15,
+      "score_cells_printed": "-",
+      "record_cells_printed": "-",
+      "game_leaders_printed": "-",
+      "hide_scores_toggle_present": true
+    }
+  },
+  "orientation_rule": "On nba.com/games the first team in a card is the AWAY team and the second is the HOME team. Confirmed by the card link pattern https://www.nba.com/game/<away>-vs-<home>-<game_id>, which each row's source_url follows.",
+  "fixtures": [
+    {"date": "2026-10-24", "status_printed": "FINAL", "away": "MIA", "away_pts": null, "home": "CHA", "home_pts": null, "game_id": "0022600104", "source_url": "https://www.nba.com/game/mia-vs-cha-0022600104", "day_page": "https://www.nba.com/games?date=2026-10-24"},
+    {"date": "2026-10-24", "status_printed": "FINAL", "away": "BKN", "away_pts": null, "home": "CLE", "home_pts": null, "game_id": "0022600105", "source_url": "https://www.nba.com/game/bkn-vs-cle-0022600105", "day_page": "https://www.nba.com/games?date=2026-10-24"},
+    {"date": "2026-10-24", "status_printed": "FINAL", "away": "MIL", "away_pts": null, "home": "PHI", "home_pts": null, "game_id": "0022600106", "source_url": "https://www.nba.com/game/mil-vs-phi-0022600106", "day_page": "https://www.nba.com/games?date=2026-10-24"},
+    {"date": "2026-10-24", "status_printed": "FINAL", "away": "HOU", "away_pts": null, "home": "ATL", "home_pts": null, "game_id": "0022600107", "source_url": "https://www.nba.com/game/hou-vs-atl-0022600107", "day_page": "https://www.nba.com/games?date=2026-10-24"},
+    {"date": "2026-10-24", "status_printed": "FINAL", "away": "WAS", "away_pts": null, "home": "CHI", "home_pts": null, "game_id": "0022600108", "source_url": "https://www.nba.com/game/was-vs-chi-0022600108", "day_page": "https://www.nba.com/games?date=2026-10-24"},
+    {"date": "2026-10-24", "status_printed": "FINAL", "away": "SAS", "away_pts": null, "home": "DAL", "home_pts": null, "game_id": "0022600109", "source_url": "https://www.nba.com/game/sas-vs-dal-0022600109", "day_page": "https://www.nba.com/games?date=2026-10-24"},
+    {"date": "2026-10-24", "status_printed": "FINAL", "away": "NOP", "away_pts": null, "home": "DEN", "home_pts": null, "game_id": "0022600110", "source_url": "https://www.nba.com/game/nop-vs-den-0022600110", "day_page": "https://www.nba.com/games?date=2026-10-24"},
+    {"date": "2026-10-24", "status_printed": "FINAL", "away": "GSW", "away_pts": null, "home": "PHX", "home_pts": null, "game_id": "0022600111", "source_url": "https://www.nba.com/game/gsw-vs-phx-0022600111", "day_page": "https://www.nba.com/games?date=2026-10-24"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "OKC", "away_pts": null, "home": "CLE", "home_pts": null, "game_id": "0022600158", "source_url": "https://www.nba.com/game/okc-vs-cle-0022600158", "day_page": "https://www.nba.com/games?date=2026-11-02"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "DET", "away_pts": null, "home": "CHA", "home_pts": null, "game_id": "0022600159", "source_url": "https://www.nba.com/game/det-vs-cha-0022600159", "day_page": "https://www.nba.com/games?date=2026-11-02"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "ATL", "away_pts": null, "home": "IND", "home_pts": null, "game_id": "0022600160", "source_url": "https://www.nba.com/game/atl-vs-ind-0022600160", "day_page": "https://www.nba.com/games?date=2026-11-02"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "BKN", "away_pts": null, "home": "NYK", "home_pts": null, "game_id": "0022600161", "source_url": "https://www.nba.com/game/bkn-vs-nyk-0022600161", "day_page": "https://www.nba.com/games?date=2026-11-02"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "WAS", "away_pts": null, "home": "ORL", "home_pts": null, "game_id": "0022600162", "source_url": "https://www.nba.com/game/was-vs-orl-0022600162", "day_page": "https://www.nba.com/games?date=2026-11-02"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "CHI", "away_pts": null, "home": "PHI", "home_pts": null, "game_id": "0022600163", "source_url": "https://www.nba.com/game/chi-vs-phi-0022600163", "day_page": "https://www.nba.com/games?date=2026-11-02"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "SAC", "away_pts": null, "home": "DAL", "home_pts": null, "game_id": "0022600164", "source_url": "https://www.nba.com/game/sac-vs-dal-0022600164", "day_page": "https://www.nba.com/games?date=2026-11-02"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "NOP", "away_pts": null, "home": "MEM", "home_pts": null, "game_id": "0022600165", "source_url": "https://www.nba.com/game/nop-vs-mem-0022600165", "day_page": "https://www.nba.com/games?date=2026-11-02"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "MIL", "away_pts": null, "home": "MIN", "home_pts": null, "game_id": "0022600166", "source_url": "https://www.nba.com/game/mil-vs-min-0022600166", "day_page": "https://www.nba.com/games?date=2026-11-02"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "BOS", "away_pts": null, "home": "HOU", "home_pts": null, "game_id": "0022600167", "source_url": "https://www.nba.com/game/bos-vs-hou-0022600167", "day_page": "https://www.nba.com/games?date=2026-11-02"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "UTA", "away_pts": null, "home": "SAS", "home_pts": null, "game_id": "0022600168", "source_url": "https://www.nba.com/game/uta-vs-sas-0022600168", "day_page": "https://www.nba.com/games?date=2026-11-02"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "POR", "away_pts": null, "home": "DEN", "home_pts": null, "game_id": "0022600169", "source_url": "https://www.nba.com/game/por-vs-den-0022600169", "day_page": "https://www.nba.com/games?date=2026-11-02"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "PHX", "away_pts": null, "home": "GSW", "home_pts": null, "game_id": "0022600170", "source_url": "https://www.nba.com/game/phx-vs-gsw-0022600170", "day_page": "https://www.nba.com/games?date=2026-11-02"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "TOR", "away_pts": null, "home": "LAC", "home_pts": null, "game_id": "0022600171", "source_url": "https://www.nba.com/game/tor-vs-lac-0022600171", "day_page": "https://www.nba.com/games?date=2026-11-02"},
+    {"date": "2026-11-02", "status_printed": "FINAL", "away": "MIA", "away_pts": null, "home": "LAL", "home_pts": null, "game_id": "0022600172", "source_url": "https://www.nba.com/game/mia-vs-lal-0022600172", "day_page": "https://www.nba.com/games?date=2026-11-02"}
+  ],
+  "calendar_game_counts": {
+    "note": "Official per-date game counts read from the month grid printed at the top of the same two day pages. Used as an independent completeness instrument: the count for a date must equal the rows the repository holds for that date.",
+    "october_2026": {"1": 0, "2": 0, "3": 1, "4": 2, "5": 5, "6": 4, "7": 5, "8": 6, "9": 2, "10": 7, "11": 4, "12": 5, "13": 5, "14": 7, "15": 2, "16": 12, "17": 0, "18": 0, "19": 0, "20": 3, "21": 11, "22": 2, "23": 12, "24": 8, "25": 7, "26": 9, "27": 4, "28": 12, "29": 3, "30": 10, "31": 7},
+    "november_2026": {"1": 4, "2": 15, "3": 0, "4": 14, "5": 2, "6": 9, "7": 7, "8": 7, "9": 8, "10": 6, "11": 10, "12": 4, "13": 9, "14": 5, "15": 9, "16": 8, "17": 5, "18": 12, "19": 4, "20": 9, "21": 6, "22": 7, "23": 10, "24": 3, "25": 9, "26": 0, "27": 11, "28": 5, "29": 10, "30": 7},
+    "october_source_url": "https://www.nba.com/games?date=2026-10-24",
+    "november_source_url": "https://www.nba.com/games?date=2026-11-14",
+    "regular_season_only_from": "2026-10-20",
+    "pre_season_warning": "October dates 1-19 in the grid are preseason games and are NOT part of the regular-season log; only 2026-10-20 onward is compared."
+  },
+  "incidental_official_read_of_2026-11-13_finals": {
+    "read_utc": "2026-11-14T10:41:00Z",
+    "url_fetched": "https://www.nba.com/game/mia-vs-cha-0022600104/box-score",
+    "what_was_returned": "The box-score path for the 2026-10-24 game served the site-wide scoreboard block instead of a box score (the archived game page has no rendered box-score payload). The block printed the nine 2026-11-13 finals with scores and the upcoming 11/14-11/15 slates. Recorded here because it is an official read taken in this session, and because it documents that the archive path for these dates does not serve a box score to a non-browser client.",
+    "finals_2026_11_13": [
+      {"away": "NYK", "away_pts": 104, "home": "IND", "home_pts": 106, "status": "Final", "game_id": "0022600034", "cup_group_printed": "East Group B"},
+      {"away": "MIL", "away_pts": 99, "home": "ORL", "home_pts": 107, "status": "Final", "game_id": "0022600035", "cup_group_printed": "East Group A"},
+      {"away": "CLE", "away_pts": 121, "home": "MIA", "home_pts": 133, "status": "Final", "game_id": "0022600036", "cup_group_printed": "East Group B"},
+      {"away": "ATL", "away_pts": 117, "home": "CHI", "home_pts": 125, "status": "Final/OT", "game_id": "0022600037", "cup_group_printed": "East Group C"},
+      {"away": "MEM", "away_pts": 142, "home": "NOP", "home_pts": 111, "status": "Final", "game_id": "0022600038", "cup_group_printed": "West Group B"},
+      {"away": "UTA", "away_pts": 118, "home": "HOU", "home_pts": 125, "status": "Final", "game_id": "0022600039", "cup_group_printed": "West Group A"},
+      {"away": "GSW", "away_pts": 85, "home": "SAS", "home_pts": 123, "status": "Final", "game_id": "0022600040", "cup_group_printed": "West Group C"},
+      {"away": "POR", "away_pts": 120, "home": "SAC", "home_pts": 107, "status": "Final", "game_id": "0022600041", "cup_group_printed": "West Group C"},
+      {"away": "OKC", "away_pts": 112, "home": "LAC", "home_pts": 113, "status": "Final", "game_id": "0022600042", "cup_group_printed": "West Group B"}
+    ]
+  }
+}

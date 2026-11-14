@@ -1,0 +1,29 @@
+{
+ "generated_utc": "2026-11-14T11:55:59Z",
+ "session": "arena/a3e092a2-nba1",
+ "commit": "4d1a6d1",
+ "inputs": {
+  "data/official/gamelog.json": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/gamelog.json",
+  "verify/2026-11-14/official_finals_2026-11-13.json": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/verify/2026-11-14/official_finals_2026-11-13.json",
+  "verify/2026-11-14-a3e092a2/official_backfill_2026-10-24_2026-11-02.json": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/verify/2026-11-14-a3e092a2/official_backfill_2026-10-24_2026-11-02.json",
+  "data/derived/horizon_lines.json": "https://www.nba.com/games?date=2026-11-14",
+  "site/data/teams.json": "https://www.nba.com/stats/teams/advanced",
+  "site/data/gameflow.json": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/gameflow.json",
+  "site/data/backtest.json": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json"
+ },
+ "official_pages_read_by_this_session": [
+  "https://www.nba.com/games?date=2026-10-24",
+  "https://www.nba.com/games?date=2026-11-02",
+  "https://www.nba.com/games?date=2026-11-14",
+  "https://www.nba.com/stats/teams/advanced"
+ ],
+ "not_used_anywhere_in_this_directory": [
+  "a sportsbook or exchange price: none exists in this repository and no NBA-operated source publishes one",
+  "a score for the 23 fixture games, because the official page does not print one",
+  "any third-party stats site"
+ ],
+ "determinism": {
+  "seed": 20261114,
+  "python": "3.11.2"
+ }
+}
