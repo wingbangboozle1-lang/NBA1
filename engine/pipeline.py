@@ -233,7 +233,8 @@ def main():
     for g in scheduled:
         src = g["source_id"]
         ctx = build_ctx(g["date"], g["away"], g["home"], time_et=g["time_et"],
-                        venue=f'{g["venue"]}, {g["city"]}', game_id=g["game_id"],
+                        venue=", ".join(x for x in (g["venue"], g["city"]) if x),
+                        game_id=g["game_id"],
                         extra={
                             "away_rec": g["away_rec"], "home_rec": g["home_rec"],
                             "cup_group": g["cup_group"], "src": src,

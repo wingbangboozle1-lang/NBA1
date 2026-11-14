@@ -4,9 +4,9 @@
  "data_cut_et": "2026-11-13 19:38 ET",
  "headline": "Every line for the next three days is originated, gated and published from official data re-verified this session. Nothing is funded: the best strategy's record is still inside what luck produces.",
  "verdict": {
-  "status": "PROVISIONAL \u2014 NOT FUNDED",
+  "status": "PROVISIONAL — NOT FUNDED",
   "one_line": "Ten strategies, seven conformance gates, 51 strictly out-of-sample games. Zero strategies clear the skill gate; the leaderboard leader sits at Tier 3 (quarter-unit) because a gate, not a score, caps it.",
-  "why": "The model beats the naive reference on margin accuracy (MAE 12.89 vs 13.19) and loses on totals (14.86 vs 14.73) and on probability calibration (Brier 0.1970 vs 0.1889). The top strategy, S1, is 16-7 on 23 graded plays with an exact binomial p of 0.093 and a Wilson lower bound of 0.491 against a 0.524 break-even \u2014 a real run, not yet distinguishable from luck."
+  "why": "The model beats the naive reference on margin accuracy (MAE 12.89 vs 13.19) and loses on totals (14.86 vs 14.73) and on probability calibration (Brier 0.1970 vs 0.1889). The top strategy, S1, is 16-7 on 23 graded plays with an exact binomial p of 0.093 and a Wilson lower bound of 0.491 against a 0.524 break-even — a real run, not yet distinguishable from luck."
  },
  "what_changed_this_session": [
   {
@@ -38,12 +38,17 @@
    "title": "The injury layer moved from the 17:15 ET to the 19:30 ET official edition, and seven statuses changed in two hours",
    "detail": "McConnell, Nesmith, Mathurin and Powell went Questionable -> Available; Larsson went Doubtful -> Out; Thompson went Probable -> Out; Swain went Questionable -> Out. Eight of the eleven 11/14 fixtures still show 'NOT YET SUBMITTED' as published.",
    "reading": "This is the strongest available argument for the availability-robustness gate (G7) and for not pricing a Questionable player as available. It also shows why a single daily snapshot is the wrong cadence for injury data."
+  },
+  {
+   "n": 6,
+   "title": "Merge integration (2026-11-14): horizon extended to 2026-11-17 - 27 pickable games",
+   "detail": "The final integration session merged the 2026-11-14 refresh and re-verified it line by line. The five official 2026-11-17 games (0022600253-0022600257, verified against the nba.com game pages whose titles read 'Nov 17, 2026') were added after transcription verification, so the pickable horizon is now 2026-11-14 .. 2026-11-17 (27 games, the maximum 3 days ahead of the 2026-11-14 data cut). The nine 2026-11-13 games were live at the data cut and are recorded in data/raw/schedule_in_progress.json for rest maths only - not pickable, no results published. 11/17 venues and cities are blank on purpose (not printed on the official page; never inferred)."
   }
  ],
  "what_is_live_now": [
   "Originated lines for all 22 upcoming games, each row carrying the game's own NBA.com link.",
   "59 paper picks across ten strategies, every one tagged with its strategy rule and gate status.",
-  "Player prop baselines for every captured player available on the three slates, with no probability attached (game-to-game variance is unmeasured \u2014 flagged F2/Q3).",
+  "Player prop baselines for every captured player available on the three slates, with no probability attached (game-to-game variance is unmeasured — flagged F2/Q3).",
   "Per-game injury impact with an explicit minutes-coverage figure beside every number, so a low-confidence row cannot be mistaken for a high-confidence one.",
   "25 open questions with the exact artefact that would close each one, and 8 suggestions each ending in a decision a reviewer can make.",
   "A line-by-line repository review with every claim tied to a file path, a commit or an official URL."
