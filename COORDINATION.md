@@ -3792,3 +3792,40 @@ commit-vs-`main` before proceeding), and probe records regenerate per push. An i
 rewound the remote branch to `6064fdd` was corrected by re-pushing this PR's head; both dropped commits remain locally
 recoverable (`git show 726903d`). Logged as irregularity **R-33-5**: record commits from one seat appearing on another
 seat's branch breaks the board's ownership model and should be traced to whichever automation pushes cross-branch.
+---
+
+## 38. Session `arena/1744d4d2-nba1` — R-29-1 rest-layer fixture defect + official fixture verification (claimed 2026-11-14 20:20 UTC)
+
+Branch `arena/1744d4d2-nba1`, based on `main` at `91fac1f` (post-PR #94). Claim pushed before any
+other edit (ground rule 4). The platform pins this session to its pre-named branch, so the
+`session-<id>/<task>` convention is satisfied by this single branch (same deviation logged in §21,
+§23, §24, §27, §28, §31).
+
+**Why this lane.** The board's open request **R-29-1** (§29, `F-S29-02`) assigns
+"`engine_v2/context.py` and `scripts/originate_horizon.py`" to their owners; no session claim table
+on `main` or on the six live branches checked at claim time (`cc5a6652`, `f7f6c46e`, `e06aed97`,
+`95c1cb23`, `428e6264`, `140a10aa`, `8c9e6135`) holds either file, and `gh pr diff` on all three
+open PRs (#88, #91, #93) shows neither `scripts/originate_horizon.py`, `engine_v2/**`, nor
+`data/derived/horizon_lines.json` in any of them. Integration-seat work (nav, `index.html`,
+`site/**`, `data/content/**`, `data/raw/**`, board de-dup, flag registers) is deliberately not
+touched here.
+
+### Task board — session `arena/1744d4d2-nba1`
+
+| # | Task | Status | File scope (exclusive) | Plan |
+| --- | --- | --- | --- | --- |
+| X01 | Board read + claim, pushed before any other edit | **done** | `COORDINATION.md` (§38 only) | This row; pushed immediately (ground rule 4). |
+| X02 | Line-by-line audit of every rest/back-to-back consumer named by F-S29-02/F-S29-04 | unclaimed → mine | `verify/2026-11-14-1744d4d2/**` (new namespace) | Which consumers read `known_unplayed_by_source.fixtures`, which do not, with file:line evidence; published values checked against the complete official schedule (both `rest_days` definitions accepted per F-S29-04). |
+| X03 | Fix `scripts/originate_horizon.py` rest history to read the fixture list the game log publishes for exactly that purpose (R-29-1) | unclaimed → mine | `scripts/originate_horizon.py` | Build `team_dates` from the complete official schedule (scored log + fixtures + 11/13 finals + horizon capture) instead of the 11/11–11/12 fragment; dispersion input (scored games only) stays untouched — fixtures carry null scores by policy. |
+| X04 | Verify `engine_v2/context.py` against the flag's claim (`context.py:125`) | unclaimed → mine | `engine_v2/context.py` (audit; fix only a proven fixture-blind **rest** path) | `rest()`/`last4()` take the `played` map from `pipeline.build_universe()`, which already folds fixtures in — if confirmed, the flag's rest citation is corrected in the report with line evidence and **no code change is made**; the form table's `gp` vs official standings is measured and reported as a finding, not silently rewritten. |
+| X05 | Regenerate `data/derived/horizon_lines.json` and prove value-identity | unclaimed → mine | `data/derived/horizon_lines.json` (regenerated) | Expected: byte/value-identical (every horizon team's last prior game already falls in the capture window), which is itself the proof that no published pick, line or gate number changes — the materiality bar §29 set. |
+| X06 | Official-source verification of the 23 fixtures (2026-10-24 ×8, 2026-11-02 ×15) | unclaimed → mine | `verify/2026-11-14-1744d4d2/**` | Fetch `https://www.nba.com/games?date=2026-10-24` and `.../2026-11-02` through the web-fetch channel; record per-row FINAL-with-blank-score status, retrieval time, and the exact URL each fixture row links to (the brief's manual-review rule). |
+| X07 | Full gate suite on the touched tree + delivery record | unclaimed → mine | `COORDINATION.md` (§38 append only), PR | `verify_all`, `check_links`, `check_site`, `render_check`, `verify_integration`, `check_rendered` green; then PR → `main`, merge without waiting for approval, confirm Pages, append delivery record to §38. |
+
+**Do not touch (other sessions' claims):** `index.html`, `site/**`, `docs/**`, `data/content/**`,
+`data/raw/**`, `strategy-lab/**`, `scripts/build_*.py`, `scripts/verify_*.py`,
+`.github/**`, `COORDINATION.md` outside §38, `engine/model_core.py`, `engine/validate.py`,
+`engine/pipeline.py` (v1 engine paths belong to the model/gate owners; any defect found there is
+logged as a cross-session request, not edited).
+
+**Cross-session requests logged, not executed here:** none yet — X02 records whatever it finds.
