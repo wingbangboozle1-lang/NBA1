@@ -1,6 +1,6 @@
 {
   "title": "Flagged for Review",
-  "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition.",
+  "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link.",
   "items": [
     {
       "id": "F1",
@@ -382,6 +382,76 @@
       "affected": "One row of the injury transcription (data/raw/s14/injury_report_2026-11-14_0415ET.json)",
       "source_url": "https://www.nba.com/team/1610612751/nets",
       "suggested_action": "Confirm against a later edition of the same PDF, where the cell is expected to render."
+    },
+    {
+      "id": "F40",
+      "severity": "Medium",
+      "title": "Four of the 14 published prop rows for 2026-11-14 cannot be measured - no NBA.com player id in the repo",
+      "detail": "Julius Randle (BKN), Kyrie Irving (DAL), Michael Porter Jr. (BKN) and Norman Powell (CHI) appear on the props page, but no committed official capture in this repository carries an NBA.com player id for them, and the game-log page is addressed by id. The capture was not attempted by guessing an id: the page exists, the number for it does not. Their prop rows therefore still publish no probability, while the other ten rows on the same slate now do.",
+      "affected": "Player Props page; Prop Variance cohort (10 of 14 measured)",
+      "source": null,
+      "source_url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS",
+      "suggested_action": "One roster-page read per team (nets, mavs, bulls) supplies the ids; scripts/prop_variance.py then prices them with no further code. Reviewer: approve or defer."
+    },
+    {
+      "id": "F41",
+      "severity": "Medium",
+      "title": "Every prop baseline on the horizon is one to two games stale and the page does not say so",
+      "detail": "The season averages behind the props were transcribed on 2026-11-13 from the official Per Game table. Recomputing each of the ten captured players (baseline x games played, plus the games since) reproduces what NBA.com prints now for 10 of 10, inside the rounding of a one-decimal average - so the figures are correct for the date they were taken and simply not current. Ty Jerome 26.2 -> 25.4 and Giannis 27.7 -> 28.5 are the largest moves; nothing was wrong and nothing has been refreshed.",
+      "affected": "Player Props page; any prop comparison made after 2026-11-13",
+      "source": null,
+      "source_url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS",
+      "suggested_action": "Print an as-of date on the props table and re-pull the season table on the morning of each slate. The reconciliation itself is now a check the builder can run: any player whose recomputed average misses the live page is a transcription error, not staleness."
+    },
+    {
+      "id": "F42",
+      "severity": "High",
+      "title": "The same-game-parlay rho is still an assumption - a Last-5 window cannot measure it",
+      "detail": "Seven pairs of captured players share at least one game. The best pair (Murray and Jokic) shares three, and reads rho 0.82 on points; pairs with one or two shared games cannot be read at all. Nothing about the pricing on the Correlations page changes as a result: it keeps its declared rho, and this is the measured evidence for why it must stay labelled an assumption. A usable estimate needs 30-50 shared games per pair, i.e. a season-long game-log capture for the players whose props get parlayed - not a Last-5 block.",
+      "affected": "Correlations page; every same-game parlay price on the Picks page",
+      "source": null,
+      "source_url": "https://www.nba.com/player/1627750/jamal-murray/game-log",
+      "suggested_action": "Reviewer: choose between (a) a season game-log capture for a small named set of parlay-eligible players, (b) keeping the declared rho and labelling every parlay price with it, or (c) suspending prop legs inside parlays until (a) exists. SG17 writes it up."
+    },
+    {
+      "id": "F43",
+      "severity": "Medium",
+      "title": "Today's lines and props are priced against a half-filed injury report",
+      "detail": "The newest official edition at 10:30 UTC (11/14 04:30 AM ET) carries 26 named designations for the day, but five of the ten teams had NOT YET SUBMITTED: New Orleans, Cleveland, Memphis, Chicago and Miami. The league rule requires a game-day report between 11:00 and 13:00 local, which had not opened when this was read. The site's injury page and the horizon lines were cut against the 11/13 05:15 PM ET edition; comparing the two editions finds zero rows new or changed, so nothing stale was found - but nothing game-day was confirmable either.",
+      "affected": "Lines and Picks for 2026-11-14; Props for the same date; Injuries page confidence column",
+      "source": null,
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf",
+      "suggested_action": "Re-read the edition inside the 11:00-13:00 window before the first tip and re-run the delta; the refresh workflow already has the URL pattern."
+    },
+    {
+      "id": "F44",
+      "severity": "Low",
+      "title": "Limits of the first measured prop variance - read before using any number on that page",
+      "detail": "Three of the site's own making, published rather than smoothed over. (1) The window is 3-4 games per player: the standard deviation itself carries an uncertainty of about SD/sqrt(2(n-1)), i.e. roughly a quarter to a half of the SD, which is why the page prints it per row. (2) Per-player SDs are shrunk toward a cohort figure with k=4 - a modelling choice declared in the script, not an official quantity. (3) The anchor test is contaminated in the season average's favour, and unequal in information (11 games vs 3), so it licenses 'do not chase form' and nothing stronger.",
+      "affected": "Prop Variance page; any sizing decision taken from it",
+      "source": null,
+      "source_url": "https://www.nba.com/player/1629627/zion-williamson/game-log",
+      "suggested_action": "Accept as stated, or extend the capture. No figure on the page should be read as statistically significant at this sample size."
+    },
+    {
+      "id": "F45",
+      "severity": "Low",
+      "title": "F31 resolved: the 11/14 noon injury edition was unpublished, not missing",
+      "detail": "The official index lists 2026-11-14 editions in 15-minute steps beginning 12:00 a.m. ET, and the newest one present when the index was read at 10:30 UTC was 04:30 a.m. ET. The AccessDenied response the earlier session got on the 12:00 PM ET URL is the response for a file the league has not written yet - which is exactly the ambiguity F31 recorded. This closes it: the fetch path works, the timing does not.",
+      "affected": "Injuries page; the refresh cron's edition probing",
+      "source": null,
+      "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+      "suggested_action": "Register owner: mark F31 closed by F45 and have the cron read the index list first instead of guessing edition times."
+    },
+    {
+      "id": "F46",
+      "severity": "Low",
+      "title": "The Prop Variance page marks 8 rows with the not-published dash rather than an official link",
+      "detail": "The anchor-test and minutes tables aggregate across all ten players, so no single official URL is the source of a row; the cells say 'derived - every input cell is an official row of section 3' instead of linking to one. This is the same class as F34 and F37: the site's strict official-link count is 880 rows linked of 898 table rows, and these 8 are now part of that difference. No value was invented to close the count.",
+      "affected": "Prop Variance page; the strict source-link count",
+      "source": null,
+      "source_url": "https://www.nba.com/games?date=2026-11-14",
+      "suggested_action": "Reviewer: if per-row official links are wanted on aggregate tables, the fix is to explode those two tables to one row per player-game (40 rows each), which the derived file already supports."
     }
   ]
 }
