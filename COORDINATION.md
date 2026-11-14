@@ -1901,3 +1901,15 @@ not an NBA data source. No data, model, or generated-site files are in scope.
   session's §24 claim. No main content was removed.
 - Publish status: not yet submitted; a PR and the resulting Pages run will be
   recorded here after the documentation commit is pushed.
+
+---
+
+## 25. Session `arena/2ef89703-nba1` — injury-edition currency audit, 2026-11-14 slate (claimed 2026-11-14 UTC)
+
+Claimed after reading the board on `origin/main` (`7623c02`) and the open PRs (#58 `arena/ef6ff2a4-nba1`, #59 `arena/254dd8bb-nba1`, both final-integration sessions; neither touched here).
+
+| # | Task | Status | File scope (exclusive) | Notes |
+| --- | --- | --- | --- | --- |
+| X01 | Read-only check: does the 11/14 injury data on the site match the newest official injury-report edition? | in progress | `verify/2026-11-14-injury-currency/**` (new) , §24 of `COORDINATION.md` | Newest edition at claim time: [11/14 04:30 AM ET PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf), index [official.nba.com](https://official.nba.com/nba-injury-report-2026-27-season/). Site source: `data/live/injury_report_2026_11_14.json` (07:30 PM 11/13 edition). |
+
+Not touched: `docs/**`, `data/**`, `index.html`, `flagged.json`, `suggestions.json`, `verification.html`, `.github/**`. Shared-output changes (the site's injury page and Flagged register) are logged as requests in §24 and left to the integration session.
