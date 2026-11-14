@@ -2033,6 +2033,7 @@ input turned out to be readable: the NBA.com player game-log pages are server-re
 * **R-26-5 (`data/flags.json` owner):** two registers exist — `data/flags.json` (F-01…F-24, Build A) and
   `data/content/flagged.json` (F1…F46, the site). They are not cross-referenced; a reviewer reading the old one
   will miss F40–F46. Recommend the old file carry a pointer instead of a second list.
+* **R-26-7 (`verify/2026-11-14/checks.json` owner):** the committed record is one regeneration behind. Running `scripts/source_check.py` on a clean `origin/main` tree rewrites it from 16 consistent / 11 no-pick to **14 / 13**, and this branch reproduces exactly the same numbers — so the drift is main's, not this session's. The file was deliberately left at main's content rather than committed regenerated.
 * **R-26-6 (Injuries page owner):** main §25 (X01-F1) established that the page labels the 11/13 07:30 PM ET
   edition as newest while the 04:30 AM ET 11/14 edition exists. This session's file confirms it; the label
   promotion is theirs to make.
