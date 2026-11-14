@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for review &middot; NBA Line Origination Desk</title>
+<meta name="description" content="NBA lines originated from official NBA.com final scores, with a gated strategy leaderboard.">
+<link rel="stylesheet" href="../assets/style.css">
+
+</head><body>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html"><span class="dot"></span>NBA&nbsp;Line&nbsp;Origination&nbsp;Desk</a>
+  <div class="cap">Official capture 2026-11-14 00:42 UTC</div>
+  <nav><div class="navgroup"><h4>Overview</h4><ul>
+<li><a href="../index.html">Executive dashboard</a></li>
+</ul></div>
+<div class="navgroup"><h4>Lines and game flow</h4><ul>
+<li><a href="lines.html">Originated lines</a></li>
+<li><a href="gameflow.html">Game flow and rest</a></li>
+</ul></div>
+<div class="navgroup"><h4>Strategy lab</h4><ul>
+<li><a href="strategies.html">Strategy library</a></li>
+<li><a href="leaderboard.html">Leaderboard and rewards</a></li>
+<li><a href="gates.html">Validation gates</a></li>
+<li><a href="luck.html">Luck removal and power</a></li>
+<li><a href="signals.html">Signal study</a></li>
+</ul></div>
+<div class="navgroup"><h4>Model and data</h4><ul>
+<li><a href="teams.html">Team ratings</a></li>
+<li><a href="backtest.html">Walk-forward backtest</a></li>
+<li><a href="gamelog.html">Official game log</a></li>
+<li><a href="correlations.html">Correlations and parlays</a></li>
+<li><a href="method.html">Method</a></li>
+</ul></div>
+<div class="navgroup"><h4>Availability</h4><ul>
+<li><a href="injuries.html">Injuries and rotation</a></li>
+<li><a href="props.html">Player props</a></li>
+</ul></div>
+<div class="navgroup"><h4>Governance</h4><ul>
+<li><a href="questions.html">Open questions</a></li>
+<li><a href="suggestions.html">Suggestions</a></li>
+<li><a href="sources.html">Source register</a></li>
+<li><a class="active" href="flagged.html">Flagged for review</a></li>
+<li><a href="repo-review.html">Repository review</a></li>
+</ul></div></nav>
+  <div class="sidenote">
+    Every table row links to the official page it was read from.
+    A dash means the value is not published, not that it is zero.
+  </div>
+</aside>
+<main class="main">
+  <header class="top">
+    <h1>Flagged for review</h1>
+    <p class="sub">12 items that are missing, unverifiable or too thin to rely on.</p>
+  </header>
+  <div class="banner">
+    <strong>No strategy is funded.</strong> All 12 flagged items and every unvalidated number are published
+    <a href="flagged.html">here</a>. There is no market odds feed, so nothing on this site is a claim of real-world profit.
+  </div>
+  
+<section class="card">
+  <h3>Flagged for review</h3>
+  <p>Things that are wrong, missing, unverifiable or simply too thin to rely on. None of them blocks publication;
+  all of them are published here with the source link so they can be reviewed and challenged.</p>
+  <div class="tablewrap"><table class="tbl" data-sortable><thead><tr><th>ID</th><th>Severity</th><th>Area</th><th>Item</th><th>Detail</th><th>Suggested action</th><th>Source</th></tr></thead><tbody><tr><td><a id="F1"></a><code>F1</code></td><td><span class="badge b-high">High</span></td><td>Source</td><td><strong>nba.com/games publishes fixtures without results for 2026-10-24 and 2026-11-02</strong></td><td>Both dates render a game card with the status FINAL but with &#x27;-&#x27; in every score, record and game-leader cell, and without the HIDE SCORES / HIDE ODDS toggles that other dates carry. Reproduced twice, 40 minutes apart. 23 games are affected (8 on 10-24, 15 on 11-02). The fixtures are listed in data/official/gamelog.json so the rest layer stays complete; no score is inferred. The standings reconciliation confirms the log is otherwise complete.</td><td>Re-fetch those two dates on a later pass, or read the box-score page for each of the 23 game IDs. If NBA.com never republishes them, the season log stays at 151 of 174 games.</td><td><a class="src" href="https://www.nba.com/games?date=2026-10-24" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="F2"></a><code>F2</code></td><td><span class="badge b-high">High</span></td><td>Coverage</td><td><strong>No market odds are available from any official source</strong></td><td>NBA.com prints an odds toggle on its game cards but the odds themselves are not part of the published page content available here, and no official NBA source publishes historical betting lines. Every &#x27;edge&#x27; on this site is therefore measured against our own originated line, not against a real sportsbook price. Nothing here is evidence of real-world profitability.</td><td>Decide whether to license an odds feed. Until then, treat the leaderboard as an internal ranking of signal quality only.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="F3"></a><code>F3</code></td><td><span class="badge b-high">High</span></td><td>Coverage</td><td><strong>No verified per-game player log, so player props cannot be originated</strong></td><td>Originating a player-prop line needs each player&#x27;s game-by-game distribution, not a season average. The only official player data reachable here are two partial leaderboards: the top 50 scorers (season averages) and the top 24 by minutes. Neither is a game log. Strategy S9 is therefore blocked rather than approximated.</td><td>Source a game-by-game box-score feed (paid provider, or the NBA stats API if it becomes reachable).</td><td><a class="src" href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="F4"></a><code>F4</code></td><td><span class="badge b-medium">Medium</span></td><td>Source</td><td><strong>The NBA Stats tables cannot be re-read in this environment</strong></td><td>nba.com/stats/teams/advanced returns only its filter controls to a plain fetch - the data grid is rendered client-side. The efficiency numbers captured by earlier sessions could not be re-verified this session, so this build deliberately uses none of them: every rating here is derived from final scores, which are re-verifiable.</td><td>Either run a headless browser in the refresh job, or keep the score-only model. The score-only model is the safer default because every input is re-checkable.</td><td><a class="src" href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="F5"></a><code>F5</code></td><td><span class="badge b-medium">Medium</span></td><td>Model</td><td><strong>Possessions and pace are not available, so efficiency ratings are not used</strong></td><td>Offensive and defensive rating as NBA.com defines them are per 100 possessions. Possessions are not published in the pages reachable here, so this build models raw points per game with opponent adjustment instead. Ratings here are points-per-game scale, not NBA.com&#x27;s per-100-possession scale, and the two are not interchangeable.</td><td>Add possessions if a box-score feed is licensed; then restate the ratings on the standard scale.</td><td><a class="src" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="F6"></a><code>F6</code></td><td><span class="badge b-medium">Medium</span></td><td>Model</td><td><strong>Three originated spreads are wider than any realistic market number</strong></td><td>CHI@MIN comes out at MIN -22.5 and two other games exceed 15 points. The ratings behind them rest on 10-12 games per team. The shrinkage sensitivity table shows the model is at its best MAE at the declared shrinkage, so this is not a tuning failure - it is small-sample variance showing up in the tails.</td><td>Cap or further shrink the extremes for display, or wait for a deeper sample. Flagged rather than silently adjusted.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="F7"></a><code>F7</code></td><td><span class="badge b-medium">Medium</span></td><td>Coverage</td><td><strong>Days 2 and 3 of the slate have no official injury data yet</strong></td><td>The most recent published edition (11/13/26 07:30 PM) covers the 2026-11-13 and 2026-11-14 slates only. NBA policy does not require the 2026-11-15 reports until 5 p.m. local time on 2026-11-14, nor the 2026-11-16 reports until 2026-11-15. Four of the five 2026-11-14 teams are additionally marked NOT YET SUBMITTED.</td><td>Re-run the refresh after each reporting deadline. Lines for 11-15 and 11-16 carry no injury adjustment and are labelled as such.</td><td><a class="src" href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="F8"></a><code>F8</code></td><td><span class="badge b-medium">Medium</span></td><td>Method</td><td><strong>The evaluation window is 101 games, which is far too few to detect anything</strong></td><td>The minimum detectable ROI at 80% power is 79-118% for the strategies that produced bets. A strategy showing +23% ROI is not merely unproven - it is not even in the same order of magnitude as what this sample could detect. The one signal with any hint, rest days, would need about 340 games.</td><td>Extend the log. Each additional month of the season roughly triples the available sample.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="F9"></a><code>F9</code></td><td><span class="badge b-low">Low</span></td><td>Source</td><td><strong>Game IDs for three late 2026-11-13 games were not visible</strong></td><td>GSW@SAS, POR@SAC and OKC@LAC appear on the injury report with tip times, but their NBA.com game IDs were not present in the captured page. The IDs are left null rather than guessed. The matchups and tip times are official and are used for the rest calculation.</td><td>Re-read the 2026-11-13 page once those games finish.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="F10"></a><code>F10</code></td><td><span class="badge b-low">Low</span></td><td>Method</td><td><strong>Residual standard deviations are measured on the same window the strategies trade</strong></td><td>The spread that turns a point prediction into a probability (sigma_margin 15.87, sigma_total 19.27) is measured out of sample across the walk-forward window, then reused to price bets inside that window. This biases strategy results slightly optimistic. It cannot change any conclusion here, because no strategy is close to passing, but it should be corrected before any strategy is funded.</td><td>Re-measure sigma on a window strictly before the trading window once enough games exist.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="F11"></a><code>F11</code></td><td><span class="badge b-low">Low</span></td><td>Source</td><td><strong>The 2026-11-07 DEN@IND game is a neutral-site game</strong></td><td>Carried forward from an earlier session: the official page labels the NBA Mexico City Game &#x27;Neutral Site&#x27;. Home-court advantage is set to zero for that game only.</td><td>None needed; recorded so the home-court estimate is not distorted.</td><td><a class="src" href="https://www.nba.com/games?date=2026-11-07" target="_blank" rel="noopener">official source</a></td></tr><tr><td><a id="F12"></a><code>F12</code></td><td><span class="badge b-low">Low</span></td><td>Ops</td><td><strong>The daily refresh workflow has never been executed</strong></td><td>Written by an earlier session in a sandbox whose outbound network was restricted to github.com, npm and pypi, so it could not be tested against nba.com. It uses continue-on-error, so a failure leaves the previous snapshot live rather than blanking the site.</td><td>Run it once manually and confirm the commit it produces.</td><td><a class="src" href="https://github.com/wingbangboozle1-lang/NBA1/actions" target="_blank" rel="noopener">official source</a></td></tr></tbody></table></div>
+</section>
+
+  <footer class="foot">
+    <p>Session <code>arena/e32856d8-nba1</code>. Official capture 2026-11-14 00:42 UTC.
+    Model inputs: official NBA.com final scores and schedule only.
+    <a href="sources.html">Source register</a> &middot;
+    <a href="method.html">Method</a> &middot;
+    <a href="flagged.html">Flagged for review</a> &middot;
+    <a href="https://github.com/wingbangboozle1-lang/NBA1" target="_blank" rel="noopener">Repository</a></p>
+  </footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body></html>
