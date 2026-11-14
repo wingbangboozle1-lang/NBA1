@@ -2964,7 +2964,6 @@ left open; its content is fully carried by #75.
 
 Final integration PR opened from `arena/a39b9370-nba1` to `main`; merged without waiting for
 approval; GitHub Pages deploy confirmed `built`; PR link and merge result recorded in §30.6.
-=======
 ## 30. Session `arena/e812a9ed-nba1` — independent site QA and discrepancy register (claimed 2026-11-14 UTC)
 
 Branch `arena/e812a9ed-nba1`, based on `2038333` (`main`). This session does not claim the integration seat and does not edit shared site/navigation/data/build files. It owns only the new `verify/2026-11-14-e812a9ed/**` audit artifact plus this §30 record.
@@ -2983,7 +2982,6 @@ Branch `arena/e812a9ed-nba1`, based on `2038333` (`main`). This session does not
 - **Deploy:** GitHub Pages API reported `built`; Pages run <https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43597387021> succeeded for `203833304a2d16594aac6d30802b5d0939106adc`. This confirms GitHub deployment state, not fresh browser access to every page or external NBA URLs.
 - **PR/merge:** this audit-only record was delivered in [PR #82](https://github.com/wingbangboozle1-lang/NBA1/pull/82), merged at `48207a28f5863e5d8b082658062b368813c84757` on 2026-11-14. The final-integration PR/merge was not attempted by this task. At the original audit time PRs #63, #65, #66, #75 and #80 were open and `DIRTY`; #66 owns final integration. Do not treat this record as the final integration close-out.
 - **Post-merge Pages:** run [#43628532646](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43628532646) completed successfully; GitHub Pages API reports `built` at `https://wingbangboozle1-lang.github.io/NBA1/`. The separate official-source probe run [#43628532715](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43628532715) was still in progress at the time of this update; it does not gate the successful Pages deployment.
->>>>>>> origin/main
 
 ---
 
@@ -3274,3 +3272,41 @@ were not read); they are marked unverified rather than assumed. Cooper Flagg's p
 average is published as unverified because two official reads disagree (21.0 and 24.6) and
 choosing one would be a guess. No odds source exists, so no strategy is funded — that is
 F-15 and Q-02, not an oversight.
+## 33. Session `arena/140a10aa-nba1` — open-PR carry overtaken by the integration seat's merge; duplicate lift dropped; merged tree independently verified (claimed 2026-11-14T18:44Z, resolved 19:1xZ)
+
+**What was claimed (18:44–18:46Z, branch `arena/140a10aa-nba1`, base `2038333`).** A content carry of the
+stale CONFLICTING PRs #63 / #65 / #75 / #80 onto a fresh branch (blob-exact lifts, credited; #66 left to the
+seat). The claim, the carry commits (`09068cd`, `9924423`, `227554b`) and PR
+[#84](https://github.com/wingbangboozle1-lang/NBA1/pull/84) were pushed before 18:47Z, and the carried tree
+passed the full local gate at that commit.
+
+**What happened next (18:53:45Z).** The final-integration seat `arena/a39b9370-nba1` merged PR
+[#87](https://github.com/wingbangboozle1-lang/NBA1/pull/87), which merged the original PRs themselves —
+#63, #66, #75, #80 (merge commit `51015c6`, 18:53:44–45Z; #65 closed the same minute). The carry was
+overtaken ~8 minutes after it was claimed. **Per the rule this session pre-logged in its claim ("if a seat
+merges a carried file itself before this PR merges, this branch rebases onto that result and drops the
+duplicate lift"), the carried file content was dropped**: the branch was reset onto `origin/main`
+(`1aee2dd`) and PR #84 now carries this record only. No work was discarded — the fixes live on `main`
+through #87; what this section adds is the independent verification below.
+
+### 33.1 Independent verification of the merged tree (this session, on `main` at `1aee2dd`)
+
+| Check | Result |
+| --- | --- |
+| Byte-identity of the merged content: `git diff origin/<pr-head> -- <file>` per carried path (verify_dashboard.py, verify_all.py, pages.yml, ACTIVE_PR_REVIEW.md, all 20 strategy-lab files) | **empty diff for every path** — #87 landed each PR's file byte-exactly; zero drift introduced by the merge |
+| `strategy-lab/run.py` + `build.py` re-run on `main`; `check.py` | reproduced; **PASS** (8 pages, 479 rows, all sourced) |
+| `scripts/verify_dashboard.py` | **VERIFY OK** — tree grown by #89's Game-Day Read page: 1,157 rows / 1,131 linked / 24 explanatory / 2 title-only pointers / **0 unmarked / 0 unexplained** |
+| `scripts/verify_all.py` | **VERIFY OK** — 36 official games 11/13–11/17 vs published rows, **0 mismatches** |
+| `scripts/check_links.py`, `scripts/check_rendered.py`, `scripts/verify_integration.py` | **PASS / PASS / 0 errors** (standing warnings unchanged, on Flagged for Review) |
+| `python3 -m py_compile scripts/verify_dashboard.py scripts/verify_all.py` | clean |
+| Pages | `pages-build-deployment` for `1aee2dd` in flight at 19:09Z (the `pages.yml` concurrency isolation carried by #87 serialises production runs by ref — the two cancelled runs before it are the mechanism, not a failure); conclusion confirmed in §33.3 |
+
+### 33.2 Corrections and requests
+
+| id | Note |
+| --- | --- |
+| R-33-1 (withdraws R-31-1) | This session earlier reported `EXECUTIVE_SUMMARY.md` and `site/pages/leaderboard.html` absent from `main` — **that was this session's own tooling error** (`git cat-file -e rev/path` instead of `rev:path` returned a false "not found"). With the correct syntax both files are on `main` at `1aee2dd`, PR #87 landed them, and `index.html` links them. The request is withdrawn; nothing needs carrying. |
+| R-33-2 (was R-31-2) | Root cause of the five PR conflicts documented for posterity: every session's branch receives `probe-official.yml` record commits, which collide with `main`'s own probe records. The concurrency isolation now on `main` fixes the run-cancellation half; the conflict half remains a known property of branch-based work on this repo. |
+| R-33-3 | Board de-duplication (R-29-8: §30 appears three times on `main`, e812a9ed twice) stays with the active seat claim `arena/cc5a6652-nba1` (I04, claimed 18:40:53Z) — not executed here. |
+
+| R-33-4 | `COORDINATION.md` as committed on `main` at `5f63109` (F53/SG23 commit) contains **two leftover conflict-marker lines** (`=======` at old line 2967 and `>>>>>>> origin/main` at old line 2986, around the duplicate e812a9ed §30 record). This commit removed exactly those two marker lines — the content between them is kept untouched, because deleting a duplicate record is the seat's de-duplication call (R-29-8 / I04 of `arena/cc5a6652-nba1`), not this session's. |
