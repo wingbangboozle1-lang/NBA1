@@ -10,13 +10,14 @@ from __future__ import annotations
 
 import statistics as st
 
-from labdata import rest_maps
+from labdata import rest_maps, site_fit
 from statools import ols, pearson, t_two_sided_p, rnd
 
 FIRST_DAY = "https://www.nba.com/games?date=2026-10-20"
 
 
 def run(ctx):
+    pub = site_fit()
     games = [g for g in ctx["games"] if g["kind"] == "scored"]
     games.sort(key=lambda g: (g["date"], g["game_id"]))
     yes, _ = rest_maps(ctx["games"], True)
@@ -74,16 +75,19 @@ def run(ctx):
         "regressions": [
             {"name": "Back-to-back fatigue, measured on the whole season",
              "measured": b2b_m, "games_with_a_b2b_mismatch": n_mismatch,
-             "site_value": 6.096,
-             "site_source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json",
-             "reading": ("the published penalty is more than twice the full-season coefficient, and the "
-                         "full-season coefficient is not distinguishable from zero on this sample")},
+             "site_value": pub["b2b_penalty_applied"], "site_se": pub["b2b_se"], "site_t": pub["b2b_t"],
+             "site_window": f'{pub["window_first"]}..{pub["window_last"]} ({pub["n_games"]} games)',
+             "site_source": pub["source_url"], "site_disclosure": pub["b2b_disclosure"],
+             "reading": ("the site applies the full " + str(pub["b2b_penalty_applied"]) + " points because its own "
+                         "|t| = " + str(abs(pub["b2b_t"] or 0)) + " clears 1; the season measurement of the same "
+                         "quantity is a fifth of that size with a standard error of the same width, so the term is "
+                         "inside noise on every sample available")},
             {"name": "Rest-gap effect, measured on the whole season",
              "measured": gap_m, "site_value": None,
              "site_source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json",
              "reading": "no rest effect beyond the back-to-back flag shows up here; the rest-edge strategies inherit that"},
             {"name": "Back-to-back effect on scoring, measured",
-             "measured": b2b_t, "site_value": 0.0,
+             "measured": b2b_t, "site_value": pub.get("total_b2b_coef", 0.0),
              "site_source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/backtest.json",
              "reading": "the site's totals carry no back-to-back term; the season estimate is positive but inside noise"},
         ],
