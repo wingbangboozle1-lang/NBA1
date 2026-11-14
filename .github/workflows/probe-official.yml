@@ -18,11 +18,26 @@ name: Probe official source reachability
 
 on:
   workflow_dispatch:
+  # Only `main` and the scheduler may spend a runner on this.
+  #
+  # Observed on 2026-11-14: four sessions pushed 30+ branches in one afternoon, every
+  # push triggered this job, and 44 probe runs sat queued in front of the PR validation
+  # and Pages deploy that the brief actually requires. The probe re-reads the SAME static
+  # URLs every time and its record only lands on the branch that ran it, so a branch push
+  # buys nothing a main-branch run does not already prove. Validation for a PR comes from
+  # pages.yml (pull_request), which is the job that must not be starved.
   push:
-    branches: [main, "arena/**"]
+    branches: [main]
 
 permissions:
   contents: write
+
+concurrency:
+  # One probe at a time per ref: an identical re-read of the same URLs 20 times in a
+  # row is the queue jam, not extra evidence. Never cancels a run that is already
+  # committing, because `cancel-in-progress` would drop the push step.
+  group: probe-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
   probe:

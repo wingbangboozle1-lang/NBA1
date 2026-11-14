@@ -76,7 +76,7 @@
 <div class="tiles">
 <div class="tile"><div class="tile-v">19</div><div class="tile-l">Questions answered</div><div class="tile-s">with the official link that answers each</div></div>
 <div class="tile"><div class="tile-v">19</div><div class="tile-l">Questions still open</div><div class="tile-s">each with its missing input</div></div>
-<div class="tile"><div class="tile-v">26</div><div class="tile-l">Suggestions on the table</div><div class="tile-s">8 new in this pass</div></div>
+<div class="tile"><div class="tile-v">27</div><div class="tile-l">Suggestions on the table</div><div class="tile-s">8 new in this pass</div></div>
 <div class="tile"><div class="tile-v">53</div><div class="tile-l">Flagged items</div><div class="tile-s">8 new in this pass</div></div>
 <div class="tile"><div class="tile-v">27/27</div><div class="tile-l">Horizon rows verified</div><div class="tile-s">field by field against nba.com on 2026-11-14</div></div>
 <div class="tile"><div class="tile-v">23.0</div><div class="tile-l">Games missing from the log</div><div class="tile-s">uniform across all 30 teams</div></div>
@@ -517,6 +517,14 @@
 <td>Every pick must carry its official game id. On this site they do.</td>
 <td>Re-settle the 11/13 slate and reproduce the hand ledger's 3-4 / -1.40 exactly.</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">source</a></td>
+</tr>
+<tr>
+<td>SG27</td>
+<td><b>Stop spending CI runners on a probe that re-reads the same static URLs</b></td>
+<td>Operations / CI cost</td>
+<td>confirmed that the probe's own record is not used as a merge gate - it is not; pages.yml is</td>
+<td>after one push to a branch, `gh run list --workflow probe-official` shows no new run for that branch</td>
+<td class="src"><a href="https://docs.github.com/en/actions/using-jobs/using-concurrency" target="_blank" rel="noopener">source</a></td>
 </tr>
 </tbody></table></div>
 <p class="tnote">Items SG1-SG18 are the earlier build's; SG19-SG26 and the protocol above were added by this pass. Every new item names its dependency and its cheapest test, because a suggestion without those two is an opinion.</p>

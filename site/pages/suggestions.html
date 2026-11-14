@@ -346,6 +346,16 @@
 <td>Confirm the price convention used for grading, since no market price exists (the site uses -110 as a stated convention, not a quote).</td>
 <td class="src"><span class="na" title="source id S_GAMES13 is not in the register">&mdash;</span></td>
 </tr>
+<tr>
+<td>SG27</td>
+<td>Operations / CI cost</td>
+<td><b>Stop spending CI runners on a probe that re-reads the same static URLs</b></td>
+<td>On 2026-11-14 four sessions pushed 30+ branches. Every push triggered the official-source probe, and by 19:15Z there were 44 queued or running probe jobs against 20 that were actually progressing, in front of the PR validation and the Pages deploy the brief requires. The probe fetches the same static NBA URLs each time and only commits its record to the branch that ran it, so 29 of those runs produced a duplicate of evidence already on main.</td>
+<td></td>
+<td>Trigger the probe on `main` and `workflow_dispatch` only, and give it a per-ref concurrency group so the same ref never runs two at once. PR validation stays in pages.yml, which is the job that must not starve.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>
 <div class="tablewrap">

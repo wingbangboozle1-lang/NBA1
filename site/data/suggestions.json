@@ -673,6 +673,23 @@
    "if_wrong": "Grades a pick against the wrong game. Mitigation: match on game id, never on team names or dates.",
    "source": "S_GAMES13",
    "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "id": "SG27",
+   "title": "Stop spending CI runners on a probe that re-reads the same static URLs",
+   "category": "Operations / CI cost",
+   "problem": "On 2026-11-14 four sessions pushed 30+ branches. Every push triggered the official-source probe, and by 19:15Z there were 44 queued or running probe jobs against 20 that were actually progressing, in front of the PR validation and the Pages deploy the brief requires. The probe fetches the same static NBA URLs each time and only commits its record to the branch that ran it, so 29 of those runs produced a duplicate of evidence already on main.",
+   "recommendation": "Trigger the probe on `main` and `workflow_dispatch` only, and give it a per-ref concurrency group so the same ref never runs two at once. PR validation stays in pages.yml, which is the job that must not starve.",
+   "what_it_changes": "the probe stops competing with validation for runners; no evidence is lost, the main-branch run still records every URL",
+   "effort": "Low - one trigger filter and one concurrency block in .github/workflows/probe-official.yml",
+   "risk": "A branch that breaks the fetch path is no longer probed on push; pages.yml validation still catches a broken build",
+   "unlocks": "PR validation and Pages deploys start and finish within minutes instead of sitting behind dozens of duplicate probes",
+   "must_be_true_first": "confirmed that the probe's own record is not used as a merge gate - it is not; pages.yml is",
+   "smallest_test": "after one push to a branch, `gh run list --workflow probe-official` shows no new run for that branch",
+   "evidence": "observed directly: 44 queued/running probe runs at 19:15Z; PR #88's validate job still queued 25 minutes after dispatch",
+   "applied": true,
+   "applied_where": "this branch: .github/workflows/probe-official.yml (trigger narrowed to main, concurrency added)",
+   "source_url": "https://docs.github.com/en/actions/using-jobs/using-concurrency"
   }
  ],
  "review_protocol": {
