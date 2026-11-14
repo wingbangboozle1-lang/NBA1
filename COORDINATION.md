@@ -1691,3 +1691,13 @@ No shared file was edited: `data/raw/**`, `integration/**`, `site/**`, `docs/**`
 Flagged-for-Review register, the Command Center, and the rest of the brief. Those are owned by the sessions
 listed in §0b and by the integration seat.
 
+
+### 20.2 Publish record (session `arena/cfb25ff0-nba1`)
+
+| Item | Result |
+| --- | --- |
+| Pull request | [#56](https://github.com/wingbangboozle1-lang/NBA1/pull/56) `arena/cfb25ff0-nba1` → `main`, title "2026-11-13 official finals verified row-by-row + coordination §20" |
+| Gates on the PR | `validate` pass (1m10s); `probe` ran on `main` after merge |
+| Merge | `gh pr merge 56 --merge`, merged 2026-11-14T09:53:18Z, merge commit `4e4d0b0` |
+| Pages | "Publish static site to GitHub Pages" on `main` (run 43582655442): success. Live: `https://wingbangboozle1-lang.github.io/NBA1/data/verified/finals_2026-11-13.json` serves the 9 rows and `all_checks_passed: true` |
+| Requests R-X1–R-X4 | open, for the integration seat (not executed here) |
