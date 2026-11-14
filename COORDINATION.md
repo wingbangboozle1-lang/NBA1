@@ -1950,6 +1950,7 @@ Not touched: `docs/**`, `data/**`, `index.html`, `flagged.json`, `suggestions.js
 
 ---
 
+
 ## 26. Session `arena/24eb72c6-nba1` — measured prop variance from official game logs (claimed 2026-11-14 10:2x UTC)
 
 Branch `arena/24eb72c6-nba1` (base `main` `7623c02`, now merged through `5ea615f`). The platform pins this
@@ -2043,3 +2044,91 @@ input turned out to be readable: the NBA.com player game-log pages are server-re
 **Limits stated on the page itself:** n = 3–4 games per player (the `Last 5 Games` block is all the page
 prints), SD uncertainty ≈ a quarter to a half of the SD, shrinkage k = 4 is a declared modelling choice, the
 anchor test is contaminated in the season average's favour, and no market line exists for any prop (Q1).
+
+## 27. Session `arena/212c2298-nba1` — independent row-level verification & close-out (claimed 2026-11-14T10:27Z)
+
+Branch `arena/212c2298-nba1` (base `main` `7623c02`, the merge of PR #60). The platform pins this
+session to that branch, so the `session-<id>/<task>` naming in the brief is not used; this single
+pinned branch carries the claims below (deviation logged, as earlier sessions did).
+
+| # | Task | Status | File scope (exclusive to this session) |
+| --- | --- | --- | --- |
+| Z01 | Independent line-by-line verification of published values against official nba.com pages (11/13 finals, 11/14–11/17 horizon, records, injury designations); every checked row recorded with its source URL; values that cannot be confirmed are left blank and flagged, never inferred | done (§27.1) | `verify/212c2298/**`, `REVIEW_Z01.md` |
+| Z02 | Independent recomputation of strategy statistics (binomial p-values, validation gates, correlation values, settlement math, luck decomposition) from committed raw data | done (§27.1) | `verify/212c2298/**` |
+| Z03 | Live-site + GitHub Pages verification (deploy status, live-URL link audit of every published page) | done (§27.1) | `verify/212c2298/**` |
+| Z04 | Close-out (only after other active claims are merged or idle >60 min): combined-tree rebase, full gate re-run, PR to `main`, merge, Pages confirmation, record here | done (§27.2) | `COORDINATION.md` (§27 only), `verify/212c2298/**` |
+
+**Active claims respected (not touched by this session):** `arena/ef6ff2a4-nba1` — integration seat,
+PR #58 (commits within the last 10 minutes at claim time); `arena/254dd8bb-nba1` — PR #59
+(conflicting with `main`, owner alive); `arena/2ef89703-nba1` — X01 injury-edition currency check
+(CI run in progress at claim time). `data/**`, `engine/**`, `engine_v2/**`, `scripts/**` builders,
+`site/**`, `docs/**`, `command-center/**`, root `*.html` are **read-only inputs** to Z01–Z03.
+If Z01–Z03 find a bad published value, the fix is logged as a cross-session request here (or taken
+in Z04 close-out), never edited behind an active owner's back.
+
+Sources for Z01 (read 2026-11-14T10:25–10:30Z): <https://www.nba.com/games?date=2026-11-13>
+(all 9 finals, incl. ATL–CHI `Final/OT`), and the horizon pages `…?date=2026-11-14` … `…-17`.
+
+### 27.1 Results (2026-11-14T11:05Z) — Z01–Z03 done
+
+Full line-by-line report: [`REVIEW_Z01.md`](REVIEW_Z01.md); machine results:
+`verify/212c2298/checks.json` (14 checks: 9 PASS, 3 FLAG = known open items F-C01/R-X1/R-X2/F30,
+1 RESOLVED-FLAG, 1 NOTE). Independent captures: `verify/212c2298/official_capture_2026-11-14.json`
+(finals + 27-game horizon + 04:15 AM injury edition, every row with its official URL).
+
+| Check | Result |
+| --- | --- |
+| 9 finals of 11/13 vs `data/verified/finals_2026-11-13.json` | 9/9 rows VERIFIED (scores, status, game IDs) |
+| ATL–CHI overtime count (was unconfirmed, `ot: null`) | **RESOLVED: 1 OT** — official box-score period filter `Q1 Q2 Q3 Q4 OT1` + recap headline "Bulls outlast Hawks in OT" ([box score](https://www.nba.com/game/atl-vs-chi-0022600037/box-score)) |
+| 27 horizon games vs `site/data/lines.json`, `data/derived/horizon_lines.json`, `data/official/slate.json`, all pick rows | 27/27 VERIFIED on date/tip/matchup/game ID; per-day counts match calendar badges; every pick row maps 1:1 |
+| 54 horizon record cells | 25 match current official cards; **29 stale and every one explained exactly** by the team's 11/13 result; 0 unexplained (F29/F-C02 stays a disclosure) |
+| Injury designations vs the current official edition (11/14 04:15 AM ET PDF) | 21/21 player rows VERIFIED (names, statuses, reasons); 5 NOT-YET-SUBMITTED teams VERIFIED; 11/15+ no-entry states VERIFIED |
+| Strategy stats (binomial p, Wilson CI, hit rate, units = Σ graded rows, 10 strategies) | PASS — all reproduce exactly |
+| Window metrics (MAE/RMSE/bias/straight-up, 51 games) | PASS — reproduce exactly from `docs/data/backtest.json` rows (home-margin convention per F27) |
+| Settlement ledger arithmetic | PASS — every settled row recomputes from its official score string |
+| Correlation register Tier A (10 pairs, n=30) | PASS — r and p reproduce exactly from the committed team tables (rows carry official source URLs) |
+| Live Pages (Z03) | `built`; landing tiles 27/27/63/10/51/37 all agree with committed data; flagged.html 37 rows; source-check.html numbers independently reproduced (25/29/0) |
+
+**Cross-session requests from this session (logged, not executed in Z01–Z03):**
+
+* **R-Y1 — cross-ledger model numbers (F26-class):** `integration/out/settlement.json`
+  `model_margin_home` and `docs/data/backtest.json` `model_spread_home` disagree on 50 of 51
+  shared games (e.g. BKN@ATL 11/07 +7.23 vs +3.4). Each ledger is internally consistent but the
+  pages do not label which engine produced which column. Label every model column with its engine
+  and pick one ledger as canonical for settlement. (Data owners + Flagged register.)
+* **R-Y2 — apply the resolved ATL–CHI overtime count:** set `ot: 1` in
+  `data/verified/finals_2026-11-13.json` (and wherever the null is carried), citing the box-score
+  period filter. This closes §20 irregularity 3 and the related F-row.
+* **R-Y3 — close F32 (DET@MIA time):** the 11/14 04:15 AM official edition prints `08:00 (ET)` for
+  DET@MIA, matching the schedule; the `07:00` print belonged to older editions. Mark F32 resolved
+  with that link.
+* **R-Y4 — relabel `units_at_minus110`:** for S9 and S10 (parlays) the published figure is the
+  parlay-priced sum of graded rows (−0.147, +2.919), not flat −110 grading (−1.273, −3.727).
+  Rename the metric (e.g. `units_at_graded_prices`) or split it per market.
+* **X01 cross-note (`arena/2ef89703-nba1`):** the 11/14 04:15 AM ET edition is published and this
+  session compared it row by row with the site's 11/13 07:30 PM ET edition — **no designation
+  changed**; an edition refresh moves labels only (plus F32, above).
+
+**Not done here (owned by the active claims):** the 11/13 finals promotion into
+`data/raw/games_completed.json` and the pick settlement (PR #58 / PR #59 lineages), the
+injury-edition currency update (X01), and any shared-page edits. Z04 (close-out) runs only after
+those claims merge or idle past 60 minutes.
+
+### 27.2 Z04 close-out record (2026-11-14T11:25Z)
+
+Combined tree: `main` at `73c64bd` (PRs #61/#62/#64 merged) + this session's two commits,
+rebased; one `COORDINATION.md` append conflict resolved with **both sides kept** (main's §24/§25
++ this §27). Post-merge re-verification (details in `REVIEW_Z01.md` §9): 16 checks — 12 PASS,
+2 FLAG (R-X2/F30 class), 1 pending fix (R-Y2), 1 NOTE (R-Y1); the merged 11/13 settlement
+(`data/raw/s14/settlement_2026-11-13.json`) verified **line by line** — 9/9 scores equal the
+official finals, grading recomputed correct (3-4, 2 NO BET, −1.40u), pre-registration fidelity to
+the frozen pre-tip archive PASS. Closed by the merges since §27.1: **R-X1** (finals promoted),
+the F29/F-C02 stale-record cells (54/54 record cells now current). Still open: R-Y1 (integration
+ledger frozen at 51 games; wrong shared source_url on its 11/13 `cannot_settle` rows), R-Y2
+(`ot: null` → 1 for ATL–CHI), R-Y3 (F32 resolvable), R-Y4 (units label), F30.
+
+Gate suite on the combined tree — all green: `verify_all.py` VERIFY OK (822 rows / 812 official
+source links; the 10 exceptions are the published F37 class), `check_site.py` PASS,
+`verify_integration.py` PASSED (warnings published), `check_links.py` PASS, `check_rendered.py`
+PASS, `render_check.mjs` 113 pages / 0 problems, `verification.html` current, broken-internal-link
+scan 0 of 113. Delivery (PR + Pages) is appended below after the merge.
