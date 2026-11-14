@@ -50,6 +50,7 @@
 <a href="suggestions.html">Suggestions</a>
 <a href="flagged.html">Flagged for Review</a>
 <a href="sources.html">Source Register</a>
+<a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
 <a href="repo-review.html">Repo Review</a>
 </div>
     <div class="side-note">
@@ -288,7 +289,7 @@
 <td>F24</td>
 <td>Medium</td>
 <td><b>Team-advanced stats cannot be refreshed from the runner yet</b></td>
-<td>The cited page www.nba.com/stats/teams/advanced renders its table in the browser: the raw HTML has no OffRtg text and no stats/team links (indicators in data/raw/_capture_evidence_S1_season.json). The page's own JS chunk calls the resource leaguedashteamstats (chunk excerpt recorded there), and the official stats API stats.nba.com/stats/leaguedashteamstats answered with a read timeout from the Actions runner even with the full web-client header set, while www.nba.com pages returned 200 from the same runner. The committed data/raw/team_advanced.json therefore stays live; the refresh records the block instead of guessing values.</td>
+<td>The cited page www.nba.com/stats/teams/advanced renders its table in the browser: the raw HTML has no OffRtg text and no stats/team links (indicators in data/raw/_capture_evidence_S1_season.json). The page's own JS chunk calls the resource leaguedashteamstats (chunk excerpt recorded there), and the official stats API stats.nba.com/stats/leaguedashteamstats answered with a read timeout from the Actions runner even with the full web-client header set, while www.nba.com pages returned 200 from the same runner. The committed data/raw/team_advanced.json therefore stays live; the refresh records the block instead of guessing values. RE-TESTED 2026-11-14 (session arena/934ca56f-nba1): still true. https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season returns the filter chrome and the date pickers but no data table, so the team ratings CANNOT be re-captured from this environment. This is the concrete reason flag F19 (ratings window ends 11/12) is still open: the 11/13 finals are known, but the advanced ratings that would need to follow them are not retrievable here.</td>
 <td>Refresh of data/raw/team_advanced.json (both windows)</td>
 <td>Re-test stats.nba.com from a different network, or capture the table with a headless browser in the workflow. Until a capture passes the W+L==GP integrity gate, do not promote.</td>
 <td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">S4</a></td>

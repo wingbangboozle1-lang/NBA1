@@ -122,6 +122,13 @@ available, that the data may be used, or that any model result is correct.
 
 ---
 
+## Start here
+
+**[EXECUTIVE_SUMMARY.md](EXECUTIVE_SUMMARY.md)** is the one-document picture: what was
+verified and how, what the model has and has not shown, the limits that matter, and the
+seven decisions waiting on a reviewer before anything else can sensibly proceed. It is also
+linked from every page of the site.
+
 ## Known limits
 
 - **Resolved 2026-11-14.** The nine 2026-11-13 games are Final. They were read from

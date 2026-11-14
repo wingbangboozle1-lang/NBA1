@@ -232,11 +232,12 @@
    "id": "F24",
    "severity": "Medium",
    "title": "Team-advanced stats cannot be refreshed from the runner yet",
-   "detail": "The cited page www.nba.com/stats/teams/advanced renders its table in the browser: the raw HTML has no OffRtg text and no stats/team links (indicators in data/raw/_capture_evidence_S1_season.json). The page's own JS chunk calls the resource leaguedashteamstats (chunk excerpt recorded there), and the official stats API stats.nba.com/stats/leaguedashteamstats answered with a read timeout from the Actions runner even with the full web-client header set, while www.nba.com pages returned 200 from the same runner. The committed data/raw/team_advanced.json therefore stays live; the refresh records the block instead of guessing values.",
+   "detail": "The cited page www.nba.com/stats/teams/advanced renders its table in the browser: the raw HTML has no OffRtg text and no stats/team links (indicators in data/raw/_capture_evidence_S1_season.json). The page's own JS chunk calls the resource leaguedashteamstats (chunk excerpt recorded there), and the official stats API stats.nba.com/stats/leaguedashteamstats answered with a read timeout from the Actions runner even with the full web-client header set, while www.nba.com pages returned 200 from the same runner. The committed data/raw/team_advanced.json therefore stays live; the refresh records the block instead of guessing values. RE-TESTED 2026-11-14 (session arena/934ca56f-nba1): still true. https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season returns the filter chrome and the date pickers but no data table, so the team ratings CANNOT be re-captured from this environment. This is the concrete reason flag F19 (ratings window ends 11/12) is still open: the 11/13 finals are known, but the advanced ratings that would need to follow them are not retrievable here.",
    "affected": "Refresh of data/raw/team_advanced.json (both windows)",
    "source": "S4",
    "source_url": "https://www.nba.com/stats/teams/advanced",
-   "suggested_action": "Re-test stats.nba.com from a different network, or capture the table with a headless browser in the workflow. Until a capture passes the W+L==GP integrity gate, do not promote."
+   "suggested_action": "Re-test stats.nba.com from a different network, or capture the table with a headless browser in the workflow. Until a capture passes the W+L==GP integrity gate, do not promote.",
+   "reverified_utc": "2026-11-14"
   },
   {
    "id": "F25",

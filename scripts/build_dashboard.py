@@ -79,6 +79,7 @@ CATEGORIES = [
     ("Suggestions", "suggestions.html", "Improvements written as options with effort, risk and what each unlocks, so a reviewer can pick a path."),
     ("Flagged for Review", "flagged.html", "Every value that could not be confirmed from an official source, with the link it would need."),
     ("Source Register", "sources.html", "Every official URL this site is built from."),
+    ("Executive Summary", "../../EXECUTIVE_SUMMARY.md", "The whole picture in one document: what was verified, what the model has and has not shown, the limits, and the decisions waiting."),
     ("Repo Review", "repo-review.html", "Line-by-line review of the repository, the irregularities found, and the verification log."),
 ]
 
