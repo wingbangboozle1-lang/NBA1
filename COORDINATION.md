@@ -190,3 +190,25 @@ flagged items (and Build A's 8) are published on their respective
 *Flagged for Review* pages with source links:
 <https://wingbangboozle1-lang.github.io/NBA1/docs/b/pages/flagged.html> and
 <https://wingbangboozle1-lang.github.io/NBA1/review.html>.
+
+---
+
+## 7. Task board — Integration session `arena/458a6570-nba1` (final integration)
+
+Cloned from `main` at `2f44c980e38a1e89dad0d1ae76c957c96f347aa3`, which already
+contains both builds (A at the repository root, B under `docs/b/`). This session
+is the **final integration session**: it merges outstanding work, re-verifies the
+combined data, confirms the site builds with no broken links, and publishes.
+
+| # | Task | Status | Owner | File scope | Notes |
+| --- | --- | --- | --- | --- | --- |
+| V01 | Read board, claim integration scope | **done** | `arena/458a6570-nba1` | `COORDINATION.md` | Claim committed and pushed before any other edit. |
+| V02 | Re-verify combined data line by line | in progress | `arena/458a6570-nba1` | `scripts/verify_integration.py` (new) | Independent re-check; does not trust the earlier session's own gates. |
+| V03 | Independent reachability probe of official sources | in progress | `arena/458a6570-nba1` | `.github/workflows/probe-official.yml`, `scripts/probe_official.py` | This sandbox cannot reach `*.nba.com` (only github/npm/pypi). The probe runs on GitHub's runners, which can. |
+| V04 | Resolve outstanding PRs (#11, #14) | unclaimed | — | — | #14 is docs-only; #11 is a stale parallel build that conflicts with the merged tree. |
+| V05 | Unified landing page + nav (cross-session request R1) | unclaimed | — | `index.html` | An integration session may edit the shared index; logged as R1. |
+| V06 | Publish: PR → `main`, merge, confirm Pages | unclaimed | — | whole repo | |
+
+**Scope rule for this session:** `COORDINATION.md`, new files under `scripts/`
+and `.github/workflows/`, and (only under V05) `index.html`. It will not touch
+Build A's or Build B's page bodies except to fix a defect it can prove.
