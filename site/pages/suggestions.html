@@ -32,6 +32,7 @@
 <a href="props.html">Player Props</a>
 <a href="prop-variance.html">Prop Variance &amp; Rotation</a>
 <a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameday.html">Game-Day Injury Read</a>
 <a href="gameflow.html">Game Flow</a>
 </div>
 <div class="nav-group"><h3>EVIDENCE</h3>
@@ -259,6 +260,46 @@
 <td>Option 1, sequenced behind SG17 option 2. Do not re-fit on this week's sample to move a live line.</td>
 <td>Reviewer: approve the per-stat direction now (so the module's declared assumption is on the record as unmeasured) and schedule the fit for when the sample exists.</td>
 <td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">S7</a></td>
+</tr>
+<tr>
+<td>SG19</td>
+<td>Operations / model</td>
+<td><b>Cut the pickable horizon against the game-day edition, and freeze at that cut</b></td>
+<td>The pipeline currently originates and publishes lines against whatever edition the overnight capture found. For a 7:00 PM ET slate that is up to fifteen hours before the league's own game-day window closes, and the measured consequence is on the site: four clubs filed in the meantime and the model line for their games moved by 0.0 to 2.6 points only because the rest of the names could not be priced at all.</td>
+<td>- Add a 15:15 UTC scheduled capture immediately before the first 7:00 PM ET tip, and let that cut be the published line set for the day <span class='fine'>(effort: Low - the refresh workflow already runs at 15:15 UTC; the change is which edition it treats as final; risk: Low - additive; earlier lines stay archived and graded, they are not rewritten; unlocks: Q10, Q14 (now answered), Q18 (now answered); every pick then reflects what a person watching the report at 3 p.m. ET could see)</span><br>- Keep the overnight cut as the official line set and publish only the game-day delta, as the Game-Day Read page does now <span class='fine'>(effort: None - this is the current behaviour; risk: Low, but the published number is knowingly stale by one filing window; unlocks: Nothing new; it preserves pre-registration purity at the cost of usefulness)</span><br>- Re-price the published lines in place when a newer edition arrives <span class='fine'>(effort: Low; risk: Fatal for the leaderboard - it puts information published after the cut inside a line that will later be graded, which is the look-ahead error this repository has already been burned by; unlocks: Nothing; rejected and recorded so nobody re-proposes it)</span></td>
+<td>Option A, with the frozen copy kept and diffed. Publish a line, then a delta, never a mutated line.</td>
+<td>Which edition is the day's official cut, and what time the scheduler should fire.</td>
+<td class="src"><span class="na" title="source id https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG20</td>
+<td>Data / model</td>
+<td><b>Either give every listed player a minutes row or stop printing 0.00 for an unknown</b></td>
+<td>The availability impact is computed as (status weight x minutes share) x 15.0, and a player with no minutes row contributes 0.00 - indistinguishable in the table from a player whose absence costs nothing. Tonight that is 45 of 24 newly filed rows, and it is the difference between a line that moved and a line that did not.</td>
+<td>- Capture minutes per club from the official team pages (30 URLs) instead of the paginated top-50 league table <span class='fine'>(effort: Medium - one fetch per club plus a parser; no new permission or vendor needed; risk: Low - additive; the existing table stays as the cross-check; unlocks: Q12, Q3, Q20 and F47; prop projections stop being a point estimate with no width)</span><br>- Render a dash, not 0.00, wherever minutes are unknown, and exclude the row from the team total with the exclusion counted in the header <span class='fine'>(effort: Low - one formatting rule and one counter; risk: Low, but it makes published impacts smaller-looking because fewer players count at all; unlocks: Removes a misleading zero from every table today, including this one)</span><br>- Do nothing and keep the lower-bound note <span class='fine'>(effort: None; risk: Medium - the note is correct and unread; readers keep seeing 0.00 as 'healthy'; unlocks: Nothing)</span></td>
+<td>Both of the first two: the dash is a one-line honesty fix that should ship now, the per-club capture is the actual repair.</td>
+<td>Whether the reviewer wants a data project (option A) or a display fix (option B) this week.</td>
+<td class="src"><span class="na" title="source id https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG21</td>
+<td>Site / UI</td>
+<td><b>Show an edition timeline per game: what the model knew, and when</b></td>
+<td>Every table on the site carries a source id, so a reader can find WHERE a value came from, but nothing shows WHEN a row ceased to be the newest word. Today the gap between the edition behind the lines and the newest published edition was nine hours and seventeen minutes, and it could only be discovered by opening two PDFs.</td>
+<td>- A per-game timeline strip on the Game-Day Read page: each edition, its timestamp, the number of rows it added or changed, and whether the site's line was cut before or after it <span class='fine'>(effort: Low - the data already exists in data/derived/gameday_read.json; risk: Low; unlocks: Makes staleness visible at a glance, which is the single decision-support gap this session found)</span><br>- A single 'age of newest edition' badge in the header of every page <span class='fine'>(effort: Low; risk: Low; unlocks: Coarser, but it is impossible to miss)</span></td>
+<td>Option A first; the badge follows for free.</td>
+<td>None technically - a reviewer only has to say whether per-game or global.</td>
+<td class="src"><span class="na" title="source id https://official.nba.com/nba-injury-report-2026-27-season/ is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG22</td>
+<td>Site / data</td>
+<td><b>Never display a season leader without the report's verdict on him</b></td>
+<td>The official game cards print a season leader for each club that is a pure season-average read-out. On 2026-11-16 that widget shows Anthony Edwards for Minnesota while the report rules him out, and on 11/14 it shows Caleb Wilson for Chicago, also out (F49). Any prop table or card copy that inherits that name is quoting a player who is not playing.</td>
+<td>- Join the leader line to the current report at render time and mark a ruled-out leader in place, keeping the published value visible next to the mark <span class='fine'>(effort: Low - the join key already exists in the capture; risk: Low; unlocks: Removes the most likely way a confident-looking wrong name gets onto a pick slip)</span><br>- Drop the leader widget from the capture entirely and derive leaders from the players table only <span class='fine'>(effort: Medium; risk: Low; unlocks: One fewer source of unprefixed third-party-looking numbers, at the cost of context)</span></td>
+<td>Option A. The card is official and should stay cited; it should stop being unqualified.</td>
+<td>Whether a marked leader may still be shown as the leader.</td>
+<td class="src"><span class="na" title="source id https://www.nba.com/games?date=2026-11-16 is not in the register">&mdash;</span></td>
 </tr>
 </tbody></table></div>
 <h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>

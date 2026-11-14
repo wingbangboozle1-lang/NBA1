@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game-day read &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="suggestions.html">Decision</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="prop-variance.html">Prop Variance &amp; Rotation</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameday.html">Game-Day Injury Read</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row links to the official source it
+      came from. A blank cell means the value could not be confirmed from an official
+      source &mdash; it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Game-day read</h1>
+      <p class="sub">The newest official injury edition against the edition the published lines were built from: the diff, the re-priced horizon, and the verification of every row on the horizon.</p>
+    </div>
+    <h2 class="sec">Game-day read</h2><p class="secsub">What the league's newest injury report says, what the model was built on, and the gap between them - row by row, with a source link on every row.</p>
+<div class="tiles">
+<div class="tile"><div class="tile-v">27/27</div><div class="tile-l">Slate rows verified against NBA.com</div><div class="tile-s">every field of every horizon row re-read from the official page</div></div>
+<div class="tile"><div class="tile-v">31/31</div><div class="tile-l">Published report rows re-checked</div><div class="tile-s">independent re-transcription of the edition the lines cite</div></div>
+<div class="tile"><div class="tile-v">CHI, CLE, MIA, NOP</div><div class="tile-l">Clubs that filed since the cut</div><div class="tile-s">rows added to the report after the lines were frozen</div></div>
+<div class="tile"><div class="tile-v">Memphis Grizzlies</div><div class="tile-l">Still unfiled at capture</div><div class="tile-s">inside the league's game-day window, not overdue</div></div>
+<div class="tile"><div class="tile-v">3 of 5</div><div class="tile-l">Games whose line moves</div><div class="tile-s">re-priced with the engine's own adjustment rule</div></div>
+<div class="tile"><div class="tile-v">0</div><div class="tile-l">Favourite flips</div><div class="tile-s">games where the model changed its mind on a side</div></div>
+</div>
+<div class="banner info"><div class="b-t">Editions on this page</div><div class="b-b">The site's published lines were cut from the <strong>NBA Official Injury Report, 11/14/26 04:15 AM ET edition</strong>. The newest edition when this was captured was the <strong>NBA Official Injury Report, 11/14/26 01:30 PM ET edition</strong>. The hub updates continuously, so a newer file may exist by the time you read this - the check is one click on the source link.</div></div>
+<h2 class="sec">1. What the game-day report changed</h2><p class="secsub">One row per club whose listing moved between the two editions. Nothing is inferred: a club that filed for the first time shows every row it added.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Matchup</th>
+<th>Club</th>
+<th>Filed since the cut</th>
+<th>Previous edition</th>
+<th>Rows added</th>
+<th>Status changes</th>
+<th>Rows dropped</th>
+<th>Detail</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-14</td>
+<td>BKN@MEM</td>
+<td>BKN</td>
+<td>no</td>
+<td>already filed</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td><b>Brown Jr., Mikel</b> Questionable &rarr; Probable</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">01:30 PM ET PDF</a> &middot; <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM ET PDF</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>CHI@MIN</td>
+<td>CHI</td>
+<td>yes</td>
+<td>NOT YET SUBMITTED</td>
+<td>7</td>
+<td>0</td>
+<td>0</td>
+<td><b>Awaka, Tobe</b> Out &middot; Injury/Illness - Disc Irritation <span class="fine">(new row)</span><br><b>Claxton, Nic</b> Questionable &middot; Injury/Illness - Left Hamstring Injury Management <span class="fine">(new row)</span><br><b>Powell, Norman</b> Questionable &middot; Injury/Illness - Low Back Injury Management <span class="fine">(new row)</span><br><b>Sellers, Jaylin</b> Out &middot; G League - Two-Way <span class="fine">(new row)</span><br><b>Smith, Jalen</b> Questionable &middot; Injury/Illness - Left Finger Sprain <span class="fine">(new row)</span><br><b>Swain, Dailyn</b> Out &middot; G League - On Assignment <span class="fine">(new row)</span><br><b>Wilson, Caleb</b> Out &middot; Injury/Illness - Right Metacarpal Fracture <span class="fine">(new row)</span></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">01:30 PM ET PDF</a> &middot; <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM ET PDF</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DAL@CLE</td>
+<td>CLE</td>
+<td>yes</td>
+<td>NOT YET SUBMITTED</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td><b>Allen, Jarrett</b> Questionable &middot; Injury/Illness - Right Knee Injury <span class="fine">(new row)</span><br><b>Harden, James</b> Questionable &middot; Injury/Illness - Left Lower Leg/Calf Tightness <span class="fine">(new row)</span><br><b>Merrill, Sam</b> Out &middot; Injury/Illness - Right Elbow Injury Management <span class="fine">(new row)</span><br><b>Mitchell, Donovan</b> Questionable &middot; Injury/Illness - Left Knee Contusion/Injury Management <span class="fine">(new row)</span><br><b>Mobley, Evan</b> Out &middot; Injury/Illness - Left Great Toe Sprain <span class="fine">(new row)</span><br><b>Tomlin, Nae'Qwan</b> Out &middot; Injury/Illness - Low Back Stress Reaction <span class="fine">(new row)</span><br><b>Udeh, Jr., Ernest</b> Out &middot; G League - Two-Way <span class="fine">(new row)</span><br><b>Watson, Peyton</b> Questionable &middot; Injury/Illness - Right Hamstring Injury Management <span class="fine">(new row)</span></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">01:30 PM ET PDF</a> &middot; <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM ET PDF</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DAL@CLE</td>
+<td>DAL</td>
+<td>no</td>
+<td>already filed</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td><b>Christie, Max</b> Questionable &rarr; Doubtful</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">01:30 PM ET PDF</a> &middot; <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM ET PDF</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DET@MIA</td>
+<td>DET</td>
+<td>no</td>
+<td>already filed</td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+<td><b>Harkless, Elijah</b> Questionable &rarr; Available<br><b>Jones, Isaac</b> Questionable &rarr; Available</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">01:30 PM ET PDF</a> &middot; <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM ET PDF</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DET@MIA</td>
+<td>MIA</td>
+<td>yes</td>
+<td>NOT YET SUBMITTED</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td><b>Antetokounmpo, Giannis</b> Probable &middot; Injury/Illness - Right Wrist Sprain <span class="fine">(new row)</span><br><b>Goldin, Vladislav</b> Out &middot; G League - Two-Way <span class="fine">(new row)</span><br><b>Larsson, Pelle</b> Doubtful &middot; Injury/Illness - Illness <span class="fine">(new row)</span><br><b>Thompson, Klay</b> Probable &middot; Injury/Illness - Left Ankle Sprain <span class="fine">(new row)</span></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">01:30 PM ET PDF</a> &middot; <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM ET PDF</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DEN@NOP</td>
+<td>NOP</td>
+<td>yes</td>
+<td>NOT YET SUBMITTED</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td><b>McGowens, Bryce</b> Out &middot; Injury/Illness - Left Elbow Infection <span class="fine">(new row)</span><br><b>Missi, Yves</b> Probable &middot; Injury/Illness - Left Knee Contusion / Bone Bruise <span class="fine">(new row)</span><br><b>Murphy III, Trey</b> Out &middot; Injury/Illness - Bilateral Patellar Tendinopathy <span class="fine">(new row)</span><br><b>Murray, Dejounte</b> Out &middot; Injury/Illness - Left Ankle Sprain <span class="fine">(new row)</span><br><b>Watford, Trendon</b> Out &middot; Injury/Illness - Right Ankle Sprain <span class="fine">(new row)</span></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">01:30 PM ET PDF</a> &middot; <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM ET PDF</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>BKN@MEM</td>
+<td>MEM</td>
+<td>no</td>
+<td>NOT YET SUBMITTED</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>still no filing at the game-day edition; its window (11 a.m. to 1 p.m. local for a 8:00 PM ET tip) had not closed when this was read, so this is not a missed deadline (F48)</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">01:30 PM ET PDF</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Rows whose club was assigned from the PDF's block structure rather than a printed team cell are marked <code>attribution: block</code> in <code>data/captures/2026-11-14-pm/</code> and cross-checked in section 4 below.</p>
+<h2 class="sec">2. What it does to tonight's lines</h2><p class="secsub">The published line, the same model re-run on the game-day edition, and the arithmetic between them. Both numbers are kept; the published one stays graded.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Tip (ET)</th>
+<th>Matchup</th>
+<th>Published spread (home)</th>
+<th>Game-day spread</th>
+<th>Move</th>
+<th>Published total</th>
+<th>Game-day total</th>
+<th>Move</th>
+<th>P(home) pub.</th>
+<th>P(home) now</th>
+<th>Favourite flips</th>
+<th>Report listing H/A</th>
+<th>Published picks</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>7:00 PM ET</td>
+<td><b>DEN@NOP</b></td>
+<td>-9.1</td>
+<td>-9.1</td>
+<td>+0.00</td>
+<td>236.0</td>
+<td>236.0</td>
+<td>+0.00</td>
+<td>0.302</td>
+<td>0.301</td>
+<td>no</td>
+<td>5 / 4 listed &middot; 0 / 0 with known minutes</td>
+<td><span class="fine">S1 &middot; Point spread &middot; DEN -5.9 &middot; side still model-backed: <b>yes</b><br>S2 &middot; Game total &middot; Over 227.0 &middot; side still model-backed: <b>NO</b><br>S3 &middot; Moneyline &middot; DEN ML (-232 fair) &middot; side still model-backed: <b>yes</b><br>S5 &middot; Point spread &middot; DEN -5.9 &middot; side still model-backed: <b>yes</b><br>S7 &middot; Player points &middot; Jamal Murray Over 26.2 &middot; side still model-backed: <b>NO</b></span></td>
+<td class="src"><a href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">game card</a> &middot; <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">01:30 PM PDF</a></td>
+</tr>
+<tr>
+<td>7:30 PM ET</td>
+<td><b>DAL@CLE</b></td>
+<td>-1.8</td>
+<td>-2.5</td>
+<td>-0.72</td>
+<td>229.9</td>
+<td>230.0</td>
+<td>+0.14</td>
+<td>0.459</td>
+<td>0.442</td>
+<td>no</td>
+<td>8 / 6 listed &middot; 1 / 0 with known minutes</td>
+<td><span class="fine">S1 &middot; Point spread &middot; DAL +3.2 &middot; side still model-backed: <b>yes</b><br>S3 &middot; Moneyline &middot; DAL ML (-118 fair) &middot; side still model-backed: <b>yes</b><br>S5 &middot; Point spread &middot; DAL +3.2 &middot; side still model-backed: <b>yes</b></span></td>
+<td class="src"><a href="https://www.nba.com/game/dal-vs-cle-0022600232" target="_blank" rel="noopener">game card</a> &middot; <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">01:30 PM PDF</a></td>
+</tr>
+<tr>
+<td>8:00 PM ET</td>
+<td><b>DET@MIA</b></td>
+<td>-12.2</td>
+<td>-12.4</td>
+<td>-0.20</td>
+<td>227.2</td>
+<td>227.2</td>
+<td>+0.04</td>
+<td>0.242</td>
+<td>0.238</td>
+<td>no</td>
+<td>4 / 7 listed &middot; 1 / 0 with known minutes</td>
+<td><span class="fine">S5 &middot; Point spread &middot; DET -9.9 &middot; side still model-backed: <b>yes</b><br>S7 &middot; Player points &middot; Giannis Antetokounmpo Under 27.7 &middot; side still model-backed: <b>NO</b></span></td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-mia-0022600233" target="_blank" rel="noopener">game card</a> &middot; <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">01:30 PM PDF</a></td>
+</tr>
+<tr>
+<td>8:00 PM ET</td>
+<td><b>BKN@MEM</b></td>
+<td>5.9</td>
+<td>5.9</td>
+<td>+0.00</td>
+<td>227.6</td>
+<td>227.6</td>
+<td>+0.00</td>
+<td>0.632</td>
+<td>0.633</td>
+<td>no</td>
+<td>0 / 6 listed &middot; 0 / 0 with known minutes</td>
+<td><span class="fine">S1 &middot; Point spread &middot; BKN +12.9 &middot; side still model-backed: <b>NO</b><br>S3 &middot; Moneyline &middot; BKN ML (+172 fair) &middot; side still model-backed: <b>NO</b><br>S5 &middot; Point spread &middot; BKN +12.9 &middot; side still model-backed: <b>NO</b></span></td>
+<td class="src"><a href="https://www.nba.com/game/bkn-vs-mem-0022600234" target="_blank" rel="noopener">game card</a> &middot; <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">01:30 PM PDF</a></td>
+</tr>
+<tr>
+<td>8:00 PM ET</td>
+<td><b>CHI@MIN</b></td>
+<td>30.6</td>
+<td>33.2</td>
+<td>+2.60</td>
+<td>235.0</td>
+<td>235.5</td>
+<td>+0.52</td>
+<td>0.960</td>
+<td>0.972</td>
+<td>no</td>
+<td>3 / 7 listed &middot; 1 / 2 with known minutes</td>
+<td><span class="fine">S7 &middot; Player points &middot; LaMelo Ball Over 18.6 &middot; side still model-backed: <b>NO</b><br>S8 &middot; Player PRA &middot; LaMelo Ball Over 28.2 &middot; side still model-backed: <b>NO</b></span></td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-min-0022600235" target="_blank" rel="noopener">game card</a> &middot; <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">01:30 PM PDF</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Spread is the model's projected home margin in points (negative = the away club is the model's pick); it is the same field the Lines &amp; Picks page prints as <em>model spread</em>. Re-computation rule: <code>margin += (loss_away - loss_home) * possessions/100 ; total += -(1 - 2*alpha) * (loss_home + loss_away) * possessions/100</code> (<code>engine/model_core.py apply_availability()</code>), with impact coefficient 15.0 net-rating points per 100 possessions lost and alpha 0.60, both project choices (F4), and sigma_margin 17.409 from the fitted backtest window.</p>
+<div class="banner warn"><div class="b-t">Why two games do not move at all</div><div class="b-b">A listed player with no row in the captured minutes table contributes <strong>0.00</strong> net-rating points - that is a lower bound, not a verdict of 'no impact'. New Orleans filed five names tonight and none of them are in that table, so DEN@NOP is printed unchanged. See <a href="flagged.html">F47</a>.</div></div>
+<h2 class="sec">3. The rest of the horizon</h2><p class="secsub">What the game-day edition does and does not say about the days after tonight.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Matchup</th>
+<th>In this edition</th>
+<th>Player rows</th>
+<th>Clubs unfiled</th>
+<th>Verdict</th>
+<th>Note</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-15</td>
+<td>IND@PHI</td>
+<td>yes</td>
+<td>0</td>
+<td>18</td>
+<td>LISTED, ALL UNFILED</td>
+<td>every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>LAL@PHX</td>
+<td>yes</td>
+<td>0</td>
+<td>18</td>
+<td>LISTED, ALL UNFILED</td>
+<td>every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>CHA@LAC</td>
+<td>yes</td>
+<td>0</td>
+<td>18</td>
+<td>LISTED, ALL UNFILED</td>
+<td>every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>SAS@UTA</td>
+<td>yes</td>
+<td>0</td>
+<td>18</td>
+<td>LISTED, ALL UNFILED</td>
+<td>every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>DAL@BOS</td>
+<td>yes</td>
+<td>0</td>
+<td>18</td>
+<td>LISTED, ALL UNFILED</td>
+<td>every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>NYK@TOR</td>
+<td>yes</td>
+<td>0</td>
+<td>18</td>
+<td>LISTED, ALL UNFILED</td>
+<td>every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>HOU@WAS</td>
+<td>yes</td>
+<td>0</td>
+<td>18</td>
+<td>LISTED, ALL UNFILED</td>
+<td>every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>ATL@MIL</td>
+<td>yes</td>
+<td>0</td>
+<td>18</td>
+<td>LISTED, ALL UNFILED</td>
+<td>every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>OKC@SAC</td>
+<td>yes</td>
+<td>0</td>
+<td>18</td>
+<td>LISTED, ALL UNFILED</td>
+<td>every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">official report</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>ORL@BOS</td>
+<td>no</td>
+<td>0</td>
+<td>0</td>
+<td>NOT COVERED BY THE REPORT</td>
+<td>the report covers 11/14 and 11/15 only; a game on this date has no line in it</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">report hub</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>CHI@CLE</td>
+<td>no</td>
+<td>0</td>
+<td>0</td>
+<td>NOT COVERED BY THE REPORT</td>
+<td>the report covers 11/14 and 11/15 only; a game on this date has no line in it</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">report hub</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>MEM@WAS</td>
+<td>no</td>
+<td>0</td>
+<td>0</td>
+<td>NOT COVERED BY THE REPORT</td>
+<td>the report covers 11/14 and 11/15 only; a game on this date has no line in it</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">report hub</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>PHI@BKN</td>
+<td>no</td>
+<td>0</td>
+<td>0</td>
+<td>NOT COVERED BY THE REPORT</td>
+<td>the report covers 11/14 and 11/15 only; a game on this date has no line in it</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">report hub</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>HOU@MIA</td>
+<td>no</td>
+<td>0</td>
+<td>0</td>
+<td>NOT COVERED BY THE REPORT</td>
+<td>the report covers 11/14 and 11/15 only; a game on this date has no line in it</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">report hub</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>POR@MIN</td>
+<td>no</td>
+<td>0</td>
+<td>0</td>
+<td>NOT COVERED BY THE REPORT</td>
+<td>the report covers 11/14 and 11/15 only; a game on this date has no line in it</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">report hub</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>GSW@NOP</td>
+<td>no</td>
+<td>0</td>
+<td>0</td>
+<td>NOT COVERED BY THE REPORT</td>
+<td>the report covers 11/14 and 11/15 only; a game on this date has no line in it</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">report hub</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>PHX@DEN</td>
+<td>no</td>
+<td>0</td>
+<td>0</td>
+<td>NOT COVERED BY THE REPORT</td>
+<td>the report covers 11/14 and 11/15 only; a game on this date has no line in it</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">report hub</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>UTA@LAC</td>
+<td>no</td>
+<td>0</td>
+<td>0</td>
+<td>NOT COVERED BY THE REPORT</td>
+<td>the report covers 11/14 and 11/15 only; a game on this date has no line in it</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">report hub</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>CHA@LAL</td>
+<td>no</td>
+<td>0</td>
+<td>0</td>
+<td>NOT COVERED BY THE REPORT</td>
+<td>the report covers 11/14 and 11/15 only; a game on this date has no line in it</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">report hub</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>NYK@TOR</td>
+<td>no</td>
+<td>0</td>
+<td>0</td>
+<td>NOT COVERED BY THE REPORT</td>
+<td>the report covers 11/14 and 11/15 only; a game on this date has no line in it</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">report hub</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>POR@MIN</td>
+<td>no</td>
+<td>0</td>
+<td>0</td>
+<td>NOT COVERED BY THE REPORT</td>
+<td>the report covers 11/14 and 11/15 only; a game on this date has no line in it</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">report hub</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>DET@SAS</td>
+<td>no</td>
+<td>0</td>
+<td>0</td>
+<td>NOT COVERED BY THE REPORT</td>
+<td>the report covers 11/14 and 11/15 only; a game on this date has no line in it</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">report hub</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">The report covers the current day and the next. A horizon that runs three days out therefore has no availability input for its last two dates - that is the league's cadence, recorded as F52, not a capture that failed.</p>
+<h2 class="sec">4. Row-by-row verification</h2><p class="secsub">Every published horizon row re-read from the official page, and every published injury row re-transcribed from the PDF it cites. Disagreements are listed; nothing is corrected silently.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Matchup</th>
+<th>Game id</th>
+<th>Verdict</th>
+<th>Fields compared</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-14</td>
+<td>DEN@NOP</td>
+<td>0022600231</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-14 / official 2026-11-14)</span>; time_et OK <span class="fine">(site 7:00 PM ET / official 7:00 PM ET)</span>; matchup OK <span class="fine">(site DEN@NOP / official DEN@NOP)</span>; away_rec OK <span class="fine">(site 6-4 / official 6-4)</span>; home_rec OK <span class="fine">(site 4-9 / official 4-9)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DAL@CLE</td>
+<td>0022600232</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-14 / official 2026-11-14)</span>; time_et OK <span class="fine">(site 7:30 PM ET / official 7:30 PM ET)</span>; matchup OK <span class="fine">(site DAL@CLE / official DAL@CLE)</span>; away_rec OK <span class="fine">(site 7-5 / official 7-5)</span>; home_rec OK <span class="fine">(site 6-7 / official 6-7)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/dal-vs-cle-0022600232" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DET@MIA</td>
+<td>0022600233</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-14 / official 2026-11-14)</span>; time_et OK <span class="fine">(site 8:00 PM ET / official 8:00 PM ET)</span>; matchup OK <span class="fine">(site DET@MIA / official DET@MIA)</span>; away_rec OK <span class="fine">(site 8-3 / official 8-3)</span>; home_rec OK <span class="fine">(site 6-6 / official 6-6)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/det-vs-mia-0022600233" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>BKN@MEM</td>
+<td>0022600234</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-14 / official 2026-11-14)</span>; time_et OK <span class="fine">(site 8:00 PM ET / official 8:00 PM ET)</span>; matchup OK <span class="fine">(site BKN@MEM / official BKN@MEM)</span>; away_rec OK <span class="fine">(site 3-8 / official 3-8)</span>; home_rec OK <span class="fine">(site 8-4 / official 8-4)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/bkn-vs-mem-0022600234" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>CHI@MIN</td>
+<td>0022600235</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-14 / official 2026-11-14)</span>; time_et OK <span class="fine">(site 8:00 PM ET / official 8:00 PM ET)</span>; matchup OK <span class="fine">(site CHI@MIN / official CHI@MIN)</span>; away_rec OK <span class="fine">(site 2-9 / official 2-9)</span>; home_rec OK <span class="fine">(site 9-3 / official 9-3)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/chi-vs-min-0022600235" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>IND@PHI</td>
+<td>0022600236</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-15 / official 2026-11-15)</span>; time_et OK <span class="fine">(site 1:00 PM ET / official 1:00 PM ET)</span>; matchup OK <span class="fine">(site IND@PHI / official IND@PHI)</span>; away_rec OK <span class="fine">(site 5-8 / official 5-8)</span>; home_rec OK <span class="fine">(site 10-3 / official 10-3)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/ind-vs-phi-0022600236" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>LAL@PHX</td>
+<td>0022600237</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-15 / official 2026-11-15)</span>; time_et OK <span class="fine">(site 4:00 PM ET / official 4:00 PM ET)</span>; matchup OK <span class="fine">(site LAL@PHX / official LAL@PHX)</span>; away_rec OK <span class="fine">(site 11-2 / official 11-2)</span>; home_rec OK <span class="fine">(site 5-6 / official 5-6)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/lal-vs-phx-0022600237" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>CHA@LAC</td>
+<td>0022600238</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-15 / official 2026-11-15)</span>; time_et OK <span class="fine">(site 4:30 PM ET / official 4:30 PM ET)</span>; matchup OK <span class="fine">(site CHA@LAC / official CHA@LAC)</span>; away_rec OK <span class="fine">(site 4-8 / official 4-8)</span>; home_rec OK <span class="fine">(site 3-8 / official 3-8)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/cha-vs-lac-0022600238" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>SAS@UTA</td>
+<td>0022600239</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-15 / official 2026-11-15)</span>; time_et OK <span class="fine">(site 5:00 PM ET / official 5:00 PM ET)</span>; matchup OK <span class="fine">(site SAS@UTA / official SAS@UTA)</span>; away_rec OK <span class="fine">(site 11-2 / official 11-2)</span>; home_rec OK <span class="fine">(site 1-12 / official 1-12)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/sas-vs-uta-0022600239" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>DAL@BOS</td>
+<td>0022600240</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-15 / official 2026-11-15)</span>; time_et OK <span class="fine">(site 6:00 PM ET / official 6:00 PM ET)</span>; matchup OK <span class="fine">(site DAL@BOS / official DAL@BOS)</span>; away_rec OK <span class="fine">(site 7-5 / official 7-5)</span>; home_rec OK <span class="fine">(site 10-2 / official 10-2)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/dal-vs-bos-0022600240" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>NYK@TOR</td>
+<td>0022600241</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-15 / official 2026-11-15)</span>; time_et OK <span class="fine">(site 6:00 PM ET / official 6:00 PM ET)</span>; matchup OK <span class="fine">(site NYK@TOR / official NYK@TOR)</span>; away_rec OK <span class="fine">(site 6-6 / official 6-6)</span>; home_rec OK <span class="fine">(site 5-7 / official 5-7)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/nyk-vs-tor-0022600241" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>HOU@WAS</td>
+<td>0022600242</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-15 / official 2026-11-15)</span>; time_et OK <span class="fine">(site 7:00 PM ET / official 7:00 PM ET)</span>; matchup OK <span class="fine">(site HOU@WAS / official HOU@WAS)</span>; away_rec OK <span class="fine">(site 10-3 / official 10-3)</span>; home_rec OK <span class="fine">(site 4-9 / official 4-9)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/hou-vs-was-0022600242" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>ATL@MIL</td>
+<td>0022600243</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-15 / official 2026-11-15)</span>; time_et OK <span class="fine">(site 8:00 PM ET / official 8:00 PM ET)</span>; matchup OK <span class="fine">(site ATL@MIL / official ATL@MIL)</span>; away_rec OK <span class="fine">(site 7-6 / official 7-6)</span>; home_rec OK <span class="fine">(site 1-12 / official 1-12)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/atl-vs-mil-0022600243" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>OKC@SAC</td>
+<td>0022600244</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-15 / official 2026-11-15)</span>; time_et OK <span class="fine">(site 9:00 PM ET / official 9:00 PM ET)</span>; matchup OK <span class="fine">(site OKC@SAC / official OKC@SAC)</span>; away_rec OK <span class="fine">(site 8-5 / official 8-5)</span>; home_rec OK <span class="fine">(site 1-11 / official 1-11)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/okc-vs-sac-0022600244" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>ORL@BOS</td>
+<td>0022600245</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-16 / official 2026-11-16)</span>; time_et OK <span class="fine">(site 7:00 PM ET / official 7:00 PM ET)</span>; matchup OK <span class="fine">(site ORL@BOS / official ORL@BOS)</span>; away_rec OK <span class="fine">(site 5-7 / official 5-7)</span>; home_rec OK <span class="fine">(site 10-2 / official 10-2)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/orl-vs-bos-0022600245" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>CHI@CLE</td>
+<td>0022600246</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-16 / official 2026-11-16)</span>; time_et OK <span class="fine">(site 7:00 PM ET / official 7:00 PM ET)</span>; matchup OK <span class="fine">(site CHI@CLE / official CHI@CLE)</span>; away_rec OK <span class="fine">(site 2-9 / official 2-9)</span>; home_rec OK <span class="fine">(site 6-7 / official 6-7)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/chi-vs-cle-0022600246" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>MEM@WAS</td>
+<td>0022600247</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-16 / official 2026-11-16)</span>; time_et OK <span class="fine">(site 7:00 PM ET / official 7:00 PM ET)</span>; matchup OK <span class="fine">(site MEM@WAS / official MEM@WAS)</span>; away_rec OK <span class="fine">(site 8-4 / official 8-4)</span>; home_rec OK <span class="fine">(site 4-9 / official 4-9)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/mem-vs-was-0022600247" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>PHI@BKN</td>
+<td>0022600248</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-16 / official 2026-11-16)</span>; time_et OK <span class="fine">(site 7:30 PM ET / official 7:30 PM ET)</span>; matchup OK <span class="fine">(site PHI@BKN / official PHI@BKN)</span>; away_rec OK <span class="fine">(site 10-3 / official 10-3)</span>; home_rec OK <span class="fine">(site 3-8 / official 3-8)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/phi-vs-bkn-0022600248" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>HOU@MIA</td>
+<td>0022600249</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-16 / official 2026-11-16)</span>; time_et OK <span class="fine">(site 7:30 PM ET / official 7:30 PM ET)</span>; matchup OK <span class="fine">(site HOU@MIA / official HOU@MIA)</span>; away_rec OK <span class="fine">(site 10-3 / official 10-3)</span>; home_rec OK <span class="fine">(site 6-6 / official 6-6)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/hou-vs-mia-0022600249" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>POR@MIN</td>
+<td>0022600250</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-16 / official 2026-11-16)</span>; time_et OK <span class="fine">(site 8:00 PM ET / official 8:00 PM ET)</span>; matchup OK <span class="fine">(site POR@MIN / official POR@MIN)</span>; away_rec OK <span class="fine">(site 9-3 / official 9-3)</span>; home_rec OK <span class="fine">(site 9-3 / official 9-3)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/por-vs-min-0022600250" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>GSW@NOP</td>
+<td>0022600251</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-16 / official 2026-11-16)</span>; time_et OK <span class="fine">(site 8:00 PM ET / official 8:00 PM ET)</span>; matchup OK <span class="fine">(site GSW@NOP / official GSW@NOP)</span>; away_rec OK <span class="fine">(site 8-5 / official 8-5)</span>; home_rec OK <span class="fine">(site 4-9 / official 4-9)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/gsw-vs-nop-0022600251" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>PHX@DEN</td>
+<td>0022600252</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-16 / official 2026-11-16)</span>; time_et OK <span class="fine">(site 9:00 PM ET / official 9:00 PM ET)</span>; matchup OK <span class="fine">(site PHX@DEN / official PHX@DEN)</span>; away_rec OK <span class="fine">(site 5-6 / official 5-6)</span>; home_rec OK <span class="fine">(site 6-4 / official 6-4)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/phx-vs-den-0022600252" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>UTA@LAC</td>
+<td>0022600257</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-17 / official 2026-11-17)</span>; time_et OK <span class="fine">(site 10:30 PM ET / official 10:30 PM ET)</span>; matchup OK <span class="fine">(site UTA@LAC / official UTA@LAC)</span>; away_rec OK <span class="fine">(site 1-12 / official 1-12)</span>; home_rec OK <span class="fine">(site 3-8 / official 3-8)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/uta-vs-lac-0022600257" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>CHA@LAL</td>
+<td>0022600256</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-17 / official 2026-11-17)</span>; time_et OK <span class="fine">(site 11:00 PM ET / official 11:00 PM ET)</span>; matchup OK <span class="fine">(site CHA@LAL / official CHA@LAL)</span>; away_rec OK <span class="fine">(site 4-8 / official 4-8)</span>; home_rec OK <span class="fine">(site 11-2 / official 11-2)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/cha-vs-lal-0022600256" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>NYK@TOR</td>
+<td>0022600253</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-17 / official 2026-11-17)</span>; time_et OK <span class="fine">(site 7:30 PM ET / official 7:30 PM ET)</span>; matchup OK <span class="fine">(site NYK@TOR / official NYK@TOR)</span>; away_rec OK <span class="fine">(site 6-6 / official 6-6)</span>; home_rec OK <span class="fine">(site 5-7 / official 5-7)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/nyk-vs-tor-0022600253" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>POR@MIN</td>
+<td>0022600254</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-17 / official 2026-11-17)</span>; time_et OK <span class="fine">(site 8:00 PM ET / official 8:00 PM ET)</span>; matchup OK <span class="fine">(site POR@MIN / official POR@MIN)</span>; away_rec OK <span class="fine">(site 9-3 / official 9-3)</span>; home_rec OK <span class="fine">(site 9-3 / official 9-3)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/por-vs-min-0022600254" target="_blank" rel="noopener">game card</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>DET@SAS</td>
+<td>0022600255</td>
+<td><b>AGREE</b></td>
+<td>date OK <span class="fine">(site 2026-11-17 / official 2026-11-17)</span>; time_et OK <span class="fine">(site 8:00 PM ET / official 8:00 PM ET)</span>; matchup OK <span class="fine">(site DET@SAS / official DET@SAS)</span>; away_rec OK <span class="fine">(site 8-3 / official 8-3)</span>; home_rec OK <span class="fine">(site 11-2 / official 11-2)</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate page</a> &middot; <a href="https://www.nba.com/game/det-vs-sas-0022600255" target="_blank" rel="noopener">game card</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Records are checked twice: against the game card and against the official standings page, both read on 2026-11-14.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Club</th>
+<th>Player</th>
+<th>Site status</th>
+<th>Re-read status</th>
+<th>Site reason</th>
+<th>Re-read reason</th>
+<th>Verdict</th>
+<th>PDF cell</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>NOP</td>
+<td>(club row)</td>
+<td>NOT YET SUBMITTED</td>
+<td>NOT YET SUBMITTED</td>
+<td>Team had not filed at the 11/14/26 04:15 AM ET EDITION</td>
+<td>-</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Holmes II, DaRon</td>
+<td>Out</td>
+<td>Out</td>
+<td>G League - On Assignment</td>
+<td>G League - On Assignment</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Nembhard, Ryan</td>
+<td>Out</td>
+<td>Out</td>
+<td>G League - Two-Way</td>
+<td>G League - Two-Way</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Strawther, Julian</td>
+<td>Out</td>
+<td>Out</td>
+<td>Injury/Illness - Left Knee Sprain</td>
+<td>Injury/Illness - Left Knee Sprain</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Whitmore, Cam</td>
+<td>Out</td>
+<td>Out</td>
+<td>G League - Two-Way</td>
+<td>G League - Two-Way</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>CLE</td>
+<td>(club row)</td>
+<td>NOT YET SUBMITTED</td>
+<td>NOT YET SUBMITTED</td>
+<td>Team had not filed at the 11/14/26 04:15 AM ET EDITION</td>
+<td>-</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Biberovic, Tarik</td>
+<td>Out</td>
+<td>Out</td>
+<td>Injury/Illness - Right Heel Bursitis</td>
+<td>Injury/Illness - Right Heel Bursitis</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Christie, Max</td>
+<td>Questionable</td>
+<td>Questionable</td>
+<td>Injury/Illness - Left Ankle Sprain</td>
+<td>Injury/Illness - Left Ankle Sprain</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>de Larrea, Sergio</td>
+<td>Out</td>
+<td>Out</td>
+<td>Injury/Illness - Right Knee Sprain</td>
+<td>Injury/Illness - Right Knee Sprain</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Johnson Jr., Morez</td>
+<td>Probable</td>
+<td>Probable</td>
+<td>Injury/Illness - Left Shin / Tibia Contusion</td>
+<td>Injury/Illness - Left Shin / Tibia Contusion</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Lively II, Dereck</td>
+<td>Out</td>
+<td>Out</td>
+<td>Injury/Illness - Right Foot Surgery</td>
+<td>Injury/Illness - Right Foot Surgery</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Martin, Caleb</td>
+<td>Available</td>
+<td>Available</td>
+<td>Injury/Illness - Right Thumb Splint</td>
+<td>Injury/Illness - Right Thumb Splint</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>(club row)</td>
+<td>NOT YET SUBMITTED</td>
+<td>NOT YET SUBMITTED</td>
+<td>Team had not filed at the 11/14/26 04:15 AM ET EDITION</td>
+<td>-</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Duren, Jalen</td>
+<td>Out</td>
+<td>Out</td>
+<td>Injury/Illness - Right Hamstring Strain</td>
+<td>Injury/Illness - Right Hamstring Strain</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Harkless, Elijah</td>
+<td>Questionable</td>
+<td>Questionable</td>
+<td>G League - Two-Way</td>
+<td>G League - Two-Way</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Joe, Isaiah</td>
+<td>Out</td>
+<td>Out</td>
+<td>Injury/Illness - Right Hip Contusion</td>
+<td>Injury/Illness - Right Hip Contusion</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Jones, Isaac</td>
+<td>Questionable</td>
+<td>Questionable</td>
+<td>G League - Two-Way</td>
+<td>G League - Two-Way</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Lanier, Chaz</td>
+<td>Out</td>
+<td>Out</td>
+<td>G League - On Assignment</td>
+<td>G League - On Assignment</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Okorie, Ebuka</td>
+<td>Out</td>
+<td>Out</td>
+<td>G League - On Assignment</td>
+<td>G League - On Assignment</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Onyenso, Ugonna</td>
+<td>Out</td>
+<td>Out</td>
+<td>G League - Two-Way</td>
+<td>G League - Two-Way</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>MEM</td>
+<td>(club row)</td>
+<td>NOT YET SUBMITTED</td>
+<td>NOT YET SUBMITTED</td>
+<td>Team had not filed at the 11/14/26 04:15 AM ET EDITION</td>
+<td>-</td>
+<td><b>AGREE</b></td>
+<td>block</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>BKN</td>
+<td>Bilodeau, Tyler</td>
+<td>Out</td>
+<td>Out</td>
+<td>G League - Two-Way</td>
+<td>G League - Two-Way</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>BKN</td>
+<td>Brown Jr., Mikel</td>
+<td>Questionable</td>
+<td>Questionable</td>
+<td>Injury/Illness - Illness</td>
+<td>Injury/Illness - Illness</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>BKN</td>
+<td>Jefferson, Joshua</td>
+<td>Out</td>
+<td>Out</td>
+<td>G League - On Assignment</td>
+<td>G League - On Assignment</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>BKN</td>
+<td>Nelson, Grant</td>
+<td>Out</td>
+<td>Out</td>
+<td>G League - Two-Way</td>
+<td>G League - Two-Way</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>BKN</td>
+<td>Saraf, Ben</td>
+<td>Out</td>
+<td>Out</td>
+<td>G League - On Assignment</td>
+<td>G League - On Assignment</td>
+<td><b>AGREE</b></td>
+<td>explicit</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>BKN</td>
+<td>Traore, Nolan</td>
+<td>Probable</td>
+<td>Probable</td>
+<td>Injury/Illness - Right Calf Tightness / Soreness</td>
+<td>Injury/Illness - Right Calf Tightness / Soreness</td>
+<td><b>AGREE</b></td>
+<td>block</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Beringer, Joan</td>
+<td>Available</td>
+<td>Available</td>
+<td>Injury/Illness - Face Mask</td>
+<td>Injury/Illness - Face Mask</td>
+<td><b>AGREE</b></td>
+<td>block</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>DiVincenzo, Donte</td>
+<td>Out</td>
+<td>Out</td>
+<td>Injury/Illness - Right Achilles Tendon Repair / Surgery</td>
+<td>Injury/Illness - Right Achilles Tendon Repair / Surgery</td>
+<td><b>AGREE</b></td>
+<td>block</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Edwards, Anthony</td>
+<td>Out</td>
+<td>Out</td>
+<td>Injury/Illness - Right Knee Arthroscopy</td>
+<td>Injury/Illness - Right Knee Arthroscopy</td>
+<td><b>AGREE</b></td>
+<td>block</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td>(club row)</td>
+<td>NOT YET SUBMITTED</td>
+<td>NOT YET SUBMITTED</td>
+<td>Team had not filed at the 11/14/26 04:15 AM ET EDITION</td>
+<td>-</td>
+<td><b>AGREE</b></td>
+<td>block</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">04:15 AM PDF</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">The <em>PDF cell</em> column says whether the club was printed in the table row or came from the block structure of a re-flowed page (F50).</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Player</th>
+<th>Club per report block</th>
+<th>Club per official minutes table</th>
+<th>Verdict</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Harden, James</td>
+<td>CLE</td>
+<td></td>
+<td><b>NO-CROSS-CHECK</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Merrill, Sam</td>
+<td>CLE</td>
+<td></td>
+<td><b>NO-CROSS-CHECK</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Mitchell, Donovan</td>
+<td>CLE</td>
+<td>CLE</td>
+<td><b>AGREE</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Mobley, Evan</td>
+<td>CLE</td>
+<td></td>
+<td><b>NO-CROSS-CHECK</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Tomlin, Nae'Qwan</td>
+<td>CLE</td>
+<td></td>
+<td><b>NO-CROSS-CHECK</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Udeh, Jr., Ernest</td>
+<td>CLE</td>
+<td></td>
+<td><b>NO-CROSS-CHECK</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Watson, Peyton</td>
+<td>CLE</td>
+<td></td>
+<td><b>NO-CROSS-CHECK</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Traore, Nolan</td>
+<td>BKN</td>
+<td></td>
+<td><b>NO-CROSS-CHECK</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Claxton, Nic</td>
+<td>CHI</td>
+<td></td>
+<td><b>NO-CROSS-CHECK</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Powell, Norman</td>
+<td>CHI</td>
+<td>CHI</td>
+<td><b>AGREE</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Sellers, Jaylin</td>
+<td>CHI</td>
+<td></td>
+<td><b>NO-CROSS-CHECK</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Smith, Jalen</td>
+<td>CHI</td>
+<td></td>
+<td><b>NO-CROSS-CHECK</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Swain, Dailyn</td>
+<td>CHI</td>
+<td></td>
+<td><b>NO-CROSS-CHECK</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Wilson, Caleb</td>
+<td>CHI</td>
+<td>CHI</td>
+<td><b>AGREE</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Antetokounmpo, Giannis</td>
+<td>MIA</td>
+<td>MIA</td>
+<td><b>AGREE</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Goldin, Vladislav</td>
+<td>MIA</td>
+<td></td>
+<td><b>NO-CROSS-CHECK</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Larsson, Pelle</td>
+<td>MIA</td>
+<td></td>
+<td><b>NO-CROSS-CHECK</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+<tr>
+<td>Thompson, Klay</td>
+<td>MIA</td>
+<td></td>
+<td><b>NO-CROSS-CHECK</b></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">report</a> &middot; <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">players table</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote"><code>NO-CROSS-CHECK</code> means the player is outside the captured top-50 table, so no second official source in this repository prints a club for him. It is not a disagreement, and it is not filled in.</p>
+<div class="banner info"><div class="b-t">Limits of this page</div><div class="b-b"><ul><li>Impact is a LOWER BOUND: a listed player outside the captured top-50 minutes table contributes 0.00 net-rating points, so a team can be missing real rotation and still show 0.0. The count of such players is published per game below.</li><li>The 01:30 PM ET edition is the newest published when this was captured. Memphis had not filed; its game-day window (11 a.m. to 1 p.m. local, Central time, for an 8:00 PM ET tip) was still open at capture time, so 'not yet submitted' is not a missed deadline.</li><li>Status labels are the league's own words. The probability attached to each label (Out 1.00 / Doubtful 0.70 / Questionable 0.35 / Probable 0.10 / Available 0.00) is a modelling choice of this project, not an official figure, and is flagged as such (F4).</li><li>No market price exists anywhere in this file. 'Re-priced' means the model against its own naive reference, never the model against a book.</li></ul></div></div>
+<div class="banner info"><div class="b-t">Files this page is built from</div><div class="b-b"><code>data/captures/2026-11-14-pm/</code> (the four official transcriptions), <code>data/derived/gameday_read.json</code> (the comparison and the re-price), <code>scripts/gameday_capture_2026_11_14.py</code> and <code>scripts/gameday_read_2026_11_14.py</code> (how both were produced).</div></div>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

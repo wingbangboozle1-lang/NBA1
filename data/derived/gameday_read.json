@@ -1,0 +1,2697 @@
+{
+ "summary": {
+  "generated_utc": "2026-11-14T19:20Z",
+  "session": "arena/95c1cb23-nba1",
+  "edition_published_by_site": "NBA Official Injury Report, 11/14/26 04:15 AM ET edition",
+  "edition_gameday": "NBA Official Injury Report, 11/14/26 01:30 PM ET edition",
+  "slate_rows_checked": 27,
+  "slate_rows_agree": 27,
+  "slate_rows_check": [],
+  "injury_rows_checked": 31,
+  "injury_rows_agree": 31,
+  "injury_rows_disagree": [],
+  "teams_that_filed_since": [
+   "CHI",
+   "CLE",
+   "MIA",
+   "NOP"
+  ],
+  "teams_still_unfiled": [
+   "Memphis Grizzlies"
+  ],
+  "teams_unfiled_last_edition": [
+   "CHI",
+   "CLE",
+   "MEM",
+   "MIA",
+   "NOP"
+  ],
+  "games_repriced": 3,
+  "favourite_flips": [],
+  "attribution_checks": {
+   "total": 18,
+   "agree": 4,
+   "no_cross_check": 14,
+   "conflict": []
+  },
+  "mechanism": {
+   "impact_coef_net_pts_per_100poss": 15.0,
+   "alpha_offense_share": 0.6,
+   "sigma_margin": 17.4093,
+   "rule": "margin += (loss_away - loss_home) * possessions/100 ; total += -(1 - 2*alpha) * (loss_home + loss_away) * possessions/100",
+   "rule_source": "engine/model_core.py apply_availability()",
+   "minutes_source": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  "honest_limits": [
+   "Impact is a LOWER BOUND: a listed player outside the captured top-50 minutes table contributes 0.00 net-rating points, so a team can be missing real rotation and still show 0.0. The count of such players is published per game below.",
+   "The 01:30 PM ET edition is the newest published when this was captured. Memphis had not filed; its game-day window (11 a.m. to 1 p.m. local, Central time, for an 8:00 PM ET tip) was still open at capture time, so 'not yet submitted' is not a missed deadline.",
+   "Status labels are the league's own words. The probability attached to each label (Out 1.00 / Doubtful 0.70 / Questionable 0.35 / Probable 0.10 / Available 0.00) is a modelling choice of this project, not an official figure, and is flagged as such (F4).",
+   "No market price exists anywhere in this file. 'Re-priced' means the model against its own naive reference, never the model against a book."
+  ]
+ },
+ "slate_verification": [
+  {
+   "game_id": "0022600231",
+   "date": "2026-11-14",
+   "matchup": "DEN@NOP",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "DEN@NOP",
+     "official": "DEN@NOP",
+     "agree": true
+    },
+    "time_et": {
+     "published": "7:00 PM ET",
+     "official": "7:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-14",
+     "official": "2026-11-14",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "6-4",
+     "official": "6-4",
+     "agree": true,
+     "standings_page": "6-4",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "4-9",
+     "official": "4-9",
+     "agree": true,
+     "standings_page": "4-9",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "game_url": "https://www.nba.com/game/den-vs-nop-0022600231",
+   "official_read_at": "2026-11-14T18:39Z"
+  },
+  {
+   "game_id": "0022600232",
+   "date": "2026-11-14",
+   "matchup": "DAL@CLE",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "DAL@CLE",
+     "official": "DAL@CLE",
+     "agree": true
+    },
+    "time_et": {
+     "published": "7:30 PM ET",
+     "official": "7:30 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-14",
+     "official": "2026-11-14",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "7-5",
+     "official": "7-5",
+     "agree": true,
+     "standings_page": "7-5",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "6-7",
+     "official": "6-7",
+     "agree": true,
+     "standings_page": "6-7",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "game_url": "https://www.nba.com/game/dal-vs-cle-0022600232",
+   "official_read_at": "2026-11-14T18:39Z"
+  },
+  {
+   "game_id": "0022600233",
+   "date": "2026-11-14",
+   "matchup": "DET@MIA",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "DET@MIA",
+     "official": "DET@MIA",
+     "agree": true
+    },
+    "time_et": {
+     "published": "8:00 PM ET",
+     "official": "8:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-14",
+     "official": "2026-11-14",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "8-3",
+     "official": "8-3",
+     "agree": true,
+     "standings_page": "8-3",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "6-6",
+     "official": "6-6",
+     "agree": true,
+     "standings_page": "6-6",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "game_url": "https://www.nba.com/game/det-vs-mia-0022600233",
+   "official_read_at": "2026-11-14T18:39Z"
+  },
+  {
+   "game_id": "0022600234",
+   "date": "2026-11-14",
+   "matchup": "BKN@MEM",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "BKN@MEM",
+     "official": "BKN@MEM",
+     "agree": true
+    },
+    "time_et": {
+     "published": "8:00 PM ET",
+     "official": "8:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-14",
+     "official": "2026-11-14",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "3-8",
+     "official": "3-8",
+     "agree": true,
+     "standings_page": "3-8",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "8-4",
+     "official": "8-4",
+     "agree": true,
+     "standings_page": "8-4",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "game_url": "https://www.nba.com/game/bkn-vs-mem-0022600234",
+   "official_read_at": "2026-11-14T18:39Z"
+  },
+  {
+   "game_id": "0022600235",
+   "date": "2026-11-14",
+   "matchup": "CHI@MIN",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "CHI@MIN",
+     "official": "CHI@MIN",
+     "agree": true
+    },
+    "time_et": {
+     "published": "8:00 PM ET",
+     "official": "8:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-14",
+     "official": "2026-11-14",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "2-9",
+     "official": "2-9",
+     "agree": true,
+     "standings_page": "2-9",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "9-3",
+     "official": "9-3",
+     "agree": true,
+     "standings_page": "9-3",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "game_url": "https://www.nba.com/game/chi-vs-min-0022600235",
+   "official_read_at": "2026-11-14T18:39Z"
+  },
+  {
+   "game_id": "0022600236",
+   "date": "2026-11-15",
+   "matchup": "IND@PHI",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "IND@PHI",
+     "official": "IND@PHI",
+     "agree": true
+    },
+    "time_et": {
+     "published": "1:00 PM ET",
+     "official": "1:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-15",
+     "official": "2026-11-15",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "5-8",
+     "official": "5-8",
+     "agree": true,
+     "standings_page": "5-8",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "10-3",
+     "official": "10-3",
+     "agree": true,
+     "standings_page": "10-3",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "game_url": "https://www.nba.com/game/ind-vs-phi-0022600236",
+   "official_read_at": "2026-11-14T18:52Z"
+  },
+  {
+   "game_id": "0022600237",
+   "date": "2026-11-15",
+   "matchup": "LAL@PHX",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "LAL@PHX",
+     "official": "LAL@PHX",
+     "agree": true
+    },
+    "time_et": {
+     "published": "4:00 PM ET",
+     "official": "4:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-15",
+     "official": "2026-11-15",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "11-2",
+     "official": "11-2",
+     "agree": true,
+     "standings_page": "11-2",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "5-6",
+     "official": "5-6",
+     "agree": true,
+     "standings_page": "5-6",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "game_url": "https://www.nba.com/game/lal-vs-phx-0022600237",
+   "official_read_at": "2026-11-14T18:52Z"
+  },
+  {
+   "game_id": "0022600238",
+   "date": "2026-11-15",
+   "matchup": "CHA@LAC",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "CHA@LAC",
+     "official": "CHA@LAC",
+     "agree": true
+    },
+    "time_et": {
+     "published": "4:30 PM ET",
+     "official": "4:30 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-15",
+     "official": "2026-11-15",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "4-8",
+     "official": "4-8",
+     "agree": true,
+     "standings_page": "4-8",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "3-8",
+     "official": "3-8",
+     "agree": true,
+     "standings_page": "3-8",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "game_url": "https://www.nba.com/game/cha-vs-lac-0022600238",
+   "official_read_at": "2026-11-14T18:52Z"
+  },
+  {
+   "game_id": "0022600239",
+   "date": "2026-11-15",
+   "matchup": "SAS@UTA",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "SAS@UTA",
+     "official": "SAS@UTA",
+     "agree": true
+    },
+    "time_et": {
+     "published": "5:00 PM ET",
+     "official": "5:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-15",
+     "official": "2026-11-15",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "11-2",
+     "official": "11-2",
+     "agree": true,
+     "standings_page": "11-2",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "1-12",
+     "official": "1-12",
+     "agree": true,
+     "standings_page": "1-12",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "game_url": "https://www.nba.com/game/sas-vs-uta-0022600239",
+   "official_read_at": "2026-11-14T18:52Z"
+  },
+  {
+   "game_id": "0022600240",
+   "date": "2026-11-15",
+   "matchup": "DAL@BOS",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "DAL@BOS",
+     "official": "DAL@BOS",
+     "agree": true
+    },
+    "time_et": {
+     "published": "6:00 PM ET",
+     "official": "6:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-15",
+     "official": "2026-11-15",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "7-5",
+     "official": "7-5",
+     "agree": true,
+     "standings_page": "7-5",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "10-2",
+     "official": "10-2",
+     "agree": true,
+     "standings_page": "10-2",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "game_url": "https://www.nba.com/game/dal-vs-bos-0022600240",
+   "official_read_at": "2026-11-14T18:52Z"
+  },
+  {
+   "game_id": "0022600241",
+   "date": "2026-11-15",
+   "matchup": "NYK@TOR",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "NYK@TOR",
+     "official": "NYK@TOR",
+     "agree": true
+    },
+    "time_et": {
+     "published": "6:00 PM ET",
+     "official": "6:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-15",
+     "official": "2026-11-15",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "6-6",
+     "official": "6-6",
+     "agree": true,
+     "standings_page": "6-6",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "5-7",
+     "official": "5-7",
+     "agree": true,
+     "standings_page": "5-7",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "game_url": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+   "official_read_at": "2026-11-14T18:52Z"
+  },
+  {
+   "game_id": "0022600242",
+   "date": "2026-11-15",
+   "matchup": "HOU@WAS",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "HOU@WAS",
+     "official": "HOU@WAS",
+     "agree": true
+    },
+    "time_et": {
+     "published": "7:00 PM ET",
+     "official": "7:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-15",
+     "official": "2026-11-15",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "10-3",
+     "official": "10-3",
+     "agree": true,
+     "standings_page": "10-3",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "4-9",
+     "official": "4-9",
+     "agree": true,
+     "standings_page": "4-9",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "game_url": "https://www.nba.com/game/hou-vs-was-0022600242",
+   "official_read_at": "2026-11-14T19:10Z"
+  },
+  {
+   "game_id": "0022600243",
+   "date": "2026-11-15",
+   "matchup": "ATL@MIL",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "ATL@MIL",
+     "official": "ATL@MIL",
+     "agree": true
+    },
+    "time_et": {
+     "published": "8:00 PM ET",
+     "official": "8:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-15",
+     "official": "2026-11-15",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "7-6",
+     "official": "7-6",
+     "agree": true,
+     "standings_page": "7-6",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "1-12",
+     "official": "1-12",
+     "agree": true,
+     "standings_page": "1-12",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "game_url": "https://www.nba.com/game/atl-vs-mil-0022600243",
+   "official_read_at": "2026-11-14T19:10Z"
+  },
+  {
+   "game_id": "0022600244",
+   "date": "2026-11-15",
+   "matchup": "OKC@SAC",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "OKC@SAC",
+     "official": "OKC@SAC",
+     "agree": true
+    },
+    "time_et": {
+     "published": "9:00 PM ET",
+     "official": "9:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-15",
+     "official": "2026-11-15",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "8-5",
+     "official": "8-5",
+     "agree": true,
+     "standings_page": "8-5",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "1-11",
+     "official": "1-11",
+     "agree": true,
+     "standings_page": "1-11",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "game_url": "https://www.nba.com/game/okc-vs-sac-0022600244",
+   "official_read_at": "2026-11-14T19:10Z"
+  },
+  {
+   "game_id": "0022600245",
+   "date": "2026-11-16",
+   "matchup": "ORL@BOS",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "ORL@BOS",
+     "official": "ORL@BOS",
+     "agree": true
+    },
+    "time_et": {
+     "published": "7:00 PM ET",
+     "official": "7:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-16",
+     "official": "2026-11-16",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "5-7",
+     "official": "5-7",
+     "agree": true,
+     "standings_page": "5-7",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "10-2",
+     "official": "10-2",
+     "agree": true,
+     "standings_page": "10-2",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/orl-vs-bos-0022600245",
+   "official_read_at": "2026-11-14T18:58Z"
+  },
+  {
+   "game_id": "0022600246",
+   "date": "2026-11-16",
+   "matchup": "CHI@CLE",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "CHI@CLE",
+     "official": "CHI@CLE",
+     "agree": true
+    },
+    "time_et": {
+     "published": "7:00 PM ET",
+     "official": "7:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-16",
+     "official": "2026-11-16",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "2-9",
+     "official": "2-9",
+     "agree": true,
+     "standings_page": "2-9",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "6-7",
+     "official": "6-7",
+     "agree": true,
+     "standings_page": "6-7",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/chi-vs-cle-0022600246",
+   "official_read_at": "2026-11-14T18:58Z"
+  },
+  {
+   "game_id": "0022600247",
+   "date": "2026-11-16",
+   "matchup": "MEM@WAS",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "MEM@WAS",
+     "official": "MEM@WAS",
+     "agree": true
+    },
+    "time_et": {
+     "published": "7:00 PM ET",
+     "official": "7:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-16",
+     "official": "2026-11-16",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "8-4",
+     "official": "8-4",
+     "agree": true,
+     "standings_page": "8-4",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "4-9",
+     "official": "4-9",
+     "agree": true,
+     "standings_page": "4-9",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/mem-vs-was-0022600247",
+   "official_read_at": "2026-11-14T18:58Z"
+  },
+  {
+   "game_id": "0022600248",
+   "date": "2026-11-16",
+   "matchup": "PHI@BKN",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "PHI@BKN",
+     "official": "PHI@BKN",
+     "agree": true
+    },
+    "time_et": {
+     "published": "7:30 PM ET",
+     "official": "7:30 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-16",
+     "official": "2026-11-16",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "10-3",
+     "official": "10-3",
+     "agree": true,
+     "standings_page": "10-3",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "3-8",
+     "official": "3-8",
+     "agree": true,
+     "standings_page": "3-8",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
+   "official_read_at": "2026-11-14T18:58Z"
+  },
+  {
+   "game_id": "0022600249",
+   "date": "2026-11-16",
+   "matchup": "HOU@MIA",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "HOU@MIA",
+     "official": "HOU@MIA",
+     "agree": true
+    },
+    "time_et": {
+     "published": "7:30 PM ET",
+     "official": "7:30 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-16",
+     "official": "2026-11-16",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "10-3",
+     "official": "10-3",
+     "agree": true,
+     "standings_page": "10-3",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "6-6",
+     "official": "6-6",
+     "agree": true,
+     "standings_page": "6-6",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/hou-vs-mia-0022600249",
+   "official_read_at": "2026-11-14T18:58Z"
+  },
+  {
+   "game_id": "0022600250",
+   "date": "2026-11-16",
+   "matchup": "POR@MIN",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "POR@MIN",
+     "official": "POR@MIN",
+     "agree": true
+    },
+    "time_et": {
+     "published": "8:00 PM ET",
+     "official": "8:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-16",
+     "official": "2026-11-16",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "9-3",
+     "official": "9-3",
+     "agree": true,
+     "standings_page": "9-3",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "9-3",
+     "official": "9-3",
+     "agree": true,
+     "standings_page": "9-3",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/por-vs-min-0022600250",
+   "official_read_at": "2026-11-14T18:58Z"
+  },
+  {
+   "game_id": "0022600251",
+   "date": "2026-11-16",
+   "matchup": "GSW@NOP",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "GSW@NOP",
+     "official": "GSW@NOP",
+     "agree": true
+    },
+    "time_et": {
+     "published": "8:00 PM ET",
+     "official": "8:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-16",
+     "official": "2026-11-16",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "8-5",
+     "official": "8-5",
+     "agree": true,
+     "standings_page": "8-5",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "4-9",
+     "official": "4-9",
+     "agree": true,
+     "standings_page": "4-9",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
+   "official_read_at": "2026-11-14T18:58Z"
+  },
+  {
+   "game_id": "0022600252",
+   "date": "2026-11-16",
+   "matchup": "PHX@DEN",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "PHX@DEN",
+     "official": "PHX@DEN",
+     "agree": true
+    },
+    "time_et": {
+     "published": "9:00 PM ET",
+     "official": "9:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-16",
+     "official": "2026-11-16",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "5-6",
+     "official": "5-6",
+     "agree": true,
+     "standings_page": "5-6",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "6-4",
+     "official": "6-4",
+     "agree": true,
+     "standings_page": "6-4",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/phx-vs-den-0022600252",
+   "official_read_at": "2026-11-14T18:58Z"
+  },
+  {
+   "game_id": "0022600257",
+   "date": "2026-11-17",
+   "matchup": "UTA@LAC",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "UTA@LAC",
+     "official": "UTA@LAC",
+     "agree": true
+    },
+    "time_et": {
+     "published": "10:30 PM ET",
+     "official": "10:30 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-17",
+     "official": "2026-11-17",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "1-12",
+     "official": "1-12",
+     "agree": true,
+     "standings_page": "1-12",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "3-8",
+     "official": "3-8",
+     "agree": true,
+     "standings_page": "3-8",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "game_url": "https://www.nba.com/game/uta-vs-lac-0022600257",
+   "official_read_at": "2026-11-14T19:03Z"
+  },
+  {
+   "game_id": "0022600256",
+   "date": "2026-11-17",
+   "matchup": "CHA@LAL",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "CHA@LAL",
+     "official": "CHA@LAL",
+     "agree": true
+    },
+    "time_et": {
+     "published": "11:00 PM ET",
+     "official": "11:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-17",
+     "official": "2026-11-17",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "4-8",
+     "official": "4-8",
+     "agree": true,
+     "standings_page": "4-8",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "11-2",
+     "official": "11-2",
+     "agree": true,
+     "standings_page": "11-2",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "game_url": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "official_read_at": "2026-11-14T19:03Z"
+  },
+  {
+   "game_id": "0022600253",
+   "date": "2026-11-17",
+   "matchup": "NYK@TOR",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "NYK@TOR",
+     "official": "NYK@TOR",
+     "agree": true
+    },
+    "time_et": {
+     "published": "7:30 PM ET",
+     "official": "7:30 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-17",
+     "official": "2026-11-17",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "6-6",
+     "official": "6-6",
+     "agree": true,
+     "standings_page": "6-6",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "5-7",
+     "official": "5-7",
+     "agree": true,
+     "standings_page": "5-7",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "game_url": "https://www.nba.com/game/nyk-vs-tor-0022600253",
+   "official_read_at": "2026-11-14T19:03Z"
+  },
+  {
+   "game_id": "0022600254",
+   "date": "2026-11-17",
+   "matchup": "POR@MIN",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "POR@MIN",
+     "official": "POR@MIN",
+     "agree": true
+    },
+    "time_et": {
+     "published": "8:00 PM ET",
+     "official": "8:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-17",
+     "official": "2026-11-17",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "9-3",
+     "official": "9-3",
+     "agree": true,
+     "standings_page": "9-3",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "9-3",
+     "official": "9-3",
+     "agree": true,
+     "standings_page": "9-3",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "game_url": "https://www.nba.com/game/por-vs-min-0022600254",
+   "official_read_at": "2026-11-14T19:03Z"
+  },
+  {
+   "game_id": "0022600255",
+   "date": "2026-11-17",
+   "matchup": "DET@SAS",
+   "verdict": "AGREE",
+   "fields": {
+    "matchup": {
+     "published": "DET@SAS",
+     "official": "DET@SAS",
+     "agree": true
+    },
+    "time_et": {
+     "published": "8:00 PM ET",
+     "official": "8:00 PM ET",
+     "agree": true
+    },
+    "date": {
+     "published": "2026-11-17",
+     "official": "2026-11-17",
+     "agree": true
+    },
+    "away_rec": {
+     "published": "8-3",
+     "official": "8-3",
+     "agree": true,
+     "standings_page": "8-3",
+     "agree_standings": true
+    },
+    "home_rec": {
+     "published": "11-2",
+     "official": "11-2",
+     "agree": true,
+     "standings_page": "11-2",
+     "agree_standings": true
+    }
+   },
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "game_url": "https://www.nba.com/game/det-vs-sas-0022600255",
+   "official_read_at": "2026-11-14T19:03Z"
+  }
+ ],
+ "injury_verification": [
+  {
+   "team": "NOP",
+   "player": null,
+   "published_status": "NOT YET SUBMITTED",
+   "fresh_status": "NOT YET SUBMITTED",
+   "published_reason": "Team had not filed at the 11/14/26 04:15 AM ET EDITION",
+   "fresh_reason": null,
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DEN",
+   "player": "Holmes II, DaRon",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "G League - On Assignment",
+   "fresh_reason": "G League - On Assignment",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DEN",
+   "player": "Nembhard, Ryan",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "G League - Two-Way",
+   "fresh_reason": "G League - Two-Way",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DEN",
+   "player": "Strawther, Julian",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "Injury/Illness - Left Knee Sprain",
+   "fresh_reason": "Injury/Illness - Left Knee Sprain",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DEN",
+   "player": "Whitmore, Cam",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "G League - Two-Way",
+   "fresh_reason": "G League - Two-Way",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "CLE",
+   "player": null,
+   "published_status": "NOT YET SUBMITTED",
+   "fresh_status": "NOT YET SUBMITTED",
+   "published_reason": "Team had not filed at the 11/14/26 04:15 AM ET EDITION",
+   "fresh_reason": null,
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DAL",
+   "player": "Biberovic, Tarik",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "Injury/Illness - Right Heel Bursitis",
+   "fresh_reason": "Injury/Illness - Right Heel Bursitis",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DAL",
+   "player": "Christie, Max",
+   "published_status": "Questionable",
+   "fresh_status": "Questionable",
+   "published_reason": "Injury/Illness - Left Ankle Sprain",
+   "fresh_reason": "Injury/Illness - Left Ankle Sprain",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DAL",
+   "player": "de Larrea, Sergio",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "Injury/Illness - Right Knee Sprain",
+   "fresh_reason": "Injury/Illness - Right Knee Sprain",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DAL",
+   "player": "Johnson Jr., Morez",
+   "published_status": "Probable",
+   "fresh_status": "Probable",
+   "published_reason": "Injury/Illness - Left Shin / Tibia Contusion",
+   "fresh_reason": "Injury/Illness - Left Shin / Tibia Contusion",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DAL",
+   "player": "Lively II, Dereck",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "Injury/Illness - Right Foot Surgery",
+   "fresh_reason": "Injury/Illness - Right Foot Surgery",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DAL",
+   "player": "Martin, Caleb",
+   "published_status": "Available",
+   "fresh_status": "Available",
+   "published_reason": "Injury/Illness - Right Thumb Splint",
+   "fresh_reason": "Injury/Illness - Right Thumb Splint",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "MIA",
+   "player": null,
+   "published_status": "NOT YET SUBMITTED",
+   "fresh_status": "NOT YET SUBMITTED",
+   "published_reason": "Team had not filed at the 11/14/26 04:15 AM ET EDITION",
+   "fresh_reason": null,
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DET",
+   "player": "Duren, Jalen",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "Injury/Illness - Right Hamstring Strain",
+   "fresh_reason": "Injury/Illness - Right Hamstring Strain",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DET",
+   "player": "Harkless, Elijah",
+   "published_status": "Questionable",
+   "fresh_status": "Questionable",
+   "published_reason": "G League - Two-Way",
+   "fresh_reason": "G League - Two-Way",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DET",
+   "player": "Joe, Isaiah",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "Injury/Illness - Right Hip Contusion",
+   "fresh_reason": "Injury/Illness - Right Hip Contusion",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DET",
+   "player": "Jones, Isaac",
+   "published_status": "Questionable",
+   "fresh_status": "Questionable",
+   "published_reason": "G League - Two-Way",
+   "fresh_reason": "G League - Two-Way",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DET",
+   "player": "Lanier, Chaz",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "G League - On Assignment",
+   "fresh_reason": "G League - On Assignment",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DET",
+   "player": "Okorie, Ebuka",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "G League - On Assignment",
+   "fresh_reason": "G League - On Assignment",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "DET",
+   "player": "Onyenso, Ugonna",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "G League - Two-Way",
+   "fresh_reason": "G League - Two-Way",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "MEM",
+   "player": null,
+   "published_status": "NOT YET SUBMITTED",
+   "fresh_status": "NOT YET SUBMITTED",
+   "published_reason": "Team had not filed at the 11/14/26 04:15 AM ET EDITION",
+   "fresh_reason": null,
+   "verdict": "AGREE",
+   "attribution_in_pdf": "block",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "BKN",
+   "player": "Bilodeau, Tyler",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "G League - Two-Way",
+   "fresh_reason": "G League - Two-Way",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "BKN",
+   "player": "Brown Jr., Mikel",
+   "published_status": "Questionable",
+   "fresh_status": "Questionable",
+   "published_reason": "Injury/Illness - Illness",
+   "fresh_reason": "Injury/Illness - Illness",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "BKN",
+   "player": "Jefferson, Joshua",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "G League - On Assignment",
+   "fresh_reason": "G League - On Assignment",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "BKN",
+   "player": "Nelson, Grant",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "G League - Two-Way",
+   "fresh_reason": "G League - Two-Way",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "BKN",
+   "player": "Saraf, Ben",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "G League - On Assignment",
+   "fresh_reason": "G League - On Assignment",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "explicit",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "BKN",
+   "player": "Traore, Nolan",
+   "published_status": "Probable",
+   "fresh_status": "Probable",
+   "published_reason": "Injury/Illness - Right Calf Tightness / Soreness",
+   "fresh_reason": "Injury/Illness - Right Calf Tightness / Soreness",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "block",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "MIN",
+   "player": "Beringer, Joan",
+   "published_status": "Available",
+   "fresh_status": "Available",
+   "published_reason": "Injury/Illness - Face Mask",
+   "fresh_reason": "Injury/Illness - Face Mask",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "block",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "MIN",
+   "player": "DiVincenzo, Donte",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "Injury/Illness - Right Achilles Tendon Repair / Surgery",
+   "fresh_reason": "Injury/Illness - Right Achilles Tendon Repair / Surgery",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "block",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "MIN",
+   "player": "Edwards, Anthony",
+   "published_status": "Out",
+   "fresh_status": "Out",
+   "published_reason": "Injury/Illness - Right Knee Arthroscopy",
+   "fresh_reason": "Injury/Illness - Right Knee Arthroscopy",
+   "verdict": "AGREE",
+   "attribution_in_pdf": "block",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  },
+  {
+   "team": "CHI",
+   "player": null,
+   "published_status": "NOT YET SUBMITTED",
+   "fresh_status": "NOT YET SUBMITTED",
+   "published_reason": "Team had not filed at the 11/14/26 04:15 AM ET EDITION",
+   "fresh_reason": null,
+   "verdict": "AGREE",
+   "attribution_in_pdf": "block",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf"
+  }
+ ],
+ "edition_delta": [
+  {
+   "date": "2026-11-14",
+   "team": "BKN",
+   "matchup": "BKN@MEM",
+   "was_not_yet_submitted": false,
+   "now_not_yet_submitted": false,
+   "filed_since": false,
+   "n_added": 0,
+   "n_removed": 0,
+   "n_status_changes": 1,
+   "added": [],
+   "removed": [],
+   "status_changes": [
+    {
+     "player": "Brown Jr., Mikel",
+     "from": "Questionable",
+     "to": "Probable",
+     "reason": "Injury/Illness - Illness"
+    }
+   ],
+   "source_old": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+   "source_new": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf"
+  },
+  {
+   "date": "2026-11-14",
+   "team": "CHI",
+   "matchup": "CHI@MIN",
+   "was_not_yet_submitted": true,
+   "now_not_yet_submitted": false,
+   "filed_since": true,
+   "n_added": 7,
+   "n_removed": 0,
+   "n_status_changes": 0,
+   "added": [
+    {
+     "player": "Awaka, Tobe",
+     "status": "Out",
+     "reason": "Injury/Illness - Disc Irritation",
+     "attribution": "explicit"
+    },
+    {
+     "player": "Claxton, Nic",
+     "status": "Questionable",
+     "reason": "Injury/Illness - Left Hamstring Injury Management",
+     "attribution": "block"
+    },
+    {
+     "player": "Powell, Norman",
+     "status": "Questionable",
+     "reason": "Injury/Illness - Low Back Injury Management",
+     "attribution": "block"
+    },
+    {
+     "player": "Sellers, Jaylin",
+     "status": "Out",
+     "reason": "G League - Two-Way",
+     "attribution": "block"
+    },
+    {
+     "player": "Smith, Jalen",
+     "status": "Questionable",
+     "reason": "Injury/Illness - Left Finger Sprain",
+     "attribution": "block"
+    },
+    {
+     "player": "Swain, Dailyn",
+     "status": "Out",
+     "reason": "G League - On Assignment",
+     "attribution": "block"
+    },
+    {
+     "player": "Wilson, Caleb",
+     "status": "Out",
+     "reason": "Injury/Illness - Right Metacarpal Fracture",
+     "attribution": "block"
+    }
+   ],
+   "removed": [],
+   "status_changes": [],
+   "source_old": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+   "source_new": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf"
+  },
+  {
+   "date": "2026-11-14",
+   "team": "CLE",
+   "matchup": "DAL@CLE",
+   "was_not_yet_submitted": true,
+   "now_not_yet_submitted": false,
+   "filed_since": true,
+   "n_added": 8,
+   "n_removed": 0,
+   "n_status_changes": 0,
+   "added": [
+    {
+     "player": "Allen, Jarrett",
+     "status": "Questionable",
+     "reason": "Injury/Illness - Right Knee Injury",
+     "attribution": "explicit"
+    },
+    {
+     "player": "Harden, James",
+     "status": "Questionable",
+     "reason": "Injury/Illness - Left Lower Leg/Calf Tightness",
+     "attribution": "block"
+    },
+    {
+     "player": "Merrill, Sam",
+     "status": "Out",
+     "reason": "Injury/Illness - Right Elbow Injury Management",
+     "attribution": "block"
+    },
+    {
+     "player": "Mitchell, Donovan",
+     "status": "Questionable",
+     "reason": "Injury/Illness - Left Knee Contusion/Injury Management",
+     "attribution": "block"
+    },
+    {
+     "player": "Mobley, Evan",
+     "status": "Out",
+     "reason": "Injury/Illness - Left Great Toe Sprain",
+     "attribution": "block"
+    },
+    {
+     "player": "Tomlin, Nae'Qwan",
+     "status": "Out",
+     "reason": "Injury/Illness - Low Back Stress Reaction",
+     "attribution": "block"
+    },
+    {
+     "player": "Udeh, Jr., Ernest",
+     "status": "Out",
+     "reason": "G League - Two-Way",
+     "attribution": "block"
+    },
+    {
+     "player": "Watson, Peyton",
+     "status": "Questionable",
+     "reason": "Injury/Illness - Right Hamstring Injury Management",
+     "attribution": "block"
+    }
+   ],
+   "removed": [],
+   "status_changes": [],
+   "source_old": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+   "source_new": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf"
+  },
+  {
+   "date": "2026-11-14",
+   "team": "DAL",
+   "matchup": "DAL@CLE",
+   "was_not_yet_submitted": false,
+   "now_not_yet_submitted": false,
+   "filed_since": false,
+   "n_added": 0,
+   "n_removed": 0,
+   "n_status_changes": 1,
+   "added": [],
+   "removed": [],
+   "status_changes": [
+    {
+     "player": "Christie, Max",
+     "from": "Questionable",
+     "to": "Doubtful",
+     "reason": "Injury/Illness - Left Ankle Sprain"
+    }
+   ],
+   "source_old": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+   "source_new": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf"
+  },
+  {
+   "date": "2026-11-14",
+   "team": "DET",
+   "matchup": "DET@MIA",
+   "was_not_yet_submitted": false,
+   "now_not_yet_submitted": false,
+   "filed_since": false,
+   "n_added": 0,
+   "n_removed": 0,
+   "n_status_changes": 2,
+   "added": [],
+   "removed": [],
+   "status_changes": [
+    {
+     "player": "Harkless, Elijah",
+     "from": "Questionable",
+     "to": "Available",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Jones, Isaac",
+     "from": "Questionable",
+     "to": "Available",
+     "reason": "G League - Two-Way"
+    }
+   ],
+   "source_old": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+   "source_new": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf"
+  },
+  {
+   "date": "2026-11-14",
+   "team": "MIA",
+   "matchup": "DET@MIA",
+   "was_not_yet_submitted": true,
+   "now_not_yet_submitted": false,
+   "filed_since": true,
+   "n_added": 4,
+   "n_removed": 0,
+   "n_status_changes": 0,
+   "added": [
+    {
+     "player": "Antetokounmpo, Giannis",
+     "status": "Probable",
+     "reason": "Injury/Illness - Right Wrist Sprain",
+     "attribution": "block"
+    },
+    {
+     "player": "Goldin, Vladislav",
+     "status": "Out",
+     "reason": "G League - Two-Way",
+     "attribution": "block"
+    },
+    {
+     "player": "Larsson, Pelle",
+     "status": "Doubtful",
+     "reason": "Injury/Illness - Illness",
+     "attribution": "block"
+    },
+    {
+     "player": "Thompson, Klay",
+     "status": "Probable",
+     "reason": "Injury/Illness - Left Ankle Sprain",
+     "attribution": "block"
+    }
+   ],
+   "removed": [],
+   "status_changes": [],
+   "source_old": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+   "source_new": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf"
+  },
+  {
+   "date": "2026-11-14",
+   "team": "NOP",
+   "matchup": "DEN@NOP",
+   "was_not_yet_submitted": true,
+   "now_not_yet_submitted": false,
+   "filed_since": true,
+   "n_added": 5,
+   "n_removed": 0,
+   "n_status_changes": 0,
+   "added": [
+    {
+     "player": "McGowens, Bryce",
+     "status": "Out",
+     "reason": "Injury/Illness - Left Elbow Infection",
+     "attribution": "explicit"
+    },
+    {
+     "player": "Missi, Yves",
+     "status": "Probable",
+     "reason": "Injury/Illness - Left Knee Contusion / Bone Bruise",
+     "attribution": "explicit"
+    },
+    {
+     "player": "Murphy III, Trey",
+     "status": "Out",
+     "reason": "Injury/Illness - Bilateral Patellar Tendinopathy",
+     "attribution": "explicit"
+    },
+    {
+     "player": "Murray, Dejounte",
+     "status": "Out",
+     "reason": "Injury/Illness - Left Ankle Sprain",
+     "attribution": "explicit"
+    },
+    {
+     "player": "Watford, Trendon",
+     "status": "Out",
+     "reason": "Injury/Illness - Right Ankle Sprain",
+     "attribution": "explicit"
+    }
+   ],
+   "removed": [],
+   "status_changes": [],
+   "source_old": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+   "source_new": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf"
+  }
+ ],
+ "gameday_readout": [
+  {
+   "date": "2026-11-14",
+   "time_et": "7:00 PM ET",
+   "matchup": "DEN@NOP",
+   "game_id": "0022600231",
+   "away": "DEN",
+   "home": "NOP",
+   "published": {
+    "model_spread_home": -9.1,
+    "model_total": 236.0,
+    "p_home_win": 0.302,
+    "loss_home": 0.0,
+    "loss_away": 0.0,
+    "home_report_status": "NOT YET SUBMITTED",
+    "away_report_status": "4 player(s) listed",
+    "home_confidence": "NONE - no entry in this edition of the report",
+    "away_confidence": "NONE - minutes unavailable for every listed player",
+    "src": "S8_0022600231"
+   },
+   "gameday": {
+    "loss_home": 0.0,
+    "loss_away": 0.0,
+    "model_spread_home": -9.1,
+    "model_total": 236.0,
+    "p_home_win": 0.301,
+    "home_listed": 5,
+    "away_listed": 4,
+    "home_minutes_known": 0,
+    "away_minutes_known": 0,
+    "home_coverage": 0.136,
+    "away_coverage": 0.303,
+    "home_confidence": "NONE - minutes unavailable for every listed player",
+    "away_confidence": "NONE - minutes unavailable for every listed player",
+    "home_not_submitted": false,
+    "away_not_submitted": false,
+    "home_weighted_share": 0.0,
+    "away_weighted_share": 0.0,
+    "home_sensitivity": {
+     "10": 0.0,
+     "15": 0.0,
+     "20": 0.0
+    },
+    "away_sensitivity": {
+     "10": 0.0,
+     "15": 0.0,
+     "20": 0.0
+    },
+    "home_unknown_players": [
+     "McGowens, Bryce",
+     "Missi, Yves",
+     "Murphy III, Trey",
+     "Murray, Dejounte",
+     "Watford, Trendon"
+    ],
+    "away_unknown_players": [
+     "Holmes II, DaRon",
+     "Nembhard, Ryan",
+     "Strawther, Julian",
+     "Whitmore, Cam"
+    ]
+   },
+   "delta": {
+    "spread_move": 0.0,
+    "total_move": 0.0,
+    "p_home_move": -0.001,
+    "favourite_flips": false,
+    "changed": false
+   },
+   "picks": [
+    {
+     "strategy": "S1",
+     "market": "Point spread",
+     "side": "away",
+     "team": "DEN",
+     "line_display": "DEN -5.9",
+     "model_side_still_agrees": true,
+     "edge_old": -3.18,
+     "edge_new": -3.2
+    },
+    {
+     "strategy": "S2",
+     "market": "Game total",
+     "side": "over",
+     "team": null,
+     "line_display": "Over 227.0",
+     "model_side_still_agrees": false,
+     "edge_old": 8.96,
+     "edge_new": null
+    },
+    {
+     "strategy": "S3",
+     "market": "Moneyline",
+     "side": "away",
+     "team": "DEN",
+     "line_display": "DEN ML (-232 fair)",
+     "model_side_still_agrees": true,
+     "edge_old": null,
+     "edge_new": null
+    },
+    {
+     "strategy": "S5",
+     "market": "Point spread",
+     "side": "away",
+     "team": "DEN",
+     "line_display": "DEN -5.9",
+     "model_side_still_agrees": true,
+     "edge_old": -3.18,
+     "edge_new": -3.2
+    },
+    {
+     "strategy": "S7",
+     "market": "Player points",
+     "side": "over",
+     "team": "Jamal Murray",
+     "line_display": "Jamal Murray Over 26.2",
+     "model_side_still_agrees": false,
+     "edge_old": 2.0,
+     "edge_new": null
+    }
+   ],
+   "sources": {
+    "slate": "S8_0022600231",
+    "report_old": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+    "report_new": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+    "game_url": "https://www.nba.com/game/den-vs-nop-0022600231",
+    "slate_page": "https://www.nba.com/games?date=2026-11-14"
+   }
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "7:30 PM ET",
+   "matchup": "DAL@CLE",
+   "game_id": "0022600232",
+   "away": "DAL",
+   "home": "CLE",
+   "published": {
+    "model_spread_home": -1.8,
+    "model_total": 229.9,
+    "p_home_win": 0.459,
+    "loss_home": 0.0,
+    "loss_away": 0.0,
+    "home_report_status": "NOT YET SUBMITTED",
+    "away_report_status": "6 player(s) listed",
+    "home_confidence": "NONE - no entry in this edition of the report",
+    "away_confidence": "NONE - minutes unavailable for every listed player",
+    "src": "S8_0022600232"
+   },
+   "gameday": {
+    "loss_home": 0.72,
+    "loss_away": 0.0,
+    "model_spread_home": -2.5,
+    "model_total": 230.0,
+    "p_home_win": 0.442,
+    "home_listed": 8,
+    "away_listed": 6,
+    "home_minutes_known": 1,
+    "away_minutes_known": 0,
+    "home_coverage": 0.138,
+    "away_coverage": 0.265,
+    "home_confidence": "LOW - minutes coverage of this roster is 14%",
+    "away_confidence": "NONE - minutes unavailable for every listed player",
+    "home_not_submitted": false,
+    "away_not_submitted": false,
+    "home_weighted_share": 0.0481,
+    "away_weighted_share": 0.0,
+    "home_sensitivity": {
+     "10": 0.48,
+     "15": 0.72,
+     "20": 0.96
+    },
+    "away_sensitivity": {
+     "10": 0.0,
+     "15": 0.0,
+     "20": 0.0
+    },
+    "home_unknown_players": [
+     "Allen, Jarrett",
+     "Harden, James",
+     "Merrill, Sam",
+     "Mobley, Evan",
+     "Tomlin, Nae'Qwan",
+     "Udeh, Jr., Ernest",
+     "Watson, Peyton"
+    ],
+    "away_unknown_players": [
+     "Biberovic, Tarik",
+     "Christie, Max",
+     "de Larrea, Sergio",
+     "Johnson Jr., Morez",
+     "Lively II, Dereck",
+     "Martin, Caleb"
+    ]
+   },
+   "delta": {
+    "spread_move": -0.72,
+    "total_move": 0.14,
+    "p_home_move": -0.017,
+    "favourite_flips": false,
+    "changed": true
+   },
+   "picks": [
+    {
+     "strategy": "S1",
+     "market": "Point spread",
+     "side": "away",
+     "team": "DAL",
+     "line_display": "DAL +3.2",
+     "model_side_still_agrees": true,
+     "edge_old": -4.99,
+     "edge_new": -5.72
+    },
+    {
+     "strategy": "S3",
+     "market": "Moneyline",
+     "side": "away",
+     "team": "DAL",
+     "line_display": "DAL ML (-118 fair)",
+     "model_side_still_agrees": true,
+     "edge_old": null,
+     "edge_new": null
+    },
+    {
+     "strategy": "S5",
+     "market": "Point spread",
+     "side": "away",
+     "team": "DAL",
+     "line_display": "DAL +3.2",
+     "model_side_still_agrees": true,
+     "edge_old": -4.99,
+     "edge_new": -5.72
+    }
+   ],
+   "sources": {
+    "slate": "S8_0022600232",
+    "report_old": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+    "report_new": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+    "game_url": "https://www.nba.com/game/dal-vs-cle-0022600232",
+    "slate_page": "https://www.nba.com/games?date=2026-11-14"
+   }
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "8:00 PM ET",
+   "matchup": "DET@MIA",
+   "game_id": "0022600233",
+   "away": "DET",
+   "home": "MIA",
+   "published": {
+    "model_spread_home": -12.2,
+    "model_total": 227.2,
+    "p_home_win": 0.242,
+    "loss_home": 0.0,
+    "loss_away": 0.0,
+    "home_report_status": "NOT YET SUBMITTED",
+    "away_report_status": "7 player(s) listed",
+    "home_confidence": "NONE - no entry in this edition of the report",
+    "away_confidence": "NONE - minutes unavailable for every listed player",
+    "src": "S8_0022600233"
+   },
+   "gameday": {
+    "loss_home": 0.2,
+    "loss_away": 0.0,
+    "model_spread_home": -12.4,
+    "model_total": 227.2,
+    "p_home_win": 0.238,
+    "home_listed": 4,
+    "away_listed": 7,
+    "home_minutes_known": 1,
+    "away_minutes_known": 0,
+    "home_coverage": 0.136,
+    "away_coverage": 0.144,
+    "home_confidence": "LOW - minutes coverage of this roster is 14%",
+    "away_confidence": "NONE - minutes unavailable for every listed player",
+    "home_not_submitted": false,
+    "away_not_submitted": false,
+    "home_weighted_share": 0.0136,
+    "away_weighted_share": 0.0,
+    "home_sensitivity": {
+     "10": 0.14,
+     "15": 0.2,
+     "20": 0.27
+    },
+    "away_sensitivity": {
+     "10": 0.0,
+     "15": 0.0,
+     "20": 0.0
+    },
+    "home_unknown_players": [
+     "Goldin, Vladislav",
+     "Larsson, Pelle",
+     "Thompson, Klay"
+    ],
+    "away_unknown_players": [
+     "Duren, Jalen",
+     "Harkless, Elijah",
+     "Joe, Isaiah",
+     "Jones, Isaac",
+     "Lanier, Chaz",
+     "Okorie, Ebuka",
+     "Onyenso, Ugonna"
+    ]
+   },
+   "delta": {
+    "spread_move": -0.2,
+    "total_move": 0.04,
+    "p_home_move": -0.004,
+    "favourite_flips": false,
+    "changed": true
+   },
+   "picks": [
+    {
+     "strategy": "S5",
+     "market": "Point spread",
+     "side": "away",
+     "team": "DET",
+     "line_display": "DET -9.9",
+     "model_side_still_agrees": true,
+     "edge_old": -2.29,
+     "edge_new": -2.5
+    },
+    {
+     "strategy": "S7",
+     "market": "Player points",
+     "side": "under",
+     "team": "Giannis Antetokounmpo",
+     "line_display": "Giannis Antetokounmpo Under 27.7",
+     "model_side_still_agrees": false,
+     "edge_old": -2.0,
+     "edge_new": null
+    }
+   ],
+   "sources": {
+    "slate": "S8_0022600233",
+    "report_old": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+    "report_new": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+    "game_url": "https://www.nba.com/game/det-vs-mia-0022600233",
+    "slate_page": "https://www.nba.com/games?date=2026-11-14"
+   }
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "8:00 PM ET",
+   "matchup": "BKN@MEM",
+   "game_id": "0022600234",
+   "away": "BKN",
+   "home": "MEM",
+   "published": {
+    "model_spread_home": 5.9,
+    "model_total": 227.6,
+    "p_home_win": 0.632,
+    "loss_home": 0.0,
+    "loss_away": 0.0,
+    "home_report_status": "NOT YET SUBMITTED",
+    "away_report_status": "6 player(s) listed",
+    "home_confidence": "NONE - no entry in this edition of the report",
+    "away_confidence": "NONE - minutes unavailable for every listed player",
+    "src": "S8_0022600234"
+   },
+   "gameday": {
+    "loss_home": 0.0,
+    "loss_away": 0.0,
+    "model_spread_home": 5.9,
+    "model_total": 227.6,
+    "p_home_win": 0.633,
+    "home_listed": 0,
+    "away_listed": 6,
+    "home_minutes_known": 0,
+    "away_minutes_known": 0,
+    "home_coverage": 0.128,
+    "away_coverage": 0.274,
+    "home_confidence": "NONE - no entry in this edition of the report",
+    "away_confidence": "NONE - minutes unavailable for every listed player",
+    "home_not_submitted": true,
+    "away_not_submitted": false,
+    "home_weighted_share": 0.0,
+    "away_weighted_share": 0.0,
+    "home_sensitivity": {
+     "10": 0.0,
+     "15": 0.0,
+     "20": 0.0
+    },
+    "away_sensitivity": {
+     "10": 0.0,
+     "15": 0.0,
+     "20": 0.0
+    },
+    "home_unknown_players": [],
+    "away_unknown_players": [
+     "Bilodeau, Tyler",
+     "Brown Jr., Mikel",
+     "Jefferson, Joshua",
+     "Nelson, Grant",
+     "Saraf, Ben",
+     "Traore, Nolan"
+    ]
+   },
+   "delta": {
+    "spread_move": 0.0,
+    "total_move": 0.0,
+    "p_home_move": 0.001,
+    "favourite_flips": false,
+    "changed": false
+   },
+   "picks": [
+    {
+     "strategy": "S1",
+     "market": "Point spread",
+     "side": "away",
+     "team": "BKN",
+     "line_display": "BKN +12.9",
+     "model_side_still_agrees": false,
+     "edge_old": -7.03,
+     "edge_new": -7.0
+    },
+    {
+     "strategy": "S3",
+     "market": "Moneyline",
+     "side": "away",
+     "team": "BKN",
+     "line_display": "BKN ML (+172 fair)",
+     "model_side_still_agrees": false,
+     "edge_old": null,
+     "edge_new": null
+    },
+    {
+     "strategy": "S5",
+     "market": "Point spread",
+     "side": "away",
+     "team": "BKN",
+     "line_display": "BKN +12.9",
+     "model_side_still_agrees": false,
+     "edge_old": -7.03,
+     "edge_new": -7.0
+    }
+   ],
+   "sources": {
+    "slate": "S8_0022600234",
+    "report_old": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+    "report_new": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+    "game_url": "https://www.nba.com/game/bkn-vs-mem-0022600234",
+    "slate_page": "https://www.nba.com/games?date=2026-11-14"
+   }
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "8:00 PM ET",
+   "matchup": "CHI@MIN",
+   "game_id": "0022600235",
+   "away": "CHI",
+   "home": "MIN",
+   "published": {
+    "model_spread_home": 30.6,
+    "model_total": 235.0,
+    "p_home_win": 0.96,
+    "loss_home": 2.11,
+    "loss_away": 0.0,
+    "home_report_status": "3 player(s) listed",
+    "away_report_status": "NOT YET SUBMITTED",
+    "home_confidence": "LOW - minutes coverage of this roster is 26%",
+    "away_confidence": "NONE - no entry in this edition of the report",
+    "src": "S8_0022600235"
+   },
+   "gameday": {
+    "loss_home": 2.11,
+    "loss_away": 2.55,
+    "model_spread_home": 33.2,
+    "model_total": 235.5,
+    "p_home_win": 0.972,
+    "home_listed": 3,
+    "away_listed": 7,
+    "home_minutes_known": 1,
+    "away_minutes_known": 2,
+    "home_coverage": 0.255,
+    "away_coverage": 0.248,
+    "home_confidence": "LOW - minutes coverage of this roster is 26%",
+    "away_confidence": "LOW - minutes coverage of this roster is 25%",
+    "home_not_submitted": false,
+    "away_not_submitted": false,
+    "home_weighted_share": 0.1404,
+    "away_weighted_share": 0.1702,
+    "home_sensitivity": {
+     "10": 1.4,
+     "15": 2.11,
+     "20": 2.81
+    },
+    "away_sensitivity": {
+     "10": 1.7,
+     "15": 2.55,
+     "20": 3.4
+    },
+    "home_unknown_players": [
+     "Beringer, Joan",
+     "DiVincenzo, Donte"
+    ],
+    "away_unknown_players": [
+     "Awaka, Tobe",
+     "Claxton, Nic",
+     "Sellers, Jaylin",
+     "Smith, Jalen",
+     "Swain, Dailyn"
+    ]
+   },
+   "delta": {
+    "spread_move": 2.6,
+    "total_move": 0.52,
+    "p_home_move": 0.012,
+    "favourite_flips": false,
+    "changed": true
+   },
+   "picks": [
+    {
+     "strategy": "S7",
+     "market": "Player points",
+     "side": "over",
+     "team": "LaMelo Ball",
+     "line_display": "LaMelo Ball Over 18.6",
+     "model_side_still_agrees": false,
+     "edge_old": 3.0,
+     "edge_new": null
+    },
+    {
+     "strategy": "S8",
+     "market": "Player PRA",
+     "side": "over",
+     "team": "LaMelo Ball",
+     "line_display": "LaMelo Ball Over 28.2",
+     "model_side_still_agrees": false,
+     "edge_old": 4.3,
+     "edge_new": null
+    }
+   ],
+   "sources": {
+    "slate": "S8_0022600235",
+    "report_old": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf",
+    "report_new": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+    "game_url": "https://www.nba.com/game/chi-vs-min-0022600235",
+    "slate_page": "https://www.nba.com/games?date=2026-11-14"
+   }
+  }
+ ],
+ "later_dates": [
+  {
+   "date": "2026-11-15",
+   "matchup": "IND@PHI",
+   "game_id": "0022600236",
+   "in_gameday_edition": true,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 18,
+   "verdict": "LISTED, ALL UNFILED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition"
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "LAL@PHX",
+   "game_id": "0022600237",
+   "in_gameday_edition": true,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 18,
+   "verdict": "LISTED, ALL UNFILED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition"
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "CHA@LAC",
+   "game_id": "0022600238",
+   "in_gameday_edition": true,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 18,
+   "verdict": "LISTED, ALL UNFILED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition"
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "SAS@UTA",
+   "game_id": "0022600239",
+   "in_gameday_edition": true,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 18,
+   "verdict": "LISTED, ALL UNFILED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition"
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "DAL@BOS",
+   "game_id": "0022600240",
+   "in_gameday_edition": true,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 18,
+   "verdict": "LISTED, ALL UNFILED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition"
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "NYK@TOR",
+   "game_id": "0022600241",
+   "in_gameday_edition": true,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 18,
+   "verdict": "LISTED, ALL UNFILED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition"
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "HOU@WAS",
+   "game_id": "0022600242",
+   "in_gameday_edition": true,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 18,
+   "verdict": "LISTED, ALL UNFILED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition"
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "ATL@MIL",
+   "game_id": "0022600243",
+   "in_gameday_edition": true,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 18,
+   "verdict": "LISTED, ALL UNFILED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition"
+  },
+  {
+   "date": "2026-11-15",
+   "matchup": "OKC@SAC",
+   "game_id": "0022600244",
+   "in_gameday_edition": true,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 18,
+   "verdict": "LISTED, ALL UNFILED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "note": "every club in this game is listed NOT YET SUBMITTED at the 01:30 PM ET edition"
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "ORL@BOS",
+   "game_id": "0022600245",
+   "in_gameday_edition": false,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 0,
+   "verdict": "NOT COVERED BY THE REPORT",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "note": "the report covers 11/14 and 11/15 only; a game on this date has no line in it"
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "CHI@CLE",
+   "game_id": "0022600246",
+   "in_gameday_edition": false,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 0,
+   "verdict": "NOT COVERED BY THE REPORT",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "note": "the report covers 11/14 and 11/15 only; a game on this date has no line in it"
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "MEM@WAS",
+   "game_id": "0022600247",
+   "in_gameday_edition": false,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 0,
+   "verdict": "NOT COVERED BY THE REPORT",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "note": "the report covers 11/14 and 11/15 only; a game on this date has no line in it"
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "PHI@BKN",
+   "game_id": "0022600248",
+   "in_gameday_edition": false,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 0,
+   "verdict": "NOT COVERED BY THE REPORT",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "note": "the report covers 11/14 and 11/15 only; a game on this date has no line in it"
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "HOU@MIA",
+   "game_id": "0022600249",
+   "in_gameday_edition": false,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 0,
+   "verdict": "NOT COVERED BY THE REPORT",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "note": "the report covers 11/14 and 11/15 only; a game on this date has no line in it"
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "POR@MIN",
+   "game_id": "0022600250",
+   "in_gameday_edition": false,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 0,
+   "verdict": "NOT COVERED BY THE REPORT",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "note": "the report covers 11/14 and 11/15 only; a game on this date has no line in it"
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "GSW@NOP",
+   "game_id": "0022600251",
+   "in_gameday_edition": false,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 0,
+   "verdict": "NOT COVERED BY THE REPORT",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "note": "the report covers 11/14 and 11/15 only; a game on this date has no line in it"
+  },
+  {
+   "date": "2026-11-16",
+   "matchup": "PHX@DEN",
+   "game_id": "0022600252",
+   "in_gameday_edition": false,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 0,
+   "verdict": "NOT COVERED BY THE REPORT",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "note": "the report covers 11/14 and 11/15 only; a game on this date has no line in it"
+  },
+  {
+   "date": "2026-11-17",
+   "matchup": "UTA@LAC",
+   "game_id": "0022600257",
+   "in_gameday_edition": false,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 0,
+   "verdict": "NOT COVERED BY THE REPORT",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "note": "the report covers 11/14 and 11/15 only; a game on this date has no line in it"
+  },
+  {
+   "date": "2026-11-17",
+   "matchup": "CHA@LAL",
+   "game_id": "0022600256",
+   "in_gameday_edition": false,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 0,
+   "verdict": "NOT COVERED BY THE REPORT",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "note": "the report covers 11/14 and 11/15 only; a game on this date has no line in it"
+  },
+  {
+   "date": "2026-11-17",
+   "matchup": "NYK@TOR",
+   "game_id": "0022600253",
+   "in_gameday_edition": false,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 0,
+   "verdict": "NOT COVERED BY THE REPORT",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "note": "the report covers 11/14 and 11/15 only; a game on this date has no line in it"
+  },
+  {
+   "date": "2026-11-17",
+   "matchup": "POR@MIN",
+   "game_id": "0022600254",
+   "in_gameday_edition": false,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 0,
+   "verdict": "NOT COVERED BY THE REPORT",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "note": "the report covers 11/14 and 11/15 only; a game on this date has no line in it"
+  },
+  {
+   "date": "2026-11-17",
+   "matchup": "DET@SAS",
+   "game_id": "0022600255",
+   "in_gameday_edition": false,
+   "player_rows_for_this_date": 0,
+   "teams_not_yet_submitted": 0,
+   "verdict": "NOT COVERED BY THE REPORT",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "note": "the report covers 11/14 and 11/15 only; a game on this date has no line in it"
+  }
+ ],
+ "attribution_cross_check": [
+  {
+   "player": "Harden, James",
+   "team_in_pdf_block": "CLE",
+   "team_in_minutes_table": null,
+   "verdict": "NO-CROSS-CHECK",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Merrill, Sam",
+   "team_in_pdf_block": "CLE",
+   "team_in_minutes_table": null,
+   "verdict": "NO-CROSS-CHECK",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Mitchell, Donovan",
+   "team_in_pdf_block": "CLE",
+   "team_in_minutes_table": "CLE",
+   "verdict": "AGREE",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Mobley, Evan",
+   "team_in_pdf_block": "CLE",
+   "team_in_minutes_table": null,
+   "verdict": "NO-CROSS-CHECK",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Tomlin, Nae'Qwan",
+   "team_in_pdf_block": "CLE",
+   "team_in_minutes_table": null,
+   "verdict": "NO-CROSS-CHECK",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Udeh, Jr., Ernest",
+   "team_in_pdf_block": "CLE",
+   "team_in_minutes_table": null,
+   "verdict": "NO-CROSS-CHECK",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Watson, Peyton",
+   "team_in_pdf_block": "CLE",
+   "team_in_minutes_table": null,
+   "verdict": "NO-CROSS-CHECK",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Traore, Nolan",
+   "team_in_pdf_block": "BKN",
+   "team_in_minutes_table": null,
+   "verdict": "NO-CROSS-CHECK",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Claxton, Nic",
+   "team_in_pdf_block": "CHI",
+   "team_in_minutes_table": null,
+   "verdict": "NO-CROSS-CHECK",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Powell, Norman",
+   "team_in_pdf_block": "CHI",
+   "team_in_minutes_table": "CHI",
+   "verdict": "AGREE",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Sellers, Jaylin",
+   "team_in_pdf_block": "CHI",
+   "team_in_minutes_table": null,
+   "verdict": "NO-CROSS-CHECK",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Smith, Jalen",
+   "team_in_pdf_block": "CHI",
+   "team_in_minutes_table": null,
+   "verdict": "NO-CROSS-CHECK",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Swain, Dailyn",
+   "team_in_pdf_block": "CHI",
+   "team_in_minutes_table": null,
+   "verdict": "NO-CROSS-CHECK",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Wilson, Caleb",
+   "team_in_pdf_block": "CHI",
+   "team_in_minutes_table": "CHI",
+   "verdict": "AGREE",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Antetokounmpo, Giannis",
+   "team_in_pdf_block": "MIA",
+   "team_in_minutes_table": "MIA",
+   "verdict": "AGREE",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Goldin, Vladislav",
+   "team_in_pdf_block": "MIA",
+   "team_in_minutes_table": null,
+   "verdict": "NO-CROSS-CHECK",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Larsson, Pelle",
+   "team_in_pdf_block": "MIA",
+   "team_in_minutes_table": null,
+   "verdict": "NO-CROSS-CHECK",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "player": "Thompson, Klay",
+   "team_in_pdf_block": "MIA",
+   "team_in_minutes_table": null,
+   "verdict": "NO-CROSS-CHECK",
+   "source_url_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+   "source_url_table": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season"
+  }
+ ]
+}

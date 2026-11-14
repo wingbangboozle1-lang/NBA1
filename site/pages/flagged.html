@@ -32,6 +32,7 @@
 <a href="props.html">Player Props</a>
 <a href="prop-variance.html">Prop Variance &amp; Rotation</a>
 <a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameday.html">Game-Day Injury Read</a>
 <a href="gameflow.html">Game Flow</a>
 </div>
 <div class="nav-group"><h3>EVIDENCE</h3>
@@ -492,6 +493,60 @@
 <td>Prop Variance page; the strict source-link count</td>
 <td>Reviewer: if per-row official links are wanted on aggregate tables, the fix is to explode those two tables to one row per player-game (40 rows each), which the derived file already supports.</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F47</td>
+<td>High</td>
+<td><b>The availability layer cannot see most of the game-day report: 45 of the 24 newly filed player rows contribute 0.00 net-rating points</b></td>
+<td>Between the 04:15 AM ET edition the published lines were built from and the 01:30 PM ET game-day edition, four clubs filed (New Orleans, Cleveland, Chicago, Miami) and 24 player rows appeared. Only the players who are inside the captured top-50 minutes table can move the model, so 45 of those rows contribute exactly 0.00 and 2 of the 5 games tipping tonight have a model line that does not move at all. New Orleans is the clearest case: the Pelicans ruled out Trey Murphy III and Dejounte Murray on the same report that gave the model five names it cannot price, and DEN@NOP is unchanged at -9.1.</td>
+<td>Injuries &amp; Rotation page; every originated spread and total for 2026-11-14; the prop teammate-availability factor</td>
+<td>Reviewer decision (SG20): either complete the minutes source so every listed player has a minutes value, or stop rendering 0.00 for 'unknown' and render a dash instead. The second option is one line of code and is the honest default until the first is done.</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F48</td>
+<td>Low</td>
+<td><b>Memphis had not filed at the newest edition - but its deadline had not passed</b></td>
+<td>At the 01:30 PM ET edition the report prints NOT YET SUBMITTED for the Memphis Grizzlies. The league's game-day window is 11 a.m. to 1 p.m. LOCAL time, and Memphis is on Central time, so for an 8:00 PM ET tip the window closed at 2:00 PM ET, thirty-two minutes after this capture. The site must not render that row as a missed filing.</td>
+<td>Game-Day Read page; the BKN@MEM row</td>
+<td>No action. Recorded so that a reader who compares capture time with deadline time does not conclude the source was ignored.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F49</td>
+<td>Medium</td>
+<td><b>The official game card's 'Season Leaders' widget is not injury-aware</b></td>
+<td>The 2026-11-16 card for POR@MIN displays Anthony Edwards (33.3 PPG) as Minnesota's leader while the 2026-11-14 game-day report rules him Out with a right knee arthroscopy. The 11/14 card for CHI@MIN shows the same widget showing Caleb Wilson, also ruled out. The widget is a season-average read-out and nothing in it reflects availability.</td>
+<td>Any prop or leader table that reads the card's leader line; Player Props page</td>
+<td>SG22: intersect the leader line with the current report before it is displayed, and mark any leader who is ruled out. The card value itself stays exactly as published, beside the flag.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F50</td>
+<td>Medium</td>
+<td><b>The injury PDF's table re-flows, so 18 of the game-day rows carry their club by block position rather than by a printed team cell</b></td>
+<td>Pages 2 to 4 of the report repeat the table without the Game Date / Game Time / Matchup / Team columns. Club for those rows was taken from the block label that opens the block and from the league's alphabetical-within-club ordering, never from the player's name. 4 of the rows could then be cross-checked against the official minutes table's club column and all 4 agree; 14 could not be cross-checked because the player is outside that table and no second official source in this repository prints a club for him.</td>
+<td>Every row of the game-day capture, and by extension the edition delta</td>
+<td>A reviewer who wants these rows confirmed should read them against a team roster page (30 official URLs, one per club). The transcription records which rows are affected: attribution == 'block' in data/captures/2026-11-14-pm/injury_2026-11-14_1330PM.json.</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F51</td>
+<td>Medium</td>
+<td><b>Two injury editions are live on the site at once, deliberately</b></td>
+<td>The Injuries &amp; Rotation page still shows the 04:15 AM ET edition, because that is the edition every published line and pick was built from; the Game-Day Read page shows the 01:30 PM ET edition and what it would do to those lines. Rolling the older page forward would make the site look current and make the graded window a lie, so it was not done.</td>
+<td>Injuries &amp; Rotation page header; Game-Day Read page</td>
+<td>Keep. If the reviewer prefers one edition per day, the change belongs in the capture step (SG19), not in the published table.</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F52</td>
+<td>Medium</td>
+<td><b>The report never covers the third day of the horizon, so 13 of 27 games have no availability input at all</b></td>
+<td>Every edition read today - 04:15 AM ET and 01:30 PM ET - lists games on 11/14 and 11/15 and nothing for 11/16 or 11/17. That is the league's own cadence (a club files the evening before, or the day of for the second night of a back-to-back), not a capture failure. It means the three-day horizon the brief asks for is an injury-informed horizon for two of its four dates and a ratings-only horizon for the other two.</td>
+<td>Lines &amp; Picks page: the 2026-11-16 and 2026-11-17 rows</td>
+<td>Label the T+2 and T+3 rows as 'no availability input exists' wherever an availability column is shown, or shorten the pickable window to T+1 and publish T+2/T+3 as schedule only. Reviewer's call (SG19, option C).</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">
