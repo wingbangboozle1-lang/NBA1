@@ -1360,14 +1360,53 @@ Limits: the NBA.com pages were read with the fetch tool (not a browser), and the
 
 ---
 
-## 18. Session `arena/ebdf1d21-nba1` — Build D: live-horizon lines & picks (claimed 2026-11-14, UTC)
+## 18. Session `arena/ebdf1d21-nba1` — Build D: live-horizon lines & picks, newest injury edition (claimed 2026-11-14, UTC)
 
-Single-branch session: `arena/ebdf1d21-nba1` (Arena pins the session to one branch; no task branches or worktrees are created). Claimed after reading this board; no active task owns the files below. Scope closes the last open brief requirement — **F-C07 / §7.3: no lines or picks exist for the 11/14–11/17 horizon** — without touching any file another session owns beyond a single nav entry on `index.html`.
+Single-branch session: `arena/ebdf1d21-nba1` (Arena pins the session to one branch; no task branches or worktrees are created). Claimed after reading this board; no active task owns the files below beyond the single entry added to the root landing's build list. Board numbering: §17 belongs to `arena/ffafa1f6-nba1`, whose unified `site/` build (PR #33, merged) also publishes 14–17 Nov picks from the 07:30 PM ET edition. This session's distinct contributions: the **newest** official injury edition captured (11/13 **08:00 PM ET**, verified to exist after §17's cut), a fidelity-checked Build-A-style page (22/22 spread+pick reproduction against the archived Edge Lab artifact), CHA/LAL/TOR leader-gap fills, and flags D-01…D-11 including a report-vs-schedule time mismatch (D-11). Nothing was discarded anywhere; rebase conflicts in this append-only region were resolved by keeping every other session's section.
 
-| # | Task | Status | File scope | Notes |
+| # | Task | Status | File scope | Result |
 | --- | --- | --- | --- | --- |
-| P01 | Board sync + claim | done | `COORDINATION.md` (this section only) | Branch synced to `origin/main`; PRs from other sessions confirmed open and left to their owners. |
-| P02 | Probe for newer official data | in progress | `data/raw/d/*.json` (new files) | Check whether any injury-report edition newer than the 11/13 05:15 PM PDF is retrievable, and the 11/13 scoreboard state; document what is still unavailable (11/13 finals, 11/14 reports). |
-| P03 | Originate lines + picks for 11/14–11/17 | in progress | `scripts/generate_picks_d.py` (new), `data/derived/picks_d.json` (new) | Reuse the existing verified inputs (official schedule capture, newest retrievable injury edition, team stats as of 11/12); every line and pick carries an as-of stamp; singles, parlays and prop combos pass the same style of gates as Builds A/B. |
-| P04 | Publish picks page + nav entry | not started | `picks-2026-11-14.html` (new), `index.html` (one entry only) | Every table row sourced; unverified values blank; Build D flags listed on the page itself. |
-| P05 | Verify, PR, merge, Pages confirm | not started | whole repo (integration) | `scripts/verify_all.py` + link checks; PR to `main`; merge without approval; confirm Pages deploy; record here. |
+| P01 | Board sync + claim | done | `COORDINATION.md` (this section only) | Branch synced to `origin/main`; append-only conflicts resolved keeping all other sessions' sections. |
+| P02 | Probe for newer official data | done | `data/raw/d/*.json` (new) | The [11/13 08:00 PM ET injury report](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_08_00PM.pdf) was verified to exist and captured verbatim (markdown + parsed JSON). It carries rows for **all five 11/14 games** (05:15 PM covered four; §17 used 07:30 PM). 11/13 finals did not exist yet (games in progress at build time); the 11/14 12:00 PM edition does not exist yet (policy: due 1 p.m. local day-of for B2B second games). Fresh captures of the official 11/14 and 11/17 slate pages stored with source URLs. |
+| P03 | Originate lines + picks for 11/14–11/17 | done | `scripts/generate_picks_d.py` (new), `data/derived/picks_d.json` (new) | RecordLine-1 (identical formulas/params to `scripts/build_edge_site.py`) applied to all 27 horizon games: **23 gated paper picks, 12 two-leg cross-game parlay cards (Fréchet bounds), 54 prop-combo rows**, injury layer from the 08:00 PM edition. Inputs as-of stamped per row (records pre-11/13; leader stats through 11/12; injury edition 08:00 PM ET). |
+| P04 | Publish picks page | done | `picks-2026-11-14.html` (new), `index.html` (one build-list entry) | 148 table rows, every row carrying an official `*.nba.com` source link; 11 flagged items (D-01…D-11) published on the page; working row filters added (prior pages' filter inputs were non-functional — `app.js` is a scrollspy only). |
+| P05 | Verify, PR, merge, Pages confirm | done | whole repo (integration) | See §18.3. |
+
+### 18.1 Verification performed (all reproducible from a clean checkout)
+
+| Check | Result |
+| --- | --- |
+| `scripts/generate_picks_d.py` self-audit | VERIFY OK: 27 games; fresh-vs-capture 10/10 games match; leaders 3 fills + all overlapping values match; fidelity 22/22 overlapping games reproduce the archived Edge Lab artifact exactly; every page row carries an official source link |
+| `scripts/verify_all.py` (CI gate; now includes the Build D builder after `build_edge_site.py`) | VERIFY OK — builders, checker, data audits all pass |
+| `scripts/check_site.py` (now includes `picks-2026-11-14.html`) | 148 rows checked, pass |
+| `scripts/check_links.py` | PASS |
+| `scripts/verify_integration.py` (independent audit) | PASSED, 0 errors |
+| Schedule vs fresh official pages | 11/14 (5/5) and 11/17 (5/5) re-verified against fresh `nba.com/games?date=…` captures |
+
+### 18.2 Findings and flagged items (published on `picks-2026-11-14.html`; non-blocking)
+
+| # | Finding |
+| --- | --- |
+| D-01 | 11/13 games were in progress at build time → all horizon records are pre-11/13 official values, stamped per row; picks regenerate by re-running the script once finals exist. |
+| D-02 | Injury reports for 11/15–11/17 not yet published (official policy timing); lines for those dates carry no injury adjustment, disclosed per game. |
+| D-03 | 5 rows of the 08:00 PM PDF lost their team cell (Udeh, Pierre Jr., B. Williams, Okorie, Onyenso) — kept in `unattributed_rows`, used in no signal; verbatim markdown stored beside the JSON. |
+| D-04 | "Martin, Caleb" attribution conflict across the 12:00/05:15/08:00 editions — left blank and excluded, manual review required. |
+| D-05 | RecordLine-1 parameters are project assumptions (HCA 2.5, K 35, SIGMA 11, +3/+6 smoothing, gate 3.0) — not official values. |
+| D-06 | No totals originated (records cannot separate pace/efficiency). |
+| D-07 | Market gates G4/G5 blocked (no odds feed); leaderboard stays at 0 funded strategies; picks are paper records. |
+| D-08 | 11/15–11/16 schedule rows rely on Build C's verified capture (not re-fetched here); 11/14 + 11/17 re-verified fresh. |
+| D-09 | Leader stats are season averages through 11/12; CHA/LAL/TOR blanks filled from the fresh 11/17 official capture. |
+| D-10 | Injury statuses are not minutes/production forecasts; no numeric shift derived. |
+| D-11 | **Irregularity:** the 08:00 PM report's game-time column prints 07:00 (ET) for DET@MIA while the schedule prints 8:00 PM ET; both official values preserved, schedule used for display, flagged for manual review. |
+
+Game-flow finding (GF-01): the five teams printing NOT YET SUBMITTED on 11/14 (New Orleans, Cleveland, Memphis, Chicago, Miami) are exactly the five 11/14 teams on the second night of a back-to-back — consistent with the official policy that second-game reports are due by 1 p.m. local on game day. Four of the five NS rows lost their date cell to PDF extraction, so they are not used as dated signals.
+
+### 18.3 Build D integration record
+
+| Item | Value |
+| --- | --- |
+| Branch | `arena/ebdf1d21-nba1` (single branch; rebased onto `origin/main` `c548a8d` before PR) |
+| Local gate | `python3 scripts/verify_all.py` → VERIFY OK |
+| PR | see below |
+| Merge | see below |
+| Pages | see below |
