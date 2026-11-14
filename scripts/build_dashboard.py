@@ -1072,6 +1072,41 @@ def main():
                      srclink(sources, s.get("source"))])
     b.append(table(["ID", "Category", "Title", "Problem", "Options", "Recommendation",
                     "Decision needed", "Source"], rows))
+
+    # ---- the decision index: every open decision in one place ----
+    b.append(h2("Decision index",
+                "Everything the site is currently waiting on a reviewer to choose, in one place, with the "
+                "consequence of not choosing. Sorted so the items that block the most come first."))
+    # Severity is derived from how much the item blocks, not typed per row. The rule is
+    # stated so the reader can disagree with it.
+    BLOCKERS = {
+        "SG15": ("Blocks publishing", "Until one line set is chosen, every game on the site has two different "
+                 "numbers and no pick can be called the site's pick (F26)."),
+        "SG7": ("Blocks staking", "The gates are computed but nothing acts on them, so a research play and a "
+                "fundable play look alike on the Picks page."),
+        "SG6": ("Blocks reading", "The word 'edge' means model-vs-naive-model here and market edge elsewhere; a "
+                "reader can act on the wrong meaning."),
+        "SG2": ("Blocks any real EV claim", "No price is logged, so no expected value against a book can be "
+                "stated at all (F3)."),
+        "SG3": ("Blocks injury impact", "Minutes are known for 50 of 465 players, so the impact column is a floor "
+                "and is 0.00 for several teams (F2)."),
+        "SG17": ("Blocks repeatability", "A decision taken here is not recorded anywhere a later session reads."),
+        "SG18": ("Blocks discovery", "Gaps get closed when someone happens to notice them."),
+    }
+    drows = []
+    for sid, (blocks, consequence) in BLOCKERS.items():
+        item = next((x for x in suggestions["items"] if x["id"] == sid), None)
+        if not item:
+            continue
+        drows.append([esc(sid), '<b>%s</b>' % esc(item["title"]), esc(item.get("category")),
+                      esc(blocks), esc(item.get("decision_needed")), esc(consequence),
+                      esc(item.get("recommendation")), srclink(sources, item.get("source"))])
+    b.append(table(["ID", "Suggestion", "Category", "What it blocks", "The decision", "Cost of not deciding",
+                    "Recommendation on the table", "Source"], drows,
+                   note="This is not the whole suggestion list: it is the subset that is waiting on a decision "
+                        "rather than on more data. Items that need data first are on the Open Questions page. "
+                        "Nothing in this table has been implemented; the reviewer chooses, and SG17 is the "
+                        "mechanism for recording the choice."))
     built["suggestions.html"] = page("Suggestions",
                                      "Improvements to the site and to the decision-making process, written as "
                                      "options with effort, risk and what each unlocks.", "\n".join(b))

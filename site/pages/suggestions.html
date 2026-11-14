@@ -238,7 +238,113 @@
 <td>Reviewer: approve adding the checker to the gate.</td>
 <td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>
 </tr>
+<tr>
+<td>SG17</td>
+<td>Process</td>
+<td><b>Add a single decision log so a choice, once made, cannot be re-litigated by accident</b></td>
+<td>Nothing in the repository records which suggestions were actually chosen, by whom, or when. A reviewer can pick a path on this page, but the next session has no way to know a decision was taken, so the same question gets re-opened and sometimes re-answered differently. Two builds already exist for exactly this reason.</td>
+<td>- A DECISIONS.md file: one row per decision (id, date, decision, evidence link, owner), updated when a suggestion is accepted or rejected <span class='fine'>(effort: Low - one file and one paragraph in COORDINATION.md; risk: Low; unlocks: A durable trail; a new session can read what was decided instead of guessing)</span><br>- Fold the decision state into suggestions.json as a status field and render it on this page <span class='fine'>(effort: Low-medium - one field and one column; risk: Low; unlocks: The decision shows on the page the reviewer reads)</span><br>- Keep using COORDINATION.md only <span class='fine'>(effort: None; risk: Medium - the task board is long and is organised by session, not by decision; unlocks: Nothing new)</span></td>
+<td>Option 2, plus a one-line pointer at the top of COORDINATION.md. The page a reviewer actually reads is the right place for the state of a decision.</td>
+<td>Whether decisions are tracked on the site, in the repo, or both; and who has authority to mark one accepted.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>SG18</td>
+<td>Process</td>
+<td><b>Discover missing information systematically instead of discovering it by accident</b></td>
+<td>Every gap closed so far was found by someone noticing it, not by a method that looks for gaps. The repository has 37 flags and 18 open questions, and nothing that says which ones are cheap to close, which are expensive, or which are blocking a decision. Missing information is therefore discovered at the speed of luck.</td>
+<td>- A gap-closure triage: for every open question and flag, record cost to close (minutes/hours), what it blocks, and whether an official source exists at all. Sort by (blocks a decision) / (cost). <span class='fine'>(effort: Low - a one-off pass over the existing 18 questions and 37 flags; risk: Low; unlocks: A ranked list of what to find next; the top item is almost certainly the injury editions for 11/15-11/17)</span><br>- A source-reachability probe run on a schedule: for every official URL the site relies on, record whether this environment can read it, when it was last read, and what it returned <span class='fine'>(effort: Medium - scripts/probe_official.py already exists and records reachability; it needs to be surfaced per source; risk: Low; unlocks: Turns 'the fetch tool returned AccessDenied' into a dated fact per source)</span><br>- A coverage table for every official table the model depends on: how many rows are published, how many were captured, and which players or teams are missing <span class='fine'>(effort: Medium; risk: Low; unlocks: Makes the 50-of-465 player-minutes gap and similar ones visible rather than buried in a flag)</span><br>- Ask the reviewer directly what a decision would need <span class='fine'>(effort: None; risk: Low; unlocks: The one gap no scrape can find)</span></td>
+<td>Options 1 and 3 first, because both are cheap and both turn a known unknown into a ranked, dated item. Option 2 makes the refresh honest over time. Option 4 should run alongside every time, since a reviewer's real question is the one input the data cannot supply.</td>
+<td>Whether an explicit triage pass is worth a session, and which of the three mechanisms to add first.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
 </tbody></table></div>
+<h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>ID</th>
+<th>Suggestion</th>
+<th>Category</th>
+<th>What it blocks</th>
+<th>The decision</th>
+<th>Cost of not deciding</th>
+<th>Recommendation on the table</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>SG15</td>
+<td><b>Publish one line set, one ratings window, one sign convention</b></td>
+<td>Data and model</td>
+<td>Blocks publishing</td>
+<td>Reviewer: which line set is the published horizon. No pick should be published until this is decided.</td>
+<td>Until one line set is chosen, every game on the site has two different numbers and no pick can be called the site's pick (F26).</td>
+<td>Option 1. The newer ratings use every official game through 11/12. Adopt the sign convention of Build A (home spread = minus the projected home margin) on every page.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>SG7</td>
+<td><b>Make the gates do something</b></td>
+<td>Model</td>
+<td>Blocks staking</td>
+<td>Unit sizes per tier, and whether paper-only plays are visually separated.</td>
+<td>The gates are computed but nothing acts on them, so a research play and a fundable play look alike on the Picks page.</td>
+<td>Option 1. Tier-driven staking keeps the information visible while making the status unambiguous.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">S2</a></td>
+</tr>
+<tr>
+<td>SG6</td>
+<td><b>Separate the two meanings of 'edge' everywhere in the UI</b></td>
+<td>Site / UI</td>
+<td>Blocks reading</td>
+<td>Wording only.</td>
+<td>The word 'edge' means model-vs-naive-model here and market edge elsewhere; a reader can act on the wrong meaning.</td>
+<td>Option 1, and reserve the word 'edge' for a market comparison once SG2 lands.</td>
+<td class="src"><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">S15</a></td>
+</tr>
+<tr>
+<td>SG2</td>
+<td><b>Log real closing prices</b></td>
+<td>Data</td>
+<td>Blocks any real EV claim</td>
+<td>Whether to introduce a non-NBA data source at all, and which one.</td>
+<td>No price is logged, so no expected value against a book can be stated at all (F3).</td>
+<td>Option 1 if a licensed feed is available, option 2 as a stopgap. Until either happens, the site should keep saying 'model-vs-reference units' rather than 'profit'.</td>
+<td class="src"><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">S15</a></td>
+</tr>
+<tr>
+<td>SG3</td>
+<td><b>Complete the player-minutes table</b></td>
+<td>Data</td>
+<td>Blocks injury impact</td>
+<td>Which capture path to fund.</td>
+<td>Minutes are known for 50 of 465 players, so the impact column is a floor and is 0.00 for several teams (F2).</td>
+<td>Option 1 or 2. If neither is taken, the Injuries page must keep the coverage column and confidence label visible so a 0.00 is never read as healthy.</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">S7</a></td>
+</tr>
+<tr>
+<td>SG17</td>
+<td><b>Add a single decision log so a choice, once made, cannot be re-litigated by accident</b></td>
+<td>Process</td>
+<td>Blocks repeatability</td>
+<td>Whether decisions are tracked on the site, in the repo, or both; and who has authority to mark one accepted.</td>
+<td>A decision taken here is not recorded anywhere a later session reads.</td>
+<td>Option 2, plus a one-line pointer at the top of COORDINATION.md. The page a reviewer actually reads is the right place for the state of a decision.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>SG18</td>
+<td><b>Discover missing information systematically instead of discovering it by accident</b></td>
+<td>Process</td>
+<td>Blocks discovery</td>
+<td>Whether an explicit triage pass is worth a session, and which of the three mechanisms to add first.</td>
+<td>Gaps get closed when someone happens to notice them.</td>
+<td>Options 1 and 3 first, because both are cheap and both turn a known unknown into a ranked, dated item. Option 2 makes the refresh honest over time. Option 4 should run alongside every time, since a reviewer's real question is the one input the data cannot supply.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">This is not the whole suggestion list: it is the subset that is waiting on a decision rather than on more data. Items that need data first are on the Open Questions page. Nothing in this table has been implemented; the reviewer chooses, and SG17 is the mechanism for recording the choice.</p>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
       signal is skill or luck. Nothing on this site is a betting recommendation, and no
