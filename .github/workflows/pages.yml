@@ -24,7 +24,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Validate site links and source coverage (build A)
-        continue-on-error: true
         run: python3 scripts/check_site.py
 
       - name: Validate build B site data

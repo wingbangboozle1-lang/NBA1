@@ -344,4 +344,107 @@ pass on the shared data, because the other tasks on the board were `done` or `ne
 | Pages after #24 | Pages API `built` on `295d238`, `pages-build-deployment` success. No `Publish static site` push run appeared for `295d238`; a manual `workflow_dispatch` was refused (HTTP 403). Live `review.html` shows the corrected text. Flagged for the integration session to confirm. |
 | Open after merge | V-01…V-07 on `review.html` (non-blocking). PRs #11 and #14 untouched. Team W-L records and schedule chunks 3–8 not re-verified. |
 
----\n\n## 11. Session `arena/2509073f-nba1` (current branch, claimed 2026-11-14, UTC)\n\nBranch: `arena/2509073f-nba1`, branched from `main` at `9ccccb2` (Merge PR #25).\nScope: line-by-line repo review; official-source verification of the schedule data against NBA.com; horizon documentation for today + 3 days (2026-11-14 .. 2026-11-17); build verification; integration PR → main; Pages deploy record.\n\n| # | Task | Status | File scope | Notes |\n| --- | --- | --- | --- | --- |\n| W01 | COORDINATION.md claim + session section | in progress | `COORDINATION.md` (§11 only) | Claim pushed first, before any other change |\n| W02 | Official-source verification: schedule vs NBA.com | done | `data/schedule_2026_11_13_to_16.json`, `data/raw/official_schedule_capture_2026-11-14.json`, `schedule-verified.html` | All 36 games 11/13–11/17 match nba.com (matchup, tip ET, venue, game ID). See verification notes below. |\n| W03 | Horizon today + 3 days (11/14–11/17) | done | `schedule-verified.html`, `index.html` | 27 games in the 11/14–11/17 horizon; 11/17 is in the official capture but has no originated lines (blocker F-C07: no current ratings or 11/14+ injury report) |\n| W04 | Build verification (`verify_all.py`) | in progress | `scripts/*.py`, `docs/**` | Confirms builders, checker, data audits, no broken links |\n| W05 | Irregularities flagged + published | done | `review.html`, `schedule-verified.html`, `COORDINATION.md` | Venue names, stale records, missing 11/13 finals, missing 11/14 injury report, no lines/picks for 11/14–11/17 — all flagged, none block the build |\n| W06 | Integration: PR → main, merge, Pages deploy, record | in progress | whole repo | PR from this branch to main; merge; confirm GitHub Pages deploys; record PR link + merge result in this section |\n\n### W02 verification notes (official source: https://www.nba.com/schedule)\n\nEvery row of `schedule_2026_11_13_to_16.json` and `data/raw/official_schedule_capture_2026-11-14.json` was re-checked against the live NBA.com schedule page (chunks 0–2 read, covering all games 11/13–11/17). Result: **36/36 games match** on matchup, tip time ET, venue, city, and game ID.\n\n| Date | Games checked | Match vs NBA.com |\n| --- | --- | --- |\n| 2026-11-13 | 9 | match (NYK@IND, MIL@ORL, CLE@MIA, ATL@CHI, MEM@NOP, UTA@HOU, GSW@SAS, POR@SAC, OKC@LAC) |\n| 2026-11-14 | 5 | match (DEN@NOP, DAL@CLE, DET@MIA, BKN@MEM, CHI@MIN) |\n| 2026-11-15 | 9 | match (IND@PHI, LAL@PHX, CHA@LAC, SAS@UTA, DAL@BOS, NYK@TOR, HOU@WAS, ATL@MIL, OKC@SAC) |\n| 2026-11-16 | 8 | match (ORL@BOS, CHI@CLE, MEM@WAS, PHI@BKN, HOU@MIA, POR@MIN, GSW@NOP, PHX@DEN) |\n| 2026-11-17 | 5 | match (NYK@TOR, POR@MIN, DET@SAS, CHA@LAL, UTA@LAC) |\n\nNo value was inferred. Venue names `Rocket Arena` (Cleveland) and `Mortgage Matchup Center` (Phoenix) appear exactly as printed by NBA.com and are carried as flagged items (F-C08 on schedule-verified.html). Team W-L records are pre-11/13 values and marked STALE where a team played 11/13.\n\n### W05 irregularities published for review\n\n- **F-C07**: No lines or picks generated for 11/14–11/17. Ratings run through 11/12; 11/13 results missing; no 11/14+ injury report verified. Picking now would rest on stale inputs. (schedule-verified.html)\n- **F-C02**: Records are pre-11/13 for 18 teams in the 11/14–11/17 rows; marked STALE, not read as current. (schedule-verified.html)\n- **F-C03**: 11/14 injury report not retrievable (AccessDenied). No 11/14 injury status verified. (schedule-verified.html)\n- **F-C01**: 11/13 final scores not captured; captures show games in progress. (schedule-verified.html)\n- Venue naming `Rocket Arena` / `Mortgage Matchup Center` carried as printed by NBA.com, flagged F-C08.\n\n---\n\n### W04 / W06 integration record (filled in on completion)\n\n| Item | Value |\n| --- | --- |\n| Branch | `arena/2509073f-nba1` |\n| Base | `main` at `9ccccb2` |\n| Local gate | `python3 scripts/verify_all.py` → pending |\n| PR | pending |\n| Merge | pending |\n| Pages deploy | pending |\n| Live URL | https://wingbangboozle1-lang.github.io/NBA1/ |\n
+---
+
+## 11. Session `arena/e38f7e38-nba1` — CI/deployment audit (claimed 2026-11-14 UTC)
+
+The active Arena branch is fixed as `arena/e38f7e38-nba1`; work remains on that branch (no task branch/worktree is created).
+
+| # | Task | Status | File scope | Result |
+| --- | --- | --- | --- | --- |
+| W01 | Audit CI publish gate and harden failure behavior | done | `.github/workflows/pages.yml`, `COORDINATION.md` §11 | Removed `continue-on-error` from the build-A site validation step, so a failing `scripts/check_site.py` now fails the required validation job and blocks the deploy job. |
+
+### Verification and limits
+
+- `python3 scripts/verify_all.py` — PASS. Builders and site/data audits completed; 31 published schedule rows compared with 0 mismatches; 18 teams have stale records in the current horizon and remain flagged.
+- `python3 scripts/check_links.py` — PASS: 41 docs pages, 0 broken internal links, 0 non-approved hosts, 0 ragged rows. It reports 2 unlinked methodology rows on Build B's executive page; these are already visibly identified as no-source methodology proposals, not values, and remain a flagged limitation (see `docs/b/index.html`).
+- `git diff --check` — PASS. The build produced no generated-file changes.
+- The checker allowlists official hosts; this is not an HTTP reachability check. It explicitly records that external source availability cannot be tested from this environment. Client-rendered script templates are also outside `check_links.py`'s static HTML row scan.
+- Rationale/source: GitHub documents step-level `continue-on-error` as allowing the step to continue despite a failure; removing it ensures the validation exit status participates in job success: <https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idstepscontinue-on-error>. No NBA data or model claim was changed.
+
+Claimed after reading this board and confirming no active task owns these files. No external NBA fact was changed by this task.
+
+### W01 integration record
+
+| Item | Result |
+| --- | --- |
+| PR | [#27](https://github.com/wingbangboozle1-lang/NBA1/pull/27) |
+| Merge | Merged with `--merge` at 2026-11-14T00:57:38Z; merge commit `a17b19afd5647297bfbcfce0a917a354cce8923b`. |
+| PR validation | `Publish static site to GitHub Pages` run [43537517752](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43537517752) — success. |
+| GitHub Pages deployment | `pages-build-deployment` run [43537567065](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43537567065) — build and deploy jobs succeeded for the merge commit. |
+| Live check | <https://wingbangboozle1-lang.github.io/NBA1/> fetched after deployment; dashboard content and links render. It still clearly describes the data as dated/static, not live. |
+| Deployment annotations | Non-blocking platform warnings: `actions/upload-artifact@v4` Node.js 20 deprecation and planned `ubuntu-latest` migration. These are GitHub runner/toolchain notices; no deployment failure. |
+
+## 12. Session `arena/93ff7f20-nba1` (current branch `arena/93ff7f20-nba1`, base `main` at `9ccccb2`)
+
+This session works on one branch only, as the session rules require.
+
+| # | Task | Status | File scope | Result and sources |
+|---|------|--------|------------|-------------------|
+| W01 | Repo audit + coordination claim | done | `COORDINATION.md`, `README.md` | Claimed W01–W05 on branch `arena/93ff7f20-nba1`; claim commit `8d11a3e` pushed |
+| W02 | Final verification pass | done | `scripts/verify_all.py`, `scripts/check_site.py`, `scripts/check_links.py` | `VERIFY OK` — all builders, checkers and data audits pass (31 games, 26 model picks, 12 parlays, 62 props, 62 impact rows, 20 unattributed); 731 table rows synced |
+| W03 | GitHub Pages deployment confirmation | done | `.github/workflows/pages.yml`, `docs/` | Pages status: `built`; live URL `https://wingbangboozle1-lang.github.io/NBA1/`; source branch `main`, path `/` |
+| W04 | Flagged-items audit | done | `review.html`, `data/content/flagged.json`, `docs/b/pages/flagged.html` | All flagged items carry official source links: F1–F12 (Build B flagged register), F-C01–F-C11 (Build C), V-01–V-07 (session arena-a6936331), E-01–E-10 (Edge Lab); none block publication |
+| W05 | Integration PR → main | done | whole repo | PR #29 created and merged with `--merge`; record below |
+
+### Session `arena/93ff7f20-nba1` log
+
+| Time (UTC) | Entry |
+|---|---|
+| 2026-11-14 | Board read; claimed W01–W05 on branch `arena/93ff7f20-nba1`; claim pushed immediately |
+| 2026-11-14 | `verify_all.py` → VERIFY OK; Pages confirmed `built` |
+| 2026-11-14 | PR #29 created; merged with `--merge` |
+| 2026-11-14 | Pages deployment confirmed after merge |
+
+### W05 integration record
+
+| Item | Value |
+| --- | --- |
+| Branch | `arena/93ff7f20-nba1` |
+| Base | `main` at `9ccccb2` |
+| PR | [#29](https://github.com/wingbangboozle1-lang/NBA1/pull/29), `arena/93ff7f20-nba1` → `main` |
+| Merge | `--merge` without approval (as instructed) |
+| Local gate | `python3 scripts/verify_all.py` → VERIFY OK before merge |
+| Pages | Live at https://wingbangboozle1-lang.github.io/NBA1/ |
+
+---
+
+## 13. Session `arena/2509073f-nba1` (current branch, claimed 2026-11-14, UTC)
+
+Branch: `arena/2509073f-nba1`, branched from `main` at `9ccccb2` (Merge PR #25).
+Scope: line-by-line repo review; official-source verification of the schedule data against NBA.com; horizon documentation for today + 3 days (2026-11-14 .. 2026-11-17); build verification; integration PR → main; Pages deploy record.
+
+| # | Task | Status | File scope | Notes |
+| --- | --- | --- | --- | --- |
+| W01 | COORDINATION.md claim + session section | done | `COORDINATION.md` (§13 only) | Claim pushed first, before any other change |
+| W02 | Official-source verification: schedule vs NBA.com | done | `data/schedule_2026_11_13_to_16.json`, `data/raw/official_schedule_capture_2026-11-14.json`, `schedule-verified.html` | All 36 games 11/13–11/17 match nba.com (matchup, tip ET, venue, game ID). No value inferred. |
+| W03 | Horizon today + 3 days (11/14–11/17) | done | `schedule-verified.html`, `index.html` | 27 games in the 11/14–11/17 horizon; 11/17 in the official capture but no originated lines (blocker F-C07: no current ratings or 11/14+ injury report) |
+| W04 | Build verification (`verify_all.py`) | done | `scripts/*.py`, `docs/**` | `VERIFY OK` — builders, checker, data audits pass; no broken internal links; every table row carries an official source link |
+| W05 | Irregularities flagged + published | done | `review.html`, `schedule-verified.html`, `COORDINATION.md` | F-C01 (11/13 finals not captured), F-C02 (stale pre-11/13 records, 18 teams), F-C03 (11/14 injury report AccessDenied), F-C07 (no lines/picks for 11/14–11/17), F-C08 (venue names carried as printed). None block the build. |
+| W06 | Integration: PR → main, merge, Pages deploy, record | in progress | whole repo | PR #30 created; merge in flight after conflict resolution; Pages deploy + record pending |
+
+### W02 verification notes (official source: https://www.nba.com/schedule)
+
+Every row of `schedule_2026_11_13_to_16.json` and `data/raw/official_schedule_capture_2026-11-14.json` was re-checked against the live NBA.com schedule page (chunks 0–2 read, covering all games 11/13–11/17). Result: **36/36 games match** on matchup, tip time ET, venue, city, and game ID.
+
+| Date | Games checked | Match vs NBA.com |
+| --- | --- | --- |
+| 2026-11-13 | 9 | match (NYK@IND, MIL@ORL, CLE@MIA, ATL@CHI, MEM@NOP, UTA@HOU, GSW@SAS, POR@SAC, OKC@LAC) |
+| 2026-11-14 | 5 | match (DEN@NOP, DAL@CLE, DET@MIA, BKN@MEM, CHI@MIN) |
+| 2026-11-15 | 9 | match (IND@PHI, LAL@PHX, CHA@LAC, SAS@UTA, DAL@BOS, NYK@TOR, HOU@WAS, ATL@MIL, OKC@SAC) |
+| 2026-11-16 | 8 | match (ORL@BOS, CHI@CLE, MEM@WAS, PHI@BKN, HOU@MIA, POR@MIN, GSW@NOP, PHX@DEN) |
+| 2026-11-17 | 5 | match (NYK@TOR, POR@MIN, DET@SAS, CHA@LAL, UTA@LAC) |
+
+No value was inferred. Venue names `Rocket Arena` (Cleveland) and `Mortgage Matchup Center` (Phoenix) appear exactly as printed by NBA.com and are carried as flagged items (F-C08). Team W-L records are pre-11/13 values and marked STALE where a team played 11/13.
+
+### W04 / W06 integration record
+
+| Item | Value |
+| --- | --- |
+| Branch | `arena/2509073f-nba1` |
+| Base | `main` at `9ccccb2` |
+| Local gate | `python3 scripts/verify_all.py` → VERIFY OK |
+| PR | [#30](https://github.com/wingbangboozle1-lang/NBA1/pull/30), `arena/2509073f-nba1` → `main` |
+| Merge | pending (conflict resolved; re-pushing branch) |
+| Pages deploy | pending |
+| Live URL | https://wingbangboozle1-lang.github.io/NBA1/ |
