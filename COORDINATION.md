@@ -1668,3 +1668,10 @@ integration sessions handle PR #56 (owner active) and the PR #45 builder-fidelit
 **Not done by this session (claimed elsewhere):** 11/13 finals capture + settlement (§20, PR #56),
 official-source re-check (§23), final integration / PR-to-main / merge / Pages confirmation
 (`arena/ef6ff2a4-nba1`, `arena/254dd8bb-nba1`). This session pushes only to its own branch.
+
+**Irregularity found during A03 (R-A4, logged not edited):** `README.md` line 9 prints the
+live-site URL as `<https://wingbangboozle1-lang/NBA1/>` — malformed (missing `.github.io`).
+The real URL, confirmed serving the full dashboard this session at ~10:30 UTC, is
+<https://wingbangboozle1-lang.github.io/NBA1/>. Request: integration session fixes the one
+line when merging (README is a shared output; PR #57 also touches README.md and does not
+fix it). No other file contains the malformed form (checked *.html/*.md/*.json).
