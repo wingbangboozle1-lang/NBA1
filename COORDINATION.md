@@ -250,6 +250,10 @@ available argument for not promoting anything on a small window.
 | 2026-11-14 | `arena/2329cb68-nba1` | Edition chain resolved: the "12:00 PM" vs "03:00 PM" vs "5:15 PM" injury datasets are three different official editions, not a transcription error. All 9 status movements 12:00→3:00 PM and all 5 movements 3:00→5:15 PM verified against the PDFs. |
 | 2026-11-14 | `arena/2329cb68-nba1` | Slate extended to 11/17 (5 games, official pages verified) — picks now cover every upcoming slate through today+3. NYK@TOR and POR@MIN repeat matchups on the official pages flagged F13, not corrected. 11/17 venues left blank (F14). |
 | 2026-11-14 | `arena/2329cb68-nba1` | R1 executed: root dashboard now links `docs/b/index.html` under DETAIL PAGES. Q9–Q11, SG11–SG12, F13–F15 added to the registers. |
+| 2026-11-14 | `arena/2329cb68-nba1` | **Five-way merge completed** (main advanced `a9c9d9c`→`bdbff69` mid-merge). All conflicts resolved keeping every session's work; root `index.html` = the recorded four-build collision resolution, Edge Lab archived to `edge-lab/` with the verified 2026-11-14 numbers. |
+| 2026-11-14 | `arena/2329cb68-nba1` | **Register-id recovery**: the content union had let later sessions' F13–F15/Q1–Q11 ids overwrite this session's items; recovered from git history and republished as F21–F23/Q14–Q16. Nothing discarded. |
+| 2026-11-14 | `arena/2329cb68-nba1` | **Main's Pages gate unblocked**: `render_check.mjs` CARD_PAGES + two `origination/pages` entries (main's deploy validate was red at `5372f45`); audit-page self-links relativized. Mirrored later by main-side sessions (#48). |
+| 2026-11-14 | `arena/2329cb68-nba1` | **PR #35 merged** (`a4d47f8`); `Publish static site to GitHub Pages` run 43543711012 **success**; live site spot-checked at <https://wingbangboozle1-lang.github.io/NBA1/> (27-game horizon / 63 picks / exec summary live). |
 | 2026-11-14 | `arena-a6936331` | Claimed V01–V05 (§9). Branch `arena/a6936331-nba1` only. |
 | 2026-11-14 | `arena-a6936331` | V01: 31/31 schedule rows match nba.com/schedule. V02: 113 PDF rows transcribed, PASS, 5 status changes between editions. |
 | 2026-11-14 | `arena-a6936331` | V03: impact layer and injuries page moved to the 05:15 PM edition; no line moved; 15 team cells carried with source; 5 left open. |
@@ -291,11 +295,12 @@ site tables) are in scope here.
 | # | Task | Status | File scope | Notes |
 | --- | --- | --- | --- | --- |
 | K01 | Session claim + line-by-line repo review of merged tree | done | `COORDINATION.md`, `notes/` | Both builds re-audited. The three "conflicting" injury datasets resolve to three different official report editions (12:00/3:00/5:15 PM), each verified against its own PDF. |
-| K02 | Line-by-line verification of published rows vs official sources | done | `notes/verification-2026-11-14.md`, `engine/verify_refresh.py` | **246 rows re-verified line by line, 0 failures** via an independent second transcription (`data/refresh_2026_11_14/official_captures_2026-11-14.json`). 15 items on the Flagged page. |
+| K02 | Line-by-line verification of published rows vs official sources | done | `notes/verification-2026-11-14.md`, `engine/verify_refresh.py` | **249 rows re-verified line by line, 0 failures** at the final merge (122 rows of the 7:30 PM edition + 91 rows of the 3:00 PM edition + 36 slate rows) via an independent second transcription (`data/refresh_2026_11_14/official_captures_2026-11-14.json`). Register items republished as F21–F23 / Q14–Q16 after the id merge (see K07). |
 | K03 | Data refresh as of 2026-11-14 (injury report, 11/13 results, 11/14–11/17 schedule) | done | `data/refresh_2026_11_14/*`, `data/raw/*`, `docs/data/*.json` | Slates 11/16 (8 games) and 11/17 (5 games) appended after official-page verification; 11/13 finals were still in play at capture so result cells stay blank (never zero). |
-| K04 | Picks for upcoming slate 11/14–11/17 (≤ 3 days ahead) from originated lines | done | `docs/data/picks.json`, `data/derived/*` | 5 slates, 36 games, 81 strategy-gated pick rows (11/13 rows PENDING finals). Edge Lab mirrors 36 games / 30 model picks. |
-| K05 | Site integration: R1 nav link to Build B, dated-data labels, executive summary refresh | done | `index.html`, `docs/summary.html`, `scripts/*` | R1 executed (nav link under DETAIL PAGES). Window counts/labels updated everywhere; registers gained Q9–Q11, SG11–SG12, F13–F15. |
-| K06 | Full verification pass + PR → `main` + merge + Pages confirm | in progress | `COORDINATION.md` | PR [#35](https://github.com/wingbangboozle1-lang/NBA1/pull/35). `scripts/verify_all.py` VERIFY OK + `engine/verify_refresh.py` 0 failures before PR. Merge + Pages recorded below when complete. |
+| K04 | Picks for upcoming slate 11/14–11/17 (≤ 3 days ahead) from originated lines | done | `docs/data/picks.json`, `data/derived/*` | Final merged model: 27 pickable games (11/14–11/17), **63 strategy-gated pick rows**, matching main's independently derived count exactly. The 9 Nov-13 games were live at every 11/14 cut and are recorded in `data/raw/schedule_in_progress.json` (rest maths only, never pickable, results blank). Edge Lab mirrors the 36-game window / 30 model lines. |
+| K05 | Site integration: R1 nav link to Build B, dated-data labels, executive summary refresh | done | `index.html`, `edge-lab/index.html`, `scripts/*` | R1 executed (superseded by the four-build root switcher). Window counts/labels updated everywhere; registers gained Q14–Q16, SG11–SG12, F21–F23 (ids renumbered at the register merge). Final flag total published on the Edge Lab: 66 (27 review.html + 23 register + 16 Command Center). |
+| K06 | Full verification pass + PR → `main` + merge + Pages confirm | done | `COORDINATION.md` | PR [#35](https://github.com/wingbangboozle1-lang/NBA1/pull/35) **merged** (commit `a4d47f8`); Pages `Publish static site to GitHub Pages` run 43543711012 **success**; live site spot-checked (root switcher + `edge-lab/` + exec summary all show the 27-game/63-pick horizon). See the K06 publish table below. |
+| K07 | Final-integration conflict resolution across five concurrent merges | done | `COORDINATION.md`, `data/content/*` | main advanced 5 times during the merge (`a9c9d9c`→`cee9255`→`5372f45`→`1457e1c`→`bdbff69`); every conflict resolved keeping both sides' work (5 merge commits `dac39b3`/`42e802b`/`19d196a`/`414cffb`/`7645cb8`). Register-id collision (their F13–F15/Q1–Q11 ids had overwritten mine in the union) recovered from git history and republished as F21–F23/Q14–Q16; no item discarded. |
 
 Build B's live pages: `docs/b/pages/` → `lines`, `picks`, `props`, `injuries`,
 `gameflow`, `validation`, `strategy`, `correlations`, `luck`, `backtest`,
@@ -315,6 +320,19 @@ log) while preparing its integration PR. During the merge it was found that sess
 `arena/458a6570-nba1` had already landed the same content on `main` — **recovered with the stale
 row counts corrected** — in §6.1/§6.2 below. That corrected version is authoritative; this
 session's verbatim copy was removed to avoid publishing known-stale numbers twice.
+
+### K06 publish record (session `arena/2329cb68-nba1`, 2026-11-14)
+
+| Item | Value |
+| --- | --- |
+| PR | [#35](https://github.com/wingbangboozle1-lang/NBA1/pull/35) — Integration + verification pass 2026-11-14: picks through 11/17, rows re-verified line by line |
+| Merge commit | `a4d47f8` (merge commit of PR #35 into `main`, 2026-11-14) |
+| Pages | `Publish static site to GitHub Pages` run `43543711012` → **success**; `pages build and deployment` → success. Site: <https://wingbangboozle1-lang.github.io/NBA1/> |
+| Final data state | 27 pickable games (11/14–11/17 = today+3), 63 strategy-gated pick rows, 36-game Edge Lab window (9 Nov-13 games in-progress, blank-pending), 122-row 7:30 PM ET injury edition, 51 out-of-sample games |
+| Verification | `engine/verify_refresh.py` **0 failures (249 rows)**; `scripts/verify_integration.py` **PASSED (0 errors)**; `scripts/verify_all.py` **VERIFY OK**; `scripts/check_site.py` PASS; `scripts/check_links.py` PASS; `scripts/check_rendered.py` PASS; `render_check.mjs` 110 pages / 0 problems |
+| Gate repairs landed with this merge | `render_check.mjs` CARD_PAGES + `origination/pages/method.html`/`props.html` (main's Pages gate was red at `5372f45`, run 43541692057); audit-page self-links relativized; both later mirrored by main-side sessions (#48) |
+| 11/17 venues | resolved from `https://www.nba.com/schedule` by session `arena/f80dcc4a-nba1` (Scotiabank Arena / Target Center / Frost Bank Center / Crypto.com Arena / Intuit Dome); competition labels remain blank as published (F23) |
+| Open sibling PRs at merge time | #36, #37, #42 (state unknown), #45, #49 (conflicting gate-repair branches) — left open for their sessions; not discarded |
 
 ### 6.1 Publish record (recovered from PR #14)
 
