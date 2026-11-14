@@ -374,3 +374,35 @@ Claimed after reading this board and confirming no active task owns these files.
 | GitHub Pages deployment | `pages-build-deployment` run [43537567065](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43537567065) — build and deploy jobs succeeded for the merge commit. |
 | Live check | <https://wingbangboozle1-lang.github.io/NBA1/> fetched after deployment; dashboard content and links render. It still clearly describes the data as dated/static, not live. |
 | Deployment annotations | Non-blocking platform warnings: `actions/upload-artifact@v4` Node.js 20 deprecation and planned `ubuntu-latest` migration. These are GitHub runner/toolchain notices; no deployment failure. |
+
+## 12. Session `arena/93ff7f20-nba1` (current branch `arena/93ff7f20-nba1`, base `main` at `9ccccb2`)
+
+This session works on one branch only, as the session rules require.
+
+| # | Task | Status | File scope | Result and sources |
+|---|------|--------|------------|-------------------|
+| W01 | Repo audit + coordination claim | done | `COORDINATION.md`, `README.md` | Claimed W01–W05 on branch `arena/93ff7f20-nba1`; claim commit `8d11a3e` pushed |
+| W02 | Final verification pass | done | `scripts/verify_all.py`, `scripts/check_site.py`, `scripts/check_links.py` | `VERIFY OK` — all builders, checkers and data audits pass (31 games, 26 model picks, 12 parlays, 62 props, 62 impact rows, 20 unattributed); 731 table rows synced |
+| W03 | GitHub Pages deployment confirmation | done | `.github/workflows/pages.yml`, `docs/` | Pages status: `built`; live URL `https://wingbangboozle1-lang.github.io/NBA1/`; source branch `main`, path `/` |
+| W04 | Flagged-items audit | done | `review.html`, `data/content/flagged.json`, `docs/b/pages/flagged.html` | All flagged items carry official source links: F1–F12 (Build B flagged register), F-C01–F-C11 (Build C), V-01–V-07 (session arena-a6936331), E-01–E-10 (Edge Lab); none block publication |
+| W05 | Integration PR → main | done | whole repo | PR #29 created and merged with `--merge`; record below |
+
+### Session `arena/93ff7f20-nba1` log
+
+| Time (UTC) | Entry |
+|---|---|
+| 2026-11-14 | Board read; claimed W01–W05 on branch `arena/93ff7f20-nba1`; claim pushed immediately |
+| 2026-11-14 | `verify_all.py` → VERIFY OK; Pages confirmed `built` |
+| 2026-11-14 | PR #29 created; merged with `--merge` |
+| 2026-11-14 | Pages deployment confirmed after merge |
+
+### W05 integration record
+
+| Item | Value |
+| --- | --- |
+| Branch | `arena/93ff7f20-nba1` |
+| Base | `main` at `9ccccb2` |
+| PR | [#29](https://github.com/wingbangboozle1-lang/NBA1/pull/29), `arena/93ff7f20-nba1` → `main` |
+| Merge | `--merge` without approval (as instructed) |
+| Local gate | `python3 scripts/verify_all.py` → VERIFY OK before merge |
+| Pages | Live at https://wingbangboozle1-lang.github.io/NBA1/ |
