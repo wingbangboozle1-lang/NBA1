@@ -67,6 +67,7 @@ CATEGORIES = [
     ("EVIDENCE", None, "Whether any of it is skill. The out-of-sample record, the gates, the correlations and the luck check."),
     ("Strategies &amp; Leaderboard", "strategies.html", "Ten strategies, the reward tiers, and the leaderboard that ranks them - with nothing promoted that has not passed."),
     ("Validation Gates", "validation.html", "The seven gates every strategy must clear, the definition of each, and how each strategy scored."),
+    ("Leaderboard &amp; Rewards", "leaderboard.html", "The competition scoreboard: rank, record, the gate blocking each strategy, and what clearing it would pay."),
     ("Correlations", "correlations.html", "Measured correlations, model-derived ones and the same-game-parlay rho used for pricing."),
     ("Luck &amp; Skill", "luck.html", "How many wins each team probably should have had, and which of them are luck."),
     ("Out-of-Sample Backtest", "backtest.html", "The 51-game test window and everything measured on it."),
@@ -807,6 +808,98 @@ def main():
         ["Residual sigma (margin / total)", num(m["sigma_margin"], 2) + " / " + num(m["sigma_total"], 2), NA, NA, srclink(sources, "S1")],
     ]
     b.append(table(["Metric", "Model", "Reference", "Reading", "Source"], rows))
+    # === leaderboard (the one page that ranks and explains) ==================
+    b = [banner("warn", "How to read this leaderboard",
+                "<p>This is a <b>competition with rewards</b>, and this page is the scoreboard: ten strategies, "
+                "ranked, each with what it would pay, what it has actually done on games played after the ratings "
+                "cut-off, and the single gate that is stopping it from being promoted. <b>Nothing here is funded.</b> "
+                "The reward for clearing every gate is a stake tier; the reward for not clearing them is a cap at a "
+                "quarter unit or research-only status. That is the competition working, not failing.</p>"
+                "<p>The honest state: no strategy has cleared all seven gates. The best, S1, is 16-7 with an exact "
+                "binomial p of 0.093 against a coin flip &mdash; good enough to keep watching, not good enough to "
+                "call skill. Every figure below is read from <code>docs/data/leaderboard.json</code> and "
+                "<code>docs/data/validation.json</code>.</p>")]
+
+    b.append(h2("The scoreboard", "Ranked by the composite score in the table's own weighting. The 'binding gate' "
+                                  "column names the gate that is hardest to clear, not merely the first one listed: "
+                                  "an outright FAIL outranks a NOT RUN, which outranks a PROVISIONAL."))
+    lbmap = {r["id"]: r for r in lb["rows"]}
+    rows = []
+    for srow in val["strategies"]:
+        sid = srow["id"]
+        lbrow = lbmap.get(sid, {})
+        # The BINDING gate is the hardest one still in the way, not simply the first:
+        # a FAIL is a harder block than a PROVISIONAL, and a NOT RUN gate cannot be
+        # assumed to pass. Order of severity is stated explicitly rather than implied.
+        _rank = {"FAIL": 0, "NOT RUN": 1, "PROVISIONAL": 2}
+        blocking = [g for g in srow["gates"] if g["status"] not in ("PASS", "N/A")]
+        failing = [g for g in blocking if g["status"] == "FAIL"]
+        if failing:
+            first = failing[0]
+            blocked = "%s %s: %s" % (first["id"], first["name"], first["status"])
+            detail = first["detail"]
+            if len(blocking) > 1:
+                detail += " (%d gate(s) not passing in total; this is the binding one)" % len(blocking)
+        elif blocking:
+            first = sorted(blocking, key=lambda g: _rank[g["status"]])[0]
+            blocked = "%s %s: %s" % (first["id"], first["name"], first["status"])
+            detail = first["detail"]
+            if len(blocking) > 1:
+                detail += " (no gate has outright failed; %d gate(s) still not passing)" % len(blocking)
+        else:
+            blocked, detail = "nothing", "every applicable gate is a PASS"
+        rows.append([
+            esc(str(lbrow.get("rank", ""))), "<b>%s</b>" % esc(sid), esc(srow["name"]),
+            esc(srow.get("family")), esc(str(srow.get("n_graded", 0))),
+            esc(lbrow.get("record", "0-0")), num(lbrow.get("units"), 2),
+            num(srow.get("roi_pct"), 1) if srow.get("roi_pct") is not None else NA,
+            esc(blocked), esc(detail),
+            esc(lbrow.get("tier", "")),
+            srclink(sources, "S1"),
+        ])
+    b.append(table(
+        ["Rank", "ID", "Strategy", "Family", "Graded", "W-L", "Units", "ROI %", "Binding gate",
+         "What that means", "Reward tier (cap)", "Source"],
+        rows,
+        note="Units and ROI assume the standard -110 price, which is a disclosed convention and not an observed "
+             "price: no sportsbook price was observable anywhere in this environment, so 'units' means "
+             "model-vs-naive-model units (flag F3). A strategy with 0 graded plays shows 0-0 and 0.00, which means "
+             "'no plays passed its own filter', never 'it lost'. ROI % is blank where a strategy has no graded play."))
+
+    b.append(h2("What each reward tier actually pays", "The incentive that makes this a competition rather than a list."))
+    rows = []
+    for t in lb["tiers"]:
+        rows.append([esc(t.get("tier")), esc(t.get("name")), esc(t.get("rule")),
+                     esc(t.get("min_score")), srclink(sources, "S1")])
+    b.append(table(["Tier", "Name", "What it earns", "Minimum score", "Source"], rows,
+                   note="A tier is a cap on stake, not a prediction of profit. Tier 3 - Quarter unit is the ceiling "
+                        "for anything that has not cleared every gate; it is where all six gradeable strategies sit "
+                        "today, and the four strategies with no graded plays are not funded at all."))
+
+    b.append(h2("The gate that decides each one", "Seven gates, in order. A strategy is promoted only when every "
+                                                  "applicable gate is a PASS; PROVISIONAL and NOT RUN both block."))
+    rows = []
+    for g in val["gate_definitions"]:
+        holders = []
+        for srow in val["strategies"]:
+            for gg in srow["gates"]:
+                if gg["id"] == g["id"] and gg["status"] in ("PASS", "N/A"):
+                    holders.append(srow["id"])
+        rows.append([esc(g["id"]), "<b>%s</b>" % esc(g["name"]), esc(g["definition"]),
+                     "%d of %d" % (len(holders), len(val["strategies"])),
+                     esc(", ".join(holders)) if holders else "none",
+                     srclink(sources, "S1")])
+    b.append(table(["Gate", "Name", "Threshold", "Strategies passing", "Which", "Source"], rows,
+                   note="G4 (skill, not luck) is the gate that separates this from a hot streak, and it is the one "
+                        "that fails for every strategy that has plays. It requires the Wilson 95% lower bound on the "
+                        "hit rate to clear the 52.38% break-even at -110. On 23 plays, 16 wins is consistent with "
+                        "luck (p = 0.093), so S1 stays capped no matter how good the record looks."))
+
+    built["leaderboard.html"] = page(
+        "Leaderboard and rewards",
+        "The competition scoreboard: every strategy ranked, what it has earned, the gate blocking it, and what "
+        "clearing that gate would be worth.", "\n".join(b))
+
     built["validation.html"] = page("Validation gates",
                                     "The seven gates every strategy must clear, how each strategy scored, and the "
                                     "out-of-sample metrics the gates are read against.", "\n".join(b))

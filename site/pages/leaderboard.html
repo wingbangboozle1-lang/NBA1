@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leaderboard and rewards &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="suggestions.html">Decision</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="leaderboard.html">Leaderboard &amp; Rewards</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row links to the official source it
+      came from. A blank cell means the value could not be confirmed from an official
+      source &mdash; it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Leaderboard and rewards</h1>
+      <p class="sub">The competition scoreboard: every strategy ranked, what it has earned, the gate blocking it, and what clearing that gate would be worth.</p>
+    </div>
+    <div class="banner warn"><div class="b-t">How to read this leaderboard</div><div class="b-b"><p>This is a <b>competition with rewards</b>, and this page is the scoreboard: ten strategies, ranked, each with what it would pay, what it has actually done on games played after the ratings cut-off, and the single gate that is stopping it from being promoted. <b>Nothing here is funded.</b> The reward for clearing every gate is a stake tier; the reward for not clearing them is a cap at a quarter unit or research-only status. That is the competition working, not failing.</p><p>The honest state: no strategy has cleared all seven gates. The best, S1, is 16-7 with an exact binomial p of 0.093 against a coin flip &mdash; good enough to keep watching, not good enough to call skill. Every figure below is read from <code>docs/data/leaderboard.json</code> and <code>docs/data/validation.json</code>.</p></div></div>
+<h2 class="sec">The scoreboard</h2><p class="secsub">Ranked by the composite score in the table's own weighting. The 'binding gate' column names the gate that is hardest to clear, not merely the first one listed: an outright FAIL outranks a NOT RUN, which outranks a PROVISIONAL.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Rank</th>
+<th>ID</th>
+<th>Strategy</th>
+<th>Family</th>
+<th>Graded</th>
+<th>W-L</th>
+<th>Units</th>
+<th>ROI %</th>
+<th>Binding gate</th>
+<th>What that means</th>
+<th>Reward tier (cap)</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td><b>S1</b></td>
+<td>Side edge vs reference</td>
+<td>Single bet</td>
+<td>23</td>
+<td>16-7</td>
+<td>7.54</td>
+<td>32.8</td>
+<td>G4 Skill, not luck: FAIL</td>
+<td>Wilson 95% CI [0.491, 0.844], exact binomial p = 0.093 (4 gate(s) not passing in total; this is the binding one)</td>
+<td>Tier 3 - Quarter unit</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td><b>S2</b></td>
+<td>Total edge vs reference</td>
+<td>Single bet</td>
+<td>10</td>
+<td>5-5</td>
+<td>-0.46</td>
+<td>-4.5</td>
+<td>G2 Calibration: FAIL</td>
+<td>observed 0.500 vs mean predicted 0.675 (gap 0.175) (5 gate(s) not passing in total; this is the binding one)</td>
+<td>Tier 3 - Quarter unit</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td><b>S3</b></td>
+<td>Moneyline value</td>
+<td>Single bet</td>
+<td>14</td>
+<td>7-7</td>
+<td>-0.64</td>
+<td>-4.5</td>
+<td>G4 Skill, not luck: FAIL</td>
+<td>Wilson 95% CI [0.268, 0.732], exact binomial p = 1.000 (4 gate(s) not passing in total; this is the binding one)</td>
+<td>Tier 3 - Quarter unit</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td><b>S4</b></td>
+<td>Pace-driven total</td>
+<td>Single bet</td>
+<td>0</td>
+<td>0-0</td>
+<td>0.00</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>G1 Sample size: FAIL</td>
+<td>n = 0 graded plays (needs 30) (4 gate(s) not passing in total; this is the binding one)</td>
+<td>Not funded - research only</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><b>S5</b></td>
+<td>Back-to-back fade</td>
+<td>Single bet</td>
+<td>12</td>
+<td>8-4</td>
+<td>3.27</td>
+<td>27.3</td>
+<td>G4 Skill, not luck: FAIL</td>
+<td>Wilson 95% CI [0.391, 0.862], exact binomial p = 0.388 (4 gate(s) not passing in total; this is the binding one)</td>
+<td>Tier 3 - Quarter unit</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td><b>S6</b></td>
+<td>Availability shock</td>
+<td>Single bet</td>
+<td>0</td>
+<td>0-0</td>
+<td>0.00</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>G1 Sample size: FAIL</td>
+<td>n = 0 graded plays (needs 30) (4 gate(s) not passing in total; this is the binding one)</td>
+<td>Not funded - research only</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td><b>S7</b></td>
+<td>Player points prop</td>
+<td>Player prop</td>
+<td>0</td>
+<td>0-0</td>
+<td>0.00</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>G1 Sample size: FAIL</td>
+<td>n = 0 graded plays (needs 30) (4 gate(s) not passing in total; this is the binding one)</td>
+<td>Not funded - research only</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td><b>S8</b></td>
+<td>Points + rebounds + assists combo</td>
+<td>Player prop</td>
+<td>0</td>
+<td>0-0</td>
+<td>0.00</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>G1 Sample size: FAIL</td>
+<td>n = 0 graded plays (needs 30) (4 gate(s) not passing in total; this is the binding one)</td>
+<td>Not funded - research only</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td><b>S9</b></td>
+<td>Two-leg cross-game parlay</td>
+<td>Parlay</td>
+<td>7</td>
+<td>3-4</td>
+<td>-0.15</td>
+<td>-2.1</td>
+<td>G1 Sample size: FAIL</td>
+<td>n = 7 graded plays (needs 30) (5 gate(s) not passing in total; this is the binding one)</td>
+<td>Tier 3 - Quarter unit</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td><b>S10</b></td>
+<td>Same-game parlay (side + total)</td>
+<td>Parlay / SGP</td>
+<td>19</td>
+<td>8-11</td>
+<td>2.92</td>
+<td>15.4</td>
+<td>G3 Edge over break-even: FAIL</td>
+<td>mean modelled probability 0.367 (5 gate(s) not passing in total; this is the binding one)</td>
+<td>Tier 3 - Quarter unit</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Units and ROI assume the standard -110 price, which is a disclosed convention and not an observed price: no sportsbook price was observable anywhere in this environment, so 'units' means model-vs-naive-model units (flag F3). A strategy with 0 graded plays shows 0-0 and 0.00, which means 'no plays passed its own filter', never 'it lost'. ROI % is blank where a strategy has no graded play.</p>
+<h2 class="sec">What each reward tier actually pays</h2><p class="secsub">The incentive that makes this a competition rather than a list.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Tier</th>
+<th>Name</th>
+<th>What it earns</th>
+<th>Minimum score</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>Tier 1 - Funded</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>Tier 2 - Half unit</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>Tier 3 - Quarter unit</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>Not funded - research only</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">A tier is a cap on stake, not a prediction of profit. Tier 3 - Quarter unit is the ceiling for anything that has not cleared every gate; it is where all six gradeable strategies sit today, and the four strategies with no graded plays are not funded at all.</p>
+<h2 class="sec">The gate that decides each one</h2><p class="secsub">Seven gates, in order. A strategy is promoted only when every applicable gate is a PASS; PROVISIONAL and NOT RUN both block.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Gate</th>
+<th>Name</th>
+<th>Threshold</th>
+<th>Strategies passing</th>
+<th>Which</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>G1</td>
+<td><b>Sample size</b></td>
+<td>At least 30 graded plays; 10-29 is provisional.</td>
+<td>0 of 10</td>
+<td>none</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>G2</td>
+<td><b>Calibration</b></td>
+<td>Observed hit rate within 8 pp of the mean predicted probability.</td>
+<td>9 of 10</td>
+<td>S1, S3, S4, S5, S6, S7, S8, S9, S10</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>G3</td>
+<td><b>Edge over break-even</b></td>
+<td>Mean modelled probability at or above 52.38% (break-even at -110).</td>
+<td>8 of 10</td>
+<td>S1, S2, S3, S4, S5, S6, S7, S8</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>G4</td>
+<td><b>Skill, not luck</b></td>
+<td>Wilson 95% lower bound on the hit rate above 52.38%; exact binomial p reported.</td>
+<td>0 of 10</td>
+<td>none</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>G5</td>
+<td><b>Stability</b></td>
+<td>Bootstrap 95% CI of the model's margin MAE sits entirely below the reference model's MAE.</td>
+<td>0 of 10</td>
+<td>none</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>G6</td>
+<td><b>Correlation limit</b></td>
+<td>Parlay leg pairs limited to |rho| &lt;= 0.30.</td>
+<td>10 of 10</td>
+<td>S1, S2, S3, S4, S5, S6, S7, S8, S9, S10</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>G7</td>
+<td><b>Availability robustness</b></td>
+<td>A play must survive flipping every Questionable player to Out (needs the official report for the graded window).</td>
+<td>0 of 10</td>
+<td>none</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">G4 (skill, not luck) is the gate that separates this from a hot streak, and it is the one that fails for every strategy that has plays. It requires the Wilson 95% lower bound on the hit rate to clear the 52.38% break-even at -110. On 23 plays, 16 wins is consistent with luck (p = 0.093), so S1 stays capped no matter how good the record looks.</p>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

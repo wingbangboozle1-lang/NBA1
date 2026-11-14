@@ -36,6 +36,7 @@
 <div class="nav-group"><h3>EVIDENCE</h3>
 <a href="strategies.html">Strategies &amp; Leaderboard</a>
 <a href="validation.html">Validation Gates</a>
+<a href="leaderboard.html">Leaderboard &amp; Rewards</a>
 <a href="correlations.html">Correlations</a>
 <a href="luck.html">Luck &amp; Skill</a>
 <a href="backtest.html">Out-of-Sample Backtest</a>
@@ -63,272 +64,278 @@
       <h1>Validation gates</h1>
       <p class="sub">The seven gates every strategy must clear, how each strategy scored, and the out-of-sample metrics the gates are read against.</p>
     </div>
-    <h2 class="sec">The seven gates</h2><p class="secsub">Every strategy must clear all seven. A gate that has not been run is recorded as NOT RUN, never as a pass.</p>
+    <div class="banner warn"><div class="b-t">How to read this leaderboard</div><div class="b-b"><p>This is a <b>competition with rewards</b>, and this page is the scoreboard: ten strategies, ranked, each with what it would pay, what it has actually done on games played after the ratings cut-off, and the single gate that is stopping it from being promoted. <b>Nothing here is funded.</b> The reward for clearing every gate is a stake tier; the reward for not clearing them is a cap at a quarter unit or research-only status. That is the competition working, not failing.</p><p>The honest state: no strategy has cleared all seven gates. The best, S1, is 16-7 with an exact binomial p of 0.093 against a coin flip &mdash; good enough to keep watching, not good enough to call skill. Every figure below is read from <code>docs/data/leaderboard.json</code> and <code>docs/data/validation.json</code>.</p></div></div>
+<h2 class="sec">The scoreboard</h2><p class="secsub">Ranked by the composite score in the table's own weighting. The 'binding gate' column names the gate that is hardest to clear, not merely the first one listed: an outright FAIL outranks a NOT RUN, which outranks a PROVISIONAL.</p>
 <div class="tablewrap">
 <table class="tbl "
 >
 <thead><tr>
+<th>Rank</th>
 <th>ID</th>
+<th>Strategy</th>
+<th>Family</th>
+<th>Graded</th>
+<th>W-L</th>
+<th>Units</th>
+<th>ROI %</th>
+<th>Binding gate</th>
+<th>What that means</th>
+<th>Reward tier (cap)</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>1</td>
+<td><b>S1</b></td>
+<td>Side edge vs reference</td>
+<td>Single bet</td>
+<td>23</td>
+<td>16-7</td>
+<td>7.54</td>
+<td>32.8</td>
+<td>G4 Skill, not luck: FAIL</td>
+<td>Wilson 95% CI [0.491, 0.844], exact binomial p = 0.093 (4 gate(s) not passing in total; this is the binding one)</td>
+<td>Tier 3 - Quarter unit</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td><b>S2</b></td>
+<td>Total edge vs reference</td>
+<td>Single bet</td>
+<td>10</td>
+<td>5-5</td>
+<td>-0.46</td>
+<td>-4.5</td>
+<td>G2 Calibration: FAIL</td>
+<td>observed 0.500 vs mean predicted 0.675 (gap 0.175) (5 gate(s) not passing in total; this is the binding one)</td>
+<td>Tier 3 - Quarter unit</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td><b>S3</b></td>
+<td>Moneyline value</td>
+<td>Single bet</td>
+<td>14</td>
+<td>7-7</td>
+<td>-0.64</td>
+<td>-4.5</td>
+<td>G4 Skill, not luck: FAIL</td>
+<td>Wilson 95% CI [0.268, 0.732], exact binomial p = 1.000 (4 gate(s) not passing in total; this is the binding one)</td>
+<td>Tier 3 - Quarter unit</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td><b>S4</b></td>
+<td>Pace-driven total</td>
+<td>Single bet</td>
+<td>0</td>
+<td>0-0</td>
+<td>0.00</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>G1 Sample size: FAIL</td>
+<td>n = 0 graded plays (needs 30) (4 gate(s) not passing in total; this is the binding one)</td>
+<td>Not funded - research only</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><b>S5</b></td>
+<td>Back-to-back fade</td>
+<td>Single bet</td>
+<td>12</td>
+<td>8-4</td>
+<td>3.27</td>
+<td>27.3</td>
+<td>G4 Skill, not luck: FAIL</td>
+<td>Wilson 95% CI [0.391, 0.862], exact binomial p = 0.388 (4 gate(s) not passing in total; this is the binding one)</td>
+<td>Tier 3 - Quarter unit</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td><b>S6</b></td>
+<td>Availability shock</td>
+<td>Single bet</td>
+<td>0</td>
+<td>0-0</td>
+<td>0.00</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>G1 Sample size: FAIL</td>
+<td>n = 0 graded plays (needs 30) (4 gate(s) not passing in total; this is the binding one)</td>
+<td>Not funded - research only</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td><b>S7</b></td>
+<td>Player points prop</td>
+<td>Player prop</td>
+<td>0</td>
+<td>0-0</td>
+<td>0.00</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>G1 Sample size: FAIL</td>
+<td>n = 0 graded plays (needs 30) (4 gate(s) not passing in total; this is the binding one)</td>
+<td>Not funded - research only</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td><b>S8</b></td>
+<td>Points + rebounds + assists combo</td>
+<td>Player prop</td>
+<td>0</td>
+<td>0-0</td>
+<td>0.00</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>G1 Sample size: FAIL</td>
+<td>n = 0 graded plays (needs 30) (4 gate(s) not passing in total; this is the binding one)</td>
+<td>Not funded - research only</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td><b>S9</b></td>
+<td>Two-leg cross-game parlay</td>
+<td>Parlay</td>
+<td>7</td>
+<td>3-4</td>
+<td>-0.15</td>
+<td>-2.1</td>
+<td>G1 Sample size: FAIL</td>
+<td>n = 7 graded plays (needs 30) (5 gate(s) not passing in total; this is the binding one)</td>
+<td>Tier 3 - Quarter unit</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td><b>S10</b></td>
+<td>Same-game parlay (side + total)</td>
+<td>Parlay / SGP</td>
+<td>19</td>
+<td>8-11</td>
+<td>2.92</td>
+<td>15.4</td>
+<td>G3 Edge over break-even: FAIL</td>
+<td>mean modelled probability 0.367 (5 gate(s) not passing in total; this is the binding one)</td>
+<td>Tier 3 - Quarter unit</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Units and ROI assume the standard -110 price, which is a disclosed convention and not an observed price: no sportsbook price was observable anywhere in this environment, so 'units' means model-vs-naive-model units (flag F3). A strategy with 0 graded plays shows 0-0 and 0.00, which means 'no plays passed its own filter', never 'it lost'. ROI % is blank where a strategy has no graded play.</p>
+<h2 class="sec">What each reward tier actually pays</h2><p class="secsub">The incentive that makes this a competition rather than a list.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Tier</th>
+<th>Name</th>
+<th>What it earns</th>
+<th>Minimum score</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>Tier 1 - Funded</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>Tier 2 - Half unit</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>Tier 3 - Quarter unit</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>Not funded - research only</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">A tier is a cap on stake, not a prediction of profit. Tier 3 - Quarter unit is the ceiling for anything that has not cleared every gate; it is where all six gradeable strategies sit today, and the four strategies with no graded plays are not funded at all.</p>
+<h2 class="sec">The gate that decides each one</h2><p class="secsub">Seven gates, in order. A strategy is promoted only when every applicable gate is a PASS; PROVISIONAL and NOT RUN both block.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
 <th>Gate</th>
-<th>Definition</th>
+<th>Name</th>
+<th>Threshold</th>
+<th>Strategies passing</th>
+<th>Which</th>
 <th class="src">Source</th>
 </tr></thead><tbody>
 <tr>
 <td>G1</td>
 <td><b>Sample size</b></td>
 <td>At least 30 graded plays; 10-29 is provisional.</td>
+<td>0 of 10</td>
+<td>none</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
 <td>G2</td>
 <td><b>Calibration</b></td>
 <td>Observed hit rate within 8 pp of the mean predicted probability.</td>
+<td>9 of 10</td>
+<td>S1, S3, S4, S5, S6, S7, S8, S9, S10</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
 <td>G3</td>
 <td><b>Edge over break-even</b></td>
 <td>Mean modelled probability at or above 52.38% (break-even at -110).</td>
+<td>8 of 10</td>
+<td>S1, S2, S3, S4, S5, S6, S7, S8</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
 <td>G4</td>
 <td><b>Skill, not luck</b></td>
 <td>Wilson 95% lower bound on the hit rate above 52.38%; exact binomial p reported.</td>
+<td>0 of 10</td>
+<td>none</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
 <td>G5</td>
 <td><b>Stability</b></td>
 <td>Bootstrap 95% CI of the model's margin MAE sits entirely below the reference model's MAE.</td>
+<td>0 of 10</td>
+<td>none</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
 <td>G6</td>
 <td><b>Correlation limit</b></td>
 <td>Parlay leg pairs limited to |rho| &lt;= 0.30.</td>
+<td>10 of 10</td>
+<td>S1, S2, S3, S4, S5, S6, S7, S8, S9, S10</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
 <td>G7</td>
 <td><b>Availability robustness</b></td>
 <td>A play must survive flipping every Questionable player to Out (needs the official report for the graded window).</td>
+<td>0 of 10</td>
+<td>none</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 </tbody></table></div>
-<h2 class="sec">Gate matrix</h2><p class="secsub">Each strategy against each gate. This is the table that decides what gets funded.</p>
-<div class="tablewrap">
-<table class="tbl "
->
-<thead><tr>
-<th>ID</th>
-<th>Strategy</th>
-<th>G1</th>
-<th>G2</th>
-<th>G3</th>
-<th>G4</th>
-<th>G5</th>
-<th>G6</th>
-<th>G7</th>
-<th class="src">Source</th>
-</tr></thead><tbody>
-<tr>
-<td>S1</td>
-<td>Side edge vs reference</td>
-<td><span class="g gprov">PROVISIONAL</span></td>
-<td><span class="g gp">PASS</span></td>
-<td><span class="g gp">PASS</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gnr">NOT RUN</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S2</td>
-<td>Total edge vs reference</td>
-<td><span class="g gprov">PROVISIONAL</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gp">PASS</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gnr">NOT RUN</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S3</td>
-<td>Moneyline value</td>
-<td><span class="g gprov">PROVISIONAL</span></td>
-<td><span class="g gp">PASS</span></td>
-<td><span class="g gp">PASS</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gnr">NOT RUN</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S4</td>
-<td>Pace-driven total</td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gnr">NOT RUN</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S5</td>
-<td>Back-to-back fade</td>
-<td><span class="g gprov">PROVISIONAL</span></td>
-<td><span class="g gp">PASS</span></td>
-<td><span class="g gp">PASS</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gnr">NOT RUN</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S6</td>
-<td>Availability shock</td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gnr">NOT RUN</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S7</td>
-<td>Player points prop</td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gnr">NOT RUN</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S8</td>
-<td>Points + rebounds + assists combo</td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gna">N/A</span></td>
-<td><span class="g gnr">NOT RUN</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S9</td>
-<td>Two-leg cross-game parlay</td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gp">PASS</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gp">PASS</span></td>
-<td><span class="g gnr">NOT RUN</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S10</td>
-<td>Same-game parlay (side + total)</td>
-<td><span class="g gprov">PROVISIONAL</span></td>
-<td><span class="g gp">PASS</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gf">FAIL</span></td>
-<td><span class="g gp">PASS</span></td>
-<td><span class="g gnr">NOT RUN</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-</tbody></table></div>
-<p class="tnote">Hover a gate cell for the reason it was given. PASS = green, FAIL = red, PROVISIONAL = amber (passed, but the sample is too small to rely on), N/A = not applicable to this strategy, NOT RUN = could not be evaluated.</p>
-<h2 class="sec">Measured on the out-of-sample window</h2><p class="secsub">The model against the naive reference, on 51 games played after the ratings cut-off.</p>
-<div class="tablewrap">
-<table class="tbl "
->
-<thead><tr>
-<th>Metric</th>
-<th>Model</th>
-<th>Reference</th>
-<th>Reading</th>
-<th class="src">Source</th>
-</tr></thead><tbody>
-<tr>
-<td>Games in the window</td>
-<td>51</td>
-<td>2026-11-06 .. 2026-11-12</td>
-<td>2026-10-20..2026-11-05</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>Margin MAE</td>
-<td>12.89</td>
-<td>13.19</td>
-<td>model better</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>Margin RMSE</td>
-<td>17.10</td>
-<td>17.70</td>
-<td>model better</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>Total MAE</td>
-<td>14.86</td>
-<td>14.73</td>
-<td>reference better</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>Total RMSE</td>
-<td>19.88</td>
-<td>19.59</td>
-<td>reference better</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>Brier score</td>
-<td>0.1970</td>
-<td>0.1889</td>
-<td>reference better</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>Log loss</td>
-<td>0.5768</td>
-<td>0.5567</td>
-<td>reference better</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>Straight up</td>
-<td>37-14</td>
-<td>37-14</td>
-<td></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>Residual sigma (margin / total)</td>
-<td>17.44 / 20.28</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-</tbody></table></div>
+<p class="tnote">G4 (skill, not luck) is the gate that separates this from a hot streak, and it is the one that fails for every strategy that has plays. It requires the Wilson 95% lower bound on the hit rate to clear the 52.38% break-even at -110. On 23 plays, 16 wins is consistent with luck (p = 0.093), so S1 stays capped no matter how good the record looks.</p>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
       signal is skill or luck. Nothing on this site is a betting recommendation, and no
