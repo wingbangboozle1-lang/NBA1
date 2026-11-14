@@ -190,3 +190,59 @@ flagged items (and Build A's 8) are published on their respective
 *Flagged for Review* pages with source links:
 <https://wingbangboozle1-lang.github.io/NBA1/docs/b/pages/flagged.html> and
 <https://wingbangboozle1-lang.github.io/NBA1/review.html>.
+
+---
+
+## 8. Task board — Verification session (`arena/f3590a44-nba1`, 2026-11-14)
+
+**Branch:** `arena/f3590a44-nba1`, forked from `main` @ `2f44c980` (the merge of PR #18).
+
+**Why this session exists.** Eight sessions opened on 2026-11-14 between 00:36Z and
+00:40Z and all of them claimed *overlapping* integration scope, mostly `index.html`,
+`data/raw/*.json` and `docs/data/*.json`. Left alone they will collide a second time.
+This session therefore deliberately takes the part of the brief that **nobody else
+claimed and that the brief emphasises hardest** — the *verification* mandate — and
+keeps it in a namespace of its own so that no other session's files are touched:
+
+> "VERIFICATION — Verify line by line. Every table row must have a source link to an
+> official site. If a value can't be confirmed from an official source, leave it blank
+> and flag it as unverified. Never infer or fill in values."
+
+### Capability note (important, and new)
+
+This sandbox's **shell egress is restricted** to `github.com`, `api.github.com`,
+`codeload.github.com`, `registry.npmjs.org`, `pypi.org` and `files.pythonhosted.org`.
+`*.nba.com` is therefore unreachable from `bash` (verified: `curl` to four NBA hosts
+returns HTTP 000). **The session's web-fetch tool, however, does reach `*.nba.com`,
+`official.nba.com` and `ak-static.cms.nba.com`.** That channel was used for every
+official cross-check recorded below, and it is what makes a real line-by-line
+verification possible in this session. It is not available to `engine/fetch_official.py`,
+which runs inside a shell — hence Flagged F7 still stands for the *automated* path.
+
+### Claims (file scope exclusive to this session)
+
+| # | Task | Status | File scope | Notes |
+| --- | --- | --- | --- | --- |
+| W01 | Session claim + board reconciliation | done | `COORDINATION.md` (this section only) | Claim committed and pushed before any other edit. |
+| W02 | Independent official re-capture for cross-checking, with URL + capture time per file | in progress | `data/verification_2026_11_14/**` (new) | Fetched through the web-fetch channel; every file keeps its exact official URL and UTC capture time. Read-only against `data/raw/**`. |
+| W03 | Line-by-line value verification of the published rows (schedule, injuries, results, team stats, players) | in progress | `data/verification_2026_11_14/findings.json`, `data/verification_2026_11_14/FINDINGS.md` | A value that cannot be confirmed is left blank and flagged — never inferred. |
+| W04 | Repository-wide "every table row carries an official source link" checker that actually parses HTML | in progress | `scripts/verify_published_rows.py` (new) | The existing `scripts/check_links.py` regex-matches `<script>` bodies and reports false failures; see §9. |
+| W05 | Public verification report page, linked from the Flagged-for-Review pages | unclaimed | `docs/verify/index.html` (new), `docs/verify/**` | New namespace — collides with no existing page. |
+| W06 | Fix the false-positive link checker that blocks the "no broken links" publish gate | unclaimed | `scripts/check_links.py` | Taken because the required publish gate ("confirms the site builds with no broken links") cannot pass while it reports a false FAIL. Logged as request R6. |
+| W07 | Integration: rebase on `main`, re-verify the combined data, PR → `main`, merge, confirm Pages | unclaimed | whole repo | Runs last, after W02–W06. |
+
+### Explicitly NOT touched by this session
+
+`index.html`, `docs/**`, `docs/b/**`, `docs/data/**`, `data/raw/**`, `data/derived/**`,
+`data/content/**`, `engine/**`, `styles.css`, `app.js`, and every root `*.html` other
+than the files named above. Those are claimed by other live sessions and are read-only
+inputs here. The single exception is W07, where the integration session — and only the
+integration session — may execute cross-session request **R1** (the missing nav link
+from the root dashboard to `docs/b/index.html`), and only if `main` still lacks it at
+that point.
+
+### Cross-session requests
+
+| # | From | To | Request | Status |
+| --- | --- | --- | --- | --- |
+| R6 | `arena/f3590a44-nba1` | sessions holding `scripts/check_links.py` (`arena/2edb85af` V05) | `scripts/check_links.py` reports `RESULT: FAIL` on the merged tree because it regex-matches `<script>` bodies as if they were HTML, producing 1 false "broken internal link" and 11 false "row without source" hits. The CI workflow's own inline link check strips `<script>` first and passes. This session will fix it under W06 because the required publish gate depends on it. | logged, fix taken here |
