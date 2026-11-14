@@ -132,10 +132,10 @@
 <tr>
 <td>S1</td>
 <td>Side edge vs reference</td>
-<td><span class="g gprov">PROVISIONAL</span></td>
-<td><span class="g gp">PASS</span></td>
 <td><span class="g gp">PASS</span></td>
 <td><span class="g gf">FAIL</span></td>
+<td><span class="g gp">PASS</span></td>
+<td><span class="g gp">PASS</span></td>
 <td><span class="g gf">FAIL</span></td>
 <td><span class="g gna">N/A</span></td>
 <td><span class="g gnr">NOT RUN</span></td>
@@ -158,7 +158,7 @@
 <td>Moneyline value</td>
 <td><span class="g gprov">PROVISIONAL</span></td>
 <td><span class="g gp">PASS</span></td>
-<td><span class="g gp">PASS</span></td>
+<td><span class="g gf">FAIL</span></td>
 <td><span class="g gf">FAIL</span></td>
 <td><span class="g gf">FAIL</span></td>
 <td><span class="g gna">N/A</span></td>
@@ -229,7 +229,7 @@
 <td>S9</td>
 <td>Two-leg cross-game parlay</td>
 <td><span class="g gf">FAIL</span></td>
-<td><span class="g gp">PASS</span></td>
+<td><span class="g gf">FAIL</span></td>
 <td><span class="g gf">FAIL</span></td>
 <td><span class="g gf">FAIL</span></td>
 <td><span class="g gf">FAIL</span></td>
@@ -251,7 +251,7 @@
 </tr>
 </tbody></table></div>
 <p class="tnote">Hover a gate cell for the reason it was given. PASS = green, FAIL = red, PROVISIONAL = amber (passed, but the sample is too small to rely on), N/A = not applicable to this strategy, NOT RUN = could not be evaluated.</p>
-<h2 class="sec">Measured on the out-of-sample window</h2><p class="secsub">The model against the naive reference, on 51 games played after the ratings cut-off.</p>
+<h2 class="sec">Measured on the out-of-sample window</h2><p class="secsub">The model against the naive reference, on 60 games played after the ratings cut-off.</p>
 <div class="tablewrap">
 <table class="tbl "
 >
@@ -264,63 +264,63 @@
 </tr></thead><tbody>
 <tr>
 <td>Games in the window</td>
-<td>51</td>
-<td>2026-11-06 .. 2026-11-12</td>
+<td>60</td>
+<td>2026-11-06 .. 2026-11-13</td>
 <td>2026-10-20..2026-11-05</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
 <td>Margin MAE</td>
-<td>12.89</td>
-<td>13.19</td>
+<td>12.98</td>
+<td>13.62</td>
 <td>model better</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
 <td>Margin RMSE</td>
-<td>17.10</td>
-<td>17.70</td>
+<td>17.12</td>
+<td>17.88</td>
 <td>model better</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
 <td>Total MAE</td>
-<td>14.86</td>
-<td>14.73</td>
+<td>14.83</td>
+<td>14.72</td>
 <td>reference better</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
 <td>Total RMSE</td>
-<td>19.88</td>
-<td>19.59</td>
+<td>19.35</td>
+<td>19.10</td>
 <td>reference better</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
 <td>Brier score</td>
-<td>0.1970</td>
-<td>0.1889</td>
+<td>0.2020</td>
+<td>0.2001</td>
 <td>reference better</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
 <td>Log loss</td>
-<td>0.5768</td>
-<td>0.5567</td>
+<td>0.5873</td>
+<td>0.5827</td>
 <td>reference better</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
 <td>Straight up</td>
-<td>37-14</td>
-<td>37-14</td>
+<td>40-20</td>
+<td>42-18</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
 </tr>
 <tr>
 <td>Residual sigma (margin / total)</td>
-<td>17.44 / 20.28</td>
+<td>17.41 / 19.68</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
