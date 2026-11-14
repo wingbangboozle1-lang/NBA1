@@ -2984,3 +2984,55 @@ Branch `arena/e812a9ed-nba1`, based on `2038333` (`main`). This session does not
 - **PR/merge:** this audit-only record was delivered in [PR #82](https://github.com/wingbangboozle1-lang/NBA1/pull/82), merged at `48207a28f5863e5d8b082658062b368813c84757` on 2026-11-14. The final-integration PR/merge was not attempted by this task. At the original audit time PRs #63, #65, #66, #75 and #80 were open and `DIRTY`; #66 owns final integration. Do not treat this record as the final integration close-out.
 - **Post-merge Pages:** run [#43628532646](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43628532646) completed successfully; GitHub Pages API reports `built` at `https://wingbangboozle1-lang.github.io/NBA1/`. The separate official-source probe run [#43628532715](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43628532715) was still in progress at the time of this update; it does not gate the successful Pages deployment.
 >>>>>>> origin/main
+
+---
+
+## 31. Session `arena/95c1cb23-nba1` — game-day injury refresh, row-level re-verification, integration close-out (claimed 2026-11-14 18:41 UTC)
+
+**Numbering note.** This session claimed **§30** on the tree it branched from (`2038333`) and pushed
+the claim immediately, as the ground rules require. While this work was in flight `arena/a39b9370-nba1`
+landed its own §30 on `main` (merge of PR #87) and the board collided again — the fourth such collision
+logged, and the reason R-29-9 asks for atomic claims renumbered once at fusion by the integration seat.
+Nothing of theirs is edited or deleted here: this section is renumbered to **§31** and their record is kept
+in full. Their §30 records the merging of PRs #66/#80/#63/#75, which is why task G06 below closed out as
+*landed elsewhere* rather than as a merge by this session.
+
+**Board read before claiming (required by the ground rules).** `main` is at
+`2038333` (last commit 12:58:10Z — the probe workflow's own record). The newest
+claim on the board is §21 (`arena/254dd8bb-nba1`, integration seat, opened 09:40Z,
+branch tip `87b8486`) and §28 (`arena/df3fed12-nba1`, 10:00Z). Both are **more than
+60 minutes old with no commits** (5h40m and 6h00m at claim time), so under ground
+rule 5 the integration seat is takeable and is taken here, with the handoff noted:
+no work of theirs is discarded; open PRs #63/#65/#66/#75/#80 are triaged below as
+part of the seat, not edited.
+
+Session ID `arena/95c1cb23-nba1`; branch `arena/95c1cb23-nba1`, base `2038333`
+(the current tip of `main`). The platform pins this session to that branch, so the
+`session-<id>/<task>` naming in the brief is satisfied by this single pre-named
+branch — the same deviation §16/§17/§28 logged.
+
+**Why this lane and no other.** Everything else on the board is either done or
+owned. What is *time-critical and unowned* right now: the site's injury register is
+pinned to the **11/14 04:15 AM ET** edition (`site/data/meta.json`, `injury_report`),
+which is *before* the league's game-day filing window (11 a.m.–1 p.m. local on game
+days, per <https://official.nba.com/nba-injury-report-2026-27-season/>). At 18:39Z the
+official hub lists editions through **1:30 PM ET on 11/14** — i.e. the pre-tip report
+for tonight's five games has existed for ~5 hours and no build has read it. Five
+teams were recorded "NOT YET SUBMITTED" at 04:15 AM ET. That gap is the difference
+between a horizon that is hours stale and one that is current at tip-off, and it is
+the only part of the brief that changes by the hour.
+
+| # | Task | Status | File scope (exclusive to this session) |
+| --- | --- | --- | --- |
+| G01 | Fresh official capture at game-day currency: injury editions (04:15 AM ET → 1:30 PM ET, 11/14), slate pages 11/14–11/17 with records/times/game ids, newest league standings | in progress | `data/captures/2026-11-14-pm/**` |
+| G02 | Row-by-row re-verification of every published slate row (matchup, time, game id, record, season leader) against the live official page; agreement/disagreement per row with a source URL | in progress | `data/captures/2026-11-14-pm/**`, `site/data/**`, `index.html`, `site/pages/**` |
+| G03 | Injury-delta read-out: what changed between the 04:15 AM ET edition the model used and the 1:30 PM ET game-day edition, and which published lines/picks that touches | unclaimed by others | `data/captures/2026-11-14-pm/**` |
+| G04 | Flagged for Review: publish every stale row, disagreement and new irregularity found in G02/G03 (non-blocking) | pending | `site/pages/flagged.html`, `site/data/flagged.json` |
+| G05 | Executive summary, open questions and suggestions updated from the findings above | pending | `data/content/**`, `site/pages/{questions,suggestions}.html` |
+| G06 | Integration-seat triage of open PRs #63/#65/#66/#75/#80 (merge, or record why not) | pending | none (PR metadata + this board) |
+| G07 | PR → main, merge without waiting, confirm Pages deploy, record here | pending | this file |
+
+**Do not touch while I am working:** `docs/**`, `docs/b/**`, `strategy-lab/**`,
+`command-center/**`, `origination/**`, `audit/**`, `verify/**`, `engine/**`,
+`engine_v2/**`, `integration/**`, `scripts/**`, `desk*.html` and the legacy root
+pages. They are read-only inputs. Nothing is deleted.
