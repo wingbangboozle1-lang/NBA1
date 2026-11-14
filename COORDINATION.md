@@ -207,7 +207,7 @@ integration session, as §0 requires.
 | C03 | Row-by-row verification of the 31 published schedule rows | done | `scripts/verify_schedule_c.py`, `data/raw/verification_c03.json` | 31 rows compared: **0 mismatches**; calendar cells 9/5/9/8/5 match. Caveat: the transcription was made after the published file had been read, so this is not a blind check. Records for 18 teams are STALE (F-C02). |
 | C04 | Reproducibility defect in `docs/pages/summary.html` | done | `docs/pages/summary.html` (rebuilt by `scripts/build_site.py`) | Committed text said 682 table rows; the builder generates 693. Regenerated; no other page changed. Logged as F-C11. |
 | C05 | Root nav link to Build B (R1) + link to the new page | done | `index.html` | Added `docs/b/index.html` and `schedule-verified.html` under DETAIL PAGES. |
-| C06 | Integration: `verify_all.py`, PR, merge, Pages | in progress | whole repo | See §8. |
+| C06 | Integration: `verify_all.py`, PR, merge, Pages | done | whole repo | PR #19 merged 2026-11-14T00:43:06Z; Pages built. Record in §8. |
 
 ### 7.1 What was verified, and how
 
@@ -241,5 +241,31 @@ source for the 11/13 results and for the 11/14 injury reports, plus a team-stats
 | Branch | `arena/afbb836e-nba1` |
 | Base | `main` at `2f44c98` (PR #18) |
 | Local gate | `python3 scripts/verify_all.py` → `VERIFY OK` (includes the new `verify_schedule_c.py`) |
-| PR / merge / Pages | recorded below after merge |
+| PR | [#19](https://github.com/wingbangboozle1-lang/NBA1/pull/19) — "Build C: verified 14-17 Nov schedule, row-level checks, flagged items" |
+| Merge | `--merge`, 2026-11-14T00:43:06Z, merge commit `5fd46c8ae3364baa18adc58463dedc796c5e95ba`, without approval (as instructed; no auto-merge) |
+| PR checks | `validate` pass (5 s); `deploy` skipped on PR, as designed |
+| Pages workflow on `main` | `Publish static site to GitHub Pages` → success (run 43536058235, 28 s) |
+| Pages build | `pages build and deployment` → success (run 43536057551, 39 s); Pages API `status: built`, commit `5fd46c8` |
+| Live pages (checked with the fetch tool after deploy) | <https://wingbangboozle1-lang.github.io/NBA1/schedule-verified.html> (renders 36 / 27 / 31 / 0 counts) · <https://wingbangboozle1-lang.github.io/NBA1/> |
+| Not blocking, published for review | F-C01 to F-C11 on `schedule-verified.html`; irregularities also listed in §7.2 |
+| Still open | PR #11 and PR #14 (other branches, not touched); 11/13 finals; 11/14 injury report; lines and picks for 14–17 Nov (§7.3) |
 
+### 8.1 Log (session `arena/afbb836e-nba1`, UTC)
+
+| Time | Entry |
+| --- | --- |
+| 2026-11-14 00:3x | Board read; Build C claimed (C01–C06), claim pushed (`fbb3e5d`). |
+| 2026-11-14 | Official schedule and Games pages read; 36 games captured; 31 published rows compared, 0 mismatches. |
+| 2026-11-14 | `summary.html` row-count drift found and fixed (C04). Root nav link to Build B added (C05). |
+| 2026-11-14 00:43Z | PR #19 merged; Pages deployed (see table above). |
+
+### 8.2 Cross-session notes (logged, not executed)
+
+Found after PR #19 merged: two other branches have open PRs that overlap this build. Neither was merged or edited by this session.
+
+| # | From | To | Note |
+| --- | --- | --- | --- |
+| X1 | `arena/afbb836e-nba1` | `arena/a6936331-nba1` (PR #21) | PR #21 touches `docs/pages/summary.html`, `index.html`, `scripts/build_site.py`, `COORDINATION.md` and the verified-schedule area. PR #19 has since merged into `main`, so PR #21 needs a rebase before merge. The row-count fix in `summary.html` (682 → 693) is already on `main`. Keep `schedule-verified.html` and the index links. PR #21 also addresses the 5:15 PM vs 12:00 PM edition labelling; this session flagged that as F-C04, and it is not verified here. |
+| X2 | `arena/afbb836e-nba1` | `arena/9abdf3f7-nba1` (PR #20) | PR #20 is an audit of official scores for 6–12 Nov and of team advanced stats. If it captures verified 11/13 finals, it can close F-C01 and F-C02 (the 18 STALE records). This session did not capture 11/13 finals. |
+
+Status of other sessions' work is theirs to report. This session makes no claim about PR #20 or #21 content.
