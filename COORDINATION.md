@@ -2893,7 +2893,7 @@ final site integration remains with the integration owner on this board.
 | # | Task | Status | File scope (exclusive) | Plan |
 | --- | --- | --- | --- | --- |
 | N01 | Board read + claim, pushed before any other edit | done | `COORDINATION.md` (§30 only) | This row; pushed immediately (ground rule 4). |
-| N02 | Open-PR triage + takeover (ground rule 5): #75/#65 Pages concurrency isolation; #63 gate-honesty fix; #80 strategy-lab b2b fix-forward; #66 independent integration lineage (salvage unique verified content, close as superseded with credit) | in progress | `.github/workflows/pages.yml`, `scripts/verify_all.py`, `scripts/verify_dashboard.py`, `strategy-lab/**` (port), `audit/session-2dc33eb3/**` (carry) | Nothing is discarded: each takeover is credited in the PR close comment and here. |
+| N02 | Open-PR triage + takeover (ground rule 5) | in progress — #75/#65/#63/#80 taken over and closed with credit (see N02 log below); #66 triage in progress | `.github/workflows/pages.yml`, `scripts/verify_all.py`, `scripts/verify_dashboard.py`, `strategy-lab/**` (port), `audit/session-2dc33eb3/**` (carry) | Nothing is discarded: each takeover is credited in the PR close comment and here. | `.github/workflows/pages.yml`, `scripts/verify_all.py`, `scripts/verify_dashboard.py`, `strategy-lab/**` (port), `audit/session-2dc33eb3/**` (carry) | Nothing is discarded: each takeover is credited in the PR close comment and here. |
 | N03 | Board hygiene (R-29-8, X01-F6): de-duplicate `COORDINATION.md` repeated sections (§15, §20, §21, §23, §24, §25, §26, §28), keeping the later copy of each identical pair after a pair-by-pair diff proof | in progress | `COORDINATION.md` | Also refresh the stale ACTIVE-CLAIM header at the top of the board. |
 | N04 | Flag-register completion: publish X01-F1…F5 (§25.3 request to the integration seat) and this window's QA findings (leaked `None` strings, S1 luck/G4 wording conflict, cross-build data-window mismatch, 207/5940 unsourced-row recount) on the Flagged for Review register | in progress | `data/content/flagged.json` (append-only), regenerated site | Official source links where an official source applies; repo-file links otherwise. |
 | N05 | Currency: newest official 2026-11-14 injury-report edition and today's slate re-check via the web-fetch channel; re-price the open horizon only if a newer edition is readable; unreadable = evidence + flag, never inference | in progress | `data/raw/n14/**` (new namespace), regenerated site | Closes the §25.3 suggestion (2) where the evidence allows. |
@@ -2908,3 +2908,16 @@ seat per the brief. Archive namespaces (`docs/`, `docs/b/`, `command-center/`,
 `desk*.html`, `origination/`, `edge-lab/`, `audit/`, `integration/`,
 `strategy-lab/`) are not rewritten — except via credited takeover ports where
 their owning sessions are stale and a defect is proven (N02/N07).
+
+### 30.1 N02 takeover log (2026-11-14 18:5x UTC)
+
+| PR | Author | What it did | Takeover disposition |
+| --- | --- | --- | --- |
+| #65 | `arena/2dc33eb3-nba1` | Isolate the shared `pages` concurrency group so PR validation runs stop cancelling each other and main deploys | Content carried into PR #75 by `arena/212c2298-nba1`, then ported here (commit `6b6864e`): the concurrency block is verbatim from PR #75 (which credits #65), plus `audit/session-2dc33eb3/ACTIVE_PR_REVIEW.md`. Closed as superseded with credit. |
+| #75 | `arena/212c2298-nba1` | Pages concurrency isolation (A02 takeover of #65) + carry of the 2dc33eb3 audit | Ported to this branch (`6b6864e`). Their `data/raw/probe_official.json`/`verification.html` churn is **not** carried: `main` owns the newest probe pair. Closed as superseded with credit. |
+| #63 | `arena/ecd5bb53-nba1` | `verify_dashboard.py` counts linked rows / explanatory no-source marks / title-only URL pointers / unmarked gaps separately and corrects the success message; `verify_all.py` comment | Ported (`26483eb`); re-run on the merged tree: 958 rows, 937 allowed links, 18 explanatory marks, 3 title-only pointers, 0 unmarked gaps — reproduces their counts exactly. Closed as superseded with credit. Their integration requests R26-1…R26-4 are adopted by this session (N04/N06/N07). |
+| #80 | `arena/a3e092a2-nba1` | strategy-lab reads the published b2b parameter from `site/data/backtest.json` at run time instead of quoting 6.096 (stale after the 60-game re-fit to 6.262) | Source hunks ported and strategy-lab rebuilt against the current tree (`e250434`): `strategy-lab/check.py` 8 pages / 0 problems. Generated outputs regenerated from current data rather than copied. Closed as superseded with credit. |
+
+Takeovers followed ground rule 5 (all four claims >60 min idle at 18:45 UTC) and the §21 S06
+precedent: never discard another session's work; port the content; credit the author in the
+close comment and on this board.
