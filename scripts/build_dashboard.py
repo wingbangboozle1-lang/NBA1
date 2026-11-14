@@ -62,6 +62,7 @@ CATEGORIES = [
     ("HORIZON", None, "The next three days of NBA games and the lines we originate for them."),
     ("Lines &amp; Picks", "picks.html", "Originated spread, total and fair-moneyline for every game in the horizon, and the gated paper picks built on them."),
     ("Player Props", "props.html", "Per-player projections and prop combinations, with the minutes coverage stated next to every number."),
+    ("Prop Variance &amp; Rotation", "prop-variance.html", "Game-to-game dispersion measured from official game logs: the uncertainty behind every prop, the minutes-to-production elasticity, and what the injury report changed since the lines were cut."),
     ("Injuries &amp; Rotation", "injuries.html", "The official injury report, the rotation minutes it implies, and the measured production impact."),
     ("Game Flow", "gameflow.html", "Pace, expected margin and total, blow-out and overtime probability, and the rest and back-to-back context."),
     ("EVIDENCE", None, "Whether any of it is skill. The out-of-sample record, the gates, the correlations and the luck check."),
@@ -398,6 +399,304 @@ def build_source_check(sources):
     return page("Official source check",
                 "Line-by-line comparison of the site with NBA.com on 2026-11-14 (UTC): the horizon, the nine 11/13 finals and "
                 "the settlement of the lines published for them.", "\n".join(b))
+
+
+# ------------------------------------------------------- prop variance (session 24eb72c6)
+def build_prop_variance():
+    """Render data/derived/prop_variance.json (written by scripts/prop_variance.py).
+
+    Every box score on this page is a row transcribed from an official NBA.com player page
+    (data/proplogs/2026-11-14/captures.json); every derived figure is computed in the script
+    and the rule that produced it is printed in the note under its table. A cell the capture
+    could not read stays blank and is called out, never filled in."""
+    path = os.path.join(ROOT, "data", "derived", "prop_variance.json")
+    if not os.path.exists(path):
+        return page("Prop variance and rotation",
+                    "Measured game-to-game dispersion from official player game logs.",
+                    banner("warn", "No measurement file",
+                           "<code>data/derived/prop_variance.json</code> is not present. Refresh "
+                           "<code>data/proplogs/</code> from NBA.com and run "
+                           "<code>python3 scripts/prop_variance.py</code>."))
+    v = load(path)
+    hl = v["headline"]
+    b = []
+
+    b.append(tiles([
+        ("Players measured", hl["players_captured"], "of %d prop rows published for 2026-11-14" % (hl["players_captured"] + 4)),
+        ("Box scores transcribed", hl["games_transcribed"], "%d rows complete enough for rebounds and assists" % hl["complete_rows"]),
+        ("Props now priced", hl["props_now_priced"], "a measured SD behind the projection"),
+        ("Props clearing 1 SD", hl["props_clearing_one_sd"], "our line vs the season-average anchor"),
+        ("Cohort CV, points", hl["cohort_cv_points"], "game-to-game SD as a share of a player's average"),
+        ("Cross-check rows agreed", hl["cross_check_rows_agreeing"], "independent read of the same pages 9h earlier; %d disagreements" % hl["cross_check_disagreements"]),
+    ]))
+
+    b.append(banner("warn", "Why this page exists",
+                    "<p>Until now every prop row on this site published a projection with the "
+                    "<em>probability column left blank</em>, because game-to-game variance had never been "
+                    "measured from official data (open question Q3, flag F2). Without a dispersion figure a "
+                    "projection is a point with no width, so no prop could be sized, no prop combination could "
+                    "be priced, and no prop could be graded against anything.</p>"
+                    "<p>This page measures that width from the official NBA.com game-log pages for the "
+                    "2026-11-14 slate cohort, states the sampling limit next to every number, and reports "
+                    "what it does and does not license. It prices %d of the %d horizon prop rows; the other "
+                    "%d still carry no probability, exactly as before.</p>"
+                    % (hl["props_now_priced"], hl["props_total_in_horizon"], hl["props_still_unpriced"])))
+
+    b.append(h2("1. Measured dispersion, player by player",
+                "Each row is the player's own captured games. \"SD used\" is the player's sample SD shrunk "
+                "toward the cohort figure; the shrinkage rule is printed below the table."))
+    rows = []
+    for r in v["per_player"]:
+        bd = r["band"]["pts"]
+        bp = r["band"]["pra"]
+        rows.append([
+            "<b>%s</b>" % esc(r["player"]), esc(r["team"]), esc(r["n_games_pts"]),
+            num(bd["mean"]), num(bd["sd_player"]), num(bd["sd_cohort_implied"]), num(bd["sd_used"]),
+            "&plusmn;%s" % num(bd["sd_uncertainty"]), num(bd["cv"], 3),
+            "%s&nbsp;&ndash;&nbsp;%s" % (num(bd["band_80"][0]), num(bd["band_80"][1])),
+            num(r["site_proj_pts"]), num(r["site_baseline_pts"]),
+            num(bp["sd_used"]) if bp.get("sd_used") is not None else NA,
+            srclink_url(r["page"], "player page"),
+        ])
+    b.append(table(["Player", "Team", "Games read", "Mean PTS", "SD (own)", "SD (cohort)", "SD used",
+                    "SD uncertainty", "CV", "80% band on PTS", "Our proj", "Season anchor", "SD used PRA",
+                    "Source"], rows,
+                    note="Sample SD uses ddof&nbsp;=&nbsp;1. Because three or four games cannot pin a player's own SD, "
+                         "it is shrunk toward the cohort: SD<sub>used</sub><sup>2</sup> = "
+                         "((n&minus;1)&middot;SD<sub>player</sub><sup>2</sup> + 4&middot;SD<sub>cohort</sub><sup>2</sup>) / "
+                         "(n&minus;1 + 4), where SD<sub>cohort</sub> = pooled CV &times; the player's mean (points CV "
+                         "%s over %d rows). \"SD uncertainty\" is SD / sqrt(2(n&minus;1)) - the error on the SD itself - "
+                         "and it is large on purpose: a band this wide is the honest answer at this sample size. "
+                         "A dash means the cell was not readable at the chunk boundary or the player is outside the "
+                         "captured season table; nothing is estimated into it."
+                         % (num(v["cohort_dispersion"]["pts"]["pooled_cv"], 3), v["cohort_dispersion"]["pts"]["n_obs"])))
+
+    b.append(h2("2. The prop signal, and why none of it clears the bar",
+                "Edge here means our projection minus the player's own season average, expressed in the measured SD. "
+                "It is not an edge against a book: no official source publishes a prop line (Q1, F3)."))
+    rows = []
+    for s in v["prop_signals"]:
+        if s["status"] != "MEASURED":
+            rows.append([esc(s["player"]), NA, NA, NA, NA, NA, NA,
+                         '<span class="na" title="%s">not priced</span>' % esc(s.get("why", ""))])
+            continue
+        rows.append([
+            "<b>%s</b>" % esc(s["player"]), esc(s["team"]), num(s["n_games"], 0),
+            num(s["anchor_season_avg"]), num(s["our_projection"]), num(s["gap_pts"], 2),
+            num(s["gap_in_sd"], 3), num(s["p_beats_anchor"], 3),
+            "%s&nbsp;&ndash;&nbsp;%s" % (num(s["fair_line_low"]), num(s["fair_line_high"])),
+            esc(s["tier"]), srclink_url(s["page"], "player page"),
+        ])
+    rows = rows  # keep column count consistent below
+    b[-1:] = b[-1:]
+    b.append(table(["Player", "Team", "Games", "Season anchor", "Our projection", "Gap",
+                    "Gap in SD", "P(beats anchor)", "80% fair band", "Tier", "Source"], rows,
+                    note="P(beats anchor) is 1 &minus; &Phi;((anchor &minus; projection) / SD<sub>used</sub>) under a "
+                         "normal model on the two figures above. The desk rule this page supports: <b>a prop is "
+                         "publishable only when our projection sits at least one measured SD away from the naive "
+                         "anchor</b>; below that the projection is inside the player's own week-to-week noise, and the "
+                         "correct action is no bet. On 2026-11-14 that is every prop in the cohort - the largest gap "
+                         "measured is %s SD - which is the finding, not a shortfall of the pipeline."
+                         % num(max([abs(x.get("gap_in_sd") or 0) for x in v["prop_signals"]]), 2)))
+
+    b.append(h2("3. Every box score behind the numbers",
+                "The raw transcription. One row per game, as printed on the official page, with the box score link "
+                "for the same game so a reviewer can re-read it."))
+    rows = []
+    for r in v["per_player"]:
+        for g in r["games"]:
+            rows.append([esc(r["player"]), esc(r["team"]), esc(g["date"]), esc(g["matchup"]),
+                         num(g["min"], 0), num(g["pts"], 0), num(g["reb"], 0), num(g["ast"], 0),
+                         num(g["pra"], 0) if g.get("pra") is not None else NA,
+                         num(g["fg3m"], 0) if g.get("fg3m") is not None else NA,
+                         ("<em>cut at the page-chunk boundary - later cells unreadable, not zero</em>"
+                          if g["row_cut_at_chunk_boundary"] else "complete"),
+                         srclink_url(g["box_url"], "official box score")])
+    b.append(table(["Player", "Team", "Date", "Matchup", "MIN", "PTS", "REB", "AST", "PRA", "3PM",
+                    "Row state", "Source"], rows,
+                    note="40 rows read from %d official pages. A row marked <em>cut</em> is excluded from every "
+                         "statistic that needs the missing cells, and included for points and minutes, which sit "
+                         "left of the cut. PRA is points + rebounds + assists from the same row."
+                         % hl["players_captured"]))
+
+    b.append(h2("4. Which anchor forecasts a player better",
+                "The question the whole props module depends on: should a projection start from the season "
+                "average, from recent form, or from the last game?"))
+    rows = []
+    for a in v["anchor_test"]:
+        def cell(d):
+            if not d or d.get("n") in (0, None):
+                return NA
+            return "%s (%s rows)" % (num(d["mae"], 2), d["n"])
+        rows.append([esc(a["stat"]), cell(a["season_avg_baseline"]), cell(a["leave_one_out_window_mean"]),
+                     cell(a["previous_game"]), cell(a["official_header_average"]),
+                     ("season average wins by %s points" % num((a["leave_one_out_window_mean"]["mae"] or 0) -
+                                                                (a["season_avg_baseline"]["mae"] or 0), 2))
+                     if a["stat"] == "PTS" and a["season_avg_baseline"].get("mae") else "see the note",
+                     nomark("derived - scored on the official rows of section 3")])
+    b.append(table(["Stat", "Season average", "Recent-form mean (leave-one-out)", "Previous game",
+                    "Official page average", "Verdict on points", "Source"], rows,
+                    note="<b>Read this carefully.</b> All three forecasts are scored on the same captured games. "
+                         "The season average is contaminated - those games are inside it - and it sees 10-12 games "
+                         "while the leave-one-out form mean sees three. So the honest result is narrow: on this "
+                         "sample, <b>throwing away season data for a three-game window makes the forecast worse, and "
+                         "chasing the single previous game makes it worse still</b> (points MAE %s vs %s vs %s). "
+                         "It is not evidence that the season average is the best possible anchor, and it is not "
+                         "evidence that a properly weighted blend would lose - that test needs a longer logged "
+                         "window, which is what the remaining capture would buy."
+                         % (num(v["anchor_test"][0]["season_avg_baseline"]["mae"], 2),
+                            num(v["anchor_test"][0]["leave_one_out_window_mean"]["mae"], 2),
+                            num(v["anchor_test"][0]["previous_game"]["mae"], 2))))
+
+    b.append(h2("5. Minutes to production - the rotation number the injury module was missing",
+                "Within-player, pooled: how much of a player's game-to-game production swing travels with the "
+                "minutes he actually played."))
+    rows = []
+    for m, e in zip(v["minutes_to_production"], v["minutes_elasticity"]):
+        rows.append([esc(m["stat"]), num(m["n_rows"], 0), num(m["rho"], 3), num(m["rho_squared"], 3),
+                     num(m["t_statistic"], 2),
+                     ("&lt;0.0001" if (m["p_value_two_sided"] is not None and m["p_value_two_sided"] < 0.001)
+                      else num(m["p_value_two_sided"], 4)),
+                     num(e["beta_minutes_to_production"], 3), num(e["standard_error"], 3),
+                     esc(m["reading"]),
+                     nomark("derived - every input cell is an official row of section 3")])
+    b.append(table(["Stat", "Rows", "rho with minutes", "R squared", "t", "p (two-sided)",
+                    "Beta (elasticity)", "SE of beta", "Reading", "Source"], rows,
+                    note="Deviations are taken from each player's own mean before pooling, so a starter's level "
+                         "cannot masquerade as a minutes effect. Beta is a pooled within-player regression of "
+                         "relative production on relative minutes: <b>a 10%% cut in minutes predicts a %.1f%% cut in "
+                         "points</b> and a %.1f%% cut in PRA, while assists barely move with minutes at all. That "
+                         "matters for the injury module, which currently applies a declared production-transfer "
+                         "rule of 0.55 with no measured figure behind it (see its <code>model_assumptions</code>): "
+                         "points transfer at roughly one-for-one with minutes, rebounds and assists do not, so a "
+                         "flat 0.55 is too small for a scorer and too large for a passer. It is a fitted sample of "
+                         "%d rows from 10 players, not a league fit."
+                         % (abs(v["minutes_elasticity"][0]["beta_minutes_to_production"]) * 10,
+                            abs([e for e in v["minutes_elasticity"] if e["stat"] == "PRA"][0]["beta_minutes_to_production"]) * 10,
+                            v["minutes_to_production"][0]["n_rows"])))
+
+    b.append(h2("6. Same-game pairs - why the parlay rho stays an assumption",
+                "Every pair of captured players who shared a game, correlated on their deviations from their own "
+                "means."))
+    rows = []
+    for c in v["same_game_correlations"]:
+        rows.append([esc(c["leg_a"]), esc(c["leg_b"]), esc(c["relationship"]), num(c["games_shared"], 0),
+                     num(c["rho_points"], 3), num(c["rho_pra"], 3),
+                     esc(c["reading"]),
+                     srclink_url("https://www.nba.com/games?date=2026-11-14", "official games")])
+    b.append(table(["Leg A", "Leg B", "Relationship", "Games shared", "rho points", "rho PRA", "Reading",
+                    "Source"], rows,
+                    note="<b>The measured answer is that rho cannot be measured from this window.</b> The best pair "
+                         "shares three games, and a three-point correlation can be anything - the Denver pair reads "
+                         "%s on points while pairs with two or one shared games read as noise. The correlations page "
+                         "therefore keeps pricing same-game parlays with its declared rho, and this table is the "
+                         "evidence for why that number is labelled an assumption instead of a measurement. A usable "
+                         "estimate needs 30-50 shared games per pair, which means a full-season game-log capture, not "
+                         "a Last-5 block." % num([c for c in v["same_game_correlations"] if c["rho_points"] is not None][0]["rho_points"], 2)
+                    if v["same_game_correlations"] else None))
+
+    n_recon = sum(1 for x in v["baseline_staleness"] if (x.get("reconciliation") or "").startswith("EXPLAINED"))
+    n_bad = sum(1 for x in v["baseline_staleness"] if (x.get("reconciliation") or "").startswith("NOT"))
+    b.append(h2("7. Are the site's season averages stale?",
+                "The props baseline was transcribed on 2026-11-13. Recomputing it from the captured games should "
+                "reproduce what the official player page prints now."))
+    rows = []
+    for r in v["baseline_staleness"]:
+        rows.append([esc(r["player"]), esc(r.get("team") or ""), num(r.get("gp_at_capture"), 0),
+                     num(r.get("site_season_ppg_used")), num(r.get("official_ppg_now")),
+                     num(r.get("delta"), 2), num(r.get("rel"), 3),
+                     esc(r.get("reconciliation") or r.get("status") or ""),
+                     srclink_url("https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS",
+                                  "official season table")])
+    b.append(table(["Player", "Team", "GP at capture", "Site PPG", "Official PPG now", "Delta", "Relative",
+                    "Reconciliation", "Source"], rows,
+                    note="%d of %d reconcile, %d do not: the difference between the number this site published and "
+                         "the number NBA.com prints now is exactly the games played since the capture, within the "
+                         "rounding of a one-decimal average. So the staleness is <em>arithmetically explained</em> "
+                         "rather than suspicious - but it is still staleness: every prop on the horizon is anchored "
+                         "one to two games behind the league, and the tolerance that makes the check meaningful "
+                         "rather than decorative is 0.05 x (1 + gp / gp+g) points, about 0.1 of a point here."
+                         % (n_recon, len(v["baseline_staleness"]), n_bad)))
+
+    b.append(h2("8. What the injury report changed after the lines were cut",
+                "The newest official edition against the edition the horizon lines were originated from."))
+    inj = v["injury_delta"]
+    rows = []
+    for g in inj["games_affected"]:
+        rows.append([esc(g["matchup"]), esc(g["game_id"]), num(g["n_new_or_changed_rows"], 0),
+                     esc(", ".join(g["players"]) or "none"), esc(g["report_state_at_line_build"]),
+                     esc(g["line_originated"]), esc(g["note"]),
+                     srclink_url(inj["new_edition"], "%s edition" % inj["new_stamp"])])
+    b.append(table(["Game", "Game ID", "New or changed rows", "Players", "Report state when the line was cut",
+                    "Originated line", "Reading", "Source"], rows,
+                    note="Nothing changed for any 11/14 game between the 11/13 05:15 PM ET edition the lines were "
+                         "built from and the newest edition read at 10:30 UTC (%s). That is a clean result, and it is "
+                         "also the limit of it: at this edition five of the ten teams on the slate had still not "
+                         "filed (%s), so the game-day confirmation the league rule asks for (11 a.m.-1 p.m. local) "
+                         "had not happened yet. Any prop or line for those games is priced against a half-filed "
+                         "report." % (inj["new_stamp"], ", ".join(inj["teams_not_yet_submitted_at_this_edition"]))))
+    if inj["rows_changed_or_new"]:
+        rows = []
+        for d in inj["rows_changed_or_new"]:
+            rows.append([esc(d["matchup"]), esc(d["team"]), esc(d["player"]), esc(d["status_new"]),
+                         esc(d.get("status_in_site_edition") or ""), esc(d["change"]),
+                         srclink_url(inj["new_edition"], "official edition")])
+        b.append(table(["Game", "Team", "Player", "Status now", "Status in the site's edition", "Change",
+                        "Source"], rows,
+                        note="These rows are new or changed since the edition the site published; they are the "
+                             "items a reviewer should look at before trusting the affected line."))
+
+    b.append(h2("9. Independent second read of the same pages",
+                "A separate session captured three of these players nine hours earlier from the same official URLs. "
+                "Overlapping rows are compared cell for cell."))
+    rows = []
+    for c in v["cross_check_against_earlier_read"]:
+        if "result" in c:
+            rows.append([esc(c["player"]), NA, NA, NA, esc(c["result"])])
+            continue
+        rows.append([esc(c["player"]), num(c["rows_compared_and_agreeing"], 0),
+                     num(len(c["disagreements"]), 0), num(len(c["rows_only_one_side_could_read"]), 0),
+                     esc(c["window_shift"]), ])
+    b.append(table(["Player", "Rows agreeing", "Disagreements", "Readable by one side only", "Note", "Source"],
+                   [[r[0], r[1], r[2], r[3], r[4],
+                     srclink_url("https://www.nba.com/games?date=2026-11-14", "official games")] for r in rows],
+                   note="Zero disagreements. The earlier read carries an older window because it was taken before "
+                        "the 11/13 games finished, which is exactly the difference between the two files - so the "
+                        "agreement is a check on the transcription, not on the schedule."))
+
+    b.append(h2("10. What is not here, and what would finish it", "Stated as a list of gaps, with the page each gap needs."))
+    rows = []
+    for n in v["not_captured"]:
+        rows.append([esc(n["player"]), esc(n.get("team") or ""), esc(n.get("date") or ""), esc(n["reason"]),
+                     srclink_url("https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS",
+                                 "nba.com season table - id source")])
+    b.append(table(["Not captured", "Team", "Dates", "Why", "Source"], rows,
+                   note="The blocker for the four 11/14 players is not the game-log page, it is the player id: no "
+                        "committed capture in this repo carries an NBA.com id for them, and this session does not "
+                        "guess one. The fix is one roster-page read per team, after which the same script prices "
+                        "them with no further work. The 36 remaining horizon prop rows fail for the same reason "
+                        "plus volume, not method."))
+
+    b.append(banner("info", "Files behind this page",
+                    "<ul>"
+                    "<li><code>data/proplogs/2026-11-14/captures.json</code> - the row-for-row transcription, one "
+                    "source URL per player and per game.</li>"
+                    "<li><code>data/proplogs/2026-11-14/injury_2026-11-14_04_30AM.json</code> - the newest official "
+                    "injury edition, 31 printed rows for the 11/14 slate.</li>"
+                    "<li><code>data/derived/prop_variance.json</code> - everything rendered above, as data.</li>"
+                    "<li><code>scripts/prop_variance.py</code> - the computation, with its declared modelling "
+                    "choices at the top of the file.</li>"
+                    "</ul>"))
+    return page("Prop variance and rotation",
+                "Game-to-game dispersion measured from official NBA.com game logs for the 2026-11-14 slate cohort: "
+                "the uncertainty behind every prop, the minutes-to-production elasticity, and the injury delta "
+                "between editions. Read %s." % esc(v["_meta"]["generated_utc"]), "\n".join(b))
+
+
+def link_repo(path, label):
+    """Link into the repository. Used only for files inside this repo, never as a data source."""
+    return ('<a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/%s" target="_blank" '
+            'rel="noopener">%s</a>' % (esc(path), esc(label)))
 
 
 # ------------------------------------------------------------------------- main
@@ -1009,6 +1308,9 @@ def main():
     # === official source check (session arena/b0f2cc98-nba1, COORDINATION §23) =====
     built["source-check.html"] = build_source_check(sources)
 
+    # === prop variance (session arena/24eb72c6-nba1, COORDINATION section 24) =====
+    built["prop-variance.html"] = build_prop_variance()
+
     # ------------------------------------------------------------------ write
     for name, html in built.items():
         path = os.path.join(ROOT, name) if name == "index.html" else os.path.join(PAGES, name)
@@ -1030,6 +1332,9 @@ def main():
     shutil.copyfile(os.path.join(RAW, "sources.json"), os.path.join(SITE_DATA, "sources.json"))
     shutil.copyfile(os.path.join(ROOT, "data", "d", "repo_review.json"),
                     os.path.join(SITE_DATA, "repo_review.json"))
+    pv = os.path.join(ROOT, "data", "derived", "prop_variance.json")
+    if os.path.exists(pv):
+        shutil.copyfile(pv, os.path.join(SITE_DATA, "prop_variance.json"))
 
     print("Wrote %d pages, assets and data to %s" % (len(built), SITE))
 

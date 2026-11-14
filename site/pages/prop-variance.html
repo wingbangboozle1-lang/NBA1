@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prop variance and rotation &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="suggestions.html">Decision</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="prop-variance.html">Prop Variance &amp; Rotation</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row links to the official source it
+      came from. A blank cell means the value could not be confirmed from an official
+      source &mdash; it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Prop variance and rotation</h1>
+      <p class="sub">Game-to-game dispersion measured from official NBA.com game logs for the 2026-11-14 slate cohort: the uncertainty behind every prop, the minutes-to-production elasticity, and the injury delta between editions. Read 2026-11-14T10:35Z.</p>
+    </div>
+    <div class="tiles">
+<div class="tile"><div class="tile-v">10</div><div class="tile-l">Players measured</div><div class="tile-s">of 14 prop rows published for 2026-11-14</div></div>
+<div class="tile"><div class="tile-v">40</div><div class="tile-l">Box scores transcribed</div><div class="tile-s">30 rows complete enough for rebounds and assists</div></div>
+<div class="tile"><div class="tile-v">10</div><div class="tile-l">Props now priced</div><div class="tile-s">a measured SD behind the projection</div></div>
+<div class="tile"><div class="tile-v">0</div><div class="tile-l">Props clearing 1 SD</div><div class="tile-s">our line vs the season-average anchor</div></div>
+<div class="tile"><div class="tile-v">0.344</div><div class="tile-l">Cohort CV, points</div><div class="tile-s">game-to-game SD as a share of a player's average</div></div>
+<div class="tile"><div class="tile-v">10</div><div class="tile-l">Cross-check rows agreed</div><div class="tile-s">independent read of the same pages 9h earlier; 0 disagreements</div></div>
+</div>
+<div class="banner warn"><div class="b-t">Why this page exists</div><div class="b-b"><p>Until now every prop row on this site published a projection with the <em>probability column left blank</em>, because game-to-game variance had never been measured from official data (open question Q3, flag F2). Without a dispersion figure a projection is a point with no width, so no prop could be sized, no prop combination could be priced, and no prop could be graded against anything.</p><p>This page measures that width from the official NBA.com game-log pages for the 2026-11-14 slate cohort, states the sampling limit next to every number, and reports what it does and does not license. It prices 10 of the 88 horizon prop rows; the other 78 still carry no probability, exactly as before.</p></div></div>
+<h2 class="sec">1. Measured dispersion, player by player</h2><p class="secsub">Each row is the player's own captured games. "SD used" is the player's sample SD shrunk toward the cohort figure; the shrinkage rule is printed below the table.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Player</th>
+<th>Team</th>
+<th>Games read</th>
+<th>Mean PTS</th>
+<th>SD (own)</th>
+<th>SD (cohort)</th>
+<th>SD used</th>
+<th>SD uncertainty</th>
+<th>CV</th>
+<th>80% band on PTS</th>
+<th>Our proj</th>
+<th>Season anchor</th>
+<th>SD used PRA</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td><b>Ty Jerome</b></td>
+<td>MEM</td>
+<td>4</td>
+<td>21.8</td>
+<td>4.1</td>
+<td>7.5</td>
+<td>6.3</td>
+<td>&plusmn;2.6</td>
+<td>0.288</td>
+<td>13.7&nbsp;&ndash;&nbsp;29.8</td>
+<td>26.5</td>
+<td>26.2</td>
+<td>6.7</td>
+<td class="src"><a href="https://www.nba.com/player/1629660/ty-jerome/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>LaMelo Ball</b></td>
+<td>MIN</td>
+<td>4</td>
+<td>22.0</td>
+<td>1.6</td>
+<td>7.6</td>
+<td>5.8</td>
+<td>&plusmn;2.4</td>
+<td>0.265</td>
+<td>14.5&nbsp;&ndash;&nbsp;29.5</td>
+<td>21.6</td>
+<td>18.6</td>
+<td>6.8</td>
+<td class="src"><a href="https://www.nba.com/player/1630163/lamelo-ball/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Caleb Wilson</b></td>
+<td>CHI</td>
+<td>4</td>
+<td>15.5</td>
+<td>7.9</td>
+<td>5.3</td>
+<td>6.6</td>
+<td>&plusmn;2.7</td>
+<td>0.424</td>
+<td>7.1&nbsp;&ndash;&nbsp;23.9</td>
+<td>17.1</td>
+<td>18.9</td>
+<td>5.4</td>
+<td class="src"><a href="https://www.nba.com/player/1643410/caleb-wilson/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Donovan Mitchell</b></td>
+<td>CLE</td>
+<td>4</td>
+<td>24.0</td>
+<td>10.7</td>
+<td>8.3</td>
+<td>9.4</td>
+<td>&plusmn;3.8</td>
+<td>0.390</td>
+<td>12.0&nbsp;&ndash;&nbsp;36.0</td>
+<td>22.6</td>
+<td>22.8</td>
+<td>8.8</td>
+<td class="src"><a href="https://www.nba.com/player/1628378/donovan-mitchell/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Cooper Flagg</b></td>
+<td>DAL</td>
+<td>3</td>
+<td>26.7</td>
+<td>15.6</td>
+<td>9.2</td>
+<td>11.7</td>
+<td>&plusmn;5.8</td>
+<td>0.439</td>
+<td>11.7&nbsp;&ndash;&nbsp;41.7</td>
+<td>24.6</td>
+<td>24.6</td>
+<td>14.9</td>
+<td class="src"><a href="https://www.nba.com/player/1642843/cooper-flagg/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Zion Williamson</b></td>
+<td>NOP</td>
+<td>5</td>
+<td>22.4</td>
+<td>5.9</td>
+<td>7.7</td>
+<td>6.9</td>
+<td>&plusmn;2.4</td>
+<td>0.306</td>
+<td>13.6&nbsp;&ndash;&nbsp;31.2</td>
+<td>21.7</td>
+<td>21.7</td>
+<td>6.5</td>
+<td class="src"><a href="https://www.nba.com/player/1629627/zion-williamson/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Jamal Murray</b></td>
+<td>DEN</td>
+<td>4</td>
+<td>24.5</td>
+<td>11.5</td>
+<td>8.4</td>
+<td>9.8</td>
+<td>&plusmn;4.0</td>
+<td>0.402</td>
+<td>11.9&nbsp;&ndash;&nbsp;37.1</td>
+<td>28.2</td>
+<td>26.2</td>
+<td>8.8</td>
+<td class="src"><a href="https://www.nba.com/player/1627750/jamal-murray/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Giannis Antetokounmpo</b></td>
+<td>MIA</td>
+<td>4</td>
+<td>29.0</td>
+<td>7.0</td>
+<td>10.0</td>
+<td>8.8</td>
+<td>&plusmn;3.6</td>
+<td>0.304</td>
+<td>17.7&nbsp;&ndash;&nbsp;40.3</td>
+<td>25.7</td>
+<td>27.7</td>
+<td>9.7</td>
+<td class="src"><a href="https://www.nba.com/player/203507/giannis-antetokounmpo/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Cade Cunningham</b></td>
+<td>DET</td>
+<td>4</td>
+<td>27.2</td>
+<td>17.3</td>
+<td>9.4</td>
+<td>13.3</td>
+<td>&plusmn;5.5</td>
+<td>0.490</td>
+<td>10.2&nbsp;&ndash;&nbsp;44.4</td>
+<td>26.1</td>
+<td>25.0</td>
+<td>16.2</td>
+<td class="src"><a href="https://www.nba.com/player/1630595/cade-cunningham/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Nikola Jokic</b></td>
+<td>DEN</td>
+<td>4</td>
+<td>25.8</td>
+<td>5.4</td>
+<td>8.9</td>
+<td>7.6</td>
+<td>&plusmn;3.1</td>
+<td>0.294</td>
+<td>16.1&nbsp;&ndash;&nbsp;35.5</td>
+<td>25.3</td>
+<td>23.5</td>
+<td>9.8</td>
+<td class="src"><a href="https://www.nba.com/player/203999/nikola-jokic/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Sample SD uses ddof&nbsp;=&nbsp;1. Because three or four games cannot pin a player's own SD, it is shrunk toward the cohort: SD<sub>used</sub><sup>2</sup> = ((n&minus;1)&middot;SD<sub>player</sub><sup>2</sup> + 4&middot;SD<sub>cohort</sub><sup>2</sup>) / (n&minus;1 + 4), where SD<sub>cohort</sub> = pooled CV &times; the player's mean (points CV 0.344 over 40 rows). "SD uncertainty" is SD / sqrt(2(n&minus;1)) - the error on the SD itself - and it is large on purpose: a band this wide is the honest answer at this sample size. A dash means the cell was not readable at the chunk boundary or the player is outside the captured season table; nothing is estimated into it.</p>
+<h2 class="sec">2. The prop signal, and why none of it clears the bar</h2><p class="secsub">Edge here means our projection minus the player's own season average, expressed in the measured SD. It is not an edge against a book: no official source publishes a prop line (Q1, F3).</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Player</th>
+<th>Team</th>
+<th>Games</th>
+<th>Season anchor</th>
+<th>Our projection</th>
+<th>Gap</th>
+<th>Gap in SD</th>
+<th>P(beats anchor)</th>
+<th>80% fair band</th>
+<th>Tier</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td><b>LaMelo Ball</b></td>
+<td>MIN</td>
+<td>4</td>
+<td>18.6</td>
+<td>21.6</td>
+<td>3.00</td>
+<td>0.515</td>
+<td>0.697</td>
+<td>14.1&nbsp;&ndash;&nbsp;29.1</td>
+<td>borderline</td>
+<td class="src"><a href="https://www.nba.com/player/1630163/lamelo-ball/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Caleb Wilson</b></td>
+<td>CHI</td>
+<td>4</td>
+<td>18.9</td>
+<td>17.1</td>
+<td>-1.80</td>
+<td>-0.274</td>
+<td>0.392</td>
+<td>8.7&nbsp;&ndash;&nbsp;25.5</td>
+<td>thin - inside one measured SD</td>
+<td class="src"><a href="https://www.nba.com/player/1643410/caleb-wilson/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Nikola Jokic</b></td>
+<td>DEN</td>
+<td>4</td>
+<td>23.5</td>
+<td>25.3</td>
+<td>1.80</td>
+<td>0.238</td>
+<td>0.594</td>
+<td>15.6&nbsp;&ndash;&nbsp;35.0</td>
+<td>thin - inside one measured SD</td>
+<td class="src"><a href="https://www.nba.com/player/203999/nikola-jokic/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Giannis Antetokounmpo</b></td>
+<td>MIA</td>
+<td>4</td>
+<td>27.7</td>
+<td>25.7</td>
+<td>-2.00</td>
+<td>-0.227</td>
+<td>0.410</td>
+<td>14.4&nbsp;&ndash;&nbsp;37.0</td>
+<td>thin - inside one measured SD</td>
+<td class="src"><a href="https://www.nba.com/player/203507/giannis-antetokounmpo/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Jamal Murray</b></td>
+<td>DEN</td>
+<td>4</td>
+<td>26.2</td>
+<td>28.2</td>
+<td>2.00</td>
+<td>0.203</td>
+<td>0.580</td>
+<td>15.6&nbsp;&ndash;&nbsp;40.8</td>
+<td>thin - inside one measured SD</td>
+<td class="src"><a href="https://www.nba.com/player/1627750/jamal-murray/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Cade Cunningham</b></td>
+<td>DET</td>
+<td>4</td>
+<td>25.0</td>
+<td>26.1</td>
+<td>1.10</td>
+<td>0.082</td>
+<td>0.533</td>
+<td>9.0&nbsp;&ndash;&nbsp;43.2</td>
+<td>thin - inside one measured SD</td>
+<td class="src"><a href="https://www.nba.com/player/1630595/cade-cunningham/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Ty Jerome</b></td>
+<td>MEM</td>
+<td>4</td>
+<td>26.2</td>
+<td>26.5</td>
+<td>0.30</td>
+<td>0.048</td>
+<td>0.519</td>
+<td>18.5&nbsp;&ndash;&nbsp;34.5</td>
+<td>thin - inside one measured SD</td>
+<td class="src"><a href="https://www.nba.com/player/1629660/ty-jerome/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Donovan Mitchell</b></td>
+<td>CLE</td>
+<td>4</td>
+<td>22.8</td>
+<td>22.6</td>
+<td>-0.20</td>
+<td>-0.021</td>
+<td>0.491</td>
+<td>10.6&nbsp;&ndash;&nbsp;34.6</td>
+<td>thin - inside one measured SD</td>
+<td class="src"><a href="https://www.nba.com/player/1628378/donovan-mitchell/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Cooper Flagg</b></td>
+<td>DAL</td>
+<td>3</td>
+<td>24.6</td>
+<td>24.6</td>
+<td>0.00</td>
+<td>0.000</td>
+<td>0.500</td>
+<td>9.6&nbsp;&ndash;&nbsp;39.6</td>
+<td>thin - inside one measured SD</td>
+<td class="src"><a href="https://www.nba.com/player/1642843/cooper-flagg/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+<tr>
+<td><b>Zion Williamson</b></td>
+<td>NOP</td>
+<td>5</td>
+<td>21.7</td>
+<td>21.7</td>
+<td>0.00</td>
+<td>0.000</td>
+<td>0.500</td>
+<td>12.9&nbsp;&ndash;&nbsp;30.5</td>
+<td>thin - inside one measured SD</td>
+<td class="src"><a href="https://www.nba.com/player/1629627/zion-williamson/game-log" target="_blank" rel="noopener">player page</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">P(beats anchor) is 1 &minus; &Phi;((anchor &minus; projection) / SD<sub>used</sub>) under a normal model on the two figures above. The desk rule this page supports: <b>a prop is publishable only when our projection sits at least one measured SD away from the naive anchor</b>; below that the projection is inside the player's own week-to-week noise, and the correct action is no bet. On 2026-11-14 that is every prop in the cohort - the largest gap measured is 0.52 SD - which is the finding, not a shortfall of the pipeline.</p>
+<h2 class="sec">3. Every box score behind the numbers</h2><p class="secsub">The raw transcription. One row per game, as printed on the official page, with the box score link for the same game so a reviewer can re-read it.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Player</th>
+<th>Team</th>
+<th>Date</th>
+<th>Matchup</th>
+<th>MIN</th>
+<th>PTS</th>
+<th>REB</th>
+<th>AST</th>
+<th>PRA</th>
+<th>3PM</th>
+<th>Row state</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Ty Jerome</td>
+<td>MEM</td>
+<td>2026-11-13</td>
+<td>MEM @ NOP</td>
+<td>29</td>
+<td>17</td>
+<td>2</td>
+<td>9</td>
+<td>28</td>
+<td>2</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600038/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Ty Jerome</td>
+<td>MEM</td>
+<td>2026-11-11</td>
+<td>MEM vs. DEN</td>
+<td>32</td>
+<td>22</td>
+<td>2</td>
+<td>5</td>
+<td>29</td>
+<td>1</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600221/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Ty Jerome</td>
+<td>MEM</td>
+<td>2026-11-09</td>
+<td>MEM @ TOR</td>
+<td>32</td>
+<td>27</td>
+<td>6</td>
+<td>2</td>
+<td>35</td>
+<td>5</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600206/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Ty Jerome</td>
+<td>MEM</td>
+<td>2026-11-06</td>
+<td>MEM vs. OKC</td>
+<td>28</td>
+<td>21</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><em>cut at the page-chunk boundary - later cells unreadable, not zero</em></td>
+<td class="src"><a href="https://www.nba.com/game/0022600029/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>LaMelo Ball</td>
+<td>MIN</td>
+<td>2026-11-12</td>
+<td>MIN vs. DAL</td>
+<td>25</td>
+<td>22</td>
+<td>3</td>
+<td>9</td>
+<td>34</td>
+<td>6</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600229/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>LaMelo Ball</td>
+<td>MIN</td>
+<td>2026-11-08</td>
+<td>MIN vs. UTA</td>
+<td>30</td>
+<td>24</td>
+<td>3</td>
+<td>5</td>
+<td>32</td>
+<td>4</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600198/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>LaMelo Ball</td>
+<td>MIN</td>
+<td>2026-11-06</td>
+<td>MIN @ NOP</td>
+<td>35</td>
+<td>22</td>
+<td>2</td>
+<td>8</td>
+<td>32</td>
+<td>3</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600031/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>LaMelo Ball</td>
+<td>MIN</td>
+<td>2026-11-04</td>
+<td>MIN @ HOU</td>
+<td>31</td>
+<td>20</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>4</td>
+<td><em>cut at the page-chunk boundary - later cells unreadable, not zero</em></td>
+<td class="src"><a href="https://www.nba.com/game/0022600181/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Caleb Wilson</td>
+<td>CHI</td>
+<td>2026-11-11</td>
+<td>CHI vs. SAS</td>
+<td>15</td>
+<td>15</td>
+<td>5</td>
+<td>0</td>
+<td>20</td>
+<td>2</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600220/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Caleb Wilson</td>
+<td>CHI</td>
+<td>2026-11-08</td>
+<td>CHI vs. PHI</td>
+<td>32</td>
+<td>18</td>
+<td>5</td>
+<td>0</td>
+<td>23</td>
+<td>2</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600196/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Caleb Wilson</td>
+<td>CHI</td>
+<td>2026-11-04</td>
+<td>CHI @ NYK</td>
+<td>22</td>
+<td>5</td>
+<td>5</td>
+<td>0</td>
+<td>10</td>
+<td>1</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600177/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Caleb Wilson</td>
+<td>CHI</td>
+<td>2026-11-02</td>
+<td>CHI @ PHI</td>
+<td>34</td>
+<td>24</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>4</td>
+<td><em>cut at the page-chunk boundary - later cells unreadable, not zero</em></td>
+<td class="src"><a href="https://www.nba.com/game/0022600163/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Donovan Mitchell</td>
+<td>CLE</td>
+<td>2026-11-13</td>
+<td>CLE @ MIA</td>
+<td>33</td>
+<td>25</td>
+<td>4</td>
+<td>7</td>
+<td>36</td>
+<td>5</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600036/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Donovan Mitchell</td>
+<td>CLE</td>
+<td>2026-11-11</td>
+<td>CLE @ NYK</td>
+<td>36</td>
+<td>23</td>
+<td>7</td>
+<td>6</td>
+<td>36</td>
+<td>2</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600218/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Donovan Mitchell</td>
+<td>CLE</td>
+<td>2026-11-09</td>
+<td>CLE @ CHA</td>
+<td>23</td>
+<td>11</td>
+<td>2</td>
+<td>4</td>
+<td>17</td>
+<td>1</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600204/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Donovan Mitchell</td>
+<td>CLE</td>
+<td>2026-11-07</td>
+<td>CLE vs. NYK</td>
+<td>37</td>
+<td>37</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><em>cut at the page-chunk boundary - later cells unreadable, not zero</em></td>
+<td class="src"><a href="https://www.nba.com/game/0022600191/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Cooper Flagg</td>
+<td>DAL</td>
+<td>2026-11-12</td>
+<td>DAL @ MIN</td>
+<td>27</td>
+<td>12</td>
+<td>7</td>
+<td>3</td>
+<td>22</td>
+<td>1</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600229/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Cooper Flagg</td>
+<td>DAL</td>
+<td>2026-11-09</td>
+<td>DAL vs. IND</td>
+<td>39</td>
+<td>43</td>
+<td>10</td>
+<td>6</td>
+<td>59</td>
+<td>3</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600207/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Cooper Flagg</td>
+<td>DAL</td>
+<td>2026-11-08</td>
+<td>DAL vs. BKN</td>
+<td>28</td>
+<td>25</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>3</td>
+<td><em>cut at the page-chunk boundary - later cells unreadable, not zero</em></td>
+<td class="src"><a href="https://www.nba.com/game/0022600199/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Zion Williamson</td>
+<td>NOP</td>
+<td>2026-11-13</td>
+<td>NOP vs. MEM</td>
+<td>33</td>
+<td>22</td>
+<td>5</td>
+<td>4</td>
+<td>31</td>
+<td>0</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600038/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Zion Williamson</td>
+<td>NOP</td>
+<td>2026-11-11</td>
+<td>NOP vs. BKN</td>
+<td>30</td>
+<td>29</td>
+<td>4</td>
+<td>2</td>
+<td>35</td>
+<td>1</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600223/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Zion Williamson</td>
+<td>NOP</td>
+<td>2026-11-08</td>
+<td>NOP @ LAC</td>
+<td>31</td>
+<td>25</td>
+<td>4</td>
+<td>2</td>
+<td>31</td>
+<td>0</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600201/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Zion Williamson</td>
+<td>NOP</td>
+<td>2026-11-06</td>
+<td>NOP vs. MIN</td>
+<td>36</td>
+<td>13</td>
+<td>8</td>
+<td>4</td>
+<td>25</td>
+<td>0</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600031/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Zion Williamson</td>
+<td>NOP</td>
+<td>2026-11-04</td>
+<td>NOP vs. UTA</td>
+<td>38</td>
+<td>23</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><em>cut at the page-chunk boundary - later cells unreadable, not zero</em></td>
+<td class="src"><a href="https://www.nba.com/game/0022600179/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Jamal Murray</td>
+<td>DEN</td>
+<td>2026-11-11</td>
+<td>DEN @ MEM</td>
+<td>32</td>
+<td>30</td>
+<td>4</td>
+<td>8</td>
+<td>42</td>
+<td>4</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600221/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Jamal Murray</td>
+<td>DEN</td>
+<td>2026-11-09</td>
+<td>DEN @ HOU</td>
+<td>39</td>
+<td>38</td>
+<td>2</td>
+<td>2</td>
+<td>42</td>
+<td>5</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600208/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Jamal Murray</td>
+<td>DEN</td>
+<td>2026-11-07</td>
+<td>DEN @ IND</td>
+<td>34</td>
+<td>16</td>
+<td>6</td>
+<td>8</td>
+<td>30</td>
+<td>2</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600189/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Jamal Murray</td>
+<td>DEN</td>
+<td>2026-11-04</td>
+<td>DEN vs. TOR</td>
+<td>28</td>
+<td>14</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><em>cut at the page-chunk boundary - later cells unreadable, not zero</em></td>
+<td class="src"><a href="https://www.nba.com/game/0022600182/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Giannis Antetokounmpo</td>
+<td>MIA</td>
+<td>2026-11-13</td>
+<td>MIA vs. CLE</td>
+<td>31</td>
+<td>37</td>
+<td>9</td>
+<td>2</td>
+<td>48</td>
+<td>1</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600036/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Giannis Antetokounmpo</td>
+<td>MIA</td>
+<td>2026-11-10</td>
+<td>MIA @ UTA</td>
+<td>31</td>
+<td>30</td>
+<td>11</td>
+<td>4</td>
+<td>45</td>
+<td>1</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600214/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Giannis Antetokounmpo</td>
+<td>MIA</td>
+<td>2026-11-08</td>
+<td>MIA @ SAC</td>
+<td>34</td>
+<td>29</td>
+<td>14</td>
+<td>3</td>
+<td>46</td>
+<td>0</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600202/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Giannis Antetokounmpo</td>
+<td>MIA</td>
+<td>2026-11-05</td>
+<td>MIA @ GSW</td>
+<td>31</td>
+<td>20</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>1</td>
+<td><em>cut at the page-chunk boundary - later cells unreadable, not zero</em></td>
+<td class="src"><a href="https://www.nba.com/game/0022600188/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Cade Cunningham</td>
+<td>DET</td>
+<td>2026-11-12</td>
+<td>DET @ WAS</td>
+<td>48</td>
+<td>52</td>
+<td>5</td>
+<td>11</td>
+<td>68</td>
+<td>3</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600228/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Cade Cunningham</td>
+<td>DET</td>
+<td>2026-11-09</td>
+<td>DET vs. WAS</td>
+<td>27</td>
+<td>17</td>
+<td>3</td>
+<td>7</td>
+<td>27</td>
+<td>0</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600205/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Cade Cunningham</td>
+<td>DET</td>
+<td>2026-11-08</td>
+<td>DET vs. LAL</td>
+<td>38</td>
+<td>14</td>
+<td>4</td>
+<td>8</td>
+<td>26</td>
+<td>1</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600197/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Cade Cunningham</td>
+<td>DET</td>
+<td>2026-11-04</td>
+<td>DET vs. PHI</td>
+<td>40</td>
+<td>26</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><em>cut at the page-chunk boundary - later cells unreadable, not zero</em></td>
+<td class="src"><a href="https://www.nba.com/game/0022600173/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Nikola Jokic</td>
+<td>DEN</td>
+<td>2026-11-11</td>
+<td>DEN @ MEM</td>
+<td>37</td>
+<td>27</td>
+<td>11</td>
+<td>8</td>
+<td>46</td>
+<td>1</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600221/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Nikola Jokic</td>
+<td>DEN</td>
+<td>2026-11-09</td>
+<td>DEN @ HOU</td>
+<td>39</td>
+<td>25</td>
+<td>16</td>
+<td>9</td>
+<td>50</td>
+<td>1</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600208/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Nikola Jokic</td>
+<td>DEN</td>
+<td>2026-11-07</td>
+<td>DEN @ IND</td>
+<td>36</td>
+<td>19</td>
+<td>13</td>
+<td>8</td>
+<td>40</td>
+<td>1</td>
+<td>complete</td>
+<td class="src"><a href="https://www.nba.com/game/0022600189/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+<tr>
+<td>Nikola Jokic</td>
+<td>DEN</td>
+<td>2026-11-04</td>
+<td>DEN vs. TOR</td>
+<td>30</td>
+<td>32</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><em>cut at the page-chunk boundary - later cells unreadable, not zero</em></td>
+<td class="src"><a href="https://www.nba.com/game/0022600182/box-score" target="_blank" rel="noopener">official box score</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">40 rows read from 10 official pages. A row marked <em>cut</em> is excluded from every statistic that needs the missing cells, and included for points and minutes, which sit left of the cut. PRA is points + rebounds + assists from the same row.</p>
+<h2 class="sec">4. Which anchor forecasts a player better</h2><p class="secsub">The question the whole props module depends on: should a projection start from the season average, from recent form, or from the last game?</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Stat</th>
+<th>Season average</th>
+<th>Recent-form mean (leave-one-out)</th>
+<th>Previous game</th>
+<th>Official page average</th>
+<th>Verdict on points</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>PTS</td>
+<td>6.53 (40 rows)</td>
+<td>8.02 (40 rows)</td>
+<td>9.97 (30 rows)</td>
+<td>6.43 (40 rows)</td>
+<td>season average wins by 1.49 points</td>
+<td class="src"><span class="na" title="derived - scored on the official rows of section 3">&mdash;</span></td>
+</tr>
+<tr>
+<td>REB</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>1.88 (30 rows)</td>
+<td>2.15 (20 rows)</td>
+<td>1.60 (30 rows)</td>
+<td>see the note</td>
+<td class="src"><span class="na" title="derived - scored on the official rows of section 3">&mdash;</span></td>
+</tr>
+<tr>
+<td>AST</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>1.94 (30 rows)</td>
+<td>2.30 (20 rows)</td>
+<td>1.67 (30 rows)</td>
+<td>see the note</td>
+<td class="src"><span class="na" title="derived - scored on the official rows of section 3">&mdash;</span></td>
+</tr>
+<tr>
+<td>PRA</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>9.82 (30 rows)</td>
+<td>8.35 (20 rows)</td>
+<td>7.01 (30 rows)</td>
+<td>see the note</td>
+<td class="src"><span class="na" title="derived - scored on the official rows of section 3">&mdash;</span></td>
+</tr>
+</tbody></table></div>
+<p class="tnote"><b>Read this carefully.</b> All three forecasts are scored on the same captured games. The season average is contaminated - those games are inside it - and it sees 10-12 games while the leave-one-out form mean sees three. So the honest result is narrow: on this sample, <b>throwing away season data for a three-game window makes the forecast worse, and chasing the single previous game makes it worse still</b> (points MAE 6.53 vs 8.02 vs 9.97). It is not evidence that the season average is the best possible anchor, and it is not evidence that a properly weighted blend would lose - that test needs a longer logged window, which is what the remaining capture would buy.</p>
+<h2 class="sec">5. Minutes to production - the rotation number the injury module was missing</h2><p class="secsub">Within-player, pooled: how much of a player's game-to-game production swing travels with the minutes he actually played.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Stat</th>
+<th>Rows</th>
+<th>rho with minutes</th>
+<th>R squared</th>
+<th>t</th>
+<th>p (two-sided)</th>
+<th>Beta (elasticity)</th>
+<th>SE of beta</th>
+<th>Reading</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>PTS</td>
+<td>40</td>
+<td>0.580</td>
+<td>0.336</td>
+<td>4.39</td>
+<td>&lt;0.0001</td>
+<td>1.288</td>
+<td>0.296</td>
+<td>minutes carry a measurable share of the swing</td>
+<td class="src"><span class="na" title="derived - every input cell is an official row of section 3">&mdash;</span></td>
+</tr>
+<tr>
+<td>REB</td>
+<td>30</td>
+<td>0.381</td>
+<td>0.145</td>
+<td>2.18</td>
+<td>0.0290</td>
+<td>0.626</td>
+<td>0.367</td>
+<td>minutes explain little of the swing at this sample</td>
+<td class="src"><span class="na" title="derived - every input cell is an official row of section 3">&mdash;</span></td>
+</tr>
+<tr>
+<td>AST</td>
+<td>30</td>
+<td>0.195</td>
+<td>0.038</td>
+<td>1.05</td>
+<td>0.2930</td>
+<td>0.485</td>
+<td>0.488</td>
+<td>minutes explain little of the swing at this sample</td>
+<td class="src"><span class="na" title="derived - every input cell is an official row of section 3">&mdash;</span></td>
+</tr>
+<tr>
+<td>PRA</td>
+<td>30</td>
+<td>0.630</td>
+<td>0.397</td>
+<td>4.29</td>
+<td>&lt;0.0001</td>
+<td>0.934</td>
+<td>0.250</td>
+<td>minutes carry a measurable share of the swing</td>
+<td class="src"><span class="na" title="derived - every input cell is an official row of section 3">&mdash;</span></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Deviations are taken from each player's own mean before pooling, so a starter's level cannot masquerade as a minutes effect. Beta is a pooled within-player regression of relative production on relative minutes: <b>a 10% cut in minutes predicts a 12.9% cut in points</b> and a 9.3% cut in PRA, while assists barely move with minutes at all. That matters for the injury module, which currently applies a declared production-transfer rule of 0.55 with no measured figure behind it (see its <code>model_assumptions</code>): points transfer at roughly one-for-one with minutes, rebounds and assists do not, so a flat 0.55 is too small for a scorer and too large for a passer. It is a fitted sample of 40 rows from 10 players, not a league fit.</p>
+<h2 class="sec">6. Same-game pairs - why the parlay rho stays an assumption</h2><p class="secsub">Every pair of captured players who shared a game, correlated on their deviations from their own means.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Leg A</th>
+<th>Leg B</th>
+<th>Relationship</th>
+<th>Games shared</th>
+<th>rho points</th>
+<th>rho PRA</th>
+<th>Reading</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Jamal Murray</td>
+<td>Nikola Jokic</td>
+<td>same team</td>
+<td>3</td>
+<td>0.820</td>
+<td>0.918</td>
+<td>not interpretable - n=3</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official games</a></td>
+</tr>
+<tr>
+<td>Ty Jerome</td>
+<td>Zion Williamson</td>
+<td>opponents</td>
+<td>1</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>not interpretable - n=1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official games</a></td>
+</tr>
+<tr>
+<td>Jamal Murray</td>
+<td>Ty Jerome</td>
+<td>opponents</td>
+<td>1</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>not interpretable - n=1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official games</a></td>
+</tr>
+<tr>
+<td>Nikola Jokic</td>
+<td>Ty Jerome</td>
+<td>opponents</td>
+<td>1</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>not interpretable - n=1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official games</a></td>
+</tr>
+<tr>
+<td>Cooper Flagg</td>
+<td>LaMelo Ball</td>
+<td>opponents</td>
+<td>1</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>not interpretable - n=1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official games</a></td>
+</tr>
+<tr>
+<td>LaMelo Ball</td>
+<td>Zion Williamson</td>
+<td>opponents</td>
+<td>1</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>not interpretable - n=1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official games</a></td>
+</tr>
+<tr>
+<td>Donovan Mitchell</td>
+<td>Giannis Antetokounmpo</td>
+<td>opponents</td>
+<td>1</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>not interpretable - n=1</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official games</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote"><b>The measured answer is that rho cannot be measured from this window.</b> The best pair shares three games, and a three-point correlation can be anything - the Denver pair reads 0.82 on points while pairs with two or one shared games read as noise. The correlations page therefore keeps pricing same-game parlays with its declared rho, and this table is the evidence for why that number is labelled an assumption instead of a measurement. A usable estimate needs 30-50 shared games per pair, which means a full-season game-log capture, not a Last-5 block.</p>
+<h2 class="sec">7. Are the site's season averages stale?</h2><p class="secsub">The props baseline was transcribed on 2026-11-13. Recomputing it from the captured games should reproduce what the official player page prints now.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Player</th>
+<th>Team</th>
+<th>GP at capture</th>
+<th>Site PPG</th>
+<th>Official PPG now</th>
+<th>Delta</th>
+<th>Relative</th>
+<th>Reconciliation</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Ty Jerome</td>
+<td>MEM</td>
+<td>10</td>
+<td>26.2</td>
+<td>25.4</td>
+<td>-0.80</td>
+<td>-0.031</td>
+<td>EXPLAINED (within the rounding of a 1-decimal average, tolerance 0.095): recomputing the season average from the site's own baseline (26.2 over 10 games) plus the 1 captured game(s) since gives 25.36 against the 25.4 the official page prints now</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">official season table</a></td>
+</tr>
+<tr>
+<td>Giannis Antetokounmpo</td>
+<td>MIA</td>
+<td>11</td>
+<td>27.7</td>
+<td>28.5</td>
+<td>0.80</td>
+<td>0.029</td>
+<td>EXPLAINED (within the rounding of a 1-decimal average, tolerance 0.096): recomputing the season average from the site's own baseline (27.7 over 11 games) plus the 1 captured game(s) since gives 28.47 against the 28.5 the official page prints now</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">official season table</a></td>
+</tr>
+<tr>
+<td>Donovan Mitchell</td>
+<td>CLE</td>
+<td>12</td>
+<td>22.8</td>
+<td>23.0</td>
+<td>0.20</td>
+<td>0.009</td>
+<td>EXPLAINED (within the rounding of a 1-decimal average, tolerance 0.096): recomputing the season average from the site's own baseline (22.8 over 12 games) plus the 1 captured game(s) since gives 22.97 against the 23.0 the official page prints now</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">official season table</a></td>
+</tr>
+<tr>
+<td>Zion Williamson</td>
+<td>NOP</td>
+<td>11</td>
+<td>21.7</td>
+<td>21.8</td>
+<td>0.10</td>
+<td>0.005</td>
+<td>EXPLAINED (within the rounding of a 1-decimal average, tolerance 0.096): recomputing the season average from the site's own baseline (21.7 over 11 games) plus the 1 captured game(s) since gives 21.72 against the 21.8 the official page prints now</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">official season table</a></td>
+</tr>
+<tr>
+<td>LaMelo Ball</td>
+<td>MIN</td>
+<td>12</td>
+<td>18.6</td>
+<td>18.6</td>
+<td>0.00</td>
+<td>0.000</td>
+<td>EXPLAINED (within the rounding of a 1-decimal average, tolerance 0.100): recomputing the season average from the site's own baseline (18.6 over 12 games) plus the 0 captured game(s) since gives 18.60 against the 18.6 the official page prints now</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">official season table</a></td>
+</tr>
+<tr>
+<td>Caleb Wilson</td>
+<td>CHI</td>
+<td>10</td>
+<td>18.9</td>
+<td>18.9</td>
+<td>0.00</td>
+<td>0.000</td>
+<td>EXPLAINED (within the rounding of a 1-decimal average, tolerance 0.100): recomputing the season average from the site's own baseline (18.9 over 10 games) plus the 0 captured game(s) since gives 18.90 against the 18.9 the official page prints now</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">official season table</a></td>
+</tr>
+<tr>
+<td>Cooper Flagg</td>
+<td>DAL</td>
+<td>11</td>
+<td>24.6</td>
+<td>24.6</td>
+<td>0.00</td>
+<td>0.000</td>
+<td>EXPLAINED (within the rounding of a 1-decimal average, tolerance 0.100): recomputing the season average from the site's own baseline (24.6 over 11 games) plus the 0 captured game(s) since gives 24.60 against the 24.6 the official page prints now</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">official season table</a></td>
+</tr>
+<tr>
+<td>Jamal Murray</td>
+<td>DEN</td>
+<td>10</td>
+<td>26.2</td>
+<td>26.2</td>
+<td>0.00</td>
+<td>0.000</td>
+<td>EXPLAINED (within the rounding of a 1-decimal average, tolerance 0.100): recomputing the season average from the site's own baseline (26.2 over 10 games) plus the 0 captured game(s) since gives 26.20 against the 26.2 the official page prints now</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">official season table</a></td>
+</tr>
+<tr>
+<td>Cade Cunningham</td>
+<td>DET</td>
+<td>11</td>
+<td>25.0</td>
+<td>25.0</td>
+<td>0.00</td>
+<td>0.000</td>
+<td>EXPLAINED (within the rounding of a 1-decimal average, tolerance 0.100): recomputing the season average from the site's own baseline (25.0 over 11 games) plus the 0 captured game(s) since gives 25.00 against the 25.0 the official page prints now</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">official season table</a></td>
+</tr>
+<tr>
+<td>Nikola Jokic</td>
+<td>DEN</td>
+<td>10</td>
+<td>23.5</td>
+<td>23.5</td>
+<td>0.00</td>
+<td>0.000</td>
+<td>EXPLAINED (within the rounding of a 1-decimal average, tolerance 0.100): recomputing the season average from the site's own baseline (23.5 over 10 games) plus the 0 captured game(s) since gives 23.50 against the 23.5 the official page prints now</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">official season table</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">10 of 10 reconcile, 0 do not: the difference between the number this site published and the number NBA.com prints now is exactly the games played since the capture, within the rounding of a one-decimal average. So the staleness is <em>arithmetically explained</em> rather than suspicious - but it is still staleness: every prop on the horizon is anchored one to two games behind the league, and the tolerance that makes the check meaningful rather than decorative is 0.05 x (1 + gp / gp+g) points, about 0.1 of a point here.</p>
+<h2 class="sec">8. What the injury report changed after the lines were cut</h2><p class="secsub">The newest official edition against the edition the horizon lines were originated from.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Game</th>
+<th>Game ID</th>
+<th>New or changed rows</th>
+<th>Players</th>
+<th>Report state when the line was cut</th>
+<th>Originated line</th>
+<th>Reading</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>DEN@NOP</td>
+<td>0022600231</td>
+<td>0</td>
+<td>none</td>
+<td>NOT YET SUBMITTED / 4 player(s) listed</td>
+<td>spread home -9.6 / total 235.7  (reference line -5.9 / 227.0)</td>
+<td>the originated line was cut against the 11/13 05:15 PM ET edition; the newest edition changes nothing for this game</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">Injury Report: 11/14/26 04:30 AM edition</a></td>
+</tr>
+<tr>
+<td>DAL@CLE</td>
+<td>0022600232</td>
+<td>0</td>
+<td>none</td>
+<td>NOT YET SUBMITTED / 6 player(s) listed</td>
+<td>spread home -2.3 / total 229.6  (reference line +3.2 / 228.4)</td>
+<td>the originated line was cut against the 11/13 05:15 PM ET edition; the newest edition changes nothing for this game</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">Injury Report: 11/14/26 04:30 AM edition</a></td>
+</tr>
+<tr>
+<td>DET@MIA</td>
+<td>0022600233</td>
+<td>0</td>
+<td>none</td>
+<td>NOT YET SUBMITTED / 7 player(s) listed</td>
+<td>spread home -12.8 / total 226.9  (reference line -9.9 / 227.6)</td>
+<td>the originated line was cut against the 11/13 05:15 PM ET edition; the newest edition changes nothing for this game</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">Injury Report: 11/14/26 04:30 AM edition</a></td>
+</tr>
+<tr>
+<td>BKN@MEM</td>
+<td>0022600234</td>
+<td>0</td>
+<td>none</td>
+<td>NOT YET SUBMITTED / 6 player(s) listed</td>
+<td>spread home +5.3 / total 227.3  (reference line +12.9 / 225.8)</td>
+<td>the originated line was cut against the 11/13 05:15 PM ET edition; the newest edition changes nothing for this game</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">Injury Report: 11/14/26 04:30 AM edition</a></td>
+</tr>
+<tr>
+<td>CHI@MIN</td>
+<td>0022600235</td>
+<td>0</td>
+<td>none</td>
+<td>3 player(s) listed / NOT YET SUBMITTED</td>
+<td>spread home +29.7 / total 234.7  (reference line +31.1 / 231.8)</td>
+<td>the originated line was cut against the 11/13 05:15 PM ET edition; the newest edition changes nothing for this game</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf" target="_blank" rel="noopener">Injury Report: 11/14/26 04:30 AM edition</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Nothing changed for any 11/14 game between the 11/13 05:15 PM ET edition the lines were built from and the newest edition read at 10:30 UTC (Injury Report: 11/14/26 04:30 AM). That is a clean result, and it is also the limit of it: at this edition five of the ten teams on the slate had still not filed (New Orleans Pelicans, Cleveland Cavaliers, Memphis Grizzlies, Chicago Bulls, Miami Heat), so the game-day confirmation the league rule asks for (11 a.m.-1 p.m. local) had not happened yet. Any prop or line for those games is priced against a half-filed report.</p>
+<h2 class="sec">9. Independent second read of the same pages</h2><p class="secsub">A separate session captured three of these players nine hours earlier from the same official URLs. Overlapping rows are compared cell for cell.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Player</th>
+<th>Rows agreeing</th>
+<th>Disagreements</th>
+<th>Readable by one side only</th>
+<th>Note</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Nikola Jokić</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>the earlier read (00:55Z) predates the 11/13 games, so it carries an older window; the rows that overlap agree cell for cell</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official games</a></td>
+</tr>
+<tr>
+<td>Giannis Antetokounmpo</td>
+<td>2</td>
+<td>0</td>
+<td>2</td>
+<td>the earlier read (00:55Z) predates the 11/13 games, so it carries an older window; the rows that overlap agree cell for cell</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official games</a></td>
+</tr>
+<tr>
+<td>LaMelo Ball</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>the earlier read (00:55Z) predates the 11/13 games, so it carries an older window; the rows that overlap agree cell for cell</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official games</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Zero disagreements. The earlier read carries an older window because it was taken before the 11/13 games finished, which is exactly the difference between the two files - so the agreement is a check on the transcription, not on the schedule.</p>
+<h2 class="sec">10. What is not here, and what would finish it</h2><p class="secsub">Stated as a list of gaps, with the page each gap needs.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Not captured</th>
+<th>Team</th>
+<th>Dates</th>
+<th>Why</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Julius Randle</td>
+<td>BKN</td>
+<td>2026-11-14</td>
+<td>no NBA.com player id in any committed capture; the official roster page (https://www.nba.com/nets/roster) would supply it</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">nba.com season table - id source</a></td>
+</tr>
+<tr>
+<td>Kyrie Irving</td>
+<td>DAL</td>
+<td>2026-11-14</td>
+<td>no NBA.com player id in any committed capture; https://www.nba.com/mavs/roster</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">nba.com season table - id source</a></td>
+</tr>
+<tr>
+<td>Michael Porter Jr.</td>
+<td>BKN</td>
+<td>2026-11-14</td>
+<td>no NBA.com player id in any committed capture; https://www.nba.com/nets/roster</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">nba.com season table - id source</a></td>
+</tr>
+<tr>
+<td>Norman Powell</td>
+<td>CHI</td>
+<td>2026-11-14</td>
+<td>no NBA.com player id in any committed capture; https://www.nba.com/bulls/roster</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">nba.com season table - id source</a></td>
+</tr>
+<tr>
+<td>36 further players</td>
+<td>-</td>
+<td>2026-11-15 to 2026-11-17</td>
+<td>out of this session's claimed scope; ids for most of them are already in data/players_2026_27.json</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame&amp;dir=-1&amp;sort=PTS" target="_blank" rel="noopener">nba.com season table - id source</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">The blocker for the four 11/14 players is not the game-log page, it is the player id: no committed capture in this repo carries an NBA.com id for them, and this session does not guess one. The fix is one roster-page read per team, after which the same script prices them with no further work. The 36 remaining horizon prop rows fail for the same reason plus volume, not method.</p>
+<div class="banner info"><div class="b-t">Files behind this page</div><div class="b-b"><ul><li><code>data/proplogs/2026-11-14/captures.json</code> - the row-for-row transcription, one source URL per player and per game.</li><li><code>data/proplogs/2026-11-14/injury_2026-11-14_04_30AM.json</code> - the newest official injury edition, 31 printed rows for the 11/14 slate.</li><li><code>data/derived/prop_variance.json</code> - everything rendered above, as data.</li><li><code>scripts/prop_variance.py</code> - the computation, with its declared modelling choices at the top of the file.</li></ul></div></div>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>
