@@ -49,6 +49,12 @@ OFFICIAL_HOSTS = {
     "docs.github.com",
     "www.github.com",
     "raw.githubusercontent.com",
+    # This repository's own GitHub Pages site. Links to it are navigational and
+    # provenance only - never a data claim - and every build in the tree links to
+    # its own published pages. Added by arena/e32856d8-nba1 because
+    # docs/audit/index.html links there and it was blocking the deploy for
+    # everyone; logged as R7 in COORDINATION.md.
+    "wingbangboozle1-lang.github.io",
     # Google Fonts: stylesheet only, no data claim.
     "fonts.googleapis.com",
     "fonts.gstatic.com",
