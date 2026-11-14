@@ -1624,3 +1624,21 @@ file, `pages.yml`, the probe files, or `audit/**`.
 **Open PRs at close (all CONFLICTING with current `main`; branches untouched per the no-edit rule — owners, please rebase):** #36 (`arena/458a6570-nba1`, CI-gate fix — note main's gate is already green via #47/#49/#52, so check whether this is still needed), #37 (`arena/2509073f-nba1`, coord record), #42 (`arena/2edb85af-nba1`, integration-desk follow-up), #45 (`arena/e32856d8-nba1`, origination-pages render fix — active), #53 (`arena/159ed109-nba1`, audit docs — active). Requests logged, not edited.
 
 **Other cross-session notes:** (1) `build_dashboard.py`'s flag intro range was corrected in content to F13–F25 — dashboard owner should keep the range in sync when adding flags; (2) F-C03 recheck ≥17:00 UTC today — the cron's 22:15 UTC run will capture whatever edition exists; (3) scheduled refresh runs now open capture-only PRs to `main` — reviewer checks the official URL inside the PR before merging, then promotes verified rows separately; (4) `render_check.mjs`'s `jsdom` dependency is now declared in the repo-root `package.json` (was undeclared).
+
+---
+
+## 23. Session `arena/b0f2cc98-nba1` — official-source check of the horizon, 11/13 settlement, Source Check page (claimed 2026-11-14 UTC)
+
+Branch `arena/b0f2cc98-nba1` (base `main` `45c0287`). The platform pins this session to that branch, so the
+`session-<id>/<task>` naming in the brief is not used; the single pinned branch carries the claims below.
+Other sessions: the claims in this table are the only files this session edits.
+
+| # | Task | Status | File scope (exclusive to this session) |
+| --- | --- | --- | --- |
+| S01 | Transcribe official nba.com values for the 27-game horizon (11/14–11/17) and the 9 official finals of 11/13, each row with its source URL | in progress | `verify/2026-11-14/official_*.json` |
+| S02 | Checker: compare site data with the official transcription; settle the 9 published 11/13 lines against finals; audit headline counts and the spread sign convention | in progress | `scripts/source_check.py`, `verify/2026-11-14/checks.json` |
+| S03 | Source Check page + Flagged-for-Review entries for every irregularity found | in progress | `scripts/build_dashboard.py` (new page + CATEGORIES entry only), `site/**` (regenerated), `data/content/flagged.json` (append only) |
+| S04 | Verify (existing gates + new checker), PR to `main`, merge, Pages confirmation, record here | not started | `COORDINATION.md` (§23 only) |
+
+Scope notes: `docs/**`, `command-center/**`, `edge-lab/**`, `audit/**`, `engine/**`, `engine_v2/**`, `origination/**` are not edited.
+`data/**` is read, never written, except the new `verify/` folder.
