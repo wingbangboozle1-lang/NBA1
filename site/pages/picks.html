@@ -37,6 +37,7 @@
 <div class="nav-group"><h3>EVIDENCE</h3>
 <a href="strategies.html">Strategies &amp; Leaderboard</a>
 <a href="validation.html">Validation Gates</a>
+<a href="leaderboard.html">Leaderboard &amp; Rewards</a>
 <a href="correlations.html">Correlations</a>
 <a href="luck.html">Luck &amp; Skill</a>
 <a href="backtest.html">Out-of-Sample Backtest</a>
@@ -50,6 +51,7 @@
 <a href="suggestions.html">Suggestions</a>
 <a href="flagged.html">Flagged for Review</a>
 <a href="sources.html">Source Register</a>
+<a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
 <a href="repo-review.html">Repo Review</a>
 </div>
     <div class="side-note">
@@ -75,8 +77,8 @@
 <th>Away</th>
 <th>Home</th>
 <th>Venue</th>
-<th>Ref spread</th>
-<th>Model spread</th>
+<th>Ref home margin</th>
+<th>Model home margin</th>
 <th>Spread edge</th>
 <th>Ref total</th>
 <th>Model total</th>
@@ -657,7 +659,7 @@
 <td class="src"><a href="https://www.nba.com/game/det-vs-sas-0022600255" target="_blank" rel="noopener">S8_0022600255</a></td>
 </tr>
 </tbody></table></div>
-<p class="tnote">A negative spread means the home team is favoured. Fair moneyline is the model's own break-even price (no market price is used). Rest days: number of days since that team's previous game, taken from the official schedule; a blank means the team's previous game falls outside the captured window. Injury status is the official report read-out for that team on that date.</p>
+<p class="tnote">SIGN CONVENTION: 'Ref spread' and 'Model spread' are both the projected HOME MARGIN (home minus away), not a book-style home spread. A NEGATIVE value means the home team is projected to lose by that many points (flag F27: Build A's stored field uses the opposite sign, and the two builds are not comparable cell for cell). Fair moneyline is the model's own break-even price (no market price is used). Rest days: number of days since that team's previous game, taken from the official schedule; a blank means the team's previous game falls outside the captured window. Injury status is the official report read-out for that team on that date.</p>
 <h2 class="sec">Paper picks</h2><p class="secsub">Every play the strategy library produced for the horizon, with its gate status.</p>
 <div class="tablewrap">
 <table class="tbl "

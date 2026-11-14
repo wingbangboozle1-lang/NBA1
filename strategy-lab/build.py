@@ -18,6 +18,7 @@ import json
 import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.dirname(HERE)
 DATA = os.path.join(HERE, "data")
 PAGES = os.path.join(HERE, "pages")
 NBA_DAY = "https://www.nba.com/games?date="
@@ -205,6 +206,11 @@ def page(title, active, body, meta, sub=""):
     return head + body + foot
 
 
+def _load_site_metrics():
+    with open(os.path.join(ROOT_DIR, "site", "data", "backtest.json"), encoding="utf-8") as f:
+        return json.load(f).get("metrics", {})
+
+
 def read(name):
     with open(os.path.join(DATA, name + ".json"), encoding="utf-8") as f:
         return json.load(f)
@@ -232,6 +238,9 @@ def main():
     content = read("content")
     meta = read("meta")
     s = bf["summary"]
+    # the site's own published backtest metrics, read here so no sentence on these pages can
+    # quote a number that a re-fit has already moved
+    bt_metrics = _load_site_metrics()
     ts = tour["strategies"]
     top = ts[0]
     hz = rest["horizon_rest_check"]
@@ -268,7 +277,8 @@ def main():
          str(rest["summary"]["team_slots_affected_by_the_missing_fixtures"]) + " of " +
          str(rest["summary"]["team_slots_checked"]) + " team-slots change when the fixtures enter the history, and " +
          str(rest["summary"]["back_to_back_flags_that_flip"]) + " back-to-back flags flip. None of them falls inside "
-         "the 51-game window the leaderboard was graded on, so no published pick changes today; what it does "
+         "the window the leaderboard is graded on (" + esc(rest["summary"]["graded_window"]) +
+         "), so no published pick changes today; what it does "
          "invalidate is any October backtest, which is the base this lab used."),
         ("3", "Nothing in a 13-strategy library beats the originated line",
          "The largest excess over the model's own expectation is " + str(top["excess_wins"]) + " wins on " +
@@ -278,7 +288,8 @@ def main():
          "% of the time when every strategy is pure noise. That is the luck removal asked for, and the answer is "
          "that the signal is not there yet."),
         ("4", "The back-to-back penalty is a one-week fit applied to every line",
-         "The site carries " + str(reg0["site_value"]) + " points. Measured on " + str(m0["n"]) +
+         "The site carries " + str(reg0["site_value"]) + " points, fitted on " + str(reg0["site_window"]) +
+         " and disclosed as in-sample. Measured on " + str(m0["n"]) +
          " games where both teams have a game on record it is " + str(m0["coef"]) + " &plusmn; " + str(m0["se"]) +
          " (p = " + str(m0["p_two_sided"]) + "). On the current slate " +
          str(imp["summary"]["games_where_the_two_positions_differ_by_3_points_or_more"]) + " of " +
@@ -326,7 +337,7 @@ def main():
     overview = """
 @@kpi@@
 <div class="note"><b>What this directory is.</b> The rest of the site reports lines, picks and gates on a
-51-game window, because that is the only window a point-in-time team rating was ever captured for. The
+@@graded_window@@, because that is the only window a point-in-time team rating was ever captured for. The
 repository already holds a bigger official base: @@scored@@ scored games, every one transcribed from
 <span class="mono">nba.com/games</span>. This lab re-runs the audit on all of it with a walk-forward that cannot
 see the future, and publishes what survives. It reads committed files and writes only inside
@@ -359,6 +370,7 @@ pages are <span class="mono">strategy-lab/build.py</span>; both are deterministi
 (@@seed@@). A clean checkout at the commit in the footer rebuilds every table on these pages.</div>
 """
     overview = render(overview, {
+        "graded_window": str(bt_metrics.get("n_games")) + "-game window (" + str(bt_metrics.get("window")) + ")",
         "kpi": ov_kpi, "cards": ov_cards, "sections": ov_tbl, "inputs": inputs_html,
         "notused": notused_html, "pagesread": pagesread_html,
         "scored": str(s["scored_games"]), "seed": str(meta["determinism"]["seed"]),
@@ -452,7 +464,7 @@ block and compared with the transcription already committed by session
         "found": note("warn", "What was found.", esc(rs["cause"])),
         "kpi": kpi([(rs["team_slots_affected_by_the_missing_fixtures"], "team-slots whose rest changes"),
                     (rs["back_to_back_flags_that_flip"], "back-to-back flags that flip"),
-                    (rs["affected_inside_the_published_51_game_window"], "of them inside the graded 51-game window"),
+                    (rs["affected_inside_the_graded_window"], "of them inside the window the site grades on"),
                     (hz["agree"], "horizon rest fields confirmed on 27 unplayed games (" +
                      str(hz["mismatch"]) + " mismatch)")]),
         "materiality": esc(rs["materiality"]), "perdate": t_perdate, "changed": t_changed,
@@ -489,7 +501,10 @@ block and compared with the transcription already committed by session
         {"k": "margin MAE, model", "v": fs["margin"]["mae_model"], "ctx": "points"},
         {"k": "margin MAE, naive zero line", "v": fs["margin"]["mae_naive_zero_line"], "ctx": "points"},
         {"k": "improvement on the naive line", "v": str(fs["margin"]["improvement_pct"]) + "%",
-         "ctx": "the same comparison on 51 games, published by Build B, was 2.3%"},
+         "ctx": "for contrast the site's own " + str(bt_metrics.get("n_games")) + "-game page reports " +
+                str(bt_metrics.get("mae_margin_model")) + " against " + str(bt_metrics.get("mae_margin_ref")) +
+                " for its reference model - a different naive yardstick (a model built from the same ratings, "
+                "not a zero line), so the two figures are not the same test and neither copies the other"},
         {"k": "margin bias", "v": fs["margin"]["bias_model"],
          "ctx": "points; negative means the model over-predicts the home margin"},
         {"k": "total MAE, model", "v": fs["total"]["mae_model"], "ctx": "points"},
@@ -590,11 +605,16 @@ sample the verdict comes from.</p>
     for r in corr["regressions"]:
         m = r["measured"] or {}
         ci = m.get("ci95") or []
-        cmp_rows.append({"name": r["name"], "site_value": r["site_value"], "measured_coef": m.get("coef"),
-                         "measured_se": m.get("se"),
+        cmp_rows.append({"name": r["name"], "site_value": r["site_value"],
+                         "site_se": r.get("site_se"), "site_t": r.get("site_t"),
+                         "site_window": r.get("site_window"),
+                         "site_disclosure": r.get("site_disclosure"),
+                         "measured_coef": m.get("coef"), "measured_se": m.get("se"),
                          "measured_ci": " / ".join(str(x) for x in ci) if ci else None,
                          "games": m.get("n"), "reading": r["reading"], "src": r["site_source"]})
     t_cmp = table([("name", "What is being compared", "txt"), ("site_value", "Value the site carries", "num"),
+                   ("site_se", "Its standard error", "num"), ("site_t", "Its t", "num"),
+                   ("site_window", "Fitted on", "txt"), ("site_disclosure", "The site's own disclosure", "txt"),
                    ("measured_coef", "Measured on the season", "num"), ("measured_se", "Standard error", "num"),
                    ("measured_ci", "95% interval", "txt"), ("games", "Sample games", "num"),
                    ("reading", "Reading", "txt"), ("src", "Site source", "src")], cmp_rows)
@@ -615,7 +635,8 @@ sample the verdict comes from.</p>
     t_dist = table([("k", "Quantity", "txt"), ("v", "Value", "txt"), ("unit", "Unit", "txt"),
                     ("src", "Source", "src")], [
         {"k": "mean home margin", "v": mg["mean_home"], "unit": "points", "src": mg["source_url"]},
-        {"k": "home margin spread", "v": mg["sd"], "unit": "points; the site carries 17.44 from a 51-game fit",
+        {"k": "home margin spread", "v": mg["sd"], "unit": "points; the site carries " + str(bt_metrics.get("sigma_margin")) +
+                       " from its " + str(bt_metrics.get("n_games")) + "-game fit",
          "src": mg["source_url"]},
         {"k": "decided by 3 or fewer", "v": mg["within_3"], "unit": "share of games", "src": mg["source_url"]},
         {"k": "decided by 5 or fewer", "v": mg["within_5"], "unit": "share of games", "src": mg["source_url"]},

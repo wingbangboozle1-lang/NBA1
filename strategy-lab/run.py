@@ -84,7 +84,7 @@ def report(bf, rest, tour, corr, gate, prob, imp):
           f"| teams {s['teams_mismatched']}/{s['teams_checked']} bad | 11/13 finals {s['finals_11_13_agreeing']}/9")
     r = rest["summary"]
     print(f"rest: {r['team_slots_affected_by_the_missing_fixtures']} of {r['team_slots_checked']} team-slots "
-          f"differ, {r['back_to_back_flags_that_flip']} b2b flips, {r['affected_inside_the_published_51_game_window']} "
+          f"differ, {r['back_to_back_flags_that_flip']} b2b flips, {r['affected_inside_the_graded_window']} "
           f"inside the graded window | horizon agree {rest['horizon_rest_check']['agree']} "
           f"mismatch {rest['horizon_rest_check']['mismatch']}")
     print(f"tournament: {tour['games_graded']} graded of {tour['games_in_log_with_scores']} scored "
