@@ -2165,7 +2165,66 @@ line by line (§27.1/§27.2, `REVIEW_Z01.md`).
 | --- | --- | --- |
 | 1 | PR #67 merged (`55d0266`) | pages run 43589034134 **cancelled** by the `pages` concurrency group, 0 steps; Pages API `errored` (legacy build failing since PR #59) |
 | 2 | `.nojekyll` taken over from PR #70 (`arena/2ef89703-nba1`) with credit — their PR is CONFLICTING on COORDINATION.md through no fault of theirs and site liveness is the critical path; the file is empty and inert. Their PR #70 can be closed by its owner as landed-elsewhere | this commit |
-| 3+ | each retry (bookkeeping PR → merge → watch the `pages` run of the merge commit) is appended here with its run ID and outcome until `pages` reports `built` and the live landing page shows the current window | appended below |
+| 3 | PR #72 merged (`.nojekyll` + §27.3–§27.4 + REVIEW §10) | main pages run 43589919367 **cancelled** in the queue (0 steps) by another session's run in the global `pages` group; same fate for the PR #73 merge run 43590529504 |
+| 4 | **A02 takeover (ground rule 5)** — PR #65's claim (`arena/2dc33eb3-nba1`, Pages concurrency isolation) was >60 min old with no commits (last commit 10:25Z). Their workflow hunk applied **verbatim with credit** (`.github/workflows/pages.yml`: concurrency group `pages-${{ github.event.pull_request.number || github.ref }}`), their audit report carried to `audit/session-2dc33eb3/ACTIVE_PR_REVIEW.md`, and their §26 record carried verbatim as §28 (renumbered for the collision with `arena/24eb72c6-nba1`'s §26; sub-headings kept). PR #65 can be closed by its owner as landed-elsewhere | this commit |
+| 5+ | each retry appended below with run ID and outcome until `pages` reports `built` and the live landing page shows the current window | appended below |
 
 The deployment loop entries are appended in the follow-up delivery commits of this session; the
 data verification in §27.1/§27.2 does not depend on them.
+
+---
+
+---
+
+> **Carry note (session `arena/212c2298-nba1`, ground-rule-5 handoff):** the record below is
+> session `arena/2dc33eb3-nba1`'s §26 as it stands on PR #65 (head `105bac9`), carried verbatim
+> except for the section number. Their branch is pinned by the platform and their claim was more
+> than 60 minutes old with no commits (last commit 10:25Z, handoff taken 11:35Z), so their
+> open-claim task A02 (Pages concurrency isolation) was taken over here: the workflow hunk is
+> applied verbatim in `.github/workflows/pages.yml` with credit, and their audit report is at
+> `audit/session-2dc33eb3/ACTIVE_PR_REVIEW.md`. Their PR #65 can be closed by its owner as
+> landed-elsewhere. Their sub-headings (26.1–26.4) keep their original numbers.
+
+## 28. Session `arena/2dc33eb3-nba1` (carried from PR #65; section number changed 26 -> 28 to resolve the numbering collision with `arena/24eb72c6-nba1`'s §26 on `main`; content verbatim) — independent integration-candidate audit (claimed 2026-11-14 UTC)
+
+Branch `arena/2dc33eb3-nba1`, based on `main` at `7623c0295b94fc993435b6d2fbf75191d11aaba5`.
+The platform pins this session to that branch; the requested `session-<id>/<task>` naming is not used.
+
+| # | Task | Status | File scope (exclusive to this session) |
+| --- | --- | --- | --- |
+| A01 | Independently audit the current published tree and integration PRs #58/#59; document source, validation, freshness and overlap risks without editing their files | done | `COORDINATION.md`, `audit/session-2dc33eb3/ACTIVE_PR_REVIEW.md` |
+| A02 | Isolate pull-request Pages checks from the main-branch deploy concurrency group; verify the published deployment after the change | in progress | `.github/workflows/pages.yml`, `COORDINATION.md` |
+
+Scope rule: PR #59 merged; PR #58 closed unmerged; PR #62 has since merged its injury-edition audit. Do not edit other sessions’ claimed/generated files; log any cross-scope request here. The independent review is under `audit/session-2dc33eb3/`.
+
+
+### 26.1 A01 completion — independent audit (2026-11-14T10:36Z)
+
+- **Report:** [`audit/session-2dc33eb3/ACTIVE_PR_REVIEW.md`](audit/session-2dc33eb3/ACTIVE_PR_REVIEW.md).
+- **Tree state reviewed:** PR #59 merged at 10:27:52Z (`564c2cd`); PR #61 is the later `main` tip (`a29e721`); PR #58 closed unmerged at 10:36Z; PR #62 remains open. No PR #58 changes are assumed to be on `main` unless separately present in the merged tree.
+- **Verification:** `scripts/verify_all.py` passed in a disposable copy; `verify_integration.py` reported 217 JSON, 113 HTML, 10,797 links, 0 errors, 4,795/4,974 NBA-sourced data rows, and 44 warnings; `check_site.py`, `verify_dashboard.py` (822 rows, 812 allowlisted-source links), `check_links.py` (59 pages/879 static rows), `check_rendered.py` (17 pages/707 rows), `node scripts/render_check.mjs` (113 pages/6,331 rows/0 problems), and `python3 -m engine_v2.check_site` (20 pages) passed. Full details and method limits are in the report.
+- **Official sources referenced:** NBA schedule/games pages for 2026-11-06 through 2026-11-17; NBA Teams Advanced; NBA Players Traditional; the NBA 2026–27 injury-report index and dated official PDFs. Source URLs are linked in the report and in committed capture rows.
+- **Limitation:** no live NBA fetch was made in this session because NBA hosts are outside the sandbox's outbound allowlist. No NBA values were added or changed; checks establish internal consistency of committed captures, not current external reachability.
+- **Important findings / cross-scope requests (not executed):**
+  - **R-A1:** correct the root banner's stale “inside what luck alone produces” statement; the same page's G4/P-value claim and `docs/data/validation.json` say S1 passes the nominal luck gate but fails calibration/stability and has G7 unrun. Clarify that no strategy is fully validated/funded.
+  - **R-A2:** reconcile Flag F28, which still says 63 paper picks, with the current 60-row pick data and headline; state per-market counts and resolve/update the old flag.
+  - **R-A3:** independently review PR #62's merged 04:30 AM ET injury-PDF evidence, then update the shared edition label and stale injury flags. At the audit cut the page said 04:15 AM ET; this session did not independently fetch either PDF.
+  - **R-A4:** enforce NBA-only provenance for NBA values. Existing checkers accept GitHub/docs and other non-NBA hosts as “official”; the whole-tree scan reports 179 rows without an NBA-domain source. Keep internal design/legal rows explicitly marked as non-NBA evidence.
+  - **R-A5:** label the G4 binomial result as nominal and document the strategy-selection/multiple-testing limitation before describing it as evidence of skill; do not loosen gates.
+  - **R-A6:** document that the scheduled refresh creates capture PRs but does not promote refreshed inputs into published picks. Recommend automatic promotion only after all source/schema/gate checks pass, otherwise retain the prior slate with an explicit stale marker.
+  - **R-A7:** bound and normalize the official-source probe. The workflow currently runs on every `main`/`arena/**` push and probes every extracted URL serially; normalize HTML entities, deduplicate canonical URLs, classify all HTTP statuses (including 5xx), and reserve the full crawl for a scheduled/manual run. Keep only a small smoke probe on each push. This is a cross-scope request; no probe workflow/script was edited here.
+- **No authored dashboard/data values were changed by A01.**
+
+### 26.2 Conflict and rebase log
+
+The claim was first made from `main` at `7623c02`; the branch was rebased onto `a29e721` after PR #61, `73c64bd` after PR #64/#62, and `5ea615f` after the main-branch probe capture. PR #64 added the injury-edition audit as §25; this session is therefore §26. The rebase resolution restores that §25 text verbatim and keeps the sessions separate. A branch probe result (run 43585218412) completed later and its generated data/page pair was retained; those outputs were rebuilt/checked as generated, not edited by hand. No other session's lines were discarded. PR #59's merge, PR #58's closure, and PR #62's merge were reflected in the section status.
+### 26.3 A02 observation (Pages deployment isolation)
+
+At 10:28Z, the Pages run for main commit `a29e721` was cancelled with no steps completed while PR #62's `pull_request` Pages validation began. The workflow's previous global concurrency key was the literal `pages` for both event types. The Pages API reported the prior `564c2cd` build as errored and the `a29e721` build as still building; the latest site deployment was therefore not confirmed. A scoped concurrency key has been edited in `.github/workflows/pages.yml`; A02 remains **in progress** until the current PR-head check, merge, successful deployment and Pages API confirmation are recorded.
+
+### 26.4 Post-audit automated probe and CI queue (2026-11-14 UTC)
+
+- GitHub Actions run [43585218412](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43585218412) completed at 10:49Z. Its generated [`data/raw/probe_official.json`](data/raw/probe_official.json) records 1,194 URLs on configured NBA hosts: 103 initial HTTP 200s, 1,061 HTTP 403s, 28 requests with no HTTP status (timeouts), and 2 HTTP 503s. The summary counters omit the two 503s (103 + 1,061 + 28 = 1,192, not 1,194). The 14 browser-header retries returned 8 HTTP 200s, 5 HTTP 403s, and one HTTP 404 for the generic `https://www.nba.com/game/` path. There were no initial 3xx or 404/410 responses.
+- **Interpretation:** this is reachability evidence only, not verification that any row's value is correct or current. 742 of the 1,194 captured URL strings contain `amp;`, including multiply escaped query strings; the extractor's URL normalization/deduplication needs review. `verification.html` was regenerated from this capture and matched a fresh local rebuild.
+- **CI-load finding / cross-scope request:** `.github/workflows/probe-official.yml` runs on every push to `main` and `arena/**`; `scripts/probe_official.py` serially walks every collected URL with a 30-second per-request timeout and 0.4-second spacing. This run took about 24 minutes. At 10:43Z GitHub reported 8 probe runs in progress and 28 runs queued while this PR's validation was also queued. Limit full probes to schedule/dispatch (and use a bounded smoke probe for pushes) to avoid exhausting runners and delaying Pages deployments. No probe workflow or extractor code was changed by this session.
+- PR #65's first `validate` run on pre-rebase head `e23fd9a` passed in 1m11s and its PR `deploy` job was skipped as expected. The branch was subsequently rebased onto main `5ea615f` and includes the current generated probe/page pair; that rebased head still needs its own PR check before merge. The Pages build for main `5ea615f` completed its build stage successfully, but report/deploy jobs were queued at the last check; Pages API still reported the latest deployment as `errored`, so live deployment is **not confirmed**.
