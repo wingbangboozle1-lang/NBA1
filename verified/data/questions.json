@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "title": "Questions that need answering before a decision can be made",
+    "rule": "Each question states what we know, what we do not know, why the answer changes a decision, and the cheapest concrete step that would produce the answer. A question with no such step is not a question, it is a wish \u2014 none of those are listed.",
+    "priority_key": {
+      "P1": "Blocks a decision that is being made now",
+      "P2": "Blocks a decision in the next build",
+      "P3": "Worth knowing, no decision depends on it yet"
+    }
+  },
+  "counts": {},
+  "rows": [
+    {
+      "id": "Q-01",
+      "priority": "P1",
+      "question": "Is this project trying to beat a market, or to measure model quality?",
+      "known": "No licensed odds feed is connected and no NBA-operated price exists. Every edge on the site is model-vs-naive-model at a -110 convention chosen by the repository.",
+      "missing": "A decision, plus \u2014 if the answer is 'beat a market' \u2014 a dated, licensed closing-price source per game.",
+      "why_it_decides": "It changes what 'validated' means. Against a market, S1 must beat a real price and pay real vig. Against a naive model, S1 is already mildly ahead on margin (MAE 12.98 vs 13.62) and behind on totals (14.83 vs 14.72).",
+      "how_to_discover": "Either (a) buy a licensed historical + closing-line feed and backfill the 60-game window, or (b) publish one sentence on the landing page: 'this project measures model quality; no market edge is claimed or measurable'. Option (b) costs nothing and can be done today.",
+      "owner": "Project owner",
+      "blocks": "Gate G7, the leaderboard's meaning, and every 'edge' label on the site",
+      "source": "https://www.nba.com/stats/help/glossary"
+    },
+    {
+      "id": "Q-02",
+      "priority": "P1",
+      "question": "Do NBA.com's terms permit publishing derived lines and a paid reward structure?",
+      "known": "The site publishes derived numbers built on official data, and the brief describes rewards for top strategies.",
+      "missing": "A reading of NBA.com's terms of use for derived commercial content. This session can read the page but cannot give a legal opinion, and nothing in the repository states the terms under which the data is used.",
+      "why_it_decides": "If derived commercial use is not permitted, the reward/leaderboard framing has to change before it is built, not after.",
+      "how_to_discover": "Read https://www.nba.com/termsofuse and, if the reward structure is real money, take one hour of legal advice. Record the conclusion in the repository so the next session does not re-litigate it.",
+      "owner": "Project owner",
+      "blocks": "Any monetised leaderboard, and the site's public framing",
+      "source": "https://www.nba.com/termsofuse"
+    },
+    {
+      "id": "Q-03",
+      "priority": "P1",
+      "question": "Is S1 real, or is it the best of six lottery tickets?",
+      "known": "23-9, p = 0.020 against a coin flip, Wilson lower bound 0.546. It fails calibration and stability.",
+      "missing": "A corrected significance figure and a pre-registered replication. BH across the six tested strategies gives q = 0.120, and S1's win rate barely changes with edge size (r = 0.051).",
+      "why_it_decides": "It is the difference between 'one strategy shows a signal worth funding at quarter size' and 'nothing has demonstrated skill yet'.",
+      "how_to_discover": "Pre-register S1 exactly as it stands, then grade the next 60 games with no changes. At 32 games the design can only detect a very large edge; about 250-300 graded picks are needed to separate 55% from 52.4% at 80% power.",
+      "owner": "Gate owner",
+      "blocks": "Any funding decision",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/validation.json"
+    },
+    {
+      "id": "Q-04",
+      "priority": "P1",
+      "question": "What is the true injury-driven minutes and production impact, and how do we keep it current?",
+      "known": "The injury layer exists and is rule-based, but it is built on the 04:15 AM edition on a game day. Twenty-two designations changed by 1:30 PM. Minutes are known for only 24 players in the repository.",
+      "missing": "A per-team minutes distribution (all rotation players, not the top 24 league-wide), and an ingestion path that picks up the latest edition instead of a hand-captured one.",
+      "why_it_decides": "The brief asks specifically for injury-driven rotation and production analysis. Right now the impact number is a lower bound computed over a small slice of players, on a stale report.",
+      "how_to_discover": "Pull each team's official roster minutes from the Players Traditional table filtered by team (30 requests, all official), then re-price every game against the latest edition and compare before/after.",
+      "owner": "Injury/impact builder",
+      "blocks": "The props layer and any availability-based strategy (S6, S7, S8)",
+      "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf"
+    },
+    {
+      "id": "Q-05",
+      "priority": "P2",
+      "question": "Does '3 days in advance' mean today+3 calendar dates, or a 72-hour window?",
+      "known": "The build publishes 11/14 through 11/17 \u2014 27 games, four calendar dates.",
+      "missing": "A stated rule. The two readings differ by one slate (five games on 11/17).",
+      "why_it_decides": "The 11/17 games have no injury report at all (all 28 team-slots NOT YET SUBMITTED), so they are the lowest-information picks on the page. Whether they belong in the horizon is a product decision, not a technical one.",
+      "how_to_discover": "State the rule on the picks page in one sentence and in the builder's header. No data collection needed.",
+      "owner": "Project owner",
+      "blocks": "Horizon scope and the pick count headline",
+      "source": "https://www.nba.com/schedule?date=2026-11-15"
+    },
+    {
+      "id": "Q-06",
+      "priority": "P2",
+      "question": "Which of the six published builds is the product?",
+      "known": "Root site/ (Build D), command-center/, edge-lab/, docs/, docs/b/, origination/, plus five desk pages \u2014 all live, all linked from a switcher.",
+      "missing": "A designation of one current build, and a decision about whether the others are archive.",
+      "why_it_decides": "Every improvement spends effort on one of six codebases. Fixing S1's statistics in one build leaves five other pages saying something different.",
+      "how_to_discover": "Pick the build whose pipeline the next session should extend (the root site is the only one that rebuilds idempotently and passes its own gate), and move the rest under a single /archive/ path with a banner. No data work needed.",
+      "owner": "Project owner",
+      "blocks": "All engineering suggestions S-01 to S-06",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/README.md"
+    },
+    {
+      "id": "Q-07",
+      "priority": "P2",
+      "question": "For player props, what exactly is the 'line' being bet against?",
+      "known": "Prop lines are the players' official season averages, sometimes one game stale, and the model's projection is that average adjusted for pace and opponent.",
+      "missing": "A stated definition. A season average is not a market line: it has no juice, no half-point, and no closing value.",
+      "why_it_decides": "With an average as the line, an 'over' pick is close to a coin flip by construction unless the adjustment is genuinely predictive. That is why S7 and S8 have zero graded plays.",
+      "how_to_discover": "Either define a fixed convention (e.g. 'line = season average rounded to 0.5, graded at even money') and publish it, or drop prop picks until a real line source exists.",
+      "owner": "Props builder",
+      "blocks": "Player props, prop combos, same-game parlays",
+      "source": "https://www.nba.com/player/1627750"
+    },
+    {
+      "id": "Q-08",
+      "priority": "P2",
+      "question": "How should correlated legs be priced across a parlay?",
+      "known": "Thirteen correlations among official team stats are measured and reproduce exactly. The same-game-parlay rho values are model guesses (0.0, 0.25, 0.30, -0.20, 0.05) and the site labels them as guesses.",
+      "missing": "A measured rho for any parlay pair that involves a player, which needs a player game-log corpus. The repository holds game logs for 3 players.",
+      "why_it_decides": "Parlay pricing is the whole of the brief's 'parlay and prop combo' section. With guessed rho, a parlay price is a guess with extra steps.",
+      "how_to_discover": "Collect official player game logs for the 60-game window (one request per player per season via the official stats pages), then measure pairwise rho directly instead of assuming it.",
+      "owner": "Props/correlation build",
+      "blocks": "Parlay and prop-combo strategies",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/data/correlations.json"
+    },
+    {
+      "id": "Q-09",
+      "priority": "P2",
+      "question": "Is the rest signal real, and can we trust the field that carries it?",
+      "known": "The repository reports a rest-day differential worth about +2.82 points per game at p = 0.130, needing roughly 340 games. The field itself is currently computed wrongly in the horizon build (26 of 27 rows negative).",
+      "missing": "A correct rest table across the season, and enough games to detect an effect that small.",
+      "why_it_decides": "Rest is one of the few signals that is not just a re-expression of team quality, so it is worth getting right \u2014 but only after the field is correct.",
+      "how_to_discover": "Fix the rest computation (F-12), widen the corpus to the full season from the official schedule, then re-estimate.",
+      "owner": "Game-flow build",
+      "blocks": "Rest/back-to-back strategies (S5 is already 8-4 on this basis and unvalidated)",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py"
+    },
+    {
+      "id": "Q-10",
+      "priority": "P3",
+      "question": "Which official injury designations actually move a line?",
+      "known": "Statuses are mapped to weights (Out 1.0, Doubtful, Questionable 0.35, Probable, Available) and to a 15 net-rating-points-per-100-possessions impact if a full team of minutes were lost.",
+      "missing": "Any measured relationship between a designation and the player's actual minutes. The weights are asserted, not fitted.",
+      "why_it_decides": "If 'Questionable' means a 70% chance of playing 34 minutes, weighting it at 0.35 mis-prices the game. Nothing in the repository tests this.",
+      "how_to_discover": "Join the official injury reports (every edition for a fortnight) to the box scores of those games and measure realised minutes by designation. That is a self-contained, entirely official dataset.",
+      "owner": "Injury build",
+      "blocks": "Availability strategies (S6)",
+      "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf"
+    },
+    {
+      "id": "Q-11",
+      "priority": "P3",
+      "question": "How much of the model's error is pace, and how much is efficiency?",
+      "known": "Totals are the weak spot: model MAE 14.83 vs naive 14.72, while margin MAE is 12.98 vs 13.62. The model uses PACE and OffRtg/DefRtg scaled by league averages.",
+      "missing": "An error decomposition. No page separates 'we got the pace wrong' from 'we got the shooting wrong'.",
+      "why_it_decides": "It tells the next build whether to spend effort on pace modelling or on efficiency modelling \u2014 a fork in the road with very different data requirements.",
+      "how_to_discover": "Regress total error on predicted pace and predicted offensive rating across the 60 games. Both series already exist in the repository.",
+      "owner": "Model build",
+      "blocks": "Totals model improvement",
+      "source": "https://www.nba.com/stats/teams/advanced"
+    },
+    {
+      "id": "Q-12",
+      "priority": "P3",
+      "question": "What does a 'reward' for a top strategy actually consist of?",
+      "known": "The brief describes a leaderboard competition with rewards. The repository publishes reward tiers and caps (a quarter unit for an unvalidated strategy).",
+      "missing": "Whether rewards are money, ranking only, or nothing, and who funds them.",
+      "why_it_decides": "If money, every statistical claim becomes a conduct question (and Q-02 becomes urgent). If ranking only, the leaderboard is a research artefact and can be simpler.",
+      "how_to_discover": "Decide and write it down. No data needed.",
+      "owner": "Project owner",
+      "blocks": "Leaderboard design",
+      "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/README.md"
+    }
+  ]
+}

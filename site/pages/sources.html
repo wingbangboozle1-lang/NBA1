@@ -33,6 +33,7 @@
 <a href="props.html">Player Props</a>
 <a href="prop-variance.html">Prop Variance &amp; Rotation</a>
 <a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameday.html">Game-Day Injury Read</a>
 <a href="gameflow.html">Game Flow</a>
 </div>
 <div class="nav-group"><h3>EVIDENCE</h3>
@@ -56,6 +57,13 @@
 <a href="sources.html">Source Register</a>
 <a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
 <a href="repo-review.html">Repo Review</a>
+</div>
+<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 14 NOV</h3>
+<a href="../../verified/index.html">&#10003; What is actually true</a>
+<a href="../../verified/summary.html">Executive summary</a>
+<a href="../../verified/verification.html">Row-level verification</a>
+<a href="../../verified/review.html">Repo review</a>
+<a href="../../verified/flagged.html">Flagged (17)</a>
 </div>
     <div class="side-note">
       <strong>Reading rule.</strong> Every table row links to the official source it
@@ -100,6 +108,13 @@
 <td>NBA.com (official)</td>
 <td>Participation status for the 2026-11-14 and 2026-11-15 games; transcribed row by row in data/raw/s14/injury_report_2026-11-14_0415ET.json.</td>
 <td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf</a></td>
+</tr>
+<tr>
+<td>S10_2026-11-14-1330PM</td>
+<td><b>NBA Official Injury Report, 11/14/26 01:30 PM ET edition (game-day report)</b></td>
+<td>NBA.com (official)</td>
+<td>The league's game-day participation report for the 2026-11-14 slate and the 2026-11-15 slate. Transcribed row by row in data/captures/2026-11-14-pm/injury_2026-11-14_1330PM.json and diffed against the 04:15 AM ET edition the published lines were built from.</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf" target="_blank" rel="noopener">https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf</a></td>
 </tr>
 <tr>
 <td>S11_2026-11-13</td>
@@ -197,6 +212,13 @@
 <td><b>NBA.com Standings - 2026-27 Regular Season</b></td>
 <td>NBA.com (official)</td>
 <td>Official W-L records for all 30 teams through the games of 2026-11-13, captured 2026-11-14T10:10Z; used to cross-check every printed record cell.</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">https://www.nba.com/standings</a></td>
+</tr>
+<tr>
+<td>S2_2026-11-14-pm-standings</td>
+<td><b>NBA.com 2026-27 Regular Season Standings (game-day read)</b></td>
+<td>NBA.com (official)</td>
+<td>All 30 club records at 18:56Z on 2026-11-14 (Utah 19:14Z), used as the second official cross-read of the record fields that also appear on each game card.</td>
 <td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">https://www.nba.com/standings</a></td>
 </tr>
 <tr>
@@ -541,6 +563,13 @@
 <td>NBA.com (official)</td>
 <td>Official game page for game 0022600257: tip time, venue, records and the game identifier.</td>
 <td class="src"><a href="https://www.nba.com/game/uta-vs-lac-0022600257" target="_blank" rel="noopener">https://www.nba.com/game/uta-vs-lac-0022600257</a></td>
+</tr>
+<tr>
+<td>S8_2026-11-14-pm-slate</td>
+<td><b>NBA.com Games &amp; Scores, 2026-11-14 to 2026-11-17 (game-day read)</b></td>
+<td>NBA.com (official)</td>
+<td>Matchup, tip time, game id, displayed club records and the displayed season-leader line for all 27 horizon games, read 2026-11-14 between 18:39Z and 19:10Z. Used to verify every published row in docs/data/lines.json; see data/captures/2026-11-14-pm/slate_2026-11-14_to_17.json.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">https://www.nba.com/games?date=2026-11-14</a></td>
 </tr>
 <tr>
 <td>S9</td>

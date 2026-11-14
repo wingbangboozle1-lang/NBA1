@@ -1,8 +1,8 @@
 {
  "title": "Executive Summary",
  "as_of": "2026-11-14",
- "headline": "The horizon runs the full three days: 27 games from 14 to 17 November 2026, with an originated line, a paper pick and an injury read-out for every one, and a source link on every row. The 2026-11-13 finals are now captured, settled and folded into a 60-game out-of-sample window, and the newest official injury-report edition (11/14/26 04:15 AM ET) has been transcribed row by row. The honest read: a small edge on the margin, none on totals or winners, and one strategy whose record has cleared the luck gate at last (S1, 23-9, p = 0.020) - but not the calibration and stability gates, so it stays capped at a quarter unit.",
- "lead": "Ten strategies were written, seven validation gates were defined, and all ten were run against a strictly out-of-sample window: all 60 completed games from 2026-11-06 to 2026-11-13, every one predicted using team ratings computed only from 2026-10-20 to 2026-11-05. No game in the test window contributes to the ratings that predict it. On top of that the system originates a line for every game in the next three days - 14, 15, 16 and 17 November - from official ratings and the newest official injury report.",
+ "headline": "The horizon runs the full three days: 27 games from 14 to 17 November 2026, with an originated line, a paper pick and an injury read-out for every one - and, as of 19:20 UTC on 11/14, a game-day injury refresh that re-verifies every published row against the official page it came from (27 of 27 slate rows and 31 of 31 published report rows agree) and re-prices tonight's five games against the four clubs that filed since the lines were cut.",
+ "lead": "Ten strategies were written, seven validation gates were defined, and all ten were run against a strictly out-of-sample window: all 60 completed games from 2026-11-06 to 2026-11-13, every one predicted using team ratings computed only from 2026-10-20 to 2026-11-05. No game in the test window contributes to the ratings that predict it. On top of that the system originates a line for every game in the next three days - 14, 15, 16 and 17 November - from official ratings and the newest official injury report. The morning's top next action - capture the day-of-game injury updates for 2026-11-14 and re-run against them - has been executed: the 01:30 PM ET game-day edition is transcribed row by row on the new Game-Day Read page, four clubs' filings are diffed against the edition the lines were built from, and the lines themselves are left exactly as published, because a line re-priced after the cut cannot be graded. What that exercise found is not a small print: the game-day report moved 3 of tonight's 5 games, and the lines that did not move each have a reason: Memphis had not filed yet, while New Orleans filed five names that have no minutes row anywhere in this project's inputs, so 45 of the 50 rows listed for tonight contribute 0.00 (F47).",
  "verdict": {
   "status": "PROVISIONAL - not funded",
   "one_line": "The model beats the naive reference on margin accuracy (MAE 12.98 against 13.62) and loses to it on totals (14.83 against 14.72) and on picking winners (42-18 against 40-20). S1 (side edge) is now 23-9, worth +11.91 model units, and for the first time its record is outside what luck alone produces (exact binomial p = 0.020, Wilson lower bound 0.546 against the 0.524 break-even) - but it fails the calibration gate (hit rate 0.719 against a mean predicted 0.627) and the stability gate (the bootstrap interval on the model's margin MAE still overlaps the reference), and the availability gate cannot run at all. Under the tier ceilings it stays a quarter-unit strategy. The 27 new lines are published as lines and paper picks, not as recommendations.",
@@ -68,6 +68,12 @@
    "title": "The 60-game extension is real, but it cannot be reproduced from this repository alone",
    "detail": "The 2026-11-13 finals are captured, transcribed three independent times that all agree 9/9, and used to settle every published 11/13 pick (seven singles 3-4 at -1.40 units, three two-leg parlays 0-3). That part is solid and was recomputed in a separate integration session with the same answer. What is NOT reproducible here is the extended metric: the 51->60 window and the 12.98 vs 13.62 margin MAE depend on a team-ratings refresh, and https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season returns no data table to this environment (flag F24, re-tested 2026-11-14). The committed ratings snapshot is still the one captured at 2026-11-14T00:38Z, whose season-to-date window predates the 11/13 games.",
    "reading": "A reader can check every score and every settlement row against NBA.com, and should. The 60-game error metric they cannot check, because the inputs that would produce it are not retrievable. Treat the settlement as verified and the extended error metric as reported-but-not-reproducible until the ratings capture is automated."
+  },
+  {
+   "n": 11,
+   "title": "The game-day edition arrived, and it moved the model far less than it should have",
+   "detail": "New Orleans, Cleveland, Chicago and Miami filed between the 04:15 AM ET edition the horizon was cut from and the 01:30 PM ET game-day edition, adding 24 player rows and changing four statuses; Memphis was still inside its filing window. Re-run through the engine's own availability adjustment, that edition moves 3 of the 5 games tipping tonight (DAL@CLE -1.8 to -2.5; DET@MIA -12.2 to -12.4; CHI@MIN 30.6 to 33.2) and leaves DEN@NOP, BKN@MEM unchanged. No favourite flips and no published pick changes side.",
+   "reading": "Two readings are available and the site publishes both. The charitable one: intra-day report churn is usually noise, and a model that lurched on every status label would be worse. The uncomfortable one: the reason it cannot move New Orleans is that the Pelicans' five listed names are not in the minutes table, so the model is not judging them, it is blind to them. That is F47, and it is the highest-value item in the register."
   }
  ],
  "what_is_live_now": [
@@ -77,45 +83,35 @@
   "The official injury report, 11/14/26 04:15 AM ET edition, transcribed row by row - 49 rows - with each player's status and the team's published reason.",
   "The settlement of every published paper pick on the 2026-11-13 slate against the official finals, with pre-registration provenance.",
   "Game-flow read-outs built from official pace and efficiency inputs, including probability of a close game, a blowout and overtime.",
-  "60 out-of-sample games with the full seven-gate matrix, a 30-team luck decomposition, 13 measured correlations and a ten-strategy leaderboard with reward tiers."
+  "60 out-of-sample games with the full seven-gate matrix, a 30-team luck decomposition, 13 measured correlations and a ten-strategy leaderboard with reward tiers.",
+  "Game-Day Read: the 01:30 PM ET official edition transcribed row by row, the diff against the edition the lines were cut from, the re-priced model line beside the published one for all five 11/14 games, and the 27-of-27 row-level verification of the whole 27-game horizon against NBA.com."
  ],
  "recommended_next_actions": [
   {
    "rank": 1,
-   "action": "Capture the day-of-game injury updates for 2026-11-14 (after 16:30 UTC) and re-run the pipeline",
-   "why": "At the newest edition (11/14/26 04:15 AM ET), the same five teams - New Orleans, Cleveland, Memphis, Chicago and Miami - have still not filed for tonight's games. The official rules require game-day reports between 11 a.m. and 1 p.m. local time, so a later edition today will contain them. Tonight's five lines currently carry no adjustment for those teams.",
-   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
-   "source_label": "NBA official injury-report index"
+   "action": "DONE 2026-11-14T19:20Z: capture the day-of-game injury updates and re-price against them. The published lines were deliberately not rewritten.",
+   "why": "Executed by session arena/95c1cb23-nba1. The two editions, the diff, the impact re-computation and the row-level verification are in data/derived/gameday_read.json, one source URL per row. The residual finding is F47: the availability layer cannot see most of what was filed."
   },
   {
    "rank": 2,
-   "action": "Capture the 11/15, 11/16 and 11/17 injury-report editions as they are published",
-   "why": "The 04:15 AM ET edition lists all twenty team-slots for 11/15 as NOT YET SUBMITTED and lists no rows at all for 11/16 or 11/17 - exactly as the reporting deadlines predict. Until those editions exist, 18 of the 27 horizon lines carry no injury adjustment and say so.",
-   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
-   "source_label": "NBA official injury-report index"
+   "action": "Complete the minutes input, per club, so the availability layer can see a rotation instead of a top-50 slice",
+   "why": "It is what turns tonight's 0.00 columns into numbers, and it unlocks Q3, Q12 and Q20 (SG20, F47)."
   },
   {
    "rank": 3,
-   "action": "Log real closing prices",
-   "why": "Until this exists, nothing here can be called profitable - only better than a naive model. Everything else is optimisation of an unvalidated target.",
-   "source_url": null,
-   "source_label": null,
-   "source_note": "No official price source is available in this repository; a methodological action, flagged unverified."
+   "action": "Capture the 11/15, 11/16 and 11/17 injury-report editions as they are published",
+   "why": "The 04:15 AM ET edition lists all twenty team-slots for 11/15 as NOT YET SUBMITTED and lists no rows at all for 11/16 or 11/17 - exactly as the reporting deadlines predict. Until those editions exist, 18 of the 27 horizon lines carry no injury adjustment and say so."
   },
   {
    "rank": 4,
-   "action": "Backfill results for 2026-10-20 to 2026-11-05 and re-cut the split",
-   "why": "Every game from 2026-11-06 onward is already in the test window, so this is now the only way to grow the sample. It would let the ratings window move earlier and the test window roughly double again.",
-   "source_url": "https://www.nba.com/games",
-   "source_label": "NBA.com Games & Scores index"
+   "action": "Log real closing prices",
+   "why": "Until this exists, nothing here can be called profitable - only better than a naive model. Everything else is optimisation of an unvalidated target."
   },
   {
    "rank": 5,
-   "action": "Complete the Players Traditional table so minutes are known for all 465 players",
-   "why": "Minutes are known for 50 of them, so the availability impact is a measured lower bound and three prop strategies have no graded plays at all.",
-   "source_url": "https://www.nba.com/stats/players/traditional",
-   "source_label": "NBA.com Stats, Players Traditional"
+   "action": "Backfill results for 2026-10-20 to 2026-11-05 and re-cut the split",
+   "why": "Every game from 2026-11-06 onward is already in the test window, so this is now the only way to grow the sample. It would let the ratings window move earlier and the test window roughly double again."
   }
  ],
- "bottom_line": "The machinery works end to end: it originates lines for every game three days out, it tests ten strategies against a real out-of-sample window, it settles the previous slate's paper picks against official finals the morning after, it refuses to promote anything that has not cleared every gate that can be run, and it publishes every gap it cannot close. One strategy has now cleared the luck gate and failed two others - that is the first genuinely selective signal in the project, and the gate matrix is what keeps it honest. What the project still cannot do is prove any of it against a real price, because no NBA-operated source publishes one."
+ "bottom_line": "The machinery works end to end: it originates lines for every game three days out, it tests ten strategies against a real out-of-sample window, it settles the previous slate's paper picks against official finals the morning after, it refuses to promote anything that has not cleared every gate that can be run, and it publishes every gap it cannot close. One strategy has now cleared the luck gate and failed two others - that is the first genuinely selective signal in the project, and the gate matrix is what keeps it honest. What the project still cannot do is prove any of it against a real price, because no NBA-operated source publishes one. The game-day pass added the one thing the site did not have: a measured answer to 'what did we miss by cutting the line before the clubs filed?' - 3 of five games moved, the rest could not, and the reason they could not is a data gap with a name and a size, not bad luck."
 }

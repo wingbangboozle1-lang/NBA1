@@ -33,6 +33,7 @@
 <a href="props.html">Player Props</a>
 <a href="prop-variance.html">Prop Variance &amp; Rotation</a>
 <a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameday.html">Game-Day Injury Read</a>
 <a href="gameflow.html">Game Flow</a>
 </div>
 <div class="nav-group"><h3>EVIDENCE</h3>
@@ -56,6 +57,13 @@
 <a href="sources.html">Source Register</a>
 <a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
 <a href="repo-review.html">Repo Review</a>
+</div>
+<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 14 NOV</h3>
+<a href="../../verified/index.html">&#10003; What is actually true</a>
+<a href="../../verified/summary.html">Executive summary</a>
+<a href="../../verified/verification.html">Row-level verification</a>
+<a href="../../verified/review.html">Repo review</a>
+<a href="../../verified/flagged.html">Flagged (17)</a>
 </div>
     <div class="side-note">
       <strong>Reading rule.</strong> Every table row links to the official source it
@@ -185,6 +193,20 @@
 <td>Low - 40 rows from 10 players over one week; the sign is robust, the magnitude is not</td>
 <td class="src"><span class="na" title="source id data/derived/prop_variance.json (minutes_to_production, minutes_elasticity) is not in the register">&mdash;</span></td>
 </tr>
+<tr id="A16">
+<td>A16</td>
+<td><b>Which injury-report edition is authoritative at tip-off, and what did the intra-day movements actually cost? (was Q14)</b></td>
+<td>Measured on 2026-11-14. The 04:15 AM ET edition is not authoritative for a 7:00 PM tip - it predates the game-day filing window entirely. The 01:30 PM ET game-day edition adds 24 player rows across four clubs (Chicago, Cleveland, Miami, New Orleans), changes four existing statuses (Dallas' Christie Questionable to Doubtful; Brooklyn's Brown Jr. Questionable to Probable; Detroit's Harkless and Jones Questionable to Available) and still lists Memphis as NOT YET SUBMITTED. Run through the engine's own availability adjustment, that edition moves 3 of the 5 games tipping tonight and by at most 2.6 points; no game's favourite flips. The movements cost essentially nothing in the published lines for one reason, and it is not the report's fault: 20 of the 24 newly listed players are outside the captured minutes table, so their impact is forced to 0.00 (F47).</td>
+<td>High for the two editions read here (both transcribed row by row from the official PDF, each row checkable at its URL); Medium for the 'what it costs' half, because the cost is computed through a model whose impact coefficient is a projectled choice (F4) and whose minutes input is incomplete (F47).</td>
+<td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>
+</tr>
+<tr id="A17">
+<td>A17</td>
+<td><b>Was the 11/14 midday injury report published, and what does it say about 11/14 rows? (was Q18)</b></td>
+<td>Yes. The official hub listed forty-five editions for 11/14 at the time of reading, from 12:00 a.m. ET through 1:30 p.m. ET, and the 1:30 p.m. ET PDF was fetched and transcribed in full: 51 rows for the five 11/14 games (ten clubs, nine of which filed) and 18 rows for the 11/15 games, every one of them NOT YET SUBMITTED. The file is data/captures/2026-11-14-pm/injury_2026-11-14_1330PM.json, and it is the newest edition published when it was read, so a newer one exists by the time this is on the page - the hub updates continuously and the site says so rather than implying a final read.</td>
+<td>High - a direct transcription of the league's own document, with the row count and per-club status reproducible from the URL on the row.</td>
+<td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Open</h2><p class="secsub">Questions that cannot be answered yet. Nothing on this site is decided on an open question.</p>
 <div class="tablewrap">
@@ -274,10 +296,10 @@
 <tr id="Q10">
 <td>Q10</td>
 <td><b>Which players are actually available for the 27 games in the horizon?</b></td>
-<td>At the newest official edition (11/14/26 04:15 AM ET), five of the ten teams playing on 11/14 have not filed (New Orleans, Cleveland, Memphis, Chicago, Miami), all twenty team-slots for 11/15 are printed as NOT YET SUBMITTED, and no rows exist for 11/16 or 11/17. The five filed teams for tonight are transcribed in full (31 rows for 11/14).</td>
+<td>Availability for the 2026-11-15, 11-16 and 11-17 games. 2026-11-14 is answered: the 01:30 PM ET game-day edition is transcribed row by row on the Game-Day Read page, with Memphis the one club still inside its filing window. Nothing later than 11/14 can be answered today because no club has filed for 11/15 yet - the first edition that will contain them is 11/14 evening, and the report never lists a game more than one day ahead (F52).</td>
 <td>Capture the official injury-report index (https://official.nba.com/nba-injury-report-2026-27-season/) on each of 11/14 (after 16:30 UTC, when the game-day reports are due), 11/15, 11/16 and 11/17 and add each published edition to the refresh job.</td>
 <td>Any injury adjustment to the 18 games on 11/15 to 11/17; the confidence label on every availability number</td>
-<td>1</td>
+<td>2</td>
 <td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf" target="_blank" rel="noopener">S10</a></td>
 </tr>
 <tr id="Q11">
@@ -292,10 +314,10 @@
 <tr id="Q12">
 <td>Q12</td>
 <td><b>Is the availability impact still a lower bound once the Players table is complete?</b></td>
-<td>Minutes are known for 50 of 465 players (F2). A player outside that page contributes 0 to the impact figure, so a team can look fully available when its rotation is not.</td>
+<td>Minutes for the 415 players outside the captured top-50 table. This is no longer a theoretical worry: on the 2026-11-14 game-day report 20 of the 24 rows a club added have no minutes row, so a club can rule out two rotation pieces and the originated line will not move (F47). Across tonight's five games the figure is 45 of 50 listed rows. Until the table is complete, the impact column is a floor and not an estimate.</td>
 <td>Capture pages 2 to 10 of the official Players Traditional table, or build the minutes table from official box scores, then re-run and compare the impact column before and after.</td>
 <td>Any claim that a team is close to full strength; the availability-shock strategy (S6) has 0 graded plays because of this</td>
-<td>2</td>
+<td>1</td>
 <td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">S7</a></td>
 </tr>
 <tr id="Q13">
@@ -306,15 +328,6 @@
 <td>Promotion of any strategy past quarter unit; the reward allocation</td>
 <td>1</td>
 <td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">S14</a></td>
-</tr>
-<tr id="Q14">
-<td>Q14</td>
-<td><b>Which injury-report edition is authoritative at tip-off, and what did the intra-day movements actually cost?</b></td>
-<td>The official league publishes multiple editions per day (12:00, 3:00, 5:00/5:15 PM ET and game-day reports). The 2026-11-13 chain was captured and every movement verified (9 status changes 12:00-&gt;3:00 PM, 5 more 3:00-&gt;5:15 PM), but no gameday edition is archived and no box-score starters are joined, so a movement's effect on minutes and production cannot be measured.</td>
-<td>Archive every edition of every report (the URLs follow the ak-static.cms.nba.com/referee/injury/Injury-Report_&lt;date&gt;_&lt;time&gt;PM.pdf pattern), diff statuses between editions, then join official box scores (nba.com/game/&lt;id&gt;/box-score) to see who actually started and played. Verified on 2026-11-14: https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><span class="na" title="https://official.nba.com/nba-injury-report-2026-27-season/">&mdash;</span></td>
 </tr>
 <tr id="Q15">
 <td>Q15</td>
@@ -342,15 +355,6 @@
 <td>Every horizon pick and every headline count</td>
 <td>High</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr id="Q18">
-<td>Q18</td>
-<td><b>Was the 11/14 12:00 PM ET injury report published, and what does it say about 11/14 rows?</b></td>
-<td>The edition's URL returned AccessDenied at capture, which is also what a missing object returns (F31).</td>
-<td>Re-check the official URL after 17:00 UTC on 2026-11-14 and transcribe any new rows with the page link. Record the response either way.</td>
-<td>Injury layer for 11/14 rows</td>
-<td>High</td>
-<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
 </tr>
 <tr id="Q19">
 <td>Q19</td>
