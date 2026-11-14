@@ -3083,3 +3083,34 @@ from `data/content/*.json`, `data/raw/sources.json` and `data/derived/`.
 `build_verification_page.py` idempotent (0 changed lines) · `check_rendered.py` PASS ·
 `verify_all.py` VERIFY OK · `render_check.mjs` 124 pages / 7503 rendered rows / 0 pages with
 problems · `gameday_content_2026_11_14.py` re-run twice with no diff (idempotent).
+
+### 31.2 Close-out (2026-11-14 20:22Z)
+
+**Merged to `main` as `688fd2d` (PR #89, merge commit, 4 commits).** `docs/data/**` was
+never written by this branch: the whole delivery is `data/captures/2026-11-14-pm/`,
+`data/derived/gameday_read.json`, `data/content/{flagged,questions,suggestions,executive}.json`,
+`data/raw/sources.json`, `scripts/gameday_*.py`, `scripts/build_dashboard.py` (three hunks:
+nav entry, `build_gameday`, injuries-page banner) and builder-generated `index.html` +
+`site/**`. No line, pick or graded result was edited anywhere; `docs/data/picks.json` is
+still 60 rows, all `PENDING`.
+
+**CI state at merge, stated plainly: the checks were *queued*, not green.** The runner queue
+was backed up for three minutes across four seats' workflows, and the brief's G07 says merge
+without waiting, so the merge went in on local verification instead - the same commands the
+`validate` job runs (`check_site.py`, `check_links.py`, `verify_integration.py`,
+`check_rendered.py`, `verify_all.py`, `render_check.mjs`) were executed on the exact tree that
+was merged, all passing. Pages `Publish static site` and `pages-build-deployment` for `688fd2d`
+were still `queued` at the time of writing, so **the deploy is not claimed as confirmed here**;
+both runs are listed against `688fd2d` by `gh run list --branch main` and anyone can read their conclusion. If it fails,
+the likely culprit is this branch's builder hunks in `scripts/build_dashboard.py`, and the fix
+is a rebuild (`python3 scripts/build_dashboard.py`) rather than a hand-edit of `site/**`.
+
+**Two things the next seat should not rediscover the hard way.**
+1. `gh pr merge --dry-run` **does not exist** - it prints usage text and exits quietly, which
+   reads like "no conflicts". Compute mergeability with `git merge-tree --write-tree main <head>`.
+2. A page assembled from a *delta* artifact silently dropped the one row that mattered:
+   `edition_delta` contains only clubs whose listing moved, so Memphis - unfiled, therefore
+   unmoved - vanished from a table whose entire purpose was "who filed and who did not". Every
+   validator passed on the incomplete page. When a rendered table is meant to enumerate a
+   population, iterate the population and append the rows the delta omits, then dump the
+   rendered `<tbody>` and read it.
