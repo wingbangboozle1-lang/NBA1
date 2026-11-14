@@ -17,6 +17,7 @@ The live site is published by GitHub Pages from the repository root:
 | Overview | [`index.html`](index.html) | Landing page: horizon at a glance, executive summary, status tiles, category index |
 | Horizon | [`site/pages/picks.html`](site/pages/picks.html) | Originated lines for every game 14–17 Nov 2026, and the gated paper picks |
 | Horizon | [`site/pages/props.html`](site/pages/props.html) | Player projections and prop combinations, with minutes coverage stated |
+| Horizon | [`site/pages/prop-variance.html`](site/pages/prop-variance.html) | Measured game-to-game dispersion from official game logs: prop uncertainty bands, minutes-to-production elasticity, injury delta |
 | Horizon | [`site/pages/injuries.html`](site/pages/injuries.html) | The official injury report, rotation minutes and measured production impact |
 | Horizon | [`site/pages/gameflow.html`](site/pages/gameflow.html) | Pace, expected margin and total, blow-out and overtime probability, rest context |
 | Evidence | [`site/pages/strategies.html`](site/pages/strategies.html) | Ten strategies, reward tiers, leaderboard |
