@@ -461,7 +461,17 @@ def main():
             "src": c.get("src"), "src_ratings": "S1",
         })
         gf.append(g)
-    write_json(os.path.join(OUT, "gameflow.json"), {"rows": gf, "src": "S1"})
+    gfm = {"rows": gf, "src": "S1"}
+    # The measured season overtime rate (scripts/measure_ot_rate.py -> data/derived/ot_rate.json)
+    # travels with the rows so every consumer can price P(OT) from the measurement instead of the
+    # miscalibrated per-game approximation (R-29-4, flag F53).
+    try:
+        with open(os.path.join(os.path.dirname(OUT), "..", "data", "derived", "ot_rate.json"),
+                  encoding="utf-8") as _f:
+            gfm["p_overtime_measured"] = json.load(_f)
+    except FileNotFoundError:
+        gfm["p_overtime_measured"] = None
+    write_json(os.path.join(OUT, "gameflow.json"), gfm)
 
     # backtest
     bt_rows = []
