@@ -30,23 +30,20 @@
 <a href="pages/questions.html">Questions</a>
 <a href="pages/suggestions.html">Suggestions</a>
 <a href="pages/sources.html">Sources</a>
-<span class="navsep" aria-hidden="true"></span>
-<a class="sib" href="../../command-center/index.html" title="current data, 14–16 Nov">Command Center ↗</a>
-<a class="sib" href="../../index.html" title="frozen 13 Nov snapshot">Edge Lab ↗</a>
     </nav>
-    <span class="stamp">as of 2026-11-14</span>
+    <span class="stamp">as of 2026-11-13</span>
   </div>
 </header>
 <main>
   <div class="wrap">
 
   <h1>Executive Summary</h1>
-  <p class="lede">The system is built and every line for the next three days is live, with a source link on every row. The out-of-sample window is now 51 games rather than 28. The honest read on it: the model has a small edge on the margin, no edge on totals or winners, and one strategy whose good record is still well inside what luck produces.</p>
+  <p class="lede">The horizon now runs the full three days: 27 games from 14 to 17 November 2026, with an originated line, a paper pick and an injury read-out for every one, and a source link on every row. The newest official injury-report edition (11/13/26 07:30 PM ET) has been captured and transcribed row by row. The out-of-sample window is 51 games, and the honest read on it is unchanged: a small edge on the margin, no edge on totals or winners, and one strategy whose good record is still inside what luck produces.</p>
 
   <div class="banner danger">
     <div class="ico">⚠</div>
     <div>
-      <p><strong>Verdict: PROVISIONAL - not funded.</strong> The model beats the naive reference on margin accuracy and loses to it on totals and on picking winners. The best strategy is 16-7, worth +7.55 model units - but with an exact p-value of 0.093 and a Wilson lower bound of 0.491 against a 0.524 break-even, it fails the skill gate. Every strategy stays at quarter-unit or research-only.</p>
+      <p><strong>Verdict: PROVISIONAL - not funded.</strong> The model beats the naive reference on margin accuracy and loses to it on totals and on picking winners. The best strategy is 16-7, worth +7.55 model units - but with an exact p-value of 0.093 and a Wilson lower bound of 0.491 against a 0.524 break-even, it fails the skill gate. Every strategy stays at quarter-unit or research-only, and the 27 new lines are published as lines and paper picks, not as recommendations.</p>
       <p class="small">Fifty-one games with a 17.4-point residual standard deviation narrows the uncertainty a lot but does not remove it. On 23 graded plays, a 16-7 run happens often enough by chance that it cannot be called skill.</p>
     </div>
   </div>
@@ -61,16 +58,16 @@
     <div class="grid k4" style="margin-bottom:16px">
       <div class="card"><h4>Strategies</h4><div class="kpi">10</div>
         <div class="kpi-sub">singles, parlays, SGPs, prop combos</div></div>
-      <div class="card"><h4>Upcoming games</h4><div class="kpi">22</div>
-        <div class="kpi-sub">2026-11-14, 2026-11-15, 2026-11-16 (22 games, maximum horizon 3 days)</div></div>
+      <div class="card"><h4>Upcoming games</h4><div class="kpi">27</div>
+        <div class="kpi-sub">2026-11-14, 2026-11-15, 2026-11-16, 2026-11-17 (27 games)</div></div>
       <div class="card"><h4>Out-of-sample games</h4><div class="kpi">51</div>
         <div class="kpi-sub">2026-11-06 to 2026-11-12, ratings from 11-05 or earlier</div></div>
-      <div class="card"><h4>Official sources</h4><div class="kpi">41</div>
+      <div class="card"><h4>Official sources</h4><div class="kpi">63</div>
         <div class="kpi-sub">nba.com, official.nba.com, league injury PDFs</div></div>
     </div>
 
   <h2>What the data says</h2>
-  <p class="small">Ten strategies were written, seven validation gates were defined, and all ten were run against a strictly out-of-sample window: all 51 completed games from 2026-11-06 to 2026-11-12, every one of them predicted using team ratings computed only from 2026-10-20 to 2026-11-05. No game in the test window contributes to the ratings that predict it.</p>
+  <p class="small">Ten strategies were written, seven validation gates were defined, and all ten were run against a strictly out-of-sample window: all 51 completed games from 2026-11-06 to 2026-11-12, every one predicted using team ratings computed only from 2026-10-20 to 2026-11-05. No game in the test window contributes to the ratings that predict it. On top of that the system now originates a line for every game in the next three days - 14, 15, 16 and 17 November - from official ratings and the newest official injury report.</p>
   <details class="q">
   <summary>1. The model wins on the margin and loses on totals and winners</summary>
   <div class="body">
@@ -127,28 +124,35 @@
     <p class="small"><strong>Reading:</strong> This is the single most important caveat for anyone reading the leaderboard.</p>
   </div>
 </details>
+<details class="q">
+  <summary>9. The three-day horizon is now live, and it is the part that is hardest to keep honest</summary>
+  <div class="body">
+    <p>27 games from 2026-11-14 to 2026-11-17, each with an originated spread, total and fair moneyline, a gated paper pick, rest and back-to-back flags, and an injury read-out. The schedule was read from the official NBA.com Schedule page and independently cross-checked against another session's capture of the same page: 27 of 27 rows agree, 0 mismatches. The injury report was taken from the 07:30 PM ET edition of the official PDF, which is newer than the 05:15 PM edition this repository previously held.</p>
+    <p class="small"><strong>Reading:</strong> Two things are not yet knowable and are published as such rather than filled in. The 11/13 finals were not published when the capture was made, so the ratings window still ends at 11/12 and 18 team records are one night out of date. And at the 07:30 PM edition five of the ten teams playing on 11/14 had not filed an injury report, while no edition yet covers the 11/15 to 11/17 games. Those lines carry no injury adjustment and say so.</p>
+  </div>
+</details>
 
   <h2>Live right now</h2>
-  <ul class="tight"><li>Originated spreads, totals, moneylines and fair prices for all 23 games across 2026-11-13, 2026-11-14 and 2026-11-15.</li>
-<li>43 picks from the strategy library, each tagged with its strategy, its market, the reference number it is betting against, the model's number and the gap.</li>
+  <ul class="tight"><li>Originated spreads, totals, moneylines and fair prices for all 27 games across 2026-11-14, 2026-11-15, 2026-11-16 and 2026-11-17.</li>
+<li>63 picks from the strategy library, each tagged with its strategy, its market, the reference number it is betting against, the model's number and the gap.</li>
 <li>Player projections for the top-50 scorers, with the possession, opponent-defence and teammate-availability factors broken out separately.</li>
-<li>The official injury report for 2026-11-13 and 2026-11-14, transcribed row by row with each player's status and the team's published reason.</li>
+<li>The official injury report, 11/13/26 07:30 PM ET edition, transcribed row by row - 122 rows - with each player's status and the team's published reason.</li>
 <li>Game-flow read-outs built from official pace and efficiency inputs, including probability of a close game, a blowout and overtime.</li>
-<li>The full 51-game out-of-sample log, with the official final score next to both forecasts.</li></ul>
+<li>51 out-of-sample games with the full seven-gate matrix, a 30-team luck decomposition, 13 measured correlations and a ten-strategy leaderboard with reward tiers.</li></ul>
 
   <h2>Recommended next actions</h2>
   <div class="tablewrap"><table class="thin">
     <thead><tr><th class="num">#</th><th>Action</th><th>Why</th><th>Official source</th></tr></thead>
-    <tbody><tr><td class="num strong">1</td><td>Log real closing prices</td>
+    <tbody><tr><td class="num strong">1</td><td>Publish the 2026-11-13 final scores as soon as the official page publishes them, then re-run the pipeline</td>
+            <td class="small">The 11/13 slate was still in progress when the capture was made, so the ratings window ends at 11/12 and 18 team records are one night out of date. The nine games are already carried for rest flags; only the scores and the refreshed official ratings are missing.</td><td><a class="srclink" href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">NBA.com Games &amp; Scores, Nov 13</a></td></tr>
+<tr><td class="num strong">2</td><td>Capture the 11/14, 11/15, 11/16 and 11/17 injury-report editions</td>
+            <td class="small">At the newest edition, five of the ten teams playing on 11/14 had not filed and no edition covers the 11/15 to 11/17 games, so 23 of the 27 horizon lines carry no injury adjustment at all.</td><td><a class="srclink" href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">NBA official injury-report index</a></td></tr>
+<tr><td class="num strong">3</td><td>Log real closing prices</td>
             <td class="small">Until this exists, nothing here can be called profitable - only better than a naive model. Everything else is optimisation of an unvalidated target.</td><td><span class="flag">unverified</span> <span class="small">No official price source is available in this repository; a methodological action, flagged unverified.</span></td></tr>
-<tr><td class="num strong">2</td><td>Backfill results for 2026-10-20 to 2026-11-05 and re-cut the split</td>
-            <td class="small">Every game from 2026-11-06 onward is already in the test window, so this is now the only way to grow the sample. It would let the ratings window move earlier and the test window roughly double again.</td><td><a class="srclink" href="https://www.nba.com/schedule" target="_blank" rel="noopener">NBA schedule (dated results)</a></td></tr>
-<tr><td class="num strong">3</td><td>Work on probability calibration rather than point accuracy</td>
-            <td class="small">The model is better on MAE and RMSE and worse on Brier and log loss. The gap between those two facts is where the leverage is.</td><td><span class="flag">unverified</span> <span class="small">Methodological action (calibration metrics are not NBA statistics); flagged unverified.</span></td></tr>
-<tr><td class="num strong">4</td><td>Complete the player-minutes table</td>
-            <td class="small">Turns the availability impact from a floor into a real number and lets the prop strategies be graded.</td><td><a class="srclink" href="https://www.nba.com/stats/players" target="_blank" rel="noopener">NBA player statistics</a></td></tr>
-<tr><td class="num strong">5</td><td>Archive every injury-report edition</td>
-            <td class="small">The only way to grade the availability strategy or to run the robustness gate.</td><td><a class="srclink" href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">NBA official injury report policy</a></td></tr></tbody>
+<tr><td class="num strong">4</td><td>Backfill results for 2026-10-20 to 2026-11-05 and re-cut the split</td>
+            <td class="small">Every game from 2026-11-06 onward is already in the test window, so this is now the only way to grow the sample. It would let the ratings window move earlier and the test window roughly double again.</td><td><a class="srclink" href="https://www.nba.com/games" target="_blank" rel="noopener">NBA.com Games &amp; Scores index</a></td></tr>
+<tr><td class="num strong">5</td><td>Complete the Players Traditional table so minutes are known for all 465 players</td>
+            <td class="small">Minutes are known for 50 of them, so the availability impact is a measured lower bound and three prop strategies have no graded plays at all.</td><td><a class="srclink" href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">NBA.com Stats, Players Traditional</a></td></tr></tbody>
   </table></div>
 
   <h2>How to read this site</h2>
@@ -166,7 +170,7 @@
   </div>
 
   <h2>Bottom line</h2>
-  <p>Everything asked for exists and is live: originated lines for every upcoming slate up to three days ahead, singles, parlays and same-game parlays, player-prop combos, a validation gate set, correlation values, a luck decomposition, injury and rotation tracking, game-flow analysis, a leaderboard with reward tiers, a suggestions page with decision paths, and a questions page split by what is known and what is not. The window grew from 28 games to 51 during this build and one conclusion flipped as a result - which is the clearest possible demonstration of why nothing here is being promoted yet.</p>
+  <p>The machinery works end to end: it originates lines for every game three days out, it tests ten strategies against a real out-of-sample window, it refuses to promote anything that has not cleared the skill gate, and it publishes every gap it cannot close. What it has not yet done is prove that any of it is skill. That is the next piece of work, and it needs one thing this repository cannot reach from an official source: a price.</p>
 
   <div class="toc" style="margin-top:18px">
     <a href="pages/lines.html">Originated lines →</a>

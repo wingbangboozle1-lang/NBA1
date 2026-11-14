@@ -1,0 +1,37 @@
+{
+  "captured_at_utc": "2026-11-13T22:30:00Z",
+  "note": "Upcoming slate transcribed from the NBA.com official Schedule page (Week 4: Nov 9 - Nov 15) and cross-checked against each game's NBA.com game page, which also supplies the current won-lost records. Tip times are ET as published. NBA Cup group labels are shown exactly as published for 2026-11-13 (Emirates NBA Cup night); 2026-11-14 and 2026-11-15 carry no Cup label on the official schedule. Records marked null were not visible in the captured page content and are left blank rather than inferred.",
+  "record_sources": {
+    "default": "S8_<game_id> (the game's own NBA.com game page, which prints both teams' current records)",
+    "exceptions": {
+      "0022600241": "TOR record 5-7 cross-confirmed on S4 (the schedule listing printed on nba.com/game/okc-vs-sac-0022600244, 'Raptors 5-7') and S1 (NBA.com Stats Teams Advanced: TOR GP 12, W 5, L 7).",
+      "0022600242": "WAS record 4-9 cross-confirmed on S4 (the schedule listing printed on nba.com/game/okc-vs-sac-0022600244, 'Wizards 4-9') and S1 (NBA.com Stats Teams Advanced: WAS GP 13, W 4, L 9)."
+    }
+  },
+  "cols": ["date", "time_et", "away", "away_rec", "home", "home_rec", "venue", "city", "cup_group", "game_id", "source_id"],
+  "rows": [
+    ["2026-11-13", "7:00 PM ET", "NYK", "6-5", "IND", "4-8", "Gainbridge Fieldhouse", "Indianapolis, IN", "East Group B", "0022600034", "S8_0022600034"],
+    ["2026-11-13", "7:00 PM ET", "MIL", "1-11", "ORL", "4-7", "Kia Center", "Orlando, FL", "East Group A", "0022600035", "S8_0022600035"],
+    ["2026-11-13", "8:00 PM ET", "CLE", "6-6", "MIA", "5-6", "Kaseya Center", "Miami, FL", "East Group B", "0022600036", "S8_0022600036"],
+    ["2026-11-13", "8:00 PM ET", "ATL", "7-5", "CHI", "1-9", "United Center", "Chicago, IL", "East Group C", "0022600037", "S8_0022600037"],
+    ["2026-11-13", "8:00 PM ET", "MEM", "7-4", "NOP", "4-8", "Smoothie King Center", "New Orleans, LA", "West Group B", "0022600038", "S8_0022600038"],
+    ["2026-11-13", "8:30 PM ET", "UTA", "1-11", "HOU", "9-3", "Toyota Center", "Houston, TX", "West Group A", "0022600039", "S8_0022600039"],
+    ["2026-11-13", "9:30 PM ET", "GSW", "8-4", "SAS", "10-2", "Frost Bank Center", "San Antonio, TX", "West Group C", "0022600040", "S8_0022600040"],
+    ["2026-11-13", "10:00 PM ET", "POR", "8-3", "SAC", "1-10", "Golden 1 Center", "Sacramento, CA", "West Group C", "0022600041", "S8_0022600041"],
+    ["2026-11-13", "10:30 PM ET", "OKC", "8-4", "LAC", "2-8", "Intuit Dome", "Inglewood, CA", "West Group B", "0022600042", "S8_0022600042"],
+    ["2026-11-14", "7:00 PM ET", "DEN", "6-4", "NOP", "4-8", "Smoothie King Center", "New Orleans, LA", "", "0022600231", "S8_0022600231"],
+    ["2026-11-14", "7:30 PM ET", "DAL", "7-5", "CLE", "6-6", "Rocket Arena", "Cleveland, OH", "", "0022600232", "S8_0022600232"],
+    ["2026-11-14", "8:00 PM ET", "DET", "8-3", "MIA", "5-6", "Kaseya Center", "Miami, FL", "", "0022600233", "S8_0022600233"],
+    ["2026-11-14", "8:00 PM ET", "BKN", "3-8", "MEM", "7-4", "FedExForum", "Memphis, TN", "", "0022600234", "S8_0022600234"],
+    ["2026-11-14", "8:00 PM ET", "CHI", "1-9", "MIN", "9-3", "Target Center", "Minneapolis, MN", "", "0022600235", "S8_0022600235"],
+    ["2026-11-15", "1:00 PM ET", "IND", "4-8", "PHI", "10-3", "Xfinity Mobile Arena", "Philadelphia, PA", "", "0022600236", "S8_0022600236"],
+    ["2026-11-15", "4:00 PM ET", "LAL", "11-2", "PHX", "5-6", "Mortgage Matchup Center", "Phoenix, AZ", "", "0022600237", "S8_0022600237"],
+    ["2026-11-15", "4:30 PM ET", "CHA", "4-8", "LAC", "2-8", "Intuit Dome", "Inglewood, CA", "", "0022600238", "S8_0022600238"],
+    ["2026-11-15", "5:00 PM ET", "SAS", "10-2", "UTA", "1-11", "Delta Center", "Salt Lake City, UT", "", "0022600239", "S8_0022600239"],
+    ["2026-11-15", "6:00 PM ET", "DAL", "7-5", "BOS", "10-2", "TD Garden", "Boston, MA", "", "0022600240", "S8_0022600240"],
+    ["2026-11-15", "6:00 PM ET", "NYK", "6-5", "TOR", "5-7", "Scotiabank Arena", "Toronto, ON", "", "0022600241", "S8_0022600241"],
+    ["2026-11-15", "7:00 PM ET", "HOU", "9-3", "WAS", "4-9", "Capital One Arena", "Washington, DC", "", "0022600242", "S8_0022600242"],
+    ["2026-11-15", "8:00 PM ET", "ATL", "7-5", "MIL", "1-11", "Fiserv Forum", "Milwaukee, WI", "", "0022600243", "S8_0022600243"],
+    ["2026-11-15", "9:00 PM ET", "OKC", "8-4", "SAC", "1-10", "Golden 1 Center", "Sacramento, CA", "", "0022600244", "S8_0022600244"]
+  ]
+}

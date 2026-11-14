@@ -1,0 +1,219 @@
+{
+ "title": "Repository review and irregularities",
+ "summary": "Line-by-line review of the NBA1 repository at merge commit 295d238 and of every official capture this build depends on. The repository was not empty: three earlier builds (A, B, C) plus one verification session (V) had already merged, and each had left a data file, a generator and a set of pages. This build re-verified the shared inputs, added the newest official injury-report edition, extended the slate to a full today-plus-three-days horizon, and produced the unified site. Every irregularity found is listed below with the official link that resolves or documents it.",
+ "checks": [
+  {
+   "item": "Repository contents",
+   "method": "find over every tracked path, then git log / git branch -a / git ls-remote to list the branches and the open pull requests",
+   "result": "150 tracked files across data/, engine/, scripts/, docs/ and 8 root pages; 1 branch of this session (arena/ffafa1f6-nba1) plus 18 branches from earlier sessions; open pull requests #11, #14 and #20 belong to other sessions and were not touched",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1"
+  },
+  {
+   "item": "Coordination board",
+   "method": "Read COORDINATION.md in full before starting; every task board item from Builds A, B, C and V checked for status",
+   "result": "All items are done or needs-review, so this session acted as the final integration session and changed the shared index and navigation",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md"
+  },
+  {
+   "item": "Horizon schedule",
+   "method": "Read every game of 2026-11-14 to 2026-11-17 off the official NBA.com Schedule page (date, tip time ET, venue, city, NBA Cup label) and compared the 27 rows against the independent capture made by session arena/afbb836e-nba1",
+   "result": "27 of 27 rows agree on date, tip time, matchup, records and game id; 0 mismatches",
+   "source": "https://www.nba.com/schedule"
+  },
+  {
+   "item": "Team records",
+   "method": "Read the won-lost record printed for every team on the official Games & Scores slate page for each of the four dates",
+   "result": "All 30 teams' records read from the official slate pages; records for the 18 teams that played on 2026-11-13 do not yet include that night's result, because the slate was still in progress",
+   "source": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "item": "Injury report edition",
+   "method": "Probed the official PDF path for every later edition of the 11/13/26 report, then read the newest one that exists",
+   "result": "The 07:30 PM ET edition exists and is newer than the 05:15 PM edition held in the repository; the 10:30 PM edition returns AccessDenied, i.e. it was not published at capture time",
+   "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+  },
+  {
+   "item": "Injury report transcription",
+   "method": "Read the PDF text layer page by page and transcribed every row, keeping the printed Game Date, Game Time, Matchup, Team, Player, Status and Reason; the report's own team blocks were recorded as the attribution basis",
+   "result": "122 rows transcribed: 91 for 2026-11-13 and 31 for 2026-11-14; 5 teams on 11/14 are recorded as NOT YET SUBMITTED exactly as published",
+   "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+  },
+  {
+   "item": "Team attribution of rows with a blank Team cell",
+   "method": "The PDF prints the Team cell once per team block. Where a row's cell is blank, the row was placed in the block whose Team cell the PDF printed, and the two cases where a block crosses a page break were corroborated against the official NBA.com team roster pages",
+   "result": "Caleb Martin confirmed on the Dallas Mavericks roster and Ernest Udeh, Jr. confirmed on the Cleveland Cavaliers roster; the attribution basis is stored row by row in data/d/injury_0730PM_team_basis.json",
+   "source": "https://www.nba.com/team/1610612742/mavericks/roster"
+  },
+  {
+   "item": "Ratings input",
+   "method": "Compared the season-to-date team table held in the repository against the wins and losses printed on the official team pages",
+   "result": "The snapshot covers games through 2026-11-12. The 2026-11-13 games were in progress at capture time, so the snapshot is the most recent complete set of official ratings available",
+   "source": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "item": "Generated lines and picks",
+   "method": "Re-ran the whole pipeline from the captured snapshots and re-read every produced row",
+   "result": "27 originated lines and 63 paper picks for the horizon; no result, record or ROI value was written for any game that has not been played",
+   "source": "https://www.nba.com/schedule"
+  },
+  {
+   "item": "Every published table row carries a source link",
+   "method": "A checker walks every generated page, finds every table row, and requires a link to an allowed official host",
+   "result": "0 rows without a source; values that could not be confirmed render as an em dash and are listed on the Flagged for Review page",
+   "source": "https://www.nba.com/schedule"
+  },
+  {
+   "item": "Internal links",
+   "method": "Resolved every relative href and src in every HTML file in the repository against the file system",
+   "result": "0 broken internal links",
+   "source": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages"
+  }
+ ],
+ "irregularities": [
+  {
+   "id": "IR-01",
+   "severity": "High",
+   "title": "Two transcriptions of the same official PDF disagree on one player's team",
+   "detail": "Build A's transcription of the 11/13/26 05:15 PM injury report records 'Martin, Caleb' under Cleveland Cavaliers with a blank matchup. In the PDF the row sits inside the Dallas Mavericks block, between 'Lively II, Dereck' and the Cleveland Cavaliers 'NOT YET SUBMITTED' row, and the official Dallas roster lists Caleb Martin (1628997, traded from PHI on 02/04/25). Cleveland's official roster does not list him.",
+   "resolution": "This build records him as Dallas Mavericks, on the PDF's block structure and corroborated by the official roster page. Build A's page still shows the earlier attribution; the conflict is published rather than silently corrected.",
+   "source_url": "https://www.nba.com/team/1610612742/mavericks/roster"
+  },
+  {
+   "id": "IR-02",
+   "severity": "High",
+   "title": "No final score exists for the 2026-11-13 slate",
+   "detail": "At capture time (2026-11-14T01:20Z, 2026-11-13 21:20 ET) the 11/13 games were in progress: the official Games & Scores page shows NYK 35 - IND 40 at Q2 6:55 and MIL 30 - ORL 36 at Q2 4:48, with the remaining seven games marked PREGAME. No final score for any 11/13 game is published anywhere in the captures.",
+   "resolution": "Left open. The 9 games are carried in data/raw/prior_slate.json for rest and back-to-back flags only, with no score and no inferred result. The ratings window therefore still ends at 2026-11-12.",
+   "source_url": "https://www.nba.com/games?date=2026-11-13"
+  },
+  {
+   "id": "IR-03",
+   "severity": "Medium",
+   "title": "18 team records are one night out of date",
+   "detail": "Records are read from the official slate pages at capture time, before the 11/13 games finish. The 18 teams that played on 11/13 (NYK, IND, MIL, ORL, CLE, MIA, ATL, CHI, MEM, NOP, UTA, HOU, GSW, SAS, POR, SAC, OKC, LAC) will each have a changed record once that slate settles.",
+   "resolution": "Left open and published. The next capture of the slate pages resolves it automatically.",
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "id": "IR-04",
+   "severity": "High",
+   "title": "The 11/14 injury report covers only half the teams",
+   "detail": "At the 07:30 PM ET edition, five of the ten teams playing on 11/14 had not filed: New Orleans, Cleveland, Memphis, Chicago and Miami are printed as NOT YET SUBMITTED. Only Denver, Dallas, Brooklyn, Minnesota and Detroit filed.",
+   "resolution": "Published as NOT YET SUBMITTED with the official PDF link. The availability impact for those five teams is unknown and is shown as such; it is never filled in.",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+  },
+  {
+   "id": "IR-05",
+   "severity": "Medium",
+   "title": "No injury-report edition yet covers the 11/15 to 11/17 games",
+   "detail": "The 07:30 PM ET edition of the 11/13 report prints rows for the 11/13 and 11/14 games only. The official injury-report policy requires a report for each day's games, so editions for 11/15, 11/16 and 11/17 will be published later and do not exist at capture time.",
+   "resolution": "Those teams show as 'NO ENTRY IN THE 11/13/26 07:30 PM ET EDITION'. The lines for those games carry no injury adjustment, and that is stated on the page.",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/"
+  },
+  {
+   "id": "IR-06",
+   "severity": "Low",
+   "title": "The 10:30 PM ET edition of the 11/13 report returns AccessDenied",
+   "detail": "The league publishes a report at 10:30 PM ET for late games. The path for that edition returns an AccessDenied error rather than a document, so it was not published at capture time (21:20 ET).",
+   "resolution": "The 07:30 PM ET edition is used as the newest available. The next capture will pick up the later edition automatically.",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_10_30PM.pdf"
+  },
+  {
+   "id": "IR-07",
+   "severity": "High",
+   "title": "Player minutes are known for 50 of 465 players",
+   "detail": "The official Players Traditional table publishes 465 rows across ten pages and only page 1 - the 50 highest scorers - is present in the page source a plain fetch can read. Minutes for the other 415 players are unknown.",
+   "resolution": "Blank, not estimated. The availability impact column is therefore a measured lower bound, and the minutes-coverage column is printed next to every injury row so the reader can see how much of the rotation is actually known.",
+   "source_url": "https://www.nba.com/stats/players/traditional"
+  },
+  {
+   "id": "IR-08",
+   "severity": "High",
+   "title": "No official price exists, so 'edge' is measured against a model",
+   "detail": "No NBA-operated source publishes a sportsbook price. Every edge on this site is therefore the originated model against a deliberately naive reference model built from the same official ratings - not an edge against a book.",
+   "resolution": "Stated on the lines, picks, strategies and validation pages, and carried as flag F3. No pick is described as market-validated.",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "id": "IR-09",
+   "severity": "Low",
+   "title": "Two conventions for a blank Team cell existed across builds",
+   "detail": "Build A left every row whose Team cell was blank in the PDF unattributed and flagged it. Build B repeated the team of the block. Both are defensible readings of the same document, and they produce different answers for the same player.",
+   "resolution": "This build adopts one rule, states it on the page, records the basis row by row in data/d/injury_0730PM_team_basis.json, and corroborates the two page-break cases against official roster pages. IR-01 is the one place the two readings actually conflict.",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+  },
+  {
+   "id": "IR-10",
+   "severity": "Info",
+   "title": "Three pull requests from earlier sessions remain open",
+   "detail": "PR #11 (arena/c7fbc064-nba1), PR #14 (arena/7cfd203a-nba1) and PR #20 (arena/9abdf3f7-nba1) are still open and belong to other branches. PR #20 audits official scores for 6-12 November and team advanced statistics, and may close IR-02 and IR-03 if it captures the 11/13 finals.",
+   "resolution": "Not touched by this session, which works on one branch only. Logged here so the reviewer can decide whether to merge them.",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/pulls"
+  }
+ ],
+ "log": [
+  {
+   "when": "2026-11-14 00:56Z",
+   "check": "Board and branch survey",
+   "result": "3 earlier builds merged, 1 verification session merged, 3 open pull requests found and left alone",
+   "note": "COORDINATION.md read in full before any file was touched",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1"
+  },
+  {
+   "when": "2026-11-14 01:05Z",
+   "check": "Official schedule read",
+   "result": "36 games 11/13-11/17 read from nba.com/schedule; 27 in the horizon",
+   "note": "tip time, venue, city and NBA Cup label as printed",
+   "source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "when": "2026-11-14 01:10Z",
+   "check": "Injury-report editions probed",
+   "result": "07:30 PM edition found and read; 10:30 PM edition not published",
+   "note": "122 rows transcribed",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+  },
+  {
+   "when": "2026-11-14 01:12Z",
+   "check": "Slate records read",
+   "result": "records for all 30 teams read from the four official slate pages",
+   "note": "pre-11/13 values, recorded as such",
+   "source_url": "https://www.nba.com/games?date=2026-11-14"
+  },
+  {
+   "when": "2026-11-14 01:15Z",
+   "check": "Official rosters read",
+   "result": "Caleb Martin = Dallas, Ernest Udeh Jr. = Cleveland",
+   "note": "resolves the attribution conflict in IR-01 and IR-09",
+   "source_url": "https://www.nba.com/team/1610612742/mavericks/roster"
+  },
+  {
+   "when": "2026-11-14 01:18Z",
+   "check": "Independent schedule cross-check",
+   "result": "27/27 rows agree with session arena/afbb836e-nba1's capture, 0 mismatches",
+   "note": "two independent reads of the same official page",
+   "source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "when": "2026-11-14 01:22Z",
+   "check": "Pipeline re-run",
+   "result": "27 originated lines, 63 paper picks, 88 prop rows, 75 injury rows, 27 game-flow rows",
+   "note": "from the captured snapshots only; no network access in the pipeline",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "when": "2026-11-14 01:35Z",
+   "check": "Site build",
+   "result": "unified site generated: 1 landing page + 15 category pages, all rows source-linked",
+   "note": "scripts/build_dashboard.py",
+   "source_url": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages"
+  },
+  {
+   "when": "2026-11-14 01:40Z",
+   "check": "Link and source audit",
+   "result": "0 broken internal links, 0 table rows without a source link",
+   "note": "scripts/verify_all.py",
+   "source_url": "https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages"
+  }
+ ]
+}
