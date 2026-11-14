@@ -385,7 +385,7 @@ This session works on one branch only, as the session rules require.
 | W02 | Final verification pass | done | `scripts/verify_all.py`, `scripts/check_site.py`, `scripts/check_links.py` | `VERIFY OK` — all builders, checkers and data audits pass (31 games, 26 model picks, 12 parlays, 62 props, 62 impact rows, 20 unattributed); 731 table rows synced |
 | W03 | GitHub Pages deployment confirmation | done | `.github/workflows/pages.yml`, `docs/` | Pages status: `built`; live URL `https://wingbangboozle1-lang.github.io/NBA1/`; source branch `main`, path `/` |
 | W04 | Flagged-items audit | done | `review.html`, `data/content/flagged.json`, `docs/b/pages/flagged.html` | All flagged items carry official source links: F1–F12 (Build B flagged register), F-C01–F-C11 (Build C), V-01–V-07 (session arena-a6936331), E-01–E-10 (Edge Lab); none block publication |
-| W05 | Integration PR → main | done | whole repo | PR #29 created and merged with `--merge`; record below |
+| W05 | Integration PR → main | done | whole repo | PR #29 created and merged with `--merge` at 2026-11-14; merge commit `338002b`; Pages `built` at commit `338002b`; live URL https://wingbangboozle1-lang.github.io/NBA1/ |
 
 ### Session `arena/93ff7f20-nba1` log
 
