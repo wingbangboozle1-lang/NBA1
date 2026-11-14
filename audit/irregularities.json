@@ -1,60 +1,187 @@
 {
-  "_meta": {
-    "title": "Irregularity register: arena-9abdf3f7 audit of main @ 2f44c98",
-    "retrieved_utc": "2026-11-14",
-    "severity_scale": "High = could mislead a reader or run unreviewed code; Medium = data or label is wrong or stale; Low = precision or wording; Info = limitation of this audit",
-    "rule": "Logged, not silently corrected. Fixes belong to the integration session or the owning session."
+ "_meta": {
+  "title": "Irregularity register: arena-9abdf3f7 audit of main @ 2f44c98",
+  "retrieved_utc": "2026-11-14",
+  "severity_scale": "High = could mislead a reader or run unreviewed code; Medium = data or label is wrong or stale; Low = precision or wording; Info = limitation of this audit",
+  "rule": "Logged, not silently corrected. Fixes belong to the integration session or the owning session.",
+  "status_checked_against": "origin/main @ 5fd46c8 (PR #19 merged), 2026-11-14"
+ },
+ "items": [
+  {
+   "id": "I-01",
+   "severity": "High",
+   "area": "Automation",
+   "finding": "refresh-data.yml runs at 11:15, 15:15 and 22:15 UTC with permissions contents: write and pushes the checked-out branch with git push. The fetch, rebuild and page-build steps are continue-on-error. No run has ever executed (gh run list returns none).",
+   "evidence": "Workflow file; gh run list --workflow refresh-data.yml returned []",
+   "links": [
+    {
+     "label": "Workflow file on main",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml"
+    }
+   ],
+   "suggested_action": "Disable the schedule, or make the job open a pull request instead of pushing to main, before first use.",
+   "status": "Open",
+   "status_note": "Checked on main 5fd46c8: cron, contents: write and git push all present; gh run list shows no runs."
   },
-  "items": [
-    {"id":"I-01","severity":"High","area":"Automation",
-     "finding":"refresh-data.yml runs at 11:15, 15:15 and 22:15 UTC with permissions contents: write and pushes the checked-out branch with git push. The fetch, rebuild and page-build steps are continue-on-error. No run has ever executed (gh run list returns none).",
-     "evidence":"Workflow file; gh run list --workflow refresh-data.yml returned []",
-     "links":[{"label":"Workflow file on main","url":"https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml"}],
-     "suggested_action":"Disable the schedule, or make the job open a pull request instead of pushing to main, before first use."},
-    {"id":"I-02","severity":"Medium","area":"Data label",
-     "finding":"data/teams_advanced_2026_27.json says 'Per Mode: Per Game', but MIN is a season total (48 x GP plus 5 per overtime game, e.g. LAL 624.0 = 13 x 48) and POSS is documented as a season total. The numbers match the official page; the label does not match them.",
-     "evidence":"Stored MIN minus 48 x GP is 0 or a multiple of 5 for all 30 teams. The official page URL carries no PerMode parameter and its text does not show the selected mode.",
-     "links":[{"label":"Official Teams > Advanced (season to date)","url":"https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"},{"label":"Stored file","url":"https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/teams_advanced_2026_27.json"}],
-     "suggested_action":"Confirm the Per Mode on the live page and correct the label to 'Totals' if confirmed. Values are not changed."},
-    {"id":"I-03","severity":"Medium","area":"Generated page",
-     "finding":"docs/pages/summary.html states 682 table rows. The generator now produces 693. scripts/verify_all.py rewrites this tracked file on every run, exits 0, and leaves git status dirty.",
-     "evidence":"Run of scripts/verify_all.py on 2f44c98: git diff changed one line, '682' to '693'.",
-     "links":[{"label":"Generated page on main","url":"https://github.com/wingbangboozle1-lang/NBA1/blob/main/docs/pages/summary.html"}],
-     "suggested_action":"Integration session regenerates and commits the page (task V03 on arena/a6936331-nba1). Verification should check, not write, tracked files."},
-    {"id":"I-04","severity":"Medium","area":"Coordination",
-     "finding":"COORDINATION.md on main still lists U14 as 'in progress' and U12 as 'needs review', still names base f73edd2, and has no entries for open PR #11 (arena/c7fbc064-nba1), open PR #14 (arena/7cfd203a-nba1), or the remote branches arena/a6936331-nba1 and arena/d3892d13-nba1.",
-     "evidence":"gh pr list --state open; git ls-remote --heads origin.",
-     "links":[{"label":"PR #11 (open)","url":"https://github.com/wingbangboozle1-lang/NBA1/pull/11"},{"label":"PR #14 (open)","url":"https://github.com/wingbangboozle1-lang/NBA1/pull/14"}],
-     "suggested_action":"Integration session reconciles the board and decides the fate of PRs #11 and #14."},
-    {"id":"I-05","severity":"Medium","area":"Publishing",
-     "finding":"pages.yml uploads path '.', so the whole repository is published, including COORDINATION.md, notes/, scripts/ and the raw snapshots. The build-A link check is continue-on-error, so a broken link in build A does not stop the deploy.",
-     "evidence":"Workflow file, 'path: .' and 'continue-on-error: true' on the build-A validation step.",
-     "links":[{"label":"Pages workflow on main","url":"https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/pages.yml"}],
-     "suggested_action":"Publish a dedicated site directory, and make the link check blocking."},
-    {"id":"I-06","severity":"Medium","area":"Site structure",
-     "finding":"Two independent dashboards are published (build A at the root and in docs/, build B at docs/b/). Neither links to the other, and the cross-link request (R1) has not been executed.",
-     "evidence":"Root index.html and docs/b/index.html are both live.",
-     "links":[{"label":"Build A live root","url":"https://wingbangboozle1-lang.github.io/NBA1/"},{"label":"Build B live landing","url":"https://wingbangboozle1-lang.github.io/NBA1/docs/b/index.html"}],
-     "suggested_action":"Integration session adds the cross-link (R1 / V04) and then decides on one landing page."},
-    {"id":"I-07","severity":"Low","area":"Data precision",
-     "finding":"games_completed.json records overtime as a yes/no flag. DET at WAS on 2026-11-12 is 'Final/OT2' on the official page (two overtimes); the stored row records OT only.",
-     "evidence":"Official card label 'Final/OT2'; stored ot = true.",
-     "links":[{"label":"Official game page","url":"https://www.nba.com/game/det-vs-was-0022600228"}],
-     "suggested_action":"Add an overtime-count column when the table is next rebuilt. Score values are not affected."},
-    {"id":"I-08","severity":"Low","area":"Snapshot time",
-     "finding":"The official Teams > Advanced page does not display a capture time. The season-to-date window is confirmed only by matching games-played totals to the stored window (through 11/12).",
-     "evidence":"Official page text; games-played values equal the stored values for all 30 teams.",
-     "links":[{"label":"Official Teams > Advanced","url":"https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"}],
-     "suggested_action":"Record the exact capture time and URL with every snapshot (already done for the team table in data/raw; not done on the official page itself)."},
-    {"id":"I-09","severity":"Low","area":"Documentation",
-     "finding":"The README's GitHub Pages section calls PR #4 'the current integration'. That is out of date: the integration is now PRs #15 to #18. The Actions run it cites (43520295487) does exist and succeeded.",
-     "evidence":"gh pr view 4 (MERGED, arena/4f997533-nba1); gh run view 43520295487 (success).",
-     "links":[{"label":"PR #4 (merged)","url":"https://github.com/wingbangboozle1-lang/NBA1/pull/4"},{"label":"Run 43520295487","url":"https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43520295487"}],
-     "suggested_action":"Reword the section with the current PR list."},
-    {"id":"I-10","severity":"Info","area":"Audit limitation",
-     "finding":"Branch protection on main could not be read with this session's credentials (HTTP 403). Whether direct pushes (I-01) are blocked is therefore unknown.",
-     "evidence":"gh api repos/wingbangboozle1-lang/NBA1/branches/main/protection returned 403.",
-     "links":[{"label":"GitHub docs: branch protection API","url":"https://docs.github.com/rest/branches/branch-protection#get-branch-protection"}],
-     "suggested_action":"A maintainer with admin rights should check the setting in the repository settings."}
-  ]
+  {
+   "id": "I-02",
+   "severity": "Medium",
+   "area": "Data label",
+   "finding": "data/teams_advanced_2026_27.json says 'Per Mode: Per Game', but MIN is a season total (48 x GP plus 5 per overtime game, e.g. LAL 624.0 = 13 x 48) and POSS is documented as a season total. The numbers match the official page; the label does not match them.",
+   "evidence": "Stored MIN minus 48 x GP is 0 or a multiple of 5 for all 30 teams. The official page URL carries no PerMode parameter and its text does not show the selected mode.",
+   "links": [
+    {
+     "label": "Official Teams > Advanced (season to date)",
+     "url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+    },
+    {
+     "label": "Stored file",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/teams_advanced_2026_27.json"
+    }
+   ],
+   "suggested_action": "Confirm the Per Mode on the live page and correct the label to 'Totals' if confirmed. Values are not changed.",
+   "status": "Open",
+   "status_note": "Checked on main 5fd46c8: label still reads 'Per Mode: Per Game'."
+  },
+  {
+   "id": "I-03",
+   "severity": "Medium",
+   "area": "Generated page",
+   "finding": "docs/pages/summary.html states 682 table rows. The generator now produces 693. scripts/verify_all.py rewrites this tracked file on every run, exits 0, and leaves git status dirty.",
+   "evidence": "Run of scripts/verify_all.py on 2f44c98: git diff changed one line, '682' to '693'.",
+   "links": [
+    {
+     "label": "Generated page on main",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/docs/pages/summary.html"
+    }
+   ],
+   "suggested_action": "Integration session regenerates and commits the page (task V03 on arena/a6936331-nba1). Verification should check, not write, tracked files.",
+   "status": "Resolved on main",
+   "status_note": "Checked on main 5fd46c8 (PR #19): summary.html now reads 693, equal to the generator output. verify_all.py was run in a clean checkout and left the tree unchanged."
+  },
+  {
+   "id": "I-04",
+   "severity": "Medium",
+   "area": "Coordination",
+   "finding": "COORDINATION.md on main still lists U14 as 'in progress' and U12 as 'needs review', still names base f73edd2, and has no entries for open PR #11 (arena/c7fbc064-nba1), open PR #14 (arena/7cfd203a-nba1), or the remote branches arena/a6936331-nba1 and arena/d3892d13-nba1.",
+   "evidence": "gh pr list --state open; git ls-remote --heads origin.",
+   "links": [
+    {
+     "label": "PR #11 (open)",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/pull/11"
+    },
+    {
+     "label": "PR #14 (open)",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/pull/14"
+    }
+   ],
+   "suggested_action": "Integration session reconciles the board and decides the fate of PRs #11 and #14.",
+   "status": "Partly resolved",
+   "status_note": "PR #19 corrected U14 and logged PRs #11 and #14 as open (F-C10). Still open: arena/a6936331-nba1 (PR #21 open) and arena/d3892d13-nba1 are not on main's board, and U14 still shows 'in progress' in §2."
+  },
+  {
+   "id": "I-05",
+   "severity": "Medium",
+   "area": "Publishing",
+   "finding": "pages.yml uploads path '.', so the whole repository is published, including COORDINATION.md, notes/, scripts/ and the raw snapshots. The build-A link check is continue-on-error, so a broken link in build A does not stop the deploy.",
+   "evidence": "Workflow file, 'path: .' and 'continue-on-error: true' on the build-A validation step.",
+   "links": [
+    {
+     "label": "Pages workflow on main",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/pages.yml"
+    }
+   ],
+   "suggested_action": "Publish a dedicated site directory, and make the link check blocking.",
+   "status": "Open",
+   "status_note": "Checked on main 5fd46c8: path: '.' and continue-on-error both present."
+  },
+  {
+   "id": "I-06",
+   "severity": "Medium",
+   "area": "Site structure",
+   "finding": "Two independent dashboards are published (build A at the root and in docs/, build B at docs/b/). Neither links to the other, and the cross-link request (R1) has not been executed.",
+   "evidence": "Root index.html and docs/b/index.html are both live.",
+   "links": [
+    {
+     "label": "Build A live root",
+     "url": "https://wingbangboozle1-lang.github.io/NBA1/"
+    },
+    {
+     "label": "Build B live landing",
+     "url": "https://wingbangboozle1-lang.github.io/NBA1/docs/b/index.html"
+    }
+   ],
+   "suggested_action": "Integration session adds the cross-link (R1 / V04) and then decides on one landing page.",
+   "status": "Partly resolved",
+   "status_note": "Checked on main 5fd46c8: root index.html links to docs/b/index.html (R1 closed by PR #19). Two dashboards are still published."
+  },
+  {
+   "id": "I-07",
+   "severity": "Low",
+   "area": "Data precision",
+   "finding": "games_completed.json records overtime as a yes/no flag. DET at WAS on 2026-11-12 is 'Final/OT2' on the official page (two overtimes); the stored row records OT only.",
+   "evidence": "Official card label 'Final/OT2'; stored ot = true.",
+   "links": [
+    {
+     "label": "Official game page",
+     "url": "https://www.nba.com/game/det-vs-was-0022600228"
+    }
+   ],
+   "suggested_action": "Add an overtime-count column when the table is next rebuilt. Score values are not affected.",
+   "status": "Open",
+   "status_note": "Stored data unchanged; OT still recorded as a flag."
+  },
+  {
+   "id": "I-08",
+   "severity": "Low",
+   "area": "Snapshot time",
+   "finding": "The official Teams > Advanced page does not display a capture time. The season-to-date window is confirmed only by matching games-played totals to the stored window (through 11/12).",
+   "evidence": "Official page text; games-played values equal the stored values for all 30 teams.",
+   "links": [
+    {
+     "label": "Official Teams > Advanced",
+     "url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+    }
+   ],
+   "suggested_action": "Record the exact capture time and URL with every snapshot (already done for the team table in data/raw; not done on the official page itself).",
+   "status": "Open",
+   "status_note": "Official page still shows no capture time."
+  },
+  {
+   "id": "I-09",
+   "severity": "Low",
+   "area": "Documentation",
+   "finding": "The README's GitHub Pages section calls PR #4 'the current integration'. That is out of date: the integration is now PRs #15 to #18. The Actions run it cites (43520295487) does exist and succeeded.",
+   "evidence": "gh pr view 4 (MERGED, arena/4f997533-nba1); gh run view 43520295487 (success).",
+   "links": [
+    {
+     "label": "PR #4 (merged)",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/pull/4"
+    },
+    {
+     "label": "Run 43520295487",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43520295487"
+    }
+   ],
+   "suggested_action": "Reword the section with the current PR list.",
+   "status": "Open",
+   "status_note": "Checked on main 5fd46c8: README line 66 unchanged."
+  },
+  {
+   "id": "I-10",
+   "severity": "Info",
+   "area": "Audit limitation",
+   "finding": "Branch protection on main could not be read with this session's credentials (HTTP 403). Whether direct pushes (I-01) are blocked is therefore unknown.",
+   "evidence": "gh api repos/wingbangboozle1-lang/NBA1/branches/main/protection returned 403.",
+   "links": [
+    {
+     "label": "GitHub docs: branch protection API",
+     "url": "https://docs.github.com/rest/branches/branch-protection#get-branch-protection"
+    }
+   ],
+   "suggested_action": "A maintainer with admin rights should check the setting in the repository settings.",
+   "status": "Open",
+   "status_note": "Still HTTP 403 with this session's token."
+  }
+ ]
 }

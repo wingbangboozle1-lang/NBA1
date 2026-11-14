@@ -91,6 +91,8 @@ for k in ["straight_up_model", "straight_up_ref", "mae_margin_model", "mae_total
 
 # ---- irregularities ---------------------------------------------------------------
 sev_cls = {"High": "high", "Medium": "medium", "Low": "low", "Info": "info"}
+def stat_cls(st):
+    return "ok" if st.startswith("Resolved") else ("medium" if st.startswith("Partly") else "high")
 irr_rows = []
 for it in irr["items"]:
     links = " · ".join(f'<a href="{E(l["url"])}" target="_blank" rel="noopener">{E(l["label"])}</a>' for l in it["links"])
@@ -99,6 +101,7 @@ for it in irr["items"]:
     irr_rows.append(
         f'<tr><td class="mono">{E(it["id"])}</td><td><span class="badge {sev_cls[it["severity"]]}">{E(it["severity"])}</span></td>'
         f'<td>{E(it["area"])}</td><td>{E(it["finding"])}<div class="faint small">Evidence: {E(it["evidence"])}</div></td>'
+        f'<td><span class="badge {stat_cls(it["status"])}">{E(it["status"])}</span><div class="faint small">{E(it["status_note"])}</div></td>'
         f'<td>{links}</td><td>{E(it["suggested_action"])}</td></tr>')
 
 page = f"""<!doctype html>
@@ -184,12 +187,12 @@ Results match what the stored summary reports. These metrics depend on the model
 </tbody></table></div>
 
 <h2 id="irregularities">Irregularity register</h2>
-<p class="small">Every issue found in this audit, with evidence and a link. None blocks publication, and none was silently corrected.
+<p class="small">Every issue found in this audit, with evidence and a link. Status is re-checked against <code>origin/main</code> at <code>5fd46c8</code> (after PR #19). None blocks publication, and none was silently corrected.
 Severity: <span class="badge high">High</span> could mislead a reader or run unreviewed code;
 <span class="badge medium">Medium</span> data or label is wrong or stale;
 <span class="badge low">Low</span> precision or wording; <span class="badge info">Info</span> a limit on this audit.</p>
 <div class="tablewrap"><table>
-<thead><tr><th>ID</th><th>Severity</th><th>Area</th><th>Finding</th><th>Links</th><th>Suggested action</th></tr></thead>
+<thead><tr><th>ID</th><th>Severity</th><th>Area</th><th>Finding</th><th>Status on main</th><th>Links</th><th>Suggested action</th></tr></thead>
 <tbody>
 {chr(10).join(irr_rows)}
 </tbody></table></div>
