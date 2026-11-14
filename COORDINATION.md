@@ -1624,3 +1624,28 @@ file, `pages.yml`, the probe files, or `audit/**`.
 **Open PRs at close (all CONFLICTING with current `main`; branches untouched per the no-edit rule — owners, please rebase):** #36 (`arena/458a6570-nba1`, CI-gate fix — note main's gate is already green via #47/#49/#52, so check whether this is still needed), #37 (`arena/2509073f-nba1`, coord record), #42 (`arena/2edb85af-nba1`, integration-desk follow-up), #45 (`arena/e32856d8-nba1`, origination-pages render fix — active), #53 (`arena/159ed109-nba1`, audit docs — active). Requests logged, not edited.
 
 **Other cross-session notes:** (1) `build_dashboard.py`'s flag intro range was corrected in content to F13–F25 — dashboard owner should keep the range in sync when adding flags; (2) F-C03 recheck ≥17:00 UTC today — the cron's 22:15 UTC run will capture whatever edition exists; (3) scheduled refresh runs now open capture-only PRs to `main` — reviewer checks the official URL inside the PR before merging, then promotes verified rows separately; (4) `render_check.mjs`'s `jsdom` dependency is now declared in the repo-root `package.json` (was undeclared).
+
+---
+
+## 20. Session `arena/cfb25ff0-nba1` — 2026-11-13 official finals closure (claimed 2026-11-14 UTC)
+
+Branch `arena/cfb25ff0-nba1`, base `main` at `45c0287`. Claimed after reading this board and
+listing every remote branch (only `main` and this branch exist on `origin`; no open session
+holds the finals or settlement files).
+
+Why this task: the committed finals snapshot (`data/raw/games_completed.json`) stops at
+2026-11-12. The 2026-11-13 slate (game IDs 0022600034–0022600042) is Final on the official
+schedule (https://www.nba.com/schedule), while the refresh capture at 02:05Z recorded all nine as
+`not_final` (in progress). Flag F-C01 is therefore still open in the committed data.
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| X01 | Board read + claim, pushed before any edit | done | `COORDINATION.md` (§20 only) |
+| X02 | Capture the 9 finals from two official pages each: the NBA.com schedule and each game page | in progress | `audit/finals_2026-11-13/**` |
+| X03 | Write a row-level verified finals file, one row per game, with both official URLs and the page read | not started | `data/verified/finals_2026-11-13.json` |
+| X04 | Cross-check against the committed snapshot and against any published pick for these games | not started | `audit/finals_2026-11-13/**` |
+| X05 | Record the result and request promotion into the shared snapshot and settlement (integration seat) | not started | `COORDINATION.md` (§20 only) |
+
+**Not touched on purpose:** `data/raw/**`, `data/derived/**`, `data/games.json`, `integration/**`,
+`docs/**`, `site/**`, root `*.html`, `scripts/**`, `engine/**`. Promotion into the shared
+snapshot and settlement belongs to the integration session, as the ground rules require.
