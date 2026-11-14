@@ -522,10 +522,125 @@ def check_correlations():
         f"{ok} of {len(c['tier_a_empirical'])} Tier-A pairs reproduce exactly from teams_advanced/scoring (r and normal-approx p); {bad} differ")
 
 
+def check_s14_settlement():
+    """Verify PR #59's merged settlement of the 11/13 slate against the official finals capture."""
+    name = "settlement(merged): data/raw/s14/settlement_2026-11-13.json vs official finals"
+    try:
+        d = load("data/raw/s14/settlement_2026-11-13.json")
+    except FileNotFoundError:
+        rec(name, "MISSING", "file not found")
+        return
+    bad = ok = 0
+    w = l = nb = 0
+    for s in d["singles"]:
+        c = fin_by_id.get(s["game_id"])
+        if not c:
+            bad += 1
+            results["mismatches"].append({"where": name, "row": s["game_id"], "detail": "no official capture row"})
+            continue
+        # scores
+        if s["away_pts"] != c["away_pts"] or s["home_pts"] != c["home_pts"]:
+            bad += 1
+            results["mismatches"].append({"where": name, "row": s["game_id"], "field": "score",
+                                          "repo": (s["away_pts"], s["home_pts"]),
+                                          "official": (c["away_pts"], c["home_pts"]), "src": c["source_url"]})
+        else:
+            ok += 1
+        margin = c["home_pts"] - c["away_pts"]
+        if s["actual_margin_home"] != margin:
+            bad += 1
+            results["mismatches"].append({"where": name, "row": s["game_id"], "field": "actual_margin_home",
+                                          "repo": s["actual_margin_home"], "official": margin, "src": c["source_url"]})
+        # grading: HOME covers iff margin + spread_home > 0 (their stated rule, book-style spread)
+        if s["pick_side"] in ("HOME", "AWAY"):
+            covers_home = margin + s["originated_spread_home"] > 0
+            pick_home = s["pick_side"] == "HOME"
+            expect = "WIN" if covers_home == pick_home else "LOSS"
+            if s["result"] != expect:
+                bad += 1
+                results["mismatches"].append({"where": name, "row": s["game_id"], "field": "result",
+                                              "repo": s["result"], "recomputed": expect})
+            if s["result"] == "WIN":
+                w += 1
+                if abs(s["units"] - 1.0) > 1e-9:
+                    bad += 1
+            elif s["result"] == "LOSS":
+                l += 1
+                if abs(s["units"] + 1.1) > 1e-9:
+                    bad += 1
+        else:
+            nb += 1
+    summ = d["summary"]
+    if not (summ["wins"] == w and summ["losses"] == l and summ["no_bets"] == nb):
+        bad += 1
+        results["mismatches"].append({"where": name, "row": "summary",
+                                      "repo": (summ["wins"], summ["losses"], summ["no_bets"]),
+                                      "recomputed": (w, l, nb)})
+    if abs(round(w * 1.0 - l * 1.1, 2) - summ["units_at_minus110"]) > 0.011:
+        bad += 1
+        results["mismatches"].append({"where": name, "row": "summary units",
+                                      "repo": summ["units_at_minus110"], "recomputed": round(w * 1.0 - l * 1.1, 2)})
+    # MAE on slate
+    errs = [abs(s["model_margin_error"]) for s in d["singles"]]
+    mae = round(sum(errs) / len(errs), 2)
+    if abs(mae - summ["model_margin_mae_on_slate"]) > 0.011:
+        bad += 1
+        results["mismatches"].append({"where": name, "row": "model_margin_mae_on_slate",
+                                      "repo": summ["model_margin_mae_on_slate"], "recomputed": mae})
+    # parlays: legs must grade consistently with the singles results
+    leg_res = {s["matchup"]: s["result"] for s in d["singles"]}
+    for p in d["parlays"]:
+        for leg in p["legs"]:
+            mu = leg["leg"].split(" — ")[0]
+            if mu in leg_res and leg_res[mu] in ("WIN", "LOSS") and leg["result"] != leg_res[mu]:
+                bad += 1
+                results["mismatches"].append({"where": name, "row": f"parlay leg {leg['leg']}",
+                                              "repo": leg["result"], "singles_row": leg_res[mu]})
+    rec(name, "PASS" if bad == 0 else "MISMATCH",
+        f"9 singles: {ok} scores match official capture, grading recomputed {w}-{l} + {nb} NO BET, "
+        f"units {summ['units_at_minus110']}, MAE {mae}; {len(d['parlays'])} parlays leg-checked; {bad} mismatches")
+
+
+def check_preregistration():
+    """The settled lines must equal the pre-tip frozen archive (no look-ahead)."""
+    name = "settlement(merged): pre-registration fidelity vs data/archive/originated_lines_2026-11-13T2245Z.json"
+    try:
+        d = load("data/raw/s14/settlement_2026-11-13.json")
+        a = load("data/archive/originated_lines_2026-11-13T2245Z.json")
+    except FileNotFoundError as e:
+        rec(name, "MISSING", str(e))
+        return
+    rows = a["games"] if isinstance(a, dict) and "games" in a else a
+    frozen = {r["matchup"]: r for r in rows}
+    bad = ok = 0
+    for s in d["singles"]:
+        f = frozen.get(s["matchup"])
+        if not f or "model" not in f:
+            bad += 1
+            results["mismatches"].append({"where": name, "row": s["matchup"], "detail": "no frozen row"})
+            continue
+        m = f["model"]
+        same = (m.get("originated_spread_home") == s["originated_spread_home"]
+                and m.get("expected_margin_home") == s["model_expected_margin_home"]
+                and m.get("pick_side") == s["pick_side"]
+                and m.get("pick_line") == s["pick_line"])
+        if same:
+            ok += 1
+        else:
+            bad += 1
+            results["mismatches"].append({"where": name, "row": s["matchup"],
+                                          "frozen": {k: m.get(k) for k in ("originated_spread_home", "expected_margin_home", "pick_side", "pick_line")},
+                                          "settled": {k: s[k] for k in ("originated_spread_home", "model_expected_margin_home", "pick_side", "pick_line")}})
+    rec(name, "PASS" if bad == 0 else "MISMATCH",
+        f"{ok}/9 settled rows carry exactly the lines frozen before tip (2026-11-13T22:45Z archive); {bad} differ")
+
+
 check_finals()
 check_finals_consistency()
 check_games_completed()
 check_settlement()
+check_s14_settlement()
+check_preregistration()
 check_horizon_lines()
 check_horizon_official_slate()
 check_horizon_engine()

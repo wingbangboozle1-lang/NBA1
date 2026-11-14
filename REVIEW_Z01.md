@@ -138,3 +138,43 @@ sound and reproduce exactly from their rows. Four irregularities are recorded ab
 (**R-Y1** cross-ledger numbers, **R-Y2** ATL–CHI OT now resolvable, **R-Y3** F32 resolvable,
 **R-Y4** misleading units label); none blocks the site; all are logged in COORDINATION.md §27
 for the data owners and the Flagged register.
+
+## 9. Z04 addendum — combined-tree re-verification (2026-11-14T11:2xZ)
+
+After the earlier passes, `main` absorbed PR #59+#64 (`arena/254dd8bb-nba1` refresh + settlement),
+PR #62 (`arena/2ef89703-nba1`, X01 injury-currency) and PR #61 (`arena/aadc3342-nba1`, README URL).
+This session rebased onto that combined tree and re-verified everything (**16 checks now:
+12 PASS, 2 FLAG, 1 pending fix, 1 NOTE** — `verify/212c2298/checks.json`), then ran the complete
+CI gate suite locally. What changed versus §2–§5 above:
+
+| Item | Before | After (combined tree) |
+| --- | --- | --- |
+| 11/13 finals in `data/raw/games_completed.json` | absent (F-C01 / R-X1) | **promoted — 9/9 rows present and equal to the official capture** (R-X1 closed) |
+| Horizon record cells (54) | 25 match / 29 stale-explained / 0 bad | **54/54 match the current official cards** (refresh done; F29/F-C02 stale-records closed) |
+| 11/13 pick settlement | not settled on `main` | **settled in `data/raw/s14/settlement_2026-11-13.json` — verified line by line**: 9/9 scores equal the official finals, every cover/loss grading recomputed correct (3-4, +2 NO BET, −1.40u at the disclosed −110 convention), summary math and slate MAE (12.39) reproduce, and all 9 rows carry **exactly the lines frozen pre-tip** in `data/archive/originated_lines_2026-11-13T2245Z.json` (pre-registration fidelity PASS — no look-ahead) |
+| Out-of-sample window | 51 games | 60 games (11/06–11/13); binomial p / Wilson / metrics re-verified on the new numbers (S1 23-9 → p = 0.0201) |
+| Injury edition (X01) | 11/13 07:30 PM ET cited as newest | X01 confirmed 26/26 rows equal the 11/14 04:30 AM edition; this session's 04:15 AM read agrees; **no designation value changed between any of the three editions** |
+
+**Gate suite on the combined tree (all green):** `verify_all.py` VERIFY OK (822 rows, 812 with
+official source links — the 10 exceptions are the published F37 class); `check_site.py` PASS;
+`verify_integration.py` PASSED (warnings published on the Flagged page); `check_links.py` PASS;
+`check_rendered.py` PASS; `render_check.mjs` 113 pages / 0 problems; `build_verification_page.py`
+re-run leaves `verification.html` current; inline broken-internal-link scan 0 of 113.
+
+**Still open at close-out (all non-blocking, all logged as requests in §27):**
+
+* **R-Y1** cross-ledger numbers — sharpened: `integration/out/settlement.json` is frozen at the
+  51-game window with the 11/13 rows still in `cannot_settle` under one wrong shared `source_url`
+  (the old R-X2), while the site's validation/backtest lineage moved to 60 games. Two ledgers,
+  two windows, no engine labels.
+* **R-Y2** `data/verified/finals_2026-11-13.json` still carries `ot: null` for ATL–CHI (confirmed 1
+  OT by the official box score) — the only value-level mismatch left in this session's checks.
+* **R-Y3** F32 can be marked resolved (04:15 AM edition prints 08:00 (ET) for DET@MIA).
+* **R-Y4** `units_at_minus110` label misleading for S9/S10.
+* F30 (`data/official/slate.json` lacks the five 11/17 games) — unchanged, owner-side.
+
+**PR disposition recorded:** #58 closed as superseded (content adopted into integration branch
+`arena/934ca56f-nba1` with credit); #59 and #64 merged (254dd8bb); #62 merged (X01); #61 merged
+(aadc3342). Open at close-out and untouched here: #63 (`arena/ecd5bb53-nba1`), #65
+(`arena/2dc33eb3-nba1`), plus the live `arena/934ca56f-nba1` integration lineage — all owned by
+active sessions.

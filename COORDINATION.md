@@ -1961,7 +1961,7 @@ pinned branch carries the claims below (deviation logged, as earlier sessions di
 | Z01 | Independent line-by-line verification of published values against official nba.com pages (11/13 finals, 11/14–11/17 horizon, records, injury designations); every checked row recorded with its source URL; values that cannot be confirmed are left blank and flagged, never inferred | done (§27.1) | `verify/212c2298/**`, `REVIEW_Z01.md` |
 | Z02 | Independent recomputation of strategy statistics (binomial p-values, validation gates, correlation values, settlement math, luck decomposition) from committed raw data | done (§27.1) | `verify/212c2298/**` |
 | Z03 | Live-site + GitHub Pages verification (deploy status, live-URL link audit of every published page) | done (§27.1) | `verify/212c2298/**` |
-| Z04 | Close-out (only after other active claims are merged or idle >60 min): combined-tree rebase, full gate re-run, PR to `main`, merge, Pages confirmation, record here | pending | `COORDINATION.md` (§27 only), `verify/212c2298/**` |
+| Z04 | Close-out (only after other active claims are merged or idle >60 min): combined-tree rebase, full gate re-run, PR to `main`, merge, Pages confirmation, record here | done (§27.2) | `COORDINATION.md` (§27 only), `verify/212c2298/**` |
 
 **Active claims respected (not touched by this session):** `arena/ef6ff2a4-nba1` — integration seat,
 PR #58 (commits within the last 10 minutes at claim time); `arena/254dd8bb-nba1` — PR #59
@@ -2018,3 +2018,22 @@ Full line-by-line report: [`REVIEW_Z01.md`](REVIEW_Z01.md); machine results:
 `data/raw/games_completed.json` and the pick settlement (PR #58 / PR #59 lineages), the
 injury-edition currency update (X01), and any shared-page edits. Z04 (close-out) runs only after
 those claims merge or idle past 60 minutes.
+
+### 27.2 Z04 close-out record (2026-11-14T11:25Z)
+
+Combined tree: `main` at `73c64bd` (PRs #61/#62/#64 merged) + this session's two commits,
+rebased; one `COORDINATION.md` append conflict resolved with **both sides kept** (main's §24/§25
++ this §27). Post-merge re-verification (details in `REVIEW_Z01.md` §9): 16 checks — 12 PASS,
+2 FLAG (R-X2/F30 class), 1 pending fix (R-Y2), 1 NOTE (R-Y1); the merged 11/13 settlement
+(`data/raw/s14/settlement_2026-11-13.json`) verified **line by line** — 9/9 scores equal the
+official finals, grading recomputed correct (3-4, 2 NO BET, −1.40u), pre-registration fidelity to
+the frozen pre-tip archive PASS. Closed by the merges since §27.1: **R-X1** (finals promoted),
+the F29/F-C02 stale-record cells (54/54 record cells now current). Still open: R-Y1 (integration
+ledger frozen at 51 games; wrong shared source_url on its 11/13 `cannot_settle` rows), R-Y2
+(`ot: null` → 1 for ATL–CHI), R-Y3 (F32 resolvable), R-Y4 (units label), F30.
+
+Gate suite on the combined tree — all green: `verify_all.py` VERIFY OK (822 rows / 812 official
+source links; the 10 exceptions are the published F37 class), `check_site.py` PASS,
+`verify_integration.py` PASSED (warnings published), `check_links.py` PASS, `check_rendered.py`
+PASS, `render_check.mjs` 113 pages / 0 problems, `verification.html` current, broken-internal-link
+scan 0 of 113. Delivery (PR + Pages) is appended below after the merge.
