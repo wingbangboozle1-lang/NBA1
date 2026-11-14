@@ -2511,3 +2511,99 @@ Branch `arena/e812a9ed-nba1`, based on `2038333` (`main`). This session does not
 - **Deploy:** GitHub Pages API reported `built`; Pages run <https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43597387021> succeeded for `203833304a2d16594aac6d30802b5d0939106adc`. This confirms GitHub deployment state, not fresh browser access to every page or external NBA URLs.
 - **PR/merge:** this audit-only record was delivered in [PR #82](https://github.com/wingbangboozle1-lang/NBA1/pull/82), merged at `48207a28f5863e5d8b082658062b368813c84757` on 2026-11-14. The final-integration PR/merge was not attempted by this task. At the original audit time PRs #63, #65, #66, #75 and #80 were open and `DIRTY`; #66 owns final integration. Do not treat this record as the final integration close-out.
 - **Post-merge Pages:** run [#43628532646](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43628532646) completed successfully; GitHub Pages API reports `built` at `https://wingbangboozle1-lang.github.io/NBA1/`. The separate official-source probe run [#43628532715](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43628532715) was still in progress at the time of this update; it does not gate the successful Pages deployment.
+
+## 30. Session `arena/a39b9370-nba1` — FINAL INTEGRATION (claimed 2026-11-14, integration seat)
+
+Branch `arena/a39b9370-nba1`, based on `2038333` (tip of `main` at claim time). This session
+takes the **integration seat**: it merges the open PRs other sessions left conflicting,
+re-verifies the combined tree line by line, confirms the site builds with no broken links,
+and publishes. Platform pins this session to `arena/a39b9370-nba1`; it does not create, switch
+to, or push to any other branch. PR heads were fetched into local `refs/pr/*` and merged into
+this branch with 3-way merges (the local clone was shallow at start and was `--unshallow`ed so
+merge-base existed; no remote branch was pushed to).
+
+### 30.1  PRs merged into this branch (all were CONFLICTING / DIRTY against main)
+
+| PR | Contents | Merge commit | Conflict resolution |
+| --- | --- | --- | --- |
+| [#66](https://github.com/wingbangboozle1-lang/NBA1/pull/66) | Final integration: 11/13 finals verified 3x, horizon records refreshed, false claims corrected, **EXECUTIVE_SUMMARY.md**, decision index, **site/pages/leaderboard.html** | `6e07c29` | 12 conflicts. Content registers (`data/content/{questions,flagged,suggestions}.json` + `site/data/` copies) taken from **main** — main is a strict superset of PR #66's IDs (34 vs 31 questions, 46 vs 39 flags, 18 vs 18 suggestions; PR #66 had **zero** unique IDs), so taking main loses no entry and keeps the newer verified values. Generated files (`data/raw/probe_official.json`, `verification.html`, `verify/2026-11-14/checks.json`, `site/pages/suggestions.html`) taken from **main** (newer). `index.html` nav merged as a **union**: kept main's "Prop Variance & Rotation" card and added PR #66's "Leaderboard & Rewards" and "Executive Summary" cards. `COORDINATION.md` kept from main's canonical board. |
+| [#80](https://github.com/wingbangboozle1-lang/NBA1/pull/80) | strategy-lab: read the published b2b parameter from `backtest.json` instead of quoting a stale `6.096` | `5116c9f` | 2 conflicts (`probe_official.json`, `verification.html`) → main (newer, generated). |
+| [#63](https://github.com/wingbangboozle1-lang/NBA1/pull/63) | Dashboard source-link exception reporting fix | `f614e7c` | 3 conflicts (`COORDINATION.md`, `probe_official.json`, `verification.html`) → main (newer). |
+| [#75](https://github.com/wingbangboozle1-lang/NBA1/pull/75) | Pages concurrency isolation (A02 takeover of PR #65 with credit) | `4912185` | 3 conflicts (`COORDINATION.md`, `probe_official.json`, `verification.html`) → main (newer). `.github/workflows/pages.yml` concurrency group is now `pages-${{ github.event.pull_request.number || github.ref }}` so PR validation cannot cancel a main deploy. |
+
+**PR #65 deliberately NOT merged**: PR #75 is its ground-rule-5 takeover ("with credit") and
+supersedes it (same `pages.yml` fix). Merging both would double-apply the change. PR #65 is
+left open; its content is fully carried by #75.
+
+### 30.2  Verification performed on the combined merged tree (all green)
+
+- `python3 scripts/verify_all.py` → **VERIFY OK**. 19 pages, 1033 table rows, 1012 with an
+  allowed official source link, 18 no-source marks with explanatory text, 3 approved URLs in
+  `title` only, **0** unmarked rows without a link, **0** no-source markers without a reason.
+- `python3 scripts/check_links.py` → **PASS** (ragged rows 0). Note recorded in output: outbound
+  access to nba.com is blocked from this sandbox, so HTTP status is not claimed here.
+- `python3 scripts/verify_integration.py` → **PASSED, 0 errors**, 44 warnings (published).
+  207 JSON, 123 HTML, 12068 links, 5808/6015 data rows official-sourced.
+- `node scripts/render_check.mjs` (jsdom installed) → **123 pages, 8184 content blocks,
+  7379 rendered table rows, 0 problems**.
+- **Direct official-source spot-check** (via the fetch tool, which reaches nba.com): the
+  2026-11-13 Games & Scores page was read and the finals confirmed against the site's
+  `source-check.html` — NYK 104–106 IND, MIL 99–107 ORL, CLE 121–133 MIA, ATL 117–125 CHI (OT),
+  MEM 142–111 NOP, UTA 118–125 HOU, … all 9/9 agree. The live `source-check.html` shows the
+  27-game horizon 11/14–11/17 all MATCH, each row linking to its official `nba.com/game/…` page;
+  the 29 stale horizon records are every one flagged `STALE_TEAM_PLAYED_11_13` with a source link.
+- Live site confirmed serving: `https://wingbangboozle1-lang.github.io/NBA1/` returns the landing
+  page with the executive summary, 27 games / 60 picks / 10 strategies tiles.
+
+### 30.3  Sources used
+
+- Official NBA.com: `https://www.nba.com/games?date=2026-11-13` (finals, read 2026-11-14),
+  `https://www.nba.com/schedule`, `https://www.nba.com/stats/teams/advanced`,
+  `https://www.nba.com/stats/players/traditional` — the same hosts the site's rows link to.
+- Repo-internal official-source reachability probe: `data/raw/probe_official.json` (CI runner
+  `Linux/ubuntu26`, 1465 URLs probed; key nba.com URLs retried with browser headers returned
+  HTTP 200 with recorded sha256).
+- The site's own `site/pages/source-check.html` and `verify/2026-11-14/` capture + checker.
+
+### 30.4  Irregularities / flags carried (not blocking; published on Flagged for Review)
+
+- **I-30-1 (duplicate COORDINATION.md sections):** `main`'s board still carries duplicate
+  §15/§20/§21/§23/§24/§25/§26/§28 headings (R-29-8). This session did **not** de-duplicate —
+  the board is shared and a de-dup pass is a separate, deliberate edit. Logged, not fixed here.
+- **I-30-2 (probe-workflow interference):** the `probe-official.yml` workflow pushes its own
+  record commits to `arena/**` branches and to `main`, which is why every open PR was
+  CONFLICTING and why prior Pages builds churned. This session absorbed those record commits
+  into its merges (taking main's newer probe record each time). The `pages.yml` concurrency
+  fix from PR #75 should reduce the cancel-in-progress churn going forward.
+- **I-30-3 (no sportsbook price):** no NBA-operated source publishes a closing price, so gate
+  GG (market edge) cannot run; "edge" on this site is model-vs-naive-model, never market-validated.
+  This is a standing limit, not a defect introduced here.
+- **I-30-4 (60-game extension not reproducible here):** the 12.98-vs-13.62 margin MAE depends on
+  a team-ratings refresh that `nba.com/stats/teams/advanced?Season=2026-27` does not return to
+  this environment (flag F24). The settlement and every score are checkable on NBA.com; the
+  extended error metric is reported-but-not-reproducible until the ratings capture is automated.
+
+### 30.5  Delivery
+
+Final integration PR opened from `arena/a39b9370-nba1` to `main`; merged without waiting for
+approval; GitHub Pages deploy confirmed `built`; PR link and merge result recorded in §30.6.
+=======
+## 30. Session `arena/e812a9ed-nba1` — independent site QA and discrepancy register (claimed 2026-11-14 UTC)
+
+Branch `arena/e812a9ed-nba1`, based on `2038333` (`main`). This session does not claim the integration seat and does not edit shared site/navigation/data/build files. It owns only the new `verify/2026-11-14-e812a9ed/**` audit artifact plus this §30 record.
+
+| # | Task | Status | File scope | Plan |
+| --- | --- | --- | --- | --- |
+| E01 | Re-run repository/site checks; independently record site status, official-source boundaries, and actionable irregularities without changing another session's scope | **done** — `verify/2026-11-14-e812a9ed/REPORT.md` | `verify/2026-11-14-e812a9ed/**`; `COORDINATION.md` (§30 only) | Re-ran seven validators; 0 checker errors, but integration check has 207/5,940 rows without NBA links and 44 warnings; deployment is built. Exact scope, findings and manual source links are in the report. |
+
+**Do not touch:** root `index.html`, `site/**`, `data/**`, `docs/**`, `command-center/**`, `origination/**`, `strategy-lab/**`, `scripts/**`, `engine*/**`, `.github/**`, or any shared site/content output. The final integration seat and other sessions own those paths. The claim commit contains only this board entry; no site changes precede the claim.
+
+### 30.1 E01 completion record (2026-11-14 UTC)
+
+- **Verification:** `scripts/check_site.py` (15 pages, 1,264 rows, scoped checks pass); `scripts/verify_integration.py` (202 JSON, 122 HTML, 11,918 links, 5,733/5,940 sourced, 0 errors, 44 warnings); `scripts/check_links.py` (59 pages, 879 rows, pass); `scripts/check_rendered.py` (17 pages, 707 rendered rows, pass); `strategy-lab/check.py` (8 pages, 479/479 sourced, pass); `python3 -m engine_v2.check_site` (20 pages, pass); `scripts/verify_all.py` (pass).
+- **Sources:** official source register `data/raw/sources.json`; official NBA schedule <https://www.nba.com/schedule>; NBA game calendar <https://www.nba.com/games?date=2026-11-14>; NBA advanced statistics <https://www.nba.com/stats/teams/advanced>; official injury-report index <https://official.nba.com/nba-injury-report-2026-27-season/>. These are published source links, not claimed as freshly fetched by this audit.
+- **Irregularities / integration requests:** inconsistent S1 banner versus detailed G4 result; different horizons and samples across visible site builds; 207 HTML table rows without official NBA links under the repository-wide checker; three leaked `None` strings; repeated coordination section numbers. Details are recorded in `verify/2026-11-14-e812a9ed/REPORT.md`. No model value was altered and no other session's scope was edited.
+- **Deploy:** GitHub Pages API reported `built`; Pages run <https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43597387021> succeeded for `203833304a2d16594aac6d30802b5d0939106adc`. This confirms GitHub deployment state, not fresh browser access to every page or external NBA URLs.
+- **PR/merge:** this audit-only record was delivered in [PR #82](https://github.com/wingbangboozle1-lang/NBA1/pull/82), merged at `48207a28f5863e5d8b082658062b368813c84757` on 2026-11-14. The final-integration PR/merge was not attempted by this task. At the original audit time PRs #63, #65, #66, #75 and #80 were open and `DIRTY`; #66 owns final integration. Do not treat this record as the final integration close-out.
+- **Post-merge Pages:** run [#43628532646](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43628532646) completed successfully; GitHub Pages API reports `built` at `https://wingbangboozle1-lang.github.io/NBA1/`. The separate official-source probe run [#43628532715](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43628532715) was still in progress at the time of this update; it does not gate the successful Pages deployment.
+>>>>>>> origin/main

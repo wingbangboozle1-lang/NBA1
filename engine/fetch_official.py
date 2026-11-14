@@ -642,10 +642,22 @@ def capture_results(now, changed, failed, known, committed):
     sched = read_json(os.path.join(RAW, "schedule_upcoming.json"))
     dates = sorted({r["date"] for r in rows_by_cols(games)}
                    | {r["date"] for r in rows_by_cols(sched)})
-    today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+    now_utc = datetime.datetime.now(datetime.timezone.utc)
+    today = now_utc.strftime("%Y-%m-%d")
     if today not in dates:
         dates.append(today)
-    for d in dates:
+    # Also capture yesterday's slate. The committed snapshots cover the graded
+    # window (11/06-11/12) and the upcoming horizon (11/14+), so a slate that went
+    # final "last night" fell between them and was never re-fetched after the games
+    # ended -- observed on 2026-11-14, when the 11/13 capture was still stuck at its
+    # 02:05Z in-progress state while all nine games were Final on the official page.
+    # Yesterday is exactly when the settle ledger needs the FINAL card.
+    # (Adopted into the integration seat from PR #58, session arena/ef6ff2a4-nba1,
+    #  which found and fixed this; its evidence is data/audit/finals_2026_11_13_verification.json.)
+    yesterday = (now_utc - datetime.timedelta(days=1)).strftime("%Y-%m-%d")
+    if yesterday not in dates:
+        dates.append(yesterday)
+    for d in sorted(dates):
         url = f"https://www.nba.com/games?date={d}"
         try:
             raw = get(url)

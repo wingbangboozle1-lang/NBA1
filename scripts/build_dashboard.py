@@ -69,6 +69,7 @@ CATEGORIES = [
     ("EVIDENCE", None, "Whether any of it is skill. The out-of-sample record, the gates, the correlations and the luck check."),
     ("Strategies &amp; Leaderboard", "strategies.html", "Ten strategies, the reward tiers, and the leaderboard that ranks them - with nothing promoted that has not passed."),
     ("Validation Gates", "validation.html", "The seven gates every strategy must clear, the definition of each, and how each strategy scored."),
+    ("Leaderboard &amp; Rewards", "leaderboard.html", "The competition scoreboard: rank, record, the gate blocking each strategy, and what clearing it would pay."),
     ("Correlations", "correlations.html", "Measured correlations, model-derived ones and the same-game-parlay rho used for pricing."),
     ("Luck &amp; Skill", "luck.html", "How many wins each team probably should have had, and which of them are luck."),
     ("Out-of-Sample Backtest", "backtest.html", "The full test window - every completed game after the ratings cut-off - and everything measured on it."),
@@ -82,6 +83,7 @@ CATEGORIES = [
     ("Decisions: pick a path", "decisions.html", "Six decisions in dependency order, every open question mapped to the decision that closes it, and every suggestion ranked against them. Start here before implementing anything."),
     ("Flagged for Review", "flagged.html", "Every value that could not be confirmed from an official source, with the link it would need."),
     ("Source Register", "sources.html", "Every official URL this site is built from."),
+    ("Executive Summary", "../../EXECUTIVE_SUMMARY.md", "The whole picture in one document: what was verified, what the model has and has not shown, the limits, and the decisions waiting."),
     ("Repo Review", "repo-review.html", "Line-by-line review of the repository, the irregularities found, and the verification log."),
 ]
 
@@ -353,6 +355,67 @@ def build_source_check(sources):
             pick, esc(r.get("result")),
             num(r.get("model_error_margin"), 1) if r.get("model_error_margin") is not None else NA,
             link(r.get("official_source"), "final") if r.get("official_source") else NA])
+    # ---- the 11/13 parlays, graded leg by leg against the same official finals ----
+    # The originated parlay cards are in data/originated_lines.json. Grading rule taken
+    # from that file and from PR #59's stated rule: a team covers iff (team margin) +
+    # (its printed line) > 0, because a favourite carries a negative line. Recomputed
+    # here from the verified finals rather than copied, so the number is checkable.
+    import re as _re
+    try:
+        _ol = load(os.path.join(ROOT, "data", "originated_lines.json"))
+        _fin = {("%s@%s" % (r["away"], r["home"])): r
+                for r in load(os.path.join(ROOT, "verify", "2026-11-14",
+                                           "official_finals_2026-11-13_s934ca56f.json"))["games"]}
+        _cards = []
+        for _p in _ol.get("parlays", []):
+            if _p.get("date") != "2026-11-13":
+                continue
+            _legs, _ok = [], True
+            for _leg in (_p["leg1"], _p["leg2"]):
+                _m = _re.match(r"(\w+)@(\w+) \u2014 (\w+) ([+-]?[\d.]+)", _leg)
+                if not _m:
+                    _ok = False
+                    break
+                _a, _h, _t, _ln = _m.group(1), _m.group(2), _m.group(3), float(_m.group(4))
+                _g = _fin.get("%s@%s" % (_a, _h))
+                if not _g:
+                    _ok = False
+                    break
+                _hm = _g["home_pts"] - _g["away_pts"]
+                _tm = _hm if _t == _h else -_hm
+                _v = _tm + _ln
+                _legs.append((_leg, "WIN" if _v > 0 else ("PUSH" if _v == 0 else "LOSS"), _tm, _ln,
+                              _g["game_url"]))
+            if _ok and _legs:
+                _cards.append((_legs, "WIN" if all(l[1] == "WIN" for l in _legs) else "LOSS"))
+        if _cards:
+            b.append(h2("The three two-leg parlay cards from 11/13, graded leg by leg",
+                        "Settled against the same official finals. Recomputed here from the verified scores, not "
+                        "copied from another build; PR #59 reached the same answer independently."))
+            _rows = []
+            for _legs, _card in _cards:
+                _desc = " + ".join(l[0] for l in _legs)
+                _detail = "; ".join("%s %s (team margin %+d, line %+.1f)" % (l[0], l[1], l[2], l[3])
+                                    for l in _legs)
+                _rows.append([esc(_desc), '<b>%s</b>' % esc(_card), esc(_detail),
+                              srclink_url(_legs[0][4], "game 1"), ])
+            b.append(table(["Card", "Result", "Leg-by-leg", "Source"], _rows,
+                           note="A parlay card wins only if every leg wins. All three lost, and all three lost on "
+                                "the same leg: HOU -18.0 and ORL -9.0 both failed to cover. No unit figure is "
+                                "computed for parlays, because no market price exists for a two-leg card (F3)."))
+            _won = sum(1 for _, c in _cards if c == "WIN")
+            b.append(card("What the parlay result adds",
+                          "<p>Three cards, <b>%d won</b>. This is a small and one-sided sample and it proves "
+                          "nothing on its own, but it is worth stating plainly: the two-leg cards built on the "
+                          "same 11/13 lines that went 3-4 as singles also lost, and they lost because a large "
+                          "favourite failed to cover a large number (HOU -18.0 won by 7; ORL -9.0 won by 8). That "
+                          "is the failure mode a parlay amplifies: each leg is a separate chance to be wrong, and "
+                          "the joint probability is only as good as its weakest leg.</p>" % _won))
+    except (OSError, KeyError) as _e:
+        b.append(banner("info", "Parlay settlement unavailable",
+                        "The parlay cards could not be graded from the committed data (%s). Nothing is inferred."
+                        % esc(str(_e))))
+
     b.append(table(["Game", "Official final (away &ndash; home)", "Official home margin", "Published spread (home)",
                     "Model expected home margin", "Pick", "Result", "|model &minus; final|", "Source"], rows,
                    note="Tally: %d WIN, %d LOSS, %d PUSH, %d NO BET. Mean absolute margin error %s points over %d games. "
@@ -1277,12 +1340,18 @@ def main():
     horizon = sorted({r["date"] for r in lines})
     n_games = len(lines)
     n_picks = len(picks["rows"])
+    n_singles = sum(1 for r in picks["rows"] if r["n_legs"] == 1)
+    n_leg_combo = n_picks - n_singles
+    n_games_with_pick = len({(r["date"], r["matchup"]) for r in picks["rows"]
+                             if " & " not in r["matchup"]})
     n_flags = len(flagged["items"])
     body = []
     body.append(tiles([
         ("Games in horizon", n_games, "14&ndash;17 Nov 2026 (today + 3 days)"),
         ("Originated lines", n_games, "spread, total and fair moneyline per game"),
-        ("Paper picks", n_picks, "gated; none is market-validated"),
+        ("Paper picks, single-leg", n_singles,
+         "%d of %d games &middot; +%d two-leg combos = %d plays; none market-validated"
+         % (n_games_with_pick, n_games, n_leg_combo, n_picks)),
         ("Strategies tested", len(lb["rows"]), "%d capped at a quarter unit &middot; %d research-only"
          % (sum(1 for r in lb["rows"] if "Not funded" not in r["tier"]),
             sum(1 for r in lb["rows"] if "Not funded" in r["tier"]))),
@@ -1383,12 +1452,39 @@ def main():
             ("B2B" if (r["home_b2b"] or r["away_b2b"]) else ""),
             srclink(sources, r["src"]),
         ])
+    # Which line is authoritative? Two models exist and they disagree; say so where the
+    # numbers are shown rather than only on a subpage. The counts are read from the
+    # cross-build comparison, not typed.
+    xcb = None
+    try:
+        xcb = load(os.path.join(ROOT, "verify", "2026-11-14", "checks.json"))["cross_build_summary"]
+    except (OSError, KeyError):
+        pass
+    if xcb:
+        body.append(banner("warn", "Two models, two different lines - which one is authoritative?",
+            "<p>Every game below carries a line from the <b>validated model</b> "
+            "(<code>engine/pipeline.py</code>, the one tested on %d out-of-sample games). A second, independent "
+            "line-origination model (<code>RecordLine-1</code>, <code>scripts/originate_horizon.py</code>) produces "
+            "its own spread for the same games. They are <b>different models, not two renderings of one number</b>: "
+            "on the %d games they share they differ on %d, and on %d of those the two disagree about which team is "
+            "the favourite (largest gap %.1f points).</p>"
+            "<p><b>The line shown on this page is the authoritative one</b> because it is the only one whose error has "
+            "been measured out of sample. Do not average the two and do not treat the second as a second opinion on "
+            "the same estimate - it is a different, unmeasured model. The full row-by-row comparison is in "
+            "<a href=\"site/pages/source-check.html\">Official Source Check</a>, section 5. Choosing between them, or "
+            "retiring one, is an open decision (flag F26, suggestion SG15).</p>"
+            % (back["metrics"]["n_games"], xcb["matchups_compared"], xcb["disagree_over_0.5"],
+               xcb["opposite_favourite"], xcb["max_abs_difference"])))
+
     body.append(h2("Horizon at a glance", "Every game in the window, with the originated line, the reference line and the difference between them."))
     body.append(table(
-        ["Date", "Tip ET", "Matchup", "Away rec", "Home rec", "Model spread", "Model total",
+        ["Date", "Tip ET", "Matchup", "Away rec", "Home rec", "Model home margin", "Model total",
          "Spread edge", "Total edge", "P(home)", "Rest", "Source"],
         glance,
-        note="Spread and total are the originated lines (model). Edge is the model minus the naive reference line "
+        note="SIGN CONVENTION (read this once): 'Model spread' is the projected home margin, i.e. home points minus "
+             "away points. A NEGATIVE number means the home team is projected to LOSE by that many points. That is the "
+             "opposite of the way a book prints a home spread, and the two must not be mixed up (flag F27). Spread and "
+             "total are the originated lines (model). Edge is the model minus the naive reference line "
              "built from the same official ratings; positive spread edge means the model likes the home side more "
              "than the reference does. Rest flags a back-to-back. Every row links to the official NBA.com game page."))
 
@@ -1467,11 +1563,14 @@ def main():
             srclink(sources, r["src"]),
         ])
     b.append(table(
-        ["Date", "Tip ET", "Matchup", "Away", "Home", "Venue", "Ref spread", "Model spread",
+        ["Date", "Tip ET", "Matchup", "Away", "Home", "Venue", "Ref home margin", "Model home margin",
          "Spread edge", "Ref total", "Model total", "Total edge", "P(home)", "Fair ML home",
          "Fair ML away", "Rest days H/A", "Home injury status", "Away injury status", "Source"],
         rows,
-        note="A negative spread means the home team is favoured. Fair moneyline is the model's own break-even "
+        note="SIGN CONVENTION: 'Ref spread' and 'Model spread' are both the projected HOME MARGIN (home minus away), "
+             "not a book-style home spread. A NEGATIVE value means the home team is projected to lose by that many "
+             "points (flag F27: Build A's stored field uses the opposite sign, and the two builds are not comparable "
+             "cell for cell). Fair moneyline is the model's own break-even "
              "price (no market price is used). Rest days: number of days since that team's previous game, taken "
              "from the official schedule; a blank means the team's previous game falls outside the captured "
              "window. Injury status is the official report read-out for that team on that date."))
@@ -1537,6 +1636,50 @@ def main():
 
     # === injuries ==========================================================
     b = [h2("Injury report read-out", "One row per official injury-report line, with the minutes it implies and the impact it carries.")]
+
+    # The site's model is built on the 11/13 07:30 PM ET edition. A newer edition was
+    # read on 2026-11-14 and is strictly better information; it is shown here as a
+    # comparison, and deliberately NOT fed into the model, because doing so would move
+    # every 11/14 line. Say that plainly rather than silently using the older one.
+    try:
+        _newer = load(os.path.join(ROOT, "verify", "2026-11-14",
+                                   "official_injury_2026-11-14_0415AM_s934ca56f.json"))
+    except OSError:
+        _newer = None
+    if _newer:
+        _sm = _newer["summary"]
+        b.append(banner("warn", "A newer official injury edition exists than the one the model uses",
+            "<p>The lines on this site are built on the <b>11/13/26 07:30 PM ET</b> edition. On 2026-11-14 this "
+            "session read a newer one, the <b>11/14/26 04:15 AM ET</b> edition "
+            "(<a href=\"%s\">official PDF</a>), and transcribed all %d rows to "
+            "<code>verify/2026-11-14/official_injury_2026-11-14_0415AM_s934ca56f.json</code>. "
+            "It has deliberately <b>not</b> been fed into the model, because it would move every 11/14 line and that "
+            "is a reviewer decision, not an integration step.</p>"
+            "<p><b>What it changes in practice: very little.</b> The same five of the ten teams playing on 11/14 "
+            "(%s) still print <b>NOT YET SUBMITTED</b>; the teams that filed are %s. The %d player-level rows are "
+            "Denver, Dallas, Brooklyn, Minnesota and Detroit. The 11/15 games do appear in this edition but every "
+            "team is NOT YET SUBMITTED, and no 11/16 or 11/17 game appears at all. So the older edition was not "
+            "hiding a status change &mdash; it was simply one publication cycle behind.</p>"
+            % (_newer["source_url"], _sm["rows_transcribed"],
+               ", ".join(_sm["teams_not_yet_submitted_for_a_2026_11_14_game"]),
+               ", ".join(_sm["teams_that_filed_for_a_2026_11_14_game"]),
+               _sm["rows_with_a_player_and_status"])))
+        b.append(h2("The newer edition, row by row",
+                    "Transcribed from the official 11/14/26 04:15 AM ET PDF. NOT USED by any line on this site."))
+        _rows = []
+        for _r in _newer["rows"]:
+            _rows.append([
+                esc(_r.get("game_date")), esc(_r.get("matchup")), esc(_r.get("team")),
+                esc(_r.get("player")) if _r.get("player") else NA,
+                '<b>%s</b>' % esc(_r.get("status")), esc(_r.get("reason")) if _r.get("reason") else NA,
+                srclink_url(_newer["source_url"], "official PDF"),
+            ])
+        b.append(table(["Game date", "Matchup", "Team", "Player", "Status", "Reason printed", "Source"],
+                       _rows,
+                       note="Read directly from the official PDF on 2026-11-14. A row printed NOT YET SUBMITTED has "
+                            "no player and no status to report, so both are blank rather than guessed. One row "
+                            "(Traore, Nolan) lost its team cell to a PDF page break; the team is left blank and "
+                            "flagged, not inferred."))
     rows = []
     for r in injs["rows"]:
         rows.append([
@@ -1673,6 +1816,98 @@ def main():
         ["Residual sigma (margin / total)", num(m["sigma_margin"], 2) + " / " + num(m["sigma_total"], 2), NA, NA, srclink(sources, "S1")],
     ]
     b.append(table(["Metric", "Model", "Reference", "Reading", "Source"], rows))
+    # === leaderboard (the one page that ranks and explains) ==================
+    b = [banner("warn", "How to read this leaderboard",
+                "<p>This is a <b>competition with rewards</b>, and this page is the scoreboard: ten strategies, "
+                "ranked, each with what it would pay, what it has actually done on games played after the ratings "
+                "cut-off, and the single gate that is stopping it from being promoted. <b>Nothing here is funded.</b> "
+                "The reward for clearing every gate is a stake tier; the reward for not clearing them is a cap at a "
+                "quarter unit or research-only status. That is the competition working, not failing.</p>"
+                "<p>The honest state: no strategy has cleared all seven gates. The best, S1, is 16-7 with an exact "
+                "binomial p of 0.093 against a coin flip &mdash; good enough to keep watching, not good enough to "
+                "call skill. Every figure below is read from <code>docs/data/leaderboard.json</code> and "
+                "<code>docs/data/validation.json</code>.</p>")]
+
+    b.append(h2("The scoreboard", "Ranked by the composite score in the table's own weighting. The 'binding gate' "
+                                  "column names the gate that is hardest to clear, not merely the first one listed: "
+                                  "an outright FAIL outranks a NOT RUN, which outranks a PROVISIONAL."))
+    lbmap = {r["id"]: r for r in lb["rows"]}
+    rows = []
+    for srow in val["strategies"]:
+        sid = srow["id"]
+        lbrow = lbmap.get(sid, {})
+        # The BINDING gate is the hardest one still in the way, not simply the first:
+        # a FAIL is a harder block than a PROVISIONAL, and a NOT RUN gate cannot be
+        # assumed to pass. Order of severity is stated explicitly rather than implied.
+        _rank = {"FAIL": 0, "NOT RUN": 1, "PROVISIONAL": 2}
+        blocking = [g for g in srow["gates"] if g["status"] not in ("PASS", "N/A")]
+        failing = [g for g in blocking if g["status"] == "FAIL"]
+        if failing:
+            first = failing[0]
+            blocked = "%s %s: %s" % (first["id"], first["name"], first["status"])
+            detail = first["detail"]
+            if len(blocking) > 1:
+                detail += " (%d gate(s) not passing in total; this is the binding one)" % len(blocking)
+        elif blocking:
+            first = sorted(blocking, key=lambda g: _rank[g["status"]])[0]
+            blocked = "%s %s: %s" % (first["id"], first["name"], first["status"])
+            detail = first["detail"]
+            if len(blocking) > 1:
+                detail += " (no gate has outright failed; %d gate(s) still not passing)" % len(blocking)
+        else:
+            blocked, detail = "nothing", "every applicable gate is a PASS"
+        rows.append([
+            esc(str(lbrow.get("rank", ""))), "<b>%s</b>" % esc(sid), esc(srow["name"]),
+            esc(srow.get("family")), esc(str(srow.get("n_graded", 0))),
+            esc(lbrow.get("record", "0-0")), num(lbrow.get("units"), 2),
+            num(srow.get("roi_pct"), 1) if srow.get("roi_pct") is not None else NA,
+            esc(blocked), esc(detail),
+            esc(lbrow.get("tier", "")),
+            srclink(sources, "S1"),
+        ])
+    b.append(table(
+        ["Rank", "ID", "Strategy", "Family", "Graded", "W-L", "Units", "ROI %", "Binding gate",
+         "What that means", "Reward tier (cap)", "Source"],
+        rows,
+        note="Units and ROI assume the standard -110 price, which is a disclosed convention and not an observed "
+             "price: no sportsbook price was observable anywhere in this environment, so 'units' means "
+             "model-vs-naive-model units (flag F3). A strategy with 0 graded plays shows 0-0 and 0.00, which means "
+             "'no plays passed its own filter', never 'it lost'. ROI % is blank where a strategy has no graded play."))
+
+    b.append(h2("What each reward tier actually pays", "The incentive that makes this a competition rather than a list."))
+    rows = []
+    for t in lb["tiers"]:
+        rows.append([esc(t.get("tier")), esc(t.get("name")), esc(t.get("rule")),
+                     esc(t.get("min_score")), srclink(sources, "S1")])
+    b.append(table(["Tier", "Name", "What it earns", "Minimum score", "Source"], rows,
+                   note="A tier is a cap on stake, not a prediction of profit. Tier 3 - Quarter unit is the ceiling "
+                        "for anything that has not cleared every gate; it is where all six gradeable strategies sit "
+                        "today, and the four strategies with no graded plays are not funded at all."))
+
+    b.append(h2("The gate that decides each one", "Seven gates, in order. A strategy is promoted only when every "
+                                                  "applicable gate is a PASS; PROVISIONAL and NOT RUN both block."))
+    rows = []
+    for g in val["gate_definitions"]:
+        holders = []
+        for srow in val["strategies"]:
+            for gg in srow["gates"]:
+                if gg["id"] == g["id"] and gg["status"] in ("PASS", "N/A"):
+                    holders.append(srow["id"])
+        rows.append([esc(g["id"]), "<b>%s</b>" % esc(g["name"]), esc(g["definition"]),
+                     "%d of %d" % (len(holders), len(val["strategies"])),
+                     esc(", ".join(holders)) if holders else "none",
+                     srclink(sources, "S1")])
+    b.append(table(["Gate", "Name", "Threshold", "Strategies passing", "Which", "Source"], rows,
+                   note="G4 (skill, not luck) is the gate that separates this from a hot streak, and it is the one "
+                        "that fails for every strategy that has plays. It requires the Wilson 95% lower bound on the "
+                        "hit rate to clear the 52.38% break-even at -110. On 23 plays, 16 wins is consistent with "
+                        "luck (p = 0.093), so S1 stays capped no matter how good the record looks."))
+
+    built["leaderboard.html"] = page(
+        "Leaderboard and rewards",
+        "The competition scoreboard: every strategy ranked, what it has earned, the gate blocking it, and what "
+        "clearing that gate would be worth.", "\n".join(b))
+
     built["validation.html"] = page("Validation gates",
                                     "The seven gates every strategy must clear, how each strategy scored, and the "
                                     "out-of-sample metrics the gates are read against.", "\n".join(b))
@@ -1889,6 +2124,41 @@ def main():
                      srclink(sources, s.get("source"))])
     b.append(table(["ID", "Category", "Title", "Problem", "Options", "Recommendation",
                     "Decision needed", "Source"], rows, anchor_pattern=r"^SG\d+$"))
+
+    # ---- the decision index: every open decision in one place ----
+    b.append(h2("Decision index",
+                "Everything the site is currently waiting on a reviewer to choose, in one place, with the "
+                "consequence of not choosing. Sorted so the items that block the most come first."))
+    # Severity is derived from how much the item blocks, not typed per row. The rule is
+    # stated so the reader can disagree with it.
+    BLOCKERS = {
+        "SG15": ("Blocks publishing", "Until one line set is chosen, every game on the site has two different "
+                 "numbers and no pick can be called the site's pick (F26)."),
+        "SG7": ("Blocks staking", "The gates are computed but nothing acts on them, so a research play and a "
+                "fundable play look alike on the Picks page."),
+        "SG6": ("Blocks reading", "The word 'edge' means model-vs-naive-model here and market edge elsewhere; a "
+                "reader can act on the wrong meaning."),
+        "SG2": ("Blocks any real EV claim", "No price is logged, so no expected value against a book can be "
+                "stated at all (F3)."),
+        "SG3": ("Blocks injury impact", "Minutes are known for 50 of 465 players, so the impact column is a floor "
+                "and is 0.00 for several teams (F2)."),
+        "SG17": ("Blocks repeatability", "A decision taken here is not recorded anywhere a later session reads."),
+        "SG18": ("Blocks discovery", "Gaps get closed when someone happens to notice them."),
+    }
+    drows = []
+    for sid, (blocks, consequence) in BLOCKERS.items():
+        item = next((x for x in suggestions["items"] if x["id"] == sid), None)
+        if not item:
+            continue
+        drows.append([esc(sid), '<b>%s</b>' % esc(item["title"]), esc(item.get("category")),
+                      esc(blocks), esc(item.get("decision_needed")), esc(consequence),
+                      esc(item.get("recommendation")), srclink(sources, item.get("source"))])
+    b.append(table(["ID", "Suggestion", "Category", "What it blocks", "The decision", "Cost of not deciding",
+                    "Recommendation on the table", "Source"], drows, anchor_pattern=r"^SG\d+$",
+                   note="This is not the whole suggestion list: it is the subset that is waiting on a decision "
+                        "rather than on more data. Items that need data first are on the Open Questions page. "
+                        "Nothing in this table has been implemented; the reviewer chooses, and SG17 is the "
+                        "mechanism for recording the choice."))
     built["suggestions.html"] = page("Suggestions",
                                      "Improvements to the site and to the decision-making process, written as "
                                      "options with effort, risk and what each unlocks.", "\n".join(b))

@@ -38,6 +38,7 @@
 <div class="nav-group"><h3>EVIDENCE</h3>
 <a href="strategies.html">Strategies &amp; Leaderboard</a>
 <a href="validation.html">Validation Gates</a>
+<a href="leaderboard.html">Leaderboard &amp; Rewards</a>
 <a href="correlations.html">Correlations</a>
 <a href="luck.html">Luck &amp; Skill</a>
 <a href="backtest.html">Out-of-Sample Backtest</a>
@@ -53,6 +54,7 @@
 <a href="decisions.html">Decisions: pick a path</a>
 <a href="flagged.html">Flagged for Review</a>
 <a href="sources.html">Source Register</a>
+<a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
 <a href="repo-review.html">Repo Review</a>
 </div>
     <div class="side-note">
@@ -262,6 +264,92 @@
 <td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">S7</a></td>
 </tr>
 </tbody></table></div>
+<h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>ID</th>
+<th>Suggestion</th>
+<th>Category</th>
+<th>What it blocks</th>
+<th>The decision</th>
+<th>Cost of not deciding</th>
+<th>Recommendation on the table</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr id="SG15">
+<td>SG15</td>
+<td><b>Publish one line set, one ratings window, one sign convention</b></td>
+<td>Data and model</td>
+<td>Blocks publishing</td>
+<td>Reviewer: which line set is the published horizon. No pick should be published until this is decided.</td>
+<td>Until one line set is chosen, every game on the site has two different numbers and no pick can be called the site's pick (F26).</td>
+<td>Option 1. The newer ratings use every official game through 11/12. Adopt the sign convention of Build A (home spread = minus the projected home margin) on every page.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr id="SG7">
+<td>SG7</td>
+<td><b>Make the gates do something</b></td>
+<td>Model</td>
+<td>Blocks staking</td>
+<td>Unit sizes per tier, and whether paper-only plays are visually separated.</td>
+<td>The gates are computed but nothing acts on them, so a research play and a fundable play look alike on the Picks page.</td>
+<td>Option 1. Tier-driven staking keeps the information visible while making the status unambiguous.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&amp;DateTo=11%2F05%2F2026&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">S2</a></td>
+</tr>
+<tr id="SG6">
+<td>SG6</td>
+<td><b>Separate the two meanings of 'edge' everywhere in the UI</b></td>
+<td>Site / UI</td>
+<td>Blocks reading</td>
+<td>Wording only.</td>
+<td>The word 'edge' means model-vs-naive-model here and market edge elsewhere; a reader can act on the wrong meaning.</td>
+<td>Option 1, and reserve the word 'edge' for a market comparison once SG2 lands.</td>
+<td class="src"><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">S15</a></td>
+</tr>
+<tr id="SG2">
+<td>SG2</td>
+<td><b>Log real closing prices</b></td>
+<td>Data</td>
+<td>Blocks any real EV claim</td>
+<td>Whether to introduce a non-NBA data source at all, and which one.</td>
+<td>No price is logged, so no expected value against a book can be stated at all (F3).</td>
+<td>Option 1 if a licensed feed is available, option 2 as a stopgap. Until either happens, the site should keep saying 'model-vs-reference units' rather than 'profit'.</td>
+<td class="src"><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">S15</a></td>
+</tr>
+<tr id="SG3">
+<td>SG3</td>
+<td><b>Complete the player-minutes table</b></td>
+<td>Data</td>
+<td>Blocks injury impact</td>
+<td>Which capture path to fund.</td>
+<td>Minutes are known for 50 of 465 players, so the impact column is a floor and is 0.00 for several teams (F2).</td>
+<td>Option 1 or 2. If neither is taken, the Injuries page must keep the coverage column and confidence label visible so a 0.00 is never read as healthy.</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">S7</a></td>
+</tr>
+<tr id="SG17">
+<td>SG17</td>
+<td><b>Finish the game-log capture so props stop being a point estimate with no width</b></td>
+<td>Data and model</td>
+<td>Blocks repeatability</td>
+<td>Reviewer: pick 1, 2 or 1+2 in that order. Nothing on the site changes until the capture runs, because the script already reads whatever is in data/proplogs/.</td>
+<td>A decision taken here is not recorded anywhere a later session reads.</td>
+<td>Option 1 first, then option 2 for the parlay cohort. Option 1 is what turns 78 blank cells into numbers with sources; option 2 is the only route to a measured rho, and it is worth doing after the desk has a week of graded props to judge.</td>
+<td class="src"><a href="https://www.nba.com/stats/players/boxscores" target="_blank" rel="noopener">S20</a></td>
+</tr>
+<tr id="SG18">
+<td>SG18</td>
+<td><b>Replace the flat 0.55 production-transfer rule with per-stat minutes elasticities</b></td>
+<td>Model</td>
+<td>Blocks discovery</td>
+<td>Reviewer: approve the per-stat direction now (so the module's declared assumption is on the record as unmeasured) and schedule the fit for when the sample exists.</td>
+<td>Gaps get closed when someone happens to notice them.</td>
+<td>Option 1, sequenced behind SG17 option 2. Do not re-fit on this week's sample to move a live line.</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">S7</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">This is not the whole suggestion list: it is the subset that is waiting on a decision rather than on more data. Items that need data first are on the Open Questions page. Nothing in this table has been implemented; the reviewer chooses, and SG17 is the mechanism for recording the choice.</p>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
       signal is skill or luck. Nothing on this site is a betting recommendation, and no

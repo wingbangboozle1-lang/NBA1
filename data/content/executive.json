@@ -63,6 +63,11 @@
    "title": "The 2026-11-13 slate is settled, and it did not go well - which is the system working",
    "detail": "Every published paper pick on the 2026-11-13 slate was settled against the official finals captured on 2026-11-14. The seven gated singles went 3-4 (-1.40 units at -110) and all three two-leg parlays lost. The picks were pre-registered: the model blocks in the live file are identical to the copy frozen at 2026-11-13T22:45Z, before tip. The originated margin line was off by 12.39 points on average across the nine games - consistent with the 12.98 MAE on the wider window, and a useful reminder that a night like this is normal at this sample size.",
    "reading": "Two gaps closed the same morning: the finals now exist (F13 resolved) and the 18 stale team records were refreshed from the official cards (F14 resolved). Two remain open and are published as such: at the newest injury edition five of the ten teams playing on 11/14 have still not filed, and no edition lists any player for the 11/16 and 11/17 games."
+  },
+  {
+   "title": "The 60-game extension is real, but it cannot be reproduced from this repository alone",
+   "detail": "The 2026-11-13 finals are captured, transcribed three independent times that all agree 9/9, and used to settle every published 11/13 pick (seven singles 3-4 at -1.40 units, three two-leg parlays 0-3). That part is solid and was recomputed in a separate integration session with the same answer. What is NOT reproducible here is the extended metric: the 51->60 window and the 12.98 vs 13.62 margin MAE depend on a team-ratings refresh, and https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season returns no data table to this environment (flag F24, re-tested 2026-11-14). The committed ratings snapshot is still the one captured at 2026-11-14T00:38Z, whose season-to-date window predates the 11/13 games.",
+   "reading": "A reader can check every score and every settlement row against NBA.com, and should. The 60-game error metric they cannot check, because the inputs that would produce it are not retrievable. Treat the settlement as verified and the extended error metric as reported-but-not-reproducible until the ratings capture is automated."
   }
  ],
  "what_is_live_now": [
