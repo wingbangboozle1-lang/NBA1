@@ -28,6 +28,17 @@ on:
     # 11:15 UTC, 15:15 UTC and 22:15 UTC - after the league's own report times
     - cron: "15 11,15,22 * * *"
   workflow_dispatch:
+  # Fallback trigger: workflow_dispatch needs actions:write, which the
+  # session tokens do not have (HTTP 403 on the dispatch API, observed
+  # 2026-11-14). A push that changes the fetch script or this workflow runs
+  # the refresh instead. Loop-safe: the publish step commits with
+  # [skip ci], which does not trigger workflows, and neither of these two
+  # paths is ever written by the bot itself.
+  push:
+    branches: ["arena/**"]
+    paths:
+      - engine/fetch_official.py
+      - .github/workflows/refresh-data.yml
 
 permissions:
   contents: write
