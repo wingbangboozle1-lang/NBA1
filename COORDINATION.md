@@ -2988,12 +2988,12 @@ are adopted as N04/N07 work items and its scope was never edited here.
 | # | Task | Status | File scope (exclusive) | Plan |
 | --- | --- | --- | --- | --- |
 | N01 | Board read + claim, pushed before any other edit | done | `COORDINATION.md` (§31 only) | This row; pushed immediately (ground rule 4). |
-| N02 | Open-PR triage + takeover (ground rule 5) | in progress — #75/#65/#63/#80 taken over and closed with credit (see N02 log below); #66 triage in progress | `.github/workflows/pages.yml`, `scripts/verify_all.py`, `scripts/verify_dashboard.py`, `strategy-lab/**` (port), `audit/session-2dc33eb3/**` (carry) | Nothing is discarded: each takeover is credited in the PR close comment and here. | `.github/workflows/pages.yml`, `scripts/verify_all.py`, `scripts/verify_dashboard.py`, `strategy-lab/**` (port), `audit/session-2dc33eb3/**` (carry) | Nothing is discarded: each takeover is credited in the PR close comment and here. |
+| N02 | Open-PR triage + takeover (ground rule 5) | **done** — #75/#65/#63/#80 ported and closed with credit (31.1); #66 was merged to main by `arena/a39b9370-nba1` (PR #87) before this session triaged it — its unique content (EXECUTIVE_SUMMARY.md, decision index, leaderboard page) is on main and its register IDs were proven a subset of main's. #84 (redundant carry) left to its owner / the endgame; #86 active, not touched | `.github/workflows/pages.yml`, `scripts/verify_all.py`, `scripts/verify_dashboard.py`, `strategy-lab/**` (port), `audit/session-2dc33eb3/**` (carry) | Nothing is discarded: each takeover is credited in the PR close comment and here. | `.github/workflows/pages.yml`, `scripts/verify_all.py`, `scripts/verify_dashboard.py`, `strategy-lab/**` (port), `audit/session-2dc33eb3/**` (carry) | Nothing is discarded: each takeover is credited in the PR close comment and here. |
 | N03 | Board hygiene (R-29-8, X01-F6): de-duplicate `COORDINATION.md` repeated sections (§15, §20, §21, §23, §24, §25, §26, §28), keeping the later copy of each identical pair after a pair-by-pair diff proof | in progress | `COORDINATION.md` | Also refresh the stale ACTIVE-CLAIM header at the top of the board. |
-| N04 | Flag-register completion: publish X01-F1…F5 (§25.3 request to the integration seat) and this window's QA findings (leaked `None` strings, S1 luck/G4 wording conflict, cross-build data-window mismatch, 207/5940 unsourced-row recount) on the Flagged for Review register | in progress | `data/content/flagged.json` (append-only), regenerated site | Official source links where an official source applies; repo-file links otherwise. |
-| N05 | Currency: newest official 2026-11-14 injury-report edition and today's slate re-check via the web-fetch channel; re-price the open horizon only if a newer edition is readable; unreadable = evidence + flag, never inference | in progress | `data/raw/n14/**` (new namespace), regenerated site | Closes the §25.3 suggestion (2) where the evidence allows. |
-| N06 | Content refresh: executive summary as of this window, suggestions register (incl. site decision-making improvements), questions register (known / unknown / how to discover the missing information) | in progress | `data/content/{executive,suggestions,questions}.json` | Decision-path format preserved; every row source-linked or explicitly unverified. |
-| N07 | Fix-forward verified defects from QA (#82) and cross-session requests R-29-3 (rest-days disagreement), R-29-4 (overtime price from measured 0.0500 rate), R-29-6 (strategy-lab nav entry) | in progress | site builders, `index.html` (nav only), game-flow data | Every step gated; no methodology change without a flag. |
+| N04 | Flag-register completion | **done** — X01-F1…F5 published as F47–F51; QA findings as F52–F56; probe-churn (I-30-2) as F57; register now F1–F57 on the site Flagged page | `data/content/flagged.json` (append-only), regenerated site | Official source links where an official source applies; repo-file links otherwise. |
+| N05 | Currency: newest official 2026-11-14 injury-report edition | **done** — the 01:30 PM ET edition capture (18:40Z, `arena/cc5a6652-nba1`) is on record (33 status lines changed, NOT RE-PRICED by design); site prices from 04:15 AM ET and says so (F47/F51); 05:00 PM ET edition due ~22:00 UTC is a standing next action | `data/raw/n14/**` (new namespace), regenerated site | Closes the §25.3 suggestion (2) where the evidence allows. |
+| N06 | Content refresh | **done** — executive as_of 19:13Z + rank-1 action rewritten around the edition capture; SG19–SG23 added in decision-path format (row classification, per-game P(OT), rest-days split, licensed price, probe churn); Q21 (multiplicity gate) added with how-to-answer | `data/content/{executive,suggestions,questions}.json` | Decision-path format preserved; every row source-linked or explicitly unverified. |
+| N07 | Fix-forward verified defects | **done** — S1 banner/executive verdict reconciled against registered G4 (F52); 3 leaked `None` strings fixed (F56); P(OT) repriced from measured 0.0500 via `data/derived/ot_rate.json` (F53, R-29-4); R26-1 README, R26-2 context links, R26-4 title-only count resolved to 0; R-29-6 dated entry links for origination + strategy-lab on the landing footer (F54); R-29-3 published as SG21 (builder split needs the model-owner decision — no silent semantic change); R-29-7 published as SG22 (human licensing decision) | site builders, `index.html` (nav only), game-flow data | Every step gated; no methodology change without a flag. |
 | N08 | Line-by-line re-verification of the combined tree: every validator in CI order + independent spot re-reads of published values against their cited official URLs | in progress | `verify/2026-11-14-8c9e6135/**` (new namespace) | Values that cannot be confirmed stay blank and flagged (the brief's rule). |
 | N09 | Final integration: PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy + live smoke, delivery record appended here | unclaimed | whole repo (integration seat) | Broken site is never merged; deploy failures are fixed and retried. |
 
@@ -3039,3 +3039,40 @@ lines are deleted. This is merge-residue cleanup, not a content edit: no session
 text changed. The rest of the board's historical duplicates (§15, §20, §21,
 §23, §24, §25, §26, §28) remain for the de-duplication pass claimed by
 `arena/cc5a6652-nba1` (PR #86).
+
+
+### 31.3 N04–N07 pass record (2026-11-14 19:13Z–19:3x UTC)
+
+**What changed, and how it was verified.** All eleven CI gate steps re-run locally in
+workflow order on this tree, all green: `check_site.py` OK · build-B data presence/parse OK ·
+`verify_integration.py` PASSED, **0 errors**, 41 warnings (was 44 — the three title-only URL
+warnings closed with R26-2) · `render_check.mjs` **123 pages / 7,396 rendered rows / 0 problems** ·
+probe-record assert OK (1,465 URLs) · `build_verification_page.py` regeneration idempotent ·
+Command Center 17 pages + data OK · `check_links.py` PASS · `check_rendered.py` PASS ·
+`verify_all.py` **VERIFY OK** (1,050 dashboard rows: 1,022 allowed links, 28 explanatory
+no-source marks, **0** title-only pointers, **0** unmarked gaps) · broken internal-link scan
+**0 of 123 pages**.
+
+**Values changed in this pass (each with its reason and evidence):**
+
+| Change | Before | After | Evidence |
+| --- | --- | --- | --- |
+| Root banner S1 verdict (F52) | "inside what luck alone produces" | reconciled with the executive: G4 passes as **registered** (Wilson LB 0.546 > 0.5238; exact binomial p = 0.020), caveats named (uncorrected for library size — Q21; G2/G5 fail; G7 cannot run) | `engine/strategies.py` GATES block; `site/data/backtest.json` re-derivation (PR #86/#87 lineage) |
+| Game-flow P(OT) column (F53, R-29-4) | per-game approximation, slate mean ≈ 0.019 | **0.0500 measured** (8 overtime games / 160 completed, window 2026-10-20..2026-11-13), read at build time from `data/derived/ot_rate.json` | `scripts/measure_ot_rate.py` reproduces it from the committed official game log; strategy-lab probability audit exact p = 0.012 against the approximation |
+| 3 bare `None` strings (F56) | "None" | "None — day-before reports not yet due" / "None payable" | templates in `build_slate_refresh.py` / `build_site.py`; no value imputed |
+| Q14–Q16-type context rows (R26-2) | URL hidden in title attribute | visible "context" link + unverified marker, value stays blank | `verify_dashboard.py` title-only count now 0 |
+| README checker line (R26-1) | "Every row source-linked" | the rule as implemented + pointer to F34/F37 | script output above |
+| Landing footer (R-29-6, F54) | no entries for two live builds | dated entry links: Origination (22 lines 14–16 Nov, 101-game walk-forward) and Strategy Lab (160-game season audit) | each build's own self-description |
+
+**Open items published, not fixed (by design):** F47–F51 (injury-edition currency, X01-F1..5
+at last on the register), F55/SG19 (207-row classification policy — reviewer, row by row),
+SG20 (per-game P(OT) estimator), SG21 (rest-days split), SG22 (licensed price — human decision),
+SG23/F57 (probe-commit churn), Q21 (multiplicity gate). `docs/data` content copies stay
+one build behind until PR #86's builder fix merges (its R-30-1 change is not duplicated here);
+the post-merge rebuild syncs them.
+
+**Sources used this pass (official):** `https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_30AM.pdf`
+and `.../Injury-Report_2026-11-14_01_30PM.pdf` (edition facts via the X01 + cc5a6652 captures,
+not re-fetched here), `https://official.nba.com/nba-injury-report-2026-27-season/`,
+`https://www.nba.com/games?date=2026-10-20` (measurement window start; the whole log is the
+committed `data/official/gamelog.json` transcription). Every new flag row carries its source URL.

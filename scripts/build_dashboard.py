@@ -172,6 +172,8 @@ def page(title, sub, body, depth=1, extra_head=""):
       <a href="%(repo)sdesk.html">Integration Desk</a> &middot;
       <a href="%(repo)sdocs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
       <a href="%(repo)sdocs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="%(repo)sorigination/index.html">Origination build &mdash; 22 lines for 14&ndash;16 Nov, 101-game walk-forward</a> &middot;
+      <a href="%(repo)sstrategy-lab/index.html">Strategy Lab &mdash; season-wide audit on 160 games</a> &middot;
       <a href="%(repo)sschedule-verified.html">verified schedule</a> &middot;
       <a href="%(repo)sverification.html">live verification</a>.</p>
     </footer>
