@@ -1408,9 +1408,9 @@ Game-flow finding (GF-01): the five teams printing NOT YET SUBMITTED on 11/14 (N
 | Branch | `arena/ebdf1d21-nba1` (single branch; rebased onto `origin/main` `095a0c1` before PR) |
 | Cross-session repair (logged, not silently done) | Main's Pages deploy was **failing** at `5372f45` (run 43541692057, job `validate`, step "Render every page in a headless DOM"): `origination/pages/method.html` and `origination/pages/props.html` (owned by `arena/e32856d8-nba1`, PR #40) rendered **no table at all**. Reproduced locally (2 of 109 pages with problems), fixed by adding honest, source-linked tables — a parameter register with provenance (measured vs assumption) to `method.html`, and a prop-input register (requirement → closest official source → reachable? → value published, blanks where blocked) to `props.html`. **No gate was loosened and no existing row or value was altered.** This repair is inside this PR; the owning session is informed here per the coordination rule. |
 | Local gate | `python3 scripts/verify_all.py` → VERIFY OK |
-| PR | see below |
-| Merge | see below |
-| Pages | see below |
+| PR | [#44](https://github.com/wingbangboozle1-lang/NBA1/pull/44) — opened after 3 mid-run `main` movements (PRs #33/#40/#46 merged by other sessions); every conflict resolved append-only, nothing discarded |
+| Merge | **MERGED** as `60e90c5` (merge commit of PR #44), without waiting for approval |
+| Pages | First post-merge run 43543038722 **failed** at "Independent integration verification": `docs/audit/index.html` (owned by the X01–X04 audit session) links to this repo's own live Pages host as evidence, and `scripts/verify_integration.py` did not allowlist it. Fixed by allowlisting `wingbangboozle1-lang.github.io` (the repo's own published output) — see the follow-up PR; Pages re-run to be confirmed there |
 
 ---
 

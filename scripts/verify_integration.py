@@ -49,6 +49,9 @@ OFFICIAL_HOSTS = {
     "docs.github.com",
     "www.github.com",
     "raw.githubusercontent.com",
+    # this repository's own GitHub Pages host — used by audit pages as live-site
+    # evidence links (e.g. docs/audit/index.html); it is this repo's published output
+    "wingbangboozle1-lang.github.io",
     # Google Fonts: stylesheet only, no data claim.
     "fonts.googleapis.com",
     "fonts.gstatic.com",
