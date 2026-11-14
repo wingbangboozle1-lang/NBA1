@@ -1,0 +1,108 @@
+{
+ "checks": [
+  {
+   "check": "finals: capture vs data/verified/finals_2026-11-13.json",
+   "status": "MISMATCH",
+   "detail": "9 rows compared; 9 present; 1 field mismatches (see mismatches)"
+  },
+  {
+   "check": "finals: post-game records cross-consistent with horizon sidebar",
+   "status": "PASS",
+   "detail": "every team that played 11/13 and appears in the 11/14-11/17 sidebar carries the same post-game record on both official readings"
+  },
+  {
+   "check": "finals: promotion state in data/raw/games_completed.json",
+   "status": "PASS",
+   "detail": "2026-11-13 rows present; window 2026-11-06..2026-11-13"
+  },
+  {
+   "check": "settlement: integration/out/settlement.json vs official finals",
+   "status": "FLAG",
+   "detail": "9 rows dated 2026-11-13 sit in cannot_settle with pre-final snapshots; matchups/game_ids vs official: all match; graded rows so far: 51"
+  },
+  {
+   "check": "settlement: actual margins/totals recomputed from final-score strings",
+   "status": "PASS",
+   "detail": "48 settled rows recomputed, 0 inconsistent"
+  },
+  {
+   "check": "settlement(merged): data/raw/s14/settlement_2026-11-13.json vs official finals",
+   "status": "PASS",
+   "detail": "9 singles: 9 scores match official capture, grading recomputed 3-4 + 2 NO BET, units -1.4, MAE 12.39; 3 parlays leg-checked; 0 mismatches"
+  },
+  {
+   "check": "settlement(merged): pre-registration fidelity vs data/archive/originated_lines_2026-11-13T2245Z.json",
+   "status": "PASS",
+   "detail": "9/9 settled rows carry exactly the lines frozen before tip (2026-11-13T22:45Z archive); 0 differ"
+  },
+  {
+   "check": "horizon: site/data/lines.json vs official capture",
+   "status": "PASS",
+   "detail": "27 games compared (date/tip/matchup/game_id + 54 record cells): 54 record cells match current official cards, 0 stale-but-explained by 11/13 results, 0 unexplained (see mismatches)"
+  },
+  {
+   "check": "horizon: data/official/slate.json vs official capture",
+   "status": "FLAG",
+   "detail": "22 rows match on date/tip/teams; 0 mismatch; days absent from this file: ['2026-11-17'] (F30)"
+  },
+  {
+   "check": "horizon: data/derived/horizon_lines.json games vs official capture",
+   "status": "PASS",
+   "detail": "27 games: 27 match on date/teams/time, 0 differ"
+  },
+  {
+   "check": "picks: every published pick row maps to an official horizon game",
+   "status": "PASS",
+   "detail": "60 pick rows map 1:1 to official horizon games; 0 bad"
+  },
+  {
+   "check": "horizon: per-day game counts vs official calendar badges",
+   "status": "PASS",
+   "detail": "captured rows per day {'2026-11-14': 5, '2026-11-15': 9, '2026-11-16': 8, '2026-11-17': 5} vs badges {'2026-11-14': 5, '2026-11-15': 9, '2026-11-16': 8, '2026-11-17': 5}; total 27"
+  },
+  {
+   "check": "stats: binomial p, Wilson CI, hit rate, units recomputed (site/data/validation.json)",
+   "status": "PASS",
+   "detail": "10 strategies: 0 recomputation mismatches; 2 unit-label notes (see notes); S1: n=32 p_binom=0.0201 units=11.909; S2: n=15 p_binom=1.0 units=0.273; S3: n=22 p_binom=0.8318 units=-2.909; S4: n=0 p_binom=None units=0.0 \u2026"
+  },
+  {
+   "check": "stats: window metrics reproduced from docs/data/backtest.json rows",
+   "status": "PASS",
+   "detail": "n=60 rows: MAE margin 12.98 vs 12.98, MAE total 14.83 vs 14.83, RMSE 17.12/19.35, bias -0.17, straight-up 40-20 vs 40-20; 0 mismatches"
+  },
+  {
+   "check": "stats: settlement-ledger metrics recomputed (integration/out/settlement.json)",
+   "status": "NOTE",
+   "detail": "n=51 settled rows: MAE margin 12.79, straight-up 37-14 \u2014 different model numbers than the published metrics; see cross-ledger note (F26)."
+  },
+  {
+   "check": "stats: correlation register recomputed from committed team data",
+   "status": "PASS",
+   "detail": "10 of 10 Tier-A pairs reproduce exactly from teams_advanced/scoring (r and normal-approx p); 0 differ"
+  }
+ ],
+ "mismatches": [
+  {
+   "where": "finals: capture vs data/verified/finals_2026-11-13.json",
+   "row": "0022600037",
+   "field": "ot",
+   "repo": null,
+   "official": 1,
+   "detail": "official box-score period filter prints 'Q1 Q2 Q3 Q4 OT1'; recap headline 'Bulls outlast Hawks in OT'. Repo deliberately left null (was unconfirmed); this capture confirms 1 OT.",
+   "src": "https://www.nba.com/game/atl-vs-chi-0022600037/box-score"
+  },
+  {
+   "where": "settlement: integration/out/settlement.json vs official finals",
+   "row": "all 9 rows of 2026-11-13",
+   "field": "source_url",
+   "detail": "all rows share one source_url (https://www.nba.com/game/cha-vs-phx-0022600230/box-score) that is a different game \u2014 known irregularity R-X2/\u00a720 item 1. The finals ARE now public and verified; these rows are stale ('IN PROGRESS' snapshots)."
+  }
+ ],
+ "unverified": [],
+ "explained_stale": [],
+ "notes": [
+  "S9: published units -1.297 = sum of graded rows (-1.2969) but NOT flat -110 grading (-2.2727) \u2014 market 'Parlay' is priced differently; the metric name 'units_at_minus110' is misleading for this strategy.",
+  "S10: published units 3.628 = sum of graded rows (3.6285) but NOT flat -110 grading (-5.0) \u2014 market 'Same-game parlay' is priced differently; the metric name 'units_at_minus110' is misleading for this strategy.",
+  "cross-ledger (F26 evidence): docs/data/backtest.json model_spread_home vs integration/out/settlement.json model_margin_home agree on 1/51 shared games (same 51-game window); settlement-ledger MAE would be 12.79 vs published 12.98. Two engine lineages describe the same window; each ledger is internally consistent but the pages do not label which engine produced which number."
+ ]
+}
