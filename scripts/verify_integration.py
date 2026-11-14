@@ -302,6 +302,54 @@ def check_prose_numbers():
                 err(f"{rel(p)}: prose says {n} out-of-sample games, data says {facts['out_of_sample_games']}")
 
 
+# --------------------------------------------------- I6b site-wide row counts
+ROW_BLOCK = re.compile(r"<tbody>(.*?)</tbody>", re.S | re.I)
+OFFICIAL_IN_ROW = re.compile(r"https?://([\w.\-]*\.)?nba\.com/")
+
+
+def count_rows(scope):
+    total = sourced = 0
+    for dirpath, dirnames, filenames in os.walk(os.path.join(ROOT, scope)):
+        dirnames[:] = [d for d in dirnames if d not in {".git", "node_modules"}]
+        for f in filenames:
+            if not f.endswith(".html"):
+                continue
+            txt = open(os.path.join(dirpath, f), encoding="utf-8", errors="replace").read()
+            txt = strip_scripts(txt)
+            for tb in ROW_BLOCK.findall(txt):
+                for row in re.findall(r"<tr\b[^>]*>.*?</tr>", tb, re.S):
+                    total += 1
+                    if OFFICIAL_IN_ROW.search(row):
+                        sourced += 1
+    return total, sourced
+
+
+def check_row_counts():
+    """The two numbers the executive summary publishes about itself.
+
+    Earlier sessions shipped this sentence with a hard-coded count and then with
+    an overstated claim ("a source link on every row"). Both were invisible to the
+    existing gates because the gates check links, not arithmetic. Here the
+    published numbers are recomputed from the pages and compared."""
+    print("\n[I6b] Published site-wide row counts match the pages")
+    total, sourced = count_rows("docs")
+    page = open(os.path.join(ROOT, "docs/pages/summary.html"), encoding="utf-8",
+                errors="replace").read()
+    m = re.search(r"Of its (\d+) table rows, (\d+) carry", page)
+    if not m:
+        err("docs/pages/summary.html no longer states the derived row counts")
+        return
+    said_total, said_sourced = int(m.group(1)), int(m.group(2))
+    if said_total != total:
+        err(f"summary says {said_total} table rows, docs/ actually has {total}")
+    elif said_sourced != sourced:
+        err(f"summary says {said_sourced} sourced rows, docs/ actually has {sourced}")
+    else:
+        ok(f"summary's {said_total} rows / {said_sourced} sourced match the pages exactly")
+    if said_sourced > total:
+        err("sourced rows exceed total rows - impossible")
+
+
 # ---------------------------------------------------------------- I7 entry points
 def check_entry_points():
     print("\n[I7] Both builds reachable from the repository root")
@@ -326,6 +374,7 @@ def main():
     check_rows()
     check_sentinels()
     check_prose_numbers()
+    check_row_counts()
     check_entry_points()
 
     print("\n" + "=" * 66)

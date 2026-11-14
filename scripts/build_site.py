@@ -175,8 +175,15 @@ def table_row_count():
                 continue
             with open(os.path.join(base, f), encoding="utf-8") as fh:
                 txt = fh.read()
+            # Strip <script> blocks first. A few Build B pages build their tables
+            # in JavaScript, so their <tr> strings are templates, not rows that
+            # exist in the document. Counting them inflated this number by 6
+            # (731 vs the 725 rows actually present) and that inflated number is
+            # what the executive summary published. scripts/verify_integration.py
+            # recomputes it with the same definition and fails if they disagree.
+            txt = re.sub(r"<script\b.*?</script>", "", txt, flags=re.S | re.I)
             for tb in re.findall(r"<tbody>(.*?)</tbody>", txt, re.S):
-                total += len(re.findall(r"<tr>", tb))
+                total += len(re.findall(r"<tr\b[^>]*>", tb))
     return total
 
 
