@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slate &amp; Originated Lines · NBA1 Command Center</title>
+<meta name="description" content="Every upcoming game, our originated spread and total, the reference line, and the rest and availability context.">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a href="index.html">Dashboard</a>
+    <a href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a class="on" href="slate.html">Slate &amp; lines</a>
+    <a href="picks.html">Picks</a>
+    <a href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html">Validation gates</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="luck.html">Luck</a>
+    <a href="backtest.html">Game log</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="gameflow.html">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="flagged.html">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+  <div class="main">
+    <div class="top"><div><h1>Slate &amp; originated lines</h1><div class="sub" id="sub">—</div></div><span class="asof" id="asof">as of …</span></div>
+    <div class="wrap">
+      <p class="lede">One row per upcoming game. <b>Model</b> is this project's originated line.
+      <b>Reference</b> is a naive internal baseline (flat 2.0-point home court) — it is
+      <em>not</em> a sportsbook price, so "edge" below means the model disagrees with the naive
+      baseline, not that it beats a book.</p>
+
+      <div class="bn info"><div class="ico">i</div><div>
+        <p>The horizon is capped at three days: <b>as of date + 0, 1 and 2</b>. Games already under
+        way at the data cut are excluded from picks and listed at the bottom of this page for rest
+        arithmetic only.</p>
+      </div></div>
+
+      <div class="tools">
+        <label>Slate <select id="f-date"><option value="">All dates</option></select></label>
+        <label>Search <input type="search" id="f-q" placeholder="team, e.g. BOS"></label>
+        <span class="count" id="cnt"></span>
+      </div>
+      <div id="tbl"><div class="empty">Loading…</div></div>
+      <p class="tnote">Home spread is negative when the home team is favoured. Every row links to the
+      game's own official NBA.com page, which prints both teams' records.</p>
+
+      <h2>Player-prop baselines on this slate</h2>
+      <p class="small">Season per-game baselines adjusted for game pace and the opponent's defensive
+      rating. No probability is attached to any prop: game-to-game variance has not been measured
+      (see <a href="flagged.html">R03</a>).</p>
+      <div id="props"><div class="empty">Loading…</div></div>
+
+      <h2>Games already under way at the cut</h2>
+      <div id="live"><div class="empty">Loading…</div></div>
+      <p class="tnote">These nine fixtures tipped before the capture. They are recorded so rest and
+      back-to-back arithmetic is right, and they carry no score and no pick in this repository.</p>
+    </div>
+    <footer class="bot">
+      <p><strong>Sources.</strong> Ratings: NBA.com Stats → Teams → Advanced. Slate and records: each
+      game's own NBA.com page. Availability: the official injury report PDF. All linked per row.</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association.</p>
+    </footer>
+  </div>
+</div>
+<script>
+(async () => {
+  try {
+    const [L, meta, P, G] = await Promise.all([
+      CC.load("lines.json"), fetch("data/meta.json").then(r=>r.json()),
+      CC.load("picks.json"), CC.load("gameflow.json"),
+    ]);
+    document.getElementById("asof").textContent = "as of " + meta.as_of;
+    const dates = [...new Set(L.rows.map(r => r.date))].sort();
+    document.getElementById("sub").textContent = dates.length + " slates · " + L.rows.length + " games · max horizon 3 days";
+    document.getElementById("cut").textContent = meta.generated_at_utc;
+
+    const sel = document.getElementById("f-date");
+    dates.forEach(d => sel.insertAdjacentHTML("beforeend", `<option value="${d}">${d}</option>`));
+
+    const pickCount = {};
+    P.rows.forEach(p => { pickCount[p.game_id] = (pickCount[p.game_id] || 0) + 1; });
+
+    const cols = [
+      {h:"Date", v:r=>CC.games(r.date)},
+      {h:"Time ET", k:"time_et", c:"nowrap"},
+      {h:"Game", v:r=>`<b>${CC.esc(r.away)}</b> @ <b>${CC.esc(r.home)}</b>`},
+      {h:"Rec", v:r=>`<span class="mono">${CC.esc(r.away_rec ?? "—")} / ${CC.esc(r.home_rec ?? "—")}</span>`},
+      {h:"Our spread", n:1, v:r=>CC.num(r.model_spread_home,1)},
+      {h:"Ref spread", n:1, v:r=>CC.num(r.ref_spread_home,1)},
+      {h:"Δ spread", n:1, v:r=>CC.num(r.spread_edge,2)},
+      {h:"Our total", n:1, v:r=>CC.num(r.model_total,1)},
+      {h:"Ref total", n:1, v:r=>CC.num(r.ref_total,1)},
+      {h:"Δ total", n:1, v:r=>CC.num(r.total_edge,2)},
+      {h:"Model P(home)", n:1, v:r=>CC.pct(r.p_home_win,1)},
+      {h:"Fair ML home/away", v:r=>r.ml_home_fair==null?CC.blank:`<span class="mono">${r.ml_home_fair>0?"+":""}${r.ml_home_fair} / ${r.ml_away_fair>0?"+":""}${r.ml_away_fair}</span>`},
+      {h:"Rest (H/A)", v:r=>`${r.home_b2b?"<span class='tag a'>B2B</span>":""}${r.away_b2b?"<span class='tag a'>A B2B</span>":""}${!r.home_b2b&&!r.away_b2b?"<span class='small'>—</span>":""}`},
+      {h:"Avail. loss (H/A)", v:r=>`<span class="mono">${CC.n(r.home_availability_loss,2)} / ${CC.n(r.away_availability_loss,2)}</span>`},
+      {h:"Picks", n:1, v:r=>pickCount[r.game_id] ? `<b>${pickCount[r.game_id]}</b>` : `<span class="blankdash">0</span>`},
+      {h:"Source", v:r=>CC.game(r.game_id, "game page")},
+    ];
+
+    let date="", q="";
+    function render() {
+      const rows = L.rows.filter(r => (!date || r.date===date) &&
+        (!q || (r.away+" "+r.home+" "+r.matchup).toLowerCase().includes(q.toLowerCase())));
+      CC.set("#tbl", CC.table(cols, rows));
+      document.getElementById("cnt").textContent = rows.length + " of " + L.rows.length + " games";
+    }
+    sel.onchange = e => { date = e.target.value; render(); };
+    document.getElementById("f-q").oninput = e => { q = e.target.value; render(); };
+    render();
+
+    // ---- props baselines (top 12 by projected points) 
+    const pr = (P.rows||[]).filter(p=>p.market==="Player points").slice(0,0);
+    const propRows = (await CC.load("props.json")).rows
+      .filter(p => !date || p.date===date)
+      .sort((a,b)=>(b.baseline_pts||0)-(a.baseline_pts||0)).slice(0,14);
+    CC.set("#props", CC.table([
+      {h:"Date", v:r=>CC.games(r.date)},
+      {h:"Player", v:r=>`<b>${CC.esc(r.player)}</b>`},
+      {h:"Team", k:"team"},
+      {h:"Matchup", k:"matchup"},
+      {h:"PTS", n:1, v:r=>CC.n(r.baseline_pts,1)},
+      {h:"REB", n:1, v:r=>CC.n(r.baseline_reb,1)},
+      {h:"AST", n:1, v:r=>CC.n(r.baseline_ast,1)},
+      {h:"3PM", n:1, v:r=>CC.n(r.baseline_fg3m,1)},
+      {h:"PRA", n:1, v:r=>CC.n(r.baseline_pts_reb_ast,1)},
+      {h:"Source", v:r=>CC.src("S7","player stats")},
+    ], propRows));
+  } catch (e) { CC.fail("#tbl", e); }
+
+  // in-progress games are static in the page (no score exists anywhere)
+  document.getElementById("live").innerHTML = CC.table([
+    {h:"Date", v:()=>CC.games("2026-11-13")},
+    {h:"Game", k:"g"},
+    {h:"Venue", k:"v"},
+    {h:"Status", v:()=>CC.tag("live at cut — not pickable","a")},
+    {h:"Score", v:()=>CC.blank},
+  ], [
+    {g:"NYK @ IND", v:"Gainbridge Fieldhouse, Indianapolis"},
+    {g:"MIL @ ORL", v:"Kia Center, Orlando"},
+    {g:"CLE @ MIA", v:"Kaseya Center, Miami"},
+    {g:"ATL @ CHI", v:"United Center, Chicago"},
+    {g:"MEM @ NOP", v:"Smoothie King Center, New Orleans"},
+    {g:"UTA @ HOU", v:"Toyota Center, Houston"},
+    {g:"GSW @ SAS", v:"Frost Bank Center, San Antonio"},
+    {g:"POR @ SAC", v:"Golden 1 Center, Sacramento"},
+    {g:"OKC @ LAC", v:"Intuit Dome, Inglewood"},
+  ]);
+})();
+</script>
+</body>
+</html>

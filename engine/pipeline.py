@@ -45,6 +45,8 @@ def main():
     adv = read_json(os.path.join(RAW, "team_advanced.json"))
     games_raw = read_json(os.path.join(RAW, "games_completed.json"))
     sched_raw = read_json(os.path.join(RAW, "schedule_upcoming.json"))
+    ip_path = os.path.join(RAW, "schedule_in_progress.json")
+    ip_raw = read_json(ip_path) if os.path.exists(ip_path) else {"rows": [], "cols": []}
     inj_raw = read_json(os.path.join(RAW, "injuries.json"))
     pl_raw = read_json(os.path.join(RAW, "players_traditional.json"))
     sources = read_json(os.path.join(RAW, "sources.json"))
@@ -55,8 +57,18 @@ def main():
     season_rows = [dict(zip(adv["cols"], r)) for r in season_block["rows"]]
     completed = [dict(zip(games_raw["cols"], r)) for r in games_raw["rows"]]
     scheduled = [dict(zip(sched_raw["cols"], r)) for r in sched_raw["rows"]]
+    # Games that were already under way at the data cut: rest / back-to-back only.
+    # They are never pickable and no score for them exists in this repository.
+    in_progress = [dict(zip(ip_raw["cols"], r)) for r in ip_raw["rows"]]
     injuries = [dict(zip(inj_raw["cols"], r)) for r in inj_raw["rows"]]
     players = [dict(zip(pl_raw["cols"], r)) for r in pl_raw["rows"]]
+
+    # ------------------------------------------------- derived window constants
+    RESULTS = sorted({g["date"] for g in completed})
+    SLATE_DATES = sorted({g["date"] for g in scheduled})
+    IP_DATE = in_progress[0]["date"] if in_progress else None
+    AS_OF = SLATE_DATES[0]
+    CUP = {g["game_id"]: g.get("cup_group") for g in in_progress}
 
     # ------------------------------------------------------- backtest + params
     bt = run_backtest(train_rows, season_rows, completed,
@@ -80,6 +92,7 @@ def main():
     # ------------------------------------------------- rest / B2B for all games
     all_games = [{"date": g["date"], "home": g["home"], "away": g["away"]} for g in completed]
     all_games += [{"date": g["date"], "home": g["home"], "away": g["away"]} for g in scheduled]
+    all_games += [{"date": g["date"], "home": g["home"], "away": g["away"]} for g in in_progress]
     dates = sorted({g["date"] for g in all_games})
     last_by_date = {}
     for d in dates:
@@ -221,13 +234,17 @@ def main():
     meta = {
         "generated_at_utc": GENERATED_AT,
         "season": "2026-27",
-        "as_of": "2026-11-13",
+        "as_of": AS_OF,
         "data_windows": {
             "ratings_season_to_date": season_block["label"],
             "ratings_training_window": train_block["label"],
-            "results_captured": "2026-11-06 .. 2026-11-12 (51 games, all of them out-of-sample)",
-            "out_of_sample_window": "2026-11-06 .. 2026-11-12 (51 games)",
-            "upcoming_slates": "2026-11-13, 2026-11-14, 2026-11-15 (23 games)",
+            "results_captured": f"{RESULTS[0]} .. {RESULTS[-1]} ({len(completed)} games, "
+                                f"all of them out-of-sample)",
+            "out_of_sample_window": f"{RESULTS[0]} .. {RESULTS[-1]} ({len(holdout_ctx)} games)",
+            "upcoming_slates": f"{', '.join(SLATE_DATES)} ({len(future_ctx)} games, "
+                               f"maximum horizon {sched_raw.get('window_days', 3)} days)",
+            "in_progress_at_capture": f"{len(in_progress)} games on {IP_DATE} were live at the "
+                                      f"data cut; they feed rest maths only and are not pickable",
             "injury_report": inj_raw["report"],
         },
         "counts": {
@@ -355,7 +372,7 @@ def main():
                 inj_rows.append({
                     "date": c["date"], "matchup": c["matchup"], "game_id": c["game_id"],
                     "team": c[side], "side": side, "listed": None,
-                    "status": "NO ENTRY IN THE 2026-11-13 05:15 PM ET EDITION",
+                    "status": "NO ENTRY IN THIS EDITION",
                     "weighted_lost_share": None, "impact_net_rating": None,
                     "minutes_coverage": None,
                     "confidence": "NONE - no entry in this edition of the report",
@@ -384,8 +401,9 @@ def main():
                 inj_rows.append({
                     "date": c["date"], "matchup": c["matchup"], "game_id": c["game_id"],
                     "team": c[side], "side": side, "player": None,
-                    "status": "NOT YET SUBMITTED", "reason": "Team had not filed at the "
-                    "05:15 PM ET edition", "src": "S6",
+                    "status": "NOT YET SUBMITTED",
+                    "reason": "Team had not filed at the " + inj_raw["report"].split(", ")[-1],
+                    "src": "S6",
                 })
     write_json(os.path.join(OUT, "injuries.json"), {
         "rows": inj_rows, "src": "S6",
@@ -533,11 +551,11 @@ def main():
 
 def _report_status(rep):
     if not rep:
-        return "NO ENTRY IN THE 2026-11-13 05:15 PM ET EDITION"
+        return "NO ENTRY IN THIS EDITION"
     if rep.get("not_submitted"):
         return "NOT YET SUBMITTED"
     if rep.get("no_entry_in_report"):
-        return "NO ENTRY IN THE 2026-11-13 05:15 PM ET EDITION"
+        return "NO ENTRY IN THIS EDITION"
     return f'{rep["listed"]} player(s) listed'
 
 

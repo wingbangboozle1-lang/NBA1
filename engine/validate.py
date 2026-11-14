@@ -2,7 +2,9 @@
 
 Information discipline
 ----------------------
-Holdout window       : 2026-11-09 .. 2026-11-12  (28 completed games, sources S3_*)
+Holdout window       : all completed games after the training cut-off (driven by
+                       HOLDOUT_START / HOLDOUT_END below, currently 2026-11-06 ..
+                       2026-11-12 = 51 games, sources S3_*)
 Ratings used for it  : the 2026-10-20 .. 2026-11-05 window ONLY (source S2)
 So no game in the test window contributes to the ratings that predict it.
 

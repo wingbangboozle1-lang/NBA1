@@ -1,0 +1,97 @@
+{
+ "title": "Executive Summary",
+ "as_of": "2026-11-14",
+ "data_cut_et": "2026-11-13 19:38 ET",
+ "headline": "Every line for the next three days is originated, gated and published from official data re-verified this session. Nothing is funded: the best strategy's record is still inside what luck produces.",
+ "verdict": {
+  "status": "PROVISIONAL \u2014 NOT FUNDED",
+  "one_line": "Ten strategies, seven conformance gates, 51 strictly out-of-sample games. Zero strategies clear the skill gate; the leaderboard leader sits at Tier 3 (quarter-unit) because a gate, not a score, caps it.",
+  "why": "The model beats the naive reference on margin accuracy (MAE 12.89 vs 13.19) and loses on totals (14.86 vs 14.73) and on probability calibration (Brier 0.1970 vs 0.1889). The top strategy, S1, is 16-7 on 23 graded plays with an exact binomial p of 0.093 and a Wilson lower bound of 0.491 against a 0.524 break-even \u2014 a real run, not yet distinguishable from luck."
+ },
+ "what_changed_this_session": [
+  {
+   "n": 1,
+   "title": "The data cut rolled forward: the horizon is now 2026-11-14 .. 2026-11-16",
+   "detail": "The previous snapshot was taken at 2026-11-13T22:30Z with a 11/13-11/15 horizon. At this session's capture (2026-11-13 19:38 ET) the nine 11/13 games had already tipped and were live, so they were moved to a non-pickable 'in progress' file that feeds rest arithmetic only. The pickable window is 5 + 9 + 8 = 22 games over three days, which matches the game counts the official schedule calendar prints for those dates.",
+   "reading": "A horizon that starts yesterday is not a horizon. The rule is unchanged: every upcoming game inside as_of .. as_of+2."
+  },
+  {
+   "n": 2,
+   "title": "Nothing in the methodology or in any graded result moved",
+   "detail": "The engine was rebuilt on the refreshed snapshot. The 51-game game log, all 24 performance metrics, the 10 strategy summaries, the leaderboard and the 13 measured correlations are value-for-value identical to the previous build. Only the forward-looking files (lines, picks, props, injuries, game flow, meta) changed, because they are about games that have not been played yet.",
+   "reading": "This is the difference between a refresh and a revision. If the backtest had moved, the refresh would have been contaminated."
+  },
+  {
+   "n": 3,
+   "title": "Two independent transcriptions of the same official tables now agree on all 1,200 cells",
+   "detail": "The season-to-date and training-window team tables were re-transcribed from nba.com/stats/teams/advanced and compared cell by cell with the previous session's transcription: 600/600 and 600/600 identical. Independently, all 30 teams' games played reconcile exactly to 'training games + completed results' (246 + 102 = 348), and wins equal losses (174 = 174).",
+   "reading": "Transcription was the weakest link in the chain because the shell has no direct internet. It is now the most heavily cross-checked part."
+  },
+  {
+   "n": 4,
+   "title": "All 51 results were re-verified line by line against the official pages",
+   "detail": "Every score and game id in the results file was checked against nba.com/games?date=... for 2026-11-06 through 2026-11-12. The per-day game counts read off the official calendar (9, 7, 7, 8, 6, 10, 4) match the file exactly, and every final score matches.",
+   "reading": "The out-of-sample log the whole verdict rests on is verified against primary sources, not taken on trust."
+  },
+  {
+   "n": 5,
+   "title": "The injury layer moved from the 17:15 ET to the 19:30 ET official edition, and seven statuses changed in two hours",
+   "detail": "McConnell, Nesmith, Mathurin and Powell went Questionable -> Available; Larsson went Doubtful -> Out; Thompson went Probable -> Out; Swain went Questionable -> Out. Eight of the eleven 11/14 fixtures still show 'NOT YET SUBMITTED' as published.",
+   "reading": "This is the strongest available argument for the availability-robustness gate (G7) and for not pricing a Questionable player as available. It also shows why a single daily snapshot is the wrong cadence for injury data."
+  }
+ ],
+ "what_is_live_now": [
+  "Originated lines for all 22 upcoming games, each row carrying the game's own NBA.com link.",
+  "59 paper picks across ten strategies, every one tagged with its strategy rule and gate status.",
+  "Player prop baselines for every captured player available on the three slates, with no probability attached (game-to-game variance is unmeasured \u2014 flagged F2/Q3).",
+  "Per-game injury impact with an explicit minutes-coverage figure beside every number, so a low-confidence row cannot be mistaken for a high-confidence one.",
+  "25 open questions with the exact artefact that would close each one, and 8 suggestions each ending in a decision a reviewer can make.",
+  "A line-by-line repository review with every claim tied to a file path, a commit or an official URL."
+ ],
+ "not_live_and_not_claimed": [
+  "No licensed sportsbook price is used anywhere. The 'reference line' is a naive model, not a market quote.",
+  "No player minutes projection is published: minutes are known for 50 players in the captured official table and nobody else.",
+  "No correlation value is measured between bets and results: only 13 correlations between official statistics are measured; parlay rho values are labelled MODEL-DERIVED.",
+  "No settlement: no play in this repository has a graded outcome against a real price, and no ROI is claimed against a market.",
+  "No betting recommendation. This is a research artefact."
+ ],
+ "recommended_next_actions": [
+  {
+   "rank": 1,
+   "action": "Instrument the engine with a price feed (or a dated manual quote table) and score against the market, not the reference line.",
+   "why": "Every gate that matters economically (G3 edge, G4 skill) is currently measured against an unplayed reference line. That is the single biggest reason nothing can be funded.",
+   "ref": "S1",
+   "ref_label": "team stats"
+  },
+  {
+   "rank": 2,
+   "action": "Extend the out-of-sample window past 100 games by letting the daily refresh run, and pre-register the gates before looking.",
+   "why": "23 graded plays cannot separate skill from luck at any p threshold. The window is the binding constraint, not the model.",
+   "ref": "S3",
+   "ref_label": "games & scores"
+  },
+  {
+   "rank": 3,
+   "action": "Replace the daily injury snapshot with the pre-tip editions (the 19:30 ET report used here, plus a 2-hour-before-tip sweep).",
+   "why": "Seven statuses changed between 17:15 and 19:30 ET. A stale availability number is worse than a blank one.",
+   "ref": "S5",
+   "ref_label": "injury index"
+  },
+  {
+   "rank": 4,
+   "action": "Capture full-league minutes (all 465 player rows, not the top 50) so availability impact stops being a lower bound.",
+   "why": "Minutes coverage per roster is 27-30%. Every injury impact figure is therefore an under-estimate, and the site says so on every row.",
+   "ref": "S7",
+   "ref_label": "player stats"
+  },
+  {
+   "rank": 5,
+   "action": "Decide the retail price assumption explicitly (currently -110 flat) and publish a sensitivity band.",
+   "why": "The break-even of 52.38% is an assumption, not a measurement. At -105 it is 51.2%; at -115 it is 53.5%. The verdicts are sensitive to it.",
+   "ref": "S9",
+   "ref_label": "standings"
+  }
+ ],
+ "bottom_line": "The system does what was asked: it originates its own lines from official data, runs single bets, parlays, same-game parlays and player-prop combinations through conformance gates, measures correlations where it can and says where it cannot, removes luck with explicit binomial and bootstrap intervals, and publishes a reward-tiered leaderboard that refuses to promote anything on a short run. The honest result is that no strategy is funded, and the site says that on its front page rather than burying it.",
+ "verification_rule": "Every published table row carries a source id or a direct official URL. A value that could not be traced to an official source is left blank and appears on the Flagged for Review page. Nothing is inferred, and a blank is never a zero."
+}
