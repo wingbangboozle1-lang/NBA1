@@ -264,3 +264,85 @@ combined data, confirms the site builds with no broken links, and publishes.
 **Scope rule for this session:** `COORDINATION.md`, new files under `scripts/`
 and `.github/workflows/`, and (only under V05) `index.html`. It will not touch
 Build A's or Build B's page bodies except to fix a defect it can prove.
+
+---
+
+## 10. Final integration results — `arena/458a6570-nba1`
+
+Merged `origin/afbb` (Build C) into this branch before verifying, so every check
+below ran on the **combined** tree, not on one session's slice. The `COORDINATION.md`
+conflict was two sessions appending a section at the same anchor; nothing was
+discarded, Build C's §7–§8 kept their numbers and this session's board moved to §9.
+A second, mid-run `git pull --rebase` conflict was in the same append-only region;
+it was aborted cleanly and resolved by merge instead of a forced rebase, so no
+commit from either side was rewritten or dropped.
+
+### 10.1 Verification performed (all runnable from a clean checkout)
+
+| Check | Command | Result |
+| --- | --- | --- |
+| Independent data/link/source audit | `python3 scripts/verify_integration.py` | 56 JSON files parse · 49 HTML pages · 2,071 static links · **0 broken internal links, 0 non-https, 0 untrusted hosts** · 945/1,008 data rows carry an official NBA link · headline prose counts match `docs/data/*.json` |
+| Every page rendered in a real DOM | `node scripts/render_check.mjs` | **49/49 pages render, 0 problems**, 2,095 content blocks. Tables are actually built from the data at runtime, not just present in markup. |
+| Official-source reachability | `scripts/probe_official.py` on a GitHub runner (`.github/workflows/probe-official.yml`) | 115 cited URLs probed. **0 dead links.** See §10.2 — this is the session's main new finding. |
+| Both builds reachable from the root | `verify_integration.py` check I7 | pass, after R1 was closed by Build C (`index.html` → `docs/b/index.html`) |
+
+`scripts/verify_integration.py` deliberately does **not** call the earlier
+sessions' gates and accept their verdict. It re-derives the properties from the
+files. `scripts/render_check.mjs` exists because a static grep cannot see a page
+whose script throws or a table that renders empty; it was validated by injecting
+a deliberately broken `fetch` into a copy of `picks.html` and confirming it
+fails, then restoring the file.
+
+### 10.2 The finding that changes what the project can claim
+
+The previous board recorded, correctly, that the refresh path had **never been
+executed** (Build B flagged F7) because every build session ran in a sandbox whose
+network reached only github.com/npm/pypi. That left the central question
+unanswered. This session answered it with an executed probe rather than an
+assumption:
+
+| Observation | Value |
+| --- | --- |
+| Cited official URLs probed | 115 |
+| Answered as a plain, honestly-identified client | 3 (the 11/13 injury-report PDFs only) |
+| Refused to that client (401/403/429) | 112 |
+| Re-requested with nba.com's own web-client headers | **`www.nba.com/stats/teams/advanced` 200 · `stats/players/traditional` 200 · `schedule` 200 · `games?date=…` 200** |
+| Still refused with those headers | `cdn.nba.com/static/json/...` (both attempts) |
+| 404 / 410 | **0** |
+
+Conclusion, published on `verification.html`: **a scripted origination pipeline is
+technically possible** for the team ratings, player stats, schedule and injury
+PDFs. What the probe does *not* establish — and the page says so — is permission,
+licence, rate limits, or the right to store or republish the data. Technical
+reachability is not authorisation; that remains an open human decision (Q-02,
+Q-04, Q-08).
+
+This also means Build B's `engine/fetch_official.py` is not wrong so much as
+under-specified: it sends a generic client and would most likely be refused
+outright. That is now recorded rather than left to a scheduled workflow to
+discover silently.
+
+### 10.3 Flagged for review (published, non-blocking)
+
+New flags raised by this session are on `verification.html`; the pre-existing
+registers stay where they were (`review.html`, `docs/pages/flagged.html`,
+`docs/b/pages/flagged.html`, `schedule-verified.html`):
+
+1. **V-F1** `cdn.nba.com/static/json/staticData/scheduleLeagueV2.json` is cited in
+   `data/flags.json` and `docs/flagged.html` but returns 403 to a script and to
+   the NBA web-client headers. It should not be relied on.
+2. **V-F2** 112 of 115 cited URLs refuse a plain client. Anyone reproducing a row
+   by script must know this up front or they will conclude the sources are dead.
+3. **V-F3** The 11/14 injury report returned 403 at probe time; other evidence
+   says it does not exist yet. Recorded as "absent, not blocked" but not proven.
+4. **V-F4** No source was 404 at probe time, but the probe is a single instant.
+   Nothing here establishes continuity, and the site does not claim it.
+
+### 10.4 Files this session owns / touched
+
+New: `scripts/verify_integration.py`, `scripts/render_check.mjs`,
+`scripts/probe_official.py`, `scripts/build_verification_page.py`,
+`.github/workflows/probe-official.yml`, `verification.html`,
+`data/raw/probe_official.json`, `data/raw/_last_refresh.json`.
+Edited: `COORDINATION.md` (this section, §9), `.gitignore` (tooling dirs only).
+Not touched: any page body belonging to Builds A, B or C.
