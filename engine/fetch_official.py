@@ -292,26 +292,65 @@ def excerpt_around(text, needle, before=800, span=4000):
 
 
 def extract_json_games(text):
-    """Pull finished-or-live game objects out of the page's clean JSON.
+    """Pull finished-or-live game objects out of the page's embedded state.
 
-    The games page embeds its data as real JSON (inside __NEXT_DATA__ and
-    related state), not as HTML cells. Every occurrence of {"gameId":"..."}
-    is tried as the start of a JSON object with raw_decode; only objects
-    that carry both team blocks are kept. Escaped payloads ({\\"gameId\\")
-    are deliberately not unescaped here - if the clean scan finds nothing,
-    the caller falls back to the card text and records evidence.
+    Order of attack, proven against the executed runs:
+      1. `__NEXT_DATA__` (present on the games pages - indicator = 1): one
+         well-formed JSON document, walked for dicts that carry a gameId and
+         both team blocks;
+      2. otherwise: every `"gameId":"..."` occurrence, trying raw_decode from
+         each `{` within a bounded window behind it, keeping objects that
+         decode fully and carry both team blocks;
+      3. otherwise: the caller falls back to card text and records evidence.
+
+    Escaped payloads ({\\"gameId\\") are deliberately not unescaped here.
     """
     games = {}
-    for m in re.finditer(r'\{"gameId"\s*:\s*"(\d{10})"', text):
+
+    def keep(obj):
+        gid = str(obj.get("gameId"))
+        if gid and gid not in games \
+                and isinstance(obj.get("homeTeam"), dict) \
+                and isinstance(obj.get("awayTeam"), dict):
+            games[gid] = obj
+
+    def walk(node):
+        if isinstance(node, dict):
+            if "gameId" in node and "homeTeam" in node and "awayTeam" in node:
+                keep(node)
+            for v in node.values():
+                walk(v)
+        elif isinstance(node, list):
+            for v in node:
+                walk(v)
+
+    nd = re.search(
+        r'<script[^>]*id="__NEXT_DATA__"[^>]*>(.*?)</script>', text, re.S)
+    if nd:
+        try:
+            walk(json.loads(nd.group(1)))
+        except ValueError:
+            pass
+    if games:
+        return games
+
+    decoder = json.JSONDecoder()
+    for m in re.finditer(r'"gameId"\s*:\s*"(\d{10})"', text):
         gid = m.group(1)
         if gid in games:
             continue
-        try:
-            obj, _ = json.JSONDecoder().raw_decode(text[m.start():])
-        except ValueError:
-            continue
-        if isinstance(obj.get("homeTeam"), dict) and isinstance(obj.get("awayTeam"), dict):
-            games[gid] = obj
+        window_start = max(0, m.start() - 8000)
+        for i in range(m.start() - 1, window_start - 1, -1):
+            if text[i] != "{":
+                continue
+            try:
+                obj, _ = decoder.raw_decode(text[i:])
+            except ValueError:
+                continue
+            if str(obj.get("gameId")) == gid and isinstance(obj.get("homeTeam"), dict) \
+                    and isinstance(obj.get("awayTeam"), dict):
+                keep(obj)
+                break
     return games
 
 
@@ -689,7 +728,8 @@ def main():
             if len(rows) != 30:
                 failed.append((key, f"expected 30 team rows, parsed {len(rows)}"))
                 log(f"  SKIPPED: parsed {len(rows)} rows - keeping the existing snapshot")
-                needles = ["OffRtg", "<td", "stats/team/"]
+                needles = ["stats.nba.com", "/stats/api", "leaguedash",
+                           "graphql", "<td"]
                 if write_if_changed(
                         os.path.join(RAW, f"_capture_evidence_{key}.json"),
                         {"captured_at_utc": now, "source_url": url,
