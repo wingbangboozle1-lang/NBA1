@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive Summary · NBA1 Command Center</title>
+<meta name="description" content="The verdict, what changed this session, what is live and what is deliberately not claimed.">
+<link rel="stylesheet" href="assets/cc.css">
+<script src="assets/cc.js"></script>
+</head>
+<body>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="mark">N1</span><span>NBA<b>1</b><br><small style="font-weight:400;font-size:10.5px;letter-spacing:.08em;color:#7d8ea3">COMMAND CENTER</small></span></div>
+    <div class="grp">Overview</div>
+    <a href="index.html">Dashboard</a>
+    <a class="on" href="executive.html">Executive summary</a>
+    <div class="grp">The board</div>
+    <a href="slate.html">Slate &amp; lines</a>
+    <a href="picks.html">Picks</a>
+    <a href="strategy.html">Strategies &amp; leaderboard</a>
+    <a href="props.html">Player props</a>
+    <div class="grp">Evidence</div>
+    <a href="validation.html">Validation gates</a>
+    <a href="correlations.html">Correlations</a>
+    <a href="luck.html">Luck</a>
+    <a href="backtest.html">Game log</a>
+    <a href="injuries.html">Injuries</a>
+    <a href="gameflow.html">Game flow</a>
+    <div class="grp">Decision support</div>
+    <a href="questions.html">Questions &amp; answers</a>
+    <a href="suggestions.html">Suggestions</a>
+    <a href="flagged.html">Flagged for review</a>
+    <a href="repo-review.html">Repo review</a>
+    <a href="sources.html">Sources</a>
+    <div class="grp">Other builds</div>
+    <a href="../index.html">Build A · Edge Lab</a>
+    <a href="../docs/b/index.html">Build B · Origination Desk</a>
+    <div class="foot">Data cut<br><span class="mono" id="cut">—</span><br><br>Not betting advice. No market price is used anywhere in this build.</div>
+  </aside>
+  <div class="main">
+    <div class="top"><div><h1>Executive Summary</h1><div class="sub" id="sub">What happened, what changed, what is not claimed</div></div><span class="asof" id="asof">as of …</span></div>
+    <div class="wrap" id="body"><div class="empty">Loading…</div></div>
+    <footer class="bot">
+      <p><strong>NBA1</strong> — every figure above is regenerated from <span class="mono">data/*.json</span> on each build. Nothing in this summary is typed by hand.</p>
+      <p>Not affiliated with or endorsed by the National Basketball Association.</p>
+    </footer>
+  </div>
+</div>
+<script>
+(async () => {
+  try {
+    const [ex, meta, val, lb] = await Promise.all([
+      CC.load("executive.json"), fetch("data/meta.json").then(r=>r.json()),
+      fetch("data/validation.json").then(r=>r.json()), fetch("data/leaderboard.json").then(r=>r.json()),
+    ]);
+    document.getElementById("asof").textContent = "as of " + ex.as_of + " · cut " + ex.data_cut_et;
+    document.getElementById("sub").textContent = "Data cut " + ex.data_cut_et + " · " + meta.counts.upcoming_games + " upcoming games";
+
+    const changes = ex.what_changed_this_session.map(c => `
+      <details ${c.n <= 2 ? "open" : ""}>
+        <summary>${CC.esc(c.n)}. ${CC.esc(c.title)}</summary>
+        <div class="body">
+          <p>${CC.esc(c.detail)}</p>
+          <p class="small"><strong>Why it matters:</strong> ${CC.esc(c.reading)}</p>
+        </div>
+      </details>`).join("");
+
+    const live = ex.what_is_live_now.map(x => `<li>${CC.esc(x)}</li>`).join("");
+    const notLive = ex.not_live_and_not_claimed.map(x => `<li>${CC.esc(x)}</li>`).join("");
+    const acts = ex.recommended_next_actions.map(a =>
+      `<tr><td class="n">${a.rank}</td><td>${CC.esc(a.action)}</td><td class="small">${CC.esc(a.why)}</td></tr>`).join("");
+
+    const m = val.metrics;
+    CC.set("#body", `
+      <p class="lede">${CC.esc(ex.headline)}</p>
+
+      <div class="bn bad"><div class="ico">!</div><div>
+        <p><strong>Verdict: ${CC.esc(ex.verdict.status)}</strong></p>
+        <p>${CC.esc(ex.verdict.one_line)}</p>
+        <p class="small">${CC.esc(ex.verdict.why)}</p>
+      </div></div>
+
+      <div class="kpis">
+        ${CC.kpi("Margin MAE", m.mae_margin_model, "vs " + m.mae_margin_ref + " naive reference", m.mae_margin_model < m.mae_margin_ref ? "ok" : "bad")}
+        ${CC.kpi("Total MAE", m.mae_total_model, "vs " + m.mae_total_ref + " naive reference", m.mae_total_model < m.mae_total_ref ? "ok" : "bad")}
+        ${CC.kpi("Brier score", m.brier_model, "vs " + m.brier_ref + " reference (lower is better)", m.brier_model < m.brier_ref ? "ok" : "bad")}
+        ${CC.kpi("Out-of-sample games", m.n_games, "all after the ratings cut-off", "")}
+      </div>
+
+      <h2>What changed at this data cut</h2>
+      ${changes}
+
+      <h2>What is live on the site right now</h2>
+      <ul class="small" style="max-width:100ch">${live}</ul>
+
+      <h2>What is deliberately not claimed</h2>
+      <div class="bn warn"><div class="ico">•</div><div><ul class="small" style="margin:0">${notLive}</ul></div></div>
+
+      <h2>What a reviewer should decide next, in order</h2>
+      <div class="tw"><table>
+        <thead><tr><th class="n">#</th><th>Action</th><th>Why it is the next thing</th></tr></thead>
+        <tbody>${acts}</tbody>
+      </table></div>
+      <p class="tnote">These are sequenced by what unblocks the most, not by effort. Item 1 is the only
+      one that changes what any gate is measuring.</p>
+
+      <h2>Bottom line</h2>
+      <p>${CC.esc(ex.bottom_line)}</p>
+
+      <div class="bn info"><div class="ico">i</div><div>
+        <p><strong>Verification rule.</strong> ${CC.esc(ex.verification_rule)}</p>
+        <p class="small">The full audit trail is on <a href="repo-review.html">Repo review</a>; every
+        unresolved item is on <a href="flagged.html">Flagged for Review</a>.</p>
+      </div></div>
+    `);
+  } catch (e) { CC.fail("#body", e); }
+})();
+</script>
+</body>
+</html>

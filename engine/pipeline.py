@@ -401,8 +401,9 @@ def main():
                 inj_rows.append({
                     "date": c["date"], "matchup": c["matchup"], "game_id": c["game_id"],
                     "team": c[side], "side": side, "player": None,
-                    "status": "NOT YET SUBMITTED", "reason": "Team had not filed at the "
-                    "05:15 PM ET edition", "src": "S6",
+                    "status": "NOT YET SUBMITTED",
+                    "reason": "Team had not filed at the " + inj_raw["report"].split(", ")[-1],
+                    "src": "S6",
                 })
     write_json(os.path.join(OUT, "injuries.json"), {
         "rows": inj_rows, "src": "S6",
