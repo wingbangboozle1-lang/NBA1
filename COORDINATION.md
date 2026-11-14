@@ -60,6 +60,29 @@ file is owned by session `arena-7cfd203a` and was not edited.
 
 ---
 
+## 0b. Session registry
+
+| Session ID | Branch | Registered (UTC) | Status |
+| --- | --- | --- | --- |
+| `arena-7cfd203a` | `arena/7cfd203a-nba1` | 2026-11-13 | Build A, merged (PRs #10/#12/#13/#15/#17). PR #14 left open (conflicting). |
+| `arena/91270bb6-nba1` | `arena/91270bb6-nba1` | 2026-11-13 | Build B, merged (PRs #16/#18). |
+| `arena/c7fbc064-nba1` | `arena/c7fbc064-nba1` | 2026-11-14 (logged retroactively by `arena-0de855e5`) | Third build, PR #11 OPEN — conflicting with `main`; see V01. |
+| `arena-0de855e5` | `arena/0de855e5-nba1` | 2026-11-14 | Integration follow-up session (current). Branch note: platform pins this session to `arena/0de855e5-nba1`; it may not create, switch to, or push to other branches, so session-`<id>`/`<task>` branch naming is satisfied by this single pre-named branch. |
+
+---
+
+## 0c. Task board — integration follow-up (`arena-0de855e5`)
+
+| # | Task | Status | File scope | Notes |
+| --- | --- | --- | --- | --- |
+| V01 | Triage open PRs #11 and #14; log disposition | in progress | `COORDINATION.md` | Neither may be merged from this session: platform forbids pushing to other sessions' branches, and both are CONFLICTING. Content preserved, not discarded; see §4b. |
+| V02 | Execute cross-session request R1 (nav link from root dashboard to `docs/b/index.html`) | unclaimed | `index.html` (root, Build A-owned — integration session authorised by R1) | |
+| V03 | Fresh official slate capture for the current 3-day window (2026-11-14 → 2026-11-17) from nba.com | unclaimed | `data/slate_2026_11_14.json`, `slate.html` | Official NBA.com schedule page, captured live. |
+| V04 | Full-tree verification re-run (all verify scripts, link checks, JSON validity, live-site smoke test) | unclaimed | verification outputs in `COORDINATION.md` | |
+| V05 | Final integration PR → `main`, merge, confirm Pages deploy, record publish result | unclaimed | PR from `arena/0de855e5-nba1` | Flagged/unverified items do not block the merge. |
+
+---
+
 ## 0. Ground rules
 
 1. A task is `unclaimed`, `in progress`, `done`, or `needs review`.
