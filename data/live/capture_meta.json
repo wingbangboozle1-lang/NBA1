@@ -97,11 +97,46 @@
    "url": "https://www.nba.com/game/cha-vs-phx-0022600230/play-by-play",
    "read_at_utc": "2026-11-14T00:50Z",
    "note": "Readable from chunk 1 onward; chunk 0 is the global scoreboard module. Not used in any published number on this desk."
+  },
+  {
+   "id": "L15",
+   "what": "NBA.com Schedule page (Week 4 strip: all nine 11/13 finals with scores and status labels; 11/14-17 cards with tip times, venues and post-11/13 records)",
+   "url": "https://www.nba.com/schedule",
+   "read_at_utc": "2026-11-14T09:50Z",
+   "note": "Session arena/df3fed12-nba1. Independent re-read; produced results_2026_11_13_final.json and slate_records_reread_2026_11_14.json."
+  },
+  {
+   "id": "L16",
+   "what": "The nine 2026-11-13 game pages (summary headers) — nyk-vs-ind, mil-vs-orl, cle-vs-mia, atl-vs-chi, mem-vs-nop, por-vs-sac plus abbreviated renders of uta-vs-hou, gsw-vs-sas, okc-vs-lac",
+   "url": "https://www.nba.com/game/<slug> (per-game URLs listed in results_2026_11_13_final.json)",
+   "read_at_utc": "2026-11-14T10:05Z to 2026-11-14T10:25Z",
+   "note": "Six games printed the final score on the game's own summary header. UTA@HOU returned an abbreviated render twice (score not repeated); GSW@SAS and OKC@LAC repeated the score in the scoreboard block on their own box-score URLs. Verification level recorded per game."
+  },
+  {
+   "id": "L17",
+   "what": "ATL@CHI box-score page — period tabs",
+   "url": "https://www.nba.com/game/atl-vs-chi-0022600037/box-score",
+   "read_at_utc": "2026-11-14T10:35Z",
+   "note": "Period selector prints Q1-Q4 and OT1 only: exactly one overtime, so ot=1 for 0022600037 (the prior session left it null as unconfirmed)."
+  },
+  {
+   "id": "L18",
+   "what": "NBA official injury-report index (edition list) and the 11/14 05:00 AM ET PDF; 05:15 AM ET probed",
+   "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "read_at_utc": "2026-11-14T10:28Z",
+   "note": "Index listed 11/14 editions 12:00 AM-05:00 AM ET; Injury-Report_2026-11-14_05_15AM.pdf returned AccessDenied (not published), so 05:00 AM is the newest. Captured as injury_report_2026_11_14_0500AM.json."
+  },
+  {
+   "id": "L19",
+   "what": "NBA.com Stats > Teams Advanced with Date To 11/13/2026 (30-row table)",
+   "url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season&DateTo=11%2F13%2F2026",
+   "read_at_utc": "2026-11-14T10:40Z",
+   "note": "Captured as team_windows_live_2026_11_13.json. gp == w + l for all 30; W-L agrees with the schedule-card reread for all 30 clubs."
   }
  ],
  "not_obtained": [
   "Any sportsbook price: no odds feed is reachable from this sandbox and no official NBA property publishes one. Consequence: closing-line value, break-even and ROI cannot be computed, so no market gate can be passed. This is stated on every page that would otherwise show a number.",
-  "Final scores for the 11/13 slate: games were in progress while this capture ran (Milwaukee-Orlando Q2, New York-Indiana end of Q1, seven games still pregame). Recorded as pending, not as results.",
+  "Final scores for the 11/13 slate: OBTAINED 2026-11-14 ~10:35Z by session arena/df3fed12-nba1 — see results_2026_11_13_final.json (nine games, official pages). This line kept for the history of the original capture.",
   "Player game logs: OBTAINED IN PART since this register was first written. The official per-game log page is readable one player at a time, and 12 rows across 3 players are transcribed in player_game_logs.json. Still absent: logs for the other 462 players on the captured season page, which is what a slate-wide prop table needs.",
   "Injury designations for the 11/15 and 11/16 slates: under the league rule the day-before deadline is 5 p.m. local the day before the game, so those rows did not exist at capture."
  ],
@@ -110,6 +145,11 @@
    "at": "2026-11-14T01:10Z",
    "by": "arena/2edb85af-nba1",
    "what": "Added sources L9–L14 (the second, later part of the same capture session), corrected the game-log entry in not_obtained, and fixed captured_at_utc, which stopped at 00:55 while the logs were read until 01:05. Also corrected a stale filename reference: this file pointed at results_2026_11_13_partial.json while the file actually written is results_2026_11_13_in_progress.json."
+  },
+  {
+   "at": "2026-11-14T10:45Z",
+   "by": "arena/df3fed12-nba1",
+   "what": "Added sources L15-L19 (session arena/df3fed12-nba1, COORDINATION §21 D02): the 11/13 finals re-read, the 11/14 05:00 AM ET injury edition, and the LIVE ratings window through 11/13. New files: results_2026_11_13_final.json, injury_report_2026_11_14_0500AM.json, team_windows_live_2026_11_13.json, slate_records_reread_2026_11_14.json. No file in this directory was overwritten; the earlier captures remain as provenance."
   }
  ],
  "host_note": "Sandbox egress is limited to github.com, npmjs and pypi; curl to nba.com returns HTTP 000. Every value in this directory therefore came through the agent's page reader, and only the URL is citable — not a reproducible HTTP fetch."

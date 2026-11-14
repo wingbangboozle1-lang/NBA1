@@ -30,15 +30,7 @@ FINDINGS = [
                  "probability on lines.html too confident. Tested, that turns out to be the "
                  "wrong diagnosis — and the real defect underneath it is worse for the site's "
                  "credibility than a mis-set constant.",
-         action="Measured on the same 51 finals (integration/out/transform_test.json): at σ=11 "
-                "the logistic link scores Brier 0.1943 and a normal link 0.1884, while the "
-                "measured error σ of 17.4 scores 0.1937 — so σ=11 is close to optimal and the "
-                "*link function* is what costs accuracy. What does not survive measurement is "
-                "the home-advantage assumption: every variant puts mean P(home) between 0.512 "
-                "and 0.566 while home teams actually won 25 of 51 (0.4902). The typed constant "
-                "is still a defect — it should be fitted or swept, not hardcoded — but the bias "
-                "to fix first is +2.5 points of home court on a window where home teams won less "
-                "than half.",
+         action="MEASURED_IN_BUILD",  # replaced in build() from integration/out/transform_test.json
          verify_url="https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season&DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026"),
     dict(file="scripts/build_edge_site.py:380", url=L("scripts/build_edge_site.py", 380),
          severity="MEDIUM",
@@ -73,9 +65,10 @@ FINDINGS = [
                  "model. This is not hypothetical here: `scripts/build_site.py:369` records that "
                  "an earlier version of this same pipeline 'guessed a dispersion figure and "
                  "produced 99.9% win probabilities and 30-point spreads'.",
-         action="Do not extend that path. Dispersion on the desk is now measured from the 51 "
-                "official finals for teams and from 12 logged player-games for props, each "
-                "published with an interval and a sample size.",
+         action="Do not extend that path. Dispersion on the desk is now measured from the "
+                "official finals in the graded window (60 games, 2026-11-06 .. 2026-11-13) "
+                "for teams and from 12 logged player-games for props, each published with an "
+                "interval and a sample size.",
          verify_url="https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame"),
     dict(file="engine/model_core.py:30-56", url=L("engine/model_core.py", 44),
          severity="MEDIUM",
@@ -152,8 +145,9 @@ FINDINGS = [
          finding="The repo-wide gate checks that a page saying “N out-of-sample” agrees with "
                  "docs/data/meta.json. It is the right idea, and it also means prose in this "
                  "repository is only free to state that count once.",
-         action="The desk obeys it: every out-of-sample reference on these pages is 51, which is "
-                "what both the graded table and the meta count say.",
+         action="The desk obeys it: every out-of-sample reference on these pages is 60 "
+                "(2026-11-06 .. 2026-11-13), which is what the graded table says after the "
+                "11/13 finals were captured and appended by this session.",
          verify_url="https://www.nba.com/stats/help/glossary"),
     dict(file="docs/data/validation.json → fit.total_bias", url=L("docs/data/validation.json"),
          severity="LOW",
@@ -173,8 +167,11 @@ IRREGULARITIES = [
               "in progress.",
          why_it_matters="Any feature that reads 'record' off a slate page is a day behind at "
                         "tip-off and correct by the next morning.",
-         state="Documented per row in the capture; records are displayed as copied and never used "
-               "as a model input.",
+         state="CLOSED for the desk on 2026-11-14: slate_records_reread_2026_11_14.json "
+               "re-read every card after the finals (30/30 clubs match the DateTo=11/13 stats "
+               "table) and the rows now display the reread values with their read time. Records "
+               "remain display-only, never a model input. The original 00:37Z capture keeps its "
+               "own values as provenance.",
          verify_url="https://www.nba.com/games?date=2026-11-14"),
     dict(id="IR-02", url=L("data/live/player_game_logs.json"),
          what="Minnesota's slate card lists Anthony Edwards as OUT for 11/14 while the same card's "
@@ -191,8 +188,10 @@ IRREGULARITIES = [
               "how the same W-L is displayed.",
          why_it_matters="A 'team windows' snapshot taken mid-Cup-window is not the same object as "
                         "one taken after it, which is precisely where a naive refit goes wrong.",
-         state="The LIVE window is treated as a clean pre-11/13 snapshot and the Cup exclusion is "
-               "recorded in team_windows.json.",
+         state="Both readings kept: team_windows.json remains the clean pre-11/13 snapshot "
+               "(Cup exclusion recorded there), and team_windows_live_2026_11_13.json is the "
+               "refreshed window with DateTo=11/13, captured after every Cup game finished — "
+               "the live lines are priced from the refreshed window, the backtest never is.",
          verify_url="https://www.nba.com/games?date=2026-11-13"),
     dict(id="IR-04", url=L("data/live/slate_2026_11_14_to_16.json"),
          what="Game IDs are not contiguous across the schedule: the Cup block runs 0022600034–42 "
@@ -208,7 +207,9 @@ IRREGULARITIES = [
          why_it_matters="That is how an absence ends up charged to the wrong club, which moves a "
                         "line in the wrong direction with total confidence.",
          state="Rows carry printed_team=false and are excluded from the impact model; they are "
-               "still listed so the exclusion is visible.",
+               "still listed so the exclusion is visible. The 11/14 05:00 AM edition (the "
+               "newest at capture) drops the team cell on 1 of 27 player rows (Traore) — same "
+               "rule applied, same exclusion.",
          verify_url="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"),
     dict(id="IR-06", url=L("data/live/injury_report_2026_11_14.json"),
          what="Giannis Antetokounmpo is printed 'Available' with a right wrist sprain while also "
@@ -248,16 +249,17 @@ QUESTIONS = [
          verify_url="https://www.nba.com/player/203999/nikola-joki-c/game-log"),
     dict(id="Q-04", url=L("data/live/results_2026_11_13_in_progress.json"),
          question="Who runs the settlement re-fetch, and at what time?",
-         known="The 11/13 games were in flight at capture; the last tip was 02:30 UTC, so any "
-               "grading before ~03:40 UTC would grade a live score.",
-         missing="A scheduled job (or a person) that re-reads the date page after the final "
-                 "buzzer and writes FINAL rows only.",
-         decision_it_unblocks="Whether the ledger grows daily or stays at 51 games forever.",
+         known="Partly answered 2026-11-14: session arena/df3fed12-nba1 re-read the date page "
+               "after the finals, wrote results_2026_11_13_final.json (two-source), and the "
+               "ledger now grades 60 games instead of 51.",
+         missing="A scheduled job that does this unattended — today it is still a manual pass, "
+                 "and the next date will need the same treatment.",
+         decision_it_unblocks="Whether the ledger grows daily on its own or one session at a time.",
          verify_url="https://www.nba.com/games?date=2026-11-13"),
     dict(id="Q-05", url=L("index.html"),
          question="Which of the three published sites is the product?",
          known="Build A at the root, Build B under docs/b/, and dated snapshots under docs/. They "
-               "disagree on samples (14 vs 23 vs 51 games) and on which gates exist.",
+               "disagree on samples (14 vs 23 vs 60 games) and on which gates exist.",
          missing="A decision to merge them under one nav, or to declare one canonical and freeze "
                  "the others.",
          decision_it_unblocks="Where a reviewer looks first, and which register a new strategy has "
@@ -377,29 +379,58 @@ BLANKS = [
          why="the slate capture has no venue column",
          appears="selection rule R4, which is therefore inert",
          verify_url="https://www.nba.com/games?date=2026-11-14"),
-    dict(item="11/13 final scores",
-         why="every card was in progress or untipped at capture; non-FINAL rows are unusable",
-         appears="settlement ledger, 'refused' table",
-         verify_url="https://www.nba.com/games?date=2026-11-13"),
-    dict(item="Injury rows for 11/15 and 11/16",
-         why="the league has not filed them yet — the report for a date is published the evening "
-              "before",
-         appears="nine provisional lines",
+    dict(item="Filed injury rows for 11/15 and anything for 11/16",
+         why="the 11/14 05:00 AM edition carries rows for 11/15 but every club prints NOT YET "
+             "SUBMITTED (the day-before deadline is 5 p.m. local on 11/14), and no 11/16 rows "
+             "exist yet at all",
+         appears="provisional lines for 11/15 and 11/16",
          verify_url="https://official.nba.com/nba-injury-report-2026-27-season/"),
 ]
 
 
+def _finding0_action():
+    """Rebuild finding #1's action from the current transform_test.json — never typed prose."""
+    try:
+        with open(os.path.join(ROOT, "integration", "out", "transform_test.json"),
+                  encoding="utf-8") as fh:
+            tt = json.load(fh)
+    except (OSError, ValueError):
+        return ("Measured in integration/out/transform_test.json (re-run "
+                "python3 integration/transform.py to refresh this row).")
+    res = tt.get("results", {})
+    n = tt.get("n_graded", "?")
+    lg = res.get("logistic_sigma_11", {}).get("brier")
+    nm = res.get("normal_sigma_11", {}).get("brier")
+    best = tt.get("best_by_brier", {})
+    rate = tt.get("home_win_rate_actual")
+    hw = round(rate * n) if isinstance(rate, float) and isinstance(n, int) else "?"
+    above = tt.get("variants_with_mean_p_home_above_actual", "?")
+    tot = tt.get("variants_total", "?")
+    return (f"Measured on the same {n} finals (integration/out/transform_test.json): at σ=11 "
+            f"the logistic link scores Brier {lg} and a normal link {nm}; the best in the "
+            f"table is {best.get('name')} at {best.get('brier')}. What does not survive "
+            f"measurement is the home-advantage assumption: home teams actually won {hw} of "
+            f"{n} ({rate}) while mean P(home) sits above that in {above} of {tot} variants. "
+            "The typed constant is still a defect — it should be fitted or swept, not "
+            "hardcoded — and the +2.5 points of home court is the term to re-examine first.")
+
+
 def build():
+    findings = [dict(f) for f in FINDINGS]
+    findings[0]["action"] = _finding0_action()
     out = {
         "title": "Repo review + questions and suggestions, integration desk session",
-        "session": "arena/2edb85af-nba1",
-        "base": "main @ 2f44c98, rebased onto main @ 981a5cf",
+        "session": "arena/2edb85af-nba1 (original read); rows updated by arena/df3fed12-nba1 "
+                   "on 2026-11-14 (settlement refresh, COORDINATION §21)",
+        "base": "main @ 2f44c98, rebased onto main @ 981a5cf; revalidated against the "
+                "2026-11-14 captures",
         "read_at_utc": load("data", "live", "capture_meta.json")["captured_at_utc"],
+        "revalidated_at_utc": "2026-11-14T10:45Z (register amendment L15–L19)",
         "method": "Every file under scripts/, engine/ and the two site roots was read; data files "
                   "were opened, counted and compared against the official captures in data/live/. "
                   "Line numbers refer to this branch. A finding is only recorded when the file "
                   "itself or a run of it establishes it.",
-        "findings": FINDINGS,
+        "findings": findings,
         "irregularities": IRREGULARITIES,
         "questions": QUESTIONS,
         "suggestions": SUGGESTIONS,
@@ -460,19 +491,24 @@ def write_md(out):
            "[11-16](https://www.nba.com/games?date=2026-11-16) · "
            "[11-13](https://www.nba.com/games?date=2026-11-13) — the schedule and record basis.",
            "- [Official injury report index](https://official.nba.com/nba-injury-report-2026-27-season/) "
-           "and the [11/13 7:30 PM PDF](https://ak-static.cms.nba.com/referee/injury/"
-           "Injury-Report_2026-11-13_07_30PM.pdf) used by the availability layer.",
+           "and the [11/14 05:00 AM PDF](https://ak-static.cms.nba.com/referee/injury/"
+           "Injury-Report_2026-11-14_05_00AM.pdf) used by the availability layer (the "
+           "[11/13 7:30 PM edition](https://ak-static.cms.nba.com/referee/injury/"
+           "Injury-Report_2026-11-13_07_30PM.pdf) is kept as provenance).",
            "- [Team advanced stats, 10/20–11/05 window](https://www.nba.com/stats/teams/advanced?"
            "Season=2026-27&SeasonType=Regular+Season&DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026) "
            "— the ratings behind every graded prediction.",
-           "- [Team advanced stats, whole season to date](https://www.nba.com/stats/teams/advanced?"
-           "Season=2026-27&SeasonType=Regular+Season) — the window behind the live lines.",
+           "- [Team advanced stats, Date To 11/13/2026](https://www.nba.com/stats/teams/advanced?"
+           "Season=2026-27&SeasonType=Regular+Season&DateTo=11%2F13%2F2026) — the window "
+           "behind the live lines.",
            "- [Jokić game log](https://www.nba.com/player/203999/nikola-joki-c/game-log) · "
            "[LaMelo Ball game log](https://www.nba.com/player/1630163/lamelo-ball/game-log) — the "
            "dispersion rows.",
            "- [11/12 slate](https://www.nba.com/games?date=2026-11-12) and "
            "[CHA@PHX box score](https://www.nba.com/game/cha-vs-phx-0022600230/box-score) — proof "
-           "the graded finals are the official ones.",
+           "the first 51 graded finals are the official ones; the 9 games of "
+           "[11/13](https://www.nba.com/games?date=2026-11-13) were captured two-source into "
+           "data/live/results_2026_11_13_final.json (per-game links inside that file).",
            ""]
     # Written under integration/ on purpose: REPO_REVIEW.md at the repository root belongs to
     # another session's review, and a generator that overwrites a file it does not own is how a

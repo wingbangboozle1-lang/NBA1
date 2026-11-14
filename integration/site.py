@@ -154,6 +154,10 @@ commands in that order reproduces every number on these pages.</p></footer>
 def page_desk(D, stamp):
     g, st, pk, ln = D["gates"], D["settle"], D["picks"], D["lines"]
     lb, meta = D["leaderboard"], D["meta"]
+    pr = D["props"]
+    v8 = next(x for x in g["gates"] if x["id"] == "V8")
+    gw = st["graded_window"]
+    tiers = pk["slate"]["tiers"]
     diag = ln["diagnostics"]
     kpis = "".join([
         metric("Games priced for the next three days", f"{pk['slate']['games_priced']}",
@@ -161,7 +165,7 @@ def page_desk(D, stamp):
         metric("Games that pass every selection rule", f"{pk['slate']['tiers']['SELECTED']}",
                "the rule is the constraint, not the model"),
         metric("Out-of-sample games graded", f"{st['graded_window']['games']}",
-               "2026-11-06 … 11-12 official finals, ratings frozen at 11/05"),
+               f"{gw['from']} … {gw['to']} official finals, ratings frozen at 11/05"),
         metric("MAE on the margin", f"{st['error_statistics']['mae_margin']} pts",
                f"95% CI {st['error_statistics']['mae_margin_ci_95'][0]}–"
                f"{st['error_statistics']['mae_margin_ci_95'][1]} · a constant pick is "
@@ -189,19 +193,22 @@ def page_desk(D, stamp):
          f"point, inside a ±{round((g['bootstrap_mae_margin_95'][1]-g['bootstrap_mae_margin_95'][0])/2,1)} "
          f"interval. This is reported as the finding, not smoothed over."),
         ("The binding constraint on picks is the injury report, not the ratings.",
-         "On 11/14 exactly one side of each of the five games had filed. An adjustment built from "
-         "one team's absences and the other team's silence is a bias, so those five games are "
-         "priced and then refused. Nine later games are published as provisional lines, and eight "
-         "more sit inside the model's own noise."),
+         f"Where one side had filed and the other had not, an adjustment built from one team's "
+         f"absences and the other team's silence is a bias — those games are priced and then "
+         f"refused ({tiers['REJECTED-DATA']} today). Dates where nobody has filed yet are "
+         f"published as provisional lines ({tiers['PROVISIONAL']}), and "
+         f"{tiers['LEAN-ONLY']} more sit inside the model's own noise."),
         ("Rotation impact cannot be sized yet, and that is now a measured gap.",
-         "One of the 26 listed absences has verified season minutes anywhere in this repository. "
-         "Vacated minutes are deducted from the named player and deliberately not re-spread to "
-         "teammates, because the data to do that fairly (page 2 onward of the player tables) was "
-         "never captured."),
+         f"{v8.get('rows_with_minutes', '?')} of the {v8.get('rows_total', '?')} listed "
+         f"absences in the newest edition ({v8.get('edition', 'n/a')}) have verified season "
+         "minutes anywhere in this repository. Vacated minutes are deducted from the named "
+         "player and deliberately not re-spread to teammates, because the data to do that "
+         "fairly (page 2 onward of the player tables) was never captured."),
         ("Dispersion stopped being an assumption.",
-         "Player-prop σ used to be a constant in this repo, which is how ±30-point spreads appeared "
-         "in an earlier draft. Twelve official game-log rows now give a measured spread for three "
-         "players, published with its interval and flagged as far too small to stake."),
+         "Player-prop σ used to be a constant in this repo, which is how ±30-point spreads "
+         f"appeared in an earlier draft. {pr['sample']['player_games']} official game-log rows "
+         f"now give a measured spread for {len(pr['sample']['players'])} players, published "
+         "with its interval and flagged as far too small to stake."),
         ("Nothing here is a bet.",
          "No sportsbook price is reachable from the sandbox that produced these files, so break-even, "
          "hold, ROI and closing-line value are blank on every row and will stay blank until a price "
@@ -236,7 +243,6 @@ def page_desk(D, stamp):
                        "and Build B (<a href=\"docs/b/index.html\">docs/b/index.html</a>). Each anchor "
                        "is the official page that page's data came from.")
 
-    tiers = pk["slate"]["tiers"]
     tier_anchor = {"SELECTED": SRC["L1"], "PROVISIONAL": SRC["L2"],
                    "LEAN-ONLY": SRC["L3"], "REJECTED-DATA": SRC["L5"]}
     tier_rows = [[f'<a href="{esc(tier_anchor[k])}" target="_blank" rel="noopener">{esc(k)}</a>', v, {
@@ -266,6 +272,8 @@ def page_desk(D, stamp):
 
 def page_lines(D, stamp):
     pk, ln = D["picks"], D["lines"]
+    tiers = pk["slate"]["tiers"]
+    inj = D.get("injury") or {}
     rows = []
     for r in pk["rows"]:
         gf = r["game_flow"]
@@ -286,8 +294,9 @@ def page_lines(D, stamp):
          "|margin|", "Tier", "Why this tier", "Venue (from the independent capture)"], rows,
         note="Spread and total are OUR numbers, not market prices. P(home win) is a normal-CDF "
              "read of the projected margin over the measured out-of-sample σ, so it is a "
-             "calibration statement, not a price. Records are copied as displayed and lag one "
-             "league day because the 11/13 games were unfinished at capture (IR-05).")
+             "calibration statement, not a price. Records are copied from the schedule card "
+             "as re-read after the 11/13 finals (read time on each row in picks.json; "
+             "IR-05 closed for this desk).")
 
     flow_rows = []
     for r in pk["rows"]:
@@ -348,17 +357,22 @@ def page_lines(D, stamp):
                     "Min/gp", "GP", "Team GP", "Minute share", "Classification", "Moves the line"],
                    av_rows or [["—", "—", "—", "no rows printed with every field for the priced dates",
                                 "—", "—", "—", "—", "—", "—"]],
-                   note="Rows come from the 11/13 7:30 PM PDF, the only edition that carries 11/14 "
-                        "designations. A player with no verified season-minutes row is classified "
-                        "SEASON DATA NOT CAPTURED and contributes 0.0 — that is a hole in our data, "
-                        "not a judgement that the absence does not matter.")
+                   note=f"Rows come from the newest official edition at build time "
+                        f"({inj.get('report_stamp', 'n/a')} — "
+                        f"{inj.get('source_url', '')}). A player with no verified "
+                        "season-minutes row is classified SEASON DATA NOT CAPTURED and "
+                        "contributes 0.0 — that is a hole in our data, not a judgement that "
+                        "the absence does not matter.")
 
     body = (
-        notice("warn", "Zero games pass every rule on this slate.",
-               "Five games are refused because one side had filed an injury report and the other "
-               "had not; nine are provisional because no report exists yet for their date; eight "
-               "are inside the model's own noise. The lines below are still the lines we would "
-               "post, and they are the number a refreshed report has to move.")
+        notice("warn",
+               f"{tiers['SELECTED']} games pass every rule on this slate."
+               if tiers["SELECTED"] else "Zero games pass every rule on this slate.",
+               f"{tiers['REJECTED-DATA']} are refused (an injury-report input is missing or "
+               f"asymmetric), {tiers['PROVISIONAL']} are provisional (availability for their "
+               f"date is not filed yet), and {tiers['LEAN-ONLY']} sit inside the model's own "
+               "noise. The lines below are still the lines we would post, and they are the "
+               "number a refreshed report has to move.")
         + card("Originated lines and tiers",
                f"{len(pk['rows'])} games across {', '.join(pk['slate']['dates'])}. "
                f"Rule: {esc(pk['rule']['criteria'][1])}, σ from the graded window.", lines_tbl)
@@ -379,7 +393,8 @@ def page_validation(D, stamp):
                 "MARGINAL": "review"}
     src = {x["id"]: x["url"] for x in D["meta"]["sources"]}
     trad_url = D["trad"]["source_url"]
-    ADV_FIT, ADV_LIVE = D["windows"]["window_fit"]["source_url"], src["L4"]
+    ADV_FIT = D["windows"]["window_fit"]["source_url"]
+    ADV_LIVE = D["windows"]["window_live"]["source_url"]
     GATE_URL = {"V1": ADV_FIT, "V2": "https://www.nba.com/games?date=2026-11-06",
                 "V3": ADV_FIT, "V4": src["L13"], "V5": "https://www.nba.com/games?date=2026-11-09",
                 "V6": "https://www.nba.com/games?date=2026-11-07", "V7": "https://www.nba.com/",
@@ -403,9 +418,11 @@ def page_validation(D, stamp):
                  for x in g["gates"]]
     gates_tbl = table(["Gate", "Requirement", "Threshold", "Measured", "Status", "Reading",
                        "Missing input that would resolve it", "Official source"], gate_rows,
-                      note="A BLANK is not a soft pass: it means the input does not exist in the "
-                           "environment that produced this. Three gates are blank, all three for "
-                           "the same reason (no price file, no full player tables).")
+                      note=f"A BLANK is not a soft pass: it means the input does not exist in "
+                           f"the environment that produced this. {g['summary']['blank']} gates "
+                           f"are blank ({', '.join(g['summary'].get('blank_ids', []))}) — for "
+                           "no price file, no full player tables, and no injury-report history "
+                           "over the graded window.")
 
     abl_rows = []
     for k, a in g["ablations"].items():
@@ -434,7 +451,9 @@ def page_validation(D, stamp):
     set_tbl = table(["Date", "Matchup", "Official final", "Model margin", "Actual margin",
                      "|err|", "Model total", "Actual total", "|err|", "Model side"], set_rows,
                     note=f"All {len(set_rows)} rows are official FINAL scores transcribed to "
-                         f"<code>data/raw/games_completed.json</code>; the model's inputs come from the "
+                         f"<code>data/raw/games_completed.json</code> (11/06–11/12) or captured "
+                         f"two-source into <code>data/live/results_2026_11_13_final.json</code> "
+                         f"(11/13); the model's inputs come from the "
                          f"10/20–11/05 window, which ends the day before the first graded game. "
                          f"Aggregate: MAE margin {st['error_statistics']['mae_margin']}, "
                          f"MAE total {st['error_statistics']['mae_total']}, "
@@ -482,7 +501,7 @@ def page_validation(D, stamp):
                   D["props"]["sample"]["official_sources"][0]]
     dis_rows = [[esc(d["topic"]),
                  f'<a href="{esc(dis_anchor[i])}" target="_blank" rel="noopener">'
-                 f'{"the 51 graded finals" if i == 0 else "the game-log rows"}</a>',
+                 f'{("the %d graded finals" % st["graded_count"]) if i == 0 else "the game-log rows"}</a>',
                  "<br>".join(f"{k}: {v}" for k, v in d["values"].items()), esc(d["resolution"])]
                 for i, d in enumerate(lb["registers_disagree"])]
     dis_tbl = table(["Registers disagree on", "Anchor", "Values", "How this desk resolved it"], dis_rows)
@@ -496,13 +515,16 @@ def page_validation(D, stamp):
         best = tt["best_by_brier"]
         tr_tbl = table(["Link and σ applied to the same projected margins", "Brier", "Log loss",
                         "Mean P(home)"], tr_rows,
-                       note=f"Home teams actually won 25 of these 51 games (0.4902), and every "
-                            f"variant's mean P(home) sits above that — the home-court assumption, "
-                            f"not the link function, is the systematic error. Best Brier here is "
-                            f"<b>{esc(best['name'])}</b> at {best['brier']}, against 0.25 for a flat "
-                            f"coin. Picking the winner of this table would be in-sample selection "
-                            f"on 51 games, so it is printed as a correction to an assertion and not "
-                            f"adopted as a parameter. {esc(tt['caveat'])}")
+                       note=f"Home teams actually won {round(tt['home_win_rate_actual'] * tt['n_graded'])} "
+                            f"of these {tt['n_graded']} games ({tt['home_win_rate_actual']}), and "
+                            f"{tt.get('variants_with_mean_p_home_above_actual', '?')} of "
+                            f"{tt.get('variants_total', '?')} variants put mean P(home) above "
+                            "that — the home-court assumption, not the link function, is the "
+                            f"systematic error. Best Brier here is <b>{esc(best['name'])}</b> "
+                            f"at {best['brier']}, against 0.25 for a flat coin. Picking the "
+                            f"winner of this table would be in-sample selection on "
+                            f"{tt['n_graded']} games, so it is printed as a correction to an "
+                            f"assertion and not adopted as a parameter. {esc(tt['caveat'])}")
     else:
         tr_tbl = ""
 
@@ -513,7 +535,7 @@ def page_validation(D, stamp):
           f'{metric("Gates failed", g["summary"]["fail"], "reported as failures")}'
           f'{metric("Gates blank", g["summary"]["blank"], "input does not exist here")}'
           f'{metric("Graded games", st["graded_count"], "official finals only")}'
-          f'{metric("Cannot be graded", st["cannot_settle_count"], "in progress or not tipped")}'
+          f'{metric("Cannot be graded", st["cannot_settle_count"], "scheduled — not tipped yet")}'
           f'{metric("Model record vs its own line", st["side"]["record"], "≈50% by construction")}</div>'
         + card("Validation gates", "Every gate, its threshold, and what it measured.", gates_tbl)
         + card("Ablations", "Does each adjustment earn its place? One knob at a time.", abl_tbl)
@@ -632,6 +654,15 @@ def page_props(D, stamp):
     return body
 
 
+def _span(meta):
+    """First → last read time in the register (string-safe: all stamps are ISO-prefixed)."""
+    ts = [str(s.get("read_at_utc") or "")[:16] for s in meta.get("sources", [])
+          if s.get("read_at_utc")]
+    if not ts:
+        return str(meta.get("captured_at_utc"))
+    return f"{min(ts)} → {max(ts)}"
+
+
 def page_capture(D, stamp):
     meta, lines, ln = D["meta"], D["lines"], D["lines"]
     rev = D["review"]
@@ -645,7 +676,7 @@ def page_capture(D, stamp):
             esc(s.get("note") or s.get("url_verification") or "—"),
         ])
     src_tbl = table(["#", "Host", "What was read", "Read at (UTC)", "Note carried with it"], src_rows,
-                    note=f"Capture window {esc(meta['captured_at_utc'])}. Only NBA-operated hosts "
+                    note=f"Capture window {_span(meta)}. Only NBA-operated hosts "
                          f"were used for data: {', '.join(meta['allowed_official_hosts'])}. "
                          f"{esc(meta['method'])}")
 
@@ -753,8 +784,9 @@ def page_capture(D, stamp):
         card("Cross-capture reproducibility",
              "This session's slate read against Build C's, game by game.", cc_tbl)
         + notice("ok", "Every capture is a real fetch with a timestamp.",
-               "Eight reads, all of an NBA-operated host, each recorded with the time it was read "
-               "and what it was used for. Where a page was chunked, the chunks read are named.")
+               f"{len(meta['sources'])} reads, all of an NBA-operated host, each recorded "
+               "with the time it was read and what it was used for. Where a page was chunked, "
+               "the chunks read are named.")
         + card("Capture register", "What was read, when, and what it fed.", src_tbl)
         + card("Point-in-time team windows", "The two windows the model is allowed to look at.", win_tbl)
         + card("Holes in the data", "Blank on every other page, listed here once.", gap_tbl)
@@ -785,6 +817,18 @@ def main():
         D["transform"] = J("integration", "out", "transform_test.json")
     except FileNotFoundError:
         D["transform"] = None
+    # newest official inputs: LIVE window refresh + the newest injury edition (never overwrite)
+    try:
+        D["windows"] = dict(D["windows"])
+        D["windows"]["window_live"] = J("data", "live",
+                                        "team_windows_live_2026_11_13.json")["window_live"]
+    except (FileNotFoundError, KeyError):
+        pass
+    try:
+        import model as _M
+        D["injury"], _ = _M.load_injury()
+    except Exception:
+        D["injury"] = J("data", "live", "injury_report_2026_11_14.json")
     stamp = f"desk capture {D['meta']['captured_at_utc']}"
     made = []
     for fname, title, sub, fn, tag in [

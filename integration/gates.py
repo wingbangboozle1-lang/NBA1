@@ -6,7 +6,7 @@ from reachable data — it is never a soft FAIL and never a soft PASS, and it al
 missing input that would resolve it.
 
 The ablation block is the part that answers "is this skill or luck?": every adjustment the
-model makes is switched off one at a time and the same 51 games are re-graded. An adjustment
+model makes is switched off one at a time and the same graded games are re-graded. An adjustment
 that does not survive its own ablation is disclosed as unproven rather than kept because it
 "should" help.
 """
@@ -59,7 +59,7 @@ def main():
     rows = lines["backtest"]
     base = reproject(rows, rat_fit, src["played"])
 
-    # ---- one-at-a-time ablations on the same 51 games
+    # ---- one-at-a-time ablations on the same graded games
     abl = {}
     abl["hca_off"] = reproject(rows, rat_fit, src["played"], hca=0.0)
     abl["hca_double"] = reproject(rows, rat_fit, src["played"], hca=5.0)
@@ -117,7 +117,7 @@ def main():
               "minimum_per_half": MIN_HALVES,
               "note": "A component that only works in one half is a schedule artefact, not a model."}
 
-    # ---- naive baselines, computed on the same 51 games (no fitting, no magic numbers)
+    # ---- naive baselines, computed on the same graded games (no fitting, no magic numbers)
     am = [r["actual_margin_home"] for r in rows]
     at = [r["actual_total"] for r in rows]
     mm = [r["model_margin_home"] for r in rows]
@@ -143,6 +143,32 @@ def main():
     ci = block_bootstrap(errs)
     n = len(rows)
 
+    # ---- V8/V9 read the newest injury edition directly (one league statement, one count)
+    inj = src["injury"]
+    team_by_full = {v: k for k, v in M.TEAM_FULL.items()}
+    n_absence_rows, n_with_minutes = 0, 0
+    for r in inj.get("rows", []):
+        if not r.get("player"):
+            continue
+        n_absence_rows += 1
+        ab = team_by_full.get(r.get("team_printed"))
+        if not ab:
+            continue                       # team cell dropped by pagination — never attributed
+        last, _, first = r["player"].partition(",")
+        key = ((first + last).strip().lower().replace(".", "").replace(" ", ""))
+        if src["player_season"].get((key, ab)):
+            n_with_minutes += 1
+    live_rows = lines["live_lines"]
+    _no_edition = "no edition covers this date yet"
+    with_edition = [x for x in live_rows if x["report_state_away"] != _no_edition]
+
+    def _filed(x, side):
+        return x[f"report_state_{side}"] == "SUBMITTED"
+    both_filed = [x for x in with_edition if _filed(x, "away") and _filed(x, "home")]
+    one_filed = [x for x in with_edition if _filed(x, "away") != _filed(x, "home")]
+    no_one_filed = [x for x in with_edition
+                    if not _filed(x, "away") and not _filed(x, "home")]
+
     gates = []
 
     def g(gid, name, threshold, value, status, detail, missing=None, url=None):
@@ -159,16 +185,16 @@ def main():
       url=src["windows"]["window_fit"]["source_url"])
     g("V2", "Sample floor", f"n >= {MIN_GAMES} graded games", n,
       "FAIL" if n < MIN_GAMES else "PASS",
-      f"n={n}. Every interval below is wide for the reason this gate exists: a 51-game window "
-      "cannot separate a 12.79 MAE from a 13.19 MAE. This gate FAILS and the desk says so "
-      "instead of reporting the difference as skill.")
+      f"n={n}. Every interval below is wide for the reason this gate exists: a {n}-game window "
+      f"cannot separate a {base['mae_margin']} MAE from a model one point worse. This gate "
+      "FAILS and the desk says so instead of reporting the difference as skill.")
     g("V3", "Beat a constant on the margin", "MAE(model) < MAE(predict the same number every game)",
       f"{naive['margin_model']} vs {naive['margin_constant_sample_mean']}",
       "PASS" if naive["margin_improvement"] > 0 else "FAIL",
-      f"The model gains {naive['margin_improvement']} points of MAE over a constant on the same 51 "
-      f"games. Whether that gain is real is a different question: the 95% interval on the model's "
-      f"own error is ±{noise} "
-      f"points, so the pass means 'carries some information', never 'beats the market'.",
+      f"The model gains {naive['margin_improvement']} points of MAE over a constant on the same "
+      f"{n} games. Whether that gain is real is a different question: the 95% interval on the "
+      f"model's own error is ±{noise} points, so the pass means 'carries some information', "
+      "never 'beats the market'.",
       url=src["windows"]["window_fit"]["source_url"])
     g("V3b", "Beat a constant on the total", "MAE(model) < MAE(sample-mean total)",
       f"{naive['total_model']} vs {naive['total_constant_sample_mean']}",
@@ -187,8 +213,8 @@ def main():
       f"{halves['first_half']['n']}/{halves['second_half']['n']} games, "
       f"MAE {halves['first_half']['mae_margin']} vs {halves['second_half']['mae_margin']}",
       "PASS",
-      "Both halves are large enough to read and the error does not swing wildly, but 25-game "
-      "halves still cannot detect a small bias.",
+      f"Both halves are large enough to read and the error does not swing wildly, but "
+      f"{halves['first_half']['n']}-game halves still cannot detect a small bias.",
       missing=None)
     g("V6", "Uncertainty published", "every headline figure carries an interval",
       f"MAE margin 95% CI [{ci[0]}, {ci[1]}]" if ci else None, "PASS" if ci else "FAIL",
@@ -200,17 +226,22 @@ def main():
       "rendered site re-checks with scripts/check_links.py.")
     g("V8", "Rotation reassignment", "role-player minutes reallocatable from verified data",
       None, "BLANK",
-      "Only 1 of the 26 official absences for 11/14 has verified season minutes inside this "
-      "repository (the per-game points file is page 1 of 465 rows; the minutes file stops at "
-      "rank 24). Vacated minutes therefore reduce the named star's production and are NOT "
-      "re-spread across his teammates — the model under-states replacement offence on purpose.",
+      f"Only {n_with_minutes} of the {n_absence_rows} official player rows in the newest edition "
+      f"({inj.get('report_stamp')}) has verified season minutes inside this repository (the "
+      "per-game points file is page 1 of 465 rows; the minutes file stops at rank 24). Vacated "
+      "minutes therefore reduce the named star's production and are NOT re-spread across his "
+      "teammates — the model under-states replacement offence on purpose.",
       missing="the remaining ~415 rows of players_traditional and the minutes leaderboard past rank 24")
     g("V9", "Availability completeness", "both teams filed for every priced game",
-      "0 of 5 games have both sides filed; 5 of 5 have exactly one side filed", "FAIL",
-      "One team in each 11/14 game was still NOT YET SUBMITTED when the report was captured. "
-      "The adjustment is asymmetric by construction, so any line on those games carries an "
-      "unquantified error bar.",
-      missing="the next edition of the official injury report (filed the evening before)")
+      f"{len(both_filed)} of {len(with_edition)} games with an edition have both sides filed; "
+      f"{len(one_filed)} have exactly one side filed; {len(no_one_filed)} have neither",
+      "FAIL" if len(both_filed) < len(with_edition) else "PASS",
+      f"On the newest edition ({inj.get('report_stamp')}), "
+      f"{len(one_filed)} priced games are asymmetric — one club had filed and the other had "
+      f"not — and {len(no_one_filed)} more have an edition in which no club has filed yet. "
+      "The adjustment is asymmetric by construction on the first group and unknown on the "
+      "second, so any line on those games carries an unquantified error bar.",
+      missing="the next edition of the official injury report for the affected dates")
     g("V10", "Market comparison / closing line value", "beat the close on a tracked price",
       None, "BLANK",
       "No sportsbook price is reachable from this sandbox, so there is no break-even rate, no "
@@ -237,6 +268,18 @@ def main():
       missing="back-copies of the NBA.com injury report (one PDF per day at the same URL pattern), "
               "or any archive of them")
 
+    for x in gates:                       # structured counts behind the V8/V9 prose
+        if x["id"] == "V8":
+            x["rows_total"] = n_absence_rows
+            x["rows_with_minutes"] = n_with_minutes
+            x["edition"] = inj.get("report_stamp")
+        if x["id"] == "V9":
+            x["games_with_edition"] = len(with_edition)
+            x["games_both_filed"] = len(both_filed)
+            x["games_one_filed"] = len(one_filed)
+            x["games_none_filed"] = len(no_one_filed)
+            x["edition"] = inj.get("report_stamp")
+
     out = {"naive_baselines": naive, "base_model": base, "ablations": abl, "halves": halves,
            "scope": "margin/total engine only — see V13 for the absence term",
            "bootstrap_mae_margin_95": [ci[0], ci[1]] if ci else None,
@@ -248,11 +291,20 @@ def main():
                "pass": sum(1 for x in gates if x["status"] == "PASS"),
                "fail": sum(1 for x in gates if x["status"] == "FAIL"),
                "blank": sum(1 for x in gates if x["status"] == "BLANK"),
-               "decision": "The margin carries information worth 2.49 points of MAE over a "
-                           "constant; the total carries none — it loses to a constant by 0.32 "
-                           "points. No component survives its own ablation at this sample size. "
-                           "V2/V3b/V9/V11 FAIL and V8/V10/V13 are BLANK. Nothing on this desk is "
-                           "validated, and no gate was loosened to change that."},
+               "fail_ids": [x["id"] for x in gates if x["status"] == "FAIL"],
+               "blank_ids": [x["id"] for x in gates if x["status"] == "BLANK"],
+               "decision": (
+                   f"The margin carries information worth {naive['margin_improvement']} points "
+                   f"of MAE over a constant; the total "
+                   + (f"carries none — it loses to a constant by "
+                      f"{abs(naive['total_improvement'])} points."
+                      if naive["total_improvement"] <= 0 else
+                      f"beats a constant by {naive['total_improvement']} points.")
+                   + " No component survives its own ablation at this sample size. "
+                   + f"{'/'.join(x['id'] for x in gates if x['status'] == 'FAIL')} FAIL and "
+                   + f"{'/'.join(x['id'] for x in gates if x['status'] == 'BLANK')} are BLANK. "
+                   + "Nothing on this desk is validated, and no gate was loosened to change "
+                     "that.")},
            }
     dump("gates.json", out)
     print(f"gates · base MAE_m={base['mae_margin']} MAE_t={base['mae_total']} "

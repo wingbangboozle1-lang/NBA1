@@ -7,7 +7,7 @@ Two registers existed before this session and they disagreed:
     bets, with tiers and stake caps.
 This module does not average them and does not pick a winner between them. It re-states every
 candidate on the gates in gates.py, records the sample each register actually had, and prints the
-disagreement where the two disagree, because a leaderboard that hides a 14-vs-23-vs-51 sample
+disagreement where the two disagree, because a leaderboard that hides a 14-vs-23-vs-60 sample
 conflict is decoration.
 
 Ranking basis, decided before the run: gates passed (hard gates first), then measurable error,
@@ -50,16 +50,20 @@ def main():
         metric="MAE in points against official FINAL scores, ratings fitted on an earlier window",
         why="The only candidate on this desk whose inputs are all official, all point-in-time and "
             "all out-of-sample. It is not worse than a naive pick, and that is the whole claim.",
-        blocking_gates="V2 sample floor (n=51 < 100), V9 availability, V13 absence term ungraded",
+        blocking_gates=f"V2 sample floor (n={base['n']} < 100), V9 availability, "
+                       "V13 absence term ungraded",
         blank_fields=["odds", "break-even %", "ROI", "CLV", "stake", "edge vs close"],
         what_moves_it_up="100+ graded games and any closing-price file; nothing else can promote it.")
     add(id="INT-2", name="Same, with rest / home-court adjustments on", family="Single bet",
         register="integration (this session)", n_graded=base["n"], record=base["straight_up"],
         mae_margin=base["mae_margin"], mae_total=base["mae_total"],
         metric="ΔMAE of each component, measured one at a time",
-        why="HCA is worth +0.05 MAE, back-to-back +0.01, shrinkage +0.36 — all inside a ±2.8 "
-            "interval. The adjustments are kept because theory supports them, and flagged because "
-            "this sample cannot confirm them.",
+        why=(f"HCA {gates['ablations']['hca_off']['delta_mae_vs_full_model']:+}, back-to-back "
+             f"{gates['ablations']['b2b_off']['delta_mae_vs_full_model']:+}, shrinkage "
+             f"{gates['ablations']['no_shrinkage']['delta_mae_vs_full_model']:+} points of MAE — "
+             f"all inside a ±{round((gates['bootstrap_mae_margin_95'][1] - gates['bootstrap_mae_margin_95'][0]) / 2, 1)} "
+             "interval. The adjustments are kept because theory supports them, and flagged "
+             "because this sample cannot confirm them."),
         blocking_gates="V2", blank_fields=["component p-values", "ROI"],
         what_moves_it_up="A second and third graded week; the code path is unchanged meanwhile.")
     add(id="INT-3", name="Player-prop lines from measured game-log dispersion", family="Player prop",
@@ -124,13 +128,14 @@ def main():
         "rows": rows,
         "registers_disagree": [
             {"topic": "how many graded games exist",
-             "values": {"integration (finals 11/06–11/12)": base["n"],
+             "values": {f"integration (finals {settle['graded_window']['from'][5:]}–"
+                       f"{settle['graded_window']['to'][5:]})": base["n"],
                        "Build A ledger": 14, "Build B LBS": top_b["n_graded"] if top_b else None},
-             "resolution": "51 is the count this session could verify as FINAL with a clean "
-                           "pre-window fit. Build A's 14 were look-ahead contaminated by its own "
-                           "admission; Build B's 23 is a per-strategy graded-bet count, not a "
-                           "game count, so the two are not the same unit and were never divided "
-                           "into each other."},
+             "resolution": (f"{base['n']} is the count this session could verify as FINAL with "
+                            "a clean pre-window fit (2026-11-06 .. 2026-11-13). Build A's 14 "
+                            "were look-ahead contaminated by its own admission; Build B's 23 is "
+                            "a per-strategy graded-bet count, not a game count, so the two are "
+                            "not the same unit and were never divided into each other.")},
             {"topic": "whether props could be priced",
              "values": {"Build A": "BLOCKED — no game-log variance",
                        "integration": "variance measured for 3 players, still not slate-wide"},

@@ -5,7 +5,26 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
-## 🔑 ACTIVE CLAIM — session `arena/2edb85af-nba1` (opened 2026-11-14, integration + refresh)
+## 🔑 ACTIVE CLAIM — session `arena/df3fed12-nba1` (opened 2026-11-14 10:00 UTC, desk settlement takeover)
+
+Branch `arena/df3fed12-nba1`, based on `45c0287` (tip of `main` at claim time).
+
+**Handoff / takeover note (ground rule 5).** The claim below (session
+`arena/2edb85af-nba1`, opened 2026-11-14) had no commits for more than 60
+minutes — its last commit was `a4fc931` at 01:24 UTC and its follow-up PR #42
+was last touched 01:30 UTC, i.e. **8.5 hours idle** at takeover. Its rows
+V01/V02/V04 were already `done` in §16, V03 was `blocked, by design` pending the
+11/13 finals (now final — see §28), and V05 was `unclaimed`. This session takes
+over **only the file scopes no other active session holds** and re-scopes them
+as D01–D06 in §28: `data/live/**`, `integration/**`, `desk*.html`,
+`integration/REPO_REVIEW.md`, `review.html` (desk rows only). The takeover does
+**not** claim the integration seat: session `arena/254dd8bb-nba1` (§20, opened
+09:40 UTC) holds verification/`data/raw/s14/**`/content-settlement/PR-triage/final
+integration (S01–S07), and session `arena/cfb25ff0-nba1` (§20, opened 09:37 UTC)
+holds `audit/finals_2026-11-13/**` + `data/verified/finals_2026-11-13.json`
+(X01–X05). Original claimant's table preserved below; PR #42 is left to S06.
+
+### Superseded claim table — session `arena/2edb85af-nba1` (preserved verbatim)
 
 Branch `arena/2edb85af-nba1`, based on `2f44c98` (tip of `main`, the merge of PR #18).
 
@@ -2620,3 +2639,47 @@ line by line (§27.1/§27.2, `REVIEW_Z01.md`).
 
 The deployment loop entries are appended in the follow-up delivery commits of this session; the
 data verification in §27.1/§27.2 does not depend on them.
+
+## 28. Session `arena/df3fed12-nba1` — desk settlement takeover: settle the 2026-11-13 finals (claimed 2026-11-14 10:00 UTC)
+
+Branch `arena/df3fed12-nba1`, base `45c0287` (tip of `main` at claim time). Read this board
+first (1 626 lines), listed every remote branch, and checked the two claims pushed minutes
+earlier (`arena/254dd8bb-nba1` S01–S07 and `arena/cfb25ff0-nba1` X01–X05) before claiming.
+Numbering note: both of those sessions appended a section numbered §20 on their own branches;
+this section first took **§21**, was renumbered to **§26**, and is renumbered again to **§28**
+here because main had assigned §26 (prop variance) and §27 (independent verification) while
+this claim was in flight. Highest section number on the board wins; the D01–D06 rows below are
+unaffected by the number.
+
+**Why this task exists.** Session `arena/2edb85af-nba1` built the Integration Desk
+(`desk*.html` + `integration/**` + `data/live/**`, PR #39 merged) and logged its own
+next action as **H-5** (COORDINATION §16, line ~1011): *"Re-run `python3 integration/settle.py`
+after ~03:40 UTC to settle 11/13, then re-run `picks` for 11/15–16 against the newly filed
+report. The desk's own rule requires FINAL rows and a symmetric report; both arrive with time,
+not effort."* Its V03 was `blocked, by design` only because the 11/13 slate was still in
+progress at 02:15 UTC. It has been 8.5 hours; all nine 11/13 games now print **Final** on
+https://www.nba.com/schedule (read 2026-11-14 ~09:50 UTC). The claim is stale under ground
+rule 5 and is taken over here, rescoped to files nobody else holds.
+
+| # | Task | Status | File scope (exclusive) | Plan |
+| --- | --- | --- | --- | --- |
+| D01 | Board sync + takeover claim, pushed before any other edit | done | `COORDINATION.md` (claim header + this §26 only) | This row. |
+| D02 | Fresh official capture: the nine 2026-11-13 finals, two official reads each; current injury-report editions for the 11/14–11/17 window; capture register update | **done** (commit `4d973d0`) | `data/live/**` (new `results_2026_11_13_final.json`; `capture_meta.json` appended L15–L19; newest injury edition captured verbatim) | Schedule card + each game's own page for all nine finals; ATL@CHI OT count confirmed from box-score period tabs (OT1); score-block repeats on GSW/OKC box-score URLs; UTA@HOU single printed score + winner-consistent headline, recorded at that level. New files: `results_2026_11_13_final.json` (cross-checked 9/9 vs `data/verified/finals_2026-11-13.json` — 0 mismatches), `injury_report_2026_11_14_0500AM.json` (newest edition; 05:15 AM probed = AccessDenied), `team_windows_live_2026_11_13.json` (30/30 gp=w+l, W-L agrees 30/30 with the card reread), `slate_records_reread_2026_11_14.json`. **No file in `data/raw/**` touched** — R-X1 stays with the integration seat. |
+| D03 | Settle the desk ledger: grade the 11/13 slate that V03 could not settle; extend the out-of-sample window from 51 to 60 games with zero look-ahead (FIT ratings frozen at 2026-11-05); re-run gates/leaderboard/luck from the same code | **done** (commit `bf3fb21`) | `integration/**` (`model.py`, `settle.py`, `picks`, `gates`, `leaderboard`, `transform`, `review`, `report`, `site`) | Executes H-5. `model.py` appends the 9 verified finals to the graded rows and rest index at load time (`games_completed.json` untouched); `settle.py` moves all 9 out of cannot-settle → blocked now = 22 scheduled only. Result: **graded 60, MAE_m 12.913, MAE_t 14.636, side 42-18, σ_m 17.392**; gates 8 PASS / 3 FAIL (V2 n=60<100, V9 0-of-14 both-filed, V11) / 3 BLANK (V8/V10/V13); V3b flips FAIL→PASS on 60 games (+0.022) and is published as measured. Every window/count string in gates/leaderboard/transform/report/site/review prose is now computed, never typed. |
+| D04 | Re-price the open slate (11/14–11/16) against the newest official injury editions available at capture time; regenerate the five desk pages and the report | **done** (commit `bf3fb21`) | the five `desk*.html`, `integration/REPORT.md`, `integration/REPO_REVIEW.md`, desk rows of `review.html` | H-5's second half. Pricing now uses: newest edition by printed stamp (11/14 **05:00 AM ET** — 05:15 probed absent), LIVE window refreshed DateTo=11/13, post-finals records (reread 09:50Z, IR-05 closed for the desk), per-date submission states (11/15 rows exist, all NOT YET SUBMITTED → PROVISIONAL, never a pass; both-not-filed can never classify as SELECTED). Tiers after re-run: **0 SELECTED / 8 PROVISIONAL / 9 LEAN-ONLY / 5 REJECTED-DATA** (the 11/14 asymmetries persist until ~16:30–17:00 UTC filings — S04's, not re-fetched here). |
+| D05 | Verify: every gate script, row-level source audit, link check, render check | **done** | read-only + gate outputs | `verify_all` → VERIFY OK; `check_site` → every table row official-sourced (desk rows: 8/92/128/152/88); `check_links` → PASS (0 broken, 0 unsourced); `verify_integration` → 0 errors (I6 prose counts pass against `docs/data/meta.json`); `render_check.mjs` after `npm ci` → **113 pages, 0 problems** (I-W03 closed for this session). Row-level cross-checks: finals 9/9 vs `data/verified`, records 30/30 vs the DateTo=11/13 stats table, desk-vs-Build-C slate crosscheck 22/22 match. |
+| D06 | PR → `main`, merge without waiting for approval, confirm Pages deploy, record here | in progress — **PR #71** opened 2026-11-14 ~11:10 UTC | `COORDINATION.md` (this §28 log), own branch | **PR: https://github.com/wingbangboozle1-lang/NBA1/pull/71** (this branch → `main`). Merge without approval per the brief; Pages deploy confirmed after merge and the result appended here in the post-merge record commit. | Shared outputs (`index.html`, `README.md`, site nav, `data/content/**`, `docs/data/**`, `site/data/**`, `data/raw/**`, `data/raw/s14/**`, `audit/**`, `data/verified/**`, `.github/workflows/**`) are **not** edited by this session. |
+**Explicitly not claimed (active sessions hold them):** S02 verification → `arena/254dd8bb-nba1`;
+S03/S04 captures → `arena/254dd8bb-nba1` (`data/raw/s14/**`); S05 content settlement →
+`arena/254dd8bb-nba1` (`data/content/**`, `docs/data/**`, `site/data/**`); S06 PR triage
+(#37/#42/#45/#53) → `arena/254dd8bb-nba1`; S07 final integration seat → `arena/254dd8bb-nba1`;
+X02–X04 finals verification → `arena/cfb25ff0-nba1` (`audit/finals_2026-11-13/**`,
+`data/verified/**`). Where this session's D02 capture duplicates S03/X02 it is an
+**independent double-capture into a different namespace** (`data/live/**`), which is the
+cross-check the brief asks for, not a conflict; the three captures are compared in D05.
+
+**Relationship to the 11/13 settlement done elsewhere:** S05 settles the *paper picks* of
+Builds B/D into the shared registers; this session settles the *desk's own* model ledger
+(`integration/out/settlement.json`) and extends its out-of-sample window. Different ledgers,
+different namespaces, one set of finals — D05 compares the scores across all captures and
+reports any mismatch as a flagged irregularity rather than averaging them.
