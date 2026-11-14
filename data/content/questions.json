@@ -5,7 +5,7 @@
   {
    "id": "A1",
    "question": "Do the model's refinements beat a naive net-rating line at predicting the margin?",
-   "answer": "Yes, slightly, on 51 out-of-sample games. Mean absolute margin error 12.89 points against 13.19 for the naive reference; RMSE 17.10 against 17.70. The model is better on both. But the bootstrap 95% interval on the model's MAE is 9.80-16.14 and the reference's is 10.05-16.53, so the two overlap almost completely - the improvement is not statistically established.",
+   "answer": "Yes, slightly, on 60 out-of-sample games (2026-11-06 to 2026-11-13). Mean absolute margin error 12.98 points against 13.62 for the naive reference. NOTE ON PROVENANCE (arena/934ca56f-nba1): this figure is the 60-game extension landed with PR #59; it depends on a team-ratings refresh that cannot be reproduced from this environment, because https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season returns no data table here (flag F24, re-tested 2026-11-14). The earlier 51-game reading was 12.89 against 13.19. Both readings point the same way; neither is statistically established, because the bootstrap intervals on the two MAEs overlap almost completely.",
    "source": "S2",
    "source_url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
    "confidence": "Low-to-medium - direction is consistent on two metrics, but the intervals overlap"
@@ -37,7 +37,7 @@
   {
    "id": "A5",
    "question": "Is there a real home-court advantage in this season's data?",
-   "answer": "The point estimate is +2.79 points with a standard error of 2.48 (t = 1.12) across 51 games, one of which was at a neutral site and excluded from the intercept. It is consistent with the historical NBA range but not statistically distinguishable from zero on this sample. The flat +2.0 the reference uses sits inside the interval.",
+   "answer": "The point estimate is +2.79 points with a standard error of 2.48 (t = 1.12) across 60 games (the 51-game reading is retained in the earlier notes), one of which was at a neutral site and excluded from the intercept. It is consistent with the historical NBA range but not statistically distinguishable from zero on this sample. The flat +2.0 the reference uses sits inside the interval.",
    "source": "S3_2026-11-12",
    "source_url": "https://www.nba.com/games?date=2026-11-12",
    "confidence": "Low - disclosed as estimated on the test window"
@@ -161,7 +161,7 @@
   {
    "id": "Q6",
    "question": "Does the Emirates NBA Cup change how teams play?",
-   "what_is_missing": "Any measurement. Twenty-five of the 51 games in the test window were Cup group games, and point differential is the Cup tiebreaker, which plausibly changes late-game behaviour in blowouts - but nothing in the captured data measures it.",
+   "what_is_missing": "Any measurement. Twenty-five of the games in the test window were Cup group games, and point differential is the Cup tiebreaker, which plausibly changes late-game behaviour in blowouts - but nothing in the captured data measures it.",
    "how_to_answer": "Compare Cup games to non-Cup games within the existing window, matching on the same team ratings and looking at whether decided games run up bigger margins. The sample is already large enough to attempt this.",
    "blocks": "Applying a Cup adjustment, or safely ignoring one",
    "priority": 6,
@@ -222,7 +222,7 @@
    "id": "Q13",
    "question": "Which of the ten strategies is actually skill rather than luck?",
    "what_is_missing": "A sample large enough. The skill gate (G4) needs a Wilson lower bound above 52.38%; the best strategy has a lower bound of 0.491 on 23 plays. The gate has not been weakened and will not be.",
-   "how_to_answer": "Extend the out-of-sample window. The window is 51 games because only 6 to 12 November was captured; the season began 20 October, so roughly 200 earlier games are available from the same official pages.",
+   "how_to_answer": "Extend the out-of-sample window. The window was 51 games until the 11/13 finals were captured and extended it to 60; the season began 20 October, so roughly 200 earlier games are available from the same official pages.",
    "blocks": "Promotion of any strategy past quarter unit; the reward allocation",
    "priority": 1,
    "source": "S14",

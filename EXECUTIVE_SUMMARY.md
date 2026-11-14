@@ -15,11 +15,12 @@ Where a value could not be confirmed it is described as unconfirmed rather than 
 The system originates its own NBA lines from official NBA.com data and then tries hard to
 prove those lines carry skill. It covers 27 games across the full three-day horizon
 (2026-11-14 to 2026-11-17), with an originated spread, total and fair moneyline for every
-game, and a gated paper pick. **No strategy has cleared the skill gate.** The best, S1
-(side edge versus a naive reference line), is **16-7 on 23 graded plays** with an exact
-binomial p-value of **0.093** against a coin flip — good enough to keep watching, not good
-enough to call skill. Every strategy is therefore capped at a quarter unit or held as
-research-only, and that is the designed outcome, not a failure of the build.
+game, and a gated paper pick. **No strategy has cleared every gate.** The best, S1 (side
+edge versus a naive reference line), is **23-9 on 23 graded plays** with an exact binomial
+p-value of **0.020** — the first record in this project that is statistically distinguishable
+from a coin flip — but it **fails the calibration and stability gates**, so it stays capped
+at a quarter unit. A hit rate the model's own probabilities did not predict is a calibration
+failure, not a windfall. Nothing is funded, and that is the designed outcome.
 
 ## 2. What was verified in this session, and how
 
@@ -38,16 +39,21 @@ Every one of these checks is re-runnable: `python3 scripts/verify_all.py` and
 
 ## 3. What the model has and has not shown
 
-**Out-of-sample window:** 51 completed games, 2026-11-06 to 2026-11-12, every one predicted
+**Out-of-sample window:** 60 completed games, 2026-11-06 to 2026-11-13, every one predicted
 using team ratings built only from 2026-10-20 to 2026-11-05. No game in the test window
 contributes to the ratings that predict it.
 
+*Provenance caveat, stated once and meant:* the 51 → 60 extension landed with PR #59. It
+depends on a team-ratings refresh that **cannot be reproduced from this environment** —
+`nba.com/stats/teams/advanced` renders client-side and returns no data table (flag F24,
+re-tested 2026-11-14). The nine scores that extend the window are confirmed three times over;
+the extended error metric is not independently re-derivable here. Treat it as reported, not
+reproduced.
+
 | Metric | Model | Naive reference | Reading |
 | --- | --- | --- | --- |
-| Margin MAE | 12.89 | 13.19 | Model better |
-| Margin RMSE | 17.10 | 17.70 | Model better |
-| Total MAE | 14.86 | 14.73 | **Reference better** |
-| Total RMSE | 19.88 | 19.59 | **Reference better** |
+| Margin MAE | 12.98 | 13.62 | Model better |
+| Total MAE | 14.83 | 14.72 | **Reference better** |
 | Brier (win prob.) | 0.1970 | 0.1889 | **Reference better** |
 | Log loss | 0.5768 | 0.5567 | **Reference better** |
 
@@ -66,16 +72,18 @@ Ten strategies, seven gates. A tier is a **cap on stake**, not a profit forecast
 
 | Rank | ID | Strategy | Record | Units | Binding gate |
 | --- | --- | --- | --- | --- | --- |
-| 1 | S1 | Side edge vs reference | 16-7 | +7.54 | **G4 skill-not-luck: FAIL** (Wilson lower bound 0.491 < 0.524) |
-| 2 | S5 | Back-to-back fade | 8-4 | +3.27 | **G4 skill-not-luck: FAIL** |
+| 1 | S1 | Side edge vs reference | 23-9 | +11.91 | **G4 now PASSES** (Wilson lower bound 0.546 > 0.524); **G2 calibration FAIL** is the binding gate |
+| 2 | S5 | Back-to-back fade | see data | see data | **G4 skill-not-luck: FAIL** |
 | 3 | S3 | Moneyline value | 7-7 | −0.64 | **G2 calibration: FAIL** |
 | 4 | S2 | Total edge vs reference | 5-5 | −0.46 | **G2 calibration: FAIL** |
 | 5 | S10 | Same-game parlay (side + total) | 8-11 | +2.92 | **G2 calibration: FAIL** |
 | 6 | S9 | Two-leg cross-game parlay | 3-4 | −0.15 | **G2 calibration: FAIL** |
 | 7–10 | S4, S6, S7, S8 | Pace total, availability shock, player points, PRA combo | 0-0 | 0.00 | **G1: FAIL** (0 graded plays) |
 
-The four at 0-0 are not losses: their own filters produced no plays on 51 games, which is
-itself a finding about how restrictive those rules are.
+The four at 0-0 are not losses: their own filters produced no plays in the window, which is
+itself a finding about how restrictive those rules are. The live per-strategy figures are on
+the [Leaderboard page](https://wingbangboozle1-lang.github.io/NBA1/site/pages/leaderboard.html),
+which names the binding gate for each one.
 
 ## 5. The limits that matter most
 

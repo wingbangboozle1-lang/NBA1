@@ -561,7 +561,7 @@ def main():
     if xcb:
         body.append(banner("warn", "Two models, two different lines - which one is authoritative?",
             "<p>Every game below carries a line from the <b>validated model</b> "
-            "(<code>engine/pipeline.py</code>, the one tested on 51 out-of-sample games). A second, independent "
+            "(<code>engine/pipeline.py</code>, the one tested on %d out-of-sample games). A second, independent "
             "line-origination model (<code>RecordLine-1</code>, <code>scripts/originate_horizon.py</code>) produces "
             "its own spread for the same games. They are <b>different models, not two renderings of one number</b>: "
             "on the %d games they share they differ on %d, and on %d of those the two disagree about which team is "
@@ -571,8 +571,8 @@ def main():
             "the same estimate - it is a different, unmeasured model. The full row-by-row comparison is in "
             "<a href=\"site/pages/source-check.html\">Official Source Check</a>, section 5. Choosing between them, or "
             "retiring one, is an open decision (flag F26, suggestion SG15).</p>"
-            % (xcb["matchups_compared"], xcb["disagree_over_0.5"], xcb["opposite_favourite"],
-               xcb["max_abs_difference"])))
+            % (back["metrics"]["n_games"], xcb["matchups_compared"], xcb["disagree_over_0.5"],
+               xcb["opposite_favourite"], xcb["max_abs_difference"])))
 
     body.append(h2("Horizon at a glance", "Every game in the window, with the originated line, the reference line and the difference between them."))
     body.append(table(
