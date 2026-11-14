@@ -1,0 +1,2625 @@
+{
+ "rule": {
+  "sigma_margin_measured": 17.4,
+  "min_edge_points": 8.7,
+  "criteria": [
+   "R1 verified ratings window",
+   "R2 |margin| ≥ 8.7 (0.5·σ)",
+   "R3 symmetric availability filing",
+   "R4 neutral-site veto",
+   "R5 rest state derivable"
+  ],
+  "written_before": "the cut came from the 51-game backtest's own error, not from these games"
+ },
+ "slate": {
+  "dates": [
+   "2026-11-14",
+   "2026-11-15",
+   "2026-11-16"
+  ],
+  "games_priced": 22,
+  "tiers": {
+   "SELECTED": 0,
+   "PROVISIONAL": 9,
+   "LEAN-ONLY": 8,
+   "REJECTED-DATA": 5
+  }
+ },
+ "rows": [
+  {
+   "date": "2026-11-14",
+   "time_et": "7:00 PM",
+   "matchup": "DEN@NOP",
+   "game_id": "0022600231",
+   "game_url": "https://www.nba.com/game/den-vs-nop-0022600231",
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "tier": "REJECTED-DATA",
+   "reasons": [
+    "R3 asymmetric availability: DEN=SUBMITTED vs NOP=NOT YET SUBMITTED — one side's absences are known and the other's are not, which biases the adjustment instead of removing it",
+    "R2 |margin -5.8| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": 5.8,
+   "line_total": 233.46,
+   "p_home_win_model": 0.369,
+   "lean": "AWAY DEN",
+   "lean_margin_points": 5.8,
+   "records_as_displayed": {
+    "away": "6-4",
+    "home": "4-8",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 0.551,
+    "home": -5.791,
+    "games_behind": {
+     "away": 10,
+     "home": 12
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 99.61,
+    "pace_note": "DEN 97.58 / NOP 101.64 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 2,
+     "home_days": 0,
+     "away_b2b": false,
+     "home_b2b": true,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "NOP"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": -6.32,
+     "rest_adj": -2.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": -5.82,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "DEN",
+      "listed_absent_or_questioned": 4,
+      "report_state": "SUBMITTED",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 4,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": [
+       {
+        "player": "Holmes II, DaRon",
+        "status": "Out",
+        "reason": "G League - On Assignment",
+        "printed_whole_row": true,
+        "team_abbr": "DEN",
+        "team_gp": 10,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       },
+       {
+        "player": "Nembhard, Ryan",
+        "status": "Out",
+        "reason": "G League - Two-Way",
+        "printed_whole_row": true,
+        "team_abbr": "DEN",
+        "team_gp": 10,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       },
+       {
+        "player": "Strawther, Julian",
+        "status": "Out",
+        "reason": "Injury/Illness - Left Knee Sprain",
+        "printed_whole_row": true,
+        "team_abbr": "DEN",
+        "team_gp": 10,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       },
+       {
+        "player": "Whitmore, Cam",
+        "status": "Out",
+        "reason": "G League - Two-Way",
+        "printed_whole_row": true,
+        "team_abbr": "DEN",
+        "team_gp": 10,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       }
+      ]
+     },
+     "home": {
+      "side": "HOME",
+      "team": "NOP",
+      "listed_absent_or_questioned": 0,
+      "report_state": "NOT YET SUBMITTED",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Nikola Jokić",
+      "ppg": 23.5,
+      "rpg": 10.8,
+      "apg": 9.0
+     },
+     "home": {
+      "player": "Zion Williamson",
+      "ppg": 21.7,
+      "rpg": 5.2,
+      "apg": 2.6
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "7:30 PM",
+   "matchup": "DAL@CLE",
+   "game_id": "0022600232",
+   "game_url": "https://www.nba.com/game/dal-vs-cle-0022600232",
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "tier": "REJECTED-DATA",
+   "reasons": [
+    "R3 asymmetric availability: DAL=SUBMITTED vs CLE=NOT YET SUBMITTED — one side's absences are known and the other's are not, which biases the adjustment instead of removing it",
+    "R2 |margin +1.6| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": -1.6,
+   "line_total": 227.61,
+   "p_home_win_model": 0.5357,
+   "lean": "HOME CLE",
+   "lean_margin_points": 1.6,
+   "records_as_displayed": {
+    "away": "7-5",
+    "home": "6-6",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 0.653,
+    "home": 1.713,
+    "games_behind": {
+     "away": 12,
+     "home": 12
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 100.15,
+    "pace_note": "DAL 100.5 / CLE 99.8 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 1,
+     "home_days": 0,
+     "away_b2b": false,
+     "home_b2b": true,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "CLE"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": 1.06,
+     "rest_adj": -2.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": 1.56,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "DAL",
+      "listed_absent_or_questioned": 2,
+      "report_state": "SUBMITTED",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 2,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": [
+       {
+        "player": "Biberovic, Tarik",
+        "status": "Out",
+        "reason": "Injury/Illness - Right Heel Bursitis",
+        "printed_whole_row": true,
+        "team_abbr": "DAL",
+        "team_gp": 12,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       },
+       {
+        "player": "Christie, Max",
+        "status": "Questionable",
+        "reason": "Injury/Illness - Left Ankle Sprain",
+        "printed_whole_row": true,
+        "team_abbr": "DAL",
+        "team_gp": 12,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       }
+      ]
+     },
+     "home": {
+      "side": "HOME",
+      "team": "CLE",
+      "listed_absent_or_questioned": 0,
+      "report_state": "NOT YET SUBMITTED",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Cooper Flagg",
+      "ppg": 24.6,
+      "rpg": 6.9,
+      "apg": 6.5
+     },
+     "home": {
+      "player": "Donovan Mitchell",
+      "ppg": 22.8,
+      "rpg": 5.0,
+      "apg": 5.5
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "8:00 PM",
+   "matchup": "DET@MIA",
+   "game_id": "0022600233",
+   "game_url": "https://www.nba.com/game/det-vs-mia-0022600233",
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "tier": "REJECTED-DATA",
+   "reasons": [
+    "R3 asymmetric availability: DET=SUBMITTED vs MIA=NOT YET SUBMITTED — one side's absences are known and the other's are not, which biases the adjustment instead of removing it",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": 9.1,
+   "line_total": 225.27,
+   "p_home_win_model": 0.3013,
+   "lean": "AWAY DET",
+   "lean_margin_points": 9.1,
+   "records_as_displayed": {
+    "away": "8-3",
+    "home": "5-6",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 5.776,
+    "home": -3.69,
+    "games_behind": {
+     "away": 11,
+     "home": 11
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 100.98,
+    "pace_note": "DET 99.17 / MIA 102.8 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 1,
+     "home_days": 0,
+     "away_b2b": false,
+     "home_b2b": true,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "MIA"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": -9.56,
+     "rest_adj": -2.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": -9.06,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "DET",
+      "listed_absent_or_questioned": 1,
+      "report_state": "SUBMITTED",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 1,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": [
+       {
+        "player": "Duren, Jalen",
+        "status": "Out",
+        "reason": "Injury/Illness - Right Hamstring Strain",
+        "printed_whole_row": true,
+        "team_abbr": "DET",
+        "team_gp": 11,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       }
+      ]
+     },
+     "home": {
+      "side": "HOME",
+      "team": "MIA",
+      "listed_absent_or_questioned": 0,
+      "report_state": "NOT YET SUBMITTED",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Cade Cunningham",
+      "ppg": 25.0,
+      "rpg": 5.2,
+      "apg": 7.9
+     },
+     "home": {
+      "player": "Giannis Antetokounmpo",
+      "ppg": 27.7,
+      "rpg": 12.6,
+      "apg": 5.2
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "8:00 PM",
+   "matchup": "BKN@MEM",
+   "game_id": "0022600234",
+   "game_url": "https://www.nba.com/game/bkn-vs-mem-0022600234",
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "tier": "REJECTED-DATA",
+   "reasons": [
+    "R3 asymmetric availability: BKN=SUBMITTED vs MEM=NOT YET SUBMITTED — one side's absences are known and the other's are not, which biases the adjustment instead of removing it",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": -9.3,
+   "line_total": 225.2,
+   "p_home_win_model": 0.7041,
+   "lean": "HOME MEM",
+   "lean_margin_points": 9.3,
+   "records_as_displayed": {
+    "away": "3-8",
+    "home": "7-4",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": -4.172,
+    "home": 4.653,
+    "games_behind": {
+     "away": 11,
+     "home": 11
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 100.06,
+    "pace_note": "BKN 99.83 / MEM 100.28 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 2,
+     "home_days": 0,
+     "away_b2b": false,
+     "home_b2b": true,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "MEM"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": 8.83,
+     "rest_adj": -2.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": 9.33,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "BKN",
+      "listed_absent_or_questioned": 6,
+      "report_state": "SUBMITTED",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 6,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": [
+       {
+        "player": "Bilodeau, Tyler",
+        "status": "Out",
+        "reason": "G League - Two-Way",
+        "printed_whole_row": true,
+        "team_abbr": "BKN",
+        "team_gp": 11,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       },
+       {
+        "player": "Brown Jr., Mikel",
+        "status": "Questionable",
+        "reason": "Injury/Illness - Illness",
+        "printed_whole_row": true,
+        "team_abbr": "BKN",
+        "team_gp": 11,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       },
+       {
+        "player": "Jefferson, Joshua",
+        "status": "Out",
+        "reason": "G League - On Assignment",
+        "printed_whole_row": true,
+        "team_abbr": "BKN",
+        "team_gp": 11,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       },
+       {
+        "player": "Nelson, Grant",
+        "status": "Out",
+        "reason": "G League - Two-Way",
+        "printed_whole_row": true,
+        "team_abbr": "BKN",
+        "team_gp": 11,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       },
+       {
+        "player": "Saraf, Ben",
+        "status": "Out",
+        "reason": "G League - On Assignment",
+        "printed_whole_row": true,
+        "team_abbr": "BKN",
+        "team_gp": 11,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       },
+       {
+        "player": "Traore, Nolan",
+        "status": "Probable",
+        "reason": "Injury/Illness - Right Calf Tightness / Soreness",
+        "printed_whole_row": true,
+        "team_abbr": "BKN",
+        "team_gp": 11,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       }
+      ]
+     },
+     "home": {
+      "side": "HOME",
+      "team": "MEM",
+      "listed_absent_or_questioned": 0,
+      "report_state": "NOT YET SUBMITTED",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Julius Randle",
+      "ppg": 19.7,
+      "rpg": 6.5,
+      "apg": 5.0
+     },
+     "home": {
+      "player": "Ty Jerome",
+      "ppg": 26.2,
+      "rpg": 3.5,
+      "apg": 4.9
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "8:00 PM",
+   "matchup": "CHI@MIN",
+   "game_id": "0022600235",
+   "game_url": "https://www.nba.com/game/chi-vs-min-0022600235",
+   "source_url": "https://www.nba.com/games?date=2026-11-14",
+   "tier": "REJECTED-DATA",
+   "reasons": [
+    "R3 asymmetric availability: CHI=NOT YET SUBMITTED vs MIN=SUBMITTED — one side's absences are known and the other's are not, which biases the adjustment instead of removing it",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": -27.9,
+   "line_total": 233.36,
+   "p_home_win_model": 0.9453,
+   "lean": "HOME MIN",
+   "lean_margin_points": 27.9,
+   "records_as_displayed": {
+    "away": "1-9",
+    "home": "9-3",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": -11.879,
+    "home": 10.93,
+    "games_behind": {
+     "away": 10,
+     "home": 12
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 102.41,
+    "pace_note": "CHI 103.75 / MIN 101.08 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 0,
+     "home_days": 1,
+     "away_b2b": true,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "CHI"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": 23.36,
+     "rest_adj": 2.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": 27.86,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "CHI",
+      "listed_absent_or_questioned": 0,
+      "report_state": "NOT YET SUBMITTED",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "MIN",
+      "listed_absent_or_questioned": 3,
+      "report_state": "SUBMITTED",
+      "rows_with_season_minutes_in_repo": 1,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 3,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": [
+       {
+        "player": "Beringer, Joan",
+        "status": "Available",
+        "reason": "Injury/Illness - Face Mask",
+        "printed_whole_row": true,
+        "team_abbr": "MIN",
+        "team_gp": 12,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       },
+       {
+        "player": "DiVincenzo, Donte",
+        "status": "Out",
+        "reason": "Injury/Illness - Right Achilles Tendon Repair / Surgery",
+        "printed_whole_row": true,
+        "team_abbr": "MIN",
+        "team_gp": 12,
+        "player_gp": null,
+        "minutes_per_game": null,
+        "minute_share": null,
+        "classification": "SEASON DATA NOT CAPTURED",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf"
+       },
+       {
+        "player": "Edwards, Anthony",
+        "status": "Out",
+        "reason": "Injury/Illness - Right Knee Arthroscopy",
+        "printed_whole_row": true,
+        "team_abbr": "MIN",
+        "team_gp": 12,
+        "player_gp": 4,
+        "minutes_per_game": 33.7,
+        "minute_share": null,
+        "classification": "ALREADY_IN_SAMPLE (4 of 12 games played)",
+        "moves_the_line": false,
+        "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf",
+        "season_source_url": "https://www.nba.com/stats/players/traditional"
+       }
+      ]
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Caleb Wilson",
+      "ppg": 18.9,
+      "rpg": 6.2,
+      "apg": 1.9
+     },
+     "home": {
+      "player": "LaMelo Ball",
+      "ppg": 18.6,
+      "rpg": 3.3,
+      "apg": 6.3
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-15",
+   "time_et": "1:00 PM",
+   "matchup": "IND@PHI",
+   "game_id": "0022600236",
+   "game_url": "https://www.nba.com/game/ind-vs-phi-0022600236",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "tier": "LEAN-ONLY",
+   "reasons": [
+    "R2 |margin +5.3| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": -5.3,
+   "line_total": 220.49,
+   "p_home_win_model": 0.6199,
+   "lean": "HOME PHI",
+   "lean_margin_points": 5.3,
+   "records_as_displayed": {
+    "away": "4-8",
+    "home": "10-3",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": -1.55,
+    "home": 1.241,
+    "games_behind": {
+     "away": 12,
+     "home": 13
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 100.59,
+    "pace_note": "IND 101.13 / PHI 100.04 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 1,
+     "home_days": 2,
+     "away_b2b": false,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "IND"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": 2.81,
+     "rest_adj": 0.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": 5.31,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "IND",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "PHI",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Pascal Siakam",
+      "ppg": 22.7,
+      "rpg": 6.9,
+      "apg": 4.4
+     },
+     "home": {
+      "player": "Tyrese Maxey",
+      "ppg": 26.7,
+      "rpg": 3.4,
+      "apg": 5.5
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-15",
+   "time_et": "4:00 PM",
+   "matchup": "LAL@PHX",
+   "game_id": "0022600237",
+   "game_url": "https://www.nba.com/game/lal-vs-phx-0022600237",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "tier": "LEAN-ONLY",
+   "reasons": [
+    "R2 |margin -7.1| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": 7.1,
+   "line_total": 236.82,
+   "p_home_win_model": 0.3412,
+   "lean": "AWAY LAL",
+   "lean_margin_points": 7.1,
+   "records_as_displayed": {
+    "away": "11-2",
+    "home": "5-6",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 6.619,
+    "home": -3.049,
+    "games_behind": {
+     "away": 13,
+     "home": 11
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 99.47,
+    "pace_note": "LAL 100.5 / PHX 98.45 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 3,
+     "home_days": 2,
+     "away_b2b": false,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": null
+    },
+    "margin_path": {
+     "raw_from_ratings": -9.62,
+     "rest_adj": 0.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": -7.12,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "LAL",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "PHX",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Luka Dončić",
+      "ppg": 38.6,
+      "rpg": 7.5,
+      "apg": 7.6
+     },
+     "home": {
+      "player": "Devin Booker",
+      "ppg": 25.5,
+      "rpg": 2.5,
+      "apg": 5.0
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-15",
+   "time_et": "4:30 PM",
+   "matchup": "CHA@LAC",
+   "game_id": "0022600238",
+   "game_url": "https://www.nba.com/game/cha-vs-lac-0022600238",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "tier": "LEAN-ONLY",
+   "reasons": [
+    "R2 |margin +7.0| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": -7.0,
+   "line_total": 214.51,
+   "p_home_win_model": 0.6567,
+   "lean": "HOME LAC",
+   "lean_margin_points": 7.0,
+   "records_as_displayed": {
+    "away": "4-8",
+    "home": "2-8",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": -9.136,
+    "home": -4.563,
+    "games_behind": {
+     "away": 12,
+     "home": 10
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 98.94,
+    "pace_note": "CHA 96.92 / LAC 100.95 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 2,
+     "home_days": 1,
+     "away_b2b": false,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "LAC"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": 4.52,
+     "rest_adj": 0.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": 7.02,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "CHA",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "LAC",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Naz Reid",
+      "ppg": 17.3,
+      "rpg": 8.5,
+      "apg": 2.2
+     },
+     "home": {
+      "player": "Darius Garland",
+      "ppg": 20.4,
+      "rpg": 1.8,
+      "apg": 6.9
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-15",
+   "time_et": "5:00 PM",
+   "matchup": "SAS@UTA",
+   "game_id": "0022600239",
+   "game_url": "https://www.nba.com/game/sas-vs-uta-0022600239",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "tier": "PROVISIONAL",
+   "reasons": [
+    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": 15.9,
+   "line_total": 221.57,
+   "p_home_win_model": 0.1803,
+   "lean": "AWAY SAS",
+   "lean_margin_points": 15.9,
+   "records_as_displayed": {
+    "away": "10-2",
+    "home": "1-11",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 8.973,
+    "home": -9.462,
+    "games_behind": {
+     "away": 12,
+     "home": 12
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 99.86,
+    "pace_note": "SAS 98.97 / UTA 100.75 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 1,
+     "home_days": 1,
+     "away_b2b": false,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "SAS",
+      "UTA"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": -18.41,
+     "rest_adj": 0.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": -15.91,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "SAS",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "UTA",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Victor Wembanyama",
+      "ppg": 30.3,
+      "rpg": 11.7,
+      "apg": 2.8
+     },
+     "home": {
+      "player": "Keyonte George",
+      "ppg": 20.4,
+      "rpg": 4.5,
+      "apg": 6.5
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-15",
+   "time_et": "6:00 PM",
+   "matchup": "DAL@BOS",
+   "game_id": "0022600240",
+   "game_url": "https://www.nba.com/game/dal-vs-bos-0022600240",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "tier": "PROVISIONAL",
+   "reasons": [
+    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": -13.3,
+   "line_total": 219.01,
+   "p_home_win_model": 0.777,
+   "lean": "HOME BOS",
+   "lean_margin_points": 13.3,
+   "records_as_displayed": {
+    "away": "7-5",
+    "home": "10-2",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 0.653,
+    "home": 9.544,
+    "games_behind": {
+     "away": 12,
+     "home": 12
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 98.56,
+    "pace_note": "DAL 100.5 / BOS 96.62 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 0,
+     "home_days": 3,
+     "away_b2b": true,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": null
+    },
+    "margin_path": {
+     "raw_from_ratings": 8.76,
+     "rest_adj": 2.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": 13.26,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "DAL",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "BOS",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Cooper Flagg",
+      "ppg": 24.6,
+      "rpg": 6.9,
+      "apg": 6.5
+     },
+     "home": {
+      "player": "Jayson Tatum",
+      "ppg": 26.3,
+      "rpg": 6.1,
+      "apg": 7.5
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-15",
+   "time_et": "6:00 PM",
+   "matchup": "NYK@TOR",
+   "game_id": "0022600241",
+   "game_url": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "tier": "LEAN-ONLY",
+   "reasons": [
+    "R2 |margin -1.4| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": 1.4,
+   "line_total": 220.45,
+   "p_home_win_model": 0.4682,
+   "lean": "AWAY NYK",
+   "lean_margin_points": 1.4,
+   "records_as_displayed": {
+    "away": "6-5",
+    "home": "5-7",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 5.375,
+    "home": 1.387,
+    "games_behind": {
+     "away": 11,
+     "home": 12
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 97.48,
+    "pace_note": "NYK 95.09 / TOR 99.88 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 1,
+     "home_days": 2,
+     "away_b2b": false,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "NYK"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": -3.89,
+     "rest_adj": 0.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": -1.39,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "NYK",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "TOR",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Karl-Anthony Towns",
+      "ppg": 20.9,
+      "rpg": 13.5,
+      "apg": 3.5
+     },
+     "home": {
+      "player": "RJ Barrett",
+      "ppg": 21.3,
+      "rpg": 6.7,
+      "apg": 4.1
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-15",
+   "time_et": "7:00 PM",
+   "matchup": "HOU@WAS",
+   "game_id": "0022600242",
+   "game_url": "https://www.nba.com/game/hou-vs-was-0022600242",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "tier": "PROVISIONAL",
+   "reasons": [
+    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": 9.4,
+   "line_total": 221.79,
+   "p_home_win_model": 0.2949,
+   "lean": "AWAY HOU",
+   "lean_margin_points": 9.4,
+   "records_as_displayed": {
+    "away": "9-3",
+    "home": "4-9",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 7.504,
+    "home": -4.551,
+    "games_behind": {
+     "away": 12,
+     "home": 13
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 98.53,
+    "pace_note": "HOU 97.42 / WAS 99.63 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 1,
+     "home_days": 2,
+     "away_b2b": false,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "HOU"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": -11.88,
+     "rest_adj": 0.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": -9.38,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "HOU",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "WAS",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Alperen Sengun",
+      "ppg": 21.1,
+      "rpg": 9.4,
+      "apg": 7.9
+     },
+     "home": {
+      "player": "Anthony Davis",
+      "ppg": 25.6,
+      "rpg": 10.5,
+      "apg": 2.0
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-15",
+   "time_et": "8:00 PM",
+   "matchup": "ATL@MIL",
+   "game_id": "0022600243",
+   "game_url": "https://www.nba.com/game/atl-vs-mil-0022600243",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "tier": "PROVISIONAL",
+   "reasons": [
+    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": 11.3,
+   "line_total": 231.76,
+   "p_home_win_model": 0.2578,
+   "lean": "AWAY ATL",
+   "lean_margin_points": 11.3,
+   "records_as_displayed": {
+    "away": "7-5",
+    "home": "1-11",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 1.713,
+    "home": -11.828,
+    "games_behind": {
+     "away": 12,
+     "home": 12
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 101.98,
+    "pace_note": "ATL 103.46 / MIL 100.5 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 1,
+     "home_days": 1,
+     "away_b2b": false,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "ATL",
+      "MIL"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": -13.81,
+     "rest_adj": 0.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": -11.31,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "ATL",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "MIL",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Jalen Johnson",
+      "ppg": 19.2,
+      "rpg": 8.6,
+      "apg": 7.2
+     },
+     "home": {
+      "player": "Tyler Herro",
+      "ppg": 21.9,
+      "rpg": 4.4,
+      "apg": 4.5
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-15",
+   "time_et": "9:00 PM",
+   "matchup": "OKC@SAC",
+   "game_id": "0022600244",
+   "game_url": "https://www.nba.com/game/okc-vs-sac-0022600244",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "tier": "PROVISIONAL",
+   "reasons": [
+    "R3 no injury-report edition exists yet for 2026-11-15; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": 10.6,
+   "line_total": 222.26,
+   "p_home_win_model": 0.2706,
+   "lean": "AWAY OKC",
+   "lean_margin_points": 10.6,
+   "records_as_displayed": {
+    "away": "8-4",
+    "home": "1-10",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 3.426,
+    "home": -9.707,
+    "games_behind": {
+     "away": 12,
+     "home": 11
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 99.99,
+    "pace_note": "OKC 98.75 / SAC 101.23 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 1,
+     "home_days": 1,
+     "away_b2b": false,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "OKC",
+      "SAC"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": -13.13,
+     "rest_adj": 0.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": -10.63,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "OKC",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "SAC",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Shai Gilgeous-Alexander",
+      "ppg": 29.7,
+      "rpg": 4.3,
+      "apg": 4.5
+     },
+     "home": {
+      "player": "Darius Acuff Jr.",
+      "ppg": 26.2,
+      "rpg": 3.8,
+      "apg": 7.3
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-16",
+   "time_et": "7:00 PM",
+   "matchup": "ORL@BOS",
+   "game_id": "0022600245",
+   "game_url": "https://www.nba.com/game/orl-vs-bos-0022600245",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "tier": "PROVISIONAL",
+   "reasons": [
+    "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": -13.7,
+   "line_total": 216.61,
+   "p_home_win_model": 0.7846,
+   "lean": "HOME BOS",
+   "lean_margin_points": 13.7,
+   "records_as_displayed": {
+    "away": "4-7",
+    "home": "10-2",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": -4.011,
+    "home": 9.544,
+    "games_behind": {
+     "away": 11,
+     "home": 12
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 97.44,
+    "pace_note": "ORL 98.25 / BOS 96.62 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 2,
+     "home_days": 0,
+     "away_b2b": false,
+     "home_b2b": true,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "ORL"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": 13.21,
+     "rest_adj": -2.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": 13.71,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "ORL",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "BOS",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Franz Wagner",
+      "ppg": 23.5,
+      "rpg": 6.5,
+      "apg": 7.9
+     },
+     "home": {
+      "player": "Jayson Tatum",
+      "ppg": 26.3,
+      "rpg": 6.1,
+      "apg": 7.5
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-16",
+   "time_et": "7:00 PM",
+   "matchup": "CHI@CLE",
+   "game_id": "0022600246",
+   "game_url": "https://www.nba.com/game/chi-vs-cle-0022600246",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "tier": "PROVISIONAL",
+   "reasons": [
+    "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": -16.3,
+   "line_total": 238.71,
+   "p_home_win_model": 0.826,
+   "lean": "HOME CLE",
+   "lean_margin_points": 16.3,
+   "records_as_displayed": {
+    "away": "1-9",
+    "home": "6-6",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": -11.879,
+    "home": 1.713,
+    "games_behind": {
+     "away": 10,
+     "home": 12
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 101.78,
+    "pace_note": "CHI 103.75 / CLE 99.8 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 1,
+     "home_days": 1,
+     "away_b2b": false,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "CHI",
+      "CLE"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": 13.83,
+     "rest_adj": 0.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": 16.33,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "CHI",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "CLE",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Caleb Wilson",
+      "ppg": 18.9,
+      "rpg": 6.2,
+      "apg": 1.9
+     },
+     "home": {
+      "player": "Donovan Mitchell",
+      "ppg": 22.8,
+      "rpg": 5.0,
+      "apg": 5.5
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-16",
+   "time_et": "7:00 PM",
+   "matchup": "MEM@WAS",
+   "game_id": "0022600247",
+   "game_url": "https://www.nba.com/game/mem-vs-was-0022600247",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "tier": "PROVISIONAL",
+   "reasons": [
+    "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": 8.7,
+   "line_total": 224.34,
+   "p_home_win_model": 0.3085,
+   "lean": "AWAY MEM",
+   "lean_margin_points": 8.7,
+   "records_as_displayed": {
+    "away": "7-4",
+    "home": "4-9",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 4.653,
+    "home": -4.551,
+    "games_behind": {
+     "away": 11,
+     "home": 13
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 99.95,
+    "pace_note": "MEM 100.28 / WAS 99.63 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 1,
+     "home_days": 0,
+     "away_b2b": false,
+     "home_b2b": true,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "MEM"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": -9.2,
+     "rest_adj": -2.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": -8.7,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "MEM",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "WAS",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Ty Jerome",
+      "ppg": 26.2,
+      "rpg": 3.5,
+      "apg": 4.9
+     },
+     "home": {
+      "player": "Anthony Davis",
+      "ppg": 25.6,
+      "rpg": 10.5,
+      "apg": 2.0
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-16",
+   "time_et": "7:30 PM",
+   "matchup": "PHI@BKN",
+   "game_id": "0022600248",
+   "game_url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "tier": "LEAN-ONLY",
+   "reasons": [
+    "R2 |margin -0.9| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": 0.9,
+   "line_total": 219.58,
+   "p_home_win_model": 0.4791,
+   "lean": "AWAY PHI",
+   "lean_margin_points": 0.9,
+   "records_as_displayed": {
+    "away": "10-3",
+    "home": "3-8",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 1.241,
+    "home": -4.172,
+    "games_behind": {
+     "away": 13,
+     "home": 11
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 99.94,
+    "pace_note": "PHI 100.04 / BKN 99.83 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 0,
+     "home_days": 1,
+     "away_b2b": true,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": null
+    },
+    "margin_path": {
+     "raw_from_ratings": -5.41,
+     "rest_adj": 2.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": -0.91,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "PHI",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "BKN",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Tyrese Maxey",
+      "ppg": 26.7,
+      "rpg": 3.4,
+      "apg": 5.5
+     },
+     "home": {
+      "player": "Julius Randle",
+      "ppg": 19.7,
+      "rpg": 6.5,
+      "apg": 5.0
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-16",
+   "time_et": "7:30 PM",
+   "matchup": "HOU@MIA",
+   "game_id": "0022600249",
+   "game_url": "https://www.nba.com/game/hou-vs-mia-0022600249",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "tier": "LEAN-ONLY",
+   "reasons": [
+    "R2 |margin -6.7| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": 6.7,
+   "line_total": 228.8,
+   "p_home_win_model": 0.3499,
+   "lean": "AWAY HOU",
+   "lean_margin_points": 6.7,
+   "records_as_displayed": {
+    "away": "9-3",
+    "home": "5-6",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 7.504,
+    "home": -3.69,
+    "games_behind": {
+     "away": 12,
+     "home": 11
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 100.11,
+    "pace_note": "HOU 97.42 / MIA 102.8 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 0,
+     "home_days": 1,
+     "away_b2b": true,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "HOU",
+      "MIA"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": -11.21,
+     "rest_adj": 2.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": -6.71,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "HOU",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "MIA",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Alperen Sengun",
+      "ppg": 21.1,
+      "rpg": 9.4,
+      "apg": 7.9
+     },
+     "home": {
+      "player": "Giannis Antetokounmpo",
+      "ppg": 27.7,
+      "rpg": 12.6,
+      "apg": 5.2
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-16",
+   "time_et": "8:00 PM",
+   "matchup": "POR@MIN",
+   "game_id": "0022600250",
+   "game_url": "https://www.nba.com/game/por-vs-min-0022600250",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "tier": "LEAN-ONLY",
+   "reasons": [
+    "R2 |margin +7.8| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": -7.8,
+   "line_total": 227.35,
+   "p_home_win_model": 0.6726,
+   "lean": "HOME MIN",
+   "lean_margin_points": 7.8,
+   "records_as_displayed": {
+    "away": "8-3",
+    "home": "9-3",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 5.696,
+    "home": 10.93,
+    "games_behind": {
+     "away": 11,
+     "home": 12
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 100.97,
+    "pace_note": "POR 100.86 / MIN 101.08 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 2,
+     "home_days": 1,
+     "away_b2b": false,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "POR"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": 5.28,
+     "rest_adj": 0.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": 7.78,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "POR",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "MIN",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Deni Avdija",
+      "ppg": 23.0,
+      "rpg": 6.1,
+      "apg": 6.5
+     },
+     "home": {
+      "player": "LaMelo Ball",
+      "ppg": 18.6,
+      "rpg": 3.3,
+      "apg": 6.3
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-16",
+   "time_et": "8:00 PM",
+   "matchup": "GSW@NOP",
+   "game_id": "0022600251",
+   "game_url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "tier": "PROVISIONAL",
+   "reasons": [
+    "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": 9.5,
+   "line_total": 234.77,
+   "p_home_win_model": 0.2927,
+   "lean": "AWAY GSW",
+   "lean_margin_points": 9.5,
+   "records_as_displayed": {
+    "away": "8-4",
+    "home": "4-8",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": 6.118,
+    "home": -5.791,
+    "games_behind": {
+     "away": 12,
+     "home": 12
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 100.7,
+    "pace_note": "GSW 99.76 / NOP 101.64 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 2,
+     "home_days": 1,
+     "away_b2b": false,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": [
+      "GSW",
+      "NOP"
+     ]
+    },
+    "margin_path": {
+     "raw_from_ratings": -11.99,
+     "rest_adj": 0.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": -9.49,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "GSW",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "NOP",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Stephen Curry",
+      "ppg": 27.8,
+      "rpg": 3.7,
+      "apg": 3.9
+     },
+     "home": {
+      "player": "Zion Williamson",
+      "ppg": 21.7,
+      "rpg": 5.2,
+      "apg": 2.6
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  },
+  {
+   "date": "2026-11-16",
+   "time_et": "9:00 PM",
+   "matchup": "PHX@DEN",
+   "game_id": "0022600252",
+   "game_url": "https://www.nba.com/game/phx-vs-den-0022600252",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "tier": "LEAN-ONLY",
+   "reasons": [
+    "R2 |margin +8.0| is inside the ±8.7 point cut (half of the measured σ_margin 17.4)",
+    "R3 no injury-report edition exists yet for 2026-11-16; availability is unknown, not clear",
+    "R4 venue not captured for future dates, so neutrality is unverified (in the backtest window the neutral flag exists and was enforced)"
+   ],
+   "line_spread_home": -8.0,
+   "line_total": 229.73,
+   "p_home_win_model": 0.6778,
+   "lean": "HOME DEN",
+   "lean_margin_points": 8.0,
+   "records_as_displayed": {
+    "away": "5-6",
+    "home": "6-4",
+    "caveat": "copied exactly as displayed; the unfinished 11/13 games mean every card lags one league day (IR-05)"
+   },
+   "ratings_window": "2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date)",
+   "ratings_shrunk_net": {
+    "away": -3.049,
+    "home": 0.551,
+    "games_behind": {
+     "away": 11,
+     "home": 10
+    }
+   },
+   "neutral_site": null,
+   "market_price": null,
+   "edge_vs_market": null,
+   "kelly_stake": null,
+   "hold": null,
+   "market_fields_blank_because": "no sportsbook price is reachable from this sandbox — these four fields stay blank on every row, forever, until a price file exists",
+   "game_flow": {
+    "projected_possessions": 98.02,
+    "pace_note": "PHX 98.45 / DEN 97.58 per 100 — mean of the two, from the 2026-10-20 .. 2026-11-12 as displayed 2026-11-14T00:40Z (Regular Season, whole season to date) window",
+    "first_half_share": null,
+    "first_half_share_blank_because": "no quarter-level scoring split is stored for either team in this repository, so the halftime-to-final shape is left blank rather than assumed at 50/50",
+    "rest": {
+     "away_days": 0,
+     "home_days": 1,
+     "away_b2b": true,
+     "home_b2b": false,
+     "note": "both teams' previous games are inside the window",
+     "caveat": "a rest day counted from a game that never finished is wrong in the useful direction — the game is cheaper, not harder. The 11/13 slate was IN PROGRESS when captured, so any back-to-back flag built on it is provisional until those games are confirmed FINAL.",
+     "provisional_prior_date": "2026-11-13",
+     "teams_affected": null
+    },
+    "margin_path": {
+     "raw_from_ratings": 3.53,
+     "rest_adj": 2.0,
+     "availability_adj": 0.0,
+     "hca_points": 2.5,
+     "final": 8.03,
+     "check": "raw + hca + rest + availability = final, printed so the arithmetic is verifiable by hand"
+    },
+    "availability": {
+     "away": {
+      "side": "AWAY",
+      "team": "PHX",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": null,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     },
+     "home": {
+      "side": "HOME",
+      "team": "DEN",
+      "listed_absent_or_questioned": 0,
+      "report_state": "no 11/15 or 11/16 edition exists yet",
+      "rows_with_season_minutes_in_repo": 0,
+      "rows_sized_by_the_model": 0,
+      "rows_unsizeable": 0,
+      "minute_share_vacated": 0.0,
+      "margin_points_applied": 0.0,
+      "reading": "a listed absence that could not be sized contributes 0.0 points. That is a gap in the data, not a judgement that the player does not matter.",
+      "rows": []
+     }
+    },
+    "leaders": {
+     "away": {
+      "player": "Devin Booker",
+      "ppg": 25.5,
+      "rpg": 2.5,
+      "apg": 5.0
+     },
+     "home": {
+      "player": "Nikola Jokić",
+      "ppg": 23.5,
+      "rpg": 10.8,
+      "apg": 9.0
+     },
+     "caveat": "a slate card's season-leaders capsule is not re-derived after the injury report, so a leader shown on a card is not evidence of playing"
+    }
+   }
+  }
+ ],
+ "headline": "22 games priced, 0 pass every selection rule. The rule, not the model, is what is holding the desk back: on 11/14 the official report had one side filed and the other NOT YET SUBMITTED in all five games.",
+ "neutral_site_note": "R4 is inert on this slate because the capture has no venue column. The one neutral site in the backtest window (Indiana–Denver, Mexico City, 11/07) was zeroed there. Blank here, not assumed safe.",
+ "not_a_bet": "Every row is a paper lean against our own number: no price, no hold, no stake, no expectation of profit, and none of it clears the validation gates."
+}

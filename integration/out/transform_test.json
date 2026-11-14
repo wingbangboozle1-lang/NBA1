@@ -1,0 +1,22 @@
+{
+ "note": "same projected margins, four probability transforms",
+ "sigma_measured": 17.4,
+ "results": {
+  "buildA_logit_sigma11": {
+   "brier": 0.1943,
+   "logloss": 0.5733
+  },
+  "ours_normal_sigma17": {
+   "brier": 0.1937,
+   "logloss": 0.5714
+  },
+  "ours_logit_sigma11": {
+   "brier": 0.1943,
+   "logloss": 0.5733
+  },
+  "flat_50": {
+   "brier": 0.25,
+   "logloss": 0.6931
+  }
+ }
+}

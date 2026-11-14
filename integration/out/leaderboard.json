@@ -1,0 +1,175 @@
+{
+ "title": "Strategy leaderboard — integration desk",
+ "ranking_basis": "hard gates passed → graded sample size → MAE. Gates are pass/fail with no weighting, so a cosmetic lead cannot be bought with a soft score.",
+ "reward_policy": "No entry is VALIDATED, therefore no reward is payable to any of them. This table is informational, and the honest headline is that the best model on this desk is not distinguishable from a naive pick.",
+ "hard_gates_passed": "7 of 13",
+ "gate_ledger": {
+  "pass": 7,
+  "fail": 3,
+  "blank": 3
+ },
+ "sample_floor": "n >= 100 graded games",
+ "rows": [
+  {
+   "id": "INT-1",
+   "name": "Originated margin + total (no absence term)",
+   "family": "Single bet",
+   "register": "integration (this session)",
+   "n_graded": 51,
+   "record": "36-15",
+   "mae_margin": 12.836,
+   "mae_total": 14.693,
+   "metric": "MAE in points against official FINAL scores, ratings fitted on an earlier window",
+   "why": "The only candidate on this desk whose inputs are all official, all point-in-time and all out-of-sample. It is not worse than a naive pick, and that is the whole claim.",
+   "blocking_gates": "V2 sample floor (n=51 < 100), V9 availability, V13 absence term ungraded",
+   "blank_fields": [
+    "odds",
+    "break-even %",
+    "ROI",
+    "CLV",
+    "stake",
+    "edge vs close"
+   ],
+   "what_moves_it_up": "100+ graded games and any closing-price file; nothing else can promote it.",
+   "gates_passed_hard": 7,
+   "validated": false,
+   "reward_payable": false,
+   "rank": 1
+  },
+  {
+   "id": "INT-2",
+   "name": "Same, with rest / home-court adjustments on",
+   "family": "Single bet",
+   "register": "integration (this session)",
+   "n_graded": 51,
+   "record": "36-15",
+   "mae_margin": 12.836,
+   "mae_total": 14.693,
+   "metric": "ΔMAE of each component, measured one at a time",
+   "why": "HCA is worth +0.05 MAE, back-to-back +0.01, shrinkage +0.36 — all inside a ±2.8 interval. The adjustments are kept because theory supports them, and flagged because this sample cannot confirm them.",
+   "blocking_gates": "V2",
+   "blank_fields": [
+    "component p-values",
+    "ROI"
+   ],
+   "what_moves_it_up": "A second and third graded week; the code path is unchanged meanwhile.",
+   "gates_passed_hard": 7,
+   "validated": false,
+   "reward_payable": false,
+   "rank": 2
+  },
+  {
+   "id": "BLD-B",
+   "name": "Build B LBS leaderboard (S1–S8)",
+   "family": "register",
+   "register": "docs/data/leaderboard.json",
+   "n_graded": 23,
+   "record": "16-7",
+   "mae_margin": 12.89,
+   "mae_total": 14.86,
+   "metric": "best LBS 81.3/100 (Side edge vs reference)",
+   "why": "Scored on 51 games with a 10/20–11/05 ratings window, so it is not look-ahead contaminated — but its Brier and log-loss both came out slightly worse than the reference, and its own conclusion was 'model ≈ market, within noise'.",
+   "blocking_gates": "V2, V10",
+   "blank_fields": [
+    "price",
+    "hold",
+    "CLV"
+   ],
+   "what_moves_it_up": "Nothing inside the sandbox: it needs prices.",
+   "gates_passed_hard": 7,
+   "validated": false,
+   "reward_payable": false,
+   "rank": 3
+  },
+  {
+   "id": "BLD-A",
+   "name": "Build A ledger (RecordLine-1 and its four families)",
+   "family": "register",
+   "register": "data/derived/strategies.json (2026-11-13)",
+   "n_graded": 14,
+   "record": null,
+   "mae_margin": 12.36,
+   "mae_total": 14.06,
+   "metric": "NOT VALIDATION. Look-ahead bias is present because the team stats cover the same games being predicted. Use this to confirm the pipeline runs, not to claim skill.",
+   "why": "Its own metadata labels the 14-game test CONTAMINATED — season-to-date inputs include the games being predicted. Read as a pipeline check only.",
+   "blocking_gates": "look-ahead, V2, V10",
+   "blank_fields": [
+    "validated count"
+   ],
+   "what_moves_it_up": "Re-fit on a DateFrom/DateTo window (now proven reachable) — that is exactly what INT-1 does.",
+   "gates_passed_hard": 7,
+   "validated": false,
+   "reward_payable": false,
+   "rank": 4
+  },
+  {
+   "id": "INT-3",
+   "name": "Player-prop lines from measured game-log dispersion",
+   "family": "Player prop",
+   "register": "integration (this session)",
+   "n_graded": 0,
+   "record": null,
+   "mae_margin": null,
+   "mae_total": null,
+   "metric": "dispersion measured on 12 player-games across 3 players",
+   "why": "Build A blocked every prop row with 'no game-log variance'. That blocker is now partly lifted — a σ exists and is published with an interval — but 3 players cannot price a 22-game slate, so no prop pick is published.",
+   "blocking_gates": "V11 props coverage, V2, V10 price",
+   "blank_fields": [
+    "prop line",
+    "over/under probability for the slate",
+    "ROI"
+   ],
+   "what_moves_it_up": "Per-game logs for the players actually in the slate: one reachable page per player. This is the cheapest unblock on the list.",
+   "gates_passed_hard": 7,
+   "validated": false,
+   "reward_payable": false,
+   "rank": 5
+  },
+  {
+   "id": "INT-4",
+   "name": "Same-game parlay inside Fréchet bounds",
+   "family": "Parlay / SGP",
+   "register": "integration (this session)",
+   "n_graded": 0,
+   "record": null,
+   "mae_margin": null,
+   "mae_total": null,
+   "metric": "joint probability published as bounds, never a point",
+   "why": "Correlation between two legs of one player's line is measured at r values whose intervals cross zero at n=4. Publishing a joint price off that would be inventing a number.",
+   "blocking_gates": "V11, V10",
+   "blank_fields": [
+    "parlay odds",
+    "correlation parameter"
+   ],
+   "what_moves_it_up": "30+ logged player-games per player before a single-point correlation is defensible.",
+   "gates_passed_hard": 7,
+   "validated": false,
+   "reward_payable": false,
+   "rank": 6
+  }
+ ],
+ "registers_disagree": [
+  {
+   "topic": "how many graded games exist",
+   "values": {
+    "integration (finals 11/06–11/12)": 51,
+    "Build A ledger": 14,
+    "Build B LBS": 23
+   },
+   "resolution": "51 is the count this session could verify as FINAL with a clean pre-window fit. Build A's 14 were look-ahead contaminated by its own admission; Build B's 23 is a per-strategy graded-bet count, not a game count, so the two are not the same unit and were never divided into each other."
+  },
+  {
+   "topic": "whether props could be priced",
+   "values": {
+    "Build A": "BLOCKED — no game-log variance",
+    "integration": "variance measured for 3 players, still not slate-wide"
+   },
+   "resolution": "Both statements are true of their own capture date. The blocker moved from 'no data at all' to 'data for 3 players'."
+  }
+ ],
+ "not_a_gate_but_relevant": {
+  "settlement": "51 games graded, 31 cannot be settled yet",
+  "side_record_if_it_were_a_bet": "37-14",
+  "warning": "the record above is graded against the model's own number and is ~50% by construction; it is printed so nobody has to guess that it was hidden"
+ }
+}

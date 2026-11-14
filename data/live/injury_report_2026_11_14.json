@@ -1,0 +1,340 @@
+{
+ "title": "Official NBA Injury Report — rows affecting the 2026-11-14 slate (day-before designation)",
+ "source_name": "NBA official injury-report PDF (league-issued)",
+ "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_07_30PM.pdf",
+ "index_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "report_stamp": "Injury Report: 11/13/26 07:30 PM",
+ "retrieved_utc": "2026-11-14T00:40Z",
+ "why_this_edition": "It is the newest edition published on the league's own index at the moment this desk ran. The 11/14 game-day editions (11 a.m.-1 p.m. local; 1 p.m. local for second nights of a back-to-back) did not exist yet at retrieval, so 11/14 rows are the day-before designations, not game-day confirmations.",
+ "league_rules_copied_from_index_page": "NBA teams must report information concerning player injuries, illnesses, other medical conditions, or rest for all NBA games. By 5 p.m. local time the day before a game (other than the second day of a back-to-back), teams must designate a participation status and identify a specific injury, illness, other medical condition, or other reason for any player whose participation in the game may be affected for any reason. For the second game of a back-to-back, teams must report the above information by 1 p.m. local time on the day of the game. In addition, teams are required to submit a game-day injury report between 11 a.m. and 1 p.m. local time (and between 8 and 10 a.m. for tip-offs 5 p.m. or earlier) on game days (besides the second game of a back-to-back). Reports are updated on a continual basis throughout the day.",
+ "transcription_method": "Rows below are the 11/14/2026 game-date block of the PDF, copied field by field. Where the PDF's pagination dropped the Game Date / Matchup / Team cells on a continuation row, the row is kept but tagged `printed_team: false` — the value is carried from the block above by the reader, which is an inference and is therefore flagged, not silently used. A row is used by the impact model only when every field is printed on the row itself.",
+ "submission_state_2026_11_14": [
+  {
+   "team": "DEN",
+   "printed_team": true,
+   "state": "SUBMITTED"
+  },
+  {
+   "team": "NOP",
+   "printed_team": true,
+   "state": "NOT YET SUBMITTED"
+  },
+  {
+   "team": "DAL",
+   "printed_team": true,
+   "state": "SUBMITTED"
+  },
+  {
+   "team": "CLE",
+   "printed_team": true,
+   "state": "NOT YET SUBMITTED"
+  },
+  {
+   "team": "BKN",
+   "printed_team": true,
+   "state": "SUBMITTED"
+  },
+  {
+   "team": "MEM",
+   "printed_team": true,
+   "state": "NOT YET SUBMITTED"
+  },
+  {
+   "team": "CHI",
+   "printed_team": true,
+   "state": "NOT YET SUBMITTED"
+  },
+  {
+   "team": "MIN",
+   "printed_team": true,
+   "state": "SUBMITTED"
+  },
+  {
+   "team": "DET",
+   "printed_team": true,
+   "state": "SUBMITTED"
+  },
+  {
+   "team": "MIA",
+   "printed_team": true,
+   "state": "NOT YET SUBMITTED"
+  }
+ ],
+ "submission_finding": "5 of the 10 clubs on the 11/14 slate had not filed. In every one of the five games exactly ONE club had filed and the other had not — New Orleans vs Denver, Cleveland vs Dallas, Memphis vs Brooklyn, Chicago vs Minnesota, Miami vs Detroit. There is no game on this slate with both clubs filed, and none with neither. This is the single most decision-relevant fact on the board and it is what the desk's asymmetric-information rule keys on.",
+ "rows": [
+  {
+   "date": "2026-11-14",
+   "time_et": "07:00",
+   "matchup": "DEN@NOP",
+   "team_printed": "Denver Nuggets",
+   "printed_team": true,
+   "player": "Holmes II, DaRon",
+   "status": "Out",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "07:00",
+   "matchup": "DEN@NOP",
+   "team_printed": "Denver Nuggets",
+   "printed_team": true,
+   "player": "Nembhard, Ryan",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "07:00",
+   "matchup": "DEN@NOP",
+   "team_printed": "Denver Nuggets",
+   "printed_team": true,
+   "player": "Strawther, Julian",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Sprain"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "07:00",
+   "matchup": "DEN@NOP",
+   "team_printed": "Denver Nuggets",
+   "printed_team": true,
+   "player": "Whitmore, Cam",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "07:30",
+   "matchup": "DAL@CLE",
+   "team_printed": "Dallas Mavericks",
+   "printed_team": true,
+   "player": "Biberovic, Tarik",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Heel Bursitis"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "07:30",
+   "matchup": "DAL@CLE",
+   "team_printed": "Dallas Mavericks",
+   "printed_team": true,
+   "player": "Christie, Max",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Ankle Sprain"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "07:30",
+   "matchup": "DAL@CLE",
+   "team_printed": "Dallas Mavericks",
+   "printed_team": false,
+   "player": "de Larrea, Sergio",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Sprain"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "07:30",
+   "matchup": "DAL@CLE",
+   "team_printed": "Dallas Mavericks",
+   "printed_team": false,
+   "player": "Johnson Jr., Morez",
+   "status": "Probable",
+   "reason": "Injury/Illness - Left Shin / Tibia Contusion"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "07:30",
+   "matchup": "DAL@CLE",
+   "team_printed": "Dallas Mavericks",
+   "printed_team": false,
+   "player": "Lively II, Dereck",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Surgery"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "07:30",
+   "matchup": "DAL@CLE",
+   "team_printed": "Dallas Mavericks",
+   "printed_team": false,
+   "player": "Martin, Caleb",
+   "status": "Available",
+   "reason": "Injury/Illness - Right Thumb Splint"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "BKN@MEM",
+   "team_printed": "Brooklyn Nets",
+   "printed_team": true,
+   "player": "Bilodeau, Tyler",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "BKN@MEM",
+   "team_printed": "Brooklyn Nets",
+   "printed_team": true,
+   "player": "Brown Jr., Mikel",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Illness"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "BKN@MEM",
+   "team_printed": "Brooklyn Nets",
+   "printed_team": true,
+   "player": "Jefferson, Joshua",
+   "status": "Out",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "BKN@MEM",
+   "team_printed": "Brooklyn Nets",
+   "printed_team": true,
+   "player": "Nelson, Grant",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "BKN@MEM",
+   "team_printed": "Brooklyn Nets",
+   "printed_team": true,
+   "player": "Saraf, Ben",
+   "status": "Out",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "BKN@MEM",
+   "team_printed": "Brooklyn Nets",
+   "printed_team": true,
+   "player": "Traore, Nolan",
+   "status": "Probable",
+   "reason": "Injury/Illness - Right Calf Tightness / Soreness"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "CHI@MIN",
+   "team_printed": "Minnesota Timberwolves",
+   "printed_team": true,
+   "player": "Beringer, Joan",
+   "status": "Available",
+   "reason": "Injury/Illness - Face Mask"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "CHI@MIN",
+   "team_printed": "Minnesota Timberwolves",
+   "printed_team": true,
+   "player": "DiVincenzo, Donte",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Achilles Tendon Repair / Surgery"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "CHI@MIN",
+   "team_printed": "Minnesota Timberwolves",
+   "printed_team": true,
+   "player": "Edwards, Anthony",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Arthroscopy"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "DET@MIA",
+   "team_printed": "Detroit Pistons",
+   "printed_team": true,
+   "player": "Duren, Jalen",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hamstring Strain"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "DET@MIA",
+   "team_printed": "Detroit Pistons",
+   "printed_team": false,
+   "player": "Harkless, Elijah",
+   "status": "Questionable",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "DET@MIA",
+   "team_printed": "Detroit Pistons",
+   "printed_team": false,
+   "player": "Joe, Isaiah",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hip Contusion"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "DET@MIA",
+   "team_printed": "Detroit Pistons",
+   "printed_team": false,
+   "player": "Jones, Isaac",
+   "status": "Questionable",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "DET@MIA",
+   "team_printed": "Detroit Pistons",
+   "printed_team": false,
+   "player": "Lanier, Chaz",
+   "status": "Out",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "DET@MIA",
+   "team_printed": "Detroit Pistons",
+   "printed_team": false,
+   "player": "Okorie, Ebuka",
+   "status": "Out",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "date": "2026-11-14",
+   "time_et": "08:00",
+   "matchup": "DET@MIA",
+   "team_printed": "Detroit Pistons",
+   "printed_team": false,
+   "player": "Onyenso, Ugonna",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  }
+ ],
+ "coverage_audit": {
+  "rows_for_2026_11_14": 26,
+  "rows_with_all_fields_printed_on_the_row": 16,
+  "rows_where_team_cell_was_dropped_by_pdf_pagination": 10,
+  "dropped_rows_by_matchup": {
+   "DAL@CLE": 4,
+   "DET@MIA": 6
+  },
+  "players_with_verified_season_minutes_in_this_repo": [
+   "Edwards, Anthony (33.7 MPG; also on the official per-game points page captured 2026-11-13)"
+  ],
+  "players_without_verified_minutes": null,
+  "note": "Counts recomputed from the rows themselves by the integration session on 2026-11-14. An earlier draft of this file claimed 18 printed / 8 dropped; the rows say 16 / 10, so the audit text was wrong and has been corrected to match the data rather than the other way round. 'players_without_verified_minutes' is left BLANK because the 50-row season file covers only some of these names and the rest were never checked one by one."
+ }
+}
