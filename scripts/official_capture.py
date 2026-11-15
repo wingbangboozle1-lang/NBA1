@@ -875,11 +875,14 @@ def main():
     # ---- 7. box scores for every completed game ---------------------------
     # One row per finished game: date, teams, final, quarter scores, both team
     # box scores (the possession model's inputs) and every player's line.
+    # Every game card the schedule printed, played or not. A fixture's page
+    # still publishes the arena, the neutral-site flag and the tip time, which
+    # the horizon model needs; a played game's page additionally publishes the
+    # box score.
     played = []
     for d in sorted(games):
         for r in games[d]["rows"]:
-            if (r.get("status_label") or "").lower().startswith("final"):
-                played.append((d, r))
+            played.append((d, r))
     if debug:
         played = played[:2]
     box = []
@@ -899,11 +902,14 @@ def main():
         box.append(p)
         record(rec, "parse_game_page", p)
     if box:
+        final = [b for b in box if (b.get("status_label") or "").lower().startswith("final")]
         save("boxscores.json", {"parser_version": PARSER_VERSION, "rows": box,
-                                "row_count": len(box)})
+                                "row_count": len(box),
+                                "final_count": len(final)})
         manifest["findings"].append(
-            {"level": "info", "detail": f"{len(box)} official box scores captured; "
-             f"{sum(1 for b in box if b.get('away_quarters') and b.get('home_quarters'))} "
+            {"level": "info", "detail": f"{len(box)} game pages captured "
+             f"({len(final)} final, with box scores); "
+             f"{sum(1 for b in final if b.get('away_quarters') and b.get('home_quarters'))} "
              f"carry quarter scores for both teams"})
 
     # ---- 8. URL probe (structure discovery, recorded not assumed) ---------
