@@ -3508,3 +3508,47 @@ committed `data/official/gamelog.json` transcription). Every new flag row carrie
 the SG23 workflow fix; deploys now complete instead of being cancelled. Nothing here claims the
 *newest* head (`99a7043`+) is rendered — its own deploy serialises and completes under SG23, and each
 push's deploy supersedes the last.
+
+---
+
+## 🔑 ACTIVE CLAIM — session `arena/e3ebc423-nba1` (opened 2026-11-15 11:35 UTC — day roll: settle 11/14, re-price 11/15–18, extend the scheduled refresh, publish)
+
+Branch `arena/e3ebc423-nba1`, based on `ef2e723` (tip of `main` at claim time — the
+`chore: record official-source reachability probe` commit that follows PR #99).
+
+**Board read before claiming (11:30–11:35 UTC).** `gh pr list --state all` shows **no open
+PRs**: #61–#100 are all MERGED or CLOSED, the newest activity being PR #99 merged at
+2026-11-14T21:22Z. Every earlier claim on this board (§24–§35) is `done` or `needs review`,
+and the most recent one is ~14 hours idle — far past ground rule 5's 60-minute threshold, so
+the integration seat is open and taken here. The `Refresh official data` schedule ran on main
+at 2026-11-15 ~00:15 UTC (run 43649583004, success) and produced capture payloads only
+(`data/raw/_last_refresh.json` records `captured_at_utc 2026-11-14T19:40:43Z` with the
+S1/S2/S4 parse failures that pre-date this session — logged as an irregularity, not "fixed"
+here). Pages reports `status: built`; the site is live.
+
+**Session ID:** `arena/e3ebc423-nba1`. The platform pins this session to the single pre-named
+branch above; the `session-<id>/<task>` convention is satisfied by that branch (deviation
+already logged in §21, §23, §24, §27, §28, §31, §33, §35).
+
+### Task board — session `arena/e3ebc423-nba1`
+
+| # | Task | Status | File scope (exclusive) | Notes |
+| --- | --- | --- | --- | --- |
+| R01 | Board read + claim pushed before any other edit | in progress | `COORDINATION.md` (§36 only) | This row. |
+| R02 | Fresh official capture 2026-11-15: 11/14 finals **with quarter scores**, 11/15–11/18 slate, injury editions 06:00 + 06:15 AM ET + consecutive diff, standings, three team-stat pages, player game logs | in progress | `verify/2026-11-15-e3ebc423/**`, `data/live/**` | Verbatim transcription, one official URL per row; unreadable cells stay blank and are flagged. |
+| R03 | Day roll of the committed snapshots the site builds from, then rebuild **only** after freshness + provenance gates pass | in progress | `data/raw/schedule_upcoming.json`, `data/raw/games_completed.json`, `data/raw/schedule_in_progress.json`, `data/raw/injuries.json`, `data/raw/sources.json`, `data/derived/day_roll_2026-11-15.json` | Ratings windows in `data/raw/team_advanced.json` are deliberately NOT re-cut (they are the registered ratings cut; re-rating mid-test would rewrite settled history). |
+| R04 | Settle the 11/14 published picks against official finals; verify the sealed ledger; store one row per game | in progress | `data/live/settlement_2026_11_14.json`, `data/live/ledger_2026-11-15.json` | Settlement only after both official pages print FINAL. |
+| R05 | Extend the scheduled job: standings + traditional + opponent pages + injury PDF store/diff, and a freshness/provenance gate in front of the rebuild | in progress | `engine/fetch_official.py`, `engine/gate_refresh.py` (new), `.github/workflows/refresh-data.yml` | The gate blocks the rebuild step, never the published site. |
+| R06 | Day-roll page + site refresh: projection vs bet split, estimator disagreement headline, rotation-availability column, travel miles, minutes redistribution, P(OT)-priced totals, revision+retrieval times in the injuries banner | in progress | `scripts/build_dashboard.py`, `site/**`, `docs/data/**`, `docs/b/pages/**`, `index.html` | Builder-side (a rebuild cannot drop it). Annotation-restore step added so out-of-band `meta.json` keys survive a rebuild. |
+| R07 | Content updates: executive summary, questions, suggestions, flag register appends | in progress | `data/content/**`, `EXECUTIVE_SUMMARY.md` | Flag ids continue from the register's current maximum. |
+| R08 | Gate run + line-by-line re-verification of the merged tree; PR → merge → Pages confirmation | unclaimed | — (verification only) | All repo gates + live fetch-back. |
+
+### Do-not-touch while R02–R08 run (other builds, untouched)
+
+`command-center/**`, `strategy-lab/**`, `verified/**`, `edge-lab/**`, `origination/**`,
+`docs/index.html`, `docs/pages/**`, `docs/assets/**`, `engine/**` **except** the three files
+named in R05, `scripts/**` **except** `scripts/build_dashboard.py` (R06), root legacy pages
+(`desk*.html`, `slate.html`, `lines.html`, `picks*.html`, `gameflow.html`, `review.html`,
+`research.html`, `schedule-verified.html`, `sources.html`, `styles.css`, `subpages.css`,
+`app.js`, `verification.html`, `docs/**` other than the builder outputs listed in R06).
+Requests against those files are logged here, not executed.
