@@ -45,6 +45,37 @@ jobs:
         continue-on-error: true
         run: python3 scripts/capture_official_801ba27f.py
 
+      # The www.nba.com/stats pages render their tables in the browser only:
+      # the HTML response carries no team rows (checked on the first run of
+      # this workflow - zero `resultSets`, two tables, both date pickers). The
+      # official box score pages ARE server-rendered and carry the complete
+      # official team and player statistics, so the season pass rebuilds the
+      # model inputs from those instead. Same host, same official source.
+      - name: Capture every box score of the season to date
+        id: season
+        continue-on-error: true
+        timeout-minutes: 60
+        run: python3 scripts/capture_official_801ba27f.py --season
+
+      - name: Show the season capture manifest
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, os
+          p = "data/raw/html/2026-11-15-801ba27f/_season_manifest.json"
+          if not os.path.exists(p):
+              print("no season manifest produced"); raise SystemExit(0)
+          m = json.load(open(p))
+          print(json.dumps(m.get("counts", {}), indent=1))
+          for r in m.get("dates", []):
+              if r["http_status"] != 200:
+                  print("DATE PROBLEM:", r["date"], r["http_status"], r.get("error"))
+          for r in m.get("games", []):
+              if r["http_status"] != 200 or not r.get("box"):
+                  print("GAME PROBLEM:", r["game_id"], r["date"],
+                        r["http_status"], r.get("error"))
+          PY
+
       - name: Show the capture manifest
         if: always()
         run: |

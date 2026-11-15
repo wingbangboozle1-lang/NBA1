@@ -173,11 +173,203 @@ def save_pdf(url):
     return rec
 
 
+# --------------------------------------------------------------------------
+# Season-wide pass (COORDINATION.md §41 H02/H05).
+#
+# The www.nba.com/stats pages are client-rendered: their HTML carries no team
+# rows (verified on this run - see the note in the manifest) so the three
+# official team-stat pages cannot be parsed from a plain HTTP response. The
+# official *box score* pages, by contrast, are server-rendered and carry the
+# complete official team and player statistics inside __NEXT_DATA__. This pass
+# therefore rebuilds the model inputs from first principles out of official
+# box scores for every game of the season to date, which is what the brief
+# asks for when it says "re-read the official pages and re-cut the inputs".
+# --------------------------------------------------------------------------
+
+SEASON_START = "2026-10-20"
+SEASON_END = "2026-11-15"
+
+
+def daterange(a, b):
+    a = datetime.date.fromisoformat(a)
+    b = datetime.date.fromisoformat(b)
+    d = a
+    while d <= b:
+        yield d.isoformat()
+        d += datetime.timedelta(days=1)
+
+
+def next_data(html):
+    m = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', html, re.S)
+    return json.loads(m.group(1)) if m else None
+
+
+def date_cards(path_gz):
+    """Return the official game cards from a saved games?date= page."""
+    nd = next_data(read_gz(path_gz))
+    if not nd:
+        return []
+    feed = nd.get("props", {}).get("pageProps", {}).get("gameCardFeed") or {}
+    cards = []
+    for mod in feed.get("modules", []):
+        for c in mod.get("cards", []):
+            cards.append(c.get("cardData", c))
+    return cards
+
+
+def slim_card(cd, date):
+    """Keep exactly the official fields the model and the results feed use."""
+    def team(t):
+        return {
+            "team_id": t.get("teamId"), "tricode": t.get("teamTricode"),
+            "name": t.get("teamName"), "city": t.get("teamCity"),
+            "score": t.get("score"),
+            "wins": t.get("wins"), "losses": t.get("losses"),
+            "periods": [{"period": p.get("period"), "score": p.get("score")}
+                        for p in (t.get("periods") or [])],
+        }
+    return {
+        "date": date,
+        "game_id": cd.get("gameId"),
+        "game_time_utc": cd.get("gameTimeUtc"),
+        "game_time_et": cd.get("gameTimeEastern"),
+        "game_status": cd.get("gameStatus"),
+        "game_status_text": cd.get("gameStatusText"),
+        "home": team(cd.get("homeTeam") or {}),
+        "away": team(cd.get("awayTeam") or {}),
+        "share_url": cd.get("shareUrl"),
+    }
+
+
+def slim_box(nd):
+    """Keep the official team + player statistics out of a box score page."""
+    g = (nd.get("props", {}).get("pageProps", {}) or {}).get("game") or {}
+    if not g:
+        return None
+    stat_keys = ["minutes", "fieldGoalsMade", "fieldGoalsAttempted",
+                 "threePointersMade", "threePointersAttempted",
+                 "freeThrowsMade", "freeThrowsAttempted", "reboundsOffensive",
+                 "reboundsDefensive", "reboundsTotal", "assists", "steals",
+                 "blocks", "turnovers", "foulsPersonal", "points",
+                 "plusMinusPoints"]
+
+    def side(t):
+        st = t.get("statistics") or {}
+        players = []
+        for p in (t.get("players") or []):
+            ps = p.get("statistics") or {}
+            players.append({
+                "person_id": p.get("personId"),
+                "name": ("%s %s" % (p.get("firstName") or "",
+                                    p.get("familyName") or "")).strip(),
+                "jersey": p.get("jerseyNum"),
+                "position": p.get("position"),
+                "starter": p.get("position") is not None and p.get("comment") == "",
+                "not_playing_reason": p.get("comment") or "",
+                "minutes": ps.get("minutes"),
+                "points": ps.get("points"),
+                "rebounds": ps.get("reboundsTotal"),
+                "assists": ps.get("assists"),
+                "fieldGoalsAttempted": ps.get("fieldGoalsAttempted"),
+                "turnovers": ps.get("turnovers"),
+            })
+        return {
+            "team_id": t.get("teamId"), "tricode": t.get("teamTricode"),
+            "name": t.get("teamName"), "city": t.get("teamCity"),
+            "score": t.get("score"),
+            "wins": t.get("teamWins"), "losses": t.get("teamLosses"),
+            "periods": [{"period": p.get("period"),
+                         "period_type": p.get("periodType"),
+                         "score": p.get("score")}
+                        for p in (t.get("periods") or [])],
+            "statistics": {k: st.get(k) for k in stat_keys if k in st},
+            "players": players,
+        }
+
+    arena = g.get("arena") or {}
+    return {
+        "game_id": g.get("gameId"),
+        "game_status": g.get("gameStatus"),
+        "game_status_text": g.get("gameStatusText"),
+        "game_time_utc": g.get("gameTimeUTC"),
+        "game_et": g.get("gameEt"),
+        "period": g.get("period"),
+        "attendance": g.get("attendance"),
+        "arena": {k: arena.get(k) for k in
+                  ("arenaName", "arenaCity", "arenaState", "arenaCountry",
+                   "arenaTimezone", "arenaStreetAddress", "arenaPostalCode")},
+        "officials": [o.get("formattedName") or o.get("name")
+                      for o in (g.get("officials") or [])],
+        "home": side(g.get("homeTeam") or {}),
+        "away": side(g.get("awayTeam") or {}),
+    }
+
+
+def season_pass():
+    """Capture every game of the season to date, date page then box score."""
+    os.makedirs(OUT, exist_ok=True)
+    manifest = {"run_id": RUN_ID + "-season", "session": "arena/801ba27f-nba1",
+                "started_utc": utc(), "dates": [], "games": []}
+    games = {}
+
+    print("date pages %s .. %s" % (SEASON_START, SEASON_END))
+    for d in daterange(SEASON_START, SEASON_END):
+        url = "https://www.nba.com/games?date=" + d
+        rec = save_page("games_" + d, url)
+        rec["date"] = d
+        manifest["dates"].append(rec)
+        if rec["http_status"] == 200:
+            for cd in date_cards(os.path.join(OUT, "games_%s.html.gz" % d)):
+                s = slim_card(cd, d)
+                if s["game_id"]:
+                    games[s["game_id"]] = s
+        time.sleep(0.3)
+    print("  %d distinct games on those date pages" % len(games))
+
+    print("box score pages (season to date):")
+    for gid in sorted(games):
+        g = games[gid]
+        slug = None
+        if g.get("share_url"):
+            m = re.search(r"/game/([a-z0-9\-]+)$", g["share_url"])
+            slug = m.group(1) if m else None
+        if not slug:
+            slug = "%s-vs-%s-%s" % ((g["away"]["tricode"] or "").lower(),
+                                    (g["home"]["tricode"] or "").lower(), gid)
+        url = "https://www.nba.com/game/%s/box-score" % slug
+        rec = save_page("boxscore__" + slug, url)
+        rec["game_id"] = gid
+        rec["date"] = g["date"]
+        rec["card"] = g
+        box = None
+        if rec["http_status"] == 200:
+            nd = next_data(read_gz(os.path.join(OUT, "boxscore__%s.html.gz" % slug)))
+            box = slim_box(nd) if nd else None
+            rec["box"] = box
+        manifest["games"].append(rec)
+        time.sleep(0.25)
+
+    manifest["finished_utc"] = utc()
+    manifest["counts"] = {
+        "dates": len(manifest["dates"]),
+        "dates_ok": sum(1 for r in manifest["dates"] if r["http_status"] == 200),
+        "games": len(manifest["games"]),
+        "games_ok": sum(1 for r in manifest["games"] if r["http_status"] == 200),
+        "boxes_parsed": sum(1 for r in manifest["games"] if r.get("box")),
+    }
+    with open(os.path.join(OUT, "_season_manifest.json"), "w") as fh:
+        json.dump(manifest, fh, indent=1)
+    print(json.dumps(manifest["counts"], indent=1))
+    return 0
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     os.makedirs(PDF_DIR, exist_ok=True)
     started = utc()
     print("capture run %s started %s" % (RUN_ID, started))
+    if "--season" in sys.argv:
+        return season_pass()
 
     manifest = {"run_id": RUN_ID, "session": "arena/801ba27f-nba1",
                 "started_utc": started, "pages": [], "box_scores": [], "pdfs": []}
