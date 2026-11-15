@@ -192,7 +192,10 @@ def lines_view(hz_rows, ev, minutes, sigma_margin):
                 return None
             return -int(round(100 * (1 - p) / p)) if p >= 0.5 else int(round(100 * p / (1 - p)))
         out.append({
+            "game_id": r.get("game_id"),
             "date": r["date"],
+            "home": r.get("home"),
+            "away": r.get("away"),
             "time_et": r.get("time_et"),
             "matchup": r["matchup"],
             "away_rec": r.get("away_record_printed"),
@@ -511,7 +514,7 @@ def main():
         red = M.redistribution(shares, injury_rows, r["date"])
         redist.append({"date": r["date"], "game_id": r["game_id"],
                        "matchup": r["matchup"], "rows": red})
-    write_json(os.path.join(DER, "minutes.json"), {
+    minutes = {
         "generated_at_utc": now_utc(),
         "injury_edition_used": (newest_edition or {}).get("edition_id"),
         "injury_edition_url": (newest_edition or {}).get("url"),
@@ -519,7 +522,8 @@ def main():
         "status_weight_rule": M.STATUS_WEIGHT,
         "redistribution": redist,
         "source": "official box scores and the official injury report",
-    })
+    }
+    write_json(os.path.join(DER, "minutes.json"), minutes)
 
     # ---- per-player game logs --------------------------------------------
     logs = player_logs(boxes_doc, injury_rows, games)

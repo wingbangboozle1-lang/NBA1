@@ -97,6 +97,11 @@ STATUS_WORDS = ("NOT YET SUBMITTED", "Questionable", "Doubtful", "Probable",
 
 
 # ---------------------------------------------------------------------- helpers
+def log(msg):
+    print("[%s] %s" % (datetime.datetime.now(datetime.timezone.utc)
+                        .strftime("%Y-%m-%dT%H:%M:%SZ"), msg), flush=True)
+
+
 def load(path, default=None):
     if not os.path.exists(path):
         return default
@@ -224,6 +229,153 @@ def team_inputs(stats):
                                        "advanced_season")}}
 
 
+# ------------------------------------------------------------ arena coordinates
+# The arena coordinate table. The NBA publishes the arena and its city; the
+# coordinates come from the U.S. Census Bureau 2025 Gazetteer file of
+# incorporated places and CDPs, a federal statistical source and the only
+# official gazetteer this build can cite for coordinates. That gazetteer
+# covers the United States only, so Toronto is left without a coordinate and
+# every travel distance that needs one is left blank and flagged rather than
+# estimated.
+GAZETTEER_SUFFIXES = (" consolidated city", " city", " borough", " CDP", " town",
+                      " village", " municipality", " urban area", " urban cluster")
+
+# tricode -> (city/state candidates in priority order, the arena the NBA
+# publishes for the club)
+ARENA_TABLE = {
+    "ATL": ([("Atlanta", "GA")], "State Farm Arena"),
+    "BOS": ([("Boston", "MA")], "TD Garden"),
+    "BKN": ([("Brooklyn", "NY"), ("New York", "NY")], "Barclays Center"),
+    "CHA": ([("Charlotte", "NC")], "Spectrum Center"),
+    "CHI": ([("Chicago", "IL")], "United Center"),
+    "CLE": ([("Cleveland", "OH")], "Rocket Arena"),
+    "DAL": ([("Dallas", "TX")], "American Airlines Center"),
+    "DEN": ([("Denver", "CO")], "Ball Arena"),
+    "DET": ([("Detroit", "MI")], "Little Caesars Arena"),
+    "GSW": ([("San Francisco", "CA")], "Chase Center"),
+    "HOU": ([("Houston", "TX")], "Toyota Center"),
+    "IND": ([("Indianapolis", "IN")], "Gainbridge Fieldhouse"),
+    "LAC": ([("Los Angeles", "CA")], "Intuit Dome"),
+    "LAL": ([("Los Angeles", "CA")], "Crypto.com Arena"),
+    "MEM": ([("Memphis", "TN")], "FedExForum"),
+    "MIA": ([("Miami", "FL")], "Kaseya Center"),
+    "MIL": ([("Milwaukee", "WI")], "Fiserv Forum"),
+    "MIN": ([("Minneapolis", "MN")], "Target Center"),
+    "NOP": ([("New Orleans", "LA")], "Smoothie King Center"),
+    "NYK": ([("New York", "NY")], "Madison Square Garden"),
+    "OKC": ([("Oklahoma City", "OK")], "Paycom Center"),
+    "ORL": ([("Orlando", "FL")], "Kia Center"),
+    "PHI": ([("Philadelphia", "PA")], "Xfinity Mobile Arena"),
+    "PHX": ([("Phoenix", "AZ")], "Footprint Center"),
+    "POR": ([("Portland", "OR")], "Moda Center"),
+    "SAC": ([("Sacramento", "CA")], "Golden 1 Center"),
+    "SAS": ([("San Antonio", "TX")], "Frost Bank Center"),
+    "TOR": ([("Toronto", "ON")], "Scotiabank Arena"),
+    "UTA": ([("Salt Lake City", "UT")], "Delta Center"),
+    "WAS": ([("Washington", "DC")], "Capital One Arena"),
+}
+
+# The NBA prints its own arena-city names on the schedule. These are the
+# printed names that appear in the captured schedule, mapped onto the city the
+# coordinate table is keyed by. A city that is not listed here is left blank.
+NBA_CITY_TO_TRI = {
+    "Atlanta": "ATL", "Boston": "BOS", "Brooklyn": "BKN", "Charlotte": "CHA",
+    "Chicago": "CHI", "Cleveland": "CLE", "Dallas": "DAL", "Denver": "DEN",
+    "Detroit": "DET", "Golden State": "GSW", "San Francisco": "GSW",
+    "Houston": "HOU", "Indiana": "IND", "Indianapolis": "IND",
+    "LA": "LAL", "Los Angeles": "LAL", "Los Angeles Lakers": "LAL",
+    "Memphis": "MEM", "Miami": "MIA", "Milwaukee": "MIL",
+    "Minnesota": "MIN", "Minneapolis": "MIN", "New Orleans": "NOP",
+    "New York": "NYK", "Oklahoma City": "OKC", "Orlando": "ORL",
+    "Philadelphia": "PHI", "Phoenix": "PHX", "Portland": "POR",
+    "Sacramento": "SAC", "San Antonio": "SAS", "Toronto": "TOR",
+    "Utah": "UTA", "Salt Lake City": "UTA", "Washington": "WAS",
+}
+
+
+def _norm_place(name):
+    n = re.sub(r"\s*\(balance\)\s*$", "", name.strip())
+    for suf in GAZETTEER_SUFFIXES:
+        if n.endswith(suf):
+            return n[:-len(suf)].strip().lower()
+    return n.lower()
+
+
+def parse_gazetteer(zip_path):
+    """The official coordinate table, read from the captured Census gazetteer."""
+    import zipfile
+    with zipfile.ZipFile(zip_path) as zf:
+        name = [n for n in zf.namelist() if n.endswith(".txt")][0]
+        text = zf.read(name).decode("utf-8", "replace")
+    lines = text.splitlines()
+    hdr = lines[0].split("|")
+    idx = {n: i for i, n in enumerate(hdr)}
+    places = {}
+    for line in lines[1:]:
+        f = line.split("|")
+        if len(f) < len(hdr):
+            continue
+        try:
+            lat = float(f[idx["INTPTLAT"]])
+            lon = float(f[idx["INTPTLONG"]])
+        except (ValueError, KeyError):
+            continue
+        key = (_norm_place(f[idx["NAME"]]), f[idx["USPS"]])
+        lsad = f[idx["LSAD"]]
+        rank = 0 if lsad in ("25", "43") else (1 if lsad == "57" else 2)
+        prev = places.get(key)
+        if prev is None or rank < prev["rank"]:
+            places[key] = {"name": f[idx["NAME"]], "lat": lat, "lon": lon,
+                           "lsad": lsad, "rank": rank}
+    out = {}
+    for tri, (cands, arena) in ARENA_TABLE.items():
+        hit = used = None
+        for city, state in cands:
+            k = (city.lower(), state)
+            if k in places:
+                hit, used = places[k], (city, state)
+                break
+        if hit is None:
+            out[tri] = {
+                "arena": arena,
+                "arena_city": cands[0][0],
+                "arena_state": cands[0][1],
+                "latitude": None,
+                "longitude": None,
+                "coordinate_status": ("BLANK - the U.S. Census Bureau gazetteer "
+                                      "covers the United States only and has no "
+                                      "entry for this city, and no other official "
+                                      "coordinate source was reachable; the value "
+                                      "is left blank rather than estimated"),
+                "coordinate_source": None,
+                "coordinate_source_url": None,
+            }
+            continue
+        out[tri] = {
+            "arena": arena,
+            "arena_city": used[0],
+            "arena_state": used[1],
+            "latitude": hit["lat"],
+            "longitude": hit["lon"],
+            "gazetteer_place_name": hit["name"],
+            "gazetteer_lsad": hit["lsad"],
+            "coordinate_status": "resolved",
+            "coordinate_source": ("U.S. Census Bureau 2025 Gazetteer file of "
+                                  "incorporated places and CDPs "
+                                  "(2025_Gaz_place_national.txt), "
+                                  "INTPTLAT/INTPTLONG"),
+            "coordinate_source_url": ("https://www2.census.gov/geo/docs/maps-data/"
+                                      "data/gazetteer/2025_Gazetteer/"
+                                      "2025_Gaz_place_national.zip"),
+            "coordinate_source_index_url": ("https://www2.census.gov/geo/docs/"
+                                            "maps-data/data/gazetteer/"
+                                            "2025_Gazetteer/"),
+            "match_basis": ("the arena city the NBA publishes for this club, "
+                            "joined on the gazetteer place name and state"),
+        }
+    return out
+
+
 # --------------------------------------------------------------- game indexing
 def index_games(games_doc, boxes_doc):
     """One record per game: teams, status, tip time, arena, quarters, final."""
@@ -336,12 +488,20 @@ def box_form(boxes_doc, last_n=10):
             if not t:
                 continue
             a = agg.setdefault(t, {"pts": 0, "fga": 0, "fta": 0, "oreb": 0, "tov": 0,
-                                    "min": 0.0, "gp": 0})
+                                    "min": 0.0, "gp": 0, "oreb_source": False})
             for k, key in (("pts", "points"), ("fga", "fg_att"), ("fta", "ft_att"),
-                           ("oreb", None), ("tov", "turnovers")):
+                           ("oreb", "offensive_rebounds"),
+                           ("dreb", "defensive_rebounds"),
+                           ("tov", "turnovers")):
                 if key is None:
                     continue
                 v = p.get(key)
+                if v is None and k == "oreb":
+                    # the capture may only carry the total rebounds; without an
+                    # official offensive-rebound count the estimate cannot use it
+                    continue
+                if k == "oreb":
+                    a["oreb_source"] = True
                 if v is not None:
                     try:
                         a[k] += float(v)
@@ -353,11 +513,19 @@ def box_form(boxes_doc, last_n=10):
                 a["gp"] += 1
         # team totals for rebounds/turnovers are summed from the player rows
         for t, a in agg.items():
+            # POSS = FGA + 0.44*FTA - OREB + TOV. When the capture carries no
+            # official offensive-rebound count the OREB term is dropped and the
+            # row records that it was, rather than substituting a guess.
             poss = a["fga"] + 0.44 * a["fta"] - a["oreb"] + a["tov"]
+            poss_basis = ("FGA + 0.44*FTA - OREB + TOV (all official box-score "
+                          "counts)" if a["oreb_source"] else
+                          "FGA + 0.44*FTA + TOV (the capture carries no official "
+                          "offensive-rebound count, so the OREB term is dropped)")
             rec = per_team.setdefault(t, {"games": [], "opp_pts": []})
             rec["games"].append({
                 "game_id": g["game_id"], "date": g["date"],
-                "pts": a["pts"], "poss": poss, "min": a["min"],
+                "pts": a["pts"], "poss": poss, "poss_basis": poss_basis,
+                "min": a["min"],
                 "opponent": g.get("home_tricode") if t == g.get("away_tricode")
                             else g.get("away_tricode"),
             })
@@ -466,8 +634,15 @@ def injury_editions(editions_doc, raw_dir):
         if text_path:
             full = os.path.join(ROOT, text_path)
             if os.path.exists(full):
-                with gzip.open(full, "rt", encoding="utf-8") as fh:
-                    rows = parse_injury_text(fh.read())
+                if full.endswith(".gz"):
+                    with gzip.open(full, "rt", encoding="utf-8") as fh:
+                        rows = parse_injury_text(fh.read())
+                else:
+                    with open(full, encoding="utf-8") as fh:
+                        rows = parse_injury_text(fh.read())
+                rec["text_source_path"] = text_path
+                rec["text_format"] = "gzip text layer of the official PDF" \
+                    if full.endswith(".gz") else "plain text"
         rec["rows"] = rows
         editions.append(rec)
     # consecutive diff, in edition order within a day

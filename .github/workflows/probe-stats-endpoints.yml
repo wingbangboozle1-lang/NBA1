@@ -1,0 +1,101 @@
+name: Probe the official stats endpoints
+
+# Purpose
+# -------
+# The 2026-11-15 capture could not read the official team-stat tables:
+#   * stats.nba.com timed out on every one of its nine requests;
+#   * www.nba.com/stats/teams/* returns only the page shell, and the headless
+#     render waited 120s for a table that never appeared;
+#   * www.nba.com/standings is rendered the same way.
+#
+# This probe answers one question with evidence instead of an assumption: from
+# a GitHub runner, WHICH of these official endpoints actually returns the
+# published table? It tries, in order:
+#
+#   1. the stats.nba.com JSON API with the headers the site itself sends;
+#   2. the stats.nba.com JSON API with a plain browser header set;
+#   3. cdn.nba.com static JSON;
+#   4. a headless Chrome render of the rendered stats page and of the
+#      standings page, dumping both the rendered HTML and every table it can
+#      find.
+#
+# Everything it fetches is written under data/captures/2026-11-15/probe/ with
+# the URL, the HTTP status, the byte count and the SHA-256 of the bytes, so
+# the answer is reviewable rather than asserted.
+#
+# Scope note (COORDINATION.md section 40): a NEW workflow with a NEW name. It
+# does not touch engine/fetch_official.py or .github/workflows/refresh-data.yml,
+# which belong to seat arena/7eb1c20a-nba1 (section 38).
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["arena/48727fe1-nba1"]
+    paths:
+      - scripts/probe_stats_endpoints.py
+      - scripts/probe_stats_render.mjs
+      - .github/workflows/probe-stats-endpoints.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: probe-stats-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install the headless browser driver
+        continue-on-error: true
+        run: npm install --no-save puppeteer-core
+
+      - name: Probe the endpoints
+        continue-on-error: true
+        run: python3 scripts/probe_stats_endpoints.py
+
+      - name: Render the pages
+        continue-on-error: true
+        run: node scripts/probe_stats_render.mjs || true
+
+      - name: Upload the probe as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-stats-probe
+          path: data/captures/2026-11-15/probe
+          if-no-files-found: warn
+
+      - name: Commit the probe
+        if: always()
+        run: |
+          set -u
+          git config user.name  "nba1-bot"
+          git config user.email "nba1-bot@users.noreply.github.com"
+          git add data/captures/2026-11-15/probe || true
+          if git diff --cached --quiet; then
+            echo "the probe produced no new bytes"
+            exit 0
+          fi
+          git commit -m "chore(probe): official stats endpoint reachability [skip ci]"
+          for i in 1 2 3 4 5; do
+            if git push; then
+              echo "probe pushed on attempt $i"
+              exit 0
+            fi
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            sleep $((i * 5))
+          done
+          echo "::warning::could not push the probe after 5 attempts; it is in the run artifact"
+          exit 0
