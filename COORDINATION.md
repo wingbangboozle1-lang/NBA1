@@ -3880,3 +3880,36 @@ workflow run existed for the 11:46Z window and labelled a `build_outcome: succes
 unattributed gate bypass. Both came from reading only the first page of the Actions API. The run exists
 (43710500439) and the workflow at that commit had no gate step at all. REPORT.md now carries the
 correction explicitly in R-43-03.
+
+---
+
+## 44. Session `arena/5ae0869e-nba1` — §40 takeover, delivery record (claimed 2026-11-15 23:3x UTC; section number 41 was already taken on `main` by `arena/513516f6-nba1` and `arena/49f70042-nba1`, so this record is §44)
+
+**Collision record.** My §41 claim was pushed to this branch at `1377f43`. By the time PR #107 was merged, `main` already carried §41 (`arena/513516f6-nba1`, which had taken over PR #106 and merged it as PR #108 with its own register). The §41 text from this branch is therefore not on `main`; the work is recorded here instead. Nothing from `main` was overwritten: this branch was merged with `main` (`-X theirs` for conflicting hunks, which is `main`'s side).
+
+**What this session delivered (PR #107, on top of `main` at `1d99e1c`):**
+
+| # | Task | Status | Evidence |
+| --- | --- | --- | --- |
+| H01 | Board claim, pushed first | done | `1377f43` |
+| H02 | Carry PR #106's 29 non-board files | **superseded by `main`** (PR #108 merged the same work). The merge kept `main`'s versions; no carried file is left different from `main` except the injury banner below. | `git diff origin/main` on this branch: 2 files |
+| H03 | Gate suite on the final tree | done, all green | check_site · verify_integration (0 errors) · check_links · check_rendered · verify_all (VERIFY OK) · render_check (137 pages, 8,647 rows, 0 problems) · verify_ledger (chain OK) |
+| H04 | PR → `main`, merge, Pages confirmation | in progress (see §44.1) | PR #107 |
+
+**Changes in PR #107 (the only new content):**
+- `scripts/build_dashboard.py` + `site/pages/injuries.html`: a warning banner stating that a newer official injury edition (**11/15/26 05:15 PM ET**) is live on the NBA host and is **not yet ingested**. The "Newest official edition" title is renamed "Edition shown below", because the 06:15 AM edition is no longer the newest. No row from the 05:15 PM edition is used anywhere.
+- `data/content/flagged.json`: flag **F92** (appended, new ID only; F78 is taken on `main`).
+
+**Verification performed (official sources, independent of prior captures):**
+- The five 11/14 finals on `https://www.nba.com/games?date=2026-11-14` match `data/official/results_2026-11-14.json` exactly: DEN 116–108 NOP (`0022600231`), DAL 117–127 CLE (`0022600232`), DET 117–137 MIA (`0022600233`), BKN 110–129 MEM (`0022600234`), CHI 117–106 MIN (`0022600235`).
+- The 11/14 settlement arithmetic was recomputed from the rows: singles −1.20 + parlays −3.30 + SGP +2.26 = −2.24 units, which matches `data/settlement/settlement_2026-11-14.json` and the executive summary.
+- `DEN -8.0` against a final margin of exactly 8 is graded as PUSH, which is correct.
+- The 11/15 05:15 PM ET injury PDF was read at `https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_15PM.pdf`. Its header is "Injury Report: 11/15/26 05:15 PM". Only its first two chunks were read; the rows were not transcribed.
+
+**Irregularities for review (published on Flagged for Review, non-blocking):**
+- **F92 (high):** the newer 05:15 PM edition is not ingested (see above).
+- **Refresh gate failure** is recorded on `main` in §43 and in the flag register, not re-flagged here. The `data/raw/_last_refresh.json` record I checked at 12:47:50Z reported `gate_outcome: FAIL` with zero-row parses for S1/S2/S8/S9 (team stats), S4 (schedule) and S5 (injury index). The probe shows those URLs answering HTTP 200 from the runner, so the fault is in the parsers or fetch headers.
+
+### 44.1 Delivery record
+
+- PR #107 (`arena/5ae0869e-nba1` → `main`) first attempt: `validate` pass, `probe` still pending after 15 min (known slow reachability workflow, R-30-2). Merge refused on conflict with `main` (PR #108/#110/#111 had landed). Resolved by merging `main` in, not by rebasing or force-pushing; conflicts resolved to `main`'s side; the rebuilt tree passed every gate above. The PR is merged only after `validate` passes on the merged tree.
