@@ -53,6 +53,7 @@
 <a href="questions.html">Open Questions</a>
 <a href="suggestions.html">Suggestions</a>
 <a href="decisions.html">Decisions: pick a path</a>
+<a href="requirements.html">Brief Traceability</a>
 <a href="flagged.html">Flagged for Review</a>
 <a href="sources.html">Source Register</a>
 <a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
@@ -748,6 +749,132 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F78</td>
+<td>high</td>
+<td><b>Pre-registration was frozen after the 11/14 picks it would govern</b></td>
+<td>data/prereg/*.json were frozen 2026-11-15T12:55Z. The 11/14 published picks are ledger entry 1 (2026-11-14T22:18:48Z), which predates every prereg file. The 11/14 results are therefore not pre-registered evidence and must not be presented as such.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/prereg/S01.json" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F79</td>
+<td>high</td>
+<td><b>Ledger anchor commit is not on main</b></td>
+<td>origin/main is a single squashed root commit (cd8fd27). The pre-tip anchor commit ef2e723 named in ledger entry 1 is an ancestor of arena/83d380ad-nba1 only, not of main. The hash chain still verifies (scripts/verify_ledger.py), but the external anchor is not on main's history.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/commit/ef2e723e13523b5b2495656c2a4ae5b461244374" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F80</td>
+<td>medium</td>
+<td><b>First 11/14 tip stated as 00:30Z; official tip is 7:00 PM ET (00:00Z)</b></td>
+<td>COORDINATION §40 says the earliest 11/14 game tipped at 00:30Z on 11/15. The official results file lists DEN @ NOP at 7:00 PM ET, which is 00:00Z (EST, UTC-5). Ledger entry 1 records first_tip_utc 2026-11-15T00:00Z, which matches the official time.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F81</td>
+<td>high</td>
+<td><b>Player game logs cover 3 players; the injury edition lists 101 rows</b></td>
+<td>data/live/player_game_logs.json holds 3 players. The 11/15 06:15 AM ET injury edition has 101 rows. The brief requires per-player logs for at least the players on an injury report, so coverage is far short.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/player/203999/nikola-joki-c/game-log" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F82</td>
+<td>medium</td>
+<td><b>Injury PDFs are not retained in the repository</b></td>
+<td>The fetcher downloads injury PDFs, but no .pdf file is tracked in git. The repository holds transcriptions with revision and retrieval times, plus one consecutive diff. Every PDF must be stored with its timestamp to meet the brief.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F83</td>
+<td>medium</td>
+<td><b>Picks page has no rotation-availability column</b></td>
+<td>The picks table shows Home injury status and Away injury status. The brief asks for rotation availability as its own column.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F84</td>
+<td>high</td>
+<td><b>Home-court advantage is a fixed constant, not pinned to the measured home-win rate</b></td>
+<td>engine/model_core.py uses flat_hca = 2.0. scripts/originate_horizon.py records that HCA could not be sourced from an official NBA page. The measured 57.6% home-win rate from another build is a note only and is not applied.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F85</td>
+<td>high</td>
+<td><b>No arena-coordinate table; travel distance and 3-in-4 not computed</b></td>
+<td>The repository has no arena latitude or longitude table, so travel distance cannot be computed from a sourced table. No 3-in-4 metric was found by search. Rest and back-to-back are shown per game.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F86</td>
+<td>high</td>
+<td><b>No closing line or licensed price: market-anchored prior is blocked</b></td>
+<td>data/prereg/S01.json states: 'No licensed two-sided price exists (no odds feed)'. Blending the model with a closing line, weighted by out-of-sample log-loss, cannot be built until an official or licensed price source exists.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/prereg/S01.json" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F87</td>
+<td>high</td>
+<td><b>Two independent estimators and a disagreement headline are not implemented</b></td>
+<td>The picks table shows reference and model margins side by side and a spread edge. No second independent estimator module was found by search, and the headline was not verified to be a disagreement measure.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F88</td>
+<td>medium</td>
+<td><b>No noise-band refusal rule for strategies</b></td>
+<td>Luck z-scores are computed for all 30 teams in command-center/data/luck.json. No rule was found that refuses to publish a strategy leaning on a team outside the noise band.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/command-center/data/luck.json" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F89</td>
+<td>medium</td>
+<td><b>Top-8 minutes shares not reported; redistribution rule unmeasured</b></td>
+<td>data/derived/injury_impact.json sets the redistribution rule to a model rule, labelled 'MODEL RULE, not measured'. Top-8 minutes shares for each team are not reported.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/injury_impact.json" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F90</td>
+<td>medium</td>
+<td><b>Parlay rho is a fixed model constant, not a measured value</b></td>
+<td>scripts/generate_picks.py uses SGP_RHO_TEAMMATES = -0.2 and SGP_RHO_OPPONENTS = 0.05, labelled as model-derived. The naive product printed beside each parlay price was not verified on the parlay table.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/generate_picks.py" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F91</td>
+<td>high</td>
+<td><b>Most nba.com URLs were blocked from the probe runner; row values were not re-read here</b></td>
+<td>data/raw/probe_official.json: 1,911 URLs probed, 114 OK, 1,679 blocked, 116 unreachable. This session's sandbox allows only GitHub and package hosts, so no nba.com value was re-fetched and compared. Row-level values remain as captured in the repo.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/probe_official.json" target="_blank" rel="noopener">link</a></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">

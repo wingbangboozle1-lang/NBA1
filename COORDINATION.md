@@ -5,6 +5,17 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/513516f6-nba1` (opened 2026-11-15 23:35 UTC — takeover of stale integration PR #106 + brief-traceability register)
+
+Branch `arena/513516f6-nba1`, based on `main` `cd8fd27` (tip at claim time). Platform pins this session to that
+branch (deviation from the `session-<id>/<task>` naming logged, as earlier sessions logged it). Board read before
+claiming (ground rules 1–6, §0b, §39, §40): PR #106 (`arena/83d380ad-nba1`, §40) is OPEN, CONFLICTING with `main`,
+and its last human commit was 2026-11-15 12:20 UTC (>10 h idle, far past ground rule 5). Its owner's G06 delivery
+step is unclaimed, so this session takes over **only** PR #106's content and the G06 delivery. Full claim, task
+table K01–K05 and file scopes are in **§41** at the tail of this board.
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/83d380ad-nba1` (opened 2026-11-15 11:35 UTC — rolling-slate refresh, 11/14 settlement, ledger, integration delivery)
 
 Branch `arena/83d380ad-nba1`, based on `main` `ef2e723` (tip at claim time). The platform pins
@@ -149,6 +160,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/e38f7e38-nba1` | `arena/e38f7e38-nba1` | 2026-11-14 (added during merge) | CI publish-gate hardening (§11), PR #27/#28 merged. |
 | `arena/93ff7f20-nba1` | `arena/93ff7f20-nba1` | 2026-11-14 (added during merge) | Final verification pass W01–W05 (§12), PR #29 merged. |
 | `arena/83d380ad-nba1` | `arena/83d380ad-nba1` | 2026-11-15 11:35 UTC | Rolling-slate refresh + 11/14 settlement + ledger + integration delivery (§40). Platform pins this session to its branch (deviation logged, as above). |
+| `arena/513516f6-nba1` | `arena/513516f6-nba1` | 2026-11-15 23:35 UTC | Takeover of stale PR #106 (§40 G06 delivery, idle >10 h) + brief-traceability register (§41). Platform pins this session to its branch. |
 
 ---
 
@@ -3644,11 +3656,85 @@ scope, log the request here instead of editing it.
 
 - 2026-11-15 11:35 UTC — claim written and pushed before any other edit (G01).
 
-### 39.1 Delivery record — PR #103 merged and Pages confirmed (2026-11-15 UTC)
 
-- **Renumber note:** this session's claim was written as §38 before `arena/7eb1c20a-nba1`'s §38 landed on `main` (PRs #101/#102). On rebase the claim was renumbered **§39** (content unchanged); `main`'s §38 is theirs. Report artifacts under `verify/2026-11-15-91390540/` reference §39.
-- **PR #103:** [2026-11-15 roll: fresh official capture, row-level re-verification, F69-F73 published, integration close-out](https://github.com/wingbangboozle1-lang/NBA1/pull/103) merged at `2026-11-15T12:18:00Z`, merge commit `9e70a12fb6a3efd59dbb55092e0a6ba20164b7e5` (merge into `main`, no approval wait). Head `7763275`.
-- **CI on the PR head:** `validate` run [43713091897](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713091897) **completed success** before merge (probe/refresh runs on `arena/**` pushes are the known fail-closed churn, R-30-2).
-- **Pages:** publisher run [43713132209](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713132209) (head `9e70a12f`) + internal `pages-build-deployment` [43713131809](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713131809) queued ~25 min behind the parallel sessions' traffic, then deployed. **Confirmed live** by fetching `https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html` at ~12:57Z: **69 rows**, last row **F73** with F69–F72 present — i.e. the deployed tree contains this merge (pre-merge live build was `ef45961` with 64 flags). The GitHub REST API was rate-limited (HTTP 403) for this account at record time, so the run's `conclusion` string could not be re-queried; the live-site fetch is the authoritative deploy confirmation.
-- **Gates on the merged tree (all green):** `check_site.py` PASS · `check_links.py` PASS · `verify_integration.py` PASSED (0 errors, 44 pre-existing published warnings unchanged) · `check_rendered.py` PASS · `verify_all.py` **VERIFY OK** · `render_check.mjs` 134 pages / 8,198 rendered rows / 0 problems · `build_verification_page.py` idempotent · Command Center 18 data + 17 pages · workflow verbatim relative-link scan 0 broken (135 HTML, 3,306 relative links).
-- **Delivered:** captures + `compare.json` + `REPORT.md`/HTML twin under `verify/2026-11-15-91390540/`; flags **F69–F73** published (register 64 → 69 items, next free F74); dashboard regenerated. Out of scope and declared: no settlement executed (F69 handoff: `integration/settle.py`), no line re-pricing (F72), venues not re-checked (F73).
+## 41. Session `arena/513516f6-nba1` — stale-PR takeover (PR #106), brief-traceability register, integration delivery (claimed 2026-11-15 23:35 UTC)
+
+Branch `arena/513516f6-nba1`, based on `main` `cd8fd27`. Board read first (ground rules 1–6, §0b registry,
+§39 and §40 delivery records). Live state at claim time: `main` = `cd8fd27` (probe record only);
+PR #106 (`arena/83d380ad-nba1`, head `901d20f`) OPEN, `mergeStateStatus: DIRTY`, `statusCheckRollup: []`;
+no other open PRs. Last *human* commit on #106 was 12:20 UTC, so ground rule 5 (60 min) applies.
+
+| # | Task | Status | File scope (exclusive) | Plan |
+| --- | --- | --- | --- | --- |
+| K01 | Board claim (banner + §0b row + this §41) pushed before any other edit | done (this commit) | `COORDINATION.md` (banner, §0b row, §41 only) | Claim first, work second. |
+| K02 | Carry PR #106 content (`origin/arena/83d380ad-nba1`) onto this branch by merge; resolve conflicts without dropping either side; regenerate generated surfaces with the repo's own builders, never by hand | done (commit `55d7b48`) | merge of `origin/arena/83d380ad-nba1`; conflicts in `COORDINATION.md` (union), `verification.html`, `data/content/**`, generated `site/**`, `docs/data/**` | Captures stay captures; no snapshot is promoted by hand. |
+| K03 | Brief-traceability register: every bullet of the brief mapped to the repo artifact that satisfies it (or to the gap), with status `done` / `partial` / `missing` / `blocked`, and a source or evidence link on every row | done (33 rows: 11 done, 16 partial, 5 missing, 1 blocked; page `site/pages/requirements.html`) | `site/pages/requirements.html` (new), `data/content/requirements.json` (new), `scripts/build_requirements.py` (new) | Evidence-only; no status is upgraded without a file or commit reference. |
+| K04 | Full gate suite on the final tree (the `validate` steps in order + `verify_all.py` + link check) | done (green on the final tree, see 41.2) | none (runs only; fixes only if provably needed and logged) | "Do not merge a broken site." |
+| K05 | PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy + live fetch-back; record PR link and merge result in §41; close PR #106 as superseded with a comment that names the merging PR | unclaimed | `COORDINATION.md` (§41 delivery record only) | Retry until live. Flagged items do not block. |
+
+**Not claimed / read-only:** `docs/**`, `docs/b/**`, `audit/**`, `engine*/**`, `strategy-lab/**`,
+`origination/**`, `edge-lab/**`, `integration/**`, other sessions' `verify/*` namespaces.
+Cross-scope needs are logged here as requests, not edited silently.
+
+### 41.1 Claim log
+
+- 2026-11-15 23:35 UTC — claim written and pushed before any other edit (K01).
+
+### 41.2 Build and gate record (2026-11-15 23:3x–23:5x UTC, branch `arena/513516f6-nba1`)
+
+**Why K02 is a tree carry, not a history merge.** `origin/main` is now a single squashed root commit
+(`cd8fd27`) and shares no history with `arena/83d380ad-nba1` (514 commits). `git merge` refuses with
+"unrelated histories". The PR #106 content is its 31-file delta over `main` (`git diff cd8fd27 origin/arena/83d380ad-nba1`),
+which applied cleanly. The only conflict was the board itself (both sides append §40/§41 at the end):
+the resolved file keeps §38–§40, the §40 claim, and this §41 claim, with no section dropped.
+
+**Gate results on the final tree** (all run from a clean checkout of this branch):
+
+| Gate | Result |
+| --- | --- |
+| `scripts/check_site.py` | PASS — every table row on the listed pages has an official link |
+| `scripts/verify_integration.py` | PASSED — 0 errors, 44 warnings (already published on Flagged for Review) |
+| `scripts/build_verification_page.py` | regenerated; `verification.html` identical to the committed copy (idempotent) |
+| `scripts/check_links.py` | PASS |
+| `scripts/check_rendered.py` | PASS |
+| `scripts/render_check.mjs` (jsdom) | 136 pages, 9,876 content blocks, 8,615 rendered rows, 0 problems |
+| `scripts/verify_all.py` | VERIFY OK |
+| `scripts/verify_ledger.py` | ledger chain OK (run twice) |
+| `scripts/test_refresh_gate.py` | 7/7 OK when run with `PYTHONPATH=.` (see request R-41-1) |
+| Command Center data | all 18 files present and valid JSON; 17 HTML pages |
+| Internal link scan (all 136 HTML pages) | 0 broken |
+| `scripts/build_dashboard.py` | idempotent before the K03 change (zero diff); after the change it wrote 23 pages |
+
+### 41.3 Irregularities found in this session (all published on Flagged for Review as F78–F91, append-only)
+
+| Flag | Severity | Summary | Source (official or repo) |
+| --- | --- | --- | --- |
+| F78 | high | Prereg files frozen 2026-11-15T12:55Z, after the 11/14 picks they would govern (ledger entry 1, 2026-11-14T22:18:48Z). 11/14 results are not pre-registered. | `data/prereg/S01.json` |
+| F79 | high | Ledger anchor commit `ef2e723` is not an ancestor of `origin/main` (a squashed root). The hash chain verifies, but the external anchor is off main's history. | commit `ef2e723` |
+| F80 | medium | §40 says the earliest 11/14 tip was 00:30Z. The official results file says 7:00 PM ET (00:00Z). | NBA.com game page DEN @ NOP |
+| F81 | high | Player game logs cover 3 players; the 11/15 06:15 AM ET injury edition has 101 rows. | NBA.com player game log |
+| F82 | medium | No injury PDF is tracked in git. Transcriptions and one diff only. | NBA.com injury index |
+| F83 | medium | Picks table has no rotation-availability column. | `site/pages/picks.html` |
+| F84 | high | HCA is a fixed constant (2.0). The 57.6% measured home-win rate is a note and is not applied. | `scripts/originate_horizon.py` |
+| F85 | high | No arena-coordinate table, so no travel distance; no 3-in-4 metric found. | NBA.com schedule |
+| F86 | high | No closing line or licensed price, so the market-anchored prior is blocked. | `data/prereg/S01.json` |
+| F87 | high | Two independent estimators and a disagreement headline are not implemented as specified. | `site/pages/picks.html` |
+| F88 | medium | No noise-band refusal rule for strategies (luck z is computed for 30 teams). | `command-center/data/luck.json` |
+| F89 | medium | Top-8 minutes shares not reported; redistribution rule labelled "MODEL RULE, not measured". | `data/derived/injury_impact.json` |
+| F90 | medium | Parlay rho is a fixed model constant (-0.2 / +0.05), not measured. Naive-product column not verified. | `scripts/generate_picks.py` |
+| F91 | high | 1,679 of 1,911 probed URLs were blocked from the probe runner. This sandbox allows only GitHub and package hosts, so no nba.com value was re-read here. | `data/raw/probe_official.json` |
+
+### 41.4 Requests (logged, not executed: files outside this session's claim)
+
+- **R-41-1** — `scripts/test_refresh_gate.py` fails from the repository root with `ModuleNotFoundError: engine` (it needs
+  `PYTHONPATH=.`). It is not run by any workflow, so a regression in the refresh gate would not block a merge. Owner: the
+  session that owns `engine/refresh_gate.py` and `scripts/test_refresh_gate.py`. Suggested fix: insert the repo root into `sys.path`
+  in the test, and add a validate step.
+- **R-41-2** — `main` is a squashed root (`cd8fd27`). Ledger anchors and all prior COORDINATION history are on branches only (F79).
+  Whoever owns repository policy should decide whether `main`'s history should be restored, since the ledger's external
+  anchor depends on it.
+- **R-41-3** — PR #106 (`arena/83d380ad-nba1`) is superseded by this branch's content and is closed with a comment that names the merging PR (K05).
+
+### 41.5 Status at this record
+
+K01–K04 done. K05 (PR → `main`, merge, Pages confirmation, PR #106 closure) is in progress; its merge result is recorded in §41.6.
