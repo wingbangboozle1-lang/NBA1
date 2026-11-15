@@ -1,0 +1,113 @@
+name: Capture official 2026-11-15 rolling slate
+
+# Purpose
+# -------
+# The rolling slate for 2026-11-15 needs fresh official inputs: the slate
+# pages, every box score (final score AND quarter scores AND player boxes),
+# the standings, the three official team-stat pages, every injury-report PDF
+# edition with its timestamp, and an official arena-coordinate table.
+#
+# This sandbox cannot reach nba.com (see data/raw/probe_official.json), so the
+# capture runs on GitHub's runners - the only environment in this project with
+# outbound access to the official hosts.
+#
+# Scope note (COORDINATION.md section 40): this workflow is a NEW file with a
+# NEW name. It does not touch `engine/fetch_official.py` or
+# `.github/workflows/refresh-data.yml`, which are claimed by seat
+# `arena/7eb1c20a-nba1` (section 38). The two captures do not overlap:
+# refresh-data.yml fetches the standing snapshot set, this workflow fetches the
+# 2026-11-15 rolling-slate set.
+#
+# Safety rules
+# ------------
+#   * captures are written under data/captures/2026-11-15/ only - a promoted
+#     snapshot is never overwritten here;
+#   * every fetch records url, UTC time, HTTP status, byte length and sha256;
+#   * a failed page is a finding, not a build error (continue-on-error);
+#   * the commit message carries [skip ci], so this workflow never re-triggers
+#     itself and the site build is not disturbed by the capture commit.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["arena/48727fe1-nba1"]
+    paths:
+      - scripts/capture_official_2026_11_15.py
+      - .github/workflows/capture-official-2026-11-15.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capture-2026-11-15-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install the PDF text extractor
+        continue-on-error: true
+        run: python3 -m pip install --quiet pypdf
+
+      - name: Capture the official rolling slate
+        id: capture
+        continue-on-error: true
+        run: python3 scripts/capture_official_2026_11_15.py
+
+      - name: Summarise the capture
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, os
+          p = "data/captures/2026-11-15/manifest.json"
+          if not os.path.exists(p):
+              print("no manifest produced")
+              raise SystemExit(0)
+          d = json.load(open(p))
+          c = d["counts"]
+          print(f"fetches {c['fetches']} (ok {c['ok']}) | games {c['games']} | "
+                f"box scores {c['boxscores']}")
+          bad = [f for f in d["fetches"] if f["http_status"] not in (200, 403)]
+          for b in bad[:40]:
+              print("  NON-200/403:", b["http_status"], b["url"], b.get("error"))
+          print(f"  other non-200/403: {max(0, len(bad) - 40)}")
+          PY
+
+      - name: Upload the capture as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-capture-2026-11-15
+          path: data/captures/2026-11-15
+          if-no-files-found: warn
+
+      - name: Commit the capture
+        if: always()
+        run: |
+          set -u
+          git config user.name  "nba1-bot"
+          git config user.email "nba1-bot@users.noreply.github.com"
+          git add data/captures/2026-11-15 || true
+          if git diff --cached --quiet; then
+            echo "capture produced no new bytes"
+            exit 0
+          fi
+          git commit -m "chore(capture): official 2026-11-15 rolling-slate capture [skip ci]"
+          for i in 1 2 3 4 5; do
+            if git push; then
+              echo "capture pushed on attempt $i"
+              exit 0
+            fi
+            echo "push raced with another commit; rebasing and retrying ($i/5)"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            sleep $((i * 5))
+          done
+          echo "::warning::could not push the capture after 5 attempts; it is in the run artifact"
+          exit 0
