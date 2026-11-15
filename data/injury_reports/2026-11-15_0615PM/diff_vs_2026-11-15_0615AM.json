@@ -1,0 +1,994 @@
+{
+ "title": "Consecutive-edition injury diff: 2026-11-15 06:15 AM ET -> 2026-11-15 06:15 PM ET",
+ "from_edition": {
+  "edition_id": "2026-11-15_0615AM",
+  "revision": null,
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+ },
+ "to_edition": {
+  "edition_id": "2026-11-15_0615PM",
+  "revision": "2026-11-15 06:15 PM ET",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+ },
+ "computed_by": "arena/49f70042-nba1",
+ "computed_utc": "2026-11-15T23:46:28Z",
+ "method": "Row-by-row comparison on (game_date, matchup, team_effective, player). Status changes are reported only where both editions carry the same key; rows present in one edition only are listed separately. Nothing is inferred.",
+ "counts": {
+  "previous_rows": 101,
+  "current_rows": 155,
+  "comparable_rows": 77,
+  "status_changes": 16,
+  "rows_added": 78,
+  "rows_removed": 24
+ },
+ "status_changes": [
+  {
+   "game_date": "11/15/2026",
+   "matchup": "ATL@MIL",
+   "team": "Atlanta Hawks",
+   "player": "Landale, Jock",
+   "from": "Available",
+   "to": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "DAL@BOS",
+   "team": "Boston Celtics",
+   "player": "Carter, Devin",
+   "from": "Questionable",
+   "to": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "DAL@BOS",
+   "team": "Boston Celtics",
+   "player": "Cenac Jr., Christopher",
+   "from": "Questionable",
+   "to": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "DAL@BOS",
+   "team": "Boston Celtics",
+   "player": "Mitchell, Dillon",
+   "from": "Questionable",
+   "to": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "DAL@BOS",
+   "team": "Boston Celtics",
+   "player": "Williams, Amari",
+   "from": "Questionable",
+   "to": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "HOU@WAS",
+   "team": "Houston Rockets",
+   "player": "Adams, Steven",
+   "from": "Probable",
+   "to": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "HOU@WAS",
+   "team": "Washington Wizards",
+   "player": "Carrington, Bub",
+   "from": "Questionable",
+   "to": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "HOU@WAS",
+   "team": "Washington Wizards",
+   "player": "Johnson, Tre",
+   "from": "Questionable",
+   "to": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "HOU@WAS",
+   "team": "Washington Wizards",
+   "player": "Okpara, Felix",
+   "from": "Questionable",
+   "to": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "HOU@WAS",
+   "team": "Washington Wizards",
+   "player": "Sarr, Alex",
+   "from": "Questionable",
+   "to": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "IND@PHI",
+   "team": "Indiana Pacers",
+   "player": "McConnell, T.J.",
+   "from": "Probable",
+   "to": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "IND@PHI",
+   "team": "Indiana Pacers",
+   "player": "Nembhard, Andrew",
+   "from": "Questionable",
+   "to": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "IND@PHI",
+   "team": "Indiana Pacers",
+   "player": "Nesmith, Aaron",
+   "from": "Questionable",
+   "to": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "LAL@PHX",
+   "team": "Los Angeles Lakers",
+   "player": "James, Bronny",
+   "from": "Questionable",
+   "to": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "player": "Barnes, Scottie",
+   "from": "Questionable",
+   "to": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "OKC@SAC",
+   "team": "Sacramento Kings",
+   "player": "Murray, Keegan",
+   "from": "Questionable",
+   "to": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  }
+ ],
+ "rows_added": [
+  {
+   "game_date": "11/15/2026",
+   "matchup": "ATL@MIL",
+   "team": "Atlanta Hawks",
+   "player": "Veesaar, Henri",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "ATL@MIL",
+   "team": "Atlanta Hawks",
+   "player": "Wilson, Jalen",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "ATL@MIL",
+   "team": "Milwaukee Bucks",
+   "player": "Rollins, Ryan",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "CHA@LAC",
+   "team": "LA Clippers",
+   "player": "Martinelli, Nick",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "DAL@BOS",
+   "team": "Dallas Mavericks",
+   "player": "Aldama, Santi",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "DAL@BOS",
+   "team": "Dallas Mavericks",
+   "player": "Biberovic, Tarik",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "DAL@BOS",
+   "team": "Dallas Mavericks",
+   "player": "Christie, Max",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "DAL@BOS",
+   "team": "Dallas Mavericks",
+   "player": "Gafford, Daniel",
+   "status": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "DAL@BOS",
+   "team": "Dallas Mavericks",
+   "player": "Irving, Kyrie",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "DAL@BOS",
+   "team": "Dallas Mavericks",
+   "player": "Lively II, Dereck",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "DAL@BOS",
+   "team": "Dallas Mavericks",
+   "player": "Martin, Caleb",
+   "status": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "DAL@BOS",
+   "team": "Dallas Mavericks",
+   "player": "de Larrea, Sergio",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "HOU@WAS",
+   "team": "Houston Rockets",
+   "player": "Phillips, Julian",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "HOU@WAS",
+   "team": "Houston Rockets",
+   "player": "Smart, Marcus",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "HOU@WAS",
+   "team": "Houston Rockets",
+   "player": "VanVleet, Fred",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "LAL@PHX",
+   "team": "Los Angeles Lakers",
+   "player": "Sexton, Collin",
+   "status": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "LAL@PHX",
+   "team": "Los Angeles Lakers",
+   "player": "Thiero, Adou",
+   "status": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "LAL@PHX",
+   "team": "Phoenix Suns",
+   "player": "Timme, Drew",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "OKC@SAC",
+   "team": "Sacramento Kings",
+   "player": "Simmons, Ben",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "SAS@UTA",
+   "team": "San Antonio Spurs",
+   "player": "Fox, De'Aaron",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "SAS@UTA",
+   "team": "Utah Jazz",
+   "player": "Hayes, Jaxson",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "SAS@UTA",
+   "team": "Utah Jazz",
+   "player": "Ingram, Harrison",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "SAS@UTA",
+   "team": "Utah Jazz",
+   "player": "Jackson Jr., Jaren",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "SAS@UTA",
+   "team": "Utah Jazz",
+   "player": "Markkanen, Lauri",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "SAS@UTA",
+   "team": "Utah Jazz",
+   "player": "Nurkic, Jusuf",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "player": "Awaka, Tobe",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "player": "Robinson, Orlando",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "player": "Sellers, Jaylin",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "player": "Smith, Jalen",
+   "status": "Questionable",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "player": "Wilson, Caleb",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Diop, Khalifa",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Merrill, Sam",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Mobley, Evan",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Tomlin, Nae'Qwan",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Tyson, Jaylon",
+   "status": "Questionable",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Udeh, Jr., Ernest",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Watson, Peyton",
+   "status": "Questionable",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Butler III, Jimmy",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Curry, Stephen",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Moody, Moses",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Porzingis, Kristaps",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Santos, Gui",
+   "status": "Questionable",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Williams, Brandon",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Dia, Malik",
+   "status": "Questionable",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Mathurin, Bennedict",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "McGowens, Bryce",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Murphy III, Trey",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Murray, Dejounte",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Pierre Jr., Jaron",
+   "status": "Questionable",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Reese, Julian",
+   "status": "Questionable",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Watford, Trendon",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "HOU@MIA",
+   "team": "Miami Heat",
+   "player": "Goldin, Vladislav",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "HOU@MIA",
+   "team": "Miami Heat",
+   "player": "Larsson, Pelle",
+   "status": "Questionable",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "HOU@MIA",
+   "team": "Miami Heat",
+   "player": "Thompson, Klay",
+   "status": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Edey, Zach",
+   "status": "Questionable",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Jackson, GG",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Jerome, Ty",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Pippen Jr., Scotty",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Post, Quinten",
+   "status": "Questionable",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Saunders, Richie",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Stewart, Isaiah",
+   "status": "Questionable",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "ORL@BOS",
+   "team": "Orlando Magic",
+   "player": "Banchero, Paolo",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "ORL@BOS",
+   "team": "Orlando Magic",
+   "player": "Isaac, Jonathan",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "ORL@BOS",
+   "team": "Orlando Magic",
+   "player": "Nelson, Izaiyah",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "ORL@BOS",
+   "team": "Orlando Magic",
+   "player": "Penda, Noah",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "player": "Bilodeau, Tyler",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "player": "Jefferson, Joshua",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "player": "Nelson, Grant",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "player": "Powell, Drake",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "player": "Saraf, Ben",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "Beringer, Joan",
+   "status": "Available",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "Clark, Jaylen",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "DiVincenzo, Donte",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "Edwards, Anthony",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "player": "Krejci, Vit",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "player": "Morant, Ja",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "player": "Sharpe, Shaedon",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "player": "Youngblood, Chris",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  }
+ ],
+ "rows_removed": [
+  {
+   "game_date": "11/15/2026",
+   "matchup": "ATL@MIL",
+   "team": "Atlanta Hawks (inherited: PDF merged cells)",
+   "player": "Veesaar, Henri",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "ATL@MIL",
+   "team": "Atlanta Hawks (inherited: PDF merged cells)",
+   "player": "Wilson, Jalen",
+   "status": "Doubtful",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "DAL@BOS",
+   "team": "Dallas Mavericks",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "HOU@WAS",
+   "team": "Houston Rockets (inherited: PDF merged cells)",
+   "player": "Phillips, Julian",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "HOU@WAS",
+   "team": "Houston Rockets (inherited: PDF merged cells)",
+   "player": "Smart, Marcus",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "HOU@WAS",
+   "team": "Houston Rockets (inherited: PDF merged cells)",
+   "player": "VanVleet, Fred",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "LAL@PHX",
+   "team": "Los Angeles Lakers (inherited: PDF merged cells)",
+   "player": "Sexton, Collin",
+   "status": "Questionable",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "LAL@PHX",
+   "team": "Los Angeles Lakers (inherited: PDF merged cells)",
+   "player": "Thiero, Adou",
+   "status": "Questionable",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "OKC@SAC",
+   "team": "Sacramento Kings (inherited: PDF merged cells)",
+   "player": "Simmons, Ben",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "SAS@UTA",
+   "team": "Utah Jazz (inherited: PDF merged cells)",
+   "player": "Hayes, Jaxson",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "SAS@UTA",
+   "team": "Utah Jazz (inherited: PDF merged cells)",
+   "player": "Ingram, Harrison",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "SAS@UTA",
+   "team": "Utah Jazz (inherited: PDF merged cells)",
+   "player": "Jackson Jr., Jaren",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "SAS@UTA",
+   "team": "Utah Jazz (inherited: PDF merged cells)",
+   "player": "Markkanen, Lauri",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/15/2026",
+   "matchup": "SAS@UTA",
+   "team": "Utah Jazz (inherited: PDF merged cells)",
+   "player": "Nurkic, Jusuf",
+   "status": "Out",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "HOU@MIA",
+   "team": "Miami Heat",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "ORL@BOS",
+   "team": "Orlando Magic",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  },
+  {
+   "game_date": "11/16/2026",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "player": null,
+   "status": "NOT YET SUBMITTED",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
+  }
+ ],
+ "caveats": [
+  "The PDF text layer drops the Team cell on continuation rows; both editions are keyed on team_effective (nearest preceding printed Team in the same game block), so a mis-read team would surface as an add/remove pair rather than a false status change.",
+  "A row whose status flips because the previous edition printed NOT YET SUBMITTED and this edition filed the player appears under status_changes with from='NOT YET SUBMITTED'."
+ ]
+}

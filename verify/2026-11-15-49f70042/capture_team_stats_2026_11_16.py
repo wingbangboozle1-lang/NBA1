@@ -2,7 +2,7 @@
 """capture_team_stats_2026_11_16.py — re-read the three official NBA.com team
 stat pages and re-cut the model inputs.
 
-Read live through the web-fetch channel on 2026-11-16T00:48Z..01:05Z (the
+Read live through the web-fetch channel on 2026-11-15T23:36Z..23:45Z (the
 sandbox has no general egress; the web-fetch channel is the only route):
 
   https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season
@@ -22,7 +22,7 @@ Writes:
   data/official/teams_advanced_2026-11-16_0050Z.json
   data/official/teams_traditional_2026-11-16_0052Z.json
   data/official/teams_opponent_2026-11-16_0055Z.json
-  data/official/team_stats_recut_2026-11-16.json      (the diff + league baselines)
+  data/official/team_stats_recut_2026-11-15_2340Z.json      (the diff + league baselines)
 
 Run: python3 verify/2026-11-15-49f70042/capture_team_stats_2026_11_16.py
 """
@@ -189,7 +189,18 @@ OPP_FIELDS = ("gp w l min opp_fgm opp_fga opp_fg_pct opp_fg3m opp_fg3a opp_fg3_p
               "opp_ftm opp_fta opp_ft_pct opp_oreb opp_dreb opp_reb opp_ast opp_tov "
               "opp_stl opp_blk opp_blka opp_pf opp_pfd opp_pts plus_minus").split()
 
-RETRIEVED = "2026-11-16T00:48Z..01:05Z"
+RETRIEVED = "2026-11-15T23:40Z"
+# The session clock was measured at 2026-11-15T23:45:56Z while the three pages
+# were being read, and the official index read that established the newest
+# edition was taken before that measurement, so the retrieval is bracketed
+# rather than guessed.
+RETRIEVAL_WINDOW = {
+    "earliest_possible_utc": "2026-11-15T23:34Z",
+    "latest_possible_utc": "2026-11-15T23:45:56Z",
+    "basis": ("the session clock was measured at 2026-11-15T23:45:56Z with the "
+              "three official pages already read; the clock reading that precedes "
+              "the reads in the same session was 2026-11-15T23:34:10Z"),
+}
 SESSION = "arena/49f70042-nba1"
 
 
@@ -307,18 +318,19 @@ def main():
                                                   "markdown rendering of this column is a mis-read"})
 
     files = [
-        ("teams_advanced_2026-11-16_0110Z.json", "advanced", adv_rows, SRC_ADV),
-        ("teams_traditional_2026-11-16_0110Z.json", "traditional", tra_rows, SRC_TRA),
-        ("teams_opponent_2026-11-16_0110Z.json", "opponent", opp_rows, SRC_OPP),
+        ("teams_advanced_2026-11-15_2340Z.json", "advanced", adv_rows, SRC_ADV),
+        ("teams_traditional_2026-11-15_2340Z.json", "traditional", tra_rows, SRC_TRA),
+        ("teams_opponent_2026-11-15_2340Z.json", "opponent", opp_rows, SRC_OPP),
     ]
     for fname, label, rows, src in files:
         doc = {
             "title": f"NBA.com Teams {label.capitalize()} re-cut, 2026-11-16",
             "captured_by": SESSION,
             "retrieved_utc": RETRIEVED,
+            "retrieval_window_utc": RETRIEVAL_WINDOW,
             "source_url": src,
             "per_team_source_urls": TEAM_URL,
-            "method": ("league-wide re-read of the official page at 2026-11-16T00:48Z..01:05Z; "
+            "method": ("league-wide re-read of the official page at 2026-11-15T23:36Z..23:45Z; "
                        "rows for the two teams whose official game count changed (PHI, IND) "
                        "re-read on the official per-team view; the remaining rows carried from "
                        "the earlier official capture of the same page and re-verified "
@@ -332,9 +344,9 @@ def main():
 
     from statistics import mean
     recut = {
-        "title": "Team-stat re-cut 2026-11-16 - the three official pages re-read and the model inputs re-cut",
+        "title": "Team-stat re-cut 2026-11-15 23:40Z - the three official pages re-read and the model inputs re-cut",
         "captured_by": SESSION,
-        "computed_utc": "2026-11-16T01:15Z",
+        "computed_utc": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "sources": {"advanced": SRC_ADV, "traditional": SRC_TRA, "opponent": SRC_OPP,
                     "per_team": TEAM_URL},
         "league_baselines": {
@@ -354,9 +366,9 @@ def main():
         "transcription_notes": TRANSCRIPTION_NOTES,
         "note": "Every field the league-wide re-read could not confirm against the published row is listed with both values. The only teams whose official game count moved between the two reads are PHI and IND (the 2026-11-15 IND@PHI game); their rows were re-read on the official per-team view and are authoritative.",
     }
-    with open(os.path.join(OFF, "team_stats_recut_2026-11-16.json"), "w", encoding="utf-8") as fh:
+    with open(os.path.join(OFF, "team_stats_recut_2026-11-15_2340Z.json"), "w", encoding="utf-8") as fh:
         json.dump(recut, fh, indent=1, ensure_ascii=False)
-    print("wrote team_stats_recut_2026-11-16.json")
+    print("wrote team_stats_recut_2026-11-15_2340Z.json")
     print(json.dumps(recut["league_baselines"], indent=1))
     print("rows changed (advanced):", len(adv_ch))
     for c in adv_ch[:40]:

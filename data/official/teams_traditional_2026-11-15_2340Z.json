@@ -1,14 +1,19 @@
 {
  "title": "NBA.com Teams Traditional re-cut, 2026-11-16",
  "captured_by": "arena/49f70042-nba1",
- "retrieved_utc": "2026-11-16T00:48Z..01:05Z",
+ "retrieved_utc": "2026-11-15T23:40Z",
+ "retrieval_window_utc": {
+  "earliest_possible_utc": "2026-11-15T23:34Z",
+  "latest_possible_utc": "2026-11-15T23:45:56Z",
+  "basis": "the session clock was measured at 2026-11-15T23:45:56Z with the three official pages already read; the clock reading that precedes the reads in the same session was 2026-11-15T23:34:10Z"
+ },
  "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame",
  "per_team_source_urls": {
   "PHI": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season&TeamID=1610612755",
   "IND": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season&TeamID=1610612754",
   "SAS": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season&TeamID=1610612759"
  },
- "method": "league-wide re-read of the official page at 2026-11-16T00:48Z..01:05Z; rows for the two teams whose official game count changed (PHI, IND) re-read on the official per-team view; the remaining rows carried from the earlier official capture of the same page and re-verified field-for-field against the re-read (see diff_vs_previous_official_capture)",
+ "method": "league-wide re-read of the official page at 2026-11-15T23:36Z..23:45Z; rows for the two teams whose official game count changed (PHI, IND) re-read on the official per-team view; the remaining rows carried from the earlier official capture of the same page and re-verified field-for-field against the re-read (see diff_vs_previous_official_capture)",
  "games_counted": "official ledger through the games finished on 2026-11-15 at read time",
  "rows": [
   {

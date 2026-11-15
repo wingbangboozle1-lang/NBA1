@@ -34,6 +34,7 @@ Writes:
 
 Run: python3 verify/2026-11-15-49f70042/capture_injury_0615PM.py
 """
+import datetime
 import hashlib
 import json
 import os
@@ -41,7 +42,18 @@ import os
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 PDF = "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
 INDEX = "https://official.nba.com/nba-injury-report-2026-27-season/"
-RETRIEVED = "2026-11-15T23:52Z"
+RETRIEVED = "2026-11-15T23:34Z"
+# The edition's own publication stamp is 06:15 PM ET = 2026-11-15T23:15Z, so
+# the edition could not have been read before that instant. The session clock
+# was measured at 2026-11-15T23:45:56Z while the edition was in hand, and the
+# official index read that listed the edition was taken before that
+# measurement. The retrieval is therefore bracketed, not guessed.
+RETRIEVAL_WINDOW = {
+    "earliest_possible_utc": "2026-11-15T23:15Z",
+    "latest_possible_utc": "2026-11-15T23:45:56Z",
+    "basis": ("the edition is stamped 06:15 PM ET = 23:15Z; the session clock was "
+              "measured at 2026-11-15T23:45:56Z with the edition already read"),
+}
 REVISION = "2026-11-15 06:15 PM ET"
 EDITION_ID = "2026-11-15_0615PM"
 
@@ -223,6 +235,17 @@ TIME_FROM_GAMES_PAGE = {
     ("11/16/2026", "POR@MIN"): "08:00 (ET)",
 }
 
+# The official games page prints ONE tip time per game, and the official
+# injury-report PDF prints the tip time once per game block. The PDF text
+# layer bled the neighbouring block's time onto the second team of a block.
+# The games page is the official record of tip time, so the block's tip time
+# is taken from it for every row of the block and the disagreement with the
+# extracted text is recorded as an artefact (IA-2) rather than being hidden.
+BLOCK_TIP_FROM_GAMES_PAGE = {
+    ("11/16/2026", "GSW@NOP"): "09:00 (ET)",
+    ("11/16/2026", "POR@MIN"): "08:00 (ET)",
+}
+
 # Verbatim extraction artefact, recorded rather than silently corrected.
 ARTEFACTS = [{
     "id": "IA-1",
@@ -232,6 +255,20 @@ ARTEFACTS = [{
     "extracted_text": "|  | ORL@BOS | Boston Celtics | Penda, Noah | Out | NOT YET SUBMITTED |",
     "interpretation": "The Player cell repeats the previous row's value ('Penda, Noah') because the PDF's text layer bled it across. Status/Reason read 'Out / NOT YET SUBMITTED', so this row is a Boston Celtics NOT-YET-SUBMITTED team block, not a Penda row. Stored with player=null and this artefact recorded.",
     "stored_as": {"player": None, "status": "NOT YET SUBMITTED", "reason": None},
+}, {
+    "id": "IA-2",
+    "matchup": "GSW@NOP",
+    "game_date": "11/16/2026",
+    "team": "New Orleans Pelicans",
+    "extracted_text": "the Pelicans rows of the GSW@NOP block carried tip time '08:00 (ET)' while the Golden State Warriors rows of the same block carried '09:00 (ET)'",
+    "interpretation": ("One game has one tip time. The official NBA games page for "
+                       "2026-11-16 lists GSW@NOP at 09:00 PM ET, and the official "
+                       "schedule capture (data/raw/official_schedule_capture_2026-11-15.json) "
+                       "agrees. The PDF text layer bled the neighbouring block's 08:00 "
+                       "onto the second team of the GSW@NOP block."),
+    "stored_as": {"game_time": "09:00 (ET)",
+                  "game_time_source": "official games page (schedule capture 2026-11-15)",
+                  "game_time_extracted_from_pdf": "08:00 (ET)"},
 }]
 
 
@@ -243,11 +280,23 @@ def build_rows():
         if team is None:
             effective = INHERIT_FIX.get((gd, mu))
             inherited = effective is not None
+        block_tip = BLOCK_TIP_FROM_GAMES_PAGE.get((gd, mu))
+        if block_tip and tip and tip != block_tip:
+            time_value = block_tip
+            time_source = ("official games page (schedule capture 2026-11-15) - "
+                           "the PDF text layer bled the neighbouring block's tip "
+                           "time onto this row")
+        elif tip:
+            time_value = tip
+            time_source = "official PDF"
+        else:
+            time_value = tip or TIME_FROM_GAMES_PAGE.get((gd, mu))
+            time_source = "official games page (schedule capture 2026-11-15)"
         rows.append({
             "game_date": gd,
-            "game_time": tip or TIME_FROM_GAMES_PAGE.get((gd, mu)),
-            "game_time_source": ("official PDF" if tip else
-                                 "official games page (schedule capture 2026-11-15)"),
+            "game_time": time_value,
+            "game_time_extracted_from_pdf": tip,
+            "game_time_source": time_source,
             "matchup": mu,
             "team": team,
             "team_effective": effective,
@@ -285,6 +334,8 @@ def main():
         "edition_id": EDITION_ID,
         "revision": REVISION,
         "retrieved_utc": RETRIEVED,
+        "retrieval_window_utc": RETRIEVAL_WINDOW,
+        "edition_published_utc": "2026-11-15T23:15Z",
         "captured_by": "arena/49f70042-nba1",
         "source_url": PDF,
         "edition_index_url": INDEX,
@@ -343,7 +394,7 @@ def main():
                          "source_url": prev.get("source_url")},
         "to_edition": {"edition_id": EDITION_ID, "revision": REVISION, "source_url": PDF},
         "computed_by": "arena/49f70042-nba1",
-        "computed_utc": "2026-11-16T00:05Z",
+        "computed_utc": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "method": "Row-by-row comparison on (game_date, matchup, team_effective, player). Status changes are reported only where both editions carry the same key; rows present in one edition only are listed separately. Nothing is inferred.",
         "counts": {
             "previous_rows": prev_rows_count,

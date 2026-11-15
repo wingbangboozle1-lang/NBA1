@@ -1,0 +1,840 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury Report: 11/14/26 01:30 PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+  "retrieved_utc": "2026-11-14T18:40Z..19:10Z",
+  "rows": 50
+ },
+ "after": {
+  "edition": "NBA Official Injury Report, 11/15/26 06:15 AM ET",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+  "retrieved_utc": "2026-11-15T11:52Z",
+  "rows": 101
+ },
+ "comparability_note": "The two editions cover different game slates (11/14 games vs 11/15 games). Player-level status changes can only be detected for players listed in both; the only team on both slates is Dallas (11/14 at CLE, 11/15 at BOS - a back-to-back), whose 11/15 block is NOT YET SUBMITTED under the league's B2B game-day rule. The team-block filing change below is the meaningful delta for this pair.",
+ "team_blocks_11_15_before": "all 18 team blocks printed NOT YET SUBMITTED in the 01:30 PM edition",
+ "team_blocks_filed_since": [
+  "Indiana Pacers",
+  "Philadelphia 76ers",
+  "Los Angeles Lakers",
+  "Phoenix Suns",
+  "Charlotte Hornets",
+  "LA Clippers",
+  "San Antonio Spurs",
+  "Utah Jazz",
+  "Boston Celtics",
+  "Toronto Raptors",
+  "Houston Rockets",
+  "Washington Wizards",
+  "Atlanta Hawks",
+  "Milwaukee Bucks",
+  "Oklahoma City Thunder",
+  "Sacramento Kings"
+ ],
+ "team_blocks_still_unsubmitted": [
+  "Dallas Mavericks (second game of a back-to-back; league deadline 1 p.m. local game day)"
+ ],
+ "team_blocks_no_rows_printed": [
+  "New York Knicks (no rows and no NOT YET SUBMITTED row in either edition - flagged, not inferred)"
+ ],
+ "player_status_changes": [],
+ "players_new_vs_before": [
+  {
+   "player": "Furphy, Johnny",
+   "team_effective": "Indiana Pacers",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right ACL Repair / Surgery",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Haliburton, Tyrese",
+   "team_effective": "Indiana Pacers",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Hamstring Strain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "McConnell, T.J.",
+   "team_effective": "Indiana Pacers",
+   "status_now": "Probable",
+   "reason_now": "Injury/Illness - Right Hamstring Strain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Nembhard, Andrew",
+   "team_effective": "Indiana Pacers",
+   "status_now": "Questionable",
+   "reason_now": "Injury/Illness - Left Hip Soreness / Tightness",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Nesmith, Aaron",
+   "team_effective": "Indiana Pacers",
+   "status_now": "Questionable",
+   "reason_now": "Injury/Illness - Left Hand Sprain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Sheppard, Ben",
+   "team_effective": "Indiana Pacers",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Meniscus Tear",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Barlow, Dominick",
+   "team_effective": "Philadelphia 76ers",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Low Back Stress Reaction",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Bona, Adem",
+   "team_effective": "Philadelphia 76ers",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Cervical Spine Sprain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Embid, Joel",
+   "team_effective": "Philadelphia 76ers",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Foot Plantar Fascia Injury Management",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Hukporti, Ariel",
+   "team_effective": "Philadelphia 76ers",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Achilles Tendon Rupture / Tear",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Carr, Cameron",
+   "team_effective": "Los Angeles Lakers",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Illness",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Grimes, Quentin",
+   "team_effective": "Los Angeles Lakers",
+   "status_now": "Available",
+   "reason_now": "Injury/Illness - Right Finger Splint",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "James, Bronny",
+   "team_effective": "Los Angeles Lakers",
+   "status_now": "Questionable",
+   "reason_now": "Injury/Illness - Illness",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Reaves, Austin",
+   "team_effective": "Los Angeles Lakers",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Heel Contusion / Bone Bruise",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Sexton, Collin",
+   "team_effective": "Los Angeles Lakers (inherited: PDF merged cells)",
+   "status_now": "Questionable",
+   "reason_now": "Injury/Illness - Right Orbital Laceration",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Thiero, Adou",
+   "team_effective": "Los Angeles Lakers (inherited: PDF merged cells)",
+   "status_now": "Questionable",
+   "reason_now": "Injury/Illness - Left Ankle Sprain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Williams, Mark",
+   "team_effective": "Phoenix Suns",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Shoulder Surgery",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Ajayi, Michael",
+   "team_effective": "Charlotte Hornets",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Boswell, Kylan",
+   "team_effective": "Charlotte Hornets",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Knueppel, Kon",
+   "team_effective": "Charlotte Hornets",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Hamstring Strain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Schroder, Dennis",
+   "team_effective": "Charlotte Hornets",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Hamstring Strain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Steinbach, Hannes",
+   "team_effective": "Charlotte Hornets",
+   "status_now": "Out",
+   "reason_now": "G League - On Assignment",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Beal, Bradley",
+   "team_effective": "LA Clippers",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Knee Injury Management",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Ingram, Brandon",
+   "team_effective": "LA Clippers",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Heel Surgery",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Miller, Jordan",
+   "team_effective": "LA Clippers",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Rotator Cuff Surgery",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Niederhauser, Yanic Konan",
+   "team_effective": "LA Clippers",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Lisfranc Surgery",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Brown, Maliq",
+   "team_effective": "San Antonio Spurs",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Gillespie, Ja'Kobi",
+   "team_effective": "San Antonio Spurs",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Harris, Tobias",
+   "team_effective": "San Antonio Spurs",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Calf Strain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Quaintance, Jayden",
+   "team_effective": "San Antonio Spurs",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Knee Surgery",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Alexander, Trey",
+   "team_effective": "Utah Jazz",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Bufkin, Kobe",
+   "team_effective": "Utah Jazz",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Hayes, Jaxson",
+   "team_effective": "Utah Jazz (inherited: PDF merged cells)",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Knee Strain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Ingram, Harrison",
+   "team_effective": "Utah Jazz (inherited: PDF merged cells)",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Jackson Jr., Jaren",
+   "team_effective": "Utah Jazz (inherited: PDF merged cells)",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right MCL Tear",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Markkanen, Lauri",
+   "team_effective": "Utah Jazz (inherited: PDF merged cells)",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Hand Fracture",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Nurkic, Jusuf",
+   "team_effective": "Utah Jazz (inherited: PDF merged cells)",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right 2nd Plantar Plate Tear",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Carter, Devin",
+   "team_effective": "Boston Celtics",
+   "status_now": "Questionable",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Cenac Jr., Christopher",
+   "team_effective": "Boston Celtics",
+   "status_now": "Questionable",
+   "reason_now": "G League - On Assignment",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Mitchell, Dillon",
+   "team_effective": "Boston Celtics",
+   "status_now": "Questionable",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Williams, Amari",
+   "team_effective": "Boston Celtics",
+   "status_now": "Questionable",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Barnes, Scottie",
+   "team_effective": "Toronto Raptors",
+   "status_now": "Questionable",
+   "reason_now": "Injury/Illness - Left Groin Strain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Bittle, Nate",
+   "team_effective": "Toronto Raptors",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Foot Avulsion Fracture",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Leonard, Kawhi",
+   "team_effective": "Toronto Raptors",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Knee Injury Management",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "McCullar Jr., Kevin",
+   "team_effective": "Toronto Raptors",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Smith, Malachi",
+   "team_effective": "Toronto Raptors",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Adams, Steven",
+   "team_effective": "Houston Rockets",
+   "status_now": "Probable",
+   "reason_now": "Injury/Illness - Right Soleus Strain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Capela, Clint",
+   "team_effective": "Houston Rockets",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Ankle Sprain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Copeland, Quadir",
+   "team_effective": "Houston Rockets",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Phillips, Julian",
+   "team_effective": "Houston Rockets (inherited: PDF merged cells)",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Smart, Marcus",
+   "team_effective": "Houston Rockets (inherited: PDF merged cells)",
+   "status_now": "Out",
+   "reason_now": "League Suspension",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "VanVleet, Fred",
+   "team_effective": "Houston Rockets (inherited: PDF merged cells)",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Knee Injury Management",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Beekman, Reece",
+   "team_effective": "Washington Wizards",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right AC Joint Injury",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Carrington, Bub",
+   "team_effective": "Washington Wizards",
+   "status_now": "Questionable",
+   "reason_now": "Injury/Illness - Chest / Sternum Contusion",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Champagne, Justin",
+   "team_effective": "Washington Wizards",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Foot Surgery",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Johnson, Tre",
+   "team_effective": "Washington Wizards",
+   "status_now": "Questionable",
+   "reason_now": "Injury/Illness - Low Back Soreness",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Okpara, Felix",
+   "team_effective": "Washington Wizards",
+   "status_now": "Questionable",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Sarr, Alex",
+   "team_effective": "Washington Wizards",
+   "status_now": "Questionable",
+   "reason_now": "Injury/Illness - Illness",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Vukcevic, Tristan",
+   "team_effective": "Washington Wizards",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Hip Impingement",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Watkins, Jamir",
+   "team_effective": "Washington Wizards",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left ACL Repair / Surgery",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Flemings, Kingston",
+   "team_effective": "Atlanta Hawks",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Lumbar Strain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Gilbert, Keshon",
+   "team_effective": "Atlanta Hawks",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Knee Inflammation; Non-Surgical Procedure",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Gueye, Mouhamed",
+   "team_effective": "Atlanta Hawks",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Foot Fracture",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Landale, Jock",
+   "team_effective": "Atlanta Hawks",
+   "status_now": "Available",
+   "reason_now": "Injury/Illness - Face Mask",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Newell, Asa",
+   "team_effective": "Atlanta Hawks",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Great Toe Hyperextension",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Veesaar, Henri",
+   "team_effective": "Atlanta Hawks (inherited: PDF merged cells)",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right ACL Tear",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Wilson, Jalen",
+   "team_effective": "Atlanta Hawks (inherited: PDF merged cells)",
+   "status_now": "Doubtful",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Dieng, Ousmane",
+   "team_effective": "Milwaukee Bucks",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Finger Sprain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Jones, Kam",
+   "team_effective": "Milwaukee Bucks",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Markovic, Bogoljub",
+   "team_effective": "Milwaukee Bucks",
+   "status_now": "Out",
+   "reason_now": "G League - On Assignment",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Nance, Pete",
+   "team_effective": "Milwaukee Bucks",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Ryan, Cormac",
+   "team_effective": "Milwaukee Bucks",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Holmgren, Chet",
+   "team_effective": "Oklahoma City Thunder",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Knee/ Injury Recovery",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Mitchell, Ajay",
+   "team_effective": "Oklahoma City Thunder",
+   "status_now": "Questionable",
+   "reason_now": "Injury/Illness - Left Ankle Sprain",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Sorber, Thomas",
+   "team_effective": "Oklahoma City Thunder",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Knee Surgery",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Wallace, Cason",
+   "team_effective": "Oklahoma City Thunder",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Shoulder Surgery",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Williams, Jalen",
+   "team_effective": "Oklahoma City Thunder",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Left Ankle Surgery",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Williams, Jaylin",
+   "team_effective": "Oklahoma City Thunder",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Low Back Spasms",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Achiuwa, Precious",
+   "team_effective": "Sacramento Kings",
+   "status_now": "Questionable",
+   "reason_now": "Injury/Illness - Left Ankle Soreness",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Mogbo, Jonathan",
+   "team_effective": "Sacramento Kings",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Murray, Keegan",
+   "team_effective": "Sacramento Kings",
+   "status_now": "Questionable",
+   "reason_now": "Injury/Illness - Illness",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Pedulla, Sean",
+   "team_effective": "Sacramento Kings",
+   "status_now": "Out",
+   "reason_now": "G League - Two-Way",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Raynaud, Maxime",
+   "team_effective": "Sacramento Kings",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Patella Subluxation",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  },
+  {
+   "player": "Simmons, Ben",
+   "team_effective": "Sacramento Kings (inherited: PDF merged cells)",
+   "status_now": "Out",
+   "reason_now": "Injury/Illness - Right Achilles Tendon Repair / Surgery",
+   "note": "player absent from the 2026-11-14 01:30 PM edition"
+  }
+ ],
+ "players_only_in_before": [
+  {
+   "player": "Allen, Jarrett",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Antetokounmpo, Giannis",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Awaka, Tobe",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Beringer, Joan",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Biberovic, Tarik",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Bilodeau, Tyler",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Brown Jr., Mikel",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Christie, Max",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Claxton, Nic",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "DiVincenzo, Donte",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Duren, Jalen",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Edwards, Anthony",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Goldin, Vladislav",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Harden, James",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Harkless, Elijah",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Holmes II, DaRon",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Jefferson, Joshua",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Joe, Isaiah",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Johnson Jr., Morez",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Jones, Isaac",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Lanier, Chaz",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Larsson, Pelle",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Lively II, Dereck",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Martin, Caleb",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "McGowens, Bryce",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Merrill, Sam",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Missi, Yves",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Mitchell, Donovan",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Mobley, Evan",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Murphy III, Trey",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Murray, Dejounte",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Nelson, Grant",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Nembhard, Ryan",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Okorie, Ebuka",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Onyenso, Ugonna",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Powell, Norman",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Saraf, Ben",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Sellers, Jaylin",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Smith, Jalen",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Strawther, Julian",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Swain, Dailyn",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Thompson, Klay",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Tomlin, Nae'Qwan",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Traore, Nolan",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Udeh, Jr., Ernest",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Watford, Trendon",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Watson, Peyton",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Whitmore, Cam",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "Wilson, Caleb",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  },
+  {
+   "player": "de Larrea, Sergio",
+   "note": "present in 11/14 01:30 PM edition (11/14 slate), absent from 11/15 06:15 AM edition (11/15 slate) - different slates, not a status change"
+  }
+ ],
+ "counts": {
+  "status_changes": 0,
+  "new_vs_before": 84,
+  "only_in_before": 50,
+  "comparable_player_rows": 0
+ }
+}
