@@ -1,0 +1,230 @@
+{
+ "title": "2026-11-14 slate - FINAL, settleable (one row per game: date, teams, final score, quarter scores)",
+ "captured_by_session": "arena/e3ebc423-nba1",
+ "captured_at_utc": "2026-11-15T11:45:00Z",
+ "read_utc": "2026-11-15T11:32Z..11:50Z",
+ "source_name": "NBA.com (official) - Games & Scores date pages + each game's own summary page",
+ "rule": "Verbatim transcription. A cell the fetch did not return is null and is flagged; it is never estimated, inferred or back-solved.",
+ "orientation_note": "On nba.com/games the FIRST team listed is the AWAY team and the SECOND is the HOME team, confirmed by the game-detail URL pattern /game/<away>-vs-<home>-<game_id>.",
+ "games": [
+  {
+   "date": "2026-11-14",
+   "game_id": "0022600231",
+   "away": "DEN",
+   "away_pts": 116,
+   "home": "NOP",
+   "home_pts": 108,
+   "final": "DEN 116 @ NOP 108",
+   "winner": "DEN",
+   "margin_home": -8,
+   "ot": 0,
+   "quarter_scores": {
+    "away": [
+     29,
+     27,
+     30,
+     30
+    ],
+    "home": [
+     23,
+     28,
+     31,
+     26
+    ]
+   },
+   "quarter_check": true,
+   "status_label": "Final",
+   "venue": "Smoothie King Center",
+   "city": "New Orleans, LA",
+   "tip_et": "7:00 PM",
+   "attendance": 15721,
+   "officials": "James Capers, Brent Barnaky, CJ Washington",
+   "recap_headline": "Jokic, Murray help Nuggets hand Pelicans a sixth straight loss",
+   "sources": [
+    {
+     "label": "NBA.com Games & Scores, 2026-11-14 (final score card)",
+     "url": "https://www.nba.com/games?date=2026-11-14"
+    },
+    {
+     "label": "NBA.com game summary page (LINESCORES + GAME INFO)",
+     "url": "https://www.nba.com/game/den-vs-nop-0022600231"
+    }
+   ],
+   "verification": "final score read twice on official pages (the date card and this game's own summary header) and they agree; quarter splits are the summary page's LINESCORES table and sum to the printed final on both sides where captured"
+  },
+  {
+   "date": "2026-11-14",
+   "game_id": "0022600232",
+   "away": "DAL",
+   "away_pts": 117,
+   "home": "CLE",
+   "home_pts": 127,
+   "final": "DAL 117 @ CLE 127",
+   "winner": "CLE",
+   "margin_home": 10,
+   "ot": 0,
+   "quarter_scores": {
+    "away": [
+     33,
+     20,
+     38,
+     26
+    ],
+    "home": [
+     33,
+     38,
+     34,
+     22
+    ]
+   },
+   "quarter_check": true,
+   "status_label": "Final",
+   "venue": "Rocket Arena",
+   "city": "Cleveland, OH",
+   "tip_et": "7:30 PM",
+   "attendance": 19432,
+   "officials": "Eric Lewis, Tyler Ford, Jenna Schroeder",
+   "recap_headline": "Tyrese Proctor has a triple-double as short-handed Cavaliers top Mavericks 127-117",
+   "sources": [
+    {
+     "label": "NBA.com Games & Scores, 2026-11-14 (final score card)",
+     "url": "https://www.nba.com/games?date=2026-11-14"
+    },
+    {
+     "label": "NBA.com game summary page (LINESCORES + GAME INFO)",
+     "url": "https://www.nba.com/game/dal-vs-cle-0022600232"
+    }
+   ],
+   "verification": "final score read twice on official pages (the date card and this game's own summary header) and they agree; quarter splits are the summary page's LINESCORES table and sum to the printed final on both sides where captured"
+  },
+  {
+   "date": "2026-11-14",
+   "game_id": "0022600233",
+   "away": "DET",
+   "away_pts": 117,
+   "home": "MIA",
+   "home_pts": 137,
+   "final": "DET 117 @ MIA 137",
+   "winner": "MIA",
+   "margin_home": 20,
+   "ot": 0,
+   "quarter_scores": {
+    "away": [
+     39,
+     21,
+     26,
+     31
+    ],
+    "home": [
+     37,
+     31,
+     35,
+     34
+    ]
+   },
+   "quarter_check": true,
+   "status_label": "Final",
+   "venue": "Kaseya Center",
+   "city": "Miami, FL",
+   "tip_et": "8:00 PM",
+   "attendance": 19658,
+   "officials": "Mitchell Ervin, Suyash Mehta, Jonathan Sterling",
+   "recap_headline": "Antetokounmpo scores 34, Heat block 14 shots and roll past Pistons 137-117",
+   "sources": [
+    {
+     "label": "NBA.com Games & Scores, 2026-11-14 (final score card)",
+     "url": "https://www.nba.com/games?date=2026-11-14"
+    },
+    {
+     "label": "NBA.com game summary page (LINESCORES + GAME INFO)",
+     "url": "https://www.nba.com/game/det-vs-mia-0022600233"
+    }
+   ],
+   "verification": "final score read twice on official pages (the date card and this game's own summary header) and they agree; quarter splits are the summary page's LINESCORES table and sum to the printed final on both sides where captured"
+  },
+  {
+   "date": "2026-11-14",
+   "game_id": "0022600234",
+   "away": "BKN",
+   "away_pts": 110,
+   "home": "MEM",
+   "home_pts": 129,
+   "final": "BKN 110 @ MEM 129",
+   "winner": "MEM",
+   "margin_home": 19,
+   "ot": 0,
+   "quarter_scores": {
+    "away": [
+     23,
+     31,
+     30,
+     26
+    ],
+    "home": [
+     38,
+     33,
+     32,
+     26
+    ]
+   },
+   "quarter_check": true,
+   "status_label": "Final",
+   "venue": "FedExForum",
+   "city": "Memphis, TN",
+   "tip_et": "8:00 PM",
+   "attendance": 15103,
+   "officials": "Michael Smith, Josh Tiven, Nate Green",
+   "recap_headline": "Cedric Coward has 23 points and 12 rebounds as Grizzlies beat Nets 129-110",
+   "sources": [
+    {
+     "label": "NBA.com Games & Scores, 2026-11-14 (final score card)",
+     "url": "https://www.nba.com/games?date=2026-11-14"
+    },
+    {
+     "label": "NBA.com game summary page (LINESCORES + GAME INFO)",
+     "url": "https://www.nba.com/game/bkn-vs-mem-0022600234"
+    }
+   ],
+   "verification": "final score read twice on official pages (the date card and this game's own summary header) and they agree; quarter splits are the summary page's LINESCORES table and sum to the printed final on both sides where captured"
+  },
+  {
+   "date": "2026-11-14",
+   "game_id": "0022600235",
+   "away": "CHI",
+   "away_pts": 117,
+   "home": "MIN",
+   "home_pts": 106,
+   "final": "CHI 117 @ MIN 106",
+   "winner": "CHI",
+   "margin_home": -11,
+   "ot": 0,
+   "quarter_scores": {
+    "away": null,
+    "home": null
+   },
+   "quarter_check": null,
+   "status_label": "Final",
+   "venue": null,
+   "city": null,
+   "tip_et": null,
+   "attendance": null,
+   "officials": null,
+   "recap_headline": null,
+   "sources": [
+    {
+     "label": "NBA.com Games & Scores, 2026-11-14 (final score card)",
+     "url": "https://www.nba.com/games?date=2026-11-14"
+    },
+    {
+     "label": "NBA.com game summary page (LINESCORES + GAME INFO)",
+     "url": "https://www.nba.com/game/chi-vs-min-0022600235"
+    }
+   ],
+   "verification": "final score read twice on official pages (the date card and this game's own summary header) and they agree; quarter splits are the summary page's LINESCORES table and sum to the printed final on both sides where captured"
+  }
+ ],
+ "open_items": [
+  "0022600235 (CHI@MIN): the final score is printed on the official date card and on the game's own summary header and both agree (117-106), but the LINESCORES table was not retrievable in this session's fetch window (the fetch channel returned a signature error on that URL four times). Quarter splits are therefore left blank and flagged, not guessed.",
+  "CHI@MIN venue/tip/attendance/officials come from the game card, which was not fetched; left blank."
+ ]
+}
