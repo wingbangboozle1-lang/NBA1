@@ -3737,4 +3737,13 @@ the resolved file keeps §38–§40, the §40 claim, and this §41 claim, with n
 
 ### 41.5 Status at this record
 
-K01–K04 done. K05 (PR → `main`, merge, Pages confirmation, PR #106 closure) is in progress; its merge result is recorded in §41.6.
+K01–K05 done. Delivery record in §41.6.
+
+### 41.6 Delivery record (K05) — PR #108 merged, Pages confirmed, PR #106 closed as superseded (2026-11-15 UTC)
+
+- **PR #108** — [Takeover: PR #106 content (rolling-slate follow-up) + brief-traceability register + flags F78–F91 (K02–K05)](https://github.com/wingbangboozle1-lang/NBA1/pull/108), merged with `gh pr merge 108 --merge` at **2026-11-15T23:44:33Z**, merge commit **`afc79f29efdf317d500de00ec4a7b93f7ebaf6c5`**, head `2916022`. No approval was awaited; the PR was `MERGEABLE`, and its `validate` run passed on the head before the merge. The `probe` check was still pending at merge and is not a gate on the site.
+- **Pages:** publish run `43776440280` (validate + deploy) success on `afc79f2`; `pages-build-deployment` run `43776439852` success. Confirmed by fetching the live site: `site/pages/requirements.html` serves 33 rows (11 done / 16 partial / 5 missing / 1 blocked) with a source link per row, and `site/pages/flagged.html` serves **87 rows** including F78–F91.
+- **PR #106** (`arena/83d380ad-nba1`) was closed as superseded with a comment that names #108 and §41. Its content is preserved on this branch and on `main`. Nothing was deleted.
+- **Gate results** on the merged tree: as in §41.2. The PR's `validate` run passed on the head; the same tree was checked locally first.
+- **Honest limit of this delivery:** the sandbox and the probe runner could not reach most nba.com URLs (F91). The row values on the live site are the ones captured earlier and checked for provenance and link structure. They were not re-read from NBA.com in this session.
+- **Still open, not blocking (see the register and Flagged for Review):** R-41-1 test runner path, R-41-2 squashed `main` history and the ledger anchor (F79), and the open partials and missing items in the register (R08, R09, R13, R15, R16, R21 and the others).
