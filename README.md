@@ -75,7 +75,7 @@ they exercise:
 
 | Build | Entry point | Horizon | Character |
 | --- | --- | --- | --- |
-| **Build D — this build** | [`index.html`](index.html) → [`site/`](site/pages/picks.html) | 27 games, 14–17 Nov | The current build: landing page, 16 category pages, 60 gated paper picks |
+| **Build D — this build** | [`index.html`](index.html) → [`site/`](site/pages/picks.html) | 34-game rolling horizon (15–18 Nov); 27 priced lines in the 14 Nov freeze | The current build: landing page, 16 category pages, 60 gated paper picks |
 | **Command Center** | [`command-center/index.html`](command-center/index.html) | 22 games, 14–16 Nov | A second consolidated site, built in session `arena/791c9114-nba1` from the same captures, with its own rendered-page checks |
 | **A — NBA Edge Lab** | [`edge-lab/index.html`](edge-lab/index.html) | 23 games, 13–15 Nov | Build A's original decision dashboard, frozen at the 11/13 cut and archived unchanged |
 | **Integration Desk** | [`desk.html`](desk.html) | 14–16 Nov | The origination, gate, settlement and prop pipeline published at the repository root by session `arena/2edb85af-nba1` |

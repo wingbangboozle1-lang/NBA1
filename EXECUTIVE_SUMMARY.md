@@ -1,6 +1,6 @@
 # Executive summary — NBA1 line origination and strategy lab
 
-**As of** 2026-11-14 (UTC) · **Session** `arena/934ca56f-nba1` · **Live site**
+**As of** 2026-11-15 (UTC) · **Session** `arena/934ca56f-nba1`, rolled forward by `arena/e3ebc423-nba1` · **Live site**
 <https://wingbangboozle1-lang.github.io/NBA1/>
 
 This document states what the system does, what it has actually established, what it has
@@ -10,12 +10,69 @@ Where a value could not be confirmed it is described as unconfirmed rather than 
 
 ---
 
+## 0. What changed on 2026-11-15 (data roll, settlement and two model inputs measured)
+
+Session `arena/e3ebc423-nba1` ran one day of the data-ops loop end to end, behind gates.
+
+- **Freshness + provenance gates first.** 17 checks — capture age, slate window (today + maximum
+  three days), per-day game counts against the official calendar strip, one-row-per-game, official
+  URL on every row, quarter sums, records cross-checked against the standings page, every injury
+  row carrying a printed reason, page-break rows labelled rather than attributed. The roll script
+  exits 1 and writes **nothing** if any check fails, so a stale or untraceable capture cannot
+  reach a published page. Record: `data/live/gates_2026-11-15.json`.
+- **The per-game result feed grew.** Five 2026-11-14 games appended with final, OT flag, venue,
+  attendance, officials, recap link and quarter scores; 4 of 5 carry a LINESCORES split and each
+  captured split sums to the printed final. CHI@MIN's split could not be read, so those cells say
+  *not captured* — no quarter line was solved backwards from a final. The out-of-sample window is
+  now 65 games, 2026-11-06 to 2026-11-14.
+- **The injury report moved, and the job that reads it was fixed.** The site had been keyed to
+  editions named `…PM.pdf`; the league republishes every 15 minutes from 12:00 a.m. ET, so the
+  newest report on a game day is an **AM** file the parser could not see. `parse_injury_index`
+  now accepts AM and PM, the hard-coded PM-only list is a labelled fallback used only when the
+  index cannot be read, and `scripts/check_injury_editions.py` fails the build if either
+  regresses. Both 11/15 editions (06:00 and 06:15 AM ET) were read in full and diffed: no status
+  changed in the fifteen minutes between them, and the one structural difference — a row whose
+  Team cell the earlier render dropped at a page break — is recorded as printed.
+- **Settlement and the picks table are now the same object.** Every one of the 60 published rows
+  carries a `settled` flag, the final, its distance to the line it was graded against, units at
+  the −110 convention and a settlement stamp naming the **git blob** of the frozen picks file —
+  grading reads that blob, not the working copy, so a settlement cannot move a line. Each of the
+  60 picks also carries a sha256 over its frozen core fields, chained, head committed
+  (`data/live/ledger_2026-11-15.json`). Parlays are graded leg by leg with the naive product
+  printed beside the joint probability and Frechet bounds, as always with no official parlay
+  price to price them at (F3 unchanged).
+- **Home court is measured.** The model's `+2.5` was an assumption (flag E-01); the fitted
+  residual intercept says 3.508; the **measured home-win rate pins it at 1.053 points**
+  (0.5294 across 187 home games in the official standings HOME column, 0.5469 across the 64
+  non-neutral games in our own feed, converted with sigma = 11.0). `scripts/pin_home_court.py`
+  writes `data/derived/home_court_pin.json`, `engine/model_core.py` will price with it once a
+  freeze adopts it, and the sensitivity for the un-tipped horizon is published as a table
+  (−1.447 points on every home margin, zero on totals, favourite flips on a minority of rows)
+  rather than applied to a hashed set. Flags F71 / Q22 / SG30.
+- **Travel is still not modelled, and that is now a named gap rather than a silent one.** The
+  term (`travel_load`), the great-circle arithmetic (`haversine_miles`, self-checked at 1,627
+  miles New York→Denver) and the data contract all exist; the input does not — no NBA-operated
+  page reachable from this build publishes arena coordinates, and copying them from memory would
+  put an untraceable number in a table whose whole job is traceability. Coefficient stays 0.0;
+  the printable travel fact (whether a team's next game is in the city it is already in) is
+  published in its place. F70 / SG31.
+- **Nothing was promoted that the site cannot cite.** Every new row on every new page links an
+  official page; where a value could not be read, the cell says so. New flags F69–F74, new open
+  questions Q22–Q25, new suggestions SG30–SG33, and the day-roll page
+  ([`site/pages/day-roll.html`](site/pages/day-roll.html)) carries the gate record, the feed, the
+  settlement, the ledger, the pin and the gap in one place.
+
+
+---
+
 ## 1. The one-paragraph version
 
 The system originates its own NBA lines from official NBA.com data and then tries hard to
-prove those lines carry skill. It covers 27 games across the full three-day horizon
-(2026-11-14 to 2026-11-17), with an originated spread, total and fair moneyline for every
-game, and a gated paper pick. **No strategy has cleared every gate.** The best, S1 (side
+prove those lines carry skill. It prices 27 games in the 2026-11-14 freeze (that slate is now settled:
+3-10 on its 13 gradable picks, −5.80 units at the repo's −110 convention, 4 rows left ungraded
+for want of a citable per-player box score) and carries a rolling horizon of 34 games, 2026-11-15
+to 2026-11-18, re-read from the official date cards on 2026-11-15. Every priced game has an
+originated spread, total and fair moneyline, and a gated paper pick. **No strategy has cleared every gate.** The best, S1 (side
 edge versus a naive reference line), is **23-9 on 23 graded plays** with an exact binomial
 p-value of **0.020** — the first record in this project that is statistically distinguishable
 from a coin flip — but it **fails the calibration and stability gates**, so it stays capped
