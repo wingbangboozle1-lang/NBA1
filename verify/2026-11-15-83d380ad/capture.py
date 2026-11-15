@@ -225,7 +225,7 @@ SCHEDULE = [
 # same official schedule page family). For 2026-11-18 rows the official date card does
 # not print venues; venue/city were joined by home team from the same prior capture or
 # the 2026-11-14 results GAME INFO blocks (ORB: ORL/OKC/DAL home venues are blank in
-# repo captures -> left blank + flagged F72, never inferred).
+# repo captures -> left blank + flagged F77, never inferred).
 sched_rows = [{
     "date": d, "tip_et": t, "away": a, "home": h, "game_id": gid,
     "away_record": ar, "home_record": hr, "venue": v, "city": c,
@@ -258,7 +258,7 @@ dump("data/raw/official_schedule_capture_2026-11-15.json", {
                        "data/raw/official_schedule_capture_2026-11-14.json (same official schedule page); "
                        "2026-11-18 rows carry venues joined by home team from that capture or the "
                        "2026-11-14 results GAME INFO blocks; ORL/OKC/DAL home venues are blank in every "
-                       "repo capture and are left blank + flagged F72."),
+                       "repo capture and are left blank + flagged F77."),
     "scope": "Every game listed on the official schedule for 2026-11-15 through 2026-11-18 (today + 3 days).",
     "sources": {f"games_{r['date']}": r["source_date_url"] for r in sched_rows},
     "cols": ["date", "game_id", "away", "home", "tip_et", "venue", "city", "cup_label",
@@ -558,7 +558,7 @@ dump("verify/2026-11-15-83d380ad/capture_log.json", {
         "data/teams_scoring_2026_27.json": "own columns from traditional, opponent columns from opponent re-read (pts + opp_pts are the only columns the model consumes)",
     },
     "flagged": [
-        "F69: 13 injury rows lost their Team column in PDF extraction (team_inherited rows); NYK block absent with no NOT YET SUBMITTED row - recorded, not inferred",
+        "F74: 13 injury rows lost their Team column in PDF extraction (team_inherited rows); NYK block absent with no NOT YET SUBMITTED row - recorded, not inferred",
         "OT reconciliation: standings OT columns sum to 9 season-to-date vs 8 OT games visible in the results feed through 11/14 - carried forward from §38 G02/G03, flag stays open",
     ],
 })

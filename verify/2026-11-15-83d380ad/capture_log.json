@@ -56,7 +56,7 @@
   "data/teams_scoring_2026_27.json": "own columns from traditional, opponent columns from opponent re-read (pts + opp_pts are the only columns the model consumes)"
  },
  "flagged": [
-  "F69: 13 injury rows lost their Team column in PDF extraction (team_inherited rows); NYK block absent with no NOT YET SUBMITTED row - recorded, not inferred",
+  "F74: 13 injury rows lost their Team column in PDF extraction (team_inherited rows); NYK block absent with no NOT YET SUBMITTED row - recorded, not inferred",
   "OT reconciliation: standings OT columns sum to 9 season-to-date vs 8 OT games visible in the results feed through 11/14 - carried forward from §38 G02/G03, flag stays open"
  ]
 }

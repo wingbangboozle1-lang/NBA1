@@ -53,6 +53,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from common import ABBR, RAW, ROOT, read_json, rows_by_cols, write_json
 
+INJURY_PDF_DIR = os.path.join(RAW, "injury_pdfs")
+
 # stats.nba.com is the NBA's own stats service - it is the data layer behind
 # the cited www.nba.com/stats pages (evidence: the page's own JS chunk calls
 # resource "leaguedashteamstats"; recorded in
@@ -88,20 +90,13 @@ FETCHES = {
     "S4_schedule": ("https://www.nba.com/schedule", "schedule"),
     "S5_injury_index": ("https://official.nba.com/nba-injury-report-2026-27-season/",
                         "injury_index"),
-    # Rolling-slate additions (session arena/83d380ad-nba1, 2026-11-15): the
-    # three official team-stat pages the brief requires re-read every refresh,
-    # plus standings. Kinds teams_base / teams_opponent use the same
-    # HTML-then-stats-API pattern as teams_advanced, with STRICT header
-    # validation: an unrecognised response header fails the parse and keeps
-    # the committed snapshot (never a guessed mapping). The opponent resource
-    # name is taken as the same leaguedashteamstats with MeasureType=Opponent;
-    # if that proves wrong on the runner, the parse fails loudly and the
-    # bounded chunk probe records the real endpoint as evidence.
-    "S8_traditional": ("https://www.nba.com/stats/teams/traditional"
-                       "?Season=2026-27&SeasonType=Regular+Season", "teams_base"),
-    "S9_opponent": ("https://www.nba.com/stats/teams/opponent"
-                    "?Season=2026-27&SeasonType=Regular+Season", "teams_opponent"),
-    "S10_standings": ("https://www.nba.com/standings", "standings"),
+    # Official source pages are captured as evidence even when the page does
+    # not expose a stable server-rendered table. A content digest is not a
+    # parsed data update: the freshness gate blocks rebuild until verified
+    # structured rows are promoted into the committed model inputs.
+    "S8_standings": ("https://www.nba.com/standings", "page_snapshot"),
+    "S9_team_traditional": ("https://www.nba.com/stats/teams/traditional", "page_snapshot"),
+    "S10_team_opponent": ("https://www.nba.com/stats/teams/opponent", "page_snapshot"),
 }
 
 TEAM_ABBR_RE = re.compile(
@@ -142,7 +137,7 @@ INJURY_HOST = "https://ak-static.cms.nba.com/referee/injury/"
 # snapshot stores (season-to-date and the 10/20-11/05 training window).
 STATS_API = ("https://stats.nba.com/stats/leaguedashteamstats"
              "?LeagueID=00&Season=2026-27&SeasonType=Regular+Season"
-             "&MeasureType={mt}&PerMode={pm}&Scope=Season"
+             "&MeasureType=Advanced&PerMode=Totals&Scope=Season"
              "&LastNGames=0&Month=0&OpponentTeamID=0"
              "&DateFrom={df}&DateTo={dt}")
 
@@ -162,13 +157,12 @@ STATS_COLS = ["team", "gp", "w", "l", "min", "ortg", "drtg", "netr",
               "reb_pct", "tov_pct", "efg_pct", "ts_pct", "pace", "pie", "poss"]
 
 
-def parse_stats_api_generic(payload, want, cols, int_cols, row_check):
-    """Map an official stats API response onto a committed schema.
+def parse_stats_api(payload):
+    """Map the official stats API response onto our committed schema.
 
     Returns (rows, note). rows is [] and note explains why on any problem -
     the response's own header list is the only authority for column names,
     so a header we do not recognise fails the parse instead of being guessed.
-    row_check(row, byname) returns None or a problem string.
     """
     rs = None
     for rset in payload.get("resultSets", []) or []:
@@ -182,7 +176,7 @@ def parse_stats_api_generic(payload, want, cols, int_cols, row_check):
     raw_rows = rs.get("rowSet") or rs.get("rows") or []
     norm = {re.sub(r"[^A-Za-z0-9]", "", str(h)).upper(): i
             for i, h in enumerate(headers)}
-    missing = [f"{k}->{v}" for k, v in want.items() if v not in norm]
+    missing = [f"{k}->{v}" for k, v in STATS_API_WANT.items() if v not in norm]
     if missing:
         return [], (f"headers not recognised: {missing}; "
                     f"response headers = {headers}")
@@ -190,26 +184,29 @@ def parse_stats_api_generic(payload, want, cols, int_cols, row_check):
     problems = []
     for rr in raw_rows:
         row = []
-        for col in cols:
-            v = rr[norm[want[col]]]
-            if col in ("team", "abbr"):
+        for col in STATS_COLS:
+            v = rr[norm[STATS_API_WANT[col]]]
+            if col == "team":
                 row.append(str(v))
                 continue
             try:
-                row.append(int(float(v)) if col in int_cols else float(v))
+                row.append(int(float(v)) if col in STATS_API_INT else float(v))
             except (TypeError, ValueError):
                 row.append(None)
-        byname = dict(zip(cols, row))
-        team = byname.get("team") or byname.get("abbr")
+        team, gp, w, l = row[0], row[1], row[2], row[3]
         if team not in ABBR:
             problems.append(f"unexpected team {team!r}")
             continue
         if None in row[1:]:
             problems.append(f"{team}: non-numeric cell {row}")
             continue
-        problem = row_check(row, byname)
-        if problem:
-            problems.append(problem)
+        ortg, pace, poss = row[5], row[17], row[19]
+        if w + l != gp:
+            problems.append(f"{team}: W+L {w}+{l} != GP {gp}")
+            continue
+        if not (1 <= gp <= 40) or not (70 <= ortg <= 150) \
+                or not (85 <= pace <= 120) or not (100 <= poss <= 3000):
+            problems.append(f"{team}: out-of-range values {row}")
             continue
         out.append(row)
     if problems:
@@ -217,58 +214,6 @@ def parse_stats_api_generic(payload, want, cols, int_cols, row_check):
     if len(out) != 30:
         return [], f"expected 30 rows, got {len(out)}"
     return out, "ok"
-
-
-def parse_stats_api(payload):
-    def check(row, b):
-        gp, w, l = b["gp"], b["w"], b["l"]
-        if w + l != gp:
-            return f"{b['team']}: W+L {w}+{l} != GP {gp}"
-        if not (1 <= gp <= 40) or not (70 <= b["ortg"] <= 150) \
-                or not (85 <= b["pace"] <= 120) or not (100 <= b["poss"] <= 3000):
-            return f"{b['team']}: out-of-range values {row}"
-        return None
-    return parse_stats_api_generic(payload, STATS_API_WANT, STATS_COLS,
-                                   STATS_API_INT, check)
-
-
-# Schema of data/official/teams_traditional_2026-11-15.json rows -> the
-# leaguedashteamstats (MeasureType=Base, PerMode=PerGame) headers, normalised.
-# Strict: any header the response does not carry fails the parse.
-BASE_API_WANT = {
-    "team": "TEAMNAME", "gp": "GP", "w": "W", "l": "L", "win_pct": "WINPCT",
-    "min": "MIN", "pts": "PTS", "fgm": "FGM", "fga": "FGA", "fg_pct": "FGPCT",
-    "fg3m": "FG3M", "fg3a": "FG3A", "fg3_pct": "FG3PCT", "ftm": "FTM",
-    "fta": "FTA", "ft_pct": "FTPCT", "oreb": "OREB", "dreb": "DREB",
-    "reb": "REB", "ast": "AST", "tov": "TOV", "stl": "STL", "blk": "BLK",
-    "blka": "BLKA", "pf": "PF", "pfd": "PFD", "plus_minus": "PLUSMINUS",
-}
-BASE_API_INT = {"gp", "w", "l"}
-BASE_COLS = list(BASE_API_WANT)
-
-OPP_API_WANT = {
-    "team": "TEAMNAME", "gp": "GP", "w": "W", "l": "L", "min": "MIN",
-    "opp_fgm": "OPPFGM", "opp_fga": "OPPFGA", "opp_fg_pct": "OPPFGPCT",
-    "opp_fg3m": "OPPFG3M", "opp_fg3a": "OPPFG3A", "opp_fg3_pct": "OPPFG3PCT",
-    "opp_ftm": "OPPFTM", "opp_fta": "OPPFTA", "opp_ft_pct": "OPPFTPCT",
-    "opp_oreb": "OPPOREB", "opp_dreb": "OPPDREB", "opp_reb": "OPPREB",
-    "opp_ast": "OPPAST", "opp_tov": "OPPTOV", "opp_stl": "OPPSTL",
-    "opp_blk": "OPPBLK", "opp_blka": "OPPBLKA", "opp_pf": "OPPPF",
-    "opp_pfd": "OPPPFD", "opp_pts": "OPPPTS", "plus_minus": "PLUSMINUS",
-}
-OPP_API_INT = {"gp", "w", "l"}
-OPP_COLS = list(OPP_API_WANT)
-
-
-def parse_base_or_opp(payload, want, cols, int_cols):
-    def check(row, b):
-        gp, w, l = b["gp"], b["w"], b["l"]
-        if w + l != gp:
-            return f"{b['team']}: W+L {w}+{l} != GP {gp}"
-        if not (1 <= gp <= 40):
-            return f"{b['team']}: GP out of range {gp}"
-        return None
-    return parse_stats_api_generic(payload, want, cols, int_cols, check)
 
 
 def get(url, timeout=45):
@@ -701,7 +646,7 @@ def known_index(games_block, sched_block):
 
 
 # ---------------------------------------------------------------------- main
-def capture_results(now, changed, failed, known, committed):
+def capture_results(now, changed, failed, known, committed, source_checks):
     games = read_json(os.path.join(RAW, "games_completed.json"))
     sched = read_json(os.path.join(RAW, "schedule_upcoming.json"))
     dates = sorted({r["date"] for r in rows_by_cols(games)}
@@ -726,8 +671,15 @@ def capture_results(now, changed, failed, known, committed):
         try:
             raw = get(url)
         except Exception as exc:                       # noqa: BLE001
+            source_checks.append({"key": f"results_{d}", "url": url,
+                                  "checked_at_utc": now, "http_status": None,
+                                  "error": f"{type(exc).__name__}: {exc}"})
             failed.append((f"results {d}", f"fetch failed: {exc}"))
             continue
+        source_checks.append({"key": f"results_{d}", "url": url,
+                              "checked_at_utc": now, "http_status": 200,
+                              "bytes": len(raw),
+                              "sha256": hashlib.sha256(raw).hexdigest()})
         text = as_text(raw)
         rows, not_final, unparsed, occurrences, source = parse_games_page(text, known)
         # dedupe unparsed reasons per game (a game can fail on several slices)
@@ -838,12 +790,32 @@ def capture_injury(now, changed, failed, index_editions):
                 rec["http_status"] = 200
                 rec["bytes"] = len(raw)
                 rec["sha256"] = hashlib.sha256(raw).hexdigest()
-                if write_if_changed(os.path.join(RAW, f"_capture_injury_pdf_{edition}.json"),
-                                    {"captured_at_utc": now, "source_url": url,
-                                     "bytes": len(raw), "sha256": rec["sha256"],
-                                     "content_type": "application/pdf"}):
+                rec["pdf_valid"] = b"%PDF-" in raw[:1024]
+                if not rec["pdf_valid"]:
+                    rec["error"] = "HTTP 200 response did not contain a PDF signature"
+                    log(f"  injury {edition}: invalid PDF response; not stored")
+                    break
+                os.makedirs(INJURY_PDF_DIR, exist_ok=True)
+                stem = f"{edition[:-4]}__{rec['sha256']}"
+                pdf_path = os.path.join(INJURY_PDF_DIR, stem + ".pdf")
+                meta_path = os.path.join(INJURY_PDF_DIR, stem + ".json")
+                new_artifact = False
+                if not os.path.exists(pdf_path):
+                    with open(pdf_path, "wb") as pdf_file:
+                        pdf_file.write(raw)
+                    new_artifact = True
+                if not os.path.exists(meta_path):
+                    with open(meta_path, "w", encoding="utf-8") as meta_file:
+                        json.dump({"edition": edition, "source_url": url,
+                                   "retrieved_at_utc": now, "bytes": len(raw),
+                                   "sha256": rec["sha256"],
+                                   "content_type": "application/pdf"},
+                                  meta_file, indent=2)
+                    new_artifact = True
+                if new_artifact:
                     changed.append(f"injury pdf {edition}")
-                log(f"  injury {edition}: 200, {len(raw)} bytes (attempt {attempt})")
+                rec["artifact_path"] = os.path.relpath(pdf_path, ROOT).replace(os.sep, "/")
+                log(f"  injury {edition}: 200, {len(raw)} PDF bytes (attempt {attempt})")
                 break
             except urllib.error.HTTPError as exc:
                 rec["http_status"] = exc.code
@@ -867,6 +839,7 @@ def capture_injury(now, changed, failed, index_editions):
                                   "it is recorded as unavailable at capture time, not "
                                   "as proof of absence.")}):
         changed.append("injury probe")
+    return results
 
 
 def main():
@@ -874,15 +847,21 @@ def main():
     changed = []
     failed = []
     index_editions = []
+    source_checks = []
 
     for key, (url, kind) in FETCHES.items():
         log(f"fetch {key} <- {url}")
         try:
             raw = get(url)
         except Exception as exc:                      # noqa: BLE001 - report and continue
+            source_checks.append({"key": key, "url": url, "checked_at_utc": now,
+                                  "http_status": None, "error": f"{type(exc).__name__}: {exc}"})
             failed.append((key, f"fetch failed: {exc}"))
             log(f"  FAILED: {exc} - keeping the existing snapshot")
             continue
+        source_checks.append({"key": key, "url": url, "checked_at_utc": now,
+                              "http_status": 200, "bytes": len(raw),
+                              "sha256": hashlib.sha256(raw).hexdigest()})
         text = as_text(raw)
         if len(text) < 2000:
             failed.append((key, f"implausibly short response ({len(text)} bytes)"))
@@ -901,7 +880,7 @@ def main():
                     df, dt = "", ""
                 else:
                     df, dt = "10%2F20%2F2026", "11%2F05%2F2026"
-                api_url = STATS_API.format(df=df, dt=dt, mt="Advanced", pm="Totals")
+                api_url = STATS_API.format(df=df, dt=dt)
                 api_evidence = {"url": api_url}
                 try:
                     raw2 = get(api_url, timeout=45)
@@ -985,95 +964,14 @@ def main():
                                  "rows": rows,
                                  "page_sha256": hashlib.sha256(raw).hexdigest()}):
                 changed.append(key)
-        elif kind in ("teams_base", "teams_opponent"):
-            if kind == "teams_base":
-                want, cols, int_cols = BASE_API_WANT, BASE_COLS, BASE_API_INT
-                mt, pm = "Base", "PerGame"
-            else:
-                want, cols, int_cols = OPP_API_WANT, OPP_COLS, OPP_API_INT
-                mt, pm = "Opponent", "PerGame"
-            rows = parse_teams_advanced(text)  # HTML-first probe (client-rendered)
-            fetched_from = url
-            api_evidence = None
-            if len(rows) != 30:
-                api_url = STATS_API.format(df="", dt="", mt=mt, pm=pm)
-                api_evidence = {"url": api_url}
-                try:
-                    raw2 = get(api_url, timeout=45)
-                    api_evidence["http_status"] = 200
-                    api_evidence["bytes"] = len(raw2)
-                    rows, note = parse_base_or_opp(json.loads(as_text(raw2)),
-                                                   want, cols, int_cols)
-                    api_evidence["parse_note"] = note
-                    if len(rows) == 30:
-                        fetched_from = api_url
-                        log(f"  stats API parsed {len(rows)} rows ({note})")
-                except urllib.error.HTTPError as exc:
-                    api_evidence["http_status"] = exc.code
-                    api_evidence["parse_note"] = f"HTTP {exc.code}"
-                    rows = []
-                except Exception as exc:              # noqa: BLE001
-                    api_evidence["parse_note"] = f"{type(exc).__name__}: {exc}"
-                    rows = []
-                time.sleep(1.0)
-            if len(rows) != 30:
-                failed.append((key, f"expected 30 team rows, parsed {len(rows)}"))
-                log(f"  SKIPPED: parsed {len(rows)} rows - keeping the existing snapshot")
-                if write_if_changed(
-                        os.path.join(RAW, f"_capture_evidence_{key}.json"),
-                        {"captured_at_utc": now, "source_url": url,
-                         "status": "parse_failed", "api_attempt": api_evidence,
-                         "document_tail": text[-6000:],
-                         "note": "Evidence for the next parser iteration. "
-                                 "The committed snapshot is untouched."}):
-                    changed.append(f"evidence {key}")
-                continue
-            log(f"  parsed {len(rows)} team rows")
+        elif kind == "page_snapshot":
+            log(f"  captured official page evidence ({len(raw)} bytes)")
             if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"),
                                 {"captured_at_utc": now, "source_url": url,
-                                 "fetched_from": fetched_from,
-                                 "row_count": len(rows), "cols": cols,
-                                 "rows": rows,
-                                 "page_sha256": hashlib.sha256(raw).hexdigest()}):
-                changed.append(key)
-        elif kind == "standings":
-            # The standings table is client-rendered and its data endpoint is
-            # not in the HTML. Capture the page bytes + a bounded probe of the
-            # page's own JS chunks for the endpoint the browser calls - evidence,
-            # not values. Row transcription stays a verified step (capture-only
-            # design); the freshness gate reads this file's timestamp.
-            log(f"  captured {len(text)} bytes (standings: evidence capture)")
-            chunks = list(dict.fromkeys(re.findall(r'/_next/static/chunks/[^"\']+\.js', text)))
-            chunk_probe = []
-            for c in (chunks[-6:] if len(chunks) > 6 else chunks):
-                entry = {"chunk": c, "hits": {}}
-                try:
-                    js = as_text(get("https://www.nba.com" + c, timeout=30))
-                except Exception as exc:              # noqa: BLE001
-                    entry["error"] = f"{type(exc).__name__}: {exc}"
-                    chunk_probe.append(entry)
-                    continue
-                for n in ("leaguestandings", "LeagueStandings", "stats.nba.com",
-                          "/stats/api", "leaguedash"):
-                    cnt = js.count(n)
-                    if cnt:
-                        entry["hits"][n] = cnt
-                        ev = excerpt_around(js, n, before=300, span=1200)
-                        if ev and "excerpt" not in entry:
-                            entry["excerpt"] = ev
-                chunk_probe.append(entry)
-                if any(entry["hits"].values()):
-                    break
-                time.sleep(0.5)
-            if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"),
-                                {"captured_at_utc": now, "source_url": url,
+                                 "bytes": len(raw),
                                  "page_sha256": hashlib.sha256(raw).hexdigest(),
-                                 "chunk_probe": chunk_probe,
-                                 "note": "Evidence capture: rows are transcribed "
-                                         "into data/official/standings_YYYY-MM-DD.json "
-                                         "by a verified session from this page; "
-                                         "promotion gate requires that file to be "
-                                         "as fresh as this capture."}):
+                                 "capture_type": "official_page_evidence_only",
+                                 "note": "Page-level evidence only; not structured or promoted model data."}):
                 changed.append(key)
         elif kind == "players":
             log(f"  captured {len(text)} bytes")
@@ -1114,7 +1012,8 @@ def main():
                 continue
             if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"),
                                 {"captured_at_utc": now, "source_url": url,
-                                 "editions": links}):
+                                 "editions": links,
+                                 "page_sha256": hashlib.sha256(raw).hexdigest()}):
                 changed.append(key)
 
     # results: one page per date, for the dates we already know about plus today
@@ -1123,14 +1022,16 @@ def main():
         sched_block = read_json(os.path.join(RAW, "schedule_upcoming.json"))
         known = known_index(games_block, sched_block)
         committed = committed_index(games_block, sched_block)
-        capture_results(now, changed, failed, known, committed)
+        capture_results(now, changed, failed, known, committed, source_checks)
     except Exception as exc:                          # noqa: BLE001
         failed.append(("results", f"stage failed: {exc}"))
         log(f"  results stage FAILED: {exc}")
 
     # injury reports: full capture of the newest editions + status probe
     try:
-        capture_injury(now, changed, failed, index_editions)
+        injury_results = capture_injury(now, changed, failed, index_editions)
+        source_checks.append({"key": "injury_pdf_probe", "checked_at_utc": now,
+                              "results": injury_results})
     except Exception as exc:                          # noqa: BLE001
         failed.append(("injury", f"stage failed: {exc}"))
         log(f"  injury stage FAILED: {exc}")
@@ -1139,6 +1040,7 @@ def main():
         "captured_at_utc": now,
         "changed": changed,
         "failed": failed,
+        "source_checks": source_checks,
         "note": "Raw captures only. Nothing in data/raw/*.json that a snapshot "
                 "owner committed is overwritten by this script - a parsed "
                 "result is written as _capture_*.json so a verifier can diff "

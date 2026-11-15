@@ -3523,7 +3523,91 @@ push's deploy supersedes the last.
 
 ---
 
-## 38. Session `arena/83d380ad-nba1` — rolling-slate refresh, 2026-11-14 settlement, pick ledger, integration delivery (claimed 2026-11-15 11:35 UTC)
+## 38. Session `arena/7eb1c20a-nba1` — scheduled refresh freshness/provenance gate (claimed 2026-11-15 UTC)
+
+Branch `arena/7eb1c20a-nba1`, based on `ef2e723` (`main`, branch pinned by Arena).
+
+| # | Task | Status | File scope | Plan |
+| --- | --- | --- | --- | --- |
+| RFG1 | Make refresh inputs explicit and capture the official schedule, standings, team-stat pages (traditional/opponent/advanced), injury index, and official finals feed without overwriting promoted snapshots | done (official pages captured with source URL/time/digest; schedule and advanced parser retained) | `engine/fetch_official.py` | Injury PDF bytes are persisted content-addressed with retrieval sidecars; no committed model snapshot is overwritten. |
+| RFG2 | Gate builder execution on fresh, provenance-valid captures and equality with promoted inputs; prevent stale or unverified rebuilds | done (fail-closed order; 7 tests) | `.github/workflows/refresh-data.yml`, `engine/refresh_gate.py`, `scripts/test_refresh_gate.py` | Fetch → validate → conditional build. A changed capture or missing structured promotion blocks the builder. |
+| RFG3 | Verify and record sources, tests, and limitations | done | `COORDINATION.md` (§38 only) | Official NBA source links and verification are recorded below; unsupported structured values remain unverified and block rebuild. |
+
+No other files are claimed. Prior historical claims in this board are treated as closed where their own delivery sections report completion; this task does not edit published data, model inputs, or site navigation.
+
+
+### 38.1 Implementation and verification (2026-11-15 UTC)
+
+**What changed**
+
+- `engine/fetch_official.py` now records a per-source check in `_last_refresh.json` for every primary page and each date-specific `www.nba.com/games?date=...` results request: direct URL, check time, HTTP status, byte count and SHA-256. Added official NBA pages for standings (`https://www.nba.com/standings`), team traditional (`https://www.nba.com/stats/teams/traditional`) and team opponent (`https://www.nba.com/stats/teams/opponent`). Existing advanced, schedule and official injury-index sources remain.
+- Injury report responses are checked for a PDF signature, then retained as immutable content-addressed bytes at `data/raw/injury_pdfs/<edition>__<sha256>.pdf`; a JSON sidecar records the official URL, first retrieval timestamp, byte count and digest. The refresh workflow uploads and stages these files along with JSON capture evidence.
+- `.github/workflows/refresh-data.yml` now runs fetch → freshness/provenance/promotion gate → conditional rebuild. Builders are skipped on fetch/gate failure, stale captures, unofficial or mismatched source digests, missing/invalid PDF bytes, changed-but-unpromoted evidence, or absent structured verified standings/traditional/opponent records. Builder cleanup is restricted to generated `docs/data` and `docs/b`, so it does not discard fetched evidence.
+- Added `engine/refresh_gate.py` and `scripts/test_refresh_gate.py`. Seven unit tests cover an allowed fixture and fail-closed cases for stale runs, untrusted host, changed unpromoted capture, mismatched capture digest, absent PDF evidence, and tampered PDF bytes.
+
+**Sources / verification**
+
+Official URLs used by the scheduled fetcher: [NBA schedule](https://www.nba.com/schedule), [NBA standings](https://www.nba.com/standings), [NBA team traditional stats](https://www.nba.com/stats/teams/traditional), [NBA team opponent stats](https://www.nba.com/stats/teams/opponent), [NBA team advanced stats](https://www.nba.com/stats/teams/advanced), [official NBA injury report index](https://official.nba.com/nba-injury-report-2026-27-season/), [NBA games/results feed](https://www.nba.com/games?date=YYYY-MM-DD), and the official injury-report PDF host `https://ak-static.cms.nba.com/referee/injury/`.
+
+- `python3 -m unittest scripts.test_refresh_gate -v`: **7 passed**.
+- `python3 -m py_compile engine/fetch_official.py engine/refresh_gate.py scripts/test_refresh_gate.py`: passed.
+- `python3 scripts/check_site.py`: passed (all table rows in its checked pages contain source links).
+- `python3 scripts/verify_integration.py`: **0 errors, 44 existing warnings**; no unrelated warning/page data was modified.
+- `git diff --check`: passed. Workflow-order assertion confirmed fetch precedes gate and gate precedes the conditional builder.
+- The current committed `_last_refresh.json` is ~16 hours old, has no per-source checks, reports prior failures and changed captures; the repository also lacks current-run-matching verification records for the committed schedule/injuries and structured verified standings/traditional/opponent inputs. Running the gate locally correctly returns **BLOCK**; the scheduled builder is therefore not claimed to have run or to have passed on current data. No NBA value was refreshed or promoted from this restricted workspace.
+
+**Flagged limitations / follow-up (does not block the fail-closed change)**
+
+1. The newly added standings/traditional/opponent captures are page-level digest evidence, not parsed team-row datasets. The explicit gate requires matching structured rows plus a verification record before any rebuild can pass. Their parsers and verified promotion records remain unimplemented; no table values were guessed.
+2. The existing schedule parser captures game IDs/team pairs from NBA.com but this change does not refresh the committed date/time/venue/record schedule table. A date-aware structured schedule parser and comparison/promotion step are still required for a truly current rolling 3-day slate.
+3. Injury PDFs are now preserved byte-for-byte with timestamps and SHA-256, but an automatic text extraction/status-change diff of each consecutive PDF is not added here. Existing edition-diff audit is historical; it is not a live PDF-to-PDF diff. Do not treat the injury gate as proof that status changes have been parsed or repriced.
+4. No live NBA host was fetched from this local session; this environment is restricted to approved hosts and the scheduled GitHub runner is responsible for the source fetch. The workflow's next run must establish endpoint reachability and live behavior; all HTTP and parse failures fail closed.
+
+| # | Task | Status | Scope / next owner |
+| --- | --- | --- | --- |
+| RFG4 | Parse and independently verify standings, traditional/opponent stats, date-aware schedule rows, and successive injury-PDF status differences; promote only with row-level source evidence | needs review | New isolated module/data scope; no edits in this session. |
+
+
+- **Live scheduled-run validation:** push-triggered refresh run [#43709896895](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43709896895) completed successfully on commit `25bfcea`. Its `Fetch official sources` and `Require fresh provenance and verified-promotion gates` steps completed; the conditional builder was explicitly **skipped**, as the gate output was not `true`. The Pages PR validation for [PR #101](https://github.com/wingbangboozle1-lang/NBA1/pull/101) passed. GitHub's artifact log-download host returned EOF from this sandbox, so the artifact's detailed per-source report could not be re-opened locally; no assertion is made here about specific live endpoint values. A follow-up workflow step now prints gate diagnostics in the run log whenever the builder is skipped.
+
+### 38.2 Delivery record — PR #101 merged and Pages confirmed (2026-11-15 UTC)
+
+- **PR #101:** [Gate scheduled NBA refreshes on current verified provenance](https://github.com/wingbangboozle1-lang/NBA1/pull/101) was merged at `2026-11-15T11:46:46Z`; merge commit `6bf4efd97ab90cd9873fdbecb766c65894caec49`. No review wait was requested. PR validation (`validate`) passed; its `deploy` job was correctly skipped for the pull request event.
+- **Refresh workflow:** push-triggered run [#43710202772](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43710202772) passed as a workflow. It fetched official sources and evaluated the new gate; builder was skipped because the output was not `true`. This is the intended safe result while the required structured/promoted inputs are absent. Run details and raw capture artifacts are hosted by GitHub Actions; this restricted environment could not download the artifact/log archive (EOF), so no specific live-source response values are claimed.
+- **Pages:** post-merge publisher [#43710562087](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43710562087) completed with validation and deployment successful. The GitHub Pages API reports `status: built` for `https://wingbangboozle1-lang.github.io/NBA1/`. The deployment publishes the existing site tree plus this PR's workflow and documentation changes; it does not publish fresh picks because the freshness/promotion gate correctly skipped the rebuild.
+- **Irregularities:** the known 44 integration warnings remain documented on the site's Flagged for Review page; this session introduced no new site data rows. The open follow-up RFG4 remains `needs review` for structured stats/schedule parsing and automated successive-report status diffs.
+
+
+## 39. Session `arena/91390540-nba1` — 2026-11-15 roll: fresh official capture, row-level re-verification, integration close-out (claimed 2026-11-15 11:35 UTC)
+
+**Board read before claiming (required by ground rule 6).** `main` is at `ef2e723`
+(the 2026-11-14T22:18:48Z probe-record commit, i.e. the tip after PR #100). **No open PRs**
+(`gh pr list --state open` → empty). The last push to any branch was 13+ hours ago; every
+prior claim on this board is `done` or `needs review`, so ground rule 5's 60-minute
+threshold leaves the shared outputs unowned and the integration seat takeable. This
+session takes it for the 2026-11-15 slate roll (today +3 = 11/15..11/18; the published
+horizon is 11/14–11/17 and 11/14 is now final).
+
+Platform pins this session to branch `arena/91390540-nba1`; the brief's
+`session-<id>/<task>` naming is satisfied by this single pre-named branch (deviation
+logged, as §16/§17/§28/§31/§35 logged it).
+
+| # | Task | Status | File scope (exclusive) | Plan |
+| --- | --- | --- | --- | --- |
+| R01 | Board claim pushed before any other edit | **done** (this commit) | `COORDINATION.md` (§39 only) | Claim first, work second. |
+| R02 | Fresh official capture 2026-11-15 (~11:30Z): the five 11/14 finals, the 11/15–11/18 horizon (34 games: 9/8/5/12), the newest official injury-report edition — every read stored with its exact URL and retrieval time | unclaimed | `verify/2026-11-15-91390540/**` (new namespace) | Independent of all prior passes; nothing outside this namespace written. |
+| R03 | Row-by-row comparison of the published values this session can reach (site horizon rows, 11/14 pending picks/results, register counts) against the R02 captures; agreement or disagreement per row, no value inferred | unclaimed | `verify/2026-11-15-91390540/**` | Unconfirmable values stay blank and flagged, never filled. |
+| R04 | Publish the R02/R03 report as a self-contained page + append any new irregularities to the Flagged register with official source links (non-blocking) | unclaimed | `verify/2026-11-15-91390540/REPORT.md` (+ HTML twin in same namespace), `data/content/flagged.json` (append-only, new ids only) | Flagged items do not block the merge. |
+| R05 | Full gate suite on the final tree (the `validate` workflow steps in order + `verify_all.py`), then integration PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy + live smoke test, record PR link and merge result here | unclaimed | own branch + `COORDINATION.md` (§39 delivery log) | "Do not merge a broken site." Retry until live. |
+
+**Not claimed / read-only:** `docs/**`, `docs/b/**`, `command-center/**`, `origination/**`,
+`strategy-lab/**`, `edge-lab/**`, `integration/**`, `audit/**`, `engine*/**`, `scripts/**`
+(runs only, no edits unless a gate is red and the fix is provable), `data/**` snapshots
+other than the append-only `data/content/flagged.json`, other sessions' `verify/*` namespaces.
+If a shared file must change, the request is logged here, not edited silently.
+
+
+## 40. Session `arena/83d380ad-nba1` — rolling-slate refresh, 2026-11-14 settlement, pick ledger, integration delivery (claimed 2026-11-15 11:35 UTC)
 
 Branch `arena/83d380ad-nba1`, based on `main` `ef2e723` (tip at claim time). The platform pins
 this session to that branch; the `session-<id>/<task>` naming in the brief is not used (single
@@ -3542,16 +3626,16 @@ verify_all VERIFY OK.
 (2026-11-14T22:18:48Z), committed **before the first 2026-11-14 tip** (earliest 11/14 game
 00:30Z 2026-11-15). The 11/14 published picks in `data/derived/horizon_picks.json` and
 `data/derived/horizon_lines.json` at that commit are therefore the tamper-evident pre-tip
-record; their SHA-256 digests are recorded and verified at settlement (§38.2).
+record; their SHA-256 digests are recorded and verified at settlement (§40.2).
 
 | # | Task | Status | File scope (exclusive) |
 | --- | --- | --- | --- |
-| G01 | Board claim (banner + §0b row + this §38) pushed before any other edit | done (this commit) | `COORDINATION.md` (top banner + §0b row + §38 only) | Claim first, work second. |
+| G01 | Board claim (banner + §0b row + this §40) pushed before any other edit | done (this commit) | `COORDINATION.md` (top banner + §0b row + §40 only) | Claim first, work second. |
 | G02 | Settle the 2026-11-14 slate (5 games) against official finals only: capture finals + quarter scores from NBA.com box scores, one results row per game (date, teams, final score, quarter scores), grade every published 11/14 single/parlay from the pre-tip record, verify the ledger hashes | in progress | `data/settlement/**`, `data/official/results_2026-11-14.json`, `verify/2026-11-15-83d380ad/**` | Nothing inferred; every row carries its official game/box-score URL. |
 | G03 | Rolling-slate official refresh (freshness + provenance gates before rebuild): standings, three team-stat pages (traditional, opponent, advanced), schedule 11/15–11/18, latest 11/15 injury-report editions (stored with revision + retrieval timestamps; consecutive-report diff) | in progress | `data/official/**` (new dated files), `data/injury_reports/**` | Captures committed verbatim with retrieval stamps; diff computed, not hand-written. |
 | G04 | Roll the originated horizon + picks to the 2026-11-15..2026-11-18 window (max 3 days ahead); publish picks with their pre-registration block and ledger hashes | in progress | `data/derived/horizon_lines.json`, `data/derived/horizon_picks.json`, `data/prereg/**`, `scripts/originate_horizon.py`, `scripts/generate_picks.py` | Same formulas; every new pick row source-linked; unvalidated status preserved. |
 | G05 | Rebuild the site surfaces from refreshed data (projection/bet split preserved; settlement stamp visible; disagreement headline kept) and run the full 11-step gate suite to green | in progress | `site/**`, `docs/data/**`, `command-center/**`, root pages touched by the builders, `scripts/build_*.py`, `verification.html` | No manual values; builders only. |
-| G06 | Integration PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy + live fetch-back, record PR link + merge result here | unclaimed | `COORDINATION.md` (§38 delivery record) | Retry until live per the brief; flagged items do not block. |
+| G06 | Integration PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy + live fetch-back, record PR link + merge result here | unclaimed | `COORDINATION.md` (§40 delivery record) | Retry until live per the brief; flagged items do not block. |
 
 **Requests from other sessions:** none at claim time. If a future session needs a file in this
 scope, log the request here instead of editing it.

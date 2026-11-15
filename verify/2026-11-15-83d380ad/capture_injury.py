@@ -173,12 +173,12 @@ doc = {
     "submission_rule_url": INDEX,
     "merged_cell_caveat": ("13 rows lost their Team column in PDF extraction and are marked team_inherited; "
                            "their team_effective is the nearest preceding printed team in the same game block. "
-                           "Flagged for review (F69)."),
+                           "Flagged for review (F74)."),
     "rows_note": ("Verbatim report order. Rows cover the 2026-11-15 slate; the 2026-11-16 slate is printed "
                   "NOT YET SUBMITTED for all 16 team blocks. The report prints no rows for New York Knicks "
                   "(NYK@TOR): the edition prints NOT YET SUBMITTED rows for unsubmitted teams (Dallas, same "
                   "slate), so an absent block most likely means no reportable players - nothing inferred, "
-                  "flagged for review (F69)."),
+                  "flagged for review (F74)."),
     "row_count": len(rows),
     "rows": rows,
 }

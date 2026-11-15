@@ -1,0 +1,86 @@
+{
+  "session": "arena/91390540-nba1",
+  "captured_by": "session arena/91390540-nba1 (COORDINATION §39, task R02)",
+  "capture_window_utc": ["2026-11-15T11:31Z", "2026-11-15T11:45Z"],
+  "timestamp_note": "Reads were executed sequentially inside the window above through the session's web-fetch channel (the shell's egress to nba.com is blocked, as earlier sessions recorded). Per-read times are the session window, not instrumented clocks.",
+  "method": "verbatim structured transcription of each fetched page; every row carries the exact official URL it was read from; no value inferred, no cell filled from any non-official source",
+  "reads": [
+    {
+      "id": "S115-G14",
+      "url": "https://www.nba.com/games?date=2026-11-14",
+      "what": "the five 2026-11-14 finals (schedule card surface)",
+      "file": "official_finals_2026-11-14.json"
+    },
+    {
+      "id": "S115-G15",
+      "url": "https://www.nba.com/games?date=2026-11-15",
+      "what": "nine 2026-11-15 fixtures: matchup, tip ET, both records, game id",
+      "file": "official_horizon_2026-11-15_to_18.json"
+    },
+    {
+      "id": "S115-G16",
+      "url": "https://www.nba.com/games?date=2026-11-16",
+      "what": "eight 2026-11-16 fixtures",
+      "file": "official_horizon_2026-11-15_to_18.json"
+    },
+    {
+      "id": "S115-G17",
+      "url": "https://www.nba.com/games?date=2026-11-17",
+      "what": "five 2026-11-17 fixtures",
+      "file": "official_horizon_2026-11-15_to_18.json"
+    },
+    {
+      "id": "S115-G18",
+      "url": "https://www.nba.com/games?date=2026-11-18",
+      "what": "twelve 2026-11-18 fixtures (the third day of the today+3 window)",
+      "file": "official_horizon_2026-11-15_to_18.json"
+    },
+    {
+      "id": "S115-HUB",
+      "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+      "what": "official injury-report index; newest edition listed at read time = 11/15/26 06:15 AM ET",
+      "file": "injury_report_2026-11-15_0615AM.json"
+    },
+    {
+      "id": "S115-IR0615",
+      "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+      "what": "the 06:15 AM ET edition itself: 85 player/team rows for 11/15 + 16 NOT YET SUBMITTED team rows for 11/16",
+      "file": "injury_report_2026-11-15_0615AM.json"
+    },
+    {
+      "id": "S115-BOX231",
+      "url": "https://www.nba.com/game/den-vs-nop-0022600231",
+      "what": "second surface for DEN@NOP final + linescore (quarters) + game info",
+      "file": "official_finals_2026-11-14.json"
+    },
+    {
+      "id": "S115-BOX232",
+      "url": "https://www.nba.com/game/dal-vs-cle-0022600232",
+      "what": "second surface for DAL@CLE final + linescore + game info",
+      "file": "official_finals_2026-11-14.json"
+    },
+    {
+      "id": "S115-BOX233",
+      "url": "https://www.nba.com/game/det-vs-mia-0022600233",
+      "what": "second surface for DET@MIA final + linescore + game info",
+      "file": "official_finals_2026-11-14.json"
+    },
+    {
+      "id": "S115-BOX234",
+      "url": "https://www.nba.com/game/bkn-vs-mem-0022600234",
+      "what": "second surface for BKN@MEM final + linescore + game info",
+      "file": "official_finals_2026-11-14.json"
+    },
+    {
+      "id": "S115-BOX235",
+      "url": "https://www.nba.com/game/chi-vs-min-0022600235",
+      "what": "second surface for CHI@MIN final + linescore + game info",
+      "file": "official_finals_2026-11-14.json"
+    }
+  ],
+  "second_source_rule": "each 11/14 final was read twice on two distinct official surfaces (the date's Games & Scores card list AND the game's own summary page); both surfaces agreed on all five scores (0 disagreements)",
+  "not_captured_this_pass": [
+    "venues for 11/15-11/18 (the games pages do not print them; would need https://www.nba.com/schedule — not read this pass, so no venue cell is claimed or compared)",
+    "any value from a third-party or odds source (none exists on an NBA-operated host; see standing flag F2/I-30-3)"
+  ]
+}
