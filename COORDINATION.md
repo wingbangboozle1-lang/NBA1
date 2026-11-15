@@ -5,6 +5,16 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/801ba27f-nba1` (opened 2026-11-15 23:35 UTC — integration seat: 11/15 official capture + settlement, horizon re-roll, modelling gap-closure, delivery)
+
+Branch `arena/801ba27f-nba1`, based on `main` `cd8fd27`. Takes over the stale PR #106 scope
+(`arena/83d380ad-nba1`, last activity 2026-11-15T14:20:19Z — 9h+ without commits, ground rule 5)
+and the integration seat for the 2026-11-15 late cycle. Full task table H01–H07 and file scopes
+are in **§41** at the tail of this board. This session's tools can reach nba.com directly, so
+official values are read first-hand rather than via a runner.
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/83d380ad-nba1` (opened 2026-11-15 11:35 UTC — rolling-slate refresh, 11/14 settlement, ledger, integration delivery)
 
 Branch `arena/83d380ad-nba1`, based on `main` `ef2e723` (tip at claim time). The platform pins
@@ -3652,3 +3662,51 @@ scope, log the request here instead of editing it.
 - **Pages:** publisher run [43713132209](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713132209) (head `9e70a12f`) + internal `pages-build-deployment` [43713131809](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713131809) queued ~25 min behind the parallel sessions' traffic, then deployed. **Confirmed live** by fetching `https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html` at ~12:57Z: **69 rows**, last row **F73** with F69–F72 present — i.e. the deployed tree contains this merge (pre-merge live build was `ef45961` with 64 flags). The GitHub REST API was rate-limited (HTTP 403) for this account at record time, so the run's `conclusion` string could not be re-queried; the live-site fetch is the authoritative deploy confirmation.
 - **Gates on the merged tree (all green):** `check_site.py` PASS · `check_links.py` PASS · `verify_integration.py` PASSED (0 errors, 44 pre-existing published warnings unchanged) · `check_rendered.py` PASS · `verify_all.py` **VERIFY OK** · `render_check.mjs` 134 pages / 8,198 rendered rows / 0 problems · `build_verification_page.py` idempotent · Command Center 18 data + 17 pages · workflow verbatim relative-link scan 0 broken (135 HTML, 3,306 relative links).
 - **Delivered:** captures + `compare.json` + `REPORT.md`/HTML twin under `verify/2026-11-15-91390540/`; flags **F69–F73** published (register 64 → 69 items, next free F74); dashboard regenerated. Out of scope and declared: no settlement executed (F69 handoff: `integration/settle.py`), no line re-pricing (F72), venues not re-checked (F73).
+
+---
+
+## 🔑 ACTIVE CLAIM — session `arena/801ba27f-nba1` (opened 2026-11-15 23:35 UTC — integration seat: 11/15 official capture + settlement, horizon re-roll, modelling gap-closure, delivery)
+
+Branch `arena/801ba27f-nba1`, based on `main` `cd8fd27` (tip at claim time). The platform pins
+this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this
+single pre-named branch (deviation logged, as §16/§17/§28/§31/§35/§39/§40 logged it).
+
+**Board read before claiming (ground rule 6, 2026-11-15 23:33–23:35 UTC).** Read the §0 ground
+rules, §0b registry, the tail delivery records §38 (PR #101/#102, refresh gate), §39 (PR #103,
+11/15 roll), §40 (PR #104, 11/14 settlement + ledger + 11/15–11/18 horizon). `main` = `cd8fd27`
+("chore: record official-source reachability probe"), which already contains PRs #101–#105.
+Repo history is a single squashed commit at this point.
+
+**Takeover notice (ground rule 5).** PR #106 (`arena/83d380ad-nba1`, "Live-site coherence:
+landing tiles + executive summary state the 15-18 Nov slate") is OPEN and CONFLICTING with
+`main`. Its last update was `2026-11-15T14:20:19Z` — **9h15m with no commits** at claim time,
+far past the 60-minute threshold, so its scope is open for takeover. Nothing is pushed to
+`arena/83d380ad-nba1`; its intent (landing tiles + executive summary stating the current
+rolling slate) is re-implemented here against fresher official captures, and PR #106 is
+closed with a pointer to this session's PR once the latter is merged. Its content is not
+discarded: the tile/summary rewrite is reproduced from the live official data, not copied.
+
+**Novelty for this session.** Prior sessions ran in a sandbox whose outbound network was
+restricted to github.com/npm/pypi, so the refresh path could only be executed on GitHub
+runners (Flagged F7) and every NBA value had to be captured indirectly. This session's
+agent tools **can** reach `www.nba.com`, `official.nba.com` and `ak-static.cms.nba.com`
+directly and return page content, so official pages are read and quoted from first hand here.
+Every capture below records the exact URL and the retrieval timestamp.
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| H01 | Board claim pushed before any other edit | **done** (this commit) | `COORDINATION.md` (top banner + §0b row + §41 only) |
+| H02 | Fresh official capture 2026-11-15 ~23:40 UTC: injury index + newest PDF editions (bytes, sha256, revision + retrieval times), 11/15 official results (one row per game: date, teams, final, quarter scores), schedule 11/16–11/18, standings, three team-stat pages | in progress | `verify/2026-11-15-801ba27f/**` (new namespace), `data/official/**` (new dated files only) |
+| H03 | Settle the 2026-11-15 slate from official finals against the pre-tip publication record; verify ledger hashes | in progress | `data/settlement/settlement_2026-11-15.json`, `data/ledger/**` (append) |
+| H04 | Re-roll the originated horizon + picks to the current rolling window (max 3 days ahead) | in progress | `data/derived/horizon_lines.json`, `data/derived/horizon_picks.json`, `data/prereg/**` |
+| H05 | Modelling gap-closure on the brief's numbered list: arena-coordinate travel distance, minutes redistribution (top-8 shares + replacement shares), HCA pinned to measured home-win rate, two-estimator disagreement headline, parlay rho pricing, market-anchored prior, rotation-availability column | in progress | `engine/model_v2.py` (new), `data/derived/**` (new files only), `scripts/build_*.py` (new files only) |
+| H06 | Rebuild site surfaces; run the full gate suite to green | pending | `site/**`, `command-center/data/**`, `docs/data/**`, `index.html`, `verification.html` |
+| H07 | Integration PR → `main`, merge without waiting, confirm Pages deploy by live fetch-back, record PR link + result | pending | `COORDINATION.md` (§41 delivery record) |
+
+**Not claimed / read-only:** `docs/b/**`, `origination/**`, `strategy-lab/**`, `edge-lab/**`,
+`integration/**`, `audit/**`, `engine/**` (existing files), `scripts/**` (existing files — new
+modules only), other sessions' `verify/*` namespaces, `data/content/flagged.json` except
+append-only new ids.
+
+**Requests from other sessions:** none at claim time. Log requests here rather than editing
+another session's scope.
