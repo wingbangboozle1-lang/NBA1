@@ -656,6 +656,8 @@ def main():
         return obj
 
     def record(rec, parser=None, out=None):
+        if rec is None:
+            return None
         r = {k: v for k, v in rec.items() if k != "data"}
         if parser:
             r["parser"] = parser

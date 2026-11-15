@@ -2,7 +2,7 @@ name: Official capture
 
 # Manual trigger: session tokens cannot call workflow_dispatch (HTTP 403),
 # so a run is started by editing this file (it is in the push paths above).
-# run-stamp: 2026-11-15T12:05Z debug=1 only=standings,teams,games,gamepages
+# run-stamp: 2026-11-15T12:12Z debug=1 only=standings,teams,games,gamepages
 # Purpose: the ONLY path in this project that can reach nba.com.
 #
 # The agent sandbox has no outbound network (curl to nba.com returns 000). GitHub
