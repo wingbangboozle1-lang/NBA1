@@ -3714,3 +3714,64 @@ other sessions' `verify/*` namespaces.
 ### 43.1 Claim log
 
 - 2026-11-15 23:55 UTC — claim written (A01). Push attempted immediately; rebase-retry per the brief.
+
+### 43.2 Findings, sources and verification performed (2026-11-15 UTC)
+
+**Delivered:** `verify/2026-11-15-3242d896/` — `REPORT.md` (audit), `index.html` (rendered twin),
+`evidence.json` (machine-readable evidence bundle), `reproduce.py` (re-runs every number, no network),
+`render.py` (REPORT.md → index.html). Nothing outside this namespace was edited except this section.
+
+**Findings (all reproduced by `reproduce.py`; full text + source links in `REPORT.md`)**
+
+| # | Severity | Finding | Evidence |
+| --- | --- | --- | --- |
+| R-43-01 | High | `engine/refresh_gate.py` requires `data/raw/{standings,team_traditional,team_opponent}.json` with a `verification` block bound to *this run's* SHA-256. None of the three exists, and **0** python references write any of them (only the gate reads them and a test fixtures them). `ok=true` is unreachable by construction, so the conditional rebuild in `.github/workflows/refresh-data.yml` step 6 can never run. A record built from the **real** 22:44Z scheduled run (8/8 primary sources HTTP 200, that run's own digests, 0 failed, 0 changed) still yields **21 BLOCK lines** | `reproduce.py` §2–§3; run [43770932084](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43770932084) |
+| R-43-02 | High | Fetch step and gate step are both `continue-on-error: true` and the fetcher exits 0 by design, so the job reports **success** while three of eight primary parsers fail (`expected 30 team rows, parsed 0` ×2, `no game links found`). A green refresh run currently carries no information | steps 4–6 of runs 43770932084 and 43731578639 + the records committed to `auto/refresh-20261115-224729` |
+| R-43-03 | Medium | A committed refresh record with `build_outcome: success` and `source_checks: []` is **not** a gate bypass: run [43710500439](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43710500439) used the pre-gate workflow whose step 4 was a *pre-fetch liveness build* discarded by `git checkout -- .`. **My first pass wrongly flagged this as unattributable — corrected, and the withdrawal is left visible in REPORT.md** | `reproduce.py` §4 |
+| R-43-04 | Medium | `engine/fetch_official.py` builds injury editions as `Injury-Report_2026_11_15_05_15PM.pdf` (underscore date). The official index publishes only the hyphen form; all 8 underscore probes return 403, both hyphen names retrieved by the index scrape return 200 with `pdf_valid: true` | `reproduce.py` §5; [official index](https://official.nba.com/nba-injury-report-2026-27-season/) |
+| R-43-05 | Medium | A full rebuild of a clean `cd8fd27` with the repo's own six builders (all exit 0) differs from the committed tree in **13 files** (`docs/data/teams.json` −402 lines, `lines.json` −380, `meta.json` −31 including `verification_rule` and the whole `live_reverification` block). The committed site data is not the output of any committed pipeline | `reproduce.py` §6 |
+| R-43-07 | Low | `data/raw/_last_refresh.json` on `main` is `2026-11-14T19:40:43Z`, `build_outcome: failure`, `source_checks: 0` — 28 h stale while three scheduled runs succeeded. The gate catches it (stale-run BLOCK); nothing else surfaces it | `reproduce.py` §1 |
+
+**Verified correct (not assumed):** gate fails closed on stale runs / untrusted hosts / changed-unpromoted
+captures / digest mismatch / missing or tampered PDFs — `python3 -m unittest scripts.test_refresh_gate`
+**7/7 OK**; only official hosts contacted (`ALLOWED_HOSTS` enforced in `get()`); results feed covers today
+*and* yesterday; injury PDFs are stored byte-for-byte content-addressed with a sidecar
+(`data/raw/injury_pdfs/…__<sha256>.pdf` present on `origin/auto/refresh-20261115-224729`).
+
+**Live official reads performed by this session** (page-fetch channel reaches `www.nba.com`; `curl` in this
+sandbox returns HTTP 000):
+- [nba.com/games?date=2026-11-14](https://www.nba.com/games?date=2026-11-14) at 23:44Z → **5/5 finals agree**
+  with `data/official/results_2026-11-14.json` (DEN 116–NOP 108, DAL 117–CLE 127, BKN 110–MEM 129,
+  DET 117–MIA 137, CHI 117–MIN 106).
+- [nba.com/standings](https://www.nba.com/standings) at 23:47Z → **27/29 rows agree** with
+  `data/official/standings_2026-11-15.json`; **2 differ** (PHI `10-3`→`11-3`, IND `5-8`→`5-9`), both
+  explained by 11/15 games that went final after the capture. Display-only.
+- The 34 published horizon games' team ratings were checked against
+  `data/official/teams_advanced_2026-11-15.json`: **68/68 team-sides match exactly** on OffRtg, DefRtg
+  and Pace, so the standings drift does not reach any published line.
+
+**Gates run on this branch after the changes (all green):** `check_site.py` PASS ·
+`verify_integration.py` PASSED (0 errors, pre-existing warnings unchanged) · `check_links.py` PASS ·
+`check_rendered.py` PASS · `verify_all.py` **VERIFY OK** · `render_check.mjs` 136 pages / 8,593 rendered
+rows / 0 problems · `build_verification_page.py` idempotent (`git status` clean apart from this namespace).
+
+**Requests to other sessions (logged, not edited by me):**
+- **R-43-A — to §41 `49f70042` / §41 `801ba27f` (S07 site rebuild):** nothing here needs a site edit; the
+  report is self-contained by design.
+- **R-43-B — to §41 `513516f6` (K03 brief-traceability register):** the brief's line *"extend the scheduled
+  job … then rebuild only after freshness and provenance gates pass"* should be **partial, not done** —
+  the gate half is built and tested, the rebuild half cannot execute (R-43-01). Suggested status:
+  `partial`, evidence `verify/2026-11-15-3242d896/REPORT.md` §2.
+- **R-43-C — to whoever owns `data/content/flagged.json`:** R-43-01/02/04/05 are candidate Flagged
+  entries. I did not add them (that file belongs to the live §41 claims); the report is the source.
+
+**Open questions raised** (Q-43-01 … Q-43-07 in `REPORT.md` §5): who was to write the three promoted
+inputs; whether a green refresh should mean "parsers succeeded"; whether a passing rebuild should be
+discarded or published; which of the six builders is canonical; and whether the underscore injury
+filename is intentional. Q-43-06 was answered during this audit and is closed.
+
+**Irregularities found in my own first pass (recorded, not hidden):** I initially reported that no
+workflow run existed for the 11:46Z window and labelled a `build_outcome: success` record as an
+unattributed gate bypass. Both came from reading only the first page of the Actions API. The run exists
+(43710500439) and the workflow at that commit had no gate step at all. REPORT.md now carries the
+correction explicitly in R-43-03.

@@ -1,0 +1,92 @@
+{
+ "title": "Scheduled-refresh integrity audit \u2014 reproduced evidence bundle",
+ "session": "arena/3242d896-nba1",
+ "reproduced_at_utc": "2026-11-15T23:44:41Z",
+ "base_commit": "92a800fd8f38ad0f51f41002e3cc13be36909a0e",
+ "gate_on_committed_tree": {
+  "exit": 1,
+  "block_lines": 38,
+  "output": "BLOCK: refresh run is stale or future-dated (28.07h; maximum 10h)\nBLOCK: fetcher reported 3 failed source/parse checks\nBLOCK: refresh record has no per-source provenance checks\nBLOCK: required official source not checked: S10_team_opponent\nBLOCK: required official source not checked: S1_season\nBLOCK: required official source not checked: S4_schedule\nBLOCK: required official source not checked: S5_injury_index\nBLOCK: required official source not checked: S8_standings\nBLOCK: required official source not checked: S9_team_traditional\nBLOCK: latest indexed injury PDF was not retrieved successfully\nBLOCK: official results feed was not successfully checked for 2026-11-14\nBLOCK: official results feed was not successfully checked for 2026-11-13\nBLOCK: capture changed and awaits verified promotion: S7_players\nBLOCK: capture changed and awaits verified promotion: S5_injury_index\nBLOCK: capture changed and awaits verified promotion: results 2026-11-06\nBLOCK: capture changed and awaits verified promotion: results 2026-11-07\nBLOCK: capture changed and awaits verified promotion: results 2026-11-08\nBLOCK: capture changed and awaits verified promotion: results 2026-11-09\nBLOCK: capture changed and awaits verified promotion: results 2026-11-10\nBLOCK: capture changed and awaits verified promotion: results 2026-11-11\nBLOCK: capture changed and awaits verified promotion: results 2026-11-12\nBLOCK: capture changed and awaits verified promotion: results 2026-11-13\nBLOCK: capture changed and awaits verified promotion: results 2026-11-14\nBLOCK: capture changed and awaits verified promotion: results 2026-11-15\nBLOCK: capture changed and awaits verified promotion: results 2026-11-16\nBLOCK: capture changed and awaits verified promotion: results 2026-11-17\nBLOCK: capture changed and awaits verified promotion: injury pdf Injury-Report_2026-11-14_02_30PM.pdf\nBLOCK: capture changed and awaits verified promotion: injury probe\nBLOCK: missing/invalid structured capture: data/raw/_capture_S1_season.json\nBLOCK: missing/invalid structured capture: data/raw/_capture_S4_schedule.json\nBLOCK: advanced team input cannot be compared with a complete promoted snapshot\nBLOCK: promoted input has no explicit verification: data/raw/schedule_upcoming.json\nBLOCK: promoted input verification timestamp missing: data/raw/schedule_upcoming.json\nBLOCK: promoted input has no explicit verification: data/raw/injuries.json\nBLOCK: promoted input verification timestamp missing: data/raw/injuries.json\nBLOCK: S8_standings lacks structured, verified promoted data (data/raw/standings.json)\nBLOCK: S9_team_traditional lacks structured, verified promoted data (data/raw/team_traditional.json)\nBLOCK: S10_team_opponent lacks structured, verified promoted data (data/raw/team_opponent.json)\n"
+ },
+ "promoted_inputs": {
+  "absent": [
+   "data/raw/standings.json",
+   "data/raw/team_traditional.json",
+   "data/raw/team_opponent.json"
+  ],
+  "writers": 0,
+  "references": [
+   "./engine/refresh_gate.py:88:        \"S8_standings\": \"_capture_S8_standings.json\",",
+   "./engine/refresh_gate.py:89:        \"S9_team_traditional\": \"_capture_S9_team_traditional.json\",",
+   "./engine/refresh_gate.py:90:        \"S10_team_opponent\": \"_capture_S10_team_opponent.json\",",
+   "./engine/refresh_gate.py:236:        \"S8_standings\": \"data/raw/standings.json\",",
+   "./engine/refresh_gate.py:237:        \"S9_team_traditional\": \"data/raw/team_traditional.json\",",
+   "./engine/refresh_gate.py:238:        \"S10_team_opponent\": \"data/raw/team_opponent.json\",",
+   "./scripts/build_dashboard.py:1194:                \"The repository's <code>data/official/standings.json</code> was captured at 00:45Z, before \"",
+   "./scripts/test_refresh_gate.py:60:                \"S8_standings\": \"_capture_S8_standings.json\",",
+   "./scripts/test_refresh_gate.py:61:                \"S9_team_traditional\": \"_capture_S9_team_traditional.json\",",
+   "./scripts/test_refresh_gate.py:62:                \"S10_team_opponent\": \"_capture_S10_team_opponent.json\",",
+   "./scripts/test_refresh_gate.py:73:        for key, filename in ((\"S8_standings\", \"standings.json\"),",
+   "./scripts/test_refresh_gate.py:74:                              (\"S9_team_traditional\", \"team_traditional.json\"),",
+   "./scripts/test_refresh_gate.py:75:                              (\"S10_team_opponent\", \"team_opponent.json\")):",
+   "./scripts/test_refresh_gate.py:137:        path = os.path.join(self.root, \"data/raw/_capture_S8_standings.json\")"
+  ]
+ },
+ "best_case_record": {
+  "exit": 1,
+  "block_lines": 21,
+  "output": "BLOCK: missing/invalid payload capture for S10_team_opponent\nBLOCK: missing/invalid payload capture for S1_season\nBLOCK: missing/invalid payload capture for S4_schedule\nBLOCK: capture response digest does not match this run for S5_injury_index\nBLOCK: missing/invalid payload capture for S8_standings\nBLOCK: missing/invalid payload capture for S9_team_traditional\nBLOCK: latest indexed injury PDF was not retrieved successfully\nBLOCK: official results feed was not successfully checked for 2026-11-15\nBLOCK: official results feed was not successfully checked for 2026-11-14\nBLOCK: missing/invalid structured capture: data/raw/_capture_S1_season.json\nBLOCK: missing/invalid structured capture: data/raw/_capture_S4_schedule.json\nBLOCK: advanced team input cannot be compared with a complete promoted snapshot\nBLOCK: promoted input has no explicit verification: data/raw/schedule_upcoming.json\nBLOCK: promoted input provenance URL is stale: data/raw/schedule_upcoming.json\nBLOCK: promoted input is not verified against this run's capture: data/raw/schedule_upcoming.json\nBLOCK: promoted input verification timestamp missing: data/raw/schedule_upcoming.json\nBLOCK: promoted input has no explicit verification: data/raw/injuries.json\nBLOCK: promoted input verification timestamp missing: data/raw/injuries.json\nBLOCK: S8_standings lacks structured, verified promoted data (data/raw/standings.json)\nBLOCK: S9_team_traditional lacks structured, verified promoted data (data/raw/team_traditional.json)\nBLOCK: S10_team_opponent lacks structured, verified promoted data (data/raw/team_opponent.json)\n"
+ },
+ "contradicting_run": {
+  "exit": 1,
+  "block_lines": 35,
+  "record": {
+   "captured_at_utc": "2026-11-15T11:46:11Z",
+   "fetch_outcome": "success",
+   "build_outcome": "success",
+   "failed": [
+    [
+     "S1_season",
+     "expected 30 team rows, parsed 0"
+    ],
+    [
+     "S2_train",
+     "expected 30 team rows, parsed 0"
+    ],
+    [
+     "S4_schedule",
+     "no game links found"
+    ],
+    [
+     "S5_injury_index",
+     "no injury-report links found"
+    ]
+   ]
+  }
+ },
+ "injury_filenames": {
+  "retrieved": [
+   "Injury-Report_2026-11-15_05_30PM.pdf",
+   "Injury-Report_2026-11-15_05_15PM.pdf"
+  ],
+  "refused": [
+   "Injury-Report_2026_11_15_12_00PM.pdf",
+   "Injury-Report_2026_11_15_03_00PM.pdf",
+   "Injury-Report_2026_11_15_05_15PM.pdf",
+   "Injury-Report_2026_11_15_07_30PM.pdf",
+   "Injury-Report_2026_11_14_12_00PM.pdf",
+   "Injury-Report_2026_11_14_03_00PM.pdf",
+   "Injury-Report_2026_11_14_05_15PM.pdf",
+   "Injury-Report_2026_11_14_07_30PM.pdf"
+  ]
+ },
+ "rebuild_reproducibility": {
+  "changed_files": 13,
+  "meta_lines_removed": 31
+ },
+ "what_is_correct": {
+  "tests": "Ran 7 tests in 0.009s\n\nOK",
+  "pdfs_on_tree": 0,
+  "archived_on_run_branch": 4
+ }
+}
