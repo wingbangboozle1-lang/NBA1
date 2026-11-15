@@ -16,7 +16,7 @@
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
-      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon 11/15-11/18</a>
       <a href="picks.html">Horizon</a>
       <a href="strategies.html">Evidence</a>
       <a href="decisions.html">Decisions</a>
@@ -48,6 +48,7 @@
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
 <a href="official-verify.html">Live Re-verification</a>
+<a href="day-roll.html">Day Roll &amp; Settlement</a>
 </div>
 <div class="nav-group"><h3>DECISION</h3>
 <a href="questions.html">Open Questions</a>
@@ -667,6 +668,60 @@
 <td>CI on every push; PR mergeability; Pages build churn</td>
 <td>Workflow owner: make the probe commit [skip ci] on session branches too, or push probe records only to main; see suggestion SG28.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/probe-official.yml" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F69</td>
+<td>High</td>
+<td><b>Player-prop and parlay picks cannot be settled from any source this site may cite</b></td>
+<td>Of the 17 picks published on the 2026-11-14 slate, 13 grade against the official finals and 4 do not: three Player-points rows and one Player-PRA row need a per-player box score, and the official game-log endpoints answer 403 to this build while the gamebook PDF host is not on the allowed source list. Those four rows are now marked 'not gradable' with the reason attached, rather than settled from a source the site cannot cite. Until a per-player source is registered, no player-prop strategy (S7, S8) can ever accumulate a settled record, whatever its gate thresholds say.</td>
+<td>S7 / S8 rows on the picks page; every prop strategy's path to a funded tier</td>
+<td>Register one per-player source the site may cite - the box-score table on each NBA.com game page prints MIN/PTS/REB/AST and is already an allowed host - and re-grade the four rows from it.</td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-min-0022600235" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F70</td>
+<td>Medium</td>
+<td><b>Travel distance is still not in the model: the term exists, its input table does not</b></td>
+<td>engine/model_core.py now carries travel_load() and engine/home_court.py carries travel_leg_miles()/haversine_miles(), so the arithmetic is written and self-checked (New York to Denver: 1,627 miles). The coefficient is 0.0 and stays 0.0 because the model refuses to price with distances it cannot source: no NBA-operated page reachable from this build publishes arena latitudes and longitudes, and coordinates written from memory are exactly the untraceable numbers the verification rule exists to keep out. The one travel fact the official cards do print - whether a team's next game is in the city it is already in - is published on the day-roll page as a stand-in, with the limitation named beside it.</td>
+<td>Rest / back-to-back pricing on every line; the 3-in-4 nights load rule</td>
+<td>Add data/official/arena_coordinates.json - arena name, the city as printed on the game card, lat/lon, the URL each value was read from and the read time - then fit the coefficient on the results feed instead of assuming it.</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F71</td>
+<td>High</td>
+<td><b>Home court: the published lines still use an assumption, and it is more than double the measured rate</b></td>
+<td>Three values are in play. 2.5 points is the hard-coded project assumption used by every published line (flag E-01). 3.508 points is what engine/validate.py fits on holdout residuals - in-sample, and disclosed as such. 1.053 points is home court pinned to the measured home-win rate: 0.5469 on the 64 non-neutral games in the results feed and 0.5294 on the 187 home games in the official standings HOME column. The pin is computed, published and reproducible (scripts/pin_home_court.py writes data/derived/home_court_pin.json), but it is NOT applied to the current horizon: the 60 picks are frozen and hashed in data/live/ledger_2026-11-15.json, and moving their lines after tip would void the pre-registration the ledger exists to protect. The published lines are therefore priced with a home edge this site states is too large.</td>
+<td>Every margin on the Lines, Picks and Game Flow pages; every side pick's edge</td>
+<td>Adopt the pin at the next freeze (adopted_for_pricing in data/derived/home_court_pin.json) and re-grade the window with it as a labelled second column. The day-roll page prints the whole sensitivity: -1.447 points on every home margin, zero on totals.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/home_court_pin.json" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F72</td>
+<td>Low</td>
+<td><b>Most horizon venues are carried forward, and the 12 games added for 11/18 have none at all</b></td>
+<td>The 34-game horizon (2026-11-15 to 11-18) is priced with tip times, matchups and records read from the official date cards today. Venue and city for the 22 games dated 11/15-11/17 are the values captured from each game's own NBA.com page on 11/14 - carried forward deliberately, because arenas do not move, and labelled as carried in data/raw/schedule_upcoming.json. The 12 games added for 11/18 carry venue = null, because the only official block that lists them prints tip times and records and no arena. Nothing was filled in from memory.</td>
+<td>Venue column on the horizon tables; travel legs for the 11/18 slate</td>
+<td>Fetch the twelve 11/18 game pages on the next run and promote their venues row by row.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F73</td>
+<td>Medium</td>
+<td><b>One game in five has no quarter scores in the new results feed</b></td>
+<td>The 2026-11-14 result feed carries one row per game with date, teams, final, quarter scores and the game id. Four of the five games have a LINESCORES split and every captured split sums to the printed final on both sides. CHI@MIN (0022600235) does not: the fetch channel refused that game page four times, so its quarter cells read 'not captured' and its quarter check reads 'uncheckable'. The final itself is safe - 117-106 appears on the date card and on the game's own header and agrees - but a quarter split solved backwards from a final would be a fabricated number, so it is left blank.</td>
+<td>Quarter-score column for 0022600235; game-flow reads that want per-quarter margins for that game</td>
+<td>Re-fetch that game page from a run that can reach it and promote the four cells.</td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-min-0022600235" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F74</td>
+<td>Medium</td>
+<td><b>Until today the scheduled job could not see the newest injury report on a game day</b></td>
+<td>parse_injury_index() in engine/fetch_official.py matched only names ending in 'PM.pdf', while the official hub republishes the report every 15 minutes from 12:00 a.m. ET: on 2026-11-15 the newest edition was the 06:15 a.m. one, and the job's first PM candidate was 12:00 p.m. - so a morning run either missed the day's report or fell back to the previous evening's. The pattern now accepts AM and PM, the fixed fallback list includes the morning window and is used only when the index cannot be read, and scripts/check_injury_editions.py fails the build if either regresses. Historical captures are NOT back-filled: the editions behind settled slates stay as they were, because pretending the job had read a newer report would misstate what those lines were priced from.</td>
+<td>Every injury row behind lines published before 2026-11-15; the freshness of today's roll</td>
+<td>Nothing further for the past; the new check keeps the future honest.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">

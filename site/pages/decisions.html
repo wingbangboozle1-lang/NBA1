@@ -16,7 +16,7 @@
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
-      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon 11/15-11/18</a>
       <a href="picks.html">Horizon</a>
       <a href="strategies.html">Evidence</a>
       <a href="decisions.html">Decisions</a>
@@ -48,6 +48,7 @@
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
 <a href="official-verify.html">Live Re-verification</a>
+<a href="day-roll.html">Day Roll &amp; Settlement</a>
 </div>
 <div class="nav-group"><h3>DECISION</h3>
 <a href="questions.html">Open Questions</a>
@@ -66,9 +67,11 @@
 <a href="../../verified/flagged.html">Flagged (17)</a>
 </div>
     <div class="side-note">
-      <strong>Reading rule.</strong> Every table row links to the official source it
-      came from. A blank cell means the value could not be confirmed from an official
-      source &mdash; it is never filled in by guesswork. See
+      <strong>Reading rule.</strong> Every table row either links to the official source
+      it came from or carries an explicit no-source mark with a stated reason (the mark
+      explains why no official source exists or could confirm the cell). A blank or
+      dashed cell means the value could not be confirmed from an official source &mdash;
+      it is never filled in by guesswork. See
       <a href="flagged.html">Flagged for Review</a>.
     </div>
   </aside>
@@ -193,6 +196,38 @@
 <td><span class="chip bad">no path</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/strategies.py" target="_blank" rel="noopener">official page</a></td>
 </tr>
+<tr id="Q22">
+<td>Q22</td>
+<td>Which home-court value governs the next line freeze - the fitted 3.508, the assumption 2.5, or the measured pin 1.053?</td>
+<td>The pin is computed and published, and the sensitivity of every published line to it is arithmetic the site already prints (-1.447 points on home margins, zero on totals). What is missing is the decision, because adopting it changes the price the strategy records were graded against: re-freezing with 1.053 makes the settled 60-game window and the new horizon two different models.</td>
+<td>Set adopted_for_pricing in data/derived/home_court_pin.json, re-run scripts/build_slate_refresh.py and scripts/generate_picks_d.py, and publish the new pre-registration with the pin inside its ASSUMPTIONS block before the first tip of that slate. Then re-grade the window with the pin as a second, labelled column rather than replacing the first.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id F71 is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q23">
+<td>Q23</td>
+<td>Does the results feed require quarter scores for every game, or is an explicit 'not captured' acceptable?</td>
+<td>The brief asks for one row per game with date, teams, final and quarter scores. Four of the five rows on 2026-11-14 have them; one does not, because the official summary page would not load in this session's fetch window. Nothing in the repository says which way the feed should behave when a source is unreachable for one game in five.</td>
+<td>Decide between (a) leave the cell blank and flagged, as now - the row publishes and the gap is visible; (b) hold the whole slate's settlement until every quarter split is readable, which would have delayed the 11/14 settlement by a day; or (c) accept the gamebook PDF as a secondary source, which requires adding its host to the allowed list in scripts/verify_dashboard.py.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id F73 is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q24">
+<td>Q24</td>
+<td>What is the registered source for per-player game logs, now that the roll publishes a real prop slate?</td>
+<td>Four published prop picks cannot be settled because no allowed host gives this build a per-player box score (F69), and the minutes-coverage column on the props page is computed from season averages for the same reason. The requirement to capture per-player game logs for at least the players on an injury report is therefore still unmet for every date, including the one just rolled.</td>
+<td>Pick one: parse the box-score table on each NBA.com game page (same host as the finals already cited, prints MIN/PTS/REB/AST per player), or register the league's public JSON endpoint and put its host on the allowed list. Then re-run the roll with logs present so prop rows grade and minutes coverage stops being an estimate.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id F69 is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q25">
+<td>Q25</td>
+<td>Should the day roll become a scheduled promotion instead of a session act?</td>
+<td>scripts/roll_2026_11_15.py runs 17 freshness and provenance gates, refuses to write if any fails, and merges into the committed snapshots instead of replacing them - but its inputs are captures a session writes by hand. The scheduled job captures into data/raw/_capture_*.json and never promotes, which is why the horizon went a day stale between sessions.</td>
+<td>Parameterise the roll by date and call it from refresh-data.yml after the fetch step, gated on the same 17 checks, and have it open a pull request rather than commit. Until then the horizon ages whenever no session runs, and the site's own staleness banners are the only defence.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id F74 is not in the register">&mdash;</span></td>
+</tr>
 <tr id="Q3">
 <td>Q3</td>
 <td>Are the player-prop projections any good?</td>
@@ -242,7 +277,7 @@
 <td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
 </tr>
 </tbody></table></div>
-<p class="fine">18 open, 17 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
+<p class="fine">22 open, 17 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
 <h2 class="sec">The suggestion catalogue, ranked for review</h2><p class="secsub">18 suggestions as they exist in the repository, with the recommendation the repository already makes and the decision it belongs to. Nothing has been implemented.</p>
 <div class="tablewrap">
 <table class="tbl "
@@ -505,6 +540,51 @@
 <td><b>Stop the probe workflow from pushing record commits onto open session branches</b></td>
 <td>probe-official.yml commits its record to arena/** branches and main after each run, which made every open PR CONFLICTING today and churned Pages builds (F68). The pages.yml concurrency fix stopped runs cancelling each other; the record commits still dirty branches.</td>
 <td>(a) or (b); the probe record's job is to evidence reachability, not to ride every session branch.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG29</td>
+<td><span class="chip info">Process</span></td>
+<td><b>Promote refreshed captures into published picks only through the gate suite, never by hand or silently</b></td>
+<td>The scheduled refresh captures official data into capture-only branches/PRs, but promotion into published picks is a separate manual step; a refresh can therefore sit unpromoted (stale site) or be promoted without the gates having run on it (unchecked site). Requested by the independent audit (COORDINATION R-A6).</td>
+<td>A.</td>
+<td>&mdash;</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>SG30</td>
+<td><span class="chip warn">Model</span></td>
+<td><b>Adopt the measured home-court pin at the next freeze</b></td>
+<td>Home court enters every published line as +2.5 points, a value this repository itself calls an assumption. The measured home-win rate pins it at 1.053 points; the fitted residual intercept says 3.508. Pricing side picks with a home edge the league's own results do not support is how a systematic bias hides inside a profitable-looking record.</td>
+<td>Adopt the pin at the next freeze and keep 2.5 published as the pre-change column.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG31</td>
+<td><span class="chip info">Data</span></td>
+<td><b>Give the travel term a sourced coordinate table, then measure its coefficient</b></td>
+<td>Rest is measured from the official schedule, but a 3-in-4 night with a cross-country leg and a 3-in-4 night in the same city are priced identically, because no arena-coordinate table exists. The term and the great-circle arithmetic are already written and self-checked; only the input is missing.</td>
+<td>Fetch the table, keep the coefficient at 0.0 until a fit justifies moving it, and publish the fit with its standard error whichever way it lands.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG32</td>
+<td><span class="chip info">Data</span></td>
+<td><b>Register a per-player box-score source so props can settle</b></td>
+<td>Four of the 17 published picks on 2026-11-14 cannot be graded, and the props page's minutes column is an estimate, because no allowed host gives this build a per-player box score. Every player-prop strategy is therefore untestable no matter how sound its gates are.</td>
+<td>Parse the game-page box score first: it needs no policy change and settles the four pending rows.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG33</td>
+<td><span class="chip info">Process</span></td>
+<td><b>Run the day roll from the schedule, behind its own gates</b></td>
+<td>The horizon went a day stale because promotion is a session act: cron captures, a session promotes. The roll script already refuses to write unless all 17 gates pass, and it merges into the committed snapshots instead of overwriting them, so it is safe to automate.</td>
+<td>Automate it behind the gates and publish to a pull request - the gate record is the review.</td>
 <td>&mdash;</td>
 <td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
 </tr>

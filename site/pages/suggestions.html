@@ -16,7 +16,7 @@
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
-      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon 11/15-11/18</a>
       <a href="picks.html">Horizon</a>
       <a href="strategies.html">Evidence</a>
       <a href="decisions.html">Decisions</a>
@@ -48,6 +48,7 @@
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
 <a href="official-verify.html">Live Re-verification</a>
+<a href="day-roll.html">Day Roll &amp; Settlement</a>
 </div>
 <div class="nav-group"><h3>DECISION</h3>
 <a href="questions.html">Open Questions</a>
@@ -373,7 +374,7 @@
 <td>Workflow owner.</td>
 <td class="src"><span class="na" title="source id https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/probe-official.yml is not in the register">&mdash;</span></td>
 </tr>
-<tr>
+<tr id="SG29">
 <td>SG29</td>
 <td>Process</td>
 <td><b>Promote refreshed captures into published picks only through the gate suite, never by hand or silently</b></td>
@@ -382,6 +383,46 @@
 <td>A.</td>
 <td>A or B, and who signs the promotion record.</td>
 <td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr id="SG30">
+<td>SG30</td>
+<td>Model</td>
+<td><b>Adopt the measured home-court pin at the next freeze</b></td>
+<td>Home court enters every published line as +2.5 points, a value this repository itself calls an assumption. The measured home-win rate pins it at 1.053 points; the fitted residual intercept says 3.508. Pricing side picks with a home edge the league's own results do not support is how a systematic bias hides inside a profitable-looking record.</td>
+<td>- Set adopted_for_pricing, re-freeze, and re-grade the window with the pin as a labelled second column <span class='fine'>(effort: Low - scripts/pin_home_court.py already writes the file; the rest is one build; risk: Medium - it changes the price the settled record was graded against, so the old column must stay published beside it; unlocks: Closes Q22 and F71; home court becomes a measurement instead of a flag)</span><br>- Keep 2.5 and publish the pin as a documented dissent <span class='fine'>(effort: None; risk: High - the site keeps pricing with a number it states is wrong, and the brief's pinning requirement stays open; unlocks: Nothing)</span></td>
+<td>Adopt the pin at the next freeze and keep 2.5 published as the pre-change column.</td>
+<td>Whether the model's home edge is an assumption or a measurement</td>
+<td class="src"><span class="na" title="source id F71 is not in the register">&mdash;</span></td>
+</tr>
+<tr id="SG31">
+<td>SG31</td>
+<td>Data</td>
+<td><b>Give the travel term a sourced coordinate table, then measure its coefficient</b></td>
+<td>Rest is measured from the official schedule, but a 3-in-4 night with a cross-country leg and a 3-in-4 night in the same city are priced identically, because no arena-coordinate table exists. The term and the great-circle arithmetic are already written and self-checked; only the input is missing.</td>
+<td>- Read the 30 arenas' names and cities from each franchise's NBA.com page and their lat/lon from one public gazetteer, storing a URL per value <span class='fine'>(effort: Medium - 30 pages, one table, one gate; risk: Low - additive; the coefficient stays 0.0 until it is fitted; unlocks: Closes F70; turns the rest term into a distance term; feeds game-flow fatigue)</span><br>- Fit travel_coef on the 65 completed games before switching the term on <span class='fine'>(effort: Medium - one regression, published with its standard error either way; risk: Low - a coefficient that does not clear noise stays 0.0, and that is itself the finding; unlocks: Turns the term on with evidence rather than with a guess)</span></td>
+<td>Fetch the table, keep the coefficient at 0.0 until a fit justifies moving it, and publish the fit with its standard error whichever way it lands.</td>
+<td>Whether to accept a non-NBA gazetteer as the source for coordinates the league does not publish</td>
+<td class="src"><span class="na" title="source id F70 is not in the register">&mdash;</span></td>
+</tr>
+<tr id="SG32">
+<td>SG32</td>
+<td>Data</td>
+<td><b>Register a per-player box-score source so props can settle</b></td>
+<td>Four of the 17 published picks on 2026-11-14 cannot be graded, and the props page's minutes column is an estimate, because no allowed host gives this build a per-player box score. Every player-prop strategy is therefore untestable no matter how sound its gates are.</td>
+<td>- Parse the box-score table on each NBA.com game page - same host as every source already cited <span class='fine'>(effort: Low - one parser, one fixture, reuse the row-provenance gate; risk: Low - it lands in data/official/ and is promoted row by row like the finals; unlocks: Settles S7/S8, replaces estimated minutes with measured ones, satisfies the game-log requirement)</span><br>- Ask for the league's JSON host to be added to the allowed list <span class='fine'>(effort: Low code, but it changes the site's source policy; risk: Medium - widens what counts as citable, which is a reviewer call, not an integration step; unlocks: The same, plus full-season logs in one call)</span></td>
+<td>Parse the game-page box score first: it needs no policy change and settles the four pending rows.</td>
+<td>Which source the site is willing to cite for a player's night</td>
+<td class="src"><span class="na" title="source id F69 is not in the register">&mdash;</span></td>
+</tr>
+<tr id="SG33">
+<td>SG33</td>
+<td>Process</td>
+<td><b>Run the day roll from the schedule, behind its own gates</b></td>
+<td>The horizon went a day stale because promotion is a session act: cron captures, a session promotes. The roll script already refuses to write unless all 17 gates pass, and it merges into the committed snapshots instead of overwriting them, so it is safe to automate.</td>
+<td>- Parameterise the roll by date and call it after the fetch step in refresh-data.yml, publishing a pull request <span class='fine'>(effort: Low - the gate logic exists; the date is the only new input; risk: Medium - an automated run would touch committed data, so it must stay behind the same gates and never push to main; unlocks: Closes Q25; the horizon cannot age between sessions)</span><br>- Leave promotion to sessions <span class='fine'>(effort: None; risk: Medium - on any day without a session the published horizon and injury read go stale; unlocks: Nothing)</span></td>
+<td>Automate it behind the gates and publish to a pull request - the gate record is the review.</td>
+<td>Whether an automated run may promote a snapshot after passing the gates</td>
+<td class="src"><span class="na" title="source id F74 is not in the register">&mdash;</span></td>
 </tr>
 </tbody></table></div>
 <h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>

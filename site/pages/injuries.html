@@ -16,7 +16,7 @@
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
-      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon 11/15-11/18</a>
       <a href="picks.html">Horizon</a>
       <a href="strategies.html">Evidence</a>
       <a href="decisions.html">Decisions</a>
@@ -48,6 +48,7 @@
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
 <a href="official-verify.html">Live Re-verification</a>
+<a href="day-roll.html">Day Roll &amp; Settlement</a>
 </div>
 <div class="nav-group"><h3>DECISION</h3>
 <a href="questions.html">Open Questions</a>
@@ -538,6 +539,7 @@
 </tr>
 </tbody></table></div>
 <p class="tnote">Read directly from the official PDF on 2026-11-14. A row printed NOT YET SUBMITTED has no player and no status to report, so both are blank rather than guessed. One row (Traore, Nolan) lost its team cell to a PDF page break; the team is left blank and flagged, not inferred.</p>
+<div class="banner warn"><div class="b-t">These rows are the edition the published lines were cut from - not the newest read</div><div class="b-b"><p>The table below is <b>NBA Official Injury Report, 11/14/26 04:15 AM ET edition</b>, because that is the report the frozen lines were priced from and a line re-cut after publication cannot be graded. This build has since read a later edition, <b>NBA Official Injury Report, 11/15/26 06:15 AM ET edition</b> (revised 11/15/26 06:15 AM ET (the edition header printed inside the PDF), retrieved 2026-11-15T11:36Z..11:44Z UTC, 101 rows), stored at <code>data/raw/injuries.json</code> and diffed against its predecessor on <a href="day-roll.html">Day Roll &amp; Settlement</a>. Feeding the newer edition into the availability layer would move published lines, so it is a freeze decision (Q25 / SG33), not an integration step.</p></div></div>
 <div class="tablewrap">
 <table class="tbl "
 >
@@ -1759,7 +1761,70 @@
 </tr>
 </tbody></table></div>
 <p class="tnote">Season min and min share are blank when the player is outside the captured minutes table. Team lost share and the impact figure are a measured LOWER BOUND: only players with known minutes can contribute. Confidence is the engine's own statement of how much of the rotation the report covers.</p>
-<div class="banner info"><div class="b-t">Report edition in use</div><div class="b-b">NBA Official Injury Report, 11/14/26 04:15 AM ET edition. Source: <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">S10_2026-11-14-0415AM</a>. Rows for a team that had not filed at this edition are recorded with status <em>NOT YET SUBMITTED</em> exactly as published; they are never filled in.</div></div>
+<div class="banner info"><div class="b-t">Report edition in use</div><div class="b-b">NBA Official Injury Report, 11/14/26 04:15 AM ET edition. Source: <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf" target="_blank" rel="noopener">S10_2026-11-14-0415AM</a>. Rows for a team that had not filed at this edition are recorded with status <em>NOT YET SUBMITTED</em> exactly as published; they are never filled in.<p><b>The newest official read is a later edition than the rows below.</b> The table on this page is the edition the published lines were cut from; this build has since read <b>NBA Official Injury Report, 11/15/26 06:15 AM ET edition</b> (revised 11/15/26 06:15 AM ET (the edition header printed inside the PDF), retrieved 2026-11-15T11:36Z..11:44Z UTC, 101 rows, source <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf">the official PDF</a>) and stored it in <code>data/raw/injuries.json</code>. It has deliberately <b>not</b> been fed into the availability layer: doing so would move every published line, and the picks are frozen and hashed. Re-cutting is a freeze decision (Q25, SG33), not an integration step.</p></div></div>
+<h2 class="sec">Consecutive-edition diff</h2><p class="secsub">11/15/26 06:15 AM ET compared with 11/15/26 06:00 AM ET - the league republishes the report every 15 minutes on game days, so a status is only meaningful with the edition it came from. the two 11/15 editions print the same status for every player that appears in both. The only structural difference is the 'Simmons, Ben' row: the 06:00 AM render prints it at a section break with no Matchup and no Team cell, and the 06:15 AM render attributes it to Sacramento Kings. A team-blind row cannot be priced, so the earlier edition is kept as printed and the row appears here as one departure and one arrival - a render artefact, not a status change. Flagged for review.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Direction</th>
+<th>Game date</th>
+<th>Matchup</th>
+<th>Team</th>
+<th>Player</th>
+<th>What changed</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>newly listed</td>
+<td>11/15/2026</td>
+<td>OKC@SAC</td>
+<td>Sacramento Kings</td>
+<td>Simmons, Ben</td>
+<td>listed <b>Out</b> &mdash; Injury/Illness - Right Achilles Tendon Repair / Surgery</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf" target="_blank" rel="noopener">the official PDF</a></td>
+</tr>
+<tr>
+<td>no longer printed</td>
+<td>11/15/2026</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>not printed by this edition</td>
+<td>Simmons, Ben</td>
+<td>dropped from the next edition &mdash; Injury/Illness - Right Achilles Tendon Repair / Surgery</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf" target="_blank" rel="noopener">the official PDF</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Both editions are stored (data/raw/injuries.json and the capture in verify/2026-11-15-e3ebc423/injury_editions_2026-11-15.json), so the diff can be re-run by anyone: scripts/roll_2026_11_15.py recomputes it from the two row sets.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Stamp</th>
+<th>Value</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Report revision time (as the edition labels itself)</td>
+<td>11/15/26 06:15 AM ET (the edition header printed inside the PDF)</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf" target="_blank" rel="noopener">official injury PDF</a></td>
+</tr>
+<tr>
+<td>Retrieved by this build</td>
+<td>2026-11-15T11:36Z..11:44Z UTC</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf" target="_blank" rel="noopener">official injury PDF</a></td>
+</tr>
+<tr>
+<td>Edition in the snapshot the rows below were cut from</td>
+<td>NBA Official Injury Report, 11/15/26 06:15 AM ET edition</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf" target="_blank" rel="noopener">official injury PDF</a></td>
+</tr>
+<tr>
+<td>Snapshot capture stamp (UTC)</td>
+<td>2026-11-15T11:45:00Z</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf" target="_blank" rel="noopener">official injury PDF</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">The revision time is the edition's own published label (the same instant the official index prints as e.g. &quot;6:15 a.m ET report&quot;); the retrieval time is when this build read it. A 15-minute lag is visible here rather than hidden.</p>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
       signal is skill or luck. Nothing on this site is a betting recommendation, and no

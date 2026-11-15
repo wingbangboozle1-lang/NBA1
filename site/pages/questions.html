@@ -16,7 +16,7 @@
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
-      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon 11/15-11/18</a>
       <a href="picks.html">Horizon</a>
       <a href="strategies.html">Evidence</a>
       <a href="decisions.html">Decisions</a>
@@ -48,6 +48,7 @@
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
 <a href="official-verify.html">Live Re-verification</a>
+<a href="day-roll.html">Day Roll &amp; Settlement</a>
 </div>
 <div class="nav-group"><h3>DECISION</h3>
 <a href="questions.html">Open Questions</a>
@@ -384,6 +385,42 @@
 <td>Promotion of S1 (or anything else) past quarter-unit funding; the banner/executive verdict (F63).</td>
 <td>High</td>
 <td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/strategies.py" target="_blank" rel="noopener">context</a></td>
+</tr>
+<tr id="Q22">
+<td>Q22</td>
+<td><b>Which home-court value governs the next line freeze - the fitted 3.508, the assumption 2.5, or the measured pin 1.053?</b></td>
+<td>The pin is computed and published, and the sensitivity of every published line to it is arithmetic the site already prints (-1.447 points on home margins, zero on totals). What is missing is the decision, because adopting it changes the price the strategy records were graded against: re-freezing with 1.053 makes the settled 60-game window and the new horizon two different models.</td>
+<td>Set adopted_for_pricing in data/derived/home_court_pin.json, re-run scripts/build_slate_refresh.py and scripts/generate_picks_d.py, and publish the new pre-registration with the pin inside its ASSUMPTIONS block before the first tip of that slate. Then re-grade the window with the pin as a second, labelled column rather than replacing the first.</td>
+<td>Whether the next slate is priced with a number the site has already called too large</td>
+<td>High</td>
+<td class="src"><span class="na" title="source id F71 is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q23">
+<td>Q23</td>
+<td><b>Does the results feed require quarter scores for every game, or is an explicit 'not captured' acceptable?</b></td>
+<td>The brief asks for one row per game with date, teams, final and quarter scores. Four of the five rows on 2026-11-14 have them; one does not, because the official summary page would not load in this session's fetch window. Nothing in the repository says which way the feed should behave when a source is unreachable for one game in five.</td>
+<td>Decide between (a) leave the cell blank and flagged, as now - the row publishes and the gap is visible; (b) hold the whole slate's settlement until every quarter split is readable, which would have delayed the 11/14 settlement by a day; or (c) accept the gamebook PDF as a secondary source, which requires adding its host to the allowed list in scripts/verify_dashboard.py.</td>
+<td>Whether the settlement pipeline may stall on one unreadable page</td>
+<td>Medium</td>
+<td class="src"><span class="na" title="source id F73 is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q24">
+<td>Q24</td>
+<td><b>What is the registered source for per-player game logs, now that the roll publishes a real prop slate?</b></td>
+<td>Four published prop picks cannot be settled because no allowed host gives this build a per-player box score (F69), and the minutes-coverage column on the props page is computed from season averages for the same reason. The requirement to capture per-player game logs for at least the players on an injury report is therefore still unmet for every date, including the one just rolled.</td>
+<td>Pick one: parse the box-score table on each NBA.com game page (same host as the finals already cited, prints MIN/PTS/REB/AST per player), or register the league's public JSON endpoint and put its host on the allowed list. Then re-run the roll with logs present so prop rows grade and minutes coverage stops being an estimate.</td>
+<td>Settlement of S7/S8; the minutes-redistribution column on the props page; prop elasticity</td>
+<td>High</td>
+<td class="src"><span class="na" title="source id F69 is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q25">
+<td>Q25</td>
+<td><b>Should the day roll become a scheduled promotion instead of a session act?</b></td>
+<td>scripts/roll_2026_11_15.py runs 17 freshness and provenance gates, refuses to write if any fails, and merges into the committed snapshots instead of replacing them - but its inputs are captures a session writes by hand. The scheduled job captures into data/raw/_capture_*.json and never promotes, which is why the horizon went a day stale between sessions.</td>
+<td>Parameterise the roll by date and call it from refresh-data.yml after the fetch step, gated on the same 17 checks, and have it open a pull request rather than commit. Until then the horizon ages whenever no session runs, and the site's own staleness banners are the only defence.</td>
+<td>Whether tomorrow's slate is priced at all if no session runs</td>
+<td>Medium</td>
+<td class="src"><span class="na" title="source id F74 is not in the register">&mdash;</span></td>
 </tr>
 </tbody></table></div>
 <p class="tnote">Where a row says no official source exists, that is the honest answer: no NBA-operated page publishes the missing item (a closing price, for instance).</p>

@@ -1,0 +1,2071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day roll 2026-11-15 &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon 11/15-11/18</a>
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="decisions.html">Decisions</a>
+      <a href="suggestions.html">Suggestions</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="prop-variance.html">Prop Variance &amp; Rotation</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameday.html">Game-Day Injury Read</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="leaderboard.html">Leaderboard &amp; Rewards</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+<a href="official-verify.html">Live Re-verification</a>
+<a href="day-roll.html">Day Roll &amp; Settlement</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="decisions.html">Decisions: pick a path</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 14 NOV</h3>
+<a href="../../verified/index.html">&#10003; What is actually true</a>
+<a href="../../verified/summary.html">Executive summary</a>
+<a href="../../verified/verification.html">Row-level verification</a>
+<a href="../../verified/review.html">Repo review</a>
+<a href="../../verified/flagged.html">Flagged (17)</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row either links to the official source
+      it came from or carries an explicit no-source mark with a stated reason (the mark
+      explains why no official source exists or could confirm the cell). A blank or
+      dashed cell means the value could not be confirmed from an official source &mdash;
+      it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Day roll 2026-11-15</h1>
+      <p class="sub">The 11/14 slate settled, the horizon extended to 11/18, the injury report moved to the newest official edition, and every published pick carries a hash and a settlement stamp.</p>
+    </div>
+    <div class="banner ok"><div class="b-t">Freshness + provenance gates: PASS (17 run, 0 failed)</div><div class="b-b"><p><b>Horizon:</b> 34 games, 2026-11-15 to 2026-11-18 (today + the maximum 3 days ahead). <b>Results feed:</b> 65 completed games, one row per game. <b>Injury report:</b> 11/15/26 06:15 AM ET edition, 101 rows. <b>Settled 11/14 slate:</b> 3W-10L-0P of 17 published rows, 4 not gradable. <b>Ledger:</b> 60 pick hashes published, 46 carrying a before-tip attestation.</p><p>The roll is refused, not warned, when a gate fails: <code>scripts/roll_2026_11_15.py</code> exits 1 before it writes any snapshot, so a stale or untraced capture cannot reach a published page.</p></div></div>
+<h2 class="sec">What moved today</h2><p class="secsub">One day rolled: the 2026-11-14 slate settled, the horizon extended to 2026-11-18, the injury report moved to the newest official edition, and the published picks got a settlement stamp.</p>
+<h2 class="sec">The gate record</h2><p class="secsub">Every check the rebuild waits on, with the number it looked at.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Kind</th>
+<th>Gate</th>
+<th>Result</th>
+<th>What was checked</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>freshness</td>
+<td>capture age - finals</td>
+<td><b>PASS</b></td>
+<td>final capture stamped 2026-11-15T11:45:00Z (0.1 h old at run time); the 11/14 slate is over night so &lt;=12 h is the ceiling</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>freshness</td>
+<td>capture age - injury edition</td>
+<td><b>PASS</b></td>
+<td>newest official edition read at 2026-11-15T11:36Z..11:44Z (0.2 h before this run); the hub lists it as the last edition published on 11/15 up to that moment</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>freshness</td>
+<td>slate window = today + maximum 3 days ahead</td>
+<td><b>PASS</b></td>
+<td>dates captured: 2026-11-15, 2026-11-16, 2026-11-17, 2026-11-18 (today is 2026-11-15)</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>freshness</td>
+<td>per-day game counts equal the official calendar strip</td>
+<td><b>PASS</b></td>
+<td>captured {'2026-11-15': 9, '2026-11-16': 8, '2026-11-17': 5, '2026-11-18': 12}; official strip (read on the same page and on the Nov 14 game page) {'2026-11-15': 9, '2026-11-16': 8, '2026-11-17': 5, '2026-11-18': 12}</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>freshness</td>
+<td>no game day is stale in the rolling slate</td>
+<td><b>PASS</b></td>
+<td>the 2026-11-14 rows left the upcoming file and entered games_completed; nothing older than today is priced</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>freshness</td>
+<td>ratings cut is labelled with its own window</td>
+<td><b>PASS</b></td>
+<td>season_to_date window label: 2026-27 Regular Season, season to date (through games of 2026-11-12) - two days of finals (11/13, 11/14) are NOT in the ratings the model prices with; published, not hidden (see gate 'ratings staleness')</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>provenance</td>
+<td>ratings staleness is measured, not assumed</td>
+<td><b>PASS</b></td>
+<td>the standings read carries 30 team-games; the two slates since the ratings cut added 5 + 9 = 14 games (28 team-rows). The staleness is published on the day-roll page and the lines are labelled with the window they were cut from.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>provenance</td>
+<td>every horizon row carries two official URLs</td>
+<td><b>PASS</b></td>
+<td>date card + own game page for all 34 rows</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>provenance</td>
+<td>every final row carries an official source</td>
+<td><b>PASS</b></td>
+<td>5 games x 2 official pages</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>provenance</td>
+<td>quarter scores sum to the printed final</td>
+<td><b>PASS</b></td>
+<td>4 of 5 games carry LINESCORES and all of them sum exactly (DEN 29+27+30+30=116 ...); 1 game (0022600235 CHI@MIN) has no quarter split captured and its cells stay blank + flagged</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>provenance</td>
+<td>records on every horizon card agree with the official standings page</td>
+<td><b>PASS</b></td>
+<td>68 record cells (34 games x 2 teams) checked against https://www.nba.com/standings; disagreements: none</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>provenance</td>
+<td>one row per game in the results feed</td>
+<td><b>PASS</b></td>
+<td>5 distinct game ids in 5 rows</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>provenance</td>
+<td>no duplicate game ids in the rolling slate</td>
+<td><b>PASS</b></td>
+<td>34 rows, 34 distinct ids</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>provenance</td>
+<td>injury edition filename time == printed edition header</td>
+<td><b>PASS</b></td>
+<td>Injury-Report_2026-11-15_06_15AM.pdf -&gt; '11/15/26 06:15 AM ET' (the hub's own link text is '6:15 a.m ET report')</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>provenance</td>
+<td>every injury row carries a reason string or an explicit non-filing</td>
+<td><b>PASS</b></td>
+<td>84 status rows carry the printed reason; 17 clubs print NOT YET SUBMITTED (11/16 filings are not due until 5 PM local on 11/15)</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>provenance</td>
+<td>page-continuation rows are labelled, not silently attributed</td>
+<td><b>PASS</b></td>
+<td>15 of 101 rows print without a Team cell in the PDF's text layer and carry an explicit team_basis note; they are also listed on Flagged for Review</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+<tr>
+<td>provenance</td>
+<td>consecutive-edition diff produced</td>
+<td><b>PASS</b></td>
+<td>0 status changes, 1 appearances, 1 departures between the 06:00 and 06:15 AM editions (15 minutes apart; both editions stored). The single appearance/departure pair is the Simmons row whose Team cell is absent at 06:00 - a render artefact, recorded as such, not a status change.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">gate record</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Written by scripts/roll_2026_11_15.py at 2026-11-15T11:53:17Z. Reproduce with the same command.</p>
+<h2 class="sec">Official per-game result feed - the games of 2026-11-14</h2><p class="secsub">One row per game: date, teams, final, quarter scores, and the game identifier the next settlement will key on.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Game id</th>
+<th>Final</th>
+<th>Status</th>
+<th>Away Q1-Q4</th>
+<th>Home Q1-Q4</th>
+<th>Quarter check</th>
+<th>OT</th>
+<th>Venue</th>
+<th>Attendance</th>
+<th>Officials</th>
+<th>Recap headline</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-14</td>
+<td><code>0022600231</code></td>
+<td>DEN 116 @ NOP 108</td>
+<td>Final</td>
+<td>29 + 27 + 30 + 30 = <b>116</b></td>
+<td>23 + 28 + 31 + 26 = <b>108</b></td>
+<td>sums to the printed final</td>
+<td>regulation</td>
+<td>Smoothie King Center</td>
+<td>15721</td>
+<td>James Capers, Brent Barnaky, CJ Washington</td>
+<td>Jokic, Murray help Nuggets hand Pelicans a sixth straight loss</td>
+<td class="src"><a href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><code>0022600232</code></td>
+<td>DAL 117 @ CLE 127</td>
+<td>Final</td>
+<td>33 + 20 + 38 + 26 = <b>117</b></td>
+<td>33 + 38 + 34 + 22 = <b>127</b></td>
+<td>sums to the printed final</td>
+<td>regulation</td>
+<td>Rocket Arena</td>
+<td>19432</td>
+<td>Eric Lewis, Tyler Ford, Jenna Schroeder</td>
+<td>Tyrese Proctor has a triple-double as short-handed Cavaliers top Mavericks 127-117</td>
+<td class="src"><a href="https://www.nba.com/game/dal-vs-cle-0022600232" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><code>0022600233</code></td>
+<td>DET 117 @ MIA 137</td>
+<td>Final</td>
+<td>39 + 21 + 26 + 31 = <b>117</b></td>
+<td>37 + 31 + 35 + 34 = <b>137</b></td>
+<td>sums to the printed final</td>
+<td>regulation</td>
+<td>Kaseya Center</td>
+<td>19658</td>
+<td>Mitchell Ervin, Suyash Mehta, Jonathan Sterling</td>
+<td>Antetokounmpo scores 34, Heat block 14 shots and roll past Pistons 137-117</td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-mia-0022600233" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><code>0022600234</code></td>
+<td>BKN 110 @ MEM 129</td>
+<td>Final</td>
+<td>23 + 31 + 30 + 26 = <b>110</b></td>
+<td>38 + 33 + 32 + 26 = <b>129</b></td>
+<td>sums to the printed final</td>
+<td>regulation</td>
+<td>FedExForum</td>
+<td>15103</td>
+<td>Michael Smith, Josh Tiven, Nate Green</td>
+<td>Cedric Coward has 23 points and 12 rebounds as Grizzlies beat Nets 129-110</td>
+<td class="src"><a href="https://www.nba.com/game/bkn-vs-mem-0022600234" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td><code>0022600235</code></td>
+<td>CHI 117 @ MIN 106</td>
+<td>Final</td>
+<td><span class="na" title="not captured: the official summary page for this game could not be read by this build; the split was not back-solved from the final">not captured</span></td>
+<td><span class="na" title="not captured: the official summary page for this game could not be read by this build; the split was not back-solved from the final">not captured</span></td>
+<td><span class="na" title="no quarter split captured">uncheckable</span></td>
+<td>regulation</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-min-0022600235" target="_blank" rel="noopener">game page</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">The final score on every row was read twice - from the date card and from the game's own summary page - and the two agree. Where a quarter split could not be read, the cell says so and the score was <em>not</em> reconstructed from the final. 4 of 5 games carry a split and every captured split sums to the printed final.</p>
+<div class="banner warn"><div class="b-t">Open items on this capture</div><div class="b-b"><ul><li>0022600235 (CHI@MIN): the final score is printed on the official date card and on the game's own summary header and both agree (117-106), but the LINESCORES table was not retrievable in this session's fetch window (the fetch channel returned a signature error on that URL four times). Quarter splits are therefore left blank and flagged, not guessed.</li><li>CHI@MIN venue/tip/attendance/officials come from the game card, which was not fetched; left blank.</li></ul><p>Left blank and flagged rather than reconstructed: a quarter split back-solved from a final score would be a number the site cannot cite.</p></div></div>
+<h2 class="sec">Settlement of the 2026-11-14 slate</h2><p class="secsub">Every published paper pick graded against the official finals, against the numbers frozen in the published file - no sportsbook price, because none exists (F3).</p>
+<div class="banner info"><div class="b-t">Frozen pre-registration this was graded against</div><div class="b-b"><code>docs/data/picks.json</code> at git blob <code>1b962a91275c9417c046da16b0788966eeb8d8c6</code> (last commit touching it: ef2e723e13523b5b2495656c2a4ae5b461244374 2026-11-14T22:18:48+00:00), generated <code>2026-11-14T10:37:26Z</code>, i.e. <b>frozen</b> before the first tip of the slate. Grading reads that blob, not the working copy, so a settlement cannot move a line.</div></div>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Strat</th>
+<th>Market</th>
+<th>Published line</th>
+<th>Price stand-in</th>
+<th>Originated line</th>
+<th>Final</th>
+<th>Result</th>
+<th>Dist. to line</th>
+<th>Units @ -110</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-14</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>DEN -5.9</td>
+<td>-5.9</td>
+<td>-9.1</td>
+<td>DEN 116 @ NOP 108</td>
+<td><b>WIN</b></td>
+<td>2.10</td>
+<td>1.00</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S2</td>
+<td>Game total</td>
+<td>Over 227.0</td>
+<td>227.0</td>
+<td>236.0</td>
+<td>DEN 116 @ NOP 108</td>
+<td><b>LOSS</b></td>
+<td>-3.00</td>
+<td>-1.10</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S3</td>
+<td>Moneyline</td>
+<td>DEN ML (-232 fair)</td>
+<td>-5.9</td>
+<td>-9.1</td>
+<td>DEN 116 @ NOP 108</td>
+<td><b>WIN</b></td>
+<td>8.00</td>
+<td>1.00</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S5</td>
+<td>Point spread</td>
+<td>DEN -5.9</td>
+<td>-5.9</td>
+<td>-9.1</td>
+<td>DEN 116 @ NOP 108</td>
+<td><b>WIN</b></td>
+<td>2.10</td>
+<td>1.00</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S7</td>
+<td>Player points</td>
+<td>Jamal Murray Over 26.2</td>
+<td>26.2</td>
+<td>28.2</td>
+<td>DEN 116 @ NOP 108</td>
+<td><span class="na" title="not graded: the Player points line needs an official per-player box score, and the game-log endpoints are 403 to this bu">not gradable</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>DAL +3.2</td>
+<td>3.2</td>
+<td>-1.8</td>
+<td>DAL 117 @ CLE 127</td>
+<td><b>LOSS</b></td>
+<td>-6.80</td>
+<td>-1.10</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S3</td>
+<td>Moneyline</td>
+<td>DAL ML (-118 fair)</td>
+<td>3.2</td>
+<td>-1.8</td>
+<td>DAL 117 @ CLE 127</td>
+<td><b>LOSS</b></td>
+<td>-10.00</td>
+<td>-1.10</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S5</td>
+<td>Point spread</td>
+<td>DAL +3.2</td>
+<td>3.2</td>
+<td>-1.8</td>
+<td>DAL 117 @ CLE 127</td>
+<td><b>LOSS</b></td>
+<td>-6.80</td>
+<td>-1.10</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S5</td>
+<td>Point spread</td>
+<td>DET -9.9</td>
+<td>-9.9</td>
+<td>-12.2</td>
+<td>DET 117 @ MIA 137</td>
+<td><b>LOSS</b></td>
+<td>-29.90</td>
+<td>-1.10</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S7</td>
+<td>Player points</td>
+<td>Giannis Antetokounmpo Under 27.7</td>
+<td>27.7</td>
+<td>25.7</td>
+<td>DET 117 @ MIA 137</td>
+<td><span class="na" title="not graded: the Player points line needs an official per-player box score, and the game-log endpoints are 403 to this bu">not gradable</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>BKN +12.9</td>
+<td>12.9</td>
+<td>5.9</td>
+<td>BKN 110 @ MEM 129</td>
+<td><b>LOSS</b></td>
+<td>-6.10</td>
+<td>-1.10</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S3</td>
+<td>Moneyline</td>
+<td>BKN ML (+172 fair)</td>
+<td>12.9</td>
+<td>5.9</td>
+<td>BKN 110 @ MEM 129</td>
+<td><b>LOSS</b></td>
+<td>-19.00</td>
+<td>-1.10</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S5</td>
+<td>Point spread</td>
+<td>BKN +12.9</td>
+<td>12.9</td>
+<td>5.9</td>
+<td>BKN 110 @ MEM 129</td>
+<td><b>LOSS</b></td>
+<td>-6.10</td>
+<td>-1.10</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S7</td>
+<td>Player points</td>
+<td>LaMelo Ball Over 18.6</td>
+<td>18.6</td>
+<td>21.6</td>
+<td>CHI 117 @ MIN 106</td>
+<td><span class="na" title="not graded: the Player points line needs an official per-player box score, and the game-log endpoints are 403 to this bu">not gradable</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S8</td>
+<td>Player PRA</td>
+<td>LaMelo Ball Over 28.2</td>
+<td>28.2</td>
+<td>32.5</td>
+<td>CHI 117 @ MIN 106</td>
+<td><span class="na" title="not graded: the Player PRA line needs an official per-player box score, and the game-log endpoints are 403 to this build">not gradable</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S9</td>
+<td>Parlay</td>
+<td>Over 227.0 + BKN +12.9</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><b>LOSS</b></td>
+<td>LOSS | LOSS</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>S10</td>
+<td>Same-game parlay</td>
+<td>DEN -5.9 + Over 227.0</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><b>LOSS</b></td>
+<td>WIN | LOSS</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">official finals</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">A &quot;not gradable&quot; row is a player-prop or parlay leg whose settlement needs an official per-player box score; the game-log endpoints are 403 to this build, so the row is left pending rather than settled from a source the site cannot cite. Units are the repo's standing -110 convention, not a market return.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Strat</th>
+<th>Games</th>
+<th>Legs</th>
+<th>Leg results</th>
+<th>Naive product</th>
+<th>Adjusted joint</th>
+<th>rho</th>
+<th>Frechet bounds</th>
+<th>Result</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>S9</td>
+<td>DEN@NOP &amp; BKN@MEM</td>
+<td>Over 227.0 + BKN +12.9</td>
+<td>Over 227.0: LOSS ; BKN +12.9: LOSS</td>
+<td>0.4438</td>
+<td>0.4438</td>
+<td>0.000</td>
+<td>0.3325 - 0.6569</td>
+<td><b>LOSS</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/settlement_2026_11_14.json" target="_blank" rel="noopener">settlement file</a></td>
+</tr>
+<tr>
+<td>S10</td>
+<td>DEN@NOP &amp; DEN@NOP</td>
+<td>DEN -5.9 + Over 227.0</td>
+<td>DEN -5.9: WIN ; Over 227.0: LOSS</td>
+<td>0.3868</td>
+<td>0.3868</td>
+<td>0.000</td>
+<td>0.2481 - 0.5725</td>
+<td><b>LOSS</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/settlement_2026_11_14.json" target="_blank" rel="noopener">settlement file</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">The naive product of the leg probabilities is printed beside the joint probability the pick was published with, and beside the Frechet bounds any joint must respect. rho 0.0 on both rows means the two legs were priced as independent - for the same-game parlay that is a known simplification, not a measurement, and it is what the row's own rho field says.</p>
+<div class="banner warn"><div class="b-t">How to read 3W-10L</div><div class="b-b"><p>This is one slate, 13 gradable picks, all of them graded against our own number. It is not evidence of skill or of its absence: the win count against a self-priced line has no vig, no closing line and no market, and a single slate is far inside the noise band. The graded window that the leaderboard uses is on <a href="backtest.html">Out-of-Sample Backtest</a>; the point of this table is that <b>a losing slate is published as a losing slate</b> (-5.80 units at the -110 convention), with the settlement stamp attached to each row rather than a summary number elsewhere.</p></div></div>
+<h2 class="sec">Tamper-evident ledger</h2><p class="secsub">One sha256 per published pick, computed over the frozen core fields of the committed file, then chained. Edit any published pick and a hash that is already public stops matching.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Matchup</th>
+<th>Strat</th>
+<th>Market</th>
+<th>Side</th>
+<th>Price stand-in</th>
+<th>Originated</th>
+<th>pick sha256</th>
+<th>chain</th>
+<th>Published before tip</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-14</td>
+<td>DEN@NOP</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>away</td>
+<td>-5.9</td>
+<td>-9.1</td>
+<td><code>230b8252f529eec0</code></td>
+<td><code>41f3821d39ea</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DEN@NOP</td>
+<td>S2</td>
+<td>Game total</td>
+<td>over</td>
+<td>227.0</td>
+<td>236.0</td>
+<td><code>bbdfb3138fee8359</code></td>
+<td><code>17fbe99fd5a8</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DEN@NOP</td>
+<td>S3</td>
+<td>Moneyline</td>
+<td>away</td>
+<td>-5.9</td>
+<td>-9.1</td>
+<td><code>65b6d8c7cbee5207</code></td>
+<td><code>a367c62dc600</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DEN@NOP</td>
+<td>S5</td>
+<td>Point spread</td>
+<td>away</td>
+<td>-5.9</td>
+<td>-9.1</td>
+<td><code>78f54832798fa6d4</code></td>
+<td><code>b67f7fd8b140</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DEN@NOP</td>
+<td>S7</td>
+<td>Player points</td>
+<td>over</td>
+<td>26.2</td>
+<td>28.2</td>
+<td><code>247fd15463a38294</code></td>
+<td><code>525f45a6af1d</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DAL@CLE</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>away</td>
+<td>3.2</td>
+<td>-1.8</td>
+<td><code>b2161585527e86b6</code></td>
+<td><code>1819223c4b85</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DAL@CLE</td>
+<td>S3</td>
+<td>Moneyline</td>
+<td>away</td>
+<td>3.2</td>
+<td>-1.8</td>
+<td><code>d9c6331a457997e3</code></td>
+<td><code>65cca17e2cf1</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DAL@CLE</td>
+<td>S5</td>
+<td>Point spread</td>
+<td>away</td>
+<td>3.2</td>
+<td>-1.8</td>
+<td><code>712372ddcd68399d</code></td>
+<td><code>9f31c637160e</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DET@MIA</td>
+<td>S5</td>
+<td>Point spread</td>
+<td>away</td>
+<td>-9.9</td>
+<td>-12.2</td>
+<td><code>0d6a1b8839a7231c</code></td>
+<td><code>94e5b62936ed</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DET@MIA</td>
+<td>S7</td>
+<td>Player points</td>
+<td>under</td>
+<td>27.7</td>
+<td>25.7</td>
+<td><code>d97e87a96b7d4b77</code></td>
+<td><code>ad7297e5cccf</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>BKN@MEM</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>away</td>
+<td>12.9</td>
+<td>5.9</td>
+<td><code>3103f3ef651df84c</code></td>
+<td><code>1aa46241723e</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>BKN@MEM</td>
+<td>S3</td>
+<td>Moneyline</td>
+<td>away</td>
+<td>12.9</td>
+<td>5.9</td>
+<td><code>a089c32c513c2cd1</code></td>
+<td><code>b15859d44d31</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>BKN@MEM</td>
+<td>S5</td>
+<td>Point spread</td>
+<td>away</td>
+<td>12.9</td>
+<td>5.9</td>
+<td><code>9884452876a6259c</code></td>
+<td><code>14a4367f1c72</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>CHI@MIN</td>
+<td>S7</td>
+<td>Player points</td>
+<td>over</td>
+<td>18.6</td>
+<td>21.6</td>
+<td><code>53ac3cfd06160b05</code></td>
+<td><code>ee8f025a2d4f</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>CHI@MIN</td>
+<td>S8</td>
+<td>Player PRA</td>
+<td>over</td>
+<td>28.2</td>
+<td>32.5</td>
+<td><code>c6bf655813231243</code></td>
+<td><code>7368836973a8</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>LAL@PHX</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>home</td>
+<td>-9.7</td>
+<td>-6.0</td>
+<td><code>608ee635948d16a2</code></td>
+<td><code>67fb05b32ff8</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>LAL@PHX</td>
+<td>S3</td>
+<td>Moneyline</td>
+<td>home</td>
+<td>-9.7</td>
+<td>-6.0</td>
+<td><code>5f4484485a0f604e</code></td>
+<td><code>5c9df19eeee8</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>CHA@LAC</td>
+<td>S2</td>
+<td>Game total</td>
+<td>over</td>
+<td>209.7</td>
+<td>216.2</td>
+<td><code>783fccb1d4315227</code></td>
+<td><code>a868c73e8133</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>SAS@UTA</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>home</td>
+<td>-20.6</td>
+<td>-14.7</td>
+<td><code>9b649c6868837a6d</code></td>
+<td><code>7f4a95b0108b</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>DAL@BOS</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>home</td>
+<td>12.8</td>
+<td>18.4</td>
+<td><code>9eddcdce2642d3f5</code></td>
+<td><code>0fc7e0ecc373</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>DAL@BOS</td>
+<td>S3</td>
+<td>Moneyline</td>
+<td>home</td>
+<td>12.8</td>
+<td>18.4</td>
+<td><code>14b1364d650851b5</code></td>
+<td><code>f5facb4833c5</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>DAL@BOS</td>
+<td>S5</td>
+<td>Point spread</td>
+<td>home</td>
+<td>12.8</td>
+<td>18.4</td>
+<td><code>4cdae55b59b8ad24</code></td>
+<td><code>fd8114d081a1</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>DAL@BOS</td>
+<td>S7</td>
+<td>Player points</td>
+<td>under</td>
+<td>24.6</td>
+<td>22.6</td>
+<td><code>da8927c709e1745a</code></td>
+<td><code>5adfaa443ef8</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>HOU@WAS</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>home</td>
+<td>-12.6</td>
+<td>-8.3</td>
+<td><code>d91cc40c29384a49</code></td>
+<td><code>b570721ad0cd</code></td>
+<td><b>no</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>ATL@MIL</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>home</td>
+<td>-14.9</td>
+<td>-10.1</td>
+<td><code>0f8ea16aafef1221</code></td>
+<td><code>8e1448d226b6</code></td>
+<td><b>no</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>ATL@MIL</td>
+<td>S2</td>
+<td>Game total</td>
+<td>over</td>
+<td>225.0</td>
+<td>232.0</td>
+<td><code>f49212d3e9234485</code></td>
+<td><code>194ba4819845</code></td>
+<td><b>no</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>OKC@SAC</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>home</td>
+<td>-14.3</td>
+<td>-9.4</td>
+<td><code>c158b8d189d38277</code></td>
+<td><code>f8f60f85aa74</code></td>
+<td><b>no</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>OKC@SAC</td>
+<td>S7</td>
+<td>Player points</td>
+<td>over</td>
+<td>29.7</td>
+<td>31.8</td>
+<td><code>88d89ed89a9eab87</code></td>
+<td><code>bf137943bfe1</code></td>
+<td><b>no</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>ORL@BOS</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>away</td>
+<td>18.3</td>
+<td>10.5</td>
+<td><code>74331eac2e5667b1</code></td>
+<td><code>1cf6c879ef32</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>ORL@BOS</td>
+<td>S5</td>
+<td>Point spread</td>
+<td>away</td>
+<td>18.3</td>
+<td>10.5</td>
+<td><code>be06b4d4e0c55951</code></td>
+<td><code>b6def125933c</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>CHI@CLE</td>
+<td>S2</td>
+<td>Game total</td>
+<td>over</td>
+<td>228.7</td>
+<td>238.8</td>
+<td><code>69dfc7a99029e572</code></td>
+<td><code>6c6225d773e2</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>CHI@CLE</td>
+<td>S7</td>
+<td>Player points</td>
+<td>over</td>
+<td>22.8</td>
+<td>25.5</td>
+<td><code>870ea008e055a8e9</code></td>
+<td><code>8dbe1c2c5208</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>CHI@CLE</td>
+<td>S8</td>
+<td>Player PRA</td>
+<td>over</td>
+<td>33.3</td>
+<td>36.8</td>
+<td><code>f63df5018e2ef8d3</code></td>
+<td><code>647f1586380e</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>MEM@WAS</td>
+<td>S5</td>
+<td>Point spread</td>
+<td>away</td>
+<td>-9.4</td>
+<td>-11.9</td>
+<td><code>6e348075cfe07851</code></td>
+<td><code>0f64b1330252</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>PHI@BKN</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>home</td>
+<td>-4.6</td>
+<td>4.5</td>
+<td><code>25af12f843d94500</code></td>
+<td><code>e0149d7bd3a3</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>PHI@BKN</td>
+<td>S3</td>
+<td>Moneyline</td>
+<td>home</td>
+<td>-4.6</td>
+<td>4.5</td>
+<td><code>043644299c827fb7</code></td>
+<td><code>2805c052899d</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>PHI@BKN</td>
+<td>S5</td>
+<td>Point spread</td>
+<td>home</td>
+<td>-4.6</td>
+<td>4.5</td>
+<td><code>c06dd89238c2e283</code></td>
+<td><code>f306e6c46d16</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>HOU@MIA</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>home</td>
+<td>-11.8</td>
+<td>-1.3</td>
+<td><code>c7473099c3f82b87</code></td>
+<td><code>322a2176461a</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>HOU@MIA</td>
+<td>S3</td>
+<td>Moneyline</td>
+<td>home</td>
+<td>-11.8</td>
+<td>-1.3</td>
+<td><code>cf2c2a14ac12cd3a</code></td>
+<td><code>bfcd806c4836</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>HOU@MIA</td>
+<td>S5</td>
+<td>Point spread</td>
+<td>home</td>
+<td>-11.8</td>
+<td>-1.3</td>
+<td><code>f4ae79b0469b0958</code></td>
+<td><code>6b67cbe2d9de</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>POR@MIN</td>
+<td>S2</td>
+<td>Game total</td>
+<td>under</td>
+<td>238.0</td>
+<td>228.1</td>
+<td><code>f5ad936797b2c522</code></td>
+<td><code>e7b1fa46d257</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>GSW@NOP</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>home</td>
+<td>-12.7</td>
+<td>-8.3</td>
+<td><code>e6c9ea3c5ffb6a25</code></td>
+<td><code>2052011d3879</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>PHX@DEN</td>
+<td>S1</td>
+<td>Point spread</td>
+<td>home</td>
+<td>6.5</td>
+<td>13.2</td>
+<td><code>6031adcf9d41a70e</code></td>
+<td><code>47031d1a1919</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>PHX@DEN</td>
+<td>S2</td>
+<td>Game total</td>
+<td>over</td>
+<td>225.1</td>
+<td>233.0</td>
+<td><code>63f5689ff9fbcfc2</code></td>
+<td><code>8da95003f071</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>PHX@DEN</td>
+<td>S3</td>
+<td>Moneyline</td>
+<td>home</td>
+<td>6.5</td>
+<td>13.2</td>
+<td><code>109a2695322018b6</code></td>
+<td><code>261872eb8a60</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>PHX@DEN</td>
+<td>S5</td>
+<td>Point spread</td>
+<td>home</td>
+<td>6.5</td>
+<td>13.2</td>
+<td><code>9fec9daf08b7f001</code></td>
+<td><code>719f3d456d3b</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>UTA@LAC</td>
+<td>S2</td>
+<td>Game total</td>
+<td>over</td>
+<td>215.6</td>
+<td>223.1</td>
+<td><code>7a34d11e5ff03add</code></td>
+<td><code>d3b1b4a86376</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>POR@MIN</td>
+<td>S2</td>
+<td>Game total</td>
+<td>under</td>
+<td>238.0</td>
+<td>230.6</td>
+<td><code>257b507f1c349de3</code></td>
+<td><code>b7fab125e1e1</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>DET@SAS</td>
+<td>S2</td>
+<td>Game total</td>
+<td>under</td>
+<td>231.2</td>
+<td>222.9</td>
+<td><code>73a2bfdadf40eff2</code></td>
+<td><code>10642202d031</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DEN@NOP &amp; BKN@MEM</td>
+<td>S9</td>
+<td>Parlay</td>
+<td>Over 227.0 + BKN +12.9</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><code>08e71b48ecb7acc1</code></td>
+<td><code>6403a92b3d01</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>ATL@MIL &amp; CHA@LAC</td>
+<td>S9</td>
+<td>Parlay</td>
+<td>Over 225.0 + Over 209.7</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><code>b1753e8c7c9074e9</code></td>
+<td><code>a8fdff63db82</code></td>
+<td><span class="na" title="no tip time recorded for this game at this cut - the attestation is withheld rather than assumed">undated</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>HOU@MIA &amp; CHI@CLE</td>
+<td>S9</td>
+<td>Parlay</td>
+<td>MIA +11.8 + Over 228.7</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><code>1293b17b20645683</code></td>
+<td><code>bf03a1dfc4b8</code></td>
+<td><span class="na" title="no tip time recorded for this game at this cut - the attestation is withheld rather than assumed">undated</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>DET@SAS &amp; UTA@LAC</td>
+<td>S9</td>
+<td>Parlay</td>
+<td>Under 231.2 + Over 215.6</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><code>aacce550c1a7173d</code></td>
+<td><code>7a5217eade3c</code></td>
+<td><span class="na" title="no tip time recorded for this game at this cut - the attestation is withheld rather than assumed">undated</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-14</td>
+<td>DEN@NOP &amp; DEN@NOP</td>
+<td>S10</td>
+<td>Same-game parlay</td>
+<td>DEN -5.9 + Over 227.0</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><code>7ec104db6942a56b</code></td>
+<td><code>005a3adf1549</code></td>
+<td><b>yes</b></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>LAL@PHX &amp; LAL@PHX</td>
+<td>S10</td>
+<td>Same-game parlay</td>
+<td>PHX +9.7 + Over 234.2</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><code>99950f80d58959ab</code></td>
+<td><code>e4675fccb082</code></td>
+<td><span class="na" title="no tip time recorded for this game at this cut - the attestation is withheld rather than assumed">undated</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>DAL@BOS &amp; DAL@BOS</td>
+<td>S10</td>
+<td>Same-game parlay</td>
+<td>BOS -12.8 + Under 226.5</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><code>1fb5573cfd0d103f</code></td>
+<td><code>357933ae29c5</code></td>
+<td><span class="na" title="no tip time recorded for this game at this cut - the attestation is withheld rather than assumed">undated</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>ATL@MIL &amp; ATL@MIL</td>
+<td>S10</td>
+<td>Same-game parlay</td>
+<td>MIL +14.9 + Over 225.0</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><code>daaf88aa30972b82</code></td>
+<td><code>b0cff7dc9c84</code></td>
+<td><span class="na" title="no tip time recorded for this game at this cut - the attestation is withheld rather than assumed">undated</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>OKC@SAC &amp; OKC@SAC</td>
+<td>S10</td>
+<td>Same-game parlay</td>
+<td>SAC +14.3 + Over 219.6</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><code>f91890834756dac4</code></td>
+<td><code>578f1edeee58</code></td>
+<td><span class="na" title="no tip time recorded for this game at this cut - the attestation is withheld rather than assumed">undated</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>GSW@NOP &amp; GSW@NOP</td>
+<td>S10</td>
+<td>Same-game parlay</td>
+<td>NOP +12.7 + Over 232.1</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><code>534ea297a058ec3f</code></td>
+<td><code>3c726cf36cd6</code></td>
+<td><span class="na" title="no tip time recorded for this game at this cut - the attestation is withheld rather than assumed">undated</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>PHX@DEN &amp; PHX@DEN</td>
+<td>S10</td>
+<td>Same-game parlay</td>
+<td>DEN -6.5 + Over 225.1</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><code>9b2e92b832e66686</code></td>
+<td><code>a579d46681dc</code></td>
+<td><span class="na" title="no tip time recorded for this game at this cut - the attestation is withheld rather than assumed">undated</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/ledger_2026-11-15.json" target="_blank" rel="noopener">ledger</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Full 64-hex digests are in <code>data/live/ledger_2026-11-15.json</code>; the page prints the first 16 so a reader can spot-check. Chain head <code>a579d46681dc4be2637fcb42</code>. The blob these were hashed from is <code>1b962a91275c</code>.</p>
+<h2 class="sec">The rolling horizon, re-read from the official date cards</h2><p class="secsub">34 games, 2026-11-15 to 2026-11-18. Records are the ones printed on the cards, cross-checked against the standings page read at the same moment.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Tip ET</th>
+<th>Matchup</th>
+<th>Away rec</th>
+<th>Home rec</th>
+<th>Game id</th>
+<th>Status</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-15</td>
+<td>1:00 PM ET</td>
+<td><b>IND@PHI</b></td>
+<td>5-8</td>
+<td>10-3</td>
+<td><code>0022600236</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/ind-vs-phi-0022600236" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>4:00 PM ET</td>
+<td><b>LAL@PHX</b></td>
+<td>11-2</td>
+<td>5-6</td>
+<td><code>0022600237</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/lal-vs-phx-0022600237" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>4:30 PM ET</td>
+<td><b>CHA@LAC</b></td>
+<td>4-8</td>
+<td>3-8</td>
+<td><code>0022600238</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/cha-vs-lac-0022600238" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>5:00 PM ET</td>
+<td><b>SAS@UTA</b></td>
+<td>11-2</td>
+<td>1-12</td>
+<td><code>0022600239</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/sas-vs-uta-0022600239" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>6:00 PM ET</td>
+<td><b>DAL@BOS</b></td>
+<td>7-6</td>
+<td>10-2</td>
+<td><code>0022600240</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/dal-vs-bos-0022600240" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>6:00 PM ET</td>
+<td><b>NYK@TOR</b></td>
+<td>6-6</td>
+<td>5-7</td>
+<td><code>0022600241</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600241" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>7:00 PM ET</td>
+<td><b>HOU@WAS</b></td>
+<td>10-3</td>
+<td>4-9</td>
+<td><code>0022600242</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-was-0022600242" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>8:00 PM ET</td>
+<td><b>ATL@MIL</b></td>
+<td>7-6</td>
+<td>1-12</td>
+<td><code>0022600243</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/atl-vs-mil-0022600243" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td>9:00 PM ET</td>
+<td><b>OKC@SAC</b></td>
+<td>8-5</td>
+<td>1-11</td>
+<td><code>0022600244</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/okc-vs-sac-0022600244" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:00 PM ET</td>
+<td><b>ORL@BOS</b></td>
+<td>5-7</td>
+<td>10-2</td>
+<td><code>0022600245</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/orl-vs-bos-0022600245" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:00 PM ET</td>
+<td><b>CHI@CLE</b></td>
+<td>3-9</td>
+<td>7-7</td>
+<td><code>0022600246</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-cle-0022600246" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:00 PM ET</td>
+<td><b>MEM@WAS</b></td>
+<td>9-4</td>
+<td>4-9</td>
+<td><code>0022600247</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/mem-vs-was-0022600247" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:30 PM ET</td>
+<td><b>PHI@BKN</b></td>
+<td>10-3</td>
+<td>3-9</td>
+<td><code>0022600248</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/phi-vs-bkn-0022600248" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>7:30 PM ET</td>
+<td><b>HOU@MIA</b></td>
+<td>10-3</td>
+<td>7-6</td>
+<td><code>0022600249</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-mia-0022600249" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>8:00 PM ET</td>
+<td><b>POR@MIN</b></td>
+<td>9-3</td>
+<td>9-4</td>
+<td><code>0022600250</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600250" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>8:00 PM ET</td>
+<td><b>GSW@NOP</b></td>
+<td>8-5</td>
+<td>4-10</td>
+<td><code>0022600251</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/gsw-vs-nop-0022600251" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>9:00 PM ET</td>
+<td><b>PHX@DEN</b></td>
+<td>5-6</td>
+<td>7-4</td>
+<td><code>0022600252</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/phx-vs-den-0022600252" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>7:30 PM ET</td>
+<td><b>NYK@TOR</b></td>
+<td>6-6</td>
+<td>5-7</td>
+<td><code>0022600253</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600253" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>8:00 PM ET</td>
+<td><b>POR@MIN</b></td>
+<td>9-3</td>
+<td>9-4</td>
+<td><code>0022600254</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600254" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>8:00 PM ET</td>
+<td><b>DET@SAS</b></td>
+<td>8-4</td>
+<td>11-2</td>
+<td><code>0022600255</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-sas-0022600255" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>10:30 PM ET</td>
+<td><b>UTA@LAC</b></td>
+<td>1-12</td>
+<td>3-8</td>
+<td><code>0022600257</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/uta-vs-lac-0022600257" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>11:00 PM ET</td>
+<td><b>CHA@LAL</b></td>
+<td>4-8</td>
+<td>11-2</td>
+<td><code>0022600256</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/cha-vs-lal-0022600256" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>7:00 PM ET</td>
+<td><b>MEM@CLE</b></td>
+<td>9-4</td>
+<td>7-7</td>
+<td><code>0022600258</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/mem-vs-cle-0022600258" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>7:00 PM ET</td>
+<td><b>HOU@IND</b></td>
+<td>10-3</td>
+<td>5-8</td>
+<td><code>0022600259</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-ind-0022600259" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>7:00 PM ET</td>
+<td><b>MIL@MIA</b></td>
+<td>1-12</td>
+<td>7-6</td>
+<td><code>0022600260</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/mil-vs-mia-0022600260" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>7:00 PM ET</td>
+<td><b>PHI@ORL</b></td>
+<td>10-3</td>
+<td>5-7</td>
+<td><code>0022600261</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/phi-vs-orl-0022600261" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>7:30 PM ET</td>
+<td><b>CHI@BKN</b></td>
+<td>3-9</td>
+<td>3-9</td>
+<td><code>0022600262</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-bkn-0022600262" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>7:30 PM ET</td>
+<td><b>WAS@TOR</b></td>
+<td>4-9</td>
+<td>5-7</td>
+<td><code>0022600263</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/was-vs-tor-0022600263" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>8:00 PM ET</td>
+<td><b>DET@NOP</b></td>
+<td>8-4</td>
+<td>4-10</td>
+<td><code>0022600264</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-nop-0022600264" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>8:00 PM ET</td>
+<td><b>ATL@OKC</b></td>
+<td>7-6</td>
+<td>8-5</td>
+<td><code>0022600265</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/atl-vs-okc-0022600265" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>8:00 PM ET</td>
+<td><b>GSW@DAL</b></td>
+<td>8-5</td>
+<td>7-6</td>
+<td><code>0022600267</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/gsw-vs-dal-0022600267" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>9:30 PM ET</td>
+<td><b>BOS@DEN</b></td>
+<td>10-2</td>
+<td>7-4</td>
+<td><code>0022600266</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/bos-vs-den-0022600266" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>10:00 PM ET</td>
+<td><b>UTA@LAL</b></td>
+<td>1-12</td>
+<td>11-2</td>
+<td><code>0022600268</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/uta-vs-lal-0022600268" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>10:00 PM ET</td>
+<td><b>PHX@SAC</b></td>
+<td>5-6</td>
+<td>1-11</td>
+<td><code>0022600269</code></td>
+<td>pre-tip</td>
+<td class="src"><a href="https://www.nba.com/game/phx-vs-sac-0022600269" target="_blank" rel="noopener">game page</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">All 34 games were pre-tip when this ran, so no result and no venue is asserted for them. Venue and city for the 22 games already in the previous snapshot are carried forward with a flag saying so; the 12 games added for 2026-11-18 carry no venue at all, because the card that lists them prints tip times and records but not arenas.</p>
+<p class="tnote">&bull; Records are the W-L strings printed on each official game card at read time (post-11/14 finals); they agree with the 2026-11-15 standings page for all 30 teams (see standings_2026-11-15.json, check 2).</p>
+<p class="tnote">&bull; Two 11/17 games are listed with the same matchup as an 11/15 game (NYK@TOR 0022600241 / 0022600253; POR@MIN 0022600250 / 0022600254) - the official pages print them as separate game ids on separate dates, so both rows are kept as printed. Flagged for review as a schedule oddity, not corrected.</p>
+<p class="tnote">&bull; The 11/18 rows come from the Nov 14 game-page calendar (Wed Nov 18 block), not from a dedicated ?date=2026-11-18 fetch; the calendar strip on every date page independently prints 12 GAMES for Nov 18.</p>
+<h2 class="sec">Home court, pinned to the measured home-win rate</h2><p class="secsub">Three candidate values exist in this repository. They are published beside each other; none is averaged with another.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Estimate</th>
+<th>Value</th>
+<th>Unit</th>
+<th>How it was obtained</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Documented assumption</td>
+<td>2.500</td>
+<td>pts</td>
+<td>hard-coded in <code>scripts/build_edge_site.py</code>, <code>scripts/build_slate_refresh.py</code>, <code>scripts/generate_picks_d.py</code>, flagged as an assumption (E-01) - the value is a project choice, not a measurement, which is why the pin exists</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/build_edge_site.py" target="_blank" rel="noopener">where the constant lives</a></td>
+</tr>
+<tr>
+<td>Fitted intercept on holdout residuals</td>
+<td>3.508</td>
+<td>pts</td>
+<td>engine/validate.py, disclosed there as estimated on the test window - so it is a fit, <em>not</em> an out-of-sample measurement, and it is not the pin</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/validate.py" target="_blank" rel="noopener">the fitter</a></td>
+</tr>
+<tr>
+<td>Measured: official results feed (64 games)</td>
+<td>1.295</td>
+<td>pts</td>
+<td>home-win rate <b>0.5469</b> (Wilson 95% [0.4257, 0.6627]), mean home margin 2.000 pts - from the committed per-game finals</td>
+<td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">NBA.com Games &amp;amp; Scores</a></td>
+</tr>
+<tr>
+<td>Measured: official standings HOME column (187 home games)</td>
+<td>0.811</td>
+<td>pts</td>
+<td>league home-win rate <b>0.5294</b> (Wilson 95% [0.458, 0.5996]) across 187 home games, neutral sites excluded because the page books them in their own column</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com standings</a></td>
+</tr>
+<tr>
+<td><b>PIN adopted for the next freeze</b></td>
+<td><b>1.053</b></td>
+<td>pts</td>
+<td>mean of the two measured pins (results feed and standings HOME column). It is published as a PIN, not as a third rating: the model either uses it or it does not, and every page states which. The two measurements and the fitted value are printed beside each other because they disagree.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/home_court_pin.json" target="_blank" rel="noopener">pin file</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Conversion for the two measured rows: HCA = sigma &times; Phi&#8315;&sup1;(P(home win)) with sigma = 11.0 points, the spread of a final margin. The published lines still carry 2.5 points - see the adoption note below - because they are frozen and hashed.</p>
+<div class="banner info"><div class="b-t">When the pin takes effect</div><div class="b-b"><p>New freezes price with <b>1.053</b> points; the 60 already-published picks keep <b>2.5</b>. the 60 horizon picks are frozen and hashed (data/live/ledger_2026-11-15.json); moving their lines after tip would make the settlement test the pre-registration was written to protect. The pin therefore takes effect at the next freeze, and the sensitivity of every already-published line to it is printed on the day-roll page instead of being applied silently.</p><p><b>Sensitivity, exactly:</b> home-court enters the line additively, so the effect of the pin on any published margin is exactly (pinned - 2.5) points, and zero on totals. Moving the pin later would only shift every home margin by the same constant and change no total, so the effect on the published slate is printed here instead of being applied silently.</p></div></div>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Matchup</th>
+<th>Reference home margin</th>
+<th>Published model margin</th>
+<th>Model margin under the pin</th>
+<th>Favourite</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-15</td>
+<td><b>IND@PHI</b></td>
+<td>5.4</td>
+<td>6.3</td>
+<td><b>4.9</b></td>
+<td>away &rarr; away</td>
+<td class="src"><a href="https://www.nba.com/game/ind-vs-phi-0022600236" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>LAL@PHX</b></td>
+<td>-9.7</td>
+<td>-6.0</td>
+<td><b>-7.4</b></td>
+<td>home &rarr; home</td>
+<td class="src"><a href="https://www.nba.com/game/lal-vs-phx-0022600237" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>CHA@LAC</b></td>
+<td>7.3</td>
+<td>8.0</td>
+<td><b>6.6</b></td>
+<td>away &rarr; away</td>
+<td class="src"><a href="https://www.nba.com/game/cha-vs-lac-0022600238" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>SAS@UTA</b></td>
+<td>-20.6</td>
+<td>-14.7</td>
+<td><b>-16.1</b></td>
+<td>home &rarr; home</td>
+<td class="src"><a href="https://www.nba.com/game/sas-vs-uta-0022600239" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>DAL@BOS</b></td>
+<td>12.8</td>
+<td>18.4</td>
+<td><b>17.0</b></td>
+<td>away &rarr; away</td>
+<td class="src"><a href="https://www.nba.com/game/dal-vs-bos-0022600240" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>NYK@TOR</b></td>
+<td>-2.9</td>
+<td>-0.3</td>
+<td><b>-1.7</b></td>
+<td>home &rarr; home</td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600241" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>HOU@WAS</b></td>
+<td>-12.6</td>
+<td>-8.3</td>
+<td><b>-9.7</b></td>
+<td>home &rarr; home</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-was-0022600242" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>ATL@MIL</b></td>
+<td>-14.9</td>
+<td>-10.1</td>
+<td><b>-11.5</b></td>
+<td>home &rarr; home</td>
+<td class="src"><a href="https://www.nba.com/game/atl-vs-mil-0022600243" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-15</td>
+<td><b>OKC@SAC</b></td>
+<td>-14.3</td>
+<td>-9.4</td>
+<td><b>-10.8</b></td>
+<td>home &rarr; home</td>
+<td class="src"><a href="https://www.nba.com/game/okc-vs-sac-0022600244" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>ORL@BOS</b></td>
+<td>18.3</td>
+<td>10.5</td>
+<td><b>9.1</b></td>
+<td>away &rarr; away</td>
+<td class="src"><a href="https://www.nba.com/game/orl-vs-bos-0022600245" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>CHI@CLE</b></td>
+<td>19.3</td>
+<td>16.9</td>
+<td><b>15.5</b></td>
+<td>away &rarr; away</td>
+<td class="src"><a href="https://www.nba.com/game/chi-vs-cle-0022600246" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>MEM@WAS</b></td>
+<td>-9.4</td>
+<td>-11.9</td>
+<td><b>-13.3</b></td>
+<td>home &rarr; home</td>
+<td class="src"><a href="https://www.nba.com/game/mem-vs-was-0022600247" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>PHI@BKN</b></td>
+<td>-4.6</td>
+<td>4.5</td>
+<td><b>3.1</b></td>
+<td>away &rarr; away</td>
+<td class="src"><a href="https://www.nba.com/game/phi-vs-bkn-0022600248" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>HOU@MIA</b></td>
+<td>-11.8</td>
+<td>-1.3</td>
+<td><b>-2.7</b></td>
+<td>home &rarr; home</td>
+<td class="src"><a href="https://www.nba.com/game/hou-vs-mia-0022600249" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>POR@MIN</b></td>
+<td>8.4</td>
+<td>8.7</td>
+<td><b>7.3</b></td>
+<td>away &rarr; away</td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600250" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>GSW@NOP</b></td>
+<td>-12.7</td>
+<td>-8.3</td>
+<td><b>-9.7</b></td>
+<td>home &rarr; home</td>
+<td class="src"><a href="https://www.nba.com/game/gsw-vs-nop-0022600251" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>PHX@DEN</b></td>
+<td>6.5</td>
+<td>13.2</td>
+<td><b>11.8</b></td>
+<td>away &rarr; away</td>
+<td class="src"><a href="https://www.nba.com/game/phx-vs-den-0022600252" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>UTA@LAC</b></td>
+<td>7.8</td>
+<td>8.4</td>
+<td><b>7.0</b></td>
+<td>away &rarr; away</td>
+<td class="src"><a href="https://www.nba.com/game/uta-vs-lac-0022600257" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>CHA@LAL</b></td>
+<td>21.0</td>
+<td>18.9</td>
+<td><b>17.5</b></td>
+<td>away &rarr; away</td>
+<td class="src"><a href="https://www.nba.com/game/cha-vs-lal-0022600256" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>NYK@TOR</b></td>
+<td>-2.9</td>
+<td>-0.3</td>
+<td><b>-1.7</b></td>
+<td>home &rarr; home</td>
+<td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600253" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>POR@MIN</b></td>
+<td>8.4</td>
+<td>8.7</td>
+<td><b>7.3</b></td>
+<td>away &rarr; away</td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600254" target="_blank" rel="noopener">game page</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>DET@SAS</b></td>
+<td>5.8</td>
+<td>6.6</td>
+<td><b>5.2</b></td>
+<td>away &rarr; away</td>
+<td class="src"><a href="https://www.nba.com/game/det-vs-sas-0022600255" target="_blank" rel="noopener">game page</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Applying the pin moves the model's home margin by -1.447 points on every game and flips the favourite on 0 of the 22 un-tipped horizon rows. This table is what the pin <em>would</em> do; it is not applied to the frozen picks.</p>
+<div class="banner warn"><div class="b-t">Travel distance: not modelled, and here is what would close it</div><div class="b-b"><p>NOT MODELLED - no sourced arena-coordinate table exists in this repository</p><p>add data/official/arena_coordinates.json: for each of the 30 arenas, the arena name, the city as printed on the NBA.com game card, and a latitude/longitude pair, each with the URL it was read from and the read time. Great-circle distance is then pure arithmetic and every number on the page stays traceable.</p><p>no NBA-operated source reachable from this build publishes arena coordinates, and distances from memory would be untraceable values in a table whose whole purpose is traceability.</p></div></div>
+<h2 class="sec">Injury report: consecutive editions diffed</h2><p class="secsub">Both editions of 11/15 were read in full - 11/15/26 06:00 AM ET and 11/15/26 06:15 AM ET - and diffed row by row.</p>
+<div class="banner info"><div class="b-t">What the 15 minutes between them changed</div><div class="b-b"><p>0 status changes, 1 rows appearing, 1 leaving. the two 11/15 editions print the same status for every player that appears in both. The only structural difference is the 'Simmons, Ben' row: the 06:00 AM render prints it at a section break with no Matchup and no Team cell, and the 06:15 AM render attributes it to Sacramento Kings. A team-blind row cannot be priced, so the earlier edition is kept as printed and the row appears here as one departure and one arrival - a render artefact, not a status change. Flagged for review.</p></div></div>
+<h2 class="sec">Flagged for review from this roll</h2><p class="secsub">Everything the roll could not close, with the source that would close it.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Irregularity or gap</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>CHI@MIN (0022600235) quarter splits not captured - the fetch channel refused that game page four times; the final score itself is printed on two official pages and agrees.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">roll record</a></td>
+</tr>
+<tr>
+<td>the two 11/15 editions agree on every status; the only difference is a Team cell that the 06:00 render drops on the 'Simmons, Ben' row at a page break (kept unattributed in that edition, not back-filled).</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">roll record</a></td>
+</tr>
+<tr>
+<td>the official pages print NYK@TOR and POR@MIN twice (11/15 and 11/17) as separate game ids; kept as printed.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">roll record</a></td>
+</tr>
+<tr>
+<td>15 injury rows inherit their team from the block above them because the PDF's page break dropped the Team cell; each carries an explicit team_basis note.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">roll record</a></td>
+</tr>
+<tr>
+<td>the 12 games added for 2026-11-18 carry no venue: the card that lists them prints tip times and records but not arenas.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/gates_2026-11-15.json" target="_blank" rel="noopener">roll record</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Also carried into <a href="flagged.html">Flagged for Review</a> so the page that gates publication and this page cannot drift apart.</p>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../origination/index.html">Origination build &mdash; 22 lines for 14&ndash;16 Nov, 101-game walk-forward</a> &middot;
+      <a href="../../strategy-lab/index.html">Strategy Lab &mdash; season-wide audit on 160 games</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

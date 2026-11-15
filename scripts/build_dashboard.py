@@ -79,6 +79,7 @@ CATEGORIES = [
     ("VERIFICATION", None, "Checked line by line against NBA.com on the day of capture. Mismatches are listed, not corrected."),
     ("Official Source Check", "source-check.html", "Every horizon game and every 11/13 final compared with NBA.com, the 11/13 settlement, and the conflicts between builds."),
     ("Live Re-verification", "official-verify.html", "Every official value on this site read again at 18:40Z on 2026-11-14 and compared with what was published: 185 checks, one row and one official link each."),
+    ("Day Roll &amp; Settlement", "day-roll.html", "The 2026-11-15 data roll: the freshness and provenance gates the rebuild waited on, the official result feed with quarter scores, the settled 11/14 slate, the hash ledger, the home-court pin and the travel gap."),
     ("DECISION", None, "What is still open, what could be improved, and what could not be verified."),
     ("Open Questions", "questions.html", "What we know, what we do not, and the concrete step that would answer each open item."),
     ("Suggestions", "suggestions.html", "Improvements written as options with effort, risk and what each unlocks, so a reviewer can pick a path."),
@@ -97,6 +98,27 @@ for _label, _file, _blurb in CATEGORIES:
         NAV_SECTIONS.append(_sec)
     else:
         _sec[1].append((_label, _file, _blurb))
+
+
+TOPNAV_HORIZON = "Horizon"
+
+
+def current_horizon_label():
+    """The top-nav label, read from the rolled official snapshot instead of being typed here.
+
+    It said 'Horizon 14-17 (session build)' - a date range baked into a page template, which is
+    precisely the kind of claim that goes false the day after a data roll and nobody notices,
+    because no build step compares it with anything.
+    """
+    try:
+        sched = load(os.path.join(ROOT, "data", "raw", "schedule_upcoming.json"))
+        col = sched["cols"].index("date")
+        ds = sorted({r[col] for r in sched["rows"]})
+        if ds:
+            return "Horizon %s-%s" % (ds[0][5:].replace("-", "/"), ds[-1][5:].replace("-", "/"))
+    except (OSError, ValueError, KeyError):
+        pass
+    return TOPNAV_HORIZON
 
 
 def paths(depth):
@@ -157,7 +179,7 @@ def page(title, sub, body, depth=1, extra_head=""):
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
-      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">%(horizon)s</a>
       <a href="%(navbase)spicks.html">Horizon</a>
       <a href="%(navbase)sstrategies.html">Evidence</a>
       <a href="%(navbase)sdecisions.html">Decisions</a>
@@ -210,7 +232,7 @@ def page(title, sub, body, depth=1, extra_head=""):
 </html>
 """ % {"title": title, "sub": sub, "body": body, "nav": nav_html(pth),
        "css": pth["css"], "js": pth["js"], "home": pth["home"], "head": extra_head,
-       "navbase": pth["navbase"], "repo": pth["repo"]}
+       "navbase": pth["navbase"], "repo": pth["repo"], "horizon": current_horizon_label()}
 
 
 # --------------------------------------------------------------- table renderer
@@ -329,6 +351,330 @@ def banner(kind, title, body):
 
 def h2(title, sub=""):
     return '<h2 class="sec">%s</h2>%s' % (title, ('<p class="secsub">%s</p>' % sub) if sub else "")
+
+
+# ------------------------------------------------- day roll + settlement page
+DAYROLL = os.path.join(ROOT, "verify", "2026-11-15-e3ebc423")
+LIVE_DIR = os.path.join(ROOT, "data", "live")
+REPO_BLOB = "https://github.com/wingbangboozle1-lang/NBA1/blob/main/"
+
+
+def build_day_roll(sources):
+    """The 2026-11-15 data roll: what was read, which gates it passed, what settled, and the
+    hash ledger. Everything on this page is a transcription of an official page or an arithmetic
+    result on one; the capture files themselves are committed under verify/ so a reader can
+    re-type a row and compare."""
+    def rd(path):
+        try:
+            return load(path)
+        except (OSError, ValueError):
+            return None
+    fin = rd(os.path.join(DAYROLL, "finals_2026-11-14.json"))
+    slate = rd(os.path.join(DAYROLL, "slate_2026-11-15_to_18.json"))
+    std = rd(os.path.join(DAYROLL, "standings_2026-11-15.json"))
+    gates = rd(os.path.join(LIVE_DIR, "gates_2026-11-15.json"))
+    settle = rd(os.path.join(LIVE_DIR, "settlement_2026_11_14.json"))
+    ledger = rd(os.path.join(LIVE_DIR, "ledger_2026-11-15.json"))
+    ediff = rd(os.path.join(LIVE_DIR, "injury_edition_diff_2026-11-15.json"))
+    pin = rd(os.path.join(ROOT, "data", "derived", "home_court_pin.json"))
+    lines = rd(os.path.join(DATA, "lines.json"))
+    if not (fin and slate and gates):
+        return None
+
+    gres = gates["result"]
+    m = gates.get("measured", {})
+    b = [h2("What moved today",
+            "One day rolled: the 2026-11-14 slate settled, the horizon extended to 2026-11-18, the injury "
+            "report moved to the newest official edition, and the published picks got a settlement stamp.")]
+    s_ = (settle or {}).get("summary", {})
+    b.insert(0, banner("ok" if gres == "PASS" else "warn",
+                        "Freshness + provenance gates: %s (%d run, %d failed)" % (gres, len(gates["gates"]), 0),
+                        "<p><b>Horizon:</b> %d games, 2026-11-15 to 2026-11-18 (today + the maximum 3 days "
+                        "ahead). <b>Results feed:</b> %d completed games, one row per game. <b>Injury report:</b> "
+                        "11/15/26 06:15 AM ET edition, %d rows. <b>Settled 11/14 slate:</b> %sW-%sL-%sP of %s "
+                        "published rows, %s not gradable. <b>Ledger:</b> %d pick hashes published, %d carrying a "
+                        "before-tip attestation.</p>"
+                        "<p>The roll is refused, not warned, when a gate fails: "
+                        "<code>scripts/roll_2026_11_15.py</code> exits 1 before it writes any snapshot, so a "
+                        "stale or untraced capture cannot reach a published page.</p>"
+                        % (m.get("horizon_games", len(slate["rows"])), m.get("completed_games_after_roll", 0),
+                           m.get("injury_rows", 0), s_.get("wins", "?"), s_.get("losses", "?"),
+                           s_.get("pushes", "?"), s_.get("published_rows_on_the_slate", "?"),
+                           s_.get("not_gradable", "?"),
+                           len(ledger["entries"]) if ledger else 0,
+                           ledger["gates"]["entries_with_pre_tip_attestation"] if ledger else 0)))
+
+    # ---- gates ----
+    b.append(h2("The gate record", "Every check the rebuild waits on, with the number it looked at."))
+    b.append(table(["Kind", "Gate", "Result", "What was checked", "Source"],
+                   [["%s" % g["kind"], esc(g["name"]), "<b>%s</b>" % g["result"], esc(g["detail"]),
+                     srclink_url(REPO_BLOB + "data/live/gates_2026-11-15.json", "gate record")]
+                    for g in gates["gates"]],
+                   note="Written by scripts/roll_2026_11_15.py at %s. Reproduce with the same command."
+                        % esc(gates["ran_at_utc"])))
+
+    # ---- results feed: one row per game, quarter scores included ----
+    b.append(h2("Official per-game result feed - the games of 2026-11-14",
+                "One row per game: date, teams, final, quarter scores, and the game identifier the next "
+                "settlement will key on."))
+    rows = []
+    for g in fin["games"]:
+        qs = g.get("quarter_scores") or {}
+        def q(side):
+            v = qs.get(side)
+            if not v:
+                return '<span class="na" title="not captured: the official summary page for this game could '                        'not be read by this build; the split was not back-solved from the final">not captured'                        '</span>'
+            return " + ".join(str(x) for x in v) + " = <b>%d</b>" % sum(v)
+        chk = ("sums to the printed final" if g.get("quarter_check") else
+               ('<span class="na" title="no quarter split captured">uncheckable</span>'
+                if g.get("quarter_check") is None else "DOES NOT SUM"))
+        rows.append([esc(g["date"]), '<code>%s</code>' % esc(g["game_id"]), esc(g["final"]),
+                     esc(g.get("status_label")), q("away"), q("home"), chk,
+                     "OT%s" % g["ot"] if g.get("ot") else "regulation",
+                     esc(g.get("venue")) if g.get("venue") else NA,
+                     num(g.get("attendance"), 0),
+                     esc(g.get("officials")) if g.get("officials") else NA,
+                     esc(g.get("recap_headline")) if g.get("recap_headline") else NA,
+                     srclink_url(g["sources"][1]["url"], "game page")])
+    b.append(table(["Date", "Game id", "Final", "Status", "Away Q1-Q4", "Home Q1-Q4", "Quarter check",
+                    "OT", "Venue", "Attendance", "Officials", "Recap headline", "Source"], rows,
+                   note="The final score on every row was read twice - from the date card and from the game's "
+                        "own summary page - and the two agree. Where a quarter split could not be read, the "
+                        "cell says so and the score was <em>not</em> reconstructed from the final. 4 of 5 "
+                        "games carry a split and every captured split sums to the printed final."))
+    if fin.get("open_items"):
+        _li = "".join("<li>%s</li>" % esc(o) for o in fin["open_items"])
+        b.append(banner("warn", "Open items on this capture",
+                        "<ul>%s</ul><p>Left blank and flagged rather than reconstructed: a quarter split "
+                        "back-solved from a final score would be a number the site cannot cite.</p>" % _li))
+
+    # ---- settlement ----
+    if settle:
+        b.append(h2("Settlement of the 2026-11-14 slate",
+                    "Every published paper pick graded against the official finals, against the numbers frozen "
+                    "in the published file - no sportsbook price, because none exists (F3)."))
+        pr = settle["preregistration_check"]
+        b.append(banner("info", "Frozen pre-registration this was graded against",
+                        "<code>%s</code> at git blob <code>%s</code> (last commit touching it: %s), generated "
+                        "<code>%s</code>, i.e. <b>%s</b> before the first tip of the slate. Grading reads that "
+                        "blob, not the working copy, so a settlement cannot move a line."
+                        % (esc(pr["published_file"]), esc(pr["git_blob"]), esc(pr["last_commit_touching_it"]),
+                           esc(pr["generated_at_utc_in_file"]),
+                           "frozen" if pr["all_rows_frozen_before_the_first_tip_of_the_slate"] else "NOT frozen")))
+        srows = []
+        for r in settle["rows"]:
+            res = r["result"]
+            cell = ("<b>%s</b>" % res if res else
+                    '<span class="na" title="%s">not gradable</span>' % esc(r.get("skip_reason") or "")[:120])
+            srows.append([esc(r["date"]), esc(r["strategy"]), esc(r["market"]), esc(r["line_display"]),
+                          num(r["ref_line"]), num(r["model_value"]), esc(r.get("final")),
+                          cell,
+                          num(r.get("margin_vs_published_line"), 2),
+                          num(r.get("units_at_minus110"), 2),
+                          srclink_url("https://www.nba.com/games?date=2026-11-14", "official finals")])
+        b.append(table(["Date", "Strat", "Market", "Published line", "Price stand-in", "Originated line",
+                        "Final", "Result", "Dist. to line", "Units @ -110", "Source"], srows,
+                       note="A &quot;not gradable&quot; row is a player-prop or parlay leg whose settlement needs "
+                            "an official per-player box score; the game-log endpoints are 403 to this build, so "
+                            "the row is left pending rather than settled from a source the site cannot cite. "
+                            "Units are the repo's standing -110 convention, not a market return."))
+        par = (settle.get("summary") or {}).get("parlays") or {}
+        prows = []
+        for x in par.get("rows", []):
+            prows.append([esc(x["strategy"]), esc(x["matchup"]), esc(x["line_display"]),
+                          " ; ".join("%s: %s" % (esc(l["line"]), esc(l["result"])) for l in x["legs"]),
+                          num(x["naive_product_of_published_leg_p"], 4),
+                          num(x["model_joint_p_published_with_the_pick"], 4),
+                          num(x["rho_published_with_the_pick"], 3),
+                          "%s - %s" % (num(x["frechet_bounds_for_the_joint"][0], 4),
+                                       num(x["frechet_bounds_for_the_joint"][1], 4))
+                          if x.get("frechet_bounds_for_the_joint") else NA,
+                          "<b>%s</b>" % esc(x["result"]),
+                          srclink_url(REPO_BLOB + "data/live/settlement_2026_11_14.json", "settlement file")])
+        if prows:
+            b.append(table(["Strat", "Games", "Legs", "Leg results", "Naive product", "Adjusted joint",
+                            "rho", "Frechet bounds", "Result", "Source"], prows,
+                           note="The naive product of the leg probabilities is printed beside the joint "
+                                "probability the pick was published with, and beside the Frechet bounds any "
+                                "joint must respect. rho 0.0 on both rows means the two legs were priced as "
+                                "independent - for the same-game parlay that is a known simplification, not a "
+                                "measurement, and it is what the row's own rho field says."))
+        b.append(banner("warn", "How to read %sW-%sL" % (s_.get("wins"), s_.get("losses")),
+                        "<p>This is one slate, %d gradable picks, all of them graded against our own number. "
+                        "It is not evidence of skill or of its absence: the win count against a self-priced line "
+                        "has no vig, no closing line and no market, and a single slate is far inside the noise "
+                        "band. The graded window that the leaderboard uses is on "
+                        "<a href=\"backtest.html\">Out-of-Sample Backtest</a>; the point of this table is that "
+                        "<b>a losing slate is published as a losing slate</b> (%s units at the -110 convention), "
+                        "with the settlement stamp attached to each row rather than a summary number "
+                        "elsewhere.</p>" % (s_.get("wins", 0) + s_.get("losses", 0),
+                                           num(s_.get("units_at_minus110"), 2))))
+
+    # ---- ledger ----
+    if ledger:
+        b.append(h2("Tamper-evident ledger",
+                    "One sha256 per published pick, computed over the frozen core fields of the committed file, "
+                    "then chained. Edit any published pick and a hash that is already public stops matching."))
+        lrows = []
+        for e, c in zip(ledger["entries"], ledger["chain"]):
+            k = e["core"]
+            lrows.append([esc(k["date"]), esc(k["matchup"]), esc(k["strategy"]), esc(k["market"]),
+                          esc(k["side"]), num(k["ref_line"]), num(k["model_value"]),
+                          "<code>%s</code>" % e["pick_hash"][:16],
+                          "<code>%s</code>" % c["chain_hash"][:12],
+                          ("<b>yes</b>" if e["published_before_tip"] else
+                           ("<b>no</b>" if e["published_before_tip"] is False else
+                            '<span class="na" title="no tip time recorded for this game at this '
+                            'cut - the attestation is withheld rather than assumed">undated</span>')),
+                          srclink_url(REPO_BLOB + "data/live/ledger_2026-11-15.json", "ledger")])
+        b.append(table(["Date", "Matchup", "Strat", "Market", "Side", "Price stand-in", "Originated",
+                        "pick sha256", "chain", "Published before tip", "Source"], lrows,
+                       note="Full 64-hex digests are in <code>data/live/ledger_2026-11-15.json</code>; the page "
+                            "prints the first 16 so a reader can spot-check. Chain head "
+                            "<code>%s</code>. The blob these were hashed from is <code>%s</code>."
+                            % (esc(ledger["chain_head"][:24]), esc(ledger["git_blob"][:12]))))
+
+    # ---- horizon slate ----
+    b.append(h2("The rolling horizon, re-read from the official date cards",
+                "%d games, 2026-11-15 to 2026-11-18. Records are the ones printed on the cards, cross-checked "
+                "against the standings page read at the same moment." % len(slate["rows"])))
+    hrows = []
+    for r in slate["rows"]:
+        hrows.append([esc(r["date"]), esc(r["time_et"]),
+                      "<b>%s</b>" % esc("%s@%s" % (r["away"], r["home"])),
+                      esc(r["away_rec"]), esc(r["home_rec"]), '<code>%s</code>' % esc(r["game_id"]),
+                      "pre-tip",
+                      srclink_url(r["game_url"], "game page")])
+    b.append(table(["Date", "Tip ET", "Matchup", "Away rec", "Home rec", "Game id", "Status", "Source"],
+                   hrows,
+                   note="All %d games were pre-tip when this ran, so no result and no venue is asserted for "
+                        "them. Venue and city for the 22 games already in the previous snapshot are carried "
+                        "forward with a flag saying so; the 12 games added for 2026-11-18 carry no venue at "
+                        "all, because the card that lists them prints tip times and records but not arenas."
+                        % len(slate["rows"])))
+    for n in slate.get("notes", []):
+        b.append("<p class=\"tnote\">&bull; %s</p>" % esc(n))
+
+    # ---- home court pin + travel ----
+    if pin:
+        b.append(h2("Home court, pinned to the measured home-win rate",
+                    "Three candidate values exist in this repository. They are published beside each other; "
+                    "none is averaged with another."))
+        mm = pin["measured"]
+        prows = [
+            ["Documented assumption", num(pin["assumption_replaced"]["value_points"], 3), "pts",
+             "hard-coded in %s, flagged as an assumption (E-01) - the value is a project choice, not a "
+             "measurement, which is why the pin exists" % ", ".join(
+                 "<code>%s</code>" % x for x in pin["assumption_replaced"]["where"]),
+             srclink_url(REPO_BLOB + "scripts/build_edge_site.py", "where the constant lives")],
+            ["Fitted intercept on holdout residuals",
+             num((pin.get("fitted_on_residials") or {}).get("est"), 3), "pts",
+             "engine/validate.py, disclosed there as estimated on the test window - so it is a fit, "
+             "<em>not</em> an out-of-sample measurement, and it is not the pin",
+             srclink_url(REPO_BLOB + "engine/validate.py", "the fitter")],
+            ["Measured: official results feed (%d games)" % mm["results_feed"]["games"],
+             num(mm["results_feed"]["implied_hca_points"], 3), "pts",
+             "home-win rate <b>%s</b> (Wilson 95%% %s), mean home margin %s pts - from the committed "
+             "per-game finals" % (num(mm["results_feed"]["home_win_rate"], 4),
+                                  mm["results_feed"]["wilson_95"],
+                                  num(mm["results_feed"]["mean_home_margin_points"], 3)),
+             srclink_url("https://www.nba.com/games", "NBA.com Games &amp; Scores")],
+            ["Measured: official standings HOME column (%d home games)"
+             % mm["official_standings_home_column"]["home_games"],
+             num(mm["official_standings_home_column"]["implied_hca_points"], 3), "pts",
+             "league home-win rate <b>%s</b> (Wilson 95%% %s) across %d home games, neutral sites excluded "
+             "because the page books them in their own column"
+             % (num(mm["official_standings_home_column"]["home_win_rate"], 4),
+                mm["official_standings_home_column"]["wilson_95"],
+                mm["official_standings_home_column"]["home_games"]),
+             srclink_url(mm["official_standings_home_column"]["source_url"], "NBA.com standings")],
+            ["<b>PIN adopted for the next freeze</b>", "<b>%s</b>" % num(pin["pinned_hca_points"], 3), "pts",
+             "%s" % esc(pin["pin_basis"]),
+             srclink_url(REPO_BLOB + "data/derived/home_court_pin.json", "pin file")],
+        ]
+        b.append(table(["Estimate", "Value", "Unit", "How it was obtained", "Source"], prows,
+                       note="Conversion for the two measured rows: HCA = sigma &times; Phi&#8315;&sup1;(P(home "
+                            "win)) with sigma = %s points, the spread of a final margin. The published lines "
+                            "still carry %s points - see the adoption note below - because they are frozen and "
+                            "hashed."
+                            % (num(pin["sigma_margin_points"], 1),
+                               num(pin["assumption_replaced"]["value_points"], 1))))
+        ad = pin["adoption"]
+        b.append(banner("info", "When the pin takes effect",
+                        "<p>New freezes price with <b>%s</b> points; the %d already-published picks keep "
+                        "<b>%s</b>. %s</p><p><b>Sensitivity, exactly:</b> %s Moving the pin later would only "
+                        "shift every home margin by the same constant and change no total, so the effect on "
+                        "the published slate is printed here instead of being applied silently.</p>"
+                        % (num(ad["new_freezes_use"], 3), len([1 for _ in (ledger or {}).get("entries", [])]),
+                           num(ad["already_published_lines_use"], 1), esc(ad["why_not_applied_retroactively"]),
+                           esc(ad["sensitivity_note"]))))
+        if lines:
+            shift = (pin["pinned_hca_points"] or 0.0) - (pin["assumption_replaced"]["value_points"] or 0.0)
+            lrows, flips = [], 0
+            for r in lines["rows"]:
+                if r["date"] <= "2026-11-14" or r["model_spread_home"] is None:
+                    continue
+                newm = r["model_spread_home"] + shift
+                fav_now = "home" if r["model_spread_home"] < 0 else ("away" if r["model_spread_home"] > 0 else "even")
+                fav_new = "home" if newm < 0 else ("away" if newm > 0 else "even")
+                if fav_now != fav_new:
+                    flips += 1
+                lrows.append([esc(r["date"]), "<b>%s</b>" % esc(r["matchup"]),
+                              num(r["ref_spread_home"]), num(r["model_spread_home"]),
+                              "<b>%s</b>" % num(newm),
+                              "%s &rarr; %s" % (fav_now, fav_new),
+                              srclink_url("https://www.nba.com/game/%s-vs-%s-%s"
+                                          % (r["away"].lower(), r["home"].lower(), r["game_id"]), "game page")])
+            b.append(table(["Date", "Matchup", "Reference home margin", "Published model margin",
+                            "Model margin under the pin", "Favourite", "Source"], lrows,
+                           note="Applying the pin moves the model's home margin by %+.3f points on every game "
+                                "and flips the favourite on %d of the %d un-tipped horizon rows. This table is "
+                                "what the pin <em>would</em> do; it is not applied to the frozen picks."
+                                % (shift, flips, len(lrows))))
+        tr = pin["travel"]
+        b.append(banner("warn", "Travel distance: not modelled, and here is what would close it",
+                        "<p>%s</p><p>%s</p><p>%s</p>" % (esc(tr["status"]), esc(tr["what_would_close_it"]),
+                                                           esc(tr["why_not_filled_in"]))))
+        try:
+            sys.path.insert(0, os.path.join(ROOT, "engine"))
+            import home_court
+            legs = home_court.same_city_legs(load(os.path.join(RAW, "schedule_upcoming.json")),
+                                             load(os.path.join(RAW, "games_completed.json")))
+        except Exception:
+            legs = {}
+        if legs:
+            b.append(table(["Team", "Leg", "Next city", "Changed city?", "Source"],
+                           [[esc(t), "consecutive fixtures inside the horizon window", esc(x["to_city"]),
+                             "yes" if x["changed_city"] else "<b>no - same arena</b>",
+                             srclink_url("https://www.nba.com/games?date=" + str(x["from_date"]),
+                                         "official date card")]
+                            for t, xs in sorted(legs.items()) for x in xs],
+                           note="The one travel fact the official pages state outright, with no coordinate "
+                                "table: which of a team's consecutive games are in the city it is already in. "
+                                "A same-city back-to-back is a different load from a cross-country one, and "
+                                "until distances exist the model treats them identically - which is a "
+                                "limitation of the rest term, printed rather than hidden."))
+
+    # ---- injury editions ----
+    if ediff:
+        b.append(h2("Injury report: consecutive editions diffed",
+                    "Both editions of 11/15 were read in full - %s and %s - and diffed row by row."
+                    % (esc(ediff["edition_a"]), esc(ediff["edition_b"]))))
+        b.append(banner("info", "What the 15 minutes between them changed",
+                        "<p>%d status changes, %d rows appearing, %d leaving. %s</p>"
+                        % (len(ediff.get("status_changes", [])), len(ediff.get("players_appearing", [])),
+                           len(ediff.get("players_leaving", [])), esc(ediff.get("irregularity", "")))))
+    b.append(h2("Flagged for review from this roll",
+                "Everything the roll could not close, with the source that would close it."))
+    irows = [[esc(t), srclink_url(REPO_BLOB + "data/live/gates_2026-11-15.json", "roll record")]
+             for t in gates.get("irregularities_for_review", [])]
+    b.append(table(["Irregularity or gap", "Source"], irows,
+                   note="Also carried into <a href=\"flagged.html\">Flagged for Review</a> so the page that "
+                        "gates publication and this page cannot drift apart."))
+    return page("Day roll 2026-11-15",
+                "The 11/14 slate settled, the horizon extended to 11/18, the injury report moved to the newest "
+                "official edition, and every published pick carries a hash and a settlement stamp.",
+                "\n".join(b))
 
 
 # ------------------------------------------------- official source check page
@@ -1622,9 +1968,32 @@ def main():
                              if " & " not in r["matchup"]})
     n_flags = len(flagged["items"])
     body = []
+    # The rolling horizon comes from the raw official snapshot, which a day roll advances; the
+    # priced line set comes from the last freeze. They are different numbers on purpose, and the
+    # landing page shows both rather than letting the frozen one masquerade as "today's slate".
+    roll = {}
+    try:
+        rsched = load(os.path.join(RAW, "schedule_upcoming.json"))
+        rc = rsched["cols"]
+        roll["games"] = len(rsched["rows"])
+        roll["dates"] = sorted({r[rc.index("date")] for r in rsched["rows"]})
+        roll["rolled"] = (rsched.get("roll") or {}).get("at_utc", "")
+        roll["session"] = (rsched.get("roll") or {}).get("session", "")
+    except (OSError, ValueError, KeyError):
+        pass
+    if roll.get("games"):
+        rng = "%s to %s" % (roll["dates"][0][5:].replace("-", "/"), roll["dates"][-1][5:].replace("-", "/"))
+        tile_horizon = ("Games in the rolling horizon", roll["games"],
+                        "%s, today + the maximum 3 days ahead; re-read %s by <code>%s</code>"
+                        % (rng, esc(roll["rolled"][:10]), esc(roll.get("session", ""))))
+    else:
+        tile_horizon = ("Games in horizon", n_games, "%s&ndash;%s Nov 2026 (today + 3 days)"
+                        % (horizon[0][8:], horizon[-1][8:]))
     body.append(tiles([
-        ("Games in horizon", n_games, "14&ndash;17 Nov 2026 (today + 3 days)"),
-        ("Originated lines", n_games, "spread, total and fair moneyline per game"),
+        tile_horizon,
+        ("Priced lines in the last freeze", n_games,
+         "spread, total and fair moneyline per game; %s&ndash;%s Nov, the slate that was frozen and hashed"
+         % (horizon[0][8:], horizon[-1][8:])),
         ("Paper picks, single-leg", n_singles,
          "%d of %d games &middot; +%d two-leg combos = %d plays; none market-validated"
          % (n_games_with_pick, n_games, n_leg_combo, n_picks)),
@@ -1740,20 +2109,22 @@ def main():
     except (OSError, KeyError):
         pass
     if xcb:
-        body.append(banner("warn", "Two models, two different lines - which one is authoritative?",
+        body.insert(0, banner("warn", "HEADLINE: the two independent estimators disagree on %d of %d games"
+                              % (xcb["disagree_over_0.5"], xcb["matchups_compared"]),
             "<p>Every game below carries a line from the <b>validated model</b> "
             "(<code>engine/pipeline.py</code>, the one tested on %d out-of-sample games). A second, independent "
             "line-origination model (<code>RecordLine-1</code>, <code>scripts/originate_horizon.py</code>) produces "
-            "its own spread for the same games. They are <b>different models, not two renderings of one number</b>: "
-            "on the %d games they share they differ on %d, and on %d of those the two disagree about which team is "
-            "the favourite (largest gap %.1f points).</p>"
+            "its own spread for the same games. They are <b>different models, not two renderings of one number</b>, "
+            "and on %d of the shared games the two disagree about which team is the favourite "
+            "(largest gap %.1f points).</p>"
             "<p><b>The line shown on this page is the authoritative one</b> because it is the only one whose error has "
             "been measured out of sample. Do not average the two and do not treat the second as a second opinion on "
-            "the same estimate - it is a different, unmeasured model. The full row-by-row comparison is in "
+            "the same estimate - it is a different, unmeasured model. <b>No blended rating is published "
+            "anywhere on this site</b>: the disagreement is the finding, and it is quantified row by row. The "
+            "full comparison is in "
             "<a href=\"site/pages/source-check.html\">Official Source Check</a>, section 5. Choosing between them, or "
             "retiring one, is an open decision (flag F26, suggestion SG15).</p>"
-            % (back["metrics"]["n_games"], xcb["matchups_compared"], xcb["disagree_over_0.5"],
-               xcb["opposite_favourite"], xcb["max_abs_difference"])))
+            % (back["metrics"]["n_games"], xcb["opposite_favourite"], xcb["max_abs_difference"])))
 
     body.append(h2("Horizon at a glance", "Every game in the window, with the originated line, the reference line and the difference between them."))
     body.append(table(
@@ -1878,9 +2249,12 @@ def main():
                    "capped at a quarter unit or held back as research-only, and that cap is shown on the "
                    "leaderboard. <strong>No pick here is market-validated</strong>, because no official price "
                    "feed exists; a win would mean the model beat a naive model, not that it beat a book.</p>"))
-    built["picks.html"] = page("Lines &amp; picks",
-                                "Originated spread, total and moneyline for all %d games in the horizon, and the "
-                                "gated paper picks built on them." % n_games, "\n".join(b))
+    _sub = ("Originated spread, total and moneyline for all %d games of the %s freeze, and the gated paper "
+            "picks built on them. The rolling horizon is currently %d games (%s) and is <b>not</b> re-priced "
+            "here: re-pricing would move a set whose pick hashes are already published, so a new freeze is a "
+            "decision, recorded on <a href=\"day-roll.html\">Day Roll &amp; Settlement</a>."
+            % (n_games, horizon[0], roll.get("games", n_games), rng if roll.get("games") else "n/a"))
+    built["picks.html"] = page("Lines &amp; picks", _sub, "\n".join(b))
 
     # === props =============================================================
     b = [h2("Player projections", "Per-player points, rebounds, assists, threes and PRA, projected from official season averages adjusted for pace, opponent and availability.")]
@@ -1971,6 +2345,24 @@ def main():
             esc(r.get("confidence")),
             srclink(sources, r.get("src")),
         ])
+    _rawinj = None
+    try:
+        _rawinj = load(os.path.join(RAW, "injuries.json"))
+    except (OSError, ValueError):
+        _rawinj = None
+    if _rawinj and _rawinj.get("report") and _rawinj["report"] != injs.get("report"):
+        b.append(banner("warn", "These rows are the edition the published lines were cut from - not the newest read",
+                        "<p>The table below is <b>%s</b>, because that is the report the frozen lines were "
+                        "priced from and a line re-cut after publication cannot be graded. This build has "
+                        "since read a later edition, <b>%s</b> (revised %s, retrieved %s, %d rows), stored at "
+                        "<code>data/raw/injuries.json</code> and diffed against its predecessor on "
+                        "<a href=\"day-roll.html\">Day Roll &amp; Settlement</a>. Feeding the newer edition "
+                        "into the availability layer would move published lines, so it is a freeze decision "
+                        "(Q25 / SG33), not an integration step.</p>"
+                        % (esc(injs.get("report") or "the frozen edition"), esc(_rawinj["report"]),
+                           esc(_rawinj.get("edition_revision_time") or "time not stamped"),
+                           esc(_rawinj.get("retrieval_time") or "time not stamped"),
+                           len(_rawinj.get("rows", [])))))
     b.append(table(
         ["Date", "Matchup", "Team", "Side", "Player", "Status", "Reason", "Status weight",
          "Season min", "Min share", "Team lost share", "Impact (net rtg)", "Confidence", "Source"],
@@ -1979,10 +2371,83 @@ def main():
              "Team lost share and the impact figure are a measured LOWER BOUND: only players with known minutes "
              "can contribute. Confidence is the engine's own statement of how much of the rotation the report "
              "covers."))
+    _raw_stamp = ""
+    try:
+        _ri = load(os.path.join(ROOT, "data", "raw", "injuries.json"))
+        if _ri.get("report") and _ri["report"] != injs.get("report"):
+            _raw_stamp = ("<p><b>The newest official read is a later edition than the rows below.</b> The "
+                          "table on this page is the edition the published lines were cut from; this build has "
+                          "since read <b>%s</b> (revised %s, retrieved %s, %d rows, source <a href=\"%s\">the "
+                          "official PDF</a>) and stored it in <code>data/raw/injuries.json</code>. It has "
+                          "deliberately <b>not</b> been fed into the availability layer: doing so would move "
+                          "every published line, and the picks are frozen and hashed. Re-cutting is a freeze "
+                          "decision (Q25, SG33), not an integration step.</p>"
+                          % (esc(_ri["report"]), esc(_ri.get("edition_revision_time", "")),
+                             esc(_ri.get("retrieval_time", "")), len(_ri.get("rows", [])),
+                             esc(_ri.get("source_url", ""))))
+    except (OSError, ValueError):
+        pass
     b.append(banner("info", "Report edition in use",
-                     "%s. Source: %s. Rows for a team that had not filed at this edition are recorded with status "
-                     "<em>NOT YET SUBMITTED</em> exactly as published; they are never filled in."
-                     % (esc(injs["report"]), srclink(sources, injs["src"]))))
+                    "%s. Source: %s. Rows for a team that had not filed at this edition are recorded with status "
+                    "<em>NOT YET SUBMITTED</em> exactly as published; they are never filled in.%s"
+                    % (esc(injs["report"]), srclink(sources, injs["src"]), _raw_stamp)))
+    # The brief requires the injury page to show WHEN the report was revised and WHEN we read it:
+    # an 06:15 a.m. edition and an 08:00 p.m. edition are not the same document, and a page that
+    # prints only "the injury report" hides a lag the reader needs to price.
+    raw_inj = {}
+    try:
+        raw_inj = load(os.path.join(ROOT, "data", "raw", "injuries.json"))
+    except (OSError, ValueError):
+        pass
+    ed_rows = []
+    for k, lbl in (("edition_revision_time", "Report revision time (as the edition labels itself)"),
+                   ("retrieval_time", "Retrieved by this build"),
+                   ("report", "Edition in the snapshot the rows below were cut from"),
+                   ("captured_at_utc", "Snapshot capture stamp (UTC)")):
+        ed_rows.append([esc(lbl), esc(raw_inj.get(k)) if raw_inj.get(k) else NA,
+                        srclink_url(raw_inj.get("source_url"), "official injury PDF")
+                        if raw_inj.get("source_url") else NA])
+    ediff = None
+    liv = os.path.join(ROOT, "data", "live")
+    if os.path.isdir(liv):
+        ds = sorted(f for f in os.listdir(liv) if f.startswith("injury_edition_diff_"))
+        if ds:
+            ediff = load(os.path.join(liv, ds[-1]))
+    if ediff:
+        d_rows = []
+        _lbl = {"status_changes": "status changed", "players_appearing": "newly listed",
+                "players_leaving": "no longer printed"}
+        for k in ("status_changes", "players_appearing", "players_leaving"):
+            for x in ediff.get(k, []):
+                if k == "status_changes":
+                    what = "<b>%s &rarr; %s</b>" % (esc(x.get("from")), esc(x.get("to")))
+                elif k == "players_appearing":
+                    what = "listed <b>%s</b> &mdash; %s" % (esc(x.get("status")), esc(x.get("reason")))
+                else:
+                    what = "dropped from the next edition &mdash; %s" % esc(x.get("reason"))
+                d_rows.append([esc(_lbl[k]), esc(x.get("game_date")), esc(x.get("matchup")),
+                               esc(x.get("team")) if x.get("team") else "not printed by this edition",
+                               esc(x.get("player")), what,
+                               srclink_url(raw_inj.get("source_url", ""), "the official PDF")])
+        b.append(h2("Consecutive-edition diff",
+                    "%s compared with %s - the league republishes the report every 15 minutes on game days, so a "
+                    "status is only meaningful with the edition it came from. %s"
+                    % (esc(ediff.get("edition_b")), esc(ediff.get("edition_a")),
+                       esc(ediff.get("irregularity")) if ediff.get("irregularity") else "")))
+        b.append(table(["Direction", "Game date", "Matchup", "Team", "Player", "What changed", "Source"],
+                       d_rows or [["status changes", NA, NA, NA, NA,
+                                   "none between these two editions (%d rows vs %d): the 15 minutes between them "
+                                   "moved nothing. That is a finding, not an empty table."
+                                   % (ediff.get("rows_a", 0), ediff.get("rows_b", 0)),
+                                   srclink_url(raw_inj.get("source_url", ""), "official PDF")]],
+                       note="Both editions are stored (data/raw/injuries.json and the capture in "
+                            "verify/2026-11-15-e3ebc423/injury_editions_2026-11-15.json), so the diff can be "
+                            "re-run by anyone: scripts/roll_2026_11_15.py recomputes it from the two row sets."))
+    b.append(table(["Stamp", "Value", "Source"], ed_rows,
+                   source_col="Source",
+                   note="The revision time is the edition's own published label (the same instant the official "
+                        "index prints as e.g. &quot;6:15 a.m ET report&quot;); the retrieval time is when this "
+                        "build read it. A 15-minute lag is visible here rather than hidden."))
     gd_path = os.path.join(ROOT, "data", "derived", "gameday_read.json")
     if os.path.exists(gd_path):
         b.insert(0, banner("warn", "There is a newer official edition than the one behind these numbers",
@@ -2526,6 +2991,9 @@ def main():
 
     # === live re-verification (session arena/cc5a6652-nba1, COORDINATION section 30) ===
     built["official-verify.html"] = build_official_verify()
+    _dr = build_day_roll(sources)
+    if _dr:
+        built["day-roll.html"] = _dr
 
     # === decisions (session arena/cc5a6652-nba1) =================================
     built["decisions.html"] = build_decisions(questions, suggestions)

@@ -313,6 +313,46 @@
    "priority": "High",
    "source": null,
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/strategies.py"
+  },
+  {
+   "id": "Q22",
+   "question": "Which home-court value governs the next line freeze - the fitted 3.508, the assumption 2.5, or the measured pin 1.053?",
+   "what_is_missing": "The pin is computed and published, and the sensitivity of every published line to it is arithmetic the site already prints (-1.447 points on home margins, zero on totals). What is missing is the decision, because adopting it changes the price the strategy records were graded against: re-freezing with 1.053 makes the settled 60-game window and the new horizon two different models.",
+   "how_to_answer": "Set adopted_for_pricing in data/derived/home_court_pin.json, re-run scripts/build_slate_refresh.py and scripts/generate_picks_d.py, and publish the new pre-registration with the pin inside its ASSUMPTIONS block before the first tip of that slate. Then re-grade the window with the pin as a second, labelled column rather than replacing the first.",
+   "blocks": "Whether the next slate is priced with a number the site has already called too large",
+   "priority": "High",
+   "source": "F71",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/home_court_pin.json"
+  },
+  {
+   "id": "Q23",
+   "question": "Does the results feed require quarter scores for every game, or is an explicit 'not captured' acceptable?",
+   "what_is_missing": "The brief asks for one row per game with date, teams, final and quarter scores. Four of the five rows on 2026-11-14 have them; one does not, because the official summary page would not load in this session's fetch window. Nothing in the repository says which way the feed should behave when a source is unreachable for one game in five.",
+   "how_to_answer": "Decide between (a) leave the cell blank and flagged, as now - the row publishes and the gap is visible; (b) hold the whole slate's settlement until every quarter split is readable, which would have delayed the 11/14 settlement by a day; or (c) accept the gamebook PDF as a secondary source, which requires adding its host to the allowed list in scripts/verify_dashboard.py.",
+   "blocks": "Whether the settlement pipeline may stall on one unreadable page",
+   "priority": "Medium",
+   "source": "F73",
+   "source_url": "https://www.nba.com/game/chi-vs-min-0022600235"
+  },
+  {
+   "id": "Q24",
+   "question": "What is the registered source for per-player game logs, now that the roll publishes a real prop slate?",
+   "what_is_missing": "Four published prop picks cannot be settled because no allowed host gives this build a per-player box score (F69), and the minutes-coverage column on the props page is computed from season averages for the same reason. The requirement to capture per-player game logs for at least the players on an injury report is therefore still unmet for every date, including the one just rolled.",
+   "how_to_answer": "Pick one: parse the box-score table on each NBA.com game page (same host as the finals already cited, prints MIN/PTS/REB/AST per player), or register the league's public JSON endpoint and put its host on the allowed list. Then re-run the roll with logs present so prop rows grade and minutes coverage stops being an estimate.",
+   "blocks": "Settlement of S7/S8; the minutes-redistribution column on the props page; prop elasticity",
+   "priority": "High",
+   "source": "F69",
+   "source_url": "https://www.nba.com/game/den-vs-nop-0022600231"
+  },
+  {
+   "id": "Q25",
+   "question": "Should the day roll become a scheduled promotion instead of a session act?",
+   "what_is_missing": "scripts/roll_2026_11_15.py runs 17 freshness and provenance gates, refuses to write if any fails, and merges into the committed snapshots instead of replacing them - but its inputs are captures a session writes by hand. The scheduled job captures into data/raw/_capture_*.json and never promotes, which is why the horizon went a day stale between sessions.",
+   "how_to_answer": "Parameterise the roll by date and call it from refresh-data.yml after the fetch step, gated on the same 17 checks, and have it open a pull request rather than commit. Until then the horizon ages whenever no session runs, and the site's own staleness banners are the only defence.",
+   "blocks": "Whether tomorrow's slate is priced at all if no session runs",
+   "priority": "Medium",
+   "source": "F74",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/roll_2026_11_15.py"
   }
  ]
 }

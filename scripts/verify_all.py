@@ -59,6 +59,8 @@ run("check_site.py")
 run("verify_schedule_c.py")  # Build C: row-by-row schedule check + schedule-verified.html
 run("build_dashboard.py")    # Build D: regenerate the unified site (index.html + site/**)
 run("verify_dashboard.py")   # Build D: linked or explicit no-source rows; hosts checked, values not re-fetched
+run("check_injury_editions.py")  # injury index parse (AM + PM), revision/retrieval stamps, edition diff
+run("pin_home_court.py")         # re-derive the home-court pin from the committed captures (writes data/derived/)
 
 # 4a: slate sources
 slate = load("slate_full")
