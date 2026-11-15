@@ -72,6 +72,17 @@ jobs:
         continue-on-error: true
         run: python3 engine/fetch_official.py
 
+      # Freshness + provenance gate: per the project brief, nothing is rebuilt
+      # or promoted on stale or unsourced data. The gate writes
+      # data/raw/_capture_gate_report.json and fails the run on any violation;
+      # captures are still published below so a verifier sees exactly what went
+      # wrong, and the promotion PR body carries the report.
+      - name: Freshness and provenance gate (before any rebuild or promotion)
+        id: gate
+        if: always()
+        continue-on-error: true
+        run: python3 engine/gate_refresh.py
+
       - name: Record the run
         run: |
           python3 - <<'PY'
@@ -83,6 +94,10 @@ jobs:
           s["workflow_ref"] = "${{ github.ref }}"
           s["fetch_outcome"] = "${{ steps.fetch.outcome }}"
           s["build_outcome"] = "${{ steps.build.outcome }}"
+          s["gate_outcome"] = "${{ steps.gate.outcome }}"
+          g = os.path.join("data", "raw", "_capture_gate_report.json")
+          if os.path.exists(g):
+              s["gate_report"] = json.load(open(g)).get("status")
           json.dump(s, open(p, "w"), indent=1)
           print(json.dumps(s, indent=1))
           PY
@@ -133,6 +148,15 @@ jobs:
           changed = ", ".join(s.get("changed", [])) or "(none)"
           failed = "; ".join(f"{k}: {v}" for k, v in s.get("failed", [])) or "(none)"
           check_tail = (check.stdout + check.stderr).strip()[-1500:]
+          gate_lines = ""
+          gp = os.path.join("data", "raw", "_capture_gate_report.json")
+          if os.path.exists(gp):
+              g = json.load(open(gp))
+              gate_lines = (
+                  f"- freshness + provenance gate: **{g.get('status')}** "
+                  f"({len(g.get('failed', []))} failures)\n")
+              for f_ in g.get("failed", [])[:10]:
+                  gate_lines += f"  - `{f_['check']}` {f_['target']}: {f_['detail']}\n"
           body = (
               "## Automated official-data refresh (captures only)\n\n"
               "Opened by the `Refresh official data` workflow. **No committed "
@@ -144,11 +168,14 @@ jobs:
               f"- ref: {s.get('workflow_ref')}\n"
               f"- fetch step: {s.get('fetch_outcome')}\n"
               f"- build step: {s.get('build_outcome')}\n"
+              f"{gate_lines}"
               f"- captures changed: {changed}\n"
               f"- problems: {failed}\n"
               f"- `scripts/check_site.py` exit: {check.returncode}\n\n"
               "```\n" + check_tail + "\n```\n\n"
               "### Review before merging\n\n"
+              "- **A FAILING FRESHNESS/PROVENANCE GATE BLOCKS PROMOTION**: do not\n"
+              "  rebuild or promote from this run until the listed failures are fixed.\n"
               "- Diff each changed capture against the official URL recorded inside it.\n"
               "- Promote a row into a committed snapshot only after re-checking it on\n"
               "  the official page - never from this PR alone.\n"
