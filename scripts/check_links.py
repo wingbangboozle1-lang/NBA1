@@ -43,6 +43,10 @@ APPROVED_HOSTS = {
     # Same allowlist entry verify_integration.py already carries (commit 0954d3d); without it the
     # deploy gate fails on every push (session arena/697fca1e-nba1, I-W09).
     "wingbangboozle1-lang.github.io",
+    # U.S. Census Bureau: the federal statistical source for the arena-coordinate
+    # table (2025 Gazetteer of incorporated places). Coordinates only; every
+    # basketball statistic still comes from an NBA-operated source.
+    "www2.census.gov",
 }
 
 HREF = re.compile(r'href="([^"]+)"')

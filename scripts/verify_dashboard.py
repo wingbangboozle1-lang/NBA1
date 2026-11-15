@@ -26,7 +26,12 @@ ALLOWED = {"www.nba.com", "nba.com", "official.nba.com", "ak-static.cms.nba.com"
            "cdn.nba.com", "docs.github.com", "github.com", "kansspelautoriteit.nl",
            "www.kansspelautoriteit.nl", "www.monumentalsportsnetwork.com",
            "nbatickets.nba.com", "a.data.nba.com", "www.peacocktv.com",
-           "www.amazon.com", "nbatv.com"}
+           "www.amazon.com", "nbatv.com",
+           # U.S. Census Bureau: the federal statistical source for the
+           # arena-coordinate table (2025 Gazetteer of incorporated
+           # places). It supplies coordinates only; every basketball
+           # statistic still comes from an NBA-operated source.
+           "www2.census.gov"}
 
 errors = []
 PAGES = [os.path.join(ROOT, "index.html")]

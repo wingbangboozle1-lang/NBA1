@@ -62,7 +62,15 @@ def load(path):
 # (label, filename under site/pages, blurb)
 CATEGORIES = [
     ("HORIZON", None, "The next three days of NBA games and the lines we originate for them."),
+    ("Projection surface", "projection.html", "The model view of the next three days: two independent estimators, their disagreement, travel, rest and the rotation impact of the injury report. No picks on this page."),
+    ("Bet surface (gated)", "bet.html", "The release surface. A play appears only when its strategy has cleared every registered validation gate."),
     ("Lines &amp; Picks", "picks.html", "Originated spread, total and fair-moneyline for every game in the horizon, and the gated paper picks built on them."),
+    ("Official Results &amp; Settlement", "results.html", "One row per official game: date, teams, final score and quarter scores, plus the settlement of every published pick against the official finals."),
+    ("Two Estimators", "estimators.html", "The two independent estimators, the home-court advantage pinned to the measured home-win rate, the possession-based total and the market-anchored prior."),
+    ("Minutes Redistribution", "minutes.html", "Per-team top-8 minutes shares and the explicit replacement of the minutes a player loses when the report rules them out."),
+    ("Player Game Logs", "player-logs.html", "Minutes, points, rebounds, assists and the opponent for every player on the injury report, read from the official box scores."),
+    ("Injury-Report Archive", "injury-editions.html", "Every official injury edition stored with its timestamp and content hash, and the status changes detected between consecutive editions."),
+    ("Sealed Ledger", "ledger.html", "The tamper-evident pick ledger and the frozen pre-registration file for every strategy."),
     ("Player Props", "props.html", "Per-player projections and prop combinations, with the minutes coverage stated next to every number."),
     ("Prop Variance &amp; Rotation", "prop-variance.html", "Game-to-game dispersion measured from official game logs: the uncertainty behind every prop, the minutes-to-production elasticity, and what the injury report changed since the lines were cut."),
     ("Injuries &amp; Rotation", "injuries.html", "The official injury report, the rotation minutes it implies, and the measured production impact."),
@@ -1591,6 +1599,16 @@ def main():
     meta = load(os.path.join(DATA, "meta.json"))
     lines = load(os.path.join(DATA, "lines.json"))["rows"]
     picks = load(os.path.join(DATA, "picks.json"))
+    # The 2026-11-15 rolling-slate build (session arena/48727fe1-nba1) re-cuts the
+    # horizon from the fresh official capture, so its lines and picks win when the
+    # derived files exist. The older set stays in the sealed ledger, which is where
+    # a superseded pick belongs.
+    _RS = os.path.join(ROOT, "data", "derived", "rolling_slate_2026_11_15")
+    if os.path.exists(os.path.join(_RS, "lines_view.json")):
+        lines = load(os.path.join(_RS, "lines_view.json"))["rows"]
+        _newp = load(os.path.join(_RS, "picks.json"))
+        if _newp:
+            picks = _newp
     props = load(os.path.join(DATA, "props.json"))["rows"]
     injs = load(os.path.join(DATA, "injuries.json"))
     flow = load(os.path.join(DATA, "gameflow.json"))["rows"]
@@ -1821,6 +1839,18 @@ def main():
     built["index.html"] = landing
 
     # === picks =============================================================
+    def _rot(r):
+        """The rotation-availability cell: the share of each team's minutes the
+        official injury report puts at risk. A blank means the report carried no
+        row for that team, which is a fact about the report and not an estimate."""
+        h = r.get("home_rotation_availability")
+        a = r.get("away_rotation_availability")
+        if h is None and a is None:
+            return NA
+        hs = ("H %.1f%%" % (100 * h)) if h is not None else "H -"
+        as_ = ("A %.1f%%" % (100 * a)) if a is not None else "A -"
+        return esc("%s / %s" % (hs, as_))
+
     b = [h2("Originated lines for every game in the horizon",
             "Spread, total and fair moneyline originated from official team ratings, shown against the naive "
             "reference line the model has to beat.")]
@@ -1839,12 +1869,14 @@ def main():
             ("H " + num(r["home_rest_days"], 0) + " / A " + num(r["away_rest_days"], 0))
             if (r["home_rest_days"] is not None or r["away_rest_days"] is not None) else NA,
             esc(r["home_report_status"]), esc(r["away_report_status"]),
+            _rot(r),
             srclink(sources, r["src"]),
         ])
     b.append(table(
         ["Date", "Tip ET", "Matchup", "Away", "Home", "Venue", "Ref home margin", "Model home margin",
          "Spread edge", "Ref total", "Model total", "Total edge", "P(home)", "Fair ML home",
-         "Fair ML away", "Rest days H/A", "Home injury status", "Away injury status", "Source"],
+         "Fair ML away", "Rest days H/A", "Home injury status", "Away injury status",
+         "Rotation availability", "Source"],
         rows,
         note="SIGN CONVENTION: 'Ref spread' and 'Model spread' are both the projected HOME MARGIN (home minus away), "
              "not a book-style home spread. A NEGATIVE value means the home team is projected to lose by that many "
@@ -1915,6 +1947,28 @@ def main():
 
     # === injuries ==========================================================
     b = [h2("Injury report read-out", "One row per official injury-report line, with the minutes it implies and the impact it carries.")]
+
+    # The banner must carry BOTH the report's own revision time and the moment
+    # this repository retrieved it: they are different facts and a reader needs
+    # both to judge how current the injury read is.
+    _ie = load(os.path.join(ROOT, "data", "derived", "rolling_slate_2026_11_15",
+                            "injury_editions.json"))
+    if _ie:
+        _live = [e for e in _ie.get("editions", [])
+                 if e.get("http_status") == 200 and e.get("rows")]
+        if _live:
+            _newest = sorted(_live, key=lambda e: e["edition_id"])[-1]
+            b.insert(0, banner("info", "Injury report: revision time and retrieval time",
+                "<p>The newest official injury-report edition this build read is the "
+                "<b>%s</b> edition. Its <b>revision time</b> is <b>%s ET</b> (the time the "
+                "league published it, printed on the PDF itself); the <b>retrieval time</b> is "
+                "<b>%s UTC</b>, when this repository fetched it. %d rows were read from it.</p>"
+                "<p>Every edition the league published in the rolling window is stored "
+                "byte-for-byte with its own timestamp and SHA-256, and consecutive editions "
+                "are diffed so a status change is visible rather than inferred: "
+                "<a href=\"injury-editions.html\">the archive and the diffs</a>.</p>"
+                % (_newest.get("edition_id"), _newest.get("revision_time_et"),
+                   _newest.get("fetched_at_utc"), len(_newest.get("rows") or []))))
 
     # The site's model is built on the 11/13 07:30 PM ET edition. A newer edition was
     # read on 2026-11-14 and is strictly better information; it is shown here as a
@@ -2568,6 +2622,18 @@ def main():
     pv = os.path.join(ROOT, "data", "derived", "prop_variance.json")
     if os.path.exists(pv):
         shutil.copyfile(pv, os.path.join(SITE_DATA, "prop_variance.json"))
+
+    # The 2026-11-15 rolling-slate build owns its own pages (projection and bet
+    # surfaces, the official result feed, the sealed ledger, the two estimators,
+    # the minutes redistribution, the player logs and the injury archive). It is
+    # called here so one command regenerates the whole site.
+    try:
+        import build_rolling_slate_2026_11_15 as RS
+        RS.build_into(built)
+    except SystemExit:
+        raise
+    except Exception as exc:                            # noqa: BLE001
+        print("WARNING: the 2026-11-15 rolling-slate pages were not rebuilt: %r" % (exc,))
 
     print("Wrote %d pages, assets and data to %s" % (len(built), SITE))
 
