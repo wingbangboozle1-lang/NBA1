@@ -1,0 +1,28 @@
+{
+ "pages": {
+  "traditional": {
+   "page_url": "https://www.nba.com/stats/teams/traditional",
+   "http_status": 200,
+   "sha256": "964fd0c8f855aa7155d9db484e12f226190218b00014acb8608bb8fb3d7f8fd1",
+   "bytes": 322680,
+   "fetched_at_utc": "2026-11-15T11:37:02Z",
+   "stored_path": "data/captures/2026-11-15/raw/stats_page_traditional.html"
+  },
+  "opponent": {
+   "page_url": "https://www.nba.com/stats/teams/opponent",
+   "http_status": 200,
+   "sha256": "c179b4cc7bcd582085b7388444d48e6d4b0490446d0467076e06c420c617d615",
+   "bytes": 322617,
+   "fetched_at_utc": "2026-11-15T11:37:02Z",
+   "stored_path": "data/captures/2026-11-15/raw/stats_page_opponent.html"
+  },
+  "advanced": {
+   "page_url": "https://www.nba.com/stats/teams/advanced",
+   "http_status": 200,
+   "sha256": "61cfe9824991842149fbaab3715ce05b74670e8bdbaea2868af76cbc8b353ddc",
+   "bytes": 322617,
+   "fetched_at_utc": "2026-11-15T11:37:03Z",
+   "stored_path": "data/captures/2026-11-15/raw/stats_page_advanced.html"
+  }
+ }
+}
