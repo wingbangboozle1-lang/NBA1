@@ -112,13 +112,52 @@ HREF_ATTR_RE = re.compile(r'\s+href="[^"]*"')
 FINAL_RE = re.compile(r"\bFinal(?:/OT\d*)?\b", re.I)
 RECORD_RE = re.compile(r"\b\d{1,2}-\d{1,2}\b")
 
-# Injury-report editions are published at fixed times on game days. The first
-# three names are proven to exist for 2026-11-13 (HTTP 200 in the probe
-# record); 07_30PM is included because a session captured that edition name
-# from the official index page. An edition that returns 403 is recorded as
-# unavailable at capture time - ak-static answers 403 both for absent objects
-# and for some clients, so 403 is never treated as proof of absence.
+# Injury-report editions: fallback candidate times, used ONLY when the official
+# index page cannot be read. The real list is parsed from the index (see
+# parse_injury_index) - hard-coding these was a defect.
+#
+# Why the fixed list is only four PM names and a generated AM sweep: on
+# 2026-11-15 the hub (https://official.nba.com/nba-injury-report-2026-27-season/)
+# listed the day's editions at 15-minute increments from 12:00 a.m. ET to
+# 06:15 a.m. ET, i.e. the NEWEST report of the day is an AM edition. The previous
+# hard-coded tuple ("12_00PM", "03_00PM", "05_15PM", "07_30PM") is blind to every
+# one of them: a run at 11:15 UTC (06:15 ET) would walk past the newest file and
+# either 404 on PM names that do not exist yet or fall back to yesterday's report.
+# The PM anchors are kept because editions at 12:00/3:00/5:15/7:30 PM were proven
+# to exist on 2026-11-13 (HTTP 200 in data/raw/_capture_injury_probe.json).
+#
+# An edition that returns 403 is recorded as unavailable at capture time -
+# ak-static answers 403 both for absent objects and for some clients, so 403 is
+# never treated as proof of absence.
 INJURY_EDITION_TIMES = ("12_00PM", "03_00PM", "05_15PM", "07_30PM")
+# The game-day AM window the league actually publishes in: every 15 minutes from
+# midnight to the 11 a.m. filing window (etiquette per the hub's own deadline
+# text). Generated, not enumerated, so a schedule change does not silently retire it.
+INJURY_AM_EDITION_TIMES = tuple(
+    "%02d_%02dAM" % (h, m)
+    for h in (0, 1, 2, 3, 4, 5, 6)
+    for m in ((0, 15, 30, 45) if h not in (0,) else (0, 15, 30, 45))
+)
+
+
+def edition_revision_time(edition):
+    """The revision time a report claims for itself, taken from its own filename.
+
+    Returns (iso_utc, human_et) or (None, None) for a name we cannot parse. The
+    hub prints the same instant as e.g. "6:15 a.m ET report" for
+    Injury-Report_2026-11-15_06_15AM.pdf, so the two agree; the value is
+    reported next to the retrieval time so a reader can see the lag.
+    """
+    m = re.search(r"(\d{4})-(\d{2})-(\d{2})_(\d{2})_(\d{2})(AM|PM)\.pdf$", edition)
+    if not m:
+        return None, None
+    y, mo, d, hh, mm, ampm = m.groups()
+    hour24 = int(hh) % 12 + (12 if ampm == "PM" else 0)
+    # ET in November is EST = UTC-5; the ISO stamp is the UTC equivalent of the
+    # printed ET revision time, so "newer than" comparisons are single-number.
+    iso = "%s-%s-%sT%02d:%02d:00Z" % (y, mo, d, (hour24 + 5) % 24, int(mm))
+    human = "%s-%s-%s %02d:%02d ET" % (y, mo, d, hour24, int(mm))
+    return iso, human
 INJURY_HOST = "https://ak-static.cms.nba.com/referee/injury/"
 
 # The stats API behind the cited team-advanced page. The resource name and
@@ -349,13 +388,17 @@ def parse_schedule(text):
 
 # --------------------------------------------------------------- injury index
 def parse_injury_index(text):
-    # Edition names look like Injury-Report_2026-11-13_05_15PM.pdf: the date
-    # contains hyphens. The pre-execution version of this pattern used
-    # [0-9_]+ after the prefix, which can never consume "2026-11-13" and so
-    # returned zero editions on every page - found by the unit test in
-    # COORDINATION.md section 15 (R02) before the first executed run.
+    # Edition names look like Injury-Report_2026-11-13_05_15PM.pdf and
+    # Injury-Report_2026-11-15_06_15AM.pdf: the date contains hyphens.
+    # Two defects lived here. (1) [0-9_]+ after the prefix can never consume
+    # "2026-11-13", so the pattern returned zero editions on every page - found
+    # by the unit test in COORDINATION.md section 15 (R02) before the first
+    # executed run. (2) The suffix was PM-only, so every AM edition - which on
+    # 2026-11-15 is the whole newest-report window, 12:00 a.m. to 6:15 a.m. ET -
+    # was invisible to the job even though the hub links it. AM|PM now.
     links = re.findall(
-        r'https://ak-static\.cms\.nba\.com/referee/injury/(Injury-Report_[0-9\-_]+PM\.pdf)',
+        r'https://ak-static\.cms\.nba\.com/referee/injury/'
+        r'(Injury-Report_[0-9\-_]+(?:AM|PM)\.pdf)',
         text)
 
     def edition_key(name):
@@ -749,21 +792,24 @@ def capture_injury(now, changed, failed, index_editions):
     Every HTTP status is recorded. 403 means 'unavailable to this client at
     this time', never 'does not exist'.
     """
-    candidates = []
-    for e in index_editions[:2]:
-        candidates.append(e)
-    today = datetime.datetime.now(datetime.timezone.utc).date()
-    for delta in (0, 1):
-        day = today - datetime.timedelta(days=delta)
-        for t in INJURY_EDITION_TIMES:
-            name = f"Injury-Report_{day.isoformat().replace('-', '_')}_{t}.pdf"
-            if name not in candidates:
-                candidates.append(name)
+    candidates = list(index_editions[:4])
+    fallback_used = not index_editions
+    if fallback_used:
+        today = datetime.datetime.now(datetime.timezone.utc).date()
+        for delta in (0, 1):
+            day = today - datetime.timedelta(days=delta)
+            for t in INJURY_EDITION_TIMES + INJURY_AM_EDITION_TIMES:
+                name = f"Injury-Report_{day.isoformat().replace('-', '_')}_{t}.pdf"
+                if name not in candidates:
+                    candidates.append(name)
     results = []
     for edition in candidates[:12]:
         url = INJURY_HOST + edition
+        rev_iso, rev_human = edition_revision_time(edition)
         rec = {"edition": edition, "url": url, "http_status": None,
-               "bytes": 0, "sha256": None, "attempts": 0}
+               "bytes": 0, "sha256": None, "attempts": 0,
+               "edition_revision_utc": rev_iso, "edition_revision_printed": rev_human,
+               "retrieved_utc": now}
         # The first executed run saw 200,200 then 403,403... on a tight loop
         # over ak-static - the shape of a rate limit, not of absent files.
         # Space the requests and retry a 403 once before recording it.
@@ -777,7 +823,13 @@ def capture_injury(now, changed, failed, index_editions):
                 if write_if_changed(os.path.join(RAW, f"_capture_injury_pdf_{edition}.json"),
                                     {"captured_at_utc": now, "source_url": url,
                                      "bytes": len(raw), "sha256": rec["sha256"],
-                                     "content_type": "application/pdf"}):
+                                     "content_type": "application/pdf",
+                                     # revision time as the report labels itself (from the
+                                     # published filename) next to the moment we fetched it:
+                                     # the injury page prints both so the lag is visible.
+                                     "edition_revision_utc": rev_iso,
+                                     "edition_revision_printed": rev_human,
+                                     "retrieved_utc": now}):
                     changed.append(f"injury pdf {edition}")
                 log(f"  injury {edition}: 200, {len(raw)} bytes (attempt {attempt})")
                 break
@@ -797,6 +849,12 @@ def capture_injury(now, changed, failed, index_editions):
     if write_if_changed(os.path.join(RAW, "_capture_injury_probe.json"),
                         {"captured_at_utc": now,
                          "results": results,
+                         "candidate_source": ("official index page (newest four links)"
+                                              if not fallback_used else
+                                              "FIXED FALLBACK LIST - the index page could not be "
+                                              "read, so these names are guesses and an absent file "
+                                              "is expected"),
+                         "editions_from_index": len(index_editions),
                          "note": ("HTTP status only. 403 from ak-static.cms.nba.com "
                                   "has been observed both for editions that exist to a "
                                   "browser and for editions that are not published yet; "

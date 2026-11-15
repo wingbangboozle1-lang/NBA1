@@ -38,6 +38,7 @@ on:
     branches: ["arena/**"]
     paths:
       - engine/fetch_official.py
+      - scripts/check_injury_editions.py
       - .github/workflows/refresh-data.yml
 
 permissions:
@@ -72,7 +73,17 @@ jobs:
         continue-on-error: true
         run: python3 engine/fetch_official.py
 
+      # The injury surface carries its own gate, because its failure mode is silent: a parser
+      # that only accepts "…PM.pdf" happily returns yesterday's report and every row downstream
+      # looks fresh. This step proves the index parse sees the 15-minute game-day morning
+      # editions, that the snapshot stores a report-revision time AND a retrieval time, and that
+      # consecutive editions were actually diffed - and it fails the run when they are not.
+      - name: Gate the injury-edition surface
+        id: injury_gate
+        run: python3 scripts/check_injury_editions.py
+
       - name: Record the run
+        if: always()
         run: |
           python3 - <<'PY'
           import json, os, datetime
@@ -83,6 +94,10 @@ jobs:
           s["workflow_ref"] = "${{ github.ref }}"
           s["fetch_outcome"] = "${{ steps.fetch.outcome }}"
           s["build_outcome"] = "${{ steps.build.outcome }}"
+          s["injury_gate_outcome"] = "${{ steps.injury_gate.outcome }}"
+          s["injury_gate_meaning"] = (
+              "pass = the injury index parser sees AM and PM editions, the snapshot carries a "
+              "revision stamp and a retrieval stamp, and a consecutive-edition diff exists")
           json.dump(s, open(p, "w"), indent=1)
           print(json.dumps(s, indent=1))
           PY
@@ -144,6 +159,7 @@ jobs:
               f"- ref: {s.get('workflow_ref')}\n"
               f"- fetch step: {s.get('fetch_outcome')}\n"
               f"- build step: {s.get('build_outcome')}\n"
+              f"- injury-edition gate: {s.get('injury_gate_outcome')}\n"
               f"- captures changed: {changed}\n"
               f"- problems: {failed}\n"
               f"- `scripts/check_site.py` exit: {check.returncode}\n\n"
