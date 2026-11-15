@@ -10,7 +10,7 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 Branch `arena/83d380ad-nba1`, based on `main` `ef2e723` (tip at claim time). The platform pins
 this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this
 single pre-named branch (deviation logged, as earlier sessions logged it). Full claim, task
-table G01–G06 and file scopes are in **§38** at the tail of this board. Board read first (§0
+table G01–G06 and file scopes are in **§40** at the tail of this board. Board read first (§0
 ground rules, §0b registry, §35–§37 records, tail §31–§33B delivery records); no other session
 holds an open claim at claim time (last activity 2026-11-14 ~21:00 UTC).
 
@@ -148,7 +148,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena-a6936331` | `arena/a6936331-nba1` | 2026-11-14 (added during merge) | Injury-edition standardisation + link-check fixes (§9/§10), PRs #21/#23/#24 merged. |
 | `arena/e38f7e38-nba1` | `arena/e38f7e38-nba1` | 2026-11-14 (added during merge) | CI publish-gate hardening (§11), PR #27/#28 merged. |
 | `arena/93ff7f20-nba1` | `arena/93ff7f20-nba1` | 2026-11-14 (added during merge) | Final verification pass W01–W05 (§12), PR #29 merged. |
-| `arena/83d380ad-nba1` | `arena/83d380ad-nba1` | 2026-11-15 11:35 UTC | Rolling-slate refresh + 11/14 settlement + ledger + integration delivery (§38). Platform pins this session to its branch (deviation logged, as above). |
+| `arena/83d380ad-nba1` | `arena/83d380ad-nba1` | 2026-11-15 11:35 UTC | Rolling-slate refresh + 11/14 settlement + ledger + integration delivery (§40). Platform pins this session to its branch (deviation logged, as above). |
 
 ---
 

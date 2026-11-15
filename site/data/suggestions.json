@@ -772,7 +772,7 @@
   },
   {
    "id": "SG31",
-   "title": "Close the OT-column reconciliation (F70) with a full per-game re-read",
+   "title": "Close the OT-column reconciliation (F75) with a full per-game re-read",
    "category": "data quality",
    "problem": "Standings OT columns sum to 9 overtime games through 2026-11-14 while the verified finals show 8. One value is unreconciled and stays flagged.",
    "options": [
@@ -780,13 +780,13 @@
      "option": "A: re-read every game result page from 2026-10-21 (season start) to 2026-11-14 at the next refresh and rebuild the gamelog as the single OT source of truth",
      "effort": "High - ~150 game pages",
      "risk": "Low - additive transcription with source links",
-     "unlocks": "F70 close; full-season result feed the brief asks for"
+     "unlocks": "F75 close; full-season result feed the brief asks for"
     },
     {
      "option": "B: reconcile only the teams whose OT records imply an OT game not in the gamelog (narrower read)",
      "effort": "Low - a handful of team pages",
      "risk": "Low",
-     "unlocks": "F70 close on the flagged value"
+     "unlocks": "F75 close on the flagged value"
     },
     {
      "option": "C: leave the flag open and never use OT counts in any published metric",
@@ -797,7 +797,7 @@
    ],
    "recommendation": "B first (cheap, targeted), then A inside the weekly full re-read that the refresh job already performs.",
    "decision_needed": "Confirm B (targeted) or A (full) so the next refresh allocates the fetch budget accordingly.",
-   "source": "https://www.nba.com/standings (F70)"
+   "source": "https://www.nba.com/standings (F75)"
   }
  ]
 }
