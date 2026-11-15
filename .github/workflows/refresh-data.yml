@@ -79,6 +79,16 @@ jobs:
           python3 engine/pipeline.py
           python3 engine/build_site.py
 
+      - name: Report why rebuilding was blocked
+        if: always() && steps.build.outcome == 'skipped'
+        run: |
+          echo "::warning::Scheduled rebuild was skipped because fetch or freshness/provenance/promotion gates did not pass."
+          if [ "${{ steps.fetch.outcome }}" = "success" ]; then
+            python3 engine/refresh_gate.py --max-age-hours 10 || true
+          else
+            echo "Fetch step outcome: ${{ steps.fetch.outcome }}"
+          fi
+
       - name: Discard generated-site churn only
         if: always() && steps.build.outcome != 'skipped'
         run: git checkout -- docs/data docs/b || true
