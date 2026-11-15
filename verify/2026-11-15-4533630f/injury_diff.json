@@ -1,0 +1,222 @@
+{
+ "title": "Consecutive official injury-report editions, diffed: 11/15 06:15 AM ET vs 11/15 06:15 PM ET",
+ "retrieved_utc": "2026-11-16T00:40Z..00:50Z",
+ "edition_a": {
+  "stamp": "11/15/26 06:15 AM ET",
+  "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+  "the_edition_the_published_model_inputs_used": true
+ },
+ "edition_b": {
+  "stamp": "11/15/26 06:15 PM ET",
+  "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf",
+  "last_edition_listed_on_the_official_index_at_read_time": true
+ },
+ "scope": "First reader chunk of each edition only (IND@PHI, LAL@PHX, CHA@LAC, SAS@UTA, DAL@BOS, NYK@TOR, HOU@WAS, ATL@MIL). Rows printed only in later chunks are not compared and are not claimed unchanged.",
+ "availability_weight_convention": {
+  "Out": 0.0,
+  "Doubtful": 0.25,
+  "Questionable": 0.5,
+  "Probable": 0.8,
+  "Available": 1.0,
+  "(absent)": null
+ },
+ "convention_note": "The weights are the repo's existing convention (scripts/originate_horizon.py STATUS_PLAY_PROB). The two editions' printed status cells are the evidence; the weight only translates them and is labelled as a model convention, not an official value.",
+ "rows_compared": 16,
+ "status_changed": 15,
+ "downgrades": 1,
+ "upgrades": 10,
+ "rows": [
+  {
+   "matchup": "IND@PHI",
+   "team": "Indianapolis Pacers (IND)",
+   "player_as_printed": "McConnell, T.J.",
+   "status_0615AM_et": "Probable",
+   "status_0615PM_et": "Available",
+   "changed": true,
+   "availability_weight_delta": 0.2,
+   "note": "",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "IND@PHI",
+   "team": "Indianapolis Pacers (IND)",
+   "player_as_printed": "Nembhard, Andrew",
+   "status_0615AM_et": "Questionable",
+   "status_0615PM_et": "Out",
+   "changed": true,
+   "availability_weight_delta": -0.5,
+   "note": "downgraded to Out on game day",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "IND@PHI",
+   "team": "Indianapolis Pacers (IND)",
+   "player_as_printed": "Nesmith, Aaron",
+   "status_0615AM_et": "Questionable",
+   "status_0615PM_et": "Available",
+   "changed": true,
+   "availability_weight_delta": 0.5,
+   "note": "",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "IND@PHI",
+   "team": "Philadelphia 76ers (PHI)",
+   "player_as_printed": "Embid, Joel",
+   "status_0615AM_et": "Out",
+   "status_0615PM_et": "Out",
+   "changed": false,
+   "availability_weight_delta": 0,
+   "note": "printed 'Embid' in the 06:15 AM edition, corrected to 'Embiid' in the 06:15 PM edition - a name-keyed diff would treat these as two different players",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "LAL@PHX",
+   "team": "Los Angeles Lakers (LAL)",
+   "player_as_printed": "James, Bronny",
+   "status_0615AM_et": "Questionable",
+   "status_0615PM_et": "Available",
+   "changed": true,
+   "availability_weight_delta": 0.5,
+   "note": "",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "LAL@PHX",
+   "team": "Phoenix Suns (PHX)",
+   "player_as_printed": "Sexton, Collin",
+   "status_0615AM_et": "Questionable",
+   "status_0615PM_et": "Available",
+   "changed": true,
+   "availability_weight_delta": 0.5,
+   "note": "",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "LAL@PHX",
+   "team": "Phoenix Suns (PHX)",
+   "player_as_printed": "Thiero, Adou",
+   "status_0615AM_et": "Questionable",
+   "status_0615PM_et": "Available",
+   "changed": true,
+   "availability_weight_delta": 0.5,
+   "note": "",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "LAL@PHX",
+   "team": "Phoenix Suns (PHX)",
+   "player_as_printed": "Timme, Drew",
+   "status_0615AM_et": "(absent)",
+   "status_0615PM_et": "Out",
+   "changed": true,
+   "availability_weight_delta": null,
+   "note": "row added",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "CHA@LAC",
+   "team": "LA Clippers (LAC)",
+   "player_as_printed": "Martinelli, Nick",
+   "status_0615AM_et": "(absent)",
+   "status_0615PM_et": "Out",
+   "changed": true,
+   "availability_weight_delta": null,
+   "note": "row added",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "SAS@UTA",
+   "team": "San Antonio Spurs (SAS)",
+   "player_as_printed": "Fox, De'Aaron",
+   "status_0615AM_et": "(absent)",
+   "status_0615PM_et": "Out",
+   "changed": true,
+   "availability_weight_delta": null,
+   "note": "row added on game day - a starter-scale absence invisible to the 06:15 AM read",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "DAL@BOS",
+   "team": "Dallas Mavericks (DAL)",
+   "player_as_printed": "(entire team block)",
+   "status_0615AM_et": "NOT YET SUBMITTED",
+   "status_0615PM_et": "8 players submitted",
+   "changed": true,
+   "availability_weight_delta": null,
+   "note": "Aldama, Biberovic, Christie, de Larrea, Gafford (Available), Irving (Out), Lively II, Martin (Available) - the model's edition contained NO Dallas participation data at all",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "DAL@BOS",
+   "team": "Boston Celtics (BOS)",
+   "player_as_printed": "Carter, Devin",
+   "status_0615AM_et": "Questionable",
+   "status_0615PM_et": "Available",
+   "changed": true,
+   "availability_weight_delta": 0.5,
+   "note": "",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "DAL@BOS",
+   "team": "Boston Celtics (BOS)",
+   "player_as_printed": "Cenac Jr., Christopher",
+   "status_0615AM_et": "Questionable",
+   "status_0615PM_et": "Available",
+   "changed": true,
+   "availability_weight_delta": 0.5,
+   "note": "",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors (TOR)",
+   "player_as_printed": "Barnes, Scottie",
+   "status_0615AM_et": "Questionable",
+   "status_0615PM_et": "Available",
+   "changed": true,
+   "availability_weight_delta": 0.5,
+   "note": "",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "HOU@WAS",
+   "team": "Houston Rockets (HOU)",
+   "player_as_printed": "Adams, Steven",
+   "status_0615AM_et": "Probable",
+   "status_0615PM_et": "Available",
+   "changed": true,
+   "availability_weight_delta": 0.2,
+   "note": "",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  },
+  {
+   "matchup": "HOU@WAS",
+   "team": "Washington Wizards (WAS)",
+   "player_as_printed": "Carrington, Bub",
+   "status_0615AM_et": "Questionable",
+   "status_0615PM_et": "Available",
+   "changed": true,
+   "availability_weight_delta": 0.5,
+   "note": "",
+   "source_0615AM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "source_0615PM": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+  }
+ ]
+}
