@@ -3508,3 +3508,49 @@ committed `data/official/gamelog.json` transcription). Every new flag row carrie
 the SG23 workflow fix; deploys now complete instead of being cancelled. Nothing here claims the
 *newest* head (`99a7043`+) is rendered — its own deploy serialises and completes under SG23, and each
 push's deploy supersedes the last.
+
+---
+
+## 40. Session `arena/48727fe1-nba1` — 2026-11-15 rolling-slate refresh, dual-estimator model, sealed ledger (claimed 2026-11-15 11:35 UTC)
+
+Branch `arena/48727fe1-nba1`, based on `ef2e723` (`main`, tip at claim time). The platform pins this
+session to that single branch, so the `session-<id>/<task>` naming in the brief is satisfied by this
+pre-named branch (same deviation logged in §21, §23, §24, §27, §28, §31, §38).
+
+**Board read before claiming (2026-11-15 11:30–11:35 UTC).** `main` = `ef2e723`. One other seat is
+live: `arena/7eb1c20a-nba1`, §38, claiming `engine/fetch_official.py`,
+`.github/workflows/refresh-data.yml`, `engine/refresh_gate.py`, `scripts/test_refresh_gate.py`
+(scheduled-refresh freshness/provenance gate). **This session does not touch any of those four
+paths** and does not re-do that task; the refresh work here is additive and lives in new files
+with new names, so the two claims cannot collide. No other seat has an open claim.
+
+### Task board — session `arena/48727fe1-nba1`
+
+| # | Task | Status | File scope (exclusive) | Plan |
+| --- | --- | --- | --- | --- |
+| A01 | Board read + claim, pushed before any other edit | done | `COORDINATION.md` (§40 only) | This section; pushed immediately (ground rule 4). |
+| A02 | Official capture harness for the 2026-11-15 rolling slate: schedule/slate pages, per-game box scores (final + quarter scores + player box), standings, the three official team-stat pages (traditional / opponent / advanced), injury index + every PDF edition with timestamp + sha256, and a sourced arena-coordinate table | in progress | `scripts/capture_official_2026_11_15.py`, `.github/workflows/capture-official-2026-11-15.yml`, `data/captures/2026-11-15/**` | Runs on GitHub's runners (the only environment in this project with outbound access to nba.com); commits raw captures + parsed JSON with url, fetch timestamp, sha256. Never overwrites a promoted snapshot. |
+| A03 | Official per-game result feed: one row per game - date, teams, final score, quarter scores - plus settlement from official finals with a visible settlement stamp | unclaimed | `data/results/**`, `site/data/results.json`, `site/pages/results.html` | Rows come only from official box-score pages; a game is settled only when the official page says Final and the quarter lines sum to the final. |
+| A04 | Injury-PDF archive with per-edition timestamp + consecutive-edition diff (status change detection) | unclaimed | `data/injury_editions/**`, `site/data/injury_editions.json`, `site/pages/injuries.html` | Every edition fetched is stored with sha256 and fetch time; diffs computed against the previous stored edition. |
+| A05 | Pre-registration file per strategy (signal, thresholds, universe, exact settlement rule) frozen before its first bet | unclaimed | `data/ledger/preregistration/**`, `site/data/preregistration.json` | Frozen as a hash-addressed document per strategy id; the published content is the file, not a summary. |
+| A06 | Tamper-evident ledger: hash each published pick, publish the hash before tip, verify after settlement | unclaimed | `data/ledger/ledger.json`, `site/data/ledger.json`, `site/pages/ledger.html` | sha256 over the canonical pick payload; pre-tip publish time and post-settlement verification both recorded. |
+| A07 | Projection surface vs bet surface split - never mixed | unclaimed | `site/pages/projection.html`, `site/pages/bet.html`, `site/pages/*.html` (nav only) | `projection` = safe to publish now; `bet` = gated. Two entry points, two navs, no page in both. |
+| A08 | Two independent estimators; publish their disagreement as the headline signal, the blend underneath | unclaimed | `scripts/dual_estimator.py`, `site/data/estimators.json`, `site/pages/model.html` | Estimator A and B computed independently from the same official inputs; headline = |A-B|, blend printed below. |
+| A09 | Home-court advantage pinned to the measured home-win rate (not freely fitted) | unclaimed | `scripts/dual_estimator.py`, `site/data/estimators.json` | HCA term is the measured home-win rate applied as a points term, disclosed as pinned. |
+| A10 | Travel distance from a sourced arena-coordinate table (new column) | unclaimed | `data/derived/travel/**`, `site/data/travel.json` | Coordinates from an official published gazetteer; distance is great-circle between city centroids and is labelled as such. |
+| A11 | Total modelled as possessions x points-per-possession (not an average of team scoring averages) | unclaimed | `scripts/dual_estimator.py`, `site/data/estimators.json` | Both parts measured on official data; the old average-of-averages number is kept only as a labelled comparison. |
+| A12 | Rotation availability as its own column on the picks page | unclaimed | `site/pages/picks.html` | New column, sourced, no value inferred. |
+| A13 | Injuries banner shows the injury-report revision time AND the retrieval time | unclaimed | `site/pages/injuries.html` | Both timestamps come from the capture manifest. |
+| A14 | Parlay pricing with the measured rho, printing the naive product next to it | unclaimed | `site/data/correlations.json`, `site/pages/correlations.html` | Where rho is measured, price with it and print the naive product beside it; where rho is only derived, it stays labelled as derived. |
+| A15 | Market-anchored prior: blend the model line with the closing line, weighted by measured out-of-sample log-loss | unclaimed | `scripts/dual_estimator.py`, `site/data/estimators.json` | Weight measured out-of-sample; where no official closing line exists the market leg is left blank and flagged - never filled in. |
+| A16 | Minutes redistribution modelled explicitly: per team the top-8 minutes shares and the replacement shares when a player is out | unclaimed | `data/derived/minutes/**`, `site/data/minutes_redistribution.json` | From official box scores; replacement share allocated over the remaining rotation. |
+| A17 | Re-read the three official team-stat pages and re-cut the model inputs | unclaimed | `data/derived/**` (new files only), `site/data/estimators.json` | Only after A02's captures exist. |
+| A18 | Per-player game logs (minutes, points, rebounds, assists, opponent) for at least the players on an injury report | unclaimed | `data/derived/player_logs/**`, `site/data/player_logs.json` | Derived from official box scores captured in A02. |
+| A19 | Line-by-line verification of everything published above, source links per row, unverified values blank and flagged | unclaimed | `data/content/flagged.json` (append), `site/data/flagged.json`, `verified/data/**` | A new row-level verifier; 0 unmarked rows. |
+| A20 | Final integration: rebuild, gates, PR to `main`, merge, confirm Pages deploy, record the result | unclaimed | repo-wide rebuild of the files this session owns | Only after A01–A19 are done. |
+
+**Explicitly not touched by this session (owned elsewhere or shared by the final integration):**
+`engine/fetch_official.py`, `.github/workflows/refresh-data.yml`, `engine/refresh_gate.py`,
+`scripts/test_refresh_gate.py` (§38, seat `arena/7eb1c20a-nba1`); `engine/**` and `engine_v2/**`
+(legacy builds kept as they are); the pre-existing `site/pages/*.html` bodies except where this
+session's rows above name them.
