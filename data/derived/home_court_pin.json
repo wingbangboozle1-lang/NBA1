@@ -1,0 +1,63 @@
+{
+ "title": "Home-court pinned to the measured home-win rate, and the travel term's status",
+ "sigma_margin_points": 11.0,
+ "conversion": "HCA = sigma * Phi^-1(P(home win)); sigma = 11.0 points, the spread of a final margin",
+ "assumption_replaced": {
+  "value_points": 2.5,
+  "where": [
+   "scripts/build_edge_site.py",
+   "scripts/build_slate_refresh.py",
+   "scripts/generate_picks_d.py"
+  ],
+  "status": "documented assumption (flag E-01), not a measurement"
+ },
+ "fitted_on_residials": {
+  "est": 3.508,
+  "se": 2.28,
+  "t": 1.539,
+  "used": true,
+  "disclosure": "estimated on the test window (in-sample)"
+ },
+ "measured": {
+  "results_feed": {
+   "games": 64,
+   "home_wins": 35,
+   "home_win_rate": 0.5469,
+   "wilson_95": [
+    0.4257,
+    0.6627
+   ],
+   "mean_home_margin_points": 2.0,
+   "implied_hca_points": 1.295,
+   "note": "mean_home_margin_points is the direct arithmetic estimate (no normality assumption); implied_hca_points is the same rate read through the model's margin spread. They differ because the season's home margins are skewed by blowouts on both sides.",
+   "source_url": "https://www.nba.com/games"
+  },
+  "official_standings_home_column": {
+   "home_games": 187,
+   "home_wins": 99,
+   "home_losses": 88,
+   "home_win_rate": 0.5294,
+   "wilson_95": [
+    0.458,
+    0.5996
+   ],
+   "implied_hca_points": 0.811,
+   "excludes": "neutral-site games (the page books them in their own column)",
+   "source_url": "https://www.nba.com/standings"
+  }
+ },
+ "travel": {
+  "status": "NOT MODELLED - no sourced arena-coordinate table exists in this repository",
+  "what_would_close_it": "add data/official/arena_coordinates.json: for each of the 30 arenas, the arena name, the city as printed on the NBA.com game card, and a latitude/longitude pair, each with the URL it was read from and the read time. Great-circle distance is then pure arithmetic and every number on the page stays traceable.",
+  "why_not_filled_in": "no NBA-operated source reachable from this build publishes arena coordinates, and distances from memory would be untraceable values in a table whose whole purpose is traceability.",
+  "source_needed": "https://www.nba.com/teams (arena + address per franchise)"
+ },
+ "pinned_hca_points": 1.053,
+ "pin_basis": "mean of the two measured pins (results feed and standings HOME column). It is published as a PIN, not as a third rating: the model either uses it or it does not, and every page states which. The two measurements and the fitted value are printed beside each other because they disagree.",
+ "adoption": {
+  "new_freezes_use": 1.053,
+  "already_published_lines_use": 2.5,
+  "why_not_applied_retroactively": "the 60 horizon picks are frozen and hashed (data/live/ledger_2026-11-15.json); moving their lines after tip would make the settlement test the pre-registration was written to protect. The pin therefore takes effect at the next freeze, and the sensitivity of every already-published line to it is printed on the day-roll page instead of being applied silently.",
+  "sensitivity_note": "home-court enters the line additively, so the effect of the pin on any published margin is exactly (pinned - 2.5) points, and zero on totals."
+ }
+}

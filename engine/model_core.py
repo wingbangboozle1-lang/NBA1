@@ -52,6 +52,26 @@ ASSUMPTIONS = {
         "unit": "probability-ish weight applied to a player's minute share",
         "status": "MODELLING CHOICE - not taken from any official source. Flagged F4.",
     },
+    "hca": {
+        "value": 2.5,
+        "unit": "points added to the home margin",
+        "status": "ASSUMPTION, and the site says so: three values are in play and they disagree by "
+                  "a factor of four - 2.5 (the hard-coded project assumption, flag E-01), 3.508 (the "
+                  "intercept engine/validate.py fits on holdout residuals, disclosed as in-sample) and "
+                  "1.053 (home court PINNED to the measured league home-win rate, see "
+                  "engine/home_court.py and data/derived/home_court_pin.json). The pin is the value the "
+                  "brief asks for; it takes effect at the next line freeze, because the published picks "
+                  "are frozen and hashed and moving their lines after tip would void the pre-registration.",
+    },
+    "travel_coef": {
+        "value": 0.0,
+        "unit": "net-rating points per 1,000 miles of one-way travel in the last 24 hours",
+        "status": "NOT MODELLED, deliberately: the term exists in code (travel_load below) but its "
+                  "input table - arena latitudes/longitudes with a source URL each - does not, and no "
+                  "NBA-operated source reachable from this build publishes one. Distance is therefore "
+                  "never estimated from memory; the coefficient stays 0.0 and the limitation is printed "
+                  "on the day-roll page together with the file that would close it.",
+    },
     "team_minutes_per_game": {
         "value": 240.0,
         "unit": "5 players x 48 minutes - used to turn a player's minutes into a share of team minutes",
@@ -162,6 +182,36 @@ def apply_availability(line, loss_home=0.0, loss_away=0.0, alpha=None):
     return out
 
 
+def travel_load(away, home, leg_miles=None, coef_key="travel_coef"):
+    """Travel burden as an availability-style margin adjustment, in net-rating points.
+
+    `leg_miles` is a dict {abbr: one-way miles moved in the last 24 h}. It is None until a
+    sourced arena-coordinate table exists (see ASSUMPTIONS["travel_coef"]), in which case this
+    returns zeros and a reason, so callers can print the gap instead of a fabricated number.
+    """
+    coef = ASSUMPTIONS.get(coef_key, {}).get("value", 0.0)
+    if not leg_miles or not coef:
+        return {"home": 0.0, "away": 0.0,
+                "applied": False,
+                "reason": ("no sourced arena-coordinate table, so no miles; the term is 0.0 rather "
+                           "than an estimate" if not leg_miles else
+                           "miles known, coefficient 0.0 pending a measured travel effect"),
+                "miles": leg_miles or {}}
+    return {"home": -coef * leg_miles.get(home, 0.0) / 1000.0,
+            "away": -coef * leg_miles.get(away, 0.0) / 1000.0,
+            "applied": True, "reason": "travel_coef %s pts per 1,000 miles" % coef,
+            "miles": leg_miles}
+
+
+def pinned_hca():
+    """The measured home-court value, if a freeze has adopted it. None means 'leave params alone'."""
+    try:
+        import home_court
+        return home_court.hca_override()
+    except Exception:                                          # noqa: BLE001
+        return None
+
+
 def reference_line(table, home, away, flat_hca=2.0):
     """The REFERENCE line we bet against.
 
@@ -197,8 +247,20 @@ def model_line(table, home, away, params, loss_home=0.0, loss_away=0.0,
     line = apply_availability(base,
                               loss_home=loss_home + rest_home,
                               loss_away=loss_away + rest_away)
-    line["margin"] += params.get("hca", 0.0)
-    line["hca"] = params.get("hca", 0.0)
+    # Home court: an explicit caller param wins, otherwise the measured pin is used when a
+    # freeze has adopted it. Nothing here silently changes a published line - adoption is a
+    # written flag in data/derived/home_court_pin.json, see engine/home_court.py.
+    hca = params.get("hca")
+    if hca is None:
+        hca = pinned_hca()
+    hca = 0.0 if hca is None else hca
+    line["margin"] += hca
+    line["hca"] = hca
+    line["hca_source"] = ("caller param" if params.get("hca") is not None
+                          else ("pinned to the measured home-win rate" if hca else "no home edge"))
+    tr = travel_load(away, home, params.get("travel_leg_miles"))
+    line["travel"] = tr
+    line["margin"] += tr["home"] - tr["away"]
     line["rest_home"] = rest_home
     line["rest_away"] = rest_away
     return line
