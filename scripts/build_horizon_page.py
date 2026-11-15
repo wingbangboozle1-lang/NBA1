@@ -19,7 +19,7 @@ NAV = [
     ("index.html", "◫&nbsp; Executive summary"),
     ("research.html", "⌁&nbsp; Strategy lab"),
     ("lines.html", "◈&nbsp; Originated lines &amp; picks"),
-    ("picks.html", "▦&nbsp; Horizon lines &amp; picks 14–17 Nov"),
+    ("picks.html", "▦&nbsp; Horizon lines &amp; picks 15–18 Nov"),
     ("gameflow.html", "＋&nbsp; Injuries &amp; game flow"),
     ("slate.html", "▦&nbsp; Upcoming slate"),
     ("schedule-verified.html", "▦&nbsp; Verified schedule"),
@@ -56,7 +56,7 @@ def fmt_record(rest):
     if rd is None:
         if last:
             return f"not known in captured window (last official game seen: {esc(last)})"
-        return "no prior game in captured window (11/11-13)"
+        return "no prior game in captured window (11/11-14)"
     return f"{rd}d{' — B2B' if b2b else ''}"
 
 
@@ -88,7 +88,7 @@ def main():
         a_rows.append(
             f"<tr><td>{esc(g['date'][5:])} · {esc(g['tip_et'])}</td>"
             f"<td><b>{esc(g['away'])} @ {esc(g['home'])}</b><br>"
-            f"<small>records {esc(g['records_pre_11_13'])} ({esc(g['records_status'])})</small></td>"
+            f"<small>records {esc(g['records_as_captured'])} ({esc(g['records_status'])})</small></td>"
             f"<td>{esc(g['proj_away_pts'])} / {esc(g['proj_home_pts'])}</td>"
             f"<td>{esc(g['line_spread_home'])}</td>"
             f"<td>{esc(g['line_total'])}</td>"
@@ -140,10 +140,10 @@ def main():
             f"<td>{badge('review', 'UNVALIDATED')}</td>"
             f"<td>{src_link(s['sources'][0], 'slate')}</td></tr>")
 
-    # ---------------- table E: 11/14 availability detail -------------------------
+    # ---------------- table E: 11/15 availability detail -------------------------
     e_rows = []
     for g in games:
-        if g["date"] != "2026-11-14":
+        if g["date"] != "2026-11-15":
             continue
         for r in g["availability_rows"]:
             e_rows.append(
@@ -166,17 +166,21 @@ def main():
             f"<td><b>{esc(fl['item'])}</b><br><small>{esc(fl['detail'])}</small></td>"
             f"<td>{src_link(fl['source'], 'games in scope' if fl['id'] == 'F-W08' else 'source')}</td></tr>")
     inherited = [
-        ("F-C01", "11/13 final scores not captured at build time (games were live).",
-         "https://www.nba.com/games?date=2026-11-13"),
-        ("F-C02", "Pre-11/13 records on 18 horizon teams (STALE markers kept).",
+        ("F-C01", "CLOSED 2026-11-15: the 2026-11-14 slate is settled from official finals "
+                  "(data/settlement/settlement_2026-11-14.json) with a ledger stamp.",
          "https://www.nba.com/games?date=2026-11-14"),
-        ("F-C03", "The 11/14 noon injury report returned AccessDenied to Build C's fetch.",
-         "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_12_00PM.pdf"),
-        ("F-C06", "The CHI@MIN outlier (this model: spread +29.9, p 0.968) reproduces "
-                  "Build B's flagged +29.7 — extreme early-season CHI ratings; kept, flagged.",
+        ("F-C02", "CLOSED 2026-11-15: records on this page are post-2026-11-14, verified against "
+                  "the official standings capture of 2026-11-15.",
+         "https://www.nba.com/standings"),
+        ("F-C03", "Historical: the 11/14 noon injury report returned AccessDenied to Build C's "
+                  "fetch. Current injury input is the 11/15 06:15 AM ET edition, transcribed "
+                  "verbatim and stored with its timestamp.",
+         "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"),
+        ("F-C06", "Historical: the CHI@MIN outlier of the 2026-11-14 vintage (spread +29.9) settled "
+                  "as a LOSS; the margin was 11. Extreme early-season CHI ratings remain flagged.",
          "https://www.nba.com/game/chi-vs-min-0022600235"),
-        ("F-C07", "This page is the F-C07 closure: picks exist now, with staleness disclosed "
-                  "instead of hidden. Gate/limit caveats remain binding.",
+        ("F-C07", "This page publishes picks with dated inputs disclosed on every row. Gate/limit "
+                  "caveats remain binding: no strategy has passed the validation gates.",
          "https://www.nba.com/schedule"),
     ]
     for fid, txt, u in inherited:
@@ -184,27 +188,58 @@ def main():
             f"<tr><td><b>{esc(fid)}</b></td><td>{badge('info', 'inherited')}</td>"
             f"<td>{esc(txt)}</td><td>{src_link(u, 'source')}</td></tr>")
 
-    # ---------------- live probe block (only if a probe artefact exists) ----------
-    probe_html = ""
-    probe_path = os.path.join(ROOT, "data", "raw", "probe_2026-11-13_finals.json")
-    if os.path.exists(probe_path):
-        pr = load("data/raw/probe_2026-11-13_finals.json")
-        rows = "".join(
-            f"<tr><td>{esc(r.get('matchup'))}</td><td>{esc(r.get('status'))}</td>"
-            f"<td>{esc(r.get('score') or '—')}</td>"
-            f"<td>{src_link(r.get('source_url', ''), 'official game page')}</td></tr>"
-            for r in pr.get("rows", []))
-        ip = pr.get("injury_report_probe", {})
-        probe_html = (
-            '<section class="card"><h2>Live probe at build time (W04)</h2>'
-            f'<p class="card-intro">{esc(pr.get("note", ""))} Captured {esc(pr.get("captured_utc", ""))}. '
-            'Artefact: <a href="data/raw/probe_2026-11-13_finals.json">probe_2026-11-13_finals.json</a>.</p>'
-            '<div class="table-wrap"><table><thead><tr><th>Game (11/13)</th><th>Status at capture</th>'
-            '<th>Score at capture</th><th>Source</th></tr></thead><tbody>' + rows +
-            "</tbody></table></div>"
-            f'<p class="small">Injury-report probe: {esc(ip.get("url", ""))} → '
-            f'{esc(ip.get("result", ""))} at {esc(ip.get("captured_utc", ""))}. '
-            f'{esc(ip.get("interpretation", ""))}</p></section>')
+    # ---------------- settlement + ledger stamp (game-day settlement) ------------
+    stamp_html = ""
+    settle_path = os.path.join(ROOT, "data", "settlement", "settlement_2026-11-14.json")
+    ledger_path = os.path.join(ROOT, "data", "ledger", "ledger.json")
+    if os.path.exists(settle_path):
+        st = load("data/settlement/settlement_2026-11-14.json")
+        sm = st["summary"]
+        s_rows = "".join(
+            f"<tr><td>{esc(r['matchup'])}</td><td>{esc(r['pick_line'] or '—')}</td>"
+            f"<td>{esc(r['away_pts'])}–{esc(r['home_pts'])}</td>"
+            f"<td>{badge('info' if r['result'] == 'WIN' else ('review' if r['result'] == 'LOSS' else 'warn'), r['result'])}</td>"
+            f"<td>{esc(r['units'])}</td><td>{src_link(r['source_game_url'], 'official game page')}</td></tr>"
+            for r in st["singles"])
+        g_rows = "".join(
+            f"<tr><td>{esc(' + '.join(r['legs']))}</td>"
+            f"<td>{badge('info' if r['result'] == 'WIN' else 'review', r['result'])}</td>"
+            f"<td>{esc(r['units'])}</td>"
+            f"<td>{' · '.join(src_link(l['source_game_url'], 'game') for l in r['leg_results'])}</td></tr>"
+            for r in st["parlays"]) + "".join(
+            f"<tr><td>{esc(r['game'])}: {esc(' + '.join(l['leg_text'] for l in r['legs']))}</td>"
+            f"<td>{badge('info' if r['result'] == 'WIN' else 'review', r['result'])}</td>"
+            f"<td>{esc(r['units'])}</td>"
+            f"<td>{' · '.join(src_link(l['source_url'], 'game') for l in r['legs'])}</td></tr>"
+            for r in st["sgp_candidates"])
+        ledger_note = ""
+        if os.path.exists(ledger_path):
+            lg = load("data/ledger/ledger.json")
+            head = lg["head"]
+            ledger_note = (
+                f'<p class="small">Tamper-evident ledger: <a href="data/ledger/ledger.json">data/ledger/ledger.json</a> '
+                f'(hash chain, {len(lg["entries"])} entries, head <code>{esc(head[:16])}…</code>). '
+                f'Pre-tip anchor commit <code>{esc(st["preregistration_check"]["pre_tip_anchor_commit"][:8])}</code> '
+                f'at {esc(st["preregistration_check"]["pre_tip_anchor_time"])} — before first tip '
+                f'{esc(st["preregistration_check"]["first_tip"])}. Verification: '
+                f'<code>python3 scripts/verify_ledger.py</code>. '
+                f'Pre-registration: <a href="data/prereg/Prereg_index.json">data/prereg/</a>.</p>')
+        stamp_html = (
+            f'<section class="card"><h2>Settlement stamp — 2026-11-14 slate (settled {esc(st["settled_at_utc"])})</h2>'
+            f'<p class="card-intro">Sealed ledger settled from official finals at game-day end. '
+            f'Singles record <b>{esc(sm["record"])}</b> ({esc(sm["wins"])}W {esc(sm["losses"])}L '
+            f'{esc(sm["pushes"])}P, {esc(sm["no_bets"])} NO BET), units {esc(sm["singles_units_at_minus110"])} '
+            f'(paper −110); parlays {esc(sm["parlays_won"])}/{esc(sm["parlays_published"])} '
+            f'({esc(sm["parlay_units"])}u); SGP {esc(sm["sgp_won"])}/{esc(sm["sgp_published"])} '
+            f'({esc(sm["sgp_units"])}u). Every ticket was published pre-tip as MODEL OUTPUT — '
+            f"UNVALIDATED, zero stake. Settlement rules and every leg's evidence: "
+            f'<a href="data/settlement/settlement_2026-11-14.json">settlement_2026-11-14.json</a>.</p>'
+            '<div class="table-wrap"><table><thead><tr><th>Single</th><th>Published line</th>'
+            '<th>Final</th><th>Result</th><th>Units</th><th>Source</th></tr></thead><tbody>'
+            + s_rows + '</tbody></table></div>'
+            '<div class="table-wrap"><table><thead><tr><th>Parlay / SGP ticket</th><th>Result</th>'
+            '<th>Units</th><th>Sources</th></tr></thead><tbody>' + g_rows + '</tbody></table></div>'
+            + ledger_note + '</section>')
 
 
     def nav_anchor(item):
@@ -214,18 +249,18 @@ def main():
 
     nav_html = "".join(nav_anchor(item) for item in NAV)
 
-    page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Horizon lines &amp; picks | NBA Lines Lab</title><link rel="stylesheet" href="subpages.css"></head><body><header class="topbar"><div class="top-inner"><a class="brand" href="index.html"><span class="brand-mark">N</span> NBA Lines Lab</a><div class="top-note">Horizon 14–17 Nov 2026 · originated lines · no market feed · model output only</div></div></header><div class="layout"><nav class="side" aria-label="Main navigation"><div class="nav-label">Workspace</div>{nav_html}<div class="side-foot">Every row links to an official NBA source.<br>Blank = unverified, never zero.</div></nav><main class="main">
+    page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Horizon lines &amp; picks | NBA Lines Lab</title><link rel="stylesheet" href="subpages.css"></head><body><header class="topbar"><div class="top-inner"><a class="brand" href="index.html"><span class="brand-mark">N</span> NBA Lines Lab</a><div class="top-note">Horizon 15–18 Nov 2026 · originated lines · no market feed · model output only</div></div></header><div class="layout"><nav class="side" aria-label="Main navigation"><div class="nav-label">Workspace</div>{nav_html}<div class="side-foot">Every row links to an official NBA source.<br>Blank = unverified, never zero.</div></nav><main class="main">
 <p class="crumb">Workspace / Horizon lines &amp; picks</p>
-<header class="page-head"><div class="kicker">F-C07 closure</div><h1>Horizon lines &amp; picks — 14–17 Nov 2026</h1>
-<p>Originated lines for all {len(games)} unplayed games from today through today + 3 days, generated by <code>scripts/originate_horizon.py</code> with the same formulas as <code>lines.html</code>'s engine, and picks generated by <code>scripts/generate_picks.py</code>. Prior sessions declined to publish picks on staleness grounds (F-C07); this page publishes them <em>with the staleness disclosed on every row</em> instead of hidden — no market price is claimed and nothing is a validated bet.</p></header>
+<header class="page-head"><div class="kicker">rolling slate · published before first tip</div><h1>Horizon lines &amp; picks — 15–18 Nov 2026</h1>
+<p>Originated lines for all {len(games)} unplayed games from today through today + 3 days, generated by <code>scripts/originate_horizon.py</code> with the same formulas as <code>lines.html</code>'s engine, and picks generated by <code>scripts/generate_picks.py</code>. Published pre-tip and hash-chained in <a href="data/ledger/ledger.json">the ledger</a>; every input's date is disclosed on every row — no market price is claimed and nothing is a validated bet.</p></header>
 
-<div class="notice warn"><strong>Read this first.</strong> (1) Inputs are dated, not live: team ratings run through games of 2026-11-12; records are pre-11/13; the latest injury report is 11/13 05:15 PM ET (11/14 rows only). (2) No market odds feed exists — market-comparison gates G4/G5 and prop gate G-PROP are <strong>blocked</strong>. (3) <strong>No strategy has passed the validation gates</strong> (Build A 0/8, Build B 0/10): every pick is MODEL OUTPUT — UNVALIDATED, zero stake, paper record only. (4) Home-court advantage is not applied (unsourced; flagged F-W02). See <a href="review.html" target="_blank" rel="noopener">Flagged for review</a>.</div>
+<div class="notice warn"><strong>Read this first.</strong> (1) Inputs are dated, not live: team ratings were re-cut 2026-11-15 from the three official team-stat pages (games through 2026-11-14); records are post-11/14; the latest injury report is 11/15 06:15 AM ET (11/15 rows; 11/16 blocks NOT YET SUBMITTED; 11/17–18 have no rows yet). (2) No market odds feed exists — market-comparison gates G4/G5 and prop gate G-PROP are <strong>blocked</strong>. (3) <strong>No strategy has passed the validation gates</strong> (Build A 0/8, Build B 0/10): every pick is MODEL OUTPUT — UNVALIDATED, zero stake, paper record only. (4) Home-court advantage is not applied (unsourced; flagged F-W02). (5) The 2026-11-14 slate is settled and stamped below; its pre-tip picks are archived and hash-verified. See <a href="review.html" target="_blank" rel="noopener">Flagged for review</a>.</div>
 
-<div class="grid"><article class="metric"><div class="metric-label">Horizon games (14–17 Nov)</div><div class="metric-value">{len(games)}</div><div class="metric-sub">official schedule capture, verified row-by-row twice</div></article><article class="metric"><div class="metric-label">Model picks (singles)</div><div class="metric-value">{n_picks}</div><div class="metric-sub">gate: |spread| ≥ 3.0 — {len(games) - n_picks} PASS</div></article><article class="metric"><div class="metric-label">2-leg parlays published</div><div class="metric-value">{len(parlays)}</div><div class="metric-sub">Fréchet–Hoeffding joint bands, never single numbers</div></article><article class="metric"><div class="metric-label">SGP candidates</div><div class="metric-value">{len(sgp)}</div><div class="metric-sub">MODEL-DERIVED rho; G-PROP blocked</div></article><article class="metric"><div class="metric-label">Strategies past gates</div><div class="metric-value">0</div><div class="metric-sub">Build A 0/8 · Build B 0/10 — zero stake until one passes</div></article></div>
+<div class="grid"><article class="metric"><div class="metric-label">Horizon games (15–18 Nov)</div><div class="metric-value">{len(games)}</div><div class="metric-sub">official schedule capture, game IDs verified in date-card links</div></article><article class="metric"><div class="metric-label">Model picks (singles)</div><div class="metric-value">{n_picks}</div><div class="metric-sub">gate: |spread| ≥ 3.0 — {len(games) - n_picks} PASS</div></article><article class="metric"><div class="metric-label">2-leg parlays published</div><div class="metric-value">{len(parlays)}</div><div class="metric-sub">Fréchet–Hoeffding joint bands, never single numbers</div></article><article class="metric"><div class="metric-label">SGP candidates</div><div class="metric-value">{len(sgp)}</div><div class="metric-sub">MODEL-DERIVED rho; G-PROP blocked</div></article><article class="metric"><div class="metric-label">Strategies past gates</div><div class="metric-value">0</div><div class="metric-sub">Build A 0/8 · Build B 0/10 — zero stake until one passes</div></article></div>
 
-{probe_html}
+{stamp_html}
 
-<section class="card"><h2>A. Originated horizon lines (all {len(games)} games)</h2><p class="card-intro">Spread is home-minus-away (positive = home favoured); totals and spreads are DERIVED by the printed formula; no home-court advantage; dispersion measured from 14 real finals (margin sd {esc(meta['empirical_dispersion']['margin_sd'])}, total sd {esc(meta['empirical_dispersion']['total_sd'])}, n = {esc(meta['empirical_dispersion']['n_margin_games'])}).</p><div class="table-wrap"><table><thead><tr><th>Date · tip</th><th>Matchup (records pre-11/13)</th><th>Proj pts A / H</th><th>Spread (home)</th><th>Total</th><th>P(home win)</th><th>Fair ML (home)</th><th>Availability (latest official report)</th><th>Rest A / H</th><th>Source</th></tr></thead><tbody>{''.join(a_rows)}</tbody></table></div><p class="small">Formula: POSS = pace_home + pace_away − league_pace; PTS = (OffRtg × DefRtg_opp / league_OffRtg) × POSS / 100; SPREAD = PTS_home − PTS_away. Ratings as of 2026-11-13 retrieval (games through 11/12).</p></section>
+<section class="card"><h2>A. Originated horizon lines (all {len(games)} games)</h2><p class="card-intro">Spread is home-minus-away (positive = home favoured); totals and spreads are DERIVED by the printed formula; no home-court advantage; dispersion measured from 28 real finals (margin sd {esc(meta['empirical_dispersion']['margin_sd'])}, total sd {esc(meta['empirical_dispersion']['total_sd'])}, n = {esc(meta['empirical_dispersion']['n_margin_games'])}).</p><div class="table-wrap"><table><thead><tr><th>Date · tip</th><th>Matchup (records post-11/14)</th><th>Proj pts A / H</th><th>Spread (home)</th><th>Total</th><th>P(home win)</th><th>Fair ML (home)</th><th>Availability (latest official report)</th><th>Rest A / H</th><th>Source</th></tr></thead><tbody>{''.join(a_rows)}</tbody></table></div><p class="small">Formula: POSS = pace_home + pace_away − league_pace; PTS = (OffRtg × DefRtg_opp / league_OffRtg) × POSS / 100; SPREAD = PTS_home − PTS_away. Ratings re-cut 2026-11-15 (games through 2026-11-14).</p></section>
 
 <section class="card"><h2>B. Model picks — singles (SINGLE-SPREAD-v1, gate 3.0)</h2><p class="card-intro">{esc(picks_doc['_meta']['validation_state'])}</p><div class="table-wrap"><table><thead><tr><th>Date</th><th>Game</th><th>Pick</th><th>Spread (home)</th><th>Pick prob</th><th>Gate result</th><th>Status</th><th>Source</th></tr></thead><tbody>{''.join(b_rows)}</tbody></table></div></section>
 
@@ -233,15 +268,15 @@ def main():
 
 <section class="card"><h2>D. Same-game prop combos (SGP2-PROP-v1)</h2><p class="card-intro">Player-points OVER pairs at originated lines (floor(season avg) + 0.5). Joint probability uses the MODEL-DERIVED rho from the repo's sgp_rho register — an assumption, not a measured statistic; G-PROP is blocked (no market number, no game-log variance).</p><div class="table-wrap"><table><thead><tr><th>Date</th><th>Game</th><th>Legs (OVER)</th><th>rho</th><th>Joint P (rho / indep.)</th><th>Gates &amp; sigma</th><th>Status</th><th>Source</th></tr></thead><tbody>{''.join(d_rows)}</tbody></table></div></section>
 
-<section class="card"><h2>E. Availability detail — 11/14 rows of the official 11/13 05:15 PM report</h2><p class="card-intro">Verbatim statuses. Impact columns follow the canonical NEW_ABSENCE rule (scripts/injury_impact.py): only a verifiable new absence moves a line — none qualifies here, so no line moves. Blank minutes/points = not verifiable in repo, never zero.</p><div class="table-wrap"><table><thead><tr><th>Game</th><th>Team</th><th>Player</th><th>Status</th><th>Reason</th><th>Min/g</th><th>Pts/g</th><th>Absence class</th><th>Pts removed</th><th>Note</th><th>Source</th></tr></thead><tbody>{''.join(e_rows)}</tbody></table></div></section>
+<section class="card"><h2>E. Availability detail — 11/15 rows of the official 11/15 06:15 AM ET report</h2><p class="card-intro">Verbatim statuses (13 rows carry PDF-inherited team cells, marked in the source capture). Impact columns follow the canonical NEW_ABSENCE rule (scripts/injury_impact.py): only a verifiable new absence moves a line — none qualifies here, so no line moves. Blank minutes/points = not verifiable in repo, never zero.</p><div class="table-wrap"><table><thead><tr><th>Game</th><th>Team</th><th>Player</th><th>Status</th><th>Reason</th><th>Min/g</th><th>Pts/g</th><th>Absence class</th><th>Pts removed</th><th>Note</th><th>Source</th></tr></thead><tbody>{''.join(e_rows)}</tbody></table></div></section>
 
 <section class="card"><h2>Method &amp; provenance</h2><ul class="bullets">
 <li>Lines: <code>scripts/originate_horizon.py</code> → <a href="data/derived/horizon_lines.json">data/derived/horizon_lines.json</a> — identical formulas to Build A's <code>scripts/originate_lines.py</code>.</li>
 <li>Picks: <code>scripts/generate_picks.py</code> → <a href="data/derived/horizon_picks.json">data/derived/horizon_picks.json</a> — gate 3.0 inherited from <code>data/originated_lines.json</code>.</li>
-<li>Schedule input: <a href="data/raw/official_schedule_capture_2026-11-14.json">official schedule capture</a> (36 games, verified twice against <a class="source" href="https://www.nba.com/schedule" target="_blank" rel="noopener">nba.com/schedule</a>).</li>
-<li>Ratings input: <a class="source" href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">NBA.com team advanced stats</a> (retrieved 2026-11-13).</li>
-<li>Dispersion input: official finals of 11/11–11/12 (<a class="source" href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">11 Nov</a>, <a class="source" href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">12 Nov</a>).</li>
-<li>Injury input: <a class="source" href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf" target="_blank" rel="noopener">official 11/13 05:15 PM ET injury report PDF</a> (policy: <a class="source" href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">official.nba.com</a>).</li>
+<li>Schedule input: <a href="data/raw/official_schedule_capture_2026-11-15.json">official schedule capture</a> (34 games, game IDs verified in the official date-card link URLs against <a class="source" href="https://www.nba.com/schedule" target="_blank" rel="noopener">nba.com/schedule</a>).</li>
+<li>Ratings input: the three official team-stat pages re-read 2026-11-15 — <a class="source" href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">advanced</a>, <a class="source" href="https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">traditional</a>, <a class="source" href="https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">opponent</a> (games through 2026-11-14; captures in data/official/).</li>
+<li>Dispersion input: official finals of 11/11–11/14 (<a class="source" href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">11 Nov</a>, <a class="source" href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">12 Nov</a>, <a class="source" href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">13 Nov</a>, <a class="source" href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">14 Nov</a>).</li>
+<li>Injury input: <a class="source" href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf" target="_blank" rel="noopener">official 11/15 06:15 AM ET injury report PDF</a> (policy: <a class="source" href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">official.nba.com</a>).</li>
 </ul></section>
 
 <section class="card"><h2>Flagged for review — this page</h2><p class="card-intro">Published, non-blocking, per the brief. Nothing above hides these.</p><div class="table-wrap"><table><thead><tr><th>ID</th><th>Severity</th><th>Item</th><th>Source</th></tr></thead><tbody>{''.join(flag_rows)}</tbody></table></div></section>

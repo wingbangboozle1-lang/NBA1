@@ -66,9 +66,11 @@
 <a href="../../verified/flagged.html">Flagged (17)</a>
 </div>
     <div class="side-note">
-      <strong>Reading rule.</strong> Every table row links to the official source it
-      came from. A blank cell means the value could not be confirmed from an official
-      source &mdash; it is never filled in by guesswork. See
+      <strong>Reading rule.</strong> Every table row either links to the official source
+      it came from or carries an explicit no-source mark with a stated reason (the mark
+      explains why no official source exists or could confirm the cell). A blank or
+      dashed cell means the value could not be confirmed from an official source &mdash;
+      it is never filled in by guesswork. See
       <a href="flagged.html">Flagged for Review</a>.
     </div>
   </aside>
@@ -193,6 +195,22 @@
 <td><span class="chip bad">no path</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/strategies.py" target="_blank" rel="noopener">official page</a></td>
 </tr>
+<tr id="Q22">
+<td>Q22</td>
+<td>When a same-game-parlay player is inactive at tip, should the whole ticket void or should the leg be removed and the rest settle?</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="no official source exists for this item">&mdash;</span></td>
+</tr>
+<tr id="Q23">
+<td>Q23</td>
+<td>Which price should paper SGP tickets settle at: the model's published joint_prob_rho (fair price) or a fixed -110-per-leg parlay price?</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="no official source exists for this item">&mdash;</span></td>
+</tr>
 <tr id="Q3">
 <td>Q3</td>
 <td>Are the player-prop projections any good?</td>
@@ -242,7 +260,7 @@
 <td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
 </tr>
 </tbody></table></div>
-<p class="fine">18 open, 17 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
+<p class="fine">20 open, 17 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
 <h2 class="sec">The suggestion catalogue, ranked for review</h2><p class="secsub">18 suggestions as they exist in the repository, with the recommendation the repository already makes and the decision it belongs to. Nothing has been implemented.</p>
 <div class="tablewrap">
 <table class="tbl "
@@ -505,6 +523,33 @@
 <td><b>Stop the probe workflow from pushing record commits onto open session branches</b></td>
 <td>probe-official.yml commits its record to arena/** branches and main after each run, which made every open PR CONFLICTING today and churned Pages builds (F68). The pages.yml concurrency fix stopped runs cancelling each other; the record commits still dirty branches.</td>
 <td>(a) or (b); the probe record's job is to evidence reachability, not to ride every session branch.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG29</td>
+<td><span class="chip info">Process</span></td>
+<td><b>Promote refreshed captures into published picks only through the gate suite, never by hand or silently</b></td>
+<td>The scheduled refresh captures official data into capture-only branches/PRs, but promotion into published picks is a separate manual step; a refresh can therefore sit unpromoted (stale site) or be promoted without the gates having run on it (unchecked site). Requested by the independent audit (COORDINATION R-A6).</td>
+<td>A.</td>
+<td>&mdash;</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>SG30</td>
+<td><span class="chip info">operations</span></td>
+<td><b>Adopt the rolling-slate cadence as the standing daily process</b></td>
+<td>The 2026-11-15 session had to hand-run capture, settlement, ledger, horizon roll and rebuild. The brief requires a scheduled job with freshness + provenance gates before rebuild; manual runs do not scale and skip gates silently.</td>
+<td>A. The brief says no waiting for user review and no manual input; A keeps the promotion honest because the gate report travels with the PR and a failing gate blocks the merge.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG31</td>
+<td><span class="chip info">data quality</span></td>
+<td><b>Close the OT-column reconciliation (F70) with a full per-game re-read</b></td>
+<td>Standings OT columns sum to 9 overtime games through 2026-11-14 while the verified finals show 8. One value is unreconciled and stays flagged.</td>
+<td>B first (cheap, targeted), then A inside the weekly full re-read that the refresh job already performs.</td>
 <td>&mdash;</td>
 <td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
 </tr>

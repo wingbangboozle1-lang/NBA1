@@ -668,6 +668,42 @@
 <td>Workflow owner: make the probe commit [skip ci] on session branches too, or push probe records only to main; see suggestion SG28.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/probe-official.yml" target="_blank" rel="noopener">link</a></td>
 </tr>
+<tr>
+<td>F69</td>
+<td>medium</td>
+<td><b>Injury report PDF merged cells: 13 rows lost their Team cell; NYK block absent</b></td>
+<td>In the official 11/15/26 06:15 AM ET edition, 13 continuation rows dropped the Team column during PDF extraction. They are stored with team_inherited=true and team_effective = nearest printed team in the same game block, marked in data/official/injury_2026-11-15_0615AM.json. Separately, New York Knicks (NYK@TOR 11/15) has no rows and no NOT YET SUBMITTED row in the edition; the edition prints NOT YET SUBMITTED rows for unsubmitted teams (Dallas, same slate), so an absent block most likely means no reportable players - recorded, not inferred. Nothing filled; reviewer confirmation requested (Q22).</td>
+<td>data/official/injury_2026-11-15_0615AM.json; picks.html table E (rows marked)</td>
+<td>Re-transcribe the 13 rows from the PDF's visual layout (or the next edition) and confirm the NYK block status; the rolling capture already stores every edition with its timestamp.</td>
+<td class="src"><span class="na" title="source id NBA Official Injury Report 11/15/26 06:15 AM ET is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F70</td>
+<td>low</td>
+<td><b>OT columns on the standings page sum to 9 vs 8 overtime games visible through 2026-11-14</b></td>
+<td>The official standings capture of 2026-11-15 prints OT records summing to 9 games, while the results feed (2026-11-14 slate) and the prior verified finals sets show 8 overtime games through 2026-11-14. One OT column value cannot be reconciled from the pages read on 2026-11-15. Left unreconciled - not guessed. Likely a season-opening OT game outside the captured finals window; a full gamelog re-read at the next refresh closes this.</td>
+<td>data/official/standings_2026-11-15.json (ot column); data/official/gamelog.json</td>
+<td>Reconcile the OT column team-by-team against per-game results for 2026-10-21..11-14 at the next scheduled refresh; publish the corrected gamelog or a reconciliation note.</td>
+<td class="src"><span class="na" title="source id NBA.com Standings (read 2026-11-15) is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F71</td>
+<td>low</td>
+<td><b>Giannis Antetokounmpo 34 points (11/14) settled from the official game-page recap text</b></td>
+<td>The SGP-2 leg Giannis Antetokounmpo OVER 27.5 settles WIN on 34 points. The 34 figure is printed in the official DET@MIA game page's recap and Game Leaders blocks (read live 2026-11-15), but his box-score table row was not among the captured chunks. The box-score row is the stricter source; the value is settled from the official recap and marked here.</td>
+<td>data/settlement/settlement_2026-11-14.json (SGP-2 leg 2)</td>
+<td>Transcribe the DET@MIA box-score row for Antetokounmpo at the next game-day capture and mark the leg box-score-verified.</td>
+<td class="src"><span class="na" title="source id NBA.com official game page DET@MIA (recap + game leaders) is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F72</td>
+<td>low</td>
+<td><b>Venue/city blank for ORL, OKC and DAL home rows in the 2026-11-18 schedule capture</b></td>
+<td>The official date cards for 2026-11-18 do not print venues, and no earlier repo capture contains the home arenas of Orlando, Oklahoma City or Dallas. Those three cells are left blank in data/official/schedule_2026-11-15_to_18.json and data/raw/official_schedule_capture_2026-11-15.json - never inferred from other teams' rows. Every other row's venue is either printed on its date card (11/15-17) or joined by home team from the official 2026-11-14 schedule capture / GAME INFO blocks, with provenance noted in the capture_method field.</td>
+<td>data/official/schedule_2026-11-15_to_18.json; data/raw/official_schedule_capture_2026-11-15.json</td>
+<td>Fill the three venues from the game-page GAME INFO blocks once those games' pages are captured (or from the sourced arena-coordinate table the brief requests).</td>
+<td class="src"><span class="na" title="source id NBA.com games date cards (2026-11-18) + prior official schedule captures is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the

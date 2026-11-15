@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 originate_horizon.py — originate OUR OWN lines for every unplayed game in the
-2026-11-14 .. 2026-11-17 horizon (today + 3 days, per the project brief), closing F-C07.
+2026-11-15 .. 2026-11-18 horizon (today + 3 days, per the project brief).
 
 METHOD = Build A's scripts/originate_lines.py, unchanged:
     POSS_game  = pace_home + pace_away - league_pace
@@ -10,19 +10,21 @@ METHOD = Build A's scripts/originate_lines.py, unchanged:
     TOTAL      = PTS_home + PTS_away
     SPREAD     = PTS_home - PTS_away        (positive = home favoured)
     Home-court advantage: NOT applied (no official source; flagged, as on lines.html).
-    Dispersion: measured from real finals in data/played_games_2026_11_11_12.json.
+    Dispersion: measured from real finals in data/played_games_2026_11_11_12.json
+    + data/played_games_2026_11_13_14.json (28 finals, 2026-11-11..14).
 
 HONESTY RULES (same as the rest of the repo):
     * Every number is (a) an official NBA statistic with its source, or (b) DERIVED,
       with its formula printed beside it, or (c) blank + flagged.
-    * Inputs are STALE relative to the games they project: team ratings run through
-      2026-11-12, records are pre-11/13, and no injury report yet covers 11/15-11/17.
-      Nothing here is hidden: every game row carries an as_of note and a staleness flag.
+    * Inputs are dated, not live: team ratings were re-cut 2026-11-15 from the three
+      official team-stat pages (games through 2026-11-14); records are post-11/14;
+      the latest injury report is 11/15 06:15 AM ET (11/15 rows; 11/16 blocks are
+      printed NOT YET SUBMITTED). Every game row carries an as_of note.
     * No sportsbook price is used or claimed.
     * Availability adjustments: only a verifiable NEW_ABSENCE moves a line
-      (scripts/injury_impact.py canonical rule). For the 11/14 games no absence in the
-      official 11/13 05:15 PM edition can be classified NEW_ABSENCE from evidence in
-      this repo, so NO line moves and every status is published instead.
+      (scripts/injury_impact.py canonical rule). For the 11/15 games no absence in
+      the official 11/15 06:15 AM edition can be classified NEW_ABSENCE from
+      evidence in this repo, so NO line moves and every status is published instead.
 """
 import json
 import math
@@ -33,16 +35,16 @@ from statistics import mean, pstdev
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data")
 
-HORIZON_START = "2026-11-14"
-HORIZON_END = "2026-11-17"
+HORIZON_START = "2026-11-15"
+HORIZON_END = "2026-11-18"
 
-CAPTURE = os.path.join(DATA, "raw", "official_schedule_capture_2026-11-14.json")
+CAPTURE = os.path.join(DATA, "raw", "official_schedule_capture_2026-11-15.json")
 CAPTURE_SOURCE = "https://www.nba.com/schedule"
 
-# Official sources for every input (all verified in-repo by prior sessions)
+# Official sources for every input (all verified in-repo; see verify/2026-11-15-83d380ad/)
 SRC_ADVANCED = "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
 SRC_TRADITIONAL = "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame"
-SRC_INJ_0515 = "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-13_05_15PM.pdf"
+SRC_INJ_0515 = "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
 SRC_INJ_POLICY = "https://official.nba.com/nba-injury-report-2026-27-season/"
 
 STATUS_PLAY_PROB = {"Out": 0.00, "Doubtful": 0.25, "Questionable": 0.50,
@@ -78,22 +80,21 @@ def d(s):
 
 
 def load_horizon_injuries():
-    """Official 11/14 rows from the 05:15 PM 11/13 edition, with the same team-cell
-    carry rule scripts/originate_lines.py applies (05:15 team missing -> carry the
-    03:00 PM team with its source; status always stays 05:15)."""
-    doc = load("injuries_0515.json")
-    rows = doc["rows"] + doc.get("unattributed_rows", [])
-    roster_ref = {r["player"]: r for r in load("injury_report_2026_11_13.json")["rows"]
-                  if r.get("team") and r.get("player")}
+    """Official 2026-11-15 06:15 AM ET edition rows (data/official/injury_2026-11-15_0615AM.json,
+    transcribed verbatim; see the capture's merged_cell_caveat). Rows for the 11/15
+    games only; the 11/16 blocks are printed NOT YET SUBMITTED. team_effective carries
+    the PDF's inherited team for merged-cell rows and is used for the team lookup."""
+    doc = json.load(open(os.path.join(DATA, "official", "injury_2026-11-15_0615AM.json"), encoding="utf-8"))
     out = []
-    for r in rows:
-        if r.get("game_date") != "2026-11-14":
+    for r in doc["rows"]:
+        if r.get("game_date") != "11/15/2026" or not r.get("player"):
             continue
-        if not r.get("team") and r.get("player") and r["player"] in roster_ref:
-            ref = roster_ref[r["player"]]
-            r = dict(r, team=ref["team"],
-                     team_source="carried from 03:00 PM edition; 05:15 PM team cell lost")
-        out.append(r)
+        team = (r.get("team_effective") or "").split(" (inherited")[0]
+        out.append({"matchup": r.get("matchup") or "", "team": team or None,
+                    "player": r["player"], "status": r.get("status"),
+                    "reason": r.get("reason"),
+                    "team_source": ("inherited from PDF merged cells" if r.get("team_inherited")
+                                    else "printed team cell")})
     return out
 
 
@@ -102,11 +103,12 @@ def main():
     cols = cap["cols"]
     rows = [dict(zip(cols, r)) for r in cap["rows"]]
     games = [r for r in rows if HORIZON_START <= r["date"] <= HORIZON_END]
-    assert len(games) == 27, f"expected 27 horizon games, got {len(games)}"
+    assert len(games) == 34, f"expected 34 horizon games, got {len(games)}"
 
     adv = {t["abbr"]: t for t in load("teams_advanced_2026_27.json")["rows"]}
     scoring = {r["abbr"]: r for r in load("teams_scoring_2026_27.json")["rows"]}
-    played = load("played_games_2026_11_11_12.json")["games"]
+    played = (load("played_games_2026_11_11_12.json")["games"] +
+              load("played_games_2026_11_13_14.json")["games"])
     minutes_idx = {p["player"]: p for p in load("players_minutes_2026_27.json")["rows"]}
     players_idx = {p["player"]: p for p in load("players_2026_27.json")["players"]
                    if p.get("min") is not None}
@@ -149,9 +151,10 @@ def main():
 
     def availability_for(away, home, game_date):
         """(label, detail rows) for one game. No line moves: canonical NEW_ABSENCE rule."""
-        if game_date != "2026-11-14":
+        if game_date != "2026-11-15":
             return ("No official injury report covers this game yet "
-                    "(latest edition in repo: 11/13 05:15 PM ET)", [])
+                    "(latest edition in repo: 11/15 06:15 AM ET; 11/16 blocks are "
+                    "printed NOT YET SUBMITTED and 11/17-11/18 have no rows)", [])
         detail = []
         for abbr in (away, home):
             team_rows = []
@@ -177,7 +180,7 @@ def main():
                 pts = pmin["pts"] if pmin else (prow or {}).get("pts")
                 play_prob = STATUS_PLAY_PROB.get(r.get("status"), None)
                 # Canonical rule (scripts/injury_impact.py): only NEW_ABSENCE with verified
-                # production moves a line. No 11/14 player has in-repo evidence that his
+                # production moves a line. No 11/15 player has in-repo evidence that his
                 # absence is new relative to the ratings window, so adjustment stays 0.
                 adj = 0.0 if (pts is not None and cls == "NEW_ABSENCE") else 0.0
                 detail.append({
@@ -194,7 +197,7 @@ def main():
                               "(gp 4 of 12) -> no adjustment" if r["player"] == "Edwards, Anthony"
                               else "absence class UNKNOWN -> no adjustment")),
                 })
-        return ("statuses from the official 11/13 05:15 PM ET edition (11/14 rows); "
+        return ("statuses from the official 11/15 06:15 AM ET edition (11/15 rows); "
                 "no NEW_ABSENCE verifiable -> no line adjustment", detail)
 
     out_games = []
@@ -220,11 +223,9 @@ def main():
             "competition": (f"Emirates NBA Cup — {g['cup_label']}" if g.get("cup_label")
                             else "not printed on official schedule"),
             "tip_et": g["tip_et"],
-            "records_pre_11_13": f"{g['away_record_pre_11_13']} / {g['home_record_pre_11_13']}",
-            "records_status": ("STALE for any team that played 11/13 (F-C02 inherited)"
-                               if "2026-11-13" in team_dates.get(g["home"], [])
-                               or "2026-11-13" in team_dates.get(g["away"], [])
-                               else "pre-11/13 as captured; neither team played 11/13"),
+            "records_as_captured": f"{g['away_record']} / {g['home_record']}",
+            "records_status": ("post-11/14 records captured 2026-11-15 (verified vs "
+                               "standings 2026-11-15); go stale as the slate's games complete"),
             "game_possessions": round(poss, 2),
             "off_rtg_home": h["off_rtg"], "def_rtg_home": h["def_rtg"], "pace_home": h["pace"],
             "off_rtg_away": a["off_rtg"], "def_rtg_away": a["def_rtg"], "pace_away": a["pace"],
@@ -239,9 +240,9 @@ def main():
             "formula": ("POSS = pace_home + pace_away - league_pace; "
                         "PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; "
                         "TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away"),
-            "inputs_as_of": ("team ratings retrieved 2026-11-13, games through 2026-11-12 "
-                             "(gp column of the source table); 11/13 finals were not yet "
-                             "final at build time"),
+            "inputs_as_of": ("team ratings re-cut 2026-11-15 from the three official team-stat "
+                             "pages (traditional, opponent, advanced), games through 2026-11-14; "
+                             "injury statuses from the official 11/15 06:15 AM ET edition"),
             "inputs_source": SRC_ADVANCED,
             "rest_away": {"rest_days": rest_a, "b2b": b2b_a, "last_date": last_a,
                           "derived_from": "official schedule capture + official finals "
@@ -266,55 +267,68 @@ def main():
 
     payload = {
         "_meta": {
-            "title": "Originated horizon lines — 2026-11-14 through 2026-11-17 (27 unplayed games)",
+            "title": "Originated horizon lines — 2026-11-15 through 2026-11-18 (34 unplayed games)",
             "generated_by": "scripts/originate_horizon.py",
-            "generated_utc": "2026-11-14T01:xxZ (built after the 2026-11-13 games tipped; "
-                             "11/13 finals were not yet available)",
+            "generated_utc": "2026-11-15T12:50Z (built after the 2026-11-14 games are final "
+                             "and settled; see data/settlement/settlement_2026-11-14.json)",
             "method": "identical formulas to scripts/originate_lines.py (Build A)",
-            "horizon": "today (2026-11-14 UTC) + 3 days; 11/13 games excluded (in progress "
-                       "at build time; see lines.html for their lines)",
+            "horizon": "today (2026-11-15 UTC) + 3 days; 2026-11-14 games excluded "
+                       "(played and settled)",
             "empirical_dispersion": {
                 "margin_sd": round(margin_sd, 3), "total_sd": round(total_sd, 3),
                 "n_margin_games": len(margins), "n_total_games": len(totals),
-                "source": "https://www.nba.com/games?date=2026-11-11 and "
-                          "https://www.nba.com/games?date=2026-11-12",
-                "caveat": "n=14 (13 for totals). Small sample; directional, not final."},
+                "source": "https://www.nba.com/games?date=2026-11-11, "
+                          "https://www.nba.com/games?date=2026-11-12, "
+                          "https://www.nba.com/games?date=2026-11-13, "
+                          "https://www.nba.com/games?date=2026-11-14",
+                "caveat": ("n=28 (26 for totals). Small sample; directional, not final. "
+                           "Corpus: data/played_games_2026_11_11_12.json + "
+                           "data/played_games_2026_11_13_14.json.")},
             "league_baselines": {"league_pace": round(league_pace, 3),
                                  "league_off_rtg": round(league_off, 3)},
             "flags": [
                 {"id": "F-W01", "severity": "medium",
                  "item": "Repeated matchups printed by the official schedule: POR@MIN on "
                          "both 11/16 and 11/17, NYK@TOR on both 11/15 and 11/17 (same venues).",
-                 "detail": "Two independent sessions transcribed these rows from NBA.com with "
-                           "distinct game IDs; carried as printed and flagged for manual "
-                           "confirmation against the live schedule page.",
+                 "detail": "Rows transcribed from the official schedule with distinct game "
+                           "IDs (verified in the per-game link URLs on 2026-11-15); carried "
+                           "as printed and flagged for manual confirmation.",
                  "source": CAPTURE_SOURCE},
                 {"id": "F-W02", "severity": "high (inherited)",
                  "item": "No home-court advantage in any line.",
                  "detail": "HCA could not be sourced from an official NBA page; home moneylines "
-                           "are understated by exactly the real HCA.",
+                           "are understated by exactly the real HCA. (Build B's measured "
+                           "home-win-rate 57.6% note remains a published finding, not applied.)",
                  "source": CAPTURE_SOURCE},
-                {"id": "F-W03", "severity": "high",
-                 "item": "Stale inputs, disclosed: ratings through 11/12 games; records "
-                         "pre-11/13 (F-C02); 11/13 finals missing at build time (F-C01).",
+                {"id": "F-W03", "severity": "medium",
+                 "item": "Inputs dated, disclosed: ratings re-cut 2026-11-15 (games through "
+                         "11/14); records post-11/14; injury edition 11/15 06:15 AM ET.",
                  "detail": "Every pick built on these lines is labelled MODEL OUTPUT — "
-                           "UNVALIDATED and stamped with this as-of date.",
-                 "source": "https://www.nba.com/games?date=2026-11-13"},
-                {"id": "F-W04", "severity": "high",
-                 "item": "No injury report yet covers 11/15-11/17 games.",
-                 "detail": "Latest official edition in repo is 11/13 05:15 PM ET. Game-day "
-                           "reports (noon ET) had not been published at build time.",
+                           "UNVALIDATED and stamped with this as-of date. Records go stale "
+                           "as the 11/15+ games complete (rolling refresh job).",
+                 "source": "https://www.nba.com/games?date=2026-11-15"},
+                {"id": "F-W04", "severity": "medium",
+                 "item": "No injury report rows cover the 11/16-11/18 games yet.",
+                 "detail": "The official 11/15 06:15 AM ET edition prints NOT YET SUBMITTED "
+                           "for all 11/16 team blocks and no rows for 11/17-11/18. Game-day "
+                           "editions appear 11 a.m.-1 p.m. local per league policy.",
                  "source": SRC_INJ_POLICY},
                 {"id": "F-W05", "severity": "medium",
-                 "item": "DEN@NOP (11/14) printed NOT YET SUBMITTED for both teams.",
-                 "detail": "Verbatim from the official PDF; no status is invented.",
+                 "item": "DAL@BOS (11/15) prints NOT YET SUBMITTED for Dallas; NYK block "
+                         "absent from the edition entirely.",
+                 "detail": "Dallas is on the second game of a back-to-back (league deadline "
+                           "1 p.m. local game day). The edition prints NOT YET SUBMITTED rows "
+                           "for unsubmitted teams, so New York's absent block most likely "
+                           "means no reportable players - recorded, not inferred (F69).",
                  "source": SRC_INJ_0515},
                 {"id": "F-W06", "severity": "medium",
-                 "item": "Edwards, Anthony (MIN) listed Out for 11/14; no line adjustment applied.",
-                 "detail": "His minutes/points are verified (33.7 / 33.3), but no official in-repo "
-                           "evidence classifies the absence as NEW relative to the ratings window "
-                           "(gp 4 of MIN's 12 games: 8 prior misses already in season stats). "
-                           "Canonical NEW_ABSENCE rule (scripts/injury_impact.py) -> adjustment 0.",
+                 "item": "13 injury rows lost their Team cell to PDF merged cells; "
+                         "team_effective inherits the nearest printed team.",
+                 "detail": "Rows are marked team_inherited in "
+                           "data/official/injury_2026-11-15_0615AM.json and are published "
+                           "with that caveat (F69). No line moves: no absence classifies as "
+                           "NEW_ABSENCE from evidence in this repo (canonical rule, "
+                           "scripts/injury_impact.py) -> adjustment 0.",
                  "source": SRC_INJ_0515},
                 {"id": "F-W07", "severity": "high",
                  "item": "No market prices exist anywhere on this page.",
@@ -327,7 +341,7 @@ def main():
                            "capped at zero stake until a strategy passes the gates. Outcomes: "
                            "data/derived/strategies.json (Build A), docs/data/leaderboard.json "
                            "(Build B) — internal artifacts, not official NBA sources.",
-                 "source": "https://www.nba.com/games?date=2026-11-14"},
+                 "source": "https://www.nba.com/games?date=2026-11-15"},
             ],
         },
         "games": out_games,
