@@ -172,6 +172,8 @@ jobs:
               f"- `scripts/check_site.py` exit: {check.returncode}\n\n"
               "```\n" + check_tail + "\n```\n\n"
               "### Review before merging\n\n"
+              "- **A FAILING FRESHNESS/PROVENANCE GATE BLOCKS PROMOTION**: do not\n"
+              "  rebuild or promote from this run until the listed failures are fixed.\n"
               "- Diff each changed capture against the official URL recorded inside it.\n"
               "- Promote a row into a committed snapshot only after re-checking it on\n"
               "  the official page - never from this PR alone.\n"

@@ -383,6 +383,26 @@
 <td>A or B, and who signs the promotion record.</td>
 <td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
 </tr>
+<tr id="SG30">
+<td>SG30</td>
+<td>operations</td>
+<td><b>Adopt the rolling-slate cadence as the standing daily process</b></td>
+<td>The 2026-11-15 session had to hand-run capture, settlement, ledger, horizon roll and rebuild. The brief requires a scheduled job with freshness + provenance gates before rebuild; manual runs do not scale and skip gates silently.</td>
+<td>- A: refresh-data.yml cron captures everything, runs the full pipeline (capture -&gt; verify -&gt; settle -&gt; roll -&gt; rebuild -&gt; gate) and opens a PR with the gate report attached (auto-merge only when all gates pass) <span class='fine'>(effort: Medium - extend the workflow and gate script (drafted in this PR); risk: Low - capture-only commits remain; promotion stays a PR with the gate report; unlocks: The brief's scheduled-job requirement end to end; SG30 decision A)</span><br>- B: cron captures only (current design) and a human/session promotes snapshots by PR <span class='fine'>(effort: None - status quo; risk: Medium - manual steps get skipped under load; no gate report travels with promotion; unlocks: Nothing new)</span><br>- C: cron captures + auto-commits to a data branch; a weekly session promotes <span class='fine'>(effort: Low; risk: Medium - weekly cadence is stale for a rolling slate; unlocks: Some automation)</span></td>
+<td>A. The brief says no waiting for user review and no manual input; A keeps the promotion honest because the gate report travels with the PR and a failing gate blocks the merge.</td>
+<td>Reviewer picks A, B or C before the workflow is extended (the engine additions for standings + teams/traditional + teams/opponent and the gate step are already drafted in this PR as the basis for A).</td>
+<td class="src"><span class="na" title="source id engine/fetch_official.py, .github/workflows/refresh-data.yml (this PR) is not in the register">&mdash;</span></td>
+</tr>
+<tr id="SG31">
+<td>SG31</td>
+<td>data quality</td>
+<td><b>Close the OT-column reconciliation (F75) with a full per-game re-read</b></td>
+<td>Standings OT columns sum to 9 overtime games through 2026-11-14 while the verified finals show 8. One value is unreconciled and stays flagged.</td>
+<td>- A: re-read every game result page from 2026-10-21 (season start) to 2026-11-14 at the next refresh and rebuild the gamelog as the single OT source of truth <span class='fine'>(effort: High - ~150 game pages; risk: Low - additive transcription with source links; unlocks: F75 close; full-season result feed the brief asks for)</span><br>- B: reconcile only the teams whose OT records imply an OT game not in the gamelog (narrower read) <span class='fine'>(effort: Low - a handful of team pages; risk: Low; unlocks: F75 close on the flagged value)</span><br>- C: leave the flag open and never use OT counts in any published metric <span class='fine'>(effort: None; risk: Low but the brief's per-game result feed stays incomplete; unlocks: Nothing)</span></td>
+<td>B first (cheap, targeted), then A inside the weekly full re-read that the refresh job already performs.</td>
+<td>Confirm B (targeted) or A (full) so the next refresh allocates the fetch budget accordingly.</td>
+<td class="src"><span class="na" title="source id https://www.nba.com/standings (F75) is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>
 <div class="tablewrap">

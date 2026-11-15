@@ -1991,6 +1991,34 @@ def main():
                            "diff, the re-priced lines and a row-by-row re-verification of the whole horizon "
                            "are on <a href=\"gameday.html\">Game-Day Injury Read</a>. Those numbers do not "
                            "replace the ones here: a line re-priced after it was frozen cannot be graded."))
+    # Newest-edition banner: report revision + retrieval time (brief requirement).
+    newest_path = os.path.join(ROOT, "data", "official", "injury_2026-11-15_0615AM.json")
+    if os.path.exists(newest_path):
+        _n = load(newest_path)
+        _rows = _n.get("rows", [])
+        _players = sum(1 for r in _rows if r.get("player"))
+        _nys = sum(1 for r in _rows if r.get("status") == "NOT YET SUBMITTED")
+        diff_note = ""
+        diff_path = os.path.join(ROOT, "data", "official",
+                                 "injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json")
+        if os.path.exists(diff_path):
+            _df = load(diff_path)
+            _c = _df.get("counts", {})
+            diff_note = ("Consecutive-edition diff: %d comparable player rows, %d status changes, "
+                         "%d team blocks filed since the previous stored edition "
+                         "(<a href=\"../../data/official/injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json\">diff file</a>)."
+                         % (_c.get("comparable_player_rows", 0), _c.get("status_changes", 0),
+                            len(_df.get("team_blocks_filed_since", []))))
+        b.insert(0, banner("info", "Newest official edition: report revision and retrieval time",
+                           "<p><b>Report revision:</b> %s &nbsp;|&nbsp; <b>retrieved (UTC):</b> %s &nbsp;|&nbsp; "
+                           "<b>rows:</b> %d (%d player rows, %d NOT YET SUBMITTED team blocks). "
+                           "Source: <a href=\"%s\">official PDF</a> (index: <a href=\"%s\">official.nba.com</a>).</p>"
+                           "<p>%s %s</p>"
+                           % (esc(_n.get("revision_time_et")), esc(_n.get("retrieved_utc")),
+                              len(_rows), _players, _nys,
+                              esc(_n.get("source_url")), esc(_n.get("index_url")),
+                              diff_note,
+                              esc(_n.get("merged_cell_caveat", "")))))
     built["injuries.html"] = page("Injuries, rotation and production impact",
                                   "The official injury report for the horizon, what it does to rotation minutes, "
                                   "and the measured effect on a team's net rating.", "\n".join(b))
@@ -2342,9 +2370,101 @@ def main():
                         "at this sample size."
                         % (s_["record"], s_["units_at_minus110"], s_["no_bets"], s_["parlays_won"],
                            s_["parlays_published"] - s_["parlays_won"], s_["model_margin_mae_on_slate"])))
+    # --- settlement of the 2026-11-14 slate (rolling-slate ledger) ---------
+    settle_path2 = os.path.join(ROOT, "data", "settlement", "settlement_2026-11-14.json")
+    if os.path.exists(settle_path2):
+        with open(settle_path2, encoding="utf-8") as fh:
+            st2 = json.load(fh)
+        pre = st2["preregistration_check"]
+        b.append(h2("Settlement stamp - the 2026-11-14 slate (sealed ledger)",
+                    "Every paper pick published before the first tip of 2026-11-15 (anchor commit %s at %s), "
+                    "settled against the official finals at game-day end. Pre-tip bytes verified unchanged "
+                    "at settlement: %s."
+                    % (pre["pre_tip_anchor_commit"][:8], pre["pre_tip_anchor_time"],
+                       "pass" if pre["model_blocks_identical_to_live_file"] else "FAIL")))
+        rows = []
+        for r in st2["singles"]:
+            rows.append([esc(r.get("date")), esc(r.get("matchup")), esc(r.get("pick_side")),
+                         esc(r.get("pick_line")) if r.get("pick_line") else NA,
+                         esc(r.get("gate")),
+                         esc("%d-%d" % (r["away_pts"], r["home_pts"])),
+                         esc(r.get("result")), num(r.get("units"), 2),
+                         srclink_url(r.get("source_game_url"), "official final")])
+        b.append(table(["Date", "Matchup", "Pick", "Line", "Gate at publication",
+                        "Final (away-home)", "Result", "Units (-110)", "Source"], rows,
+                       note="Singles units use the repo's standing -110 convention (win +1.00, loss -1.10); "
+                            "this is a convention, not a market price (flag F3). Gate failures settle NO BET "
+                            "0.00. Grades come from the published pick_line text, not from derived fields."))
+        rows = []
+        for p in st2["parlays"]:
+            legs = "; ".join("%s %s" % (l["leg"], l["result"]) for l in p["leg_results"])
+            rows.append([esc(p.get("date")), esc(legs), esc(p.get("result")), num(p.get("units"), 2),
+                         esc(p.get("units_note")),
+                         srclink_url(p["leg_results"][0].get("source_game_url"), "official final")])
+        for g in st2["sgp_candidates"]:
+            legs = "; ".join("%s %s%s" % (l["leg_text"], l["result"],
+                                          (" %d pts" % l["actual_pts"]) if l.get("actual_pts") is not None else "")
+                             for l in g["legs"])
+            rows.append([esc(g.get("date")), esc("%s: %s" % (g.get("game"), legs)),
+                         esc(g.get("result")), num(g.get("units"), 2),
+                         esc(g.get("void_convention")),
+                         srclink_url(g["legs"][0].get("source_url"), "official box score")])
+        b.append(table(["Date", "Legs (parlay / SGP)", "Result", "Units", "Note", "Source"], rows,
+                       note="SGP legs settle from official box-score points; a leg whose player did not play "
+                            "is VOID and removed; any losing leg loses the stake. Winning SGP tickets pay at "
+                            "the model price frozen at publication (G-PROP blocked, no market price)."))
+        s_ = st2["summary"]
+        b.append(banner("info", "Slate result",
+                        "Gated singles %s (%+.2f units at -110, %d no-bets); two-leg parlays %d-%d "
+                        "(%+.2f); SGP %d-%d (%+.2f). Total %+.2f units on paper. Every ticket was "
+                        "published pre-tip as MODEL OUTPUT - UNVALIDATED, zero stake."
+                        % (s_["record"], s_["singles_units_at_minus110"], s_["no_bets"],
+                           s_["parlays_won"], s_["parlays_published"], s_["parlay_units"],
+                           s_["sgp_won"], s_["sgp_published"], s_["sgp_units"], s_["total_units"])))
+        lg_path = os.path.join(ROOT, "data", "ledger", "ledger.json")
+        if os.path.exists(lg_path):
+            with open(lg_path, encoding="utf-8") as fh:
+                lg = json.load(fh)
+            rows = []
+            for e in lg["entries"]:
+                if e.get("commit"):
+                    src = srclink_url(
+                        "https://github.com/wingbangboozle1-lang/NBA1/commit/" + e["commit"],
+                        "pre-tip anchor commit")
+                else:
+                    src = srclink_url(
+                        "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json",
+                        "ledger file")
+                rows.append([str(e.get("entry")), esc(e.get("type")), esc(e.get("at_utc")),
+                             esc((e.get("prev") or "")[:16]), src])
+            b.append(table(["Entry", "Type", "At (UTC)", "Prev hash", "Source"], rows,
+                           note="Tamper-evident hash chain in data/ledger/ledger.json (verify: "
+                                "python3 scripts/verify_ledger.py). Head: %s. Each entry commits to the "
+                                "previous entry's canonical SHA-256; entry 1 anchors the pre-tip "
+                                "publication, entry 3 seals the settlement record."
+                                % lg["head"][:16]))
+        res_path = os.path.join(ROOT, "data", "official", "results_2026-11-14.json")
+        if os.path.exists(res_path):
+            with open(res_path, encoding="utf-8") as fh:
+                res = json.load(fh)
+            rows = []
+            for r in res["rows"]:
+                rows.append([esc(r.get("date")), esc("%s @ %s" % (r.get("away"), r.get("home"))),
+                             esc("%d-%d" % (r.get("away_pts"), r.get("home_pts"))),
+                             esc("/".join(str(x) for x in r.get("away_quarters", []))),
+                             esc("/".join(str(x) for x in r.get("home_quarters", []))),
+                             esc(r.get("venue")), esc(r.get("attendance")),
+                             srclink_url(r.get("source_url"), "official game page")])
+            b.append(h2("Official per-game results feed - 2026-11-14",
+                        "One row per game: date, teams, final score, quarter scores. Settled only after the "
+                        "final was verified on the official game page (LINESCORES) and the date page; the "
+                        "capture script asserts quarters sum to finals. Stored at data/official/results_2026-11-14.json."))
+            b.append(table(["Date", "Game", "Final (away-home)", "Away quarters", "Home quarters",
+                            "Venue", "Attendance", "Source"], rows))
     built["backtest.html"] = page("Out-of-sample backtest",
                                    "The full test window, every game in it, the parameters the model "
-                                   "was fitted on, and the settlement of the previous slate's paper picks.",
+                                   "was fitted on, and the ledger-sealed settlement stamps of the last "
+                                   "slates' paper picks.",
                                    "\n".join(b))
 
     # === model ==============================================================

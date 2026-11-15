@@ -209,9 +209,9 @@ def main():
 
     payload = {
         "_meta": {
-            "title": "Horizon picks — 2026-11-14 through 2026-11-17",
+            "title": "Horizon picks — 2026-11-15 through 2026-11-18",
             "generated_by": "scripts/generate_picks.py",
-            "generated_utc": "2026-11-14",
+            "generated_utc": "2026-11-15",
             "lines_source": "data/derived/horizon_lines.json (scripts/originate_horizon.py)",
             "pick_gate": {"margin": PICK_GATE_MARGIN,
                           "inherited_from": "data/originated_lines.json assumptions",
@@ -220,8 +220,9 @@ def main():
                                  "Build B 0/10). Every pick is MODEL OUTPUT — UNVALIDATED, "
                                  "unfunded, zero stake. Market-comparison gates G4/G5 and "
                                  "prop-variance gate G-PROP remain BLOCKED (no odds feed)."),
-            "as_of": ("ratings through 2026-11-12; records pre-11/13; latest injury report "
-                      "11/13 05:15 PM ET. 11/13 finals were not yet final at build time."),
+            "as_of": ("ratings re-cut 2026-11-15 from the three official team-stat pages "
+                      "(games through 2026-11-14); records post-11/14; latest injury report "
+                      "11/15 06:15 AM ET (11/15 rows; 11/16 NOT YET SUBMITTED)."),
         },
         "singles": singles,
         "parlays": parlays,

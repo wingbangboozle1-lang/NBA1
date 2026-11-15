@@ -1,0 +1,83 @@
+{
+ "title": "Tamper-evident pick ledger (SHA-256 hash chain)",
+ "chain_rule": "each entry stores the SHA-256 of the previous entry's canonical JSON (sorted keys); genesis = entry 1",
+ "verify_command": "python3 scripts/verify_ledger.py",
+ "entries": [
+  {
+   "entry": 1,
+   "type": "pre_tip_publication",
+   "at_utc": "2026-11-14T22:18:48Z",
+   "commit": "ef2e723e13523b5b2495656c2a4ae5b461244374",
+   "first_tip_utc": "2026-11-15T00:00Z",
+   "files": {
+    "data/archive/horizon_picks_2026-11-14.json": "fd027304b89e505f6a2145c9c82708d92eed5cc2895c6e36e2f2eb9a90d78cdf",
+    "data/archive/horizon_lines_2026-11-14.json": "2b7405421b1efe0d6dd410aba2177d4f859e4f74d26513d0d62c6c75f99bd92f"
+   },
+   "working_paths_at_publication": [
+    "data/derived/horizon_picks.json",
+    "data/derived/horizon_lines.json"
+   ],
+   "note": "Published picks and model lines as committed at the pre-tip anchor. Commit time 2026-11-14T22:18:48Z precedes the first tip (2026-11-15T00:00Z DEN@NOP) by 1h41m. Byte-identical archives are committed to by digest so the chain survives the rolling update.",
+   "prev": "GENESIS"
+  },
+  {
+   "entry": 2,
+   "type": "settlement_verification",
+   "at_utc": "2026-11-15T12:35Z",
+   "verifies_entry": 1,
+   "files_at_settlement": {
+    "data/derived/horizon_picks.json": "fd027304b89e505f6a2145c9c82708d92eed5cc2895c6e36e2f2eb9a90d78cdf",
+    "data/derived/horizon_lines.json": "2b7405421b1efe0d6dd410aba2177d4f859e4f74d26513d0d62c6c75f99bd92f"
+   },
+   "unchanged_since_pre_tip": true,
+   "prev": "da74fc1689097d42596a3c7deebd6076f5b9b8c10e471e59c131a3c4c52bd9c0"
+  },
+  {
+   "entry": 3,
+   "type": "settlement_record",
+   "at_utc": "2026-11-15T12:35Z",
+   "file": "data/settlement/settlement_2026-11-14.json",
+   "sha256": "992796498633d9a98c68de69dba164400be0471d195265a67dc30daea2a37827",
+   "official_finals_file": "data/official/results_2026-11-14.json",
+   "prev": "3c0cceb9e5528be32f67f84a54269795670ae2e609695721119772a1f0db1349"
+  },
+  {
+   "entry": 4,
+   "type": "pre_tip_publication",
+   "at_utc": "2026-11-15T12:55Z",
+   "first_tip_utc": "2026-11-15T18:00Z",
+   "window": "2026-11-15 .. 2026-11-18 (today + 3 days)",
+   "files": {
+    "data/archive/horizon_picks_2026-11-15.json": "82974ede2fa98c5a515f521f39103724ea6165b3e12d8e725ddb2476c5b66dfe",
+    "data/archive/horizon_lines_2026-11-15.json": "534f0cc160c47d4f839793b102afd46a9af854c0f30b5f476956520e2a85e633"
+   },
+   "prereg_files": {
+    "data/prereg/S01.json": "b00a6f9768a7b915a59ce4e4bd3c77c21f2a452deb3e2e00a510c99f690f2ec4",
+    "data/prereg/S02.json": "680ab79a70adcfd2daeffb1d1f92e81773168bed821450d2d4a58930dbc84547",
+    "data/prereg/S03.json": "f6ee2bf864856a097a896ea799adbb4df5f8eb89a5c51fb00ec9f7ddb5ecb508",
+    "data/prereg/S04.json": "6434911bac11adc9374433f02cb9ecabe9787c0fc707b7ae490eff120701ef25",
+    "data/prereg/S05.json": "c92aa70ef8afd4d5d92bce59675d15868b567919d384e7c549da5fb1b43af427",
+    "data/prereg/S06.json": "63cb5efb0acb775f09579225f117ad8babdb65bac4e287dd60e7c532d6146c90",
+    "data/prereg/S07.json": "1bc27d4b2c828bd58555c81854fa91596a69f751fc79d4788124f8c140157e75",
+    "data/prereg/S08.json": "62da594b65fbf24ad370ca3bea633f184becf148f8b3306d4c78328f7b7370d2",
+    "data/prereg/T-SINGLE.json": "9e78f93a12fd67462d798cbced96635b1dc98a6bb26021633f35cdcab5bbafe1",
+    "data/prereg/T-PARLAY.json": "b96442a4c073258481a46381df1ca1dd28a2d57a4b0ff859f5410428b7d94226",
+    "data/prereg/T-SGP.json": "a208126f430e8669b36334e6872f2bcf3b3aad010cec1e439631df7763f04736",
+    "data/prereg/Prereg_index.json": "76c5273861bccb28963df9e1269c01cdeec4b263616b84086499ef72b69146ee"
+   },
+   "model_input_digests": {
+    "data/derived/horizon_picks.json": "82974ede2fa98c5a515f521f39103724ea6165b3e12d8e725ddb2476c5b66dfe",
+    "data/derived/horizon_lines.json": "534f0cc160c47d4f839793b102afd46a9af854c0f30b5f476956520e2a85e633",
+    "data/teams_advanced_2026_27.json": "dc58fa2d95a822aa0dc871ed9e743c521be4879653158b18d2b251cb80aef126",
+    "data/teams_scoring_2026_27.json": "247bc44c3ae850b690b72b2b9cbbe3c501db1142b5b8188c87ace2aa31ce1c8d",
+    "data/raw/official_schedule_capture_2026-11-15.json": "6b6006db8ee4f4c758ea197972a230e6543923a31c8b2529b0f03ce9c366defe",
+    "data/official/injury_2026-11-15_0615AM.json": "8958f9d71e5c2af8ff360edcc10de7f4674c08dd3e5428498945e7cfe040b965",
+    "data/official/results_2026-11-14.json": "187e853de73856cedddd8f4ba79d1096cd5f283beb912663313ee3186cbec8eb",
+    "data/settlement/settlement_2026-11-14.json": "992796498633d9a98c68de69dba164400be0471d195265a67dc30daea2a37827"
+   },
+   "note": "Rolling-slate publication for the 2026-11-15..18 window, generated after the 2026-11-14 games were settled (entry 3) and before the first tip of the window. Preregistration files for every strategy family are frozen by digest here. The 2026-11-14..17 vintage (entry 1) remains settleable from its archives.",
+   "prev": "e6f6be8333f85637eb808ae91fd012260524ab97a2ffdda22b50ad6431a3a08c"
+  }
+ ],
+ "head": "c46e0a37b321679b968ca4aee84a7477a53b2d1f5fa803bd9213672cc310a4bb"
+}

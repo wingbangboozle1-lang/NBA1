@@ -1,6 +1,6 @@
 {
   "title": "Flagged for Review",
-  "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link.",
+  "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md \u00a723): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link.",
   "items": [
     {
       "id": "F1",
@@ -329,7 +329,7 @@
       "id": "F34",
       "severity": "Medium",
       "title": "The repository's gate checks structure, not values",
-      "detail": "The dashboard gate is structural, not a value check: scripts/verify_dashboard.py counts four categories separately — rows with an allowed official source link, explicit no-source marks with an explanatory title, marks whose title carries an approved official URL (rendered as a clickable context link since 2026-11-14), and unmarked rows — and fails only on the last category. It never fetches an NBA page and never compares a published value with its source; scripts/source_check.py is the row-value spot-check, and both were run on the merged tree before every merge (COORDINATION section 35). The original finding stands: a link is not a value check.",
+      "detail": "The dashboard gate is structural, not a value check: scripts/verify_dashboard.py counts four categories separately \u2014 rows with an allowed official source link, explicit no-source marks with an explanatory title, marks whose title carries an approved official URL (rendered as a clickable context link since 2026-11-14), and unmarked rows \u2014 and fails only on the last category. It never fetches an NBA page and never compares a published value with its source; scripts/source_check.py is the row-value spot-check, and both were run on the merged tree before every merge (COORDINATION section 35). The original finding stands: a link is not a value check.",
       "affected": "Trust in 'VERIFY OK' and in every 'verified' label on the site",
       "source": null,
       "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_all.py",
@@ -682,6 +682,38 @@
       "source": null,
       "source_url": "https://www.nba.com/schedule",
       "suggested_action": "Re-read https://www.nba.com/schedule in the next verification pass and compare venue cells row by row."
+    },
+    {
+      "id": "F74",
+      "severity": "medium",
+      "title": "Injury PDF merged cells: 13 rows lost their Team cell; NYK block absent",
+      "detail": "Rows stored with team_inherited and marked; NYK's absent block recorded, not inferred (the reviewer question on the merged-cell reading is Q22).",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+      "status": "open"
+    },
+    {
+      "id": "F75",
+      "severity": "low",
+      "title": "Standings OT columns sum to 9 vs 8 overtime games visible through 2026-11-14",
+      "detail": "Left unreconciled - not guessed. Closes at the next full gamelog re-read (SG31).",
+      "source_url": "https://www.nba.com/standings",
+      "status": "open"
+    },
+    {
+      "id": "F76",
+      "severity": "low",
+      "title": "Giannis Antetokounmpo 34 points (11/14) settled from the official game-page recap",
+      "detail": "Recap + game-leaders blocks read live; the stricter box-score row was not among the captured chunks and is flagged as such.",
+      "source_url": "https://www.nba.com/game/det-vs-mia-0022600233",
+      "status": "open"
+    },
+    {
+      "id": "F77",
+      "severity": "low",
+      "title": "Venue/city blank for ORL, OKC and DAL home rows in the 2026-11-18 capture",
+      "detail": "Date cards do not print venues and no repo capture holds those arenas - left blank, never inferred.",
+      "source_url": "https://www.nba.com/games?date=2026-11-18",
+      "status": "open"
     }
   ]
 }

@@ -313,6 +313,20 @@
    "priority": "High",
    "source": null,
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/strategies.py"
+  },
+  {
+   "id": "Q22",
+   "question": "When a same-game-parlay player is inactive at tip, should the whole ticket void or should the leg be removed and the rest settle?",
+   "why_it_matters": "This decides real settlement outcomes. SGP-1 of 2026-11-14 (Mitchell inactive) is the first live case: leg-removal + any-losing-leg-loses graded it a LOSS; a whole-ticket-void rule would have returned the stake.",
+   "discovery": "The league's own rule for official SGP markets is not published in the sources in this repo. We froze the leg-removal convention in data/prereg/T-SGP.json before the slate and settled with it; a reviewer decision can override it for future slates (the 2026-11-14 settlement is already stamped and would only change under a documented re-settlement).",
+   "status": "answered with a documented default; reviewer confirmation wanted"
+  },
+  {
+   "id": "Q23",
+   "question": "Which price should paper SGP tickets settle at: the model's published joint_prob_rho (fair price) or a fixed -110-per-leg parlay price?",
+   "why_it_matters": "It changes reported units materially (SGP-2 of 2026-11-14 pays +3.36u at the model fair price vs +2.64u at -110 legs).",
+   "discovery": "No market price exists (G-PROP blocked), so any convention is a placeholder. We publish both numbers on the ticket (frozen price and independent product beside it) and settle at the frozen model price, printed on every ticket. Open until a licensed price feed exists (then G4/G5 rules apply).",
+   "status": "open"
   }
  ]
 }
