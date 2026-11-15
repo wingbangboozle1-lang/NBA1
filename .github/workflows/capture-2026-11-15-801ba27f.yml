@@ -1,0 +1,104 @@
+name: Capture official HTML (session 801ba27f)
+
+# Session `arena/801ba27f-nba1`, COORDINATION.md §41 task H02.
+#
+# Purpose: this project's workstations cannot reach nba.com (the sandbox allows
+# github.com / npm / pypi only), so official pages can only be read from a
+# GitHub runner. This workflow executes
+# `scripts/capture_official_801ba27f.py`, which stores every official page it
+# fetches - raw bytes, gzipped, with the exact URL, retrieval timestamp, HTTP
+# status and SHA-256 of the response - and commits that evidence to this
+# branch, where it is parsed and verified locally.
+#
+# Loop-safe:
+#   * it only runs when the capture script or this file changes, or on
+#     workflow_dispatch;
+#   * its own commit message carries [skip ci] [skip probe] [skip capture], so
+#     the commit it pushes does not re-trigger this or any sibling workflow.
+#
+# A data problem must never break the published site: every step that can fail
+# is allowed to, and the evidence is uploaded as an artifact regardless.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [arena/801ba27f-nba1]
+    paths:
+      - scripts/capture_official_801ba27f.py
+      - .github/workflows/capture-2026-11-15-801ba27f.yml
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Capture official pages and injury PDFs
+        id: capture
+        continue-on-error: true
+        run: python3 scripts/capture_official_801ba27f.py
+
+      - name: Show the capture manifest
+        if: always()
+        run: |
+          python3 - <<'PY'
+          import json, os
+          p = "data/raw/html/2026-11-15-801ba27f/_manifest.json"
+          if not os.path.exists(p):
+              print("no manifest produced"); raise SystemExit(0)
+          m = json.load(open(p))
+          print(json.dumps(m.get("counts", {}), indent=1))
+          for r in m.get("pages", []):
+              if r["http_status"] != 200:
+                  print("PAGE PROBLEM:", r["id"], r["http_status"], r.get("error"))
+          for r in m.get("pdfs", []):
+              if r["http_status"] != 200 or not r.get("pdf_signature_ok"):
+                  print("PDF PROBLEM:", r["id"], r["http_status"],
+                        r.get("pdf_signature_ok"), r.get("error"))
+          for r in m.get("box_scores", []):
+              if r["http_status"] != 200:
+                  print("BOXSCORE PROBLEM:", r["id"], r["http_status"], r.get("error"))
+          PY
+
+      - name: Upload the capture as an artifact (survives a failed push)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-capture-2026-11-15-801ba27f
+          path: |
+            data/raw/html/2026-11-15-801ba27f/**
+            data/raw/injury_pdfs/**
+          if-no-files-found: warn
+
+      - name: Commit the capture to this branch
+        if: always() && github.event_name == 'push'
+        run: |
+          set -u
+          git config user.name  "nba1-bot"
+          git config user.email "nba1-bot@users.noreply.github.com"
+          git add data/raw/html/2026-11-15-801ba27f data/raw/injury_pdfs 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No new capture payloads - nothing to publish."
+            exit 0
+          fi
+          git commit -m "chore: capture official HTML + injury PDFs 2026-11-15 [skip ci] [skip probe] [skip capture]"
+          # Another session may push to this branch between checkout and push.
+          # That is not a data problem, so rebase and retry before giving up.
+          for i in 1 2 3 4 5; do
+            if git push; then
+              echo "capture pushed on attempt $i"
+              exit 0
+            fi
+            echo "push raced with another commit; rebasing and retrying ($i/5)"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            sleep $((i * 5))
+          done
+          echo "::warning::could not push the capture after 5 attempts; it is in the run artifact"
+          exit 0
