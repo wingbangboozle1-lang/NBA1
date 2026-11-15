@@ -3508,3 +3508,18 @@ committed `data/official/gamelog.json` transcription). Every new flag row carrie
 the SG23 workflow fix; deploys now complete instead of being cancelled. Nothing here claims the
 *newest* head (`99a7043`+) is rendered — its own deploy serialises and completes under SG23, and each
 push's deploy supersedes the last.
+
+---
+
+## 38. Session `arena/7eb1c20a-nba1` — scheduled refresh freshness/provenance gate (claimed 2026-11-15 UTC)
+
+Branch `arena/7eb1c20a-nba1`, based on `ef2e723` (`main`, branch pinned by Arena).
+
+| # | Task | Status | File scope | Plan |
+| --- | --- | --- | --- | --- |
+| RFG1 | Make refresh inputs explicit and capture the official schedule, standings, team-stat pages (traditional/opponent/advanced), injury index, and official finals feed without overwriting promoted snapshots | in progress | `engine/fetch_official.py` | Record direct official URL, capture timestamp and content digest; fail closed on missing/invalid capture. |
+| RFG2 | Gate builder execution on fresh, provenance-valid captures and equality with promoted inputs; prevent stale or unverified rebuilds | in progress | `.github/workflows/refresh-data.yml`, `engine/refresh_gate.py`, `scripts/test_refresh_gate.py` | Reorder workflow to fetch → validate → build, and test gate pass/fail cases. |
+| RFG3 | Verify and record sources, tests, and limitations | unclaimed | `COORDINATION.md` (§38 only) | Source URLs are official NBA pages/API; no data values are promoted by this task. |
+
+No other files are claimed. Prior historical claims in this board are treated as closed where their own delivery sections report completion; this task does not edit published data, model inputs, or site navigation.
+
