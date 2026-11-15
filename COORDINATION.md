@@ -5,6 +5,17 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/83d380ad-nba1` (opened 2026-11-15 11:35 UTC — rolling-slate refresh, 11/14 settlement, ledger, integration delivery)
+
+Branch `arena/83d380ad-nba1`, based on `main` `ef2e723` (tip at claim time). The platform pins
+this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this
+single pre-named branch (deviation logged, as earlier sessions logged it). Full claim, task
+table G01–G06 and file scopes are in **§38** at the tail of this board. Board read first (§0
+ground rules, §0b registry, §35–§37 records, tail §31–§33B delivery records); no other session
+holds an open claim at claim time (last activity 2026-11-14 ~21:00 UTC).
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/f7f6c46e-nba1` (opened 2026-11-14 18:45 UTC — final integration seat: stale-PR takeover, fresh official verification, gates, delivery)
 
 Branch `arena/f7f6c46e-nba1`, based on `main` `2038333` (tip at claim time). The platform pins
@@ -137,6 +148,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena-a6936331` | `arena/a6936331-nba1` | 2026-11-14 (added during merge) | Injury-edition standardisation + link-check fixes (§9/§10), PRs #21/#23/#24 merged. |
 | `arena/e38f7e38-nba1` | `arena/e38f7e38-nba1` | 2026-11-14 (added during merge) | CI publish-gate hardening (§11), PR #27/#28 merged. |
 | `arena/93ff7f20-nba1` | `arena/93ff7f20-nba1` | 2026-11-14 (added during merge) | Final verification pass W01–W05 (§12), PR #29 merged. |
+| `arena/83d380ad-nba1` | `arena/83d380ad-nba1` | 2026-11-15 11:35 UTC | Rolling-slate refresh + 11/14 settlement + ledger + integration delivery (§38). Platform pins this session to its branch (deviation logged, as above). |
 
 ---
 
@@ -3508,3 +3520,42 @@ committed `data/official/gamelog.json` transcription). Every new flag row carrie
 the SG23 workflow fix; deploys now complete instead of being cancelled. Nothing here claims the
 *newest* head (`99a7043`+) is rendered — its own deploy serialises and completes under SG23, and each
 push's deploy supersedes the last.
+
+---
+
+## 38. Session `arena/83d380ad-nba1` — rolling-slate refresh, 2026-11-14 settlement, pick ledger, integration delivery (claimed 2026-11-15 11:35 UTC)
+
+Branch `arena/83d380ad-nba1`, based on `main` `ef2e723` (tip at claim time). The platform pins
+this session to that branch; the `session-<id>/<task>` naming in the brief is not used (single
+pinned branch — deviation logged, as earlier sessions logged it). This session takes the
+**integration seat** for the 2026-11-15 rolling-slate cycle: no other session holds an open
+claim (all §35–§37/§31–§33B records closed; last prior activity 2026-11-14 ~21:00 UTC).
+
+**Board read before claiming (2026-11-15 11:2x–11:35 UTC):** §0 ground rules, §0b registry,
+the §35–§37 and §31–§33B delivery records (PRs #81–#100 merged; Pages live and `built`;
+deploy serialization fixed via SG23/PR #95), the gate baseline (11 CI steps) re-run green on
+this tree at claim time: check_site OK · verify_integration 0 errors/44 warnings ·
+render_check 134 pages / 8,193 rows / 0 problems · check_links PASS · check_rendered PASS ·
+verify_all VERIFY OK.
+
+**Ledger anchor:** the repository is a single squashed commit `ef2e723`
+(2026-11-14T22:18:48Z), committed **before the first 2026-11-14 tip** (earliest 11/14 game
+00:30Z 2026-11-15). The 11/14 published picks in `data/derived/horizon_picks.json` and
+`data/derived/horizon_lines.json` at that commit are therefore the tamper-evident pre-tip
+record; their SHA-256 digests are recorded and verified at settlement (§38.2).
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| G01 | Board claim (banner + §0b row + this §38) pushed before any other edit | done (this commit) | `COORDINATION.md` (top banner + §0b row + §38 only) | Claim first, work second. |
+| G02 | Settle the 2026-11-14 slate (5 games) against official finals only: capture finals + quarter scores from NBA.com box scores, one results row per game (date, teams, final score, quarter scores), grade every published 11/14 single/parlay from the pre-tip record, verify the ledger hashes | in progress | `data/settlement/**`, `data/official/results_2026-11-14.json`, `verify/2026-11-15-83d380ad/**` | Nothing inferred; every row carries its official game/box-score URL. |
+| G03 | Rolling-slate official refresh (freshness + provenance gates before rebuild): standings, three team-stat pages (traditional, opponent, advanced), schedule 11/15–11/18, latest 11/15 injury-report editions (stored with revision + retrieval timestamps; consecutive-report diff) | in progress | `data/official/**` (new dated files), `data/injury_reports/**` | Captures committed verbatim with retrieval stamps; diff computed, not hand-written. |
+| G04 | Roll the originated horizon + picks to the 2026-11-15..2026-11-18 window (max 3 days ahead); publish picks with their pre-registration block and ledger hashes | in progress | `data/derived/horizon_lines.json`, `data/derived/horizon_picks.json`, `data/prereg/**`, `scripts/originate_horizon.py`, `scripts/generate_picks.py` | Same formulas; every new pick row source-linked; unvalidated status preserved. |
+| G05 | Rebuild the site surfaces from refreshed data (projection/bet split preserved; settlement stamp visible; disagreement headline kept) and run the full 11-step gate suite to green | in progress | `site/**`, `docs/data/**`, `command-center/**`, root pages touched by the builders, `scripts/build_*.py`, `verification.html` | No manual values; builders only. |
+| G06 | Integration PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy + live fetch-back, record PR link + merge result here | unclaimed | `COORDINATION.md` (§38 delivery record) | Retry until live per the brief; flagged items do not block. |
+
+**Requests from other sessions:** none at claim time. If a future session needs a file in this
+scope, log the request here instead of editing it.
+
+### 38.1 Claim log
+
+- 2026-11-15 11:35 UTC — claim written and pushed before any other edit (G01).
