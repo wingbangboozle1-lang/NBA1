@@ -3517,9 +3517,41 @@ Branch `arena/7eb1c20a-nba1`, based on `ef2e723` (`main`, branch pinned by Arena
 
 | # | Task | Status | File scope | Plan |
 | --- | --- | --- | --- | --- |
-| RFG1 | Make refresh inputs explicit and capture the official schedule, standings, team-stat pages (traditional/opponent/advanced), injury index, and official finals feed without overwriting promoted snapshots | in progress | `engine/fetch_official.py` | Record direct official URL, capture timestamp and content digest; fail closed on missing/invalid capture. |
-| RFG2 | Gate builder execution on fresh, provenance-valid captures and equality with promoted inputs; prevent stale or unverified rebuilds | in progress | `.github/workflows/refresh-data.yml`, `engine/refresh_gate.py`, `scripts/test_refresh_gate.py` | Reorder workflow to fetch → validate → build, and test gate pass/fail cases. |
-| RFG3 | Verify and record sources, tests, and limitations | unclaimed | `COORDINATION.md` (§38 only) | Source URLs are official NBA pages/API; no data values are promoted by this task. |
+| RFG1 | Make refresh inputs explicit and capture the official schedule, standings, team-stat pages (traditional/opponent/advanced), injury index, and official finals feed without overwriting promoted snapshots | done (official pages captured with source URL/time/digest; schedule and advanced parser retained) | `engine/fetch_official.py` | Injury PDF bytes are persisted content-addressed with retrieval sidecars; no committed model snapshot is overwritten. |
+| RFG2 | Gate builder execution on fresh, provenance-valid captures and equality with promoted inputs; prevent stale or unverified rebuilds | done (fail-closed order; 7 tests) | `.github/workflows/refresh-data.yml`, `engine/refresh_gate.py`, `scripts/test_refresh_gate.py` | Fetch → validate → conditional build. A changed capture or missing structured promotion blocks the builder. |
+| RFG3 | Verify and record sources, tests, and limitations | done | `COORDINATION.md` (§38 only) | Official NBA source links and verification are recorded below; unsupported structured values remain unverified and block rebuild. |
 
 No other files are claimed. Prior historical claims in this board are treated as closed where their own delivery sections report completion; this task does not edit published data, model inputs, or site navigation.
+
+
+### 38.1 Implementation and verification (2026-11-15 UTC)
+
+**What changed**
+
+- `engine/fetch_official.py` now records a per-source check in `_last_refresh.json` for every primary page and each date-specific `www.nba.com/games?date=...` results request: direct URL, check time, HTTP status, byte count and SHA-256. Added official NBA pages for standings (`https://www.nba.com/standings`), team traditional (`https://www.nba.com/stats/teams/traditional`) and team opponent (`https://www.nba.com/stats/teams/opponent`). Existing advanced, schedule and official injury-index sources remain.
+- Injury report responses are checked for a PDF signature, then retained as immutable content-addressed bytes at `data/raw/injury_pdfs/<edition>__<sha256>.pdf`; a JSON sidecar records the official URL, first retrieval timestamp, byte count and digest. The refresh workflow uploads and stages these files along with JSON capture evidence.
+- `.github/workflows/refresh-data.yml` now runs fetch → freshness/provenance/promotion gate → conditional rebuild. Builders are skipped on fetch/gate failure, stale captures, unofficial or mismatched source digests, missing/invalid PDF bytes, changed-but-unpromoted evidence, or absent structured verified standings/traditional/opponent records. Builder cleanup is restricted to generated `docs/data` and `docs/b`, so it does not discard fetched evidence.
+- Added `engine/refresh_gate.py` and `scripts/test_refresh_gate.py`. Seven unit tests cover an allowed fixture and fail-closed cases for stale runs, untrusted host, changed unpromoted capture, mismatched capture digest, absent PDF evidence, and tampered PDF bytes.
+
+**Sources / verification**
+
+Official URLs used by the scheduled fetcher: [NBA schedule](https://www.nba.com/schedule), [NBA standings](https://www.nba.com/standings), [NBA team traditional stats](https://www.nba.com/stats/teams/traditional), [NBA team opponent stats](https://www.nba.com/stats/teams/opponent), [NBA team advanced stats](https://www.nba.com/stats/teams/advanced), [official NBA injury report index](https://official.nba.com/nba-injury-report-2026-27-season/), [NBA games/results feed](https://www.nba.com/games?date=YYYY-MM-DD), and the official injury-report PDF host `https://ak-static.cms.nba.com/referee/injury/`.
+
+- `python3 -m unittest scripts.test_refresh_gate -v`: **7 passed**.
+- `python3 -m py_compile engine/fetch_official.py engine/refresh_gate.py scripts/test_refresh_gate.py`: passed.
+- `python3 scripts/check_site.py`: passed (all table rows in its checked pages contain source links).
+- `python3 scripts/verify_integration.py`: **0 errors, 44 existing warnings**; no unrelated warning/page data was modified.
+- `git diff --check`: passed. Workflow-order assertion confirmed fetch precedes gate and gate precedes the conditional builder.
+- The current committed `_last_refresh.json` is ~16 hours old, has no per-source checks, reports prior failures and changed captures; the repository also lacks current-run-matching verification records for the committed schedule/injuries and structured verified standings/traditional/opponent inputs. Running the gate locally correctly returns **BLOCK**; the scheduled builder is therefore not claimed to have run or to have passed on current data. No NBA value was refreshed or promoted from this restricted workspace.
+
+**Flagged limitations / follow-up (does not block the fail-closed change)**
+
+1. The newly added standings/traditional/opponent captures are page-level digest evidence, not parsed team-row datasets. The explicit gate requires matching structured rows plus a verification record before any rebuild can pass. Their parsers and verified promotion records remain unimplemented; no table values were guessed.
+2. The existing schedule parser captures game IDs/team pairs from NBA.com but this change does not refresh the committed date/time/venue/record schedule table. A date-aware structured schedule parser and comparison/promotion step are still required for a truly current rolling 3-day slate.
+3. Injury PDFs are now preserved byte-for-byte with timestamps and SHA-256, but an automatic text extraction/status-change diff of each consecutive PDF is not added here. Existing edition-diff audit is historical; it is not a live PDF-to-PDF diff. Do not treat the injury gate as proof that status changes have been parsed or repriced.
+4. No live NBA host was fetched from this local session; this environment is restricted to approved hosts and the scheduled GitHub runner is responsible for the source fetch. The workflow's next run must establish endpoint reachability and live behavior; all HTTP and parse failures fail closed.
+
+| # | Task | Status | Scope / next owner |
+| --- | --- | --- | --- |
+| RFG4 | Parse and independently verify standings, traditional/opponent stats, date-aware schedule rows, and successive injury-PDF status differences; promote only with row-level source evidence | needs review | New isolated module/data scope; no edits in this session. |
 
