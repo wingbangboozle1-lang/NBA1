@@ -1,0 +1,1558 @@
+{
+ "session": "arena/91390540-nba1",
+ "generated_by": "verify/2026-11-15-91390540/compare.py",
+ "official_capture_window_utc": [
+  "2026-11-15T11:31Z",
+  "2026-11-15T11:45Z"
+ ],
+ "sections": {
+  "A_1114_finals_vs_published": {
+   "check": "official two-source finals vs published horizon rows, published picks, and the settlement ledger",
+   "rows": [
+    {
+     "game_id": "0022600231",
+     "matchup": "DEN@NOP",
+     "official_final": "DEN 116 @ NOP 108",
+     "quarters": {
+      "DEN": [
+       29,
+       27,
+       30,
+       30
+      ],
+      "NOP": [
+       23,
+       28,
+       31,
+       26
+      ]
+     },
+     "two_source": true,
+     "official_urls": [
+      "https://www.nba.com/games?date=2026-11-14",
+      "https://www.nba.com/game/den-vs-nop-0022600231"
+     ],
+     "published_horizon_row_present": true,
+     "published_records_at_capture": "DEN 6-4 / NOP 4-9",
+     "published_single_picks": 5,
+     "published_parlay_legs": 2,
+     "published_picks_status": [
+      "PENDING"
+     ],
+     "settlement_ledger_entry": {
+      "state": "SCHEDULED",
+      "reason": "tip-off has not happened yet at capture time"
+     }
+    },
+    {
+     "game_id": "0022600232",
+     "matchup": "DAL@CLE",
+     "official_final": "DAL 117 @ CLE 127",
+     "quarters": {
+      "DAL": [
+       33,
+       20,
+       38,
+       26
+      ],
+      "CLE": [
+       33,
+       38,
+       34,
+       22
+      ]
+     },
+     "two_source": true,
+     "official_urls": [
+      "https://www.nba.com/games?date=2026-11-14",
+      "https://www.nba.com/game/dal-vs-cle-0022600232"
+     ],
+     "published_horizon_row_present": true,
+     "published_records_at_capture": "DAL 7-5 / CLE 6-7",
+     "published_single_picks": 3,
+     "published_parlay_legs": 0,
+     "published_picks_status": [
+      "PENDING"
+     ],
+     "settlement_ledger_entry": {
+      "state": "SCHEDULED",
+      "reason": "tip-off has not happened yet at capture time"
+     }
+    },
+    {
+     "game_id": "0022600233",
+     "matchup": "DET@MIA",
+     "official_final": "DET 117 @ MIA 137",
+     "quarters": {
+      "DET": [
+       39,
+       21,
+       26,
+       31
+      ],
+      "MIA": [
+       37,
+       31,
+       35,
+       34
+      ]
+     },
+     "two_source": true,
+     "official_urls": [
+      "https://www.nba.com/games?date=2026-11-14",
+      "https://www.nba.com/game/det-vs-mia-0022600233"
+     ],
+     "published_horizon_row_present": true,
+     "published_records_at_capture": "DET 8-3 / MIA 6-6",
+     "published_single_picks": 2,
+     "published_parlay_legs": 0,
+     "published_picks_status": [
+      "PENDING"
+     ],
+     "settlement_ledger_entry": {
+      "state": "SCHEDULED",
+      "reason": "tip-off has not happened yet at capture time"
+     }
+    },
+    {
+     "game_id": "0022600234",
+     "matchup": "BKN@MEM",
+     "official_final": "BKN 110 @ MEM 129",
+     "quarters": {
+      "BKN": [
+       23,
+       31,
+       30,
+       26
+      ],
+      "MEM": [
+       38,
+       33,
+       32,
+       26
+      ]
+     },
+     "two_source": true,
+     "official_urls": [
+      "https://www.nba.com/games?date=2026-11-14",
+      "https://www.nba.com/game/bkn-vs-mem-0022600234"
+     ],
+     "published_horizon_row_present": true,
+     "published_records_at_capture": "BKN 3-8 / MEM 8-4",
+     "published_single_picks": 3,
+     "published_parlay_legs": 1,
+     "published_picks_status": [
+      "PENDING"
+     ],
+     "settlement_ledger_entry": {
+      "state": "SCHEDULED",
+      "reason": "tip-off has not happened yet at capture time"
+     }
+    },
+    {
+     "game_id": "0022600235",
+     "matchup": "CHI@MIN",
+     "official_final": "CHI 117 @ MIN 106",
+     "quarters": {
+      "CHI": [
+       29,
+       29,
+       30,
+       29
+      ],
+      "MIN": [
+       17,
+       28,
+       35,
+       26
+      ]
+     },
+     "two_source": true,
+     "official_urls": [
+      "https://www.nba.com/games?date=2026-11-14",
+      "https://www.nba.com/game/chi-vs-min-0022600235"
+     ],
+     "published_horizon_row_present": true,
+     "published_records_at_capture": "CHI 2-9 / MIN 9-3",
+     "published_single_picks": 2,
+     "published_parlay_legs": 0,
+     "published_picks_status": [
+      "PENDING"
+     ],
+     "settlement_ledger_entry": {
+      "state": "SCHEDULED",
+      "reason": "tip-off has not happened yet at capture time"
+     }
+    }
+   ],
+   "summary": {
+    "finals": 5,
+    "all_finals_two_source": true,
+    "picks_rows_dated_1114": 17,
+    "picks_statuses_dated_1114": [
+     "PENDING"
+    ],
+    "single_game_picks": 15,
+    "parlay_or_sgp_picks": 2,
+    "ledger_still_says_tipoff_not_happened": 5,
+    "verified_finals_file_for_1114_present": false
+   },
+   "verdict": "MISMATCH (stale): the repository publishes no final score for any of the five 11/14 games; all 17 published pick rows dated 11/14 (15 single-game + 2 parlays/SGPs whose legs are among these finals) are still PENDING; the settlement ledger still records the five games as 'tip-off has not happened yet at capture time'. The finals captured here are ready to settle against — two-source, with quarter scores."
+  },
+  "B_horizon_1115_to_1117_vs_published": {
+   "check": "each published horizon row (date, tip ET, matchup, game id, both records) vs the fresh official read",
+   "rows": [
+    {
+     "game_id": "0022600236",
+     "published": "IND(5-8)@PHI(10-3) 2026-11-15 1:00 PM ET",
+     "fresh": "IND(5-8)@PHI(10-3) 2026-11-15 1:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-15",
+       "fresh": "2026-11-15",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "1:00 PM ET",
+       "fresh": "1:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "IND",
+       "fresh": "IND",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "PHI",
+       "fresh": "PHI",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600236",
+       "fresh": "0022600236",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "5-8",
+       "fresh": "5-8",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "10-3",
+       "fresh": "10-3",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "AGREE"
+    },
+    {
+     "game_id": "0022600237",
+     "published": "LAL(11-2)@PHX(5-6) 2026-11-15 4:00 PM ET",
+     "fresh": "LAL(11-2)@PHX(5-6) 2026-11-15 4:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-15",
+       "fresh": "2026-11-15",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "4:00 PM ET",
+       "fresh": "4:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "LAL",
+       "fresh": "LAL",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "PHX",
+       "fresh": "PHX",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600237",
+       "fresh": "0022600237",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "11-2",
+       "fresh": "11-2",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "5-6",
+       "fresh": "5-6",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "AGREE"
+    },
+    {
+     "game_id": "0022600238",
+     "published": "CHA(4-8)@LAC(3-8) 2026-11-15 4:30 PM ET",
+     "fresh": "CHA(4-8)@LAC(3-8) 2026-11-15 4:30 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-15",
+       "fresh": "2026-11-15",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "4:30 PM ET",
+       "fresh": "4:30 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "CHA",
+       "fresh": "CHA",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "LAC",
+       "fresh": "LAC",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600238",
+       "fresh": "0022600238",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "4-8",
+       "fresh": "4-8",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "3-8",
+       "fresh": "3-8",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "AGREE"
+    },
+    {
+     "game_id": "0022600239",
+     "published": "SAS(11-2)@UTA(1-12) 2026-11-15 5:00 PM ET",
+     "fresh": "SAS(11-2)@UTA(1-12) 2026-11-15 5:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-15",
+       "fresh": "2026-11-15",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "5:00 PM ET",
+       "fresh": "5:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "SAS",
+       "fresh": "SAS",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "UTA",
+       "fresh": "UTA",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600239",
+       "fresh": "0022600239",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "11-2",
+       "fresh": "11-2",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "1-12",
+       "fresh": "1-12",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "AGREE"
+    },
+    {
+     "game_id": "0022600240",
+     "published": "DAL(7-5)@BOS(10-2) 2026-11-15 6:00 PM ET",
+     "fresh": "DAL(7-6)@BOS(10-2) 2026-11-15 6:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-15",
+       "fresh": "2026-11-15",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "6:00 PM ET",
+       "fresh": "6:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "DAL",
+       "fresh": "DAL",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "BOS",
+       "fresh": "BOS",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600240",
+       "fresh": "0022600240",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "7-5",
+       "fresh": "7-6",
+       "verdict": "STALE (published pre-dates the 11/14 results)"
+      },
+      "home_rec": {
+       "published": "10-2",
+       "fresh": "10-2",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "IDENTITY AGREE / RECORD STALE"
+    },
+    {
+     "game_id": "0022600241",
+     "published": "NYK(6-6)@TOR(5-7) 2026-11-15 6:00 PM ET",
+     "fresh": "NYK(6-6)@TOR(5-7) 2026-11-15 6:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-15",
+       "fresh": "2026-11-15",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "6:00 PM ET",
+       "fresh": "6:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "NYK",
+       "fresh": "NYK",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "TOR",
+       "fresh": "TOR",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600241",
+       "fresh": "0022600241",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "6-6",
+       "fresh": "6-6",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "5-7",
+       "fresh": "5-7",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "AGREE"
+    },
+    {
+     "game_id": "0022600242",
+     "published": "HOU(10-3)@WAS(4-9) 2026-11-15 7:00 PM ET",
+     "fresh": "HOU(10-3)@WAS(4-9) 2026-11-15 7:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-15",
+       "fresh": "2026-11-15",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "7:00 PM ET",
+       "fresh": "7:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "HOU",
+       "fresh": "HOU",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "WAS",
+       "fresh": "WAS",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600242",
+       "fresh": "0022600242",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "10-3",
+       "fresh": "10-3",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "4-9",
+       "fresh": "4-9",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "AGREE"
+    },
+    {
+     "game_id": "0022600243",
+     "published": "ATL(7-6)@MIL(1-12) 2026-11-15 8:00 PM ET",
+     "fresh": "ATL(7-6)@MIL(1-12) 2026-11-15 8:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-15",
+       "fresh": "2026-11-15",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "8:00 PM ET",
+       "fresh": "8:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "ATL",
+       "fresh": "ATL",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "MIL",
+       "fresh": "MIL",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600243",
+       "fresh": "0022600243",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "7-6",
+       "fresh": "7-6",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "1-12",
+       "fresh": "1-12",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "AGREE"
+    },
+    {
+     "game_id": "0022600244",
+     "published": "OKC(8-5)@SAC(1-11) 2026-11-15 9:00 PM ET",
+     "fresh": "OKC(8-5)@SAC(1-11) 2026-11-15 9:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-15",
+       "fresh": "2026-11-15",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "9:00 PM ET",
+       "fresh": "9:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "OKC",
+       "fresh": "OKC",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "SAC",
+       "fresh": "SAC",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600244",
+       "fresh": "0022600244",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "8-5",
+       "fresh": "8-5",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "1-11",
+       "fresh": "1-11",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "AGREE"
+    },
+    {
+     "game_id": "0022600245",
+     "published": "ORL(5-7)@BOS(10-2) 2026-11-16 7:00 PM ET",
+     "fresh": "ORL(5-7)@BOS(10-2) 2026-11-16 7:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-16",
+       "fresh": "2026-11-16",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "7:00 PM ET",
+       "fresh": "7:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "ORL",
+       "fresh": "ORL",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "BOS",
+       "fresh": "BOS",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600245",
+       "fresh": "0022600245",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "5-7",
+       "fresh": "5-7",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "10-2",
+       "fresh": "10-2",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "AGREE"
+    },
+    {
+     "game_id": "0022600246",
+     "published": "CHI(2-9)@CLE(6-7) 2026-11-16 7:00 PM ET",
+     "fresh": "CHI(3-9)@CLE(7-7) 2026-11-16 7:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-16",
+       "fresh": "2026-11-16",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "7:00 PM ET",
+       "fresh": "7:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "CHI",
+       "fresh": "CHI",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "CLE",
+       "fresh": "CLE",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600246",
+       "fresh": "0022600246",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "2-9",
+       "fresh": "3-9",
+       "verdict": "STALE (published pre-dates the 11/14 results)"
+      },
+      "home_rec": {
+       "published": "6-7",
+       "fresh": "7-7",
+       "verdict": "STALE (published pre-dates the 11/14 results)"
+      }
+     },
+     "verdict": "IDENTITY AGREE / RECORD STALE"
+    },
+    {
+     "game_id": "0022600247",
+     "published": "MEM(8-4)@WAS(4-9) 2026-11-16 7:00 PM ET",
+     "fresh": "MEM(9-4)@WAS(4-9) 2026-11-16 7:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-16",
+       "fresh": "2026-11-16",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "7:00 PM ET",
+       "fresh": "7:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "MEM",
+       "fresh": "MEM",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "WAS",
+       "fresh": "WAS",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600247",
+       "fresh": "0022600247",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "8-4",
+       "fresh": "9-4",
+       "verdict": "STALE (published pre-dates the 11/14 results)"
+      },
+      "home_rec": {
+       "published": "4-9",
+       "fresh": "4-9",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "IDENTITY AGREE / RECORD STALE"
+    },
+    {
+     "game_id": "0022600248",
+     "published": "PHI(10-3)@BKN(3-8) 2026-11-16 7:30 PM ET",
+     "fresh": "PHI(10-3)@BKN(3-9) 2026-11-16 7:30 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-16",
+       "fresh": "2026-11-16",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "7:30 PM ET",
+       "fresh": "7:30 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "PHI",
+       "fresh": "PHI",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "BKN",
+       "fresh": "BKN",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600248",
+       "fresh": "0022600248",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "10-3",
+       "fresh": "10-3",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "3-8",
+       "fresh": "3-9",
+       "verdict": "STALE (published pre-dates the 11/14 results)"
+      }
+     },
+     "verdict": "IDENTITY AGREE / RECORD STALE"
+    },
+    {
+     "game_id": "0022600249",
+     "published": "HOU(10-3)@MIA(6-6) 2026-11-16 7:30 PM ET",
+     "fresh": "HOU(10-3)@MIA(7-6) 2026-11-16 7:30 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-16",
+       "fresh": "2026-11-16",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "7:30 PM ET",
+       "fresh": "7:30 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "HOU",
+       "fresh": "HOU",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "MIA",
+       "fresh": "MIA",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600249",
+       "fresh": "0022600249",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "10-3",
+       "fresh": "10-3",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "6-6",
+       "fresh": "7-6",
+       "verdict": "STALE (published pre-dates the 11/14 results)"
+      }
+     },
+     "verdict": "IDENTITY AGREE / RECORD STALE"
+    },
+    {
+     "game_id": "0022600250",
+     "published": "POR(9-3)@MIN(9-3) 2026-11-16 8:00 PM ET",
+     "fresh": "POR(9-3)@MIN(9-4) 2026-11-16 8:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-16",
+       "fresh": "2026-11-16",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "8:00 PM ET",
+       "fresh": "8:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "POR",
+       "fresh": "POR",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "MIN",
+       "fresh": "MIN",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600250",
+       "fresh": "0022600250",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "9-3",
+       "fresh": "9-3",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "9-3",
+       "fresh": "9-4",
+       "verdict": "STALE (published pre-dates the 11/14 results)"
+      }
+     },
+     "verdict": "IDENTITY AGREE / RECORD STALE"
+    },
+    {
+     "game_id": "0022600251",
+     "published": "GSW(8-5)@NOP(4-9) 2026-11-16 8:00 PM ET",
+     "fresh": "GSW(8-5)@NOP(4-10) 2026-11-16 8:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-16",
+       "fresh": "2026-11-16",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "8:00 PM ET",
+       "fresh": "8:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "GSW",
+       "fresh": "GSW",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "NOP",
+       "fresh": "NOP",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600251",
+       "fresh": "0022600251",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "8-5",
+       "fresh": "8-5",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "4-9",
+       "fresh": "4-10",
+       "verdict": "STALE (published pre-dates the 11/14 results)"
+      }
+     },
+     "verdict": "IDENTITY AGREE / RECORD STALE"
+    },
+    {
+     "game_id": "0022600252",
+     "published": "PHX(5-6)@DEN(6-4) 2026-11-16 9:00 PM ET",
+     "fresh": "PHX(5-6)@DEN(7-4) 2026-11-16 9:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-16",
+       "fresh": "2026-11-16",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "9:00 PM ET",
+       "fresh": "9:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "PHX",
+       "fresh": "PHX",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "DEN",
+       "fresh": "DEN",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600252",
+       "fresh": "0022600252",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "5-6",
+       "fresh": "5-6",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "6-4",
+       "fresh": "7-4",
+       "verdict": "STALE (published pre-dates the 11/14 results)"
+      }
+     },
+     "verdict": "IDENTITY AGREE / RECORD STALE"
+    },
+    {
+     "game_id": "0022600257",
+     "published": "UTA(1-12)@LAC(3-8) 2026-11-17 10:30 PM ET",
+     "fresh": "UTA(1-12)@LAC(3-8) 2026-11-17 10:30 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-17",
+       "fresh": "2026-11-17",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "10:30 PM ET",
+       "fresh": "10:30 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "UTA",
+       "fresh": "UTA",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "LAC",
+       "fresh": "LAC",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600257",
+       "fresh": "0022600257",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "1-12",
+       "fresh": "1-12",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "3-8",
+       "fresh": "3-8",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "AGREE"
+    },
+    {
+     "game_id": "0022600256",
+     "published": "CHA(4-8)@LAL(11-2) 2026-11-17 11:00 PM ET",
+     "fresh": "CHA(4-8)@LAL(11-2) 2026-11-17 11:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-17",
+       "fresh": "2026-11-17",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "11:00 PM ET",
+       "fresh": "11:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "CHA",
+       "fresh": "CHA",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "LAL",
+       "fresh": "LAL",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600256",
+       "fresh": "0022600256",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "4-8",
+       "fresh": "4-8",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "11-2",
+       "fresh": "11-2",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "AGREE"
+    },
+    {
+     "game_id": "0022600253",
+     "published": "NYK(6-6)@TOR(5-7) 2026-11-17 7:30 PM ET",
+     "fresh": "NYK(6-6)@TOR(5-7) 2026-11-17 7:30 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-17",
+       "fresh": "2026-11-17",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "7:30 PM ET",
+       "fresh": "7:30 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "NYK",
+       "fresh": "NYK",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "TOR",
+       "fresh": "TOR",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600253",
+       "fresh": "0022600253",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "6-6",
+       "fresh": "6-6",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "5-7",
+       "fresh": "5-7",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "AGREE"
+    },
+    {
+     "game_id": "0022600254",
+     "published": "POR(9-3)@MIN(9-3) 2026-11-17 8:00 PM ET",
+     "fresh": "POR(9-3)@MIN(9-4) 2026-11-17 8:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-17",
+       "fresh": "2026-11-17",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "8:00 PM ET",
+       "fresh": "8:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "POR",
+       "fresh": "POR",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "MIN",
+       "fresh": "MIN",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600254",
+       "fresh": "0022600254",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "9-3",
+       "fresh": "9-3",
+       "verdict": "AGREE"
+      },
+      "home_rec": {
+       "published": "9-3",
+       "fresh": "9-4",
+       "verdict": "STALE (published pre-dates the 11/14 results)"
+      }
+     },
+     "verdict": "IDENTITY AGREE / RECORD STALE"
+    },
+    {
+     "game_id": "0022600255",
+     "published": "DET(8-3)@SAS(11-2) 2026-11-17 8:00 PM ET",
+     "fresh": "DET(8-4)@SAS(11-2) 2026-11-17 8:00 PM ET",
+     "identity_cells": {
+      "date": {
+       "published": "2026-11-17",
+       "fresh": "2026-11-17",
+       "verdict": "AGREE"
+      },
+      "time_et": {
+       "published": "8:00 PM ET",
+       "fresh": "8:00 PM ET",
+       "verdict": "AGREE"
+      },
+      "away": {
+       "published": "DET",
+       "fresh": "DET",
+       "verdict": "AGREE"
+      },
+      "home": {
+       "published": "SAS",
+       "fresh": "SAS",
+       "verdict": "AGREE"
+      },
+      "game_id": {
+       "published": "0022600255",
+       "fresh": "0022600255",
+       "verdict": "AGREE"
+      }
+     },
+     "record_cells": {
+      "away_rec": {
+       "published": "8-3",
+       "fresh": "8-4",
+       "verdict": "STALE (published pre-dates the 11/14 results)"
+      },
+      "home_rec": {
+       "published": "11-2",
+       "fresh": "11-2",
+       "verdict": "AGREE"
+      }
+     },
+     "verdict": "IDENTITY AGREE / RECORD STALE"
+    }
+   ],
+   "summary": {
+    "published_rows_checked": 22,
+    "identity_mismatches": 0,
+    "rows_with_stale_records": 10,
+    "rows_fully_agreeing": 12
+   },
+   "verdict": "IDENTITY: 22/22 agree on date/tip/matchup/game id (0 identity mismatches expected; found 0). RECORDS: 10 rows carry pre-11/14 records (stale by exactly the 11/14 results, reconciled 10/10 in the finals capture).",
+   "venue_cells": "NOT CHECKED this pass (the games pages do not print venues; needs https://www.nba.com/schedule)"
+  },
+  "C_1118_coverage": {
+   "check": "the brief's maximum horizon is today + 3 days = 2026-11-18; the published capture window is 11/14..11/17",
+   "fresh_1118_games": 12,
+   "published_1118_rows": 0,
+   "picks_slate_dates": [
+    "2026-11-14",
+    "2026-11-15",
+    "2026-11-16",
+    "2026-11-17"
+   ],
+   "rows": [
+    {
+     "game_id": "0022600258",
+     "matchup": "MEM@CLE",
+     "time_et": "7:00 PM ET",
+     "in_published_horizon": false
+    },
+    {
+     "game_id": "0022600259",
+     "matchup": "HOU@IND",
+     "time_et": "7:00 PM ET",
+     "in_published_horizon": false
+    },
+    {
+     "game_id": "0022600260",
+     "matchup": "MIL@MIA",
+     "time_et": "7:00 PM ET",
+     "in_published_horizon": false
+    },
+    {
+     "game_id": "0022600261",
+     "matchup": "PHI@ORL",
+     "time_et": "7:00 PM ET",
+     "in_published_horizon": false
+    },
+    {
+     "game_id": "0022600262",
+     "matchup": "CHI@BKN",
+     "time_et": "7:30 PM ET",
+     "in_published_horizon": false
+    },
+    {
+     "game_id": "0022600263",
+     "matchup": "WAS@TOR",
+     "time_et": "7:30 PM ET",
+     "in_published_horizon": false
+    },
+    {
+     "game_id": "0022600264",
+     "matchup": "DET@NOP",
+     "time_et": "8:00 PM ET",
+     "in_published_horizon": false
+    },
+    {
+     "game_id": "0022600265",
+     "matchup": "ATL@OKC",
+     "time_et": "8:00 PM ET",
+     "in_published_horizon": false
+    },
+    {
+     "game_id": "0022600267",
+     "matchup": "GSW@DAL",
+     "time_et": "8:00 PM ET",
+     "in_published_horizon": false
+    },
+    {
+     "game_id": "0022600266",
+     "matchup": "BOS@DEN",
+     "time_et": "9:30 PM ET",
+     "in_published_horizon": false
+    },
+    {
+     "game_id": "0022600268",
+     "matchup": "UTA@LAL",
+     "time_et": "10:00 PM ET",
+     "in_published_horizon": false
+    },
+    {
+     "game_id": "0022600269",
+     "matchup": "PHX@SAC",
+     "time_et": "10:00 PM ET",
+     "in_published_horizon": false
+    }
+   ],
+   "verdict": "GAP: 12 official 11/18 games exist and are captured here; none appears in the published horizon, and the published picks stop at 11/17. Flagged, not filled."
+  },
+  "D_injury_edition_currency_and_diff": {
+   "published_basis": {
+    "site_injuries_report": "NBA Official Injury Report, 11/14/26 04:15 AM ET edition",
+    "site_injuries_src": "S10_2026-11-14-0415AM",
+    "site_meta_injury_report_text": "The originated line columns were priced from the NBA Official Injury Report 11/14/26 04:15 AM ET edition. The newest edition listed on https://official.nba.com/nba-injury-report-2026-27-season/ at read time (2026-11-14 2026-11-14T18:40Z..19:10Z) is 01:30 PM ET: four more teams filed and 33 status lines changed (compare.json section F). The lines are labelled NOT RE-PRICED rather than silently re-cut.",
+    "site_rows": 75
+   },
+   "fresh_basis": {
+    "report": "NBA Official Injury Report, 11/15/26 06:15 AM ET edition",
+    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+    "edition_index_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+    "rows_1115": 85,
+    "rows_1116_nys": 16
+   },
+   "consecutive_edition_diff": {
+    "from": "NBA Official Injury Report, 11/14/26 01:30 PM ET edition",
+    "to": "NBA Official Injury Report, 11/15/26 06:15 AM ET edition",
+    "overlap": "the nine 11/15 games (18 team entries in the old edition)",
+    "old_edition_rows_for_overlap": 18,
+    "old_edition_player_rows_for_overlap": 0,
+    "old_edition_all_nys": true,
+    "new_edition_rows_for_overlap": 85,
+    "new_edition_player_rows_for_overlap": 84,
+    "player_level_status_changes": [],
+    "player_level_note": "the old edition listed zero players for 11/15 (all 18 entries were NOT YET SUBMITTED), so no player-level status change is computable between these two editions; nothing is inferred",
+    "team_filing_changes": [
+     {
+      "entry": "IND@PHI / Indiana Pacers",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 6 player designation row(s) printed",
+      "new_statuses": [
+       "Out",
+       "Probable",
+       "Questionable"
+      ]
+     },
+     {
+      "entry": "IND@PHI / Philadelphia 76ers",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 4 player designation row(s) printed",
+      "new_statuses": [
+       "Out"
+      ]
+     },
+     {
+      "entry": "LAL@PHX / Los Angeles Lakers",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 4 player designation row(s) printed",
+      "new_statuses": [
+       "Available",
+       "Out",
+       "Questionable"
+      ]
+     },
+     {
+      "entry": "LAL@PHX / Phoenix Suns",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 1 player designation row(s) printed",
+      "new_statuses": [
+       "Out"
+      ]
+     },
+     {
+      "entry": "CHA@LAC / Charlotte Hornets",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 5 player designation row(s) printed",
+      "new_statuses": [
+       "Out"
+      ]
+     },
+     {
+      "entry": "CHA@LAC / LA Clippers",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 4 player designation row(s) printed",
+      "new_statuses": [
+       "Out"
+      ]
+     },
+     {
+      "entry": "SAS@UTA / San Antonio Spurs",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 4 player designation row(s) printed",
+      "new_statuses": [
+       "Out"
+      ]
+     },
+     {
+      "entry": "SAS@UTA / Utah Jazz",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 2 player designation row(s) printed",
+      "new_statuses": [
+       "Out"
+      ]
+     },
+     {
+      "entry": "DAL@BOS / Dallas Mavericks",
+      "old": "NOT YET SUBMITTED",
+      "new": "NOT YET SUBMITTED (unchanged)",
+      "new_statuses": []
+     },
+     {
+      "entry": "DAL@BOS / Boston Celtics",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 4 player designation row(s) printed",
+      "new_statuses": [
+       "Questionable"
+      ]
+     },
+     {
+      "entry": "NYK@TOR / New York Knicks",
+      "old": "NOT YET SUBMITTED",
+      "new": "no row of any kind for this team in the new edition - recorded as absent, not interpreted (a disappeared NOT YET SUBMITTED row could mean an empty filing; the two PDFs alone cannot distinguish that)",
+      "new_statuses": []
+     },
+     {
+      "entry": "NYK@TOR / Toronto Raptors",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 5 player designation row(s) printed",
+      "new_statuses": [
+       "Out",
+       "Questionable"
+      ]
+     },
+     {
+      "entry": "HOU@WAS / Houston Rockets",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 3 player designation row(s) printed",
+      "new_statuses": [
+       "Out",
+       "Probable"
+      ]
+     },
+     {
+      "entry": "HOU@WAS / Washington Wizards",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 8 player designation row(s) printed",
+      "new_statuses": [
+       "Out",
+       "Questionable"
+      ]
+     },
+     {
+      "entry": "ATL@MIL / Atlanta Hawks",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 5 player designation row(s) printed",
+      "new_statuses": [
+       "Available",
+       "Out"
+      ]
+     },
+     {
+      "entry": "ATL@MIL / Milwaukee Bucks",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 5 player designation row(s) printed",
+      "new_statuses": [
+       "Out"
+      ]
+     },
+     {
+      "entry": "OKC@SAC / Oklahoma City Thunder",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 6 player designation row(s) printed",
+      "new_statuses": [
+       "Out",
+       "Questionable"
+      ]
+     },
+     {
+      "entry": "OKC@SAC / Sacramento Kings",
+      "old": "NOT YET SUBMITTED",
+      "new": "filed — 5 player designation row(s) printed",
+      "new_statuses": [
+       "Out",
+       "Questionable"
+      ]
+     }
+    ],
+    "newly_listed_player_rows": 84,
+    "newly_listed_sample": [
+     {
+      "player": "Furphy, Johnny",
+      "status": "Out",
+      "matchup_printed": "IND@PHI",
+      "team_printed": "Indiana Pacers",
+      "attribution": "explicit"
+     },
+     {
+      "player": "Haliburton, Tyrese",
+      "status": "Out",
+      "matchup_printed": "IND@PHI",
+      "team_printed": "Indiana Pacers",
+      "attribution": "explicit"
+     },
+     {
+      "player": "McConnell, T.J.",
+      "status": "Probable",
+      "matchup_printed": "IND@PHI",
+      "team_printed": "Indiana Pacers",
+      "attribution": "explicit"
+     },
+     {
+      "player": "Nembhard, Andrew",
+      "status": "Questionable",
+      "matchup_printed": "IND@PHI",
+      "team_printed": "Indiana Pacers",
+      "attribution": "explicit"
+     },
+     {
+      "player": "Nesmith, Aaron",
+      "status": "Questionable",
+      "matchup_printed": "IND@PHI",
+      "team_printed": "Indiana Pacers",
+      "attribution": "explicit"
+     },
+     {
+      "player": "Sheppard, Ben",
+      "status": "Out",
+      "matchup_printed": "IND@PHI",
+      "team_printed": "Indiana Pacers",
+      "attribution": "explicit"
+     },
+     {
+      "player": "Barlow, Dominick",
+      "status": "Out",
+      "matchup_printed": "IND@PHI",
+      "team_printed": "Philadelphia 76ers",
+      "attribution": "explicit"
+     },
+     {
+      "player": "Bona, Adem",
+      "status": "Out",
+      "matchup_printed": "IND@PHI",
+      "team_printed": "Philadelphia 76ers",
+      "attribution": "explicit"
+     },
+     {
+      "player": "Embid, Joel",
+      "status": "Out",
+      "matchup_printed": "IND@PHI",
+      "team_printed": "Philadelphia 76ers",
+      "attribution": "explicit"
+     },
+     {
+      "player": "Hukporti, Ariel",
+      "status": "Out",
+      "matchup_printed": "IND@PHI",
+      "team_printed": "Philadelphia 76ers",
+      "attribution": "explicit"
+     }
+    ],
+    "still_not_submitted": [
+     {
+      "entry": "DAL@BOS / Dallas Mavericks",
+      "status": "NOT YET SUBMITTED"
+     }
+    ],
+    "attribution_caveat": "team filing states use printed Team cells only; the 13 continuation rows whose Team cell the PDF dropped are listed under newly_listed_player_rows with attribution='dropped-by-pdf' and are never attributed to a team here"
+   },
+   "verdict": "STALE: the site prices from NBA Official Injury Report, 11/14/26 04:15 AM ET edition while the newest official edition at read time is NBA Official Injury Report, 11/15/26 06:15 AM ET edition. Between the previous in-repo edition (NBA Official Injury Report, 11/14/26 01:30 PM ET edition) and this one, 16 of 18 team entries for 11/15 moved from NOT YET SUBMITTED to filed, 84 player designation rows appeared, and 1 entry is still unfiled (Dallas, inside its game-day window). Nothing here is re-priced: re-pricing a frozen line would put post-cut information into a graded number (standing rule from §31.1 G03)."
+  },
+  "E_register_state": {
+   "flagged_items_published": 69,
+   "last_flag_id": "F73",
+   "next_free_flag_id": "F74",
+   "note": "append-only: new flags from this pass start at the next free id"
+  }
+ }
+}

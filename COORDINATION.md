@@ -3564,3 +3564,32 @@ Official URLs used by the scheduled fetcher: [NBA schedule](https://www.nba.com/
 - **Refresh workflow:** push-triggered run [#43710202772](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43710202772) passed as a workflow. It fetched official sources and evaluated the new gate; builder was skipped because the output was not `true`. This is the intended safe result while the required structured/promoted inputs are absent. Run details and raw capture artifacts are hosted by GitHub Actions; this restricted environment could not download the artifact/log archive (EOF), so no specific live-source response values are claimed.
 - **Pages:** post-merge publisher [#43710562087](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43710562087) completed with validation and deployment successful. The GitHub Pages API reports `status: built` for `https://wingbangboozle1-lang.github.io/NBA1/`. The deployment publishes the existing site tree plus this PR's workflow and documentation changes; it does not publish fresh picks because the freshness/promotion gate correctly skipped the rebuild.
 - **Irregularities:** the known 44 integration warnings remain documented on the site's Flagged for Review page; this session introduced no new site data rows. The open follow-up RFG4 remains `needs review` for structured stats/schedule parsing and automated successive-report status diffs.
+
+
+## 39. Session `arena/91390540-nba1` — 2026-11-15 roll: fresh official capture, row-level re-verification, integration close-out (claimed 2026-11-15 11:35 UTC)
+
+**Board read before claiming (required by ground rule 6).** `main` is at `ef2e723`
+(the 2026-11-14T22:18:48Z probe-record commit, i.e. the tip after PR #100). **No open PRs**
+(`gh pr list --state open` → empty). The last push to any branch was 13+ hours ago; every
+prior claim on this board is `done` or `needs review`, so ground rule 5's 60-minute
+threshold leaves the shared outputs unowned and the integration seat takeable. This
+session takes it for the 2026-11-15 slate roll (today +3 = 11/15..11/18; the published
+horizon is 11/14–11/17 and 11/14 is now final).
+
+Platform pins this session to branch `arena/91390540-nba1`; the brief's
+`session-<id>/<task>` naming is satisfied by this single pre-named branch (deviation
+logged, as §16/§17/§28/§31/§35 logged it).
+
+| # | Task | Status | File scope (exclusive) | Plan |
+| --- | --- | --- | --- | --- |
+| R01 | Board claim pushed before any other edit | **done** (this commit) | `COORDINATION.md` (§39 only) | Claim first, work second. |
+| R02 | Fresh official capture 2026-11-15 (~11:30Z): the five 11/14 finals, the 11/15–11/18 horizon (34 games: 9/8/5/12), the newest official injury-report edition — every read stored with its exact URL and retrieval time | unclaimed | `verify/2026-11-15-91390540/**` (new namespace) | Independent of all prior passes; nothing outside this namespace written. |
+| R03 | Row-by-row comparison of the published values this session can reach (site horizon rows, 11/14 pending picks/results, register counts) against the R02 captures; agreement or disagreement per row, no value inferred | unclaimed | `verify/2026-11-15-91390540/**` | Unconfirmable values stay blank and flagged, never filled. |
+| R04 | Publish the R02/R03 report as a self-contained page + append any new irregularities to the Flagged register with official source links (non-blocking) | unclaimed | `verify/2026-11-15-91390540/REPORT.md` (+ HTML twin in same namespace), `data/content/flagged.json` (append-only, new ids only) | Flagged items do not block the merge. |
+| R05 | Full gate suite on the final tree (the `validate` workflow steps in order + `verify_all.py`), then integration PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy + live smoke test, record PR link and merge result here | unclaimed | own branch + `COORDINATION.md` (§39 delivery log) | "Do not merge a broken site." Retry until live. |
+
+**Not claimed / read-only:** `docs/**`, `docs/b/**`, `command-center/**`, `origination/**`,
+`strategy-lab/**`, `edge-lab/**`, `integration/**`, `audit/**`, `engine*/**`, `scripts/**`
+(runs only, no edits unless a gate is red and the fix is provable), `data/**` snapshots
+other than the append-only `data/content/flagged.json`, other sessions' `verify/*` namespaces.
+If a shared file must change, the request is logged here, not edited silently.
