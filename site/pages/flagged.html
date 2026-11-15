@@ -668,6 +668,51 @@
 <td>Workflow owner: make the probe commit [skip ci] on session branches too, or push probe records only to main; see suggestion SG28.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/probe-official.yml" target="_blank" rel="noopener">link</a></td>
 </tr>
+<tr>
+<td>F69</td>
+<td>High</td>
+<td><b>The five 2026-11-14 finals are verified but nothing in the repository has been settled against them</b></td>
+<td>Session arena/91390540-nba1 read all five 11/14 finals twice on two official surfaces (the date's Games &amp; Scores list and each game's own summary page) with quarter scores: DEN 116-108 NOP, DAL 117-127 CLE, DET 117-137 MIA, BKN 110-129 MEM, CHI 117-106 MIN (0 disagreements). Post-game records printed on the 11/15-11/18 cards reconcile with the pre-game records plus these results for all ten teams (10/10). Despite that, the repository publishes no finals file for 11/14 (data/verified/ still ends at finals_2026-11-13.json), all 17 published pick rows dated 11/14 (15 single-game + 2 parlays/SGPs) are still PENDING, and integration/out/settlement.json still lists all five games with reason 'tip-off has not happened yet at capture time'.</td>
+<td>17 published pick rows; the settlement ledger; any leaderboard or gate that reads them</td>
+<td>Settle the 11/14 slate from verify/2026-11-15-91390540/official_finals_2026-11-14.json (two-source, quarter scores included) and re-run integration/settle.py with a 11/14 finals input; ledger owner's call, not done in this pass because integration/** is outside this session's claimed scope.</td>
+<td class="src"><span class="na" title="source id S115-G14 + S115-BOX231..235 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F70</td>
+<td>Medium</td>
+<td><b>10 of the 22 published horizon rows (11/15-11/17) carry pre-11/14 records</b></td>
+<td>Row-by-row re-read of the official games pages for 11/15-11/17 against data/raw/schedule_upcoming.json: date, tip time, matchup and game id agree on all 22 rows (0 identity mismatches), but 10 rows carry records that pre-date the 11/14 results - exactly the ten teams that played 11/14. The staleness reconciles 10/10 with the verified finals, so it is a refresh gap, not a transcription error. The other 12 rows agree on every cell checked.</td>
+<td>record columns on the published horizon; any rest/record display derived from them</td>
+<td>Refresh the horizon records from the official cards (values captured in verify/2026-11-15-91390540/official_horizon_2026-11-15_to_18.json); venue cells were NOT checked this pass and must stay as published until re-read from https://www.nba.com/schedule.</td>
+<td class="src"><span class="na" title="source id S115-G15/G16/G17 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F71</td>
+<td>Medium</td>
+<td><b>Horizon stops at 11/17: the 12 official 11/18 games are outside every published surface</b></td>
+<td>Today is 2026-11-15, so the brief's maximum horizon (today + 3 days) runs through 11/18. The official calendar prints 12 games on 11/18 and this session captured all 12 (game ids 0022600258-0022600269), but data/raw/schedule_upcoming.json has window 11/14..11/17, the published picks' slate_dates stop at 11/17, and no surface carries a 11/18 row.</td>
+<td>schedule, lines and picks surfaces for 11/18</td>
+<td>Extend the horizon capture to 11/18 and regenerate lines/picks for the new window; the 12 rows are already captured here with sources.</td>
+<td class="src"><span class="na" title="source id S115-G18 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F72</td>
+<td>Medium</td>
+<td><b>Injury basis is two editions behind: site prices from 11/14 04:15 AM ET, newest official edition is 11/15 06:15 AM ET</b></td>
+<td>site/data/injuries.json is built from the 11/14/26 04:15 AM ET edition (75 rows) and meta.json says the lines were priced from it, with the 01:30 PM ET edition recorded as NOT RE-PRICED. The official hub at read time (2026-11-15 ~11:35Z) lists editions at 15-minute cadence through 11/15 06:15 AM ET, which this session captured in full (101 rows: 85 for 11/15, 16 NOT YET SUBMITTED team rows for 11/16). Diff against the previous in-repo edition (11/14 01:30 PM ET): 16 of 18 team entries for 11/15 moved from NOT YET SUBMITTED to filed, 84 player designation rows appeared, Dallas remains NOT YET SUBMITTED (inside its game-day window), and New York has no row of any kind - recorded as absent, not interpreted. Player-level status changes are not computable between these two editions because the older one listed no players for 11/15. Lines are deliberately NOT re-priced (post-cut information must not enter a graded number).</td>
+<td>injury layer for 11/15 games; any line adjustment driven by it</td>
+<td>Refresh the injury layer to the newest edition at the next pricing cut (before the 11/15 tips), keeping both editions visible; re-price only before publication, never after a line is frozen.</td>
+<td class="src"><span class="na" title="source id S115-IR0615 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F73</td>
+<td>Low</td>
+<td><b>Venue cells for 11/15-11/18 were not re-checked this pass</b></td>
+<td>The games pages used for this verification do not print venues, so venue cells on the published horizon were neither confirmed nor contradicted. They are reported as NOT CHECKED rather than assumed correct; no venue value was inferred or filled anywhere in this pass.</td>
+<td>venue column of the published horizon for 11/15-11/17</td>
+<td>Re-read https://www.nba.com/schedule in the next verification pass and compare venue cells row by row.</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">link</a></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
