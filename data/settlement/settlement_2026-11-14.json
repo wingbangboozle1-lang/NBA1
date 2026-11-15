@@ -1,0 +1,321 @@
+{
+ "title": "Settlement — 2026-11-14 slate (settled from official finals)",
+ "settled_at_utc": "2026-11-15T12:35Z",
+ "settled_by": "arena/83d380ad-nba1",
+ "rules": {
+  "single": "grade from published pick_line text \"TEAM -x.x\": cover if team wins by more than x.x, PUSH at exactly x.x, else LOSS; units paper -110 (WIN +1.00, LOSS -1.10, PUSH 0.00); gate failures NO BET 0.00",
+  "parlay": "every leg must WIN; any losing leg loses stake 1.10; WIN pays the published fair-odds band lower bound",
+  "sgp": "legs are player props (Over/Under). A leg whose player did not play is VOID and removed; remaining legs settle at the ticket price frozen at publication (joint_prob_rho as fair price; G-PROP blocked, no market price). Any losing leg loses the stake (1.10).",
+  "finals_source": "data/official/results_2026-11-14.json — official game pages (LINESCORES), quarters sum to finals (asserted at capture)"
+ },
+ "preregistration_check": {
+  "pre_tip_anchor_commit": "ef2e723e13523b5b2495656c2a4ae5b461244374",
+  "pre_tip_anchor_time": "2026-11-14T22:18:48Z",
+  "first_tip": "2026-11-15T00:00Z",
+  "publication_precedes_first_tip": true,
+  "horizon_picks_sha256_at_anchor": "fd027304b89e505f6a2145c9c82708d92eed5cc2895c6e36e2f2eb9a90d78cdf",
+  "horizon_lines_sha256_at_anchor": "2b7405421b1efe0d6dd410aba2177d4f859e4f74d26513d0d62c6c75f99bd92f",
+  "horizon_picks_sha256_now": "fd027304b89e505f6a2145c9c82708d92eed5cc2895c6e36e2f2eb9a90d78cdf",
+  "horizon_lines_sha256_now": "2b7405421b1efe0d6dd410aba2177d4f859e4f74d26513d0d62c6c75f99bd92f",
+  "model_blocks_identical_to_live_file": true
+ },
+ "singles": [
+  {
+   "date": "2026-11-14",
+   "game_id": "0022600231",
+   "matchup": "DEN@NOP",
+   "pick_side": "AWAY",
+   "pick_line": "DEN -8.0",
+   "gate": "G-CFG pass (|spread| 8.0 >= 3.0)",
+   "away": "DEN",
+   "away_pts": 116,
+   "home": "NOP",
+   "home_pts": 108,
+   "margin_pick_team": 8,
+   "result": "PUSH",
+   "units": 0.0,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/den-vs-nop-0022600231",
+   "source_finals": "data/official/results_2026-11-14.json (official LINESCORES)"
+  },
+  {
+   "date": "2026-11-14",
+   "game_id": "0022600232",
+   "matchup": "DAL@CLE",
+   "pick_side": "PASS",
+   "pick_line": null,
+   "gate": "G-CFG pass-through (|spread| 1.2 < 3.0) — no bet",
+   "away": "DAL",
+   "away_pts": 117,
+   "home": "CLE",
+   "home_pts": 127,
+   "margin_pick_team": null,
+   "result": "NO BET (gate failed at publication)",
+   "units": 0.0,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/dal-vs-cle-0022600232",
+   "source_finals": "data/official/results_2026-11-14.json (official LINESCORES)"
+  },
+  {
+   "date": "2026-11-14",
+   "game_id": "0022600233",
+   "matchup": "DET@MIA",
+   "pick_side": "AWAY",
+   "pick_line": "DET -12.0",
+   "gate": "G-CFG pass (|spread| 12.0 >= 3.0)",
+   "away": "DET",
+   "away_pts": 117,
+   "home": "MIA",
+   "home_pts": 137,
+   "margin_pick_team": -20,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/det-vs-mia-0022600233",
+   "source_finals": "data/official/results_2026-11-14.json (official LINESCORES)"
+  },
+  {
+   "date": "2026-11-14",
+   "game_id": "0022600234",
+   "matchup": "BKN@MEM",
+   "pick_side": "HOME",
+   "pick_line": "MEM -10.9",
+   "gate": "G-CFG pass (|spread| 10.9 >= 3.0)",
+   "away": "BKN",
+   "away_pts": 110,
+   "home": "MEM",
+   "home_pts": 129,
+   "margin_pick_team": 19,
+   "result": "WIN",
+   "units": 1.0,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/bkn-vs-mem-0022600234",
+   "source_finals": "data/official/results_2026-11-14.json (official LINESCORES)"
+  },
+  {
+   "date": "2026-11-14",
+   "game_id": "0022600235",
+   "matchup": "CHI@MIN",
+   "pick_side": "HOME",
+   "pick_line": "MIN -29.9",
+   "gate": "G-CFG pass (|spread| 29.9 >= 3.0)",
+   "away": "CHI",
+   "away_pts": 117,
+   "home": "MIN",
+   "home_pts": 106,
+   "margin_pick_team": -11,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/chi-vs-min-0022600235",
+   "source_finals": "data/official/results_2026-11-14.json (official LINESCORES)"
+  }
+ ],
+ "parlays": [
+  {
+   "date": "2026-11-14",
+   "legs": [
+    "CHI@MIN — MIN -29.9",
+    "DET@MIA — DET -12.0"
+   ],
+   "leg_results": [
+    {
+     "leg": "CHI@MIN — MIN -29.9",
+     "result": "LOSS",
+     "source_game_url": "https://www.nba.com/game/chi-vs-min-0022600235"
+    },
+    {
+     "leg": "DET@MIA — DET -12.0",
+     "result": "LOSS",
+     "source_game_url": "https://www.nba.com/game/det-vs-mia-0022600233"
+    }
+   ],
+   "joint_published": {
+    "joint_lb": 0.74,
+    "joint_ub": 0.771,
+    "rho_lb": -0.099,
+    "rho_ub": 0.334
+   },
+   "naive_product_printed_beside": null,
+   "result": "LOSS",
+   "units": -1.1,
+   "units_note": "LOSS -1.10 (stake)",
+   "price_convention": "paper -110 legs; fair-odds band published pre-tip",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-14",
+    "https://www.nba.com/games?date=2026-11-14"
+   ]
+  },
+  {
+   "date": "2026-11-14",
+   "legs": [
+    "CHI@MIN — MIN -29.9",
+    "BKN@MEM — MEM -10.9"
+   ],
+   "leg_results": [
+    {
+     "leg": "CHI@MIN — MIN -29.9",
+     "result": "LOSS",
+     "source_game_url": "https://www.nba.com/game/chi-vs-min-0022600235"
+    },
+    {
+     "leg": "BKN@MEM — MEM -10.9",
+     "result": "WIN",
+     "source_game_url": "https://www.nba.com/game/bkn-vs-mem-0022600234"
+    }
+   ],
+   "joint_published": {
+    "joint_lb": 0.718,
+    "joint_ub": 0.75,
+    "rho_lb": -0.105,
+    "rho_ub": 0.315
+   },
+   "naive_product_printed_beside": null,
+   "result": "LOSS",
+   "units": -1.1,
+   "units_note": "LOSS -1.10 (stake)",
+   "price_convention": "paper -110 legs; fair-odds band published pre-tip",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-14",
+    "https://www.nba.com/games?date=2026-11-14"
+   ]
+  },
+  {
+   "date": "2026-11-14",
+   "legs": [
+    "CHI@MIN — MIN -29.9",
+    "DEN@NOP — DEN -8.0"
+   ],
+   "leg_results": [
+    {
+     "leg": "CHI@MIN — MIN -29.9",
+     "result": "LOSS",
+     "source_game_url": "https://www.nba.com/game/chi-vs-min-0022600235"
+    },
+    {
+     "leg": "DEN@NOP — DEN -8.0",
+     "result": "PUSH",
+     "source_game_url": "https://www.nba.com/game/den-vs-nop-0022600231"
+    }
+   ],
+   "joint_published": {
+    "joint_lb": 0.658,
+    "joint_ub": 0.69,
+    "rho_lb": -0.122,
+    "rho_ub": 0.271
+   },
+   "naive_product_printed_beside": null,
+   "result": "LOSS",
+   "units": -1.1,
+   "units_note": "LOSS -1.10 (stake)",
+   "price_convention": "paper -110 legs; fair-odds band published pre-tip",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-14",
+    "https://www.nba.com/games?date=2026-11-14"
+   ]
+  }
+ ],
+ "sgp_candidates": [
+  {
+   "date": "2026-11-14",
+   "game": "DAL@CLE",
+   "kind": "two_opponents",
+   "legs": [
+    {
+     "leg_text": "Donovan Mitchell (CLE) OVER 22.5",
+     "player": "Donovan Mitchell",
+     "line": 22.5,
+     "actual_pts": null,
+     "played": false,
+     "result": "VOID (player inactive)",
+     "evidence": "Inactive Players list, official box score DAL@CLE",
+     "source_url": "https://www.nba.com/game/dal-vs-cle-0022600232"
+    },
+    {
+     "leg_text": "Cooper Flagg (DAL) OVER 24.5",
+     "player": "Cooper Flagg",
+     "line": 24.5,
+     "actual_pts": 18,
+     "played": true,
+     "result": "LOSS",
+     "evidence": "starter row, official box score DAL@CLE",
+     "source_url": "https://www.nba.com/game/dal-vs-cle-0022600232"
+    }
+   ],
+   "void_convention": "A leg whose player did not play is VOID and removed; the ticket settles on the remaining legs at the price frozen at publication. Any losing leg loses the stake (1.10).",
+   "frozen_price_joint_prob_rho": 0.2725,
+   "frozen_price_independent_printed_beside": 0.2645,
+   "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+   "result": "LOSS",
+   "units": -1.1,
+   "payout_formula": null,
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-14",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ]
+  },
+  {
+   "date": "2026-11-14",
+   "game": "DET@MIA",
+   "kind": "two_opponents",
+   "legs": [
+    {
+     "leg_text": "Cade Cunningham (DET) OVER 25.5",
+     "player": "Cade Cunningham",
+     "line": 25.5,
+     "actual_pts": 33,
+     "played": true,
+     "result": "WIN",
+     "evidence": "starter row, official box score DET@MIA",
+     "source_url": "https://www.nba.com/game/det-vs-mia-0022600233"
+    },
+    {
+     "leg_text": "Giannis Antetokounmpo (MIA) OVER 27.5",
+     "player": "Giannis Antetokounmpo",
+     "line": 27.5,
+     "actual_pts": 34,
+     "played": true,
+     "result": "WIN",
+     "evidence": "Game recap / points leader, official game page DET@MIA (see flagged F71)",
+     "source_url": "https://www.nba.com/game/det-vs-mia-0022600233"
+    }
+   ],
+   "void_convention": "A leg whose player did not play is VOID and removed; the ticket settles on the remaining legs at the price frozen at publication. Any losing leg loses the stake (1.10).",
+   "frozen_price_joint_prob_rho": 0.2467,
+   "frozen_price_independent_printed_beside": 0.2388,
+   "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+   "result": "WIN",
+   "units": 3.36,
+   "payout_formula": "profit = 1.10 * (1/joint_prob_rho - 1) at the model's published fair price (G-PROP market gate blocked; no market price exists)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-14",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ]
+  }
+ ],
+ "summary": {
+  "singles_published": 5,
+  "wins": 1,
+  "losses": 2,
+  "pushes": 1,
+  "no_bets": 1,
+  "record": "1-2-1",
+  "singles_units_at_minus110": -1.2,
+  "parlays_published": 3,
+  "parlays_won": 0,
+  "parlay_units": -3.3,
+  "sgp_published": 2,
+  "sgp_won": 1,
+  "sgp_units": 2.26,
+  "total_units": -2.24,
+  "validation_note": "All tickets were published as MODEL OUTPUT — UNVALIDATED, unfunded, zero-stake paper picks (no strategy has passed the validation gates; market-comparison gates G4/G5 and prop gate G-PROP remain BLOCKED)."
+ },
+ "sources": [
+  "https://www.nba.com/games?date=2026-11-14",
+  "https://www.nba.com/game/den-vs-nop-0022600231",
+  "https://www.nba.com/game/dal-vs-cle-0022600232",
+  "https://www.nba.com/game/det-vs-mia-0022600233",
+  "https://www.nba.com/game/bkn-vs-mem-0022600234",
+  "https://www.nba.com/game/chi-vs-min-0022600235"
+ ]
+}

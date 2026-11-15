@@ -1,0 +1,62 @@
+{
+ "session": "arena/83d380ad-nba1",
+ "retrieved_utc": "2026-11-15T11:35Z..12:20Z",
+ "method": "All values transcribed from official pages read live through the web-fetch channel (the sandbox has no general egress). Transcription is verbatim; assertions at the bottom of capture.py re-check internal consistency. Nothing inferred or filled.",
+ "sources_read": [
+  {
+   "url": "https://www.nba.com/games?date=2026-11-14",
+   "read": "date rail cards (5 finals + records + upcoming slate) and each game page chunk 2/3 (LINESCORES + GAME INFO: venue, attendance, officials, recap/AP headline)",
+   "produced": "data/official/results_2026-11-14.json"
+  },
+  {
+   "url": "https://www.nba.com/standings",
+   "read": "both chunks (all 30 rows, East + West tables)",
+   "produced": "data/official/standings_2026-11-15.json"
+  },
+  {
+   "url": "https://www.nba.com/games?date=2026-11-15 (through 2026-11-18)",
+   "read": "date-rail cards for the 4-day window (34 games: 9/8/5/12)",
+   "produced": "data/official/schedule_2026-11-15_to_18.json, data/raw/official_schedule_capture_2026-11-15.json"
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "read": "all 2 chunks (30 rows, full columns)",
+   "produced": "data/official/teams_advanced_2026-11-15.json"
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+   "read": "all 5 chunks (30 rows, full columns)",
+   "produced": "data/official/teams_traditional_2026-11-15.json"
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+   "read": "all 2 chunks (30 rows, full columns)",
+   "produced": "data/official/teams_opponent_2026-11-15.json"
+  },
+  {
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "read": "both chunks of the PDF text extraction (88 rows + 16 NOT YET SUBMITTED placeholders)",
+   "produced": "data/official/injury_2026-11-15_0615AM.json, data/official/injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json"
+  },
+  {
+   "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "read": "index page: edition listing + participation-status submission rule",
+   "produced": "injury capture metadata + revision/retrieval banner inputs"
+  }
+ ],
+ "assertions_run": [
+  "quarter scores sum to finals (5 games)",
+  "schedule row counts equal official per-day counts (9/8/5/12)",
+  "records equal across standings + all 3 stats pages (30 teams)",
+  "pts - opp_pts equals printed +/- on both stats pages within rounding (30 teams)",
+  "GP deltas vs previous model-input file are 0..2 with the 11/14 slate >= 1"
+ ],
+ "re_cut": {
+  "data/teams_advanced_2026_27.json": "full row replace from advanced re-read",
+  "data/teams_scoring_2026_27.json": "own columns from traditional, opponent columns from opponent re-read (pts + opp_pts are the only columns the model consumes)"
+ },
+ "flagged": [
+  "F69: 13 injury rows lost their Team column in PDF extraction (team_inherited rows); NYK block absent with no NOT YET SUBMITTED row - recorded, not inferred",
+  "OT reconciliation: standings OT columns sum to 9 season-to-date vs 8 OT games visible in the results feed through 11/14 - carried forward from §38 G02/G03, flag stays open"
+ ]
+}
