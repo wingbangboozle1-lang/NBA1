@@ -1,0 +1,145 @@
+name: Official capture
+
+# Purpose: the ONLY path in this project that can reach nba.com.
+#
+# The agent sandbox has no outbound network (curl to nba.com returns 000). GitHub
+# runners do, but only with the league's own web-client header set - proven by
+# data/raw/probe_official.json (`retried_with_browser_headers`: 9/14 refused URLs
+# answer 200, including stats/teams/*, schedule, games?date=, game/<slug>, the
+# injury index and the injury PDFs). A plain client is refused with 403.
+#
+# Design rules:
+#   * only hosts on the allowlist inside scripts/official_capture.py are fetched;
+#   * every fetch records url / status / bytes / sha256 / retrieval timestamp;
+#   * nothing here overwrites a committed snapshot: captures land in
+#     data/capture/<run_id>/ for the freshness + provenance gate to promote;
+#   * a dead source is a finding, never a build failure (exit is always 0);
+#   * the run never edits another build's file.
+
+on:
+  workflow_dispatch:
+    inputs:
+      today:
+        description: "League date to anchor the rolling slate (YYYY-MM-DD)"
+        required: false
+        default: ""
+      dates:
+        description: "Explicit slate dates, comma separated (overrides today)"
+        required: false
+        default: ""
+      debug_dump:
+        description: "Also save raw HTML to data/capture/<run>/_debug/"
+        required: false
+        default: "0"
+      game_pages_all:
+        description: "Fetch game pages for the whole slate, not just played dates"
+        required: false
+        default: "0"
+      probe_urls:
+        description: "Pipe-separated URLs to probe (status + first 400 chars of text)"
+        required: false
+        default: ""
+      skip_ci:
+        description: "Append [skip ci] to the commit message"
+        required: false
+        default: "0"
+  push:
+    branches: ["arena/**"]
+    paths:
+      - scripts/official_capture.py
+      - .github/workflows/official-capture.yml
+  schedule:
+    # 11:40, 15:40, 19:40 and 23:40 UTC - after the league's own report times
+    - cron: "40 11,15,19,23 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install a PDF text extractor (optional; a pure-python fallback exists)
+        continue-on-error: true
+        run: pip install --quiet pypdf
+
+      - name: Capture the official sources
+        id: capture
+        continue-on-error: true
+        env:
+          CAPTURE_TODAY: ${{ github.event.inputs.today }}
+          CAPTURE_DATES: ${{ github.event.inputs.dates }}
+          DEBUG_DUMP: ${{ github.event.inputs.debug_dump }}
+          GAME_PAGES_ALL: ${{ github.event.inputs.game_pages_all }}
+          PROBE_URLS: ${{ github.event.inputs.probe_urls }}
+        run: python3 scripts/official_capture.py
+
+      - name: Run the freshness and provenance gate
+        id: gate
+        continue-on-error: true
+        run: python3 scripts/gate_freshness.py
+
+      - name: Rebuild the site only if the gate passed
+        if: steps.gate.outcome == 'success'
+        continue-on-error: true
+        run: python3 scripts/build_requirements.py
+
+      - name: Print the parsed output for review
+        if: always()
+        run: |
+          R=$(cat data/capture/LATEST 2>/dev/null || echo "")
+          echo "run: $R"
+          if [ -n "$R" ] && [ -f "data/capture/$R/manifest.json" ]; then
+            python3 - "$R" <<'PY'
+            import json, sys, os
+            r = sys.argv[1]
+            m = json.load(open(f"data/capture/{r}/manifest.json"))
+            print("fetches:", len(m["fetches"]))
+            for f in m["fetches"]:
+                print("  ", f.get("http_status"), f.get("bytes"), (f.get("parser") or "-"), f["url"][:110])
+            for d in sorted(os.listdir(f"data/capture/{r}/parsed")):
+                p = json.load(open(f"data/capture/{r}/parsed/{d}"))
+                if isinstance(p, dict) and "rows" in p and isinstance(p["rows"], list) and p["rows"]:
+                    print(f"--- {d}: {len(p['rows'])} rows; first row:")
+                    print("   ", json.dumps(p["rows"][0])[:600])
+                elif isinstance(p, dict) and "editions" in p:
+                    print(f"--- {d}: {len(p['editions'])} editions")
+            PY
+          fi
+
+      - name: Upload the run
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-capture-${{ github.run_id }}
+          path: data/capture/
+          if-no-files-found: warn
+
+      - name: Commit the capture
+        if: always()
+        run: |
+          set -u
+          git config user.name  "nba1-bot"
+          git config user.email "nba1-bot@users.noreply.github.com"
+          git add data/capture site/data site/pages index.html 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "nothing new captured"
+            exit 0
+          fi
+          MSG="chore: official capture $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          if [ "${{ github.event.inputs.skip_ci }}" = "1" ]; then MSG="$MSG [skip ci]"; fi
+          git commit -m "$MSG"
+          for i in 1 2 3 4 5; do
+            if git push; then echo "pushed on attempt $i"; exit 0; fi
+            echo "push raced; rebasing and retrying ($i/5)"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            sleep $((i * 5))
+          done
+          echo "::warning::could not push the capture after 5 attempts; it is in the run artifact"
+          exit 0
