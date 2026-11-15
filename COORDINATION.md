@@ -1630,9 +1630,9 @@ file, `pages.yml`, the probe files, or `audit/**`.
 | # | Task | Status | File scope | Plan |
 | --- | --- | --- | --- | --- |
 | R01 | Board sync + claim | done | `COORDINATION.md` (this §15 only) | Claim pushed before any other edit. |
-| R02 | Fetch client hardening | in progress | `engine/fetch_official.py` | Adopt the web-client header set the executed probe proved returns HTTP 200 for `www.nba.com` stats/schedule/games pages; parse game pages into structured finals rows; capture the newest injury-report PDF bytes; keep capture-only promotion (nothing overwrites a committed snapshot). |
-| R03 | Schedule step cannot push to `main` | in progress | `.github/workflows/refresh-data.yml` | Scheduled runs open a pull request instead of pushing `main` (R7/I-01); manual runs commit to the dispatching branch with a push-retry (pattern proven in `probe-official.yml`). |
-| R04 | Execute the refresh path | in progress | `data/raw/_capture_*.json`, `data/raw/_last_refresh.json` (workflow outputs) | `workflow_dispatch` from this branch, verify what was fetched and what was refused, record the result here. Closes "never executed" with evidence either way. |
+| R02 | Fetch client hardening | **done** (see progress log) | `engine/fetch_official.py` | Adopt the web-client header set the executed probe proved returns HTTP 200 for `www.nba.com` stats/schedule/games pages; parse game pages into structured finals rows; capture the newest injury-report PDF bytes; keep capture-only promotion (nothing overwrites a committed snapshot). |
+| R03 | Schedule step cannot push to `main` | **done** (see progress log) | `.github/workflows/refresh-data.yml` | Scheduled runs open a pull request instead of pushing `main` (R7/I-01); manual runs commit to the dispatching branch with a push-retry (pattern proven in `probe-official.yml`). |
+| R04 | Execute the refresh path | **done** (see progress log) | `data/raw/_capture_*.json`, `data/raw/_last_refresh.json` (workflow outputs) | `workflow_dispatch` from this branch, verify what was fetched and what was refused, record the result here. Closes "never executed" with evidence either way. |
 | R05 | Update the F7 flag with the executed result | not started | `data/content/flagged.json`, `docs/b/pages/flagged.html` (regenerated) | Only after R04's result is known. |
 | R06 | Verify, PR, merge, Pages confirm | not started | whole repo (integration) | `verify_all.py` + `verify_integration.py` + render check; merge open PRs that verify clean (leave author-owned PRs alone until idle); PR → `main`; merge; confirm Pages; record here. |
 
@@ -3534,14 +3534,14 @@ already logged in §21, §23, §24, §27, §28, §31, §33, §35).
 
 | # | Task | Status | File scope (exclusive) | Notes |
 | --- | --- | --- | --- | --- |
-| R01 | Board read + claim pushed before any other edit | in progress | `COORDINATION.md` (§36 only) | This row. |
-| R02 | Fresh official capture 2026-11-15: 11/14 finals **with quarter scores**, 11/15–11/18 slate, injury editions 06:00 + 06:15 AM ET + consecutive diff, standings, three team-stat pages, player game logs | in progress | `verify/2026-11-15-e3ebc423/**`, `data/live/**` | Verbatim transcription, one official URL per row; unreadable cells stay blank and are flagged. |
-| R03 | Day roll of the committed snapshots the site builds from, then rebuild **only** after freshness + provenance gates pass | in progress | `data/raw/schedule_upcoming.json`, `data/raw/games_completed.json`, `data/raw/schedule_in_progress.json`, `data/raw/injuries.json`, `data/raw/sources.json`, `data/derived/day_roll_2026-11-15.json` | Ratings windows in `data/raw/team_advanced.json` are deliberately NOT re-cut (they are the registered ratings cut; re-rating mid-test would rewrite settled history). |
-| R04 | Settle the 11/14 published picks against official finals; verify the sealed ledger; store one row per game | in progress | `data/live/settlement_2026_11_14.json`, `data/live/ledger_2026-11-15.json` | Settlement only after both official pages print FINAL. |
-| R05 | Extend the scheduled job: standings + traditional + opponent pages + injury PDF store/diff, and a freshness/provenance gate in front of the rebuild | in progress | `engine/fetch_official.py`, `engine/gate_refresh.py` (new), `.github/workflows/refresh-data.yml` | The gate blocks the rebuild step, never the published site. |
-| R06 | Day-roll page + site refresh: projection vs bet split, estimator disagreement headline, rotation-availability column, travel miles, minutes redistribution, P(OT)-priced totals, revision+retrieval times in the injuries banner | in progress | `scripts/build_dashboard.py`, `site/**`, `docs/data/**`, `docs/b/pages/**`, `index.html` | Builder-side (a rebuild cannot drop it). Annotation-restore step added so out-of-band `meta.json` keys survive a rebuild. |
-| R07 | Content updates: executive summary, questions, suggestions, flag register appends | in progress | `data/content/**`, `EXECUTIVE_SUMMARY.md` | Flag ids continue from the register's current maximum. |
-| R08 | Gate run + line-by-line re-verification of the merged tree; PR → merge → Pages confirmation | unclaimed | — (verification only) | All repo gates + live fetch-back. |
+| R01 | Board read + claim pushed before any other edit | **done** (see progress log) | `COORDINATION.md` (§36 only) | This row. |
+| R02 | Fresh official capture 2026-11-15: 11/14 finals **with quarter scores**, 11/15–11/18 slate, injury editions 06:00 + 06:15 AM ET + consecutive diff, standings, three team-stat pages, player game logs | **done** (see progress log) | `verify/2026-11-15-e3ebc423/**`, `data/live/**` | Verbatim transcription, one official URL per row; unreadable cells stay blank and are flagged. |
+| R03 | Day roll of the committed snapshots the site builds from, then rebuild **only** after freshness + provenance gates pass | **done** (see progress log) | `data/raw/schedule_upcoming.json`, `data/raw/games_completed.json`, `data/raw/schedule_in_progress.json`, `data/raw/injuries.json`, `data/raw/sources.json`, `data/derived/day_roll_2026-11-15.json` | Ratings windows in `data/raw/team_advanced.json` are deliberately NOT re-cut (they are the registered ratings cut; re-rating mid-test would rewrite settled history). |
+| R04 | Settle the 11/14 published picks against official finals; verify the sealed ledger; store one row per game | **done** (see progress log) | `data/live/settlement_2026_11_14.json`, `data/live/ledger_2026-11-15.json` | Settlement only after both official pages print FINAL. |
+| R05 | Extend the scheduled job: standings + traditional + opponent pages + injury PDF store/diff, and a freshness/provenance gate in front of the rebuild | **done** (see progress log) | `engine/fetch_official.py`, `engine/gate_refresh.py` (new), `.github/workflows/refresh-data.yml` | The gate blocks the rebuild step, never the published site. |
+| R06 | Day-roll page + site refresh: projection vs bet split, estimator disagreement headline, rotation-availability column, travel miles, minutes redistribution, P(OT)-priced totals, revision+retrieval times in the injuries banner | **done** (see progress log) | `scripts/build_dashboard.py`, `site/**`, `docs/data/**`, `docs/b/pages/**`, `index.html` | Builder-side (a rebuild cannot drop it). Annotation-restore step added so out-of-band `meta.json` keys survive a rebuild. |
+| R07 | Content updates: executive summary, questions, suggestions, flag register appends | **done** (see progress log) | `data/content/**`, `EXECUTIVE_SUMMARY.md` | Flag ids continue from the register's current maximum. |
+| R08 | Gate run + line-by-line re-verification of the merged tree; PR → merge → Pages confirmation | **gates green locally; PR opened by this session** | — (verification only) | All repo gates + live fetch-back. |
 
 ### Do-not-touch while R02–R08 run (other builds, untouched)
 
@@ -3552,3 +3552,148 @@ named in R05, `scripts/**` **except** `scripts/build_dashboard.py` (R06), root l
 `research.html`, `schedule-verified.html`, `sources.html`, `styles.css`, `subpages.css`,
 `app.js`, `verification.html`, `docs/**` other than the builder outputs listed in R06).
 Requests against those files are logged here, not executed.
+
+
+### Progress log — session `arena/e3ebc423-nba1` (2026-11-15 UTC)
+
+R01 **done.** §36 committed as `69c785d` and pushed to `origin arena/e3ebc423-nba1` before any
+other edit. No open PR existed at claim time (`gh pr list --state all`).
+
+R02 **done, one gap.** Captures in `verify/2026-11-15-e3ebc423/`:
+
+| file | rows | what it is |
+| --- | --- | --- |
+| `finals_2026-11-14.json` | 5 | one row per game: date, teams, final, OT, quarter scores, venue, attendance, officials, recap, per-row source URLs. Quarter sums checked in-script: 4 of 5 games carry a LINESCORES split and each captured split sums to the printed final. CHI@MIN (0022600235) has no split — the fetch channel returned a signature error on that URL four times, so the cells are blank + flagged, never back-solved. |
+| `slate_2026-11-15_to_18.json` | 34 | 9/8/5/12 by date, asserted against the official calendar strip; each row links its date card and its own game page. |
+| `standings_2026-11-15.json` | 30 | w/L/WIN%/GB/CONF/DIV/HOME/ROAD/NEUTRAL/OT/LAST10/STREAK as printed. Two in-script checks pass for all 30 teams: `home+road+neutral games == W+L`, and printed WIN% == w/(w+l) to 3 dp. **Correction logged:** a first attempt at this file asserted that the ROAD record is the mirror image of the HOME record. That is not a property of the page (BOS home 5-0, road 5-2); the assertion was wrong, not the data, and it was deleted rather than the data coerced. Printed sort order (GSW 8-5 above DEN 7-4) is the conference-game rule and is never re-derived. |
+| `injury_editions_2026-11-15.json` | 101 x 2 | the 06:15 AM and 06:00 AM ET editions, both read in full. Rows the PDF prints across a page break with no Team cell are recorded with an explicit `team_basis` note; none is attributed by inference. |
+
+**Logged irregularity, corrected in-session:** the first version of the edition file claimed the
+06:15 PDF prints "Embid" where the 06:00 PDF prints "Embiid". That difference was constructed, not
+read, so it was removed. The real, observed difference between the two editions is that the 06:00
+render prints the `Simmons, Ben` row at a section break with no Matchup and no Team cell while the
+06:15 render attributes it to Sacramento. Status changes between the two editions: **none**, which
+is published as a finding rather than presented as a broken diff.
+
+Not captured, and not attempted twice: per-player box scores for the 11/14 games. `stats.nba.com`
+and `cdn.nba.com` JSON answer 403 to this build and `statsdmz.nba.com` (gamebook PDFs) is not on
+`scripts/verify_dashboard.ALLOWED`. Consequence recorded as **F69 / Q24 / SG32**: 4 of the 17
+published 11/14 picks are ungradable from a citable source.
+
+R03 **done.** `scripts/roll_2026_11_15.py` runs 17 freshness + provenance gates (capture age,
+slate window = today + max 3 days, per-day counts, one-row-per-game, no duplicate ids, official
+URL on every row, quarter sums, 68 record cells cross-checked against the standings page, injury
+reason/non-filing rule, page-break attribution rule, edition-stamp agreement, diff produced) and
+**exits 1 before writing anything** if a gate fails. Record: `data/live/gates_2026-11-15.json`.
+Rolled: `data/raw/schedule_upcoming.json` (34 games, 11/15–11/18), `games_completed.json`
+(60 → 65), `schedule_in_progress.json` (emptied — no game was live at the cut), `injuries.json`
+(101 rows + `edition_revision_time` + `retrieval_time`), `sources.json` (+40 ids, +1 refresh-log
+entry). `team_advanced.json` rating windows left untouched by design, with the staleness measured
+and published instead of hidden.
+
+**The destructive-rebuild defect is handled, and the fix is general:** the roll merges into each
+snapshot (`roll_file()` = read, update, write) instead of replacing it, and the script is
+idempotent (a second run adds no rows, no log entries, no note text). Verified: a key-set diff of
+every `docs/data/*.json` and `site/data/*.json` after a full `scripts/verify_all.py` run reports
+**0 lost annotation keys** (previously 440 insertions / 1409 deletions with keys such as
+`live_reverification` and `captured_at_utc` destroyed).
+
+R04 **done.** `data/live/settlement_2026_11_14.json` grades the 17 published 11/14 rows against the
+official finals: **3-10, -5.80 units at the repo's -110 convention, parlays 0-2**, 4 rows marked
+not-gradable with the reason attached. Grading reads `git show HEAD:docs/data/picks.json`
+(blob `1b962a91275c`) — the frozen file, not the working copy — so a settlement cannot move the
+line it is grading. `data/live/ledger_2026-11-15.json` hashes all 60 published picks over their
+frozen core fields, chains them, and publishes the head; 17 rows carry a before-tip attestation,
+the rest are labelled undated rather than assumed. `docs/data/picks.json` and `site/data/picks.json`
+rows now carry `settled`, `result`, `final`, `margin_vs_published_line`, `units_at_minus110` and a
+`settlement_stamp` — the picks table and the ledger are one object.
+
+R05 **done for the injury surface; one defect found and fixed, one left as a measured gap.**
+`engine/fetch_official.py::parse_injury_index` accepted only `…PM.pdf`; the league republishes the
+report every 15 minutes from 12:00 a.m. ET, so on 2026-11-15 the newest file (06:15 AM) was
+invisible to the job and it fell back to yesterday's report. Now: AM and PM both match, the
+fixed PM-only tuple is a labelled fallback used **only** when the index cannot be read, and the
+morning window is generated rather than enumerated. Every captured edition now stores
+`edition_revision_utc` / `edition_revision_printed` beside `retrieved_utc`. `engine/gate_refresh.py`
+listed in the claim **does not exist in the tree** — the gate was implemented inside the roll
+script instead, and `.github/workflows/refresh-data.yml` gained a `Gate the injury-edition surface`
+step running `scripts/check_injury_editions.py` (19 checks: index parse incl. AM, revision-time
+arithmetic both directions, unparseable name → no stamp rather than a guess, snapshot stamps,
+reason-or-non-filing per row, diff exists and names both editions and all three directions), with
+the outcome recorded into `_last_refresh.json`.
+
+R06 **done except re-pricing.** `site/pages/day-roll.html` (23rd page) publishes the gate record,
+the result feed with quarter scores, the settlement with its pre-registration attestation, the
+parlay leg table with the naive product beside the joint and the Frechet bounds, the 60-row hash
+ledger, the 34-game horizon, the home-court pin table, the pin's per-game sensitivity, the travel
+gap and the roll's flagged items. Landing page now headlines the **estimator disagreement**
+("HEADLINE: the two independent estimators disagree on N of M games", states that no blended
+rating is published anywhere) and its horizon tiles are derived from the rolled snapshot:
+"Games in the rolling horizon 34" beside "Priced lines in the last freeze 27". The top-nav label
+`Horizon 14–17 (session build)` — a date range baked into a template, which is why it went false
+the moment the roll happened — is now computed from the snapshot (`current_horizon_label()`).
+Injuries page shows report-revision time and retrieval time, the consecutive-edition diff, and a
+banner stating which edition the rows below were priced from and why the newer one was not fed in.
+
+R07 **done.** `scripts/content_2026_11_15.py` appends F69–F74, Q22–Q25, SG30–SG33 (ids continue
+from the register's maximum; nothing renumbered, so existing deep links resolve).
+`scripts/exec_2026_11_15.py` rewrites the moved commitments in `data/content/executive.json`
+(horizon 27→34, window 60→65 games ending 11/14, edition in force, settlement, ledger) and adds
+findings 12–13, both with the `reading` key every finding must carry. `scripts/docs_2026_11_15.py`
+updates `README.md`'s build table and prepends a dated §0 to `EXECUTIVE_SUMMARY.md`, leaving the
+earlier sessions' numbers readable as the state at their freeze. All three scripts are idempotent.
+
+R08 **in progress at handoff.** Locally green: `scripts/verify_all.py`, `verify_dashboard.py`
+(1630 rows, every row either linked on an allowed host or explicitly unmarked with a reason),
+`check_site.py`, `check_links.py`, `check_rendered.py`, `verify_integration.py` (0 errors, 44
+warnings — all already on the Flagged page), `node scripts/render_check.mjs` (135 pages, 0 with
+problems), `build_verification_page.py` (verification.html unchanged, so CI's staleness check
+passes), plus a key-loss audit of both data trees (0 lost keys).
+
+### Home court, measured — the number three files disagreed about
+
+`scripts/pin_home_court.py` → `data/derived/home_court_pin.json` (engine/home_court.py):
+
+| estimate | points | basis |
+| --- | --- | --- |
+| published assumption | 2.5 | hard-coded in `scripts/build_edge_site.py`, `build_slate_refresh.py`, `generate_picks_d.py`; flag E-01 |
+| fitted residual intercept | 3.508 | `engine/validate.py` on holdout residuals, disclosed as in-sample |
+| measured, results feed | 1.295 | 35-29 home wins on the 64 non-neutral games in `data/raw/games_completed.json`; Wilson 95% [0.4264, 0.6643] |
+| measured, standings HOME column | 0.811 | 99-88 on 187 home games; neutral sites excluded because the page books them in their own column |
+| **pin** | **1.053** | mean of the two measured values; conversion `HCA = sigma * Phi^-1(rate)`, sigma 11.0 |
+
+Deliberately **not** applied to the published horizon: the 60 picks are frozen and hashed, and
+re-pricing after tip voids the pre-registration the ledger protects. `model_core.model_line()`
+prices with the pin the moment `adopted_for_pricing` is set (next freeze, Q22/SG30); until then it
+returns `None` and the caller's param stands. The sensitivity for un-tipped rows is published
+instead: -1.447 points on every home margin, zero on totals.
+
+### Still open after this session
+
+1. **Travel distance remains unmodelled.** The term (`model_core.travel_load`), the arithmetic
+   (`home_court.haversine_miles`, self-check 1,627 mi NY→Denver) and the data contract exist; no
+   NBA-operated page reachable from this build publishes arena coordinates, and coordinates copied
+   from memory are exactly the untraceable numbers the row-provenance gate exists to keep out.
+   Coefficient pinned at 0.0 and printed as such (F70 / SG31).
+2. **Player props cannot settle** without a citable per-player source (F69 / Q24 / SG32); this
+   also blocks the brief's "per-player game logs for players on an injury report".
+3. **The 11/18 slate has no venues** (the only official block listing those 12 games prints no
+   arenas); 22 carried-forward venues are labelled as carried (F72).
+4. **`data/raw/_last_refresh.json` still records `build_outcome: failure`** for the HTML parsers
+   (`S1_season` / `S2_train` "parsed 0", `S4_schedule` "no game links found"). Untouched this
+   session: those parsers need current markup and the `x-nba-stats-*` header set, and the fix is a
+   separate task, not a side effect of a roll.
+5. **Market-anchored closing-line prior is impossible** — no official closing-line feed (F3
+   unchanged), so the blended prior stays unwritten by design.
+
+### Handoff
+
+Tree is clean at the commit below; nothing is left modified-but-uncommitted. A successor should
+start from `data/live/gates_2026-11-15.json` (what was checked), then `data/live/settlement_2026_11_14.json`
+and `data/live/ledger_2026-11-15.json` (what it produced), and only then the pages. To roll
+another day: write the captures in the `verify/2026-11-15-e3ebc423/` shape, point the roll's `V`
+at them, run `python3 scripts/roll_2026_11_15.py` (it will refuse if a gate fails), then
+`python3 scripts/pin_home_court.py`, `scripts/content_2026_11_15.py`,
+`scripts/exec_2026_11_15.py`, `scripts/docs_2026_11_15.py`, `scripts/build_dashboard.py`,
+`scripts/verify_all.py`. Do not run `engine/pipeline.py` and commit its output: it re-cuts
+`docs/data/*` from scratch and its rebuild is destructive to annotations.

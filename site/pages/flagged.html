@@ -675,7 +675,7 @@
 <td><b>Player-prop and parlay picks cannot be settled from any source this site may cite</b></td>
 <td>Of the 17 picks published on the 2026-11-14 slate, 13 grade against the official finals and 4 do not: three Player-points rows and one Player-PRA row need a per-player box score, and the official game-log endpoints answer 403 to this build while the gamebook PDF host is not on the allowed source list. Those four rows are now marked 'not gradable' with the reason attached, rather than settled from a source the site cannot cite. Until a per-player source is registered, no player-prop strategy (S7, S8) can ever accumulate a settled record, whatever its gate thresholds say.</td>
 <td>S7 / S8 rows on the picks page; every prop strategy's path to a funded tier</td>
-<td>Register one per-player source the site may cite - the box-score table on each NBA.com game page prints MIN/PTS/REB/AST and is already an allowed host - and re-grade the four rows from it.</td>
+<td>Register one per-player source the site may cite - the box-score table on each NBA.com game page prints MIN/PTS/REB/AST and is already an allowed host - and re-grade the four rows from it. See F75: the capture path now exists in the scheduled job, so this becomes executable on the next CI run rather than waiting on a parser.</td>
 <td class="src"><a href="https://www.nba.com/game/chi-vs-min-0022600235" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
@@ -722,6 +722,15 @@
 <td>Every injury row behind lines published before 2026-11-15; the freshness of today's roll</td>
 <td>Nothing further for the past; the new check keeps the future honest.</td>
 <td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F75</td>
+<td>Medium</td>
+<td><b>The four new capture stages are written but have never been executed by a session - only by CI</b></td>
+<td>The scheduled job now fetches the other two official team-stat pages (traditional, opponent), the standings page, and per-player box scores for the most recent completed games (stats.nba.com boxscoretraditionalv2, whose response carries its own headers array so no column meaning is inferred from position). All four are capture-only: they write data/raw/_capture_*.json and never a committed snapshot. None of them has been run from this sandbox, where stats.nba.com answers 403; they will execute on the runner, which carries the web-client header set the probe record proves returns 200. Until a capture exists, nothing from these stages appears on a published page - the code is not a result.</td>
+<td>Refresh coverage for standings, team traditional/opponent and per-player game logs</td>
+<td>On the next refresh run, read data/raw/_capture_S1t_traditional.json, _capture_S1o_opponent.json, _capture_S9_standings.json and the newest _capture_gamelog_*.json; where teams_parsed != 30 the capture carries failure_evidence with the raw excerpt, which is the thing to write a real parser against.</td>
+<td class="src"><a href="https://www.nba.com/stats/players/boxscores" target="_blank" rel="noopener">S20</a></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">

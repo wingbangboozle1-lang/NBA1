@@ -641,7 +641,7 @@
    "affected": "S7 / S8 rows on the picks page; every prop strategy's path to a funded tier",
    "source": null,
    "source_url": "https://www.nba.com/game/chi-vs-min-0022600235",
-   "suggested_action": "Register one per-player source the site may cite - the box-score table on each NBA.com game page prints MIN/PTS/REB/AST and is already an allowed host - and re-grade the four rows from it."
+   "suggested_action": "Register one per-player source the site may cite - the box-score table on each NBA.com game page prints MIN/PTS/REB/AST and is already an allowed host - and re-grade the four rows from it. See F75: the capture path now exists in the scheduled job, so this becomes executable on the next CI run rather than waiting on a parser."
   },
   {
    "id": "F70",
@@ -692,6 +692,16 @@
    "source": "S5",
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "suggested_action": "Nothing further for the past; the new check keeps the future honest."
+  },
+  {
+   "id": "F75",
+   "severity": "Medium",
+   "title": "The four new capture stages are written but have never been executed by a session - only by CI",
+   "detail": "The scheduled job now fetches the other two official team-stat pages (traditional, opponent), the standings page, and per-player box scores for the most recent completed games (stats.nba.com boxscoretraditionalv2, whose response carries its own headers array so no column meaning is inferred from position). All four are capture-only: they write data/raw/_capture_*.json and never a committed snapshot. None of them has been run from this sandbox, where stats.nba.com answers 403; they will execute on the runner, which carries the web-client header set the probe record proves returns 200. Until a capture exists, nothing from these stages appears on a published page - the code is not a result.",
+   "affected": "Refresh coverage for standings, team traditional/opponent and per-player game logs",
+   "source": "S20",
+   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "suggested_action": "On the next refresh run, read data/raw/_capture_S1t_traditional.json, _capture_S1o_opponent.json, _capture_S9_standings.json and the newest _capture_gamelog_*.json; where teams_parsed != 30 the capture carries failure_evidence with the raw excerpt, which is the thing to write a real parser against."
   }
  ]
 }

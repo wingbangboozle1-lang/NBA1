@@ -85,6 +85,16 @@ FETCHES = {
                  "?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
                  "teams_advanced"),
     "S7_players": ("https://www.nba.com/stats/players/traditional", "players"),
+    # The other two of the three official team-stat pages the brief names, and the standings
+    # table. Added 2026-11-15: the job used to read ONLY the advanced page, so "re-read the
+    # three official team-stat pages" was satisfied by one third of itself. These are
+    # CAPTURE-ONLY (kind=team_table / standings): they write _capture_*.json and never a
+    # committed snapshot, because a parse that returns 29 rows instead of 30, or re-sorts the
+    # table by a rule the page implements differently, would silently corrupt the ratings the
+    # settled history was graded against. A session promotes rows after re-checking them.
+    "S1t_traditional": ("https://www.nba.com/stats/teams/traditional", "team_table"),
+    "S1o_opponent": ("https://www.nba.com/stats/teams/opponent", "team_table"),
+    "S9_standings": ("https://www.nba.com/standings", "standings"),
     "S4_schedule": ("https://www.nba.com/schedule", "schedule"),
     "S5_injury_index": ("https://official.nba.com/nba-injury-report-2026-27-season/",
                         "injury_index"),
@@ -412,6 +422,55 @@ def parse_injury_index(text):
         return (f"{year}-{mo}-{day}", hour24 * 100 + int(mm))
 
     return sorted(set(links), key=edition_key, reverse=True)
+
+
+# ------------------------------------------------- generic official-table probe
+def probe_team_table(text):
+    """Count the rows of a server-rendered team stats table, whatever columns it carries.
+
+    Deliberately does NOT try to interpret the numbers. The three team-stat pages
+    (traditional, opponent, advanced) share the row shell - a link cell with the full
+    team name - but not the column set, and the last time a parser guessed at columns it
+    produced a snapshot the site had to walk back. So the capture records: how many of the
+    30 teams appear as rows, the cell text of each row in page order, and the page hash.
+    A verifier turns that into data; this does not.
+    """
+    rows = []
+    seen = set()
+    for tr in re.finditer(r"<tr[^>]*>(.*?)</tr>", text, re.S | re.I):
+        body = tr.group(1)
+        tm = re.search(r'href="/stats/team/\d+/[^"]*"[^>]*>\s*([^<]+?)\s*</a>', body, re.I)
+        if not tm:
+            continue
+        team = html.unescape(tm.group(1)).strip()
+        if team not in ABBR or team in seen:
+            continue
+        seen.add(team)
+        cells = [TAG_RE.sub(" ", c).strip() for c in
+                 re.findall(r"<td[^>]*>(.*?)</td>", body, re.S | re.I)]
+        rows.append({"team": team, "abbr": ABBR[team],
+                     "cells": [html.unescape(c) for c in cells]})
+    return rows
+
+
+def parse_standings_records(text):
+    """Record cells (``10-2`` style) attached to a team name, as printed.
+
+    The standings page renders its table in the browser (source S9 on the register says so),
+    so a plain fetch may legitimately contain nothing parseable. That is reported as
+    zero rows with evidence, never as 'no games played', and this function only ever
+    transcribes what is in the bytes: team, the record strings in document order.
+    """
+    out = []
+    for name in ABBR:
+        i = text.find(name)
+        if i < 0:
+            continue
+        window = text[i:i + 320]     # short on purpose: a wider window swallows the next team's cells
+        recs = RECORD_RE.findall(window)
+        if recs:
+            out.append({"team": name, "abbr": ABBR[name], "records_in_document_order": recs[:12]})
+    return out
 
 
 # ---------------------------------------------------------------- game results
@@ -786,6 +845,69 @@ def capture_results(now, changed, failed, known, committed):
             log(f"  {d}: unchanged")
 
 
+BOXSCORE_API = ("https://stats.nba.com/stats/boxscoretraditionalv2?GameID={gid}"
+                "&LeagueID=00&StartPeriod=0&EndPeriod=10&StartBonus=0&EndBonus=0&RangeType=0")
+
+
+def capture_game_logs(now, changed, failed, games_block, days_back=1):
+    """Per-player game logs for the most recent completed games, from the league's own JSON.
+
+    Why this endpoint and not the HTML: boxscoretraditionalv2 returns its own `headers` /
+    `baseColumns` arrays alongside `rowSet`, so every value is labelled by the source that
+    published it. That is the difference between a capture and a guess - the previous attempt to
+    read minutes off the rendered page is what produced a 50-of-465 slice with no column
+    mapping (Flagged F-G). Nothing here overwrites a committed snapshot: each game lands in
+    data/raw/_capture_gamelog_<game_id>.json for a verifier to promote.
+    """
+    cols = games_block.get("cols", [])
+    if "date" not in cols or "game_id" not in cols:
+        return
+    di, gi = cols.index("date"), cols.index("game_id")
+    ai, hi = cols.index("away"), cols.index("home")
+    want = sorted({r[di] for r in games_block["rows"]})[-days_back:]
+    targets = [(r[gi], r[ai], r[hi], r[di]) for r in games_block["rows"] if r[di] in want]
+    for gid, away, home, date in targets[-12:]:
+        url = BOXSCORE_API.format(gid=gid)
+        rec = {"captured_at_utc": now, "source_url": url, "game_id": gid, "date": date,
+               "away": away, "home": home, "http_status": None, "players": [],
+               "note": ("Capture only. Column meaning comes from the response's own headers, not "
+                        "from position. Promote after re-checking the game page.")}
+        try:
+            raw = get(url, timeout=45)
+            payload = json.loads(as_text(raw))
+            rec["http_status"] = 200
+            sets = payload.get("resultSets") or []
+            if not sets:
+                rec["error"] = "no resultSets in the response"
+            for rs in sets:
+                names = rs.get("headers") or []
+                for row in rs.get("rowSet") or []:
+                    d = dict(zip(names, row))
+                    team = d.get("TEAM_ABBREVIATION")
+                    opp = home if team == away else away
+                    rec["players"].append({
+                        "player": d.get("PLAYER_NAME"), "team": team, "opponent": opp,
+                        "in": d.get("MIN"), "pts": d.get("PTS"), "reb": d.get("REB"),
+                        "ast": d.get("AST"), "game_id": gid, "date": date,
+                        "source_url": "https://www.nba.com/game/%s-vs-%s-%s"
+                                       % (away.lower(), home.lower(), gid)})
+                rec["headers_from_source"] = names
+                break
+            if write_if_changed(os.path.join(RAW, f"_capture_gamelog_{gid}.json"), rec):
+                changed.append(f"game log {gid} ({len(rec['players'])} players)")
+        except urllib.error.HTTPError as exc:
+            rec["http_status"] = exc.code
+            rec["error"] = ("HTTP %s - the stats API refuses this client; recorded as unavailable, "
+                            "not as 'no data'" % exc.code)
+            write_if_changed(os.path.join(RAW, f"_capture_gamelog_{gid}.json"), rec)
+            failed.append((f"gamelog_{gid}", "HTTP %s" % exc.code))
+        except Exception as exc:                          # noqa: BLE001
+            rec["error"] = "%s: %s" % (type(exc).__name__, exc)
+            write_if_changed(os.path.join(RAW, f"_capture_gamelog_{gid}.json"), rec)
+            failed.append((f"gamelog_{gid}", rec["error"]))
+        time.sleep(1.2)
+
+
 def capture_injury(now, changed, failed, index_editions):
     """Fetch the newest report PDFs fully; probe today's/yesterday's editions.
 
@@ -883,6 +1005,48 @@ def main():
             log("  FAILED: response too short - keeping the existing snapshot")
             continue
 
+        if kind == "team_table":
+            rows = probe_team_table(text)
+            payload = {"captured_at_utc": now, "source_url": url,
+                       "page_sha256": hashlib.sha256(raw).hexdigest(),
+                       "teams_parsed": len(rows), "teams_expected": 30,
+                       "rows": rows,
+                       "note": ("Capture only. A row-count check and the cell text as printed; the "
+                                "column meaning is NOT inferred here, and no committed snapshot is "
+                                "touched. Promote by re-reading the page and mapping the columns to "
+                                "the schema in data/raw/teams_traditional.json / teams_opponent.json.")}
+            if len(rows) != 30:
+                payload["failure_evidence"] = [
+                    {"around": "first <tr> containing a team link",
+                     "excerpt": excerpt_around(text, "/stats/team/", before=200, span=2600)}]
+                failed.append((key, "expected 30 team rows, parsed %d" % len(rows)))
+            if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"), payload):
+                changed.append(f"team table {key} ({len(rows)} rows)")
+            continue
+        if kind == "standings":
+            recs = parse_standings_records(text)
+            payload = {"captured_at_utc": now, "source_url": url,
+                       "page_sha256": hashlib.sha256(raw).hexdigest(),
+                       "teams_with_records": len(recs), "teams_expected": 30,
+                       "rows": recs,
+                       "note": ("Capture only. The official standings table is rendered client-side, "
+                                "so a fetch may hold no parseable table at all - zero rows here means "
+                                "'not in these bytes', never 'no games played'. Records are transcribed "
+                                "in document order and NOT mapped to columns: which string is HOME and "
+                                "which is ROAD is a property of the rendered table, and a standings "
+                                "table with those two columns swapped is worse than a stale one. The "
+                                "home-win rate this site quotes is computed from a live read of the "
+                                "rendered table (verify/2026-11-15-e3ebc423/standings_2026-11-15.json), "
+                                "not from this capture.")}
+            if len(recs) < 30:
+                payload["failure_evidence"] = [{"around": "first occurrence of a team name",
+                                                "excerpt": excerpt_around(text, "Boston Celtics",
+                                                                         before=300, span=2600)}]
+                log(f"  standings: {len(recs)}/30 teams carry a record in these bytes - "
+                    "client-side render, recorded as a gap")
+            if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"), payload):
+                changed.append(f"standings probe ({len(recs)}/30 teams)")
+            continue
         if kind == "teams_advanced":
             rows = parse_teams_advanced(text)
             fetched_from = url
@@ -1031,6 +1195,13 @@ def main():
     except Exception as exc:                          # noqa: BLE001
         failed.append(("results", f"stage failed: {exc}"))
         log(f"  results stage FAILED: {exc}")
+
+    # per-player game logs for the most recent completed games (capture only)
+    try:
+        capture_game_logs(now, changed, failed, games_block)
+    except Exception as exc:                              # noqa: BLE001
+        failed.append(("gamelog", f"stage failed: {exc}"))
+        log(f"  game-log stage FAILED: {exc}")
 
     # injury reports: full capture of the newest editions + status probe
     try:
