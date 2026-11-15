@@ -1,0 +1,22 @@
+GATE FAIL — run 2026-11-15T114253Z, 20 checks, 4 blocking, 1 advisory
+  [ok ] P1.hosts: 0 fetch(es) to a host outside the official allowlist
+  [ok ] P1.sha256: 0 successful fetch(es) without a SHA-256
+  [ok ] P1.http200: 0 fetch(es) did not return HTTP 200: 
+  [FAIL] P3.standings: standings.json: 0 rows, need >= 30
+  [ok ] P2.standings: standings is 0.13h old; SLA is 24h
+  [FAIL] P3.teams_traditional: teams_traditional.json: 0 rows, need >= 30
+  [ok ] P2.teams_traditional: teams_traditional is 0.13h old; SLA is 36h
+  [FAIL] P3.teams_opponent: teams_opponent.json: 0 rows, need >= 30
+  [ok ] P2.teams_opponent: teams_opponent is 0.13h old; SLA is 36h
+  [FAIL] P3.teams_advanced: teams_advanced.json: 0 rows, need >= 30
+  [ok ] P2.teams_advanced: teams_advanced is 0.13h old; SLA is 36h
+  [ok ] P3.injury_index: injury_index.json: 27 rows, need >= 1
+  [ok ] P2.injury_index: injury_index is 0.12h old; SLA is 6h
+  [ok ] P3.slate_2026-11-15: 2026-11-15: 10 games on the official page
+  [ok ] P3.slate_2026-11-16: 2026-11-16: 9 games on the official page
+  [ok ] P3.slate_2026-11-17: 2026-11-17: 6 games on the official page
+  [ok ] P3.slate_2026-11-18: 2026-11-18: 13 games on the official page
+  [ok ] P4.pdf_bytes: 0 stored injury PDF(s) no longer hash to the value recorded at capture
+  [ok ] P4.pdf_present: 27 injury PDFs archived in this run
+  [FAIL] P5.newest: newest run on disk is _ci, gating 2026-11-15T114253Z
+REBUILD SKIPPED — the gate did not pass, so no page was regenerated

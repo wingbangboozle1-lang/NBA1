@@ -1,7 +1,7 @@
 {
  "gate": "freshness_and_provenance",
  "run_id": "2026-11-15T114253Z",
- "evaluated_at_utc": "2026-11-15T11:43:09Z",
+ "evaluated_at_utc": "2026-11-15T11:50:26Z",
  "checks": [
   {
    "id": "P1.hosts",
@@ -30,7 +30,7 @@
   {
    "id": "P2.standings",
    "ok": true,
-   "detail": "standings is 0.00h old; SLA is 24h",
+   "detail": "standings is 0.13h old; SLA is 24h",
    "blocking": true
   },
   {
@@ -42,7 +42,7 @@
   {
    "id": "P2.teams_traditional",
    "ok": true,
-   "detail": "teams_traditional is 0.00h old; SLA is 36h",
+   "detail": "teams_traditional is 0.13h old; SLA is 36h",
    "blocking": true
   },
   {
@@ -54,7 +54,7 @@
   {
    "id": "P2.teams_opponent",
    "ok": true,
-   "detail": "teams_opponent is 0.00h old; SLA is 36h",
+   "detail": "teams_opponent is 0.13h old; SLA is 36h",
    "blocking": true
   },
   {
@@ -66,7 +66,7 @@
   {
    "id": "P2.teams_advanced",
    "ok": true,
-   "detail": "teams_advanced is 0.00h old; SLA is 36h",
+   "detail": "teams_advanced is 0.13h old; SLA is 36h",
    "blocking": true
   },
   {
@@ -78,7 +78,7 @@
   {
    "id": "P2.injury_index",
    "ok": true,
-   "detail": "injury_index is 0.00h old; SLA is 6h",
+   "detail": "injury_index is 0.12h old; SLA is 6h",
    "blocking": true
   },
   {
@@ -119,8 +119,8 @@
   },
   {
    "id": "P5.newest",
-   "ok": true,
-   "detail": "newest run on disk is 2026-11-15T114253Z, gating 2026-11-15T114253Z",
+   "ok": false,
+   "detail": "newest run on disk is _ci, gating 2026-11-15T114253Z",
    "blocking": false
   }
  ],
@@ -131,7 +131,9 @@
   "P3.teams_opponent: teams_opponent.json: 0 rows, need >= 30",
   "P3.teams_advanced: teams_advanced.json: 0 rows, need >= 30"
  ],
- "advisory": [],
+ "advisory": [
+  "P5.newest: newest run on disk is _ci, gating 2026-11-15T114253Z"
+ ],
  "slas_hours": {
   "standings": 24.0,
   "teams_traditional": 36.0,
