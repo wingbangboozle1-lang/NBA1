@@ -1,0 +1,98 @@
+name: Capture official 2026-11-15 pass 2
+
+# Purpose
+# -------
+# The first rolling-slate capture (scripts/capture_official_2026_11_15.py) got
+# the slate pages, every box score, the standings page, the three team-stat
+# pages, every injury-report PDF and the Census gazetteer. Three of those need
+# a second pass:
+#
+#   * the box-score payload is stored raw so the parser is corrected against
+#     the real shape rather than a guess;
+#   * the standings page and the three team-stat pages are rendered
+#     client-side, so the runner's headless Chrome renders them and the
+#     published tables are extracted.
+#
+# Scope note (COORDINATION.md section 40): a NEW workflow with a NEW name; it
+# does not touch engine/fetch_official.py or .github/workflows/refresh-data.yml,
+# which belong to seat arena/7eb1c20a-nba1 (section 38).
+#
+# The commit carries [skip ci], so this workflow never re-triggers itself.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["arena/48727fe1-nba1"]
+    paths:
+      - scripts/capture_official_2026_11_15_pass2.py
+      - scripts/render_stats_tables.mjs
+      - .github/workflows/capture-official-2026-11-15-pass2.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capture-2026-11-15-pass2-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install the headless browser driver
+        continue-on-error: true
+        run: npm install --no-save puppeteer-core
+
+      - name: Chrome binary
+        run: |
+          for c in /usr/bin/google-chrome /usr/bin/google-chrome-stable /usr/bin/chromium; do
+            if [ -x "$c" ]; then echo "found $c"; fi
+          done
+          ls /usr/bin | grep -i chrom || true
+
+      - name: Second capture pass
+        id: capture
+        continue-on-error: true
+        run: python3 scripts/capture_official_2026_11_15_pass2.py
+
+      - name: Upload the capture as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: official-capture-2026-11-15-pass2
+          path: data/captures/2026-11-15
+          if-no-files-found: warn
+
+      - name: Commit the capture
+        if: always()
+        run: |
+          set -u
+          git config user.name  "nba1-bot"
+          git config user.email "nba1-bot@users.noreply.github.com"
+          git add data/captures/2026-11-15 || true
+          if git diff --cached --quiet; then
+            echo "capture produced no new bytes"
+            exit 0
+          fi
+          git commit -m "chore(capture): official 2026-11-15 second capture pass [skip ci]"
+          for i in 1 2 3 4 5; do
+            if git push; then
+              echo "capture pushed on attempt $i"
+              exit 0
+            fi
+            echo "push raced with another commit; rebasing and retrying ($i/5)"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+            sleep $((i * 5))
+          done
+          echo "::warning::could not push the capture after 5 attempts; it is in the run artifact"
+          exit 0
