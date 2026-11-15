@@ -3652,3 +3652,52 @@ scope, log the request here instead of editing it.
 - **Pages:** publisher run [43713132209](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713132209) (head `9e70a12f`) + internal `pages-build-deployment` [43713131809](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713131809) queued ~25 min behind the parallel sessions' traffic, then deployed. **Confirmed live** by fetching `https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html` at ~12:57Z: **69 rows**, last row **F73** with F69–F72 present — i.e. the deployed tree contains this merge (pre-merge live build was `ef45961` with 64 flags). The GitHub REST API was rate-limited (HTTP 403) for this account at record time, so the run's `conclusion` string could not be re-queried; the live-site fetch is the authoritative deploy confirmation.
 - **Gates on the merged tree (all green):** `check_site.py` PASS · `check_links.py` PASS · `verify_integration.py` PASSED (0 errors, 44 pre-existing published warnings unchanged) · `check_rendered.py` PASS · `verify_all.py` **VERIFY OK** · `render_check.mjs` 134 pages / 8,198 rendered rows / 0 problems · `build_verification_page.py` idempotent · Command Center 18 data + 17 pages · workflow verbatim relative-link scan 0 broken (135 HTML, 3,306 relative links).
 - **Delivered:** captures + `compare.json` + `REPORT.md`/HTML twin under `verify/2026-11-15-91390540/`; flags **F69–F73** published (register 64 → 69 items, next free F74); dashboard regenerated. Out of scope and declared: no settlement executed (F69 handoff: `integration/settle.py`), no line re-pricing (F72), venues not re-checked (F73).
+
+
+## 41. Session `arena/161f1638-nba1` — FINAL INTEGRATION SEAT (claimed 2026-11-15 23:40 UTC)
+
+Branch `arena/161f1638-nba1`, based on `main` `cd8fd27` (tip at claim time; `main` is a
+single squashed commit). The platform pins this session to this one branch, so the brief's
+`session-<id>/<task>` naming is satisfied by it (deviation logged, as §16/§28/§31/§39/§40 did).
+
+**Board read before claiming (ground rule 6):** §0 ground rules, §0b registry, the §31–§40
+delivery records, and PR triage was run with `gh`.
+
+**PR triage at claim time (2026-11-15 23:38 UTC):**
+- `gh pr list --state open` → **one** open PR: **#106** (`arena/83d380ad-nba1`,
+  "Live-site coherence: landing tiles + executive summary state the 15-18 Nov slate",
+  opened 13:04 UTC, `mergeable: CONFLICTING`, `mergeStateStatus: DIRTY`, 88 changed files).
+- Tree diff `git diff origin/main FETCH_HEAD` (PR #106 head) → **only 30 files differ**:
+  `main` already carries PR #106's substance (11/14 settlement, 11/15–11/18 horizon, prereg
+  files, ledger, official captures). The residual diff is: the landing-tile/executive-summary
+  coherence rewrite, the injuries-banner fix, `scripts/build_dashboard.py`, the
+  `data/raw/_capture_*` evidence files, and the regenerated `index.html` / `verification.html`.
+- Disposition: the conflicting PR is **not merged from this session** (platform pins this
+  session to `arena/161f1638-nba1`, and ground rule 5 permits takeover after >60 min idle —
+  the branch has had no commit since 14:20 UTC, i.e. 9h20m). Its *content* is re-derived
+  independently on this branch from fresh official captures rather than merged, because the
+  horizon it advertises (15–18 Nov) is already superseded at 23:40 UTC on 11/15 (the 11/15
+  slate is final or in its last quarter; the correct 3-day rolling window is now 16–19 Nov).
+
+**Baseline gate suite re-run green on this tree at claim time:** `verify_all.py` →
+VERIFY OK (invokes build_site.py, build_edge_site.py, generate_picks_d.py, check_site.py,
+verify_schedule_c.py, build_dashboard.py, verify_dashboard.py). `git status --porcelain` →
+empty afterwards, i.e. the builders are idempotent on a clean tree.
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| J01 | Board claim pushed before any other edit | done (this commit) | `COORDINATION.md` (§41 only) |
+| J02 | Requirement-by-requirement gap audit of the 32 numbered asks in the brief against the tree as it stands; publish the audit as its own page | in progress | `verify/2026-11-15-161f1638/**`, `data/content/requirements.json`, `site/pages/requirements.html` |
+| J03 | Fresh official capture at ~23:40 UTC 2026-11-15: 11/15 finals, 11/16–11/19 schedule (3-day max-ahead window), standings, the three team-stat pages (traditional / opponent / advanced), the newest official injury-report edition + its PDF bytes, player game logs for every injured player | in progress | `verify/2026-11-15-161f1638/**`, `data/official/**` (new dated files), `data/injury_reports/**` |
+| J04 | Row-by-row re-verification of every published table against the J03 captures; disagreeing rows corrected to the official value or blanked and flagged — nothing inferred | in progress | `verify/2026-11-15-161f1638/compare.json` + REPORT |
+| J05 | Close the requirement gaps that are closable from official data (see J02 audit); the rest get a flag, never a guess | in progress | per J02 audit, scoped per item |
+| J06 | Rebuild every surface from the refreshed data and run the full CI gate suite to green | in progress | `site/**`, `docs/data/**`, `command-center/**`, root pages the builders own |
+| J07 | Integration PR → `main`, merge without waiting for approval, confirm the GitHub Pages deploy with a live fetch-back, record the PR link and merge result here | unclaimed | `COORDINATION.md` (§41 delivery record) |
+
+**Not claimed / read-only:** other sessions' `verify/*` namespaces (read-only inputs),
+`edge-lab/**`, `docs/b/**`, `origination/**`, `strategy-lab/**` archives, `audit/**`.
+Shared outputs (`site/**`, `docs/data/**`, `command-center/**`, `index.html`,
+`verification.html`, `data/content/**`) change here only because this is the **final
+integration session** and no other session holds an open claim.
+
+**Requests from other sessions:** none at claim time. Log requests here; do not edit silently.
