@@ -2,7 +2,7 @@ name: Official capture
 
 # Manual trigger: session tokens cannot call workflow_dispatch (HTTP 403),
 # so a run is started by editing this file (it is in the push paths above).
-# run-stamp: 2026-11-15T12:12Z debug=1 only=standings,teams,games,gamepages
+# run-stamp: 2026-11-15T12:30Z full season capture
 # Purpose: the ONLY path in this project that can reach nba.com.
 #
 # The agent sandbox has no outbound network (curl to nba.com returns 000). GitHub
@@ -82,10 +82,11 @@ jobs:
         env:
           CAPTURE_TODAY: ${{ github.event.inputs.today || '' }}
           CAPTURE_DATES: ${{ github.event.inputs.dates || '' }}
-          DEBUG_DUMP: ${{ github.event.inputs.debug_dump || '1' }}
+          DEBUG_DUMP: ${{ github.event.inputs.debug_dump || '0' }}
+          SEASON_START: ${{ github.event.inputs.season_start || '2026-10-20' }}
           GAME_PAGES_ALL: ${{ github.event.inputs.game_pages_all || '0' }}
           PROBE_URLS: ${{ github.event.inputs.probe_urls || '' }}
-          DEBUG_ONLY: ${{ github.event.inputs.debug_only || 'standings,teams,games,gamepages' }}
+          DEBUG_ONLY: ${{ github.event.inputs.debug_only || '' }}
         run: |
           mkdir -p data/capture/_ci
           python3 scripts/official_capture.py 2>&1 | tee data/capture/_ci/capture.log

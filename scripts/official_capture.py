@@ -264,65 +264,96 @@ def pdf_text(data):
 PARSER_VERSION = "2026-11-15.1"
 
 
-def parse_games_page(html_text, date):
-    """NBA.com /games?date= — one row per scheduled game card.
+NEXT_DATA_RE = re.compile(r'<script id="__NEXT_DATA__" type="application/json">(.*?)</script>', re.S)
 
-    Only fields the page actually prints are written. The page prints the
-    fixture, the tip time, both clubs' records and the game leaders; the venue is
-    NOT printed on the card, so it is left absent rather than guessed.
+
+def next_data(html_text):
+    """The JSON the page server-renders. Returns {} when the page has none.
+
+    Why this is the parser's entry point: nba.com's /games and /game pages ship
+    their data inside this blob. The standings and /stats pages do NOT - they
+    hydrate from a client-side call - which is why this project reads per-game
+    box scores (the primary source) instead of the summary tables.
     """
-    txt = text_of(html_text)
-    rows = []
-    seen = set()
-    for m in GAME_LINK_RE.finditer(html_text):
-        away, home, gid = m.group(1).upper(), m.group(2).upper(), m.group(3)
-        if gid in seen:
-            continue
-        seen.add(gid)
-        rows.append({
-            "date": date,
-            "game_id": gid,
-            "away": away,
-            "home": home,
-            "game_url": f"https://www.nba.com/game/{m.group(1)}-vs-{m.group(2)}-{gid}",
-            "tip_time_et": None,
-            "away_record": None,
-            "home_record": None,
-            "away_pts": None,
-            "home_pts": None,
-            "status_label": None,
-            "venue": None,
-            "source_url": f"https://www.nba.com/games?date={date}",
-        })
-    # Tip times and records sit in the rendered card text near each game link.
-    # They are matched positionally on the rendered text, which prints them in
-    # the same order the game links appear.
-    times = re.findall(r"(\d{1,2}:\d{2}\s*(?:AM|PM)\s*ET)", txt)
-    recs = re.findall(r"\b(\d{1,2})-(\d{1,2})\b(?=\s*(?:[A-Z][a-z]+|$))", txt)
-    # Records are printed as "5-8" right after each club name on the card.
-    # Recover them by walking the rendered text in card order.
-    card_recs = []
-    for line in re.split(r"(?<=[A-Za-z])\s{2,}|\n", txt):
-        pass
-    # Robust approach: the rendered text prints "... Pacers 5-8 1:00 PM ET 76ers 10-3 ..."
-    # so capture (record) (time) (record) triples in order.
-    triples = re.findall(
-        r"(\d{1,2}-\d{1,2})\s+(\d{1,2}:\d{2}\s*(?:AM|PM)\s*ET)\s+(\d{1,2}-\d{1,2})", txt)
-    for i, r in enumerate(rows):
-        if i < len(triples):
-            r["away_record"], r["tip_time_et"], r["home_record"] = triples[i]
-        elif i < len(times):
-            r["tip_time_et"] = times[i]
-    # Final scores, when the card prints them ("FINAL" + two numbers).
-    finals = re.findall(r"\bFINAL(?:/OT\d?)?\b\s+(\d{2,3})\s+(\d{2,3})", txt, re.I)
-    for i, r in enumerate(rows):
-        if i < len(finals):
-            r["away_pts"] = int(finals[i][0])
-            r["home_pts"] = int(finals[i][1])
-            r["status_label"] = "Final"
-    return {"parser_version": PARSER_VERSION, "rows": rows,
-            "triples_matched": len(triples), "finals_matched": len(finals),
-            "game_links": len(rows)}
+    m = NEXT_DATA_RE.search(html_text)
+    if not m:
+        return {}
+    try:
+        return json.loads(m.group(1))
+    except Exception:                                            # noqa: BLE001
+        return {}
+
+
+def _periods(team):
+    return [{"period": p.get("period"), "type": p.get("periodType"),
+             "score": p.get("score")} for p in (team.get("periods") or [])]
+
+
+def _qscores(team):
+    """Quarter scores as a plain list, or None when the page prints none."""
+    ps = team.get("periods") or []
+    if not ps:
+        return None
+    return [p.get("score") for p in ps]
+
+
+def _card_to_row(card, date, source_url):
+    home = card.get("homeTeam") or {}
+    away = card.get("awayTeam") or {}
+    return {
+        "date": date,
+        "game_id": card.get("gameId"),
+        "away": away.get("teamTricode"),
+        "home": home.get("teamTricode"),
+        "away_team_name": away.get("teamName"),
+        "home_team_name": home.get("teamName"),
+        "away_team_id": away.get("teamId"),
+        "home_team_id": home.get("teamId"),
+        "away_wins": away.get("wins"), "away_losses": away.get("losses"),
+        "home_wins": home.get("wins"), "home_losses": home.get("losses"),
+        "away_record": away.get("teamSubtitle"),
+        "home_record": home.get("teamSubtitle"),
+        "away_pts": away.get("score"), "home_pts": home.get("score"),
+        "away_quarters": _qscores(away), "home_quarters": _qscores(home),
+        "away_periods": _periods(away), "home_periods": _periods(home),
+        "status_label": card.get("gameStatusText"),
+        "game_status": card.get("gameStatus"),
+        "period": card.get("period"),
+        "tip_time_et": card.get("gameTimeEastern"),
+        "tip_time_utc": card.get("gameTimeUtc"),
+        "season_type": card.get("seasonType"),
+        "game_url": card.get("shareUrl") or (
+            f"https://www.nba.com/game/{str(away.get('teamSlug') or '')}-vs-"
+            f"{str(home.get('teamSlug') or '')}-{card.get('gameId')}"),
+        "source_url": source_url,
+    }
+
+
+def parse_games_page(html_text, date):
+    """www.nba.com/games?date=<d>: every game card the page server-renders.
+
+    Fields the page does not print stay None; nothing is inferred. Quarter
+    scores come from the card's own `periods` array.
+    """
+    nd = next_data(html_text)
+    src = f"https://www.nba.com/games?date={date}"
+    cards, seen = [], set()
+    try:
+        modules = nd["props"]["pageProps"]["gameCardFeed"]["modules"]
+    except Exception:                                            # noqa: BLE001
+        modules = []
+    for mod in modules or []:
+        for c in (mod.get("cards") or []):
+            cd = c.get("cardData") or {}
+            gid = cd.get("gameId")
+            if not gid or gid in seen:
+                continue
+            if cd.get("leagueId") not in (None, "00"):
+                continue
+            seen.add(gid)
+            cards.append(_card_to_row(cd, date, src))
+    return {"parser_version": PARSER_VERSION, "rows": cards, "row_count": len(cards),
+            "source_url": src, "has_next_data": bool(nd)}
 
 
 def parse_standings(html_text):
@@ -528,53 +559,83 @@ def parse_injury_pdf(text):
 
 
 def parse_game_page(html_text, gid):
-    """www.nba.com/game/<slug> — the linescore: final score and quarter scores.
+    """www.nba.com/game/<slug>: the official box score for one game.
 
-    Quarter scores are read from the linescore table (a row of 4-5 period
-    columns plus T). If the page does not print them, they are left null and the
-    row is published as final-score-only. Never inferred from the final.
+    This is the richest official artefact in the project. It prints, per team:
+    the team box score (everything the possession model needs), the period
+    scores, every player's minutes / points / rebounds / assists, the starters,
+    the bench and the inactives; and per game: the arena, the attendance, the
+    neutral-site flag, the tip time and the officials.
     """
-    res = {"game_id": gid, "away": None, "home": None,
-           "away_pts": None, "home_pts": None,
-           "away_quarters": None, "home_quarters": None,
-           "status_label": None, "venue": None, "attendance": None,
-           "parser_version": PARSER_VERSION}
-    t = text_of(html_text)
-    m = GAME_LINK_RE.search(html_text)
-    if m:
-        res["away"], res["home"] = m.group(1).upper(), m.group(2).upper()
-    for t_ in tables(html_text):
-        flat = [" ".join(r) for r in t_]
-        joined = " | ".join(flat)
-        if not re.search(r"\bQ1\b|\b1st\b", joined, re.I):
-            continue
-        for row in t_:
-            cells = [c for c in row if c not in ("", "|")]
-            if len(cells) < 5:
-                continue
-            ab = ABBR_RE.match(cells[0]) if cells else None
-            if not ab:
-                continue
-            nums = []
-            for c in cells[1:]:
-                nums.append(int(c) if re.fullmatch(r"\d{1,3}", c) else (c or None))
-            key = "away_quarters" if ab.group(1) == res["away"] else (
-                "home_quarters" if ab.group(1) == res["home"] else None)
-            if key and res[key] is None:
-                res[key] = nums
-    # venue / attendance, when printed
-    mv = re.search(r"([A-Z][A-Za-z0-9 .'\-&]+(?:Center|Centre|Arena|Dome|Forum|Garden|"
-                   r"Coliseum|Center|Fieldhouse|Center|Palace|Center)),\s*([A-Za-z .'\-]+,?\s*[A-Z]{2})", t)
-    if mv:
-        res["venue"] = f"{mv.group(1).strip()}, {mv.group(2).strip()}"
-    fin = re.findall(r"\bFinal(?:/OT\d*)?\b", t, re.I)
-    if fin:
-        res["status_label"] = fin[0]
-    # final score: the two biggest numbers in the score header
-    if res["away_quarters"] and res["home_quarters"]:
-        res["away_pts"] = sum(x for x in res["away_quarters"] if isinstance(x, int)) or None
-        res["home_pts"] = sum(x for x in res["home_quarters"] if isinstance(x, int)) or None
-    return res
+    nd = next_data(html_text)
+    g = {}
+    try:
+        g = nd["props"]["pageProps"]["game"]
+    except Exception:                                            # noqa: BLE001
+        g = {}
+    out = {"game_id": gid, "parser_version": PARSER_VERSION, "has_next_data": bool(nd)}
+    if not g:
+        return out
+    ar = g.get("arena") or {}
+    out.update({
+        "status_label": g.get("gameStatusText"),
+        "game_status": g.get("gameStatus"),
+        "period": g.get("period"),
+        "tip_time_utc": g.get("gameTimeUTC"),
+        "tip_time_et": g.get("gameEt"),
+        "neutral": g.get("isNeutral"),
+        "attendance": g.get("attendance"),
+        "arena_name": ar.get("arenaName"),
+        "arena_city": ar.get("arenaCity"),
+        "arena_state": ar.get("arenaState"),
+        "arena_country": ar.get("arenaCountry"),
+        "game_label": g.get("gameLabel"),
+        "game_sub_label": g.get("gameSubLabel"),
+        "officials": [o.get("name") for o in (g.get("officials") or [])],
+    })
+    for side in ("awayTeam", "homeTeam"):
+        t = g.get(side) or {}
+        key = "away" if side == "awayTeam" else "home"
+        st = t.get("statistics") or {}
+        out[key] = t.get("teamTricode")
+        out[f"{key}_team_id"] = t.get("teamId")
+        out[f"{key}_pts"] = t.get("score")
+        out[f"{key}_wins"] = t.get("teamWins")
+        out[f"{key}_losses"] = t.get("teamLosses")
+        out[f"{key}_quarters"] = _qscores(t)
+        out[f"{key}_stats"] = st
+        players = []
+        for p in (t.get("players") or []):
+            ps = p.get("statistics") or {}
+            players.append({
+                "person_id": p.get("personId"),
+                "name": f"{p.get('firstName','')} {p.get('familyName','')}".strip(),
+                "slug": p.get("playerSlug"),
+                "position": p.get("position"),
+                "min": ps.get("minutes"),
+                "pts": ps.get("points"),
+                "reb": ps.get("reboundsTotal"),
+                "ast": ps.get("assists"),
+                "fgm": ps.get("fieldGoalsMade"),
+                "fga": ps.get("fieldGoalsAttempted"),
+                "fg3m": ps.get("threePointersMade"),
+                "fg3a": ps.get("threePointersAttempted"),
+                "ftm": ps.get("freeThrowsMade"),
+                "fta": ps.get("freeThrowsAttempted"),
+                "oreb": ps.get("reboundsOffensive"),
+                "dreb": ps.get("reboundsDefensive"),
+                "tov": ps.get("turnovers"),
+                "stl": ps.get("steals"),
+                "blk": ps.get("blocks"),
+                "pf": ps.get("foulsPersonal"),
+                "plus_minus": ps.get("plusMinusPoints"),
+            })
+        out[f"{key}_players"] = players
+        out[f"{key}_inactives"] = [
+            {"person_id": p.get("personId"),
+             "name": f"{p.get('firstName','')} {p.get('familyName','')}".strip()}
+            for p in (t.get("inactives") or [])]
+    return out
 
 
 def parse_player_gamelog(html_text, player_id):
@@ -621,10 +682,17 @@ def main():
     else:
         d0 = datetime.date.fromisoformat(today)
         slate_dates = [(d0 + datetime.timedelta(days=i)).isoformat() for i in range(0, 4)]
-    # the previous two league days, for results + settlement
-    d0 = datetime.date.fromisoformat(slate_dates[0])
-    result_dates = [(d0 - datetime.timedelta(days=i)).isoformat() for i in (1, 2)]
+    horizon_end = slate_dates[-1]
+    season_start = os.environ.get("SEASON_START", "2026-10-20")
+    # every league day from the season opener to the end of the horizon
+    d0 = datetime.date.fromisoformat(season_start)
+    d1 = datetime.date.fromisoformat(horizon_end)
+    all_dates = [(d0 + datetime.timedelta(days=i)).isoformat()
+                 for i in range((d1 - d0).days + 1)]
+    result_dates = [d for d in all_dates if d < slate_dates[0]]
     debug = os.environ.get("DEBUG_DUMP") == "1"
+    only = set(x.strip() for x in os.environ.get("DEBUG_ONLY", "").split(",") if x.strip())
+    wanted = (lambda s: (not only) or (s in only))
 
     run_id = os.environ.get("RUN_ID") or \
         datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H%M%SZ")
@@ -635,15 +703,14 @@ def main():
     for d in (parsed_dir, pdf_dir, dbg_dir):
         os.makedirs(d, exist_ok=True)
 
-    only = set(x.strip() for x in os.environ.get("DEBUG_ONLY", "").split(",") if x.strip())
-    wanted = (lambda s: (not only) or (s in only))
-
     manifest = {
         "run_id": run_id,
         "created_at_utc": utcnow(),
         "season": SEASON,
+        "season_start": season_start,
         "slate_dates": slate_dates,
         "result_dates": result_dates,
+        "all_dates": all_dates,
         "allowed_hosts": sorted(ALLOWED_HOSTS),
         "parser_version": PARSER_VERSION,
         "fetches": [],
@@ -666,9 +733,9 @@ def main():
         manifest["fetches"].append(r)
         return r
 
-    # ---- 1. schedule / results pages -------------------------------------
+    # ---- 1. every league day: the official schedule / result card ---------
     games = {}
-    for d in sorted(set(result_dates) | set(slate_dates)):
+    for d in all_dates:
         if not wanted("games"):
             break
         url = f"https://www.nba.com/games?date={d}"
@@ -680,82 +747,59 @@ def main():
             save(f"games_{d}.json", p)
             games[d] = p
             record(rec, "parse_games_page", p)
-            manifest["findings"].append(
-                {"level": "info", "detail": f"games?date={d}: {len(p['rows'])} game links, "
-                 f"{p['triples_matched']} time/record triples, {p['finals_matched']} finals"})
         else:
             record(rec, "parse_games_page")
             manifest["findings"].append(
-                {"level": "error", "detail": f"games?date={d} not captured: {rec.get('error') or rec.get('http_status')}"})
-
-    # A game card belongs to exactly one date. NBA.com also carries one promo
-    # /game/ link (the marquee match-up) in the page furniture, and it appears
-    # identically on every date's page. Rather than guess which link it is, drop
-    # any game id that shows up on more than one date: that is a property of the
-    # page furniture, not of the schedule.
-    seen_on = {}
-    for d, p in games.items():
-        for r in p["rows"]:
-            seen_on.setdefault(r["game_id"], set()).add(d)
-    promo = {gid for gid, ds in seen_on.items() if len(ds) > 1}
-    for d, p in games.items():
-        p["rows"] = [r for r in p["rows"] if r["game_id"] not in promo]
-        p["row_count"] = len(p["rows"])
-        if promo:
-            save(f"games_{d}.json", p)
-    if promo:
+                {"level": "error", "detail": f"games?date={d} not captured: "
+                 f"{rec.get('error') or rec.get('http_status')}"})
+    if games:
         manifest["findings"].append(
-            {"level": "info",
-             "detail": f"{len(promo)} promo game link(s) appeared on more than one date's page "
-                       f"and were dropped as page furniture: {sorted(promo)}"})
+            {"level": "info", "detail": "cards per date: " + ", ".join(
+                f"{d[-5:]}:{len(g['rows'])}" for d, g in sorted(games.items()))})
 
-    # ---- 2. standings -----------------------------------------------------
+    # ---- 2. standings (page fetches 200; it publishes no table in its HTML)
     rec = fetch("https://www.nba.com/standings") if wanted("standings") else None
-    if rec is None:
-        manifest["findings"].append({"level": "info", "detail": "standings: skipped (DEBUG_ONLY)"})
     if rec and rec.get("data"):
         if debug:
             open(os.path.join(dbg_dir, "standings.html"), "wb").write(rec["data"])
         p = parse_standings(decode(rec["data"]))
         save("standings.json", p)
         record(rec, "parse_standings", p)
-        if p["row_count"] != 30:
-            manifest["findings"].append(
-                {"level": "error", "detail": f"standings: parsed {p['row_count']} rows, expected 30"})
-    else:
-        record(rec, "parse_standings")
+        manifest["findings"].append(
+            {"level": "error" if p["row_count"] != 30 else "info",
+             "detail": f"standings page fetched ({rec['bytes']}B) but publishes "
+                       f"{p['row_count']} table rows in its HTML: the table is hydrated "
+                       f"client-side. Standings are therefore derived from official "
+                       f"per-game results and cross-checked, never transcribed blind."})
 
-    # ---- 3. the three official team-stat pages ----------------------------
+    # ---- 3. the three official team-stat pages (same finding) -------------
     for slug in (("traditional", "opponent", "advanced") if wanted("teams") else ()):
         url = (f"https://www.nba.com/stats/teams/{slug}?Season={SEASON}"
                f"&SeasonType={SEASON_TYPE}")
         rec = fetch(url)
-        if rec.get("data"):
+        if rec and rec.get("data"):
             if debug:
                 open(os.path.join(dbg_dir, f"teams_{slug}.html"), "wb").write(rec["data"])
             p = parse_stats_teams(decode(rec["data"]), url)
             save(f"teams_{slug}.json", p)
             record(rec, "parse_stats_teams", p)
-            if p["row_count"] != 30:
-                manifest["findings"].append(
-                    {"level": "error", "detail": f"teams/{slug}: parsed {p['row_count']} rows, expected 30"})
+            manifest["findings"].append(
+                {"level": "error" if p["row_count"] != 30 else "info",
+                 "detail": f"teams/{slug} fetched ({rec['bytes']}B) but publishes "
+                           f"{p['row_count']} table rows in its HTML (client-side "
+                           f"hydration). Model inputs are re-cut from the official "
+                           f"per-game box scores instead - the primary source."})
         else:
             record(rec, "parse_stats_teams")
 
-    # ---- 4. players traditional (player ids + season rates) ---------------
+    # ---- 4. players traditional (same finding) ----------------------------
     url = (f"https://www.nba.com/stats/players/traditional?Season={SEASON}"
            f"&SeasonType={SEASON_TYPE}")
     rec = fetch(url) if wanted("players") else None
-    if rec is None:
-        manifest["findings"].append({"level": "info", "detail": "players: skipped (DEBUG_ONLY)"})
     if rec and rec.get("data"):
-        if debug:
-            open(os.path.join(dbg_dir, "players_traditional.html"), "wb").write(rec["data"])
         p = parse_stats_teams(decode(rec["data"]), url)
         save("players_traditional.json", p)
         record(rec, "parse_stats_teams", p)
-    else:
-        record(rec, "parse_stats_teams")
 
     # ---- 5. injury index ---------------------------------------------------
     rec = fetch("https://official.nba.com/nba-injury-report-2026-27-season/") if wanted("injury") else None
@@ -774,7 +818,7 @@ def main():
 
     # ---- 6. injury PDFs ----------------------------------------------------
     # Every edition published for the slate window, newest last, plus the last
-    # edition of each of the two previous days so consecutive diffs are possible.
+    # edition of each previous league day so consecutive diffs are possible.
     want = []
     by_date = {}
     for e in editions:
@@ -782,64 +826,85 @@ def main():
     for d in sorted(set(result_dates) | set(slate_dates)):
         for e in by_date.get(d, []):
             want.append(e)
-    # cap the run: newest 40 editions is ample and keeps the repo light
-    want = want[-40:]
+    want = want[-60:]
+    if debug:
+        want = want[-6:]
     pdf_rows = []
-    for e in (want if wanted("injury") else []):
+    # The league republishes the same report under a new timestamp many times a
+    # day. Every edition is FETCHED and every edition's own SHA-256, URL and
+    # retrieval time are recorded; the bytes are archived once per distinct
+    # report (plus always the newest), so the archive stays complete without
+    # storing the same bytes dozens of times.
+    seen_content = set()
+    for idx, e in enumerate(want if wanted("injury") else []):
         rec = fetch(e["url"])
         if not rec.get("data"):
             record(rec, "parse_injury_pdf")
             continue
         fn = e["file"]
-        with open(os.path.join(pdf_dir, fn), "wb") as fh:
-            fh.write(rec["data"])
         txt = pdf_text(rec["data"])
-        with open(os.path.join(pdf_dir, fn + ".txt"), "w", encoding="utf-8") as fh:
-            fh.write(txt)
         p = parse_injury_pdf(txt)
+        content_sha = hashlib.sha256(json.dumps(p["rows"], sort_keys=True).encode()).hexdigest()
+        keep = (content_sha not in seen_content) or (idx == len(want) - 1)
+        seen_content.add(content_sha)
+        if keep:
+            with open(os.path.join(pdf_dir, fn), "wb") as fh:
+                fh.write(rec["data"])
+            with open(os.path.join(pdf_dir, fn + ".txt"), "w", encoding="utf-8") as fh:
+                fh.write(txt)
+        p["content_sha256"] = content_sha
+        p["duplicate_of"] = None if keep else "an earlier edition with identical content"
+
         p.update({"edition_url": e["url"], "edition_label": e["edition_label"],
                   "edition_date": e["date"],
                   "pdf_sha256": rec["sha256"], "pdf_bytes": rec["bytes"],
-                  "pdf_stored_path": f"data/capture/{run_id}/injury_pdf/{fn}",
+                  "pdf_archived": bool(keep),
+                  "pdf_stored_path": (f"data/capture/{run_id}/injury_pdf/{fn}" if keep else None),
                   "http_last_modified": rec.get("last_modified"),
                   "retrieved_at_utc": rec["fetched_at_utc"]})
         pdf_rows.append(p)
-        rec["stored_path"] = f"data/capture/{run_id}/injury_pdf/{fn}"
+        rec["stored_path"] = f"data/capture/{run_id}/injury_pdf/{fn}" if keep else None
         record(rec, "parse_injury_pdf", p)
-    save("injury_pdfs.json", {"parser_version": PARSER_VERSION,
-                              "editions": pdf_rows, "edition_count": len(pdf_rows)})
+    if pdf_rows:
+        save("injury_pdfs.json", {"parser_version": PARSER_VERSION,
+                                  "editions": pdf_rows, "edition_count": len(pdf_rows)})
+        manifest["findings"].append(
+            {"level": "info", "detail": f"{len(pdf_rows)} injury PDF editions archived "
+             f"({sum(p['row_count'] for p in pdf_rows)} player-rows parsed)"})
 
-    # ---- 7. game pages (final + quarter scores) ---------------------------
-    # Only for games the schedule page printed as played, plus the slate window.
-    game_rows = []
-    targets = []
-    for d in sorted(set(result_dates)):
-        for g in games.get(d, {}).get("rows", []):
-            targets.append((d, g))
-    if os.environ.get("GAME_PAGES_ALL") == "1":
-        for d in slate_dates:
-            for g in games.get(d, {}).get("rows", []):
-                targets.append((d, g))
-    if debug and targets:
-        targets = targets[:2]
-    if not wanted("gamepages"):
-        targets = []
-    for d, g in targets:
-        url = g["game_url"]
+    # ---- 7. box scores for every completed game ---------------------------
+    # One row per finished game: date, teams, final, quarter scores, both team
+    # box scores (the possession model's inputs) and every player's line.
+    played = []
+    for d in sorted(games):
+        for r in games[d]["rows"]:
+            if (r.get("status_label") or "").lower().startswith("final"):
+                played.append((d, r))
+    if debug:
+        played = played[:2]
+    box = []
+    for d, r in (played if wanted("gamepages") else []):
+        url = r["game_url"]
         rec = fetch(url)
         if not rec.get("data"):
             record(rec, "parse_game_page")
             continue
         if debug:
-            open(os.path.join(dbg_dir, f"game_{g['game_id']}.html"), "wb").write(rec["data"])
-        p = parse_game_page(decode(rec["data"]), g["game_id"])
-        p.update({"date": d, "game_url": url,
-                  "page_sha256": rec["sha256"], "retrieved_at_utc": rec["fetched_at_utc"],
-                  "away": g["away"], "home": g["home"]})
-        game_rows.append(p)
+            open(os.path.join(dbg_dir, f"game_{r['game_id']}.html"), "wb").write(rec["data"])
+        p = parse_game_page(decode(rec["data"]), r["game_id"])
+        p.update({"date": d, "game_url": url, "page_sha256": rec["sha256"],
+                  "retrieved_at_utc": rec["fetched_at_utc"],
+                  "away": r["away"], "home": r["home"],
+                  "away_pts_card": r["away_pts"], "home_pts_card": r["home_pts"]})
+        box.append(p)
         record(rec, "parse_game_page", p)
-    save("game_pages.json", {"parser_version": PARSER_VERSION,
-                             "rows": game_rows, "row_count": len(game_rows)})
+    if box:
+        save("boxscores.json", {"parser_version": PARSER_VERSION, "rows": box,
+                                "row_count": len(box)})
+        manifest["findings"].append(
+            {"level": "info", "detail": f"{len(box)} official box scores captured; "
+             f"{sum(1 for b in box if b.get('away_quarters') and b.get('home_quarters'))} "
+             f"carry quarter scores for both teams"})
 
     # ---- 8. URL probe (structure discovery, recorded not assumed) ---------
     probes = []
@@ -848,7 +913,7 @@ def main():
             rec = fetch(u, tries=1)
             body = ""
             if rec.get("data"):
-                body = text_of(decode(rec["data"]))[:400]
+                body = text_of(decode(rec["data"]))[:600]
             probes.append({"url": u, "http_status": rec["http_status"],
                            "bytes": rec["bytes"], "error": rec.get("error"),
                            "text_head": body})
@@ -858,7 +923,6 @@ def main():
     manifest["finished_at_utc"] = utcnow()
     with open(os.path.join(run_dir, "manifest.json"), "w", encoding="utf-8") as fh:
         json.dump(manifest, fh, indent=1)
-    # a stable pointer for the builders
     with open(os.path.join(CAPTURE, "LATEST"), "w", encoding="utf-8") as fh:
         fh.write(run_id)
     log(f"run {run_id}: {len(manifest['fetches'])} fetches, "
