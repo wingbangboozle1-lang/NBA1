@@ -1,6 +1,6 @@
 {
   "session": "arena/91390540-nba1",
-  "captured_by": "session arena/91390540-nba1 (COORDINATION §38, task R02)",
+  "captured_by": "session arena/91390540-nba1 (COORDINATION §39, task R02)",
   "capture_window_utc": ["2026-11-15T11:31Z", "2026-11-15T11:45Z"],
   "timestamp_note": "Reads were executed sequentially inside the window above through the session's web-fetch channel (the shell's egress to nba.com is blocked, as earlier sessions recorded). Per-read times are the session window, not instrumented clocks.",
   "method": "verbatim structured transcription of each fetched page; every row carries the exact official URL it was read from; no value inferred, no cell filled from any non-official source",

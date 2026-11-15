@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Row-by-row comparison for session arena/91390540-nba1 (COORDINATION §38, R03).
+"""Row-by-row comparison for session arena/91390540-nba1 (COORDINATION §39, R03).
 
 Reads this session's fresh official captures (same directory) against the values the
 repository currently publishes, and writes compare.json next to itself.

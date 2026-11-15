@@ -1,4 +1,4 @@
-# 2026-11-15 verification pass — session `arena/91390540-nba1` (COORDINATION §38)
+# 2026-11-15 verification pass — session `arena/91390540-nba1` (COORDINATION §39)
 
 **Capture window:** 2026-11-15T11:31Z – 11:45Z (reads executed sequentially in this window through the
 session's web-fetch channel; the shell's egress to `*.nba.com` is blocked, as earlier sessions recorded).
@@ -61,7 +61,7 @@ the cards and the repo's own capture are arithmetically consistent.
 | `integration/out/settlement.json` | all five games listed with reason **"tip-off has not happened yet at capture time"** |
 
 The finals captured here are ready to settle against (two-source, quarter scores included). Settlement was
-**not executed** by this session: `integration/**` and the picks ledgers are outside the claimed §38 scope.
+**not executed** by this session: `integration/**` and the picks ledgers are outside the claimed §39 scope.
 → **F69**, with the fix spelled out as a request to the ledger owner.
 
 ---
