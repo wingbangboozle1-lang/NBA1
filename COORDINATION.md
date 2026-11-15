@@ -5,6 +5,17 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/513516f6-nba1` (opened 2026-11-15 23:35 UTC — takeover of stale integration PR #106 + brief-traceability register)
+
+Branch `arena/513516f6-nba1`, based on `main` `cd8fd27` (tip at claim time). Platform pins this session to that
+branch (deviation from the `session-<id>/<task>` naming logged, as earlier sessions logged it). Board read before
+claiming (ground rules 1–6, §0b, §39, §40): PR #106 (`arena/83d380ad-nba1`, §40) is OPEN, CONFLICTING with `main`,
+and its last human commit was 2026-11-15 12:20 UTC (>10 h idle, far past ground rule 5). Its owner's G06 delivery
+step is unclaimed, so this session takes over **only** PR #106's content and the G06 delivery. Full claim, task
+table K01–K05 and file scopes are in **§41** at the tail of this board.
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/83d380ad-nba1` (opened 2026-11-15 11:35 UTC — rolling-slate refresh, 11/14 settlement, ledger, integration delivery)
 
 Branch `arena/83d380ad-nba1`, based on `main` `ef2e723` (tip at claim time). The platform pins
@@ -149,6 +160,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/e38f7e38-nba1` | `arena/e38f7e38-nba1` | 2026-11-14 (added during merge) | CI publish-gate hardening (§11), PR #27/#28 merged. |
 | `arena/93ff7f20-nba1` | `arena/93ff7f20-nba1` | 2026-11-14 (added during merge) | Final verification pass W01–W05 (§12), PR #29 merged. |
 | `arena/83d380ad-nba1` | `arena/83d380ad-nba1` | 2026-11-15 11:35 UTC | Rolling-slate refresh + 11/14 settlement + ledger + integration delivery (§40). Platform pins this session to its branch (deviation logged, as above). |
+| `arena/513516f6-nba1` | `arena/513516f6-nba1` | 2026-11-15 23:35 UTC | Takeover of stale PR #106 (§40 G06 delivery, idle >10 h) + brief-traceability register (§41). Platform pins this session to its branch. |
 
 ---
 
@@ -3652,3 +3664,27 @@ scope, log the request here instead of editing it.
 - **Pages:** publisher run [43713132209](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713132209) (head `9e70a12f`) + internal `pages-build-deployment` [43713131809](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713131809) queued ~25 min behind the parallel sessions' traffic, then deployed. **Confirmed live** by fetching `https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html` at ~12:57Z: **69 rows**, last row **F73** with F69–F72 present — i.e. the deployed tree contains this merge (pre-merge live build was `ef45961` with 64 flags). The GitHub REST API was rate-limited (HTTP 403) for this account at record time, so the run's `conclusion` string could not be re-queried; the live-site fetch is the authoritative deploy confirmation.
 - **Gates on the merged tree (all green):** `check_site.py` PASS · `check_links.py` PASS · `verify_integration.py` PASSED (0 errors, 44 pre-existing published warnings unchanged) · `check_rendered.py` PASS · `verify_all.py` **VERIFY OK** · `render_check.mjs` 134 pages / 8,198 rendered rows / 0 problems · `build_verification_page.py` idempotent · Command Center 18 data + 17 pages · workflow verbatim relative-link scan 0 broken (135 HTML, 3,306 relative links).
 - **Delivered:** captures + `compare.json` + `REPORT.md`/HTML twin under `verify/2026-11-15-91390540/`; flags **F69–F73** published (register 64 → 69 items, next free F74); dashboard regenerated. Out of scope and declared: no settlement executed (F69 handoff: `integration/settle.py`), no line re-pricing (F72), venues not re-checked (F73).
+
+
+## 41. Session `arena/513516f6-nba1` — stale-PR takeover (PR #106), brief-traceability register, integration delivery (claimed 2026-11-15 23:35 UTC)
+
+Branch `arena/513516f6-nba1`, based on `main` `cd8fd27`. Board read first (ground rules 1–6, §0b registry,
+§39 and §40 delivery records). Live state at claim time: `main` = `cd8fd27` (probe record only);
+PR #106 (`arena/83d380ad-nba1`, head `901d20f`) OPEN, `mergeStateStatus: DIRTY`, `statusCheckRollup: []`;
+no other open PRs. Last *human* commit on #106 was 12:20 UTC, so ground rule 5 (60 min) applies.
+
+| # | Task | Status | File scope (exclusive) | Plan |
+| --- | --- | --- | --- | --- |
+| K01 | Board claim (banner + §0b row + this §41) pushed before any other edit | done (this commit) | `COORDINATION.md` (banner, §0b row, §41 only) | Claim first, work second. |
+| K02 | Carry PR #106 content (`origin/arena/83d380ad-nba1`) onto this branch by merge; resolve conflicts without dropping either side; regenerate generated surfaces with the repo's own builders, never by hand | unclaimed | merge of `origin/arena/83d380ad-nba1`; conflicts in `COORDINATION.md` (union), `verification.html`, `data/content/**`, generated `site/**`, `docs/data/**` | Captures stay captures; no snapshot is promoted by hand. |
+| K03 | Brief-traceability register: every bullet of the brief mapped to the repo artifact that satisfies it (or to the gap), with status `done` / `partial` / `missing` / `needs decision`, and a source or evidence link on every row | unclaimed | `site/pages/requirements.html` (new), `data/content/requirements.json` (new), `scripts/build_requirements.py` (new) | Evidence-only; no status is upgraded without a file or commit reference. |
+| K04 | Full gate suite on the final tree (the `validate` steps in order + `verify_all.py` + link check) | unclaimed | none (runs only; fixes only if provably needed and logged) | "Do not merge a broken site." |
+| K05 | PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy + live fetch-back; record PR link and merge result in §41; close PR #106 as superseded with a comment that names the merging PR | unclaimed | `COORDINATION.md` (§41 delivery record only) | Retry until live. Flagged items do not block. |
+
+**Not claimed / read-only:** `docs/**`, `docs/b/**`, `audit/**`, `engine*/**`, `strategy-lab/**`,
+`origination/**`, `edge-lab/**`, `integration/**`, other sessions' `verify/*` namespaces.
+Cross-scope needs are logged here as requests, not edited silently.
+
+### 41.1 Claim log
+
+- 2026-11-15 23:35 UTC — claim written and pushed before any other edit (K01).
