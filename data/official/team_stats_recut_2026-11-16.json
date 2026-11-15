@@ -1,0 +1,723 @@
+{
+ "title": "Team-stat re-cut 2026-11-16 - the three official pages re-read and the model inputs re-cut",
+ "captured_by": "arena/49f70042-nba1",
+ "computed_utc": "2026-11-16T01:15Z",
+ "sources": {
+  "advanced": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+  "traditional": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame",
+  "opponent": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame",
+  "per_team": {
+   "PHI": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season&TeamID=1610612755",
+   "IND": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season&TeamID=1610612754",
+   "SAS": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season&TeamID=1610612759"
+  }
+ },
+ "league_baselines": {
+  "league_off_rtg": 113.127,
+  "league_def_rtg": 113.14,
+  "league_pace": 99.838,
+  "league_pts_per_game": 113.637,
+  "league_opp_pts_per_game": 113.667,
+  "n_teams": 30
+ },
+ "rows_changed_vs_previous_official_capture": {
+  "advanced": [
+   {
+    "abbr": "ATL",
+    "field": "ast_ratio",
+    "re_read": 38.6,
+    "published": 20.5,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "BKN",
+    "field": "ast_ratio",
+    "re_read": 38.2,
+    "published": 17.2,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "BOS",
+    "field": "ast_ratio",
+    "re_read": 38.1,
+    "published": 19.1,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "BOS",
+    "field": "oreb_pct",
+    "re_read": 33.9,
+    "published": 32.7,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "BOS",
+    "field": "dreb_pct",
+    "re_read": 64.4,
+    "published": 67.5,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "CHA",
+    "field": "ast_ratio",
+    "re_read": 35.7,
+    "published": 15.8,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "CHA",
+    "field": "oreb_pct",
+    "re_read": 33.7,
+    "published": 35.7,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "CHI",
+    "field": "ast_ratio",
+    "re_read": 38.2,
+    "published": 18.2,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "CLE",
+    "field": "ast_ratio",
+    "re_read": 38.1,
+    "published": 19.1,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "CLE",
+    "field": "oreb_pct",
+    "re_read": 34.9,
+    "published": 29.1,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "CLE",
+    "field": "dreb_pct",
+    "re_read": 71.3,
+    "published": 68.1,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "CLE",
+    "field": "reb_pct",
+    "re_read": 52.6,
+    "published": 49.4,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "DEN",
+    "field": "ast_ratio",
+    "re_read": 38.7,
+    "published": 19.7,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "DET",
+    "field": "ast_ratio",
+    "re_read": 38.4,
+    "published": 19.2,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "DET",
+    "field": "oreb_pct",
+    "re_read": 33.8,
+    "published": 29.8,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "DET",
+    "field": "dreb_pct",
+    "re_read": 70.9,
+    "published": 66.6,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "DET",
+    "field": "reb_pct",
+    "re_read": 52.4,
+    "published": 48.4,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "GSW",
+    "field": "ast_ratio",
+    "re_read": 37.6,
+    "published": 19.4,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "HOU",
+    "field": "ast_ratio",
+    "re_read": 38.0,
+    "published": 19.0,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "HOU",
+    "field": "dreb_pct",
+    "re_read": 66.2,
+    "published": 67.8,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "HOU",
+    "field": "reb_pct",
+    "re_read": 50.5,
+    "published": 52.0,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "IND",
+    "field": "ast_ratio",
+    "re_read": 38.7,
+    "published": 19.7,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "LAC",
+    "field": "ast_ratio",
+    "re_read": 38.8,
+    "published": 18.8,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "MEM",
+    "field": "ast_ratio",
+    "re_read": 38.2,
+    "published": 19.1,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "MEM",
+    "field": "oreb_pct",
+    "re_read": 33.9,
+    "published": 34.2,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "MEM",
+    "field": "dreb_pct",
+    "re_read": 71.6,
+    "published": 70.6,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "MIA",
+    "field": "ast_ratio",
+    "re_read": 38.0,
+    "published": 20.1,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "MIL",
+    "field": "ast_ratio",
+    "re_read": 38.5,
+    "published": 17.5,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "MIN",
+    "field": "ast_pct",
+    "re_read": 65.4,
+    "published": 59.9,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "MIN",
+    "field": "ast_ratio",
+    "re_read": 37.8,
+    "published": 17.8,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "MIN",
+    "field": "oreb_pct",
+    "re_read": 33.9,
+    "published": 35.4,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "MIN",
+    "field": "dreb_pct",
+    "re_read": 71.3,
+    "published": 69.5,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "NOP",
+    "field": "ast_ratio",
+    "re_read": 38.0,
+    "published": 17.0,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "NYK",
+    "field": "ast_ratio",
+    "re_read": 38.9,
+    "published": 18.9,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "OKC",
+    "field": "ast_pct",
+    "re_read": 66.2,
+    "published": 55.5,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "OKC",
+    "field": "ast_ratio",
+    "re_read": 38.4,
+    "published": 16.6,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "OKC",
+    "field": "oreb_pct",
+    "re_read": 33.9,
+    "published": 31.9,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "ORL",
+    "field": "ast_ratio",
+    "re_read": 38.5,
+    "published": 18.5,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "PHX",
+    "field": "ast_ratio",
+    "re_read": 38.5,
+    "published": 19.5,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "POR",
+    "field": "ast_ratio",
+    "re_read": 37.9,
+    "published": 17.9,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "POR",
+    "field": "dreb_pct",
+    "re_read": 70.6,
+    "published": 70.2,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "SAC",
+    "field": "ast_ratio",
+    "re_read": 38.9,
+    "published": 17.9,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "SAS",
+    "field": "ast_ratio",
+    "re_read": 38.9,
+    "published": 19.4,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "TOR",
+    "field": "ast_ratio",
+    "re_read": 38.1,
+    "published": 19.1,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "UTA",
+    "field": "ast_ratio",
+    "re_read": 38.6,
+    "published": 17.0,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "WAS",
+    "field": "ast_ratio",
+    "re_read": 38.7,
+    "published": 17.0,
+    "note": "re-read differs from the published row"
+   }
+  ],
+  "traditional": [
+   {
+    "abbr": "ATL",
+    "field": "win_pct",
+    "re_read": 0.538,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "BKN",
+    "field": "win_pct",
+    "re_read": 0.25,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "BOS",
+    "field": "win_pct",
+    "re_read": 0.833,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "CHA",
+    "field": "win_pct",
+    "re_read": 0.333,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "CHI",
+    "field": "win_pct",
+    "re_read": 0.25,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "CLE",
+    "field": "win_pct",
+    "re_read": 0.5,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "DAL",
+    "field": "win_pct",
+    "re_read": 0.538,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "DEN",
+    "field": "win_pct",
+    "re_read": 0.636,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "DET",
+    "field": "win_pct",
+    "re_read": 0.667,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "GSW",
+    "field": "win_pct",
+    "re_read": 0.615,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "HOU",
+    "field": "win_pct",
+    "re_read": 0.769,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "LAC",
+    "field": "win_pct",
+    "re_read": 0.273,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "LAL",
+    "field": "win_pct",
+    "re_read": 0.846,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "MEM",
+    "field": "win_pct",
+    "re_read": 0.692,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "MIA",
+    "field": "win_pct",
+    "re_read": 0.538,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "MIL",
+    "field": "win_pct",
+    "re_read": 0.077,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "MIN",
+    "field": "win_pct",
+    "re_read": 0.692,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "NOP",
+    "field": "win_pct",
+    "re_read": 0.286,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "NYK",
+    "field": "win_pct",
+    "re_read": 0.5,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "OKC",
+    "field": "win_pct",
+    "re_read": 0.615,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "ORL",
+    "field": "win_pct",
+    "re_read": 0.417,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "PHX",
+    "field": "win_pct",
+    "re_read": 0.455,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "POR",
+    "field": "win_pct",
+    "re_read": 0.75,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "SAC",
+    "field": "win_pct",
+    "re_read": 0.083,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "SAS",
+    "field": "win_pct",
+    "re_read": 0.846,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "TOR",
+    "field": "win_pct",
+    "re_read": 0.417,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "UTA",
+    "field": "win_pct",
+    "re_read": 0.077,
+    "published": null,
+    "note": "re-read differs from the published row"
+   },
+   {
+    "abbr": "WAS",
+    "field": "win_pct",
+    "re_read": 0.308,
+    "published": null,
+    "note": "re-read differs from the published row"
+   }
+  ],
+  "opponent": []
+ },
+ "ast_ratio_rendering_discrepancy": [
+  {
+   "abbr": "ATL",
+   "league_wide_re_read": 38.6,
+   "published": 20.5,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "BKN",
+   "league_wide_re_read": 38.2,
+   "published": 17.2,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "BOS",
+   "league_wide_re_read": 38.1,
+   "published": 19.1,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "CHA",
+   "league_wide_re_read": 35.7,
+   "published": 15.8,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "CHI",
+   "league_wide_re_read": 38.2,
+   "published": 18.2,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "CLE",
+   "league_wide_re_read": 38.1,
+   "published": 19.1,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "DEN",
+   "league_wide_re_read": 38.7,
+   "published": 19.7,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "DET",
+   "league_wide_re_read": 38.4,
+   "published": 19.2,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "GSW",
+   "league_wide_re_read": 37.6,
+   "published": 19.4,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "HOU",
+   "league_wide_re_read": 38.0,
+   "published": 19.0,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "IND",
+   "league_wide_re_read": 38.7,
+   "published": 19.7,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "LAC",
+   "league_wide_re_read": 38.8,
+   "published": 18.8,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "MEM",
+   "league_wide_re_read": 38.2,
+   "published": 19.1,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "MIA",
+   "league_wide_re_read": 38.0,
+   "published": 20.1,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "MIL",
+   "league_wide_re_read": 38.5,
+   "published": 17.5,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "MIN",
+   "league_wide_re_read": 37.8,
+   "published": 17.8,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "NOP",
+   "league_wide_re_read": 38.0,
+   "published": 17.0,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "NYK",
+   "league_wide_re_read": 38.9,
+   "published": 18.9,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "OKC",
+   "league_wide_re_read": 38.4,
+   "published": 16.6,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "ORL",
+   "league_wide_re_read": 38.5,
+   "published": 18.5,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "PHX",
+   "league_wide_re_read": 38.5,
+   "published": 19.5,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "POR",
+   "league_wide_re_read": 37.9,
+   "published": 17.9,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "SAC",
+   "league_wide_re_read": 38.9,
+   "published": 17.9,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "SAS",
+   "league_wide_re_read": 38.9,
+   "published": 19.4,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "TOR",
+   "league_wide_re_read": 38.1,
+   "published": 19.1,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "UTA",
+   "league_wide_re_read": 38.6,
+   "published": 17.0,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  },
+  {
+   "abbr": "WAS",
+   "league_wide_re_read": 38.7,
+   "published": 17.0,
+   "resolution": "published value kept - the per-team official view for SAS (1610612759) prints the same value as the earlier capture, so the league-wide markdown rendering of this column is a mis-read"
+  }
+ ],
+ "transcription_notes": [
+  {
+   "table": "traditional",
+   "team": "CLE",
+   "field": "blk",
+   "value": 5.3,
+   "source": "previous official read of the same page (data/official/teams_traditional_2026-11-15.json)",
+   "issue": "the 2026-11-16 read of the row rendered one value fewer than the official table has columns"
+  }
+ ],
+ "note": "Every field the league-wide re-read could not confirm against the published row is listed with both values. The only teams whose official game count moved between the two reads are PHI and IND (the 2026-11-15 IND@PHI game); their rows were re-read on the official per-team view and are authoritative."
+}
