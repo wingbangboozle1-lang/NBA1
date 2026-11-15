@@ -3508,3 +3508,89 @@ committed `data/official/gamelog.json` transcription). Every new flag row carrie
 the SG23 workflow fix; deploys now complete instead of being cancelled. Nothing here claims the
 *newest* head (`99a7043`+) is rendered — its own deploy serialises and completes under SG23, and each
 push's deploy supersedes the last.
+
+---
+
+## 38. Session `arena/00ec402a-nba1` — requirements build: scheduled refresh + gates, sealed ledger, two estimators, possession model, projection/bet split (CLAIMED 2026-11-15T11:40Z UTC)
+
+Branch `arena/00ec402a-nba1`, based on `main` `ef2e723` (tip at claim time, 2026-11-15T11:33Z).
+The platform pins this session to this single pre-named branch, so the
+`session-<id>/<task>` naming in the brief is satisfied by it (same deviation every
+earlier session logged). All content is carried on this branch; nothing is pushed
+to another session's branch.
+
+### Board read before claiming (2026-11-15T11:33–11:40Z)
+
+* `gh pr list --state open` → **empty**. No open PRs, so no in-flight work to avoid.
+* Last commit dates on every other session branch are **2026-11-14T21:10Z … 22:18Z**
+  (`main` 22:18:48Z). At claim time that is **13+ hours idle**, far past ground
+  rule 5's 60-minute threshold. No session is live. This session therefore takes
+  the **integration seat** as well, as the brief's final-integration rules allow.
+* Nothing is deleted. Every earlier build stays linked.
+
+### Ground rules this session follows (the brief's own)
+
+1. Every published number is transcribed from an official NBA property
+   (`www.nba.com`, `official.nba.com`, `ak-static.cms.nba.com`) and carries the URL
+   and the retrieval timestamp it came from.
+2. A value that cannot be confirmed from an official source is published as an em
+   dash, marked *not published*, and listed on **Flagged for Review**. Nothing is
+   inferred and no blank cell is quietly filled.
+3. Network reality, stated once and reused: the **sandbox** has no general outbound
+   network (curl to nba.com returns 000); the **GitHub runner** can reach
+   `www.nba.com`, `official.nba.com` and the injury PDFs but only with the league's
+   own web-client header set (`data/raw/probe_official.json`,
+   `retried_with_browser_headers`: 9/14 refused URLs answer, including
+   `stats/teams/advanced`, `schedule`, `games?date=`, `game/<slug>`, the injury
+   index and the injury PDFs). Bulk capture therefore runs in CI; the sandbox
+   parses it.
+
+### Task board — session `arena/00ec402a-nba1`
+
+| # | Requirement | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| T01 | Extend the scheduled job: official schedule + standings + team stats + injury report per rolling slate; rebuild only after freshness & provenance gates pass | in progress | `.github/workflows/official-capture.yml`, `scripts/official_capture.py`, `scripts/gate_freshness.py`, `data/capture/**` |
+| T02 | Official per-game result feed: one row per game — date, teams, final score, **quarter scores**; settle only after finals verified | in progress | `data/capture/results/**`, `data/official/gamelog_v2.json` |
+| T03 | Store every injury PDF with its timestamp; diff consecutive editions | in progress | `data/capture/injury_pdf/**`, `data/capture/injury_diff.json` |
+| T04 | Pre-registration freeze per strategy before its first bet | in progress | `data/capture/prereg/*.json` |
+| T05 | Tamper-evident ledger: hash each published pick, publish hash pre-tip, verify post-settlement | in progress | `data/capture/ledger.json`, `site/pages/ledger.html` |
+| T06 | Split the site into `projection` (publishable) and `bet` (gated) surfaces; never mix | in progress | `site/pages/projection.html`, `site/pages/bet.html` |
+| T07 | Two independent estimators; publish their **disagreement** as the headline, blend underneath | in progress | `scripts/estimators.py`, `data/capture/model_v3.json` |
+| T08 | Home-court advantage pinned to the **measured** home-win rate, not fitted | in progress | (same model file) |
+| T09 | Luck as a z-score per team; refuse to publish a strategy leaning on a team outside the noise band | in progress | `site/pages/luck.html` (re-cut), model output |
+| T10 | Rest / back-to-back / 3-in-4 from the official schedule + travel distance from a sourced arena table | in progress | `data/capture/travel.json` |
+| T11 | Minutes redistribution: top-8 minutes shares + replacement shares when a player is out | in progress | `data/capture/rotation.json` |
+| T13 | Price every parlay with the measured rho; print the naive product beside it | in progress | `data/capture/parlays.json` |
+| T14 | Rotation availability as its own column on the picks page | in progress | `site/pages/picks.html` (re-cut) |
+| T15 | Market-anchored prior: blend model line with closing line, weight by OOS log-loss | in progress | flagged if no official closing line exists |
+| T16 | Total modelled as possessions × points-per-possession | in progress | model output |
+| T17 | Injury page banner: report revision time **and** retrieval time | in progress | `site/pages/injuries.html` (re-cut) |
+| T18 | Settle the sealed ledger from official finals; settlement stamp visible | in progress | ledger page |
+| T19 | Re-read the three official team-stat pages (traditional, opponent, advanced) and re-cut model inputs | in progress | capture + model |
+| T20 | Per-player game logs (MIN/PTS/REB/AST + opponent) for every player on an injury report | in progress | `data/capture/player_logs.json` |
+
+### Files this session will NOT edit (other builds, preserved and still linked)
+
+`docs/**`, `engine/**`, `engine_v2/**`, `edge-lab/**`, `command-center/**`,
+`origination/**`, `strategy-lab/**`, `desk*.html`, `verification.html`,
+`review.html`, `slate.html`, `lines.html`, `gameflow.html`, `picks-2026-11-14.html`,
+`research.html`, `REPO_REVIEW.md`, `REVIEW_*.md`.
+This session edits: `index.html` (landing), `site/pages/**` (its own build),
+`site/data/**`, `site/assets/**`, `scripts/**` (new files only), `data/capture/**`,
+`.github/workflows/**` (new file only), `README.md`, `EXECUTIVE_SUMMARY.md`,
+`COORDINATION.md`.
+
+### Sources to be used (all official)
+
+| id | URL |
+| --- | --- |
+| C1 | `https://www.nba.com/games?date=<date>` (schedule, tip times, records, game ids) |
+| C2 | `https://www.nba.com/standings` (W/L, home/road splits — the measured home-win rate) |
+| C3 | `https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season` |
+| C4 | `https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season` |
+| C5 | `https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season` |
+| C6 | `https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season` |
+| C7 | `https://official.nba.com/nba-injury-report-2026-27-season/` (edition index) |
+| C8 | `https://ak-static.cms.nba.com/referee/injury/Injury-Report_<date>_<HH_MM>AM.pdf` |
+| C9 | `https://www.nba.com/game/<away>-vs-<home>-<gid>` (final score + quarter scores) |
+| C10 | `https://www.nba.com/player/<id>/<slug>/game-logs` (per-player game log) |
