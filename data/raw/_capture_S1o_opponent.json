@@ -1,0 +1,15 @@
+{
+ "captured_at_utc": "2026-11-15T12:20:26Z",
+ "source_url": "https://www.nba.com/stats/teams/opponent",
+ "page_sha256": "0a954fb7251a292346384ee813b055705d7bc7621c2b702c3efd8523931fe106",
+ "teams_parsed": 0,
+ "teams_expected": 30,
+ "rows": [],
+ "note": "Capture only. A row-count check and the cell text as printed; the column meaning is NOT inferred here, and no committed snapshot is touched. Promote by re-reading the page and mapping the columns to the schema in data/raw/teams_traditional.json / teams_opponent.json.",
+ "failure_evidence": [
+  {
+   "around": "first <tr> containing a team link",
+   "excerpt": null
+  }
+ ]
+}

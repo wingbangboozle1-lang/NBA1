@@ -1,9 +1,12 @@
 {
- "captured_at_utc": "2026-11-14T19:40:43Z",
+ "captured_at_utc": "2026-11-15T12:20:26Z",
  "changed": [
   "evidence S1_season",
   "evidence S2_train",
   "S7_players",
+  "team table S1t_traditional (0 rows)",
+  "team table S1o_opponent (0 rows)",
+  "standings probe (0/30 teams)",
   "S5_injury_index",
   "results 2026-11-06",
   "results 2026-11-07",
@@ -17,7 +20,11 @@
   "results 2026-11-15",
   "results 2026-11-16",
   "results 2026-11-17",
-  "injury pdf Injury-Report_2026-11-14_02_30PM.pdf",
+  "results 2026-11-18",
+  "injury pdf Injury-Report_2026-11-15_07_15AM.pdf",
+  "injury pdf Injury-Report_2026-11-15_07_00AM.pdf",
+  "injury pdf Injury-Report_2026-11-15_06_45AM.pdf",
+  "injury pdf Injury-Report_2026-11-15_06_30AM.pdf",
   "injury probe"
  ],
  "failed": [
@@ -30,13 +37,43 @@
    "expected 30 team rows, parsed 0"
   ],
   [
+   "S1t_traditional",
+   "expected 30 team rows, parsed 0"
+  ],
+  [
+   "S1o_opponent",
+   "expected 30 team rows, parsed 0"
+  ],
+  [
    "S4_schedule",
    "no game links found"
+  ],
+  [
+   "gamelog_0022600231",
+   "TimeoutError: The read operation timed out"
+  ],
+  [
+   "gamelog_0022600232",
+   "TimeoutError: The read operation timed out"
+  ],
+  [
+   "gamelog_0022600233",
+   "TimeoutError: The read operation timed out"
+  ],
+  [
+   "gamelog_0022600234",
+   "TimeoutError: The read operation timed out"
+  ],
+  [
+   "gamelog_0022600235",
+   "TimeoutError: The read operation timed out"
   ]
  ],
  "note": "Raw captures only. Nothing in data/raw/*.json that a snapshot owner committed is overwritten by this script - a parsed result is written as _capture_*.json so a verifier can diff it against the committed snapshot before it is promoted.",
- "workflow_run_at_utc": "2026-11-14T19:43:49Z",
- "workflow_ref": "refs/heads/arena/f7f6c46e-nba1",
+ "workflow_run_at_utc": "2026-11-15T12:26:08Z",
+ "workflow_ref": "refs/heads/arena/e3ebc423-nba1",
  "fetch_outcome": "success",
- "build_outcome": "failure"
+ "build_outcome": "success",
+ "injury_gate_outcome": "success",
+ "injury_gate_meaning": "pass = the injury index parser sees AM and PM editions, the snapshot carries a revision stamp and a retrieval stamp, and a consecutive-edition diff exists"
 }
