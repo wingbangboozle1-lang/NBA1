@@ -3656,15 +3656,6 @@ scope, log the request here instead of editing it.
 
 - 2026-11-15 11:35 UTC — claim written and pushed before any other edit (G01).
 
-### 39.1 Delivery record — PR #103 merged and Pages confirmed (2026-11-15 UTC)
-
-- **Renumber note:** this session's claim was written as §38 before `arena/7eb1c20a-nba1`'s §38 landed on `main` (PRs #101/#102). On rebase the claim was renumbered **§39** (content unchanged); `main`'s §38 is theirs. Report artifacts under `verify/2026-11-15-91390540/` reference §39.
-- **PR #103:** [2026-11-15 roll: fresh official capture, row-level re-verification, F69-F73 published, integration close-out](https://github.com/wingbangboozle1-lang/NBA1/pull/103) merged at `2026-11-15T12:18:00Z`, merge commit `9e70a12fb6a3efd59dbb55092e0a6ba20164b7e5` (merge into `main`, no approval wait). Head `7763275`.
-- **CI on the PR head:** `validate` run [43713091897](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713091897) **completed success** before merge (probe/refresh runs on `arena/**` pushes are the known fail-closed churn, R-30-2).
-- **Pages:** publisher run [43713132209](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713132209) (head `9e70a12f`) + internal `pages-build-deployment` [43713131809](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713131809) queued ~25 min behind the parallel sessions' traffic, then deployed. **Confirmed live** by fetching `https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html` at ~12:57Z: **69 rows**, last row **F73** with F69–F72 present — i.e. the deployed tree contains this merge (pre-merge live build was `ef45961` with 64 flags). The GitHub REST API was rate-limited (HTTP 403) for this account at record time, so the run's `conclusion` string could not be re-queried; the live-site fetch is the authoritative deploy confirmation.
-- **Gates on the merged tree (all green):** `check_site.py` PASS · `check_links.py` PASS · `verify_integration.py` PASSED (0 errors, 44 pre-existing published warnings unchanged) · `check_rendered.py` PASS · `verify_all.py` **VERIFY OK** · `render_check.mjs` 134 pages / 8,198 rendered rows / 0 problems · `build_verification_page.py` idempotent · Command Center 18 data + 17 pages · workflow verbatim relative-link scan 0 broken (135 HTML, 3,306 relative links).
-- **Delivered:** captures + `compare.json` + `REPORT.md`/HTML twin under `verify/2026-11-15-91390540/`; flags **F69–F73** published (register 64 → 69 items, next free F74); dashboard regenerated. Out of scope and declared: no settlement executed (F69 handoff: `integration/settle.py`), no line re-pricing (F72), venues not re-checked (F73).
-
 
 ## 41. Session `arena/513516f6-nba1` — stale-PR takeover (PR #106), brief-traceability register, integration delivery (claimed 2026-11-15 23:35 UTC)
 
