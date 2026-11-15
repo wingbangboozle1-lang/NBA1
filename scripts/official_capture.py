@@ -451,36 +451,80 @@ def parse_injury_index(html_text):
             "editions": rows, "edition_count": len(rows)}
 
 
-def parse_injury_pdf(text):
-    """The league PDF: one row per player — team, player, status, reason.
+STATUS_WORDS = ("Out", "Doubtful", "Questionable", "Probable", "Available")
+STATUS_RE = re.compile(r"\b(Out|Doubtful|Questionable|Probable|Available)\b")
+# The league prints every player as "Last, First" in the PDF.
+PLAYER_RE = re.compile(
+    r"([A-Z][A-Za-z'\-]*[A-Za-z],\s+[A-Z][A-Za-z'.\-]+(?:\s+[A-Z][A-Za-z'.\-]+)*?)"
+    r"(?=\s+(?:Out|Doubtful|Questionable|Probable|Available)\b)")
+# Each game block opens with  <time> (ET) AWAY@HOME. The date is printed only on
+# the first line of each page, so it is optional and carried forward.
+GAME_BLOCK_RE = re.compile(
+    r"(?:(\d{2}/\d{2}/\d{4})\s+)?(\d{1,2}:\d{2})\s*\(ET\)\s+([A-Z]{3}@[A-Z]{3})")
+# The league's own revision stamp, printed in the page header.
+REVISION_RE = re.compile(r"Injury\s+Report:\s*(\d{2}/\d{2}/\d{2})\s+(\d{1,2}:\d{2})\s*(AM|PM)", re.I)
 
-    The published layout is a table:  Game Date | Game Time | Matchup |
-    Team | Player Name | Current Status | Reason. Anything the PDF does not print
-    is left null.
+
+def parse_injury_pdf(text):
+    """The league PDF: one row per player — game, team, player, status, reason.
+
+    The PDF's text layer arrives as one token per line, so the tokens are
+    rejoined first and then segmented on the structures the league actually
+    prints: a game block header (`<date> <time> (ET) AWAY@HOME`), a club name from
+    the official 30-club list, a player printed as `Last, First`, and one of the
+    five official status words. Anything the PDF does not print is left null.
+
+    The league's own revision stamp (`Injury Report: <date> <time>`) is returned
+    separately from the retrieval time — they are different facts and the site
+    shows both.
     """
+    joined = re.sub(r"\s+", " ", text)
+    joined = re.sub(r"Page \d+ of \d+", " ", joined)
+    rev = None
+    mr = REVISION_RE.search(joined)
+    if mr:
+        rev = f"{mr.group(1)} {mr.group(2)} {mr.group(3).upper()} ET"
+
+    blocks = []
+    gs = list(GAME_BLOCK_RE.finditer(joined))
+    last_date = None
+    for i, g in enumerate(gs):
+        start = g.end()
+        end = gs[i + 1].start() if i + 1 < len(gs) else len(joined)
+        last_date = g.group(1) or last_date
+        blocks.append({"game_date": last_date, "game_time_et": g.group(2) + " (ET)",
+                       "matchup": g.group(3), "body": joined[start:end]})
+
     rows = []
-    lines = [re.sub(r"\s+", " ", ln).strip() for ln in text.splitlines()]
-    for ln in lines:
-        if not ln:
-            continue
-        m = re.match(
-            r"^(\d{2}/\d{2}/\d{4})?\s*(\d{1,2}:\d{2}\s*(?:AM|PM)\s*ET)?\s*"
-            r"([A-Za-z .'\-]+?)\s+([A-Za-z .'\-]+?)\s+"
-            r"(Out|Doubtful|Questionable|Probable|Available)\s*(.*)$", ln)
-        if not m:
-            continue
-        team, player, status, reason = m.group(3).strip(), m.group(4).strip(), m.group(5), m.group(6).strip()
-        rows.append({
-            "game_date": m.group(1),
-            "game_time_et": m.group(2),
-            "team_name": team,
-            "team": NAME_TO_ABBR.get(team),
-            "player": player,
-            "status": status,
-            "reason": reason or None,
-        })
+    for b in blocks:
+        body = b["body"]
+        # locate the club segments inside this game block
+        clubs = [(m.start(), m.end(), m.group(1)) for m in TEAM_NAME_RE.finditer(body)]
+        for ci, (c_start, c_end, club) in enumerate(clubs):
+            c_end2 = clubs[ci + 1][0] if ci + 1 < len(clubs) else len(body)
+            seg = body[c_end:c_end2]
+            players = list(PLAYER_RE.finditer(seg))
+            for pi, pm in enumerate(players):
+                p_end = players[pi + 1].start() if pi + 1 < len(players) else len(seg)
+                tail = seg[pm.end():p_end].strip()
+                ms = STATUS_RE.search(tail)
+                status = ms.group(1) if ms else None
+                reason = tail[ms.end():].strip() if ms else (tail or None)
+                reason = re.sub(r"^Injury/Illness\s*-\s*", "", reason or "").strip() or None
+                # the page header of the next page can trail the last row
+                reason = re.sub(r"\s*Injury\s+Report:.*$", "", reason or "").strip() or None
+                rows.append({
+                    "game_date": b["game_date"],
+                    "game_time_et": b["game_time_et"],
+                    "matchup": b["matchup"],
+                    "team_name": club,
+                    "team": NAME_TO_ABBR[club],
+                    "player": re.sub(r"\s+", " ", pm.group(1)).strip(),
+                    "status": status,
+                    "reason": reason,
+                })
     return {"parser_version": PARSER_VERSION, "rows": rows, "row_count": len(rows),
-            "raw_lines": len(lines)}
+            "revision_stamp_et": rev, "game_blocks": len(blocks)}
 
 
 def parse_game_page(html_text, gid):
@@ -591,6 +635,9 @@ def main():
     for d in (parsed_dir, pdf_dir, dbg_dir):
         os.makedirs(d, exist_ok=True)
 
+    only = set(x.strip() for x in os.environ.get("DEBUG_ONLY", "").split(",") if x.strip())
+    wanted = (lambda s: (not only) or (s in only))
+
     manifest = {
         "run_id": run_id,
         "created_at_utc": utcnow(),
@@ -620,6 +667,8 @@ def main():
     # ---- 1. schedule / results pages -------------------------------------
     games = {}
     for d in sorted(set(result_dates) | set(slate_dates)):
+        if not wanted("games"):
+            break
         url = f"https://www.nba.com/games?date={d}"
         rec = fetch(url)
         if rec.get("data"):
@@ -637,9 +686,32 @@ def main():
             manifest["findings"].append(
                 {"level": "error", "detail": f"games?date={d} not captured: {rec.get('error') or rec.get('http_status')}"})
 
+    # A game card belongs to exactly one date. NBA.com also carries one promo
+    # /game/ link (the marquee match-up) in the page furniture, and it appears
+    # identically on every date's page. Rather than guess which link it is, drop
+    # any game id that shows up on more than one date: that is a property of the
+    # page furniture, not of the schedule.
+    seen_on = {}
+    for d, p in games.items():
+        for r in p["rows"]:
+            seen_on.setdefault(r["game_id"], set()).add(d)
+    promo = {gid for gid, ds in seen_on.items() if len(ds) > 1}
+    for d, p in games.items():
+        p["rows"] = [r for r in p["rows"] if r["game_id"] not in promo]
+        p["row_count"] = len(p["rows"])
+        if promo:
+            save(f"games_{d}.json", p)
+    if promo:
+        manifest["findings"].append(
+            {"level": "info",
+             "detail": f"{len(promo)} promo game link(s) appeared on more than one date's page "
+                       f"and were dropped as page furniture: {sorted(promo)}"})
+
     # ---- 2. standings -----------------------------------------------------
-    rec = fetch("https://www.nba.com/standings")
-    if rec.get("data"):
+    rec = fetch("https://www.nba.com/standings") if wanted("standings") else None
+    if rec is None:
+        manifest["findings"].append({"level": "info", "detail": "standings: skipped (DEBUG_ONLY)"})
+    if rec and rec.get("data"):
         if debug:
             open(os.path.join(dbg_dir, "standings.html"), "wb").write(rec["data"])
         p = parse_standings(decode(rec["data"]))
@@ -652,7 +724,7 @@ def main():
         record(rec, "parse_standings")
 
     # ---- 3. the three official team-stat pages ----------------------------
-    for slug in ("traditional", "opponent", "advanced"):
+    for slug in (("traditional", "opponent", "advanced") if wanted("teams") else ()):
         url = (f"https://www.nba.com/stats/teams/{slug}?Season={SEASON}"
                f"&SeasonType={SEASON_TYPE}")
         rec = fetch(url)
@@ -671,8 +743,10 @@ def main():
     # ---- 4. players traditional (player ids + season rates) ---------------
     url = (f"https://www.nba.com/stats/players/traditional?Season={SEASON}"
            f"&SeasonType={SEASON_TYPE}")
-    rec = fetch(url)
-    if rec.get("data"):
+    rec = fetch(url) if wanted("players") else None
+    if rec is None:
+        manifest["findings"].append({"level": "info", "detail": "players: skipped (DEBUG_ONLY)"})
+    if rec and rec.get("data"):
         if debug:
             open(os.path.join(dbg_dir, "players_traditional.html"), "wb").write(rec["data"])
         p = parse_stats_teams(decode(rec["data"]), url)
@@ -682,9 +756,9 @@ def main():
         record(rec, "parse_stats_teams")
 
     # ---- 5. injury index ---------------------------------------------------
-    rec = fetch("https://official.nba.com/nba-injury-report-2026-27-season/")
+    rec = fetch("https://official.nba.com/nba-injury-report-2026-27-season/") if wanted("injury") else None
     editions = []
-    if rec.get("data"):
+    if rec and rec.get("data"):
         if debug:
             open(os.path.join(dbg_dir, "injury_index.html"), "wb").write(rec["data"])
         p = parse_injury_index(decode(rec["data"]))
@@ -709,7 +783,7 @@ def main():
     # cap the run: newest 40 editions is ample and keeps the repo light
     want = want[-40:]
     pdf_rows = []
-    for e in want:
+    for e in (want if wanted("injury") else []):
         rec = fetch(e["url"])
         if not rec.get("data"):
             record(rec, "parse_injury_pdf")
@@ -746,6 +820,8 @@ def main():
                 targets.append((d, g))
     if debug and targets:
         targets = targets[:2]
+    if not wanted("gamepages"):
+        targets = []
     for d, g in targets:
         url = g["game_url"]
         rec = fetch(url)
@@ -765,7 +841,7 @@ def main():
 
     # ---- 8. URL probe (structure discovery, recorded not assumed) ---------
     probes = []
-    if os.environ.get("PROBE_URLS"):
+    if os.environ.get("PROBE_URLS") and wanted("probe"):
         for u in [x for x in os.environ["PROBE_URLS"].split("|") if x]:
             rec = fetch(u, tries=1)
             body = ""

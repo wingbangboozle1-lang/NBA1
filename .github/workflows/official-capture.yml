@@ -2,7 +2,7 @@ name: Official capture
 
 # Manual trigger: session tokens cannot call workflow_dispatch (HTTP 403),
 # so a run is started by editing this file (it is in the push paths above).
-# run-stamp: 2026-11-15T11:52Z debug=1
+# run-stamp: 2026-11-15T11:58Z debug=1 only=standings,teams,games,gamepages
 # Purpose: the ONLY path in this project that can reach nba.com.
 #
 # The agent sandbox has no outbound network (curl to nba.com returns 000). GitHub
@@ -42,6 +42,10 @@ on:
         description: "Pipe-separated URLs to probe (status + first 400 chars of text)"
         required: false
         default: ""
+      debug_only:
+        description: "Comma list limiting the run: standings|teams|games|players|injury|gamepages|probe"
+        required: false
+        default: ""
       skip_ci:
         description: "Append [skip ci] to the commit message"
         required: false
@@ -76,22 +80,29 @@ jobs:
         id: capture
         continue-on-error: true
         env:
-          CAPTURE_TODAY: ${{ github.event.inputs.today }}
-          CAPTURE_DATES: ${{ github.event.inputs.dates }}
-          DEBUG_DUMP: ${{ github.event.inputs.debug_dump }}
-          GAME_PAGES_ALL: ${{ github.event.inputs.game_pages_all }}
-          PROBE_URLS: ${{ github.event.inputs.probe_urls }}
-        run: python3 scripts/official_capture.py
+          CAPTURE_TODAY: ${{ github.event.inputs.today || '' }}
+          CAPTURE_DATES: ${{ github.event.inputs.dates || '' }}
+          DEBUG_DUMP: ${{ github.event.inputs.debug_dump || '0' }}
+          GAME_PAGES_ALL: ${{ github.event.inputs.game_pages_all || '0' }}
+          PROBE_URLS: ${{ github.event.inputs.probe_urls || '' }}
+          DEBUG_ONLY: ${{ github.event.inputs.debug_only || '' }}
+        run: |
+          mkdir -p data/capture/_ci
+          python3 scripts/official_capture.py 2>&1 | tee data/capture/_ci/capture.log
 
       - name: Run the freshness and provenance gate
         id: gate
         continue-on-error: true
-        run: python3 scripts/gate_freshness.py
+        run: |
+          mkdir -p data/capture/_ci
+          python3 scripts/gate_freshness.py 2>&1 | tee data/capture/_ci/gate.log
 
       - name: Rebuild the site only if the gate passed
         if: steps.gate.outcome == 'success'
         continue-on-error: true
-        run: python3 scripts/build_requirements.py
+        run: |
+          mkdir -p data/capture/_ci
+          python3 scripts/build_requirements.py 2>&1 | tee data/capture/_ci/build.log
 
       - name: Print the parsed output for review
         if: always()
