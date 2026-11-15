@@ -7,9 +7,11 @@ name: Refresh official data
 # Design rules (see also engine/fetch_official.py):
 #   * only official NBA hosts are fetched, with the web-client header set the
 #     reachability probe proved returns HTTP 200 (data/raw/probe_official.json);
-#   * captures are written as data/raw/_capture_*.json and NEVER overwrite a
-#     committed snapshot - promotion happens only after a verifier re-checks
-#     the row against the official page (COORDINATION.md section 15);
+#   * captures are written as data/raw/_capture_*.json and injury PDFs are
+#     archived by content hash under data/raw/injury_pdfs/; committed model
+#     snapshots are never overwritten - promotion requires re-verification;
+#   * the builder runs only after a current-run source digest, freshness, PDF
+#     integrity and verified-promotion gate passes; otherwise it is skipped;
 #   * a scheduled run can no longer push to `main` directly (cross-session
 #     request R7 / audit item I-01): it opens a pull request instead, so a
 #     human or session reviews captures before they land;
@@ -54,23 +56,42 @@ jobs:
         with:
           python-version: "3.11"
 
-      # Builders consume the committed snapshots, not the captures below, so
-      # they run first on a clean tree. This step only proves they still run.
-      - name: Verify the site builders still run
+      # Capture first. Builders must never run against stale/changed snapshots.
+      - name: Fetch official sources
+        id: fetch
+        continue-on-error: true
+        run: python3 engine/fetch_official.py
+
+      - name: Require fresh provenance and verified-promotion gates
+        id: freshness
+        if: steps.fetch.outcome == 'success'
+        continue-on-error: true
+        run: python3 engine/refresh_gate.py --max-age-hours 10
+
+      # A changed raw capture is only evidence; it is not a promotion into the
+      # model inputs. The gate blocks rebuilding until changes are verified and
+      # promoted. A clean current capture set may rebuild committed inputs.
+      - name: Rebuild only after all freshness and provenance gates pass
         id: build
+        if: steps.fetch.outcome == 'success' && steps.freshness.outputs.ok == 'true'
         continue-on-error: true
         run: |
           python3 engine/pipeline.py
           python3 engine/build_site.py
 
-      - name: Discard builder churn (promotions happen only after verification)
-        if: always()
-        run: git checkout -- . || true
+      - name: Report why rebuilding was blocked
+        if: always() && steps.build.outcome == 'skipped'
+        run: |
+          echo "::warning::Scheduled rebuild was skipped because fetch or freshness/provenance/promotion gates did not pass."
+          if [ "${{ steps.fetch.outcome }}" = "success" ]; then
+            python3 engine/refresh_gate.py --max-age-hours 10 || true
+          else
+            echo "Fetch step outcome: ${{ steps.fetch.outcome }}"
+          fi
 
-      - name: Fetch official sources
-        id: fetch
-        continue-on-error: true
-        run: python3 engine/fetch_official.py
+      - name: Discard generated-site churn only
+        if: always() && steps.build.outcome != 'skipped'
+        run: git checkout -- docs/data docs/b || true
 
       - name: Record the run
         run: |
@@ -100,7 +121,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: refresh-captures
-          path: data/raw/_capture_*.json
+          path: |
+            data/raw/_capture_*.json
+            data/raw/injury_pdfs/**
           if-no-files-found: warn
 
       - name: Publish captures (pull request from main, direct commit on session branches)
@@ -112,10 +135,10 @@ jobs:
           git config user.name  "nba1-bot"
           git config user.email "nba1-bot@users.noreply.github.com"
 
-          # Stage only capture payloads. _last_refresh.json rides along only
-          # when something new was captured, so a run that saw nothing new
-          # produces no commit at all.
-          git add data/raw/_capture_*.json 2>/dev/null || true
+          # Stage only capture payloads and content-addressed injury PDFs.
+          # _last_refresh.json rides along only when evidence changes, so a
+          # no-change run produces no timestamp-only commit.
+          git add data/raw/_capture_*.json data/raw/injury_pdfs/ 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No new capture payloads - nothing to publish."
             exit 0

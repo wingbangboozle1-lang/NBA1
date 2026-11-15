@@ -53,6 +53,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from common import ABBR, RAW, ROOT, read_json, rows_by_cols, write_json
 
+INJURY_PDF_DIR = os.path.join(RAW, "injury_pdfs")
+
 # stats.nba.com is the NBA's own stats service - it is the data layer behind
 # the cited www.nba.com/stats pages (evidence: the page's own JS chunk calls
 # resource "leaguedashteamstats"; recorded in
@@ -88,6 +90,13 @@ FETCHES = {
     "S4_schedule": ("https://www.nba.com/schedule", "schedule"),
     "S5_injury_index": ("https://official.nba.com/nba-injury-report-2026-27-season/",
                         "injury_index"),
+    # Official source pages are captured as evidence even when the page does
+    # not expose a stable server-rendered table. A content digest is not a
+    # parsed data update: the freshness gate blocks rebuild until verified
+    # structured rows are promoted into the committed model inputs.
+    "S8_standings": ("https://www.nba.com/standings", "page_snapshot"),
+    "S9_team_traditional": ("https://www.nba.com/stats/teams/traditional", "page_snapshot"),
+    "S10_team_opponent": ("https://www.nba.com/stats/teams/opponent", "page_snapshot"),
 }
 
 TEAM_ABBR_RE = re.compile(
@@ -637,7 +646,7 @@ def known_index(games_block, sched_block):
 
 
 # ---------------------------------------------------------------------- main
-def capture_results(now, changed, failed, known, committed):
+def capture_results(now, changed, failed, known, committed, source_checks):
     games = read_json(os.path.join(RAW, "games_completed.json"))
     sched = read_json(os.path.join(RAW, "schedule_upcoming.json"))
     dates = sorted({r["date"] for r in rows_by_cols(games)}
@@ -662,8 +671,15 @@ def capture_results(now, changed, failed, known, committed):
         try:
             raw = get(url)
         except Exception as exc:                       # noqa: BLE001
+            source_checks.append({"key": f"results_{d}", "url": url,
+                                  "checked_at_utc": now, "http_status": None,
+                                  "error": f"{type(exc).__name__}: {exc}"})
             failed.append((f"results {d}", f"fetch failed: {exc}"))
             continue
+        source_checks.append({"key": f"results_{d}", "url": url,
+                              "checked_at_utc": now, "http_status": 200,
+                              "bytes": len(raw),
+                              "sha256": hashlib.sha256(raw).hexdigest()})
         text = as_text(raw)
         rows, not_final, unparsed, occurrences, source = parse_games_page(text, known)
         # dedupe unparsed reasons per game (a game can fail on several slices)
@@ -774,12 +790,32 @@ def capture_injury(now, changed, failed, index_editions):
                 rec["http_status"] = 200
                 rec["bytes"] = len(raw)
                 rec["sha256"] = hashlib.sha256(raw).hexdigest()
-                if write_if_changed(os.path.join(RAW, f"_capture_injury_pdf_{edition}.json"),
-                                    {"captured_at_utc": now, "source_url": url,
-                                     "bytes": len(raw), "sha256": rec["sha256"],
-                                     "content_type": "application/pdf"}):
+                rec["pdf_valid"] = b"%PDF-" in raw[:1024]
+                if not rec["pdf_valid"]:
+                    rec["error"] = "HTTP 200 response did not contain a PDF signature"
+                    log(f"  injury {edition}: invalid PDF response; not stored")
+                    break
+                os.makedirs(INJURY_PDF_DIR, exist_ok=True)
+                stem = f"{edition[:-4]}__{rec['sha256']}"
+                pdf_path = os.path.join(INJURY_PDF_DIR, stem + ".pdf")
+                meta_path = os.path.join(INJURY_PDF_DIR, stem + ".json")
+                new_artifact = False
+                if not os.path.exists(pdf_path):
+                    with open(pdf_path, "wb") as pdf_file:
+                        pdf_file.write(raw)
+                    new_artifact = True
+                if not os.path.exists(meta_path):
+                    with open(meta_path, "w", encoding="utf-8") as meta_file:
+                        json.dump({"edition": edition, "source_url": url,
+                                   "retrieved_at_utc": now, "bytes": len(raw),
+                                   "sha256": rec["sha256"],
+                                   "content_type": "application/pdf"},
+                                  meta_file, indent=2)
+                    new_artifact = True
+                if new_artifact:
                     changed.append(f"injury pdf {edition}")
-                log(f"  injury {edition}: 200, {len(raw)} bytes (attempt {attempt})")
+                rec["artifact_path"] = os.path.relpath(pdf_path, ROOT).replace(os.sep, "/")
+                log(f"  injury {edition}: 200, {len(raw)} PDF bytes (attempt {attempt})")
                 break
             except urllib.error.HTTPError as exc:
                 rec["http_status"] = exc.code
@@ -803,6 +839,7 @@ def capture_injury(now, changed, failed, index_editions):
                                   "it is recorded as unavailable at capture time, not "
                                   "as proof of absence.")}):
         changed.append("injury probe")
+    return results
 
 
 def main():
@@ -810,15 +847,21 @@ def main():
     changed = []
     failed = []
     index_editions = []
+    source_checks = []
 
     for key, (url, kind) in FETCHES.items():
         log(f"fetch {key} <- {url}")
         try:
             raw = get(url)
         except Exception as exc:                      # noqa: BLE001 - report and continue
+            source_checks.append({"key": key, "url": url, "checked_at_utc": now,
+                                  "http_status": None, "error": f"{type(exc).__name__}: {exc}"})
             failed.append((key, f"fetch failed: {exc}"))
             log(f"  FAILED: {exc} - keeping the existing snapshot")
             continue
+        source_checks.append({"key": key, "url": url, "checked_at_utc": now,
+                              "http_status": 200, "bytes": len(raw),
+                              "sha256": hashlib.sha256(raw).hexdigest()})
         text = as_text(raw)
         if len(text) < 2000:
             failed.append((key, f"implausibly short response ({len(text)} bytes)"))
@@ -921,6 +964,15 @@ def main():
                                  "rows": rows,
                                  "page_sha256": hashlib.sha256(raw).hexdigest()}):
                 changed.append(key)
+        elif kind == "page_snapshot":
+            log(f"  captured official page evidence ({len(raw)} bytes)")
+            if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"),
+                                {"captured_at_utc": now, "source_url": url,
+                                 "bytes": len(raw),
+                                 "page_sha256": hashlib.sha256(raw).hexdigest(),
+                                 "capture_type": "official_page_evidence_only",
+                                 "note": "Page-level evidence only; not structured or promoted model data."}):
+                changed.append(key)
         elif kind == "players":
             log(f"  captured {len(text)} bytes")
             if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"),
@@ -960,7 +1012,8 @@ def main():
                 continue
             if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"),
                                 {"captured_at_utc": now, "source_url": url,
-                                 "editions": links}):
+                                 "editions": links,
+                                 "page_sha256": hashlib.sha256(raw).hexdigest()}):
                 changed.append(key)
 
     # results: one page per date, for the dates we already know about plus today
@@ -969,14 +1022,16 @@ def main():
         sched_block = read_json(os.path.join(RAW, "schedule_upcoming.json"))
         known = known_index(games_block, sched_block)
         committed = committed_index(games_block, sched_block)
-        capture_results(now, changed, failed, known, committed)
+        capture_results(now, changed, failed, known, committed, source_checks)
     except Exception as exc:                          # noqa: BLE001
         failed.append(("results", f"stage failed: {exc}"))
         log(f"  results stage FAILED: {exc}")
 
     # injury reports: full capture of the newest editions + status probe
     try:
-        capture_injury(now, changed, failed, index_editions)
+        injury_results = capture_injury(now, changed, failed, index_editions)
+        source_checks.append({"key": "injury_pdf_probe", "checked_at_utc": now,
+                              "results": injury_results})
     except Exception as exc:                          # noqa: BLE001
         failed.append(("injury", f"stage failed: {exc}"))
         log(f"  injury stage FAILED: {exc}")
@@ -985,6 +1040,7 @@ def main():
         "captured_at_utc": now,
         "changed": changed,
         "failed": failed,
+        "source_checks": source_checks,
         "note": "Raw captures only. Nothing in data/raw/*.json that a snapshot "
                 "owner committed is overwritten by this script - a parsed "
                 "result is written as _capture_*.json so a verifier can diff "
