@@ -3747,3 +3747,136 @@ K01–K05 done. Delivery record in §41.6.
 - **Gate results** on the merged tree: as in §41.2. The PR's `validate` run passed on the head; the same tree was checked locally first.
 - **Honest limit of this delivery:** the sandbox and the probe runner could not reach most nba.com URLs (F91). The row values on the live site are the ones captured earlier and checked for provenance and link structure. They were not re-read from NBA.com in this session.
 - **Still open, not blocking (see the register and Flagged for Review):** R-41-1 test runner path, R-41-2 squashed `main` history and the ledger anchor (F79), and the open partials and missing items in the register (R08, R09, R13, R15, R16, R21 and the others).
+
+
+### 39.1 Delivery record — PR #103 merged and Pages confirmed (2026-11-15 UTC)
+
+- **Renumber note:** this session's claim was written as §38 before `arena/7eb1c20a-nba1`'s §38 landed on `main` (PRs #101/#102). On rebase the claim was renumbered **§39** (content unchanged); `main`'s §38 is theirs. Report artifacts under `verify/2026-11-15-91390540/` reference §39.
+- **PR #103:** [2026-11-15 roll: fresh official capture, row-level re-verification, F69-F73 published, integration close-out](https://github.com/wingbangboozle1-lang/NBA1/pull/103) merged at `2026-11-15T12:18:00Z`, merge commit `9e70a12fb6a3efd59dbb55092e0a6ba20164b7e5` (merge into `main`, no approval wait). Head `7763275`.
+- **CI on the PR head:** `validate` run [43713091897](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713091897) **completed success** before merge (probe/refresh runs on `arena/**` pushes are the known fail-closed churn, R-30-2).
+- **Pages:** publisher run [43713132209](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713132209) (head `9e70a12f`) + internal `pages-build-deployment` [43713131809](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713131809) queued ~25 min behind the parallel sessions' traffic, then deployed. **Confirmed live** by fetching `https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html` at ~12:57Z: **69 rows**, last row **F73** with F69–F72 present — i.e. the deployed tree contains this merge (pre-merge live build was `ef45961` with 64 flags). The GitHub REST API was rate-limited (HTTP 403) for this account at record time, so the run's `conclusion` string could not be re-queried; the live-site fetch is the authoritative deploy confirmation.
+- **Gates on the merged tree (all green):** `check_site.py` PASS · `check_links.py` PASS · `verify_integration.py` PASSED (0 errors, 44 pre-existing published warnings unchanged) · `check_rendered.py` PASS · `verify_all.py` **VERIFY OK** · `render_check.mjs` 134 pages / 8,198 rendered rows / 0 problems · `build_verification_page.py` idempotent · Command Center 18 data + 17 pages · workflow verbatim relative-link scan 0 broken (135 HTML, 3,306 relative links).
+- **Delivered:** captures + `compare.json` + `REPORT.md`/HTML twin under `verify/2026-11-15-91390540/`; flags **F69–F73** published (register 64 → 69 items, next free F74); dashboard regenerated. Out of scope and declared: no settlement executed (F69 handoff: `integration/settle.py`), no line re-pricing (F72), venues not re-checked (F73).
+
+
+---
+
+## 43. Session `arena/3242d896-nba1` — scheduled-refresh integrity audit: does the "freshness/provenance gate → rebuild" path actually satisfy the brief's refresh requirement? (claimed 2026-11-15 23:55 UTC)
+
+Branch `arena/3242d896-nba1`, based on `main` `cd8fd27`. The platform pins this session to that branch;
+the brief's `session-<id>/<task>` naming is satisfied by this single pre-named branch (deviation logged,
+as §16/§17/§28/§31/§35/§39/§40/§41/§42 logged it).
+
+**Board read before claiming (2026-11-15 23:40–23:55 UTC, ground rule 6).** Read: §0 ground rules
+(1–6), §0b registry, the tail delivery records §38 (refresh gate, PRs #101/#102), §39 (PR #103),
+§40 (PR #104), and the **five live claims written in the last 20 minutes**: §41 `arena/513516f6-nba1`
+(stale-PR #106 takeover, brief-traceability register, integration delivery), §41 `arena/5ae0869e-nba1`
+(§40 takeover), §41 `arena/49f70042-nba1` (late cycle: settle 11/15, pin HCA to measured home-win rate,
+two-estimator disagreement headline, travel, minutes redistribution, injury-PDF archive, roll to 11/16–19),
+§41 `arena/801ba27f-nba1` (11/15 capture + settlement + horizon re-roll + gap closure + delivery),
+§42 `arena/4533630f-nba1` (independent official-source verification of the published 11/15 horizon).
+
+**Collision risk is high, so this session deliberately claims no data, no site page, no generator and
+no integration seat.** Every file a normal task would touch (`data/**`, `site/**`, `docs/**`,
+`command-center/**`, `scripts/originate_*`, `scripts/build_*`, `data/prereg/**`, `data/ledger/**`,
+`data/content/**`, `verification.html`, `index.html`) is inside at least one of those five claims.
+This session instead audits the **scheduled-refresh pipeline** (`engine/fetch_official.py`,
+`engine/refresh_gate.py`, `.github/workflows/refresh-data.yml`, `scripts/probe_official.py`,
+`scripts/test_refresh_gate.py`) — a scope none of the five claims, and the one area where a provable
+correctness defect would silently invalidate every "freshly refreshed" claim on the site.
+
+**Why this is worth a session (evidence found before claiming, not asserted).** All from files already
+on `main` at `cd8fd27`, re-run locally here:
+- `python3 engine/refresh_gate.py --max-age-hours 10` on the committed tree → **30 BLOCK lines**
+  (stale run 27.96 h, 3 failed parses, no per-source provenance checks, 6 required sources never
+  checked, `_capture_S1_season.json`/`_capture_S4_schedule.json` missing).
+- `engine/refresh_gate.py` requires `data/raw/standings.json`, `data/raw/team_traditional.json`,
+  `data/raw/team_opponent.json` with a `verification` block matching **this run's** `sha256`.
+  Those three files **do not exist** on `main`, and no script in the repository writes a
+  `verification` block into any of them (`grep -rn '"verification":' --include=*.py` returns only
+  `audit/finals_2026-11-13/check.py`, `scripts/generate_picks_d.py`, `scripts/test_refresh_gate.py`).
+  The gate can therefore never return `ok=true`, so the scheduled rebuild is **structurally** dead,
+  not merely "waiting for promotion".
+- `engine/fetch_official.py` writes `S8_standings`/`S9_team_traditional`/`S10_team_opponent` with
+  `kind == "page_snapshot"`, whose payload contains no `source_url`-bound `verification` object and no
+  rows — so the gate's `require_promotion`-style check on those three keys cannot be satisfied by the
+  fetcher either.
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| A01 | Board claim pushed before any other edit (this section only) | done (this commit) | `COORDINATION.md` (§43 only) |
+| A02 | Prove or disprove, with reproducible commands, that the scheduled refresh can reach `ok=true` and that a rebuild follows only after the freshness/provenance gates pass; enumerate every reason it cannot, each mapped to the exact file/line | in progress | `verify/2026-11-15-3242d896/**` (new namespace) |
+| A03 | Line-by-line audit of the refresh chain (fetch → gate → conditional build → publish) against the brief's refresh requirement, with a source/official-URL link on every row; anything unprovable left blank and flagged | in progress | `verify/2026-11-15-3242d896/**` |
+| A04 | Reproducible defect report + proposed minimal fixes, published as a self-contained page (REPORT.md + HTML twin) in this session's namespace; no shared file edited, fixes offered to the owning scope as a request | unclaimed | `verify/2026-11-15-3242d896/**` |
+| A05 | PR → `main` carrying only this namespace + this section, merge after the full gate suite is green, confirm Pages deploy by live fetch-back, record PR link and merge result here | unclaimed | own branch + `COORDINATION.md` (§43 delivery record) |
+
+**Not claimed / read-only in this session:** `data/**`, `site/**`, `docs/**`, `docs/b/**`,
+`command-center/**`, `integration/**`, `audit/**`, `origination/**`, `strategy-lab/**`, `edge-lab/**`,
+`engine/**` and `scripts/**` (read and executed, never edited — any fix is offered as a request, not
+applied), `index.html`, `picks.html`, `review.html`, `verification.html`, `data/content/**`,
+other sessions' `verify/*` namespaces.
+
+### 43.1 Claim log
+
+- 2026-11-15 23:55 UTC — claim written (A01). Push attempted immediately; rebase-retry per the brief.
+
+### 43.2 Findings, sources and verification performed (2026-11-15 UTC)
+
+**Delivered:** `verify/2026-11-15-3242d896/` — `REPORT.md` (audit), `index.html` (rendered twin),
+`evidence.json` (machine-readable evidence bundle), `reproduce.py` (re-runs every number, no network),
+`render.py` (REPORT.md → index.html). Nothing outside this namespace was edited except this section.
+
+**Findings (all reproduced by `reproduce.py`; full text + source links in `REPORT.md`)**
+
+| # | Severity | Finding | Evidence |
+| --- | --- | --- | --- |
+| R-43-01 | High | `engine/refresh_gate.py` requires `data/raw/{standings,team_traditional,team_opponent}.json` with a `verification` block bound to *this run's* SHA-256. None of the three exists, and **0** python references write any of them (only the gate reads them and a test fixtures them). `ok=true` is unreachable by construction, so the conditional rebuild in `.github/workflows/refresh-data.yml` step 6 can never run. A record built from the **real** 22:44Z scheduled run (8/8 primary sources HTTP 200, that run's own digests, 0 failed, 0 changed) still yields **21 BLOCK lines** | `reproduce.py` §2–§3; run [43770932084](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43770932084) |
+| R-43-02 | High | Fetch step and gate step are both `continue-on-error: true` and the fetcher exits 0 by design, so the job reports **success** while three of eight primary parsers fail (`expected 30 team rows, parsed 0` ×2, `no game links found`). A green refresh run currently carries no information | steps 4–6 of runs 43770932084 and 43731578639 + the records committed to `auto/refresh-20261115-224729` |
+| R-43-03 | Medium | A committed refresh record with `build_outcome: success` and `source_checks: []` is **not** a gate bypass: run [43710500439](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43710500439) used the pre-gate workflow whose step 4 was a *pre-fetch liveness build* discarded by `git checkout -- .`. **My first pass wrongly flagged this as unattributable — corrected, and the withdrawal is left visible in REPORT.md** | `reproduce.py` §4 |
+| R-43-04 | Medium | `engine/fetch_official.py` builds injury editions as `Injury-Report_2026_11_15_05_15PM.pdf` (underscore date). The official index publishes only the hyphen form; all 8 underscore probes return 403, both hyphen names retrieved by the index scrape return 200 with `pdf_valid: true` | `reproduce.py` §5; [official index](https://official.nba.com/nba-injury-report-2026-27-season/) |
+| R-43-05 | Medium | A full rebuild of a clean `cd8fd27` with the repo's own six builders (all exit 0) differs from the committed tree in **13 files** (`docs/data/teams.json` −402 lines, `lines.json` −380, `meta.json` −31 including `verification_rule` and the whole `live_reverification` block). The committed site data is not the output of any committed pipeline | `reproduce.py` §6 |
+| R-43-07 | Low | `data/raw/_last_refresh.json` on `main` is `2026-11-14T19:40:43Z`, `build_outcome: failure`, `source_checks: 0` — 28 h stale while three scheduled runs succeeded. The gate catches it (stale-run BLOCK); nothing else surfaces it | `reproduce.py` §1 |
+
+**Verified correct (not assumed):** gate fails closed on stale runs / untrusted hosts / changed-unpromoted
+captures / digest mismatch / missing or tampered PDFs — `python3 -m unittest scripts.test_refresh_gate`
+**7/7 OK**; only official hosts contacted (`ALLOWED_HOSTS` enforced in `get()`); results feed covers today
+*and* yesterday; injury PDFs are stored byte-for-byte content-addressed with a sidecar
+(`data/raw/injury_pdfs/…__<sha256>.pdf` present on `origin/auto/refresh-20261115-224729`).
+
+**Live official reads performed by this session** (page-fetch channel reaches `www.nba.com`; `curl` in this
+sandbox returns HTTP 000):
+- [nba.com/games?date=2026-11-14](https://www.nba.com/games?date=2026-11-14) at 23:44Z → **5/5 finals agree**
+  with `data/official/results_2026-11-14.json` (DEN 116–NOP 108, DAL 117–CLE 127, BKN 110–MEM 129,
+  DET 117–MIA 137, CHI 117–MIN 106).
+- [nba.com/standings](https://www.nba.com/standings) at 23:47Z → **27/29 rows agree** with
+  `data/official/standings_2026-11-15.json`; **2 differ** (PHI `10-3`→`11-3`, IND `5-8`→`5-9`), both
+  explained by 11/15 games that went final after the capture. Display-only.
+- The 34 published horizon games' team ratings were checked against
+  `data/official/teams_advanced_2026-11-15.json`: **68/68 team-sides match exactly** on OffRtg, DefRtg
+  and Pace, so the standings drift does not reach any published line.
+
+**Gates run on this branch after the changes (all green):** `check_site.py` PASS ·
+`verify_integration.py` PASSED (0 errors, pre-existing warnings unchanged) · `check_links.py` PASS ·
+`check_rendered.py` PASS · `verify_all.py` **VERIFY OK** · `render_check.mjs` 136 pages / 8,593 rendered
+rows / 0 problems · `build_verification_page.py` idempotent (`git status` clean apart from this namespace).
+
+**Requests to other sessions (logged, not edited by me):**
+- **R-43-A — to §41 `49f70042` / §41 `801ba27f` (S07 site rebuild):** nothing here needs a site edit; the
+  report is self-contained by design.
+- **R-43-B — to §41 `513516f6` (K03 brief-traceability register):** the brief's line *"extend the scheduled
+  job … then rebuild only after freshness and provenance gates pass"* should be **partial, not done** —
+  the gate half is built and tested, the rebuild half cannot execute (R-43-01). Suggested status:
+  `partial`, evidence `verify/2026-11-15-3242d896/REPORT.md` §2.
+- **R-43-C — to whoever owns `data/content/flagged.json`:** R-43-01/02/04/05 are candidate Flagged
+  entries. I did not add them (that file belongs to the live §41 claims); the report is the source.
+
+**Open questions raised** (Q-43-01 … Q-43-07 in `REPORT.md` §5): who was to write the three promoted
+inputs; whether a green refresh should mean "parsers succeeded"; whether a passing rebuild should be
+discarded or published; which of the six builders is canonical; and whether the underscore injury
+filename is intentional. Q-43-06 was answered during this audit and is closed.
+
+**Irregularities found in my own first pass (recorded, not hidden):** I initially reported that no
+workflow run existed for the 11:46Z window and labelled a `build_outcome: success` record as an
+unattributed gate bypass. Both came from reading only the first page of the Actions API. The run exists
+(43710500439) and the workflow at that commit had no gate step at all. REPORT.md now carries the
+correction explicitly in R-43-03.
