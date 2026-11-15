@@ -26,8 +26,19 @@
    "team": "DEN",
    "line_display": "DEN -5.9",
    "n_legs": 1,
-   "result": null,
-   "status": "PENDING"
+   "result": "WIN",
+   "status": "SETTLED WIN",
+   "settled": true,
+   "settled_at_utc": "2026-11-15T11:53:17Z",
+   "final": "DEN 116 @ NOP 108",
+   "margin_vs_published_line": 2.0999999999999996,
+   "units_at_minus110": 1.0,
+   "settlement_stamp": {
+    "git_blob_of_frozen_picks": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+    "settlement_file": "data/live/settlement_2026_11_14.json",
+    "settlement_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/69c785d5e90508ae74efd2a338ba136880b6e2e5/data/live/settlement_2026_11_14.json",
+    "graded_on": "the official 2026-11-14 finals (date card + game page)"
+   }
   },
   {
    "date": "2026-11-14",
@@ -48,8 +59,19 @@
    "team": null,
    "line_display": "Over 227.0",
    "n_legs": 1,
-   "result": null,
-   "status": "PENDING"
+   "result": "LOSS",
+   "status": "SETTLED LOSS",
+   "settled": true,
+   "settled_at_utc": "2026-11-15T11:53:17Z",
+   "final": "DEN 116 @ NOP 108",
+   "margin_vs_published_line": -3.0,
+   "units_at_minus110": -1.1,
+   "settlement_stamp": {
+    "git_blob_of_frozen_picks": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+    "settlement_file": "data/live/settlement_2026_11_14.json",
+    "settlement_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/69c785d5e90508ae74efd2a338ba136880b6e2e5/data/live/settlement_2026_11_14.json",
+    "graded_on": "the official 2026-11-14 finals (date card + game page)"
+   }
   },
   {
    "date": "2026-11-14",
@@ -70,8 +92,19 @@
    "team": "DEN",
    "line_display": "DEN ML (-232 fair)",
    "n_legs": 1,
-   "result": null,
-   "status": "PENDING"
+   "result": "WIN",
+   "status": "SETTLED WIN",
+   "settled": true,
+   "settled_at_utc": "2026-11-15T11:53:17Z",
+   "final": "DEN 116 @ NOP 108",
+   "margin_vs_published_line": 8,
+   "units_at_minus110": 1.0,
+   "settlement_stamp": {
+    "git_blob_of_frozen_picks": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+    "settlement_file": "data/live/settlement_2026_11_14.json",
+    "settlement_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/69c785d5e90508ae74efd2a338ba136880b6e2e5/data/live/settlement_2026_11_14.json",
+    "graded_on": "the official 2026-11-14 finals (date card + game page)"
+   }
   },
   {
    "date": "2026-11-14",
@@ -92,8 +125,19 @@
    "team": "DEN",
    "line_display": "DEN -5.9",
    "n_legs": 1,
-   "result": null,
-   "status": "PENDING"
+   "result": "WIN",
+   "status": "SETTLED WIN",
+   "settled": true,
+   "settled_at_utc": "2026-11-15T11:53:17Z",
+   "final": "DEN 116 @ NOP 108",
+   "margin_vs_published_line": 2.0999999999999996,
+   "units_at_minus110": 1.0,
+   "settlement_stamp": {
+    "git_blob_of_frozen_picks": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+    "settlement_file": "data/live/settlement_2026_11_14.json",
+    "settlement_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/69c785d5e90508ae74efd2a338ba136880b6e2e5/data/live/settlement_2026_11_14.json",
+    "graded_on": "the official 2026-11-14 finals (date card + game page)"
+   }
   },
   {
    "date": "2026-11-14",
@@ -117,7 +161,8 @@
    "n_legs": 1,
    "note": "No probability is published: game-to-game variance has not been measured from official player game logs (F2/Q3).",
    "result": null,
-   "status": "PENDING"
+   "status": "NOT GRADABLE - not graded: the Player points line needs an official per-player box sc",
+   "settled": false
   },
   {
    "date": "2026-11-14",
@@ -138,8 +183,19 @@
    "team": "DAL",
    "line_display": "DAL +3.2",
    "n_legs": 1,
-   "result": null,
-   "status": "PENDING"
+   "result": "LOSS",
+   "status": "SETTLED LOSS",
+   "settled": true,
+   "settled_at_utc": "2026-11-15T11:53:17Z",
+   "final": "DAL 117 @ CLE 127",
+   "margin_vs_published_line": -6.8,
+   "units_at_minus110": -1.1,
+   "settlement_stamp": {
+    "git_blob_of_frozen_picks": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+    "settlement_file": "data/live/settlement_2026_11_14.json",
+    "settlement_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/69c785d5e90508ae74efd2a338ba136880b6e2e5/data/live/settlement_2026_11_14.json",
+    "graded_on": "the official 2026-11-14 finals (date card + game page)"
+   }
   },
   {
    "date": "2026-11-14",
@@ -160,8 +216,19 @@
    "team": "DAL",
    "line_display": "DAL ML (-118 fair)",
    "n_legs": 1,
-   "result": null,
-   "status": "PENDING"
+   "result": "LOSS",
+   "status": "SETTLED LOSS",
+   "settled": true,
+   "settled_at_utc": "2026-11-15T11:53:17Z",
+   "final": "DAL 117 @ CLE 127",
+   "margin_vs_published_line": -10,
+   "units_at_minus110": -1.1,
+   "settlement_stamp": {
+    "git_blob_of_frozen_picks": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+    "settlement_file": "data/live/settlement_2026_11_14.json",
+    "settlement_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/69c785d5e90508ae74efd2a338ba136880b6e2e5/data/live/settlement_2026_11_14.json",
+    "graded_on": "the official 2026-11-14 finals (date card + game page)"
+   }
   },
   {
    "date": "2026-11-14",
@@ -182,8 +249,19 @@
    "team": "DAL",
    "line_display": "DAL +3.2",
    "n_legs": 1,
-   "result": null,
-   "status": "PENDING"
+   "result": "LOSS",
+   "status": "SETTLED LOSS",
+   "settled": true,
+   "settled_at_utc": "2026-11-15T11:53:17Z",
+   "final": "DAL 117 @ CLE 127",
+   "margin_vs_published_line": -6.8,
+   "units_at_minus110": -1.1,
+   "settlement_stamp": {
+    "git_blob_of_frozen_picks": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+    "settlement_file": "data/live/settlement_2026_11_14.json",
+    "settlement_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/69c785d5e90508ae74efd2a338ba136880b6e2e5/data/live/settlement_2026_11_14.json",
+    "graded_on": "the official 2026-11-14 finals (date card + game page)"
+   }
   },
   {
    "date": "2026-11-14",
@@ -204,8 +282,19 @@
    "team": "DET",
    "line_display": "DET -9.9",
    "n_legs": 1,
-   "result": null,
-   "status": "PENDING"
+   "result": "LOSS",
+   "status": "SETTLED LOSS",
+   "settled": true,
+   "settled_at_utc": "2026-11-15T11:53:17Z",
+   "final": "DET 117 @ MIA 137",
+   "margin_vs_published_line": -29.9,
+   "units_at_minus110": -1.1,
+   "settlement_stamp": {
+    "git_blob_of_frozen_picks": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+    "settlement_file": "data/live/settlement_2026_11_14.json",
+    "settlement_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/69c785d5e90508ae74efd2a338ba136880b6e2e5/data/live/settlement_2026_11_14.json",
+    "graded_on": "the official 2026-11-14 finals (date card + game page)"
+   }
   },
   {
    "date": "2026-11-14",
@@ -229,7 +318,8 @@
    "n_legs": 1,
    "note": "No probability is published: game-to-game variance has not been measured from official player game logs (F2/Q3).",
    "result": null,
-   "status": "PENDING"
+   "status": "NOT GRADABLE - not graded: the Player points line needs an official per-player box sc",
+   "settled": false
   },
   {
    "date": "2026-11-14",
@@ -250,8 +340,19 @@
    "team": "BKN",
    "line_display": "BKN +12.9",
    "n_legs": 1,
-   "result": null,
-   "status": "PENDING"
+   "result": "LOSS",
+   "status": "SETTLED LOSS",
+   "settled": true,
+   "settled_at_utc": "2026-11-15T11:53:17Z",
+   "final": "BKN 110 @ MEM 129",
+   "margin_vs_published_line": -6.1,
+   "units_at_minus110": -1.1,
+   "settlement_stamp": {
+    "git_blob_of_frozen_picks": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+    "settlement_file": "data/live/settlement_2026_11_14.json",
+    "settlement_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/69c785d5e90508ae74efd2a338ba136880b6e2e5/data/live/settlement_2026_11_14.json",
+    "graded_on": "the official 2026-11-14 finals (date card + game page)"
+   }
   },
   {
    "date": "2026-11-14",
@@ -272,8 +373,19 @@
    "team": "BKN",
    "line_display": "BKN ML (+172 fair)",
    "n_legs": 1,
-   "result": null,
-   "status": "PENDING"
+   "result": "LOSS",
+   "status": "SETTLED LOSS",
+   "settled": true,
+   "settled_at_utc": "2026-11-15T11:53:17Z",
+   "final": "BKN 110 @ MEM 129",
+   "margin_vs_published_line": -19,
+   "units_at_minus110": -1.1,
+   "settlement_stamp": {
+    "git_blob_of_frozen_picks": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+    "settlement_file": "data/live/settlement_2026_11_14.json",
+    "settlement_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/69c785d5e90508ae74efd2a338ba136880b6e2e5/data/live/settlement_2026_11_14.json",
+    "graded_on": "the official 2026-11-14 finals (date card + game page)"
+   }
   },
   {
    "date": "2026-11-14",
@@ -294,8 +406,19 @@
    "team": "BKN",
    "line_display": "BKN +12.9",
    "n_legs": 1,
-   "result": null,
-   "status": "PENDING"
+   "result": "LOSS",
+   "status": "SETTLED LOSS",
+   "settled": true,
+   "settled_at_utc": "2026-11-15T11:53:17Z",
+   "final": "BKN 110 @ MEM 129",
+   "margin_vs_published_line": -6.1,
+   "units_at_minus110": -1.1,
+   "settlement_stamp": {
+    "git_blob_of_frozen_picks": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+    "settlement_file": "data/live/settlement_2026_11_14.json",
+    "settlement_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/69c785d5e90508ae74efd2a338ba136880b6e2e5/data/live/settlement_2026_11_14.json",
+    "graded_on": "the official 2026-11-14 finals (date card + game page)"
+   }
   },
   {
    "date": "2026-11-14",
@@ -319,7 +442,8 @@
    "n_legs": 1,
    "note": "No probability is published: game-to-game variance has not been measured from official player game logs (F2/Q3).",
    "result": null,
-   "status": "PENDING"
+   "status": "NOT GRADABLE - not graded: the Player points line needs an official per-player box sc",
+   "settled": false
   },
   {
    "date": "2026-11-14",
@@ -343,7 +467,8 @@
    "n_legs": 1,
    "note": "No probability is published: game-to-game variance has not been measured from official player game logs (F2/Q3).",
    "result": null,
-   "status": "PENDING"
+   "status": "NOT GRADABLE - not graded: the Player PRA line needs an official per-player box score",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -365,7 +490,8 @@
    "line_display": "PHX +9.7",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -387,7 +513,8 @@
    "line_display": "PHX ML (+174 fair)",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -409,7 +536,8 @@
    "line_display": "Over 209.7",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -431,7 +559,8 @@
    "line_display": "UTA +20.6",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -453,7 +582,8 @@
    "line_display": "BOS -12.8",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -475,7 +605,8 @@
    "line_display": "BOS ML (-591 fair)",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -497,7 +628,8 @@
    "line_display": "BOS -12.8",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -521,7 +653,8 @@
    "n_legs": 1,
    "note": "No probability is published: game-to-game variance has not been measured from official player game logs (F2/Q3).",
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -543,7 +676,8 @@
    "line_display": "WAS +12.6",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -565,7 +699,8 @@
    "line_display": "MIL +14.9",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -587,7 +722,8 @@
    "line_display": "Over 225.0",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -609,7 +745,8 @@
    "line_display": "SAC +14.3",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -633,7 +770,8 @@
    "n_legs": 1,
    "note": "No probability is published: game-to-game variance has not been measured from official player game logs (F2/Q3).",
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -655,7 +793,8 @@
    "line_display": "ORL +18.3",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -677,7 +816,8 @@
    "line_display": "ORL +18.3",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -699,7 +839,8 @@
    "line_display": "Over 228.7",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -723,7 +864,8 @@
    "n_legs": 1,
    "note": "No probability is published: game-to-game variance has not been measured from official player game logs (F2/Q3).",
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -747,7 +889,8 @@
    "n_legs": 1,
    "note": "No probability is published: game-to-game variance has not been measured from official player game logs (F2/Q3).",
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -769,7 +912,8 @@
    "line_display": "MEM -9.4",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -791,7 +935,8 @@
    "line_display": "BKN +4.6",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -813,7 +958,8 @@
    "line_display": "BKN ML (-151 fair)",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -835,7 +981,8 @@
    "line_display": "BKN +4.6",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -857,7 +1004,8 @@
    "line_display": "MIA +11.8",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -879,7 +1027,8 @@
    "line_display": "MIA ML (+112 fair)",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -901,7 +1050,8 @@
    "line_display": "MIA +11.8",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -923,7 +1073,8 @@
    "line_display": "Under 238.0",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -945,7 +1096,8 @@
    "line_display": "NOP +12.7",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -967,7 +1119,8 @@
    "line_display": "DEN -6.5",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -989,7 +1142,8 @@
    "line_display": "Over 225.1",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -1011,7 +1165,8 @@
    "line_display": "DEN ML (-348 fair)",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -1033,7 +1188,8 @@
    "line_display": "DEN -6.5",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-17",
@@ -1055,7 +1211,8 @@
    "line_display": "Over 215.6",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-17",
@@ -1077,7 +1234,8 @@
    "line_display": "Under 238.0",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-17",
@@ -1099,7 +1257,8 @@
    "line_display": "Under 231.2",
    "n_legs": 1,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-14",
@@ -1137,8 +1296,19 @@
    "fair_price": 125,
    "naive_price": 125,
    "n_legs": 2,
-   "result": null,
-   "status": "PENDING"
+   "result": "LOSS",
+   "status": "SETTLED LOSS",
+   "settled": true,
+   "settled_at_utc": "2026-11-15T11:53:17Z",
+   "final": null,
+   "margin_vs_published_line": "LOSS | LOSS",
+   "units_at_minus110": null,
+   "settlement_stamp": {
+    "git_blob_of_frozen_picks": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+    "settlement_file": "data/live/settlement_2026_11_14.json",
+    "settlement_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/69c785d5e90508ae74efd2a338ba136880b6e2e5/data/live/settlement_2026_11_14.json",
+    "graded_on": "the official 2026-11-14 finals (date card + game page)"
+   }
   },
   {
    "date": "2026-11-15",
@@ -1177,7 +1347,8 @@
    "naive_price": 149,
    "n_legs": 2,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -1216,7 +1387,8 @@
    "naive_price": -103,
    "n_legs": 2,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-17",
@@ -1255,7 +1427,8 @@
    "naive_price": 133,
    "n_legs": 2,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-14",
@@ -1293,8 +1466,19 @@
    "fair_price": 159,
    "naive_price": 159,
    "n_legs": 2,
-   "result": null,
-   "status": "PENDING"
+   "result": "LOSS",
+   "status": "SETTLED LOSS",
+   "settled": true,
+   "settled_at_utc": "2026-11-15T11:53:17Z",
+   "final": null,
+   "margin_vs_published_line": "WIN | LOSS",
+   "units_at_minus110": null,
+   "settlement_stamp": {
+    "git_blob_of_frozen_picks": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+    "settlement_file": "data/live/settlement_2026_11_14.json",
+    "settlement_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/69c785d5e90508ae74efd2a338ba136880b6e2e5/data/live/settlement_2026_11_14.json",
+    "graded_on": "the official 2026-11-14 finals (date card + game page)"
+   }
   },
   {
    "date": "2026-11-15",
@@ -1333,7 +1517,8 @@
    "naive_price": 196,
    "n_legs": 2,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -1372,7 +1557,8 @@
    "naive_price": 171,
    "n_legs": 2,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -1411,7 +1597,8 @@
    "naive_price": 156,
    "n_legs": 2,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-15",
@@ -1450,7 +1637,8 @@
    "naive_price": 184,
    "n_legs": 2,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -1489,7 +1677,8 @@
    "naive_price": 193,
    "n_legs": 2,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   },
   {
    "date": "2026-11-16",
@@ -1528,8 +1717,10 @@
    "naive_price": 135,
    "n_legs": 2,
    "result": null,
-   "status": "PENDING"
+   "status": "PENDING",
+   "settled": false
   }
  ],
- "note": "Picks are produced from the originated lines only. No play has been graded yet; grading happens automatically once the official final score is published on nba.com."
+ "note": "Picks are produced from the originated lines only. No play has been graded yet; grading happens automatically once the official final score is published on nba.com.",
+ "settlement_note": "Every row now carries a 'settled' key: true when the pick has been graded against an official FINAL, false with the reason attached when it has not. Grading is done by scripts/roll_2026_11_15.py, which reads the frozen picks file from git (1b962a91275c) rather than the working copy, so a settled row cannot be moved by editing the number it was graded against. The settlement ledger is data/live/settlement_2026_11_14.json."
 }

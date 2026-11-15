@@ -1,6 +1,6 @@
 {
- "captured_at_utc": "2026-11-13T23:40:00Z",
- "note": "Final scores transcribed from the NBA.com official Games & Scores pages. On NBA.com the first team listed is the AWAY team and the second is the HOME team; this is confirmed by the game-detail URL pattern (nba.com/game/<away>-vs-<home>-<id>) and by the venue printed on the game page. `neutral` = 1 marks the 2026-11-07 Denver-Indiana NBA Mexico City Game, which the official page labels 'Neutral Site'; home-court advantage is set to zero for that game.",
+ "captured_at_utc": "2026-11-15T11:45:00Z",
+ "note": "Final scores transcribed from the NBA.com official Games & Scores pages. On NBA.com the first team listed is the AWAY team and the second is the HOME team; this is confirmed by the game-detail URL pattern (nba.com/game/<away>-vs-<home>-<id>) and by the venue printed on the game page. `neutral` = 1 marks the 2026-11-07 Denver-Indiana NBA Mexico City Game, which the official page labels 'Neutral Site'; home-court advantage is set to zero for that game. | ROLLED 2026-11-15 by arena/e3ebc423-nba1: the five 2026-11-14 games were added from the official date card and each game's own summary page (both print the same final). Quarter scores for those games live in verify/2026-11-15-e3ebc423/finals_2026-11-14.json, not in this file - this file stays one row per game with the columns the models consume.",
  "cols": [
   "date",
   "away",
@@ -672,6 +672,61 @@
    0,
    "0022600042",
    "S3_2026-11-13"
+  ],
+  [
+   "2026-11-14",
+   "DEN",
+   116,
+   "NOP",
+   108,
+   0,
+   0,
+   "0022600231",
+   "S3_2026-11-14"
+  ],
+  [
+   "2026-11-14",
+   "DAL",
+   117,
+   "CLE",
+   127,
+   0,
+   0,
+   "0022600232",
+   "S3_2026-11-14"
+  ],
+  [
+   "2026-11-14",
+   "DET",
+   117,
+   "MIA",
+   137,
+   0,
+   0,
+   "0022600233",
+   "S3_2026-11-14"
+  ],
+  [
+   "2026-11-14",
+   "BKN",
+   110,
+   "MEM",
+   129,
+   0,
+   0,
+   "0022600234",
+   "S3_2026-11-14"
+  ],
+  [
+   "2026-11-14",
+   "CHI",
+   117,
+   "MIN",
+   106,
+   0,
+   0,
+   "0022600235",
+   "S3_2026-11-14"
   ]
  ]
 }

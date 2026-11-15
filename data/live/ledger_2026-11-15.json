@@ -1,0 +1,1647 @@
+{
+ "title": "Tamper-evident ledger for every published pick (hash before tip, verify after settlement)",
+ "built_at_utc": "2026-11-15T11:53:17Z",
+ "session": "arena/e3ebc423-nba1",
+ "how_it_works": "each pick is hashed over its frozen core fields; the entries are then chained (chain_hash = sha256(previous chain_hash, this pick_hash)) and the head of the chain is committed to git on this branch, so a later edit to any published pick changes a hash that is already public. The pre-tip claim is anchored to the git blob of the frozen file, not to a timestamp this script invented.",
+ "published_file": "docs/data/picks.json",
+ "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+ "last_commit_touching_it": "ef2e723e13523b5b2495656c2a4ae5b461244374 2026-11-14T22:18:48+00:00",
+ "frozen_at_utc": "2026-11-14T10:37:26Z",
+ "entries": [
+  {
+   "pick_hash": "230b8252f529eec07c6e06a2793eb26a2cabd5dd3d8924c7bfd1e2b81bfd69ee",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600231",
+    "matchup": "DEN@NOP",
+    "strategy": "S1",
+    "market": "Point spread",
+    "side": "away",
+    "ref_line": -5.9,
+    "model_value": -9.1,
+    "edge": -3.18,
+    "p_model": 0.5725,
+    "n_legs": 1,
+    "team": "DEN"
+   }
+  },
+  {
+   "pick_hash": "bbdfb3138fee8359236d0633355b1829722be74bee83917b7d5ac23920b9d4ac",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600231",
+    "matchup": "DEN@NOP",
+    "strategy": "S2",
+    "market": "Game total",
+    "side": "over",
+    "ref_line": 227.0,
+    "model_value": 236.0,
+    "edge": 8.96,
+    "p_model": 0.6756,
+    "n_legs": 1,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "65b6d8c7cbee52073dfa2438c71dea5d7625d286626c8744d0cd48b22465ade8",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600231",
+    "matchup": "DEN@NOP",
+    "strategy": "S3",
+    "market": "Moneyline",
+    "side": "away",
+    "ref_line": -5.9,
+    "model_value": -9.1,
+    "edge": null,
+    "p_model": 0.6985,
+    "n_legs": 1,
+    "team": "DEN"
+   }
+  },
+  {
+   "pick_hash": "78f54832798fa6d43a628eebe3b1d194ed9ccc6c55fbce0f04fd95dea65cc892",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600231",
+    "matchup": "DEN@NOP",
+    "strategy": "S5",
+    "market": "Point spread",
+    "side": "away",
+    "ref_line": -5.9,
+    "model_value": -9.1,
+    "edge": -3.18,
+    "p_model": 0.5725,
+    "n_legs": 1,
+    "team": "DEN"
+   }
+  },
+  {
+   "pick_hash": "247fd15463a38294d3b69d50bc253d2801e2a348f37b647be679cd5c863ed195",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600231",
+    "matchup": "DEN@NOP",
+    "strategy": "S7",
+    "market": "Player points",
+    "side": "over",
+    "ref_line": 26.2,
+    "model_value": 28.2,
+    "edge": 2.0,
+    "p_model": null,
+    "n_legs": 1,
+    "team": "Jamal Murray"
+   }
+  },
+  {
+   "pick_hash": "b2161585527e86b6973df45832420063fbe47b46c55563810581f1a94c71fef4",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600232",
+    "matchup": "DAL@CLE",
+    "strategy": "S1",
+    "market": "Point spread",
+    "side": "away",
+    "ref_line": 3.2,
+    "model_value": -1.8,
+    "edge": -4.99,
+    "p_model": 0.6129,
+    "n_legs": 1,
+    "team": "DAL"
+   }
+  },
+  {
+   "pick_hash": "d9c6331a457997e352d4b1c765b2851f35ebbf4c9af067acbfd5304482520fce",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600232",
+    "matchup": "DAL@CLE",
+    "strategy": "S3",
+    "market": "Moneyline",
+    "side": "away",
+    "ref_line": 3.2,
+    "model_value": -1.8,
+    "edge": null,
+    "p_model": 0.541,
+    "n_legs": 1,
+    "team": "DAL"
+   }
+  },
+  {
+   "pick_hash": "712372ddcd68399deb613365a4da568ce36bd36f1a68cf05cff7499892cdd410",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600232",
+    "matchup": "DAL@CLE",
+    "strategy": "S5",
+    "market": "Point spread",
+    "side": "away",
+    "ref_line": 3.2,
+    "model_value": -1.8,
+    "edge": -4.99,
+    "p_model": 0.6129,
+    "n_legs": 1,
+    "team": "DAL"
+   }
+  },
+  {
+   "pick_hash": "0d6a1b8839a7231c3224d769b4bc1c41859302a1471a86ff6be5521b60648d3d",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600233",
+    "matchup": "DET@MIA",
+    "strategy": "S5",
+    "market": "Point spread",
+    "side": "away",
+    "ref_line": -9.9,
+    "model_value": -12.2,
+    "edge": -2.29,
+    "p_model": 0.5524,
+    "n_legs": 1,
+    "team": "DET"
+   }
+  },
+  {
+   "pick_hash": "d97e87a96b7d4b777c23f074796870d1047a185d61c151040b50943bfcfa2361",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600233",
+    "matchup": "DET@MIA",
+    "strategy": "S7",
+    "market": "Player points",
+    "side": "under",
+    "ref_line": 27.7,
+    "model_value": 25.7,
+    "edge": -2.0,
+    "p_model": null,
+    "n_legs": 1,
+    "team": "Giannis Antetokounmpo"
+   }
+  },
+  {
+   "pick_hash": "3103f3ef651df84caed97b15d4995fa6cf2daebb4fcd6665f2797c5657bb7552",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600234",
+    "matchup": "BKN@MEM",
+    "strategy": "S1",
+    "market": "Point spread",
+    "side": "away",
+    "ref_line": 12.9,
+    "model_value": 5.9,
+    "edge": -7.03,
+    "p_model": 0.6569,
+    "n_legs": 1,
+    "team": "BKN"
+   }
+  },
+  {
+   "pick_hash": "a089c32c513c2cd127e405abb4d4e055c27bb99f7cbd56a055893669cd000214",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600234",
+    "matchup": "BKN@MEM",
+    "strategy": "S3",
+    "market": "Moneyline",
+    "side": "away",
+    "ref_line": 12.9,
+    "model_value": 5.9,
+    "edge": null,
+    "p_model": 0.3679,
+    "n_legs": 1,
+    "team": "BKN"
+   }
+  },
+  {
+   "pick_hash": "9884452876a6259caef2dd3ac9d922fff9d025a25a8d4b04205177cdfbf15e9f",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600234",
+    "matchup": "BKN@MEM",
+    "strategy": "S5",
+    "market": "Point spread",
+    "side": "away",
+    "ref_line": 12.9,
+    "model_value": 5.9,
+    "edge": -7.03,
+    "p_model": 0.6569,
+    "n_legs": 1,
+    "team": "BKN"
+   }
+  },
+  {
+   "pick_hash": "53ac3cfd06160b056db691724f9880c6c6d4b6f4f7e36aa62d0bb8aeca09adb9",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600235",
+    "matchup": "CHI@MIN",
+    "strategy": "S7",
+    "market": "Player points",
+    "side": "over",
+    "ref_line": 18.6,
+    "model_value": 21.6,
+    "edge": 3.0,
+    "p_model": null,
+    "n_legs": 1,
+    "team": "LaMelo Ball"
+   }
+  },
+  {
+   "pick_hash": "c6bf655813231243376a1c20f692f1e776a096ca234f9bdbb1c202c78a60617f",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600235",
+    "matchup": "CHI@MIN",
+    "strategy": "S8",
+    "market": "Player PRA",
+    "side": "over",
+    "ref_line": 28.2,
+    "model_value": 32.5,
+    "edge": 4.3,
+    "p_model": null,
+    "n_legs": 1,
+    "team": "LaMelo Ball"
+   }
+  },
+  {
+   "pick_hash": "608ee635948d16a220bf44d69e53c31d90133e87e774e3f21b4e14d39e3a6aeb",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-15T21:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600237",
+    "matchup": "LAL@PHX",
+    "strategy": "S1",
+    "market": "Point spread",
+    "side": "home",
+    "ref_line": -9.7,
+    "model_value": -6.0,
+    "edge": 3.74,
+    "p_model": 0.5851,
+    "n_legs": 1,
+    "team": "PHX"
+   }
+  },
+  {
+   "pick_hash": "5f4484485a0f604eed9213f93a0b38d6f6b0c83ddbc51f3a250e55d6086a78aa",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-15T21:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600237",
+    "matchup": "LAL@PHX",
+    "strategy": "S3",
+    "market": "Moneyline",
+    "side": "home",
+    "ref_line": -9.7,
+    "model_value": -6.0,
+    "edge": null,
+    "p_model": 0.3652,
+    "n_legs": 1,
+    "team": "PHX"
+   }
+  },
+  {
+   "pick_hash": "783fccb1d4315227c19f2f0ffe334e9b90863ad3616c43f25d787d02bb876989",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-15T21:30:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600238",
+    "matchup": "CHA@LAC",
+    "strategy": "S2",
+    "market": "Game total",
+    "side": "over",
+    "ref_line": 209.7,
+    "model_value": 216.2,
+    "edge": 6.48,
+    "p_model": 0.629,
+    "n_legs": 1,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "9b649c6868837a6dba7553ff09d7a56d9dd0d40b697d3fd6cbee4a93de316527",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-15T22:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600239",
+    "matchup": "SAS@UTA",
+    "strategy": "S1",
+    "market": "Point spread",
+    "side": "home",
+    "ref_line": -20.6,
+    "model_value": -14.7,
+    "edge": 5.9,
+    "p_model": 0.6327,
+    "n_legs": 1,
+    "team": "UTA"
+   }
+  },
+  {
+   "pick_hash": "9eddcdce2642d3f5e98b4b3fb0bdffaa89225e9594f80060ae057d59fceae86d",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-15T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600240",
+    "matchup": "DAL@BOS",
+    "strategy": "S1",
+    "market": "Point spread",
+    "side": "home",
+    "ref_line": 12.8,
+    "model_value": 18.4,
+    "edge": 5.61,
+    "p_model": 0.6263,
+    "n_legs": 1,
+    "team": "BOS"
+   }
+  },
+  {
+   "pick_hash": "14b1364d650851b52c7d1d46edf8cff3f79ce6ee4e7eb47d99037b5f9f8dabb1",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-15T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600240",
+    "matchup": "DAL@BOS",
+    "strategy": "S3",
+    "market": "Moneyline",
+    "side": "home",
+    "ref_line": 12.8,
+    "model_value": 18.4,
+    "edge": null,
+    "p_model": 0.8554,
+    "n_legs": 1,
+    "team": "BOS"
+   }
+  },
+  {
+   "pick_hash": "4cdae55b59b8ad246753afd6fc9f71a19ceefdce42728b1f20e1762d0f4e39ca",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-15T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600240",
+    "matchup": "DAL@BOS",
+    "strategy": "S5",
+    "market": "Point spread",
+    "side": "home",
+    "ref_line": 12.8,
+    "model_value": 18.4,
+    "edge": 5.61,
+    "p_model": 0.6263,
+    "n_legs": 1,
+    "team": "BOS"
+   }
+  },
+  {
+   "pick_hash": "da8927c709e1745a6cd6e93c0b32466956d020c35e2ec73daedf2a3c8c3944be",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-15T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600240",
+    "matchup": "DAL@BOS",
+    "strategy": "S7",
+    "market": "Player points",
+    "side": "under",
+    "ref_line": 24.6,
+    "model_value": 22.6,
+    "edge": -2.0,
+    "p_model": null,
+    "n_legs": 1,
+    "team": "Cooper Flagg"
+   }
+  },
+  {
+   "pick_hash": "d91cc40c29384a4937ae5c146f2087ff317a358e565e6980cf0f414fe9e86c9c",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-15T00:00:00Z",
+   "published_before_tip": false,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600242",
+    "matchup": "HOU@WAS",
+    "strategy": "S1",
+    "market": "Point spread",
+    "side": "home",
+    "ref_line": -12.6,
+    "model_value": -8.3,
+    "edge": 4.25,
+    "p_model": 0.5964,
+    "n_legs": 1,
+    "team": "WAS"
+   }
+  },
+  {
+   "pick_hash": "0f8ea16aafef1221c8977c99fab27ef72f1fc162754d9f88e232a9d1a9462f46",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-15T01:00:00Z",
+   "published_before_tip": false,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600243",
+    "matchup": "ATL@MIL",
+    "strategy": "S1",
+    "market": "Point spread",
+    "side": "home",
+    "ref_line": -14.9,
+    "model_value": -10.1,
+    "edge": 4.86,
+    "p_model": 0.6099,
+    "n_legs": 1,
+    "team": "MIL"
+   }
+  },
+  {
+   "pick_hash": "f49212d3e9234485b338996df50e2b63023134a2f399730ddbc1ae39dd0d9ca0",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-15T01:00:00Z",
+   "published_before_tip": false,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600243",
+    "matchup": "ATL@MIL",
+    "strategy": "S2",
+    "market": "Game total",
+    "side": "over",
+    "ref_line": 225.0,
+    "model_value": 232.0,
+    "edge": 7.02,
+    "p_model": 0.6395,
+    "n_legs": 1,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "c158b8d189d382779c9c0351918552b3b614b98b327137a43e6b65eb417ab9b1",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-15T02:00:00Z",
+   "published_before_tip": false,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600244",
+    "matchup": "OKC@SAC",
+    "strategy": "S1",
+    "market": "Point spread",
+    "side": "home",
+    "ref_line": -14.3,
+    "model_value": -9.4,
+    "edge": 4.85,
+    "p_model": 0.6098,
+    "n_legs": 1,
+    "team": "SAC"
+   }
+  },
+  {
+   "pick_hash": "88d89ed89a9eab8775a95c27cea4a8bf1549b38e4b7c6a818a753e7ed1b842ca",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-15T02:00:00Z",
+   "published_before_tip": false,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600244",
+    "matchup": "OKC@SAC",
+    "strategy": "S7",
+    "market": "Player points",
+    "side": "over",
+    "ref_line": 29.7,
+    "model_value": 31.8,
+    "edge": 2.1,
+    "p_model": null,
+    "n_legs": 1,
+    "team": "Shai Gilgeous-Alexander"
+   }
+  },
+  {
+   "pick_hash": "74331eac2e5667b143e03f2b986601d97f82fda12b934bd5bb872465641e4c74",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T00:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600245",
+    "matchup": "ORL@BOS",
+    "strategy": "S1",
+    "market": "Point spread",
+    "side": "away",
+    "ref_line": 18.3,
+    "model_value": 10.5,
+    "edge": -7.79,
+    "p_model": 0.6728,
+    "n_legs": 1,
+    "team": "ORL"
+   }
+  },
+  {
+   "pick_hash": "be06b4d4e0c559519663092c01d095affd3bd6c73826142d459f92f2c90c1f66",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T00:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600245",
+    "matchup": "ORL@BOS",
+    "strategy": "S5",
+    "market": "Point spread",
+    "side": "away",
+    "ref_line": 18.3,
+    "model_value": 10.5,
+    "edge": -7.79,
+    "p_model": 0.6728,
+    "n_legs": 1,
+    "team": "ORL"
+   }
+  },
+  {
+   "pick_hash": "69dfc7a99029e572a11eebe799196f0aeec7fffb0cdf6982dc28c60bf2b7f349",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T00:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600246",
+    "matchup": "CHI@CLE",
+    "strategy": "S2",
+    "market": "Game total",
+    "side": "over",
+    "ref_line": 228.7,
+    "model_value": 238.8,
+    "edge": 10.12,
+    "p_model": 0.6964,
+    "n_legs": 1,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "870ea008e055a8e94a30382d3a067f417fd7d8c427582044b0ab72b9ae8db8e8",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T00:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600246",
+    "matchup": "CHI@CLE",
+    "strategy": "S7",
+    "market": "Player points",
+    "side": "over",
+    "ref_line": 22.8,
+    "model_value": 25.5,
+    "edge": 2.7,
+    "p_model": null,
+    "n_legs": 1,
+    "team": "Donovan Mitchell"
+   }
+  },
+  {
+   "pick_hash": "f63df5018e2ef8d3c760df55c1061d7f365ebd2e04c456f016a2e428dc7a66f7",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T00:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600246",
+    "matchup": "CHI@CLE",
+    "strategy": "S8",
+    "market": "Player PRA",
+    "side": "over",
+    "ref_line": 33.3,
+    "model_value": 36.8,
+    "edge": 3.5,
+    "p_model": null,
+    "n_legs": 1,
+    "team": "Donovan Mitchell"
+   }
+  },
+  {
+   "pick_hash": "6e348075cfe07851b39fabada71619b393debdeb6bae6d1c6ada257d2ec6c5c7",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T00:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600247",
+    "matchup": "MEM@WAS",
+    "strategy": "S5",
+    "market": "Point spread",
+    "side": "away",
+    "ref_line": -9.4,
+    "model_value": -11.9,
+    "edge": -2.52,
+    "p_model": 0.5575,
+    "n_legs": 1,
+    "team": "MEM"
+   }
+  },
+  {
+   "pick_hash": "25af12f843d94500f9ffa546369cc34a39d485dd5668e32c04f722ad9ac54bc3",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T00:30:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600248",
+    "matchup": "PHI@BKN",
+    "strategy": "S1",
+    "market": "Point spread",
+    "side": "home",
+    "ref_line": -4.6,
+    "model_value": 4.5,
+    "edge": 9.1,
+    "p_model": 0.6995,
+    "n_legs": 1,
+    "team": "BKN"
+   }
+  },
+  {
+   "pick_hash": "043644299c827fb734a2158174eb19aa5e0f930587cccd21feb96fba06155096",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T00:30:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600248",
+    "matchup": "PHI@BKN",
+    "strategy": "S3",
+    "market": "Moneyline",
+    "side": "home",
+    "ref_line": -4.6,
+    "model_value": 4.5,
+    "edge": null,
+    "p_model": 0.6021,
+    "n_legs": 1,
+    "team": "BKN"
+   }
+  },
+  {
+   "pick_hash": "c06dd89238c2e283ef22982b8a7a8aa1fedbf60c960e2f5e0119ce8a1f8fd245",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T00:30:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600248",
+    "matchup": "PHI@BKN",
+    "strategy": "S5",
+    "market": "Point spread",
+    "side": "home",
+    "ref_line": -4.6,
+    "model_value": 4.5,
+    "edge": 9.1,
+    "p_model": 0.6995,
+    "n_legs": 1,
+    "team": "BKN"
+   }
+  },
+  {
+   "pick_hash": "c7473099c3f82b87e38daf16f37681d5f805504a49567aa1a342b42b064dff4f",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T00:30:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600249",
+    "matchup": "HOU@MIA",
+    "strategy": "S1",
+    "market": "Point spread",
+    "side": "home",
+    "ref_line": -11.8,
+    "model_value": -1.3,
+    "edge": 10.53,
+    "p_model": 0.7274,
+    "n_legs": 1,
+    "team": "MIA"
+   }
+  },
+  {
+   "pick_hash": "cf2c2a14ac12cd3af2ff08e36b5e1c473377b1d5d10b0af9a9ab426aaa0a17a0",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T00:30:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600249",
+    "matchup": "HOU@MIA",
+    "strategy": "S3",
+    "market": "Moneyline",
+    "side": "home",
+    "ref_line": -11.8,
+    "model_value": -1.3,
+    "edge": null,
+    "p_model": 0.4707,
+    "n_legs": 1,
+    "team": "MIA"
+   }
+  },
+  {
+   "pick_hash": "f4ae79b0469b09589690c841162f69b47e2a40d03e0dd8bc5101fe1be14459e8",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T00:30:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600249",
+    "matchup": "HOU@MIA",
+    "strategy": "S5",
+    "market": "Point spread",
+    "side": "home",
+    "ref_line": -11.8,
+    "model_value": -1.3,
+    "edge": 10.53,
+    "p_model": 0.7274,
+    "n_legs": 1,
+    "team": "MIA"
+   }
+  },
+  {
+   "pick_hash": "f5ad936797b2c5224ca4b109842e85baa1f07438cf414a91809046afe0ca557f",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T01:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600250",
+    "matchup": "POR@MIN",
+    "strategy": "S2",
+    "market": "Game total",
+    "side": "under",
+    "ref_line": 238.0,
+    "model_value": 228.1,
+    "edge": -9.92,
+    "p_model": 0.693,
+    "n_legs": 1,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "e6c9ea3c5ffb6a256a592a618abb310df8160232c3e52e93c2c5356ba9c5982d",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T01:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600251",
+    "matchup": "GSW@NOP",
+    "strategy": "S1",
+    "market": "Point spread",
+    "side": "home",
+    "ref_line": -12.7,
+    "model_value": -8.3,
+    "edge": 4.39,
+    "p_model": 0.5995,
+    "n_legs": 1,
+    "team": "NOP"
+   }
+  },
+  {
+   "pick_hash": "6031adcf9d41a70e70cfbf83d3e6e1a4843f9e8cd6cde598a0eb60948817e237",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T02:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600252",
+    "matchup": "PHX@DEN",
+    "strategy": "S1",
+    "market": "Point spread",
+    "side": "home",
+    "ref_line": 6.5,
+    "model_value": 13.2,
+    "edge": 6.73,
+    "p_model": 0.6505,
+    "n_legs": 1,
+    "team": "DEN"
+   }
+  },
+  {
+   "pick_hash": "63f5689ff9fbcfc22ca7020178dcc6ea50cd001ed32da22883b7e246875001b6",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T02:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600252",
+    "matchup": "PHX@DEN",
+    "strategy": "S2",
+    "market": "Game total",
+    "side": "over",
+    "ref_line": 225.1,
+    "model_value": 233.0,
+    "edge": 7.86,
+    "p_model": 0.6553,
+    "n_legs": 1,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "109a2695322018b63090dec052dd464de05af9242f3cae76b52d96d4fc279754",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T02:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600252",
+    "matchup": "PHX@DEN",
+    "strategy": "S3",
+    "market": "Moneyline",
+    "side": "home",
+    "ref_line": 6.5,
+    "model_value": 13.2,
+    "edge": null,
+    "p_model": 0.7765,
+    "n_legs": 1,
+    "team": "DEN"
+   }
+  },
+  {
+   "pick_hash": "9fec9daf08b7f001010c17be443ba8d1e7c1461b5ed84652e57451661c0e6cfc",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-16T02:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600252",
+    "matchup": "PHX@DEN",
+    "strategy": "S5",
+    "market": "Point spread",
+    "side": "home",
+    "ref_line": 6.5,
+    "model_value": 13.2,
+    "edge": 6.73,
+    "p_model": 0.6505,
+    "n_legs": 1,
+    "team": "DEN"
+   }
+  },
+  {
+   "pick_hash": "7a34d11e5ff03add9c3bc298cd5a4951fda3fcff89a91e15992dcd54aaf0c85b",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-17T03:30:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-17",
+    "game_id": "0022600257",
+    "matchup": "UTA@LAC",
+    "strategy": "S2",
+    "market": "Game total",
+    "side": "over",
+    "ref_line": 215.6,
+    "model_value": 223.1,
+    "edge": 7.48,
+    "p_model": 0.648,
+    "n_legs": 1,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "257b507f1c349de35f29837d684a486bd2af104d1381fcc92394ad42d403848c",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-17T01:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-17",
+    "game_id": "0022600254",
+    "matchup": "POR@MIN",
+    "strategy": "S2",
+    "market": "Game total",
+    "side": "under",
+    "ref_line": 238.0,
+    "model_value": 230.6,
+    "edge": -7.4,
+    "p_model": 0.6466,
+    "n_legs": 1,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "73a2bfdadf40eff29abdf54773b02febd6bb434e4a621c371c1c61cb8b4e38ac",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-17T01:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-17",
+    "game_id": "0022600255",
+    "matchup": "DET@SAS",
+    "strategy": "S2",
+    "market": "Game total",
+    "side": "under",
+    "ref_line": 231.2,
+    "model_value": 222.9,
+    "edge": -8.3,
+    "p_model": 0.6633,
+    "n_legs": 1,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "08e71b48ecb7acc15e1c7c109e2f8663a7f96d358bbace92a6b8948ed0bfb0d3",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600231+0022600234",
+    "matchup": "DEN@NOP & BKN@MEM",
+    "strategy": "S9",
+    "market": "Parlay",
+    "side": "Over 227.0 + BKN +12.9",
+    "ref_line": null,
+    "model_value": null,
+    "edge": null,
+    "p_model": 0.4438,
+    "n_legs": 2,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "b1753e8c7c9074e905cab23c3b368e1de32eaeee2819bd7e52631f064768ac49",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": null,
+   "published_before_tip": null,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600243+0022600238",
+    "matchup": "ATL@MIL & CHA@LAC",
+    "strategy": "S9",
+    "market": "Parlay",
+    "side": "Over 225.0 + Over 209.7",
+    "ref_line": null,
+    "model_value": null,
+    "edge": null,
+    "p_model": 0.4022,
+    "n_legs": 2,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "1293b17b206456832da0b44aaf56c436966c512e5a3980fcee23239084408ec6",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": null,
+   "published_before_tip": null,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600249+0022600246",
+    "matchup": "HOU@MIA & CHI@CLE",
+    "strategy": "S9",
+    "market": "Parlay",
+    "side": "MIA +11.8 + Over 228.7",
+    "ref_line": null,
+    "model_value": null,
+    "edge": null,
+    "p_model": 0.5066,
+    "n_legs": 2,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "aacce550c1a7173de92ab7d0395217e148af63ce25e1739d8d470caf9472747f",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": null,
+   "published_before_tip": null,
+   "core": {
+    "date": "2026-11-17",
+    "game_id": "0022600255+0022600257",
+    "matchup": "DET@SAS & UTA@LAC",
+    "strategy": "S9",
+    "market": "Parlay",
+    "side": "Under 231.2 + Over 215.6",
+    "ref_line": null,
+    "model_value": null,
+    "edge": null,
+    "p_model": 0.4298,
+    "n_legs": 2,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "7ec104db6942a56bc3b772b721e65a5afa1645e9c7e8c561b860846c09a5c3bf",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": "2026-11-14T23:00:00Z",
+   "published_before_tip": true,
+   "core": {
+    "date": "2026-11-14",
+    "game_id": "0022600231+0022600231",
+    "matchup": "DEN@NOP & DEN@NOP",
+    "strategy": "S10",
+    "market": "Same-game parlay",
+    "side": "DEN -5.9 + Over 227.0",
+    "ref_line": null,
+    "model_value": null,
+    "edge": null,
+    "p_model": 0.3868,
+    "n_legs": 2,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "99950f80d58959ab5ac06de5d9465793d6c64fffea4a42d80aaad5189cf603c3",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": null,
+   "published_before_tip": null,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600237+0022600237",
+    "matchup": "LAL@PHX & LAL@PHX",
+    "strategy": "S10",
+    "market": "Same-game parlay",
+    "side": "PHX +9.7 + Over 234.2",
+    "ref_line": null,
+    "model_value": null,
+    "edge": null,
+    "p_model": 0.3378,
+    "n_legs": 2,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "1fb5573cfd0d103f6ee4a805bf918ff7c0744e5a07430bbfcc8a19a17b802d16",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": null,
+   "published_before_tip": null,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600240+0022600240",
+    "matchup": "DAL@BOS & DAL@BOS",
+    "strategy": "S10",
+    "market": "Same-game parlay",
+    "side": "BOS -12.8 + Under 226.5",
+    "ref_line": null,
+    "model_value": null,
+    "edge": null,
+    "p_model": 0.369,
+    "n_legs": 2,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "daaf88aa30972b8222428aa23d3d92e19984664b9c67c8b2b0004c11df541573",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": null,
+   "published_before_tip": null,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600243+0022600243",
+    "matchup": "ATL@MIL & ATL@MIL",
+    "strategy": "S10",
+    "market": "Same-game parlay",
+    "side": "MIL +14.9 + Over 225.0",
+    "ref_line": null,
+    "model_value": null,
+    "edge": null,
+    "p_model": 0.39,
+    "n_legs": 2,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "f91890834756dac40919be54920a8860b99263f175ec0217660d85128c1b0cc2",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": null,
+   "published_before_tip": null,
+   "core": {
+    "date": "2026-11-15",
+    "game_id": "0022600244+0022600244",
+    "matchup": "OKC@SAC & OKC@SAC",
+    "strategy": "S10",
+    "market": "Same-game parlay",
+    "side": "SAC +14.3 + Over 219.6",
+    "ref_line": null,
+    "model_value": null,
+    "edge": null,
+    "p_model": 0.3518,
+    "n_legs": 2,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "534ea297a058ec3f6727f5f3b7d8ab20244cb1612e094e71d19e2d9159e7d4aa",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": null,
+   "published_before_tip": null,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600251+0022600251",
+    "matchup": "GSW@NOP & GSW@NOP",
+    "strategy": "S10",
+    "market": "Same-game parlay",
+    "side": "NOP +12.7 + Over 232.1",
+    "ref_line": null,
+    "model_value": null,
+    "edge": null,
+    "p_model": 0.3414,
+    "n_legs": 2,
+    "team": null
+   }
+  },
+  {
+   "pick_hash": "9b2e92b832e666864a300f62e1f6603b5d9ea0c242cccc8f9f9f953dabd7edd1",
+   "published_file": "docs/data/picks.json",
+   "git_blob": "1b962a91275c9417c046da16b0788966eeb8d8c6",
+   "frozen_at_utc": "2026-11-14T10:37:26Z",
+   "tip_utc_estimate": null,
+   "published_before_tip": null,
+   "core": {
+    "date": "2026-11-16",
+    "game_id": "0022600252+0022600252",
+    "matchup": "PHX@DEN & PHX@DEN",
+    "strategy": "S10",
+    "market": "Same-game parlay",
+    "side": "DEN -6.5 + Over 225.1",
+    "ref_line": null,
+    "model_value": null,
+    "edge": null,
+    "p_model": 0.4263,
+    "n_legs": 2,
+    "team": null
+   }
+  }
+ ],
+ "chain": [
+  {
+   "seq": 1,
+   "pick_hash": "230b8252f529eec07c6e06a2793eb26a2cabd5dd3d8924c7bfd1e2b81bfd69ee",
+   "chain_hash": "41f3821d39ea8fd4dba23684d2d55b7e11857827103dd715449af589937ce7f3"
+  },
+  {
+   "seq": 2,
+   "pick_hash": "bbdfb3138fee8359236d0633355b1829722be74bee83917b7d5ac23920b9d4ac",
+   "chain_hash": "17fbe99fd5a8252d29a4aaf53cf382dab749d17ad19776a6decd7798db8e4ffa"
+  },
+  {
+   "seq": 3,
+   "pick_hash": "65b6d8c7cbee52073dfa2438c71dea5d7625d286626c8744d0cd48b22465ade8",
+   "chain_hash": "a367c62dc600b08a98f273a3a8dbd55e20a5788e8493c02cfb86c645f8e59503"
+  },
+  {
+   "seq": 4,
+   "pick_hash": "78f54832798fa6d43a628eebe3b1d194ed9ccc6c55fbce0f04fd95dea65cc892",
+   "chain_hash": "b67f7fd8b140eb05db12b8932c4899e16d694d5fb9e29ad47d93187acf315eb3"
+  },
+  {
+   "seq": 5,
+   "pick_hash": "247fd15463a38294d3b69d50bc253d2801e2a348f37b647be679cd5c863ed195",
+   "chain_hash": "525f45a6af1dbfd237f7f9a78546d9a03f03baad36ac29bfeaec56e48ea3faf1"
+  },
+  {
+   "seq": 6,
+   "pick_hash": "b2161585527e86b6973df45832420063fbe47b46c55563810581f1a94c71fef4",
+   "chain_hash": "1819223c4b857cc625be30343b57011802c3594c353aa300bc7e6470c0ac8105"
+  },
+  {
+   "seq": 7,
+   "pick_hash": "d9c6331a457997e352d4b1c765b2851f35ebbf4c9af067acbfd5304482520fce",
+   "chain_hash": "65cca17e2cf164ad3a0879d1255630b123cc7b270fcecce7f848d8beae339e71"
+  },
+  {
+   "seq": 8,
+   "pick_hash": "712372ddcd68399deb613365a4da568ce36bd36f1a68cf05cff7499892cdd410",
+   "chain_hash": "9f31c637160eb74f299ad18b2eb45b612231e2e3af07d3f2f8714deb56655135"
+  },
+  {
+   "seq": 9,
+   "pick_hash": "0d6a1b8839a7231c3224d769b4bc1c41859302a1471a86ff6be5521b60648d3d",
+   "chain_hash": "94e5b62936edf6bde9697088c5023fb567913e02695812b7a3c8287bb9d3e629"
+  },
+  {
+   "seq": 10,
+   "pick_hash": "d97e87a96b7d4b777c23f074796870d1047a185d61c151040b50943bfcfa2361",
+   "chain_hash": "ad7297e5cccfcae29194bfbed1311dcdfa3edfdc78658fc5cc6abcb495194125"
+  },
+  {
+   "seq": 11,
+   "pick_hash": "3103f3ef651df84caed97b15d4995fa6cf2daebb4fcd6665f2797c5657bb7552",
+   "chain_hash": "1aa46241723eb2018a6553e008c8ab87e8180ed399ea8a7235fd8c89e8fe18e4"
+  },
+  {
+   "seq": 12,
+   "pick_hash": "a089c32c513c2cd127e405abb4d4e055c27bb99f7cbd56a055893669cd000214",
+   "chain_hash": "b15859d44d3197b61e37f58636fe7a1515c87d4624a7b862ecb3d84cd38df66a"
+  },
+  {
+   "seq": 13,
+   "pick_hash": "9884452876a6259caef2dd3ac9d922fff9d025a25a8d4b04205177cdfbf15e9f",
+   "chain_hash": "14a4367f1c726d8889a7bbdc8f40c18c195b7ba4ed2d5029b7e08ba92e48fd17"
+  },
+  {
+   "seq": 14,
+   "pick_hash": "53ac3cfd06160b056db691724f9880c6c6d4b6f4f7e36aa62d0bb8aeca09adb9",
+   "chain_hash": "ee8f025a2d4f74757eeea5b427ed56b711c2e7528b6fbcae6b9eb1c45ae01f40"
+  },
+  {
+   "seq": 15,
+   "pick_hash": "c6bf655813231243376a1c20f692f1e776a096ca234f9bdbb1c202c78a60617f",
+   "chain_hash": "7368836973a8b85384ceb4901d4db9c4f958516cb6b426300e0e417af9d1c957"
+  },
+  {
+   "seq": 16,
+   "pick_hash": "608ee635948d16a220bf44d69e53c31d90133e87e774e3f21b4e14d39e3a6aeb",
+   "chain_hash": "67fb05b32ff8a7a34402a5864393e5cf60b73548ac6960a13760ba50b788b4da"
+  },
+  {
+   "seq": 17,
+   "pick_hash": "5f4484485a0f604eed9213f93a0b38d6f6b0c83ddbc51f3a250e55d6086a78aa",
+   "chain_hash": "5c9df19eeee8d5613f5bd8b51fc2f8ba626969eab3e0b9135be796a90dfa7001"
+  },
+  {
+   "seq": 18,
+   "pick_hash": "783fccb1d4315227c19f2f0ffe334e9b90863ad3616c43f25d787d02bb876989",
+   "chain_hash": "a868c73e813362696408fc5e63ab2cde647acb27cc5750d44e78fb669727c0c7"
+  },
+  {
+   "seq": 19,
+   "pick_hash": "9b649c6868837a6dba7553ff09d7a56d9dd0d40b697d3fd6cbee4a93de316527",
+   "chain_hash": "7f4a95b0108b90164c3b1ed4c42c4356cec0761ee672de57a423cde244066ed3"
+  },
+  {
+   "seq": 20,
+   "pick_hash": "9eddcdce2642d3f5e98b4b3fb0bdffaa89225e9594f80060ae057d59fceae86d",
+   "chain_hash": "0fc7e0ecc373250a63a9f7aa9e7ab36585e21634a636d04122c54abeedb0b9a4"
+  },
+  {
+   "seq": 21,
+   "pick_hash": "14b1364d650851b52c7d1d46edf8cff3f79ce6ee4e7eb47d99037b5f9f8dabb1",
+   "chain_hash": "f5facb4833c587a1aec8b88436d16398d030e67a541dfdac3ada02b52145f9c1"
+  },
+  {
+   "seq": 22,
+   "pick_hash": "4cdae55b59b8ad246753afd6fc9f71a19ceefdce42728b1f20e1762d0f4e39ca",
+   "chain_hash": "fd8114d081a17b8bf73c581b304132b166e5a36ec7f5a87f3c48eaeae127cb05"
+  },
+  {
+   "seq": 23,
+   "pick_hash": "da8927c709e1745a6cd6e93c0b32466956d020c35e2ec73daedf2a3c8c3944be",
+   "chain_hash": "5adfaa443ef8a868c3224626493dcbec6f1e144f2a0228786faaafc97f12a8a5"
+  },
+  {
+   "seq": 24,
+   "pick_hash": "d91cc40c29384a4937ae5c146f2087ff317a358e565e6980cf0f414fe9e86c9c",
+   "chain_hash": "b570721ad0cd6356ee0051640371eeeb864609e5895ffae03f9380610d5f1ebc"
+  },
+  {
+   "seq": 25,
+   "pick_hash": "0f8ea16aafef1221c8977c99fab27ef72f1fc162754d9f88e232a9d1a9462f46",
+   "chain_hash": "8e1448d226b6e7f6d41dbd6a913dfd515792998cef5530ee85c1aa20ae16c574"
+  },
+  {
+   "seq": 26,
+   "pick_hash": "f49212d3e9234485b338996df50e2b63023134a2f399730ddbc1ae39dd0d9ca0",
+   "chain_hash": "194ba4819845435163ec856664de822ea98dd5b598c248f1a7d77d0e81035a03"
+  },
+  {
+   "seq": 27,
+   "pick_hash": "c158b8d189d382779c9c0351918552b3b614b98b327137a43e6b65eb417ab9b1",
+   "chain_hash": "f8f60f85aa74e4d2658a8035a3fc82876bb9554943f9f15f0a52b92c510f5b77"
+  },
+  {
+   "seq": 28,
+   "pick_hash": "88d89ed89a9eab8775a95c27cea4a8bf1549b38e4b7c6a818a753e7ed1b842ca",
+   "chain_hash": "bf137943bfe17250a03f72a0072437b57bed88d21fff45f384e32d457d7fb89a"
+  },
+  {
+   "seq": 29,
+   "pick_hash": "74331eac2e5667b143e03f2b986601d97f82fda12b934bd5bb872465641e4c74",
+   "chain_hash": "1cf6c879ef32c7d7a80596bf0a4a1106ba0350a2ff1bfb97f536f4377a25016f"
+  },
+  {
+   "seq": 30,
+   "pick_hash": "be06b4d4e0c559519663092c01d095affd3bd6c73826142d459f92f2c90c1f66",
+   "chain_hash": "b6def125933ce8eecc19c352d52f7ac84c5a7702e4d5ef1256f6ff5aa7ca29b4"
+  },
+  {
+   "seq": 31,
+   "pick_hash": "69dfc7a99029e572a11eebe799196f0aeec7fffb0cdf6982dc28c60bf2b7f349",
+   "chain_hash": "6c6225d773e2bc72c14dd53fa674bfbc6e93ea3f5febcd7f4712a963f8ff64f5"
+  },
+  {
+   "seq": 32,
+   "pick_hash": "870ea008e055a8e94a30382d3a067f417fd7d8c427582044b0ab72b9ae8db8e8",
+   "chain_hash": "8dbe1c2c5208520a7a9f244d962879813d2c59c2d2f2f5abf141badd4bebd117"
+  },
+  {
+   "seq": 33,
+   "pick_hash": "f63df5018e2ef8d3c760df55c1061d7f365ebd2e04c456f016a2e428dc7a66f7",
+   "chain_hash": "647f1586380edd4c93033fd36e6e2e380ba0c7249077ffa5eba5afee0a49646f"
+  },
+  {
+   "seq": 34,
+   "pick_hash": "6e348075cfe07851b39fabada71619b393debdeb6bae6d1c6ada257d2ec6c5c7",
+   "chain_hash": "0f64b1330252c75b87ad66e23b22836f608c56dbf484d88689a2488fb74d3579"
+  },
+  {
+   "seq": 35,
+   "pick_hash": "25af12f843d94500f9ffa546369cc34a39d485dd5668e32c04f722ad9ac54bc3",
+   "chain_hash": "e0149d7bd3a32adbf45716c5c18c79e8ea4d41a34f8fd79ef7c1f8cefdd747bf"
+  },
+  {
+   "seq": 36,
+   "pick_hash": "043644299c827fb734a2158174eb19aa5e0f930587cccd21feb96fba06155096",
+   "chain_hash": "2805c052899da0ba967bd3255fecb8ffc13bca6c3d06f484988db7a1cab0d37c"
+  },
+  {
+   "seq": 37,
+   "pick_hash": "c06dd89238c2e283ef22982b8a7a8aa1fedbf60c960e2f5e0119ce8a1f8fd245",
+   "chain_hash": "f306e6c46d169a4b69eb28ecf5182297e143d52473bfeaa9ac0b2c02e52ecce4"
+  },
+  {
+   "seq": 38,
+   "pick_hash": "c7473099c3f82b87e38daf16f37681d5f805504a49567aa1a342b42b064dff4f",
+   "chain_hash": "322a2176461ab2cab32547fc39a3ad04a7fdc315dd7ec888023ff4acc543eed6"
+  },
+  {
+   "seq": 39,
+   "pick_hash": "cf2c2a14ac12cd3af2ff08e36b5e1c473377b1d5d10b0af9a9ab426aaa0a17a0",
+   "chain_hash": "bfcd806c4836144650b0adee6dfe7fa5695e40e0c35ea89e48a20598482d23a5"
+  },
+  {
+   "seq": 40,
+   "pick_hash": "f4ae79b0469b09589690c841162f69b47e2a40d03e0dd8bc5101fe1be14459e8",
+   "chain_hash": "6b67cbe2d9de7222916a43eab83b54b1af674cace8c4e6db59f2d9d41d1be0eb"
+  },
+  {
+   "seq": 41,
+   "pick_hash": "f5ad936797b2c5224ca4b109842e85baa1f07438cf414a91809046afe0ca557f",
+   "chain_hash": "e7b1fa46d2576367f34cdf8e6abb935b9e485f53a01ccafedd014412bc7d91cf"
+  },
+  {
+   "seq": 42,
+   "pick_hash": "e6c9ea3c5ffb6a256a592a618abb310df8160232c3e52e93c2c5356ba9c5982d",
+   "chain_hash": "2052011d38799a9ba2c5c39912493e649a0045d2d6c469774dc6efab6aeda187"
+  },
+  {
+   "seq": 43,
+   "pick_hash": "6031adcf9d41a70e70cfbf83d3e6e1a4843f9e8cd6cde598a0eb60948817e237",
+   "chain_hash": "47031d1a19199716cd06242c3b41308aeecfa988e59b69d4b95979b0f9f33a00"
+  },
+  {
+   "seq": 44,
+   "pick_hash": "63f5689ff9fbcfc22ca7020178dcc6ea50cd001ed32da22883b7e246875001b6",
+   "chain_hash": "8da95003f07161c9afdc52864dd0e2fe381cafb35cc5c26f3bc76cb917124160"
+  },
+  {
+   "seq": 45,
+   "pick_hash": "109a2695322018b63090dec052dd464de05af9242f3cae76b52d96d4fc279754",
+   "chain_hash": "261872eb8a605fc4e7ac934dbd12b637cfc82534ca81d4a04bbf61f47bc1b930"
+  },
+  {
+   "seq": 46,
+   "pick_hash": "9fec9daf08b7f001010c17be443ba8d1e7c1461b5ed84652e57451661c0e6cfc",
+   "chain_hash": "719f3d456d3bc7b25e223373260dec08855414271420acd395b1ed1799bcf588"
+  },
+  {
+   "seq": 47,
+   "pick_hash": "7a34d11e5ff03add9c3bc298cd5a4951fda3fcff89a91e15992dcd54aaf0c85b",
+   "chain_hash": "d3b1b4a86376ae9c44fded7c0774781d0618ec66eca8f61feb2487da8493ecf7"
+  },
+  {
+   "seq": 48,
+   "pick_hash": "257b507f1c349de35f29837d684a486bd2af104d1381fcc92394ad42d403848c",
+   "chain_hash": "b7fab125e1e1c26dc17619122fd2f145309f5f146ec236cbf2a7a4b643df09e3"
+  },
+  {
+   "seq": 49,
+   "pick_hash": "73a2bfdadf40eff29abdf54773b02febd6bb434e4a621c371c1c61cb8b4e38ac",
+   "chain_hash": "10642202d031ac7ced0f042e53647925bcb266e419b751a90e07b2a7f95fb1ea"
+  },
+  {
+   "seq": 50,
+   "pick_hash": "08e71b48ecb7acc15e1c7c109e2f8663a7f96d358bbace92a6b8948ed0bfb0d3",
+   "chain_hash": "6403a92b3d01200ca9facad1ec06c5f7b8fd38f8bb1bac4331c1524896c3569f"
+  },
+  {
+   "seq": 51,
+   "pick_hash": "b1753e8c7c9074e905cab23c3b368e1de32eaeee2819bd7e52631f064768ac49",
+   "chain_hash": "a8fdff63db82ca98f762407a1cc5cc37c326bd57da62c88a0f660c565de7d673"
+  },
+  {
+   "seq": 52,
+   "pick_hash": "1293b17b206456832da0b44aaf56c436966c512e5a3980fcee23239084408ec6",
+   "chain_hash": "bf03a1dfc4b82546d79e5d0adfacd18f8471fa0436338a12aa29ba5f7e4b29ae"
+  },
+  {
+   "seq": 53,
+   "pick_hash": "aacce550c1a7173de92ab7d0395217e148af63ce25e1739d8d470caf9472747f",
+   "chain_hash": "7a5217eade3cfa179023af4909291915046d849399271d12f758f3d5281a6681"
+  },
+  {
+   "seq": 54,
+   "pick_hash": "7ec104db6942a56bc3b772b721e65a5afa1645e9c7e8c561b860846c09a5c3bf",
+   "chain_hash": "005a3adf15493b65e56f3b3a686259a78cc10b03e45d2c6b2cc9a46a938e5f4a"
+  },
+  {
+   "seq": 55,
+   "pick_hash": "99950f80d58959ab5ac06de5d9465793d6c64fffea4a42d80aaad5189cf603c3",
+   "chain_hash": "e4675fccb082139ec49883da7ada1c3a2a711fed0f04f477ee752ad88a7ce145"
+  },
+  {
+   "seq": 56,
+   "pick_hash": "1fb5573cfd0d103f6ee4a805bf918ff7c0744e5a07430bbfcc8a19a17b802d16",
+   "chain_hash": "357933ae29c53808f297eed9bc9f3d5a06ac0273c4b0365facc63e456aa7add4"
+  },
+  {
+   "seq": 57,
+   "pick_hash": "daaf88aa30972b8222428aa23d3d92e19984664b9c67c8b2b0004c11df541573",
+   "chain_hash": "b0cff7dc9c849d3142e46989932aeb693252a576bd821322d0540051e15494ac"
+  },
+  {
+   "seq": 58,
+   "pick_hash": "f91890834756dac40919be54920a8860b99263f175ec0217660d85128c1b0cc2",
+   "chain_hash": "578f1edeee58d43d4e0f4c152114936fe3697518155486967bf39113b95d08f3"
+  },
+  {
+   "seq": 59,
+   "pick_hash": "534ea297a058ec3f6727f5f3b7d8ab20244cb1612e094e71d19e2d9159e7d4aa",
+   "chain_hash": "3c726cf36cd612f21f2b36cee03edfb1cf4f0e810f0c1aafce250c50111c3698"
+  },
+  {
+   "seq": 60,
+   "pick_hash": "9b2e92b832e666864a300f62e1f6603b5d9ea0c242cccc8f9f9f953dabd7edd1",
+   "chain_hash": "a579d46681dc4be2637fcb42c22d408efbdea4672e9c4b55758b2ba514358838"
+  }
+ ],
+ "chain_head": "a579d46681dc4be2637fcb42c22d408efbdea4672e9c4b55758b2ba514358838",
+ "gates": {
+  "entries_hashed": 60,
+  "entries_with_pre_tip_attestation": 46,
+  "entries_without_a_tip_time": 9,
+  "verification_status": "chain head published with this roll; settlement verification runs after each game day ends and its stamp is stored beside the settled rows"
+ },
+ "verify_after_settlement": {
+  "settled_slate": "2026-11-14",
+  "hashes_recomputed_from_the_same_frozen_blob": 17,
+  "all_match": true,
+  "note": "the settlement file references the same git blob; recomputing the hashes from it reproduces the entry hashes recorded above, so a settlement cannot silently move a line."
+ }
+}

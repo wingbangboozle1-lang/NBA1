@@ -1,0 +1,131 @@
+{
+ "ran_at_utc": "2026-11-15T11:53:17Z",
+ "session": "arena/e3ebc423-nba1",
+ "result": "PASS",
+ "rule": "the site is rebuilt only when every gate below passes; a failing gate writes the raw snapshots not at all (this script exits before step 2), so a stale or untraced capture cannot reach the published pages.",
+ "gates": [
+  {
+   "kind": "freshness",
+   "name": "capture age - finals",
+   "result": "PASS",
+   "detail": "final capture stamped 2026-11-15T11:45:00Z (0.1 h old at run time); the 11/14 slate is over night so <=12 h is the ceiling"
+  },
+  {
+   "kind": "freshness",
+   "name": "capture age - injury edition",
+   "result": "PASS",
+   "detail": "newest official edition read at 2026-11-15T11:36Z..11:44Z (0.2 h before this run); the hub lists it as the last edition published on 11/15 up to that moment"
+  },
+  {
+   "kind": "freshness",
+   "name": "slate window = today + maximum 3 days ahead",
+   "result": "PASS",
+   "detail": "dates captured: 2026-11-15, 2026-11-16, 2026-11-17, 2026-11-18 (today is 2026-11-15)"
+  },
+  {
+   "kind": "freshness",
+   "name": "per-day game counts equal the official calendar strip",
+   "result": "PASS",
+   "detail": "captured {'2026-11-15': 9, '2026-11-16': 8, '2026-11-17': 5, '2026-11-18': 12}; official strip (read on the same page and on the Nov 14 game page) {'2026-11-15': 9, '2026-11-16': 8, '2026-11-17': 5, '2026-11-18': 12}"
+  },
+  {
+   "kind": "freshness",
+   "name": "no game day is stale in the rolling slate",
+   "result": "PASS",
+   "detail": "the 2026-11-14 rows left the upcoming file and entered games_completed; nothing older than today is priced"
+  },
+  {
+   "kind": "freshness",
+   "name": "ratings cut is labelled with its own window",
+   "result": "PASS",
+   "detail": "season_to_date window label: 2026-27 Regular Season, season to date (through games of 2026-11-12) - two days of finals (11/13, 11/14) are NOT in the ratings the model prices with; published, not hidden (see gate 'ratings staleness')"
+  },
+  {
+   "kind": "provenance",
+   "name": "ratings staleness is measured, not assumed",
+   "result": "PASS",
+   "detail": "the standings read carries 30 team-games; the two slates since the ratings cut added 5 + 9 = 14 games (28 team-rows). The staleness is published on the day-roll page and the lines are labelled with the window they were cut from."
+  },
+  {
+   "kind": "provenance",
+   "name": "every horizon row carries two official URLs",
+   "result": "PASS",
+   "detail": "date card + own game page for all 34 rows"
+  },
+  {
+   "kind": "provenance",
+   "name": "every final row carries an official source",
+   "result": "PASS",
+   "detail": "5 games x 2 official pages"
+  },
+  {
+   "kind": "provenance",
+   "name": "quarter scores sum to the printed final",
+   "result": "PASS",
+   "detail": "4 of 5 games carry LINESCORES and all of them sum exactly (DEN 29+27+30+30=116 ...); 1 game (0022600235 CHI@MIN) has no quarter split captured and its cells stay blank + flagged"
+  },
+  {
+   "kind": "provenance",
+   "name": "records on every horizon card agree with the official standings page",
+   "result": "PASS",
+   "detail": "68 record cells (34 games x 2 teams) checked against https://www.nba.com/standings; disagreements: none"
+  },
+  {
+   "kind": "provenance",
+   "name": "one row per game in the results feed",
+   "result": "PASS",
+   "detail": "5 distinct game ids in 5 rows"
+  },
+  {
+   "kind": "provenance",
+   "name": "no duplicate game ids in the rolling slate",
+   "result": "PASS",
+   "detail": "34 rows, 34 distinct ids"
+  },
+  {
+   "kind": "provenance",
+   "name": "injury edition filename time == printed edition header",
+   "result": "PASS",
+   "detail": "Injury-Report_2026-11-15_06_15AM.pdf -> '11/15/26 06:15 AM ET' (the hub's own link text is '6:15 a.m ET report')"
+  },
+  {
+   "kind": "provenance",
+   "name": "every injury row carries a reason string or an explicit non-filing",
+   "result": "PASS",
+   "detail": "84 status rows carry the printed reason; 17 clubs print NOT YET SUBMITTED (11/16 filings are not due until 5 PM local on 11/15)"
+  },
+  {
+   "kind": "provenance",
+   "name": "page-continuation rows are labelled, not silently attributed",
+   "result": "PASS",
+   "detail": "15 of 101 rows print without a Team cell in the PDF's text layer and carry an explicit team_basis note; they are also listed on Flagged for Review"
+  },
+  {
+   "kind": "provenance",
+   "name": "consecutive-edition diff produced",
+   "result": "PASS",
+   "detail": "0 status changes, 1 appearances, 1 departures between the 06:00 and 06:15 AM editions (15 minutes apart; both editions stored). The single appearance/departure pair is the Simmons row whose Team cell is absent at 06:00 - a render artefact, recorded as such, not a status change."
+  }
+ ],
+ "measured": {
+  "horizon_games": 34,
+  "completed_games_after_roll": 65,
+  "injury_rows": 101,
+  "standings_rows": 30,
+  "league_home_win_rate": 0.5294,
+  "edition_status_changes_0600_to_0615": 0,
+  "settlement_2026_11_14": {
+   "wins": 3,
+   "losses": 10,
+   "pushes": 0,
+   "not_gradable": 4
+  }
+ },
+ "irregularities_for_review": [
+  "CHI@MIN (0022600235) quarter splits not captured - the fetch channel refused that game page four times; the final score itself is printed on two official pages and agrees.",
+  "the two 11/15 editions agree on every status; the only difference is a Team cell that the 06:00 render drops on the 'Simmons, Ben' row at a page break (kept unattributed in that edition, not back-filled).",
+  "the official pages print NYK@TOR and POR@MIN twice (11/15 and 11/17) as separate game ids; kept as printed.",
+  "15 injury rows inherit their team from the block above them because the PDF's page break dropped the Team cell; each carries an explicit team_basis note.",
+  "the 12 games added for 2026-11-18 carry no venue: the card that lists them prints tip times and records but not arenas."
+ ]
+}

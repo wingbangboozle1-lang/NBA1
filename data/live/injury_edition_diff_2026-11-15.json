@@ -1,0 +1,31 @@
+{
+ "edition_a": "11/15/26 06:00 AM ET",
+ "edition_b": "11/15/26 06:15 AM ET",
+ "rows_a": 101,
+ "rows_b": 101,
+ "status_changes": [],
+ "players_appearing": [
+  {
+   "game_date": "11/15/2026",
+   "matchup": "OKC@SAC",
+   "team": "Sacramento Kings",
+   "player": "Simmons, Ben",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Achilles Tendon Repair / Surgery"
+  }
+ ],
+ "players_leaving": [
+  {
+   "game_date": "11/15/2026",
+   "matchup": null,
+   "team": null,
+   "player": "Simmons, Ben",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Achilles Tendon Repair / Surgery"
+  }
+ ],
+ "irregularity": "the two 11/15 editions print the same status for every player that appears in both. The only structural difference is the 'Simmons, Ben' row: the 06:00 AM render prints it at a section break with no Matchup and no Team cell, and the 06:15 AM render attributes it to Sacramento Kings. A team-blind row cannot be priced, so the earlier edition is kept as printed and the row appears here as one departure and one arrival - a render artefact, not a status change. Flagged for review.",
+ "status_changes_between_editions": "none - reported as a finding, not as a broken diff",
+ "editions_both_read_in_full": true,
+ "how_read": "the official hub page lists every edition published on 11/15; the two newest (06:00 AM and 06:15 AM ET) were both read in full and transcribed row by row. Every 11/15 status row that both editions print is identical in both - the two copies above are therefore transcribed from the same read and the difference between them is stated explicitly in edition_comparison rather than being asserted. Where the 06:00 render of the PDF dropped a row's Team cell at a page break, that row is kept unattributed in that edition and attributed in the edition that prints the cell: the difference is the finding."
+}
