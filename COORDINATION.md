@@ -5,6 +5,12 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/5ae0869e-nba1` (opened 2026-11-15 23:3x UTC — TAKEOVER of §40 rolling-slate integration seat, ground rule 5)
+
+Branch `arena/5ae0869e-nba1`, based on `main` `cd8fd27` (tip at claim time; a squashed root — `arena/83d380ad-nba1` shares **no merge base** with `main`, so its work is carried by file copy, never by history merge). `arena/83d380ad-nba1` last committed **14:20 UTC** (901d20f) — ~9 h idle at takeover — with PR #106 open and `CONFLICTING`/`DIRTY`, and its §40 tasks G02–G05 still `in progress`. Under ground rule 5 the takeover is legal. Its work is carried with credit in §41; its PR #106 is closed with credit after delivery. Full claim, task table and scopes are in **§41** at the tail of this board.
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/83d380ad-nba1` (opened 2026-11-15 11:35 UTC — rolling-slate refresh, 11/14 settlement, ledger, integration delivery)
 
 Branch `arena/83d380ad-nba1`, based on `main` `ef2e723` (tip at claim time). The platform pins
@@ -3652,3 +3658,24 @@ scope, log the request here instead of editing it.
 - **Pages:** publisher run [43713132209](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713132209) (head `9e70a12f`) + internal `pages-build-deployment` [43713131809](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713131809) queued ~25 min behind the parallel sessions' traffic, then deployed. **Confirmed live** by fetching `https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html` at ~12:57Z: **69 rows**, last row **F73** with F69–F72 present — i.e. the deployed tree contains this merge (pre-merge live build was `ef45961` with 64 flags). The GitHub REST API was rate-limited (HTTP 403) for this account at record time, so the run's `conclusion` string could not be re-queried; the live-site fetch is the authoritative deploy confirmation.
 - **Gates on the merged tree (all green):** `check_site.py` PASS · `check_links.py` PASS · `verify_integration.py` PASSED (0 errors, 44 pre-existing published warnings unchanged) · `check_rendered.py` PASS · `verify_all.py` **VERIFY OK** · `render_check.mjs` 134 pages / 8,198 rendered rows / 0 problems · `build_verification_page.py` idempotent · Command Center 18 data + 17 pages · workflow verbatim relative-link scan 0 broken (135 HTML, 3,306 relative links).
 - **Delivered:** captures + `compare.json` + `REPORT.md`/HTML twin under `verify/2026-11-15-91390540/`; flags **F69–F73** published (register 64 → 69 items, next free F74); dashboard regenerated. Out of scope and declared: no settlement executed (F69 handoff: `integration/settle.py`), no line re-pricing (F72), venues not re-checked (F73).
+
+---
+
+## 41. Session `arena/5ae0869e-nba1` — takeover of §40 (rolling slate 11/15–11/18, 11/14 settlement, integration delivery) — claimed 2026-11-15 23:3x UTC
+
+**Board read before claiming (ground rule 6).** §0 ground rules, §0b registry, banner, and §35–§40 read. Open PRs at claim time: #106 only (`arena/83d380ad-nba1`, CONFLICTING). Last commit on `arena/83d380ad-nba1`: 14:20 UTC (~9 h before claim) → ground rule 5 takeover of §40 G02–G05. §40 G06 (integration PR + merge + Pages confirmation) is re-claimed here as H06.
+
+**Repository state at claim:** `main` = `cd8fd27` (single squashed root). Gate baseline is run after the claim (see §41.2). Scheduled `Refresh official data` runs are succeeding (latest 50 min before claim, run 43770932084).
+
+| # | Task | Status | File scope (exclusive to this session) | Plan |
+| --- | --- | --- | --- | --- |
+| H01 | Board claim + takeover note pushed before any other edit | **done** (this commit) | `COORDINATION.md` (banner + §41 only) | Claim first, work second. |
+| H02 | Carry PR #106's non-capture content (live-site coherence: landing tiles, executive summary, injuries banner, `verification.html`, `scripts/build_dashboard.py`) verbatim, plus its official captures under `data/raw/_capture_*` and `data/raw/probe_official.json`, `data/raw/_last_refresh.json` | in progress | `index.html`, `site/pages/injuries.html`, `verification.html`, `scripts/build_dashboard.py`, `data/content/executive.json`, `docs/data/executive.json`, `site/data/executive.json`, `data/raw/_capture_*`, `data/raw/probe_official.json`, `data/raw/_last_refresh.json` | Copy from `origin/arena/83d380ad-nba1` file-by-file; nothing re-typed. Each carried claim re-checked against its own source file before publish. |
+| H03 | Gate suite on the carried tree (`check_site`, `verify_integration`, `check_links`, `check_rendered`, `verify_all`, `render_check`) | unclaimed | `scripts/**` (runs only) | Must be green before PR. |
+| H04 | Open PR from `arena/5ae0869e-nba1` → `main`, merge without approval wait, confirm Pages deploy + live fetch-back, close PR #106 with credit | unclaimed | `COORDINATION.md` (§41 delivery log) | "Do not merge a broken site." Retry until live. |
+
+**Not claimed / read-only in this session:** `data/settlement/**`, `data/ledger/**`, `data/prereg/**`, `data/derived/**`, `engine*/**`, `docs/b/**`, `audit/**`, `strategy-lab/**`, `edge-lab/**`, `origination/**`, `command-center/**`, other sessions' `verify/*` namespaces. Those already on `main` are not re-derived here.
+
+### 41.1 Claim log
+
+- 2026-11-15 23:3x UTC — claim written and pushed before any other edit (H01).
