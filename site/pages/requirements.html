@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brief traceability &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="decisions.html">Decisions</a>
+      <a href="suggestions.html">Suggestions</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="prop-variance.html">Prop Variance &amp; Rotation</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameday.html">Game-Day Injury Read</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="leaderboard.html">Leaderboard &amp; Rewards</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+<a href="official-verify.html">Live Re-verification</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="decisions.html">Decisions: pick a path</a>
+<a href="requirements.html">Brief Traceability</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 14 NOV</h3>
+<a href="../../verified/index.html">&#10003; What is actually true</a>
+<a href="../../verified/summary.html">Executive summary</a>
+<a href="../../verified/verification.html">Row-level verification</a>
+<a href="../../verified/review.html">Repo review</a>
+<a href="../../verified/flagged.html">Flagged (17)</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row either links to the official source
+      it came from or carries an explicit no-source mark with a stated reason (the mark
+      explains why no official source exists or could confirm the cell). A blank or
+      dashed cell means the value could not be confirmed from an official source &mdash;
+      it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Brief traceability</h1>
+      <p class="sub">Every requirement in the brief, checked against the repository. Done, partial, missing or blocked, with the gap stated and a link to the evidence.</p>
+    </div>
+    <section class="card"><p><b>Status counts</b></p><div class="tiles"><div class="tile"><div class="tile-n">11</div><div class="tile-l">Done</div></div><div class="tile"><div class="tile-n">16</div><div class="tile-l">Partial</div></div><div class="tile"><div class="tile-n">5</div><div class="tile-l">Missing</div></div><div class="tile"><div class="tile-n">1</div><div class="tile-l">Blocked</div></div></div><ul class="tnote"><li><b>Done</b> &mdash; Implemented and evidenced in this repository.</li><li><b>Partial</b> &mdash; Implemented in part; the gap is stated.</li><li><b>Missing</b> &mdash; Not found in the repository by search.</li><li><b>Blocked</b> &mdash; Cannot be built: the source it needs is not available.</li></ul><p class="tnote">Repository links are code and data evidence in this repository. NBA.com links are the official pages the data was read from. No row fills a value that the repository does not contain. Full register: <a href="../../data/content/requirements.json">requirements.json</a>.</p></section><div class="tablewrap">
+<table class="tbl "
+ id="requirements"
+>
+<thead><tr>
+<th>ID</th>
+<th>Brief requirement</th>
+<th>Status</th>
+<th>What the repository contains</th>
+<th>Gap / next step</th>
+<th class="src">Source links</th>
+</tr></thead><tbody>
+<tr>
+<td><b>R01</b></td>
+<td>Scheduled job refreshes the official schedule, standings, team stats and injury report for each rolling slate, and rebuilds only after freshness and provenance gates pass.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>Workflow runs 3x daily (cron 11:15, 15:15, 22:15 UTC). engine/fetch_official.py captures sources; engine/refresh_gate.py fails closed on freshness, provenance and promotion; scripts/test_refresh_gate.py tests the gate. Latest scheduled run: success.</td>
+<td>Structured parsing of stats and schedule and automated consecutive-report status diffs are still open (see §38 RFG4 &#x27;needs review&#x27;).</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">Official schedule (NBA.com)</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml" target="_blank" rel="noopener">Refresh workflow</a></td>
+</tr>
+<tr>
+<td><b>R02</b></td>
+<td>Official per-game result feed kept current: one row per game with date, teams, final score, quarter scores.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>data/official/results_2026-11-14.json holds 5 rows with columns date, game_id, away, home, away_pts, home_pts, away_quarters, home_quarters, ot_periods, source_url. Every row links its NBA.com game page.</td>
+<td>Only the 11/14 slate is in the feed. Not verified that the scheduled job appends finals automatically. 11/15 games are not yet settled.</td>
+<td class="src"><a href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">Sample row: DEN @ NOP game page</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/results_2026-11-14.json" target="_blank" rel="noopener">Results file</a></td>
+</tr>
+<tr>
+<td><b>R03</b></td>
+<td>Settle only after final scores are verified.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>data/settlement/settlement_2026-11-14.json settles 11/14 singles, parlays and SGPs against the official finals file. ledger entry 3 records its hash. scripts/settle_2026_11_14.py performs the settlement.</td>
+<td>Settlement is run by hand for each slate and is not part of the scheduled job. 11/15 is due after its game day ends.</td>
+<td class="src"><a href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">Sample final: DEN @ NOP</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/settlement/settlement_2026-11-14.json" target="_blank" rel="noopener">Settlement file</a></td>
+</tr>
+<tr>
+<td><b>R04</b></td>
+<td>Store every injury PDF with its timestamp, and diff consecutive reports to detect status changes.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>Transcriptions with revision_time_et and retrieved_utc: data/official/injury_2026-11-14_0130PM.json and injury_2026-11-15_0615AM.json. One consecutive diff: data/official/injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json. The fetcher downloads PDFs.</td>
+<td>No injury PDF file is tracked in git (0 .pdf files in the repository). Raw PDFs are not retained. Only one consecutive pair is diffed. See flag F82.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">NBA injury report index</a> &middot; <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf" target="_blank" rel="noopener">Sample PDF 11/15 06:15 AM ET</a></td>
+</tr>
+<tr>
+<td><b>R05</b></td>
+<td>Freeze a pre-registration file per strategy before its first bet: signal, thresholds, universe, exact settlement rule.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>data/prereg/ holds S01–S08, T-SINGLE, T-PARLAY, T-SGP and an index. Each file has signal, thresholds, universe, exact_settlement_rule, frozen_at_utc, first_tip_of_universe and frozen_before_first_tip = true.</td>
+<td>All files were frozen 2026-11-15T12:55Z, after the 11/14 picks were published (ledger entry 1, 2026-11-14T22:18:48Z). The 11/14 results are therefore not pre-registered evidence. See flag F78.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/prereg/S01.json" target="_blank" rel="noopener">Prereg S01 (repo)</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">Ledger (repo)</a></td>
+</tr>
+<tr>
+<td><b>R06</b></td>
+<td>Tamper-evident ledger: hash each published pick, publish the hash before tip, verify after settlement.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>data/ledger/ledger.json is a SHA-256 hash chain: entry 1 pre-tip publication, entry 2 settlement verification, entry 3 settlement record. scripts/verify_ledger.py reports &#x27;ledger chain OK&#x27;.</td>
+<td>The anchor commit ef2e723 is not an ancestor of origin/main, which is a single squashed root (cd8fd27). It is reachable only through branch history. See flag F79.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/commit/ef2e723e13523b5b2495656c2a4ae5b461244374" target="_blank" rel="noopener">Anchor commit ef2e723</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">Ledger (repo)</a></td>
+</tr>
+<tr>
+<td><b>R07</b></td>
+<td>Split the site into a &#x27;projection&#x27; surface (safe to publish now) and a &#x27;bet&#x27; surface (gated), and never mix them.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>Gated paper picks are labelled as gated on the picks page, and prop-variance and props pages carry their own labels. The picks page does not split into two separate surfaces.</td>
+<td>No separate projection and bet surfaces exist. A reviewer decision is needed on the split (see Decisions page).</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html" target="_blank" rel="noopener">Picks page (repo)</a></td>
+</tr>
+<tr>
+<td><b>R08</b></td>
+<td>Keep two independent estimators and publish their disagreement as the primary confidence signal, not a single blended rating.</td>
+<td><span class="pill bad">Missing</span></td>
+<td>The picks table shows &#x27;Ref home margin&#x27; beside &#x27;Model home margin&#x27; and &#x27;Spread edge&#x27;. No second independent estimator module was found by search, and no disagreement headline was found.</td>
+<td>Build a second, independent estimator and publish the disagreement as the headline. See flag F87.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html" target="_blank" rel="noopener">Picks table columns (repo)</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py" target="_blank" rel="noopener">Originate script (repo)</a></td>
+</tr>
+<tr>
+<td><b>R09</b></td>
+<td>Pin home-court advantage to the measured home-win rate instead of fitting it freely.</td>
+<td><span class="pill bad">Missing</span></td>
+<td>engine/model_core.py uses a fixed flat_hca = 2.0. scripts/originate_horizon.py records that HCA &#x27;could not be sourced from an official NBA page&#x27;. The 57.6% measured home-win rate from another build is a note only, not applied.</td>
+<td>Measure the home-win rate from official finals and apply it. See flag F84.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py" target="_blank" rel="noopener">Originate script (repo)</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/model_core.py" target="_blank" rel="noopener">Model core (repo)</a></td>
+</tr>
+<tr>
+<td><b>R10</b></td>
+<td>Report luck as a z-score per team; refuse to publish a strategy that leans on a team outside the noise band.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>command-center/data/luck.json computes luck_z for all 30 teams from Pythagorean expectation (exponent 13.91) on official OffRtg and DefRtg. The Luck page is built from it.</td>
+<td>No noise-band refusal rule was found in code or pages, so strategies are not gated on it. See flag F88.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">Team advanced stats (NBA.com)</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/command-center/data/luck.json" target="_blank" rel="noopener">Luck data (repo)</a></td>
+</tr>
+<tr>
+<td><b>R11</b></td>
+<td>Compute rest, back-to-back and 3-in-4 from the official schedule, and add travel distance from a sourced arena-coordinate table.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>Rest and back-to-back are shown per game on the Game Flow page, computed from the official schedule. The 3-in-4 metric was not found by search.</td>
+<td>No arena-coordinate table exists, so travel distance is not computed. 3-in-4 is not computed. See flag F85.</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">Official schedule (NBA.com)</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/gameflow.html" target="_blank" rel="noopener">Game Flow page (repo)</a></td>
+</tr>
+<tr>
+<td><b>R12</b></td>
+<td>Model minutes redistribution explicitly: for each team, the top-8 minutes shares and the replacement shares when a player is out.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>data/derived/injury_impact.json has a rotation block per team (regulation minutes available, minutes vacated, redistribution rule). Its own rule is labelled &#x27;MODEL RULE, not measured&#x27;.</td>
+<td>Top-8 minutes shares are not reported. The redistribution rule is unmeasured. See flag F89.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/injury_impact.json" target="_blank" rel="noopener">Injury impact (repo)</a></td>
+</tr>
+<tr>
+<td><b>R13</b></td>
+<td>Stop publishing a single blended rating as the headline; publish the disagreement as the headline and the blend underneath.</td>
+<td><span class="pill bad">Missing</span></td>
+<td>Not found. The site headline was not verified to be a disagreement measure.</td>
+<td>Depends on R08. Needs a reviewer decision on the headline.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/index.html" target="_blank" rel="noopener">Index page (repo)</a></td>
+</tr>
+<tr>
+<td><b>R14</b></td>
+<td>Price every parlay with the measured rho and print the naive product beside it instead of withholding the price.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>scripts/generate_picks.py prices SGPs with rho constants SGP_RHO_TEAMMATES = -0.2 and SGP_RHO_OPPONENTS = 0.05, labelled as model-derived. The correlations page holds rho values.</td>
+<td>The rho is a fixed model constant, not a measured value. The naive-product column was not verified on the parlay table. See flag F90.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/generate_picks.py" target="_blank" rel="noopener">SGP pricing (repo)</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/correlations.json" target="_blank" rel="noopener">Correlations (repo)</a></td>
+</tr>
+<tr>
+<td><b>R15</b></td>
+<td>Put rotation availability on the picks page as its own column.</td>
+<td><span class="pill bad">Missing</span></td>
+<td>The picks table headers are Home injury status and Away injury status. No rotation-availability column exists.</td>
+<td>Add the column from the injury impact data. See flag F83.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html" target="_blank" rel="noopener">Picks page (repo)</a></td>
+</tr>
+<tr>
+<td><b>R16</b></td>
+<td>Add a market-anchored prior: blend the model line with the closing line, weighted by measured out-of-sample log-loss.</td>
+<td><span class="pill bad">Blocked</span></td>
+<td>No closing line or licensed price exists in the repository. The prereg files state: &#x27;No licensed two-sided price exists (no odds feed)&#x27;.</td>
+<td>Needs a licensed or official price source before it can be built. See flag F86.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/prereg/S01.json" target="_blank" rel="noopener">Prereg S01 (repo)</a></td>
+</tr>
+<tr>
+<td><b>R17</b></td>
+<td>Model the total as possessions times points per possession, not as an average of team scoring averages.</td>
+<td><span class="pill ok">Done</span></td>
+<td>scripts/originate_horizon.py: possessions = pace_home + pace_away − league_pace; points = (off_rtg × opp def_rtg ÷ league_off) × possessions ÷ 100; total = home points + away points. Inputs are the official team advanced stats.</td>
+<td>None in the formula. Inputs are refreshed by R01.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">Team advanced stats (NBA.com)</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py" target="_blank" rel="noopener">Originate script (repo)</a></td>
+</tr>
+<tr>
+<td><b>R18</b></td>
+<td>Show the injury-report revision time and retrieval time in the Injuries page banner.</td>
+<td><span class="pill ok">Done</span></td>
+<td>site/pages/injuries.html banner shows &#x27;revision and retrieval time&#x27; with the revision and retrieved (UTC) fields.</td>
+<td>None found for the banner. Source values are the official index edition.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">NBA injury report index</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/injuries.html" target="_blank" rel="noopener">Injuries page (repo)</a></td>
+</tr>
+<tr>
+<td><b>R19</b></td>
+<td>Settle the sealed ledger from official finals as soon as each game day ends, and keep the settlement stamp visible.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>The 11/14 settlement is recorded in the ledger (entry 3), and the Injuries page carries a &#x27;settled and stamped&#x27; note.</td>
+<td>Settlement is manual per slate, not scheduled. 11/15 has not yet been settled.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/settlement/settlement_2026-11-14.json" target="_blank" rel="noopener">Settlement file (repo)</a></td>
+</tr>
+<tr>
+<td><b>R20</b></td>
+<td>Re-read the three official team-stat pages (traditional, opponent, advanced) and re-cut the model inputs.</td>
+<td><span class="pill ok">Done</span></td>
+<td>data/official/teams_traditional_2026-11-15.json, teams_opponent_2026-11-15.json and teams_advanced_2026-11-15.json each hold 30 rows with source_url and retrieved_utc. Model input files were re-cut from them (as stated in PR #106; the files are present in this tree).</td>
+<td>Re-read 11/15 only. The next re-read depends on R01.</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">Team advanced (NBA.com)</a> &middot; <a href="https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">Traditional (NBA.com)</a> &middot; <a href="https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">Opponent (NBA.com)</a></td>
+</tr>
+<tr>
+<td><b>R21</b></td>
+<td>Capture per-player game logs (minutes, points, rebounds, assists, opponent) for at least the players on an injury report.</td>
+<td><span class="pill bad">Missing</span></td>
+<td>data/live/player_game_logs.json has 3 players, including Nikola Jokić, with minutes, points, rebounds, assists and opponent.</td>
+<td>The 11/15 injury edition has 101 rows, so coverage is far short of the requirement. See flag F81.</td>
+<td class="src"><a href="https://www.nba.com/player/203999/nikola-joki-c/game-log" target="_blank" rel="noopener">Sample player log (NBA.com)</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/player_game_logs.json" target="_blank" rel="noopener">Player logs (repo)</a></td>
+</tr>
+<tr>
+<td><b>R22</b></td>
+<td>Originate our own NBA lines and research strategies, run them as a leaderboard competition with rewards, and validate each through gates.</td>
+<td><span class="pill ok">Done</span></td>
+<td>Strategies, validation gates and leaderboard pages built from data/derived/strategies.json and backtest.json. Reward tiers are defined. No strategy is promoted unless it clears the gates.</td>
+<td>No licensed price exists, so unit ROI is blank for moneyline strategies (see R16).</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/strategies.html" target="_blank" rel="noopener">Strategies page (repo)</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/validation.html" target="_blank" rel="noopener">Validation gates (repo)</a></td>
+</tr>
+<tr>
+<td><b>R23</b></td>
+<td>Look at single bets, parlays and player-prop combinations.</td>
+<td><span class="pill ok">Done</span></td>
+<td>Single-game picks, parlay tickets, SGPs and prop combinations are built and published (picks, props, prop-variance pages).</td>
+<td>Prop combinations are priced without a market price (see R16).</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html" target="_blank" rel="noopener">Picks page (repo)</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/props.html" target="_blank" rel="noopener">Props page (repo)</a></td>
+</tr>
+<tr>
+<td><b>R24</b></td>
+<td>Determine correlation values and select strategies that are skill-based rather than luck.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>data/derived/correlations.json and site/pages/correlations.html publish the measured correlation values. The luck check is on the Luck page.</td>
+<td>Skill-versus-luck selection is limited by the sample size. The noise-band refusal is missing (R10).</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/correlations.json" target="_blank" rel="noopener">Correlations (repo)</a></td>
+</tr>
+<tr>
+<td><b>R25</b></td>
+<td>Generate picks for every upcoming slate up to 3 days in advance using our originated lines.</td>
+<td><span class="pill ok">Done</span></td>
+<td>data/derived/horizon_lines.json and horizon_picks.json cover the 11/15–11/18 window: 34 games, matching data/official/schedule_2026-11-15_to_18.json.</td>
+<td>The window rolls forward with each refresh (R01).</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">Official schedule 11/15–11/18 (NBA.com)</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_picks.json" target="_blank" rel="noopener">Horizon picks (repo)</a></td>
+</tr>
+<tr>
+<td><b>R26</b></td>
+<td>Track how injuries could affect rotation minutes and production, and provide game-flow analysis.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>data/derived/injury_impact.json (player and team effects) and site/pages/gameflow.html (pace, margin, total, blow-out and overtime probability).</td>
+<td>The rotation model is unmeasured (R12). Production effects rest on few observed games (R21).</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/injury_impact.json" target="_blank" rel="noopener">Injury impact (repo)</a> &middot; <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/gameflow.html" target="_blank" rel="noopener">Game Flow (repo)</a></td>
+</tr>
+<tr>
+<td><b>R27</b></td>
+<td>Create an executive summary outlining the important details.</td>
+<td><span class="pill ok">Done</span></td>
+<td>EXECUTIVE_SUMMARY.md at the repository root and the Executive Summary page built from data/content/executive.json.</td>
+<td>Refresh when data changes.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/EXECUTIVE_SUMMARY.md" target="_blank" rel="noopener">Executive summary (repo)</a></td>
+</tr>
+<tr>
+<td><b>R28</b></td>
+<td>Suggestions section so someone can review options and pick a path before any change is made.</td>
+<td><span class="pill ok">Done</span></td>
+<td>site/pages/suggestions.html and site/pages/decisions.html, built from data/content/suggestions.json (31 items).</td>
+<td>Decisions are not yet recorded by a reviewer.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/decisions.html" target="_blank" rel="noopener">Decisions page (repo)</a></td>
+</tr>
+<tr>
+<td><b>R29</b></td>
+<td>Clear list of questions, information and answers needed before any decision.</td>
+<td><span class="pill ok">Done</span></td>
+<td>site/pages/questions.html built from data/content/questions.json.</td>
+<td>Answers are open and carry their own status.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/questions.html" target="_blank" rel="noopener">Questions page (repo)</a></td>
+</tr>
+<tr>
+<td><b>R30</b></td>
+<td>Line-by-line repository review with flagged irregularities and links for manual review.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>REPO_REVIEW.md, the Repo Review page and the Flagged for Review register (data/content/flagged.json).</td>
+<td>Not every line was reviewed in this session. This session added flags F78–F91.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/flagged.html" target="_blank" rel="noopener">Flagged for Review (repo)</a></td>
+</tr>
+<tr>
+<td><b>R31</b></td>
+<td>GitHub Pages live site with a clean landing page and subpages organised by category, each table row linked to an official source.</td>
+<td><span class="pill ok">Done</span></td>
+<td>pages.yml builds and deploys site/ on push to main. scripts/check_site.py checks that every table row on its listed pages carries an official link.</td>
+<td>Row links are checked for the approved host only. Sandbox limits mean nba.com URLs are not re-fetched here (F91).</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/pages.yml" target="_blank" rel="noopener">Pages workflow (repo)</a></td>
+</tr>
+<tr>
+<td><b>R32</b></td>
+<td>Verify every value against an official source; leave blank and flag anything unconfirmed.</td>
+<td><span class="pill warn">Partial</span></td>
+<td>Probe record: 1,911 URLs probed from the runner, 114 OK, 1,679 blocked, 116 unreachable. The site flags unconfirmed values.</td>
+<td>Most nba.com URLs were blocked from the probe runner and cannot be re-read from this sandbox. See flag F91.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/probe_official.json" target="_blank" rel="noopener">Probe record (repo)</a></td>
+</tr>
+<tr>
+<td><b>R33</b></td>
+<td>Parallel sessions coordinate through a shared task board with claims, file scopes and handoffs.</td>
+<td><span class="pill ok">Done</span></td>
+<td>COORDINATION.md holds the registry, ground rules, claims and delivery records.</td>
+<td>Board is long and has many sessions&#x27; records.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md" target="_blank" rel="noopener">Coordination board (repo)</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">33 requirements traced to repository evidence, 11 done, 16 partial, 5 missing, 1 blocked.</p>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../origination/index.html">Origination build &mdash; 22 lines for 14&ndash;16 Nov, 101-game walk-forward</a> &middot;
+      <a href="../../strategy-lab/index.html">Strategy Lab &mdash; season-wide audit on 160 games</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

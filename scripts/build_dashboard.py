@@ -83,6 +83,7 @@ CATEGORIES = [
     ("Open Questions", "questions.html", "What we know, what we do not, and the concrete step that would answer each open item."),
     ("Suggestions", "suggestions.html", "Improvements written as options with effort, risk and what each unlocks, so a reviewer can pick a path."),
     ("Decisions: pick a path", "decisions.html", "Six decisions in dependency order, every open question mapped to the decision that closes it, and every suggestion ranked against them. Start here before implementing anything."),
+    ("Brief Traceability", "requirements.html", "Every requirement in the brief checked against the repository: done, partial, missing or blocked, with the gap and the link to the evidence."),
     ("Flagged for Review", "flagged.html", "Every value that could not be confirmed from an official source, with the link it would need."),
     ("Source Register", "sources.html", "Every official URL this site is built from."),
     ("Executive Summary", "../../EXECUTIVE_SUMMARY.md", "The whole picture in one document: what was verified, what the model has and has not shown, the limits, and the decisions waiting."),
@@ -2652,6 +2653,12 @@ def main():
 
     # === decisions (session arena/cc5a6652-nba1) =================================
     built["decisions.html"] = build_decisions(questions, suggestions)
+
+    # === brief traceability (session arena/513516f6-nba1, COORDINATION section 41) ===
+    import sys as _sys
+    _sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import build_requirements
+    built["requirements.html"] = build_requirements.render(page, table)
 
     # ------------------------------------------------------------------ write
     for name, html in built.items():
