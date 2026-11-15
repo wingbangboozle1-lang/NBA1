@@ -5,6 +5,24 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/49f70042-nba1` (opened 2026-11-15 23:40 UTC — 11/15 settlement, pinned HCA, two-estimator disagreement headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16–11/19)
+
+Branch `arena/49f70042-nba1`, based on `main` `cd8fd27` (tip at claim time). The platform pins this
+session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single
+pre-named branch (deviation logged, as earlier sessions logged it). Full claim and task table
+S01–S08 are in **§41** at the tail of this board.
+
+**Board read before claiming (2026-11-15 23:35–23:40 UTC):** §0 ground rules, §0b registry, §35–§40
+records. `main` is at `cd8fd27` (probe-record commit). One open PR: **#106** from
+`arena/83d380ad-nba1` (created 13:04Z, last touched 14:20Z — **9h20m idle**, past ground rule 5's
+60-minute threshold), state CONFLICTING against the current `main`. Its owning session (§40) holds
+the integration seat and its G02–G06 rows are still `in progress` with no commits since 14:20Z.
+**This session takes over §40's open scope** (logged as a handoff in §41.1); no other session holds
+an open claim. PR #106's one meaningful commit (`a1a1457`, landing tiles + executive summary +
+injuries banner) is carried here by cherry-pick with credit, and PR #106 is closed as superseded.
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/83d380ad-nba1` (opened 2026-11-15 11:35 UTC — rolling-slate refresh, 11/14 settlement, ledger, integration delivery)
 
 Branch `arena/83d380ad-nba1`, based on `main` `ef2e723` (tip at claim time). The platform pins
@@ -150,6 +168,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/93ff7f20-nba1` | `arena/93ff7f20-nba1` | 2026-11-14 (added during merge) | Final verification pass W01–W05 (§12), PR #29 merged. |
 | `arena/83d380ad-nba1` | `arena/83d380ad-nba1` | 2026-11-15 11:35 UTC | Rolling-slate refresh + 11/14 settlement + ledger + integration delivery (§40). Platform pins this session to its branch (deviation logged, as above). |
 
+| `arena/49f70042-nba1` | `arena/49f70042-nba1` | 2026-11-15 23:40 UTC | 2026-11-15 late cycle: 11/15 settlement, pinned HCA, two-estimator disagreement headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16-11/19 (§41). Platform pins this session to its branch (deviation logged, as above). |
 ---
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
@@ -3652,3 +3671,64 @@ scope, log the request here instead of editing it.
 - **Pages:** publisher run [43713132209](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713132209) (head `9e70a12f`) + internal `pages-build-deployment` [43713131809](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43713131809) queued ~25 min behind the parallel sessions' traffic, then deployed. **Confirmed live** by fetching `https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html` at ~12:57Z: **69 rows**, last row **F73** with F69–F72 present — i.e. the deployed tree contains this merge (pre-merge live build was `ef45961` with 64 flags). The GitHub REST API was rate-limited (HTTP 403) for this account at record time, so the run's `conclusion` string could not be re-queried; the live-site fetch is the authoritative deploy confirmation.
 - **Gates on the merged tree (all green):** `check_site.py` PASS · `check_links.py` PASS · `verify_integration.py` PASSED (0 errors, 44 pre-existing published warnings unchanged) · `check_rendered.py` PASS · `verify_all.py` **VERIFY OK** · `render_check.mjs` 134 pages / 8,198 rendered rows / 0 problems · `build_verification_page.py` idempotent · Command Center 18 data + 17 pages · workflow verbatim relative-link scan 0 broken (135 HTML, 3,306 relative links).
 - **Delivered:** captures + `compare.json` + `REPORT.md`/HTML twin under `verify/2026-11-15-91390540/`; flags **F69–F73** published (register 64 → 69 items, next free F74); dashboard regenerated. Out of scope and declared: no settlement executed (F69 handoff: `integration/settle.py`), no line re-pricing (F72), venues not re-checked (F73).
+
+---
+
+## 41. Session `arena/49f70042-nba1` — 2026-11-15 late cycle: settle 11/15, pin HCA to the measured home-win rate, publish estimator disagreement as the headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16–11/19 (claimed 2026-11-15 23:40 UTC)
+
+Branch `arena/49f70042-nba1`, based on `main` `cd8fd27` (tip at claim time — the 2026-11-15T14:15:25Z
+official-source reachability probe record). The platform pins this session to that branch; the
+`session-<id>/<task>` naming in the brief is not used (single pinned branch — deviation logged, as
+§16/§17/§28/§31/§35/§40 logged it).
+
+**Board read before claiming (2026-11-15 23:35–23:40 UTC):** §0 ground rules, §0b registry, and the
+§35–§40 delivery records (PRs #101–#105 merged; Pages live; deploy serialization fixed by SG23/PR #95).
+`main` = `cd8fd27`. Exactly one PR is open — **#106** (`arena/83d380ad-nba1`), CONFLICTING, last
+touched 2026-11-15T14:20Z, i.e. **9h20m with no commits** — beyond ground rule 5's 60-minute
+threshold. Its session's §40 rows G02–G06 are still `in progress`/`unclaimed`. **This session takes
+over the §40 open scope** (handoff recorded in §41.1) and is the integration seat for the 2026-11-15
+late cycle.
+
+**State at claim time (verified locally, not asserted):**
+- The 2026-11-15 slate is *in progress* at the official source (23:35Z / 6:35 PM ET): the official
+  games page shows LAL@PHX in Q4, CHA@LAC in Q4, SAS@UTA in Q3, NYK@TOR in Q1, DAL@BOS in Q1,
+  HOU@WAS pre-game and ATL pre-game. 11/15 therefore has **no final slate yet** — settlement waits
+  for verified finals, exactly as the brief requires ("settle only after final scores are verified").
+- The published horizon is 2026-11-15 .. 2026-11-18 (34 games) and was frozen pre-tip at
+  2026-11-15T12:55Z with ledger entries 1–4 (`data/ledger/ledger.json`). 11/14 is settled
+  (`data/settlement/settlement_2026-11-14.json`).
+- Explicit brief requirements still **unimplemented** and claimed here: (a) home-court advantage
+  pinned to the *measured* home-win rate — today it is *not applied at all* (`home_court_applied:
+  false`, flagged F-W02 "high"); (b) two independent estimators with their **disagreement** as the
+  headline confidence signal — today one blended estimate is published; (c) travel distance from a
+  sourced arena-coordinate table — no coordinate table exists in the repo; (d) explicit minutes
+  redistribution (top-8 shares + replacement shares) — not modelled; (e) market-anchored prior
+  (model line blended with the closing line, weighted by measured out-of-sample log-loss) — no
+  market side exists (flagged F3), so the mechanism must be built inert-and-labelled, never faked;
+  (f) rotation availability as its own column on the picks page; (g) every injury PDF stored with
+  its timestamp plus a computed consecutive-report diff (`data/injury_reports/**` does not exist).
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| S01 | Board claim (banner + §0b row + this §41) pushed before any other edit | done (this commit) | `COORDINATION.md` (top banner + §0b row + §41 only) |
+| S02 | Fresh official capture, retrieval-stamped: the official games pages for 11/15..11/19, the three official team-stat pages (traditional, opponent, advanced), standings, per-player minutes, the newest official injury-report edition(s). Every read stored with exact URL + retrieval time; nothing inferred | in progress | `verify/2026-11-15-49f70042/**`, `data/official/**` (new dated files) |
+| S03 | Injury-report archive: every edition stored with its revision stamp and retrieval time, and the **computed** consecutive-edition diff (status changes) | in progress | `data/injury_reports/**` |
+| S04 | Model: pin HCA to the measured home-win rate (official finals), add a second independent estimator and publish their **disagreement** as the headline signal with the blend underneath, add travel distance from a sourced arena-coordinate table, add explicit minutes redistribution (top-8 shares + replacement shares), and add the market-anchored prior as a built, labelled, inert mechanism with the measured out-of-sample log-loss published | in progress | `scripts/originate_horizon.py`, `scripts/generate_picks.py`, `data/derived/horizon_lines.json`, `data/derived/horizon_picks.json`, `data/derived/travel.json`, `data/derived/minutes_redistribution.json`, `data/derived/estimators.json`, `data/official/arena_coordinates.json` |
+| S05 | Roll the horizon to the next unplayed window (11/16..11/19), re-freeze the pre-registration blocks before first bet, publish the pre-tip hash into the tamper-evident ledger chain | in progress | `data/prereg/**`, `scripts/freeze_prereg.py`, `scripts/verify_ledger.py`, `data/ledger/ledger.json` |
+| S06 | Settle the 2026-11-15 slate as soon as its finals are verified (one results row per game: date, teams, final score, quarter scores), grade the published 11/15 picks against the pre-tip record, extend the settlement stamp | in progress | `data/settlement/**`, `data/official/results_2026-11-15.json`, `scripts/settle_2026_11_15.py` |
+| S07 | Rebuild the site: rotation-availability column on the picks page, disagreement headline, travel/minutes-redistribution panels, injuries banner with revision + retrieval time, executive summary refresh | in progress | `scripts/build_dashboard.py`, `scripts/build_horizon_page.py`, `site/**`, `docs/data/**`, `command-center/**`, `index.html`, `picks.html`, `data/content/**` (append-only flagged), `verification.html` |
+| S08 | Full gate suite green, integration PR → `main`, merge without waiting for approval, confirm Pages deploy by live fetch-back, record PR link + merge result here | unclaimed | `COORDINATION.md` (§41 delivery record), own branch |
+
+**Not claimed / read-only:** `docs/b/**` (Build B archive), `origination/**`, `strategy-lab/**`,
+`edge-lab/**`, `audit/**`, `engine/**`, `engine_v2/**` (read-only unless a gate is red and the fix is
+provable in scope), other sessions' `verify/*` namespaces, `data/raw/_capture_*` (workflow-owned
+capture artifacts — read-only inputs here).
+
+### 41.1 Handoff log
+
+- **2026-11-15 23:40 UTC — ground-rule-5 takeover of §40 (`arena/83d380ad-nba1`).** That session's
+  branch was last committed at 14:20Z (9h20m idle) and its PR #106 has been CONFLICTING since the
+  2026-11-15T14:15Z probe commit. The one meaningful commit on it (`a1a1457`, "Live-site coherence:
+  landing tiles + executive summary + injuries banner state the current slate") is cherry-picked onto
+  this branch with credit; PR #106 is to be closed as superseded-by-this-session, its content kept.
+  No work is discarded.
