@@ -1,20 +1,25 @@
-[11:50:24]   200   569486B  https://www.nba.com/games?date=2026-11-13
-[11:50:24]   200   434288B  https://www.nba.com/games?date=2026-11-14
-[11:50:24]   200   373747B  https://www.nba.com/games?date=2026-11-15
-[11:50:24]   200   365946B  https://www.nba.com/games?date=2026-11-16
-[11:50:25]   200   360823B  https://www.nba.com/games?date=2026-11-17
-[11:50:25]   200   417125B  https://www.nba.com/games?date=2026-11-18
-[11:50:25]   200   254228B  https://www.nba.com/standings
-[11:50:26]   200   322695B  https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season
-[11:50:26]   200   322665B  https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season
-[11:50:26]   200   322665B  https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season
-Traceback (most recent call last):
-  File "/home/runner/work/NBA1/NBA1/scripts/official_capture.py", line 870, in <module>
-    sys.exit(main())
-             ^^^^^^
-  File "/home/runner/work/NBA1/NBA1/scripts/official_capture.py", line 756, in main
-    record(rec, "parse_stats_teams")
-  File "/home/runner/work/NBA1/NBA1/scripts/official_capture.py", line 659, in record
-    r = {k: v for k, v in rec.items() if k != "data"}
-                          ^^^^^^^^^
-AttributeError: 'NoneType' object has no attribute 'items'
+[11:52:43]   200   569485B  https://www.nba.com/games?date=2026-11-13
+[11:52:43]   200   434258B  https://www.nba.com/games?date=2026-11-14
+[11:52:44]   200   373717B  https://www.nba.com/games?date=2026-11-15
+[11:52:44]   200   365945B  https://www.nba.com/games?date=2026-11-16
+[11:52:45]   200   360822B  https://www.nba.com/games?date=2026-11-17
+[11:52:45]   200   417124B  https://www.nba.com/games?date=2026-11-18
+[11:52:45]   200   254353B  https://www.nba.com/standings
+[11:52:45]   200   322694B  https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season
+[11:52:45]   200   322664B  https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season
+[11:52:45]   200   322664B  https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season
+[11:52:46]   200   711667B  https://www.nba.com/game/nyk-vs-ind-0022600034
+[11:52:46]   200   681173B  https://www.nba.com/game/mil-vs-orl-0022600035
+[11:52:46] run 2026-11-15T115243Z: 12 fetches, 12 findings
+[11:52:46]   [info] games?date=2026-11-13: 10 game links, 0 time/record triples, 0 finals
+[11:52:46]   [info] games?date=2026-11-14: 5 game links, 0 time/record triples, 0 finals
+[11:52:46]   [info] games?date=2026-11-15: 10 game links, 0 time/record triples, 0 finals
+[11:52:46]   [info] games?date=2026-11-16: 9 game links, 0 time/record triples, 0 finals
+[11:52:46]   [info] games?date=2026-11-17: 6 game links, 0 time/record triples, 0 finals
+[11:52:46]   [info] games?date=2026-11-18: 13 game links, 0 time/record triples, 0 finals
+[11:52:46]   [info] 1 promo game link(s) appeared on more than one date's page and were dropped as page furniture: ['0022600232']
+[11:52:46]   [error] standings: parsed 0 rows, expected 30
+[11:52:46]   [error] teams/traditional: parsed 0 rows, expected 30
+[11:52:46]   [error] teams/opponent: parsed 0 rows, expected 30
+[11:52:46]   [error] teams/advanced: parsed 0 rows, expected 30
+[11:52:46]   [info] players: skipped (DEBUG_ONLY)

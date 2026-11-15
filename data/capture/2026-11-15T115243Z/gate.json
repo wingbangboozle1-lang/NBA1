@@ -1,0 +1,142 @@
+{
+ "gate": "freshness_and_provenance",
+ "run_id": "2026-11-15T115243Z",
+ "evaluated_at_utc": "2026-11-15T11:52:46Z",
+ "checks": [
+  {
+   "id": "P1.hosts",
+   "ok": true,
+   "detail": "0 fetch(es) to a host outside the official allowlist",
+   "blocking": true
+  },
+  {
+   "id": "P1.sha256",
+   "ok": true,
+   "detail": "0 successful fetch(es) without a SHA-256",
+   "blocking": true
+  },
+  {
+   "id": "P1.http200",
+   "ok": true,
+   "detail": "0 fetch(es) did not return HTTP 200: ",
+   "blocking": true
+  },
+  {
+   "id": "P3.standings",
+   "ok": false,
+   "detail": "standings.json: 0 rows, need >= 30",
+   "blocking": true
+  },
+  {
+   "id": "P2.standings",
+   "ok": true,
+   "detail": "standings is 0.00h old; SLA is 24h",
+   "blocking": true
+  },
+  {
+   "id": "P3.teams_traditional",
+   "ok": false,
+   "detail": "teams_traditional.json: 0 rows, need >= 30",
+   "blocking": true
+  },
+  {
+   "id": "P2.teams_traditional",
+   "ok": true,
+   "detail": "teams_traditional is 0.00h old; SLA is 36h",
+   "blocking": true
+  },
+  {
+   "id": "P3.teams_opponent",
+   "ok": false,
+   "detail": "teams_opponent.json: 0 rows, need >= 30",
+   "blocking": true
+  },
+  {
+   "id": "P2.teams_opponent",
+   "ok": true,
+   "detail": "teams_opponent is 0.00h old; SLA is 36h",
+   "blocking": true
+  },
+  {
+   "id": "P3.teams_advanced",
+   "ok": false,
+   "detail": "teams_advanced.json: 0 rows, need >= 30",
+   "blocking": true
+  },
+  {
+   "id": "P2.teams_advanced",
+   "ok": true,
+   "detail": "teams_advanced is 0.00h old; SLA is 36h",
+   "blocking": true
+  },
+  {
+   "id": "P3.injury_index",
+   "ok": false,
+   "detail": "injury_index.json missing from the run",
+   "blocking": true
+  },
+  {
+   "id": "P3.slate_2026-11-15",
+   "ok": true,
+   "detail": "2026-11-15: 9 games on the official page",
+   "blocking": true
+  },
+  {
+   "id": "P3.slate_2026-11-16",
+   "ok": true,
+   "detail": "2026-11-16: 8 games on the official page",
+   "blocking": true
+  },
+  {
+   "id": "P3.slate_2026-11-17",
+   "ok": true,
+   "detail": "2026-11-17: 5 games on the official page",
+   "blocking": true
+  },
+  {
+   "id": "P3.slate_2026-11-18",
+   "ok": true,
+   "detail": "2026-11-18: 12 games on the official page",
+   "blocking": true
+  },
+  {
+   "id": "P4.pdf_bytes",
+   "ok": true,
+   "detail": "0 stored injury PDF(s) no longer hash to the value recorded at capture",
+   "blocking": true
+  },
+  {
+   "id": "P4.pdf_present",
+   "ok": false,
+   "detail": "0 injury PDFs archived in this run",
+   "blocking": false
+  },
+  {
+   "id": "P5.newest",
+   "ok": false,
+   "detail": "newest run on disk is _ci, gating 2026-11-15T115243Z",
+   "blocking": false
+  }
+ ],
+ "passed": false,
+ "blocking_failures": [
+  "P3.standings: standings.json: 0 rows, need >= 30",
+  "P3.teams_traditional: teams_traditional.json: 0 rows, need >= 30",
+  "P3.teams_opponent: teams_opponent.json: 0 rows, need >= 30",
+  "P3.teams_advanced: teams_advanced.json: 0 rows, need >= 30",
+  "P3.injury_index: injury_index.json missing from the run"
+ ],
+ "advisory": [
+  "P4.pdf_present: 0 injury PDFs archived in this run",
+  "P5.newest: newest run on disk is _ci, gating 2026-11-15T115243Z"
+ ],
+ "slas_hours": {
+  "standings": 24.0,
+  "teams_traditional": 36.0,
+  "teams_opponent": 36.0,
+  "teams_advanced": 36.0,
+  "injury_index": 6.0
+ },
+ "count_of_fetches": 12,
+ "count_of_injury_pdfs": 0
+}

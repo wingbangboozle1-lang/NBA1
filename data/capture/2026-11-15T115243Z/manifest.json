@@ -1,0 +1,243 @@
+{
+ "run_id": "2026-11-15T115243Z",
+ "created_at_utc": "2026-11-15T11:52:43Z",
+ "season": "2026-27",
+ "slate_dates": [
+  "2026-11-15",
+  "2026-11-16",
+  "2026-11-17",
+  "2026-11-18"
+ ],
+ "result_dates": [
+  "2026-11-14",
+  "2026-11-13"
+ ],
+ "allowed_hosts": [
+  "ak-static.cms.nba.com",
+  "cdn.nba.com",
+  "official.nba.com",
+  "www.nba.com"
+ ],
+ "parser_version": "2026-11-15.1",
+ "fetches": [
+  {
+   "url": "https://www.nba.com/games?date=2026-11-13",
+   "host": "www.nba.com",
+   "allowed": true,
+   "http_status": 200,
+   "bytes": 569485,
+   "sha256": "00fa9f030c082cdd8e6d827a571d0ccdc3bcab2e7357fcb4a39bc8224e033168",
+   "fetched_at_utc": "2026-11-15T11:52:43Z",
+   "error": null,
+   "last_modified": null,
+   "content_type": "text/html; charset=utf-8",
+   "parser": "parse_games_page",
+   "parsed_rows": null
+  },
+  {
+   "url": "https://www.nba.com/games?date=2026-11-14",
+   "host": "www.nba.com",
+   "allowed": true,
+   "http_status": 200,
+   "bytes": 434258,
+   "sha256": "5136d0b9c3c90d6c5c86b7ab993cf8db5d3a799fffb7856f0212e0217c787bd6",
+   "fetched_at_utc": "2026-11-15T11:52:43Z",
+   "error": null,
+   "last_modified": null,
+   "content_type": "text/html; charset=utf-8",
+   "parser": "parse_games_page",
+   "parsed_rows": null
+  },
+  {
+   "url": "https://www.nba.com/games?date=2026-11-15",
+   "host": "www.nba.com",
+   "allowed": true,
+   "http_status": 200,
+   "bytes": 373717,
+   "sha256": "8f00c0705972fb2e6da022c87ea693eff51d2e76e7361ed27221d1ba27592036",
+   "fetched_at_utc": "2026-11-15T11:52:43Z",
+   "error": null,
+   "last_modified": null,
+   "content_type": "text/html; charset=utf-8",
+   "parser": "parse_games_page",
+   "parsed_rows": null
+  },
+  {
+   "url": "https://www.nba.com/games?date=2026-11-16",
+   "host": "www.nba.com",
+   "allowed": true,
+   "http_status": 200,
+   "bytes": 365945,
+   "sha256": "374ba9cd95589c8ce931e614c7e385bf43c3a1f76a44e1d278879ed47041c288",
+   "fetched_at_utc": "2026-11-15T11:52:44Z",
+   "error": null,
+   "last_modified": null,
+   "content_type": "text/html; charset=utf-8",
+   "parser": "parse_games_page",
+   "parsed_rows": null
+  },
+  {
+   "url": "https://www.nba.com/games?date=2026-11-17",
+   "host": "www.nba.com",
+   "allowed": true,
+   "http_status": 200,
+   "bytes": 360822,
+   "sha256": "d3653375b9fef1c1a002a774eb93fcf96dd09dc13fa5d8eae9b9da9c18b798f0",
+   "fetched_at_utc": "2026-11-15T11:52:44Z",
+   "error": null,
+   "last_modified": null,
+   "content_type": "text/html; charset=utf-8",
+   "parser": "parse_games_page",
+   "parsed_rows": null
+  },
+  {
+   "url": "https://www.nba.com/games?date=2026-11-18",
+   "host": "www.nba.com",
+   "allowed": true,
+   "http_status": 200,
+   "bytes": 417124,
+   "sha256": "b02ed4a262ce914fe9f304cc5fe9d9ca90044a0cad7987dadcb43ca95f6bc8e9",
+   "fetched_at_utc": "2026-11-15T11:52:45Z",
+   "error": null,
+   "last_modified": null,
+   "content_type": "text/html; charset=utf-8",
+   "parser": "parse_games_page",
+   "parsed_rows": null
+  },
+  {
+   "url": "https://www.nba.com/standings",
+   "host": "www.nba.com",
+   "allowed": true,
+   "http_status": 200,
+   "bytes": 254353,
+   "sha256": "4368e96d173c69db6b7b0d01ca56352bfb85376d596aea6fbbd1f9c0cc992e1c",
+   "fetched_at_utc": "2026-11-15T11:52:45Z",
+   "error": null,
+   "last_modified": null,
+   "content_type": "text/html; charset=utf-8",
+   "parser": "parse_standings",
+   "parsed_rows": 0
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+   "host": "www.nba.com",
+   "allowed": true,
+   "http_status": 200,
+   "bytes": 322694,
+   "sha256": "f921ab98ca630a8a164352f446482b45555abc2ac991f6a3477d35f0e0860efe",
+   "fetched_at_utc": "2026-11-15T11:52:45Z",
+   "error": null,
+   "last_modified": null,
+   "content_type": "text/html; charset=utf-8",
+   "parser": "parse_stats_teams",
+   "parsed_rows": 0
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+   "host": "www.nba.com",
+   "allowed": true,
+   "http_status": 200,
+   "bytes": 322664,
+   "sha256": "1b5b1649c76d82f2bb82d7bfbd4ed61a2d040ee66b17f50d39733dae9c76f7c0",
+   "fetched_at_utc": "2026-11-15T11:52:45Z",
+   "error": null,
+   "last_modified": null,
+   "content_type": "text/html; charset=utf-8",
+   "parser": "parse_stats_teams",
+   "parsed_rows": 0
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "host": "www.nba.com",
+   "allowed": true,
+   "http_status": 200,
+   "bytes": 322664,
+   "sha256": "a68fcd98be5093e6e7499c062a373a3896b4129969bc5105015c6db1e5ae7726",
+   "fetched_at_utc": "2026-11-15T11:52:45Z",
+   "error": null,
+   "last_modified": null,
+   "content_type": "text/html; charset=utf-8",
+   "parser": "parse_stats_teams",
+   "parsed_rows": 0
+  },
+  {
+   "url": "https://www.nba.com/game/nyk-vs-ind-0022600034",
+   "host": "www.nba.com",
+   "allowed": true,
+   "http_status": 200,
+   "bytes": 711667,
+   "sha256": "1d20e35f350fc26bbd7c44ee80c0622331ad2079ebd9f50a543ef24bcbbfcb4f",
+   "fetched_at_utc": "2026-11-15T11:52:45Z",
+   "error": null,
+   "last_modified": null,
+   "content_type": "text/html; charset=utf-8",
+   "parser": "parse_game_page",
+   "parsed_rows": null
+  },
+  {
+   "url": "https://www.nba.com/game/mil-vs-orl-0022600035",
+   "host": "www.nba.com",
+   "allowed": true,
+   "http_status": 200,
+   "bytes": 681173,
+   "sha256": "751c65702f4d6d413eb1b60e1831982a5dc3bf5a9f7288910206459053198df9",
+   "fetched_at_utc": "2026-11-15T11:52:46Z",
+   "error": null,
+   "last_modified": null,
+   "content_type": "text/html; charset=utf-8",
+   "parser": "parse_game_page",
+   "parsed_rows": null
+  }
+ ],
+ "findings": [
+  {
+   "level": "info",
+   "detail": "games?date=2026-11-13: 10 game links, 0 time/record triples, 0 finals"
+  },
+  {
+   "level": "info",
+   "detail": "games?date=2026-11-14: 5 game links, 0 time/record triples, 0 finals"
+  },
+  {
+   "level": "info",
+   "detail": "games?date=2026-11-15: 10 game links, 0 time/record triples, 0 finals"
+  },
+  {
+   "level": "info",
+   "detail": "games?date=2026-11-16: 9 game links, 0 time/record triples, 0 finals"
+  },
+  {
+   "level": "info",
+   "detail": "games?date=2026-11-17: 6 game links, 0 time/record triples, 0 finals"
+  },
+  {
+   "level": "info",
+   "detail": "games?date=2026-11-18: 13 game links, 0 time/record triples, 0 finals"
+  },
+  {
+   "level": "info",
+   "detail": "1 promo game link(s) appeared on more than one date's page and were dropped as page furniture: ['0022600232']"
+  },
+  {
+   "level": "error",
+   "detail": "standings: parsed 0 rows, expected 30"
+  },
+  {
+   "level": "error",
+   "detail": "teams/traditional: parsed 0 rows, expected 30"
+  },
+  {
+   "level": "error",
+   "detail": "teams/opponent: parsed 0 rows, expected 30"
+  },
+  {
+   "level": "error",
+   "detail": "teams/advanced: parsed 0 rows, expected 30"
+  },
+  {
+   "level": "info",
+   "detail": "players: skipped (DEBUG_ONLY)"
+  }
+ ],
+ "finished_at_utc": "2026-11-15T11:52:46Z"
+}
