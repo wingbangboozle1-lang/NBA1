@@ -1,6 +1,6 @@
 {
   "title": "Flagged for Review",
-  "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md \u00a723): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link.",
+  "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link.",
   "items": [
     {
       "id": "F1",
@@ -329,7 +329,7 @@
       "id": "F34",
       "severity": "Medium",
       "title": "The repository's gate checks structure, not values",
-      "detail": "The dashboard gate is structural, not a value check: scripts/verify_dashboard.py counts four categories separately \u2014 rows with an allowed official source link, explicit no-source marks with an explanatory title, marks whose title carries an approved official URL (rendered as a clickable context link since 2026-11-14), and unmarked rows \u2014 and fails only on the last category. It never fetches an NBA page and never compares a published value with its source; scripts/source_check.py is the row-value spot-check, and both were run on the merged tree before every merge (COORDINATION section 35). The original finding stands: a link is not a value check.",
+      "detail": "The dashboard gate is structural, not a value check: scripts/verify_dashboard.py counts four categories separately — rows with an allowed official source link, explicit no-source marks with an explanatory title, marks whose title carries an approved official URL (rendered as a clickable context link since 2026-11-14), and unmarked rows — and fails only on the last category. It never fetches an NBA page and never compares a published value with its source; scripts/source_check.py is the row-value spot-check, and both were run on the merged tree before every merge (COORDINATION section 35). The original finding stands: a link is not a value check.",
       "affected": "Trust in 'VERIFY OK' and in every 'verified' label on the site",
       "source": null,
       "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_all.py",
@@ -713,6 +713,22 @@
       "title": "Venue/city blank for ORL, OKC and DAL home rows in the 2026-11-18 capture",
       "detail": "Date cards do not print venues and no repo capture holds those arenas - left blank, never inferred.",
       "source_url": "https://www.nba.com/games?date=2026-11-18",
+      "status": "open"
+    },
+    {
+      "id": "F78",
+      "severity": "high",
+      "title": "Injury banner named the 11/15 06:15 AM ET edition as newest; a 05:15 PM ET edition is live on the official host",
+      "detail": "Read by fetch_page at about 2026-11-15 23:38 UTC from ak-static.cms.nba.com: 'Injury Report: 11/15/26 05:15 PM' (PDF header). Its rows have NOT been transcribed, diffed, or used in any line. The site now carries a warning banner saying so. Action for review: ingest the 05:15 PM edition, compute the consecutive diff against 06:15 AM, and decide whether the 11/15 lines need a revision note.",
+      "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_15PM.pdf",
+      "status": "open"
+    },
+    {
+      "id": "F79",
+      "severity": "high",
+      "title": "Scheduled refresh gate fails: official-page parsers return zero rows",
+      "detail": "data/raw/_last_refresh.json (workflow_ref arena/83d380ad-nba1, run 2026-11-15T12:47:50Z) records gate_outcome FAIL with failed parsers: S1_season and S2_train and S8_traditional and S9_opponent ('expected 30 team rows, parsed 0'), S4_schedule ('no game links found'), S5_injury_index ('no injury-report links found'). The probe record (data/raw/probe_official.json) shows the same URLs answering HTTP 200 to a browser header set from the runner, so the failure is in the parsers or in the fetch headers, not in reachability. Model snapshots were NOT rebuilt from the failed captures. Action for review: fix the parsers against the live HTML and re-run the gate.",
+      "source_url": "https://www.nba.com/stats/teams/advanced",
       "status": "open"
     }
   ]

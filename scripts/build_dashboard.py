@@ -1622,12 +1622,15 @@ def main():
                              if " & " not in r["matchup"]})
     n_flags = len(flagged["items"])
     body = []
+    hz = load(os.path.join(ROOT, "data", "derived", "horizon_lines.json"))
+    hz_games = len(hz["games"])
     body.append(tiles([
-        ("Games in horizon", n_games, "14&ndash;17 Nov 2026 (today + 3 days)"),
-        ("Originated lines", n_games, "spread, total and fair moneyline per game"),
+        ("Games in horizon (15&ndash;18 Nov)", hz_games,
+         "rolling slate 15&ndash;18 Nov 2026 (today + 3 days) &mdash; see the picks page"),
+        ("Originated lines", hz_games, "spread, total and fair moneyline per game"),
         ("Paper picks, single-leg", n_singles,
-         "%d of %d games &middot; +%d two-leg combos = %d plays; none market-validated"
-         % (n_games_with_pick, n_games, n_leg_combo, n_picks)),
+         "%d of %d games &middot; +%d two-leg combos = %d plays in the strategy-lab window (14&ndash;17 Nov); the 15&ndash;18 roll publishes %d singles on the picks page"
+         % (n_games_with_pick, n_games, n_leg_combo, n_picks, 33)),
         ("Strategies tested", len(lb["rows"]), "%d capped at a quarter unit &middot; %d research-only"
          % (sum(1 for r in lb["rows"] if "Not funded" not in r["tier"]),
             sum(1 for r in lb["rows"] if "Not funded" in r["tier"]))),
@@ -1927,18 +1930,18 @@ def main():
         _newer = None
     if _newer:
         _sm = _newer["summary"]
-        b.append(banner("warn", "A newer official injury edition exists than the one the model uses",
-            "<p>The lines on this site are built on the <b>11/13/26 07:30 PM ET</b> edition. On 2026-11-14 this "
-            "session read a newer one, the <b>11/14/26 04:15 AM ET</b> edition "
+        b.append(banner("warn", "Historical: the 11/14 game-day edition handling (superseded)",
+            "<p>This section is a dated record of the 2026-11-14 game-day injury cycle; those lines are "
+            "<b>settled and stamped</b> on the backtest and picks pages, and the 2026-11-15..18 window is priced "
             "(<a href=\"%s\">official PDF</a>), and transcribed all %d rows to "
             "<code>verify/2026-11-14/official_injury_2026-11-14_0415AM_s934ca56f.json</code>. "
-            "It has deliberately <b>not</b> been fed into the model, because it would move every 11/14 line and that "
-            "is a reviewer decision, not an integration step.</p>"
-            "<p><b>What it changes in practice: very little.</b> The same five of the ten teams playing on 11/14 "
+            "from the <b>11/15/26 06:15 AM ET</b> edition (see the current-edition banner above). It was "
+            "deliberately <b>not</b> fed into the settled 11/14 lines, because a line re-priced after the cut cannot be graded.</p>"
+            "<p><b>What it showed:</b> five of the ten teams playing on 11/14 "
             "(%s) still print <b>NOT YET SUBMITTED</b>; the teams that filed are %s. The %d player-level rows are "
             "Denver, Dallas, Brooklyn, Minnesota and Detroit. The 11/15 games do appear in this edition but every "
-            "team is NOT YET SUBMITTED, and no 11/16 or 11/17 game appears at all. So the older edition was not "
-            "hiding a status change &mdash; it was simply one publication cycle behind.</p>"
+            
+            
             % (_newer["source_url"], _sm["rows_transcribed"],
                ", ".join(_sm["teams_not_yet_submitted_for_a_2026_11_14_game"]),
                ", ".join(_sm["teams_that_filed_for_a_2026_11_14_game"]),
@@ -2009,7 +2012,7 @@ def main():
                          "(<a href=\"../../data/official/injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json\">diff file</a>)."
                          % (_c.get("comparable_player_rows", 0), _c.get("status_changes", 0),
                             len(_df.get("team_blocks_filed_since", []))))
-        b.insert(0, banner("info", "Newest official edition: report revision and retrieval time",
+        b.insert(0, banner("info", "Edition shown below: report revision and retrieval time",
                            "<p><b>Report revision:</b> %s &nbsp;|&nbsp; <b>retrieved (UTC):</b> %s &nbsp;|&nbsp; "
                            "<b>rows:</b> %d (%d player rows, %d NOT YET SUBMITTED team blocks). "
                            "Source: <a href=\"%s\">official PDF</a> (index: <a href=\"%s\">official.nba.com</a>).</p>"
@@ -2019,6 +2022,14 @@ def main():
                               esc(_n.get("source_url")), esc(_n.get("index_url")),
                               diff_note,
                               esc(_n.get("merged_cell_caveat", "")))))
+    # Newer official edition seen on the NBA host but NOT yet ingested (flag F78).
+    # Stated as a fact about the source only; no row of it is used anywhere.
+    b.insert(0, banner("warn", "A newer official edition exists and is NOT yet ingested",
+                       "<p><b>Newer edition on the official host:</b> 2026-11-15 05:15 PM ET "
+                       "(<a href=\"https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_15PM.pdf\">official PDF</a>), "
+                       "read at about 2026-11-15 23:38 UTC during the session check. The rows below are the "
+                       "06:15 AM ET edition (retrieved 11:52 UTC). The 05:15 PM edition has not been transcribed, diffed, "
+                       "or fed into any line; it is flagged for review as F78.</p>"))
     built["injuries.html"] = page("Injuries, rotation and production impact",
                                   "The official injury report for the horizon, what it does to rotation minutes, "
                                   "and the measured effect on a team's net rating.", "\n".join(b))

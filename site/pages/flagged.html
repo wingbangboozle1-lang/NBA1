@@ -749,6 +749,24 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">link</a></td>
 </tr>
+<tr>
+<td>F78</td>
+<td>high</td>
+<td><b>Injury banner named the 11/15 06:15 AM ET edition as newest; a 05:15 PM ET edition is live on the official host</b></td>
+<td>Read by fetch_page at about 2026-11-15 23:38 UTC from ak-static.cms.nba.com: 'Injury Report: 11/15/26 05:15 PM' (PDF header). Its rows have NOT been transcribed, diffed, or used in any line. The site now carries a warning banner saying so. Action for review: ingest the 05:15 PM edition, compute the consecutive diff against 06:15 AM, and decide whether the 11/15 lines need a revision note.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_15PM.pdf" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F79</td>
+<td>high</td>
+<td><b>Scheduled refresh gate fails: official-page parsers return zero rows</b></td>
+<td>data/raw/_last_refresh.json (workflow_ref arena/83d380ad-nba1, run 2026-11-15T12:47:50Z) records gate_outcome FAIL with failed parsers: S1_season and S2_train and S8_traditional and S9_opponent ('expected 30 team rows, parsed 0'), S4_schedule ('no game links found'), S5_injury_index ('no injury-report links found'). The probe record (data/raw/probe_official.json) shows the same URLs answering HTTP 200 to a browser header set from the runner, so the failure is in the parsers or in the fetch headers, not in reachability. Model snapshots were NOT rebuilt from the failed captures. Action for review: fix the parsers against the live HTML and re-run the gate.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">link</a></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
