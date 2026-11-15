@@ -1,0 +1,27 @@
+{
+ "captured_at_utc": "2026-11-15T12:43:11Z",
+ "source_url": "https://www.nba.com/standings",
+ "page_sha256": "bdda537e47f4b02a672e83255c4f1e01786081dfaf39ad0cc05dbc13a2c05b5a",
+ "chunk_probe": [
+  {
+   "chunk": "/_next/static/chunks/80814-d834ab48bfc598b9.js",
+   "hits": {}
+  },
+  {
+   "chunk": "/_next/static/chunks/22403-d57624ffbb5be632.js",
+   "hits": {}
+  },
+  {
+   "chunk": "/_next/static/chunks/79716-ea4d75a9b40da02f.js",
+   "hits": {}
+  },
+  {
+   "chunk": "/_next/static/chunks/57369-2ae918045bd22a1e.js",
+   "hits": {
+    "leaguestandings": 1
+   },
+   "excerpt": "},h=()=>({});var x={resource:o,params:c,transform:d,get:async(e,t=2020)=>{const{SeasonYear:a,State:s}=e||c;if(Number(a)>t){return await i(a,s)}const n={resource:o,parse:e=>e,transform:d,params:{...c,...e},fail:h};return r.Z.get(n)},fail:h}},50144:function(e,t,a){\"use strict\";var r=a(36843);const s=\"leaguestandingsv3\",n=e=>({standings:e.find((e=>\"Standings\"===e.name)).rows}),i=()=>({standings:[]});t.Z={resource:s,transform:n,get:async e=>{const t={resource:s,transform:n,params:e,fail:i};return r.Z.get(t)},fail:i}},70578:function(e,t,a){\"use strict\";a.d(t,{Z:function(){return be}});var r=a(85893),s=a(67294),n=a(77837),i=a(46974),l=a(98963),o=a(3133),c=a(18744);const d=(e,t,a=\"\",r=\"\")=>{const s=e=>(0,o.HD)(e)&&e.length>0;if(s(r))return r;if(s(a))return a;const n=t&&Number(t)?t:null,i=`${c.$}/logos/playoffs/${n??\"fallback\"}/L`;switch(e){case\"play-in-tournament\":return`${i}/playin.svg`;case\"playoff-picture\":return`${i}/playoffs-picture.svg`;case\"full-playoff-bracket\":return`${i}/finals.svg`;default:return`${i}/playoffs.svg`}};var h=a(40553),x=a(45697),m=a.n(x);function g({result:e}){return(0,r.jsx)(\"svg\",{viewBox:\"0 0 31 20\",height:\"20\",width:\"31\",children:(0,r.jsxs)(\"g\",{children:[(0,r"
+  }
+ ],
+ "note": "Evidence capture: rows are transcribed into data/official/standings_YYYY-MM-DD.json by a verified session from this page; promotion gate requires that file to be as fresh as this capture."
+}
