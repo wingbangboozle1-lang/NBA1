@@ -659,6 +659,15 @@
 <td>&mdash;</td>
 <td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
 </tr>
+<tr>
+<td>SG37</td>
+<td><span class="chip info">deployment</span></td>
+<td><b>Give GitHub Pages one deploy path instead of two that race each other</b></td>
+<td>Pages is configured with build_type 'legacy' - it builds the site from the main branch itself - while .github/workflows/pages.yml also deploys an Actions artifact to the same environment. Two builders are writing one site. Measured at 2026-11-16T02:5xZ: 9 consecutive 'pages build and deployment' runs cancelled, one every few minutes, each cancelled by the next push to main, with the last successful build at 2026-11-15T23:44:35Z. Freeing the queue (SG23, PR #115) did not fix it because the starvation is structural, not a backlog.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <p class="tnote">Sources are the official pages the suggestion is built on. A suggestion that adds a source is the only kind that can add a link here, which is why the rows for licensed-price work point at the NBA page that shows the gap.</p>
 <h2 class="sec">What the 2026-11-14 18:40Z re-read changed, and what it did not</h2><p class="secsub">Recorded here because a decision page that hides its own findings is not a decision page.</p>
