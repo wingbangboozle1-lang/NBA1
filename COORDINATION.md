@@ -5239,3 +5239,40 @@ because each push is exactly what cancels the pending build.
 `pages.yml`, which is worse because it loses the pre-deploy `validate` gate). Until then the
 live host serves the 2026-11-15T23:44Z build, and **no fetch-back can be used to prove what
 `main` contains** — verify against the tree and the Actions run log instead.
+
+### 43.4 Deploy status, re-measured 2026-11-16 03:20Z — cause is now **identified**, and it is not this branch
+
+§43.3 said the Pages deploy was blocked by a cancelling/stuck queue. That was the symptom. A later,
+independent measurement by other sessions (flags **F97**, **F107**) names the cause, and this session
+re-measured it directly rather than repeating it:
+
+| Measurement | Command | Result |
+| --- | --- | --- |
+| Site build type and source | `gh api /repos/OWNER/REPO/pages` | `"build_type": "legacy"`, `"source": {"branch":"main","path":"/"}` |
+| Why each legacy build fails | `gh api /repos/OWNER/REPO/pages/builds` | `"error": {"message": "Page build failed."}` on every build; the newest is stuck in `building` for 12+ minutes |
+| Attempt to switch the source to Actions | `gh api -X PUT /repos/OWNER/REPO/pages -f build_type=workflow` | **HTTP 403 `Resource not accessible by integration`** — the session token cannot change it |
+| Live host | `fetch_page https://wingbangboozle1-lang.github.io/NBA1/site/pages/requirements.html` | returns the build from **`afc79f2`** (2026-11-15T23:44Z), i.e. the site is frozen one commit before this work merged |
+| This branch's page | `fetch_page …/verify/2026-11-15-3242d896/index.html` | **404** — expected while the site is frozen at `afc79f2` |
+
+**Why this is not attributable to this session's diff:** the failure mode is the legacy branch builder
+returning `Page build failed.` for every commit, including commits that contain none of this session's
+files, and `afc79f2` — the same content minus `verify/2026-11-15-3242d896/` — built and served
+successfully. The setting change that resolves it is a **repository-owner action** (Settings → Pages →
+Build and deployment → Source: **GitHub Actions**), which F97 already records. I attempted it and the
+token was refused; that is recorded above rather than worked around.
+
+**What is therefore verified, and what is not.**
+
+- **Verified:** PR #111 and PR #120 are merged into `main` (`1d99e1c`, `f6b7676`); `validate` passed on
+  both heads before merge; `verify/2026-11-15-3242d896/` is in `main` and `reproduce.py` exits 0 against
+  the current tree; every repository gate is green on the merged head (§43.2, §43.3).
+- **Not verified, and not claimed:** that the audit page is reachable at
+  `https://wingbangboozle1-lang.github.io/NBA1/verify/2026-11-15-3242d896/index.html`. It returns 404
+  because no session can currently publish. This is a **handoff to the repository owner (R-43-F)**, and
+  it will resolve itself on the first successful deploy after the Pages source is set to GitHub Actions
+  — the file is already on `main`, so no further code change is needed.
+
+- **R-43-F — for the repository owner:** set Settings → Pages → Build and deployment → Source to
+  **GitHub Actions**. Then confirm with
+  `gh api /repos/OWNER/REPO/pages --jq .status` → `built` and a 200 on the audit page. This unblocks
+  every session's published work, not just this one.
