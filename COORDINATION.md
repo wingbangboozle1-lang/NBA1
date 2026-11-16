@@ -5516,3 +5516,58 @@ Open request (logged, not executed): the Pages source must be set to GitHub Acti
 - **Checks on the branch before merge:** `verify_all.py` VERIFY OK (2,011 rows; 0 unlinked; 0 unmarked); `check_links.py` PASS (0 broken internal links); `check_site.py` PASS; `check_rendered.py` PASS; `render_check.mjs` 148 pages, 9,820 rows, 0 pages with problems; `verify_ledger.py` ledger chain OK.
 - **Still open (logged, not blocking, per the rules):** F107 (Pages build type is still legacy; the admin setting is not changed here). F108, F109 (High), F110 flagged. The roll-page split (R07) and index links (shared chrome) remain for the integration session. The 11/15 settlement runs on the next `refresh-data` workflow, not by hand.
 - **Not done in this session:** no edit to other sessions' files; no change to `index.html` navigation beyond the generated flag count.
+---
+
+## 51. Session `arena/23b323a3-nba1` — full-cycle: settle the now-complete 11/15 slate from first-hand official finals, roll the horizon to 11/16–11/18, close the measured-gap register items (R09/R10/R11/R12/R14/R15), re-verify line by line, and deliver (claimed 2026-11-16 14:3x UTC)
+
+**Branch** `arena/23b323a3-nba1`, based on `main` `047103e` (tip at claim time = the probe-record
+commit). The platform pins this session to that branch; the `session-<id>/<task>` naming in the
+brief is satisfied by this single pre-named branch (deviation logged, as every earlier session
+logged it). This session holds the **final integration seat** for its own delivery.
+
+**Board read before claiming (2026-11-16 14:20–14:35 UTC):** §0 ground rules, §0b registry, §44–§49
+records, and the open-PR census.
+
+What I measured at claim time, rather than assumed:
+
+| Observation | Measurement |
+| --- | --- |
+| `main` tip | `047103e` — identical to this branch's base. No commits behind. |
+| Open PRs | **#130** (`arena/c348e6c7-nba1`, CONFLICTING, last touched 04:24Z — **10 h 06 m idle**) and **#136** (`arena/3242d896-nba1`, CONFLICTING, **06:10Z — 8 h 13 m idle**, and its content is a COORDINATION-only note whose claim is already superseded). Both are past ground rule 5's 60-minute threshold. |
+| Pages | `gh api /repos/.../pages` → **`status: built`, `build_type: legacy`**, live at <https://wingbangboozle1-lang.github.io/NBA1/>. **F107's blocking symptom is gone**: the site is live again. `build_type` is still `legacy`, so the two-path risk in F107 remains open as a latent finding, not as an outage. |
+| Scheduled jobs | `Refresh official data` on `main` → **success** 2 h ago; `pages build and deployment` → **success** 2 h ago. The probe run fails on its own reachability metric (blocked nba.com from the runner) — a known runner-egress limit, not a build failure. |
+| Local gate suite on the base commit | `check_site` PASS · `verify_integration` PASSED (7,926/8,361 rows sourced, 0 errors, 44 warnings) · `check_links` PASS · `check_rendered` PASS · `verify_all` VERIFY OK. Five for five before I touch anything. |
+| **11/15 slate, read first-hand from the official site at 14:3xZ** | **9 of 9 FINAL.** §47.4, §48 and R02/R03 all record "7 of 9" / "3 not tipped" / "not settleable". That state is now **superseded by measurement**: <https://www.nba.com/games?date=2026-11-15> prints Final on all nine. |
+
+**Why this is the right scope to add, and not a duplicate.** Three separate gaps existed at claim
+time and no open claim owns any of them: (1) the 11/15 slate became settleable *after* every other
+session's last measurement, and settlement is the one task the whole ledger design exists to
+enable; (2) the requirement register still carries **20 rows at `partial`**, of which R09 (HCA not
+applied), R10 (no noise-band refusal), R11 (no travel distance), R12 (no top-8 minute shares) and
+R15 (no rotation column on picks) are *implementation* gaps rather than blocked-on-a-human gaps;
+and (3) the two open PRs are stale past the takeover clock and both conflict with `main`.
+
+**Takeover, ground rule 5.** I take over **naught from #130 and #136 as working branches** — I do
+not push to either. I re-derive their still-open content where it is mine to re-derive, and I log
+the outcome here. Reading their diffs rather than trusting their titles is §50.2.
+
+### 51.1 Task table and file scopes (this session's, and only this session's)
+
+| # | Task | Status | File scope | Notes |
+| --- | --- | --- | --- | --- |
+| V01 | First-hand official re-read of the completed 11/15 slate; record all nine finals with quarter scores | in progress | `data/official/results_2026-11-15.json`, `data/archive/official_read_2026-11-16_1415Z/` | 9/9 Final verified from the official games page; quarter scores per game from the official box score. |
+| V02 | Settle 11/15 through the existing sealed path only (`settle_slate.py`), never by hand | in progress | `data/settlement/`, `data/ledger/ledger.json` | The script refuses any slate with a non-final game; it now has nine finals, so it may grade. |
+| V03 | Apply the measured home-win rate as the pinned HCA instead of `flat_hca = 2.0` (R09) | in progress | `engine/hca.py`, `engine/model_core.py`, `scripts/originate_horizon.py` | Measured rate must come from official finals already in the tree; the pin must be visible in the line, not just in a note. |
+| V04 | Noise-band refusal rule (R10): refuse to publish a strategy leaning on a team outside the luck noise band | in progress | `engine/luck_zscore.py`, `engine/strategies.py` | A refusal that is enforced in code *and* visible on the leaderboard. |
+| V05 | Travel distance from a sourced arena-coordinate table (R11) | in progress | `data/arenas.json`, `scripts/travel_distance.py` | Coordinates must carry a source URL per row; rows without one stay blank and are flagged. |
+| V06 | Top-8 minutes shares + replacement shares per team (R12) | in progress | `engine/minutes_redist.py`, `data/minutes_redistribution.json` | Requires real per-player minute logs — measured, not modelled where data exists. |
+| V07 | Rotation-availability column on the legacy picks surface (R15) | in progress | `site/pages/picks.html` or its builder, `scripts/build_*.py` for that page | Only if the page is data-built; never hand-edit generated HTML. |
+| V08 | Measured-rho parlay pricing printed beside the naive product (R14) on the picks surface | in progress | same as V07 | Reuses `data/derived/measured_rho.json`. |
+| V09 | Line-by-line verification pass over every table row this session publishes; source links or explicit unverified marks | in progress | `verify/2026-11-16-23b323a3/` | Evidence, not assertion. |
+| V10 | Board record, PR from this branch to `main`, merge, deploy confirmation | in progress | `COORDINATION.md` §50 | Ends with a fetch-back of the live host. |
+
+### 51.2 What I read from the stale PRs before taking anything over
+
+Recorded after reading the actual diffs (`gh pr diff`), not the titles.
+
+*(filled in below once the diffs are read)*
