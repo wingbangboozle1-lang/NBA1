@@ -13,7 +13,7 @@ Two clearly separated tables are produced:
 """
 
 from common import american_from_prob, bivariate_normal_cdf, norm_ppf, pearson, rnd
-from strategies import SGP_RHO
+from strategies import SGP_RHO, SGP_RHO_PROVENANCE
 
 
 MEASURED_PAIRS = [
@@ -73,26 +73,44 @@ def measured_correlations(season):
 
 
 def model_derived_correlations():
+    """The pairing grid.
+
+    Three of these five correlations are now MEASURED - the register prices them and the
+    value below is the register's, not a hand-typed constant - so the row status is read
+    from SGP_RHO_PROVENANCE rather than asserted for the whole table. Labelling a measured
+    value "not measured" is as wrong as the reverse, and the old label said "MODEL-DERIVED
+    - not measured (F6)" for all five even after scripts/measure_parlay_rho.py landed
+    (session arena/3ff8ff0f-nba1). The derivation prose stays: it explains the mechanism,
+    which a correlation coefficient on its own does not.
+    """
     rows = [
-        ("Side (team A covers)", "Game total", SGP_RHO["side_total"],
+        ("side_total", "Side (team A covers)", "Game total", SGP_RHO["side_total"],
          "Under the additive model the two team scores share the same possession count but "
          "the margin is a difference and the total is a sum; with equal team-score variances "
          "their covariance is zero. This is a derived property of the model, not a measurement."),
-        ("Player over (team A)", "Team A total", SGP_RHO["player_total_same_team"],
+        ("player_total_same_team", "Player over (team A)", "Team A total", SGP_RHO["player_total_same_team"],
          "A player's production is part of his team's total, so the two must move together. "
          "The magnitude is a model estimate."),
-        ("Player over (team A)", "Team A covers", SGP_RHO["player_side_same_team"],
+        ("player_side_same_team", "Player over (team A)", "Team A covers", SGP_RHO["player_side_same_team"],
          "Same mechanism, weaker because covering depends on the opponent too."),
-        ("Player over (team A)", "Teammate over (team A)", SGP_RHO["two_teammates"],
+        ("two_teammates", "Player over (team A)", "Teammate over (team A)", SGP_RHO["two_teammates"],
          "Teammates compete for the same possessions and shots, so the sign should be negative. "
          "Magnitude is a model estimate."),
-        ("Player over (team A)", "Opponent player over", SGP_RHO["two_opponents"],
+        ("two_opponents", "Player over (team A)", "Opponent player over", SGP_RHO["two_opponents"],
          "Only linked through game pace and game script, so close to zero. Model estimate."),
     ]
-    return [{
-        "leg_1": a, "leg_2": b, "rho_model": rnd(r, 3),
-        "derivation": d, "status": "MODEL-DERIVED - not measured (F6)",
-    } for a, b, r, d in rows]
+    out = []
+    for key, a, b, r, d in rows:
+        prov = SGP_RHO_PROVENANCE.get(key, "")
+        measured = prov.startswith("MEASURED")
+        out.append({
+            "leg_1": a, "leg_2": b, "rho_model": rnd(r, 3), "rho_key": key,
+            "derivation": d,
+            "status": ("MEASURED on official data - was MODEL-DERIVED (F6)" if measured
+                       else "MODEL-DERIVED - not measured (F6)"),
+            "rho_provenance": prov or "no register entry consulted",
+        })
+    return out
 
 
 def parlay_pricing_grid():

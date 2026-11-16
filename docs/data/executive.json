@@ -1,12 +1,12 @@
 {
  "title": "Executive Summary",
  "as_of": "2026-11-16 (model inputs re-measured and the ledger re-verified at 2026-11-16T18:20-19:05Z)",
- "headline": "THE MODEL'S HOME-COURT PIN WAS STALE BY THE REPOSITORY'S OWN MEASUREMENT - IT IS NOW DERIVED, AND THE TWO OFFICIAL SOURCES AGREE EXACTLY. The published line model carried 0.5285 (102 home wins in 193 home games, read at 02:13Z with a caveat naming three games still in progress); a fresh read of https://www.nba.com/standings gives 102/196 = 0.5204, and the independent finals corpus in this repo - after 25 unplayed 0-0 placeholder rows stop being counted as games - gives 102/196 = 0.5204 too. The pin moved 1.14 -> 0.87 points and all 29 games in the 11/16-11/19 horizon re-priced from it. Parlay and SGP prices now come from one measured rho register instead of a constant that was labelled measured (flag F128). The 2026-11-15 slate remains settled and untouched: a pin change never re-grades history.",
+ "headline": "THE MODEL'S HOME-COURT PIN WAS STALE BY THE REPOSITORY'S OWN MEASUREMENT - IT IS NOW DERIVED, AND THE TWO OFFICIAL SOURCES AGREE EXACTLY. The published line model carried 0.5285 (102 home wins in 193 home games, read at 02:13Z with a caveat naming three games still in progress); a fresh read of https://www.nba.com/standings gives 102/196 = 0.5204, and the independent finals corpus in this repo - after 25 unplayed 0-0 placeholder rows stop being counted as games - gives 102/196 = 0.5204 too. The pin moved 1.14 -> 0.87 points and all 29 games in the 11/16-11/19 horizon re-priced from it. Parlay and SGP prices now come from one measured rho register instead of a constant that was labelled measured (flag F135). The 2026-11-15 slate remains settled and untouched: a pin change never re-grades history.",
  "lead": "This cycle was a re-measurement, not a re-read of the news. Four register items were blocked on a derivation nobody had run: the home-court pin (R09), the correlation that prices parlays (R14), the legacy Lines & Picks headline and availability column (R13/R15), and the injury-archive audit (R04). All four were closed by computing from the official data already committed plus one first-hand standings read, and two defects were found in the process: a pricer whose 'measured' rho was an unreachable lookup with a literal behind it, and a results corpus in which games that have not been played print 0-0 and were being counted as finals by four model inputs. scripts/test_hca_pin.py and scripts/test_rho_pricing.py now fail the build if either regresses, and both run in CI.",
  "verdict": {
   "status": "PROVISIONAL - not funded",
   "one_line": "the numbers moved, the confidence signal did not: mean estimator disagreement across the horizon is 0.43 pp with all 29 games inside the 4.0 pp publish gate, while 10 of 29 picks still fail the minutes-redistribution gate and no strategy has cleared the validation gates, so nothing here is stakeable",
-  "what_would_change_it": "an official closing price for the market-anchored prior (R16, Q32); 24 more game-days of box scores to clear the teammate-rho floor (F131); and injury editions filed nearer tip than the 10:30 AM ET one that is newest on disk (F132)",
+  "what_would_change_it": "an official closing price for the market-anchored prior (R16, Q32); 24 more game-days of box scores to clear the teammate-rho floor (F138); and injury editions filed nearer tip than the 10:30 AM ET one that is newest on disk (F139)",
   "why": "the confidence signal is unchanged in kind and the numbers moved a little: mean estimator disagreement across the 29-game horizon is 0.43 pp with every game inside the 4.0 pp publish gate, while 10 of 29 picks still fail the minutes-redistribution gate and no strategy has cleared the validation gates - so the correct reading is that the model got better measured, not that it got better."
  },
  "findings": [
@@ -24,13 +24,13 @@
   },
   {
    "title": "The parlay page's 'measured' rho was a literal",
-   "reading": "engine/parlay.py read a `rho` key that does not exist in the file it named and fell back to 0.15 while printing 'measured from historical same-game pairs'. The pairing it prices is side + total, whose measured rho is -0.038 (n = 196, p = 0.60) - the wrong sign, so the page was inflating parlay probabilities. All three pricing rhos now come from data/derived/parlay_rho.json, printed with n, interval, jackknife range and sample-floor status, beside the naive product on every row (F128).",
+   "reading": "engine/parlay.py read a `rho` key that does not exist in the file it named and fell back to 0.15 while printing 'measured from historical same-game pairs'. The pairing it prices is side + total, whose measured rho is -0.038 (n = 196, p = 0.60) - the wrong sign, so the page was inflating parlay probabilities. All three pricing rhos now come from data/derived/parlay_rho.json, printed with n, interval, jackknife range and sample-floor status, beside the naive product on every row (F135).",
    "detail": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/parlay_rho.json",
    "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/parlay_rho.json"
   },
   {
    "title": "Teammate correlation: measured, thin, labelled",
-   "reading": "rho(teammate points, teammate points) = 0.4213 over 672 same-team pairs from the 12 team-games of 6 game-days of official gamebooks. The pair-level p-value is deliberately not published (6 games are not 672 independent observations); the game-level delete-a-group jackknife gives t = 19.8 on 5 df against a 5% critical value of 2.571, with the caveat that six clusters understate uncertainty. It is below its declared 30-game-day floor, and the rows say so (F131).",
+   "reading": "rho(teammate points, teammate points) = 0.4213 over 672 same-team pairs from the 12 team-games of 6 game-days of official gamebooks. The pair-level p-value is deliberately not published (6 games are not 672 independent observations); the game-level delete-a-group jackknife gives t = 19.8 on 5 df against a 5% critical value of 2.571, with the caveat that six clusters understate uncertainty. It is below its declared 30-game-day floor, and the rows say so (F138).",
    "detail": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/parlay_rho.json",
    "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/parlay_rho.json"
   },
@@ -42,7 +42,7 @@
   },
   {
    "title": "Injury archive: 88 PDFs verified, and the reader was losing their provenance",
-   "reading": "scripts/verify_injury_pdf_archive.py recomputes every stored PDF's SHA-256 and compares it with the hash in its own filename and in its sidecar, checks the sidecar byte count against the file, and confirms each sidecar URL names its edition: 88 for 88 OK, editions 11/15 12:00 AM to 11/16 10:30 AM ET. The consecutive-diff chain was rebuilt to full coverage - 87 diffs for 87 pairs, 25 player status/reason changes, 244 newly listed, 265 no longer listed. Auditing it found that engine/injury_diff.py read only one of the two sidecar schemas, so 76 editions parsed with null source_url and null retrieval time - the evidence was on disk and lost in the reader. Fixed; all 88 editions now publish both (F130, SG39).",
+   "reading": "scripts/verify_injury_pdf_archive.py recomputes every stored PDF's SHA-256 and compares it with the hash in its own filename and in its sidecar, checks the sidecar byte count against the file, and confirms each sidecar URL names its edition: 88 for 88 OK, editions 11/15 12:00 AM to 11/16 10:30 AM ET. The consecutive-diff chain was rebuilt to full coverage - 87 diffs for 87 pairs, 25 player status/reason changes, 244 newly listed, 265 no longer listed. Auditing it found that engine/injury_diff.py read only one of the two sidecar schemas, so 76 editions parsed with null source_url and null retrieval time - the evidence was on disk and lost in the reader. Fixed; all 88 editions now publish both (F137, SG39).",
    "detail": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_injury_pdf_archive.py",
    "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_injury_pdf_archive.py"
   },
@@ -156,7 +156,7 @@
   ],
   [
    "Flags",
-   "130 open items on the Flagged for Review page, including the four this session found (F128 rho label, F129 0-0 finals, F130 sidecar schema, F131 thin teammate rho) plus F132-F134 for the archive lag and the two brittle tests."
+   "130 open items on the Flagged for Review page, including the four this session found (F135 rho label, F136 0-0 finals, F137 sidecar schema, F138 thin teammate rho) plus F139-F141 for the archive lag and the two brittle tests."
   ],
   [
    "Gates",
@@ -190,14 +190,14 @@
   },
   {
    "rank": 3,
-   "action": "Let the 22:15Z scheduled run capture the afternoon injury editions (F132)",
+   "action": "Let the 22:15Z scheduled run capture the afternoon injury editions (F139)",
    "why": "The newest archived edition is 11/16 10:30 AM ET while tonight's games tip at 7:00-8:00 PM ET, so several rotation-availability cells legitimately read 'not submitted'.",
    "added_by": "arena/3ff8ff0f-nba1",
    "added_utc": "2026-11-16T18:20-19:05Z"
   },
   {
    "rank": 4,
-   "action": "Extend the gamebook corpus to 30 game-days (F131/Q33)",
+   "action": "Extend the gamebook corpus to 30 game-days (F138/Q33)",
    "why": "It is the only thing standing between the teammate SGP price and a real interval; each game-day is one addressable official PDF.",
    "added_by": "arena/3ff8ff0f-nba1",
    "added_utc": "2026-11-16T18:20-19:05Z"

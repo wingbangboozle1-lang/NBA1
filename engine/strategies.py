@@ -7,7 +7,9 @@ UNGRADED rather than being scored with substituted numbers.
 """
 
 import itertools
+import json
 import math
+import os
 
 from common import (american_from_prob, binom_test_two_sided, bivariate_normal_cdf,
                     norm_cdf, norm_ppf, rnd, wilson_ci)
@@ -122,15 +124,77 @@ STRATEGIES = [
     },
 ]
 
-# Model-derived same-game correlations. These are NOT measured from official data
-# (that would need play-by-play). Flagged F6.
-SGP_RHO = {
+# Same-game correlations, read from the measured register where the register measures the
+# pairing.  Before 2026-11-16 this block was five hand-typed constants and the comment
+# said so (flag F6); request X-57-02 in COORDINATION 57.7 then found that the S10 prices
+# this module emits were being built with `side_total = 0.00` while the roll page published
+# a measured -0.06, i.e. the same pairing priced two different ways on two surfaces of one
+# site.  The values now come from data/derived/parlay_rho.json (scripts/measure_parlay_rho.py,
+# computed from the verified official finals and the official gamebooks), and each key
+# carries its provenance so a reader can see which number is a measurement and which is
+# still an assumption.  `python3 scripts/test_rho_pricing.py` fails if a value here stops
+# matching the register or if a fallback loses its label.
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+RHO_REGISTER = os.path.join(ROOT, "data", "derived", "parlay_rho.json")
+
+# model-derived fallbacks, kept only for pairings no official corpus in this repository
+# can measure (they need player-level lines over more game-days than exist).
+_SGP_RHO_FALLBACK = {
     "side_total": 0.00,
     "player_total_same_team": 0.30,
     "player_side_same_team": 0.25,
     "two_teammates": -0.20,
     "two_opponents": 0.05,
+    # legs on DIFFERENT games: independence is an assumption, not a measurement - the
+    # repository has no cross-game correlation estimate, and none is invented here.
+    "cross_game": 0.00,
 }
+
+# which register pairing answers which local key
+_RHO_KEY_MAP = {
+    "side_total": "side_and_total",
+    "two_teammates": "same_team_players",
+    "two_opponents": "cross_team_points",
+}
+
+
+def _rho_register():
+    try:
+        with open(RHO_REGISTER, encoding="utf-8") as fh:
+            return (json.load(fh) or {}).get("register") or {}
+    except (OSError, ValueError):
+        return {}
+
+
+def _load_sgp_rho():
+    """Measured rho per pairing where the register has one; labelled fallback otherwise."""
+    reg = _rho_register()
+    vals, prov = {}, {}
+    for key, fb in _SGP_RHO_FALLBACK.items():
+        entry = reg.get(_RHO_KEY_MAP.get(key, ""), {}) if key in _RHO_KEY_MAP else {}
+        rho = entry.get("rho_measured")
+        if rho is None:
+            vals[key] = fb
+            prov[key] = ("ASSUMED INDEPENDENCE - no cross-game correlation is measured in "
+                         "this repository, so multi-game legs are priced as if one game told "
+                         "you nothing about the next"
+                         if key == "cross_game" else
+                         "FALLBACK MODEL CONSTANT - not measured; no pairing in the register "
+                         "answers this one (it needs player-level lines over more game-days "
+                         "than this repository holds)")
+        else:
+            vals[key] = rho
+            n = entry.get("n_games") or entry.get("n_game_days")
+            floor = "clears its sample floor" if entry.get("clears_floor")                 else "BELOW its sample floor"
+            ci = entry.get("ci95_bootstrap")
+            prov[key] = ("MEASURED rho %s (n=%s, %s; 95%% CI %s..%s) from %s"
+                         % (rho, n, floor,
+                            None if not ci else ci[0], None if not ci else ci[1],
+                            os.path.relpath(RHO_REGISTER, ROOT)))
+    return vals, prov
+
+
+SGP_RHO, SGP_RHO_PROVENANCE = _load_sgp_rho()
 
 
 # ------------------------------------------------------------------ play building
@@ -287,7 +351,9 @@ def build_plays(games):
             if len(chosen) == 2:
                 break
         if len(chosen) == 2:
-            plays.append(_parlay_play(chosen, "S9", 0.0))
+            # cross-game legs: priced at independence, and labelled as an assumption
+            # rather than a measurement (SGP_RHO_PROVENANCE["cross_game"]).
+            plays.append(_parlay_play(chosen, "S9", SGP_RHO["cross_game"]))
 
     # S10 - same-game parlays
     for g in games:
@@ -338,6 +404,8 @@ def _parlay_play(chosen, sid, rho):
         "p_if_independent": rnd(p_indep, 4),
         "correlation_adjustment": rnd(p_true - p_indep, 4),
         "rho": rnd(rho, 3),
+        "rho_source": SGP_RHO_PROVENANCE.get(
+            "cross_game" if sid == "S9" else "side_total", "unlabelled"),
         "fair_price": american_from_prob(p_true),
         "naive_price": american_from_prob(p_indep),
         "n_legs": 2,

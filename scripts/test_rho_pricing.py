@@ -90,7 +90,8 @@ def main():
     #    syntax tree rather than the text, so a docstring that QUOTES the old line (as
     #    engine/parlay.py's does, to explain what was fixed) is not mistaken for code.
     import ast
-    for src in ("engine/parlay.py", "scripts/generate_picks.py"):
+    for src in ("engine/parlay.py", "scripts/generate_picks.py", "engine/strategies.py",
+                "engine/correlate.py"):
         path = os.path.join(ROOT, src)
         text = open(path, encoding="utf-8").read()
         srclines = text.splitlines()
@@ -108,8 +109,55 @@ def main():
                     fails.append("%s:%d defaults %s to the literal %s with no FALLBACK "
                                  "label on it or above it"
                                  % (src, node.lineno, nm, val.value))
-        if "parlay_rho.json" not in text:
+        # reading the register directly OR through engine/strategies.py's provenance,
+        # which is the one module that opens the file.
+        if "parlay_rho.json" not in text and "SGP_RHO_PROVENANCE" not in text:
             fails.append("%s does not read the measured register" % src)
+
+    # 3b. the strategy engine and the correlation grid must agree with the register.
+    #     X-57-02 (COORDINATION 57.7) found engine/strategies.py pricing S10 parlays at a
+    #     hand-typed 0.00 for the same pairing the roll page measured at -0.06: one site,
+    #     two prices for one line.  This asserts the constants cannot drift back.
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "engine"))
+        import strategies as _st
+        mapped = {"side_total": "side_and_total", "two_teammates": "same_team_players",
+                  "two_opponents": "cross_team_points"}
+        for local, key in mapped.items():
+            want = (rows.get(key) or {}).get("rho_measured")
+            got = _st.SGP_RHO.get(local)
+            if want is not None and got is not None and abs(got - want) > 1e-9:
+                fails.append("engine/strategies.py SGP_RHO['%s'] = %s but the register "
+                             "measures %s for %s" % (local, got, want, key))
+            if want is not None and not str(_st.SGP_RHO_PROVENANCE.get(local, "")).startswith("MEASURED"):
+                fails.append("engine/strategies.py has a register value for %s but labels "
+                             "it %s" % (local, _st.SGP_RHO_PROVENANCE.get(local, "(nothing)")[:40]))
+        for lab in ("player_total_same_team", "player_side_same_team", "cross_game"):
+            prov = str(_st.SGP_RHO_PROVENANCE.get(lab, ""))
+            if prov.startswith("MEASURED"):
+                fails.append("engine/strategies.py labels the unmeasured %s assumption "
+                             "MEASURED" % lab)
+            if not prov:
+                fails.append("engine/strategies.py carries no provenance for %s" % lab)
+        notes.append("engine/strategies.py: %d pairings read the register, %d carry a "
+                     "labelled assumption"
+                     % (len(mapped), 3))
+        import correlate as _co
+        for r in _co.model_derived_correlations():
+            # the grid keys are this module's names; the register is keyed by pairing.
+            reg_row = rows.get(mapped.get(r["rho_key"], ""), {})
+            has = reg_row.get("rho_measured") is not None
+            claims = r["status"].startswith("MEASURED")
+            if claims and not has:
+                fails.append("correlations grid claims MEASURED for %s with no register value"
+                             % r["rho_key"])
+            if has and not claims:
+                fails.append("correlations grid calls %s model-derived while the register "
+                             "measures it" % r["rho_key"])
+        notes.append("engine/correlate.py: grid status labels agree with the register on "
+                     "all %d pairings" % len(_co.model_derived_correlations()))
+    except ImportError as exc:
+        fails.append("cannot import the strategy engine to check its rhos: %s" % exc)
 
     # 4. both prices on every priced row, and the MEASURED claim must be earned
     pp = json.load(open(os.path.join(ROOT, "data", "parlay_pricing.json"), encoding="utf-8"))

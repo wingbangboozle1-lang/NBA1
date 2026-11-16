@@ -69,7 +69,7 @@
    "requirement": "Store every injury PDF with its timestamp, and diff consecutive reports to detect status changes.",
    "status": "done",
    "evidence": "Every retrieved official injury report is archived byte-for-byte under data/raw/injury_pdfs/<edition>__<sha256>.pdf with a sidecar carrying the retrieval timestamp, the official URL, the byte count and the hash. Measured 2026-11-16 by scripts/verify_injury_pdf_archive.py: 88 PDFs (11/15 12:00 AM .. 11/16 10:30 AM ET editions), every file re-hashed and matched to its filename and sidecar, every sidecar byte count matched the file on disk, every sidecar URL names its own edition. engine/injury_diff.py parses each edition from the stored bytes and diffs every consecutive pair: 87 diffs for 87 pairs, 25 player status/reason changes, 244 newly listed and 265 no longer listed. The register's earlier gap ('the PDF bytes themselves are still not retained', F82) was stale - the bytes are retained and now verified.",
-   "gap": "Two things stay open and flagged, neither about retention: the archive's newest edition is 11/16 10:30 AM ET while tonight's games are ~9 hours off (F132), and 12 of the 88 sidecars use a second key schema (source_url/retrieved_at_utc instead of url/retrieved_utc), so a consumer that reads only one name sees blanks (F130).",
+   "gap": "Two things stay open and flagged, neither about retention: the archive's newest edition is 11/16 10:30 AM ET while tonight's games are ~9 hours off (F139), and 12 of the 88 sidecars use a second key schema (source_url/retrieved_at_utc instead of url/retrieved_utc), so a consumer that reads only one name sees blanks (F137).",
    "links": [
     {
      "label": "NBA injury report index",
@@ -232,8 +232,8 @@
    "id": "R14",
    "requirement": "Price every parlay with the measured rho and print the naive product beside it instead of withholding the price.",
    "status": "done",
-   "evidence": "One measured register prices every parlay. scripts/measure_parlay_rho.py computes rho from the 196 verified official finals and the official gamebooks: rho(home points, away points) = 0.12 (n=196, 95% CI -0.03..0.27, leave-one-game-out -0.10..0.25), rho(margin, total) = -0.038 (p=0.62), rho(home points, total) = 0.737, and the same-team pair rho = 0.4213 from 6 game-days of box scores (below its 30-game-day floor, so it is labelled). engine/parlay.py and scripts/generate_picks.py both read that register now: the naive product is printed beside every rho-adjusted price, the fair American odds for both are printed, and each row carries the n, the interval and the floor status of the rho it used. The old constants survive only as a fallback that is labelled FALLBACK in the row itself.",
-   "gap": "The teammate-pair rho rests on 6 game-days, so its interval is wide and its bootstrap CI is optimistic - the leave-one-game-out range is the dispersion the page quotes. More gamebook days are the only way to tighten it (F131).",
+   "evidence": "One measured register prices every parlay. scripts/measure_parlay_rho.py computes rho from the 196 verified official finals and the official gamebooks: rho(home points, away points) = 0.12 (n=196, 95% CI -0.03..0.27, leave-one-game-out -0.10..0.25), rho(margin, total) = -0.038 (p=0.62), rho(home points, total) = 0.737, and the same-team pair rho = 0.4213 from 6 game-days of box scores (below its 30-game-day floor, so it is labelled). all three consumers read that register now - engine/parlay.py, scripts/generate_picks.py and engine/strategies.py (whose hand-typed SGP_RHO was still pricing S10 parlays at 0.00 for the very pairing the roll page measures, which is what request X-57-02 reported): the naive product is printed beside every rho-adjusted price, the fair American odds for both are printed, and each row carries the n, the interval and the floor status of the rho it used. The old constants survive only as a fallback that is labelled FALLBACK in the row itself.",
+   "gap": "The teammate-pair rho rests on 6 game-days, so its interval is wide and its bootstrap CI is optimistic - the leave-one-game-out range is the dispersion the page quotes. More gamebook days are the only way to tighten it (F138). engine/correlate.py's grid now derives its MODEL-DERIVED vs MEASURED label from the register per row, so the two surfaces cannot disagree about one pairing.",
    "links": [
     {
      "label": "SGP pricing (repo)",
@@ -252,7 +252,7 @@
    "requirement": "Put rotation availability on the picks page as its own column.",
    "status": "done",
    "evidence": "Rotation availability is its own column pair on the Lines & Picks page: for each side, how many of the players who actually carry minutes for the club are Out or Questionable on the official report, and the status of the club's filing. A club the edition has not received for prints 'not submitted' rather than defaulting to healthy. Built from the same injury edition the line is priced from, in scripts/build_horizon_v2.py, and the rolling-slate page keeps its own count column.",
-   "gap": "Availability for tonight's games is bounded by the league's filing time, not by the site: the newest archived edition is 11/16 10:30 AM ET (F132).",
+   "gap": "Availability for tonight's games is bounded by the league's filing time, not by the site: the newest archived edition is 11/16 10:30 AM ET (F139).",
    "links": [
     {
      "label": "Picks page (repo)",
@@ -348,12 +348,28 @@
    "id": "R21",
    "requirement": "Capture per-player game logs (minutes, points, rebounds, assists, opponent) for at least the players on an injury report.",
    "status": "partial",
-   "evidence": "Per-player logs are captured for all six finished 11/15 games from the league's own gamebook PDFs (text committed verbatim under data/official/gamebooks/, one file per game): 143 player rows, 132 of whom appeared, with MIN, PTS, REB, AST, STL, BLK, TOV, shooting splits, +/- and the DNP/DND note, plus the opponent and home/away. `scripts/capture_player_logs.py` parses them and asserts every team's player points against the official final score - 12 of 12 match - before writing data/official/player_game_logs_2026-11-15.json. The page is site/pages/player-logs.html.",
-   "gap": "Coverage is complete for the six games that finished and incomplete for the slate: 10 of the 149 players on the 06:15 PM ET injury report appear in these six gamebooks, because 139 of them play for teams whose 11/15 games were unfinished or whose next game is 11/16. A DNP player from a finished game is captured (played=false); a player from an unplayed game cannot be until his gamebook exists. See F99.",
+   "evidence": "Per-player rows for all nine finished 11/15 games, from the league's own gamebook PDFs (page-1 text committed under data/official/gamebooks/): 304 rows, 199 appeared, with MIN, PTS, REB, AST, STL, BLK, TOV, shooting splits, +/- and the DNP/DND/NWT note. Every team's player points equal the official final (9 of 9 games, 18 team totals; the three games added in session arena/fe8e2065-nba1 were re-read from the official game pages and the statsdmz PDFs on 2026-11-16). Minutes match the printed team total in 13 of 18 teams (largest difference 3 s, published as printed). 73 injury-report players with no box-score row are recorded from the gamebook's own Inactive line, with its official reason. Of the 149 unique names on the 11/15 06:15 PM ET injury report, 92 now have a row, 53 have only games after 11/15 and 4 are unexplained by the gamebooks (flags F128 to F134). The parser was corrected in this session: the three skipped gamebooks (F128) and the DND/NWT rows (F129). Script: scripts/capture_player_logs.py; page: site/pages/player-logs.html.",
+   "gap": "53 report names have only games after 11/15, so no gamebook exists yet; their logs need those gamebooks once played. 4 report names are unexplained by the gamebooks (flags F130 to F133: a status conflict, a name variant, a spelling conflict and an ambiguous surname). Only the nine finished 11/15 games are captured. Coverage of 11/16 and later games is pending.",
    "links": [
     {
      "label": "NBA gamebook (official source, IND@PHI)",
      "url": "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf"
+    },
+    {
+     "label": "Official game page ATL@MIL (final 113-106, re-read 2026-11-16)",
+     "url": "https://www.nba.com/game/atl-vs-mil-0022600243"
+    },
+    {
+     "label": "Official game page HOU@WAS (final 147-119, re-read 2026-11-16)",
+     "url": "https://www.nba.com/game/hou-vs-was-0022600242"
+    },
+    {
+     "label": "Official game page OKC@SAC (final 125-103, re-read 2026-11-16)",
+     "url": "https://www.nba.com/game/okc-vs-sac-0022600244"
+    },
+    {
+     "label": "Injury report 11/15 06:15 PM ET (official PDF)",
+     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
     },
     {
      "label": "Parsed logs (repo)",
