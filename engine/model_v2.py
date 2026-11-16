@@ -318,12 +318,63 @@ def load_standings():
 
 
 def load_schedule():
-    path = os.path.join(OFF, "official_schedule_2026-11-15_to_19.json")
-    return _load(path)
+    """Union of every official schedule capture, newest capture winning per
+    game id.
+
+    Why a union and not "the newest file": a later capture is usually a
+    narrower window (this session re-read only the 3-day pick window), while an
+    earlier capture carries fields the narrower read does not print - the
+    venue and city, which the travel-distance context needs.  Merging per game
+    id keeps both: the newest read supplies the fields it re-read (tip time,
+    date, teams), and the earlier read supplies the fields it did not (venue).
+
+    A field the newer row leaves empty is filled from the older row; a field
+    both carry is taken from the newer row and any disagreement is recorded by
+    the capture itself in its `conflicts` list.
+    """
+    files = sorted(f for f in os.listdir(OFF)
+                   if f.startswith("official_schedule_") and f.endswith(".json"))
+    merged, order = {}, []
+    for name in files:
+        doc = _load(os.path.join(OFF, name))
+        for r in doc.get("rows", []):
+            gid = r.get("game_id")
+            if not gid:
+                order.append(r)
+                continue
+            if gid not in merged:
+                merged[gid] = {}
+                order.append(merged[gid])
+            base = merged[gid]
+            for k, v in r.items():
+                if v not in (None, "", []):
+                    base[k] = v
+    rows = [r for r in order if r]
+    rows.sort(key=lambda r: (r.get("date") or "", r.get("game_id") or ""))
+    return {"title": "official schedule, merged from %d captures" % len(files),
+            "sources": files, "rows": rows}
 
 
 def load_arenas():
     return _load(os.path.join(OFF, "arena_coordinates_2026-11-15.json"))
+
+
+def _more_complete(a, b):
+    """True when row a carries strictly more settled information than row b.
+
+    A row is more complete when it has final scores and the other does not;
+    ties are broken in favour of the row that reports a status of FINAL.
+    """
+    def done(r):
+        return r.get("home_pts") is not None and r.get("away_pts") is not None
+    if done(a) != done(b):
+        return done(a)
+    return str(r_get(a, "status") or "").upper().startswith("FINAL") and not \
+        str(r_get(b, "status") or "").upper().startswith("FINAL")
+
+
+def r_get(row, key):
+    return row.get(key)
 
 
 def load_results():
@@ -341,15 +392,28 @@ def load_results():
             for g in doc.get("games", doc.get("rows", [])):
                 if isinstance(g, dict) and "home_pts" in g:
                     games.append(dict(g))
-    # de-duplicate on game id, keeping the first
+    # De-duplicate on game id.  A later capture wins over an earlier one when
+    # the later one is more complete: the 2026-11-15 slate was captured
+    # mid-game, so the first capture of those ids carries null scores while a
+    # later capture carries finals.  Keeping "the first row" would freeze the
+    # nulls in and the finals out, so completeness decides, not file order.
+    by_id = {}
+    for g in games:
+        gid = g.get("game_id")
+        if not gid:
+            continue
+        cur = by_id.get(gid)
+        if cur is None or _more_complete(g, cur):
+            by_id[gid] = g
     seen, uniq = set(), []
     for g in games:
         gid = g.get("game_id")
-        if gid and gid in seen:
-            continue
-        if gid:
-            seen.add(gid)
-        uniq.append(g)
+        if gid and gid in by_id:
+            if gid not in seen:
+                seen.add(gid)
+                uniq.append(by_id[gid])
+        else:
+            uniq.append(g)
     return uniq
 
 

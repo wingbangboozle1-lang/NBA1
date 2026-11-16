@@ -35,7 +35,13 @@ TODAY = "2026-11-15"
 # starts on the next slate and runs three days ahead.
 PICK_WINDOW_START = "2026-11-16"
 PICK_WINDOW_END = "2026-11-18"
-LINE_WINDOW_END = "2026-11-19"
+# The line window is the pick window: 2026-11-15 is dropped because every game
+# on that slate has tipped (six are final, three were still in progress at
+# 2026-11-16T02:16Z), and 2026-11-19 is dropped because it is four days ahead
+# and the brief caps origination at three.  Lines are therefore only ever
+# originated for a game that has not started.
+LINE_WINDOW_START = "2026-11-16"
+LINE_WINDOW_END = "2026-11-18"
 
 STATUS_PLAY_PROB = {"Out": 0.00, "Doubtful": 0.25, "Questionable": 0.50,
                     "Probable": 0.80, "Available": 1.00}
@@ -59,7 +65,10 @@ def load_injury_edition():
     # canonical path, which now carries the parallel arena/161f1638-nba1
     # transcription of the same edition (kept at merge, zero status
     # disagreements between the two)
-    pref = os.path.join(OFF, "injury_2026-11-15_0615PM_arena49f70042.json")
+    # Newest official edition at the time of the re-cut.  The 06:15 PM edition
+    # the previous cut used is superseded: the 09:00 PM edition exists, is the
+    # newest on the official index, and carries the 11/16 game date.
+    pref = os.path.join(OFF, "injury_2026-11-15_0900PM_dfef26dc.json")
     if os.path.exists(pref):
         path = pref
     else:
@@ -162,7 +171,7 @@ def main():
     # ------------------------------------------------------- per-game lines
     out_games = []
     for r in sched["rows"]:
-        if r["date"] < TODAY or r["date"] > LINE_WINDOW_END:
+        if r["date"] < LINE_WINDOW_START or r["date"] > LINE_WINDOW_END:
             continue
         h, a = r["home"], r["away"]
         th, ta = teams.get(h), teams.get(a)
@@ -389,8 +398,8 @@ def main():
                        "tables, blended underneath; their disagreement is the "
                        "headline confidence signal; the home-court advantage is "
                        "pinned to the measured official home win rate"),
-            "pick_window": "%s .. %s (up to 3 days ahead)" % (TODAY, PICK_WINDOW_END),
-            "line_window": "%s .. %s" % (TODAY, LINE_WINDOW_END),
+            "pick_window": "%s .. %s (up to 3 days ahead)" % (PICK_WINDOW_START, PICK_WINDOW_END),
+            "line_window": "%s .. %s" % (LINE_WINDOW_START, LINE_WINDOW_END),
             "inputs": {
                 "team_tables": {"advanced": tabs["advanced_file"],
                                 "traditional": tabs["traditional_file"],
@@ -479,9 +488,9 @@ def main():
                      "source": "https://www.nba.com/stats/players/traditional"})
     else:
         missing = sorted(({r["home"] for r in sched["rows"]
-                           if r["date"] >= TODAY} |
+                           if r["date"] >= LINE_WINDOW_START} |
                           {r["away"] for r in sched["rows"]
-                           if r["date"] >= TODAY}) -
+                           if r["date"] >= LINE_WINDOW_START}) -
                          set(minutes_meta.get("teams_captured", [])))
         if missing:
             gaps.append({"id": "G-MIN-2", "severity": "medium",
