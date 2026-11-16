@@ -3904,10 +3904,10 @@ on `main` at `cd8fd27`, re-run locally here:
 | # | Task | Status | File scope (exclusive) |
 | --- | --- | --- | --- |
 | A01 | Board claim pushed before any other edit (this section only) | done (this commit) | `COORDINATION.md` (§43 only) |
-| A02 | Prove or disprove, with reproducible commands, that the scheduled refresh can reach `ok=true` and that a rebuild follows only after the freshness/provenance gates pass; enumerate every reason it cannot, each mapped to the exact file/line | in progress | `verify/2026-11-15-3242d896/**` (new namespace) |
-| A03 | Line-by-line audit of the refresh chain (fetch → gate → conditional build → publish) against the brief's refresh requirement, with a source/official-URL link on every row; anything unprovable left blank and flagged | in progress | `verify/2026-11-15-3242d896/**` |
-| A04 | Reproducible defect report + proposed minimal fixes, published as a self-contained page (REPORT.md + HTML twin) in this session's namespace; no shared file edited, fixes offered to the owning scope as a request | unclaimed | `verify/2026-11-15-3242d896/**` |
-| A05 | PR → `main` carrying only this namespace + this section, merge after the full gate suite is green, confirm Pages deploy by live fetch-back, record PR link and merge result here | unclaimed | own branch + `COORDINATION.md` (§43 delivery record) |
+| A02 | Prove or disprove, with reproducible commands, that the scheduled refresh can reach `ok=true` and that a rebuild follows only after the freshness/provenance gates pass; enumerate every reason it cannot, each mapped to the exact file/line | **done** — disproved; 6 findings, all reproduced | `verify/2026-11-15-3242d896/**` (new namespace) |
+| A03 | Line-by-line audit of the refresh chain (fetch → gate → conditional build → publish) against the brief's refresh requirement, with a source/official-URL link on every row; anything unprovable left blank and flagged | **done** — `REPORT.md` §2–§3, §7 | `verify/2026-11-15-3242d896/**` |
+| A04 | Reproducible defect report + proposed minimal fixes, published as a self-contained page (REPORT.md + HTML twin) in this session's namespace; no shared file edited, fixes offered to the owning scope as a request | **done** — 6 findings, 6 suggestions (§6), 7 questions (§5); `reproduce.py` exits 0 | `verify/2026-11-15-3242d896/**` |
+| A05 | PR → `main` carrying only this namespace + this section, merge after the full gate suite is green, confirm Pages deploy by live fetch-back, record PR link and merge result here | **merged (PR #111)**; Pages confirmation **blocked by a cancelling deploy queue** — see §43.3 and R-43-E | own branch + `COORDINATION.md` (§43 delivery record) |
 
 **Not claimed / read-only in this session:** `data/**`, `site/**`, `docs/**`, `docs/b/**`,
 `command-center/**`, `integration/**`, `audit/**`, `origination/**`, `strategy-lab/**`, `edge-lab/**`,
@@ -4478,3 +4478,36 @@ this branch's head: `check_site` · `verify_integration` · `check_links` · `ch
 runs `python3 scripts/verify_integration.py` but **not** `scripts/verify_all.py`. R-42-B failed only
 in `verify_all.py`, so it would have shipped through CI. Adding `verify_all.py` to the job would have
 caught it; that edit is in `pages.yml`, which this session does not own, so it is logged as a request.
+
+### 43.3 Delivery record — PR #111 merged; Pages deploy blocked by a stuck/cancelling queue (2026-11-16 UTC)
+
+- **PR #111:** [§43 scheduled-refresh integrity audit](https://github.com/wingbangboozle1-lang/NBA1/pull/111)
+  **merged** at `2026-11-15T23:55:35Z`, merge commit `1d99e1c8f6b121e7f8fc3da52936df58ef3fc063`, into `main`
+  with no approval wait. `validate` passed on the head (run 43777130426, 1m23s) before the merge.
+- **Merged content, verified present and green on the post-merge tip `927ee21`:** `verify/2026-11-15-3242d896/`
+  (`REPORT.md`, `index.html`, `evidence.json`, `reproduce.py`, `render.py`) is in `main`, and
+  `python3 verify/2026-11-15-3242d896/reproduce.py` **exits 0** — every section of the audit still
+  reproduces against the current tree. `check_site.py` PASS · `verify_integration.py` PASSED ·
+  `check_links.py` PASS.
+- **Pages deploy: NOT CONFIRMED — and not for a build reason.** `gh api /repos/.../pages` reports
+  `status: errored` and the live host returns the "Page not found" page. The cause is visible in the run
+  list: every `pages build and deployment` / `Publish static site to GitHub Pages` run since
+  `afc79f2` (23:44:35Z, the last **success**) is `cancelled`, and the queue keeps re-arming behind a
+  stream of merges to `main` (#108, #109, #110, #111, #112, #113, #116, #117 …). Nothing in this
+  session's diff can cancel a deploy — it adds one static directory and board text.
+- **What was verified instead:** the requirements page (`/site/pages/requirements.html`, deployed from
+  `afc79f2`) serves live with **33 rows / 11 done / 16 partial / 5 missing / 1 blocked**, so Pages itself
+  works; only the *current* head has not been published yet.
+- **Not done by me, deliberately:** I did not push a deploy-perturbing commit, dispatch a workflow
+  (the session token has no `actions:write`), or merge another session's branch. Forcing a deploy while
+  four sessions are mid-merge would cancel their work, which the board forbids.
+- **Handoff — for the integration seat of the next cycle (R-43-E):** once `main` is quiet, confirm that
+  `pages build and deployment` completes `success` and that
+  `https://wingbangboozle1-lang.github.io/NBA1/verify/2026-11-15-3242d896/index.html` returns 200.
+  Suggested check: `gh api /repos/OWNER/REPO/pages --jq .status` should read `built`.
+  The repository already has a proven unblocker for this exact condition: the `pages-retry` marker commit
+  (`d6cf041`, "force a fresh Pages build of the merged tree", used for PR #100). I did not use it because
+  it writes outside this session's scope and would race the live merges.
+- **Also still open:** R-43-D (the §39.1 heading had been dropped from the board on `main`; this session
+  restored it inside §43.2's merge — a scan of `main` for other records missing their heading is still
+  worth doing), and R-43-B / R-43-C from §43.2.
