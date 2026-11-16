@@ -17,6 +17,7 @@ import json
 import os
 import re
 import shutil
+import sys
 from urllib.parse import urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -62,6 +63,7 @@ def load(path):
 # (label, filename under site/pages, blurb)
 CATEGORIES = [
     ("HORIZON", None, "The next three days of NBA games and the lines we originate for them."),
+    ("Rolling Slate", "roll.html", "The current 3-day window re-cut from a fresh official capture: the two estimators and their disagreement, rotation availability, rest and back-to-back, and parlays priced with the measured rho beside the naive product."),
     ("Lines &amp; Picks", "picks.html", "Originated spread, total and fair-moneyline for every game in the horizon, and the gated paper picks built on them."),
     ("Player Props", "props.html", "Per-player projections and prop combinations, with the minutes coverage stated next to every number."),
     ("Prop Variance &amp; Rotation", "prop-variance.html", "Game-to-game dispersion measured from official game logs: the uncertainty behind every prop, the minutes-to-production elasticity, and what the injury report changed since the lines were cut."),
@@ -84,6 +86,7 @@ CATEGORIES = [
     ("Suggestions", "suggestions.html", "Improvements written as options with effort, risk and what each unlocks, so a reviewer can pick a path."),
     ("Decisions: pick a path", "decisions.html", "Six decisions in dependency order, every open question mapped to the decision that closes it, and every suggestion ranked against them. Start here before implementing anything."),
     ("Flagged for Review", "flagged.html", "Every value that could not be confirmed from an official source, with the link it would need."),
+    ("Requirements Audit", "requirements.html", "Every numbered requirement from the brief, the verdict this repository supports, and the artifact or official link that backs it. Worst-first, so what is missing is at the top."),
     ("Source Register", "sources.html", "Every official URL this site is built from."),
     ("Executive Summary", "../../EXECUTIVE_SUMMARY.md", "The whole picture in one document: what was verified, what the model has and has not shown, the limits, and the decisions waiting."),
     ("Repo Review", "repo-review.html", "Line-by-line review of the repository, the irregularities found, and the verification log."),
@@ -1992,23 +1995,40 @@ def main():
                            "are on <a href=\"gameday.html\">Game-Day Injury Read</a>. Those numbers do not "
                            "replace the ones here: a line re-priced after it was frozen cannot be graded."))
     # Newest-edition banner: report revision + retrieval time (brief requirement).
-    newest_path = os.path.join(ROOT, "data", "official", "injury_2026-11-15_0615AM.json")
-    if os.path.exists(newest_path):
+    # ROLLING: pick the newest stored edition and the newest consecutive-edition diff
+    # instead of a hardcoded filename, so the banner cannot go stale between passes.
+    import glob as _glob, re as _re
+    def _newest(pattern):
+        c = [q for q in _glob.glob(os.path.join(ROOT, "data", "official", pattern))
+             if _re.search(r"_\d{4}-\d{2}-\d{2}", q)]
+        if not c:
+            c = _glob.glob(os.path.join(ROOT, "data", "official", pattern))
+        return sorted(c)[-1] if c else None
+    newest_path = _newest("injury_2*.json")
+    if newest_path and os.path.exists(newest_path):
         _n = load(newest_path)
         _rows = _n.get("rows", [])
         _players = sum(1 for r in _rows if r.get("player"))
         _nys = sum(1 for r in _rows if r.get("status") == "NOT YET SUBMITTED")
         diff_note = ""
-        diff_path = os.path.join(ROOT, "data", "official",
-                                 "injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json")
-        if os.path.exists(diff_path):
+        diff_path = _newest("injury_diff_*.json")
+        if diff_path and os.path.exists(diff_path):
             _df = load(diff_path)
             _c = _df.get("counts", {})
-            diff_note = ("Consecutive-edition diff: %d comparable player rows, %d status changes, "
-                         "%d team blocks filed since the previous stored edition "
-                         "(<a href=\"../../data/official/injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json\">diff file</a>)."
-                         % (_c.get("comparable_player_rows", 0), _c.get("status_changes", 0),
-                            len(_df.get("team_blocks_filed_since", []))))
+            if _c:
+                _cmp = _c.get("comparable_player_rows", 0)
+                _chg = _c.get("status_changes", 0)
+                _filed = len(_df.get("team_blocks_filed_since", []))
+            else:
+                # schema written by the rolling capture passes (keyed lists)
+                _cmp = _df.get("unchanged", 0) + len(_df.get("changed", []))
+                _chg = len(_df.get("changed", []))
+                _filed = len(_df.get("added", []))
+            diff_note = ("Consecutive-edition diff against %s: %d comparable player rows, "
+                         "%d status changes, %d rows the newer edition adds "
+                         "(<a href=\"../../data/official/%s\">diff file</a>)."
+                         % (esc(_df.get("from_edition", "the previous stored edition")),
+                            _cmp, _chg, _filed, esc(os.path.basename(diff_path))))
         b.insert(0, banner("info", "Newest official edition: report revision and retrieval time",
                            "<p><b>Report revision:</b> %s &nbsp;|&nbsp; <b>retrieved (UTC):</b> %s &nbsp;|&nbsp; "
                            "<b>rows:</b> %d (%d player rows, %d NOT YET SUBMITTED team blocks). "
@@ -2649,6 +2669,13 @@ def main():
 
     # === decisions (session arena/cc5a6652-nba1) =================================
     built["decisions.html"] = build_decisions(questions, suggestions)
+
+    # === rolling slate + requirements audit (integration session arena/161f1638-nba1) ===
+    # Generated after the flagged/picks data above, so the two pages read the same
+    # files a rebuild just wrote. Failure here fails the build: these pages are part
+    # of the site, not an optional extra.
+    import build_roll_page as _roll
+    built.update(_roll.build(sys.modules[__name__]))
 
     # ------------------------------------------------------------------ write
     for name, html in built.items():
