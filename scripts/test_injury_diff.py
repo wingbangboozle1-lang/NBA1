@@ -41,11 +41,27 @@ class ScannerTests(unittest.TestCase):
 @unittest.skipUnless(glob.glob(os.path.join(PDF_DIR, "*.pdf")),
                      "no archived injury PDFs in the repository")
 class RealPdfTests(unittest.TestCase):
+    # The edition this test audits is named, not "whichever PDF is newest". The
+    # transcription it is cross-checked against is the 11/15 06:15 AM ET edition, so
+    # asking the newest archived PDF to still contain Furphy's row made the test fail
+    # the moment the archive advanced past that edition - a real 11/16 report simply
+    # does not list an 11/15 injury. Pinning the edition keeps the assertion about the
+    # parser (a reason cell wrapped across three text lines) instead of about the
+    # calendar. (session arena/3ff8ff0f-nba1, flag F133)
+    AUDIT_EDITION = "Injury-Report_2026-11-15_06_15AM.pdf"
+
     @classmethod
     def setUpClass(cls):
         paths = sorted(glob.glob(os.path.join(PDF_DIR, "*.pdf")),
                        key=lambda p: ij.edition_key(os.path.basename(p)))
-        cls.rec = ij.load_edition(paths[-1])
+        want = next((p for p in paths
+                     if os.path.basename(p).startswith(cls.AUDIT_EDITION[:-4])), None)
+        if want is None:
+            raise unittest.SkipTest(
+                "the edition this test cross-checks (%s) is not in the archive; the "
+                "archive has grown past it and the parser is still exercised by the "
+                "other tests here" % cls.AUDIT_EDITION)
+        cls.rec = ij.load_edition(want)
         with open(os.path.join(ROOT, "data", "official",
                                "injury_2026-11-15_0615AM.json")) as fh:
             cls.cross = json.load(fh)

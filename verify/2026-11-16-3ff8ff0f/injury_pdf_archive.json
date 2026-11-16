@@ -1,0 +1,815 @@
+{
+ "title": "Injury-PDF archive integrity and consecutive-diff coverage",
+ "checked_utc": "2026-11-16T18:30:17Z",
+ "session": "arena/3ff8ff0f-nba1",
+ "pdfs_checked": 88,
+ "first_edition": "Injury-Report_2026-11-15_12_00AM",
+ "last_edition": "Injury-Report_2026-11-16_10_30AM",
+ "sidecar_schemas_in_circulation": {
+  "bytes,error,file,http_status,id,pdf_signature_ok,retrieved_utc,revision_label,sha256,url": 76,
+  "bytes,content_type,edition,retrieved_at_utc,sha256,source_url": 12
+ },
+ "all_signed_ok": true,
+ "status_changes_detected": 25,
+ "players_listed_in_the_later_edition_only": 244,
+ "players_dropped_from_the_later_edition": 265,
+ "team_block_filing_changes": 0,
+ "diff_artifacts": 87,
+ "consecutive_pairs": 87,
+ "problems": [],
+ "editions": [
+  {
+   "edition": "Injury-Report_2026-11-15_12_00AM",
+   "revision_label": "2026-11-15 12:00AM ET",
+   "retrieved_utc": "2026-11-15T23:49:16Z",
+   "bytes": 97578,
+   "sha256": "0d9cc47a2d4e174df48d4b9abc09d4dab86763cc4f812ac2f2ab20b5575df376",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_12_00AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_12_00AM__0d9cc47a2d4e174d.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_12_15AM",
+   "revision_label": "2026-11-15 12:15AM ET",
+   "retrieved_utc": "2026-11-15T23:49:17Z",
+   "bytes": 97488,
+   "sha256": "ebe27a76eea4253066b5abf08d52372456a89022e1f562da5ef7977b3ca1265f",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_12_15AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_12_15AM__ebe27a76eea42530.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_12_30AM",
+   "revision_label": "2026-11-15 12:30AM ET",
+   "retrieved_utc": "2026-11-15T23:49:17Z",
+   "bytes": 97736,
+   "sha256": "38deee083177129ce34738533f08d95b3a4f62e1da19fbadf82b10aecd717d66",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_12_30AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_12_30AM__38deee083177129c.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_12_45AM",
+   "revision_label": "2026-11-15 12:45AM ET",
+   "retrieved_utc": "2026-11-15T23:49:18Z",
+   "bytes": 97597,
+   "sha256": "209238bfefb78a740c896a795632087fa57a80b4d6cd5fd2fc2df7e5eb88ff8f",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_12_45AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_12_45AM__209238bfefb78a74.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_01_00AM",
+   "revision_label": "2026-11-15 01:00AM ET",
+   "retrieved_utc": "2026-11-15T23:48:58Z",
+   "bytes": 97578,
+   "sha256": "27dac29890a56fa8477c0e6cf265dafe2499b30a5e6372255472b21c94a7472e",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_00AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_01_00AM__27dac29890a56fa8.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_01_15AM",
+   "revision_label": "2026-11-15 01:15AM ET",
+   "retrieved_utc": "2026-11-15T23:48:58Z",
+   "bytes": 97581,
+   "sha256": "8e49e0e20c1c3f019953baa81b2fe3fe63e8367fda65146c8f26530aa190f809",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_15AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_01_15AM__8e49e0e20c1c3f01.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_01_30AM",
+   "revision_label": "2026-11-15 01:30AM ET",
+   "retrieved_utc": "2026-11-15T23:48:59Z",
+   "bytes": 97736,
+   "sha256": "3a7d3523aebfe54fa6afab32b83ed571b7bc656dc57dff08f212d398a049f283",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_30AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_01_30AM__3a7d3523aebfe54f.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_01_45AM",
+   "revision_label": "2026-11-15 01:45AM ET",
+   "retrieved_utc": "2026-11-15T23:48:59Z",
+   "bytes": 97690,
+   "sha256": "299b77b514ad9bd2fdbb74a5f796c5c5f2a627bd431ceb2b093b35178f0a0858",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_45AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_01_45AM__299b77b514ad9bd2.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_02_00AM",
+   "revision_label": "2026-11-15 02:00AM ET",
+   "retrieved_utc": "2026-11-15T23:49:00Z",
+   "bytes": 97579,
+   "sha256": "81752cd0e35930c511587b98e36f139f3df3360aa25a441f39e302b572d5affa",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_02_00AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_02_00AM__81752cd0e35930c5.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_02_15AM",
+   "revision_label": "2026-11-15 02:15AM ET",
+   "retrieved_utc": "2026-11-15T23:49:00Z",
+   "bytes": 97581,
+   "sha256": "9c8ed584346e433fe8dcc23d2de52ab82dd48227998678136b85a8eec9c284b5",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_02_15AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_02_15AM__9c8ed584346e433f.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_02_30AM",
+   "revision_label": "2026-11-15 02:30AM ET",
+   "retrieved_utc": "2026-11-15T23:49:01Z",
+   "bytes": 97735,
+   "sha256": "11245a14426b96f5fb548f4067b12ee4f9d8e0604c1026dd2e9d1ffc30556003",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_02_30AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_02_30AM__11245a14426b96f5.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_02_45AM",
+   "revision_label": "2026-11-15 02:45AM ET",
+   "retrieved_utc": "2026-11-15T23:49:02Z",
+   "bytes": 97690,
+   "sha256": "f29632476e2824b9b5d7252909434a7be5c903eabf3ecd6e0fa9c1087689f5ca",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_02_45AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_02_45AM__f29632476e2824b9.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_03_00AM",
+   "revision_label": "2026-11-15 03:00AM ET",
+   "retrieved_utc": "2026-11-15T23:49:02Z",
+   "bytes": 97731,
+   "sha256": "ce18d3979eb43f766580e4f0734a4d8bd60734ddd32211ebca229c5dbcdc56b8",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_03_00AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_03_00AM__ce18d3979eb43f76.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_03_15AM",
+   "revision_label": "2026-11-15 03:15AM ET",
+   "retrieved_utc": "2026-11-15T23:49:03Z",
+   "bytes": 97733,
+   "sha256": "e546c9c904a606f8ceef5e097ddf7e50235ecd45c942d7662876fc4b28397710",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_03_15AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_03_15AM__e546c9c904a606f8.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_03_30AM",
+   "revision_label": "2026-11-15 03:30AM ET",
+   "retrieved_utc": "2026-11-15T23:49:03Z",
+   "bytes": 97735,
+   "sha256": "e8be8a86e9fc13f6b70aec1d968f163e48d5fc1db40687c4759a915983e8ed28",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_03_30AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_03_30AM__e8be8a86e9fc13f6.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_03_45AM",
+   "revision_label": "2026-11-15 03:45AM ET",
+   "retrieved_utc": "2026-11-15T23:49:04Z",
+   "bytes": 97836,
+   "sha256": "48dec0c02fa442fd6ba05c400db0efe5417af0dadfe8484f5493d0367fe7b9f6",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_03_45AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_03_45AM__48dec0c02fa442fd.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_04_00AM",
+   "revision_label": "2026-11-15 04:00AM ET",
+   "retrieved_utc": "2026-11-15T23:49:04Z",
+   "bytes": 97686,
+   "sha256": "afdca8044261198cd29e9173ed0859d314d03a2f210140035e2f2999e81fa7d9",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_04_00AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_04_00AM__afdca8044261198c.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_04_15AM",
+   "revision_label": "2026-11-15 04:15AM ET",
+   "retrieved_utc": "2026-11-15T23:49:05Z",
+   "bytes": 97688,
+   "sha256": "a0e3fa9025a8e4d4ad5e11ca13f30ebc905e7d4a6c0aa601c73583bdb2d75a63",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_04_15AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_04_15AM__a0e3fa9025a8e4d4.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_04_30AM",
+   "revision_label": "2026-11-15 04:30AM ET",
+   "retrieved_utc": "2026-11-15T23:49:05Z",
+   "bytes": 97835,
+   "sha256": "d30f6bd8f577a92af1362f6a8652c4a88fa8fcdef49152b164b2fd8c79182339",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_04_30AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_04_30AM__d30f6bd8f577a92a.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_04_45AM",
+   "revision_label": "2026-11-15 04:45AM ET",
+   "retrieved_utc": "2026-11-15T23:49:06Z",
+   "bytes": 97688,
+   "sha256": "bbdfe4c814c8f80b77cc479aea8ca02e0d56f2445246f737cc0bdbc262459efb",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_04_45AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_04_45AM__bbdfe4c814c8f80b.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_05_00AM",
+   "revision_label": "2026-11-15 05:00AM ET",
+   "retrieved_utc": "2026-11-15T23:49:06Z",
+   "bytes": 97576,
+   "sha256": "b2d17d77fe2dea196c316591e628175337f0f6b52b89fa804528ab75380b5f93",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_00AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_05_00AM__b2d17d77fe2dea19.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_05_15AM",
+   "revision_label": "2026-11-15 05:15AM ET",
+   "retrieved_utc": "2026-11-15T23:49:07Z",
+   "bytes": 97580,
+   "sha256": "eacbd6850affda221a49d38cc4a2fe8743b48914b107c8a11e8d994d6bc10ec1",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_15AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_05_15AM__eacbd6850affda22.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_05_30AM",
+   "revision_label": "2026-11-15 05:30AM ET",
+   "retrieved_utc": "2026-11-15T23:49:08Z",
+   "bytes": 97734,
+   "sha256": "116ad2d18d666a2da2121a164bce623f228d590cf78cf6b65f05f8d238848a04",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_30AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_05_30AM__116ad2d18d666a2d.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_05_45AM",
+   "revision_label": "2026-11-15 05:45AM ET",
+   "retrieved_utc": "2026-11-15T23:49:08Z",
+   "bytes": 97689,
+   "sha256": "96a8483dab90037f5d2099b4fb77b1f6d782c3aa1de20f9e2457a10ed4ded32b",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_45AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_05_45AM__96a8483dab90037f.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_06_00AM",
+   "revision_label": "2026-11-15 06:00AM ET",
+   "retrieved_utc": "2026-11-15T23:49:09Z",
+   "bytes": 97577,
+   "sha256": "e4d21fe109e41cc5e7a7c4bbfee5afb8669e4a3f8e3f753470883df0e49da4c4",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_00AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_06_00AM__e4d21fe109e41cc5.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_06_15AM",
+   "revision_label": "2026-11-15 06:15AM ET",
+   "retrieved_utc": "2026-11-15T23:49:09Z",
+   "bytes": 97582,
+   "sha256": "042868ef01ea1530c182e3253da17947dcdfae1e7075ca26e642c0b240d83f00",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_06_15AM__042868ef01ea1530.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_06_30AM",
+   "revision_label": "2026-11-15 06:30AM ET",
+   "retrieved_utc": "2026-11-15T23:49:10Z",
+   "bytes": 97736,
+   "sha256": "0fdb2fd4a455b541d555fbf3bd1ee52aa298ecf59f0a31d4c44624ee46cb8b90",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_30AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_06_30AM__0fdb2fd4a455b541.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_06_45AM",
+   "revision_label": "2026-11-15 06:45AM ET",
+   "retrieved_utc": "2026-11-15T23:49:10Z",
+   "bytes": 97691,
+   "sha256": "8e1928cbdf1612ef08928b5b7ab6ff907b6a6f546d6f4dfac4c6364f552022be",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_45AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_06_45AM__8e1928cbdf1612ef.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_07_00AM",
+   "revision_label": "2026-11-15 07:00AM ET",
+   "retrieved_utc": "2026-11-15T23:49:11Z",
+   "bytes": 97667,
+   "sha256": "a34a11fe3ce92e6de083a9ed076e6074bce52eca3e0fbfc0b839f90f5731043d",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_07_00AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_07_00AM__a34a11fe3ce92e6d.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_07_15AM",
+   "revision_label": "2026-11-15 07:15AM ET",
+   "retrieved_utc": "2026-11-15T23:49:11Z",
+   "bytes": 97670,
+   "sha256": "619a6814548952a6299c063f2568ec2513bd07dbc56d15f911890ece3ed3aa19",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_07_15AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_07_15AM__619a6814548952a6.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_07_30AM",
+   "revision_label": "2026-11-15 07:30AM ET",
+   "retrieved_utc": "2026-11-15T23:49:11Z",
+   "bytes": 97817,
+   "sha256": "f25518064ea6bdf067a9ae896cce019e668a04b8ce0cd63841e9756ae15171ec",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_07_30AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_07_30AM__f25518064ea6bdf0.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_07_45AM",
+   "revision_label": "2026-11-15 07:45AM ET",
+   "retrieved_utc": "2026-11-15T23:49:12Z",
+   "bytes": 97774,
+   "sha256": "a3b1f8cf882cac93fcfb397851db7161c916271c10e5da72b47ea594a4ca7ed3",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_07_45AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_07_45AM__a3b1f8cf882cac93.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_08_00AM",
+   "revision_label": "2026-11-15 08:00AM ET",
+   "retrieved_utc": "2026-11-15T23:49:12Z",
+   "bytes": 97826,
+   "sha256": "e31da8561e97a9ac9142a51466a1458f7554764a3abdbcaef419958ef90bce9c",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_08_00AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_08_00AM__e31da8561e97a9ac.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_08_15AM",
+   "revision_label": "2026-11-15 08:15AM ET",
+   "retrieved_utc": "2026-11-15T23:49:12Z",
+   "bytes": 97831,
+   "sha256": "49f1bd8b8de6c1d528a3483b3f68f27e3dc52a9098608b727859c600b1b706b6",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_08_15AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_08_15AM__49f1bd8b8de6c1d5.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_08_30AM",
+   "revision_label": "2026-11-15 08:30AM ET",
+   "retrieved_utc": "2026-11-15T23:49:12Z",
+   "bytes": 97978,
+   "sha256": "51f6fe8720f5f3074288bf1e4ba9a5665894c8589d80bc93317849e9fa3e5b6b",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_08_30AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_08_30AM__51f6fe8720f5f307.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_08_45AM",
+   "revision_label": "2026-11-15 08:45AM ET",
+   "retrieved_utc": "2026-11-15T23:49:13Z",
+   "bytes": 97935,
+   "sha256": "1480c69bbf02bdf861f2c1f297566da0b7bf268358a80f940d1fb998a25fd937",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_08_45AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_08_45AM__1480c69bbf02bdf8.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_09_00AM",
+   "revision_label": "2026-11-15 09:00AM ET",
+   "retrieved_utc": "2026-11-15T23:49:13Z",
+   "bytes": 97755,
+   "sha256": "68df2662ab829cfedf55fa8c6b2159a57c6f2c5e147df3a4649ff35376255a17",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_09_00AM__68df2662ab829cfe.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_09_15AM",
+   "revision_label": "2026-11-15 09:15AM ET",
+   "retrieved_utc": "2026-11-15T23:49:13Z",
+   "bytes": 97762,
+   "sha256": "342f0aab6c3338b24f8cd69be40b2eafbb3846a378a3e7d1042eabe0d43369df",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_15AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_09_15AM__342f0aab6c3338b2.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_09_30AM",
+   "revision_label": "2026-11-15 09:30AM ET",
+   "retrieved_utc": "2026-11-15T23:49:13Z",
+   "bytes": 97916,
+   "sha256": "5545ff634e98591dc03698aec84987a093780f00b0fc479334dd125bc16da0fc",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_30AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_09_30AM__5545ff634e98591d.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_09_45AM",
+   "revision_label": "2026-11-15 09:45AM ET",
+   "retrieved_utc": "2026-11-15T23:49:14Z",
+   "bytes": 97869,
+   "sha256": "37d6887c4501f46bc1493977db8237989cbcb5ddae17964a8a2fec2ddc5c919c",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_45AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_09_45AM__37d6887c4501f46b.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_10_00AM",
+   "revision_label": "2026-11-15 10:00AM ET",
+   "retrieved_utc": "2026-11-15T23:49:14Z",
+   "bytes": 97578,
+   "sha256": "9787aa05c15445dd70bfa2e7ffb3ec245f981f46b3e58350ed4bac481b731a1c",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_10_00AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_10_00AM__9787aa05c15445dd.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_10_15AM",
+   "revision_label": "2026-11-15 10:15AM ET",
+   "retrieved_utc": "2026-11-15T23:49:14Z",
+   "bytes": 97581,
+   "sha256": "41bca0be438472b7133a6de18be6aa9a5f089d5106919d02c2feb5d1e9d29797",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_10_15AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_10_15AM__41bca0be438472b7.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_10_30AM",
+   "revision_label": "2026-11-15 10:30AM ET",
+   "retrieved_utc": "2026-11-15T23:49:14Z",
+   "bytes": 97735,
+   "sha256": "1be2b5d9bf77945d9416ae5f492de943d95b7ea825087ccf0a0a0de7a455bab4",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_10_30AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_10_30AM__1be2b5d9bf77945d.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_10_45AM",
+   "revision_label": "2026-11-15 10:45AM ET",
+   "retrieved_utc": "2026-11-15T23:49:15Z",
+   "bytes": 97690,
+   "sha256": "51f581d042226b49c7de0cb840db9ba7f5a77a06607a313db9c6fb5016715e34",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_10_45AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_10_45AM__51f581d042226b49.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_11_00AM",
+   "revision_label": "2026-11-15 11:00AM ET",
+   "retrieved_utc": "2026-11-15T23:49:15Z",
+   "bytes": 97572,
+   "sha256": "115182c5c4b2ea3d66b7bea868e3ddead88c1628acadb423dfcbb5c104c88251",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_11_00AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_11_00AM__115182c5c4b2ea3d.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_11_15AM",
+   "revision_label": "2026-11-15 11:15AM ET",
+   "retrieved_utc": "2026-11-15T23:49:15Z",
+   "bytes": 97483,
+   "sha256": "9761b4c6d2c8286bc78515f1c3d12a23f81ed3c57f24138a880586fd9e058cfb",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_11_15AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_11_15AM__9761b4c6d2c8286b.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_11_30AM",
+   "revision_label": "2026-11-15 11:30AM ET",
+   "retrieved_utc": "2026-11-15T23:49:16Z",
+   "bytes": 97730,
+   "sha256": "8e97a9d721bc056cf6c985629c80dac0ac31137f2f3a777470c0e2ff95368366",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_11_30AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_11_30AM__8e97a9d721bc056c.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_11_45AM",
+   "revision_label": "2026-11-15 11:45AM ET",
+   "retrieved_utc": "2026-11-15T23:49:16Z",
+   "bytes": 97592,
+   "sha256": "ff5262420ecce86b919d9410a767138d8f709cd627534552c3d3d471351a2fea",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_11_45AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_11_45AM__ff5262420ecce86b.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_12_00PM",
+   "revision_label": "2026-11-15 12:00PM ET",
+   "retrieved_utc": "2026-11-15T23:49:16Z",
+   "bytes": 97416,
+   "sha256": "8c2a4de1dfdd10818dbc5f83dfd411a5963279ff11c41aa2e0327f13da9fb60f",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_12_00PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_12_00PM__8c2a4de1dfdd1081.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_12_15PM",
+   "revision_label": "2026-11-15 12:15PM ET",
+   "retrieved_utc": "2026-11-15T23:49:17Z",
+   "bytes": 97475,
+   "sha256": "9332855fa6e8b2eb38aa50f6316984b92ec8e3f546a25a006ddd497ecefc4c95",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_12_15PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_12_15PM__9332855fa6e8b2eb.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_12_30PM",
+   "revision_label": "2026-11-15 12:30PM ET",
+   "retrieved_utc": "2026-11-15T23:49:17Z",
+   "bytes": 97716,
+   "sha256": "92348979be88d031a7df6d5915968ad8915f4e63274424fabe72ebd7155d183a",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_12_30PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_12_30PM__92348979be88d031.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_12_45PM",
+   "revision_label": "2026-11-15 12:45PM ET",
+   "retrieved_utc": "2026-11-15T23:49:18Z",
+   "bytes": 98546,
+   "sha256": "2a40a7d62fbbc7d3feef95f670b7576bb160a0fbee6a5b00cf5d8e8bc2a3adf6",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_12_45PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_12_45PM__2a40a7d62fbbc7d3.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_01_00PM",
+   "revision_label": "2026-11-15 01:00PM ET",
+   "retrieved_utc": "2026-11-15T23:48:58Z",
+   "bytes": 99964,
+   "sha256": "d9c0e3a4ab2fadfd63837cd7d8bff4310558d6c5d4e16642388d25bed90e9d6c",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_00PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_01_00PM__d9c0e3a4ab2fadfd.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_01_15PM",
+   "revision_label": "2026-11-15 01:15PM ET",
+   "retrieved_utc": "2026-11-15T23:48:59Z",
+   "bytes": 100071,
+   "sha256": "a9e3068bda1d5d7b124f0c9849c999387212bf4673963738fddc1825323ace12",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_15PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_01_15PM__a9e3068bda1d5d7b.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_01_30PM",
+   "revision_label": "2026-11-15 01:30PM ET",
+   "retrieved_utc": "2026-11-15T23:48:59Z",
+   "bytes": 100220,
+   "sha256": "51fe7103718ae2f3d4615b421fc75d8a396973add5179e52c3935d1f6fad7da4",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_30PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_01_30PM__51fe7103718ae2f3.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_01_45PM",
+   "revision_label": "2026-11-15 01:45PM ET",
+   "retrieved_utc": "2026-11-15T23:49:00Z",
+   "bytes": 100176,
+   "sha256": "dc10cd5189b8469daf6e8b9b3489c05515e135bbd03f157f84230e1c9d794e60",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_01_45PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_01_45PM__dc10cd5189b8469d.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_02_00PM",
+   "revision_label": "2026-11-15 02:00PM ET",
+   "retrieved_utc": "2026-11-15T23:49:00Z",
+   "bytes": 100067,
+   "sha256": "1b3ba262ef2a03dbcbf058d8bc337b292205d7dc20472e2661e69aa5196f7b25",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_02_00PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_02_00PM__1b3ba262ef2a03db.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_02_15PM",
+   "revision_label": "2026-11-15 02:15PM ET",
+   "retrieved_utc": "2026-11-15T23:49:01Z",
+   "bytes": 100072,
+   "sha256": "f382c574a327b6d9e6c30751d4cc1a352bd89467f0c1dd114a538b89fd08f6bf",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_02_15PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_02_15PM__f382c574a327b6d9.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_02_30PM",
+   "revision_label": "2026-11-15 02:30PM ET",
+   "retrieved_utc": "2026-11-15T23:49:01Z",
+   "bytes": 100228,
+   "sha256": "59d58ef723a73df11a9d4fbdfe43b6e400b3dfd6a1d694317be12499dd90ff9d",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_02_30PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_02_30PM__59d58ef723a73df1.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_02_45PM",
+   "revision_label": "2026-11-15 02:45PM ET",
+   "retrieved_utc": "2026-11-15T23:49:02Z",
+   "bytes": 100269,
+   "sha256": "901c50a26d5db6146c1e489f3ec86f50e3fae26151537c50b05c48ac402d8f0c",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_02_45PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_02_45PM__901c50a26d5db614.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_03_00PM",
+   "revision_label": "2026-11-15 03:00PM ET",
+   "retrieved_utc": "2026-11-15T23:49:02Z",
+   "bytes": 100300,
+   "sha256": "4ba6a6bcdc87dc570c546b577a793a08889edeab32c672dcd9dd49da6246cd27",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_03_00PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_03_00PM__4ba6a6bcdc87dc57.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_03_15PM",
+   "revision_label": "2026-11-15 03:15PM ET",
+   "retrieved_utc": "2026-11-15T23:49:03Z",
+   "bytes": 100305,
+   "sha256": "d1aa215e326e5b60a37514f876b9b7838c8f0b7f27f1f35b34e6e6f628b63968",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_03_15PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_03_15PM__d1aa215e326e5b60.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_03_30PM",
+   "revision_label": "2026-11-15 03:30PM ET",
+   "retrieved_utc": "2026-11-15T23:49:03Z",
+   "bytes": 100299,
+   "sha256": "c17ab5a7d2128a319140492cc10eb3f729ad230c220dbacb16bbbc297d67e7db",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_03_30PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_03_30PM__c17ab5a7d2128a31.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_03_45PM",
+   "revision_label": "2026-11-15 03:45PM ET",
+   "retrieved_utc": "2026-11-15T23:49:04Z",
+   "bytes": 100410,
+   "sha256": "3eb296327e704125cc28cd62c7e59ed0ca5830457bb0c6fd86619929272d61d4",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_03_45PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_03_45PM__3eb296327e704125.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_04_00PM",
+   "revision_label": "2026-11-15 04:00PM ET",
+   "retrieved_utc": "2026-11-15T23:49:05Z",
+   "bytes": 100247,
+   "sha256": "0522cbd3b3e7ddb62a9a2ad965ae873ab1fa2d3bb7354f52c4267d6997a53673",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_04_00PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_04_00PM__0522cbd3b3e7ddb6.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_04_15PM",
+   "revision_label": "2026-11-15 04:15PM ET",
+   "retrieved_utc": "2026-11-15T23:49:05Z",
+   "bytes": 101653,
+   "sha256": "98541686730bc6500d7edb93bde995ed0b34cf8dc9ecdae8ab56776fa3d557fa",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_04_15PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_04_15PM__98541686730bc650.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_04_30PM",
+   "revision_label": "2026-11-15 04:30PM ET",
+   "retrieved_utc": "2026-11-15T23:49:06Z",
+   "bytes": 104641,
+   "sha256": "b1425352f0bd81bfe44e3a99ace3f09a5bccad5d5e868206ff5c41cb0058df8a",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_04_30PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_04_30PM__b1425352f0bd81bf.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_04_45PM",
+   "revision_label": "2026-11-15 04:45PM ET",
+   "retrieved_utc": "2026-11-15T23:49:06Z",
+   "bytes": 104484,
+   "sha256": "eec639713fd48121a439cf8e049cc2eb391a41c635c9f7113a3854c90a376387",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_04_45PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_04_45PM__eec639713fd48121.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_05_00PM",
+   "revision_label": "2026-11-15 05:00PM ET",
+   "retrieved_utc": "2026-11-15T23:49:07Z",
+   "bytes": 105845,
+   "sha256": "8be609b429d619a61d66dc34dc36ca5eb961ef42bbadadcd33fbe2ccffdee4a6",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_00PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_05_00PM__8be609b429d619a6.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_05_15PM",
+   "revision_label": "2026-11-15 05:15PM ET",
+   "retrieved_utc": "2026-11-15T23:49:07Z",
+   "bytes": 105859,
+   "sha256": "e6605d35bf4acfcb8e980247521796233ea3663648db4218d58a9a79c6e827ab",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_15PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_05_15PM__e6605d35bf4acfcb.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_05_15PM",
+   "revision_label": "Injury-Report_2026-11-15_05_15PM.pdf",
+   "retrieved_utc": "2026-11-15T22:44:19Z",
+   "bytes": 105859,
+   "sha256": "e6605d35bf4acfcb8e980247521796233ea3663648db4218d58a9a79c6e827ab",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_15PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_05_15PM__e6605d35bf4acfcb8e980247521796233ea3663648db4218d58a9a79c6e827ab.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_05_30PM",
+   "revision_label": "2026-11-15 05:30PM ET",
+   "retrieved_utc": "2026-11-15T23:49:08Z",
+   "bytes": 105986,
+   "sha256": "0ff31c236dda6c0dfc750665c94f47bed83c1d7f900b678195367421b115be89",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_30PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_05_30PM__0ff31c236dda6c0d.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_05_30PM",
+   "revision_label": "Injury-Report_2026-11-15_05_30PM.pdf",
+   "retrieved_utc": "2026-11-15T22:44:19Z",
+   "bytes": 105986,
+   "sha256": "0ff31c236dda6c0dfc750665c94f47bed83c1d7f900b678195367421b115be89",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_30PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_05_30PM__0ff31c236dda6c0dfc750665c94f47bed83c1d7f900b678195367421b115be89.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_05_45PM",
+   "revision_label": "2026-11-15 05:45PM ET",
+   "retrieved_utc": "2026-11-15T23:49:08Z",
+   "bytes": 105945,
+   "sha256": "97a006cd90f05f411f0a9c9bf00e3880403288f6a75d6d1572e3057f3bc4770e",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_45PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_05_45PM__97a006cd90f05f41.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_06_00PM",
+   "revision_label": "2026-11-15 06:00PM ET",
+   "retrieved_utc": "2026-11-15T23:49:09Z",
+   "bytes": 108308,
+   "sha256": "4f57f0cd018af8d0f7dc68541939b32d2224b1159181aa8ebea100f753d9502d",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_00PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_06_00PM__4f57f0cd018af8d0.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_06_15PM",
+   "revision_label": "2026-11-15 06:15PM ET",
+   "retrieved_utc": "2026-11-15T23:49:09Z",
+   "bytes": 108297,
+   "sha256": "17fbcb8d206fa2602a712977af9cdf854a7c8c898767c1d6ac8cd62ba4da3203",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_06_15PM__17fbcb8d206fa260.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_06_30PM",
+   "revision_label": "2026-11-15 06:30PM ET",
+   "retrieved_utc": "2026-11-15T23:49:10Z",
+   "bytes": 108445,
+   "sha256": "031b28059f33b60a173e8290c46cad711015e6820ddc9f205dd0dd7dc862316d",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_30PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_06_30PM__031b28059f33b60a.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_06_45PM",
+   "revision_label": "2026-11-15 06:45PM ET",
+   "retrieved_utc": "2026-11-15T23:49:10Z",
+   "bytes": 108402,
+   "sha256": "24e8255930ec13900edd14ae225660d54536a7eaeebc41d4fcb4aa2c7fd533f0",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_45PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_06_45PM__24e8255930ec1390.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_09_00PM",
+   "revision_label": "Injury-Report_2026-11-15_09_00PM.pdf",
+   "retrieved_utc": "2026-11-16T02:28:18Z",
+   "bytes": 109024,
+   "sha256": "3a148bf1db5fb0165a495915ba42eb955e9387efe55916eb5feb7dd3688c1448",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_09_00PM__3a148bf1db5fb0165a495915ba42eb955e9387efe55916eb5feb7dd3688c1448.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_09_15PM",
+   "revision_label": "Injury-Report_2026-11-15_09_15PM.pdf",
+   "retrieved_utc": "2026-11-16T02:45:04Z",
+   "bytes": 109037,
+   "sha256": "06a1c3640db8bcd7d5c0079071aa84320c55f33dc66e69351a9015a4815793e1",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_15PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_09_15PM__06a1c3640db8bcd7d5c0079071aa84320c55f33dc66e69351a9015a4815793e1.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_09_30PM",
+   "revision_label": "Injury-Report_2026-11-15_09_30PM.pdf",
+   "retrieved_utc": "2026-11-16T02:45:04Z",
+   "bytes": 109191,
+   "sha256": "bee0f4fc581e87490304b0fa1317bb79fe5821df320e98b69ad8c1304d46f391",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_30PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_09_30PM__bee0f4fc581e87490304b0fa1317bb79fe5821df320e98b69ad8c1304d46f391.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_10_45PM",
+   "revision_label": "Injury-Report_2026-11-15_10_45PM.pdf",
+   "retrieved_utc": "2026-11-16T04:07:04Z",
+   "bytes": 108948,
+   "sha256": "c0d2230b20f7020d5d53dad5b3a8140848092a2b8dbdff77bc57325a14ec5490",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_10_45PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_10_45PM__c0d2230b20f7020d5d53dad5b3a8140848092a2b8dbdff77bc57325a14ec5490.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-15_11_00PM",
+   "revision_label": "Injury-Report_2026-11-15_11_00PM.pdf",
+   "retrieved_utc": "2026-11-16T04:07:04Z",
+   "bytes": 108832,
+   "sha256": "c28666e0d6460b986f502f243350bed35ca3e3b06bf8b196e38692eaf35ecbc4",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_11_00PM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-15_11_00PM__c28666e0d6460b986f502f243350bed35ca3e3b06bf8b196e38692eaf35ecbc4.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-16_09_30AM",
+   "revision_label": "Injury-Report_2026-11-16_09_30AM.pdf",
+   "retrieved_utc": "2026-11-16T14:47:44Z",
+   "bytes": 93435,
+   "sha256": "8e9592936b389f74eee82306656679cd2d7cd2dc42fc7671dbb14f67465cac28",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_30AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-16_09_30AM__8e9592936b389f74eee82306656679cd2d7cd2dc42fc7671dbb14f67465cac28.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-16_09_45AM",
+   "revision_label": "Injury-Report_2026-11-16_09_45AM.pdf",
+   "retrieved_utc": "2026-11-16T14:47:44Z",
+   "bytes": 93508,
+   "sha256": "a84e58a9577181969762aed74b56b178b8f2d7c6e148a8cd2a18e4707bec0d9f",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_45AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-16_09_45AM__a84e58a9577181969762aed74b56b178b8f2d7c6e148a8cd2a18e4707bec0d9f.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-16_10_00AM",
+   "revision_label": "Injury-Report_2026-11-16_10_00AM.pdf",
+   "retrieved_utc": "2026-11-16T15:16:51Z",
+   "bytes": 93081,
+   "sha256": "1a03c177803341037c022e9b604fdb363eb6dee882b2a35ebfd957a0fa216a52",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_10_00AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-16_10_00AM__1a03c177803341037c022e9b604fdb363eb6dee882b2a35ebfd957a0fa216a52.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-16_10_15AM",
+   "revision_label": "Injury-Report_2026-11-16_10_15AM.pdf",
+   "retrieved_utc": "2026-11-16T15:16:51Z",
+   "bytes": 93220,
+   "sha256": "cb4c0cde3f4059667831ed45400bc45cf9a0409d679e2e92f8480fbf207093b7",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_10_15AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-16_10_15AM__cb4c0cde3f4059667831ed45400bc45cf9a0409d679e2e92f8480fbf207093b7.pdf"
+  },
+  {
+   "edition": "Injury-Report_2026-11-16_10_30AM",
+   "revision_label": "Injury-Report_2026-11-16_10_30AM.pdf",
+   "retrieved_utc": "2026-11-16T15:30:05Z",
+   "bytes": 93249,
+   "sha256": "d45e0922b69c0cb9c6cd39a102a4dfd34b77d6c87d215c87268a460cae57c956",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_10_30AM.pdf",
+   "file": "data/raw/injury_pdfs/Injury-Report_2026-11-16_10_30AM__d45e0922b69c0cb9c6cd39a102a4dfd34b77d6c87d215c87268a460cae57c956.pdf"
+  }
+ ],
+ "rule": "every value here is computed from the files in this repository: the hash is recomputed from the stored bytes, the timestamp and URL come from the sidecar the fetcher wrote at retrieval, and the change counts come from the consecutive-edition diffs engine/injury_diff.py generates."
+}

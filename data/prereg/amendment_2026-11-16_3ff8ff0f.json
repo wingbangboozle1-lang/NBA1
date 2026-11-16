@@ -1,0 +1,53 @@
+{
+ "title": "Pre-registration amendment - model inputs changed after the freeze; no frozen document was edited",
+ "amended_utc": "2026-11-16T18:31:43Z",
+ "amended_by": "arena/3ff8ff0f-nba1",
+ "rule": "a pre-registration file is frozen before the first bet. Changing a model input must therefore never rewrite one: the frozen files under data/prereg/ are left byte-identical, and this record states what changed, which strategies it touches, and how already-graded settlement is treated.",
+ "input_changes": [
+  {
+   "input": "home-court advantage (points)",
+   "before": 1.14,
+   "after": 0.87,
+   "why": "the pin is read off the measured home-win rate. The published value came from the 02:13Z standings capture (102/193) whose own caveat said three 11/15 games were still in progress; this session re-read the standings first-hand (102/196 = 0.5204) and the independent finals corpus agrees exactly (102/196). The margin dispersion used to convert the rate into points also moved, 15.96 -> 16.94, because 25 unplayed 0-0 rows had been counted as games.",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "input": "parlay / SGP correlation (rho)",
+   "before": {
+    "engine/parlay.py": 0.15,
+    "SGP teammates": -0.2,
+    "SGP opponents": 0.05
+   },
+   "after": {
+    "side_and_total": -0.038,
+    "cross_team_points": 0.12,
+    "same_team_players": 0.4213
+   },
+   "why": "the 0.15 in engine/parlay.py was a literal the code claimed was measured (the register it read has no top-level rho key); the SGP constants were labelled MODEL-DERIVED. All three are now read from data/derived/parlay_rho.json, which scripts/measure_parlay_rho.py computes from the 196 verified official finals and the official gamebooks, each with n, interval and sample-floor status.",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/parlay_rho.json"
+  }
+ ],
+ "affected_strategies": [
+  "S01",
+  "S02",
+  "S03",
+  "S04",
+  "S05",
+  "S06",
+  "S07",
+  "S08",
+  "T-SINGLE",
+  "T-PARLAY",
+  "T-SGP"
+ ],
+ "settlement_treatment": "games already graded from the sealed ledger (2026-11-14, 2026-11-15) are NOT re-graded: a pick that was published and settled under the frozen inputs stays graded under them, so the amendment cannot move a record. Picks published after this amendment are graded by the same frozen thresholds, which are unchanged; only the line they are measured against moved with the official data it is derived from.",
+ "frozen_files_touched": "none",
+ "verification": {
+  "standings_capture": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/standings_2026-11-16_1825Z_3ff8ff0f.json",
+  "rho_register": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/parlay_rho.json",
+  "gates_added": [
+   "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/test_hca_pin.py",
+   "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/test_rho_pricing.py"
+  ]
+ }
+}

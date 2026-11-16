@@ -1,0 +1,35 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-15_04_30PM__b1425352f0bd81bf.pdf",
+  "label": "Injury-Report_2026-11-15_04_30PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_04_30PM.pdf",
+  "retrieved_at_utc": "2026-11-15T23:49:06Z",
+  "sha256": "b1425352f0bd81bfe44e3a99ace3f09a5bccad5d5e868206ff5c41cb0058df8a",
+  "rows": 124
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-15_04_45PM__eec639713fd48121.pdf",
+  "label": "Injury-Report_2026-11-15_04_45PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_04_45PM.pdf",
+  "retrieved_at_utc": "2026-11-15T23:49:06Z",
+  "sha256": "eec639713fd48121a439cf8e049cc2eb391a41c635c9f7113a3854c90a376387",
+  "rows": 124
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "Toronto Raptors",
+   "player": "Barnes, Scottie",
+   "before_status": "Probable",
+   "after_status": "Available",
+   "before_reason": "Injury/Illness - Left Groin Strain",
+   "after_reason": "Injury/Illness - Left Groin Strain",
+   "before_matchup": "NYK@TOR",
+   "after_matchup": "NYK@TOR"
+  }
+ ],
+ "listed_in_after_only": [],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}

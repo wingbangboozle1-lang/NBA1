@@ -419,8 +419,18 @@ def load_edition(pdf_path):
     return {
         "edition": sidecar.get("edition") or os.path.basename(pdf_path),
         "label": edition_label(os.path.basename(pdf_path)),
-        "source_url": sidecar.get("source_url"),
-        "retrieved_at_utc": sidecar.get("retrieved_at_utc"),
+        # Two sidecar schemas are in circulation in data/raw/injury_pdfs/ (measured
+        # 2026-11-16 by scripts/verify_injury_pdf_archive.py: 76 files write
+        # {url, retrieved_utc}, 12 write {source_url, retrieved_at_utc}).  Reading
+        # only one name used to leave source_url and retrieved_at_utc null for every
+        # edition the fetcher itself archived - i.e. the provenance requirement was
+        # met on disk and lost in the reader.  Both spellings are accepted; the
+        # split is still flagged (F130) and the fix is to write one schema (SG39).
+        "source_url": sidecar.get("source_url") or sidecar.get("url"),
+        "retrieved_at_utc": (sidecar.get("retrieved_at_utc")
+                             or sidecar.get("retrieved_utc")),
+        "revision_label": sidecar.get("revision_label"),
+        "http_status": sidecar.get("http_status"),
         "sha256": sidecar.get("sha256") or hashlib.sha256(raw).hexdigest(),
         "bytes": len(raw),
         "pages": len(pages),

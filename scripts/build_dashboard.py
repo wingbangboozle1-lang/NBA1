@@ -176,8 +176,8 @@ def page(title, sub, body, depth=1, extra_head=""):
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
-      <a href="%(repo)smodel-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
-      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="%(repo)smodel-v2.html">Model v2 — disagreement-first</a>
+      <a href="picks.html">Horizon lines &amp; picks (session build)</a>
       <a href="%(repo)spicks.html">Rolling horizon pick file</a>
       <a href="%(navbase)spicks.html">Horizon</a>
       <a href="%(navbase)sstrategies.html">Evidence</a>
@@ -3087,8 +3087,18 @@ def main():
 
     # COORDINATION §50 (Q05, integration-seat hook): measured minutes shares (Q02) and the
     # projection/bet split with its four gates (Q03). Each writes its own pages and data file.
+    #
+    # build_horizon_page_v2.py was added to this list on 2026-11-16 (session
+    # arena/3ff8ff0f-nba1) because it is the ONLY writer of the root model-v2.html that the
+    # header nav links, and nothing in any workflow ran it. It was found stale: the page was
+    # still rendering a 25-pick horizon with 14 gate passes and a 1.14-point home-court pin,
+    # while data/derived/*_v2.json had been rebuilt to 29 games, 17 passes and 0.87 the same
+    # day. A committed artifact with no producer step in the build rots silently and
+    # contradicts the rest of the site - exactly the E11/E12 class of defect - so the page is
+    # now regenerated whenever the site is, and scripts/test_hca_pin.py fails if the
+    # regenerated pin ever stops matching a re-derivation from the official captures.
     import subprocess as _sp
-    for _s in ("build_minutes_shares.py", "build_surfaces.py"):
+    for _s in ("build_minutes_shares.py", "build_surfaces.py", "build_horizon_page_v2.py"):
         _sp.run([sys.executable, os.path.join(ROOT, "scripts", _s)], check=True)
 
     print("Wrote %d pages, assets and data to %s" % (len(built), SITE))

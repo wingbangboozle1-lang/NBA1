@@ -1,0 +1,97 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-15_03_30PM__c17ab5a7d2128a31.pdf",
+  "label": "Injury-Report_2026-11-15_03_30PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_03_30PM.pdf",
+  "retrieved_at_utc": "2026-11-15T23:49:03Z",
+  "sha256": "c17ab5a7d2128a319140492cc10eb3f729ad230c220dbacb16bbbc297d67e7db",
+  "rows": 105
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-15_03_45PM__3eb296327e704125.pdf",
+  "label": "Injury-Report_2026-11-15_03_45PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_03_45PM.pdf",
+  "retrieved_at_utc": "2026-11-15T23:49:04Z",
+  "sha256": "3eb296327e704125cc28cd62c7e59ed0ca5830457bb0c6fd86619929272d61d4",
+  "rows": 89
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [],
+ "listed_in_after_only": [],
+ "listed_in_before_only": [
+  {
+   "team": "Oklahoma City Thunder",
+   "player": "Holmgren, Chet",
+   "status": "Out",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "Oklahoma City Thunder",
+   "player": "Mitchell, Ajay",
+   "status": "Questionable",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "Oklahoma City Thunder",
+   "player": "Sorber, Thomas",
+   "status": "Out",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "Oklahoma City Thunder",
+   "player": "Wallace, Cason",
+   "status": "Out",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "Oklahoma City Thunder",
+   "player": "Williams, Jalen",
+   "status": "Out",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "Oklahoma City Thunder",
+   "player": "Williams, Jaylin",
+   "status": "Out",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Achiuwa, Precious",
+   "status": "Questionable",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Mogbo, Jonathan",
+   "status": "Out",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Murray, Keegan",
+   "status": "Available",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Pedulla, Sean",
+   "status": "Out",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Raynaud, Maxime",
+   "status": "Out",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Simmons, Ben",
+   "status": "Out",
+   "matchup": "OKC@SAC"
+  }
+ ],
+ "team_block_filing_changes": []
+}

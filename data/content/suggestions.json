@@ -937,6 +937,118 @@
    ],
    "recommended": "A",
    "note": "This session's token returned HTTP 403 on PUT /repos/{owner}/{repo}/pages (build_type=workflow), so it could not be applied here; it needs a repository admin."
+  },
+  {
+   "id": "SG38",
+   "title": "Stop writing scores for games that have not been played",
+   "category": "data quality",
+   "problem": "The dated result captures write home_pts 0 / away_pts 0 with game_status 1 for every scheduled fixture, and the horizon generator keeps those rows in data/official/. Four model inputs read that corpus; each had to invent its own filter, and three of them got it wrong (F129): the published home-court block, the per-team luck z-scores and the measured correlations were all computed over 25 games that had not happened, and the margin dispersion that converts the home-win rate into points was diluted by 25 zero margins.",
+   "options": [
+    {
+     "option": "A: have the capture write null for a non-final game and assert it at promotion",
+     "effort": "Low - one guard in engine/promote_official.py plus a schema check",
+     "risk": "Low - consumers already treat None as not-a-game; a 0-0 game is not a legal final anyway",
+     "unlocks": "every count-based number stops depending on each consumer remembering to filter"
+    },
+    {
+     "option": "B: keep the payload and make the shared predicate the only definition",
+     "effort": "Zero - done in this session (engine/model_v2.is_verified_final)",
+     "risk": "Medium - the next consumer that filters on 'score is not None' reintroduces the bug",
+     "unlocks": "nothing new; it preserves what this session fixed"
+    },
+    {
+     "option": "C: both - write nulls and keep the predicate as a backstop",
+     "effort": "Low, on top of A",
+     "risk": "Low",
+     "unlocks": "the defect cannot come back quietly from either side"
+    }
+   ],
+   "recommended": "C",
+   "note": "The predicate is already in place and tested; A is the remaining half. Until A lands, any new script that sums over data/official/results_*.json must import is_verified_final - worth a line in the README."
+  },
+  {
+   "id": "SG39",
+   "title": "One provenance manifest for the archived injury PDFs",
+   "category": "data quality",
+   "problem": "76 of 88 sidecars use {url, retrieved_utc, revision_label, http_status, ...}; the newest 12 use {edition, source_url, retrieved_at_utc, content_type}. Same facts, two spellings, so a consumer that reads one name sees blanks for the other (F130). Requirement R04 is satisfied only because the auditor checks both.",
+   "options": [
+    {
+     "option": "A: normalise the fetcher to one schema and rewrite the 12 older sidecars in a migration commit",
+     "effort": "Low - 12 files, mechanical, byte hashes untouched",
+     "risk": "Low - the PDF bytes and their sha256 are not modified, so tamper-evidence is unaffected",
+     "unlocks": "the archive can be audited by one reader, and the diff chain can key off retrieval time alone"
+    },
+    {
+     "option": "B: keep both and make the verifier accept either",
+     "effort": "Zero - done",
+     "risk": "Medium - the ambiguity stays and every future consumer re-solves it",
+     "unlocks": "nothing new"
+    },
+    {
+     "option": "C: add the revision time printed inside the PDF to the sidecar as a separate field",
+     "effort": "Medium - needs the PDF text parse engine/injury_diff.py already does",
+     "risk": "Low",
+     "unlocks": "R18's banner can show the league's own revision stamp, not just our retrieval time"
+    }
+   ],
+   "recommended": "A, then C",
+   "note": "Do not re-download anything to do A: the sidecar is metadata, the evidence is the stored bytes."
+  },
+  {
+   "id": "SG40",
+   "title": "Gate the build on pin currency: fail when the published HCA pin is older than the newest standings capture",
+   "category": "model integrity",
+   "problem": "The published pin sat at 102/193 = 0.5285 for 16 hours after the league's own standings had moved to 102/196 = 0.5204, and the capture that produced it carried a caveat saying three games were still in progress. Nothing failed. A session read the standings, wrote the number into the board, asked an integration seat to apply it, and the model kept shipping the stale one (R09, request R-50-B). The pin is only 'pinned to the measurement' if something checks that it still is.",
+   "options": [
+    {
+     "option": "A: a build-time assertion that the pin equals a re-derivation from the newest standings capture",
+     "effort": "Low - scripts/test_hca_pin.py already re-derives it; promote it into the CI validate job",
+     "risk": "Low - a stale pin then blocks a rebuild instead of shipping quietly",
+     "unlocks": "this class of defect cannot reach the published site again"
+    },
+    {
+     "option": "B: also fail when the standings capture itself is older than the newest settled game day",
+     "effort": "Low - the comparison is a date string against data/settlement/",
+     "risk": "Medium - a quiet night could block a rebuild for no good reason; state the tolerance",
+     "unlocks": "a pin computed from an obviously stale read stops being publishable"
+    },
+    {
+     "option": "C: publish the pin's age on every page that uses it",
+     "effort": "Low - the capture already carries retrieved_utc",
+     "risk": "None",
+     "unlocks": "a reader can see the input is 3 hours old or 3 days old without opening a JSON file"
+    }
+   ],
+   "recommended": "A + C",
+   "note": "Test A exists in this branch already (scripts/test_hca_pin.py) but is not wired into .github/workflows/pages.yml; wiring it is a one-line change in the validate job."
+  },
+  {
+   "id": "SG41",
+   "title": "Print the two rho prices side by side everywhere, not only on the roll page",
+   "category": "presentation",
+   "problem": "After this session's fix the data files carry both numbers - naive product, rho-adjusted, fair American odds, the rho's n and interval - but only the rolling-slate page renders them. site/pages/parlay-pricing.html and the SGP candidates table still render one column each, so a reader comparing the two surfaces sees a price without its assumption on one of them.",
+   "options": [
+    {
+     "option": "A: one shared parlay table component used by both pages",
+     "effort": "Medium - both builders must import it",
+     "risk": "Low - the numbers are already in the JSON",
+     "unlocks": "the naive-vs-correlated comparison becomes impossible to omit by accident"
+    },
+    {
+     "option": "B: add the missing columns to the older page only",
+     "effort": "Low",
+     "risk": "Low - duplicates the markup, which is how the drift happened",
+     "unlocks": "the same information, less safely"
+    },
+    {
+     "option": "C: leave it; the roll page is the surface of record",
+     "effort": "Zero",
+     "risk": "Medium - the brief's 'price every parlay and print the naive product beside it' is then satisfied on the data but not on every page",
+     "unlocks": "nothing"
+    }
+   ],
+   "recommended": "A",
+   "note": "The register rows carry rho_status strings long enough to print under the number; no new data is needed."
   }
  ]
 }

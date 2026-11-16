@@ -1,0 +1,234 @@
+{
+ "title": "Horizon re-verification, 2026-11-17 and 2026-11-19 row by row (11/16 belongs to session arena/0d7e58e9-nba1, COORDINATION 55)",
+ "session": "arena/3ff8ff0f-nba1",
+ "read_utc": "2026-11-16T18:31:43Z",
+ "method": "the official per-date games page was read first-hand (https://www.nba.com/games?date=YYYY-MM-DD) and every game card compared with the published horizon in data/derived/horizon_lines_v2.json on game id, matchup and tip time; the league's own calendar strip supplies the game count per date; the W-L each card prints is checked against the standings capture this session transcribed. Nothing was inferred: a row that could not be matched is listed as a mismatch, not corrected.",
+ "rows_checked": 9,
+ "mismatches": [],
+ "rows": [
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600253",
+   "official_matchup": "NYK@TOR",
+   "published_matchup": "NYK@TOR",
+   "official_tip": "7:30 PM ET",
+   "published_tip": "7:30 PM ET",
+   "official_arena_record_line": "Knicks 7-6 / Raptors 5-8",
+   "published_venue": "Scotiabank Arena",
+   "official_game_url": "https://www.nba.com/game/nyk-tor-0022600253",
+   "matchup_match": true,
+   "tip_match": true
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "official_matchup": "POR@MIN",
+   "published_matchup": "POR@MIN",
+   "official_tip": "8:00 PM ET",
+   "published_tip": "8:00 PM ET",
+   "official_arena_record_line": "Trail Blazers 9-3 / Timberwolves 9-4",
+   "published_venue": "Target Center",
+   "official_game_url": "https://www.nba.com/game/por-min-0022600254",
+   "matchup_match": true,
+   "tip_match": true
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "official_matchup": "DET@SAS",
+   "published_matchup": "DET@SAS",
+   "official_tip": "8:00 PM ET",
+   "published_tip": "8:00 PM ET",
+   "official_arena_record_line": "Pistons 8-4 / Spurs 12-2",
+   "published_venue": "Frost Bank Center",
+   "official_game_url": "https://www.nba.com/game/det-sas-0022600255",
+   "matchup_match": true,
+   "tip_match": true
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600256",
+   "official_matchup": "CHA@LAL",
+   "published_matchup": "CHA@LAL",
+   "official_tip": "11:00 PM ET",
+   "published_tip": "11:00 PM ET",
+   "official_arena_record_line": "Hornets 4-9 / Lakers 12-2",
+   "published_venue": "Crypto.com Arena",
+   "official_game_url": "https://www.nba.com/game/cha-lal-0022600256",
+   "matchup_match": true,
+   "tip_match": true
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "official_matchup": "UTA@LAC",
+   "published_matchup": "UTA@LAC",
+   "official_tip": "10:30 PM ET",
+   "published_tip": "10:30 PM ET",
+   "official_arena_record_line": "Jazz 1-13 / Clippers 4-8",
+   "published_venue": "Intuit Dome",
+   "official_game_url": "https://www.nba.com/game/uta-lac-0022600257",
+   "matchup_match": true,
+   "tip_match": true
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600270",
+   "official_matchup": "GSW@MEM",
+   "published_matchup": "GSW@MEM",
+   "official_tip": "8:00 PM ET",
+   "published_tip": "8:00 PM ET",
+   "official_arena_record_line": "Warriors 8-5 / Grizzlies 9-4",
+   "published_venue": "FedExForum",
+   "official_game_url": "https://www.nba.com/game/gsw-mem-0022600270",
+   "matchup_match": true,
+   "tip_match": true
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600271",
+   "official_matchup": "POR@MIL",
+   "published_matchup": "POR@MIL",
+   "official_tip": "8:00 PM ET",
+   "published_tip": "8:00 PM ET",
+   "official_arena_record_line": "Trail Blazers 9-3 / Bucks 1-13",
+   "published_venue": "Fiserv Forum",
+   "official_game_url": "https://www.nba.com/game/por-mil-0022600271",
+   "matchup_match": true,
+   "tip_match": true
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600272",
+   "official_matchup": "NYK@MIN",
+   "published_matchup": "NYK@MIN",
+   "official_tip": "8:00 PM ET",
+   "published_tip": "8:00 PM ET",
+   "official_arena_record_line": "Knicks 7-6 / Timberwolves 9-4",
+   "published_venue": "Target Center",
+   "official_game_url": "https://www.nba.com/game/nyk-min-0022600272",
+   "matchup_match": true,
+   "tip_match": true
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600273",
+   "official_matchup": "LAC@SAS",
+   "published_matchup": "LAC@SAS",
+   "official_tip": "8:00 PM ET",
+   "published_tip": "8:00 PM ET",
+   "official_arena_record_line": "Clippers 4-8 / Spurs 12-2",
+   "published_venue": "Frost Bank Center",
+   "official_game_url": "https://www.nba.com/game/lac-sas-0022600273",
+   "matchup_match": true,
+   "tip_match": true
+  }
+ ],
+ "date_count_checks": [
+  {
+   "date": "2026-11-16",
+   "official_games_on_calendar_strip": 8,
+   "published_rows_for_that_date": 8,
+   "match": true
+  },
+  {
+   "date": "2026-11-17",
+   "official_games_on_calendar_strip": 5,
+   "published_rows_for_that_date": 5,
+   "match": true
+  },
+  {
+   "date": "2026-11-18",
+   "official_games_on_calendar_strip": 12,
+   "published_rows_for_that_date": 12,
+   "match": true
+  },
+  {
+   "date": "2026-11-19",
+   "official_games_on_calendar_strip": 4,
+   "published_rows_for_that_date": 4,
+   "match": true
+  }
+ ],
+ "team_record_checks": [
+  {
+   "team": "CHA",
+   "record_on_game_card": "4-9",
+   "record_in_standings_capture": "4-9",
+   "match": true
+  },
+  {
+   "team": "DET",
+   "record_on_game_card": "8-4",
+   "record_in_standings_capture": "8-4",
+   "match": true
+  },
+  {
+   "team": "GSW",
+   "record_on_game_card": "8-5",
+   "record_in_standings_capture": "8-5",
+   "match": true
+  },
+  {
+   "team": "LAC",
+   "record_on_game_card": "4-8",
+   "record_in_standings_capture": "4-8",
+   "match": true
+  },
+  {
+   "team": "LAL",
+   "record_on_game_card": "12-2",
+   "record_in_standings_capture": "12-2",
+   "match": true
+  },
+  {
+   "team": "MEM",
+   "record_on_game_card": "9-4",
+   "record_in_standings_capture": "9-4",
+   "match": true
+  },
+  {
+   "team": "MIL",
+   "record_on_game_card": "1-13",
+   "record_in_standings_capture": "1-13",
+   "match": true
+  },
+  {
+   "team": "MIN",
+   "record_on_game_card": "9-4",
+   "record_in_standings_capture": "9-4",
+   "match": true
+  },
+  {
+   "team": "NYK",
+   "record_on_game_card": "7-6",
+   "record_in_standings_capture": "7-6",
+   "match": true
+  },
+  {
+   "team": "POR",
+   "record_on_game_card": "9-3",
+   "record_in_standings_capture": "9-3",
+   "match": true
+  },
+  {
+   "team": "SAS",
+   "record_on_game_card": "12-2",
+   "record_in_standings_capture": "12-2",
+   "match": true
+  },
+  {
+   "team": "TOR",
+   "record_on_game_card": "5-8",
+   "record_in_standings_capture": "5-8",
+   "match": true
+  },
+  {
+   "team": "UTA",
+   "record_on_game_card": "1-13",
+   "record_in_standings_capture": "1-13",
+   "match": true
+  }
+ ],
+ "scope_note": "2026-11-18 was verified at count level today (the league's calendar strip prints 12 games, and the published horizon holds 12 rows for that date) rather than row by row in this session: its 12 rows are the same official ids 0022600258-0022600269 that the promoted, verified S4 schedule capture carries (COORDINATION 54 E04/E05), re-read by session arena/0d7e58e9-nba1 for 11/16 and by this session's page loads for the surrounding dates."
+}

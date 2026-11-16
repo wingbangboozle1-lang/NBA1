@@ -1,7 +1,7 @@
 {
  "title": "Parlay rho register - every correlation the site prices with, measured",
  "generated_by": "scripts/measure_parlay_rho.py",
- "generated_utc": "2026-11-16T18:25:34Z",
+ "generated_utc": "2026-11-16T18:33:14Z",
  "session": "arena/3ff8ff0f-nba1",
  "answers": "R14: price every parlay with the measured rho and print the naive product beside it, instead of withholding the price",
  "rule": "a rho may be printed as MEASURED only if it is computed from official data in this repository by this script; a hand-set constant is never labelled measured. Values that do not clear their sample floor are printed with their n, their interval and the floor, and the naive independent product stays beside them.",
@@ -112,7 +112,23 @@
    "rho_measured": 0.4213,
    "n_player_pairs": 672,
    "n_game_days": 6,
-   "p_value": 0.0,
+   "p_value": null,
+   "p_value_note": "not computed at pair level: 672 player pairs from 6 independent game-days are not 672 independent observations",
+   "cluster_inference": {
+    "method": "delete-a-group jackknife over the leave-one-game-out estimates (the game is the independent unit; the individual player pair is not)",
+    "k_clusters": 6,
+    "theta_bar": 0.4213,
+    "jackknife_se": 0.0213,
+    "t": 19.777,
+    "df": 5,
+    "verdict": "|t| = 19.78 against t_0.975(df=5) = 2.571 -> nonzero at the 5% level; t_0.995(df=5) = 4.032 -> also nonzero at the 1% level",
+    "critical_values": {
+     "5pct_two_sided": 2.571,
+     "1pct_two_sided": 4.032
+    },
+    "caveat": "read the t with the same suspicion the sample deserves: a leave-one-cluster-out jackknife is known to understate uncertainty when k is this small (6 games), because dropping one game removes only a sixth of the pairs and the rest of the day is still in the sample. The pairing of teammate legs is clearly positive on six game-days of box scores; its precision is not established until the corpus clears the floor. This is why the row is priced AND bounded, not priced alone."
+   },
+   "p_value_naive_pair_level_for_reference_only": 0.0,
    "ci95_bootstrap": [
     0.3923,
     0.4504

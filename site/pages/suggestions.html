@@ -16,8 +16,8 @@
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
-      <a href="../../model-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
-      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="../../model-v2.html">Model v2 — disagreement-first</a>
+      <a href="picks.html">Horizon lines &amp; picks (session build)</a>
       <a href="../../picks.html">Rolling horizon pick file</a>
       <a href="picks.html">Horizon</a>
       <a href="strategies.html">Evidence</a>
@@ -480,6 +480,46 @@
 <td><b>Give GitHub Pages one deploy path instead of two that race each other</b></td>
 <td>Pages is configured with build_type 'legacy' - it builds the site from the main branch itself - while .github/workflows/pages.yml also deploys an Actions artifact to the same environment. Two builders are writing one site. Measured at 2026-11-16T02:5xZ: 9 consecutive 'pages build and deployment' runs cancelled, one every few minutes, each cancelled by the next push to main, with the last successful build at 2026-11-15T23:44:35Z. Freeing the queue (SG23, PR #115) did not fix it because the starvation is structural, not a backlog.</td>
 <td>- A: switch Pages to the Actions build type, so pages.yml is the only deploy path <span class='fine'>(effort: Low - one API call or one setting in Settings &gt; Pages; risk: Low - pages.yml already produces the artifact and its deploy job has a concurrency group that serialises production runs (cancel-in-progress false on main); unlocks: F97 closes; the site stops depending on how many sessions happen to be pushing)</span><br>- B: delete pages.yml and let the legacy branch builder be the only path <span class='fine'>(effort: Low; risk: Medium - loses the validate gate that runs before deploy, so a broken page could publish; unlocks: the same single path, but without the pre-deploy check)</span><br>- C: leave both paths <span class='fine'>(effort: None; risk: High - the site keeps serving whatever build happened to finish, which during parallel sessions is an old commit; unlocks: nothing)</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>
+</tr>
+<tr id="SG38">
+<td>SG38</td>
+<td>data quality</td>
+<td><b>Stop writing scores for games that have not been played</b></td>
+<td>The dated result captures write home_pts 0 / away_pts 0 with game_status 1 for every scheduled fixture, and the horizon generator keeps those rows in data/official/. Four model inputs read that corpus; each had to invent its own filter, and three of them got it wrong (F129): the published home-court block, the per-team luck z-scores and the measured correlations were all computed over 25 games that had not happened, and the margin dispersion that converts the home-win rate into points was diluted by 25 zero margins.</td>
+<td>- A: have the capture write null for a non-final game and assert it at promotion <span class='fine'>(effort: Low - one guard in engine/promote_official.py plus a schema check; risk: Low - consumers already treat None as not-a-game; a 0-0 game is not a legal final anyway; unlocks: every count-based number stops depending on each consumer remembering to filter)</span><br>- B: keep the payload and make the shared predicate the only definition <span class='fine'>(effort: Zero - done in this session (engine/model_v2.is_verified_final); risk: Medium - the next consumer that filters on 'score is not None' reintroduces the bug; unlocks: nothing new; it preserves what this session fixed)</span><br>- C: both - write nulls and keep the predicate as a backstop <span class='fine'>(effort: Low, on top of A; risk: Low; unlocks: the defect cannot come back quietly from either side)</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>
+</tr>
+<tr id="SG39">
+<td>SG39</td>
+<td>data quality</td>
+<td><b>One provenance manifest for the archived injury PDFs</b></td>
+<td>76 of 88 sidecars use {url, retrieved_utc, revision_label, http_status, ...}; the newest 12 use {edition, source_url, retrieved_at_utc, content_type}. Same facts, two spellings, so a consumer that reads one name sees blanks for the other (F130). Requirement R04 is satisfied only because the auditor checks both.</td>
+<td>- A: normalise the fetcher to one schema and rewrite the 12 older sidecars in a migration commit <span class='fine'>(effort: Low - 12 files, mechanical, byte hashes untouched; risk: Low - the PDF bytes and their sha256 are not modified, so tamper-evidence is unaffected; unlocks: the archive can be audited by one reader, and the diff chain can key off retrieval time alone)</span><br>- B: keep both and make the verifier accept either <span class='fine'>(effort: Zero - done; risk: Medium - the ambiguity stays and every future consumer re-solves it; unlocks: nothing new)</span><br>- C: add the revision time printed inside the PDF to the sidecar as a separate field <span class='fine'>(effort: Medium - needs the PDF text parse engine/injury_diff.py already does; risk: Low; unlocks: R18's banner can show the league's own revision stamp, not just our retrieval time)</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>
+</tr>
+<tr id="SG40">
+<td>SG40</td>
+<td>model integrity</td>
+<td><b>Gate the build on pin currency: fail when the published HCA pin is older than the newest standings capture</b></td>
+<td>The published pin sat at 102/193 = 0.5285 for 16 hours after the league's own standings had moved to 102/196 = 0.5204, and the capture that produced it carried a caveat saying three games were still in progress. Nothing failed. A session read the standings, wrote the number into the board, asked an integration seat to apply it, and the model kept shipping the stale one (R09, request R-50-B). The pin is only 'pinned to the measurement' if something checks that it still is.</td>
+<td>- A: a build-time assertion that the pin equals a re-derivation from the newest standings capture <span class='fine'>(effort: Low - scripts/test_hca_pin.py already re-derives it; promote it into the CI validate job; risk: Low - a stale pin then blocks a rebuild instead of shipping quietly; unlocks: this class of defect cannot reach the published site again)</span><br>- B: also fail when the standings capture itself is older than the newest settled game day <span class='fine'>(effort: Low - the comparison is a date string against data/settlement/; risk: Medium - a quiet night could block a rebuild for no good reason; state the tolerance; unlocks: a pin computed from an obviously stale read stops being publishable)</span><br>- C: publish the pin's age on every page that uses it <span class='fine'>(effort: Low - the capture already carries retrieved_utc; risk: None; unlocks: a reader can see the input is 3 hours old or 3 days old without opening a JSON file)</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>
+</tr>
+<tr id="SG41">
+<td>SG41</td>
+<td>presentation</td>
+<td><b>Print the two rho prices side by side everywhere, not only on the roll page</b></td>
+<td>After this session's fix the data files carry both numbers - naive product, rho-adjusted, fair American odds, the rho's n and interval - but only the rolling-slate page renders them. site/pages/parlay-pricing.html and the SGP candidates table still render one column each, so a reader comparing the two surfaces sees a price without its assumption on one of them.</td>
+<td>- A: one shared parlay table component used by both pages <span class='fine'>(effort: Medium - both builders must import it; risk: Low - the numbers are already in the JSON; unlocks: the naive-vs-correlated comparison becomes impossible to omit by accident)</span><br>- B: add the missing columns to the older page only <span class='fine'>(effort: Low; risk: Low - duplicates the markup, which is how the drift happened; unlocks: the same information, less safely)</span><br>- C: leave it; the roll page is the surface of record <span class='fine'>(effort: Zero; risk: Medium - the brief's 'price every parlay and print the naive product beside it' is then satisfied on the data but not on every page; unlocks: nothing)</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>

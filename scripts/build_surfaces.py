@@ -111,13 +111,31 @@ def gate_prereg():
                      "frozen_at_utc": d.get("frozen_at_utc"),
                      "frozen_before_first_tip": str(d.get("frozen_before_first_tip")) == "True"})
     ok = len(rows) >= 1 and all(r["frozen_before_first_tip"] for r in rows)
+    # Disclosure only - the pass condition above is unchanged. A frozen file is only
+    # meaningful if a reader can see whether it was ever edited after the fact, so the
+    # amendment files that carry post-freeze input changes are listed here too: an
+    # amendment is how a model input is allowed to move without touching a frozen
+    # document (session arena/3ff8ff0f-nba1, after the home-court pin moved 1.14 ->
+    # 0.87 and data/prereg/amendment_2026-11-16_3ff8ff0f.json was written).
+    amds = []
+    for f in sorted(glob.glob(os.path.join(ROOT, "data", "prereg", "amendment_*.json"))):
+        d = _load(f)
+        amds.append({"file": os.path.relpath(f, ROOT),
+                     "amended_utc": d.get("amended_utc"),
+                     "amended_by": d.get("amended_by"),
+                     "inputs": [c.get("input") for c in d.get("input_changes", [])]})
     return {
         "id": "G3_preregistration",
         "requirement": "every pre-registration file (data/prereg/S*.json) is frozen before its first tip; at least one exists",
         "observed": len(rows),
         "observed_detail": rows,
+        "amendments": amds,
+        "amendment_note": ("%d frozen file(s); %d amendment file(s) recording model-input "
+                          "changes made after the freeze - no frozen file was edited"
+                          % (len(rows), len(amds))) if amds else
+                          "%d frozen file(s); no amendments recorded" % len(rows),
         "passed": ok,
-        "source": "data/prereg/S*.json",
+        "source": "data/prereg/S*.json and data/prereg/amendment_*.json",
     }
 
 

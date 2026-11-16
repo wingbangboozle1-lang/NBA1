@@ -76,8 +76,20 @@
           "frozen_before_first_tip": true
         }
       ],
+      "amendments": [
+        {
+          "file": "data/prereg/amendment_2026-11-16_3ff8ff0f.json",
+          "amended_utc": "2026-11-16T18:31:43Z",
+          "amended_by": "arena/3ff8ff0f-nba1",
+          "inputs": [
+            "home-court advantage (points)",
+            "parlay / SGP correlation (rho)"
+          ]
+        }
+      ],
+      "amendment_note": "8 frozen file(s); 1 amendment file(s) recording model-input changes made after the freeze - no frozen file was edited",
       "passed": true,
-      "source": "data/prereg/S*.json"
+      "source": "data/prereg/S*.json and data/prereg/amendment_*.json"
     },
     {
       "id": "G4_ledger_integrity",

@@ -95,6 +95,9 @@ def boot_ci_groups(rows, key, pair_fn, reps=BOOT, seed=SEED):
     return [round(lo, 4), round(hi, 4)], len(names)
 
 
+JACK_vals = []
+
+
 def jackknife_range(rows, key, pair_fn):
     """Leave-one-cluster-out spread of the statistic.  With a handful of clusters a
     percentile bootstrap CI is optimistic (there are too few resamples to span the
@@ -110,6 +113,8 @@ def jackknife_range(rows, key, pair_fn):
         v = pearson(xs, ys)
         if v is not None:
             vals.append(v)
+    global JACK_vals
+    JACK_vals = list(vals)
     if not vals:
         return None, 0
     return [round(min(vals), 4), round(max(vals), 4)], len(vals)
@@ -217,7 +222,18 @@ def main():
             "rho_measured": None if r is None else round(r, 4),
             "n_player_pairs": len(pairs),
             "n_game_days": n_days,
-            "p_value": fisher_p(r, len(pairs)),
+            # the pair-level p-value would be computed on 672 observations that are
+            # not independent (they come from 6 games), so it is replaced by an
+            # inference at the level that IS independent: the game.  Jackknife SE over
+            # the leave-one-game-out estimates, t with k-1 degrees of freedom, and the
+            # published verdict against tabulated critical values rather than a p on a
+            # sample this small.
+            "p_value": None,
+            "p_value_note": ("not computed at pair level: %d player pairs from %d "
+                              "independent game-days are not %d independent "
+                              "observations" % (len(pairs), n_days, len(pairs))),
+            "cluster_inference": None,
+            "p_value_naive_pair_level_for_reference_only": fisher_p(r, len(pairs)),
             "ci95_bootstrap": ci,
             "bootstrap": ("%d reps, clusters = games (the only clustering the sample "
                           "supports), seed %d" % (BOOT, SEED)) if ci else None,
@@ -240,6 +256,36 @@ def main():
             "source_examples": sorted({r2.get("source_pdf") for r2 in doc["rows"]
                                        if r2.get("source_pdf")})[:3],
         })
+        # jackknife SE -> t on k-1 df, verdict against tabulated critical values
+        if JACK_vals:
+            k = len(JACK_vals)
+            mu = sum(JACK_vals) / k
+            var = sum((v - mu) ** 2 for v in JACK_vals) * (k - 1) / k
+            se = math.sqrt(var) if var > 0 else None
+            t = round(mu / se, 3) if se else None
+            mate["cluster_inference"] = {
+                "method": ("delete-a-group jackknife over the leave-one-game-out "
+                           "estimates (the game is the independent unit; the "
+                           "individual player pair is not)"),
+                "k_clusters": k, "theta_bar": round(mu, 4),
+                "jackknife_se": None if se is None else round(se, 4),
+                "t": t, "df": k - 1,
+                "verdict": (None if t is None else
+                            ("|t| = %.2f against t_0.975(df=%d) = 2.571 -> nonzero at the "
+                             "5%% level; t_0.995(df=%d) = 4.032 -> %s at the 1%% level"
+                             % (abs(t), k - 1, k - 1,
+                                "also nonzero" if abs(t) > 4.032 else "NOT nonzero"))),
+                "critical_values": {"5pct_two_sided": 2.571, "1pct_two_sided": 4.032},
+                "caveat": ("read the t with the same suspicion the sample deserves: a "
+                           "leave-one-cluster-out jackknife is known to understate "
+                           "uncertainty when k is this small (6 games), because dropping "
+                           "one game removes only a sixth of the pairs and the rest of "
+                           "the day is still in the sample. The pairing of teammate legs "
+                           "is clearly positive on six game-days of box scores; its "
+                           "precision is not established until the corpus clears the "
+                           "floor. This is why the row is priced AND bounded, not priced "
+                           "alone."),
+            }
     else:
         mate["note"] = ("no player game-log capture present; the teammate rho stays blank "
                         "and every teammate SGP is priced with the Fréchet-Hoeffding band only")

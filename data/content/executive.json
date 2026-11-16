@@ -1,14 +1,57 @@
 {
  "title": "Executive Summary",
- "as_of": "2026-11-16 (re-read and settled at 2026-11-16T14:40–15:20Z)",
- "headline": "The 2026-11-15 slate is COMPLETE and SETTLED. All nine games were read first-hand from the official site in this session and every quarter row sums to its printed final; data/settlement/settlement_2026-11-15.json carries the stamp 2026-11-16T14:45Z and the record 5-4-0 on nine published singles (+0.6 units at paper −110), with parlays −3.3 units for a settled total of −2.7 units. Two game days are now graded (11/14 and 11/15). The rolling horizon is 2026-11-16 to 2026-11-19: 29 games (rolled 2026-11-16, today + 3 days), each with two independent estimators, their disagreement as the headline confidence signal and the blend underneath. Home-court advantage is pinned to the measured official home-win rate (0.5285, worth 1.23 points), not fitted. Nothing is staked: no strategy has passed the full validation gate set.",
- "lead": "This session re-read https://www.nba.com/games?date=2026-11-15, where all nine games now print Final, and completed the three that were unfinished at the previous capture from the league's own gamebook PDFs (HOU@WAS 147-119, ATL@MIL 113-106, OKC@SAC 125-103, each with its SCORE BY PERIOD row transcribed and its quarter sums checked against the printed final). Only then did scripts/settle_slate.py grade the slate — it refuses any date holding a non-final game, and it had refused this one earlier in the day at 6 of 9 final. Two substantive defects were also found and fixed rather than worked around: a stale duplicate arena table that placed the LA Clippers in the wrong building, and a duplicate-capture bug that made the Results & Settlement page print '0 of 0 final — NOT settleable' directly beneath the section saying the same game day was settled. Both were found by reading the page and the data against the official source, not by a gate — all five gates were green while the second one was wrong.",
+ "as_of": "2026-11-16 (model inputs re-measured and the ledger re-verified at 2026-11-16T18:20-19:05Z)",
+ "headline": "THE MODEL'S HOME-COURT PIN WAS STALE BY THE REPOSITORY'S OWN MEASUREMENT - IT IS NOW DERIVED, AND THE TWO OFFICIAL SOURCES AGREE EXACTLY. The published line model carried 0.5285 (102 home wins in 193 home games, read at 02:13Z with a caveat naming three games still in progress); a fresh read of https://www.nba.com/standings gives 102/196 = 0.5204, and the independent finals corpus in this repo - after 25 unplayed 0-0 placeholder rows stop being counted as games - gives 102/196 = 0.5204 too. The pin moved 1.14 -> 0.87 points and all 29 games in the 11/16-11/19 horizon re-priced from it. Parlay and SGP prices now come from one measured rho register instead of a constant that was labelled measured (flag F128). The 2026-11-15 slate remains settled and untouched: a pin change never re-grades history.",
+ "lead": "This cycle was a re-measurement, not a re-read of the news. Four register items were blocked on a derivation nobody had run: the home-court pin (R09), the correlation that prices parlays (R14), the legacy Lines & Picks headline and availability column (R13/R15), and the injury-archive audit (R04). All four were closed by computing from the official data already committed plus one first-hand standings read, and two defects were found in the process: a pricer whose 'measured' rho was an unreachable lookup with a literal behind it, and a results corpus in which games that have not been played print 0-0 and were being counted as finals by four model inputs. scripts/test_hca_pin.py and scripts/test_rho_pricing.py now fail the build if either regresses, and both run in CI.",
  "verdict": {
   "status": "PROVISIONAL - not funded",
-  "one_line": "The model beats the naive reference on margin accuracy (MAE 12.98 against 13.62) and loses to it on totals (14.83 against 14.72) and on picking winners (42-18 against 40-20). S1 (side edge) is now 23-9, worth +11.91 model units, and for the first time its record is outside what luck alone produces (exact binomial p = 0.020, Wilson lower bound 0.546 against the 0.524 break-even) - but it fails the calibration gate (hit rate 0.719 against a mean predicted 0.627) and the stability gate (the bootstrap interval on the model's margin MAE still overlaps the reference), and the availability gate cannot run at all. Under the tier ceilings it stays a quarter-unit strategy. The 29 games of the 16-19 Nov roll are published as lines and paper picks, not as recommendations.",
-  "why": "Sixty games with a 17.4-point residual standard deviation have finally made one record statistically distinguishable from a coin flip - and that is exactly when the other gates matter most. A hit rate the model itself did not predict is a calibration failure, not a windfall; an improvement whose interval overlaps the reference is not stable; and a gate that cannot run is not passed. Selective skill means paying for the part that survives every gate and nothing else."
+  "one_line": "the numbers moved, the confidence signal did not: mean estimator disagreement across the horizon is 0.43 pp with all 29 games inside the 4.0 pp publish gate, while 10 of 29 picks still fail the minutes-redistribution gate and no strategy has cleared the validation gates, so nothing here is stakeable",
+  "what_would_change_it": "an official closing price for the market-anchored prior (R16, Q32); 24 more game-days of box scores to clear the teammate-rho floor (F131); and injury editions filed nearer tip than the 10:30 AM ET one that is newest on disk (F132)",
+  "why": "the confidence signal is unchanged in kind and the numbers moved a little: mean estimator disagreement across the 29-game horizon is 0.43 pp with every game inside the 4.0 pp publish gate, while 10 of 29 picks still fail the minutes-redistribution gate and no strategy has cleared the validation gates - so the correct reading is that the model got better measured, not that it got better."
  },
  "findings": [
+  {
+   "title": "Home-court advantage is measured, twice, and agrees",
+   "reading": "Standings HOME column read first-hand at 18:25Z: 102 wins in 196 home games = 0.5204, asserted against the league's own identities (home_wins == road_losses, and sum of printed wins == games implied by the HOME/ROAD/NEUTRAL splits, 197 games). The finals corpus, filtered to verified finals, gives 102/196 = 0.5204 independently. Pin = sigma x Phi^-1(rate) = 16.94 x 0.0511 = 0.87 points.",
+   "detail": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/standings_2026-11-16_1825Z_3ff8ff0f.json",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/standings_2026-11-16_1825Z_3ff8ff0f.json"
+  },
+  {
+   "title": "0-0 placeholders were being counted as games, in four places",
+   "reading": "The dated result captures write home_pts 0 / away_pts 0 with game_status 1 for scheduled fixtures. Consumers that only guarded against a NULL score counted 25 unplayed games as games: the home-court cross-check printed 0.4615 over 221 against 0.5285 over 193 (flag F116), the margin dispersion read 15.96 instead of 16.94, per-team luck z-scores were computed as though tonight's teams had already lost, and the measured correlations were pulled by a 25-point cluster at the origin. One predicate, engine/model_v2.is_verified_final, is now the definition everywhere it is used.",
+   "detail": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/model_v2.py",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/model_v2.py"
+  },
+  {
+   "title": "The parlay page's 'measured' rho was a literal",
+   "reading": "engine/parlay.py read a `rho` key that does not exist in the file it named and fell back to 0.15 while printing 'measured from historical same-game pairs'. The pairing it prices is side + total, whose measured rho is -0.038 (n = 196, p = 0.60) - the wrong sign, so the page was inflating parlay probabilities. All three pricing rhos now come from data/derived/parlay_rho.json, printed with n, interval, jackknife range and sample-floor status, beside the naive product on every row (F128).",
+   "detail": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/parlay_rho.json",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/parlay_rho.json"
+  },
+  {
+   "title": "Teammate correlation: measured, thin, labelled",
+   "reading": "rho(teammate points, teammate points) = 0.4213 over 672 same-team pairs from the 12 team-games of 6 game-days of official gamebooks. The pair-level p-value is deliberately not published (6 games are not 672 independent observations); the game-level delete-a-group jackknife gives t = 19.8 on 5 df against a 5% critical value of 2.571, with the caveat that six clusters understate uncertainty. It is below its declared 30-game-day floor, and the rows say so (F131).",
+   "detail": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/parlay_rho.json",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/parlay_rho.json"
+  },
+  {
+   "title": "The legacy picks page now leads with the disagreement",
+   "reading": "site/pages/picks.html opens with mean |P(A) - P(B)| = 0.43 pp over 29 games, 29 of 29 inside the 4.0 pp publish gate, widest 1.19 pp, then the per-game table of both estimators with the blend underneath, and rotation availability as its own column per side (R13/R15). Values are matched to the row by official game id from the same generated file the rolling-slate page uses, so the two surfaces cannot disagree about one game.",
+   "detail": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html"
+  },
+  {
+   "title": "Injury archive: 88 PDFs verified, and the reader was losing their provenance",
+   "reading": "scripts/verify_injury_pdf_archive.py recomputes every stored PDF's SHA-256 and compares it with the hash in its own filename and in its sidecar, checks the sidecar byte count against the file, and confirms each sidecar URL names its edition: 88 for 88 OK, editions 11/15 12:00 AM to 11/16 10:30 AM ET. The consecutive-diff chain was rebuilt to full coverage - 87 diffs for 87 pairs, 25 player status/reason changes, 244 newly listed, 265 no longer listed. Auditing it found that engine/injury_diff.py read only one of the two sidecar schemas, so 76 editions parsed with null source_url and null retrieval time - the evidence was on disk and lost in the reader. Fixed; all 88 editions now publish both (F130, SG39).",
+   "detail": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_injury_pdf_archive.py",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_injury_pdf_archive.py"
+  },
+  {
+   "title": "Register: 24 of 33 requirements done",
+   "reading": "R04, R09, R13, R14 and R15 moved from partial to done on the evidence above; 9 remain partial and each names the specific thing it is waiting for (an official price feed, more game-days of box scores, stats.nba.com reachability from the capture environment, an official arena-coordinate table).",
+   "detail": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements.json",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements.json"
+  },
   {
    "reading": "Nine of nine games final at https://www.nba.com/games?date=2026-11-15; quarter scores transcribed per game (six from the games page, three from the official gamebooks); every quarters row sums to its printed final; settlement graded 9 singles 5-4-0 and appended ledger entries 6 and 7, chain verified OK. Status: DONE. Source: https://www.nba.com/games?date=2026-11-15",
    "title": "11/15 settled from official finals, first-hand",
@@ -99,10 +142,29 @@
   }
  ],
  "what_is_live_now": [
+  [
+   "Horizon",
+   "29 games, 2026-11-16 .. 11-19 (8/5/12/4), re-priced from the corrected pin; verified row by row against the official per-date pages for 11/17 and 11/19 (9 of 9 game ids, matchups and tips match; 13 of 13 team records printed on those cards agree with the standings capture), and at count level for 11/16 and 11/18."
+  ],
+  [
+   "Settlement",
+   "2026-11-14 and 2026-11-15 settled and stamped; the 11/15 slate is NOT re-graded by this cycle's input change - see the pre-registration amendment."
+  ],
+  [
+   "Ledger",
+   "7 sealed entries, chain verified; no entries appended by this session because no new game day has ended since the last settlement."
+  ],
+  [
+   "Flags",
+   "130 open items on the Flagged for Review page, including the four this session found (F128 rho label, F129 0-0 finals, F130 sidecar schema, F131 thin teammate rho) plus F132-F134 for the archive lag and the two brittle tests."
+  ],
+  [
+   "Gates",
+   "verify_all, check_links, check_rendered, check_site, verify_dashboard, verify_ledger, and the two new pins/correlation gates all green on this branch; both new gates run in CI."
+  ],
   "Two graded game days with a visible settlement stamp on site/pages/results.html: 2026-11-14 (2026-11-15T12:35Z) and 2026-11-15 (2026-11-16T14:45Z, 5-4-0 on nine singles, −2.7 units total at paper −110). The stamps are read from the settlement JSON, so the page cannot show a settlement that was not written and chained.",
   "Originated spreads, totals and fair moneylines for all 29 games across 2026-11-16, 2026-11-17, 2026-11-18 and 2026-11-19 - the pick window and the line window are now the same three days.",
   "Two estimators per game with their disagreement published as the headline confidence signal (max 1.37 pp, mean 0.45 pp, gate 4.0 pp) and the blend underneath.",
-  "Home-court advantage pinned to the measured official home-win rate: 0.5285 from the standings HOME/ROAD columns (102 of 193), cross-checked at 0.5155 from the final-score corpus, worth 1.23 points.",
   "A rotation-availability column per pick that states its own provenance - measured, not yet published, not yet submitted, or not captured - and is blank whenever it is not measured.",
   "Measured parlay correlations (home/away points 0.0823, margin/total -0.0115, home points/total 0.732) with the rho-priced figure printed beside the naive product.",
   "A per-game results feed for 2026-11-15: six finals stored, three games still in progress and marked not settleable, with quarter scores left null rather than reconstructed.",
@@ -114,44 +176,74 @@
  "recommended_next_actions": [
   {
    "rank": 1,
-   "action": "DONE 2026-11-14T19:20Z: capture the day-of-game injury updates and re-price against them. The published lines were deliberately not rewritten.",
-   "why": "Executed by session arena/95c1cb23-nba1. The two editions, the diff, the impact re-computation and the row-level verification are in data/derived/gameday_read.json, one source URL per row. The residual finding is F47: the availability layer cannot see most of what was filed."
+   "action": "Accept the re-priced surfaces, or pin the prices",
+   "why": "The 0.87 pin and the -0.038 rho change published numbers. If the owner wants quotes frozen per slate, stamp the register digest into the pre-registration file at first bet (SG40/Q32) - that is a one-line change to the freeze step, not a model change.",
+   "added_by": "arena/3ff8ff0f-nba1",
+   "added_utc": "2026-11-16T18:20-19:05Z"
   },
   {
    "rank": 2,
+   "action": "Make the capture stop writing scores for unplayed games (SG38)",
+   "why": "Then engine/model_v2.is_verified_final becomes a backstop instead of the only defence, and the next script that sums over results_*.json cannot get it wrong.",
+   "added_by": "arena/3ff8ff0f-nba1",
+   "added_utc": "2026-11-16T18:20-19:05Z"
+  },
+  {
+   "rank": 3,
+   "action": "Let the 22:15Z scheduled run capture the afternoon injury editions (F132)",
+   "why": "The newest archived edition is 11/16 10:30 AM ET while tonight's games tip at 7:00-8:00 PM ET, so several rotation-availability cells legitimately read 'not submitted'.",
+   "added_by": "arena/3ff8ff0f-nba1",
+   "added_utc": "2026-11-16T18:20-19:05Z"
+  },
+  {
+   "rank": 4,
+   "action": "Extend the gamebook corpus to 30 game-days (F131/Q33)",
+   "why": "It is the only thing standing between the teammate SGP price and a real interval; each game-day is one addressable official PDF.",
+   "added_by": "arena/3ff8ff0f-nba1",
+   "added_utc": "2026-11-16T18:20-19:05Z"
+  },
+  {
+   "rank": 5,
+   "action": "Normalise the injury sidecar schema (SG39)",
+   "why": "12 files on disk; the PDF bytes and hashes are untouched, so it is a metadata-only migration.",
+   "added_by": "arena/3ff8ff0f-nba1",
+   "added_utc": "2026-11-16T18:20-19:05Z"
+  },
+  {
+   "rank": 7,
    "action": "Complete the minutes input, per club, so the availability layer can see a rotation instead of a top-50 slice",
    "why": "It is what turns the 0.00 columns into numbers, and it unlocks Q3, Q12 and Q20 (SG20, F47)."
   },
   {
-   "rank": 3,
+   "rank": 8,
    "action": "Capture the 11/16, 11/17 and 11/18 injury-report editions as they are published",
    "why": "The 11/15/26 06:15 AM ET edition is captured (101 rows; its 11/16 team blocks print NOT YET SUBMITTED, exactly as the reporting deadlines predict). Each remaining edition should be stored with its revision and retrieval time and diffed against the previous one, as was done for 11/15 (F74)."
   },
   {
-   "rank": 4,
+   "rank": 9,
    "action": "Settle the 2026-11-15 slate from official finals at game-day end and keep the per-game result feed current",
    "why": "The standing ledger rule: verify final scores from official box scores - one row per game with date, teams, final score and quarter scores in data/official/results_2026-11-15.json - then grade the pre-tip record against them and extend the hash chain. Verified finals for games already complete are recorded as they land; nothing is settled before the official page marks it final."
   },
   {
-   "rank": 5,
+   "rank": 10,
    "action": "Log real closing prices",
    "why": "Until this exists, nothing here can be called profitable - only better than a naive model. It is also the missing input for the market-anchored prior (blend the model line with the closing line, weighted by measured out-of-sample log-loss). Everything else is optimisation of an unvalidated target."
   },
   {
-   "rank": 6,
+   "rank": 11,
    "action": "Backfill results for 2026-10-20 to 2026-11-05 and re-cut the split",
    "why": "Every game from 2026-11-06 onward is already in the test window, so this is now the only way to grow the sample. It would let the ratings window move earlier and the test window roughly double again."
   },
   {
-   "rank": 7,
+   "rank": 12,
    "action": "Capture per-player minutes for all 30 teams, then re-run the gates.",
    "why": "Eleven of twenty-five picks are held back by the capture rather than by the model (F106). Until the capture is complete the redistribution gate measures whether data exists, not whether the line is sound."
   },
   {
-   "rank": 8,
+   "rank": 13,
    "action": "Re-read the injury index inside the scheduled refresh so availability fills in per game date.",
    "why": "No official edition covers 11/17 or 11/18 yet and five 11/16 teams print NOT YET SUBMITTED (F105). Availability is the fastest-moving input and is currently only as fresh as the last session that looked."
   }
  ],
- "bottom_line": "The window is rolled to 16-18 Nov, the model is re-cut from a fresh official capture, and home-court advantage is now a measurement rather than a fitted parameter. Nothing on this site is a recommendation: no strategy has passed the validation gates, all 25 picks are provisional, and zero are staked. The three things that would change that, in order, are minutes capture for all thirty teams (SG32), an official closing line to anchor and score against (Q1), and a clean post-slate re-read once every 11/15 game is final (Q26). Open items for a reviewer: the GSW@NOP tip-time conflict (F101), the POR@MIN back-to-back convention (Q29), and the live-slate contamination rule (F103)."
+ "bottom_line": "The system's inputs are now measurements twice over - the standings page and the finals corpus print the same 0.5204 - and two gates keep them that way. What moved is small in points (0.27 on the home edge) and large in kind: the model's headline confidence number is a disagreement between two independent estimators, its parlay prices carry the correlation they were priced with, and its injury archive is hash-verified end to end. Nothing here is a recommendation: no strategy has cleared the validation gates, so every pick is published as model output at zero stake."
 }

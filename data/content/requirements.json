@@ -67,9 +67,9 @@
   {
    "id": "R04",
    "requirement": "Store every injury PDF with its timestamp, and diff consecutive reports to detect status changes.",
-   "status": "partial",
-   "evidence": "Transcriptions with revision_time_et and retrieved_utc: data/official/injury_2026-11-14_0130PM.json and injury_2026-11-15_0615AM.json. One consecutive diff: data/official/injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json. The fetcher downloads PDFs. Updated 2026-11-16 by session arena/161f1638-nba1. This session transcribed the 11/15 06:15 PM ET edition (155 rows, data/official/injury_2026-11-15_0615PM.json) and diffed it against the 06:15 AM edition: 19 status changes, 13 added rows, 13 removed (the AM edition's 'Embid' typo and NOT YET SUBMITTED placeholders), 58 rows covering 11/16.",
-   "gap": "The PDF bytes themselves are still not retained under version control (see F82); only the transcription and its source URL are stored.",
+   "status": "done",
+   "evidence": "Every retrieved official injury report is archived byte-for-byte under data/raw/injury_pdfs/<edition>__<sha256>.pdf with a sidecar carrying the retrieval timestamp, the official URL, the byte count and the hash. Measured 2026-11-16 by scripts/verify_injury_pdf_archive.py: 88 PDFs (11/15 12:00 AM .. 11/16 10:30 AM ET editions), every file re-hashed and matched to its filename and sidecar, every sidecar byte count matched the file on disk, every sidecar URL names its own edition. engine/injury_diff.py parses each edition from the stored bytes and diffs every consecutive pair: 87 diffs for 87 pairs, 25 player status/reason changes, 244 newly listed and 265 no longer listed. The register's earlier gap ('the PDF bytes themselves are still not retained', F82) was stale - the bytes are retained and now verified.",
+   "gap": "Two things stay open and flagged, neither about retention: the archive's newest edition is 11/16 10:30 AM ET while tonight's games are ~9 hours off (F132), and 12 of the 88 sidecars use a second key schema (source_url/retrieved_at_utc instead of url/retrieved_utc), so a consumer that reads only one name sees blanks (F130).",
    "links": [
     {
      "label": "NBA injury report index",
@@ -79,7 +79,9 @@
      "label": "Sample PDF 11/15 06:15 AM ET",
      "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
     }
-   ]
+   ],
+   "updated_by": "arena/3ff8ff0f-nba1",
+   "updated_utc": "2026-11-16T18:31:43Z"
   },
   {
    "id": "R05",
@@ -148,9 +150,9 @@
   {
    "id": "R09",
    "requirement": "Pin home-court advantage to the measured home-win rate instead of fitting it freely.",
-   "status": "partial",
-   "evidence": "engine/model_core.py uses a fixed flat_hca = 2.0. scripts/originate_horizon.py records that HCA 'could not be sourced from an official NBA page'. The 57.6% measured home-win rate from another build is a note only, not applied. Updated 2026-11-16 by session arena/161f1638-nba1. The home-win rate is now measured from official finals: 0.5455 (36 of 66), published on site/pages/roll.html section 5 alongside the measured correlations. The size of the unpinned term is also quantified there: estimator B fits HCA at +3.508 points (t = 1.539, in-sample), estimator A applies none, and that term is 90% of their mean 3.89-point disagreement. engine/model_core.py uses a fixed flat_hca = 2.0. scripts/originate_horizon.py records that HCA 'could not be sourced from an official NBA page'. The 57.6% measured home-win rate from another build is a note only, not applied. Updated 2026-11-16 by session arena/161f1638-nba1. The home-win rate is now measured from official finals: 0.5455 (36 of 66), published on site/pages/roll.html section 5 alongside the measured correlations. The size of the unpinned term is also quantified there: estimator B fits HCA at +3.508 points (t = 1.539, in-sample), estimator A applies none, and that term is 90% of their mean 3.89-point disagreement. Measured again from the official standings in this session (2026-11-16T14:3xZ): home W-L 102-94 over 196 games, a home-win rate of 0.5204, which pins HCA at 0.88 points rather than the published 1.23. The drift reconciles EXACTLY to the three 11/15 games that finished after the model's own capture (all three away wins: +3 games, +0 home wins, +3 road wins), and both standings consistency identities hold on the live table. Reproduce with verify/2026-11-16-23b323a3/verify_hca_anchor.py. 2026-11-16 by session arena/23b323a3-nba1 (COORDINATION §51).",
-   "gap": "The pin is now MEASURED and reconciled, but the published model still carries the stale value: 1.23 points against a current 0.88. The input was deliberately not hand-edited; re-derivation belongs to scripts/build_horizon_v2.py. A separate defect is that the published block reports rate 0.5285 over 161 games while its own standings cross-check says 0.5285 over 193. See F113.",
+   "status": "done",
+   "evidence": "The pin is derived, not typed: scripts/build_horizon_v2.py takes the home-win rate from the newest official standings capture in data/official/ and converts it with the measured margin dispersion, HCA_points = sigma * Phi^-1(rate). This session re-read the standings table first-hand (data/official/standings_2026-11-16_1825Z_3ff8ff0f.json: 102 home wins in 196 home games = 0.5204, asserted against the league's own identities) and the independent finals corpus in the repository agrees exactly (102/196 = 0.5204), so the two official measurements now print the same number with their own denominators. The pin moved 1.14 -> 0.87 points; sigma moved 15.96 -> 16.94 because 25 unplayed 0-0 rows were being counted as games. scripts/test_hca_pin.py fails the build if the published pin stops matching a re-derivation from the captures.",
+   "gap": "The model still applies one flat league-wide HCA rather than a team-specific venue effect; that is a modelling choice, published as such, not a missing input.",
    "links": [
     {
      "label": "Originate script (repo)",
@@ -160,7 +162,9 @@
      "label": "Model core (repo)",
      "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/model_core.py"
     }
-   ]
+   ],
+   "updated_by": "arena/3ff8ff0f-nba1",
+   "updated_utc": "2026-11-16T18:31:43Z"
   },
   {
    "id": "R10",
@@ -212,22 +216,24 @@
   {
    "id": "R13",
    "requirement": "Stop publishing a single blended rating as the headline; publish the disagreement as the headline and the blend underneath.",
-   "status": "partial",
-   "evidence": "Not found. The site headline was not verified to be a disagreement measure. Updated 2026-11-16 by session arena/161f1638-nba1. site/pages/roll.html leads with the disagreement column (mean |delta| 4.69 pts) and prints both spreads underneath it; the two are NOT blended, because averaging two models whose errors have not been measured against each other would hide the signal.",
-   "gap": "Only the new rolling-slate page is built this way. The legacy Lines & Picks surface still leads with a single model's line and carries the disagreement only as flag F26.",
+   "status": "done",
+   "evidence": "Both surfaces now lead with the disagreement. The rolling-slate page did already; the legacy Lines & Picks page (site/pages/picks.html) is rebuilt to open with a headline card - mean |P(A)-P(B)| across the horizon, how many games sit inside the 4.0 pp publish gate, the widest disagreement on the slate - followed by a per-game table of estimator A vs B for margin and total with the blend printed underneath, labelled as the blend, never on top. Values are read from data/derived/horizon_lines_v2.json and matched to the row by official game id, so the two pages cannot tell different stories about one game.",
+   "gap": "None for the requirement as written. The blend remains an unweighted 50/50 because the estimators' errors have not been measured against each other; that is stated on the page.",
    "links": [
     {
      "label": "Index page (repo)",
      "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/index.html"
     }
-   ]
+   ],
+   "updated_by": "arena/3ff8ff0f-nba1",
+   "updated_utc": "2026-11-16T18:31:43Z"
   },
   {
    "id": "R14",
    "requirement": "Price every parlay with the measured rho and print the naive product beside it instead of withholding the price.",
-   "status": "partial",
-   "evidence": "scripts/generate_picks.py prices SGPs with rho constants SGP_RHO_TEAMMATES = -0.2 and SGP_RHO_OPPONENTS = 0.05, labelled as model-derived. The correlations page holds rho values. Updated 2026-11-16 by session arena/161f1638-nba1. A rho is now measured from official finals rather than assumed: rho(home margin, game total) = -0.0635 on 66 finals (p = 0.61; -0.0621 on the 63 regulation games), computed by scripts/measure_rho.py. site/pages/roll.html section 4 prices same-game side-and-total at that rho with the naive product printed beside it, and section 3 prints the naive product for cross-game parlays with the exact Frechet-Hoeffding band, because no rho between two different games is measurable from official data and none is asserted.",
-   "gap": "The SGP rho used by scripts/generate_picks.py is still the fixed model constant described in F90; only the roll page prices from the measured value.",
+   "status": "done",
+   "evidence": "One measured register prices every parlay. scripts/measure_parlay_rho.py computes rho from the 196 verified official finals and the official gamebooks: rho(home points, away points) = 0.12 (n=196, 95% CI -0.03..0.27, leave-one-game-out -0.10..0.25), rho(margin, total) = -0.038 (p=0.62), rho(home points, total) = 0.737, and the same-team pair rho = 0.4213 from 6 game-days of box scores (below its 30-game-day floor, so it is labelled). engine/parlay.py and scripts/generate_picks.py both read that register now: the naive product is printed beside every rho-adjusted price, the fair American odds for both are printed, and each row carries the n, the interval and the floor status of the rho it used. The old constants survive only as a fallback that is labelled FALLBACK in the row itself.",
+   "gap": "The teammate-pair rho rests on 6 game-days, so its interval is wide and its bootstrap CI is optimistic - the leave-one-game-out range is the dispersion the page quotes. More gamebook days are the only way to tighten it (F131).",
    "links": [
     {
      "label": "SGP pricing (repo)",
@@ -237,20 +243,24 @@
      "label": "Correlations (repo)",
      "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/correlations.json"
     }
-   ]
+   ],
+   "updated_by": "arena/3ff8ff0f-nba1",
+   "updated_utc": "2026-11-16T18:31:43Z"
   },
   {
    "id": "R15",
    "requirement": "Put rotation availability on the picks page as its own column.",
-   "status": "partial",
-   "evidence": "The picks table headers are Home injury status and Away injury status. No rotation-availability column exists. Updated 2026-11-16 by session arena/161f1638-nba1. site/pages/roll.html carries a rotation-availability column built from the official injury report: Out / Questionable counts per game plus the count of club blocks still filed as NOT YET SUBMITTED.",
-   "gap": "The legacy Lines & Picks page still has no such column. See F83.",
+   "status": "done",
+   "evidence": "Rotation availability is its own column pair on the Lines & Picks page: for each side, how many of the players who actually carry minutes for the club are Out or Questionable on the official report, and the status of the club's filing. A club the edition has not received for prints 'not submitted' rather than defaulting to healthy. Built from the same injury edition the line is priced from, in scripts/build_horizon_v2.py, and the rolling-slate page keeps its own count column.",
+   "gap": "Availability for tonight's games is bounded by the league's filing time, not by the site: the newest archived edition is 11/16 10:30 AM ET (F132).",
    "links": [
     {
      "label": "Picks page (repo)",
      "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html"
     }
-   ]
+   ],
+   "updated_by": "arena/3ff8ff0f-nba1",
+   "updated_utc": "2026-11-16T18:31:43Z"
   },
   {
    "id": "R16",
@@ -318,7 +328,7 @@
    "status": "done",
    "evidence": "data/official/teams_traditional_2026-11-15.json, teams_opponent_2026-11-15.json and teams_advanced_2026-11-15.json each hold 30 rows with source_url and retrieved_utc. Model input files were re-cut from them (as stated in PR #106; the files are present in this tree). Updated 2026-11-16 by session arena/161f1638-nba1. The re-read was also APPLIED, not just stored: scripts/recut_model_inputs.py re-cut data/teams_advanced_2026_27.json and data/teams_scoring_2026_27.json from the three 2026-11-15_2345Z captures. The diff against the previous cut was PHI and IND only - the two teams in the one Final game since - which is exactly the expected change and confirms nothing else moved.",
    "gap": "Re-read 11/15 and independently re-read 11/16 by session arena/fec7d5ae-nba1. The next re-read depends on R01.",
-  "evidence_2026_11_16_fec7d5ae": "Independent first-hand re-read of all three pages on 2026-11-16 ~14:3xZ (every page returned the full 30-row table; flag F24 CLOSED). Produced data/official/team_stats_recut_2026-11-16_fec7d5ae.json (verbatim 30-team capture, per-team source-linked) and data/derived/team_stats_recut.json (re-cut model inputs: net rating, pace, points per possession). Cross-checks C1-C5 all pass; league scoring balance 113.743 vs 113.763 ppg (0.02 gap) validates the transcription. Resolves the AST Ratio rendering discrepancy flagged by arena/49f70042-nba1: the column renders correctly on a full-table read (e.g. SAS 19.4), so that discrepancy was a chunked-read artifact, not a page property. See scripts/recut_team_stats.py and notes/verification-2026-11-16-fec7d5ae.md.",
+   "evidence_2026_11_16_fec7d5ae": "Independent first-hand re-read of all three pages on 2026-11-16 ~14:3xZ (every page returned the full 30-row table; flag F24 CLOSED). Produced data/official/team_stats_recut_2026-11-16_fec7d5ae.json (verbatim 30-team capture, per-team source-linked) and data/derived/team_stats_recut.json (re-cut model inputs: net rating, pace, points per possession). Cross-checks C1-C5 all pass; league scoring balance 113.743 vs 113.763 ppg (0.02 gap) validates the transcription. Resolves the AST Ratio rendering discrepancy flagged by arena/49f70042-nba1: the column renders correctly on a full-table read (e.g. SAS 19.4), so that discrepancy was a chunked-read artifact, not a page property. See scripts/recut_team_stats.py and notes/verification-2026-11-16-fec7d5ae.md.",
    "links": [
     {
      "label": "Team advanced (NBA.com)",

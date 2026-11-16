@@ -388,6 +388,38 @@
    "how_to_answer": "Name the per-date games page as the source, normalise the format, and have the refresh record a conflict row whenever two captures of one game id differ instead of overwriting (SG33).",
    "blocks": "Any downstream use of tip time - rest windows, pre-tip publication, and the ledger's publish-before-tip rule",
    "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "id": "Q31",
+   "question": "Who owns the definition of a final score - the capture that writes it or every model that reads it?",
+   "what_is_missing": "A single documented rule. Today the dated result captures write 0-0 for unplayed games and four consumers each decide for themselves whether that is a game (F129). The model now has one predicate; the producers do not.",
+   "how_to_answer": "Decide whether engine/fetch_official.py should write null (or omit the field) for any game whose status is not Final, and add a schema assertion to the promote step so a 0-0 with status 1 can never reach data/official/ again.",
+   "blocks": "every count-based number on the site: HCA pin, sigma, luck z-scores, rho, out-of-sample log loss, settle gates",
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "id": "Q32",
+   "question": "Should a parlay price move when tomorrow's finals change the measured rho, or be frozen at publication?",
+   "what_is_missing": "A rule. rho(margin, total) = -0.038 today on 196 finals; it will drift as the season fills in. A pre-registered strategy quotes a price, and a price that drifts after the pick is published cannot be graded fairly against the number the pick was made on.",
+   "how_to_answer": "Freeze the register digest into the pre-registration file at the moment the strategy first bets (the ledger already stores hashes), and have the pricer stamp the register's generated_utc onto every published price so a reviewer can tell which rho made the quote.",
+   "blocks": "parlay and SGP settlement, the leaderboard's ROI column, the sealed-ledger verification step",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/parlay_rho.json"
+  },
+  {
+   "id": "Q33",
+   "question": "How many game-days of official box scores are needed before a teammate-prop correlation can be trusted?",
+   "what_is_missing": "Sample. The repository holds full team gamebooks for 6 games (11/15). The teammate rho declares a 30-game-day floor and is currently at 6 (F131); nothing else in the repo can raise it because stats.nba.com is not reachable from the capture environment.",
+   "how_to_answer": "Either extend the statsdmz gamebook capture backwards date by date (each is a single addressable PDF) or accept that teammate SGPs are published as bound-only and say so on the page header, not in a flag.",
+   "blocks": "player-prop combo pricing and any prop strategy that wants a correlation adjustment",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf"
+  },
+  {
+   "id": "Q34",
+   "question": "Does the corrected home-court pin re-price anything that has already been graded?",
+   "what_is_missing": "A decision the board should record once rather than per session.",
+   "how_to_answer": "Answered in this session's amendment file and adopted here: no. Picks published and settled under the frozen inputs stay graded under them (2026-11-14 and 2026-11-15 are untouched); only future picks move with the official data. If the owner wants retro-active re-pricing, that breaks the ledger's tamper-evidence and needs a new ledger, not an edit.",
+   "blocks": "nothing - it unblocks the question of whether to re-run the settled slates",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/prereg/amendment_2026-11-16_3ff8ff0f.json"
   }
  ]
 }

@@ -10,7 +10,45 @@ Where a value could not be confirmed it is described as unconfirmed rather than 
 
 ---
 
-## 0a. Update — 2026-11-16T14:40–15:20Z, session `arena/23b323a3-nba1` (read this first)
+## 0a. Update — 2026-11-16T18:20-19:05Z, session `arena/3ff8ff0f-nba1` (read this first)
+
+**The published home-court pin was stale by the repository's own measurement, and it is now derived
+and gated.** A fresh first-hand read of the official standings and the finals corpus already in the repo
+agree exactly, and the model re-prices off them. Two defects found on the way were live behind five green
+gates; both are now covered by a CI test.
+
+| Item | Was | Is now | Official source |
+| --- | --- | --- | --- |
+| Home-win rate the pin is read off | 0.5285 (102/193, captured 02:13Z with three games still in progress) | **0.5204 (102/196)** — and the independent finals corpus gives **102/196 = 0.5204** after unplayed rows stop counting | <https://www.nba.com/standings> |
+| Home-court advantage in points | 1.14 (sigma 15.96) | **0.87** (sigma 16.94, measured on 196 verified finals) | `data/derived/horizon_lines_v2.json` |
+| Games counted as finals | 222 rows, 25 of them unplayed fixtures printing 0-0 | **197 verified finals**, the exclusion counted and published | `engine/model_v2.is_verified_final` |
+| Parlay rho on the pricing page | 0.15, labelled "measured", from a lookup that could never succeed (F128) | **measured register**: side+total −0.038 (n=196, p=0.60), cross-team +0.12, teammate +0.4213 (below its 30-game-day floor, labelled) | [`data/derived/parlay_rho.json`](https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/parlay_rho.json) |
+| Legacy Lines & Picks page | one model's line as the headline, no availability column | **disagreement headline** (mean 0.43 pp, 29/29 inside the 4.0 pp gate, widest 1.19 pp), blend underneath, **rotation availability** per side | [`site/pages/picks.html`](https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html) |
+| Injury PDF archive | "bytes not retained" (F82, stale) | **88 PDFs, every SHA-256 recomputed and matched; 87 consecutive diffs, 25 status changes**; provenance-loss bug in the reader fixed (76 editions had lost their URL and retrieval time) | [`scripts/verify_injury_pdf_archive.py`](https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_injury_pdf_archive.py) |
+| Requirements register | 19 done / 14 partial | **24 done / 9 partial** | [`data/content/requirements.json`](https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/content/requirements.json) |
+| Open flags | 123 | **130** (F128–F134 added; none block the merge) | [Flagged for Review](https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html) |
+
+**History was not rewritten.** The 2026-11-14 and 2026-11-15 settlements stand exactly as graded: a
+pre-registered pick is graded against the numbers that were published when it was made. The input change is
+recorded as an amendment file — [`data/prereg/amendment_2026-11-16_3ff8ff0f.json`](https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/prereg/amendment_2026-11-16_3ff8ff0f.json)
+— and no frozen pre-registration document was edited.
+
+**Two new gates** (`scripts/test_hca_pin.py`, `scripts/test_rho_pricing.py`) recompute the pin and every
+correlation from the committed official captures and fail the build when a published number stops matching,
+including the exact F116 failure mode (a rate paired with another measurement's denominator). Both are wired
+into the CI validate job.
+
+**Verification performed this cycle, first-hand:** all 30 standings rows transcribed and asserted against the
+league's own identities; the 11/17 and 11/19 game cards re-read row by row (9/9 ids, matchups and tips match;
+13/13 team records printed on those cards agree with the standings read); per-date game counts 8/5/12/4
+confirmed twice from the league calendar strip; the injury archive hash-verified; the ledger chain and all six
+existing gates re-run green. `11/16`'s slate belongs to session `arena/0d7e58e9-nba1` (§55) and is not
+re-verified here, and 2026-11-16's eight games had not tipped at read time (13:2x ET), so no settlement was
+possible for that date in this window.
+
+---
+
+## 0b. Update — 2026-11-16T14:40–15:20Z, session `arena/23b323a3-nba1` (the settlement half still stands; its home-court line is superseded by §0a)
 
 **The 2026-11-15 slate is complete and settled.** Every other section of this document that
 describes 11/15 as "6 of 9 final" or "not settleable" is superseded by this one, and by the

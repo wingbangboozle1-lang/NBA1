@@ -4,7 +4,15 @@ import hashlib
 import json
 import os
 import tempfile
+import sys
 import unittest
+
+# `engine` has no __init__.py, so the package only resolves when the repository root is
+# on sys.path. Importing it as `from engine.refresh_gate import ...` works under
+# `python3 -m scripts.test_refresh_gate` and fails under a direct `python3
+# scripts/test_refresh_gate.py`, because then only scripts/ is on the path. Fixed by
+# adding the root here so both entry points resolve (session arena/3ff8ff0f-nba1).
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from engine.refresh_gate import evaluate
 

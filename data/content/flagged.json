@@ -1,6 +1,6 @@
 {
  "title": "Flagged for Review",
- "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link. Items F111 to F116 were added on 2026-11-16 by session arena/23b323a3-nba1 (COORDINATION §51). Their numbers were assigned F108-F113 on that branch and RENUMBERED here because arena/2042a559-nba1 landed F108-F110 on main first; nothing was renumbered away from another session.",
+ "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link. Items F111 to F116 were added on 2026-11-16 by session arena/23b323a3-nba1 (COORDINATION §51). Their numbers were assigned F108-F113 on that branch and RENUMBERED here because arena/2042a559-nba1 landed F108-F110 on main first; nothing was renumbered away from another session. Items F128 to F135 were added on 2026-11-16 by session arena/3ff8ff0f-nba1 (COORDINATION §56): a pricer that labelled a constant as measured, the 0-0 placeholder rows that four model inputs were counting as finals, the injury-PDF sidecar schema split (and the provenance the reader was losing because of it), the teammate rho below its sample floor, the archive's morning-edition lag, two verification tests that rotted against a growing archive, and the model page that no build step regenerated. F82, F90 and F116 were resolved by measurement in the same cycle and are kept with their titles marked RESOLVED, the convention this register already uses for F13/F14/F29.",
  "items": [
   {
    "id": "F1",
@@ -750,10 +750,12 @@
   {
    "id": "F82",
    "severity": "medium",
-   "title": "Injury PDFs are not retained in the repository",
-   "detail": "The fetcher downloads injury PDFs, but no .pdf file is tracked in git. The repository holds transcriptions with revision and retrieval times, plus one consecutive diff. Every PDF must be stored with its timestamp to meet the brief.",
+   "title": "RESOLVED 2026-11-16 (session arena/3ff8ff0f-nba1): the PDFs ARE retained, and the register entry was stale",
+   "detail": "RESOLVED 2026-11-16 (session arena/3ff8ff0f-nba1). Measured against the repository, not assumed: `git ls-files | grep -c '\\.pdf$'` = **88** tracked injury PDFs under data/raw/injury_pdfs/, named <edition>__<hash>.pdf, each with a sidecar carrying the retrieval timestamp, the official URL, the byte count and the SHA-256. scripts/verify_injury_pdf_archive.py recomputes every file's hash and compares it with both the filename and the sidecar, checks the %PDF- magic, and checks the diff chain: 88 for 88 OK, editions 2026-11-15 12:00 AM through 2026-11-16 10:30 AM ET, 87 diffs for 87 consecutive pairs, 25 player status/reason changes detected. The original claim ('no .pdf file is tracked in git') was true of an earlier state of the repository and is false now; R04 is marked done on that measurement. What remains open is not retention but freshness and reachability: see F130 (sidecar schema) and F132 (the newest edition is a morning one). Fetching a NEW edition from this sandbox is impossible - verify/2026-11-16-3ff8ff0f/pdf_reachability.json records TLS EOF from ak-static.cms.nba.com and www.nba.com at 18:3xZ while github.com returns 200.",
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
-   "status": "open"
+   "status": "resolved",
+   "resolved_by": "arena/3ff8ff0f-nba1",
+   "resolved_utc": "2026-11-16T19:1xZ"
   },
   {
    "id": "F83",
@@ -765,9 +767,9 @@
   },
   {
    "id": "F84",
-   "severity": "high",
+   "severity": "Medium",
    "title": "Home-court advantage is a fixed constant, not pinned to the measured home-win rate",
-   "detail": "engine/model_core.py uses flat_hca = 2.0. scripts/originate_horizon.py records that HCA could not be sourced from an official NBA page. The measured 57.6% home-win rate from another build is a note only and is not applied.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): the home-win rate is now measured from official finals - 0.5455 (36 of 66) - and published on site/pages/roll.html. It is still not applied to any line. The gap is quantified: estimator B fits HCA at +3.508 points (t = 1.539, estimated in-sample) while estimator A applies none, and that single term is 90% of the models' mean 3.89-point disagreement.",
+   "detail": "engine/model_core.py uses flat_hca = 2.0. scripts/originate_horizon.py records that HCA could not be sourced from an official NBA page. The measured 57.6% home-win rate from another build is a note only and is not applied.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): the home-win rate is now measured from official finals - 0.5455 (36 of 66) - and published on site/pages/roll.html. It is still not applied to any line. The gap is quantified: estimator B fits HCA at +3.508 points (t = 1.539, estimated in-sample) while estimator A applies none, and that single term is 90% of the models' mean 3.89-point disagreement. ADVANCED 2026-11-16 (session arena/3ff8ff0f-nba1): the v2 line no longer has this problem at all - the pin is derived from the measured home-win rate at build time (0.87 points from 0.5204, sigma 16.94), asserted by scripts/test_hca_pin.py. What keeps this entry open is the LEGACY origination path, which still prices reference_line(flat_hca=2.0) in engine/model_core.py / engine/pipeline.py / engine/validate.py; that path is outside the v2 model's line of custody and is documented as such rather than quietly reused.",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py",
    "status": "open"
   },
@@ -814,10 +816,12 @@
   {
    "id": "F90",
    "severity": "medium",
-   "title": "Parlay rho is a fixed model constant, not a measured value",
-   "detail": "scripts/generate_picks.py uses SGP_RHO_TEAMMATES = -0.2 and SGP_RHO_OPPONENTS = 0.05, labelled as model-derived. The naive product printed beside each parlay price was not verified on the parlay table.",
+   "title": "RESOLVED 2026-11-16 (session arena/3ff8ff0f-nba1): parlay and SGP prices now read a measured register",
+   "detail": "RESOLVED 2026-11-16 (session arena/3ff8ff0f-nba1). scripts/measure_parlay_rho.py computes the register (data/derived/parlay_rho.json) from the 196 verified official finals and the official gamebooks, and BOTH pricers read it: engine/parlay.py prices side+total at the measured -0.038 (n=196, p=0.597) and the naive product is printed beside the correlation-adjusted price on every row, each carrying the rho's n, interval, jackknife range and floor status. SGP_RHO_TEAMMATES (-0.2) and SGP_RHO_OPPONENTS (+0.05) survive only as a fallback that is labelled FALLBACK MODEL CONSTANT inside the row, and they are no longer what the published prices used. Two things this resolution does NOT claim: the teammate rho rests on 6 game-days against a declared 30-game-day floor (F131), and finding the fake 'measured' label on the old constant is a separate defect, recorded as F128.",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/generate_picks.py",
-   "status": "open"
+   "status": "resolved",
+   "resolved_by": "arena/3ff8ff0f-nba1",
+   "resolved_utc": "2026-11-16T19:1xZ"
   },
   {
    "id": "F91",
@@ -1053,11 +1057,14 @@
   {
    "id": "F116",
    "severity": "Medium",
-   "title": "The pinned home-court advantage is computed on a stale standings read, and the published file contains two different standings-derived samples",
-   "detail": "The HCA the model is pinned to is 1.23 points, from a measured home-win rate of 0.5285 on 193 games. That figure was measured from the official standings at the 2026-11-16T02:12Z..02:17Z capture, and it was honestly labelled as including only the 11/15 games that had gone Final at that moment. All three games that finished afterwards (HOU@WAS, ATL@MIL, OKC@SAC) were AWAY wins, so re-adding the official standings at 14:3xZ in this session gives home W-L 102-94 = 196 games, a home-win rate of 0.5204, and a pinned HCA of 0.88 points rather than 1.23. The drift reconciles EXACTLY: +3 games, +0 home wins, +3 road wins, which is precisely those three away wins - verified by verify/2026-11-16-23b323a3/verify_hca_anchor.py, which also re-checks the two internal consistency identities on the live table (home wins 102 == road losses 102; road wins 94 == home losses 94). A second, separate problem is visible in the same JSON: data/derived/horizon_lines_v2.json meta.home_court_anchor reports measured_home_win_rate 0.5285 with games_measured 161, while its own standings_cross_check sub-object reports 0.5285 over 193 games and the final-score corpus measures 0.5155 over 161. The rate and the game count in the top-level fields do not come from the same sample.",
+   "title": "RESOLVED 2026-11-16 (session arena/3ff8ff0f-nba1): the pin was recomputed from a first-hand standings read at the source, and the two measurements now carry their own denominators",
+   "detail": "RESOLVED 2026-11-16 (session arena/3ff8ff0f-nba1). scripts/build_horizon_v2.py now takes the home-win rate from the newest official standings capture in data/official/ and derives the pin (HCA_points = sigma x Phi^-1(rate)); data/official/standings_2026-11-16_1825Z_3ff8ff0f.json was produced by transcribing all 30 rows of https://www.nba.com/standings in this session and asserting the league's own identities. Result: 0.5204 (102/196) from the standings AND 0.5204 (102/196) from the finals corpus, sigma 16.94, pin 0.87 points - the two independent measurements agree exactly, and the published block labels each with its own games_measured key instead of sharing one. The suggested action here was 're-run build_horizon_v2.py against the current standings so the pin is recomputed rather than hand-corrected', which is what happened. Why the finals count moved from the 221 that F116 quoted to 196: 25 unplayed fixtures printing 0-0 stopped being counted as games (F129), which is also what fixed sigma. scripts/test_hca_pin.py now fails the build if the published pin stops matching a re-derivation, and both measurements' denominators are asserted there. Note the number quoted in this entry's original text (1.23 points) and the value this session found committed (1.14) are two successive stale snapshots of the same defect; the current published value is 0.87.",
    "affected": "data/derived/horizon_lines_v2.json meta.home_court_anchor; every line on site/pages/roll.html and model-v2.html that carries the pinned HCA",
    "source_url": "https://www.nba.com/standings",
-   "suggested_action": "Re-run scripts/build_horizon_v2.py against the current standings so the pin is recomputed rather than hand-corrected; that run also fixes the rate/count mismatch, because both are then read from one capture. This session deliberately did NOT hand-edit the pinned input: a hand-edited model input is exactly what this project forbids, and the re-derivation needs a run that reads the official pages. The arithmetic reconciliation above is committed so the size and direction of the correction are known in advance."
+   "suggested_action": "Re-run scripts/build_horizon_v2.py against the current standings so the pin is recomputed rather than hand-corrected; that run also fixes the rate/count mismatch, because both are then read from one capture. This session deliberately did NOT hand-edit the pinned input: a hand-edited model input is exactly what this project forbids, and the re-derivation needs a run that reads the official pages. The arithmetic reconciliation above is committed so the size and direction of the correction are known in advance.",
+   "status": "resolved",
+   "resolved_by": "arena/3ff8ff0f-nba1",
+   "resolved_utc": "2026-11-16T19:1xZ"
   },
   {
    "id": "F117",
@@ -1167,6 +1174,86 @@
    "source": "GitHub REST API response captured in session log; GET /repos/.../pages shows build_type=legacy",
    "source_url": "https://docs.github.com/rest/pages/pages#update-information-about-a-apiname-pages-site",
    "suggested_action": "Grant the app pages:write (or run the PUT from an admin UI session), flip build_type=workflow, then restore the four deploy steps in pages.yml as documented in its header comment."
+  },
+  {
+   "id": "F128",
+   "severity": "High",
+   "title": "engine/parlay.py published a hardcoded rho of 0.15 as \"measured from historical same-game pairs\"",
+   "detail": "Found by reading the line, not by inference. The module opened with `RHO = 0.15  # measured parlay correlation from data/derived/measured_rho.json` and then `rho = read_json('data/derived/measured_rho.json').get('rho', RHO)`. That file has no top-level `rho` key (it carries a `measured` list), so the lookup could never succeed: every row on the Parlay Pricing page was priced at the literal 0.15 while its own `_meta.method` line asserted the value was measured. Measured effect: the pairing priced there is side + total, whose rho on the 196 verified official finals is -0.038 (p = 0.62), i.e. the wrong sign - the page was inflating parlay probabilities rather than deflating them. Fixed in this build by scripts/measure_parlay_rho.py + the register it writes; the constant is gone and scripts/test_rho_pricing.py fails if a price ever again claims 'measured' without a register value. Kept on the register because it changes published prices, so a reviewer should see which numbers moved.",
+   "affected": "site/pages/parlay-pricing.html, data/parlay_pricing.json",
+   "source": "repository code + the measured register",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/parlay.py",
+   "suggested_action": "Accept the re-priced page, or restore the old page and re-label it as an assumption - do not leave both in circulation."
+  },
+  {
+   "id": "F129",
+   "severity": "High",
+   "title": "The official results captures store 0-0 for games that have not been played, and consumers disagree about what counts as a final",
+   "detail": "Measured: data/official/results_*.json rows for 2026-11-16/17/18 print home_pts 0 and away_pts 0 with game_status 1 and a tip-off string in game_status_text - a scheduled fixture, not a score. Four separate model inputs read that corpus and only guarded against a *missing* score, so 25 unplayed fixtures were being counted as games: the published home-court block printed a finals cross-check of 0.4615 over 221 games against the standings' 0.5285 over 193 (flag F116), the margin dispersion that converts the home-win rate into points was diluted from 16.94 to 15.96, per-team luck z-scores were computed as though tonight's teams had already lost 0-0, and the measured correlations were pulled by a 25-point cluster at the origin. Fixed centrally in engine/model_v2.py with one predicate (is_verified_final: both scores printed, not 0-0, and game_status 3 when the capture carries one) used by the HCA anchor, the luck table, the out-of-sample log loss and the rho measurement.",
+   "affected": "engine/model_v2.py, scripts/build_horizon_v2.py, every published margin, correlation and z-score",
+   "source": "repository data, measured 2026-11-16T18:2xZ",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/results_2026-11-15.json",
+   "suggested_action": "Make the capture write null (not 0) for a game the league has not scored, so the consumer-side predicate becomes a backstop rather than the only defence (SG38)."
+  },
+  {
+   "id": "F130",
+   "severity": "Medium",
+   "title": "Two sidecar schemas are in circulation for the archived injury PDFs",
+   "detail": "Counted across the archive by scripts/verify_injury_pdf_archive.py: 76 of 88 sidecars use the fetcher's keys {url, retrieved_utc, revision_label, http_status, bytes, sha256, file, id, pdf_signature_ok, error} and 12 use {edition, source_url, retrieved_at_utc, bytes, sha256, content_type}. The same two facts - where it came from, when it was fetched - are therefore filed under two names, so any consumer that reads one schema silently sees blanks for the other 12 editions. The integrity verifier accepts either and reports the split; the requirement is that it be one manifest. Consequence found while auditing this: engine/injury_diff.load_edition read only the schema-B key names, so the parsed edition index carried source_url = null and retrieved_at_utc = null for all 76 schema-A editions - the provenance was on disk and lost in the reader. The reader now accepts both spellings (all 88 editions publish both fields again, re-verified by scripts/verify_injury_pdf_archive.py); what remains open here is the writer side: one schema, then the split can be deleted rather than tolerated.",
+   "affected": "data/raw/injury_pdfs/*.json, engine/injury_diff.py, any future audit of report provenance",
+   "source": "measured 2026-11-16T18:3xZ from the files on disk",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/injury_pdfs",
+   "suggested_action": "Normalise the fetcher to one schema and rewrite the 12 older sidecars in a migration commit (SG39). The consumer tolerance added here is a backstop, not the fix."
+  },
+  {
+   "id": "F131",
+   "severity": "Medium",
+   "title": "The same-team (teammate) SGP rho is measured on 6 game-days, below its declared 30-game-day floor",
+   "detail": "data/derived/parlay_rho.json reports rho(teammate points, teammate points) = 0.4213 over 672 same-team player pairs drawn from the 12 team-games of the 6 game-days of official gamebooks the repository holds. The pair-level p-value is deliberately not published (672 pairs from 6 independent games are not 672 observations); the inference in the file is at game level - a delete-a-group jackknife over leave-one-game-out estimates gives t = 19.8 on 5 df against a 5% critical value of 2.571, with a stated caveat that a 6-cluster jackknife understates uncertainty. So the sign and the order of magnitude are solid and the precision is not. The price is still published, because the brief asks for a measured price with the naive product beside it rather than no price, and the row carries BELOW THE SAMPLE FLOOR in its status next to it.",
+   "affected": "SGP candidate prices on the picks and parlay surfaces",
+   "source": "scripts/measure_parlay_rho.py output",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/parlay_rho.json",
+   "suggested_action": "Extend the gamebook capture backwards (the official PDFs are addressable by date) until the floor is met; 4 more game-days of the same slate cohort would double the sample."
+  },
+  {
+   "id": "F132",
+   "severity": "Low",
+   "title": "The injury-report archive stops at the 11/16 10:30 AM ET edition while tonight's games are still hours away",
+   "detail": "Measured from the archive: the newest stored edition is Injury-Report_2026-11-16_10_30AM.pdf (retrieved 15:30:05Z). The league publishes further editions through the afternoon, and the scheduled fetcher runs at 11:15, 15:15 and 22:15 UTC, so the 22:15Z run should carry a later one. Until it does, rotation-availability cells for the 11/16 slate read from a morning edition, which is why several clubs print NOT YET SUBMITTED rather than a status. This is the league's filing cadence, not a site defect, but it bounds what the picks page can honestly say about tonight.",
+   "affected": "site/pages/picks.html rotation-availability column, site/pages/injuries.html banner",
+   "source": "data/raw/injury_pdfs + the workflow cron",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "suggested_action": "No action needed beyond letting the next scheduled run capture; if a pre-tip cut-off matters, add a gate that refuses to publish availability for a game inside 3 hours of tip when the newest edition is older than that."
+  },
+  {
+   "id": "F133",
+   "severity": "Medium",
+   "title": "Two verification tests asserted properties of \"the newest archived file\" and rotted as the archive grew",
+   "detail": "Found by running the suite, and both failures were pre-existing on main (verified against a clean checkout of origin/main in this session). scripts/test_injury_diff.py pinned its expectation to `paths[-1]` - the newest archived PDF - while cross-checking it against the transcription of the 11/15 06:15 AM edition; once the 11/16 editions arrived the newest PDF legitimately no longer listed that player, and the test reported a parser failure that was really a calendar effect. scripts/test_refresh_gate.py could not even start: it imports `engine.refresh_gate`, which resolves only when the repository root is on sys.path, so `python3 scripts/test_refresh_gate.py` died on ModuleNotFoundError while `python3 -m scripts.test_refresh_gate` worked. Both are fixed in this branch: the injury test now names the edition it audits (and skips with an explanation if that edition is not archived), and the refresh test puts the root on the path. Both suites pass now.",
+   "affected": "scripts/test_injury_diff.py, scripts/test_refresh_gate.py",
+   "source": "repository tests, run 2026-11-16T18:5xZ on this branch and on origin/main",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/test_injury_diff.py",
+   "suggested_action": "Any future test that reads the archive should name the artifact it audits; if it means to audit 'the newest', it must also assert what newest means or it will fail on a day the league publishes something."
+  },
+  {
+   "id": "F134",
+   "severity": "Low",
+   "title": "scripts/test_gate_roundtrip.py requires the fail-closed refresh gate to PASS, which it cannot do in this environment",
+   "detail": "Running the test: the promote step exits 0 and the gate exits 1, so the round-trip reports FAIL. The gate's own output is the documented structural block set (10 blocks: the client-rendered shells S1/S8/S9/S10 and stats.nba.com, unreachable from this sandbox - COORDINATION 54 E05 records the count falling 42 -> 10 and the remainder being R01 by design, which is why refresh-data.yml keeps that step continue-on-error). A test that asserts the gate returns 0 is therefore asserting that the sandbox can reach sources it cannot reach, and will red-light for reasons unrelated to the code. Not fixed in this session: the right change is to make the test assert the *identity of the blocked set* (which conditions block, and that the rest are clean) rather than the exit code, and that touches the R01 surface another line of custody owns. Reported here so the red test is not mistaken for a new defect.",
+   "affected": "scripts/test_gate_roundtrip.py, engine/refresh_gate.py",
+   "source": "measured on this branch and on origin/main, 2026-11-16T18:5xZ",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/test_gate_roundtrip.py",
+   "suggested_action": "Rewrite the assertion as 'exactly these conditions block, and nothing else does'."
+  },
+  {
+   "id": "F135",
+   "severity": "Medium",
+   "title": "model-v2.html, the page the site header links for the model, had no producer step in any build and was a day stale",
+   "detail": "Found by grepping the published pages for the corrected home-court number and finding none. model-v2.html at the repository root is written only by scripts/build_horizon_page_v2.py, which no workflow, no verify_all step and no site build invoked; it was last regenerated in the merge before this session. Consequence measured before the fix: the page the header nav links as 'Model v2' was rendering 25 picks, 14 gate passes and a 1.14-point home-court pin while data/derived/horizon_lines_v2.json had been rebuilt the same afternoon to 29 games, 17 passes and 0.87 - a committed artifact with no producer step silently contradicts every number next to it, the same class of defect as the earlier nav-label mismatches (COORDINATION 54 E11/E12). Fixed in this build by adding the builder to the site build's existing generator hook list in scripts/build_dashboard.py, so the page is regenerated whenever the site is, and by scripts/test_hca_pin.py, which fails if the regenerated pin stops matching a re-derivation from the official captures. After the fix the page prints 29 rows, 17 passes, 0.87 points and the 0.5204 rate with both denominators. The same pattern was found twice more in this cycle and fixed the same way: the header nav on all 28 pages hardcoded 'Model v2 — 15–19 Nov' and 'Horizon 14–17' while every table printed the 11/16–11/19 slate, and the v2 page's own headings carried the same hardcoded ranges. The ranges are now derived from the horizon file on the page (build_horizon_page_v2.py) and dropped from the shared header altogether, because a label with no date in it cannot go stale.",
+   "affected": "model-v2.html, scripts/build_dashboard.py",
+   "source": "file mtimes and a grep of the committed page against data/derived/*_v2.json, 2026-11-16T19:0xZ",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/model-v2.html",
+   "suggested_action": "Audit for the same pattern: any committed page that only a hand-run script writes. scripts/build_horizon_page_v2.py is now in the site build; scripts/build_surfaces.py and build_minutes_shares.py already were. The remaining one to check is docs/pages/model-v2.html (docs build only), which is fine because docs is not the published product."
   }
  ]
 }

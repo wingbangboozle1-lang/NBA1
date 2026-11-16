@@ -123,7 +123,7 @@ def main():
     # Home-court advantage is PINNED to the measured home-win rate (R09), never
     # fitted.  Two independent official measurements exist in the repository:
     # the standings HOME/ROAD columns and the final-score corpus.  Both are
-    # published, each with its own denominator (board flag F113 - the block used
+    # published, each with its own denominator (board flag F116 - the block used
     # to pair the standings rate with the corpus denominator, which made the two
     # numbers look like they disagreed when they in fact agree).
     #
@@ -194,7 +194,7 @@ def main():
             "source_url": "data/official/gamelog.json + data/official/results_*.json",
         },
         "source_agreement": agree,
-        # each number below belongs to the measurement named in its key - F113 was
+        # each number below belongs to the measurement named in its key - F116 was
         # the defect that a bare `games_measured` beside a standings rate created.
         "games_measured_standalone_finals": anchor["finals_counted"],
         "measured_road_win_rate": (round(anchor["road_win_rate"], 4)

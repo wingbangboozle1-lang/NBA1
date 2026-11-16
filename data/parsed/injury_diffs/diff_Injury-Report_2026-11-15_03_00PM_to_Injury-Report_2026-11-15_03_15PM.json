@@ -1,0 +1,35 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-15_03_00PM__4ba6a6bcdc87dc57.pdf",
+  "label": "Injury-Report_2026-11-15_03_00PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_03_00PM.pdf",
+  "retrieved_at_utc": "2026-11-15T23:49:02Z",
+  "sha256": "4ba6a6bcdc87dc570c546b577a793a08889edeab32c672dcd9dd49da6246cd27",
+  "rows": 105
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-15_03_15PM__d1aa215e326e5b60.pdf",
+  "label": "Injury-Report_2026-11-15_03_15PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_03_15PM.pdf",
+  "retrieved_at_utc": "2026-11-15T23:49:03Z",
+  "sha256": "d1aa215e326e5b60a37514f876b9b7838c8f0b7f27f1f35b34e6e6f628b63968",
+  "rows": 105
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "LA Clippers",
+   "player": "Martinelli, Nick",
+   "before_status": "Questionable",
+   "after_status": "Out",
+   "before_reason": "G League - Two- Way",
+   "after_reason": "G League - Two- Way",
+   "before_matchup": "CHA@LAC",
+   "after_matchup": "CHA@LAC"
+  }
+ ],
+ "listed_in_after_only": [],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}

@@ -16,8 +16,8 @@
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
-      <a href="../../model-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
-      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="../../model-v2.html">Model v2 — disagreement-first</a>
+      <a href="picks.html">Horizon lines &amp; picks (session build)</a>
       <a href="../../picks.html">Rolling horizon pick file</a>
       <a href="picks.html">Horizon</a>
       <a href="strategies.html">Evidence</a>
@@ -489,6 +489,42 @@
 <td>Any downstream use of tip time - rest windows, pre-tip publication, and the ledger's publish-before-tip rule</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">context</a></td>
+</tr>
+<tr id="Q31">
+<td>Q31</td>
+<td><b>Who owns the definition of a final score - the capture that writes it or every model that reads it?</b></td>
+<td>A single documented rule. Today the dated result captures write 0-0 for unplayed games and four consumers each decide for themselves whether that is a game (F129). The model now has one predicate; the producers do not.</td>
+<td>Decide whether engine/fetch_official.py should write null (or omit the field) for any game whose status is not Final, and add a schema assertion to the promote step so a 0-0 with status 1 can never reach data/official/ again.</td>
+<td>every count-based number on the site: HCA pin, sigma, luck z-scores, rho, out-of-sample log loss, settle gates</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">context</a></td>
+</tr>
+<tr id="Q32">
+<td>Q32</td>
+<td><b>Should a parlay price move when tomorrow's finals change the measured rho, or be frozen at publication?</b></td>
+<td>A rule. rho(margin, total) = -0.038 today on 196 finals; it will drift as the season fills in. A pre-registered strategy quotes a price, and a price that drifts after the pick is published cannot be graded fairly against the number the pick was made on.</td>
+<td>Freeze the register digest into the pre-registration file at the moment the strategy first bets (the ledger already stores hashes), and have the pricer stamp the register's generated_utc onto every published price so a reviewer can tell which rho made the quote.</td>
+<td>parlay and SGP settlement, the leaderboard's ROI column, the sealed-ledger verification step</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/parlay_rho.json" target="_blank" rel="noopener">context</a></td>
+</tr>
+<tr id="Q33">
+<td>Q33</td>
+<td><b>How many game-days of official box scores are needed before a teammate-prop correlation can be trusted?</b></td>
+<td>Sample. The repository holds full team gamebooks for 6 games (11/15). The teammate rho declares a 30-game-day floor and is currently at 6 (F131); nothing else in the repo can raise it because stats.nba.com is not reachable from the capture environment.</td>
+<td>Either extend the statsdmz gamebook capture backwards date by date (each is a single addressable PDF) or accept that teammate SGPs are published as bound-only and say so on the page header, not in a flag.</td>
+<td>player-prop combo pricing and any prop strategy that wants a correlation adjustment</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf" target="_blank" rel="noopener">context</a></td>
+</tr>
+<tr id="Q34">
+<td>Q34</td>
+<td><b>Does the corrected home-court pin re-price anything that has already been graded?</b></td>
+<td>A decision the board should record once rather than per session.</td>
+<td>Answered in this session's amendment file and adopted here: no. Picks published and settled under the frozen inputs stay graded under them (2026-11-14 and 2026-11-15 are untouched); only future picks move with the official data. If the owner wants retro-active re-pricing, that breaks the ledger's tamper-evidence and needs a new ledger, not an edit.</td>
+<td>nothing - it unblocks the question of whether to re-run the settled slates</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/prereg/amendment_2026-11-16_3ff8ff0f.json" target="_blank" rel="noopener">context</a></td>
 </tr>
 </tbody></table></div>
 <p class="tnote">Where a row says no official source exists, that is the honest answer: no NBA-operated page publishes the missing item (a closing price, for instance).</p>

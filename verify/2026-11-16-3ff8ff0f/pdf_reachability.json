@@ -1,0 +1,31 @@
+{
+ "measured_utc": "2026-11-16T18:29:02Z",
+ "environment": "agent sandbox (bash/python egress allow-list: github.com, codeload, api.github.com, registry.npmjs.org, pypi.org, files.pythonhosted.org)",
+ "checks": [
+  {
+   "label": "ak-static.cms.nba.com (injury PDF host)",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_45AM.pdf",
+   "host": "ak-static.cms.nba.com",
+   "dns": "resolved",
+   "http_status": "FAILED",
+   "error": "URLError(SSLZeroReturnError(6, 'TLS/SSL connection has been closed (EOF) (_ssl.c:992)'))"
+  },
+  {
+   "label": "www.nba.com (HTML)",
+   "url": "https://www.nba.com/schedule",
+   "host": "www.nba.com",
+   "dns": "resolved",
+   "http_status": "FAILED",
+   "error": "URLError(SSLZeroReturnError(6, 'TLS/SSL connection has been closed (EOF) (_ssl.c:992)'))"
+  },
+  {
+   "label": "github.com (allow-listed)",
+   "url": "https://github.com",
+   "host": "github.com",
+   "dns": "resolved",
+   "http_status": 200,
+   "first_bytes": "0a0a0a0a0a0a0a0a",
+   "bytes_read": 4096
+  }
+ ]
+}

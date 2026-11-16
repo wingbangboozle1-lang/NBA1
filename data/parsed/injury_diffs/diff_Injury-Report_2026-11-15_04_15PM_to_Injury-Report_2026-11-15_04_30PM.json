@@ -1,0 +1,162 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-15_04_15PM__98541686730bc650.pdf",
+  "label": "Injury-Report_2026-11-15_04_15PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_04_15PM.pdf",
+  "retrieved_at_utc": "2026-11-15T23:49:05Z",
+  "sha256": "98541686730bc6500d7edb93bde995ed0b34cf8dc9ecdae8ab56776fa3d557fa",
+  "rows": 109
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-15_04_30PM__b1425352f0bd81bf.pdf",
+  "label": "Injury-Report_2026-11-15_04_30PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_04_30PM.pdf",
+  "retrieved_at_utc": "2026-11-15T23:49:06Z",
+  "sha256": "b1425352f0bd81bfe44e3a99ace3f09a5bccad5d5e868206ff5c41cb0058df8a",
+  "rows": 124
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "Toronto Raptors",
+   "player": "Barnes, Scottie",
+   "before_status": "Questionable",
+   "after_status": "Probable",
+   "before_reason": "Injury/Illness - Left Groin Strain",
+   "after_reason": "Injury/Illness - Left Groin Strain",
+   "before_matchup": "NYK@TOR",
+   "after_matchup": "NYK@TOR"
+  }
+ ],
+ "listed_in_after_only": [
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Diop, Khalifa",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "matchup": "CHI@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Merrill, Sam",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Elbow Injury Management",
+   "matchup": "CHI@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Mobley, Evan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Great Toe Sprain",
+   "matchup": "CHI@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Tomlin, Nae'Qwan",
+   "status": "Out",
+   "reason": "Injury/Illness - Low Back Stress Reaction",
+   "matchup": "CHI@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Tyson, Jaylon",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Ankle Injury Management",
+   "matchup": "CHI@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Udeh, Jr., Ernest",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "matchup": "CHI@CLE"
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Watson, Peyton",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Abdominal Soreness",
+   "matchup": "CHI@CLE"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Goldin, Vladislav",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "matchup": "HOU@MIA"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Larsson, Pelle",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Illness",
+   "matchup": "HOU@MIA"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Thompson, Klay",
+   "status": "Available",
+   "reason": "Injury/Illness - Left Ankle Sprain",
+   "matchup": "HOU@MIA"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Dia, Malik",
+   "status": "Questionable",
+   "reason": "G League - Two- Way",
+   "matchup": "GSW@NOP"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Mathurin, Bennedict",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Plantar Fasciitis",
+   "matchup": "GSW@NOP"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "McGowens, Bryce",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Elbow Infection",
+   "matchup": "GSW@NOP"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Murphy III, Trey",
+   "status": "Out",
+   "reason": "Injury/Illness - Bilateral Patellar Tendinopathy",
+   "matchup": "GSW@NOP"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Murray, Dejounte",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Ankle Sprain",
+   "matchup": "GSW@NOP"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Pierre Jr., Jaron",
+   "status": "Questionable",
+   "reason": "G League - Two- Way",
+   "matchup": "GSW@NOP"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Reese, Julian",
+   "status": "Questionable",
+   "reason": "G League - Two- Way",
+   "matchup": "GSW@NOP"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Watford, Trendon",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Ankle Sprain",
+   "matchup": "GSW@NOP"
+  }
+ ],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}

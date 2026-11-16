@@ -1,0 +1,35 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-15_03_15PM__d1aa215e326e5b60.pdf",
+  "label": "Injury-Report_2026-11-15_03_15PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_03_15PM.pdf",
+  "retrieved_at_utc": "2026-11-15T23:49:03Z",
+  "sha256": "d1aa215e326e5b60a37514f876b9b7838c8f0b7f27f1f35b34e6e6f628b63968",
+  "rows": 105
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-15_03_30PM__c17ab5a7d2128a31.pdf",
+  "label": "Injury-Report_2026-11-15_03_30PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_03_30PM.pdf",
+  "retrieved_at_utc": "2026-11-15T23:49:03Z",
+  "sha256": "c17ab5a7d2128a319140492cc10eb3f729ad230c220dbacb16bbbc297d67e7db",
+  "rows": 105
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "San Antonio Spurs",
+   "player": "Fox, De'Aaron",
+   "before_status": "Questionable",
+   "after_status": "Out",
+   "before_reason": "Injury/Illness - Left Hip Tightness",
+   "after_reason": "Injury/Illness - Left Hip Tightness",
+   "before_matchup": "SAS@UTA",
+   "after_matchup": "SAS@UTA"
+  }
+ ],
+ "listed_in_after_only": [],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}

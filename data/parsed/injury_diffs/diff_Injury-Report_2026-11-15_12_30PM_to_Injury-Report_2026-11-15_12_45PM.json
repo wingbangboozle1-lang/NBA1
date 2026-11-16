@@ -1,0 +1,74 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-15_12_30PM__92348979be88d031.pdf",
+  "label": "Injury-Report_2026-11-15_12_30PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_12_30PM.pdf",
+  "retrieved_at_utc": "2026-11-15T23:49:17Z",
+  "sha256": "92348979be88d031a7df6d5915968ad8915f4e63274424fabe72ebd7155d183a",
+  "rows": 89
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-15_12_45PM__2a40a7d62fbbc7d3.pdf",
+  "label": "Injury-Report_2026-11-15_12_45PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_12_45PM.pdf",
+  "retrieved_at_utc": "2026-11-15T23:49:18Z",
+  "sha256": "2a40a7d62fbbc7d3feef95f670b7576bb160a0fbee6a5b00cf5d8e8bc2a3adf6",
+  "rows": 85
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "Atlanta Hawks",
+   "player": "Landale, Jock",
+   "before_status": "Available",
+   "after_status": "Questionable",
+   "before_reason": "Injury/Illness - Face Mask",
+   "after_reason": "Injury/Illness - Right Hip Inflammation",
+   "before_matchup": "ATL@MIL",
+   "after_matchup": "ATL@MIL"
+  }
+ ],
+ "listed_in_after_only": [
+  {
+   "team": "LA Clippers",
+   "player": "Martinelli, Nick",
+   "status": "Questionable",
+   "reason": "G League - Two- Way",
+   "matchup": "CHA@LAC"
+  }
+ ],
+ "listed_in_before_only": [
+  {
+   "team": "Atlanta Hawks",
+   "player": "Newell, Asa",
+   "status": "Out",
+   "matchup": "ATL@MIL"
+  },
+  {
+   "team": "Houston Rockets",
+   "player": "Copeland, Quadir",
+   "status": "Out",
+   "matchup": "HOU@WAS"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Pedulla, Sean",
+   "status": "Out",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Raynaud, Maxime",
+   "status": "Out",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "Utah Jazz",
+   "player": "Bufkin, Kobe",
+   "status": "Out",
+   "matchup": "SAS@UTA"
+  }
+ ],
+ "team_block_filing_changes": []
+}
