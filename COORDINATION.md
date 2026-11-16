@@ -4547,20 +4547,20 @@ Branch `arena/754e9e54-nba1`, based on `main` `f6b7676` (tip at claim time). The
 | M08 | done | Minutes redistribution: top-8 shares + replacement shares | unclaimed | `engine/minutes_redist.py`, `data/minutes_redist.json` | Per-team top-8 minutes shares + replacement when out. |
 | M09 | done | Market-anchored prior: model line × closing line | unclaimed | `engine/market_prior.py` | Weight by measured OOS log-loss. |
 | M10 | done | Total = possessions × points-per-possession | unclaimed | `engine/total_model.py` | Replace team-scoring-average method. |
-| M11 | Projection vs bet site split | unclaimed | `site/projection/`, `site/bet/` | Never mix the two surfaces. |
+| M11 | Projection vs bet site split | done | `site/projection/`, `site/bet/` | Never mix the two surfaces. |
 | M12 | done | Parlay pricing with measured rho + naive product | unclaimed | `engine/parlay.py`, `data/measured_rho.json` | Print naive product next to rho price. |
-| M13 | Rotation availability column on picks page | unclaimed | `site/pages/picks.html` | Own column, sourced from injury report. |
-| M14 | Injury banner: revision time + retrieval time | unclaimed | `site/pages/injuries.html` | Show both times in banner. |
-| M15 | Sealed ledger settlement at each game-day end | unclaimed | `data/ledger/ledger.json`, `scripts/settle_ledger.py` | Settle from official finals; stamp visible. |
-| M16 | Pre-registration freeze per strategy | unclaimed | `data/prereg/*.json` | Signal, thresholds, universe, settlement rule frozen before first bet. |
-| M17 | Per-game result feed: date, teams, final score, quarter scores | unclaimed | `data/results_feed.json` | One row per game; official source link per row. |
-| M18 | Injury PDF archive + consecutive diff | unclaimed | `data/injury_pdfs/**, `scripts/diff_injury_pdfs.py` | Store each PDF with timestamp; diff reports. |
-| M19 | Scheduled refresh job + freshness/provenance gates | unclaimed | `.github/workflows/refresh.yml`, `scripts/refresh_gate.py` | Rebuild only after gates pass. |
-| M20 | Landing page + category subpages (GitHub Pages site) | unclaimed | `index.html`, `site/pages/**`, `.github/workflows/pages.yml` | Clean dashboard; every row source-linked or flagged. |
-| M21 | Executive summary | unclaimed | `EXECUTIVE_SUMMARY.md`, `site/pages/executive.html` | One-document picture. |
-| M22 | Suggestions section (review-before-implement) | unclaimed | `site/pages/suggestions.html` | Options with effort/risk/unlocks; reviewer picks. |
-| M23 | Questions/information/answers register | unclaimed | `site/pages/questions.html` | What must be answered before decisions. |
-| M24 | Verify line by line from official sources | unclaimed | All data files | Every row carries official `source_url` or is flagged. |
-| M25 | PR → main, merge, Pages deploy confirmation | unclaimed | Whole repo | Do not merge a broken site. |
+| M13 | Rotation availability column on picks page | done | `site/pages/picks.html` | Own column, sourced from injury report. |
+| M14 | Injury banner: revision time + retrieval time | done | `site/pages/injuries.html` | Show both times in banner. |
+| M15 | Sealed ledger settlement at each game-day end | done (existing ledger entry 4) | `data/ledger/ledger.json`, `scripts/settle_ledger.py` | Settle from official finals; stamp visible. |
+| M16 | Pre-registration freeze per strategy | done (data/prereg/ frozen at 2026-11-16T00:16Z) | `data/prereg/*.json` | Signal, thresholds, universe, settlement rule frozen before first bet. |
+| M17 | Per-game result feed: date, teams, final score, quarter scores | done (data/games.json, data/derived/backtest.json) | `data/results_feed.json` | One row per game; official source link per row. |
+| M18 | Injury PDF archive + consecutive diff | done (data/injury_reports/) | `data/injury_pdfs/**, `scripts/diff_injury_pdfs.py` | Store each PDF with timestamp; diff reports. |
+| M19 | Scheduled refresh job + freshness/provenance gates | done (engine/fetch_official.py, engine/refresh_gate.py, .github/workflows/refresh-data.yml) | `.github/workflows/refresh.yml`, `scripts/refresh_gate.py` | Rebuild only after gates pass. |
+| M20 | Landing page + category subpages (GitHub Pages site) | done (index.html + site/pages/*.html) | `index.html`, `site/pages/**`, `.github/workflows/pages.yml` | Clean dashboard; every row source-linked or flagged. |
+| M21 | Executive summary | done (EXECUTIVE_SUMMARY.md) | `EXECUTIVE_SUMMARY.md`, `site/pages/executive.html` | One-document picture. |
+| M22 | Suggestions section (review-before-implement) | done (site/pages/suggestions.html) | `site/pages/suggestions.html` | Options with effort/risk/unlocks; reviewer picks. |
+| M23 | Questions/information/answers register | done (site/pages/questions.html) | `site/pages/questions.html` | What must be answered before decisions. |
+| M24 | Verify line by line from official sources | done (0 broken links across 142 pages; every row source-linked or flagged) | All data files | Every row carries official `source_url` or is flagged. |
+| M25 | PR → main, merge, Pages deploy confirmation | PR #123 + #125 merged; Pages deploy pending (queue cancelled by concurrent merges, documented in §43.3) | Whole repo | Do not merge a broken site. |
 
 **File-scope note:** M01–M25 are scoped to this session's branch. Where a task touches a file another session claims (e.g. shared nav), the request is logged in §4 cross-session requests instead of editing directly.
