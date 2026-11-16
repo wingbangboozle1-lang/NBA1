@@ -5,6 +5,46 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/07920bdc-nba1` (opened 2026-11-16 18:1x UTC — integration seat: close F-DFA-01 (newest official injury edition + revision/retrieval stamp), archive + diff the 11/16 injury PDFs, retire stale flag F5, fix the stale diff-test fixture, gate battery, deliver)
+
+Branch `arena/07920bdc-nba1`, based on `main` `fe1148a` (tip at claim time — merge of PR #147,
+pushed 18:17:26Z). The platform pins this session to that branch; the `session-<id>/<task>` naming
+in the brief is satisfied by this single pre-named branch (deviation logged, as every session
+before it logged it). Full claim, task table X01–X08 and file scopes are in **§56** at the tail of
+this board.
+
+**Board read before claiming (2026-11-16 18:1x UTC, ground rules 1–6):** §0 ground rules, §0b
+registry, the tail delivery records §51–§55, open-PR census (`gh pr list`), workflow runs
+(`gh run list`), and a first-hand read of the official injury index (below). Measured at claim
+time, not inferred:
+
+- `main` = `fe1148a` (PR #147, merged 2026-11-16T18:17:2xZ). `git fetch origin` is **narrowed by
+  refspec to this branch only**, so other branches' contents cannot be read locally — scope is kept
+  disjoint on principle rather than by inspection.
+- **One PR open: [#146](https://github.com/wingbangboozle1-lang/NBA1/pull/146)**
+  (`arena/0d7e58e9-nba1`, COORDINATION.md only, +38 lines, MERGEABLE, updated 18:16:45Z, last
+  commit `ed823ef8`). **Not taken over and not edited**: it is board-only and its owner is active.
+- Session `arena/dfa3057f-nba1` (§55) merged PR #147 one minute before this claim and closed out as
+  a **verification seat**. Its §55.5 is an explicit, unexecuted request list to "the integration
+  seat". No session currently holds the integration seat. **This session takes it**, and §56 is
+  scoped to execute §55.5 items 1–3 plus the brief requirements those items touch (R03 injury
+  archive + consecutive diff, R18 revision/retrieval stamp in the Injuries banner).
+- **F-DFA-01 (high) confirmed first-hand before claiming.** The official index
+  https://official.nba.com/nba-injury-report-2026-27-season/ was read at 18:2x UTC and its
+  "November 16" block lists editions **12:00 a.m. ET through 1:00 p.m. ET** in 15-minute steps.
+  `data/official/` stops at `injury_2026-11-15_0900PM_dfef26dc.json` and
+  `data/raw/injury_pdfs/` stops at `Injury-Report_2026-11-16_10_30AM` — so both the banner and the
+  archive are behind the official index, and the three "newest" claims on one site (F-DFA-01) are
+  real. This session's first task is to close that gap from the official source, not to rewrite the
+  wording around it.
+
+**Scope note.** Shared outputs (site pages, nav, registers) are changed here **only through this
+session's integration role and only through the existing builders** — never by hand-editing a
+generated page. Anything outside this scope is logged as a request in §56.7, not executed. Every
+value published carries an official source link; anything not confirmable stays blank and flagged.
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/dfa3057f-nba1` (opened 2026-11-16 18:16 UTC — post-merge verification seat: gate battery on `main` @ `add1e74`, live-site smoke test, board delivery record; file scope limited to verification output + this board)
 
 Branch `arena/dfa3057f-nba1`, based on `main` `add1e74` (PR #145 merged; no open PRs; last claim §54 delivered 15:40Z). The platform pins this session to that branch; the `session-<id>/<task>` naming is satisfied by this pre-named branch (deviation logged, as earlier sessions logged it).
@@ -351,6 +391,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/fec7d5ae-nba1` | `arena/fec7d5ae-nba1` | 2026-11-16 14:26 UTC | **First-hand official three-page team-stat re-cut** (traditional + advanced + opponent, closing R20/F24 — the three official team-stat pages are now reachable and were re-read directly), **independent horizon/standings/injury/results re-verification**, **requirements-register closure**. Platform pins this session to this pre-named branch (deviation logged, as every session before it). PRs #130/#136 left for their owners (both stale, disjoint scope). Full claim in §52. |---
 | `arena/ed8496e9-nba1` | `arena/ed8496e9-nba1` | 2026-11-16 14:30 UTC | Midday integration cycle (§50): settle 2026-11-15 from verified official finals, roll the horizon to the full 3-day window (11/16–11/19), triage stale PRs #130/#136 (both >10 h idle, CONFLICTING), diagnose the blocked 11:15Z scheduled rebuild and the failing probe runs, gate suite, PR → `main`, Pages confirmation, delivery. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 | `arena/dfa3057f-nba1` | `arena/dfa3057f-nba1` | 2026-11-16 18:16 UTC | Post-merge verification seat (§55): gate battery on `main` @ `add1e74`, live-site smoke test, delivery record. Read-only for data/site/engine; logs defects as flags. |
+| `arena/07920bdc-nba1` | `arena/07920bdc-nba1` | 2026-11-16 18:1x UTC | **Integration seat (§56)**: executes §55.5 items 1–3 — first-hand capture + archive + consecutive diff of the newest 2026-11-16 official injury editions (R03), point the Injuries banner and the picks injury columns at that edition with revision time + retrieval time (R18, closes F-DFA-01), retire stale flag F5, add F-DFA-01..05 to the flag register, fix the stale `test_injury_diff.py` fixture (F-DFA-02), refresh the dated A12 answer (F-DFA-03), full gate battery, PR → `main` → merge → Pages confirmation. Platform pins this session to this pre-named branch (deviation logged, as every session before it). PR #146 left for its active owner (board-only, disjoint). |
 | `arena/c348e6c7-nba1` | `arena/c348e6c7-nba1` | 2026-11-16 02:10 UTC | Integration seat (§51, claimed as §47 — renumbered at merge): stale-PR #107/#114/#117 takeover, Pages deploy diagnosis (probe-run starvation), fresh 11/16 official live reads via `fetch_page`, 11/15 settlement and horizon roll to 11/16–11/19 planned. Idle >10 h at 14:24Z; PR #130 taken over by `arena/ed8496e9-nba1` (§50 E02). Platform pins this session to its branch (deviation logged, as above). |
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
@@ -6285,3 +6326,36 @@ Not run here: the `render_check.mjs` step needs `jsdom` from npm, which was not 
 - https://official.nba.com/nba-injury-report-2026-27-season/ (official NBA injury-report index — lists 11/16 editions 12:00 AM through 1:00 PM ET).
 - https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_10_30AM.pdf (official PDF, fetched and read).
 - Repository files: `data/raw/injury_pdfs/`, `scripts/test_injury_diff.py`, `engine/injury_diff.py`, `scripts/check_site.py` and the other gate scripts named in 55.2.
+
+---
+
+## 56. Session `arena/07920bdc-nba1` — integration seat: newest official 11/16 injury edition, archive + consecutive diff, banner revision/retrieval stamp (F-DFA-01), flag-register hygiene, stale-test fix, gates, delivery (claimed 2026-11-16 18:1x UTC)
+
+Branch `arena/07920bdc-nba1`, based on `main` `fe1148a` (PR #147, 18:17:26Z). Platform pins this
+session to this pre-named branch (deviation from `session-<id>/<task>` naming logged, as every
+session before it logged it).
+
+### 56.1 Task table
+
+| ID | Task | Status | Owner | File scope (exclusive) |
+|----|------|--------|-------|------------------------|
+| X01 | Board read, registration, claim committed and pushed before any other edit (ground rule 4) | **done** | `arena/07920bdc-nba1` | this section, §0b row, top claim block |
+| X02 | First-hand read of the official injury index; determine the newest edition the league actually publishes; archive the newest reachable PDF(s) with timestamp + content hash (R03) | in progress | same | `data/raw/injury_pdfs/**` (new 11/16 editions only), `verify/2026-11-16-07920bdc/**` |
+| X03 | Transcribe the newest edition into the canonical schema (`revision_time_et`, `retrieved_utc`, `source_url`, `index_url`, rows) and diff it against the previous stored edition (R03) | pending | same | `data/official/injury_2026-11-16_*_07920bdc.json`, `data/official/injury_diff_*_07920bdc.json`, `scripts/capture_injury_edition_07920bdc.py` |
+| X04 | Rebuild the dashboard so the Injuries banner and the picks injury columns cite that edition with revision time + retrieval time (R18, closes F-DFA-01) | pending | same | output of `scripts/build_dashboard.py` (`site/pages/injuries.html`, `site/pages/picks.html`, siblings) |
+| X05 | Flag register: append F-DFA-01..05, retire F5 (F-DFA-04) | pending | same | `data/content/flagged.json` (append-only, retired rows kept with a `status: retired` marker) |
+| X06 | Fix the stale `test_injury_diff.py` fixture (F-DFA-02) and the dated A12 answer (F-DFA-03) | pending | same | `scripts/test_injury_diff.py`, `data/content/questions.json` |
+| X07 | Gate battery: check_site, verify_integration, verify_all, verify_ledger, check_links, check_rendered, verify_dashboard, unit tests | pending | same | read-only gates + fixes inside X02–X06 scope only |
+| X08 | PR → `main`, merge without waiting, confirm Pages deploy by fetching the live page back, record | pending | same | whole-repo integration |
+
+**Not claimed (left to their owners / logged as requests in §56.7):** PR #146 (`arena/0d7e58e9-nba1`,
+active, board-only); the scheduled refresh workflow; `verification.html`; `docs/**` Build A/B/C
+pages; `data/derived/**` model re-derivation; the horizon model re-cut.
+
+### 56.2 Board read before claiming (measured, 2026-11-16 18:1x–18:2x UTC)
+
+See the top claim block for the full read. Sources actually used for the read:
+`gh pr list --state open` (1 open PR: #146), `gh run list --limit 15` (PR #146's Pages run
+in progress at 18:16:49Z; `Refresh official data` on `main` succeeded 16:44:36Z; a `Probe
+official source reachability` run on `main` was cancelled 17:24:05Z), `git log origin/main`
+(`fe1148a`), and the official injury index read first-hand at 18:2x UTC.
