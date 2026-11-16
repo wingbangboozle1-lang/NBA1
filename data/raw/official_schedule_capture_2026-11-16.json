@@ -2,8 +2,13 @@
  "captured_by": "arena/161f1638-nba1",
  "captured_on_utc_date": "2026-11-15",
  "capture_method": "official pages read live through the web-fetch channel",
- "scope": "rolling 3-day window 2026-11-16 .. 2026-11-18 (25 games)",
+ "scope": "rolling window 2026-11-16 .. 2026-11-19 (today + up to 3 days, 29 games)",
  "sources": [
+  "https://www.nba.com/game/gsw-vs-mem-0022600270",
+  "https://www.nba.com/game/lac-vs-sas-0022600273",
+  "https://www.nba.com/game/nyk-vs-min-0022600272",
+  "https://www.nba.com/game/por-vs-mil-0022600271",
+  "https://www.nba.com/games?date=2026-11-19",
   "https://www.nba.com/schedule",
   "https://www.nba.com/standings"
  ],
@@ -296,19 +301,6 @@
   ],
   [
    "2026-11-18",
-   "0022600267",
-   "GSW",
-   "DAL",
-   "8:00 PM ET",
-   "American Airlines Center",
-   "Dallas, TX",
-   null,
-   "8-5",
-   "7-6",
-   "official schedule card + standings"
-  ],
-  [
-   "2026-11-18",
    "0022600266",
    "BOS",
    "DEN",
@@ -318,6 +310,19 @@
    null,
    "10-2",
    "7-4",
+   "official schedule card + standings"
+  ],
+  [
+   "2026-11-18",
+   "0022600267",
+   "GSW",
+   "DAL",
+   "8:00 PM ET",
+   "American Airlines Center",
+   "Dallas, TX",
+   null,
+   "8-5",
+   "7-6",
    "official schedule card + standings"
   ],
   [
@@ -345,6 +350,59 @@
    "5-6",
    "1-11",
    "official schedule card + standings"
+  ],
+  [
+   "2026-11-19",
+   "0022600270",
+   "GSW",
+   "MEM",
+   "8:00 PM ET",
+   "FedExForum",
+   "Memphis, TN",
+   null,
+   "8-5",
+   "9-4",
+   "official schedule card + game page GAME INFO (nba.com/game/gsw-vs-mem-0022600270)"
+  ],
+  [
+   "2026-11-19",
+   "0022600271",
+   "POR",
+   "MIL",
+   "8:00 PM ET",
+   "Fiserv Forum",
+   "Milwaukee, WI",
+   null,
+   "9-3",
+   "1-13",
+   "official schedule card + game page GAME INFO (nba.com/game/por-vs-mil-0022600271)"
+  ],
+  [
+   "2026-11-19",
+   "0022600272",
+   "NYK",
+   "MIN",
+   "8:00 PM ET",
+   "Target Center",
+   "Minneapolis, MN",
+   null,
+   "7-6",
+   "9-4",
+   "official schedule card + game page GAME INFO (nba.com/game/nyk-vs-min-0022600272)"
+  ],
+  [
+   "2026-11-19",
+   "0022600273",
+   "LAC",
+   "SAS",
+   "8:00 PM ET",
+   "Frost Bank Center",
+   "San Antonio, TX",
+   null,
+   "4-8",
+   "12-2",
+   "official schedule card + game page GAME INFO (nba.com/game/lac-vs-sas-0022600273)"
   ]
- ]
+ ],
+ "extension_note": "Four 2026-11-19 rows appended by arena/ed8496e9-nba1 after the 00:16Z pre-tip publication (ledger entry 5) had already frozen the 16..18 vintage: the original 25 rows are untouched, each new row's tip/venue/record was read live from the official schedule card and the official game page GAME INFO block on 2026-11-16 ~15:0xZ. The ledger archive horizon_picks_2026-11-16.json is NOT rewritten; the 11-19 picks publish with the next day's freeze."
 }

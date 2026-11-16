@@ -1,11 +1,11 @@
 {
  "_meta": {
-  "title": "Originated horizon lines — 2026-11-16 through 2026-11-18 (25 unplayed games)",
+  "title": "Originated horizon lines — 2026-11-16 through 2026-11-19 (29 unplayed games)",
   "generated_by": "scripts/originate_horizon.py (rolling window)",
-  "generated_utc": "2026-11-15T23:55Z",
+  "generated_utc": "2026-11-16T14:57Z",
   "method": "identical formulas to scripts/originate_lines.py (Build A)",
-  "horizon": "2026-11-16 .. 2026-11-18: the rolling window (today + up to 3 days ahead) as captured in data/raw/official_schedule_capture_2026-11-16.json — scope: rolling 3-day window 2026-11-16 .. 2026-11-18 (25 games)",
-  "window_rule": "the window is defined by the capture, never re-derived here: 2026-11-16=8, 2026-11-17=5, 2026-11-18=12 games",
+  "horizon": "2026-11-16 .. 2026-11-19: the rolling window (today + up to 3 days ahead) as captured in data/raw/official_schedule_capture_2026-11-16.json — scope: rolling window 2026-11-16 .. 2026-11-19 (today + up to 3 days, 29 games)",
+  "window_rule": "the window is defined by the capture, never re-derived here: 2026-11-16=8, 2026-11-17=5, 2026-11-18=12, 2026-11-19=4 games",
   "inputs": {
    "schedule_capture": "data/raw/official_schedule_capture_2026-11-16.json",
    "schedule_captured_on": "2026-11-15",
@@ -14,10 +14,10 @@
     "data/teams_advanced_2026_27.json",
     "data/teams_scoring_2026_27.json"
    ],
-   "injury_edition": "2026-11-15_0615PM",
-   "injury_revision_et": "11/15/2026 06:15 PM",
-   "injury_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
-   "injury_file": "data/official/injury_2026-11-15_0615PM.json"
+   "injury_edition": "2026-11-15_0900PM_dfef26dc",
+   "injury_revision_et": "11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM')",
+   "injury_retrieved_utc": "2026-11-16T02:14Z..02:17Z",
+   "injury_file": "data/official/injury_2026-11-15_0900PM_dfef26dc.json"
   },
   "empirical_dispersion": {
    "margin_sd": 16.322,
@@ -49,30 +49,30 @@
    {
     "id": "F-W03",
     "severity": "medium",
-    "item": "Inputs dated, disclosed: ratings re-cut from the official captures retrieved 2026-11-15T23:38Z..23:52Z; records captured 2026-11-15; injury edition 2026-11-15_0615PM (revision 11/15/2026 06:15 PM).",
+    "item": "Inputs dated, disclosed: ratings re-cut from the official captures retrieved 2026-11-15T23:38Z..23:52Z; records captured 2026-11-15; injury edition 2026-11-15_0900PM_dfef26dc (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM')).",
     "detail": "Every pick built on these lines is labelled MODEL OUTPUT — UNVALIDATED and stamped with this as-of date. Records go stale as earlier games in the window complete (rolling refresh job).",
     "source": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame"
    },
    {
     "id": "F-W04",
     "severity": "medium",
-    "item": "The newest stored edition (2026-11-15_0615PM, revision 11/15/2026 06:15 PM) covers 11/15/2026, 11/16/2026 only; later days in the window have no rows, and some blocks are printed NOT YET SUBMITTED.",
+    "item": "The newest stored edition (2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM')) covers 11/15/2026, 11/16/2026 only; later days in the window have no rows, and some blocks are printed NOT YET SUBMITTED.",
     "detail": "Teams must file by 5 p.m. local the day before a game (1 p.m. local for the second night of a back-to-back), so blocks for the later days of the window cannot exist yet. Game-day editions appear 11 a.m.–1 p.m. local per league policy.",
     "source": "https://official.nba.com/nba-injury-report-2026-27-season/"
    },
    {
     "id": "F-W05",
     "severity": "medium",
-    "item": "Some team blocks in the 2026-11-15_0615PM edition are printed NOT YET SUBMITTED, and some clubs have no block at all.",
+    "item": "Some team blocks in the 2026-11-15_0900PM_dfef26dc edition are printed NOT YET SUBMITTED, and some clubs have no block at all.",
     "detail": "The league prints a NOT YET SUBMITTED placeholder for a club that has not filed; an absent block is recorded as absent and never read as 'no injuries'. Both states are published verbatim.",
-    "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+    "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf"
    },
    {
     "id": "F-W06",
     "severity": "medium",
-    "item": "22 injury rows lost their Team cell to PDF merged cells; team_effective inherits the nearest printed team.",
-    "detail": "Rows are marked team_inherited in data/official/injury_2026-11-15_0615PM.json and are published with that caveat. No line moves: no absence classifies as NEW_ABSENCE from evidence in this repo (canonical rule, scripts/injury_impact.py) -> adjustment 0.",
-    "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf"
+    "item": "0 injury rows lost their Team cell to PDF merged cells; team_effective inherits the nearest printed team.",
+    "detail": "Rows are marked team_inherited in data/official/injury_2026-11-15_0900PM_dfef26dc.json and are published with that caveat. No line moves: no absence classifies as NEW_ABSENCE from evidence in this repo (canonical rule, scripts/injury_impact.py) -> adjustment 0.",
+    "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf"
    },
    {
     "id": "F-W07",
@@ -119,7 +119,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 2,
@@ -133,7 +133,7 @@
     "last_date": "2026-11-11",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z); no NEW_ABSENCE verifiable -> no line adjustment",
+   "availability_label": "statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z); no NEW_ABSENCE verifiable -> no line adjustment",
    "availability_rows": [
     {
      "team": "ORL",
@@ -189,16 +189,10 @@
     },
     {
      "team": "BOS",
-     "player": "Penda, Noah",
-     "status": "Out",
-     "reason": "NOT YET SUBMITTED",
-     "play_probability": 0.0,
-     "season_min": null,
-     "season_pts": null,
-     "absence_class": "UNKNOWN",
-     "expected_points_removed": 0.0,
-     "stat_source": null,
-     "note": "minutes/points not verifiable in repo -> blank"
+     "player": null,
+     "status": "NOT YET SUBMITTED",
+     "reason": null,
+     "note": "team block printed without player names (NOT YET SUBMITTED = the club had not filed when the edition was published)"
     }
    ],
    "schedule_source": "https://www.nba.com/games?date=2026-11-16",
@@ -235,7 +229,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 1,
@@ -249,7 +243,7 @@
     "last_date": "2026-11-14",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z); no NEW_ABSENCE verifiable -> no line adjustment",
+   "availability_label": "statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z); no NEW_ABSENCE verifiable -> no line adjustment",
    "availability_rows": [
     {
      "team": "CHI",
@@ -442,7 +436,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 1,
@@ -456,7 +450,7 @@
     "last_date": "2026-11-12",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z); no NEW_ABSENCE verifiable -> no line adjustment",
+   "availability_label": "statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z); no NEW_ABSENCE verifiable -> no line adjustment",
    "availability_rows": [
     {
      "team": "MEM",
@@ -591,7 +585,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 3,
@@ -605,7 +599,7 @@
     "last_date": "2026-11-14",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z); no NEW_ABSENCE verifiable -> no line adjustment",
+   "availability_label": "statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z); no NEW_ABSENCE verifiable -> no line adjustment",
    "availability_rows": [
     {
      "team": "PHI",
@@ -714,7 +708,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 2,
@@ -728,7 +722,7 @@
     "last_date": "2026-11-14",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z); no NEW_ABSENCE verifiable -> no line adjustment",
+   "availability_label": "statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z); no NEW_ABSENCE verifiable -> no line adjustment",
    "availability_rows": [
     {
      "team": "HOU",
@@ -811,7 +805,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 2,
@@ -825,7 +819,7 @@
     "last_date": "2026-11-14",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z); no NEW_ABSENCE verifiable -> no line adjustment",
+   "availability_label": "statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z); no NEW_ABSENCE verifiable -> no line adjustment",
    "availability_rows": [
     {
      "team": "POR",
@@ -966,7 +960,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 2,
@@ -980,7 +974,7 @@
     "last_date": "2026-11-14",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z); no NEW_ABSENCE verifiable -> no line adjustment",
+   "availability_label": "statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z); no NEW_ABSENCE verifiable -> no line adjustment",
    "availability_rows": [
     {
      "team": "GSW",
@@ -1199,7 +1193,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 3,
@@ -1213,7 +1207,7 @@
     "last_date": "2026-11-14",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z); no NEW_ABSENCE verifiable -> no line adjustment",
+   "availability_label": "statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z); no NEW_ABSENCE verifiable -> no line adjustment",
    "availability_rows": [
     {
      "team": "PHX",
@@ -1224,10 +1218,55 @@
     },
     {
      "team": "DEN",
-     "player": null,
-     "status": "NOT YET SUBMITTED",
-     "reason": null,
-     "note": "team block printed without player names (NOT YET SUBMITTED = the club had not filed when the edition was published)"
+     "player": "Holmes II, DaRon",
+     "status": "Out",
+     "reason": "",
+     "play_probability": 0.0,
+     "season_min": null,
+     "season_pts": null,
+     "absence_class": "UNKNOWN",
+     "expected_points_removed": 0.0,
+     "stat_source": null,
+     "note": "minutes/points not verifiable in repo -> blank"
+    },
+    {
+     "team": "DEN",
+     "player": "Nembhard, Ryan",
+     "status": "Out",
+     "reason": "",
+     "play_probability": 0.0,
+     "season_min": null,
+     "season_pts": null,
+     "absence_class": "UNKNOWN",
+     "expected_points_removed": 0.0,
+     "stat_source": null,
+     "note": "minutes/points not verifiable in repo -> blank"
+    },
+    {
+     "team": "DEN",
+     "player": "Strawther, Julian",
+     "status": "Out",
+     "reason": "",
+     "play_probability": 0.0,
+     "season_min": null,
+     "season_pts": null,
+     "absence_class": "UNKNOWN",
+     "expected_points_removed": 0.0,
+     "stat_source": null,
+     "note": "minutes/points not verifiable in repo -> blank"
+    },
+    {
+     "team": "DEN",
+     "player": "Whitmore, Cam",
+     "status": "Out",
+     "reason": "",
+     "play_probability": 0.0,
+     "season_min": null,
+     "season_pts": null,
+     "absence_class": "UNKNOWN",
+     "expected_points_removed": 0.0,
+     "stat_source": null,
+     "note": "minutes/points not verifiable in repo -> blank"
     }
    ],
    "schedule_source": "https://www.nba.com/games?date=2026-11-16",
@@ -1264,7 +1303,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 3,
@@ -1278,7 +1317,7 @@
     "last_date": "2026-11-12",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-17",
    "model_home_win_prob": 0.4032,
@@ -1314,7 +1353,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 0,
@@ -1328,7 +1367,7 @@
     "last_date": "2026-11-16",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-17",
    "model_home_win_prob": 0.6039,
@@ -1364,7 +1403,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 2,
@@ -1378,7 +1417,7 @@
     "last_date": "2026-11-13",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-17",
    "model_home_win_prob": 0.6837,
@@ -1414,7 +1453,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 4,
@@ -1428,7 +1467,7 @@
     "last_date": "2026-11-11",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-17",
    "model_home_win_prob": 0.8741,
@@ -1464,7 +1503,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 3,
@@ -1478,7 +1517,7 @@
     "last_date": "2026-11-13",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-17",
    "model_home_win_prob": 0.6548,
@@ -1514,7 +1553,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 1,
@@ -1528,7 +1567,7 @@
     "last_date": "2026-11-16",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-18",
    "model_home_win_prob": 0.3273,
@@ -1564,7 +1603,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 1,
@@ -1578,7 +1617,7 @@
     "last_date": "2026-11-13",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-18",
    "model_home_win_prob": 0.2521,
@@ -1614,7 +1653,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 4,
@@ -1628,7 +1667,7 @@
     "last_date": "2026-11-16",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-18",
    "model_home_win_prob": 0.7959,
@@ -1664,7 +1703,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 1,
@@ -1678,7 +1717,7 @@
     "last_date": "2026-11-16",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-18",
    "model_home_win_prob": 0.3681,
@@ -1714,7 +1753,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 1,
@@ -1728,7 +1767,7 @@
     "last_date": "2026-11-16",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-18",
    "model_home_win_prob": 0.6157,
@@ -1764,7 +1803,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 1,
@@ -1778,7 +1817,7 @@
     "last_date": "2026-11-17",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-18",
    "model_home_win_prob": 0.6727,
@@ -1814,7 +1853,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 0,
@@ -1828,7 +1867,7 @@
     "last_date": "2026-11-16",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-18",
    "model_home_win_prob": 0.1989,
@@ -1864,7 +1903,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 4,
@@ -1878,61 +1917,11 @@
     "last_date": "2026-11-13",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-18",
    "model_home_win_prob": 0.556,
    "line_home_ml": -125.0,
-   "ml_formula": "normal CDF of projected margin / margin_sd, converted to American odds",
-   "ml_status": "DERIVED (model-internal; no sportsbook comparison available)"
-  },
-  {
-   "date": "2026-11-18",
-   "game_id": "0022600267",
-   "matchup": "GSW@DAL",
-   "home": "DAL",
-   "away": "GSW",
-   "venue": "American Airlines Center",
-   "city": "Dallas, TX",
-   "competition": "not printed on official schedule",
-   "tip_et": "8:00 PM ET",
-   "records_as_captured": "8-5 / 7-6",
-   "records_status": "records captured 2026-11-15 (verified against the official standings page); they go stale as the slate's earlier games complete",
-   "game_possessions": 100.36,
-   "off_rtg_home": 112.8,
-   "def_rtg_home": 112.8,
-   "pace_home": 100.54,
-   "off_rtg_away": 116.1,
-   "def_rtg_away": 112.0,
-   "pace_away": 99.66,
-   "proj_home_pts": 112.1,
-   "proj_away_pts": 116.2,
-   "line_total": 228.3,
-   "line_spread_home": -4.1,
-   "total_sd": 17.03,
-   "margin_sd": 16.32,
-   "home_court_applied": false,
-   "line_status": "DERIVED",
-   "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
-   "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
-   "rest_away": {
-    "rest_days": 1,
-    "b2b": false,
-    "last_date": "2026-11-16",
-    "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
-   },
-   "rest_home": {
-    "rest_days": 3,
-    "b2b": false,
-    "last_date": "2026-11-14",
-    "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
-   },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
-   "availability_rows": [],
-   "schedule_source": "https://www.nba.com/games?date=2026-11-18",
-   "model_home_win_prob": 0.4008,
-   "line_home_ml": 149.0,
    "ml_formula": "normal CDF of projected margin / margin_sd, converted to American odds",
    "ml_status": "DERIVED (model-internal; no sportsbook comparison available)"
   },
@@ -1964,7 +1953,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 1,
@@ -1978,11 +1967,61 @@
     "last_date": "2026-11-16",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-18",
    "model_home_win_prob": 0.268,
    "line_home_ml": 273.0,
+   "ml_formula": "normal CDF of projected margin / margin_sd, converted to American odds",
+   "ml_status": "DERIVED (model-internal; no sportsbook comparison available)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600267",
+   "matchup": "GSW@DAL",
+   "home": "DAL",
+   "away": "GSW",
+   "venue": "American Airlines Center",
+   "city": "Dallas, TX",
+   "competition": "not printed on official schedule",
+   "tip_et": "8:00 PM ET",
+   "records_as_captured": "8-5 / 7-6",
+   "records_status": "records captured 2026-11-15 (verified against the official standings page); they go stale as the slate's earlier games complete",
+   "game_possessions": 100.36,
+   "off_rtg_home": 112.8,
+   "def_rtg_home": 112.8,
+   "pace_home": 100.54,
+   "off_rtg_away": 116.1,
+   "def_rtg_away": 112.0,
+   "pace_away": 99.66,
+   "proj_home_pts": 112.1,
+   "proj_away_pts": 116.2,
+   "line_total": 228.3,
+   "line_spread_home": -4.1,
+   "total_sd": 17.03,
+   "margin_sd": 16.32,
+   "home_court_applied": false,
+   "line_status": "DERIVED",
+   "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
+   "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-16",
+    "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
+   },
+   "rest_home": {
+    "rest_days": 3,
+    "b2b": false,
+    "last_date": "2026-11-14",
+    "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
+   },
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
+   "availability_rows": [],
+   "schedule_source": "https://www.nba.com/games?date=2026-11-18",
+   "model_home_win_prob": 0.4008,
+   "line_home_ml": 149.0,
    "ml_formula": "normal CDF of projected margin / margin_sd, converted to American odds",
    "ml_status": "DERIVED (model-internal; no sportsbook comparison available)"
   },
@@ -2014,7 +2053,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 0,
@@ -2028,7 +2067,7 @@
     "last_date": "2026-11-17",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-18",
    "model_home_win_prob": 0.8886,
@@ -2064,7 +2103,7 @@
    "home_court_applied": false,
    "line_status": "DERIVED",
    "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
-   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
    "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "rest_away": {
     "rest_days": 1,
@@ -2078,11 +2117,211 @@
     "last_date": "2026-11-13",
     "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
    },
-   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0615PM, revision 11/15/2026 06:15 PM; that edition covers 11/15/2026, 11/16/2026)",
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
    "availability_rows": [],
    "schedule_source": "https://www.nba.com/games?date=2026-11-18",
    "model_home_win_prob": 0.2991,
    "line_home_ml": 234.0,
+   "ml_formula": "normal CDF of projected margin / margin_sd, converted to American odds",
+   "ml_status": "DERIVED (model-internal; no sportsbook comparison available)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600270",
+   "matchup": "GSW@MEM",
+   "home": "MEM",
+   "away": "GSW",
+   "venue": "FedExForum",
+   "city": "Memphis, TN",
+   "competition": "not printed on official schedule",
+   "tip_et": "8:00 PM ET",
+   "records_as_captured": "8-5 / 9-4",
+   "records_status": "records captured 2026-11-15 (verified against the official standings page); they go stale as the slate's earlier games complete",
+   "game_possessions": 100.28,
+   "off_rtg_home": 119.0,
+   "def_rtg_home": 110.4,
+   "pace_home": 100.46,
+   "off_rtg_away": 116.1,
+   "def_rtg_away": 112.0,
+   "pace_away": 99.66,
+   "proj_home_pts": 118.1,
+   "proj_away_pts": 113.6,
+   "line_total": 231.7,
+   "line_spread_home": 4.5,
+   "total_sd": 17.03,
+   "margin_sd": 16.32,
+   "home_court_applied": false,
+   "line_status": "DERIVED",
+   "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
+   "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "rest_away": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-18",
+    "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
+   },
+   "rest_home": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-18",
+    "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
+   },
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
+   "availability_rows": [],
+   "schedule_source": "https://www.nba.com/games?date=2026-11-19",
+   "model_home_win_prob": 0.6086,
+   "line_home_ml": -156.0,
+   "ml_formula": "normal CDF of projected margin / margin_sd, converted to American odds",
+   "ml_status": "DERIVED (model-internal; no sportsbook comparison available)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600271",
+   "matchup": "POR@MIL",
+   "home": "MIL",
+   "away": "POR",
+   "venue": "Fiserv Forum",
+   "city": "Milwaukee, WI",
+   "competition": "not printed on official schedule",
+   "tip_et": "8:00 PM ET",
+   "records_as_captured": "9-3 / 1-13",
+   "records_status": "records captured 2026-11-15 (verified against the official standings page); they go stale as the slate's earlier games complete",
+   "game_possessions": 101.14,
+   "off_rtg_home": 105.7,
+   "def_rtg_home": 120.0,
+   "pace_home": 100.31,
+   "off_rtg_away": 118.8,
+   "def_rtg_away": 111.1,
+   "pace_away": 100.67,
+   "proj_home_pts": 105.0,
+   "proj_away_pts": 127.5,
+   "line_total": 232.5,
+   "line_spread_home": -22.5,
+   "total_sd": 17.03,
+   "margin_sd": 16.32,
+   "home_court_applied": false,
+   "line_status": "DERIVED",
+   "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
+   "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-17",
+    "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
+   },
+   "rest_home": {
+    "rest_days": 0,
+    "b2b": true,
+    "last_date": "2026-11-18",
+    "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
+   },
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
+   "availability_rows": [],
+   "schedule_source": "https://www.nba.com/games?date=2026-11-19",
+   "model_home_win_prob": 0.084,
+   "line_home_ml": 1091.0,
+   "ml_formula": "normal CDF of projected margin / margin_sd, converted to American odds",
+   "ml_status": "DERIVED (model-internal; no sportsbook comparison available)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600272",
+   "matchup": "NYK@MIN",
+   "home": "MIN",
+   "away": "NYK",
+   "venue": "Target Center",
+   "city": "Minneapolis, MN",
+   "competition": "not printed on official schedule",
+   "tip_et": "8:00 PM ET",
+   "records_as_captured": "7-6 / 9-4",
+   "records_status": "records captured 2026-11-15 (verified against the official standings page); they go stale as the slate's earlier games complete",
+   "game_possessions": 97.06,
+   "off_rtg_home": 116.0,
+   "def_rtg_home": 104.5,
+   "pace_home": 101.27,
+   "off_rtg_away": 114.5,
+   "def_rtg_away": 108.6,
+   "pace_away": 95.63,
+   "proj_home_pts": 108.1,
+   "proj_away_pts": 102.7,
+   "line_total": 210.8,
+   "line_spread_home": 5.4,
+   "total_sd": 17.03,
+   "margin_sd": 16.32,
+   "home_court_applied": false,
+   "line_status": "DERIVED",
+   "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
+   "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-17",
+    "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-17",
+    "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
+   },
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
+   "availability_rows": [],
+   "schedule_source": "https://www.nba.com/games?date=2026-11-19",
+   "model_home_win_prob": 0.6296,
+   "line_home_ml": -170.0,
+   "ml_formula": "normal CDF of projected margin / margin_sd, converted to American odds",
+   "ml_status": "DERIVED (model-internal; no sportsbook comparison available)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600273",
+   "matchup": "LAC@SAS",
+   "home": "SAS",
+   "away": "LAC",
+   "venue": "Frost Bank Center",
+   "city": "San Antonio, TX",
+   "competition": "not printed on official schedule",
+   "tip_et": "8:00 PM ET",
+   "records_as_captured": "4-8 / 12-2",
+   "records_status": "records captured 2026-11-15 (verified against the official standings page); they go stale as the slate's earlier games complete",
+   "game_possessions": 99.65,
+   "off_rtg_home": 119.6,
+   "def_rtg_home": 106.6,
+   "pace_home": 98.94,
+   "off_rtg_away": 110.7,
+   "def_rtg_away": 115.8,
+   "pace_away": 100.55,
+   "proj_home_pts": 122.0,
+   "proj_away_pts": 103.9,
+   "line_total": 225.9,
+   "line_spread_home": 18.1,
+   "total_sd": 17.03,
+   "margin_sd": 16.32,
+   "home_court_applied": false,
+   "line_status": "DERIVED",
+   "formula": "POSS = pace_home + pace_away - league_pace; PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away",
+   "inputs_as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)",
+   "inputs_source": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "rest_away": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-17",
+    "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "b2b": false,
+    "last_date": "2026-11-17",
+    "derived_from": "official schedule capture + official finals (no adjustment applied to the line)"
+   },
+   "availability_label": "No official injury report covers this game yet (latest edition in repo: 2026-11-15_0900PM_dfef26dc, revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'); that edition covers 11/15/2026, 11/16/2026)",
+   "availability_rows": [],
+   "schedule_source": "https://www.nba.com/games?date=2026-11-19",
+   "model_home_win_prob": 0.8663,
+   "line_home_ml": -648.0,
    "ml_formula": "normal CDF of projected margin / margin_sd, converted to American odds",
    "ml_status": "DERIVED (model-internal; no sportsbook comparison available)"
   }
