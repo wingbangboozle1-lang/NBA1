@@ -92,10 +92,12 @@
   {
    "id": "A12",
    "question": "Does the site now produce a line for every game in the next three days?",
-   "answer": "Yes. 27 games from 2026-11-14 to 2026-11-17, each with an originated spread, total and fair moneyline, a gated paper pick, rest and back-to-back flags and an injury read-out. The schedule was read from the official NBA.com Schedule page and cross-checked against an independent capture of the same page made by another session: 27 of 27 rows agree on date, tip time, matchup, records and game id, 0 mismatches. The injury input is the newest official edition available, 11/13/26 07:30 PM ET, transcribed row by row.",
+   "answer": "Recorded 2026-11-14 and left as written - a dated answer, not a live count: Yes. 27 games from 2026-11-14 to 2026-11-17, each with an originated spread, total and fair moneyline, a gated paper pick, rest and back-to-back flags and an injury read-out. The schedule was read from the official NBA.com Schedule page and cross-checked against an independent capture of the same page made by another session: 27 of 27 rows agree on date, tip time, matchup, records and game id, 0 mismatches. The injury input is the newest official edition available, 11/13/26 07:30 PM ET, transcribed row by row.",
    "source": "S4",
    "source_url": "https://www.nba.com/schedule",
-   "confidence": "High for the schedule and the injury rows, both read directly from official pages. Low for the lines themselves, because they rest on ratings that end at 11/12 and on an injury report that covers half of the 11/14 teams and none of the later games."
+   "confidence": "High for the schedule and the injury rows, both read directly from official pages. Low for the lines themselves, because they rest on ratings that end at 11/12 and on an injury report that covers half of the 11/14 teams and none of the later games.",
+   "recorded_on": "2026-11-14",
+   "live_note": "The live rolling horizon is 29 games, 2026-11-16 to 2026-11-19, and every game in it carries an originated line - see the Horizon and Projection pages. This answer is the 2026-11-14 record, kept because an answered question is not re-opened."
   },
   {
    "id": "A13",

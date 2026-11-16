@@ -1,0 +1,162 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-16_12_45PM.pdf",
+  "label": "Injury-Report_2026-11-16_12_45PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_12_45PM.pdf",
+  "retrieved_at_utc": "2026-11-16T18:25:44Z",
+  "sha256": "d6f290cd7a66f6c09d28ad1df7077d2a8d9cfe24b4a1be06eedff8baf90ce81b",
+  "rows": 65
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-16_01_00PM.pdf",
+  "label": "Injury-Report_2026-11-16_01_00PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_00PM.pdf",
+  "retrieved_at_utc": "2026-11-16T18:25:44Z",
+  "sha256": "e0dbe404b34b616c0acb18427966dad7058ac3e4a743cd76ea46f7e8c7550152",
+  "rows": 80
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Jackson, GG",
+   "before_status": "Out",
+   "after_status": "Out",
+   "before_reason": "Injury/Illness - Left Foot Injury",
+   "after_reason": "Injury/Illness - Left 5th Metatarsal",
+   "before_matchup": "MEM@WAS",
+   "after_matchup": "MEM@WAS"
+  }
+ ],
+ "listed_in_after_only": [
+  {
+   "team": "Houston Rockets",
+   "player": "Adams, Steven",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Lower Leg Injury Management",
+   "matchup": "HOU@MIA"
+  },
+  {
+   "team": "Houston Rockets",
+   "player": "Capela, Clint",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Ankle Sprain",
+   "matchup": "HOU@MIA"
+  },
+  {
+   "team": "Houston Rockets",
+   "player": "Copeland, Quadir",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "matchup": "HOU@MIA"
+  },
+  {
+   "team": "Houston Rockets",
+   "player": "Phillips, Julian",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "matchup": "HOU@MIA"
+  },
+  {
+   "team": "Houston Rockets",
+   "player": "Smart, Marcus",
+   "status": "Out",
+   "reason": "League Suspension",
+   "matchup": "HOU@MIA"
+  },
+  {
+   "team": "Houston Rockets",
+   "player": "Thompson, Amen",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Knee Soreness",
+   "matchup": "HOU@MIA"
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Pierre Jr., Jaron",
+   "status": "Questionable",
+   "reason": "G League - Two- Way",
+   "matchup": "GSW@NOP"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "Barlow, Dominick",
+   "status": "Out",
+   "reason": "Injury/Illness - Low Back Stress Reaction",
+   "matchup": "PHI@BKN"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "Bona, Adem",
+   "status": "Out",
+   "reason": "Injury/Illness - Cervical Spine Sprain",
+   "matchup": "PHI@BKN"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "Embiid, Joel",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Foot Plantar Fascia Injury Management",
+   "matchup": "PHI@BKN"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "Hukporti, Ariel",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Achilles Tendon Rupture / Tear",
+   "matchup": "PHI@BKN"
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "player": "James, LeBron",
+   "status": "Out",
+   "reason": "Injury/Illness - Low Back/Sciatica Management",
+   "matchup": "PHI@BKN"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Beekman, Reece",
+   "status": "Out",
+   "reason": "Injury/Illness - Right AC Joint Injury",
+   "matchup": "MEM@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Champagnie, Justin",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Surgery",
+   "matchup": "MEM@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Johnson, Tre",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Low Back Soreness",
+   "matchup": "MEM@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Okpara, Felix",
+   "status": "Questionable",
+   "reason": "G League - Two- Way",
+   "matchup": "MEM@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Vukcevic, Tristan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hip Impingement",
+   "matchup": "MEM@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Watkins, Jamir",
+   "status": "Out",
+   "reason": "Injury/Illness - Left ACL Repair / Surgery",
+   "matchup": "MEM@WAS"
+  }
+ ],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}

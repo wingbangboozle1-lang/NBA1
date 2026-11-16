@@ -33,6 +33,7 @@
 <a href="roll.html">Rolling Slate</a>
 <a href="projection.html">Projection Surface</a>
 <a href="bet-surface.html">Bet Surface (gated)</a>
+<a href="bet.html">Bet surface (gate state)</a>
 <a href="picks.html">Lines &amp; Picks</a>
 <a href="props.html">Player Props</a>
 <a href="prop-variance.html">Prop Variance &amp; Rotation</a>
@@ -151,8 +152,8 @@
 <tr>
 <td>F5</td>
 <td>High</td>
-<td><b>No archived injury reports, so the availability strategy is ungraded</b></td>
-<td>Only the 2026-11-13 05:15 PM edition of the official injury report was captured. Strategy S6 (availability shock) and gate G7 (flip every Questionable player to Out) therefore have no graded record. They are shown as UNGRADED / NOT RUN rather than being scored with substituted data.</td>
+<td><b>RETIRED - No archived injury reports, so the availability strategy is ungraded</b></td>
+<td>RETIRED 2026-11-16 (§56). RETIRED 2026-11-16 (COORDINATION §56, flag F-DFA-04): the premise is no longer true - data/raw/injury_pdfs/ now holds 29 content-addressed editions, 11/15 12:45 PM through 11/16 01:15 PM ET, each with its retrieval timestamp and SHA-256. The grading gap this flag described is now carried by F-X01 instead (parsed editions that are silently incomplete), not by an empty archive. Original finding, kept verbatim: Only the 2026-11-13 05:15 PM edition of the official injury report was captured. Strategy S6 (availability shock) and gate G7 (flip every Questionable player to Out) therefore have no graded record. They are shown as UNGRADED / NOT RUN rather than being scored with substituted data.</td>
 <td>S6, gate G7</td>
 <td>The refresh job should archive every edition it sees; grading can then start once ~30 graded S6 plays exist.</td>
 <td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
@@ -809,9 +810,9 @@
 <td>F82</td>
 <td>medium</td>
 <td><b>Injury PDFs are not retained in the repository</b></td>
-<td>The fetcher downloads injury PDFs, but no .pdf file is tracked in git. The repository holds transcriptions with revision and retrieval times, plus one consecutive diff. Every PDF must be stored with its timestamp to meet the brief.
+<td>The fetcher downloads injury PDFs, but no .pdf file is tracked in git. The repository holds transcriptions with revision and retrieval times, plus consecutive diffs. Updated 2026-11-16 by session arena/bfad39b2-nba1 (B02): the newest edition (11/16 01:15 PM ET) was archived as a verbatim row transcription (data/injury_reports/2026-11-16_0115PM/, 87 rows) with a horizon-consumable copy in data/official/, and diffed against the 11/15 06:15 PM edition (10 status/reason changes, 24 new rows). The PDF bytes themselves still cannot be retained: the sandbox egress allowlist has no byte-download route to ak-static.cms.nba.com, so the archive is the transcription plus a SHA-256 of the transcribed text. Every edition carries its official URL and revision stamp. Item stays open: the brief asks for the PDF stored with its timestamp, and only the transcription is stored.
 
-UPDATE 2026-11-16T19:1xZ (session arena/23ec1e32-nba1, §55 W05): the core claim in this flag is now STALE — measured `git ls-files data/raw/injury_pdfs/` returns 176 tracked files: 88 PDFs (editions 2026-11-15 and 2026-11-16) plus 88 sidecar JSON records, each with edition, official source_url, retrieved_at_utc, bytes and sha256. Three consecutive-report diffs are committed (engine/injury_diff.py, tested). This flag stays OPEN for the two remaining real gaps: (a) editions earlier than 2026-11-15 were never retained and the official URLs rotate, so they cannot be recovered; (b) the diff chain stops at the 11/15 06:15 PM ET pair — the 11/15 09:00 PM ET edition and five 11/16 editions have stored PDFs but no transcription/diff yet, which rides on the parse/promote path tracked under R01/RFG4.</td>
+UPDATE 2026-11-16T19:1xZ (session arena/23ec1e32-nba1, §61 W05): the core claim in this flag is now STALE — measured `git ls-files data/raw/injury_pdfs/` returns 176 tracked files: 88 PDFs (editions 2026-11-15 and 2026-11-16) plus 88 sidecar JSON records, each with edition, official source_url, retrieved_at_utc, bytes and sha256. Three consecutive-report diffs are committed (engine/injury_diff.py, tested). This flag stays OPEN for the two remaining real gaps: (a) editions earlier than 2026-11-15 were never retained and the official URLs rotate, so they cannot be recovered; (b) the diff chain stops at the 11/15 06:15 PM ET pair — the 11/15 09:00 PM ET edition and five 11/16 editions have stored PDFs but no transcription/diff yet, which rides on the parse/promote path tracked under R01/RFG4.</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
@@ -820,9 +821,9 @@ UPDATE 2026-11-16T19:1xZ (session arena/23ec1e32-nba1, §55 W05): the core claim
 <td>F83</td>
 <td>medium</td>
 <td><b>Picks page has no rotation-availability column</b></td>
-<td>The picks table shows Home injury status and Away injury status. The brief asks for rotation availability as its own column.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): a rotation-availability column now exists on site/pages/roll.html, built from the official injury report (Out / Questionable counts and NOT YET SUBMITTED blocks). The legacy Lines &amp; Picks page still has no such column, so the item stays open.
+<td>The picks table shows Home injury status and Away injury status. The brief asks for rotation availability as its own column. ADVANCED 2026-11-16 (session arena/bfad39b2-nba1, B02): a rotation-availability column now exists on site/pages/roll.html, built from the official injury report (Out / Questionable counts and NOT YET SUBMITTED blocks, sourced from the 11/16 01:15 PM ET edition). The legacy Lines &amp; Picks page (site/pages/picks.html) still has no such column, so the item stays open; that page is outside this session's file scope.
 
-RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, §55 W03): scripts/build_dashboard.py's Lines &amp; Picks builder now emits a 'Rotation availability (own column)' column on BOTH the originated-lines table and the paper-picks table, read from data/derived/horizon_lines_v2.json rotation_availability_home/away (share of top-8 minutes available, rotation players Out/Questionable, NOT YET SUBMITTED shown as a blank cell with the reason — never estimated). The same build leads the page with the two-estimator disagreement table (R13).</td>
+RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, §61 W03): scripts/build_dashboard.py's Lines &amp; Picks builder now emits a 'Rotation availability (own column)' column on BOTH the originated-lines table and the paper-picks table, read from data/derived/horizon_lines_v2.json rotation_availability_home/away (share of top-8 minutes available, rotation players Out/Questionable, NOT YET SUBMITTED shown as a blank cell with the reason — never estimated). The same build leads the page with the two-estimator disagreement table (R13).</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html" target="_blank" rel="noopener">link</a></td>
@@ -831,9 +832,9 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, §55 W03): scripts/buil
 <td>F84</td>
 <td>high</td>
 <td><b>Home-court advantage is a fixed constant, not pinned to the measured home-win rate</b></td>
-<td>engine/model_core.py uses flat_hca = 2.0. scripts/originate_horizon.py records that HCA could not be sourced from an official NBA page. The measured 57.6% home-win rate from another build is a note only and is not applied.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): the home-win rate is now measured from official finals - 0.5455 (36 of 66) - and published on site/pages/roll.html. It is still not applied to any line. The gap is quantified: estimator B fits HCA at +3.508 points (t = 1.539, estimated in-sample) while estimator A applies none, and that single term is 90% of the models' mean 3.89-point disagreement.
+<td>engine/model_core.py uses flat_hca = 2.0. scripts/originate_horizon.py records that HCA could not be sourced from an official NBA page. ADVANCED 2026-11-16 (session arena/bfad39b2-nba1, B03): the home-win rate was re-measured first-hand from the official standings HOME/ROAD columns - HOME 102W/95L/197G = 0.5178 (road 0.4796) - and the horizon's home_court_anchor now carries measured_home_win_rate 0.5178 (was the stale 0.5285) and hca_points 0.71 (was 1.14), via HCA_points = sigma_margin * Phi^-1(home_win_rate), sigma_margin 15.96. The pin is current in the horizon build (scripts/build_horizon_v2.py). The legacy engine path still carries flat_hca=2.0 (engine/** read-only for this session; cross-scope request logged in COORDINATION §4), and originate_horizon.py still records home_court_applied: False. Item stays open until the engine path is wired to the measured pin.
 
-ADVANCED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, §55 W01): the v2 line set is now fully pinned to the re-derived measurement — data/derived/horizon_lines_v2.json _meta.home_court_anchor.hca_points = 0.87 from the official standings home-win rate 0.5204 (102/196) x sigma 16.93, sources_agree true, and every v2 page renders it. This item stays OPEN for the legacy path: engine/model_core.py still carries flat_hca = 2.0 and scripts/originate_horizon.py / data/derived/horizon_lines.json (the roll page's board) still apply no home-court advantage at all (window flag F-W02).</td>
+ADVANCED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, §61 W01): the v2 line set is now fully pinned to the re-derived measurement — data/derived/horizon_lines_v2.json _meta.home_court_anchor.hca_points = 0.87 from the official standings home-win rate 0.5204 (102/196) x sigma 16.93, sources_agree true, and every v2 page renders it. This item stays OPEN for the legacy path: engine/model_core.py still carries flat_hca = 2.0 and scripts/originate_horizon.py / data/derived/horizon_lines.json (the roll page's board) still apply no home-court advantage at all (window flag F-W02).</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py" target="_blank" rel="noopener">link</a></td>
@@ -887,9 +888,9 @@ ADVANCED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, §55 W01): the v2 line 
 <td>F90</td>
 <td>medium</td>
 <td><b>Parlay rho is a fixed model constant, not a measured value</b></td>
-<td>scripts/generate_picks.py uses SGP_RHO_TEAMMATES = -0.2 and SGP_RHO_OPPONENTS = 0.05, labelled as model-derived. The naive product printed beside each parlay price was not verified on the parlay table.
+<td>scripts/generate_picks.py uses SGP_RHO_TEAMMATES = -0.2 and SGP_RHO_OPPONENTS = 0.05, labelled as model-derived. The naive product printed beside each parlay price was not verified on the parlay table. ADVANCED 2026-11-16 (session arena/bfad39b2-nba1, B02): a rho is now MEASURED from official finals - rho(home margin, game total) = -0.0635 on 66 finals (p = 0.6109) - and site/pages/roll.html section 4 prices same-game side-and-total at that measured rho with the naive product printed beside it; section 3 prints the naive product for cross-game parlays with the Fréchet-Hoeffding band. generate_picks.py still uses the fixed constants (outside this session's file scope). Item stays open until generate_picks.py is rewired to the measured rho.
 
-RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, §55 W02): scripts/generate_picks.py now prices every parlay with a measured rho — cross-game legs at rho_2026_27.json's measured same-date margin rho 0.0142 (n_pairs 1546; re-derived first-hand from the committed finals corpus at r 0.0120 over 26 dates / 197 games), teammate legs at -0.0975 (n=374) and opponent legs at +0.0321 (n=187) — and prints the naive product p1 x p2 beside every price on every row, verified programmatically (naive == round(p1*p2,4); price within the Frechet-Hoeffding band; joint at rho=0 reduces to the naive product to &lt;1e-6). The measured side/total rho on site/pages/roll.html section 4 refreshed with scripts/measure_rho.py to its current 74-final corpus (-0.105, p=0.370). The register conflict this uncovered (measured_rho.json's 'not measurable' verdict vs rho_2026_27's measured cross-game value) is published as F128 rather than hidden.</td>
+RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, §61 W02): scripts/generate_picks.py now prices every parlay with a measured rho — cross-game legs at rho_2026_27.json's measured same-date margin rho 0.0142 (n_pairs 1546; re-derived first-hand from the committed finals corpus at r 0.0120 over 26 dates / 197 games), teammate legs at -0.0975 (n=374) and opponent legs at +0.0321 (n=187) — and prints the naive product p1 x p2 beside every price on every row, verified programmatically (naive == round(p1*p2,4); price within the Frechet-Hoeffding band; joint at rho=0 reduces to the naive product to &lt;1e-6). The measured side/total rho on site/pages/roll.html section 4 refreshed with scripts/measure_rho.py to its current 74-final corpus (-0.105, p=0.370). The register conflict this uncovered (measured_rho.json's 'not measurable' verdict vs rho_2026_27's measured cross-game value) is published as F128 rather than hidden.</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/generate_picks.py" target="_blank" rel="noopener">link</a></td>
@@ -898,7 +899,7 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, §55 W02): scripts/gene
 <td>F91</td>
 <td>high</td>
 <td><b>Most nba.com URLs were blocked from the probe runner; row values were not re-read here</b></td>
-<td>data/raw/probe_official.json: 1,911 URLs probed, 114 OK, 1,679 blocked, 116 unreachable. This session's sandbox allows only GitHub and package hosts, so no nba.com value was re-fetched and compared. Row-level values remain as captured in the repo.</td>
+<td>data/raw/probe_official.json: 1,911 URLs probed, 114 OK, 1,679 blocked, 116 unreachable. Updated 2026-11-16 by session arena/bfad39b2-nba1 (B02): this session reached the official NBA.com pages through the web-fetch channel (raw curl returns HTTP 000; only fetch_page reaches nba.com) and re-verified the rolling-slate values first-hand, row by row, with a source link on every checked row - schedule 21/21 PASS, standings 30 rows, team-stat pages 60/60 rows 0 mismatches, injury edition 87 rows. The general probe-runner block remains for URLs outside the fetched set; the fetch channel is the working route for official re-reads. Item stays open: the probe runner itself still cannot reach most nba.com URLs.</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/probe_official.json" target="_blank" rel="noopener">link</a></td>
@@ -1125,7 +1126,7 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, §55 W02): scripts/gene
 <td><b>The pinned home-court advantage is computed on a stale standings read, and the published file contains two different standings-derived samples</b></td>
 <td>The HCA the model is pinned to is 1.23 points, from a measured home-win rate of 0.5285 on 193 games. That figure was measured from the official standings at the 2026-11-16T02:12Z..02:17Z capture, and it was honestly labelled as including only the 11/15 games that had gone Final at that moment. All three games that finished afterwards (HOU@WAS, ATL@MIL, OKC@SAC) were AWAY wins, so re-adding the official standings at 14:3xZ in this session gives home W-L 102-94 = 196 games, a home-win rate of 0.5204, and a pinned HCA of 0.88 points rather than 1.23. The drift reconciles EXACTLY: +3 games, +0 home wins, +3 road wins, which is precisely those three away wins - verified by verify/2026-11-16-23b323a3/verify_hca_anchor.py, which also re-checks the two internal consistency identities on the live table (home wins 102 == road losses 102; road wins 94 == home losses 94). A second, separate problem is visible in the same JSON: data/derived/horizon_lines_v2.json meta.home_court_anchor reports measured_home_win_rate 0.5285 with games_measured 161, while its own standings_cross_check sub-object reports 0.5285 over 193 games and the final-score corpus measures 0.5155 over 161. The rate and the game count in the top-level fields do not come from the same sample.
 
-RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §55 W01): the HCA was re-derived through scripts/build_horizon_v2.py on a fresh first-hand standings read (data/official/standings_2026-11-16_1835Z_23ec1e32.json, 102-94 home / 94-102 road, 196 games, rate 0.5204). The final-score cross-check corpus was fixed at the same time: engine/model_v2.load_results now excludes unplayed rows (25 scheduled 0-0 placeholder rows from results_feed_2026_27.json were being counted as road wins and zero margins), so both sources now measure the SAME 196 home/road decisions and agree at 0.5204; the anchor block publishes home_wins/home_games from the standings and final_score_home_wins/final_score_home_games/games_measured from the corpus, each paired with its own n, plus a sources_agree flag (true). Published: sigma_margin 16.93, hca_points 0.87, hca cross-check 0.87. verify/2026-11-16-23b323a3/verify_hca_anchor.py re-run to RESULT: the published anchor is current and reconciled (zero drift against this read).</td>
+RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01): the HCA was re-derived through scripts/build_horizon_v2.py on a fresh first-hand standings read (data/official/standings_2026-11-16_1835Z_23ec1e32.json, 102-94 home / 94-102 road, 196 games, rate 0.5204). The final-score cross-check corpus was fixed at the same time: engine/model_v2.load_results now excludes unplayed rows (25 scheduled 0-0 placeholder rows from results_feed_2026_27.json were being counted as road wins and zero margins), so both sources now measure the SAME 196 home/road decisions and agree at 0.5204; the anchor block publishes home_wins/home_games from the standings and final_score_home_wins/final_score_home_games/games_measured from the corpus, each paired with its own n, plus a sources_agree flag (true). Published: sigma_margin 16.93, hca_points 0.87, hca cross-check 0.87. verify/2026-11-16-23b323a3/verify_hca_anchor.py re-run to RESULT: the published anchor is current and reconciled (zero drift against this read).</td>
 <td>data/derived/horizon_lines_v2.json meta.home_court_anchor; every line on site/pages/roll.html and model-v2.html that carries the pinned HCA</td>
 <td>Re-run scripts/build_horizon_v2.py against the current standings so the pin is recomputed rather than hand-corrected; that run also fixes the rate/count mismatch, because both are then read from one capture. This session deliberately did NOT hand-edit the pinned input: a hand-edited model input is exactly what this project forbids, and the re-derivation needs a run that reads the official pages. The arithmetic reconciliation above is committed so the size and direction of the correction are known in advance.</td>
 <td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">link</a></td>
@@ -1151,8 +1152,8 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §55 W01):
 <tr>
 <td>F119</td>
 <td>High</td>
-<td><b>The 2026-11-15 slate is not settled because three of its nine games were still in progress</b></td>
-<td>[Renumbered from F108 at merge with main (PR #138's register already holds F108 with different content): content unchanged.] [Renumbered from F99 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] Read from the official games page at 2026-11-16 02:2x UTC (21:2x ET on 11/15). Final: PHI 131-124 IND (0022600236), LAL 131-123 PHX (0022600237), LAC 113-105 CHA (0022600238), SAS 110-102 UTA (0022600239), BOS 131-94 DAL (0022600240), NYK 112-108 TOR/OT (0022600241). In progress: HOU@WAS Q4 5:24 (132-102), ATL@MIL Q3 10:42 (57-53), OKC@SAC Q1 7:59 (15-4). The settlement rule requires the official page to print Final with quarter linescores summing to it, so the slate stays open rather than being settled from live scores.</td>
+<td><b>RESOLVED 2026-11-16 18:4xZ - the 2026-11-15 slate is settled (was: three of its nine games were still in progress at the 02:2xZ read)</b></td>
+<td>Original finding (2026-11-16 02:2x UTC read, 21:2x ET on 11/15): three games were still in progress, so the slate could not be settled then - the rule 'grade only from a printed Final' held. Resolution chain: settled 2026-11-16T14:45Z by scripts/settle_slate.py from data/official/results_2026-11-15.json (official game-page LINESCORES with quarter sums asserted against the printed final; data/settlement/settlement_2026-11-15.json, sealed-ledger entries 6-7). Independent re-verification on 2026-11-16 18:3xZ by session arena/7ec9e7a3-nba1, first-hand from https://www.nba.com/games?date=2026-11-15 - all nine finals re-read and numerically identical to the settlement: IND 124@PHI 131, LAL 131@PHX 123, CHA 105@LAC 113, SAS 110@UTA 102, NYK 112@TOR 108 (OT), DAL 94@BOS 131, HOU 147@WAS 119, ATL 113@MIL 106, OKC 125@SAC 103. Nothing inferred; every graded entry traces to the official game page.</td>
 <td>data/settlement/, the ledger, the leaderboard and every pick graded against this slate</td>
 <td>Settle at game-day end from official finals once all nine games print Final; store one row per game with date, teams, final score and quarter scores.</td>
 <td class="src"><span class="na" title="source id NBA.com official games page, 2026-11-15 is not in the register">&mdash;</span></td>
@@ -1178,8 +1179,8 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §55 W01):
 <tr>
 <td>F122</td>
 <td>Medium</td>
-<td><b>The live horizon lines were cut from the 06:15 PM injury edition; Denver filed four Out players at 09:00 PM</b></td>
-<td>[Renumbered from F111 at merge with main (PR #138's register already holds F111 with different content): content unchanged.] [Renumbered from F102 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] Diffing 11/15 06:15 PM against 09:00 PM for the 11/16 games: zero player-level status changes, one team submission change. Denver submitted nothing at 06:15 PM and filed four players Out at 09:00 PM (Holmes II, Nembhard, Strawther, Whitmore) for PHX@DEN (0022600252). Five teams had still not submitted at 09:00 PM: WAS, BOS, HOU, PHI, PHX. The lines were deliberately NOT re-priced: a line re-priced after publication cannot be graded. This is the exact class of gap identified in COORDINATION §42.</td>
+<td><b>RESOLVED 2026-11-16 18:4xZ - horizon lines are cut from the 11/16 09:45 AM official edition, which contains the Denver designations the finding was about (was: lines cut from 11/15 06:15 PM while Denver filed four Out at 09:00 PM)</b></td>
+<td>Original finding: the 11/16 lines were priced from the 11/15 06:15 PM injury edition; Denver filed four players Out at 09:00 PM for PHX@DEN. Resolution: the scheduled runner promoted the official 11/16 09:45 AM edition into data/raw/injuries.json at 2026-11-16T15:25Z (digest-bound, data/raw/injury_pdfs/Injury-Report_2026-11-16_09_45AM__a84e58a9*.pdf); it contains all four Denver designations (Holmes II, Nembhard, Strawther, Whitmore - Out) and the remaining 11/16 designations. Session arena/7ec9e7a3-nba1 diffed the next official edition (12:00 PM) against the promoted input on 2026-11-16 18:4xZ: zero status changes, seven ADDED rows (MEM +5, NOP +2), no Denver change (data/official/injury_diff_2026-11-16_0945AM_to_1200PM_7ec9e7a3.json). Lines stay frozen pre-tip and are not re-priced after publication - the residual rule from the original finding stands.</td>
 <td>the PHX@DEN line; every pick or parlay containing it</td>
 <td>Reader decision, recorded as a suggestion: re-cut unpublished future slates from the newest edition, and treat PHX@DEN as carrying a known unpriced availability gap.</td>
 <td class="src"><span class="na" title="source id official injury PDFs, 11/15/2026 06:15 PM and 09:00 PM editions is not in the register">&mdash;</span></td>
@@ -1187,8 +1188,8 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §55 W01):
 <tr>
 <td>F123</td>
 <td>Low</td>
-<td><b>Sacramento's standings row was only partially read on 2026-11-16</b></td>
-<td>[Renumbered from F112 at merge with main (PR #138's register already holds F112 with different content): content unchanged.] [Renumbered from F103 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] The standings page fetch returned the Sacramento Kings row split across a chunk boundary, so only its W-L (1-11, confirmed separately from the official 11/18 games page) was captured. The remaining cells - win%, GB, conference, division, home, road, neutral, OT, last-10 and streak - are recorded as null with a reason rather than inferred.</td>
+<td><b>RESOLVED 2026-11-16 18:2xZ - Sacramento's standings row read in full (was: partially read, null cells recorded)</b></td>
+<td>Original finding: the standings fetch split Sacramento's row across a chunk boundary and only the W-L was captured. Resolution: the complete row was read first-hand from https://www.nba.com/standings on 2026-11-16 18:2xZ by session arena/7ec9e7a3-nba1: W 1, L 12, WIN% .077, GB 10.5, CONF 1-10, DIV 0-2, HOME 0-8, ROAD 1-4, Neutral 0-0, OT 0-0, LAST10 1-9, STREAK L 6. Evidence: verify/2026-11-16-7ec9e7a3/evidence_official_reads.json. The promoted standings snapshot on the site (data/official/standings_2026-11-16_0213Z_dfef26dc.json) is dated 2026-11-16T02:13Z and predates the 11/15 finals for some rows (it holds SAC 1-11); the scheduled runner refreshes it (next run 22:15Z). The horizon rows' team records were independently verified current against the official games page (every record shown matches the 18:2xZ standings read).</td>
 <td>verify/2026-11-16-c348e6c7/standings_live.json; any standings-derived figure touching SAC</td>
 <td>Re-read https://www.nba.com/standings and fill the ten SAC cells; the row is flagged in place so it cannot be silently treated as complete.</td>
 <td class="src"><span class="na" title="source id NBA.com official standings is not in the register">&mdash;</span></td>
@@ -1231,18 +1232,162 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §55 W01):
 </tr>
 <tr>
 <td>F128</td>
+<td>High</td>
+<td><b>Per-player game-log capture skipped three of the nine official 11/15 gamebooks, while the committed log reported six games and zero problems</b></td>
+<td>scripts/capture_player_logs.py mapped six games in GAME_IDS; data/official/gamebooks/ holds nine. ATLMIL, HOUWAS and OKCSAC printed 'not in GAME_IDS, skipped' and the run exited 1, but the committed data/official/player_game_logs_2026-11-15.json was written with problems: []. The R21 evidence said 'complete for the six games that finished' although data/official/results_2026-11-15.json lists nine FINAL games. Corrected by arena/fe8e2065-nba1 (COORDINATION §55): the three ids were added, and each id is now checked against the official results feed (away, home, FINAL) before any parsing. All nine games pass the points check against the official final (9 of 9; 18 team totals). Minutes match the printed team total exactly in 13 of 18 teams (largest difference 3 s, published as printed).</td>
+<td>data/official/player_game_logs_2026-11-15.json; site/pages/player-logs.html; data/content/requirements.json (R21)</td>
+<td>Review the corrected log and page. No further action is needed for the nine 11/15 games; later games need their own gamebooks.</td>
+<td class="src"><span class="na" title="source id Official game pages re-read 2026-11-16 ~18:2xZ: ATL 113 - MIL 106 Final, HOU 147 - WAS 119 Final, OKC 125 - SAC 103 Final is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F129</td>
+<td>Medium</td>
+<td><b>Parser dropped non-appearance rows: DND rows with the jersey and name in separate cells, and NWT rows, produced no row</b></td>
+<td>Found by re-reading the 11/15 gamebook text. ATL: '| 4 | Kingston Flemings | | DND - Injury/Illness - Lumbar Strain |' produced no row because the DNP branch only read a jersey and name in one cell. HOU: '| 36 Marcus Smart | | NWT - League Suspension |' was not recognised because NWT was not a non-appearance note. Both are fixed in scripts/capture_player_logs.py; both players now have played=false rows that carry the printed note. The points and minutes checks were already passing, so no published total changed.</td>
+<td>scripts/capture_player_logs.py; data/official/player_game_logs_2026-11-15.json</td>
+<td>None beyond review. Keep the NWT and DND/DNP recognition when the parser is extended to later games.</td>
+<td class="src"><span class="na" title="source id Official gamebook PDFs, page 1 box score (re-read 2026-11-16) is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F130</td>
+<td>Medium</td>
+<td><b>Injury-report status conflicts with the gamebook: Dillon Mitchell and Amari Williams (DAL@BOS) are 'Available' on the 06:15 PM ET report but on the gamebook's Inactive line as 'G League - Two-Way'</b></td>
+<td>Both names are on the 11/15 06:15 PM ET report with status Available. The DAL@BOS gamebook's Inactive line for the Celtics lists 'Mitchell (G League - Two-Way), Williams (G League - Two-Way)'. The gamebook reason is not an injury, and the report lists them as available, so both documents cannot describe the same status for a G League assignment. Recorded as printed: the player rows carry the gamebook reason and the report status, and the conflict is listed in the coverage section. Neither value was changed.</td>
+<td>data/official/player_game_logs_2026-11-15.json (coverage.report_players_unexplained_by_gamebooks); site/pages/player-logs.html</td>
+<td>Ask the league or the club which document governs a two-way assignment listed on the report. No change to values until answered.</td>
+<td class="src"><span class="na" title="source id Injury report 11/15 06:15 PM ET (official index edition), and gamebook DAL@BOS Inactive line is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F131</td>
+<td>Low</td>
+<td><b>Name variant not reconciled: 'Christopher Cenac Jr.' (DAL@BOS, report: Available) vs 'Chris Cenac Jr.' in the gamebook box score</b></td>
+<td>The gamebook box score lists 'Chris Cenac Jr.' for Dallas, who played 06:57 with 3 points. The report lists 'Cenac Jr., Christopher' as Available. The two names describe the same surname and suffix, but the official documents do not state that they are the same player, so no row was merged and the report entry is listed as unexplained.</td>
+<td>site/pages/player-logs.html (coverage list)</td>
+<td>Confirm the identity from an official roster source before merging the report entry into the player row.</td>
+<td class="src"><span class="na" title="source id Gamebook DAL@BOS page 1 (statsdmz) and injury report 11/15 06:15 PM ET is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F132</td>
+<td>Medium</td>
+<td><b>Spelling conflict: report 'Champagne, Justin' (HOU@WAS, Out) vs gamebook Inactive line 'Champagnie (Injury/Illness - Right Foot Surgery)' for Washington</b></td>
+<td>The 11/15 06:15 PM ET report spells the name 'Champagne'. The Washington Inactive line in the gamebook spells it 'Champagnie'. The two names are not paired. The report entry is listed as unexplained. The gamebook reason is recorded on the Inactive line, and no value was changed.</td>
+<td>site/pages/player-logs.html (coverage list)</td>
+<td>Confirm the legal spelling from the league roster before pairing the two entries.</td>
+<td class="src"><span class="na" title="source id Gamebook HOU@WAS page 1 (statsdmz) and injury report 11/15 06:15 PM ET is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F133</td>
+<td>Low</td>
+<td><b>Ambiguous surname: OKC@SAC report lists Jalen Williams and Jaylin Williams (both Out); the Thunder Inactive line lists 'Williams' twice with two reasons and no first names</b></td>
+<td>The gamebook prints 'Williams (Injury/Illness - Left Ankle Surgery)' and 'Williams (Injury/Illness - Low Back Spasms)' on the Thunder Inactive line. It gives no first names. Pairing either report entry to either line by surname would be a guess, so neither entry was paired. Both report entries are listed as unexplained.</td>
+<td>site/pages/player-logs.html (coverage list)</td>
+<td>Use the official game page's player list or a dated roster to pair the two entries.</td>
+<td class="src"><span class="na" title="source id Gamebook OKC@SAC page 1 (statsdmz) and injury report 11/15 06:15 PM ET is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F134</td>
+<td>Low</td>
+<td><b>Status reason differs: Marcus Smart (HOU@WAS) is 'Out' on the 06:15 PM ET report, but the gamebook prints 'NWT - League Suspension'</b></td>
+<td>The report gives Smart status Out with no injury reason in the row matched by name. The gamebook prints a league suspension (NWT, not with team). Both are recorded as printed: the row carries the gamebook note, and the report status is kept in the injury-report fields. The reasons were not reconciled.</td>
+<td>data/official/player_game_logs_2026-11-15.json (HOU@WAS row)</td>
+<td>Confirm whether a league suspension should be reported as Out on the injury report.</td>
+<td class="src"><span class="na" title="source id Gamebook HOU@WAS page 1 (statsdmz) and injury report 11/15 06:15 PM ET is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F135</td>
+<td>Medium</td>
+<td><b>The freshest official injury editions read this cycle (11/16 12:00 PM and 01:30 PM ET) run ahead of the promoted pipeline input (11/16 09:45 AM ET): 26 added designations and 7 status changes across the two later editions, all awaiting digest-bound runner promotion</b></td>
+<td>Session arena/7ec9e7a3-nba1 retrieved two newer official editions as text on 2026-11-16: the 12:00 PM edition (18:3xZ) and the 01:30 PM edition (19:1xZ), transcribed under data/official/ with the canonical schema (revision + retrieval stamps; unreadable render cells left empty and noted). 09:45 AM -&gt; 12:00 PM: zero status changes, seven ADDED rows (MEM +5, NOP +2) - data/official/injury_diff_2026-11-16_0945AM_to_1200PM_7ec9e7a3.json. 12:00 PM -&gt; 01:30 PM: 49 comparable rows, SEVEN status changes (CLE Tyson Questionable-&gt;Doubtful; MEM Stewart Questionable-&gt;Out; MIA Larsson Questionable-&gt;Doubtful; MEM GG Jackson reason completed to 'Left 5th Metatarsal Fracture'; NOP Dia / Pierre Jr. / Reese Questionable-&gt;Probable, all three G League two-way) and NINETEEN ADDED rows as four previously-unfiled team blocks filed (WAS 6, BOS 1 - Queta Questionable Rest, HOU 6 incl. Smart Out - League Suspension, PHI 5 incl. LeBron James Out and Embiid Questionable) - data/official/injury_diff_2026-11-16_1200PM_to_0130PM_7ec9e7a3.json. Why the pipeline input is not updated in place: promotion into data/raw/injuries.json is digest-bound to a runner-retrieved PDF (engine/promote_official.py; F120's sandbox limitation), so these rows stay out of the promoted input until the runner's next scheduled run (22:15Z) retrieves the then-current edition. Impact until then: the picks surface's rotation-availability column understates WAS/HOU/PHI absence depth (they read NOT YET SUBMITTED at 09:45 AM) and misses the Memphis/New Orleans designations; the 01:30 PM state is published from the transcription in the Injuries banner and the transcription/diff files above. No model line is re-priced: lines are frozen pre-tip by the pre-registration rule.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-X01</td>
+<td>High</td>
+<td><b>The injury-PDF parser drops player rows that the official PDF contains, and reports zero unparsed cells</b></td>
+<td>engine/injury_diff.py recovers report text by grouping words into visual lines. Read against the 2026-11-16 01:15 PM edition it returns 80 rows and reports 0 unparsed cells, while the same PDF's content stream contains 87 report rows. Seven player rows are silently missing: Jerome (Ty), Pippen Jr. (Scotty), Post (Quinten), Saunders (Richie) and Stewart (Isaiah) for Memphis in MEM@WAS, and Reese (Julian) and Watford (Trendon) for New Orleans in GSW@NOP. The bytes were re-read independently, per clipped rectangle rather than per visual line, by scripts/verify_injury_edition_07920bdc.py, which recovers all 87 with 0 status disagreements and 0 rows the line parser finds that it does not. A parser that drops rows while reporting a clean parse is the worst failure mode for an archive whose purpose is detecting a status change, so this session's published edition and its consecutive diff are built from the verified rows, and each recovered row carries recovered_by.</td>
+<td>data/parsed/injury_diffs/** (every edition parsed so far), any consecutive-edition diff computed from it, and any availability strategy graded from parsed editions</td>
+<td>Port the per-clipped-rectangle reader in scripts/verify_injury_edition_07920bdc.py into engine/injury_diff.py, or make it fail loudly when a row's cells do not assemble. Until then, no parsed edition's row count should be treated as complete. Logged as a cross-session request in COORDINATION §56.7 - the file is outside this session's claim.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F-X02</td>
+<td>Low</td>
+<td><b>Both PDF readers split a hyphenated word into two kerned strings and print it with a spurious space</b></td>
+<td>The reports draw 'Two-Way' as two kerned strings, so a reader that joins drawn strings with a space prints 'G League - Two- Way'. Both engine/injury_diff.py and this session's cell reader do it. It is a rendering artifact, not a content disagreement: the independent 11/15 06:15 AM transcription prints 'Two-Way'. The cell reader now suppresses the space when the preceding string ends in a hyphen and is not itself a standalone dash, and the regression test normalises it before comparing, so no value on the site is affected - but any future diff of reason text should normalise it too.</td>
+<td>Reason text in parsed editions, and reason comparison in tests</td>
+<td>Normalise kerned hyphens at the point of extraction in engine/injury_diff.py so reason strings are comparable across editions without post-processing.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F-DFA-01</td>
+<td>High</td>
+<td><b>RESOLVED - three pages named three different 'newest official injury editions'</b></td>
+<td>Found by session arena/dfa3057f-nba1 (§55) on 2026-11-16: the Injuries banner named the 11/15 09:00 PM edition, the picks page's availability columns cited 11/16 09:45 AM, and the Injuries body text said the window was priced from 11/15 06:15 AM, while the official index listed 11/16 editions through 1:00 PM ET. Resolved in §56: twelve further 11/16 editions (09:15 AM through 01:15 PM ET) were captured byte-exactly from ak-static.cms.nba.com by a runner with network access and archived with their SHA-256 and retrieval timestamps; the 01:15 PM edition was transcribed twice by two independent readers and promoted; the two hard-coded 'newest' sentences on the Injuries page now read the same value as the banner. The banner shows report revision 11/16/2026 01:15 PM ET and retrieval 2026-11-16T18:25:44Z. The page still also shows a separate 'Report edition in use' banner (11/16 09:45 AM) - deliberately, because that is the edition the published availability numbers were cut from, and a line re-priced after the cut cannot be graded.</td>
+<td>site/pages/injuries.html, site/pages/picks.html availability columns</td>
+<td>Re-point the 'Report edition in use' at a newer edition only alongside a deliberate re-cut of the availability inputs, never silently (§56.7 request 2).</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F-DFA-02</td>
+<td>Medium</td>
+<td><b>RESOLVED - test_injury_diff.py pinned a player from an older edition against the newest archived PDF</b></td>
+<td>The test asserted that 'Furphy, Johnny' appears in the newest archived injury PDF. He appears in the 11/15 slate's reports, so the test failed as soon as the archive rolled to an 11/16 edition that does not list him - a stale fixture, not a parser fault. It was not wired into any workflow, so no gate was affected. Fixed: the test now loads the edition the independent transcription was made from (11/15 06:15 AM) and compares every shared player row instead of one hand-picked name, skipping cleanly when those bytes are absent. scripts/test_injury_edition_crosscheck_07920bdc.py adds the regression this exposed: the independent cell reader must never recover fewer player rows than the line parser, and the seven rows the line parser dropped (F-X01) must be present in the bytes.</td>
+<td>scripts/test_injury_diff.py, the unit-test suite</td>
+<td>Wire both test files into the validate job so a parser regression fails CI rather than a reviewer's read.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F-DFA-03</td>
+<td>Low</td>
+<td><b>RESOLVED - answered question A12 read as current while quoting a stale count</b></td>
+<td>A12 ('Does the site now produce a line for every game in the next three days?') answered 'Yes. 27 games from 2026-11-14 to 2026-11-17' under the Answered heading, while the live horizon is 29 games, 16-19 Nov. The answer was correct when written and was not re-opened, but under 'Answered' the wording read as current. The answer now opens with the date it was recorded and states the live count separately; the underlying record is unchanged.</td>
+<td>site/pages/questions.html answer A12</td>
+<td>Give every answered question a recorded-on date and have the page render it, so a dated answer can never silently read as a live one.</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">S4</a></td>
+</tr>
+<tr>
+<td>F-DFA-04</td>
+<td>Low</td>
+<td><b>RESOLVED - flag F5 ('No archived injury reports') was out of date</b></td>
+<td>F5 said only the 2026-11-13 05:15 PM edition had been captured. The archive now holds 29 editions (11/15 12:45 PM through 11/16 01:15 PM ET), each content-addressed with its retrieval timestamp. F5 is retired below: its premise is false, and the grading consequence it described no longer follows from an empty archive but from F-X01 (parsed editions that are silently incomplete), which is the live item.</td>
+<td>Flagged page item F5</td>
+<td>None. Retired, kept in the register for the record.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F-DFA-05</td>
+<td>Info</td>
+<td><b>scripts/test_refresh_gate.py cannot import engine when run as a script from the repository root</b></td>
+<td>It needs PYTHONPATH=. because it imports the engine package. Harmless in CI, which does not run it, but a reviewer running the suite by hand sees a failure that is not a defect.</td>
+<td>scripts/test_refresh_gate.py</td>
+<td>Add the repository root to sys.path in the test module, as scripts/test_injury_diff.py already does.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/test_refresh_gate.py" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F-X03</td>
+<td>High</td>
+<td><b>An edition transcribed from the text render of an official PDF loses the Reason column on wrapped GSW rows and one Status</b></td>
+<td>The 2026-11-16 01:30 PM edition in data/official/ was transcribed by session arena/7ec9e7a3-nba1 from the fetch_page text render of the official PDF rather than from its bytes. Diffing it against the byte-verified 01:15 PM edition (87 rows each, 85 comparable) shows 9 differences, and checking each against a fresh read of the official 01:30 PM PDF separates them: 3 are real league status changes (Dia, Malik; Pierre Jr., Jaron; Reese, Julian - all New Orleans, Questionable to Probable between 01:15 and 01:30 PM), and 6 are reading losses in the render (the Reason column is empty for Butler III, Curry, Moody, Porzingis, Santos and Williams - every Golden State row, whose table block is the one the render splits across pages - and Butler's Status is empty). The render also prints 'Champagne, Justin' and 'Mathurin, Benedict' where the official bytes print 'Champagnie' and 'Bennedict'. The 3 real upgrades are published as status changes; the 6 losses are reported as unverified and the blank values are left blank, never copied forward from the earlier edition.</td>
+<td>data/official/injury_2026-11-16_0130PM_7ec9e7a3.json and any availability figure derived from it; the Injuries banner's 'Report revision' row counts</td>
+<td>Prefer byte-exact capture (the workflow added in §56 does this) and re-transcribe 01:30 PM from the archived PDF once it is captured, before any availability input is re-cut from that edition.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F136</td>
 <td>Medium</td>
 <td><b>Two measured-rho registers disagree: cross-game parlay rho is 'not measurable' in measured_rho.json but measured at 0.0142 in rho_2026_27.json, and the side/total value differs by corpus window (-0.105 on 74 finals vs -0.0199 on 190)</b></td>
-<td>Measured 2026-11-16 (session arena/23ec1e32-nba1, §55 W02). Register A — data/derived/measured_rho.json (scripts/measure_rho.py): side/total r = -0.105 (n=74 finals, 2026-11-06..11-15, refreshed this session because the corpus files had grown to 74 games while the file still said 66 — see F129) and a methodological verdict that cross-game rho is NOT measurable from official data (pairings would be an artefact of how pairs are made), consequence: price = naive product with the Frechet band. Register B — data/derived/rho_2026_27.json (session arena/801ba27f-nba1, official box-score pages): cross-game same-date margin rho = 0.0142 MEASURED (n_pairs 1546), teammate points -0.0975 (n=374), opponent leading-scorer +0.0321 (n=187), side/total -0.0199 (n=190). Re-derivation this session from the committed finals corpus (engine/model_v2.load_results, 197 decided games through 11/15): all unordered same-date margin pairs over 26 dates give r = 0.0120 on 808 pairs — Register B's value is confirmed in substance, so the measurability dispute is methodological, not arithmetic. Current publication split: scripts/generate_picks.py and the roll page's parlay table price AT the measured 0.0142 with the naive product printed beside every row (the brief asks for measured-rho pricing); the roll page's 'What could not be measured' table still publishes Register A's opposing verdict beside it; the side/total price on roll section 4 uses Register A's refreshed value; parlay-pricing.html uses Register B. The teammate/opponent values in Register B CANNOT be re-derived inside this tree: the box scores behind n=374/187 are not committed (only nine gamebooks are), so their provenance is the register file itself. Suggested action: a reviewer picks the register of record per pair type and the loser is retired with a note, or measure_rho.py is extended to cover cross-game pairs with date-level block bootstrap so one script produces all pairs.</td>
+<td>Measured 2026-11-16 (session arena/23ec1e32-nba1, §61 W02). Register A — data/derived/measured_rho.json (scripts/measure_rho.py): side/total r = -0.105 (n=74 finals, 2026-11-06..11-15, refreshed this session because the corpus files had grown to 74 games while the file still said 66 — see F137) and a methodological verdict that cross-game rho is NOT measurable from official data (pairings would be an artefact of how pairs are made), consequence: price = naive product with the Frechet band. Register B — data/derived/rho_2026_27.json (session arena/801ba27f-nba1, official box-score pages): cross-game same-date margin rho = 0.0142 MEASURED (n_pairs 1546), teammate points -0.0975 (n=374), opponent leading-scorer +0.0321 (n=187), side/total -0.0199 (n=190). Re-derivation this session from the committed finals corpus (engine/model_v2.load_results, 197 decided games through 11/15): all unordered same-date margin pairs over 26 dates give r = 0.0120 on 808 pairs — Register B's value is confirmed in substance, so the measurability dispute is methodological, not arithmetic. Current publication split: scripts/generate_picks.py and the roll page's parlay table price AT the measured 0.0142 with the naive product printed beside every row (the brief asks for measured-rho pricing); the roll page's 'What could not be measured' table still publishes Register A's opposing verdict beside it; the side/total price on roll section 4 uses Register A's refreshed value; parlay-pricing.html uses Register B. The teammate/opponent values in Register B CANNOT be re-derived inside this tree: the box scores behind n=374/187 are not committed (only nine gamebooks are), so their provenance is the register file itself. Suggested action: a reviewer picks the register of record per pair type and the loser is retired with a note, or measure_rho.py is extended to cover cross-game pairs with date-level block bootstrap so one script produces all pairs.</td>
 <td>scripts/generate_picks.py; site/pages/roll.html sections 3-5; site/pages/parlay-pricing.html; data/derived/measured_rho.json; data/derived/rho_2026_27.json; data/derived/horizon_picks.json</td>
 <td>Pick the register of record per pair type; consider a date-block bootstrap in measure_rho.py so one script owns every published rho.</td>
 <td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
-<td>F129</td>
+<td>F137</td>
 <td>Low</td>
 <td><b>Derived registers go stale when their corpus files grow: measured_rho.json still said n=66 while its own inputs held 74 finals (66/74 rows published)</b></td>
-<td>Measured 2026-11-16T18:5xZ (session arena/23ec1e32-nba1, §55 W05). scripts/measure_rho.py was last run when data/raw/games_completed.json held 60 rows; a later official capture grew that file (and data/official/results_2026-11-15.json) to the full 74-game 11/06..11/15 window without the derived file being regenerated, so the published rho (-0.0635, n=66) understated its own corpus. Re-running the script reproduced the exact pipeline on the current inputs and refreshed the file to r = -0.105 (n=74, p=0.370) — every consumer (roll page sections 3-5, market_anchor) now renders the refreshed values. The process gap: no gate re-runs a derived builder when a corpus file it reads is updated by the scheduled refresh. Suggested action: have the refresh workflow re-run scripts/measure_rho.py (and similarly derived registers) when any corpus input changes, or add a staleness check to verify_all.</td>
+<td>Measured 2026-11-16T18:5xZ (session arena/23ec1e32-nba1, §61 W05). scripts/measure_rho.py was last run when data/raw/games_completed.json held 60 rows; a later official capture grew that file (and data/official/results_2026-11-15.json) to the full 74-game 11/06..11/15 window without the derived file being regenerated, so the published rho (-0.0635, n=66) understated its own corpus. Re-running the script reproduced the exact pipeline on the current inputs and refreshed the file to r = -0.105 (n=74, p=0.370) — every consumer (roll page sections 3-5, market_anchor) now renders the refreshed values. The process gap: no gate re-runs a derived builder when a corpus file it reads is updated by the scheduled refresh. Suggested action: have the refresh workflow re-run scripts/measure_rho.py (and similarly derived registers) when any corpus input changes, or add a staleness check to verify_all.</td>
 <td>data/derived/measured_rho.json; site/pages/roll.html sections 3-5; scripts/market_anchor.py inputs</td>
 <td>Re-run measure_rho.py on refresh when its corpus inputs change; add a staleness assertion to the gate battery.</td>
 <td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">link</a></td>

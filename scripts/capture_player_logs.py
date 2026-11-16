@@ -60,6 +60,13 @@ GAME_IDS = {
     "2026-11-15_SASUTA": ("0022600239", "SAS", "UTA"),
     "2026-11-15_DALBOS": ("0022600240", "DAL", "BOS"),
     "2026-11-15_NYKTOR": ("0022600241", "NYK", "TOR"),
+    # Added 2026-11-16 by arena/fe8e2065-nba1 (COORDINATION §55). These three
+    # gamebooks were committed but never mapped, so the run skipped them and
+    # the committed log reported six games with `problems: []`. Each id is
+    # re-checked below against the official results feed (away/home/FINAL).
+    "2026-11-15_HOUWAS": ("0022600242", "HOU", "WAS"),
+    "2026-11-15_ATLMIL": ("0022600243", "ATL", "MIL"),
+    "2026-11-15_OKCSAC": ("0022600244", "OKC", "SAC"),
 }
 
 MIN_RE = re.compile(r"^(\d{1,2}):(\d{2})$")
@@ -129,10 +136,16 @@ def parse_gamebook(path):
         if min_idx is None:
             # A row with no MIN clock is a DNP / DND row.  It is recorded, not
             # dropped: "on the roster, did not appear" is part of the log.
-            note = next((x for x in c if "DNP" in x or "DND" in x), None)
+            # NWT = "not with team" (e.g. a league suspension), also a non-appearance.
+            note = next((x for x in c if "DNP" in x or "DND" in x or "NWT" in x), None)
             if note:
                 pre = [x for x in c if x]
                 m = re.match(r"^(\d{1,2})\s+(.+)$", pre[0]) if pre else None
+                # COORDINATION §55: the jersey and the name can also sit in separate
+                # cells ("| 4 | Kingston Flemings | | DND - ... |"). Before this fix those
+                # rows were silently dropped; they are recorded now.
+                if not m and len(pre) >= 2 and re.match(r"^\d{1,2}$", pre[0]):
+                    m = re.match(r"^(\d{1,2})\s+(.+)$", pre[0] + " " + pre[1])
                 if m:
                     current["rows"].append({
                         "jersey": m.group(1), "player": m.group(2).strip(),
@@ -207,11 +220,115 @@ def inactive_lists(raw):
     return out
 
 
+def fold(txt):
+    """Accent- and case-insensitive key ('Vukčević' -> 'vukcevic')."""
+    import unicodedata
+    return unicodedata.normalize("NFKD", txt).encode("ascii", "ignore").decode().lower().strip()
+
+
+def inactive_entries(body):
+    """(surname-as-printed, reason-as-printed) for each name in an Inactive line."""
+    out = []
+    for m in re.finditer(r"(?:^|,\s*)([A-Za-z\u00C0-\u017F'\u2019. \-]+?)\s*\(([^()]*)\)", body):
+        out.append((m.group(1).strip(), m.group(2).strip()))
+    return out
+
+
+def recover_inactive_rows(raw, blocks, away, home, report_rows, game_key, problems):
+    """Add a played=False row for every injury-report player who is absent from the
+    box-score table but named on the gamebook's own `Inactive:` line for his team.
+
+    Rules (nothing is inferred):
+      * the Inactive team label must be the team named in the gamebook header
+        (checked against the two team blocks, visitor first);
+      * a player is matched only when his surname occurs exactly once in that
+        team's Inactive line; an ambiguous surname is flagged, not paired;
+      * the row's dnp_note is the Inactive line's own reason text, verbatim.
+    Returns (rows_added, unmatched) where unmatched lists report names that
+    remain unexplained by the gamebook.
+    """
+    ina = inactive_lists(raw)
+    labels = list(ina.keys())
+    added, unmatched = [], []
+    if len(labels) < 2 or len(blocks) < 2:
+        return added, [f"{game_key}: no two Inactive lines / team blocks to map"]
+    away_label, home_label = labels[0], labels[1]
+    if away_label.lower() not in (blocks[0]["team_name"] or "").lower() or \
+       home_label.lower() not in (blocks[1]["team_name"] or "").lower():
+        problems.append(f"{game_key}: Inactive labels {away_label}/{home_label} do not match header order")
+        return added, [f"{game_key}: Inactive label mapping failed"]
+    side_of = {away_label: ("away", away), home_label: ("home", home)}
+    entries = {lab: inactive_entries(ina[lab]["raw"]) for lab in labels[:2]}
+    box_names = {fold(r["player"]) for blk in blocks for r in blk["rows"]}
+    for rr in report_rows:
+        name = rr["player"]
+        parts = [x.strip() for x in name.split(",")]
+        surname = fold(parts[0])
+        first_last = fold(f"{parts[1]} {parts[0]}") if len(parts) == 2 else fold(name)
+        if first_last in box_names:
+            continue
+        team = fold(rr.get("team_effective") or rr.get("team_printed") or "")
+        lab = next((l for l in (away_label, home_label) if team.endswith(fold(l))), None)
+        if lab is None:
+            unmatched.append(f"{name} ({rr.get('matchup')}): team not one of the two Inactive labels")
+            continue
+        hits = [(p, r) for p, r in entries[lab] if fold(p) == surname]
+        if len(hits) != 1:
+            why = "ambiguous surname on the Inactive line" if len(hits) > 1 else "not on the Inactive line"
+            unmatched.append(f"{name} ({rr.get('matchup')}, {rr.get('status')}): {why}")
+            continue
+        side, team_abbr = side_of[lab]
+        opp = home if side == "away" else away
+        added.append({
+            "date": "2026-11-15", "game_id": GAME_IDS[game_key][0], "team": team_abbr, "opponent": opp,
+            "home_away": side, "player": first_last_title(name), "jersey": None, "played": False,
+            "min": None, "minutes_seconds": None, "dnp_note": "Inactive (gamebook Inactive line): " + hits[0][1],
+            "on_official_injury_report": True, "injury_report_status": rr.get("status"),
+            "injury_report_reason": rr.get("reason"),
+            "source_pdf": f"https://statsdmz.nba.com/pdfs/20261115/20261115_{away}{home}_book.pdf",
+            "source_text": os.path.relpath(os.path.join(GB_DIR, game_key + ".md"), ROOT),
+            **{k: None for k in ("pts", "reb", "ast", "stl", "blk", "tov", "pf", "fgm", "fga",
+                                  "fg3m", "fg3a", "ftm", "fta", "oreb", "dreb", "plus_minus")},
+        })
+    return added, unmatched
+
+
+def injury_rows_for(injury, away, home):
+    """Injury-report rows for this game (official matchup and game date), in file order."""
+    out = []
+    for r in injury["rows"]:
+        if not r.get("player"):
+            continue
+        if r.get("matchup") == f"{away}@{home}" and r.get("game_date") == "11/15/2026":
+            out.append(r)
+    return out
+
+
+def first_last_title(report_name):
+    parts = [x.strip() for x in report_name.split(",")]
+    return f"{parts[1]} {parts[0]}" if len(parts) == 2 else report_name
+
+
 def main():
     files = sorted(glob.glob(os.path.join(GB_DIR, "*.md")))
     if not files:
         print("no gamebooks captured; nothing to parse", file=sys.stderr)
         return 2
+
+    # Every mapping must agree with the official results feed: same away/home
+    # codes and a FINAL status. A mapping that disagrees is a hard stop, never
+    # a guess.
+    feed = json.load(open(os.path.join(ROOT, "data/official/results_2026-11-15.json"), encoding="utf-8"))
+    feed_by_id = {r["game_id"]: r for r in feed["rows"]}
+    mapping_problems = []
+    for key, (gid, away, home) in GAME_IDS.items():
+        row = feed_by_id.get(gid)
+        if row is None or row.get("away") != away or row.get("home") != home or row.get("status") != "FINAL":
+            mapping_problems.append(f"{key}: GAME_IDS {gid} {away}@{home} disagrees with the official results feed")
+    if mapping_problems:
+        for p in mapping_problems:
+            print("  -", p, file=sys.stderr)
+        return 3
 
     injury = json.load(open(os.path.join(ROOT, "data/official/injury_2026-11-15_0615PM.json"),
                             encoding="utf-8"))
@@ -225,7 +342,7 @@ def main():
             else:
                 report_names.add(r["player"].lower())
 
-    games_out, all_rows, problems = [], [], []
+    games_out, all_rows, problems, unexplained, recovered_total = [], [], [], [], []
     for path in files:
         key = os.path.basename(path)[:-3]
         if key not in GAME_IDS:
@@ -251,12 +368,22 @@ def main():
                     "source_text": os.path.relpath(path, ROOT),
                 })
                 rows.append(r)
+        # COORDINATION §55: recover inactive players from the gamebook's own Inactive line.
+        inactive_rows, inactive_unmatched = recover_inactive_rows(
+            raw, blocks, away, home,
+            [r for r in injury_rows_for(injury, away, home)], key, problems)
+        rows.extend(inactive_rows)
+        for u in inactive_unmatched:
+            unexplained.append(f"{key}: {u}")
+        for ir in inactive_rows:
+            if ir.get("injury_report_status") == "Available":
+                unexplained.append(f"{key}: CONFLICT {ir['player']} is 'Available' on the 06:15 PM report "
+                                   f"but on the gamebook Inactive line ({ir['dnp_note']})")
+        recovered_total.append(len(inactive_rows))
         all_rows.extend(rows)
 
         # checks against the official final score
-        res = json.load(open(os.path.join(ROOT, "data/official/results_2026-11-15.json"),
-                             encoding="utf-8"))
-        official = [r for r in res["rows"] if r["game_id"] == gid][0]
+        official = feed_by_id[gid]
         checks = []
         for blk, team, want in ((away_blk, away, official.get("away_pts")),
                                 (home_blk, home, official.get("home_pts"))):
@@ -292,14 +419,36 @@ def main():
             "source_text": rows[0]["source_text"],
         })
 
+    # Split every report name that no gamebook row explains into two classes, from the
+    # report's own game dates: (a) its only report rows are for games after 11/15 (no
+    # gamebook exists yet), (b) it has a row for one of the nine finished 11/15 games but
+    # no gamebook row was matched (an unexplained irregularity, listed by name).
+    finished = {g["matchup"] for g in games_out}
+    in_rows = {r["player"].lower() for r in all_rows}
+    by_name = {}
+    for rr in injury["rows"]:
+        if rr.get("player"):
+            by_name.setdefault(first_last_title(rr["player"]).lower(), []).append(rr)
+    later_only, unexplained_11_15 = [], []
+    for nm, rrs in sorted(by_name.items()):
+        if nm in in_rows:
+            continue
+        if any(x.get("game_date") == "11/15/2026" and x.get("matchup") in finished for x in rrs):
+            unexplained_11_15.append(nm)
+        else:
+            later_only.append(nm)
+
     doc = {
         "title": "Per-player game logs — parsed from the official NBA gamebook PDF",
         "generated_by": "scripts/capture_player_logs.py",
         "answers": "register R21: per-player minutes, points, rebounds, assists and opponent",
         "source_name": ("NBA official gamebook (PDF), statsdmz.nba.com — the league's own box-score "
                         "document for the game"),
-        "retrieved_utc": "2026-11-16T02:18Z..02:20Z",
-        "captured_by": "arena/d31fb422-nba1",
+        "retrieved_utc": "2026-11-16T02:18Z..02:20Z (games 1-6, arena/d31fb422-nba1); "
+                         "2026-11-16T18:21Z re-read of ATLMIL, HOUWAS, OKCSAC (games 7-9): official "
+                         "gamebook PDF page 1 at statsdmz.nba.com and final scores at nba.com/game, "
+                         "by arena/fe8e2065-nba1 (COORDINATION §55)",
+        "captured_by": "arena/d31fb422-nba1; games 7-9 mapped and re-verified by arena/fe8e2065-nba1",
         "rule": ("Every value is a cell of the official gamebook. A player who did not appear keeps a "
                  "row with played=false and null stats. Missing cells stay null. Each game is checked "
                  "against its official final score and against the printed team minutes total; a "
@@ -317,10 +466,15 @@ def main():
                                                       if r["on_official_injury_report"]),
             "injury_report_edition": injury["revision_time_et"],
             "injury_report_rows": len(injury["rows"]),
+            "rows_recovered_from_gamebook_inactive_lines": sum(recovered_total),
+            "report_players_unexplained_by_gamebooks": unexplained,
+            "report_names_unique": len(by_name),
+            "names_on_report_later_games_only": later_only,
+            "names_on_report_11_15_unexplained": unexplained_11_15,
             "names_on_report_not_found_in_any_gamebook": sorted(
                 n for n in report_names
                 if n not in {r["player"].lower() for r in all_rows}),
-            "note": ("Names on the report that do not appear in these six gamebooks are players whose "
+            "note": ("Names on the report that do not appear in these %d gamebooks are players whose " % len(games_out) +
                      "game is on 11/16 or later, or who are not on a 11/15 roster page. They are listed, "
                      "not silently dropped; capturing their logs needs their games' gamebooks."),
         },

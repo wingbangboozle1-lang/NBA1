@@ -1,0 +1,284 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-15_06_45PM__24e8255930ec1390.pdf",
+  "label": "Injury-Report_2026-11-15_06_45PM",
+  "source_url": null,
+  "retrieved_at_utc": null,
+  "sha256": "24e8255930ec13900edd14ae225660d54536a7eaeebc41d4fcb4aa2c7fd533f0",
+  "rows": 124
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-15_09_00PM.pdf",
+  "label": "Injury-Report_2026-11-15_09_00PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf",
+  "retrieved_at_utc": "2026-11-16T02:28:18Z",
+  "sha256": "3a148bf1db5fb0165a495915ba42eb955e9387efe55916eb5feb7dd3688c1448",
+  "rows": 142
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "Oklahoma City Thunder",
+   "player": "Mitchell, Ajay",
+   "before_status": "Questionable",
+   "after_status": "Available",
+   "before_reason": "Injury/Illness - Left Ankle Sprain",
+   "after_reason": "Injury/Illness - Left Ankle Sprain",
+   "before_matchup": "OKC@SAC",
+   "after_matchup": "OKC@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Achiuwa, Precious",
+   "before_status": "Questionable",
+   "after_status": "Out",
+   "before_reason": "Injury/Illness - Left Ankle Soreness",
+   "after_reason": "Injury/Illness - Left Ankle Soreness",
+   "before_matchup": "OKC@SAC",
+   "after_matchup": "OKC@SAC"
+  }
+ ],
+ "listed_in_after_only": [
+  {
+   "team": "Charlotte Hornets",
+   "player": "Ajayi, Michael",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "matchup": "CHA@LAC"
+  },
+  {
+   "team": "Charlotte Hornets",
+   "player": "Boswell, Kylan",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "matchup": "CHA@LAC"
+  },
+  {
+   "team": "Charlotte Hornets",
+   "player": "Knueppel, Kon",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain",
+   "matchup": "CHA@LAC"
+  },
+  {
+   "team": "Charlotte Hornets",
+   "player": "Schroder, Dennis",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain",
+   "matchup": "CHA@LAC"
+  },
+  {
+   "team": "Charlotte Hornets",
+   "player": "Steinbach, Hannes",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "matchup": "CHA@LAC"
+  },
+  {
+   "team": "Denver Nuggets",
+   "player": "Holmes II, DaRon",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "matchup": "PHX@DEN"
+  },
+  {
+   "team": "Denver Nuggets",
+   "player": "Nembhard, Ryan",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "matchup": "PHX@DEN"
+  },
+  {
+   "team": "Denver Nuggets",
+   "player": "Strawther, Julian",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Sprain",
+   "matchup": "PHX@DEN"
+  },
+  {
+   "team": "Denver Nuggets",
+   "player": "Whitmore, Cam",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "matchup": "PHX@DEN"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Curry, Stephen",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Oblique Tear",
+   "matchup": "GSW@NOP"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Moody, Moses",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Patellar Tendon Repair / Surgery",
+   "matchup": "GSW@NOP"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Porzingis, Kristaps",
+   "status": "Out",
+   "reason": "Not With Team",
+   "matchup": "GSW@NOP"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Santos, Gui",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Ankle Inflammation",
+   "matchup": "GSW@NOP"
+  },
+  {
+   "team": "Golden State Warriors",
+   "player": "Williams, Brandon",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain",
+   "matchup": "GSW@NOP"
+  },
+  {
+   "team": "LA Clippers",
+   "player": "Beal, Bradley",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Injury Management",
+   "matchup": "CHA@LAC"
+  },
+  {
+   "team": "LA Clippers",
+   "player": "Ingram, Brandon",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Heel Surgery",
+   "matchup": "CHA@LAC"
+  },
+  {
+   "team": "LA Clippers",
+   "player": "Martinelli, Nick",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "matchup": "CHA@LAC"
+  },
+  {
+   "team": "LA Clippers",
+   "player": "Miller, Jordan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Rotator Cuff Surgery",
+   "matchup": "CHA@LAC"
+  },
+  {
+   "team": "LA Clippers",
+   "player": "Niederhauser, Yanic Konan",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Lisfranc Surgery",
+   "matchup": "CHA@LAC"
+  },
+  {
+   "team": "Phoenix Suns",
+   "player": "Timme, Drew",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "matchup": "LAL@PHX"
+  },
+  {
+   "team": "Phoenix Suns",
+   "player": "Williams, Mark",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Shoulder Surgery",
+   "matchup": "LAL@PHX"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "Hunter, De'Andre",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hip Soreness / Tightness",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "Sacramento Kings",
+   "player": "LaVine, Zach",
+   "status": "Out",
+   "reason": "Injury/Illness - Illness",
+   "matchup": "OKC@SAC"
+  },
+  {
+   "team": "San Antonio Spurs",
+   "player": "Brown, Maliq",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "matchup": "SAS@UTA"
+  },
+  {
+   "team": "San Antonio Spurs",
+   "player": "Fox, De'Aaron",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hip Tightness",
+   "matchup": "SAS@UTA"
+  },
+  {
+   "team": "San Antonio Spurs",
+   "player": "Gillespie, Ja'Kobi",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "matchup": "SAS@UTA"
+  },
+  {
+   "team": "San Antonio Spurs",
+   "player": "Harris, Tobias",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Calf Strain",
+   "matchup": "SAS@UTA"
+  }
+ ],
+ "listed_in_before_only": [
+  {
+   "team": "Brooklyn Nets",
+   "player": "Saraf, Ben",
+   "status": "Out",
+   "matchup": "PHI@BKN"
+  },
+  {
+   "team": "Chicago Bulls",
+   "player": "Sellers, Jaylin",
+   "status": "Out",
+   "matchup": "CHI@CLE"
+  },
+  {
+   "team": "Chicago Bulls",
+   "player": "Smith, Jalen",
+   "status": "Questionable",
+   "matchup": "CHI@CLE"
+  },
+  {
+   "team": "Chicago Bulls",
+   "player": "Wilson, Caleb",
+   "status": "Out",
+   "matchup": "CHI@CLE"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Saunders, Richie",
+   "status": "Out",
+   "matchup": "MEM@WAS"
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "player": "Stewart, Isaiah",
+   "status": "Questionable",
+   "matchup": "MEM@WAS"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Sharpe, Shaedon",
+   "status": "Out",
+   "matchup": "POR@MIN"
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "player": "Youngblood, Chris",
+   "status": "Out",
+   "matchup": "POR@MIN"
+  }
+ ],
+ "team_block_filing_changes": []
+}

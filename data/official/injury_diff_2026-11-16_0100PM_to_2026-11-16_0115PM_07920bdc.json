@@ -1,0 +1,50 @@
+{
+ "title": "Consecutive-edition injury diff: 2026-11-16 01:00 PM -> 2026-11-16 01:15 PM",
+ "from_edition": {
+  "edition_id": "Injury-Report_2026-11-16_01_00PM",
+  "revision": "11/16/2026 01:00 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:00 PM')",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_00PM.pdf",
+  "sha256": "e0dbe404b34b616c0acb18427966dad7058ac3e4a743cd76ea46f7e8c7550152"
+ },
+ "to_edition": {
+  "edition_id": "Injury-Report_2026-11-16_01_15PM",
+  "revision": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+  "sha256": "55a45f930841c34f46d249e2a2de8bcc853cb9714a6a735904cb79708f24ff6c"
+ },
+ "computed_by": "arena/07920bdc-nba1",
+ "computed_utc": "2026-11-16T18:50:45Z",
+ "method": "Row-by-row comparison of two independently extracted reads of two consecutive official PDFs, keyed on (matchup, team, player). Status changes are reported only where both editions carry the same key; rows present in one edition only are listed separately. Nothing is inferred.",
+ "counts": {
+  "previous_rows": 87,
+  "current_rows": 87,
+  "comparable_rows": 86,
+  "status_changes": 0,
+  "rows_added": 1,
+  "rows_removed": 1
+ },
+ "status_changes": [],
+ "rows_added": [
+  {
+   "matchup": "ORL@BOS",
+   "team": "Boston Celtics",
+   "player": "Queta, Neemias",
+   "status": "Questionable",
+   "reason": "Rest"
+  }
+ ],
+ "rows_removed": [
+  {
+   "matchup": "ORL@BOS",
+   "team": "Boston Celtics",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": ""
+  }
+ ],
+ "caveats": [
+  "Both editions were extracted twice - once per clipped-rectangle cell by scripts/verify_injury_edition_07920bdc.py and once by engine/injury_diff.py - and cross-checked before this diff was computed.",
+  "engine/injury_diff.py dropped 7 player rows present in the newer PDF (flag F-X01), so a diff computed from its output alone would have under-reported both editions. This diff uses the verified rows.",
+  "A row present in one edition only usually reflects a team filing or withdrawing a block, or a slate change, not a player status change."
+ ]
+}

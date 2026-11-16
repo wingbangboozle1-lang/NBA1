@@ -66,6 +66,7 @@ CATEGORIES = [
     ("Rolling Slate", "roll.html", "The current 3-day window re-cut from a fresh official capture: the two estimators and their disagreement, rotation availability, rest and back-to-back, and the gate state of the bet surface. Projection only (R07): picks live behind the gate."),
     ("Projection Surface", "projection.html", "Safe to publish now: originated lines, two estimators with their disagreement as the headline, rest/travel and rotation context. Model output, not a recommendation."),
     ("Bet Surface (gated)", "bet-surface.html", "GATED, fail-closed: the four computed gates, and picks only while all four pass. Currently closed by the validation and sample-floor gates, so no picks are shown. Never mixed with the projection surface."),
+    ("Bet surface (gate state)", "bet.html", "The canonical gated surface built by scripts/build_surfaces.py: the four computed gates (validation, sample floor, pre-registration, ledger integrity) and picks only when all four pass. Fail-closed; shows no picks while any gate is closed. Machine-checked as separate from the projection surface."),
     ("Lines &amp; Picks", "picks.html", "The two-estimator disagreement as the headline for every game in the horizon, the blend underneath, rotation availability as its own column, and the gated paper picks built on them."),
     ("Player Props", "props.html", "Per-player projections and prop combinations, with the minutes coverage stated next to every number."),
     ("Prop Variance &amp; Rotation", "prop-variance.html", "Game-to-game dispersion measured from official game logs: the uncertainty behind every prop, the minutes-to-production elasticity, and what the injury report changed since the lines were cut."),
@@ -1859,8 +1860,8 @@ def main():
                      '<a href="model-v2.html">Open model v2</a>.</li>'
                      '<li><b>Current &mdash; this build.</b> The rolling ' + hz_label + ' horizon (originated lines, '
                      'pick rows, settlement stamp), the frozen 14&ndash;17 Nov strategy-lab window with its '
-                     '60 gated paper picks (settled day by day from official finals), the 11/15/26 '
-                     '06:15 AM ET injury edition, and the full strategy/evidence set. '
+                     '60 gated paper picks (settled day by day from official finals), the 11/16/26 '
+                     '09:45 AM ET injury edition, and the full strategy/evidence set. '
                      '<a href="site/pages/picks.html">Open the horizon</a>.</li>'
                      '<li><a href="command-center/index.html">Command Center</a> &mdash; a second consolidated '
                      'site built in session <code>arena/791c9114-nba1</code> from the same official captures. '
@@ -1897,7 +1898,7 @@ def main():
     built["index.html"] = landing
 
     # === picks =============================================================
-    # §55 W03 (R13 / R15 / F83): the HEADLINE on this page is the disagreement
+    # §61 W03 (R13 / R15 / F83): the HEADLINE on this page is the disagreement
     # between the two independent estimators; the blended line and the legacy
     # single-model line are published underneath it, never on top.  Rotation
     # availability gets its own column on every table below, read from the
@@ -2101,7 +2102,7 @@ def main():
         b.append(banner("warn", "Historical: the 11/14 game-day edition handling (superseded)",
             "<p>This section is a dated record of the 2026-11-14 game-day injury cycle. Those lines are "
             "<b>settled and stamped</b> on the picks and settlement pages, and the current "
-            "2026-11-15..18 window is priced from the <b>11/15/26 06:15 AM ET</b> edition (see the "
+            "2026-11-16..19 window is priced from the <b>11/16/26 09:45 AM ET</b> edition (see the "
             "current-edition banner above). The <b>11/14/26 04:15 AM ET</b> edition shown below "
             "(<a href=\"%s\">official PDF</a>) was transcribed &mdash; all %d rows &mdash; to "
             "<code>verify/2026-11-14/official_injury_2026-11-14_0415AM_s934ca56f.json</code> and was "
@@ -2162,9 +2163,12 @@ def main():
                            "The rows below are the <b>11/13/26 07:30 PM ET</b> edition &mdash; the one the "
                            "settled 14&ndash;17 Nov strategy-lab window was cut from. The league has since "
                            "published newer reports: the 11/14 game-day cycle is on "
-                           "<a href=\"gameday.html\">Game-Day Injury Read</a>, and the current 15&ndash;18 Nov "
-                           "window is priced from the <b>11/15/26 06:15 AM ET</b> edition in the banner "
-                           "above. Those numbers do not replace the ones here: a line re-priced after it was "
+                           "<a href=\"gameday.html\">Game-Day Injury Read</a>, and the current 16&ndash;19 Nov "
+                           "window is priced from the <b>11/16/26 09:45 AM ET</b> edition (the digest-bound promoted "
+                           "input); the newest-edition banner above shows the latest official edition read "
+                           "this cycle (01:30 PM ET) with its consecutive-edition diff - 26 added designations "
+                           "and 7 status changes still awaiting digest-bound runner promotion (flag F135). "
+                           "Those numbers do not replace the ones here: a line re-priced after it was "
                            "frozen cannot be graded."))
     # Newest-edition banner: report revision + retrieval time (brief requirement).
     # ROLLING: pick the newest stored edition and the newest consecutive-edition diff

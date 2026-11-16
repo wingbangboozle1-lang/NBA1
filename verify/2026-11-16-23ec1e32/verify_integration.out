@@ -1,12 +1,12 @@
 Independent integration verification of /home/user/NBA1
 
 [I1] JSON parses and site data exists
-  ok      534 JSON files parse
+  ok      759 JSON files parse
   ok      6 referenced data files all exist
 
 [I2/I3] Internal links resolve; external links are https on trusted hosts
   ok      regulator host cited for legal scope only: kansspelautoriteit.nl
-  ok      160 HTML files, 16957 static links
+  ok      160 HTML files, 17286 static links
 
 [I4] Data rows carry a source link
   WARN    review.html: row without an official source link (no official NBA link)
@@ -49,13 +49,13 @@ Independent integration verification of /home/user/NBA1
   WARN    docs/index.html: row without an official source link (no external link at all)
   WARN    docs/questions.html: row without an official source link (no official NBA link)
   WARN    docs/questions.html: row without an official source link (no official NBA link)
-  WARN    ... and 442 more rows without an official link
-  ok      8774/9256 data rows carry an official source link
+  WARN    ... and 452 more rows without an official link
+  ok      9073/9565 data rows carry an official source link
 
 [I5] No leaked placeholders or sentinels
-  WARN    site/pages/decisions.html:106: 'None' rendered into prose
   WARN    site/pages/decisions.html:107: 'None' rendered into prose
   WARN    site/pages/decisions.html:108: 'None' rendered into prose
+  WARN    site/pages/decisions.html:109: 'None' rendered into prose
 
 [I6] Headline counts in prose match the data
   data  {'out_of_sample_games': 60, 'strategies': 10, 'upcoming_games': 29, 'pick_rows': 58}
@@ -73,10 +73,10 @@ Independent integration verification of /home/user/NBA1
   ok      root index.html links to docs/b/index.html
 
 ==================================================================
-JSON files  : 534
+JSON files  : 759
 HTML files  : 160
-Links       : 16957
-Data rows   : 8774/9256 official-sourced
+Links       : 17286
+Data rows   : 9073/9565 official-sourced
 Errors      : 0
 Warnings    : 44
 ==================================================================

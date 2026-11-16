@@ -1,0 +1,1730 @@
+{
+ "edition": "2026-11-16 01:15 PM",
+ "edition_file": "injury_2026-11-16_0115PM_07920bdc.json",
+ "revision_time_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+ "retrieved_utc": "2026-11-16T18:25:44Z",
+ "captured_by": "arena/07920bdc-nba1",
+ "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+ "pdf_sha256": "55a45f930841c34f46d249e2a2de8bcc853cb9714a6a735904cb79708f24ff6c",
+ "pdf_bytes": 96068,
+ "index_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "index_note": "captured on this session's branch by .github/workflows/capture-injury-07920bdc.yml, which read the official index first; the index listed 54 editions for 2026-11-16 and named 2026-11-16 01:15 PM as the newest at retrieval time",
+ "submission_rule_quoted": "Teams must report by 5 p.m. local time the day before a game (other than the second day of a back-to-back); for the second game of a back-to-back, by 1 p.m. local time on the day of the game. Game-day reports are required between 11 a.m. and 1 p.m. local time (8-10 a.m. for tip-offs 5 p.m. or earlier). Reports are updated on a continual basis throughout the day.",
+ "submission_rule_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "extraction": {
+  "primary": "per clipped-rectangle cell, grouped into rows by rectangle geometry, columns mapped from each page's own header row (scripts/verify_injury_edition_07920bdc.py)",
+  "cross_checked_against": "engine/injury_diff.py visual-line parse of the same bytes",
+  "agreement": {
+   "keys_in_both": 80,
+   "cell_extractor_only": 7,
+   "line_parser_only": 0,
+   "status_disagreements": 0
+  }
+ },
+ "merged_cell_caveat": "the PDF draws the Game Date, Game Time, Matchup and Team cells once at the top of a block and clips empty rectangles below, so those values are inherited by the rows that follow; inherited rows are marked _inherited. A reason that wraps is drawn as a second clipped rectangle, sometimes on the next page, and is re-joined to the row it continues (marked _wrapped_reason)",
+ "rows_note": "87 rows transcribed from the official PDF bytes (76 player rows, 11 NOT YET SUBMITTED team blocks) on game dates 11/16/2026, 11/17/2026. 7 player rows are in the PDF but were dropped by engine/injury_diff.py's visual-line parse; they are published here because the bytes contain them, and each carries recovered_by (flag F-X01). Nothing is inferred.",
+ "game_dates_present": [
+  "11/16/2026",
+  "11/17/2026"
+ ],
+ "rows": [
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "team_effective": "Chicago Bulls",
+   "player": "Awaka, Tobe",
+   "status": "Out",
+   "reason": "Injury/Illness - Disc Irritation",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [],
+   "_page": 1,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "team_effective": "Chicago Bulls",
+   "player": "Robinson, Orlando",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 1,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "team_effective": "Chicago Bulls",
+   "player": "Sellers, Jaylin",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 1,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "team_effective": "Chicago Bulls",
+   "player": "Smith, Jalen",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Finger Sprain",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 1,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "team_effective": "Chicago Bulls",
+   "player": "Wilson, Caleb",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Metacarpal Fracture",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 1,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "team_effective": "Cleveland Cavaliers",
+   "player": "Diop, Khalifa",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_page": 1,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "team_effective": "Cleveland Cavaliers",
+   "player": "Merrill, Sam",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Elbow Injury Management",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 1,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "team_effective": "Cleveland Cavaliers",
+   "player": "Mobley, Evan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Great Toe Sprain",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 1,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "team_effective": "Cleveland Cavaliers",
+   "player": "Tomlin, Nae'Qwan",
+   "status": "Out",
+   "reason": "Injury/Illness - Low Back Stress Reaction",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 1,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "team_effective": "Cleveland Cavaliers",
+   "player": "Tyson, Jaylon",
+   "status": "Doubtful",
+   "reason": "Injury/Illness - Right Ankle Injury Management",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 1,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "team_effective": "Cleveland Cavaliers",
+   "player": "Udeh, Jr., Ernest",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 1,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "team_effective": "Cleveland Cavaliers",
+   "player": "Watson, Peyton",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Abdominal Soreness",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 1,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "team_effective": "Memphis Grizzlies",
+   "player": "Edey, Zach",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Ankle Injury Management",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et"
+   ],
+   "_page": 1,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "team_effective": "Memphis Grizzlies",
+   "player": "Jackson, GG",
+   "status": "Out",
+   "reason": "Injury/Illness - Left 5th Metatarsal Fracture",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 1,
+   "_wrapped_reason": [
+    "Fracture"
+   ]
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "team_effective": "Memphis Grizzlies",
+   "player": "Jerome, Ty",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hip Soreness",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 2,
+   "_wrapped_reason": [],
+   "recovered_by": "cell-extractor-only - present in the official PDF bytes, absent from engine/injury_diff.py's visual-line parse (flag F-X01)"
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "team_effective": "Memphis Grizzlies",
+   "player": "Pippen Jr., Scotty",
+   "status": "Out",
+   "reason": "Injury/Illness - Lumbar Disc Herniation",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 2,
+   "_wrapped_reason": [],
+   "recovered_by": "cell-extractor-only - present in the official PDF bytes, absent from engine/injury_diff.py's visual-line parse (flag F-X01)"
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "team_effective": "Memphis Grizzlies",
+   "player": "Post, Quinten",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Concussion Protocol",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 2,
+   "_wrapped_reason": [],
+   "recovered_by": "cell-extractor-only - present in the official PDF bytes, absent from engine/injury_diff.py's visual-line parse (flag F-X01)"
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "team_effective": "Memphis Grizzlies",
+   "player": "Saunders, Richie",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Surgery",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 2,
+   "_wrapped_reason": [],
+   "recovered_by": "cell-extractor-only - present in the official PDF bytes, absent from engine/injury_diff.py's visual-line parse (flag F-X01)"
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "team_effective": "Memphis Grizzlies",
+   "player": "Stewart, Isaiah",
+   "status": "Out",
+   "reason": "Injury/Illness - Illness",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 2,
+   "_wrapped_reason": [],
+   "recovered_by": "cell-extractor-only - present in the official PDF bytes, absent from engine/injury_diff.py's visual-line parse (flag F-X01)"
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "team_effective": "Washington Wizards",
+   "player": "Beekman, Reece",
+   "status": "Out",
+   "reason": "Injury/Illness - Right AC Joint Injury",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_page": 2,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "team_effective": "Washington Wizards",
+   "player": "Champagnie, Justin",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Surgery",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 2,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "team_effective": "Washington Wizards",
+   "player": "Johnson, Tre",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Low Back Soreness",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 2,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "team_effective": "Washington Wizards",
+   "player": "Okpara, Felix",
+   "status": "Questionable",
+   "reason": "G League - Two-Way",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 2,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "team_effective": "Washington Wizards",
+   "player": "Vukcevic, Tristan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hip Impingement",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 2,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "team_effective": "Washington Wizards",
+   "player": "Watkins, Jamir",
+   "status": "Out",
+   "reason": "Injury/Illness - Left ACL Repair / Surgery",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 2,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "ORL@BOS",
+   "team": "Orlando Magic",
+   "team_effective": "Orlando Magic",
+   "player": "Banchero, Paolo",
+   "status": "Out",
+   "reason": "Injury/Illness - Right High Ankle Sprain",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et"
+   ],
+   "_page": 2,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "ORL@BOS",
+   "team": "Orlando Magic",
+   "team_effective": "Orlando Magic",
+   "player": "Isaac, Jonathan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Injury Management",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 2,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "ORL@BOS",
+   "team": "Orlando Magic",
+   "team_effective": "Orlando Magic",
+   "player": "Nelson, Izaiyah",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Ankle Injury Recovery",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 2,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "ORL@BOS",
+   "team": "Orlando Magic",
+   "team_effective": "Orlando Magic",
+   "player": "Penda, Noah",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Partially Torn Hamstring",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 2,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:00 (ET)",
+   "matchup": "ORL@BOS",
+   "team": "Boston Celtics",
+   "team_effective": "Boston Celtics",
+   "player": "Queta, Neemias",
+   "status": "Questionable",
+   "reason": "Rest",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "team_effective": "Houston Rockets",
+   "player": "Adams, Steven",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Lower Leg Injury Management",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "team_effective": "Houston Rockets",
+   "player": "Capela, Clint",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Ankle Sprain",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "team_effective": "Houston Rockets",
+   "player": "Copeland, Quadir",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "team_effective": "Houston Rockets",
+   "player": "Phillips, Julian",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "team_effective": "Houston Rockets",
+   "player": "Smart, Marcus",
+   "status": "Out",
+   "reason": "League Suspension",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "team_effective": "Houston Rockets",
+   "player": "Thompson, Amen",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Knee Soreness",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Miami Heat",
+   "team_effective": "Miami Heat",
+   "player": "Goldin, Vladislav",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Miami Heat",
+   "team_effective": "Miami Heat",
+   "player": "Jovic, Nikola",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Illness",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Miami Heat",
+   "team_effective": "Miami Heat",
+   "player": "Larsson, Pelle",
+   "status": "Doubtful",
+   "reason": "Injury/Illness - Illness",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Miami Heat",
+   "team_effective": "Miami Heat",
+   "player": "Thompson, Klay",
+   "status": "Available",
+   "reason": "Injury/Illness - Left Ankle Sprain",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "team_effective": "Philadelphia 76ers",
+   "player": "Barlow, Dominick",
+   "status": "Out",
+   "reason": "Injury/Illness - Low Back Stress Reaction",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "team_effective": "Philadelphia 76ers",
+   "player": "Bona, Adem",
+   "status": "Out",
+   "reason": "Injury/Illness - Cervical Spine Sprain",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "team_effective": "Philadelphia 76ers",
+   "player": "Embiid, Joel",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Foot Plantar Fascia Injury Management",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "team_effective": "Philadelphia 76ers",
+   "player": "Hukporti, Ariel",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Achilles Tendon Rupture / Tear",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "team_effective": "Philadelphia 76ers",
+   "player": "James, LeBron",
+   "status": "Out",
+   "reason": "Injury/Illness - Low Back/Sciatica Management",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 3,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "team_effective": "Brooklyn Nets",
+   "player": "Bilodeau, Tyler",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "team_effective": "Brooklyn Nets",
+   "player": "Jefferson, Joshua",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "team_effective": "Brooklyn Nets",
+   "player": "Nelson, Grant",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "team_effective": "Brooklyn Nets",
+   "player": "Powell, Drake",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "team_effective": "Brooklyn Nets",
+   "player": "Saraf, Ben",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "team_effective": "Golden State Warriors",
+   "player": "Butler III, Jimmy",
+   "status": "Out",
+   "reason": "Injury/Illness - Right ACL Repair / Surgery",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "team_effective": "Golden State Warriors",
+   "player": "Curry, Stephen",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Oblique Tear",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "team_effective": "Golden State Warriors",
+   "player": "Moody, Moses",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Patellar Tendon Repair / Surgery",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "team_effective": "Golden State Warriors",
+   "player": "Porzingis, Kristaps",
+   "status": "Out",
+   "reason": "Not With Team",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "team_effective": "Golden State Warriors",
+   "player": "Santos, Gui",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Ankle Inflammation",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "team_effective": "Golden State Warriors",
+   "player": "Williams, Brandon",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "team_effective": "New Orleans Pelicans",
+   "player": "Dia, Malik",
+   "status": "Questionable",
+   "reason": "G League - Two-Way",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "team_effective": "New Orleans Pelicans",
+   "player": "Mathurin, Bennedict",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Plantar Fasciitis",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "team_effective": "New Orleans Pelicans",
+   "player": "McGowens, Bryce",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Elbow Infection",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "team_effective": "New Orleans Pelicans",
+   "player": "Murphy III, Trey",
+   "status": "Out",
+   "reason": "Injury/Illness - Bilateral Patellar Tendinopathy",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "team_effective": "New Orleans Pelicans",
+   "player": "Murray, Dejounte",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Ankle Sprain",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "team_effective": "New Orleans Pelicans",
+   "player": "Pierre Jr., Jaron",
+   "status": "Questionable",
+   "reason": "G League - Two-Way",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 4,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "team_effective": "New Orleans Pelicans",
+   "player": "Reese, Julian",
+   "status": "Questionable",
+   "reason": "G League - Two-Way",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 5,
+   "_wrapped_reason": [],
+   "recovered_by": "cell-extractor-only - present in the official PDF bytes, absent from engine/injury_diff.py's visual-line parse (flag F-X01)"
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "team_effective": "New Orleans Pelicans",
+   "player": "Watford, Trendon",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Ankle Sprain",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 5,
+   "_wrapped_reason": [],
+   "recovered_by": "cell-extractor-only - present in the official PDF bytes, absent from engine/injury_diff.py's visual-line parse (flag F-X01)"
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "team_effective": "Portland Trail Blazers",
+   "player": "Krejci, Vit",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Ankle Fracture",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et"
+   ],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "team_effective": "Portland Trail Blazers",
+   "player": "Morant, Ja",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "team_effective": "Portland Trail Blazers",
+   "player": "Sharpe, Shaedon",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Surgery",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "team_effective": "Portland Trail Blazers",
+   "player": "Youngblood, Chris",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Heel Contusion / Bone Bruise",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "team_effective": "Minnesota Timberwolves",
+   "player": "Beringer, Joan",
+   "status": "Available",
+   "reason": "Injury/Illness - Face Mask",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "team_effective": "Minnesota Timberwolves",
+   "player": "Clark, Jaylen",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hamstring Strain",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "team_effective": "Minnesota Timberwolves",
+   "player": "DiVincenzo, Donte",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Achilles Tendon Repair / Surgery",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "team_effective": "Minnesota Timberwolves",
+   "player": "Edwards, Anthony",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Arthroscopy",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "09:00 (ET)",
+   "matchup": "PHX@DEN",
+   "team": "Phoenix Suns",
+   "team_effective": "Phoenix Suns",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date"
+   ],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "09:00 (ET)",
+   "matchup": "PHX@DEN",
+   "team": "Denver Nuggets",
+   "team_effective": "Denver Nuggets",
+   "player": "Holmes II, DaRon",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "09:00 (ET)",
+   "matchup": "PHX@DEN",
+   "team": "Denver Nuggets",
+   "team_effective": "Denver Nuggets",
+   "player": "Nembhard, Ryan",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "09:00 (ET)",
+   "matchup": "PHX@DEN",
+   "team": "Denver Nuggets",
+   "team_effective": "Denver Nuggets",
+   "player": "Strawther, Julian",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Sprain",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time": "09:00 (ET)",
+   "matchup": "PHX@DEN",
+   "team": "Denver Nuggets",
+   "team_effective": "Denver Nuggets",
+   "player": "Whitmore, Cam",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "NYK@TOR",
+   "team": "New York Knicks",
+   "team_effective": "New York Knicks",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time": "07:30 (ET)",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "team_effective": "Toronto Raptors",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_page": 5,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "team_effective": "Detroit Pistons",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date"
+   ],
+   "_page": 6,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "team_effective": "San Antonio Spurs",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_page": 6,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "team_effective": "Portland Trail Blazers",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et"
+   ],
+   "_page": 6,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "team_effective": "Minnesota Timberwolves",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_page": 6,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time": "10:30 (ET)",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "team_effective": "Utah Jazz",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date"
+   ],
+   "_page": 6,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time": "10:30 (ET)",
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers",
+   "team_effective": "LA Clippers",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_page": 6,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time": "11:00 (ET)",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "team_effective": "Charlotte Hornets",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date"
+   ],
+   "_page": 6,
+   "_wrapped_reason": []
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time": "11:00 (ET)",
+   "matchup": "CHA@LAL",
+   "team": "Los Angeles Lakers",
+   "team_effective": "Los Angeles Lakers",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+   "edition_revision_et": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_page": 6,
+   "_wrapped_reason": []
+  }
+ ]
+}

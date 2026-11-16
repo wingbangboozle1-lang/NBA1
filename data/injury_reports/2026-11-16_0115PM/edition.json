@@ -1,0 +1,36 @@
+{
+ "edition_id": "2026-11-16_0115PM",
+ "revision": "Injury Report: 11/16/26 01:15 PM",
+ "edition_published_utc": "2026-11-16T17:15Z",
+ "retrieved_utc": "2026-11-16T18:30Z",
+ "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+ "edition_index_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "captured_by": "arena/bfad39b2-nba1",
+ "capture_method": "Read live through the web-fetch channel; rows transcribed verbatim in report order.",
+ "binary_pdf_stored": false,
+ "binary_pdf_note": "text-extraction channel only; SHA-256 is of the transcribed row text",
+ "rows_sha256": "972af265f01989649ce58d18c143a281ca0a0090efc2a657c42c67ad3a6282c4",
+ "row_counts": {
+  "rows_total": 87,
+  "player_rows": 76,
+  "not_yet_submitted_blocks": 11,
+  "rows_with_inherited_team": 12
+ },
+ "game_dates_in_edition": [
+  "11/16/2026",
+  "11/17/2026"
+ ],
+ "extraction_artefacts": [
+  {
+   "id": "IA-1",
+   "matchup": "GSW@NOP",
+   "note": "Butler III, Jimmy row printed a Reason but no Status cell in the PDF text layer; status stored as null (not inferred)"
+  },
+  {
+   "id": "IA-2",
+   "matchup": "ORL@BOS",
+   "note": "the ORL@BOS block's continuation rows printed no game time in the PDF; tip 07:00 (ET) taken from the official schedule (https://www.nba.com/schedule) and recorded as game_time_source"
+  }
+ ],
+ "rows_file": "rows.json"
+}

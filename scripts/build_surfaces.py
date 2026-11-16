@@ -11,7 +11,7 @@ Outputs
   site/pages/bet.html          closed gates + no picks while any gate fails. Picks are read from
                                data/derived/horizon_picks_v2.json ONLY when all four gates pass.
   site/pages/bet-surface.html  the index-linked ALIAS of bet.html, written from the same render in
-                               the same run so the two can never disagree (R07 split; §55 W04).
+                               the same run so the two can never disagree (R07 split; §61 W04).
   data/derived/surface_gates.json  the four gates, their requirement, observed value, and pass flag.
 
 The four gates (all computed here from repository files, fail-closed; ALL must pass)

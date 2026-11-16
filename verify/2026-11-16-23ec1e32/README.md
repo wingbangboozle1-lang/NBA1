@@ -1,4 +1,4 @@
-# verify/2026-11-16-23ec1e32 — session arena/23ec1e32-nba1 (COORDINATION §55)
+# verify/2026-11-16-23ec1e32 — session arena/23ec1e32-nba1 (COORDINATION §61)
 
 Evidence for the measured-HCA re-derivation (W01), measured-rho pricing (W02),
 Lines & Picks disagreement headline + rotation column (W03), projection/bet split (W04),
@@ -35,9 +35,9 @@ register refresh (W05), captured 2026-11-16 ~19:1xZ.
   separation checks OK (no picks on bet-surface.html/bet.html while closed)
 
 ## Flags published this session
-- F128 (Medium) — two measured-rho registers disagree (measurability + values);
+- F136 (Medium) — two measured-rho registers disagree (measurability + values);
   both published, reviewer picks the register of record.
-- F129 (Low) — measured_rho.json had gone stale against its own corpus (66 vs 74
+- F137 (Low) — measured_rho.json had gone stale against its own corpus (66 vs 74
   finals); refreshed, with the process gap flagged.
 - F116, F90, F83 annotated RESOLVED; F84 annotated ADVANCED (legacy path remains);
   F82 annotated (PDF retention claim stale; diff-chain gap restated).

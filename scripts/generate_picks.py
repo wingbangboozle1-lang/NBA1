@@ -56,7 +56,7 @@ SGP_RHO_SOURCE_FILE = "docs/data/correlations.json"
 #       same-date margin pairs MEASURED at rho=0.0142 (n_pairs 1546), teammate
 #       points at -0.0975 (n=374), opponent leading-scorer at +0.0321 (n=187),
 #       from official box-score pages.
-# §55 W02 prices with rho_2026_27's measured values (the brief: "price every
+# §61 W02 prices with rho_2026_27's measured values (the brief: "price every
 # parlay with the measured rho"), prints the naive product beside every price,
 # and publishes the methodological conflict as a flag instead of hiding it.
 # Cross-game rho was re-derived first-hand from the committed finals corpus on
@@ -64,7 +64,7 @@ SGP_RHO_SOURCE_FILE = "docs/data/correlations.json"
 # r = 0.0120 — the register's 0.0142 is confirmed in substance.
 MEASURED_RHO_FILE = os.path.join(DATA, "derived", "measured_rho.json")
 RHO_REGISTER_FILE = os.path.join(DATA, "derived", "rho_2026_27.json")
-REGISTER_CONFLICT_FLAG = "F128"
+REGISTER_CONFLICT_FLAG = "F136"
 
 
 def load_rho_register():

@@ -2,7 +2,7 @@
  "_meta": {
   "title": "Originated horizon lines v2 - 2026-11-15 through 2026-11-19",
   "generated_by": "scripts/build_horizon_v2.py",
-  "generated_utc": "2026-11-16T18:41:34Z",
+  "generated_utc": "2026-11-16T19:31:59Z",
   "method": "two independent estimators built on the official team tables, blended underneath; their disagreement is the headline confidence signal; the home-court advantage is pinned to the measured official home win rate",
   "pick_window": "2026-11-16 .. 2026-11-19 (up to 3 days ahead)",
   "line_window": "2026-11-16 .. 2026-11-19",
@@ -16,8 +16,8 @@
    "standings_file": "standings_2026-11-16_1835Z_23ec1e32.json",
    "schedule_file": "official_schedule_2026-11-15_to_19.json",
    "arena_file": "arena_coordinates_2026-11-15.json",
-   "injury_edition_file": "injury_2026-11-15_0900PM_dfef26dc.json",
-   "injury_edition_revision": null,
+   "injury_edition_file": "injury_2026-11-16_0115PM_bfad39b2.json",
+   "injury_edition_revision": "2026-11-16 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
    "minutes_file": "player_minutes_top50_2026-11-15.json"
   },
   "league_baselines": {
@@ -203,7 +203,15 @@
     "team": "BOS",
     "minutes_removed": 0.0,
     "net_points_lost": 0.0,
-    "absent_players": [],
+    "absent_players": [
+     {
+      "player": "Queta, Neemias",
+      "status": "Questionable",
+      "min": null,
+      "pts": null,
+      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
+     }
+    ],
     "note": "no absent player has an official minutes capture -> no redistribution is computed"
    },
    "availability_redistribution_away": {
@@ -266,15 +274,17 @@
     "rotation_players_named": [
      "jayson tatum"
     ],
-    "listed_on_injury_report": 4,
+    "listed_on_injury_report": 1,
     "out": [],
-    "questionable": [],
+    "questionable": [
+     "Queta, Neemias"
+    ],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
-    "availability_pct": null,
-    "status": "NOT YET SUBMITTED - the official injury edition for 2026-11-16 prints NOT YET SUBMITTED for this team, so its availability is unknown and the cell is blank."
+    "availability_pct": 100.0,
+    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "rotation_availability_away": {
     "team": "ORL",
@@ -423,7 +433,7 @@
      },
      {
       "player": "Tyson, Jaylon",
-      "status": "Questionable",
+      "status": "Doubtful",
       "min": null,
       "pts": null,
       "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
@@ -575,7 +585,50 @@
     "team": "WAS",
     "minutes_removed": 0.0,
     "net_points_lost": 0.0,
-    "absent_players": [],
+    "absent_players": [
+     {
+      "player": "Beekman, Reece",
+      "status": "Out",
+      "min": null,
+      "pts": null,
+      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
+     },
+     {
+      "player": "Champagne, Justin",
+      "status": "Out",
+      "min": null,
+      "pts": null,
+      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
+     },
+     {
+      "player": "Johnson, Tre",
+      "status": "Questionable",
+      "min": null,
+      "pts": null,
+      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
+     },
+     {
+      "player": "Okpara, Felix",
+      "status": "Questionable",
+      "min": null,
+      "pts": null,
+      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
+     },
+     {
+      "player": "Vukcevic, Tristan",
+      "status": "Out",
+      "min": null,
+      "pts": null,
+      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
+     },
+     {
+      "player": "Watkins, Jamir",
+      "status": "Out",
+      "min": null,
+      "pts": null,
+      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
+     }
+    ],
     "note": "no absent player has an official minutes capture -> no redistribution is computed"
    },
    "availability_redistribution_away": null,
@@ -593,22 +646,23 @@
      "kyshawn george",
      "trae young"
     ],
-    "listed_on_injury_report": 8,
+    "listed_on_injury_report": 6,
     "out": [
      "Beekman, Reece",
      "Champagne, Justin",
-     "Johnson, Tre",
-     "Okpara, Felix",
      "Vukcevic, Tristan",
      "Watkins, Jamir"
     ],
-    "questionable": [],
+    "questionable": [
+     "Johnson, Tre",
+     "Okpara, Felix"
+    ],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
-    "availability_pct": null,
-    "status": "NOT YET SUBMITTED - the official injury edition for 2026-11-16 prints NOT YET SUBMITTED for this team, so its availability is unknown and the cell is blank."
+    "availability_pct": 100.0,
+    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "rotation_availability_away": {
     "team": "MEM",
@@ -679,10 +733,10 @@
     "margin_blend": -7.4,
     "total_blend": 222.0
    },
-   "line_total": 222.0,
-   "line_spread_home": -6.2,
-   "model_home_win_prob": 0.357,
-   "model_home_ml": 180,
+   "line_total": 221.1,
+   "line_spread_home": -3.9,
+   "model_home_win_prob": 0.4078,
+   "model_home_ml": 145,
    "confidence_signal_pp": 0.0,
    "rest_home": {
     "rest_days": 1,
@@ -757,13 +811,55 @@
    },
    "availability_redistribution_away": {
     "team": "PHI",
-    "minutes_removed": 0.0,
-    "net_points_lost": 0.0,
-    "absent_players": [],
-    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+    "minutes_removed": 32.6,
+    "absent_players": [
+     {
+      "player": "James, LeBron",
+      "status": "Out",
+      "minutes_removed_share": 1.0,
+      "min": 32.6,
+      "pts": 15.1,
+      "min_captured": 32.6,
+      "pts_captured": 15.1,
+      "source_url": null,
+      "note": "minutes removed at the status share (Out -> 100% of his captured minutes)"
+     }
+    ],
+    "production_per_minute_removed": 0.4632,
+    "bench_efficiency_ratio": 0.85,
+    "redistribution": [
+     {
+      "player": "Tyrese Maxey",
+      "minutes_before": 36.1,
+      "minutes_added": 11.27,
+      "share_before": 0.2635,
+      "share_after": 0.2793,
+      "expected_points_added": 4.44
+     },
+     {
+      "player": "Jaylen Brown",
+      "minutes_before": 34.8,
+      "minutes_added": 10.87,
+      "share_before": 0.254,
+      "share_after": 0.2693,
+      "expected_points_added": 4.28
+     },
+     {
+      "player": "VJ Edgecombe",
+      "minutes_before": 33.5,
+      "minutes_added": 10.46,
+      "share_before": 0.2445,
+      "share_after": 0.2592,
+      "expected_points_added": 4.12
+     }
+    ],
+    "team_points_lost": 15.1,
+    "team_points_gained_by_replacement": 12.84,
+    "net_points_lost": 2.26,
+    "note": "minutes that leave the rotation are re-spread across the remaining rotation in proportion to existing minutes and valued at the bench-efficiency ratio"
    },
    "net_points_lost_home": 0.0,
-   "net_points_lost_away": 0.0,
+   "net_points_lost_away": 2.26,
    "rest_adjustment_home": 0.0,
    "rest_adjustment_away": 1.1,
    "travel_adjustment_away": 0.1,
@@ -799,20 +895,24 @@
      "tyrese maxey",
      "vj edgecombe"
     ],
-    "listed_on_injury_report": 4,
+    "listed_on_injury_report": 5,
     "out": [
      "Barlow, Dominick",
      "Bona, Adem",
-     "Embiid, Joel",
-     "Hukporti, Ariel"
+     "Hukporti, Ariel",
+     "James, LeBron"
     ],
-    "questionable": [],
-    "rotation_out": [],
+    "questionable": [
+     "Embiid, Joel"
+    ],
+    "rotation_out": [
+     "James, LeBron"
+    ],
     "rotation_questionable": [],
-    "rotation_out_count": 0,
+    "rotation_out_count": 1,
     "rotation_questionable_count": 0,
-    "availability_pct": null,
-    "status": "NOT YET SUBMITTED - the official injury edition for 2026-11-16 prints NOT YET SUBMITTED for this team, so its availability is unknown and the cell is blank."
+    "availability_pct": 75.0,
+    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
     "luck_z": -0.07,
@@ -875,10 +975,10 @@
     "margin_blend": -9.4,
     "total_blend": 234.6
    },
-   "line_total": 234.6,
-   "line_spread_home": -7.2,
-   "model_home_win_prob": 0.3356,
-   "model_home_ml": 198,
+   "line_total": 234.1,
+   "line_spread_home": -6.1,
+   "model_home_win_prob": 0.3602,
+   "model_home_ml": 178,
    "confidence_signal_pp": 0.2,
    "rest_home": {
     "rest_days": 1,
@@ -921,8 +1021,15 @@
       "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
      },
      {
-      "player": "Larsson, Pelle",
+      "player": "Jovic, Nikola",
       "status": "Questionable",
+      "min": null,
+      "pts": null,
+      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
+     },
+     {
+      "player": "Larsson, Pelle",
+      "status": "Doubtful",
       "min": null,
       "pts": null,
       "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
@@ -939,13 +1046,55 @@
    },
    "availability_redistribution_away": {
     "team": "HOU",
-    "minutes_removed": 0.0,
-    "net_points_lost": 0.0,
-    "absent_players": [],
-    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+    "minutes_removed": 16.9,
+    "absent_players": [
+     {
+      "player": "Thompson, Amen",
+      "status": "Questionable",
+      "minutes_removed_share": 0.5,
+      "min": 16.85,
+      "pts": 7.5,
+      "min_captured": 33.7,
+      "pts_captured": 15.0,
+      "source_url": null,
+      "note": "minutes removed at the status share (Questionable -> 50% of his captured minutes)"
+     }
+    ],
+    "production_per_minute_removed": 0.4451,
+    "bench_efficiency_ratio": 0.85,
+    "redistribution": [
+     {
+      "player": "Alperen Sengun",
+      "minutes_before": 35.2,
+      "minutes_added": 5.71,
+      "share_before": 0.256,
+      "share_after": 0.2651,
+      "expected_points_added": 2.16
+     },
+     {
+      "player": "Jabari Smith Jr.",
+      "minutes_before": 34.4,
+      "minutes_added": 5.58,
+      "share_before": 0.2502,
+      "share_after": 0.259,
+      "expected_points_added": 2.11
+     },
+     {
+      "player": "Kevin Durant",
+      "minutes_before": 34.2,
+      "minutes_added": 5.55,
+      "share_before": 0.2487,
+      "share_after": 0.2575,
+      "expected_points_added": 2.1
+     }
+    ],
+    "team_points_lost": 7.5,
+    "team_points_gained_by_replacement": 6.37,
+    "net_points_lost": 1.13,
+    "note": "minutes that leave the rotation are re-spread across the remaining rotation in proportion to existing minutes and valued at the bench-efficiency ratio"
    },
    "net_points_lost_home": 0.0,
-   "net_points_lost_away": 0.0,
+   "net_points_lost_away": 1.13,
    "rest_adjustment_home": 0.6,
    "rest_adjustment_away": 1.7000000000000002,
    "travel_adjustment_away": 1.11,
@@ -956,11 +1105,12 @@
      "bam adebayo",
      "davion mitchell"
     ],
-    "listed_on_injury_report": 3,
+    "listed_on_injury_report": 4,
     "out": [
      "Goldin, Vladislav"
     ],
     "questionable": [
+     "Jovic, Nikola",
      "Larsson, Pelle"
     ],
     "rotation_out": [],
@@ -981,19 +1131,23 @@
     ],
     "listed_on_injury_report": 6,
     "out": [
+     "Adams, Steven",
      "Capela, Clint",
      "Copeland, Quadir",
      "Phillips, Julian",
-     "Smart, Marcus",
-     "VanVleet, Fred"
+     "Smart, Marcus"
     ],
-    "questionable": [],
+    "questionable": [
+     "Thompson, Amen"
+    ],
     "rotation_out": [],
-    "rotation_questionable": [],
+    "rotation_questionable": [
+     "Thompson, Amen"
+    ],
     "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": null,
-    "status": "NOT YET SUBMITTED - the official injury edition for 2026-11-16 prints NOT YET SUBMITTED for this team, so its availability is unknown and the cell is blank."
+    "rotation_questionable_count": 1,
+    "availability_pct": 100.0,
+    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
     "luck_z": -0.12,
@@ -1341,7 +1495,7 @@
     "absent_players": [
      {
       "player": "Butler III, Jimmy",
-      "status": "Out",
+      "status": null,
       "min": null,
       "pts": null,
       "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
@@ -1398,7 +1552,7 @@
     ],
     "listed_on_injury_report": 8,
     "out": [
-     "Mathurin, Bennedict",
+     "Mathurin, Benedict",
      "McGowens, Bryce",
      "Murphy III, Trey",
      "Murray, Dejounte",
@@ -1426,7 +1580,6 @@
     ],
     "listed_on_injury_report": 6,
     "out": [
-     "Butler III, Jimmy",
      "Curry, Stephen",
      "Moody, Moses",
      "Porzingis, Kristaps",
@@ -1613,18 +1766,15 @@
     "rotation_players_named": [
      "devin booker"
     ],
-    "listed_on_injury_report": 2,
-    "out": [
-     "Timme, Drew",
-     "Williams, Mark"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
-    "availability_pct": null,
-    "status": "NOT YET SUBMITTED - the official injury edition for 2026-11-16 prints NOT YET SUBMITTED for this team, so its availability is unknown and the cell is blank."
+    "availability_pct": 100.0,
+    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
     "luck_z": 0.04,
@@ -1724,47 +1874,7 @@
     "team": "TOR",
     "minutes_removed": 0.0,
     "net_points_lost": 0.0,
-    "absent_players": [
-     {
-      "player": "Barnes, Scottie",
-      "status": "Available",
-      "minutes_removed_share": 0.0,
-      "min": 0.0,
-      "pts": 0.0,
-      "min_captured": 33.3,
-      "pts_captured": 23.5,
-      "source_url": null,
-      "note": "status Available -> no minutes removed"
-     },
-     {
-      "player": "Bittle, Nate",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Leonard, Kawhi",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "McCullar Jr., Kevin",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Smith, Malachi",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     }
-    ],
+    "absent_players": [],
     "note": "no absent player has an official minutes capture -> no redistribution is computed"
    },
    "availability_redistribution_away": {
@@ -1786,20 +1896,15 @@
      "rj barrett",
      "scottie barnes"
     ],
-    "listed_on_injury_report": 5,
-    "out": [
-     "Bittle, Nate",
-     "Leonard, Kawhi",
-     "McCullar Jr., Kevin",
-     "Smith, Malachi"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
-    "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-17; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "availability_pct": 100.0,
+    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "rotation_availability_away": {
     "team": "NYK",
@@ -1815,8 +1920,8 @@
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
-    "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-17; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "availability_pct": 100.0,
+    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
     "luck_z": -0.04,
@@ -2006,8 +2111,8 @@
     "rotation_questionable": [],
     "rotation_out_count": 1,
     "rotation_questionable_count": 0,
-    "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-17; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "availability_pct": 50.0,
+    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "rotation_availability_away": {
     "team": "POR",
@@ -2027,8 +2132,8 @@
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
-    "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-17; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "availability_pct": 100.0,
+    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
     "luck_z": -0.53,
@@ -2150,8 +2255,8 @@
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
-    "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-17; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "availability_pct": 100.0,
+    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
     "luck_z": -0.83,
@@ -2267,20 +2372,15 @@
      "austin reaves",
      "luka doncic"
     ],
-    "listed_on_injury_report": 6,
-    "out": [
-     "Carr, Cameron",
-     "Reaves, Austin"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
-    "rotation_out": [
-     "Reaves, Austin"
-    ],
+    "rotation_out": [],
     "rotation_questionable": [],
-    "rotation_out_count": 1,
+    "rotation_out_count": 0,
     "rotation_questionable_count": 0,
-    "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-17; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "availability_pct": 100.0,
+    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "rotation_availability_away": {
     "team": "CHA",
@@ -2409,21 +2509,15 @@
     "rotation_players_named": [
      "darius garland"
     ],
-    "listed_on_injury_report": 5,
-    "out": [
-     "Beal, Bradley",
-     "Ingram, Brandon",
-     "Martinelli, Nick",
-     "Miller, Jordan",
-     "Niederhauser, Yanic Konan"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
-    "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-17; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "availability_pct": 100.0,
+    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "rotation_availability_away": {
     "team": "UTA",
@@ -2431,24 +2525,15 @@
     "rotation_players_named": [
      "keyonte george"
     ],
-    "listed_on_injury_report": 8,
-    "out": [
-     "Alexander, Trey",
-     "Bufkin, Kobe",
-     "Hayes, Jaxson",
-     "Ingram, Harrison",
-     "Jackson Jr., Jaren",
-     "Markkanen, Lauri",
-     "Nurkic, Jusuf",
-     "Quaintance, Jayden"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
-    "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-17; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "availability_pct": 100.0,
+    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
     "luck_z": 0.32,
@@ -2581,7 +2666,7 @@
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "rotation_availability_away": {
     "team": "MEM",
@@ -2711,23 +2796,15 @@
      "andrew nembhard",
      "tyrese haliburton"
     ],
-    "listed_on_injury_report": 6,
-    "out": [
-     "Furphy, Johnny",
-     "Haliburton, Tyrese",
-     "Nembhard, Andrew",
-     "Sheppard, Ben"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
-    "rotation_out": [
-     "Haliburton, Tyrese",
-     "Nembhard, Andrew"
-    ],
+    "rotation_out": [],
     "rotation_questionable": [],
-    "rotation_out_count": 2,
+    "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "rotation_availability_away": {
     "team": "HOU",
@@ -2740,19 +2817,23 @@
     ],
     "listed_on_injury_report": 6,
     "out": [
+     "Adams, Steven",
      "Capela, Clint",
      "Copeland, Quadir",
      "Phillips, Julian",
-     "Smart, Marcus",
-     "VanVleet, Fred"
+     "Smart, Marcus"
     ],
-    "questionable": [],
+    "questionable": [
+     "Thompson, Amen"
+    ],
     "rotation_out": [],
-    "rotation_questionable": [],
+    "rotation_questionable": [
+     "Thompson, Amen"
+    ],
     "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
+    "rotation_questionable_count": 1,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
     "luck_z": -0.38,
@@ -2868,11 +2949,12 @@
      "bam adebayo",
      "davion mitchell"
     ],
-    "listed_on_injury_report": 3,
+    "listed_on_injury_report": 4,
     "out": [
      "Goldin, Vladislav"
     ],
     "questionable": [
+     "Jovic, Nikola",
      "Larsson, Pelle"
     ],
     "rotation_out": [],
@@ -2880,7 +2962,7 @@
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "rotation_availability_away": {
     "team": "MIL",
@@ -3027,7 +3109,7 @@
     "rotation_out_count": 1,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "rotation_availability_away": {
     "team": "PHI",
@@ -3038,20 +3120,24 @@
      "tyrese maxey",
      "vj edgecombe"
     ],
-    "listed_on_injury_report": 4,
+    "listed_on_injury_report": 5,
     "out": [
      "Barlow, Dominick",
      "Bona, Adem",
-     "Embiid, Joel",
-     "Hukporti, Ariel"
+     "Hukporti, Ariel",
+     "James, LeBron"
     ],
-    "questionable": [],
-    "rotation_out": [],
+    "questionable": [
+     "Embiid, Joel"
+    ],
+    "rotation_out": [
+     "James, LeBron"
+    ],
     "rotation_questionable": [],
-    "rotation_out_count": 0,
+    "rotation_out_count": 1,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
     "luck_z": -0.21,
@@ -3181,7 +3267,7 @@
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "rotation_availability_away": {
     "team": "CHI",
@@ -3311,20 +3397,15 @@
      "rj barrett",
      "scottie barnes"
     ],
-    "listed_on_injury_report": 5,
-    "out": [
-     "Bittle, Nate",
-     "Leonard, Kawhi",
-     "McCullar Jr., Kevin",
-     "Smith, Malachi"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "rotation_availability_away": {
     "team": "WAS",
@@ -3335,22 +3416,23 @@
      "kyshawn george",
      "trae young"
     ],
-    "listed_on_injury_report": 8,
+    "listed_on_injury_report": 6,
     "out": [
      "Beekman, Reece",
      "Champagne, Justin",
-     "Johnson, Tre",
-     "Okpara, Felix",
      "Vukcevic, Tristan",
      "Watkins, Jamir"
     ],
-    "questionable": [],
+    "questionable": [
+     "Johnson, Tre",
+     "Okpara, Felix"
+    ],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
     "luck_z": -0.04,
@@ -3474,7 +3556,7 @@
     ],
     "listed_on_injury_report": 8,
     "out": [
-     "Mathurin, Bennedict",
+     "Mathurin, Benedict",
      "McGowens, Bryce",
      "Murphy III, Trey",
      "Murray, Dejounte",
@@ -3492,7 +3574,7 @@
     "rotation_out_count": 1,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "rotation_availability_away": {
     "team": "DET",
@@ -3508,7 +3590,7 @@
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
     "luck_z": -0.24,
@@ -3629,21 +3711,15 @@
     "rotation_players_named": [
      "shai gilgeous-alexander"
     ],
-    "listed_on_injury_report": 6,
-    "out": [
-     "Holmgren, Chet",
-     "Sorber, Thomas",
-     "Wallace, Cason",
-     "Williams, Jalen",
-     "Williams, Jaylin"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "rotation_availability_away": {
     "team": "ATL",
@@ -3651,23 +3727,15 @@
     "rotation_players_named": [
      "jalen johnson"
     ],
-    "listed_on_injury_report": 7,
-    "out": [
-     "Flemings, Kingston",
-     "Gilbert, Keshon",
-     "Gueye, Mouhamed",
-     "Landale, Jock",
-     "Newell, Asa",
-     "Veesaar, Henri",
-     "Wilson, Jalen"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
     "luck_z": 0.7,
@@ -3803,7 +3871,7 @@
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "rotation_availability_away": {
     "team": "BOS",
@@ -3811,15 +3879,17 @@
     "rotation_players_named": [
      "jayson tatum"
     ],
-    "listed_on_injury_report": 4,
+    "listed_on_injury_report": 1,
     "out": [],
-    "questionable": [],
+    "questionable": [
+     "Queta, Neemias"
+    ],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
     "luck_z": 0.04,
@@ -3940,22 +4010,15 @@
     "rotation_players_named": [
      "cooper flagg"
     ],
-    "listed_on_injury_report": 8,
-    "out": [
-     "Aldama, Santi",
-     "Biberovic, Tarik",
-     "Christie, Max",
-     "Irving, Kyrie",
-     "Lively II, Dereck",
-     "de Larrea, Sergio"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "rotation_availability_away": {
     "team": "GSW",
@@ -3965,7 +4028,6 @@
     ],
     "listed_on_injury_report": 6,
     "out": [
-     "Butler III, Jimmy",
      "Curry, Stephen",
      "Moody, Moses",
      "Porzingis, Kristaps",
@@ -3979,7 +4041,7 @@
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
     "luck_z": -0.03,
@@ -4101,20 +4163,15 @@
      "austin reaves",
      "luka doncic"
     ],
-    "listed_on_injury_report": 6,
-    "out": [
-     "Carr, Cameron",
-     "Reaves, Austin"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
-    "rotation_out": [
-     "Reaves, Austin"
-    ],
+    "rotation_out": [],
     "rotation_questionable": [],
-    "rotation_out_count": 1,
+    "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "rotation_availability_away": {
     "team": "UTA",
@@ -4122,24 +4179,15 @@
     "rotation_players_named": [
      "keyonte george"
     ],
-    "listed_on_injury_report": 8,
-    "out": [
-     "Alexander, Trey",
-     "Bufkin, Kobe",
-     "Hayes, Jaxson",
-     "Ingram, Harrison",
-     "Jackson Jr., Jaren",
-     "Markkanen, Lauri",
-     "Nurkic, Jusuf",
-     "Quaintance, Jayden"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
     "luck_z": -0.48,
@@ -4262,25 +4310,15 @@
      "domantas sabonis",
      "zach lavine"
     ],
-    "listed_on_injury_report": 8,
-    "out": [
-     "Achiuwa, Precious",
-     "Hunter, De'Andre",
-     "LaVine, Zach",
-     "Mogbo, Jonathan",
-     "Pedulla, Sean",
-     "Raynaud, Maxime",
-     "Simmons, Ben"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
-    "rotation_out": [
-     "LaVine, Zach"
-    ],
+    "rotation_out": [],
     "rotation_questionable": [],
-    "rotation_out_count": 1,
+    "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "rotation_availability_away": {
     "team": "PHX",
@@ -4288,18 +4326,15 @@
     "rotation_players_named": [
      "devin booker"
     ],
-    "listed_on_injury_report": 2,
-    "out": [
-     "Timme, Drew",
-     "Williams, Mark"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
     "luck_z": 0.93,
@@ -4424,7 +4459,6 @@
     ],
     "listed_on_injury_report": 6,
     "out": [
-     "Butler III, Jimmy",
      "Curry, Stephen",
      "Moody, Moses",
      "Porzingis, Kristaps",
@@ -4438,7 +4472,7 @@
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
     "luck_z": -1.13,
@@ -4574,7 +4608,7 @@
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
     "luck_z": 0.89,
@@ -4710,7 +4744,7 @@
     "rotation_out_count": 1,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "rotation_availability_away": {
     "team": "NYK",
@@ -4727,7 +4761,7 @@
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
     "luck_z": -0.53,
@@ -4850,21 +4884,15 @@
     "rotation_players_named": [
      "darius garland"
     ],
-    "listed_on_injury_report": 5,
-    "out": [
-     "Beal, Bradley",
-     "Ingram, Brandon",
-     "Martinelli, Nick",
-     "Miller, Jordan",
-     "Niederhauser, Yanic Konan"
-    ],
+    "listed_on_injury_report": 0,
+    "out": [],
     "questionable": [],
     "rotation_out": [],
     "rotation_questionable": [],
     "rotation_out_count": 0,
     "rotation_questionable_count": 0,
     "availability_pct": null,
-    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
     "luck_z": -0.83,

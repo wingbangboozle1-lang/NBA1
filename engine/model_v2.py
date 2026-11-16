@@ -382,7 +382,7 @@ def _played(g):
 
     Three ways an unplayed row gets into a results file, all measured in
     data/official/results_feed_2026_27.json on 2026-11-16 (session
-    arena/23ec1e32-nba1, COORDINATION §55 W01):
+    arena/23ec1e32-nba1, COORDINATION §61 W01):
 
       * `game_status: 1` (scheduled) with tied placeholder scores 0-0 — 25 such
         rows (11/16-11/18) were being counted as road wins and as 25 zero

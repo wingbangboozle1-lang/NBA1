@@ -35,16 +35,16 @@ wrote data/derived/minutes_shares.json
 gates: G1_validation=CLOSED, G2_sample_floor=CLOSED, G3_preregistration=PASS, G4_ledger_integrity=PASS
 projection rows: 29
 separation checks: OK
-content: flagged.json     125 items  (data/content -> docs/data + site/data)
+content: flagged.json     141 items  (data/content -> docs/data + site/data)
 content: questions.json    45 items  (data/content -> docs/data + site/data)
 content: suggestions.json  37 items  (data/content -> docs/data + site/data)
 content: executive.json     1 items  (data/content -> docs/data + site/data)
 Wrote 28 pages, assets and data to /home/user/NBA1/site
 pages checked                         : 41
-table rows checked                    : 2805
-rows with an allowed official source link       : 2701 / 2805
-no-source marks with explanatory text           : 104 / 2805
-no-source marks with approved URL in title only : 0 / 2805
+table rows checked                    : 3114
+rows with an allowed official source link       : 3002 / 3114
+no-source marks with explanatory text           : 112 / 3114
+no-source marks with approved URL in title only : 0 / 3114
 unmarked rows without an official link           : 0
 no-source markers without a reason/pointer       : 0
 
