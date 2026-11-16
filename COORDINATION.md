@@ -4478,3 +4478,13 @@ this branch's head: `check_site` · `verify_integration` · `check_links` · `ch
 runs `python3 scripts/verify_integration.py` but **not** `scripts/verify_all.py`. R-42-B failed only
 in `verify_all.py`, so it would have shipped through CI. Adding `verify_all.py` to the job would have
 caught it; that edit is in `pages.yml`, which this session does not own, so it is logged as a request.
+
+**Deploy status, second look (2026-11-16 ~01:20 UTC).** Not a code problem and not a broken build —
+it is a Pages build backlog. `gh api repos/.../pages` reports the last build as `errored` while
+`pages/builds/latest` shows a build `building` since 01:06:11Z against commit `927ee21`. Deployment
+`7812080989` (sha `2715601`) reached `state: success` at 00:58:12Z; deployment `7812936744` (sha
+`0dfdf00`) went waiting → queued → **error** at 01:06:14Z with an empty description. Six sessions
+pushed to `main` inside the hour, so each new deployment supersedes the one before it. Every gate on
+this branch passes, and `site/pages/roll.html` is confirmed present in `main` (1,408 lines, 61.1 KB,
+committed by the #112/#113 merge `1c34bea`). Conclusion stands: while several sessions are pushing,
+verify against the `main` tree and the Actions run log, not a live fetch-back. See flag F97.
