@@ -60,6 +60,13 @@ GAME_IDS = {
     "2026-11-15_SASUTA": ("0022600239", "SAS", "UTA"),
     "2026-11-15_DALBOS": ("0022600240", "DAL", "BOS"),
     "2026-11-15_NYKTOR": ("0022600241", "NYK", "TOR"),
+    # added 2026-11-16 by session arena/acc2fd9e-nba1 (COORDINATION §50 C06),
+    # completing the 11/15 slate: HOU@WAS, ATL@MIL and OKC@SAC were the three
+    # games whose gamebooks had not yet been captured. Ids and teams come from
+    # data/official/results_2026-11-15.json, the same source as the six above.
+    "2026-11-15_HOUWAS": ("0022600242", "HOU", "WAS"),
+    "2026-11-15_ATLMIL": ("0022600243", "ATL", "MIL"),
+    "2026-11-15_OKCSAC": ("0022600244", "OKC", "SAC"),
 }
 
 MIN_RE = re.compile(r"^(\d{1,2}):(\d{2})$")
@@ -320,9 +327,10 @@ def main():
             "names_on_report_not_found_in_any_gamebook": sorted(
                 n for n in report_names
                 if n not in {r["player"].lower() for r in all_rows}),
-            "note": ("Names on the report that do not appear in these six gamebooks are players whose "
+            "note": ("Names on the report that do not appear in these %d gamebooks are players whose "
                      "game is on 11/16 or later, or who are not on a 11/15 roster page. They are listed, "
-                     "not silently dropped; capturing their logs needs their games' gamebooks."),
+                     "not silently dropped; capturing their logs needs their games' gamebooks."
+                     % len(games_out)),
         },
         "games": games_out,
         "rows": all_rows,
