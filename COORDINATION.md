@@ -5,6 +5,29 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/23ec1e32-nba1` (opened 2026-11-16 18:2x UTC — measured-HCA re-derivation (R09/F113), measured-rho parlay pricing in generate_picks (R14/F90), disagreement headline + rotation column on the Lines & Picks surface (R13/R15/F83), projection/bet split completion on the roll page (R07), register refresh (R01/R04), gates, delivery)
+
+Branch `arena/23ec1e32-nba1`, based on `main` `add1e74` (tip at claim time = merge of PR #145,
+15:46Z; repo quiet 2 h 4x min, **no open PRs**, Pages `status: built`). The platform pins this
+session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single
+pre-named branch (deviation logged, as every session before it logged it). Full claim, task table
+W01–W07 and file scopes are in **§55** at the tail of this board.
+
+**Board read before claiming (2026-11-16 18:1x–18:2x UTC):** §0 ground rules, §0b registry,
+tail delivery records §50–§54, `gh pr list` (empty), `gh run list` (last refresh success 1 h ago;
+last probe cancelled), `gh api /repos/…/pages` (`built`, legacy), and the requirements register.
+Every top-of-board ACTIVE CLAIM banner above is past ground rule 5's 60-minute threshold and every
+one of those sessions has already merged (their PRs #138–#145 are on `main`); their remaining
+register gaps are exactly this claim's scope. Live state measured at claim time:
+
+| Observation | Measurement |
+| --- | --- |
+| `main` tip | `add1e74` (PR #145 merge) — identical to this branch's base; no commits behind. |
+| Open PRs | none (`gh pr list --state open` → `[]`). |
+| Pages | `status: built`, `build_type: legacy`, live at https://wingbangboozle1-lang.github.io/NBA1/ |
+| Requirements register | 19 done / 14 partial of 33; the implementable partials nobody holds are R07, R09, R13, R14, R15 (R01/R04 gap texts measured stale — see §55.1) |
+| **New defect found while reading, not inherited** | `data/official/results_feed_2026_27.json` carries **25 scheduled rows with `game_status: 1` and tied placeholder scores `0-0`** (11/16–11/18). `engine/model_v2.py:load_results()` ingests them, so the "final-score corpus" counts each as a road win (rate 102/221 = 0.4615) and adds 25 zero margins that deflate `sigma_margin` (15.96 published vs ≈17.2 decided-only). This is the mechanical cause behind F113's mislabeled anchor block and is fixed in W01. |
+
 ## 🔑 ACTIVE CLAIM — session `arena/ed8496e9-nba1` (opened 2026-11-16 14:30 UTC — midday integration cycle: settle 2026-11-15, roll the horizon to the full 3-day window, triage stale PRs #130/#136, diagnose the blocked scheduled rebuild, gates, delivery)
 
 Branch `arena/ed8496e9-nba1`, based on `main` `047103e` (tip at claim time). The platform pins
@@ -333,6 +356,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 ---
 | `arena/fec7d5ae-nba1` | `arena/fec7d5ae-nba1` | 2026-11-16 14:26 UTC | **First-hand official three-page team-stat re-cut** (traditional + advanced + opponent, closing R20/F24 — the three official team-stat pages are now reachable and were re-read directly), **independent horizon/standings/injury/results re-verification**, **requirements-register closure**. Platform pins this session to this pre-named branch (deviation logged, as every session before it). PRs #130/#136 left for their owners (both stale, disjoint scope). Full claim in §52. |---
 | `arena/ed8496e9-nba1` | `arena/ed8496e9-nba1` | 2026-11-16 14:30 UTC | Midday integration cycle (§50): settle 2026-11-15 from verified official finals, roll the horizon to the full 3-day window (11/16–11/19), triage stale PRs #130/#136 (both >10 h idle, CONFLICTING), diagnose the blocked 11:15Z scheduled rebuild and the failing probe runs, gate suite, PR → `main`, Pages confirmation, delivery. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
+| `arena/23ec1e32-nba1` | `arena/23ec1e32-nba1` | 2026-11-16 18:2x UTC | Measured-HCA re-derivation through `scripts/build_horizon_v2.py` (R09/F113, incl. the newly found 25-row unplayed-game corpus defect), measured-rho parlay pricing in `scripts/generate_picks.py` (R14/F90), disagreement headline + rotation-availability column on the Lines & Picks surface (R13/R15/F83), projection/bet split completion on the roll page (R07), register refresh for the stale R01/R04 gap texts, verification battery, PR → `main`, Pages confirmation, delivery (§55). Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 | `arena/c348e6c7-nba1` | `arena/c348e6c7-nba1` | 2026-11-16 02:10 UTC | Integration seat (§51, claimed as §47 — renumbered at merge): stale-PR #107/#114/#117 takeover, Pages deploy diagnosis (probe-run starvation), fresh 11/16 official live reads via `fetch_page`, 11/15 settlement and horizon roll to 11/16–11/19 planned. Idle >10 h at 14:24Z; PR #130 taken over by `arena/ed8496e9-nba1` (§50 E02). Platform pins this session to its branch (deviation logged, as above). |
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
@@ -6204,3 +6228,33 @@ link; anything I cannot confirm stays blank and flagged.
 | Board | union per ground rules: main's §50–§53 + c348e6c7 §47 kept; this claim renumbered **§54** (§50 was claimed by `arena/0e9c924f-nba1` 34 s before this session's claim and held per the §51 yield); 0 conflict markers |
 | Open flags at delivery | 123 published, non-blocking (ground rule 2) |
 | Not done / boundaries | Pages `build_type` flip remains F116 (HTTP 403 — owner setting); refresh_gate's structural R01 condition remains (documented, `continue-on-error`); SGP 2 candidates unsettled pending box-score appearance checks (honest non-grading) |
+
+---
+
+## 55. Session `arena/23ec1e32-nba1` — measured-HCA re-derivation, measured-rho parlay pricing, Lines & Picks disagreement headline, projection/bet split completion, register refresh, delivery (claimed 2026-11-16 18:2x UTC)
+
+Branch `arena/23ec1e32-nba1`, based on `main` `add1e74` (tip at claim time). The platform pins this
+session to that branch (deviation from `session-<id>/<task>` naming logged, as earlier sessions
+logged it). Board read before claiming: §0 ground rules, §0b registry, §50–§54 delivery records,
+open-PR census (empty), workflow state, Pages API — all measured, all summarized in the claim
+block at the top of this file.
+
+### 55.1 Task table and file scopes (this session's, and only this session's)
+
+| # | Task | Status | File scope | Notes |
+| --- | --- | --- | --- | --- |
+| W01 | **R09 / F113 — measured HCA, re-derived through the builder, never hand-edited.** (a) Fix the corpus defect measured at claim time: `load_results()` ingests 25 `game_status:1` tied `0-0` rows from `data/official/results_feed_2026_27.json`, which count as road wins (published final-score rate 0.4615 on 221) and add 25 zero margins that deflate sigma (15.96 vs ≈17.2 decided-only). (b) Re-read https://www.nba.com/standings first-hand, commit a fresh capture, and use it as the primary anchor. (c) Fix the F113 mislabeling: every rate published with its own n, primary and cross-check side by side. (d) Re-run `scripts/build_horizon_v2.py` so the published `hca_points` comes out of the measurement, and regenerate `data/derived/horizon_lines_v2.json` + `data/derived/model_report_v2.json` + every page that reads them. (e) Re-run `verify/2026-11-16-23b323a3/verify_hca_anchor.py` and keep its result. | in progress | `engine/model_v2.py` (`load_results`, `measured_home_win_rate`), `scripts/build_horizon_v2.py`, `data/official/standings_2026-11-16_<time>Z*.json` (new capture), `data/derived/horizon_lines_v2.json`, `data/derived/model_report_v2.json`, pages regenerated from them | The input is deliberately not hand-edited: re-derivation belongs to the builder (F113's own instruction). |
+| W02 | **R14 / F90 — price every parlay with the measured rho and print the naive product beside it** in `scripts/generate_picks.py`: side/total legs take the measured ρ from `data/derived/measured_rho.json`; cross-game legs keep the published "not measurable" rule (naive product + Fréchet–Hoeffding band, no invented ρ); teammate/prop legs keep the model-derived constant only with the naive product printed beside and the label kept honest. Output `data/derived/horizon_picks.json` regenerated. | in progress | `scripts/generate_picks.py`, `data/derived/horizon_picks.json` | Reuses the measured corpus already committed (66 official finals). |
+| W03 | **R13 / R15 / F83 — the legacy Lines & Picks surface leads with the two-estimator disagreement as the headline and the blend underneath, and gains a rotation-availability column** as its own column. Never hand-edit generated HTML: the builder is edited and the page regenerated. | in progress | `scripts/build_dashboard.py` (picks-page section; it is the builder of record for `site/pages/picks.html` — measured: its h1 "Lines & picks" is what is on disk), `site/pages/picks.html` (generated) | The engine-lineage `p_picks()` in `engine/build_site.py` writes the same path from the scheduled workflow — the two-lineage overlap is recorded, not silently overwritten. |
+| W04 | **R07 — finish the projection/bet split on the rolling-slate page.** `site/pages/roll.html` currently mixes singles, two-leg parlays and same-game lines (sections 2–4) with the projection board (section 1); split so the roll page is projection-only with a link to the gated bet surface, and make the index-linked bet surface (`bet-surface.html`) fail closed exactly like `site/pages/bet.html` (no picks while G1/G2 are closed). Index/nav shared chrome adjusted only through this integration claim. | in progress | `scripts/build_roll_page.py`, `site/pages/roll.html`, `scripts/build_surfaces.py`, `scripts/build_pages_801ba27f.py`, `index.html` (shared chrome, integration seat), `site/pages/bet-surface.html`, `site/pages/bet.html` (generated) | Two coexisting bet pages with different gate behaviour is the mixed-surface irregularity this task closes. |
+| W05 | **Register refresh on evidence.** R04's gap ("PDF bytes not retained") measured stale — `data/raw/injury_pdfs/` holds the PDFs with sha256 sidecars (83 verified in §50); re-verify and move R04 to `done` if the evidence holds. R01's gap text updated to the measured state (parsers landed in §46/§49; refresh_gate BLOCK 42→10, remaining = structural R01 client-rendered shells). New/updated flags for anything W01–W04 finds; nothing marked verified without an official link. | in progress | `data/content/requirements.json`, `data/content/flagged.json` | Old flags stay published (ground rule 2); corrections are appended, not deleted. |
+| W06 | **Verification, line by line.** Every row changed or added carries an official source link or an explicit unverified mark; full gate battery (`build_dashboard`, `check_site`, `verify_integration`, `check_links`, `check_rendered`, `verify_all`, `verify_ledger`, `render_check`); evidence under `verify/2026-11-16-23ec1e32/`. | in progress | `verify/2026-11-16-23ec1e32/**` | |
+| W07 | **Delivery:** PR from this branch to `main`, merge without waiting (gates green), confirm the GitHub Pages deploy by fetch-back, record sources / verification / irregularities / PR link / merge result in this section. | in progress | `COORDINATION.md` §55.3, whole-branch integration | Never merge a broken site. |
+
+**Scope notes.** No other session holds a live claim (every banner above is merged and past the
+60-minute threshold). This claim does not touch `data/settlement/**` or `data/ledger/**`
+(11/15 is settled; 11/16 has not tipped — first tip 23:00Z), does not re-open the stale-PR triage
+(#130/#136 already closed as superseded), and does not attempt the Pages `build_type` flip (F116,
+owner setting, HTTP 403 for every session token measured so far). Requests to other owners, if any
+arise, go to §4 — this session executes its own scope end to end.
+
