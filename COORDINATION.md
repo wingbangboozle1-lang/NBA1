@@ -4282,3 +4282,70 @@ capture artifacts — read-only inputs here).
 - **Site:** `model-v2.html` regenerated with the refreshed measurements; the shared dashboard
   builder (both sessions' additions kept) regenerated `index.html` and 25 `site/pages/*`; zero
   conflict markers remain; `check_site.py` and `check_links.py` re-run green before the merge.
+
+### §41 delivery record — session `arena/161f1638-nba1` (final integration seat, updated 2026-11-16 00:5x UTC)
+
+**Merged pull requests**
+
+| PR | Title | Merged | Merge commit |
+| --- | --- | --- | --- |
+| [#113](https://github.com/wingbangboozle1-lang/NBA1/pull/113) | Rolling 11/16–11/18 slate: two-estimator roll page, requirements audit, pre-tip freeze, measured rho | 2026-11-16T00:25:29Z | `fe53ad29c8611c62eb6543b382cee702c41de809` |
+| [#118](https://github.com/wingbangboozle1-lang/NBA1/pull/118) | Repair: 23 pages linked to a root-level page that does not exist under site/pages | 2026-11-16T00:51:56Z | (PR #118, merge commit on `main`) |
+
+**What the branch delivered**
+
+1. **The 3-day window is derived, not typed.** `scripts/originate_horizon.py` resolves the newest
+   official schedule capture and the newest stored injury edition at run time; `scripts/generate_picks.py`
+   takes its title and as-of from the lines file; the Injuries banner pins itself to the newest stored
+   edition. Window this pass: **2026-11-16 .. 2026-11-18, 25 games (8 / 5 / 12)**.
+2. **Model inputs re-cut.** New `scripts/recut_model_inputs.py` rebuilds the two model input files from
+   the three official team-stat pages. Diff vs the previous cut was **PHI and IND only** — the two teams
+   in the one Final game since — which is exactly the expected change.
+3. **Measured correlations.** New `scripts/measure_rho.py`: ρ(home margin, game total) = **−0.0635** on
+   66 official finals (p = 0.61; −0.0621 on the 63 regulation games) and a home-win rate of **0.5455**
+   (36/66). A ρ between two *different* games is published as unmeasurable with the exact
+   Fréchet–Hoeffding band, never a plausible number.
+4. **`site/pages/roll.html`** (new): the rolling slate, with the two estimators' **disagreement as the
+   headline** — mean |Δ| 4.69 pts, mean signed −3.89, of which **90% is estimator B's fitted +3.508 HCA
+   (t = 1.539, in-sample)** that estimator A does not apply — plus rest / B2B / 3-in-4, rotation
+   availability, and parlays priced with the measured ρ beside the naive product.
+5. **Pre-registration is rolling and idempotent.** `scripts/freeze_prereg.py` resolves window, first tip
+   (2026-11-17T00:00Z, converted from the official 7:00 PM ET tip) and input digests at run time and
+   refuses to publish after first tip. The 11/16–11/18 set was frozen at 2026-11-16T00:14Z, **23.8 hours
+   before the first tip**, as ledger entry 5. Each vintage is now snapshotted to
+   `data/archive/prereg_<start>/`, and `scripts/verify_ledger.py` accepts an archived byte-identical copy
+   (naming it) so a later re-freeze cannot invalidate an earlier entry.
+6. **Flags F94–F96** added, and F71 / F72 marked resolved. This session's F81–F89 were renumbered to
+   avoid colliding with `arena/8f64e94c-nba1`'s F81–F93; duplicates were folded into their equivalents
+   (F84 HCA, F85 travel/3-in-4, F83 rotation column) with the new measurements appended.
+7. **Requirements register updated in place** (`data/content/requirements.json`, owned by
+   `arena/513516f6-nba1`): R05, R08, R20, R25 → done; R09, R11, R13, R14, R15 → partial with the new
+   measurements; R02, R04, R19, R30 updated. **13 done / 18 partial / 1 missing / 1 blocked.**
+
+**Merge-conflict resolutions (three-way, nothing discarded)**
+
+- `site/pages/requirements.html`: the other session's data-driven register won; this session's 32-row
+  audit was folded into `data/content/requirements.json` as evidence updates, and `build_roll_page.py`
+  no longer emits that filename.
+- `data/official/results_2026-11-15.json`: theirs kept (same slate, richer — 2 finals with quarter-sum
+  checks, officials, gamebook PDF links). This session's 1-final capture added nothing.
+- `data/content/flagged.json`: their 89-item base kept; this session's items renumbered to F94–F96.
+- `COORDINATION.md`: both sessions' §41 records kept, theirs appended after a separator.
+- `data/official/injury_2026-11-15_0615PM.json` stays canonical; the parallel transcription is namespaced
+  as `..._arena49f70042.json` (148 common rows, 0 status disagreements).
+- PR #116 had left 23 pages linking to `site/pages/model-v2.html`, which does not exist (the page is
+  generated at the repository root). Fixed in PR #118 by prefixing the root-level links.
+
+**Verification**
+
+- `scripts/verify_all.py` → **VERIFY OK**: 25 pages + `model-v2.html`, **1,757 table rows, 0 unmarked
+  rows without an official link**, 63 explained no-source marks, all internal links resolve.
+- `scripts/verify_ledger.py` → chain OK (entry 4 verifies against its archived 11/15 vintage).
+
+**Deploy — irregularity, not yet confirmed**
+
+Every `pages.yml` push run to `main` between 23:55Z and 01:00Z was cancelled or left pending while five
+sessions pushed to `main` inside the same hour; the live site still served the pre-11/16 build
+(34-game 15–18 Nov tiles, 4 ledger entries) at the last fetch-back. `site/pages/roll.html` **is present
+in `main`** (1,408 lines, 61.1 KB). This is a deploy-backlog artefact of parallel sessions, not a broken
+build: nothing in this branch fails its gates. Recorded as flag F97.
