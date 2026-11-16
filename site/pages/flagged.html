@@ -34,6 +34,7 @@
 <a href="roll.html">Rolling Slate</a>
 <a href="projection.html">Projection Surface</a>
 <a href="bet-surface.html">Bet Surface (gated)</a>
+<a href="bet.html">Bet surface (gate state)</a>
 <a href="picks.html">Lines &amp; Picks</a>
 <a href="props.html">Player Props</a>
 <a href="prop-variance.html">Prop Variance &amp; Rotation</a>
@@ -810,7 +811,7 @@
 <td>F82</td>
 <td>medium</td>
 <td><b>Injury PDFs are not retained in the repository</b></td>
-<td>The fetcher downloads injury PDFs, but no .pdf file is tracked in git. The repository holds transcriptions with revision and retrieval times, plus one consecutive diff. Every PDF must be stored with its timestamp to meet the brief.</td>
+<td>The fetcher downloads injury PDFs, but no .pdf file is tracked in git. The repository holds transcriptions with revision and retrieval times, plus consecutive diffs. Updated 2026-11-16 by session arena/bfad39b2-nba1 (B02): the newest edition (11/16 01:15 PM ET) was archived as a verbatim row transcription (data/injury_reports/2026-11-16_0115PM/, 87 rows) with a horizon-consumable copy in data/official/, and diffed against the 11/15 06:15 PM edition (10 status/reason changes, 24 new rows). The PDF bytes themselves still cannot be retained: the sandbox egress allowlist has no byte-download route to ak-static.cms.nba.com, so the archive is the transcription plus a SHA-256 of the transcribed text. Every edition carries its official URL and revision stamp. Item stays open: the brief asks for the PDF stored with its timestamp, and only the transcription is stored.</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
@@ -819,7 +820,7 @@
 <td>F83</td>
 <td>medium</td>
 <td><b>Picks page has no rotation-availability column</b></td>
-<td>The picks table shows Home injury status and Away injury status. The brief asks for rotation availability as its own column.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): a rotation-availability column now exists on site/pages/roll.html, built from the official injury report (Out / Questionable counts and NOT YET SUBMITTED blocks). The legacy Lines &amp; Picks page still has no such column, so the item stays open.</td>
+<td>The picks table shows Home injury status and Away injury status. The brief asks for rotation availability as its own column. ADVANCED 2026-11-16 (session arena/bfad39b2-nba1, B02): a rotation-availability column now exists on site/pages/roll.html, built from the official injury report (Out / Questionable counts and NOT YET SUBMITTED blocks, sourced from the 11/16 01:15 PM ET edition). The legacy Lines &amp; Picks page (site/pages/picks.html) still has no such column, so the item stays open; that page is outside this session's file scope.</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html" target="_blank" rel="noopener">link</a></td>
@@ -828,7 +829,7 @@
 <td>F84</td>
 <td>high</td>
 <td><b>Home-court advantage is a fixed constant, not pinned to the measured home-win rate</b></td>
-<td>engine/model_core.py uses flat_hca = 2.0. scripts/originate_horizon.py records that HCA could not be sourced from an official NBA page. The measured 57.6% home-win rate from another build is a note only and is not applied.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): the home-win rate is now measured from official finals - 0.5455 (36 of 66) - and published on site/pages/roll.html. It is still not applied to any line. The gap is quantified: estimator B fits HCA at +3.508 points (t = 1.539, estimated in-sample) while estimator A applies none, and that single term is 90% of the models' mean 3.89-point disagreement.</td>
+<td>engine/model_core.py uses flat_hca = 2.0. scripts/originate_horizon.py records that HCA could not be sourced from an official NBA page. ADVANCED 2026-11-16 (session arena/bfad39b2-nba1, B03): the home-win rate was re-measured first-hand from the official standings HOME/ROAD columns - HOME 102W/95L/197G = 0.5178 (road 0.4796) - and the horizon's home_court_anchor now carries measured_home_win_rate 0.5178 (was the stale 0.5285) and hca_points 0.71 (was 1.14), via HCA_points = sigma_margin * Phi^-1(home_win_rate), sigma_margin 15.96. The pin is current in the horizon build (scripts/build_horizon_v2.py). The legacy engine path still carries flat_hca=2.0 (engine/** read-only for this session; cross-scope request logged in COORDINATION §4), and originate_horizon.py still records home_court_applied: False. Item stays open until the engine path is wired to the measured pin.</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py" target="_blank" rel="noopener">link</a></td>
@@ -882,7 +883,7 @@
 <td>F90</td>
 <td>medium</td>
 <td><b>Parlay rho is a fixed model constant, not a measured value</b></td>
-<td>scripts/generate_picks.py uses SGP_RHO_TEAMMATES = -0.2 and SGP_RHO_OPPONENTS = 0.05, labelled as model-derived. The naive product printed beside each parlay price was not verified on the parlay table.</td>
+<td>scripts/generate_picks.py uses SGP_RHO_TEAMMATES = -0.2 and SGP_RHO_OPPONENTS = 0.05, labelled as model-derived. The naive product printed beside each parlay price was not verified on the parlay table. ADVANCED 2026-11-16 (session arena/bfad39b2-nba1, B02): a rho is now MEASURED from official finals - rho(home margin, game total) = -0.0635 on 66 finals (p = 0.6109) - and site/pages/roll.html section 4 prices same-game side-and-total at that measured rho with the naive product printed beside it; section 3 prints the naive product for cross-game parlays with the Fréchet-Hoeffding band. generate_picks.py still uses the fixed constants (outside this session's file scope). Item stays open until generate_picks.py is rewired to the measured rho.</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/generate_picks.py" target="_blank" rel="noopener">link</a></td>
@@ -891,7 +892,7 @@
 <td>F91</td>
 <td>high</td>
 <td><b>Most nba.com URLs were blocked from the probe runner; row values were not re-read here</b></td>
-<td>data/raw/probe_official.json: 1,911 URLs probed, 114 OK, 1,679 blocked, 116 unreachable. This session's sandbox allows only GitHub and package hosts, so no nba.com value was re-fetched and compared. Row-level values remain as captured in the repo.</td>
+<td>data/raw/probe_official.json: 1,911 URLs probed, 114 OK, 1,679 blocked, 116 unreachable. Updated 2026-11-16 by session arena/bfad39b2-nba1 (B02): this session reached the official NBA.com pages through the web-fetch channel (raw curl returns HTTP 000; only fetch_page reaches nba.com) and re-verified the rolling-slate values first-hand, row by row, with a source link on every checked row - schedule 21/21 PASS, standings 30 rows, team-stat pages 60/60 rows 0 mismatches, injury edition 87 rows. The general probe-runner block remains for URLs outside the fetched set; the fetch channel is the working route for official re-reads. Item stays open: the probe runner itself still cannot reach most nba.com URLs.</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/probe_official.json" target="_blank" rel="noopener">link</a></td>

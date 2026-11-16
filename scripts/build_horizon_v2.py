@@ -56,15 +56,16 @@ GATES = {
 
 def load_injury_edition():
     """The newest official injury-report edition in the repo."""
-    # prefer this session's namespaced transcription (which carries the raw
-    # team cell + game_time fields the PDF tip column uses); fall back to the
-    # canonical path, which now carries the parallel arena/161f1638-nba1
-    # transcription of the same edition (kept at merge, zero status
-    # disagreements between the two)
-    # Newest official edition at the time of the re-cut.  The 06:15 PM edition
-    # the previous cut used is superseded: the 09:00 PM edition exists, is the
-    # newest on the official index, and carries the 11/16 game date.
-    pref = os.path.join(OFF, "injury_2026-11-15_0900PM_dfef26dc.json")
+    # prefer this session's namespaced transcription of the newest edition
+    # (which carries the raw team cell + game_time fields the PDF tip column
+    # uses); fall back to the canonical path, which carries the parallel
+    # arena/161f1638-nba1 transcription of the same edition (kept at merge,
+    # zero status disagreements between the two)
+    # Newest official edition at the time of the re-cut.  The 11/15 09:00 PM
+    # edition the previous cut used is superseded: the 11/16 01:15 PM edition
+    # exists, is the newest on the official index, and carries the 11/16 and
+    # 11/17 game dates.
+    pref = os.path.join(OFF, "injury_2026-11-16_0115PM_bfad39b2.json")
     if os.path.exists(pref):
         path = pref
     else:
@@ -452,7 +453,8 @@ def main():
                 "schedule_file": "official_schedule_2026-11-15_to_19.json",
                 "arena_file": "arena_coordinates_2026-11-15.json",
                 "injury_edition_file": inj_file,
-                "injury_edition_revision": inj_doc.get("revision"),
+                "injury_edition_revision": (inj_doc.get("revision")
+                                             or inj_doc.get("revision_time_et")),
                 "minutes_file": minutes_meta.get("file"),
             },
             "league_baselines": {k: (round(v, 4) if isinstance(v, float) else v)
