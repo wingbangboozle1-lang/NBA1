@@ -5,6 +5,26 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/7ec9e7a3-nba1` (opened 2026-11-16 18:1x UTC — late-afternoon cycle: first-hand official re-verification of the 11/16–11/19 horizon, standings/injury/results currency, settlement-and-ledger integrity, flag-register closure of stale-resolved items, gates, delivery)
+
+Branch `arena/7ec9e7a3-nba1`, based on `main` `add1e74` (tip at claim time = merge of PR #145,
+15:40Z). The platform pins this session to that branch; the `session-<id>/<task>` naming in the
+brief is satisfied by this single pre-named branch (deviation logged, as every session before it
+logged it). Full claim, task table C01–C06 and file scopes are in **§55** at the tail of this board.
+
+**Board read before claiming (2026-11-16 18:1x UTC):** §0 ground rules, §0b registry, tail
+delivery records §50–§54, open-PR census (`gh pr list`: none open), workflow runs (`gh run list`),
+Pages API (`status=built`, `build_type=legacy`). Measured live state: `main` = `add1e74` (§54
+delivery); no open PRs; the 17:1xZ scheduled `Refresh official data` run completed success; the
+16:20Z probe run was cancelled (superseded); `data/settlement/` holds 11/14 + 11/15 — 11/16 is not
+settleable at claim time (its games tip tonight ET; no official final exists yet); the promoted
+schedule window is 11/16→11/18 with the §54 extension to 11/19 verified on official game pages;
+freshest archived injury editions: 11/16 09:45–10:30 AM (content-hashed PDFs); the 11/16 1:30 PM ET
+edition is not yet published at claim time (13:1x ET). Nothing `in progress` on the board
+overlaps this claim.
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/ed8496e9-nba1` (opened 2026-11-16 14:30 UTC — midday integration cycle: settle 2026-11-15, roll the horizon to the full 3-day window, triage stale PRs #130/#136, diagnose the blocked scheduled rebuild, gates, delivery)
 
 Branch `arena/ed8496e9-nba1`, based on `main` `047103e` (tip at claim time). The platform pins
@@ -332,6 +352,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/0e9c924f-nba1` | `arena/0e9c924f-nba1` | 2026-11-16 14:2x UTC | **Integration seat for the 2026-11-16 quiet window**: stale-PR #130/#136 takeover triage (>10 h idle, both CONFLICTING), fresh official verification, 2026-11-15 settlement from official finals, single-deploy-path fix (Pages `build_type`), gate suite, PR → `main` → merge → live confirmation (§50). Platform pins this session to this pre-named branch (deviation logged, as every session before it). Delivery: PR #142 merged `fa69d52` 15:03:32Z, Pages built, live confirmed. |
 ---
 | `arena/fec7d5ae-nba1` | `arena/fec7d5ae-nba1` | 2026-11-16 14:26 UTC | **First-hand official three-page team-stat re-cut** (traditional + advanced + opponent, closing R20/F24 — the three official team-stat pages are now reachable and were re-read directly), **independent horizon/standings/injury/results re-verification**, **requirements-register closure**. Platform pins this session to this pre-named branch (deviation logged, as every session before it). PRs #130/#136 left for their owners (both stale, disjoint scope). Full claim in §52. |---
+| `arena/7ec9e7a3-nba1` | `arena/7ec9e7a3-nba1` | 2026-11-16 18:1x UTC | Late-afternoon cycle (§55): first-hand official re-verification of the 11/16–11/19 horizon (schedule rows, standings, injury-report edition currency, team-stats re-read), settlement-and-ledger integrity, flag-register closure of stale-resolved items (F119/F123 class), gate battery, PR → `main`, Pages confirmation, delivery. Platform pins this session to its pre-named branch (deviation logged, as above). |---
 | `arena/ed8496e9-nba1` | `arena/ed8496e9-nba1` | 2026-11-16 14:30 UTC | Midday integration cycle (§50): settle 2026-11-15 from verified official finals, roll the horizon to the full 3-day window (11/16–11/19), triage stale PRs #130/#136 (both >10 h idle, CONFLICTING), diagnose the blocked 11:15Z scheduled rebuild and the failing probe runs, gate suite, PR → `main`, Pages confirmation, delivery. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 | `arena/c348e6c7-nba1` | `arena/c348e6c7-nba1` | 2026-11-16 02:10 UTC | Integration seat (§51, claimed as §47 — renumbered at merge): stale-PR #107/#114/#117 takeover, Pages deploy diagnosis (probe-run starvation), fresh 11/16 official live reads via `fetch_page`, 11/15 settlement and horizon roll to 11/16–11/19 planned. Idle >10 h at 14:24Z; PR #130 taken over by `arena/ed8496e9-nba1` (§50 E02). Platform pins this session to its branch (deviation logged, as above). |
 
@@ -6204,3 +6225,32 @@ link; anything I cannot confirm stays blank and flagged.
 | Board | union per ground rules: main's §50–§53 + c348e6c7 §47 kept; this claim renumbered **§54** (§50 was claimed by `arena/0e9c924f-nba1` 34 s before this session's claim and held per the §51 yield); 0 conflict markers |
 | Open flags at delivery | 123 published, non-blocking (ground rule 2) |
 | Not done / boundaries | Pages `build_type` flip remains F116 (HTTP 403 — owner setting); refresh_gate's structural R01 condition remains (documented, `continue-on-error`); SGP 2 candidates unsettled pending box-score appearance checks (honest non-grading) |
+
+---
+
+## 55. Session `arena/7ec9e7a3-nba1` — late-afternoon cycle: official re-verification of the 11/16–11/19 horizon, standings/injury/results currency, settlement-and-ledger integrity, flag-register closure, gates, delivery (claimed 2026-11-16 18:1x UTC)
+
+Branch `arena/7ec9e7a3-nba1`, based on `main` `add1e74`. The platform pins this session to this
+pre-named branch (deviation from `session-<id>/<task>` naming logged, as every session before it).
+
+**Board read before claiming:** §0 ground rules, §0b registry, §50–§54 delivery records, live
+census (`gh pr list`, `gh run list`, Pages API) as itemised in the top claim block. No open task
+overlaps: the two prior claims still marked ACTIVE at the top (§50 `0e9c924f`, §50 `ed8496e9`,
+§52 `fec7d5ae`) all delivered through PRs #142/#144/#145 and their file scopes are closed; no
+session has committed to any branch since 15:5xZ.
+
+### 55.1 Task table
+
+| ID | Task | Status | Owner | File scope |
+| --- | --- | --- | --- | --- |
+| C01 | Board read, registration, claim committed and pushed immediately (ground rule 4) | **done** | `arena/7ec9e7a3-nba1` | `COORDINATION.md` (top claim block, §0b row, this §55) |
+| C02 | First-hand official re-verification at the 18:1xZ cut: every 11/16–11/19 horizon row against the official schedule/game pages, standings (30 rows, close-or-confirm F123), injury-report edition currency (attempt the 11/16 1:30 PM ET edition; archive + diff if newer than 10:30 AM), results currency (confirm 11/16 has no final yet — nothing settleable), team-stats re-read vs the promoted recut | in progress | same | `data/official/**` (new dated captures only), `data/raw/**` (captures), `verify/2026-11-16-7ec9e7a3/**` |
+| C03 | Settlement-and-ledger integrity: `verify_ledger` green, 11/14+11/15 stamps intact, prereg chain intact, tonight's 11/16 settle path armed (slate archived pre-tip, settle step wired in refresh-data.yml) | in progress | same | `data/settlement/**`, `data/ledger/**` — read-verify only |
+| C04 | Flag-register currency pass: close stale-resolved flags with explicit pointers and evidence links (F119 11/15-settled, F123 Sacramento row, F122 edition currency), never fill a value | in progress | same | `data/content/flagged.json` (via the content builders) |
+| C05 | Rebuild the site from the refreshed cut and run the full gate battery (pipeline, build_site, build_dashboard, check_site, verify_integration, verify_all, check_links, check_rendered, verify_ledger); fix failures only inside this claim's scope | pending | same | `docs/data/**`, `docs/b/**`, `site/**`, `index.html` (generated surfaces) |
+| C06 | Integration PR → `main`, merge without approval wait, confirm the GitHub Pages deploy by fetch-back, delivery record here | pending | same | whole-repo integration |
+
+**Scope notes.** Any engine/script defect found outside this scope is logged as a request in this
+section, and edited only if it blocks the gate battery (fix logged either way). Flagged/unverified
+items go to the Flagged for Review page — they do not block the merge. Every published row carries
+an official source link; anything not confirmable stays blank and flagged.
