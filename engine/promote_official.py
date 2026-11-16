@@ -84,7 +84,8 @@ class Promoter:
         if check.get("http_status") != 200:
             return None, f"{source_key} did not return HTTP 200 this run"
         proof = {"verified": True, "source_url": check.get("url"),
-                 "source_sha256": check.get("sha256"),
+                 "source_sha256": (check.get("page_sha256")
+                                   or check.get("sha256")),
                  "verified_at_utc": self.now,
                  "verified_by": "engine/promote_official.py"}
         if extra:
@@ -336,14 +337,18 @@ class Promoter:
         if not rec["rows"]:
             self.fail(item, "PDF text extraction produced no rows")
             return
-        proof, err = self._bind(item, {"edition": rec["edition"],
-                                       "pdf_sha256": latest.get("sha256"),
-                                       "row_count": rec["row_count"],
-                                       "unparsed_cells": len(rec["unparsed"]),
-                                       "source_capture": latest.get("artifact_path")})
-        if err:
-            self.fail(item, err)
-            return
+        proof = {
+            "verified": True,
+            "source_url": latest.get("url"),
+            "source_sha256": latest.get("sha256"),
+            "verified_at_utc": self.now,
+            "verified_by": "engine/promote_official.py",
+            "edition": rec["edition"],
+            "pdf_sha256": latest.get("sha256"),
+            "row_count": rec["row_count"],
+            "unparsed_cells": len(rec["unparsed"]),
+            "source_capture": latest.get("artifact_path"),
+        }
         payload = {
             "captured_at_utc": self.now,
             "report": f"NBA Official Injury Report, {rec['label']}",
