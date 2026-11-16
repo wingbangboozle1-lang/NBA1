@@ -1,0 +1,1523 @@
+{
+ "session": "arena/07920bdc-nba1",
+ "purpose": "COORDINATION \u00a756 / X03 - independent cell-based re-read of an official injury-report PDF, cross-checked against engine/injury_diff.py's visual-line parser, so a dropped row is detected instead of being published as complete.",
+ "checked_at_utc": "2026-11-16T18:37:04Z",
+ "edition": "Injury-Report_2026-11-16_01_15PM",
+ "pdf": "data/raw/injury_pdfs/Injury-Report_2026-11-16_01_15PM__55a45f930841c34f46d249e2a2de8bcc853cb9714a6a735904cb79708f24ff6c.pdf",
+ "pdf_sha256": "55a45f930841c34f46d249e2a2de8bcc853cb9714a6a735904cb79708f24ff6c",
+ "extraction": {
+  "method": "per clipped-rectangle cell; cells grouped into rows by vertical contiguity; columns mapped from each page's own header row",
+  "columns_detected": {
+   "19.1": "game_date",
+   "115.6": "game_time_et",
+   "196.0": "matchup",
+   "260.2": "team",
+   "421.0": "player",
+   "581.7": "status",
+   "662.1": "reason"
+  },
+  "clipped_cells": 8,
+  "populated_cells": 296,
+  "rows_recovered": 87,
+  "player_rows": 76,
+  "wrapped_reason_rows_rejoined": 1,
+  "team_blocks_not_yet_submitted": 11
+ },
+ "engine_line_parser": {
+  "rows": 80,
+  "player_rows": 80
+ },
+ "cross_check": {
+  "in_both": 80,
+  "cell_extractor_only": [
+   {
+    "matchup": "GSW@NOP",
+    "team": "New Orleans Pelicans",
+    "player": "Reese, Julian",
+    "status": "Questionable"
+   },
+   {
+    "matchup": "GSW@NOP",
+    "team": "New Orleans Pelicans",
+    "player": "Watford, Trendon",
+    "status": "Out"
+   },
+   {
+    "matchup": "MEM@WAS",
+    "team": "Memphis Grizzlies",
+    "player": "Jerome, Ty",
+    "status": "Out"
+   },
+   {
+    "matchup": "MEM@WAS",
+    "team": "Memphis Grizzlies",
+    "player": "Pippen Jr., Scotty",
+    "status": "Out"
+   },
+   {
+    "matchup": "MEM@WAS",
+    "team": "Memphis Grizzlies",
+    "player": "Post, Quinten",
+    "status": "Questionable"
+   },
+   {
+    "matchup": "MEM@WAS",
+    "team": "Memphis Grizzlies",
+    "player": "Saunders, Richie",
+    "status": "Out"
+   },
+   {
+    "matchup": "MEM@WAS",
+    "team": "Memphis Grizzlies",
+    "player": "Stewart, Isaiah",
+    "status": "Out"
+   }
+  ],
+  "line_parser_only": [],
+  "status_disagreements": []
+ },
+ "rule": "Nothing is inferred. A row is published only when the PDF bytes contain it; rows recovered by one reader and not the other are listed here and flagged, never silently merged.",
+ "rows": [
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "player": "Awaka, Tobe",
+   "status": "Out",
+   "reason": "Injury/Illness - Disc Irritation",
+   "_inherited": [],
+   "_wrapped_reason": [],
+   "_page": 1
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "player": "Robinson, Orlando",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 1
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "player": "Sellers, Jaylin",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 1
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "player": "Smith, Jalen",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Finger Sprain",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 1
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Chicago Bulls",
+   "player": "Wilson, Caleb",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Metacarpal Fracture",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 1
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Diop, Khalifa",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_wrapped_reason": [],
+   "_page": 1
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Merrill, Sam",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Elbow Injury Management",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 1
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Mobley, Evan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Great Toe Sprain",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 1
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Tomlin, Nae'Qwan",
+   "status": "Out",
+   "reason": "Injury/Illness - Low Back Stress Reaction",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 1
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Tyson, Jaylon",
+   "status": "Doubtful",
+   "reason": "Injury/Illness - Right Ankle Injury Management",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 1
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Udeh, Jr., Ernest",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 1
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Watson, Peyton",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Abdominal Soreness",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 1
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Edey, Zach",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Ankle Injury Management",
+   "_inherited": [
+    "game_date",
+    "game_time_et"
+   ],
+   "_wrapped_reason": [],
+   "_page": 1
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Jackson, GG",
+   "status": "Out",
+   "reason": "Injury/Illness - Left 5th Metatarsal Fracture",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [
+    "Fracture"
+   ],
+   "_page": 1
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Jerome, Ty",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hip Soreness",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Pippen Jr., Scotty",
+   "status": "Out",
+   "reason": "Injury/Illness - Lumbar Disc Herniation",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Post, Quinten",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Concussion Protocol",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Saunders, Richie",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Surgery",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Stewart, Isaiah",
+   "status": "Out",
+   "reason": "Injury/Illness - Illness",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Beekman, Reece",
+   "status": "Out",
+   "reason": "Injury/Illness - Right AC Joint Injury",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Champagnie, Justin",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Surgery",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Johnson, Tre",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Low Back Soreness",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Okpara, Felix",
+   "status": "Questionable",
+   "reason": "G League - Two- Way",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Vukcevic, Tristan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hip Impingement",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Watkins, Jamir",
+   "status": "Out",
+   "reason": "Injury/Illness - Left ACL Repair / Surgery",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "ORL@BOS",
+   "team": "Orlando Magic",
+   "player": "Banchero, Paolo",
+   "status": "Out",
+   "reason": "Injury/Illness - Right High Ankle Sprain",
+   "_inherited": [
+    "game_date",
+    "game_time_et"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "ORL@BOS",
+   "team": "Orlando Magic",
+   "player": "Isaac, Jonathan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Injury Management",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "ORL@BOS",
+   "team": "Orlando Magic",
+   "player": "Nelson, Izaiyah",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Ankle Injury Recovery",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "ORL@BOS",
+   "team": "Orlando Magic",
+   "player": "Penda, Noah",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Partially Torn Hamstring",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 2
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "ORL@BOS",
+   "team": "Boston Celtics",
+   "player": "Queta, Neemias",
+   "status": "Questionable",
+   "reason": "Rest",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "player": "Adams, Steven",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Lower Leg Injury Management",
+   "_inherited": [
+    "game_date"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "player": "Capela, Clint",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Ankle Sprain",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "player": "Copeland, Quadir",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "player": "Phillips, Julian",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "player": "Smart, Marcus",
+   "status": "Out",
+   "reason": "League Suspension",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "player": "Thompson, Amen",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Knee Soreness",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Miami Heat",
+   "player": "Goldin, Vladislav",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Miami Heat",
+   "player": "Jovic, Nikola",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Illness",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Miami Heat",
+   "player": "Larsson, Pelle",
+   "status": "Doubtful",
+   "reason": "Injury/Illness - Illness",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "HOU@MIA",
+   "team": "Miami Heat",
+   "player": "Thompson, Klay",
+   "status": "Available",
+   "reason": "Injury/Illness - Left Ankle Sprain",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "player": "Barlow, Dominick",
+   "status": "Out",
+   "reason": "Injury/Illness - Low Back Stress Reaction",
+   "_inherited": [
+    "game_date",
+    "game_time_et"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "player": "Bona, Adem",
+   "status": "Out",
+   "reason": "Injury/Illness - Cervical Spine Sprain",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "player": "Embiid, Joel",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Foot Plantar Fascia Injury Management",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "player": "Hukporti, Ariel",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Achilles Tendon Rupture / Tear",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "player": "James, LeBron",
+   "status": "Out",
+   "reason": "Injury/Illness - Low Back/Sciatica Management",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 3
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "player": "Bilodeau, Tyler",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "player": "Jefferson, Joshua",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "player": "Nelson, Grant",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "player": "Powell, Drake",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "PHI@BKN",
+   "team": "Brooklyn Nets",
+   "player": "Saraf, Ben",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Butler III, Jimmy",
+   "status": "Out",
+   "reason": "Injury/Illness - Right ACL Repair / Surgery",
+   "_inherited": [
+    "game_date"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Curry, Stephen",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Oblique Tear",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Moody, Moses",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Patellar Tendon Repair / Surgery",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Porzingis, Kristaps",
+   "status": "Out",
+   "reason": "Not With Team",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Santos, Gui",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Ankle Inflammation",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Williams, Brandon",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Dia, Malik",
+   "status": "Questionable",
+   "reason": "G League - Two- Way",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Mathurin, Bennedict",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Plantar Fasciitis",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "McGowens, Bryce",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Elbow Infection",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Murphy III, Trey",
+   "status": "Out",
+   "reason": "Injury/Illness - Bilateral Patellar Tendinopathy",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Murray, Dejounte",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Ankle Sprain",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Pierre Jr., Jaron",
+   "status": "Questionable",
+   "reason": "G League - Two- Way",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 4
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Reese, Julian",
+   "status": "Questionable",
+   "reason": "G League - Two- Way",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Watford, Trendon",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Ankle Sprain",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "player": "Krejci, Vit",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Ankle Fracture",
+   "_inherited": [
+    "game_date",
+    "game_time_et"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "player": "Morant, Ja",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "player": "Sharpe, Shaedon",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Surgery",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "player": "Youngblood, Chris",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Heel Contusion / Bone Bruise",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "Beringer, Joan",
+   "status": "Available",
+   "reason": "Injury/Illness - Face Mask",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "Clark, Jaylen",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hamstring Strain",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "DiVincenzo, Donte",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Achilles Tendon Repair / Surgery",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "Edwards, Anthony",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Arthroscopy",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "09:00 (ET)",
+   "matchup": "PHX@DEN",
+   "team": "Phoenix Suns",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "printed_raw": "NOT YET SUBMITTED (printed in the Reason column)",
+   "_inherited": [
+    "game_date"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "09:00 (ET)",
+   "matchup": "PHX@DEN",
+   "team": "Denver Nuggets",
+   "player": "Holmes II, DaRon",
+   "status": "Out",
+   "reason": "G League - On Assignment",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "09:00 (ET)",
+   "matchup": "PHX@DEN",
+   "team": "Denver Nuggets",
+   "player": "Nembhard, Ryan",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "09:00 (ET)",
+   "matchup": "PHX@DEN",
+   "team": "Denver Nuggets",
+   "player": "Strawther, Julian",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Sprain",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/16/2026",
+   "game_time_et": "09:00 (ET)",
+   "matchup": "PHX@DEN",
+   "team": "Denver Nuggets",
+   "player": "Whitmore, Cam",
+   "status": "Out",
+   "reason": "G League - Two- Way",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup",
+    "team"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "NYK@TOR",
+   "team": "New York Knicks",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "printed_raw": "NOT YET SUBMITTED (printed in the Reason column)",
+   "_inherited": [],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "printed_raw": "NOT YET SUBMITTED (printed in the Reason column)",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_wrapped_reason": [],
+   "_page": 5
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "printed_raw": "NOT YET SUBMITTED (printed in the Reason column)",
+   "_inherited": [
+    "game_date"
+   ],
+   "_wrapped_reason": [],
+   "_page": 6
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "printed_raw": "NOT YET SUBMITTED (printed in the Reason column)",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_wrapped_reason": [],
+   "_page": 6
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "printed_raw": "NOT YET SUBMITTED (printed in the Reason column)",
+   "_inherited": [
+    "game_date",
+    "game_time_et"
+   ],
+   "_wrapped_reason": [],
+   "_page": 6
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "printed_raw": "NOT YET SUBMITTED (printed in the Reason column)",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_wrapped_reason": [],
+   "_page": 6
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "10:30 (ET)",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "printed_raw": "NOT YET SUBMITTED (printed in the Reason column)",
+   "_inherited": [
+    "game_date"
+   ],
+   "_wrapped_reason": [],
+   "_page": 6
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "10:30 (ET)",
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "printed_raw": "NOT YET SUBMITTED (printed in the Reason column)",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_wrapped_reason": [],
+   "_page": 6
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "11:00 (ET)",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "printed_raw": "NOT YET SUBMITTED (printed in the Reason column)",
+   "_inherited": [
+    "game_date"
+   ],
+   "_wrapped_reason": [],
+   "_page": 6
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "11:00 (ET)",
+   "matchup": "CHA@LAL",
+   "team": "Los Angeles Lakers",
+   "player": "",
+   "status": "NOT YET SUBMITTED",
+   "reason": "",
+   "printed_raw": "NOT YET SUBMITTED (printed in the Reason column)",
+   "_inherited": [
+    "game_date",
+    "game_time_et",
+    "matchup"
+   ],
+   "_wrapped_reason": [],
+   "_page": 6
+  }
+ ]
+}
