@@ -1222,6 +1222,69 @@
 </tr>
 <tr>
 <td>F128</td>
+<td>High</td>
+<td><b>Per-player game-log capture skipped three of the nine official 11/15 gamebooks, while the committed log reported six games and zero problems</b></td>
+<td>scripts/capture_player_logs.py mapped six games in GAME_IDS; data/official/gamebooks/ holds nine. ATLMIL, HOUWAS and OKCSAC printed 'not in GAME_IDS, skipped' and the run exited 1, but the committed data/official/player_game_logs_2026-11-15.json was written with problems: []. The R21 evidence said 'complete for the six games that finished' although data/official/results_2026-11-15.json lists nine FINAL games. Corrected by arena/fe8e2065-nba1 (COORDINATION §55): the three ids were added, and each id is now checked against the official results feed (away, home, FINAL) before any parsing. All nine games pass the points check against the official final (9 of 9; 18 team totals). Minutes match the printed team total exactly in 13 of 18 teams (largest difference 3 s, published as printed).</td>
+<td>data/official/player_game_logs_2026-11-15.json; site/pages/player-logs.html; data/content/requirements.json (R21)</td>
+<td>Review the corrected log and page. No further action is needed for the nine 11/15 games; later games need their own gamebooks.</td>
+<td class="src"><span class="na" title="source id Official game pages re-read 2026-11-16 ~18:2xZ: ATL 113 - MIL 106 Final, HOU 147 - WAS 119 Final, OKC 125 - SAC 103 Final is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F129</td>
+<td>Medium</td>
+<td><b>Parser dropped non-appearance rows: DND rows with the jersey and name in separate cells, and NWT rows, produced no row</b></td>
+<td>Found by re-reading the 11/15 gamebook text. ATL: '| 4 | Kingston Flemings | | DND - Injury/Illness - Lumbar Strain |' produced no row because the DNP branch only read a jersey and name in one cell. HOU: '| 36 Marcus Smart | | NWT - League Suspension |' was not recognised because NWT was not a non-appearance note. Both are fixed in scripts/capture_player_logs.py; both players now have played=false rows that carry the printed note. The points and minutes checks were already passing, so no published total changed.</td>
+<td>scripts/capture_player_logs.py; data/official/player_game_logs_2026-11-15.json</td>
+<td>None beyond review. Keep the NWT and DND/DNP recognition when the parser is extended to later games.</td>
+<td class="src"><span class="na" title="source id Official gamebook PDFs, page 1 box score (re-read 2026-11-16) is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F130</td>
+<td>Medium</td>
+<td><b>Injury-report status conflicts with the gamebook: Dillon Mitchell and Amari Williams (DAL@BOS) are 'Available' on the 06:15 PM ET report but on the gamebook's Inactive line as 'G League - Two-Way'</b></td>
+<td>Both names are on the 11/15 06:15 PM ET report with status Available. The DAL@BOS gamebook's Inactive line for the Celtics lists 'Mitchell (G League - Two-Way), Williams (G League - Two-Way)'. The gamebook reason is not an injury, and the report lists them as available, so both documents cannot describe the same status for a G League assignment. Recorded as printed: the player rows carry the gamebook reason and the report status, and the conflict is listed in the coverage section. Neither value was changed.</td>
+<td>data/official/player_game_logs_2026-11-15.json (coverage.report_players_unexplained_by_gamebooks); site/pages/player-logs.html</td>
+<td>Ask the league or the club which document governs a two-way assignment listed on the report. No change to values until answered.</td>
+<td class="src"><span class="na" title="source id Injury report 11/15 06:15 PM ET (official index edition), and gamebook DAL@BOS Inactive line is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F131</td>
+<td>Low</td>
+<td><b>Name variant not reconciled: 'Christopher Cenac Jr.' (DAL@BOS, report: Available) vs 'Chris Cenac Jr.' in the gamebook box score</b></td>
+<td>The gamebook box score lists 'Chris Cenac Jr.' for Dallas, who played 06:57 with 3 points. The report lists 'Cenac Jr., Christopher' as Available. The two names describe the same surname and suffix, but the official documents do not state that they are the same player, so no row was merged and the report entry is listed as unexplained.</td>
+<td>site/pages/player-logs.html (coverage list)</td>
+<td>Confirm the identity from an official roster source before merging the report entry into the player row.</td>
+<td class="src"><span class="na" title="source id Gamebook DAL@BOS page 1 (statsdmz) and injury report 11/15 06:15 PM ET is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F132</td>
+<td>Medium</td>
+<td><b>Spelling conflict: report 'Champagne, Justin' (HOU@WAS, Out) vs gamebook Inactive line 'Champagnie (Injury/Illness - Right Foot Surgery)' for Washington</b></td>
+<td>The 11/15 06:15 PM ET report spells the name 'Champagne'. The Washington Inactive line in the gamebook spells it 'Champagnie'. The two names are not paired. The report entry is listed as unexplained. The gamebook reason is recorded on the Inactive line, and no value was changed.</td>
+<td>site/pages/player-logs.html (coverage list)</td>
+<td>Confirm the legal spelling from the league roster before pairing the two entries.</td>
+<td class="src"><span class="na" title="source id Gamebook HOU@WAS page 1 (statsdmz) and injury report 11/15 06:15 PM ET is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F133</td>
+<td>Low</td>
+<td><b>Ambiguous surname: OKC@SAC report lists Jalen Williams and Jaylin Williams (both Out); the Thunder Inactive line lists 'Williams' twice with two reasons and no first names</b></td>
+<td>The gamebook prints 'Williams (Injury/Illness - Left Ankle Surgery)' and 'Williams (Injury/Illness - Low Back Spasms)' on the Thunder Inactive line. It gives no first names. Pairing either report entry to either line by surname would be a guess, so neither entry was paired. Both report entries are listed as unexplained.</td>
+<td>site/pages/player-logs.html (coverage list)</td>
+<td>Use the official game page's player list or a dated roster to pair the two entries.</td>
+<td class="src"><span class="na" title="source id Gamebook OKC@SAC page 1 (statsdmz) and injury report 11/15 06:15 PM ET is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F134</td>
+<td>Low</td>
+<td><b>Status reason differs: Marcus Smart (HOU@WAS) is 'Out' on the 06:15 PM ET report, but the gamebook prints 'NWT - League Suspension'</b></td>
+<td>The report gives Smart status Out with no injury reason in the row matched by name. The gamebook prints a league suspension (NWT, not with team). Both are recorded as printed: the row carries the gamebook note, and the report status is kept in the injury-report fields. The reasons were not reconciled.</td>
+<td>data/official/player_game_logs_2026-11-15.json (HOU@WAS row)</td>
+<td>Confirm whether a league suspension should be reported as Out on the injury report.</td>
+<td class="src"><span class="na" title="source id Gamebook HOU@WAS page 1 (statsdmz) and injury report 11/15 06:15 PM ET is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F135</td>
 <td>Medium</td>
 <td><b>The freshest official injury editions read this cycle (11/16 12:00 PM and 01:30 PM ET) run ahead of the promoted pipeline input (11/16 09:45 AM ET): 26 added designations and 7 status changes across the two later editions, all awaiting digest-bound runner promotion</b></td>
 <td>Session arena/7ec9e7a3-nba1 retrieved two newer official editions as text on 2026-11-16: the 12:00 PM edition (18:3xZ) and the 01:30 PM edition (19:1xZ), transcribed under data/official/ with the canonical schema (revision + retrieval stamps; unreadable render cells left empty and noted). 09:45 AM -&gt; 12:00 PM: zero status changes, seven ADDED rows (MEM +5, NOP +2) - data/official/injury_diff_2026-11-16_0945AM_to_1200PM_7ec9e7a3.json. 12:00 PM -&gt; 01:30 PM: 49 comparable rows, SEVEN status changes (CLE Tyson Questionable-&gt;Doubtful; MEM Stewart Questionable-&gt;Out; MIA Larsson Questionable-&gt;Doubtful; MEM GG Jackson reason completed to 'Left 5th Metatarsal Fracture'; NOP Dia / Pierre Jr. / Reese Questionable-&gt;Probable, all three G League two-way) and NINETEEN ADDED rows as four previously-unfiled team blocks filed (WAS 6, BOS 1 - Queta Questionable Rest, HOU 6 incl. Smart Out - League Suspension, PHI 5 incl. LeBron James Out and Embiid Questionable) - data/official/injury_diff_2026-11-16_1200PM_to_0130PM_7ec9e7a3.json. Why the pipeline input is not updated in place: promotion into data/raw/injuries.json is digest-bound to a runner-retrieved PDF (engine/promote_official.py; F120's sandbox limitation), so these rows stay out of the promoted input until the runner's next scheduled run (22:15Z) retrieves the then-current edition. Impact until then: the picks surface's rotation-availability column understates WAS/HOU/PHI absence depth (they read NOT YET SUBMITTED at 09:45 AM) and misses the Memphis/New Orleans designations; the 01:30 PM state is published from the transcription in the Injuries banner and the transcription/diff files above. No model line is re-priced: lines are frozen pre-tip by the pre-registration rule.</td>
