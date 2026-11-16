@@ -1,12 +1,59 @@
 # Executive summary — NBA1 line origination and strategy lab
 
-**As of** 2026-11-14 (UTC) · **Session** `arena/934ca56f-nba1` · **Live site**
-<https://wingbangboozle1-lang.github.io/NBA1/>
+**As of** 2026-11-16 (UTC) · **Sessions** `arena/934ca56f-nba1` (original), `arena/dfef26dc-nba1`
+(this update) · **Live site** <https://wingbangboozle1-lang.github.io/NBA1/>
 
 This document states what the system does, what it has actually established, what it has
 not, and what a decision-maker needs in front of them before choosing anything. Every
 number here is traceable to an official source; the source for each claim is named inline.
 Where a value could not be confirmed it is described as unconfirmed rather than filled in.
+
+---
+
+## 0. Update — 2026-11-16, session `arena/dfef26dc-nba1` (read this first)
+
+The window has rolled and the model has been re-cut from a fresh official capture. Sections
+1–8 below are the 2026-11-14 record and are kept verbatim for provenance; where this update
+supersedes them, it says so.
+
+**What changed**
+
+| Item | Was (2026-11-14) | Is now (2026-11-16) | Official source |
+| --- | --- | --- | --- |
+| Horizon | 2026-11-15 to 2026-11-18 (34 games) | **2026-11-16 to 2026-11-18 (25 games)** | [games pages](https://www.nba.com/games?date=2026-11-16) |
+| Line window vs pick window | lines ran one day wider than picks | **identical**: nothing is originated for a game that has tipped, or beyond three days | — |
+| Home-court advantage | fitted / pinned to 0.5319 | **pinned to the measured 0.5285** (102 of 193), worth **1.23 points** | [standings](https://www.nba.com/standings) |
+| Headline per game | one blended rating | **the two estimators' disagreement** (max 1.37 pp, mean 0.45 pp; gate 4.0 pp), blend underneath | — |
+| Rotation availability | 100% when the injury list was empty, labelled MEASURED | **blank with a stated reason** when no official edition covers the game date, or the team prints NOT YET SUBMITTED | [injury index](https://official.nba.com/nba-injury-report-2026-27-season/) |
+| Injury edition behind the cut | 11/15 06:15 PM | **11/15 09:00 PM**, diffed against the previous edition (2 real status changes) | [PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf) |
+| 11/15 results | 2 of 9 final | **6 of 9 final**, 3 stored as in-progress and not settleable | [games page](https://www.nba.com/games?date=2026-11-15) |
+
+**The three things a decision-maker needs to know**
+
+1. **Nothing is staked and nothing is funded.** 14 of 25 picks clear every model gate, but
+   0 are publishable outright: no official injury edition covers 11/17 or 11/18 yet, and five
+   11/16 teams print NOT YET SUBMITTED, so every pick is provisional.
+2. **Eleven of the twenty-five picks are held back by a data gap, not by the model.** Seven
+   fail the minutes-redistribution gate because per-player minutes were captured for the
+   league-wide top 50 only (F103). The gate is currently measuring whether the capture
+   exists.
+3. **A re-cut taken during a live slate is contaminated.** The official efficiency table
+   already showed the Lakers at GP 14 while three other 11/15 games were still in progress,
+   so the cut uses the last *clean* official snapshot (2026-11-15T23:45Z) and publishes that
+   as the reason (F100).
+
+**What I verified line by line this session** — every row below was read off the named
+official page at 2026-11-16T02:12–02:17Z, not inferred:
+
+- the 25-game schedule for 11/16, 11/17 and 11/18, team by team, with tip times — and one
+  genuine conflict between two official captures (GSW@NOP, 09:00 vs 8:00 PM ET — **F98**);
+- all 30 standings rows, summed to the measured home-win rate, with two internal
+  cross-checks that hold;
+- the nine 11/15 results, of which six are final;
+- the newest injury PDF in full (160 rows across two game dates) and its diff against the
+  previous edition;
+- that POR@MIN appears on 11/16 **and** 11/17 under two different game ids — confirmed on the
+  official game page, not a parsing artefact (**F99**).
 
 ---
 

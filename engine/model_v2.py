@@ -719,12 +719,39 @@ def minutes_redistribution(team, absent, roster, bench_ratio=None):
     }
 
 
-def rotation_availability(team, injury_rows, roster):
-    """The rotation-availability read-out used on the picks page."""
+def _mdy_to_iso(d):
+    """'11/16/2026' (the injury PDF's Game Date format) -> '2026-11-16'."""
+    if not d:
+        return None
+    parts = str(d).split("/")
+    if len(parts) != 3:
+        return None
+    m, day, y = parts
+    return "%s-%s-%s" % (y, m.zfill(2), day.zfill(2))
+
+
+def rotation_availability(team, injury_rows, roster, game_date=None,
+                          covered_dates=None, not_submitted=None):
+    """The rotation-availability read-out used on the picks page.
+
+    Provenance is part of the value, so the status string is decided by what
+    the official sources actually cover:
+
+    * no per-player minutes capture for the team            -> "not captured"
+    * no official injury edition covers this game date yet  -> the percentage
+      is left blank and flagged.  Teams file by 5 p.m. local the day before a
+      game, so an edition that stops at 11/16 says nothing about 11/17 or
+      11/18; an empty injury list is NOT evidence that nobody is injured.
+    * the edition covers the date but this team's entry prints
+      NOT YET SUBMITTED                                     -> flagged as such
+    * otherwise                                             -> "MEASURED"
+    """
     if roster is None:
         return {"team": team, "status": "not captured",
                 "rotation_players": None, "out": None, "questionable": None,
                 "note": "official per-player minutes not captured for this team"}
+    covered_dates = covered_dates or set()
+    not_submitted = not_submitted or set()
     top = roster[:8]
     names = {norm_name(r["player"]) for r in top}
     out, quest, listed = [], [], []
@@ -738,7 +765,7 @@ def rotation_availability(team, injury_rows, roster):
             quest.append(r["player"])
     rotation_out = [p for p in out if norm_name(p) in names]
     rotation_quest = [p for p in quest if norm_name(p) in names]
-    return {
+    res = {
         "team": team,
         "rotation_players": len(top),
         "rotation_players_named": sorted(names),
@@ -749,10 +776,27 @@ def rotation_availability(team, injury_rows, roster):
         "rotation_questionable": sorted(rotation_quest),
         "rotation_out_count": len(rotation_out),
         "rotation_questionable_count": len(rotation_quest),
-        "availability_pct": round(100.0 * (len(top) - len(rotation_out)) / len(top), 1) if top else None,
-        "status": "MEASURED from the official injury-report edition and the "
-                  "official per-player minutes capture",
     }
+    # ---- provenance, in order of what the official sources actually cover
+    if game_date and game_date not in covered_dates:
+        res["availability_pct"] = None
+        res["status"] = ("NOT YET PUBLISHED - no official injury edition covers "
+                         "%s; the newest edition stops at %s. An empty injury "
+                         "list is not evidence that nobody is injured, so the "
+                         "cell is blank rather than 100%%."
+                         % (game_date, ", ".join(sorted(covered_dates)) or "no date"))
+    elif (game_date, team) in not_submitted:
+        res["availability_pct"] = None
+        res["status"] = ("NOT YET SUBMITTED - the official injury edition for "
+                         "%s prints NOT YET SUBMITTED for this team, so its "
+                         "availability is unknown and the cell is blank."
+                         % game_date)
+    else:
+        res["availability_pct"] = (round(100.0 * (len(top) - len(rotation_out)) / len(top), 1)
+                                   if top else None)
+        res["status"] = ("MEASURED from the official injury-report edition and the "
+                         "official per-player minutes capture")
+    return res
 
 
 # ------------------------------------------------------------- rest and travel
