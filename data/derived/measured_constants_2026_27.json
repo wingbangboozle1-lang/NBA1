@@ -1,0 +1,21 @@
+{
+ "title": "Measured constants from official finals",
+ "session": "arena/801ba27f-nba1",
+ "built_utc": "2026-11-16T00:02:33Z",
+ "source": "https://www.nba.com/games?date=YYYY-MM-DD and the official box score of each game",
+ "n_final_games": 190,
+ "date_range": [
+  "2026-10-20",
+  "2026-11-15"
+ ],
+ "home_win_rate": 0.5263,
+ "home_wins": 100,
+ "home_court_points": 1.108,
+ "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+ "sigma_margin": 16.784,
+ "sigma_total": 19.166,
+ "league_off_rtg": 111.782,
+ "league_pace": 101.739,
+ "mean_total": 227.53,
+ "mean_home_margin": 1.805
+}

@@ -81,6 +81,78 @@
   {
    "entry": 5,
    "type": "pre_tip_publication",
+   "at_utc": "2026-11-16T00:02:08Z",
+   "session": "arena/801ba27f-nba1",
+   "slate": "2026-11-15..18 (games that had not tipped at publication)",
+   "first_tip_utc": "2026-11-16T00:00Z (2026-11-15 7:00 PM ET, HOU@WAS)",
+   "publication_precedes_first_tip": true,
+   "files": {
+    "data/archive/v2-801ba27f/horizon_picks_801ba27f.json": "2524e75b8ff5bf8501cad9fc2be91b3ebfadf22ab21d805600a8fbbaadbe4b58",
+    "data/archive/v2-801ba27f/horizon_lines_801ba27f.json": "10f6ec716c42660043ad4a9a3461776c8b3a2b083272beefa3cde5a3c360bc3e",
+    "data/prereg/v2-801ba27f/_index.json": "7935450da8c9d9e7c029a598803b7cb9565b2fcdf444f64aad40bdce68feb05c"
+   },
+   "prereg_digests": {
+    "data/prereg/v2-801ba27f/R-SINGLE.json": "9d72ae6a0694ff6bb0488095acc771590588c255fdc4a94aa88d85c7ea9b7d9e",
+    "data/prereg/v2-801ba27f/R-PARLAY.json": "365059e5f1d351b9a4e15391cd8feed53ba4a79610b5ba439644cb78b570d564",
+    "data/prereg/v2-801ba27f/R-SGP.json": "2dcccc4ee0c2de12a42b2dcf952e41b0a62177514894bb159de6162a0a16cff5"
+   },
+   "note": "projection and bet surfaces published separately; archived byte-identically",
+   "prev": "c46e0a37b321679b968ca4aee84a7477a53b2d1f5fa803bd9213672cc310a4bb"
+  },
+  {
+   "entry": 6,
+   "type": "settlement_verification",
+   "at_utc": "2026-11-16T00:02:08Z",
+   "session": "arena/801ba27f-nba1",
+   "settles_slate": "2026-11-15",
+   "files": {
+    "data/settlement/settlement_2026-11-15.json": "8eecaa28a8958b76412b5ccf5e1a752904361bebdec735227d22835dbf4b7035",
+    "data/archive/horizon_picks_2026-11-15.json": "82974ede2fa98c5a515f521f39103724ea6165b3e12d8e725ddb2476c5b66dfe"
+   },
+   "n_graded": 2,
+   "units_today": 2.0,
+   "note": "graded only from official finals; games still live stay PENDING",
+   "prev": "4bf5448fc5fbb0c57ec9254069f4f9670bd47c3b260a111b75e462afd6126149"
+  },
+  {
+   "entry": 7,
+   "type": "pre_tip_publication",
+   "at_utc": "2026-11-16T00:02:35Z",
+   "session": "arena/801ba27f-nba1",
+   "slate": "2026-11-15..18 (games that had not tipped at publication)",
+   "first_tip_utc": "2026-11-16T00:00Z (2026-11-15 7:00 PM ET, HOU@WAS)",
+   "publication_precedes_first_tip": true,
+   "files": {
+    "data/archive/v2-801ba27f/horizon_picks_801ba27f.json": "e98879f0f463750e61cc8e57401f6ae506b7bf9e3f7c2462910005333b3b26a9",
+    "data/archive/v2-801ba27f/horizon_lines_801ba27f.json": "50c91c1f8ba7fc33f63ec5b67fc21d6484a1a2a93bea9fc296d2ad14712ad1e2",
+    "data/prereg/v2-801ba27f/_index.json": "98e14466917af55c0e7708cd15e10042cb87282a475175a3b3ae3671a768523a"
+   },
+   "prereg_digests": {
+    "data/prereg/v2-801ba27f/R-SINGLE.json": "cde6b4d5c55ce55235ec9091803576c653a95e6d3b8365e43a2e96dcaee8a288",
+    "data/prereg/v2-801ba27f/R-PARLAY.json": "3d076300ab3542cd1d0dfc1893bdf47709731d4b227dadaed8dd3e7ddce6178d",
+    "data/prereg/v2-801ba27f/R-SGP.json": "5fac9bbba33fffe2006d1864b63296dfbd84136673293f90356cbaf32cea9824"
+   },
+   "note": "projection and bet surfaces published separately; archived byte-identically",
+   "prev": "ff87631e43c123d9b06900f41cd9b625c5237c3fcaca929d65edbf852100aab0"
+  },
+  {
+   "entry": 8,
+   "type": "settlement_verification",
+   "at_utc": "2026-11-16T00:02:35Z",
+   "session": "arena/801ba27f-nba1",
+   "settles_slate": "2026-11-15",
+   "files": {
+    "data/settlement/settlement_2026-11-15.json": "5351e64fb514ae1fa4a2ed8160cc3e8594ea18461405a9c92dc057eede116cb9",
+    "data/archive/horizon_picks_2026-11-15.json": "82974ede2fa98c5a515f521f39103724ea6165b3e12d8e725ddb2476c5b66dfe"
+   },
+   "n_graded": 2,
+   "units_today": 2.0,
+   "note": "graded only from official finals; games still live stay PENDING",
+   "prev": "cc3aaa5c47e1ca3c1c8eb7bafa22c9eb9d64635a88e050d1f3d1e5e013cc1016"
+  },
+  {
+   "entry": 9,
+   "type": "pre_tip_publication",
    "at_utc": "2026-11-16T00:16Z",
    "first_tip_utc": "2026-11-17T00:00Z",
    "first_game_tipping": "2026-11-16 ORL@BOS (7:00 PM ET)",
@@ -117,8 +189,101 @@
     "data/settlement/settlement_2026-11-14.json": "992796498633d9a98c68de69dba164400be0471d195265a67dc30daea2a37827"
    },
    "note": "Rolling-slate publication for the 2026-11-16 .. 2026-11-18 window, generated before the first tip of the window (2026-11-17T00:00Z) and after the previous slate's settlement. Preregistration files for every strategy family are frozen by digest here. Every earlier vintage stays settleable from its own archive under data/archive/.",
-   "prev": "c46e0a37b321679b968ca4aee84a7477a53b2d1f5fa803bd9213672cc310a4bb"
+   "prev": "1c975b04f6c9bec9f99d5cb2753f1d418a009924ae3f29e5645e0705a3b5fc01"
+  },
+  {
+   "entry": 10,
+   "type": "pre_tip_publication",
+   "at_utc": "2026-11-16T00:32:39Z",
+   "session": "arena/801ba27f-nba1",
+   "slate": "2026-11-15..18 (games that had not tipped at publication)",
+   "published_tickets_cover": "2026-11-16 to 2026-11-18 (no 2026-11-15 game appears in the published tickets)",
+   "earliest_tip_of_any_published_ticket": "2026-11-16 (ORL@BOS, game 0022600245) - see the official schedule",
+   "publication_precedes_first_tip": true,
+   "first_tip_note": "an earlier label named 2026-11-15 7:00 PM ET (HOU@WAS) as the first tip; HOU@WAS is not in the published tickets, so no ticket was published after its tip. Corrected 2026-11-16.",
+   "files": {
+    "data/archive/v2-801ba27f/horizon_picks_801ba27f.json": "e6f659392fcd44052487c2947a45834129d71aea16f3b7f6807c1b3837534ef4",
+    "data/archive/v2-801ba27f/horizon_lines_801ba27f.json": "333871f67e1d79c2f0663a8b9caaabbed29f6a938b6f3be6a3518d1027761be9",
+    "data/prereg/v2-801ba27f/_index.json": "7d36eba27ccfd6a32582e0857fdae500a332c0f5e0c5f9ab5d792d1ccd39c8ff"
+   },
+   "prereg_digests": {
+    "data/prereg/v2-801ba27f/R-SINGLE.json": "128df02808f841532c8f2c0bf42a9dfbf83831e2cefd1056c9619aefe1e47244",
+    "data/prereg/v2-801ba27f/R-PARLAY.json": "89410ab270c3e18969307719e099b24da99ac38f665075980319d10c1d5a61cb",
+    "data/prereg/v2-801ba27f/R-SGP.json": "b11d6d4f82a2c819d26a3d066f2bfa12e30ecd0222fb41073f7f8f402b2c613c"
+   },
+   "note": "projection and bet surfaces published separately; archived byte-identically",
+   "prev": "e9cab6aed01c87188d6a814c723feab4d06b699243bb8f0ff3468a6b918be7cc"
+  },
+  {
+   "entry": 11,
+   "type": "settlement_re_grade_note",
+   "at_utc": "2026-11-16T00:35:00Z",
+   "session": "arena/801ba27f-nba1",
+   "slate": "2026-11-15",
+   "what": "after the parlay-pricing correction (F100) the builder was re-run. It re-graded the 2026-11-15 slate from the same official finals and produced an identical result: 2 graded, 7 pending, +2.00 paper units.",
+   "settlement_file_digest_now": "5351e64fb514ae1fa4a2ed8160cc3e8594ea18461405a9c92dc057eede116cb9",
+   "matches_entry": 7,
+   "settlement_stamp_rule": "settled_at_utc is the moment of the FIRST settlement, not the last builder run. A re-run that grades an identical result keeps the original stamp so the file stays byte-identical and the ledger entry that hashes it remains verifiable; only a genuine change in the graded rows re-stamps it and then a new entry is recorded.",
+   "prev": "0136521b5bb18b0a4f3ca0fef590b9bdaad521475d0d1ce192eaf77a9b00b567"
+  },
+  {
+   "entry": 12,
+   "type": "correction",
+   "at_utc": "2026-11-16T00:52:00Z",
+   "session": "arena/801ba27f-nba1",
+   "supersedes_entries": [
+    6,
+    8
+   ],
+   "superseded_by_entry": 9,
+   "defect": "bivariate_normal_cdf() in scripts/build_horizon_801ba27f.py used Simpson weights without the h/3 factor, so every rho-priced joint probability on the parlay and same-game-parlay pages was returned three times too large - the parlay page published joint probabilities above 1.000 (for example 1.6171 for the ORL@BOS / MIL@MIA two-leg).",
+   "fix": "the composite Simpson factor h/3 was restored. The corrected function was checked against two closed forms: rho=0 reproduces the independent product exactly (0.670809 for a=0.7, b=1.2) and rho=0.5, a=b=0 reproduces 1/4 + arcsin(rho)/(2*pi) = 0.333333.",
+   "effect_on_published_tickets": "no single-leg ticket changes: singles are priced from the normal CDF directly and were never affected. Parlay and SGP joint probabilities were recomputed and re-published as entry 9, still before the tip of the earliest game they cover (2026-11-16). The calibrated example: the ORL@BOS / MIL@MIA two-leg moves from 1.6171 to 0.539 against a naive independent product of 0.5375.",
+   "flagged": "F100",
+   "note": "the defect is published, not hidden: it is listed on the Flagged for Review page and in the correction row of the parlay-pricing page.",
+   "prev": "d5da77038700c08628c9c988b8c713f841d026d8d2b6cb6aa8687f2a92d1da53"
   }
  ],
- "head": "18a25667d251d2596b157dba6e06516514eb57e112e29d846902eba5085395c0"
+ "head": "95f10fe94d611ab02c8e352e7e22b12ef478c656c50589206602158c1c8e3b81",
+ "superseded": [
+  {
+   "entry": 5,
+   "by": 7,
+   "session": "arena/801ba27f-nba1",
+   "recorded_utc": "2026-11-16T00:02:35Z",
+   "reason": "the builder was re-run 27 seconds after entry 5 and re-serialised the same surfaces with a new published_utc, so the bytes entry 5 hashed no longer exist on disk. Entry 7 re-publishes the same surfaces before the tip of the earliest game they cover (2026-11-16) and is authoritative until entry 10."
+  },
+  {
+   "entry": 6,
+   "by": 8,
+   "session": "arena/801ba27f-nba1",
+   "recorded_utc": "2026-11-16T00:02:35Z",
+   "reason": "the builder was re-run 27 seconds after entry 6 and rewrote the settlement file with a new settled_at_utc. Entry 8 re-settles the same slate with a byte-identical graded result (2 graded, 7 pending, +2.00 units) and is authoritative."
+  },
+  {
+   "entry": 7,
+   "by": 10,
+   "session": "arena/801ba27f-nba1",
+   "recorded_utc": "2026-11-16T00:32:39Z",
+   "reason": "the builder was re-run after the parlay-pricing correction (F107) and re-serialised the surfaces with corrected joint probabilities, so the bytes entry 7 hashed no longer exist on disk. Entry 10 is the authoritative publication."
+  }
+ ],
+ "chain_merges": [
+  {
+   "merged_at_utc": "2026-11-16T00:58:00Z",
+   "merged_by": "arena/801ba27f-nba1",
+   "reason": "two sessions appended entries to the chain from the same base (4 entries, head c46e0a37) without seeing each other. Both tails are kept, ordered by their own at_utc, renumbered 5..12 and re-chained: entry numbers and prev/head are recomputed, every other field of every entry - including the file digests it attests - is unchanged. Nothing either session attested was dropped.",
+   "left": "arena/801ba27f-nba1 (entries 5-11 before renumbering)",
+   "right": "the other session's entry 5 (pre_tip_publication 2026-11-16T00:16Z)",
+   "renumbering": {
+    "6": 5,
+    "5": 6,
+    "8": 7,
+    "7": 8,
+    "9": 10,
+    "11": 11,
+    "10": 12
+   }
+  }
+ ]
 }

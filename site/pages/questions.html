@@ -48,6 +48,19 @@
 <a href="backtest.html">Out-of-Sample Backtest</a>
 <a href="model.html">Model &amp; Teams</a>
 </div>
+<div class="nav-group"><h3>RE-CUT 15 NOV 2026</h3>
+<a href="official-feed.html">Official result feed</a>
+<a href="estimators.html">Two estimators</a>
+<a href="projection.html">Projection surface</a>
+<a href="bet-surface.html">Bet surface (gated)</a>
+<a href="parlay-pricing.html">Parlay pricing</a>
+<a href="rotation.html">Minutes redistribution</a>
+<a href="rest-travel.html">Rest &amp; travel</a>
+<a href="luck-z.html">Luck z-scores</a>
+<a href="injury-ledger.html">Injury PDF ledger</a>
+<a href="settlement.html">Settlement &amp; ledger</a>
+<a href="brief-coverage.html">Requirements coverage</a>
+</div>
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
 <a href="official-verify.html">Live Re-verification</a>
@@ -213,6 +226,55 @@
 <td>Yes. The official hub listed forty-five editions for 11/14 at the time of reading, from 12:00 a.m. ET through 1:30 p.m. ET, and the 1:30 p.m. ET PDF was fetched and transcribed in full: 51 rows for the five 11/14 games (ten clubs, nine of which filed) and 18 rows for the 11/15 games, every one of them NOT YET SUBMITTED. The file is data/captures/2026-11-14-pm/injury_2026-11-14_1330PM.json, and it is the newest edition published when it was read, so a newer one exists by the time this is on the page - the hub updates continuously and the site says so rather than implying a final read.</td>
 <td>High - a direct transcription of the league's own document, with the row count and per-club status reproducible from the URL on the row.</td>
 <td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>
+</tr>
+<tr id="A18">
+<td>A18</td>
+<td><b>What is the measured home-win rate, and what home-court value does it imply?</b></td>
+<td>Home teams won 100 of 190 official finals from 2026-10-20 to 2026-11-15, a rate of 0.5263. Under the empirical margin distribution (sigma 16.78) that is 1.108 points of home court. The site now pins home court to that number instead of fitting it: HCA = sigma_margin * Phi^-1(home_win_rate).</td>
+<td>High for the rate (190 official finals); medium for the conversion, which assumes the margin distribution is normal enough at the median.</td>
+<td class="src"><span class="na" title="source id official box scores is not in the register">&mdash;</span></td>
+</tr>
+<tr id="A19">
+<td>A19</td>
+<td><b>Do the two estimators disagree enough for the disagreement to be a usable signal?</b></td>
+<td>Yes. Across the 34 games on the 2026-11-15..18 slate the two estimators disagree by 4.05 points on the spread on average and up to 8.8 points. That is the same order as the edge the singles gate looks for, so it is a real signal and not rounding noise.</td>
+<td>High that the disagreement is measured; not yet established that it predicts which estimator is right - that needs graded tickets.</td>
+<td class="src"><span class="na" title="source id official box scores, official schedule is not in the register">&mdash;</span></td>
+</tr>
+<tr id="A20">
+<td>A20</td>
+<td><b>Are two games on the same night correlated?</b></td>
+<td>Measured, not assumed: pairing every game with every other game on the same date across 190 official finals gives 1,546 pairs and a correlation of 0.0142 between their home margins - statistically indistinguishable from zero. Multi-game parlays are therefore priced at essentially the naive product, and the naive product is printed beside the rho-priced number so the reader can see the difference.</td>
+<td>High.</td>
+<td class="src"><span class="na" title="source id official box scores is not in the register">&mdash;</span></td>
+</tr>
+<tr id="A21">
+<td>A21</td>
+<td><b>Can a player's minutes really be redistributed when a team-mate is out, from official data alone?</b></td>
+<td>Yes, at the level of a measured minutes share. Minutes were summed from the official box score of each team's last 10 completed games, giving every player a share of team minutes. The top-8 shares and the proportional reallocation when a player is removed are published per team. What is still missing is who actually absorbs the minutes in a given matchup, which is a coaching decision and cannot be read off any official page.</td>
+<td>High for the shares; low for the reallocation rule, which is a stated modelling choice.</td>
+<td class="src"><span class="na" title="source id official box scores is not in the register">&mdash;</span></td>
+</tr>
+<tr id="A22">
+<td>A22</td>
+<td><b>How many status changes does the official injury report actually make in a day?</b></td>
+<td>On 2026-11-15 the league published 75 editions. Diffing each edition against the one immediately before it found 28 status changes - for example T.J. McConnell going Probable to Available at 12:15 PM ET and Andrew Nembhard going Questionable to Out at the same minute. That is why a rotation read built in the morning is stale by the afternoon.</td>
+<td>High - computed from the stored PDFs, not transcribed by hand.</td>
+<td class="src"><span class="na" title="source id official injury report PDFs is not in the register">&mdash;</span></td>
+</tr>
+<tr id="A23">
+<td>A23</td>
+<td><b>Is the 2026-11-15 slate settled?</b></td>
+<td>Partly. At capture, 2 of the 9 games were Final and both published tickets on them won (+2.00 paper units). Four games were in progress and three had not tipped, so their tickets are PENDING. Nothing was graded from a live score.</td>
+<td>High.</td>
+<td class="src"><span class="na" title="source id official finals is not in the register">&mdash;</span></td>
+</tr>
+<tr id="A24">
+<td>A24</td>
+<td><b>Which teams are currently outside the luck noise band?</b></td>
+<td>Luck is reported as a z-score per team from Pythagorean expectation on official points for and against. Teams with |z| &gt; 2.0 are outside the noise band and the site refuses to publish a ticket that leans on them. The full table, with each z and its band, is on the Luck z-scores page.</td>
+<td>Medium - Pythagorean exponent 13.91 is a stated modelling choice, not an official number.</td>
+<td class="src"><span class="na" title="source id official finals is not in the register">&mdash;</span></td>
 </tr>
 </tbody></table></div>
 <h2 class="sec">Open</h2><p class="secsub">Questions that cannot be answered yet. Nothing on this site is decided on an open question.</p>
@@ -407,6 +469,69 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="no official source exists">&mdash;</span></td>
+</tr>
+<tr id="Q24">
+<td>Q24</td>
+<td><b>Is the estimator disagreement actually predictive of error?</b></td>
+<td>Graded tickets. The disagreement is measured, but nothing yet shows that a large disagreement predicts a larger miss.</td>
+<td>Log the disagreement for every published ticket, then regress absolute error on disagreement once there are 100+ graded plays. This is the single cheapest experiment available.</td>
+<td>Whether disagreement can be used as a stake-sizing signal</td>
+<td>high</td>
+<td class="src"><span class="na" title="source id official finals is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q25">
+<td>Q25</td>
+<td><b>What is the real closing line, and how far is the model from it?</b></td>
+<td>A price feed. No closing price is captured anywhere in this repository and no NBA source publishes one, so the market-anchored prior is switched off (F79).</td>
+<td>Log the closing spread, total and price for every graded play into a new file at capture time. Until then 'units won' means model against a naive model, not against a market.</td>
+<td>G4/G5 market gates and the market-anchored prior</td>
+<td>highest</td>
+<td class="src"><span class="na" title="source id n/a - no official source exists is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q26">
+<td>Q26</td>
+<td><b>Do travel distance and 3-in-4 schedule spots move a line at all?</b></td>
+<td>Both columns are now computed and published, but no test has been run against them. Travel is additionally flagged because the coordinates are not official (F78).</td>
+<td>Regress the model's margin and total error on rest days, back-to-back, 3-in-4 and travel miles over 190 official finals, and publish the coefficients with standard errors before any of them is applied.</td>
+<td>Whether schedule and travel belong in the line at all</td>
+<td>medium</td>
+<td class="src"><span class="na" title="source id official schedule and finals is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q27">
+<td>Q27</td>
+<td><b>Are the measured player-prop correlations stable?</b></td>
+<td>Sample. The team-mate correlation is measured on 374 pairs and the opponent correlation on 187 - enough to publish with a caveat, not enough to price on.</td>
+<td>Re-measure at the end of every month and publish the series, so a reader can see whether it is converging or drifting.</td>
+<td>Confident same-game-parlay pricing</td>
+<td>medium</td>
+<td class="src"><span class="na" title="source id official game logs is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q28">
+<td>Q28</td>
+<td><b>Should the model inputs come from the official stats pages or from rebuilt box scores?</b></td>
+<td>The stats pages carry no data in an HTTP response (F80), so this session rebuilt the ratings from official box scores. That is a substantial architectural choice, not a detail.</td>
+<td>Decide explicitly: either add a headless browser to the refresh job so the stats pages can be read as a human sees them, or keep the box-score rebuild as the official path and document it as such. Both are defensible; silently straddling them is not.</td>
+<td>What the scheduled refresh job is allowed to rebuild from</td>
+<td>high</td>
+<td class="src"><span class="na" title="source id official stats pages and box scores is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q29">
+<td>Q29</td>
+<td><b>How should an in-progress slate be presented without tempting anyone to act on a live score?</b></td>
+<td>A rule. On 2026-11-15 six of nine games were live or finished while the horizon page still listed them.</td>
+<td>Split the horizon page by official game status and grey out anything that has tipped, or drop tipped games from the horizon entirely once the day rolls over. The projection/bet split makes this cheap.</td>
+<td>Whether the horizon page can be trusted at a glance in the evening</td>
+<td>medium</td>
+<td class="src"><span class="na" title="source id official games pages is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q30">
+<td>Q30</td>
+<td><b>Does the repository need a retention rule for raw captures?</b></td>
+<td>A policy. This session added 22 MB of gzipped official HTML and 7.5 MB of injury PDFs. That is fine today and will not be fine by the All-Star break.</td>
+<td>Keep the extracted JSON and the manifest digests in git, move the raw bytes to build artifacts, and keep raw HTML only for the current horizon. Document it in the repo before the next session adds more.</td>
+<td>Repository size and Pages deploy time</td>
+<td>low</td>
+<td class="src"><span class="na" title="source id n/a - engineering policy is not in the register">&mdash;</span></td>
 </tr>
 </tbody></table></div>
 <p class="tnote">Where a row says no official source exists, that is the honest answer: no NBA-operated page publishes the missing item (a closing price, for instance).</p>

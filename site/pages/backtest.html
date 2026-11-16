@@ -48,6 +48,19 @@
 <a href="backtest.html">Out-of-Sample Backtest</a>
 <a href="model.html">Model &amp; Teams</a>
 </div>
+<div class="nav-group"><h3>RE-CUT 15 NOV 2026</h3>
+<a href="official-feed.html">Official result feed</a>
+<a href="estimators.html">Two estimators</a>
+<a href="projection.html">Projection surface</a>
+<a href="bet-surface.html">Bet surface (gated)</a>
+<a href="parlay-pricing.html">Parlay pricing</a>
+<a href="rotation.html">Minutes redistribution</a>
+<a href="rest-travel.html">Rest &amp; travel</a>
+<a href="luck-z.html">Luck z-scores</a>
+<a href="injury-ledger.html">Injury PDF ledger</a>
+<a href="settlement.html">Settlement &amp; ledger</a>
+<a href="brief-coverage.html">Requirements coverage</a>
+</div>
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
 <a href="official-verify.html">Live Re-verification</a>
@@ -1512,12 +1525,61 @@
 <tr>
 <td>5</td>
 <td>pre_tip_publication</td>
-<td>2026-11-16T00:16Z</td>
+<td>2026-11-16T00:02:08Z</td>
 <td>c46e0a37b321679b</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger file</a></td>
 </tr>
+<tr>
+<td>6</td>
+<td>settlement_verification</td>
+<td>2026-11-16T00:02:08Z</td>
+<td>4bf5448fc5fbb0c5</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger file</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>pre_tip_publication</td>
+<td>2026-11-16T00:02:35Z</td>
+<td>ff87631e43c123d9</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger file</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>settlement_verification</td>
+<td>2026-11-16T00:02:35Z</td>
+<td>cc3aaa5c47e1ca3c</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger file</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>pre_tip_publication</td>
+<td>2026-11-16T00:16Z</td>
+<td>1c975b04f6c9bec9</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger file</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>pre_tip_publication</td>
+<td>2026-11-16T00:32:39Z</td>
+<td>e9cab6aed01c8718</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger file</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td>settlement_re_grade_note</td>
+<td>2026-11-16T00:35:00Z</td>
+<td>0136521b5bb18b0a</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger file</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td>correction</td>
+<td>2026-11-16T00:52:00Z</td>
+<td>d5da77038700c086</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json" target="_blank" rel="noopener">ledger file</a></td>
+</tr>
 </tbody></table></div>
-<p class="tnote">Tamper-evident hash chain in data/ledger/ledger.json (verify: python3 scripts/verify_ledger.py). Head: 18a25667d251d259. Each entry commits to the previous entry's canonical SHA-256; entry 1 anchors the pre-tip publication, entry 3 seals the settlement record.</p>
+<p class="tnote">Tamper-evident hash chain in data/ledger/ledger.json (verify: python3 scripts/verify_ledger.py). Head: 95f10fe94d611ab0. Each entry commits to the previous entry's canonical SHA-256; entry 1 anchors the pre-tip publication, entry 3 seals the settlement record.</p>
 <h2 class="sec">Official per-game results feed - 2026-11-14</h2><p class="secsub">One row per game: date, teams, final score, quarter scores. Settled only after the final was verified on the official game page (LINESCORES) and the date page; the capture script asserts quarters sum to finals. Stored at data/official/results_2026-11-14.json.</p>
 <div class="tablewrap">
 <table class="tbl "

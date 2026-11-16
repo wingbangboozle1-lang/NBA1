@@ -1,6 +1,6 @@
 {
  "title": "Flagged for Review",
- "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link.",
+ "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md \u00a723): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link.",
  "items": [
   {
    "id": "F1",
@@ -329,7 +329,7 @@
    "id": "F34",
    "severity": "Medium",
    "title": "The repository's gate checks structure, not values",
-   "detail": "The dashboard gate is structural, not a value check: scripts/verify_dashboard.py counts four categories separately — rows with an allowed official source link, explicit no-source marks with an explanatory title, marks whose title carries an approved official URL (rendered as a clickable context link since 2026-11-14), and unmarked rows — and fails only on the last category. It never fetches an NBA page and never compares a published value with its source; scripts/source_check.py is the row-value spot-check, and both were run on the merged tree before every merge (COORDINATION section 35). The original finding stands: a link is not a value check.",
+   "detail": "The dashboard gate is structural, not a value check: scripts/verify_dashboard.py counts four categories separately \u2014 rows with an allowed official source link, explicit no-source marks with an explanatory title, marks whose title carries an approved official URL (rendered as a clickable context link since 2026-11-14), and unmarked rows \u2014 and fails only on the last category. It never fetches an NBA page and never compares a published value with its source; scripts/source_check.py is the row-value spot-check, and both were run on the merged tree before every merge (COORDINATION section 35). The original finding stands: a link is not a value check.",
    "affected": "Trust in 'VERIFY OK' and in every 'verified' label on the site",
    "source": null,
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_all.py",
@@ -735,7 +735,7 @@
    "id": "F80",
    "severity": "medium",
    "title": "First 11/14 tip stated as 00:30Z; official tip is 7:00 PM ET (00:00Z)",
-   "detail": "COORDINATION §40 says the earliest 11/14 game tipped at 00:30Z on 11/15. The official results file lists DEN @ NOP at 7:00 PM ET, which is 00:00Z (EST, UTC-5). Ledger entry 1 records first_tip_utc 2026-11-15T00:00Z, which matches the official time.",
+   "detail": "COORDINATION \u00a740 says the earliest 11/14 game tipped at 00:30Z on 11/15. The official results file lists DEN @ NOP at 7:00 PM ET, which is 00:00Z (EST, UTC-5). Ledger entry 1 records first_tip_utc 2026-11-15T00:00Z, which matches the official time.",
    "source_url": "https://www.nba.com/game/den-vs-nop-0022600231",
    "status": "open"
   },
@@ -881,6 +881,62 @@
    "affected": "every published page; any claim about what the live site currently shows",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/actions/workflows/pages.yml",
    "suggested_action": "Either serialize merges to main (a merge queue) so each deploy completes, or verify against the main tree and the Actions run log rather than a live fetch-back while several sessions are pushing."
+  },
+  {
+   "id": "F107",
+   "severity": "high",
+   "title": "Parlay and SGP joint probabilities were published three times too large (found and fixed 2026-11-16)",
+   "detail": "bivariate_normal_cdf() in scripts/build_horizon_801ba27f.py used composite Simpson weights without the h/3 factor, so every rho-priced joint probability was returned three times its true value. The parlay page therefore published joint probabilities above 1.000 - for example 1.6171 for the ORL@BOS / MIL@MIA two-leg, against a naive independent product of 0.5375. The h/3 factor has been restored and the corrected function was checked against two closed forms: rho = 0 now reproduces the independent product exactly, and rho = 0.5 at a = b = 0 reproduces 1/4 + arcsin(rho)/(2*pi) = 0.333333. Every parlay and SGP row has been recomputed and re-published, still before the tip of the earliest game they cover (2026-11-16). No single-leg ticket changed: singles are priced from the normal CDF directly and were never affected. The defect and the fix are recorded in ledger entry 10; entries 6 and 8 are marked superseded by entry 9.",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_picks_801ba27f.json",
+   "status": "resolved"
+  },
+  {
+   "id": "F101",
+   "severity": "medium",
+   "title": "Arena latitude/longitude are not published by the NBA, so travel distances are unverified",
+   "detail": "The arena NAME, CITY and STATE on every row of the Rest & Travel page are official (printed on the official box score page of a game played there). The latitude and longitude are not printed by any NBA page, so the great-circle distances computed from them are derived, not official. They are published with this flag attached and no travel value is used to move a line.",
+   "source_url": "https://www.nba.com/games",
+   "status": "open"
+  },
+  {
+   "id": "F102",
+   "severity": "high",
+   "title": "Market-anchored prior cannot be applied: no official closing line exists anywhere in this repository",
+   "detail": "The brief asks for a market-anchored prior that blends the model line with the closing line, weighted by measured out-of-sample log-loss. No closing line is captured anywhere in this repo and no NBA-operated source publishes one, so the prior weight is set to 0 and no market-blended price is published. Inventing a closing line would be a hallucination. The weighting machinery is in place and switches on the moment a price feed is added.",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_picks_801ba27f.json",
+   "status": "open"
+  },
+  {
+   "id": "F103",
+   "severity": "medium",
+   "title": "The three official team-stat pages carry no data in an HTTP response",
+   "detail": "www.nba.com/stats/teams/traditional, /opponent and /advanced render their tables in the browser. The raw response captured this session contains zero team rows (no 'resultSets', two <table> elements, both date-picker calendars). The brief asks for these pages to be re-read and the inputs re-cut, so the same quantities were rebuilt from first principles out of official box scores, which ARE server-rendered. Every rating therefore traces to an official game page. The captured stat pages are committed as evidence.",
+   "source_url": "https://www.nba.com/stats/teams/advanced",
+   "status": "open"
+  },
+  {
+   "id": "F104",
+   "severity": "low",
+   "title": "Only 2 of the 9 games on the 2026-11-15 slate were Final at capture time",
+   "detail": "Four were still in progress and three had not tipped. Their tickets are left PENDING and are not graded. The settlement page re-reads the official feed and grades them as they go final; nothing is graded from a live score.",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "status": "open"
+  },
+  {
+   "id": "F105",
+   "severity": "low",
+   "title": "The injury-report index is read once; editions published after the capture are not stored",
+   "detail": "All 75 editions the official index linked for 2026-11-15 were downloaded, hashed, stored and parsed. Editions the league publishes after the capture run are not in the repository. The revision time and the retrieval time of the newest stored edition are printed on the Injury PDF Ledger page.",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "status": "open"
+  },
+  {
+   "id": "F106",
+   "severity": "low",
+   "title": "Players on the injury report with no minutes this season have no measured minutes share",
+   "detail": "Rotation availability is the minutes-weighted share of a team's measured top-8 that is not ruled out. A player who has not appeared in an official box score this season has no measured share, so removing them changes availability by 0.00 even when a coach would have played them. The top-8 table shows the window each share was measured over.",
+   "source_url": "https://www.nba.com/games",
+   "status": "open"
   }
  ]
 }

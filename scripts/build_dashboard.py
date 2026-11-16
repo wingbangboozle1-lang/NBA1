@@ -44,6 +44,15 @@ def esc(v):
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 
 
+def elink(url, label):
+    """Render <a href=...>label</a>, or the not-published mark as plain text when there
+    is no URL. (Escaping None into an href produced href="<span class=...", which the
+    link checker reads as a broken internal link - fixed 2026-11-16, arena/801ba27f-nba1.)"""
+    if not url:
+        return NA
+    return '<a href="%s">%s</a>' % (esc(url), esc(label))
+
+
 def num(v, dp=1):
     """Format a number or render the unverified marker."""
     if v is None or v == "":
@@ -78,6 +87,18 @@ CATEGORIES = [
     ("Luck &amp; Skill", "luck.html", "How many wins each team probably should have had, and which of them are luck."),
     ("Out-of-Sample Backtest", "backtest.html", "The full test window - every completed game after the ratings cut-off - and everything measured on it."),
     ("Model &amp; Teams", "model.html", "The efficiency model, its assumptions and the team ratings it reads."),
+    ("RE-CUT 15 NOV 2026", None, "Everything on these pages was rebuilt from official box scores, because the official stats pages carry no data in a plain HTTP response."),
+    ("Official result feed", "official-feed.html", "One row per game: date, teams, final score, quarter scores. 222 games, 190 Final, quarters summing to the final on every one."),
+    ("Two estimators", "estimators.html", "Two independent constructions of the same line, with their disagreement as the headline and the blend underneath."),
+    ("Projection surface", "projection.html", "Originated lines for every game on the rolling slate. Safe to publish; no bet recommendation lives here."),
+    ("Bet surface (gated)", "bet-surface.html", "Singles, parlays and same-game parlays with the gate status attached. Rotation availability is its own column."),
+    ("Parlay pricing", "parlay-pricing.html", "Measured rho, with the naive independent product printed beside it instead of a single withheld price."),
+    ("Minutes redistribution", "rotation.html", "Measured top-8 minutes shares per team and a worked replacement when a player is out."),
+    ("Rest &amp; travel", "rest-travel.html", "Rest days, back-to-back and 3-in-4 from the official schedule, plus travel between arenas (flagged)."),
+    ("Luck z-scores", "luck-z.html", "Luck per team as a z-score, and the refusal rule for teams outside the noise band."),
+    ("Injury PDF ledger", "injury-ledger.html", "75 editions stored with revision and retrieval times; consecutive editions diffed for status changes."),
+    ("Settlement &amp; ledger", "settlement.html", "The 15 Nov slate graded from official finals only, and the hash chain proving the picks predate the tip."),
+    ("Requirements coverage", "brief-coverage.html", "Every instruction in the brief, its status, and the evidence for that status."),
     ("VERIFICATION", None, "Checked line by line against NBA.com on the day of capture. Mismatches are listed, not corrected."),
     ("Official Source Check", "source-check.html", "Every horizon game and every 11/13 final compared with NBA.com, the 11/13 settlement, and the conflicts between builds."),
     ("Live Re-verification", "official-verify.html", "Every official value on this site read again at 18:40Z on 2026-11-14 and compared with what was published: 185 checks, one row and one official link each."),
@@ -1642,6 +1663,35 @@ def main():
                              if " & " not in r["matchup"]})
     n_flags = len(flagged["items"])
     body = []
+    # --- 2026-11-15 re-cut tiles (session arena/801ba27f-nba1) ---------------
+    def _load_if(rel):
+        _p = os.path.join(ROOT, rel)
+        return load(_p) if os.path.exists(_p) else None
+    _rc = _load_if(os.path.join("data", "derived", "measured_constants_2026_27.json")) or {}
+    _est = _load_if(os.path.join("data", "derived", "estimators_2026_27.json")) or {"rows": []}
+    _ldg = _load_if(os.path.join("data", "injury_reports", "editions_2026-11-15.json")) or {"editions": []}
+    _dfs = _load_if(os.path.join("data", "injury_reports", "diff_2026-11-15.json")) or {"diffs": []}
+    _rc_games = len(_est["rows"])
+    _rc_live = sum(1 for r in _est["rows"] if r.get("game_status") == 1)
+    _rc_dis = (sum(r["disagreement_spread"] for r in _est["rows"]) / _rc_games) if _rc_games else 0
+    _inj_n = len(_ldg["editions"])
+    _inj_ch = sum(1 for d in _dfs["diffs"] for c in d["changes"]
+                  if c["change"] == "STATUS_CHANGE")
+    body.append(tiles([
+        ("Games in the rolling window", _rc_games,
+         "15&ndash;18 Nov 2026 (today + 3 days) &middot; %d had not tipped at publication" % _rc_live),
+        ("Official finals behind the model", _rc.get("n_final_games", 0),
+         "every rating re-cut from official box scores, 20 Oct&ndash;15 Nov"),
+        ("Estimator disagreement", "%.2f" % _rc_dis,
+         "mean points of spread disagreement between the two estimators &middot; the headline signal"),
+        ("Home court, pinned", _rc.get("home_court_points", 0),
+         "from the measured %s home-win rate over %s finals &mdash; not fitted"
+         % (_rc.get("home_win_rate"), _rc.get("n_final_games"))),
+        ("Injury PDFs stored today", _inj_n,
+         "%d status changes detected between consecutive editions" % _inj_ch),
+        ("Open flags", n_flags, "published, non-blocking"),
+    ]))
+
     # I02 (arena/8f64e94c-nba1, taking over PR #106): the landing tiles must state the
     # CURRENT rolling horizon (data/derived/horizon_*.json), not a hard-coded window. The
     # strategy-lab window (docs/data/lines.json + picks.json) is a separate, frozen record
@@ -1667,6 +1717,16 @@ def main():
         ("Out-of-sample games", back["metrics"]["n_games"], "every one predicted out of sample"),
         ("Open flags", n_flags, "published, non-blocking"),
     ]))
+    body.append(banner("info", "Re-cut 15 Nov 2026 &mdash; everything rebuilt from official box scores",
+                     "<p>The three official team-stat pages render their tables in the browser and carry "
+                     "no data in an HTTP response, so possessions, ratings and pace were rebuilt out of "
+                     "official box scores for all %s completed games instead. Nothing here is inferred: "
+                     "every value links to the official page it came from, and anything that could not be "
+                     "confirmed is blank and flagged. Start at "
+                     "<a href=\"site/pages/brief-coverage.html\">Requirements coverage</a> for the "
+                     "instruction-by-instruction status, or "
+                     "<a href=\"site/pages/projection.html\">the projection surface</a> for the lines.</p>"
+                     % _rc.get("n_final_games", 0)))
 
     body.append(banner("warn", "What this site is, and what it is not",
                      "<p>This is an <strong>origination and research</strong> workspace. It produces its own "
@@ -2069,10 +2129,14 @@ def main():
                 _cmp = _df.get("unchanged", 0) + len(_df.get("changed", []))
                 _chg = len(_df.get("changed", []))
                 _filed = len(_df.get("added", []))
+            _from = _df.get("from_edition", "the previous stored edition")
+            if isinstance(_from, dict):
+                _from = (_from.get("edition_id") or _from.get("revision")
+                         or "the previous stored edition")
             diff_note = ("Consecutive-edition diff against %s: %d comparable player rows, "
                          "%d status changes, %d rows the newer edition adds "
                          "(<a href=\"../../data/official/%s\">diff file</a>)."
-                         % (esc(_df.get("from_edition", "the previous stored edition")),
+                         % (esc(_from),
                             _cmp, _chg, _filed, esc(os.path.basename(diff_path))))
         # R-42-B: `esc(None)` is an empty string, and the empty string used to land in a
         # bare `<b>...</b>` slot. When the edition file had no revision stamp the slot was
@@ -2086,13 +2150,31 @@ def main():
         b.insert(0, banner("info", "Newest official edition: report revision and retrieval time",
                            "<p><b>Report revision:</b> %s &nbsp;|&nbsp; <b>retrieved (UTC):</b> %s &nbsp;|&nbsp; "
                            "<b>rows:</b> %d (%d player rows, %d NOT YET SUBMITTED team blocks). "
-                           "Source: <a href=\"%s\">official PDF</a> (index: <a href=\"%s\">official.nba.com</a>).</p>"
+                           "Source: %s (index: %s).</p>"
                            "<p>%s %s</p>"
                            % (_rev_cell, esc(_n.get("retrieved_utc")),
                               len(_rows), _players, _nys,
-                              esc(_src_url), esc(_idx_url),
+                              elink(_n.get("source_url"), "official PDF"),
+                              elink(_n.get("index_url"), "official.nba.com"),
                               diff_note,
                               esc(_n.get("merged_cell_caveat", "")))))
+    # Cross-link to this session's complete injury ledger (arena/801ba27f-nba1).
+    _led = os.path.join(ROOT, "data", "injury_reports", "editions_2026-11-15.json")
+    if os.path.exists(_led):
+        _ld = load(_led)
+        _ok = [x for x in _ld["editions"] if x["parse_status"] == "ok"]
+        _newest = _ok[-1] if _ok else {}
+        b.insert(0, banner("info", "Complete edition ledger for 2026-11-15 now available",
+                           "<p><b>%d</b> editions published by the league on 2026-11-15 were "
+                           "downloaded, hashed, stored and parsed; <b>%d</b> consecutive pairs "
+                           "were diffed and <b>%d</b> status changes were found. Newest stored "
+                           "edition: <b>%s</b>, retrieved <b>%s</b>. "
+                           "<a href=\"injury-ledger.html\">Open the Injury PDF Ledger</a>.</p>"
+                           % (len(_ld["editions"]),
+                              _ld.get("n_consecutive_pairs", 0) if "n_consecutive_pairs" in _ld else len(_ld["editions"]) - 1,
+                              sum(1 for d in json.load(open(os.path.join(ROOT, "data", "injury_reports", "diff_2026-11-15.json")))["diffs"] for c in d["changes"] if c["change"] == "STATUS_CHANGE") if os.path.exists(os.path.join(ROOT, "data", "injury_reports", "diff_2026-11-15.json")) else 0,
+                              esc(_newest.get("revision_label", "")),
+                              esc(_newest.get("retrieved_utc", "")))))
     built["injuries.html"] = page("Injuries, rotation and production impact",
                                   "The official injury report for the horizon, what it does to rotation minutes, "
                                   "and the measured effect on a team's net rating.", "\n".join(b))

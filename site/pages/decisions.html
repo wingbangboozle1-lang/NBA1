@@ -48,6 +48,19 @@
 <a href="backtest.html">Out-of-Sample Backtest</a>
 <a href="model.html">Model &amp; Teams</a>
 </div>
+<div class="nav-group"><h3>RE-CUT 15 NOV 2026</h3>
+<a href="official-feed.html">Official result feed</a>
+<a href="estimators.html">Two estimators</a>
+<a href="projection.html">Projection surface</a>
+<a href="bet-surface.html">Bet surface (gated)</a>
+<a href="parlay-pricing.html">Parlay pricing</a>
+<a href="rotation.html">Minutes redistribution</a>
+<a href="rest-travel.html">Rest &amp; travel</a>
+<a href="luck-z.html">Luck z-scores</a>
+<a href="injury-ledger.html">Injury PDF ledger</a>
+<a href="settlement.html">Settlement &amp; ledger</a>
+<a href="brief-coverage.html">Requirements coverage</a>
+</div>
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
 <a href="official-verify.html">Live Re-verification</a>
@@ -216,6 +229,54 @@
 <td><span class="chip bad">no path</span></td>
 <td class="src"><span class="na" title="no official source exists for this item">&mdash;</span></td>
 </tr>
+<tr id="Q24">
+<td>Q24</td>
+<td>Is the estimator disagreement actually predictive of error?</td>
+<td>Graded tickets. The disagreement is measured, but nothing yet shows that a large disagreement predicts a larger miss.</td>
+<td>Log the disagreement for every published ticket, then regress absolute error on disagreement once there are 100+ graded plays. This is the single cheapest experiment available.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id official finals is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q25">
+<td>Q25</td>
+<td>What is the real closing line, and how far is the model from it?</td>
+<td>A price feed. No closing price is captured anywhere in this repository and no NBA source publishes one, so the market-anchored prior is switched off (F79).</td>
+<td>Log the closing spread, total and price for every graded play into a new file at capture time. Until then 'units won' means model against a naive model, not against a market.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id n/a - no official source exists is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q26">
+<td>Q26</td>
+<td>Do travel distance and 3-in-4 schedule spots move a line at all?</td>
+<td>Both columns are now computed and published, but no test has been run against them. Travel is additionally flagged because the coordinates are not official (F78).</td>
+<td>Regress the model's margin and total error on rest days, back-to-back, 3-in-4 and travel miles over 190 official finals, and publish the coefficients with standard errors before any of them is applied.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id official schedule and finals is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q27">
+<td>Q27</td>
+<td>Are the measured player-prop correlations stable?</td>
+<td>Sample. The team-mate correlation is measured on 374 pairs and the opponent correlation on 187 - enough to publish with a caveat, not enough to price on.</td>
+<td>Re-measure at the end of every month and publish the series, so a reader can see whether it is converging or drifting.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id official game logs is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q28">
+<td>Q28</td>
+<td>Should the model inputs come from the official stats pages or from rebuilt box scores?</td>
+<td>The stats pages carry no data in an HTTP response (F80), so this session rebuilt the ratings from official box scores. That is a substantial architectural choice, not a detail.</td>
+<td>Decide explicitly: either add a headless browser to the refresh job so the stats pages can be read as a human sees them, or keep the box-score rebuild as the official path and document it as such. Both are defensible; silently straddling them is not.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id official stats pages and box scores is not in the register">&mdash;</span></td>
+</tr>
+<tr id="Q29">
+<td>Q29</td>
+<td>How should an in-progress slate be presented without tempting anyone to act on a live score?</td>
+<td>A rule. On 2026-11-15 six of nine games were live or finished while the horizon page still listed them.</td>
+<td>Split the horizon page by official game status and grey out anything that has tipped, or drop tipped games from the horizon entirely once the day rolls over. The projection/bet split makes this cheap.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id official games pages is not in the register">&mdash;</span></td>
+</tr>
 <tr id="Q3">
 <td>Q3</td>
 <td>Are the player-prop projections any good?</td>
@@ -223,6 +284,14 @@
 <td>Repeat the capture for every player on the horizon (ids for most are already in data/players_2026_27.json; the rest come from one roster-page read per team), then settle every published prop against its official box score after the game. scripts/prop_variance.py needs no change - it reads whatever is in data/proplogs/.</td>
 <td><span class="chip info">P4</span></td>
 <td class="src"><a href="https://www.nba.com/stats/players/boxscores" target="_blank" rel="noopener">S20</a></td>
+</tr>
+<tr id="Q30">
+<td>Q30</td>
+<td>Does the repository need a retention rule for raw captures?</td>
+<td>A policy. This session added 22 MB of gzipped official HTML and 7.5 MB of injury PDFs. That is fine today and will not be fine by the All-Star break.</td>
+<td>Keep the extracted JSON and the manifest digests in git, move the raw bytes to build artifacts, and keep raw HTML only for the current horizon. Document it in the repo before the next session adds more.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><span class="na" title="source id n/a - engineering policy is not in the register">&mdash;</span></td>
 </tr>
 <tr id="Q4">
 <td>Q4</td>
@@ -265,7 +334,7 @@
 <td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
 </tr>
 </tbody></table></div>
-<p class="fine">20 open, 17 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
+<p class="fine">27 open, 24 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
 <h2 class="sec">The suggestion catalogue, ranked for review</h2><p class="secsub">18 suggestions as they exist in the repository, with the recommendation the repository already makes and the decision it belongs to. Nothing has been implemented.</p>
 <div class="tablewrap">
 <table class="tbl "
@@ -555,6 +624,69 @@
 <td><b>Close the OT-column reconciliation (F75) with a full per-game re-read</b></td>
 <td>Standings OT columns sum to 9 overtime games through 2026-11-14 while the verified finals show 8. One value is unreconciled and stays flagged.</td>
 <td>B first (cheap, targeted), then A inside the weekly full re-read that the refresh job already performs.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG32</td>
+<td><span class="chip warn">Model</span></td>
+<td><b>Make the estimator disagreement a stake-sizing signal, not just a headline</b></td>
+<td>The disagreement between the two estimators is published as the headline confidence signal, but nothing uses it: every ticket is still printed at the same paper unit.</td>
+<td>Do the threshold first. It needs no statistical justification to be safe, and it produces the data that answers whether the disagreement is predictive at all.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG33</td>
+<td><span class="chip info">Data</span></td>
+<td><b>Add a price feed so the market gates can run</b></td>
+<td>G4 and G5 are blocked and the market-anchored prior is switched off (F79) because no closing price exists anywhere in the repository. Everything the site calls 'units' is model against a naive model.</td>
+<td>Option 3 immediately, whatever else is chosen: the current wording invites a misreading. Then option 2.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG34</td>
+<td><span class="chip info">Architecture</span></td>
+<td><b>Decide the official input path: stats pages or rebuilt box scores</b></td>
+<td>www.nba.com/stats carries no data in a plain HTTP response (F80). This session rebuilt the ratings from official box scores instead, which works and is fully traceable, but it is a different source from the one the brief names.</td>
+<td>Option 2 now, with the caveat printed next to every rating.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG35</td>
+<td><span class="chip info">Data</span></td>
+<td><b>Give the injury pipeline a live polling mode</b></td>
+<td>The league published 75 editions on 2026-11-15 and 28 of the consecutive diffs changed a player's status. A rotation read built in the morning is stale by the afternoon, and the pipeline currently only stores what one capture run saw.</td>
+<td>Option 2, with the newest-edition banner on the Injuries page.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG36</td>
+<td><span class="chip ok">Site</span></td>
+<td><b>Split the horizon page by official game status</b></td>
+<td>On 2026-11-15 six of the nine games on the horizon page had already tipped while the page still listed them as picks (Q29).</td>
+<td>Both: grey out immediately, drop at the daily roll.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG37</td>
+<td><span class="chip info">Engineering</span></td>
+<td><b>Set a retention rule for raw captures before the repository outgrows git</b></td>
+<td>This session added 22 MB of gzipped official HTML and 7.5 MB of injury PDFs. Extracted JSON plus a manifest digest is a few hundred kilobytes for the same information.</td>
+<td>Option 2 now, option 1 when the repo passes 100 MB.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG38</td>
+<td><span class="chip ok">Site</span></td>
+<td><b>Publish a requirements-coverage matrix so the brief can be audited line by line</b></td>
+<td>The brief contains twenty specific modelling instructions. A reader currently has to read the whole site to work out which are done.</td>
+<td>Option 1, regenerated by the build so it cannot drift.</td>
 <td>&mdash;</td>
 <td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
 </tr>
