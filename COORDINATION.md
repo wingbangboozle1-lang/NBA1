@@ -4334,3 +4334,44 @@ completes behind the parallel sessions' runs). This session fetched the site bac
 proxy is not reachable from here — so **the live fetch-back is reported as pending, not as
 confirmed**. The authoritative check for the owner is the Actions run for `243538d` plus
 `site/pages/verify-2026-11-15.html` on the live host.
+
+### 42.4 The page deploy is queued behind the probe workflow — cause found and fixed
+
+**Observation (2026-11-16 00:20Z).** Merge commit `243538d` (PR #109) is an ancestor of `main`
+and every artifact of this session's pass is on `main` (`verify/2026-11-15-4533630f/**` — 17 files —
+and `site/pages/verify-2026-11-15.html`). But the production `Publish static site to GitHub Pages`
+run for `243538d` was still **`pending`** 20 minutes after the merge, while PR-triggered
+`validate` runs queued behind it finished. Main meanwhile moved to `bfc5678` (PR #112, §44's
+session), whose deploy is now the one that matters.
+
+**Cause, read off the workflow files and the run queue, not inferred.** `.github/workflows/probe-official.yml`
+triggers on `push` to `main` **and** `arena/**` and had **no `concurrency` group**. Twelve-plus probe
+runs were queued, one per push, from six different branches (`arena/801ba27f-nba1`,
+`arena/161f1638-nba1`, `arena/abac961f-nba1`, `arena/8f64e94c-nba1`, `arena/4533630f-nba1`, `main`).
+Each probe run fetches every official URL the site cites and takes up to ~1 hour (the session
+`arena/83d380ad-nba1` push-probe run measured 1h16m). GitHub queues jobs FIFO under a per-account
+limit, so a long workflow with no concurrency control starves the publisher that matters. This is
+the same class of bug SG23 fixed for `pages.yml` (board §33/§33.3) — it was simply never applied here.
+
+**Fix (this session, `.github/workflows/probe-official.yml` only):**
+
+```yaml
+concurrency:
+  group: probe-${{ github.ref }}
+  cancel-in-progress: true
+```
+
+One pending probe per ref; the newest push supersedes an older **pending** run. A probe is a
+reachability record, not a deliverable, so dropping a superseded pending run loses nothing: the
+last completed run's `data/raw/probe_official.json` remains the record, and the run artifact is
+only a convenience copy. Published probes still commit exactly as before.
+
+**What is *not* claimed:** that this alone clears the backlog (the runs already queued keep their
+slots), nor that `243538d` will deploy — `main` has moved past it and the deploy for the newest head
+supersedes it, which is the intended convergence behaviour. The authoritative check for the owner is
+the `Publish static site to GitHub Pages` run for the head that is on `main` when they look.
+
+**Live fetch-back, stated honestly:** this session **could not** confirm the live site. `curl` from
+the sandbox to `https://wingbangboozle1-lang.github.io/NBA1/` returns **HTTP 000** (the proxy is not
+reachable from here), so no live evidence is claimed. Earlier sessions could fetch it; this one
+cannot. That is a sandbox limitation, recorded rather than papered over.
