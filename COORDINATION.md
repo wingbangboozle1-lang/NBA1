@@ -5201,3 +5201,34 @@ argument for running the full gate suite after a rebase rather than before a pus
 - It did **not** edit `site/**`, `index.html`, `data/content/**`, `data/derived/**`, `engine/**` or
   any other session's `verify/*` namespace. Every change that belonged on a shared surface is logged
   in §47.2 as a request for that surface's owner.
+
+### 48.7 Pages deploy — measured, and the cause found (2026-11-16T02:5x–03:0xZ)
+
+**PR #128** merged into `main` at `2026-11-16T02:46:52Z` as **`e649dd5`**. Local gate suite on
+the merged head: `check_site` PASS · `verify_integration` PASSED · `check_links` PASS ·
+`check_rendered` PASS · `verify_all` VERIFY OK · `verify_ledger` chain OK.
+
+**Deploy: not yet confirmed, and the cause is now measured rather than guessed.** Between
+01:24Z and 02:58Z on 2026-11-16, **nine consecutive `pages build and deployment` runs ended
+`cancelled`**, each superseded by the next push to `main`; the last successful build is
+`afc79f2` at 2026-11-15T23:44:35Z, and the Pages API reports `status: errored`. Five sessions
+were merging to `main` at a measured cadence of one merge every one to three minutes, which is
+why no build can finish.
+
+**The cause is structural, not a backlog.** Pages is configured with `build_type: legacy` — it
+builds the site from the `main` branch — **and** `.github/workflows/pages.yml deploys an Actions
+artifact to the same environment. Two builders write one site, and the branch builder loses on
+nearly every push. The evidence that this is structural rather than a queue artefact: freeing
+the Actions queue (SG23, PR #115) changed nothing. Recorded as **F107** with the fix as **SG37**
+(one deploy path, not two).
+
+**Not done by me, and why:** I could not apply SG37. `PUT /repos/{owner}/{repo}/pages` with
+`build_type=workflow` returns **HTTP 403 "Resource not accessible by integration"** for this
+session's token — it needs a repository admin. That is a permission boundary, not a choice.
+I also did not force-deploy by pushing a marker commit while five sessions were mid-merge,
+because each push is exactly what cancels the pending build.
+
+**Handoff for the owner:** switch Settings > Pages > Source to *GitHub Actions* (or delete
+`pages.yml`, which is worse because it loses the pre-deploy `validate` gate). Until then the
+live host serves the 2026-11-15T23:44Z build, and **no fetch-back can be used to prove what
+`main` contains** — verify against the tree and the Actions run log instead.

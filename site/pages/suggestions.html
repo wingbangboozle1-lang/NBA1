@@ -462,6 +462,16 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>
 </tr>
+<tr id="SG37">
+<td>SG37</td>
+<td>deployment</td>
+<td><b>Give GitHub Pages one deploy path instead of two that race each other</b></td>
+<td>Pages is configured with build_type 'legacy' - it builds the site from the main branch itself - while .github/workflows/pages.yml also deploys an Actions artifact to the same environment. Two builders are writing one site. Measured at 2026-11-16T02:5xZ: 9 consecutive 'pages build and deployment' runs cancelled, one every few minutes, each cancelled by the next push to main, with the last successful build at 2026-11-15T23:44:35Z. Freeing the queue (SG23, PR #115) did not fix it because the starvation is structural, not a backlog.</td>
+<td>- A: switch Pages to the Actions build type, so pages.yml is the only deploy path <span class='fine'>(effort: Low - one API call or one setting in Settings &gt; Pages; risk: Low - pages.yml already produces the artifact and its deploy job has a concurrency group that serialises production runs (cancel-in-progress false on main); unlocks: F97 closes; the site stops depending on how many sessions happen to be pushing)</span><br>- B: delete pages.yml and let the legacy branch builder be the only path <span class='fine'>(effort: Low; risk: Medium - loses the validate gate that runs before deploy, so a broken page could publish; unlocks: the same single path, but without the pre-deploy check)</span><br>- C: leave both paths <span class='fine'>(effort: None; risk: High - the site keeps serving whatever build happened to finish, which during parallel sessions is an old commit; unlocks: nothing)</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>
 <div class="tablewrap">
