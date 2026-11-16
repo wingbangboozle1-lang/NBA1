@@ -118,7 +118,21 @@
    },
    "note": "Rolling-slate publication for the 2026-11-16 .. 2026-11-18 window, generated before the first tip of the window (2026-11-17T00:00Z) and after the previous slate's settlement. Preregistration files for every strategy family are frozen by digest here. Every earlier vintage stays settleable from its own archive under data/archive/.",
    "prev": "c46e0a37b321679b968ca4aee84a7477a53b2d1f5fa803bd9213672cc310a4bb"
+  },
+  {
+   "entry": 6,
+   "type": "settlement_record",
+   "at_utc": "2026-11-16T03:1xZ",
+   "file": "data/settlement/settlement_2026-11-15.json",
+   "sha256": "907567739b8452fd45741f248a9ceb07772c076082dc24a3705d104c415918c3",
+   "official_finals_file": "data/official/results_2026-11-15_settled_6e1aadc1.json",
+   "official_finals_sha256": "0e0dc23292aa9df47543ca339b594942d66eb6597ed4b2b897ab5d4e0563db97",
+   "settles_entry": 4,
+   "verifies_pre_tip_publication_of": "2026-11-15T12:55Z (entry 4); picks graded are the frozen cut, not a re-price",
+   "games_verified_final": 6,
+   "games_on_slate_not_yet_final": 3,
+   "prev": "18a25667d251d2596b157dba6e06516514eb57e112e29d846902eba5085395c0"
   }
  ],
- "head": "18a25667d251d2596b157dba6e06516514eb57e112e29d846902eba5085395c0"
+ "head": "85e4331419e81a594c26f0c406e51a1c303aa0512947e2ff8a2b0eadb7c80bbe"
 }
