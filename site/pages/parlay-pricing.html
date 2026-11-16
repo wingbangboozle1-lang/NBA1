@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parlay pricing &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="picks.html">Horizon</a>
+      <a href="projection.html">Projection</a>
+      <a href="bet-surface.html">Bet (gated)</a>
+      <a href="decisions.html">Decisions</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>2026-11-15 RE-CUT</h3><a href="official-feed.html">Official result feed</a><a href="estimators.html">Two estimators</a><a href="projection.html">Projection surface</a><a href="bet-surface.html">Bet surface (gated)</a><a href="parlay-pricing.html" class="active">Parlay pricing</a><a href="rotation.html">Minutes redistribution</a><a href="rest-travel.html">Rest &amp; travel</a><a href="luck-z.html">Luck z-scores</a><a href="injury-ledger.html">Injury PDF ledger</a><a href="settlement.html">Settlement &amp; ledger</a></div>
+    <div class="nav-group"><h3>HORIZON</h3><a href="picks.html">Lines &amp; Picks</a><a href="props.html">Player Props</a><a href="injuries.html">Injuries &amp; Rotation</a><a href="gameflow.html">Game Flow</a></div>
+    <div class="nav-group"><h3>EVIDENCE</h3><a href="strategies.html">Strategies &amp; Leaderboard</a><a href="validation.html">Validation Gates</a><a href="correlations.html">Correlations</a><a href="luck.html">Luck &amp; Skill</a><a href="backtest.html">Out-of-Sample Backtest</a><a href="model.html">Model &amp; Teams</a></div>
+    <div class="nav-group"><h3>DECISION</h3><a href="questions.html">Open Questions</a><a href="suggestions.html">Suggestions</a><a href="decisions.html">Decisions: pick a path</a><a href="flagged.html">Flagged for Review</a><a href="sources.html">Source Register</a><a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a></div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every row links to the official page the value
+      came from. A blank cell means the value could not be confirmed on an official
+      page and is flagged, never filled in.
+    </div>
+  </aside>
+  <main id="main">
+    <h1>Parlay pricing</h1>
+    <p class="lede">Measured rho, with the naive product printed beside it instead of a single withheld price.</p>
+<div class="note ok">Every parlay is priced with a <strong>measured</strong> rho and the naive independent product is printed immediately beside it, so the reader can see exactly what the correlation assumption is worth.</div><h2>The measured correlations</h2><div class="tablewrap"><table><thead><tr><th>Pair</th><th>rho</th><th>n</th><th>Status</th><th>Note</th><th>Source</th></tr></thead><tbody><tr><td>same game: home margin vs total points</td><td>-0.0199</td><td>190</td><td>MEASURED</td><td>the correlation that prices a side/total same-game parlay</td><td><a href="https://www.nba.com/games">official finals</a></td></tr><tr><td>cross-game: home margin vs home margin, two games on the same date</td><td>0.0142</td><td>1546</td><td>MEASURED</td><td>the rho that prices an ordinary multi-game parlay; if two different games really are independent this is 0</td><td><a href="https://www.nba.com/games">official finals</a></td></tr><tr><td>two team-mates: points (top-2 minutes on the same team)</td><td>-0.0975</td><td>374</td><td>MEASURED</td><td>small sample at this point in the season</td><td><a href="https://www.nba.com/games">official finals</a></td></tr><tr><td>two opponents: points (leading scorer on each team)</td><td>0.0321</td><td>187</td><td>MEASURED</td><td>small sample at this point in the season</td><td><a href="https://www.nba.com/games">official finals</a></td></tr></tbody></table></div><h2>Prices</h2><div class="tablewrap"><table><thead><tr><th>Leg 1</th><th>Leg 2</th><th>p1</th><th>p2</th><th>rho</th><th>Joint (rho)</th><th>Naive product</th><th>Source</th></tr></thead><tbody><tr><td>ORL@BOS ORL +11.8</td><td>MIL@MIA MIL +9.2</td><td>0.759</td><td>0.7082</td><td>0.0142</td><td><strong>1.6171</strong></td><td>0.5375</td><td><a href="https://www.nba.com/game/orl-vs-bos-0022600245/box-score">game 1</a></td></tr><tr><td>ORL@BOS ORL +11.8</td><td>ATL@OKC ATL +4.8</td><td>0.759</td><td>0.6126</td><td>0.0142</td><td><strong>1.3999</strong></td><td>0.4649</td><td><a href="https://www.nba.com/game/orl-vs-bos-0022600245/box-score">game 1</a></td></tr><tr><td>ORL@BOS ORL +11.8</td><td>PHX@DEN PHX +4.6</td><td>0.759</td><td>0.608</td><td>0.0142</td><td><strong>1.3895</strong></td><td>0.4615</td><td><a href="https://www.nba.com/game/orl-vs-bos-0022600245/box-score">game 1</a></td></tr><tr><td>ORL@BOS ORL +11.8</td><td>UTA@LAC UTA +3.6</td><td>0.759</td><td>0.5849</td><td>0.0142</td><td><strong>1.337</strong></td><td>0.4439</td><td><a href="https://www.nba.com/game/orl-vs-bos-0022600245/box-score">game 1</a></td></tr><tr><td>ORL@BOS ORL +11.8</td><td>CHI@BKN CHI +3.5</td><td>0.759</td><td>0.5826</td><td>0.0142</td><td><strong>1.3317</strong></td><td>0.4422</td><td><a href="https://www.nba.com/game/orl-vs-bos-0022600245/box-score">game 1</a></td></tr><tr><td>MIL@MIA MIL +9.2</td><td>ATL@OKC ATL +4.8</td><td>0.7082</td><td>0.6126</td><td>0.0142</td><td><strong>1.307</strong></td><td>0.4338</td><td><a href="https://www.nba.com/game/mil-vs-mia-0022600260/box-score">game 1</a></td></tr><tr><td>ORL@BOS ORL +11.8</td><td>POR@MIN POR +3.0</td><td>0.759</td><td>0.5709</td><td>0.0142</td><td><strong>1.3052</strong></td><td>0.4333</td><td><a href="https://www.nba.com/game/orl-vs-bos-0022600245/box-score">game 1</a></td></tr><tr><td>ORL@BOS ORL +11.8</td><td>POR@MIN POR +3.0</td><td>0.759</td><td>0.5709</td><td>0.0142</td><td><strong>1.3052</strong></td><td>0.4333</td><td><a href="https://www.nba.com/game/orl-vs-bos-0022600245/box-score">game 1</a></td></tr><tr><td>PHX@DEN PHX +4.6</td><td>MIL@MIA MIL +9.2</td><td>0.608</td><td>0.7082</td><td>0.0142</td><td><strong>1.2974</strong></td><td>0.4306</td><td><a href="https://www.nba.com/game/phx-vs-den-0022600252/box-score">game 1</a></td></tr><tr><td>UTA@LAC UTA +3.6</td><td>MIL@MIA MIL +9.2</td><td>0.5849</td><td>0.7082</td><td>0.0142</td><td><strong>1.2484</strong></td><td>0.4142</td><td><a href="https://www.nba.com/game/uta-vs-lac-0022600257/box-score">game 1</a></td></tr><tr><td>MIL@MIA MIL +9.2</td><td>CHI@BKN CHI +3.5</td><td>0.7082</td><td>0.5826</td><td>0.0142</td><td><strong>1.2435</strong></td><td>0.4126</td><td><a href="https://www.nba.com/game/mil-vs-mia-0022600260/box-score">game 1</a></td></tr><tr><td>POR@MIN POR +3.0</td><td>MIL@MIA MIL +9.2</td><td>0.5709</td><td>0.7082</td><td>0.0142</td><td><strong>1.2187</strong></td><td>0.4043</td><td><a href="https://www.nba.com/game/por-vs-min-0022600250/box-score">game 1</a></td></tr></tbody></table></div>
+    <p class="foot">Built 2026-11-16T00:06:15Z by session <code>arena/801ba27f-nba1</code>.
+    <a href="https://www.nba.com/games">www.nba.com/games</a> &middot;
+    <a href="https://official.nba.com/nba-injury-report-2026-27-season/">official injury index</a></p>
+  </main>
+</div>
+</body>
+</html>
