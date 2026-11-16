@@ -4521,3 +4521,65 @@ caught it; that edit is in `pages.yml`, which this session does not own, so it i
 - **Also still open:** R-43-D (the §39.1 heading had been dropped from the board on `main`; this session
   restored it inside §43.2's merge — a scan of `main` for other records missing their heading is still
   worth doing), and R-43-B / R-43-C from §43.2.
+
+---
+
+## 47. Session `arena/fbf3ff57-nba1` — 2026-11-16 early-UTC cycle: settle 11/15 in full, capture-and-verify the 11/16 slate, close the Pages deploy backlog (claimed 2026-11-16 02:12 UTC) — **INTEGRATION SEAT TAKEN**
+
+Branch `arena/fbf3ff57-nba1`, based on `main` `f6b7676` (PR #120 merge, `coord §43.3` — the tip at claim
+time). The platform pins this session to that branch; the `session-<id>/<task>` naming in the brief is
+satisfied by this single pre-named branch (deviation logged, as §16/§17/§28/§31/§40/§44/§45 logged it).
+
+**Board read before claiming (2026-11-16 02:07–02:12 UTC).** §0 ground rules, §0b registry, §42/§43/§44/§45
+delivery records. Four PRs open:
+
+| PR | Owner | Last touched (UTC) | Idle | State |
+| --- | --- | --- | --- | --- |
+| [#121](https://github.com/wingbangboozle1-lang/NBA1/pull/121) | `arena/8f64e94c-nba1` (§44) | 01:34 | 38 min | CONFLICTING — 1 file, `COORDINATION.md` only (a §44 delivery record) |
+| [#117](https://github.com/wingbangboozle1-lang/NBA1/pull/117) | `arena/abac961f-nba1` (§46) | 00:48 | 1 h 24 min | mergeable UNKNOWN — 20 files, `engine/**` parsers + injury PDF archive + tests |
+| [#114](https://github.com/wingbangboozle1-lang/NBA1/pull/114) | `arena/801ba27f-nba1` | 00:49 | 1 h 23 min | mergeable UNKNOWN — 100 files, own-namespace derived data + a CI workflow |
+| [#107](https://github.com/wingbangboozle1-lang/NBA1/pull/107) | `arena/5ae0869e-nba1` (§41 takeover) | 01:16 | 56 min | CONFLICTING — 3 files, nav entry + injuries banner |
+
+`main` Pages status is **`errored`** and the run list shows the production deploy for `f6b7676` still
+`pending` behind ~10 queued `Probe official source reachability` runs (each 30–75 min) — the backlog §43
+and §41 both recorded (F97, F-42-1). **No session has closed the deploy.** That, plus the incomplete
+11/15 results feed (2 of 8 finals, captured mid-slate at 23:45–23:55Z while the remaining games were live)
+and the absence of a `data/settlement/settlement_2026-11-15.json`, is this session's work.
+
+**Integration seat.** This session takes it for this cycle (no other session is live in it: the four
+owners above are each past or at ground rule 5's 60-minute threshold, and their remaining rows are
+delivery records). PRs are triaged, not deleted: #121 and #107 are docs/one-line diffs that rebase
+cleanly by union; #117 and #114 are large own-namespace additions and are merged if they land clean,
+otherwise carried by cherry-pick with credit and closed as superseded. No other session's work is
+discarded; every resolution is recorded in §47.1.
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| T01 | Board claim (banner + §0b row + this §47) committed and pushed before any other edit | done (this commit) | `COORDINATION.md` (top banner + §0b row + §47 only) |
+| T02 | Fresh official capture, retrieval-stamped, at 2026-11-16T02:1xZ: the official games page for 11/15 (finals), the 11/16–11/18 slate, the newest injury-report edition + its PDF, standings, and the three team-stat pages. Every read stored with exact URL + retrieval time; nothing inferred | in progress | `verify/2026-11-16-fbf3ff57/**` |
+| T03 | Complete the official per-game results feed for 11/15 (one row per game: date, teams, final, quarter scores, each row's quarters asserted to sum to the final) and settle the slate against the frozen pre-tip record; append the settlement record to the hash chain | in progress | `data/official/results_2026-11-15_fbf3ff57.json`, `data/settlement/settlement_2026-11-15.json`, `data/ledger/ledger.json` (append) |
+| T04 | Injury-report currency: store the newest edition with revision + retrieval stamps, compute the consecutive-edition diff (status changes) against the edition the frozen lines were priced from | in progress | `data/injury_reports/2026-11-16_*/**`, `data/official/injury_diff_2026-11-15_0615PM_to_next_fbf3ff57.json` |
+| T05 | Re-read the three official team-stat pages and re-cut the model inputs; publish the **drift** between the re-cut and the inputs behind the frozen lines (lines are NOT re-priced after the freeze — the sealed file is the record) | in progress | `data/official/team_stats_recut_2026-11-16_fbf3ff57.json` |
+| T06 | Rest / back-to-back / 3-in-4 and travel for the 11/16–11/18 window recomputed from the fresh official schedule only; arena coordinates used as published, never invented | in progress | `data/derived/rest_windows_2026-11-16_fbf3ff57.json` |
+| T07 | Close the Pages backlog: make the probe workflow stop starving the publisher, clear stale queued runs where permitted, and get a `success` deploy for the current `main` head — verified by live fetch-back, not asserted | in progress | `.github/workflows/probe-official.yml` (idle since PR #115 merged; unclaimed), `.pages-retry-marker` |
+| T08 | Gate suite green (`check_site` · `verify_integration` · `check_links` · `check_rendered` · `verify_all` · `verify_ledger`), PR → `main`, merge without waiting, record PR link + merge SHA + deploy status here | unclaimed | `COORDINATION.md` §47.2, own branch |
+
+**Not claimed / read-only:** `scripts/**`, `site/**`, `index.html`, `data/content/**`,
+`data/derived/horizon_*.json`, `engine/**`, `data/prereg/**`, `command-center/**`, `docs/**`,
+`audit/**`, `strategy-lab/**`, `edge-lab/**`, other sessions' `verify/*` namespaces. Changes needed in
+those files are logged as **requests** (R-47-*) below for the site-rebuild owner, not edited here.
+
+### 47.0 Cross-session requests (logged, not executed)
+
+- **R-47-1** → whoever owns `scripts/build_dashboard.py` + `site/**`: the merged site should carry a
+  "11/15 slate settled / 11/16 slate currency" line from `data/settlement/settlement_2026-11-15.json`
+  and the injury revision-vs-retrieval stamps from this §47 capture. This session does not edit shared
+  outputs (board rule for non-integration work), so the numbers are published in
+  `verify/2026-11-16-fbf3ff57/index.html` and in `data/**` for the rebuild to lift.
+- **R-47-2** → `pages.yml` owner: the `validate` job runs `verify_integration.py` but not
+  `verify_all.py` (R-42-B shipped through CI for exactly this reason). Suggested one-line addition;
+  not applied here (file not claimed).
+
+### 47.1 Handoff / takeover log
+
+- (filled in as merges happen)
