@@ -212,7 +212,7 @@ def main():
                 "mismatches": [],
                 "promotion_candidates": [{"game_id": r["game_id"]}
                                          for r in rows],
-                "committed_finals_missed": [r["game_id"] for r in rows]}})
+                "committed_finals_missed": []}})
         checks.append({"key": f"results_{date}",
                        "url": f"https://www.nba.com/games?date={date}",
                        "checked_at_utc": now, "http_status": 200,

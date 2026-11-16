@@ -369,7 +369,15 @@ class Promoter:
 
     # -------------------------------------------------------------- results
     def promote_results(self):
-        """Append verified official finals to the per-game results feed."""
+        """Append verified official finals to the per-game results feed.
+
+        Fail-closed per date: if the capture's own snapshot comparison shows
+        a mismatch, a missed committed final, or a row whose matchup
+        disagrees with the snapshot, NOTHING is appended and the comparison
+        is left untouched so the freshness gate blocks on it. Only a fully
+        clean slate is promoted, and then every promotion candidate is
+        resolved into the feed.
+        """
         games_path = os.path.join(RAW, "games_completed.json")
         try:
             feed = read_json(games_path)
@@ -378,7 +386,7 @@ class Promoter:
             return
         cols = feed.get("cols")
         known = {r[7] for r in feed.get("rows", [])}
-        appended, flagged = [], []
+        appended = []
         for path in sorted(glob.glob(os.path.join(RAW, "_capture_results_*.json"))):
             date = os.path.basename(path)[len("_capture_results_"):-len(".json")]
             try:
@@ -395,17 +403,34 @@ class Promoter:
                         rows = cb.get("rows") or cb.get("games") or []
                         for r in rows:
                             if isinstance(r, dict):
-                                official_cross[str(r.get("game_id"))] = r
+                                official_cross[str(r.get("game_id") or
+                                                   r.get("gid"))] = r
                     except (OSError, ValueError):
                         pass
             comparison = cap.get("snapshot_comparison", {})
             original = dict(comparison)
-            for r in (cap.get("parse") or {}).get("finals_rows", []):
+            rows = (cap.get("parse") or {}).get("finals_rows", [])
+            blockers = []
+            if comparison.get("mismatches"):
+                blockers.append(f"{len(comparison['mismatches'])} snapshot "
+                                f"mismatches")
+            if comparison.get("committed_finals_missed"):
+                blockers.append(
+                    f"committed finals missed by the page parse: "
+                    f"{comparison['committed_finals_missed'][:4]}")
+            bad_rows = [r for r in rows if r.get("snapshot_match") is False]
+            if bad_rows:
+                blockers.append(
+                    f"matchup disagrees with snapshot: "
+                    f"{[r.get('game_id') for r in bad_rows][:4]}")
+            if blockers:
+                self.fail("results_feed",
+                          f"{date}: " + "; ".join(blockers) +
+                          " - nothing appended, comparison left for review")
+                return
+            for r in rows:
                 gid = str(r.get("game_id"))
                 if gid in known:
-                    continue
-                if r.get("snapshot_match") is False:
-                    flagged.append({"game_id": gid, "reason": "matchup disagrees with snapshot"})
                     continue
                 x = official_cross.get(gid)
                 if x:
@@ -413,8 +438,8 @@ class Promoter:
                     if (xa, xh) != (r.get("away_pts"), r.get("home_pts")):
                         self.fail("results_feed",
                                   f"{gid}: captured final {r.get('away_pts')}-"
-                                  f"{r.get('home_pts')} disagrees with independent "
-                                  f"record {xa}-{xh}")
+                                  f"{r.get('home_pts')} disagrees with "
+                                  f"independent record {xa}-{xh}")
                         return
                 row = [date, r["away"], r["away_pts"], r["home"], r["home_pts"],
                        r.get("ot") or 0, 0, gid, f"S3_{date}"]
@@ -428,6 +453,9 @@ class Promoter:
                                           f"{r['home_pts']} {r['home']}",
                                  "source_url": game_url(r["away"], r["home"], gid),
                                  "cross_checked": x is not None})
+            # Clean date: every parsed final is now in the feed, so every
+            # promotion candidate is resolved. Mismatches and missed stay
+            # empty because the blockers above would have returned.
             if original != comparison or appended:
                 cap.setdefault("snapshot_comparison_first_capture", original)
                 comparison.update({
@@ -439,9 +467,10 @@ class Promoter:
                 })
                 cap["snapshot_comparison"] = comparison
                 write_json(path, cap)
-                self.promoted.append({
-                    "item": f"results {date}", "promoted_at_utc": self.now,
-                    "detail": "capture reconciled to promoted finals"})
+            self.promoted.append({
+                "item": f"results {date}", "promoted_at_utc": self.now,
+                "detail": f"{len(rows)} finals reconciled ({len(appended)} "
+                          f"new this run)"})
         if appended:
             feed.setdefault("row_sources", {})
             for a in appended:
@@ -454,7 +483,9 @@ class Promoter:
                 "rule": "A final is appended only from an official "
                         "www.nba.com results capture with integer scores and "
                         "a Final status; when an independent record exists it "
-                        "must agree exactly.",
+                        "must agree exactly. A capture whose snapshot "
+                        "comparison shows any mismatch, missed committed "
+                        "final or bad matchup blocks the whole append.",
                 "appended_this_run": appended,
             }
             write_json(games_path, feed)
@@ -463,8 +494,6 @@ class Promoter:
                     f"{len(appended)} finals appended -> data/raw/games_completed.json")
         else:
             self.ok("results_feed", "no new finals to append")
-        if flagged:
-            self.warnings.extend(flagged)
 
     # -------------------------------------------------- evidence-only items
     def promote_evidence_only(self, item, capture_name):

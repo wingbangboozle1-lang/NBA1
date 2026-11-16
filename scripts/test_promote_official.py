@@ -189,6 +189,23 @@ class ResultsFeedTests(unittest.TestCase):
         self.assertEqual(len(feed["rows"]), 1)  # untouched
         self.assertTrue(p.blocked)
 
+    def test_snapshot_mismatch_blocks_all_appends(self):
+        """A capture-level mismatch is never papered over: no append at all."""
+        self._write_results_capture()
+        with open(os.path.join(self.raw, "_capture_results_2026-11-15.json")) as fh:
+            cap = json.load(fh)
+        cap["snapshot_comparison"]["mismatches"] = [
+            {"game_id": "0022600236", "field": "away_pts",
+             "committed": 120, "page": 124}]
+        with open(os.path.join(self.raw, "_capture_results_2026-11-15.json"),
+                  "w") as fh:
+            json.dump(cap, fh)
+        p = promote_official.Promoter(self.record, "2026-11-15T23:00:00Z")
+        p.promote_results()
+        feed = self._feed()
+        self.assertEqual(len(feed["rows"]), 1)  # untouched
+        self.assertTrue(p.blocked)
+
     def test_no_record_appends_single_source_row(self):
         self._write_results_capture()
         p = promote_official.Promoter(self.record, "2026-11-15T23:00:00Z")
