@@ -1,0 +1,24 @@
+{
+ "edition_id": "2026-11-14_0130PM",
+ "revision": "Injury Report: 11/14/26 01:30 PM",
+ "edition_published_utc": null,
+ "retrieved_utc": "2026-11-14T18:40Z..19:10Z",
+ "retrieval_window_utc": null,
+ "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_01_30PM.pdf",
+ "edition_index_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "captured_by": "arena/cc5a6652-nba1",
+ "capture_method": "Verbatim transcription of the newest edition listed on the official index at read time (the index ends at 01:30 PM ET for 2026-11-14). Supersedes the 04:15 AM ET edition the site currently prices from (S10). Rows are limited to the 11/14 games; the 11/15 games are all printed NOT YET SUBMITTED and 11/16-11/17 have no rows at all.",
+ "binary_pdf_stored": false,
+ "binary_pdf_note": "The binary PDF is NOT archived in this sandbox: the shell egress allowlist has no route to ak-static.cms.nba.com, and the only available route to it is the text-extraction fetch channel, which returns extracted text rather than bytes. What is stored is the verbatim row transcription, the SHA-256 of the transcribed row text, the official PDF URL on every row, the edition revision stamp and the retrieval time. This archive is therefore a text archive and is not represented as a binary one.",
+ "rows_sha256": null,
+ "row_counts": {
+  "rows_total": 50,
+  "player_rows": 50,
+  "not_yet_submitted_blocks": 0,
+  "rows_with_inherited_team": 0
+ },
+ "game_dates_in_edition": [],
+ "extraction_artefacts": [],
+ "rows_file": "rows.json",
+ "diffs": []
+}

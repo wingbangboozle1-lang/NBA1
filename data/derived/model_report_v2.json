@@ -1,0 +1,549 @@
+{
+ "title": "Model report v2 - every measured input the line model is pinned to",
+ "generated_by": "scripts/build_horizon_v2.py",
+ "generated_utc": "2026-11-16T00:31:26Z",
+ "home_court_anchor": {
+  "measured_home_win_rate": 0.5319,
+  "measured_home_win_rate_from_final_scores": 0.5159235668789809,
+  "hca_points_from_final_scores_crosscheck": 0.69,
+  "primary_measurement": "the official standings HOME/ROAD columns (the largest official sample); the final-score corpus measurement is published beside it as a cross-check",
+  "measured_road_win_rate": 0.4840764331210191,
+  "games_measured": 157,
+  "home_wins": 81,
+  "home_games": 157,
+  "standings_cross_check": {
+   "home_win_rate": 0.5319,
+   "road_win_rate": 0.4681,
+   "home_games": 188,
+   "road_games": 188,
+   "source_url": "https://www.nba.com/standings"
+  },
+  "sigma_margin_used": 17.2,
+  "sigma_margin_source": "population standard deviation of the margin on the official final-score corpus",
+  "hca_points": 1.38,
+  "hca_z": 0.08,
+  "formula": "HCA_points = sigma_margin * Phi^-1(measured home win rate). The number of points is read off the measurement; nothing about it is fitted.",
+  "status": "MEASURED - the home-court advantage is pinned to the official home win rate"
+ },
+ "league_baselines": {
+  "league_off_rtg": 113.1267,
+  "league_def_rtg": 113.14,
+  "league_pace": 99.8383,
+  "league_pts_per_game": 113.6367,
+  "league_opp_pts_per_game": 113.6667,
+  "league_ppp_off": 1.1315,
+  "league_ppp_def": 1.1313,
+  "n_teams": 30
+ },
+ "measured_correlations": [
+  {
+   "pair": "home points / away points",
+   "rho_measured": 0.0939,
+   "p_value": 0.24065,
+   "n": 158,
+   "why": "the correlation between the two teams' scores in the same game - the rho a both-teams-over parlay has to be priced with",
+   "status": "MEASURED on official final scores (data/official/gamelog.json)"
+  },
+  {
+   "pair": "margin / total",
+   "rho_measured": -0.013,
+   "p_value": 0.87134,
+   "n": 158,
+   "why": "the correlation between the margin and the total - the rho a side plus total same-game parlay has to be priced with",
+   "status": "MEASURED on official final scores (data/official/gamelog.json)"
+  },
+  {
+   "pair": "home points / total",
+   "rho_measured": 0.7356,
+   "p_value": 0.0,
+   "n": 158,
+   "why": "the correlation between a team's own score and the game total",
+   "status": "MEASURED on official final scores (data/official/gamelog.json)"
+  }
+ ],
+ "parlay_pricing_with_measured_rho": [
+  {
+   "p_leg1": 0.55,
+   "p_leg2": 0.55,
+   "rho_used": 0.0939,
+   "p_joint_with_rho": 0.31724,
+   "p_naive_independent_product": 0.3025,
+   "difference": 0.01474,
+   "bettor_edge_pct": 4.87,
+   "pricing_note": "the joint probability is computed from the bivariate normal with the measured rho; the naive independent product is printed beside it so the correlation cost is visible"
+  },
+  {
+   "p_leg1": 0.55,
+   "p_leg2": 0.55,
+   "rho_used": -0.013,
+   "p_joint_with_rho": 0.30046,
+   "p_naive_independent_product": 0.3025,
+   "difference": -0.00204,
+   "bettor_edge_pct": -0.67,
+   "pricing_note": "the joint probability is computed from the bivariate normal with the measured rho; the naive independent product is printed beside it so the correlation cost is visible"
+  },
+  {
+   "p_leg1": 0.6,
+   "p_leg2": 0.6,
+   "rho_used": 0.0939,
+   "p_joint_with_rho": 0.37408,
+   "p_naive_independent_product": 0.36,
+   "difference": 0.01408,
+   "bettor_edge_pct": 3.91,
+   "pricing_note": "the joint probability is computed from the bivariate normal with the measured rho; the naive independent product is printed beside it so the correlation cost is visible"
+  },
+  {
+   "p_leg1": 0.6,
+   "p_leg2": 0.6,
+   "rho_used": -0.013,
+   "p_joint_with_rho": 0.35806,
+   "p_naive_independent_product": 0.36,
+   "difference": -0.00194,
+   "bettor_edge_pct": -0.54,
+   "pricing_note": "the joint probability is computed from the bivariate normal with the measured rho; the naive independent product is printed beside it so the correlation cost is visible"
+  },
+  {
+   "p_leg1": 0.65,
+   "p_leg2": 0.65,
+   "rho_used": 0.0939,
+   "p_joint_with_rho": 0.43549,
+   "p_naive_independent_product": 0.4225,
+   "difference": 0.01299,
+   "bettor_edge_pct": 3.07,
+   "pricing_note": "the joint probability is computed from the bivariate normal with the measured rho; the naive independent product is printed beside it so the correlation cost is visible"
+  },
+  {
+   "p_leg1": 0.65,
+   "p_leg2": 0.65,
+   "rho_used": -0.013,
+   "p_joint_with_rho": 0.42072,
+   "p_naive_independent_product": 0.4225,
+   "difference": -0.00178,
+   "bettor_edge_pct": -0.42,
+   "pricing_note": "the joint probability is computed from the bivariate normal with the measured rho; the naive independent product is printed beside it so the correlation cost is visible"
+  }
+ ],
+ "luck_table": [
+  {
+   "team": "GSW",
+   "games": 10,
+   "expected_points_total": 15.9,
+   "actual_points_total": 108.0,
+   "luck_points": 84.1,
+   "luck_z": 1.95,
+   "in_noise_band": false,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "SAS",
+   "games": 10,
+   "expected_points_total": 152.3,
+   "actual_points_total": -52.0,
+   "luck_points": -56.3,
+   "luck_z": -1.3,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "DAL",
+   "games": 11,
+   "expected_points_total": -22.5,
+   "actual_points_total": 129.0,
+   "luck_points": 55.5,
+   "luck_z": 1.23,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "MEM",
+   "games": 11,
+   "expected_points_total": 134.3,
+   "actual_points_total": -26.0,
+   "luck_points": -48.3,
+   "luck_z": -1.07,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "WAS",
+   "games": 11,
+   "expected_points_total": -44.3,
+   "actual_points_total": 86.0,
+   "luck_points": -43.7,
+   "luck_z": -0.97,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "UTA",
+   "games": 11,
+   "expected_points_total": -156.6,
+   "actual_points_total": -8.0,
+   "luck_points": 40.6,
+   "luck_z": 0.9,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "OKC",
+   "games": 11,
+   "expected_points_total": 8.5,
+   "actual_points_total": 109.0,
+   "luck_points": 36.5,
+   "luck_z": 0.81,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "LAL",
+   "games": 13,
+   "expected_points_total": 125.9,
+   "actual_points_total": -20.0,
+   "luck_points": -35.9,
+   "luck_z": -0.73,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "CHI",
+   "games": 9,
+   "expected_points_total": -149.7,
+   "actual_points_total": 87.0,
+   "luck_points": 28.7,
+   "luck_z": 0.7,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "IND",
+   "games": 12,
+   "expected_points_total": -2.4,
+   "actual_points_total": -24.0,
+   "luck_points": -29.6,
+   "luck_z": -0.63,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "DET",
+   "games": 11,
+   "expected_points_total": 58.8,
+   "actual_points_total": 0.0,
+   "luck_points": -26.8,
+   "luck_z": -0.59,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "BOS",
+   "games": 11,
+   "expected_points_total": 175.8,
+   "actual_points_total": -28.0,
+   "luck_points": -25.8,
+   "luck_z": -0.57,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "NOP",
+   "games": 11,
+   "expected_points_total": -68.1,
+   "actual_points_total": 45.0,
+   "luck_points": -22.9,
+   "luck_z": -0.51,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "CLE",
+   "games": 11,
+   "expected_points_total": 14.3,
+   "actual_points_total": 32.0,
+   "luck_points": 21.7,
+   "luck_z": 0.48,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "MIL",
+   "games": 10,
+   "expected_points_total": -168.4,
+   "actual_points_total": -50.0,
+   "luck_points": 16.4,
+   "luck_z": 0.38,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "NYK",
+   "games": 10,
+   "expected_points_total": 77.1,
+   "actual_points_total": 44.0,
+   "luck_points": -15.1,
+   "luck_z": -0.35,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "SAC",
+   "games": 10,
+   "expected_points_total": -170.2,
+   "actual_points_total": 35.0,
+   "luck_points": 15.2,
+   "luck_z": 0.35,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "HOU",
+   "games": 10,
+   "expected_points_total": 70.4,
+   "actual_points_total": 28.0,
+   "luck_points": 13.6,
+   "luck_z": 0.32,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "PHI",
+   "games": 12,
+   "expected_points_total": 14.7,
+   "actual_points_total": -8.0,
+   "luck_points": -14.7,
+   "luck_z": -0.31,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "PHX",
+   "games": 10,
+   "expected_points_total": -74.7,
+   "actual_points_total": 42.0,
+   "luck_points": 12.7,
+   "luck_z": 0.29,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "ATL",
+   "games": 10,
+   "expected_points_total": 39.3,
+   "actual_points_total": -46.0,
+   "luck_points": -11.3,
+   "luck_z": -0.26,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "MIN",
+   "games": 12,
+   "expected_points_total": 150.4,
+   "actual_points_total": 36.0,
+   "luck_points": -12.4,
+   "luck_z": -0.26,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "DEN",
+   "games": 9,
+   "expected_points_total": 13.4,
+   "actual_points_total": -24.0,
+   "luck_points": 8.6,
+   "luck_z": 0.21,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "POR",
+   "games": 10,
+   "expected_points_total": 65.0,
+   "actual_points_total": -16.0,
+   "luck_points": 7.0,
+   "luck_z": 0.16,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "MIA",
+   "games": 10,
+   "expected_points_total": -7.4,
+   "actual_points_total": -11.0,
+   "luck_points": 6.4,
+   "luck_z": 0.15,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "BKN",
+   "games": 10,
+   "expected_points_total": -52.0,
+   "actual_points_total": -22.0,
+   "luck_points": -6.0,
+   "luck_z": -0.14,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "LAC",
+   "games": 9,
+   "expected_points_total": -55.8,
+   "actual_points_total": 100.0,
+   "luck_points": 3.8,
+   "luck_z": 0.09,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "TOR",
+   "games": 11,
+   "expected_points_total": 13.0,
+   "actual_points_total": 80.0,
+   "luck_points": -3.0,
+   "luck_z": -0.07,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "ORL",
+   "games": 10,
+   "expected_points_total": -53.5,
+   "actual_points_total": -28.0,
+   "luck_points": 1.5,
+   "luck_z": 0.04,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "CHA",
+   "games": 10,
+   "expected_points_total": -103.5,
+   "actual_points_total": -40.0,
+   "luck_points": -0.5,
+   "luck_z": -0.01,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  }
+ ],
+ "luck_noise_band_z": 1.5,
+ "market_prior": {
+  "p_model": 0.5,
+  "p_market": null,
+  "p_blend": 0.5,
+  "w_model": 1.0,
+  "w_market": 0.0,
+  "market_leg": "UNAVAILABLE - no official closing line is reachable from this sandbox, so the market leg carries zero weight",
+  "oos_log_loss_model": 0.4862802533559244
+ },
+ "model_out_of_sample_log_loss": {
+  "value": 0.48628,
+  "n_games": 157,
+  "definition": "binary log loss of the model's home-win probability on the official final-score corpus"
+ },
+ "per_player_minutes": {
+  "available": true,
+  "file": "player_minutes_top50_2026-11-15.json",
+  "captured_utc": "2026-11-16T00:13:23Z",
+  "source_url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=MIN",
+  "rows_captured": 50,
+  "rows_total_official": 469,
+  "capture_limitation": "The rendered leaderboard is 10 pages; the URL Page parameter was not honored by the rendered slice (Page=2 re-rendered page 1), so pages 2-10 (rows 51-469) were NOT reachable this session. Page 1 (top 50 by MIN) was captured in full and transcribed verbatim into verify/2026-11-15-49f70042/player_minutes_top50_rows.csv. Full rosters remain obtainable per-team (stats/players/traditional?TeamID=...) in future sessions.",
+  "teams_captured": [
+   "ATL",
+   "BKN",
+   "BOS",
+   "CLE",
+   "DAL",
+   "DEN",
+   "DET",
+   "GSW",
+   "HOU",
+   "IND",
+   "LAC",
+   "LAL",
+   "MIA",
+   "MIN",
+   "NOP",
+   "NYK",
+   "OKC",
+   "ORL",
+   "PHI",
+   "PHX",
+   "POR",
+   "SAC",
+   "TOR",
+   "UTA",
+   "WAS"
+  ]
+ },
+ "assumptions": {
+  "league_pace_formula": {
+   "value": "POSS_game = pace_home + pace_away - league_pace",
+   "status": "ARITHMETIC identity used by the published NBA efficiency construction; the model also publishes the possession estimate taken straight from the official POSS column."
+  },
+  "opponent_ppp_scaling": {
+   "value": "PPP_proj(team) = PPP_off(team) * PPP_def(opponent) / league_PPP_def",
+   "status": "DERIVED from the official points-per-possession fields; the scaling exponent is a modelling choice fixed at 1.0."
+  },
+  "estimator_blend_weights": {
+   "value": 0.5,
+   "status": "MODELLING CHOICE - the two estimators are blended with equal weight. The headline confidence signal is their DISAGREEMENT, not the blend, so the blend weight does not drive the confidence gate."
+  },
+  "bench_efficiency_ratio": {
+   "value": 0.85,
+   "status": "MODELLING CHOICE - replacement players are assumed to produce at 0.85 points per minute of the absent player's rate. Sensitivity 0.75 / 0.85 / 0.95 is published. Flagged F4."
+  },
+  "replacement_pool_size": {
+   "value": 5,
+   "status": "MODELLING CHOICE - the replacement pool is the five rotation players behind the top eight by minutes."
+  },
+  "absence_minutes_share_by_status": {
+   "value": {
+    "Out": 1.0,
+    "Doubtful": 0.75,
+    "Questionable": 0.5,
+    "Probable": 0.2,
+    "Available": 0.0
+   },
+   "status": "MODELLING CHOICE - the share of a listed player's captured season minutes that the redistribution removes is one minus the repo's published play probability by status (STATUS_PLAY_PROB). Available players lose nothing; Questionable players lose an expected half. The removed minutes are re-spread at the bench-efficiency ratio."
+  },
+  "team_name_to_abbr": {
+   "value": "canonical mapping of the official full team names to the three-letter abbreviations used by every official surface"
+  },
+  "rest_penalty_points": {
+   "value": {
+    "b2b": 1.1,
+    "three_in_four": 0.6
+   },
+   "status": "MODELLING CHOICE - net-rating points per 100 possessions conceded to a team on a back-to-back or that has played three games in four. Flagged F4."
+  },
+  "travel_penalty_points": {
+   "value": "0.0012 points per mile of great-circle distance",
+   "status": "MODELLING CHOICE - calibrated so that a 3,000-mile cross-country trip is worth about 3.6 net-rating points per 100 possessions. Flagged F4."
+  },
+  "luck_noise_band_z": {
+   "value": 1.5,
+   "status": "MODELLING CHOICE - a strategy that leans on a team whose luck z-score is outside +/-1.5 is refused. Flagged F4."
+  },
+  "market_leg_weight": {
+   "value": 0.0,
+   "status": "BLOCKED BY SOURCE, not chosen: no official closing line is reachable from this sandbox, so the market leg of the blend carries zero weight and the blend is model-only. The machinery and the measured out-of-sample log loss that would set the weight are implemented and published."
+  }
+ },
+ "gaps": [
+  {
+   "id": "G-MIN-2",
+   "severity": "medium",
+   "item": "per-player minutes captured for 25 of the teams in the window; missing: CHA, CHI, MEM, MIL, SAS",
+   "detail": "for those teams the rotation-availability column and the redistribution effect are blank and flagged",
+   "source": "https://www.nba.com/stats/players/traditional"
+  },
+  {
+   "id": "G-MKT",
+   "severity": "high",
+   "item": "no official closing line is reachable, so the market leg of the blend carries zero weight",
+   "detail": "the blend machinery and the measured out-of-sample log loss that would set the weight are implemented and published; the weight is 0 because the market leg is unavailable, not because it was chosen",
+   "source": "https://www.nba.com/games"
+  }
+ ]
+}

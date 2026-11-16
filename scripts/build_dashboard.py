@@ -161,6 +161,8 @@ def page(title, sub, body, depth=1, extra_head=""):
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
+      <a href="model-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
+      <a href="picks.html">Horizon 14–17 (session build)</a>
       <a href="%(repo)spicks.html">Rolling horizon pick file</a>
       <a href="%(navbase)spicks.html">Horizon</a>
       <a href="%(navbase)sstrategies.html">Evidence</a>
@@ -1814,6 +1816,12 @@ def main():
                      'only in presentation, data cut and how much of the pipeline they exercise. The pages '
                      'above are the current build; the rest are reachable from here.</p>'
                      '<ul class="plain">'
+                     '<li><b>Model v2 (session <code>arena/49f70042-nba1</code>).</b> The disagreement-first '
+                     'rebuild: measured home-court advantage, two independent estimators with their disagreement '
+                     'as the headline, minutes redistribution at published status shares, rest/travel from sourced '
+                     'arena coordinates, measured rho, inert market leg &mdash; 38 lines 15&ndash;19 Nov, '
+                     '25 zero-stake model-output picks 16&ndash;18 Nov (14 gate passes, nothing promoted). '
+                     '<a href="model-v2.html">Open model v2</a>.</li>'
                      '<li><b>Current &mdash; this build.</b> The rolling ' + hz_label + ' horizon (originated lines, '
                      'pick rows, settlement stamp), the frozen 14&ndash;17 Nov strategy-lab window with its '
                      '60 gated paper picks (settled day by day from official finals), the 11/15/26 '
