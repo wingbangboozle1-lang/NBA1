@@ -61,7 +61,7 @@ once this branch lands.
 - ledger entries 6+7 appended, head
   `45aad9f894f6b695cf8311f0ecf810885a91beebe16f353710685d6b6f1088a8`, `verify_ledger` OK;
 - an idempotency guard was added to `settle_slate.py` so the scheduled run cannot duplicate
-  the settlement or break entry 7's digest (the still-open structural piece is **F115**).
+  the settlement or break entry 7's digest (the still-open structural piece is **F126 (F115 at authoring)**).
 
 ## 5. Fixes and findings this session published
 
@@ -69,9 +69,9 @@ once this branch lands.
 - `scripts/settle_slate.py` — idempotent skip when no new date is settleable;
 - `scripts/build_pages_801ba27f.py` — `build_settlement` patched to the real settlement schema
   (it referenced keys no settlement file ever had);
-- new flags **F113** (results-feed builder inputs absent from the repo — feed not
+- new flags **F124 (F113 at authoring)** (results-feed builder inputs absent from the repo — feed not
   reproducible here; poss/rtg/pace left null on re-cut rows rather than invented),
-  **F114** (main re-squashed to a single root commit 047103e at 11:51:15Z; PRs #130/#136 had
+  **F125 (F114 at authoring)** (main re-squashed to a single root commit 047103e at 11:51:15Z; PRs #130/#136 had
   no merge base, content carried file-by-file with credit), **F115** (future re-settlements
   overwrite the record and will break `verify_ledger`'s digest of entry 7 — guard in place,
   structural fix open);

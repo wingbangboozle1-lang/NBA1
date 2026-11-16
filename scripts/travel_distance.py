@@ -3,9 +3,30 @@ using the arena-coordinate table and the official schedule.
 
 Usage:  python3 scripts/travel_distance.py <schedule_json> [output_json]
 
-Reads:  data/arenas.json (team -> arena lat/lon)
+Reads:  data/official/arena_coordinates_2026-11-15.json   (team -> arena lat/lon)
         schedule JSON with {_meta, games: [{date, home, away, ...}]}
 Writes: per-team travel miles for each game.
+
+SOURCE FIX (session arena/23b323a3-nba1, COORDINATION §50, finding F-50-01)
+--------------------------------------------------------------------------
+This script previously read `data/arenas.json`. That table is wrong in five
+places, and the errors were measured against the official schedule page's own
+venue text in this session:
+
+  LAC  said Crypto.com Arena, Los Angeles   official: Intuit Dome, Inglewood, CA
+  LAL  said Crypto.com Arena, Los Angeles   official: Crypto.com Arena, Los Angeles, CA
+  PHX  said Footprint Center                official: Mortgage Matchup Center, Phoenix, AZ
+  SAC  said Golden 1 Center, Sacramento     (same arena, coordinates off by ~0.2 mi)
+  CLE  said Rocket Arena, Cleveland         (same arena, coordinates fine)
+  PHI  said Wells Fargo Center              official: Xfinity Mobile Arena, Philadelphia, PA
+
+LAC is the material one: an LA-vs-Inglewood swap moves a Clippers home game by
+~9 miles of the away team's travel. The repo already held the CORRECT table
+(`data/official/arena_coordinates_2026-11-15.json`, venue names transcribed from
+the official schedule page per row). This script was simply reading the stale
+one. Pointing it at the official capture is a source correction, not a new
+assumption. `data/arenas.json` is left on disk (it is cited by other files) and
+is flagged F-50-01 rather than deleted, so the discrepancy stays visible.
 """
 import sys, json, math, os
 
@@ -25,7 +46,11 @@ def main():
     sched_path = sys.argv[1]
     out_path = sys.argv[2] if len(sys.argv) > 2 else "data/travel_distance.json"
 
-    arenas = read_json("data/arenas.json")["arenas"]
+    coord_doc = read_json("data/official/arena_coordinates_2026-11-15.json")
+    arenas = {r["abbr"]: {"arena": r["arena"], "lat": r["lat"], "lon": r["lon"],
+                          "source": r.get("venue_source_url"),
+                          "coordinate_source": r.get("coordinate_source_url")}
+              for r in coord_doc["rows"]}
     sched = read_json(sched_path)
     games = sched["games"]
 
@@ -57,9 +82,18 @@ def main():
 
     write_json(out_path, {
         "_meta": {
-            "source": "data/arenas.json (approx arena coords) + official schedule",
+            "source": ("data/official/arena_coordinates_2026-11-15.json "
+                       "(venue names transcribed from https://www.nba.com/schedule; "
+                       "coordinates from the Wikipedia coordinate parameter, "
+                       "SOURCED SECONDARY - not NBA-published) + official schedule"),
+            "supersedes": ("data/arenas.json, whose LAC/LAL/PHX/PHI/SAC arena entries "
+                           "were measured wrong against the official schedule page "
+                           "in COORDINATION §50 (finding F-50-01)."),
             "method": "great-circle miles from previous game arena to current game arena (away team only); home team = 0.0",
-            "note": "Away-team travel is None when the team has no previous game in the capture window (first game of season for that team). Coordinates are approximate and flagged for review.",
+            "note": ("Away-team travel is None when the team has no previous game in "
+                 "the capture window (first game of season for that team)."),
+        "correction_measured_utc": "2026-11-16T15:10Z",
+        "correction_by": "arena/23b323a3-nba1",
         },
         "travel": travel,
     })

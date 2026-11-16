@@ -59,6 +59,11 @@ run("check_site.py")
 run("verify_schedule_c.py")  # Build C: row-by-row schedule check + schedule-verified.html
 run("build_dashboard.py")    # Build D: regenerate the unified site (index.html + site/**)
 run("verify_dashboard.py")   # Build D: linked or explicit no-source rows; hosts checked, values not re-fetched
+# R10 noise-band refusal (session arena/23b323a3-nba1, COORDINATION §50). A gate that has
+# never rejected anything is not evidence of a gate: on the live corpus zero strategies are
+# refused, so the only way to show the refusal works is to plant a team outside the band and
+# assert it is refused. This runs in the suite so the rule cannot be quietly deleted.
+run("test_noise_band_refusal.py")
 
 # 4a: slate sources
 slate = load("slate_full")

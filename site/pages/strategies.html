@@ -249,6 +249,113 @@
 </tr>
 </tbody></table></div>
 <p class="tnote">Units assume the standard -110 price, which is a disclosed convention, not an observed price: no sportsbook price was observable anywhere in this environment. A blank or 0 record means the strategy has no graded plays, never a loss.</p>
+<h2 class="sec">Luck noise band &mdash; the refusal rule</h2><p class="secsub">Requirement R10: report luck as a z-score per team and refuse to publish a strategy that leans on a team outside the noise band. This is applied to every strategy in the batch by one function, so no strategy can be defined around it.</p>
+<p class="lead">R10 refusal, applied uniformly to every strategy in the batch: a strategy is REFUSED if any bet it places leans on a team whose luck z-score has |z| &gt;= 1.96, or on a team with no luck z-score at all. Source of every z: data/luck_zscores.json, computed from the official team advanced table (https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season).</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>ID</th>
+<th>Strategy</th>
+<th>Bets checked</th>
+<th>Bets on a team outside the band</th>
+<th>Bets with no measurable z</th>
+<th>Offending teams</th>
+<th>Refusal</th>
+<th>Status</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td><b>S01</b></td>
+<td>High-confidence moneyline</td>
+<td>7</td>
+<td>0</td>
+<td>0</td>
+<td>&mdash;</td>
+<td>not refused</td>
+<td>NOT VALIDATED</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><b>S02</b></td>
+<td>Extreme-confidence moneyline</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>&mdash;</td>
+<td>not refused</td>
+<td>NOT VALIDATED</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><b>S08</b></td>
+<td>NULL CONTROL — coin flip</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>&mdash;</td>
+<td>not refused</td>
+<td>NOT VALIDATED</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><b>S03</b></td>
+<td>Total deviation fade</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>&mdash;</td>
+<td>not refused</td>
+<td>NOT VALIDATED</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><b>S04</b></td>
+<td>Two-leg moneyline parlay, cross-game</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>&mdash;</td>
+<td>not refused</td>
+<td>UNGRADED</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><b>S05</b></td>
+<td>Player prop over, half-line</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>&mdash;</td>
+<td>not refused</td>
+<td>UNGRADED</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><b>S06</b></td>
+<td>Same-game parlay: player points + team total</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>&mdash;</td>
+<td>not refused</td>
+<td>UNGRADED</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+<tr>
+<td><b>S07</b></td>
+<td>Injury-fade total under</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>&mdash;</td>
+<td>not refused</td>
+<td>UNGRADED</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">On the current corpus every modelled lean falls inside the band, so no strategy is refused today &mdash; 11 bets checked, 0 offending. That is a measurement, not a guarantee: <code>scripts/test_noise_band_refusal.py</code> demonstrates the same code path refusing a planted team at |z| &ge; 1.96, so the rule is known to bite. A totals bet leans on the game rather than on a team's record, so it is recorded as checked against no team rather than assumed safe. The null control is checked too and is never refused, because a coin flip does not lean on a team.</p>
+<p class="fine">Refused strategies on this build: <b>0</b> of 8. The band is two-sided (|z| &ge; 1.96) and matches the threshold <code>data/luck_zscores.json</code> publishes. A lean on a team with no z-score at all is also refused, rather than being treated as safe.</p>
 <h2 class="sec">Reward tiers</h2><p class="secsub">What a strategy earns once it clears the gates it must clear.</p>
 <div class="tablewrap">
 <table class="tbl "

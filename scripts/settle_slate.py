@@ -367,7 +367,7 @@ def main(argv=None):
     # so the overwrite alone would turn the chain check red. Exit 0 without
     # touching anything when every date settleable right now is already in the
     # existing record; a genuinely new settleable date still takes the normal
-    # path (with the vintage-mismatch caveat flagged in F115).
+    # path (with the vintage-mismatch caveat flagged in F126 (renumbered from F115 at merge)).
     out_rel_existing = f"data/settlement/settlement_{args.slate}.json"
     existing_path = os.path.join(ROOT, out_rel_existing)
     if os.path.exists(existing_path):
