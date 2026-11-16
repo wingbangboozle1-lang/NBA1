@@ -1,0 +1,55 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-15_05_15PM.pdf",
+  "label": "Injury-Report_2026-11-15_05_15PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_15PM.pdf",
+  "retrieved_at_utc": "2026-11-15T22:44:19Z",
+  "sha256": "e6605d35bf4acfcb8e980247521796233ea3663648db4218d58a9a79c6e827ab",
+  "rows": 127
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-15_05_30PM.pdf",
+  "label": "Injury-Report_2026-11-15_05_30PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_30PM.pdf",
+  "retrieved_at_utc": "2026-11-15T22:44:19Z",
+  "sha256": "0ff31c236dda6c0dfc750665c94f47bed83c1d7f900b678195367421b115be89",
+  "rows": 127
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "Dallas Mavericks",
+   "player": "Aldama, Santi",
+   "before_status": "Questionable",
+   "after_status": "Out",
+   "before_reason": "Injury/Illness - Left Ankle Sprain",
+   "after_reason": "Injury/Illness - Left Ankle Sprain",
+   "before_matchup": "DAL@BOS",
+   "after_matchup": "DAL@BOS"
+  },
+  {
+   "team": "Dallas Mavericks",
+   "player": "Gafford, Daniel",
+   "before_status": "Probable",
+   "after_status": "Available",
+   "before_reason": "Injury/Illness - Right Shoulder Stinger",
+   "after_reason": "Injury/Illness - Right Shoulder Stinger",
+   "before_matchup": "DAL@BOS",
+   "after_matchup": "DAL@BOS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Johnson, Tre",
+   "before_status": "Questionable",
+   "after_status": "Out",
+   "before_reason": "Injury/Illness - Low Back Soreness",
+   "after_reason": "Injury/Illness - Low Back Soreness",
+   "before_matchup": "HOU@WAS",
+   "after_matchup": "HOU@WAS"
+  }
+ ],
+ "listed_in_after_only": [],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}
