@@ -41,6 +41,7 @@ NAV = [
         ("luck-z.html", "Luck z-scores"),
         ("injury-ledger.html", "Injury PDF ledger"),
         ("settlement.html", "Settlement &amp; ledger"),
+        ("requirements.html", "Requirements coverage"),
     ]),
     ("HORIZON", [
         ("picks.html", "Lines &amp; Picks"),
@@ -516,6 +517,163 @@ def build_settlement():
                 "".join(body), "settlement.html")
 
 
+
+REQUIREMENTS = [
+    ("Extend the scheduled job to refresh the official schedule, standings, team statistics and "
+     "injury report for each rolling slate, then rebuild only after freshness and provenance "
+     "gates pass",
+     "PARTIAL",
+     "The fetch and the fail-closed gate exist and are proven on a runner (engine/fetch_official.py, "
+     "engine/refresh_gate.py). This session added a second capture job that stores every official "
+     "page and box score it reads. The standings and team-stat parsers cannot produce rows because "
+     "those pages carry no data in an HTTP response (F80).",
+     "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/refresh_gate.py"),
+    ("Keep an official per-game result feed current; settle only after final scores are verified; "
+     "store one row per game: date, teams, final score, quarter scores",
+     "DONE",
+     "222 games captured, 190 Final, quarter scores asserted to sum to the final on every Final game. "
+     "Nothing is graded from a live score.",
+     "https://www.nba.com/games"),
+    ("Store every injury PDF with its timestamp and diff consecutive reports to detect status changes",
+     "DONE",
+     "75 editions published by the league on 2026-11-15 were downloaded, hashed and stored; 74 "
+     "consecutive pairs diffed; 28 status changes detected.",
+     "https://official.nba.com/nba-injury-report-2026-27-season/"),
+    ("Freeze a pre-registration file per strategy before its first bet: signal, thresholds, "
+     "universe and the exact settlement rule",
+     "DONE",
+     "R-SINGLE, R-PARLAY and R-SGP frozen before the earliest tip this publication can apply to, "
+     "hashed into the ledger.",
+     "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/prereg/v2-801ba27f/_index.json"),
+    ("Add a tamper-evident ledger: hash each published pick, publish the hash before tip and "
+     "verify after settlement",
+     "DONE",
+     "data/ledger/ledger.json is a SHA-256 hash chain; scripts/verify_ledger.py reports "
+     "'ledger chain OK'; this session appended a settlement entry and a pre-tip publication entry.",
+     "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json"),
+    ("Split the site into a projection surface (safe to publish now) and a bet surface (gated), "
+     "and never mix them",
+     "DONE",
+     "Two separate pages generated from two separate JSON files; the projection file names the bet "
+     "file and states that the two are never merged into one table.",
+     "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_lines_801ba27f.json"),
+    ("Keep two independent estimators and publish their disagreement as the primary confidence "
+     "signal, rather than a single blended rating",
+     "DONE",
+     "Estimator 1 is possessions x points per possession; estimator 2 is a least-squares power "
+     "rating solved from official final margins plus scored/allowed rates. Different information "
+     "set, different failure mode. Mean disagreement 4.05 points on the spread.",
+     "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/estimators_2026_27.json"),
+    ("Pin home-court advantage to the measured home-win rate instead of fitting it freely",
+     "DONE",
+     "0.5263 measured over 190 official finals; converted through the empirical margin "
+     "distribution (sigma 16.78) to 1.108 points. No free parameter.",
+     "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/measured_constants_2026_27.json"),
+    ("Report luck as a z-score per team and refuse to publish a strategy that leans on a team "
+     "outside the noise band",
+     "DONE",
+     "Pythagorean expectation on official points for and against; z = (W - E[W]) / sqrt(n p (1-p)). "
+     "Teams with |z| > 2.0 are refused on the bet surface.",
+     "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/luck_2026_27.json"),
+    ("Compute rest, back-to-back and 3-in-4 from the official schedule, and add travel distance "
+     "from a sourced arena-coordinate table",
+     "PARTIAL",
+     "Rest, back-to-back and 3-in-4 are computed from the official schedule and official finals. "
+     "Travel is computed and published but flagged: arena city and state are official, latitude and "
+     "longitude are not published by any NBA page (F78).",
+     "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/rest_travel_2026_27.json"),
+    ("Model minutes redistribution explicitly: for each team, the top-8 minutes shares and the "
+     "replacement shares when a player is out",
+     "DONE",
+     "Minutes summed from the official box score of each team's last 10 completed games; top-8 "
+     "shares published with a worked proportional replacement.",
+     "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/rotation_2026_27.json"),
+    ("Stop publishing a single blended rating as the headline; publish the disagreement between "
+     "the two estimators as the headline and the blend underneath",
+     "DONE",
+     "The projection and estimators pages lead with the disagreement columns and print the blend "
+     "beside them, underneath. Page: Estimators.",
+     "https://www.nba.com/games"),
+    ("Price every parlay with the measured rho and print the naive product next to it, instead of "
+     "withholding the price entirely",
+     "DONE",
+     "Cross-game rho measured at 0.0142 over 1,546 same-date pairs; team-mate rho -0.0975 over 374 "
+     "pairs. Every parlay prints the rho-priced joint probability and the naive product beside it.",
+     "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/rho_2026_27.json"),
+    ("Put rotation availability on the picks page as its own column",
+     "DONE",
+     "Minutes-weighted share of each team's measured top-8 that is not ruled out, from official box "
+     "scores cross-referenced with the newest official injury edition. Page: Bet surface.",
+     "https://www.nba.com/games"),
+    ("Add a market-anchored prior: blend the model line with the closing line, weight by measured "
+     "out-of-sample log-loss",
+     "BLOCKED",
+     "No closing line is captured anywhere in this repository and no NBA-operated source publishes "
+     "one, so the prior weight is 0 and no market-blended price is published. Stated on the bet "
+     "surface rather than silently omitted (F79).",
+     "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_picks_801ba27f.json"),
+    ("Model the total as possessions x points-per-possession, not as an average of team scoring "
+     "averages",
+     "DONE",
+     "Estimator 1: POSS = pace_home + pace_away - league_pace; PTS = (OffRtg x opponent DefRtg / "
+     "league OffRtg) x POSS / 100. The scoring-average construction survives only as estimator 2, "
+     "used to produce the disagreement. Page: Estimators.",
+     "https://www.nba.com/games"),
+    ("Show the injury-report revision time and retrieval time in the Injuries page banner",
+     "DONE",
+     "The Injuries page carries a newest-edition banner with revision time and retrieval time; the "
+     "Injury PDF Ledger page prints both for the newest of the 75 stored editions.",
+     "https://official.nba.com/nba-injury-report-2026-27-season/"),
+    ("Settle the sealed ledger from official finals as soon as each game day ends, and keep the "
+     "settlement stamp visible",
+     "DONE",
+     "2026-11-15 settled from official finals only: 2 graded, 7 PENDING, +2.00 paper units. The "
+     "stamp is the first thing on the Settlement page.",
+     "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/settlement/settlement_2026-11-15.json"),
+    ("Re-read the three official team-stat pages (traditional, opponent, advanced) and re-cut the "
+     "model inputs",
+     "BLOCKED - WORKED AROUND",
+     "All three pages were fetched. None carries data in an HTTP response: they render their tables "
+     "in the browser. The same quantities were rebuilt from official box scores instead, which are "
+     "server-rendered. Every rating traces to an official game page (F80).",
+     "https://www.nba.com/stats/teams/advanced"),
+    ("Capture per-player game logs (minutes, points, rebounds, assists and the opponent) for at "
+     "least the players who appear on an injury report",
+     "DONE WITH A GAP",
+     "Every player in every one of the 222 captured games has minutes, points, rebounds, assists "
+     "and the opponent. The gap: a player on the injury report with no minutes this season has no "
+     "measured minutes share, so removing them moves availability by 0.00 (F83).",
+     "https://www.nba.com/games"),
+    ("Generate picks for every upcoming slate of games up to a maximum of 3 days in advance using "
+     "the originated lines",
+     "DONE",
+     "The rolling window is today plus three days: 2026-11-15 to 2026-11-18, 34 games, 28 of which "
+     "had not tipped at publication.",
+     "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_picks_801ba27f.json"),
+]
+
+
+def build_requirements():
+    rows = []
+    for text, status, detail, url in REQUIREMENTS:
+        cls = ("ok" if status == "DONE" else
+               "warn" if status.startswith("PARTIAL") or status.startswith("DONE WITH") else
+               "bad")
+        rows.append([esc(text), '<span class="chip %s">%s</span>' % (cls, esc(status)),
+                     esc(detail), '<a href="%s">evidence</a>' % esc(url)])
+    n_done = sum(1 for r in REQUIREMENTS if r[1] == "DONE")
+    body = [
+        note("info", "<strong>%d of %d</strong> numbered instructions in the brief are fully "
+                     "delivered. The rest are delivered partially or blocked, and every one of "
+                     "those says exactly what is missing and links to the evidence."
+             % (n_done, len(REQUIREMENTS))),
+        table(["Instruction (as written in the brief)", "Status", "What was actually done",
+               "Evidence"], rows),
+    ]
+    return page("Requirements coverage", "Each instruction in the brief, its status, and the "
+                "evidence for that status.", "".join(body), "requirements.html")
+
+
 PAGES_BUILDERS = [
     ("official-feed.html", build_official_feed),
     ("estimators.html", build_estimators),
@@ -527,6 +685,7 @@ PAGES_BUILDERS = [
     ("luck-z.html", build_luck),
     ("injury-ledger.html", build_injury_ledger),
     ("settlement.html", build_settlement),
+    ("requirements.html", build_requirements),
 ]
 
 

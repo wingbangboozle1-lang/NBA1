@@ -136,6 +136,62 @@
    "source": null,
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "confidence": "High - a direct transcription of the league's own document, with the row count and per-club status reproducible from the URL on the row."
+  },
+  {
+   "id": "A18",
+   "question": "What is the measured home-win rate, and what home-court value does it imply?",
+   "answer": "Home teams won 100 of 190 official finals from 2026-10-20 to 2026-11-15, a rate of 0.5263. Under the empirical margin distribution (sigma 16.78) that is 1.108 points of home court. The site now pins home court to that number instead of fitting it: HCA = sigma_margin * Phi^-1(home_win_rate).",
+   "source": "official box scores",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/measured_constants_2026_27.json",
+   "confidence": "High for the rate (190 official finals); medium for the conversion, which assumes the margin distribution is normal enough at the median."
+  },
+  {
+   "id": "A19",
+   "question": "Do the two estimators disagree enough for the disagreement to be a usable signal?",
+   "answer": "Yes. Across the 34 games on the 2026-11-15..18 slate the two estimators disagree by 4.05 points on the spread on average and up to 8.8 points. That is the same order as the edge the singles gate looks for, so it is a real signal and not rounding noise.",
+   "source": "official box scores, official schedule",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/estimators_2026_27.json",
+   "confidence": "High that the disagreement is measured; not yet established that it predicts which estimator is right - that needs graded tickets."
+  },
+  {
+   "id": "A20",
+   "question": "Are two games on the same night correlated?",
+   "answer": "Measured, not assumed: pairing every game with every other game on the same date across 190 official finals gives 1,546 pairs and a correlation of 0.0142 between their home margins - statistically indistinguishable from zero. Multi-game parlays are therefore priced at essentially the naive product, and the naive product is printed beside the rho-priced number so the reader can see the difference.",
+   "source": "official box scores",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/rho_2026_27.json",
+   "confidence": "High."
+  },
+  {
+   "id": "A21",
+   "question": "Can a player's minutes really be redistributed when a team-mate is out, from official data alone?",
+   "answer": "Yes, at the level of a measured minutes share. Minutes were summed from the official box score of each team's last 10 completed games, giving every player a share of team minutes. The top-8 shares and the proportional reallocation when a player is removed are published per team. What is still missing is who actually absorbs the minutes in a given matchup, which is a coaching decision and cannot be read off any official page.",
+   "source": "official box scores",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/rotation_2026_27.json",
+   "confidence": "High for the shares; low for the reallocation rule, which is a stated modelling choice."
+  },
+  {
+   "id": "A22",
+   "question": "How many status changes does the official injury report actually make in a day?",
+   "answer": "On 2026-11-15 the league published 75 editions. Diffing each edition against the one immediately before it found 28 status changes - for example T.J. McConnell going Probable to Available at 12:15 PM ET and Andrew Nembhard going Questionable to Out at the same minute. That is why a rotation read built in the morning is stale by the afternoon.",
+   "source": "official injury report PDFs",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "confidence": "High - computed from the stored PDFs, not transcribed by hand."
+  },
+  {
+   "id": "A23",
+   "question": "Is the 2026-11-15 slate settled?",
+   "answer": "Partly. At capture, 2 of the 9 games were Final and both published tickets on them won (+2.00 paper units). Four games were in progress and three had not tipped, so their tickets are PENDING. Nothing was graded from a live score.",
+   "source": "official finals",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/settlement/settlement_2026-11-15.json",
+   "confidence": "High."
+  },
+  {
+   "id": "A24",
+   "question": "Which teams are currently outside the luck noise band?",
+   "answer": "Luck is reported as a z-score per team from Pythagorean expectation on official points for and against. Teams with |z| > 2.0 are outside the noise band and the site refuses to publish a ticket that leans on them. The full table, with each z and its band, is on the Luck z-scores page.",
+   "source": "official finals",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/luck_2026_27.json",
+   "confidence": "Medium - Pythagorean exponent 13.91 is a stated modelling choice, not an official number."
   }
  ],
  "open": [
@@ -327,6 +383,76 @@
    "why_it_matters": "It changes reported units materially (SGP-2 of 2026-11-14 pays +3.36u at the model fair price vs +2.64u at -110 legs).",
    "discovery": "No market price exists (G-PROP blocked), so any convention is a placeholder. We publish both numbers on the ticket (frozen price and independent product beside it) and settle at the frozen model price, printed on every ticket. Open until a licensed price feed exists (then G4/G5 rules apply).",
    "status": "open"
+  },
+  {
+   "id": "Q24",
+   "question": "Is the estimator disagreement actually predictive of error?",
+   "what_is_missing": "Graded tickets. The disagreement is measured, but nothing yet shows that a large disagreement predicts a larger miss.",
+   "how_to_answer": "Log the disagreement for every published ticket, then regress absolute error on disagreement once there are 100+ graded plays. This is the single cheapest experiment available.",
+   "blocks": "Whether disagreement can be used as a stake-sizing signal",
+   "priority": "high",
+   "source": "official finals",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/estimators_2026_27.json"
+  },
+  {
+   "id": "Q25",
+   "question": "What is the real closing line, and how far is the model from it?",
+   "what_is_missing": "A price feed. No closing price is captured anywhere in this repository and no NBA source publishes one, so the market-anchored prior is switched off (F79).",
+   "how_to_answer": "Log the closing spread, total and price for every graded play into a new file at capture time. Until then 'units won' means model against a naive model, not against a market.",
+   "blocks": "G4/G5 market gates and the market-anchored prior",
+   "priority": "highest",
+   "source": "n/a - no official source exists",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_picks_801ba27f.json"
+  },
+  {
+   "id": "Q26",
+   "question": "Do travel distance and 3-in-4 schedule spots move a line at all?",
+   "what_is_missing": "Both columns are now computed and published, but no test has been run against them. Travel is additionally flagged because the coordinates are not official (F78).",
+   "how_to_answer": "Regress the model's margin and total error on rest days, back-to-back, 3-in-4 and travel miles over 190 official finals, and publish the coefficients with standard errors before any of them is applied.",
+   "blocks": "Whether schedule and travel belong in the line at all",
+   "priority": "medium",
+   "source": "official schedule and finals",
+   "source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "id": "Q27",
+   "question": "Are the measured player-prop correlations stable?",
+   "what_is_missing": "Sample. The team-mate correlation is measured on 374 pairs and the opponent correlation on 187 - enough to publish with a caveat, not enough to price on.",
+   "how_to_answer": "Re-measure at the end of every month and publish the series, so a reader can see whether it is converging or drifting.",
+   "blocks": "Confident same-game-parlay pricing",
+   "priority": "medium",
+   "source": "official game logs",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/rho_2026_27.json"
+  },
+  {
+   "id": "Q28",
+   "question": "Should the model inputs come from the official stats pages or from rebuilt box scores?",
+   "what_is_missing": "The stats pages carry no data in an HTTP response (F80), so this session rebuilt the ratings from official box scores. That is a substantial architectural choice, not a detail.",
+   "how_to_answer": "Decide explicitly: either add a headless browser to the refresh job so the stats pages can be read as a human sees them, or keep the box-score rebuild as the official path and document it as such. Both are defensible; silently straddling them is not.",
+   "blocks": "What the scheduled refresh job is allowed to rebuild from",
+   "priority": "high",
+   "source": "official stats pages and box scores",
+   "source_url": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "id": "Q29",
+   "question": "How should an in-progress slate be presented without tempting anyone to act on a live score?",
+   "what_is_missing": "A rule. On 2026-11-15 six of nine games were live or finished while the horizon page still listed them.",
+   "how_to_answer": "Split the horizon page by official game status and grey out anything that has tipped, or drop tipped games from the horizon entirely once the day rolls over. The projection/bet split makes this cheap.",
+   "blocks": "Whether the horizon page can be trusted at a glance in the evening",
+   "priority": "medium",
+   "source": "official games pages",
+   "source_url": "https://www.nba.com/games"
+  },
+  {
+   "id": "Q30",
+   "question": "Does the repository need a retention rule for raw captures?",
+   "what_is_missing": "A policy. This session added 22 MB of gzipped official HTML and 7.5 MB of injury PDFs. That is fine today and will not be fine by the All-Star break.",
+   "how_to_answer": "Keep the extracted JSON and the manifest digests in git, move the raw bytes to build artifacts, and keep raw HTML only for the current horizon. Document it in the repo before the next session adds more.",
+   "blocks": "Repository size and Pages deploy time",
+   "priority": "low",
+   "source": "n/a - engineering policy",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md"
   }
  ]
 }

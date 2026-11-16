@@ -45,6 +45,19 @@
 <a href="backtest.html">Out-of-Sample Backtest</a>
 <a href="model.html">Model &amp; Teams</a>
 </div>
+<div class="nav-group"><h3>RE-CUT 15 NOV 2026</h3>
+<a href="official-feed.html">Official result feed</a>
+<a href="estimators.html">Two estimators</a>
+<a href="projection.html">Projection surface</a>
+<a href="bet-surface.html">Bet surface (gated)</a>
+<a href="parlay-pricing.html">Parlay pricing</a>
+<a href="rotation.html">Minutes redistribution</a>
+<a href="rest-travel.html">Rest &amp; travel</a>
+<a href="luck-z.html">Luck z-scores</a>
+<a href="injury-ledger.html">Injury PDF ledger</a>
+<a href="settlement.html">Settlement &amp; ledger</a>
+<a href="requirements.html">Requirements coverage</a>
+</div>
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
 <a href="official-verify.html">Live Re-verification</a>
@@ -79,7 +92,8 @@
       <h1>Injuries, rotation and production impact</h1>
       <p class="sub">The official injury report for the horizon, what it does to rotation minutes, and the measured effect on a team's net rating.</p>
     </div>
-    <div class="banner info"><div class="b-t">Newest official edition: report revision and retrieval time</div><div class="b-b"><p><b>Report revision:</b> 2026-11-15 06:15 AM ET (edition stamp printed on every PDF page) &nbsp;|&nbsp; <b>retrieved (UTC):</b> 2026-11-15T11:52Z &nbsp;|&nbsp; <b>rows:</b> 101 (84 player rows, 17 NOT YET SUBMITTED team blocks). Source: <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf">official PDF</a> (index: <a href="https://official.nba.com/nba-injury-report-2026-27-season/">official.nba.com</a>).</p><p>Consecutive-edition diff: 0 comparable player rows, 0 status changes, 16 team blocks filed since the previous stored edition (<a href="../../data/official/injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json">diff file</a>). 13 rows lost their Team column in PDF extraction and are marked team_inherited; their team_effective is the nearest preceding printed team in the same game block. Flagged for review (F74).</p></div></div>
+    <div class="banner info"><div class="b-t">Complete edition ledger for 2026-11-15 now available</div><div class="b-b"><p><b>75</b> editions published by the league on 2026-11-15 were downloaded, hashed, stored and parsed; <b>74</b> consecutive pairs were diffed and <b>28</b> status changes were found. Newest stored edition: <b>2026-11-15 06:30PM ET</b>, retrieved <b>2026-11-15T23:43:14Z</b>. <a href="injury-ledger.html">Open the Injury PDF Ledger</a>.</p></div></div>
+<div class="banner info"><div class="b-t">Newest official edition: report revision and retrieval time</div><div class="b-b"><p><b>Report revision:</b> 2026-11-15 06:15 AM ET (edition stamp printed on every PDF page) &nbsp;|&nbsp; <b>retrieved (UTC):</b> 2026-11-15T11:52Z &nbsp;|&nbsp; <b>rows:</b> 101 (84 player rows, 17 NOT YET SUBMITTED team blocks). Source: <a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf">official PDF</a> (index: <a href="https://official.nba.com/nba-injury-report-2026-27-season/">official.nba.com</a>).</p><p>Consecutive-edition diff: 0 comparable player rows, 0 status changes, 16 team blocks filed since the previous stored edition (<a href="../../data/official/injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json">diff file</a>). 13 rows lost their Team column in PDF extraction and are marked team_inherited; their team_effective is the nearest preceding printed team in the same game block. Flagged for review (F74).</p></div></div>
 <div class="banner warn"><div class="b-t">There is a newer official edition than the one behind these numbers</div><div class="b-b">The rows below are the edition the published lines were cut from. The league has since published its game-day report, and four more clubs have filed. The diff, the re-priced lines and a row-by-row re-verification of the whole horizon are on <a href="gameday.html">Game-Day Injury Read</a>. Those numbers do not replace the ones here: a line re-priced after it was frozen cannot be graded.</div></div>
 <h2 class="sec">Injury report read-out</h2><p class="secsub">One row per official injury-report line, with the minutes it implies and the impact it carries.</p>
 <div class="banner warn"><div class="b-t">A newer official injury edition exists than the one the model uses</div><div class="b-b"><p>The lines on this site are built on the <b>11/13/26 07:30 PM ET</b> edition. On 2026-11-14 this session read a newer one, the <b>11/14/26 04:15 AM ET</b> edition (<a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-14_04_15AM.pdf">official PDF</a>), and transcribed all 49 rows to <code>verify/2026-11-14/official_injury_2026-11-14_0415AM_s934ca56f.json</code>. It has deliberately <b>not</b> been fed into the model, because it would move every 11/14 line and that is a reviewer decision, not an integration step.</p><p><b>What it changes in practice: very little.</b> The same five of the ten teams playing on 11/14 (New Orleans Pelicans, Cleveland Cavaliers, Memphis Grizzlies, Chicago Bulls, Miami Heat) still print <b>NOT YET SUBMITTED</b>; the teams that filed are Denver Nuggets, Dallas Mavericks, Brooklyn Nets, Minnesota Timberwolves, Detroit Pistons. The 26 player-level rows are Denver, Dallas, Brooklyn, Minnesota and Detroit. The 11/15 games do appear in this edition but every team is NOT YET SUBMITTED, and no 11/16 or 11/17 game appears at all. So the older edition was not hiding a status change &mdash; it was simply one publication cycle behind.</p></div></div>

@@ -798,6 +798,185 @@
    "recommendation": "B first (cheap, targeted), then A inside the weekly full re-read that the refresh job already performs.",
    "decision_needed": "Confirm B (targeted) or A (full) so the next refresh allocates the fetch budget accordingly.",
    "source": "https://www.nba.com/standings (F75)"
+  },
+  {
+   "id": "SG32",
+   "title": "Make the estimator disagreement a stake-sizing signal, not just a headline",
+   "category": "Model",
+   "problem": "The disagreement between the two estimators is published as the headline confidence signal, but nothing uses it: every ticket is still printed at the same paper unit.",
+   "options": [
+    {
+     "option": "Leave it as a display-only signal",
+     "effort": "none",
+     "risk": "none",
+     "unlocks": "nothing new"
+    },
+    {
+     "option": "Scale stake by 1 / (1 + disagreement)",
+     "effort": "low - one function in the picks builder",
+     "risk": "medium - it is an untested assumption until Q24 is answered",
+     "unlocks": "a principled reason to bet less when the model is unsure"
+    },
+    {
+     "option": "Suppress any ticket whose disagreement exceeds a threshold",
+     "effort": "low",
+     "risk": "low - it can only remove tickets",
+     "unlocks": "fewer, better-defined plays; directly answers Q24"
+    }
+   ],
+   "recommendation": "Do the threshold first. It needs no statistical justification to be safe, and it produces the data that answers whether the disagreement is predictive at all.",
+   "decision_needed": "Which of the three, and what threshold",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/estimators_2026_27.json"
+  },
+  {
+   "id": "SG33",
+   "title": "Add a price feed so the market gates can run",
+   "category": "Data",
+   "problem": "G4 and G5 are blocked and the market-anchored prior is switched off (F79) because no closing price exists anywhere in the repository. Everything the site calls 'units' is model against a naive model.",
+   "options": [
+    {
+     "option": "Log closing prices by hand at capture time",
+     "effort": "medium, and it does not scale",
+     "risk": "transcription error",
+     "unlocks": "G4, G5 and the market-anchored prior"
+    },
+    {
+     "option": "Add a licensed or public odds source to the allowlist and capture it in the refresh job",
+     "effort": "medium",
+     "risk": "the source is not NBA-operated, so it has to be labelled as non-official",
+     "unlocks": "everything above, automatically"
+    },
+    {
+     "option": "Do nothing and rename 'units' to 'model points' throughout",
+     "effort": "low",
+     "risk": "none",
+     "unlocks": "honesty about what is being measured"
+    }
+   ],
+   "recommendation": "Option 3 immediately, whatever else is chosen: the current wording invites a misreading. Then option 2.",
+   "decision_needed": "Whether a non-NBA price source may enter the allowlist",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_picks_801ba27f.json"
+  },
+  {
+   "id": "SG34",
+   "title": "Decide the official input path: stats pages or rebuilt box scores",
+   "category": "Architecture",
+   "problem": "www.nba.com/stats carries no data in a plain HTTP response (F80). This session rebuilt the ratings from official box scores instead, which works and is fully traceable, but it is a different source from the one the brief names.",
+   "options": [
+    {
+     "option": "Add a headless browser to the refresh job and read the stats pages as a human sees them",
+     "effort": "high",
+     "risk": "fragile; the pages change layout without notice",
+     "unlocks": "the exact source the brief names"
+    },
+    {
+     "option": "Adopt the box-score rebuild as the official path and document it",
+     "effort": "low - it is already built and passing every gate",
+     "risk": "it will not match a reader checking nba.com/stats by eye",
+     "unlocks": "a stable, cheap, fully traceable input path"
+    },
+    {
+     "option": "Run both and publish their disagreement",
+     "effort": "high",
+     "risk": "two sources of truth",
+     "unlocks": "a third, independent disagreement signal"
+    }
+   ],
+   "recommendation": "Option 2 now, with the caveat printed next to every rating.",
+   "decision_needed": "Which path is official",
+   "source": "https://www.nba.com/stats/teams/advanced"
+  },
+  {
+   "id": "SG35",
+   "title": "Give the injury pipeline a live polling mode",
+   "category": "Data",
+   "problem": "The league published 75 editions on 2026-11-15 and 28 of the consecutive diffs changed a player's status. A rotation read built in the morning is stale by the afternoon, and the pipeline currently only stores what one capture run saw.",
+   "options": [
+    {
+     "option": "Poll the index every 15 minutes and store any new edition",
+     "effort": "low - the fetcher and the differ already exist",
+     "risk": "storage growth (see SG37)",
+     "unlocks": "a rotation read that is current at tip"
+    },
+    {
+     "option": "Poll only on game days between 11:00 and 20:00 ET",
+     "effort": "low",
+     "risk": "misses late scratches on non-game days",
+     "unlocks": "most of the value at a fraction of the storage"
+    }
+   ],
+   "recommendation": "Option 2, with the newest-edition banner on the Injuries page.",
+   "decision_needed": "Polling cadence and retention",
+   "source": "https://official.nba.com/nba-injury-report-2026-27-season/"
+  },
+  {
+   "id": "SG36",
+   "title": "Split the horizon page by official game status",
+   "category": "Site",
+   "problem": "On 2026-11-15 six of the nine games on the horizon page had already tipped while the page still listed them as picks (Q29).",
+   "options": [
+    {
+     "option": "Grey out any game the official page says has started",
+     "effort": "low",
+     "risk": "none",
+     "unlocks": "an honest page at any hour"
+    },
+    {
+     "option": "Drop tipped games from the horizon once the day rolls over",
+     "effort": "low",
+     "risk": "the page changes shape during the evening",
+     "unlocks": "a page that is always actionable"
+    }
+   ],
+   "recommendation": "Both: grey out immediately, drop at the daily roll.",
+   "decision_needed": "Which, and at what hour the day rolls",
+   "source": "https://www.nba.com/games"
+  },
+  {
+   "id": "SG37",
+   "title": "Set a retention rule for raw captures before the repository outgrows git",
+   "category": "Engineering",
+   "problem": "This session added 22 MB of gzipped official HTML and 7.5 MB of injury PDFs. Extracted JSON plus a manifest digest is a few hundred kilobytes for the same information.",
+   "options": [
+    {
+     "option": "Keep extracted JSON and manifests in git; move raw bytes to build artifacts",
+     "effort": "medium",
+     "risk": "the raw bytes are then only as durable as GitHub's artifact retention",
+     "unlocks": "a repository that stays small"
+    },
+    {
+     "option": "Keep raw HTML for the current horizon only and prune the rest",
+     "effort": "low",
+     "risk": "historical captures cannot be re-parsed",
+     "unlocks": "most of the saving for the least change"
+    }
+   ],
+   "recommendation": "Option 2 now, option 1 when the repo passes 100 MB.",
+   "decision_needed": "Retention window",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md"
+  },
+  {
+   "id": "SG38",
+   "title": "Publish a requirements-coverage matrix so the brief can be audited line by line",
+   "category": "Site",
+   "problem": "The brief contains twenty specific modelling instructions. A reader currently has to read the whole site to work out which are done.",
+   "options": [
+    {
+     "option": "One page, one row per requirement, with status and a link to the evidence",
+     "effort": "low",
+     "risk": "it goes stale unless it is regenerated",
+     "unlocks": "an auditable answer to 'is it done?'"
+    },
+    {
+     "option": "Fold it into the executive summary",
+     "effort": "low",
+     "risk": "it gets lost in prose",
+     "unlocks": "the same answer, less visibly"
+    }
+   ],
+   "recommendation": "Option 1, regenerated by the build so it cannot drift.",
+   "decision_needed": "Whether it blocks the merge",
+   "source": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/COORDINATION.md"
   }
  ]
 }
