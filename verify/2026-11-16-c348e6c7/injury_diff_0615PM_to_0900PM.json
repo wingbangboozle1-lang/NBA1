@@ -1,0 +1,89 @@
+{
+ "prev_edition": "2026-11-15_0615PM",
+ "prev_source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf",
+ "cur_edition": "2026-11-15_09_00PM",
+ "cur_source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf",
+ "diff_generated_utc": "2026-11-16T02:26:52Z",
+ "rows_prev_11_16": 59,
+ "rows_cur_11_16": 62,
+ "players_unchanged": 57,
+ "status_changes": [],
+ "team_submission_changes": [
+  {
+   "matchup": "PHX@DEN",
+   "team": "denver nuggets",
+   "from": "NOT YET SUBMITTED",
+   "to": "filed",
+   "players_now_listed": 4,
+   "outright_outs_now": 4
+  }
+ ],
+ "teams_still_not_submitted_in_current": [
+  {
+   "matchup": "MEM@WAS",
+   "team": "washington wizards"
+  },
+  {
+   "matchup": "ORL@BOS",
+   "team": "boston celtics"
+  },
+  {
+   "matchup": "HOU@MIA",
+   "team": "houston rockets"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "team": "philadelphia 76ers"
+  },
+  {
+   "matchup": "PHX@DEN",
+   "team": "phoenix suns"
+  }
+ ],
+ "rows_only_in_current": [
+  {
+   "matchup": "PHX@DEN",
+   "player": "Holmes II, DaRon",
+   "team": "Denver Nuggets",
+   "status": "Out",
+   "reason": null
+  },
+  {
+   "matchup": "PHX@DEN",
+   "player": "Nembhard, Ryan",
+   "team": "Denver Nuggets",
+   "status": "Out",
+   "reason": null
+  },
+  {
+   "matchup": "PHX@DEN",
+   "player": "Strawther, Julian",
+   "team": "Denver Nuggets",
+   "status": "Out",
+   "reason": null
+  },
+  {
+   "matchup": "PHX@DEN",
+   "player": "Whitmore, Cam",
+   "team": "Denver Nuggets",
+   "status": "Out",
+   "reason": null
+  }
+ ],
+ "rows_only_in_previous": [],
+ "inherited_name_rows_in_prev": [
+  {
+   "edition": "2026-11-15_0615PM",
+   "matchup": "ORL@BOS",
+   "team": "Boston Celtics",
+   "inherited_player": "Penda, Noah",
+   "status_field": "Out",
+   "reason_field": "NOT YET SUBMITTED",
+   "marker_in_field": "reason",
+   "why_suspect": "NOT YET SUBMITTED is a TEAM-level marker and the league prints no player on that row; a player name here was inherited from the previous row during transcription.",
+   "consumer_hazard": "This row is encoded status='Out'. A consumer that reads the status column alone will count a player who was never named as ruled out for a team that had filed nothing."
+  }
+ ],
+ "inherited_name_rows_in_cur": [],
+ "verdict": "0 player status change(s), 1 team submission change(s), 4 row(s) only in the newer edition, 0 row(s) only in the older one"
+}

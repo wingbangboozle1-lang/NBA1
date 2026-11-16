@@ -367,8 +367,19 @@ def parse_injury_index(text):
     # [0-9_]+ after the prefix, which can never consume "2026-11-13" and so
     # returned zero editions on every page - found by the unit test in
     # COORDINATION.md section 15 (R02) before the first executed run.
+    #
+    # 2026-11-16 fix (session arena/0e9c924f-nba1, COORDINATION §50 N03):
+    # the pattern then required a literal "PM" suffix, so AM editions - every
+    # edition published between midnight and noon - were invisible to the
+    # scheduled refresh. Measured consequence before the fix: the official
+    # index listed 25 consecutive 2026-11-16 AM editions (12:00AM through
+    # 9:30AM ET, read 2026-11-16T14:45Z) while the newest edition the repo
+    # held was Injury-Report_2026-11-15_09_30PM.pdf; the 12:17Z scheduled run
+    # therefore reported "no new capture payloads" and the Injuries banner
+    # stayed a day behind. AM|PM is now matched; edition_key already handled
+    # both suffixes.
     links = re.findall(
-        r'https://ak-static\.cms\.nba\.com/referee/injury/(Injury-Report_[0-9\-_]+PM\.pdf)',
+        r'https://ak-static\.cms\.nba\.com/referee/injury/(Injury-Report_[0-9\-_]+(?:AM|PM)\.pdf)',
         text)
 
     def edition_key(name):

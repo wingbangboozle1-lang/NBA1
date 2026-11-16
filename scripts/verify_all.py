@@ -26,14 +26,7 @@ from urllib.parse import urlparse
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ALLOWED = {"www.nba.com", "nba.com", "official.nba.com", "ak-static.cms.nba.com",
            "cdn.nba.com", "docs.github.com", "github.com", "kansspelautoriteit.nl",
-           "www.kansspelautoriteit.nl",
-           # Added by arena/2823d556-nba1 (COORDINATION §47.1b, R-47-2823-H) so the two
-           # gates agree on what counts as official. statsdmz.nba.com is the NBA's own
-           # PDF service and is already cited from this repository's official captures
-           # (data/official/results_2026-11-15.json -> source_gamebook_pdf). A host that
-           # verify_integration.py accepts and verify_all.py rejects is exactly the
-           # split that let R-42-B ship, so the two sets are kept in step.
-           "statsdmz.nba.com"}
+           "www.kansspelautoriteit.nl"}
 errors = []
 
 

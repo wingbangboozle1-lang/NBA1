@@ -64,6 +64,8 @@ def load(path):
 CATEGORIES = [
     ("HORIZON", None, "The next three days of NBA games and the lines we originate for them."),
     ("Rolling Slate", "roll.html", "The current 3-day window re-cut from a fresh official capture: the two estimators and their disagreement, rotation availability, rest and back-to-back, and parlays priced with the measured rho beside the naive product."),
+    ("Projection Surface", "projection.html", "Safe to publish now: originated lines, two estimators with their disagreement as the headline, rest/travel and rotation context. Model output, not a recommendation."),
+    ("Bet Surface (gated)", "bet-surface.html", "GATED. Paper picks, parlays priced with the measured rho beside the naive product, and the gate state that blocks funding. Never mixed with the projection surface."),
     ("Lines &amp; Picks", "picks.html", "Originated spread, total and fair-moneyline for every game in the horizon, and the gated paper picks built on them."),
     ("Player Props", "props.html", "Per-player projections and prop combinations, with the minutes coverage stated next to every number."),
     ("Prop Variance &amp; Rotation", "prop-variance.html", "Game-to-game dispersion measured from official game logs: the uncertainty behind every prop, the minutes-to-production elasticity, and what the injury report changed since the lines were cut."),
@@ -73,6 +75,9 @@ CATEGORIES = [
     ("RESULTS &amp; SETTLEMENT", None, "What actually happened, and whether the paperwork was settled from it."),
     ("Official Results &amp; Settlement", "results.html", "One row per game with date, teams, final score and quarter scores, read from the official game pages; the verified-final count per game day; and the visible settlement stamp with the ledger head behind it."),
     ("Player Game Logs", "player-logs.html", "Minutes, points, rebounds and assists for every player in each finished game's official gamebook, with the report cross-reference and the DNP/DND rows kept."),
+    ("Settlement &amp; Ledger", "settlement.html", "The tamper-evident ledger: each published pick hashed before tip and verified after settlement, with the settlement stamp visible."),
+    ("Injury PDF Ledger", "injury-ledger.html", "Every official injury PDF stored with its timestamp and content hash, and the status changes found by diffing consecutive reports."),
+    ("Official Result Feed", "official-feed.html", "The per-game result feed: date, teams, final score and quarter scores, kept current and settled only from verified finals."),
     ("EVIDENCE", None, "Whether any of it is skill. The out-of-sample record, the gates, the correlations and the luck check."),
     ("Strategies &amp; Leaderboard", "strategies.html", "Ten strategies, the reward tiers, and the leaderboard that ranks them - with nothing promoted that has not passed."),
     ("Validation Gates", "validation.html", "The seven gates every strategy must clear, the definition of each, and how each strategy scored."),
@@ -81,10 +86,17 @@ CATEGORIES = [
     ("Luck &amp; Skill", "luck.html", "How many wins each team probably should have had, and which of them are luck."),
     ("Out-of-Sample Backtest", "backtest.html", "The full test window - every completed game after the ratings cut-off - and everything measured on it."),
     ("Model &amp; Teams", "model.html", "The efficiency model, its assumptions and the team ratings it reads."),
+    ("Two Estimators", "estimators.html", "Two independent estimators of every game, and their disagreement published as the primary confidence signal - with the blend underneath rather than on top."),
+    ("Luck as a z-score", "luck-z.html", "Wins versus expected wins per team as a z-score, and the noise band a strategy may not lean outside."),
+    ("Parlay Pricing", "parlay-pricing.html", "Every parlay priced with the measured rho, with the naive product printed next to it so the correlation charge is visible."),
+    ("Rest, B2B &amp; Travel", "rest-travel.html", "Rest days, back-to-backs and 3-in-4 read from the official schedule, plus travel distance from a sourced arena-coordinate table."),
+    ("Minutes Redistribution", "rotation.html", "The top-8 minutes shares per team and the replacement shares when a player is out - rotation availability as its own number, not a vibe."),
+    ("Requirements Coverage", "brief-coverage.html", "Every requirement in the brief mapped to the artifact that satisfies it, with the gap where none does."),
     ("VERIFICATION", None, "Checked line by line against NBA.com on the day of capture. Mismatches are listed, not corrected."),
     ("Official Source Check", "source-check.html", "Every horizon game and every 11/13 final compared with NBA.com, the 11/13 settlement, and the conflicts between builds."),
     ("Live Re-verification", "official-verify.html", "Every official value on this site read again at 18:40Z on 2026-11-14 and compared with what was published: 185 checks, one row and one official link each."),
     ("Nov 15 re-verification", "verify-2026-11-15.html", "The 15-18 Nov horizon read again on 2026-11-15 and compared row by row: settled 11/14 finals, the 34-game schedule, standings, the three team-stat inputs, and a diff of two consecutive official injury-report editions."),
+    ("Nov 16 re-verification", "verify-2026-11-16.html", "The 16-18 Nov window read directly from NBA.com for the first time in the project: schedule structure an exact match, standings, the newest injury edition, and a consecutive-edition diff that caught Denver filing four Out players after the lines were cut."),
     ("DECISION", None, "What is still open, what could be improved, and what could not be verified."),
     ("Open Questions", "questions.html", "What we know, what we do not, and the concrete step that would answer each open item."),
     ("Suggestions", "suggestions.html", "Improvements written as options with effort, risk and what each unlocks, so a reviewer can pick a path."),
@@ -2067,12 +2079,63 @@ def main():
     # ROLLING: pick the newest stored edition and the newest consecutive-edition diff
     # instead of a hardcoded filename, so the banner cannot go stale between passes.
     import glob as _glob, re as _re
+
+    def _edition_sort_key(path):
+        """Rank an edition file by the DATE AND TIME in its name, newest last.
+
+        The previous implementation was a plain `sorted(...)[-1]` on the file
+        name. That is wrong in this repository in a way that was visible on the
+        published page: `injury_2026-11-15_0615PM_arena49f70042.json` (another
+        session's namespaced duplicate transcription) sorts AFTER the canonical
+        `injury_2026-11-15_0615PM.json`, because '.' (0x2E) < '_' (0x5F). The
+        banner therefore read the duplicate, which carries no revision stamp and
+        no index URL - producing a blank "Report revision" and an empty
+        `href=""` on the live Injuries page.
+
+        Fix: parse the timestamp, and when two files carry the same timestamp
+        prefer the canonical one (no `_<session>` suffix). Never infer a value
+        that is missing: a missing stamp still renders as NA.
+        """
+        name = os.path.basename(path)
+        m = _re.search(r"_(\d{4})-(\d{2})-(\d{2})_(\d{2})[_-]?(\d{2})\s*(AM|PM)",
+                       name, _re.I)
+        if m:
+            y, mo, d, hh, mm, ap = m.groups()
+            hh = int(hh) % 12
+            if ap.upper() == "PM":
+                hh += 12
+            stamp = (int(y), int(mo), int(d), hh, int(mm))
+        else:
+            m2 = _re.search(r"_(\d{4})-(\d{2})-(\d{2})", name)
+            stamp = (int(m2.group(1)), int(m2.group(2)), int(m2.group(3)), 0, 0) if m2 else (0, 0, 0, 0, 0)
+        # Canonical files sort after namespaced duplicates at equal timestamps.
+        namespaced = 1 if _re.search(r"_\d{4}-\d{2}-\d{2}_\d{2}[_-]?\d{2}\s*(?:AM|PM)_",
+                                     name, _re.I) else 0
+        return (stamp, -namespaced)
+
     def _newest(pattern):
         c = [q for q in _glob.glob(os.path.join(ROOT, "data", "official", pattern))
              if _re.search(r"_\d{4}-\d{2}-\d{2}", q)]
         if not c:
             c = _glob.glob(os.path.join(ROOT, "data", "official", pattern))
-        return sorted(c)[-1] if c else None
+        return sorted(c, key=_edition_sort_key)[-1] if c else None
+
+    def _edition_label(x):
+        """Edition refs are written as a plain string by some passes and as a
+        dict by others ({'edition_id':..., 'revision':..., 'source_url':...}).
+        Rendering the dict with `esc()` leaked a raw Python repr onto the
+        published page. Render either shape as text."""
+        if isinstance(x, dict):
+            ident = x.get("edition_id") or x.get("edition") or ""
+            rev = x.get("revision")
+            return ("%s (%s)" % (ident, rev)) if (ident and rev) else (ident or "the previous stored edition")
+        if isinstance(x, str) and x.strip():
+            return x.strip()
+        return "the previous stored edition"
+
+    # Canonical index URL, used only when an edition file omits its own. It is a
+    # real, reachable official URL, not a placeholder, so the link is never empty.
+    _INDEX_FALLBACK = "https://official.nba.com/nba-injury-report-2026-27-season/"
     newest_path = _newest("injury_2*.json")
     if newest_path and os.path.exists(newest_path):
         _n = load(newest_path)
@@ -2085,18 +2148,22 @@ def main():
             _df = load(diff_path)
             _c = _df.get("counts", {})
             if _c:
-                _cmp = _c.get("comparable_player_rows", 0)
+                # Two schemas exist for the same idea. `comparable_rows` is what
+                # the committed diff files actually use; `comparable_player_rows`
+                # was the name this branch looked for, so it silently reported 0
+                # on the published page. Accept both, and prefer a real number.
+                _cmp = _c.get("comparable_rows", _c.get("comparable_player_rows", 0))
                 _chg = _c.get("status_changes", 0)
-                _filed = len(_df.get("team_blocks_filed_since", []))
+                _filed = _c.get("rows_added", len(_df.get("team_blocks_filed_since", [])))
             else:
                 # schema written by the rolling capture passes (keyed lists)
                 _cmp = _df.get("unchanged", 0) + len(_df.get("changed", []))
                 _chg = len(_df.get("changed", []))
                 _filed = len(_df.get("added", []))
-            diff_note = ("Consecutive-edition diff against %s: %d comparable player rows, "
-                         "%d status changes, %d rows the newer edition adds "
-                         "(<a href=\"../../data/official/%s\">diff file</a>)."
-                         % (esc(_df.get("from_edition", "the previous stored edition")),
+            diff_note = ("Consecutive-edition diff against <b>%s</b>: %d comparable "
+                         "player rows, %d status changes, %d rows the newer edition "
+                         "adds (<a href=\"../../data/official/%s\">diff file</a>)."
+                         % (esc(_edition_label(_df.get("from_edition"))),
                             _cmp, _chg, _filed, esc(os.path.basename(diff_path))))
         # R-42-B: `esc(None)` is an empty string, and the empty string used to land in a
         # bare `<b>...</b>` slot. When the edition file had no revision stamp the slot was
@@ -2106,7 +2173,10 @@ def main():
         _rev = _n.get("revision_time_et")
         _rev_cell = esc(_rev) if _rev else NA
         _src_url = _n.get("source_url") or ""
-        _idx_url = _n.get("index_url") or ""
+        # An empty index URL emitted `<a href="">`, which every link checker
+        # correctly reads as a broken internal link. Fall back to the canonical
+        # official index rather than publishing an empty href.
+        _idx_url = _n.get("index_url") or _INDEX_FALLBACK
         b.insert(0, banner("info", "Newest official edition: report revision and retrieval time",
                            "<p><b>Report revision:</b> %s &nbsp;|&nbsp; <b>retrieved (UTC):</b> %s &nbsp;|&nbsp; "
                            "<b>rows:</b> %d (%d player rows, %d NOT YET SUBMITTED team blocks). "
@@ -2797,6 +2867,39 @@ def main():
             banner("warn", "Artifact missing",
                    "<p><code>verify/2026-11-15-4533630f/index.html</code> is not present. Run "
                    "<code>python3 verify/2026-11-15-4533630f/build_report.py</code>.</p>"))
+
+    # === results feed + player game logs (carried from arena/5ae0869e-nba1, PR #107) ===
+    # Two brief requirements in one module: an official per-game result feed with
+    # one row per game (date, teams, final score, quarter scores) that settles only
+    # from verified finals, and per-player game logs (minutes, points, rebounds,
+    # assists, opponent). Wrapped so a failure here reports instead of taking the
+    # whole site build down with it.
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "scripts"))
+        import build_results_page as _res
+        built["results.html"] = _res.results_page()
+        built["player-logs.html"] = _res.player_logs_page()
+    except Exception as _exc:  # pragma: no cover - diagnostic path
+        _msg = ("<p><code>scripts/build_results_page.py</code> could not build the results "
+                "and player-log pages: %s</p>" % esc(str(_exc)))
+        built["results.html"] = page("Official results", "builder error",
+                                     banner("warn", "Builder error", _msg))
+        built["player-logs.html"] = page("Player game logs", "builder error",
+                                         banner("warn", "Builder error", _msg))
+
+    # === 2026-11-16 live verification (session arena/c348e6c7-nba1, COORDINATION §47) ===
+    # First pass in this repository that could reach nba.com at all; every prior session
+    # recorded flag F7 ("the refresh path has never been executed").
+    _v2611 = os.path.join(ROOT, "verify", "2026-11-16-c348e6c7", "index.html")
+    if os.path.exists(_v2611):
+        with open(_v2611, encoding="utf-8") as _fh:
+            built["verify-2026-11-16.html"] = _fh.read()
+    else:
+        built["verify-2026-11-16.html"] = page(
+            "Nov 16 re-verification", "the artifact is missing",
+            banner("warn", "Artifact missing",
+                   "<p><code>verify/2026-11-16-c348e6c7/index.html</code> is not present. Run "
+                   "<code>python3 verify/2026-11-16-c348e6c7/render.py</code>.</p>"))
 
     # === decisions (session arena/cc5a6652-nba1) =================================
     built["decisions.html"] = build_decisions(questions, suggestions)

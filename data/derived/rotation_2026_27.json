@@ -1,0 +1,2979 @@
+{
+ "title": "Rotation minutes: top-8 shares and replacement shares",
+ "session": "arena/801ba27f-nba1",
+ "built_utc": "2026-11-16T00:02:33Z",
+ "method": "minutes summed from the official box score of each team's last 10 completed games; share = player minutes / team minutes",
+ "source": "https://www.nba.com/game/<slug>/box-score",
+ "teams": {
+  "DET": {
+   "team": "DET",
+   "games_used": 10,
+   "window": "2026-10-25 .. 2026-11-14",
+   "total_player_minutes": 2450.0,
+   "top8": [
+    {
+     "player": "Cade Cunningham",
+     "minutes_share": 0.1431,
+     "minutes_per_game": 35.1,
+     "points_per_game": 27.0
+    },
+    {
+     "player": "Duncan Robinson",
+     "minutes_share": 0.1268,
+     "minutes_per_game": 31.1,
+     "points_per_game": 17.1
+    },
+    {
+     "player": "Daniss Jenkins",
+     "minutes_share": 0.1224,
+     "minutes_per_game": 30.0,
+     "points_per_game": 14.0
+    },
+    {
+     "player": "Paul Reed",
+     "minutes_share": 0.1128,
+     "minutes_per_game": 27.6,
+     "points_per_game": 11.1
+    },
+    {
+     "player": "John Collins",
+     "minutes_share": 0.1067,
+     "minutes_per_game": 26.1,
+     "points_per_game": 9.6
+    },
+    {
+     "player": "Kevin Huerter",
+     "minutes_share": 0.104,
+     "minutes_per_game": 25.5,
+     "points_per_game": 11.1
+    },
+    {
+     "player": "Ausar Thompson",
+     "minutes_share": 0.1035,
+     "minutes_per_game": 25.4,
+     "points_per_game": 9.6
+    },
+    {
+     "player": "Javonte Green",
+     "minutes_share": 0.07,
+     "minutes_per_game": 17.2,
+     "points_per_game": 4.8
+    }
+   ],
+   "bench_share_outside_top8": 0.1106,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Cade Cunningham",
+    "redistribution": [
+     {
+      "player": "Duncan Robinson",
+      "minutes_share_before": 0.1268,
+      "minutes_share_after_out": 0.148
+     },
+     {
+      "player": "Daniss Jenkins",
+      "minutes_share_before": 0.1224,
+      "minutes_share_after_out": 0.1429
+     },
+     {
+      "player": "Paul Reed",
+      "minutes_share_before": 0.1128,
+      "minutes_share_after_out": 0.1316
+     },
+     {
+      "player": "John Collins",
+      "minutes_share_before": 0.1067,
+      "minutes_share_after_out": 0.1246
+     },
+     {
+      "player": "Kevin Huerter",
+      "minutes_share_before": 0.104,
+      "minutes_share_after_out": 0.1213
+     },
+     {
+      "player": "Ausar Thompson",
+      "minutes_share_before": 0.1035,
+      "minutes_share_after_out": 0.1208
+     },
+     {
+      "player": "Javonte Green",
+      "minutes_share_before": 0.07,
+      "minutes_share_after_out": 0.0817
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "BOS": {
+   "team": "BOS",
+   "games_used": 10,
+   "window": "2026-10-26 .. 2026-11-11",
+   "total_player_minutes": 2425.1,
+   "top8": [
+    {
+     "player": "Jayson Tatum",
+     "minutes_share": 0.1233,
+     "minutes_per_game": 29.9,
+     "points_per_game": 24.0
+    },
+    {
+     "player": "Derrick White",
+     "minutes_share": 0.1192,
+     "minutes_per_game": 28.9,
+     "points_per_game": 12.4
+    },
+    {
+     "player": "Payton Pritchard",
+     "minutes_share": 0.1113,
+     "minutes_per_game": 27.0,
+     "points_per_game": 13.9
+    },
+    {
+     "player": "Paul George",
+     "minutes_share": 0.0977,
+     "minutes_per_game": 23.7,
+     "points_per_game": 16.7
+    },
+    {
+     "player": "Neemias Queta",
+     "minutes_share": 0.0934,
+     "minutes_per_game": 22.7,
+     "points_per_game": 9.2
+    },
+    {
+     "player": "Baylor Scheierman",
+     "minutes_share": 0.0904,
+     "minutes_per_game": 21.9,
+     "points_per_game": 6.3
+    },
+    {
+     "player": "Sam Hauser",
+     "minutes_share": 0.0871,
+     "minutes_per_game": 21.1,
+     "points_per_game": 8.0
+    },
+    {
+     "player": "Jordan Walsh",
+     "minutes_share": 0.0659,
+     "minutes_per_game": 16.0,
+     "points_per_game": 4.9
+    }
+   ],
+   "bench_share_outside_top8": 0.2116,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Jayson Tatum",
+    "redistribution": [
+     {
+      "player": "Derrick White",
+      "minutes_share_before": 0.1192,
+      "minutes_share_after_out": 0.1359
+     },
+     {
+      "player": "Payton Pritchard",
+      "minutes_share_before": 0.1113,
+      "minutes_share_after_out": 0.127
+     },
+     {
+      "player": "Paul George",
+      "minutes_share_before": 0.0977,
+      "minutes_share_after_out": 0.1114
+     },
+     {
+      "player": "Neemias Queta",
+      "minutes_share_before": 0.0934,
+      "minutes_share_after_out": 0.1066
+     },
+     {
+      "player": "Baylor Scheierman",
+      "minutes_share_before": 0.0904,
+      "minutes_share_after_out": 0.1031
+     },
+     {
+      "player": "Sam Hauser",
+      "minutes_share_before": 0.0871,
+      "minutes_share_after_out": 0.0993
+     },
+     {
+      "player": "Jordan Walsh",
+      "minutes_share_before": 0.0659,
+      "minutes_share_after_out": 0.0752
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "NYK": {
+   "team": "NYK",
+   "games_used": 10,
+   "window": "2026-10-25 .. 2026-11-13",
+   "total_player_minutes": 2400.1,
+   "top8": [
+    {
+     "player": "Jalen Brunson",
+     "minutes_share": 0.1392,
+     "minutes_per_game": 33.4,
+     "points_per_game": 27.9
+    },
+    {
+     "player": "OG Anunoby",
+     "minutes_share": 0.1368,
+     "minutes_per_game": 32.8,
+     "points_per_game": 16.2
+    },
+    {
+     "player": "Karl-Anthony Towns",
+     "minutes_share": 0.1327,
+     "minutes_per_game": 31.9,
+     "points_per_game": 21.2
+    },
+    {
+     "player": "Landry Shamet",
+     "minutes_share": 0.1085,
+     "minutes_per_game": 26.1,
+     "points_per_game": 9.8
+    },
+    {
+     "player": "Mikal Bridges",
+     "minutes_share": 0.1008,
+     "minutes_per_game": 24.2,
+     "points_per_game": 7.9
+    },
+    {
+     "player": "Josh Hart",
+     "minutes_share": 0.0851,
+     "minutes_per_game": 20.4,
+     "points_per_game": 4.2
+    },
+    {
+     "player": "Miles McBride",
+     "minutes_share": 0.0777,
+     "minutes_per_game": 18.6,
+     "points_per_game": 7.3
+    },
+    {
+     "player": "Tyler Kolek",
+     "minutes_share": 0.0558,
+     "minutes_per_game": 13.4,
+     "points_per_game": 3.6
+    }
+   ],
+   "bench_share_outside_top8": 0.1633,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Jalen Brunson",
+    "redistribution": [
+     {
+      "player": "OG Anunoby",
+      "minutes_share_before": 0.1368,
+      "minutes_share_after_out": 0.159
+     },
+     {
+      "player": "Karl-Anthony Towns",
+      "minutes_share_before": 0.1327,
+      "minutes_share_after_out": 0.1542
+     },
+     {
+      "player": "Landry Shamet",
+      "minutes_share_before": 0.1085,
+      "minutes_share_after_out": 0.1261
+     },
+     {
+      "player": "Mikal Bridges",
+      "minutes_share_before": 0.1008,
+      "minutes_share_after_out": 0.1171
+     },
+     {
+      "player": "Josh Hart",
+      "minutes_share_before": 0.0851,
+      "minutes_share_after_out": 0.0989
+     },
+     {
+      "player": "Miles McBride",
+      "minutes_share_before": 0.0777,
+      "minutes_share_after_out": 0.0902
+     },
+     {
+      "player": "Tyler Kolek",
+      "minutes_share_before": 0.0558,
+      "minutes_share_after_out": 0.0648
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "PHI": {
+   "team": "PHI",
+   "games_used": 10,
+   "window": "2026-10-28 .. 2026-11-15",
+   "total_player_minutes": 2400.0,
+   "top8": [
+    {
+     "player": "Tyrese Maxey",
+     "minutes_share": 0.1479,
+     "minutes_per_game": 35.5,
+     "points_per_game": 25.9
+    },
+    {
+     "player": "VJ Edgecombe",
+     "minutes_share": 0.1405,
+     "minutes_per_game": 33.7,
+     "points_per_game": 12.9
+    },
+    {
+     "player": "Jaylen Brown",
+     "minutes_share": 0.1269,
+     "minutes_per_game": 30.5,
+     "points_per_game": 20.2
+    },
+    {
+     "player": "LeBron James",
+     "minutes_share": 0.1075,
+     "minutes_per_game": 25.8,
+     "points_per_game": 11.7
+    },
+    {
+     "player": "Dean Wade",
+     "minutes_share": 0.1033,
+     "minutes_per_game": 24.8,
+     "points_per_game": 4.1
+    },
+    {
+     "player": "Joel Embiid",
+     "minutes_share": 0.1011,
+     "minutes_per_game": 24.3,
+     "points_per_game": 13.2
+    },
+    {
+     "player": "Anfernee Simons",
+     "minutes_share": 0.0869,
+     "minutes_per_game": 20.9,
+     "points_per_game": 12.1
+    },
+    {
+     "player": "Kentavious Caldwell-Pope",
+     "minutes_share": 0.0819,
+     "minutes_per_game": 19.7,
+     "points_per_game": 5.1
+    }
+   ],
+   "bench_share_outside_top8": 0.104,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Tyrese Maxey",
+    "redistribution": [
+     {
+      "player": "VJ Edgecombe",
+      "minutes_share_before": 0.1405,
+      "minutes_share_after_out": 0.1648
+     },
+     {
+      "player": "Jaylen Brown",
+      "minutes_share_before": 0.1269,
+      "minutes_share_after_out": 0.1489
+     },
+     {
+      "player": "LeBron James",
+      "minutes_share_before": 0.1075,
+      "minutes_share_after_out": 0.1262
+     },
+     {
+      "player": "Dean Wade",
+      "minutes_share_before": 0.1033,
+      "minutes_share_after_out": 0.1212
+     },
+     {
+      "player": "Joel Embiid",
+      "minutes_share_before": 0.1011,
+      "minutes_share_after_out": 0.1186
+     },
+     {
+      "player": "Anfernee Simons",
+      "minutes_share_before": 0.0869,
+      "minutes_share_after_out": 0.102
+     },
+     {
+      "player": "Kentavious Caldwell-Pope",
+      "minutes_share_before": 0.0819,
+      "minutes_share_after_out": 0.0961
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "SAS": {
+   "team": "SAS",
+   "games_used": 10,
+   "window": "2026-10-27 .. 2026-11-13",
+   "total_player_minutes": 2425.0,
+   "top8": [
+    {
+     "player": "Dylan Harper",
+     "minutes_share": 0.1289,
+     "minutes_per_game": 31.2,
+     "points_per_game": 16.5
+    },
+    {
+     "player": "Victor Wembanyama",
+     "minutes_share": 0.118,
+     "minutes_per_game": 28.6,
+     "points_per_game": 31.5
+    },
+    {
+     "player": "Stephon Castle",
+     "minutes_share": 0.1177,
+     "minutes_per_game": 28.5,
+     "points_per_game": 14.2
+    },
+    {
+     "player": "De'Aaron Fox",
+     "minutes_share": 0.115,
+     "minutes_per_game": 27.9,
+     "points_per_game": 12.5
+    },
+    {
+     "player": "Julian Champagnie",
+     "minutes_share": 0.1051,
+     "minutes_per_game": 25.5,
+     "points_per_game": 10.4
+    },
+    {
+     "player": "Keldon Johnson",
+     "minutes_share": 0.1027,
+     "minutes_per_game": 24.9,
+     "points_per_game": 8.9
+    },
+    {
+     "player": "Devin Vassell",
+     "minutes_share": 0.0936,
+     "minutes_per_game": 22.7,
+     "points_per_game": 9.8
+    },
+    {
+     "player": "Luke Kornet",
+     "minutes_share": 0.063,
+     "minutes_per_game": 15.3,
+     "points_per_game": 3.6
+    }
+   ],
+   "bench_share_outside_top8": 0.1561,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Dylan Harper",
+    "redistribution": [
+     {
+      "player": "Victor Wembanyama",
+      "minutes_share_before": 0.118,
+      "minutes_share_after_out": 0.1354
+     },
+     {
+      "player": "Stephon Castle",
+      "minutes_share_before": 0.1177,
+      "minutes_share_after_out": 0.1351
+     },
+     {
+      "player": "De'Aaron Fox",
+      "minutes_share_before": 0.115,
+      "minutes_share_after_out": 0.132
+     },
+     {
+      "player": "Julian Champagnie",
+      "minutes_share_before": 0.1051,
+      "minutes_share_after_out": 0.1206
+     },
+     {
+      "player": "Keldon Johnson",
+      "minutes_share_before": 0.1027,
+      "minutes_share_after_out": 0.1179
+     },
+     {
+      "player": "Devin Vassell",
+      "minutes_share_before": 0.0936,
+      "minutes_share_after_out": 0.1074
+     },
+     {
+      "player": "Luke Kornet",
+      "minutes_share_before": 0.063,
+      "minutes_share_after_out": 0.0723
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "OKC": {
+   "team": "OKC",
+   "games_used": 10,
+   "window": "2026-10-26 .. 2026-11-13",
+   "total_player_minutes": 2400.0,
+   "top8": [
+    {
+     "player": "Shai Gilgeous-Alexander",
+     "minutes_share": 0.1356,
+     "minutes_per_game": 32.5,
+     "points_per_game": 31.3
+    },
+    {
+     "player": "Jared McCain",
+     "minutes_share": 0.1181,
+     "minutes_per_game": 28.3,
+     "points_per_game": 14.8
+    },
+    {
+     "player": "Isaiah Hartenstein",
+     "minutes_share": 0.1093,
+     "minutes_per_game": 26.2,
+     "points_per_game": 9.5
+    },
+    {
+     "player": "Kenrich Williams",
+     "minutes_share": 0.1015,
+     "minutes_per_game": 24.4,
+     "points_per_game": 8.1
+    },
+    {
+     "player": "Aday Mara",
+     "minutes_share": 0.0992,
+     "minutes_per_game": 23.8,
+     "points_per_game": 10.1
+    },
+    {
+     "player": "Ajay Mitchell",
+     "minutes_share": 0.0945,
+     "minutes_per_game": 22.7,
+     "points_per_game": 16.9
+    },
+    {
+     "player": "Bennett Stirtz",
+     "minutes_share": 0.0927,
+     "minutes_per_game": 22.2,
+     "points_per_game": 9.8
+    },
+    {
+     "player": "Alex Caruso",
+     "minutes_share": 0.0572,
+     "minutes_per_game": 13.7,
+     "points_per_game": 4.5
+    }
+   ],
+   "bench_share_outside_top8": 0.1921,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Shai Gilgeous-Alexander",
+    "redistribution": [
+     {
+      "player": "Jared McCain",
+      "minutes_share_before": 0.1181,
+      "minutes_share_after_out": 0.1366
+     },
+     {
+      "player": "Isaiah Hartenstein",
+      "minutes_share_before": 0.1093,
+      "minutes_share_after_out": 0.1264
+     },
+     {
+      "player": "Kenrich Williams",
+      "minutes_share_before": 0.1015,
+      "minutes_share_after_out": 0.1174
+     },
+     {
+      "player": "Aday Mara",
+      "minutes_share_before": 0.0992,
+      "minutes_share_after_out": 0.1148
+     },
+     {
+      "player": "Ajay Mitchell",
+      "minutes_share_before": 0.0945,
+      "minutes_share_after_out": 0.1093
+     },
+     {
+      "player": "Bennett Stirtz",
+      "minutes_share_before": 0.0927,
+      "minutes_share_after_out": 0.1072
+     },
+     {
+      "player": "Alex Caruso",
+      "minutes_share_before": 0.0572,
+      "minutes_share_after_out": 0.0661
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "MIA": {
+   "team": "MIA",
+   "games_used": 10,
+   "window": "2026-10-26 .. 2026-11-14",
+   "total_player_minutes": 2425.0,
+   "top8": [
+    {
+     "player": "Davion Mitchell",
+     "minutes_share": 0.1493,
+     "minutes_per_game": 36.2,
+     "points_per_game": 16.7
+    },
+    {
+     "player": "Bam Adebayo",
+     "minutes_share": 0.1428,
+     "minutes_per_game": 34.6,
+     "points_per_game": 21.4
+    },
+    {
+     "player": "Giannis Antetokounmpo",
+     "minutes_share": 0.1374,
+     "minutes_per_game": 33.3,
+     "points_per_game": 29.1
+    },
+    {
+     "player": "Andrew Wiggins",
+     "minutes_share": 0.1097,
+     "minutes_per_game": 26.6,
+     "points_per_game": 9.1
+    },
+    {
+     "player": "Pelle Larsson",
+     "minutes_share": 0.0972,
+     "minutes_per_game": 23.6,
+     "points_per_game": 10.1
+    },
+    {
+     "player": "Klay Thompson",
+     "minutes_share": 0.0931,
+     "minutes_per_game": 22.6,
+     "points_per_game": 15.4
+    },
+    {
+     "player": "Bobby Portis Jr.",
+     "minutes_share": 0.0758,
+     "minutes_per_game": 18.4,
+     "points_per_game": 5.6
+    },
+    {
+     "player": "Ryan Conwell",
+     "minutes_share": 0.0663,
+     "minutes_per_game": 16.1,
+     "points_per_game": 6.2
+    }
+   ],
+   "bench_share_outside_top8": 0.1286,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Davion Mitchell",
+    "redistribution": [
+     {
+      "player": "Bam Adebayo",
+      "minutes_share_before": 0.1428,
+      "minutes_share_after_out": 0.1678
+     },
+     {
+      "player": "Giannis Antetokounmpo",
+      "minutes_share_before": 0.1374,
+      "minutes_share_after_out": 0.1615
+     },
+     {
+      "player": "Andrew Wiggins",
+      "minutes_share_before": 0.1097,
+      "minutes_share_after_out": 0.1289
+     },
+     {
+      "player": "Pelle Larsson",
+      "minutes_share_before": 0.0972,
+      "minutes_share_after_out": 0.1143
+     },
+     {
+      "player": "Klay Thompson",
+      "minutes_share_before": 0.0931,
+      "minutes_share_after_out": 0.1094
+     },
+     {
+      "player": "Bobby Portis Jr.",
+      "minutes_share_before": 0.0758,
+      "minutes_share_after_out": 0.0891
+     },
+     {
+      "player": "Ryan Conwell",
+      "minutes_share_before": 0.0663,
+      "minutes_share_after_out": 0.0779
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "MIN": {
+   "team": "MIN",
+   "games_used": 10,
+   "window": "2026-10-26 .. 2026-11-14",
+   "total_player_minutes": 2425.1,
+   "top8": [
+    {
+     "player": "Jaden McDaniels",
+     "minutes_share": 0.1419,
+     "minutes_per_game": 34.4,
+     "points_per_game": 17.5
+    },
+    {
+     "player": "Ayo Dosunmu",
+     "minutes_share": 0.1344,
+     "minutes_per_game": 32.6,
+     "points_per_game": 20.2
+    },
+    {
+     "player": "Jonathan Kuminga",
+     "minutes_share": 0.1295,
+     "minutes_per_game": 31.4,
+     "points_per_game": 12.4
+    },
+    {
+     "player": "LaMelo Ball",
+     "minutes_share": 0.1204,
+     "minutes_per_game": 29.2,
+     "points_per_game": 19.4
+    },
+    {
+     "player": "Rudy Gobert",
+     "minutes_share": 0.1051,
+     "minutes_per_game": 25.5,
+     "points_per_game": 6.1
+    },
+    {
+     "player": "Trey Lyles",
+     "minutes_share": 0.0798,
+     "minutes_per_game": 19.4,
+     "points_per_game": 6.4
+    },
+    {
+     "player": "Joan Beringer",
+     "minutes_share": 0.0718,
+     "minutes_per_game": 17.4,
+     "points_per_game": 6.2
+    },
+    {
+     "player": "Bones Hyland",
+     "minutes_share": 0.0627,
+     "minutes_per_game": 15.2,
+     "points_per_game": 12.1
+    }
+   ],
+   "bench_share_outside_top8": 0.1543,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Jaden McDaniels",
+    "redistribution": [
+     {
+      "player": "Ayo Dosunmu",
+      "minutes_share_before": 0.1344,
+      "minutes_share_after_out": 0.1567
+     },
+     {
+      "player": "Jonathan Kuminga",
+      "minutes_share_before": 0.1295,
+      "minutes_share_after_out": 0.151
+     },
+     {
+      "player": "LaMelo Ball",
+      "minutes_share_before": 0.1204,
+      "minutes_share_after_out": 0.1403
+     },
+     {
+      "player": "Rudy Gobert",
+      "minutes_share_before": 0.1051,
+      "minutes_share_after_out": 0.1225
+     },
+     {
+      "player": "Trey Lyles",
+      "minutes_share_before": 0.0798,
+      "minutes_share_after_out": 0.093
+     },
+     {
+      "player": "Joan Beringer",
+      "minutes_share_before": 0.0718,
+      "minutes_share_after_out": 0.0836
+     },
+     {
+      "player": "Bones Hyland",
+      "minutes_share_before": 0.0627,
+      "minutes_share_after_out": 0.073
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "LAL": {
+   "team": "LAL",
+   "games_used": 10,
+   "window": "2026-10-28 .. 2026-11-15",
+   "total_player_minutes": 2160.0,
+   "top8": [
+    {
+     "player": "Austin Reaves",
+     "minutes_share": 0.1287,
+     "minutes_per_game": 27.8,
+     "points_per_game": 19.0
+    },
+    {
+     "player": "Walker Kessler",
+     "minutes_share": 0.1271,
+     "minutes_per_game": 27.4,
+     "points_per_game": 12.6
+    },
+    {
+     "player": "Luka Don\u010di\u0107",
+     "minutes_share": 0.1173,
+     "minutes_per_game": 25.3,
+     "points_per_game": 28.1
+    },
+    {
+     "player": "Jake LaRavia",
+     "minutes_share": 0.1117,
+     "minutes_per_game": 24.1,
+     "points_per_game": 5.2
+    },
+    {
+     "player": "Matisse Thybulle",
+     "minutes_share": 0.103,
+     "minutes_per_game": 22.3,
+     "points_per_game": 6.0
+    },
+    {
+     "player": "Sandro Mamukelashvili",
+     "minutes_share": 0.1,
+     "minutes_per_game": 21.6,
+     "points_per_game": 10.3
+    },
+    {
+     "player": "Quentin Grimes",
+     "minutes_share": 0.0879,
+     "minutes_per_game": 19.0,
+     "points_per_game": 6.0
+    },
+    {
+     "player": "Collin Sexton",
+     "minutes_share": 0.0755,
+     "minutes_per_game": 16.3,
+     "points_per_game": 9.6
+    }
+   ],
+   "bench_share_outside_top8": 0.1489,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Austin Reaves",
+    "redistribution": [
+     {
+      "player": "Walker Kessler",
+      "minutes_share_before": 0.1271,
+      "minutes_share_after_out": 0.1458
+     },
+     {
+      "player": "Luka Don\u010di\u0107",
+      "minutes_share_before": 0.1173,
+      "minutes_share_after_out": 0.1346
+     },
+     {
+      "player": "Jake LaRavia",
+      "minutes_share_before": 0.1117,
+      "minutes_share_after_out": 0.1282
+     },
+     {
+      "player": "Matisse Thybulle",
+      "minutes_share_before": 0.103,
+      "minutes_share_after_out": 0.1182
+     },
+     {
+      "player": "Sandro Mamukelashvili",
+      "minutes_share_before": 0.1,
+      "minutes_share_after_out": 0.1147
+     },
+     {
+      "player": "Quentin Grimes",
+      "minutes_share_before": 0.0879,
+      "minutes_share_after_out": 0.1009
+     },
+     {
+      "player": "Collin Sexton",
+      "minutes_share_before": 0.0755,
+      "minutes_share_after_out": 0.0867
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "GSW": {
+   "team": "GSW",
+   "games_used": 10,
+   "window": "2026-10-26 .. 2026-11-13",
+   "total_player_minutes": 2425.1,
+   "top8": [
+    {
+     "player": "Brandin Podziemski",
+     "minutes_share": 0.1334,
+     "minutes_per_game": 32.4,
+     "points_per_game": 16.3
+    },
+    {
+     "player": "Yaxel Lendeborg",
+     "minutes_share": 0.127,
+     "minutes_per_game": 30.8,
+     "points_per_game": 20.7
+    },
+    {
+     "player": "Draymond Green",
+     "minutes_share": 0.0955,
+     "minutes_per_game": 23.1,
+     "points_per_game": 2.9
+    },
+    {
+     "player": "De'Anthony Melton",
+     "minutes_share": 0.0903,
+     "minutes_per_game": 21.9,
+     "points_per_game": 9.4
+    },
+    {
+     "player": "Stephen Curry",
+     "minutes_share": 0.0874,
+     "minutes_per_game": 21.2,
+     "points_per_game": 23.1
+    },
+    {
+     "player": "Georges Niang",
+     "minutes_share": 0.0838,
+     "minutes_per_game": 20.3,
+     "points_per_game": 8.6
+    },
+    {
+     "player": "Will Richard",
+     "minutes_share": 0.0686,
+     "minutes_per_game": 16.6,
+     "points_per_game": 4.8
+    },
+    {
+     "player": "Al Horford",
+     "minutes_share": 0.0629,
+     "minutes_per_game": 15.3,
+     "points_per_game": 4.4
+    }
+   ],
+   "bench_share_outside_top8": 0.251,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Brandin Podziemski",
+    "redistribution": [
+     {
+      "player": "Yaxel Lendeborg",
+      "minutes_share_before": 0.127,
+      "minutes_share_after_out": 0.1465
+     },
+     {
+      "player": "Draymond Green",
+      "minutes_share_before": 0.0955,
+      "minutes_share_after_out": 0.1102
+     },
+     {
+      "player": "De'Anthony Melton",
+      "minutes_share_before": 0.0903,
+      "minutes_share_after_out": 0.1042
+     },
+     {
+      "player": "Stephen Curry",
+      "minutes_share_before": 0.0874,
+      "minutes_share_after_out": 0.1009
+     },
+     {
+      "player": "Georges Niang",
+      "minutes_share_before": 0.0838,
+      "minutes_share_after_out": 0.0967
+     },
+     {
+      "player": "Will Richard",
+      "minutes_share_before": 0.0686,
+      "minutes_share_after_out": 0.0791
+     },
+     {
+      "player": "Al Horford",
+      "minutes_share_before": 0.0629,
+      "minutes_share_after_out": 0.0726
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "ORL": {
+   "team": "ORL",
+   "games_used": 10,
+   "window": "2026-10-25 .. 2026-11-13",
+   "total_player_minutes": 2425.1,
+   "top8": [
+    {
+     "player": "Franz Wagner",
+     "minutes_share": 0.1563,
+     "minutes_per_game": 37.9,
+     "points_per_game": 25.3
+    },
+    {
+     "player": "Wendell Carter Jr.",
+     "minutes_share": 0.1372,
+     "minutes_per_game": 33.3,
+     "points_per_game": 12.0
+    },
+    {
+     "player": "Desmond Bane",
+     "minutes_share": 0.1321,
+     "minutes_per_game": 32.0,
+     "points_per_game": 17.8
+    },
+    {
+     "player": "Anthony Black",
+     "minutes_share": 0.1191,
+     "minutes_per_game": 28.9,
+     "points_per_game": 14.7
+    },
+    {
+     "player": "Tristan da Silva",
+     "minutes_share": 0.1025,
+     "minutes_per_game": 24.9,
+     "points_per_game": 12.9
+    },
+    {
+     "player": "Jase Richardson",
+     "minutes_share": 0.0869,
+     "minutes_per_game": 21.1,
+     "points_per_game": 5.7
+    },
+    {
+     "player": "Jamal Cain",
+     "minutes_share": 0.0723,
+     "minutes_per_game": 17.5,
+     "points_per_game": 7.0
+    },
+    {
+     "player": "Nikola Vu\u010devi\u0107",
+     "minutes_share": 0.0458,
+     "minutes_per_game": 11.1,
+     "points_per_game": 3.2
+    }
+   ],
+   "bench_share_outside_top8": 0.1479,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Franz Wagner",
+    "redistribution": [
+     {
+      "player": "Wendell Carter Jr.",
+      "minutes_share_before": 0.1372,
+      "minutes_share_after_out": 0.1626
+     },
+     {
+      "player": "Desmond Bane",
+      "minutes_share_before": 0.1321,
+      "minutes_share_after_out": 0.1566
+     },
+     {
+      "player": "Anthony Black",
+      "minutes_share_before": 0.1191,
+      "minutes_share_after_out": 0.1411
+     },
+     {
+      "player": "Tristan da Silva",
+      "minutes_share_before": 0.1025,
+      "minutes_share_after_out": 0.1215
+     },
+     {
+      "player": "Jase Richardson",
+      "minutes_share_before": 0.0869,
+      "minutes_share_after_out": 0.103
+     },
+     {
+      "player": "Jamal Cain",
+      "minutes_share_before": 0.0723,
+      "minutes_share_after_out": 0.0857
+     },
+     {
+      "player": "Nikola Vu\u010devi\u0107",
+      "minutes_share_before": 0.0458,
+      "minutes_share_after_out": 0.0542
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "ATL": {
+   "team": "ATL",
+   "games_used": 10,
+   "window": "2026-10-26 .. 2026-11-13",
+   "total_player_minutes": 2185.0,
+   "top8": [
+    {
+     "player": "Nickeil Alexander-Walker",
+     "minutes_share": 0.1341,
+     "minutes_per_game": 29.3,
+     "points_per_game": 19.1
+    },
+    {
+     "player": "Dyson Daniels",
+     "minutes_share": 0.1283,
+     "minutes_per_game": 28.0,
+     "points_per_game": 7.1
+    },
+    {
+     "player": "Onyeka Okongwu",
+     "minutes_share": 0.1282,
+     "minutes_per_game": 28.0,
+     "points_per_game": 12.6
+    },
+    {
+     "player": "CJ McCollum",
+     "minutes_share": 0.1059,
+     "minutes_per_game": 23.1,
+     "points_per_game": 12.9
+    },
+    {
+     "player": "Aaron Wiggins",
+     "minutes_share": 0.105,
+     "minutes_per_game": 22.9,
+     "points_per_game": 11.7
+    },
+    {
+     "player": "Luguentz Dort",
+     "minutes_share": 0.103,
+     "minutes_per_game": 22.5,
+     "points_per_game": 9.2
+    },
+    {
+     "player": "Jalen Johnson",
+     "minutes_share": 0.098,
+     "minutes_per_game": 21.4,
+     "points_per_game": 11.8
+    },
+    {
+     "player": "Kingston Flemings",
+     "minutes_share": 0.0855,
+     "minutes_per_game": 18.7,
+     "points_per_game": 8.4
+    }
+   ],
+   "bench_share_outside_top8": 0.1119,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Nickeil Alexander-Walker",
+    "redistribution": [
+     {
+      "player": "Dyson Daniels",
+      "minutes_share_before": 0.1283,
+      "minutes_share_after_out": 0.1481
+     },
+     {
+      "player": "Onyeka Okongwu",
+      "minutes_share_before": 0.1282,
+      "minutes_share_after_out": 0.1481
+     },
+     {
+      "player": "CJ McCollum",
+      "minutes_share_before": 0.1059,
+      "minutes_share_after_out": 0.1223
+     },
+     {
+      "player": "Aaron Wiggins",
+      "minutes_share_before": 0.105,
+      "minutes_share_after_out": 0.1212
+     },
+     {
+      "player": "Luguentz Dort",
+      "minutes_share_before": 0.103,
+      "minutes_share_after_out": 0.119
+     },
+     {
+      "player": "Jalen Johnson",
+      "minutes_share_before": 0.098,
+      "minutes_share_after_out": 0.1131
+     },
+     {
+      "player": "Kingston Flemings",
+      "minutes_share_before": 0.0855,
+      "minutes_share_after_out": 0.0988
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "WAS": {
+   "team": "WAS",
+   "games_used": 10,
+   "window": "2026-10-26 .. 2026-11-12",
+   "total_player_minutes": 2450.0,
+   "top8": [
+    {
+     "player": "Trae Young",
+     "minutes_share": 0.147,
+     "minutes_per_game": 36.0,
+     "points_per_game": 18.9
+    },
+    {
+     "player": "Kyshawn George",
+     "minutes_share": 0.1385,
+     "minutes_per_game": 33.9,
+     "points_per_game": 18.5
+    },
+    {
+     "player": "AJ Dybantsa",
+     "minutes_share": 0.1245,
+     "minutes_per_game": 30.5,
+     "points_per_game": 13.5
+    },
+    {
+     "player": "Anthony Davis",
+     "minutes_share": 0.1136,
+     "minutes_per_game": 27.8,
+     "points_per_game": 22.0
+    },
+    {
+     "player": "Alex Sarr",
+     "minutes_share": 0.1039,
+     "minutes_per_game": 25.5,
+     "points_per_game": 11.1
+    },
+    {
+     "player": "Bilal Coulibaly",
+     "minutes_share": 0.0947,
+     "minutes_per_game": 23.2,
+     "points_per_game": 5.2
+    },
+    {
+     "player": "Tre Johnson",
+     "minutes_share": 0.0877,
+     "minutes_per_game": 21.5,
+     "points_per_game": 7.5
+    },
+    {
+     "player": "Bub Carrington",
+     "minutes_share": 0.0764,
+     "minutes_per_game": 18.7,
+     "points_per_game": 4.1
+    }
+   ],
+   "bench_share_outside_top8": 0.1137,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Trae Young",
+    "redistribution": [
+     {
+      "player": "Kyshawn George",
+      "minutes_share_before": 0.1385,
+      "minutes_share_after_out": 0.1623
+     },
+     {
+      "player": "AJ Dybantsa",
+      "minutes_share_before": 0.1245,
+      "minutes_share_after_out": 0.146
+     },
+     {
+      "player": "Anthony Davis",
+      "minutes_share_before": 0.1136,
+      "minutes_share_after_out": 0.1332
+     },
+     {
+      "player": "Alex Sarr",
+      "minutes_share_before": 0.1039,
+      "minutes_share_after_out": 0.1218
+     },
+     {
+      "player": "Bilal Coulibaly",
+      "minutes_share_before": 0.0947,
+      "minutes_share_after_out": 0.111
+     },
+     {
+      "player": "Tre Johnson",
+      "minutes_share_before": 0.0877,
+      "minutes_share_after_out": 0.1028
+     },
+     {
+      "player": "Bub Carrington",
+      "minutes_share_before": 0.0764,
+      "minutes_share_after_out": 0.0895
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "MIL": {
+   "team": "MIL",
+   "games_used": 10,
+   "window": "2026-10-26 .. 2026-11-13",
+   "total_player_minutes": 2400.1,
+   "top8": [
+    {
+     "player": "Tyler Herro",
+     "minutes_share": 0.1169,
+     "minutes_per_game": 28.1,
+     "points_per_game": 18.8
+    },
+    {
+     "player": "Jaime Jaquez Jr.",
+     "minutes_share": 0.1115,
+     "minutes_per_game": 26.8,
+     "points_per_game": 15.3
+    },
+    {
+     "player": "Kyle Kuzma",
+     "minutes_share": 0.1093,
+     "minutes_per_game": 26.2,
+     "points_per_game": 11.1
+    },
+    {
+     "player": "Myles Turner",
+     "minutes_share": 0.1026,
+     "minutes_per_game": 24.6,
+     "points_per_game": 6.5
+    },
+    {
+     "player": "Brayden Burries",
+     "minutes_share": 0.0986,
+     "minutes_per_game": 23.7,
+     "points_per_game": 9.4
+    },
+    {
+     "player": "Ryan Rollins",
+     "minutes_share": 0.0945,
+     "minutes_per_game": 22.7,
+     "points_per_game": 10.2
+    },
+    {
+     "player": "Nate Ament",
+     "minutes_share": 0.0774,
+     "minutes_per_game": 18.6,
+     "points_per_game": 8.2
+    },
+    {
+     "player": "AJ Green",
+     "minutes_share": 0.0724,
+     "minutes_per_game": 17.4,
+     "points_per_game": 5.0
+    }
+   ],
+   "bench_share_outside_top8": 0.2168,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Tyler Herro",
+    "redistribution": [
+     {
+      "player": "Jaime Jaquez Jr.",
+      "minutes_share_before": 0.1115,
+      "minutes_share_after_out": 0.1263
+     },
+     {
+      "player": "Kyle Kuzma",
+      "minutes_share_before": 0.1093,
+      "minutes_share_after_out": 0.1238
+     },
+     {
+      "player": "Myles Turner",
+      "minutes_share_before": 0.1026,
+      "minutes_share_after_out": 0.1162
+     },
+     {
+      "player": "Brayden Burries",
+      "minutes_share_before": 0.0986,
+      "minutes_share_after_out": 0.1116
+     },
+     {
+      "player": "Ryan Rollins",
+      "minutes_share_before": 0.0945,
+      "minutes_share_after_out": 0.107
+     },
+     {
+      "player": "Nate Ament",
+      "minutes_share_before": 0.0774,
+      "minutes_share_after_out": 0.0876
+     },
+     {
+      "player": "AJ Green",
+      "minutes_share_before": 0.0724,
+      "minutes_share_after_out": 0.082
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "BKN": {
+   "team": "BKN",
+   "games_used": 10,
+   "window": "2026-10-25 .. 2026-11-14",
+   "total_player_minutes": 2425.1,
+   "top8": [
+    {
+     "player": "Julius Randle",
+     "minutes_share": 0.1331,
+     "minutes_per_game": 32.3,
+     "points_per_game": 18.3
+    },
+    {
+     "player": "Michael Porter Jr.",
+     "minutes_share": 0.1204,
+     "minutes_per_game": 29.2,
+     "points_per_game": 18.3
+    },
+    {
+     "player": "Day'Ron Sharpe",
+     "minutes_share": 0.0955,
+     "minutes_per_game": 23.2,
+     "points_per_game": 9.1
+    },
+    {
+     "player": "Nolan Traore",
+     "minutes_share": 0.0907,
+     "minutes_per_game": 22.0,
+     "points_per_game": 13.4
+    },
+    {
+     "player": "Noah Clowney",
+     "minutes_share": 0.0863,
+     "minutes_per_game": 20.9,
+     "points_per_game": 6.8
+    },
+    {
+     "player": "Moritz Wagner",
+     "minutes_share": 0.0782,
+     "minutes_per_game": 19.0,
+     "points_per_game": 11.7
+    },
+    {
+     "player": "Chaney Johnson",
+     "minutes_share": 0.0772,
+     "minutes_per_game": 18.7,
+     "points_per_game": 4.3
+    },
+    {
+     "player": "Keon Ellis",
+     "minutes_share": 0.0743,
+     "minutes_per_game": 18.0,
+     "points_per_game": 3.7
+    }
+   ],
+   "bench_share_outside_top8": 0.2442,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Julius Randle",
+    "redistribution": [
+     {
+      "player": "Michael Porter Jr.",
+      "minutes_share_before": 0.1204,
+      "minutes_share_after_out": 0.1389
+     },
+     {
+      "player": "Day'Ron Sharpe",
+      "minutes_share_before": 0.0955,
+      "minutes_share_after_out": 0.1102
+     },
+     {
+      "player": "Nolan Traore",
+      "minutes_share_before": 0.0907,
+      "minutes_share_after_out": 0.1046
+     },
+     {
+      "player": "Noah Clowney",
+      "minutes_share_before": 0.0863,
+      "minutes_share_after_out": 0.0996
+     },
+     {
+      "player": "Moritz Wagner",
+      "minutes_share_before": 0.0782,
+      "minutes_share_after_out": 0.0902
+     },
+     {
+      "player": "Chaney Johnson",
+      "minutes_share_before": 0.0772,
+      "minutes_share_after_out": 0.089
+     },
+     {
+      "player": "Keon Ellis",
+      "minutes_share_before": 0.0743,
+      "minutes_share_after_out": 0.0858
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "CHA": {
+   "team": "CHA",
+   "games_used": 10,
+   "window": "2026-10-24 .. 2026-11-12",
+   "total_player_minutes": 2400.1,
+   "top8": [
+    {
+     "player": "Naz Reid",
+     "minutes_share": 0.1251,
+     "minutes_per_game": 30.0,
+     "points_per_game": 17.0
+    },
+    {
+     "player": "Grayson Allen",
+     "minutes_share": 0.1161,
+     "minutes_per_game": 27.9,
+     "points_per_game": 15.0
+    },
+    {
+     "player": "Sion James",
+     "minutes_share": 0.1093,
+     "minutes_per_game": 26.2,
+     "points_per_game": 6.6
+    },
+    {
+     "player": "Brandon Miller",
+     "minutes_share": 0.1047,
+     "minutes_per_game": 25.1,
+     "points_per_game": 18.2
+    },
+    {
+     "player": "Moussa Diabat\u00e9",
+     "minutes_share": 0.0982,
+     "minutes_per_game": 23.6,
+     "points_per_game": 6.5
+    },
+    {
+     "player": "Dennis Schr\u00f6der",
+     "minutes_share": 0.0892,
+     "minutes_per_game": 21.4,
+     "points_per_game": 6.9
+    },
+    {
+     "player": "Royce O'Neale",
+     "minutes_share": 0.083,
+     "minutes_per_game": 19.9,
+     "points_per_game": 5.0
+    },
+    {
+     "player": "Ryan Kalkbrenner",
+     "minutes_share": 0.0791,
+     "minutes_per_game": 19.0,
+     "points_per_game": 4.5
+    }
+   ],
+   "bench_share_outside_top8": 0.1953,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Naz Reid",
+    "redistribution": [
+     {
+      "player": "Grayson Allen",
+      "minutes_share_before": 0.1161,
+      "minutes_share_after_out": 0.1327
+     },
+     {
+      "player": "Sion James",
+      "minutes_share_before": 0.1093,
+      "minutes_share_after_out": 0.1249
+     },
+     {
+      "player": "Brandon Miller",
+      "minutes_share_before": 0.1047,
+      "minutes_share_after_out": 0.1197
+     },
+     {
+      "player": "Moussa Diabat\u00e9",
+      "minutes_share_before": 0.0982,
+      "minutes_share_after_out": 0.1122
+     },
+     {
+      "player": "Dennis Schr\u00f6der",
+      "minutes_share_before": 0.0892,
+      "minutes_share_after_out": 0.102
+     },
+     {
+      "player": "Royce O'Neale",
+      "minutes_share_before": 0.083,
+      "minutes_share_after_out": 0.0948
+     },
+     {
+      "player": "Ryan Kalkbrenner",
+      "minutes_share_before": 0.0791,
+      "minutes_share_after_out": 0.0904
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "TOR": {
+   "team": "TOR",
+   "games_used": 10,
+   "window": "2026-10-25 .. 2026-11-12",
+   "total_player_minutes": 2400.0,
+   "top8": [
+    {
+     "player": "RJ Barrett",
+     "minutes_share": 0.1423,
+     "minutes_per_game": 34.1,
+     "points_per_game": 21.3
+    },
+    {
+     "player": "Ja'Kobe Walter",
+     "minutes_share": 0.1317,
+     "minutes_per_game": 31.6,
+     "points_per_game": 11.6
+    },
+    {
+     "player": "Immanuel Quickley",
+     "minutes_share": 0.1054,
+     "minutes_per_game": 25.3,
+     "points_per_game": 14.1
+    },
+    {
+     "player": "Jamal Shead",
+     "minutes_share": 0.1027,
+     "minutes_per_game": 24.7,
+     "points_per_game": 7.5
+    },
+    {
+     "player": "Collin Murray-Boyles",
+     "minutes_share": 0.0892,
+     "minutes_per_game": 21.4,
+     "points_per_game": 10.1
+    },
+    {
+     "player": "Jamison Battle",
+     "minutes_share": 0.0872,
+     "minutes_per_game": 20.9,
+     "points_per_game": 10.3
+    },
+    {
+     "player": "Scottie Barnes",
+     "minutes_share": 0.0849,
+     "minutes_per_game": 20.4,
+     "points_per_game": 13.7
+    },
+    {
+     "player": "Jakob Poeltl",
+     "minutes_share": 0.0791,
+     "minutes_per_game": 19.0,
+     "points_per_game": 7.4
+    }
+   ],
+   "bench_share_outside_top8": 0.1775,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "RJ Barrett",
+    "redistribution": [
+     {
+      "player": "Ja'Kobe Walter",
+      "minutes_share_before": 0.1317,
+      "minutes_share_after_out": 0.1535
+     },
+     {
+      "player": "Immanuel Quickley",
+      "minutes_share_before": 0.1054,
+      "minutes_share_after_out": 0.1229
+     },
+     {
+      "player": "Jamal Shead",
+      "minutes_share_before": 0.1027,
+      "minutes_share_after_out": 0.1198
+     },
+     {
+      "player": "Collin Murray-Boyles",
+      "minutes_share_before": 0.0892,
+      "minutes_share_after_out": 0.1041
+     },
+     {
+      "player": "Jamison Battle",
+      "minutes_share_before": 0.0872,
+      "minutes_share_after_out": 0.1016
+     },
+     {
+      "player": "Scottie Barnes",
+      "minutes_share_before": 0.0849,
+      "minutes_share_after_out": 0.099
+     },
+     {
+      "player": "Jakob Poeltl",
+      "minutes_share_before": 0.0791,
+      "minutes_share_after_out": 0.0922
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "CHI": {
+   "team": "CHI",
+   "games_used": 10,
+   "window": "2026-10-24 .. 2026-11-14",
+   "total_player_minutes": 2425.0,
+   "top8": [
+    {
+     "player": "Josh Giddey",
+     "minutes_share": 0.1206,
+     "minutes_per_game": 29.2,
+     "points_per_game": 11.7
+    },
+    {
+     "player": "Matas Buzelis",
+     "minutes_share": 0.1152,
+     "minutes_per_game": 27.9,
+     "points_per_game": 14.0
+    },
+    {
+     "player": "Caleb Wilson",
+     "minutes_share": 0.0998,
+     "minutes_per_game": 24.2,
+     "points_per_game": 15.2
+    },
+    {
+     "player": "Norman Powell",
+     "minutes_share": 0.0974,
+     "minutes_per_game": 23.6,
+     "points_per_game": 17.1
+    },
+    {
+     "player": "Jalen Smith",
+     "minutes_share": 0.0941,
+     "minutes_per_game": 22.8,
+     "points_per_game": 11.4
+    },
+    {
+     "player": "Isaac Okoro",
+     "minutes_share": 0.0898,
+     "minutes_per_game": 21.8,
+     "points_per_game": 6.0
+    },
+    {
+     "player": "Tre Jones",
+     "minutes_share": 0.0783,
+     "minutes_per_game": 19.0,
+     "points_per_game": 10.2
+    },
+    {
+     "player": "Patrick Williams",
+     "minutes_share": 0.0507,
+     "minutes_per_game": 12.3,
+     "points_per_game": 4.7
+    }
+   ],
+   "bench_share_outside_top8": 0.2539,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Josh Giddey",
+    "redistribution": [
+     {
+      "player": "Matas Buzelis",
+      "minutes_share_before": 0.1152,
+      "minutes_share_after_out": 0.131
+     },
+     {
+      "player": "Caleb Wilson",
+      "minutes_share_before": 0.0998,
+      "minutes_share_after_out": 0.1135
+     },
+     {
+      "player": "Norman Powell",
+      "minutes_share_before": 0.0974,
+      "minutes_share_after_out": 0.1108
+     },
+     {
+      "player": "Jalen Smith",
+      "minutes_share_before": 0.0941,
+      "minutes_share_after_out": 0.107
+     },
+     {
+      "player": "Isaac Okoro",
+      "minutes_share_before": 0.0898,
+      "minutes_share_after_out": 0.1022
+     },
+     {
+      "player": "Tre Jones",
+      "minutes_share_before": 0.0783,
+      "minutes_share_after_out": 0.0891
+     },
+     {
+      "player": "Patrick Williams",
+      "minutes_share_before": 0.0507,
+      "minutes_share_after_out": 0.0576
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "MEM": {
+   "team": "MEM",
+   "games_used": 10,
+   "window": "2026-10-26 .. 2026-11-14",
+   "total_player_minutes": 2425.0,
+   "top8": [
+    {
+     "player": "Cameron Boozer",
+     "minutes_share": 0.1266,
+     "minutes_per_game": 30.7,
+     "points_per_game": 15.6
+    },
+    {
+     "player": "Cedric Coward",
+     "minutes_share": 0.1177,
+     "minutes_per_game": 28.6,
+     "points_per_game": 14.1
+    },
+    {
+     "player": "Jaylen Wells",
+     "minutes_share": 0.1098,
+     "minutes_per_game": 26.6,
+     "points_per_game": 10.3
+    },
+    {
+     "player": "Ty Jerome",
+     "minutes_share": 0.0991,
+     "minutes_per_game": 24.0,
+     "points_per_game": 17.5
+    },
+    {
+     "player": "Cam Spencer",
+     "minutes_share": 0.0918,
+     "minutes_per_game": 22.3,
+     "points_per_game": 10.6
+    },
+    {
+     "player": "Jerami Grant",
+     "minutes_share": 0.0876,
+     "minutes_per_game": 21.3,
+     "points_per_game": 11.4
+    },
+    {
+     "player": "Zach Edey",
+     "minutes_share": 0.0673,
+     "minutes_per_game": 16.3,
+     "points_per_game": 6.2
+    },
+    {
+     "player": "Isaiah Stewart",
+     "minutes_share": 0.0589,
+     "minutes_per_game": 14.3,
+     "points_per_game": 9.2
+    }
+   ],
+   "bench_share_outside_top8": 0.2412,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Cameron Boozer",
+    "redistribution": [
+     {
+      "player": "Cedric Coward",
+      "minutes_share_before": 0.1177,
+      "minutes_share_after_out": 0.1348
+     },
+     {
+      "player": "Jaylen Wells",
+      "minutes_share_before": 0.1098,
+      "minutes_share_after_out": 0.1257
+     },
+     {
+      "player": "Ty Jerome",
+      "minutes_share_before": 0.0991,
+      "minutes_share_after_out": 0.1134
+     },
+     {
+      "player": "Cam Spencer",
+      "minutes_share_before": 0.0918,
+      "minutes_share_after_out": 0.1051
+     },
+     {
+      "player": "Jerami Grant",
+      "minutes_share_before": 0.0876,
+      "minutes_share_after_out": 0.1004
+     },
+     {
+      "player": "Zach Edey",
+      "minutes_share_before": 0.0673,
+      "minutes_share_after_out": 0.077
+     },
+     {
+      "player": "Isaiah Stewart",
+      "minutes_share_before": 0.0589,
+      "minutes_share_after_out": 0.0674
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "UTA": {
+   "team": "UTA",
+   "games_used": 10,
+   "window": "2026-10-26 .. 2026-11-13",
+   "total_player_minutes": 2450.0,
+   "top8": [
+    {
+     "player": "Ace Bailey",
+     "minutes_share": 0.1354,
+     "minutes_per_game": 33.2,
+     "points_per_game": 14.6
+    },
+    {
+     "player": "Darryn Peterson",
+     "minutes_share": 0.128,
+     "minutes_per_game": 31.4,
+     "points_per_game": 19.1
+    },
+    {
+     "player": "Keyonte George",
+     "minutes_share": 0.1212,
+     "minutes_per_game": 29.7,
+     "points_per_game": 18.6
+    },
+    {
+     "player": "Jaxson Hayes",
+     "minutes_share": 0.0893,
+     "minutes_per_game": 21.9,
+     "points_per_game": 7.5
+    },
+    {
+     "player": "Josh Green",
+     "minutes_share": 0.0862,
+     "minutes_per_game": 21.1,
+     "points_per_game": 3.8
+    },
+    {
+     "player": "Josh Okogie",
+     "minutes_share": 0.0843,
+     "minutes_per_game": 20.6,
+     "points_per_game": 4.9
+    },
+    {
+     "player": "Isaiah Collier",
+     "minutes_share": 0.066,
+     "minutes_per_game": 16.2,
+     "points_per_game": 6.6
+    },
+    {
+     "player": "Mo Bamba",
+     "minutes_share": 0.065,
+     "minutes_per_game": 15.9,
+     "points_per_game": 6.7
+    }
+   ],
+   "bench_share_outside_top8": 0.2246,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Ace Bailey",
+    "redistribution": [
+     {
+      "player": "Darryn Peterson",
+      "minutes_share_before": 0.128,
+      "minutes_share_after_out": 0.148
+     },
+     {
+      "player": "Keyonte George",
+      "minutes_share_before": 0.1212,
+      "minutes_share_after_out": 0.1402
+     },
+     {
+      "player": "Jaxson Hayes",
+      "minutes_share_before": 0.0893,
+      "minutes_share_after_out": 0.1032
+     },
+     {
+      "player": "Josh Green",
+      "minutes_share_before": 0.0862,
+      "minutes_share_after_out": 0.0997
+     },
+     {
+      "player": "Josh Okogie",
+      "minutes_share_before": 0.0843,
+      "minutes_share_after_out": 0.0975
+     },
+     {
+      "player": "Isaiah Collier",
+      "minutes_share_before": 0.066,
+      "minutes_share_after_out": 0.0763
+     },
+     {
+      "player": "Mo Bamba",
+      "minutes_share_before": 0.065,
+      "minutes_share_after_out": 0.0752
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "NOP": {
+   "team": "NOP",
+   "games_used": 10,
+   "window": "2026-10-29 .. 2026-11-14",
+   "total_player_minutes": 2450.0,
+   "top8": [
+    {
+     "player": "Jeremiah Fears",
+     "minutes_share": 0.1309,
+     "minutes_per_game": 32.1,
+     "points_per_game": 17.8
+    },
+    {
+     "player": "Saddiq Bey",
+     "minutes_share": 0.1228,
+     "minutes_per_game": 30.1,
+     "points_per_game": 17.5
+    },
+    {
+     "player": "Zion Williamson",
+     "minutes_share": 0.1204,
+     "minutes_per_game": 29.5,
+     "points_per_game": 19.8
+    },
+    {
+     "player": "Herbert Jones",
+     "minutes_share": 0.1077,
+     "minutes_per_game": 26.4,
+     "points_per_game": 7.2
+    },
+    {
+     "player": "Derik Queen",
+     "minutes_share": 0.0858,
+     "minutes_per_game": 21.0,
+     "points_per_game": 11.6
+    },
+    {
+     "player": "Karlo Matkovi\u0107",
+     "minutes_share": 0.0832,
+     "minutes_per_game": 20.4,
+     "points_per_game": 8.5
+    },
+    {
+     "player": "Trey Murphy III",
+     "minutes_share": 0.0672,
+     "minutes_per_game": 16.5,
+     "points_per_game": 8.8
+    },
+    {
+     "player": "Dejounte Murray",
+     "minutes_share": 0.0624,
+     "minutes_per_game": 15.3,
+     "points_per_game": 5.0
+    }
+   ],
+   "bench_share_outside_top8": 0.2196,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Jeremiah Fears",
+    "redistribution": [
+     {
+      "player": "Saddiq Bey",
+      "minutes_share_before": 0.1228,
+      "minutes_share_after_out": 0.1413
+     },
+     {
+      "player": "Zion Williamson",
+      "minutes_share_before": 0.1204,
+      "minutes_share_after_out": 0.1385
+     },
+     {
+      "player": "Herbert Jones",
+      "minutes_share_before": 0.1077,
+      "minutes_share_after_out": 0.1239
+     },
+     {
+      "player": "Derik Queen",
+      "minutes_share_before": 0.0858,
+      "minutes_share_after_out": 0.0987
+     },
+     {
+      "player": "Karlo Matkovi\u0107",
+      "minutes_share_before": 0.0832,
+      "minutes_share_after_out": 0.0957
+     },
+     {
+      "player": "Trey Murphy III",
+      "minutes_share_before": 0.0672,
+      "minutes_share_after_out": 0.0774
+     },
+     {
+      "player": "Dejounte Murray",
+      "minutes_share_before": 0.0624,
+      "minutes_share_after_out": 0.0718
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "IND": {
+   "team": "IND",
+   "games_used": 10,
+   "window": "2026-10-28 .. 2026-11-15",
+   "total_player_minutes": 2400.0,
+   "top8": [
+    {
+     "player": "Pascal Siakam",
+     "minutes_share": 0.122,
+     "minutes_per_game": 29.3,
+     "points_per_game": 20.6
+    },
+    {
+     "player": "Andrew Nembhard",
+     "minutes_share": 0.1131,
+     "minutes_per_game": 27.2,
+     "points_per_game": 13.5
+    },
+    {
+     "player": "Aaron Nesmith",
+     "minutes_share": 0.1085,
+     "minutes_per_game": 26.0,
+     "points_per_game": 11.2
+    },
+    {
+     "player": "Quenton Jackson",
+     "minutes_share": 0.0967,
+     "minutes_per_game": 23.2,
+     "points_per_game": 10.9
+    },
+    {
+     "player": "Kelly Oubre Jr.",
+     "minutes_share": 0.0846,
+     "minutes_per_game": 20.3,
+     "points_per_game": 9.8
+    },
+    {
+     "player": "Jarace Walker",
+     "minutes_share": 0.0754,
+     "minutes_per_game": 18.1,
+     "points_per_game": 6.3
+    },
+    {
+     "player": "Jay Huff",
+     "minutes_share": 0.0637,
+     "minutes_per_game": 15.3,
+     "points_per_game": 6.9
+    },
+    {
+     "player": "Ivica Zubac",
+     "minutes_share": 0.0603,
+     "minutes_per_game": 14.5,
+     "points_per_game": 6.7
+    }
+   ],
+   "bench_share_outside_top8": 0.2757,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Pascal Siakam",
+    "redistribution": [
+     {
+      "player": "Andrew Nembhard",
+      "minutes_share_before": 0.1131,
+      "minutes_share_after_out": 0.1288
+     },
+     {
+      "player": "Aaron Nesmith",
+      "minutes_share_before": 0.1085,
+      "minutes_share_after_out": 0.1236
+     },
+     {
+      "player": "Quenton Jackson",
+      "minutes_share_before": 0.0967,
+      "minutes_share_after_out": 0.1101
+     },
+     {
+      "player": "Kelly Oubre Jr.",
+      "minutes_share_before": 0.0846,
+      "minutes_share_after_out": 0.0963
+     },
+     {
+      "player": "Jarace Walker",
+      "minutes_share_before": 0.0754,
+      "minutes_share_after_out": 0.0859
+     },
+     {
+      "player": "Jay Huff",
+      "minutes_share_before": 0.0637,
+      "minutes_share_after_out": 0.0726
+     },
+     {
+      "player": "Ivica Zubac",
+      "minutes_share_before": 0.0603,
+      "minutes_share_after_out": 0.0687
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "HOU": {
+   "team": "HOU",
+   "games_used": 10,
+   "window": "2026-10-26 .. 2026-11-13",
+   "total_player_minutes": 2400.1,
+   "top8": [
+    {
+     "player": "Jabari Smith Jr.",
+     "minutes_share": 0.1433,
+     "minutes_per_game": 34.4,
+     "points_per_game": 15.6
+    },
+    {
+     "player": "Kevin Durant",
+     "minutes_share": 0.1389,
+     "minutes_per_game": 33.3,
+     "points_per_game": 20.1
+    },
+    {
+     "player": "Amen Thompson",
+     "minutes_share": 0.1372,
+     "minutes_per_game": 32.9,
+     "points_per_game": 14.2
+    },
+    {
+     "player": "Alperen Sengun",
+     "minutes_share": 0.1199,
+     "minutes_per_game": 28.8,
+     "points_per_game": 18.5
+    },
+    {
+     "player": "Fred VanVleet",
+     "minutes_share": 0.1135,
+     "minutes_per_game": 27.2,
+     "points_per_game": 13.4
+    },
+    {
+     "player": "Tari Eason",
+     "minutes_share": 0.1069,
+     "minutes_per_game": 25.7,
+     "points_per_game": 9.3
+    },
+    {
+     "player": "Reed Sheppard",
+     "minutes_share": 0.0616,
+     "minutes_per_game": 14.8,
+     "points_per_game": 6.9
+    },
+    {
+     "player": "Marcus Smart",
+     "minutes_share": 0.0603,
+     "minutes_per_game": 14.5,
+     "points_per_game": 6.0
+    }
+   ],
+   "bench_share_outside_top8": 0.1184,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Jabari Smith Jr.",
+    "redistribution": [
+     {
+      "player": "Kevin Durant",
+      "minutes_share_before": 0.1389,
+      "minutes_share_after_out": 0.1621
+     },
+     {
+      "player": "Amen Thompson",
+      "minutes_share_before": 0.1372,
+      "minutes_share_after_out": 0.1601
+     },
+     {
+      "player": "Alperen Sengun",
+      "minutes_share_before": 0.1199,
+      "minutes_share_after_out": 0.1399
+     },
+     {
+      "player": "Fred VanVleet",
+      "minutes_share_before": 0.1135,
+      "minutes_share_after_out": 0.1325
+     },
+     {
+      "player": "Tari Eason",
+      "minutes_share_before": 0.1069,
+      "minutes_share_after_out": 0.1248
+     },
+     {
+      "player": "Reed Sheppard",
+      "minutes_share_before": 0.0616,
+      "minutes_share_after_out": 0.0719
+     },
+     {
+      "player": "Marcus Smart",
+      "minutes_share_before": 0.0603,
+      "minutes_share_after_out": 0.0703
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "DAL": {
+   "team": "DAL",
+   "games_used": 10,
+   "window": "2026-10-26 .. 2026-11-14",
+   "total_player_minutes": 2400.0,
+   "top8": [
+    {
+     "player": "Cooper Flagg",
+     "minutes_share": 0.1487,
+     "minutes_per_game": 35.7,
+     "points_per_game": 24.3
+    },
+    {
+     "player": "P.J. Washington",
+     "minutes_share": 0.1303,
+     "minutes_per_game": 31.3,
+     "points_per_game": 13.9
+    },
+    {
+     "player": "Kyrie Irving",
+     "minutes_share": 0.1207,
+     "minutes_per_game": 29.0,
+     "points_per_game": 21.1
+    },
+    {
+     "player": "Daniel Gafford",
+     "minutes_share": 0.0896,
+     "minutes_per_game": 21.5,
+     "points_per_game": 10.1
+    },
+    {
+     "player": "Zaccharie Risacher",
+     "minutes_share": 0.0896,
+     "minutes_per_game": 21.5,
+     "points_per_game": 7.9
+    },
+    {
+     "player": "Walter Clayton Jr.",
+     "minutes_share": 0.0765,
+     "minutes_per_game": 18.4,
+     "points_per_game": 7.6
+    },
+    {
+     "player": "Caleb Martin",
+     "minutes_share": 0.076,
+     "minutes_per_game": 18.2,
+     "points_per_game": 4.7
+    },
+    {
+     "player": "Naji Marshall",
+     "minutes_share": 0.07,
+     "minutes_per_game": 16.8,
+     "points_per_game": 7.3
+    }
+   ],
+   "bench_share_outside_top8": 0.1986,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Cooper Flagg",
+    "redistribution": [
+     {
+      "player": "P.J. Washington",
+      "minutes_share_before": 0.1303,
+      "minutes_share_after_out": 0.1531
+     },
+     {
+      "player": "Kyrie Irving",
+      "minutes_share_before": 0.1207,
+      "minutes_share_after_out": 0.1418
+     },
+     {
+      "player": "Daniel Gafford",
+      "minutes_share_before": 0.0896,
+      "minutes_share_after_out": 0.1053
+     },
+     {
+      "player": "Zaccharie Risacher",
+      "minutes_share_before": 0.0896,
+      "minutes_share_after_out": 0.1052
+     },
+     {
+      "player": "Walter Clayton Jr.",
+      "minutes_share_before": 0.0765,
+      "minutes_share_after_out": 0.0898
+     },
+     {
+      "player": "Caleb Martin",
+      "minutes_share_before": 0.076,
+      "minutes_share_after_out": 0.0893
+     },
+     {
+      "player": "Naji Marshall",
+      "minutes_share_before": 0.07,
+      "minutes_share_after_out": 0.0822
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "POR": {
+   "team": "POR",
+   "games_used": 10,
+   "window": "2026-10-27 .. 2026-11-13",
+   "total_player_minutes": 2400.0,
+   "top8": [
+    {
+     "player": "Deni Avdija",
+     "minutes_share": 0.1378,
+     "minutes_per_game": 33.1,
+     "points_per_game": 24.3
+    },
+    {
+     "player": "Toumani Camara",
+     "minutes_share": 0.1246,
+     "minutes_per_game": 29.9,
+     "points_per_game": 12.1
+    },
+    {
+     "player": "Damian Lillard",
+     "minutes_share": 0.1234,
+     "minutes_per_game": 29.6,
+     "points_per_game": 20.3
+    },
+    {
+     "player": "Jrue Holiday",
+     "minutes_share": 0.1116,
+     "minutes_per_game": 26.8,
+     "points_per_game": 13.3
+    },
+    {
+     "player": "Donovan Clingan",
+     "minutes_share": 0.1097,
+     "minutes_per_game": 26.3,
+     "points_per_game": 11.3
+    },
+    {
+     "player": "Sidy Cissoko",
+     "minutes_share": 0.0949,
+     "minutes_per_game": 22.8,
+     "points_per_game": 7.6
+    },
+    {
+     "player": "Scoot Henderson",
+     "minutes_share": 0.094,
+     "minutes_per_game": 22.6,
+     "points_per_game": 8.4
+    },
+    {
+     "player": "Robert Williams III",
+     "minutes_share": 0.0547,
+     "minutes_per_game": 13.1,
+     "points_per_game": 5.5
+    }
+   ],
+   "bench_share_outside_top8": 0.1492,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Deni Avdija",
+    "redistribution": [
+     {
+      "player": "Toumani Camara",
+      "minutes_share_before": 0.1246,
+      "minutes_share_after_out": 0.1445
+     },
+     {
+      "player": "Damian Lillard",
+      "minutes_share_before": 0.1234,
+      "minutes_share_after_out": 0.1432
+     },
+     {
+      "player": "Jrue Holiday",
+      "minutes_share_before": 0.1116,
+      "minutes_share_after_out": 0.1295
+     },
+     {
+      "player": "Donovan Clingan",
+      "minutes_share_before": 0.1097,
+      "minutes_share_after_out": 0.1272
+     },
+     {
+      "player": "Sidy Cissoko",
+      "minutes_share_before": 0.0949,
+      "minutes_share_after_out": 0.1101
+     },
+     {
+      "player": "Scoot Henderson",
+      "minutes_share_before": 0.094,
+      "minutes_share_after_out": 0.109
+     },
+     {
+      "player": "Robert Williams III",
+      "minutes_share_before": 0.0547,
+      "minutes_share_after_out": 0.0635
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "PHX": {
+   "team": "PHX",
+   "games_used": 10,
+   "window": "2026-10-26 .. 2026-11-15",
+   "total_player_minutes": 2160.1,
+   "top8": [
+    {
+     "player": "Devin Booker",
+     "minutes_share": 0.1425,
+     "minutes_per_game": 30.8,
+     "points_per_game": 21.5
+    },
+    {
+     "player": "Dillon Brooks",
+     "minutes_share": 0.1238,
+     "minutes_per_game": 26.7,
+     "points_per_game": 13.9
+    },
+    {
+     "player": "Miles Bridges",
+     "minutes_share": 0.1223,
+     "minutes_per_game": 26.4,
+     "points_per_game": 13.7
+    },
+    {
+     "player": "Jalen Green",
+     "minutes_share": 0.1143,
+     "minutes_per_game": 24.7,
+     "points_per_game": 10.8
+    },
+    {
+     "player": "Collin Gillespie",
+     "minutes_share": 0.1017,
+     "minutes_per_game": 22.0,
+     "points_per_game": 7.4
+    },
+    {
+     "player": "Oso Ighodaro",
+     "minutes_share": 0.0857,
+     "minutes_per_game": 18.5,
+     "points_per_game": 4.6
+    },
+    {
+     "player": "Khaman Maluach",
+     "minutes_share": 0.0788,
+     "minutes_per_game": 17.0,
+     "points_per_game": 7.4
+    },
+    {
+     "player": "Ryan Dunn",
+     "minutes_share": 0.0736,
+     "minutes_per_game": 15.9,
+     "points_per_game": 5.0
+    }
+   ],
+   "bench_share_outside_top8": 0.1572,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Devin Booker",
+    "redistribution": [
+     {
+      "player": "Dillon Brooks",
+      "minutes_share_before": 0.1238,
+      "minutes_share_after_out": 0.1444
+     },
+     {
+      "player": "Miles Bridges",
+      "minutes_share_before": 0.1223,
+      "minutes_share_after_out": 0.1427
+     },
+     {
+      "player": "Jalen Green",
+      "minutes_share_before": 0.1143,
+      "minutes_share_after_out": 0.1334
+     },
+     {
+      "player": "Collin Gillespie",
+      "minutes_share_before": 0.1017,
+      "minutes_share_after_out": 0.1186
+     },
+     {
+      "player": "Oso Ighodaro",
+      "minutes_share_before": 0.0857,
+      "minutes_share_after_out": 0.1
+     },
+     {
+      "player": "Khaman Maluach",
+      "minutes_share_before": 0.0788,
+      "minutes_share_after_out": 0.0919
+     },
+     {
+      "player": "Ryan Dunn",
+      "minutes_share_before": 0.0736,
+      "minutes_share_after_out": 0.0859
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "LAC": {
+   "team": "LAC",
+   "games_used": 10,
+   "window": "2026-10-23 .. 2026-11-13",
+   "total_player_minutes": 2425.0,
+   "top8": [
+    {
+     "player": "Darius Garland",
+     "minutes_share": 0.1365,
+     "minutes_per_game": 33.1,
+     "points_per_game": 19.8
+    },
+    {
+     "player": "Kris Dunn",
+     "minutes_share": 0.1148,
+     "minutes_per_game": 27.9,
+     "points_per_game": 8.0
+    },
+    {
+     "player": "Derrick Jones Jr.",
+     "minutes_share": 0.1093,
+     "minutes_per_game": 26.5,
+     "points_per_game": 10.6
+    },
+    {
+     "player": "Kobe Sanders",
+     "minutes_share": 0.0983,
+     "minutes_per_game": 23.8,
+     "points_per_game": 10.1
+    },
+    {
+     "player": "Brook Lopez",
+     "minutes_share": 0.098,
+     "minutes_per_game": 23.8,
+     "points_per_game": 14.5
+    },
+    {
+     "player": "Rui Hachimura",
+     "minutes_share": 0.0976,
+     "minutes_per_game": 23.7,
+     "points_per_game": 11.2
+    },
+    {
+     "player": "Keaton Wagler",
+     "minutes_share": 0.0912,
+     "minutes_per_game": 22.1,
+     "points_per_game": 12.1
+    },
+    {
+     "player": "Isaiah Jackson",
+     "minutes_share": 0.0769,
+     "minutes_per_game": 18.6,
+     "points_per_game": 6.5
+    }
+   ],
+   "bench_share_outside_top8": 0.1774,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Darius Garland",
+    "redistribution": [
+     {
+      "player": "Kris Dunn",
+      "minutes_share_before": 0.1148,
+      "minutes_share_after_out": 0.133
+     },
+     {
+      "player": "Derrick Jones Jr.",
+      "minutes_share_before": 0.1093,
+      "minutes_share_after_out": 0.1266
+     },
+     {
+      "player": "Kobe Sanders",
+      "minutes_share_before": 0.0983,
+      "minutes_share_after_out": 0.1138
+     },
+     {
+      "player": "Brook Lopez",
+      "minutes_share_before": 0.098,
+      "minutes_share_after_out": 0.1135
+     },
+     {
+      "player": "Rui Hachimura",
+      "minutes_share_before": 0.0976,
+      "minutes_share_after_out": 0.1131
+     },
+     {
+      "player": "Keaton Wagler",
+      "minutes_share_before": 0.0912,
+      "minutes_share_after_out": 0.1056
+     },
+     {
+      "player": "Isaiah Jackson",
+      "minutes_share_before": 0.0769,
+      "minutes_share_after_out": 0.089
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "SAC": {
+   "team": "SAC",
+   "games_used": 10,
+   "window": "2026-10-25 .. 2026-11-13",
+   "total_player_minutes": 2400.0,
+   "top8": [
+    {
+     "player": "Darius Acuff Jr.",
+     "minutes_share": 0.156,
+     "minutes_per_game": 37.4,
+     "points_per_game": 26.0
+    },
+    {
+     "player": "Zach LaVine",
+     "minutes_share": 0.1345,
+     "minutes_per_game": 32.3,
+     "points_per_game": 20.7
+    },
+    {
+     "player": "De'Andre Hunter",
+     "minutes_share": 0.1299,
+     "minutes_per_game": 31.2,
+     "points_per_game": 14.7
+    },
+    {
+     "player": "Domantas Sabonis",
+     "minutes_share": 0.1276,
+     "minutes_per_game": 30.6,
+     "points_per_game": 11.8
+    },
+    {
+     "player": "Precious Achiuwa",
+     "minutes_share": 0.0973,
+     "minutes_per_game": 23.4,
+     "points_per_game": 8.5
+    },
+    {
+     "player": "Emanuel Sharp",
+     "minutes_share": 0.0731,
+     "minutes_per_game": 17.5,
+     "points_per_game": 4.2
+    },
+    {
+     "player": "Malik Monk",
+     "minutes_share": 0.0672,
+     "minutes_per_game": 16.1,
+     "points_per_game": 8.5
+    },
+    {
+     "player": "Leaky Black",
+     "minutes_share": 0.0606,
+     "minutes_per_game": 14.5,
+     "points_per_game": 3.5
+    }
+   ],
+   "bench_share_outside_top8": 0.1538,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Darius Acuff Jr.",
+    "redistribution": [
+     {
+      "player": "Zach LaVine",
+      "minutes_share_before": 0.1345,
+      "minutes_share_after_out": 0.1594
+     },
+     {
+      "player": "De'Andre Hunter",
+      "minutes_share_before": 0.1299,
+      "minutes_share_after_out": 0.1539
+     },
+     {
+      "player": "Domantas Sabonis",
+      "minutes_share_before": 0.1276,
+      "minutes_share_after_out": 0.1512
+     },
+     {
+      "player": "Precious Achiuwa",
+      "minutes_share_before": 0.0973,
+      "minutes_share_after_out": 0.1153
+     },
+     {
+      "player": "Emanuel Sharp",
+      "minutes_share_before": 0.0731,
+      "minutes_share_after_out": 0.0866
+     },
+     {
+      "player": "Malik Monk",
+      "minutes_share_before": 0.0672,
+      "minutes_share_after_out": 0.0796
+     },
+     {
+      "player": "Leaky Black",
+      "minutes_share_before": 0.0606,
+      "minutes_share_after_out": 0.0718
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "CLE": {
+   "team": "CLE",
+   "games_used": 10,
+   "window": "2026-10-29 .. 2026-11-14",
+   "total_player_minutes": 2160.1,
+   "top8": [
+    {
+     "player": "Donovan Mitchell",
+     "minutes_share": 0.1186,
+     "minutes_per_game": 25.6,
+     "points_per_game": 17.8
+    },
+    {
+     "player": "James Harden",
+     "minutes_share": 0.1162,
+     "minutes_per_game": 25.1,
+     "points_per_game": 13.3
+    },
+    {
+     "player": "Meleek Thomas",
+     "minutes_share": 0.1012,
+     "minutes_per_game": 21.9,
+     "points_per_game": 12.4
+    },
+    {
+     "player": "Evan Mobley",
+     "minutes_share": 0.098,
+     "minutes_per_game": 21.2,
+     "points_per_game": 11.2
+    },
+    {
+     "player": "Tyrese Proctor",
+     "minutes_share": 0.0961,
+     "minutes_per_game": 20.8,
+     "points_per_game": 10.7
+    },
+    {
+     "player": "Mario Hezonja",
+     "minutes_share": 0.0847,
+     "minutes_per_game": 18.3,
+     "points_per_game": 8.3
+    },
+    {
+     "player": "Peyton Watson",
+     "minutes_share": 0.0746,
+     "minutes_per_game": 16.1,
+     "points_per_game": 5.4
+    },
+    {
+     "player": "Jarrett Allen",
+     "minutes_share": 0.0662,
+     "minutes_per_game": 14.3,
+     "points_per_game": 7.1
+    }
+   ],
+   "bench_share_outside_top8": 0.2445,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Donovan Mitchell",
+    "redistribution": [
+     {
+      "player": "James Harden",
+      "minutes_share_before": 0.1162,
+      "minutes_share_after_out": 0.1319
+     },
+     {
+      "player": "Meleek Thomas",
+      "minutes_share_before": 0.1012,
+      "minutes_share_after_out": 0.1148
+     },
+     {
+      "player": "Evan Mobley",
+      "minutes_share_before": 0.098,
+      "minutes_share_after_out": 0.1112
+     },
+     {
+      "player": "Tyrese Proctor",
+      "minutes_share_before": 0.0961,
+      "minutes_share_after_out": 0.109
+     },
+     {
+      "player": "Mario Hezonja",
+      "minutes_share_before": 0.0847,
+      "minutes_share_after_out": 0.096
+     },
+     {
+      "player": "Peyton Watson",
+      "minutes_share_before": 0.0746,
+      "minutes_share_after_out": 0.0846
+     },
+     {
+      "player": "Jarrett Allen",
+      "minutes_share_before": 0.0662,
+      "minutes_share_after_out": 0.0751
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  },
+  "DEN": {
+   "team": "DEN",
+   "games_used": 10,
+   "window": "2026-10-24 .. 2026-11-14",
+   "total_player_minutes": 2425.1,
+   "top8": [
+    {
+     "player": "Nikola Joki\u0107",
+     "minutes_share": 0.1506,
+     "minutes_per_game": 36.5,
+     "points_per_game": 24.8
+    },
+    {
+     "player": "Jamal Murray",
+     "minutes_share": 0.1506,
+     "minutes_per_game": 36.5,
+     "points_per_game": 27.9
+    },
+    {
+     "player": "Christian Braun",
+     "minutes_share": 0.1398,
+     "minutes_per_game": 33.9,
+     "points_per_game": 13.4
+    },
+    {
+     "player": "Aaron Gordon",
+     "minutes_share": 0.1213,
+     "minutes_per_game": 29.4,
+     "points_per_game": 10.1
+    },
+    {
+     "player": "Cameron Johnson",
+     "minutes_share": 0.0895,
+     "minutes_per_game": 21.7,
+     "points_per_game": 9.2
+    },
+    {
+     "player": "DeMar DeRozan",
+     "minutes_share": 0.0855,
+     "minutes_per_game": 20.7,
+     "points_per_game": 8.6
+    },
+    {
+     "player": "Trevon Brazile",
+     "minutes_share": 0.0794,
+     "minutes_per_game": 19.2,
+     "points_per_game": 7.2
+    },
+    {
+     "player": "Marvin Bagley III",
+     "minutes_share": 0.0517,
+     "minutes_per_game": 12.5,
+     "points_per_game": 6.3
+    }
+   ],
+   "bench_share_outside_top8": 0.1317,
+   "replacement_rule": "when a player is out their minutes are redistributed to the remaining players in proportion to their measured minutes share",
+   "replacement_example": {
+    "player_out": "Nikola Joki\u0107",
+    "redistribution": [
+     {
+      "player": "Jamal Murray",
+      "minutes_share_before": 0.1506,
+      "minutes_share_after_out": 0.1773
+     },
+     {
+      "player": "Christian Braun",
+      "minutes_share_before": 0.1398,
+      "minutes_share_after_out": 0.1646
+     },
+     {
+      "player": "Aaron Gordon",
+      "minutes_share_before": 0.1213,
+      "minutes_share_after_out": 0.1428
+     },
+     {
+      "player": "Cameron Johnson",
+      "minutes_share_before": 0.0895,
+      "minutes_share_after_out": 0.1053
+     },
+     {
+      "player": "DeMar DeRozan",
+      "minutes_share_before": 0.0855,
+      "minutes_share_after_out": 0.1006
+     },
+     {
+      "player": "Trevon Brazile",
+      "minutes_share_before": 0.0794,
+      "minutes_share_after_out": 0.0934
+     },
+     {
+      "player": "Marvin Bagley III",
+      "minutes_share_before": 0.0517,
+      "minutes_share_after_out": 0.0608
+     }
+    ]
+   },
+   "source": "official NBA box score pages, last 10 games played"
+  }
+ }
+}

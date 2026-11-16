@@ -1,0 +1,13 @@
+{
+ "title": "Official injury-report index - currency read",
+ "read_at": "2026-11-16T14:45Z",
+ "session": "arena/0e9c924f-nba1 (\u00a750 N03)",
+ "source_url": "https://official.nba.com/nba-injury-report-2026-17-season/",
+ "corrected_source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "latest_edition_on_index": "Injury-Report_2026-11-16_09_30AM.pdf",
+ "latest_edition_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_30AM.pdf",
+ "editions_on_index_2026_11_16": "12:00AM through 9:30AM ET (25 editions at read time)",
+ "repo_newest_edition": "Injury-Report_2026-11-15_09_30PM.pdf",
+ "gap": "The repository held yesterday's 09:30PM edition while the index already listed today's AM editions. Root cause found and fixed same session: engine/fetch_official.py parse_injury_index required a literal 'PM' suffix, so AM editions were never parsed (measured: the scheduled 12:17Z run reported 'no new capture payloads'). Banner revision/retrieval stamps (R18) are correct for the edition they show; the edition itself refreshes once the fixed fetcher runs (next scheduled 15:15Z UTC).",
+ "status": "flagged (R01 partial); fix committed on arena/0e9c924f-nba1 pending integration"
+}

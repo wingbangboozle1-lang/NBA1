@@ -1,0 +1,284 @@
+{
+ "title": "Rolling-window schedule read line by line from the official games pages (first-hand)",
+ "session": "arena/0e9c924f-nba1 (\u00a750 N03)",
+ "read_at": "2026-11-16T14:55Z..15:00Z",
+ "window": "2026-11-16 .. 2026-11-18 (25 games; calendar shows 8/5/12)",
+ "days": {
+  "2026-11-16": {
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "games": [
+    {
+     "away": "ORL",
+     "home": "BOS",
+     "records_printed": {
+      "ORL": "5-7",
+      "BOS": "11-2"
+     },
+     "tip_et": "7:00 PM ET",
+     "game_url": "https://www.nba.com/game/orl-bos-0022600245"
+    },
+    {
+     "away": "MEM",
+     "home": "WAS",
+     "records_printed": {
+      "MEM": "9-4",
+      "WAS": "4-10"
+     },
+     "tip_et": "7:00 PM ET",
+     "game_url": "https://www.nba.com/game/mem-was-0022600247"
+    },
+    {
+     "away": "CHI",
+     "home": "CLE",
+     "records_printed": {
+      "CHI": "3-9",
+      "CLE": "7-7"
+     },
+     "tip_et": "7:00 PM ET",
+     "game_url": "https://www.nba.com/game/chi-cle-0022600246"
+    },
+    {
+     "away": "HOU",
+     "home": "MIA",
+     "records_printed": {
+      "HOU": "11-3",
+      "MIA": "7-6"
+     },
+     "tip_et": "7:30 PM ET",
+     "game_url": "https://www.nba.com/game/hou-mia-0022600249"
+    },
+    {
+     "away": "PHI",
+     "home": "BKN",
+     "records_printed": {
+      "PHI": "11-3",
+      "BKN": "3-9"
+     },
+     "tip_et": "7:30 PM ET",
+     "game_url": "https://www.nba.com/game/phi-bkn-0022600248"
+    },
+    {
+     "away": "POR",
+     "home": "MIN",
+     "records_printed": {
+      "POR": "9-3",
+      "MIN": "9-4"
+     },
+     "tip_et": "8:00 PM ET",
+     "game_url": "https://www.nba.com/game/por-min-0022600250"
+    },
+    {
+     "away": "GSW",
+     "home": "NOP",
+     "records_printed": {
+      "GSW": "8-5",
+      "NOP": "4-10"
+     },
+     "tip_et": "8:00 PM ET",
+     "game_url": "https://www.nba.com/game/gsw-nop-0022600251"
+    },
+    {
+     "away": "PHX",
+     "home": "DEN",
+     "records_printed": {
+      "PHX": "5-7",
+      "DEN": "7-4"
+     },
+     "tip_et": "9:00 PM ET",
+     "game_url": "https://www.nba.com/game/phx-den-0022600252"
+    }
+   ]
+  },
+  "2026-11-17": {
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "games": [
+    {
+     "away": "NYK",
+     "home": "TOR",
+     "records_printed": {
+      "NYK": "7-6",
+      "TOR": "5-8"
+     },
+     "tip_et": "7:30 PM ET",
+     "game_url": "https://www.nba.com/game/nyk-tor-0022600253"
+    },
+    {
+     "away": "DET",
+     "home": "SAS",
+     "records_printed": {
+      "DET": "8-4",
+      "SAS": "12-2"
+     },
+     "tip_et": "8:00 PM ET",
+     "game_url": "https://www.nba.com/game/det-sas-0022600255"
+    },
+    {
+     "away": "POR",
+     "home": "MIN",
+     "records_printed": {
+      "POR": "9-3",
+      "MIN": "9-4"
+     },
+     "tip_et": "8:00 PM ET",
+     "game_url": "https://www.nba.com/game/por-min-0022600254"
+    },
+    {
+     "away": "UTA",
+     "home": "LAC",
+     "records_printed": {
+      "UTA": "1-13",
+      "LAC": "4-8"
+     },
+     "tip_et": "10:30 PM ET",
+     "game_url": "https://www.nba.com/game/uta-lac-0022600257"
+    },
+    {
+     "away": "CHA",
+     "home": "LAL",
+     "records_printed": {
+      "CHA": "4-9",
+      "LAL": "12-2"
+     },
+     "tip_et": "11:00 PM ET",
+     "game_url": "https://www.nba.com/game/cha-lal-0022600256"
+    }
+   ]
+  },
+  "2026-11-18": {
+   "source_url": "https://www.nba.com/games?date=2026-11-18",
+   "games": [
+    {
+     "away": "HOU",
+     "home": "IND",
+     "records_printed": {
+      "HOU": "11-3",
+      "IND": "5-9"
+     },
+     "tip_et": "7:00 PM ET",
+     "game_url": "https://www.nba.com/game/hou-ind-0022600259"
+    },
+    {
+     "away": "PHI",
+     "home": "ORL",
+     "records_printed": {
+      "PHI": "11-3",
+      "ORL": "5-7"
+     },
+     "tip_et": "7:00 PM ET",
+     "game_url": "https://www.nba.com/game/phi-orl-0022600261"
+    },
+    {
+     "away": "MIL",
+     "home": "MIA",
+     "records_printed": {
+      "MIL": "1-13",
+      "MIA": "7-6"
+     },
+     "tip_et": "7:00 PM ET",
+     "game_url": "https://www.nba.com/game/mil-mia-0022600260"
+    },
+    {
+     "away": "MEM",
+     "home": "CLE",
+     "records_printed": {
+      "MEM": "9-4",
+      "CLE": "7-7"
+     },
+     "tip_et": "7:00 PM ET",
+     "game_url": "https://www.nba.com/game/mem-cle-0022600258"
+    },
+    {
+     "away": "CHI",
+     "home": "BKN",
+     "records_printed": {
+      "CHI": "3-9",
+      "BKN": "3-9"
+     },
+     "tip_et": "7:30 PM ET",
+     "game_url": "https://www.nba.com/game/chi-bkn-0022600262"
+    },
+    {
+     "away": "WAS",
+     "home": "TOR",
+     "records_printed": {
+      "WAS": "4-10",
+      "TOR": "5-8"
+     },
+     "tip_et": "7:30 PM ET",
+     "game_url": "https://www.nba.com/game/was-tor-0022600263"
+    },
+    {
+     "away": "GSW",
+     "home": "DAL",
+     "records_printed": {
+      "GSW": "8-5",
+      "DAL": "7-7"
+     },
+     "tip_et": "8:00 PM ET",
+     "game_url": "https://www.nba.com/game/gsw-dal-0022600267"
+    },
+    {
+     "away": "ATL",
+     "home": "OKC",
+     "records_printed": {
+      "ATL": "8-6",
+      "OKC": "9-5"
+     },
+     "tip_et": "8:00 PM ET",
+     "game_url": "https://www.nba.com/game/atl-okc-0022600265"
+    },
+    {
+     "away": "DET",
+     "home": "NOP",
+     "records_printed": {
+      "DET": "8-4",
+      "NOP": "4-10"
+     },
+     "tip_et": "8:00 PM ET",
+     "game_url": "https://www.nba.com/game/det-nop-0022600264"
+    },
+    {
+     "away": "BOS",
+     "home": "DEN",
+     "records_printed": {
+      "BOS": "11-2",
+      "DEN": "7-4"
+     },
+     "tip_et": "9:30 PM ET",
+     "game_url": "https://www.nba.com/game/bos-den-0022600266"
+    },
+    {
+     "away": "UTA",
+     "home": "LAL",
+     "records_printed": {
+      "UTA": "1-13",
+      "LAL": "12-2"
+     },
+     "tip_et": "10:00 PM ET",
+     "game_url": "https://www.nba.com/game/uta-lal-0022600268"
+    },
+    {
+     "away": "PHX",
+     "home": "SAC",
+     "records_printed": {
+      "PHX": "5-7",
+      "SAC": "1-12"
+     },
+     "tip_et": "10:00 PM ET",
+     "game_url": "https://www.nba.com/game/phx-sac-0022600269"
+    }
+   ]
+  }
+ },
+ "comparison_to_site_roll": {
+  "method": "exact set + exact tip_et comparison against data/derived/horizon_lines_v2.json (25 rows, generated 2026-11-16T02:40Z)",
+  "matchups": "25/25 exact match - no site row off the official slate, no official game missing from the site",
+  "tips": "25/25 exact match, including GSW@NOP 8:00 PM ET (F92's official value) and BOS@DEN 9:30 PM ET",
+  "result": "PASS - the published roll's schedule matches the official pages line by line"
+ },
+ "observations": [
+  "POR@MIN appears on BOTH 11/16 and 11/17 official pages with distinct game ids (0022600250 and 0022600254); recorded verbatim, not resolved.",
+  "Record strings are transcribed exactly as the official cards printed them at read time; some cards print pre-late-final records (e.g. HOU 11-3 on 11/18) while others print post (ATL 8-6); no reconciliation attempted.",
+  "F92: official GSW@NOP tip is 8:00 PM ET, confirming the flag; the flag stays open for the horizon owner rather than being silently patched (frozen pre-registration rows)."
+ ]
+}

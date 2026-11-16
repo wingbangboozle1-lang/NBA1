@@ -169,8 +169,31 @@ jobs:
           print(f"Checked {len(pages)} pages, no broken internal links.")
           PY
 
-  deploy:
-    if: github.event_name != 'pull_request'
+  # SINGLE DEPLOY PATH (SG37 / GR4.2), fixed 2026-11-16T15:0xZ by session
+  # arena/0e9c924f-nba1 (COORDINATION §50):
+  #
+  # GitHub Pages was configured build_type=legacy, so every push to main made
+  # GitHub's legacy builder publish the site WHILE this workflow's deploy job
+  # pushed a second artifact at the same environment. The measurable symptom
+  # (board F53 / F80-F86 line of findings): nine consecutive "pages build and
+  # deployment" runs cancelled, one per push, each killed by the next.
+  #
+  # The intended fix is `PUT /repos/.../pages -F build_type=workflow` followed
+  # by keeping this deploy job. That PUT was attempted from this session and
+  # measured to fail: HTTP 403 {"message":"Resource not accessible by
+  # integration"} - the token behind this session (GitHub App installation of
+  # wingbangboozle1-lang) has no pages:write, recorded as flag F127 (renumbered from F116 at merge). One
+  # deploy path is still required TODAY, so the reachable half is applied:
+  # this workflow keeps its full validation battery but no longer publishes
+  # artifacts, leaving the Pages legacy builder (which successfully published
+  # 047103e at 11:51:43Z) as the only publisher.
+  #
+  # To hand the deploy back to Actions later: (1) grant the app pages:write or
+  # run the PUT from an admin session (build_type=workflow), (2) restore the
+  # four configure/upload/deploy steps removed here. Until then, do NOT add a
+  # second publisher - SG37's whole point is one writer of one site.
+  deploy-disabled:
+    if: false && github.event_name != 'pull_request'
     needs: validate
     environment:
       name: github-pages
