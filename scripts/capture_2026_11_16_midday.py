@@ -66,6 +66,38 @@ WEST = [
 ]
 
 # --------------------------------------------------------------------------
+# Official franchise names, transcribed from the SAME standings page.
+#
+# Why this is a separate table and not a guess: the 14:44Z read captured the
+# standings table by its numeric columns only, and scripts/recut_model_inputs.py
+# joins the standings rows to the team-stat rows on `abbr` to attach the display
+# name (`team`).  Rather than reconstruct the names from memory, the page was
+# re-read at 15:0xZ and every row below is the name the page prints next to that
+# team's own logo link (nba.com/team/<id>/<slug>).  The W-L columns re-read then
+# were identical to the 14:44Z values above, so nothing else moved.  The window in
+# NAMES_REREAD_UTC is bracketed by the two files this session wrote either side of
+# it (15:01:52Z and 15:04:42Z).
+# --------------------------------------------------------------------------
+NAMES = {
+    "BOS": "Boston Celtics",            "PHI": "Philadelphia 76ers",
+    "DET": "Detroit Pistons",           "ATL": "Atlanta Hawks",
+    "MIA": "Miami Heat",                "NYK": "New York Knicks",
+    "CLE": "Cleveland Cavaliers",       "ORL": "Orlando Magic",
+    "TOR": "Toronto Raptors",           "IND": "Indiana Pacers",
+    "CHA": "Charlotte Hornets",         "WAS": "Washington Wizards",
+    "BKN": "Brooklyn Nets",             "CHI": "Chicago Bulls",
+    "MIL": "Milwaukee Bucks",           "SAS": "San Antonio Spurs",
+    "LAL": "Los Angeles Lakers",        "HOU": "Houston Rockets",
+    "POR": "Portland Trail Blazers",    "MIN": "Minnesota Timberwolves",
+    "MEM": "Memphis Grizzlies",         "OKC": "Oklahoma City Thunder",
+    "DEN": "Denver Nuggets",            "GSW": "Golden State Warriors",
+    "DAL": "Dallas Mavericks",          "PHX": "Phoenix Suns",
+    "LAC": "LA Clippers",               "NOP": "New Orleans Pelicans",
+    "SAC": "Sacramento Kings",          "UTA": "Utah Jazz",
+}
+NAMES_REREAD_UTC = "2026-11-16T15:01Z..15:05Z"
+
+# --------------------------------------------------------------------------
 # C05 — official injury report, edition 2026-11-16 09:30 AM ET
 # tuple: (game_date, game_time, matchup, team, player, status, reason, note)
 # a None in game_date/game_time/matchup/team means "inherited from the row above"
@@ -172,10 +204,14 @@ def build_standings():
     rows = []
     for conf, tbl in (("East", EAST), ("West", WEST)):
         for i, (ab, W, L, pct, gb, confrec, div, home, road, neu, ot, l10, strk) in enumerate(tbl, 1):
-            rows.append({"conference": conf, "rank": i, "abbr": ab, "w": W, "l": L,
+            rows.append({"conference": conf, "rank": i, "abbr": ab, "team": NAMES[ab],
+                         "w": W, "l": L,
                          "win_pct": pct, "gb": gb, "conf_rec": confrec, "div_rec": div,
                          "home": home, "road": road, "neutral": neu, "ot": ot,
                          "last10": l10, "streak": strk})
+    missing = sorted({r["abbr"] for r in rows} - set(NAMES))
+    if missing:
+        problems.append("no official name transcribed for %s" % ", ".join(missing))
     hw = sum(wl(r["home"]) for r in rows)
     hg = sum(wl(r["home"]) + ll(r["home"]) for r in rows)
     rw = sum(wl(r["road"]) for r in rows)
@@ -198,6 +234,7 @@ def build_standings():
         "captured_by": SESSION,
         "retrieved_utc": RETRIEVED,
         "source_url": STANDINGS_URL,
+        "team_names_reread_utc": NAMES_REREAD_UTC,
         "rule": ("Every cell is a cell of the official standings table, read "
                  "conference by conference. Nothing is computed from it except the "
                  "sums published in measured_home_court_anchor, which are arithmetic "
@@ -217,6 +254,24 @@ def build_standings():
                 f"home win rate {hw}/{hg} + road win rate {rw}/{rg} = "
                 f"{round(hw/hg + rw/rg, 6)} (must be 1.0 when neutral games are excluded)",
             ],
+            "home_losses": hg - hw,
+            "road_losses": rg - rw,
+            "neutral_team_games": ng,
+            "measured_from": ("the official standings HOME and ROAD columns, summed "
+                              "across all 30 teams"),
+            "cross_checks": [
+                f"home_wins({hw}) must equal road_losses({rg - rw}): "
+                f"{'OK' if hw == rg - rw else 'MISMATCH'}",
+                f"road_wins({rw}) must equal home_losses({hg - hw}): "
+                f"{'OK' if rw == hg - hw else 'MISMATCH'}",
+            ],
+            "source_url": STANDINGS_URL,
+            "retrieved_utc": RETRIEVED,
+            "caveat": ("every game completed at retrieval time is included. The 11/16 "
+                       "slate had not tipped (first tip 7:00 PM ET = 2026-11-17T00:00Z), "
+                       "so this is the complete standings through the games of "
+                       "2026-11-15 - including the three 11/15 games that were still "
+                       "in progress when the previous capture was taken at 02:13Z."),
             "note": ("this is the measurement home-court advantage is pinned to "
                      "(brief requirement: pin HCA to the measured home-win rate, "
                      "do not fit it)"),

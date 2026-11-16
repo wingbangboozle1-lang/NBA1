@@ -1,0 +1,93 @@
+{
+ "title": "Consecutive-edition injury diff: 2026-11-15 09:00 PM -> 2026-11-16 09:30 AM",
+ "from_edition": "2026-11-15 09:00 PM (file data/official/injury_2026-11-15_0900PM_dfef26dc.json)",
+ "to_edition": "2026-11-16 09:30 AM (file data/official/injury_2026-11-16_0930AM_acc2fd9e.json)",
+ "computed_by": "arena/acc2fd9e-nba1",
+ "computed_utc": "2026-11-16T14:44Z..14:52Z",
+ "canonical_file": "data/injury_reports/2026-11-16_0930AM/diff_vs_2026-11-15_0900PM.json",
+ "rendered_from": "this file is a rendered view of the canonical diff named above, in the schema scripts/build_dashboard.py reads; the canonical file is the record and nothing here is recomputed",
+ "method": "a status change is recorded only when the same (game date, matchup, team, player) prints a different Current Status in the two editions. A player who appears in one edition and not the other is listed as added/removed, not as a status change. A row whose status the PDF text layer lost in the current edition is reported under not_comparable and is never counted as a change.",
+ "counts": {
+  "comparable_player_rows": 62,
+  "status_changes": 0,
+  "unchanged": 61,
+  "not_comparable": 1
+ },
+ "status_changes": [],
+ "rows_added": [],
+ "rows_removed": [],
+ "not_comparable": [
+  {
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Butler III, Jimmy",
+   "previous_status": "Out",
+   "current_status": null,
+   "why": "PDF text layer lost the status/reason column boundary for this row: the only trailing text printed was 'Injury/Illness - Right ACL Repair / Surgery', which is a reason, not a status. Status and reason are left null and the row is flagged rather than guessed."
+  }
+ ],
+ "team_blocks_filed_since": [],
+ "team_blocks_newly_not_submitted": [
+  {
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets"
+  },
+  {
+   "matchup": "CHA@LAL",
+   "team": "Los Angeles Lakers"
+  },
+  {
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons"
+  },
+  {
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs"
+  },
+  {
+   "matchup": "NYK@TOR",
+   "team": "New York Knicks"
+  },
+  {
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors"
+  },
+  {
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves"
+  },
+  {
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz"
+  }
+ ],
+ "comparison_window": {
+  "game_dates_compared": [
+   "11/16/2026"
+  ],
+  "game_dates_only_in_previous": [
+   "11/15/2026"
+  ],
+  "game_dates_only_in_current": [
+   "11/17/2026"
+  ],
+  "why": "the report is a rolling document: it lists the next two game dates. Comparing dates only one edition covers would report every finished game as a removal."
+ },
+ "caveats": [
+  "The report is rolling: it lists the next two game dates. Rows are compared only on game dates BOTH editions print (11/16/2026); dates only one edition covers are counted separately and are not changes.",
+  "A row whose status the PDF text layer lost is reported under not_comparable, never as a status change (1 such row here).",
+  "Six Golden State rows and one more lost a status or reason cell in the PDF text layer; those cells are null in the edition file, never filled in."
+ ],
+ "source_urls": {
+  "previous": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf",
+  "current": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_30AM.pdf"
+ }
+}

@@ -49,6 +49,70 @@ def load(name):
         return json.load(f)
 
 
+def newest(prefix, folder="data/official"):
+    """Newest file in `folder` whose name starts with prefix."""
+    d = os.path.join(ROOT, folder)
+    cands = sorted(f for f in os.listdir(d) if f.startswith(prefix) and f.endswith(".json"))
+    return os.path.join(d, cands[-1]) if cands else None
+
+
+def load_rel(path):
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def iso_from_us(d):
+    """"11/16/2026" -> "2026-11-16".  Returns None if it is not that shape."""
+    try:
+        m, day, yr = d.split("/")
+        return "%s-%s-%s" % (yr, m.zfill(2), day.zfill(2))
+    except Exception:
+        return None
+
+
+def provenance():
+    """The injury edition and the team-stat capture the derived files were built
+    on, read at run time.
+
+    Every date and URL the page prints about its inputs comes from here, so the
+    prose cannot drift away from the data: it is read out of the same files the
+    numbers came from, never typed.
+    """
+    lines_doc = load("data/derived/horizon_lines.json")
+    inp = lines_doc["_meta"]["inputs"]
+    out = {"ratings_retrieved_utc": inp.get("ratings_recut_retrieved_utc"),
+           "injury_file": inp.get("injury_file"),
+           "injury_edition": inp.get("injury_edition"),
+           "injury_revision_et": inp.get("injury_revision_et"),
+           "injury_retrieved_utc": inp.get("injury_retrieved_utc")}
+    # the team-stat capture behind the re-cut ratings
+    cap = newest("teams_advanced_")
+    if cap:
+        cap_doc = load_rel(cap)
+        out["team_capture"] = os.path.basename(cap)
+        out["team_games_through"] = cap_doc.get("games_through")
+        out["team_retrieved_utc"] = cap_doc.get("retrieved_utc")
+        out["team_source_url"] = cap_doc.get("source_url")
+        out["team_rows"] = len(cap_doc.get("rows", []))
+    # the injury edition itself
+    if out["injury_file"] and os.path.exists(os.path.join(ROOT, out["injury_file"])):
+        inj = load_rel(os.path.join(ROOT, out["injury_file"]))
+        out["injury_source_url"] = inj.get("source_url")
+        out["injury_index_url"] = inj.get("index_url")
+        out["injury_rows_note"] = inj.get("rows_note")
+        out["injury_game_dates"] = inj.get("game_dates_present") or []
+        out["injury_rows"] = len(inj.get("rows", []))
+        out["injury_dates_iso"] = sorted({x for x in (iso_from_us(d) for d in out["injury_game_dates"]) if x})
+    else:
+        out["injury_source_url"] = None
+        out["injury_index_url"] = None
+        out["injury_rows_note"] = None
+        out["injury_game_dates"] = []
+        out["injury_rows"] = 0
+        out["injury_dates_iso"] = []
+    return out
+
+
 def fmt_record(rest):
     if rest is None:
         return ""
@@ -73,6 +137,19 @@ def avail_short(g):
 def main():
     lines_doc = load("data/derived/horizon_lines.json")
     picks_doc = load("data/derived/horizon_picks.json")
+    prov = provenance()
+    inj_label = prov["injury_revision_et"] or prov["injury_edition"] or "unknown edition"
+    inj_url = prov["injury_source_url"] or ""
+    inj_rows = prov["injury_rows"]
+    inj_dates = ", ".join(prov["injury_game_dates"]) or "none"
+    inj_dates_iso = set(prov["injury_dates_iso"])
+    rat_utc = prov["ratings_retrieved_utc"] or "unknown"
+    team_through = prov.get("team_games_through") or "unknown"
+    # "2026-11-15 (the page was read after that day's games)" -> "2026-11-15"
+    team_through_short = team_through.split(" (")[0]
+    # short, human form of the revision stamp: "11/16/2026 09:30 AM ET (...)" -> "11/16 09:30 AM ET"
+    inj_short = (prov["injury_revision_et"] or "").split(" (")[0].replace("11/16/2026", "11/16")
+    inj_short = inj_short or (prov["injury_edition"] or "unknown")
     games = lines_doc["games"]
     meta = lines_doc["_meta"]
     singles = picks_doc["singles"]
@@ -140,11 +217,13 @@ def main():
             f"<td>{badge('review', 'UNVALIDATED')}</td>"
             f"<td>{src_link(s['sources'][0], 'slate')}</td></tr>")
 
-    # ---------------- table E: 11/15 availability detail -------------------------
+    # ---------------- table E: availability detail -------------------------------
+    # Scope: the game dates the stored official injury edition actually covers.
+    # The old code hardcoded 2026-11-15, which silently emptied this section the
+    # moment the window rolled forward.
     e_rows = []
-    for g in games:
-        if g["date"] != "2026-11-15":
-            continue
+    e_games = [g for g in games if g["date"] in inj_dates_iso]
+    for g in e_games:
         for r in g["availability_rows"]:
             e_rows.append(
                 f"<tr><td>{esc(g['matchup'])}</td><td>{esc(r.get('team') or '')}</td>"
@@ -156,7 +235,7 @@ def main():
                 f"<td>{esc(r.get('absence_class'))}</td>"
                 f"<td>{esc(r.get('expected_points_removed'))}</td>"
                 f"<td><small>{esc(r.get('note') or (r.get('team_source') or ''))}</small></td>"
-                f"<td>{src_link(lines_doc['_meta']['flags'][5].get('source', ''), 'injury report PDF')}</td></tr>")
+                f"<td>{src_link(inj_url, 'injury report PDF')}</td></tr>")
 
     # ---------------- flags -------------------------------------------------------
     flag_rows = []
@@ -173,9 +252,12 @@ def main():
                   "the official standings capture of 2026-11-15.",
          "https://www.nba.com/standings"),
         ("F-C03", "Historical: the 11/14 noon injury report returned AccessDenied to Build C's "
-                  "fetch. Current injury input is the 11/15 06:15 AM ET edition, transcribed "
-                  "verbatim and stored with its timestamp.",
-         "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"),
+                  "fetch. Current injury input is the %s edition (retrieved %s, %d rows), "
+                  "transcribed verbatim and stored with its timestamp. It covers game dates %s; "
+                  "later dates in this window have no official report yet, so their picks are "
+                  "provisional."
+                  % (inj_short, prov["injury_retrieved_utc"], inj_rows, inj_dates),
+         inj_url),
         ("F-C06", "Historical: the CHI@MIN outlier of the 2026-11-14 vintage (spread +29.9) settled "
                   "as a LOSS; the margin was 11. Extreme early-season CHI ratings remain flagged.",
          "https://www.nba.com/game/chi-vs-min-0022600235"),
@@ -254,7 +336,7 @@ def main():
 <header class="page-head"><div class="kicker">rolling slate · published before first tip</div><h1>Horizon lines &amp; picks — 15–18 Nov 2026</h1>
 <p>Originated lines for all {len(games)} unplayed games from today through today + 3 days, generated by <code>scripts/originate_horizon.py</code> with the same formulas as <code>lines.html</code>'s engine, and picks generated by <code>scripts/generate_picks.py</code>. Published pre-tip and hash-chained in <a href="data/ledger/ledger.json">the ledger</a>; every input's date is disclosed on every row — no market price is claimed and nothing is a validated bet.</p></header>
 
-<div class="notice warn"><strong>Read this first.</strong> (1) Inputs are dated, not live: team ratings were re-cut 2026-11-15 from the three official team-stat pages (games through 2026-11-14); records are post-11/14; the latest injury report is 11/15 06:15 AM ET (11/15 rows; 11/16 blocks NOT YET SUBMITTED; 11/17–18 have no rows yet). (2) No market odds feed exists — market-comparison gates G4/G5 and prop gate G-PROP are <strong>blocked</strong>. (3) <strong>No strategy has passed the validation gates</strong> (Build A 0/8, Build B 0/10): every pick is MODEL OUTPUT — UNVALIDATED, zero stake, paper record only. (4) Home-court advantage is not applied (unsourced; flagged F-W02). (5) The 2026-11-14 slate is settled and stamped below; its pre-tip picks are archived and hash-verified. See <a href="review.html" target="_blank" rel="noopener">Flagged for review</a>.</div>
+<div class="notice warn"><strong>Read this first.</strong> (1) Inputs are dated, not live: team ratings were re-cut from the three official team-stat pages (retrieved {esc(rat_utc)}, games through {esc(team_through_short)}); records are post-{esc(team_through_short)}; the latest injury report is {esc(inj_short)} ({esc(inj_rows)} rows, covering {esc(inj_dates)}; dates outside that list have no official report yet, so those picks are provisional). (2) No market odds feed exists — market-comparison gates G4/G5 and prop gate G-PROP are <strong>blocked</strong>. (3) <strong>No strategy has passed the validation gates</strong> (Build A 0/8, Build B 0/10): every pick is MODEL OUTPUT — UNVALIDATED, zero stake, paper record only. (4) Home-court advantage is not applied (unsourced; flagged F-W02). (5) The 2026-11-14 slate is settled and stamped below; its pre-tip picks are archived and hash-verified. See <a href="review.html" target="_blank" rel="noopener">Flagged for review</a>.</div>
 
 <div class="grid"><article class="metric"><div class="metric-label">Horizon games (15–18 Nov)</div><div class="metric-value">{len(games)}</div><div class="metric-sub">official schedule capture, game IDs verified in date-card links</div></article><article class="metric"><div class="metric-label">Model picks (singles)</div><div class="metric-value">{n_picks}</div><div class="metric-sub">gate: |spread| ≥ 3.0 — {len(games) - n_picks} PASS</div></article><article class="metric"><div class="metric-label">2-leg parlays published</div><div class="metric-value">{len(parlays)}</div><div class="metric-sub">Fréchet–Hoeffding joint bands, never single numbers</div></article><article class="metric"><div class="metric-label">SGP candidates</div><div class="metric-value">{len(sgp)}</div><div class="metric-sub">MODEL-DERIVED rho; G-PROP blocked</div></article><article class="metric"><div class="metric-label">Strategies past gates</div><div class="metric-value">0</div><div class="metric-sub">Build A 0/8 · Build B 0/10 — zero stake until one passes</div></article></div>
 
@@ -268,15 +350,15 @@ def main():
 
 <section class="card"><h2>D. Same-game prop combos (SGP2-PROP-v1)</h2><p class="card-intro">Player-points OVER pairs at originated lines (floor(season avg) + 0.5). Joint probability uses the MODEL-DERIVED rho from the repo's sgp_rho register — an assumption, not a measured statistic; G-PROP is blocked (no market number, no game-log variance).</p><div class="table-wrap"><table><thead><tr><th>Date</th><th>Game</th><th>Legs (OVER)</th><th>rho</th><th>Joint P (rho / indep.)</th><th>Gates &amp; sigma</th><th>Status</th><th>Source</th></tr></thead><tbody>{''.join(d_rows)}</tbody></table></div></section>
 
-<section class="card"><h2>E. Availability detail — 11/15 rows of the official 11/15 06:15 AM ET report</h2><p class="card-intro">Verbatim statuses (13 rows carry PDF-inherited team cells, marked in the source capture). Impact columns follow the canonical NEW_ABSENCE rule (scripts/injury_impact.py): only a verifiable new absence moves a line — none qualifies here, so no line moves. Blank minutes/points = not verifiable in repo, never zero.</p><div class="table-wrap"><table><thead><tr><th>Game</th><th>Team</th><th>Player</th><th>Status</th><th>Reason</th><th>Min/g</th><th>Pts/g</th><th>Absence class</th><th>Pts removed</th><th>Note</th><th>Source</th></tr></thead><tbody>{''.join(e_rows)}</tbody></table></div></section>
+<section class="card"><h2>E. Availability detail — {len(e_rows)} rows of the official {esc(inj_short)} report</h2><p class="card-intro">Verbatim statuses for the {len(e_games)} games the stored edition covers ({esc(inj_dates)}); rows whose team cell the PDF text layer merged or lost carry a note in the source capture. {esc(prov["injury_rows_note"] or "")} Impact columns follow the canonical NEW_ABSENCE rule (scripts/injury_impact.py): only a verifiable new absence moves a line — none qualifies here, so no line moves. Blank minutes/points = not verifiable in repo, never zero.</p><div class="table-wrap"><table><thead><tr><th>Game</th><th>Team</th><th>Player</th><th>Status</th><th>Reason</th><th>Min/g</th><th>Pts/g</th><th>Absence class</th><th>Pts removed</th><th>Note</th><th>Source</th></tr></thead><tbody>{''.join(e_rows)}</tbody></table></div></section>
 
 <section class="card"><h2>Method &amp; provenance</h2><ul class="bullets">
 <li>Lines: <code>scripts/originate_horizon.py</code> → <a href="data/derived/horizon_lines.json">data/derived/horizon_lines.json</a> — identical formulas to Build A's <code>scripts/originate_lines.py</code>.</li>
 <li>Picks: <code>scripts/generate_picks.py</code> → <a href="data/derived/horizon_picks.json">data/derived/horizon_picks.json</a> — gate 3.0 inherited from <code>data/originated_lines.json</code>.</li>
 <li>Schedule input: <a href="data/raw/official_schedule_capture_2026-11-15.json">official schedule capture</a> (34 games, game IDs verified in the official date-card link URLs against <a class="source" href="https://www.nba.com/schedule" target="_blank" rel="noopener">nba.com/schedule</a>).</li>
-<li>Ratings input: the three official team-stat pages re-read 2026-11-15 — <a class="source" href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">advanced</a>, <a class="source" href="https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">traditional</a>, <a class="source" href="https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">opponent</a> (games through 2026-11-14; captures in data/official/).</li>
+<li>Ratings input: the three official team-stat pages — <a class="source" href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">advanced</a>, <a class="source" href="https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">traditional</a>, <a class="source" href="https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">opponent</a> — newest capture <code>{esc(prov.get("team_capture"))}</code>, games through {esc(team_through_short)}, retrieved {esc(prov.get("team_retrieved_utc"))}, {esc(prov.get("team_rows"))} teams; re-cut by <code>scripts/recut_model_inputs.py</code> at {esc(rat_utc)}.</li>
 <li>Dispersion input: official finals of 11/11–11/14 (<a class="source" href="https://www.nba.com/games?date=2026-11-11" target="_blank" rel="noopener">11 Nov</a>, <a class="source" href="https://www.nba.com/games?date=2026-11-12" target="_blank" rel="noopener">12 Nov</a>, <a class="source" href="https://www.nba.com/games?date=2026-11-13" target="_blank" rel="noopener">13 Nov</a>, <a class="source" href="https://www.nba.com/games?date=2026-11-14" target="_blank" rel="noopener">14 Nov</a>).</li>
-<li>Injury input: <a class="source" href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf" target="_blank" rel="noopener">official 11/15 06:15 AM ET injury report PDF</a> (policy: <a class="source" href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">official.nba.com</a>).</li>
+<li>Injury input: <a class="source" href="{esc(inj_url)}" target="_blank" rel="noopener">official {esc(inj_short)} injury report PDF</a> — {esc(inj_rows)} rows, retrieved {esc(prov["injury_retrieved_utc"])}, stored as <code>{esc(prov["injury_file"])}</code> (policy: <a class="source" href="{esc(prov["injury_index_url"] or "https://official.nba.com/nba-injury-report-2026-27-season/")}" target="_blank" rel="noopener">official.nba.com</a>).</li>
 </ul></section>
 
 <section class="card"><h2>Flagged for review — this page</h2><p class="card-intro">Published, non-blocking, per the brief. Nothing above hides these.</p><div class="table-wrap"><table><thead><tr><th>ID</th><th>Severity</th><th>Item</th><th>Source</th></tr></thead><tbody>{''.join(flag_rows)}</tbody></table></div></section>

@@ -68,7 +68,12 @@ def load_injury_edition():
     # Newest official edition at the time of the re-cut.  The 06:15 PM edition
     # the previous cut used is superseded: the 09:00 PM edition exists, is the
     # newest on the official index, and carries the 11/16 game date.
-    pref = os.path.join(OFF, "injury_2026-11-15_0900PM_dfef26dc.json")
+    # Newest official edition at the time of the re-cut. The 11/15 09:00 PM
+    # edition the previous cut used is superseded: the 11/16 09:30 AM edition
+    # exists, is the newest on the official index, and is the first edition
+    # printed for the 11/16 game date rather than a carry-over.
+    # (updated by session arena/acc2fd9e-nba1, COORDINATION §50 C05)
+    pref = os.path.join(OFF, "injury_2026-11-16_0930AM_acc2fd9e.json")
     if os.path.exists(pref):
         path = pref
     else:
