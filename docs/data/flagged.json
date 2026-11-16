@@ -1052,6 +1052,16 @@
    "source": "scripts/verify_ledger.py sha256/file branch; scripts/settle_slate.py append path",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_ledger.py",
    "suggested_action": "Add settlement-vintage archival + superseded-tolerance to verify_ledger before the 11/16 game day settles."
+  },
+  {
+   "id": "F116",
+   "severity": "Medium",
+   "title": "GitHub Pages build_type cannot be switched to 'workflow' from the session token: PUT /repos/.../pages returns HTTP 403 'Resource not accessible by integration'",
+   "detail": "Measured 2026-11-16T15:0xZ by session arena/0e9c924f-nba1: gh api -X PUT repos/wingbangboozle1-lang/NBA1/pages -f build_type=workflow -> 403 {\"message\":\"Resource not accessible by integration\",\"documentation_url\":\"https://docs.github.com/rest/pages/pages#update-information-about-a-apiname-pages-site\",\"status\":\"403\"}, while the read (GET /pages) works and shows build_type=legacy. The session's token is a GitHub App installation/user token of wingbangboozle1-lang without pages:write. Consequence: the repo stays on the legacy builder, so the single-deploy-path fix (SG37/GR4.2) was implemented from the other side: .github/workflows/pages.yml keeps its full validation battery but its deploy job is disabled (job 'deploy-disabled', if:false), leaving the Pages legacy builder as the only publisher. The intended end state remains build_type=workflow with the Actions deploy job restored.",
+   "affected": ".github/workflows/pages.yml (deploy job disabled); GitHub Pages settings (build_type=legacy)",
+   "source": "GitHub REST API response captured in session log; GET /repos/.../pages shows build_type=legacy",
+   "source_url": "https://docs.github.com/rest/pages/pages#update-information-about-a-apiname-pages-site",
+   "suggested_action": "Grant the app pages:write (or run the PUT from an admin UI session), flip build_type=workflow, then restore the four deploy steps in pages.yml as documented in its header comment."
   }
  ]
 }

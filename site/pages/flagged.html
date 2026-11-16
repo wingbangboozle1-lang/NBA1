@@ -1112,6 +1112,15 @@
 <td>Add settlement-vintage archival + superseded-tolerance to verify_ledger before the 11/16 game day settles.</td>
 <td class="src"><span class="na" title="source id scripts/verify_ledger.py sha256/file branch; scripts/settle_slate.py append path is not in the register">&mdash;</span></td>
 </tr>
+<tr>
+<td>F116</td>
+<td>Medium</td>
+<td><b>GitHub Pages build_type cannot be switched to 'workflow' from the session token: PUT /repos/.../pages returns HTTP 403 'Resource not accessible by integration'</b></td>
+<td>Measured 2026-11-16T15:0xZ by session arena/0e9c924f-nba1: gh api -X PUT repos/wingbangboozle1-lang/NBA1/pages -f build_type=workflow -&gt; 403 {&quot;message&quot;:&quot;Resource not accessible by integration&quot;,&quot;documentation_url&quot;:&quot;https://docs.github.com/rest/pages/pages#update-information-about-a-apiname-pages-site&quot;,&quot;status&quot;:&quot;403&quot;}, while the read (GET /pages) works and shows build_type=legacy. The session's token is a GitHub App installation/user token of wingbangboozle1-lang without pages:write. Consequence: the repo stays on the legacy builder, so the single-deploy-path fix (SG37/GR4.2) was implemented from the other side: .github/workflows/pages.yml keeps its full validation battery but its deploy job is disabled (job 'deploy-disabled', if:false), leaving the Pages legacy builder as the only publisher. The intended end state remains build_type=workflow with the Actions deploy job restored.</td>
+<td>.github/workflows/pages.yml (deploy job disabled); GitHub Pages settings (build_type=legacy)</td>
+<td>Grant the app pages:write (or run the PUT from an admin UI session), flip build_type=workflow, then restore the four deploy steps in pages.yml as documented in its header comment.</td>
+<td class="src"><span class="na" title="source id GitHub REST API response captured in session log; GET /repos/.../pages shows build_type=legacy is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
