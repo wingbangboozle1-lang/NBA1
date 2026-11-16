@@ -5432,3 +5432,42 @@ because each push is exactly what cancels the pending build.
 `pages.yml`, which is worse because it loses the pre-deploy `validate` gate). Until then the
 live host serves the 2026-11-15T23:44Z build, and **no fetch-back can be used to prove what
 `main` contains** — verify against the tree and the Actions run log instead.
+
+### 48.8 Final deploy status and handoff (2026-11-16T03:4xZ) — measured, not assumed
+
+**Everything this session built is on `main`**, verified by reading the files back off the
+remote rather than from this working tree:
+
+- `data/derived/horizon_lines_v2.json` → `line_window: 2026-11-16 .. 2026-11-18`, 25 games.
+- `data/content/flagged.json` → 103 items, with **F101–F107** present (this session's six plus
+  F107, the deploy finding).
+- `data/official/standings_2026-11-16_0213Z_dfef26dc.json` → present, home-win rate 0.5285.
+- Merges: **PR #128 → `e649dd5`**, **PR #134 → `793c222`**.
+
+**The live site still serves the 2026-11-15T23:44:35Z build (`afc79f2`).** I fetched it back
+from this sandbox successfully — <https://wingbangboozle1-lang.github.io/NBA1/> returns HTTP
+200 and renders — and it reports **34 games (15–18 Nov)** and **87 open flags**, i.e. the
+pre-11/16 build. (Note for the next session: `fetch_page` on the live host works from this
+sandbox even though `curl` does not, so a live fetch-back *is* possible; earlier sessions
+reported HTTP 000 because they used curl.)
+
+**Every lever I had, tried, with the result:**
+
+| Lever | Result |
+| --- | --- |
+| Monitor 11 consecutive `pages build and deployment` runs (01:24Z–03:42Z) | 10 cancelled, 1 still queued; last success remains `afc79f2` |
+| Switch Pages to the Actions build type (SG37) | **HTTP 403** — `PUT /repos/{owner}/{repo}/pages` is not accessible to this session's token; needs a repository admin |
+| Wait for the merge cadence to slow | it slowed to one merge every ~10 min at 03:07–03:42, and `01dde31`'s build then sat **queued for 35 minutes** before being cancelled by `424bba5` |
+| Count on PR #124 (probe workflow → `workflow_dispatch` only, merged 02:54Z) | landed, and it removes the *future* probe runs, but a backlog of 15 unfinished `Publish static site to GitHub Pages` runs and 6 `Refresh official data` runs sits ahead of any Pages build |
+
+**Conclusion.** This is F107: two deploy paths racing, and it cannot be closed from inside a
+session. It needs a repository admin to make one change — Settings ▸ Pages ▸ Source:
+**GitHub Actions** — after which `pages.yml` is the only deploy path and its existing
+concurrency group (`pages-refs/heads/main`, `cancel-in-progress: false` on main) serialises
+production runs instead of letting each push cancel the last.
+
+**Recommendation to whoever reads this next:** make that one setting change *before* starting
+another build cycle, and re-check with
+`gh api /repos/wingbangboozle1-lang/NBA1/pages --jq .status` (should read `built`) plus a
+fetch-back that shows **25 games (16–18 Nov)** and **103 open flags**. Until then, verify
+against the `main` tree, not the live host.
