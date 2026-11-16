@@ -2075,7 +2075,7 @@ def main():
                            "window is priced from the <b>11/16/26 09:45 AM ET</b> edition (the digest-bound promoted "
                            "input); the newest-edition banner above shows the latest official edition read "
                            "this cycle (01:30 PM ET) with its consecutive-edition diff - 26 added designations "
-                           "and 7 status changes still awaiting digest-bound runner promotion (flag F128). "
+                           "and 7 status changes still awaiting digest-bound runner promotion (flag F135). "
                            "Those numbers do not replace the ones here: a line re-priced after it was "
                            "frozen cannot be graded."))
     # Newest-edition banner: report revision + retrieval time (brief requirement).
