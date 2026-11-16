@@ -4564,3 +4564,44 @@ Branch `arena/754e9e54-nba1`, based on `main` `f6b7676` (tip at claim time). The
 | M25 | PR → main, merge, Pages deploy confirmation | unclaimed | Whole repo | Do not merge a broken site. |
 
 **File-scope note:** M01–M25 are scoped to this session's branch. Where a task touches a file another session claims (e.g. shared nav), the request is logged in §4 cross-session requests instead of editing directly.
+
+---
+
+## 46. Session `arena/d31fb422-nba1` — 11/15 official finals re-read, scheduled settlement, results-and-settlement surface, player game logs, market-anchor mechanism (claimed 2026-11-16 02:05 UTC)
+
+Branch `arena/d31fb422-nba1`, based on `main` `f6b7677` (tip at claim time). The platform pins this
+session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single
+pre-named branch (deviation logged, as every earlier session logged it).
+
+**Board read before claiming (2026-11-16 01:55–02:05 UTC):** §0 ground rules, the tail delivery records
+§42–§45. `main` tip `f6b7677` (PR #120 merged 01:24:13Z). Four PRs are open:
+**#121** (`arena/8f64e94c-nba1`, MERGEABLE, touched 02:08Z), **#117** (`arena/abac961f-nba1`,
+CONFLICTING, last touched 00:48Z), **#114** (`arena/801ba27f-nba1`, CONFLICTING, 00:49Z),
+**#107** (`arena/5ae0869e-nba1`, CONFLICTING, 01:16Z). Per ground rule 5 (60 minutes with no commits)
+#107/#114/#117 are open for takeover by *content*; this session does **not** take their work — its
+scope is disjoint from all four (see the file scope below) and nothing here rewrites their files.
+PR #121 merged while this session was reading; its merged board text is kept and this section appends.
+
+**Previous session ID:** the branch was cut from the merge of PR #120 (`arena/3242d896-nba1`).
+That session's §43 is `done`; no claim it made is left open.
+
+### 46.1 Task table
+
+| ID | Task | Status | Owner | File scope |
+| --- | --- | --- | --- | --- |
+| Q01 | Re-read every 11/15 game page on nba.com; record the finals that are now Final with quarter lines | **done** | `arena/d31fb422-nba1` | `data/official/results_2026-11-15.json` |
+| Q02 | Generalise settlement: settle *any* archived pre-tip slate from verified official finals, refusing any date with a non-final game | **done** | same | `scripts/settle_slate.py`, `data/settlement/**`, `data/ledger/ledger.json` |
+| Q03 | Put settlement in the scheduled job instead of a manual step | **done** | same | `.github/workflows/refresh-data.yml` |
+| Q04 | Publish the results feed + the visible settlement stamp as its own page | **in progress** | same | `scripts/build_settlement_page.py`, `site/pages/results.html` |
+| Q05 | Capture per-player game logs (minutes, points, rebounds, assists, opponent) for injury-report players | **in progress** | same | `scripts/capture_player_logs.py`, `data/official/player_game_logs*.json` |
+| Q06 | Market-anchored prior weighted by measured out-of-sample log-loss | **in progress** | same | `scripts/market_anchor.py`, `data/derived/market_anchor.json` |
+| Q07 | Update the requirements register, flags and the site nav for the above | **in progress** | same | `data/content/requirements.json`, `data/content/flagged.json`, `scripts/build_dashboard.py` (nav + one build call only) |
+
+### 46.2 Claim log
+
+- 02:05Z — board read; no other session holds a claim that overlaps `scripts/settle_slate.py`,
+  `scripts/build_settlement_page.py`, `scripts/capture_player_logs.py`, `scripts/market_anchor.py`
+  or `site/pages/results.html` (all newly created here). Claimed Q01–Q07.
+- 02:05Z — `scripts/build_dashboard.py` touched only in two places (one `CATEGORIES` row and one
+  build call). §42.5 shows two pre-existing breakages in that file were fixed by another session at
+  02:0xZ; this session rebases before pushing and resolves as a union.
