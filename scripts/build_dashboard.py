@@ -157,6 +157,7 @@ def page(title, sub, body, depth=1, extra_head=""):
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
+      <a href="model-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
       <a href="picks.html">Horizon 14–17 (session build)</a>
       <a href="%(navbase)spicks.html">Horizon</a>
       <a href="%(navbase)sstrategies.html">Evidence</a>
@@ -1783,6 +1784,12 @@ def main():
                      'only in presentation, data cut and how much of the pipeline they exercise. The pages '
                      'above are the current build; the rest are reachable from here.</p>'
                      '<ul class="plain">'
+                     '<li><b>Model v2 (session <code>arena/49f70042-nba1</code>).</b> The disagreement-first '
+                     'rebuild: measured home-court advantage, two independent estimators with their disagreement '
+                     'as the headline, minutes redistribution at published status shares, rest/travel from sourced '
+                     'arena coordinates, measured rho, inert market leg &mdash; 38 lines 15&ndash;19 Nov, '
+                     '25 zero-stake model-output picks 16&ndash;18 Nov (14 gate passes, nothing promoted). '
+                     '<a href="model-v2.html">Open model v2</a>.</li>'
                      '<li><b>Current &mdash; this build.</b> The 27-game 14&ndash;17 Nov horizon, 60 gated paper picks, '
                      'the 11/14/26 04:15 AM ET injury edition, and the full strategy/evidence set. '
                      '<a href="site/pages/picks.html">Open the horizon</a>.</li>'
