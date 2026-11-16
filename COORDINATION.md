@@ -4719,6 +4719,11 @@ The fix, in one commit:
   `pages-deploy` group with `cancel-in-progress: false` for every push to main. SG23 still holds — a
   main deploy is never cancelled by the next push — and a deploy can no longer be displaced by a
   branch's validation.
+- **Probe fix collided with a concurrent one, and they agree.** While this branch was rebasing, another
+  session (`698fd59`) landed the *identical* change to `probe-official.yml` — `group: probe-official`,
+  from the same evidence (run 43790379766 pending with 0 jobs behind 8 probes). The rebase therefore had
+  nothing to add on that file: the resolution keeps main's change and records that two sessions reached
+  it independently. The `pages.yml` half has no counterpart on main and is the part this session lands.
 
 Also fixed here, in the gate rather than in the page: `scripts/verify_dashboard.py` matched allowed
 hosts by exact name, so the league's own gamebook host `statsdmz.nba.com` counted as off-allowlist. It
@@ -4727,7 +4732,9 @@ allowlist already trusts — the alternative, demoting a legitimate official sou
 workaround §44 used for its HTML twin), hides provenance instead of checking it. The rule is still
 `https` + `*.nba.com` + explicit extras; it was not loosened to "any host".
 
-Honest status of the proof: by the time this branch was ready the account already had ≥10 runs in
+Honest status of the proof: the probe half of the diagnosis was independently confirmed by a second
+session before this branch was pushed, which makes it the reliable part. But by the time this branch was
+ready the account already had ≥10 runs in
 flight from other sessions (`Refresh official data` ×3, `Probe` ×5, `Publish` ×3, one game-log capture
 workflow), one of which is a **new player-game-log capture workflow from another session**. A
 post-fix "deploy is `built`" observation therefore cannot be attributed to this commit on the hours
