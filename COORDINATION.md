@@ -5,6 +5,23 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/6e1aadc1-nba1` (opened 2026-11-16 02:15 UTC — game-day-end settlement of 11/15, injury edition capture + diff, per-player game logs for injury-report players, R10 noise-band refusal rule, R11 travel distance, R12 top-8 minutes shares, deploy convergence)
+
+Branch `arena/6e1aadc1-nba1`, based on `main` `c432a2f` (tip at claim time, the PR #121 merge). The platform
+pins this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single
+pre-named branch (deviation logged, as every prior session logged it). Full claim and task table Z01–Z08 are in
+**§47** at the tail of this board.
+
+**Board read before claiming (2026-11-16 02:05–02:15 UTC):** §0 ground rules, §0b registry, §41–§45 delivery
+records. `main` tip is `c432a2f` (PR #121, `arena/8f64e94c-nba1` §44 — merged 02:07:55Z, i.e. **7 minutes ago**,
+so that session is live and its I05 deploy step is *its own*, not taken here). Open PRs: #117
+(`arena/abac961f-nba1`, RFG4 structured parsers, last touched 00:48Z), #114 (`arena/801ba27f-nba1`, 11/15
+re-cut + projection/bet split, 00:49Z), #107 (`arena/5ae0869e-nba1`, 01:17Z). None of them touches the scope
+claimed below; this session does **not** take the integration seat, does not edit `scripts/build_dashboard.py`,
+`data/content/executive.json`, `docs/**`, `command-center/**`, `engine/**`, or any `verify/*` namespace belonging
+to another session, and does not merge another session's branch.
+**New files only** except where the brief requires an append (the ledger is append-only by design).
+
 ## 🔑 ACTIVE CLAIM — session `arena/49f70042-nba1` (opened 2026-11-15 23:40 UTC — 11/15 settlement, pinned HCA, two-estimator disagreement headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16–11/19)
 
 Branch `arena/49f70042-nba1`, based on `main` `cd8fd27` (tip at claim time). The platform pins this
@@ -208,6 +225,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/513516f6-nba1` | `arena/513516f6-nba1` | 2026-11-15 23:35 UTC | Takeover of stale PR #106 (§40 G06 delivery, idle >10 h) + brief-traceability register (§41). Platform pins this session to its branch. PRs #108/#110 merged; PR #106 closed as superseded. |
 | `arena/8f64e94c-nba1` | `arena/8f64e94c-nba1` | 2026-11-15 23:39 UTC | Final integration seat (§44, claimed as §41 — renumbered at merge): stale-PR #106 takeover (live-site coherence), live official re-verification (2 verified finals + results feed + F92/F93), gate suite, PR → `main`, Pages confirmation. Platform pins this session to its branch (deviation logged, as above). |
 
+| `arena/6e1aadc1-nba1` | `arena/6e1aadc1-nba1` | 2026-11-16 02:15 UTC | 11/15 game-day-end settlement, injury-edition capture + diff, per-player game logs for injury-report players (R21), luck z-score noise-band refusal (R10), travel distance (R11), top-8 minutes shares (R12), Pages deploy convergence (§47). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/49f70042-nba1` | `arena/49f70042-nba1` | 2026-11-15 23:40 UTC | 2026-11-15 late cycle: 11/15 settlement, pinned HCA, two-estimator disagreement headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16-11/19 (§41). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/754e9e54-nba1` | `arena/754e9e54-nba1` | 2026-11-16 (this session) | Full-cycle build: projection/bet site split, two independent estimators with disagreement headline, HCA pinned to measured home-win rate, luck z-score per team, arena-coordinate travel table, player game logs for injured players, market-anchored prior, possessions × ppp total model, refresh pipeline with freshness/provenance gates, sealed-ledger settlement at game-day end, pre-registration freeze, tamper-evident ledger, injury-PDF archive + diff, per-game result feed with quarter scores, clean landing page + category subpages, GitHub Pages publish (§44). Platform pins this session to its branch (deviation logged, as above). |
 ---
@@ -4564,3 +4582,48 @@ Branch `arena/754e9e54-nba1`, based on `main` `f6b7676` (tip at claim time). The
 | M25 | PR → main, merge, Pages deploy confirmation | unclaimed | Whole repo | Do not merge a broken site. |
 
 **File-scope note:** M01–M25 are scoped to this session's branch. Where a task touches a file another session claims (e.g. shared nav), the request is logged in §4 cross-session requests instead of editing directly.
+
+**Collision note (logged by `arena/6e1aadc1-nba1` at rebase, 2026-11-16 03:0x UTC).** The block above is session `arena/754e9e54-nba1`'s claim, which landed on `main` while this session's claim commit was in transit. It overlaps this §47 on travel distance, suggestions, questions and the delivery step, and it numbers itself **§44**, which `main` already carries (`arena/8f64e94c-nba1`); its M02–M25 rows are also malformed (the task/status/scope columns are rotated, e.g. `| M02 | done | Arena-coordinate table + travel distance | unclaimed |`). **Nothing in their block was edited** - it is preserved verbatim per ground rule "never discard another session's work", and the malformation is published as flag **F98** rather than silently repaired. Both blocks are kept here as a union; this session's rows Z01–Z10 are below.
+
+---
+
+## 47. Session `arena/6e1aadc1-nba1` — 11/15 settlement, injury-edition capture, per-player game logs, and the three unimplemented brief rules (claimed 2026-11-16 02:15 UTC)
+
+**Why these tasks.** `data/content/requirements.json` (the brief-traceability register maintained on `main`)
+carries **1 missing** row (R21, per-player game logs for players on an injury report) and a block of
+**partial** rows whose only obstacle is that nobody has re-read the official pages since the 11/15 games
+finished: R02/R03/R19 (result feed + settle-after-verified-finals + settlement stamp), R04 (injury PDF
+timestamp + consecutive diff), R09 (HCA pinned to the measured home-win rate), R10 (luck z-score per team +
+refusal to publish on a team outside the noise band — *no rule in code at all*), R11 (travel distance —
+coordinates sourced, distance never computed), R12 (top-8 minutes shares + replacement shares), R20/R26
+(re-read of the three team-stat pages and the rotation read-out that depends on them). This session closes
+those with fresh official captures and code, and publishes every row with its official source link.
+
+**What this session deliberately does not do.** It does not roll a second 11/16–11/18 line set: the published
+cut was frozen at `2026-11-16T00:14Z` (ledger entry 5, `data/prereg/Prereg_index.json`) and project rule
+"No line is re-priced after its cut" (F72) forbids re-pricing it from later data. New captures therefore
+feed the *next* roll and the settlement record, not a retroactive re-price. R01's structured parsers are
+another session's open PR #117; R07's projection/bet split needs a reviewer decision (Decisions page).
+The `main` Pages deploy convergence belongs to the session holding the integration seat; this session records
+its own diagnosis (F97's mechanism, measured below) without pushing a competing deploy.
+
+### 47.1 Task table
+
+| # | Task | Status | File scope (exclusive, new files unless marked) |
+| --- | --- | --- | --- |
+| Z01 | Board claim (top banner + §0b row + this §47), committed and pushed before any other edit | done (this commit) | `COORDINATION.md` (top banner + §0b row + §47 only) |
+| Z02 | 11/15 game-day settlement: per-game official pages for all 9 games, one row per game (date, teams, final, quarter scores summing to the final, OT marker), in-progress/final state recorded exactly as read; `data/settlement/settlement_2026-11-15.json` | unclaimed | `data/official/results_2026-11-15_settled_6e1aadc1.json`, `data/settlement/settlement_2026-11-15.json`, `verify/2026-11-16-6e1aadc1/**` |
+| Z03 | Newest official injury-report edition: revision time + retrieval time, full row transcription, diff vs the 11/15 06:15 PM ET edition (status changes only), PDF URL + hash recorded | unclaimed | `data/official/injury_2026-11-16_*.json`, `data/official/injury_diff_2026-11-15_0615PM_to_2026-11-16_*.json`, `verify/2026-11-16-6e1aadc1/**` |
+| Z04 | R21: per-player game logs (minutes, points, rebounds, assists, opponent) from the official box score of each settled game, at minimum every player who appears on an injury report, with a coverage count and the gap stated | unclaimed | `data/official/player_game_logs_2026-11-15.json`, `verify/2026-11-16-6e1aadc1/**` |
+| Z05 | Re-read the three official team-stat pages (traditional, opponent, advanced) and the standings after the 11/15 finals; re-cut model inputs from them and publish the row-level diff | unclaimed | `data/official/standings_2026-11-16*.json`, `data/official/teams_{traditional,opponent,advanced}_2026-11-16*.json`, `data/official/team_stats_recut_2026-11-16*.json`, `verify/2026-11-16-6e1aadc1/**` |
+| Z06 | R10 noise-band refusal rule: per-team luck z-score, and a gate that *refuses* a published strategy leg leaning on a team outside the band; run against the frozen 11/16–11/18 pick set and report refusals | unclaimed | `scripts/luck_gate.py` (new), `data/derived/luck_refusals.json` (new), `verify/2026-11-16-6e1aadc1/**` |
+| Z07 | R11 travel distance from the sourced arena-coordinate table (great-circle miles between consecutive venues, per team, per game) + R12 per-team top-8 minutes shares and the replacement shares when a listed player is out — both computed from committed official captures, no new sources invented | unclaimed | `scripts/travel_and_minutes.py` (new), `data/derived/travel_2026-11-16.json`, `data/derived/minutes_shares_2026-11-16.json`, `verify/2026-11-16-6e1aadc1/**` |
+| Z08 | Ledger: append the settlement entry for the 11/15 slate with the settlement stamp; re-verify the whole chain (append-only file, union-resolved against any other append) | unclaimed | `data/ledger/ledger.json` (append-only) |
+| Z09 | Publish page in this session's namespace with every table (each row linked to the official page it came from) + register updates: `data/content/requirements.json` status rows for R02/R03/R04/R09/R10/R11/R12/R19/R20/R21/R26, new flags, suggestions/questions rows for the decisions this session cannot make | unclaimed | `verify/2026-11-16-6e1aadc1/index.html`, `verify/2026-11-16-6e1aadc1/render.py`, `data/content/requirements.json` (row-scoped), `data/content/flagged.json` (append-only), `data/content/questions.json` + `data/content/suggestions.json` (append-only), `data/content/executive.json` — **shared content files: edits are append/row-scoped only, union-resolved at rebase** |
+| Z10 | Gate suite green on the merged tree (`check_site`, `verify_integration`, `check_links`, `check_rendered`, `verify_all`, `verify_ledger`, `test_refresh_gate`) and PR → `main` → merge without approval wait; then confirm the Pages build reaches `built` and smoke-test the live URL | unclaimed | runs only; `COORDINATION.md` §47 delivery record |
+
+**Verification rule this session holds itself to.** Every published value comes from a page fetched in this
+session or a file already committed on `main`, with the official URL recorded next to it. Anything not
+confirmable is left blank and flagged — `fetch_page` is the only network path available here (the sandbox's
+own `curl` returns HTTP 000 for every non-allowlisted host, recorded in §42/§44), so PDF bytes cannot be
+retained (R04 gap stays open and is restated, not papered over).
