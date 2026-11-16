@@ -135,6 +135,30 @@ deleted.
 Other sessions: claim a row here, commit and push the claim before editing.
 
 
+## 🔑 ACTIVE CLAIM — session `arena/c348e6c7-nba1` (opened 2026-11-16 02:10 UTC — integration seat: publish the site, fresh 11/16 official capture, 11/15 settlement, horizon roll to 11/16–11/19, stale-PR takeover)
+
+Branch `arena/c348e6c7-nba1`, based on `main` `f6b7676` (tip at claim time; `main` has since moved to
+`c432a2f` via PR #121). The platform pins this session to that branch; the `session-<id>/<task>`
+naming in the brief is satisfied by this single pre-named branch (deviation logged, as every earlier
+session logged it). Full claim, task table T01–T10 and file scopes are in **§47** at the tail of this
+board.
+
+**Board read before claiming (2026-11-16 02:05–02:13 UTC):** §0 ground rules, §0b registry, §0c, the
+five ACTIVE-CLAIM banners, §41/§42/§43/§44/§45 delivery records. At claim time every previously
+active session is **idle past ground rule 5's 60-minute threshold** — last commits:
+`arena/8f64e94c-nba1` 02:08:26Z (its PR #121 is now merged), `arena/5ae0869e-nba1` 01:16:54Z,
+`arena/801ba27f-nba1` 00:49:41Z, `arena/abac961f-nba1` 00:48:52Z. Three PRs are open, all
+**CONFLICTING** with `main` and all idle >1 h: **#107**, **#114**, **#117**. Under ground rule 5 this
+session takes over their content (carried onto this branch, never pushed to their branches) and
+closes them as superseded; the handoff is logged in §47.0.
+
+**The one thing that changes the plan — measured, not assumed.** `fetch_page` from this session
+reaches nba.com, so the brief's "verify from official verified trusted sources" can be executed
+directly for the first time in this repository's history (every prior session recorded nba.com as
+unreachable from its sandbox — flag F7 and the whole point of `probe-official.yml`). Standings were
+read live at 02:13Z and differ from the stored capture. Evidence for the first live read is in
+`verify/2026-11-16-c348e6c7/`.
+
 ---
 
 ## ⚠ Read this first: two sessions, two builds, one repository
@@ -4511,3 +4535,47 @@ caught it; that edit is in `pages.yml`, which this session does not own, so it i
 - **Also still open:** R-43-D (the §39.1 heading had been dropped from the board on `main`; this session
   restored it inside §43.2's merge — a scan of `main` for other records missing their heading is still
   worth doing), and R-43-B / R-43-C from §43.2.
+
+---
+
+## 47. Session `arena/c348e6c7-nba1` — integration seat: get the site published, fresh 11/16 official capture, 11/15 settlement, horizon roll (claimed 2026-11-16 02:10 UTC)
+
+**Branch:** `arena/c348e6c7-nba1` (base `main` `f6b7676`; `main` moved to `c432a2f` during the claim).
+The platform pins this session to this one branch, so the brief's `session-<id>/<task>` naming is
+satisfied by this single pre-named branch — the same deviation every prior session logged.
+
+### 47.0 What the board looked like when I claimed it
+
+| Observation | Evidence |
+| --- | --- |
+| Every prior claim is idle > 60 min (ground rule 5) | last commits `8f64e94c` 02:08:26Z (PR #121 now merged), `5ae0869e` 01:16:54Z, `801ba27f` 00:49:41Z, `abac961f` 00:48:52Z |
+| 3 open PRs, all CONFLICTING, all idle | [#107](https://github.com/wingbangboozle1-lang/NBA1/pull/107), [#114](https://github.com/wingbangboozle1-lang/NBA1/pull/114), [#117](https://github.com/wingbangboozle1-lang/NBA1/pull/117) |
+| Pages `status: errored` on the current head | `gh api /repos/wingbangboozle1-lang/NBA1/pages` → `build_type: legacy`, latest build `errored` for commit `f6b7676` |
+| The live site still serves the **last successful** build (00:51:58Z, `afc79f2`) | `fetch_page https://wingbangboozle1-lang.github.io/NBA1/` returns 200 with the 15–18 Nov horizon — i.e. **stale, not down** |
+| **20 probe runs `in_progress` + 24 `queued`** = 44 concurrent ~1-hour jobs | `gh run list` — this is what starves every Pages deploy |
+| `gh run cancel` → HTTP 403 (token has no `actions: write`) | measured, not assumed |
+| `PUT /repos/.../pages -F build_type=workflow` → HTTP 403 | measured; the Pages publishing source cannot be switched from this session |
+
+**Handoff log (ground rule 5).** PRs #107 / #114 / #117 are taken over here: their content is carried
+onto this branch and merged to `main`, then each PR is closed as superseded with credit. Nothing is
+discarded. Two session-level capability limits are recorded honestly above (no `actions: write`, no
+Pages-admin) — they change *how* the site gets published, not whether.
+
+### 47.1 Task table
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| T01 | Board claim + registry row | in progress | `COORDINATION.md` |
+| T02 | Diagnose the Pages deploy and fix what a session can fix (probe-run starvation, `pages.yml` cost) | in progress | `.github/workflows/probe-official.yml`, `.github/workflows/pages.yml`, `scripts/probe_official.py` |
+| T03 | Fresh official capture 2026-11-16: schedule, standings, three team-stat pages, injury edition | unclaimed | `verify/2026-11-16-c348e6c7/**`, `data/official/*_2026-11-16*.json` |
+| T04 | Settle the 2026-11-15 slate from official finals; one row per game | unclaimed | `data/settlement/**`, `data/official/results_2026-11-15.json` (append-only) |
+| T05 | Roll the horizon to 11/16–11/19 (3 days) and re-originate lines | unclaimed | `data/derived/**`, `data/prereg/**`, `data/ledger/**` |
+| T06 | Regenerate the site and run every gate | unclaimed | `index.html`, `site/pages/**`, `*.html` (generated) |
+| T07 | Takeover-merge PRs #107 / #114 / #117 | unclaimed | `COORDINATION.md`, carried content |
+| T08 | Executive summary, suggestions register, questions register | unclaimed | `EXECUTIVE_SUMMARY.md`, `data/content/suggestions*.json`, `data/content/questions*.json` |
+| T09 | Final integration: PR → `main`, merge, confirm Pages | unclaimed | PR + board |
+| T10 | Flagged-for-review page updated with this pass's irregularities | unclaimed | `data/content/flagged.json` (append-only), `site/pages/flagged.html` |
+
+**Not touched by this session:** `docs/**` (Build A/B archives), `command-center/**`, `engine/**`,
+`engine_v2/**`, `origination/**` — read-only inputs.
+
