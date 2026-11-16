@@ -751,7 +751,7 @@
    "id": "F82",
    "severity": "medium",
    "title": "Injury PDFs are not retained in the repository",
-   "detail": "The fetcher downloads injury PDFs, but no .pdf file is tracked in git. The repository holds transcriptions with revision and retrieval times, plus one consecutive diff. Every PDF must be stored with its timestamp to meet the brief.",
+   "detail": "The fetcher downloads injury PDFs, but no .pdf file is tracked in git. The repository holds transcriptions with revision and retrieval times, plus one consecutive diff. Every PDF must be stored with its timestamp to meet the brief.\n\nUPDATE 2026-11-16T19:1xZ (session arena/23ec1e32-nba1, §55 W05): the core claim in this flag is now STALE — measured `git ls-files data/raw/injury_pdfs/` returns 176 tracked files: 88 PDFs (editions 2026-11-15 and 2026-11-16) plus 88 sidecar JSON records, each with edition, official source_url, retrieved_at_utc, bytes and sha256. Three consecutive-report diffs are committed (engine/injury_diff.py, tested). This flag stays OPEN for the two remaining real gaps: (a) editions earlier than 2026-11-15 were never retained and the official URLs rotate, so they cannot be recovered; (b) the diff chain stops at the 11/15 06:15 PM ET pair — the 11/15 09:00 PM ET edition and five 11/16 editions have stored PDFs but no transcription/diff yet, which rides on the parse/promote path tracked under R01/RFG4.",
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "status": "open"
   },

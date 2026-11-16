@@ -1,0 +1,26 @@
+==============================================================================
+LINK AND SOURCING REPORT — docs/ and command-center/
+==============================================================================
+  pages scanned        : 59
+  links found          : 2074
+  distinct external    : 133
+  table rows           : 882
+  internal broken      : 0
+  non-approved hosts   : 0
+  rows without a source: 0
+  rows marked unverified: 8 (no NBA value; reason stated)
+  ragged table rows    : 0
+  client-side scripts  : 76 (rendered from JSON; not statically scanned)
+  see   explicitly unverified in b/index.html: 1 DONE 2026-11-14T19:20Z: capture the day-of-game injury updates and re-price against them
+  see   explicitly unverified in b/index.html: 2 Complete the minutes input, per club, so the availability layer can see a rotation inste
+  see   explicitly unverified in b/index.html: 3 Capture the 11/16, 11/17 and 11/18 injury-report editions as they are published The 11/1
+  see   explicitly unverified in b/index.html: 4 Settle the 2026-11-15 slate from official finals at game-day end and keep the per-game r
+  see   explicitly unverified in b/index.html: 5 Log real closing prices Until this exists, nothing here can be called profitable - only 
+  see   explicitly unverified in b/index.html: 6 Backfill results for 2026-10-20 to 2026-11-05 and re-cut the split Every game from 2026-
+  see   explicitly unverified in b/index.html: 7 Capture per-player minutes for all 30 teams, then re-run the gates. Eleven of twenty-fiv
+  see   explicitly unverified in b/index.html: 8 Re-read the injury index inside the scheduled refresh so availability fills in per game 
+------------------------------------------------------------------------------
+note: external links are checked for approved host only. Outbound access to nba.com is
+      blocked from this sandbox, so HTTP status cannot be verified here and is not claimed.
+note: rows inside client-side scripts are rendered from JSON and are not counted here.
+RESULT: PASS

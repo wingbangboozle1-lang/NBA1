@@ -309,7 +309,9 @@ def build(db):
                   esc(str(g.get("observed_detail") if g.get("observed_detail") not in (None, "", [], {})
                           else g.get("observed"))),
                   ("<b>CLOSED</b>" if not g["passed"] else "PASS"),
-                  esc(g["source"])] for g in gates_doc.get("gates", [])]
+                  ('<span class="na" title="computed from a repository file, not an official '
+                   'value: no official link applies">&mdash;</span> ' + esc(g["source"]))]
+                 for g in gates_doc.get("gates", [])]
         b.append(h2("2. Picks are not on this page &mdash; the bet surface is gated",
                     "Requirement R07 splits the site into a projection surface (this page, safe to "
                     "publish now) and a bet surface (gated), and never mixes them. Singles, two-leg "
