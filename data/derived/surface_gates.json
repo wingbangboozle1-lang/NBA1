@@ -1,7 +1,7 @@
 {
   "title": "Bet-surface gates (R07)",
   "generated_by": "scripts/build_surfaces.py",
-  "rule": "bet.html shows picks only when ALL four gates pass (fail-closed). Projection carries model output and is not gated.",
+  "rule": "bet.html and its index-linked alias bet-surface.html show picks only when ALL four gates pass (fail-closed); both are written from the same render in the same run. Projection carries model output and is not gated.",
   "gates": [
     {
       "id": "G1_validation",

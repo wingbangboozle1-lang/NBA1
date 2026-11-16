@@ -2,15 +2,15 @@
  "title": "Measured correlations from official finals",
  "generated_by": "scripts/measure_rho.py",
  "corpus": {
-  "n_games": 66,
-  "n_regulation": 63,
-  "n_overtime": 3,
+  "n_games": 74,
+  "n_regulation": 70,
+  "n_overtime": 4,
   "first_date": "2026-11-06",
   "last_date": "2026-11-15",
   "files": [
    {
     "file": "data/raw/games_completed.json",
-    "games_added": 60,
+    "games_added": 74,
     "official_url": "https://www.nba.com/games?date=2026-11-06"
    },
    {
@@ -25,7 +25,7 @@
    },
    {
     "file": "data/official/results_2026-11-15.json",
-    "games_added": 1,
+    "games_added": 8,
     "official_url": "https://www.nba.com/games?date=2026-11-15"
    }
   ],
@@ -35,9 +35,9 @@
   {
    "x": "home margin",
    "y": "game total",
-   "r": -0.0635,
-   "p_value": 0.6109,
-   "n": 66,
+   "r": -0.105,
+   "p_value": 0.3704,
+   "n": 74,
    "subset": "all finals",
    "status": "MEASURED from official final scores",
    "why": "the rho a same-game side-and-total parlay needs"
@@ -45,9 +45,9 @@
   {
    "x": "home margin",
    "y": "game total",
-   "r": -0.0621,
-   "p_value": 0.6272,
-   "n": 63,
+   "r": -0.1112,
+   "p_value": 0.3561,
+   "n": 70,
    "subset": "regulation finals only (no overtime)",
    "status": "MEASURED from official final scores",
    "why": "overtime raises the total without moving the margin the same way, so the regulation-only figure is the cleaner estimate"
@@ -66,10 +66,10 @@
   }
  ],
  "home_win_rate": {
-  "home_wins": 36,
-  "n_decided": 66,
-  "n_games": 66,
-  "rate": 0.5455,
+  "home_wins": 38,
+  "n_decided": 74,
+  "n_games": 74,
+  "rate": 0.5135,
   "status": "MEASURED from official final scores",
   "note": "this is the measured home-win rate the brief asks to pin home-court advantage to; it is published here and is NOT applied to any originated line yet (flag F-W02 / F74)"
  },

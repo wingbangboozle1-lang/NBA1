@@ -272,8 +272,10 @@ def build(db):
     b.append(h2("1. The board &mdash; %d games, %s to %s" % (len(games), dates[0], dates[-1]),
                 "Spread is home minus away; positive means the home team is favoured. "
                 "Possessions, points, spread and total are DERIVED by the printed formula. "
-                "No home-court advantage is applied (it is not sourced from an official page; "
-                "measured home-win rate published below, flag F74)."))
+                "This legacy line set applies <b>no</b> home-court advantage (F84 / window flag F-W02); the v2 "
+                "lines on the projection surface apply the measured 0.87 pts from the official "
+                "standings home-win rate 0.5204 (re-derived 2026-11-16, §55 W01), published "
+                "in section 3 below. See F84 and window flag F-W02."))
     b.append(table(
         ["Date &middot; tip ET", "Matchup", "Records", "Poss.", "Proj pts A / H",
          "Spread (home)", "Total", "P(home win)", "Fair ML (home)",
@@ -285,71 +287,89 @@ def build(db):
               "TOTAL = PTS_home + PTS_away; SPREAD = PTS_home &minus; PTS_away. "
               "Ratings: official advanced page (pace, OffRtg, DefRtg). Records: official "
               "standings page. Availability: official injury report, verbatim statuses &mdash; "
-              "no line is moved by them (see section 4). Rest, back-to-back and 3-in-4 are "
+              "no line is moved by them (see section 3, what was measured). Rest, back-to-back "
               "counted from the official schedule and official finals. "
               "'Estimator B' is engine/pipeline.py's own model line, shown only where the two "
               "windows overlap.")))
 
-    # ---- table 2: singles ---------------------------------------------
-    srows = []
-    for s in picks_doc.get("singles", []):
-        pk = s["pick"]
-        srows.append([
-            esc(s["date"]), '<b>%s</b>' % esc(s["matchup"]),
-            esc(pk.get("pick_line") or NA),
-            num(pk.get("pick_prob"), 3),
-            ("%+d" % american(pk["pick_prob"])) if pk.get("pick_prob") else NA,
-            esc(pk.get("gate")),
-            esc(s.get("status", "")),
-            srclink_url(s["sources"][0], "slate"),
-        ])
-    b.append(h2("2. Singles", "%d of %d games clear the |spread| &ge; 3.0 gate. Every pick is "
-                              "MODEL OUTPUT &mdash; UNVALIDATED: no strategy has passed the "
-                              "validation gates, so the stake is zero and the record is paper."
-                              % (picks_doc.get("n_model_picks", 0), len(games))))
-    b.append(table(["Date", "Matchup", "Pick", "Model p", "Fair price", "Gate", "Status", "Source"],
-                   srows))
+    # ---- R07: picks are NOT on this page --------------------------------
+    # The projection/bet split: this page carries model output only.  Singles,
+    # two-leg parlays and same-game lines are bet content and live on the bet
+    # surface, which fails closed while any of its four computed gates is
+    # closed (scripts/build_surfaces.py).  Nothing is deleted: the picks stay
+    # in data/derived/horizon_picks.json and on the legacy Lines & Picks page
+    # (flagged F26/F83), and the pricing methodology stays in the sections
+    # below.
+    gates_path = os.path.join(DATA, "derived", "surface_gates.json")
+    gates_doc = load(gates_path) if os.path.exists(gates_path) else None
+    if gates_doc:
+        g_open = gates_doc.get("open")
+        g_closed_by = gates_doc.get("closed_by") or []
+        grows = [[esc(g["id"]), esc(g["requirement"]),
+                  esc(str(g.get("observed_detail") if g.get("observed_detail") not in (None, "", [], {})
+                          else g.get("observed"))),
+                  ("<b>CLOSED</b>" if not g["passed"] else "PASS"),
+                  esc(g["source"])] for g in gates_doc.get("gates", [])]
+        b.append(h2("2. Picks are not on this page &mdash; the bet surface is gated",
+                    "Requirement R07 splits the site into a projection surface (this page, safe to "
+                    "publish now) and a bet surface (gated), and never mixes them. Singles, two-leg "
+                    "parlays and same-game lines moved to the bet surface: %s. While any gate is "
+                    "closed the bet surface shows the gates and no picks, so this page shows none "
+                    "either. The picks themselves are never deleted &mdash; they remain in "
+                    "<code>data/derived/horizon_picks.json</code> and on the legacy "
+                    "<a href=\"picks.html\">Lines &amp; Picks</a> page."
+                    % ("<b>currently closed by %s</b>" % ", ".join(g_closed_by)
+                       if not g_open else "<b>currently open</b>")))
+        b.append(table(["Gate", "Requirement", "Observed", "Status", "Source"], grows,
+                       note=("Fail-closed rule (scripts/build_surfaces.py): the bet surface renders "
+                             "picks only when ALL four gates pass. Gate data: "
+                             "data/derived/surface_gates.json, regenerated with the site. "
+                             "Parlay pricing with the measured rho and the naive product beside it "
+                             "is published as methodology and measurement in sections 3-4 below and "
+                             "on the parlay-pricing page; the priced PICKS are bet content and stay "
+                             "behind the gate.")))
+        b.append('<p class="note">Open the gated surface: <a href="bet-surface.html">bet-surface.html'
+                 '</a> (index link) or <a href="bet.html">bet.html</a> &mdash; both are written by '
+                 '<code>scripts/build_surfaces.py</code> from the same gate data, so they cannot '
+                 'disagree.</p>')
+    else:
+        b.append(h2("2. Picks are not on this page &mdash; the bet surface is gated",
+                    "surface_gates.json is missing, so the gate state cannot be read and no pick "
+                    "content is shown anywhere on this surface (fail-closed)."))
 
-    # ---- table 3: two-leg parlays, naive product vs measured rho -------
-    prows = []
-    for p_ in picks_doc.get("parlays", []):
-        p1, p2 = p_["p1"], p_["p2"]
-        naive = p1 * p2
-        lo, hi = max(0.0, p1 + p2 - 1.0), min(p1, p2)
-        prows.append([
-            esc(p_["date"]),
-            "%s<br>%s" % (esc(p_["leg1"]), esc(p_["leg2"])),
-            num(p1, 3), num(p2, 3),
-            "<b>%.4f</b>" % naive,
-            "[%.4f, %.4f]" % (lo, hi),
-            ("%+d" % american(naive)),
-            NA,
-            srclink_url(p_["sources"][0], "slate"),
-        ])
-    b.append(h2("3. Two-leg parlays &mdash; the naive product, printed, with the band around it", (
-        "The brief asks for every parlay to be priced with a measured rho and for the naive "
-        "product to be printed next to it. Both columns are here. The rho column is an em dash "
-        "because <b>no rho between two different games is measurable from official data</b>: the "
-        "games have no natural pairing, so any figure would be an artefact of how the pairs were "
-        "made. What is published instead of a fake number is the exact "
-        "Fr&eacute;chet&ndash;Hoeffding band the joint probability must lie in for <i>any</i> rho, "
-        "and the naive product is the price. Where a rho <i>is</i> measurable it is used &mdash; "
-        "see section 4.")))
-    b.append(table(["Date", "Legs", "p&#8321;", "p&#8322;", "Naive product p&#8321;&times;p&#8322;",
-                    "Fr&eacute;chet band (any rho)", "Fair price at the naive product",
-                    "Measured rho"],
-                   prows,
-                   note=("The band is [max(0, p&#8321;+p&#8322;&minus;1), min(p&#8321;,p&#8322;)]. "
-                         "A price inside it is not evidence of skill; the naive product is the "
-                         "independence price and is the number this site publishes.")))
 
-    # ---- table 4: same-game, priced with the measured rho --------------
+    # ---- table 5: measured statistics ---------------------------------
     if rho_doc:
+        mrows = []
+        for m in rho_doc["measured"]:
+            mrows.append([esc(m["x"]), esc(m["y"]), num(m["r"], 4), num(m["p_value"], 4),
+                          esc(m["n"]), esc(m["subset"]), esc(m["status"]), esc(m["why"]),
+                          srclink_url("https://www.nba.com/games", "official games index")])
+        hw = rho_doc["home_win_rate"]
+        mrows.append(["home win", "&mdash;", num(hw["rate"], 4), NA, esc(hw["n_games"]),
+                      "all official finals", esc(hw["status"]),
+                      "the measured home-win rate the brief wants home-court advantage pinned to; "
+                      "measured and published, and <b>applied</b> to the v2 horizon lines "
+                      "(0.87 pts, re-derived 2026-11-16 — §55 W01); the legacy line set this "
+                      "page's board still applies none to (F84 / window flag F-W02),",
+                      srclink_url("https://www.nba.com/games", "official games index")])
+        b.append(h2("3. What was measured, and on how many games",
+                    "Pearson r on official final scores. Nothing here is model-derived."))
+        b.append(table(["x", "y", "r", "p", "n", "Subset", "Status", "Why / note"], mrows,
+                       note=("Corpus: " + "; ".join(
+                           "%s (%d games)" % (esc(f["file"]), f["games_added"])
+                           for f in rho_doc["corpus"]["files"]) +
+                           ". Only games whose official label is Final are used &mdash; a game "
+                           "still live at capture time is excluded, never filled in.")))
+
+        # ---- table 4: same-game side-and-total, priced with the measured rho
+        # (restored §55 W04: this table prices a GENERIC pair of legs for every
+        # game — home win × over the originated total — so it is measurement,
+        # not a pick, and belongs on the projection side of the split.)
         r_mt = rho_doc["measured"][0]["r"]
-        r_reg = rho_doc["measured"][1]["r"]
+        r_reg = rho_doc["measured"][1]["r"] if len(rho_doc["measured"]) > 1 else None
         n_meas = rho_doc["measured"][0]["n"]
         p_meas = rho_doc["measured"][0]["p_value"]
-        by_id = {g["matchup"]: g for g in games}
         srows2 = []
         for g in games:
             z1 = -g["line_spread_home"] / g["margin_sd"]   # P(home margin > 0)
@@ -376,7 +396,10 @@ def build(db):
             "observable and is measured from <b>%d official finals</b> (%s to %s): "
             "<b>&rho;(home margin, game total) = %s</b> (p = %s), and %s on regulation games only. "
             "Both are statistically indistinguishable from zero, which is itself the finding: "
-            "the naive product is very nearly the right price for this pair. "
+            "the naive product is very nearly the right price for this pair. The measured rho "
+            "price and the naive product are printed side by side on every row (R14); a second "
+            "register (rho_2026_27.json) measures the same pair at -0.0199 over a longer "
+            "190-game window &mdash; the register conflict is flagged F128. "
             "P(total &gt; total) is exactly 0.500 because the originated total is this model's "
             "own median &mdash; stated rather than dressed up as a model edge."
             % (n_meas, esc(rho_doc["corpus"]["first_date"]), esc(rho_doc["corpus"]["last_date"]),
@@ -387,36 +410,16 @@ def build(db):
             srows2,
             note=("Joint probability = P(Z&#8321; &gt; z&#8321;, Z&#8322; &gt; 0) under a Gaussian "
                   "copula with the measured &rho;, integrated numerically; at &rho; = 0 it reduces "
-                  "exactly to the naive product, so the two columns are directly comparable.")))
-
-    # ---- table 5: measured statistics ---------------------------------
-    if rho_doc:
-        mrows = []
-        for m in rho_doc["measured"]:
-            mrows.append([esc(m["x"]), esc(m["y"]), num(m["r"], 4), num(m["p_value"], 4),
-                          esc(m["n"]), esc(m["subset"]), esc(m["status"]), esc(m["why"]),
-                          srclink_url("https://www.nba.com/games", "official games index")])
-        hw = rho_doc["home_win_rate"]
-        mrows.append(["home win", "&mdash;", num(hw["rate"], 4), NA, esc(hw["n_games"]),
-                      "all official finals", esc(hw["status"]),
-                      "the measured home-win rate the brief wants home-court advantage pinned to; "
-                      "measured, published, and <b>not yet applied</b> to any line (F84)",
-                      srclink_url("https://www.nba.com/games", "official games index")])
-        b.append(h2("5. What was measured, and on how many games",
-                    "Pearson r on official final scores. Nothing here is model-derived."))
-        b.append(table(["x", "y", "r", "p", "n", "Subset", "Status", "Why / note"], mrows,
-                       note=("Corpus: " + "; ".join(
-                           "%s (%d games)" % (esc(f["file"]), f["games_added"])
-                           for f in rho_doc["corpus"]["files"]) +
-                           ". Only games whose official label is Final are used &mdash; a game "
-                           "still live at capture time is excluded, never filled in.")))
+                  "exactly to the naive product, so the two columns are directly comparable. "
+                  "Corpus: measured_rho.json refreshed this session to its current %d-final "
+                  "window." % n_meas)))
 
         def _na_reason(why):
             return ('<span class="na" title="%s">&mdash;</span>'
                     % esc("not published - " + why))
         nrows = [[esc(q["quantity"]), esc(q["why_not"]), esc(q["consequence"]),
                   _na_reason(q["why_not"])] for q in rho_doc["not_measurable"]]
-        b.append(h2("6. What could not be measured",
+        b.append(h2("5. What could not be measured",
                     "Published as a gap rather than filled with a plausible number."))
         b.append(table(["Quantity", "Why it is not measurable from official data",
                         "What is published instead"], nrows))
@@ -424,7 +427,7 @@ def build(db):
     # ---- flags ---------------------------------------------------------
     frows = [[esc(f["id"]), esc(f["severity"]), '<b>%s</b>' % esc(f["item"]), esc(f["detail"]),
               srclink_url(f["source"], "link")] for f in meta["flags"]]
-    b.append(h2("7. Flags carried by this window",
+    b.append(h2("6. Flags carried by this window",
                 "Every limitation that applies to the numbers above, with the official link "
                 "that would resolve it."))
     b.append(table(["ID", "Severity", "Item", "Detail", "Source"], frows))
@@ -457,8 +460,9 @@ def build(db):
     built["roll.html"] = page(
         "Rolling slate &mdash; %s to %s" % (dates[0], dates[-1]),
         "The originated lines for the next three days, the disagreement between the two "
-        "estimators, rotation availability from the official injury report, and parlays "
-        "priced with the measured rho beside the naive product.", "\n".join(b))
+        "estimators, rotation availability from the official injury report, and the gate "
+        "state of the bet surface — projection only (R07): picks live behind the gate.",
+        "\n".join(b))
 
     # ================================================== REQUIREMENTS PAGE
     return built
