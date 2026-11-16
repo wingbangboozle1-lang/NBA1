@@ -1019,6 +1019,15 @@
 <td>Capture per-player minutes for all thirty teams (one request per team, or the full leaders table with a working page parameter) so redistribution is computable for every game in the window.</td>
 <td class="src"><a href="https://www.nba.com/stats/players/traditional" target="_blank" rel="noopener">link</a></td>
 </tr>
+<tr>
+<td>F107</td>
+<td>High</td>
+<td><b>Pages has two deploy paths that race, so the live site serves an old commit</b></td>
+<td>Pages is configured with build_type 'legacy' (it builds the site from the main branch) while .github/workflows/pages.yml also deploys an Actions artifact to the same environment. Measured on 2026-11-16 between 01:24Z and 02:58Z: nine consecutive 'pages build and deployment' runs ended cancelled, each superseded by the next push to main, and the last successful build is 2026-11-15T23:44:35Z (afc79f2). The API reports status 'errored' for the site. This is not a backlog that clears: it is two builders writing one site, and the branch builder loses on nearly every push. Freeing the Actions queue (SG23, PR #115) did not change it, which is the evidence that the cause is structural. The session token cannot change the build type - PUT /repos/{owner}/{repo}/pages with build_type=workflow returns HTTP 403 - so this needs a repository admin.</td>
+<td>the live site at https://wingbangboozle1-lang.github.io/NBA1/ - it serves 2026-11-15T23:44Z content, not the current main</td>
+<td>Switch Pages to the Actions build type (Settings &gt; Pages &gt; Source: GitHub Actions), or delete pages.yml, so exactly one path deploys. Recorded as SG37.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/actions/workflows/pages.yml" target="_blank" rel="noopener">link</a></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the

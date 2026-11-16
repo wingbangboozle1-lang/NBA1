@@ -909,6 +909,34 @@
     }
    ],
    "recommended": "A"
+  },
+  {
+   "id": "SG37",
+   "title": "Give GitHub Pages one deploy path instead of two that race each other",
+   "category": "deployment",
+   "problem": "Pages is configured with build_type 'legacy' - it builds the site from the main branch itself - while .github/workflows/pages.yml also deploys an Actions artifact to the same environment. Two builders are writing one site. Measured at 2026-11-16T02:5xZ: 9 consecutive 'pages build and deployment' runs cancelled, one every few minutes, each cancelled by the next push to main, with the last successful build at 2026-11-15T23:44:35Z. Freeing the queue (SG23, PR #115) did not fix it because the starvation is structural, not a backlog.",
+   "options": [
+    {
+     "option": "A: switch Pages to the Actions build type, so pages.yml is the only deploy path",
+     "effort": "Low - one API call or one setting in Settings > Pages",
+     "risk": "Low - pages.yml already produces the artifact and its deploy job has a concurrency group that serialises production runs (cancel-in-progress false on main)",
+     "unlocks": "F97 closes; the site stops depending on how many sessions happen to be pushing"
+    },
+    {
+     "option": "B: delete pages.yml and let the legacy branch builder be the only path",
+     "effort": "Low",
+     "risk": "Medium - loses the validate gate that runs before deploy, so a broken page could publish",
+     "unlocks": "the same single path, but without the pre-deploy check"
+    },
+    {
+     "option": "C: leave both paths",
+     "effort": "None",
+     "risk": "High - the site keeps serving whatever build happened to finish, which during parallel sessions is an old commit",
+     "unlocks": "nothing"
+    }
+   ],
+   "recommended": "A",
+   "note": "This session's token returned HTTP 403 on PUT /repos/{owner}/{repo}/pages (build_type=workflow), so it could not be applied here; it needs a repository admin."
   }
  ]
 }
