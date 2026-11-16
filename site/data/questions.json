@@ -352,7 +352,7 @@
   {
    "id": "Q26",
    "question": "How much does a completed slate move the model inputs?",
-   "what_is_missing": "A clean re-cut after 2026-11-15. Three games on that slate were still in progress at 02:16Z on 11/16 (HOU@WAS in the fourth quarter, ATL@MIL at half, OKC@SAC in the first), so the efficiency tables cannot yet be re-read consistently (F100).",
+   "what_is_missing": "A clean re-cut after 2026-11-15. Three games on that slate were still in progress at 02:16Z on 11/16 (HOU@WAS in the fourth quarter, ATL@MIL at half, OKC@SAC in the first), so the efficiency tables cannot yet be re-read consistently (F103).",
    "how_to_answer": "Once every 11/15 game is final, re-read the three official team-stat pages, re-cut, and publish the drift between the new cut and the inputs behind the currently published lines.",
    "blocks": "Confidence that the published lines rest on the freshest consistent inputs",
    "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season"
@@ -368,7 +368,7 @@
   {
    "id": "Q28",
    "question": "How much does rotation availability move a line once the league publishes it?",
-   "what_is_missing": "Official injury editions for 11/17 and 11/18, plus five 11/16 team entries that still print NOT YET SUBMITTED (WAS, BOS, HOU, PHI, PHX). Fifteen of the twenty-five picks carry a blank availability cell for at least one team (F102).",
+   "what_is_missing": "Official injury editions for 11/17 and 11/18, plus five 11/16 team entries that still print NOT YET SUBMITTED (WAS, BOS, HOU, PHI, PHX). Fifteen of the twenty-five picks carry a blank availability cell for at least one team (F105).",
    "how_to_answer": "Re-read the injury index at each refresh, re-cut the availability column only, and compare the line before and after for every game where availability changed.",
    "blocks": "Whether availability belongs in the line at all, and at what weight",
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/"
@@ -376,7 +376,7 @@
   {
    "id": "Q29",
    "question": "Are the two POR@MIN meetings on consecutive nights independent observations?",
-   "what_is_missing": "Nothing in the data - the official schedule genuinely lists Portland at Minnesota on both 11/16 (game 0022600250) and 11/17 (game 0022600254), confirmed on the official game page (F99). What is missing is a convention for treating them.",
+   "what_is_missing": "Nothing in the data - the official schedule genuinely lists Portland at Minnesota on both 11/16 (game 0022600250) and 11/17 (game 0022600254), confirmed on the official game page (F102). What is missing is a convention for treating them.",
    "how_to_answer": "Decide and register whether two meetings of the same teams within 48 hours count as one observation or two in the backtest and in the correlation measurement. Today they are counted as two.",
    "blocks": "Backtest sample size, the rho estimates, and any parlay that contains both games",
    "source_url": "https://www.nba.com/game/por-vs-min-0022600254"
@@ -384,7 +384,7 @@
   {
    "id": "Q30",
    "question": "Which official endpoint should tip time come from, and what happens when two captures disagree?",
-   "what_is_missing": "A designated source and a conflict rule. Two official captures disagree on GSW@NOP (09:00 PM ET against 8:00 PM ET); the newest one silently wins today (F98).",
+   "what_is_missing": "A designated source and a conflict rule. Two official captures disagree on GSW@NOP (09:00 PM ET against 8:00 PM ET); the newest one silently wins today (F101).",
    "how_to_answer": "Name the per-date games page as the source, normalise the format, and have the refresh record a conflict row whenever two captures of one game id differ instead of overwriting (SG33).",
    "blocks": "Any downstream use of tip time - rest windows, pre-tip publication, and the ledger's publish-before-tip rule",
    "source_url": "https://www.nba.com/games?date=2026-11-16"

@@ -35,25 +35,25 @@ supersedes them, it says so.
    11/16 teams print NOT YET SUBMITTED, so every pick is provisional.
 2. **Eleven of the twenty-five picks are held back by a data gap, not by the model.** Seven
    fail the minutes-redistribution gate because per-player minutes were captured for the
-   league-wide top 50 only (F103). The gate is currently measuring whether the capture
+   league-wide top 50 only (F106). The gate is currently measuring whether the capture
    exists.
 3. **A re-cut taken during a live slate is contaminated.** The official efficiency table
    already showed the Lakers at GP 14 while three other 11/15 games were still in progress,
    so the cut uses the last *clean* official snapshot (2026-11-15T23:45Z) and publishes that
-   as the reason (F100).
+   as the reason (F103).
 
 **What I verified line by line this session** — every row below was read off the named
 official page at 2026-11-16T02:12–02:17Z, not inferred:
 
 - the 25-game schedule for 11/16, 11/17 and 11/18, team by team, with tip times — and one
-  genuine conflict between two official captures (GSW@NOP, 09:00 vs 8:00 PM ET — **F98**);
+  genuine conflict between two official captures (GSW@NOP, 09:00 vs 8:00 PM ET — **F101**);
 - all 30 standings rows, summed to the measured home-win rate, with two internal
   cross-checks that hold;
 - the nine 11/15 results, of which six are final;
 - the newest injury PDF in full (160 rows across two game dates) and its diff against the
   previous edition;
 - that POR@MIN appears on 11/16 **and** 11/17 under two different game ids — confirmed on the
-  official game page, not a parsing artefact (**F99**).
+  official game page, not a parsing artefact (**F102**).
 
 ---
 

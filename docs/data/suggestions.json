@@ -836,7 +836,7 @@
      "option": "A: designate the per-date games page as the tip-time source, normalise the format, and record a conflict row whenever two captures of one game id differ",
      "effort": "Low",
      "risk": "Low",
-     "unlocks": "F98 closes; tip-time provenance becomes auditable per game"
+     "unlocks": "F101 closes; tip-time provenance becomes auditable per game"
     },
     {
      "option": "B: cross-check tip time against the injury PDF's Game Time column as well",
@@ -878,7 +878,7 @@
      "option": "A: add a freshness gate to the refresh job - promote a team-stat capture only when every game on the most recent slate is final",
      "effort": "Low",
      "risk": "Low - the previous capture simply stays in force",
-     "unlocks": "F100 closes; every published line is cut from a consistent game set"
+     "unlocks": "F103 closes; every published line is cut from a consistent game set"
     },
     {
      "option": "B: cut twice, once clean and once current, and publish the drift between them",
@@ -899,7 +899,7 @@
      "option": "A: have the scheduled refresh read the injury index, take the newest edition, diff it against the stored one, and re-cut the availability column only (leaving frozen pre-registration untouched)",
      "effort": "Medium",
      "risk": "Low - additive to the existing refresh gate",
-     "unlocks": "the 11/17 and 11/18 columns fill in as the league publishes; F102 closes"
+     "unlocks": "the 11/17 and 11/18 columns fill in as the league publishes; F105 closes"
     },
     {
      "option": "B: keep manual per-session capture",

@@ -71,12 +71,12 @@ session's early window. Consequences, applied throughout:
 | # | Task | Status | File scope (exclusive) |
 | --- | --- | --- | --- |
 | E01 | Board claim (banner + §0b row + this §48) committed and pushed before any other edit | done (this commit) | `COORDINATION.md` |
-| E02 | Line-by-line repo review: every generator, every data file, every provenance claim; irregularities flagged, never silently fixed | in progress | `REPO_REVIEW.md`, `verify/2026-11-16-dfef26dc/REPO_REVIEW.md` |
-| E03 | Fresh official capture for the 11/16–11/18 horizon: schedule, standings, three team-stat pages, injury report + PDF, each with exact URL and retrieval stamp | in progress | `verify/2026-11-16-dfef26dc/**`, `data/official/*_dfef26dc.json` |
-| E04 | Rebuild every generated page from that capture; roll the horizon; keep `projection` and `bet` surfaces strictly separate | in progress | `scripts/**`, `site/**`, `index.html` |
-| E05 | Strategy/decisions content: leaderboard, correlations + measured rho, luck z-scores, parlay pricing with the naive product beside it, market-anchored prior, possession-based totals, rotation-availability column, pre-registration freeze, suggestions + decisions pages | in progress | `data/content/**`, `docs/data/**`, `command-center/**`, `EXECUTIVE_SUMMARY.md` |
-| E06 | Row-level verification: every table row carries an official source link; unverifiable values left blank and flagged; gate suite green | in progress | `scripts/verify_*.py`, `site/pages/flagged.html` |
-| E07 | PR → `main`, merge without waiting, confirm Pages deploys, record PR link + merge SHA + deploy status here | unclaimed | `COORDINATION.md` §48.6 |
+| E02 | Line-by-line repo review: every generator, every data file, every provenance claim; irregularities flagged, never silently fixed | **done** | `REPO_REVIEW.md`, `verify/2026-11-16-dfef26dc/REPO_REVIEW.md` |
+| E03 | Fresh official capture for the 11/16–11/18 horizon: schedule, standings, three team-stat pages, injury report + PDF, each with exact URL and retrieval stamp | **done** | `verify/2026-11-16-dfef26dc/**`, `data/official/*_dfef26dc.json` |
+| E04 | Rebuild every generated page from that capture; roll the horizon; keep `projection` and `bet` surfaces strictly separate | **done** | `scripts/**`, `site/**`, `index.html` |
+| E05 | Strategy/decisions content: leaderboard, correlations + measured rho, luck z-scores, parlay pricing with the naive product beside it, market-anchored prior, possession-based totals, rotation-availability column, pre-registration freeze, suggestions + decisions pages | **done** | `data/content/**`, `docs/data/**`, `command-center/**`, `EXECUTIVE_SUMMARY.md` |
+| E06 | Row-level verification: every table row carries an official source link; unverifiable values left blank and flagged; gate suite green | **done** | `scripts/verify_*.py`, `site/pages/flagged.html` |
+| E07 | PR → `main`, merge without waiting, confirm Pages deploys, record PR link + merge SHA + deploy status here | **in progress** | `COORDINATION.md` §48.6 |
 
 ### 48.5 Cross-session requests (logged, not executed)
 
@@ -224,11 +224,11 @@ score (12 of 12)**, and each team's player minutes are compared with the gameboo
 total. 8 of 12 match exactly; 4 differ by 1–3 seconds. That difference belongs to the official
 document — its printed total against the sum of its own per-player `MM:SS` cells — so it is recorded
 per team in the `minutes_check` block and **no player's minutes are adjusted to make a total balance**
-(F100).
+(F103).
 
 Coverage is stated rather than implied: 10 of the 149 players on the 06:15 PM ET injury report appear
 in these six gamebooks. The other 139 play for teams whose 11/15 game had not finished or whose next
-game is 11/16 — a player from an unplayed game has no gamebook to read (F99). The names are listed in
+game is 11/16 — a player from an unplayed game has no gamebook to read (F102). The names are listed in
 the output file for the next capture pass rather than dropped.
 
 **Q06 — market anchor (done, and the answer is "no weight yet").** `scripts/market_anchor.py` fits the
@@ -249,13 +249,13 @@ Two consequences are published rather than buried: (a) the two proper rules pick
 (w differs by >0.01), so an earlier claim on this board that they always rank linear blends identically
 is withdrawn inside `market_anchor.json`; (b) with a CI spanning the whole admissible range, any
 non-zero weight would be a choice rather than a measurement, so **the applied weight is 0 and the site
-says 100% model** (F98). The market half of R16 stays BLOCKED: `--market` exits 5 without
+says 100% model** (F101). The market half of R16 stays BLOCKED: `--market` exits 5 without
 `data/external/closing_lines.json`, and the required schema is written into the output file.
 
 **Q07 — register, flags, nav (done).** R03/R16/R19/R21 updated in `data/content/requirements.json`
 with the evidence above and the gap stated in each; three flags appended —
-**F98** (anchor not significant, weight published as 0), **F99** (10-of-149 player-log coverage),
-**F100** (gamebook minutes deltas). Nav: one new `RESULTS & SETTLEMENT` block with two rows
+**F101** (anchor not significant, weight published as 0), **F102** (10-of-149 player-log coverage),
+**F103** (gamebook minutes deltas). Nav: one new `RESULTS & SETTLEMENT` block with two rows
 (`results.html`, `player-logs.html`). `verify_all.py` → **VERIFY OK**, 27 pages, 1,934 table rows,
 1,871 sourced, 63 explicit no-source marks, 0 unmarked.
 
@@ -318,7 +318,7 @@ queue shown above. §46.4 records the post-merge check to run.
 3. Finish 11/15: once HOU@WAS, ATL@MIL and OKC@SAC are verified Final, the scheduled job settles the
    slate unaided. Check the stamp appears on `results.html` and that `settle_slate.py` no longer exits 3.
 4. Capture the three unfinished gamebooks, then re-run `scripts/capture_player_logs.py` — it needs no
-   change, only the files — and the 10-of-149 coverage in F99 rises on its own.
+   change, only the files — and the 10-of-149 coverage in F102 rises on its own.
 
 ### 46.5 Deviations, stated
 
@@ -334,3 +334,33 @@ queue shown above. §46.4 records the post-merge check to run.
 - Q06's honest answer is "no weight yet". It would have been easy to publish `w = 0.6449` and describe
   anchoring as working; the bootstrap does not support that, so the site says the opposite of the
   flattering reading.
+
+### 48.6 Delivery record
+
+**Merge collision with the `arena/754e9e54-nba1` full-cycle build (logged, nothing discarded).**
+That session's §44 block and this session's §48 block were both appended to `COORDINATION.md`
+within the same few minutes and both touched `data/content/flagged.json`. Resolution:
+
+- `COORDINATION.md` — both sides kept in full (their §44 banner and task table, this session's
+  §48 banner and task table).
+- `data/content/flagged.json` — **all 102 items kept**. Both sessions had independently minted
+  `F98`, `F99` and `F100`. The side that reached `main` first keeps its numbers; this session's
+  six flags are renumbered **F101–F106** and every reference in `EXECUTIVE_SUMMARY.md`,
+  `REPO_REVIEW.md`, `data/content/executive.json`, `questions.json`, `suggestions.json` and this
+  board was rewritten to match in one pass.
+- Generated artefacts (`index.html`, `site/pages/*.html`, `site/data/*.json`, `docs/data/*.json`)
+  were regenerated from the merged data rather than hand-edited, which is the board's own rule.
+- Overlap of claimed scope: `arena/754e9e54-nba1` says it touches `scripts/build_dashboard.py`
+  in two places and `scripts/verify_dashboard.py` in one. This session touched
+  `scripts/build_dashboard.py` in two places (the landing tiles) and `engine/model_v2.py` and
+  `scripts/build_horizon_v2.py` throughout. The two edits to `build_dashboard.py` are in
+  different functions and merged cleanly; nothing from either side was dropped.
+
+**Gate suite on the merged head — all green:**
+`check_site` PASS · `verify_integration` PASSED (0 errors, warnings published) ·
+`check_links` PASS · `check_rendered` PASS · `verify_all` VERIFY OK · `verify_ledger` chain OK.
+
+**Build numbers produced by this session's re-cut:** 25 games in the 11/16–11/18 window; 25
+priced singles; 14 clear every model gate; 0 publishable outright (every pick is provisional on
+rotation availability); HCA pinned to 1.23 points from the measured 0.5285 home-win rate;
+measured rho 0.0823 / -0.0115 / 0.732; OOS log loss 0.48003 on 161 games.

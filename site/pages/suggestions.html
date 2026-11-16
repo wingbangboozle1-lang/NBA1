@@ -427,7 +427,7 @@
 <td>data quality</td>
 <td><b>Make one official endpoint the source of truth for tip times and fail the refresh on a disagreement</b></td>
 <td>Two official captures disagreed on the tip time of GSW@NOP (09:00 PM ET vs 8:00 PM ET). Nothing in the pipeline detects that class of conflict today; the newest capture simply overwrites.</td>
-<td>- A: designate the per-date games page as the tip-time source, normalise the format, and record a conflict row whenever two captures of one game id differ <span class='fine'>(effort: Low; risk: Low; unlocks: F98 closes; tip-time provenance becomes auditable per game)</span><br>- B: cross-check tip time against the injury PDF's Game Time column as well <span class='fine'>(effort: Medium; risk: Low; unlocks: a third official corroboration, but the PDF only covers games with a submitted report)</span></td>
+<td>- A: designate the per-date games page as the tip-time source, normalise the format, and record a conflict row whenever two captures of one game id differ <span class='fine'>(effort: Low; risk: Low; unlocks: F101 closes; tip-time provenance becomes auditable per game)</span><br>- B: cross-check tip time against the injury PDF's Game Time column as well <span class='fine'>(effort: Medium; risk: Low; unlocks: a third official corroboration, but the PDF only covers games with a submitted report)</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>
@@ -447,7 +447,7 @@
 <td>process control</td>
 <td><b>Refuse to promote a team-stat capture while any game on the previous slate is still in progress</b></td>
 <td>Cutting model inputs from an efficiency table during a live slate produces a table in which some teams include that slate's games and some do not. This session avoided it by using the last clean snapshot, but the pipeline would not have stopped anyone.</td>
-<td>- A: add a freshness gate to the refresh job - promote a team-stat capture only when every game on the most recent slate is final <span class='fine'>(effort: Low; risk: Low - the previous capture simply stays in force; unlocks: F100 closes; every published line is cut from a consistent game set)</span><br>- B: cut twice, once clean and once current, and publish the drift between them <span class='fine'>(effort: Medium; risk: Low; unlocks: the same guarantee plus a visible measure of how much a slate moves the inputs)</span></td>
+<td>- A: add a freshness gate to the refresh job - promote a team-stat capture only when every game on the most recent slate is final <span class='fine'>(effort: Low; risk: Low - the previous capture simply stays in force; unlocks: F103 closes; every published line is cut from a consistent game set)</span><br>- B: cut twice, once clean and once current, and publish the drift between them <span class='fine'>(effort: Medium; risk: Low; unlocks: the same guarantee plus a visible measure of how much a slate moves the inputs)</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>
@@ -457,7 +457,7 @@
 <td>data completeness</td>
 <td><b>Re-read the injury index inside the refresh job so availability fills in game date by game date</b></td>
 <td>Availability is the one column that changes fastest and it is currently captured only when a session happens to look. No official edition covers 11/17 or 11/18 yet, so fifteen of twenty-five picks carry a blank cell.</td>
-<td>- A: have the scheduled refresh read the injury index, take the newest edition, diff it against the stored one, and re-cut the availability column only (leaving frozen pre-registration untouched) <span class='fine'>(effort: Medium; risk: Low - additive to the existing refresh gate; unlocks: the 11/17 and 11/18 columns fill in as the league publishes; F102 closes)</span><br>- B: keep manual per-session capture <span class='fine'>(effort: None; risk: High - the column is as stale as the last session that looked; unlocks: nothing)</span></td>
+<td>- A: have the scheduled refresh read the injury index, take the newest edition, diff it against the stored one, and re-cut the availability column only (leaving frozen pre-registration untouched) <span class='fine'>(effort: Medium; risk: Low - additive to the existing refresh gate; unlocks: the 11/17 and 11/18 columns fill in as the league publishes; F105 closes)</span><br>- B: keep manual per-session capture <span class='fine'>(effort: None; risk: High - the column is as stale as the last session that looked; unlocks: nothing)</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>

@@ -93,7 +93,7 @@
   "The official injury edition 11/15 09:00 PM with its revision and retrieval stamps, and its diff against the 06:15 PM edition: two real status changes (Ajay Mitchell Questionable to Available, Precious Achiuwa Questionable to Out).",
   "Rest, back-to-back, 3-in-4 and travel distance for every team in the window, computed from the official schedule and a sourced arena-coordinate table.",
   "A luck z-score per team, with the rule that a pick leaning on a team outside the +/-1.5 band is not published (it currently removes GSW twice and SAS once).",
-  "Six new flags (F98-F103), five new suggestions (SG32-SG36) and five new open questions (Q26-Q30), all published on the site with their official source links."
+  "Six new flags (F101-F106), five new suggestions (SG32-SG36) and five new open questions (Q26-Q30), all published on the site with their official source links."
  ],
  "recommended_next_actions": [
   {
@@ -129,13 +129,13 @@
   {
    "rank": 7,
    "action": "Capture per-player minutes for all 30 teams, then re-run the gates.",
-   "why": "Eleven of twenty-five picks are held back by the capture rather than by the model (F103). Until the capture is complete the redistribution gate measures whether data exists, not whether the line is sound."
+   "why": "Eleven of twenty-five picks are held back by the capture rather than by the model (F106). Until the capture is complete the redistribution gate measures whether data exists, not whether the line is sound."
   },
   {
    "rank": 8,
    "action": "Re-read the injury index inside the scheduled refresh so availability fills in per game date.",
-   "why": "No official edition covers 11/17 or 11/18 yet and five 11/16 teams print NOT YET SUBMITTED (F102). Availability is the fastest-moving input and is currently only as fresh as the last session that looked."
+   "why": "No official edition covers 11/17 or 11/18 yet and five 11/16 teams print NOT YET SUBMITTED (F105). Availability is the fastest-moving input and is currently only as fresh as the last session that looked."
   }
  ],
- "bottom_line": "The window is rolled to 16-18 Nov, the model is re-cut from a fresh official capture, and home-court advantage is now a measurement rather than a fitted parameter. Nothing on this site is a recommendation: no strategy has passed the validation gates, all 25 picks are provisional, and zero are staked. The three things that would change that, in order, are minutes capture for all thirty teams (SG32), an official closing line to anchor and score against (Q1), and a clean post-slate re-read once every 11/15 game is final (Q26). Open items for a reviewer: the GSW@NOP tip-time conflict (F98), the POR@MIN back-to-back convention (Q29), and the live-slate contamination rule (F100)."
+ "bottom_line": "The window is rolled to 16-18 Nov, the model is re-cut from a fresh official capture, and home-court advantage is now a measurement rather than a fitted parameter. Nothing on this site is a recommendation: no strategy has passed the validation gates, all 25 picks are provisional, and zero are staked. The three things that would change that, in order, are minutes capture for all thirty teams (SG32), an official closing line to anchor and score against (Q1), and a clean post-slate re-read once every 11/15 game is final (Q26). Open items for a reviewer: the GSW@NOP tip-time conflict (F101), the POR@MIN back-to-back convention (Q29), and the live-slate contamination rule (F103)."
 }

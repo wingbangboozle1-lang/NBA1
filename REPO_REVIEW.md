@@ -272,7 +272,7 @@ edition covers 11/17 or 11/18 at all, and five 11/16 entries still print `NOT YE
 Fifteen of the twenty-five picks were therefore carrying a confident 100% that no official
 source supported. The function now takes the game date, the set of game dates the official
 edition actually covers, and the set of teams that printed `NOT YET SUBMITTED`; it returns a
-blank percentage and a stated reason in each case. Published as **F102** and **F103**.
+blank percentage and a stated reason in each case. Published as **F105** and **F106**.
 
 ### 7.3 Defect found and fixed — a later capture could not override an earlier one
 
@@ -306,21 +306,21 @@ same three days: 2026-11-16 to 2026-11-18.
 
 | Id | Irregularity | Source |
 | --- | --- | --- |
-| F98 | Two official captures disagree on the tip time of GSW@NOP (09:00 PM vs 8:00 PM ET). The fresh read is used; both are published. | [games page](https://www.nba.com/games?date=2026-11-16) |
-| F99 | POR@MIN is scheduled on 11/16 (0022600250) and 11/17 (0022600254) — two meetings in two nights. Confirmed on the official game page. | [game page](https://www.nba.com/game/por-vs-min-0022600254) |
-| F100 | A team-stat re-cut taken during a live slate mixes completed and in-progress games (the Lakers already showed GP 14 while three other 11/15 games were in progress). The cut uses the last clean snapshot instead. | [stats page](https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season) |
-| F101 | The 11/15 slate cannot be settled in full at this build (3 games in progress), and quarter scores were not read, so those columns are null. | [games page](https://www.nba.com/games?date=2026-11-15) |
-| F102 | No official injury edition covers 11/17 or 11/18; five 11/16 teams print NOT YET SUBMITTED. | [injury index](https://official.nba.com/nba-injury-report-2026-27-season/) |
-| F103 | Eleven of twenty-five picks are held back by per-player minutes captured for the top 50 only. | [players page](https://www.nba.com/stats/players/traditional) |
+| F101 | Two official captures disagree on the tip time of GSW@NOP (09:00 PM vs 8:00 PM ET). The fresh read is used; both are published. | [games page](https://www.nba.com/games?date=2026-11-16) |
+| F102 | POR@MIN is scheduled on 11/16 (0022600250) and 11/17 (0022600254) — two meetings in two nights. Confirmed on the official game page. | [game page](https://www.nba.com/game/por-vs-min-0022600254) |
+| F103 | A team-stat re-cut taken during a live slate mixes completed and in-progress games (the Lakers already showed GP 14 while three other 11/15 games were in progress). The cut uses the last clean snapshot instead. | [stats page](https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season) |
+| F104 | The 11/15 slate cannot be settled in full at this build (3 games in progress), and quarter scores were not read, so those columns are null. | [games page](https://www.nba.com/games?date=2026-11-15) |
+| F105 | No official injury edition covers 11/17 or 11/18; five 11/16 teams print NOT YET SUBMITTED. | [injury index](https://official.nba.com/nba-injury-report-2026-27-season/) |
+| F106 | Eleven of twenty-five picks are held back by per-player minutes captured for the top 50 only. | [players page](https://www.nba.com/stats/players/traditional) |
 
 ### 7.7 What I could not verify
 
 - **Quarter scores** for any game. They were not read from the official box score, so the
-  results feed's quarter columns are null. Left blank, not reconstructed (F101).
+  results feed's quarter columns are null. Left blank, not reconstructed (F104).
 - **A closing market line** for any game. No NBA-operated source publishes one, so the
   market-anchored prior carries zero weight. This is pre-existing (F3) and unchanged.
 - **Per-player minutes** beyond the league-wide top 50. The URL's page parameter was not
-  honoured by the rendered slice (F103).
+  honoured by the rendered slice (F106).
 - **Whether the 11/15 in-progress games finished as the live scores suggest.** They were
   in progress at capture; the finals were not read afterwards within this session.
 

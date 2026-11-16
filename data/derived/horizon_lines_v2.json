@@ -2,7 +2,7 @@
  "_meta": {
   "title": "Originated horizon lines v2 - 2026-11-15 through 2026-11-19",
   "generated_by": "scripts/build_horizon_v2.py",
-  "generated_utc": "2026-11-16T02:31:15Z",
+  "generated_utc": "2026-11-16T02:40:12Z",
   "method": "two independent estimators built on the official team tables, blended underneath; their disagreement is the headline confidence signal; the home-court advantage is pinned to the measured official home win rate",
   "pick_window": "2026-11-16 .. 2026-11-18 (up to 3 days ahead)",
   "line_window": "2026-11-16 .. 2026-11-18",
@@ -1716,7 +1716,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Scotiabank%20Arena&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "TOR",
     "minutes_removed": 0.0,
@@ -2243,7 +2243,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Crypto.com%20Arena&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "LAL",
     "minutes_removed": 0.0,
@@ -2380,7 +2380,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Intuit%20Dome&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "LAC",
     "minutes_removed": 0.0,
