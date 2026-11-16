@@ -16,6 +16,8 @@
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
+      <a href="../../model-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
+      <a href="picks.html">Horizon 14–17 (session build)</a>
       <a href="../../picks.html">Rolling horizon pick file</a>
       <a href="picks.html">Horizon</a>
       <a href="strategies.html">Evidence</a>
@@ -29,6 +31,7 @@
   <aside class="sidebar">
     <div class="side-h">Sections</div>
     <div class="nav-group"><h3>HORIZON</h3>
+<a href="roll.html">Rolling Slate</a>
 <a href="picks.html">Lines &amp; Picks</a>
 <a href="props.html">Player Props</a>
 <a href="prop-variance.html">Prop Variance &amp; Rotation</a>
@@ -692,7 +695,7 @@
 <td>F71</td>
 <td>Medium</td>
 <td><b>Horizon stops at 11/17: the 12 official 11/18 games are outside every published surface</b></td>
-<td>Today is 2026-11-15, so the brief's maximum horizon (today + 3 days) runs through 11/18. The official calendar prints 12 games on 11/18 and this session captured all 12 (game ids 0022600258-0022600269), but data/raw/schedule_upcoming.json has window 11/14..11/17, the published picks' slate_dates stop at 11/17, and no surface carries a 11/18 row.</td>
+<td>Today is 2026-11-15, so the brief's maximum horizon (today + 3 days) runs through 11/18. The official calendar prints 12 games on 11/18 and this session captured all 12 (game ids 0022600258-0022600269), but data/raw/schedule_upcoming.json has window 11/14..11/17, the published picks' slate_dates stop at 11/17, and no surface carries a 11/18 row.  RESOLVED 2026-11-16 (session arena/161f1638-nba1): the window is now derived from the newest official schedule capture instead of typed dates and the 11/18 games are published on site/pages/roll.html (window 2026-11-16..2026-11-18, 25 games).</td>
 <td>schedule, lines and picks surfaces for 11/18</td>
 <td>Extend the horizon capture to 11/18 and regenerate lines/picks for the new window; the 12 rows are already captured here with sources.</td>
 <td class="src"><span class="na" title="source id S115-G18 is not in the register">&mdash;</span></td>
@@ -701,7 +704,7 @@
 <td>F72</td>
 <td>Medium</td>
 <td><b>Injury basis is two editions behind: site prices from 11/14 04:15 AM ET, newest official edition is 11/15 06:15 AM ET</b></td>
-<td>site/data/injuries.json is built from the 11/14/26 04:15 AM ET edition (75 rows) and meta.json says the lines were priced from it, with the 01:30 PM ET edition recorded as NOT RE-PRICED. The official hub at read time (2026-11-15 ~11:35Z) lists editions at 15-minute cadence through 11/15 06:15 AM ET, which this session captured in full (101 rows: 85 for 11/15, 16 NOT YET SUBMITTED team rows for 11/16). Diff against the previous in-repo edition (11/14 01:30 PM ET): 16 of 18 team entries for 11/15 moved from NOT YET SUBMITTED to filed, 84 player designation rows appeared, Dallas remains NOT YET SUBMITTED (inside its game-day window), and New York has no row of any kind - recorded as absent, not interpreted. Player-level status changes are not computable between these two editions because the older one listed no players for 11/15. Lines are deliberately NOT re-priced (post-cut information must not enter a graded number).</td>
+<td>site/data/injuries.json is built from the 11/14/26 04:15 AM ET edition (75 rows) and meta.json says the lines were priced from it, with the 01:30 PM ET edition recorded as NOT RE-PRICED. The official hub at read time (2026-11-15 ~11:35Z) lists editions at 15-minute cadence through 11/15 06:15 AM ET, which this session captured in full (101 rows: 85 for 11/15, 16 NOT YET SUBMITTED team rows for 11/16). Diff against the previous in-repo edition (11/14 01:30 PM ET): 16 of 18 team entries for 11/15 moved from NOT YET SUBMITTED to filed, 84 player designation rows appeared, Dallas remains NOT YET SUBMITTED (inside its game-day window), and New York has no row of any kind - recorded as absent, not interpreted. Player-level status changes are not computable between these two editions because the older one listed no players for 11/15. Lines are deliberately NOT re-priced (post-cut information must not enter a graded number).  RESOLVED 2026-11-16 (session arena/161f1638-nba1): the injury basis is now the newest stored edition, 11/15 06:15 PM ET (155 rows), resolved at run time by scripts/originate_horizon.py rather than typed.</td>
 <td>injury layer for 11/15 games; any line adjustment driven by it</td>
 <td>Refresh the injury layer to the newest edition at the next pricing cut (before the 11/15 tips), keeping both editions visible; re-price only before publication, never after a line is frozen.</td>
 <td class="src"><span class="na" title="source id S115-IR0615 is not in the register">&mdash;</span></td>
@@ -800,7 +803,7 @@
 <td>F83</td>
 <td>medium</td>
 <td><b>Picks page has no rotation-availability column</b></td>
-<td>The picks table shows Home injury status and Away injury status. The brief asks for rotation availability as its own column.</td>
+<td>The picks table shows Home injury status and Away injury status. The brief asks for rotation availability as its own column.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): a rotation-availability column now exists on site/pages/roll.html, built from the official injury report (Out / Questionable counts and NOT YET SUBMITTED blocks). The legacy Lines &amp; Picks page still has no such column, so the item stays open.</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html" target="_blank" rel="noopener">link</a></td>
@@ -809,7 +812,7 @@
 <td>F84</td>
 <td>high</td>
 <td><b>Home-court advantage is a fixed constant, not pinned to the measured home-win rate</b></td>
-<td>engine/model_core.py uses flat_hca = 2.0. scripts/originate_horizon.py records that HCA could not be sourced from an official NBA page. The measured 57.6% home-win rate from another build is a note only and is not applied.</td>
+<td>engine/model_core.py uses flat_hca = 2.0. scripts/originate_horizon.py records that HCA could not be sourced from an official NBA page. The measured 57.6% home-win rate from another build is a note only and is not applied.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): the home-win rate is now measured from official finals - 0.5455 (36 of 66) - and published on site/pages/roll.html. It is still not applied to any line. The gap is quantified: estimator B fits HCA at +3.508 points (t = 1.539, estimated in-sample) while estimator A applies none, and that single term is 90% of the models' mean 3.89-point disagreement.</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py" target="_blank" rel="noopener">link</a></td>
@@ -818,7 +821,7 @@
 <td>F85</td>
 <td>high</td>
 <td><b>No arena-coordinate table; travel distance and 3-in-4 not computed</b></td>
-<td>The repository has no arena latitude or longitude table, so travel distance cannot be computed from a sourced table. No 3-in-4 metric was found by search. Rest and back-to-back are shown per game.</td>
+<td>The repository has no arena latitude or longitude table, so travel distance cannot be computed from a sourced table. No 3-in-4 metric was found by search. Rest and back-to-back are shown per game.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): 3-in-4 IS now computed from the official schedule and published in the rest column of site/pages/roll.html. Travel distance remains uncomputed - no official arena-coordinate table has been sourced, so the cell stays empty rather than filled from memory.</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">link</a></td>
@@ -894,6 +897,42 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F94</td>
+<td>High</td>
+<td><b>The site is not split into a projection surface and a gated bet surface</b></td>
+<td>The brief requires two surfaces that are never mixed: 'projection' safe to publish now, 'bet' gated behind validation. No page carries either label. Picks carry the status string 'MODEL OUTPUT - UNVALIDATED' but sit beside projections in the same tables.</td>
+<td>Lines &amp; Picks, roll.html, Player Props, Strategies</td>
+<td>Label every page projection or bet, and move every gated pick behind its own surface.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F95</td>
+<td>Medium</td>
+<td><b>2026-11-15 is not settled: 2 of its 9 games had reached Final at the last capture</b></td>
+<td>At 2026-11-15T23:55Z only IND@PHI (131-124) and LAL@PHX (131-123) were Final; four more were in progress and three had not tipped. Settlement is deferred rather than guessed - the seven rows without a final carry null score fields and the observed state. The results feed for 11/15 is kept current in data/official/results_2026-11-15.json.</td>
+<td>ledger settlement for 11/15; the 11/16 pre-registration's prior-day context</td>
+<td>Settle the ledger for 11/15 as soon as all nine games are Final (last tip 09:00 PM ET).</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F96</td>
+<td>Low</td>
+<td><b>POR@MIN is listed twice on the official schedule in two nights</b></td>
+<td>The official games pages list Portland at Minnesota on both 2026-11-16 (game 0022600250, 8:00 PM ET, Target Center) and 2026-11-17 (game 0022600254, 8:00 PM ET, Target Center) - two distinct official game IDs, same arena, consecutive nights. Both are published, because that is what the official source prints; each was checked on its own date page and neither was de-duplicated. Flagged because a same-venue back-to-back between the same two clubs is unusual enough to be worth a second look before either game is priced.</td>
+<td>roll.html rows for 11/16 and 11/17; any rest/B2B flag for POR and MIN</td>
+<td>Confirm against the box scores after both games; if one is a page artefact, drop the row.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F97</td>
+<td>Medium</td>
+<td><b>GitHub Pages deployments are being superseded faster than they run, so the live site lags main</b></td>
+<td>Every pages.yml push run to main between 2026-11-15T23:55Z and 2026-11-16T01:00Z was cancelled or left pending while five sessions pushed to main inside the same hour. At the last fetch-back the live site still served the pre-11/16 build (34-game 15-18 Nov landing tiles, 4 ledger entries) even though site/pages/roll.html is present in main (1,408 lines, 61.1 KB) and every gate on the branch passes. Nothing in the build is broken: this is a deploy-backlog artefact of parallel sessions, and it means a fetch-back cannot be used to prove what main contains.</td>
+<td>every published page; any claim about what the live site currently shows</td>
+<td>Either serialize merges to main (a merge queue) so each deploy completes, or verify against the main tree and the Actions run log rather than a live fetch-back while several sessions are pushing.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/actions/workflows/pages.yml" target="_blank" rel="noopener">link</a></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">

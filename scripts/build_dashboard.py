@@ -17,6 +17,7 @@ import json
 import os
 import re
 import shutil
+import sys
 from urllib.parse import urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -62,6 +63,7 @@ def load(path):
 # (label, filename under site/pages, blurb)
 CATEGORIES = [
     ("HORIZON", None, "The next three days of NBA games and the lines we originate for them."),
+    ("Rolling Slate", "roll.html", "The current 3-day window re-cut from a fresh official capture: the two estimators and their disagreement, rotation availability, rest and back-to-back, and parlays priced with the measured rho beside the naive product."),
     ("Lines &amp; Picks", "picks.html", "Originated spread, total and fair-moneyline for every game in the horizon, and the gated paper picks built on them."),
     ("Player Props", "props.html", "Per-player projections and prop combinations, with the minutes coverage stated next to every number."),
     ("Prop Variance &amp; Rotation", "prop-variance.html", "Game-to-game dispersion measured from official game logs: the uncertainty behind every prop, the minutes-to-production elasticity, and what the injury report changed since the lines were cut."),
@@ -159,6 +161,8 @@ def page(title, sub, body, depth=1, extra_head=""):
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
+      <a href="%(repo)smodel-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
+      <a href="picks.html">Horizon 14–17 (session build)</a>
       <a href="%(repo)spicks.html">Rolling horizon pick file</a>
       <a href="%(navbase)spicks.html">Horizon</a>
       <a href="%(navbase)sstrategies.html">Evidence</a>
@@ -1812,6 +1816,12 @@ def main():
                      'only in presentation, data cut and how much of the pipeline they exercise. The pages '
                      'above are the current build; the rest are reachable from here.</p>'
                      '<ul class="plain">'
+                     '<li><b>Model v2 (session <code>arena/49f70042-nba1</code>).</b> The disagreement-first '
+                     'rebuild: measured home-court advantage, two independent estimators with their disagreement '
+                     'as the headline, minutes redistribution at published status shares, rest/travel from sourced '
+                     'arena coordinates, measured rho, inert market leg &mdash; 38 lines 15&ndash;19 Nov, '
+                     '25 zero-stake model-output picks 16&ndash;18 Nov (14 gate passes, nothing promoted). '
+                     '<a href="model-v2.html">Open model v2</a>.</li>'
                      '<li><b>Current &mdash; this build.</b> The rolling ' + hz_label + ' horizon (originated lines, '
                      'pick rows, settlement stamp), the frozen 14&ndash;17 Nov strategy-lab window with its '
                      '60 gated paper picks (settled day by day from official finals), the 11/15/26 '
@@ -2030,31 +2040,57 @@ def main():
                            "above. Those numbers do not replace the ones here: a line re-priced after it was "
                            "frozen cannot be graded."))
     # Newest-edition banner: report revision + retrieval time (brief requirement).
-    newest_path = os.path.join(ROOT, "data", "official", "injury_2026-11-15_0615AM.json")
-    if os.path.exists(newest_path):
+    # ROLLING: pick the newest stored edition and the newest consecutive-edition diff
+    # instead of a hardcoded filename, so the banner cannot go stale between passes.
+    import glob as _glob, re as _re
+    def _newest(pattern):
+        c = [q for q in _glob.glob(os.path.join(ROOT, "data", "official", pattern))
+             if _re.search(r"_\d{4}-\d{2}-\d{2}", q)]
+        if not c:
+            c = _glob.glob(os.path.join(ROOT, "data", "official", pattern))
+        return sorted(c)[-1] if c else None
+    newest_path = _newest("injury_2*.json")
+    if newest_path and os.path.exists(newest_path):
         _n = load(newest_path)
         _rows = _n.get("rows", [])
         _players = sum(1 for r in _rows if r.get("player"))
         _nys = sum(1 for r in _rows if r.get("status") == "NOT YET SUBMITTED")
         diff_note = ""
-        diff_path = os.path.join(ROOT, "data", "official",
-                                 "injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json")
-        if os.path.exists(diff_path):
+        diff_path = _newest("injury_diff_*.json")
+        if diff_path and os.path.exists(diff_path):
             _df = load(diff_path)
             _c = _df.get("counts", {})
-            diff_note = ("Consecutive-edition diff: %d comparable player rows, %d status changes, "
-                         "%d team blocks filed since the previous stored edition "
-                         "(<a href=\"../../data/official/injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json\">diff file</a>)."
-                         % (_c.get("comparable_player_rows", 0), _c.get("status_changes", 0),
-                            len(_df.get("team_blocks_filed_since", []))))
+            if _c:
+                _cmp = _c.get("comparable_player_rows", 0)
+                _chg = _c.get("status_changes", 0)
+                _filed = len(_df.get("team_blocks_filed_since", []))
+            else:
+                # schema written by the rolling capture passes (keyed lists)
+                _cmp = _df.get("unchanged", 0) + len(_df.get("changed", []))
+                _chg = len(_df.get("changed", []))
+                _filed = len(_df.get("added", []))
+            diff_note = ("Consecutive-edition diff against %s: %d comparable player rows, "
+                         "%d status changes, %d rows the newer edition adds "
+                         "(<a href=\"../../data/official/%s\">diff file</a>)."
+                         % (esc(_df.get("from_edition", "the previous stored edition")),
+                            _cmp, _chg, _filed, esc(os.path.basename(diff_path))))
+        # R-42-B: `esc(None)` is an empty string, and the empty string used to land in a
+        # bare `<b>...</b>` slot. When the edition file had no revision stamp the slot was
+        # substituted with NA - an HTML <span> - through `%s` inside a string that the
+        # verifier then read as an href target (`href="<span class=...`). Fixed by
+        # substituting the span only into text position and never into a URL slot.
+        _rev = _n.get("revision_time_et")
+        _rev_cell = esc(_rev) if _rev else NA
+        _src_url = _n.get("source_url") or ""
+        _idx_url = _n.get("index_url") or ""
         b.insert(0, banner("info", "Newest official edition: report revision and retrieval time",
                            "<p><b>Report revision:</b> %s &nbsp;|&nbsp; <b>retrieved (UTC):</b> %s &nbsp;|&nbsp; "
                            "<b>rows:</b> %d (%d player rows, %d NOT YET SUBMITTED team blocks). "
                            "Source: <a href=\"%s\">official PDF</a> (index: <a href=\"%s\">official.nba.com</a>).</p>"
                            "<p>%s %s</p>"
-                           % (esc(_n.get("revision_time_et")), esc(_n.get("retrieved_utc")),
+                           % (_rev_cell, esc(_n.get("retrieved_utc")),
                               len(_rows), _players, _nys,
-                              esc(_n.get("source_url")), esc(_n.get("index_url")),
+                              esc(_src_url), esc(_idx_url),
                               diff_note,
                               esc(_n.get("merged_cell_caveat", "")))))
     built["injuries.html"] = page("Injuries, rotation and production impact",
@@ -2702,11 +2738,20 @@ def main():
     # === decisions (session arena/cc5a6652-nba1) =================================
     built["decisions.html"] = build_decisions(questions, suggestions)
 
+
     # === brief traceability (session arena/513516f6-nba1, COORDINATION section 41) ===
     import sys as _sys
     _sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import build_requirements
     built["requirements.html"] = build_requirements.render(page, table)
+
+    # === rolling slate (integration session arena/161f1638-nba1) ==============
+    # Built last so the page reads the same files this rebuild just wrote. The
+    # requirements register is the shared register in data/content/requirements.json
+    # and is rendered by build_requirements above; this builder adds the rolling-slate
+    # page only, so the two builders never both claim requirements.html.
+    import build_roll_page as _roll
+    built.update(_roll.build(sys.modules[__name__]))
 
     # ------------------------------------------------------------------ write
     for name, html in built.items():

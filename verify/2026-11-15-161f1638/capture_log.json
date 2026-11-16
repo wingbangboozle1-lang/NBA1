@@ -1,0 +1,41 @@
+{
+ "session": "arena/161f1638-nba1",
+ "retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+ "sources": {
+  "schedule": "https://www.nba.com/schedule",
+  "games_1115": "https://www.nba.com/games?date=2026-11-15",
+  "standings": "https://www.nba.com/standings",
+  "traditional": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+  "opponent": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season",
+  "advanced": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+  "injury_index": "https://official.nba.com/nba-injury-report-2026-27-season/",
+  "injury_pdf": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf",
+  "injury_pdf_prev": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+  "box_1115_ind_phi": "https://www.nba.com/game/ind-vs-phi-0022600236/box-score"
+ },
+ "window_rule": "2026-11-16 .. 2026-11-18 (today + up to 3 days; 11/15 excluded, in flight)",
+ "counts": {
+  "standings": 30,
+  "traditional": 30,
+  "opponent": 30,
+  "advanced": 30,
+  "schedule_games": 25,
+  "results_1115": 9,
+  "results_1115_settled": 1,
+  "injury_rows": 155,
+  "injury_1116_rows": 59
+ },
+ "cross_checks": [
+  "standings W/L == traditional W/L for all 30 teams",
+  "standings W/L == advanced W/L for all 30 teams",
+  "GP agrees across traditional / opponent / advanced for all 30 teams",
+  "traditional PTS - opponent OPP_PTS == printed +/- (0.1 tolerance), all 30 teams",
+  "opponent page +/- == -(traditional page +/-), all 30 teams",
+  "every schedule row's record pair == the standings pair, both sides",
+  "per-day game counts == the counts printed on the official schedule page"
+ ],
+ "not_read": [
+  "quarter scores for every 11/15 game (box-score quarter line not reachable in this capture)",
+  "final scores for the eight 11/15 games that were live or untipped at 23:41Z"
+ ]
+}

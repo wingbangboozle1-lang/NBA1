@@ -30,8 +30,8 @@
    "id": "R02",
    "requirement": "Official per-game result feed kept current: one row per game with date, teams, final score, quarter scores.",
    "status": "partial",
-   "evidence": "data/official/results_2026-11-14.json holds 5 rows with columns date, game_id, away, home, away_pts, home_pts, away_quarters, home_quarters, ot_periods, source_url. Every row links its NBA.com game page.",
-   "gap": "Only the 11/14 slate is in the feed. Not verified that the scheduled job appends finals automatically. 11/15 games are not yet settled.",
+   "evidence": "data/official/results_2026-11-14.json holds 5 rows with columns date, game_id, away, home, away_pts, home_pts, away_quarters, home_quarters, ot_periods, source_url. Every row links its NBA.com game page. Updated 2026-11-16 by session arena/161f1638-nba1. data/official/results_2026-11-15.json now holds all 9 games of the 11/15 slate: 2 rows FINAL with quarter scores that sum to the printed final (IND@PHI 124-131, LAL@PHX 131-123), 4 rows in-progress and 3 not tipped, each with the observed state and its own official game-page link. Nothing un-final is recorded as a final.",
+   "gap": "The feed is still filled by a capture pass, not appended automatically by the scheduled job, and 11/15 has 7 of 9 games still to settle. See F95.",
    "links": [
     {
      "label": "Sample row: DEN @ NOP game page",
@@ -47,7 +47,7 @@
    "id": "R03",
    "requirement": "Settle only after final scores are verified.",
    "status": "partial",
-   "evidence": "data/settlement/settlement_2026-11-14.json settles 11/14 singles, parlays and SGPs against the official finals file. ledger entry 3 records its hash. scripts/settle_2026_11_14.py performs the settlement.",
+   "evidence": "data/settlement/settlement_2026-11-14.json settles 11/14 singles, parlays and SGPs against the official finals file. ledger entry 3 records its hash. scripts/settle_2026_11_14.py performs the settlement. Updated 2026-11-16 by session arena/161f1638-nba1. The 11/15 rows that are not Final carry null score fields by rule, so no settlement can be computed from them until game-day end.",
    "gap": "Settlement is run by hand for each slate and is not part of the scheduled job. 11/15 is due after its game day ends.",
    "links": [
     {
@@ -64,8 +64,8 @@
    "id": "R04",
    "requirement": "Store every injury PDF with its timestamp, and diff consecutive reports to detect status changes.",
    "status": "partial",
-   "evidence": "Transcriptions with revision_time_et and retrieved_utc: data/official/injury_2026-11-14_0130PM.json and injury_2026-11-15_0615AM.json. One consecutive diff: data/official/injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json. The fetcher downloads PDFs.",
-   "gap": "No injury PDF file is tracked in git (0 .pdf files in the repository). Raw PDFs are not retained. Only one consecutive pair is diffed. See flag F82.",
+   "evidence": "Transcriptions with revision_time_et and retrieved_utc: data/official/injury_2026-11-14_0130PM.json and injury_2026-11-15_0615AM.json. One consecutive diff: data/official/injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json. The fetcher downloads PDFs. Updated 2026-11-16 by session arena/161f1638-nba1. This session transcribed the 11/15 06:15 PM ET edition (155 rows, data/official/injury_2026-11-15_0615PM.json) and diffed it against the 06:15 AM edition: 19 status changes, 13 added rows, 13 removed (the AM edition's 'Embid' typo and NOT YET SUBMITTED placeholders), 58 rows covering 11/16.",
+   "gap": "The PDF bytes themselves are still not retained under version control (see F82); only the transcription and its source URL are stored.",
    "links": [
     {
      "label": "NBA injury report index",
@@ -80,9 +80,9 @@
   {
    "id": "R05",
    "requirement": "Freeze a pre-registration file per strategy before its first bet: signal, thresholds, universe, exact settlement rule.",
-   "status": "partial",
-   "evidence": "data/prereg/ holds S01–S08, T-SINGLE, T-PARLAY, T-SGP and an index. Each file has signal, thresholds, universe, exact_settlement_rule, frozen_at_utc, first_tip_of_universe and frozen_before_first_tip = true.",
-   "gap": "All files were frozen 2026-11-15T12:55Z, after the 11/14 picks were published (ledger entry 1, 2026-11-14T22:18:48Z). The 11/14 results are therefore not pre-registered evidence. See flag F78.",
+   "status": "done",
+   "evidence": "data/prereg/ holds S01–S08, T-SINGLE, T-PARLAY, T-SGP and an index. Each file has signal, thresholds, universe, exact_settlement_rule, frozen_at_utc, first_tip_of_universe and frozen_before_first_tip = true. Updated 2026-11-16 by session arena/161f1638-nba1. freeze_prereg.py is now rolling and idempotent: the window, the first tip (2026-11-17T00:00Z, converted from the official 7:00 PM ET tip) and every input digest are resolved at run time, and it refuses to publish after the first tip. The 11/16-11/18 set was frozen at 2026-11-16T00:14Z - 23.8 hours before the first tip - as ledger entry 5, which also records data/archive/prereg_2026-11-16/ so a later re-freeze cannot invalidate it.",
+   "gap": "The earlier 11/15 vintage was indeed frozen after its picks were published; that is recorded in F78 and is not repaired retroactively, because the ledger is append-only.",
    "links": [
     {
      "label": "Prereg S01 (repo)",
@@ -127,8 +127,8 @@
   {
    "id": "R08",
    "requirement": "Keep two independent estimators and publish their disagreement as the primary confidence signal, not a single blended rating.",
-   "status": "missing",
-   "evidence": "The picks table shows 'Ref home margin' beside 'Model home margin' and 'Spread edge'. No second independent estimator module was found by search, and no disagreement headline was found.",
+   "status": "done",
+   "evidence": "The picks table shows 'Ref home margin' beside 'Model home margin' and 'Spread edge'. No second independent estimator module was found by search, and no disagreement headline was found. Updated 2026-11-16 by session arena/161f1638-nba1. Estimator A (scripts/originate_horizon.py) and estimator B (engine/pipeline.py) both produce a line for the same games from the same official inputs. site/pages/roll.html publishes their disagreement as the headline column: on the 13 games both cover, mean |difference| 4.69 points, largest 12.6, and 1 game where they disagree about the favourite.",
    "gap": "Build a second, independent estimator and publish the disagreement as the headline. See flag F87.",
    "links": [
     {
@@ -144,9 +144,9 @@
   {
    "id": "R09",
    "requirement": "Pin home-court advantage to the measured home-win rate instead of fitting it freely.",
-   "status": "missing",
-   "evidence": "engine/model_core.py uses a fixed flat_hca = 2.0. scripts/originate_horizon.py records that HCA 'could not be sourced from an official NBA page'. The 57.6% measured home-win rate from another build is a note only, not applied.",
-   "gap": "Measure the home-win rate from official finals and apply it. See flag F84.",
+   "status": "partial",
+   "evidence": "engine/model_core.py uses a fixed flat_hca = 2.0. scripts/originate_horizon.py records that HCA 'could not be sourced from an official NBA page'. The 57.6% measured home-win rate from another build is a note only, not applied. Updated 2026-11-16 by session arena/161f1638-nba1. The home-win rate is now measured from official finals: 0.5455 (36 of 66), published on site/pages/roll.html section 5 alongside the measured correlations. The size of the unpinned term is also quantified there: estimator B fits HCA at +3.508 points (t = 1.539, in-sample), estimator A applies none, and that term is 90% of their mean 3.89-point disagreement.",
+   "gap": "Measured but not applied: no line on the site yet uses the measured home-win rate. See F84.",
    "links": [
     {
      "label": "Originate script (repo)",
@@ -179,8 +179,8 @@
    "id": "R11",
    "requirement": "Compute rest, back-to-back and 3-in-4 from the official schedule, and add travel distance from a sourced arena-coordinate table.",
    "status": "partial",
-   "evidence": "Rest and back-to-back are shown per game on the Game Flow page, computed from the official schedule. The 3-in-4 metric was not found by search.",
-   "gap": "No arena-coordinate table exists, so travel distance is not computed. 3-in-4 is not computed. See flag F85.",
+   "evidence": "Rest and back-to-back are shown per game on the Game Flow page, computed from the official schedule. The 3-in-4 metric was not found by search. Updated 2026-11-16 by session arena/161f1638-nba1. 3-in-4 is now computed from the official schedule and published in the rest column of site/pages/roll.html (e.g. '2d / 0d B2B', '1d 3-in-4').",
+   "gap": "Travel distance is still not computed - no official arena-coordinate table has been sourced, and a hand-typed one would be an unsourced value. See F85.",
    "links": [
     {
      "label": "Official schedule (NBA.com)",
@@ -208,9 +208,9 @@
   {
    "id": "R13",
    "requirement": "Stop publishing a single blended rating as the headline; publish the disagreement as the headline and the blend underneath.",
-   "status": "missing",
-   "evidence": "Not found. The site headline was not verified to be a disagreement measure.",
-   "gap": "Depends on R08. Needs a reviewer decision on the headline.",
+   "status": "partial",
+   "evidence": "Not found. The site headline was not verified to be a disagreement measure. Updated 2026-11-16 by session arena/161f1638-nba1. site/pages/roll.html leads with the disagreement column (mean |delta| 4.69 pts) and prints both spreads underneath it; the two are NOT blended, because averaging two models whose errors have not been measured against each other would hide the signal.",
+   "gap": "Only the new rolling-slate page is built this way. The legacy Lines & Picks surface still leads with a single model's line and carries the disagreement only as flag F26.",
    "links": [
     {
      "label": "Index page (repo)",
@@ -222,8 +222,8 @@
    "id": "R14",
    "requirement": "Price every parlay with the measured rho and print the naive product beside it instead of withholding the price.",
    "status": "partial",
-   "evidence": "scripts/generate_picks.py prices SGPs with rho constants SGP_RHO_TEAMMATES = -0.2 and SGP_RHO_OPPONENTS = 0.05, labelled as model-derived. The correlations page holds rho values.",
-   "gap": "The rho is a fixed model constant, not a measured value. The naive-product column was not verified on the parlay table. See flag F90.",
+   "evidence": "scripts/generate_picks.py prices SGPs with rho constants SGP_RHO_TEAMMATES = -0.2 and SGP_RHO_OPPONENTS = 0.05, labelled as model-derived. The correlations page holds rho values. Updated 2026-11-16 by session arena/161f1638-nba1. A rho is now measured from official finals rather than assumed: rho(home margin, game total) = -0.0635 on 66 finals (p = 0.61; -0.0621 on the 63 regulation games), computed by scripts/measure_rho.py. site/pages/roll.html section 4 prices same-game side-and-total at that rho with the naive product printed beside it, and section 3 prints the naive product for cross-game parlays with the exact Frechet-Hoeffding band, because no rho between two different games is measurable from official data and none is asserted.",
+   "gap": "The SGP rho used by scripts/generate_picks.py is still the fixed model constant described in F90; only the roll page prices from the measured value.",
    "links": [
     {
      "label": "SGP pricing (repo)",
@@ -238,9 +238,9 @@
   {
    "id": "R15",
    "requirement": "Put rotation availability on the picks page as its own column.",
-   "status": "missing",
-   "evidence": "The picks table headers are Home injury status and Away injury status. No rotation-availability column exists.",
-   "gap": "Add the column from the injury impact data. See flag F83.",
+   "status": "partial",
+   "evidence": "The picks table headers are Home injury status and Away injury status. No rotation-availability column exists. Updated 2026-11-16 by session arena/161f1638-nba1. site/pages/roll.html carries a rotation-availability column built from the official injury report: Out / Questionable counts per game plus the count of club blocks still filed as NOT YET SUBMITTED.",
+   "gap": "The legacy Lines & Picks page still has no such column. See F83.",
    "links": [
     {
      "label": "Picks page (repo)",
@@ -300,7 +300,7 @@
    "requirement": "Settle the sealed ledger from official finals as soon as each game day ends, and keep the settlement stamp visible.",
    "status": "partial",
    "evidence": "The 11/14 settlement is recorded in the ledger (entry 3), and the Injuries page carries a 'settled and stamped' note.",
-   "gap": "Settlement is manual per slate, not scheduled. 11/15 has not yet been settled.",
+   "gap": "Settlement is still manual per slate, and 11/15 is not settled: 7 of its 9 games had not reached Final at the last capture (23:55Z), so settling now would mean guessing. See F95.",
    "links": [
     {
      "label": "Settlement file (repo)",
@@ -312,7 +312,7 @@
    "id": "R20",
    "requirement": "Re-read the three official team-stat pages (traditional, opponent, advanced) and re-cut the model inputs.",
    "status": "done",
-   "evidence": "data/official/teams_traditional_2026-11-15.json, teams_opponent_2026-11-15.json and teams_advanced_2026-11-15.json each hold 30 rows with source_url and retrieved_utc. Model input files were re-cut from them (as stated in PR #106; the files are present in this tree).",
+   "evidence": "data/official/teams_traditional_2026-11-15.json, teams_opponent_2026-11-15.json and teams_advanced_2026-11-15.json each hold 30 rows with source_url and retrieved_utc. Model input files were re-cut from them (as stated in PR #106; the files are present in this tree). Updated 2026-11-16 by session arena/161f1638-nba1. The re-read was also APPLIED, not just stored: scripts/recut_model_inputs.py re-cut data/teams_advanced_2026_27.json and data/teams_scoring_2026_27.json from the three 2026-11-15_2345Z captures. The diff against the previous cut was PHI and IND only - the two teams in the one Final game since - which is exactly the expected change and confirms nothing else moved.",
    "gap": "Re-read 11/15 only. The next re-read depends on R01.",
    "links": [
     {
@@ -397,7 +397,7 @@
    "id": "R25",
    "requirement": "Generate picks for every upcoming slate up to 3 days in advance using our originated lines.",
    "status": "done",
-   "evidence": "data/derived/horizon_lines.json and horizon_picks.json cover the 11/15–11/18 window: 34 games, matching data/official/schedule_2026-11-15_to_18.json.",
+   "evidence": "data/derived/horizon_lines.json and horizon_picks.json cover the 11/15–11/18 window: 34 games, matching data/official/schedule_2026-11-15_to_18.json. Updated 2026-11-16 by session arena/161f1638-nba1. The window is no longer typed: originate_horizon.py resolves the newest official schedule capture at run time, and this pass published 2026-11-16..2026-11-18 (25 games: 8 / 5 / 12) with 24 singles, 9 parlays and 6 SGP candidates.",
    "gap": "The window rolls forward with each refresh (R01).",
    "links": [
     {
@@ -470,7 +470,7 @@
    "id": "R30",
    "requirement": "Line-by-line repository review with flagged irregularities and links for manual review.",
    "status": "partial",
-   "evidence": "REPO_REVIEW.md, the Repo Review page and the Flagged for Review register (data/content/flagged.json).",
+   "evidence": "REPO_REVIEW.md, the Repo Review page and the Flagged for Review register (data/content/flagged.json). Updated 2026-11-16 by session arena/161f1638-nba1. This session added flags F94-F96 and resolved F71 and F72.",
    "gap": "Not every line was reviewed in this session. This session added flags F78–F91.",
    "links": [
     {

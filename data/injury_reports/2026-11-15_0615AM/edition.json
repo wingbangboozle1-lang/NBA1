@@ -1,0 +1,40 @@
+{
+ "edition_id": "2026-11-15_0615AM",
+ "revision": "2026-11-15 06:15 AM ET (edition stamp printed on every PDF page)",
+ "edition_published_utc": null,
+ "retrieved_utc": "2026-11-15T11:52Z",
+ "retrieval_window_utc": null,
+ "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+ "edition_index_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "captured_by": "arena/83d380ad-nba1",
+ "capture_method": "Verbatim report order. Rows cover the 2026-11-15 slate; the 2026-11-16 slate is printed NOT YET SUBMITTED for all 16 team blocks. The report prints no rows for New York Knicks (NYK@TOR): the edition prints NOT YET SUBMITTED rows for unsubmitted teams (Dallas, same slate), so an absent block most likely means no reportable players - nothing inferred, flagged for review (F74).",
+ "binary_pdf_stored": false,
+ "binary_pdf_note": "The binary PDF is NOT archived in this sandbox: the shell egress allowlist has no route to ak-static.cms.nba.com, and the only available route to it is the text-extraction fetch channel, which returns extracted text rather than bytes. What is stored is the verbatim row transcription, the SHA-256 of the transcribed row text, the official PDF URL on every row, the edition revision stamp and the retrieval time. This archive is therefore a text archive and is not represented as a binary one.",
+ "rows_sha256": null,
+ "row_counts": {
+  "rows_total": 101,
+  "player_rows": 84,
+  "not_yet_submitted_blocks": 17,
+  "rows_with_inherited_team": 13
+ },
+ "game_dates_in_edition": [
+  "11/15/2026",
+  "11/16/2026"
+ ],
+ "extraction_artefacts": [],
+ "rows_file": "rows.json",
+ "diffs": [
+  {
+   "file": "diff_vs_2026-11-14_0130PM.json",
+   "from_edition": null,
+   "to_edition": null,
+   "counts": {
+    "status_changes": 0,
+    "new_vs_before": 84,
+    "only_in_before": 50,
+    "comparable_player_rows": 0
+   },
+   "sha256": "2f6e7dd73d591a1b292db008d1e7e1a84ceb56c13f77bb58a1ae88bb7e904566"
+  }
+ ]
+}
