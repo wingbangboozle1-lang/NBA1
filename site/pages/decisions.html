@@ -39,6 +39,10 @@
 <a href="gameday.html">Game-Day Injury Read</a>
 <a href="gameflow.html">Game Flow</a>
 </div>
+<div class="nav-group"><h3>RESULTS &amp; SETTLEMENT</h3>
+<a href="results.html">Official Results &amp; Settlement</a>
+<a href="player-logs.html">Player Game Logs</a>
+</div>
 <div class="nav-group"><h3>EVIDENCE</h3>
 <a href="strategies.html">Strategies &amp; Leaderboard</a>
 <a href="validation.html">Validation Gates</a>
@@ -216,6 +220,38 @@
 <td><span class="chip bad">no path</span></td>
 <td class="src"><span class="na" title="no official source exists for this item">&mdash;</span></td>
 </tr>
+<tr id="Q26">
+<td>Q26</td>
+<td>How much does a completed slate move the model inputs?</td>
+<td>A clean re-cut after 2026-11-15. Three games on that slate were still in progress at 02:16Z on 11/16 (HOU@WAS in the fourth quarter, ATL@MIL at half, OKC@SAC in the first), so the efficiency tables cannot yet be re-read consistently (F103).</td>
+<td>Once every 11/15 game is final, re-read the three official team-stat pages, re-cut, and publish the drift between the new cut and the inputs behind the currently published lines.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><a href="https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">official page</a></td>
+</tr>
+<tr id="Q27">
+<td>Q27</td>
+<td>Is the measured home-win rate stable enough to pin to?</td>
+<td>A time series. Two captures two and a half hours apart gave 0.5319 and 0.5285 - a 0.34 point move on a 193-game sample. That is within noise, but the stability of the measurement has never been tracked across a season.</td>
+<td>Record the measured home-win rate at every refresh and publish the series with its sample size, so pinning can be tested for drift instead of assumed sound.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">official page</a></td>
+</tr>
+<tr id="Q28">
+<td>Q28</td>
+<td>How much does rotation availability move a line once the league publishes it?</td>
+<td>Official injury editions for 11/17 and 11/18, plus five 11/16 team entries that still print NOT YET SUBMITTED (WAS, BOS, HOU, PHI, PHX). Fifteen of the twenty-five picks carry a blank availability cell for at least one team (F105).</td>
+<td>Re-read the injury index at each refresh, re-cut the availability column only, and compare the line before and after for every game where availability changed.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">official page</a></td>
+</tr>
+<tr id="Q29">
+<td>Q29</td>
+<td>Are the two POR@MIN meetings on consecutive nights independent observations?</td>
+<td>Nothing in the data - the official schedule genuinely lists Portland at Minnesota on both 11/16 (game 0022600250) and 11/17 (game 0022600254), confirmed on the official game page (F102). What is missing is a convention for treating them.</td>
+<td>Decide and register whether two meetings of the same teams within 48 hours count as one observation or two in the backtest and in the correlation measurement. Today they are counted as two.</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600254" target="_blank" rel="noopener">official page</a></td>
+</tr>
 <tr id="Q3">
 <td>Q3</td>
 <td>Are the player-prop projections any good?</td>
@@ -223,6 +259,14 @@
 <td>Repeat the capture for every player on the horizon (ids for most are already in data/players_2026_27.json; the rest come from one roster-page read per team), then settle every published prop against its official box score after the game. scripts/prop_variance.py needs no change - it reads whatever is in data/proplogs/.</td>
 <td><span class="chip info">P4</span></td>
 <td class="src"><a href="https://www.nba.com/stats/players/boxscores" target="_blank" rel="noopener">S20</a></td>
+</tr>
+<tr id="Q30">
+<td>Q30</td>
+<td>Which official endpoint should tip time come from, and what happens when two captures disagree?</td>
+<td>A designated source and a conflict rule. Two official captures disagree on GSW@NOP (09:00 PM ET against 8:00 PM ET); the newest one silently wins today (F101).</td>
+<td>Name the per-date games page as the source, normalise the format, and have the refresh record a conflict row whenever two captures of one game id differ instead of overwriting (SG33).</td>
+<td><span class="chip bad">no path</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">official page</a></td>
 </tr>
 <tr id="Q4">
 <td>Q4</td>
@@ -265,7 +309,7 @@
 <td class="src"><span class="na" title="No NBA-operated source publishes the missing item, so no official link exists for it.">&mdash;</span></td>
 </tr>
 </tbody></table></div>
-<p class="fine">20 open, 17 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
+<p class="fine">25 open, 20 answered. An answered question is not re-opened here; it is on the <a href="questions.html">Open Questions</a> page with its number.</p>
 <h2 class="sec">The suggestion catalogue, ranked for review</h2><p class="secsub">18 suggestions as they exist in the repository, with the recommendation the repository already makes and the decision it belongs to. Nothing has been implemented.</p>
 <div class="tablewrap">
 <table class="tbl "
@@ -555,6 +599,60 @@
 <td><b>Close the OT-column reconciliation (F75) with a full per-game re-read</b></td>
 <td>Standings OT columns sum to 9 overtime games through 2026-11-14 while the verified finals show 8. One value is unreconciled and stays flagged.</td>
 <td>B first (cheap, targeted), then A inside the weekly full re-read that the refresh job already performs.</td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG32</td>
+<td><span class="chip info">data completeness</span></td>
+<td><b>Capture per-player minutes for all 30 teams so the redistribution gate measures the model, not the capture</b></td>
+<td>Eleven of the twenty-five picks in the current window are held back by minutes capture, not by the model: seven fail the minutes-redistribution gate outright and four more carry a blank availability cell. The stored capture is the league-wide top 50 by minutes (page 1 of 10).</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG33</td>
+<td><span class="chip info">data quality</span></td>
+<td><b>Make one official endpoint the source of truth for tip times and fail the refresh on a disagreement</b></td>
+<td>Two official captures disagreed on the tip time of GSW@NOP (09:00 PM ET vs 8:00 PM ET). Nothing in the pipeline detects that class of conflict today; the newest capture simply overwrites.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG34</td>
+<td><span class="chip info">data completeness</span></td>
+<td><b>Read quarter scores from the official box score so the results feed matches the brief</b></td>
+<td>The brief asks for one row per game with date, teams, final score and quarter scores. The results feed carries date, teams and final; the quarter columns are null because the box score was not read in this pass.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG35</td>
+<td><span class="chip info">process control</span></td>
+<td><b>Refuse to promote a team-stat capture while any game on the previous slate is still in progress</b></td>
+<td>Cutting model inputs from an efficiency table during a live slate produces a table in which some teams include that slate's games and some do not. This session avoided it by using the last clean snapshot, but the pipeline would not have stopped anyone.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG36</td>
+<td><span class="chip info">data completeness</span></td>
+<td><b>Re-read the injury index inside the refresh job so availability fills in game date by game date</b></td>
+<td>Availability is the one column that changes fastest and it is currently captured only when a session happens to look. No official edition covers 11/17 or 11/18 yet, so fifteen of twenty-five picks carry a blank cell.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>&mdash;</td>
+<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+</tr>
+<tr>
+<td>SG37</td>
+<td><span class="chip info">deployment</span></td>
+<td><b>Give GitHub Pages one deploy path instead of two that race each other</b></td>
+<td>Pages is configured with build_type 'legacy' - it builds the site from the main branch itself - while .github/workflows/pages.yml also deploys an Actions artifact to the same environment. Two builders are writing one site. Measured at 2026-11-16T02:5xZ: 9 consecutive 'pages build and deployment' runs cancelled, one every few minutes, each cancelled by the next push to main, with the last successful build at 2026-11-15T23:44:35Z. Freeing the queue (SG23, PR #115) did not fix it because the starvation is structural, not a backlog.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td>&mdash;</td>
 <td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
 </tr>

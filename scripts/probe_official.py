@@ -48,6 +48,34 @@ PROBE_HOSTS = {
 }
 USER_AGENT = "Mozilla/5.0 (compatible; NBA1-probe/1.0; +https://github.com/wingbangboozle1-lang/NBA1)"
 
+# Runtime bounding (session arena/2823d556-nba1, 2026-11-16, COORDINATION §47.1).
+#
+# Measured, not guessed: the 2026-11-16T01:05Z probe run took **1h16m** for
+# **1996 URLs**, and its own record shows 130 `stats.nba.com` URLs returning
+# `http_status: null` - i.e. every one of them burned the full 30 s socket
+# timeout. 130 x 30 s = 65 min, which is 85 % of the run. A probe that occupies
+# a shared runner for over an hour is not a monitoring job, it is a denial of
+# service on this repository's own publisher: while it runs, the
+# `Publish static site to GitHub Pages` workflow waits behind it (observed
+# 2026-11-16 02:0x UTC: production deploys `pending`/`cancelled` for 44-60 min
+# while six probe runs held the queue).
+#
+# Two bounded, honest changes:
+#
+#   1. `TIMEOUT` 30 s -> 10 s. Every 2xx/403 URL in the 2026-11-16T01:05Z record
+#      answered in under 2 s; only the unreachable ones ever approached 30 s.
+#   2. A per-host circuit breaker. After `HOST_CIRCUIT_THRESHOLD` consecutive
+#      transport failures on one host, the remaining URLs for that host are
+#      recorded as NOT RETRIED THIS RUN with the reason printed in the record.
+#      They are still listed (a cited source never disappears from the
+#      register), still counted, and still flagged - the probe simply stops
+#      paying the timeout for a host it has already proven is unreachable.
+#
+# Both are recorded in the output so a reader can see exactly which URLs were
+# measured and which were skipped, and why. Nothing is inferred as reachable.
+TIMEOUT = 10
+HOST_CIRCUIT_THRESHOLD = 5
+
 
 def log(msg):
     print(f"[{datetime.datetime.now(datetime.timezone.utc):%H:%M:%S}] {msg}", flush=True)
@@ -77,7 +105,7 @@ def collect_urls():
     return found
 
 
-def probe(url, timeout=30):
+def probe(url, timeout=TIMEOUT):
     started = time.time()
     req = urllib.request.Request(url, headers={
         "User-Agent": USER_AGENT,
@@ -111,7 +139,7 @@ def probe(url, timeout=30):
     return rec
 
 
-def probe_xhr(url, timeout=30):
+def probe_xhr(url, timeout=TIMEOUT):
     """Second attempt with nba.com's public web client headers.
 
     www.nba.com's stats front-end reads from the same endpoints with these
@@ -165,12 +193,48 @@ def main():
     urls = collect_urls()
     log(f"{len(urls)} distinct official URLs cited in the repository")
     results = []
+    # Per-host circuit breaker (see the TIMEOUT/HOST_CIRCUIT_THRESHOLD note at
+    # the top of this file). A host that fails the transport layer N times in a
+    # row is not going to answer on attempt N+1 within this run, and paying its
+    # full socket timeout for every URL is what turned this job into an
+    # hour-long occupant of the shared runner pool.
+    host_consecutive_failures = {}
+    host_circuit_open = set()
     for i, url in enumerate(sorted(urls), 1):
-        rec = probe(url)
+        host = url.split("/")[2]
+        rec = {"url": url, "http_status": None, "ms": None, "bytes": 0,
+               "content_type": None, "sha256": None, "error": None,
+               "final_url": None}
+        if host in host_circuit_open:
+            # Recorded, counted and kept in the register - explicitly NOT
+            # claimed to have been measured in this run.
+            rec["error"] = (f"not retried this run: host '{host}' already failed "
+                            f"{HOST_CIRCUIT_THRESHOLD} consecutive transport "
+                            f"connections (per-host circuit breaker)")
+            rec["retried_this_run"] = False
+        else:
+            rec = probe(url)
+            rec["retried_this_run"] = True
         rec["cited_in"] = sorted(urls[url])
         results.append(rec)
+        # Update the breaker only on a real transport failure (http_status None
+        # with an error). An HTTP 403 is the host *answering*, so it resets the
+        # counter: that host is reachable, it is just refusing this client.
+        if rec.get("retried_this_run") and rec["http_status"] is None and rec["error"]:
+            host_consecutive_failures[host] = host_consecutive_failures.get(host, 0) + 1
+            if host_consecutive_failures[host] >= HOST_CIRCUIT_THRESHOLD:
+                host_circuit_open.add(host)
+                log(f"circuit open for host '{host}' after "
+                    f"{HOST_CIRCUIT_THRESHOLD} consecutive transport failures - "
+                    f"its remaining URLs are recorded as not retried this run")
+        else:
+            host_consecutive_failures[host] = 0
         status = rec["http_status"] if rec["http_status"] is not None else "ERR"
-        log(f"{i:>3}/{len(urls)}  {status:>4}  {rec['ms']:>6}ms  {rec['bytes']:>9}B  {url}")
+        # `ms` is None when the row was not contacted (circuit open) - print a
+        # dash rather than a zero, so a skipped row never looks like a fast
+        # measurement.
+        ms = f"{rec['ms']:>6}ms" if rec["ms"] is not None else "      -"
+        log(f"{i:>3}/{len(urls)}  {status:>4}  {ms}  {rec['bytes']:>9}B  {url}")
         time.sleep(0.4)  # be a polite client; nba.com is not ours
 
     # Second attempt only on the URLs the first attempt was refused, and only a
@@ -198,7 +262,12 @@ def main():
     redirect = [r for r in results if r["http_status"] and 300 <= r["http_status"] < 400]
     gone = [r for r in results if r["http_status"] in (404, 410)]
     blocked = [r for r in results if r["http_status"] in (401, 403, 429)]
-    failed = [r for r in results if r["error"] and r["http_status"] is None]
+    # "failed" = measured this run and unreachable. "not_retried" = recorded in
+    # the register but skipped by the per-host circuit breaker. They are
+    # different claims and are reported as different numbers.
+    failed = [r for r in results
+              if r["error"] and r["http_status"] is None and r.get("retried_this_run", True)]
+    not_retried = [r for r in results if r.get("retried_this_run") is False]
 
     findings = []
     if gone:
@@ -231,6 +300,20 @@ def main():
             "detail": f"{len(redirect)} cited URL(s) redirect. The destination is recorded in "
                       f"final_url so the register can be updated.",
             "urls": [r["url"] for r in redirect],
+        })
+    if not_retried:
+        hosts = sorted({r["url"].split("/")[2] for r in not_retried})
+        findings.append({
+            "id": "P6",
+            "severity": "Informational",
+            "detail": (f"{len(not_retried)} cited URL(s) on {len(hosts)} host(s) "
+                       f"({', '.join(hosts)}) were NOT retried in this run: each of those "
+                       f"hosts had already failed {HOST_CIRCUIT_THRESHOLD} consecutive "
+                       f"transport connections, so the per-host circuit breaker stopped "
+                       f"spending the socket timeout on them. They are listed for a human "
+                       f"check, not reported as reachable. Their status is UNKNOWN for this "
+                       f"run - not 200, not 404."),
+            "urls": [r["url"] for r in not_retried],
         })
     opened = [r for r in retried if r["http_status"] and 200 <= r["http_status"] < 300]
     if retried and opened:
@@ -269,6 +352,9 @@ def main():
             "gone": len(gone),
             "blocked": len(blocked),
             "unreachable": len(failed),
+            "not_retried_circuit_open": len(not_retried),
+            "socket_timeout_seconds": TIMEOUT,
+            "host_circuit_threshold": HOST_CIRCUIT_THRESHOLD,
             "user_agent": USER_AGENT,
         },
         "what_this_proves": (
@@ -276,6 +362,12 @@ def main():
             "that any number in this repository is current, that a value was parsed correctly, "
             "or that the source will still exist tomorrow. Reachability and currency are "
             "separate claims."
+        ),
+        "what_this_run_did_not_measure": (
+            f"{len(not_retried)} URL(s) were recorded but not contacted in this run because "
+            f"their host had already failed {HOST_CIRCUIT_THRESHOLD} consecutive transport "
+            f"connections (finding P6). Their status is unknown for this run - it is not "
+            f"reported as reachable, and it is not reported as dead."
         ),
         "retried_with_browser_headers": retried,
         "findings": findings,
@@ -286,7 +378,7 @@ def main():
         json.dump(doc, fh, indent=1)
     log(f"wrote {os.path.relpath(OUT, ROOT)}")
     log(f"ok={len(ok)} redirect={len(redirect)} gone={len(gone)} "
-        f"blocked={len(blocked)} unreachable={len(failed)}")
+        f"blocked={len(blocked)} unreachable={len(failed)} not_retried={len(not_retried)}")
     return 0
 
 

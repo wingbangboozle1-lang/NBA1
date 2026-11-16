@@ -1,0 +1,90 @@
+{
+ "title": "Market-anchored prior - the measured blend weight, and why the market half is blocked",
+ "generated_by": "scripts/market_anchor.py",
+ "answers": "register R16",
+ "verdict": "PARTIAL - the weighting rule is implemented and the weight is MEASURED out of sample; the market application is BLOCKED because no closing line exists for this repository and no NBA-operated source publishes a priced market.",
+ "blend_formula": "p_anchor = w * p_other + (1 - w) * p_model, w measured by out-of-sample log-loss",
+ "corpus": {
+  "what": "every graded game in the walk-forward record that carries both probabilities",
+  "n": 60,
+  "window": "2026-11-06 .. 2026-11-13",
+  "ratings_window": "2026-10-20..2026-11-05",
+  "out_of_sample": true,
+  "source": "docs/data/backtest.json (p_home_model, p_home_ref, home_won per game)",
+  "why_not_the_v2_horizon": "data/derived/horizon_lines_v2.json covers 2026-11-15..19 and only its 11/15 games have finished; a weight measured on six games is not a measurement. The 60-game out-of-sample record is."
+ },
+ "logloss_weights": {
+  "anchor_identity_used_here": "the naive reference probability p_home_ref carried on every backtest row: the same official ratings with the fitted extras removed. It is the only second probability this repository holds for these games, and it stands in for a market price in the ARITHMETIC only - not in the claim.",
+  "w_optimal_logloss": 0.6449,
+  "w_bootstrap_95_logloss": [
+   0.0,
+   1.0
+  ],
+  "w_bootstrap_median": 0.6756,
+  "logloss_at_w0_pure_model": 0.5873,
+  "logloss_at_w0.5": 0.58092,
+  "logloss_at_w1_pure_anchor": 0.58276,
+  "logloss_at_w_optimal": 0.58058,
+  "improvement_vs_pure_model": 0.00672,
+  "improvement_bootstrap_95": [
+   -0.02182,
+   0.03565
+  ],
+  "improvement_significant_at_5pct": false,
+  "one_sided_p_improvement_not_positive": 0.313,
+  "brier_at_w_optimal": 0.19908,
+  "published_reconciliation": {
+   "n_games_published": 60,
+   "n_games_recomputed": 60,
+   "logloss_model_published": 0.5873,
+   "logloss_model_recomputed": 0.5873,
+   "logloss_ref_published": 0.5827,
+   "logloss_ref_recomputed": 0.5828,
+   "brier_model_published": 0.202,
+   "brier_model_recomputed": 0.202,
+   "brier_ref_published": 0.2001,
+   "brier_ref_recomputed": 0.2001,
+   "agree": true,
+   "note": "The recomputation is from the per-game p_home_model / p_home_ref rows in docs/data/backtest.json; agreement to four decimals means the blend below is measured on exactly the corpus the published log-losses describe."
+  },
+  "reading": "If improvement_significant_at_5pct is false, the honest statement is that anchoring to this second source buys no log-loss improvement that the sample can detect, so the weight applied today must be 0 (pure model) until it does. It is published either way, and the same function is what would run against a real closing line."
+ },
+ "logloss_identity": {
+  "statement": "For a binary outcome y and a forecast p, Brier = (p-y)^2 and log-loss = -[y ln p + (1-y) ln(1-p)]. Both are proper scoring rules and both are minimised at the true probability, but they are NOT affine images of each other: Brier is quadratic in p, log-loss is logarithmic. A blend weight optimised for one is therefore not, in general, optimal for the other.",
+  "withdrawn_claim": "An earlier draft of this file asserted that Brier and log-loss rank linear blends identically. That claim is false and was withdrawn before publication; the two weights below are reported separately because they really are different numbers.",
+  "measured_w_logloss": 0.6449,
+  "measured_w_brier": 0.633,
+  "do_they_differ": true
+ },
+ "market_anchor": {
+  "status": "BLOCKED - no closing line exists",
+  "why": "The pre-registration files state 'No licensed two-sided price exists (no odds feed)'; no file under data/ holds a two-sided price; and the only hosts this project may read for evidence are the NBA's own, which do not publish priced markets.",
+  "what_would_unblock_it": {
+   "file": "data/external/closing_lines.json",
+   "present": false,
+   "required_schema": {
+    "source_name": "the licensed feed's name (must be named on the site)",
+    "source_url": "the URL the price was read from",
+    "retrieved_utc": "ISO-8601 UTC timestamp of the capture",
+    "markets": [
+     {
+      "game_id": "nba game id, e.g. 0022600245",
+      "closing_spread_home": "the close, home-perspective, signed (negative = home favoured)",
+      "closing_total": "the close on the game total",
+      "closing_ml_home": "optional, decimal or American",
+      "closing_ml_away": "optional",
+      "capture_is_pre_tip": "true only if retrieved_utc precedes the official tip"
+     }
+    ]
+   },
+   "rule_once_present": "Refuse any market row whose capture_is_pre_tip is not true or whose retrieved_utc is after the official tip; convert the close to a probability with the measured sigma_margin in model_report_v2.json; then re-measure w on the enlarged out-of-sample corpus. w is never set by hand."
+  },
+  "refusal": "`--market` exits 5 when the closing-line file is absent. The script will not synthesise, scrape or infer a price.",
+  "sigma_margin_available_for_conversion": 17.2
+ },
+ "sources": [
+  "https://www.nba.com/games (official finals behind every graded game)",
+  "docs/data/backtest.json (per-game out-of-sample probabilities and results)",
+  "data/derived/model_report_v2.json (measured sigma_margin)"
+ ]
+}

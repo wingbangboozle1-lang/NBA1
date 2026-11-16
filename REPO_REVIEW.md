@@ -241,3 +241,92 @@ what it adds is 14 findings tied to specific lines (`scripts/build_edge_site.py:
 irregularities in the official sources themselves, and a list of the six values the desk leaves
 blank because no reachable source supplies them. Flag rows from it are also published on
 [`review.html`](review.html) under `integration-desk-flags` sentinels.
+
+---
+
+## 7. Line-by-line review — session `arena/dfef26dc-nba1`, 2026-11-16T02:0x–02:4xZ
+
+Scope of this review: the generators in `scripts/**` and `engine/**`, the official captures in
+`data/official/**`, the derived model in `data/derived/**`, and every table row the site
+publishes. Method: read the code, re-read the official page the code claims to have read, and
+compare. Anything I could not confirm against an official page is listed as unverified rather
+than accepted.
+
+### 7.1 What was read and what it produced
+
+| File read | What it claims | What I found |
+| --- | --- | --- |
+| `engine/model_v2.py` | two estimators, HCA pinned to a measured rate, rho, luck, market prior | Correct as written. Two provenance defects found and fixed (7.2, 7.3). |
+| `scripts/build_horizon_v2.py` | builds the 3-day lines, picks and model report | Correct. It was emitting lines for a date that had already tipped; narrowed (7.4). |
+| `engine/model_v2.py::load_results` | de-duplicates the results corpus on game id | It kept the **first** row per id, which froze in null scores captured mid-game and dropped the later finals. Fixed to prefer the more complete row. |
+| `engine/model_v2.py::load_schedule` | loads one hard-coded schedule file | Replaced with a per-game-id union of every official schedule capture, newest winning per field, so a narrow re-read cannot delete the venue and city fields the travel context needs. |
+| `scripts/build_dashboard.py` | builds the landing page and the 25 subpages | The "Paper picks" tile reported the v1 count only; it now also reports the v2 gate result and the number publishable outright. |
+| `data/official/*` | official captures | Four new captures added, each with its source URL and retrieval stamp (§7.5). |
+
+### 7.2 Defect found and fixed — availability was silently 100%
+
+`rotation_availability()` returned `availability_pct = 100` whenever the injury list for a team
+was empty, and labelled the result `MEASURED`. An empty injury list is not evidence that nobody
+is injured: teams file by 5 p.m. local the day before a game, so on 2026-11-16 no official
+edition covers 11/17 or 11/18 at all, and five 11/16 entries still print `NOT YET SUBMITTED`.
+Fifteen of the twenty-five picks were therefore carrying a confident 100% that no official
+source supported. The function now takes the game date, the set of game dates the official
+edition actually covers, and the set of teams that printed `NOT YET SUBMITTED`; it returns a
+blank percentage and a stated reason in each case. Published as **F105** and **F106**.
+
+### 7.3 Defect found and fixed — a later capture could not override an earlier one
+
+`load_results()` de-duplicated on game id keeping the first row. The 2026-11-15 slate was first
+captured mid-game with null scores, so when this session captured six finals the de-duplicator
+kept the nulls and discarded the finals. The corpus now prefers the row that carries final
+scores. Effect: the corpus went from 156 to 162 completed games, which is what makes the
+back-to-back flags on the 11/16 picks correct (Boston and Philadelphia both played on 11/15 and
+both are correctly flagged as playing the second night of a back-to-back on 11/16).
+
+### 7.4 Defect found and fixed — lines were being originated for games that had tipped
+
+The line window started at `TODAY = 2026-11-15` while the pick window started on 11/16, so the
+site published lines for nine 11/15 games that had already started. The two windows are now the
+same three days: 2026-11-16 to 2026-11-18.
+
+### 7.5 New official captures (all with source URL and retrieval stamp)
+
+- `data/official/official_schedule_2026-11-16_to_18_dfef26dc.json` — 25 games, read from the
+  three per-date games pages.
+- `data/official/standings_2026-11-16_0213Z_dfef26dc.json` — 30 rows plus the summed
+  home-win measurement and its two internal cross-checks.
+- `data/official/results_2026-11-15_dfef26dc.json` — 9 games, 6 final, 3 in progress.
+- `data/official/injury_2026-11-15_0900PM_dfef26dc.json` — 160 rows, the newest edition on the
+  official index at retrieval time.
+- `verify/2026-11-16-dfef26dc/injury_diff_0615PM_to_0900PM.json` — the consecutive diff:
+  **2 status changes** (Ajay Mitchell Questionable → Available; Precious Achiuwa
+  Questionable → Out).
+
+### 7.6 Irregularities found — published, non-blocking
+
+| Id | Irregularity | Source |
+| --- | --- | --- |
+| F101 | Two official captures disagree on the tip time of GSW@NOP (09:00 PM vs 8:00 PM ET). The fresh read is used; both are published. | [games page](https://www.nba.com/games?date=2026-11-16) |
+| F102 | POR@MIN is scheduled on 11/16 (0022600250) and 11/17 (0022600254) — two meetings in two nights. Confirmed on the official game page. | [game page](https://www.nba.com/game/por-vs-min-0022600254) |
+| F103 | A team-stat re-cut taken during a live slate mixes completed and in-progress games (the Lakers already showed GP 14 while three other 11/15 games were in progress). The cut uses the last clean snapshot instead. | [stats page](https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season) |
+| F104 | The 11/15 slate cannot be settled in full at this build (3 games in progress), and quarter scores were not read, so those columns are null. | [games page](https://www.nba.com/games?date=2026-11-15) |
+| F105 | No official injury edition covers 11/17 or 11/18; five 11/16 teams print NOT YET SUBMITTED. | [injury index](https://official.nba.com/nba-injury-report-2026-27-season/) |
+| F106 | Eleven of twenty-five picks are held back by per-player minutes captured for the top 50 only. | [players page](https://www.nba.com/stats/players/traditional) |
+
+### 7.7 What I could not verify
+
+- **Quarter scores** for any game. They were not read from the official box score, so the
+  results feed's quarter columns are null. Left blank, not reconstructed (F104).
+- **A closing market line** for any game. No NBA-operated source publishes one, so the
+  market-anchored prior carries zero weight. This is pre-existing (F3) and unchanged.
+- **Per-player minutes** beyond the league-wide top 50. The URL's page parameter was not
+  honoured by the rendered slice (F106).
+- **Whether the 11/15 in-progress games finished as the live scores suggest.** They were
+  in progress at capture; the finals were not read afterwards within this session.
+
+### 7.8 Verdict
+
+The build is sound: `check_site`, `verify_integration`, `check_links`, `check_rendered`,
+`verify_all` and the link/provenance audits all pass on this branch, with 0 unmarked rows
+missing an official source link. The defects above were real and are fixed; the irregularities
+are published on the Flagged for Review page with their source links rather than papered over.

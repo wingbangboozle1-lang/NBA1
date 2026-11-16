@@ -1,0 +1,35 @@
+{
+ "title": "Why the GitHub Pages site is not live — a configuration fault, not a content fault",
+ "session": "arena/2823d556-nba1",
+ "measured_at_utc": "2026-11-16T02:33Z",
+ "claim": "The published site is down because GitHub Pages is configured to deploy from a branch (legacy) and every legacy build has failed since 2026-11-16T01:02Z, while the repository's own deployer (.github/workflows/pages.yml) uses actions/deploy-pages, which can only publish when the Pages source is 'GitHub Actions'. The two are mutually exclusive, and no amount of CI green changes that.",
+ "evidence": [
+  {"check": "GET /repos/wingbangboozle1-lang/NBA1/pages",
+   "result": "status: errored; build_type: legacy; source: {branch: main, path: /}",
+   "why_it_matters": "build_type 'legacy' means Pages publishes a branch build, not the Actions artifact. Under this setting actions/deploy-pages in pages.yml cannot publish."},
+  {"check": "GET /repos/wingbangboozle1-lang/NBA1/pages/builds",
+   "result": "8 consecutive builds 2026-11-16T01:02:23Z .. 02:19:57Z all 'errored' with 'Page build failed.'; the last successful build the board records is afc79f2 at 2026-11-15T23:44:35Z",
+   "why_it_matters": "The branch build itself is failing, repeatedly, across eight different commits. It is not one bad commit."},
+  {"check": "repository content (ruling out the usual causes, not guessing)",
+   "result": "15.4 MB across 720 tracked files; largest file 1.28 MB; no symlinks; no non-ASCII or reserved filenames; .nojekyll present and tracked at the published root; no _config.yml or Gemfile",
+   "why_it_matters": "Rules out the documented causes of 'Page build failed': the 1 GB site limit, the 100 MB file limit, broken symlinks and Jekyll Liquid errors. The failure is not caused by the content being published."},
+  {"check": "PUT /repos/wingbangboozle1-lang/NBA1/pages {build_type: workflow}",
+   "result": "HTTP 403 'Resource not accessible by integration'",
+   "why_it_matters": "The session token cannot change Pages settings. This fix requires the repository owner."}
+ ],
+ "not_claimed": [
+  "That the probe-run backlog was the cause. It was a real contributor (six hour-long probe runs were queued ahead of the publisher at 02:0xZ) and it is fixed on this branch, but it is not why Pages reads 'errored'.",
+  "That switching the source to GitHub Actions will definitely succeed. It is the configuration pages.yml was written for; whether the first Actions deploy then succeeds can only be confirmed after the switch.",
+  "The specific internal reason GitHub's branch build fails. That is visible only in Settings > Pages, which this session cannot read."
+ ],
+ "owner_action_required": {
+  "where": "https://github.com/wingbangboozle1-lang/NBA1/settings/pages",
+  "what": "Set Source to 'GitHub Actions' (currently 'Deploy from a branch' -> main / root).",
+  "then": "Re-run the 'Publish static site to GitHub Pages' workflow on main, or push any commit to main.",
+  "why": "This is the only setting under which .github/workflows/pages.yml, which this repository has used since PR #27, can publish. Until it is set, the site cannot go live regardless of CI status."
+ },
+ "sources": [
+  {"url": "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site", "what": "GitHub's documentation for the Pages publishing source, including the GitHub Actions option"},
+  {"url": "https://github.com/wingbangboozle1-lang/NBA1/settings/pages", "what": "the setting that must be changed (owner only)"}
+ ]
+}

@@ -35,7 +35,13 @@ TODAY = "2026-11-15"
 # starts on the next slate and runs three days ahead.
 PICK_WINDOW_START = "2026-11-16"
 PICK_WINDOW_END = "2026-11-18"
-LINE_WINDOW_END = "2026-11-19"
+# The line window is the pick window: 2026-11-15 is dropped because every game
+# on that slate has tipped (six are final, three were still in progress at
+# 2026-11-16T02:16Z), and 2026-11-19 is dropped because it is four days ahead
+# and the brief caps origination at three.  Lines are therefore only ever
+# originated for a game that has not started.
+LINE_WINDOW_START = "2026-11-16"
+LINE_WINDOW_END = "2026-11-18"
 
 STATUS_PLAY_PROB = {"Out": 0.00, "Doubtful": 0.25, "Questionable": 0.50,
                     "Probable": 0.80, "Available": 1.00}
@@ -59,7 +65,10 @@ def load_injury_edition():
     # canonical path, which now carries the parallel arena/161f1638-nba1
     # transcription of the same edition (kept at merge, zero status
     # disagreements between the two)
-    pref = os.path.join(OFF, "injury_2026-11-15_0615PM_arena49f70042.json")
+    # Newest official edition at the time of the re-cut.  The 06:15 PM edition
+    # the previous cut used is superseded: the 09:00 PM edition exists, is the
+    # newest on the official index, and carries the 11/16 game date.
+    pref = os.path.join(OFF, "injury_2026-11-15_0900PM_dfef26dc.json")
     if os.path.exists(pref):
         path = pref
     else:
@@ -68,8 +77,21 @@ def load_injury_edition():
         path = os.path.join(OFF, files[-1])
     doc = M._load(path)
     rows = []
+    not_submitted = set()
+    covered_dates = set()
     for r in doc["rows"]:
+        iso = M._mdy_to_iso(r.get("game_date"))
+        if iso:
+            covered_dates.add(iso)
         if not r.get("player"):
+            # a team row that prints NOT YET SUBMITTED: no player cell, and the
+            # status cell carries the notice.  Record it so the availability
+            # column can say "unknown" instead of silently reading 100%.
+            team = (M.TEAM_NAME_TO_ABBR.get(
+                        (r.get("team_effective") or "").split(" (inherited")[0].strip())
+                     or r.get("team_effective"))
+            if iso and team:
+                not_submitted.add((iso, team))
             continue
         rows.append({
             "matchup": r.get("matchup"),
@@ -86,7 +108,7 @@ def load_injury_edition():
             "game_time": r.get("game_time"),
             "source_url": r.get("source_url"),
         })
-    return doc, rows, os.path.basename(path)
+    return doc, rows, os.path.basename(path), covered_dates, not_submitted
 
 
 def main():
@@ -98,7 +120,7 @@ def main():
     arenas_by_team = {r["abbr"]: r for r in arenas["rows"]}
     arena_by_name = M.arenas_by_name(arenas)
     results = M.load_results()
-    inj_doc, inj_rows, inj_file = load_injury_edition()
+    inj_doc, inj_rows, inj_file, inj_covered, inj_not_submitted = load_injury_edition()
     minutes, minutes_meta = M.load_minutes()
 
     # ---------------------------------------------------------------- HCA
@@ -162,7 +184,7 @@ def main():
     # ------------------------------------------------------- per-game lines
     out_games = []
     for r in sched["rows"]:
-        if r["date"] < TODAY or r["date"] > LINE_WINDOW_END:
+        if r["date"] < LINE_WINDOW_START or r["date"] > LINE_WINDOW_END:
             continue
         h, a = r["home"], r["away"]
         th, ta = teams.get(h), teams.get(a)
@@ -262,8 +284,10 @@ def main():
         total = blend["total_blend"] - (net_a + net_h) * scale * 0.4
         p_home = M.norm_cdf(margin / sigma_margin)
 
-        rot_h = M.rotation_availability(h, inj_rows, minutes.get(h))
-        rot_a = M.rotation_availability(a, inj_rows, minutes.get(a))
+        rot_h = M.rotation_availability(h, inj_rows, minutes.get(h), r["date"],
+                                        inj_covered, inj_not_submitted)
+        rot_a = M.rotation_availability(a, inj_rows, minutes.get(a), r["date"],
+                                        inj_covered, inj_not_submitted)
 
         luck_h = zmap.get(h, {})
         luck_a = zmap.get(a, {})
@@ -343,7 +367,39 @@ def main():
                               "the teams (per-player minutes not captured)")
         else:
             gates_pass.append("minutes redistribution computed")
+        rot_pick = (g["rotation_availability_home"] if side == "home"
+                    else g["rotation_availability_away"])
+        rot_opp = (g["rotation_availability_away"] if side == "home"
+                   else g["rotation_availability_home"])
+        # --- availability provenance decides whether a PASS is publishable
+        # as-is or only provisionally.  A gate pass says the two estimators
+        # agree and the team is inside the luck band; it says nothing about
+        # whether an official injury report exists for the game date yet, and
+        # teams file by 5 p.m. local the day before.  A pick whose rotation
+        # availability is not yet published is therefore marked provisional
+        # rather than silently treated as "nobody is injured".
+        prov = {}
+        unknown = []
+        for label, blk in (("pick_team", rot_pick), ("opponent", rot_opp)):
+            st = blk.get("status") or ""
+            if st.startswith("MEASURED"):
+                prov[label] = "measured"
+            elif st.startswith("NOT YET SUBMITTED"):
+                prov[label] = "not yet submitted"
+                unknown.append(blk.get("team"))
+            elif st.startswith("NOT YET PUBLISHED"):
+                prov[label] = "not yet published"
+                unknown.append(blk.get("team"))
+            else:
+                prov[label] = "not captured"
+                unknown.append(blk.get("team"))
+        publication = ("PASS - publishable" if gates_fail == [] and not unknown
+                       else ("PASS - PROVISIONAL: rotation availability not "
+                             "yet published for %s" % ", ".join(t for t in unknown if t)
+                             if gates_fail == [] else "FAIL - " + "; ".join(gates_fail)))
         picks.append({
+            "availability_provenance": prov,
+            "publication_verdict": publication,
             "date": g["date"], "game_id": g["game_id"], "matchup": g["matchup"],
             "pick": "%s %s" % (g["home"] if side == "home" else g["away"],
                                "wins" if side == "home" else "wins"),
@@ -389,8 +445,8 @@ def main():
                        "tables, blended underneath; their disagreement is the "
                        "headline confidence signal; the home-court advantage is "
                        "pinned to the measured official home win rate"),
-            "pick_window": "%s .. %s (up to 3 days ahead)" % (TODAY, PICK_WINDOW_END),
-            "line_window": "%s .. %s" % (TODAY, LINE_WINDOW_END),
+            "pick_window": "%s .. %s (up to 3 days ahead)" % (PICK_WINDOW_START, PICK_WINDOW_END),
+            "line_window": "%s .. %s" % (LINE_WINDOW_START, LINE_WINDOW_END),
             "inputs": {
                 "team_tables": {"advanced": tabs["advanced_file"],
                                 "traditional": tabs["traditional_file"],
@@ -479,9 +535,9 @@ def main():
                      "source": "https://www.nba.com/stats/players/traditional"})
     else:
         missing = sorted(({r["home"] for r in sched["rows"]
-                           if r["date"] >= TODAY} |
+                           if r["date"] >= LINE_WINDOW_START} |
                           {r["away"] for r in sched["rows"]
-                           if r["date"] >= TODAY}) -
+                           if r["date"] >= LINE_WINDOW_START}) -
                          set(minutes_meta.get("teams_captured", [])))
         if missing:
             gaps.append({"id": "G-MIN-2", "severity": "medium",

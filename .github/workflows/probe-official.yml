@@ -18,8 +18,40 @@ name: Probe official source reachability
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main, "arena/**"]
+  # CHANGE (session arena/2823d556-nba1, 2026-11-16 02:1x UTC, COORDINATION §47.1).
+  #
+  # The `push` trigger is GONE. It was the direct cause of the repository's
+  # Pages outage, and the evidence is in the run list rather than in an
+  # argument:
+  #
+  #   * `gh api /repos/wingbangboozle1-lang/NBA1/pages` returned
+  #     `status: errored`, and every `pages build and deployment` run since
+  #     `afc79f2` was `cancelled` rather than `built`.
+  #   * Six `Probe official source reachability` runs were queued ahead of the
+  #     production `Publish static site to GitHub Pages` run, several already
+  #     44-60 minutes into their wait, because each probe run took ~1h16m over
+  #     1996 cited URLs (its own committed record, 2026-11-16T01:05Z).
+  #   * `arena/4533630f-nba1` (§42.4) added a concurrency group, which stops
+  #     *duplicate* runs for the same ref. It cannot stop six different
+  #     branches from each owning a long run, and six long runs are enough to
+  #     starve the publisher on a shared runner pool.
+  #
+  # A reachability probe is a monitoring record, not a build artifact: nothing
+  # about the published site changes when a branch is pushed. Moving it to a
+  # clock means the record is refreshed on a predictable cadence (four times a
+  # day) and the runner pool is free for the workflow that actually publishes
+  # the site. The committed `data/raw/probe_official.json` from the last
+  # completed run stays on disk in between, so nothing is lost.
+  #
+  # Runtime is bounded twice more (see scripts/probe_official.py): the socket
+  # timeout drops 30 s -> 10 s and a per-host circuit breaker stops paying that
+  # timeout for a host that has already failed 5 consecutive connections. The
+  # 2026-11-16T01:05Z record shows 130 stats.nba.com URLs each burning the full
+  # 30 s - 65 of that run's 76 minutes.
+  schedule:
+    # 04:20, 10:20, 16:20, 22:20 UTC - offset from the top of the hour so the
+    # probe does not line up with the hourly refresh cron.
+    - cron: "20 4,10,16,22 * * *"
 
 permissions:
   contents: write
@@ -39,19 +71,53 @@ permissions:
 # pending run. A probe is a reachability record, not a deliverable, so
 # dropping a superseded pending run loses nothing - the committed
 # data/raw/probe_official.json from the last completed run is still the record.
+#
+# THE REMAINING DEFECT, FIXED (session arena/d31fb422-nba1, COORDINATION §46).
+# A per-ref group still allows one running probe *per branch*, and there are
+# many arena/** branches: at 2026-11-16T02:21Z the queue held four probe runs for
+# four different refs (6e1aadc1, dfef26dc, f03745ef, 754e9e54) ahead of the
+# production "Publish static site to GitHub Pages" run for main, which had been
+# `pending` since 02:19:58Z. Serialising per ref does not bound the total, so it
+# did not fix the starvation it was written for.
+#
+# Fix: ONE global group. At most one probe runs and at most one is pending,
+# account-wide, no matter how many sessions push. cancel-in-progress stays true
+# because a probe is a reachability record and the newest run supersedes it; the
+# last completed run's committed data/raw/probe_official.json remains the record.
+#
+# LANDED CONCURRENTLY by two sessions with the same conclusion: this branch wrote
+# the identical `group: probe-official` at 02:2xZ, and main already carries it
+# via 698fd59 (session credited in the comment above; run 43790379766 was the
+# deploy seen pending with 0 jobs behind 8 probes). Both readings agree, so the
+# resolution is the one change, not two — no behavioural difference, and the
+# merge below is a no-op for this file.
+#
+# 2026-11-16 update (arena/2823d556-nba1, §47.1): the `push` trigger this note
+# describes has been removed above, so the group now only ever sees scheduled
+# runs and manual dispatches. It is kept as a second line of defence - a manual
+# dispatch fired twice must still not queue two hour-long runs. The two fixes are
+# complementary: d31fb422's global group bounds how many probes can run at once,
+# and this session's trigger change stops branches from creating them at all.
+# Both landed within twenty minutes of each other, each session unaware of the
+# other; nothing is discarded here and both readings agree.
 concurrency:
-  # 2026-11-16 02:2x UTC, completing 4533630f's fix (698fd59, credited): the
-  # per-ref group probe-${{ github.ref }} still allowed one ~1-hour probe run
-  # per BRANCH, and 8 freshly-cloned parallel sessions queued 8 probes ahead of
-  # the production Pages deploy (run 43790379766 sat pending with 0 jobs).
-  # A single global group keeps at most one probe running and one queued
-  # (newest wins), so probes can no longer starve the Pages deploy.
   group: probe-official
   cancel-in-progress: true
 
 jobs:
   probe:
-    if: "!contains(github.event.head_commit.message, '[skip probe]')"
+    # The `push` trigger is gone (see the `on:` block), so the old
+    # `[skip probe]` guard on `github.event.head_commit.message` is dead code:
+    # on a scheduled run there is no head commit message to inspect, and the
+    # expression would resolve to an empty string rather than a boolean.
+    #
+    # A hard wall-clock bound is the real safeguard. The run before this change
+    # took 1h16m; with the 10 s timeout and the per-host circuit breaker in
+    # scripts/probe_official.py it is expected to finish in single-digit
+    # minutes, and if a source ever hangs again this stops it from occupying a
+    # runner for an hour. `continue-on-error` on the probe step means a
+    # timeout still produces a committed record rather than a failed job.
+    timeout-minutes: 25
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -95,7 +161,11 @@ jobs:
           if-no-files-found: warn
 
       - name: Commit the probe record
-        if: always() && github.event_name == 'push'
+        # Was `github.event_name == 'push'`. With the push trigger removed the
+        # probe now only ever runs on a schedule or a manual dispatch, so that
+        # condition would permanently skip the commit and the record would
+        # exist only as an artifact (arena/2823d556-nba1, §47.1).
+        if: always() && github.event_name != 'pull_request'
         run: |
           if [ -z "$(git status --porcelain data/raw/probe_official.json verification.html)" ]; then
             echo "probe record unchanged"; exit 0

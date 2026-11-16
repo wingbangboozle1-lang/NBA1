@@ -798,6 +798,145 @@
    "recommendation": "B first (cheap, targeted), then A inside the weekly full re-read that the refresh job already performs.",
    "decision_needed": "Confirm B (targeted) or A (full) so the next refresh allocates the fetch budget accordingly.",
    "source": "https://www.nba.com/standings (F75)"
+  },
+  {
+   "id": "SG32",
+   "title": "Capture per-player minutes for all 30 teams so the redistribution gate measures the model, not the capture",
+   "category": "data completeness",
+   "problem": "Eleven of the twenty-five picks in the current window are held back by minutes capture, not by the model: seven fail the minutes-redistribution gate outright and four more carry a blank availability cell. The stored capture is the league-wide top 50 by minutes (page 1 of 10).",
+   "options": [
+    {
+     "option": "A: one official request per team (30 requests) for the per-game traditional player table, stored per team with its retrieval stamp",
+     "effort": "Low - one loop over the 30 team ids",
+     "risk": "Low - additive capture, additive file",
+     "unlocks": "every pick becomes gateable on redistribution; the availability column fills in for CHI, MEM, SAS, CHA, MIL and the rest"
+    },
+    {
+     "option": "B: find the working pagination parameter on the league leaders table and capture all 10 pages",
+     "effort": "Medium - requires probing the rendered slice",
+     "risk": "Medium - the parameter was already shown not to be honoured once",
+     "unlocks": "the same coverage in one file, if the parameter can be found"
+    },
+    {
+     "option": "C: leave it and publish the gate failure as the verdict",
+     "effort": "None",
+     "risk": "High - the gate then reports a data gap as if it were a model result",
+     "unlocks": "nothing"
+    }
+   ],
+   "recommended": "A"
+  },
+  {
+   "id": "SG33",
+   "title": "Make one official endpoint the source of truth for tip times and fail the refresh on a disagreement",
+   "category": "data quality",
+   "problem": "Two official captures disagreed on the tip time of GSW@NOP (09:00 PM ET vs 8:00 PM ET). Nothing in the pipeline detects that class of conflict today; the newest capture simply overwrites.",
+   "options": [
+    {
+     "option": "A: designate the per-date games page as the tip-time source, normalise the format, and record a conflict row whenever two captures of one game id differ",
+     "effort": "Low",
+     "risk": "Low",
+     "unlocks": "F101 closes; tip-time provenance becomes auditable per game"
+    },
+    {
+     "option": "B: cross-check tip time against the injury PDF's Game Time column as well",
+     "effort": "Medium",
+     "risk": "Low",
+     "unlocks": "a third official corroboration, but the PDF only covers games with a submitted report"
+    }
+   ],
+   "recommended": "A, then B as a cross-check"
+  },
+  {
+   "id": "SG34",
+   "title": "Read quarter scores from the official box score so the results feed matches the brief",
+   "category": "data completeness",
+   "problem": "The brief asks for one row per game with date, teams, final score and quarter scores. The results feed carries date, teams and final; the quarter columns are null because the box score was not read in this pass.",
+   "options": [
+    {
+     "option": "A: after each slate completes, read the official box score for every game and store the four (or more) quarter lines, asserting that they sum to the printed final",
+     "effort": "Medium - one box score per game per day",
+     "risk": "Low",
+     "unlocks": "the results feed matches the brief outright, and the assertion catches transcription errors"
+    },
+    {
+     "option": "B: derive quarters from play-by-play",
+     "effort": "High",
+     "risk": "Medium - more endpoints, more to get wrong",
+     "unlocks": "the same data plus timing detail that is not needed for settlement"
+    }
+   ],
+   "recommended": "A"
+  },
+  {
+   "id": "SG35",
+   "title": "Refuse to promote a team-stat capture while any game on the previous slate is still in progress",
+   "category": "process control",
+   "problem": "Cutting model inputs from an efficiency table during a live slate produces a table in which some teams include that slate's games and some do not. This session avoided it by using the last clean snapshot, but the pipeline would not have stopped anyone.",
+   "options": [
+    {
+     "option": "A: add a freshness gate to the refresh job - promote a team-stat capture only when every game on the most recent slate is final",
+     "effort": "Low",
+     "risk": "Low - the previous capture simply stays in force",
+     "unlocks": "F103 closes; every published line is cut from a consistent game set"
+    },
+    {
+     "option": "B: cut twice, once clean and once current, and publish the drift between them",
+     "effort": "Medium",
+     "risk": "Low",
+     "unlocks": "the same guarantee plus a visible measure of how much a slate moves the inputs"
+    }
+   ],
+   "recommended": "A now, B later"
+  },
+  {
+   "id": "SG36",
+   "title": "Re-read the injury index inside the refresh job so availability fills in game date by game date",
+   "category": "data completeness",
+   "problem": "Availability is the one column that changes fastest and it is currently captured only when a session happens to look. No official edition covers 11/17 or 11/18 yet, so fifteen of twenty-five picks carry a blank cell.",
+   "options": [
+    {
+     "option": "A: have the scheduled refresh read the injury index, take the newest edition, diff it against the stored one, and re-cut the availability column only (leaving frozen pre-registration untouched)",
+     "effort": "Medium",
+     "risk": "Low - additive to the existing refresh gate",
+     "unlocks": "the 11/17 and 11/18 columns fill in as the league publishes; F105 closes"
+    },
+    {
+     "option": "B: keep manual per-session capture",
+     "effort": "None",
+     "risk": "High - the column is as stale as the last session that looked",
+     "unlocks": "nothing"
+    }
+   ],
+   "recommended": "A"
+  },
+  {
+   "id": "SG37",
+   "title": "Give GitHub Pages one deploy path instead of two that race each other",
+   "category": "deployment",
+   "problem": "Pages is configured with build_type 'legacy' - it builds the site from the main branch itself - while .github/workflows/pages.yml also deploys an Actions artifact to the same environment. Two builders are writing one site. Measured at 2026-11-16T02:5xZ: 9 consecutive 'pages build and deployment' runs cancelled, one every few minutes, each cancelled by the next push to main, with the last successful build at 2026-11-15T23:44:35Z. Freeing the queue (SG23, PR #115) did not fix it because the starvation is structural, not a backlog.",
+   "options": [
+    {
+     "option": "A: switch Pages to the Actions build type, so pages.yml is the only deploy path",
+     "effort": "Low - one API call or one setting in Settings > Pages",
+     "risk": "Low - pages.yml already produces the artifact and its deploy job has a concurrency group that serialises production runs (cancel-in-progress false on main)",
+     "unlocks": "F97 closes; the site stops depending on how many sessions happen to be pushing"
+    },
+    {
+     "option": "B: delete pages.yml and let the legacy branch builder be the only path",
+     "effort": "Low",
+     "risk": "Medium - loses the validate gate that runs before deploy, so a broken page could publish",
+     "unlocks": "the same single path, but without the pre-deploy check"
+    },
+    {
+     "option": "C: leave both paths",
+     "effort": "None",
+     "risk": "High - the site keeps serving whatever build happened to finish, which during parallel sessions is an old commit",
+     "unlocks": "nothing"
+    }
+   ],
+   "recommended": "A",
+   "note": "This session's token returned HTTP 403 on PUT /repos/{owner}/{repo}/pages (build_type=workflow), so it could not be applied here; it needs a repository admin."
   }
  ]
 }
