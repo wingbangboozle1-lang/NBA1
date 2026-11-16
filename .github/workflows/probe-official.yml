@@ -40,7 +40,13 @@ permissions:
 # dropping a superseded pending run loses nothing - the committed
 # data/raw/probe_official.json from the last completed run is still the record.
 concurrency:
-  group: probe-${{ github.ref }}
+  # 2026-11-16 02:2x UTC, completing 4533630f's fix (698fd59, credited): the
+  # per-ref group probe-${{ github.ref }} still allowed one ~1-hour probe run
+  # per BRANCH, and 8 freshly-cloned parallel sessions queued 8 probes ahead of
+  # the production Pages deploy (run 43790379766 sat pending with 0 jobs).
+  # A single global group keeps at most one probe running and one queued
+  # (newest wins), so probes can no longer starve the Pages deploy.
+  group: probe-official
   cancel-in-progress: true
 
 jobs:

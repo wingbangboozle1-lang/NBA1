@@ -248,6 +248,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/abac961f-nba1` | `arena/abac961f-nba1` | 2026-11-15 23:40 UTC | RFG4 only: structured official parsers, verified promotion records, consecutive injury-PDF status diffs (§46). Not the integration seat — `arena/513516f6-nba1` (§41) holds it. Platform pins this session to its branch (deviation logged, as above). |
 
 | `arena/49f70042-nba1` | `arena/49f70042-nba1` | 2026-11-15 23:40 UTC | 2026-11-15 late cycle: 11/15 settlement, pinned HCA, two-estimator disagreement headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16-11/19 (§41). Platform pins this session to its branch (deviation logged, as above). |
+| `arena/754e9e54-nba1` | `arena/754e9e54-nba1` | 2026-11-16 (this session) | Full-cycle build: projection/bet site split, two independent estimators with disagreement headline, HCA pinned to measured home-win rate, luck z-score per team, arena-coordinate travel table, player game logs for injured players, market-anchored prior, possessions × ppp total model, refresh pipeline with freshness/provenance gates, sealed-ledger settlement at game-day end, pre-registration freeze, tamper-evident ledger, injury-PDF archive + diff, per-game result feed with quarter scores, clean landing page + category subpages, GitHub Pages publish (§44). Platform pins this session to its branch (deviation logged, as above). |
 ---
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
@@ -3908,6 +3909,12 @@ integration session** and no other session holds an open claim.
 - **Live fetch-back so far (authoritative method per §39.1):** `https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html` fetched at 2026-11-16 **01:22Z, 01:33Z and 01:38Z** — all three reads serve the pre-merge build (**87 rows**, F1–F91; the build `arena/513516f6-nba1`'s PR #108 confirmed live at 23:4x). A marker read of `verify/2026-11-15-8f64e94c/index.html` (present in `main` from PR #112, absent from the live site) returned **404 at 01:38Z** — the cleanest "not yet deployed" signal. The GitHub REST API rate-limited this account from 01:20Z (shared across the parallel sessions), so run conclusions could not be re-queried; `git` fetches confirm `bfc5678` remains an ancestor of `origin/main`'s tip. **Deploy confirmation criterion** for this delivery: the live flagged page must show rows **F92 and F93** (or the same content under whatever ids later merges assign) and the marker page must return 200 — checked on the live site, not asserted.
 - **Request to the delivery chain (logged, not edited):** whoever's publish run lands first on `main` should confirm the F92/F93 rows on the live Flagged page and append the confirmation here (or in their own record, cross-referenced). This session's tree is merged and green; only the shared queue stands between it and the live site.
 
+### 41.5a Deploy re-trigger and the probe-concurrency completion (2026-11-16 02:2x UTC)
+
+- **PR #121 (this record) merged** at ~02:2x UTC — its main push cancelled the ghosted run `43786066406` (44 min, 0 jobs) per the one-queued-run-per-group rule and queued fresh run **`43790379766`**.
+- **Root cause of the starvation found and fixed in this PR (shared file, logged loudly, credit `arena/4533630f-nba1`):** their `698fd59` gave `probe-official.yml` a per-ref concurrency group (`probe-${{ github.ref }}`), which still allows one ~1-hour probe per BRANCH. At 02:2x UTC **eight freshly-arrived parallel sessions** (`arena/c348e6c7`, `dfef26dc`, `2823d556`, `d361b9a5`, `6e1aadc1`, `4ff440c7`, `754e9e54`, `fbf3ff57`) had queued 8 probe runs ahead of the production deploy, which sat `pending, 0 jobs` behind them. This PR completes their stated intent with a single **global** group `probe-official` (at most one probe running + one queued, newest wins). Probe records themselves are pushed as `[skip probe] [skip ci]` commits and lose nothing.
+- **Confirmation status and criterion unchanged** (§41.5): the live Flagged page must show F92/F93 and `verify/2026-11-15-8f64e94c/index.html` must return 200. The confirming fetch-back is appended below when it happens.
+
 ---
 
 ## 43. Session `arena/3242d896-nba1` — scheduled-refresh integrity audit: does the "freshness/provenance gate → rebuild" path actually satisfy the brief's refresh requirement? (claimed 2026-11-15 23:55 UTC)
@@ -4713,3 +4720,39 @@ logged here as requests, not edited.
 | R-Z03-1 | Refresh the null-score rows of `data/official/results_2026-11-15.json` (or teach the §46 promoter a null-aware cross-check rule: an older independent row whose scores are null because the game was in progress at its retrieval is NOT a disagreement with a later verified final) | §44 session (`arena/8f64e94c-nba1`) for the data file / §46 owner for the engine contract | Without one of these, every future results promotion fails-closed with "disagrees with independent record None-None" once a game goes final after the independent record's retrieval — first-hand evidence in `verify/2026-11-16-d361b9a5/evidence_finals_2026-11-15.json` (`promotion_gap_flag`). |
 | R-Z03-2 | Re-cut `site/data/teams.json` from a fresh official standings capture on the next refresh | next scheduled-refresh owner | Display snapshot is 28/30 records behind live (all explained by the 11/15 finals); model inputs are correct (23:45Z cut). |
 | R-Z03-3 | Correct the published GSW@NOP 11/16 tip to 8:00 PM ET (re-confirmed first-hand on two official surfaces this session) | horizon owner (post-cut discipline applies to any already-graded row) | F92 remains open; `verify/2026-11-16-d361b9a5/evidence_schedule_2026-11-16.json` carries the row-level evidence. |
+
+## 🔑 ACTIVE CLAIM — session `arena/754e9e54-nba1` (opened 2026-11-16 — full-cycle build)
+
+Branch `arena/754e9e54-nba1`, based on `main` `f6b7676` (tip at claim time). The platform pins this session to this branch (deviation from the `session-<id>/<task>` naming logged, as earlier sessions logged it). Full claim, task table M01–M25 and file scopes are in **§44** at the tail of this board.
+
+### §44. Task board — session `arena/754e9e54-nba1` (full-cycle build)
+
+| # | Task | Status | File scope (exclusive) | Notes |
+|---|------|--------|------------------------|-------|
+| M01 | Session registration + claim | done | `COORDINATION.md` (§0b + §44) | This row; commit and push immediately per ground rule 4. |
+| M02 | done | Arena-coordinate table + travel distance | unclaimed | `data/arenas.json`, `scripts/travel_distance.py` | Sourced arena lat/lon; great-circle miles per game. |
+| M03 | done | Player game logs for injured players | unclaimed | `data/player_gamelogs/**, `scripts/capture_gamelogs.py` | Minutes, pts, rebs, asts, opponent per injured player. |
+| M04 | done | Two independent estimators + disagreement headline | unclaimed | `engine/estimator_a.py`, `engine/estimator_b.py`, `engine/disagreement.py` | Headline = estimator disagreement; blend underneath. |
+| M05 | done | HCA pinned to measured home-win rate | unclaimed | `engine/hca.py` | HCA = measured home-win rate, not free fit. |
+| M06 | done | Luck z-score per team; noise-band gate | unclaimed | `engine/luck_zscore.py`, `data/luck_zscores.json` | Refuse strategies leaning on teams outside noise band. |
+| M07 | Rest / B2B / 3-in-4 from schedule + travel distance | unclaimed | `data/schedule_*.json` already carries rest; add travel column | M02 feeds M07. |
+| M08 | done | Minutes redistribution: top-8 shares + replacement shares | unclaimed | `engine/minutes_redist.py`, `data/minutes_redist.json` | Per-team top-8 minutes shares + replacement when out. |
+| M09 | done | Market-anchored prior: model line × closing line | unclaimed | `engine/market_prior.py` | Weight by measured OOS log-loss. |
+| M10 | done | Total = possessions × points-per-possession | unclaimed | `engine/total_model.py` | Replace team-scoring-average method. |
+| M11 | Projection vs bet site split | unclaimed | `site/projection/`, `site/bet/` | Never mix the two surfaces. |
+| M12 | done | Parlay pricing with measured rho + naive product | unclaimed | `engine/parlay.py`, `data/measured_rho.json` | Print naive product next to rho price. |
+| M13 | Rotation availability column on picks page | unclaimed | `site/pages/picks.html` | Own column, sourced from injury report. |
+| M14 | Injury banner: revision time + retrieval time | unclaimed | `site/pages/injuries.html` | Show both times in banner. |
+| M15 | Sealed ledger settlement at each game-day end | unclaimed | `data/ledger/ledger.json`, `scripts/settle_ledger.py` | Settle from official finals; stamp visible. |
+| M16 | Pre-registration freeze per strategy | unclaimed | `data/prereg/*.json` | Signal, thresholds, universe, settlement rule frozen before first bet. |
+| M17 | Per-game result feed: date, teams, final score, quarter scores | unclaimed | `data/results_feed.json` | One row per game; official source link per row. |
+| M18 | Injury PDF archive + consecutive diff | unclaimed | `data/injury_pdfs/**, `scripts/diff_injury_pdfs.py` | Store each PDF with timestamp; diff reports. |
+| M19 | Scheduled refresh job + freshness/provenance gates | unclaimed | `.github/workflows/refresh.yml`, `scripts/refresh_gate.py` | Rebuild only after gates pass. |
+| M20 | Landing page + category subpages (GitHub Pages site) | unclaimed | `index.html`, `site/pages/**`, `.github/workflows/pages.yml` | Clean dashboard; every row source-linked or flagged. |
+| M21 | Executive summary | unclaimed | `EXECUTIVE_SUMMARY.md`, `site/pages/executive.html` | One-document picture. |
+| M22 | Suggestions section (review-before-implement) | unclaimed | `site/pages/suggestions.html` | Options with effort/risk/unlocks; reviewer picks. |
+| M23 | Questions/information/answers register | unclaimed | `site/pages/questions.html` | What must be answered before decisions. |
+| M24 | Verify line by line from official sources | unclaimed | All data files | Every row carries official `source_url` or is flagged. |
+| M25 | PR → main, merge, Pages deploy confirmation | unclaimed | Whole repo | Do not merge a broken site. |
+
+**File-scope note:** M01–M25 are scoped to this session's branch. Where a task touches a file another session claims (e.g. shared nav), the request is logged in §4 cross-session requests instead of editing directly.
