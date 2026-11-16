@@ -218,6 +218,27 @@
 <td>High - a direct transcription of the league's own document, with the row count and per-club status reproducible from the URL on the row.</td>
 <td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>
 </tr>
+<tr id="A18">
+<td>A18</td>
+<td><b>What is the measured home-win rate, and how many points of home-court advantage is it worth?</b></td>
+<td>The official standings HOME/ROAD columns, summed across all 30 teams at 2026-11-16T02:13Z, give 102 home wins in 193 home games: a 0.5285 home-win rate. Two internal cross-checks hold - home wins (102) equals road losses (102), and road wins (91) equals home losses (91) - so the sum is internally consistent. The final-score corpus measures it independently at 0.5155 (83 of 161 completed games) and is published beside it as a cross-check rather than replacing it. With the measured margin dispersion of 17.24 points, HCA = sigma x Phi-inverse(0.5285) = 1.23 points. Nothing about that number is fitted: it is read off the measurement. The previous cut used 0.5319, so the measurement moved 0.34 percentage points between two captures two and a half hours apart.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id official standings HOME/ROAD columns and the official final-score corpus is not in the register">&mdash;</span></td>
+</tr>
+<tr id="A19">
+<td>A19</td>
+<td><b>Do the two independent estimators agree well enough for the lines to be published?</b></td>
+<td>Across the 25 games in the 11/16-11/18 window the two estimators disagree by at most 1.37 percentage points of home-win probability, with a mean of 0.45. The gate is 4.0 percentage points, so all 25 games clear it. That disagreement is what the site publishes as the headline confidence signal; the blend sits underneath it rather than the other way round.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id data/derived/horizon_lines_v2.json is not in the register">&mdash;</span></td>
+</tr>
+<tr id="A20">
+<td>A20</td>
+<td><b>What is the measured correlation used to price parlays, and how much does it move the price?</b></td>
+<td>Measured on the official final-score corpus: home points against away points 0.0823; margin against total -0.0115; home points against total 0.732. The first two are near zero, so legs on different games are close to independent and the naive product is nearly right for cross-game parlays. Home points against total at 0.732 is not, which is exactly the same-game-parlay case - so the site prints the rho-priced figure next to the naive product and lets the difference show, rather than withholding the price.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="source id data/derived/model_report_v2.json (measured_correlations) is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Open</h2><p class="secsub">Questions that cannot be answered yet. Nothing on this site is decided on an open question.</p>
 <div class="tablewrap">
@@ -411,6 +432,51 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="no official source exists">&mdash;</span></td>
+</tr>
+<tr id="Q26">
+<td>Q26</td>
+<td><b>How much does a completed slate move the model inputs?</b></td>
+<td>A clean re-cut after 2026-11-15. Three games on that slate were still in progress at 02:16Z on 11/16 (HOU@WAS in the fourth quarter, ATL@MIL at half, OKC@SAC in the first), so the efficiency tables cannot yet be re-read consistently (F103).</td>
+<td>Once every 11/15 game is final, re-read the three official team-stat pages, re-cut, and publish the drift between the new cut and the inputs behind the currently published lines.</td>
+<td>Confidence that the published lines rest on the freshest consistent inputs</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">context</a></td>
+</tr>
+<tr id="Q27">
+<td>Q27</td>
+<td><b>Is the measured home-win rate stable enough to pin to?</b></td>
+<td>A time series. Two captures two and a half hours apart gave 0.5319 and 0.5285 - a 0.34 point move on a 193-game sample. That is within noise, but the stability of the measurement has never been tracked across a season.</td>
+<td>Record the measured home-win rate at every refresh and publish the series with its sample size, so pinning can be tested for drift instead of assumed sound.</td>
+<td>Whether pinning HCA to one measurement beats fitting it freely</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://www.nba.com/standings" target="_blank" rel="noopener">context</a></td>
+</tr>
+<tr id="Q28">
+<td>Q28</td>
+<td><b>How much does rotation availability move a line once the league publishes it?</b></td>
+<td>Official injury editions for 11/17 and 11/18, plus five 11/16 team entries that still print NOT YET SUBMITTED (WAS, BOS, HOU, PHI, PHX). Fifteen of the twenty-five picks carry a blank availability cell for at least one team (F105).</td>
+<td>Re-read the injury index at each refresh, re-cut the availability column only, and compare the line before and after for every game where availability changed.</td>
+<td>Whether availability belongs in the line at all, and at what weight</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">context</a></td>
+</tr>
+<tr id="Q29">
+<td>Q29</td>
+<td><b>Are the two POR@MIN meetings on consecutive nights independent observations?</b></td>
+<td>Nothing in the data - the official schedule genuinely lists Portland at Minnesota on both 11/16 (game 0022600250) and 11/17 (game 0022600254), confirmed on the official game page (F102). What is missing is a convention for treating them.</td>
+<td>Decide and register whether two meetings of the same teams within 48 hours count as one observation or two in the backtest and in the correlation measurement. Today they are counted as two.</td>
+<td>Backtest sample size, the rho estimates, and any parlay that contains both games</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://www.nba.com/game/por-vs-min-0022600254" target="_blank" rel="noopener">context</a></td>
+</tr>
+<tr id="Q30">
+<td>Q30</td>
+<td><b>Which official endpoint should tip time come from, and what happens when two captures disagree?</b></td>
+<td>A designated source and a conflict rule. Two official captures disagree on GSW@NOP (09:00 PM ET against 8:00 PM ET); the newest one silently wins today (F101).</td>
+<td>Name the per-date games page as the source, normalise the format, and have the refresh record a conflict row whenever two captures of one game id differ instead of overwriting (SG33).</td>
+<td>Any downstream use of tip time - rest windows, pre-tip publication, and the ledger's publish-before-tip rule</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="value left blank - not published by an official source; context source linked">&mdash;</span> <a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">context</a></td>
 </tr>
 </tbody></table></div>
 <p class="tnote">Where a row says no official source exists, that is the honest answer: no NBA-operated page publishes the missing item (a closing price, for instance).</p>

@@ -1,27 +1,27 @@
 {
  "title": "Model report v2 - every measured input the line model is pinned to",
  "generated_by": "scripts/build_horizon_v2.py",
- "generated_utc": "2026-11-16T00:31:26Z",
+ "generated_utc": "2026-11-16T02:40:12Z",
  "home_court_anchor": {
-  "measured_home_win_rate": 0.5319,
-  "measured_home_win_rate_from_final_scores": 0.5159235668789809,
-  "hca_points_from_final_scores_crosscheck": 0.69,
+  "measured_home_win_rate": 0.5285,
+  "measured_home_win_rate_from_final_scores": 0.515527950310559,
+  "hca_points_from_final_scores_crosscheck": 0.67,
   "primary_measurement": "the official standings HOME/ROAD columns (the largest official sample); the final-score corpus measurement is published beside it as a cross-check",
-  "measured_road_win_rate": 0.4840764331210191,
-  "games_measured": 157,
-  "home_wins": 81,
-  "home_games": 157,
+  "measured_road_win_rate": 0.484472049689441,
+  "games_measured": 161,
+  "home_wins": 83,
+  "home_games": 161,
   "standings_cross_check": {
-   "home_win_rate": 0.5319,
-   "road_win_rate": 0.4681,
-   "home_games": 188,
-   "road_games": 188,
+   "home_win_rate": 0.5285,
+   "road_win_rate": 0.4715,
+   "home_games": 193,
+   "road_games": 193,
    "source_url": "https://www.nba.com/standings"
   },
-  "sigma_margin_used": 17.2,
+  "sigma_margin_used": 17.24,
   "sigma_margin_source": "population standard deviation of the margin on the official final-score corpus",
-  "hca_points": 1.38,
-  "hca_z": 0.08,
+  "hca_points": 1.23,
+  "hca_z": 0.0715,
   "formula": "HCA_points = sigma_margin * Phi^-1(measured home win rate). The number of points is read off the measurement; nothing about it is fitted.",
   "status": "MEASURED - the home-court advantage is pinned to the official home win rate"
  },
@@ -38,25 +38,25 @@
  "measured_correlations": [
   {
    "pair": "home points / away points",
-   "rho_measured": 0.0939,
-   "p_value": 0.24065,
-   "n": 158,
+   "rho_measured": 0.0823,
+   "p_value": 0.29794,
+   "n": 162,
    "why": "the correlation between the two teams' scores in the same game - the rho a both-teams-over parlay has to be priced with",
    "status": "MEASURED on official final scores (data/official/gamelog.json)"
   },
   {
    "pair": "margin / total",
-   "rho_measured": -0.013,
-   "p_value": 0.87134,
-   "n": 158,
+   "rho_measured": -0.0115,
+   "p_value": 0.88426,
+   "n": 162,
    "why": "the correlation between the margin and the total - the rho a side plus total same-game parlay has to be priced with",
    "status": "MEASURED on official final scores (data/official/gamelog.json)"
   },
   {
    "pair": "home points / total",
-   "rho_measured": 0.7356,
+   "rho_measured": 0.732,
    "p_value": 0.0,
-   "n": 158,
+   "n": 162,
    "why": "the correlation between a team's own score and the game total",
    "status": "MEASURED on official final scores (data/official/gamelog.json)"
   }
@@ -65,61 +65,61 @@
   {
    "p_leg1": 0.55,
    "p_leg2": 0.55,
-   "rho_used": 0.0939,
-   "p_joint_with_rho": 0.31724,
+   "rho_used": 0.0823,
+   "p_joint_with_rho": 0.31542,
    "p_naive_independent_product": 0.3025,
-   "difference": 0.01474,
-   "bettor_edge_pct": 4.87,
+   "difference": 0.01292,
+   "bettor_edge_pct": 4.27,
    "pricing_note": "the joint probability is computed from the bivariate normal with the measured rho; the naive independent product is printed beside it so the correlation cost is visible"
   },
   {
    "p_leg1": 0.55,
    "p_leg2": 0.55,
-   "rho_used": -0.013,
-   "p_joint_with_rho": 0.30046,
+   "rho_used": -0.0115,
+   "p_joint_with_rho": 0.3007,
    "p_naive_independent_product": 0.3025,
-   "difference": -0.00204,
-   "bettor_edge_pct": -0.67,
+   "difference": -0.0018,
+   "bettor_edge_pct": -0.6,
    "pricing_note": "the joint probability is computed from the bivariate normal with the measured rho; the naive independent product is printed beside it so the correlation cost is visible"
   },
   {
    "p_leg1": 0.6,
    "p_leg2": 0.6,
-   "rho_used": 0.0939,
-   "p_joint_with_rho": 0.37408,
+   "rho_used": 0.0823,
+   "p_joint_with_rho": 0.37233,
    "p_naive_independent_product": 0.36,
-   "difference": 0.01408,
-   "bettor_edge_pct": 3.91,
+   "difference": 0.01233,
+   "bettor_edge_pct": 3.42,
    "pricing_note": "the joint probability is computed from the bivariate normal with the measured rho; the naive independent product is printed beside it so the correlation cost is visible"
   },
   {
    "p_leg1": 0.6,
    "p_leg2": 0.6,
-   "rho_used": -0.013,
-   "p_joint_with_rho": 0.35806,
+   "rho_used": -0.0115,
+   "p_joint_with_rho": 0.35828,
    "p_naive_independent_product": 0.36,
-   "difference": -0.00194,
-   "bettor_edge_pct": -0.54,
+   "difference": -0.00172,
+   "bettor_edge_pct": -0.48,
    "pricing_note": "the joint probability is computed from the bivariate normal with the measured rho; the naive independent product is printed beside it so the correlation cost is visible"
   },
   {
    "p_leg1": 0.65,
    "p_leg2": 0.65,
-   "rho_used": 0.0939,
-   "p_joint_with_rho": 0.43549,
+   "rho_used": 0.0823,
+   "p_joint_with_rho": 0.43387,
    "p_naive_independent_product": 0.4225,
-   "difference": 0.01299,
-   "bettor_edge_pct": 3.07,
+   "difference": 0.01137,
+   "bettor_edge_pct": 2.69,
    "pricing_note": "the joint probability is computed from the bivariate normal with the measured rho; the naive independent product is printed beside it so the correlation cost is visible"
   },
   {
    "p_leg1": 0.65,
    "p_leg2": 0.65,
-   "rho_used": -0.013,
-   "p_joint_with_rho": 0.42072,
+   "rho_used": -0.0115,
+   "p_joint_with_rho": 0.42092,
    "p_naive_independent_product": 0.4225,
-   "difference": -0.00178,
-   "bettor_edge_pct": -0.42,
+   "difference": -0.00158,
+   "bettor_edge_pct": -0.37,
    "pricing_note": "the joint probability is computed from the bivariate normal with the measured rho; the naive independent product is printed beside it so the correlation cost is visible"
   }
  ],
@@ -136,21 +136,21 @@
   },
   {
    "team": "SAS",
-   "games": 10,
-   "expected_points_total": 152.3,
-   "actual_points_total": -52.0,
-   "luck_points": -56.3,
-   "luck_z": -1.3,
-   "in_noise_band": true,
+   "games": 11,
+   "expected_points_total": 176.0,
+   "actual_points_total": -60.0,
+   "luck_points": -72.0,
+   "luck_z": -1.59,
+   "in_noise_band": false,
    "source": "official final scores; expected margin from the official team-stat tables"
   },
   {
-   "team": "DAL",
-   "games": 11,
-   "expected_points_total": -22.5,
-   "actual_points_total": 129.0,
-   "luck_points": 55.5,
-   "luck_z": 1.23,
+   "team": "UTA",
+   "games": 12,
+   "expected_points_total": -180.3,
+   "actual_points_total": -16.0,
+   "luck_points": 56.3,
+   "luck_z": 1.19,
    "in_noise_band": true,
    "source": "official final scores; expected margin from the official team-stat tables"
   },
@@ -171,16 +171,6 @@
    "actual_points_total": 86.0,
    "luck_points": -43.7,
    "luck_z": -0.97,
-   "in_noise_band": true,
-   "source": "official final scores; expected margin from the official team-stat tables"
-  },
-  {
-   "team": "UTA",
-   "games": 11,
-   "expected_points_total": -156.6,
-   "actual_points_total": -8.0,
-   "luck_points": 40.6,
-   "luck_z": 0.9,
    "in_noise_band": true,
    "source": "official final scores; expected margin from the official team-stat tables"
   },
@@ -225,22 +215,22 @@
    "source": "official final scores; expected margin from the official team-stat tables"
   },
   {
+   "team": "DAL",
+   "games": 12,
+   "expected_points_total": -33.5,
+   "actual_points_total": 166.0,
+   "luck_points": 29.5,
+   "luck_z": 0.62,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
    "team": "DET",
    "games": 11,
    "expected_points_total": 58.8,
    "actual_points_total": 0.0,
    "luck_points": -26.8,
    "luck_z": -0.59,
-   "in_noise_band": true,
-   "source": "official final scores; expected margin from the official team-stat tables"
-  },
-  {
-   "team": "BOS",
-   "games": 11,
-   "expected_points_total": 175.8,
-   "actual_points_total": -28.0,
-   "luck_points": -25.8,
-   "luck_z": -0.57,
    "in_noise_band": true,
    "source": "official final scores; expected margin from the official team-stat tables"
   },
@@ -276,10 +266,10 @@
   },
   {
    "team": "NYK",
-   "games": 10,
-   "expected_points_total": 77.1,
-   "actual_points_total": 44.0,
-   "luck_points": -15.1,
+   "games": 11,
+   "expected_points_total": 81.8,
+   "actual_points_total": 40.0,
+   "luck_points": -15.8,
    "luck_z": -0.35,
    "in_noise_band": true,
    "source": "official final scores; expected margin from the official team-stat tables"
@@ -386,21 +376,31 @@
   },
   {
    "team": "LAC",
-   "games": 9,
-   "expected_points_total": -55.8,
-   "actual_points_total": 100.0,
-   "luck_points": 3.8,
-   "luck_z": 0.09,
+   "games": 10,
+   "expected_points_total": -49.4,
+   "actual_points_total": 108.0,
+   "luck_points": 5.4,
+   "luck_z": 0.13,
+   "in_noise_band": true,
+   "source": "official final scores; expected margin from the official team-stat tables"
+  },
+  {
+   "team": "CHA",
+   "games": 11,
+   "expected_points_total": -109.8,
+   "actual_points_total": -32.0,
+   "luck_points": -2.2,
+   "luck_z": -0.05,
    "in_noise_band": true,
    "source": "official final scores; expected margin from the official team-stat tables"
   },
   {
    "team": "TOR",
-   "games": 11,
-   "expected_points_total": 13.0,
-   "actual_points_total": 80.0,
-   "luck_points": -3.0,
-   "luck_z": -0.07,
+   "games": 12,
+   "expected_points_total": 8.3,
+   "actual_points_total": 76.0,
+   "luck_points": -2.3,
+   "luck_z": -0.05,
    "in_noise_band": true,
    "source": "official final scores; expected margin from the official team-stat tables"
   },
@@ -415,12 +415,12 @@
    "source": "official final scores; expected margin from the official team-stat tables"
   },
   {
-   "team": "CHA",
-   "games": 10,
-   "expected_points_total": -103.5,
-   "actual_points_total": -40.0,
-   "luck_points": -0.5,
-   "luck_z": -0.01,
+   "team": "BOS",
+   "games": 12,
+   "expected_points_total": 186.8,
+   "actual_points_total": 9.0,
+   "luck_points": 0.2,
+   "luck_z": 0.0,
    "in_noise_band": true,
    "source": "official final scores; expected margin from the official team-stat tables"
   }
@@ -433,11 +433,11 @@
   "w_model": 1.0,
   "w_market": 0.0,
   "market_leg": "UNAVAILABLE - no official closing line is reachable from this sandbox, so the market leg carries zero weight",
-  "oos_log_loss_model": 0.4862802533559244
+  "oos_log_loss_model": 0.4800313554396495
  },
  "model_out_of_sample_log_loss": {
-  "value": 0.48628,
-  "n_games": 157,
+  "value": 0.48003,
+  "n_games": 161,
   "definition": "binary log loss of the model's home-win probability on the official final-score corpus"
  },
  "per_player_minutes": {
