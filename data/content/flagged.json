@@ -971,6 +971,39 @@
    "affected": "the live site at https://wingbangboozle1-lang.github.io/NBA1/ - it serves 2026-11-15T23:44Z content, not the current main",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/actions/workflows/pages.yml",
    "suggested_action": "Switch Pages to the Actions build type (Settings > Pages > Source: GitHub Actions), or delete pages.yml, so exactly one path deploys. Recorded as SG37."
+  },
+  {
+   "id": "F108",
+   "severity": "Low",
+   "status": "open",
+   "title": "Four team rows in the 11/15 gamebooks do not sum to the printed team total",
+   "detail": "LAL@PHX: LAL player minutes sum to 240:03 and PHX to 240:01 against a printed 240:00. SAS@UTA: UTA sums to 240:01. NYK@TOR: NYK sums to 265:02 against a printed 265:00 (one overtime period, 5 x 53:00). Each printed total is used as the denominator. The difference is shown, not redistributed. Other rows match exactly.",
+   "source": "Official gamebook PDFs (statsdmz): LALPHX, SASUTA, NYKTOR",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf",
+   "affected": "data/derived/minutes_shares.json (flags); site/pages/minutes.html",
+   "suggested_action": "None needed for the shares. Keep the flag on the minutes page."
+  },
+  {
+   "id": "F109",
+   "severity": "High",
+   "status": "open",
+   "title": "Projection margins and totals include a travel adjustment from a non-official arena-coordinate source",
+   "detail": "data/derived/horizon_lines_v2.json computes a travel distance per away team (for example ORL to BOS 2,094 mi; the coordinates come from Wikipedia) and feeds a travel adjustment into the margin (for example 2.513 for ORL). Q04 decided no distances are computed, because no official arena-coordinate table exists. projection.html shows the margins and totals and carries a note (F85), but the adjustment itself is not yet removed.",
+   "source": "Wikipedia coordinate API (secondary); venue names from nba.com/schedule",
+   "source_url": "https://www.nba.com/schedule",
+   "affected": "data/derived/horizon_lines_v2.json (travel_away, travel_adjustment_away); site/pages/projection.html",
+   "suggested_action": "Remove the travel adjustment from the published margin, or source an official coordinate table, before the next projection publish. Owner: the session that owns scripts/build_horizon_v2.py."
+  },
+  {
+   "id": "F110",
+   "severity": "Low",
+   "status": "open",
+   "title": "Three 11/15 gamebooks are page-1 text only and are outside the minutes measure",
+   "detail": "data/official/gamebooks/2026-11-15_HOUWAS.md, _ATLMIL.md and _OKCSAC.md hold the page-1 box score and period table, not the full PDF. Their final scores match the official game pages (147-119, 113-106, 125-103). The OKC@SAC away player minutes sum to 239:59 against the printed 240:00, a one-second difference. These files are not used for the minutes shares (Q02 scope is the six 11/15 gamebooks).",
+   "source": "Official gamebook PDFs (statsdmz) and nba.com game pages",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC_book.pdf",
+   "affected": "data/official/gamebooks/2026-11-15_HOUWAS.md, _ATLMIL.md, _OKCSAC.md",
+   "suggested_action": "Capture the full gamebooks in a later pass if they are needed for minutes or player logs."
   }
  ]
 }
