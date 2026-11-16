@@ -23,6 +23,23 @@ def canon(d):
     return json.dumps(d, sort_keys=True).encode()
 
 
+def _find_archived_copy(rel, want):
+    """Look for a byte-identical copy of `rel` as it was when `want` was recorded.
+
+    Searches data/archive/prereg_*/<basename> (one directory per slate vintage).
+    Returns the relative path of the first match, or None.
+    """
+    import glob
+    base = os.path.basename(rel)
+    for cand in sorted(glob.glob(os.path.join(ROOT, "data", "archive", "prereg_*", base))):
+        try:
+            if sha(open(cand, "rb").read()) == want:
+                return os.path.relpath(cand, ROOT)
+        except OSError:
+            continue
+    return None
+
+
 def main():
     ledger = json.load(open(os.path.join(ROOT, "data/ledger/ledger.json"), encoding="utf-8"))
     ok = True
@@ -32,8 +49,9 @@ def main():
     # bytes that the re-run legitimately overwrote, so it is reported as SUPERSEDED
     # (still hash-chained, still listed) rather than read as tampering. The entry
     # that supersedes it is checked normally. Annotations live in the top-level
-    # "superseded" list and are themselves validated: each one must name an entry
-    # that is actually in the chain.
+    # "superseded" list and are themselves validated: each must name an entry that is
+    # actually in the chain. (Added by arena/801ba27f-nba1, merged with the
+    # archived-copy rule added by another session.)
     superseded = {r["entry"]: r for r in ledger.get("superseded", [])}
     for n, r in sorted(superseded.items()):
         if not any(e.get("entry") == r.get("by") for e in ledger["entries"]):
@@ -63,9 +81,21 @@ def main():
             if key in e and not skip_digests:
                 for rel, want in e[key].items():
                     got = sha(open(os.path.join(ROOT, rel), "rb").read())
-                    if got != want:
-                        print(f"FAIL entry {e['entry']}: {rel} digest mismatch ({key})")
-                        ok = False
+                    if got == want:
+                        continue
+                    # The live pre-registration set is re-frozen for each new slate, so a
+                    # historical entry's live path holds a later vintage. The bytes that
+                    # entry froze are preserved under data/archive/prereg_*/, written at
+                    # publication time; accept an archived byte-identical copy, and say
+                    # which one. A mismatch everywhere is still a tamper failure.
+                    archived = _find_archived_copy(rel, want)
+                    if archived:
+                        print(f"OK   entry {e['entry']}: {rel} superseded on the live path; "
+                              f"frozen bytes preserved at {archived}")
+                        continue
+                    print(f"FAIL entry {e['entry']}: {rel} digest mismatch ({key}) - "
+                          f"no byte-identical copy on the live path or in data/archive")
+                    ok = False
         if skip_digests:
             pass
         elif ("files_now" in e or "files_at_settlement" in e

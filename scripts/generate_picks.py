@@ -28,6 +28,7 @@ HONESTY RULES:
 import json
 import math
 import os
+from datetime import datetime, timezone
 from itertools import combinations
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -86,6 +87,7 @@ def rho_bounds(p1, p2):
 
 def main():
     hl = json.load(open(os.path.join(DATA, "derived", "horizon_lines.json"), encoding="utf-8"))
+    lines = hl
     games = hl["games"]
     players = [p for p in json.load(open(os.path.join(DATA, "players_2026_27.json"),
                                         encoding="utf-8"))["players"]
@@ -207,11 +209,16 @@ def main():
             kept.append(r)
             seen[r["date"]] = seen.get(r["date"], 0) + 1
 
+    dates = sorted({s_["date"] for s_ in singles}) or \
+            sorted({g["date"] for g in lines["games"]})
     payload = {
         "_meta": {
-            "title": "Horizon picks — 2026-11-15 through 2026-11-18",
-            "generated_by": "scripts/generate_picks.py",
-            "generated_utc": "2026-11-15",
+            "title": f"Horizon picks — {dates[0]} through {dates[-1]}",
+            "generated_by": "scripts/generate_picks.py (rolling window)",
+            "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),
+            "window_rule": ("the horizon is whatever data/derived/horizon_lines.json holds; "
+                            "that file is produced by the rolling-slate originator from the "
+                            "newest official schedule capture (today + up to 3 days ahead)"),
             "lines_source": "data/derived/horizon_lines.json (scripts/originate_horizon.py)",
             "pick_gate": {"margin": PICK_GATE_MARGIN,
                           "inherited_from": "data/originated_lines.json assumptions",
@@ -220,9 +227,15 @@ def main():
                                  "Build B 0/10). Every pick is MODEL OUTPUT — UNVALIDATED, "
                                  "unfunded, zero stake. Market-comparison gates G4/G5 and "
                                  "prop-variance gate G-PROP remain BLOCKED (no odds feed)."),
-            "as_of": ("ratings re-cut 2026-11-15 from the three official team-stat pages "
-                      "(games through 2026-11-14); records post-11/14; latest injury report "
-                      "11/15 06:15 AM ET (11/15 rows; 11/16 NOT YET SUBMITTED)."),
+            "as_of": (lines["_meta"]["inputs"]["ratings_recut_retrieved_utc"]
+                      and ("ratings re-cut from the official team-stat captures retrieved %s; "
+                           "schedule captured %s; latest injury report %s (revision %s, "
+                           "retrieved %s)."
+                           % (lines["_meta"]["inputs"]["ratings_recut_retrieved_utc"],
+                              lines["_meta"]["inputs"]["schedule_captured_on"],
+                              lines["_meta"]["inputs"]["injury_edition"],
+                              lines["_meta"]["inputs"]["injury_revision_et"],
+                              lines["_meta"]["inputs"]["injury_retrieved_utc"]))),
         },
         "singles": singles,
         "parlays": parlays,

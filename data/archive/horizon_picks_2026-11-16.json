@@ -1,0 +1,925 @@
+{
+ "_meta": {
+  "title": "Horizon picks — 2026-11-16 through 2026-11-18",
+  "generated_by": "scripts/generate_picks.py (rolling window)",
+  "generated_utc": "2026-11-15T23:55Z",
+  "window_rule": "the horizon is whatever data/derived/horizon_lines.json holds; that file is produced by the rolling-slate originator from the newest official schedule capture (today + up to 3 days ahead)",
+  "lines_source": "data/derived/horizon_lines.json (scripts/originate_horizon.py)",
+  "pick_gate": {
+   "margin": 3.0,
+   "inherited_from": "data/originated_lines.json assumptions",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/originated_lines.json"
+  },
+  "validation_state": "NO strategy has passed the validation gates (Build A 0/8, Build B 0/10). Every pick is MODEL OUTPUT — UNVALIDATED, unfunded, zero stake. Market-comparison gates G4/G5 and prop-variance gate G-PROP remain BLOCKED (no odds feed).",
+  "as_of": "ratings re-cut from the official team-stat captures retrieved 2026-11-15T23:38Z..23:52Z; schedule captured 2026-11-15; latest injury report 2026-11-15_0615PM (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)."
+ },
+ "singles": [
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600245",
+   "matchup": "ORL@BOS",
+   "line_spread_home": 14.5,
+   "line_total": 209.1,
+   "model_home_win_prob": 0.8129,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "BOS -14.5",
+    "gate": "G-CFG pass (|spread| 14.5 >= 3.0)",
+    "pick_prob": 0.8129
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600246",
+   "matchup": "CHI@CLE",
+   "line_spread_home": 13.2,
+   "line_total": 244.6,
+   "model_home_win_prob": 0.7907,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "CLE -13.2",
+    "gate": "G-CFG pass (|spread| 13.2 >= 3.0)",
+    "pick_prob": 0.7907
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600247",
+   "matchup": "MEM@WAS",
+   "line_spread_home": -14.2,
+   "line_total": 226.8,
+   "model_home_win_prob": 0.1921,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "MEM -14.2",
+    "gate": "G-CFG pass (|spread| 14.2 >= 3.0)",
+    "pick_prob": 0.8079
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600248",
+   "matchup": "PHI@BKN",
+   "line_spread_home": -8.1,
+   "line_total": 221.9,
+   "model_home_win_prob": 0.3098,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "PHI -8.1",
+    "gate": "G-CFG pass (|spread| 8.1 >= 3.0)",
+    "pick_prob": 0.6902
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600249",
+   "matchup": "HOU@MIA",
+   "line_spread_home": -10.8,
+   "line_total": 234.4,
+   "model_home_win_prob": 0.2541,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "HOU -10.8",
+    "gate": "G-CFG pass (|spread| 10.8 >= 3.0)",
+    "pick_prob": 0.7459
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600250",
+   "matchup": "POR@MIN",
+   "line_spread_home": 4.3,
+   "line_total": 228.3,
+   "model_home_win_prob": 0.6039,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "MIN -4.3",
+    "gate": "G-CFG pass (|spread| 4.3 >= 3.0)",
+    "pick_prob": 0.6039
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600251",
+   "matchup": "GSW@NOP",
+   "line_spread_home": -13.2,
+   "line_total": 237.2,
+   "model_home_win_prob": 0.2093,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "GSW -13.2",
+    "gate": "G-CFG pass (|spread| 13.2 >= 3.0)",
+    "pick_prob": 0.7907
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600252",
+   "matchup": "PHX@DEN",
+   "line_spread_home": 5.0,
+   "line_total": 227.2,
+   "model_home_win_prob": 0.6203,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "DEN -5.0",
+    "gate": "G-CFG pass (|spread| 5.0 >= 3.0)",
+    "pick_prob": 0.6203
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600253",
+   "matchup": "NYK@TOR",
+   "line_spread_home": -4.0,
+   "line_total": 214.4,
+   "model_home_win_prob": 0.4032,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "NYK -4.0",
+    "gate": "G-CFG pass (|spread| 4.0 >= 3.0)",
+    "pick_prob": 0.5968
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "matchup": "POR@MIN",
+   "line_spread_home": 4.3,
+   "line_total": 228.3,
+   "model_home_win_prob": 0.6039,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "MIN -4.3",
+    "gate": "G-CFG pass (|spread| 4.3 >= 3.0)",
+    "pick_prob": 0.6039
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "matchup": "DET@SAS",
+   "line_spread_home": 7.8,
+   "line_total": 219.8,
+   "model_home_win_prob": 0.6837,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "SAS -7.8",
+    "gate": "G-CFG pass (|spread| 7.8 >= 3.0)",
+    "pick_prob": 0.6837
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600256",
+   "matchup": "CHA@LAL",
+   "line_spread_home": 18.7,
+   "line_total": 218.3,
+   "model_home_win_prob": 0.8741,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "LAL -18.7",
+    "gate": "G-CFG pass (|spread| 18.7 >= 3.0)",
+    "pick_prob": 0.8741
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "matchup": "UTA@LAC",
+   "line_spread_home": 6.5,
+   "line_total": 224.1,
+   "model_home_win_prob": 0.6548,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "LAC -6.5",
+    "gate": "G-CFG pass (|spread| 6.5 >= 3.0)",
+    "pick_prob": 0.6548
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600258",
+   "matchup": "MEM@CLE",
+   "line_spread_home": -7.3,
+   "line_total": 236.3,
+   "model_home_win_prob": 0.3273,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "MEM -7.3",
+    "gate": "G-CFG pass (|spread| 7.3 >= 3.0)",
+    "pick_prob": 0.6727
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600259",
+   "matchup": "HOU@IND",
+   "line_spread_home": -10.9,
+   "line_total": 224.5,
+   "model_home_win_prob": 0.2521,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "HOU -10.9",
+    "gate": "G-CFG pass (|spread| 10.9 >= 3.0)",
+    "pick_prob": 0.7479
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600260",
+   "matchup": "MIL@MIA",
+   "line_spread_home": 13.5,
+   "line_total": 237.1,
+   "model_home_win_prob": 0.7959,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "MIA -13.5",
+    "gate": "G-CFG pass (|spread| 13.5 >= 3.0)",
+    "pick_prob": 0.7959
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600261",
+   "matchup": "PHI@ORL",
+   "line_spread_home": -5.5,
+   "line_total": 216.5,
+   "model_home_win_prob": 0.3681,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "PHI -5.5",
+    "gate": "G-CFG pass (|spread| 5.5 >= 3.0)",
+    "pick_prob": 0.6319
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600262",
+   "matchup": "CHI@BKN",
+   "line_spread_home": 4.8,
+   "line_total": 236.8,
+   "model_home_win_prob": 0.6157,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "BKN -4.8",
+    "gate": "G-CFG pass (|spread| 4.8 >= 3.0)",
+    "pick_prob": 0.6157
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600263",
+   "matchup": "WAS@TOR",
+   "line_spread_home": 7.3,
+   "line_total": 223.3,
+   "model_home_win_prob": 0.6727,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "TOR -7.3",
+    "gate": "G-CFG pass (|spread| 7.3 >= 3.0)",
+    "pick_prob": 0.6727
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600264",
+   "matchup": "DET@NOP",
+   "line_spread_home": -13.8,
+   "line_total": 231.8,
+   "model_home_win_prob": 0.1989,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "DET -13.8",
+    "gate": "G-CFG pass (|spread| 13.8 >= 3.0)",
+    "pick_prob": 0.8011
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600265",
+   "matchup": "ATL@OKC",
+   "line_spread_home": 2.3,
+   "line_total": 225.7,
+   "model_home_win_prob": 0.556,
+   "pick": {
+    "pick_side": "PASS",
+    "pick_line": null,
+    "gate": "G-CFG pass-through (|spread| 2.3 < 3.0) — no bet",
+    "pick_prob": null
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600267",
+   "matchup": "GSW@DAL",
+   "line_spread_home": -4.1,
+   "line_total": 228.3,
+   "model_home_win_prob": 0.4008,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "GSW -4.1",
+    "gate": "G-CFG pass (|spread| 4.1 >= 3.0)",
+    "pick_prob": 0.5992
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600266",
+   "matchup": "BOS@DEN",
+   "line_spread_home": -10.1,
+   "line_total": 214.7,
+   "model_home_win_prob": 0.268,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "BOS -10.1",
+    "gate": "G-CFG pass (|spread| 10.1 >= 3.0)",
+    "pick_prob": 0.732
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600268",
+   "matchup": "UTA@LAL",
+   "line_spread_home": 19.9,
+   "line_total": 233.3,
+   "model_home_win_prob": 0.8886,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "LAL -19.9",
+    "gate": "G-CFG pass (|spread| 19.9 >= 3.0)",
+    "pick_prob": 0.8886
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600269",
+   "matchup": "PHX@SAC",
+   "line_spread_home": -8.6,
+   "line_total": 230.8,
+   "model_home_win_prob": 0.2991,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "PHX -8.6",
+    "gate": "G-CFG pass (|spread| 8.6 >= 3.0)",
+    "pick_prob": 0.7009
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  }
+ ],
+ "parlays": [
+  {
+   "date": "2026-11-16",
+   "leg1": "ORL@BOS — BOS -14.5",
+   "p1": 0.813,
+   "leg2": "MEM@WAS — MEM -14.2",
+   "p2": 0.808,
+   "joint_lb": 0.621,
+   "joint_ub": 0.808,
+   "rho_lb": -0.234,
+   "rho_ub": 0.984,
+   "fair_odds_lb": 1.24,
+   "fair_odds_ub": 1.61,
+   "method": "legs from different games; joint published as the Fréchet–Hoeffding band, never a single number",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/games?date=2026-11-16"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-16",
+   "leg1": "ORL@BOS — BOS -14.5",
+   "p1": 0.813,
+   "leg2": "CHI@CLE — CLE -13.2",
+   "p2": 0.791,
+   "joint_lb": 0.604,
+   "joint_ub": 0.791,
+   "rho_lb": -0.247,
+   "rho_ub": 0.932,
+   "fair_odds_lb": 1.26,
+   "fair_odds_ub": 1.66,
+   "method": "legs from different games; joint published as the Fréchet–Hoeffding band, never a single number",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/games?date=2026-11-16"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-16",
+   "leg1": "ORL@BOS — BOS -14.5",
+   "p1": 0.813,
+   "leg2": "GSW@NOP — GSW -13.2",
+   "p2": 0.791,
+   "joint_lb": 0.604,
+   "joint_ub": 0.791,
+   "rho_lb": -0.247,
+   "rho_ub": 0.932,
+   "fair_odds_lb": 1.26,
+   "fair_odds_ub": 1.66,
+   "method": "legs from different games; joint published as the Fréchet–Hoeffding band, never a single number",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/games?date=2026-11-16"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-17",
+   "leg1": "CHA@LAL — LAL -18.7",
+   "p1": 0.874,
+   "leg2": "DET@SAS — SAS -7.8",
+   "p2": 0.684,
+   "joint_lb": 0.558,
+   "joint_ub": 0.684,
+   "rho_lb": -0.258,
+   "rho_ub": 0.558,
+   "fair_odds_lb": 1.46,
+   "fair_odds_ub": 1.79,
+   "method": "legs from different games; joint published as the Fréchet–Hoeffding band, never a single number",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/games?date=2026-11-17"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-17",
+   "leg1": "CHA@LAL — LAL -18.7",
+   "p1": 0.874,
+   "leg2": "UTA@LAC — LAC -6.5",
+   "p2": 0.655,
+   "joint_lb": 0.529,
+   "joint_ub": 0.655,
+   "rho_lb": -0.276,
+   "rho_ub": 0.523,
+   "fair_odds_lb": 1.53,
+   "fair_odds_ub": 1.89,
+   "method": "legs from different games; joint published as the Fréchet–Hoeffding band, never a single number",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/games?date=2026-11-17"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-17",
+   "leg1": "CHA@LAL — LAL -18.7",
+   "p1": 0.874,
+   "leg2": "POR@MIN — MIN -4.3",
+   "p2": 0.604,
+   "joint_lb": 0.478,
+   "joint_ub": 0.604,
+   "rho_lb": -0.307,
+   "rho_ub": 0.469,
+   "fair_odds_lb": 1.66,
+   "fair_odds_ub": 2.09,
+   "method": "legs from different games; joint published as the Fréchet–Hoeffding band, never a single number",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/games?date=2026-11-17"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "leg1": "UTA@LAL — LAL -19.9",
+   "p1": 0.889,
+   "leg2": "DET@NOP — DET -13.8",
+   "p2": 0.801,
+   "joint_lb": 0.69,
+   "joint_ub": 0.801,
+   "rho_lb": -0.176,
+   "rho_ub": 0.711,
+   "fair_odds_lb": 1.25,
+   "fair_odds_ub": 1.45,
+   "method": "legs from different games; joint published as the Fréchet–Hoeffding band, never a single number",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/games?date=2026-11-18"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "leg1": "UTA@LAL — LAL -19.9",
+   "p1": 0.889,
+   "leg2": "MIL@MIA — MIA -13.5",
+   "p2": 0.796,
+   "joint_lb": 0.684,
+   "joint_ub": 0.796,
+   "rho_lb": -0.179,
+   "rho_ub": 0.699,
+   "fair_odds_lb": 1.26,
+   "fair_odds_ub": 1.46,
+   "method": "legs from different games; joint published as the Fréchet–Hoeffding band, never a single number",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/games?date=2026-11-18"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "leg1": "UTA@LAL — LAL -19.9",
+   "p1": 0.889,
+   "leg2": "HOU@IND — HOU -10.9",
+   "p2": 0.748,
+   "joint_lb": 0.636,
+   "joint_ub": 0.748,
+   "rho_lb": -0.206,
+   "rho_ub": 0.61,
+   "fair_odds_lb": 1.34,
+   "fair_odds_ub": 1.57,
+   "method": "legs from different games; joint published as the Fréchet–Hoeffding band, never a single number",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/games?date=2026-11-18"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  }
+ ],
+ "sgp_candidates": [
+  {
+   "date": "2026-11-16",
+   "game": "ORL@BOS",
+   "kind": "two_opponents",
+   "rho": 0.05,
+   "leg1": "Jayson Tatum (BOS) OVER 26.5",
+   "leg2": "Paolo Banchero (ORL) OVER 24.5",
+   "leg1_detail": {
+    "player": "Jayson Tatum",
+    "team": "BOS",
+    "line": 26.5,
+    "season_avg": 26.3,
+    "sigma": 5.898,
+    "prob_over": 0.4865,
+    "z": 0.033912068520305615
+   },
+   "leg2_detail": {
+    "player": "Paolo Banchero",
+    "team": "ORL",
+    "line": 24.5,
+    "season_avg": 24.5,
+    "sigma": 5.692,
+    "prob_over": 0.5,
+    "z": 0.0
+   },
+   "joint_prob_rho": 0.2512,
+   "joint_prob_independent": 0.2432,
+   "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-16",
+   "game": "MEM@WAS",
+   "kind": "two_opponents",
+   "rho": 0.05,
+   "leg1": "Ty Jerome (MEM) OVER 26.5",
+   "leg2": "Anthony Davis (WAS) OVER 25.5",
+   "leg1_detail": {
+    "player": "Ty Jerome",
+    "team": "MEM",
+    "line": 26.5,
+    "season_avg": 26.2,
+    "sigma": 5.886,
+    "prob_over": 0.4797,
+    "z": 0.05096508685855861
+   },
+   "leg2_detail": {
+    "player": "Anthony Davis",
+    "team": "WAS",
+    "line": 25.5,
+    "season_avg": 25.6,
+    "sigma": 5.819,
+    "prob_over": 0.5069,
+    "z": -0.01718629163135013
+   },
+   "joint_prob_rho": 0.2511,
+   "joint_prob_independent": 0.2431,
+   "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-17",
+   "game": "NYK@TOR",
+   "kind": "two_opponents",
+   "rho": 0.05,
+   "leg1": "Jalen Brunson (NYK) OVER 26.5",
+   "leg2": "Scottie Barnes (TOR) OVER 23.5",
+   "leg1_detail": {
+    "player": "Jalen Brunson",
+    "team": "NYK",
+    "line": 26.5,
+    "season_avg": 26.0,
+    "sigma": 5.864,
+    "prob_over": 0.466,
+    "z": 0.08526788484268873
+   },
+   "leg2_detail": {
+    "player": "Scottie Barnes",
+    "team": "TOR",
+    "line": 23.5,
+    "season_avg": 23.5,
+    "sigma": 5.575,
+    "prob_over": 0.5,
+    "z": 0.0
+   },
+   "joint_prob_rho": 0.2409,
+   "joint_prob_independent": 0.233,
+   "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-17",
+   "game": "DET@SAS",
+   "kind": "two_opponents",
+   "rho": 0.05,
+   "leg1": "Cade Cunningham (DET) OVER 25.5",
+   "leg2": "Victor Wembanyama (SAS) OVER 30.5",
+   "leg1_detail": {
+    "player": "Cade Cunningham",
+    "team": "DET",
+    "line": 25.5,
+    "season_avg": 25.0,
+    "sigma": 5.75,
+    "prob_over": 0.4654,
+    "z": 0.08695652173913043
+   },
+   "leg2_detail": {
+    "player": "Victor Wembanyama",
+    "team": "SAS",
+    "line": 30.5,
+    "season_avg": 30.3,
+    "sigma": 6.33,
+    "prob_over": 0.4874,
+    "z": 0.031594453022293786
+   },
+   "joint_prob_rho": 0.2347,
+   "joint_prob_independent": 0.2268,
+   "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game": "GSW@DAL",
+   "kind": "two_opponents",
+   "rho": 0.05,
+   "leg1": "Cooper Flagg (DAL) OVER 24.5",
+   "leg2": "Stephen Curry (GSW) OVER 27.5",
+   "leg1_detail": {
+    "player": "Cooper Flagg",
+    "team": "DAL",
+    "line": 24.5,
+    "season_avg": 24.6,
+    "sigma": 5.704,
+    "prob_over": 0.507,
+    "z": -0.01753212692490268
+   },
+   "leg2_detail": {
+    "player": "Stephen Curry",
+    "team": "GSW",
+    "line": 27.5,
+    "season_avg": 27.8,
+    "sigma": 6.063,
+    "prob_over": 0.5197,
+    "z": -0.049476733161579356
+   },
+   "joint_prob_rho": 0.2715,
+   "joint_prob_independent": 0.2635,
+   "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game": "PHI@ORL",
+   "kind": "two_opponents",
+   "rho": 0.05,
+   "leg1": "Paolo Banchero (ORL) OVER 24.5",
+   "leg2": "Tyrese Maxey (PHI) OVER 26.5",
+   "leg1_detail": {
+    "player": "Paolo Banchero",
+    "team": "ORL",
+    "line": 24.5,
+    "season_avg": 24.5,
+    "sigma": 5.692,
+    "prob_over": 0.5,
+    "z": 0.0
+   },
+   "leg2_detail": {
+    "player": "Tyrese Maxey",
+    "team": "PHI",
+    "line": 26.5,
+    "season_avg": 26.7,
+    "sigma": 5.942,
+    "prob_over": 0.5134,
+    "z": -0.03365708694418178
+   },
+   "joint_prob_rho": 0.2647,
+   "joint_prob_independent": 0.2567,
+   "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+  }
+ ],
+ "n_model_picks": 24
+}
