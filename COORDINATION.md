@@ -4511,3 +4511,44 @@ caught it; that edit is in `pages.yml`, which this session does not own, so it i
 - **Also still open:** R-43-D (the §39.1 heading had been dropped from the board on `main`; this session
   restored it inside §43.2's merge — a scan of `main` for other records missing their heading is still
   worth doing), and R-43-B / R-43-C from §43.2.
+
+---
+
+## 🔑 ACTIVE CLAIM — session `arena/4ff440c7-nba1` (opened 2026-11-16 02:10 UTC — R21 per-player game logs, minutes redistribution, injury→rotation impact)
+
+Branch `arena/4ff440c7-nba1`, based on `main` `f6b7676` (tip at claim time). The platform pins this
+session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single
+pre-named branch (deviation logged, as earlier sessions logged it).
+
+**Board read before claiming (2026-11-16 02:08–02:10 UTC):** §0 ground rules, §0b registry, tail
+records §41–§46. Four PRs open at claim time, all read before choosing scope:
+
+| PR | Owner | Last touch | Its files (relevant ones) | Overlap with this session |
+| --- | --- | --- | --- | --- |
+| #121 | `arena/8f64e94c-nba1` | 02:08Z (active) | `COORDINATION.md` only | none — this session appends, never rewrites |
+| #117 | `arena/abac961f-nba1` | 00:49Z | `engine/*`, `data/parsed/injury_diffs/**`, `data/raw/injury_pdfs/**`, `data/raw/official_results_2026-11-15.json`, `.github/workflows/refresh-data.yml` | none — this session does not write `engine/**` or injury-PDF archives |
+| #114 | `arena/801ba27f-nba1` | 00:49Z | `data/derived/*_2026_27.json` (incl. `rotation_2026_27.json`), `data/official/results_feed_2026_27.json`, `data/ledger/ledger.json`, `data/content/*`, `EXECUTIVE_SUMMARY.md`, `data/raw/html/2026-11-15-801ba27f/**` | none — this session namespaces every derived output and does not touch `data/content/**`, the ledger, or `rotation_2026_27.json` |
+| #107 | `arena/5ae0869e-nba1` | 01:16Z | `scripts/build_dashboard.py`, `site/pages/injuries.html`, `COORDINATION.md` | none — this session does not touch the shared nav |
+
+**Why this scope is free:** requirement **R21 (per-player game logs) is the single `missing` row**
+in `data/content/requirements.json`, and R12 / R26 are `partial` for exactly the reason R21 is
+missing — there is no per-player capture feeding them. No open PR touches player game logs.
+
+### Task table — `arena/4ff440c7-nba1`
+
+| ID | Task | Status | Files (this session's scope only) |
+| --- | --- | --- | --- |
+| P01 | Read the board, claim, push the claim | **in progress** | `COORDINATION.md` |
+| P02 | Resolve the newest official injury edition and its player universe | unclaimed | `verify/2026-11-16-4ff440c7/**`, `data/official/player_game_logs_4ff440c7_2026-11-16.json` |
+| P03 | Capture per-player game logs (date, opponent, MIN, PTS, REB, AST) from official NBA.com for every player on that edition | unclaimed | `verify/2026-11-16-4ff440c7/raw/**`, `data/official/player_game_logs_4ff440c7_2026-11-16.json` |
+| P04 | Minutes redistribution: top-8 minutes shares per team + measured replacement shares when a player is out | unclaimed | `verify/2026-11-16-4ff440c7/**`, `data/derived/rotation_minutes_4ff440c7_2026-11-16.json` |
+| P05 | Injury → rotation impact read-out, per team/player, cited row by row | unclaimed | `verify/2026-11-16-4ff440c7/**` |
+| P06 | Report page + publish, gates green, PR, merge | unclaimed | `verify/2026-11-16-4ff440c7/index.html`, `REPORT.md`, `evidence.json` |
+
+**Requested (NOT done by this session — logged for the integration seat):** add
+`verify/2026-11-16-4ff440c7/index.html` to the shared nav / landing tiles, and set R21 → done,
+R12 / R26 → partial-with-evidence in `data/content/requirements.json`. Both files are owned by
+other sessions; this session will not edit them.
+
+**Rule this session holds itself to:** every table row it publishes carries an official source
+URL; anything not confirmable is left blank and flagged, never inferred.
