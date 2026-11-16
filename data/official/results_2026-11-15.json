@@ -1,7 +1,7 @@
 {
  "title": "Official per-game results feed — 2026-11-15 (kept current; finals verified from official box scores)",
- "captured_by": "arena/8f64e94c-nba1 (I03)",
- "retrieved_utc": "2026-11-15T23:45Z..23:55Z",
+ "captured_by": "arena/8f64e94c-nba1 (I03); arena/d31fb422-nba1 (Q01 update); arena/ed8496e9-nba1 (final three re-read 2026-11-16T14:50Z)",
+ "retrieved_utc": "2026-11-15T23:45Z..23:55Z; rows 236-241 re-read 2026-11-16T02:20Z..02:35Z; rows 242-244 re-read 2026-11-16T14:50Z",
  "rule": "One row per game. A row is marked FINAL only when the official game page prints Final and its LINESCORES quarters sum to the printed final (asserted per row). Not-yet-final rows carry null score fields and the observed state; nothing is inferred and no live score is stored as a final. Picks are NOT graded here: the ledger settles at game-day end (data/settlement/), after every game on the slate is final.",
  "columns": [
   "date",
@@ -256,51 +256,114 @@
    "game_id": "0022600242",
    "away": "HOU",
    "home": "WAS",
-   "status": "NOT FINAL — pregame at retrieval",
-   "away_pts": null,
-   "home_pts": null,
-   "away_quarters": null,
-   "home_quarters": null,
-   "ot_periods": null,
-   "final_label": null,
+   "status": "FINAL",
+   "away_pts": 147,
+   "home_pts": 119,
+   "away_quarters": [
+    36,
+    37,
+    46,
+    28
+   ],
+   "home_quarters": [
+    31,
+    23,
+    34,
+    31
+   ],
+   "ot_periods": 0,
+   "final_label": "Final",
    "tip_et": "07:00 PM ET",
-   "state_at_retrieval": "PREGAME at 23:45Z..23:55Z",
+   "state_at_retrieval": "PREGAME at 23:45Z..23:55Z (then IN PROGRESS Q4 5:48 at 02:2xZ per results_2026-11-15_dfef26dc.json) -> FINAL verified 2026-11-16T14:50Z",
    "source_url": "https://www.nba.com/game/hou-vs-was-0022600242",
-   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15",
+   "prior_status": "NOT FINAL — pregame at retrieval",
+   "quarters_sum_check": "away 36+37+46+28=147 ✓, home 31+23+34+31=119 ✓",
+   "venue": "Capital One Arena",
+   "city": "Washington, DC",
+   "attendance": 18041,
+   "officials": "Bill Kennedy, Jacyn Goble, Simone Jelks",
+   "ap_headline_on_official_page": "Rockets blow out Wizards 147-119; hold Trae Young scoreless for first time in his career",
+   "retrieved_utc": "2026-11-16T14:50Z",
+   "source_box_score_url": "https://www.nba.com/game/hou-vs-was-0022600242/box-score",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS.pdf"
   },
   {
    "date": "2026-11-15",
    "game_id": "0022600243",
    "away": "ATL",
    "home": "MIL",
-   "status": "NOT FINAL — scheduled at retrieval",
-   "away_pts": null,
-   "home_pts": null,
-   "away_quarters": null,
-   "home_quarters": null,
-   "ot_periods": null,
-   "final_label": null,
+   "status": "FINAL",
+   "away_pts": 113,
+   "home_pts": 106,
+   "away_quarters": [
+    18,
+    37,
+    32,
+    26
+   ],
+   "home_quarters": [
+    37,
+    16,
+    27,
+    26
+   ],
+   "ot_periods": 0,
+   "final_label": "Final",
    "tip_et": "08:00 PM ET",
-   "state_at_retrieval": "Scheduled at 23:45Z..23:55Z",
+   "state_at_retrieval": "SCHEDULED at 23:45Z..23:55Z (then IN PROGRESS Half at 02:2xZ per results_2026-11-15_dfef26dc.json) -> FINAL verified 2026-11-16T14:50Z",
    "source_url": "https://www.nba.com/game/atl-vs-mil-0022600243",
-   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15",
+   "prior_status": "NOT FINAL — scheduled at retrieval",
+   "quarters_sum_check": "away 18+37+32+26=113 ✓, home 37+16+27+26=106 ✓",
+   "venue": "Fiserv Forum",
+   "city": "Milwaukee, WI",
+   "attendance": 11474,
+   "officials": "Kevin Cutler, Ben Taylor, Gina Catanzariti",
+   "ap_headline_on_official_page": "Hawks erase 22-point second quarter deficit to hand Bucks 10th consecutive loss",
+   "retrieved_utc": "2026-11-16T14:50Z",
+   "source_box_score_url": "https://www.nba.com/game/atl-vs-mil-0022600243/box-score",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_ATLMIL_book.pdf",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_ATLMIL.pdf"
   },
   {
    "date": "2026-11-15",
    "game_id": "0022600244",
    "away": "OKC",
    "home": "SAC",
-   "status": "NOT FINAL — scheduled at retrieval",
-   "away_pts": null,
-   "home_pts": null,
-   "away_quarters": null,
-   "home_quarters": null,
-   "ot_periods": null,
-   "final_label": null,
+   "status": "FINAL",
+   "away_pts": 125,
+   "home_pts": 103,
+   "away_quarters": [
+    32,
+    30,
+    32,
+    31
+   ],
+   "home_quarters": [
+    24,
+    26,
+    30,
+    23
+   ],
+   "ot_periods": 0,
+   "final_label": "Final",
    "tip_et": "09:00 PM ET",
-   "state_at_retrieval": "Scheduled at 23:45Z..23:55Z",
+   "state_at_retrieval": "SCHEDULED at 23:45Z..23:55Z (then IN PROGRESS Q1 8:41 at 02:2xZ per results_2026-11-15_dfef26dc.json) -> FINAL verified 2026-11-16T14:50Z",
    "source_url": "https://www.nba.com/game/okc-vs-sac-0022600244",
-   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15",
+   "prior_status": "NOT FINAL — scheduled at retrieval",
+   "quarters_sum_check": "away 32+30+32+31=125 ✓, home 24+26+30+23=103 ✓",
+   "venue": "Golden 1 Center",
+   "city": "Sacramento, CA",
+   "attendance": 13021,
+   "officials": "Tre Maddox, Justin Van Duyne, Dannica Baroody",
+   "ap_headline_on_official_page": "Gilgeous-Alexander scores 37 as Thunder beat Kings 125-103 to snap 3-game losing streak",
+   "retrieved_utc": "2026-11-16T14:50Z",
+   "source_box_score_url": "https://www.nba.com/game/okc-vs-sac-0022600244/box-score",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC_book.pdf",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC.pdf"
   }
  ],
  "sources": [
@@ -311,29 +374,40 @@
   "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf",
   "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf"
  ],
- "settlement_note": "The 2026-11-15 ledger settlement (grading the pre-tip record in data/archive/horizon_picks_2026-11-15.json) runs at game-day end, after the last game (OKC@SAC, 09:00 PM ET) is final and every row above is FINAL. Recorded now, settled later — that is the rule, not an omission.",
+ "settlement_note": "All nine rows are FINAL with quarter sums asserted. The 2026-11-15 ledger settlement (grading the pre-tip record in data/archive/horizon_picks_2026-11-15.json) may now run: scripts/settle_slate.py settles only after every row above is FINAL, which became true when OKC@SAC went final (last game, 09:00 PM ET).",
  "feed_update": {
-  "at_utc": "2026-11-16T02:20Z..02:35Z",
-  "by": "arena/d31fb422-nba1 (live official re-read of each game page)",
+  "at_utc": "2026-11-16T14:50Z",
+  "by": "arena/ed8496e9-nba1 (live official re-read of the three remaining game pages via fetch_page)",
   "rule": "A row is marked FINAL only when the official game page printed Final (or Final/OT) and its LINESCORES quarters sum to the printed final; both sums are asserted by the writer and printed in quarters_sum_check.",
-  "still_not_final": [
-   "0022600242 HOU@WAS",
-   "0022600243 ATL@MIL",
-   "0022600244 OKC@SAC"
-  ],
-  "still_not_final_note": "At 02:2xZ on 2026-11-16 these three were still live on the official site (HOU 132-101 WAS in Q4; ATL 55-53 MIL at Half; OKC@SAC in Q1). Their score fields stay null by rule: a live score is never stored as a final."
+  "still_not_final": [],
+  "still_not_final_note": "None. All nine 2026-11-15 games were re-read and verified FINAL at 2026-11-16T14:50Z. HOU@WAS 147-119 (36/37/46/28 vs 31/23/34/31), ATL@MIL 113-106 (18/37/32/26 vs 37/16/27/26), OKC@SAC 125-103 (32/30/32/31 vs 24/26/30/23); each quarters sum equals the printed final.",
+  "previous_update": {
+   "at_utc": "2026-11-16T02:20Z..02:35Z",
+   "by": "arena/d31fb422-nba1 (live official re-read of each game page)",
+   "rule": "A row is marked FINAL only when the official game page printed Final (or Final/OT) and its LINESCORES quarters sum to the printed final; both sums are asserted by the writer and printed in quarters_sum_check.",
+   "still_not_final": [
+    "0022600242 HOU@WAS",
+    "0022600243 ATL@MIL",
+    "0022600244 OKC@SAC"
+   ],
+   "still_not_final_note": "At 02:2xZ on 2026-11-16 these three were still live on the official site (HOU 132-101 WAS in Q4; ATL 55-53 MIL at Half; OKC@SAC in Q1). Their score fields stay null by rule: a live score is never stored as a final."
+  }
  },
  "summary": {
   "rows": 9,
-  "final": 6,
-  "not_final": 3,
+  "final": 9,
+  "not_final": 0,
   "finals": [
    "IND 124-131 PHI",
    "LAL 131-123 PHX",
    "CHA 105-113 LAC",
    "SAS 110-102 UTA",
    "DAL 94-131 BOS",
-   "NYK 112-108 TOR"
-  ]
+   "NYK 112-108 TOR",
+   "HOU 147-119 WAS",
+   "ATL 113-106 MIL",
+   "OKC 125-103 SAC"
+  ],
+  "verified_all_final_utc": "2026-11-16T14:50Z"
  }
 }
