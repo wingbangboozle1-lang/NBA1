@@ -36,13 +36,13 @@
   {
    "n": 5,
    "title": "Travel is computed and flagged, not quietly used",
-   "detail": "Arena names, cities and states are official - they are printed on the box score of a game played there. Latitude and longitude are not published by any NBA page, so the great-circle distances are derived and flagged (F94). No travel value moves a line.",
+   "detail": "Arena names, cities and states are official - they are printed on the box score of a game played there. Latitude and longitude are not published by any NBA page, so the great-circle distances are derived and flagged (F101). No travel value moves a line.",
    "reading": "Rest, back-to-back and 3-in-4 are computed from the official schedule and are solid. Travel is a candidate input awaiting a source."
   },
   {
    "n": 6,
    "title": "The market-anchored prior remains switched off, and that is a finding",
-   "detail": "The brief asks for the model line to be blended with the closing line, weighted by measured out-of-sample log-loss. No closing line exists anywhere in this repository and no NBA-operated source publishes one, so the weight is 0 and no blended price is published (F95).",
+   "detail": "The brief asks for the model line to be blended with the closing line, weighted by measured out-of-sample log-loss. No closing line exists anywhere in this repository and no NBA-operated source publishes one, so the weight is 0 and no blended price is published (F102).",
    "reading": "This is the single change that would unlock the most: two validation gates and the prior are all blocked on the same missing input."
   },
   {
@@ -204,12 +204,12 @@
  "recommended_next_actions": [
   {
    "rank": 1,
-   "action": "Log a closing price for every graded play. It is the only missing input that blocks two validation gates and the market-anchored prior (F95, Q25).",
+   "action": "Log a closing price for every graded play. It is the only missing input that blocks two validation gates and the market-anchored prior (F102, Q25).",
    "why": "Until it exists, 'units won' measures the model against a naive model."
   },
   {
    "rank": 2,
-   "action": "Decide whether the official input path is the stats pages or the box-score rebuild (F96, Q28).",
+   "action": "Decide whether the official input path is the stats pages or the box-score rebuild (F103, Q28).",
    "why": "Two sources of truth is worse than either one chosen deliberately."
   },
   {

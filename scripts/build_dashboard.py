@@ -44,6 +44,15 @@ def esc(v):
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
 
 
+def elink(url, label):
+    """Render <a href=...>label</a>, or the not-published mark as plain text when there
+    is no URL. (Escaping None into an href produced href="<span class=...", which the
+    link checker reads as a broken internal link - fixed 2026-11-16, arena/801ba27f-nba1.)"""
+    if not url:
+        return NA
+    return '<a href="%s">%s</a>' % (esc(url), esc(label))
+
+
 def num(v, dp=1):
     """Format a number or render the unverified marker."""
     if v is None or v == "":
@@ -173,7 +182,7 @@ def page(title, sub, body, depth=1, extra_head=""):
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
-      <a href="model-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
+      <a href="%(repo)smodel-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
       <a href="picks.html">Horizon 14–17 (session build)</a>
       <a href="%(repo)spicks.html">Rolling horizon pick file</a>
       <a href="%(navbase)spicks.html">Horizon</a>
@@ -2120,19 +2129,24 @@ def main():
                 _cmp = _df.get("unchanged", 0) + len(_df.get("changed", []))
                 _chg = len(_df.get("changed", []))
                 _filed = len(_df.get("added", []))
+            _from = _df.get("from_edition", "the previous stored edition")
+            if isinstance(_from, dict):
+                _from = (_from.get("edition_id") or _from.get("revision")
+                         or "the previous stored edition")
             diff_note = ("Consecutive-edition diff against %s: %d comparable player rows, "
                          "%d status changes, %d rows the newer edition adds "
                          "(<a href=\"../../data/official/%s\">diff file</a>)."
-                         % (esc(_df.get("from_edition", "the previous stored edition")),
+                         % (esc(_from),
                             _cmp, _chg, _filed, esc(os.path.basename(diff_path))))
         b.insert(0, banner("info", "Newest official edition: report revision and retrieval time",
                            "<p><b>Report revision:</b> %s &nbsp;|&nbsp; <b>retrieved (UTC):</b> %s &nbsp;|&nbsp; "
                            "<b>rows:</b> %d (%d player rows, %d NOT YET SUBMITTED team blocks). "
-                           "Source: <a href=\"%s\">official PDF</a> (index: <a href=\"%s\">official.nba.com</a>).</p>"
+                           "Source: %s (index: %s).</p>"
                            "<p>%s %s</p>"
                            % (esc(_n.get("revision_time_et")), esc(_n.get("retrieved_utc")),
                               len(_rows), _players, _nys,
-                              esc(_n.get("source_url")), esc(_n.get("index_url")),
+                              elink(_n.get("source_url"), "official PDF"),
+                              elink(_n.get("index_url"), "official.nba.com"),
                               diff_note,
                               esc(_n.get("merged_cell_caveat", "")))))
     # Cross-link to this session's complete injury ledger (arena/801ba27f-nba1).
