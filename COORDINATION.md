@@ -209,6 +209,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/8f64e94c-nba1` | `arena/8f64e94c-nba1` | 2026-11-15 23:39 UTC | Final integration seat (§44, claimed as §41 — renumbered at merge): stale-PR #106 takeover (live-site coherence), live official re-verification (2 verified finals + results feed + F92/F93), gate suite, PR → `main`, Pages confirmation. Platform pins this session to its branch (deviation logged, as above). |
 
 | `arena/49f70042-nba1` | `arena/49f70042-nba1` | 2026-11-15 23:40 UTC | 2026-11-15 late cycle: 11/15 settlement, pinned HCA, two-estimator disagreement headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16-11/19 (§41). Platform pins this session to its branch (deviation logged, as above). |
+| `arena/754e9e54-nba1` | `arena/754e9e54-nba1` | 2026-11-16 (this session) | Full-cycle build: projection/bet site split, two independent estimators with disagreement headline, HCA pinned to measured home-win rate, luck z-score per team, arena-coordinate travel table, player game logs for injured players, market-anchored prior, possessions × ppp total model, refresh pipeline with freshness/provenance gates, sealed-ledger settlement at game-day end, pre-registration freeze, tamper-evident ledger, injury-PDF archive + diff, per-game result feed with quarter scores, clean landing page + category subpages, GitHub Pages publish (§44). Platform pins this session to its branch (deviation logged, as above). |
 ---
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
@@ -4511,3 +4512,39 @@ caught it; that edit is in `pages.yml`, which this session does not own, so it i
 - **Also still open:** R-43-D (the §39.1 heading had been dropped from the board on `main`; this session
   restored it inside §43.2's merge — a scan of `main` for other records missing their heading is still
   worth doing), and R-43-B / R-43-C from §43.2.
+
+## 🔑 ACTIVE CLAIM — session `arena/754e9e54-nba1` (opened 2026-11-16 — full-cycle build)
+
+Branch `arena/754e9e54-nba1`, based on `main` `f6b7676` (tip at claim time). The platform pins this session to this branch (deviation from the `session-<id>/<task>` naming logged, as earlier sessions logged it). Full claim, task table M01–M25 and file scopes are in **§44** at the tail of this board.
+
+### §44. Task board — session `arena/754e9e54-nba1` (full-cycle build)
+
+| # | Task | Status | File scope (exclusive) | Notes |
+|---|------|--------|------------------------|-------|
+| M01 | Session registration + claim | in progress | `COORDINATION.md` (§0b + §44) | This row; commit and push immediately per ground rule 4. |
+| M02 | Arena-coordinate table + travel distance | unclaimed | `data/arenas.json`, `scripts/travel_distance.py` | Sourced arena lat/lon; great-circle miles per game. |
+| M03 | Player game logs for injured players | unclaimed | `data/player_gamelogs/**, `scripts/capture_gamelogs.py` | Minutes, pts, rebs, asts, opponent per injured player. |
+| M04 | Two independent estimators + disagreement headline | unclaimed | `engine/estimator_a.py`, `engine/estimator_b.py`, `engine/disagreement.py` | Headline = estimator disagreement; blend underneath. |
+| M05 | HCA pinned to measured home-win rate | unclaimed | `engine/hca.py` | HCA = measured home-win rate, not free fit. |
+| M06 | Luck z-score per team; noise-band gate | unclaimed | `engine/luck_zscore.py`, `data/luck_zscores.json` | Refuse strategies leaning on teams outside noise band. |
+| M07 | Rest / B2B / 3-in-4 from schedule + travel distance | unclaimed | `data/schedule_*.json` already carries rest; add travel column | M02 feeds M07. |
+| M08 | Minutes redistribution: top-8 shares + replacement shares | unclaimed | `engine/minutes_redist.py`, `data/minutes_redist.json` | Per-team top-8 minutes shares + replacement when out. |
+| M09 | Market-anchored prior: model line × closing line | unclaimed | `engine/market_prior.py` | Weight by measured OOS log-loss. |
+| M10 | Total = possessions × points-per-possession | unclaimed | `engine/total_model.py` | Replace team-scoring-average method. |
+| M11 | Projection vs bet site split | unclaimed | `site/projection/`, `site/bet/` | Never mix the two surfaces. |
+| M12 | Parlay pricing with measured rho + naive product | unclaimed | `engine/parlay.py`, `data/measured_rho.json` | Print naive product next to rho price. |
+| M13 | Rotation availability column on picks page | unclaimed | `site/pages/picks.html` | Own column, sourced from injury report. |
+| M14 | Injury banner: revision time + retrieval time | unclaimed | `site/pages/injuries.html` | Show both times in banner. |
+| M15 | Sealed ledger settlement at each game-day end | unclaimed | `data/ledger/ledger.json`, `scripts/settle_ledger.py` | Settle from official finals; stamp visible. |
+| M16 | Pre-registration freeze per strategy | unclaimed | `data/prereg/*.json` | Signal, thresholds, universe, settlement rule frozen before first bet. |
+| M17 | Per-game result feed: date, teams, final score, quarter scores | unclaimed | `data/results_feed.json` | One row per game; official source link per row. |
+| M18 | Injury PDF archive + consecutive diff | unclaimed | `data/injury_pdfs/**, `scripts/diff_injury_pdfs.py` | Store each PDF with timestamp; diff reports. |
+| M19 | Scheduled refresh job + freshness/provenance gates | unclaimed | `.github/workflows/refresh.yml`, `scripts/refresh_gate.py` | Rebuild only after gates pass. |
+| M20 | Landing page + category subpages (GitHub Pages site) | unclaimed | `index.html`, `site/pages/**`, `.github/workflows/pages.yml` | Clean dashboard; every row source-linked or flagged. |
+| M21 | Executive summary | unclaimed | `EXECUTIVE_SUMMARY.md`, `site/pages/executive.html` | One-document picture. |
+| M22 | Suggestions section (review-before-implement) | unclaimed | `site/pages/suggestions.html` | Options with effort/risk/unlocks; reviewer picks. |
+| M23 | Questions/information/answers register | unclaimed | `site/pages/questions.html` | What must be answered before decisions. |
+| M24 | Verify line by line from official sources | unclaimed | All data files | Every row carries official `source_url` or is flagged. |
+| M25 | PR → main, merge, Pages deploy confirmation | unclaimed | Whole repo | Do not merge a broken site. |
+
+**File-scope note:** M01–M25 are scoped to this session's branch. Where a task touches a file another session claims (e.g. shared nav), the request is logged in §4 cross-session requests instead of editing directly.
