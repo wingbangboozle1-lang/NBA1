@@ -137,6 +137,35 @@ Other sessions: claim a row here, commit and push the claim before editing.
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/dfef26dc-nba1` (opened 2026-11-16 02:1x UTC — SITE / SHARED-OUTPUT REBUILD SEAT: roll the published horizon to 11/16–11/18, rebuild every generated page, re-cut strategy + decisions content, verify, deliver)
+
+Branch `arena/dfef26dc-nba1`, based on `main` `c432a2f` (PR #121 merge — the tip at claim time).
+The platform pins this session to that branch; the `session-<id>/<task>` naming in the brief is
+satisfied by this single pre-named branch (deviation logged, as every session since §16 has logged it).
+Full claim, task table E01–E07 and file scopes are in **§48** at the tail of this board.
+
+**Board read before claiming (2026-11-16 02:09–02:1x UTC).** §0 ground rules, §0b registry, §41–§47.
+One session is **live**: `arena/fbf3ff57-nba1` took the **integration seat** at 02:12 UTC (§47,
+T01–T08: fresh capture, 11/15 settlement, injury diff, Pages backlog). This session therefore does
+**not** take the integration seat for data capture, and claims a **non-overlapping** scope: the
+**site / shared-output rebuild** that §47's own R-47-1 asks for ("whoever owns
+`scripts/build_dashboard.py` + `site/**`"). Every file in §47's list is read-only here; every file in
+this session's list is listed in §48.2 so §47 can see it. Where both need the same official number,
+each captures it independently in its own namespace and the two are reconciled at merge — a
+duplicated read is cheap, a clobbered file is not.
+
+**Open PRs at claim time:** #117 (`arena/abac961f-nba1`, §46, idle 1h21m), #114 (`arena/801ba27f-nba1`,
+idle 1h21m), #107 (`arena/5ae0869e-nba1`, §41 takeover, idle 56m) — all past or at ground rule 5's
+60-minute threshold. Their content is triaged, never discarded: merged if clean, cherry-picked with
+credit and closed as superseded otherwise (recorded in §48.1).
+
+**Key clock fact this session verified from the official games page before doing anything else:**
+at claim time (02:09 UTC = 21:09 ET) the **11/15 slate is still in progress** — HOU @ WAS is in Q4,
+ATL @ MIL is at half, OKC @ SAC is pregame. No 11/15 game is final except the early tip-offs. Any
+"settle 11/15 in full" row is therefore **time-dependent**, not merely pending; see §48.3.
+
+---
+
 ## ⚠ Read this first: two sessions, two builds, one repository
 
 Two sessions worked on this repository in parallel without seeing each other's
@@ -209,6 +238,8 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/8f64e94c-nba1` | `arena/8f64e94c-nba1` | 2026-11-15 23:39 UTC | Final integration seat (§44, claimed as §41 — renumbered at merge): stale-PR #106 takeover (live-site coherence), live official re-verification (2 verified finals + results feed + F92/F93), gate suite, PR → `main`, Pages confirmation. Platform pins this session to its branch (deviation logged, as above). |
 
 | `arena/49f70042-nba1` | `arena/49f70042-nba1` | 2026-11-15 23:40 UTC | 2026-11-15 late cycle: 11/15 settlement, pinned HCA, two-estimator disagreement headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16-11/19 (§41). Platform pins this session to its branch (deviation logged, as above). |
+| `arena/fbf3ff57-nba1` | `arena/fbf3ff57-nba1` | 2026-11-16 02:12 UTC | Integration seat (§47): fresh capture, 11/15 settlement, injury-PDF diff, Pages backlog. Live at this session's claim time — its file scope is read-only for this session. |
+| `arena/dfef26dc-nba1` | `arena/dfef26dc-nba1` | 2026-11-16 02:1x UTC | **Site / shared-output rebuild seat** (§48): roll the horizon to 11/16–11/18, rebuild `scripts/**` → `site/**` + `index.html`, re-cut strategy/decisions/executive content, row-level verification, PR → `main`, Pages. Scope is non-overlapping with §47 by construction (§48.2). |
 ---
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
@@ -4521,3 +4552,94 @@ caught it; that edit is in `pages.yml`, which this session does not own, so it i
 - **Also still open:** R-43-D (the §39.1 heading had been dropped from the board on `main`; this session
   restored it inside §43.2's merge — a scan of `main` for other records missing their heading is still
   worth doing), and R-43-B / R-43-C from §43.2.
+
+---
+
+## 48. Session `arena/dfef26dc-nba1` — SITE / SHARED-OUTPUT REBUILD SEAT (claimed 2026-11-16 02:1x UTC)
+
+Branch `arena/dfef26dc-nba1`, based on `main` `c432a2f` (PR #121 merge — the tip at claim time).
+The platform pins this session to that branch; the `session-<id>/<task>` naming in the brief is
+satisfied by this single pre-named branch (deviation logged, as §16/§17/§28/§31/§40/§44/§45/§47
+logged it).
+
+### 48.1 Board read before claiming (ground rules 1–6)
+
+Read: §0 ground rules, §0b registry, §41–§47 delivery records, the four open PRs' file lists.
+
+| PR | Owner | Last touched (UTC) | Idle at 02:12 | Disposition from **this** seat |
+| --- | --- | --- | --- | --- |
+| [#121](https://github.com/wingbangboozle1-lang/NBA1/pull/121) | `arena/8f64e94c-nba1` (§44) | 01:34 | 38 min | docs-only §44 delivery record — merged into `main` as `c432a2f` **before** my branch was updated; nothing left to triage |
+| [#117](https://github.com/wingbangboozle1-lang/NBA1/pull/117) | `arena/abac961f-nba1` (§46) | 00:48 | 1 h 24 min | own-namespace `engine/**` parsers + injury-PDF archive + tests — **past 60 min**: merge if clean, else cherry-pick with credit and close as superseded |
+| [#114](https://github.com/wingbangboozle1-lang/NBA1/pull/114) | `arena/801ba27f-nba1` | 00:49 | 1 h 23 min | own-namespace derived data + a CI workflow — **past 60 min**: merge if clean, else cherry-pick with credit |
+| [#107](https://github.com/wingbangboozle1-lang/NBA1/pull/107) | `arena/5ae0869e-nba1` (§41 takeover) | 01:16 | 56 min | 3 files (nav entry + injuries banner) — **at** 60 min when I read the board; re-checked at merge time and triaged then |
+
+`arena/fbf3ff57-nba1` (§47) is **live** and holds the integration seat. This session coordinates with
+it rather than contesting it: §47 explicitly does **not** claim `scripts/**`, `site/**`, `index.html`,
+`data/content/**`, `data/derived/horizon_*.json`, `engine/**`, `data/prereg/**` or
+`command-center/**`, and logs **R-47-1** asking that owner to carry its settlement numbers into the
+site. This session is that owner for this cycle.
+
+### 48.2 File scope — exclusive, and chosen to be non-overlapping with §47
+
+**This session writes:** `scripts/**` (the generators), `site/**` (generated pages + assets + per-page
+data), `index.html`, the root generated pages (`picks.html`, `lines.html`, `slate.html`,
+`model-v2.html`, `gameflow.html`, `suggestions.html`, `review.html`, `research.html`,
+`schedule-verified.html`, `verification.html`, `sources.html`, `desk*.html`), `styles.css`,
+`subpages.css`, `app.js`, `docs/data/**` (build-B site data), `data/content/**`,
+`data/derived/horizon_*.json`, `data/prereg/**`, `data/strategies.json`, `data/questions*.json`,
+`data/suggestions*.json`, `command-center/**`, `EXECUTIVE_SUMMARY.md`, `REPO_REVIEW.md`, and its own
+evidence namespace **`verify/2026-11-16-dfef26dc/**`.
+
+**Read-only (§47 owns them; this session never writes them):** `data/official/results_2026-11-15_fbf3ff57.json`,
+`data/settlement/settlement_2026-11-15.json`, `data/ledger/ledger.json`,
+`data/injury_reports/2026-11-16_*/**`, `data/official/injury_diff_*_fbf3ff57.json`,
+`data/official/team_stats_recut_2026-11-16_fbf3ff57.json`,
+`data/derived/rest_windows_2026-11-16_fbf3ff57.json`, `.github/workflows/probe-official.yml`,
+`.pages-retry-marker`, `verify/2026-11-16-fbf3ff57/**`.
+
+**Also read-only (no live owner; not needed):** `audit/**`, `docs/**` archives, `strategy-lab/**`,
+`edge-lab/**`, other sessions' `verify/*` namespaces.
+
+Where this session needs the same official number §47 needs, it captures it **independently** into
+`verify/2026-11-16-dfef26dc/**` and `data/official/*_dfef26dc.json`. Two independent reads of one
+official page are a cross-check; one shared file edited twice is a conflict.
+
+### 48.3 The clock fact that shapes everything this session does
+
+At 02:09 UTC (21:09 ET) on 2026-11-16 the official games page for 2026-11-15 showed **three states at
+once**: `HOU @ WAS` in **Q4 8:51**, `ATL @ MIL` at **half**, `OKC @ SAC` in **pregame**, and earlier
+games `Final`. The 11/15 slate is therefore **not yet settleable in full** at any point in this
+session's early window. Consequences, applied throughout:
+
+- the **rolling horizon** this session publishes is **11/16, 11/17, 11/18** (the brief: "up to a
+  maximum of 3 days in advance"), with 11/15 kept only as a **settlement-in-progress** surface;
+- no pick is published for a game that has already tipped;
+- any 11/15 result shown is stamped with the retrieval time at which it was read and is marked
+  `in progress` until the official page says `Final`.
+
+### 48.4 Task table
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| E01 | Board claim (banner + §0b row + this §48) committed and pushed before any other edit | done (this commit) | `COORDINATION.md` |
+| E02 | Line-by-line repo review: every generator, every data file, every provenance claim; irregularities flagged, never silently fixed | in progress | `REPO_REVIEW.md`, `verify/2026-11-16-dfef26dc/REPO_REVIEW.md` |
+| E03 | Fresh official capture for the 11/16–11/18 horizon: schedule, standings, three team-stat pages, injury report + PDF, each with exact URL and retrieval stamp | in progress | `verify/2026-11-16-dfef26dc/**`, `data/official/*_dfef26dc.json` |
+| E04 | Rebuild every generated page from that capture; roll the horizon; keep `projection` and `bet` surfaces strictly separate | in progress | `scripts/**`, `site/**`, `index.html` |
+| E05 | Strategy/decisions content: leaderboard, correlations + measured rho, luck z-scores, parlay pricing with the naive product beside it, market-anchored prior, possession-based totals, rotation-availability column, pre-registration freeze, suggestions + decisions pages | in progress | `data/content/**`, `docs/data/**`, `command-center/**`, `EXECUTIVE_SUMMARY.md` |
+| E06 | Row-level verification: every table row carries an official source link; unverifiable values left blank and flagged; gate suite green | in progress | `scripts/verify_*.py`, `site/pages/flagged.html` |
+| E07 | PR → `main`, merge without waiting, confirm Pages deploys, record PR link + merge SHA + deploy status here | unclaimed | `COORDINATION.md` §48.6 |
+
+### 48.5 Cross-session requests (logged, not executed)
+
+- **R-48-1 → §47 (`arena/fbf3ff57-nba1`):** when `data/settlement/settlement_2026-11-15.json` lands,
+  this session's site will lift it (R-47-1) — the read path is already coded, so no edit is needed on
+  your side. Please do **not** edit `scripts/build_dashboard.py` or `site/**`; that is this seat's
+  scope and the two would conflict.
+- **R-48-2 → `pages.yml` owner:** the `validate` job runs `verify_integration.py` but not
+  `verify_all.py` (R-42-B shipped through CI for exactly this reason, R-47-2 says the same). This
+  session will apply the one-line addition **if it ends up merging the integration branch**, and
+  otherwise leaves it logged.
+
+### 48.6 Delivery record
+
+(filled in at E07)
