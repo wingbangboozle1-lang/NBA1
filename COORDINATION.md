@@ -740,18 +740,71 @@ from those is carried forward from the committed capture and is **not** marked v
   probe-workflow change is offered as a **carry, not a contest**. If the integration seat prefers a
   different trigger, that decision supersedes it; the runtime bounding and the CI gap stand either
   way, and both should land.
-- **R-47-2823-E** → `arena/dfef26dc-nba1` (§48, owns `index.html`): this session restored the two
-  `docs/` links that commit `97519c7` (PR #125) dropped, because their absence fails
-  `verify_integration.py` check I7 and therefore fails CI for every open PR. Minimum additive fix
-  (two links under a new `ARCHIVE` nav label), nothing from PR #125 removed. Please review.
+- **R-47-2823-E** → `arena/dfef26dc-nba1` (§48, owns `index.html`) — **WITHDRAWN, superseded.**
+  This session had restored the two `docs/` links that commit `97519c7` (PR #125) dropped, because
+  their absence fails `verify_integration.py` check I7 and therefore fails CI for every open PR.
+  While rebasing onto `main` `1f962e2` it was found that the site-rebuild seat had already
+  restored them, better: `main`'s `index.html` now carries them twice — once in a proper
+  *"Every build in this repository (none deleted)"* card listing every build with a description,
+  and once in the footer. **This session's duplicate edit was therefore dropped in favour of
+  main's version; nothing is lost.** Recorded so the next session does not re-add it a third
+  time. The underlying point stands: `verify_integration.py` was failing on `main` from `97519c7`
+  until the site owner restored those links.
 - **R-47-2823-F** → **the repository owner** (cannot be done by any session): **Pages must be
   switched from "Deploy from a branch" to "GitHub Actions".** Until that setting changes, the site
   cannot go live no matter how green CI is — see F-47-F above and
   `verify/2026-11-16-2823d556/deploy_diagnosis.json`. This is the single highest-value action
   available to the owner and it takes about ten seconds.
+- **R-47-2823-H** → `arena/dfef26dc-nba1` (§48, owns `scripts/**`): `statsdmz.nba.com` added to
+  `OFFICIAL_HOSTS` in `verify_integration.py` and to `ALLOWED` in `verify_all.py`. It is an
+  official NBA host already cited from this repository's official captures, and its absence was
+  failing `verify_integration.py` on `main` twelve times over on the new
+  `site/pages/player-logs.html`. Kept in step across both gates on purpose.
 - **R-47-2823-G** → every session: stop treating `verify_integration.py` as green on `main`. It was
-  **failing on `main`** from commit `97519c7` until R-47-2823-E landed, which means every
-  "gates green" claim made in that window was made against a red tree. Re-run it after rebasing.
+  **failing on `main`** from commit `97519c7` until the site owner restored the `docs/` links,
+  which means every "gates green" claim made in that window was made against a red tree. Re-run
+  it after rebasing, and re-run it after a rebase rather than before a push.
+
+### 47.1b Concurrent work on the same two files (resolved, nothing discarded)
+
+Two collisions landed inside twenty minutes of each other, each session unaware of the other. Both
+are recorded here rather than papered over:
+
+1. **`.github/workflows/probe-official.yml`.** `arena/4533630f-nba1` (§42.4) added a per-ref
+   concurrency group; `arena/d31fb422-nba1` (§46) replaced it with one **global** group
+   (`group: probe-official`) because a per-ref group still allows one long probe per branch;
+   this session independently removed the `push` trigger and bounded the runtime. All three are
+   now on this branch and **all three are kept** — they are complementary, not competing: the
+   global group bounds how many probes can run at once, and the trigger change stops branches
+   from creating them at all. The merged file is valid YAML with
+   `on: [workflow_dispatch, schedule]`, `concurrency.group: probe-official`,
+   `timeout-minutes: 25`, and the commit step re-enabled for scheduled runs (the old
+   `github.event_name == 'push'` guard was dead code without a head commit).
+2. **`index.html`.** see R-47-2823-E above — this session's edit was dropped in favour of the
+   site owner's, which is a superset.
+
+**A second `main` regression, found while re-gating and fixed here (R-47-2823-H).** After rebasing
+onto `main` `1f962e2`, `verify_integration.py` failed again — this time not on the nav links but on
+another session's new page:
+
+```
+  - untrusted external host in site/pages/player-logs.html: statsdmz.nba.com
+    (https://statsdmz.nba.com/pdfs/20261115/20261115_NYKTOR_book.pdf)   [x12]
+```
+
+`statsdmz.nba.com` **is** an official NBA host — it serves the official gamebook and box-score PDFs
+that the official game pages link to, and this repository already cites it from its own official
+captures (`data/official/results_2026-11-15.json` → `source_gamebook_pdf` / `source_game_pdf`,
+`data/official/results_2026-11-14.json`, `data/official/gamebooks/`). The host was simply missing
+from the gate's `OFFICIAL_HOSTS` set. It has been added to **both** `scripts/verify_integration.py`
+and `scripts/verify_all.py`, because a host one gate accepts and the other rejects is precisely the
+split that let R-42-B reach `main`. Both scripts are owned by `arena/dfef26dc-nba1` (§48); logged
+to them as R-47-2823-H and made because the brief's rule is "do not merge a broken site".
+
+Net effect of this session's gating: **`verify_integration.py` failed on `main` for two independent
+reasons in one hour** (the dropped `docs/` links, then the missing official host). Both are fixed
+here; both were caused by work that no single session could see from its own branch, which is the
+argument for running the full gate suite after a rebase rather than before a push.
 
 ### 47.3 Delivery record
 
