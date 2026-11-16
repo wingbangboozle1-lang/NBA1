@@ -233,7 +233,7 @@ def render_projection(rows, flags, hca):
                'Every row links its official game page. A blank cell is a value that could not be confirmed.</p>')
     out.append('<p class="note"><strong>Home-court anchor (measured):</strong> home win rate %s '
                '(official standings HOME/ROAD columns). <a href="%s" rel="noopener">Official standings</a>.</p>'
-               % (_pct(hca["measured_home_win_rate"]), _e(hca["source_url"])))
+               % (_pct(hca["measured_home_win_rate"], 2), _e(hca["source_url"])))
     out.append('<div class="tablewrap"><table class="dash"><thead><tr>'
                '<th>Date</th><th>Game</th><th>Tip (ET)</th><th>Disagreement (pp) &mdash; headline</th>'
                '<th>P(home) A</th><th>P(home) B</th><th>P(home) blend</th>'
