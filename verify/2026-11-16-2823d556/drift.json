@@ -1,0 +1,712 @@
+{
+ "title": "Drift between the committed official captures behind the published 11/16 horizon and the official pages read live at 2026-11-16T02:20Z-02:27Z",
+ "session": "arena/2823d556-nba1",
+ "board_section": "47",
+ "computed_utc": "2026-11-16T02:26:59Z",
+ "live_read_at_utc": {
+  "11_15": "2026-11-16T02:27Z",
+  "11_16": "2026-11-16T02:20Z"
+ },
+ "committed_inputs": {
+  "schedule_capture": "data/raw/official_schedule_capture_2026-11-16.json",
+  "schedule_captured_on_utc_date": "2026-11-15",
+  "team_advanced": "data/official/teams_advanced_2026-11-15_2345Z.json",
+  "team_advanced_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+  "team_advanced_source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+  "team_advanced_games_counted": 189.0,
+  "team_advanced_games_counted_note": "sum(gp) over the 30 rows / 2. The number of completed games the official table itself had ingested when the committed snapshot was taken. Measured from the committed file, not assumed."
+ },
+ "published_downstream": {
+  "lines": "data/derived/horizon_lines.json \u2014 25 games, 2026-11-16..2026-11-18",
+  "picks": "data/archive/horizon_picks_2026-11-16.json \u2014 25 singles / 24 model picks / 9 parlays",
+  "picks_as_of": "ratings re-cut from the official team-stat captures retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition"
+ },
+ "slate_11_16_row_comparison": [
+  {
+   "game_id": "0022600245",
+   "away": "ORL",
+   "home": "BOS",
+   "in_committed_capture": true,
+   "matchup_agrees": true,
+   "tip_agrees": true,
+   "away_record_committed": "5-7",
+   "away_record_live": "5-7",
+   "home_record_committed": "10-2",
+   "home_record_live": "11-2",
+   "source_committed": "data/raw/official_schedule_capture_2026-11-16.json",
+   "source_live": "https://www.nba.com/games?date=2026-11-16",
+   "records_agree": false,
+   "fully_agrees": false
+  },
+  {
+   "game_id": "0022600246",
+   "away": "CHI",
+   "home": "CLE",
+   "in_committed_capture": true,
+   "matchup_agrees": true,
+   "tip_agrees": true,
+   "away_record_committed": "3-9",
+   "away_record_live": "3-9",
+   "home_record_committed": "7-7",
+   "home_record_live": "7-7",
+   "source_committed": "data/raw/official_schedule_capture_2026-11-16.json",
+   "source_live": "https://www.nba.com/games?date=2026-11-16",
+   "records_agree": true,
+   "fully_agrees": true
+  },
+  {
+   "game_id": "0022600247",
+   "away": "MEM",
+   "home": "WAS",
+   "in_committed_capture": true,
+   "matchup_agrees": true,
+   "tip_agrees": true,
+   "away_record_committed": "9-4",
+   "away_record_live": "9-4",
+   "home_record_committed": "4-9",
+   "home_record_live": "4-9",
+   "source_committed": "data/raw/official_schedule_capture_2026-11-16.json",
+   "source_live": "https://www.nba.com/games?date=2026-11-16",
+   "records_agree": true,
+   "fully_agrees": true
+  },
+  {
+   "game_id": "0022600248",
+   "away": "PHI",
+   "home": "BKN",
+   "in_committed_capture": true,
+   "matchup_agrees": true,
+   "tip_agrees": true,
+   "away_record_committed": "11-3",
+   "away_record_live": "11-3",
+   "home_record_committed": "3-9",
+   "home_record_live": "3-9",
+   "source_committed": "data/raw/official_schedule_capture_2026-11-16.json",
+   "source_live": "https://www.nba.com/games?date=2026-11-16",
+   "records_agree": true,
+   "fully_agrees": true
+  },
+  {
+   "game_id": "0022600249",
+   "away": "HOU",
+   "home": "MIA",
+   "in_committed_capture": true,
+   "matchup_agrees": true,
+   "tip_agrees": true,
+   "away_record_committed": "10-3",
+   "away_record_live": "10-3",
+   "home_record_committed": "7-6",
+   "home_record_live": "7-6",
+   "source_committed": "data/raw/official_schedule_capture_2026-11-16.json",
+   "source_live": "https://www.nba.com/games?date=2026-11-16",
+   "records_agree": true,
+   "fully_agrees": true
+  },
+  {
+   "game_id": "0022600250",
+   "away": "POR",
+   "home": "MIN",
+   "in_committed_capture": true,
+   "matchup_agrees": true,
+   "tip_agrees": true,
+   "away_record_committed": "9-3",
+   "away_record_live": "9-3",
+   "home_record_committed": "9-4",
+   "home_record_live": "9-4",
+   "source_committed": "data/raw/official_schedule_capture_2026-11-16.json",
+   "source_live": "https://www.nba.com/games?date=2026-11-16",
+   "records_agree": true,
+   "fully_agrees": true
+  },
+  {
+   "game_id": "0022600251",
+   "away": "GSW",
+   "home": "NOP",
+   "in_committed_capture": true,
+   "matchup_agrees": true,
+   "tip_agrees": true,
+   "away_record_committed": "8-5",
+   "away_record_live": "8-5",
+   "home_record_committed": "4-10",
+   "home_record_live": "4-10",
+   "source_committed": "data/raw/official_schedule_capture_2026-11-16.json",
+   "source_live": "https://www.nba.com/games?date=2026-11-16",
+   "records_agree": true,
+   "fully_agrees": true
+  },
+  {
+   "game_id": "0022600252",
+   "away": "PHX",
+   "home": "DEN",
+   "in_committed_capture": true,
+   "matchup_agrees": true,
+   "tip_agrees": true,
+   "away_record_committed": "5-6",
+   "away_record_live": "5-7",
+   "home_record_committed": "7-4",
+   "home_record_live": "7-4",
+   "source_committed": "data/raw/official_schedule_capture_2026-11-16.json",
+   "source_live": "https://www.nba.com/games?date=2026-11-16",
+   "records_agree": false,
+   "fully_agrees": false
+  }
+ ],
+ "slate_11_16_rows_compared": 8,
+ "slate_11_16_rows_fully_agreeing": 6,
+ "slate_11_16_rows_with_record_drift": [
+  "0022600245",
+  "0022600252"
+ ],
+ "games_finished_after_the_committed_stats_snapshot": [
+  {
+   "game_id": "0022600237",
+   "away": "LAL",
+   "home": "PHX",
+   "official_state_at_02_27Z": "Final 131-123",
+   "winner": [
+    "LAL"
+   ],
+   "loser": [
+    "PHX"
+   ],
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "box_score_url": "https://www.nba.com/game/lal-vs-phx-0022600237/box-score#box-score"
+  },
+  {
+   "game_id": "0022600240",
+   "away": "DAL",
+   "home": "BOS",
+   "official_state_at_02_27Z": "Final 94-131",
+   "winner": [
+    "BOS"
+   ],
+   "loser": [
+    "DAL"
+   ],
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "box_score_url": "https://www.nba.com/game/dal-vs-bos-0022600240/box-score#box-score"
+  },
+  {
+   "game_id": "0022600239",
+   "away": "SAS",
+   "home": "UTA",
+   "official_state_at_02_27Z": "Final 110-102",
+   "winner": [
+    "SAS"
+   ],
+   "loser": [
+    "UTA"
+   ],
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "box_score_url": "https://www.nba.com/game/sas-vs-uta-0022600239/box-score#box-score"
+  },
+  {
+   "game_id": "0022600241",
+   "away": "NYK",
+   "home": "TOR",
+   "official_state_at_02_27Z": "Final/OT 112-108",
+   "winner": [
+    "NYK"
+   ],
+   "loser": [
+    "TOR"
+   ],
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "box_score_url": "https://www.nba.com/game/nyk-vs-tor-0022600241/box-score#box-score"
+  },
+  {
+   "game_id": "0022600238",
+   "away": "CHA",
+   "home": "LAC",
+   "official_state_at_02_27Z": "Final 105-113",
+   "winner": [
+    "LAC"
+   ],
+   "loser": [
+    "CHA"
+   ],
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "box_score_url": "https://www.nba.com/game/cha-vs-lac-0022600238/box-score#box-score"
+  }
+ ],
+ "games_still_in_progress_at_02_27Z": [
+  {
+   "game_id": "0022600242",
+   "away": "HOU",
+   "home": "WAS",
+   "official_state_at_retrieval": "Q4 5:24 at 2026-11-16T02:27Z",
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "game_id": "0022600243",
+   "away": "ATL",
+   "home": "MIL",
+   "official_state_at_retrieval": "Q3 10:42 at 2026-11-16T02:27Z",
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "game_id": "0022600244",
+   "away": "OKC",
+   "home": "SAC",
+   "official_state_at_retrieval": "Q1 7:59 at 2026-11-16T02:27Z",
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
+  }
+ ],
+ "team_record_comparison": [
+  {
+   "abbr": "ATL",
+   "committed_team_advanced_record": "7-6",
+   "committed_gp": 13,
+   "live_record": "7-6",
+   "live_record_from_11_15_page": "7-6",
+   "live_record_from_11_16_page": null,
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15"
+   ]
+  },
+  {
+   "abbr": "BKN",
+   "committed_team_advanced_record": "3-9",
+   "committed_gp": 12,
+   "live_record": "3-9",
+   "live_record_from_11_15_page": null,
+   "live_record_from_11_16_page": "3-9",
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "BOS",
+   "committed_team_advanced_record": "10-2",
+   "committed_gp": 12,
+   "live_record": "11-2",
+   "live_record_from_11_15_page": "11-2",
+   "live_record_from_11_16_page": "11-2",
+   "the_two_live_pages_agree": true,
+   "agrees_with_committed": false,
+   "delta": "10-2 -> 11-2",
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15",
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "CHA",
+   "committed_team_advanced_record": "4-8",
+   "committed_gp": 12,
+   "live_record": "4-9",
+   "live_record_from_11_15_page": "4-9",
+   "live_record_from_11_16_page": null,
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": false,
+   "delta": "4-8 -> 4-9",
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15"
+   ]
+  },
+  {
+   "abbr": "CHI",
+   "committed_team_advanced_record": "3-9",
+   "committed_gp": 12,
+   "live_record": "3-9",
+   "live_record_from_11_15_page": null,
+   "live_record_from_11_16_page": "3-9",
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "CLE",
+   "committed_team_advanced_record": "7-7",
+   "committed_gp": 14,
+   "live_record": "7-7",
+   "live_record_from_11_15_page": null,
+   "live_record_from_11_16_page": "7-7",
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "DAL",
+   "committed_team_advanced_record": "7-6",
+   "committed_gp": 13,
+   "live_record": "7-7",
+   "live_record_from_11_15_page": "7-7",
+   "live_record_from_11_16_page": null,
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": false,
+   "delta": "7-6 -> 7-7",
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15"
+   ]
+  },
+  {
+   "abbr": "DEN",
+   "committed_team_advanced_record": "7-4",
+   "committed_gp": 11,
+   "live_record": "7-4",
+   "live_record_from_11_15_page": null,
+   "live_record_from_11_16_page": "7-4",
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "GSW",
+   "committed_team_advanced_record": "8-5",
+   "committed_gp": 13,
+   "live_record": "8-5",
+   "live_record_from_11_15_page": null,
+   "live_record_from_11_16_page": "8-5",
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "HOU",
+   "committed_team_advanced_record": "10-3",
+   "committed_gp": 13,
+   "live_record": "10-3",
+   "live_record_from_11_15_page": "10-3",
+   "live_record_from_11_16_page": "10-3",
+   "the_two_live_pages_agree": true,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15",
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "IND",
+   "committed_team_advanced_record": "5-9",
+   "committed_gp": 14,
+   "live_record": "5-9",
+   "live_record_from_11_15_page": "5-9",
+   "live_record_from_11_16_page": null,
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15"
+   ]
+  },
+  {
+   "abbr": "LAC",
+   "committed_team_advanced_record": "3-8",
+   "committed_gp": 11,
+   "live_record": "4-8",
+   "live_record_from_11_15_page": "4-8",
+   "live_record_from_11_16_page": null,
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": false,
+   "delta": "3-8 -> 4-8",
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15"
+   ]
+  },
+  {
+   "abbr": "LAL",
+   "committed_team_advanced_record": "11-2",
+   "committed_gp": 13,
+   "live_record": "12-2",
+   "live_record_from_11_15_page": "12-2",
+   "live_record_from_11_16_page": null,
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": false,
+   "delta": "11-2 -> 12-2",
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15"
+   ]
+  },
+  {
+   "abbr": "MEM",
+   "committed_team_advanced_record": "9-4",
+   "committed_gp": 13,
+   "live_record": "9-4",
+   "live_record_from_11_15_page": null,
+   "live_record_from_11_16_page": "9-4",
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "MIA",
+   "committed_team_advanced_record": "7-6",
+   "committed_gp": 13,
+   "live_record": "7-6",
+   "live_record_from_11_15_page": null,
+   "live_record_from_11_16_page": "7-6",
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "MIL",
+   "committed_team_advanced_record": "1-12",
+   "committed_gp": 13,
+   "live_record": "1-12",
+   "live_record_from_11_15_page": "1-12",
+   "live_record_from_11_16_page": null,
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15"
+   ]
+  },
+  {
+   "abbr": "MIN",
+   "committed_team_advanced_record": "9-4",
+   "committed_gp": 13,
+   "live_record": "9-4",
+   "live_record_from_11_15_page": null,
+   "live_record_from_11_16_page": "9-4",
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "NOP",
+   "committed_team_advanced_record": "4-10",
+   "committed_gp": 14,
+   "live_record": "4-10",
+   "live_record_from_11_15_page": null,
+   "live_record_from_11_16_page": "4-10",
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "NYK",
+   "committed_team_advanced_record": "6-6",
+   "committed_gp": 12,
+   "live_record": "7-6",
+   "live_record_from_11_15_page": "7-6",
+   "live_record_from_11_16_page": null,
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": false,
+   "delta": "6-6 -> 7-6",
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15"
+   ]
+  },
+  {
+   "abbr": "OKC",
+   "committed_team_advanced_record": "8-5",
+   "committed_gp": 13,
+   "live_record": "8-5",
+   "live_record_from_11_15_page": "8-5",
+   "live_record_from_11_16_page": null,
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15"
+   ]
+  },
+  {
+   "abbr": "ORL",
+   "committed_team_advanced_record": "5-7",
+   "committed_gp": 12,
+   "live_record": "5-7",
+   "live_record_from_11_15_page": null,
+   "live_record_from_11_16_page": "5-7",
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "PHI",
+   "committed_team_advanced_record": "11-3",
+   "committed_gp": 14,
+   "live_record": "11-3",
+   "live_record_from_11_15_page": "11-3",
+   "live_record_from_11_16_page": "11-3",
+   "the_two_live_pages_agree": true,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15",
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "PHX",
+   "committed_team_advanced_record": "5-6",
+   "committed_gp": 11,
+   "live_record": "5-7",
+   "live_record_from_11_15_page": "5-7",
+   "live_record_from_11_16_page": "5-7",
+   "the_two_live_pages_agree": true,
+   "agrees_with_committed": false,
+   "delta": "5-6 -> 5-7",
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15",
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "POR",
+   "committed_team_advanced_record": "9-3",
+   "committed_gp": 12,
+   "live_record": "9-3",
+   "live_record_from_11_15_page": null,
+   "live_record_from_11_16_page": "9-3",
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "abbr": "SAC",
+   "committed_team_advanced_record": "1-11",
+   "committed_gp": 12,
+   "live_record": "1-11",
+   "live_record_from_11_15_page": "1-11",
+   "live_record_from_11_16_page": null,
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15"
+   ]
+  },
+  {
+   "abbr": "SAS",
+   "committed_team_advanced_record": "11-2",
+   "committed_gp": 13,
+   "live_record": "12-2",
+   "live_record_from_11_15_page": "12-2",
+   "live_record_from_11_16_page": null,
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": false,
+   "delta": "11-2 -> 12-2",
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15"
+   ]
+  },
+  {
+   "abbr": "TOR",
+   "committed_team_advanced_record": "5-7",
+   "committed_gp": 12,
+   "live_record": "5-8",
+   "live_record_from_11_15_page": "5-8",
+   "live_record_from_11_16_page": null,
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": false,
+   "delta": "5-7 -> 5-8",
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15"
+   ]
+  },
+  {
+   "abbr": "UTA",
+   "committed_team_advanced_record": "1-12",
+   "committed_gp": 13,
+   "live_record": "1-13",
+   "live_record_from_11_15_page": "1-13",
+   "live_record_from_11_16_page": null,
+   "the_two_live_pages_agree": null,
+   "agrees_with_committed": false,
+   "delta": "1-12 -> 1-13",
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15"
+   ]
+  },
+  {
+   "abbr": "WAS",
+   "committed_team_advanced_record": "4-9",
+   "committed_gp": 13,
+   "live_record": "4-9",
+   "live_record_from_11_15_page": "4-9",
+   "live_record_from_11_16_page": "4-9",
+   "the_two_live_pages_agree": true,
+   "agrees_with_committed": true,
+   "delta": null,
+   "source_committed": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "source_live": [
+    "https://www.nba.com/games?date=2026-11-15",
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  }
+ ],
+ "team_records_compared": 29,
+ "team_records_differing": [
+  "BOS",
+  "CHA",
+  "DAL",
+  "LAC",
+  "LAL",
+  "NYK",
+  "PHX",
+  "SAS",
+  "TOR",
+  "UTA"
+ ],
+ "team_records_differing_count": 10,
+ "the_two_live_pages_disagree_on": []
+}
