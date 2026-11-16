@@ -78,7 +78,20 @@ def cell_text(block: str) -> str:
     parts = []
     for m in re.finditer(r"\(((?:[^()\\]|\\.)*)\)", block):
         parts.append(unescape(m.group(1)))
-    return " ".join(p for p in parts if p).strip()
+    out = ""
+    for part in (p for p in parts if p):
+        if not out:
+            out = part
+        elif out.endswith("-") and len(out.rstrip("-")) > 0 and out[-2:-1] != " ":
+            # A hyphenated word is drawn as two kerned strings, "(Two-)" then
+            # "(Way)". Joining them with a space prints "Two- Way", which is not
+            # what the page shows. A standalone "-" is a dash, not a hyphen, so
+            # it keeps its surrounding spaces. (Both readers of these PDFs had
+            # this artifact; flag F-X02.)
+            out = out + part
+        else:
+            out = out + " " + part
+    return out.strip()
 
 
 def unescape(text: str) -> str:
@@ -207,6 +220,84 @@ def parsed_rows_for(label: str) -> list:
         return json.load(fh).get("rows")
 
 
+def complete_rows(body: list) -> list:
+    """Re-join wrapped reasons, normalise NOT YET SUBMITTED, and inherit
+    the merged Game Date / Game Time / Matchup / Team cells.
+
+    Kept as a function so the unit test can exercise the same pipeline the
+    report writer uses, rather than a copy of it.
+    """
+    if not body:
+        return []
+    # A reason that wraps is drawn as a second clipped rectangle in the same
+    # x-band, immediately below: the grouper sees it as a row of its own.
+    # Re-join it to the row it continues, and only when the continuation
+    # carries nothing but reason text in the same column on the same page -
+    # otherwise it is left alone and reported, never merged by guesswork.
+    merged = []
+    for r in body:
+        prev = merged[-1] if merged else None
+        c = r["cells"]
+        only_reason = (not c["player"]) and (not c["status"]) and bool(c["reason"].strip()) \
+            and c["reason"].strip().upper() != "NOT YET SUBMITTED"
+        # Same x-band, and on the same page or the page immediately before:
+        # the report's table continues across a page break, and a wrapped
+        # reason can break exactly at the boundary (measured: "Injury/Illness
+        # - Left 5th Metatarsal / Fracture" for Jackson, GG, 2026-11-16).
+        same_band = (prev is not None
+                     and 0 <= r["page"] - prev["page"] <= 1
+                     and prev["x"].get("reason") is not None
+                     and r["x"].get("reason") is not None
+                     and abs(prev["x"]["reason"] - r["x"]["reason"]) <= 6.0)
+        if (only_reason and same_band and prev is not None
+                and prev["cells"]["player"]
+                and (not c["matchup"] or c["matchup"] == prev["cells"]["matchup"])):
+            prev["cells"]["reason"] = (prev["cells"]["reason"] + " " + c["reason"].strip()).strip()
+            prev.setdefault("wrapped_reason_lines", []).append(c["reason"].strip())
+            continue
+        merged.append(r)
+    body = merged
+
+    # NOT YET SUBMITTED is printed in the Reason column of a team block that
+    # has not filed: it is a filing-status placeholder for the whole block,
+    # not a player status and not a reason. Transcribe it into `status` (the
+    # column semantics the rest of the repository uses) and keep the printed
+    # text verbatim in `printed_raw` so the move is auditable rather than
+    # silent. Nothing else is moved between columns.
+    for r in body:
+        c = r["cells"]
+        if (not c["player"]) and (not c["status"]) and \
+                c["reason"].strip().upper() == "NOT YET SUBMITTED":
+            c["status"] = "NOT YET SUBMITTED"
+            c["printed_raw"] = "NOT YET SUBMITTED (printed in the Reason column)"
+            c["reason"] = ""
+
+    # The PDF merges the Game Date, Game Time, Matchup and Team cells
+    # vertically: they are drawn once at the top of a block and every
+    # following row in the block clips an empty rectangle. Inherit them from
+    # the row above, and say so per row. This is the same property the
+    # repository already records as `merged_cell_caveat`; it is transcription
+    # of what the page prints, not inference of a value that is absent.
+    kept = []
+    carry = {c: "" for c in ("game_date", "game_time_et", "matchup", "team")}
+    for r in body:
+        cells = dict(r["cells"])
+        inherited = {}
+        for c in ("game_date", "game_time_et", "matchup", "team"):
+            if cells.get(c):
+                carry[c] = cells[c]
+            elif carry[c]:
+                cells[c] = carry[c]
+                inherited[c] = True
+        if not (cells.get("player") or cells.get("status") or cells.get("reason")):
+            continue
+        kept.append({"cells": cells, "page": r["page"],
+                     "inherited": inherited,
+                     "wrapped_reason_lines": r.get("wrapped_reason_lines", []),
+                     "unassigned_text": r["unassigned_text"]})
+    return kept
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--edition", default=None,
@@ -245,72 +336,8 @@ def main() -> int:
                 continue
             body.append(r)
 
-        # A reason that wraps is drawn as a second clipped rectangle in the same
-        # x-band, immediately below: the grouper sees it as a row of its own.
-        # Re-join it to the row it continues, and only when the continuation
-        # carries nothing but reason text in the same column on the same page -
-        # otherwise it is left alone and reported, never merged by guesswork.
-        merged = []
-        for r in body:
-            prev = merged[-1] if merged else None
-            c = r["cells"]
-            only_reason = (not c["player"]) and (not c["status"]) and bool(c["reason"].strip()) \
-                and c["reason"].strip().upper() != "NOT YET SUBMITTED"
-            # Same x-band, and on the same page or the page immediately before:
-            # the report's table continues across a page break, and a wrapped
-            # reason can break exactly at the boundary (measured: "Injury/Illness
-            # - Left 5th Metatarsal / Fracture" for Jackson, GG, 2026-11-16).
-            same_band = (prev is not None
-                         and 0 <= r["page"] - prev["page"] <= 1
-                         and prev["x"].get("reason") is not None
-                         and r["x"].get("reason") is not None
-                         and abs(prev["x"]["reason"] - r["x"]["reason"]) <= 6.0)
-            if (only_reason and same_band and prev is not None
-                    and prev["cells"]["player"]
-                    and (not c["matchup"] or c["matchup"] == prev["cells"]["matchup"])):
-                prev["cells"]["reason"] = (prev["cells"]["reason"] + " " + c["reason"].strip()).strip()
-                prev.setdefault("wrapped_reason_lines", []).append(c["reason"].strip())
-                continue
-            merged.append(r)
-        body = merged
+        kept = complete_rows(body)
 
-        # NOT YET SUBMITTED is printed in the Reason column of a team block that
-        # has not filed: it is a filing-status placeholder for the whole block,
-        # not a player status and not a reason. Transcribe it into `status` (the
-        # column semantics the rest of the repository uses) and keep the printed
-        # text verbatim in `printed_raw` so the move is auditable rather than
-        # silent. Nothing else is moved between columns.
-        for r in body:
-            c = r["cells"]
-            if (not c["player"]) and (not c["status"]) and \
-                    c["reason"].strip().upper() == "NOT YET SUBMITTED":
-                c["status"] = "NOT YET SUBMITTED"
-                c["printed_raw"] = "NOT YET SUBMITTED (printed in the Reason column)"
-                c["reason"] = ""
-
-        # The PDF merges the Game Date, Game Time, Matchup and Team cells
-        # vertically: they are drawn once at the top of a block and every
-        # following row in the block clips an empty rectangle. Inherit them from
-        # the row above, and say so per row. This is the same property the
-        # repository already records as `merged_cell_caveat`; it is transcription
-        # of what the page prints, not inference of a value that is absent.
-        kept = []
-        carry = {c: "" for c in ("game_date", "game_time_et", "matchup", "team")}
-        for r in body:
-            cells = dict(r["cells"])
-            inherited = {}
-            for c in ("game_date", "game_time_et", "matchup", "team"):
-                if cells.get(c):
-                    carry[c] = cells[c]
-                elif carry[c]:
-                    cells[c] = carry[c]
-                    inherited[c] = True
-            if not (cells.get("player") or cells.get("status") or cells.get("reason")):
-                continue
-            kept.append({"cells": cells, "page": r["page"],
-                         "inherited": inherited,
-                         "wrapped_reason_lines": r.get("wrapped_reason_lines", []),
-                         "unassigned_text": r["unassigned_text"]})
 
         line_rows = parsed_rows_for(label) or []
         # Key on (matchup, team, player) - the identity of a report row. A team

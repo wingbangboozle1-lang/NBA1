@@ -1,7 +1,7 @@
 {
  "session": "arena/07920bdc-nba1",
  "purpose": "COORDINATION \u00a756 / X03 - independent cell-based re-read of an official injury-report PDF, cross-checked against engine/injury_diff.py's visual-line parser, so a dropped row is detected instead of being published as complete.",
- "checked_at_utc": "2026-11-16T18:37:04Z",
+ "checked_at_utc": "2026-11-16T18:44:49Z",
  "edition": "Injury-Report_2026-11-16_01_00PM",
  "pdf": "data/raw/injury_pdfs/Injury-Report_2026-11-16_01_00PM__e0dbe404b34b616c0acb18427966dad7058ac3e4a743cd76ea46f7e8c7550152.pdf",
  "pdf_sha256": "e0dbe404b34b616c0acb18427966dad7058ac3e4a743cd76ea46f7e8c7550152",
@@ -16,7 +16,7 @@
    "581.7": "status",
    "662.1": "reason"
   },
-  "clipped_cells": 8,
+  "clipped_cells": 623,
   "populated_cells": 294,
   "rows_recovered": 87,
   "player_rows": 75,
@@ -114,7 +114,7 @@
    "team": "Chicago Bulls",
    "player": "Sellers, Jaylin",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "_inherited": [
     "game_date",
     "game_time_et",
@@ -249,7 +249,7 @@
    "team": "Cleveland Cavaliers",
    "player": "Udeh, Jr., Ernest",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "_inherited": [
     "game_date",
     "game_time_et",
@@ -452,7 +452,7 @@
    "team": "Washington Wizards",
    "player": "Okpara, Felix",
    "status": "Questionable",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "_inherited": [
     "game_date",
     "game_time_et",
@@ -617,7 +617,7 @@
    "team": "Houston Rockets",
    "player": "Copeland, Quadir",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "_inherited": [
     "game_date",
     "game_time_et",
@@ -634,7 +634,7 @@
    "team": "Houston Rockets",
    "player": "Phillips, Julian",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "_inherited": [
     "game_date",
     "game_time_et",
@@ -685,7 +685,7 @@
    "team": "Miami Heat",
    "player": "Goldin, Vladislav",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "_inherited": [
     "game_date",
     "game_time_et",
@@ -835,7 +835,7 @@
    "team": "Brooklyn Nets",
    "player": "Bilodeau, Tyler",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "_inherited": [
     "game_date",
     "game_time_et",
@@ -868,7 +868,7 @@
    "team": "Brooklyn Nets",
    "player": "Nelson, Grant",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "_inherited": [
     "game_date",
     "game_time_et",
@@ -1018,7 +1018,7 @@
    "team": "New Orleans Pelicans",
    "player": "Dia, Malik",
    "status": "Questionable",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "_inherited": [
     "game_date",
     "game_time_et",
@@ -1102,7 +1102,7 @@
    "team": "New Orleans Pelicans",
    "player": "Pierre Jr., Jaron",
    "status": "Questionable",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "_inherited": [
     "game_date",
     "game_time_et",
@@ -1119,7 +1119,7 @@
    "team": "New Orleans Pelicans",
    "player": "Reese, Julian",
    "status": "Questionable",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "_inherited": [
     "game_date",
     "game_time_et",
@@ -1317,7 +1317,7 @@
    "team": "Denver Nuggets",
    "player": "Nembhard, Ryan",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "_inherited": [
     "game_date",
     "game_time_et",
@@ -1351,7 +1351,7 @@
    "team": "Denver Nuggets",
    "player": "Whitmore, Cam",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "_inherited": [
     "game_date",
     "game_time_et",
