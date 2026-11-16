@@ -17,7 +17,7 @@
     </a>
     <nav class="topnav">
       <a href="../../model-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
-      <a href="../../picks.html">Horizon 14–17 (session build)</a>
+      <a href="picks.html">Horizon 14–17 (session build)</a>
       <a href="../../picks.html">Rolling horizon pick file</a>
       <a href="picks.html">Horizon</a>
       <a href="strategies.html">Evidence</a>
@@ -924,6 +924,15 @@
 <td>roll.html rows for 11/16 and 11/17; any rest/B2B flag for POR and MIN</td>
 <td>Confirm against the box scores after both games; if one is a page artefact, drop the row.</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F97</td>
+<td>Medium</td>
+<td><b>GitHub Pages deployments are being superseded faster than they run, so the live site lags main</b></td>
+<td>Every pages.yml push run to main between 2026-11-15T23:55Z and 2026-11-16T01:00Z was cancelled or left pending while five sessions pushed to main inside the same hour. At the last fetch-back the live site still served the pre-11/16 build (34-game 15-18 Nov landing tiles, 4 ledger entries) even though site/pages/roll.html is present in main (1,408 lines, 61.1 KB) and every gate on the branch passes. Nothing in the build is broken: this is a deploy-backlog artefact of parallel sessions, and it means a fetch-back cannot be used to prove what main contains.</td>
+<td>every published page; any claim about what the live site currently shows</td>
+<td>Either serialize merges to main (a merge queue) so each deploy completes, or verify against the main tree and the Actions run log rather than a live fetch-back while several sessions are pushing.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/actions/workflows/pages.yml" target="_blank" rel="noopener">link</a></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">
