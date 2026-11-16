@@ -1,0 +1,9343 @@
+{
+ "title": "Row-by-row comparison: published files vs this session's official capture",
+ "captured_retrieved_utc": "2026-11-15T23:40Z..2026-11-16T00:20Z",
+ "published_files": {
+  "schedule": "data/official/schedule_2026-11-15_to_18.json",
+  "standings": "data/official/standings_2026-11-15.json",
+  "finals_2026_11_14": "data/official/results_2026-11-14.json"
+ },
+ "schedule": {
+  "rows_published": 34,
+  "rows_official": 34,
+  "official_rows_absent_from_published": [],
+  "published_rows_absent_from_official": [],
+  "tally": {
+   "AGREE": 263,
+   "MISMATCH_POINT_IN_TIME": 3,
+   "PUBLISHED_BLANK_OFFICIAL_HAS_VALUE": 4,
+   "UNVERIFIABLE_IN_THIS_PASS": 2
+  },
+  "rows": [
+   {
+    "game_id": "0022600236",
+    "date": "2026-11-15",
+    "matchup": "IND@PHI",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-15",
+      "official": "2026-11-15",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "01:00 PM ET",
+      "official": "01:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "IND",
+      "official": "IND",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "PHI",
+      "official": "PHI",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Xfinity Mobile Arena",
+      "official": "Xfinity Mobile Arena",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Philadelphia, PA",
+      "official": "Philadelphia, PA",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "5-8",
+      "official": "5-8",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "10-3",
+      "official": "10-3",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-15",
+    "official_game_page": "https://www.nba.com/game/ind-vs-phi-0022600236"
+   },
+   {
+    "game_id": "0022600237",
+    "date": "2026-11-15",
+    "matchup": "LAL@PHX",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-15",
+      "official": "2026-11-15",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "04:00 PM ET",
+      "official": "04:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "LAL",
+      "official": "LAL",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "PHX",
+      "official": "PHX",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Mortgage Matchup Center",
+      "official": "Mortgage Matchup Center",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Phoenix, AZ",
+      "official": "Phoenix, AZ",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "11-2",
+      "official": "11-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "5-6",
+      "official": "5-6",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-15",
+    "official_game_page": "https://www.nba.com/game/lal-vs-phx-0022600237"
+   },
+   {
+    "game_id": "0022600238",
+    "date": "2026-11-15",
+    "matchup": "CHA@LAC",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-15",
+      "official": "2026-11-15",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "04:30 PM ET",
+      "official": "04:30 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "CHA",
+      "official": "CHA",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "LAC",
+      "official": "LAC",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Intuit Dome",
+      "official": "Intuit Dome",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Inglewood, CA",
+      "official": "Inglewood, CA",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "4-8",
+      "official": "4-8",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "3-8",
+      "official": "3-8",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-15",
+    "official_game_page": "https://www.nba.com/game/cha-vs-lac-0022600238"
+   },
+   {
+    "game_id": "0022600239",
+    "date": "2026-11-15",
+    "matchup": "SAS@UTA",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-15",
+      "official": "2026-11-15",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "05:00 PM ET",
+      "official": "05:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "SAS",
+      "official": "SAS",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "UTA",
+      "official": "UTA",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Delta Center",
+      "official": "Delta Center",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Salt Lake City, UT",
+      "official": "Salt Lake City, UT",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "11-2",
+      "official": "11-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "1-12",
+      "official": "1-12",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-15",
+    "official_game_page": "https://www.nba.com/game/sas-vs-uta-0022600239"
+   },
+   {
+    "game_id": "0022600240",
+    "date": "2026-11-15",
+    "matchup": "DAL@BOS",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-15",
+      "official": "2026-11-15",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "06:00 PM ET",
+      "official": "06:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "DAL",
+      "official": "DAL",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "BOS",
+      "official": "BOS",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "TD Garden",
+      "official": "TD Garden",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Boston, MA",
+      "official": "Boston, MA",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "7-6",
+      "official": "7-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "10-2",
+      "official": "10-2",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-15",
+    "official_game_page": "https://www.nba.com/game/dal-vs-bos-0022600240"
+   },
+   {
+    "game_id": "0022600241",
+    "date": "2026-11-15",
+    "matchup": "NYK@TOR",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-15",
+      "official": "2026-11-15",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "06:00 PM ET",
+      "official": "06:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "NYK",
+      "official": "NYK",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "TOR",
+      "official": "TOR",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Scotiabank Arena",
+      "official": "Scotiabank Arena",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Toronto, ON",
+      "official": "Toronto, ON",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "6-6",
+      "official": "6-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "5-7",
+      "official": "5-7",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-15",
+    "official_game_page": "https://www.nba.com/game/nyk-vs-tor-0022600241"
+   },
+   {
+    "game_id": "0022600242",
+    "date": "2026-11-15",
+    "matchup": "HOU@WAS",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-15",
+      "official": "2026-11-15",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "07:00 PM ET",
+      "official": "07:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "HOU",
+      "official": "HOU",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "WAS",
+      "official": "WAS",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Capital One Arena",
+      "official": "Capital One Arena",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Washington, DC",
+      "official": "Washington, DC",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "10-3",
+      "official": "10-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "4-9",
+      "official": "4-9",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-15",
+    "official_game_page": "https://www.nba.com/game/hou-vs-was-0022600242"
+   },
+   {
+    "game_id": "0022600243",
+    "date": "2026-11-15",
+    "matchup": "ATL@MIL",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-15",
+      "official": "2026-11-15",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "08:00 PM ET",
+      "official": "08:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "ATL",
+      "official": "ATL",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "MIL",
+      "official": "MIL",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Fiserv Forum",
+      "official": "Fiserv Forum",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Milwaukee, WI",
+      "official": "Milwaukee, WI",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "7-6",
+      "official": "7-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "1-12",
+      "official": "1-12",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-15",
+    "official_game_page": "https://www.nba.com/game/atl-vs-mil-0022600243"
+   },
+   {
+    "game_id": "0022600244",
+    "date": "2026-11-15",
+    "matchup": "OKC@SAC",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-15",
+      "official": "2026-11-15",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "09:00 PM ET",
+      "official": "09:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "OKC",
+      "official": "OKC",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "SAC",
+      "official": "SAC",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Golden 1 Center",
+      "official": "Golden 1 Center",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Sacramento, CA",
+      "official": "Sacramento, CA",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "8-5",
+      "official": "8-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "1-11",
+      "official": "1-11",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-15",
+    "official_game_page": "https://www.nba.com/game/okc-vs-sac-0022600244"
+   },
+   {
+    "game_id": "0022600245",
+    "date": "2026-11-16",
+    "matchup": "ORL@BOS",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-16",
+      "official": "2026-11-16",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "07:00 PM ET",
+      "official": "07:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "ORL",
+      "official": "ORL",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "BOS",
+      "official": "BOS",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "TD Garden",
+      "official": "TD Garden",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Boston, MA",
+      "official": "Boston, MA",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "5-7",
+      "official": "5-7",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "10-2",
+      "official": "10-2",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-16",
+    "official_game_page": "https://www.nba.com/game/orl-vs-bos-0022600245"
+   },
+   {
+    "game_id": "0022600246",
+    "date": "2026-11-16",
+    "matchup": "CHI@CLE",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-16",
+      "official": "2026-11-16",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "07:00 PM ET",
+      "official": "07:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "CHI",
+      "official": "CHI",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "CLE",
+      "official": "CLE",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Rocket Arena",
+      "official": "Rocket Arena",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Cleveland, OH",
+      "official": "Cleveland, OH",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "3-9",
+      "official": "3-9",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "7-7",
+      "official": "7-7",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-16",
+    "official_game_page": "https://www.nba.com/game/chi-vs-cle-0022600246"
+   },
+   {
+    "game_id": "0022600247",
+    "date": "2026-11-16",
+    "matchup": "MEM@WAS",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-16",
+      "official": "2026-11-16",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "07:00 PM ET",
+      "official": "07:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "MEM",
+      "official": "MEM",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "WAS",
+      "official": "WAS",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Capital One Arena",
+      "official": "Capital One Arena",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Washington, DC",
+      "official": "Washington, DC",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "9-4",
+      "official": "9-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "4-9",
+      "official": "4-9",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-16",
+    "official_game_page": "https://www.nba.com/game/mem-vs-was-0022600247"
+   },
+   {
+    "game_id": "0022600248",
+    "date": "2026-11-16",
+    "matchup": "PHI@BKN",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-16",
+      "official": "2026-11-16",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "07:30 PM ET",
+      "official": "07:30 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "PHI",
+      "official": "PHI",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "BKN",
+      "official": "BKN",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Barclays Center",
+      "official": "Barclays Center",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Brooklyn, NY",
+      "official": "Brooklyn, NY",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "10-3",
+      "official": "11-3",
+      "status": "MISMATCH_POINT_IN_TIME"
+     },
+     {
+      "field": "home_record",
+      "published": "3-9",
+      "official": "3-9",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-16",
+    "official_game_page": "https://www.nba.com/game/phi-vs-bkn-0022600248"
+   },
+   {
+    "game_id": "0022600249",
+    "date": "2026-11-16",
+    "matchup": "HOU@MIA",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-16",
+      "official": "2026-11-16",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "07:30 PM ET",
+      "official": "07:30 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "HOU",
+      "official": "HOU",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "MIA",
+      "official": "MIA",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Kaseya Center",
+      "official": "Kaseya Center",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Miami, FL",
+      "official": "Miami, FL",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "10-3",
+      "official": "10-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "7-6",
+      "official": "7-6",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-16",
+    "official_game_page": "https://www.nba.com/game/hou-vs-mia-0022600249"
+   },
+   {
+    "game_id": "0022600250",
+    "date": "2026-11-16",
+    "matchup": "POR@MIN",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-16",
+      "official": "2026-11-16",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "08:00 PM ET",
+      "official": "08:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "POR",
+      "official": "POR",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "MIN",
+      "official": "MIN",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Target Center",
+      "official": "Target Center",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Minneapolis, MN",
+      "official": "Minneapolis, MN",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "9-3",
+      "official": "9-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "9-4",
+      "official": "9-4",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-16",
+    "official_game_page": "https://www.nba.com/game/por-vs-min-0022600250"
+   },
+   {
+    "game_id": "0022600251",
+    "date": "2026-11-16",
+    "matchup": "GSW@NOP",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-16",
+      "official": "2026-11-16",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "09:00 PM ET",
+      "official": "09:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "GSW",
+      "official": "GSW",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "NOP",
+      "official": "NOP",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Smoothie King Center",
+      "official": "Smoothie King Center",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "New Orleans, LA",
+      "official": "New Orleans, LA",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "8-5",
+      "official": "8-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "4-10",
+      "official": "4-10",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-16",
+    "official_game_page": "https://www.nba.com/game/gsw-vs-nop-0022600251"
+   },
+   {
+    "game_id": "0022600252",
+    "date": "2026-11-16",
+    "matchup": "PHX@DEN",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-16",
+      "official": "2026-11-16",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "09:00 PM ET",
+      "official": "09:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "PHX",
+      "official": "PHX",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "DEN",
+      "official": "DEN",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Ball Arena",
+      "official": "Ball Arena",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Denver, CO",
+      "official": "Denver, CO",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "5-6",
+      "official": "5-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "7-4",
+      "official": "7-4",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-16",
+    "official_game_page": "https://www.nba.com/game/phx-vs-den-0022600252"
+   },
+   {
+    "game_id": "0022600253",
+    "date": "2026-11-17",
+    "matchup": "NYK@TOR",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-17",
+      "official": "2026-11-17",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "07:30 PM ET",
+      "official": "07:30 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "NYK",
+      "official": "NYK",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "TOR",
+      "official": "TOR",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Scotiabank Arena",
+      "official": "Scotiabank Arena",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Toronto, ON",
+      "official": "Toronto, ON",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "6-6",
+      "official": "6-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "5-7",
+      "official": "5-7",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-17",
+    "official_game_page": "https://www.nba.com/game/nyk-vs-tor-0022600253"
+   },
+   {
+    "game_id": "0022600254",
+    "date": "2026-11-17",
+    "matchup": "POR@MIN",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-17",
+      "official": "2026-11-17",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "08:00 PM ET",
+      "official": "08:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "POR",
+      "official": "POR",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "MIN",
+      "official": "MIN",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Target Center",
+      "official": "Target Center",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Minneapolis, MN",
+      "official": "Minneapolis, MN",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "9-3",
+      "official": "9-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "9-4",
+      "official": "9-4",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-17",
+    "official_game_page": "https://www.nba.com/game/por-vs-min-0022600254"
+   },
+   {
+    "game_id": "0022600255",
+    "date": "2026-11-17",
+    "matchup": "DET@SAS",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-17",
+      "official": "2026-11-17",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "08:00 PM ET",
+      "official": "08:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "DET",
+      "official": "DET",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "SAS",
+      "official": "SAS",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Frost Bank Center",
+      "official": "Frost Bank Center",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "San Antonio, TX",
+      "official": "San Antonio, TX",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "8-4",
+      "official": "8-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "11-2",
+      "official": "11-2",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-17",
+    "official_game_page": "https://www.nba.com/game/det-vs-sas-0022600255"
+   },
+   {
+    "game_id": "0022600257",
+    "date": "2026-11-17",
+    "matchup": "UTA@LAC",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-17",
+      "official": "2026-11-17",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "10:30 PM ET",
+      "official": "10:30 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "UTA",
+      "official": "UTA",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "LAC",
+      "official": "LAC",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Intuit Dome",
+      "official": "Intuit Dome",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Inglewood, CA",
+      "official": "Inglewood, CA",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "1-12",
+      "official": "1-12",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "3-8",
+      "official": "3-8",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-17",
+    "official_game_page": "https://www.nba.com/game/uta-vs-lac-0022600257"
+   },
+   {
+    "game_id": "0022600256",
+    "date": "2026-11-17",
+    "matchup": "CHA@LAL",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-17",
+      "official": "2026-11-17",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "11:00 PM ET",
+      "official": "11:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "CHA",
+      "official": "CHA",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "LAL",
+      "official": "LAL",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Crypto.com Arena",
+      "official": "Crypto.com Arena",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Los Angeles, CA",
+      "official": "Los Angeles, CA",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "4-8",
+      "official": "4-8",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "11-2",
+      "official": "11-2",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-17",
+    "official_game_page": "https://www.nba.com/game/cha-vs-lal-0022600256"
+   },
+   {
+    "game_id": "0022600258",
+    "date": "2026-11-18",
+    "matchup": "MEM@CLE",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-18",
+      "official": "2026-11-18",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "07:00 PM ET",
+      "official": "07:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "MEM",
+      "official": "MEM",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "CLE",
+      "official": "CLE",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Rocket Arena",
+      "official": "Rocket Arena",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Cleveland, OH",
+      "official": "Cleveland, OH",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "9-4",
+      "official": "9-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "7-7",
+      "official": "7-7",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-18",
+    "official_game_page": "https://www.nba.com/game/mem-vs-cle-0022600258"
+   },
+   {
+    "game_id": "0022600259",
+    "date": "2026-11-18",
+    "matchup": "HOU@IND",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-18",
+      "official": "2026-11-18",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "07:00 PM ET",
+      "official": "07:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "HOU",
+      "official": "HOU",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "IND",
+      "official": "IND",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Gainbridge Fieldhouse",
+      "official": "Gainbridge Fieldhouse",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Indianapolis, IN",
+      "official": "Indianapolis, IN",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "10-3",
+      "official": "10-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "5-8",
+      "official": "5-9",
+      "status": "MISMATCH_POINT_IN_TIME"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-18",
+    "official_game_page": "https://www.nba.com/game/hou-vs-ind-0022600259"
+   },
+   {
+    "game_id": "0022600260",
+    "date": "2026-11-18",
+    "matchup": "MIL@MIA",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-18",
+      "official": "2026-11-18",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "07:00 PM ET",
+      "official": "07:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "MIL",
+      "official": "MIL",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "MIA",
+      "official": "MIA",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Kaseya Center",
+      "official": "Kaseya Center",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Miami, FL",
+      "official": "Miami, FL",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "1-12",
+      "official": "1-12",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "7-6",
+      "official": "7-6",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-18",
+    "official_game_page": "https://www.nba.com/game/mil-vs-mia-0022600260"
+   },
+   {
+    "game_id": "0022600261",
+    "date": "2026-11-18",
+    "matchup": "PHI@ORL",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-18",
+      "official": "2026-11-18",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "07:00 PM ET",
+      "official": "07:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "PHI",
+      "official": "PHI",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "ORL",
+      "official": "ORL",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "",
+      "official": "Kia Center",
+      "status": "PUBLISHED_BLANK_OFFICIAL_HAS_VALUE"
+     },
+     {
+      "field": "city",
+      "published": "",
+      "official": "Orlando, FL",
+      "status": "PUBLISHED_BLANK_OFFICIAL_HAS_VALUE"
+     },
+     {
+      "field": "away_record",
+      "published": "10-3",
+      "official": "11-3",
+      "status": "MISMATCH_POINT_IN_TIME"
+     },
+     {
+      "field": "home_record",
+      "published": "5-7",
+      "official": "5-7",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-18",
+    "official_game_page": "https://www.nba.com/game/phi-vs-orl-0022600261"
+   },
+   {
+    "game_id": "0022600262",
+    "date": "2026-11-18",
+    "matchup": "CHI@BKN",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-18",
+      "official": "2026-11-18",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "07:30 PM ET",
+      "official": "07:30 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "CHI",
+      "official": "CHI",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "BKN",
+      "official": "BKN",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Barclays Center",
+      "official": "Barclays Center",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Brooklyn, NY",
+      "official": "Brooklyn, NY",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "3-9",
+      "official": "3-9",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "3-9",
+      "official": "3-9",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-18",
+    "official_game_page": "https://www.nba.com/game/chi-vs-bkn-0022600262"
+   },
+   {
+    "game_id": "0022600263",
+    "date": "2026-11-18",
+    "matchup": "WAS@TOR",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-18",
+      "official": "2026-11-18",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "07:30 PM ET",
+      "official": "07:30 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "WAS",
+      "official": "WAS",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "TOR",
+      "official": "TOR",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Scotiabank Arena",
+      "official": "Scotiabank Arena",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Toronto, ON",
+      "official": "Toronto, ON",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "4-9",
+      "official": "4-9",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "5-7",
+      "official": "5-7",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-18",
+    "official_game_page": "https://www.nba.com/game/was-vs-tor-0022600263"
+   },
+   {
+    "game_id": "0022600264",
+    "date": "2026-11-18",
+    "matchup": "DET@NOP",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-18",
+      "official": "2026-11-18",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "08:00 PM ET",
+      "official": "08:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "DET",
+      "official": "DET",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "NOP",
+      "official": "NOP",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Smoothie King Center",
+      "official": "Smoothie King Center",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "New Orleans, LA",
+      "official": "New Orleans, LA",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "8-4",
+      "official": "8-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "4-10",
+      "official": "4-10",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-18",
+    "official_game_page": "https://www.nba.com/game/det-vs-nop-0022600264"
+   },
+   {
+    "game_id": "0022600265",
+    "date": "2026-11-18",
+    "matchup": "ATL@OKC",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-18",
+      "official": "2026-11-18",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "08:00 PM ET",
+      "official": "08:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "ATL",
+      "official": "ATL",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "OKC",
+      "official": "OKC",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "",
+      "official": "Paycom Center",
+      "status": "PUBLISHED_BLANK_OFFICIAL_HAS_VALUE"
+     },
+     {
+      "field": "city",
+      "published": "",
+      "official": "Oklahoma City, OK",
+      "status": "PUBLISHED_BLANK_OFFICIAL_HAS_VALUE"
+     },
+     {
+      "field": "away_record",
+      "published": "7-6",
+      "official": "7-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "8-5",
+      "official": "8-5",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-18",
+    "official_game_page": "https://www.nba.com/game/atl-vs-okc-0022600265"
+   },
+   {
+    "game_id": "0022600267",
+    "date": "2026-11-18",
+    "matchup": "GSW@DAL",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-18",
+      "official": "2026-11-18",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "08:00 PM ET",
+      "official": "08:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "GSW",
+      "official": "GSW",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "DAL",
+      "official": "DAL",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "",
+      "official": null,
+      "status": "UNVERIFIABLE_IN_THIS_PASS"
+     },
+     {
+      "field": "city",
+      "published": "",
+      "official": null,
+      "status": "UNVERIFIABLE_IN_THIS_PASS"
+     },
+     {
+      "field": "away_record",
+      "published": "8-5",
+      "official": "8-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "7-6",
+      "official": "7-6",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-18",
+    "official_game_page": "https://www.nba.com/game/gsw-vs-dal-0022600267"
+   },
+   {
+    "game_id": "0022600266",
+    "date": "2026-11-18",
+    "matchup": "BOS@DEN",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-18",
+      "official": "2026-11-18",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "09:30 PM ET",
+      "official": "09:30 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "BOS",
+      "official": "BOS",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "DEN",
+      "official": "DEN",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Ball Arena",
+      "official": "Ball Arena",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Denver, CO",
+      "official": "Denver, CO",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "10-2",
+      "official": "10-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "7-4",
+      "official": "7-4",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-18",
+    "official_game_page": "https://www.nba.com/game/bos-vs-den-0022600266"
+   },
+   {
+    "game_id": "0022600268",
+    "date": "2026-11-18",
+    "matchup": "UTA@LAL",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-18",
+      "official": "2026-11-18",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "10:00 PM ET",
+      "official": "10:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "UTA",
+      "official": "UTA",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "LAL",
+      "official": "LAL",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Crypto.com Arena",
+      "official": "Crypto.com Arena",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Los Angeles, CA",
+      "official": "Los Angeles, CA",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "1-12",
+      "official": "1-12",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "11-2",
+      "official": "11-2",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-18",
+    "official_game_page": "https://www.nba.com/game/uta-vs-lal-0022600268"
+   },
+   {
+    "game_id": "0022600269",
+    "date": "2026-11-18",
+    "matchup": "PHX@SAC",
+    "checks": [
+     {
+      "field": "date",
+      "published": "2026-11-18",
+      "official": "2026-11-18",
+      "status": "AGREE"
+     },
+     {
+      "field": "tip_et",
+      "published": "10:00 PM ET",
+      "official": "10:00 PM ET",
+      "status": "AGREE"
+     },
+     {
+      "field": "away",
+      "published": "PHX",
+      "official": "PHX",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "SAC",
+      "official": "SAC",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue",
+      "published": "Golden 1 Center",
+      "official": "Golden 1 Center",
+      "status": "AGREE"
+     },
+     {
+      "field": "city",
+      "published": "Sacramento, CA",
+      "official": "Sacramento, CA",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_record",
+      "published": "5-6",
+      "official": "5-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "home_record",
+      "published": "1-11",
+      "official": "1-11",
+      "status": "AGREE"
+     }
+    ],
+    "official_games_page": "https://www.nba.com/games?date=2026-11-18",
+    "official_game_page": "https://www.nba.com/game/phx-vs-sac-0022600269"
+   }
+  ]
+ },
+ "standings": {
+  "rows_published": 30,
+  "rows_official": 30,
+  "tally": {
+   "AGREE": 347,
+   "MISMATCH": 13
+  },
+  "rows": [
+   {
+    "abbr": "BOS",
+    "team": "Boston Celtics",
+    "conference": "East",
+    "published_rank": 1,
+    "official_rank": 1,
+    "checks": [
+     {
+      "field": "w",
+      "published": 10,
+      "official": 10,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 2,
+      "official": 2,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".833",
+      "official": ".833",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "--",
+      "official": "--",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "10-1",
+      "official": "10-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "4-0",
+      "official": "4-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "5-0",
+      "official": "5-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "5-2",
+      "official": "5-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "1-0",
+      "official": "1-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "9-1",
+      "official": "9-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "W 5",
+      "official": "W 5",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "PHI",
+    "team": "Philadelphia 76ers",
+    "conference": "East",
+    "published_rank": 2,
+    "official_rank": 2,
+    "checks": [
+     {
+      "field": "w",
+      "published": 10,
+      "official": 11,
+      "status": "MISMATCH"
+     },
+     {
+      "field": "l",
+      "published": 3,
+      "official": 3,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".769",
+      "official": ".786",
+      "status": "MISMATCH"
+     },
+     {
+      "field": "gb",
+      "published": "0.5",
+      "official": "--",
+      "status": "MISMATCH"
+     },
+     {
+      "field": "conf_rec",
+      "published": "10-3",
+      "official": "11-3",
+      "status": "MISMATCH"
+     },
+     {
+      "field": "div_rec",
+      "published": "3-1",
+      "official": "3-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "5-2",
+      "official": "6-2",
+      "status": "MISMATCH"
+     },
+     {
+      "field": "road",
+      "published": "5-1",
+      "official": "5-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "7-3",
+      "official": "8-2",
+      "status": "MISMATCH"
+     },
+     {
+      "field": "streak",
+      "published": "W 1",
+      "official": "W 2",
+      "status": "MISMATCH"
+     }
+    ]
+   },
+   {
+    "abbr": "DET",
+    "team": "Detroit Pistons",
+    "conference": "East",
+    "published_rank": 3,
+    "official_rank": 3,
+    "checks": [
+     {
+      "field": "w",
+      "published": 8,
+      "official": 8,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 4,
+      "official": 4,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".667",
+      "official": ".667",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "2",
+      "official": "2",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "8-3",
+      "official": "8-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "3-2",
+      "official": "3-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "5-2",
+      "official": "5-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "1-0",
+      "official": "1-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "6-4",
+      "official": "6-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 1",
+      "official": "L 1",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "MIA",
+    "team": "Miami Heat",
+    "conference": "East",
+    "published_rank": 4,
+    "official_rank": 4,
+    "checks": [
+     {
+      "field": "w",
+      "published": 7,
+      "official": 7,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 6,
+      "official": 6,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".538",
+      "official": ".538",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "3.5",
+      "official": "3.5",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "4-2",
+      "official": "4-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "1-1",
+      "official": "1-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "3-3",
+      "official": "3-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "4-3",
+      "official": "4-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "1-0",
+      "official": "1-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "7-3",
+      "official": "7-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "W 4",
+      "official": "W 4",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "ATL",
+    "team": "Atlanta Hawks",
+    "conference": "East",
+    "published_rank": 5,
+    "official_rank": 5,
+    "checks": [
+     {
+      "field": "w",
+      "published": 7,
+      "official": 7,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 6,
+      "official": 6,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".538",
+      "official": ".538",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "3.5",
+      "official": "3.5",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "7-2",
+      "official": "7-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "4-1",
+      "official": "4-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "3-3",
+      "official": "3-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "4-3",
+      "official": "4-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-1",
+      "official": "0-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "5-5",
+      "official": "5-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 2",
+      "official": "L 2",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "CLE",
+    "team": "Cleveland Cavaliers",
+    "conference": "East",
+    "published_rank": 6,
+    "official_rank": 6,
+    "checks": [
+     {
+      "field": "w",
+      "published": 7,
+      "official": 7,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 7,
+      "official": 7,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".500",
+      "official": ".500",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "4",
+      "official": "4",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "5-5",
+      "official": "5-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "1-0",
+      "official": "1-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "5-2",
+      "official": "5-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "2-5",
+      "official": "2-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "1-0",
+      "official": "1-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "4-6",
+      "official": "4-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "W 1",
+      "official": "W 1",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "NYK",
+    "team": "New York Knicks",
+    "conference": "East",
+    "published_rank": 7,
+    "official_rank": 7,
+    "checks": [
+     {
+      "field": "w",
+      "published": 6,
+      "official": 6,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 6,
+      "official": 6,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".500",
+      "official": ".500",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "4",
+      "official": "4",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "6-6",
+      "official": "6-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "1-3",
+      "official": "1-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "4-3",
+      "official": "4-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "2-3",
+      "official": "2-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "6-4",
+      "official": "6-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 2",
+      "official": "L 2",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "TOR",
+    "team": "Toronto Raptors",
+    "conference": "East",
+    "published_rank": 8,
+    "official_rank": 8,
+    "checks": [
+     {
+      "field": "w",
+      "published": 5,
+      "official": 5,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 7,
+      "official": 7,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".417",
+      "official": ".417",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "5",
+      "official": "5",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "4-3",
+      "official": "4-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "0-2",
+      "official": "0-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "2-3",
+      "official": "2-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "3-4",
+      "official": "3-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "3-7",
+      "official": "3-7",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 3",
+      "official": "L 3",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "ORL",
+    "team": "Orlando Magic",
+    "conference": "East",
+    "published_rank": 9,
+    "official_rank": 9,
+    "checks": [
+     {
+      "field": "w",
+      "published": 5,
+      "official": 5,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 7,
+      "official": 7,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".417",
+      "official": ".417",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "5",
+      "official": "5",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "3-4",
+      "official": "3-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "0-2",
+      "official": "0-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "1-4",
+      "official": "1-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "4-3",
+      "official": "4-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-1",
+      "official": "0-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "5-5",
+      "official": "5-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "W 3",
+      "official": "W 3",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "IND",
+    "team": "Indiana Pacers",
+    "conference": "East",
+    "published_rank": 10,
+    "official_rank": 10,
+    "checks": [
+     {
+      "field": "w",
+      "published": 5,
+      "official": 5,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 8,
+      "official": 9,
+      "status": "MISMATCH"
+     },
+     {
+      "field": "win_pct",
+      "published": ".385",
+      "official": ".357",
+      "status": "MISMATCH"
+     },
+     {
+      "field": "gb",
+      "published": "5.5",
+      "official": "6",
+      "status": "MISMATCH"
+     },
+     {
+      "field": "conf_rec",
+      "published": "3-5",
+      "official": "3-6",
+      "status": "MISMATCH"
+     },
+     {
+      "field": "div_rec",
+      "published": "0-1",
+      "official": "0-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "2-4",
+      "official": "2-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "3-3",
+      "official": "3-4",
+      "status": "MISMATCH"
+     },
+     {
+      "field": "neutral",
+      "published": "0-1",
+      "official": "0-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "3-7",
+      "official": "3-7",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "W 2",
+      "official": "L 1",
+      "status": "MISMATCH"
+     }
+    ]
+   },
+   {
+    "abbr": "CHA",
+    "team": "Charlotte Hornets",
+    "conference": "East",
+    "published_rank": 11,
+    "official_rank": 11,
+    "checks": [
+     {
+      "field": "w",
+      "published": 4,
+      "official": 4,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 8,
+      "official": 8,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".333",
+      "official": ".333",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "6",
+      "official": "6",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "4-7",
+      "official": "4-7",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "2-2",
+      "official": "2-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "3-4",
+      "official": "3-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "1-4",
+      "official": "1-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "3-7",
+      "official": "3-7",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 1",
+      "official": "L 1",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "WAS",
+    "team": "Washington Wizards",
+    "conference": "East",
+    "published_rank": 12,
+    "official_rank": 12,
+    "checks": [
+     {
+      "field": "w",
+      "published": 4,
+      "official": 4,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 9,
+      "official": 9,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".308",
+      "official": ".308",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "6.5",
+      "official": "6.5",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "4-8",
+      "official": "4-8",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "2-3",
+      "official": "2-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "2-3",
+      "official": "2-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "2-6",
+      "official": "2-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-1",
+      "official": "0-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "2-8",
+      "official": "2-8",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 6",
+      "official": "L 6",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "BKN",
+    "team": "Brooklyn Nets",
+    "conference": "East",
+    "published_rank": 13,
+    "official_rank": 13,
+    "checks": [
+     {
+      "field": "w",
+      "published": 3,
+      "official": 3,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 9,
+      "official": 9,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".250",
+      "official": ".250",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "7",
+      "official": "7",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "2-7",
+      "official": "2-7",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "0-2",
+      "official": "0-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "1-3",
+      "official": "1-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "2-6",
+      "official": "2-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-1",
+      "official": "0-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "3-7",
+      "official": "3-7",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 1",
+      "official": "L 1",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "CHI",
+    "team": "Chicago Bulls",
+    "conference": "East",
+    "published_rank": 14,
+    "official_rank": 14,
+    "checks": [
+     {
+      "field": "w",
+      "published": 3,
+      "official": 3,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 9,
+      "official": 9,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".250",
+      "official": ".250",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "7",
+      "official": "7",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "2-8",
+      "official": "2-8",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "1-0",
+      "official": "1-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "1-4",
+      "official": "1-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "2-5",
+      "official": "2-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "1-0",
+      "official": "1-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "2-8",
+      "official": "2-8",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "W 2",
+      "official": "W 2",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "MIL",
+    "team": "Milwaukee Bucks",
+    "conference": "East",
+    "published_rank": 15,
+    "official_rank": 15,
+    "checks": [
+     {
+      "field": "w",
+      "published": 1,
+      "official": 1,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 12,
+      "official": 12,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".077",
+      "official": ".077",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "9.5",
+      "official": "9.5",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "1-9",
+      "official": "1-9",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "1-2",
+      "official": "1-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "1-6",
+      "official": "1-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "0-6",
+      "official": "0-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "1-9",
+      "official": "1-9",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 9",
+      "official": "L 9",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "SAS",
+    "team": "San Antonio Spurs",
+    "conference": "West",
+    "published_rank": 1,
+    "official_rank": 1,
+    "checks": [
+     {
+      "field": "w",
+      "published": 11,
+      "official": 11,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 2,
+      "official": 2,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".846",
+      "official": ".846",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "--",
+      "official": "--",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "10-2",
+      "official": "10-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "2-1",
+      "official": "2-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "5-2",
+      "official": "5-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "6-0",
+      "official": "6-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "1-0",
+      "official": "1-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "10-0",
+      "official": "10-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "W 11",
+      "official": "W 11",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "LAL",
+    "team": "Los Angeles Lakers",
+    "conference": "West",
+    "published_rank": 2,
+    "official_rank": 2,
+    "checks": [
+     {
+      "field": "w",
+      "published": 11,
+      "official": 11,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 2,
+      "official": 2,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".846",
+      "official": ".846",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "--",
+      "official": "--",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "6-2",
+      "official": "6-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "4-1",
+      "official": "4-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "5-1",
+      "official": "5-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "6-1",
+      "official": "6-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "8-2",
+      "official": "8-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "W 7",
+      "official": "W 7",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "HOU",
+    "team": "Houston Rockets",
+    "conference": "West",
+    "published_rank": 3,
+    "official_rank": 3,
+    "checks": [
+     {
+      "field": "w",
+      "published": 10,
+      "official": 10,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 3,
+      "official": 3,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".769",
+      "official": ".769",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "1",
+      "official": "1",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "6-3",
+      "official": "6-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "2-1",
+      "official": "2-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "7-1",
+      "official": "7-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "3-2",
+      "official": "3-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "7-3",
+      "official": "7-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "W 3",
+      "official": "W 3",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "POR",
+    "team": "Portland Trail Blazers",
+    "conference": "West",
+    "published_rank": 4,
+    "official_rank": 4,
+    "checks": [
+     {
+      "field": "w",
+      "published": 9,
+      "official": 9,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 3,
+      "official": 3,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".750",
+      "official": ".750",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "1.5",
+      "official": "1.5",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "9-3",
+      "official": "9-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "4-0",
+      "official": "4-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "3-2",
+      "official": "3-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "6-1",
+      "official": "6-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "7-3",
+      "official": "7-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "W 3",
+      "official": "W 3",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "MIN",
+    "team": "Minnesota Timberwolves",
+    "conference": "West",
+    "published_rank": 5,
+    "official_rank": 5,
+    "checks": [
+     {
+      "field": "w",
+      "published": 9,
+      "official": 9,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 4,
+      "official": 4,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".692",
+      "official": ".692",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "2",
+      "official": "2",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "5-2",
+      "official": "5-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "1-0",
+      "official": "1-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "5-2",
+      "official": "5-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "4-2",
+      "official": "4-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-1",
+      "official": "0-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "6-4",
+      "official": "6-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 1",
+      "official": "L 1",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "MEM",
+    "team": "Memphis Grizzlies",
+    "conference": "West",
+    "published_rank": 6,
+    "official_rank": 6,
+    "checks": [
+     {
+      "field": "w",
+      "published": 9,
+      "official": 9,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 4,
+      "official": 4,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".692",
+      "official": ".692",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "2",
+      "official": "2",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "7-3",
+      "official": "7-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "1-1",
+      "official": "1-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "3-4",
+      "official": "3-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "6-0",
+      "official": "6-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-1",
+      "official": "0-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "6-4",
+      "official": "6-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "W 2",
+      "official": "W 2",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "DEN",
+    "team": "Denver Nuggets",
+    "conference": "West",
+    "published_rank": 7,
+    "official_rank": 7,
+    "checks": [
+     {
+      "field": "w",
+      "published": 7,
+      "official": 7,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 4,
+      "official": 4,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".636",
+      "official": ".636",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "3",
+      "official": "3",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "5-4",
+      "official": "5-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "0-2",
+      "official": "0-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "2-2",
+      "official": "2-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "4-2",
+      "official": "4-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "1-0",
+      "official": "1-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "1-0",
+      "official": "1-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "7-3",
+      "official": "7-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "W 2",
+      "official": "W 2",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "GSW",
+    "team": "Golden State Warriors",
+    "conference": "West",
+    "published_rank": 8,
+    "official_rank": 8,
+    "checks": [
+     {
+      "field": "w",
+      "published": 8,
+      "official": 8,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 5,
+      "official": 5,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".615",
+      "official": ".615",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "3",
+      "official": "3",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "6-5",
+      "official": "6-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "3-2",
+      "official": "3-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "6-1",
+      "official": "6-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "2-4",
+      "official": "2-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "1-0",
+      "official": "1-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "8-2",
+      "official": "8-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 2",
+      "official": "L 2",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "OKC",
+    "team": "Oklahoma City Thunder",
+    "conference": "West",
+    "published_rank": 9,
+    "official_rank": 9,
+    "checks": [
+     {
+      "field": "w",
+      "published": 8,
+      "official": 8,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 5,
+      "official": 5,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".615",
+      "official": ".615",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "3",
+      "official": "3",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "5-5",
+      "official": "5-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "1-2",
+      "official": "1-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "5-0",
+      "official": "5-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "3-5",
+      "official": "3-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "5-5",
+      "official": "5-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 3",
+      "official": "L 3",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "DAL",
+    "team": "Dallas Mavericks",
+    "conference": "West",
+    "published_rank": 10,
+    "official_rank": 10,
+    "checks": [
+     {
+      "field": "w",
+      "published": 7,
+      "official": 7,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 6,
+      "official": 6,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".538",
+      "official": ".538",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "4",
+      "official": "4",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "3-5",
+      "official": "3-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "1-3",
+      "official": "1-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "5-2",
+      "official": "5-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "2-4",
+      "official": "2-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "6-4",
+      "official": "6-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 2",
+      "official": "L 2",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "PHX",
+    "team": "Phoenix Suns",
+    "conference": "West",
+    "published_rank": 11,
+    "official_rank": 11,
+    "checks": [
+     {
+      "field": "w",
+      "published": 5,
+      "official": 5,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 6,
+      "official": 6,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".455",
+      "official": ".455",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "5",
+      "official": "5",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "3-6",
+      "official": "3-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "2-1",
+      "official": "2-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "5-3",
+      "official": "5-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "0-3",
+      "official": "0-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "5-5",
+      "official": "5-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "W 2",
+      "official": "W 2",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "NOP",
+    "team": "New Orleans Pelicans",
+    "conference": "West",
+    "published_rank": 12,
+    "official_rank": 12,
+    "checks": [
+     {
+      "field": "w",
+      "published": 4,
+      "official": 4,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 10,
+      "official": 10,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".286",
+      "official": ".286",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "7.5",
+      "official": "7.5",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "3-8",
+      "official": "3-8",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "1-1",
+      "official": "1-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "3-6",
+      "official": "3-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "1-4",
+      "official": "1-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "2-1",
+      "official": "2-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "4-6",
+      "official": "4-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 6",
+      "official": "L 6",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "LAC",
+    "team": "LA Clippers",
+    "conference": "West",
+    "published_rank": 13,
+    "official_rank": 13,
+    "checks": [
+     {
+      "field": "w",
+      "published": 3,
+      "official": 3,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 8,
+      "official": 8,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".273",
+      "official": ".273",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "7",
+      "official": "7",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "3-6",
+      "official": "3-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "1-4",
+      "official": "1-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "3-3",
+      "official": "3-3",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "0-5",
+      "official": "0-5",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-1",
+      "official": "0-1",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "2-8",
+      "official": "2-8",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "W 1",
+      "official": "W 1",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "SAC",
+    "team": "Sacramento Kings",
+    "conference": "West",
+    "published_rank": 14,
+    "official_rank": 14,
+    "checks": [
+     {
+      "field": "w",
+      "published": 1,
+      "official": 1,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 11,
+      "official": 11,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".083",
+      "official": ".083",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "9.5",
+      "official": "9.5",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "1-9",
+      "official": "1-9",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "0-2",
+      "official": "0-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "0-7",
+      "official": "0-7",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "1-4",
+      "official": "1-4",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "1-9",
+      "official": "1-9",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 5",
+      "official": "L 5",
+      "status": "AGREE"
+     }
+    ]
+   },
+   {
+    "abbr": "UTA",
+    "team": "Utah Jazz",
+    "conference": "West",
+    "published_rank": 15,
+    "official_rank": 15,
+    "checks": [
+     {
+      "field": "w",
+      "published": 1,
+      "official": 1,
+      "status": "AGREE"
+     },
+     {
+      "field": "l",
+      "published": 12,
+      "official": 12,
+      "status": "AGREE"
+     },
+     {
+      "field": "win_pct",
+      "published": ".077",
+      "official": ".077",
+      "status": "AGREE"
+     },
+     {
+      "field": "gb",
+      "published": "10",
+      "official": "10",
+      "status": "AGREE"
+     },
+     {
+      "field": "conf_rec",
+      "published": "1-10",
+      "official": "1-10",
+      "status": "AGREE"
+     },
+     {
+      "field": "div_rec",
+      "published": "0-2",
+      "official": "0-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "1-6",
+      "official": "1-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "road",
+      "published": "0-6",
+      "official": "0-6",
+      "status": "AGREE"
+     },
+     {
+      "field": "neutral",
+      "published": "0-0",
+      "official": "0-0",
+      "status": "AGREE"
+     },
+     {
+      "field": "ot",
+      "published": "0-2",
+      "official": "0-2",
+      "status": "AGREE"
+     },
+     {
+      "field": "last10",
+      "published": "0-10",
+      "official": "0-10",
+      "status": "AGREE"
+     },
+     {
+      "field": "streak",
+      "published": "L 11",
+      "official": "L 11",
+      "status": "AGREE"
+     }
+    ]
+   }
+  ]
+ },
+ "finals_2026_11_14": {
+  "rows_published": 5,
+  "rows_official": 5,
+  "tally": {
+   "AGREE": 45
+  },
+  "rows": [
+   {
+    "game_id": "0022600231",
+    "date": "2026-11-14",
+    "matchup": "DEN@NOP",
+    "checks": [
+     {
+      "field": "away",
+      "published": "DEN",
+      "official": "DEN",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "NOP",
+      "official": "NOP",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_pts",
+      "published": 116,
+      "official": 116,
+      "status": "AGREE"
+     },
+     {
+      "field": "home_pts",
+      "published": 108,
+      "official": 108,
+      "status": "AGREE"
+     },
+     {
+      "field": "away_quarters",
+      "published": [
+       29,
+       27,
+       30,
+       30
+      ],
+      "official": [
+       29,
+       27,
+       30,
+       30
+      ],
+      "status": "AGREE"
+     },
+     {
+      "field": "home_quarters",
+      "published": [
+       23,
+       28,
+       31,
+       26
+      ],
+      "official": [
+       23,
+       28,
+       31,
+       26
+      ],
+      "status": "AGREE"
+     },
+     {
+      "field": "attendance",
+      "published": 15721,
+      "official": 15721,
+      "status": "AGREE"
+     },
+     {
+      "field": "officials",
+      "published": "James Capers, Brent Barnaky, CJ Washington",
+      "official": "James Capers, Brent Barnaky, CJ Washington",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue(+city)",
+      "published": "Smoothie King Center, New Orleans, LA",
+      "official": "Smoothie King Center, New Orleans, LA",
+      "status": "AGREE"
+     }
+    ],
+    "official_game_page": "https://www.nba.com/game/den-vs-nop-0022600231"
+   },
+   {
+    "game_id": "0022600232",
+    "date": "2026-11-14",
+    "matchup": "DAL@CLE",
+    "checks": [
+     {
+      "field": "away",
+      "published": "DAL",
+      "official": "DAL",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "CLE",
+      "official": "CLE",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_pts",
+      "published": 117,
+      "official": 117,
+      "status": "AGREE"
+     },
+     {
+      "field": "home_pts",
+      "published": 127,
+      "official": 127,
+      "status": "AGREE"
+     },
+     {
+      "field": "away_quarters",
+      "published": [
+       33,
+       20,
+       38,
+       26
+      ],
+      "official": [
+       33,
+       20,
+       38,
+       26
+      ],
+      "status": "AGREE"
+     },
+     {
+      "field": "home_quarters",
+      "published": [
+       33,
+       38,
+       34,
+       22
+      ],
+      "official": [
+       33,
+       38,
+       34,
+       22
+      ],
+      "status": "AGREE"
+     },
+     {
+      "field": "attendance",
+      "published": 19432,
+      "official": 19432,
+      "status": "AGREE"
+     },
+     {
+      "field": "officials",
+      "published": "Eric Lewis, Tyler Ford, Jenna Schroeder",
+      "official": "Eric Lewis, Tyler Ford, Jenna Schroeder",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue(+city)",
+      "published": "Rocket Arena, Cleveland, OH",
+      "official": "Rocket Arena, Cleveland, OH",
+      "status": "AGREE"
+     }
+    ],
+    "official_game_page": "https://www.nba.com/game/dal-vs-cle-0022600232"
+   },
+   {
+    "game_id": "0022600233",
+    "date": "2026-11-14",
+    "matchup": "DET@MIA",
+    "checks": [
+     {
+      "field": "away",
+      "published": "DET",
+      "official": "DET",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "MIA",
+      "official": "MIA",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_pts",
+      "published": 117,
+      "official": 117,
+      "status": "AGREE"
+     },
+     {
+      "field": "home_pts",
+      "published": 137,
+      "official": 137,
+      "status": "AGREE"
+     },
+     {
+      "field": "away_quarters",
+      "published": [
+       39,
+       21,
+       26,
+       31
+      ],
+      "official": [
+       39,
+       21,
+       26,
+       31
+      ],
+      "status": "AGREE"
+     },
+     {
+      "field": "home_quarters",
+      "published": [
+       37,
+       31,
+       35,
+       34
+      ],
+      "official": [
+       37,
+       31,
+       35,
+       34
+      ],
+      "status": "AGREE"
+     },
+     {
+      "field": "attendance",
+      "published": 19658,
+      "official": 19658,
+      "status": "AGREE"
+     },
+     {
+      "field": "officials",
+      "published": "Mitchell Ervin, Suyash Mehta, Jonathan Sterling",
+      "official": "Mitchell Ervin, Suyash Mehta, Jonathan Sterling",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue(+city)",
+      "published": "Kaseya Center, Miami, FL",
+      "official": "Kaseya Center, Miami, FL",
+      "status": "AGREE"
+     }
+    ],
+    "official_game_page": "https://www.nba.com/game/det-vs-mia-0022600233"
+   },
+   {
+    "game_id": "0022600234",
+    "date": "2026-11-14",
+    "matchup": "BKN@MEM",
+    "checks": [
+     {
+      "field": "away",
+      "published": "BKN",
+      "official": "BKN",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "MEM",
+      "official": "MEM",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_pts",
+      "published": 110,
+      "official": 110,
+      "status": "AGREE"
+     },
+     {
+      "field": "home_pts",
+      "published": 129,
+      "official": 129,
+      "status": "AGREE"
+     },
+     {
+      "field": "away_quarters",
+      "published": [
+       23,
+       31,
+       30,
+       26
+      ],
+      "official": [
+       23,
+       31,
+       30,
+       26
+      ],
+      "status": "AGREE"
+     },
+     {
+      "field": "home_quarters",
+      "published": [
+       38,
+       33,
+       32,
+       26
+      ],
+      "official": [
+       38,
+       33,
+       32,
+       26
+      ],
+      "status": "AGREE"
+     },
+     {
+      "field": "attendance",
+      "published": 15103,
+      "official": 15103,
+      "status": "AGREE"
+     },
+     {
+      "field": "officials",
+      "published": "Michael Smith, Josh Tiven, Nate Green",
+      "official": "Michael Smith, Josh Tiven, Nate Green",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue(+city)",
+      "published": "FedExForum, Memphis, TN",
+      "official": "FedExForum, Memphis, TN",
+      "status": "AGREE"
+     }
+    ],
+    "official_game_page": "https://www.nba.com/game/bkn-vs-mem-0022600234"
+   },
+   {
+    "game_id": "0022600235",
+    "date": "2026-11-14",
+    "matchup": "CHI@MIN",
+    "checks": [
+     {
+      "field": "away",
+      "published": "CHI",
+      "official": "CHI",
+      "status": "AGREE"
+     },
+     {
+      "field": "home",
+      "published": "MIN",
+      "official": "MIN",
+      "status": "AGREE"
+     },
+     {
+      "field": "away_pts",
+      "published": 117,
+      "official": 117,
+      "status": "AGREE"
+     },
+     {
+      "field": "home_pts",
+      "published": 106,
+      "official": 106,
+      "status": "AGREE"
+     },
+     {
+      "field": "away_quarters",
+      "published": [
+       29,
+       29,
+       30,
+       29
+      ],
+      "official": [
+       29,
+       29,
+       30,
+       29
+      ],
+      "status": "AGREE"
+     },
+     {
+      "field": "home_quarters",
+      "published": [
+       17,
+       28,
+       35,
+       26
+      ],
+      "official": [
+       17,
+       28,
+       35,
+       26
+      ],
+      "status": "AGREE"
+     },
+     {
+      "field": "attendance",
+      "published": 18054,
+      "official": 18054,
+      "status": "AGREE"
+     },
+     {
+      "field": "officials",
+      "published": "Brian Forte, Nick Buchert, Scott Twardoski",
+      "official": "Brian Forte, Nick Buchert, Scott Twardoski",
+      "status": "AGREE"
+     },
+     {
+      "field": "venue(+city)",
+      "published": "Target Center, Minneapolis, MN",
+      "official": "Target Center, Minneapolis, MN",
+      "status": "AGREE"
+     }
+    ],
+    "official_game_page": "https://www.nba.com/game/chi-vs-min-0022600235"
+   }
+  ]
+ },
+ "team_stats": {
+  "advanced": {
+   "rows": 30,
+   "tally": {
+    "AGREE": 536,
+    "MISMATCH_POINT_IN_TIME": 34
+   },
+   "detail": [
+    {
+     "team": "Los Angeles Lakers",
+     "abbr": "LAL",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 11.0,
+       "official": 11.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 2.0,
+       "official": 2.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 624.0,
+       "official": 624.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 121.6,
+       "official": 121.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 113.6,
+       "official": 113.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 8.0,
+       "official": 8.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 58.7,
+       "official": 58.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.46,
+       "official": 1.46,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 17.6,
+       "official": 17.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 33.2,
+       "official": 33.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 64.3,
+       "official": 64.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 49.6,
+       "official": 49.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 16.8,
+       "official": 16.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 58.7,
+       "official": 58.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 63.2,
+       "official": 63.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 100.5,
+       "official": 100.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 54.2,
+       "official": 54.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1306.0,
+       "official": 1306.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "San Antonio Spurs",
+     "abbr": "SAS",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 11.0,
+       "official": 11.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 2.0,
+       "official": 2.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 629.0,
+       "official": 629.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 119.6,
+       "official": 119.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 106.6,
+       "official": 106.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 65.4,
+       "official": 65.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 2.28,
+       "official": 2.28,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 19.4,
+       "official": 19.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 33.9,
+       "official": 33.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 71.3,
+       "official": 71.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 52.7,
+       "official": 52.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 12.3,
+       "official": 12.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 53.4,
+       "official": 53.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 57.6,
+       "official": 57.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 98.94,
+       "official": 98.94,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 56.7,
+       "official": 56.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1298.0,
+       "official": 1298.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Boston Celtics",
+     "abbr": "BOS",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 12.0,
+       "official": 12.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 10.0,
+       "official": 10.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 2.0,
+       "official": 2.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 581.0,
+       "official": 581.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 117.4,
+       "official": 117.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 105.6,
+       "official": 105.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 11.7,
+       "official": 11.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 67.5,
+       "official": 67.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.83,
+       "official": 1.83,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 19.1,
+       "official": 19.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 32.7,
+       "official": 32.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 67.5,
+       "official": 67.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 50.4,
+       "official": 50.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 15.1,
+       "official": 15.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 54.8,
+       "official": 54.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 58.5,
+       "official": 58.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 96.62,
+       "official": 96.62,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 55.9,
+       "official": 55.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1168.0,
+       "official": 1168.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Houston Rockets",
+     "abbr": "HOU",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 10.0,
+       "official": 10.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 3.0,
+       "official": 3.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 624.0,
+       "official": 624.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 119.3,
+       "official": 119.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 110.2,
+       "official": 110.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 9.1,
+       "official": 9.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 64.4,
+       "official": 64.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.85,
+       "official": 1.85,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 19.0,
+       "official": 19.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 35.2,
+       "official": 35.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 67.8,
+       "official": 67.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 52.0,
+       "official": 52.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 14.8,
+       "official": 14.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 55.1,
+       "official": 55.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 59.3,
+       "official": 59.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 97.42,
+       "official": 97.42,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 55.8,
+       "official": 55.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1266.0,
+       "official": 1266.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Philadelphia 76ers",
+     "abbr": "PHI",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 14.0,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "w",
+       "published": 10.0,
+       "official": 11.0,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "l",
+       "published": 3.0,
+       "official": 3.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 624.0,
+       "official": 672.0,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "off_rtg",
+       "published": 111.0,
+       "official": 112.3,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "def_rtg",
+       "published": 109.5,
+       "official": 110.3,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "net_rtg",
+       "published": 1.5,
+       "official": 2.0,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "ast_pct",
+       "published": 65.8,
+       "official": 65.5,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "ast_to",
+       "published": 2.04,
+       "official": 2.06,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 18.6,
+       "official": 18.7,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 28.0,
+       "official": 27.5,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 70.8,
+       "official": 71.4,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "reb_pct",
+       "published": 49.3,
+       "official": 49.4,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "tov_pct",
+       "published": 12.7,
+       "official": 12.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 51.6,
+       "official": 52.6,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "ts_pct",
+       "published": 55.9,
+       "official": 56.7,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "pace",
+       "published": 100.04,
+       "official": 100.21,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "pie",
+       "published": 50.9,
+       "official": 50.8,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "poss",
+       "published": 1302.0,
+       "official": 1404.0,
+       "status": "MISMATCH_POINT_IN_TIME"
+      }
+     ]
+    },
+    {
+     "team": "Memphis Grizzlies",
+     "abbr": "MEM",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 9.0,
+       "official": 9.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 4.0,
+       "official": 4.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 629.0,
+       "official": 629.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 119.0,
+       "official": 119.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 110.4,
+       "official": 110.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 8.5,
+       "official": 8.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 66.2,
+       "official": 66.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.76,
+       "official": 1.76,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 19.1,
+       "official": 19.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 34.2,
+       "official": 34.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 70.6,
+       "official": 70.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 52.9,
+       "official": 52.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 15.6,
+       "official": 15.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 55.8,
+       "official": 55.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 60.2,
+       "official": 60.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 100.46,
+       "official": 100.46,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 53.9,
+       "official": 53.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1318.0,
+       "official": 1318.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Minnesota Timberwolves",
+     "abbr": "MIN",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 9.0,
+       "official": 9.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 4.0,
+       "official": 4.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 629.0,
+       "official": 629.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 116.0,
+       "official": 116.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 104.5,
+       "official": 104.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 11.5,
+       "official": 11.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 59.9,
+       "official": 59.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.63,
+       "official": 1.63,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 17.8,
+       "official": 17.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 35.4,
+       "official": 35.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 69.5,
+       "official": 69.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 52.7,
+       "official": 52.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 15.6,
+       "official": 15.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 55.5,
+       "official": 55.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 57.9,
+       "official": 57.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 101.27,
+       "official": 101.27,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 55.2,
+       "official": 55.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1326.0,
+       "official": 1326.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Portland Trail Blazers",
+     "abbr": "POR",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 12.0,
+       "official": 12.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 9.0,
+       "official": 9.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 3.0,
+       "official": 3.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 576.0,
+       "official": 576.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 118.8,
+       "official": 118.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 111.1,
+       "official": 111.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 7.7,
+       "official": 7.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 63.7,
+       "official": 63.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.55,
+       "official": 1.55,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 17.9,
+       "official": 17.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 33.3,
+       "official": 33.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 70.2,
+       "official": 70.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 52.4,
+       "official": 52.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 16.2,
+       "official": 16.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 56.3,
+       "official": 56.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 60.9,
+       "official": 60.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 100.67,
+       "official": 100.67,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 53.3,
+       "official": 53.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1208.0,
+       "official": 1208.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Detroit Pistons",
+     "abbr": "DET",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 12.0,
+       "official": 12.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 8.0,
+       "official": 8.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 4.0,
+       "official": 4.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 586.0,
+       "official": 586.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 114.1,
+       "official": 114.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 109.2,
+       "official": 109.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 4.9,
+       "official": 4.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 67.6,
+       "official": 67.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.94,
+       "official": 1.94,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 19.2,
+       "official": 19.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 29.8,
+       "official": 29.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 66.6,
+       "official": 66.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 48.4,
+       "official": 48.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 14.1,
+       "official": 14.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 53.9,
+       "official": 53.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 58.0,
+       "official": 58.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 99.48,
+       "official": 99.48,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 53.7,
+       "official": 53.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1217.0,
+       "official": 1217.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Golden State Warriors",
+     "abbr": "GSW",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 8.0,
+       "official": 8.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 5.0,
+       "official": 5.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 629.0,
+       "official": 629.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 116.1,
+       "official": 116.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 112.0,
+       "official": 112.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 4.1,
+       "official": 4.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 70.0,
+       "official": 70.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.75,
+       "official": 1.75,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 19.4,
+       "official": 19.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 32.7,
+       "official": 32.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 68.5,
+       "official": 68.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 50.7,
+       "official": 50.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 15.9,
+       "official": 15.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 55.4,
+       "official": 55.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 59.5,
+       "official": 59.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 99.66,
+       "official": 99.66,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 51.8,
+       "official": 51.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1307.0,
+       "official": 1307.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Oklahoma City Thunder",
+     "abbr": "OKC",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 8.0,
+       "official": 8.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 5.0,
+       "official": 5.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 624.0,
+       "official": 624.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 112.7,
+       "official": 112.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 109.0,
+       "official": 109.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 3.7,
+       "official": 3.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 55.5,
+       "official": 55.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.72,
+       "official": 1.72,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 16.6,
+       "official": 16.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 31.9,
+       "official": 31.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 68.5,
+       "official": 68.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 50.8,
+       "official": 50.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 13.5,
+       "official": 13.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 51.4,
+       "official": 51.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 55.4,
+       "official": 55.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 98.58,
+       "official": 98.58,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 53.3,
+       "official": 53.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1282.0,
+       "official": 1282.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Atlanta Hawks",
+     "abbr": "ATL",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 7.0,
+       "official": 7.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 6.0,
+       "official": 6.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 629.0,
+       "official": 629.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 113.3,
+       "official": 113.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 111.9,
+       "official": 111.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 1.4,
+       "official": 1.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 71.6,
+       "official": 71.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 2.07,
+       "official": 2.07,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 20.5,
+       "official": 20.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 33.2,
+       "official": 33.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 69.2,
+       "official": 69.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 49.7,
+       "official": 49.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 14.6,
+       "official": 14.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 52.8,
+       "official": 52.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 55.7,
+       "official": 55.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 103.55,
+       "official": 103.55,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 48.5,
+       "official": 48.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1356.0,
+       "official": 1356.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Cleveland Cavaliers",
+     "abbr": "CLE",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 14.0,
+       "official": 14.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 7.0,
+       "official": 7.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 7.0,
+       "official": 7.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 677.0,
+       "official": 677.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 116.9,
+       "official": 116.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 115.4,
+       "official": 115.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 1.6,
+       "official": 1.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 64.8,
+       "official": 64.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 2.01,
+       "official": 2.01,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 19.1,
+       "official": 19.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 29.1,
+       "official": 29.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 68.1,
+       "official": 68.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 49.4,
+       "official": 49.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 13.4,
+       "official": 13.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 55.8,
+       "official": 55.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 59.1,
+       "official": 59.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 99.72,
+       "official": 99.72,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 51.2,
+       "official": 51.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1407.0,
+       "official": 1407.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Dallas Mavericks",
+     "abbr": "DAL",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 7.0,
+       "official": 7.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 6.0,
+       "official": 6.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 624.0,
+       "official": 624.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 112.8,
+       "official": 112.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 112.8,
+       "official": 112.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 0.0,
+       "official": 0.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 63.2,
+       "official": 63.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.65,
+       "official": 1.65,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 18.2,
+       "official": 18.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 33.0,
+       "official": 33.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 66.5,
+       "official": 66.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 49.7,
+       "official": 49.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 15.7,
+       "official": 15.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 53.5,
+       "official": 53.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 57.2,
+       "official": 57.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 100.54,
+       "official": 100.54,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 49.7,
+       "official": 49.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1308.0,
+       "official": 1308.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Denver Nuggets",
+     "abbr": "DEN",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 11.0,
+       "official": 11.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 7.0,
+       "official": 7.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 4.0,
+       "official": 4.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 533.0,
+       "official": 533.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 116.0,
+       "official": 116.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 114.7,
+       "official": 114.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 1.3,
+       "official": 1.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 66.9,
+       "official": 66.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 2.07,
+       "official": 2.07,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 19.7,
+       "official": 19.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 30.2,
+       "official": 30.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 67.7,
+       "official": 67.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 49.8,
+       "official": 49.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 13.5,
+       "official": 13.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 55.0,
+       "official": 55.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 59.2,
+       "official": 59.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 97.67,
+       "official": 97.67,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 52.9,
+       "official": 52.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1087.0,
+       "official": 1087.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Miami Heat",
+     "abbr": "MIA",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 7.0,
+       "official": 7.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 6.0,
+       "official": 6.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 629.0,
+       "official": 629.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 114.7,
+       "official": 114.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 116.2,
+       "official": 116.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": -1.5,
+       "official": -1.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 70.9,
+       "official": 70.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 2.07,
+       "official": 2.07,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 20.1,
+       "official": 20.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 30.3,
+       "official": 30.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 70.1,
+       "official": 70.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 49.8,
+       "official": 49.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 13.9,
+       "official": 13.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 54.5,
+       "official": 54.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 58.1,
+       "official": 58.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 102.49,
+       "official": 102.49,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 50.0,
+       "official": 50.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1345.0,
+       "official": 1345.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "New York Knicks",
+     "abbr": "NYK",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 12.0,
+       "official": 12.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 6.0,
+       "official": 6.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 6.0,
+       "official": 6.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 576.0,
+       "official": 576.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 114.5,
+       "official": 114.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 108.6,
+       "official": 108.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 5.9,
+       "official": 5.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 69.2,
+       "official": 69.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.86,
+       "official": 1.86,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 18.9,
+       "official": 18.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 37.3,
+       "official": 37.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 72.1,
+       "official": 72.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 54.4,
+       "official": 54.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 15.0,
+       "official": 15.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 51.9,
+       "official": 51.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 55.7,
+       "official": 55.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 95.63,
+       "official": 95.63,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 53.3,
+       "official": 53.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1150.0,
+       "official": 1150.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Indiana Pacers",
+     "abbr": "IND",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 14.0,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "w",
+       "published": 5.0,
+       "official": 5.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 8.0,
+       "official": 9.0,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "min",
+       "published": 624.0,
+       "official": 672.0,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "off_rtg",
+       "published": 110.1,
+       "official": 110.9,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "def_rtg",
+       "published": 111.7,
+       "official": 112.9,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "net_rtg",
+       "published": -1.5,
+       "official": -2.0,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "ast_pct",
+       "published": 68.0,
+       "official": 67.9,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.85,
+       "official": 1.92,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 19.5,
+       "official": 19.7,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 24.9,
+       "official": 24.6,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 67.7,
+       "official": 68.5,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "reb_pct",
+       "published": 47.0,
+       "official": 47.1,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "tov_pct",
+       "published": 14.7,
+       "official": 14.3,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "efg_pct",
+       "published": 53.5,
+       "official": 53.8,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "ts_pct",
+       "published": 57.1,
+       "official": 57.4,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "pace",
+       "published": 101.15,
+       "official": 101.25,
+       "status": "MISMATCH_POINT_IN_TIME"
+      },
+      {
+       "field": "pie",
+       "published": 49.6,
+       "official": 49.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1312.0,
+       "official": 1415.0,
+       "status": "MISMATCH_POINT_IN_TIME"
+      }
+     ]
+    },
+    {
+     "team": "Orlando Magic",
+     "abbr": "ORL",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 12.0,
+       "official": 12.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 5.0,
+       "official": 5.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 7.0,
+       "official": 7.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 581.0,
+       "official": 581.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 109.7,
+       "official": 109.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 113.4,
+       "official": 113.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": -3.7,
+       "official": -3.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 67.7,
+       "official": 67.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.55,
+       "official": 1.55,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 18.5,
+       "official": 18.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 31.7,
+       "official": 31.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 70.2,
+       "official": 70.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 50.7,
+       "official": 50.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 17.0,
+       "official": 17.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 52.8,
+       "official": 52.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 56.6,
+       "official": 56.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 98.23,
+       "official": 98.23,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 47.6,
+       "official": 47.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1185.0,
+       "official": 1185.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Phoenix Suns",
+     "abbr": "PHX",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 11.0,
+       "official": 11.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 5.0,
+       "official": 5.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 6.0,
+       "official": 6.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 528.0,
+       "official": 528.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 113.8,
+       "official": 113.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 117.6,
+       "official": 117.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": -3.8,
+       "official": -3.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 65.9,
+       "official": 65.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.95,
+       "official": 1.95,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 19.5,
+       "official": 19.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 29.1,
+       "official": 29.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 61.3,
+       "official": 61.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 45.2,
+       "official": 45.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 14.2,
+       "official": 14.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 54.4,
+       "official": 54.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 57.4,
+       "official": 57.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 98.45,
+       "official": 98.45,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 48.1,
+       "official": 48.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1080.0,
+       "official": 1080.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Toronto Raptors",
+     "abbr": "TOR",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 12.0,
+       "official": 12.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 5.0,
+       "official": 5.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 7.0,
+       "official": 7.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 576.0,
+       "official": 576.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 114.5,
+       "official": 114.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 112.8,
+       "official": 112.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": 1.7,
+       "official": 1.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 67.8,
+       "official": 67.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.96,
+       "official": 1.96,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 19.1,
+       "official": 19.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 36.2,
+       "official": 36.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 66.9,
+       "official": 66.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 50.2,
+       "official": 50.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 14.4,
+       "official": 14.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 51.9,
+       "official": 51.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 55.5,
+       "official": 55.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 99.88,
+       "official": 99.88,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 49.3,
+       "official": 49.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1197.0,
+       "official": 1197.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Charlotte Hornets",
+     "abbr": "CHA",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 12.0,
+       "official": 12.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 4.0,
+       "official": 4.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 8.0,
+       "official": 8.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 576.0,
+       "official": 576.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 101.9,
+       "official": 101.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 113.1,
+       "official": 113.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": -11.2,
+       "official": -11.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 62.6,
+       "official": 62.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.11,
+       "official": 1.11,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 15.8,
+       "official": 15.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 35.7,
+       "official": 35.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 73.7,
+       "official": 73.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 53.5,
+       "official": 53.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 20.2,
+       "official": 20.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 48.1,
+       "official": 48.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 52.0,
+       "official": 52.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 96.83,
+       "official": 96.83,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 42.9,
+       "official": 42.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1161.0,
+       "official": 1161.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "New Orleans Pelicans",
+     "abbr": "NOP",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 14.0,
+       "official": 14.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 4.0,
+       "official": 4.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 10.0,
+       "official": 10.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 687.0,
+       "official": 687.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 111.3,
+       "official": 111.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 120.0,
+       "official": 120.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": -8.6,
+       "official": -8.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 60.6,
+       "official": 60.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.51,
+       "official": 1.51,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 17.0,
+       "official": 17.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 29.7,
+       "official": 29.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 68.0,
+       "official": 68.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 48.6,
+       "official": 48.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 15.4,
+       "official": 15.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 51.9,
+       "official": 51.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 57.7,
+       "official": 57.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 101.83,
+       "official": 101.83,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 45.7,
+       "official": 45.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1457.0,
+       "official": 1457.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Washington Wizards",
+     "abbr": "WAS",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 4.0,
+       "official": 4.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 9.0,
+       "official": 9.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 634.0,
+       "official": 634.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 108.7,
+       "official": 108.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 114.3,
+       "official": 114.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": -5.5,
+       "official": -5.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 59.3,
+       "official": 59.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.56,
+       "official": 1.56,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 17.0,
+       "official": 17.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 29.0,
+       "official": 29.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 66.2,
+       "official": 66.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 48.3,
+       "official": 48.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 15.0,
+       "official": 15.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 51.5,
+       "official": 51.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 56.0,
+       "official": 56.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 99.63,
+       "official": 99.63,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 47.1,
+       "official": 47.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1315.0,
+       "official": 1315.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Brooklyn Nets",
+     "abbr": "BKN",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 12.0,
+       "official": 12.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 3.0,
+       "official": 3.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 9.0,
+       "official": 9.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 581.0,
+       "official": 581.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 109.8,
+       "official": 109.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 116.0,
+       "official": 116.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": -6.2,
+       "official": -6.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 65.2,
+       "official": 65.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.37,
+       "official": 1.37,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 17.2,
+       "official": 17.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 32.1,
+       "official": 32.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 69.9,
+       "official": 69.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 50.6,
+       "official": 50.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 17.6,
+       "official": 17.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 52.9,
+       "official": 52.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 57.2,
+       "official": 57.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 99.47,
+       "official": 99.47,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 46.1,
+       "official": 46.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1204.0,
+       "official": 1204.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Chicago Bulls",
+     "abbr": "CHI",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 12.0,
+       "official": 12.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 3.0,
+       "official": 3.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 9.0,
+       "official": 9.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 581.0,
+       "official": 581.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 109.4,
+       "official": 109.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 120.3,
+       "official": 120.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": -10.9,
+       "official": -10.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 67.4,
+       "official": 67.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.55,
+       "official": 1.55,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 18.2,
+       "official": 18.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 30.7,
+       "official": 30.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 65.1,
+       "official": 65.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 47.9,
+       "official": 47.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 16.5,
+       "official": 16.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 51.7,
+       "official": 51.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 56.1,
+       "official": 56.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 103.81,
+       "official": 103.81,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 44.9,
+       "official": 44.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1257.0,
+       "official": 1257.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "LA Clippers",
+     "abbr": "LAC",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 11.0,
+       "official": 11.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 3.0,
+       "official": 3.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 8.0,
+       "official": 8.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 533.0,
+       "official": 533.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 110.7,
+       "official": 110.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 115.8,
+       "official": 115.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": -5.1,
+       "official": -5.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 68.4,
+       "official": 68.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.51,
+       "official": 1.51,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 18.8,
+       "official": 18.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 30.4,
+       "official": 30.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 67.2,
+       "official": 67.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 48.8,
+       "official": 48.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 17.6,
+       "official": 17.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 54.3,
+       "official": 54.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 58.4,
+       "official": 58.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 100.55,
+       "official": 100.55,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 47.4,
+       "official": 47.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1116.0,
+       "official": 1116.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Milwaukee Bucks",
+     "abbr": "MIL",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 1.0,
+       "official": 1.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 12.0,
+       "official": 12.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 624.0,
+       "official": 624.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 105.7,
+       "official": 105.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 120.0,
+       "official": 120.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": -14.2,
+       "official": -14.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 65.6,
+       "official": 65.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.49,
+       "official": 1.49,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 17.5,
+       "official": 17.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 30.5,
+       "official": 30.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 64.3,
+       "official": 64.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 47.3,
+       "official": 47.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 16.6,
+       "official": 16.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 51.1,
+       "official": 51.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 54.3,
+       "official": 54.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 100.31,
+       "official": 100.31,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 42.0,
+       "official": 42.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1305.0,
+       "official": 1305.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Sacramento Kings",
+     "abbr": "SAC",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 12.0,
+       "official": 12.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 1.0,
+       "official": 1.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 11.0,
+       "official": 11.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 576.0,
+       "official": 576.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 107.3,
+       "official": 107.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 119.5,
+       "official": 119.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": -12.2,
+       "official": -12.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 63.7,
+       "official": 63.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.46,
+       "official": 1.46,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 17.9,
+       "official": 17.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 28.4,
+       "official": 28.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 69.1,
+       "official": 69.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 48.1,
+       "official": 48.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 16.9,
+       "official": 16.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 52.6,
+       "official": 52.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 56.2,
+       "official": 56.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 101.0,
+       "official": 101.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 42.8,
+       "official": 42.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1210.0,
+       "official": 1210.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Utah Jazz",
+     "abbr": "UTA",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 1.0,
+       "official": 1.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 12.0,
+       "official": 12.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 634.0,
+       "official": 634.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "off_rtg",
+       "published": 105.0,
+       "official": 105.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "def_rtg",
+       "published": 116.4,
+       "official": 116.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "net_rtg",
+       "published": -11.3,
+       "official": -11.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_pct",
+       "published": 63.5,
+       "official": 63.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_to",
+       "published": 1.44,
+       "official": 1.44,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast_ratio",
+       "published": 17.0,
+       "official": 17.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "oreb_pct",
+       "published": 29.5,
+       "official": 29.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "dreb_pct",
+       "published": 68.8,
+       "official": 68.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb_pct",
+       "published": 48.6,
+       "official": 48.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov_pct",
+       "published": 16.3,
+       "official": 16.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "efg_pct",
+       "published": 50.4,
+       "official": 50.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "ts_pct",
+       "published": 54.7,
+       "official": 54.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "pace",
+       "published": 100.5,
+       "official": 100.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "pie",
+       "published": 45.3,
+       "official": 45.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "poss",
+       "published": 1330.0,
+       "official": 1330.0,
+       "status": "AGREE"
+      }
+     ]
+    }
+   ],
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+  },
+  "traditional": {
+   "rows_read_this_pass": 3,
+   "rows_published": 30,
+   "tally": {
+    "AGREE": 36,
+    "NOT_PRINTED_IN_READ_CHUNK": 9,
+    "NOT_RE_READ_IN_THIS_PASS": 27
+   },
+   "detail": [
+    {
+     "team": "Los Angeles Lakers",
+     "abbr": "LAL",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 11.0,
+       "official": 11.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 2.0,
+       "official": 2.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "pts",
+       "published": 122.2,
+       "official": 122.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "fg_pct",
+       "published": 50.3,
+       "official": 50.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "fg3_pct",
+       "published": 38.3,
+       "official": 38.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "ft_pct",
+       "published": 80.4,
+       "official": 80.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb",
+       "published": 40.8,
+       "official": 40.8,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast",
+       "published": 24.7,
+       "official": 24.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov",
+       "published": 16.9,
+       "official": 16.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "stl",
+       "published": 11.0,
+       "official": 11.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "blk",
+       "published": 6.2,
+       "official": 6.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "pf",
+       "published": 23.4,
+       "official": 23.4,
+       "status": "AGREE"
+      },
+      {
+       "field": "plus_minus",
+       "published": 7.9,
+       "official": 7.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 48.0,
+       "official": 48.0,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "San Antonio Spurs",
+     "abbr": "SAS",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 13.0,
+       "official": 13.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 11.0,
+       "official": 11.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 2.0,
+       "official": 2.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "pts",
+       "published": 119.5,
+       "official": 119.5,
+       "status": "AGREE"
+      },
+      {
+       "field": "fg_pct",
+       "published": 46.7,
+       "official": 46.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "fg3_pct",
+       "published": 34.7,
+       "official": 34.7,
+       "status": "AGREE"
+      },
+      {
+       "field": "ft_pct",
+       "published": 79.9,
+       "official": 79.9,
+       "status": "AGREE"
+      },
+      {
+       "field": "reb",
+       "published": 48.6,
+       "official": 48.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "ast",
+       "published": 28.1,
+       "official": 28.1,
+       "status": "AGREE"
+      },
+      {
+       "field": "tov",
+       "published": 12.3,
+       "official": 12.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "stl",
+       "published": 8.3,
+       "official": 8.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "blk",
+       "published": 7.3,
+       "official": 7.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "pf",
+       "published": 20.0,
+       "official": 20.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "plus_minus",
+       "published": 13.2,
+       "official": 13.2,
+       "status": "AGREE"
+      },
+      {
+       "field": "min",
+       "published": 48.4,
+       "official": 48.4,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Boston Celtics",
+     "abbr": "BOS",
+     "checks": [
+      {
+       "field": "gp",
+       "published": 12.0,
+       "official": 12.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "w",
+       "published": 10.0,
+       "official": 10.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "l",
+       "published": 2.0,
+       "official": 2.0,
+       "status": "AGREE"
+      },
+      {
+       "field": "pts",
+       "published": 114.3,
+       "official": 114.3,
+       "status": "AGREE"
+      },
+      {
+       "field": "fg_pct",
+       "published": 45.6,
+       "official": 45.6,
+       "status": "AGREE"
+      },
+      {
+       "field": "fg3_pct",
+       "published": 38.1,
+       "official": null,
+       "status": "NOT_PRINTED_IN_READ_CHUNK"
+      },
+      {
+       "field": "ft_pct",
+       "published": 78.9,
+       "official": null,
+       "status": "NOT_PRINTED_IN_READ_CHUNK"
+      },
+      {
+       "field": "reb",
+       "published": 44.8,
+       "official": null,
+       "status": "NOT_PRINTED_IN_READ_CHUNK"
+      },
+      {
+       "field": "ast",
+       "published": 26.8,
+       "official": null,
+       "status": "NOT_PRINTED_IN_READ_CHUNK"
+      },
+      {
+       "field": "tov",
+       "published": 14.7,
+       "official": null,
+       "status": "NOT_PRINTED_IN_READ_CHUNK"
+      },
+      {
+       "field": "stl",
+       "published": 8.2,
+       "official": null,
+       "status": "NOT_PRINTED_IN_READ_CHUNK"
+      },
+      {
+       "field": "blk",
+       "published": 4.9,
+       "official": null,
+       "status": "NOT_PRINTED_IN_READ_CHUNK"
+      },
+      {
+       "field": "pf",
+       "published": 21.5,
+       "official": null,
+       "status": "NOT_PRINTED_IN_READ_CHUNK"
+      },
+      {
+       "field": "plus_minus",
+       "published": 11.2,
+       "official": null,
+       "status": "NOT_PRINTED_IN_READ_CHUNK"
+      },
+      {
+       "field": "min",
+       "published": 48.4,
+       "official": 48.4,
+       "status": "AGREE"
+      }
+     ]
+    },
+    {
+     "team": "Houston Rockets",
+     "abbr": "HOU",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Philadelphia 76ers",
+     "abbr": "PHI",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Portland Trail Blazers",
+     "abbr": "POR",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Memphis Grizzlies",
+     "abbr": "MEM",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Minnesota Timberwolves",
+     "abbr": "MIN",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Detroit Pistons",
+     "abbr": "DET",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Denver Nuggets",
+     "abbr": "DEN",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Golden State Warriors",
+     "abbr": "GSW",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Oklahoma City Thunder",
+     "abbr": "OKC",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Atlanta Hawks",
+     "abbr": "ATL",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Dallas Mavericks",
+     "abbr": "DAL",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Miami Heat",
+     "abbr": "MIA",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Cleveland Cavaliers",
+     "abbr": "CLE",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "New York Knicks",
+     "abbr": "NYK",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Phoenix Suns",
+     "abbr": "PHX",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Orlando Magic",
+     "abbr": "ORL",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Toronto Raptors",
+     "abbr": "TOR",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Indiana Pacers",
+     "abbr": "IND",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Charlotte Hornets",
+     "abbr": "CHA",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Washington Wizards",
+     "abbr": "WAS",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "New Orleans Pelicans",
+     "abbr": "NOP",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "LA Clippers",
+     "abbr": "LAC",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Brooklyn Nets",
+     "abbr": "BKN",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Chicago Bulls",
+     "abbr": "CHI",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Sacramento Kings",
+     "abbr": "SAC",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Milwaukee Bucks",
+     "abbr": "MIL",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    },
+    {
+     "team": "Utah Jazz",
+     "abbr": "UTA",
+     "checks": [
+      {
+       "field": "*",
+       "published": null,
+       "official": null,
+       "status": "NOT_RE_READ_IN_THIS_PASS"
+      }
+     ]
+    }
+   ],
+   "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  "opponent": {
+   "rows_read_this_pass": 0,
+   "status": "NOT_RE_READ_IN_THIS_PASS",
+   "source_url": "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season"
+  }
+ },
+ "stale_inputs": {
+  "title": "Model-input staleness at the 2026-11-15 slate",
+  "question": "The published team ratings were cut from the official pages before the 11/15 tips. Which of those rows have already changed because the team played on 11/15?",
+  "published_capture_retrieved_utc": "2026-11-15T11:35Z..12:20Z",
+  "this_capture_retrieved_utc": "2026-11-16T00:10Z..00:30Z",
+  "teams_playing_2026_11_15": [
+   "ATL",
+   "BOS",
+   "CHA",
+   "DAL",
+   "HOU",
+   "IND",
+   "LAC",
+   "LAL",
+   "MIL",
+   "NYK",
+   "OKC",
+   "PHI",
+   "PHX",
+   "SAC",
+   "SAS",
+   "TOR",
+   "UTA",
+   "WAS"
+  ],
+  "rows": [
+   {
+    "abbr": "ATL",
+    "team": "Atlanta Hawks",
+    "published_gp": 13,
+    "official_gp_now": 13,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 113.3,
+    "official_off_rtg_now": 113.3,
+    "published_def_rtg": 111.9,
+    "official_def_rtg_now": 111.9,
+    "published_pace": 103.55,
+    "official_pace_now": 103.55,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "BOS",
+    "team": "Boston Celtics",
+    "published_gp": 12,
+    "official_gp_now": 12,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 117.4,
+    "official_off_rtg_now": 117.4,
+    "published_def_rtg": 105.6,
+    "official_def_rtg_now": 105.6,
+    "published_pace": 96.62,
+    "official_pace_now": 96.62,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "CHA",
+    "team": "Charlotte Hornets",
+    "published_gp": 12,
+    "official_gp_now": 12,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 101.9,
+    "official_off_rtg_now": 101.9,
+    "published_def_rtg": 113.1,
+    "official_def_rtg_now": 113.1,
+    "published_pace": 96.83,
+    "official_pace_now": 96.83,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "DAL",
+    "team": "Dallas Mavericks",
+    "published_gp": 13,
+    "official_gp_now": 13,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 112.8,
+    "official_off_rtg_now": 112.8,
+    "published_def_rtg": 112.8,
+    "official_def_rtg_now": 112.8,
+    "published_pace": 100.54,
+    "official_pace_now": 100.54,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "HOU",
+    "team": "Houston Rockets",
+    "published_gp": 13,
+    "official_gp_now": 13,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 119.3,
+    "official_off_rtg_now": 119.3,
+    "published_def_rtg": 110.2,
+    "official_def_rtg_now": 110.2,
+    "published_pace": 97.42,
+    "official_pace_now": 97.42,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "IND",
+    "team": "Indiana Pacers",
+    "published_gp": 13,
+    "official_gp_now": 14,
+    "changed_since_model_cut": true,
+    "published_off_rtg": 110.1,
+    "official_off_rtg_now": 110.9,
+    "published_def_rtg": 111.7,
+    "official_def_rtg_now": 112.9,
+    "published_pace": 101.15,
+    "official_pace_now": 101.25,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "LAC",
+    "team": "LA Clippers",
+    "published_gp": 11,
+    "official_gp_now": 11,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 110.7,
+    "official_off_rtg_now": 110.7,
+    "published_def_rtg": 115.8,
+    "official_def_rtg_now": 115.8,
+    "published_pace": 100.55,
+    "official_pace_now": 100.55,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "LAL",
+    "team": "Los Angeles Lakers",
+    "published_gp": 13,
+    "official_gp_now": 13,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 121.6,
+    "official_off_rtg_now": 121.6,
+    "published_def_rtg": 113.6,
+    "official_def_rtg_now": 113.6,
+    "published_pace": 100.5,
+    "official_pace_now": 100.5,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "MIL",
+    "team": "Milwaukee Bucks",
+    "published_gp": 13,
+    "official_gp_now": 13,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 105.7,
+    "official_off_rtg_now": 105.7,
+    "published_def_rtg": 120.0,
+    "official_def_rtg_now": 120.0,
+    "published_pace": 100.31,
+    "official_pace_now": 100.31,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "NYK",
+    "team": "New York Knicks",
+    "published_gp": 12,
+    "official_gp_now": 12,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 114.5,
+    "official_off_rtg_now": 114.5,
+    "published_def_rtg": 108.6,
+    "official_def_rtg_now": 108.6,
+    "published_pace": 95.63,
+    "official_pace_now": 95.63,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "OKC",
+    "team": "Oklahoma City Thunder",
+    "published_gp": 13,
+    "official_gp_now": 13,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 112.7,
+    "official_off_rtg_now": 112.7,
+    "published_def_rtg": 109.0,
+    "official_def_rtg_now": 109.0,
+    "published_pace": 98.58,
+    "official_pace_now": 98.58,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "PHI",
+    "team": "Philadelphia 76ers",
+    "published_gp": 13,
+    "official_gp_now": 14,
+    "changed_since_model_cut": true,
+    "published_off_rtg": 111.0,
+    "official_off_rtg_now": 112.3,
+    "published_def_rtg": 109.5,
+    "official_def_rtg_now": 110.3,
+    "published_pace": 100.04,
+    "official_pace_now": 100.21,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "PHX",
+    "team": "Phoenix Suns",
+    "published_gp": 11,
+    "official_gp_now": 11,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 113.8,
+    "official_off_rtg_now": 113.8,
+    "published_def_rtg": 117.6,
+    "official_def_rtg_now": 117.6,
+    "published_pace": 98.45,
+    "official_pace_now": 98.45,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "SAC",
+    "team": "Sacramento Kings",
+    "published_gp": 12,
+    "official_gp_now": 12,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 107.3,
+    "official_off_rtg_now": 107.3,
+    "published_def_rtg": 119.5,
+    "official_def_rtg_now": 119.5,
+    "published_pace": 101.0,
+    "official_pace_now": 101.0,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "SAS",
+    "team": "San Antonio Spurs",
+    "published_gp": 13,
+    "official_gp_now": 13,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 119.6,
+    "official_off_rtg_now": 119.6,
+    "published_def_rtg": 106.6,
+    "official_def_rtg_now": 106.6,
+    "published_pace": 98.94,
+    "official_pace_now": 98.94,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "TOR",
+    "team": "Toronto Raptors",
+    "published_gp": 12,
+    "official_gp_now": 12,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 114.5,
+    "official_off_rtg_now": 114.5,
+    "published_def_rtg": 112.8,
+    "official_def_rtg_now": 112.8,
+    "published_pace": 99.88,
+    "official_pace_now": 99.88,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "UTA",
+    "team": "Utah Jazz",
+    "published_gp": 13,
+    "official_gp_now": 13,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 105.0,
+    "official_off_rtg_now": 105.0,
+    "published_def_rtg": 116.4,
+    "official_def_rtg_now": 116.4,
+    "published_pace": 100.5,
+    "official_pace_now": 100.5,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
+   {
+    "abbr": "WAS",
+    "team": "Washington Wizards",
+    "published_gp": 13,
+    "official_gp_now": 13,
+    "changed_since_model_cut": false,
+    "published_off_rtg": 108.7,
+    "official_off_rtg_now": 108.7,
+    "published_def_rtg": 114.3,
+    "official_def_rtg_now": 114.3,
+    "published_pace": 99.63,
+    "official_pace_now": 99.63,
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   }
+  ],
+  "changed_count": 2,
+  "consequence": "Every one of the 34 published 11/15..11/18 games is modelled from these rows. The games whose model inputs already moved are listed above; the site must say so on every affected row rather than presenting the line as current."
+ }
+}

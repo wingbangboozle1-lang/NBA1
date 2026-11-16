@@ -1,192 +1,287 @@
 {
- "title": "Executive Summary",
- "as_of": "2026-11-15",
- "headline": "The rolling window is 2026-11-15 to 2026-11-18: 34 games on the official schedule, 28 of which had not tipped at publication. Behind them sit 190 official finals, re-read line by line from NBA.com box scores.",
- "lead": "This session re-cut the model inputs from first principles. The three official team-stat pages render their tables in the browser and carry no data in an HTTP response, so possessions, offensive and defensive rating and pace were rebuilt out of official box scores for all 190 completed games of the season instead - every number traceable to an official game page. Home court is now pinned to the measured home-win rate (0.5263 over 190 finals, 1.108 points) rather than fitted. Two genuinely independent estimators are published with their disagreement as the headline; they disagree by 4.05 points on the spread on average. The 2026-11-15 slate is partly settled from official finals: two games were Final and both published tickets won, the other seven are PENDING.",
- "verdict": {
-  "status": "PROVISIONAL - not funded",
-  "one_line": "The model is now built entirely on values read from official pages, but no strategy has passed the validation gates and no market price exists anywhere in the repository, so nothing here is a betting recommendation.",
-  "why": "Every gate that can run has been run and none has passed. The gates that cannot run - the two that need a closing price - are blocked on data nobody in this project has. Publishing the block rather than the number is the whole point."
- },
- "findings": [
-  {
-   "n": 1,
-   "title": "Home court is measured, not fitted: 0.5263 over 190 official finals",
-   "detail": "Home teams won 100 of 190 official finals from 2026-10-20 to 2026-11-15. Converted through the empirical margin distribution (sigma 16.78) that is 1.108 points, and that is the number every line now uses. An earlier build fitted home court freely and got 3.51 points with a standard error of 2.28 - a number the data cannot support.",
-   "reading": "The pinned value is smaller and honest. It is not a tweak; it removes a free parameter that was soaking up noise."
+  "title": "Executive Summary",
+  "as_of": "2026-11-15",
+  "headline": "The rolling window is 2026-11-15 to 2026-11-18: 34 games on the official schedule, 28 of which had not tipped at publication. Behind them sit 190 official finals, re-read line by line from NBA.com box scores.",
+  "lead": "This session re-cut the model inputs from first principles. The three official team-stat pages render their tables in the browser and carry no data in an HTTP response, so possessions, offensive and defensive rating and pace were rebuilt out of official box scores for all 190 completed games of the season instead - every number traceable to an official game page. Home court is now pinned to the measured home-win rate (0.5263 over 190 finals, 1.108 points) rather than fitted. Two genuinely independent estimators are published with their disagreement as the headline; they disagree by 4.05 points on the spread on average. The 2026-11-15 slate is partly settled from official finals: two games were Final and both published tickets won, the other seven are PENDING. This build also carries the 2026-11-15 executive record written by session arena/8f64e94c-nba1; its findings, live items and next actions are appended below under that session's name so nothing from either session is lost.",
+  "verdict": {
+    "status": "PROVISIONAL - not funded",
+    "one_line": "The model is now built entirely on values read from official pages, but no strategy has passed the validation gates and no market price exists anywhere in the repository, so nothing here is a betting recommendation.",
+    "why": "Every gate that can run has been run and none has passed. The gates that cannot run - the two that need a closing price - are blocked on data nobody in this project has. Publishing the block rather than the number is the whole point."
   },
-  {
-   "n": 2,
-   "title": "The two estimators disagree by 4.05 points on the spread on average",
-   "detail": "Estimator 1 builds the line from possessions and points per possession. Estimator 2 uses a completely different information set: a least-squares power rating solved from official final margins, and the teams' own scored and allowed rates. Across the 34 games on the slate they disagree by 4.05 points on the spread on average and up to 8.8.",
-   "reading": "The disagreement is the headline number on the projection page. The 50/50 blend sits underneath it and is never the headline."
-  },
-  {
-   "n": 3,
-   "title": "Two independent estimators are only useful if they are actually independent",
-   "detail": "The first attempt at a second estimator reused the same efficiency ratings with different arithmetic and disagreed by 0.1 to 0.2 points - noise dressed up as a signal. It was replaced with a margin-based power rating on a different information set.",
-   "reading": "A disagreement that is smaller than the rounding is not a confidence signal. This is worth checking on any future estimator added to the site."
-  },
-  {
-   "n": 4,
-   "title": "The official injury report changed 28 times in one day",
-   "detail": "The league published 75 editions on 2026-11-15. Every one was downloaded, hashed, stored and parsed, and each was diffed against the edition immediately before it. Twenty-eight status changes were found, including T.J. McConnell Probable to Available at 12:15 PM ET and Andrew Nembhard Questionable to Out in the same minute.",
-   "reading": "Any rotation read older than a few hours is stale. The banner on the Injury PDF Ledger page prints the revision time and the retrieval time so the reader can see exactly how old it is."
-  },
-  {
-   "n": 5,
-   "title": "Travel is computed and flagged, not quietly used",
-   "detail": "Arena names, cities and states are official - they are printed on the box score of a game played there. Latitude and longitude are not published by any NBA page, so the great-circle distances are derived and flagged (F94). No travel value moves a line.",
-   "reading": "Rest, back-to-back and 3-in-4 are computed from the official schedule and are solid. Travel is a candidate input awaiting a source."
-  },
-  {
-   "n": 6,
-   "title": "The market-anchored prior remains switched off, and that is a finding",
-   "detail": "The brief asks for the model line to be blended with the closing line, weighted by measured out-of-sample log-loss. No closing line exists anywhere in this repository and no NBA-operated source publishes one, so the weight is 0 and no blended price is published (F95).",
-   "reading": "This is the single change that would unlock the most: two validation gates and the prior are all blocked on the same missing input."
-  },
-  {
-   "n": 1,
-   "title": "Home court is measured, not fitted: 0.5263 over 190 official finals",
-   "detail": "Home teams won 100 of 190 official finals from 2026-10-20 to 2026-11-15. Converted through the empirical margin distribution (sigma 16.78) that is 1.108 points, and that is the number every line now uses. An earlier build fitted home court freely and got 3.51 points with a standard error of 2.28 - a number the data cannot support.",
-   "reading": "The pinned value is smaller and honest. It is not a tweak; it removes a free parameter that was soaking up noise."
-  },
-  {
-   "n": 2,
-   "title": "The two estimators disagree by 4.05 points on the spread on average",
-   "detail": "Estimator 1 builds the line from possessions and points per possession. Estimator 2 uses a completely different information set: a least-squares power rating solved from official final margins, and the teams' own scored and allowed rates. Across the 34 games on the slate they disagree by 4.05 points on the spread on average and up to 8.8.",
-   "reading": "The disagreement is the headline number on the projection page. The 50/50 blend sits underneath it and is never the headline."
-  },
-  {
-   "n": 3,
-   "title": "Two independent estimators are only useful if they are actually independent",
-   "detail": "The first attempt at a second estimator reused the same efficiency ratings with different arithmetic and disagreed by 0.1 to 0.2 points - noise dressed up as a signal. It was replaced with a margin-based power rating on a different information set.",
-   "reading": "A disagreement that is smaller than the rounding is not a confidence signal. This is worth checking on any future estimator added to the site."
-  },
-  {
-   "n": 4,
-   "title": "The official injury report changed 28 times in one day",
-   "detail": "The league published 75 editions on 2026-11-15. Every one was downloaded, hashed, stored and parsed, and each was diffed against the edition immediately before it. Twenty-eight status changes were found, including T.J. McConnell Probable to Available at 12:15 PM ET and Andrew Nembhard Questionable to Out in the same minute.",
-   "reading": "Any rotation read older than a few hours is stale. The banner on the Injury PDF Ledger page prints the revision time and the retrieval time so the reader can see exactly how old it is."
-  },
-  {
-   "n": 5,
-   "title": "Travel is computed and flagged, not quietly used",
-   "detail": "Arena names, cities and states are official - they are printed on the box score of a game played there. Latitude and longitude are not published by any NBA page, so the great-circle distances are derived and flagged (F78). No travel value moves a line.",
-   "reading": "Rest, back-to-back and 3-in-4 are computed from the official schedule and are solid. Travel is a candidate input awaiting a source."
-  },
-  {
-   "n": 6,
-   "title": "The market-anchored prior remains switched off, and that is a finding",
-   "detail": "The brief asks for the model line to be blended with the closing line, weighted by measured out-of-sample log-loss. No closing line exists anywhere in this repository and no NBA-operated source publishes one, so the weight is 0 and no blended price is published (F79).",
-   "reading": "This is the single change that would unlock the most: two validation gates and the prior are all blocked on the same missing input."
-  },
-  {
-   "n": 1,
-   "title": "The model wins on the margin and loses on totals and winners",
-   "detail": "Margin: MAE 12.98 against 13.62 for the naive reference, RMSE 17.12 against 17.88 - the model is better on both. Totals: MAE 14.83 against 14.72, RMSE 19.35 against 19.10 - the reference is better on both. Straight up the reference went 42-18 and the model 40-20, and the reference has the better Brier score (0.2001 against 0.2020) and the better log loss (0.5827 against 0.5873).",
-   "reading": "The refinements buy a real but tiny margin improvement and nothing else. The probability calibration is the weakest part of the model, and it is where the remaining work should go."
-  },
-  {
-   "n": 2,
-   "title": "Growing the window keeps changing what can be claimed - which is the point of the sample gate",
-   "detail": "On the 28-game window the model beat the reference on totals (MAE 14.50 against 14.75). On 51 games it did not (14.86 against 14.75) - the sign flipped. On the 60-game window the sign holds (14.83 against 14.72) and the gap narrowed, but the conclusion stands. Each addition of data has moved at least one claim.",
-   "reading": "Any single-window result at this sample size should be treated as a hypothesis, not a finding."
-  },
-  {
-   "n": 3,
-   "title": "S1 has cleared the luck gate at 23-9 - and failed two others, which is the honest headline",
-   "detail": "S1 (side edge vs the reference spread) produced 32 graded plays at 23-9, worth +11.91 model units and a 37.2% return at -110. Its exact binomial p-value against a coin flip is 0.020 and the Wilson 95% interval on its hit rate is 0.546 to 0.844 - the lower bound is now above the 0.5238 break-even, so G4 (skill, not luck) passes for the first time. But its hit rate of 0.719 against a mean predicted probability of 0.627 fails the calibration gate (gap 0.091 against a 0.08 tolerance), and the stability gate fails because the bootstrap interval on the model's margin MAE (10.2 to 15.94) still contains the reference MAE (13.62). The availability gate cannot run at all for the graded window.",
-   "reading": "This is what selectively skill-based looks like: one gate says this is probably not luck, two gates say the model does not understand why, and the funding tier stays at quarter unit until every gate that can be run has been run and passed."
-  },
-  {
-   "n": 4,
-   "title": "Home court looks normal; the back-to-back penalty is large but uncertain",
-   "detail": "Home-court advantage estimates at +3.51 points with a standard error of 2.28 (t = 1.54) across 60 games, squarely in the historical NBA range. The back-to-back penalty estimates at -6.26 points with a standard error of 4.86 (t = -1.29); because |t| >= 1 the model applies the full 6.26, but the standard error is most of the estimate.",
-   "readings": [],
-   "reading": "Both are published with their standard errors and both are fitted on the test window, which is disclosed on every row they touch."
-  },
-  {
-   "n": 5,
-   "title": "Shrinkage was derived rather than guessed, and the curve is flat where it matters",
-   "detail": "The empirical-Bayes calculation gives k = 2.9, weighting each team's observed net rating at 0.739. The fixed-k sweep shows margin MAE moving from 13.62 at k = 0 to 12.91 at k = 4, then degrading to 13.36 by k = 20. Heavy shrinkage is clearly wrong; the choice between light and none barely matters.",
-   "reading": "The constant is defensible, its sensitivity is published, and it is not a source of hidden risk."
-  },
-  {
-   "n": 6,
-   "title": "Availability impact is a measured floor, not an estimate",
-   "detail": "Minutes are only known for the 50 players in the captured official table. Players outside it contribute 0.00 to the impact, so teams missing rotation players who are not top-50 scorers show a smaller number than the truth - sometimes zero. The minutes-coverage column sits next to every figure so a 0.00 is never read as 'healthy'.",
-   "reading": "Correct but incomplete - the Injuries page says so on every row rather than hiding it."
-  },
-  {
-   "n": 7,
-   "title": "Correlation is measured where it can be and flagged where it cannot",
-   "detail": "Thirteen team-statistic pairs were measured directly on all 30 teams from the official advanced table. Net rating explains 87% of the variation in win percentage; pace is nearly unrelated to net rating (r = -0.34, p = 0.063) and assist percentage is unrelated to offensive efficiency (r = 0.02, p = 0.92). The parlay and same-game-parlay correlations that drive pricing are model-derived and labelled as such.",
-   "reading": "The distinction matters most for parlays, because pricing correlated legs as independent is the classic way to overpay."
-  },
-  {
-   "n": 8,
-   "title": "The word 'edge' on this site does not mean edge against a sportsbook",
-   "detail": "No sportsbook price is published by an NBA-operated source, so no official link can be attached to one. The site bets the originated line against a deliberately naive reference model built from the same official ratings. Until real prices are logged, 'units won' means model-vs-naive-model units.",
-   "reading": "This is the single most important caveat for anyone reading the leaderboard."
-  },
-  {
-   "n": 9,
-   "title": "The 2026-11-13 slate is settled, and it did not go well - which is the system working",
-   "detail": "Every published paper pick on the 2026-11-13 slate was settled against the official finals captured on 2026-11-14. The seven gated singles went 3-4 (-1.40 units at -110) and all three two-leg parlays lost. The picks were pre-registered: the model blocks in the live file are identical to the copy frozen at 2026-11-13T22:45Z, before tip. The originated margin line was off by 12.39 points on average across the nine games - consistent with the 12.98 MAE on the wider window, and a useful reminder that a night like this is normal at this sample size.",
-   "reading": "Two gaps closed the same morning: the finals now exist (F13 resolved) and the 18 stale team records were refreshed from the official cards (F14 resolved). Two remain open and are published as such: at the newest injury edition five of the ten teams playing on 11/14 have still not filed, and no edition lists any player for the 11/16 and 11/17 games."
-  },
-  {
-   "n": 10,
-   "title": "The 60-game extension is real, but it cannot be reproduced from this repository alone",
-   "detail": "The 2026-11-13 finals are captured, transcribed three independent times that all agree 9/9, and used to settle every published 11/13 pick (seven singles 3-4 at -1.40 units, three two-leg parlays 0-3). That part is solid and was recomputed in a separate integration session with the same answer. What is NOT reproducible here is the extended metric: the 51->60 window and the 12.98 vs 13.62 margin MAE depend on a team-ratings refresh, and https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season returns no data table to this environment (flag F24, re-tested 2026-11-14). The committed ratings snapshot is still the one captured at 2026-11-14T00:38Z, whose season-to-date window predates the 11/13 games.",
-   "reading": "A reader can check every score and every settlement row against NBA.com, and should. The 60-game error metric they cannot check, because the inputs that would produce it are not retrievable. Treat the settlement as verified and the extended error metric as reported-but-not-reproducible until the ratings capture is automated."
-  },
-  {
-   "n": 11,
-   "title": "The game-day edition arrived, and it moved the model far less than it should have",
-   "detail": "New Orleans, Cleveland, Chicago and Miami filed between the 04:15 AM ET edition the horizon was cut from and the 01:30 PM ET game-day edition, adding 24 player rows and changing four statuses; Memphis was still inside its filing window. Re-run through the engine's own availability adjustment, that edition moves 3 of the 5 games tipping tonight (DAL@CLE -1.8 to -2.5; DET@MIA -12.2 to -12.4; CHI@MIN 30.6 to 33.2) and leaves DEN@NOP, BKN@MEM unchanged. No favourite flips and no published pick changes side.",
-   "reading": "Two readings are available and the site publishes both. The charitable one: intra-day report churn is usually noise, and a model that lurched on every status label would be worse. The uncomfortable one: the reason it cannot move New Orleans is that the Pelicans' five listed names are not in the minutes table, so the model is not judging them, it is blind to them. That is F47, and it is the highest-value item in the register."
-  }
- ],
- "what_is_live_now": [
-  "Official result feed: 222 games captured, 190 Final, quarter scores summing to the final on every one.",
-  "Ratings rebuilt from official box scores for all 30 teams (pace, offensive rating, defensive rating, net rating).",
-  "Two estimators with their disagreement, for all 34 games on the 2026-11-15..18 slate.",
-  "Projection surface and bet surface as separate pages - they are never merged.",
-  "Parlays priced with measured rho, the naive independent product printed beside them.",
-  "Minutes redistribution: measured top-8 shares per team with a worked replacement.",
-  "Rest, back-to-back, 3-in-4 and travel for every horizon game.",
-  "Luck z-scores for all 30 teams with the refusal rule applied.",
-  "75 official injury PDFs stored with revision and retrieval times, 28 status changes detected.",
-  "Ledger: hash-chained, extended with the 11/15 settlement and this publication."
- ],
- "recommended_next_actions": [
-  {
-   "rank": 1,
-   "action": "Log a closing price for every graded play. It is the only missing input that blocks two validation gates and the market-anchored prior (F95, Q25).",
-   "why": "Until it exists, 'units won' measures the model against a naive model."
-  },
-  {
-   "rank": 2,
-   "action": "Decide whether the official input path is the stats pages or the box-score rebuild (F96, Q28).",
-   "why": "Two sources of truth is worse than either one chosen deliberately."
-  },
-  {
-   "rank": 3,
-   "action": "Test whether the estimator disagreement predicts error, then either use it for stake sizing or drop it (Q24).",
-   "why": "It is currently the headline number on the projection page and nothing has shown it means anything."
-  },
-  {
-   "rank": 4,
-   "action": "Regress error on rest, back-to-back, 3-in-4 and travel before any of them enters the line (Q26).",
-   "why": "All four are computed and published; none is yet justified."
-  },
-  {
-   "rank": 5,
-   "action": "Set a retention rule for raw captures (Q30, SG37).",
-   "why": "22 MB of HTML and 7.5 MB of PDFs were added today and the season is young."
-  }
- ],
- "bottom_line": "Everything on this site is now derived from an official page or flagged as not being. That is a real change from the position a day ago, when the scheduled refresh had never once executed against nba.com. What it buys is trust in the inputs, not trust in the edge: no strategy has passed the gates, there is no market price to beat, and the honest statement of the current position is that the machinery is sound and the edge is unproven."
+  "findings": [
+    {
+      "n": 1,
+      "title": "Home court is measured, not fitted: 0.5263 over 190 official finals",
+      "detail": "Home teams won 100 of 190 official finals from 2026-10-20 to 2026-11-15. Converted through the empirical margin distribution (sigma 16.78) that is 1.108 points, and that is the number every line now uses. An earlier build fitted home court freely and got 3.51 points with a standard error of 2.28 - a number the data cannot support.",
+      "reading": "The pinned value is smaller and honest. It is not a tweak; it removes a free parameter that was soaking up noise."
+    },
+    {
+      "n": 2,
+      "title": "The two estimators disagree by 4.05 points on the spread on average",
+      "detail": "Estimator 1 builds the line from possessions and points per possession. Estimator 2 uses a completely different information set: a least-squares power rating solved from official final margins, and the teams' own scored and allowed rates. Across the 34 games on the slate they disagree by 4.05 points on the spread on average and up to 8.8.",
+      "reading": "The disagreement is the headline number on the projection page. The 50/50 blend sits underneath it and is never the headline."
+    },
+    {
+      "n": 3,
+      "title": "Two independent estimators are only useful if they are actually independent",
+      "detail": "The first attempt at a second estimator reused the same efficiency ratings with different arithmetic and disagreed by 0.1 to 0.2 points - noise dressed up as a signal. It was replaced with a margin-based power rating on a different information set.",
+      "reading": "A disagreement that is smaller than the rounding is not a confidence signal. This is worth checking on any future estimator added to the site."
+    },
+    {
+      "n": 4,
+      "title": "The official injury report changed 28 times in one day",
+      "detail": "The league published 75 editions on 2026-11-15. Every one was downloaded, hashed, stored and parsed, and each was diffed against the edition immediately before it. Twenty-eight status changes were found, including T.J. McConnell Probable to Available at 12:15 PM ET and Andrew Nembhard Questionable to Out in the same minute.",
+      "reading": "Any rotation read older than a few hours is stale. The banner on the Injury PDF Ledger page prints the revision time and the retrieval time so the reader can see exactly how old it is."
+    },
+    {
+      "n": 5,
+      "title": "Travel is computed and flagged, not quietly used",
+      "detail": "Arena names, cities and states are official - they are printed on the box score of a game played there. Latitude and longitude are not published by any NBA page, so the great-circle distances are derived and flagged (F94). No travel value moves a line.",
+      "reading": "Rest, back-to-back and 3-in-4 are computed from the official schedule and are solid. Travel is a candidate input awaiting a source."
+    },
+    {
+      "n": 6,
+      "title": "The market-anchored prior remains switched off, and that is a finding",
+      "detail": "The brief asks for the model line to be blended with the closing line, weighted by measured out-of-sample log-loss. No closing line exists anywhere in this repository and no NBA-operated source publishes one, so the weight is 0 and no blended price is published (F95).",
+      "reading": "This is the single change that would unlock the most: two validation gates and the prior are all blocked on the same missing input."
+    },
+    {
+      "n": 1,
+      "title": "Home court is measured, not fitted: 0.5263 over 190 official finals",
+      "detail": "Home teams won 100 of 190 official finals from 2026-10-20 to 2026-11-15. Converted through the empirical margin distribution (sigma 16.78) that is 1.108 points, and that is the number every line now uses. An earlier build fitted home court freely and got 3.51 points with a standard error of 2.28 - a number the data cannot support.",
+      "reading": "The pinned value is smaller and honest. It is not a tweak; it removes a free parameter that was soaking up noise."
+    },
+    {
+      "n": 2,
+      "title": "The two estimators disagree by 4.05 points on the spread on average",
+      "detail": "Estimator 1 builds the line from possessions and points per possession. Estimator 2 uses a completely different information set: a least-squares power rating solved from official final margins, and the teams' own scored and allowed rates. Across the 34 games on the slate they disagree by 4.05 points on the spread on average and up to 8.8.",
+      "reading": "The disagreement is the headline number on the projection page. The 50/50 blend sits underneath it and is never the headline."
+    },
+    {
+      "n": 3,
+      "title": "Two independent estimators are only useful if they are actually independent",
+      "detail": "The first attempt at a second estimator reused the same efficiency ratings with different arithmetic and disagreed by 0.1 to 0.2 points - noise dressed up as a signal. It was replaced with a margin-based power rating on a different information set.",
+      "reading": "A disagreement that is smaller than the rounding is not a confidence signal. This is worth checking on any future estimator added to the site."
+    },
+    {
+      "n": 4,
+      "title": "The official injury report changed 28 times in one day",
+      "detail": "The league published 75 editions on 2026-11-15. Every one was downloaded, hashed, stored and parsed, and each was diffed against the edition immediately before it. Twenty-eight status changes were found, including T.J. McConnell Probable to Available at 12:15 PM ET and Andrew Nembhard Questionable to Out in the same minute.",
+      "reading": "Any rotation read older than a few hours is stale. The banner on the Injury PDF Ledger page prints the revision time and the retrieval time so the reader can see exactly how old it is."
+    },
+    {
+      "n": 5,
+      "title": "Travel is computed and flagged, not quietly used",
+      "detail": "Arena names, cities and states are official - they are printed on the box score of a game played there. Latitude and longitude are not published by any NBA page, so the great-circle distances are derived and flagged (F78). No travel value moves a line.",
+      "reading": "Rest, back-to-back and 3-in-4 are computed from the official schedule and are solid. Travel is a candidate input awaiting a source."
+    },
+    {
+      "n": 6,
+      "title": "The market-anchored prior remains switched off, and that is a finding",
+      "detail": "The brief asks for the model line to be blended with the closing line, weighted by measured out-of-sample log-loss. No closing line exists anywhere in this repository and no NBA-operated source publishes one, so the weight is 0 and no blended price is published (F79).",
+      "reading": "This is the single change that would unlock the most: two validation gates and the prior are all blocked on the same missing input."
+    },
+    {
+      "n": 1,
+      "title": "The model wins on the margin and loses on totals and winners",
+      "detail": "Margin: MAE 12.98 against 13.62 for the naive reference, RMSE 17.12 against 17.88 - the model is better on both. Totals: MAE 14.83 against 14.72, RMSE 19.35 against 19.10 - the reference is better on both. Straight up the reference went 42-18 and the model 40-20, and the reference has the better Brier score (0.2001 against 0.2020) and the better log loss (0.5827 against 0.5873).",
+      "reading": "The refinements buy a real but tiny margin improvement and nothing else. The probability calibration is the weakest part of the model, and it is where the remaining work should go."
+    },
+    {
+      "n": 2,
+      "title": "Growing the window keeps changing what can be claimed - which is the point of the sample gate",
+      "detail": "On the 28-game window the model beat the reference on totals (MAE 14.50 against 14.75). On 51 games it did not (14.86 against 14.75) - the sign flipped. On the 60-game window the sign holds (14.83 against 14.72) and the gap narrowed, but the conclusion stands. Each addition of data has moved at least one claim.",
+      "reading": "Any single-window result at this sample size should be treated as a hypothesis, not a finding."
+    },
+    {
+      "n": 3,
+      "title": "S1 has cleared the luck gate at 23-9 - and failed two others, which is the honest headline",
+      "detail": "S1 (side edge vs the reference spread) produced 32 graded plays at 23-9, worth +11.91 model units and a 37.2% return at -110. Its exact binomial p-value against a coin flip is 0.020 and the Wilson 95% interval on its hit rate is 0.546 to 0.844 - the lower bound is now above the 0.5238 break-even, so G4 (skill, not luck) passes for the first time. But its hit rate of 0.719 against a mean predicted probability of 0.627 fails the calibration gate (gap 0.091 against a 0.08 tolerance), and the stability gate fails because the bootstrap interval on the model's margin MAE (10.2 to 15.94) still contains the reference MAE (13.62). The availability gate cannot run at all for the graded window.",
+      "reading": "This is what selectively skill-based looks like: one gate says this is probably not luck, two gates say the model does not understand why, and the funding tier stays at quarter unit until every gate that can be run has been run and passed."
+    },
+    {
+      "n": 4,
+      "title": "Home court looks normal; the back-to-back penalty is large but uncertain",
+      "detail": "Home-court advantage estimates at +3.51 points with a standard error of 2.28 (t = 1.54) across 60 games, squarely in the historical NBA range. The back-to-back penalty estimates at -6.26 points with a standard error of 4.86 (t = -1.29); because |t| >= 1 the model applies the full 6.26, but the standard error is most of the estimate.",
+      "readings": [],
+      "reading": "Both are published with their standard errors and both are fitted on the test window, which is disclosed on every row they touch."
+    },
+    {
+      "n": 5,
+      "title": "Shrinkage was derived rather than guessed, and the curve is flat where it matters",
+      "detail": "The empirical-Bayes calculation gives k = 2.9, weighting each team's observed net rating at 0.739. The fixed-k sweep shows margin MAE moving from 13.62 at k = 0 to 12.91 at k = 4, then degrading to 13.36 by k = 20. Heavy shrinkage is clearly wrong; the choice between light and none barely matters.",
+      "reading": "The constant is defensible, its sensitivity is published, and it is not a source of hidden risk."
+    },
+    {
+      "n": 6,
+      "title": "Availability impact is a measured floor, not an estimate",
+      "detail": "Minutes are only known for the 50 players in the captured official table. Players outside it contribute 0.00 to the impact, so teams missing rotation players who are not top-50 scorers show a smaller number than the truth - sometimes zero. The minutes-coverage column sits next to every figure so a 0.00 is never read as 'healthy'.",
+      "reading": "Correct but incomplete - the Injuries page says so on every row rather than hiding it."
+    },
+    {
+      "n": 7,
+      "title": "Correlation is measured where it can be and flagged where it cannot",
+      "detail": "Thirteen team-statistic pairs were measured directly on all 30 teams from the official advanced table. Net rating explains 87% of the variation in win percentage; pace is nearly unrelated to net rating (r = -0.34, p = 0.063) and assist percentage is unrelated to offensive efficiency (r = 0.02, p = 0.92). The parlay and same-game-parlay correlations that drive pricing are model-derived and labelled as such.",
+      "reading": "The distinction matters most for parlays, because pricing correlated legs as independent is the classic way to overpay."
+    },
+    {
+      "n": 8,
+      "title": "The word 'edge' on this site does not mean edge against a sportsbook",
+      "detail": "No sportsbook price is published by an NBA-operated source, so no official link can be attached to one. The site bets the originated line against a deliberately naive reference model built from the same official ratings. Until real prices are logged, 'units won' means model-vs-naive-model units.",
+      "reading": "This is the single most important caveat for anyone reading the leaderboard."
+    },
+    {
+      "n": 9,
+      "title": "The 2026-11-13 slate is settled, and it did not go well - which is the system working",
+      "detail": "Every published paper pick on the 2026-11-13 slate was settled against the official finals captured on 2026-11-14. The seven gated singles went 3-4 (-1.40 units at -110) and all three two-leg parlays lost. The picks were pre-registered: the model blocks in the live file are identical to the copy frozen at 2026-11-13T22:45Z, before tip. The originated margin line was off by 12.39 points on average across the nine games - consistent with the 12.98 MAE on the wider window, and a useful reminder that a night like this is normal at this sample size.",
+      "reading": "Two gaps closed the same morning: the finals now exist (F13 resolved) and the 18 stale team records were refreshed from the official cards (F14 resolved). Two remain open and are published as such: at the newest injury edition five of the ten teams playing on 11/14 have still not filed, and no edition lists any player for the 11/16 and 11/17 games."
+    },
+    {
+      "n": 10,
+      "title": "The 60-game extension is real, but it cannot be reproduced from this repository alone",
+      "detail": "The 2026-11-13 finals are captured, transcribed three independent times that all agree 9/9, and used to settle every published 11/13 pick (seven singles 3-4 at -1.40 units, three two-leg parlays 0-3). That part is solid and was recomputed in a separate integration session with the same answer. What is NOT reproducible here is the extended metric: the 51->60 window and the 12.98 vs 13.62 margin MAE depend on a team-ratings refresh, and https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season returns no data table to this environment (flag F24, re-tested 2026-11-14). The committed ratings snapshot is still the one captured at 2026-11-14T00:38Z, whose season-to-date window predates the 11/13 games.",
+      "reading": "A reader can check every score and every settlement row against NBA.com, and should. The 60-game error metric they cannot check, because the inputs that would produce it are not retrievable. Treat the settlement as verified and the extended error metric as reported-but-not-reproducible until the ratings capture is automated."
+    },
+    {
+      "n": 11,
+      "title": "The game-day edition arrived, and it moved the model far less than it should have",
+      "detail": "New Orleans, Cleveland, Chicago and Miami filed between the 04:15 AM ET edition the horizon was cut from and the 01:30 PM ET game-day edition, adding 24 player rows and changing four statuses; Memphis was still inside its filing window. Re-run through the engine's own availability adjustment, that edition moves 3 of the 5 games tipping tonight (DAL@CLE -1.8 to -2.5; DET@MIA -12.2 to -12.4; CHI@MIN 30.6 to 33.2) and leaves DEN@NOP, BKN@MEM unchanged. No favourite flips and no published pick changes side.",
+      "reading": "Two readings are available and the site publishes both. The charitable one: intra-day report churn is usually noise, and a model that lurched on every status label would be worse. The uncomfortable one: the reason it cannot move New Orleans is that the Pelicans' five listed names are not in the minutes table, so the model is not judging them, it is blind to them. That is F47, and it is the highest-value item in the register."
+    },
+    {
+      "n": 12,
+      "title": "[arena/8f64e94c-nba1] The model wins on the margin and loses on totals and winners",
+      "detail": "Margin: MAE 12.98 against 13.62 for the naive reference, RMSE 17.12 against 17.88 - the model is better on both. Totals: MAE 14.83 against 14.72, RMSE 19.35 against 19.10 - the reference is better on both. Straight up the reference went 42-18 and the model 40-20, and the reference has the better Brier score (0.2001 against 0.2020) and the better log loss (0.5827 against 0.5873)."
+    },
+    {
+      "n": 13,
+      "title": "[arena/8f64e94c-nba1] Growing the window keeps changing what can be claimed - which is the point of the sample gate",
+      "detail": "On the 28-game window the model beat the reference on totals (MAE 14.50 against 14.75). On 51 games it did not (14.86 against 14.75) - the sign flipped. On the 60-game window the sign holds (14.83 against 14.72) and the gap narrowed, but the conclusion stands. Each addition of data has moved at least one claim."
+    },
+    {
+      "n": 14,
+      "title": "[arena/8f64e94c-nba1] S1 has cleared the luck gate at 23-9 - and failed two others, which is the honest headline",
+      "detail": "S1 (side edge vs the reference spread) produced 32 graded plays at 23-9, worth +11.91 model units and a 37.2% return at -110. Its exact binomial p-value against a coin flip is 0.020 and the Wilson 95% interval on its hit rate is 0.546 to 0.844 - the lower bound is now above the 0.5238 break-even, so G4 (skill, not luck) passes for the first time. But its hit rate of 0.719 against a mean predicted probability of 0.627 fails the calibration gate (gap 0.091 against a 0.08 tolerance), and the stability gate fails because the bootstrap interval on the model's margin MAE (10.2 to 15.94) still contains the reference MAE (13.62). The availability gate cannot run at all for the graded window."
+    },
+    {
+      "n": 15,
+      "title": "[arena/8f64e94c-nba1] Home court looks normal; the back-to-back penalty is large but uncertain",
+      "detail": "Home-court advantage estimates at +3.51 points with a standard error of 2.28 (t = 1.54) across 60 games, squarely in the historical NBA range. The back-to-back penalty estimates at -6.26 points with a standard error of 4.86 (t = -1.29); because |t| >= 1 the model applies the full 6.26, but the standard error is most of the estimate."
+    },
+    {
+      "n": 16,
+      "title": "[arena/8f64e94c-nba1] Shrinkage was derived rather than guessed, and the curve is flat where it matters",
+      "detail": "The empirical-Bayes calculation gives k = 2.9, weighting each team's observed net rating at 0.739. The fixed-k sweep shows margin MAE moving from 13.62 at k = 0 to 12.91 at k = 4, then degrading to 13.36 by k = 20. Heavy shrinkage is clearly wrong; the choice between light and none barely matters."
+    },
+    {
+      "n": 17,
+      "title": "[arena/8f64e94c-nba1] Availability impact is a measured floor, not an estimate",
+      "detail": "Minutes are only known for the 50 players in the captured official table. Players outside it contribute 0.00 to the impact, so teams missing rotation players who are not top-50 scorers show a smaller number than the truth - sometimes zero. The minutes-coverage column sits next to every figure so a 0.00 is never read as 'healthy'."
+    },
+    {
+      "n": 18,
+      "title": "[arena/8f64e94c-nba1] Correlation is measured where it can be and flagged where it cannot",
+      "detail": "Thirteen team-statistic pairs were measured directly on all 30 teams from the official advanced table. Net rating explains 87% of the variation in win percentage; pace is nearly unrelated to net rating (r = -0.34, p = 0.063) and assist percentage is unrelated to offensive efficiency (r = 0.02, p = 0.92). The parlay and same-game-parlay correlations that drive pricing are model-derived and labelled as such."
+    },
+    {
+      "n": 19,
+      "title": "[arena/8f64e94c-nba1] The word 'edge' on this site does not mean edge against a sportsbook",
+      "detail": "No sportsbook price is published by an NBA-operated source, so no official link can be attached to one. The site bets the originated line against a deliberately naive reference model built from the same official ratings. Until real prices are logged, 'units won' means model-vs-naive-model units."
+    },
+    {
+      "n": 20,
+      "title": "[arena/8f64e94c-nba1] The 2026-11-13 slate is settled, and it did not go well - which is the system working",
+      "detail": "Every published paper pick on the 2026-11-13 slate was settled against the official finals captured on 2026-11-14. The seven gated singles went 3-4 (-1.40 units at -110) and all three two-leg parlays lost. The picks were pre-registered: the model blocks in the live file are identical to the copy frozen at 2026-11-13T22:45Z, before tip. The originated margin line was off by 12.39 points on average across the nine games - consistent with the 12.98 MAE on the wider window, and a useful reminder that a night like this is normal at this sample size."
+    },
+    {
+      "n": 21,
+      "title": "[arena/8f64e94c-nba1] The 60-game extension is real, but it cannot be reproduced from this repository alone",
+      "detail": "The 2026-11-13 finals are captured, transcribed three independent times that all agree 9/9, and used to settle every published 11/13 pick (seven singles 3-4 at -1.40 units, three two-leg parlays 0-3). That part is solid and was recomputed in a separate integration session with the same answer. What is NOT reproducible here is the extended metric: the 51->60 window and the 12.98 vs 13.62 margin MAE depend on a team-ratings refresh, and https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season returns no data table to this environment (flag F24, re-tested 2026-11-14). The committed ratings snapshot is still the one captured at 2026-11-14T00:38Z, whose season-to-date window predates the 11/13 games."
+    },
+    {
+      "n": 22,
+      "title": "[arena/8f64e94c-nba1] The game-day edition arrived, and it moved the model far less than it should have",
+      "detail": "New Orleans, Cleveland, Chicago and Miami filed between the 04:15 AM ET edition the horizon was cut from and the 01:30 PM ET game-day edition, adding 24 player rows and changing four statuses; Memphis was still inside its filing window. Re-run through the engine's own availability adjustment, that edition moves 3 of the 5 games tipping tonight (DAL@CLE -1.8 to -2.5; DET@MIA -12.2 to -12.4; CHI@MIN 30.6 to 33.2) and leaves DEN@NOP, BKN@MEM unchanged. No favourite flips and no published pick changes side."
+    }
+  ],
+  "what_is_live_now": [
+    "Official result feed: 222 games captured, 190 Final, quarter scores summing to the final on every one.",
+    "Ratings rebuilt from official box scores for all 30 teams (pace, offensive rating, defensive rating, net rating).",
+    "Two estimators with their disagreement, for all 34 games on the 2026-11-15..18 slate.",
+    "Projection surface and bet surface as separate pages - they are never merged.",
+    "Parlays priced with measured rho, the naive independent product printed beside them.",
+    "Minutes redistribution: measured top-8 shares per team with a worked replacement.",
+    "Rest, back-to-back, 3-in-4 and travel for every horizon game.",
+    "Luck z-scores for all 30 teams with the refusal rule applied.",
+    "75 official injury PDFs stored with revision and retrieval times, 28 status changes detected.",
+    "Ledger: hash-chained, extended with the 11/15 settlement and this publication.",
+    "[arena/8f64e94c-nba1] Originated spreads, totals, moneylines and fair prices for all 34 games across 2026-11-15, 2026-11-16, 2026-11-17 and 2026-11-18 (the 2026-11-14 games are played, settled and stamped).",
+    "[arena/8f64e94c-nba1] 34 pick rows on the rolling slate (33 priced singles and 1 gate pass-through no-bet), 12 two-leg parlays and 8 SGP candidates, each tagged with its market and the gate decision - all MODEL OUTPUT, unvalidated, zero stake.",
+    "[arena/8f64e94c-nba1] The settlement of every published paper pick on the 2026-11-14 slate against official finals (singles 1W-2L-1P-1NB at -1.2u, parlays 0-3 at -3.3u, SGP 1-1 at +2.26u, total -2.24u), with the pre-registration check and the ledger hash chain (4 entries, head c46e0a37...).",
+    "[arena/8f64e94c-nba1] The official injury report, 11/15/26 06:15 AM ET edition - 101 rows - transcribed row by row, with the report revision time and the retrieval time in the page banner and the consecutive-edition diff against the previous stored edition (F74).",
+    "[arena/8f64e94c-nba1] Player projections for the top-50 scorers, with the possession, opponent-defence and teammate-availability factors broken out separately.",
+    "[arena/8f64e94c-nba1] Game-flow read-outs built from official pace and efficiency inputs, including probability of a close game, a blowout and overtime.",
+    "[arena/8f64e94c-nba1] 60 out-of-sample games with the full seven-gate matrix, a 30-team luck decomposition, 13 measured correlations and a ten-strategy leaderboard with reward tiers.",
+    "[arena/8f64e94c-nba1] Game-Day Read: the 11/14 01:30 PM ET official edition transcribed row by row, the diff against the edition those lines were cut from, the re-priced model line beside the published one for all five 11/14 games, and the 27-of-27 row-level verification of that horizon against NBA.com.",
+    "[arena/8f64e94c-nba1] The 2026-11-15 per-game results feed is current: the two finals verified from official box scores with quarter scores (IND@PHI, LAL@PHX) and seven rows pending final scores - nothing is settled before the game day ends.",
+    "[arena/8f64e94c-nba1] Flagged irregularities F74-F93 (merged injury-table cells, unreconciled standings OT columns, a recap-only box-score leg, missing venue cells, the F78-F91 register additions, the GSW@NOP 11/16 tip-time discrepancy between two official reads (F92), and the post-06:15 AM injury-edition capture gap (F93)) are published on the Flagged for Review page and do not block anything."
+  ],
+  "recommended_next_actions": [
+    {
+      "rank": 1,
+      "action": "Log a closing price for every graded play. It is the only missing input that blocks two validation gates and the market-anchored prior (F95, Q25).",
+      "why": "Until it exists, 'units won' measures the model against a naive model."
+    },
+    {
+      "rank": 2,
+      "action": "Decide whether the official input path is the stats pages or the box-score rebuild (F96, Q28).",
+      "why": "Two sources of truth is worse than either one chosen deliberately."
+    },
+    {
+      "rank": 3,
+      "action": "Test whether the estimator disagreement predicts error, then either use it for stake sizing or drop it (Q24).",
+      "why": "It is currently the headline number on the projection page and nothing has shown it means anything."
+    },
+    {
+      "rank": 4,
+      "action": "Regress error on rest, back-to-back, 3-in-4 and travel before any of them enters the line (Q26).",
+      "why": "All four are computed and published; none is yet justified."
+    },
+    {
+      "rank": 5,
+      "action": "Set a retention rule for raw captures (Q30, SG37).",
+      "why": "22 MB of HTML and 7.5 MB of PDFs were added today and the season is young."
+    },
+    {
+      "rank": 6,
+      "action": "[arena/8f64e94c-nba1] DONE 2026-11-14T19:20Z: capture the day-of-game injury updates and re-price against them. The published lines were deliberately not rewritten.",
+      "why": "Executed by session arena/95c1cb23-nba1. The two editions, the diff, the impact re-computation and the row-level verification are in data/derived/gameday_read.json, one source URL per row. The residual finding is F47: the availability layer cannot see most of what was filed."
+    },
+    {
+      "rank": 7,
+      "action": "[arena/8f64e94c-nba1] Complete the minutes input, per club, so the availability layer can see a rotation instead of a top-50 slice",
+      "why": "It is what turns the 0.00 columns into numbers, and it unlocks Q3, Q12 and Q20 (SG20, F47)."
+    },
+    {
+      "rank": 8,
+      "action": "[arena/8f64e94c-nba1] Capture the 11/16, 11/17 and 11/18 injury-report editions as they are published",
+      "why": "The 11/15/26 06:15 AM ET edition is captured (101 rows; its 11/16 team blocks print NOT YET SUBMITTED, exactly as the reporting deadlines predict). Each remaining edition should be stored with its revision and retrieval time and diffed against the previous one, as was done for 11/15 (F74)."
+    },
+    {
+      "rank": 9,
+      "action": "[arena/8f64e94c-nba1] Settle the 2026-11-15 slate from official finals at game-day end and keep the per-game result feed current",
+      "why": "The standing ledger rule: verify final scores from official box scores - one row per game with date, teams, final score and quarter scores in data/official/results_2026-11-15.json - then grade the pre-tip record against them and extend the hash chain. Verified finals for games already complete are recorded as they land; nothing is settled before the official page marks it final."
+    },
+    {
+      "rank": 10,
+      "action": "[arena/8f64e94c-nba1] Log real closing prices",
+      "why": "Until this exists, nothing here can be called profitable - only better than a naive model. It is also the missing input for the market-anchored prior (blend the model line with the closing line, weighted by measured out-of-sample log-loss). Everything else is optimisation of an unvalidated target."
+    },
+    {
+      "rank": 11,
+      "action": "[arena/8f64e94c-nba1] Backfill results for 2026-10-20 to 2026-11-05 and re-cut the split",
+      "why": "Every game from 2026-11-06 onward is already in the test window, so this is now the only way to grow the sample. It would let the ratings window move earlier and the test window roughly double again."
+    }
+  ],
+  "bottom_line": "Everything on this site is now derived from an official page or flagged as not being. That is a real change from the position a day ago, when the scheduled refresh had never once executed against nba.com. What it buys is trust in the inputs, not trust in the edge: no strategy has passed the gates, there is no market price to beat, and the honest statement of the current position is that the machinery is sound and the edge is unproven. || arena/8f64e94c-nba1: The 11/14 slate is closed out on the ledger, the window is rolled to 15-18 Nov, and every new row is source-linked and pre-registered. Nothing on this site is a recommendation: no strategy has passed the validation gates, the market-anchored prior and prop pricing gates remain blocked pending an odds feed, and the 11/14 units (-2.24u) are a paper record at the repo's -110 convention. Open items for a reviewer: the SGP void convention (Q22), the SGP paper price (Q23), the refresh-cadence choice (SG30), and the OT-column reconciliation (SG31)."
 }

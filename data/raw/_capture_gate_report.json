@@ -1,0 +1,421 @@
+{
+ "gate": "refresh freshness + provenance",
+ "run_at_utc": "2026-11-15T12:47:50Z",
+ "max_age_hours": 26,
+ "status": "FAIL",
+ "checks": [
+  {
+   "check": "freshness",
+   "target": "_capture_S10_standings.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_S10_standings.json",
+   "status": "PASS",
+   "detail": "www.nba.com"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_S5_injury_index.json",
+   "status": "PASS",
+   "detail": "17.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_S5_injury_index.json",
+   "status": "FAIL",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_S7_players.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_S7_players.json",
+   "status": "PASS",
+   "detail": "www.nba.com"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_00PM.pdf.json",
+   "status": "FAIL",
+   "detail": "capture is 35.3h old (max 26h); re-fetch before any rebuild"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_00PM.pdf.json",
+   "status": "FAIL",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_15PM.pdf.json",
+   "status": "FAIL",
+   "detail": "capture is 35.3h old (max 26h); re-fetch before any rebuild"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_15PM.pdf.json",
+   "status": "FAIL",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_30PM.pdf.json",
+   "status": "FAIL",
+   "detail": "capture is 35.2h old (max 26h); re-fetch before any rebuild"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_30PM.pdf.json",
+   "status": "FAIL",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_45PM.pdf.json",
+   "status": "FAIL",
+   "detail": "capture is 35.0h old (max 26h); re-fetch before any rebuild"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_45PM.pdf.json",
+   "status": "FAIL",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_09_00PM.pdf.json",
+   "status": "FAIL",
+   "detail": "capture is 34.7h old (max 26h); re-fetch before any rebuild"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_09_00PM.pdf.json",
+   "status": "FAIL",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-14_02_00PM.pdf.json",
+   "status": "PASS",
+   "detail": "17.4h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-14_02_00PM.pdf.json",
+   "status": "FAIL",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-14_02_15PM.pdf.json",
+   "status": "PASS",
+   "detail": "17.4h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-14_02_15PM.pdf.json",
+   "status": "FAIL",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-14_02_30PM.pdf.json",
+   "status": "PASS",
+   "detail": "17.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-14_02_30PM.pdf.json",
+   "status": "FAIL",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_injury_probe.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_probe.json",
+   "status": "FAIL",
+   "detail": "no source_url"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_results_2026-11-06.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_results_2026-11-06.json",
+   "status": "PASS",
+   "detail": "www.nba.com"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_results_2026-11-07.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_results_2026-11-07.json",
+   "status": "PASS",
+   "detail": "www.nba.com"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_results_2026-11-08.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_results_2026-11-08.json",
+   "status": "PASS",
+   "detail": "www.nba.com"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_results_2026-11-09.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_results_2026-11-09.json",
+   "status": "PASS",
+   "detail": "www.nba.com"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_results_2026-11-10.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_results_2026-11-10.json",
+   "status": "PASS",
+   "detail": "www.nba.com"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_results_2026-11-11.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_results_2026-11-11.json",
+   "status": "PASS",
+   "detail": "www.nba.com"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_results_2026-11-12.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_results_2026-11-12.json",
+   "status": "PASS",
+   "detail": "www.nba.com"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_results_2026-11-13.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_results_2026-11-13.json",
+   "status": "PASS",
+   "detail": "www.nba.com"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_results_2026-11-14.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_results_2026-11-14.json",
+   "status": "PASS",
+   "detail": "www.nba.com"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_results_2026-11-15.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_results_2026-11-15.json",
+   "status": "PASS",
+   "detail": "www.nba.com"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_results_2026-11-16.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_results_2026-11-16.json",
+   "status": "PASS",
+   "detail": "www.nba.com"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_results_2026-11-17.json",
+   "status": "PASS",
+   "detail": "0.1h old"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_results_2026-11-17.json",
+   "status": "PASS",
+   "detail": "www.nba.com"
+  },
+  {
+   "check": "coverage",
+   "target": "S1_season",
+   "status": "PASS",
+   "detail": "failed fetch left evidence (capture absent; stale snapshot kept)"
+  },
+  {
+   "check": "coverage",
+   "target": "S2_train",
+   "status": "PASS",
+   "detail": "failed fetch left evidence (capture absent; stale snapshot kept)"
+  },
+  {
+   "check": "coverage",
+   "target": "S7_players",
+   "status": "PASS",
+   "detail": "capture present"
+  },
+  {
+   "check": "coverage",
+   "target": "S4_schedule",
+   "status": "PASS",
+   "detail": "failed fetch left evidence (capture absent; stale snapshot kept)"
+  },
+  {
+   "check": "coverage",
+   "target": "S5_injury_index",
+   "status": "PASS",
+   "detail": "capture present"
+  },
+  {
+   "check": "coverage",
+   "target": "S8_traditional",
+   "status": "PASS",
+   "detail": "failed fetch left evidence (capture absent; stale snapshot kept)"
+  },
+  {
+   "check": "coverage",
+   "target": "S9_opponent",
+   "status": "PASS",
+   "detail": "failed fetch left evidence (capture absent; stale snapshot kept)"
+  },
+  {
+   "check": "coverage",
+   "target": "S10_standings",
+   "status": "PASS",
+   "detail": "capture present"
+  }
+ ],
+ "failed": [
+  {
+   "check": "provenance",
+   "target": "_capture_S5_injury_index.json",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_00PM.pdf.json",
+   "detail": "capture is 35.3h old (max 26h); re-fetch before any rebuild"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_00PM.pdf.json",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_15PM.pdf.json",
+   "detail": "capture is 35.3h old (max 26h); re-fetch before any rebuild"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_15PM.pdf.json",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_30PM.pdf.json",
+   "detail": "capture is 35.2h old (max 26h); re-fetch before any rebuild"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_30PM.pdf.json",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_45PM.pdf.json",
+   "detail": "capture is 35.0h old (max 26h); re-fetch before any rebuild"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_08_45PM.pdf.json",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "freshness",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_09_00PM.pdf.json",
+   "detail": "capture is 34.7h old (max 26h); re-fetch before any rebuild"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-13_09_00PM.pdf.json",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-14_02_00PM.pdf.json",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-14_02_15PM.pdf.json",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_pdf_Injury-Report_2026-11-14_02_30PM.pdf.json",
+   "detail": "neither page_sha256 nor parsed rows recorded"
+  },
+  {
+   "check": "provenance",
+   "target": "_capture_injury_probe.json",
+   "detail": "no source_url"
+  }
+ ]
+}

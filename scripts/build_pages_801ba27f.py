@@ -41,7 +41,7 @@ NAV = [
         ("luck-z.html", "Luck z-scores"),
         ("injury-ledger.html", "Injury PDF ledger"),
         ("settlement.html", "Settlement &amp; ledger"),
-        ("requirements.html", "Requirements coverage"),
+        ("brief-coverage.html", "Requirements coverage"),
     ]),
     ("HORIZON", [
         ("picks.html", "Lines &amp; Picks"),
@@ -671,7 +671,7 @@ def build_requirements():
                "Evidence"], rows),
     ]
     return page("Requirements coverage", "Each instruction in the brief, its status, and the "
-                "evidence for that status.", "".join(body), "requirements.html")
+                "evidence for that status.", "".join(body), "brief-coverage.html")
 
 
 PAGES_BUILDERS = [
@@ -685,7 +685,7 @@ PAGES_BUILDERS = [
     ("luck-z.html", build_luck),
     ("injury-ledger.html", build_injury_ledger),
     ("settlement.html", build_settlement),
-    ("requirements.html", build_requirements),
+    ("brief-coverage.html", build_requirements),
 ]
 
 

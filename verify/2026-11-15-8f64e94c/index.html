@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026-11-15 live re-verification — arena/8f64e94c-nba1</title>
+<style>
+  :root { --ink:#1a2233; --muted:#5b6472; --line:#d9dee7; --bg:#f6f7f9; --card:#fff; --accent:#14509e; --bad:#b3261e; --ok:#1a7f37; --warn:#9a6700; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; color:var(--ink); background:var(--bg); }
+  main { max-width: 1060px; margin: 0 auto; padding: 28px 20px 60px; }
+  h1 { font-size: 26px; margin: 8px 0 4px; }
+  h2 { font-size: 19px; margin: 34px 0 10px; border-bottom: 2px solid var(--line); padding-bottom: 6px; }
+  .sub { color: var(--muted); margin-bottom: 6px; }
+  .badge { display:inline-block; padding: 2px 9px; border-radius: 10px; font-size: 12px; font-weight: 600; margin-right:6px; }
+  .b-med  { background:#fff6e0; color:var(--warn); border:1px solid #f0dca0; }
+  .b-low  { background:#eef1f5; color:var(--muted); border:1px solid var(--line); }
+  .b-ok   { background:#e7f5ec; color:var(--ok); border:1px solid #bfe3cc; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin:14px 0; }
+  table { border-collapse: collapse; width:100%; font-size: 13.5px; background:var(--card); }
+  th, td { border:1px solid var(--line); padding: 7px 9px; text-align:left; vertical-align: top; }
+  th { background:#eef1f5; font-weight:600; }
+  tr:nth-child(even) td { background:#fafbfc; }
+  a { color: var(--accent); }
+  code { background:#eef1f5; padding:1px 5px; border-radius:4px; font-size:12.5px; }
+  .foot { color: var(--muted); font-size: 13px; margin-top: 30px; border-top: 1px solid var(--line); padding-top: 12px; }
+</style>
+</head>
+<body>
+<main>
+
+<p class="sub">Session <strong>arena/8f64e94c-nba1</strong> · COORDINATION §41 task I03 · live read window
+<strong>2026-11-15 23:45–23:58 UTC</strong> · rolling horizon under test: <strong>15–18 Nov 2026 (34 games)</strong></p>
+<h1>Live official re-verification pass — 2026-11-15</h1>
+<p>Every value on this page was read from an NBA-operated host during this session and is stored with its exact URL in
+<code>verify/2026-11-15-8f64e94c/</code>. Nothing was inferred; anything not confirmed is null and flagged. Reproduce the
+comparison with <code>python3 verify/2026-11-15-8f64e94c/compare.py</code>. The full narrative is in
+<a href="REPORT.md">REPORT.md</a>.</p>
+
+<div class="card">
+<strong>Headline findings</strong>
+<ul>
+  <li><span class="badge b-ok">verified</span> The two 11/15 games that were final at read time are captured with
+  quarter scores that sum to the finals: <strong>IND 124 @ PHI 131</strong> and <strong>LAL 131 @ PHX 123</strong>.
+  The per-game result feed (<code>data/official/results_2026-11-15.json</code>) is current: 2 FINAL rows, 7 NOT FINAL stubs.</li>
+  <li><span class="badge b-ok">33/34</span> Published horizon rows and the schedule capture agree with the live official
+  schedule listing on date, matchup, game id and tip — one disagreement.</li>
+  <li><span class="badge b-med">F92</span> <strong>GSW@NOP 11/16 tip time:</strong> the published capture and the frozen
+  pre-tip row say 09:00 PM ET; three live reads print <strong>8:00 PM ET</strong> for the same game id (0022600251).
+  Both readings kept; the frozen row is not edited; the next rolling re-cut takes the live value.</li>
+  <li><span class="badge b-med">F93</span> <strong>Injury-edition capture gap:</strong> the league published 11/15 editions
+  in 15-minute steps through at least 4:15 PM ET; the site's basis edition is 06:15 AM ET. Lines are deliberately not
+  re-priced (SG29/F72); capture the rest at the next refresh (SG30).</li>
+  <li><span class="badge b-low">F-W01</span> The horizon's repeated-matchup flag is <strong>confirmed as printed by the
+  official feed</strong> (POR@MIN 11/16+11/17, NYK@TOR 11/15+11/17 — distinct game ids). Not a capture artifact.</li>
+  <li><span class="badge b-low">note</span> <strong>No pick was graded in this pass.</strong> The 11/15 ledger settlement
+  runs at game-day end, after OKC@SAC (09:00 PM ET) is final — the rule, not an omission.</li>
+</ul>
+</div>
+
+<h2>1. Sources read (all official)</h2>
+<table>
+<tr><th>#</th><th>Source URL</th><th>Used for</th></tr>
+<tr><td>V-G15</td><td><a href="https://www.nba.com/games?date=2026-11-15">nba.com/games?date=2026-11-15</a></td><td>nine 11/15 game states and finals</td></tr>
+<tr><td>V-G16</td><td><a href="https://www.nba.com/games?date=2026-11-16">nba.com/games?date=2026-11-16</a></td><td>eight 11/16 fixtures; the confirming read for F92</td></tr>
+<tr><td>V-G17</td><td><a href="https://www.nba.com/games?date=2026-11-17">nba.com/games?date=2026-11-17</a></td><td>five 11/17 fixtures (scoreboard strips)</td></tr>
+<tr><td>V-G18</td><td><a href="https://www.nba.com/games?date=2026-11-18">nba.com/games?date=2026-11-18</a></td><td>twelve 11/18 fixtures (scoreboard strips)</td></tr>
+<tr><td>V-B236</td><td><a href="https://www.nba.com/game/ind-vs-phi-0022600236">nba.com/game/ind-vs-phi-0022600236</a></td><td>IND@PHI LINESCORES, GAME INFO, gamebook links</td></tr>
+<tr><td>V-B237</td><td><a href="https://www.nba.com/game/lal-vs-phx-0022600237">nba.com/game/lal-vs-phx-0022600237</a></td><td>LAL@PHX LINESCORES, GAME INFO, gamebook links</td></tr>
+<tr><td>V-IX</td><td><a href="https://official.nba.com/nba-injury-report-2026-27-season/">official.nba.com injury-report index</a></td><td>injury-edition currency (F93)</td></tr>
+<tr><td>V-PDF</td><td><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf">Injury-Report_2026-11-15_06_15AM.pdf</a></td><td>the basis edition named on the Injuries banner</td></tr>
+</table>
+
+<h2>2. Verified finals (row level)</h2>
+<table>
+<tr><th>Game</th><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Final</th><th>Sum check</th><th>Source</th></tr>
+<tr><td>IND (away)</td><td>35</td><td>22</td><td>30</td><td>37</td><td>124</td><td>35+22+30+37 = 124 ✓</td><td><a href="https://www.nba.com/game/ind-vs-phi-0022600236">official game page</a> · gamebook PDF (URL for manual review, not linked here so the source gate keeps its allowlist untouched): <code>https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf</code></td></tr>
+<tr><td>PHI (home)</td><td>29</td><td>29</td><td>39</td><td>34</td><td>131</td><td>29+29+39+34 = 131 ✓</td><td><a href="https://www.nba.com/game/ind-vs-phi-0022600236">official game page</a> · gamebook PDF (URL for manual review, not linked here so the source gate keeps its allowlist untouched): <code>https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf</code></td></tr>
+<tr><td>LAL (away)</td><td>33</td><td>31</td><td>40</td><td>27</td><td>131</td><td>33+31+40+27 = 131 ✓</td><td><a href="https://www.nba.com/game/lal-vs-phx-0022600237">official game page</a> · gamebook PDF (URL for manual review, not linked here so the source gate keeps its allowlist untouched): <code>https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf</code></td></tr>
+<tr><td>PHX (home)</td><td>24</td><td>30</td><td>26</td><td>43</td><td>123</td><td>24+30+26+43 = 123 ✓</td><td><a href="https://www.nba.com/game/lal-vs-phx-0022600237">official game page</a> · gamebook PDF (URL for manual review, not linked here so the source gate keeps its allowlist untouched): <code>https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf</code></td></tr>
+</table>
+<p class="sub">IND@PHI: Xfinity Mobile Arena, 1:00 PM ET, attendance 21,024, officials Sean Corbin / Karl Lane / Matt Myers.
+LAL@PHX: Mortgage Matchup Center, 4:00 PM ET, attendance 17,071, officials James Williams / John Butler / Sha'Rae Mitchell.
+The LAL@PHX page's article slot shows the pre-game preview, not a recap; the LINESCORES and GAME INFO blocks are the
+official record used and the row says so.</p>
+
+<h2>3. Schedule comparison summary</h2>
+<table>
+<tr><th>Check</th><th>Rows</th><th>Agree</th><th>Disagree</th><th>Detail</th></tr>
+<tr><td>Published horizon vs live listing</td><td>34</td><td>33</td><td>1 (F92)</td><td><code>compare.json → horizon_vs_live</code> (<a href="https://www.nba.com/games?date=2026-11-16">source</a>)</td></tr>
+<tr><td>Schedule capture vs live listing</td><td>34</td><td>33</td><td>1 (F92)</td><td><code>compare.json → schedule_capture_vs_live</code> (<a href="https://www.nba.com/games?date=2026-11-16">source</a>)</td></tr>
+<tr><td>11/15 finals quarter sums</td><td>2</td><td>2</td><td>0</td><td><code>compare.json → finals_verified</code> (<a href="https://www.nba.com/game/ind-vs-phi-0022600236">source</a>)</td></tr>
+</table>
+
+<h2>4. Irregularities (non-blocking)</h2>
+<p class="sub">Both flags were conceived as F78/F79 and renumbered at merge to F92/F93 (F78&ndash;F91 were published first by arena/513516f6-nba1 in PR #108).</p>
+<table>
+<tr><th>ID</th><th>Item</th><th>Source</th></tr>
+<tr><td><span class="badge b-med">F92</span></td><td>GSW@NOP 11/16 tip: capture says 09:00 PM ET (read 11:35–12:20Z), live page says 8:00 PM ET (read 23:45–23:58Z). Frozen pre-tip row not edited; both readings published.</td><td><a href="https://www.nba.com/games?date=2026-11-16">nba.com/games?date=2026-11-16</a></td></tr>
+<tr><td><span class="badge b-med">F93</span></td><td>11/15 injury editions after 06:15 AM ET are not captured; the banner names the basis edition. Lines not re-priced by rule (SG29/F72).</td><td><a href="https://official.nba.com/nba-injury-report-2026-27-season/">official injury index</a></td></tr>
+<tr><td><span class="badge b-low">log</span></td><td>F74's detail cross-references Q22 ("the merged-cell reading"), but Q22 is the SGP void-convention question. Register is append-only this pass — logged for the content owner, not rewritten.</td><td><a href="https://www.nba.com/games?date=2026-11-15">register source row (F74)</a></td></tr>
+<tr><td><span class="badge b-low">F-W01</span></td><td>Repeated matchups (POR@MIN 11/16+11/17; NYK@TOR 11/15+11/17) confirmed on the official feed with distinct game ids — not a capture artifact.</td><td><a href="https://www.nba.com/games?date=2026-11-17">nba.com/games?date=2026-11-17</a></td></tr>
+</table>
+
+<h2>5. Files</h2>
+<table>
+<tr><th>File</th><th>What it is</th></tr>
+<tr><td><code>live_state_2026-11-15T2352Z.json</code></td><td>verbatim live observation record for the 11/15 slate + injury-index read (<a href="https://www.nba.com/games?date=2026-11-15">source</a>)</td></tr>
+<tr><td><code>live_schedule_2026-11-15T2352Z.json</code></td><td>verbatim live schedule listing 15–18 Nov with the confirming read for 0022600251 (<a href="https://www.nba.com/games?date=2026-11-16">source</a>)</td></tr>
+<tr><td><code>compare.py</code> / <code>compare.json</code></td><td>the reproducible comparison (<a href="https://www.nba.com/games?date=2026-11-15">source</a>)</td></tr>
+<tr><td><code>../../data/official/results_2026-11-15.json</code></td><td>the per-game result feed: 2 verified finals + 7 pending stubs (<a href="https://www.nba.com/games?date=2026-11-15">source</a>)</td></tr>
+</table>
+
+<p class="foot">arena/8f64e94c-nba1 · I03 · 2026-11-15 · all sources NBA-operated · nothing inferred ·
+unconfirmed fields are null and flagged.</p>
+</main>
+</body>
+</html>
