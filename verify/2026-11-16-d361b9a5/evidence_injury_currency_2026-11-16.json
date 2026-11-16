@@ -1,0 +1,25 @@
+{
+  "title": "First-hand official injury-report edition currency check (session arena/d361b9a5-nba1, Z03)",
+  "retrieved_utc": "2026-11-16T02:20Z..02:24Z",
+  "finding": {
+    "published_banner_edition": "11/15 06:15 PM ET (155 rows; data/official/injury_2026-11-15_0615PM.json, transcribed by session arena/161f1638-nba1)",
+    "newest_official_edition_found": "11/15 09:15 PM ET",
+    "newest_edition_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_15PM.pdf",
+    "retrieval_state": "fetched successfully through the session page-fetch tool; the PDF's official content rendered as a markdown table (3 chunks)",
+    "gap": "3 hours (06:15 PM -> 09:15 PM edition)",
+    "practical_impact": "low for the published 11/16-11/18 picks: the 09:15 PM edition covers the 11/15 slate (game times 01:00-09:00 PM ET on 11/15), which is now final; the next edition cycle for 11/16 games had not been published at retrieval time. The banner's 'newest stored edition' wording remains truthful - no newer edition has been stored.",
+    "flag_id": "Z03-G3"
+  },
+  "archive_note": "The raw PDF bytes could not be archived through this session's tools: the sandbox HTTP client cannot reach ak-static.cms.nba.com (curl HTTP 000) and the page-fetch tool returns rendered content, not bytes. The CI scheduled refresh (engine/fetch_official.py + engine/injury_diff.py, carried from PR #117) is the designed path for archiving the bytes and computing consecutive-edition diffs; it runs on its next trigger.",
+  "spot_checks_from_the_09_15PM_edition": [
+    {"team_printed": "Indiana Pacers", "player": "Furphy, Johnny", "status": "Out", "reason": "Injury/Illness - Right ACL Repair / Surgery", "agrees_with_published_0615PM_basis": true},
+    {"team_printed": "Indiana Pacers", "player": "Haliburton, Tyrese", "status": "Out", "reason": "Injury/Illness - Left Hamstring Strain", "agrees_with_published_0615PM_basis": true},
+    {"team_printed": "Philadelphia 76ers", "player": "Embiid, Joel", "status": "Out", "reason": "Injury/Illness - Right Foot Plantar Fascia Injury Management", "agrees_with_published_0615PM_basis": true},
+    {"team_printed": "LA Clippers", "player": "Ingram, Brandon", "status": "Out", "reason": "Injury/Illness - Right Heel Surgery", "agrees_with_published_0615PM_basis": true, "corroboration": "the official CHA@LAC game recap states the Clippers are 'still awaiting the season debut of Brandon Ingram (heel)'"}
+  ],
+  "markdown_render_limitation": "Rows whose game-date/game-time/matchup/team cells were dropped by the PDF-to-markdown rendering (band-continuation rows across page breaks) were NOT attributed and are NOT recorded as data. Only rows whose team cell printed in the render are used here. A faithful full parse of the 09:15 PM edition (with team_inherited flags, like data/official/injury_2026-11-15_0615PM.json) is left to the carried engine on raw bytes.",
+  "roster_attribution_cross_check": {
+    "observation": "Official pages this session consistently show player-team pairs that differ from earlier seasons: Kawhi Leonard listed under Toronto Raptors (09:15 PM injury edition) and named in the Raptors' opening-night lineup on the official NYK@TOR game page; Darius Garland scoring for the Clippers (CHA@LAC recap + games-page leader cards); Naz Reid scoring for the Hornets (CHA@LAC recap); Brandon Ingram listed under LA Clippers (injury edition + recap); LaMelo Ball shown as a Timberwolf on the POR@MIN leader cards.",
+    "disposition": "recorded as official-page facts, no judgment made; multiple independent official pages agree with each other, so the repo's team-keyed injury data built from these same official sources stays consistent"
+  }
+}
