@@ -91,6 +91,15 @@
  "snapshot_comparison": {
   "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
   "mismatches": [],
+  "promotion_candidates": [],
+  "committed_finals_missed": [],
+  "reconciled_at_utc": "2026-11-16T14:33:42Z",
+  "reconciled_by": "engine/promote_official.py (promoted into data/raw/games_completed.json)"
+ },
+ "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected.",
+ "snapshot_comparison_first_capture": {
+  "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
+  "mismatches": [],
   "promotion_candidates": [
    "0022600231",
    "0022600232",
@@ -99,6 +108,5 @@
    "0022600235"
   ],
   "committed_finals_missed": []
- },
- "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected."
+ }
 }

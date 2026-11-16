@@ -1,0 +1,65 @@
+{
+ "S5_injury_index": [
+  {
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "kind": "evidence_only",
+   "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "source_sha256": "024b2ee8788b0f608a7568dd594d72a8cbff29bfb6c38bfdff84e35c7039dc0f"
+  }
+ ],
+ "S7_players": [
+  {
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "kind": "evidence_only",
+   "detail": "official response retrieved at HTTP 200 and digest-bound; no structured model input consumes this source yet, so no snapshot was changed",
+   "source_url": "https://www.nba.com/stats/players/traditional",
+   "source_sha256": "2f55b3c1f29cbee7317d2b11c9c805c879822640f6a049350b5aa0fff3ebe03f"
+  }
+ ],
+ "_runs": [
+  {
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "promoted_items": [
+    "injury_pdf_probe",
+    "results 2026-11-06",
+    "results 2026-11-07",
+    "results 2026-11-08",
+    "results 2026-11-09",
+    "results 2026-11-10",
+    "results 2026-11-11",
+    "results 2026-11-12",
+    "results 2026-11-13",
+    "results 2026-11-14",
+    "S5_injury_index",
+    "S7_players"
+   ],
+   "blocked": [
+    {
+     "item": "S8_standings",
+     "reason": "capture has no parsed rows"
+    },
+    {
+     "item": "S9_team_traditional",
+     "reason": "capture has no parsed rows"
+    },
+    {
+     "item": "S10_team_opponent",
+     "reason": "capture has no parsed rows"
+    },
+    {
+     "item": "S1_season",
+     "reason": "S1_season capture unreadable: [Errno 2] No such file or directory: '/home/user/NBA1/data/raw/_capture_S1_season.json'"
+    },
+    {
+     "item": "S4_schedule",
+     "reason": "capture unreadable: [Errno 2] No such file or directory: '/home/user/NBA1/data/raw/_capture_S4_schedule.json'"
+    },
+    {
+     "item": "results_feed",
+     "reason": "0022600242: captured final 147-119 disagrees with independent record None-None"
+    }
+   ]
+  }
+ ]
+}

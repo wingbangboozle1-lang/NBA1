@@ -3,26 +3,12 @@
  "changed": [
   "evidence S1_season",
   "evidence S2_train",
-  "S7_players",
-  "S5_injury_index",
   "S8_standings",
   "S9_team_traditional",
   "S10_team_opponent",
-  "results 2026-11-06",
-  "results 2026-11-07",
-  "results 2026-11-08",
-  "results 2026-11-09",
-  "results 2026-11-10",
-  "results 2026-11-11",
-  "results 2026-11-12",
-  "results 2026-11-13",
-  "results 2026-11-14",
   "results 2026-11-15",
   "results 2026-11-16",
-  "results 2026-11-17",
-  "injury pdf Injury-Report_2026-11-15_09_30PM.pdf",
-  "injury pdf Injury-Report_2026-11-15_09_15PM.pdf",
-  "injury probe"
+  "results 2026-11-17"
  ],
  "failed": [
   [
@@ -294,5 +280,68 @@
  "workflow_run_at_utc": "2026-11-16T02:48:14Z",
  "workflow_ref": "refs/heads/arena/d31fb422-nba1",
  "fetch_outcome": "success",
- "build_outcome": "skipped"
+ "build_outcome": "skipped",
+ "promoted": [
+  {
+   "item": "injury_pdf_probe",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "142 rows from Injury-Report_2026-11-15_09_30PM -> data/raw/injuries.json"
+  },
+  {
+   "item": "results 2026-11-06",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "9 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-07",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "7 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-08",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "7 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-09",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "8 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-10",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "6 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-11",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "10 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-12",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "4 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-13",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "9 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-14",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "5 finals reconciled (5 new this run)"
+  },
+  {
+   "item": "S5_injury_index",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "digest-bound evidence record written (no model input)"
+  },
+  {
+   "item": "S7_players",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "digest-bound evidence record written (no model input)"
+  }
+ ],
+ "promotion_warnings": []
 }

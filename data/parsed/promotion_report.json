@@ -1,0 +1,96 @@
+{
+ "generated_at_utc": "2026-11-16T14:33:42Z",
+ "promoted": [
+  {
+   "item": "injury_pdf_probe",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "142 rows from Injury-Report_2026-11-15_09_30PM -> data/raw/injuries.json"
+  },
+  {
+   "item": "results 2026-11-06",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "9 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-07",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "7 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-08",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "7 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-09",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "8 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-10",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "6 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-11",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "10 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-12",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "4 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-13",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "9 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-14",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "5 finals reconciled (5 new this run)"
+  },
+  {
+   "item": "S5_injury_index",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "digest-bound evidence record written (no model input)"
+  },
+  {
+   "item": "S7_players",
+   "promoted_at_utc": "2026-11-16T14:33:42Z",
+   "detail": "digest-bound evidence record written (no model input)"
+  }
+ ],
+ "blocked": [
+  {
+   "item": "S8_standings",
+   "reason": "capture has no parsed rows"
+  },
+  {
+   "item": "S9_team_traditional",
+   "reason": "capture has no parsed rows"
+  },
+  {
+   "item": "S10_team_opponent",
+   "reason": "capture has no parsed rows"
+  },
+  {
+   "item": "S1_season",
+   "reason": "S1_season capture unreadable: [Errno 2] No such file or directory: '/home/user/NBA1/data/raw/_capture_S1_season.json'"
+  },
+  {
+   "item": "S4_schedule",
+   "reason": "capture unreadable: [Errno 2] No such file or directory: '/home/user/NBA1/data/raw/_capture_S4_schedule.json'"
+  },
+  {
+   "item": "results_feed",
+   "reason": "0022600242: captured final 147-119 disagrees with independent record None-None"
+  }
+ ],
+ "warnings": [],
+ "rows_written": {
+  "injuries.json": 142
+ },
+ "rule": "Promotion re-validates parsed rows, cross-checks two official pages against each other, and binds every record to this run's response digest. Anything unprovable stays in `changed` and blocks the rebuild."
+}
