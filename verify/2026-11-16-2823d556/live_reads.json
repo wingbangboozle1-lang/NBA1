@@ -2,7 +2,7 @@
  "title": "Live official re-read, 2026-11-16 02:17Z-02:27Z \u2014 currency of the published 11/16 horizon, and the 11/15 slate's completion state",
  "session": "arena/2823d556-nba1",
  "board_section": "47",
- "retrieved_utc": "2026-11-16T02:17Z..02:27Z",
+ "retrieved_utc": "2026-11-16T02:17Z..03:10Z",
  "read_by": "the session's web-fetch channel (fetch_page). The sandbox's own sockets still refuse: `curl https://www.nba.com/` from this session's shell returns HTTP 000. Both facts are true and both are recorded \u2014 see finding F-47-A.",
  "rule": "Only what the official page printed is recorded. A game still printing a quarter clock is IN PROGRESS and its live score is never stored as a final. Where the official page printed nothing, the cell is null, never inferred.",
  "sources": [
@@ -26,10 +26,10 @@
   "source_url": "https://www.nba.com/games?date=2026-11-15",
   "read_at_utc": "2026-11-16T02:27Z",
   "n_games": 9,
-  "n_final": 6,
-  "n_in_progress": 3,
+  "n_final": 7,
+  "n_in_progress": 2,
   "settleable": false,
-  "settleable_note": "The brief's rule is 'settle only after final scores are verified'. 3 of 9 games are still printing a quarter clock, so the 2026-11-15 slate CANNOT be settled at this retrieval time.",
+  "settleable_note": "NOT settleable at either reading. At 02:27Z: 6 of 9 Final. At 03:10Z: 7 of 9 Final (HOU@WAS went Final 147-119), with ATL@MIL at Q4 8:05 and OKC@SAC at Q2 3:38 still printing a quarter clock. The brief's rule is 'settle only after final scores are verified', so the 2026-11-15 slate is not settleable as of 2026-11-16T03:10Z.",
   "rows": [
    {
     "game_id": "0022600236",
@@ -107,11 +107,11 @@
     "game_id": "0022600242",
     "away": "HOU",
     "home": "WAS",
-    "official_state_at_retrieval": "Q4 5:24",
-    "away_pts": null,
-    "home_pts": null,
-    "live_score_not_a_final": "HOU 132 - 102 WAS (Q4 5:24)",
-    "is_final": false,
+    "official_state_at_retrieval": "Final (at the 03:10Z re-read)",
+    "away_pts": 147,
+    "home_pts": 119,
+    "live_score_not_a_final": null,
+    "is_final": true,
     "source_url": "https://www.nba.com/games?date=2026-11-15",
     "box_score_url": "https://www.nba.com/game/hou-vs-was-0022600242/box-score#box-score"
    },
@@ -139,7 +139,56 @@
     "source_url": "https://www.nba.com/games?date=2026-11-15",
     "box_score_url": "https://www.nba.com/game/okc-vs-sac-0022600244/box-score#box-score"
    }
-  ]
+  ],
+  "second_reading": {
+   "read_at_utc": "2026-11-16T03:09Z..03:10Z",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "games": [
+    {
+     "game_id": "0022600242",
+     "away": "HOU",
+     "home": "WAS",
+     "official_state_at_retrieval": "Final",
+     "away_pts": 147,
+     "home_pts": 119,
+     "is_final": true,
+     "note": "was 'Q4 5:24' at the 02:27Z reading; now Final"
+    },
+    {
+     "game_id": "0022600243",
+     "away": "ATL",
+     "home": "MIL",
+     "official_state_at_retrieval": "Q4 8:05",
+     "away_pts": null,
+     "home_pts": null,
+     "is_final": false,
+     "note": "was 'Q3 10:42' at the 02:27Z reading; still in progress"
+    },
+    {
+     "game_id": "0022600244",
+     "away": "OKC",
+     "home": "SAC",
+     "official_state_at_retrieval": "Q2 3:38",
+     "away_pts": null,
+     "home_pts": null,
+     "is_final": false,
+     "note": "was 'Q1 7:59' at the 02:27Z reading; still in progress"
+    }
+   ],
+   "n_final_now": 7,
+   "n_in_progress_now": 2,
+   "settleable": false,
+   "settleable_note": "Still not settleable. Two games are printing a quarter clock, so the brief's 'settle only after final scores are verified' rule remains unmet at 03:10Z.",
+   "records_now": {
+    "HOU": "11-3",
+    "WAS": "4-10",
+    "ATL": "7-6",
+    "MIL": "1-12",
+    "OKC": "8-5",
+    "SAC": "1-11"
+   },
+   "records_note": "HOU and WAS moved between the two readings (10-3 -> 11-3 and 4-9 -> 4-10) as expected once HOU@WAS went Final. ATL/MIL and OKC/SAC are unchanged, which is the correct behaviour for games still in progress."
+  }
  },
  "slate_2026_11_16": {
   "source_url": "https://www.nba.com/games?date=2026-11-16",

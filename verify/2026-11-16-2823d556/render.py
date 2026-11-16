@@ -82,6 +82,28 @@ def main() -> int:
     ci = drift["committed_inputs"]
 
     # ---------------------------------------------------------- 11/15 table --
+    # A second reading of the same official page, 42 minutes later, is shown as a
+    # time series rather than as a silent overwrite: the point of F-47-B is not
+    # "the slate was not ready at 02:27Z" but "here is the official clock it is
+    # actually on", which is what a settling session needs in order to sequence.
+    sr = s15.get("second_reading")
+    second_reading_html = ""
+    if sr:
+        second_reading_html = (
+            '<div class="box info"><h3>Second reading of the same official page — '
+            f'{esc(sr["read_at_utc"])}</h3>'
+            f'<p>The official page was re-read 42 minutes later. {esc(sr["n_final_now"])} of 9 '
+            f'games are now Final; {esc(sr["n_in_progress_now"])} are still printing a quarter '
+            'clock. <b>Still not settleable.</b> ' + esc(sr["settleable_note"]) + '</p><ul>'
+            + "".join(
+                f'<li><span class="mono">{esc(g["game_id"])}</span> {esc(g["away"])} @ '
+                f'{esc(g["home"])} — {esc(g["official_state_at_retrieval"])}'
+                + (f' ({esc(g["away_pts"])}–{esc(g["home_pts"])})' if g["is_final"] else '')
+                + f'. {esc(g["note"])}. '
+                + link(G15, "official games page") + '</li>'
+                for g in sr["games"])
+            + "</ul><p>" + esc(sr["records_note"]) + "</p></div>")
+
     rows15 = []
     for r in s15["rows"]:
         if r["is_final"]:
@@ -96,7 +118,8 @@ def main() -> int:
             f'<td>{esc(r["away"])} @ {esc(r["home"])}</td>'
             f'<td class="{score_cls}">{score if r["is_final"] else score}</td>'
             f'<td>{esc(r["official_state_at_retrieval"])}</td>'
-            f'<td>{"FINAL" if r["is_final"] else "IN PROGRESS"}</td>'
+            f'<td class="{"ok" if r["is_final"] else "drift"}">'
+            f'{"FINAL" if r["is_final"] else "IN PROGRESS"}</td>'
             f'<td>{link(r["box_score_url"], "box score")}</td>'
             "</tr>")
 
@@ -278,6 +301,7 @@ was read from. Where the official page printed nothing, the cell is left blank �
 <table><thead><tr><th>Game id</th><th>Matchup</th><th>Score / live state</th>
 <th>Official state at retrieval</th><th>Status</th><th>Source</th></tr></thead>
 <tbody>{"".join(rows15)}</tbody></table>
+{second_reading_html}
 
 <h2 id="s16">2026-11-16 slate — committed capture vs the official page read at {esc(s16['read_at_utc'])}</h2>
 <p class="small">Live source: {link(G16, G16)} ·
