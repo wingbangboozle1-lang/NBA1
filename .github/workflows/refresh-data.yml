@@ -79,6 +79,38 @@ jobs:
           python3 engine/pipeline.py
           python3 engine/build_site.py
 
+      # Settlement is part of the scheduled job, not a manual step (brief:
+      # "Settle the sealed ledger from official finals as soon as each game day
+      # ends"; register item R19/R03). For every archived pre-tip slate this
+      # tries to settle each date; a date settles only if EVERY game on the
+      # official results feed is verified final (quarters sum to the printed
+      # final). A date with a live or missing game is left open, never guessed.
+      # Exit 3 ("nothing settleable") is success for this step.
+      - name: Settle every game day that has ended (official finals only)
+        id: settle
+        continue-on-error: true
+        run: |
+          set -u
+          python3 - <<'PY' > /tmp/slates.txt
+          import glob, json, os, re
+          starts = set()
+          for p in glob.glob("data/archive/horizon_picks_*.json"):
+              m = re.search(r"horizon_picks_(\d{4}-\d{2}-\d{2})\.json$", p)
+              if m:
+                  starts.add(m.group(1))
+          print("\n".join(sorted(starts)))
+          PY
+          rc_all=0
+          while read -r slate; do
+            [ -z "${slate}" ] && continue
+            echo "=== slate ${slate} ==="
+            python3 scripts/settle_slate.py --slate "${slate}" --by "scheduled settle (refresh-data.yml)"
+            rc=$?
+            if [ "${rc}" -ne 0 ] && [ "${rc}" -ne 3 ]; then rc_all=1; fi
+          done < /tmp/slates.txt
+          python3 scripts/verify_ledger.py || rc_all=1
+          exit "${rc_all}"
+
       - name: Report why rebuilding was blocked
         if: always() && steps.build.outcome == 'skipped'
         run: |
@@ -138,7 +170,10 @@ jobs:
           # Stage only capture payloads and content-addressed injury PDFs.
           # _last_refresh.json rides along only when evidence changes, so a
           # no-change run produces no timestamp-only commit.
-          git add data/raw/_capture_*.json data/raw/injury_pdfs/ 2>/dev/null || true
+          # Settlement output is evidence, not a snapshot: it may land in the
+          # same PR when a game day ended during this run.
+          git add data/raw/_capture_*.json data/raw/injury_pdfs/ \
+                  data/settlement/ data/ledger/ledger.json 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No new capture payloads - nothing to publish."
             exit 0

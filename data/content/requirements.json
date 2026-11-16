@@ -47,16 +47,20 @@
    "id": "R03",
    "requirement": "Settle only after final scores are verified.",
    "status": "partial",
-   "evidence": "data/settlement/settlement_2026-11-14.json settles 11/14 singles, parlays and SGPs against the official finals file. ledger entry 3 records its hash. scripts/settle_2026_11_14.py performs the settlement. Updated 2026-11-16 by session arena/161f1638-nba1. The 11/15 rows that are not Final carry null score fields by rule, so no settlement can be computed from them until game-day end.",
-   "gap": "Settlement is run by hand for each slate and is not part of the scheduled job. 11/15 is due after its game day ends.",
+   "evidence": "Settlement is no longer a manual step: `.github/workflows/refresh-data.yml` runs `python3 scripts/settle_slate.py --slate <each archived pre-tip slate>` after the freshness gates and before the publish, and `scripts/settle_slate.py` refuses (exit 3) any slate with a game that is not verified final. It has settled 11/14 (data/settlement/settlement_2026-11-14.json, ledger entry 3) and refuses 11/15 correctly: at the 2026-11-15T23:45Z..23:55Z capture 6 of 9 games were final and HOU@WAS, ATL@MIL, OKC@SAC were not, so nothing was graded.",
+   "gap": "Until the workflow's first post-merge run lands, the scheduled execution of the settlement step is not yet observed in the Actions history - the step is committed and syntax-checked, and the same command is proved to work by hand. 11/15 stays unsettled while three games are unfinished, by design.",
    "links": [
     {
-     "label": "Sample final: DEN @ NOP",
-     "url": "https://www.nba.com/game/den-vs-nop-0022600231"
+     "label": "Settlement record (repo)",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/settlement/settlement_2026-11-14.json"
     },
     {
-     "label": "Settlement file",
-     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/settlement/settlement_2026-11-14.json"
+     "label": "settle_slate.py (repo)",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/settle_slate.py"
+    },
+    {
+     "label": "Scheduled refresh (repo)",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/.github/workflows/refresh-data.yml"
     }
    ]
   },
@@ -251,9 +255,9 @@
   {
    "id": "R16",
    "requirement": "Add a market-anchored prior: blend the model line with the closing line, weighted by measured out-of-sample log-loss.",
-   "status": "blocked",
-   "evidence": "No closing line or licensed price exists in the repository. The prereg files state: 'No licensed two-sided price exists (no odds feed)'.",
-   "gap": "Needs a licensed or official price source before it can be built. See flag F86.",
+   "status": "partial",
+   "evidence": "The blending rule and the measured weight now exist: `scripts/market_anchor.py` (v3) fits w on 60 out-of-sample games in docs/data/backtest.json, each carrying both estimators' pre-tip probability (p_home_model) and a reference probability (p_home_ref), by two independent proper rules with a 2,000-rep bootstrap (seed 20261116). Result: w_logloss = 0.6449 with a 95% CI of [0.0000, 1.0000], w_brier = 0.6330, log-loss 0.58730 pure model vs 0.58058 at w*, improvement 0.00672, one-sided p = 0.313, so the improvement is not significant and the published weight is 0. The output is data/derived/market_anchor.json.",
+   "gap": "Weighting is implemented and measured, but anchoring has not earned its weight: the confidence interval on w spans the whole range, so today's published blend is 100% model. The market half of the requirement stays BLOCKED on a sourced closing line: `--market` exits 5 without data/external/closing_lines.json, and the required schema is written into market_anchor.json. See F98.",
    "links": [
     {
      "label": "Prereg S01 (repo)",
@@ -299,8 +303,8 @@
    "id": "R19",
    "requirement": "Settle the sealed ledger from official finals as soon as each game day ends, and keep the settlement stamp visible.",
    "status": "partial",
-   "evidence": "The 11/14 settlement is recorded in the ledger (entry 3), and the Injuries page carries a 'settled and stamped' note.",
-   "gap": "Settlement is still manual per slate, and 11/15 is not settled: 7 of its 9 games had not reached Final at the last capture (23:55Z), so settling now would mean guessing. See F95.",
+   "evidence": "Settlement stamps stay visible: the new Official Results &amp; Settlement page renders the stamp (`settled_at_utc`, settling session, record, units) directly from data/settlement/settlement_<slate>.json and the ledger head beside it, for every settled game day, and prints 'NOT SETTLED YET' with the reason for a day that cannot be graded.",
+   "gap": "11/15 is not settled and must not be: three of its nine games were not final at the last capture. The stamp for 11/14 is live; the 11/15 stamp will appear on the first scheduled run after the last game is verified final.",
    "links": [
     {
      "label": "Settlement file (repo)",
@@ -332,17 +336,21 @@
   {
    "id": "R21",
    "requirement": "Capture per-player game logs (minutes, points, rebounds, assists, opponent) for at least the players on an injury report.",
-   "status": "missing",
-   "evidence": "data/live/player_game_logs.json has 3 players, including Nikola Jokić, with minutes, points, rebounds, assists and opponent.",
-   "gap": "The 11/15 injury edition has 101 rows, so coverage is far short of the requirement. See flag F81.",
+   "status": "partial",
+   "evidence": "Per-player logs are captured for all six finished 11/15 games from the league's own gamebook PDFs (text committed verbatim under data/official/gamebooks/, one file per game): 143 player rows, 132 of whom appeared, with MIN, PTS, REB, AST, STL, BLK, TOV, shooting splits, +/- and the DNP/DND note, plus the opponent and home/away. `scripts/capture_player_logs.py` parses them and asserts every team's player points against the official final score - 12 of 12 match - before writing data/official/player_game_logs_2026-11-15.json. The page is site/pages/player-logs.html.",
+   "gap": "Coverage is complete for the six games that finished and incomplete for the slate: 10 of the 149 players on the 06:15 PM ET injury report appear in these six gamebooks, because 139 of them play for teams whose 11/15 games were unfinished or whose next game is 11/16. A DNP player from a finished game is captured (played=false); a player from an unplayed game cannot be until his gamebook exists. See F99.",
    "links": [
     {
-     "label": "Sample player log (NBA.com)",
-     "url": "https://www.nba.com/player/203999/nikola-joki-c/game-log"
+     "label": "NBA gamebook (official source, IND@PHI)",
+     "url": "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf"
     },
     {
-     "label": "Player logs (repo)",
-     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/live/player_game_logs.json"
+     "label": "Parsed logs (repo)",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/player_game_logs_2026-11-15.json"
+    },
+    {
+     "label": "Capture script (repo)",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/capture_player_logs.py"
     }
    ]
   },

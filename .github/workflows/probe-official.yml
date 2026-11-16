@@ -39,8 +39,28 @@ permissions:
 # pending run. A probe is a reachability record, not a deliverable, so
 # dropping a superseded pending run loses nothing - the committed
 # data/raw/probe_official.json from the last completed run is still the record.
+#
+# THE REMAINING DEFECT, FIXED (session arena/d31fb422-nba1, COORDINATION §46).
+# A per-ref group still allows one running probe *per branch*, and there are
+# many arena/** branches: at 2026-11-16T02:21Z the queue held four probe runs for
+# four different refs (6e1aadc1, dfef26dc, f03745ef, 754e9e54) ahead of the
+# production "Publish static site to GitHub Pages" run for main, which had been
+# `pending` since 02:19:58Z. Serialising per ref does not bound the total, so it
+# did not fix the starvation it was written for.
+#
+# Fix: ONE global group. At most one probe runs and at most one is pending,
+# account-wide, no matter how many sessions push. cancel-in-progress stays true
+# because a probe is a reachability record and the newest run supersedes it; the
+# last completed run's committed data/raw/probe_official.json remains the record.
+#
+# LANDED CONCURRENTLY by two sessions with the same conclusion: this branch wrote
+# the identical `group: probe-official` at 02:2xZ, and main already carries it
+# via 698fd59 (session credited in the comment above; run 43790379766 was the
+# deploy seen pending with 0 jobs behind 8 probes). Both readings agree, so the
+# resolution is the one change, not two — no behavioural difference, and the
+# merge below is a no-op for this file.
 concurrency:
-  group: probe-${{ github.ref }}
+  group: probe-official
   cancel-in-progress: true
 
 jobs:
