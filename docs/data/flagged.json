@@ -884,59 +884,140 @@
   },
   {
    "id": "F98",
+   "severity": "Medium",
+   "title": "The market anchor earns no detectable weight, so the published blend is 100% model",
+   "detail": "scripts/market_anchor.py fits the blending weight w on 60 out-of-sample games (2026-11-06..11-13) whose pre-tip model and reference probabilities both exist in docs/data/backtest.json. Two proper rules were used. Log-loss picks w = 0.6449, but the 2,000-rep bootstrap 95% CI is [0.0000, 1.0000] - the whole admissible range - and the improvement over the pure model is 0.00672 with one-sided p = 0.313. Brier picks a different weight, w = 0.6330, so the two proper rules do not rank linear blends identically; an earlier reading of this repository that said they always do has been withdrawn in the output file. With a CI like that, publishing any non-zero weight would be a choice rather than a measurement, so the applied weight is 0 and the site says so.",
+   "affected": "every projected line on the site; the R16 verdict",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/market_anchor.json",
+   "suggested_action": "Do not raise the weight until the CI excludes zero. The reason the interval is this wide is sample size: 60 games cannot resolve a 0.007 log-loss difference. Re-fit as the corpus grows and only promote w when the lower bound clears 0."
+  },
+  {
+   "id": "F99",
+   "severity": "Low",
+   "title": "Player-log coverage is 10 of 149 injury-list players for 11/15, and the missing 139 are not a parser failure",
+   "detail": "data/official/player_game_logs_2026-11-15.json holds 143 player rows from the six finished games' official gamebooks: 132 players appeared and 11 were DNP/DND, all 12 team totals reconcile to the official final score. Only 10 of those rows belong to players named on the 06:15 PM ET injury report. The other 139 are on teams whose 11/15 game had not finished at capture (HOU@WAS, ATL@MIL, OKC@SAC) or whose next game is 11/16 or later. A player who did not appear in a finished game is recorded (played=false); a player whose game has not been played has no gamebook to read, so he cannot be captured yet.",
+   "affected": "R21 coverage; the injury-to-rotation cross-reference",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf",
+   "suggested_action": "Capture the three unfinished 11/15 gamebooks and the 11/16 slate's gamebooks as they post. scripts/capture_player_logs.py already handles the DNP case and the checks; only the files are missing."
+  },
+  {
+   "id": "F100",
+   "severity": "Low",
+   "title": "The official gamebook's printed team minutes do not always equal the sum of its own per-player MM:SS cells",
+   "detail": "In 4 of the 12 team blocks parsed for 11/15 the printed team total (240:00, or 265:00 with one overtime) differs from the sum of that page's per-player minutes by 1-3 seconds. This is a property of the official document, not of the parse: the box scores' points columns reconcile exactly to every final score (12 of 12), so the column alignment is right. The deltas are recorded per team in the output file's minutes_check block and the player minutes are not adjusted.",
+   "affected": "scripts/capture_player_logs.py minutes check; any minutes-based rotation share",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf",
+   "suggested_action": "Treat points as the hard reconciliation and minutes as a soft one. If a rotation share is ever computed from these, normalise to the printed team total and cite this note."
+  },
+  {
+   "id": "F101",
+   "severity": "Medium",
+   "title": "Two official captures disagree on the tip time of one 11/16 game (GSW@NOP)",
+   "detail": "The earlier official capture recorded GSW@NOP (game id 0022600251) at 09:00 PM ET. This session's fresh re-read of https://www.nba.com/games?date=2026-11-16 prints 8:00 PM ET for the same game id, and the official game page's date-grouped schedule strip agrees with 8:00 PM ET. Every other game in the window agrees once a leading-zero formatting difference is normalised (07:00 PM vs 7:00 PM ET). The fresh value is used and the disagreement is published rather than silently resolved.",
+   "affected": "data/official/official_schedule_2026-11-16_to_18_dfef26dc.json (conflicts list); the tip column on the picks and roll pages for GSW@NOP",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "suggested_action": "Make one official endpoint the single source for tip time (the per-date games page), re-read it on every refresh, and fail the refresh if two captures of the same game id disagree instead of overwriting."
+  },
+  {
+   "id": "F102",
+   "severity": "Low",
+   "title": "POR@MIN is scheduled on consecutive nights under two different game ids",
+   "detail": "The official schedule lists Portland at Minnesota on 2026-11-16 (game id 0022600250) and again on 2026-11-17 (game id 0022600254). This was confirmed on the official game page for 0022600254, whose title reads 'Portland Trail Blazers vs Minnesota Timberwolves Nov 17, 2026 Game Summary' and whose date-grouped schedule strip lists POR@MIN under both Mon Nov 16 and Tue Nov 17. It is not a parsing artefact: two independent official renderings carry it. It does mean the two teams meet twice in two nights, so their rest, back-to-back and 3-in-4 rows for the second game are computed off the first.",
+   "affected": "the 11/16 and 11/17 POR@MIN rows on the picks, lines and roll pages",
+   "source_url": "https://www.nba.com/game/por-vs-min-0022600254",
+   "suggested_action": "No action needed on the data; note it when reading rest context for either game, since the second meeting inherits the first."
+  },
+  {
+   "id": "F103",
+   "severity": "Medium",
+   "title": "A team-stat re-cut taken while a slate is in progress mixes completed and in-progress games",
+   "detail": "At 2026-11-16T02:14Z the official teams/traditional page already showed the Los Angeles Lakers at GP 14 (up from 13 in the previous capture), because their 11/15 game had gone final, while three other 11/15 games were still in progress and therefore contributed nothing. Any efficiency table cut at that moment is a mixture: some teams include an 11/15 game, some do not, and three more will change again. This session therefore cut the model from the last clean official snapshot (the 2026-11-15T23:45Z capture, taken before the 11/15 slate tipped) and published the contamination as the reason rather than cutting from a live page.",
+   "affected": "every originated line, spread, total and win probability on the site; the estimator inputs are one slate behind until the 11/15 games are all final",
+   "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season",
+   "suggested_action": "Gate the re-cut on a freshness check: refuse to promote a team-stat capture if any game on the previous slate is not yet final, and re-cut once all are."
+  },
+  {
+   "id": "F104",
+   "severity": "Medium",
+   "title": "The 2026-11-15 slate cannot be settled in full at this build, and its quarter scores were not read",
+   "detail": "Six of nine 11/15 games were final at 2026-11-16T02:16Z (IND 124 PHI 131; LAL 131 PHX 123; CHA 105 LAC 113; SAS 110 UTA 102; NYK 112 TOR 108 in overtime; DAL 94 BOS 131). Three were still in progress: HOU 132 WAS 101 in the fourth quarter, ATL 55 MIL 53 at half, OKC 13 SAC 4 in the first. The results feed stores the live score for those three but leaves the final-score cells null and marks the row not settleable, because a score that has not reached Final is not a final score. The brief asks for quarter scores per game; they were not read from the official box score in this pass, so the quarter columns are left null and flagged rather than reconstructed.",
+   "affected": "data/official/results_2026-11-15_dfef26dc.json; the 11/15 rows on the results feed and the settlement page",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "suggested_action": "Re-read the official box score for each 11/15 game after the slate completes and fill the quarter columns; settle 11/15 only then."
+  },
+  {
+   "id": "F105",
+   "severity": "Medium",
+   "title": "No official injury edition covers 11/17 or 11/18 yet, and five 11/16 teams print NOT YET SUBMITTED",
+   "detail": "The newest edition on the official index at 2026-11-16T02:14Z is the 11/15 09:00 PM report, and it carries only the 11/15 and 11/16 game dates. Teams file by 5 p.m. local the day before a game, so nothing official exists yet for 11/17 or 11/18. Within the 11/16 games, five team entries print NOT YET SUBMITTED with no player listed: WAS (v MEM), BOS (v ORL), HOU (v MIA), PHI (v BKN) and PHX (v DEN). Rotation availability for those teams is unknown, not 100%.",
+   "affected": "the rotation-availability column on the picks page; 15 of the 25 picks carry a blank availability cell for at least one team",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "suggested_action": "Re-read the injury index and the newest PDF inside the refresh job and re-cut availability on every edition, so the 11/17 and 11/18 columns fill in as the league publishes them."
+  },
+  {
+   "id": "F106",
+   "severity": "High",
+   "title": "Eleven of twenty-five picks fail a gate only because per-player minutes are not captured for one team",
+   "detail": "The minutes-redistribution gate reads the official per-player minutes leaderboard, which this repository captured as the league-wide top 50 by minutes (page 1 of 10; the URL's page parameter was not honoured by the rendered slice). Seven of the twenty-five picks fail on it outright, and the availability column is blank for further teams for the same reason. This is a capture gap, not a model verdict: the gate is measuring whether the capture exists.",
+   "affected": "CHI, MEM, SAS, CHA, MIL and others on the picks page; the availability_redistribution columns on the lines page",
+   "source_url": "https://www.nba.com/stats/players/traditional",
+   "suggested_action": "Capture per-player minutes for all thirty teams (one request per team, or the full leaders table with a working page parameter) so redistribution is computable for every game in the window."
+  },
+  {
+   "id": "F107",
    "severity": "High",
    "title": "Pages is configured to publish from a branch, so pages.yml's deploy job can never publish",
-   "detail": "The Pages API reports build_type='legacy', source={branch:'main', path:'/'}. actions/deploy-pages cannot publish to a branch-sourced site, so every run of that job is a guaranteed failure. This session's token returns HTTP 403 on PUT /repos/{owner}/{repo}/pages (build_type=workflow), so the setting cannot be changed from here. Until the owner flips it, the site is published only by GitHub's built-in branch build, which is what left the live URL serving a build from 2026-11-16T00:51:58Z while main had moved on. pages.yml now detects the configuration at run time, says so with the exact settings URL, and skips instead of failing.",
+   "detail": "[Renumbered from F98 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] The Pages API reports build_type='legacy', source={branch:'main', path:'/'}. actions/deploy-pages cannot publish to a branch-sourced site, so every run of that job is a guaranteed failure. This session's token returns HTTP 403 on PUT /repos/{owner}/{repo}/pages (build_type=workflow), so the setting cannot be changed from here. Until the owner flips it, the site is published only by GitHub's built-in branch build, which is what left the live URL serving a build from 2026-11-16T00:51:58Z while main had moved on. pages.yml now detects the configuration at run time, says so with the exact settings URL, and skips instead of failing.",
    "affected": "every published page; the live site's freshness",
    "source": "GitHub Pages API: GET /repos/wingbangboozle1-lang/NBA1/pages",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/settings/pages",
    "suggested_action": "Repository admin: Settings -> Pages -> Build and deployment -> Source -> 'GitHub Actions'. One setting. Verify with: gh api /repos/wingbangboozle1-lang/NBA1/pages --jq .build_type  (should read 'workflow')."
   },
   {
-   "id": "F99",
+   "id": "F108",
    "severity": "High",
    "title": "The 2026-11-15 slate is not settled because three of its nine games were still in progress",
-   "detail": "Read from the official games page at 2026-11-16 02:2x UTC (21:2x ET on 11/15). Final: PHI 131-124 IND (0022600236), LAL 131-123 PHX (0022600237), LAC 113-105 CHA (0022600238), SAS 110-102 UTA (0022600239), BOS 131-94 DAL (0022600240), NYK 112-108 TOR/OT (0022600241). In progress: HOU@WAS Q4 5:24 (132-102), ATL@MIL Q3 10:42 (57-53), OKC@SAC Q1 7:59 (15-4). The settlement rule requires the official page to print Final with quarter linescores summing to it, so the slate stays open rather than being settled from live scores.",
+   "detail": "[Renumbered from F99 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] Read from the official games page at 2026-11-16 02:2x UTC (21:2x ET on 11/15). Final: PHI 131-124 IND (0022600236), LAL 131-123 PHX (0022600237), LAC 113-105 CHA (0022600238), SAS 110-102 UTA (0022600239), BOS 131-94 DAL (0022600240), NYK 112-108 TOR/OT (0022600241). In progress: HOU@WAS Q4 5:24 (132-102), ATL@MIL Q3 10:42 (57-53), OKC@SAC Q1 7:59 (15-4). The settlement rule requires the official page to print Final with quarter linescores summing to it, so the slate stays open rather than being settled from live scores.",
    "affected": "data/settlement/, the ledger, the leaderboard and every pick graded against this slate",
    "source": "NBA.com official games page, 2026-11-15",
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "suggested_action": "Settle at game-day end from official finals once all nine games print Final; store one row per game with date, teams, final score and quarter scores."
   },
   {
-   "id": "F100",
-   "severity": "Medium",
-   "title": "Injury PDF bytes cannot be archived from this environment, so no SHA-256 of the original exists",
-   "detail": "The brief asks for every injury PDF to be stored with its timestamp. The sandbox has no outbound network (curl to ak-static.cms.nba.com fails at the TLS handshake: 'OpenSSL SSL_connect: SSL_ERROR_SYSCALL', HTTP 000, 0 bytes) and the agent-side fetcher returns parsed text only. What is archived instead: the edition stamp the PDF prints, the exact source URL, the UTC retrieval time, the printed row count and a full row transcription. No byte-identical copy and no content hash can exist until a runner with outbound network does the archiving.",
+   "id": "F109",
+   "severity": "Low",
+   "title": "Injury PDFs can be archived only by a runner with outbound network; the session sandbox cannot do it",
+   "detail": "MOSTLY CLOSED AT MERGE. The carry of PR #114 (arena/801ba27f-nba1) put 152 official injury PDFs into data/raw/injury_pdfs/, archived by content hash with JSON sidecars, produced by a GitHub Actions runner that has outbound network. What remains open is narrower: this session's own sandbox has no outbound network (curl to ak-static.cms.nba.com fails at the TLS handshake, HTTP 000, 0 bytes) and the agent-side fetcher returns parsed text only, so a session cannot archive a NEW edition at the moment it reads one. That is a tooling limit, not a data gap, and it now has a working path: capture inside the refresh workflow. The editions already archived cover the 11/15 cycle; anything published after that still needs a runner to archive it.",
    "affected": "data/raw/injury_pdfs/ (empty, 0 files); verifiability of every injury edition",
    "source": "measured in this session; see verify/2026-11-16-c348e6c7/capture_injury.py",
    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf",
-   "suggested_action": "Have a GitHub Actions runner (which does have outbound network) archive each edition by content hash into data/raw/injury_pdfs/ and record the SHA-256 alongside the transcription."
+   "suggested_action": "Nothing to fix in the data. If a newer edition needs archiving, run the refresh workflow (or add the fetch to it) so the archive happens on a runner."
   },
   {
-   "id": "F101",
+   "id": "F110",
    "severity": "Medium",
    "title": "Stored injury editions encode NOT YET SUBMITTED rows with an inherited player name",
-   "detail": "data/official/injury_2026-11-15_0615PM.json has a row: team='Boston Celtics', player='Penda, Noah', status='Out', reason='NOT YET SUBMITTED'. 'Penda, Noah' belongs to the preceding Orlando Magic row. NOT YET SUBMITTED is a team-level marker and the league prints no player on it, so any consumer reading the status column counts an unnamed player as ruled out for a team that had filed nothing. The consecutive-edition diff now detects this encoding in both the status and the reason field.",
+   "detail": "[Renumbered from F101 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] data/official/injury_2026-11-15_0615PM.json has a row: team='Boston Celtics', player='Penda, Noah', status='Out', reason='NOT YET SUBMITTED'. 'Penda, Noah' belongs to the preceding Orlando Magic row. NOT YET SUBMITTED is a team-level marker and the league prints no player on it, so any consumer reading the status column counts an unnamed player as ruled out for a team that had filed nothing. The consecutive-edition diff now detects this encoding in both the status and the reason field.",
    "affected": "data/official/injury_*.json; every availability calculation built on them",
    "source": "official injury PDF, 11/15/2026 06:15 PM edition",
    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf",
    "suggested_action": "Re-parse the affected editions with the rule 'a NOT YET SUBMITTED row carries no player', or null the player field on those rows; do not drop the rows, they are the record that a team had not filed."
   },
   {
-   "id": "F102",
+   "id": "F111",
    "severity": "Medium",
    "title": "The live horizon lines were cut from the 06:15 PM injury edition; Denver filed four Out players at 09:00 PM",
-   "detail": "Diffing 11/15 06:15 PM against 09:00 PM for the 11/16 games: zero player-level status changes, one team submission change. Denver submitted nothing at 06:15 PM and filed four players Out at 09:00 PM (Holmes II, Nembhard, Strawther, Whitmore) for PHX@DEN (0022600252). Five teams had still not submitted at 09:00 PM: WAS, BOS, HOU, PHI, PHX. The lines were deliberately NOT re-priced: a line re-priced after publication cannot be graded. This is the exact class of gap identified in COORDINATION §42.",
+   "detail": "[Renumbered from F102 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] Diffing 11/15 06:15 PM against 09:00 PM for the 11/16 games: zero player-level status changes, one team submission change. Denver submitted nothing at 06:15 PM and filed four players Out at 09:00 PM (Holmes II, Nembhard, Strawther, Whitmore) for PHX@DEN (0022600252). Five teams had still not submitted at 09:00 PM: WAS, BOS, HOU, PHI, PHX. The lines were deliberately NOT re-priced: a line re-priced after publication cannot be graded. This is the exact class of gap identified in COORDINATION §42.",
    "affected": "the PHX@DEN line; every pick or parlay containing it",
    "source": "official injury PDFs, 11/15/2026 06:15 PM and 09:00 PM editions",
    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf",
    "suggested_action": "Reader decision, recorded as a suggestion: re-cut unpublished future slates from the newest edition, and treat PHX@DEN as carrying a known unpriced availability gap."
   },
   {
-   "id": "F103",
+   "id": "F112",
    "severity": "Low",
    "title": "Sacramento's standings row was only partially read on 2026-11-16",
-   "detail": "The standings page fetch returned the Sacramento Kings row split across a chunk boundary, so only its W-L (1-11, confirmed separately from the official 11/18 games page) was captured. The remaining cells - win%, GB, conference, division, home, road, neutral, OT, last-10 and streak - are recorded as null with a reason rather than inferred.",
+   "detail": "[Renumbered from F103 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] The standings page fetch returned the Sacramento Kings row split across a chunk boundary, so only its W-L (1-11, confirmed separately from the official 11/18 games page) was captured. The remaining cells - win%, GB, conference, division, home, road, neutral, OT, last-10 and streak - are recorded as null with a reason rather than inferred.",
    "affected": "verify/2026-11-16-c348e6c7/standings_live.json; any standings-derived figure touching SAC",
    "source": "NBA.com official standings",
    "source_url": "https://www.nba.com/standings",

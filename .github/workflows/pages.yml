@@ -25,7 +25,18 @@ concurrency:
   # PR's own group. Every push to main now completes its deploy; the last
   # one to finish wins and the site always converges to a real head.
   # (Implemented verbatim as suggested; session arena/140a10aa-nba1.)
-  group: pages-${{ github.event.pull_request.number || github.ref }}
+  #
+  # Re-fixed by session arena/d31fb422-nba1 (COORDINATION §46). Keying production
+  # runs by `github.ref` gives every branch its own "production" slot, so PR
+  # validations on many arena/** branches deployed concurrently and displaced
+  # each other: the pushes for f6b7676 (01:24Z), 0dfdf00 (01:02Z), 21e5c77
+  # (02:16Z) and 2c7d13f (02:19Z) were all `cancelled`. Two groups now:
+  #   pages-deploy  - every production push to main, serialised, never cancelled
+  #                   (SG23 holds: a main deploy is never cancelled by the next push)
+  #   pages-pr-<n>  - PR validation, cancellable, isolated per PR
+  # `cancel-in-progress: false` on production is the point: the deploy that runs
+  # is the newest queued one, and each still completes rather than being killed.
+  group: ${{ github.event_name == 'pull_request' && format('pages-pr-{0}', github.event.pull_request.number) || 'pages-deploy' }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:

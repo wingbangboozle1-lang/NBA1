@@ -1667,6 +1667,19 @@ def main():
     hz_n = len(hz_games)
     hz_priced = sum(1 for x in hz_p["singles"] if (x.get("pick") or {}).get("pick_line"))
     hz_label = _window_label(sorted({g["date"] for g in hz_games}))
+    # E05 (arena/dfef26dc-nba1): the v2 model is the one that is published, so
+    # the tile reports its gate result rather than the v1 count alone.  v2 is
+    # the two-estimator cut with the home-court advantage pinned to the
+    # measured official home-win rate; every number below is read from the
+    # generated files, never typed in.
+    try:
+        v2 = load(os.path.join(ROOT, "data", "derived", "horizon_picks_v2.json"))
+        v2_rows = v2["picks"]
+        v2_pass = sum(1 for x in v2_rows if x.get("gate_verdict") == "PASS")
+        v2_pub = sum(1 for x in v2_rows
+                     if str(x.get("publication_verdict", "")).startswith("PASS - publishable"))
+    except Exception:
+        v2_rows, v2_pass, v2_pub = [], 0, 0
     lab_label = _window_label(horizon)
     body.append(tiles([
         ("Games in horizon (%s)" % hz_label, hz_n,
@@ -1674,8 +1687,11 @@ def main():
         ("Originated lines", hz_n, "spread, total and fair moneyline per game"),
         ("Paper picks, single-leg", n_singles,
          "%d of %d games &middot; +%d two-leg combos = %d plays in the strategy-lab window (%s); "
-         "the %s roll publishes %d priced singles on the picks page"
-         % (n_games_with_pick, n_games, n_leg_combo, n_picks, lab_label, hz_label, hz_priced)),
+         "the %s roll prices %d singles, of which %d clear every model gate and "
+         "%d are publishable outright - the rest are provisional because no "
+         "official injury edition covers the game date yet"
+         % (n_games_with_pick, n_games, n_leg_combo, n_picks, lab_label, hz_label,
+            len(v2_rows), v2_pass, v2_pub)),
         ("Strategies tested", len(lb["rows"]), "%d capped at a quarter unit &middot; %d research-only"
          % (sum(1 for r in lb["rows"] if "Not funded" not in r["tier"]),
             sum(1 for r in lb["rows"] if "Not funded" in r["tier"]))),
@@ -2858,6 +2874,14 @@ def main():
     # page only, so the two builders never both claim requirements.html.
     import build_roll_page as _roll
     built.update(_roll.build(sys.modules[__name__]))
+
+    # === results feed + settlement stamp, and the player game logs =============
+    # (session arena/d31fb422-nba1, COORDINATION §46). Both pages read only
+    # committed files and are regenerated on every build, so a settlement that
+    # lands in the same run is visible immediately and a page cannot go stale.
+    import build_results_page as _res
+    built["results.html"] = _res.results_page()
+    built["player-logs.html"] = _res.player_logs_page()
 
     # ------------------------------------------------------------------ write
     for name, html in built.items():

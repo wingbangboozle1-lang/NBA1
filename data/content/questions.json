@@ -136,6 +136,27 @@
    "source": null,
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "confidence": "High - a direct transcription of the league's own document, with the row count and per-club status reproducible from the URL on the row."
+  },
+  {
+   "id": "A18",
+   "question": "What is the measured home-win rate, and how many points of home-court advantage is it worth?",
+   "answer": "The official standings HOME/ROAD columns, summed across all 30 teams at 2026-11-16T02:13Z, give 102 home wins in 193 home games: a 0.5285 home-win rate. Two internal cross-checks hold - home wins (102) equals road losses (102), and road wins (91) equals home losses (91) - so the sum is internally consistent. The final-score corpus measures it independently at 0.5155 (83 of 161 completed games) and is published beside it as a cross-check rather than replacing it. With the measured margin dispersion of 17.24 points, HCA = sigma x Phi-inverse(0.5285) = 1.23 points. Nothing about that number is fitted: it is read off the measurement. The previous cut used 0.5319, so the measurement moved 0.34 percentage points between two captures two and a half hours apart.",
+   "source": "official standings HOME/ROAD columns and the official final-score corpus",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "id": "A19",
+   "question": "Do the two independent estimators agree well enough for the lines to be published?",
+   "answer": "Across the 25 games in the 11/16-11/18 window the two estimators disagree by at most 1.37 percentage points of home-win probability, with a mean of 0.45. The gate is 4.0 percentage points, so all 25 games clear it. That disagreement is what the site publishes as the headline confidence signal; the blend sits underneath it rather than the other way round.",
+   "source": "data/derived/horizon_lines_v2.json",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "id": "A20",
+   "question": "What is the measured correlation used to price parlays, and how much does it move the price?",
+   "answer": "Measured on the official final-score corpus: home points against away points 0.0823; margin against total -0.0115; home points against total 0.732. The first two are near zero, so legs on different games are close to independent and the naive product is nearly right for cross-game parlays. Home points against total at 0.732 is not, which is exactly the same-game-parlay case - so the site prints the rho-priced figure next to the naive product and lets the difference show, rather than withholding the price.",
+   "source": "data/derived/model_report_v2.json (measured_correlations)",
+   "source_url": "https://www.nba.com/games?date=2026-11-15"
   }
  ],
  "open": [
@@ -327,6 +348,46 @@
    "why_it_matters": "It changes reported units materially (SGP-2 of 2026-11-14 pays +3.36u at the model fair price vs +2.64u at -110 legs).",
    "discovery": "No market price exists (G-PROP blocked), so any convention is a placeholder. We publish both numbers on the ticket (frozen price and independent product beside it) and settle at the frozen model price, printed on every ticket. Open until a licensed price feed exists (then G4/G5 rules apply).",
    "status": "open"
+  },
+  {
+   "id": "Q26",
+   "question": "How much does a completed slate move the model inputs?",
+   "what_is_missing": "A clean re-cut after 2026-11-15. Three games on that slate were still in progress at 02:16Z on 11/16 (HOU@WAS in the fourth quarter, ATL@MIL at half, OKC@SAC in the first), so the efficiency tables cannot yet be re-read consistently (F103).",
+   "how_to_answer": "Once every 11/15 game is final, re-read the three official team-stat pages, re-cut, and publish the drift between the new cut and the inputs behind the currently published lines.",
+   "blocks": "Confidence that the published lines rest on the freshest consistent inputs",
+   "source_url": "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season"
+  },
+  {
+   "id": "Q27",
+   "question": "Is the measured home-win rate stable enough to pin to?",
+   "what_is_missing": "A time series. Two captures two and a half hours apart gave 0.5319 and 0.5285 - a 0.34 point move on a 193-game sample. That is within noise, but the stability of the measurement has never been tracked across a season.",
+   "how_to_answer": "Record the measured home-win rate at every refresh and publish the series with its sample size, so pinning can be tested for drift instead of assumed sound.",
+   "blocks": "Whether pinning HCA to one measurement beats fitting it freely",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "id": "Q28",
+   "question": "How much does rotation availability move a line once the league publishes it?",
+   "what_is_missing": "Official injury editions for 11/17 and 11/18, plus five 11/16 team entries that still print NOT YET SUBMITTED (WAS, BOS, HOU, PHI, PHX). Fifteen of the twenty-five picks carry a blank availability cell for at least one team (F105).",
+   "how_to_answer": "Re-read the injury index at each refresh, re-cut the availability column only, and compare the line before and after for every game where availability changed.",
+   "blocks": "Whether availability belongs in the line at all, and at what weight",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/"
+  },
+  {
+   "id": "Q29",
+   "question": "Are the two POR@MIN meetings on consecutive nights independent observations?",
+   "what_is_missing": "Nothing in the data - the official schedule genuinely lists Portland at Minnesota on both 11/16 (game 0022600250) and 11/17 (game 0022600254), confirmed on the official game page (F102). What is missing is a convention for treating them.",
+   "how_to_answer": "Decide and register whether two meetings of the same teams within 48 hours count as one observation or two in the backtest and in the correlation measurement. Today they are counted as two.",
+   "blocks": "Backtest sample size, the rho estimates, and any parlay that contains both games",
+   "source_url": "https://www.nba.com/game/por-vs-min-0022600254"
+  },
+  {
+   "id": "Q30",
+   "question": "Which official endpoint should tip time come from, and what happens when two captures disagree?",
+   "what_is_missing": "A designated source and a conflict rule. Two official captures disagree on GSW@NOP (09:00 PM ET against 8:00 PM ET); the newest one silently wins today (F101).",
+   "how_to_answer": "Name the per-date games page as the source, normalise the format, and have the refresh record a conflict row whenever two captures of one game id differ instead of overwriting (SG33).",
+   "blocks": "Any downstream use of tip time - rest windows, pre-tip publication, and the ledger's publish-before-tip rule",
+   "source_url": "https://www.nba.com/games?date=2026-11-16"
   }
  ]
 }
