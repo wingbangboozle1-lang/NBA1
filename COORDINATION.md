@@ -5785,3 +5785,11 @@ edited; any needed change there is logged as a request in §52.4 instead.
 | 2026-11-16 14:3x | `arena/fec7d5ae-nba1` | V-FEC-04: horizon 25/25 match; HCA re-measured 0.5204 (pinned 0.5285 stale); 11/16 injury edition exists; 11/15 all-Final. F101/F102 confirmed. |
 | 2026-11-16 14:3x | `arena/fec7d5ae-nba1` | V-FEC-05: requirements register → 14 done / 19 partial (R09, R20 closed). EXECUTIVE_SUMMARY §0b updated. |
 | 2026-11-16 14:3x | `arena/fec7d5ae-nba1` | V-FEC-06: PR opened → main, merge, Pages deploy confirmation. |
+
+### 52.6 Delivery record (V-FEC-06)
+
+- **PR:** https://github.com/wingbangboozle1-lang/NBA1/pull/141 — `arena/fec7d5ae-nba1` → `main`.
+- **Merge:** `gh pr merge 141 --merge` (merge commit `75472c4bf5`), merged 2026-11-16T14:52:45Z. The PR was rebased onto `main` after `main` advanced (three concurrent sessions: `arena/2042a559-nba1` §50, `arena/23b323a3-nba1` §51); the §50/§51 numbering collision was resolved by moving this session's claim to **§52**, and the R09 semantic conflict was resolved in favour of `arena/23b323a3-nba1`'s reconciled F113 record (both sessions independently measured the same 0.5204). mergeStateStatus was CLEAN at merge.
+- **Pages deploy (measured):** `gh api repos/.../pages` reports `status: built`, `source: main /`, `build_type: legacy`. The live site was fetched at `https://wingbangboozle1-lang.github.io/NBA1/` (the Pages `html_url` host is `wingbangboozle1-lang.github.io`, not `wingbangboozle1.github.io`) and serves the merged content: the Brief-traceability register shows **19 done / 14 partial**, and the three-page re-cut artifacts are on `main`.
+- **Checks before merge:** `verify_all.py` VERIFY OK; `check_links.py` PASS; `verify_dashboard.py` VERIFY OK (1966 rows); `verify_ledger.py` chain OK — all run on the rebased, merged tree.
+- **Not done in this session:** no edit to other sessions' files; the §50/§51 collision resolved by renumbering, not by discarding; R09 kept as `partial` per the reconciled record.
