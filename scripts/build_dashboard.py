@@ -1923,11 +1923,68 @@ def main():
     built["index.html"] = landing
 
     # === picks =============================================================
-    b = [h2("Originated lines for every game in the horizon",
+    # R08/R13: the headline confidence signal is the DISAGREEMENT between two
+    # independent estimators, never a single blended rating (the blend is printed
+    # underneath). Estimator rows come from the box-score re-cut
+    # (data/derived/estimators_2026_27.json), joined here by official game_id -
+    # no value is recomputed or re-priced on this page.
+    _est_all = load(os.path.join(ROOT, "data", "derived", "estimators_2026_27.json"))
+    _est_by_gid = {r["game_id"]: r for r in _est_all.get("rows", []) if r.get("game_id")}
+    _lucky = load(os.path.join(ROOT, "data", "derived", "luck_2026_27.json"))
+    _lz = {r["team"]: r.get("luck_z") for r in _lucky.get("rows", [])}
+    _rot = load(os.path.join(ROOT, "data", "derived", "rotation_2026_27.json"))
+    _consts = load(os.path.join(ROOT, "data", "derived", "measured_constants_2026_27.json"))
+    _rho_doc = load(os.path.join(ROOT, "data", "derived", "rho_2026_27.json"))
+
+    _est_here = [_est_by_gid[r["game_id"]] for r in lines if r.get("game_id") in _est_by_gid]
+    if _est_here:
+        _n = len(_est_here)
+        _mean_abs = sum(abs(r["disagreement_spread"]) for r in _est_here) / _n
+        _mx = max(_est_here, key=lambda r: abs(r["disagreement_spread"]))
+        _head = (banner("info", "Headline signal - estimator disagreement (R08/R13)",
+                 "<p>The primary confidence signal is the <b>disagreement between two independent "
+                 "estimators</b>, not any single blended rating. On the %d horizon games with "
+                 "estimator rows, mean |spread disagreement| is <b>%.2f points</b> (largest %.1f "
+                 "on %s @ %s). E1 is possessions &times; points-per-possession from the official "
+                 "team-stat re-cut; E2 is a least-squares power rating on official final margins "
+                 "with HCA pinned to the measured home-win rate. The 50/50 blend is printed "
+                 "<i>underneath</i> the disagreement in every row and is never the headline. "
+                 "Full rows: <a href=\"estimators.html\">Two estimators</a>, "
+                 "<a href=\"roll.html\">rolling slate</a>, "
+                 "<a href=\"../../model-v2.html\">model v2</a>.</p>"
+                 % (_n, _mean_abs, abs(_mx["disagreement_spread"]),
+                    esc(_mx["away"]), esc(_mx["home"]))))
+    else:
+        _head = (banner("warn", "Headline signal - estimator disagreement (R08/R13)",
+                 "<p>No estimator rows cover this window's games; blank, never inferred. See "
+                 "<a href=\"estimators.html\">Two estimators</a> for the games they "
+                 "do cover.</p>"))
+    b = [_head,
+         banner("info", "Measured home-court advantage (R09)",
+                "<p>HCA is <b>not fitted</b>. It is pinned to the measured home-win rate: "
+                "<b>%s points</b>, the points equivalent of the measured home-win rate <b>%s</b> "
+                "on %s official finals (<a href=\"../../data/derived/measured_constants_2026_27.json"
+                "\">measured constants</a>). The strategy-lab window rows below were cut under "
+                "the earlier no-HCA convention (documented on each row); windows cut from "
+                "2026-11-16 forward pin HCA to the measured value, and the E1/E2 column already "
+                "carries it.</p>"
+                % (esc(_consts.get("home_court_points")), esc(_consts.get("home_win_rate")),
+                   esc(_consts.get("n_final_games")))),
+         h2("Originated lines for every game in the horizon",
             "Spread, total and fair moneyline originated from official team ratings, shown against the naive "
-            "reference line the model has to beat.")]
+            "reference line the model has to beat. The estimator disagreement column is the headline confidence "
+            "signal; the blend is printed underneath it, never above.")]
     rows = []
     for r in lines:
+        e = _est_by_gid.get(r.get("game_id"))
+        if e:
+            est_cell = ("E1 %s / E2 %s &middot; <b>&Delta; %s</b><br><small>blend %s / %s "
+                        "(underneath, never the headline)</small>"
+                        % (num(e["e1_spread_home"]), num(e["e2_spread_home"]),
+                           num(e["disagreement_spread"]), num(e["blend_spread_home"]),
+                           num(e["blend_total"])))
+        else:
+            est_cell = NA
         rows.append([
             esc(r["date"]), esc(r["time_et"]), '<b>%s</b>' % esc(r["matchup"]),
             esc(r["away_rec"]), esc(r["home_rec"]), esc(r.get("venue")),
@@ -1935,6 +1992,7 @@ def main():
             ("%+.2f" % r["spread_edge"]) if r["spread_edge"] is not None else NA,
             num(r["ref_total"]), num(r["model_total"]),
             ("%+.2f" % r["total_edge"]) if r["total_edge"] is not None else NA,
+            est_cell,
             num(r["p_home_win"], 3),
             esc(r["ml_home_fair"]) if r["ml_home_fair"] is not None else NA,
             esc(r["ml_away_fair"]) if r["ml_away_fair"] is not None else NA,
@@ -1945,7 +2003,8 @@ def main():
         ])
     b.append(table(
         ["Date", "Tip ET", "Matchup", "Away", "Home", "Venue", "Ref home margin", "Model home margin",
-         "Spread edge", "Ref total", "Model total", "Total edge", "P(home)", "Fair ML home",
+         "Spread edge", "Ref total", "Model total", "Total edge",
+         "Two estimators: E1 / E2 &middot; disagreement (headline)", "P(home)", "Fair ML home",
          "Fair ML away", "Rest days H/A", "Home injury status", "Away injury status", "Source"],
         rows,
         note="SIGN CONVENTION: 'Ref spread' and 'Model spread' are both the projected HOME MARGIN (home minus away), "
@@ -1954,25 +2013,67 @@ def main():
              "cell for cell). Fair moneyline is the model's own break-even "
              "price (no market price is used). Rest days: number of days since that team's previous game, taken "
              "from the official schedule; a blank means the team's previous game falls outside the captured "
-             "window. Injury status is the official report read-out for that team on that date."))
+             "window. Injury status is the official report read-out for that team on that date. The estimator "
+             "column joins data/derived/estimators_2026_27.json by official game_id (blank where no row exists); "
+             "its HCA is pinned to the measured home-win rate."))
 
-    b.append(h2("Paper picks", "Every play the strategy library produced for the horizon, with its gate status."))
+    # R15: rotation availability as its own column, and R14: every multi-leg
+    # price printed with the naive product beside it.
+    def _team_avail(team, when=None):
+        t = (_rot.get("teams") or {}).get(team)
+        if not t or not t.get("top8"):
+            return None
+        avail = sum((pl.get("minutes_share") or 0.0) for pl in t["top8"])
+        return avail  # no per-game absence applied here: the label says measured top-8 coverage
+
+    b.append(h2("Paper picks", "Every play the strategy library produced for the horizon, with its gate status. "
+                               "Rotation availability (R15) is its own column: the measured top-8 minutes share "
+                               "of the leaned-on team, from official box scores. Multi-leg prices print the "
+                               "rho-priced joint and the naive product side by side (R14)."))
     prows = []
     for r in picks["rows"]:
+        if r.get("team"):
+            av = _team_avail(r["team"])
+            rot_cell = ("%s: %.0f%% of team minutes in the measured top-8"
+                        % (esc(r["team"]), 100.0 * av)) if av is not None else NA
+        elif r.get("n_legs", 1) > 1:
+            rot_cell = "multi-game ticket: per-game availability on the bet surface"
+        else:
+            rot_cell = NA
+        if r.get("n_legs", 1) > 1 and r.get("p_if_independent") is not None:
+            price_cell = ("joint %s <small>(rho %s)</small> &middot; <b>naive product %s</b>"
+                          % (num(r["p_model"], 3), num(r.get("rho"), 2),
+                             num(r["p_if_independent"], 3)))
+        else:
+            price_cell = num(r["p_model"], 3)
         prows.append([
             esc(r["date"]), '<b>%s</b>' % esc(r["matchup"]), esc(r["strategy"]),
             esc(r["market"]), esc(r["side"]), esc(r["line_display"]),
             num(r["model_value"]), num(r["ref_line"]),
             ("%+.2f" % r["edge"]) if r["edge"] is not None else NA,
-            num(r["p_model"], 3), str(r["n_legs"]), esc(r["status"]),
+            price_cell, rot_cell, str(r["n_legs"]), esc(r["status"]),
             srclink(sources, "S1"),
         ])
     b.append(table(
         ["Date", "Matchup", "Strategy", "Market", "Side", "Line", "Model value", "Ref line",
-         "Edge", "P(model)", "Legs", "Status", "Source"],
+         "Edge", "P(joint, rho) / naive product", "Rotation availability (R15)", "Legs",
+         "Status", "Source"],
         prows,
         note="Status is PENDING for every row: these games have not been played yet, so no result exists and "
-             "none is written. A settled record and ROI column stays blank until an official final score exists."))
+             "none is written. A settled record and ROI column stays blank until an official final score exists. "
+             "R14: every multi-leg price prints its rho-priced joint beside the naive independent product of its "
+             "frozen leg prices - nothing is withheld. The rho used at the cut is printed with each row (the "
+             "strategy-lab window was cut with rho = 0.0 before the correlations were measured); the measured "
+             "values now live in data/derived/rho_2026_27.json (same-game side/total %s on n = %s, cross-game %s) "
+             "and price every window cut from 2026-11-16 forward. R15: rotation availability is the measured "
+             "top-8 minutes share of the leaned-on team from official box scores (data/derived/rotation_2026_27"
+             ".json); a per-game absence adjustment is published on the bet surface and the rolling slate."
+             % (num([m for m in _rho_doc.get("measured", []) if "side" in m.get("pair", "")][0]["rho"], 4)
+                if any("side" in m.get("pair", "") for m in _rho_doc.get("measured", [])) else NA,
+                [m.get("n") for m in _rho_doc.get("measured", []) if "side" in m.get("pair", "")][0]
+                if any("side" in m.get("pair", "") for m in _rho_doc.get("measured", [])) else "?",
+                num([m for m in _rho_doc.get("measured", []) if "cross-game" in m.get("pair", "")][0]["rho"], 4)
+                if any("cross-game" in m.get("pair", "") for m in _rho_doc.get("measured", [])) else NA)))
 
     b.append(card("How a pick becomes a pick",
                    "<p>Each strategy is a rule over the originated lines. A play is only published when the "

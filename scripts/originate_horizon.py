@@ -99,6 +99,11 @@ def norm_cdf(z):
     return 0.5 * (1.0 + math.erf(z / math.sqrt(2.0)))
 
 
+def _norm_ppf(p):
+    from statistics import NormalDist
+    return NormalDist().inv_cdf(p)
+
+
 def d(s):
     y, m, dd = map(int, s.split("-"))
     return date(y, m, dd)
@@ -260,13 +265,44 @@ def main():
                 % (INJ_EDITION, INJ_REVISION, INJ_RETRIEVED), detail)
 
     out_games = []
+    # ---- R09: home-court advantage pinned to the MEASURED home-win rate --------
+    # Not fitted: HCA is the points equivalent of the measured home-win rate on
+    # official finals, sigma_margin * Phi^-1(home_win_rate), exactly as published
+    # in data/derived/measured_constants_2026_27.json (built from the official
+    # per-game results feed). Loaded at run time; if the constants file is
+    # missing the value is re-measured here from the same official feed, never
+    # assumed.
+    _consts_path = os.path.join(ROOT, "data", "derived", "measured_constants_2026_27.json")
+    if os.path.exists(_consts_path):
+        _mc = json.load(open(_consts_path))
+        hca_points = float(_mc["home_court_points"])
+        hca_rate = float(_mc["home_win_rate"])
+        hca_n = int(_mc.get("n_final_games", 0))
+        hca_rule = _mc.get("home_court_rule", "measured home-win rate")
+    else:
+        _feed = json.load(open(os.path.join(ROOT, "data", "official",
+                                            "results_feed_2026_27.json")))
+        _rows = _feed.get("games", _feed.get("rows", _feed if isinstance(_feed, list) else []))
+        _fin = [r for r in _rows if r.get("game_status") == 3]
+        _hw = sum(1 for r in _fin if (r.get("home_pts") or 0) > (r.get("away_pts") or 0))
+        hca_rate = _hw / len(_fin) if _fin else None
+        hca_n = len(_fin)
+        hca_points = round(margin_sd * _norm_ppf(hca_rate), 3) if hca_rate else None
+        hca_rule = ("HCA is NOT fitted. It is the points equivalent of the measured "
+                    "home-win rate: sigma_margin * Phi^-1(home_win_rate).")
     for g in games:
         h, a = adv[g["home"]], adv[g["away"]]
         poss = h["pace"] + a["pace"] - league_pace
         pts_h = (h["off_rtg"] * a["def_rtg"] / league_off) * poss / 100.0
         pts_a = (a["off_rtg"] * h["def_rtg"] / league_off) * poss / 100.0
         total = pts_h + pts_a
-        spread = pts_h - pts_a
+        # HCA is a MARGIN adjustment pinned to the measured home-win rate: it
+        # moves the projected home margin, never the projected total. The side
+        # scores are re-split around the unchanged total so that
+        # home - away = spread and home + away = total on every published row.
+        spread = pts_h - pts_a + (hca_points or 0.0)
+        pts_h = (total + spread) / 2.0
+        pts_a = (total - spread) / 2.0
 
         rest_a, b2b_a, last_a = rest_for(g["away"], g["date"])
         rest_h, b2b_h, last_h = rest_for(g["home"], g["date"])
@@ -295,7 +331,11 @@ def main():
             "line_spread_home": round(round(pts_h, 1) - round(pts_a, 1), 1),
             "total_sd": round(total_sd, 2),
             "margin_sd": round(margin_sd, 2),
-            "home_court_applied": False,
+            "home_court_applied": True,
+            "home_court_points": hca_points,
+            "home_court_rate": hca_rate,
+            "home_court_n_finals": hca_n,
+            "home_court_rule": hca_rule,
             "line_status": "DERIVED",
             "formula": ("POSS = pace_home + pace_away - league_pace; "
                         "PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; "
@@ -370,12 +410,16 @@ def main():
                            "IDs (verified in the per-game link URLs on 2026-11-15); carried "
                            "as printed and flagged for manual confirmation.",
                  "source": CAPTURE_SOURCE},
-                {"id": "F-W02", "severity": "high (inherited)",
-                 "item": "No home-court advantage in any line.",
-                 "detail": "HCA could not be sourced from an official NBA page; home moneylines "
-                           "are understated by exactly the real HCA. (Build B's measured "
-                           "home-win-rate 57.6% note remains a published finding, not applied.)",
-                 "source": CAPTURE_SOURCE},
+                {"id": "F-W02", "severity": "info (resolved for windows cut from 2026-11-16)",
+                 "item": "Home-court advantage is pinned to the MEASURED home-win rate and "
+                         "applied to every line in this file.",
+                 "detail": f"HCA = {hca_points} points, the points equivalent of the measured "
+                           f"home-win rate {hca_rate} on {hca_n} official finals "
+                           f"(sigma_margin * Phi^-1(rate) - not fitted; see "
+                           f"data/derived/measured_constants_2026_27.json). Historical windows "
+                           f"cut before 2026-11-16 carry no HCA and keep their own flags; their "
+                           f"frozen lines are never re-priced.",
+                 "source": "https://www.nba.com/games"},
                 {"id": "F-W03", "severity": "medium",
                  "item": f"Inputs dated, disclosed: ratings re-cut from the official captures "
                          f"retrieved {adv_cut_retrieved}; records captured "
