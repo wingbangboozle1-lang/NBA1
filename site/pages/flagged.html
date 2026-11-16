@@ -52,6 +52,7 @@
 <a href="source-check.html">Official Source Check</a>
 <a href="official-verify.html">Live Re-verification</a>
 <a href="verify-2026-11-15.html">Nov 15 re-verification</a>
+<a href="verify-2026-11-16.html">Nov 16 re-verification</a>
 </div>
 <div class="nav-group"><h3>DECISION</h3>
 <a href="questions.html">Open Questions</a>
@@ -933,6 +934,60 @@
 <td>every published page; any claim about what the live site currently shows</td>
 <td>Either serialize merges to main (a merge queue) so each deploy completes, or verify against the main tree and the Actions run log rather than a live fetch-back while several sessions are pushing.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/actions/workflows/pages.yml" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F98</td>
+<td>High</td>
+<td><b>Pages is configured to publish from a branch, so pages.yml's deploy job can never publish</b></td>
+<td>The Pages API reports build_type='legacy', source={branch:'main', path:'/'}. actions/deploy-pages cannot publish to a branch-sourced site, so every run of that job is a guaranteed failure. This session's token returns HTTP 403 on PUT /repos/{owner}/{repo}/pages (build_type=workflow), so the setting cannot be changed from here. Until the owner flips it, the site is published only by GitHub's built-in branch build, which is what left the live URL serving a build from 2026-11-16T00:51:58Z while main had moved on. pages.yml now detects the configuration at run time, says so with the exact settings URL, and skips instead of failing.</td>
+<td>every published page; the live site's freshness</td>
+<td>Repository admin: Settings -&gt; Pages -&gt; Build and deployment -&gt; Source -&gt; 'GitHub Actions'. One setting. Verify with: gh api /repos/wingbangboozle1-lang/NBA1/pages --jq .build_type  (should read 'workflow').</td>
+<td class="src"><span class="na" title="source id GitHub Pages API: GET /repos/wingbangboozle1-lang/NBA1/pages is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F99</td>
+<td>High</td>
+<td><b>The 2026-11-15 slate is not settled because three of its nine games were still in progress</b></td>
+<td>Read from the official games page at 2026-11-16 02:2x UTC (21:2x ET on 11/15). Final: PHI 131-124 IND (0022600236), LAL 131-123 PHX (0022600237), LAC 113-105 CHA (0022600238), SAS 110-102 UTA (0022600239), BOS 131-94 DAL (0022600240), NYK 112-108 TOR/OT (0022600241). In progress: HOU@WAS Q4 5:24 (132-102), ATL@MIL Q3 10:42 (57-53), OKC@SAC Q1 7:59 (15-4). The settlement rule requires the official page to print Final with quarter linescores summing to it, so the slate stays open rather than being settled from live scores.</td>
+<td>data/settlement/, the ledger, the leaderboard and every pick graded against this slate</td>
+<td>Settle at game-day end from official finals once all nine games print Final; store one row per game with date, teams, final score and quarter scores.</td>
+<td class="src"><span class="na" title="source id NBA.com official games page, 2026-11-15 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F100</td>
+<td>Medium</td>
+<td><b>Injury PDF bytes cannot be archived from this environment, so no SHA-256 of the original exists</b></td>
+<td>The brief asks for every injury PDF to be stored with its timestamp. The sandbox has no outbound network (curl to ak-static.cms.nba.com fails at the TLS handshake: 'OpenSSL SSL_connect: SSL_ERROR_SYSCALL', HTTP 000, 0 bytes) and the agent-side fetcher returns parsed text only. What is archived instead: the edition stamp the PDF prints, the exact source URL, the UTC retrieval time, the printed row count and a full row transcription. No byte-identical copy and no content hash can exist until a runner with outbound network does the archiving.</td>
+<td>data/raw/injury_pdfs/ (empty, 0 files); verifiability of every injury edition</td>
+<td>Have a GitHub Actions runner (which does have outbound network) archive each edition by content hash into data/raw/injury_pdfs/ and record the SHA-256 alongside the transcription.</td>
+<td class="src"><span class="na" title="source id measured in this session; see verify/2026-11-16-c348e6c7/capture_injury.py is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F101</td>
+<td>Medium</td>
+<td><b>Stored injury editions encode NOT YET SUBMITTED rows with an inherited player name</b></td>
+<td>data/official/injury_2026-11-15_0615PM.json has a row: team='Boston Celtics', player='Penda, Noah', status='Out', reason='NOT YET SUBMITTED'. 'Penda, Noah' belongs to the preceding Orlando Magic row. NOT YET SUBMITTED is a team-level marker and the league prints no player on it, so any consumer reading the status column counts an unnamed player as ruled out for a team that had filed nothing. The consecutive-edition diff now detects this encoding in both the status and the reason field.</td>
+<td>data/official/injury_*.json; every availability calculation built on them</td>
+<td>Re-parse the affected editions with the rule 'a NOT YET SUBMITTED row carries no player', or null the player field on those rows; do not drop the rows, they are the record that a team had not filed.</td>
+<td class="src"><span class="na" title="source id official injury PDF, 11/15/2026 06:15 PM edition is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F102</td>
+<td>Medium</td>
+<td><b>The live horizon lines were cut from the 06:15 PM injury edition; Denver filed four Out players at 09:00 PM</b></td>
+<td>Diffing 11/15 06:15 PM against 09:00 PM for the 11/16 games: zero player-level status changes, one team submission change. Denver submitted nothing at 06:15 PM and filed four players Out at 09:00 PM (Holmes II, Nembhard, Strawther, Whitmore) for PHX@DEN (0022600252). Five teams had still not submitted at 09:00 PM: WAS, BOS, HOU, PHI, PHX. The lines were deliberately NOT re-priced: a line re-priced after publication cannot be graded. This is the exact class of gap identified in COORDINATION §42.</td>
+<td>the PHX@DEN line; every pick or parlay containing it</td>
+<td>Reader decision, recorded as a suggestion: re-cut unpublished future slates from the newest edition, and treat PHX@DEN as carrying a known unpriced availability gap.</td>
+<td class="src"><span class="na" title="source id official injury PDFs, 11/15/2026 06:15 PM and 09:00 PM editions is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F103</td>
+<td>Low</td>
+<td><b>Sacramento's standings row was only partially read on 2026-11-16</b></td>
+<td>The standings page fetch returned the Sacramento Kings row split across a chunk boundary, so only its W-L (1-11, confirmed separately from the official 11/18 games page) was captured. The remaining cells - win%, GB, conference, division, home, road, neutral, OT, last-10 and streak - are recorded as null with a reason rather than inferred.</td>
+<td>verify/2026-11-16-c348e6c7/standings_live.json; any standings-derived figure touching SAC</td>
+<td>Re-read https://www.nba.com/standings and fill the ten SAC cells; the row is flagged in place so it cannot be silently treated as complete.</td>
+<td class="src"><span class="na" title="source id NBA.com official standings is not in the register">&mdash;</span></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">

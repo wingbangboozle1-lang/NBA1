@@ -82,6 +82,7 @@ CATEGORIES = [
     ("Official Source Check", "source-check.html", "Every horizon game and every 11/13 final compared with NBA.com, the 11/13 settlement, and the conflicts between builds."),
     ("Live Re-verification", "official-verify.html", "Every official value on this site read again at 18:40Z on 2026-11-14 and compared with what was published: 185 checks, one row and one official link each."),
     ("Nov 15 re-verification", "verify-2026-11-15.html", "The 15-18 Nov horizon read again on 2026-11-15 and compared row by row: settled 11/14 finals, the 34-game schedule, standings, the three team-stat inputs, and a diff of two consecutive official injury-report editions."),
+    ("Nov 16 re-verification", "verify-2026-11-16.html", "The 16-18 Nov window read directly from NBA.com for the first time in the project: schedule structure an exact match, standings, the newest injury edition, and a consecutive-edition diff that caught Denver filing four Out players after the lines were cut."),
     ("DECISION", None, "What is still open, what could be improved, and what could not be verified."),
     ("Open Questions", "questions.html", "What we know, what we do not, and the concrete step that would answer each open item."),
     ("Suggestions", "suggestions.html", "Improvements written as options with effort, risk and what each unlocks, so a reviewer can pick a path."),
@@ -2792,6 +2793,20 @@ def main():
             banner("warn", "Artifact missing",
                    "<p><code>verify/2026-11-15-4533630f/index.html</code> is not present. Run "
                    "<code>python3 verify/2026-11-15-4533630f/build_report.py</code>.</p>"))
+
+    # === 2026-11-16 live verification (session arena/c348e6c7-nba1, COORDINATION §47) ===
+    # First pass in this repository that could reach nba.com at all; every prior session
+    # recorded flag F7 ("the refresh path has never been executed").
+    _v2611 = os.path.join(ROOT, "verify", "2026-11-16-c348e6c7", "index.html")
+    if os.path.exists(_v2611):
+        with open(_v2611, encoding="utf-8") as _fh:
+            built["verify-2026-11-16.html"] = _fh.read()
+    else:
+        built["verify-2026-11-16.html"] = page(
+            "Nov 16 re-verification", "the artifact is missing",
+            banner("warn", "Artifact missing",
+                   "<p><code>verify/2026-11-16-c348e6c7/index.html</code> is not present. Run "
+                   "<code>python3 verify/2026-11-16-c348e6c7/render.py</code>.</p>"))
 
     # === decisions (session arena/cc5a6652-nba1) =================================
     built["decisions.html"] = build_decisions(questions, suggestions)
