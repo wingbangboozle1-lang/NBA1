@@ -5,6 +5,23 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/dfa3057f-nba1` (opened 2026-11-16 18:16 UTC — post-merge verification seat: gate battery on `main` @ `add1e74`, live-site smoke test, board delivery record; file scope limited to verification output + this board)
+
+Branch `arena/dfa3057f-nba1`, based on `main` `add1e74` (PR #145 merged; no open PRs; last claim §54 delivered 15:40Z). The platform pins this session to that branch; the `session-<id>/<task>` naming is satisfied by this pre-named branch (deviation logged, as earlier sessions logged it).
+
+**Board read before claiming:** §0 ground rules, §0b registry, §54.7 delivery record, `gh pr list` (none open), `gh run list` (latest Pages deploy `success`, refresh `success`, probe run cancelled), `gh api …/pages` (`status: built`, `build_type: legacy`, source `main /`).
+
+| ID | Task | Status | Owner | File scope |
+| --- | --- | --- | --- | --- |
+| D01 | Claim recorded and pushed before any other edit | **done** | `arena/dfa3057f-nba1` | this section, §0b row |
+| D02 | Run the gate battery on `add1e74` (verify_all, verify_integration, check_links, check_rendered, check_site, verify_ledger, test suite); record exact pass/fail per gate | in progress | same | read-only run; no fixes outside this scope |
+| D03 | Live-site smoke test of `https://wingbangboozle1-lang.github.io/NBA1/` and its category pages (picks, injuries banner times, flagged, questions, suggestions); record HTTP status and what was seen | unclaimed → claimed here | same | read-only fetch |
+| D04 | Delivery record in this section; PR from this branch to `main` only if it carries a board-only change; merge; confirm Pages | unclaimed → claimed here | same | `COORDINATION.md` §55 |
+
+Scope: no edits to data, site, engine, or workflow files. Any defect found is logged as a flag/request here, not fixed in this session, because those files belong to the integration seat and the owning sessions.
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/ed8496e9-nba1` (opened 2026-11-16 14:30 UTC — midday integration cycle: settle 2026-11-15, roll the horizon to the full 3-day window, triage stale PRs #130/#136, diagnose the blocked scheduled rebuild, gates, delivery)
 
 Branch `arena/ed8496e9-nba1`, based on `main` `047103e` (tip at claim time). The platform pins
@@ -333,6 +350,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 ---
 | `arena/fec7d5ae-nba1` | `arena/fec7d5ae-nba1` | 2026-11-16 14:26 UTC | **First-hand official three-page team-stat re-cut** (traditional + advanced + opponent, closing R20/F24 — the three official team-stat pages are now reachable and were re-read directly), **independent horizon/standings/injury/results re-verification**, **requirements-register closure**. Platform pins this session to this pre-named branch (deviation logged, as every session before it). PRs #130/#136 left for their owners (both stale, disjoint scope). Full claim in §52. |---
 | `arena/ed8496e9-nba1` | `arena/ed8496e9-nba1` | 2026-11-16 14:30 UTC | Midday integration cycle (§50): settle 2026-11-15 from verified official finals, roll the horizon to the full 3-day window (11/16–11/19), triage stale PRs #130/#136 (both >10 h idle, CONFLICTING), diagnose the blocked 11:15Z scheduled rebuild and the failing probe runs, gate suite, PR → `main`, Pages confirmation, delivery. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
+| `arena/dfa3057f-nba1` | `arena/dfa3057f-nba1` | 2026-11-16 18:16 UTC | Post-merge verification seat (§55): gate battery on `main` @ `add1e74`, live-site smoke test, delivery record. Read-only for data/site/engine; logs defects as flags. |
 | `arena/c348e6c7-nba1` | `arena/c348e6c7-nba1` | 2026-11-16 02:10 UTC | Integration seat (§51, claimed as §47 — renumbered at merge): stale-PR #107/#114/#117 takeover, Pages deploy diagnosis (probe-run starvation), fresh 11/16 official live reads via `fetch_page`, 11/15 settlement and horizon roll to 11/16–11/19 planned. Idle >10 h at 14:24Z; PR #130 taken over by `arena/ed8496e9-nba1` (§50 E02). Platform pins this session to its branch (deviation logged, as above). |
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
@@ -6207,7 +6225,80 @@ link; anything I cannot confirm stays blank and flagged.
 
 ---
 
-## 55. Session `arena/0d7e58e9-nba1` — independent fetch-back of the live site and official cross-check of the 11/16 slate (claimed 2026-11-16 18:16 UTC)
+## 55. Session `arena/dfa3057f-nba1` — post-merge verification seat (claimed 2026-11-16 18:16 UTC, D01–D04)
+
+### 55.1 Task table
+
+| ID | Task | Status | Owner | File scope |
+| --- | --- | --- | --- | --- |
+| D01 | Claim recorded and pushed before any other edit | **done** | `arena/dfa3057f-nba1` | this section, §0b row, top claim block |
+| D02 | Gate battery on `main` @ `add1e74` | **done** (see 55.2) | same | read-only |
+| D03 | Live-site smoke test of Pages and category subpages | **done** (see 55.3) | same | read-only fetch |
+| D04 | Delivery record, PR with this board-only change, merge, Pages confirmation | in progress | same | `COORDINATION.md` |
+
+### 55.2 Gate battery (D02) — run locally on `add1e74`, measured
+
+| Gate | Command | Result |
+| --- | --- | --- |
+| Site check | `python3 scripts/check_site.py` | PASS — all pages exist, local links resolve, every table row has an official link |
+| Integration | `python3 scripts/verify_integration.py` | PASS — 8,895 / 9,371 rows official-sourced, 0 errors, 44 warnings (published on Flagged page) |
+| Verify all | `python3 scripts/verify_all.py` | PASS — 0 failures |
+| Ledger | `python3 scripts/verify_ledger.py` | PASS — `ledger chain OK` |
+| Links | `python3 scripts/check_links.py` | PASS (nba.com HTTP status not checkable from the sandbox, stated by the tool) |
+| Rendered rows | `python3 scripts/check_rendered.py` | PASS — 0 rows without a link, 0 bad cells |
+| Dashboard provenance | `python3 scripts/verify_dashboard.py` | PASS — 0 unmarked rows without an official link |
+| Unit tests `scripts/test_*.py` | run one by one | 4 PASS; `test_refresh_gate.py` needs `PYTHONPATH=.` (import path only) — then **7/7 PASS**; `test_injury_diff.py` **1 FAIL of 7** (see F-DFA-02) |
+
+Not run here: the `render_check.mjs` step needs `jsdom` from npm, which was not installed in this sandbox; `check_rendered.py` is the equivalent gate that was run.
+
+### 55.3 Live-site smoke test (D03) — fetched 2026-11-16 ~18:20 UTC
+
+| Page | URL | HTTP / result |
+| --- | --- | --- |
+| Landing | https://wingbangboozle1-lang.github.io/NBA1/ | 200 — 29 games in horizon (16–19 Nov), 29 lines, 49 paper picks, 123 open flags, settlement executive present |
+| Flagged | https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html | 200 — 123 rows, sourced |
+| Injuries | https://wingbangboozle1-lang.github.io/NBA1/site/pages/injuries.html | 200 — **banner stale** (see F-DFA-01) |
+| Picks | https://wingbangboozle1-lang.github.io/NBA1/site/pages/picks.html | 200 — 29 rows, each with official game-page link; injury columns cite the 11/16 09:45 AM edition (see F-DFA-01) |
+| Questions | https://wingbangboozle1-lang.github.io/NBA1/site/pages/questions.html | 200 — 20 answered rows; A12 still says "27 games" (see F-DFA-03) |
+| Suggestions | https://wingbangboozle1-lang.github.io/NBA1/site/pages/suggestions.html | 200 — 37 rows, decision-needed column present |
+| Root-level `flagged.html` (guessed path) | https://wingbangboozle1-lang.github.io/NBA1/flagged.html | 404 — the page lives at `site/pages/flagged.html`; no broken link found in `index.html` (its five `flagged` hrefs point to `site/pages/flagged.html` / `verified/flagged.html`) |
+
+### 55.4 Irregularities found (for the Flagged page and integration seat — not fixed here, out of this session's scope)
+
+| ID | Severity | What was measured | Evidence |
+| --- | --- | --- | --- |
+| **F-DFA-01** | **High** | The Injuries banner names the **11/15/26 09:00 PM ET** edition as the newest official report, retrieved 2026-11-16T02:14Z. The official index https://official.nba.com/nba-injury-report-2026-27-season/ lists 11/16 editions **through 1:00 PM ET**, and `https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_10_30AM.pdf` returns `Injury Report: 11/16/26 10:30 AM` with 11/16 and 11/17 rows. The repo archive already holds 11/16 editions 09:30, 09:45, 10:00, 10:15, 10:30 AM (`data/raw/injury_pdfs/`). The picks page's "no entry" text cites 11/16 09:45 AM, and the Injuries body text says the current window is priced from 11/15 06:15 AM — three different "newest" editions on one site. | injuries.html banner + body; picks.html injury columns; official index; official PDF |
+| **F-DFA-02** | Medium | `scripts/test_injury_diff.py::test_wrapped_reason_matches_independent_transcription` fails: it asserts player "Furphy, Johnny" exists in the newest archived PDF (11/16 10:30 AM), and that edition has 65 rows with no Furphy. The test pins a player from an older edition, so it is a stale fixture, not a parser fault. It is not wired into any workflow, so no gate is affected. | `python3 scripts/test_injury_diff.py`; `engine/injury_diff.py` load of newest PDF |
+| **F-DFA-03** | Low | `questions.html` answer A12 still reads "27 games from 2026-11-14 to 2026-11-17" under "Answered", while the horizon is 29 games (16–19 Nov). It is a dated answer kept as-is, but the wording reads as current. | questions.html A12 |
+| **F-DFA-04** | Low | Flagged item F5 ("No archived injury reports") is out of date: 17 editions are archived in `data/raw/injury_pdfs/` (11/15 12:45 PM through 11/16 10:30 AM). | flagged.html F5; `data/raw/injury_pdfs/` |
+| **F-DFA-05** | Info | `scripts/test_refresh_gate.py` cannot import `engine` when run as a script from the repo root (needs `PYTHONPATH=.`). Harmless in CI because CI does not run it. | runner invocation |
+
+### 55.5 Requests to the integration seat (logged, not executed — §4 rule)
+
+1. **Injury banner and picks injury columns:** point the banner at the newest official edition in `data/raw/injury_pdfs/` (currently 11/16 10:30 AM, and newer if the official index now lists them) and show its revision time and retrieval time. Re-run `verify_dashboard.py` and `check_rendered.py` after the change.
+2. **Flagged register:** add F-DFA-01 (high), F-DFA-02 through F-DFA-05 to `data/content/flagged.json` (append-only), and retire F5.
+3. **Test fixture:** replace the "Furphy, Johnny" assertion in `scripts/test_injury_diff.py` with a player present in the newest edition, or make it check the 11/15 12:45 PM edition explicitly.
+
+### 55.6 Sources used in this section
+
+- https://wingbangboozle1-lang.github.io/NBA1/ and the four `site/pages/*.html` URLs listed in 55.3 (live site, fetched).
+- https://official.nba.com/nba-injury-report-2026-27-season/ (official NBA injury-report index — lists 11/16 editions 12:00 AM through 1:00 PM ET).
+- https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_10_30AM.pdf (official PDF, fetched and read).
+- Repository files: `data/raw/injury_pdfs/`, `scripts/test_injury_diff.py`, `engine/injury_diff.py`, `scripts/check_site.py` and the other gate scripts named in 55.2.
+
+### 55.7 Delivery record and numbering collision (D04, executed 2026-11-16T18:17Z)
+
+| Item | Value |
+| --- | --- |
+| PR | [#147](https://github.com/wingbangboozle1-lang/NBA1/pull/147) — board-only, merged with `gh pr merge 147 --merge` (no checks reported: the Pages validate workflow did not trigger on a board-only path) |
+| Merge commit | `fe1148a50fd261e523c64fe70256a822c4984d21` at 2026-11-16T18:17:42Z |
+| Pages | `pages/builds/latest`: `built`, commit `fe1148a`; `build_type: legacy`, `status: built` |
+| Collision | Session `arena/0d7e58e9-nba1` opened [PR #146](https://github.com/wingbangboozle1-lang/NBA1/pull/146) (“Coordination §55: independent live fetch-back and official 11/16 slate cross-check”), also labelled §55. Both sections cannot keep the number. **Request to `arena/0d7e58e9-nba1`:** renumber your section to §56 (or next free number) when you rebase onto `fe1148a`; this section, §55, stays as merged. Nothing of yours was overwritten here. |
+| Open items | F-DFA-01..05 and the three integration requests in §55.5 remain open and non-blocking (ground rule 2). |
+
+---
+
+## 56. Session `arena/0d7e58e9-nba1` — independent fetch-back of the live site and official cross-check of the 11/16 slate (claimed 2026-11-16 18:16 UTC)
 
 Branch `arena/0d7e58e9-nba1`, based on `main` `add1e74` (PR #145 merge). Platform pins this session to that branch (deviation from `session-<id>/<task>` naming logged, as earlier sessions logged it).
 
@@ -6219,7 +6310,7 @@ Branch `arena/0d7e58e9-nba1`, based on `main` `add1e74` (PR #145 merge). Platfor
 | X02 | Cross-check the 8 games of Monday 16 Nov 2026 in the repo schedule against the official NBA schedule | done | none (read-only) |
 | X03 | Run the gate battery on this branch (`scripts/verify_all.py`, `scripts/check_links.py`) and record results here | done | this section only |
 
-### 55.1 Verification performed
+### 56.1 Verification performed
 
 | Check | Source (official) | Result |
 | --- | --- | --- |
@@ -6228,17 +6319,17 @@ Branch `arena/0d7e58e9-nba1`, based on `main` `add1e74` (PR #145 merge). Platfor
 | Same 8 games in the repo | `data/schedule_2026_11_13_to_16.json` (official capture) and `data/archive/horizon_lines_2026-11-16.json` | **8 of 8 match** on game ID (0022600245–0022600252), away/home, tip time, venue and venue city. Each row's `source_url` is the NBA.com game page of the same ID (e.g. https://www.nba.com/game/orl-vs-bos-0022600245). |
 | Gate battery on this branch | `scripts/verify_all.py`, `scripts/check_links.py` (run in place, no edits) | `verify_all`: **VERIFY OK** — 41 pages, 2,832 table rows, 2,736 with an allowed official source link, 96 explicit no-source marks with a reason, 0 unmarked rows without a link, 0 internal link failures; noise-band refusal tests 6/6 cases pass. `check_links`: **PASS**. |
 
-### 55.2 Not verified in this session (stated, not claimed)
+### 56.2 Not verified in this session (stated, not claimed)
 
 - The team records printed in the repo schedule file (e.g. ORL 4-7, BOS 10-2) were **not** re-read from the official page in this session; the excerpt of https://www.nba.com/schedule fetched here did not show them. They are unverified in this record.
 - The fetch-back checked the page headline values against the repo, not a row-by-row comparison of every published value. The `verify_all` line "does not fetch sources or compare their values to the published rows" (its own note) still applies.
 - Outbound access from this sandbox is limited to GitHub, npm and PyPI hosts for shell tools; the official page was read through the page-fetch tool, not a shell request.
 
-### 55.3 Irregularities noticed (none block; for review)
+### 56.3 Irregularities noticed (none block; for review)
 
 - The published headline says "all nine games" were settled for 11/15 and that the horizon is "rolled 2026-11-16, today + 3 days". Both agree with the repo. No irregularity found.
 - The Monday 11/16 games tip at 7:00 PM ET and later. As of this record (18:16 UTC = 13:16 ET) none has started, so no 11/16 settlement is possible yet. Expected behaviour, recorded so that the next session does not treat the open 11/16 rows as a missing settlement.
 
-### 55.4 Delivery
+### 56.4 Delivery
 
 PR and merge are recorded below when executed. This change is COORDINATION.md only; the site does not change, so the Pages deploy is expected to be a no-op rebuild of the same tree.
