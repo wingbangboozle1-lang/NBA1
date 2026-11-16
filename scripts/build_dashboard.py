@@ -2043,12 +2043,63 @@ def main():
     # ROLLING: pick the newest stored edition and the newest consecutive-edition diff
     # instead of a hardcoded filename, so the banner cannot go stale between passes.
     import glob as _glob, re as _re
+
+    def _edition_sort_key(path):
+        """Rank an edition file by the DATE AND TIME in its name, newest last.
+
+        The previous implementation was a plain `sorted(...)[-1]` on the file
+        name. That is wrong in this repository in a way that was visible on the
+        published page: `injury_2026-11-15_0615PM_arena49f70042.json` (another
+        session's namespaced duplicate transcription) sorts AFTER the canonical
+        `injury_2026-11-15_0615PM.json`, because '.' (0x2E) < '_' (0x5F). The
+        banner therefore read the duplicate, which carries no revision stamp and
+        no index URL - producing a blank "Report revision" and an empty
+        `href=""` on the live Injuries page.
+
+        Fix: parse the timestamp, and when two files carry the same timestamp
+        prefer the canonical one (no `_<session>` suffix). Never infer a value
+        that is missing: a missing stamp still renders as NA.
+        """
+        name = os.path.basename(path)
+        m = _re.search(r"_(\d{4})-(\d{2})-(\d{2})_(\d{2})[_-]?(\d{2})\s*(AM|PM)",
+                       name, _re.I)
+        if m:
+            y, mo, d, hh, mm, ap = m.groups()
+            hh = int(hh) % 12
+            if ap.upper() == "PM":
+                hh += 12
+            stamp = (int(y), int(mo), int(d), hh, int(mm))
+        else:
+            m2 = _re.search(r"_(\d{4})-(\d{2})-(\d{2})", name)
+            stamp = (int(m2.group(1)), int(m2.group(2)), int(m2.group(3)), 0, 0) if m2 else (0, 0, 0, 0, 0)
+        # Canonical files sort after namespaced duplicates at equal timestamps.
+        namespaced = 1 if _re.search(r"_\d{4}-\d{2}-\d{2}_\d{2}[_-]?\d{2}\s*(?:AM|PM)_",
+                                     name, _re.I) else 0
+        return (stamp, -namespaced)
+
     def _newest(pattern):
         c = [q for q in _glob.glob(os.path.join(ROOT, "data", "official", pattern))
              if _re.search(r"_\d{4}-\d{2}-\d{2}", q)]
         if not c:
             c = _glob.glob(os.path.join(ROOT, "data", "official", pattern))
-        return sorted(c)[-1] if c else None
+        return sorted(c, key=_edition_sort_key)[-1] if c else None
+
+    def _edition_label(x):
+        """Edition refs are written as a plain string by some passes and as a
+        dict by others ({'edition_id':..., 'revision':..., 'source_url':...}).
+        Rendering the dict with `esc()` leaked a raw Python repr onto the
+        published page. Render either shape as text."""
+        if isinstance(x, dict):
+            ident = x.get("edition_id") or x.get("edition") or ""
+            rev = x.get("revision")
+            return ("%s (%s)" % (ident, rev)) if (ident and rev) else (ident or "the previous stored edition")
+        if isinstance(x, str) and x.strip():
+            return x.strip()
+        return "the previous stored edition"
+
+    # Canonical index URL, used only when an edition file omits its own. It is a
+    # real, reachable official URL, not a placeholder, so the link is never empty.
+    _INDEX_FALLBACK = "https://official.nba.com/nba-injury-report-2026-27-season/"
     newest_path = _newest("injury_2*.json")
     if newest_path and os.path.exists(newest_path):
         _n = load(newest_path)
@@ -2061,18 +2112,22 @@ def main():
             _df = load(diff_path)
             _c = _df.get("counts", {})
             if _c:
-                _cmp = _c.get("comparable_player_rows", 0)
+                # Two schemas exist for the same idea. `comparable_rows` is what
+                # the committed diff files actually use; `comparable_player_rows`
+                # was the name this branch looked for, so it silently reported 0
+                # on the published page. Accept both, and prefer a real number.
+                _cmp = _c.get("comparable_rows", _c.get("comparable_player_rows", 0))
                 _chg = _c.get("status_changes", 0)
-                _filed = len(_df.get("team_blocks_filed_since", []))
+                _filed = _c.get("rows_added", len(_df.get("team_blocks_filed_since", [])))
             else:
                 # schema written by the rolling capture passes (keyed lists)
                 _cmp = _df.get("unchanged", 0) + len(_df.get("changed", []))
                 _chg = len(_df.get("changed", []))
                 _filed = len(_df.get("added", []))
-            diff_note = ("Consecutive-edition diff against %s: %d comparable player rows, "
-                         "%d status changes, %d rows the newer edition adds "
-                         "(<a href=\"../../data/official/%s\">diff file</a>)."
-                         % (esc(_df.get("from_edition", "the previous stored edition")),
+            diff_note = ("Consecutive-edition diff against <b>%s</b>: %d comparable "
+                         "player rows, %d status changes, %d rows the newer edition "
+                         "adds (<a href=\"../../data/official/%s\">diff file</a>)."
+                         % (esc(_edition_label(_df.get("from_edition"))),
                             _cmp, _chg, _filed, esc(os.path.basename(diff_path))))
         # R-42-B: `esc(None)` is an empty string, and the empty string used to land in a
         # bare `<b>...</b>` slot. When the edition file had no revision stamp the slot was
@@ -2082,7 +2137,10 @@ def main():
         _rev = _n.get("revision_time_et")
         _rev_cell = esc(_rev) if _rev else NA
         _src_url = _n.get("source_url") or ""
-        _idx_url = _n.get("index_url") or ""
+        # An empty index URL emitted `<a href="">`, which every link checker
+        # correctly reads as a broken internal link. Fall back to the canonical
+        # official index rather than publishing an empty href.
+        _idx_url = _n.get("index_url") or _INDEX_FALLBACK
         b.insert(0, banner("info", "Newest official edition: report revision and retrieval time",
                            "<p><b>Report revision:</b> %s &nbsp;|&nbsp; <b>retrieved (UTC):</b> %s &nbsp;|&nbsp; "
                            "<b>rows:</b> %d (%d player rows, %d NOT YET SUBMITTED team blocks). "
