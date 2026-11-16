@@ -44,6 +44,8 @@ OFFICIAL_HOSTS = {
     "ak-static.cms.nba.com",
     "stats.nba.com",
     "cdn.nba.com",
+    # NBA league gamebook PDFs (official box-score / gamebook host; cited by the 11/14 and 11/15 captures)
+    "statsdmz.nba.com",
     # GitHub / docs (used for Pages + tooling references only)
     "github.com",
     "docs.github.com",
@@ -59,7 +61,7 @@ OFFICIAL_HOSTS = {
 # Official *data* hosts. A row that only links outside this set does not count as
 # sourced to the brief's standard.
 DATA_HOSTS = {"www.nba.com", "nba.com", "official.nba.com", "ak-static.cms.nba.com",
-              "stats.nba.com", "cdn.nba.com"}
+              "stats.nba.com", "cdn.nba.com", "statsdmz.nba.com"}
 # The Dutch gambling regulator (Kansspelautoriteit) is cited for legal scope only,
 # never for an NBA value. Accepted, but reported so a human can see the count.
 REGULATOR_HOSTS = {"kansspelautoriteit.nl", "www.kansspelautoriteit.nl"}
