@@ -310,15 +310,33 @@ def player_logs_page():
                        "Source"], rows))
 
     nf = cov.get("names_on_report_not_found_in_any_gamebook") or []
-    body.append('<h2>Coverage gap, stated</h2>')
-    body.append('<p>%d names appear on the %s injury report and in none of the %d gamebooks '
-                'captured here, because their games are on a later date. Their logs need those '
-                'games\' gamebooks, which do not exist until the games are played. The %d rows '
-                'captured are complete for the six games that finished.</p>'
-                % (len(nf), html.escape(cov["injury_report_edition"]), cov["games"],
-                   cov["player_rows"]))
+    later = cov.get("names_on_report_later_games_only") or []
+    unexpl = cov.get("names_on_report_11_15_unexplained") or []
+    inact_n = cov.get("rows_recovered_from_gamebook_inactive_lines", 0)
+    flagged = cov.get("report_players_unexplained_by_gamebooks") or []
+    body.append('<h2>Coverage, stated</h2>')
+    body.append('<p>The %d rows are the player rows parsed from the %d finished 11/15 gamebooks, '
+                'plus <b>%d</b> injury-report players who have no row in the box-score table but are named on '
+                'the gamebook\'s own <code>Inactive:</code> line for their team. Each is kept with that line\'s '
+                'official reason, so a player who did not play is recorded, not dropped.</p>'
+                % (cov["player_rows"], cov["games"], inact_n))
+    body.append('<p>Of the %d names on the %s injury report, <b>%d</b> have no row in any of the %d gamebooks. '
+                '<b>%d</b> of them have only games after 11/15, which have no gamebook yet. '
+                '<b>%d</b> have a row for a finished 11/15 game and are <b>not explained</b> by the gamebooks '
+                '(listed below and in <code>flagged.json</code>).</p>'
+                % (cov["report_names_unique"], html.escape(cov["injury_report_edition"]),
+                   len(nf), cov["games"], len(later), len(unexpl)))
+    if flagged:
+        # Every row carries the official gamebook PDF it came from (verify_all requires a link).
+        rows_f = []
+        for x in flagged:
+            key = x.split(":", 1)[0]                      # e.g. 2026-11-15_DALBOS
+            pdf = "https://statsdmz.nba.com/pdfs/20261115/20261115_%s_book.pdf" % key[len("2026-11-15_"):]
+            rows_f.append([esc(x), link(pdf, "gamebook PDF")])
+        body.append('<h3>Not explained by the gamebooks (flagged for review)</h3>')
+        body.append(table(["Gamebook / report entry", "Official source"], rows_f))
     if nf:
-        body.append('<details><summary>the %d names, for the next capture pass</summary><p class="fine">%s</p></details>'
+        body.append('<details><summary>the %d report names with no gamebook row</summary><p class="fine">%s</p></details>'
                     % (len(nf), html.escape(", ".join(nf))))
     body.append('<p class="fine">Reproduce: <code>python3 scripts/capture_player_logs.py</code>. '
                 'Source text: <code>data/official/gamebooks/*.md</code>.</p>')
