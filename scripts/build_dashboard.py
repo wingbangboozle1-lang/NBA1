@@ -70,6 +70,9 @@ CATEGORIES = [
     ("Injuries &amp; Rotation", "injuries.html", "The official injury report, the rotation minutes it implies, and the measured production impact."),
     ("Game-Day Injury Read", "gameday.html", "The newest official injury edition against the edition the lines were cut from: what four clubs filed, what it does to tonight's five lines, and every horizon row re-read from NBA.com today."),
     ("Game Flow", "gameflow.html", "Pace, expected margin and total, blow-out and overtime probability, and the rest and back-to-back context."),
+    ("RESULTS &amp; SETTLEMENT", None, "What actually happened, and whether the paperwork was settled from it."),
+    ("Official Results &amp; Settlement", "results.html", "One row per game with date, teams, final score and quarter scores, read from the official game pages; the verified-final count per game day; and the visible settlement stamp with the ledger head behind it."),
+    ("Player Game Logs", "player-logs.html", "Minutes, points, rebounds and assists for every player in each finished game's official gamebook, with the report cross-reference and the DNP/DND rows kept."),
     ("EVIDENCE", None, "Whether any of it is skill. The out-of-sample record, the gates, the correlations and the luck check."),
     ("Strategies &amp; Leaderboard", "strategies.html", "Ten strategies, the reward tiers, and the leaderboard that ranks them - with nothing promoted that has not passed."),
     ("Validation Gates", "validation.html", "The seven gates every strategy must clear, the definition of each, and how each strategy scored."),
@@ -2793,6 +2796,25 @@ def main():
             banner("warn", "Artifact missing",
                    "<p><code>verify/2026-11-15-4533630f/index.html</code> is not present. Run "
                    "<code>python3 verify/2026-11-15-4533630f/build_report.py</code>.</p>"))
+
+    # === results feed + player game logs (carried from arena/5ae0869e-nba1, PR #107) ===
+    # Two brief requirements in one module: an official per-game result feed with
+    # one row per game (date, teams, final score, quarter scores) that settles only
+    # from verified finals, and per-player game logs (minutes, points, rebounds,
+    # assists, opponent). Wrapped so a failure here reports instead of taking the
+    # whole site build down with it.
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "scripts"))
+        import build_results_page as _res
+        built["results.html"] = _res.results_page()
+        built["player-logs.html"] = _res.player_logs_page()
+    except Exception as _exc:  # pragma: no cover - diagnostic path
+        _msg = ("<p><code>scripts/build_results_page.py</code> could not build the results "
+                "and player-log pages: %s</p>" % esc(str(_exc)))
+        built["results.html"] = page("Official results", "builder error",
+                                     banner("warn", "Builder error", _msg))
+        built["player-logs.html"] = page("Player game logs", "builder error",
+                                         banner("warn", "Builder error", _msg))
 
     # === 2026-11-16 live verification (session arena/c348e6c7-nba1, COORDINATION §47) ===
     # First pass in this repository that could reach nba.com at all; every prior session

@@ -44,6 +44,7 @@ OFFICIAL_HOSTS = {
     "ak-static.cms.nba.com",
     "stats.nba.com",
     "cdn.nba.com",
+    "statsdmz.nba.com",  # official NBA gamebook PDFs (verified 2026-11-16)
     # GitHub / docs (used for Pages + tooling references only)
     "github.com",
     "docs.github.com",

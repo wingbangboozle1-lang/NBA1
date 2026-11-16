@@ -14,7 +14,8 @@ PAGES = ["index.html", "research.html", "slate.html", "suggestions.html", "revie
          "picks.html",
          # model v2 disagreement-first page (session arena/49f70042-nba1)
          "model-v2.html"]
-OFFICIAL_HOSTS = {"nba.com", "www.nba.com", "official.nba.com", "docs.github.com"}
+OFFICIAL_HOSTS = {"nba.com", "www.nba.com", "official.nba.com", "statsdmz.nba.com",
+                  "docs.github.com"}
 
 class Audit(HTMLParser):
     def __init__(self):
