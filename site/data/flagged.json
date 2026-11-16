@@ -657,7 +657,7 @@
    "id": "F71",
    "severity": "Medium",
    "title": "Horizon stops at 11/17: the 12 official 11/18 games are outside every published surface",
-   "detail": "Today is 2026-11-15, so the brief's maximum horizon (today + 3 days) runs through 11/18. The official calendar prints 12 games on 11/18 and this session captured all 12 (game ids 0022600258-0022600269), but data/raw/schedule_upcoming.json has window 11/14..11/17, the published picks' slate_dates stop at 11/17, and no surface carries a 11/18 row.",
+   "detail": "Today is 2026-11-15, so the brief's maximum horizon (today + 3 days) runs through 11/18. The official calendar prints 12 games on 11/18 and this session captured all 12 (game ids 0022600258-0022600269), but data/raw/schedule_upcoming.json has window 11/14..11/17, the published picks' slate_dates stop at 11/17, and no surface carries a 11/18 row.  RESOLVED 2026-11-16 (session arena/161f1638-nba1): the window is now derived from the newest official schedule capture instead of typed dates and the 11/18 games are published on site/pages/roll.html (window 2026-11-16..2026-11-18, 25 games).",
    "affected": "schedule, lines and picks surfaces for 11/18",
    "source": "S115-G18",
    "source_url": "https://www.nba.com/games?date=2026-11-18",
@@ -667,7 +667,7 @@
    "id": "F72",
    "severity": "Medium",
    "title": "Injury basis is two editions behind: site prices from 11/14 04:15 AM ET, newest official edition is 11/15 06:15 AM ET",
-   "detail": "site/data/injuries.json is built from the 11/14/26 04:15 AM ET edition (75 rows) and meta.json says the lines were priced from it, with the 01:30 PM ET edition recorded as NOT RE-PRICED. The official hub at read time (2026-11-15 ~11:35Z) lists editions at 15-minute cadence through 11/15 06:15 AM ET, which this session captured in full (101 rows: 85 for 11/15, 16 NOT YET SUBMITTED team rows for 11/16). Diff against the previous in-repo edition (11/14 01:30 PM ET): 16 of 18 team entries for 11/15 moved from NOT YET SUBMITTED to filed, 84 player designation rows appeared, Dallas remains NOT YET SUBMITTED (inside its game-day window), and New York has no row of any kind - recorded as absent, not interpreted. Player-level status changes are not computable between these two editions because the older one listed no players for 11/15. Lines are deliberately NOT re-priced (post-cut information must not enter a graded number).",
+   "detail": "site/data/injuries.json is built from the 11/14/26 04:15 AM ET edition (75 rows) and meta.json says the lines were priced from it, with the 01:30 PM ET edition recorded as NOT RE-PRICED. The official hub at read time (2026-11-15 ~11:35Z) lists editions at 15-minute cadence through 11/15 06:15 AM ET, which this session captured in full (101 rows: 85 for 11/15, 16 NOT YET SUBMITTED team rows for 11/16). Diff against the previous in-repo edition (11/14 01:30 PM ET): 16 of 18 team entries for 11/15 moved from NOT YET SUBMITTED to filed, 84 player designation rows appeared, Dallas remains NOT YET SUBMITTED (inside its game-day window), and New York has no row of any kind - recorded as absent, not interpreted. Player-level status changes are not computable between these two editions because the older one listed no players for 11/15. Lines are deliberately NOT re-priced (post-cut information must not enter a graded number).  RESOLVED 2026-11-16 (session arena/161f1638-nba1): the injury basis is now the newest stored edition, 11/15 06:15 PM ET (155 rows), resolved at run time by scripts/originate_horizon.py rather than typed.",
    "affected": "injury layer for 11/15 games; any line adjustment driven by it",
    "source": "S115-IR0615",
    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
@@ -759,7 +759,7 @@
    "id": "F83",
    "severity": "medium",
    "title": "Picks page has no rotation-availability column",
-   "detail": "The picks table shows Home injury status and Away injury status. The brief asks for rotation availability as its own column.",
+   "detail": "The picks table shows Home injury status and Away injury status. The brief asks for rotation availability as its own column.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): a rotation-availability column now exists on site/pages/roll.html, built from the official injury report (Out / Questionable counts and NOT YET SUBMITTED blocks). The legacy Lines & Picks page still has no such column, so the item stays open.",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html",
    "status": "open"
   },
@@ -767,7 +767,7 @@
    "id": "F84",
    "severity": "high",
    "title": "Home-court advantage is a fixed constant, not pinned to the measured home-win rate",
-   "detail": "engine/model_core.py uses flat_hca = 2.0. scripts/originate_horizon.py records that HCA could not be sourced from an official NBA page. The measured 57.6% home-win rate from another build is a note only and is not applied.",
+   "detail": "engine/model_core.py uses flat_hca = 2.0. scripts/originate_horizon.py records that HCA could not be sourced from an official NBA page. The measured 57.6% home-win rate from another build is a note only and is not applied.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): the home-win rate is now measured from official finals - 0.5455 (36 of 66) - and published on site/pages/roll.html. It is still not applied to any line. The gap is quantified: estimator B fits HCA at +3.508 points (t = 1.539, estimated in-sample) while estimator A applies none, and that single term is 90% of the models' mean 3.89-point disagreement.",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py",
    "status": "open"
   },
@@ -775,7 +775,7 @@
    "id": "F85",
    "severity": "high",
    "title": "No arena-coordinate table; travel distance and 3-in-4 not computed",
-   "detail": "The repository has no arena latitude or longitude table, so travel distance cannot be computed from a sourced table. No 3-in-4 metric was found by search. Rest and back-to-back are shown per game.",
+   "detail": "The repository has no arena latitude or longitude table, so travel distance cannot be computed from a sourced table. No 3-in-4 metric was found by search. Rest and back-to-back are shown per game.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): 3-in-4 IS now computed from the official schedule and published in the rest column of site/pages/roll.html. Travel distance remains uncomputed - no official arena-coordinate table has been sourced, so the cell stays empty rather than filled from memory.",
    "source_url": "https://www.nba.com/schedule",
    "status": "open"
   },
@@ -842,6 +842,36 @@
    "detail": "The official injury index lists 2026-11-15 editions in 15-minute steps; on a read at 2026-11-15T23:54Z the fetched chunk showed editions from 12:00 AM ET through at least 4:15 PM ET. The published lines (15-18 Nov roll) are priced from the 06:15 AM ET edition (retrieved 2026-11-15T11:52Z) and are deliberately not re-priced (a line re-priced after its cut cannot be graded - SG29/F72). The gap is a capture-currency gap, not a pricing error: the Injuries page banner states the edition, its revision time and its retrieval time. Capture the remaining editions at the next refresh (SG30 cadence). (Flag id renumbered from F79 to F93 at merge: F78-F91 were published first by arena/513516f6-nba1 in PR #108.)",
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "status": "open"
+  },
+  {
+   "id": "F94",
+   "severity": "High",
+   "title": "The site is not split into a projection surface and a gated bet surface",
+   "detail": "The brief requires two surfaces that are never mixed: 'projection' safe to publish now, 'bet' gated behind validation. No page carries either label. Picks carry the status string 'MODEL OUTPUT - UNVALIDATED' but sit beside projections in the same tables.",
+   "affected": "Lines & Picks, roll.html, Player Props, Strategies",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html",
+   "suggested_action": "Label every page projection or bet, and move every gated pick behind its own surface.",
+   "source": ""
+  },
+  {
+   "id": "F95",
+   "severity": "Medium",
+   "title": "2026-11-15 is not settled: 2 of its 9 games had reached Final at the last capture",
+   "detail": "At 2026-11-15T23:55Z only IND@PHI (131-124) and LAL@PHX (131-123) were Final; four more were in progress and three had not tipped. Settlement is deferred rather than guessed - the seven rows without a final carry null score fields and the observed state. The results feed for 11/15 is kept current in data/official/results_2026-11-15.json.",
+   "affected": "ledger settlement for 11/15; the 11/16 pre-registration's prior-day context",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "suggested_action": "Settle the ledger for 11/15 as soon as all nine games are Final (last tip 09:00 PM ET).",
+   "source": ""
+  },
+  {
+   "id": "F96",
+   "severity": "Low",
+   "title": "POR@MIN is listed twice on the official schedule in two nights",
+   "detail": "The official games pages list Portland at Minnesota on both 2026-11-16 (game 0022600250, 8:00 PM ET, Target Center) and 2026-11-17 (game 0022600254, 8:00 PM ET, Target Center) - two distinct official game IDs, same arena, consecutive nights. Both are published, because that is what the official source prints; each was checked on its own date page and neither was de-duplicated. Flagged because a same-venue back-to-back between the same two clubs is unusual enough to be worth a second look before either game is priced.",
+   "affected": "roll.html rows for 11/16 and 11/17; any rest/B2B flag for POR and MIN",
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "suggested_action": "Confirm against the box scores after both games; if one is a page artefact, drop the row.",
+   "source": ""
   }
  ]
 }

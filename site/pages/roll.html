@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rolling slate &mdash; 2026-11-16 to 2026-11-18 &middot; NBA1</title>
+<link rel="stylesheet" href="../assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../../index.html">
+      <span class="mark">NBA1</span>
+      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+    </a>
+    <nav class="topnav">
+      <a href="../../picks.html">Rolling horizon pick file</a>
+      <a href="picks.html">Horizon</a>
+      <a href="strategies.html">Evidence</a>
+      <a href="decisions.html">Decisions</a>
+      <a href="suggestions.html">Suggestions</a>
+      <a href="flagged.html">Flagged</a>
+    </nav>
+  </div>
+</header>
+<div class="wrap layout">
+  <aside class="sidebar">
+    <div class="side-h">Sections</div>
+    <div class="nav-group"><h3>HORIZON</h3>
+<a href="roll.html">Rolling Slate</a>
+<a href="picks.html">Lines &amp; Picks</a>
+<a href="props.html">Player Props</a>
+<a href="prop-variance.html">Prop Variance &amp; Rotation</a>
+<a href="injuries.html">Injuries &amp; Rotation</a>
+<a href="gameday.html">Game-Day Injury Read</a>
+<a href="gameflow.html">Game Flow</a>
+</div>
+<div class="nav-group"><h3>EVIDENCE</h3>
+<a href="strategies.html">Strategies &amp; Leaderboard</a>
+<a href="validation.html">Validation Gates</a>
+<a href="leaderboard.html">Leaderboard &amp; Rewards</a>
+<a href="correlations.html">Correlations</a>
+<a href="luck.html">Luck &amp; Skill</a>
+<a href="backtest.html">Out-of-Sample Backtest</a>
+<a href="model.html">Model &amp; Teams</a>
+</div>
+<div class="nav-group"><h3>VERIFICATION</h3>
+<a href="source-check.html">Official Source Check</a>
+<a href="official-verify.html">Live Re-verification</a>
+<a href="verify-2026-11-15.html">Nov 15 re-verification</a>
+</div>
+<div class="nav-group"><h3>DECISION</h3>
+<a href="questions.html">Open Questions</a>
+<a href="suggestions.html">Suggestions</a>
+<a href="decisions.html">Decisions: pick a path</a>
+<a href="requirements.html">Brief Traceability</a>
+<a href="flagged.html">Flagged for Review</a>
+<a href="sources.html">Source Register</a>
+<a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
+<a href="repo-review.html">Repo Review</a>
+</div>
+<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 14 NOV</h3>
+<a href="../../verified/index.html">&#10003; What is actually true</a>
+<a href="../../verified/summary.html">Executive summary</a>
+<a href="../../verified/verification.html">Row-level verification</a>
+<a href="../../verified/review.html">Repo review</a>
+<a href="../../verified/flagged.html">Flagged (17)</a>
+</div>
+    <div class="side-note">
+      <strong>Reading rule.</strong> Every table row either links to the official source
+      it came from or carries an explicit no-source mark with a stated reason (the mark
+      explains why no official source exists or could confirm the cell). A blank or
+      dashed cell means the value could not be confirmed from an official source &mdash;
+      it is never filled in by guesswork. See
+      <a href="flagged.html">Flagged for Review</a>.
+    </div>
+  </aside>
+  <main id="main">
+    <div class="page-head">
+      <h1>Rolling slate &mdash; 2026-11-16 to 2026-11-18</h1>
+      <p class="sub">The originated lines for the next three days, the disagreement between the two estimators, rotation availability from the official injury report, and parlays priced with the measured rho beside the naive product.</p>
+    </div>
+    <div class="banner info"><div class="b-t">The rolling slate</div><div class="b-b"><p>The window below is <b>2026-11-16 &ndash; 2026-11-18</b>: the next three calendar days, which is the maximum the brief allows a pick to be published ahead of a game. It is re-cut from a fresh official capture every pass &mdash; the schedule, the standings, the three official team-stat pages and the newest official injury report are all re-read before a line is rebuilt, and the rebuild is skipped if any of them is stale or missing.</p><p><b>Cut:</b> schedule captured 2026-11-15 &middot; ratings re-cut from captures retrieved 2026-11-15T23:38Z..23:52Z &middot; injury edition <b>2026-11-15_0615PM</b> (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z).</p></div></div>
+<div class="tiles">
+<div class="tile"><div class="tile-v">25</div><div class="tile-l">Games in the window</div><div class="tile-s">11-16=8, 11-17=5, 11-18=12</div></div>
+<div class="tile"><div class="tile-v">24</div><div class="tile-l">Singles picks</div><div class="tile-s">gate: |originated spread| >= 3.0</div></div>
+<div class="tile"><div class="tile-v">9</div><div class="tile-l">Two-leg parlays</div><div class="tile-s">different games, same date</div></div>
+<div class="tile"><div class="tile-v">41</div><div class="tile-l">Out players listed</div><div class="tile-s">official injury report, horizon games only</div></div>
+<div class="tile"><div class="tile-v">5</div><div class="tile-l">Blocks NOT YET SUBMITTED</div><div class="tile-s">clubs that had not filed when the edition was cut</div></div>
+<div class="tile"><div class="tile-v">0.5455</div><div class="tile-l">Measured home-win rate</div><div class="tile-s">36 of 66 official finals</div></div>
+</div>
+<div class="banner warn"><div class="b-t">Two independent estimators &mdash; their disagreement is the headline</div><div class="b-b"><p>Every game below carries a line from <b>two models built from the same official inputs by different code</b>: estimator A is <code>scripts/originate_horizon.py</code> (this page), estimator B is <code>engine/pipeline.py</code> (the out-of-sample-validated build). The <b>disagreement column is the first number shown</b>, and the two spreads sit underneath it &mdash; not a blend, because averaging two models whose errors have not been measured against each other would hide the one signal we can read.</p><p>On the <b>13 games both models cover</b> (they overlap on 2026-11-16, 2026-11-17), the mean absolute disagreement is <b>4.69 points</b> and the largest is <b>12.6</b>; on 1 of them the two disagree about which team is the favourite. Note the vintage difference: estimator B's ratings window is its own published cut, estimator A's is the re-cut above, so some of the gap is input age, not model opinion. Choosing between them is open decision <a href="decisions.html">F26</a>.</p></div></div><p><b>Where most of the gap comes from.</b> The mean <i>signed</i> difference (A &minus; B) is <b>-3.89 points</b>, i.e. B favours the home team by that much. B's line is built with a <b>fitted home-court advantage of +3.508 points</b> (t = 1.539, estimated in-sample on the test window) and a back-to-back penalty of 6.262 points; estimator A applies <b>neither</b>, because no official page publishes either number. The fitted HCA alone accounts for 90% of the mean gap. That is the whole of requirement R08 in one number: the measured home-win rate is 0.5455 (36 of 66 official finals), and a fitted +3.51-point edge is a far stronger claim than that evidence supports.</p>
+<h2 class="sec">1. The board &mdash; 25 games, 2026-11-16 to 2026-11-18</h2><p class="secsub">Spread is home minus away; positive means the home team is favoured. Possessions, points, spread and total are DERIVED by the printed formula. No home-court advantage is applied (it is not sourced from an official page; measured home-win rate published below, flag F74).</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date &middot; tip ET</th>
+<th>Matchup</th>
+<th>Records</th>
+<th>Poss.</th>
+<th>Proj pts A / H</th>
+<th>Spread (home)</th>
+<th>Total</th>
+<th>P(home win)</th>
+<th>Fair ML (home)</th>
+<th>Rotation availability (official report)</th>
+<th>Rest A / H</th>
+<th>Estimator B spread</th>
+<th>Disagreement</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-16 7:00 PM ET</td>
+<td><b>ORL@BOS</b></td>
+<td>5-7 / 10-2</td>
+<td>95.0</td>
+<td>97.3 / 111.8</td>
+<td>14.5</td>
+<td>209.1</td>
+<td>0.813</td>
+<td>-434</td>
+<td>5 Out / 0 Questionable</td>
+<td>2d / 0d B2B</td>
+<td>10.5</td>
+<td>4.0</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-16 7:00 PM ET</td>
+<td><b>CHI@CLE</b></td>
+<td>3-9 / 7-7</td>
+<td>103.7</td>
+<td>115.7 / 128.9</td>
+<td>13.2</td>
+<td>244.6</td>
+<td>0.791</td>
+<td>-377</td>
+<td>9 Out / 3 Questionable</td>
+<td>1d / 1d</td>
+<td>16.9</td>
+<td>3.7</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-16 7:00 PM ET</td>
+<td><b>MEM@WAS</b></td>
+<td>9-4 / 4-9</td>
+<td>100.2</td>
+<td>120.5 / 106.3</td>
+<td>-14.2</td>
+<td>226.8</td>
+<td>0.192</td>
+<td>+420</td>
+<td>4 Out / 3 Questionable &middot; 1 block NOT YET SUBMITTED</td>
+<td>1d / 0d B2B</td>
+<td>-11.9</td>
+<td>2.3</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-16 7:30 PM ET</td>
+<td><b>PHI@BKN</b></td>
+<td>11-3 / 3-9</td>
+<td>99.8</td>
+<td>115.0 / 106.9</td>
+<td>-8.1</td>
+<td>221.9</td>
+<td>0.310</td>
+<td>+222</td>
+<td>5 Out / 0 Questionable &middot; 1 block NOT YET SUBMITTED</td>
+<td>0d B2B / 1d</td>
+<td>4.5</td>
+<td>12.6</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-16 7:30 PM ET</td>
+<td><b>HOU@MIA</b></td>
+<td>10-3 / 7-6</td>
+<td>100.1</td>
+<td>122.6 / 111.8</td>
+<td>-10.8</td>
+<td>234.4</td>
+<td>0.254</td>
+<td>+293</td>
+<td>1 Out / 1 Questionable &middot; 1 block NOT YET SUBMITTED</td>
+<td>0d B2B / 1d</td>
+<td>-1.3</td>
+<td>9.5</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-16 8:00 PM ET</td>
+<td><b>POR@MIN</b></td>
+<td>9-3 / 9-4</td>
+<td>102.1</td>
+<td>112.0 / 116.3</td>
+<td>4.3</td>
+<td>228.3</td>
+<td>0.604</td>
+<td>-152</td>
+<td>7 Out / 0 Questionable</td>
+<td>2d / 1d</td>
+<td>8.7</td>
+<td>4.4</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-16 8:00 PM ET</td>
+<td><b>GSW@NOP</b></td>
+<td>8-5 / 4-10</td>
+<td>101.7</td>
+<td>125.2 / 112.0</td>
+<td>-13.2</td>
+<td>237.2</td>
+<td>0.209</td>
+<td>+377</td>
+<td>10 Out / 4 Questionable</td>
+<td>2d / 1d</td>
+<td>-8.3</td>
+<td>4.9</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-16 9:00 PM ET</td>
+<td><b>PHX@DEN</b></td>
+<td>5-6 / 7-4</td>
+<td>96.3</td>
+<td>111.1 / 116.1</td>
+<td>5.0</td>
+<td>227.2</td>
+<td>0.620</td>
+<td>-163</td>
+<td>filed, no Out/Questionable &middot; 2 blocks NOT YET SUBMITTED</td>
+<td>0d B2B / 1d</td>
+<td>13.2</td>
+<td>8.2</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-17 7:30 PM ET</td>
+<td><b>NYK@TOR</b></td>
+<td>6-6 / 5-7</td>
+<td>95.7</td>
+<td>109.2 / 105.2</td>
+<td>-4.0</td>
+<td>214.4</td>
+<td>0.403</td>
+<td>+148</td>
+<td>no official report covers this date yet</td>
+<td>1d / 1d</td>
+<td>-0.3</td>
+<td>3.7</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-17 8:00 PM ET</td>
+<td><b>POR@MIN</b></td>
+<td>9-3 / 9-4</td>
+<td>102.1</td>
+<td>112.0 / 116.3</td>
+<td>4.3</td>
+<td>228.3</td>
+<td>0.604</td>
+<td>-152</td>
+<td>no official report covers this date yet</td>
+<td>0d B2B / 0d B2B</td>
+<td>8.7</td>
+<td>4.4</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-17 8:00 PM ET</td>
+<td><b>DET@SAS</b></td>
+<td>8-4 / 11-2</td>
+<td>98.6</td>
+<td>106.0 / 113.8</td>
+<td>7.8</td>
+<td>219.8</td>
+<td>0.684</td>
+<td>-216</td>
+<td>no official report covers this date yet</td>
+<td>2d / 1d</td>
+<td>6.6</td>
+<td>1.2</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-17 11:00 PM ET</td>
+<td><b>CHA@LAL</b></td>
+<td>4-8 / 11-2</td>
+<td>97.5</td>
+<td>99.8 / 118.5</td>
+<td>18.7</td>
+<td>218.3</td>
+<td>0.874</td>
+<td>-694</td>
+<td>no official report covers this date yet</td>
+<td>1d / 1d</td>
+<td>18.9</td>
+<td>0.2</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-17 10:30 PM ET</td>
+<td><b>UTA@LAC</b></td>
+<td>1-12 / 3-8</td>
+<td>101.2</td>
+<td>108.8 / 115.3</td>
+<td>6.5</td>
+<td>224.1</td>
+<td>0.655</td>
+<td>-189</td>
+<td>no official report covers this date yet</td>
+<td>1d / 1d</td>
+<td>8.4</td>
+<td>1.9</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18 7:00 PM ET</td>
+<td><b>MEM@CLE</b></td>
+<td>9-4 / 7-7</td>
+<td>100.3</td>
+<td>121.8 / 114.5</td>
+<td>-7.3</td>
+<td>236.3</td>
+<td>0.327</td>
+<td>+205</td>
+<td>no official report covers this date yet</td>
+<td>1d / 1d</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18 7:00 PM ET</td>
+<td><b>HOU@IND</b></td>
+<td>10-3 / 5-9</td>
+<td>98.8</td>
+<td>117.7 / 106.8</td>
+<td>-10.9</td>
+<td>224.5</td>
+<td>0.252</td>
+<td>+296</td>
+<td>no official report covers this date yet</td>
+<td>1d / 2d</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18 7:00 PM ET</td>
+<td><b>MIL@MIA</b></td>
+<td>1-12 / 7-6</td>
+<td>103.0</td>
+<td>111.8 / 125.3</td>
+<td>13.5</td>
+<td>237.1</td>
+<td>0.796</td>
+<td>-389</td>
+<td>no official report covers this date yet</td>
+<td>2d / 1d</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18 7:00 PM ET</td>
+<td><b>PHI@ORL</b></td>
+<td>11-3 / 5-7</td>
+<td>98.6</td>
+<td>111.0 / 105.5</td>
+<td>-5.5</td>
+<td>216.5</td>
+<td>0.368</td>
+<td>+171</td>
+<td>no official report covers this date yet</td>
+<td>1d / 1d</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18 7:30 PM ET</td>
+<td><b>CHI@BKN</b></td>
+<td>3-9 / 3-9</td>
+<td>103.4</td>
+<td>116.0 / 120.8</td>
+<td>4.8</td>
+<td>236.8</td>
+<td>0.616</td>
+<td>-160</td>
+<td>no official report covers this date yet</td>
+<td>1d / 1d</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18 7:30 PM ET</td>
+<td><b>WAS@TOR</b></td>
+<td>4-9 / 5-7</td>
+<td>99.7</td>
+<td>108.0 / 115.3</td>
+<td>7.3</td>
+<td>223.3</td>
+<td>0.673</td>
+<td>-205</td>
+<td>no official report covers this date yet</td>
+<td>1d / 0d B2B</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18 8:00 PM ET</td>
+<td><b>DET@NOP</b></td>
+<td>8-4 / 4-10</td>
+<td>101.5</td>
+<td>122.8 / 109.0</td>
+<td>-13.8</td>
+<td>231.8</td>
+<td>0.199</td>
+<td>+402</td>
+<td>no official report covers this date yet</td>
+<td>0d B2B / 1d</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18 8:00 PM ET</td>
+<td><b>ATL@OKC</b></td>
+<td>7-6 / 8-5</td>
+<td>102.3</td>
+<td>111.7 / 114.0</td>
+<td>2.3</td>
+<td>225.7</td>
+<td>0.556</td>
+<td>-125</td>
+<td>no official report covers this date yet</td>
+<td>2d / 2d</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18 8:00 PM ET</td>
+<td><b>GSW@DAL</b></td>
+<td>8-5 / 7-6</td>
+<td>100.4</td>
+<td>116.2 / 112.1</td>
+<td>-4.1</td>
+<td>228.3</td>
+<td>0.401</td>
+<td>+149</td>
+<td>no official report covers this date yet</td>
+<td>1d / 2d</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18 9:30 PM ET</td>
+<td><b>BOS@DEN</b></td>
+<td>10-2 / 7-4</td>
+<td>94.5</td>
+<td>112.4 / 102.3</td>
+<td>-10.1</td>
+<td>214.7</td>
+<td>0.268</td>
+<td>+273</td>
+<td>no official report covers this date yet</td>
+<td>1d / 1d</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18 10:00 PM ET</td>
+<td><b>UTA@LAL</b></td>
+<td>1-12 / 11-2</td>
+<td>101.2</td>
+<td>106.7 / 126.6</td>
+<td>19.9</td>
+<td>233.3</td>
+<td>0.889</td>
+<td>-797</td>
+<td>no official report covers this date yet</td>
+<td>0d B2B / 0d B2B</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18 10:00 PM ET</td>
+<td><b>PHX@SAC</b></td>
+<td>5-6 / 1-11</td>
+<td>99.6</td>
+<td>119.7 / 111.1</td>
+<td>-8.6</td>
+<td>230.8</td>
+<td>0.299</td>
+<td>+234</td>
+<td>no official report covers this date yet</td>
+<td>1d / 2d</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Formula: POSS = pace_home + pace_away &minus; league_pace; PTS = (OffRtg &times; DefRtg_opp / league_OffRtg) &times; POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home &minus; PTS_away. Ratings: official advanced page (pace, OffRtg, DefRtg). Records: official standings page. Availability: official injury report, verbatim statuses &mdash; no line is moved by them (see section 4). Rest, back-to-back and 3-in-4 are counted from the official schedule and official finals. 'Estimator B' is engine/pipeline.py's own model line, shown only where the two windows overlap.</p>
+<h2 class="sec">2. Singles</h2><p class="secsub">24 of 25 games clear the |spread| &ge; 3.0 gate. Every pick is MODEL OUTPUT &mdash; UNVALIDATED: no strategy has passed the validation gates, so the stake is zero and the record is paper.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Matchup</th>
+<th>Pick</th>
+<th>Model p</th>
+<th>Fair price</th>
+<th>Gate</th>
+<th>Status</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-16</td>
+<td><b>ORL@BOS</b></td>
+<td>BOS -14.5</td>
+<td>0.813</td>
+<td>-434</td>
+<td>G-CFG pass (|spread| 14.5 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>CHI@CLE</b></td>
+<td>CLE -13.2</td>
+<td>0.791</td>
+<td>-377</td>
+<td>G-CFG pass (|spread| 13.2 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>MEM@WAS</b></td>
+<td>MEM -14.2</td>
+<td>0.808</td>
+<td>-420</td>
+<td>G-CFG pass (|spread| 14.2 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>PHI@BKN</b></td>
+<td>PHI -8.1</td>
+<td>0.690</td>
+<td>-222</td>
+<td>G-CFG pass (|spread| 8.1 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>HOU@MIA</b></td>
+<td>HOU -10.8</td>
+<td>0.746</td>
+<td>-293</td>
+<td>G-CFG pass (|spread| 10.8 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>POR@MIN</b></td>
+<td>MIN -4.3</td>
+<td>0.604</td>
+<td>-152</td>
+<td>G-CFG pass (|spread| 4.3 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>GSW@NOP</b></td>
+<td>GSW -13.2</td>
+<td>0.791</td>
+<td>-377</td>
+<td>G-CFG pass (|spread| 13.2 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>PHX@DEN</b></td>
+<td>DEN -5.0</td>
+<td>0.620</td>
+<td>-163</td>
+<td>G-CFG pass (|spread| 5.0 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>NYK@TOR</b></td>
+<td>NYK -4.0</td>
+<td>0.597</td>
+<td>-148</td>
+<td>G-CFG pass (|spread| 4.0 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>POR@MIN</b></td>
+<td>MIN -4.3</td>
+<td>0.604</td>
+<td>-152</td>
+<td>G-CFG pass (|spread| 4.3 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>DET@SAS</b></td>
+<td>SAS -7.8</td>
+<td>0.684</td>
+<td>-216</td>
+<td>G-CFG pass (|spread| 7.8 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>CHA@LAL</b></td>
+<td>LAL -18.7</td>
+<td>0.874</td>
+<td>-694</td>
+<td>G-CFG pass (|spread| 18.7 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>UTA@LAC</b></td>
+<td>LAC -6.5</td>
+<td>0.655</td>
+<td>-189</td>
+<td>G-CFG pass (|spread| 6.5 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>MEM@CLE</b></td>
+<td>MEM -7.3</td>
+<td>0.673</td>
+<td>-205</td>
+<td>G-CFG pass (|spread| 7.3 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>HOU@IND</b></td>
+<td>HOU -10.9</td>
+<td>0.748</td>
+<td>-296</td>
+<td>G-CFG pass (|spread| 10.9 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>MIL@MIA</b></td>
+<td>MIA -13.5</td>
+<td>0.796</td>
+<td>-389</td>
+<td>G-CFG pass (|spread| 13.5 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>PHI@ORL</b></td>
+<td>PHI -5.5</td>
+<td>0.632</td>
+<td>-171</td>
+<td>G-CFG pass (|spread| 5.5 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>CHI@BKN</b></td>
+<td>BKN -4.8</td>
+<td>0.616</td>
+<td>-160</td>
+<td>G-CFG pass (|spread| 4.8 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>WAS@TOR</b></td>
+<td>TOR -7.3</td>
+<td>0.673</td>
+<td>-205</td>
+<td>G-CFG pass (|spread| 7.3 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>DET@NOP</b></td>
+<td>DET -13.8</td>
+<td>0.801</td>
+<td>-402</td>
+<td>G-CFG pass (|spread| 13.8 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>ATL@OKC</b></td>
+<td>&lt;span class=&quot;na&quot; title=&quot;not published - no official source confirmed this value&quot;&gt;&amp;mdash;&lt;/span&gt;</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>G-CFG pass-through (|spread| 2.3 &lt; 3.0) — no bet</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>GSW@DAL</b></td>
+<td>GSW -4.1</td>
+<td>0.599</td>
+<td>-149</td>
+<td>G-CFG pass (|spread| 4.1 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>BOS@DEN</b></td>
+<td>BOS -10.1</td>
+<td>0.732</td>
+<td>-273</td>
+<td>G-CFG pass (|spread| 10.1 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>UTA@LAL</b></td>
+<td>LAL -19.9</td>
+<td>0.889</td>
+<td>-797</td>
+<td>G-CFG pass (|spread| 19.9 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>PHX@SAC</b></td>
+<td>PHX -8.6</td>
+<td>0.701</td>
+<td>-234</td>
+<td>G-CFG pass (|spread| 8.6 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+</tbody></table></div>
+<h2 class="sec">3. Two-leg parlays &mdash; the naive product, printed, with the band around it</h2><p class="secsub">The brief asks for every parlay to be priced with a measured rho and for the naive product to be printed next to it. Both columns are here. The rho column is an em dash because <b>no rho between two different games is measurable from official data</b>: the games have no natural pairing, so any figure would be an artefact of how the pairs were made. What is published instead of a fake number is the exact Fr&eacute;chet&ndash;Hoeffding band the joint probability must lie in for <i>any</i> rho, and the naive product is the price. Where a rho <i>is</i> measurable it is used &mdash; see section 4.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Legs</th>
+<th>p&#8321;</th>
+<th>p&#8322;</th>
+<th>Naive product p&#8321;&times;p&#8322;</th>
+<th>Fr&eacute;chet band (any rho)</th>
+<th>Fair price at the naive product</th>
+<th>Measured rho</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-16</td>
+<td>ORL@BOS — BOS -14.5<br>MEM@WAS — MEM -14.2</td>
+<td>0.813</td>
+<td>0.808</td>
+<td><b>0.6569</b></td>
+<td>[0.6210, 0.8080]</td>
+<td>-191</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>ORL@BOS — BOS -14.5<br>CHI@CLE — CLE -13.2</td>
+<td>0.813</td>
+<td>0.791</td>
+<td><b>0.6431</b></td>
+<td>[0.6040, 0.7910]</td>
+<td>-180</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td>ORL@BOS — BOS -14.5<br>GSW@NOP — GSW -13.2</td>
+<td>0.813</td>
+<td>0.791</td>
+<td><b>0.6431</b></td>
+<td>[0.6040, 0.7910]</td>
+<td>-180</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>CHA@LAL — LAL -18.7<br>DET@SAS — SAS -7.8</td>
+<td>0.874</td>
+<td>0.684</td>
+<td><b>0.5978</b></td>
+<td>[0.5580, 0.6840]</td>
+<td>-148</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>CHA@LAL — LAL -18.7<br>UTA@LAC — LAC -6.5</td>
+<td>0.874</td>
+<td>0.655</td>
+<td><b>0.5725</b></td>
+<td>[0.5290, 0.6550]</td>
+<td>-133</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td>CHA@LAL — LAL -18.7<br>POR@MIN — MIN -4.3</td>
+<td>0.874</td>
+<td>0.604</td>
+<td><b>0.5279</b></td>
+<td>[0.4780, 0.6040]</td>
+<td>-111</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>UTA@LAL — LAL -19.9<br>DET@NOP — DET -13.8</td>
+<td>0.889</td>
+<td>0.801</td>
+<td><b>0.7121</b></td>
+<td>[0.6900, 0.8010]</td>
+<td>-247</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>UTA@LAL — LAL -19.9<br>MIL@MIA — MIA -13.5</td>
+<td>0.889</td>
+<td>0.796</td>
+<td><b>0.7076</b></td>
+<td>[0.6850, 0.7960]</td>
+<td>-242</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td>UTA@LAL — LAL -19.9<br>HOU@IND — HOU -10.9</td>
+<td>0.889</td>
+<td>0.748</td>
+<td><b>0.6650</b></td>
+<td>[0.6370, 0.7480]</td>
+<td>-198</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">The band is [max(0, p&#8321;+p&#8322;&minus;1), min(p&#8321;,p&#8322;)]. A price inside it is not evidence of skill; the naive product is the independence price and is the number this site publishes.</p>
+<h2 class="sec">4. Same-game side-and-total &mdash; priced with the measured rho</h2><p class="secsub">Leg 1: the home team wins. Leg 2: the game total beats the originated total. These two legs come from the same final score, so their correlation is directly observable and is measured from <b>66 official finals</b> (2026-11-06 to 2026-11-15): <b>&rho;(home margin, game total) = -0.0635</b> (p = 0.6109), and -0.0621 on regulation games only. Both are statistically indistinguishable from zero, which is itself the finding: the naive product is very nearly the right price for this pair. P(total &gt; total) is exactly 0.500 because the originated total is this model's own median &mdash; stated rather than dressed up as a model edge.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Date</th>
+<th>Matchup</th>
+<th>P(home win)</th>
+<th>P(over total)</th>
+<th>Naive product</th>
+<th>Priced at measured &rho;</th>
+<th>Priced at &rho; (regulation)</th>
+<th>Fair price at &rho;</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>2026-11-16</td>
+<td><b>ORL@BOS</b></td>
+<td>0.813</td>
+<td>0.500</td>
+<td><b>0.4064</b></td>
+<td>0.3996</td>
+<td>0.3998</td>
+<td>+150</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>CHI@CLE</b></td>
+<td>0.791</td>
+<td>0.500</td>
+<td><b>0.3953</b></td>
+<td>0.3881</td>
+<td>0.3882</td>
+<td>+157</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>MEM@WAS</b></td>
+<td>0.192</td>
+<td>0.500</td>
+<td><b>0.0961</b></td>
+<td>0.0891</td>
+<td>0.0893</td>
+<td>+1021</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>PHI@BKN</b></td>
+<td>0.310</td>
+<td>0.500</td>
+<td><b>0.1549</b></td>
+<td>0.1460</td>
+<td>0.1462</td>
+<td>+585</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>HOU@MIA</b></td>
+<td>0.254</td>
+<td>0.500</td>
+<td><b>0.1270</b></td>
+<td>0.1189</td>
+<td>0.1191</td>
+<td>+740</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>POR@MIN</b></td>
+<td>0.604</td>
+<td>0.500</td>
+<td><b>0.3020</b></td>
+<td>0.2922</td>
+<td>0.2924</td>
+<td>+242</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>GSW@NOP</b></td>
+<td>0.209</td>
+<td>0.500</td>
+<td><b>0.1047</b></td>
+<td>0.0974</td>
+<td>0.0975</td>
+<td>+927</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-16</td>
+<td><b>PHX@DEN</b></td>
+<td>0.620</td>
+<td>0.500</td>
+<td><b>0.3102</b></td>
+<td>0.3005</td>
+<td>0.3007</td>
+<td>+232</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>NYK@TOR</b></td>
+<td>0.403</td>
+<td>0.500</td>
+<td><b>0.2016</b></td>
+<td>0.1918</td>
+<td>0.1920</td>
+<td>+421</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>POR@MIN</b></td>
+<td>0.604</td>
+<td>0.500</td>
+<td><b>0.3020</b></td>
+<td>0.2922</td>
+<td>0.2924</td>
+<td>+242</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>DET@SAS</b></td>
+<td>0.684</td>
+<td>0.500</td>
+<td><b>0.3418</b></td>
+<td>0.3328</td>
+<td>0.3330</td>
+<td>+200</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>CHA@LAL</b></td>
+<td>0.874</td>
+<td>0.500</td>
+<td><b>0.4370</b></td>
+<td>0.4318</td>
+<td>0.4319</td>
+<td>+131</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-17</td>
+<td><b>UTA@LAC</b></td>
+<td>0.655</td>
+<td>0.500</td>
+<td><b>0.3274</b></td>
+<td>0.3181</td>
+<td>0.3183</td>
+<td>+214</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>MEM@CLE</b></td>
+<td>0.327</td>
+<td>0.500</td>
+<td><b>0.1637</b></td>
+<td>0.1545</td>
+<td>0.1547</td>
+<td>+547</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>HOU@IND</b></td>
+<td>0.252</td>
+<td>0.500</td>
+<td><b>0.1261</b></td>
+<td>0.1180</td>
+<td>0.1181</td>
+<td>+747</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>MIL@MIA</b></td>
+<td>0.796</td>
+<td>0.500</td>
+<td><b>0.3980</b></td>
+<td>0.3908</td>
+<td>0.3909</td>
+<td>+155</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>PHI@ORL</b></td>
+<td>0.368</td>
+<td>0.500</td>
+<td><b>0.1840</b></td>
+<td>0.1745</td>
+<td>0.1747</td>
+<td>+473</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>CHI@BKN</b></td>
+<td>0.616</td>
+<td>0.500</td>
+<td><b>0.3078</b></td>
+<td>0.2981</td>
+<td>0.2984</td>
+<td>+235</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>WAS@TOR</b></td>
+<td>0.673</td>
+<td>0.500</td>
+<td><b>0.3363</b></td>
+<td>0.3272</td>
+<td>0.3274</td>
+<td>+205</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>DET@NOP</b></td>
+<td>0.199</td>
+<td>0.500</td>
+<td><b>0.0994</b></td>
+<td>0.0924</td>
+<td>0.0925</td>
+<td>+982</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>ATL@OKC</b></td>
+<td>0.556</td>
+<td>0.500</td>
+<td><b>0.2780</b></td>
+<td>0.2680</td>
+<td>0.2682</td>
+<td>+273</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>GSW@DAL</b></td>
+<td>0.401</td>
+<td>0.500</td>
+<td><b>0.2004</b></td>
+<td>0.1906</td>
+<td>0.1908</td>
+<td>+424</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>BOS@DEN</b></td>
+<td>0.268</td>
+<td>0.500</td>
+<td><b>0.1340</b></td>
+<td>0.1257</td>
+<td>0.1258</td>
+<td>+695</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>UTA@LAL</b></td>
+<td>0.889</td>
+<td>0.500</td>
+<td><b>0.4443</b></td>
+<td>0.4395</td>
+<td>0.4396</td>
+<td>+127</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>PHX@SAC</b></td>
+<td>0.299</td>
+<td>0.500</td>
+<td><b>0.1496</b></td>
+<td>0.1408</td>
+<td>0.1409</td>
+<td>+610</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a> <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">ratings</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Joint probability = P(Z&#8321; &gt; z&#8321;, Z&#8322; &gt; 0) under a Gaussian copula with the measured &rho;, integrated numerically; at &rho; = 0 it reduces exactly to the naive product, so the two columns are directly comparable.</p>
+<h2 class="sec">5. What was measured, and on how many games</h2><p class="secsub">Pearson r on official final scores. Nothing here is model-derived.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>x</th>
+<th>y</th>
+<th>r</th>
+<th>p</th>
+<th>n</th>
+<th>Subset</th>
+<th>Status</th>
+<th>Why / note</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>home margin</td>
+<td>game total</td>
+<td>-0.0635</td>
+<td>0.6109</td>
+<td>66</td>
+<td>all finals</td>
+<td>MEASURED from official final scores</td>
+<td>the rho a same-game side-and-total parlay needs</td>
+<td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">official games index</a></td>
+</tr>
+<tr>
+<td>home margin</td>
+<td>game total</td>
+<td>-0.0621</td>
+<td>0.6272</td>
+<td>63</td>
+<td>regulation finals only (no overtime)</td>
+<td>MEASURED from official final scores</td>
+<td>overtime raises the total without moving the margin the same way, so the regulation-only figure is the cleaner estimate</td>
+<td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">official games index</a></td>
+</tr>
+<tr>
+<td>home win</td>
+<td>&mdash;</td>
+<td>0.5455</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td>66</td>
+<td>all official finals</td>
+<td>MEASURED from official final scores</td>
+<td>the measured home-win rate the brief wants home-court advantage pinned to; measured, published, and <b>not yet applied</b> to any line (F84)</td>
+<td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">official games index</a></td>
+</tr>
+</tbody></table></div>
+<p class="tnote">Corpus: data/raw/games_completed.json (60 games); data/verified/finals_2026-11-13.json (8 games); data/official/results_2026-11-14.json (5 games); data/official/results_2026-11-15.json (1 games). Only games whose official label is Final are used &mdash; a game still live at capture time is excluded, never filled in.</p>
+<h2 class="sec">6. What could not be measured</h2><p class="secsub">Published as a gap rather than filled with a plausible number.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Quantity</th>
+<th>Why it is not measurable from official data</th>
+<th>What is published instead</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>rho between two different games on the same date</td>
+<td>two games have no natural pairing, so a number would be an artefact of how the pairs were made rather than a property of the games</td>
+<td>cross-game parlays are published as the naive product p1 x p2 with the Frechet-Hoeffding band [max(0, p1+p2-1), min(p1, p2)]; no rho is asserted</td>
+<td class="src"><span class="na" title="not published - two games have no natural pairing, so a number would be an artefact of how the pairs were made rather than a property of the games">&mdash;</span></td>
+</tr>
+<tr>
+<td>rho between a model pick and a market price</td>
+<td>no NBA-operated source publishes a price, so there is no market leg to correlate</td>
+<td>market-comparison gates remain blocked</td>
+<td class="src"><span class="na" title="not published - no NBA-operated source publishes a price, so there is no market leg to correlate">&mdash;</span></td>
+</tr>
+</tbody></table></div>
+<h2 class="sec">7. Flags carried by this window</h2><p class="secsub">Every limitation that applies to the numbers above, with the official link that would resolve it.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>ID</th>
+<th>Severity</th>
+<th>Item</th>
+<th>Detail</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>F-W01</td>
+<td>medium</td>
+<td><b>Repeated matchups printed by the official schedule: POR@MIN on both 11/16 and 11/17, NYK@TOR on both 11/15 and 11/17 (same venues).</b></td>
+<td>Rows transcribed from the official schedule with distinct game IDs (verified in the per-game link URLs on 2026-11-15); carried as printed and flagged for manual confirmation.</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F-W02</td>
+<td>high (inherited)</td>
+<td><b>No home-court advantage in any line.</b></td>
+<td>HCA could not be sourced from an official NBA page; home moneylines are understated by exactly the real HCA. (Build B's measured home-win-rate 57.6% note remains a published finding, not applied.)</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F-W03</td>
+<td>medium</td>
+<td><b>Inputs dated, disclosed: ratings re-cut from the official captures retrieved 2026-11-15T23:38Z..23:52Z; records captured 2026-11-15; injury edition 2026-11-15_0615PM (revision 11/15/2026 06:15 PM).</b></td>
+<td>Every pick built on these lines is labelled MODEL OUTPUT — UNVALIDATED and stamped with this as-of date. Records go stale as earlier games in the window complete (rolling refresh job).</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F-W04</td>
+<td>medium</td>
+<td><b>The newest stored edition (2026-11-15_0615PM, revision 11/15/2026 06:15 PM) covers 11/15/2026, 11/16/2026 only; later days in the window have no rows, and some blocks are printed NOT YET SUBMITTED.</b></td>
+<td>Teams must file by 5 p.m. local the day before a game (1 p.m. local for the second night of a back-to-back), so blocks for the later days of the window cannot exist yet. Game-day editions appear 11 a.m.–1 p.m. local per league policy.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F-W05</td>
+<td>medium</td>
+<td><b>Some team blocks in the 2026-11-15_0615PM edition are printed NOT YET SUBMITTED, and some clubs have no block at all.</b></td>
+<td>The league prints a NOT YET SUBMITTED placeholder for a club that has not filed; an absent block is recorded as absent and never read as 'no injuries'. Both states are published verbatim.</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F-W06</td>
+<td>medium</td>
+<td><b>22 injury rows lost their Team cell to PDF merged cells; team_effective inherits the nearest printed team.</b></td>
+<td>Rows are marked team_inherited in data/official/injury_2026-11-15_0615PM.json and are published with that caveat. No line moves: no absence classifies as NEW_ABSENCE from evidence in this repo (canonical rule, scripts/injury_impact.py) -&gt; adjustment 0.</td>
+<td class="src"><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F-W07</td>
+<td>high</td>
+<td><b>No market prices exist anywhere on this page.</b></td>
+<td>No sportsbook feed is reachable or claimed; every probability is model-internal. Market-comparison gates (G4/G5) stay blocked.</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F-W08</td>
+<td>high</td>
+<td><b>No strategy has passed the validation gates (Build A 0/8, Build B 0/10).</b></td>
+<td>Every pick is therefore MODEL OUTPUT — UNVALIDATED, unfunded, and capped at zero stake until a strategy passes the gates. Outcomes: data/derived/strategies.json (Build A), docs/data/leaderboard.json (Build B) — internal artifacts, not official NBA sources.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">link</a></td>
+</tr>
+</tbody></table></div>
+<h2 class="sec">Where the inputs came from</h2><p class="secsub">One official URL per input. Nothing is inferred.</p>
+<div class="tablewrap">
+<table class="tbl "
+>
+<thead><tr>
+<th>Input</th>
+<th>Official page</th>
+<th>Captured</th>
+<th class="src">Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Schedule, tip times, venues</td>
+<td><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">https://www.nba.com/schedule</a></td>
+<td>2026-11-15</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">schedule</a></td>
+</tr>
+<tr>
+<td>Team records</td>
+<td><a href="https://www.nba.com/standings" target="_blank" rel="noopener">https://www.nba.com/standings</a></td>
+<td>2026-11-15</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">standings</a></td>
+</tr>
+<tr>
+<td>Pace, OffRtg, DefRtg</td>
+<td><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season</a></td>
+<td>2026-11-15T23:38Z..23:52Z</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">advanced</a></td>
+</tr>
+<tr>
+<td>Own scoring splits</td>
+<td><a href="https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season</a></td>
+<td>2026-11-15T23:38Z..23:52Z</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">traditional</a></td>
+</tr>
+<tr>
+<td>Opponent scoring splits</td>
+<td><a href="https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;SeasonType=Regular+Season</a></td>
+<td>2026-11-15T23:38Z..23:52Z</td>
+<td class="src"><a href="https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">opponent</a></td>
+</tr>
+<tr>
+<td>Injury statuses</td>
+<td><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf" target="_blank" rel="noopener">official PDF</a></td>
+<td>11/15/2026 06:15 PM (2026-11-15T23:38Z..23:52Z)</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">index</a></td>
+</tr>
+<tr>
+<td>Injury policy (filing deadlines)</td>
+<td><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">https://official.nba.com/nba-injury-report-2026-27-season/</a></td>
+<td>policy page</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">index</a></td>
+</tr>
+</tbody></table></div>
+    <footer class="foot">
+      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
+      signal is skill or luck. Nothing on this site is a betting recommendation, and no
+      market price is used anywhere: every "edge" is against a naive model that stands in
+      for the market, because no official NBA-operated price feed exists.</p>
+      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
+      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
+      Earlier builds, kept as archives:
+      <a href="../../command-center/index.html">Command Center</a> &middot;
+      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
+      <a href="../../desk.html">Integration Desk</a> &middot;
+      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
+      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
+      <a href="../../origination/index.html">Origination build &mdash; 22 lines for 14&ndash;16 Nov, 101-game walk-forward</a> &middot;
+      <a href="../../strategy-lab/index.html">Strategy Lab &mdash; season-wide audit on 160 games</a> &middot;
+      <a href="../../schedule-verified.html">verified schedule</a> &middot;
+      <a href="../../verification.html">live verification</a>.</p>
+    </footer>
+  </main>
+</div>
+<script src="../assets/site.js"></script>
+</body>
+</html>

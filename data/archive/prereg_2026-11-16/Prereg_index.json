@@ -1,0 +1,26 @@
+{
+ "title": "Pre-registration index — strategies frozen before the first tip of the 2026-11-16 .. 2026-11-18 slate",
+ "rule": "Per the project brief: every strategy's signal, thresholds, universe and exact settlement rule are frozen before the first bet of the slate. Files are hash-chained into data/ledger/ledger.json at publication.",
+ "frozen_at_utc": "2026-11-16T00:16Z",
+ "slate_window": "2026-11-16 .. 2026-11-18",
+ "games_in_universe": 25,
+ "games_per_day": "2026-11-16=8, 2026-11-17=5, 2026-11-18=12",
+ "first_tip_utc": "2026-11-17T00:00Z",
+ "first_game_tipping": "2026-11-16 ORL@BOS (7:00 PM ET)",
+ "files": {
+  "data/prereg/S01.json": "62daaeeebeb4ed9ef4e40a7e1e59f2fa21c6a1477b54ccf545fd80e25ef9c9ad",
+  "data/prereg/S02.json": "c0d61a6be4d13dcd56a11b4141b2ba96ef7544c4623563242498e2657f6a5cae",
+  "data/prereg/S03.json": "7335207d1e5bed3f8964d0c4c4fd51aee405342c9232088453b8cf639e5a5e29",
+  "data/prereg/S04.json": "6e72a6d00e21ad44edc2099347f11c4aa1a062ec0ba46e80c9fd5b28a51b1162",
+  "data/prereg/S05.json": "56b3ea3168ef45987814b018b0ebcca0d6540376eaddc47dc08226a1a84ef724",
+  "data/prereg/S06.json": "2fdb86ccaec143240eaf13833fb8f205b6e259273e02ccde6fac26784971cc4c",
+  "data/prereg/S07.json": "5c592b300f6b5ef421d531045baf5afb8bb99d06726030a50dd9b2d79568699f",
+  "data/prereg/S08.json": "267b62a7c85085fb684ca0119e409798585ba9e378beac9f9bb0189b8b8c5af2",
+  "data/prereg/T-SINGLE.json": "d4bcb5ab8530929fa91c80c2d1e6c4846c4bc2d5c7ef59324c4a4c2071356366",
+  "data/prereg/T-PARLAY.json": "bbf8b4a107aebf083ed2fd49223edb1902d1f943706110e2a4966dbfef777c38",
+  "data/prereg/T-SGP.json": "7f2d6744f793f2bba8ba79d7dcac3a8946e1ae9624c03ec1b6f693bb9c923f96"
+ },
+ "universe": "all 25 games on the official 2026-11-16 .. 2026-11-18 slate (data/raw/official_schedule_capture_2026-11-16.json: 2026-11-16=8, 2026-11-17=5, 2026-11-18=12); source file data/raw/official_schedule_capture_2026-11-16.json; window rule = the newest official schedule capture, today (UTC) + up to 3 days per the project brief",
+ "slate_tickets_published": "data/derived/horizon_picks.json (archived byte-identical at data/archive/horizon_picks_2026-11-16.json)",
+ "prior_vintage_settled": "data/settlement/settlement_2026-11-14.json covers the 2026-11-14 slate of the 2026-11-14..17 vintage; that vintage's 11/15-11/17 picks remain settleable from data/archive/horizon_picks_2026-11-14.json (ledger entry 1)."
+}
