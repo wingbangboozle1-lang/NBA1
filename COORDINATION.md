@@ -6333,3 +6333,14 @@ Branch `arena/0d7e58e9-nba1`, based on `main` `add1e74` (PR #145 merge). Platfor
 ### 56.4 Delivery
 
 PR and merge are recorded below when executed. This change is COORDINATION.md only; the site does not change, so the Pages deploy is expected to be a no-op rebuild of the same tree.
+
+### 56.5 Delivery record (executed 2026-11-16 18:2x–18:4x UTC)
+
+| Item | Value |
+| --- | --- |
+| PR | [#146](https://github.com/wingbangboozle1-lang/NBA1/pull/146) — board-only (COORDINATION.md), `validate` check **pass** (1m34s) before merge |
+| Conflict and resolution | PR #146 was CONFLICTING after `arena/dfa3057f-nba1` merged its §55 (PR #147/#148). Resolved by taking main's file and re-adding this section as **§56**, per that session's numbering request in its §55.7. Main's §55 is unchanged. No content dropped. |
+| Merge | `gh pr merge 146 --merge`; merge commit `55bcba1ac6feff8e2eb2582368682aec99975baa` |
+| Pages | `pages/builds/latest`: `built`, commit `55bcba1` |
+| Live fetch-back | https://wingbangboozle1-lang.github.io/NBA1/ serves the 29-game 16–19 Nov horizon, the 11/15 settlement stamp `2026-11-16T14:45Z` and 123 open flags (unchanged by this merge, as expected for a board-only change). `COORDINATION.md` is not a published page; its direct URL returns 404, which is expected. |
+| Open items | None from this session. §55.2 (unverified team records on the schedule file) and §55.3 remain as listed. |
