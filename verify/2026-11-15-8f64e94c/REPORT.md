@@ -17,11 +17,11 @@ statement is historical; this pass fetched live official pages and says exactly 
 | # | Check | Result | Evidence |
 | --- | --- | --- | --- |
 | 1 | 2026-11-15 slate: 9 games on the official date page | **9/9 present**, game ids 0022600236–0022600244 match the published horizon | [games?date=2026-11-15](https://www.nba.com/games?date=2026-11-15) |
-| 2 | Published horizon (34 games, 15–18 Nov) vs live official schedule listing | **33/34 rows agree** on date, matchup and tip; 1 disagreement (GSW@NOP tip time → **F78**) | `compare.json`, [games?date=2026-11-16](https://www.nba.com/games?date=2026-11-16) |
+| 2 | Published horizon (34 games, 15–18 Nov) vs live official schedule listing | **33/34 rows agree** on date, matchup and tip; 1 disagreement (GSW@NOP tip time → **F92**) | `compare.json`, [games?date=2026-11-16](https://www.nba.com/games?date=2026-11-16) |
 | 3 | Published schedule capture (`data/official/schedule_2026-11-15_to_18.json`, 34 rows) vs live listing | **33/34 agree**; the same single disagreement | `compare.json` |
 | 4 | 2026-11-15 games already final at read time | **2 finals verified**: IND@PHI 124–131, LAL@PHX 131–123; both LINESCORES quarters sum to the printed final | [IND@PHI](https://www.nba.com/game/ind-vs-phi-0022600236), [LAL@PHX](https://www.nba.com/game/lal-vs-phx-0022600237) |
 | 5 | Per-game result feed kept current | `data/official/results_2026-11-15.json` written: 2 FINAL rows (date, teams, final score, quarter scores, officials, attendance, gamebook PDF links) + 7 NOT FINAL stubs with observed state and null scores | same rows, one source URL each |
-| 6 | Injury-report edition currency | Basis edition 11/15 06:15 AM ET confirmed on the official index; **newer 11/15 editions exist** (≥ 4:15 PM ET at read time) and are not captured → **F79** | [official injury index](https://official.nba.com/nba-injury-report-2026-27-season/) |
+| 6 | Injury-report edition currency | Basis edition 11/15 06:15 AM ET confirmed on the official index; **newer 11/15 editions exist** (≥ 4:15 PM ET at read time) and are not captured → **F93** | [official injury index](https://official.nba.com/nba-injury-report-2026-27-season/) |
 | 7 | Horizon flag F-W01 (repeated matchups) | **Confirmed as printed by the official feed**: POR@MIN on 11/16 (0022600250) and 11/17 (0022600254); NYK@TOR on 11/15 (0022600241) and 11/17 (0022600253) — distinct game ids and tips, not a capture artifact | `live_schedule_2026-11-15T2352Z.json` |
 | 8 | Settlement discipline | **No pick graded in this pass.** The 11/15 ledger settlement runs at game-day end after all 9 games are final (the slate's last tip is OKC@SAC 09:00 PM ET). The two verified finals are recorded in the feed now, exactly as the rule allows | `data/official/results_2026-11-15.json` `settlement_note` |
 
@@ -56,7 +56,9 @@ are the official record used, and this is stated on the row.
 
 ## 3. Irregularities (published on Flagged for Review, non-blocking)
 
-1. **F78 — GSW@NOP 2026-11-16 tip time disagreement.** The published capture and the
+Both flags were conceived as F78/F79 and renumbered at merge to F92/F93 (F78-F91 were published first by `arena/513516f6-nba1` in PR #108).
+
+1. **F92 — GSW@NOP 2026-11-16 tip time disagreement.** The published capture and the
    frozen pre-tip horizon row say **09:00 PM ET** (read 2026-11-15T11:35Z..12:20Z); three
    live reads at 23:45Z–23:58Z — two scoreboard strips and a direct read of the 11/16
    date page — say **8:00 PM ET** for game id 0022600251. Either the official page moved
@@ -64,7 +66,7 @@ are the official record used, and this is stated on the row.
    the frozen pre-tip row is **not** edited (a pick re-priced after publication cannot be
    graded); the next rolling re-cut should take the live page's value.
    Source: [games?date=2026-11-16](https://www.nba.com/games?date=2026-11-16).
-2. **F79 — injury-edition capture gap.** The league published 11/15 editions in
+2. **F93 — injury-edition capture gap.** The league published 11/15 editions in
    15-minute steps through at least 4:15 PM ET; the site's basis edition is 06:15 AM ET
    (revision 2026-11-15 06:15 AM ET, retrieved 2026-11-15T11:52Z, 101 rows). Lines are
    deliberately **not** re-priced (SG29/F72). The Injuries page banner already states the

@@ -45,10 +45,10 @@ comparison with <code>python3 verify/2026-11-15-8f64e94c/compare.py</code>. The 
   The per-game result feed (<code>data/official/results_2026-11-15.json</code>) is current: 2 FINAL rows, 7 NOT FINAL stubs.</li>
   <li><span class="badge b-ok">33/34</span> Published horizon rows and the schedule capture agree with the live official
   schedule listing on date, matchup, game id and tip — one disagreement.</li>
-  <li><span class="badge b-med">F78</span> <strong>GSW@NOP 11/16 tip time:</strong> the published capture and the frozen
+  <li><span class="badge b-med">F92</span> <strong>GSW@NOP 11/16 tip time:</strong> the published capture and the frozen
   pre-tip row say 09:00 PM ET; three live reads print <strong>8:00 PM ET</strong> for the same game id (0022600251).
   Both readings kept; the frozen row is not edited; the next rolling re-cut takes the live value.</li>
-  <li><span class="badge b-med">F79</span> <strong>Injury-edition capture gap:</strong> the league published 11/15 editions
+  <li><span class="badge b-med">F93</span> <strong>Injury-edition capture gap:</strong> the league published 11/15 editions
   in 15-minute steps through at least 4:15 PM ET; the site's basis edition is 06:15 AM ET. Lines are deliberately not
   re-priced (SG29/F72); capture the rest at the next refresh (SG30).</li>
   <li><span class="badge b-low">F-W01</span> The horizon's repeated-matchup flag is <strong>confirmed as printed by the
@@ -62,12 +62,12 @@ comparison with <code>python3 verify/2026-11-15-8f64e94c/compare.py</code>. The 
 <table>
 <tr><th>#</th><th>Source URL</th><th>Used for</th></tr>
 <tr><td>V-G15</td><td><a href="https://www.nba.com/games?date=2026-11-15">nba.com/games?date=2026-11-15</a></td><td>nine 11/15 game states and finals</td></tr>
-<tr><td>V-G16</td><td><a href="https://www.nba.com/games?date=2026-11-16">nba.com/games?date=2026-11-16</a></td><td>eight 11/16 fixtures; the confirming read for F78</td></tr>
+<tr><td>V-G16</td><td><a href="https://www.nba.com/games?date=2026-11-16">nba.com/games?date=2026-11-16</a></td><td>eight 11/16 fixtures; the confirming read for F92</td></tr>
 <tr><td>V-G17</td><td><a href="https://www.nba.com/games?date=2026-11-17">nba.com/games?date=2026-11-17</a></td><td>five 11/17 fixtures (scoreboard strips)</td></tr>
 <tr><td>V-G18</td><td><a href="https://www.nba.com/games?date=2026-11-18">nba.com/games?date=2026-11-18</a></td><td>twelve 11/18 fixtures (scoreboard strips)</td></tr>
 <tr><td>V-B236</td><td><a href="https://www.nba.com/game/ind-vs-phi-0022600236">nba.com/game/ind-vs-phi-0022600236</a></td><td>IND@PHI LINESCORES, GAME INFO, gamebook links</td></tr>
 <tr><td>V-B237</td><td><a href="https://www.nba.com/game/lal-vs-phx-0022600237">nba.com/game/lal-vs-phx-0022600237</a></td><td>LAL@PHX LINESCORES, GAME INFO, gamebook links</td></tr>
-<tr><td>V-IX</td><td><a href="https://official.nba.com/nba-injury-report-2026-27-season/">official.nba.com injury-report index</a></td><td>injury-edition currency (F79)</td></tr>
+<tr><td>V-IX</td><td><a href="https://official.nba.com/nba-injury-report-2026-27-season/">official.nba.com injury-report index</a></td><td>injury-edition currency (F93)</td></tr>
 <tr><td>V-PDF</td><td><a href="https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf">Injury-Report_2026-11-15_06_15AM.pdf</a></td><td>the basis edition named on the Injuries banner</td></tr>
 </table>
 
@@ -87,16 +87,17 @@ official record used and the row says so.</p>
 <h2>3. Schedule comparison summary</h2>
 <table>
 <tr><th>Check</th><th>Rows</th><th>Agree</th><th>Disagree</th><th>Detail</th></tr>
-<tr><td>Published horizon vs live listing</td><td>34</td><td>33</td><td>1 (F78)</td><td><code>compare.json → horizon_vs_live</code> (<a href="https://www.nba.com/games?date=2026-11-16">source</a>)</td></tr>
-<tr><td>Schedule capture vs live listing</td><td>34</td><td>33</td><td>1 (F78)</td><td><code>compare.json → schedule_capture_vs_live</code> (<a href="https://www.nba.com/games?date=2026-11-16">source</a>)</td></tr>
+<tr><td>Published horizon vs live listing</td><td>34</td><td>33</td><td>1 (F92)</td><td><code>compare.json → horizon_vs_live</code> (<a href="https://www.nba.com/games?date=2026-11-16">source</a>)</td></tr>
+<tr><td>Schedule capture vs live listing</td><td>34</td><td>33</td><td>1 (F92)</td><td><code>compare.json → schedule_capture_vs_live</code> (<a href="https://www.nba.com/games?date=2026-11-16">source</a>)</td></tr>
 <tr><td>11/15 finals quarter sums</td><td>2</td><td>2</td><td>0</td><td><code>compare.json → finals_verified</code> (<a href="https://www.nba.com/game/ind-vs-phi-0022600236">source</a>)</td></tr>
 </table>
 
 <h2>4. Irregularities (non-blocking)</h2>
+<p class="sub">Both flags were conceived as F78/F79 and renumbered at merge to F92/F93 (F78&ndash;F91 were published first by arena/513516f6-nba1 in PR #108).</p>
 <table>
 <tr><th>ID</th><th>Item</th><th>Source</th></tr>
-<tr><td><span class="badge b-med">F78</span></td><td>GSW@NOP 11/16 tip: capture says 09:00 PM ET (read 11:35–12:20Z), live page says 8:00 PM ET (read 23:45–23:58Z). Frozen pre-tip row not edited; both readings published.</td><td><a href="https://www.nba.com/games?date=2026-11-16">nba.com/games?date=2026-11-16</a></td></tr>
-<tr><td><span class="badge b-med">F79</span></td><td>11/15 injury editions after 06:15 AM ET are not captured; the banner names the basis edition. Lines not re-priced by rule (SG29/F72).</td><td><a href="https://official.nba.com/nba-injury-report-2026-27-season/">official injury index</a></td></tr>
+<tr><td><span class="badge b-med">F92</span></td><td>GSW@NOP 11/16 tip: capture says 09:00 PM ET (read 11:35–12:20Z), live page says 8:00 PM ET (read 23:45–23:58Z). Frozen pre-tip row not edited; both readings published.</td><td><a href="https://www.nba.com/games?date=2026-11-16">nba.com/games?date=2026-11-16</a></td></tr>
+<tr><td><span class="badge b-med">F93</span></td><td>11/15 injury editions after 06:15 AM ET are not captured; the banner names the basis edition. Lines not re-priced by rule (SG29/F72).</td><td><a href="https://official.nba.com/nba-injury-report-2026-27-season/">official injury index</a></td></tr>
 <tr><td><span class="badge b-low">log</span></td><td>F74's detail cross-references Q22 ("the merged-cell reading"), but Q22 is the SGP void-convention question. Register is append-only this pass — logged for the content owner, not rewritten.</td><td><a href="https://www.nba.com/games?date=2026-11-15">register source row (F74)</a></td></tr>
 <tr><td><span class="badge b-low">F-W01</span></td><td>Repeated matchups (POR@MIN 11/16+11/17; NYK@TOR 11/15+11/17) confirmed on the official feed with distinct game ids — not a capture artifact.</td><td><a href="https://www.nba.com/games?date=2026-11-17">nba.com/games?date=2026-11-17</a></td></tr>
 </table>

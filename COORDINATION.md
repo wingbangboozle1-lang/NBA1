@@ -3997,7 +3997,7 @@ unmerged copy are repaired here rather than copied (see I02).
 | --- | --- | --- | --- |
 | I01 | Board claim (banner + §0b row + this §44) pushed before any other edit | done (this commit) | `COORDINATION.md` (top banner + §0b row + §44 only) |
 | I02 | Take over PR #106's live-site coherence work: landing tiles, executive summary and the injuries banner state the current 15–18 Nov rolling slate (data already rolled by PR #104, pages had not followed). Repair the two mid-sentence truncations their unmerged copy left in `build_dashboard.py` and `injuries.html`; compute tile counts from the data files instead of hard-coding | done (commit `e096080`; also repaired their `what_is_live_now` list→string schema break and the nav link that resolved to the wrong path on subpages) | `scripts/build_dashboard.py`, `index.html`, `site/pages/injuries.html`, `data/content/executive.json`, `docs/data/executive.json`, `site/data/executive.json` |
-| I03 | Live official re-verification pass (2026-11-15 23:45–23:58Z) against NBA.com (reachable via the page-fetch tool in this environment): per-game result feed rows for the 11/15 games that are already final (one row per game: date, teams, final score, quarter scores, box-score URL), currency check of the schedule/standings/team-stat/injury captures published on the site, row-level agreement or disagreement recorded — no value inferred | done (2 finals verified with quarter sums; 33/34 schedule rows agree; irregularities F78/F79 published; F74→Q22 cross-reference logged for the content owner) | `verify/2026-11-15-8f64e94c/**` (new namespace), `data/official/results_2026-11-15.json` (new file), `data/content/flagged.json` (append-only: F78, F79 added — scope extended to the register at 2026-11-16T00:05Z per the brief's flag-the-irregularities rule; existing items untouched) |
+| I03 | Live official re-verification pass (2026-11-15 23:45–23:58Z) against NBA.com (reachable via the page-fetch tool in this environment): per-game result feed rows for the 11/15 games that are already final (one row per game: date, teams, final score, quarter scores, box-score URL), currency check of the schedule/standings/team-stat/injury captures published on the site, row-level agreement or disagreement recorded — no value inferred | done (2 finals verified with quarter sums; 33/34 schedule rows agree; irregularities F92/F93 published (renumbered from F78/F79 at merge — see §41.0a); F74→Q22 cross-reference logged for the content owner) | `verify/2026-11-15-8f64e94c/**` (new namespace), `data/official/results_2026-11-15.json` (new file), `data/content/flagged.json` (append-only: F78, F79 added — scope extended to the register at 2026-11-16T00:05Z per the brief's flag-the-irregularities rule; existing items untouched) |
 | I04 | Full gate suite to green on the final tree: the `pages.yml` validate steps in order, `verify_all.py`, `render_check.mjs`, `test_refresh_gate`, `build_verification_page.py` idempotence, workflow relative-link scan | done (all green after I02 and again after I03; results in §44.3) | runs only; red-gate fixes limited to files in this claim's scope, shared-file fixes logged as requests |
 | I05 | Integration PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy + live fetch-back, close PR #106 with takeover credit, record PR link + merge result in this section | unclaimed | `COORDINATION.md` (§44 delivery record) |
 
@@ -4051,10 +4051,11 @@ the wrong path on subpages; fixed with the `%(repo)s` prefix.
 Highlights: the two 11/15 finals verified with quarter sums (IND@PHI 124–131,
 LAL@PHX 131–123) and recorded in `data/official/results_2026-11-15.json` (2 FINAL rows +
 7 NOT FINAL stubs — the feed is current, nothing settled before the game day ends);
-33/34 horizon and schedule rows agree with the live official pages; **F78** (GSW@NOP
+33/34 horizon and schedule rows agree with the live official pages; **F92** (GSW@NOP
 11/16 tip: capture 09:00 PM ET vs live 8:00 PM ET — both readings kept, frozen pre-tip
-row not edited) and **F79** (11/15 injury editions after the 06:15 AM ET basis not
-captured) appended to the register (75 items, next free F80); F-W01's repeated matchups
+row not edited) and **F93** (11/15 injury editions after the 06:15 AM ET basis not
+captured) appended to the register (89 items after the merge, next free F94 — the two flags were
+renumbered F78/F79 → F92/F93 at merge, see §41.0a); F-W01's repeated matchups
 confirmed as genuinely printed by the official feed; F74's Q22 cross-reference logged as
 mispointed (Q22 is the SGP void-convention question) for the content owner. Gate note:
 the HTML twin first cited the NBA gamebook host `statsdmz.nba.com`, which

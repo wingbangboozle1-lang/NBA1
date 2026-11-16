@@ -130,7 +130,7 @@ def main():
             "schedule_rows": len(sched_rows),
             "schedule_agree": sum(1 for r in sched_rows if r["result"] == "AGREE"),
             "finals_verified": len(finals),
-            "injury_basis_edition": "11/15/26 06:15 AM ET (index shows newer 11/15 editions; currency gap published as F78)",
+            "injury_basis_edition": "11/15/26 06:15 AM ET (index shows newer 11/15 editions; currency gap published as F93 (renumbered from F79 at merge))",
         },
     }
     with open(os.path.join(HERE, "compare.json"), "w", encoding="utf-8") as fh:
