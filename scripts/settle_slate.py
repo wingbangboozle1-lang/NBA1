@@ -358,6 +358,28 @@ def main(argv=None):
         print("dry run: nothing written")
         return 0
 
+    # --- idempotency guard (2026-11-16, session arena/0e9c924f-nba1, §50 N03) --
+    # The scheduled workflow's settle step re-runs settle_slate after every
+    # successful fetch. If no new date has become settleable since the record
+    # was written, re-running would overwrite data/settlement/<slate>.json and
+    # append duplicate verification/settlement ledger entries. verify_ledger
+    # re-hashes that settlement file against the digest recorded at entry 7,
+    # so the overwrite alone would turn the chain check red. Exit 0 without
+    # touching anything when every date settleable right now is already in the
+    # existing record; a genuinely new settleable date still takes the normal
+    # path (with the vintage-mismatch caveat flagged in F126 (renumbered from F115 at merge)).
+    out_rel_existing = f"data/settlement/settlement_{args.slate}.json"
+    existing_path = os.path.join(ROOT, out_rel_existing)
+    if os.path.exists(existing_path):
+        existing = json.load(open(existing_path, encoding="utf-8"))
+        prev_settled = set(existing.get("summary", {}).get("dates_settled") or [])
+        if settled_dates and set(settled_dates) <= prev_settled:
+            print(f"already settled: {out_rel_existing} covers "
+                  f"{sorted(prev_settled)}; nothing new to settle "
+                  f"({sorted(settled_dates)} is a subset) - "
+                  "idempotent skip, no ledger append")
+            return 0
+
     stamp = args.at or __import__("datetime").datetime.now(
         __import__("datetime").timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
     settlement["settled_at_utc"] = stamp

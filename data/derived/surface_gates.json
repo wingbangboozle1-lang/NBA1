@@ -1,0 +1,96 @@
+{
+  "title": "Bet-surface gates (R07)",
+  "generated_by": "scripts/build_surfaces.py",
+  "rule": "bet.html shows picks only when ALL four gates pass (fail-closed). Projection carries model output and is not gated.",
+  "gates": [
+    {
+      "id": "G1_validation",
+      "requirement": "at least one strategy has status VALIDATED in data/derived/strategies.json",
+      "observed": 0,
+      "observed_detail": [],
+      "passed": false,
+      "source": "data/derived/strategies.json (leaderboard[].status)"
+    },
+    {
+      "id": "G2_sample_floor",
+      "requirement": "at least one strategy has n_graded >= 100",
+      "observed": 14,
+      "observed_detail": {
+        "strategy": "NULL CONTROL — coin flip",
+        "floor": 100
+      },
+      "passed": false,
+      "source": "data/derived/strategies.json (leaderboard[].n_graded)"
+    },
+    {
+      "id": "G3_preregistration",
+      "requirement": "every pre-registration file (data/prereg/S*.json) is frozen before its first tip; at least one exists",
+      "observed": 8,
+      "observed_detail": [
+        {
+          "file": "data/prereg/S01.json",
+          "prereg_id": "S01",
+          "frozen_at_utc": "2026-11-16T00:16Z",
+          "frozen_before_first_tip": true
+        },
+        {
+          "file": "data/prereg/S02.json",
+          "prereg_id": "S02",
+          "frozen_at_utc": "2026-11-16T00:16Z",
+          "frozen_before_first_tip": true
+        },
+        {
+          "file": "data/prereg/S03.json",
+          "prereg_id": "S03",
+          "frozen_at_utc": "2026-11-16T00:16Z",
+          "frozen_before_first_tip": true
+        },
+        {
+          "file": "data/prereg/S04.json",
+          "prereg_id": "S04",
+          "frozen_at_utc": "2026-11-16T00:16Z",
+          "frozen_before_first_tip": true
+        },
+        {
+          "file": "data/prereg/S05.json",
+          "prereg_id": "S05",
+          "frozen_at_utc": "2026-11-16T00:16Z",
+          "frozen_before_first_tip": true
+        },
+        {
+          "file": "data/prereg/S06.json",
+          "prereg_id": "S06",
+          "frozen_at_utc": "2026-11-16T00:16Z",
+          "frozen_before_first_tip": true
+        },
+        {
+          "file": "data/prereg/S07.json",
+          "prereg_id": "S07",
+          "frozen_at_utc": "2026-11-16T00:16Z",
+          "frozen_before_first_tip": true
+        },
+        {
+          "file": "data/prereg/S08.json",
+          "prereg_id": "S08",
+          "frozen_at_utc": "2026-11-16T00:16Z",
+          "frozen_before_first_tip": true
+        }
+      ],
+      "passed": true,
+      "source": "data/prereg/S*.json"
+    },
+    {
+      "id": "G4_ledger_integrity",
+      "requirement": "scripts/verify_ledger.py exits 0 and prints 'ledger chain OK'",
+      "observed": "ledger chain OK",
+      "observed_detail": "ledger chain OK",
+      "passed": true,
+      "source": "data/ledger/ledger.json via scripts/verify_ledger.py"
+    }
+  ],
+  "open": false,
+  "closed_by": [
+    "G1_validation",
+    "G2_sample_floor"
+  ]
+}

@@ -194,18 +194,12 @@ jobs:
           git config user.name  "nba1-bot"
           git config user.email "nba1-bot@users.noreply.github.com"
 
-          # Stage capture payloads, content-addressed injury PDFs, the
-          # digest-bound promotion records the promote step verified, the
-          # computed injury-report diffs, and the settlement output (main,
-          # PRs #128+: settlement is evidence too and may land in the same
-          # commit when a game day ended during this run). _last_refresh.json
-          # rides along only when evidence changes, so a no-change run
-          # produces no timestamp-only commit.
+          # Stage only capture payloads and content-addressed injury PDFs.
+          # _last_refresh.json rides along only when evidence changes, so a
+          # no-change run produces no timestamp-only commit.
+          # Settlement output is evidence, not a snapshot: it may land in the
+          # same PR when a game day ended during this run.
           git add data/raw/_capture_*.json data/raw/injury_pdfs/ \
-                  data/raw/standings.json data/raw/team_traditional.json \
-                  data/raw/team_opponent.json data/raw/team_advanced.json \
-                  data/raw/schedule_upcoming.json data/raw/injuries.json \
-                  data/raw/games_completed.json data/parsed/ \
                   data/settlement/ data/ledger/ledger.json 2>/dev/null || true
 
           # Also stage the digest-bound promotion records and computed diffs

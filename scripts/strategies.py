@@ -36,6 +36,14 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data")
 random.seed(20261113)
 
+# R10 noise band. |z| >= 1.96 is outside the band at the 5% two-sided level, which is the
+# level the luck table itself publishes (data/luck_zscores.json meta.noise_band_rule).
+# This is deliberately the stricter of the two thresholds present in the repository: the
+# horizon engine uses +/-1.5 as its own modelling choice, and was already refusing picks on
+# it. The strategy leaderboard had NO such rule, which is the gap this closes.
+NOISE_BAND_Z = 1.96
+LUCK_SOURCE_URL = "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+
 MIN_SAMPLE = 100
 # Below this many losses a resampling bootstrap has so little variance that it cannot fail, so a
 # positive result would be an artefact of the resample rather than evidence against luck.
@@ -98,7 +106,10 @@ def grade_model_ml(bt, prob_threshold):
         pick_home = p >= 0.5
         won = (r["actual_margin"] > 0) == pick_home
         graded.append({"date": r["date"], "matchup": r["matchup"], "confidence": round(conf, 3),
-                       "won": won, "source_url": r["source_url"]})
+                       "won": won, "source_url": r["source_url"],
+                       # the row itself is carried so the R10 noise-band refusal can see
+                       # which team this bet leaned on; it is not serialised
+                       "_row": r})
     return graded
 
 
@@ -123,8 +134,59 @@ def grade_model_total(bt, sd_multiple):
         won = (r["actual_total"] > baseline) == side_over
         graded.append({"date": r["date"], "matchup": r["matchup"], "edge_vs_baseline": round(edge, 1),
                        "side": "OVER" if side_over else "UNDER", "won": won,
-                       "source_url": r["source_url"]})
+                       "source_url": r["source_url"],
+                       # a totals bet is on the game, not on a team's record, so it does not
+                       # lean on a team's luck. Recorded as no_team_lean rather than omitted.
+                       "_row": None})
     return graded
+
+
+def team_abbrs(row):
+    """(away, home) for a backtest row. The matchup string is '<AWAY>@<HOME>'."""
+    away, home = row["matchup"].split("@")
+    return away, home
+
+
+def noise_band_refusal(graded, luck_z, band=NOISE_BAND_Z):
+    """The R10 refusal, applied uniformly to every strategy in the batch.
+
+    A strategy is refused if ANY bet it places leans on a team whose luck z-score
+    is outside the noise band, because such a team's record is not yet
+    distinguishable from luck and an edge measured on it cannot be attributed to
+    skill. The refusal is computed over every strategy the same way - including
+    the null control, which is never refused because a coin flip does not lean on
+    a team - so no strategy can escape the check by being defined differently.
+
+    A bet whose team has no luck z-score (not in the official table) is NOT
+    silently treated as inside the band: it is recorded as unmeasurable, and an
+    unmeasurable lean refuses the strategy too.
+    """
+    leans = []
+    for g in graded:
+        row = g.get("_row")
+        if not row:
+            continue
+        away, home = team_abbrs(row)
+        pick = row.get("model_pick") or (home if row.get("model_p_home", 0.5) >= 0.5 else away)
+        z = luck_z.get(pick)
+        leans.append({"date": g.get("date"), "matchup": g.get("matchup"),
+                      "team": pick, "luck_z": z,
+                      "inside_band": (None if z is None else abs(z) < band)})
+    offending = [x for x in leans if x["inside_band"] is False]
+    unmeasurable = [x for x in leans if x["inside_band"] is None]
+    return {
+        "rule": ("refuse publication if any bet leans on a team with |luck z| >= %.2f, "
+                "or on a team with no luck z-score (unmeasurable)" % band),
+        "band": band,
+        "bets_checked": len(leans),
+        "bets_offending": len(offending),
+        "bets_unmeasurable": len(unmeasurable),
+        "offending_teams": sorted({(x["team"], x["luck_z"]) for x in offending},
+                                  key=lambda t: -abs(t[1])),
+        "refused": bool(offending or unmeasurable),
+        "leans": leans,
+        "source_url": LUCK_SOURCE_URL,
+    }
 
 
 def random_control(n_games, seed_pick_rate=0.5):
@@ -337,14 +399,38 @@ def main():
     ]
 
     n_strat = len(definitions)
+
+    # R10: the luck noise band, read from the official-derived table, applied to EVERY
+    # strategy in the batch with the same function. This is not a new gate in the sense of
+    # changing thresholds: it is the refusal the brief asks for, and it can only ever
+    # REMOVE a strategy's right to be published, never add one.
+    luck_doc = json.load(open(os.path.join(DATA, "luck_zscores.json"), encoding="utf-8"))
+    luck_z = {r["abbr"]: r["z_score"] for r in luck_doc["rows"]}
+
     evaluated = []
     for d in definitions:
         ev = evaluate(d["graded"], n_strat, d["name"])
+        ev["noise_band_refusal"] = noise_band_refusal(d["graded"], luck_z)
         ev.update({"id": d["id"], "market": d["market"], "rule": d["rule"],
                    "why_it_might_work": d["why_it_might_work"], "inputs": d["inputs"]})
         if d.get("blocked_by"):
             ev["status"] = "UNGRADED"
             ev["blocking_reason"] = d["blocked_by"]
+        # R10: a strategy refused by the noise band can never be published or promoted,
+        # whatever its gates say. This is applied AFTER the gates so the two reasons stay
+        # separately visible: the leaderboard shows both why it passed its gates and why
+        # it is nevertheless refused.
+        if ev["noise_band_refusal"]["refused"]:
+            ev["status"] = "REFUSED BY THE NOISE BAND"
+            prev_reason = ev.get("blocking_reason")
+            ev["blocking_reason"] = (
+                ("%s %s" % (prev_reason + "; " if prev_reason else "" , 
+                            "leans on a team outside the luck noise band: "
+                            + ", ".join("%s z=%+.2f" % (t, z) for t, z in
+                                        ev["noise_band_refusal"]["offending_teams"])))
+                if ev["noise_band_refusal"]["offending_teams"] else
+                ("%s leans on a team with no measurable luck z-score"
+                 % (prev_reason + "; " if prev_reason else "")))
         evaluated.append(ev)
 
     leaderboard = sorted(
@@ -363,6 +449,12 @@ def main():
             "competition_rule": "A strategy is ranked by gates passed, then by ROI. Ranking is "
                                 "cosmetic: no reward is payable unless status is VALIDATED.",
             "validated_count": len(validated),
+            "noise_band_rule": ("R10 refusal, applied uniformly to every strategy in the batch: a "
+                                "strategy is REFUSED if any bet it places leans on a team whose luck "
+                                "z-score has |z| >= 1.96, or on a team with no luck z-score at all. "
+                                "Source of every z: data/luck_zscores.json, computed from the official "
+                                "team advanced table (%s)." % LUCK_SOURCE_URL),
+            "noise_band_refused_count": sum(1 for e in evaluated if e.get("status") == "REFUSED BY THE NOISE BAND"),
             "headline_finding": "Zero of eight strategies are validated. The binding constraint is "
                                 "sample size: the largest graded set is 14 bets against a floor of 100. "
                                 "This is reported as the result, not worked around.",

@@ -1635,6 +1635,11 @@ def main():
     corr = load(os.path.join(DATA, "correlations.json"))
     luck = load(os.path.join(DATA, "luck.json"))
     lb = load(os.path.join(DATA, "leaderboard.json"))
+    # R10 noise-band refusal (session arena/23b323a3-nba1, COORDINATION §50). The strategy
+    # ledger now applies the refusal uniformly and records it per strategy; the page must
+    # publish it next to the gates, or the refusal exists only in a JSON file.
+    _strat_path = os.path.join(ROOT, "data", "derived", "strategies.json")
+    nbr = load(_strat_path) if os.path.exists(_strat_path) else None
     teams = load(os.path.join(DATA, "teams.json"))
     execu = load(os.path.join(CONTENT, "executive.json"))
     flagged = load(os.path.join(CONTENT, "flagged.json"))
@@ -2238,6 +2243,45 @@ def main():
         note="Units assume the standard -110 price, which is a disclosed convention, not an observed price: no "
              "sportsbook price was observable anywhere in this environment. A blank or 0 record means the "
              "strategy has no graded plays, never a loss."))
+    # ---- R10: the luck noise band, published beside the gates it constrains ----------
+    if nbr:
+        nm = nbr["_meta"]
+        b.append(h2("Luck noise band &mdash; the refusal rule",
+                    "Requirement R10: report luck as a z-score per team and refuse to publish a strategy "
+                    "that leans on a team outside the noise band. This is applied to every strategy in "
+                    "the batch by one function, so no strategy can be defined around it."))
+        b.append('<p class="lead">%s</p>' % esc(nm.get("noise_band_rule")))
+        nb_rows = []
+        for r in nbr["leaderboard"]:
+            nb = r.get("noise_band_refusal") or {}
+            nb_rows.append([
+                '<b>%s</b>' % esc(r["id"]), esc(r["name"]),
+                str(nb.get("bets_checked")),
+                str(nb.get("bets_offending")),
+                str(nb.get("bets_unmeasurable")),
+                ", ".join("%s (z=%+.2f)" % (t, z) for t, z in nb.get("offending_teams") or []) or "&mdash;",
+                "REFUSED" if nb.get("refused") else "not refused",
+                esc(r.get("status")),
+                srclink(sources, "S1"),
+            ])
+        b.append(table(["ID", "Strategy", "Bets checked", "Bets on a team outside the band",
+                        "Bets with no measurable z", "Offending teams", "Refusal", "Status", "Source"],
+                       nb_rows,
+                       note=("On the current corpus every modelled lean falls inside the band, so no strategy "
+                             "is refused today &mdash; %d bets checked, %d offending. That is a measurement, not "
+                             "a guarantee: <code>scripts/test_noise_band_refusal.py</code> demonstrates the same "
+                             "code path refusing a planted team at |z| &ge; 1.96, so the rule is known to bite. "
+                             "A totals bet leans on the game rather than on a team's record, so it is recorded as "
+                             "checked against no team rather than assumed safe. The null control is checked too "
+                             "and is never refused, because a coin flip does not lean on a team."
+                             % (sum((r.get("noise_band_refusal") or {}).get("bets_checked", 0)
+                                    for r in nbr["leaderboard"]),
+                                sum((r.get("noise_band_refusal") or {}).get("bets_offending", 0)
+                                    for r in nbr["leaderboard"])))))
+        b.append('<p class="fine">Refused strategies on this build: <b>%s</b> of %d. The band is two-sided '
+                 '(|z| &ge; %.2f) and matches the threshold <code>data/luck_zscores.json</code> publishes. A '
+                 'lean on a team with no z-score at all is also refused, rather than being treated as safe.</p>'
+                 % (esc(nm.get("noise_band_refused_count")), len(nbr["leaderboard"]), nb.get("band") or 1.96))
     b.append(h2("Reward tiers", "What a strategy earns once it clears the gates it must clear."))
     rows = []
     for t in lb["tiers"]:
@@ -2921,6 +2965,12 @@ def main():
     pv = os.path.join(ROOT, "data", "derived", "prop_variance.json")
     if os.path.exists(pv):
         shutil.copyfile(pv, os.path.join(SITE_DATA, "prop_variance.json"))
+
+    # COORDINATION §50 (Q05, integration-seat hook): measured minutes shares (Q02) and the
+    # projection/bet split with its four gates (Q03). Each writes its own pages and data file.
+    import subprocess as _sp
+    for _s in ("build_minutes_shares.py", "build_surfaces.py"):
+        _sp.run([sys.executable, os.path.join(ROOT, "scripts", _s)], check=True)
 
     print("Wrote %d pages, assets and data to %s" % (len(built), SITE))
 

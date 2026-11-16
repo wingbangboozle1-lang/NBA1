@@ -1,0 +1,144 @@
+{
+  "captured_by": "arena/fec7d5ae-nba1",
+  "captured_utc": "2026-11-16T14:35:00Z",
+  "source_url": "https://www.nba.com/standings",
+  "home_records": {
+    "ATL": {
+      "home_w": 3,
+      "home_l": 3
+    },
+    "BKN": {
+      "home_w": 1,
+      "home_l": 3
+    },
+    "BOS": {
+      "home_w": 6,
+      "home_l": 0
+    },
+    "CHA": {
+      "home_w": 3,
+      "home_l": 4
+    },
+    "CHI": {
+      "home_w": 1,
+      "home_l": 4
+    },
+    "CLE": {
+      "home_w": 5,
+      "home_l": 2
+    },
+    "DAL": {
+      "home_w": 5,
+      "home_l": 2
+    },
+    "DEN": {
+      "home_w": 2,
+      "home_l": 2
+    },
+    "DET": {
+      "home_w": 3,
+      "home_l": 2
+    },
+    "GSW": {
+      "home_w": 6,
+      "home_l": 1
+    },
+    "HOU": {
+      "home_w": 7,
+      "home_l": 1
+    },
+    "IND": {
+      "home_w": 2,
+      "home_l": 4
+    },
+    "LAC": {
+      "home_w": 4,
+      "home_l": 3
+    },
+    "LAL": {
+      "home_w": 5,
+      "home_l": 1
+    },
+    "MEM": {
+      "home_w": 3,
+      "home_l": 4
+    },
+    "MIA": {
+      "home_w": 3,
+      "home_l": 3
+    },
+    "MIL": {
+      "home_w": 1,
+      "home_l": 7
+    },
+    "MIN": {
+      "home_w": 5,
+      "home_l": 2
+    },
+    "NOP": {
+      "home_w": 3,
+      "home_l": 6
+    },
+    "NYK": {
+      "home_w": 4,
+      "home_l": 3
+    },
+    "OKC": {
+      "home_w": 5,
+      "home_l": 0
+    },
+    "ORL": {
+      "home_w": 1,
+      "home_l": 4
+    },
+    "PHI": {
+      "home_w": 6,
+      "home_l": 2
+    },
+    "PHX": {
+      "home_w": 5,
+      "home_l": 4
+    },
+    "POR": {
+      "home_w": 3,
+      "home_l": 2
+    },
+    "SAC": {
+      "home_w": 0,
+      "home_l": 8
+    },
+    "SAS": {
+      "home_w": 5,
+      "home_l": 2
+    },
+    "TOR": {
+      "home_w": 2,
+      "home_l": 4
+    },
+    "UTA": {
+      "home_w": 1,
+      "home_l": 7
+    },
+    "WAS": {
+      "home_w": 2,
+      "home_l": 4
+    }
+  },
+  "measured": {
+    "home_wins": 102,
+    "home_games": 196,
+    "home_win_rate": 0.5204
+  },
+  "published": {
+    "rate": 0.5285,
+    "home_wins": 102,
+    "home_games": 193,
+    "source": "data/official/standings_2026-11-16_0213Z_dfef26dc.json"
+  },
+  "delta": {
+    "home_wins_delta": 0,
+    "home_games_delta": 3,
+    "rate_delta": -0.0081
+  },
+  "finding": "The home-win rate has moved since the 02:13Z capture. Home WINS are unchanged (102) but home GAMES rose 3 to 196, so the rate fell from 0.5285 to 0.5204. The additional home games were played in the 11/15 late / 11/16 window and the home team did not win them. The pinned HCA (0.5285) is one measurement cycle stale; the current measured value is 0.5204. This is reported, not silently applied."
+}

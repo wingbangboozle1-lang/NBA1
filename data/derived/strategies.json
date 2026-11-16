@@ -5,6 +5,8 @@
   "generated_utc": "2026-11-13",
   "competition_rule": "A strategy is ranked by gates passed, then by ROI. Ranking is cosmetic: no reward is payable unless status is VALIDATED.",
   "validated_count": 0,
+  "noise_band_rule": "R10 refusal, applied uniformly to every strategy in the batch: a strategy is REFUSED if any bet it places leans on a team whose luck z-score has |z| >= 1.96, or on a team with no luck z-score at all. Source of every z: data/luck_zscores.json, computed from the official team advanced table (https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season).",
+  "noise_band_refused_count": 0,
   "headline_finding": "Zero of eight strategies are validated. The binding constraint is sample size: the largest graded set is 14 bets against a floor of 100. This is reported as the result, not worked around.",
   "reward_policy": "Rewards are only payable to VALIDATED strategies. Because none are validated, the current reward allocation is zero and the leaderboard is informational only.",
   "sample_note": "The 14 graded games are also look-ahead contaminated (see backtest.py). Even the numerical hit rates are inflated and are not evidence of skill.",
@@ -84,6 +86,67 @@
    ],
    "status": "NOT VALIDATED",
    "blocking_reason": "fails G1_sample_floor, G2_significance, G3_luck_bootstrap",
+   "noise_band_refusal": {
+    "rule": "refuse publication if any bet leans on a team with |luck z| >= 1.96, or on a team with no luck z-score (unmeasurable)",
+    "band": 1.96,
+    "bets_checked": 7,
+    "bets_offending": 0,
+    "bets_unmeasurable": 0,
+    "offending_teams": [],
+    "refused": false,
+    "leans": [
+     {
+      "date": "2026-11-11",
+      "matchup": "BOS@TOR",
+      "team": "BOS",
+      "luck_z": 0.176,
+      "inside_band": true
+     },
+     {
+      "date": "2026-11-11",
+      "matchup": "LAL@MIL",
+      "team": "LAL",
+      "luck_z": 1.01,
+      "inside_band": true
+     },
+     {
+      "date": "2026-11-11",
+      "matchup": "SAS@CHI",
+      "team": "SAS",
+      "luck_z": 0.136,
+      "inside_band": true
+     },
+     {
+      "date": "2026-11-11",
+      "matchup": "ORL@UTA",
+      "team": "ORL",
+      "luck_z": 0.214,
+      "inside_band": true
+     },
+     {
+      "date": "2026-11-12",
+      "matchup": "DET@WAS",
+      "team": "DET",
+      "luck_z": 0.135,
+      "inside_band": true
+     },
+     {
+      "date": "2026-11-12",
+      "matchup": "DAL@MIN",
+      "team": "MIN",
+      "luck_z": -1.086,
+      "inside_band": true
+     },
+     {
+      "date": "2026-11-12",
+      "matchup": "CHA@PHX",
+      "team": "PHX",
+      "luck_z": 0.455,
+      "inside_band": true
+     }
+    ],
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
    "id": "S01",
    "market": "single",
    "rule": "Bet the model's pick straight up when its win probability is at least 0.65.",
@@ -165,6 +228,46 @@
    ],
    "status": "NOT VALIDATED",
    "blocking_reason": "fails G1_sample_floor, G2_significance, G3_luck_bootstrap",
+   "noise_band_refusal": {
+    "rule": "refuse publication if any bet leans on a team with |luck z| >= 1.96, or on a team with no luck z-score (unmeasurable)",
+    "band": 1.96,
+    "bets_checked": 4,
+    "bets_offending": 0,
+    "bets_unmeasurable": 0,
+    "offending_teams": [],
+    "refused": false,
+    "leans": [
+     {
+      "date": "2026-11-11",
+      "matchup": "LAL@MIL",
+      "team": "LAL",
+      "luck_z": 1.01,
+      "inside_band": true
+     },
+     {
+      "date": "2026-11-11",
+      "matchup": "SAS@CHI",
+      "team": "SAS",
+      "luck_z": 0.136,
+      "inside_band": true
+     },
+     {
+      "date": "2026-11-12",
+      "matchup": "DET@WAS",
+      "team": "DET",
+      "luck_z": 0.135,
+      "inside_band": true
+     },
+     {
+      "date": "2026-11-12",
+      "matchup": "DAL@MIN",
+      "team": "MIN",
+      "luck_z": -1.086,
+      "inside_band": true
+     }
+    ],
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
    "id": "S02",
    "market": "single",
    "rule": "Bet the model's pick straight up when its win probability is at least 0.75.",
@@ -246,6 +349,17 @@
    ],
    "status": "NOT VALIDATED",
    "blocking_reason": "fails G1_sample_floor, G2_significance, G3_luck_bootstrap",
+   "noise_band_refusal": {
+    "rule": "refuse publication if any bet leans on a team with |luck z| >= 1.96, or on a team with no luck z-score (unmeasurable)",
+    "band": 1.96,
+    "bets_checked": 0,
+    "bets_offending": 0,
+    "bets_unmeasurable": 0,
+    "offending_teams": [],
+    "refused": false,
+    "leans": [],
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
    "id": "S08",
    "market": "control",
    "rule": "Bet a coin flip on every game in the backtest sample.",
@@ -327,6 +441,17 @@
    ],
    "status": "NOT VALIDATED",
    "blocking_reason": "fails G1_sample_floor, G2_significance, G3_luck_bootstrap, G4_stability",
+   "noise_band_refusal": {
+    "rule": "refuse publication if any bet leans on a team with |luck z| >= 1.96, or on a team with no luck z-score (unmeasurable)",
+    "band": 1.96,
+    "bets_checked": 0,
+    "bets_offending": 0,
+    "bets_unmeasurable": 0,
+    "offending_teams": [],
+    "refused": false,
+    "leans": [],
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
    "id": "S03",
    "market": "single",
    "rule": "When the model's projected total sits more than 6 points away from the league-average total, take that side of the baseline and grade against the realised total.",
@@ -411,6 +536,17 @@
    ],
    "status": "UNGRADED",
    "blocking_reason": "No slate produced two picks at the required confidence with both games finished. Cross-game leg correlation is also unmeasured (correlations.json tier C), so the independence assumption behind the parlay price would itself be unverified.",
+   "noise_band_refusal": {
+    "rule": "refuse publication if any bet leans on a team with |luck z| >= 1.96, or on a team with no luck z-score (unmeasurable)",
+    "band": 1.96,
+    "bets_checked": 0,
+    "bets_offending": 0,
+    "bets_unmeasurable": 0,
+    "offending_teams": [],
+    "refused": false,
+    "leans": [],
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
    "id": "S04",
    "market": "parlay",
    "rule": "Combine the two highest-confidence moneyline picks on a slate.",
@@ -493,6 +629,17 @@
    ],
    "status": "UNGRADED",
    "blocking_reason": "The per-game sigma used for props is a modelled estimate, not a measured distribution, and no finished prop outcomes were captured to grade against. Grading without real outcomes is impossible, so this stays ungraded.",
+   "noise_band_refusal": {
+    "rule": "refuse publication if any bet leans on a team with |luck z| >= 1.96, or on a team with no luck z-score (unmeasurable)",
+    "band": 1.96,
+    "bets_checked": 0,
+    "bets_offending": 0,
+    "bets_unmeasurable": 0,
+    "offending_teams": [],
+    "refused": false,
+    "leans": [],
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
    "id": "S05",
    "market": "prop",
    "rule": "Take the over on a player prop line set half a point below his season average, when the normal-approximation probability clears 0.55.",
@@ -576,6 +723,17 @@
    ],
    "status": "UNGRADED",
    "blocking_reason": "This is exactly the correlation that could not be measured (correlations.json tier C). Without the joint distribution, the parlay price is a guess, so the strategy cannot be validated — only asserted. Left ungraded deliberately.",
+   "noise_band_refusal": {
+    "rule": "refuse publication if any bet leans on a team with |luck z| >= 1.96, or on a team with no luck z-score (unmeasurable)",
+    "band": 1.96,
+    "bets_checked": 0,
+    "bets_offending": 0,
+    "bets_unmeasurable": 0,
+    "offending_teams": [],
+    "refused": false,
+    "leans": [],
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
    "id": "S06",
    "market": "parlay",
    "rule": "Pair a player-points over with the same game's total over.",
@@ -659,6 +817,17 @@
    ],
    "status": "UNGRADED",
    "blocking_reason": "The first qualifying games (CLE@MIA, GSW@SAS on 11/13) have not been played. No outcome exists to grade.",
+   "noise_band_refusal": {
+    "rule": "refuse publication if any bet leans on a team with |luck z| >= 1.96, or on a team with no luck z-score (unmeasurable)",
+    "band": 1.96,
+    "bets_checked": 0,
+    "bets_offending": 0,
+    "bets_unmeasurable": 0,
+    "offending_teams": [],
+    "refused": false,
+    "leans": [],
+    "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   },
    "id": "S07",
    "market": "single",
    "rule": "Take the under when a NEW absence removes at least 12 expected points from one side.",

@@ -1,0 +1,255 @@
+{
+ "title": "2026-11-15 finals - first-hand official reads (both passes)",
+ "read_at": "2026-11-16T14:30Z..14:45Z (first-hand fetch_page reads by arena/0e9c924f-nba1)",
+ "session": "arena/0e9c924f-nba1 (\u00a750 N03)",
+ "all_final": true,
+ "n": 9,
+ "games": [
+  {
+   "id": "0022600235",
+   "away": "IND",
+   "home": "PHI",
+   "final": {
+    "away": 124,
+    "home": 131
+   },
+   "quarters": {
+    "away": [
+     33,
+     30,
+     30,
+     31
+    ],
+    "home": [
+     33,
+     31,
+     30,
+     37
+    ]
+   },
+   "sum_ok": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "linescore_url": null,
+   "note": "FINAL on games listing + settlement verify_final; quarter split from first read of this session (scores cross-checked against data/official/results_2026-11-15.json)."
+  },
+  {
+   "id": "0022600236",
+   "away": "LAL",
+   "home": "PHX",
+   "final": {
+    "away": 131,
+    "home": 123
+   },
+   "quarters": {
+    "away": [
+     33,
+     28,
+     40,
+     30
+    ],
+    "home": [
+     26,
+     35,
+     32,
+     30
+    ]
+   },
+   "sum_ok": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "linescore_url": null,
+   "note": "FINAL; sums 131/123 asserted at read time."
+  },
+  {
+   "id": "0022600237",
+   "away": "CHA",
+   "home": "LAC",
+   "final": {
+    "away": 105,
+    "home": 113
+   },
+   "quarters": {
+    "away": [
+     26,
+     27,
+     26,
+     26
+    ],
+    "home": [
+     36,
+     27,
+     22,
+     28
+    ]
+   },
+   "sum_ok": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "linescore_url": null,
+   "note": "FINAL; sums 105/113 asserted at read time."
+  },
+  {
+   "id": "0022600238",
+   "away": "SAS",
+   "home": "UTA",
+   "final": {
+    "away": 110,
+    "home": 102
+   },
+   "quarters": {
+    "away": [
+     34,
+     21,
+     31,
+     24
+    ],
+    "home": [
+     30,
+     24,
+     27,
+     21
+    ]
+   },
+   "sum_ok": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "linescore_url": null,
+   "note": "FINAL; sums 110/102 asserted at read time."
+  },
+  {
+   "id": "0022600239",
+   "away": "NYK",
+   "home": "TOR",
+   "final": {
+    "away": 112,
+    "home": 108
+   },
+   "ot": true,
+   "quarters": {
+    "away": [
+     34,
+     25,
+     28,
+     15,
+     10
+    ],
+    "home": [
+     30,
+     24,
+     26,
+     22,
+     6
+    ]
+   },
+   "sum_ok": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "linescore_url": null,
+   "note": "FINAL/OT; 4Q sums 102-102, OT 10-6, total 112-108 asserted at read time."
+  },
+  {
+   "id": "0022600240",
+   "away": "DAL",
+   "home": "BOS",
+   "final": {
+    "away": 94,
+    "home": 131
+   },
+   "quarters": {
+    "away": [
+     27,
+     20,
+     25,
+     22
+    ],
+    "home": [
+     37,
+     32,
+     32,
+     30
+    ]
+   },
+   "sum_ok": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "linescore_url": null,
+   "note": "FINAL; sums 94/131 asserted at read time."
+  },
+  {
+   "id": "0022600242",
+   "away": "HOU",
+   "home": "WAS",
+   "final": {
+    "away": 147,
+    "home": 119
+   },
+   "quarters": {
+    "away": [
+     36,
+     37,
+     46,
+     28
+    ],
+    "home": [
+     31,
+     23,
+     34,
+     31
+    ]
+   },
+   "sum_ok": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "linescore_url": "https://www.nba.com/game/hou-vs-was-0022600242/box-score",
+   "note": "Second-pass read 14:2xZ: official LINESCORES table on box-score page; 147=36+37+46+28, 119=31+23+34+31 asserted."
+  },
+  {
+   "id": "0022600243",
+   "away": "ATL",
+   "home": "MIL",
+   "final": {
+    "away": 113,
+    "home": 106
+   },
+   "quarters": {
+    "away": [
+     18,
+     37,
+     32,
+     26
+    ],
+    "home": [
+     37,
+     16,
+     27,
+     26
+    ]
+   },
+   "sum_ok": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "linescore_url": "https://www.nba.com/game/atl-vs-mil-0022600243/box-score",
+   "note": "Second-pass read 14:2xZ: official LINESCORES; 113=18+37+32+26, 106=37+16+27+26 asserted."
+  },
+  {
+   "id": "0022600244",
+   "away": "OKC",
+   "home": "SAC",
+   "final": {
+    "away": 125,
+    "home": 103
+   },
+   "quarters": {
+    "away": [
+     32,
+     30,
+     32,
+     31
+    ],
+    "home": [
+     24,
+     26,
+     30,
+     23
+    ]
+   },
+   "sum_ok": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "linescore_url": "https://www.nba.com/game/okc-vs-sac-0022600244/box-score",
+   "note": "Second-pass read 14:2xZ: official LINESCORES; 125=32+30+32+31, 103=24+26+30+23 asserted; AP recap stamp Monday 2026-11-16 1:21 AM."
+  }
+ ]
+}

@@ -1,0 +1,40 @@
+{
+ "captured_at_utc": "2026-11-16T14:31:41Z",
+ "source_url": "https://www.nba.com/stats/teams/traditional",
+ "status": "parse_failed",
+ "problems": [
+  "html_table: no header row with a Team column found",
+  "next_data: no team-table structure found in JSON"
+ ],
+ "diagnostics": {
+  "indicators": {
+   "__NEXT_DATA__": 1,
+   "rowSet": 0,
+   "gameId": 0,
+   "<tr": 12,
+   "/team/": 0,
+   "/stats/team/": 0,
+   "/game/": 0,
+   "standings": 37
+  },
+  "next_data_keys": {
+   "props.pageProps": "dict",
+   "props.xRegionMap": "str",
+   "props.isIndex": "bool",
+   "props.cmsSiteSettings": "dict",
+   "props.clientConfigSettings": "dict",
+   "props.consentSrc": "str",
+   "props.isWebView": "bool",
+   "props.isSummerLeague": "bool",
+   "props.isTypeOfPackagesPage": "bool",
+   "props.hasAdsAndAnalytics": "bool",
+   "props.countrySplits": "list",
+   "props.collegeSplits": "list",
+   "props.akamaiHeaders": "dict",
+   "props.siteHostAtRunTime": "str",
+   "props.__N_SSP": "bool",
+   "props.pageProps.layout": 5
+  }
+ },
+ "note": "Bounded raw-HTML evidence for the next parser iteration. The committed snapshot is untouched."
+}

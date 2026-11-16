@@ -112,6 +112,39 @@
    "min_model_prob": 0.55,
    "luck_band_z": 1.5,
    "note": "a pick must survive every gate to be published as a stakeable pick. No strategy has passed the strategy validation gates in this repository, so every pick below is published as MODEL OUTPUT - UNVALIDATED with zero stake, which is the honest state of the evidence."
+  },
+  "travel_source_correction": {
+   "measured_utc": "2026-11-16T15:10Z",
+   "by": "arena/23b323a3-nba1",
+   "finding": "F-50-01",
+   "what": "Travel miles were read from data/arenas.json, which lists LAC at Crypto.com Arena in Los Angeles. The official schedule page places the LA Clippers at Intuit Dome, Inglewood, CA, and already-captured official rows in this repository say so too (data/official/arena_coordinates_2026-11-15.json, venue_source_url https://www.nba.com/schedule). PHI (Wells Fargo Center -> Xfinity Mobile Arena) and PHX (Footprint Center -> Mortgage Matchup Center) are the same kind of stale-venue error.",
+   "affected_games": [
+    {
+     "date": "2026-11-17",
+     "matchup": "CHA@LAL",
+     "home": "LAL",
+     "reason": "home arena name in data/arenas.json is stale; the row's travel number depends on arena coordinates, which happen to agree to ~0.2 mi, so the miles are not materially affected"
+    },
+    {
+     "date": "2026-11-17",
+     "matchup": "UTA@LAC",
+     "home": "LAC",
+     "reason": "home arena was Crypto.com Arena in data/arenas.json; the official schedule says Intuit Dome"
+    },
+    {
+     "date": "2026-11-18",
+     "matchup": "UTA@LAL",
+     "home": "LAL",
+     "reason": "home arena name in data/arenas.json is stale; the row's travel number depends on arena coordinates, which happen to agree to ~0.2 mi, so the miles are not materially affected"
+    },
+    {
+     "date": "2026-11-18",
+     "matchup": "PHX@SAC",
+     "home": "SAC",
+     "reason": "home arena name in data/arenas.json is stale; the row's travel number depends on arena coordinates, which happen to agree to ~0.2 mi, so the miles are not materially affected"
+    }
+   ],
+   "not_recomputed_here": "the model fields on these rows are NOT recomputed by this correction pass. The rows are re-originated by scripts/build_horizon_v2.py on the next scheduled refresh, which now reads the corrected table. Recomputation is left to that run so no number on the site is edited by hand."
   }
  },
  "games": [

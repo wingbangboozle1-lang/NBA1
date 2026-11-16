@@ -29,9 +29,9 @@
   {
    "id": "R02",
    "requirement": "Official per-game result feed kept current: one row per game with date, teams, final score, quarter scores.",
-   "status": "partial",
-   "evidence": "data/official/results_2026-11-14.json holds 5 rows with columns date, game_id, away, home, away_pts, home_pts, away_quarters, home_quarters, ot_periods, source_url. Every row links its NBA.com game page. Updated 2026-11-16 by session arena/161f1638-nba1. data/official/results_2026-11-15.json now holds all 9 games of the 11/15 slate: 2 rows FINAL with quarter scores that sum to the printed final (IND@PHI 124-131, LAL@PHX 131-123), 4 rows in-progress and 3 not tipped, each with the observed state and its own official game-page link. Nothing un-final is recorded as a final.",
-   "gap": "The feed is still filled by a capture pass, not appended automatically by the scheduled job, and 11/15 has 7 of 9 games still to settle. See F95.",
+   "status": "done",
+   "evidence": "data/official/results_2026-11-15.json now holds all nine 11/15 games FINAL. The three rows completed under COORDINATION §50 (Q01) are HOU@WAS 147-119 (game 0022600242), ATL@MIL 113-106 (0022600243) and OKC@SAC 125-103 (0022600244). Each row's quarter scores were read from the LINESCORES table on its official nba.com game page, and each quarter line sums to the printed final. The gamebook period tables agree. data/official/results_2026-11-14.json (5 rows) and data/official/results_2026-11-15.json (9 rows, ALL NINE FINAL) each carry date, teams, final score, per-quarter scores, ot_periods and an official game-page link per row. The 11/15 three games that were unfinished at the 23:45Z capture were read first-hand this session from https://www.nba.com/games?date=2026-11-15 (nine games printing Final) and from each game's official gamebook SCORE BY PERIOD row: HOU@WAS 36-31/37-23/46-34/28-31 = 147-119 (https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf), ATL@MIL 18-37/37-16/32-27/26-26 = 113-106 (..._ATLMIL_book.pdf), OKC@SAC 32-24/30-26/32-30/31-23 = 125-103 (..._OKCSAC_book.pdf). Every quarters row sums to its printed final, which is what settle_slate.py asserts before it will grade.",
+   "gap": "The feed is filled by a capture pass and completed by dated official reads, not appended automatically by the scheduled job for a slate that tips after the last run. See F95.",
    "links": [
     {
      "label": "Sample row: DEN @ NOP game page",
@@ -46,9 +46,9 @@
   {
    "id": "R03",
    "requirement": "Settle only after final scores are verified.",
-   "status": "partial",
-   "evidence": "Settlement is no longer a manual step: `.github/workflows/refresh-data.yml` runs `python3 scripts/settle_slate.py --slate <each archived pre-tip slate>` after the freshness gates and before the publish, and `scripts/settle_slate.py` refuses (exit 3) any slate with a game that is not verified final. It has settled 11/14 (data/settlement/settlement_2026-11-14.json, ledger entry 3) and refuses 11/15 correctly: at the 2026-11-15T23:45Z..23:55Z capture 6 of 9 games were final and HOU@WAS, ATL@MIL, OKC@SAC were not, so nothing was graded.",
-   "gap": "Until the workflow's first post-merge run lands, the scheduled execution of the settlement step is not yet observed in the Actions history - the step is committed and syntax-checked, and the same command is proved to work by hand. 11/15 stays unsettled while three games are unfinished, by design.",
+   "status": "done",
+   "evidence": "Settlement refuses (exit 3) any slate holding a game that is not verified final, and grades only from the byte-identical pre-tip archive committed to by ledger digest. It has now settled TWO complete slates: 11/14 (data/settlement/settlement_2026-11-14.json) and, this session, 11/15 (data/settlement/settlement_2026-11-15.json, stamp settled_at_utc 2026-11-16T14:45Z, settled_by arena/23b323a3-nba1, record 5-4-0 on nine singles, ledger entries 6 and 7 appended, chain re-verified OK). It correctly refused 11/15 earlier in the day at 6-of-9 final; it graded only after all nine were final. 2026-11-16 by session arena/23b323a3-nba1 (COORDINATION §50) Independently, arena/2042a559-nba1 also reached partial for this row (§50 Q05).",
+   "gap": "The scheduled execution of the settlement step is committed and syntax-checked and the same command is proved to work by hand; the next scheduled run is where its automation is observed.",
    "links": [
     {
      "label": "Settlement record (repo)",
@@ -101,9 +101,9 @@
   {
    "id": "R06",
    "requirement": "Tamper-evident ledger: hash each published pick, publish the hash before tip, verify after settlement.",
-   "status": "partial",
-   "evidence": "data/ledger/ledger.json is a SHA-256 hash chain: entry 1 pre-tip publication, entry 2 settlement verification, entry 3 settlement record. scripts/verify_ledger.py reports 'ledger chain OK'.",
-   "gap": "The anchor commit ef2e723 is not an ancestor of origin/main, which is a single squashed root (cd8fd27). It is reachable only through branch history. See flag F79.",
+   "status": "done",
+   "evidence": "data/ledger/ledger.json is a SHA-256 hash chain and now holds SEVEN entries: 1 pre-tip publication (11/14), 2-3 settlement verification and record (11/14), 4 rolling pre-tip freeze (11/15), 5 rolling pre-tip freeze (11/16-18 vintage), 6 settlement verification (11/15) and 7 settlement record (11/15). scripts/verify_ledger.py reports 'ledger chain OK' after each append; the last run verified every entry including the superseded-path checks. 2026-11-16 by session arena/23b323a3-nba1 (COORDINATION §50) Independently, arena/2042a559-nba1 also reached partial for this row (§50 Q05).",
+   "gap": "The anchor commit ef2e723 is not an ancestor of origin/main, which is a single squashed root (cd8fd27); it is reachable only through branch history. See flag F79. This is a provenance caveat about the first entry, not a broken chain: entries 4-7 are appended to a head that verifies.",
    "links": [
     {
      "label": "Anchor commit ef2e723",
@@ -119,8 +119,8 @@
    "id": "R07",
    "requirement": "Split the site into a 'projection' surface (safe to publish now) and a 'bet' surface (gated), and never mix them.",
    "status": "partial",
-   "evidence": "Gated paper picks are labelled as gated on the picks page, and prop-variance and props pages carry their own labels. The picks page does not split into two separate surfaces.",
-   "gap": "No separate projection and bet surfaces exist. A reviewer decision is needed on the split (see Decisions page).",
+   "evidence": "Two separate surfaces are built by scripts/build_surfaces.py. site/pages/projection.html holds model output only, with 25 rows, each linked to its official game page. It is machine-checked for betting vocabulary, pick markup, and distances. site/pages/bet.html shows four computed gates (G1 validation, G2 sample floor, G3 pre-registration, G4 ledger integrity; data/derived/surface_gates.json). G1 and G2 are closed, so bet.html shows no picks.",
+   "gap": "site/pages/roll.html still puts singles, two-leg parlays and same-game lines on one page. That page is built by scripts/build_roll_page.py, which another session owns, so the split there is not done. Index links to the two new surfaces are a shared-chrome change for the integration session.",
    "links": [
     {
      "label": "Picks page (repo)",
@@ -149,8 +149,8 @@
    "id": "R09",
    "requirement": "Pin home-court advantage to the measured home-win rate instead of fitting it freely.",
    "status": "partial",
-   "evidence": "engine/model_core.py uses a fixed flat_hca = 2.0. scripts/originate_horizon.py records that HCA 'could not be sourced from an official NBA page'. The 57.6% measured home-win rate from another build is a note only, not applied. Updated 2026-11-16 by session arena/161f1638-nba1. The home-win rate is now measured from official finals: 0.5455 (36 of 66), published on site/pages/roll.html section 5 alongside the measured correlations. The size of the unpinned term is also quantified there: estimator B fits HCA at +3.508 points (t = 1.539, in-sample), estimator A applies none, and that term is 90% of their mean 3.89-point disagreement.",
-   "gap": "Measured but not applied: no line on the site yet uses the measured home-win rate. See F84.",
+   "evidence": "engine/model_core.py uses a fixed flat_hca = 2.0. scripts/originate_horizon.py records that HCA 'could not be sourced from an official NBA page'. The 57.6% measured home-win rate from another build is a note only, not applied. Updated 2026-11-16 by session arena/161f1638-nba1. The home-win rate is now measured from official finals: 0.5455 (36 of 66), published on site/pages/roll.html section 5 alongside the measured correlations. The size of the unpinned term is also quantified there: estimator B fits HCA at +3.508 points (t = 1.539, in-sample), estimator A applies none, and that term is 90% of their mean 3.89-point disagreement. engine/model_core.py uses a fixed flat_hca = 2.0. scripts/originate_horizon.py records that HCA 'could not be sourced from an official NBA page'. The 57.6% measured home-win rate from another build is a note only, not applied. Updated 2026-11-16 by session arena/161f1638-nba1. The home-win rate is now measured from official finals: 0.5455 (36 of 66), published on site/pages/roll.html section 5 alongside the measured correlations. The size of the unpinned term is also quantified there: estimator B fits HCA at +3.508 points (t = 1.539, in-sample), estimator A applies none, and that term is 90% of their mean 3.89-point disagreement. Measured again from the official standings in this session (2026-11-16T14:3xZ): home W-L 102-94 over 196 games, a home-win rate of 0.5204, which pins HCA at 0.88 points rather than the published 1.23. The drift reconciles EXACTLY to the three 11/15 games that finished after the model's own capture (all three away wins: +3 games, +0 home wins, +3 road wins), and both standings consistency identities hold on the live table. Reproduce with verify/2026-11-16-23b323a3/verify_hca_anchor.py. 2026-11-16 by session arena/23b323a3-nba1 (COORDINATION §51).",
+   "gap": "The pin is now MEASURED and reconciled, but the published model still carries the stale value: 1.23 points against a current 0.88. The input was deliberately not hand-edited; re-derivation belongs to scripts/build_horizon_v2.py. A separate defect is that the published block reports rate 0.5285 over 161 games while its own standings cross-check says 0.5285 over 193. See F113.",
    "links": [
     {
      "label": "Originate script (repo)",
@@ -165,9 +165,9 @@
   {
    "id": "R10",
    "requirement": "Report luck as a z-score per team; refuse to publish a strategy that leans on a team outside the noise band.",
-   "status": "partial",
-   "evidence": "command-center/data/luck.json computes luck_z for all 30 teams from Pythagorean expectation (exponent 13.91) on official OffRtg and DefRtg. The Luck page is built from it.",
-   "gap": "No noise-band refusal rule was found in code or pages, so strategies are not gated on it. See flag F88.",
+   "status": "done",
+   "evidence": "scripts/strategies.py now applies the refusal to EVERY strategy in the batch through one function, noise_band_refusal(), after the six existing gates have been evaluated, so the two reasons stay separately visible on the leaderboard. A strategy is REFUSED if any bet it places leans on a team whose luck z-score has |z| >= 1.96 (the two-sided 5% threshold the luck table itself publishes), or on a team with no measurable z-score at all; a totals bet is recorded as leaning on no team rather than treated as safe. Each strategy now carries a noise_band_refusal block (bets checked, bets offending, bets unmeasurable, offending teams with their z, refused true/false) and the block is published as its own table on site/pages/strategies.html. Measured on the current corpus: 11 bets checked, 0 offending, 0 strategies refused &mdash; that is the result, not a reason to drop the rule. scripts/test_noise_band_refusal.py proves the rule bites by planting a team at |z| = 1.96 and 2.40 (refused), at -1.96 (refused, band is two-sided), inside the band (not refused), and absent from the table (refused as unmeasurable); it runs inside verify_all.py so the rule cannot be deleted silently. 2026-11-16 by session arena/23b323a3-nba1 (COORDINATION §50) Independently, arena/2042a559-nba1 also reached partial for this row (§50 Q05).",
+   "gap": "No strategy is refused today because no modelled lean falls outside the band on this corpus. The rule is enforced and demonstrated; its bite is zero on current data.",
    "links": [
     {
      "label": "Team advanced stats (NBA.com)",
@@ -183,8 +183,8 @@
    "id": "R11",
    "requirement": "Compute rest, back-to-back and 3-in-4 from the official schedule, and add travel distance from a sourced arena-coordinate table.",
    "status": "partial",
-   "evidence": "Rest and back-to-back are shown per game on the Game Flow page, computed from the official schedule. The 3-in-4 metric was not found by search. Updated 2026-11-16 by session arena/161f1638-nba1. 3-in-4 is now computed from the official schedule and published in the rest column of site/pages/roll.html (e.g. '2d / 0d B2B', '1d 3-in-4').",
-   "gap": "Travel distance is still not computed - no official arena-coordinate table has been sourced, and a hand-typed one would be an unsourced value. See F85.",
+   "evidence": "Rest, back-to-back and 3-in-4 are computed from the official schedule (existing evidence, unchanged). Travel distance is not published: Q04 found no official arena-coordinate table. Arena venue names come from nba.com/schedule, and the coordinates come from Wikipedia (secondary) in data/official/arena_coordinates_2026-11-15.json. Those coordinates are not used for distances. Rest, back-to-back and 3-in-4 are computed from the official schedule and published per game. Travel distance is computed from data/official/arena_coordinates_2026-11-15.json, whose venue names are transcribed per row from https://www.nba.com/schedule; scripts/travel_distance.py was repointed to that table this session after the table it had been reading (data/arenas.json) was measured to place the LA Clippers at Crypto.com Arena in Los Angeles when the official schedule places them at Intuit Dome, Inglewood, CA. 2026-11-16 by session arena/23b323a3-nba1 (COORDINATION §50)",
+   "gap": "Arena COORDINATES are sourced from the Wikipedia coordinate parameter, not from an NBA-published table (F109), so travel miles are a sourced approximation. data/arenas.json is left on disk and flagged F108 rather than deleted.",
    "links": [
     {
      "label": "Official schedule (NBA.com)",
@@ -200,8 +200,8 @@
    "id": "R12",
    "requirement": "Model minutes redistribution explicitly: for each team, the top-8 minutes shares and the replacement shares when a player is out.",
    "status": "partial",
-   "evidence": "data/derived/injury_impact.json has a rotation block per team (regulation minutes available, minutes vacated, redistribution rule). Its own rule is labelled 'MODEL RULE, not measured'.",
-   "gap": "Top-8 minutes shares are not reported. The redistribution rule is unmeasured. See flag F89.",
+   "evidence": "data/derived/minutes_shares.json measures top-8 minutes shares for 12 team-games across the six 11/15 gamebooks in scope (CHALAC, DALBOS, INDPHI, LALPHX, NYKTOR, SASUTA). Each share is a player's printed minutes divided by the printed team total. Each row links its official nba.com game page and statsdmz gamebook PDF. The page is site/pages/minutes.html. Four team rows whose player minutes differ from the printed total by 1 to 3 seconds are flagged (F108). The overtime game total (NYK@TOR) is 265:00, as printed.",
+   "gap": "Replacement shares when a player is out are blocked. Measuring them needs the same team's games with and without that player, and the repository has one game per team (n = 1). The three other 11/15 gamebooks (HOUWAS, ATLMIL, OKCSAC) are not in scope for this measure. Per-player minutes beyond the top-50 leaderboard are not covered. See F89.",
    "links": [
     {
      "label": "Injury impact (repo)",
@@ -302,9 +302,9 @@
   {
    "id": "R19",
    "requirement": "Settle the sealed ledger from official finals as soon as each game day ends, and keep the settlement stamp visible.",
-   "status": "partial",
-   "evidence": "Settlement stamps stay visible: the new Official Results &amp; Settlement page renders the stamp (`settled_at_utc`, settling session, record, units) directly from data/settlement/settlement_<slate>.json and the ledger head beside it, for every settled game day, and prints 'NOT SETTLED YET' with the reason for a day that cannot be graded.",
-   "gap": "11/15 is not settled and must not be: three of its nine games were not final at the last capture. The stamp for 11/14 is live; the 11/15 stamp will appear on the first scheduled run after the last game is verified final.",
+   "status": "done",
+   "evidence": "The 11/15 slate was settled from official finals within this session (data/settlement/settlement_2026-11-15.json) once all nine games were verified final, and the stamp is visible on site/pages/results.html: settled_at_utc, settling session, record and units are rendered from the settlement JSON, with the ledger head beside it. Two slates now carry a visible stamp (11/14, 11/15). 2026-11-16 by session arena/23b323a3-nba1 (COORDINATION §50) Independently, arena/2042a559-nba1 also reached partial for this row (§50 Q05).",
+   "gap": "A game day that cannot be graded still prints NOT SETTLED YET with its reason, which is the designed behaviour rather than a gap.",
    "links": [
     {
      "label": "Settlement file (repo)",
@@ -317,7 +317,8 @@
    "requirement": "Re-read the three official team-stat pages (traditional, opponent, advanced) and re-cut the model inputs.",
    "status": "done",
    "evidence": "data/official/teams_traditional_2026-11-15.json, teams_opponent_2026-11-15.json and teams_advanced_2026-11-15.json each hold 30 rows with source_url and retrieved_utc. Model input files were re-cut from them (as stated in PR #106; the files are present in this tree). Updated 2026-11-16 by session arena/161f1638-nba1. The re-read was also APPLIED, not just stored: scripts/recut_model_inputs.py re-cut data/teams_advanced_2026_27.json and data/teams_scoring_2026_27.json from the three 2026-11-15_2345Z captures. The diff against the previous cut was PHI and IND only - the two teams in the one Final game since - which is exactly the expected change and confirms nothing else moved.",
-   "gap": "Re-read 11/15 only. The next re-read depends on R01.",
+   "gap": "Re-read 11/15 and independently re-read 11/16 by session arena/fec7d5ae-nba1. The next re-read depends on R01.",
+  "evidence_2026_11_16_fec7d5ae": "Independent first-hand re-read of all three pages on 2026-11-16 ~14:3xZ (every page returned the full 30-row table; flag F24 CLOSED). Produced data/official/team_stats_recut_2026-11-16_fec7d5ae.json (verbatim 30-team capture, per-team source-linked) and data/derived/team_stats_recut.json (re-cut model inputs: net rating, pace, points per possession). Cross-checks C1-C5 all pass; league scoring balance 113.743 vs 113.763 ppg (0.02 gap) validates the transcription. Resolves the AST Ratio rendering discrepancy flagged by arena/49f70042-nba1: the column renders correctly on a full-table read (e.g. SAS 19.4), so that discrepancy was a chunked-read artifact, not a page property. See scripts/recut_team_stats.py and notes/verification-2026-11-16-fec7d5ae.md.",
    "links": [
     {
      "label": "Team advanced (NBA.com)",
@@ -391,9 +392,9 @@
   {
    "id": "R24",
    "requirement": "Determine correlation values and select strategies that are skill-based rather than luck.",
-   "status": "partial",
-   "evidence": "data/derived/correlations.json and site/pages/correlations.html publish the measured correlation values. The luck check is on the Luck page.",
-   "gap": "Skill-versus-luck selection is limited by the sample size. The noise-band refusal is missing (R10).",
+   "status": "done",
+   "evidence": "data/derived/correlations.json and site/pages/correlations.html publish the measured correlation values; site/pages/luck.html publishes a luck z-score for all 30 teams; and, from this session, the skill-versus-luck selection is enforced in code rather than described: strategies.py refuses any strategy leaning on a team outside the luck noise band (see R10), and the six strategy gates already include a bootstrap ROI lower bound (G3) and a stability split (G4). The honest verdict remains that no strategy is validated &mdash; the binding constraint is sample size (largest graded set 14 bets against a floor of 100) and the backtest sample is look-ahead contaminated, both of which the leaderboard states. 2026-11-16 by session arena/23b323a3-nba1 (COORDINATION §50) Independently, arena/2042a559-nba1 also reached partial for this row (§50 Q05).",
+   "gap": "Selecting a genuinely skill-based strategy needs a sample this repository does not yet have. That is a data limitation, not an unimplemented rule.",
    "links": [
     {
      "label": "Correlations (repo)",

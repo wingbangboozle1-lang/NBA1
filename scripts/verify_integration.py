@@ -43,17 +43,6 @@ OFFICIAL_HOSTS = {
     "official.nba.com",
     "ak-static.cms.nba.com",
     "stats.nba.com",
-    # The NBA's own PDF service. It is the host behind the official gamebook and
-    # box-score PDFs that the official game pages link to, and this repository
-    # already cites it from its own official captures:
-    # data/official/results_2026-11-15.json (`source_gamebook_pdf`,
-    # `source_game_pdf`), data/official/results_2026-11-14.json and
-    # data/official/gamebooks/. It was simply missing from this set, so the page
-    # built from those captures (site/pages/player-logs.html) failed this gate
-    # with "untrusted external host" for a host the project itself treats as
-    # official. Added by arena/2823d556-nba1 (COORDINATION §47.1b, R-47-2823-H);
-    # the host is official, the omission was the defect.
-    "statsdmz.nba.com",
     "cdn.nba.com",
     "statsdmz.nba.com",  # official NBA gamebook PDFs (verified 2026-11-16)
     # GitHub / docs (used for Pages + tooling references only)

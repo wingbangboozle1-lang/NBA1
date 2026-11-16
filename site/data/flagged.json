@@ -1,6 +1,6 @@
 {
  "title": "Flagged for Review",
- "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link.",
+ "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link. Items F111 to F116 were added on 2026-11-16 by session arena/23b323a3-nba1 (COORDINATION §51). Their numbers were assigned F108-F113 on that branch and RENUMBERED here because arena/2042a559-nba1 landed F108-F110 on main first; nothing was renumbered away from another session.",
  "items": [
   {
    "id": "F1",
@@ -974,62 +974,199 @@
   },
   {
    "id": "F108",
+   "severity": "Low",
+   "status": "open",
+   "title": "Four team rows in the 11/15 gamebooks do not sum to the printed team total",
+   "detail": "LAL@PHX: LAL player minutes sum to 240:03 and PHX to 240:01 against a printed 240:00. SAS@UTA: UTA sums to 240:01. NYK@TOR: NYK sums to 265:02 against a printed 265:00 (one overtime period, 5 x 53:00). Each printed total is used as the denominator. The difference is shown, not redistributed. Other rows match exactly.",
+   "source": "Official gamebook PDFs (statsdmz): LALPHX, SASUTA, NYKTOR",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf",
+   "affected": "data/derived/minutes_shares.json (flags); site/pages/minutes.html",
+   "suggested_action": "None needed for the shares. Keep the flag on the minutes page."
+  },
+  {
+   "id": "F109",
+   "severity": "High",
+   "status": "open",
+   "title": "Projection margins and totals include a travel adjustment from a non-official arena-coordinate source",
+   "detail": "data/derived/horizon_lines_v2.json computes a travel distance per away team (for example ORL to BOS 2,094 mi; the coordinates come from Wikipedia) and feeds a travel adjustment into the margin (for example 2.513 for ORL). Q04 decided no distances are computed, because no official arena-coordinate table exists. projection.html shows the margins and totals and carries a note (F85), but the adjustment itself is not yet removed.",
+   "source": "Wikipedia coordinate API (secondary); venue names from nba.com/schedule",
+   "source_url": "https://www.nba.com/schedule",
+   "affected": "data/derived/horizon_lines_v2.json (travel_away, travel_adjustment_away); site/pages/projection.html",
+   "suggested_action": "Remove the travel adjustment from the published margin, or source an official coordinate table, before the next projection publish. Owner: the session that owns scripts/build_horizon_v2.py."
+  },
+  {
+   "id": "F110",
+   "severity": "Low",
+   "status": "open",
+   "title": "Three 11/15 gamebooks are page-1 text only and are outside the minutes measure",
+   "detail": "data/official/gamebooks/2026-11-15_HOUWAS.md, _ATLMIL.md and _OKCSAC.md hold the page-1 box score and period table, not the full PDF. Their final scores match the official game pages (147-119, 113-106, 125-103). The OKC@SAC away player minutes sum to 239:59 against the printed 240:00, a one-second difference. These files are not used for the minutes shares (Q02 scope is the six 11/15 gamebooks).",
+   "source": "Official gamebook PDFs (statsdmz) and nba.com game pages",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC_book.pdf",
+   "affected": "data/official/gamebooks/2026-11-15_HOUWAS.md, _ATLMIL.md, _OKCSAC.md",
+   "suggested_action": "Capture the full gamebooks in a later pass if they are needed for minutes or player logs."
+  },
+  {
+   "id": "F111",
+   "severity": "High",
+   "title": "A second arena table in the repo names the wrong building for the LA Clippers, and travel distance was computed from it",
+   "detail": "data/arenas.json maps LAC to Crypto.com Arena in Los Angeles (34.0430, -118.2687) and LAL to the same coordinates. The official NBA schedule page prints the LA Clippers' home venue as Intuit Dome, Inglewood, CA, and the repository's own official capture agrees: data/official/arena_coordinates_2026-11-15.json row LAC -> {'arena': 'Intuit Dome', 'city': 'Inglewood, CA', 'lat': 33.9451, 'lon': -118.3431}, with venue_source_url https://www.nba.com/schedule. The same official page also prints PHI at Xfinity Mobile Arena (data/arenas.json still says Wells Fargo Center) and PHX at Mortgage Matchup Center (data/arenas.json still says Footprint Center). scripts/travel_distance.py read the stale table, so any travel mile derived from it inherits the error - the material one being a Clippers home game, where an LA-vs-Inglewood swap moves the away team's journey by roughly 9 miles.",
+   "affected": "data/arenas.json (5 rows); data/travel_distance.json; the 4 horizon rows whose home team is LAC, PHI, PHX, LAL or SAC (annotated, not hand-edited)",
+   "source_url": "https://www.nba.com/schedule",
+   "suggested_action": "scripts/travel_distance.py now reads data/official/arena_coordinates_2026-11-15.json, and data/derived/horizon_lines_v2.json carries meta.travel_source_correction naming the affected games. data/arenas.json is left in place so the discrepancy stays visible; it should be regenerated from the official capture and then either deleted or made a pointer to it."
+  },
+  {
+   "id": "F112",
+   "severity": "Medium",
+   "title": "Arena coordinates are sourced from Wikipedia, not from an NBA-published table",
+   "detail": "No NBA-published arena-coordinate table was found. data/official/arena_coordinates_2026-11-15.json records venue names transcribed from https://www.nba.com/schedule per row (official) but latitude/longitude from each arena's Wikipedia coordinate parameter, which is OpenStreetMap-derived. The file labels this itself: coordinate_status = 'SOURCED (secondary source: Wikipedia/Wikidata, not NBA-published)'. Great-circle distance is a lower bound on road distance and ignores airport/layover routing, so travel miles are an approximation of an approximation.",
+   "affected": "the travel column wherever it is published",
+   "source_url": "https://www.nba.com/schedule",
+   "suggested_action": "Keep the secondary-source label on every row that shows a mile figure. If a primary coordinate source is required, the arena operator or city GIS open-data portal would be the place to get one; neither was retrieved in this session."
+  },
+  {
+   "id": "F113",
+   "severity": "Medium",
+   "title": "The horizon's per-player minutes capture covers 24 players, so most picks cannot compute minutes redistribution",
+   "detail": "data/players_minutes_2026_27.json holds 24 ranked player rows. The horizon's minutes-redistribution gate needs an official minutes capture for whichever players the injury report lists, and on the 2026-11-16..18 window 11 of 25 games failed the gate ONLY for that reason (gates_failed = ['minutes redistribution not computable for one of the teams (per-player minutes not captured)']). Nationally readable official player tables exist - https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame returns 471 player rows and was reached in this session - but the reading was interrupted and only the first rows were transcribed, so the capture was NOT extended on the strength of a partial read.",
+   "affected": "data/players_minutes_2026_27.json; 11 of 25 horizon picks (gate FAIL, zero stake)",
+   "source_url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame",
+   "suggested_action": "Complete a full transcription of the 471-row official table (or a paged read of the 30 teams' rosters) and re-run scripts/build_horizon_v2.py. Until then those picks stay gated, which is the conservative outcome, not a defect in the gate."
+  },
+  {
+   "id": "F114",
+   "severity": "Low",
+   "title": "The legacy lines table has no rotation-availability or parlay-rho columns (register R15/R14 still partial)",
+   "detail": "The rolling-slate page (site/pages/roll.html) carries a rotation-availability column and prices parlays with the measured rho beside the naive product. The legacy 'Lines & Picks' page (site/pages/picks.html) has home/away injury status but no rotation-availability column, and its SGP pricing still uses the fixed model constants SGP_RHO_TEAMMATES = -0.2 and SGP_RHO_OPPONENTS = 0.05 rather than the measured rho.",
+   "affected": "site/pages/picks.html; scripts/generate_picks.py",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "suggested_action": "Add both columns to the legacy builder in a dedicated pass. It was NOT done here: the legacy page is a different generator with its own layout, and mixing a layout change into a data-currency session is how a green gate ships a broken table."
+  },
+  {
+   "id": "F115",
+   "severity": "High",
+   "title": "The Results & Settlement page printed \"0 of 0 final — NOT settleable\" directly under the settled 11/15 game day",
+   "detail": "Two official captures of 2026-11-15 exist in data/official/: results_2026-11-15.json (the canonical file) and results_2026-11-15_dfef26dc.json (a session-namespaced capture at 2026-11-16T02:12Z..02:17Z). scripts/build_results_page.py derived the game day from the whole file stem, so the second file became its own section headed '2026-11-15_dfef26dc', matched zero rows against that impossible date, and printed 'Retrieved 2026-11-16T02:12Z..02:17Z · 0 of 0 final — NOT settleable' immediately beneath the section that says the same game day IS settled (stamp 2026-11-16T14:45Z, 5-4-0). Found by reading the built page, not by a gate: all five gates passed while it was wrong, because it is a false statement in prose rather than a broken link.",
+   "affected": "site/pages/results.html — the one page whose job is to answer 'is this game day settleable'",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "suggested_action": "Fixed: the date is now the first ten characters of the stem, the canonical results_<date>.json is authoritative when present, and extra captures are listed by name in a note instead of being rendered as empty game days. Verified after the fix: the page has exactly three sections (2026-11-14, 2026-11-15, How a game day gets settled) and zero occurrences of 'NOT settleable'."
+  },
+  {
+   "id": "F116",
+   "severity": "Medium",
+   "title": "The pinned home-court advantage is computed on a stale standings read, and the published file contains two different standings-derived samples",
+   "detail": "The HCA the model is pinned to is 1.23 points, from a measured home-win rate of 0.5285 on 193 games. That figure was measured from the official standings at the 2026-11-16T02:12Z..02:17Z capture, and it was honestly labelled as including only the 11/15 games that had gone Final at that moment. All three games that finished afterwards (HOU@WAS, ATL@MIL, OKC@SAC) were AWAY wins, so re-adding the official standings at 14:3xZ in this session gives home W-L 102-94 = 196 games, a home-win rate of 0.5204, and a pinned HCA of 0.88 points rather than 1.23. The drift reconciles EXACTLY: +3 games, +0 home wins, +3 road wins, which is precisely those three away wins - verified by verify/2026-11-16-23b323a3/verify_hca_anchor.py, which also re-checks the two internal consistency identities on the live table (home wins 102 == road losses 102; road wins 94 == home losses 94). A second, separate problem is visible in the same JSON: data/derived/horizon_lines_v2.json meta.home_court_anchor reports measured_home_win_rate 0.5285 with games_measured 161, while its own standings_cross_check sub-object reports 0.5285 over 193 games and the final-score corpus measures 0.5155 over 161. The rate and the game count in the top-level fields do not come from the same sample.",
+   "affected": "data/derived/horizon_lines_v2.json meta.home_court_anchor; every line on site/pages/roll.html and model-v2.html that carries the pinned HCA",
+   "source_url": "https://www.nba.com/standings",
+   "suggested_action": "Re-run scripts/build_horizon_v2.py against the current standings so the pin is recomputed rather than hand-corrected; that run also fixes the rate/count mismatch, because both are then read from one capture. This session deliberately did NOT hand-edit the pinned input: a hand-edited model input is exactly what this project forbids, and the re-derivation needs a run that reads the official pages. The arithmetic reconciliation above is committed so the size and direction of the correction are known in advance."
+  },
+  {
+   "id": "F117",
+   "severity": "Medium",
+   "title": "GitHub Pages deployments are being superseded faster than they run, so the live site lags main",
+   "detail": "[Renumbered from F97 at merge with main (PR #138's register already holds F97 with different content): content unchanged.] Every pages.yml push run to main between 2026-11-15T23:55Z and 2026-11-16T01:00Z was cancelled or left pending while five sessions pushed to main inside the same hour. At the last fetch-back the live site still served the pre-11/16 build (34-game 15-18 Nov landing tiles, 4 ledger entries) even though site/pages/roll.html is present in main (1,408 lines, 61.1 KB) and every gate on the branch passes. Nothing in the build is broken: this is a deploy-backlog artefact of parallel sessions, and it means a fetch-back cannot be used to prove what main contains. UPDATE 2026-11-16T02:35Z (session arena/d31fb422-nba1): after the Pages workflow was repaired locally and PR #126 merged as 1f962e2, the account-wide queue held 33 queued runs and two long-lived probe runs (43790671278 started 02:11:49Z, 43785336088 started 01:16:57Z) still in progress. The two runs created for the merge - 'Publish static site to GitHub Pages' 43793011882 and the legacy 'pages build and deployment' 43793011658 - were both still `queued` minutes later, and the Pages build for 1f962e2 sat in `building`. Every earlier push run in the hour (f6b7676, 0dfdf00, 21e5c77, 2c7d13f, f906c73) ended `cancelled` or `errored`. So the deploy backlog is not only a concurrency-key problem: the account's runner pool is being consumed by ~1-hour probe runs plus one refresh/publish pair per push per branch, and nothing in this repository bounds the number of branches pushing. The group keys are now correct (probe-official globally; pages-deploy serialised and never cancelled), which stops deploys from being killed, but it cannot create runners.",
+   "affected": "every published page; any claim about what the live site currently shows",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/actions/workflows/pages.yml",
+   "suggested_action": "Either serialize merges to main (a merge queue) so each deploy completes, or verify against the main tree and the Actions run log rather than a live fetch-back while several sessions are pushing. Also move the probe workflow off the push trigger for arena/** branches (a schedule plus workflow_dispatch is enough for a reachability record) so a 1-hour job cannot be armed by every push from every session."
+  },
+  {
+   "id": "F118",
+   "severity": "High",
+   "title": "Pages is configured to publish from a branch, so pages.yml's deploy job can never publish",
+   "detail": "[Renumbered from F107 at merge with main (PR #138's register already holds F107 with different content): content unchanged.] [Renumbered from F98 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] The Pages API reports build_type='legacy', source={branch:'main', path:'/'}. actions/deploy-pages cannot publish to a branch-sourced site, so every run of that job is a guaranteed failure. This session's token returns HTTP 403 on PUT /repos/{owner}/{repo}/pages (build_type=workflow), so the setting cannot be changed from here. Until the owner flips it, the site is published only by GitHub's built-in branch build, which is what left the live URL serving a build from 2026-11-16T00:51:58Z while main had moved on. pages.yml now detects the configuration at run time, says so with the exact settings URL, and skips instead of failing.",
+   "affected": "every published page; the live site's freshness",
+   "source": "GitHub Pages API: GET /repos/wingbangboozle1-lang/NBA1/pages",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/settings/pages",
+   "suggested_action": "Repository admin: Settings -> Pages -> Build and deployment -> Source -> 'GitHub Actions'. One setting. Verify with: gh api /repos/wingbangboozle1-lang/NBA1/pages --jq .build_type  (should read 'workflow')."
+  },
+  {
+   "id": "F119",
    "severity": "High",
    "title": "The 2026-11-15 slate is not settled because three of its nine games were still in progress",
-   "detail": "[Renumbered from F99 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] Read from the official games page at 2026-11-16 02:2x UTC (21:2x ET on 11/15). Final: PHI 131-124 IND (0022600236), LAL 131-123 PHX (0022600237), LAC 113-105 CHA (0022600238), SAS 110-102 UTA (0022600239), BOS 131-94 DAL (0022600240), NYK 112-108 TOR/OT (0022600241). In progress: HOU@WAS Q4 5:24 (132-102), ATL@MIL Q3 10:42 (57-53), OKC@SAC Q1 7:59 (15-4). The settlement rule requires the official page to print Final with quarter linescores summing to it, so the slate stays open rather than being settled from live scores.",
+   "detail": "[Renumbered from F108 at merge with main (PR #138's register already holds F108 with different content): content unchanged.] [Renumbered from F99 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] Read from the official games page at 2026-11-16 02:2x UTC (21:2x ET on 11/15). Final: PHI 131-124 IND (0022600236), LAL 131-123 PHX (0022600237), LAC 113-105 CHA (0022600238), SAS 110-102 UTA (0022600239), BOS 131-94 DAL (0022600240), NYK 112-108 TOR/OT (0022600241). In progress: HOU@WAS Q4 5:24 (132-102), ATL@MIL Q3 10:42 (57-53), OKC@SAC Q1 7:59 (15-4). The settlement rule requires the official page to print Final with quarter linescores summing to it, so the slate stays open rather than being settled from live scores.",
    "affected": "data/settlement/, the ledger, the leaderboard and every pick graded against this slate",
    "source": "NBA.com official games page, 2026-11-15",
    "source_url": "https://www.nba.com/games?date=2026-11-15",
    "suggested_action": "Settle at game-day end from official finals once all nine games print Final; store one row per game with date, teams, final score and quarter scores."
   },
   {
-   "id": "F109",
+   "id": "F120",
    "severity": "Low",
    "title": "Injury PDFs can be archived only by a runner with outbound network; the session sandbox cannot do it",
-   "detail": "MOSTLY CLOSED AT MERGE. The carry of PR #114 (arena/801ba27f-nba1) put 152 official injury PDFs into data/raw/injury_pdfs/, archived by content hash with JSON sidecars, produced by a GitHub Actions runner that has outbound network. What remains open is narrower: this session's own sandbox has no outbound network (curl to ak-static.cms.nba.com fails at the TLS handshake, HTTP 000, 0 bytes) and the agent-side fetcher returns parsed text only, so a session cannot archive a NEW edition at the moment it reads one. That is a tooling limit, not a data gap, and it now has a working path: capture inside the refresh workflow. The editions already archived cover the 11/15 cycle; anything published after that still needs a runner to archive it.",
+   "detail": "[Renumbered from F109 at merge with main (PR #138's register already holds F109 with different content): content unchanged.] MOSTLY CLOSED AT MERGE. The carry of PR #114 (arena/801ba27f-nba1) put 152 official injury PDFs into data/raw/injury_pdfs/, archived by content hash with JSON sidecars, produced by a GitHub Actions runner that has outbound network. What remains open is narrower: this session's own sandbox has no outbound network (curl to ak-static.cms.nba.com fails at the TLS handshake, HTTP 000, 0 bytes) and the agent-side fetcher returns parsed text only, so a session cannot archive a NEW edition at the moment it reads one. That is a tooling limit, not a data gap, and it now has a working path: capture inside the refresh workflow. The editions already archived cover the 11/15 cycle; anything published after that still needs a runner to archive it.",
    "affected": "data/raw/injury_pdfs/ (empty, 0 files); verifiability of every injury edition",
    "source": "measured in this session; see verify/2026-11-16-c348e6c7/capture_injury.py",
    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf",
    "suggested_action": "Nothing to fix in the data. If a newer edition needs archiving, run the refresh workflow (or add the fetch to it) so the archive happens on a runner."
   },
   {
-   "id": "F110",
+   "id": "F121",
    "severity": "Medium",
    "title": "Stored injury editions encode NOT YET SUBMITTED rows with an inherited player name",
-   "detail": "[Renumbered from F101 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] data/official/injury_2026-11-15_0615PM.json has a row: team='Boston Celtics', player='Penda, Noah', status='Out', reason='NOT YET SUBMITTED'. 'Penda, Noah' belongs to the preceding Orlando Magic row. NOT YET SUBMITTED is a team-level marker and the league prints no player on it, so any consumer reading the status column counts an unnamed player as ruled out for a team that had filed nothing. The consecutive-edition diff now detects this encoding in both the status and the reason field.",
+   "detail": "[Renumbered from F110 at merge with main (PR #138's register already holds F110 with different content): content unchanged.] [Renumbered from F101 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] data/official/injury_2026-11-15_0615PM.json has a row: team='Boston Celtics', player='Penda, Noah', status='Out', reason='NOT YET SUBMITTED'. 'Penda, Noah' belongs to the preceding Orlando Magic row. NOT YET SUBMITTED is a team-level marker and the league prints no player on it, so any consumer reading the status column counts an unnamed player as ruled out for a team that had filed nothing. The consecutive-edition diff now detects this encoding in both the status and the reason field.",
    "affected": "data/official/injury_*.json; every availability calculation built on them",
    "source": "official injury PDF, 11/15/2026 06:15 PM edition",
    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf",
    "suggested_action": "Re-parse the affected editions with the rule 'a NOT YET SUBMITTED row carries no player', or null the player field on those rows; do not drop the rows, they are the record that a team had not filed."
   },
   {
-   "id": "F111",
+   "id": "F122",
    "severity": "Medium",
    "title": "The live horizon lines were cut from the 06:15 PM injury edition; Denver filed four Out players at 09:00 PM",
-   "detail": "[Renumbered from F102 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] Diffing 11/15 06:15 PM against 09:00 PM for the 11/16 games: zero player-level status changes, one team submission change. Denver submitted nothing at 06:15 PM and filed four players Out at 09:00 PM (Holmes II, Nembhard, Strawther, Whitmore) for PHX@DEN (0022600252). Five teams had still not submitted at 09:00 PM: WAS, BOS, HOU, PHI, PHX. The lines were deliberately NOT re-priced: a line re-priced after publication cannot be graded. This is the exact class of gap identified in COORDINATION §42.",
+   "detail": "[Renumbered from F111 at merge with main (PR #138's register already holds F111 with different content): content unchanged.] [Renumbered from F102 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] Diffing 11/15 06:15 PM against 09:00 PM for the 11/16 games: zero player-level status changes, one team submission change. Denver submitted nothing at 06:15 PM and filed four players Out at 09:00 PM (Holmes II, Nembhard, Strawther, Whitmore) for PHX@DEN (0022600252). Five teams had still not submitted at 09:00 PM: WAS, BOS, HOU, PHI, PHX. The lines were deliberately NOT re-priced: a line re-priced after publication cannot be graded. This is the exact class of gap identified in COORDINATION §42.",
    "affected": "the PHX@DEN line; every pick or parlay containing it",
    "source": "official injury PDFs, 11/15/2026 06:15 PM and 09:00 PM editions",
    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf",
    "suggested_action": "Reader decision, recorded as a suggestion: re-cut unpublished future slates from the newest edition, and treat PHX@DEN as carrying a known unpriced availability gap."
   },
   {
-   "id": "F112",
+   "id": "F123",
    "severity": "Low",
    "title": "Sacramento's standings row was only partially read on 2026-11-16",
-   "detail": "[Renumbered from F103 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] The standings page fetch returned the Sacramento Kings row split across a chunk boundary, so only its W-L (1-11, confirmed separately from the official 11/18 games page) was captured. The remaining cells - win%, GB, conference, division, home, road, neutral, OT, last-10 and streak - are recorded as null with a reason rather than inferred.",
+   "detail": "[Renumbered from F112 at merge with main (PR #138's register already holds F112 with different content): content unchanged.] [Renumbered from F103 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] The standings page fetch returned the Sacramento Kings row split across a chunk boundary, so only its W-L (1-11, confirmed separately from the official 11/18 games page) was captured. The remaining cells - win%, GB, conference, division, home, road, neutral, OT, last-10 and streak - are recorded as null with a reason rather than inferred.",
    "affected": "verify/2026-11-16-c348e6c7/standings_live.json; any standings-derived figure touching SAC",
    "source": "NBA.com official standings",
    "source_url": "https://www.nba.com/standings",
    "suggested_action": "Re-read https://www.nba.com/standings and fill the ten SAC cells; the row is flagged in place so it cannot be silently treated as complete."
   },
   {
-   "id": "F113",
+   "id": "F124",
    "severity": "Medium",
-   "title": "GitHub Pages deployments were superseded faster than they run (measured 2026-11-15T23:55Z..2026-11-16T02:0xZ)",
-   "detail": "[Renumbered from the claiming branch's F97 at merge by arena/ed8496e9-nba1: main already carries a different finding under F97 and another session's renumber dance took F98-F106. Content unchanged from the measurement.] Every pages.yml push run to main between 2026-11-15T23:55Z and 2026-11-16T01:00Z was cancelled or left pending while five sessions pushed to main inside the same hour. At the last fetch-back the live site still served the pre-11/16 build (34-game 15-18 Nov landing tiles, 4 ledger entries) even though site/pages/roll.html is present in main (1,408 lines, 61.1 KB) and every gate on the branch passes. Nothing in the build is broken: this is a deploy-backlog artefact of parallel sessions, and it means a fetch-back cannot be used to prove what main contains. UPDATE 2026-11-16T02:35Z (session arena/d31fb422-nba1): after the Pages workflow was repaired locally and PR #126 merged as 1f962e2, the account-wide queue held 33 queued runs and two long-lived probe runs (43790671278 started 02:11:49Z, 43785336088 started 01:16:57Z) still in progress. The two runs created for the merge - 'Publish static site to GitHub Pages' 43793011882 and the legacy 'pages build and deployment' 43793011658 - were both still `queued` minutes later, and the Pages build for 1f962e2 sat in `building`. Every earlier push run in the hour (f6b7676, 0dfdf00, 21e5c77, 2c7d13f, f906c73) ended `cancelled` or `errored`. So the deploy backlog is not only a concurrency-key problem: the account's runner pool is being consumed by ~1-hour probe runs plus one refresh/publish pair per push per branch, and nothing in this repository bounds the number of branches pushing. The group keys are now correct (probe-official globally; pages-deploy serialised and never cancelled), which stops deploys from being killed, but it cannot create runners.",
-   "affected": "every published page; any claim about what the live site currently shows",
-   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/actions/workflows/pages.yml",
-   "suggested_action": "Either serialize merges to main (a merge queue) so each deploy completes, or verify against the main tree and the Actions run log rather than a live fetch-back while several sessions are pushing. Also move the probe workflow off the push trigger for arena/** branches (a schedule plus workflow_dispatch is enough for a reachability record) so a 1-hour job cannot be armed by every push from every session."
+   "title": "The official results feed cannot be rebuilt inside this repository: its box-score capture inputs were never committed",
+   "detail": "[Renumbered from F113 at merge with main (PR #138's register already holds F113 with different content): content unchanged.] scripts/model_801ba27f.py rebuilds data/official/results_feed_2026_27.json only from data/raw/html/2026-11-15-801ba27f/boxscore__*.html.gz captures. That directory does not exist on main (0 files) nor on the PR #130 head that carried the script, so the feed's possession, offensive-rating and pace columns cannot be regenerated by anyone reading this repository alone - only the committed outputs exist. Consequence recorded openly: when session arena/0e9c924f-nba1 re-cut the nine 2026-11-15 rows to FINAL from the official LINESCORES (2026-11-16T14:34Z), those six columns were left null on those rows rather than invented, and count_final was recomputed from row states (197).",
+   "affected": "data/official/results_feed_2026_27.json; any page reading poss/rtg/pace from it for 2026-11-15 games",
+   "source": "Repository file tree (scripts/model_801ba27f.py CAP path vs data/raw/html)",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/model_801ba27f.py",
+   "suggested_action": "Commit the capture directory the builder reads (or teach the builder to read data/official/results_<date>.json + official box-score pages directly) so the feed is reproducible end to end."
+  },
+  {
+   "id": "F125",
+   "severity": "Medium",
+   "title": "main's git history was re-squashed into a single root commit at 2026-11-16T11:51:15Z",
+   "detail": "[Renumbered from F114 at merge with main (PR #138's register already holds F114 with different content): content unchanged.] git rev-list --count origin/main returns 1: commit 047103e2608a53489ae051ce19f15b868eeb6cc6 ('chore: record official-source reachability probe') has no parents, while every pre-11:51 branch and the two then-open PRs (#130, #136) descend from the original root f73edd2166257df22c91dfb198d27a04cd022c15. Consequence: those PRs had no merge base (git merge-base exits 1) and could not be merged normally; their content was carried file by file instead (COORDINATION §50.4). Earlier board records already describe a previous squash (cd8fd27), so lineage-based claims ('committed in PR X') cannot be verified from main's history alone and must be checked against the PR API. Trees are unaffected: every carried file was verified against current main's tree before the close.",
+   "affected": "All lineage-based provenance claims; PRs opened before 2026-11-16T11:51Z",
+   "source": "Git history of wingbangboozle1-lang/NBA1",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/commit/047103e2608a53489ae051ce19f15b868eeb6cc6",
+   "suggested_action": "Avoid further history rewrites while parallel sessions work; if a squash is required, announce it on the coordination board so sessions can re-base their claims on the new root."
+  },
+  {
+   "id": "F126",
+   "severity": "Medium",
+   "title": "A future re-settlement that adds new dates overwrites the settlement record and breaks verify_ledger's digest of the earlier settlement entry",
+   "detail": "[Renumbered from F115 at merge with main (PR #138's register already holds F115 with different content): content unchanged.] settle_slate.py writes one data/settlement/<slate>.json per slate and appends two ledger entries per run. When dates 11/16-11/18 become settleable, a re-run will overwrite settlement_2026-11-15.json with the larger dates_settled set; ledger entry 7 records that file's SHA-256 and scripts/verify_ledger.py re-hashes 'file' against 'sha256' on every run, so the chain check will then FAIL even though nothing was tampered with (the prereg_files key has an explicit superseded-vintage path; the settlement file key does not). Mitigation in place: an idempotency guard added 2026-11-16 (settle_slate.py, §50 N03) skips re-runs that add no new date, which protects the scheduled 15:15Z run today. The structural fix - archive each settlement vintage under data/archive/ and teach verify_ledger's file branch the superseded-vintage pattern it already applies to prereg_files - remains open.",
+   "affected": "scripts/settle_slate.py; scripts/verify_ledger.py; data/ledger/ledger.json entry 7+; data/settlement/settlement_2026-11-15.json",
+   "source": "scripts/verify_ledger.py sha256/file branch; scripts/settle_slate.py append path",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_ledger.py",
+   "suggested_action": "Add settlement-vintage archival + superseded-tolerance to verify_ledger before the 11/16 game day settles."
+  },
+  {
+   "id": "F127",
+   "severity": "Medium",
+   "title": "GitHub Pages build_type cannot be switched to 'workflow' from the session token: PUT /repos/.../pages returns HTTP 403 'Resource not accessible by integration'",
+   "detail": "[Renumbered from F116 at merge with main (PR #138's register already holds F116 with different content): content unchanged.] Measured 2026-11-16T15:0xZ by session arena/0e9c924f-nba1: gh api -X PUT repos/wingbangboozle1-lang/NBA1/pages -f build_type=workflow -> 403 {\"message\":\"Resource not accessible by integration\",\"documentation_url\":\"https://docs.github.com/rest/pages/pages#update-information-about-a-apiname-pages-site\",\"status\":\"403\"}, while the read (GET /pages) works and shows build_type=legacy. The session's token is a GitHub App installation/user token of wingbangboozle1-lang without pages:write. Consequence: the repo stays on the legacy builder, so the single-deploy-path fix (SG37/GR4.2) was implemented from the other side: .github/workflows/pages.yml keeps its full validation battery but its deploy job is disabled (job 'deploy-disabled', if:false), leaving the Pages legacy builder as the only publisher. The intended end state remains build_type=workflow with the Actions deploy job restored.",
+   "affected": ".github/workflows/pages.yml (deploy job disabled); GitHub Pages settings (build_type=legacy)",
+   "source": "GitHub REST API response captured in session log; GET /repos/.../pages shows build_type=legacy",
+   "source_url": "https://docs.github.com/rest/pages/pages#update-information-about-a-apiname-pages-site",
+   "suggested_action": "Grant the app pages:write (or run the PUT from an admin UI session), flip build_type=workflow, then restore the four deploy steps in pages.yml as documented in its header comment."
   }
  ]
 }

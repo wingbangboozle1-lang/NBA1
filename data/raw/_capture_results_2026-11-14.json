@@ -1,8 +1,8 @@
 {
- "captured_at_utc": "2026-11-16T04:07:04Z",
+ "captured_at_utc": "2026-11-16T14:47:44Z",
  "source_url": "https://www.nba.com/games?date=2026-11-14",
- "page_bytes": 441127,
- "page_sha256": "0aaba59008227f95ac2e53f6ae19b648038db22e5467623713445efbe80ea4f2",
+ "page_bytes": 442504,
+ "page_sha256": "2a8983cfc8432150233ef5252dab3698027cfe2b574e3240df506a50ee1f36fe",
  "page_indicators": {
   "__NEXT_DATA__": 1,
   "clean_gameId": 0,
@@ -93,7 +93,7 @@
   "mismatches": [],
   "promotion_candidates": [],
   "committed_finals_missed": [],
-  "reconciled_at_utc": "2026-11-16T14:33:42Z",
+  "reconciled_at_utc": "2026-11-16T14:53:28Z",
   "reconciled_by": "engine/promote_official.py (promoted into data/raw/games_completed.json)"
  },
  "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected.",

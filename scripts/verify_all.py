@@ -26,14 +26,7 @@ from urllib.parse import urlparse
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ALLOWED = {"www.nba.com", "nba.com", "official.nba.com", "ak-static.cms.nba.com",
            "cdn.nba.com", "docs.github.com", "github.com", "kansspelautoriteit.nl",
-           "www.kansspelautoriteit.nl",
-           # Added by arena/2823d556-nba1 (COORDINATION §47.1b, R-47-2823-H) so the two
-           # gates agree on what counts as official. statsdmz.nba.com is the NBA's own
-           # PDF service and is already cited from this repository's official captures
-           # (data/official/results_2026-11-15.json -> source_gamebook_pdf). A host that
-           # verify_integration.py accepts and verify_all.py rejects is exactly the
-           # split that let R-42-B ship, so the two sets are kept in step.
-           "statsdmz.nba.com"}
+           "www.kansspelautoriteit.nl"}
 errors = []
 
 
@@ -66,6 +59,11 @@ run("check_site.py")
 run("verify_schedule_c.py")  # Build C: row-by-row schedule check + schedule-verified.html
 run("build_dashboard.py")    # Build D: regenerate the unified site (index.html + site/**)
 run("verify_dashboard.py")   # Build D: linked or explicit no-source rows; hosts checked, values not re-fetched
+# R10 noise-band refusal (session arena/23b323a3-nba1, COORDINATION §50). A gate that has
+# never rejected anything is not evidence of a gate: on the live corpus zero strategies are
+# refused, so the only way to show the refusal works is to plant a team outside the band and
+# assert it is refused. This runs in the suite so the rule cannot be quietly deleted.
+run("test_noise_band_refusal.py")
 
 # 4a: slate sources
 slate = load("slate_full")
