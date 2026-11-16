@@ -2,7 +2,7 @@
  "_meta": {
   "title": "Originated horizon lines v2 - 2026-11-15 through 2026-11-19",
   "generated_by": "scripts/build_horizon_v2.py",
-  "generated_utc": "2026-11-16T14:58:17Z",
+  "generated_utc": "2026-11-16T18:41:34Z",
   "method": "two independent estimators built on the official team tables, blended underneath; their disagreement is the headline confidence signal; the home-court advantage is pinned to the measured official home win rate",
   "pick_window": "2026-11-16 .. 2026-11-19 (up to 3 days ahead)",
   "line_window": "2026-11-16 .. 2026-11-19",
@@ -13,7 +13,7 @@
     "opponent": "teams_opponent_2026-11-15_2345Z.json"
    },
    "team_table_source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
-   "standings_file": "standings_2026-11-16_0213Z_dfef26dc.json",
+   "standings_file": "standings_2026-11-16_1835Z_23ec1e32.json",
    "schedule_file": "official_schedule_2026-11-15_to_19.json",
    "arena_file": "arena_coordinates_2026-11-15.json",
    "injury_edition_file": "injury_2026-11-15_0900PM_dfef26dc.json",
@@ -31,25 +31,28 @@
    "n_teams": 30
   },
   "home_court_anchor": {
-   "measured_home_win_rate": 0.5285,
-   "measured_home_win_rate_from_final_scores": 0.46153846153846156,
-   "hca_points_from_final_scores_crosscheck": -1.54,
+   "measured_home_win_rate": 0.5204,
+   "measured_home_win_rate_from_final_scores": 0.5204,
+   "hca_points_from_final_scores_crosscheck": 0.87,
    "primary_measurement": "the official standings HOME/ROAD columns (the largest official sample); the final-score corpus measurement is published beside it as a cross-check",
-   "measured_road_win_rate": 0.5384615384615384,
-   "games_measured": 221,
+   "measured_road_win_rate": 0.4796,
+   "games_measured": 196,
+   "final_score_home_wins": 102,
+   "final_score_home_games": 196,
    "home_wins": 102,
-   "home_games": 221,
+   "home_games": 196,
    "standings_cross_check": {
-    "home_win_rate": 0.5285,
-    "road_win_rate": 0.4715,
-    "home_games": 193,
-    "road_games": 193,
+    "home_win_rate": 0.5204,
+    "road_win_rate": 0.4796,
+    "home_games": 196,
+    "road_games": 196,
     "source_url": "https://www.nba.com/standings"
    },
-   "sigma_margin_used": 15.96,
-   "sigma_margin_source": "population standard deviation of the margin on the official final-score corpus",
-   "hca_points": 1.14,
-   "hca_z": 0.0715,
+   "sources_agree": true,
+   "sigma_margin_used": 16.93,
+   "sigma_margin_source": "population standard deviation of the margin on the official final-score corpus (finished games only; scheduled rows with placeholder scores are excluded by engine/model_v2.load_results)",
+   "hca_points": 0.87,
+   "hca_z": 0.0512,
    "formula": "HCA_points = sigma_margin * Phi^-1(measured home win rate). The number of points is read off the measurement; nothing about it is fitted.",
    "status": "MEASURED - the home-court advantage is pinned to the official home win rate"
   },
@@ -112,39 +115,6 @@
    "min_model_prob": 0.55,
    "luck_band_z": 1.5,
    "note": "a pick must survive every gate to be published as a stakeable pick. No strategy has passed the strategy validation gates in this repository, so every pick below is published as MODEL OUTPUT - UNVALIDATED with zero stake, which is the honest state of the evidence."
-  },
-  "travel_source_correction": {
-   "measured_utc": "2026-11-16T15:10Z",
-   "by": "arena/23b323a3-nba1",
-   "finding": "F-50-01",
-   "what": "Travel miles were read from data/arenas.json, which lists LAC at Crypto.com Arena in Los Angeles. The official schedule page places the LA Clippers at Intuit Dome, Inglewood, CA, and already-captured official rows in this repository say so too (data/official/arena_coordinates_2026-11-15.json, venue_source_url https://www.nba.com/schedule). PHI (Wells Fargo Center -> Xfinity Mobile Arena) and PHX (Footprint Center -> Mortgage Matchup Center) are the same kind of stale-venue error.",
-   "affected_games": [
-    {
-     "date": "2026-11-17",
-     "matchup": "CHA@LAL",
-     "home": "LAL",
-     "reason": "home arena name in data/arenas.json is stale; the row's travel number depends on arena coordinates, which happen to agree to ~0.2 mi, so the miles are not materially affected"
-    },
-    {
-     "date": "2026-11-17",
-     "matchup": "UTA@LAC",
-     "home": "LAC",
-     "reason": "home arena was Crypto.com Arena in data/arenas.json; the official schedule says Intuit Dome"
-    },
-    {
-     "date": "2026-11-18",
-     "matchup": "UTA@LAL",
-     "home": "LAL",
-     "reason": "home arena name in data/arenas.json is stale; the row's travel number depends on arena coordinates, which happen to agree to ~0.2 mi, so the miles are not materially affected"
-    },
-    {
-     "date": "2026-11-18",
-     "matchup": "PHX@SAC",
-     "home": "SAC",
-     "reason": "home arena name in data/arenas.json is stale; the row's travel number depends on arena coordinates, which happen to agree to ~0.2 mi, so the miles are not materially affected"
-    }
-   ],
-   "not_recomputed_here": "the model fields on these rows are NOT recomputed by this correction pass. The rows are re-originated by scripts/build_horizon_v2.py on the next scheduled refresh, which now reads the corrected table. Recomputation is left to that run so no number on the site is edited by hand."
   }
  },
  "games": [
@@ -172,7 +142,7 @@
     "ppp_proj_away": 1.0268,
     "pts_home": 112.7,
     "pts_away": 97.6,
-    "margin": 16.2,
+    "margin": 16.0,
     "total": 210.2
    },
    "estimator_b": {
@@ -181,26 +151,26 @@
     "pace_factor": 0.9517,
     "pts_home": 107.9,
     "pts_away": 93.5,
-    "margin": 15.6,
+    "margin": 15.3,
     "total": 201.4
    },
    "blend": {
-    "p_home_win_estimator_a": 0.845,
-    "p_home_win_estimator_b": 0.8359,
-    "p_home_win_blend": 0.8405,
-    "disagreement": 0.0091,
-    "disagreement_pp": 0.91,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.91 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.8277,
+    "p_home_win_estimator_b": 0.8169,
+    "p_home_win_blend": 0.8223,
+    "disagreement": 0.0108,
+    "disagreement_pp": 1.08,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.08 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 15.9,
+    "margin_blend": 15.7,
     "total_blend": 205.8
    },
    "line_total": 204.4,
-   "line_spread_home": 19.6,
-   "model_home_win_prob": 0.8906,
-   "model_home_ml": -814,
-   "confidence_signal_pp": 0.91,
+   "line_spread_home": 19.4,
+   "model_home_win_prob": 0.8744,
+   "model_home_ml": -696,
+   "confidence_signal_pp": 1.08,
    "rest_home": {
     "rest_days": 0,
     "back_to_back": true,
@@ -333,14 +303,14 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": -0.84,
+    "luck_z": -0.38,
     "in_noise_band": true,
-    "luck_points": -42.8
+    "luck_points": -18.4
    },
    "luck_away": {
-    "luck_z": 0.24,
+    "luck_z": -0.21,
     "in_noise_band": true,
-    "luck_points": 11.9
+    "luck_points": -9.8
    },
    "source_url": "https://www.nba.com/game/orl-vs-bos-0022600245",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -369,7 +339,7 @@
     "ppp_proj_away": 1.1152,
     "pts_home": 128.8,
     "pts_away": 115.6,
-    "margin": 14.3,
+    "margin": 14.0,
     "total": 244.4
    },
    "estimator_b": {
@@ -378,26 +348,26 @@
     "pace_factor": 1.0386,
     "pts_home": 135.2,
     "pts_away": 121.4,
-    "margin": 14.9,
+    "margin": 14.7,
     "total": 256.5
    },
    "blend": {
-    "p_home_win_estimator_a": 0.8149,
-    "p_home_win_estimator_b": 0.8248,
-    "p_home_win_blend": 0.8199,
-    "disagreement": 0.0099,
-    "disagreement_pp": 0.99,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.99 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.7959,
+    "p_home_win_estimator_b": 0.8074,
+    "p_home_win_blend": 0.8016,
+    "disagreement": 0.0115,
+    "disagreement_pp": 1.15,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.15 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 14.6,
+    "margin_blend": 14.3,
     "total_blend": 250.4
    },
    "line_total": 250.4,
-   "line_spread_home": 14.6,
-   "model_home_win_prob": 0.8199,
-   "model_home_ml": -455,
-   "confidence_signal_pp": 0.99,
+   "line_spread_home": 14.3,
+   "model_home_win_prob": 0.8009,
+   "model_home_ml": -402,
+   "confidence_signal_pp": 1.15,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -516,14 +486,14 @@
     "note": "official per-player minutes not captured for this team"
    },
    "luck_home": {
-    "luck_z": -0.1,
+    "luck_z": 0.01,
     "in_noise_band": true,
-    "luck_points": -5.4
+    "luck_points": 0.4
    },
    "luck_away": {
-    "luck_z": 1.28,
+    "luck_z": 0.97,
     "in_noise_band": true,
-    "luck_points": 62.9
+    "luck_points": 45.1
    },
    "source_url": "https://www.nba.com/game/chi-vs-cle-0022600246",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -552,7 +522,7 @@
     "ppp_proj_away": 1.2037,
     "pts_home": 106.2,
     "pts_away": 120.7,
-    "margin": -13.4,
+    "margin": -13.6,
     "total": 226.8
    },
    "estimator_b": {
@@ -561,26 +531,26 @@
     "pace_factor": 1.0041,
     "pts_home": 108.5,
     "pts_away": 123.4,
-    "margin": -13.7,
+    "margin": -14.0,
     "total": 231.9
    },
    "blend": {
-    "p_home_win_estimator_a": 0.2005,
-    "p_home_win_estimator_b": 0.1953,
-    "p_home_win_blend": 0.1979,
-    "disagreement": 0.0052,
-    "disagreement_pp": 0.52,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.52 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.2109,
+    "p_home_win_estimator_b": 0.2041,
+    "p_home_win_blend": 0.2075,
+    "disagreement": 0.0068,
+    "disagreement_pp": 0.68,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.68 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -13.6,
+    "margin_blend": -13.8,
     "total_blend": 229.4
    },
    "line_total": 229.4,
-   "line_spread_home": -14.1,
-   "model_home_win_prob": 0.1884,
-   "model_home_ml": 431,
-   "confidence_signal_pp": 0.52,
+   "line_spread_home": -14.3,
+   "model_home_win_prob": 0.1991,
+   "model_home_ml": 402,
+   "confidence_signal_pp": 0.68,
    "rest_home": {
     "rest_days": 0,
     "back_to_back": true,
@@ -649,14 +619,14 @@
     "note": "official per-player minutes not captured for this team"
    },
    "luck_home": {
-    "luck_z": -0.5,
+    "luck_z": -0.96,
     "in_noise_band": true,
-    "luck_points": -26.5
+    "luck_points": -48.2
    },
    "luck_away": {
-    "luck_z": -1.5,
-    "in_noise_band": false,
-    "luck_points": -76.6
+    "luck_z": -1.13,
+    "in_noise_band": true,
+    "luck_points": -54.7
    },
    "source_url": "https://www.nba.com/game/mem-vs-was-0022600247",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -685,7 +655,7 @@
     "ppp_proj_away": 1.1514,
     "pts_home": 106.7,
     "pts_away": 115.0,
-    "margin": -7.1,
+    "margin": -7.4,
     "total": 221.7
    },
    "estimator_b": {
@@ -694,25 +664,25 @@
     "pace_factor": 1.0,
     "pts_home": 107.0,
     "pts_away": 115.3,
-    "margin": -7.1,
+    "margin": -7.4,
     "total": 222.3
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3282,
-    "p_home_win_estimator_b": 0.3282,
-    "p_home_win_blend": 0.3282,
+    "p_home_win_estimator_a": 0.331,
+    "p_home_win_estimator_b": 0.331,
+    "p_home_win_blend": 0.331,
     "disagreement": 0.0,
     "disagreement_pp": 0.0,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -7.1,
+    "margin_blend": -7.4,
     "total_blend": 222.0
    },
    "line_total": 222.0,
-   "line_spread_home": -5.9,
-   "model_home_win_prob": 0.3557,
-   "model_home_ml": 181,
+   "line_spread_home": -6.2,
+   "model_home_win_prob": 0.357,
+   "model_home_ml": 180,
    "confidence_signal_pp": 0.0,
    "rest_home": {
     "rest_days": 1,
@@ -845,14 +815,14 @@
     "status": "NOT YET SUBMITTED - the official injury edition for 2026-11-16 prints NOT YET SUBMITTED for this team, so its availability is unknown and the cell is blank."
    },
    "luck_home": {
-    "luck_z": 0.01,
+    "luck_z": -0.07,
     "in_noise_band": true,
-    "luck_points": 0.4
+    "luck_points": -3.2
    },
    "luck_away": {
-    "luck_z": -0.55,
+    "luck_z": -0.28,
     "in_noise_band": true,
-    "luck_points": -28.8
+    "luck_points": -14.0
    },
    "source_url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -881,7 +851,7 @@
     "ppp_proj_away": 1.2212,
     "pts_home": 111.9,
     "pts_away": 122.2,
-    "margin": -9.2,
+    "margin": -9.4,
     "total": 234.1
    },
    "estimator_b": {
@@ -890,26 +860,26 @@
     "pace_factor": 1.0023,
     "pts_home": 112.4,
     "pts_away": 122.8,
-    "margin": -9.2,
+    "margin": -9.5,
     "total": 235.2
    },
    "blend": {
-    "p_home_win_estimator_a": 0.2821,
-    "p_home_win_estimator_b": 0.2821,
-    "p_home_win_blend": 0.2821,
-    "disagreement": 0.0,
-    "disagreement_pp": 0.0,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.2894,
+    "p_home_win_estimator_b": 0.2873,
+    "p_home_win_blend": 0.2884,
+    "disagreement": 0.002,
+    "disagreement_pp": 0.2,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.20 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -9.2,
+    "margin_blend": -9.4,
     "total_blend": 234.6
    },
    "line_total": 234.6,
-   "line_spread_home": -7.0,
-   "model_home_win_prob": 0.3307,
-   "model_home_ml": 202,
-   "confidence_signal_pp": 0.0,
+   "line_spread_home": -7.2,
+   "model_home_win_prob": 0.3356,
+   "model_home_ml": 198,
+   "confidence_signal_pp": 0.2,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -1026,14 +996,14 @@
     "status": "NOT YET SUBMITTED - the official injury edition for 2026-11-16 prints NOT YET SUBMITTED for this team, so its availability is unknown and the cell is blank."
    },
    "luck_home": {
-    "luck_z": -0.18,
+    "luck_z": -0.12,
     "in_noise_band": true,
-    "luck_points": -9.0
+    "luck_points": -5.8
    },
    "luck_away": {
-    "luck_z": 0.21,
+    "luck_z": 0.65,
     "in_noise_band": true,
-    "luck_points": 11.2
+    "luck_points": 32.7
    },
    "source_url": "https://www.nba.com/game/hou-vs-mia-0022600249",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -1062,7 +1032,7 @@
     "ppp_proj_away": 1.0996,
     "pts_home": 116.2,
     "pts_away": 112.3,
-    "margin": 5.1,
+    "margin": 4.8,
     "total": 228.5
    },
    "estimator_b": {
@@ -1071,26 +1041,26 @@
     "pace_factor": 1.0227,
     "pts_home": 119.0,
     "pts_away": 114.9,
-    "margin": 5.2,
+    "margin": 4.9,
     "total": 233.9
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6254,
-    "p_home_win_estimator_b": 0.6278,
-    "p_home_win_blend": 0.6266,
-    "disagreement": 0.0024,
-    "disagreement_pp": 0.24,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.24 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.6116,
+    "p_home_win_estimator_b": 0.6139,
+    "p_home_win_blend": 0.6127,
+    "disagreement": 0.0023,
+    "disagreement_pp": 0.23,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.23 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 5.2,
+    "margin_blend": 4.8,
     "total_blend": 231.2
    },
    "line_total": 229.2,
-   "line_spread_home": 1.9,
-   "model_home_win_prob": 0.5485,
-   "model_home_ml": -122,
-   "confidence_signal_pp": 0.24,
+   "line_spread_home": 1.5,
+   "model_home_win_prob": 0.5364,
+   "model_home_ml": -116,
+   "confidence_signal_pp": 0.23,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -1238,14 +1208,14 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": -0.66,
+    "luck_z": -0.53,
     "in_noise_band": true,
-    "luck_points": -33.7
+    "luck_points": -25.7
    },
    "luck_away": {
-    "luck_z": 0.18,
+    "luck_z": 0.02,
     "in_noise_band": true,
-    "luck_points": 9.1
+    "luck_points": 1.1
    },
    "source_url": "https://www.nba.com/game/por-vs-min-0022600250",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -1274,7 +1244,7 @@
     "ppp_proj_away": 1.2313,
     "pts_home": 111.9,
     "pts_away": 125.2,
-    "margin": -12.2,
+    "margin": -12.4,
     "total": 237.0
    },
    "estimator_b": {
@@ -1283,26 +1253,26 @@
     "pace_factor": 1.0182,
     "pts_home": 116.7,
     "pts_away": 130.6,
-    "margin": -12.7,
+    "margin": -13.0,
     "total": 247.3
    },
    "blend": {
-    "p_home_win_estimator_a": 0.2222,
-    "p_home_win_estimator_b": 0.213,
-    "p_home_win_blend": 0.2176,
-    "disagreement": 0.0092,
-    "disagreement_pp": 0.92,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.92 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.2319,
+    "p_home_win_estimator_b": 0.2213,
+    "p_home_win_blend": 0.2266,
+    "disagreement": 0.0107,
+    "disagreement_pp": 1.07,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.07 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -12.4,
+    "margin_blend": -12.7,
     "total_blend": 242.2
    },
    "line_total": 241.2,
-   "line_spread_home": -14.8,
-   "model_home_win_prob": 0.1772,
-   "model_home_ml": 464,
-   "confidence_signal_pp": 0.92,
+   "line_spread_home": -15.1,
+   "model_home_win_prob": 0.1866,
+   "model_home_ml": 436,
+   "confidence_signal_pp": 1.07,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -1473,14 +1443,14 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": 0.3,
+    "luck_z": -0.24,
     "in_noise_band": true,
-    "luck_points": 15.6
+    "luck_points": -11.9
    },
    "luck_away": {
-    "luck_z": 0.28,
+    "luck_z": 0.65,
     "in_noise_band": true,
-    "luck_points": 14.3
+    "luck_points": 31.7
    },
    "source_url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -1509,7 +1479,7 @@
     "ppp_proj_away": 1.1479,
     "pts_home": 116.7,
     "pts_away": 110.5,
-    "margin": 7.3,
+    "margin": 7.1,
     "total": 227.2
    },
    "estimator_b": {
@@ -1518,26 +1488,26 @@
     "pace_factor": 0.9644,
     "pts_home": 112.9,
     "pts_away": 106.9,
-    "margin": 7.1,
+    "margin": 6.8,
     "total": 219.8
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6764,
-    "p_home_win_estimator_b": 0.6718,
-    "p_home_win_blend": 0.6741,
-    "disagreement": 0.0045,
-    "disagreement_pp": 0.45,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.45 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.6625,
+    "p_home_win_estimator_b": 0.656,
+    "p_home_win_blend": 0.6593,
+    "disagreement": 0.0065,
+    "disagreement_pp": 0.65,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.65 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 7.2,
+    "margin_blend": 6.9,
     "total_blend": 223.5
    },
    "line_total": 223.5,
-   "line_spread_home": 8.9,
-   "model_home_win_prob": 0.7123,
-   "model_home_ml": -248,
-   "confidence_signal_pp": 0.45,
+   "line_spread_home": 8.6,
+   "model_home_win_prob": 0.695,
+   "model_home_ml": -228,
+   "confidence_signal_pp": 0.65,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -1657,14 +1627,14 @@
     "status": "NOT YET SUBMITTED - the official injury edition for 2026-11-16 prints NOT YET SUBMITTED for this team, so its availability is unknown and the cell is blank."
    },
    "luck_home": {
-    "luck_z": 0.11,
+    "luck_z": 0.04,
     "in_noise_band": true,
-    "luck_points": 5.0
+    "luck_points": 1.9
    },
    "luck_away": {
-    "luck_z": 0.69,
+    "luck_z": 0.78,
     "in_noise_band": true,
-    "luck_points": 34.0
+    "luck_points": 36.2
    },
    "source_url": "https://www.nba.com/game/phx-vs-den-0022600252",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -1693,7 +1663,7 @@
     "ppp_proj_away": 1.1452,
     "pts_home": 104.9,
     "pts_away": 109.6,
-    "margin": -3.6,
+    "margin": -3.8,
     "total": 214.4
    },
    "estimator_b": {
@@ -1702,26 +1672,26 @@
     "pace_factor": 0.9583,
     "pts_home": 99.9,
     "pts_away": 104.4,
-    "margin": -3.3,
+    "margin": -3.6,
     "total": 204.3
    },
    "blend": {
-    "p_home_win_estimator_a": 0.4107,
-    "p_home_win_estimator_b": 0.4181,
-    "p_home_win_blend": 0.4144,
-    "disagreement": 0.0073,
-    "disagreement_pp": 0.73,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.73 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.4112,
+    "p_home_win_estimator_b": 0.4158,
+    "p_home_win_blend": 0.4135,
+    "disagreement": 0.0046,
+    "disagreement_pp": 0.46,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.46 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -3.5,
+    "margin_blend": -3.7,
     "total_blend": 209.4
    },
    "line_total": 209.4,
-   "line_spread_home": -3.5,
-   "model_home_win_prob": 0.4132,
+   "line_spread_home": -3.7,
+   "model_home_win_prob": 0.4135,
    "model_home_ml": 142,
-   "confidence_signal_pp": 0.73,
+   "confidence_signal_pp": 0.46,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -1849,14 +1819,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-17; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": -0.09,
+    "luck_z": -0.04,
     "in_noise_band": true,
-    "luck_points": -4.5
+    "luck_points": -2.0
    },
    "luck_away": {
-    "luck_z": -0.6,
+    "luck_z": -0.52,
     "in_noise_band": true,
-    "luck_points": -29.8
+    "luck_points": -25.1
    },
    "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600253",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -1885,7 +1855,7 @@
     "ppp_proj_away": 1.0996,
     "pts_home": 116.2,
     "pts_away": 112.3,
-    "margin": 5.1,
+    "margin": 4.8,
     "total": 228.5
    },
    "estimator_b": {
@@ -1894,33 +1864,33 @@
     "pace_factor": 1.0227,
     "pts_home": 119.0,
     "pts_away": 114.9,
-    "margin": 5.2,
+    "margin": 4.9,
     "total": 233.9
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6254,
-    "p_home_win_estimator_b": 0.6278,
-    "p_home_win_blend": 0.6266,
-    "disagreement": 0.0024,
-    "disagreement_pp": 0.24,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.24 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.6116,
+    "p_home_win_estimator_b": 0.6139,
+    "p_home_win_blend": 0.6127,
+    "disagreement": 0.0023,
+    "disagreement_pp": 0.23,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.23 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 5.2,
+    "margin_blend": 4.8,
     "total_blend": 231.2
    },
    "line_total": 229.2,
-   "line_spread_home": -0.5,
-   "model_home_win_prob": 0.4871,
-   "model_home_ml": 105,
-   "confidence_signal_pp": 0.24,
+   "line_spread_home": -0.9,
+   "model_home_win_prob": 0.4784,
+   "model_home_ml": 109,
+   "confidence_signal_pp": 0.23,
    "rest_home": {
     "rest_days": 0,
     "back_to_back": true,
     "three_in_four": true,
     "games_in_last_4_days": 3,
     "last_date": "2026-11-16",
-    "last_game_was_home": true,
+    "last_game_was_home": false,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -1941,7 +1911,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Target%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "MIN",
     "minutes_removed": 33.7,
@@ -2061,14 +2031,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-17; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": -0.66,
+    "luck_z": -0.53,
     "in_noise_band": true,
-    "luck_points": -33.7
+    "luck_points": -25.7
    },
    "luck_away": {
-    "luck_z": 0.18,
+    "luck_z": 0.02,
     "in_noise_band": true,
-    "luck_points": 9.1
+    "luck_points": 1.1
    },
    "source_url": "https://www.nba.com/game/por-vs-min-0022600254",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -2097,7 +2067,7 @@
     "ppp_proj_away": 1.0726,
     "pts_home": 113.4,
     "pts_away": 105.7,
-    "margin": 8.8,
+    "margin": 8.6,
     "total": 219.2
    },
    "estimator_b": {
@@ -2106,26 +2076,26 @@
     "pace_factor": 0.9874,
     "pts_home": 114.5,
     "pts_away": 106.7,
-    "margin": 8.9,
+    "margin": 8.6,
     "total": 221.2
    },
    "blend": {
-    "p_home_win_estimator_a": 0.7094,
-    "p_home_win_estimator_b": 0.7115,
-    "p_home_win_blend": 0.7104,
-    "disagreement": 0.0021,
-    "disagreement_pp": 0.21,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.21 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.6943,
+    "p_home_win_estimator_b": 0.6943,
+    "p_home_win_blend": 0.6943,
+    "disagreement": 0.0,
+    "disagreement_pp": 0.0,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 8.9,
+    "margin_blend": 8.6,
     "total_blend": 220.2
    },
    "line_total": 220.2,
-   "line_spread_home": 8.9,
-   "model_home_win_prob": 0.7115,
-   "model_home_ml": -247,
-   "confidence_signal_pp": 0.21,
+   "line_spread_home": 8.6,
+   "model_home_win_prob": 0.6943,
+   "model_home_ml": -227,
+   "confidence_signal_pp": 0.0,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -2184,14 +2154,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-17; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": -0.97,
+    "luck_z": -0.83,
     "in_noise_band": true,
-    "luck_points": -49.5
+    "luck_points": -41.8
    },
    "luck_away": {
-    "luck_z": -0.32,
+    "luck_z": -0.2,
     "in_noise_band": true,
-    "luck_points": -16.0
+    "luck_points": -9.5
    },
    "source_url": "https://www.nba.com/game/det-vs-sas-0022600255",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -2220,7 +2190,7 @@
     "ppp_proj_away": 1.024,
     "pts_home": 118.7,
     "pts_away": 99.8,
-    "margin": 20.1,
+    "margin": 19.8,
     "total": 218.6
    },
    "estimator_b": {
@@ -2229,26 +2199,26 @@
     "pace_factor": 0.9765,
     "pts_home": 115.1,
     "pts_away": 96.7,
-    "margin": 19.5,
+    "margin": 19.2,
     "total": 211.8
    },
    "blend": {
-    "p_home_win_estimator_a": 0.8961,
-    "p_home_win_estimator_b": 0.8892,
-    "p_home_win_blend": 0.8926,
-    "disagreement": 0.0069,
-    "disagreement_pp": 0.69,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.69 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.8789,
+    "p_home_win_estimator_b": 0.8716,
+    "p_home_win_blend": 0.8753,
+    "disagreement": 0.0073,
+    "disagreement_pp": 0.73,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.73 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 19.8,
+    "margin_blend": 19.5,
     "total_blend": 215.2
    },
    "line_total": 215.2,
-   "line_spread_home": 19.8,
-   "model_home_win_prob": 0.8928,
-   "model_home_ml": -833,
-   "confidence_signal_pp": 0.69,
+   "line_spread_home": 19.5,
+   "model_home_win_prob": 0.8754,
+   "model_home_ml": -703,
+   "confidence_signal_pp": 0.73,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -2321,14 +2291,14 @@
     "note": "official per-player minutes not captured for this team"
    },
    "luck_home": {
-    "luck_z": -1.19,
+    "luck_z": -0.48,
     "in_noise_band": true,
-    "luck_points": -62.6
+    "luck_points": -24.4
    },
    "luck_away": {
-    "luck_z": 0.3,
+    "luck_z": -0.08,
     "in_noise_band": true,
-    "luck_points": 15.0
+    "luck_points": -4.0
    },
    "source_url": "https://www.nba.com/game/cha-vs-lal-0022600256",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -2357,7 +2327,7 @@
     "ppp_proj_away": 1.0757,
     "pts_home": 114.8,
     "pts_away": 108.9,
-    "margin": 7.1,
+    "margin": 6.8,
     "total": 223.7
    },
    "estimator_b": {
@@ -2366,26 +2336,26 @@
     "pace_factor": 1.0138,
     "pts_home": 118.8,
     "pts_away": 112.7,
-    "margin": 7.3,
+    "margin": 7.0,
     "total": 231.4
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6718,
-    "p_home_win_estimator_b": 0.6764,
-    "p_home_win_blend": 0.6741,
-    "disagreement": 0.0045,
-    "disagreement_pp": 0.45,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.45 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.656,
+    "p_home_win_estimator_b": 0.6604,
+    "p_home_win_blend": 0.6582,
+    "disagreement": 0.0043,
+    "disagreement_pp": 0.43,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.43 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 7.2,
+    "margin_blend": 6.9,
     "total_blend": 227.6
    },
    "line_total": 227.6,
-   "line_spread_home": 7.9,
-   "model_home_win_prob": 0.6901,
-   "model_home_ml": -223,
-   "confidence_signal_pp": 0.45,
+   "line_spread_home": 7.6,
+   "model_home_win_prob": 0.6736,
+   "model_home_ml": -206,
+   "confidence_signal_pp": 0.43,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -2481,14 +2451,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-17; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": 0.19,
+    "luck_z": 0.32,
     "in_noise_band": true,
-    "luck_points": 9.0
+    "luck_points": 15.0
    },
    "luck_away": {
-    "luck_z": 1.82,
-    "in_noise_band": false,
-    "luck_points": 95.7
+    "luck_z": 1.4,
+    "in_noise_band": true,
+    "luck_points": 70.5
    },
    "source_url": "https://www.nba.com/game/uta-vs-lac-0022600257",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -2517,7 +2487,7 @@
     "ppp_proj_away": 1.2126,
     "pts_home": 114.2,
     "pts_away": 121.7,
-    "margin": -6.3,
+    "margin": -6.6,
     "total": 235.9
    },
    "estimator_b": {
@@ -2526,33 +2496,33 @@
     "pace_factor": 1.005,
     "pts_home": 116.0,
     "pts_away": 123.6,
-    "margin": -6.4,
+    "margin": -6.7,
     "total": 239.6
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3465,
-    "p_home_win_estimator_b": 0.3442,
-    "p_home_win_blend": 0.3453,
-    "disagreement": 0.0023,
-    "disagreement_pp": 0.23,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.23 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.3483,
+    "p_home_win_estimator_b": 0.3461,
+    "p_home_win_blend": 0.3472,
+    "disagreement": 0.0022,
+    "disagreement_pp": 0.22,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.22 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -6.3,
+    "margin_blend": -6.7,
     "total_blend": 237.8
    },
    "line_total": 237.8,
-   "line_spread_home": -5.9,
-   "model_home_win_prob": 0.355,
+   "line_spread_home": -6.3,
+   "model_home_win_prob": 0.3542,
    "model_home_ml": 182,
-   "confidence_signal_pp": 0.23,
+   "confidence_signal_pp": 0.22,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-16",
-    "last_game_was_home": true,
+    "last_game_was_home": false,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -2573,7 +2543,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Rocket%20Arena&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "CLE",
     "minutes_removed": 0.0,
@@ -2622,14 +2592,14 @@
     "note": "official per-player minutes not captured for this team"
    },
    "luck_home": {
-    "luck_z": -0.1,
+    "luck_z": 0.01,
     "in_noise_band": true,
-    "luck_points": -5.4
+    "luck_points": 0.4
    },
    "luck_away": {
-    "luck_z": -1.5,
-    "in_noise_band": false,
-    "luck_points": -76.6
+    "luck_z": -1.13,
+    "in_noise_band": true,
+    "luck_points": -54.7
    },
    "source_url": "https://www.nba.com/game/mem-vs-cle-0022600258",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -2658,7 +2628,7 @@
     "ppp_proj_away": 1.1948,
     "pts_home": 106.9,
     "pts_away": 118.1,
-    "margin": -10.1,
+    "margin": -10.4,
     "total": 224.9
    },
    "estimator_b": {
@@ -2667,26 +2637,26 @@
     "pace_factor": 0.9899,
     "pts_home": 104.9,
     "pts_away": 115.9,
-    "margin": -9.9,
+    "margin": -10.2,
     "total": 220.7
    },
    "blend": {
-    "p_home_win_estimator_a": 0.2634,
-    "p_home_win_estimator_b": 0.2675,
-    "p_home_win_blend": 0.2654,
-    "disagreement": 0.0041,
-    "disagreement_pp": 0.41,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.41 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.2695,
+    "p_home_win_estimator_b": 0.2734,
+    "p_home_win_blend": 0.2715,
+    "disagreement": 0.0039,
+    "disagreement_pp": 0.39,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.39 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -10.0,
+    "margin_blend": -10.3,
     "total_blend": 222.8
    },
    "line_total": 222.8,
-   "line_spread_home": -8.2,
-   "model_home_win_prob": 0.3039,
-   "model_home_ml": 229,
-   "confidence_signal_pp": 0.41,
+   "line_spread_home": -8.5,
+   "model_home_win_prob": 0.308,
+   "model_home_ml": 225,
+   "confidence_signal_pp": 0.39,
    "rest_home": {
     "rest_days": 2,
     "back_to_back": false,
@@ -2714,7 +2684,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Gainbridge%20Fieldhouse&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "IND",
     "minutes_removed": 0.0,
@@ -2785,14 +2755,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": -0.16,
+    "luck_z": -0.38,
     "in_noise_band": true,
-    "luck_points": -8.1
+    "luck_points": -19.4
    },
    "luck_away": {
-    "luck_z": 0.21,
+    "luck_z": 0.65,
     "in_noise_band": true,
-    "luck_points": 11.2
+    "luck_points": 32.7
    },
    "source_url": "https://www.nba.com/game/hou-vs-ind-0022600259",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -2821,7 +2791,7 @@
     "ppp_proj_away": 1.0828,
     "pts_home": 125.0,
     "pts_away": 111.5,
-    "margin": 14.7,
+    "margin": 14.4,
     "total": 236.5
    },
    "estimator_b": {
@@ -2830,25 +2800,25 @@
     "pace_factor": 1.0313,
     "pts_home": 129.4,
     "pts_away": 115.4,
-    "margin": 15.2,
+    "margin": 14.9,
     "total": 244.9
    },
    "blend": {
-    "p_home_win_estimator_a": 0.8216,
-    "p_home_win_estimator_b": 0.8296,
-    "p_home_win_blend": 0.8256,
+    "p_home_win_estimator_a": 0.8025,
+    "p_home_win_estimator_b": 0.8106,
+    "p_home_win_blend": 0.8066,
     "disagreement": 0.0081,
     "disagreement_pp": 0.81,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.81 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 14.9,
+    "margin_blend": 14.7,
     "total_blend": 240.7
    },
    "line_total": 240.7,
-   "line_spread_home": 16.5,
-   "model_home_win_prob": 0.849,
-   "model_home_ml": -562,
+   "line_spread_home": 16.3,
+   "model_home_win_prob": 0.8317,
+   "model_home_ml": -494,
    "confidence_signal_pp": 0.81,
    "rest_home": {
     "rest_days": 1,
@@ -2856,7 +2826,7 @@
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-16",
-    "last_game_was_home": true,
+    "last_game_was_home": false,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -2921,14 +2891,14 @@
     "note": "official per-player minutes not captured for this team"
    },
    "luck_home": {
-    "luck_z": -0.18,
+    "luck_z": -0.12,
     "in_noise_band": true,
-    "luck_points": -9.0
+    "luck_points": -5.8
    },
    "luck_away": {
-    "luck_z": 1.14,
+    "luck_z": 0.89,
     "in_noise_band": true,
-    "luck_points": 58.2
+    "luck_points": 44.6
    },
    "source_url": "https://www.nba.com/game/mil-vs-mia-0022600260",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -2957,7 +2927,7 @@
     "ppp_proj_away": 1.1337,
     "pts_home": 105.2,
     "pts_away": 111.8,
-    "margin": -5.4,
+    "margin": -5.7,
     "total": 217.0
    },
    "estimator_b": {
@@ -2966,26 +2936,26 @@
     "pace_factor": 0.9876,
     "pts_home": 103.9,
     "pts_away": 110.4,
-    "margin": -5.3,
+    "margin": -5.6,
     "total": 214.2
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3675,
-    "p_home_win_estimator_b": 0.3699,
-    "p_home_win_blend": 0.3687,
-    "disagreement": 0.0024,
-    "disagreement_pp": 0.24,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.24 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.3682,
+    "p_home_win_estimator_b": 0.3704,
+    "p_home_win_blend": 0.3693,
+    "disagreement": 0.0022,
+    "disagreement_pp": 0.22,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.22 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -5.3,
+    "margin_blend": -5.7,
     "total_blend": 215.6
    },
    "line_total": 215.6,
-   "line_spread_home": -3.6,
-   "model_home_win_prob": 0.4108,
-   "model_home_ml": 143,
-   "confidence_signal_pp": 0.24,
+   "line_spread_home": -4.0,
+   "model_home_win_prob": 0.4066,
+   "model_home_ml": 146,
+   "confidence_signal_pp": 0.22,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -3013,7 +2983,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Kia%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "ORL",
     "minutes_removed": 0.0,
@@ -3084,14 +3054,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": 0.24,
+    "luck_z": -0.21,
     "in_noise_band": true,
-    "luck_points": 11.9
+    "luck_points": -9.8
    },
    "luck_away": {
-    "luck_z": -0.55,
+    "luck_z": -0.28,
     "in_noise_band": true,
-    "luck_points": -28.8
+    "luck_points": -14.0
    },
    "source_url": "https://www.nba.com/game/phi-vs-orl-0022600261",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -3120,7 +3090,7 @@
     "ppp_proj_away": 1.1219,
     "pts_home": 120.7,
     "pts_away": 116.0,
-    "margin": 5.8,
+    "margin": 5.5,
     "total": 236.8
    },
    "estimator_b": {
@@ -3129,33 +3099,33 @@
     "pace_factor": 1.0361,
     "pts_home": 126.5,
     "pts_away": 121.6,
-    "margin": 6.0,
+    "margin": 5.7,
     "total": 248.1
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6419,
-    "p_home_win_estimator_b": 0.6466,
-    "p_home_win_blend": 0.6442,
-    "disagreement": 0.0047,
-    "disagreement_pp": 0.47,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.47 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.6274,
+    "p_home_win_estimator_b": 0.6318,
+    "p_home_win_blend": 0.6296,
+    "disagreement": 0.0045,
+    "disagreement_pp": 0.45,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.45 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 5.9,
+    "margin_blend": 5.6,
     "total_blend": 242.4
    },
    "line_total": 242.4,
-   "line_spread_home": 6.4,
-   "model_home_win_prob": 0.6559,
-   "model_home_ml": -191,
-   "confidence_signal_pp": 0.47,
+   "line_spread_home": 6.1,
+   "model_home_win_prob": 0.6408,
+   "model_home_ml": -178,
+   "confidence_signal_pp": 0.45,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-16",
-    "last_game_was_home": true,
+    "last_game_was_home": false,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -3176,7 +3146,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Barclays%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "BKN",
     "minutes_removed": 0.0,
@@ -3222,14 +3192,14 @@
     "note": "official per-player minutes not captured for this team"
    },
    "luck_home": {
-    "luck_z": 0.01,
+    "luck_z": -0.07,
     "in_noise_band": true,
-    "luck_points": 0.4
+    "luck_points": -3.2
    },
    "luck_away": {
-    "luck_z": 1.28,
+    "luck_z": 0.97,
     "in_noise_band": true,
-    "luck_points": 62.9
+    "luck_points": 45.1
    },
    "source_url": "https://www.nba.com/game/chi-vs-bkn-0022600262",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -3258,7 +3228,7 @@
     "ppp_proj_away": 1.087,
     "pts_home": 115.6,
     "pts_away": 108.3,
-    "margin": 8.4,
+    "margin": 8.1,
     "total": 223.9
    },
    "estimator_b": {
@@ -3267,25 +3237,25 @@
     "pace_factor": 0.9983,
     "pts_home": 116.3,
     "pts_away": 109.0,
-    "margin": 8.4,
+    "margin": 8.1,
     "total": 225.2
    },
    "blend": {
-    "p_home_win_estimator_a": 0.7007,
-    "p_home_win_estimator_b": 0.7007,
-    "p_home_win_blend": 0.7007,
+    "p_home_win_estimator_a": 0.6838,
+    "p_home_win_estimator_b": 0.6838,
+    "p_home_win_blend": 0.6838,
     "disagreement": 0.0,
     "disagreement_pp": 0.0,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 8.4,
+    "margin_blend": 8.1,
     "total_blend": 224.6
    },
    "line_total": 224.6,
-   "line_spread_home": 7.7,
-   "model_home_win_prob": 0.6858,
-   "model_home_ml": -218,
+   "line_spread_home": 7.4,
+   "model_home_win_prob": 0.6695,
+   "model_home_ml": -203,
    "confidence_signal_pp": 0.0,
    "rest_home": {
     "rest_days": 0,
@@ -3293,7 +3263,7 @@
     "three_in_four": true,
     "games_in_last_4_days": 3,
     "last_date": "2026-11-17",
-    "last_game_was_home": true,
+    "last_game_was_home": false,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -3302,7 +3272,7 @@
     "three_in_four": true,
     "games_in_last_4_days": 3,
     "last_date": "2026-11-16",
-    "last_game_was_home": true,
+    "last_game_was_home": false,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "travel_away": {
@@ -3314,7 +3284,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Scotiabank%20Arena&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "TOR",
     "minutes_removed": 0.0,
@@ -3383,14 +3353,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": -0.09,
+    "luck_z": -0.04,
     "in_noise_band": true,
-    "luck_points": -4.5
+    "luck_points": -2.0
    },
    "luck_away": {
-    "luck_z": -0.5,
+    "luck_z": -0.96,
     "in_noise_band": true,
-    "luck_points": -26.5
+    "luck_points": -48.2
    },
    "source_url": "https://www.nba.com/game/was-vs-tor-0022600263",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -3419,7 +3389,7 @@
     "ppp_proj_away": 1.2102,
     "pts_home": 108.6,
     "pts_away": 122.8,
-    "margin": -13.0,
+    "margin": -13.3,
     "total": 231.4
    },
    "estimator_b": {
@@ -3428,33 +3398,33 @@
     "pace_factor": 1.0164,
     "pts_home": 114.3,
     "pts_away": 129.2,
-    "margin": -13.8,
+    "margin": -14.0,
     "total": 243.5
    },
    "blend": {
-    "p_home_win_estimator_a": 0.2076,
-    "p_home_win_estimator_b": 0.1935,
-    "p_home_win_blend": 0.2006,
-    "disagreement": 0.0141,
-    "disagreement_pp": 1.41,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.41 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.216,
+    "p_home_win_estimator_b": 0.2041,
+    "p_home_win_blend": 0.2101,
+    "disagreement": 0.0119,
+    "disagreement_pp": 1.19,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.19 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -13.4,
+    "margin_blend": -13.7,
     "total_blend": 237.4
    },
    "line_total": 237.4,
-   "line_spread_home": -11.7,
-   "model_home_win_prob": 0.2322,
-   "model_home_ml": 331,
-   "confidence_signal_pp": 1.41,
+   "line_spread_home": -12.0,
+   "model_home_win_prob": 0.2397,
+   "model_home_ml": 317,
+   "confidence_signal_pp": 1.19,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-16",
-    "last_game_was_home": true,
+    "last_game_was_home": false,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -3475,7 +3445,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Smoothie%20King%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "NOP",
     "minutes_removed": 0.0,
@@ -3541,14 +3511,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": 0.3,
+    "luck_z": -0.24,
     "in_noise_band": true,
-    "luck_points": 15.6
+    "luck_points": -11.9
    },
    "luck_away": {
-    "luck_z": -0.32,
+    "luck_z": -0.2,
     "in_noise_band": true,
-    "luck_points": -16.0
+    "luck_points": -9.5
    },
    "source_url": "https://www.nba.com/game/det-vs-nop-0022600264",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -3577,7 +3547,7 @@
     "ppp_proj_away": 1.0909,
     "pts_home": 114.2,
     "pts_away": 111.6,
-    "margin": 3.7,
+    "margin": 3.4,
     "total": 225.8
    },
    "estimator_b": {
@@ -3586,26 +3556,26 @@
     "pace_factor": 1.0246,
     "pts_home": 117.1,
     "pts_away": 114.4,
-    "margin": 3.8,
+    "margin": 3.5,
     "total": 231.5
    },
    "blend": {
-    "p_home_win_estimator_a": 0.5917,
-    "p_home_win_estimator_b": 0.5941,
-    "p_home_win_blend": 0.5929,
-    "disagreement": 0.0024,
-    "disagreement_pp": 0.24,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.24 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.5796,
+    "p_home_win_estimator_b": 0.5819,
+    "p_home_win_blend": 0.5807,
+    "disagreement": 0.0023,
+    "disagreement_pp": 0.23,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.23 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 3.8,
+    "margin_blend": 3.5,
     "total_blend": 228.7
    },
    "line_total": 228.7,
-   "line_spread_home": 4.7,
-   "model_home_win_prob": 0.6158,
-   "model_home_ml": -160,
-   "confidence_signal_pp": 0.24,
+   "line_spread_home": 4.4,
+   "model_home_win_prob": 0.6025,
+   "model_home_ml": -152,
+   "confidence_signal_pp": 0.23,
    "rest_home": {
     "rest_days": 2,
     "back_to_back": false,
@@ -3700,14 +3670,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": 0.64,
+    "luck_z": 0.7,
     "in_noise_band": true,
-    "luck_points": 32.6
+    "luck_points": 35.1
    },
    "luck_away": {
-    "luck_z": -0.74,
+    "luck_z": -0.8,
     "in_noise_band": true,
-    "luck_points": -37.7
+    "luck_points": -40.3
    },
    "source_url": "https://www.nba.com/game/atl-vs-okc-0022600265",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -3736,7 +3706,7 @@
     "ppp_proj_away": 1.1849,
     "pts_home": 102.6,
     "pts_away": 111.9,
-    "margin": -8.2,
+    "margin": -8.5,
     "total": 214.5
    },
    "estimator_b": {
@@ -3745,33 +3715,33 @@
     "pace_factor": 0.946,
     "pts_home": 98.3,
     "pts_away": 107.3,
-    "margin": -7.8,
+    "margin": -8.1,
     "total": 205.6
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3037,
-    "p_home_win_estimator_b": 0.3125,
-    "p_home_win_blend": 0.3081,
-    "disagreement": 0.0088,
-    "disagreement_pp": 0.88,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.88 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.3078,
+    "p_home_win_estimator_b": 0.3162,
+    "p_home_win_blend": 0.312,
+    "disagreement": 0.0084,
+    "disagreement_pp": 0.84,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.84 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -8.0,
+    "margin_blend": -8.3,
     "total_blend": 210.1
    },
    "line_total": 210.1,
-   "line_spread_home": -5.4,
-   "model_home_win_prob": 0.3668,
-   "model_home_ml": 173,
-   "confidence_signal_pp": 0.88,
+   "line_spread_home": -5.7,
+   "model_home_win_prob": 0.3675,
+   "model_home_ml": 172,
+   "confidence_signal_pp": 0.84,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-16",
-    "last_game_was_home": true,
+    "last_game_was_home": false,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -3780,7 +3750,7 @@
     "three_in_four": true,
     "games_in_last_4_days": 3,
     "last_date": "2026-11-16",
-    "last_game_was_home": true,
+    "last_game_was_home": false,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "travel_away": {
@@ -3792,7 +3762,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Ball%20Arena&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "DEN",
     "minutes_removed": 0.0,
@@ -3852,14 +3822,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": 0.11,
+    "luck_z": 0.04,
     "in_noise_band": true,
-    "luck_points": 5.0
+    "luck_points": 1.9
    },
    "luck_away": {
-    "luck_z": -0.84,
+    "luck_z": -0.38,
     "in_noise_band": true,
-    "luck_points": -42.8
+    "luck_points": -18.4
    },
    "source_url": "https://www.nba.com/game/bos-vs-den-0022600266",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -3888,7 +3858,7 @@
     "ppp_proj_away": 1.1553,
     "pts_home": 111.9,
     "pts_away": 116.0,
-    "margin": -2.9,
+    "margin": -3.2,
     "total": 227.8
    },
    "estimator_b": {
@@ -3897,26 +3867,26 @@
     "pace_factor": 1.0052,
     "pts_home": 112.8,
     "pts_away": 116.9,
-    "margin": -3.0,
+    "margin": -3.2,
     "total": 229.8
    },
    "blend": {
-    "p_home_win_estimator_a": 0.4279,
-    "p_home_win_estimator_b": 0.4254,
-    "p_home_win_blend": 0.4267,
-    "disagreement": 0.0025,
-    "disagreement_pp": 0.25,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.25 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.425,
+    "p_home_win_estimator_b": 0.425,
+    "p_home_win_blend": 0.425,
+    "disagreement": 0.0,
+    "disagreement_pp": 0.0,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -3.0,
+    "margin_blend": -3.2,
     "total_blend": 228.8
    },
    "line_total": 228.8,
-   "line_spread_home": -2.5,
-   "model_home_win_prob": 0.4386,
-   "model_home_ml": 128,
-   "confidence_signal_pp": 0.25,
+   "line_spread_home": -2.7,
+   "model_home_win_prob": 0.4374,
+   "model_home_ml": 129,
+   "confidence_signal_pp": 0.0,
    "rest_home": {
     "rest_days": 2,
     "back_to_back": false,
@@ -3944,7 +3914,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=American%20Airlines%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "DAL",
     "minutes_removed": 0.0,
@@ -4012,14 +3982,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": 0.05,
+    "luck_z": -0.03,
     "in_noise_band": true,
-    "luck_points": 2.6
+    "luck_points": -1.4
    },
    "luck_away": {
-    "luck_z": 0.28,
+    "luck_z": 0.65,
     "in_noise_band": true,
-    "luck_points": 14.3
+    "luck_points": 31.7
    },
    "source_url": "https://www.nba.com/game/gsw-vs-dal-0022600267",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -4048,7 +4018,7 @@
     "ppp_proj_away": 1.0558,
     "pts_home": 126.1,
     "pts_away": 106.8,
-    "margin": 20.4,
+    "margin": 20.1,
     "total": 232.9
    },
    "estimator_b": {
@@ -4057,33 +4027,33 @@
     "pace_factor": 1.0133,
     "pts_home": 129.2,
     "pts_away": 109.4,
-    "margin": 20.9,
+    "margin": 20.6,
     "total": 238.6
    },
    "blend": {
-    "p_home_win_estimator_a": 0.8995,
-    "p_home_win_estimator_b": 0.9049,
-    "p_home_win_blend": 0.9022,
-    "disagreement": 0.0054,
-    "disagreement_pp": 0.54,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.54 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.8824,
+    "p_home_win_estimator_b": 0.8882,
+    "p_home_win_blend": 0.8853,
+    "disagreement": 0.0057,
+    "disagreement_pp": 0.57,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.57 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 20.6,
+    "margin_blend": 20.4,
     "total_blend": 235.8
    },
    "line_total": 235.8,
-   "line_spread_home": 20.6,
-   "model_home_win_prob": 0.9018,
-   "model_home_ml": -918,
-   "confidence_signal_pp": 0.54,
+   "line_spread_home": 20.4,
+   "model_home_win_prob": 0.886,
+   "model_home_ml": -777,
+   "confidence_signal_pp": 0.57,
    "rest_home": {
     "rest_days": 0,
     "back_to_back": true,
     "three_in_four": true,
     "games_in_last_4_days": 3,
     "last_date": "2026-11-17",
-    "last_game_was_home": true,
+    "last_game_was_home": false,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -4104,7 +4074,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Crypto.com%20Arena&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "LAL",
     "minutes_removed": 0.0,
@@ -4172,14 +4142,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": -1.19,
+    "luck_z": -0.48,
     "in_noise_band": true,
-    "luck_points": -62.6
+    "luck_points": -24.4
    },
    "luck_away": {
-    "luck_z": 1.82,
-    "in_noise_band": false,
-    "luck_points": 95.7
+    "luck_z": 1.4,
+    "in_noise_band": true,
+    "luck_points": 70.5
    },
    "source_url": "https://www.nba.com/game/uta-vs-lal-0022600268",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -4208,7 +4178,7 @@
     "ppp_proj_away": 1.2057,
     "pts_home": 111.7,
     "pts_away": 120.1,
-    "margin": -7.2,
+    "margin": -7.5,
     "total": 231.8
    },
    "estimator_b": {
@@ -4217,26 +4187,26 @@
     "pace_factor": 0.9977,
     "pts_home": 110.3,
     "pts_away": 118.5,
-    "margin": -7.1,
+    "margin": -7.4,
     "total": 228.8
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3259,
-    "p_home_win_estimator_b": 0.3282,
-    "p_home_win_blend": 0.327,
-    "disagreement": 0.0023,
-    "disagreement_pp": 0.23,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.23 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.3289,
+    "p_home_win_estimator_b": 0.331,
+    "p_home_win_blend": 0.3299,
+    "disagreement": 0.0021,
+    "disagreement_pp": 0.21,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.21 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -7.2,
+    "margin_blend": -7.5,
     "total_blend": 230.3
    },
    "line_total": 230.3,
-   "line_spread_home": -5.5,
-   "model_home_win_prob": 0.3641,
-   "model_home_ml": 175,
-   "confidence_signal_pp": 0.23,
+   "line_spread_home": -5.8,
+   "model_home_win_prob": 0.365,
+   "model_home_ml": 174,
+   "confidence_signal_pp": 0.21,
    "rest_home": {
     "rest_days": 2,
     "back_to_back": false,
@@ -4264,7 +4234,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Golden%201%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "SAC",
     "minutes_removed": 0.0,
@@ -4332,14 +4302,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": 1.09,
+    "luck_z": 0.93,
     "in_noise_band": true,
-    "luck_points": 53.6
+    "luck_points": 45.2
    },
    "luck_away": {
-    "luck_z": 0.69,
+    "luck_z": 0.78,
     "in_noise_band": true,
-    "luck_points": 34.0
+    "luck_points": 36.2
    },
    "source_url": "https://www.nba.com/game/phx-vs-sac-0022600269",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -4368,7 +4338,7 @@
     "ppp_proj_away": 1.1304,
     "pts_home": 117.9,
     "pts_away": 113.4,
-    "margin": 5.7,
+    "margin": 5.4,
     "total": 231.2
    },
    "estimator_b": {
@@ -4377,26 +4347,26 @@
     "pace_factor": 1.0044,
     "pts_home": 119.8,
     "pts_away": 115.2,
-    "margin": 5.7,
+    "margin": 5.5,
     "total": 235.0
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6395,
-    "p_home_win_estimator_b": 0.6395,
-    "p_home_win_blend": 0.6395,
-    "disagreement": 0.0,
-    "disagreement_pp": 0.0,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.6251,
+    "p_home_win_estimator_b": 0.6274,
+    "p_home_win_blend": 0.6262,
+    "disagreement": 0.0022,
+    "disagreement_pp": 0.22,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.22 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 5.7,
+    "margin_blend": 5.5,
     "total_blend": 233.1
    },
    "line_total": 233.1,
-   "line_spread_home": 6.2,
-   "model_home_win_prob": 0.6513,
-   "model_home_ml": -187,
-   "confidence_signal_pp": 0.0,
+   "line_spread_home": 6.0,
+   "model_home_win_prob": 0.6386,
+   "model_home_ml": -177,
+   "confidence_signal_pp": 0.22,
    "rest_home": {
     "rest_days": 0,
     "back_to_back": true,
@@ -4424,7 +4394,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=FedExForum&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": null,
    "availability_redistribution_away": {
     "team": "GSW",
@@ -4471,14 +4441,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": -1.5,
-    "in_noise_band": false,
-    "luck_points": -76.6
+    "luck_z": -1.13,
+    "in_noise_band": true,
+    "luck_points": -54.7
    },
    "luck_away": {
-    "luck_z": 0.28,
+    "luck_z": 0.65,
     "in_noise_band": true,
-    "luck_points": 14.3
+    "luck_points": 31.7
    },
    "source_url": "https://www.nba.com/game/gsw-vs-mem-0022600270",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -4507,7 +4477,7 @@
     "ppp_proj_away": 1.2575,
     "pts_home": 105.0,
     "pts_away": 127.2,
-    "margin": -21.0,
+    "margin": -21.3,
     "total": 232.2
    },
    "estimator_b": {
@@ -4516,26 +4486,26 @@
     "pace_factor": 1.0131,
     "pts_home": 105.8,
     "pts_away": 128.1,
-    "margin": -21.2,
+    "margin": -21.4,
     "total": 233.9
    },
    "blend": {
-    "p_home_win_estimator_a": 0.0941,
-    "p_home_win_estimator_b": 0.092,
-    "p_home_win_blend": 0.093,
-    "disagreement": 0.0021,
-    "disagreement_pp": 0.21,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.21 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.1042,
+    "p_home_win_estimator_b": 0.1031,
+    "p_home_win_blend": 0.1036,
+    "disagreement": 0.0011,
+    "disagreement_pp": 0.11,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.11 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -21.1,
+    "margin_blend": -21.4,
     "total_blend": 233.1
    },
    "line_total": 233.1,
-   "line_spread_home": -21.2,
-   "model_home_win_prob": 0.0915,
-   "model_home_ml": 993,
-   "confidence_signal_pp": 0.21,
+   "line_spread_home": -21.5,
+   "model_home_win_prob": 0.1016,
+   "model_home_ml": 884,
+   "confidence_signal_pp": 0.11,
    "rest_home": {
     "rest_days": 0,
     "back_to_back": true,
@@ -4563,7 +4533,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Fiserv%20Forum&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": null,
    "availability_redistribution_away": {
     "team": "POR",
@@ -4607,14 +4577,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": 1.14,
+    "luck_z": 0.89,
     "in_noise_band": true,
-    "luck_points": 58.2
+    "luck_points": 44.6
    },
    "luck_away": {
-    "luck_z": 0.18,
+    "luck_z": 0.02,
     "in_noise_band": true,
-    "luck_points": 9.1
+    "luck_points": 1.1
    },
    "source_url": "https://www.nba.com/game/por-vs-mil-0022600271",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -4643,7 +4613,7 @@
     "ppp_proj_away": 1.0604,
     "pts_home": 107.7,
     "pts_away": 102.9,
-    "margin": 5.9,
+    "margin": 5.6,
     "total": 210.6
    },
    "estimator_b": {
@@ -4652,33 +4622,33 @@
     "pace_factor": 0.9722,
     "pts_home": 104.9,
     "pts_away": 100.3,
-    "margin": 5.8,
+    "margin": 5.5,
     "total": 205.2
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6442,
-    "p_home_win_estimator_b": 0.6419,
-    "p_home_win_blend": 0.6431,
-    "disagreement": 0.0023,
-    "disagreement_pp": 0.23,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.23 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.6296,
+    "p_home_win_estimator_b": 0.6274,
+    "p_home_win_blend": 0.6285,
+    "disagreement": 0.0022,
+    "disagreement_pp": 0.22,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.22 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 5.8,
+    "margin_blend": 5.5,
     "total_blend": 207.9
    },
    "line_total": 207.9,
-   "line_spread_home": 6.0,
-   "model_home_win_prob": 0.6471,
-   "model_home_ml": -183,
-   "confidence_signal_pp": 0.23,
+   "line_spread_home": 5.7,
+   "model_home_win_prob": 0.6324,
+   "model_home_ml": -172,
+   "confidence_signal_pp": 0.22,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
     "three_in_four": true,
     "games_in_last_4_days": 3,
     "last_date": "2026-11-17",
-    "last_game_was_home": true,
+    "last_game_was_home": false,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -4699,7 +4669,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Target%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": {
     "team": "MIN",
     "minutes_removed": 0.0,
@@ -4760,14 +4730,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": -0.66,
+    "luck_z": -0.53,
     "in_noise_band": true,
-    "luck_points": -33.7
+    "luck_points": -25.7
    },
    "luck_away": {
-    "luck_z": -0.6,
+    "luck_z": -0.52,
     "in_noise_band": true,
-    "luck_points": -29.8
+    "luck_points": -25.1
    },
    "source_url": "https://www.nba.com/game/nyk-vs-min-0022600272",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -4796,7 +4766,7 @@
     "ppp_proj_away": 1.0407,
     "pts_home": 122.1,
     "pts_away": 103.7,
-    "margin": 19.5,
+    "margin": 19.3,
     "total": 225.8
    },
    "estimator_b": {
@@ -4805,33 +4775,33 @@
     "pace_factor": 0.9981,
     "pts_home": 123.3,
     "pts_away": 104.7,
-    "margin": 19.7,
+    "margin": 19.4,
     "total": 228.0
    },
    "blend": {
-    "p_home_win_estimator_a": 0.8892,
-    "p_home_win_estimator_b": 0.8915,
-    "p_home_win_blend": 0.8903,
-    "disagreement": 0.0024,
-    "disagreement_pp": 0.24,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.24 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.8729,
+    "p_home_win_estimator_b": 0.8741,
+    "p_home_win_blend": 0.8735,
+    "disagreement": 0.0012,
+    "disagreement_pp": 0.12,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.12 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 19.6,
+    "margin_blend": 19.4,
     "total_blend": 226.9
    },
    "line_total": 226.9,
-   "line_spread_home": 21.0,
-   "model_home_win_prob": 0.9064,
-   "model_home_ml": -969,
-   "confidence_signal_pp": 0.24,
+   "line_spread_home": 20.8,
+   "model_home_win_prob": 0.8909,
+   "model_home_ml": -817,
+   "confidence_signal_pp": 0.12,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-17",
-    "last_game_was_home": true,
+    "last_game_was_home": false,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -4840,7 +4810,7 @@
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-17",
-    "last_game_was_home": true,
+    "last_game_was_home": false,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "travel_away": {
@@ -4852,7 +4822,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Frost%20Bank%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
+   "travel_source": "official schedule",
    "availability_redistribution_home": null,
    "availability_redistribution_away": {
     "team": "LAC",
@@ -4897,14 +4867,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-15, 2026-11-16. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": -0.97,
+    "luck_z": -0.83,
     "in_noise_band": true,
-    "luck_points": -49.5
+    "luck_points": -41.8
    },
    "luck_away": {
-    "luck_z": 0.19,
+    "luck_z": 0.32,
     "in_noise_band": true,
-    "luck_points": 9.0
+    "luck_points": 15.0
    },
    "source_url": "https://www.nba.com/game/lac-vs-sas-0022600273",
    "schedule_source_url": "https://www.nba.com/schedule"
