@@ -1,0 +1,26 @@
+{
+ "prereg_id": "R-PARLAY",
+ "family": "parlay",
+ "signal": "Two legs from DIFFERENT games, each an R-SINGLE qualifier, priced with the measured cross-game correlation.",
+ "thresholds": {
+  "legs": 2,
+  "leg_edge_min": 3.0,
+  "min_joint_prob": 0.3
+ },
+ "universe": "R-SINGLE qualifiers on the 2026-11-15..18 slate",
+ "exact_settlement_rule": "every leg must WIN; any losing leg loses the 1.10 stake; a PUSH leg reduces the ticket to the remaining legs at the frozen price.",
+ "frozen_at_utc": "2026-11-16T00:02:35Z",
+ "frozen_by": "arena/801ba27f-nba1",
+ "first_tip_this_publication_can_apply_to": "2026-11-15 7:00 PM ET (HOU@WAS) \u2014 the earliest 2026-11-15 game that had not tipped at publication",
+ "validation_gates": {
+  "G1_sample_floor": "n >= 100 graded bets",
+  "G2_significance": "one-sided binomial p < 0.05, Bonferroni-corrected",
+  "G3_luck_bootstrap": "5th percentile of a 10,000-draw bootstrap ROI > 0",
+  "G4_stability": "profitable in both disjoint halves",
+  "G5_fragility": "profitable after removing the best 5% of bets",
+  "G6_provenance": "all driving inputs from approved official hosts",
+  "G7_luck_gate": "refuse to publish a ticket that leans on a team whose luck z-score is outside +/-2.0",
+  "G8_market_anchor": "BLOCKED - no official closing line is captured anywhere in this repository, so the market-anchored prior weight is 0 and no market-blended price is published"
+ },
+ "price_status": "no licensed two-sided price exists in this repository; tickets settle on the paper -110 convention and unit ROI stays blank until a price feed exists"
+}

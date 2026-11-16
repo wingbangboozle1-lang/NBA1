@@ -1,0 +1,690 @@
+{
+ "title": "BET surface \u2014 gated, 2026-11-15..18",
+ "surface": "bet",
+ "session": "arena/801ba27f-nba1",
+ "published_utc": "2026-11-16T00:02:35Z",
+ "gate_status": "CLOSED. No strategy has passed the validation gates, so every ticket below is MODEL OUTPUT at zero stake. Do not fund.",
+ "gates": {
+  "G1_sample_floor": "n >= 100 graded bets",
+  "G2_significance": "one-sided binomial p < 0.05, Bonferroni-corrected",
+  "G3_luck_bootstrap": "5th percentile of a 10,000-draw bootstrap ROI > 0",
+  "G4_stability": "profitable in both disjoint halves",
+  "G5_fragility": "profitable after removing the best 5% of bets",
+  "G6_provenance": "all driving inputs from approved official hosts",
+  "G7_luck_gate": "refuse to publish a ticket that leans on a team whose luck z-score is outside +/-2.0",
+  "G8_market_anchor": "BLOCKED - no official closing line is captured anywhere in this repository, so the market-anchored prior weight is 0 and no market-blended price is published"
+ },
+ "market_anchored_prior": {
+  "status": "NOT APPLIED \u2014 weight 0",
+  "reason": "the prior needs a closing line; no official or licensed market price is captured in this repo, and inventing one would be a hallucination. The weighting machinery exists and is set to the model-only blend until a price feed is added."
+ },
+ "n_singles": 8,
+ "n_parlays": 12,
+ "n_sgp": 12,
+ "singles": [
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600245",
+   "matchup": "ORL@BOS",
+   "pick": "ORL +11.8",
+   "side": "AWAY",
+   "team": "ORL",
+   "line": 11.8,
+   "e1_spread_home": -13.1,
+   "e2_spread_home": -10.5,
+   "disagreement_spread": 2.5,
+   "rotation_availability": {
+    "available_share": 0.852,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.852,
+    "rotation_window": "2026-10-25 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "luck_z": 0.375,
+   "luck_gate": "PASS",
+   "prereg": "R-SINGLE",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (no strategy has passed the gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/game/orl-vs-bos-0022600245/box-score",
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600250",
+   "matchup": "POR@MIN",
+   "pick": "POR +3.0",
+   "side": "AWAY",
+   "team": "POR",
+   "line": 3.0,
+   "e1_spread_home": -3.7,
+   "e2_spread_home": -2.4,
+   "disagreement_spread": 1.3,
+   "rotation_availability": {
+    "available_share": 0.851,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.851,
+    "rotation_window": "2026-10-27 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "luck_z": 0.25,
+   "luck_gate": "PASS",
+   "prereg": "R-SINGLE",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (no strategy has passed the gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/game/por-vs-min-0022600250/box-score",
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600252",
+   "matchup": "PHX@DEN",
+   "pick": "PHX +4.6",
+   "side": "AWAY",
+   "team": "PHX",
+   "line": 4.6,
+   "e1_spread_home": -5.0,
+   "e2_spread_home": -4.3,
+   "disagreement_spread": 0.6,
+   "rotation_availability": {
+    "available_share": 0.843,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.843,
+    "rotation_window": "2026-10-26 .. 2026-11-15",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "luck_z": 0.39,
+   "luck_gate": "PASS",
+   "prereg": "R-SINGLE",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (no strategy has passed the gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/game/phx-vs-den-0022600252/box-score",
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "matchup": "POR@MIN",
+   "pick": "POR +3.0",
+   "side": "AWAY",
+   "team": "POR",
+   "line": 3.0,
+   "e1_spread_home": -3.7,
+   "e2_spread_home": -2.4,
+   "disagreement_spread": 1.3,
+   "rotation_availability": {
+    "available_share": 0.851,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.851,
+    "rotation_window": "2026-10-27 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "luck_z": 0.25,
+   "luck_gate": "PASS",
+   "prereg": "R-SINGLE",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (no strategy has passed the gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/game/por-vs-min-0022600254/box-score",
+    "https://www.nba.com/games?date=2026-11-17"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "matchup": "UTA@LAC",
+   "pick": "UTA +3.6",
+   "side": "AWAY",
+   "team": "UTA",
+   "line": 3.6,
+   "e1_spread_home": -2.7,
+   "e2_spread_home": -4.5,
+   "disagreement_spread": 1.7,
+   "rotation_availability": {
+    "available_share": 0.775,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.775,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "luck_z": -1.123,
+   "luck_gate": "PASS",
+   "prereg": "R-SINGLE",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (no strategy has passed the gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/game/uta-vs-lac-0022600257/box-score",
+    "https://www.nba.com/games?date=2026-11-17"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600260",
+   "matchup": "MIL@MIA",
+   "pick": "MIL +9.2",
+   "side": "AWAY",
+   "team": "MIL",
+   "line": 9.2,
+   "e1_spread_home": -9.1,
+   "e2_spread_home": -9.4,
+   "disagreement_spread": 0.3,
+   "rotation_availability": {
+    "available_share": 0.783,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.783,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "luck_z": -0.74,
+   "luck_gate": "PASS",
+   "prereg": "R-SINGLE",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (no strategy has passed the gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/game/mil-vs-mia-0022600260/box-score",
+    "https://www.nba.com/games?date=2026-11-18"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600262",
+   "matchup": "CHI@BKN",
+   "pick": "CHI +3.5",
+   "side": "AWAY",
+   "team": "CHI",
+   "line": 3.5,
+   "e1_spread_home": -4.2,
+   "e2_spread_home": -2.9,
+   "disagreement_spread": 1.3,
+   "rotation_availability": {
+    "available_share": 0.746,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.746,
+    "rotation_window": "2026-10-24 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "luck_z": 0.321,
+   "luck_gate": "PASS",
+   "prereg": "R-SINGLE",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (no strategy has passed the gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/game/chi-vs-bkn-0022600262/box-score",
+    "https://www.nba.com/games?date=2026-11-18"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600265",
+   "matchup": "ATL@OKC",
+   "pick": "ATL +4.8",
+   "side": "AWAY",
+   "team": "ATL",
+   "line": 4.8,
+   "e1_spread_home": -3.9,
+   "e2_spread_home": -5.8,
+   "disagreement_spread": 1.9,
+   "rotation_availability": {
+    "available_share": 0.888,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.888,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "luck_z": -0.001,
+   "luck_gate": "PASS",
+   "prereg": "R-SINGLE",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (no strategy has passed the gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/game/atl-vs-okc-0022600265/box-score",
+    "https://www.nba.com/games?date=2026-11-18"
+   ]
+  }
+ ],
+ "parlays": [
+  {
+   "date": "2026-11-16 / 2026-11-18",
+   "leg1": "ORL@BOS ORL +11.8",
+   "leg2": "MIL@MIA MIL +9.2",
+   "p1": 0.759,
+   "p2": 0.7082,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED from official finals (cross-game home-margin correlation)",
+   "joint_prob_with_rho": 1.6171,
+   "naive_independent_product_printed_beside": 0.5375,
+   "fair_odds_with_rho": 0.618,
+   "prereg": "R-PARLAY",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake)",
+   "sources": [
+    "https://www.nba.com/game/orl-vs-bos-0022600245/box-score",
+    "https://www.nba.com/game/mil-vs-mia-0022600260/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-16 / 2026-11-18",
+   "leg1": "ORL@BOS ORL +11.8",
+   "leg2": "ATL@OKC ATL +4.8",
+   "p1": 0.759,
+   "p2": 0.6126,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED from official finals (cross-game home-margin correlation)",
+   "joint_prob_with_rho": 1.3999,
+   "naive_independent_product_printed_beside": 0.4649,
+   "fair_odds_with_rho": 0.714,
+   "prereg": "R-PARLAY",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake)",
+   "sources": [
+    "https://www.nba.com/game/orl-vs-bos-0022600245/box-score",
+    "https://www.nba.com/game/atl-vs-okc-0022600265/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-16 / 2026-11-16",
+   "leg1": "ORL@BOS ORL +11.8",
+   "leg2": "PHX@DEN PHX +4.6",
+   "p1": 0.759,
+   "p2": 0.608,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED from official finals (cross-game home-margin correlation)",
+   "joint_prob_with_rho": 1.3895,
+   "naive_independent_product_printed_beside": 0.4615,
+   "fair_odds_with_rho": 0.72,
+   "prereg": "R-PARLAY",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake)",
+   "sources": [
+    "https://www.nba.com/game/orl-vs-bos-0022600245/box-score",
+    "https://www.nba.com/game/phx-vs-den-0022600252/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-16 / 2026-11-17",
+   "leg1": "ORL@BOS ORL +11.8",
+   "leg2": "UTA@LAC UTA +3.6",
+   "p1": 0.759,
+   "p2": 0.5849,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED from official finals (cross-game home-margin correlation)",
+   "joint_prob_with_rho": 1.337,
+   "naive_independent_product_printed_beside": 0.4439,
+   "fair_odds_with_rho": 0.748,
+   "prereg": "R-PARLAY",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake)",
+   "sources": [
+    "https://www.nba.com/game/orl-vs-bos-0022600245/box-score",
+    "https://www.nba.com/game/uta-vs-lac-0022600257/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-16 / 2026-11-18",
+   "leg1": "ORL@BOS ORL +11.8",
+   "leg2": "CHI@BKN CHI +3.5",
+   "p1": 0.759,
+   "p2": 0.5826,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED from official finals (cross-game home-margin correlation)",
+   "joint_prob_with_rho": 1.3317,
+   "naive_independent_product_printed_beside": 0.4422,
+   "fair_odds_with_rho": 0.751,
+   "prereg": "R-PARLAY",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake)",
+   "sources": [
+    "https://www.nba.com/game/orl-vs-bos-0022600245/box-score",
+    "https://www.nba.com/game/chi-vs-bkn-0022600262/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-18 / 2026-11-18",
+   "leg1": "MIL@MIA MIL +9.2",
+   "leg2": "ATL@OKC ATL +4.8",
+   "p1": 0.7082,
+   "p2": 0.6126,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED from official finals (cross-game home-margin correlation)",
+   "joint_prob_with_rho": 1.307,
+   "naive_independent_product_printed_beside": 0.4338,
+   "fair_odds_with_rho": 0.765,
+   "prereg": "R-PARLAY",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake)",
+   "sources": [
+    "https://www.nba.com/game/mil-vs-mia-0022600260/box-score",
+    "https://www.nba.com/game/atl-vs-okc-0022600265/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-16 / 2026-11-16",
+   "leg1": "ORL@BOS ORL +11.8",
+   "leg2": "POR@MIN POR +3.0",
+   "p1": 0.759,
+   "p2": 0.5709,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED from official finals (cross-game home-margin correlation)",
+   "joint_prob_with_rho": 1.3052,
+   "naive_independent_product_printed_beside": 0.4333,
+   "fair_odds_with_rho": 0.766,
+   "prereg": "R-PARLAY",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake)",
+   "sources": [
+    "https://www.nba.com/game/orl-vs-bos-0022600245/box-score",
+    "https://www.nba.com/game/por-vs-min-0022600250/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-16 / 2026-11-17",
+   "leg1": "ORL@BOS ORL +11.8",
+   "leg2": "POR@MIN POR +3.0",
+   "p1": 0.759,
+   "p2": 0.5709,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED from official finals (cross-game home-margin correlation)",
+   "joint_prob_with_rho": 1.3052,
+   "naive_independent_product_printed_beside": 0.4333,
+   "fair_odds_with_rho": 0.766,
+   "prereg": "R-PARLAY",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake)",
+   "sources": [
+    "https://www.nba.com/game/orl-vs-bos-0022600245/box-score",
+    "https://www.nba.com/game/por-vs-min-0022600254/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-16 / 2026-11-18",
+   "leg1": "PHX@DEN PHX +4.6",
+   "leg2": "MIL@MIA MIL +9.2",
+   "p1": 0.608,
+   "p2": 0.7082,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED from official finals (cross-game home-margin correlation)",
+   "joint_prob_with_rho": 1.2974,
+   "naive_independent_product_printed_beside": 0.4306,
+   "fair_odds_with_rho": 0.771,
+   "prereg": "R-PARLAY",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake)",
+   "sources": [
+    "https://www.nba.com/game/phx-vs-den-0022600252/box-score",
+    "https://www.nba.com/game/mil-vs-mia-0022600260/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-17 / 2026-11-18",
+   "leg1": "UTA@LAC UTA +3.6",
+   "leg2": "MIL@MIA MIL +9.2",
+   "p1": 0.5849,
+   "p2": 0.7082,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED from official finals (cross-game home-margin correlation)",
+   "joint_prob_with_rho": 1.2484,
+   "naive_independent_product_printed_beside": 0.4142,
+   "fair_odds_with_rho": 0.801,
+   "prereg": "R-PARLAY",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake)",
+   "sources": [
+    "https://www.nba.com/game/uta-vs-lac-0022600257/box-score",
+    "https://www.nba.com/game/mil-vs-mia-0022600260/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-18 / 2026-11-18",
+   "leg1": "MIL@MIA MIL +9.2",
+   "leg2": "CHI@BKN CHI +3.5",
+   "p1": 0.7082,
+   "p2": 0.5826,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED from official finals (cross-game home-margin correlation)",
+   "joint_prob_with_rho": 1.2435,
+   "naive_independent_product_printed_beside": 0.4126,
+   "fair_odds_with_rho": 0.804,
+   "prereg": "R-PARLAY",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake)",
+   "sources": [
+    "https://www.nba.com/game/mil-vs-mia-0022600260/box-score",
+    "https://www.nba.com/game/chi-vs-bkn-0022600262/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-16 / 2026-11-18",
+   "leg1": "POR@MIN POR +3.0",
+   "leg2": "MIL@MIA MIL +9.2",
+   "p1": 0.5709,
+   "p2": 0.7082,
+   "rho_used": 0.0142,
+   "rho_status": "MEASURED from official finals (cross-game home-margin correlation)",
+   "joint_prob_with_rho": 1.2187,
+   "naive_independent_product_printed_beside": 0.4043,
+   "fair_odds_with_rho": 0.821,
+   "prereg": "R-PARLAY",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake)",
+   "sources": [
+    "https://www.nba.com/game/por-vs-min-0022600250/box-score",
+    "https://www.nba.com/game/mil-vs-mia-0022600260/box-score"
+   ]
+  }
+ ],
+ "sgp_candidates": [
+  {
+   "date": "2026-11-16",
+   "game": "ORL@BOS",
+   "kind": "two_team-mates_points_over",
+   "leg1": "Jayson Tatum (BOS) OVER 24.0",
+   "leg2": "Derrick White (BOS) OVER 12.5",
+   "p1": 0.5,
+   "p2": 0.4901,
+   "rho_used": -0.0975,
+   "rho_status": "MEASURED from official game logs (n=374)",
+   "joint_prob_with_rho": 0.6886,
+   "naive_independent_product_printed_beside": 0.2451,
+   "sigma_note": "sqrt(points per game) * 1.15 overdispersion \u2014 stated choice",
+   "prereg": "R-SGP",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake); G-PROP still BLOCKED (no market number to validate against)",
+   "sources": [
+    "https://www.nba.com/game/orl-vs-bos-0022600245/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "game": "ORL@BOS",
+   "kind": "two_team-mates_points_over",
+   "leg1": "Franz Wagner (ORL) OVER 25.5",
+   "leg2": "Wendell Carter Jr. (ORL) OVER 12.0",
+   "p1": 0.4862,
+   "p2": 0.5,
+   "rho_used": -0.0975,
+   "rho_status": "MEASURED from official game logs (n=374)",
+   "joint_prob_with_rho": 0.6827,
+   "naive_independent_product_printed_beside": 0.2431,
+   "sigma_note": "sqrt(points per game) * 1.15 overdispersion \u2014 stated choice",
+   "prereg": "R-SGP",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake); G-PROP still BLOCKED (no market number to validate against)",
+   "sources": [
+    "https://www.nba.com/game/orl-vs-bos-0022600245/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "game": "POR@MIN",
+   "kind": "two_team-mates_points_over",
+   "leg1": "Jaden McDaniels (MIN) OVER 17.5",
+   "leg2": "Ayo Dosunmu (MIN) OVER 20.0",
+   "p1": 0.5,
+   "p2": 0.5154,
+   "rho_used": -0.0975,
+   "rho_status": "MEASURED from official game logs (n=374)",
+   "joint_prob_with_rho": 0.7266,
+   "naive_independent_product_printed_beside": 0.2577,
+   "sigma_note": "sqrt(points per game) * 1.15 overdispersion \u2014 stated choice",
+   "prereg": "R-SGP",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake); G-PROP still BLOCKED (no market number to validate against)",
+   "sources": [
+    "https://www.nba.com/game/por-vs-min-0022600250/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "game": "POR@MIN",
+   "kind": "two_team-mates_points_over",
+   "leg1": "Deni Avdija (POR) OVER 24.5",
+   "leg2": "Toumani Camara (POR) OVER 12.0",
+   "p1": 0.4859,
+   "p2": 0.51,
+   "rho_used": -0.0975,
+   "rho_status": "MEASURED from official game logs (n=374)",
+   "joint_prob_with_rho": 0.6968,
+   "naive_independent_product_printed_beside": 0.2478,
+   "sigma_note": "sqrt(points per game) * 1.15 overdispersion \u2014 stated choice",
+   "prereg": "R-SGP",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake); G-PROP still BLOCKED (no market number to validate against)",
+   "sources": [
+    "https://www.nba.com/game/por-vs-min-0022600250/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "game": "PHX@DEN",
+   "kind": "two_team-mates_points_over",
+   "leg1": "Nikola Joki\u0107 (DEN) OVER 25.0",
+   "leg2": "Jamal Murray (DEN) OVER 28.0",
+   "p1": 0.4861,
+   "p2": 0.4934,
+   "rho_used": -0.0975,
+   "rho_status": "MEASURED from official game logs (n=374)",
+   "joint_prob_with_rho": 0.6729,
+   "naive_independent_product_printed_beside": 0.2398,
+   "sigma_note": "sqrt(points per game) * 1.15 overdispersion \u2014 stated choice",
+   "prereg": "R-SGP",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake); G-PROP still BLOCKED (no market number to validate against)",
+   "sources": [
+    "https://www.nba.com/game/phx-vs-den-0022600252/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "game": "PHX@DEN",
+   "kind": "two_team-mates_points_over",
+   "leg1": "Devin Booker (PHX) OVER 21.5",
+   "leg2": "Dillon Brooks (PHX) OVER 14.0",
+   "p1": 0.5,
+   "p2": 0.4907,
+   "rho_used": -0.0975,
+   "rho_status": "MEASURED from official game logs (n=374)",
+   "joint_prob_with_rho": 0.6894,
+   "naive_independent_product_printed_beside": 0.2453,
+   "sigma_note": "sqrt(points per game) * 1.15 overdispersion \u2014 stated choice",
+   "prereg": "R-SGP",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake); G-PROP still BLOCKED (no market number to validate against)",
+   "sources": [
+    "https://www.nba.com/game/phx-vs-den-0022600252/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "game": "POR@MIN",
+   "kind": "two_team-mates_points_over",
+   "leg1": "Jaden McDaniels (MIN) OVER 17.5",
+   "leg2": "Ayo Dosunmu (MIN) OVER 20.0",
+   "p1": 0.5,
+   "p2": 0.5154,
+   "rho_used": -0.0975,
+   "rho_status": "MEASURED from official game logs (n=374)",
+   "joint_prob_with_rho": 0.7266,
+   "naive_independent_product_printed_beside": 0.2577,
+   "sigma_note": "sqrt(points per game) * 1.15 overdispersion \u2014 stated choice",
+   "prereg": "R-SGP",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake); G-PROP still BLOCKED (no market number to validate against)",
+   "sources": [
+    "https://www.nba.com/game/por-vs-min-0022600254/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "game": "POR@MIN",
+   "kind": "two_team-mates_points_over",
+   "leg1": "Deni Avdija (POR) OVER 24.5",
+   "leg2": "Toumani Camara (POR) OVER 12.0",
+   "p1": 0.4859,
+   "p2": 0.51,
+   "rho_used": -0.0975,
+   "rho_status": "MEASURED from official game logs (n=374)",
+   "joint_prob_with_rho": 0.6968,
+   "naive_independent_product_printed_beside": 0.2478,
+   "sigma_note": "sqrt(points per game) * 1.15 overdispersion \u2014 stated choice",
+   "prereg": "R-SGP",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake); G-PROP still BLOCKED (no market number to validate against)",
+   "sources": [
+    "https://www.nba.com/game/por-vs-min-0022600254/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "game": "UTA@LAC",
+   "kind": "two_team-mates_points_over",
+   "leg1": "Darius Garland (LAC) OVER 20.0",
+   "leg2": "Kris Dunn (LAC) OVER 8.0",
+   "p1": 0.4844,
+   "p2": 0.5,
+   "rho_used": -0.0975,
+   "rho_status": "MEASURED from official game logs (n=374)",
+   "joint_prob_with_rho": 0.68,
+   "naive_independent_product_printed_beside": 0.2422,
+   "sigma_note": "sqrt(points per game) * 1.15 overdispersion \u2014 stated choice",
+   "prereg": "R-SGP",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake); G-PROP still BLOCKED (no market number to validate against)",
+   "sources": [
+    "https://www.nba.com/game/uta-vs-lac-0022600257/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-17",
+   "game": "UTA@LAC",
+   "kind": "two_team-mates_points_over",
+   "leg1": "Ace Bailey (UTA) OVER 14.5",
+   "leg2": "Darryn Peterson (UTA) OVER 19.0",
+   "p1": 0.5091,
+   "p2": 0.5079,
+   "rho_used": -0.0975,
+   "rho_status": "MEASURED from official game logs (n=374)",
+   "joint_prob_with_rho": 0.7291,
+   "naive_independent_product_printed_beside": 0.2586,
+   "sigma_note": "sqrt(points per game) * 1.15 overdispersion \u2014 stated choice",
+   "prereg": "R-SGP",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake); G-PROP still BLOCKED (no market number to validate against)",
+   "sources": [
+    "https://www.nba.com/game/uta-vs-lac-0022600257/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "game": "MIL@MIA",
+   "kind": "two_team-mates_points_over",
+   "leg1": "Davion Mitchell (MIA) OVER 16.5",
+   "leg2": "Bam Adebayo (MIA) OVER 21.5",
+   "p1": 0.517,
+   "p2": 0.4925,
+   "rho_used": -0.0975,
+   "rho_status": "MEASURED from official game logs (n=374)",
+   "joint_prob_with_rho": 0.7173,
+   "naive_independent_product_printed_beside": 0.2546,
+   "sigma_note": "sqrt(points per game) * 1.15 overdispersion \u2014 stated choice",
+   "prereg": "R-SGP",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake); G-PROP still BLOCKED (no market number to validate against)",
+   "sources": [
+    "https://www.nba.com/game/mil-vs-mia-0022600260/box-score"
+   ]
+  },
+  {
+   "date": "2026-11-18",
+   "game": "MIL@MIA",
+   "kind": "two_team-mates_points_over",
+   "leg1": "Tyler Herro (MIL) OVER 19.0",
+   "leg2": "Jaime Jaquez Jr. (MIL) OVER 15.5",
+   "p1": 0.484,
+   "p2": 0.4823,
+   "rho_used": -0.0975,
+   "rho_status": "MEASURED from official game logs (n=374)",
+   "joint_prob_with_rho": 0.6537,
+   "naive_independent_product_printed_beside": 0.2334,
+   "sigma_note": "sqrt(points per game) * 1.15 overdispersion \u2014 stated choice",
+   "prereg": "R-SGP",
+   "status": "MODEL OUTPUT \u2014 UNVALIDATED (zero stake); G-PROP still BLOCKED (no market number to validate against)",
+   "sources": [
+    "https://www.nba.com/game/mil-vs-mia-0022600260/box-score"
+   ]
+  }
+ ]
+}

@@ -77,7 +77,79 @@
    },
    "note": "Rolling-slate publication for the 2026-11-15..18 window, generated after the 2026-11-14 games were settled (entry 3) and before the first tip of the window. Preregistration files for every strategy family are frozen by digest here. The 2026-11-14..17 vintage (entry 1) remains settleable from its archives.",
    "prev": "e6f6be8333f85637eb808ae91fd012260524ab97a2ffdda22b50ad6431a3a08c"
+  },
+  {
+   "entry": 5,
+   "type": "settlement_verification",
+   "at_utc": "2026-11-16T00:02:08Z",
+   "session": "arena/801ba27f-nba1",
+   "settles_slate": "2026-11-15",
+   "files": {
+    "data/settlement/settlement_2026-11-15.json": "8eecaa28a8958b76412b5ccf5e1a752904361bebdec735227d22835dbf4b7035",
+    "data/archive/horizon_picks_2026-11-15.json": "82974ede2fa98c5a515f521f39103724ea6165b3e12d8e725ddb2476c5b66dfe"
+   },
+   "n_graded": 2,
+   "units_today": 2.0,
+   "note": "graded only from official finals; games still live stay PENDING",
+   "prev": "c46e0a37b321679b968ca4aee84a7477a53b2d1f5fa803bd9213672cc310a4bb"
+  },
+  {
+   "entry": 6,
+   "type": "pre_tip_publication",
+   "at_utc": "2026-11-16T00:02:08Z",
+   "session": "arena/801ba27f-nba1",
+   "slate": "2026-11-15..18 (games that had not tipped at publication)",
+   "first_tip_utc": "2026-11-16T00:00Z (2026-11-15 7:00 PM ET, HOU@WAS)",
+   "publication_precedes_first_tip": true,
+   "files": {
+    "data/archive/v2-801ba27f/horizon_picks_801ba27f.json": "2524e75b8ff5bf8501cad9fc2be91b3ebfadf22ab21d805600a8fbbaadbe4b58",
+    "data/archive/v2-801ba27f/horizon_lines_801ba27f.json": "10f6ec716c42660043ad4a9a3461776c8b3a2b083272beefa3cde5a3c360bc3e",
+    "data/prereg/v2-801ba27f/_index.json": "7935450da8c9d9e7c029a598803b7cb9565b2fcdf444f64aad40bdce68feb05c"
+   },
+   "prereg_digests": {
+    "data/prereg/v2-801ba27f/R-SINGLE.json": "9d72ae6a0694ff6bb0488095acc771590588c255fdc4a94aa88d85c7ea9b7d9e",
+    "data/prereg/v2-801ba27f/R-PARLAY.json": "365059e5f1d351b9a4e15391cd8feed53ba4a79610b5ba439644cb78b570d564",
+    "data/prereg/v2-801ba27f/R-SGP.json": "2dcccc4ee0c2de12a42b2dcf952e41b0a62177514894bb159de6162a0a16cff5"
+   },
+   "note": "projection and bet surfaces published separately; archived byte-identically",
+   "prev": "2eeea20d92cb73c0465eec969da74572ca85bff01ca32aaf22ee0cf75e4755cf"
+  },
+  {
+   "entry": 7,
+   "type": "settlement_verification",
+   "at_utc": "2026-11-16T00:02:35Z",
+   "session": "arena/801ba27f-nba1",
+   "settles_slate": "2026-11-15",
+   "files": {
+    "data/settlement/settlement_2026-11-15.json": "5351e64fb514ae1fa4a2ed8160cc3e8594ea18461405a9c92dc057eede116cb9",
+    "data/archive/horizon_picks_2026-11-15.json": "82974ede2fa98c5a515f521f39103724ea6165b3e12d8e725ddb2476c5b66dfe"
+   },
+   "n_graded": 2,
+   "units_today": 2.0,
+   "note": "graded only from official finals; games still live stay PENDING",
+   "prev": "487aaeb361efe786d75af42dbc51dc13be0768e669cfd963db4b8f34dd5e86a1"
+  },
+  {
+   "entry": 8,
+   "type": "pre_tip_publication",
+   "at_utc": "2026-11-16T00:02:35Z",
+   "session": "arena/801ba27f-nba1",
+   "slate": "2026-11-15..18 (games that had not tipped at publication)",
+   "first_tip_utc": "2026-11-16T00:00Z (2026-11-15 7:00 PM ET, HOU@WAS)",
+   "publication_precedes_first_tip": true,
+   "files": {
+    "data/archive/v2-801ba27f/horizon_picks_801ba27f.json": "e98879f0f463750e61cc8e57401f6ae506b7bf9e3f7c2462910005333b3b26a9",
+    "data/archive/v2-801ba27f/horizon_lines_801ba27f.json": "50c91c1f8ba7fc33f63ec5b67fc21d6484a1a2a93bea9fc296d2ad14712ad1e2",
+    "data/prereg/v2-801ba27f/_index.json": "98e14466917af55c0e7708cd15e10042cb87282a475175a3b3ae3671a768523a"
+   },
+   "prereg_digests": {
+    "data/prereg/v2-801ba27f/R-SINGLE.json": "cde6b4d5c55ce55235ec9091803576c653a95e6d3b8365e43a2e96dcaee8a288",
+    "data/prereg/v2-801ba27f/R-PARLAY.json": "3d076300ab3542cd1d0dfc1893bdf47709731d4b227dadaed8dd3e7ddce6178d",
+    "data/prereg/v2-801ba27f/R-SGP.json": "5fac9bbba33fffe2006d1864b63296dfbd84136673293f90356cbaf32cea9824"
+   },
+   "note": "projection and bet surfaces published separately; archived byte-identically",
+   "prev": "044837eaa185a049b5bf4db1d0ec0361298d659666ec3c475c2a823ef93ec4ce"
   }
  ],
- "head": "c46e0a37b321679b968ca4aee84a7477a53b2d1f5fa803bd9213672cc310a4bb"
+ "head": "92aae5a94f5626b17eec6544a1f340729e05894bb4815f3448f9bca437d87eef"
 }
