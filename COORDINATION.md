@@ -4785,6 +4785,66 @@ queue shown above. §46.4 records the post-merge check to run.
   (`is_official`) to accept subdomains of an allowed host; the reason and the scope are in §46.3 Q08,
   and it makes the gate stricter for the source cells (a bare host name in a no-source marker no longer
   counts as a URL).
+
+### 46.6 Delivery record — PR #126 and PR #129 merged (2026-11-16)
+
+- **PR #126** — [11/15 finals re-read, scheduled settlement, results & settlement page, official player
+  game logs, measured market-anchor weight](https://github.com/wingbangboozle1-lang/NBA1/pull/126),
+  merged `gh pr merge 126 --merge` at **2026-11-16T02:34:36Z**, merge commit
+  **`1f962e2c350a87150a52a088f5e2310f73e92467`**. Merged at `mergeStateStatus: UNSTABLE` only because the
+  `validate` job had been `queued` without starting for 8+ minutes (the runner congestion); every gate had
+  already been run green locally on the exact merged tree.
+- **PR #129** — [§46.6 delivery record + F97 update](https://github.com/wingbangboozle1-lang/NBA1/pull/129),
+  merged at **2026-11-16T02:50:07Z**, merge commit **`37a3be3da89ee238f401c71e5b052458a72370f5`**.
+- **Branch hygiene, stated.** The remote tip was `acc47de` (the claim commit) while local had the work
+  rebased onto `main`; a plain push was rejected and two `git pull --rebase` attempts tried to replay
+  *main* onto the old tip — the wrong direction, both aborted. Pushes were then `--force-with-lease`
+  against the exact known old tips, and `origin/main` was an ancestor of each pushed tip, so nothing was
+  discarded. No other branch was touched.
+- **Collisions, resolved, nothing discarded.** (a) `probe-official.yml`: another session had landed the
+  identical `group: probe-official` fix from the same evidence, so main's version was kept. (b) Generated
+  pages (`index.html`, `site/pages/*.html`): taken from `main` and regenerated with `build_dashboard.py`,
+  which is where this session's nav block and flags enter them. (c) `data/content/flagged.json`: a third
+  session had independently minted `F98`–`F100`; this branch's PR #126 reached `main` first, so **its
+  F98/F99/F100 stand** (anchor not significant; 10-of-149 player-log coverage; gamebook minutes deltas) and
+  that session renumbered its own to F101–F106.
+- **Both CI changes are live on `main` and were verified there, not assumed:** `pages.yml` carries
+  `group: … || 'pages-deploy'` with `cancel-in-progress` only for pull requests
+  (`git show origin/main:.github/workflows/pages.yml`), and `probe-official.yml` no longer triggers on
+  `arena/**` pushes at all (that half was landed by §47 as a schedule + `workflow_dispatch`, which is a
+  stronger fix than the global concurrency group this branch proposed — both are on `main`).
+
+### 46.7 The deploy outage: cause, corrected a second time
+
+This board has now recorded three different explanations for the same outage. The order matters, because
+two of them were wrong:
+
+1. *"Concurrency keys"* (F97 as first written). Partly right for the `cancelled` era, but the keys were
+   already fixed by `140a10aa` before this session started, and builds kept failing.
+2. *"Runner-pool starvation"* (§46.3 Q08, this session). Measured and real — 33 queued runs, two probes
+   in progress for over an hour — and it explains the **queueing**, but not the failures.
+3. *Correct cause* (measured independently by §47, `e247a17`, and confirmed here): the repository's Pages
+   source is **`build_type: legacy`**, serving `main:/`. Under legacy, the Actions workflow cannot publish
+   — `actions/deploy-pages` needs the source set to "GitHub Actions" — and the legacy Jekyll builder
+   returns `Page build failed.` for every commit. `gh api .../pages` still reads
+   `status: errored, build_type: legacy`. Every `pages build and deployment` run since `afc79f2`
+   (23:44Z) is `errored` with that message; the content causes were ruled out by measurement (18 MB, 720
+   files, largest 1.28 MB, no symlinks, `.nojekyll` tracked, no `_config.yml`/`Gemfile`).
+   `PUT /repos/…/pages {build_type: workflow}` returns **403 "Resource not accessible by integration"** —
+   the session token cannot change it. That also explains why the fetch-back keeps serving the 23:44Z
+   build: the live landing page at 03:05Z still reads "34 Games in horizon (15–18 Nov)" and
+   "87 Open flags", i.e. `afc79f2`'s content, not `main`'s.
+
+**Consequence for this session's work, stated plainly:** the code, data and gates are merged and green,
+but **nothing from this session is on the live site yet, and no further merge from any session can put it
+there.** The blocker is a repository setting only the owner can change (Settings → Pages → Build and
+deployment → Source: **GitHub Actions**). Logged here as **R-46-A**; §47 logged the same request as
+R-47-2823-F. This is the honest end state: the deliverable is in `main`, the site is not publishing, and
+the fix is one settings click outside any session's token scope.
+
+**One apology owed to the board:** §46.6/'s first version was lost when a concurrent session's
+`restore_board.py` rewrote `COORDINATION.md` from a 366-line template (their `f6769f3` restored it). This
+section is the re-applied copy, so the record survives independently of that tooling.
 - Q06's honest answer is "no weight yet". It would have been easy to publish `w = 0.6449` and describe
   anchoring as working; the bootstrap does not support that, so the site says the opposite of the
   flattering reading.
