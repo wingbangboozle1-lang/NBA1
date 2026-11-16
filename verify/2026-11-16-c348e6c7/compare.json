@@ -1,0 +1,212 @@
+{
+ "captured_by": "arena/c348e6c7-nba1",
+ "generated_utc": "2026-11-16T02:21:31Z",
+ "schedule": {
+  "compared_against": "data/official/schedule_2026-11-16_to_18.json",
+  "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+  "stored_captured_by": "arena/161f1638-nba1",
+  "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z",
+  "live_captured_by": "arena/c348e6c7-nba1",
+  "stored_rows": 25,
+  "live_rows": 25,
+  "cells_agree": 135,
+  "cells_disagree": 15,
+  "games_only_in_stored": [],
+  "games_only_in_live": [],
+  "differences": [
+   {
+    "game_id": "0022600245",
+    "field": "home_record",
+    "stored": "10-2",
+    "live": "11-2",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   },
+   {
+    "game_id": "0022600252",
+    "field": "away_record",
+    "stored": "5-6",
+    "live": "5-7",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   },
+   {
+    "game_id": "0022600253",
+    "field": "away_record",
+    "stored": "6-6",
+    "live": "7-6",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   },
+   {
+    "game_id": "0022600253",
+    "field": "home_record",
+    "stored": "5-7",
+    "live": "5-8",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   },
+   {
+    "game_id": "0022600255",
+    "field": "home_record",
+    "stored": "11-2",
+    "live": "12-2",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   },
+   {
+    "game_id": "0022600256",
+    "field": "away_record",
+    "stored": "4-8",
+    "live": "4-9",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   },
+   {
+    "game_id": "0022600256",
+    "field": "home_record",
+    "stored": "11-2",
+    "live": "12-2",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   },
+   {
+    "game_id": "0022600257",
+    "field": "away_record",
+    "stored": "1-12",
+    "live": "1-13",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   },
+   {
+    "game_id": "0022600257",
+    "field": "home_record",
+    "stored": "3-8",
+    "live": "4-8",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   },
+   {
+    "game_id": "0022600263",
+    "field": "home_record",
+    "stored": "5-7",
+    "live": "5-8",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   },
+   {
+    "game_id": "0022600266",
+    "field": "away_record",
+    "stored": "10-2",
+    "live": "11-2",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   },
+   {
+    "game_id": "0022600267",
+    "field": "home_record",
+    "stored": "7-6",
+    "live": "7-7",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   },
+   {
+    "game_id": "0022600268",
+    "field": "away_record",
+    "stored": "1-12",
+    "live": "1-13",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   },
+   {
+    "game_id": "0022600268",
+    "field": "home_record",
+    "stored": "11-2",
+    "live": "12-2",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   },
+   {
+    "game_id": "0022600269",
+    "field": "away_record",
+    "stored": "5-6",
+    "live": "5-7",
+    "stored_retrieved_utc": "2026-11-15T23:38Z..23:52Z",
+    "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z"
+   }
+  ],
+  "verdict": "15 cell(s) differ - see differences[]"
+ },
+ "standings": {
+  "compared_against": "data/official/standings_2026-11-15_2347Z.json",
+  "stored_retrieved_utc": "2026-11-15T23:47Z..23:49Z",
+  "live_retrieved_utc": "2026-11-16T02:13Z..02:29Z",
+  "teams_compared": 30,
+  "cells_agree": 50,
+  "cells_disagree": 10,
+  "teams_not_found_in_stored": [],
+  "differences": [
+   {
+    "team": "BOS",
+    "field": "w",
+    "stored": 10,
+    "live": 11
+   },
+   {
+    "team": "NYK",
+    "field": "w",
+    "stored": 6,
+    "live": 7
+   },
+   {
+    "team": "TOR",
+    "field": "l",
+    "stored": 7,
+    "live": 8
+   },
+   {
+    "team": "CHA",
+    "field": "l",
+    "stored": 8,
+    "live": 9
+   },
+   {
+    "team": "SAS",
+    "field": "w",
+    "stored": 11,
+    "live": 12
+   },
+   {
+    "team": "LAL",
+    "field": "w",
+    "stored": 11,
+    "live": 12
+   },
+   {
+    "team": "DAL",
+    "field": "l",
+    "stored": 6,
+    "live": 7
+   },
+   {
+    "team": "PHX",
+    "field": "l",
+    "stored": 6,
+    "live": 7
+   },
+   {
+    "team": "LAC",
+    "field": "w",
+    "stored": 3,
+    "live": 4
+   },
+   {
+    "team": "UTA",
+    "field": "l",
+    "stored": 12,
+    "live": 13
+   }
+  ],
+  "verdict": "10 cell(s) differ - see differences[]"
+ }
+}
