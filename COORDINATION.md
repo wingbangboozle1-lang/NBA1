@@ -3732,3 +3732,48 @@ capture artifacts — read-only inputs here).
   landing tiles + executive summary + injuries banner state the current slate") is cherry-picked onto
   this branch with credit; PR #106 is to be closed as superseded-by-this-session, its content kept.
   No work is discarded.
+
+### 41.2 Work log — 2026-11-16 00:00–00:30 UTC (same session, continued)
+
+- **S02 — schedule validated + one official anomaly recorded.** The 38-row official schedule
+  (11/15..11/19) was re-validated against the live official surfaces. **POR@MIN appears on BOTH
+  2026-11-16 (0022600250) and 2026-11-17 (0022600254), both Target Center, both 8:00 PM ET** —
+  corroborated by four official surfaces (`nba.com/schedule`, both `games?date=` pages, and the POR
+  team schedule page). The same season pairs POR vs OKC on consecutive days (Nov 10/11, both Moda
+  Center), so consecutive-day repeat matchups are a pattern of this schedule; recorded as **AN-1**
+  in `data/official/official_schedule_2026-11-15_to_19.json` (regenerated from its builder), and the
+  rest model treats 11/17 as a POR road back-to-back. **Window decision: 11/20 (9 official games)
+  stays OUT of the persisted 11/15..11/19 window** — the claimed roll is 11/16..11/19; extending the
+  window later is a new capture, not an edit of this one.
+- **S02 — per-player minutes captured (top-50 of 469).** The official MIN-sorted leaderboard renders
+  10 pages; the URL `Page` parameter is NOT honored by the rendered slice (`Page=2` re-rendered
+  page 1), so pages 2–10 are unreachable with this retrieval path. **Page 1 (rows 1–50) is captured
+  in full** and stored verbatim (`verify/2026-11-15-49f70042/player_minutes_top50_rows.csv`) plus
+  parsed (`data/official/player_minutes_top50_2026-11-15.json`, 25 of 30 teams; CHA/CHI/MEM/MIL/SAS
+  have no top-50 player). The earlier 24-row partial (`data/players_minutes_2026_27.json`) is
+  superseded and deliberately NOT merged (different vintage, e.g. Acuff 37.3/GP 11 vs 37.2/GP 12).
+  Full-roster per-team capture remains the follow-up (rows 51–469 unattainable this session).
+- **S04 — model_v2 wired to real minutes; three real bugs found and fixed before publication:**
+  1. the injury loader passed full team **names** while the redistribution filtered by **abbr** —
+     every absence was silently dropped; fixed via a canonical name→abbr map.
+  2. once names matched, an **Available** player (Scottie Barnes, TOR) would have been removed as
+     absent; fixed with the repo's published status table: minutes removed = (1 − play probability)
+     → Out 100%, Doubtful 75%, Questionable 50%, Probable 20%, Available 0% (new ASSUMPTIONS entry
+     `absence_minutes_share_by_status`).
+  3. `minutes_redistribution` compared raw PDF names ("Banchero, Paolo") against leaderboard names
+     ("Paolo Banchero") — the absent player was redistributing minutes to himself; fixed with
+     `norm_name()` (Last/First reorder, diacritics stripped, no fuzzy matching).
+  Also fixed: the G-MIN gap counted only home teams (CHA/CHI are away-only in the window).
+- **S04/S05 — audited, deterministic outputs.** `engine/model_v2.py` (bivariate CDF validated to
+  ≤6e-6 against midpoint integration) + `scripts/build_horizon_v2.py` produce
+  `data/derived/horizon_lines_v2.json` (38 games, 11/15..11/19),
+  `horizon_picks_v2.json` (**25 picks, 11/16..11/18, 14 PASS the per-pick gates, every pick still
+  zero-stake MODEL OUTPUT - UNVALIDATED** — no strategy has passed validation, so nothing is
+  stakeable), and `model_report_v2.json`. Two consecutive runs are byte-identical modulo the run
+  timestamp. HCA stays pinned at **1.38 points** (measured home win rate .5319, sigma 17.29);
+  measured rho and OOS log loss unchanged (.0815 / −.0108 / .732; .48901, n=155).
+- **Settlement unchanged: the 2026-11-15 slate was still in progress at 00:00 UTC** (games tip
+  7:30–10:00 PM ET; none final at capture time) — no settlement stamp until every game is final.
+- Next: site integration of the v2 outputs (picks page rotation-availability column, disagreement
+  headline, travel/minutes panels), QA gates, integration PR, PR #106 close, Pages confirm,
+  then 11/15 settlement when finals exist.
