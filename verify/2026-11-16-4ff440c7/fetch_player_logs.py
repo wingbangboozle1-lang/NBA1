@@ -67,6 +67,20 @@ SCHEDULE_URL = "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json
 INJURY_PDF_URL = ("https://ak-static.cms.nba.com/referee/injury/"
                   "Injury-Report_2026-11-15_09_00PM.pdf")
 
+# The league-wide game log is one shot; the per-player endpoint is the fallback and
+# the citation-grade record (one official URL per player).
+COMMON_ALL_PLAYERS = ("https://stats.nba.com/stats/commonallplayers"
+                      "?IsOnlyCurrentSeason=1&LeagueID=00&Season=" + SEASON)
+PLAYER_GAMELOGS = (
+    "https://stats.nba.com/stats/playergamelogs"
+    "?DateFromNullable=&DateToNullable=&GameSegmentNullable=&LastNGames=0"
+    "&LeagueID=00&LocationNullable=&Month=0&OpponentTeamID=0&OutcomeNullable="
+    "&PORound=0&PerMode=Totals&Period=0&PlayerID={pid}"
+    "&Season=" + SEASON + "&SeasonSegmentNullable=&SeasonType=" +
+    SEASON_TYPE.replace(" ", "+") + "&TeamID=0&VsConferenceNullable=&VsDivisionNullable="
+)
+INJURY_ROWS_LOCAL = os.path.join(RAW, "injury_2026-11-15_0900PM_rows.json")
+
 manifest = {"captured_by": "session arena/4ff440c7-nba1",
             "season": SEASON, "season_type": SEASON_TYPE, "items": []}
 
@@ -180,6 +194,80 @@ def main():
                note="FETCH FAILED: %r" % (body,))
         ok = False
 
+    # 4. per-player official game logs for the injury-report universe -----------
+    #    This is both the fallback if leaguegamelog was short/failed and the
+    #    citation-grade record: one official nba.com URL per player.
+    pcount = 0
+    pfail = 0
+    if os.path.exists(INJURY_ROWS_LOCAL):
+        inj = json.load(open(INJURY_ROWS_LOCAL, encoding="utf-8"))
+        names = []
+        for r in inj.get("rows", []):
+            nm = r.get("player")
+            if nm and nm not in names:
+                names.append(nm)
+        # resolve names -> official player ids from commonallplayers
+        ids = {}
+        status, body = fetch(COMMON_ALL_PLAYERS)
+        if isinstance(body, bytes):
+            write_gz(os.path.join(RAW, "commonallplayers.json.gz"), body)
+            record("commonallplayers", COMMON_ALL_PLAYERS, status, body,
+                   os.path.join(RAW, "commonallplayers.json.gz"))
+            try:
+                d2 = json.loads(body.decode("utf-8"))
+                rs2 = (d2.get("resultSets") or [{}])[0]
+                h2 = rs2.get("headers") or []
+                i_id = h2.index("PERSON_ID") if "PERSON_ID" in h2 else None
+                i_nm = h2.index("DISPLAY_FIRST_LAST")
+                i_ln = h2.index("DISPLAY_LAST_COMMA_FIRST")
+                for row in rs2.get("rowSet") or []:
+                    ids[row[i_ln].lower()] = row[i_id]
+                    ids[row[i_nm].lower()] = row[i_id]
+            except Exception as e:              # noqa: BLE001
+                print("commonallplayers parse failed:", repr(e))
+        else:
+            record("commonallplayers", COMMON_ALL_PLAYERS, status, None,
+                   os.path.join(RAW, "commonallplayers.json.gz"),
+                   note="FETCH FAILED: %r" % (body,))
+
+        per_dir = os.path.join(RAW, "playergamelogs")
+        os.makedirs(per_dir, exist_ok=True)
+        resolved = {}
+        unresolved = []
+        for nm in names:
+            pid = ids.get(nm.lower())
+            if pid is None:
+                unresolved.append(nm)
+                continue
+            resolved[str(pid)] = nm
+        for pid, nm in resolved.items():
+            url = PLAYER_GAMELOGS.format(pid=pid)
+            st, bb = fetch(url, tries=3, timeout=60)
+            p = os.path.join(per_dir, "%s.json.gz" % pid)
+            if isinstance(bb, bytes):
+                write_gz(p, bb)
+                record("playergamelogs_%s" % pid, url, st, bb, p,
+                       note="per-player official game log for %s "
+                            "(https://www.nba.com/stats/player/%s/boxscores-traditional)"
+                            % (nm, pid))
+                pcount += 1
+            else:
+                record("playergamelogs_%s" % pid, url, st, None, p,
+                       note="FETCH FAILED for %s: %r" % (nm, bb))
+                pfail += 1
+            time.sleep(0.35)          # be polite to the official endpoint
+        json.dump({"resolved": resolved, "unresolved_names": unresolved},
+                  open(os.path.join(RAW, "player_id_map.json"), "w", encoding="utf-8"),
+                  indent=1, ensure_ascii=False)
+        print("per-player game logs fetched:", pcount, "failed:", pfail,
+              "unresolved names:", len(unresolved))
+        if unresolved:
+            print("UNRESOLVED:", unresolved)
+    else:
+        print("no parsed injury rows at", INJURY_ROWS_LOCAL, "- skipping per-player pass")
+
+    manifest["per_player_logs_fetched"] = pcount
+    manifest["per_player_logs_failed"] = pfail
     manifest["all_fetches_ok"] = bool(ok)
     with open(os.path.join(RAW, "_manifest.json"), "w", encoding="utf-8") as fh:
         json.dump(manifest, fh, indent=1, sort_keys=True)
