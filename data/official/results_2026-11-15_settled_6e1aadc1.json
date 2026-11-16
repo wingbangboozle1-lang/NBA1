@@ -1,0 +1,504 @@
+{
+ "title": "Official per-game result feed - 2026-11-15 (all 9 games; 6 FINAL rows settled from the official game books, 3 recorded at their observed state)",
+ "one_row_per_game": true,
+ "captured_by": "arena/6e1aadc1-nba1 (Z02)",
+ "retrieved_utc": "2026-11-16T02:20Z..02:40Z",
+ "rule": "A row is FINAL only when the official game book prints the team totals and its period line sums to them, and the individual player points also sum to the printed final. Both checks are executed by verify/2026-11-16-6e1aadc1/build_1115.py at build time. Not-yet-final games are listed in pending_not_final with the state observed on the official game page; no live score is stored as a final and no value is inferred.",
+ "columns": [
+  "date",
+  "game_id",
+  "away",
+  "home",
+  "status",
+  "final_label",
+  "away_pts",
+  "home_pts",
+  "away_quarters",
+  "home_quarters",
+  "ot_periods",
+  "tip_et",
+  "arena",
+  "city",
+  "attendance",
+  "officials",
+  "away_record_at_game_time",
+  "home_record_at_game_time",
+  "quarter_sum_check",
+  "box_sum_check",
+  "inactives_away",
+  "inactives_home",
+  "source_url",
+  "source_gamebook_pdf"
+ ],
+ "rows": [
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600236",
+   "away": "IND",
+   "home": "PHI",
+   "status": "FINAL",
+   "final_label": "Final",
+   "away_pts": 124,
+   "home_pts": 131,
+   "away_quarters": [
+    35,
+    22,
+    30,
+    37
+   ],
+   "home_quarters": [
+    29,
+    29,
+    39,
+    34
+   ],
+   "ot_periods": 0,
+   "tip_et": "01:00 PM ET",
+   "arena": "Xfinity Mobile Arena",
+   "city": "Philadelphia, PA",
+   "attendance": 21024,
+   "officials": "#77 Karl Lane, #33 Sean Corbin, #43 Matt Myers",
+   "away_record_at_game_time": "5-9",
+   "home_record_at_game_time": "11-3",
+   "quarter_sum_check": "35+22+30+37=124 == printed final 124 OK ; 29+29+39+34=131 == printed final 131 OK",
+   "box_sum_check": "individual points sum 124 == printed final OK ; individual points sum 131 == printed final OK",
+   "inactives_away": [
+    {
+     "player": "Furphy",
+     "reason": "Injury/Illness - Right ACL Repair / Surgery"
+    },
+    {
+     "player": "Haliburton",
+     "reason": "Injury/Illness - Left Hamstring Strain"
+    },
+    {
+     "player": "Nembhard",
+     "reason": "Injury/Illness - Left Hip Soreness / Tightness"
+    },
+    {
+     "player": "Sheppard",
+     "reason": "Injury/Illness - Left Meniscus Tear"
+    }
+   ],
+   "inactives_home": [
+    {
+     "player": "Barlow",
+     "reason": "Injury/Illness - Low Back Stress Reaction"
+    },
+    {
+     "player": "Bona",
+     "reason": "Injury/Illness - Cervical Spine Sprain"
+    },
+    {
+     "player": "Embiid",
+     "reason": "Injury/Illness - Right Foot Plantar Fascia Injury Management"
+    },
+    {
+     "player": "Hukporti",
+     "reason": "Injury/Illness - Right Achilles Tendon Rupture / Tear"
+    },
+    {
+     "player": "Rupert",
+     "reason": "G League - Two-Way"
+    }
+   ],
+   "source_url": "https://www.nba.com/game/ind-vs-phi-0022600236",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/INDPHI_book.pdf",
+   "verified_by": "arena/6e1aadc1-nba1",
+   "verified_utc": "2026-11-16T02:20Z..02:40Z"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600237",
+   "away": "LAL",
+   "home": "PHX",
+   "status": "FINAL",
+   "final_label": "Final",
+   "away_pts": 131,
+   "home_pts": 123,
+   "away_quarters": [
+    33,
+    31,
+    40,
+    27
+   ],
+   "home_quarters": [
+    24,
+    30,
+    26,
+    43
+   ],
+   "ot_periods": 0,
+   "tip_et": "03:00 PM ET",
+   "arena": "Mortgage Matchup Center",
+   "city": "Phoenix, AZ",
+   "attendance": 17071,
+   "officials": "#60 James Williams, #30 John Butler, #98 Sha'Rae Mitchell",
+   "away_record_at_game_time": "12-2",
+   "home_record_at_game_time": "5-7",
+   "quarter_sum_check": "33+31+40+27=131 == printed final 131 OK ; 24+30+26+43=123 == printed final 123 OK",
+   "box_sum_check": "individual points sum 131 == printed final OK ; individual points sum 123 == printed final OK",
+   "inactives_away": [
+    {
+     "player": "Carr",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Cooper",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Kaluma",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Reaves",
+     "reason": "Injury/Illness - Left Heel Contusion / Bone Bruise"
+    }
+   ],
+   "inactives_home": [
+    {
+     "player": "Timme",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Williams",
+     "reason": "Injury/Illness - Left Shoulder Surgery"
+    }
+   ],
+   "source_url": "https://www.nba.com/game/lal-vs-phx-0022600237",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/LALPHX_book.pdf",
+   "verified_by": "arena/6e1aadc1-nba1",
+   "verified_utc": "2026-11-16T02:20Z..02:40Z"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600238",
+   "away": "CHA",
+   "home": "LAC",
+   "status": "FINAL",
+   "final_label": "Final",
+   "away_pts": 105,
+   "home_pts": 113,
+   "away_quarters": [
+    21,
+    31,
+    31,
+    22
+   ],
+   "home_quarters": [
+    22,
+    29,
+    33,
+    29
+   ],
+   "ot_periods": 0,
+   "tip_et": "03:30 PM ET",
+   "arena": "Intuit Dome",
+   "city": "Inglewood, CA",
+   "attendance": 17487,
+   "officials": "#8 Marc Davis, #18 Andy Nagy, #94 Maru Biniam",
+   "away_record_at_game_time": "4-9",
+   "home_record_at_game_time": "4-8",
+   "quarter_sum_check": "21+31+31+22=105 == printed final 105 OK ; 22+29+33+29=113 == printed final 113 OK",
+   "box_sum_check": "individual points sum 105 == printed final OK ; individual points sum 113 == printed final OK",
+   "inactives_away": [
+    {
+     "player": "Ajayi",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Boswell",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Hall",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Knueppel",
+     "reason": "Injury/Illness - Left Hamstring Strain"
+    },
+    {
+     "player": "Schroder",
+     "reason": "Injury/Illness - Left Hamstring Strain"
+    },
+    {
+     "player": "Steinbach",
+     "reason": "G League - On Assignment"
+    }
+   ],
+   "inactives_home": [
+    {
+     "player": "Beal",
+     "reason": "Injury/Illness - Right Knee Injury Management"
+    },
+    {
+     "player": "Ingram",
+     "reason": "Injury/Illness - Right Heel Surgery"
+    },
+    {
+     "player": "Martinelli",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Miller",
+     "reason": "Injury/Illness - Left Rotator Cuff Surgery"
+    },
+    {
+     "player": "Niederhaeuser",
+     "reason": "Injury/Illness - Right Lisfranc Surgery"
+    }
+   ],
+   "source_url": "https://www.nba.com/game/cha-vs-lac-0022600238",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/CHALAC_book.pdf",
+   "verified_by": "arena/6e1aadc1-nba1",
+   "verified_utc": "2026-11-16T02:20Z..02:40Z"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600239",
+   "away": "SAS",
+   "home": "UTA",
+   "status": "FINAL",
+   "final_label": "Final",
+   "away_pts": 110,
+   "home_pts": 102,
+   "away_quarters": [
+    31,
+    27,
+    23,
+    29
+   ],
+   "home_quarters": [
+    33,
+    22,
+    26,
+    21
+   ],
+   "ot_periods": 0,
+   "tip_et": "04:00 PM ET",
+   "arena": "Delta Center",
+   "city": "Salt Lake City, UT",
+   "attendance": null,
+   "officials": "#15 Zach Zarba, #21 Dedric Taylor, #90 Pat O'Connell",
+   "away_record_at_game_time": "12-2",
+   "home_record_at_game_time": "1-13",
+   "quarter_sum_check": "31+27+23+29=110 == printed final 110 OK ; 33+22+26+21=102 == printed final 102 OK",
+   "box_sum_check": "individual points sum 110 == printed final OK ; individual points sum 102 == printed final OK",
+   "inactives_away": [
+    {
+     "player": "Brown",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Fox",
+     "reason": "Injury/Illness - Left Hip Tightness"
+    },
+    {
+     "player": "Gillespie",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Harris",
+     "reason": "Injury/Illness - Left Calf Strain"
+    },
+    {
+     "player": "Quaintance",
+     "reason": "Injury/Illness - Right Knee Surgery"
+    }
+   ],
+   "inactives_home": [
+    {
+     "player": "Alexander",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Bufkin",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Ingram",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Jackson Jr.",
+     "reason": "Injury/Illness - Right MCL Tear"
+    },
+    {
+     "player": "Markkanen",
+     "reason": "Injury/Illness - Right Hand Fracture"
+    },
+    {
+     "player": "Nurkic",
+     "reason": "Injury/Illness - Right 2nd Plantar Plate Tear"
+    }
+   ],
+   "source_url": "https://www.nba.com/game/sas-vs-uta-0022600239",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/SASUTA_book.pdf",
+   "verified_by": "arena/6e1aadc1-nba1",
+   "verified_utc": "2026-11-16T02:20Z..02:40Z"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600240",
+   "away": "DAL",
+   "home": "BOS",
+   "status": "FINAL",
+   "final_label": "Final",
+   "away_pts": 94,
+   "home_pts": 131,
+   "away_quarters": null,
+   "home_quarters": [
+    42,
+    25,
+    37,
+    27
+   ],
+   "ot_periods": 0,
+   "tip_et": "05:00 PM ET",
+   "arena": "TD Garden",
+   "city": "Boston, MA",
+   "attendance": 19156,
+   "officials": "#14 JB DeRosa, #54 Ray Acosta, #11 Derrick Collins",
+   "away_record_at_game_time": "7-7",
+   "home_record_at_game_time": "11-2",
+   "quarter_sum_check": "not-checked (period line not legible in the official render) ; 42+25+37+27=131 == printed final 131 OK",
+   "box_sum_check": "individual points sum 94 == printed final OK ; individual points sum 131 == printed final OK",
+   "inactives_away": [
+    {
+     "player": "Aldama",
+     "reason": "Injury/Illness - Left Ankle Sprain"
+    },
+    {
+     "player": "Biberovic",
+     "reason": "Injury/Illness - Right Heel Bursitis"
+    },
+    {
+     "player": "Christie",
+     "reason": "Injury/Illness - Left Ankle Sprain"
+    },
+    {
+     "player": "de Larrea",
+     "reason": "Injury/Illness - Right Knee Sprain"
+    },
+    {
+     "player": "Irving",
+     "reason": "Injury/Illness - Left Knee Injury Management"
+    },
+    {
+     "player": "Lively II",
+     "reason": "Injury/Illness - Right Foot Surgery"
+    }
+   ],
+   "inactives_home": [
+    {
+     "player": "Mitchell",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Williams",
+     "reason": "G League - Two-Way"
+    }
+   ],
+   "source_url": "https://www.nba.com/game/dal-vs-bos-0022600240",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/DALBOS_book.pdf",
+   "verified_by": "arena/6e1aadc1-nba1",
+   "verified_utc": "2026-11-16T02:20Z..02:40Z",
+   "note_quarters": "Mavericks' period line did not render legibly in the official game book (the SCORE BY PERIOD row came back interleaved with header cells). Left null - not derived from the final. Celtics' line 42+25+37+27=131 does sum to its final. Final score 94-131 is independently confirmed twice: the book's team-total row (94) and the official game-page sidebar."
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600241",
+   "away": "NYK",
+   "home": "TOR",
+   "status": "FINAL",
+   "final_label": "Final/OT",
+   "away_pts": 112,
+   "home_pts": 108,
+   "away_quarters": [
+    23,
+    24,
+    20,
+    28,
+    17
+   ],
+   "home_quarters": [
+    17,
+    26,
+    31,
+    21,
+    13
+   ],
+   "ot_periods": 1,
+   "tip_et": "07:00 PM ET",
+   "arena": "Scotiabank Arena",
+   "city": "Toronto, ON",
+   "attendance": 19800,
+   "officials": "#25 Tony Brothers, #35 Jason Goldenberg, #70 Phenizee Ransom",
+   "away_record_at_game_time": "7-6",
+   "home_record_at_game_time": "5-8",
+   "quarter_sum_check": "23+24+20+28+17=112 == printed final 112 OK ; 17+26+31+21+13=108 == printed final 108 OK",
+   "box_sum_check": "individual points sum 112 == printed final OK ; individual points sum 108 == printed final OK",
+   "inactives_away": [
+    {
+     "player": "Akins",
+     "reason": "(no reason printed on the official page)"
+    },
+    {
+     "player": "Knecht",
+     "reason": "(no reason printed on the official page)"
+    },
+    {
+     "player": "Nickel",
+     "reason": "(no reason printed on the official page)"
+    }
+   ],
+   "inactives_home": [
+    {
+     "player": "Bittle",
+     "reason": "Injury/Illness - Right Foot Avulsion Fracture"
+    },
+    {
+     "player": "Leonard",
+     "reason": "Injury/Illness - Left Knee Injury Management"
+    },
+    {
+     "player": "McCullar Jr.",
+     "reason": "G League - Two-Way"
+    },
+    {
+     "player": "Smith",
+     "reason": "G League - Two-Way"
+    }
+   ],
+   "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/NYKTOR_book.pdf",
+   "verified_by": "arena/6e1aadc1-nba1",
+   "verified_utc": "2026-11-16T02:20Z..02:40Z"
+  }
+ ],
+ "pending_not_final": [
+  {
+   "game_id": "0022600242",
+   "matchup": "HOU@WAS",
+   "state_at_retrieval": "Q4 7:00 remaining, 130-98 HOU on https://www.nba.com/game/ind-vs-phi-0022600236 sidebar at 2026-11-16T02:2xZ",
+   "score_stored": null,
+   "reason_not_settled": "not Final at retrieval time; the official game book for this game is published only after the game ends"
+  },
+  {
+   "game_id": "0022600243",
+   "matchup": "ATL@MIL",
+   "state_at_retrieval": "Half, 55-53 ATL",
+   "score_stored": null,
+   "reason_not_settled": "not Final at retrieval time"
+  },
+  {
+   "game_id": "0022600244",
+   "matchup": "OKC@SAC",
+   "state_at_retrieval": "Q1 10:37, 3-2 OKC",
+   "score_stored": null,
+   "reason_not_settled": "not Final at retrieval time (09:00 PM ET tip)"
+  }
+ ]
+}
