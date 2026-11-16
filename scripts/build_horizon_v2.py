@@ -120,17 +120,30 @@ def main():
     minutes, minutes_meta = M.load_minutes()
 
     # ---------------------------------------------------------------- HCA
-    sigma_margin = 12.0  # league margin dispersion; replaced by the measured
-                         # value below when it is computable
-    margins = [g["home_pts"] - g["away_pts"] for g in results
-               if g.get("home_pts") is not None and g.get("away_pts") is not None]
+    # Home-court advantage is PINNED to the measured home-win rate (R09), never
+    # fitted.  Two independent official measurements exist in the repository:
+    # the standings HOME/ROAD columns and the final-score corpus.  Both are
+    # published, each with its own denominator (board flag F113 - the block used
+    # to pair the standings rate with the corpus denominator, which made the two
+    # numbers look like they disagreed when they in fact agree).
+    #
+    # Only rows the league has actually scored FINAL count (model_v2.is_verified_final).
+    # The dated result captures print a 0-0 placeholder for games that have not
+    # been played, and the corpus is a union that includes the whole forward
+    # slate: 25 such rows were being counted as games, which pulled the
+    # cross-check rate down to 0.4615 and diluted the margin dispersion that
+    # converts the rate into points.
+    finals, finals_excluded = M.verified_finals(results)
+    sigma_margin = 12.0  # fallback only; replaced by the measured value below
+    margins = [g["home_pts"] - g["away_pts"] for g in finals
+               if not g.get("neutral")]
     measured_sd = M.pstdev(margins)
     if measured_sd:
         sigma_margin = measured_sd
     anchor = M.measured_home_win_rate(results, standings)
     hwr_gl = anchor["home_win_rate"]
-    hwr_std = (standings["measured_home_court_anchor"]["home_win_rate"]
-               if standings else None)
+    std_a = (standings["measured_home_court_anchor"] if standings else None)
+    hwr_std = std_a["home_win_rate"] if std_a else None
     # PRIMARY measurement: the official standings HOME/ROAD columns, which
     # cover every game completed at read time (the largest official sample).
     # The final-score corpus is published next to it as a cross-check.
@@ -138,21 +151,59 @@ def main():
     hca_points, hca_z = M.hca_from_measured_home_win_rate(hwr, sigma_margin)
     hca_points_gl, hca_z_gl = M.hca_from_measured_home_win_rate(hwr_gl, sigma_margin)
 
+    # Integrity: the two official sources must tell the same story.  They are
+    # read from different pages, so agreement is a check, not an assumption.
+    agree = []
+    if std_a:
+        agree.append("standings home_wins(%d) == finals home_wins(%d): %s"
+                     % (std_a["home_wins"], anchor["home_wins"],
+                        "OK" if std_a["home_wins"] == anchor["home_wins"] else "MISMATCH"))
+        agree.append("standings games_played(%s) == finals rows(%d): %s"
+                     % (std_a.get("games_played"), anchor["finals_counted"],
+                        "OK" if std_a.get("games_played") == anchor["finals_counted"]
+                        else "MISMATCH"))
+
     hca_block = {
         "measured_home_win_rate": hwr,
-        "measured_home_win_rate_from_final_scores": hwr_gl,
+        "measured_home_win_rate_from_final_scores": (
+            round(hwr_gl, 4) if hwr_gl is not None else None),
         "hca_points_from_final_scores_crosscheck": round(hca_points_gl, 2) if hca_points_gl else None,
         "primary_measurement": ("the official standings HOME/ROAD columns (the "
                                 "largest official sample); the final-score corpus "
                                 "measurement is published beside it as a "
                                 "cross-check"),
-        "measured_road_win_rate": anchor["road_win_rate"],
-        "games_measured": anchor["n_games"],
-        "home_wins": anchor["home_wins"], "home_games": anchor["home_games"],
-        "standings_cross_check": anchor.get("standings_anchor"),
+        "standings_measurement": None if not std_a else {
+            "home_win_rate": hwr_std,
+            "home_wins": std_a["home_wins"], "home_games": std_a["home_games"],
+            "road_win_rate": std_a["road_win_rate"],
+            "road_wins": std_a.get("road_wins"), "road_games": std_a["road_games"],
+            "games_played": std_a.get("games_played"),
+            "measured_from": std_a.get("measured_from"),
+            "retrieved_utc": std_a.get("retrieved_utc"),
+            "source_url": std_a["source_url"],
+        },
+        "final_scores_measurement": {
+            "home_win_rate": (round(hwr_gl, 4) if hwr_gl is not None else None),
+            "home_wins": anchor["home_wins"], "home_games": anchor["home_games"],
+            "road_wins": anchor["road_wins"], "road_games": anchor["road_games"],
+            "corpus_rows": anchor["corpus_rows"],
+            "finals_counted": anchor["finals_counted"],
+            "neutral_excluded": anchor["neutral_excluded"],
+            "rows_excluded_as_unplayed": anchor["rows_excluded"],
+            "finality_rule": anchor["finality_rule"],
+            "source_url": "data/official/gamelog.json + data/official/results_*.json",
+        },
+        "source_agreement": agree,
+        # each number below belongs to the measurement named in its key - F113 was
+        # the defect that a bare `games_measured` beside a standings rate created.
+        "games_measured_standalone_finals": anchor["finals_counted"],
+        "measured_road_win_rate": (round(anchor["road_win_rate"], 4)
+                                   if anchor["road_win_rate"] is not None else None),
         "sigma_margin_used": round(sigma_margin, 2),
-        "sigma_margin_source": "population standard deviation of the margin on "
-                               "the official final-score corpus",
+        "sigma_margin_source": ("population standard deviation of the home margin "
+                                "on the %d verified official finals (neutral games "
+                                "excluded); unplayed 0-0 placeholder rows are not "
+                                "in this denominator" % len(margins)),
         "hca_points": round(hca_points, 2),
         "hca_z": round(hca_z, 4),
         "formula": ("HCA_points = sigma_margin * Phi^-1(measured home win rate). "

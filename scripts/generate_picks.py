@@ -15,9 +15,15 @@ validation gates: Build A 0/8, Build B 0/10):
   SGP2-PROP-v1       same-game pair of player points OVER legs (originated prop lines =
                      floor(season avg)+0.5, sigma = sqrt(avg)*1.15, both documented
                      assumptions). Joint probability uses a Gaussian-copula bivariate
-                     normal with the rho values recorded in docs/data/correlations.json
-                     (MODEL-DERIVED: two_teammates -0.2, two_opponents +0.05) — labelled
-                     as such, never as a measured statistic.
+                     normal at the rho MEASURED and registered by
+                     scripts/measure_parlay_rho.py (data/derived/parlay_rho.json):
+                     same-team pairs at rho(teammate, teammate) from the official
+                     gamebooks, opponent pairs at rho(home points, away points) from
+                     the official finals corpus.  Each leg pair carries the n, the
+                     interval and the sample-floor status of the rho it was priced at.
+                     Before this build the two rhos were module constants (-0.2 / +0.05)
+                     labelled "MODEL-DERIVED" - flag F90; the constants survive only as
+                     a loudly-labelled fallback for a run without the register.
 
 HONESTY RULES:
   * No market price is used or claimed; every probability is model-internal.
@@ -37,14 +43,84 @@ DATA = os.path.join(ROOT, "data")
 PICK_GATE_MARGIN = 3.0          # inherited from data/originated_lines.json assumptions
 PICK_GATE_SOURCE = "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/originated_lines.json"
 
-# MODEL-DERIVED rho register (docs/data/correlations.json, Build B), labelled as such
+# MEASURED rho register (scripts/measure_parlay_rho.py -> data/derived/parlay_rho.json).
+# The kind of pair decides which measurement prices it.
+RHO_REGISTER = os.path.join(ROOT, "data", "derived", "parlay_rho.json")
+RHO_KEY_BY_KIND = {"two_teammates": "same_team_players",
+                   "two_opponents": "cross_team_points"}
+# Fallback ONLY when the register does not exist, and only ever labelled FALLBACK by
+# rho_price(); a fallback is never allowed to read as a measurement (that was F90).
 SGP_RHO_TEAMMATES = -0.2
 SGP_RHO_OPPONENTS = 0.05
 SGP_RHO_SOURCE_FILE = "docs/data/correlations.json"
 
+
+def load_rho_register():
+    if not os.path.exists(RHO_REGISTER):
+        return None
+    with open(RHO_REGISTER, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+RHO_REGISTER_DOC = load_rho_register()
+
+
+def rho_price(kind):
+    """The rho to price one SGP pair with, plus its provenance and its uncertainty.
+
+    Never withheld: when a pairing has no measurement the independent value 0.0 is
+    used and the row says so, while the Frechet-Hoeffding band beside it bounds the
+    whole question.
+    """
+    key = RHO_KEY_BY_KIND.get(kind, "cross_team_points")
+    row = ((RHO_REGISTER_DOC or {}).get("register") or {}).get(key) or {}
+    measured = row.get("rho_measured")
+    if measured is None:
+        fallback = SGP_RHO_TEAMMATES if kind == "two_teammates" else SGP_RHO_OPPONENTS
+        return {"rho": fallback,
+                "status": "FALLBACK MODEL CONSTANT - the measured register has no value "
+                          "for this pairing; the constant is labelled, never presented "
+                          "as a measurement",
+                "n": None, "ci95": None, "jackknife": None, "clears_floor": False,
+                "key": key,
+                "source": SGP_RHO_SOURCE_FILE}
+    return {"rho": measured,
+            "status": row.get("status"),
+            "n": row.get("n_games", row.get("n_game_days")),
+            "n_player_pairs": row.get("n_player_pairs"),
+            "clusters": row.get("clusters"),
+            "p_value": row.get("p_value"),
+            "ci95": row.get("ci95_bootstrap"),
+            "jackknife": row.get("jackknife_range"),
+            "sample_floor": row.get("sample_floor"),
+            "clears_floor": row.get("clears_floor"),
+            "key": key,
+            "source": os.path.relpath(RHO_REGISTER, ROOT)}
+
 OVERDISPERSION = 1.15           # same documented assumption as scripts/originate_lines.py props
 
 STATUS = "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)"
+
+
+def american_from_prob(p):
+    """Fair American odds from a probability; None outside (0,1)."""
+    if p is None or p <= 0 or p >= 1:
+        return None
+    return round(-100 * p / (1 - p)) if p >= 0.5 else round(100 * (1 - p) / p)
+
+
+def frache_band(p_indep, rho, rp):
+    """The joint probability at the two ends of whatever uncertainty the rho carries, so
+    the reader sees how much of the price is the correlation rather than the legs.  Uses
+    the leave-one-cluster-out range when the register has one, else the bootstrap interval,
+    else the exact Frechet-Hoeffding bounds on the independent product."""
+    ends = (rp.get("jackknife") or rp.get("ci95") or [max(-1.0, rho - 0.2), min(1.0, rho + 0.2)])
+    lo, hi = min(ends), max(ends)
+    return {"rho_low": round(lo, 4), "rho_high": round(hi, 4),
+            "note": ("price recomputed at the ends of the measured rho's own dispersion "
+                     "(%s)" % ("leave-one-cluster-out" if rp.get("jackknife")
+                               else "bootstrap 95%%" if rp.get("ci95")
+                               else "assumed +-0.2, no measured dispersion"))}
 
 
 def norm_cdf(z):
@@ -140,7 +216,15 @@ def main():
                 "date": dte,
                 "leg1": f"{s1['matchup']} — {s1['pick']['pick_line']}", "p1": round(p1, 3),
                 "leg2": f"{s2['matchup']} — {s2['pick']['pick_line']}", "p2": round(p2, 3),
+                "naive_product": round(p1 * p2, 4),
+                "fair_american_naive": american_from_prob(p1 * p2),
                 "joint_lb": round(lb, 3), "joint_ub": round(ub, 3),
+                "independence_price": round(p1 * p2, 4),
+                "independence_note": ("no rho is measured between two different games - the "
+                                      "cross-game correlation of official finals margins is "
+                                      "published on the correlations page - so the naive "
+                                      "product IS the price at independence and the band "
+                                      "underneath it bounds every other answer"),
                 "rho_lb": None if rho_lb is None else round(rho_lb, 3),
                 "rho_ub": None if rho_ub is None else round(rho_ub, 3),
                 "fair_odds_lb": round(1.0 / ub, 2) if ub > 0 else None,
@@ -173,7 +257,8 @@ def main():
                 cross_pairs.append((a, b, None))
         for kind, pair in ([("two_teammates", p) for p in same_team_pairs] +
                            [("two_opponents", p) for p in cross_pairs]):
-            rho = SGP_RHO_TEAMMATES if kind == "two_teammates" else SGP_RHO_OPPONENTS
+            rp = rho_price(kind)
+            rho = rp["rho"]
 
             def leg(p):
                 m, s = p["pts"], math.sqrt(max(p["pts"], 0.1)) * OVERDISPERSION
@@ -186,14 +271,23 @@ def main():
             l1, l2 = leg(pair[0]), leg(pair[1])
             joint = joint_over_over(l1["z"], l2["z"], rho)
             joint_ind = (1 - norm_cdf(l1["z"])) * (1 - norm_cdf(l2["z"]))
+            band = frache_band(joint_ind, rho, rp)
             sgp.append({
                 "date": g["date"], "game": g["matchup"], "kind": kind, "rho": rho,
+                "rho_key": rp["key"], "rho_n": rp["n"], "rho_ci95": rp["ci95"],
+                "rho_p_value": rp.get("p_value"), "rho_clusters": rp.get("clusters"),
+                "rho_clears_sample_floor": rp["clears_floor"],
+                "rho_source_file": rp["source"],
+                "naive_product": round(joint_ind, 4),
+                "fair_american_naive": american_from_prob(joint_ind),
+                "fair_american_rho": american_from_prob(joint),
+                "price_range_over_rho_band": band,
                 "leg1": f"{l1['player']} ({l1['team']}) OVER {l1['line']}",
                 "leg2": f"{l2['player']} ({l2['team']}) OVER {l2['line']}",
                 "leg1_detail": l1, "leg2_detail": l2,
                 "joint_prob_rho": round(joint, 4),
                 "joint_prob_independent": round(joint_ind, 4),
-                "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+                "rho_status": rp["status"],
                 "sigma_status": f"sqrt(season_avg) * {OVERDISPERSION} overdispersion (documented assumption)",
                 "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
                 "status": STATUS,

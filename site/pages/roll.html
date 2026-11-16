@@ -103,8 +103,8 @@
     <div class="banner info"><div class="b-t">The rolling slate</div><div class="b-b"><p>The window below is <b>2026-11-16 &ndash; 2026-11-19</b>: the next three calendar days, which is the maximum the brief allows a pick to be published ahead of a game. It is re-cut from a fresh official capture every pass &mdash; the schedule, the standings, the three official team-stat pages and the newest official injury report are all re-read before a line is rebuilt, and the rebuild is skipped if any of them is stale or missing.</p><p><b>Cut:</b> schedule captured 2026-11-15 &middot; ratings re-cut from captures retrieved 2026-11-15T23:38Z..23:52Z &middot; injury edition <b>2026-11-15_0900PM_dfef26dc</b> (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z).</p></div></div>
 <div class="tiles">
 <div class="tile"><div class="tile-v">29</div><div class="tile-l">Games in the window</div><div class="tile-s">11-16=8, 11-17=5, 11-18=12, 11-19=4</div></div>
-<div class="tile"><div class="tile-v">24</div><div class="tile-l">Singles picks</div><div class="tile-s">gate: |originated spread| >= 3.0</div></div>
-<div class="tile"><div class="tile-v">9</div><div class="tile-l">Two-leg parlays</div><div class="tile-s">different games, same date</div></div>
+<div class="tile"><div class="tile-v">28</div><div class="tile-l">Singles picks</div><div class="tile-s">gate: |originated spread| >= 3.0</div></div>
+<div class="tile"><div class="tile-v">12</div><div class="tile-l">Two-leg parlays</div><div class="tile-s">different games, same date</div></div>
 <div class="tile"><div class="tile-v">44</div><div class="tile-l">Out players listed</div><div class="tile-s">official injury report, horizon games only</div></div>
 <div class="tile"><div class="tile-v">5</div><div class="tile-l">Blocks NOT YET SUBMITTED</div><div class="tile-s">clubs that had not filed when the edition was cut</div></div>
 <div class="tile"><div class="tile-v">0.5455</div><div class="tile-l">Measured home-win rate</div><div class="tile-s">36 of 66 official finals</div></div>
@@ -596,7 +596,7 @@
 </tr>
 </tbody></table></div>
 <p class="tnote">Formula: POSS = pace_home + pace_away &minus; league_pace; PTS = (OffRtg &times; DefRtg_opp / league_OffRtg) &times; POSS / 100; TOTAL = PTS_home + PTS_away; SPREAD = PTS_home &minus; PTS_away. Ratings: official advanced page (pace, OffRtg, DefRtg). Records: official standings page. Availability: official injury report, verbatim statuses &mdash; no line is moved by them (see section 4). Rest, back-to-back and 3-in-4 are counted from the official schedule and official finals. 'Estimator B' is engine/pipeline.py's own model line, shown only where the two windows overlap.</p>
-<h2 class="sec">2. Singles</h2><p class="secsub">24 of 29 games clear the |spread| &ge; 3.0 gate. Every pick is MODEL OUTPUT &mdash; UNVALIDATED: no strategy has passed the validation gates, so the stake is zero and the record is paper.</p>
+<h2 class="sec">2. Singles</h2><p class="secsub">28 of 29 games clear the |spread| &ge; 3.0 gate. Every pick is MODEL OUTPUT &mdash; UNVALIDATED: no strategy has passed the validation gates, so the stake is zero and the record is paper.</p>
 <div class="tablewrap">
 <table class="tbl "
 >
@@ -822,21 +822,21 @@
 </tr>
 <tr>
 <td>2026-11-18</td>
-<td><b>GSW@DAL</b></td>
-<td>GSW -4.1</td>
-<td>0.599</td>
-<td>-149</td>
-<td>G-CFG pass (|spread| 4.1 &gt;= 3.0)</td>
-<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
-<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
-</tr>
-<tr>
-<td>2026-11-18</td>
 <td><b>BOS@DEN</b></td>
 <td>BOS -10.1</td>
 <td>0.732</td>
 <td>-273</td>
 <td>G-CFG pass (|spread| 10.1 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-18</td>
+<td><b>GSW@DAL</b></td>
+<td>GSW -4.1</td>
+<td>0.599</td>
+<td>-149</td>
+<td>G-CFG pass (|spread| 4.1 &gt;= 3.0)</td>
 <td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
 </tr>
@@ -859,6 +859,46 @@
 <td>G-CFG pass (|spread| 8.6 &gt;= 3.0)</td>
 <td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-19</td>
+<td><b>GSW@MEM</b></td>
+<td>MEM -4.5</td>
+<td>0.609</td>
+<td>-155</td>
+<td>G-CFG pass (|spread| 4.5 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-19" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-19</td>
+<td><b>POR@MIL</b></td>
+<td>POR -22.5</td>
+<td>0.916</td>
+<td>-1090</td>
+<td>G-CFG pass (|spread| 22.5 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-19" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-19</td>
+<td><b>NYK@MIN</b></td>
+<td>MIN -5.4</td>
+<td>0.630</td>
+<td>-169</td>
+<td>G-CFG pass (|spread| 5.4 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-19" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-19</td>
+<td><b>LAC@SAS</b></td>
+<td>SAS -18.1</td>
+<td>0.866</td>
+<td>-647</td>
+<td>G-CFG pass (|spread| 18.1 &gt;= 3.0)</td>
+<td>MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-19" target="_blank" rel="noopener">slate</a></td>
 </tr>
 </tbody></table></div>
 <h2 class="sec">3. Two-leg parlays &mdash; the naive product, printed, with the band around it</h2><p class="secsub">The brief asks for every parlay to be priced with a measured rho and for the naive product to be printed next to it. Both columns are here. The rho column is an em dash because <b>no rho between two different games is measurable from official data</b>: the games have no natural pairing, so any figure would be an artefact of how the pairs were made. What is published instead of a fake number is the exact Fr&eacute;chet&ndash;Hoeffding band the joint probability must lie in for <i>any</i> rho, and the naive product is the price. Where a rho <i>is</i> measurable it is used &mdash; see section 4.</p>
@@ -974,6 +1014,39 @@
 <td>-198</td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-19</td>
+<td>POR@MIL — POR -22.5<br>LAC@SAS — SAS -18.1</td>
+<td>0.916</td>
+<td>0.866</td>
+<td><b>0.7933</b></td>
+<td>[0.7820, 0.8660]</td>
+<td>-383</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-19" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-19</td>
+<td>POR@MIL — POR -22.5<br>NYK@MIN — MIN -5.4</td>
+<td>0.916</td>
+<td>0.630</td>
+<td><b>0.5771</b></td>
+<td>[0.5460, 0.6300]</td>
+<td>-136</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-19" target="_blank" rel="noopener">slate</a></td>
+</tr>
+<tr>
+<td>2026-11-19</td>
+<td>POR@MIL — POR -22.5<br>GSW@MEM — MEM -4.5</td>
+<td>0.916</td>
+<td>0.609</td>
+<td><b>0.5578</b></td>
+<td>[0.5250, 0.6090]</td>
+<td>-126</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-19" target="_blank" rel="noopener">slate</a></td>
 </tr>
 </tbody></table></div>
 <p class="tnote">The band is [max(0, p&#8321;+p&#8322;&minus;1), min(p&#8321;,p&#8322;)]. A price inside it is not evidence of skill; the naive product is the independence price and is the number this site publishes.</p>

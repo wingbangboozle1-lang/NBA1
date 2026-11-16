@@ -476,13 +476,63 @@ def hca_from_measured_home_win_rate(home_win_rate, sigma_margin):
     return z * sigma_margin, z
 
 
-def measured_home_win_rate(results, standings_doc=None):
-    """Home win rate measured on official final scores (neutral games removed)."""
-    hw = hg = rw = rg = 0
+def is_verified_final(g):
+    """True only for a row the league has actually scored FINAL.
+
+    The results corpus is a union of the season game log and the dated result
+    captures, and a capture of an *unplayed* game prints `home_pts: 0,
+    away_pts: 0` with `game_status: 1` and a tip-off string in
+    `game_status_text` - it is a scheduled row, not a score.  Counting those
+    rows as games silently turned 25 future fixtures into 25 home losses: the
+    home-court cross-check on the published page read 0.4615 over 221 games
+    while the standings said 0.5285 over 193 (board flag F113), and the margin
+    dispersion used to convert the pin into points was diluted by 25 zero
+    margins.  Fixed here rather than filtered at each call site, so every
+    consumer of the corpus gets the same definition.
+
+    Rules: a missing score is not a final; a printed 0-0 is not a final (no
+    NBA game ends 0-0); a status field, when present, must read 3 = Final.
+    """
+    hp, ap = g.get("home_pts"), g.get("away_pts")
+    if hp is None or ap is None:
+        return False
+    if int(hp) == 0 and int(ap) == 0:
+        return False
+    st = g.get("game_status")
+    if st is not None and int(st) != 3:
+        return False
+    return True
+
+
+def verified_finals(results):
+    """The official finals inside a results corpus, with the exclusions counted."""
+    finals, excluded = [], {"missing_score": 0, "zero_zero_placeholder": 0,
+                            "status_not_final": 0}
     for g in results:
-        if g.get("neutral"):
+        if is_verified_final(g):
+            finals.append(g)
             continue
         if g.get("home_pts") is None or g.get("away_pts") is None:
+            excluded["missing_score"] += 1
+        elif int(g["home_pts"]) == 0 and int(g["away_pts"]) == 0:
+            excluded["zero_zero_placeholder"] += 1
+        else:
+            excluded["status_not_final"] += 1
+    return finals, excluded
+
+
+def measured_home_win_rate(results, standings_doc=None):
+    """Home win rate measured on official final scores (neutral games removed).
+
+    A row only counts when `is_verified_final` accepts it, so an unplayed
+    fixture can never be read as a home loss.
+    """
+    hw = hg = rw = rg = 0
+    finals, excluded = verified_finals(results)
+    n_neutral = 0
+    for g in finals:
+        if g.get("neutral"):
+            n_neutral += 1
             continue
         hg += 1
         rg += 1
@@ -495,13 +545,26 @@ def measured_home_win_rate(results, standings_doc=None):
            "road_games": rg, "road_wins": rw,
            "home_win_rate": (hw / hg) if hg else None,
            "road_win_rate": (rw / rg) if rg else None,
-           "n_games": hg}
+           "n_games": hg,
+           "corpus_rows": len(results),
+           "finals_counted": len(finals),
+           "neutral_excluded": n_neutral,
+           "rows_excluded": excluded,
+           "finality_rule": ("is_verified_final: both scores printed, not a 0-0 "
+                             "placeholder, and game_status (when the capture "
+                             "carries one) equal to 3 = Final")}
     if standings_doc:
         a = standings_doc["measured_home_court_anchor"]
         out["standings_anchor"] = {
             "home_win_rate": a["home_win_rate"],
             "road_win_rate": a["road_win_rate"],
-            "home_games": a["home_games"], "road_games": a["road_games"],
+            "home_wins": a.get("home_wins"), "home_games": a["home_games"],
+            "road_wins": a.get("road_wins"), "road_games": a["road_games"],
+            "neutral_team_games": a.get("neutral_team_games"),
+            "games_played": a.get("games_played"),
+            "measured_from": a.get("measured_from",
+                                  "the official standings HOME and ROAD columns"),
+            "retrieved_utc": a.get("retrieved_utc"),
             "source_url": a["source_url"]}
     return out
 
@@ -937,7 +1000,10 @@ def luck_table(teams, league, results, sigma_margin):
         h, a = g.get("home"), g.get("away")
         if h not in teams or a not in teams:
             continue
-        if g.get("home_pts") is None or g.get("away_pts") is None:
+        if not is_verified_final(g):
+            # an unplayed fixture prints 0-0 in the dated captures; reading it as
+            # a score would move both the residual and the dispersion that turns
+            # it into a z-score, so it is excluded rather than inferred away
             continue
         th, ta = teams[h], teams[a]
         poss, _ = game_possessions(th, ta, league)
@@ -1037,7 +1103,7 @@ def model_out_of_sample_log_loss(teams, league, results, hca_points):
         h, a = g.get("home"), g.get("away")
         if h not in teams or a not in teams:
             continue
-        if g.get("home_pts") is None or g.get("away_pts") is None:
+        if not is_verified_final(g):
             continue
         if g.get("neutral"):
             continue
@@ -1059,7 +1125,9 @@ def measured_rho(results):
     """
     hp, ap, mg, tt = [], [], [], []
     for g in results:
-        if g.get("home_pts") is None or g.get("away_pts") is None:
+        if not is_verified_final(g):
+            # 0-0 placeholders are not games; a 25-point cluster at the origin
+            # would move every correlation below
             continue
         hp.append(g["home_pts"])
         ap.append(g["away_pts"])

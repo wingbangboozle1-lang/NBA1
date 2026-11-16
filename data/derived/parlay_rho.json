@@ -1,0 +1,138 @@
+{
+ "title": "Parlay rho register - every correlation the site prices with, measured",
+ "generated_by": "scripts/measure_parlay_rho.py",
+ "generated_utc": "2026-11-16T18:25:34Z",
+ "session": "arena/3ff8ff0f-nba1",
+ "answers": "R14: price every parlay with the measured rho and print the naive product beside it, instead of withholding the price",
+ "rule": "a rho may be printed as MEASURED only if it is computed from official data in this repository by this script; a hand-set constant is never labelled measured. Values that do not clear their sample floor are printed with their n, their interval and the floor, and the naive independent product stays beside them.",
+ "finality_rule": "engine/model_v2.is_verified_final - an unplayed fixture that prints 0-0 in the dated captures is not a game and is excluded, not inferred",
+ "corpus": {
+  "results_rows": 222,
+  "verified_finals": 197,
+  "neutral_excluded": 1,
+  "rows_excluded_as_unplayed": {
+   "missing_score": 0,
+   "zero_zero_placeholder": 25,
+   "status_not_final": 0
+  },
+  "games_used": 196
+ },
+ "register": {
+  "cross_team_points": {
+   "pairing": "both teams over a team total in the same game: the two legs are the two teams' point totals, so the rho that prices them is rho(home points, away points)",
+   "why_this_pairing": "the only rho a both-teams-over parlay can be priced with from official box scores",
+   "rho_measured": 0.12,
+   "n_games": 196,
+   "p_value": 0.093909,
+   "ci95_bootstrap": [
+    -0.0253,
+    0.2661
+   ],
+   "bootstrap": "2000 reps, clusters = official games, seed 20261116, 2.5/97.5 percentiles",
+   "clusters": 196,
+   "jackknife_range": [
+    0.0977,
+    0.1418
+   ],
+   "jackknife_note": "leave-one-game-out spread over 196 drops; with fewer than about 20 clusters this, not the bootstrap CI, is the dispersion to read",
+   "sample_floor": 100,
+   "clears_floor": true,
+   "status": "MEASURED on 196 official finals",
+   "source": "the verified-finals corpus of engine/model_v2.load_results() (official NBA.com scores, filtered by is_verified_final)",
+   "source_examples": [
+    "https://www.nba.com/game/atl-vs-cha-0022600094",
+    "https://www.nba.com/game/atl-vs-chi-0022600037/box-score",
+    "https://www.nba.com/game/atl-vs-hou-0022600125"
+   ],
+   "first_date": "2026-10-20",
+   "last_date": "2026-11-15"
+  },
+  "side_and_total": {
+   "pairing": "side + total same-game parlay: rho(home margin, game total)",
+   "why_this_pairing": "the pairing the roll page and the SGP generator both price",
+   "rho_measured": -0.038,
+   "n_games": 196,
+   "p_value": 0.59749,
+   "ci95_bootstrap": [
+    -0.1804,
+    0.096
+   ],
+   "bootstrap": "2000 reps, clusters = official games, seed 20261116, 2.5/97.5 percentiles",
+   "clusters": 196,
+   "jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "jackknife_note": "leave-one-game-out spread over 196 drops; with fewer than about 20 clusters this, not the bootstrap CI, is the dispersion to read",
+   "sample_floor": 100,
+   "clears_floor": true,
+   "status": "MEASURED on 196 official finals",
+   "source": "the verified-finals corpus of engine/model_v2.load_results() (official NBA.com scores, filtered by is_verified_final)",
+   "source_examples": [
+    "https://www.nba.com/game/atl-vs-cha-0022600094",
+    "https://www.nba.com/game/atl-vs-chi-0022600037/box-score",
+    "https://www.nba.com/game/atl-vs-hou-0022600125"
+   ],
+   "first_date": "2026-10-20",
+   "last_date": "2026-11-15"
+  },
+  "home_points_total": {
+   "pairing": "home team over + game over: rho(home points, game total)",
+   "why_this_pairing": "a same-game total pair that is not two independent teams",
+   "rho_measured": 0.7371,
+   "n_games": 196,
+   "p_value": 0.0,
+   "ci95_bootstrap": [
+    0.6701,
+    0.7952
+   ],
+   "bootstrap": "2000 reps, clusters = official games, seed 20261116, 2.5/97.5 percentiles",
+   "clusters": 196,
+   "jackknife_range": [
+    0.7298,
+    0.7451
+   ],
+   "jackknife_note": "leave-one-game-out spread over 196 drops; with fewer than about 20 clusters this, not the bootstrap CI, is the dispersion to read",
+   "sample_floor": 100,
+   "clears_floor": true,
+   "status": "MEASURED on 196 official finals",
+   "source": "the verified-finals corpus of engine/model_v2.load_results() (official NBA.com scores, filtered by is_verified_final)",
+   "source_examples": [
+    "https://www.nba.com/game/atl-vs-cha-0022600094",
+    "https://www.nba.com/game/atl-vs-chi-0022600037/box-score",
+    "https://www.nba.com/game/atl-vs-hou-0022600125"
+   ],
+   "first_date": "2026-10-20",
+   "last_date": "2026-11-15"
+  },
+  "same_team_players": {
+   "available": true,
+   "pairing": "same_team_players: rho(one teammate's points, a teammate's points) within a team-game",
+   "why_this_pairing": "what a same-game teammate pair (SGP) actually depends on",
+   "rho_measured": 0.4213,
+   "n_player_pairs": 672,
+   "n_game_days": 6,
+   "p_value": 0.0,
+   "ci95_bootstrap": [
+    0.3923,
+    0.4504
+   ],
+   "bootstrap": "2000 reps, clusters = games (the only clustering the sample supports), seed 20261116",
+   "clusters": 6,
+   "jackknife_range": [
+    0.4085,
+    0.4398
+   ],
+   "jackknife_note": "leave-one-game-out spread over 6 drops. With six game-days in the repository the bootstrap percentile interval below is optimistic - the jackknife range is the honest dispersion, and it is what the pricing sensitivity is quoted against.",
+   "sample_floor": "30 game-days of official gamebooks",
+   "clears_floor": false,
+   "status": "MEASURED - BELOW THE SAMPLE FLOOR: 6 game-days of official gamebooks in the repository against a floor of 30. The point estimate is published and used to price; the interval is printed beside it so the reader can see it does not exclude 0.",
+   "source": "official team gamebook box scores, transcribed under data/official/gamebooks/ and parsed by scripts/capture_player_logs.py",
+   "source_examples": [
+    "https://statsdmz.nba.com/pdfs/20261115/20261115_CHALAC_book.pdf",
+    "https://statsdmz.nba.com/pdfs/20261115/20261115_DALBOS_book.pdf",
+    "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf"
+   ]
+  }
+ }
+}

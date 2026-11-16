@@ -1,247 +1,93 @@
 {
  "_meta": {
-  "method": "P(parlay) = p1*p2 + rho*sqrt(p1(1-p1)p2(1-p2)); naive product printed beside it. rho=0.15 measured from historical same-game pairs."
+  "method": "P(parlay) = p1*p2 + rho*sqrt(p1(1-p1)p2(1-p2)); the naive product is printed beside it on every row. rho is read from the measured register, never set in code.",
+  "rho": -0.038,
+  "rho_status": "MEASURED on 196 official finals",
+  "rho_n_games": 196,
+  "rho_ci95": [
+   -0.1804,
+   0.096
+  ],
+  "rho_jackknife_range": [
+   -0.0576,
+   -0.0156
+  ],
+  "rho_source": "data/derived/parlay_rho.json",
+  "rho_label": "MEASURED (196)",
+  "correction": "previous builds priced this page at a hardcoded 0.15 that was labelled measured; the measured side+total rho on the official finals is what is used now, with its interval"
  },
  "rows": [
-  {
-   "date": "2026-11-14",
-   "matchup": "DEN@NOP",
-   "away": "DEN",
-   "home": "NOP",
-   "leg1_p_home": 0.302,
-   "leg2_p_over": 0.676,
-   "naive_product": 0.2042,
-   "rho": 0.15,
-   "rho_adjusted": 0.2364,
-   "naive_american": 390,
-   "rho_american": 323,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600231"
-  },
-  {
-   "date": "2026-11-14",
-   "matchup": "DAL@CLE",
-   "away": "DAL",
-   "home": "CLE",
-   "leg1_p_home": 0.459,
-   "leg2_p_over": 0.53,
-   "naive_product": 0.2433,
-   "rho": 0.15,
-   "rho_adjusted": 0.2806,
-   "naive_american": 311,
-   "rho_american": 256,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600232"
-  },
-  {
-   "date": "2026-11-14",
-   "matchup": "DET@MIA",
-   "away": "DET",
-   "home": "MIA",
-   "leg1_p_home": 0.242,
-   "leg2_p_over": 0.493,
-   "naive_product": 0.1193,
-   "rho": 0.15,
-   "rho_adjusted": 0.1514,
-   "naive_american": 738,
-   "rho_american": 560,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600233"
-  },
-  {
-   "date": "2026-11-14",
-   "matchup": "BKN@MEM",
-   "away": "BKN",
-   "home": "MEM",
-   "leg1_p_home": 0.632,
-   "leg2_p_over": 0.535,
-   "naive_product": 0.3381,
-   "rho": 0.15,
-   "rho_adjusted": 0.3742,
-   "naive_american": 196,
-   "rho_american": 167,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600234"
-  },
-  {
-   "date": "2026-11-14",
-   "matchup": "CHI@MIN",
-   "away": "CHI",
-   "home": "MIN",
-   "leg1_p_home": 0.96,
-   "leg2_p_over": 0.565,
-   "naive_product": 0.5424,
-   "rho": 0.15,
-   "rho_adjusted": 0.557,
-   "naive_american": -119,
-   "rho_american": -126,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600235"
-  },
-  {
-   "date": "2026-11-15",
-   "matchup": "IND@PHI",
-   "away": "IND",
-   "home": "PHI",
-   "leg1_p_home": 0.641,
-   "leg2_p_over": 0.471,
-   "naive_product": 0.3019,
-   "rho": 0.15,
-   "rho_adjusted": 0.3378,
-   "naive_american": 231,
-   "rho_american": 196,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600236"
-  },
-  {
-   "date": "2026-11-15",
-   "matchup": "LAL@PHX",
-   "away": "LAL",
-   "home": "PHX",
-   "leg1_p_home": 0.365,
-   "leg2_p_over": 0.577,
-   "naive_product": 0.2106,
-   "rho": 0.15,
-   "rho_adjusted": 0.2463,
-   "naive_american": 375,
-   "rho_american": 306,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600237"
-  },
-  {
-   "date": "2026-11-15",
-   "matchup": "CHA@LAC",
-   "away": "CHA",
-   "home": "LAC",
-   "leg1_p_home": 0.677,
-   "leg2_p_over": 0.629,
-   "naive_product": 0.4258,
-   "rho": 0.15,
-   "rho_adjusted": 0.4597,
-   "naive_american": 135,
-   "rho_american": 118,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600238"
-  },
-  {
-   "date": "2026-11-15",
-   "matchup": "SAS@UTA",
-   "away": "SAS",
-   "home": "UTA",
-   "leg1_p_home": 0.2,
-   "leg2_p_over": 0.504,
-   "naive_product": 0.1008,
-   "rho": 0.15,
-   "rho_adjusted": 0.1308,
-   "naive_american": 892,
-   "rho_american": 665,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600239"
-  },
-  {
-   "date": "2026-11-15",
-   "matchup": "DAL@BOS",
-   "away": "DAL",
-   "home": "BOS",
-   "leg1_p_home": 0.855,
-   "leg2_p_over": 0.411,
-   "naive_product": 0.3514,
-   "rho": 0.15,
-   "rho_adjusted": 0.3774,
-   "naive_american": 185,
-   "rho_american": 165,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600240"
-  },
-  {
-   "date": "2026-11-15",
-   "matchup": "NYK@TOR",
-   "away": "NYK",
-   "home": "TOR",
-   "leg1_p_home": 0.492,
-   "leg2_p_over": 0.467,
-   "naive_product": 0.2298,
-   "rho": 0.15,
-   "rho_adjusted": 0.2672,
-   "naive_american": 335,
-   "rho_american": 274,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600241"
-  },
-  {
-   "date": "2026-11-15",
-   "matchup": "HOU@WAS",
-   "away": "HOU",
-   "home": "WAS",
-   "leg1_p_home": 0.316,
-   "leg2_p_over": 0.497,
-   "naive_product": 0.1571,
-   "rho": 0.15,
-   "rho_adjusted": 0.1919,
-   "naive_american": 537,
-   "rho_american": 421,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600242"
-  },
-  {
-   "date": "2026-11-15",
-   "matchup": "ATL@MIL",
-   "away": "ATL",
-   "home": "MIL",
-   "leg1_p_home": 0.281,
-   "leg2_p_over": 0.639,
-   "naive_product": 0.1796,
-   "rho": 0.15,
-   "rho_adjusted": 0.2119,
-   "naive_american": 457,
-   "rho_american": 372,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600243"
-  },
-  {
-   "date": "2026-11-15",
-   "matchup": "OKC@SAC",
-   "away": "OKC",
-   "home": "SAC",
-   "leg1_p_home": 0.294,
-   "leg2_p_over": 0.577,
-   "naive_product": 0.1696,
-   "rho": 0.15,
-   "rho_adjusted": 0.2034,
-   "naive_american": 489,
-   "rho_american": 392,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600244"
-  },
   {
    "date": "2026-11-16",
    "matchup": "ORL@BOS",
    "away": "ORL",
    "home": "BOS",
-   "leg1_p_home": 0.726,
-   "leg2_p_over": 0.479,
-   "naive_product": 0.3478,
-   "rho": 0.15,
-   "rho_adjusted": 0.3812,
-   "naive_american": 188,
-   "rho_american": 162,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600245"
+   "leg1_p_home": 0.764,
+   "leg2_p_over": 0.487,
+   "naive_product": 0.3721,
+   "naive_american": 169,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.364,
+   "rho_american": 175,
+   "edge_of_rho_over_naive_pct": -2.17,
+   "src": "S4_0022600245",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.3598,
+    0.3688
+   ],
+   "american_at_range": [
+    178,
+    171
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
   },
   {
    "date": "2026-11-16",
    "matchup": "CHI@CLE",
    "away": "CHI",
    "home": "CLE",
-   "leg1_p_home": 0.835,
-   "leg2_p_over": 0.696,
-   "naive_product": 0.5812,
-   "rho": 0.15,
-   "rho_adjusted": 0.6068,
-   "naive_american": -139,
-   "rho_american": -154,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600246"
+   "leg1_p_home": 0.861,
+   "leg2_p_over": 0.703,
+   "naive_product": 0.6053,
+   "naive_american": -153,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.5993,
+   "rho_american": -150,
+   "edge_of_rho_over_naive_pct": -0.99,
+   "src": "S4_0022600246",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.5962,
+    0.6028
+   ],
+   "american_at_range": [
+    -148,
+    -152
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
   },
   {
    "date": "2026-11-16",
@@ -251,12 +97,33 @@
    "leg1_p_home": 0.247,
    "leg2_p_over": 0.535,
    "naive_product": 0.1321,
-   "rho": 0.15,
-   "rho_adjusted": 0.1644,
    "naive_american": 657,
-   "rho_american": 508,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600247"
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.124,
+   "rho_american": 707,
+   "edge_of_rho_over_naive_pct": -6.19,
+   "src": "S4_0022600247",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.1198,
+    0.1288
+   ],
+   "american_at_range": [
+    735,
+    676
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
   },
   {
    "date": "2026-11-16",
@@ -266,12 +133,33 @@
    "leg1_p_home": 0.602,
    "leg2_p_over": 0.539,
    "naive_product": 0.3245,
-   "rho": 0.15,
-   "rho_adjusted": 0.3611,
    "naive_american": 208,
-   "rho_american": 177,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600248"
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.3152,
+   "rho_american": 217,
+   "edge_of_rho_over_naive_pct": -2.86,
+   "src": "S4_0022600248",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.3104,
+    0.3207
+   ],
+   "american_at_range": [
+    222,
+    212
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
   },
   {
    "date": "2026-11-16",
@@ -281,42 +169,105 @@
    "leg1_p_home": 0.471,
    "leg2_p_over": 0.524,
    "naive_product": 0.2468,
-   "rho": 0.15,
-   "rho_adjusted": 0.2842,
    "naive_american": 305,
-   "rho_american": 252,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600249"
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.2373,
+   "rho_american": 321,
+   "edge_of_rho_over_naive_pct": -3.84,
+   "src": "S4_0022600249",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.2324,
+    0.2429
+   ],
+   "american_at_range": [
+    330,
+    312
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
   },
   {
    "date": "2026-11-16",
    "matchup": "POR@MIN",
    "away": "POR",
    "home": "MIN",
-   "leg1_p_home": 0.692,
-   "leg2_p_over": 0.307,
-   "naive_product": 0.2124,
-   "rho": 0.15,
-   "rho_adjusted": 0.2444,
-   "naive_american": 371,
-   "rho_american": 309,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600250"
+   "leg1_p_home": 0.648,
+   "leg2_p_over": 0.315,
+   "naive_product": 0.2041,
+   "naive_american": 390,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.1957,
+   "rho_american": 411,
+   "edge_of_rho_over_naive_pct": -4.13,
+   "src": "S4_0022600250",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.1913,
+    0.2007
+   ],
+   "american_at_range": [
+    423,
+    398
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
   },
   {
    "date": "2026-11-16",
    "matchup": "GSW@NOP",
    "away": "GSW",
    "home": "NOP",
-   "leg1_p_home": 0.317,
-   "leg2_p_over": 0.569,
-   "naive_product": 0.1804,
-   "rho": 0.15,
-   "rho_adjusted": 0.2149,
-   "naive_american": 454,
-   "rho_american": 365,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600251"
+   "leg1_p_home": 0.351,
+   "leg2_p_over": 0.576,
+   "naive_product": 0.2022,
+   "naive_american": 395,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.1932,
+   "rho_american": 418,
+   "edge_of_rho_over_naive_pct": -4.43,
+   "src": "S4_0022600251",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.1886,
+    0.1985
+   ],
+   "american_at_range": [
+    430,
+    404
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
   },
   {
    "date": "2026-11-16",
@@ -326,42 +277,33 @@
    "leg1_p_home": 0.777,
    "leg2_p_over": 0.655,
    "naive_product": 0.5089,
-   "rho": 0.15,
-   "rho_adjusted": 0.5386,
    "naive_american": -104,
-   "rho_american": -117,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600252"
-  },
-  {
-   "date": "2026-11-17",
-   "matchup": "UTA@LAC",
-   "away": "UTA",
-   "home": "LAC",
-   "leg1_p_home": 0.685,
-   "leg2_p_over": 0.648,
-   "naive_product": 0.4439,
-   "rho": 0.15,
-   "rho_adjusted": 0.4772,
-   "naive_american": 125,
-   "rho_american": 110,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600257"
-  },
-  {
-   "date": "2026-11-17",
-   "matchup": "CHA@LAL",
-   "away": "CHA",
-   "home": "LAL",
-   "leg1_p_home": 0.861,
-   "leg2_p_over": 0.552,
-   "naive_product": 0.4753,
-   "rho": 0.15,
-   "rho_adjusted": 0.5011,
-   "naive_american": 110,
-   "rho_american": -100,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600256"
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.5014,
+   "rho_american": -101,
+   "edge_of_rho_over_naive_pct": -1.48,
+   "src": "S4_0022600252",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.4975,
+    0.5058
+   ],
+   "american_at_range": [
+    101,
+    -102
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
   },
   {
    "date": "2026-11-17",
@@ -371,12 +313,33 @@
    "leg1_p_home": 0.492,
    "leg2_p_over": 0.467,
    "naive_product": 0.2298,
-   "rho": 0.15,
-   "rho_adjusted": 0.2672,
    "naive_american": 335,
-   "rho_american": 274,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600253"
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.2203,
+   "rho_american": 354,
+   "edge_of_rho_over_naive_pct": -4.13,
+   "src": "S4_0022600253",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.2154,
+    0.2259
+   ],
+   "american_at_range": [
+    364,
+    343
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
   },
   {
    "date": "2026-11-17",
@@ -386,12 +349,33 @@
    "leg1_p_home": 0.692,
    "leg2_p_over": 0.353,
    "naive_product": 0.2443,
-   "rho": 0.15,
-   "rho_adjusted": 0.2774,
    "naive_american": 309,
-   "rho_american": 261,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600254"
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.2359,
+   "rho_american": 324,
+   "edge_of_rho_over_naive_pct": -3.43,
+   "src": "S4_0022600254",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.2316,
+    0.2408
+   ],
+   "american_at_range": [
+    332,
+    315
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
   },
   {
    "date": "2026-11-17",
@@ -401,12 +385,681 @@
    "leg1_p_home": 0.649,
    "leg2_p_over": 0.337,
    "naive_product": 0.2187,
-   "rho": 0.15,
-   "rho_adjusted": 0.2526,
    "naive_american": 357,
-   "rho_american": 296,
-   "method": "Parlay price = naive product vs rho-adjusted. Print both, never withhold.",
-   "src": "S8_0022600255"
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.2101,
+   "rho_american": 376,
+   "edge_of_rho_over_naive_pct": -3.92,
+   "src": "S4_0022600255",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.2057,
+    0.2152
+   ],
+   "american_at_range": [
+    386,
+    365
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-17",
+   "matchup": "CHA@LAL",
+   "away": "CHA",
+   "home": "LAL",
+   "leg1_p_home": 0.861,
+   "leg2_p_over": 0.552,
+   "naive_product": 0.4753,
+   "naive_american": 110,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.4687,
+   "rho_american": 113,
+   "edge_of_rho_over_naive_pct": -1.38,
+   "src": "S4_0022600256",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.4654,
+    0.4726
+   ],
+   "american_at_range": [
+    115,
+    112
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-17",
+   "matchup": "UTA@LAC",
+   "away": "UTA",
+   "home": "LAC",
+   "leg1_p_home": 0.685,
+   "leg2_p_over": 0.648,
+   "naive_product": 0.4439,
+   "naive_american": 125,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.4354,
+   "rho_american": 130,
+   "edge_of_rho_over_naive_pct": -1.9,
+   "src": "S4_0022600257",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.4311,
+    0.4404
+   ],
+   "american_at_range": [
+    132,
+    127
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-18",
+   "matchup": "MEM@CLE",
+   "away": "MEM",
+   "home": "CLE",
+   "leg1_p_home": 0.512,
+   "leg2_p_over": 0.472,
+   "naive_product": 0.2417,
+   "naive_american": 314,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.2322,
+   "rho_american": 331,
+   "edge_of_rho_over_naive_pct": -3.92,
+   "src": "S4_0022600258",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.2273,
+    0.2378
+   ],
+   "american_at_range": [
+    340,
+    321
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-18",
+   "matchup": "HOU@IND",
+   "away": "HOU",
+   "home": "IND",
+   "leg1_p_home": 0.379,
+   "leg2_p_over": 0.455,
+   "naive_product": 0.1724,
+   "naive_american": 480,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.1633,
+   "rho_american": 513,
+   "edge_of_rho_over_naive_pct": -5.32,
+   "src": "S4_0022600259",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.1585,
+    0.1687
+   ],
+   "american_at_range": [
+    531,
+    493
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-18",
+   "matchup": "MIL@MIA",
+   "away": "MIL",
+   "home": "MIA",
+   "leg1_p_home": 0.748,
+   "leg2_p_over": 0.708,
+   "naive_product": 0.5296,
+   "naive_american": -113,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.5221,
+   "rho_american": -109,
+   "edge_of_rho_over_naive_pct": -1.42,
+   "src": "S4_0022600260",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.5182,
+    0.5265
+   ],
+   "american_at_range": [
+    -108,
+    -111
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-18",
+   "matchup": "PHI@ORL",
+   "away": "PHI",
+   "home": "ORL",
+   "leg1_p_home": 0.464,
+   "leg2_p_over": 0.522,
+   "naive_product": 0.2422,
+   "naive_american": 313,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.2327,
+   "rho_american": 330,
+   "edge_of_rho_over_naive_pct": -3.91,
+   "src": "S4_0022600261",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.2279,
+    0.2383
+   ],
+   "american_at_range": [
+    339,
+    320
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-18",
+   "matchup": "CHI@BKN",
+   "away": "CHI",
+   "home": "BKN",
+   "leg1_p_home": 0.74,
+   "leg2_p_over": 0.728,
+   "naive_product": 0.5387,
+   "naive_american": -117,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.5313,
+   "rho_american": -113,
+   "edge_of_rho_over_naive_pct": -1.38,
+   "src": "S4_0022600262",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.5275,
+    0.5357
+   ],
+   "american_at_range": [
+    -112,
+    -115
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-18",
+   "matchup": "WAS@TOR",
+   "away": "WAS",
+   "home": "TOR",
+   "leg1_p_home": 0.573,
+   "leg2_p_over": 0.581,
+   "naive_product": 0.3329,
+   "naive_american": 200,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.3236,
+   "rho_american": 209,
+   "edge_of_rho_over_naive_pct": -2.79,
+   "src": "S4_0022600263",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.3189,
+    0.3291
+   ],
+   "american_at_range": [
+    214,
+    204
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-18",
+   "matchup": "DET@NOP",
+   "away": "DET",
+   "home": "NOP",
+   "leg1_p_home": 0.462,
+   "leg2_p_over": 0.55,
+   "naive_product": 0.2541,
+   "naive_american": 294,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.2447,
+   "rho_american": 309,
+   "edge_of_rho_over_naive_pct": -3.71,
+   "src": "S4_0022600264",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.2398,
+    0.2502
+   ],
+   "american_at_range": [
+    317,
+    300
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-18",
+   "matchup": "ATL@OKC",
+   "away": "ATL",
+   "home": "OKC",
+   "leg1_p_home": 0.618,
+   "leg2_p_over": 0.422,
+   "naive_product": 0.2608,
+   "naive_american": 283,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.2517,
+   "rho_american": 297,
+   "edge_of_rho_over_naive_pct": -3.5,
+   "src": "S4_0022600265",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.247,
+    0.2571
+   ],
+   "american_at_range": [
+    305,
+    289
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-18",
+   "matchup": "BOS@DEN",
+   "away": "BOS",
+   "home": "DEN",
+   "leg1_p_home": 0.383,
+   "leg2_p_over": 0.438,
+   "naive_product": 0.1678,
+   "naive_american": 496,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.1586,
+   "rho_american": 531,
+   "edge_of_rho_over_naive_pct": -5.46,
+   "src": "S4_0022600266",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.1539,
+    0.164
+   ],
+   "american_at_range": [
+    550,
+    510
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-18",
+   "matchup": "GSW@DAL",
+   "away": "GSW",
+   "home": "DAL",
+   "leg1_p_home": 0.457,
+   "leg2_p_over": 0.45,
+   "naive_product": 0.2056,
+   "naive_american": 386,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.1962,
+   "rho_american": 410,
+   "edge_of_rho_over_naive_pct": -4.58,
+   "src": "S4_0022600267",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.1914,
+    0.2018
+   ],
+   "american_at_range": [
+    423,
+    396
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-18",
+   "matchup": "UTA@LAL",
+   "away": "UTA",
+   "home": "LAL",
+   "leg1_p_home": 0.868,
+   "leg2_p_over": 0.624,
+   "naive_product": 0.5416,
+   "naive_american": -118,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.5354,
+   "rho_american": -115,
+   "edge_of_rho_over_naive_pct": -1.15,
+   "src": "S4_0022600268",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.5322,
+    0.5391
+   ],
+   "american_at_range": [
+    -114,
+    -117
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-18",
+   "matchup": "PHX@SAC",
+   "away": "PHX",
+   "home": "SAC",
+   "leg1_p_home": 0.43,
+   "leg2_p_over": 0.713,
+   "naive_product": 0.3066,
+   "naive_american": 226,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.2981,
+   "rho_american": 235,
+   "edge_of_rho_over_naive_pct": -2.78,
+   "src": "S4_0022600269",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.2937,
+    0.3031
+   ],
+   "american_at_range": [
+    240,
+    230
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-19",
+   "matchup": "GSW@MEM",
+   "away": "GSW",
+   "home": "MEM",
+   "leg1_p_home": 0.547,
+   "leg2_p_over": 0.468,
+   "naive_product": 0.256,
+   "naive_american": 291,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.2466,
+   "rho_american": 306,
+   "edge_of_rho_over_naive_pct": -3.69,
+   "src": "S4_0022600270",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.2417,
+    0.2521
+   ],
+   "american_at_range": [
+    314,
+    297
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-19",
+   "matchup": "POR@MIL",
+   "away": "POR",
+   "home": "MIL",
+   "leg1_p_home": 0.123,
+   "leg2_p_over": 0.645,
+   "naive_product": 0.0793,
+   "naive_american": 1160,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.0734,
+   "rho_american": 1263,
+   "edge_of_rho_over_naive_pct": -7.53,
+   "src": "S4_0022600271",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.0703,
+    0.0769
+   ],
+   "american_at_range": [
+    1323,
+    1201
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-19",
+   "matchup": "NYK@MIN",
+   "away": "NYK",
+   "home": "MIN",
+   "leg1_p_home": 0.696,
+   "leg2_p_over": 0.313,
+   "naive_product": 0.2178,
+   "naive_american": 359,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.2097,
+   "rho_american": 377,
+   "edge_of_rho_over_naive_pct": -3.72,
+   "src": "S4_0022600272",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.2056,
+    0.2145
+   ],
+   "american_at_range": [
+    386,
+    366
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
+  },
+  {
+   "date": "2026-11-19",
+   "matchup": "LAC@SAS",
+   "away": "LAC",
+   "home": "SAS",
+   "leg1_p_home": 0.833,
+   "leg2_p_over": 0.483,
+   "naive_product": 0.4023,
+   "naive_american": 149,
+   "rho": -0.038,
+   "rho_status": "MEASURED on 196 official finals",
+   "rho_n_games": 196,
+   "rho_ci95": [
+    -0.1804,
+    0.096
+   ],
+   "rho_source": "data/derived/parlay_rho.json",
+   "rho_adjusted": 0.3953,
+   "rho_american": 153,
+   "edge_of_rho_over_naive_pct": -1.76,
+   "src": "S4_0022600273",
+   "rho_jackknife_range": [
+    -0.0576,
+    -0.0156
+   ],
+   "rho_adjusted_at_range": [
+    0.3916,
+    0.3994
+   ],
+   "american_at_range": [
+    155,
+    150
+   ],
+   "price_spread_note": "the whole quote, at the two ends of the measured rho's leave-one-game-out range - how much of this price is correlation and how much is the legs",
+   "method": "Parlay price = naive product vs rho-adjusted, at the measured rho. Both printed, never withheld."
   }
  ]
 }

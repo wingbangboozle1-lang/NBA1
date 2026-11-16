@@ -1,8 +1,8 @@
 {
  "_meta": {
-  "title": "Horizon picks — 2026-11-16 through 2026-11-18",
+  "title": "Horizon picks — 2026-11-16 through 2026-11-19",
   "generated_by": "scripts/generate_picks.py (rolling window)",
-  "generated_utc": "2026-11-15T23:55Z",
+  "generated_utc": "2026-11-16T18:26Z",
   "window_rule": "the horizon is whatever data/derived/horizon_lines.json holds; that file is produced by the rolling-slate originator from the newest official schedule capture (today + up to 3 days ahead)",
   "lines_source": "data/derived/horizon_lines.json (scripts/originate_horizon.py)",
   "pick_gate": {
@@ -11,7 +11,7 @@
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/originated_lines.json"
   },
   "validation_state": "NO strategy has passed the validation gates (Build A 0/8, Build B 0/10). Every pick is MODEL OUTPUT — UNVALIDATED, unfunded, zero stake. Market-comparison gates G4/G5 and prop-variance gate G-PROP remain BLOCKED (no odds feed).",
-  "as_of": "ratings re-cut from the official team-stat captures retrieved 2026-11-15T23:38Z..23:52Z; schedule captured 2026-11-15; latest injury report 2026-11-15_0615PM (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)."
+  "as_of": "ratings re-cut from the official team-stat captures retrieved 2026-11-15T23:38Z..23:52Z; schedule captured 2026-11-15; latest injury report 2026-11-15_0900PM_dfef26dc (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)."
  },
  "singles": [
   {
@@ -32,7 +32,7 @@
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-16",
@@ -52,7 +52,7 @@
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-16",
@@ -72,7 +72,7 @@
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-16",
@@ -92,7 +92,7 @@
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-16",
@@ -112,7 +112,7 @@
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-16",
@@ -132,7 +132,7 @@
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-16",
@@ -152,7 +152,7 @@
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-16",
@@ -172,7 +172,7 @@
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-17",
@@ -192,7 +192,7 @@
     "https://www.nba.com/games?date=2026-11-17",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-17",
@@ -212,7 +212,7 @@
     "https://www.nba.com/games?date=2026-11-17",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-17",
@@ -232,7 +232,7 @@
     "https://www.nba.com/games?date=2026-11-17",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-17",
@@ -252,7 +252,7 @@
     "https://www.nba.com/games?date=2026-11-17",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-17",
@@ -272,7 +272,7 @@
     "https://www.nba.com/games?date=2026-11-17",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
@@ -292,7 +292,7 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
@@ -312,7 +312,7 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
@@ -332,7 +332,7 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
@@ -352,7 +352,7 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
@@ -372,7 +372,7 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
@@ -392,7 +392,7 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
@@ -412,7 +412,7 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
@@ -432,27 +432,7 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
-  },
-  {
-   "date": "2026-11-18",
-   "game_id": "0022600267",
-   "matchup": "GSW@DAL",
-   "line_spread_home": -4.1,
-   "line_total": 228.3,
-   "model_home_win_prob": 0.4008,
-   "pick": {
-    "pick_side": "AWAY",
-    "pick_line": "GSW -4.1",
-    "gate": "G-CFG pass (|spread| 4.1 >= 3.0)",
-    "pick_prob": 0.5992
-   },
-   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
-   "sources": [
-    "https://www.nba.com/games?date=2026-11-18",
-    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
-   ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
@@ -472,7 +452,27 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600267",
+   "matchup": "GSW@DAL",
+   "line_spread_home": -4.1,
+   "line_total": 228.3,
+   "model_home_win_prob": 0.4008,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "GSW -4.1",
+    "gate": "G-CFG pass (|spread| 4.1 >= 3.0)",
+    "pick_prob": 0.5992
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-18",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
@@ -492,7 +492,7 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
@@ -512,7 +512,87 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600270",
+   "matchup": "GSW@MEM",
+   "line_spread_home": 4.5,
+   "line_total": 231.7,
+   "model_home_win_prob": 0.6086,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "MEM -4.5",
+    "gate": "G-CFG pass (|spread| 4.5 >= 3.0)",
+    "pick_prob": 0.6086
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600271",
+   "matchup": "POR@MIL",
+   "line_spread_home": -22.5,
+   "line_total": 232.5,
+   "model_home_win_prob": 0.084,
+   "pick": {
+    "pick_side": "AWAY",
+    "pick_line": "POR -22.5",
+    "gate": "G-CFG pass (|spread| 22.5 >= 3.0)",
+    "pick_prob": 0.916
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600272",
+   "matchup": "NYK@MIN",
+   "line_spread_home": 5.4,
+   "line_total": 210.8,
+   "model_home_win_prob": 0.6296,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "MIN -5.4",
+    "gate": "G-CFG pass (|spread| 5.4 >= 3.0)",
+    "pick_prob": 0.6296
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600273",
+   "matchup": "LAC@SAS",
+   "line_spread_home": 18.1,
+   "line_total": 225.9,
+   "model_home_win_prob": 0.8663,
+   "pick": {
+    "pick_side": "HOME",
+    "pick_line": "SAS -18.1",
+    "gate": "G-CFG pass (|spread| 18.1 >= 3.0)",
+    "pick_prob": 0.8663
+   },
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   }
  ],
  "parlays": [
@@ -522,8 +602,12 @@
    "p1": 0.813,
    "leg2": "MEM@WAS — MEM -14.2",
    "p2": 0.808,
+   "naive_product": 0.6567,
+   "fair_american_naive": -191,
    "joint_lb": 0.621,
    "joint_ub": 0.808,
+   "independence_price": 0.6567,
+   "independence_note": "no rho is measured between two different games - the cross-game correlation of official finals margins is published on the correlations page - so the naive product IS the price at independence and the band underneath it bounds every other answer",
    "rho_lb": -0.234,
    "rho_ub": 0.984,
    "fair_odds_lb": 1.24,
@@ -534,7 +618,7 @@
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/games?date=2026-11-16"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-16",
@@ -542,8 +626,12 @@
    "p1": 0.813,
    "leg2": "CHI@CLE — CLE -13.2",
    "p2": 0.791,
+   "naive_product": 0.6428,
+   "fair_american_naive": -180,
    "joint_lb": 0.604,
    "joint_ub": 0.791,
+   "independence_price": 0.6428,
+   "independence_note": "no rho is measured between two different games - the cross-game correlation of official finals margins is published on the correlations page - so the naive product IS the price at independence and the band underneath it bounds every other answer",
    "rho_lb": -0.247,
    "rho_ub": 0.932,
    "fair_odds_lb": 1.26,
@@ -554,7 +642,7 @@
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/games?date=2026-11-16"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-16",
@@ -562,8 +650,12 @@
    "p1": 0.813,
    "leg2": "GSW@NOP — GSW -13.2",
    "p2": 0.791,
+   "naive_product": 0.6428,
+   "fair_american_naive": -180,
    "joint_lb": 0.604,
    "joint_ub": 0.791,
+   "independence_price": 0.6428,
+   "independence_note": "no rho is measured between two different games - the cross-game correlation of official finals margins is published on the correlations page - so the naive product IS the price at independence and the band underneath it bounds every other answer",
    "rho_lb": -0.247,
    "rho_ub": 0.932,
    "fair_odds_lb": 1.26,
@@ -574,7 +666,7 @@
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/games?date=2026-11-16"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-17",
@@ -582,8 +674,12 @@
    "p1": 0.874,
    "leg2": "DET@SAS — SAS -7.8",
    "p2": 0.684,
+   "naive_product": 0.5976,
+   "fair_american_naive": -149,
    "joint_lb": 0.558,
    "joint_ub": 0.684,
+   "independence_price": 0.5976,
+   "independence_note": "no rho is measured between two different games - the cross-game correlation of official finals margins is published on the correlations page - so the naive product IS the price at independence and the band underneath it bounds every other answer",
    "rho_lb": -0.258,
    "rho_ub": 0.558,
    "fair_odds_lb": 1.46,
@@ -594,7 +690,7 @@
     "https://www.nba.com/games?date=2026-11-17",
     "https://www.nba.com/games?date=2026-11-17"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-17",
@@ -602,8 +698,12 @@
    "p1": 0.874,
    "leg2": "UTA@LAC — LAC -6.5",
    "p2": 0.655,
+   "naive_product": 0.5724,
+   "fair_american_naive": -134,
    "joint_lb": 0.529,
    "joint_ub": 0.655,
+   "independence_price": 0.5724,
+   "independence_note": "no rho is measured between two different games - the cross-game correlation of official finals margins is published on the correlations page - so the naive product IS the price at independence and the band underneath it bounds every other answer",
    "rho_lb": -0.276,
    "rho_ub": 0.523,
    "fair_odds_lb": 1.53,
@@ -614,7 +714,7 @@
     "https://www.nba.com/games?date=2026-11-17",
     "https://www.nba.com/games?date=2026-11-17"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-17",
@@ -622,8 +722,12 @@
    "p1": 0.874,
    "leg2": "POR@MIN — MIN -4.3",
    "p2": 0.604,
+   "naive_product": 0.5279,
+   "fair_american_naive": -112,
    "joint_lb": 0.478,
    "joint_ub": 0.604,
+   "independence_price": 0.5279,
+   "independence_note": "no rho is measured between two different games - the cross-game correlation of official finals margins is published on the correlations page - so the naive product IS the price at independence and the band underneath it bounds every other answer",
    "rho_lb": -0.307,
    "rho_ub": 0.469,
    "fair_odds_lb": 1.66,
@@ -634,7 +738,7 @@
     "https://www.nba.com/games?date=2026-11-17",
     "https://www.nba.com/games?date=2026-11-17"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
@@ -642,8 +746,12 @@
    "p1": 0.889,
    "leg2": "DET@NOP — DET -13.8",
    "p2": 0.801,
+   "naive_product": 0.7119,
+   "fair_american_naive": -247,
    "joint_lb": 0.69,
    "joint_ub": 0.801,
+   "independence_price": 0.7119,
+   "independence_note": "no rho is measured between two different games - the cross-game correlation of official finals margins is published on the correlations page - so the naive product IS the price at independence and the band underneath it bounds every other answer",
    "rho_lb": -0.176,
    "rho_ub": 0.711,
    "fair_odds_lb": 1.25,
@@ -654,7 +762,7 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/games?date=2026-11-18"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
@@ -662,8 +770,12 @@
    "p1": 0.889,
    "leg2": "MIL@MIA — MIA -13.5",
    "p2": 0.796,
+   "naive_product": 0.7072,
+   "fair_american_naive": -242,
    "joint_lb": 0.684,
    "joint_ub": 0.796,
+   "independence_price": 0.7072,
+   "independence_note": "no rho is measured between two different games - the cross-game correlation of official finals margins is published on the correlations page - so the naive product IS the price at independence and the band underneath it bounds every other answer",
    "rho_lb": -0.179,
    "rho_ub": 0.699,
    "fair_odds_lb": 1.26,
@@ -674,7 +786,7 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/games?date=2026-11-18"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
@@ -682,8 +794,12 @@
    "p1": 0.889,
    "leg2": "HOU@IND — HOU -10.9",
    "p2": 0.748,
+   "naive_product": 0.6646,
+   "fair_american_naive": -198,
    "joint_lb": 0.636,
    "joint_ub": 0.748,
+   "independence_price": 0.6646,
+   "independence_note": "no rho is measured between two different games - the cross-game correlation of official finals margins is published on the correlations page - so the naive product IS the price at independence and the band underneath it bounds every other answer",
    "rho_lb": -0.206,
    "rho_ub": 0.61,
    "fair_odds_lb": 1.34,
@@ -694,27 +810,108 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/games?date=2026-11-18"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
+  },
+  {
+   "date": "2026-11-19",
+   "leg1": "POR@MIL — POR -22.5",
+   "p1": 0.916,
+   "leg2": "LAC@SAS — SAS -18.1",
+   "p2": 0.866,
+   "naive_product": 0.7935,
+   "fair_american_naive": -384,
+   "joint_lb": 0.782,
+   "joint_ub": 0.866,
+   "independence_price": 0.7935,
+   "independence_note": "no rho is measured between two different games - the cross-game correlation of official finals margins is published on the correlations page - so the naive product IS the price at independence and the band underneath it bounds every other answer",
+   "rho_lb": -0.119,
+   "rho_ub": 0.771,
+   "fair_odds_lb": 1.15,
+   "fair_odds_ub": 1.28,
+   "method": "legs from different games; joint published as the Fréchet–Hoeffding band, never a single number",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/games?date=2026-11-19"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
+  },
+  {
+   "date": "2026-11-19",
+   "leg1": "POR@MIL — POR -22.5",
+   "p1": 0.916,
+   "leg2": "NYK@MIN — MIN -5.4",
+   "p2": 0.63,
+   "naive_product": 0.5767,
+   "fair_american_naive": -136,
+   "joint_lb": 0.546,
+   "joint_ub": 0.63,
+   "independence_price": 0.5767,
+   "independence_note": "no rho is measured between two different games - the cross-game correlation of official finals margins is published on the correlations page - so the naive product IS the price at independence and the band underneath it bounds every other answer",
+   "rho_lb": -0.232,
+   "rho_ub": 0.395,
+   "fair_odds_lb": 1.59,
+   "fair_odds_ub": 1.83,
+   "method": "legs from different games; joint published as the Fréchet–Hoeffding band, never a single number",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/games?date=2026-11-19"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
+  },
+  {
+   "date": "2026-11-19",
+   "leg1": "POR@MIL — POR -22.5",
+   "p1": 0.916,
+   "leg2": "GSW@MEM — MEM -4.5",
+   "p2": 0.609,
+   "naive_product": 0.5575,
+   "fair_american_naive": -126,
+   "joint_lb": 0.525,
+   "joint_ub": 0.609,
+   "independence_price": 0.5575,
+   "independence_note": "no rho is measured between two different games - the cross-game correlation of official finals margins is published on the correlations page - so the naive product IS the price at independence and the band underneath it bounds every other answer",
+   "rho_lb": -0.243,
+   "rho_ub": 0.378,
+   "fair_odds_lb": 1.64,
+   "fair_odds_ub": 1.91,
+   "method": "legs from different games; joint published as the Fréchet–Hoeffding band, never a single number",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/games?date=2026-11-19"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   }
  ],
  "sgp_candidates": [
   {
    "date": "2026-11-16",
    "game": "ORL@BOS",
-   "kind": "two_opponents",
-   "rho": 0.05,
-   "leg1": "Jayson Tatum (BOS) OVER 26.5",
-   "leg2": "Paolo Banchero (ORL) OVER 24.5",
-   "leg1_detail": {
-    "player": "Jayson Tatum",
-    "team": "BOS",
-    "line": 26.5,
-    "season_avg": 26.3,
-    "sigma": 5.898,
-    "prob_over": 0.4865,
-    "z": 0.033912068520305615
+   "kind": "two_teammates",
+   "rho": 0.4213,
+   "rho_key": "same_team_players",
+   "rho_n": 6,
+   "rho_ci95": [
+    0.3923,
+    0.4504
+   ],
+   "rho_p_value": 0.0,
+   "rho_clusters": 6,
+   "rho_clears_sample_floor": false,
+   "rho_source_file": "data/derived/parlay_rho.json",
+   "naive_product": 0.25,
+   "fair_american_naive": 300,
+   "fair_american_rho": 213,
+   "price_range_over_rho_band": {
+    "rho_low": 0.4085,
+    "rho_high": 0.4398,
+    "note": "price recomputed at the ends of the measured rho's own dispersion (leave-one-cluster-out)"
    },
-   "leg2_detail": {
+   "leg1": "Paolo Banchero (ORL) OVER 24.5",
+   "leg2": "Franz Wagner (ORL) OVER 23.5",
+   "leg1_detail": {
     "player": "Paolo Banchero",
     "team": "ORL",
     "line": 24.5,
@@ -723,9 +920,18 @@
     "prob_over": 0.5,
     "z": 0.0
    },
-   "joint_prob_rho": 0.2512,
-   "joint_prob_independent": 0.2432,
-   "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+   "leg2_detail": {
+    "player": "Franz Wagner",
+    "team": "ORL",
+    "line": 23.5,
+    "season_avg": 23.5,
+    "sigma": 5.575,
+    "prob_over": 0.5,
+    "z": 0.0
+   },
+   "joint_prob_rho": 0.3192,
+   "joint_prob_independent": 0.25,
+   "rho_status": "MEASURED - BELOW THE SAMPLE FLOOR: 6 game-days of official gamebooks in the repository against a floor of 30. The point estimate is published and used to price; the interval is printed beside it so the reader can see it does not exclude 0.",
    "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
    "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
    "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
@@ -733,18 +939,36 @@
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-16",
-   "game": "MEM@WAS",
-   "kind": "two_opponents",
-   "rho": 0.05,
-   "leg1": "Ty Jerome (MEM) OVER 26.5",
-   "leg2": "Anthony Davis (WAS) OVER 25.5",
+   "game": "PHX@DEN",
+   "kind": "two_teammates",
+   "rho": 0.4213,
+   "rho_key": "same_team_players",
+   "rho_n": 6,
+   "rho_ci95": [
+    0.3923,
+    0.4504
+   ],
+   "rho_p_value": 0.0,
+   "rho_clusters": 6,
+   "rho_clears_sample_floor": false,
+   "rho_source_file": "data/derived/parlay_rho.json",
+   "naive_product": 0.2398,
+   "fair_american_naive": 317,
+   "fair_american_rho": 224,
+   "price_range_over_rho_band": {
+    "rho_low": 0.4085,
+    "rho_high": 0.4398,
+    "note": "price recomputed at the ends of the measured rho's own dispersion (leave-one-cluster-out)"
+   },
+   "leg1": "Jamal Murray (DEN) OVER 26.5",
+   "leg2": "Nikola Jokić (DEN) OVER 23.5",
    "leg1_detail": {
-    "player": "Ty Jerome",
-    "team": "MEM",
+    "player": "Jamal Murray",
+    "team": "DEN",
     "line": 26.5,
     "season_avg": 26.2,
     "sigma": 5.886,
@@ -752,17 +976,17 @@
     "z": 0.05096508685855861
    },
    "leg2_detail": {
-    "player": "Anthony Davis",
-    "team": "WAS",
-    "line": 25.5,
-    "season_avg": 25.6,
-    "sigma": 5.819,
-    "prob_over": 0.5069,
-    "z": -0.01718629163135013
+    "player": "Nikola Jokić",
+    "team": "DEN",
+    "line": 23.5,
+    "season_avg": 23.5,
+    "sigma": 5.575,
+    "prob_over": 0.5,
+    "z": 0.0
    },
-   "joint_prob_rho": 0.2511,
-   "joint_prob_independent": 0.2431,
-   "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+   "joint_prob_rho": 0.309,
+   "joint_prob_independent": 0.2398,
+   "rho_status": "MEASURED - BELOW THE SAMPLE FLOOR: 6 game-days of official gamebooks in the repository against a floor of 30. The point estimate is published and used to price; the interval is printed beside it so the reader can see it does not exclude 0.",
    "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
    "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
    "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
@@ -770,13 +994,86 @@
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
+  },
+  {
+   "date": "2026-11-17",
+   "game": "CHA@LAL",
+   "kind": "two_teammates",
+   "rho": 0.4213,
+   "rho_key": "same_team_players",
+   "rho_n": 6,
+   "rho_ci95": [
+    0.3923,
+    0.4504
+   ],
+   "rho_p_value": 0.0,
+   "rho_clusters": 6,
+   "rho_clears_sample_floor": false,
+   "rho_source_file": "data/derived/parlay_rho.json",
+   "naive_product": 0.2598,
+   "fair_american_naive": 285,
+   "fair_american_rho": 204,
+   "price_range_over_rho_band": {
+    "rho_low": 0.4085,
+    "rho_high": 0.4398,
+    "note": "price recomputed at the ends of the measured rho's own dispersion (leave-one-cluster-out)"
+   },
+   "leg1": "Luka Dončić (LAL) OVER 38.5",
+   "leg2": "Austin Reaves (LAL) OVER 24.5",
+   "leg1_detail": {
+    "player": "Luka Dončić",
+    "team": "LAL",
+    "line": 38.5,
+    "season_avg": 38.6,
+    "sigma": 7.145,
+    "prob_over": 0.5056,
+    "z": -0.013996147390862166
+   },
+   "leg2_detail": {
+    "player": "Austin Reaves",
+    "team": "LAL",
+    "line": 24.5,
+    "season_avg": 24.7,
+    "sigma": 5.715,
+    "prob_over": 0.514,
+    "z": -0.03499320159067526
+   },
+   "joint_prob_rho": 0.329,
+   "joint_prob_independent": 0.2598,
+   "rho_status": "MEASURED - BELOW THE SAMPLE FLOOR: 6 game-days of official gamebooks in the repository against a floor of 30. The point estimate is published and used to price; the interval is printed beside it so the reader can see it does not exclude 0.",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-17",
    "game": "NYK@TOR",
    "kind": "two_opponents",
-   "rho": 0.05,
+   "rho": 0.12,
+   "rho_key": "cross_team_points",
+   "rho_n": 196,
+   "rho_ci95": [
+    -0.0253,
+    0.2661
+   ],
+   "rho_p_value": 0.093909,
+   "rho_clusters": 196,
+   "rho_clears_sample_floor": true,
+   "rho_source_file": "data/derived/parlay_rho.json",
+   "naive_product": 0.233,
+   "fair_american_naive": 329,
+   "fair_american_rho": 297,
+   "price_range_over_rho_band": {
+    "rho_low": 0.0977,
+    "rho_high": 0.1418,
+    "note": "price recomputed at the ends of the measured rho's own dispersion (leave-one-cluster-out)"
+   },
    "leg1": "Jalen Brunson (NYK) OVER 26.5",
    "leg2": "Scottie Barnes (TOR) OVER 23.5",
    "leg1_detail": {
@@ -797,9 +1094,9 @@
     "prob_over": 0.5,
     "z": 0.0
    },
-   "joint_prob_rho": 0.2409,
+   "joint_prob_rho": 0.2521,
    "joint_prob_independent": 0.233,
-   "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+   "rho_status": "MEASURED on 196 official finals",
    "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
    "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
    "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
@@ -807,73 +1104,54 @@
     "https://www.nba.com/games?date=2026-11-17",
     "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
-  },
-  {
-   "date": "2026-11-17",
-   "game": "DET@SAS",
-   "kind": "two_opponents",
-   "rho": 0.05,
-   "leg1": "Cade Cunningham (DET) OVER 25.5",
-   "leg2": "Victor Wembanyama (SAS) OVER 30.5",
-   "leg1_detail": {
-    "player": "Cade Cunningham",
-    "team": "DET",
-    "line": 25.5,
-    "season_avg": 25.0,
-    "sigma": 5.75,
-    "prob_over": 0.4654,
-    "z": 0.08695652173913043
-   },
-   "leg2_detail": {
-    "player": "Victor Wembanyama",
-    "team": "SAS",
-    "line": 30.5,
-    "season_avg": 30.3,
-    "sigma": 6.33,
-    "prob_over": 0.4874,
-    "z": 0.031594453022293786
-   },
-   "joint_prob_rho": 0.2347,
-   "joint_prob_independent": 0.2268,
-   "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
-   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
-   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
-   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
-   "sources": [
-    "https://www.nba.com/games?date=2026-11-17",
-    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
-   ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
-   "game": "GSW@DAL",
-   "kind": "two_opponents",
-   "rho": 0.05,
-   "leg1": "Cooper Flagg (DAL) OVER 24.5",
-   "leg2": "Stephen Curry (GSW) OVER 27.5",
+   "game": "UTA@LAL",
+   "kind": "two_teammates",
+   "rho": 0.4213,
+   "rho_key": "same_team_players",
+   "rho_n": 6,
+   "rho_ci95": [
+    0.3923,
+    0.4504
+   ],
+   "rho_p_value": 0.0,
+   "rho_clusters": 6,
+   "rho_clears_sample_floor": false,
+   "rho_source_file": "data/derived/parlay_rho.json",
+   "naive_product": 0.2598,
+   "fair_american_naive": 285,
+   "fair_american_rho": 204,
+   "price_range_over_rho_band": {
+    "rho_low": 0.4085,
+    "rho_high": 0.4398,
+    "note": "price recomputed at the ends of the measured rho's own dispersion (leave-one-cluster-out)"
+   },
+   "leg1": "Luka Dončić (LAL) OVER 38.5",
+   "leg2": "Austin Reaves (LAL) OVER 24.5",
    "leg1_detail": {
-    "player": "Cooper Flagg",
-    "team": "DAL",
-    "line": 24.5,
-    "season_avg": 24.6,
-    "sigma": 5.704,
-    "prob_over": 0.507,
-    "z": -0.01753212692490268
+    "player": "Luka Dončić",
+    "team": "LAL",
+    "line": 38.5,
+    "season_avg": 38.6,
+    "sigma": 7.145,
+    "prob_over": 0.5056,
+    "z": -0.013996147390862166
    },
    "leg2_detail": {
-    "player": "Stephen Curry",
-    "team": "GSW",
-    "line": 27.5,
-    "season_avg": 27.8,
-    "sigma": 6.063,
-    "prob_over": 0.5197,
-    "z": -0.049476733161579356
+    "player": "Austin Reaves",
+    "team": "LAL",
+    "line": 24.5,
+    "season_avg": 24.7,
+    "sigma": 5.715,
+    "prob_over": 0.514,
+    "z": -0.03499320159067526
    },
-   "joint_prob_rho": 0.2715,
-   "joint_prob_independent": 0.2635,
-   "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+   "joint_prob_rho": 0.329,
+   "joint_prob_independent": 0.2598,
+   "rho_status": "MEASURED - BELOW THE SAMPLE FLOOR: 6 game-days of official gamebooks in the repository against a floor of 30. The point estimate is published and used to price; the interval is printed beside it so the reader can see it does not exclude 0.",
    "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
    "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
    "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
@@ -881,15 +1159,33 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   },
   {
    "date": "2026-11-18",
    "game": "PHI@ORL",
-   "kind": "two_opponents",
-   "rho": 0.05,
+   "kind": "two_teammates",
+   "rho": 0.4213,
+   "rho_key": "same_team_players",
+   "rho_n": 6,
+   "rho_ci95": [
+    0.3923,
+    0.4504
+   ],
+   "rho_p_value": 0.0,
+   "rho_clusters": 6,
+   "rho_clears_sample_floor": false,
+   "rho_source_file": "data/derived/parlay_rho.json",
+   "naive_product": 0.25,
+   "fair_american_naive": 300,
+   "fair_american_rho": 213,
+   "price_range_over_rho_band": {
+    "rho_low": 0.4085,
+    "rho_high": 0.4398,
+    "note": "price recomputed at the ends of the measured rho's own dispersion (leave-one-cluster-out)"
+   },
    "leg1": "Paolo Banchero (ORL) OVER 24.5",
-   "leg2": "Tyrese Maxey (PHI) OVER 26.5",
+   "leg2": "Franz Wagner (ORL) OVER 23.5",
    "leg1_detail": {
     "player": "Paolo Banchero",
     "team": "ORL",
@@ -900,17 +1196,17 @@
     "z": 0.0
    },
    "leg2_detail": {
-    "player": "Tyrese Maxey",
-    "team": "PHI",
-    "line": 26.5,
-    "season_avg": 26.7,
-    "sigma": 5.942,
-    "prob_over": 0.5134,
-    "z": -0.03365708694418178
+    "player": "Franz Wagner",
+    "team": "ORL",
+    "line": 23.5,
+    "season_avg": 23.5,
+    "sigma": 5.575,
+    "prob_over": 0.5,
+    "z": 0.0
    },
-   "joint_prob_rho": 0.2647,
-   "joint_prob_independent": 0.2567,
-   "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+   "joint_prob_rho": 0.3192,
+   "joint_prob_independent": 0.25,
+   "rho_status": "MEASURED - BELOW THE SAMPLE FLOOR: 6 game-days of official gamebooks in the repository against a floor of 30. The point estimate is published and used to price; the interval is printed beside it so the reader can see it does not exclude 0.",
    "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
    "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
    "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
@@ -918,8 +1214,118 @@
     "https://www.nba.com/games?date=2026-11-18",
     "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
    ],
-   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0615PM edition (revision 11/15/2026 06:15 PM, retrieved 2026-11-15T23:38Z..23:52Z)"
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
+  },
+  {
+   "date": "2026-11-19",
+   "game": "GSW@MEM",
+   "kind": "two_opponents",
+   "rho": 0.12,
+   "rho_key": "cross_team_points",
+   "rho_n": 196,
+   "rho_ci95": [
+    -0.0253,
+    0.2661
+   ],
+   "rho_p_value": 0.093909,
+   "rho_clusters": 196,
+   "rho_clears_sample_floor": true,
+   "rho_source_file": "data/derived/parlay_rho.json",
+   "naive_product": 0.2493,
+   "fair_american_naive": 301,
+   "fair_american_rho": 273,
+   "price_range_over_rho_band": {
+    "rho_low": 0.0977,
+    "rho_high": 0.1418,
+    "note": "price recomputed at the ends of the measured rho's own dispersion (leave-one-cluster-out)"
+   },
+   "leg1": "Stephen Curry (GSW) OVER 27.5",
+   "leg2": "Ty Jerome (MEM) OVER 26.5",
+   "leg1_detail": {
+    "player": "Stephen Curry",
+    "team": "GSW",
+    "line": 27.5,
+    "season_avg": 27.8,
+    "sigma": 6.063,
+    "prob_over": 0.5197,
+    "z": -0.049476733161579356
+   },
+   "leg2_detail": {
+    "player": "Ty Jerome",
+    "team": "MEM",
+    "line": 26.5,
+    "season_avg": 26.2,
+    "sigma": 5.886,
+    "prob_over": 0.4797,
+    "z": 0.05096508685855861
+   },
+   "joint_prob_rho": 0.2684,
+   "joint_prob_independent": 0.2493,
+   "rho_status": "MEASURED on 196 official finals",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
+  },
+  {
+   "date": "2026-11-19",
+   "game": "NYK@MIN",
+   "kind": "two_opponents",
+   "rho": 0.12,
+   "rho_key": "cross_team_points",
+   "rho_n": 196,
+   "rho_ci95": [
+    -0.0253,
+    0.2661
+   ],
+   "rho_p_value": 0.093909,
+   "rho_clusters": 196,
+   "rho_clears_sample_floor": true,
+   "rho_source_file": "data/derived/parlay_rho.json",
+   "naive_product": 0.2274,
+   "fair_american_naive": 340,
+   "fair_american_rho": 306,
+   "price_range_over_rho_band": {
+    "rho_low": 0.0977,
+    "rho_high": 0.1418,
+    "note": "price recomputed at the ends of the measured rho's own dispersion (leave-one-cluster-out)"
+   },
+   "leg1": "Anthony Edwards (MIN) OVER 33.5",
+   "leg2": "Jalen Brunson (NYK) OVER 26.5",
+   "leg1_detail": {
+    "player": "Anthony Edwards",
+    "team": "MIN",
+    "line": 33.5,
+    "season_avg": 33.3,
+    "sigma": 6.636,
+    "prob_over": 0.488,
+    "z": 0.030137695357103988
+   },
+   "leg2_detail": {
+    "player": "Jalen Brunson",
+    "team": "NYK",
+    "line": 26.5,
+    "season_avg": 26.0,
+    "sigma": 5.864,
+    "prob_over": 0.466,
+    "z": 0.08526788484268873
+   },
+   "joint_prob_rho": 0.2465,
+   "joint_prob_independent": 0.2274,
+   "rho_status": "MEASURED on 196 official finals",
+   "sigma_status": "sqrt(season_avg) * 1.15 overdispersion (documented assumption)",
+   "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
+   "status": "MODEL OUTPUT — UNVALIDATED (no strategy has passed the validation gates; zero stake)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-19",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "as_of": "team ratings re-cut by scripts/recut_model_inputs.py from the newest official team-stat captures (traditional, opponent, advanced), retrieved 2026-11-15T23:38Z..23:52Z; injury statuses from the official 2026-11-15_0900PM_dfef26dc edition (revision 11/15/2026 09:00 PM ET (printed on the PDF as 'Injury Report: 11/15/26 09:00 PM'), retrieved 2026-11-16T02:14Z..02:17Z)"
   }
  ],
- "n_model_picks": 24
+ "n_model_picks": 28
 }
