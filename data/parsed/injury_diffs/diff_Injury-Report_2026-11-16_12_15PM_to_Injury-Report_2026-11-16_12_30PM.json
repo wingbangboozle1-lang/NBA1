@@ -1,0 +1,60 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-16_12_15PM.pdf",
+  "label": "Injury-Report_2026-11-16_12_15PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_12_15PM.pdf",
+  "retrieved_at_utc": "2026-11-16T18:25:44Z",
+  "sha256": "29dd8e9a36ed86f699802035300f0b5e110cc6a6c8db7c622ea6239e901b6672",
+  "rows": 65
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-16_12_30PM.pdf",
+  "label": "Injury-Report_2026-11-16_12_30PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_12_30PM.pdf",
+  "retrieved_at_utc": "2026-11-16T18:25:44Z",
+  "sha256": "013cff0c2028c4e6a7774aa3b48cda90a3be5785a3b2a2bb3dd6e98073389234",
+  "rows": 65
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "Cleveland Cavaliers",
+   "player": "Tyson, Jaylon",
+   "before_status": "Questionable",
+   "after_status": "Doubtful",
+   "before_reason": "Injury/Illness - Right Ankle Injury Management",
+   "after_reason": "Injury/Illness - Right Ankle Injury Management",
+   "before_matchup": "CHI@CLE",
+   "after_matchup": "CHI@CLE"
+  },
+  {
+   "team": "Miami Heat",
+   "player": "Larsson, Pelle",
+   "before_status": "Questionable",
+   "after_status": "Doubtful",
+   "before_reason": "Injury/Illness - Illness",
+   "after_reason": "Injury/Illness - Illness",
+   "before_matchup": "HOU@MIA",
+   "after_matchup": "HOU@MIA"
+  }
+ ],
+ "listed_in_after_only": [
+  {
+   "team": "Miami Heat",
+   "player": "Jovic, Nikola",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Illness",
+   "matchup": "HOU@MIA"
+  }
+ ],
+ "listed_in_before_only": [
+  {
+   "team": "New Orleans Pelicans",
+   "player": "Pierre Jr., Jaron",
+   "status": "Questionable",
+   "matchup": "GSW@NOP"
+  }
+ ],
+ "team_block_filing_changes": []
+}
