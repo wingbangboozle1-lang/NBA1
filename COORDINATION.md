@@ -5,6 +5,47 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/f03745ef-nba1` (opened 2026-11-16 02:25 UTC — 2026-11-16 integration + gap-closure cycle: stale-PR #117/#114 takeover, R21 per-player game logs from archived official box scores, luck noise-band refusal, 11/15 settlement completion at day end, legacy-surface fixes, delivery)
+
+Branch `arena/f03745ef-nba1`, based on `main` `f6b7676` (tip at claim time). The platform pins this
+session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single
+pre-named branch (deviation logged, as earlier sessions logged it). Full claim and task table
+C01–C09 are in **§48** at the tail of this board.
+
+**Board read before claiming (2026-11-16 02:08–02:25 UTC):** §0 ground rules, §0b registry, and the
+§38–§45 delivery records. `main` is at `c432a2f` (PR #121 merged 02:1x UTC — `arena/8f64e94c-nba1`'s
+S41.5 Pages-deploy diagnosis + re-trigger). **Two PRs are open and stale past ground rule 5's
+60-minute threshold:** **[#117](https://github.com/wingbangboozle1-lang/NBA1/pull/117)**
+(`arena/abac961f-nba1`, RFG4 structured official parsers + digest-bound promotion + injury-PDF
+diffs — last commit 00:48:52Z, **~1h36m idle**, CONFLICTING) and
+**[#114](https://github.com/wingbangboozle1-lang/NBA1/pull/114)** (`arena/801ba27f-nba1`, 2026-11-15
+re-cut: official box-score model, partial 11/15 settlement, projection/bet split, requirements
+coverage — last commit 00:49:41Z, **~1h35m idle**, CONFLICTING). This session takes over both
+scopes (ground rule 5 handoffs in §48.1): their content is carried onto this branch, never pushed
+to their branches; their PRs are closed as superseded with credit after the carried work lands.
+**[#107](https://github.com/wingbangboozle1-lang/NBA1/pull/107)** (`arena/5ae0869e-nba1`, 3-file
+takeover duplicate, last commit 01:16:54Z) is assessed for unique content and dispositioned in
+§48.1. `arena/8f64e94c-nba1` merged PR #121 at 02:1x and its §44 I05 remains open — **the deploy
+workflows (`pages.yml`, `probe-official.yml`) are NOT claimed here**; if a deploy fix is needed at
+integration time and that session is stale, it is taken over under ground rule 5 and logged.
+
+**State at claim time (verified locally and via the GitHub API, not asserted):**
+- Pages API `status: errored`; deploy queue backed up with cancelled/queued runs (flag F97). The
+  PR #121 merge at 02:1x is the live re-trigger; confirmation is part of C09.
+- The 2026-11-15 slate is **still in progress** (02:08 UTC = 9:08 PM ET; late tips 10:00 PM ET end
+  ~05:30 UTC). `settlement_2026-11-15.json` (carried from PR #114) grades only the 2 verified
+  finals of that capture and leaves 7 PENDING — correct under the rule, but the day is not settled
+  yet. C06 finishes it at day end from verified finals only.
+- Requirements register (`data/content/requirements.json`): **13 done / 18 partial / 1 missing
+  (R21 per-player game logs) / 1 blocked (R16 market-anchored prior — no licensed price source)**.
+  R21 is the only `missing` row and is claimed as C04; R10/R13/R14/R15/R09 legacy-surface gaps are
+  claimed as C08; R01/R04 are closed by the PR #117 takeover (C02); R07 by the PR #114 takeover (C03).
+- PR #114's archive `data/raw/html/2026-11-15-801ba27f/boxscore__*.html.gz` contains the season's
+  official box scores (server-rendered official pages carrying every player's minutes, points,
+  rebounds, assists) — the source material for R21 without any new external dependency.
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/49f70042-nba1` (opened 2026-11-15 23:40 UTC — 11/15 settlement, pinned HCA, two-estimator disagreement headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16–11/19)
 
 Branch `arena/49f70042-nba1`, based on `main` `cd8fd27` (tip at claim time). The platform pins this
@@ -209,6 +250,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/8f64e94c-nba1` | `arena/8f64e94c-nba1` | 2026-11-15 23:39 UTC | Final integration seat (§44, claimed as §41 — renumbered at merge): stale-PR #106 takeover (live-site coherence), live official re-verification (2 verified finals + results feed + F92/F93), gate suite, PR → `main`, Pages confirmation. Platform pins this session to its branch (deviation logged, as above). |
 
 | `arena/49f70042-nba1` | `arena/49f70042-nba1` | 2026-11-15 23:40 UTC | 2026-11-15 late cycle: 11/15 settlement, pinned HCA, two-estimator disagreement headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16-11/19 (§41). Platform pins this session to its branch (deviation logged, as above). |
+| `arena/f03745ef-nba1` | `arena/f03745ef-nba1` | 2026-11-16 02:25 UTC | 2026-11-16 integration + gap-closure cycle (§48): takeover of stale PRs #117 (RFG4 parsers / injury-PDF diffs) and #114 (11/15 re-cut / results feed / projection-bet split), R21 per-player game logs from archived official box scores, luck noise-band refusal (R10), 11/15 settlement completion at day end, legacy-surface fixes (R09/R13/R14/R15), integration delivery. Platform pins this session to its branch (deviation logged, as above). |
 ---
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
@@ -4511,3 +4553,67 @@ caught it; that edit is in `pages.yml`, which this session does not own, so it i
 - **Also still open:** R-43-D (the §39.1 heading had been dropped from the board on `main`; this session
   restored it inside §43.2's merge — a scan of `main` for other records missing their heading is still
   worth doing), and R-43-B / R-43-C from §43.2.
+
+---
+
+## 48. Session `arena/f03745ef-nba1` — 2026-11-16 integration + gap-closure cycle: stale-PR #117/#114 takeover, R21 per-player game logs, luck noise-band refusal, 11/15 settlement completion, legacy-surface fixes, delivery (claimed 2026-11-16 02:25 UTC)
+
+**Renumber note:** this claim is written as **§48** (the next free number on `main`, which carries up
+to §45; the two open stale PRs carry a §46 each and PR #107 carries a §47). Per the board's established
+renumber convention, any number collision at merge is resolved by renumbering with content untouched.
+
+Branch `arena/f03745ef-nba1`, based on `main` `f6b7676` (tip at claim time; `main` moved to `c432a2f`
+= PR #121 while this claim was being written and is merged in immediately after the claim commit).
+The platform pins this session to that branch; the `session-<id>/<task>` naming in the brief is
+satisfied by this single pre-named branch (deviation logged, as §16/§17/§28/§31/§35/§39/§40/§41/§44/§45
+logged it).
+
+### 48.1 Handoff / takeover log (ground rule 5)
+
+- **2026-11-16 02:25 UTC — takeover of PR #117 (`arena/abac961f-nba1`, its §46 — written there as §42
+  then renumbered §46).** Last commit `f76989d` at 00:48:52Z — **~1h36m idle**, CONFLICTING with
+  `main`. Its §46 table rows A02–A05/A08 are delivered on its branch (parsers, digest-bound
+  promotion, injury-PDF diffs, results promotion) and its own verify report
+  (`verify/2026-11-15-abac961f/REPORT.md`) is complete; what is missing is the landing. Content is
+  carried onto this branch, never pushed to `arena/abac961f-nba1`; PR #117 is closed as superseded
+  after the carried work lands. Credit preserved in the delivery record below.
+- **2026-11-16 02:25 UTC — takeover of PR #114 (`arena/801ba27f-nba1`, its §46 completion record).**
+  Last commit `5c03172` at 00:49:41Z — **~1h35m idle**, CONFLICTING with `main`. Its H01–H06 work
+  (official box-score capture + model re-cut, season results feed, partial 11/15 settlement with
+  verified-finals-only grading, projection/bet surface split, requirements coverage, injury-PDF
+  archive) is carried onto this branch; PR #114 is closed as superseded with credit. Its
+  `settlement_2026-11-15.json` grades 2 verified finals and leaves 7 PENDING — **it is a partial
+  settlement and is not treated as the day's settlement**; C06 finishes the day from verified
+  finals only.
+- **2026-11-16 02:25 UTC — PR #107 (`arena/5ae0869e-nba1`, its §47) assessment.** Last commit
+  `01:16:54Z` (~1h08m at assessment, just past the threshold). Its 3-file diff (COORDINATION.md
+  +16, `scripts/build_dashboard.py` +8, `site/pages/injuries.html` +3) duplicates the PR #106
+  takeover that §44/PRs #108/#112 already landed. Disposition: unique lines assessed at merge; if
+  fully superseded the PR is closed as superseded with credit and nothing is discarded (the branch
+  stays readable).
+
+### 48.2 Task table
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| C01 | Board claim (banner + §0b row + this §48) pushed before any other edit | done (this commit) | `COORDINATION.md` (top banner + §0b row + §48 only) |
+| C02 | Take over PR #117 (RFG4): structured official parsers, digest-bound verified promotion, consecutive injury-PDF diffs, results promotion; run its full test suite on the merged tree; wire the scheduled job to the new parse/promote/diff engine | in progress | `engine/fetch_official.py`, `engine/parse_official.py`, `engine/promote_official.py`, `engine/injury_diff.py`, `scripts/test_parse_official.py`, `scripts/test_promote_official.py`, `scripts/test_injury_diff.py`, `scripts/test_gate_roundtrip.py`, `data/parsed/**`, `data/raw/injury_pdfs/**`, `data/raw/official_results_2026-11-15.json`, `.github/workflows/refresh-data.yml` |
+| C03 | Take over PR #114 (2026-11-15 re-cut): archived official box scores + season results feed + box-score model re-cut + projection/bet surface split + injury-PDF archive + ledger/prereg merges; regenerate its pages from its builders on the merged tree | in progress | `scripts/*_801ba27f.py`, `.github/workflows/capture-2026-11-15-801ba27f.yml`, `data/raw/html/2026-11-15-801ba27f/**`, `data/derived/**` (its outputs), `data/official/results_feed_2026_27.json`, `data/settlement/**`, `data/ledger/ledger.json`, `data/prereg/**`, `data/archive/**`, `data/injury_reports/**`, `site/pages/**` (its pages), `data/content/**` (append-only registers) |
+| C04 | **R21 (the only `missing` requirement): per-player game logs** — minutes, points, rebounds, assists and opponent for every player appearing on the newest official injury report, parsed from the archived official box scores; one row per player-game carrying its box-score source URL; blanks + flags where a value cannot be confirmed; published as a browsable page | in progress | `scripts/build_player_logs.py`, `data/derived/player_game_logs_2026_27.json`, `site/pages/player-logs.html` |
+| C05 | **R10 luck noise-band refusal**: publish per-team luck z-scores from measured results and wire a refusal rule into the strategy gates — a strategy leaning on a team outside the noise band is refused publication, not silently down-weighted | in progress | `scripts/luck_z.py`, `data/derived/luck_z_2026_27.json`, gate code in the carried strategy path |
+| C06 | **Finish the 2026-11-15 settlement at game-day end** from verified finals only (9/9 games Final, quarter scores sum-checked): extend the per-game results feed, settle the sealed ledger, keep the settlement stamp visible | in progress | `data/settlement/**`, `data/official/results_feed_2026_27.json`, `data/ledger/ledger.json` |
+| C07 | **R02/R03/R19 automation**: the scheduled job appends verified finals to the per-game results feed and settles the previous game day after its last tip (fail-closed: no grade without a Final + quarter-sum agreement); rebuild only after the freshness + provenance gates pass (R01 gate already in place, C02 extends it) | in progress | `.github/workflows/refresh-data.yml`, `engine/` (settle step) |
+| C08 | **R09/R13/R14/R15 legacy-surface fixes**: every published line applies the measured home-court anchor; the legacy Lines & Picks surfaces lead with the two-estimator disagreement (blend underneath), price every parlay with the measured rho and print the naive product beside it, and carry rotation availability as its own column | in progress | `scripts/generate_picks.py`, `scripts/build_horizon_page.py`, `scripts/originate_horizon.py`, `lines.html`, `picks.html` |
+| C09 | Requirements register + executive summary + flagged register updated to the delivered state; full gate suite green on the merged tree (line-by-line re-verification of every changed table row against its named official source); integration PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy; disposition PRs #114/#117/#107 with credit; record PR link + merge result here | in progress | `data/content/requirements.json`, `data/content/executive.json`, `EXECUTIVE_SUMMARY.md`, `data/content/flagged.json` (append-only), `COORDINATION.md` (§48 delivery record), own branch |
+
+**Not claimed / read-only:** `docs/**`, `docs/b/**` (Build A/B archives), `command-center/**`,
+`audit/**`, `engine_v2/**`, `origination/**`, `strategy-lab/**`, `edge-lab/**`, `desk*.html`,
+other sessions' `verify/*` namespaces (except the two taken-over branches' namespaces), and
+`.github/workflows/pages.yml` + `.github/workflows/probe-official.yml` (the live deploy-diagnosis
+scope of `arena/8f64e94c-nba1`; requests are logged here, not edited silently — unless ground
+rule 5 hands that scope over at integration time, which is logged then). No sealed line is
+re-priced after its cut (project discipline, F72).
+
+### 48.3 Claim log
+
+- 2026-11-16 02:25 UTC — claim written and pushed before any other edit (C01).
