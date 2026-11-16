@@ -214,4 +214,38 @@ argument for running the full gate suite after a rebase rather than before a pus
 
 ### 47.3 Delivery record
 
-- *(filled in at merge: PR link, merge SHA, Pages status, and the gate results.)*
+- **PR [#124](https://github.com/wingbangboozle1-lang/NBA1/pull/124)** — *"T02 (§47): stop the probe
+  workflow starving the Pages publisher; add verify_all.py to CI"* — **MERGED 2026-11-16T02:54:14Z**,
+  merge commit **`f59b23a7f996f067abe1dd08060174b28a64af20`**, into `main` with no approval wait.
+- **Merged content:** the probe-workflow trigger change (push → 4×/day schedule +
+  `workflow_dispatch`) and its runtime bounds; `statsdmz.nba.com` added to both gate allow-lists;
+  the **restoration of the shared task board** (§47.1a) — 3,406 lines of other sessions' records
+  that commit `813e7a9` had deleted from `main`; the two `rebuild_board.py` / `restore_board.py`
+  tools that make a repeat impossible; and this session's evidence namespace
+  `verify/2026-11-16-2823d556/`.
+- **Gate suite on the merge head, all five PASS:** `check_site.py` · `verify_integration.py` ·
+  `check_links.py` · `check_rendered.py` · `verify_all.py`. Recorded honestly: `validate` on the PR
+  head never ran — the runner queue was saturated (one probe run on this branch had been
+  `in_progress` for 36 minutes) — so the merge was made on locally-executed gates, not on a green
+  CI check.
+- **Pages after the merge: still `errored`, and this session now knows why.** A legacy branch build
+  for `f59b23a` started at 02:54:15Z; every build before it (37a3be3, e649dd5, 1f962e2, f906c73,
+  2c7d13f, 21e5c77, c432a2f, f6b7676, 927ee21, 0dfdf003) returned **"Page build failed."** The
+  probe queue was a real contributor and is now fixed; it was **not** the cause. The cause is
+  F-47-F: the Pages source is a branch, and `pages.yml` publishes with `actions/deploy-pages`.
+  **The repository owner must switch Settings → Pages → Source to "GitHub Actions".** Until then no
+  merge can make the site live.
+- **Self-evidencing result of T02:** with the `push` trigger removed, pushes to `main` no longer
+  create probe runs at all. The queue drains instead of refilling.
+
+### 47.4 What this session did not do
+
+- It did **not** settle 2026-11-15. F-47-B is the timestamped official evidence that the slate was
+  not complete (6 of 9 Final at 02:27Z, three games still printing a quarter clock).
+- It did **not** re-price, re-cut or re-publish any line. F-47-C measures an input-currency gap; the
+  project's own rule (F72) keeps the frozen line frozen, and no pick on this site is funded.
+- It did **not** capture the 11/15 finals, the 11/16–11/19 slate, or per-player game logs: three
+  other sessions own those captures, and a third duplicate read was not worth the collision risk.
+- It did **not** edit `site/**`, `index.html`, `data/content/**`, `data/derived/**`, `engine/**` or
+  any other session's `verify/*` namespace. Every change that belonged on a shared surface is logged
+  in §47.2 as a request for that surface's owner.
