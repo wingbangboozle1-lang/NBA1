@@ -2084,14 +2084,14 @@ def main():
                               esc(_n.get("source_url")), esc(_n.get("index_url")),
                               diff_note,
                               esc(_n.get("merged_cell_caveat", "")))))
-    # Newer official edition seen on the NBA host but NOT yet ingested (flag F92).
+    # Newer official edition seen on the NBA host but NOT yet ingested (flag F93, already on main).
     # Stated as a fact about the source only; no row of it is used anywhere.
     b.insert(0, banner("warn", "A newer official edition exists and is NOT yet ingested",
                        "<p><b>Newer edition on the official host:</b> 2026-11-15 05:15 PM ET "
                        "(<a href=\"https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_05_15PM.pdf\">official PDF</a>), "
                        "read at about 2026-11-15 23:38 UTC during the session check. The rows below are the "
                        "06:15 AM ET edition (retrieved 11:52 UTC). The 05:15 PM edition has not been transcribed, diffed, "
-                       "or fed into any line; it is flagged for review as F92.</p>"))
+                       "or fed into any line; it is flagged for review as F93.</p>"))
     built["injuries.html"] = page("Injuries, rotation and production impact",
                                   "The official injury report for the horizon, what it does to rotation minutes, "
                                   "and the measured effect on a team's net rating.", "\n".join(b))
