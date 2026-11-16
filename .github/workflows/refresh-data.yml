@@ -46,9 +46,18 @@ permissions:
   contents: write
   pull-requests: write
 
+# Concurrency + timeout (session arena/c348e6c7-nba1, COORDINATION §47.2).
+# Same starvation class as the probe workflow: this workflow also triggers on
+# every push to any `arena/**` branch, and with parallel sessions pushing, each
+# push armed another run. One slot, newest wins, and a hard 30-minute ceiling.
+concurrency:
+  group: refresh-official-global
+  cancel-in-progress: true
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 

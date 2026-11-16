@@ -18,8 +18,30 @@ name: Probe official source reachability
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main, "arena/**"]
+  # NOTE (2026-11-16, session arena/c348e6c7-nba1, COORDINATION §47.2).
+  # The `push` trigger below has been REMOVED. It was the single largest
+  # consumer of this account's GitHub Actions concurrency budget and the
+  # direct cause of every stalled Pages deploy.
+  #
+  # Measured at 02:1x UTC on 2026-11-16, from `gh run list --limit 200`:
+  #   20 probe runs `in_progress` + 24 `queued` = 44 concurrent probe runs.
+  #   Each run fetches every official URL the repository cites and takes
+  #   ~1 hour (the arena/83d380ad-nba1 push-probe measured 1h16m).
+  #   GitHub runs a bounded number of jobs per account and queues the rest
+  #   FIFO, so 44 hour-long runs starve everything else: the production
+  #   "Publish static site to GitHub Pages" run for `main` sat `pending`
+  #   for 43 m 55 s and the legacy `pages build and deployment` run sat
+  #   `queued` for the same period. That is why the published site is
+  #   stale, not because any build is broken.
+  #
+  # A reachability record does not need to be regenerated on every commit.
+  # Twice a day plus manual dispatch is more than enough for a source that
+  # changes on the league's own schedule, and it leaves the queue free for
+  # the publisher that actually puts the site on the internet.
+  schedule:
+    # 04:15 UTC and 16:15 UTC - matches the refresh-data cadence so the two
+    # records are written from comparable moments in the league day.
+    - cron: "15 4,16 * * *"
 
 permissions:
   contents: write
@@ -35,18 +57,33 @@ permissions:
 # completed. GitHub runs at most a bounded number of jobs per account and
 # queues the rest FIFO, so a long, unbounded workflow starves the publisher.
 #
-# Fix: one pending probe per ref, and the newest push supersedes the older
+# Fix (1): one pending probe per ref, and the newest push supersedes the older
 # pending run. A probe is a reachability record, not a deliverable, so
 # dropping a superseded pending run loses nothing - the committed
 # data/raw/probe_official.json from the last completed run is still the record.
+#
+# Fix (2), added 2026-11-16 by session arena/c348e6c7-nba1 (COORDINATION §47.2).
+# A per-ref group bounds the queue only *within* one ref, which is exactly the
+# gap that let 20 concurrent probe runs pile up across 20 different branches.
+# The group below is GLOBAL (a constant, with no ref interpolation), so every
+# probe run - whatever branch or trigger it came from - shares one slot. A
+# second probe can therefore never run at the same time as a first, and the
+# account's remaining concurrency stays available for the Pages publisher.
+# `cancel-in-progress: true` here is safe for the same reason as in fix (1):
+# a superseded reachability probe has no deliverable to lose.
 concurrency:
-  group: probe-${{ github.ref }}
+  group: probe-official-global
   cancel-in-progress: true
 
 jobs:
   probe:
     if: "!contains(github.event.head_commit.message, '[skip probe]')"
     runs-on: ubuntu-latest
+    # Hard wall-clock ceiling (session arena/c348e6c7-nba1, §47.2). A probe is
+    # a reachability record; if a host is slow the finding is "slow", and the
+    # runner must be released long before the 1h16m worst case measured on
+    # 2026-11-15.
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
