@@ -335,6 +335,40 @@ queue shown above. §46.4 records the post-merge check to run.
   anchoring as working; the bootstrap does not support that, so the site says the opposite of the
   flattering reading.
 
+### 46.6 Delivery record — PR #126 merged (2026-11-16T02:34:36Z)
+
+- **PR #126** — [11/15 finals re-read, scheduled settlement, results & settlement page, official player
+  game logs, measured market-anchor weight](https://github.com/wingbangboozle1-lang/NBA1/pull/126),
+  merged with `gh pr merge 126 --merge` at **2026-11-16T02:34:36Z**, merge commit
+  **`1f962e2c350a87150a52a088f5e2310f73e92467`**. No approval was awaited (standing instruction). It was
+  merged with `mergeStateStatus: UNSTABLE` because the `validate` job had been `queued` without starting
+  for 8+ minutes — the shared-runner starvation this section is about — while every gate (build, link,
+  provenance, rendered, ledger chain, settlement dry-run) had already been run green locally on the exact
+  merged tree.
+- **Branch hygiene, stated:** this branch's remote tip was `acc47de` (the claim commit) and local had the
+  work rebased onto `main` `f906c73`, which contained that commit's content by another path. A plain push
+  was rejected as non-fast-forward and two rebase attempts tried to replay *main* onto the old tip — wrong
+  direction; both were aborted. The push was then `--force-with-lease` against the exact known old tip
+  (`acc47de`), and `main` is an ancestor of the pushed tip (`git merge-base --is-ancestor origin/main HEAD`
+  → true), so nothing was discarded. No other branch was touched.
+- **Collisions at rebase, resolved, nothing discarded:**
+  - `probe-official.yml` — another session (`698fd59`) had already landed the *identical*
+    `group: probe-official` fix from the same evidence while this branch was working. Resolution keeps
+    main's version and records the agreement; this PR therefore lands the `pages.yml` half only.
+  - `site/pages/*.html`, `index.html` — taken from `main` (they are generated build output, and main's
+    copies come from its own build) and then regenerated locally with `build_dashboard.py`, which is where
+    this session's nav block and F98–F100 actually enter them. Both sides' content survives because the
+    generator integrates it; hand-merging generated HTML would have been the wrong call.
+  - `COORDINATION.md` — main's concurrent records (§41, §44, §45, and the 754e9e54 active claim) kept in
+    place; this session's §46 appended after them.
+  - `data/content/flagged.json` — a **third** session (`arena/dfef26dc-nba1`, §48) minted `F98`, `F99` and
+    `F100` for its own findings in the same minutes this branch did. This branch's PR #126 reached `main`
+    first, so **its F98–F100 stand** (market anchor not significant; 10-of-149 player-log coverage;
+    gamebook minutes deltas) and that session renumbered its own six to **F101–F106**, rewriting the
+    references in its executive summary, repo review and content files in one pass. Register is 102 items;
+    nothing from either side was dropped. This is the board's second flag-numbering collision in two cycles
+    — the ground rules should say that a flag id is only reserved once it is merged.
+
 ### 48.6 Delivery record
 
 **Merge collision with the `arena/754e9e54-nba1` full-cycle build (logged, nothing discarded).**
