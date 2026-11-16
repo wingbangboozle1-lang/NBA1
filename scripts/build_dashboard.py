@@ -2072,10 +2072,12 @@ def main():
                            "settled 14&ndash;17 Nov strategy-lab window was cut from. The league has since "
                            "published newer reports: the 11/14 game-day cycle is on "
                            "<a href=\"gameday.html\">Game-Day Injury Read</a>, and the current 16&ndash;19 Nov "
-                           "window is priced from the <b>11/16/26 09:45 AM ET</b> edition in the banner "
-                           "above; the 12:00 PM edition diffed there adds seven Memphis/New Orleans "
-                           "designations with no status change (flag F128). Those numbers do not replace "
-                           "the ones here: a line re-priced after it was frozen cannot be graded."))
+                           "window is priced from the <b>11/16/26 09:45 AM ET</b> edition (the digest-bound promoted "
+                           "input); the newest-edition banner above shows the latest official edition read "
+                           "this cycle (01:30 PM ET) with its consecutive-edition diff - 26 added designations "
+                           "and 7 status changes still awaiting digest-bound runner promotion (flag F128). "
+                           "Those numbers do not replace the ones here: a line re-priced after it was "
+                           "frozen cannot be graded."))
     # Newest-edition banner: report revision + retrieval time (brief requirement).
     # ROLLING: pick the newest stored edition and the newest consecutive-edition diff
     # instead of a hardcoded filename, so the banner cannot go stale between passes.
