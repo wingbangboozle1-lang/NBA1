@@ -1,7 +1,14 @@
 #!/usr/bin/env python3
 """
 originate_horizon.py — originate OUR OWN lines for every unplayed game in the
-2026-11-15 .. 2026-11-18 horizon (today + 3 days, per the project brief).
+rolling horizon (today + up to 3 days, per the project brief).
+
+ROLLING WINDOW. The window is no longer hardcoded: the script reads the newest
+official schedule capture in data/raw/official_schedule_capture_*.json and takes
+every game row in it. The window rule (today + max 3 days ahead) is applied by
+the capture pass, and the capture file records it in its own "scope" field, so
+this script cannot drift from it. The newest official injury edition in
+data/official/injury_*.json is picked up the same way.
 
 METHOD = Build A's scripts/originate_lines.py, unchanged:
     POSS_game  = pace_home + pace_away - league_pace
@@ -16,36 +23,54 @@ METHOD = Build A's scripts/originate_lines.py, unchanged:
 HONESTY RULES (same as the rest of the repo):
     * Every number is (a) an official NBA statistic with its source, or (b) DERIVED,
       with its formula printed beside it, or (c) blank + flagged.
-    * Inputs are dated, not live: team ratings were re-cut 2026-11-15 from the three
-      official team-stat pages (games through 2026-11-14); records are post-11/14;
-      the latest injury report is 11/15 06:15 AM ET (11/15 rows; 11/16 blocks are
-      printed NOT YET SUBMITTED). Every game row carries an as_of note.
+    * Inputs are dated, not live. Every game row carries an as_of note naming the
+      capture it was cut from and the retrieval time of that capture.
     * No sportsbook price is used or claimed.
     * Availability adjustments: only a verifiable NEW_ABSENCE moves a line
-      (scripts/injury_impact.py canonical rule). For the 11/15 games no absence in
-      the official 11/15 06:15 AM edition can be classified NEW_ABSENCE from
-      evidence in this repo, so NO line moves and every status is published instead.
+      (scripts/injury_impact.py canonical rule). Rows whose absence cannot be
+      classified NEW_ABSENCE from evidence in this repo move nothing; every
+      status is published instead.
 """
+
+import glob
 import json
 import math
 import os
-from datetime import date
+import re
+from datetime import date, datetime, timezone
 from statistics import mean, pstdev
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data")
+RUN_UTC = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
+OFFICIAL = os.path.join(DATA, "official")
 
-HORIZON_START = "2026-11-15"
-HORIZON_END = "2026-11-18"
 
-CAPTURE = os.path.join(DATA, "raw", "official_schedule_capture_2026-11-15.json")
+def newest(pattern, where=None, dated=r"_\d{4}-\d{2}-\d{2}[^/]*\.json$"):
+    """Newest file matching `pattern`. Files carrying a capture stamp sort after
+    undated ones, so the rolling pass never picks up a stale snapshot."""
+    base = where or DATA
+    cands = [p for p in glob.glob(os.path.join(base, pattern)) if re.search(dated, p)]
+    if not cands:
+        cands = glob.glob(os.path.join(base, pattern))
+    if not cands:
+        raise SystemExit("no file matches %s in %s" % (pattern, os.path.relpath(base, ROOT)))
+    return sorted(cands)[-1]
+
+
+CAPTURE = newest("official_schedule_capture_*.json", os.path.join(DATA, "raw"))
 CAPTURE_SOURCE = "https://www.nba.com/schedule"
 
 # Official sources for every input (all verified in-repo; see verify/2026-11-15-83d380ad/)
 SRC_ADVANCED = "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
 SRC_TRADITIONAL = "https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame"
-SRC_INJ_0515 = "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf"
 SRC_INJ_POLICY = "https://official.nba.com/nba-injury-report-2026-27-season/"
+# Rolling: the newest stored edition wins. Resolved in load_horizon_injuries().
+INJ_PATH = newest("injury_2*.json", OFFICIAL)
+SRC_INJ = json.load(open(INJ_PATH, encoding="utf-8")).get("source_url", SRC_INJ_POLICY)
+INJ_EDITION = os.path.basename(INJ_PATH)[len("injury_"):-len(".json")]
+INJ_REVISION = json.load(open(INJ_PATH, encoding="utf-8")).get("revision_time_et", "not printed")
+INJ_RETRIEVED = json.load(open(INJ_PATH, encoding="utf-8")).get("retrieved_utc", "not printed")
 
 STATUS_PLAY_PROB = {"Out": 0.00, "Doubtful": 0.25, "Questionable": 0.50,
                     "Probable": 0.80, "Available": 1.00}
@@ -80,32 +105,57 @@ def d(s):
 
 
 def load_horizon_injuries():
-    """Official 2026-11-15 06:15 AM ET edition rows (data/official/injury_2026-11-15_0615AM.json,
-    transcribed verbatim; see the capture's merged_cell_caveat). Rows for the 11/15
-    games only; the 11/16 blocks are printed NOT YET SUBMITTED. team_effective carries
-    the PDF's inherited team for merged-cell rows and is used for the team lookup."""
-    doc = json.load(open(os.path.join(DATA, "official", "injury_2026-11-15_0615AM.json"), encoding="utf-8"))
+    """Rows of the newest stored official injury edition (INJ_PATH).
+
+    Every row the edition prints is returned, whatever game date it carries;
+    the caller filters by game date. Rows printed by the PDF without a Team
+    cell (merged cells) carry team_effective, the nearest printed team above,
+    and are marked inherited — see the capture's merged_cell_caveat.
+    """
+    doc = json.load(open(INJ_PATH, encoding="utf-8"))
     out = []
     for r in doc["rows"]:
-        if r.get("game_date") != "11/15/2026" or not r.get("player"):
-            continue
         team = (r.get("team_effective") or "").split(" (inherited")[0]
-        out.append({"matchup": r.get("matchup") or "", "team": team or None,
-                    "player": r["player"], "status": r.get("status"),
+        out.append({"game_date": r.get("game_date"), "matchup": r.get("matchup") or "",
+                    "team": team or None,
+                    "player": r.get("player"), "status": r.get("status"),
                     "reason": r.get("reason"),
                     "team_source": ("inherited from PDF merged cells" if r.get("team_inherited")
                                     else "printed team cell")})
     return out
 
 
+def iso_to_pdf_date(iso):
+    y, m, d = iso.split("-")
+    return "%s/%s/%s" % (m, d, y)
+
+
 def main():
     cap = json.load(open(CAPTURE, encoding="utf-8"))
     cols = cap["cols"]
     rows = [dict(zip(cols, r)) for r in cap["rows"]]
-    games = [r for r in rows if HORIZON_START <= r["date"] <= HORIZON_END]
-    assert len(games) == 34, f"expected 34 horizon games, got {len(games)}"
+    # ROLLING WINDOW: the capture defines the window (its "scope" field states
+    # the rule it was captured under). This script never re-derives it.
+    games = list(rows)
+    dates = sorted({r["date"] for r in games})
+    HORIZON_START, HORIZON_END = dates[0], dates[-1]
+    per_day = {}
+    for r in games:
+        per_day[r["date"]] = per_day.get(r["date"], 0) + 1
+    printed = cap.get("printed_per_day_counts")
+    if printed:
+        assert per_day == {k: v for k, v in printed.items()}, \
+            f"capture per-day counts {per_day} != printed {printed}"
+    assert (len(dates) <= 4), \
+        f"window rule is up to 3 days ahead; capture spans {len(dates)} days"
+    print("rolling window %s .. %s  (%d games: %s)  from %s" % (
+        HORIZON_START, HORIZON_END, len(games),
+        ", ".join("%s=%d" % (d[5:], per_day[d]) for d in dates),
+        os.path.relpath(CAPTURE, ROOT)))
 
-    adv = {t["abbr"]: t for t in load("teams_advanced_2026_27.json")["rows"]}
+    adv_doc = load("teams_advanced_2026_27.json")
+    adv = {t["abbr"]: t for t in adv_doc["rows"]}
+    adv_cut_retrieved = adv_doc.get("_meta", {}).get("retrieved_utc", "not printed")
     scoring = {r["abbr"]: r for r in load("teams_scoring_2026_27.json")["rows"]}
     played = (load("played_games_2026_11_11_12.json")["games"] +
               load("played_games_2026_11_13_14.json")["games"])
@@ -114,6 +164,8 @@ def main():
                    if p.get("min") is not None}
     evidence = {r["player"]: r for r in load("player_absence_evidence.json")["rows"]}
     inj_rows = load_horizon_injuries()
+    inherited_count = sum(1 for r in json.load(open(INJ_PATH, encoding="utf-8"))["rows"]
+                          if r.get("team_inherited"))
 
     # ---- league baselines (official inputs only) --------------------------------
     league_pace = mean(t["pace"] for t in adv.values())
@@ -142,25 +194,30 @@ def main():
         gap = (d(game_date) - d(last)).days
         return gap - 1, gap == 1, last
 
-    # ---- availability layer (official 05:15 PM rows for 11/14; none later) ------
+    # ---- availability layer (newest stored official edition) ------------------
+    # Keyed on (pdf game date, matchup, team) so the same team in two different
+    # games never borrows the other game's rows.
     inj_by_team = {}
     for r in inj_rows:
         abbr = TEAM_NAME_TO_ABBR.get(r.get("team"))
         if abbr:
-            inj_by_team.setdefault((r.get("matchup") or "", abbr), []).append(r)
+            inj_by_team.setdefault((r.get("game_date"), r.get("matchup") or "", abbr), []).append(r)
+
+    covered_dates = sorted({r.get("game_date") for r in inj_rows if r.get("game_date")})
 
     def availability_for(away, home, game_date):
         """(label, detail rows) for one game. No line moves: canonical NEW_ABSENCE rule."""
-        if game_date != "2026-11-15":
-            return ("No official injury report covers this game yet "
-                    "(latest edition in repo: 11/15 06:15 AM ET; 11/16 blocks are "
-                    "printed NOT YET SUBMITTED and 11/17-11/18 have no rows)", [])
+        pdf_date = iso_to_pdf_date(game_date)
+        if pdf_date not in covered_dates:
+            return ("No official injury report covers this game yet (latest edition in "
+                    "repo: %s, revision %s; that edition covers %s)" % (
+                        INJ_EDITION, INJ_REVISION, ", ".join(covered_dates)), [])
         detail = []
         for abbr in (away, home):
             team_rows = []
-            for (m, a), rs in inj_by_team.items():
-                if a == abbr and (m == "" or away in m or home in m):
-                    team_rows = rs
+            for (gd, m, a), rs in inj_by_team.items():
+                if gd == pdf_date and a == abbr and (m == "" or away in m or home in m):
+                    team_rows += rs
             if not team_rows:
                 detail.append({"team": abbr, "player": None,
                                "status": "not printed on the latest edition in repo",
@@ -170,7 +227,9 @@ def main():
                 if not r.get("player"):
                     detail.append({"team": abbr, "player": None, "status": r.get("status"),
                                    "reason": None,
-                                   "note": "team row printed without player names"})
+                                   "note": "team block printed without player names "
+                                           "(NOT YET SUBMITTED = the club had not filed "
+                                           "when the edition was published)"})
                     continue
                 pmin = minutes_idx.get(r["player"])
                 prow = players_idx.get(r["player"])
@@ -179,10 +238,13 @@ def main():
                 mins = pmin["min"] if pmin else (prow or {}).get("min")
                 pts = pmin["pts"] if pmin else (prow or {}).get("pts")
                 play_prob = STATUS_PLAY_PROB.get(r.get("status"), None)
-                # Canonical rule (scripts/injury_impact.py): only NEW_ABSENCE with verified
-                # production moves a line. No 11/15 player has in-repo evidence that his
-                # absence is new relative to the ratings window, so adjustment stays 0.
-                adj = 0.0 if (pts is not None and cls == "NEW_ABSENCE") else 0.0
+                # Canonical rule (scripts/injury_impact.py): only a NEW_ABSENCE with
+                # verified production moves a line. No player on this edition has
+                # in-repo evidence that his absence is new relative to the ratings
+                # window, so every adjustment stays 0 and the status is published.
+                adj = 0.0
+                note = ("minutes/points not verifiable in repo -> blank" if pts is None
+                        else "absence class %s -> no adjustment" % cls)
                 detail.append({
                     "team": abbr, "player": r["player"], "status": r.get("status"),
                     "reason": r.get("reason"), "play_probability": play_prob,
@@ -191,14 +253,11 @@ def main():
                     "expected_points_removed": round(adj, 2),
                     "stat_source": ("players_minutes_2026_27.json" if pmin else
                                     ("players_2026_27.json" if prow else None)),
-                    "note": ("minutes/points not verifiable in repo -> blank" if pts is None else
-                             ("absence class UNKNOWN: no official evidence he played in the "
-                              "ratings window; season stats already cover his 8 missed games "
-                              "(gp 4 of 12) -> no adjustment" if r["player"] == "Edwards, Anthony"
-                              else "absence class UNKNOWN -> no adjustment")),
+                    "note": note,
                 })
-        return ("statuses from the official 11/15 06:15 AM ET edition (11/15 rows); "
-                "no NEW_ABSENCE verifiable -> no line adjustment", detail)
+        return ("statuses from the official %s edition (revision %s, retrieved %s); "
+                "no NEW_ABSENCE verifiable -> no line adjustment"
+                % (INJ_EDITION, INJ_REVISION, INJ_RETRIEVED), detail)
 
     out_games = []
     for g in games:
@@ -224,8 +283,9 @@ def main():
                             else "not printed on official schedule"),
             "tip_et": g["tip_et"],
             "records_as_captured": f"{g['away_record']} / {g['home_record']}",
-            "records_status": ("post-11/14 records captured 2026-11-15 (verified vs "
-                               "standings 2026-11-15); go stale as the slate's games complete"),
+            "records_status": (f"records captured {cap.get('captured_on_utc_date', 'undated')} "
+                               f"(verified against the official standings page); they go "
+                               f"stale as the slate's earlier games complete"),
             "game_possessions": round(poss, 2),
             "off_rtg_home": h["off_rtg"], "def_rtg_home": h["def_rtg"], "pace_home": h["pace"],
             "off_rtg_away": a["off_rtg"], "def_rtg_away": a["def_rtg"], "pace_away": a["pace"],
@@ -240,9 +300,11 @@ def main():
             "formula": ("POSS = pace_home + pace_away - league_pace; "
                         "PTS = (OffRtg_team * DefRtg_opp / league_OffRtg) * POSS / 100; "
                         "TOTAL = PTS_home + PTS_away; SPREAD = PTS_home - PTS_away"),
-            "inputs_as_of": ("team ratings re-cut 2026-11-15 from the three official team-stat "
-                             "pages (traditional, opponent, advanced), games through 2026-11-14; "
-                             "injury statuses from the official 11/15 06:15 AM ET edition"),
+            "inputs_as_of": (f"team ratings re-cut by scripts/recut_model_inputs.py from the "
+                             f"newest official team-stat captures (traditional, opponent, "
+                             f"advanced), retrieved {adv_cut_retrieved}; injury statuses from "
+                             f"the official {INJ_EDITION} edition (revision {INJ_REVISION}, "
+                             f"retrieved {INJ_RETRIEVED})"),
             "inputs_source": SRC_ADVANCED,
             "rest_away": {"rest_days": rest_a, "b2b": b2b_a, "last_date": last_a,
                           "derived_from": "official schedule capture + official finals "
@@ -267,13 +329,27 @@ def main():
 
     payload = {
         "_meta": {
-            "title": "Originated horizon lines — 2026-11-15 through 2026-11-18 (34 unplayed games)",
-            "generated_by": "scripts/originate_horizon.py",
-            "generated_utc": "2026-11-15T12:50Z (built after the 2026-11-14 games are final "
-                             "and settled; see data/settlement/settlement_2026-11-14.json)",
+            "title": f"Originated horizon lines — {HORIZON_START} through {HORIZON_END} "
+                     f"({len(out_games)} unplayed games)",
+            "generated_by": "scripts/originate_horizon.py (rolling window)",
+            "generated_utc": RUN_UTC,
             "method": "identical formulas to scripts/originate_lines.py (Build A)",
-            "horizon": "today (2026-11-15 UTC) + 3 days; 2026-11-14 games excluded "
-                       "(played and settled)",
+            "horizon": (f"{HORIZON_START} .. {HORIZON_END}: the rolling window (today + up to "
+                        f"3 days ahead) as captured in "
+                        f"{os.path.relpath(CAPTURE, ROOT)} — scope: {cap.get('scope', 'not printed')}"),
+            "window_rule": ("the window is defined by the capture, never re-derived here: "
+                            f"{', '.join('%s=%d' % (d, per_day[d]) for d in dates)} games"),
+            "inputs": {
+                "schedule_capture": os.path.relpath(CAPTURE, ROOT),
+                "schedule_captured_on": cap.get("captured_on_utc_date", "not printed"),
+                "ratings_recut_retrieved_utc": adv_cut_retrieved,
+                "ratings_files": ["data/teams_advanced_2026_27.json",
+                                  "data/teams_scoring_2026_27.json"],
+                "injury_edition": INJ_EDITION,
+                "injury_revision_et": INJ_REVISION,
+                "injury_retrieved_utc": INJ_RETRIEVED,
+                "injury_file": os.path.relpath(INJ_PATH, ROOT),
+            },
             "empirical_dispersion": {
                 "margin_sd": round(margin_sd, 3), "total_sd": round(total_sd, 3),
                 "n_margin_games": len(margins), "n_total_games": len(totals),
@@ -301,35 +377,38 @@ def main():
                            "home-win-rate 57.6% note remains a published finding, not applied.)",
                  "source": CAPTURE_SOURCE},
                 {"id": "F-W03", "severity": "medium",
-                 "item": "Inputs dated, disclosed: ratings re-cut 2026-11-15 (games through "
-                         "11/14); records post-11/14; injury edition 11/15 06:15 AM ET.",
+                 "item": f"Inputs dated, disclosed: ratings re-cut from the official captures "
+                         f"retrieved {adv_cut_retrieved}; records captured "
+                         f"{cap.get('captured_on_utc_date', 'undated')}; injury edition "
+                         f"{INJ_EDITION} (revision {INJ_REVISION}).",
                  "detail": "Every pick built on these lines is labelled MODEL OUTPUT — "
                            "UNVALIDATED and stamped with this as-of date. Records go stale "
-                           "as the 11/15+ games complete (rolling refresh job).",
-                 "source": "https://www.nba.com/games?date=2026-11-15"},
+                           "as earlier games in the window complete (rolling refresh job).",
+                 "source": SRC_TRADITIONAL},
                 {"id": "F-W04", "severity": "medium",
-                 "item": "No injury report rows cover the 11/16-11/18 games yet.",
-                 "detail": "The official 11/15 06:15 AM ET edition prints NOT YET SUBMITTED "
-                           "for all 11/16 team blocks and no rows for 11/17-11/18. Game-day "
-                           "editions appear 11 a.m.-1 p.m. local per league policy.",
+                 "item": f"The newest stored edition ({INJ_EDITION}, revision {INJ_REVISION}) "
+                         f"covers {', '.join(covered_dates)} only; later days in the window "
+                         f"have no rows, and some blocks are printed NOT YET SUBMITTED.",
+                 "detail": "Teams must file by 5 p.m. local the day before a game (1 p.m. "
+                           "local for the second night of a back-to-back), so blocks for the "
+                           "later days of the window cannot exist yet. Game-day editions "
+                           "appear 11 a.m.–1 p.m. local per league policy.",
                  "source": SRC_INJ_POLICY},
                 {"id": "F-W05", "severity": "medium",
-                 "item": "DAL@BOS (11/15) prints NOT YET SUBMITTED for Dallas; NYK block "
-                         "absent from the edition entirely.",
-                 "detail": "Dallas is on the second game of a back-to-back (league deadline "
-                           "1 p.m. local game day). The edition prints NOT YET SUBMITTED rows "
-                           "for unsubmitted teams, so New York's absent block most likely "
-                           "means no reportable players - recorded, not inferred (F69).",
-                 "source": SRC_INJ_0515},
+                 "item": f"Some team blocks in the {INJ_EDITION} edition are printed NOT YET "
+                         f"SUBMITTED, and some clubs have no block at all.",
+                 "detail": "The league prints a NOT YET SUBMITTED placeholder for a club that "
+                           "has not filed; an absent block is recorded as absent and never "
+                           "read as 'no injuries'. Both states are published verbatim.",
+                 "source": SRC_INJ},
                 {"id": "F-W06", "severity": "medium",
-                 "item": "13 injury rows lost their Team cell to PDF merged cells; "
-                         "team_effective inherits the nearest printed team.",
-                 "detail": "Rows are marked team_inherited in "
-                           "data/official/injury_2026-11-15_0615AM.json and are published "
-                           "with that caveat (F69). No line moves: no absence classifies as "
-                           "NEW_ABSENCE from evidence in this repo (canonical rule, "
-                           "scripts/injury_impact.py) -> adjustment 0.",
-                 "source": SRC_INJ_0515},
+                 "item": f"{inherited_count} injury rows lost their Team cell to PDF merged "
+                         f"cells; team_effective inherits the nearest printed team.",
+                 "detail": f"Rows are marked team_inherited in {os.path.relpath(INJ_PATH, ROOT)} "
+                           f"and are published with that caveat. No line moves: no absence "
+                           f"classifies as NEW_ABSENCE from evidence in this repo (canonical "
+                           f"rule, scripts/injury_impact.py) -> adjustment 0.",
+                 "source": SRC_INJ},
                 {"id": "F-W07", "severity": "high",
                  "item": "No market prices exist anywhere on this page.",
                  "detail": "No sportsbook feed is reachable or claimed; every probability is "
@@ -341,7 +420,7 @@ def main():
                            "capped at zero stake until a strategy passes the gates. Outcomes: "
                            "data/derived/strategies.json (Build A), docs/data/leaderboard.json "
                            "(Build B) — internal artifacts, not official NBA sources.",
-                 "source": "https://www.nba.com/games?date=2026-11-15"},
+                 "source": f"https://www.nba.com/games?date={HORIZON_START}"},
             ],
         },
         "games": out_games,

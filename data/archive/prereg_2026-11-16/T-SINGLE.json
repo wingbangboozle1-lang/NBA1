@@ -1,0 +1,42 @@
+{
+ "prereg_id": "T-SINGLE",
+ "strategy_name": "Horizon single (G-CFG margin gate)",
+ "family": "horizon_ticket",
+ "signal": "For each window game, the two-estimator-originated margin line is published; a side is picked when |projected margin| >= 3.0, otherwise PASS (NO BET).",
+ "thresholds": {
+  "pick_gate_margin": 3.0,
+  "source": "data/originated_lines.json assumptions (inherited)"
+ },
+ "universe": "all 25 games on the official 2026-11-16 .. 2026-11-18 slate (data/raw/official_schedule_capture_2026-11-16.json: 2026-11-16=8, 2026-11-17=5, 2026-11-18=12); source file data/raw/official_schedule_capture_2026-11-16.json; window rule = the newest official schedule capture, today (UTC) + up to 3 days per the project brief",
+ "exact_settlement_rule": "Grade from the published pick_line text \\\"TEAM -x.x\\\": cover if the team wins by more than x.x, PUSH at exactly x.x, else LOSS. Paper -110 (WIN +1.00 / LOSS -1.10 / PUSH 0.00). Gate failures settle NO BET 0.00. Finals from data/official/results_YYYY-MM-DD.json (quarters sum asserted).",
+ "price_status": "No licensed two-sided price exists (no odds feed; F-W07). Spread/total tickets settle on the repo's paper -110 convention (stake 1.10 to win 1.00). Moneyline strategies record W/L only; unit ROI stays blank until a price exists. SGP tickets settle at the model's published joint_prob_rho as fair price.",
+ "validation_gates": {
+  "G1_sample_floor": "n >= 100 graded bets",
+  "G2_significance": "one-sided binomial p < 0.05, Bonferroni-corrected",
+  "G3_luck_bootstrap": "5th percentile of 10000-draw bootstrap ROI > 0",
+  "G4_stability": "profitable in both disjoint halves",
+  "G5_fragility": "profitable after removing the best 5% of bets",
+  "G6_provenance": "all driving inputs from approved official hosts",
+  "conjunction": "ALL gates must pass. There is no partial credit.",
+  "status_2026_11_15": "NO strategy has passed (Build A 0/8, Build B 0/10). All tickets are MODEL OUTPUT — UNVALIDATED, unfunded, zero stake."
+ },
+ "definition_ref": "data/derived/horizon_picks.json (2026-11-16 .. 2026-11-18 vintage)",
+ "frozen_at_utc": "2026-11-16T00:16Z",
+ "frozen_by": "arena/161f1638-nba1",
+ "slate_window": "2026-11-16 .. 2026-11-18",
+ "games_in_universe": 25,
+ "first_tip_of_universe_utc": "2026-11-17T00:00Z",
+ "first_game_tipping": "2026-11-16 ORL@BOS (7:00 PM ET)",
+ "frozen_before_first_tip": true,
+ "hours_before_first_tip": 23.73,
+ "input_digests_sha256": {
+  "data/derived/horizon_picks.json": "9b43d77bf29288765aa6ddcf418d7789567832a2374ce700db64397085922ad8",
+  "data/derived/horizon_lines.json": "04bd73ff50917bf378dab11b82eacbe1f5da56bc3c1fbcc6f0f1b7082c42ac64",
+  "data/teams_advanced_2026_27.json": "926e10910ed990703ef4f344c7a0176839d0488879c7105047d3f1c04d81c4e5",
+  "data/teams_scoring_2026_27.json": "8f6a1fa8ee420549a3fd149a5561d6e3f70306aa32eac1e4b16d678431ed132e",
+  "data/raw/official_schedule_capture_2026-11-16.json": "c9562db861a88f788de128bdc97399745c64cc9b1f838d49e52c68cf01894241",
+  "data/official/injury_2026-11-15_0615PM.json": "71271109886a025c279bbdd22a76884d7386ca2993acf993aeb0d222eea7b335",
+  "data/official/results_2026-11-15.json": "351804cf5a7d66020da46b8d190c6758d87a4ff82c5a3c4bc1809b42343e74ac",
+  "data/settlement/settlement_2026-11-14.json": "992796498633d9a98c68de69dba164400be0471d195265a67dc30daea2a37827"
+ }
+}

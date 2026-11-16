@@ -1,0 +1,292 @@
+{
+ "from_edition": "2026-11-15_06_15AM",
+ "to_edition": "2026-11-15_06_15PM",
+ "from_source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf",
+ "to_source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf",
+ "diff_rule": "keyed on (game_date, matchup, player). ADDED = in the newer edition only; REMOVED = in the older edition only; CHANGED = status differs; UNCHANGED counted only. Rows with no player name (NOT YET SUBMITTED placeholders) are keyed on (game_date, matchup, team_effective).",
+ "added": [
+  {
+   "player": "Embiid, Joel",
+   "matchup": "IND@PHI",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Plantar Fascia Injury Management"
+  },
+  {
+   "player": "Timme, Drew",
+   "matchup": "LAL@PHX",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "player": "Martinelli, Nick",
+   "matchup": "CHA@LAC",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "player": "Fox, De'Aaron",
+   "matchup": "SAS@UTA",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hip Tightness"
+  },
+  {
+   "player": "Aldama, Santi",
+   "matchup": "DAL@BOS",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Ankle Sprain"
+  },
+  {
+   "player": "Biberovic, Tarik",
+   "matchup": "DAL@BOS",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Heel Bursitis"
+  },
+  {
+   "player": "Christie, Max",
+   "matchup": "DAL@BOS",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Ankle Sprain"
+  },
+  {
+   "player": "de Larrea, Sergio",
+   "matchup": "DAL@BOS",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Sprain"
+  },
+  {
+   "player": "Gafford, Daniel",
+   "matchup": "DAL@BOS",
+   "status": "Available",
+   "reason": "Injury/Illness - Right Shoulder Stinger"
+  },
+  {
+   "player": "Irving, Kyrie",
+   "matchup": "DAL@BOS",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Injury Management"
+  },
+  {
+   "player": "Lively II, Dereck",
+   "matchup": "DAL@BOS",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Surgery"
+  },
+  {
+   "player": "Martin, Caleb",
+   "matchup": "DAL@BOS",
+   "status": "Available",
+   "reason": "Injury/Illness - Right Thumb Splint"
+  },
+  {
+   "player": "Rollins, Ryan",
+   "matchup": "ATL@MIL",
+   "status": "Out",
+   "reason": "Injury/Illness - Illness"
+  }
+ ],
+ "removed": [
+  {
+   "player": "Embid, Joel",
+   "matchup": "IND@PHI",
+   "status": "Out"
+  },
+  {
+   "player": null,
+   "matchup": "DAL@BOS",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "player": null,
+   "matchup": "CHI@CLE",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "player": null,
+   "matchup": "CHI@CLE",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "player": null,
+   "matchup": "MEM@WAS",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "player": null,
+   "matchup": "ORL@BOS",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "player": null,
+   "matchup": "ORL@BOS",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "player": null,
+   "matchup": "HOU@MIA",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "player": null,
+   "matchup": "PHI@BKN",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "player": null,
+   "matchup": "GSW@NOP",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "player": null,
+   "matchup": "GSW@NOP",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "player": null,
+   "matchup": "POR@MIN",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "player": null,
+   "matchup": "POR@MIN",
+   "status": "NOT YET SUBMITTED"
+  }
+ ],
+ "changed": [
+  {
+   "player": "McConnell, T.J.",
+   "matchup": "IND@PHI",
+   "from": "Probable",
+   "to": "Available",
+   "reason": "Injury/Illness - Right Hamstring Strain"
+  },
+  {
+   "player": "Nembhard, Andrew",
+   "matchup": "IND@PHI",
+   "from": "Questionable",
+   "to": "Out",
+   "reason": "Injury/Illness - Left Hip Soreness / Tightness"
+  },
+  {
+   "player": "Nesmith, Aaron",
+   "matchup": "IND@PHI",
+   "from": "Questionable",
+   "to": "Available",
+   "reason": "Injury/Illness - Left Hand Sprain"
+  },
+  {
+   "player": "James, Bronny",
+   "matchup": "LAL@PHX",
+   "from": "Questionable",
+   "to": "Available",
+   "reason": "Injury/Illness - Illness"
+  },
+  {
+   "player": "Sexton, Collin",
+   "matchup": "LAL@PHX",
+   "from": "Questionable",
+   "to": "Available",
+   "reason": "Injury/Illness - Right Orbital Laceration"
+  },
+  {
+   "player": "Thiero, Adou",
+   "matchup": "LAL@PHX",
+   "from": "Questionable",
+   "to": "Available",
+   "reason": "Injury/Illness - Left Ankle Sprain"
+  },
+  {
+   "player": "Carter, Devin",
+   "matchup": "DAL@BOS",
+   "from": "Questionable",
+   "to": "Available",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "player": "Cenac Jr., Christopher",
+   "matchup": "DAL@BOS",
+   "from": "Questionable",
+   "to": "Available",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "player": "Mitchell, Dillon",
+   "matchup": "DAL@BOS",
+   "from": "Questionable",
+   "to": "Available",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "player": "Williams, Amari",
+   "matchup": "DAL@BOS",
+   "from": "Questionable",
+   "to": "Available",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "player": "Barnes, Scottie",
+   "matchup": "NYK@TOR",
+   "from": "Questionable",
+   "to": "Available",
+   "reason": "Injury/Illness - Left Groin Strain"
+  },
+  {
+   "player": "Adams, Steven",
+   "matchup": "HOU@WAS",
+   "from": "Probable",
+   "to": "Available",
+   "reason": "Injury/Illness - Right Soleus Strain"
+  },
+  {
+   "player": "Carrington, Bub",
+   "matchup": "HOU@WAS",
+   "from": "Questionable",
+   "to": "Available",
+   "reason": "Injury/Illness - Chest / Sternum Contusion"
+  },
+  {
+   "player": "Johnson, Tre",
+   "matchup": "HOU@WAS",
+   "from": "Questionable",
+   "to": "Out",
+   "reason": "Injury/Illness - Low Back Soreness"
+  },
+  {
+   "player": "Okpara, Felix",
+   "matchup": "HOU@WAS",
+   "from": "Questionable",
+   "to": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "player": "Sarr, Alex",
+   "matchup": "HOU@WAS",
+   "from": "Questionable",
+   "to": "Available",
+   "reason": "Injury/Illness - Illness"
+  },
+  {
+   "player": "Landale, Jock",
+   "matchup": "ATL@MIL",
+   "from": "Available",
+   "to": "Out",
+   "reason": "Injury/Illness - Right Hip Inflammation"
+  },
+  {
+   "player": "Wilson, Jalen",
+   "matchup": "ATL@MIL",
+   "from": "Doubtful",
+   "to": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "player": "Murray, Keegan",
+   "matchup": "OKC@SAC",
+   "from": "Questionable",
+   "to": "Available",
+   "reason": "-"
+  }
+ ],
+ "unchanged": 64,
+ "caveat": "the 06:15 AM edition covers only the 11/15 games; the 06:15 PM edition adds the 11/16 blocks. Rows keyed to 11/16 are therefore ADDED by construction and are listed separately below.",
+ "added_1116_blocks": 58
+}

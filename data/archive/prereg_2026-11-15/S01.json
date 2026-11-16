@@ -1,0 +1,37 @@
+{
+ "prereg_id": "S01",
+ "strategy_name": "High-confidence moneyline",
+ "family": "moneyline",
+ "signal": "Bet the model's pick straight up when its win probability is at least 0.65.",
+ "thresholds": {
+  "win_prob_min": 0.65
+ },
+ "universe": "all 34 games on the official 2026-11-15..2026-11-18 slate (data/raw/official_schedule_capture_2026-11-15.json); window rule = today (2026-11-15 UTC) + 3 days per the project brief",
+ "exact_settlement_rule": "W/L from the official final (OT included). Units: BLOCKED (no market price) — record outcome only; settlement source = the official game page final score, recorded in data/settlement/ for each slate.",
+ "price_status": "No licensed two-sided price exists (no odds feed; F-W07). Spread/total tickets settle on the repo's paper -110 convention (stake 1.10 to win 1.00). Moneyline strategies record W/L only; unit ROI stays blank until a price exists. SGP tickets settle at the model's published joint_prob_rho as fair price.",
+ "validation_gates": {
+  "G1_sample_floor": "n >= 100 graded bets",
+  "G2_significance": "one-sided binomial p < 0.05, Bonferroni-corrected",
+  "G3_luck_bootstrap": "5th percentile of 10000-draw bootstrap ROI > 0",
+  "G4_stability": "profitable in both disjoint halves",
+  "G5_fragility": "profitable after removing the best 5% of bets",
+  "G6_provenance": "all driving inputs from approved official hosts",
+  "conjunction": "ALL gates must pass. There is no partial credit.",
+  "status_2026_11_15": "NO strategy has passed (Build A 0/8, Build B 0/10). All tickets are MODEL OUTPUT — UNVALIDATED, unfunded, zero stake."
+ },
+ "definition_ref": "data/derived/strategies.json (Build A), docs/data/leaderboard.json (Build B)",
+ "frozen_at_utc": "2026-11-15T12:55Z",
+ "frozen_by": "arena/83d380ad-nba1",
+ "first_tip_of_universe": "2026-11-15T18:00Z",
+ "frozen_before_first_tip": true,
+ "input_digests_sha256": {
+  "data/derived/horizon_picks.json": "82974ede2fa98c5a515f521f39103724ea6165b3e12d8e725ddb2476c5b66dfe",
+  "data/derived/horizon_lines.json": "534f0cc160c47d4f839793b102afd46a9af854c0f30b5f476956520e2a85e633",
+  "data/teams_advanced_2026_27.json": "dc58fa2d95a822aa0dc871ed9e743c521be4879653158b18d2b251cb80aef126",
+  "data/teams_scoring_2026_27.json": "247bc44c3ae850b690b72b2b9cbbe3c501db1142b5b8188c87ace2aa31ce1c8d",
+  "data/raw/official_schedule_capture_2026-11-15.json": "6b6006db8ee4f4c758ea197972a230e6543923a31c8b2529b0f03ce9c366defe",
+  "data/official/injury_2026-11-15_0615AM.json": "8958f9d71e5c2af8ff360edcc10de7f4674c08dd3e5428498945e7cfe040b965",
+  "data/official/results_2026-11-14.json": "187e853de73856cedddd8f4ba79d1096cd5f283beb912663313ee3186cbec8eb",
+  "data/settlement/settlement_2026-11-14.json": "992796498633d9a98c68de69dba164400be0471d195265a67dc30daea2a37827"
+ }
+}

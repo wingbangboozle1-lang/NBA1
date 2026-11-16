@@ -1,0 +1,73 @@
+{
+ "edition_id": "2026-11-15_0615PM",
+ "revision": "2026-11-15 06:15 PM ET",
+ "edition_published_utc": "2026-11-15T23:15Z",
+ "retrieved_utc": "2026-11-15T23:34Z",
+ "retrieval_window_utc": {
+  "earliest_possible_utc": "2026-11-15T23:15Z",
+  "latest_possible_utc": "2026-11-15T23:45:56Z",
+  "basis": "the edition is stamped 06:15 PM ET = 23:15Z; the session clock was measured at 2026-11-15T23:45:56Z with the edition already read"
+ },
+ "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf",
+ "edition_index_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "captured_by": "arena/49f70042-nba1",
+ "capture_method": "Read live through the web-fetch channel (the sandbox egress allowlist has no route to ak-static.cms.nba.com for byte downloads). Rows transcribed verbatim in report order.",
+ "binary_pdf_stored": false,
+ "binary_pdf_note": "The PDF bytes could not be archived in this sandbox: the only network route to ak-static.cms.nba.com is the text-extraction fetch channel. The edition is archived as a verbatim row transcription with the official URL and revision stamp on every row; the SHA-256 below is of the transcribed row text, not of the PDF bytes.",
+ "rows_sha256": "c14c48fe90dfe7f79708e3e4a0a4bcdeabeda972654210afbc24eea0fde2515d",
+ "row_counts": {
+  "rows_total": 155,
+  "player_rows": 149,
+  "not_yet_submitted_blocks": 6,
+  "rows_with_inherited_team": 12
+ },
+ "game_dates_in_edition": [
+  "11/15/2026",
+  "11/16/2026"
+ ],
+ "extraction_artefacts": [
+  {
+   "id": "IA-1",
+   "matchup": "ORL@BOS",
+   "game_date": "11/16/2026",
+   "team": "Boston Celtics",
+   "extracted_text": "|  | ORL@BOS | Boston Celtics | Penda, Noah | Out | NOT YET SUBMITTED |",
+   "interpretation": "The Player cell repeats the previous row's value ('Penda, Noah') because the PDF's text layer bled it across. Status/Reason read 'Out / NOT YET SUBMITTED', so this row is a Boston Celtics NOT-YET-SUBMITTED team block, not a Penda row. Stored with player=null and this artefact recorded.",
+   "stored_as": {
+    "player": null,
+    "status": "NOT YET SUBMITTED",
+    "reason": null
+   }
+  },
+  {
+   "id": "IA-2",
+   "matchup": "GSW@NOP",
+   "game_date": "11/16/2026",
+   "team": "New Orleans Pelicans",
+   "extracted_text": "the Pelicans rows of the GSW@NOP block carried tip time '08:00 (ET)' while the Golden State Warriors rows of the same block carried '09:00 (ET)'",
+   "interpretation": "One game has one tip time. The official NBA games page for 2026-11-16 lists GSW@NOP at 09:00 PM ET, and the official schedule capture (data/raw/official_schedule_capture_2026-11-15.json) agrees. The PDF text layer bled the neighbouring block's 08:00 onto the second team of the GSW@NOP block.",
+   "stored_as": {
+    "game_time": "09:00 (ET)",
+    "game_time_source": "official games page (schedule capture 2026-11-15)",
+    "game_time_extracted_from_pdf": "08:00 (ET)"
+   }
+  }
+ ],
+ "rows_file": "rows.json",
+ "diffs": [
+  {
+   "file": "diff_vs_2026-11-15_0615AM.json",
+   "from_edition": "2026-11-15_0615AM",
+   "to_edition": "2026-11-15_0615PM",
+   "counts": {
+    "previous_rows": 101,
+    "current_rows": 155,
+    "comparable_rows": 77,
+    "status_changes": 16,
+    "rows_added": 78,
+    "rows_removed": 24
+   },
+   "sha256": "1f1df52a0cb94bdda55d2ea55bd03d417ba0055dee10e659089550e966ab124c"
+  }
+ ]
+}
