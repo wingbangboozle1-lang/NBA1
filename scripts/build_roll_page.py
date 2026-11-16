@@ -74,6 +74,73 @@ def american(p):
     return (-100 * p / (1 - p)) if p >= 0.5 else (100 * (1 - p) / p)
 
 
+# --------------------------------------------------------------- R07 surface split
+# roll.html carries BOTH a projection surface (the board: lines, disagreement,
+# rotation availability, rest) and a bet surface (singles, two-leg parlays,
+# same-game parlays).  Requirement R07 says the two are never mixed.  The board
+# is wrapped in a <section data-surface="projection"> and the bet content in a
+# <section data-surface="bet"> with an explicit gate banner between them;
+# check_roll_separation() parses the generated HTML and fails the build if the
+# projection section carries any bet-only table or the bet section is unmarked.
+
+def surface_section_open(sid, kind, title, sub):
+    return ('<section id="%s" data-surface="%s"><h2 class="sec">%s</h2>'
+            '<p class="secsub">%s</p>' % (sid, kind, title, sub))
+
+
+def surface_section_close():
+    return "</section>"
+
+
+def bet_gate_banner():
+    return ('<div class="banner warn"><div class="b-t">Bet surface &mdash; gated</div>'
+            '<div class="b-b"><p>Everything below this line is the <strong>bet surface</strong>: '
+            'paper picks and parlays priced from the originated lines. No strategy has passed the '
+            'validation gates, so every ticket is <strong>MODEL OUTPUT &mdash; UNVALIDATED</strong> '
+            'at zero stake. This content is separated from the projection surface above by a '
+            'machine-checked boundary (R07); the projection surface carries model output only.</p></div></div>')
+
+
+def check_roll_separation(html):
+    """Fail-closed structural check that projection and bet content are not mixed.
+
+    Returns a list of problems (empty == pass). Parses the two surface sections
+    by their data-surface markers and asserts:
+      - both sections exist, projection before bet;
+      - the projection section holds the board and NO bet-only table header
+        (Pick / Legs / rho used / Fair odds / Fair price);
+      - the bet section holds the bet tables (Pick and Legs) and the gate banner.
+    """
+    import re as _re
+    problems = []
+    # locate the two sections by their opening tags
+    p_open = html.find('<section id="projection-surface" data-surface="projection">')
+    b_open = html.find('<section id="bet-surface" data-surface="bet">')
+    if p_open == -1:
+        problems.append("roll.html: projection surface section missing")
+    if b_open == -1:
+        problems.append("roll.html: bet surface section missing")
+    if problems:
+        return problems
+    if not p_open < b_open:
+        problems.append("roll.html: bet surface section precedes the projection surface section")
+    # projection section spans from p_open to b_open; bet section from b_open to its close
+    proj = html[p_open:b_open]
+    bet = html[b_open:html.find("</section>", b_open)]
+    if "Matchup" not in proj:
+        problems.append("roll.html: projection section does not carry the board table")
+    for hdr in ("Pick", "Legs", "rho used", "Fair odds", "Fair price"):
+        if _re.search(r"<th[^>]*>\s*%s\s*</th>" % _re.escape(hdr), proj):
+            problems.append("roll.html: bet-only header '%s' found in the projection section" % hdr)
+    if "Pick" not in bet:
+        problems.append("roll.html: bet section does not carry the singles (Pick) table")
+    if "Legs" not in bet:
+        problems.append("roll.html: bet section does not carry the parlay (Legs) table")
+    if "gated" not in bet.lower():
+        problems.append("roll.html: bet section has no gate banner")
+    return problems
+
+
 def build(db):
     """db = the build_dashboard module (for page/table/banner/esc/num/NA helpers)."""
     page, table, banner, h2 = db.page, db.table, db.banner, db.h2
@@ -269,11 +336,15 @@ def build(db):
             dis,
             srclink_url(g["schedule_source"], "slate") + " " + srclink_url(SRC_ADVANCED, "ratings"),
         ])
-    b.append(h2("1. The board &mdash; %d games, %s to %s" % (len(games), dates[0], dates[-1]),
-                "Spread is home minus away; positive means the home team is favoured. "
-                "Possessions, points, spread and total are DERIVED by the printed formula. "
-                "No home-court advantage is applied (it is not sourced from an official page; "
-                "measured home-win rate published below, flag F74)."))
+    b.append(surface_section_open(
+        "projection-surface", "projection",
+        "1. The board &mdash; %d games, %s to %s" % (len(games), dates[0], dates[-1]),
+        "Projection surface (safe to publish): originated lines, the two-estimator "
+        "disagreement as the headline, rotation availability and rest. Model output only "
+        "\u2014 no picks, no prices, no stakes. Spread is home minus away; positive means the "
+        "home team is favoured. Possessions, points, spread and total are DERIVED by the "
+        "printed formula. No home-court advantage is applied (it is not sourced from an "
+        "official page; measured home-win rate published below, flag F74)."))
     b.append(table(
         ["Date &middot; tip ET", "Matchup", "Records", "Poss.", "Proj pts A / H",
          "Spread (home)", "Total", "P(home win)", "Fair ML (home)",
@@ -289,6 +360,16 @@ def build(db):
               "counted from the official schedule and official finals. "
               "'Estimator B' is engine/pipeline.py's own model line, shown only where the two "
               "windows overlap.")))
+
+    # ---- R07: close the projection surface, open the gated bet surface ----
+    b.append(surface_section_close())
+    b.append(bet_gate_banner())
+    b.append(surface_section_open(
+        "bet-surface", "bet",
+        "2. Singles",
+        "Bet surface (gated): paper picks, priced from the originated lines. No strategy has "
+        "passed the validation gates, so every ticket is MODEL OUTPUT \u2014 UNVALIDATED at zero "
+        "stake. This section is machine-checked as separate from the projection surface above (R07)."))
 
     # ---- table 2: singles ---------------------------------------------
     srows = []
@@ -389,6 +470,8 @@ def build(db):
                   "copula with the measured &rho;, integrated numerically; at &rho; = 0 it reduces "
                   "exactly to the naive product, so the two columns are directly comparable.")))
 
+    b.append(surface_section_close())
+
     # ---- table 5: measured statistics ---------------------------------
     if rho_doc:
         mrows = []
@@ -467,8 +550,17 @@ def build(db):
 if __name__ == "__main__":
     import build_dashboard as db
     out = build(db)
+    problems = []
     for name, html in out.items():
         p = os.path.join(ROOT, "site", "pages", name)
         with open(p, "w", encoding="utf-8") as fh:
             fh.write(html)
         print("wrote", os.path.relpath(p, ROOT), len(html), "bytes")
+    # R07 machine-checked separation: projection surface and bet surface must not be mixed.
+    if "roll.html" in out:
+        problems = check_roll_separation(out["roll.html"])
+        if problems:
+            for pr in problems:
+                print("SEPARATION FAILURE: " + pr)
+            sys.exit(1)
+        print("roll.html projection/bet separation: OK")

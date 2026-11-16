@@ -1,0 +1,21 @@
+{
+ "session": "arena/bfad39b2-nba1",
+ "verified_at_utc": "2026-11-16T18:2xZ",
+ "source_pages": [
+  "https://www.nba.com/games?date=2026-11-17",
+  "https://www.nba.com/games?date=2026-11-18",
+  "https://www.nba.com/games?date=2026-11-19"
+ ],
+ "committed_files": [
+  "data/official/official_schedule_2026-11-15_to_19.json",
+  "data/official/official_schedule_2026-11-16_to_18_dfef26dc.json"
+ ],
+ "games_checked": 21,
+ "counts_by_date": {
+  "2026-11-17": 5,
+  "2026-11-18": 12,
+  "2026-11-19": 4
+ },
+ "mismatches": [],
+ "result": "PASS"
+}

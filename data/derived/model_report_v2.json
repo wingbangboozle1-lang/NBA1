@@ -1,9 +1,9 @@
 {
  "title": "Model report v2 - every measured input the line model is pinned to",
  "generated_by": "scripts/build_horizon_v2.py",
- "generated_utc": "2026-11-16T14:58:17Z",
+ "generated_utc": "2026-11-16T18:33:53Z",
  "home_court_anchor": {
-  "measured_home_win_rate": 0.5285,
+  "measured_home_win_rate": 0.5178,
   "measured_home_win_rate_from_final_scores": 0.46153846153846156,
   "hca_points_from_final_scores_crosscheck": -1.54,
   "primary_measurement": "the official standings HOME/ROAD columns (the largest official sample); the final-score corpus measurement is published beside it as a cross-check",
@@ -12,16 +12,16 @@
   "home_wins": 102,
   "home_games": 221,
   "standings_cross_check": {
-   "home_win_rate": 0.5285,
-   "road_win_rate": 0.4715,
-   "home_games": 193,
-   "road_games": 193,
+   "home_win_rate": 0.5178,
+   "road_win_rate": 0.4796,
+   "home_games": 197,
+   "road_games": 196,
    "source_url": "https://www.nba.com/standings"
   },
   "sigma_margin_used": 15.96,
   "sigma_margin_source": "population standard deviation of the margin on the official final-score corpus",
-  "hca_points": 1.14,
-  "hca_z": 0.0715,
+  "hca_points": 0.71,
+  "hca_z": 0.0446,
   "formula": "HCA_points = sigma_margin * Phi^-1(measured home win rate). The number of points is read off the measurement; nothing about it is fitted.",
   "status": "MEASURED - the home-court advantage is pinned to the official home win rate"
  },
@@ -433,10 +433,10 @@
   "w_model": 1.0,
   "w_market": 0.0,
   "market_leg": "UNAVAILABLE - no official closing line is reachable from this sandbox, so the market leg carries zero weight",
-  "oos_log_loss_model": 0.5601427874066056
+  "oos_log_loss_model": 0.5568821444393888
  },
  "model_out_of_sample_log_loss": {
-  "value": 0.56014,
+  "value": 0.55688,
   "n_games": 221,
   "definition": "binary log loss of the model's home-win probability on the official final-score corpus"
  },
