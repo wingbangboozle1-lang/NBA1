@@ -1,0 +1,1174 @@
+{
+ "title": "I03 row-level comparison: published horizon vs live official pages",
+ "captured_by": "arena/8f64e94c-nba1",
+ "compared_utc": "2026-11-15T23:56Z",
+ "inputs": {
+  "published_horizon": "data/derived/horizon_lines.json (34 games, 15-18 Nov roll, frozen pre-tip at 2026-11-15T12:55Z)",
+  "published_schedule_capture": "data/official/schedule_2026-11-15_to_18.json",
+  "live_observation": "verify/2026-11-15-8f64e94c/live_schedule_2026-11-15T2352Z.json",
+  "live_results_observation": "verify/2026-11-15-8f64e94c/live_state_2026-11-15T2352Z.json"
+ },
+ "horizon_vs_live": [
+  {
+   "game_id": "0022600236",
+   "date": "2026-11-15",
+   "matchup": "IND@PHI",
+   "tip_et_published": "01:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "live_tip_et_observed": "1:00 PM",
+   "live_date": "2026-11-15",
+   "live_matchup": "IND@PHI",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600237",
+   "date": "2026-11-15",
+   "matchup": "LAL@PHX",
+   "tip_et_published": "04:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "live_tip_et_observed": "4:00 PM",
+   "live_date": "2026-11-15",
+   "live_matchup": "LAL@PHX",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600238",
+   "date": "2026-11-15",
+   "matchup": "CHA@LAC",
+   "tip_et_published": "04:30 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "live_tip_et_observed": "4:30 PM (from the date card at games?date=2026-11-15)",
+   "live_date": "2026-11-15",
+   "live_matchup": "CHA@LAC",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600239",
+   "date": "2026-11-15",
+   "matchup": "SAS@UTA",
+   "tip_et_published": "05:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "live_tip_et_observed": "5:00 PM (from the date card at games?date=2026-11-15)",
+   "live_date": "2026-11-15",
+   "live_matchup": "SAS@UTA",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600240",
+   "date": "2026-11-15",
+   "matchup": "DAL@BOS",
+   "tip_et_published": "06:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "live_tip_et_observed": "6:00 PM (from the date card at games?date=2026-11-15)",
+   "live_date": "2026-11-15",
+   "live_matchup": "DAL@BOS",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600241",
+   "date": "2026-11-15",
+   "matchup": "NYK@TOR",
+   "tip_et_published": "06:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "live_tip_et_observed": "6:00 PM (from the date card at games?date=2026-11-15)",
+   "live_date": "2026-11-15",
+   "live_matchup": "NYK@TOR",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600242",
+   "date": "2026-11-15",
+   "matchup": "HOU@WAS",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "live_tip_et_observed": "7:00 PM",
+   "live_date": "2026-11-15",
+   "live_matchup": "HOU@WAS",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600243",
+   "date": "2026-11-15",
+   "matchup": "ATL@MIL",
+   "tip_et_published": "08:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "live_tip_et_observed": "8:00 PM",
+   "live_date": "2026-11-15",
+   "live_matchup": "ATL@MIL",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600244",
+   "date": "2026-11-15",
+   "matchup": "OKC@SAC",
+   "tip_et_published": "09:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "live_tip_et_observed": "9:00 PM",
+   "live_date": "2026-11-15",
+   "live_matchup": "OKC@SAC",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600245",
+   "date": "2026-11-16",
+   "matchup": "ORL@BOS",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "live_tip_et_observed": "7:00 PM",
+   "live_date": "2026-11-16",
+   "live_matchup": "ORL@BOS",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600246",
+   "date": "2026-11-16",
+   "matchup": "CHI@CLE",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "live_tip_et_observed": "7:00 PM",
+   "live_date": "2026-11-16",
+   "live_matchup": "CHI@CLE",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600247",
+   "date": "2026-11-16",
+   "matchup": "MEM@WAS",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "live_tip_et_observed": "7:00 PM",
+   "live_date": "2026-11-16",
+   "live_matchup": "MEM@WAS",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600248",
+   "date": "2026-11-16",
+   "matchup": "PHI@BKN",
+   "tip_et_published": "07:30 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "live_tip_et_observed": "7:30 PM",
+   "live_date": "2026-11-16",
+   "live_matchup": "PHI@BKN",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600249",
+   "date": "2026-11-16",
+   "matchup": "HOU@MIA",
+   "tip_et_published": "07:30 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "live_tip_et_observed": "7:30 PM",
+   "live_date": "2026-11-16",
+   "live_matchup": "HOU@MIA",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600250",
+   "date": "2026-11-16",
+   "matchup": "POR@MIN",
+   "tip_et_published": "08:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "live_tip_et_observed": "8:00 PM",
+   "live_date": "2026-11-16",
+   "live_matchup": "POR@MIN",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600251",
+   "date": "2026-11-16",
+   "matchup": "GSW@NOP",
+   "tip_et_published": "09:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "live_tip_et_observed": "8:00 PM",
+   "live_date": "2026-11-16",
+   "live_matchup": "GSW@NOP",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": false
+   },
+   "result": "DISAGREE"
+  },
+  {
+   "game_id": "0022600252",
+   "date": "2026-11-16",
+   "matchup": "PHX@DEN",
+   "tip_et_published": "09:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-16",
+   "live_tip_et_observed": "9:00 PM",
+   "live_date": "2026-11-16",
+   "live_matchup": "PHX@DEN",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600253",
+   "date": "2026-11-17",
+   "matchup": "NYK@TOR",
+   "tip_et_published": "07:30 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "live_tip_et_observed": "7:30 PM",
+   "live_date": "2026-11-17",
+   "live_matchup": "NYK@TOR",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600254",
+   "date": "2026-11-17",
+   "matchup": "POR@MIN",
+   "tip_et_published": "08:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "live_tip_et_observed": "8:00 PM",
+   "live_date": "2026-11-17",
+   "live_matchup": "POR@MIN",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600255",
+   "date": "2026-11-17",
+   "matchup": "DET@SAS",
+   "tip_et_published": "08:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "live_tip_et_observed": "8:00 PM",
+   "live_date": "2026-11-17",
+   "live_matchup": "DET@SAS",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600257",
+   "date": "2026-11-17",
+   "matchup": "UTA@LAC",
+   "tip_et_published": "10:30 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "live_tip_et_observed": "10:30 PM",
+   "live_date": "2026-11-17",
+   "live_matchup": "UTA@LAC",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600256",
+   "date": "2026-11-17",
+   "matchup": "CHA@LAL",
+   "tip_et_published": "11:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-17",
+   "live_tip_et_observed": "11:00 PM",
+   "live_date": "2026-11-17",
+   "live_matchup": "CHA@LAL",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600258",
+   "date": "2026-11-18",
+   "matchup": "MEM@CLE",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-18",
+   "live_tip_et_observed": "7:00 PM",
+   "live_date": "2026-11-18",
+   "live_matchup": "MEM@CLE",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600259",
+   "date": "2026-11-18",
+   "matchup": "HOU@IND",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-18",
+   "live_tip_et_observed": "7:00 PM",
+   "live_date": "2026-11-18",
+   "live_matchup": "HOU@IND",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600260",
+   "date": "2026-11-18",
+   "matchup": "MIL@MIA",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-18",
+   "live_tip_et_observed": "7:00 PM",
+   "live_date": "2026-11-18",
+   "live_matchup": "MIL@MIA",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600261",
+   "date": "2026-11-18",
+   "matchup": "PHI@ORL",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-18",
+   "live_tip_et_observed": "7:00 PM",
+   "live_date": "2026-11-18",
+   "live_matchup": "PHI@ORL",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600262",
+   "date": "2026-11-18",
+   "matchup": "CHI@BKN",
+   "tip_et_published": "07:30 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-18",
+   "live_tip_et_observed": "7:30 PM",
+   "live_date": "2026-11-18",
+   "live_matchup": "CHI@BKN",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600263",
+   "date": "2026-11-18",
+   "matchup": "WAS@TOR",
+   "tip_et_published": "07:30 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-18",
+   "live_tip_et_observed": "7:30 PM",
+   "live_date": "2026-11-18",
+   "live_matchup": "WAS@TOR",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600264",
+   "date": "2026-11-18",
+   "matchup": "DET@NOP",
+   "tip_et_published": "08:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-18",
+   "live_tip_et_observed": "8:00 PM",
+   "live_date": "2026-11-18",
+   "live_matchup": "DET@NOP",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600265",
+   "date": "2026-11-18",
+   "matchup": "ATL@OKC",
+   "tip_et_published": "08:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-18",
+   "live_tip_et_observed": "8:00 PM",
+   "live_date": "2026-11-18",
+   "live_matchup": "ATL@OKC",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600267",
+   "date": "2026-11-18",
+   "matchup": "GSW@DAL",
+   "tip_et_published": "08:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-18",
+   "live_tip_et_observed": "8:00 PM",
+   "live_date": "2026-11-18",
+   "live_matchup": "GSW@DAL",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600266",
+   "date": "2026-11-18",
+   "matchup": "BOS@DEN",
+   "tip_et_published": "09:30 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-18",
+   "live_tip_et_observed": "9:30 PM",
+   "live_date": "2026-11-18",
+   "live_matchup": "BOS@DEN",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600268",
+   "date": "2026-11-18",
+   "matchup": "UTA@LAL",
+   "tip_et_published": "10:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-18",
+   "live_tip_et_observed": "10:00 PM",
+   "live_date": "2026-11-18",
+   "live_matchup": "UTA@LAL",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600269",
+   "date": "2026-11-18",
+   "matchup": "PHX@SAC",
+   "tip_et_published": "10:00 PM ET",
+   "source_url": "https://www.nba.com/games?date=2026-11-18",
+   "live_tip_et_observed": "10:00 PM",
+   "live_date": "2026-11-18",
+   "live_matchup": "PHX@SAC",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  }
+ ],
+ "schedule_capture_vs_live": [
+  {
+   "game_id": "0022600236",
+   "date": "2026-11-15",
+   "matchup": "IND@PHI",
+   "tip_et_published": "01:00 PM ET",
+   "source_url": "https://www.nba.com/game/ind-vs-phi-0022600236",
+   "live_tip_et_observed": "1:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600237",
+   "date": "2026-11-15",
+   "matchup": "LAL@PHX",
+   "tip_et_published": "04:00 PM ET",
+   "source_url": "https://www.nba.com/game/lal-vs-phx-0022600237",
+   "live_tip_et_observed": "4:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600238",
+   "date": "2026-11-15",
+   "matchup": "CHA@LAC",
+   "tip_et_published": "04:30 PM ET",
+   "source_url": "https://www.nba.com/game/cha-vs-lac-0022600238",
+   "live_tip_et_observed": "4:30 PM (from the date card at games?date=2026-11-15)",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600239",
+   "date": "2026-11-15",
+   "matchup": "SAS@UTA",
+   "tip_et_published": "05:00 PM ET",
+   "source_url": "https://www.nba.com/game/sas-vs-uta-0022600239",
+   "live_tip_et_observed": "5:00 PM (from the date card at games?date=2026-11-15)",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600240",
+   "date": "2026-11-15",
+   "matchup": "DAL@BOS",
+   "tip_et_published": "06:00 PM ET",
+   "source_url": "https://www.nba.com/game/dal-vs-bos-0022600240",
+   "live_tip_et_observed": "6:00 PM (from the date card at games?date=2026-11-15)",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600241",
+   "date": "2026-11-15",
+   "matchup": "NYK@TOR",
+   "tip_et_published": "06:00 PM ET",
+   "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+   "live_tip_et_observed": "6:00 PM (from the date card at games?date=2026-11-15)",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600242",
+   "date": "2026-11-15",
+   "matchup": "HOU@WAS",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/game/hou-vs-was-0022600242",
+   "live_tip_et_observed": "7:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600243",
+   "date": "2026-11-15",
+   "matchup": "ATL@MIL",
+   "tip_et_published": "08:00 PM ET",
+   "source_url": "https://www.nba.com/game/atl-vs-mil-0022600243",
+   "live_tip_et_observed": "8:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600244",
+   "date": "2026-11-15",
+   "matchup": "OKC@SAC",
+   "tip_et_published": "09:00 PM ET",
+   "source_url": "https://www.nba.com/game/okc-vs-sac-0022600244",
+   "live_tip_et_observed": "9:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600245",
+   "date": "2026-11-16",
+   "matchup": "ORL@BOS",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/game/orl-vs-bos-0022600245",
+   "live_tip_et_observed": "7:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600246",
+   "date": "2026-11-16",
+   "matchup": "CHI@CLE",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/game/chi-vs-cle-0022600246",
+   "live_tip_et_observed": "7:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600247",
+   "date": "2026-11-16",
+   "matchup": "MEM@WAS",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/game/mem-vs-was-0022600247",
+   "live_tip_et_observed": "7:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600248",
+   "date": "2026-11-16",
+   "matchup": "PHI@BKN",
+   "tip_et_published": "07:30 PM ET",
+   "source_url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
+   "live_tip_et_observed": "7:30 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600249",
+   "date": "2026-11-16",
+   "matchup": "HOU@MIA",
+   "tip_et_published": "07:30 PM ET",
+   "source_url": "https://www.nba.com/game/hou-vs-mia-0022600249",
+   "live_tip_et_observed": "7:30 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600250",
+   "date": "2026-11-16",
+   "matchup": "POR@MIN",
+   "tip_et_published": "08:00 PM ET",
+   "source_url": "https://www.nba.com/game/por-vs-min-0022600250",
+   "live_tip_et_observed": "8:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600251",
+   "date": "2026-11-16",
+   "matchup": "GSW@NOP",
+   "tip_et_published": "09:00 PM ET",
+   "source_url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
+   "live_tip_et_observed": "8:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": false
+   },
+   "result": "DISAGREE"
+  },
+  {
+   "game_id": "0022600252",
+   "date": "2026-11-16",
+   "matchup": "PHX@DEN",
+   "tip_et_published": "09:00 PM ET",
+   "source_url": "https://www.nba.com/game/phx-vs-den-0022600252",
+   "live_tip_et_observed": "9:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600253",
+   "date": "2026-11-17",
+   "matchup": "NYK@TOR",
+   "tip_et_published": "07:30 PM ET",
+   "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600253",
+   "live_tip_et_observed": "7:30 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600254",
+   "date": "2026-11-17",
+   "matchup": "POR@MIN",
+   "tip_et_published": "08:00 PM ET",
+   "source_url": "https://www.nba.com/game/por-vs-min-0022600254",
+   "live_tip_et_observed": "8:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600255",
+   "date": "2026-11-17",
+   "matchup": "DET@SAS",
+   "tip_et_published": "08:00 PM ET",
+   "source_url": "https://www.nba.com/game/det-vs-sas-0022600255",
+   "live_tip_et_observed": "8:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600257",
+   "date": "2026-11-17",
+   "matchup": "UTA@LAC",
+   "tip_et_published": "10:30 PM ET",
+   "source_url": "https://www.nba.com/game/uta-vs-lac-0022600257",
+   "live_tip_et_observed": "10:30 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600256",
+   "date": "2026-11-17",
+   "matchup": "CHA@LAL",
+   "tip_et_published": "11:00 PM ET",
+   "source_url": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "live_tip_et_observed": "11:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600258",
+   "date": "2026-11-18",
+   "matchup": "MEM@CLE",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/game/mem-vs-cle-0022600258",
+   "live_tip_et_observed": "7:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600259",
+   "date": "2026-11-18",
+   "matchup": "HOU@IND",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/game/hou-vs-ind-0022600259",
+   "live_tip_et_observed": "7:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600260",
+   "date": "2026-11-18",
+   "matchup": "MIL@MIA",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/game/mil-vs-mia-0022600260",
+   "live_tip_et_observed": "7:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600261",
+   "date": "2026-11-18",
+   "matchup": "PHI@ORL",
+   "tip_et_published": "07:00 PM ET",
+   "source_url": "https://www.nba.com/game/phi-vs-orl-0022600261",
+   "live_tip_et_observed": "7:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600262",
+   "date": "2026-11-18",
+   "matchup": "CHI@BKN",
+   "tip_et_published": "07:30 PM ET",
+   "source_url": "https://www.nba.com/game/chi-vs-bkn-0022600262",
+   "live_tip_et_observed": "7:30 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600263",
+   "date": "2026-11-18",
+   "matchup": "WAS@TOR",
+   "tip_et_published": "07:30 PM ET",
+   "source_url": "https://www.nba.com/game/was-vs-tor-0022600263",
+   "live_tip_et_observed": "7:30 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600264",
+   "date": "2026-11-18",
+   "matchup": "DET@NOP",
+   "tip_et_published": "08:00 PM ET",
+   "source_url": "https://www.nba.com/game/det-vs-nop-0022600264",
+   "live_tip_et_observed": "8:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600265",
+   "date": "2026-11-18",
+   "matchup": "ATL@OKC",
+   "tip_et_published": "08:00 PM ET",
+   "source_url": "https://www.nba.com/game/atl-vs-okc-0022600265",
+   "live_tip_et_observed": "8:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600267",
+   "date": "2026-11-18",
+   "matchup": "GSW@DAL",
+   "tip_et_published": "08:00 PM ET",
+   "source_url": "https://www.nba.com/game/gsw-vs-dal-0022600267",
+   "live_tip_et_observed": "8:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600266",
+   "date": "2026-11-18",
+   "matchup": "BOS@DEN",
+   "tip_et_published": "09:30 PM ET",
+   "source_url": "https://www.nba.com/game/bos-vs-den-0022600266",
+   "live_tip_et_observed": "9:30 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600268",
+   "date": "2026-11-18",
+   "matchup": "UTA@LAL",
+   "tip_et_published": "10:00 PM ET",
+   "source_url": "https://www.nba.com/game/uta-vs-lal-0022600268",
+   "live_tip_et_observed": "10:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  },
+  {
+   "game_id": "0022600269",
+   "date": "2026-11-18",
+   "matchup": "PHX@SAC",
+   "tip_et_published": "10:00 PM ET",
+   "source_url": "https://www.nba.com/game/phx-vs-sac-0022600269",
+   "live_tip_et_observed": "10:00 PM",
+   "checks": {
+    "game_id_present_live": true,
+    "date_agrees": true,
+    "matchup_agrees": true,
+    "tip_agrees": true
+   },
+   "result": "AGREE"
+  }
+ ],
+ "finals_verified": [
+  {
+   "game_id": "0022600236",
+   "date": "2026-11-15",
+   "matchup": "IND@PHI",
+   "away_pts": 124,
+   "home_pts": 131,
+   "away_quarters": [
+    35,
+    22,
+    30,
+    37
+   ],
+   "home_quarters": [
+    29,
+    29,
+    39,
+    34
+   ],
+   "quarters_sum_away": true,
+   "quarters_sum_home": true,
+   "official_page_marks_final": true,
+   "result": "VERIFIED FINAL",
+   "source_url": "https://www.nba.com/game/ind-vs-phi-0022600236",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf"
+  },
+  {
+   "game_id": "0022600237",
+   "date": "2026-11-15",
+   "matchup": "LAL@PHX",
+   "away_pts": 131,
+   "home_pts": 123,
+   "away_quarters": [
+    33,
+    31,
+    40,
+    27
+   ],
+   "home_quarters": [
+    24,
+    30,
+    26,
+    43
+   ],
+   "quarters_sum_away": true,
+   "quarters_sum_home": true,
+   "official_page_marks_final": true,
+   "result": "VERIFIED FINAL",
+   "source_url": "https://www.nba.com/game/lal-vs-phx-0022600237",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf"
+  }
+ ],
+ "repeated_matchups_in_horizon": {
+  "NYK@TOR": [
+   "0022600241",
+   "0022600253"
+  ],
+  "POR@MIN": [
+   "0022600250",
+   "0022600254"
+  ]
+ },
+ "repeated_matchups_note": "The official feed genuinely lists POR@MIN on both 11/16 (0022600250) and 11/17 (0022600254), and NYK@TOR on both 11/15 (0022600241) and 11/17 (0022600253): distinct game ids, distinct tip times. This is not a capture artifact. It confirms horizon_lines.json flag F-W01 as printed by the official source.",
+ "summary": {
+  "horizon_rows": 34,
+  "horizon_agree": 33,
+  "schedule_rows": 34,
+  "schedule_agree": 33,
+  "finals_verified": 2,
+  "injury_basis_edition": "11/15/26 06:15 AM ET (index shows newer 11/15 editions; currency gap published as F78)"
+ }
+}
