@@ -1,0 +1,903 @@
+{
+  "title": "Measured minutes shares per team — official gamebooks, 2026-11-15",
+  "generated_by": "scripts/build_minutes_shares.py",
+  "session": "arena/2042a559-nba1 (COORDINATION §50, task Q02)",
+  "method": "Each player's minutes share = his printed minutes (seconds) / the printed team total (240:00, or 265:00 in a game with one overtime period). Top-8 share = the eight largest shares summed. Bench share = 1 − top-8 share. Out = players with no minutes in the gamebook, with the official note printed for them.",
+  "sample": {
+    "date": "2026-11-15",
+    "games": 6,
+    "team_games": 12,
+    "teams_measured": 12,
+    "games_per_team": 1,
+    "reading": "One game per team. These are observations of one game day, not rates: they cannot show how a team's minutes change when a player is absent."
+  },
+  "replacement_shares": {
+    "status": "blocked",
+    "reason": "Replacement share = the minutes a teammate gains when a named player is out. Measuring it needs the same team's games with and without that player. The repository holds one date, so there is no with/without contrast for any player.",
+    "unblock": "Capture the official gamebook for every completed 2026-27 game (the same statsdmz PDFs), parse them with scripts/capture_player_logs.py, and compare each player's minutes in games he missed against games he played."
+  },
+  "games": [
+    {
+      "date": "2026-11-15",
+      "away": "CHA",
+      "home": "LAC",
+      "game_id": "0022600238",
+      "gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_CHALAC_book.pdf",
+      "game_page": "https://www.nba.com/game/cha-vs-lac-0022600238"
+    },
+    {
+      "date": "2026-11-15",
+      "away": "DAL",
+      "home": "BOS",
+      "game_id": "0022600240",
+      "gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_DALBOS_book.pdf",
+      "game_page": "https://www.nba.com/game/dal-vs-bos-0022600240"
+    },
+    {
+      "date": "2026-11-15",
+      "away": "IND",
+      "home": "PHI",
+      "game_id": "0022600236",
+      "gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf",
+      "game_page": "https://www.nba.com/game/ind-vs-phi-0022600236"
+    },
+    {
+      "date": "2026-11-15",
+      "away": "LAL",
+      "home": "PHX",
+      "game_id": "0022600237",
+      "gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf",
+      "game_page": "https://www.nba.com/game/lal-vs-phx-0022600237"
+    },
+    {
+      "date": "2026-11-15",
+      "away": "NYK",
+      "home": "TOR",
+      "game_id": "0022600241",
+      "gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_NYKTOR_book.pdf",
+      "game_page": "https://www.nba.com/game/nyk-vs-tor-0022600241"
+    },
+    {
+      "date": "2026-11-15",
+      "away": "SAS",
+      "home": "UTA",
+      "game_id": "0022600239",
+      "gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_SASUTA_book.pdf",
+      "game_page": "https://www.nba.com/game/sas-vs-uta-0022600239"
+    }
+  ],
+  "scope_note": "Six gamebooks (Q02 scope). Excluded, not measured here: 2026-11-15_ATLMIL.md, 2026-11-15_HOUWAS.md, 2026-11-15_OKCSAC.md. Their files exist under data/official/gamebooks/ and parse with the same code.",
+  "rows": [
+    {
+      "date": "2026-11-15",
+      "game": "2026-11-15 CHA @ LAC",
+      "side": "away",
+      "team": "CHA",
+      "team_name": "Charlotte Hornets",
+      "opponent": "LAC",
+      "team_final": 105,
+      "players_played": 12,
+      "player_minutes_sum": "240:00",
+      "printed_team_total": "240:00",
+      "overtime_periods": 0,
+      "top8_share": 0.821,
+      "top8": [
+        {
+          "player": "Sion James",
+          "min": "35:29",
+          "share": 0.1478
+        },
+        {
+          "player": "Naz Reid",
+          "min": "27:22",
+          "share": 0.114
+        },
+        {
+          "player": "Moussa Diabaté",
+          "min": "26:16",
+          "share": 0.1094
+        },
+        {
+          "player": "Grayson Allen",
+          "min": "24:50",
+          "share": 0.1035
+        },
+        {
+          "player": "Brandon Miller",
+          "min": "24:28",
+          "share": 0.1019
+        },
+        {
+          "player": "Grant Williams",
+          "min": "20:11",
+          "share": 0.0841
+        },
+        {
+          "player": "Coby White",
+          "min": "19:57",
+          "share": 0.0831
+        },
+        {
+          "player": "Royce O'Neale",
+          "min": "18:30",
+          "share": 0.0771
+        }
+      ],
+      "bench_share": 0.179,
+      "tie_at_8": false,
+      "out_or_not_played": [],
+      "inactive_official": "Ajayi (G League - Two-Way), Boswell (G League - Two-Way), Hall (G League - Two-Way), Knueppel (Injury/Illness - Left Hamstring Strain), Schröder (Injury/Illness - Left Hamstring Strain), Steinbach (G League - On Assignment)",
+      "source_game_page": "https://www.nba.com/game/cha-vs-lac-0022600238",
+      "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_CHALAC_book.pdf"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "2026-11-15 CHA @ LAC",
+      "side": "home",
+      "team": "LAC",
+      "team_name": "LA CLIPPERS",
+      "opponent": "CHA",
+      "team_final": 113,
+      "players_played": 11,
+      "player_minutes_sum": "240:00",
+      "printed_team_total": "240:00",
+      "overtime_periods": 0,
+      "top8_share": 0.844,
+      "top8": [
+        {
+          "player": "Darius Garland",
+          "min": "34:49",
+          "share": 0.1451
+        },
+        {
+          "player": "Brook Lopez",
+          "min": "28:34",
+          "share": 0.119
+        },
+        {
+          "player": "Keaton Wagler",
+          "min": "27:32",
+          "share": 0.1147
+        },
+        {
+          "player": "Derrick Jones Jr.",
+          "min": "25:36",
+          "share": 0.1067
+        },
+        {
+          "player": "Max Strus",
+          "min": "24:54",
+          "share": 0.1037
+        },
+        {
+          "player": "Rui Hachimura",
+          "min": "22:05",
+          "share": 0.092
+        },
+        {
+          "player": "Kobe Sanders",
+          "min": "20:25",
+          "share": 0.0851
+        },
+        {
+          "player": "Gradey Dick",
+          "min": "18:38",
+          "share": 0.0776
+        }
+      ],
+      "bench_share": 0.156,
+      "tie_at_8": false,
+      "out_or_not_played": [],
+      "inactive_official": "Beal (Injury/Illness - Right Knee Injury Management), Ingram (Injury/Illness - Right Heel Surgery ), Martinelli (G League - Two-Way), Miller (Injury/Illness - Left Rotator Cuff Surgery ), Niederhäuser (Injury/Illness - Right Lisfranc Surgery )",
+      "source_game_page": "https://www.nba.com/game/cha-vs-lac-0022600238",
+      "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_CHALAC_book.pdf"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "2026-11-15 DAL @ BOS",
+      "side": "away",
+      "team": "DAL",
+      "team_name": "Dallas Mavericks (7-7) POS MIN FG FGA 3P 3PA FT FTA OR DR TOT A PF ST TO BS +/- PTS",
+      "opponent": "BOS",
+      "team_final": 94,
+      "players_played": 12,
+      "player_minutes_sum": "240:00",
+      "printed_team_total": "240:00",
+      "overtime_periods": 0,
+      "top8_share": 0.8443,
+      "top8": [
+        {
+          "player": "Caleb Martin",
+          "min": "33:51",
+          "share": 0.141
+        },
+        {
+          "player": "Zaccharie Risacher",
+          "min": "26:43",
+          "share": 0.1113
+        },
+        {
+          "player": "Cooper Flagg",
+          "min": "26:41",
+          "share": 0.1112
+        },
+        {
+          "player": "Morez Johnson Jr.",
+          "min": "25:40",
+          "share": 0.1069
+        },
+        {
+          "player": "P.J. Washington",
+          "min": "24:30",
+          "share": 0.1021
+        },
+        {
+          "player": "Walter Clayton Jr.",
+          "min": "23:04",
+          "share": 0.0961
+        },
+        {
+          "player": "Naji Marshall",
+          "min": "22:45",
+          "share": 0.0948
+        },
+        {
+          "player": "Daniel Gafford",
+          "min": "19:24",
+          "share": 0.0808
+        }
+      ],
+      "bench_share": 0.1557,
+      "tie_at_8": false,
+      "out_or_not_played": [],
+      "inactive_official": "Aldama (Injury/Illness - Left Ankle Sprain), Biberović (Injury/Illness - Right Heel Bursitis), Christie (Injury/Illness - Left Ankle Sprain), de Larrea (Injury/Illness - Right Knee Sprain), Irving (Injury/Illness - Left Knee Injury Management), Lively II (Injury/Illness - Right Foot Surgery)",
+      "source_game_page": "https://www.nba.com/game/dal-vs-bos-0022600240",
+      "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_DALBOS_book.pdf"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "2026-11-15 DAL @ BOS",
+      "side": "home",
+      "team": "BOS",
+      "team_name": "BOSTON CELTICS",
+      "opponent": "DAL",
+      "team_final": 131,
+      "players_played": 14,
+      "player_minutes_sum": "240:00",
+      "printed_team_total": "240:00",
+      "overtime_periods": 0,
+      "top8_share": 0.7049,
+      "top8": [
+        {
+          "player": "Jayson Tatum",
+          "min": "30:08",
+          "share": 0.1256
+        },
+        {
+          "player": "Paul George",
+          "min": "24:51",
+          "share": 0.1035
+        },
+        {
+          "player": "Derrick White",
+          "min": "22:56",
+          "share": 0.0956
+        },
+        {
+          "player": "Jordan Walsh",
+          "min": "21:07",
+          "share": 0.088
+        },
+        {
+          "player": "Payton Pritchard",
+          "min": "18:56",
+          "share": 0.0789
+        },
+        {
+          "player": "Baylor Scheierman",
+          "min": "18:00",
+          "share": 0.075
+        },
+        {
+          "player": "Hugo González",
+          "min": "17:52",
+          "share": 0.0744
+        },
+        {
+          "player": "Neemias Queta",
+          "min": "15:21",
+          "share": 0.064
+        }
+      ],
+      "bench_share": 0.2951,
+      "tie_at_8": false,
+      "out_or_not_played": [
+        {
+          "player": "Mike Conley",
+          "official_note": "DNP - Coach's Decision"
+        }
+      ],
+      "inactive_official": "Mitchell (G League - Two-Way), Williams (G League - Two-Way)",
+      "source_game_page": "https://www.nba.com/game/dal-vs-bos-0022600240",
+      "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_DALBOS_book.pdf"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "2026-11-15 IND @ PHI",
+      "side": "away",
+      "team": "IND",
+      "team_name": "Indiana Pacers",
+      "opponent": "PHI",
+      "team_final": 124,
+      "players_played": 12,
+      "player_minutes_sum": "240:00",
+      "printed_team_total": "240:00",
+      "overtime_periods": 0,
+      "top8_share": 0.844,
+      "top8": [
+        {
+          "player": "Aaron Nesmith",
+          "min": "36:20",
+          "share": 0.1514
+        },
+        {
+          "player": "Pascal Siakam",
+          "min": "33:40",
+          "share": 0.1403
+        },
+        {
+          "player": "Quenton Jackson",
+          "min": "30:14",
+          "share": 0.126
+        },
+        {
+          "player": "Kelly Oubre Jr.",
+          "min": "28:55",
+          "share": 0.1205
+        },
+        {
+          "player": "Ivica Zubac",
+          "min": "22:15",
+          "share": 0.0927
+        },
+        {
+          "player": "T.J. McConnell",
+          "min": "19:06",
+          "share": 0.0796
+        },
+        {
+          "player": "Jay Huff",
+          "min": "17:42",
+          "share": 0.0737
+        },
+        {
+          "player": "Jalen Slawson",
+          "min": "14:22",
+          "share": 0.0599
+        }
+      ],
+      "bench_share": 0.156,
+      "tie_at_8": false,
+      "out_or_not_played": [
+        {
+          "player": "Braden Smith",
+          "official_note": "DNP - Coach's Decision"
+        }
+      ],
+      "inactive_official": "Furphy (Injury/Illness - Right ACL Repair / Surgery), Haliburton (Injury/Illness - Left Hamstring Strain), Nembhard (Injury/Illness - Left Hip  Soreness / Tightness), Sheppard (Injury/Illness - Left Meniscus Tear)",
+      "source_game_page": "https://www.nba.com/game/ind-vs-phi-0022600236",
+      "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "2026-11-15 IND @ PHI",
+      "side": "home",
+      "team": "PHI",
+      "team_name": "PHILADELPHIA 76ERS",
+      "opponent": "IND",
+      "team_final": 131,
+      "players_played": 10,
+      "player_minutes_sum": "240:00",
+      "printed_team_total": "240:00",
+      "overtime_periods": 0,
+      "top8_share": 0.9545,
+      "top8": [
+        {
+          "player": "Tyrese Maxey",
+          "min": "35:32",
+          "share": 0.1481
+        },
+        {
+          "player": "Dean Wade",
+          "min": "35:03",
+          "share": 0.146
+        },
+        {
+          "player": "LeBron James",
+          "min": "32:47",
+          "share": 0.1366
+        },
+        {
+          "player": "Jaylen Brown",
+          "min": "32:28",
+          "share": 0.1353
+        },
+        {
+          "player": "VJ Edgecombe",
+          "min": "30:49",
+          "share": 0.1284
+        },
+        {
+          "player": "Jabari Walker",
+          "min": "24:42",
+          "share": 0.1029
+        },
+        {
+          "player": "Kentavious Caldwell-Pope",
+          "min": "22:16",
+          "share": 0.0928
+        },
+        {
+          "player": "Anfernee Simons",
+          "min": "15:28",
+          "share": 0.0644
+        }
+      ],
+      "bench_share": 0.0455,
+      "tie_at_8": false,
+      "out_or_not_played": [],
+      "inactive_official": "Barlow (Injury/Illness - Low Back Stress Reaction), Bona (Injury/Illness - Cervical Spine Sprain), Embiid (Injury/Illness - Right Foot Plantar Fascia Injury Management), Hukporti (Injury/Illness - Right Achilles Tendon Rupture / Tear), Rupert (G League - Two-Way)",
+      "source_game_page": "https://www.nba.com/game/ind-vs-phi-0022600236",
+      "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "2026-11-15 LAL @ PHX",
+      "side": "away",
+      "team": "LAL",
+      "team_name": "Los Angeles Lakers (12-2) Attendance: 17071 (Sellout)",
+      "opponent": "PHX",
+      "team_final": 131,
+      "players_played": 9,
+      "player_minutes_sum": "240:03",
+      "printed_team_total": "240:00",
+      "overtime_periods": 0,
+      "top8_share": 0.9496,
+      "top8": [
+        {
+          "player": "Quentin Grimes",
+          "min": "37:26",
+          "share": 0.156
+        },
+        {
+          "player": "Luka Dončić",
+          "min": "35:44",
+          "share": 0.1489
+        },
+        {
+          "player": "Walker Kessler",
+          "min": "32:26",
+          "share": 0.1351
+        },
+        {
+          "player": "Jake LaRavia",
+          "min": "32:19",
+          "share": 0.1347
+        },
+        {
+          "player": "Matisse Thybulle",
+          "min": "26:05",
+          "share": 0.1087
+        },
+        {
+          "player": "Collin Sexton",
+          "min": "23:45",
+          "share": 0.099
+        },
+        {
+          "player": "Sandro Mamukelashvili",
+          "min": "21:10",
+          "share": 0.0882
+        },
+        {
+          "player": "Ziaire Williams",
+          "min": "18:59",
+          "share": 0.0791
+        }
+      ],
+      "bench_share": 0.0504,
+      "tie_at_8": false,
+      "out_or_not_played": [
+        {
+          "player": "Jaden Hardy",
+          "official_note": "DNP - Coach's Decision"
+        },
+        {
+          "player": "Bronny James",
+          "official_note": "DNP - Coach's Decision"
+        },
+        {
+          "player": "Kevon Looney",
+          "official_note": "DNP - Coach's Decision"
+        },
+        {
+          "player": "Chris Mañon",
+          "official_note": "DNP - Coach's Decision"
+        },
+        {
+          "player": "Adou Thiero",
+          "official_note": "DNP - Coach's Decision"
+        }
+      ],
+      "inactive_official": "Carr (Injury/Illness - Illness ), Cooper (G League - Two-Way), Kaluma (G League - Two-Way), Reaves (Injury/Illness - Left Heel Contusion / Bone  Bruise)",
+      "source_game_page": "https://www.nba.com/game/lal-vs-phx-0022600237",
+      "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "2026-11-15 LAL @ PHX",
+      "side": "home",
+      "team": "PHX",
+      "team_name": "PHOENIX SUNS",
+      "opponent": "LAL",
+      "team_final": 123,
+      "players_played": 11,
+      "player_minutes_sum": "240:01",
+      "printed_team_total": "240:00",
+      "overtime_periods": 0,
+      "top8_share": 0.8399,
+      "top8": [
+        {
+          "player": "Jordan Goodwin",
+          "min": "31:21",
+          "share": 0.1306
+        },
+        {
+          "player": "Devin Booker",
+          "min": "27:48",
+          "share": 0.1158
+        },
+        {
+          "player": "Collin Gillespie",
+          "min": "27:38",
+          "share": 0.1151
+        },
+        {
+          "player": "Miles Bridges",
+          "min": "24:06",
+          "share": 0.1004
+        },
+        {
+          "player": "Ryan Dunn",
+          "min": "23:59",
+          "share": 0.0999
+        },
+        {
+          "player": "Luke Kennard",
+          "min": "23:08",
+          "share": 0.0964
+        },
+        {
+          "player": "Dillon Brooks",
+          "min": "22:18",
+          "share": 0.0929
+        },
+        {
+          "player": "Jalen Green",
+          "min": "21:16",
+          "share": 0.0886
+        }
+      ],
+      "bench_share": 0.1601,
+      "tie_at_8": false,
+      "out_or_not_played": [],
+      "inactive_official": "Timme (G League - Two-Way), Williams (Injury/Illness - Left Shoulder Surgery)",
+      "source_game_page": "https://www.nba.com/game/lal-vs-phx-0022600237",
+      "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "2026-11-15 NYK @ TOR",
+      "side": "away",
+      "team": "NYK",
+      "team_name": "New York Knicks (7-6) Attendance: 19800 (Sellout)",
+      "opponent": "TOR",
+      "team_final": 112,
+      "players_played": 12,
+      "player_minutes_sum": "265:02",
+      "printed_team_total": "265:00",
+      "overtime_periods": 1,
+      "top8_share": 0.9272,
+      "top8": [
+        {
+          "player": "OG Anunoby",
+          "min": "44:29",
+          "share": 0.1679
+        },
+        {
+          "player": "Karl-Anthony Towns",
+          "min": "42:49",
+          "share": 0.1616
+        },
+        {
+          "player": "Jalen Brunson",
+          "min": "40:58",
+          "share": 0.1546
+        },
+        {
+          "player": "Mikal Bridges",
+          "min": "32:15",
+          "share": 0.1217
+        },
+        {
+          "player": "Landry Shamet",
+          "min": "29:42",
+          "share": 0.1121
+        },
+        {
+          "player": "Josh Hart",
+          "min": "26:15",
+          "share": 0.0991
+        },
+        {
+          "player": "Tyler Kolek",
+          "min": "15:35",
+          "share": 0.0588
+        },
+        {
+          "player": "Miles McBride",
+          "min": "13:39",
+          "share": 0.0515
+        }
+      ],
+      "bench_share": 0.0728,
+      "tie_at_8": false,
+      "out_or_not_played": [
+        {
+          "player": "Pacôme Dadiet",
+          "official_note": "DNP - Coach's Decision"
+        },
+        {
+          "player": "Mohamed Diawara",
+          "official_note": "DNP - Coach's Decision"
+        }
+      ],
+      "inactive_official": "Akins, Knecht, Nickel",
+      "source_game_page": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+      "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_NYKTOR_book.pdf"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "2026-11-15 NYK @ TOR",
+      "side": "home",
+      "team": "TOR",
+      "team_name": "TORONTO RAPTORS",
+      "opponent": "NYK",
+      "team_final": 108,
+      "players_played": 10,
+      "player_minutes_sum": "265:00",
+      "printed_team_total": "265:00",
+      "overtime_periods": 1,
+      "top8_share": 0.9246,
+      "top8": [
+        {
+          "player": "Collin Murray-Boyles",
+          "min": "39:47",
+          "share": 0.1501
+        },
+        {
+          "player": "Immanuel Quickley",
+          "min": "37:30",
+          "share": 0.1415
+        },
+        {
+          "player": "RJ Barrett",
+          "min": "37:00",
+          "share": 0.1396
+        },
+        {
+          "player": "Scottie Barnes",
+          "min": "36:19",
+          "share": 0.137
+        },
+        {
+          "player": "Ja'Kobe Walter",
+          "min": "35:38",
+          "share": 0.1345
+        },
+        {
+          "player": "Jamal Shead",
+          "min": "25:34",
+          "share": 0.0965
+        },
+        {
+          "player": "Jakob Poeltl",
+          "min": "17:27",
+          "share": 0.0658
+        },
+        {
+          "player": "Allen Graves",
+          "min": "15:46",
+          "share": 0.0595
+        }
+      ],
+      "bench_share": 0.0754,
+      "tie_at_8": false,
+      "out_or_not_played": [],
+      "inactive_official": "Bittle (Injury/Illness - Right Foot Avulsion Fracture), Leonard (Injury/Illness - Left Knee Injury Management), McCullar Jr. (G League - Two- Way), Smith (G League - Two-Way)",
+      "source_game_page": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+      "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_NYKTOR_book.pdf"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "2026-11-15 SAS @ UTA",
+      "side": "away",
+      "team": "SAS",
+      "team_name": "San Antonio Spurs",
+      "opponent": "UTA",
+      "team_final": 110,
+      "players_played": 10,
+      "player_minutes_sum": "240:00",
+      "printed_team_total": "240:00",
+      "overtime_periods": 0,
+      "top8_share": 0.9269,
+      "top8": [
+        {
+          "player": "Victor Wembanyama",
+          "min": "35:13",
+          "share": 0.1467
+        },
+        {
+          "player": "Stephen Castle",
+          "min": "34:52",
+          "share": 0.1453
+        },
+        {
+          "player": "Dylan Harper",
+          "min": "34:20",
+          "share": 0.1431
+        },
+        {
+          "player": "Devin Vassell",
+          "min": "31:48",
+          "share": 0.1325
+        },
+        {
+          "player": "Keldon Johnson",
+          "min": "29:19",
+          "share": 0.1222
+        },
+        {
+          "player": "Julian Champagne",
+          "min": "23:53",
+          "share": 0.0995
+        },
+        {
+          "player": "Jordan McLaughlin",
+          "min": "19:14",
+          "share": 0.0801
+        },
+        {
+          "player": "Harrison Barnes",
+          "min": "13:48",
+          "share": 0.0575
+        }
+      ],
+      "bench_share": 0.0731,
+      "tie_at_8": false,
+      "out_or_not_played": [
+        {
+          "player": "David Jones Garcia",
+          "official_note": "DNP - Coach's Decision"
+        },
+        {
+          "player": "Tarris Reed Jr.",
+          "official_note": "DNP - Coach's Decision"
+        }
+      ],
+      "inactive_official": "Brown (G League - Two-Way), Fox (Injury/Illness - Left Hip Tightness), Gillespie (G League - Two-Way), Harris (Injury/Illness - Left Calf Strain), Quaintance (Injury/Illness - Right Knee Surgery)",
+      "source_game_page": "https://www.nba.com/game/sas-vs-uta-0022600239",
+      "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_SASUTA_book.pdf"
+    },
+    {
+      "date": "2026-11-15",
+      "game": "2026-11-15 SAS @ UTA",
+      "side": "home",
+      "team": "UTA",
+      "team_name": "UTAH JAZZ (1-13) POS MIN FG FGA 3P 3PA FT FTA OR DR TOT A PF ST TO BS +/- PTS",
+      "opponent": "SAS",
+      "team_final": 102,
+      "players_played": 9,
+      "player_minutes_sum": "240:01",
+      "printed_team_total": "240:00",
+      "overtime_periods": 0,
+      "top8_share": 0.9487,
+      "top8": [
+        {
+          "player": "Mo Bamba",
+          "min": "35:41",
+          "share": 0.1487
+        },
+        {
+          "player": "Darryn Peterson",
+          "min": "34:14",
+          "share": 0.1426
+        },
+        {
+          "player": "Keyonte George",
+          "min": "33:56",
+          "share": 0.1414
+        },
+        {
+          "player": "Brice Sensabaugh",
+          "min": "30:14",
+          "share": 0.126
+        },
+        {
+          "player": "Ace Bailey",
+          "min": "29:52",
+          "share": 0.1244
+        },
+        {
+          "player": "Josh Okogie",
+          "min": "27:28",
+          "share": 0.1144
+        },
+        {
+          "player": "Svi Mykhailiuk",
+          "min": "21:19",
+          "share": 0.0888
+        },
+        {
+          "player": "Josh Green",
+          "min": "14:58",
+          "share": 0.0624
+        }
+      ],
+      "bench_share": 0.0513,
+      "tie_at_8": false,
+      "out_or_not_played": [],
+      "inactive_official": "Alexander (G League - Two-Way), Bufkin (G League - Two-Way), Ingram (G League - Two-Way), Jackson Jr. (Injury/Illness - Right MCL Tear), Markkanen (Injury/Illness - Right Hand Fracture), Nurkić (Injury/Illness - Right 2nd Plantar Plate Tear)",
+      "source_game_page": "https://www.nba.com/game/sas-vs-uta-0022600239",
+      "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_SASUTA_book.pdf"
+    }
+  ],
+  "flags": [
+    {
+      "kind": "minutes_sum_mismatch",
+      "game": "2026-11-15 LAL @ PHX",
+      "team": "LAL",
+      "player_sum": "240:03",
+      "printed_total": "240:00",
+      "treatment": "printed total used as denominator; difference not redistributed",
+      "source": "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf"
+    },
+    {
+      "kind": "minutes_sum_mismatch",
+      "game": "2026-11-15 LAL @ PHX",
+      "team": "PHX",
+      "player_sum": "240:01",
+      "printed_total": "240:00",
+      "treatment": "printed total used as denominator; difference not redistributed",
+      "source": "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf"
+    },
+    {
+      "kind": "minutes_sum_mismatch",
+      "game": "2026-11-15 NYK @ TOR",
+      "team": "NYK",
+      "player_sum": "265:02",
+      "printed_total": "265:00",
+      "treatment": "printed total used as denominator; difference not redistributed",
+      "source": "https://statsdmz.nba.com/pdfs/20261115/20261115_NYKTOR_book.pdf"
+    },
+    {
+      "kind": "minutes_sum_mismatch",
+      "game": "2026-11-15 SAS @ UTA",
+      "team": "UTA",
+      "player_sum": "240:01",
+      "printed_total": "240:00",
+      "treatment": "printed total used as denominator; difference not redistributed",
+      "source": "https://statsdmz.nba.com/pdfs/20261115/20261115_SASUTA_book.pdf"
+    }
+  ]
+}
