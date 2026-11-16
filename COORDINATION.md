@@ -50,6 +50,12 @@ gated off — exactly the structured-parsing and verified-promotion gap RFG4 nam
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/3be525a9-nba1` (opened 2026-11-16 14:2x UTC — requirements traceability audit + first-hand official spot-check of the 11/15 feed; §50)
+
+Branch `arena/3be525a9-nba1`, based on `main` `047103e`. Platform pins this session to that branch (deviation from `session-<id>/<task>` naming logged, as every session before it). Scope is read-only on shared outputs: it writes only `verify/2026-11-16-3be525a9/**` and this board. It does **not** take the integration seat, does not edit `data/**`, `site/**`, `index.html`, or `.github/**`, and does not merge to `main`. Full task table and log: **§50** at the tail.
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/2823d556-nba1` (opened 2026-11-16 02:10 UTC — deploy-queue unblock, CI gap, and a live official re-read of the published 11/16 horizon)
 
 Branch `arena/2823d556-nba1`, based on `main` `f6b7676` (tip at claim time). The platform pins this
@@ -5471,3 +5477,38 @@ another build cycle, and re-check with
 `gh api /repos/wingbangboozle1-lang/NBA1/pages --jq .status` (should read `built`) plus a
 fetch-back that shows **25 games (16–18 Nov)** and **103 open flags**. Until then, verify
 against the `main` tree, not the live host.
+
+---
+
+## 50. Session `arena/3be525a9-nba1` — requirements traceability audit, first-hand official spot-check of the 2026-11-15 feed (claimed 2026-11-16 14:2x UTC)
+
+| # | Task | Status | File scope (exclusive) | Notes |
+|---|------|--------|------------------------|-------|
+| X01 | Claim + board read | done | `COORDINATION.md` (top block + §50) | Read §0, §0b, open PRs (#130, #136) before claiming. |
+| X02 | Requirements traceability register (27 brief items → artifacts on `main`) | done | `verify/2026-11-16-3be525a9/REQUIREMENTS_TRACEABILITY.md` | Each item: present / partial / missing / not verified, with the path. |
+| X03 | First-hand official spot-check of the 2026-11-15 slate | done | `verify/2026-11-16-3be525a9/spotcheck_2026-11-15.{py,md}` | Source: https://www.nba.com/games?date=2026-11-15 (pages 1–2), read via the web-fetch channel. |
+| X04 | Run `scripts/verify_all.py` | done | none (output only; working tree clean afterwards) | Exit 0, `VERIFY OK`. Its own footer says it checks link structure only, not source values. |
+
+**Sources used (all fetched 2026-11-16 ~14:20–14:25 UTC):**
+- https://www.nba.com/games?date=2026-11-15 — official NBA games page (9 games, final scores).
+- Per-game official links printed on that page, e.g. https://www.nba.com/game/ind-vs-phi-0022600236 … https://www.nba.com/game/okc-vs-sac-0022600244.
+- https://official.nba.com/nba-injury-report-2026-27-season/ — official injury-report index (fetched; reachable; lists 11/16 PDF URLs).
+
+**Verification performed:** 6 of 9 `data/official/results_2026-11-15.json` rows match the official page exactly (game ID, Final, score). 3 rows (HOU@WAS, ATL@MIL, OKC@SAC) are recorded not-final but the official page prints Final: 147–119, 113–106, 125–103. **No data value was changed.** Quarter scores for those 3 were not read and not filled in.
+
+**Irregularities (for the owner of `data/official/**` and the settlement seat):**
+1. Stale 11/15 results rows (3 of 9).
+2. No `data/settlement/settlement_2026-11-15.json` although all 9 games are Final on the official page.
+3. No `site/projection/` / `site/bet/` split on `main` (brief item 15).
+4. `data/arenas.json` coordinates are not sourced to an official or per-row URL (its own `source_note` says so). Brief item 10 needs sourced coordinates.
+5. Board paths in the brief (`scripts/refresh_gate.py`, `scripts/settle_ledger.py`, `data/results_feed.json`, `data/injury_pdfs/`, `scripts/diff_injury_pdfs.py`) do not exist under those names; equivalents are listed in the register.
+6. Reachability note: nba.com returns HTTP 000 from the sandbox shell but returns full content through the web-fetch channel (same finding as the board's F-47-A). The board's F7 wording should name the channel; that is a request to the owner, logged here, not edited.
+
+**Handoff requests (logged, not executed — cross-scope):**
+- R-50-1 → the owner of `data/official/results_2026-11-15.json` (last editor `arena/8f64e94c-nba1`, I03): re-read the 3 stale rows and the quarter scores from each official box score, then settle 11/15 (integration seat).
+- R-50-2 → the integration seat: decide ownership of the projection/bet split (brief item 15), which is currently missing.
+- R-50-3 → whoever owns `data/arenas.json`: add a per-row official source URL for each arena or flag the coordinates unverified in the table itself.
+
+**Not done:** merge to `main` (the integration seat is not this session); PR creation (the board's integration rule applies to the final integration session); re-running the refresh, settlement, or estimators.
+
+**Status:** done. Branch pushed. Pull request: not opened from this session, because a PR to `main` from an unintegrated branch would bypass the board's integration seat.
