@@ -370,15 +370,34 @@ def main(argv=None):
     # path (with the vintage-mismatch caveat flagged in F126 (renumbered from F115 at merge)).
     out_rel_existing = f"data/settlement/settlement_{args.slate}.json"
     existing_path = os.path.join(ROOT, out_rel_existing)
+    # A date is "already settled" if THIS file covers it OR any settlement
+    # record already hash-chained into the ledger graded it (slates overlap:
+    # e.g. the 11/14 archive also carries 11/15 games, which entries 6-7
+    # already settled from the 11/15 slate). Without the chain-wide half, the
+    # scheduled re-settle of an overlapping slate re-grades a date another
+    # entry froze, overwrites the older settlement file and breaks that
+    # entry's digest (observed 2026-11-16T15:23Z, dropped in the same class
+    # as main's e9f1d1f).
+    chain_settled = set()
+    for _e in ledger["entries"]:
+        if _e.get("type") == "settlement_record":
+            chain_settled |= set((_e.get("summary") or {}).get("dates_settled") or [])
+        chain_settled |= set(_e.get("settled_dates") or [])
     if os.path.exists(existing_path):
         existing = json.load(open(existing_path, encoding="utf-8"))
         prev_settled = set(existing.get("summary", {}).get("dates_settled") or [])
-        if settled_dates and set(settled_dates) <= prev_settled:
+        if settled_dates and set(settled_dates) <= (prev_settled | chain_settled):
             print(f"already settled: {out_rel_existing} covers "
-                  f"{sorted(prev_settled)}; nothing new to settle "
+                  f"{sorted(prev_settled)} and the ledger chain covers "
+                  f"{sorted(chain_settled)}; nothing new to settle "
                   f"({sorted(settled_dates)} is a subset) - "
                   "idempotent skip, no ledger append")
             return 0
+    elif settled_dates and set(settled_dates) <= chain_settled:
+        print(f"already settled in the ledger chain: {sorted(chain_settled)}; "
+              f"{sorted(settled_dates)} adds nothing - idempotent skip, "
+              "no settlement file written, no ledger append")
+        return 0
 
     stamp = args.at or __import__("datetime").datetime.now(
         __import__("datetime").timezone.utc).strftime("%Y-%m-%dT%H:%MZ")
