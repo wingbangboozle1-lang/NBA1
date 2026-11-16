@@ -1055,6 +1055,15 @@
 <td>Capture the full gamebooks in a later pass if they are needed for minutes or player logs.</td>
 <td class="src"><span class="na" title="source id Official gamebook PDFs (statsdmz) and nba.com game pages is not in the register">&mdash;</span></td>
 </tr>
+<tr>
+<td>F112</td>
+<td>High</td>
+<td><b>The Results &amp; Settlement page printed &quot;0 of 0 final — NOT settleable&quot; directly under the settled 11/15 game day</b></td>
+<td>Two official captures of 2026-11-15 exist in data/official/: results_2026-11-15.json (the canonical file) and results_2026-11-15_dfef26dc.json (a session-namespaced capture at 2026-11-16T02:12Z..02:17Z). scripts/build_results_page.py derived the game day from the whole file stem, so the second file became its own section headed '2026-11-15_dfef26dc', matched zero rows against that impossible date, and printed 'Retrieved 2026-11-16T02:12Z..02:17Z · 0 of 0 final — NOT settleable' immediately beneath the section that says the same game day IS settled (stamp 2026-11-16T14:45Z, 5-4-0). Found by reading the built page, not by a gate: all five gates passed while it was wrong, because it is a false statement in prose rather than a broken link.</td>
+<td>site/pages/results.html — the one page whose job is to answer 'is this game day settleable'</td>
+<td>Fixed: the date is now the first ten characters of the stem, the canonical results_&lt;date&gt;.json is authoritative when present, and extra captures are listed by name in a note instead of being rendered as empty game days. Verified after the fix: the page has exactly three sections (2026-11-14, 2026-11-15, How a game day gets settled) and zero occurrences of 'NOT settleable'.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">link</a></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
