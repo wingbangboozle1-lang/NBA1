@@ -1167,6 +1167,76 @@
    "source": "GitHub REST API response captured in session log; GET /repos/.../pages shows build_type=legacy",
    "source_url": "https://docs.github.com/rest/pages/pages#update-information-about-a-apiname-pages-site",
    "suggested_action": "Grant the app pages:write (or run the PUT from an admin UI session), flip build_type=workflow, then restore the four deploy steps in pages.yml as documented in its header comment."
+  },
+  {
+   "id": "F128",
+   "severity": "High",
+   "title": "Per-player game-log capture skipped three of the nine official 11/15 gamebooks, while the committed log reported six games and zero problems",
+   "detail": "scripts/capture_player_logs.py mapped six games in GAME_IDS; data/official/gamebooks/ holds nine. ATLMIL, HOUWAS and OKCSAC printed 'not in GAME_IDS, skipped' and the run exited 1, but the committed data/official/player_game_logs_2026-11-15.json was written with problems: []. The R21 evidence said 'complete for the six games that finished' although data/official/results_2026-11-15.json lists nine FINAL games. Corrected by arena/fe8e2065-nba1 (COORDINATION §55): the three ids were added, and each id is now checked against the official results feed (away, home, FINAL) before any parsing. All nine games pass the points check against the official final (9 of 9; 18 team totals). Minutes match the printed team total exactly in 13 of 18 teams (largest difference 3 s, published as printed).",
+   "affected": "data/official/player_game_logs_2026-11-15.json; site/pages/player-logs.html; data/content/requirements.json (R21)",
+   "source": "Official game pages re-read 2026-11-16 ~18:2xZ: ATL 113 - MIL 106 Final, HOU 147 - WAS 119 Final, OKC 125 - SAC 103 Final",
+   "source_url": "https://www.nba.com/game/atl-vs-mil-0022600243",
+   "suggested_action": "Review the corrected log and page. No further action is needed for the nine 11/15 games; later games need their own gamebooks."
+  },
+  {
+   "id": "F129",
+   "severity": "Medium",
+   "title": "Parser dropped non-appearance rows: DND rows with the jersey and name in separate cells, and NWT rows, produced no row",
+   "detail": "Found by re-reading the 11/15 gamebook text. ATL: '| 4 | Kingston Flemings | | DND - Injury/Illness - Lumbar Strain |' produced no row because the DNP branch only read a jersey and name in one cell. HOU: '| 36 Marcus Smart | | NWT - League Suspension |' was not recognised because NWT was not a non-appearance note. Both are fixed in scripts/capture_player_logs.py; both players now have played=false rows that carry the printed note. The points and minutes checks were already passing, so no published total changed.",
+   "affected": "scripts/capture_player_logs.py; data/official/player_game_logs_2026-11-15.json",
+   "source": "Official gamebook PDFs, page 1 box score (re-read 2026-11-16)",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf",
+   "suggested_action": "None beyond review. Keep the NWT and DND/DNP recognition when the parser is extended to later games."
+  },
+  {
+   "id": "F130",
+   "severity": "Medium",
+   "title": "Injury-report status conflicts with the gamebook: Dillon Mitchell and Amari Williams (DAL@BOS) are 'Available' on the 06:15 PM ET report but on the gamebook's Inactive line as 'G League - Two-Way'",
+   "detail": "Both names are on the 11/15 06:15 PM ET report with status Available. The DAL@BOS gamebook's Inactive line for the Celtics lists 'Mitchell (G League - Two-Way), Williams (G League - Two-Way)'. The gamebook reason is not an injury, and the report lists them as available, so both documents cannot describe the same status for a G League assignment. Recorded as printed: the player rows carry the gamebook reason and the report status, and the conflict is listed in the coverage section. Neither value was changed.",
+   "affected": "data/official/player_game_logs_2026-11-15.json (coverage.report_players_unexplained_by_gamebooks); site/pages/player-logs.html",
+   "source": "Injury report 11/15 06:15 PM ET (official index edition), and gamebook DAL@BOS Inactive line",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf",
+   "suggested_action": "Ask the league or the club which document governs a two-way assignment listed on the report. No change to values until answered."
+  },
+  {
+   "id": "F131",
+   "severity": "Low",
+   "title": "Name variant not reconciled: 'Christopher Cenac Jr.' (DAL@BOS, report: Available) vs 'Chris Cenac Jr.' in the gamebook box score",
+   "detail": "The gamebook box score lists 'Chris Cenac Jr.' for Dallas, who played 06:57 with 3 points. The report lists 'Cenac Jr., Christopher' as Available. The two names describe the same surname and suffix, but the official documents do not state that they are the same player, so no row was merged and the report entry is listed as unexplained.",
+   "affected": "site/pages/player-logs.html (coverage list)",
+   "source": "Gamebook DAL@BOS page 1 (statsdmz) and injury report 11/15 06:15 PM ET",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_DALBOS_book.pdf",
+   "suggested_action": "Confirm the identity from an official roster source before merging the report entry into the player row."
+  },
+  {
+   "id": "F132",
+   "severity": "Medium",
+   "title": "Spelling conflict: report 'Champagne, Justin' (HOU@WAS, Out) vs gamebook Inactive line 'Champagnie (Injury/Illness - Right Foot Surgery)' for Washington",
+   "detail": "The 11/15 06:15 PM ET report spells the name 'Champagne'. The Washington Inactive line in the gamebook spells it 'Champagnie'. The two names are not paired. The report entry is listed as unexplained. The gamebook reason is recorded on the Inactive line, and no value was changed.",
+   "affected": "site/pages/player-logs.html (coverage list)",
+   "source": "Gamebook HOU@WAS page 1 (statsdmz) and injury report 11/15 06:15 PM ET",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf",
+   "suggested_action": "Confirm the legal spelling from the league roster before pairing the two entries."
+  },
+  {
+   "id": "F133",
+   "severity": "Low",
+   "title": "Ambiguous surname: OKC@SAC report lists Jalen Williams and Jaylin Williams (both Out); the Thunder Inactive line lists 'Williams' twice with two reasons and no first names",
+   "detail": "The gamebook prints 'Williams (Injury/Illness - Left Ankle Surgery)' and 'Williams (Injury/Illness - Low Back Spasms)' on the Thunder Inactive line. It gives no first names. Pairing either report entry to either line by surname would be a guess, so neither entry was paired. Both report entries are listed as unexplained.",
+   "affected": "site/pages/player-logs.html (coverage list)",
+   "source": "Gamebook OKC@SAC page 1 (statsdmz) and injury report 11/15 06:15 PM ET",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC_book.pdf",
+   "suggested_action": "Use the official game page's player list or a dated roster to pair the two entries."
+  },
+  {
+   "id": "F134",
+   "severity": "Low",
+   "title": "Status reason differs: Marcus Smart (HOU@WAS) is 'Out' on the 06:15 PM ET report, but the gamebook prints 'NWT - League Suspension'",
+   "detail": "The report gives Smart status Out with no injury reason in the row matched by name. The gamebook prints a league suspension (NWT, not with team). Both are recorded as printed: the row carries the gamebook note, and the report status is kept in the injury-report fields. The reasons were not reconciled.",
+   "affected": "data/official/player_game_logs_2026-11-15.json (HOU@WAS row)",
+   "source": "Gamebook HOU@WAS page 1 (statsdmz) and injury report 11/15 06:15 PM ET",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf",
+   "suggested_action": "Confirm whether a league suspension should be reported as Out on the injury report."
   }
  ]
 }

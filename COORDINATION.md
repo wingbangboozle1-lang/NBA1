@@ -6346,3 +6346,82 @@ Branch `arena/0d7e58e9-nba1`, based on `main` `add1e74` (PR #145 merge). Platfor
 ### 56.4 Delivery
 
 PR and merge are recorded below when executed. This change is COORDINATION.md only; the site does not change, so the Pages deploy is expected to be a no-op rebuild of the same tree.
+
+## 57. Session `arena/fe8e2065-nba1` — R21 per-player game-log coverage: the three skipped 11/15 gamebooks, first-hand re-read, flags F128–F134, gates, delivery (claimed 2026-11-16 18:2x UTC)
+
+Branch `arena/fe8e2065-nba1`, based on `main` `add1e74` (PR #145). The platform pins this session to that branch (deviation logged, as every earlier session logged it). Claim commit `ef23e01`.
+
+### 57.1 Task table
+
+| ID | Task | Status | File scope |
+| --- | --- | --- | --- |
+| FE-01 | Board read, registration, claim committed and pushed (ground rule 4) | **done** (`ef23e01`) | `COORDINATION.md` |
+| FE-02 | Find the coverage gap in R21 from the repo, not from memory: the official results feed lists nine FINAL games for 11/15; `scripts/capture_player_logs.py` maps six | **done** | read-only |
+| FE-03 | Re-read the three unmapped games (ATL@MIL, HOU@WAS, OKC@SAC) first-hand: final score on the nba.com game page and the page-1 box score in the statsdmz gamebook PDF | **done** | read-only (`fetch_page`) |
+| FE-04 | Map the three games in `GAME_IDS`; refuse any mapping that disagrees with `data/official/results_2026-11-15.json` (away, home, FINAL) | **done** | `scripts/capture_player_logs.py` |
+| FE-05 | Fix two parser gaps found on the way: DND rows with jersey and name in separate cells, and NWT rows, were dropped without a row (F129) | **done** | `scripts/capture_player_logs.py` |
+| FE-06 | Record the injury-report players who have no box-score row from the gamebook's own `Inactive:` line (verbatim reason), with a strict surname-and-team match; flag every report entry the gamebooks do not explain (F130–F134) | **done** | `scripts/capture_player_logs.py`, `data/official/player_game_logs_2026-11-15.json` |
+| FE-07 | Rebuild the player-logs page with computed (not typed) coverage wording and a flagged table that carries an official link on every row | **done** | `scripts/build_results_page.py`, `site/pages/player-logs.html` |
+| FE-08 | R21 register row: evidence, gap, links updated; status stays **partial** | **done** | `data/content/requirements.json` (R21 row) |
+| FE-09 | Flags F128–F134 appended to the Flagged register with official source links | **done** | `data/content/flagged.json` |
+| FE-10 | Full gate suite (CI validate steps, run locally as CI runs them) | **done — all pass** (see 57.3) | scripts run in place |
+| FE-11 | PR → `main`, merge without waiting, confirm Pages deploy | see 57.5 | whole repo |
+
+### 57.2 Sources (all re-read on 2026-11-16 between ~18:20Z and 18:30Z unless noted)
+
+| Item | Official source (re-read this session) | Value |
+| --- | --- | --- |
+| ATL@MIL final | https://www.nba.com/game/atl-vs-mil-0022600243 | Atlanta 113 — Milwaukee 106, Final, Sun 15 Nov 2026, Fiserv Forum |
+| HOU@WAS final | https://www.nba.com/game/hou-vs-was-0022600242 | Houston 147 — Washington 119, Final, Sun 15 Nov 2026, Capital One Arena |
+| OKC@SAC final | https://www.nba.com/game/okc-vs-sac-0022600244 | Oklahoma City 125 — Sacramento 103, Final, Sun 15 Nov 2026, Golden 1 Center |
+| ATL@MIL gamebook (page 1) | https://statsdmz.nba.com/pdfs/20261115/20261115_ATLMIL_book.pdf | ATL 113, MIL 106; per-player rows match the committed text (e.g. D. Daniels 26:56, 9 pts) |
+| HOU@WAS gamebook (page 1) | https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf | HOU 147, WAS 119; Inactive line "Champagnie"; M. Smart "NWT - League Suspension" |
+| OKC@SAC gamebook (page 1) | https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC_book.pdf | OKC 125, SAC 103; Inactive line "Williams" twice; DND rows for Hunter and LaVine |
+| Injury report 11/15 06:15 PM ET | https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf (index: https://official.nba.com/nba-injury-report-2026-27-season/) | 155 rows, 149 unique names (committed transcription: `data/official/injury_2026-11-15_0615PM.json`) |
+| Other six games | `data/official/results_2026-11-15.json` (each row's source_url is the nba.com game page) and the committed gamebook texts | unchanged from the earlier capture; re-checked by the script against the feed |
+
+**Method.** The gamebook text is the committed page-1 text, not a re-transcription. The three new games were compared against the live PDF for their page-1 box score and against the nba.com game page for the final. The rest of the logic is in `scripts/capture_player_logs.py`. Its mapping and every row are checked by the script, not by hand.
+
+### 57.3 Verification performed
+
+| Gate | Result |
+| --- | --- |
+| `python3 scripts/capture_player_logs.py` | exit 0; "all per-game checks passed (points sum to official final, minutes sum to printed total)"; `problems: []` |
+| Points vs official final | **9 of 9 games, 18 of 18 team totals match** (`results_2026-11-15.json`) |
+| Minutes vs printed team total | 13 of 18 exact; largest difference 3 s (official document's own, published, not corrected) |
+| Coverage (computed) | 9 games; 304 player rows; 199 appeared; 73 rows recovered from Inactive lines; 149 unique report names → 92 have a row, 53 later-game only, 4 unexplained (flags F130–F133) |
+| `python3 scripts/build_results_page.py` | `results.html` byte-identical to HEAD; `player-logs.html` rebuilt |
+| `scripts/verify_all.py` | **VERIFY OK** (builders, checker, data audits; 3091 table rows, 0 unsourced). First run failed on six flagged-table rows without a link; fixed by adding the gamebook PDF to each row, re-run passed |
+| `scripts/check_site.py` | pass (every table row has an official source link) |
+| `scripts/verify_integration.py` | PASSED, 0 errors, 44 warnings (existing, published on the Flagged page) |
+| `scripts/build_verification_page.py` + porcelain check | regenerated; `verification.html` not stale |
+| `scripts/check_links.py` | PASS (external links checked for approved host only; nba.com HTTP status not claimed from this sandbox) |
+| `scripts/check_rendered.py` | PASS |
+| `node scripts/render_check.mjs` (jsdom, installed `--no-save`) | 160 pages, 12,611 content blocks, 11,109 rendered table rows, **0 pages with problems** |
+| `scripts/verify_ledger.py` | ledger chain OK |
+| Command Center / build-B data files | all present and valid JSON; 17 Command Center pages |
+
+### 57.4 Irregularities (all published on the Flagged for Review page, non-blocking)
+
+| Flag | Severity | What | Source |
+| --- | --- | --- | --- |
+| F128 | High | Parser skipped three of nine 11/15 gamebooks; committed log said six games, `problems: []`. Corrected. | nba.com game pages above |
+| F129 | Medium | DND rows with split cells and NWT rows were dropped. Corrected. | statsdmz gamebooks above |
+| F130 | Medium | Mitchell and Williams (DAL@BOS): "Available" on the report, "G League - Two-Way" on the Inactive line. Not changed. | injury report; DAL@BOS gamebook |
+| F131 | Low | "Christopher Cenac Jr." (report) vs "Chris Cenac Jr." (box score, played 06:57). Not merged. | DAL@BOS gamebook; injury report |
+| F132 | Medium | "Champagne, Justin" (report, Out) vs "Champagnie" (Wizards Inactive line). Not paired. | HOU@WAS gamebook; injury report |
+| F133 | Low | Two "Williams" on the OKC Inactive line, no first names; both report entries left unexplained. | OKC@SAC gamebook; injury report |
+| F134 | Low | Marcus Smart: report "Out", gamebook "NWT - League Suspension". Reasons not reconciled. | HOU@WAS gamebook; injury report |
+
+Other observations, not flagged as irregularities: the 06:15 PM report has five rows with no player name, all "NOT YET SUBMITTED" club blocks for 11/16 games (expected under the league's submission rule); they are not 11/15 data.
+
+### 57.5 Regenerated files (generated by the standard builders during `verify_all`, not hand-edited)
+
+`data/derived/minutes_shares.json` and `site/pages/minutes.html` (R12): the same parser now records DNP/DND/NWT players in the "not played" column (for example Cam Christie and Jalen Pickett, CHA@LAC, "DNP - Coach's Decision"). Top-8 shares, players-used counts and printed-total flags are unchanged. `index.html` (shared landing page): the open-flags tile moves 123 → 130. `site/pages/flagged.html`, `site/data/flagged.json`, `docs/data/flagged.json` (generated copies of the register), `site/pages/requirements.html` (generated from `requirements.json`).
+
+### 57.6 Boundaries, not done
+
+- R21 stays **partial**. Coverage is complete only for the nine finished 11/15 games. Logs for the 53 report names whose games are after 11/15 need those gamebooks, which do not exist yet.
+- The other partial rows (R01, R04, R07, R09, R12 replacement shares, R13, R14, R15, R16, R26) are not touched in this session. In particular R09 (the published HCA of 1.23 vs the measured 0.88) and R15 (rotation column on the legacy picks page) need model or UI work and were out of this session's file scope.
+- No pick, line, settlement or ledger entry was changed. The 11/15 settlement is unchanged.
+- nba.com HTTP status is not claimed from the CI sandbox; the three games were re-read through the fetch channel, not through a browser.
