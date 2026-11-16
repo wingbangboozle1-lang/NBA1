@@ -29,9 +29,9 @@
   {
    "id": "R02",
    "requirement": "Official per-game result feed kept current: one row per game with date, teams, final score, quarter scores.",
-   "status": "partial",
-   "evidence": "data/official/results_2026-11-14.json holds 5 rows with columns date, game_id, away, home, away_pts, home_pts, away_quarters, home_quarters, ot_periods, source_url. Every row links its NBA.com game page. Updated 2026-11-16 by session arena/161f1638-nba1. data/official/results_2026-11-15.json now holds all 9 games of the 11/15 slate: 2 rows FINAL with quarter scores that sum to the printed final (IND@PHI 124-131, LAL@PHX 131-123), 4 rows in-progress and 3 not tipped, each with the observed state and its own official game-page link. Nothing un-final is recorded as a final.",
-   "gap": "The feed is still filled by a capture pass, not appended automatically by the scheduled job, and 11/15 has 7 of 9 games still to settle. See F95.",
+   "status": "done",
+   "evidence": "data/official/results_2026-11-15.json now holds all nine 11/15 games FINAL. The three rows completed under COORDINATION §50 (Q01) are HOU@WAS 147-119 (game 0022600242), ATL@MIL 113-106 (0022600243) and OKC@SAC 125-103 (0022600244). Each row's quarter scores were read from the LINESCORES table on its official nba.com game page, and each quarter line sums to the printed final. The gamebook period tables agree.",
+   "gap": "The feed is a dated snapshot for the 11/15 slate. Later slates depend on the scheduled refresh (refresh-data.yml).",
    "links": [
     {
      "label": "Sample row: DEN @ NOP game page",
@@ -47,8 +47,8 @@
    "id": "R03",
    "requirement": "Settle only after final scores are verified.",
    "status": "partial",
-   "evidence": "Settlement is no longer a manual step: `.github/workflows/refresh-data.yml` runs `python3 scripts/settle_slate.py --slate <each archived pre-tip slate>` after the freshness gates and before the publish, and `scripts/settle_slate.py` refuses (exit 3) any slate with a game that is not verified final. It has settled 11/14 (data/settlement/settlement_2026-11-14.json, ledger entry 3) and refuses 11/15 correctly: at the 2026-11-15T23:45Z..23:55Z capture 6 of 9 games were final and HOU@WAS, ATL@MIL, OKC@SAC were not, so nothing was graded.",
-   "gap": "Until the workflow's first post-merge run lands, the scheduled execution of the settlement step is not yet observed in the Actions history - the step is committed and syntax-checked, and the same command is proved to work by hand. 11/15 stays unsettled while three games are unfinished, by design.",
+   "evidence": "scripts/settle_slate.py refuses (exit 3) any slate with a game that is not verified final. It settled 11/14 (data/settlement/settlement_2026-11-14.json, ledger entry 3). For 11/15 every game is now FINAL on its official game page (see R02), so the scheduled workflow can settle that day on its normal path. Settlement is not run by hand.",
+   "gap": "The 11/15 settlement has not run yet and no 11/15 settlement stamp exists. It runs on the next refresh-data workflow run after the freshness gates pass.",
    "links": [
     {
      "label": "Settlement record (repo)",
@@ -119,8 +119,8 @@
    "id": "R07",
    "requirement": "Split the site into a 'projection' surface (safe to publish now) and a 'bet' surface (gated), and never mix them.",
    "status": "partial",
-   "evidence": "Gated paper picks are labelled as gated on the picks page, and prop-variance and props pages carry their own labels. The picks page does not split into two separate surfaces.",
-   "gap": "No separate projection and bet surfaces exist. A reviewer decision is needed on the split (see Decisions page).",
+   "evidence": "Two separate surfaces are built by scripts/build_surfaces.py. site/pages/projection.html holds model output only, with 25 rows, each linked to its official game page. It is machine-checked for betting vocabulary, pick markup, and distances. site/pages/bet.html shows four computed gates (G1 validation, G2 sample floor, G3 pre-registration, G4 ledger integrity; data/derived/surface_gates.json). G1 and G2 are closed, so bet.html shows no picks.",
+   "gap": "site/pages/roll.html still puts singles, two-leg parlays and same-game lines on one page. That page is built by scripts/build_roll_page.py, which another session owns, so the split there is not done. Index links to the two new surfaces are a shared-chrome change for the integration session.",
    "links": [
     {
      "label": "Picks page (repo)",
@@ -183,8 +183,8 @@
    "id": "R11",
    "requirement": "Compute rest, back-to-back and 3-in-4 from the official schedule, and add travel distance from a sourced arena-coordinate table.",
    "status": "partial",
-   "evidence": "Rest and back-to-back are shown per game on the Game Flow page, computed from the official schedule. The 3-in-4 metric was not found by search. Updated 2026-11-16 by session arena/161f1638-nba1. 3-in-4 is now computed from the official schedule and published in the rest column of site/pages/roll.html (e.g. '2d / 0d B2B', '1d 3-in-4').",
-   "gap": "Travel distance is still not computed - no official arena-coordinate table has been sourced, and a hand-typed one would be an unsourced value. See F85.",
+   "evidence": "Rest, back-to-back and 3-in-4 are computed from the official schedule (existing evidence, unchanged). Travel distance is not published: Q04 found no official arena-coordinate table. Arena venue names come from nba.com/schedule, and the coordinates come from Wikipedia (secondary) in data/official/arena_coordinates_2026-11-15.json. Those coordinates are not used for distances.",
+   "gap": "Travel distance is still not computed. A conflict was found: data/derived/horizon_lines_v2.json already holds a travel distance (for example ORL to BOS 2,094 mi) and a travel adjustment (for example 2.513 for ORL), both computed from the Wikipedia-sourced coordinates. The projection margins and totals include that adjustment. Flagged as F109 for review. See also F85.",
    "links": [
     {
      "label": "Official schedule (NBA.com)",
@@ -200,8 +200,8 @@
    "id": "R12",
    "requirement": "Model minutes redistribution explicitly: for each team, the top-8 minutes shares and the replacement shares when a player is out.",
    "status": "partial",
-   "evidence": "data/derived/injury_impact.json has a rotation block per team (regulation minutes available, minutes vacated, redistribution rule). Its own rule is labelled 'MODEL RULE, not measured'.",
-   "gap": "Top-8 minutes shares are not reported. The redistribution rule is unmeasured. See flag F89.",
+   "evidence": "data/derived/minutes_shares.json measures top-8 minutes shares for 12 team-games across the six 11/15 gamebooks in scope (CHALAC, DALBOS, INDPHI, LALPHX, NYKTOR, SASUTA). Each share is a player's printed minutes divided by the printed team total. Each row links its official nba.com game page and statsdmz gamebook PDF. The page is site/pages/minutes.html. Four team rows whose player minutes differ from the printed total by 1 to 3 seconds are flagged (F108). The overtime game total (NYK@TOR) is 265:00, as printed.",
+   "gap": "Replacement shares when a player is out are blocked. Measuring them needs the same team's games with and without that player, and the repository has one game per team (n = 1). The three other 11/15 gamebooks (HOUWAS, ATLMIL, OKCSAC) are not in scope for this measure. Per-player minutes beyond the top-50 leaderboard are not covered. See F89.",
    "links": [
     {
      "label": "Injury impact (repo)",

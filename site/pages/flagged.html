@@ -1028,6 +1028,33 @@
 <td>Switch Pages to the Actions build type (Settings &gt; Pages &gt; Source: GitHub Actions), or delete pages.yml, so exactly one path deploys. Recorded as SG37.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/actions/workflows/pages.yml" target="_blank" rel="noopener">link</a></td>
 </tr>
+<tr>
+<td>F108</td>
+<td>Low</td>
+<td><b>Four team rows in the 11/15 gamebooks do not sum to the printed team total</b></td>
+<td>LAL@PHX: LAL player minutes sum to 240:03 and PHX to 240:01 against a printed 240:00. SAS@UTA: UTA sums to 240:01. NYK@TOR: NYK sums to 265:02 against a printed 265:00 (one overtime period, 5 x 53:00). Each printed total is used as the denominator. The difference is shown, not redistributed. Other rows match exactly.</td>
+<td>data/derived/minutes_shares.json (flags); site/pages/minutes.html</td>
+<td>None needed for the shares. Keep the flag on the minutes page.</td>
+<td class="src"><span class="na" title="source id Official gamebook PDFs (statsdmz): LALPHX, SASUTA, NYKTOR is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F109</td>
+<td>High</td>
+<td><b>Projection margins and totals include a travel adjustment from a non-official arena-coordinate source</b></td>
+<td>data/derived/horizon_lines_v2.json computes a travel distance per away team (for example ORL to BOS 2,094 mi; the coordinates come from Wikipedia) and feeds a travel adjustment into the margin (for example 2.513 for ORL). Q04 decided no distances are computed, because no official arena-coordinate table exists. projection.html shows the margins and totals and carries a note (F85), but the adjustment itself is not yet removed.</td>
+<td>data/derived/horizon_lines_v2.json (travel_away, travel_adjustment_away); site/pages/projection.html</td>
+<td>Remove the travel adjustment from the published margin, or source an official coordinate table, before the next projection publish. Owner: the session that owns scripts/build_horizon_v2.py.</td>
+<td class="src"><span class="na" title="source id Wikipedia coordinate API (secondary); venue names from nba.com/schedule is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F110</td>
+<td>Low</td>
+<td><b>Three 11/15 gamebooks are page-1 text only and are outside the minutes measure</b></td>
+<td>data/official/gamebooks/2026-11-15_HOUWAS.md, _ATLMIL.md and _OKCSAC.md hold the page-1 box score and period table, not the full PDF. Their final scores match the official game pages (147-119, 113-106, 125-103). The OKC@SAC away player minutes sum to 239:59 against the printed 240:00, a one-second difference. These files are not used for the minutes shares (Q02 scope is the six 11/15 gamebooks).</td>
+<td>data/official/gamebooks/2026-11-15_HOUWAS.md, _ATLMIL.md, _OKCSAC.md</td>
+<td>Capture the full gamebooks in a later pass if they are needed for minutes or player logs.</td>
+<td class="src"><span class="na" title="source id Official gamebook PDFs (statsdmz) and nba.com game pages is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the

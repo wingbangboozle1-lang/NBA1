@@ -2819,6 +2819,12 @@ def main():
     if os.path.exists(pv):
         shutil.copyfile(pv, os.path.join(SITE_DATA, "prop_variance.json"))
 
+    # COORDINATION §50 (Q05, integration-seat hook): measured minutes shares (Q02) and the
+    # projection/bet split with its four gates (Q03). Each writes its own pages and data file.
+    import subprocess as _sp
+    for _s in ("build_minutes_shares.py", "build_surfaces.py"):
+        _sp.run([sys.executable, os.path.join(ROOT, "scripts", _s)], check=True)
+
     print("Wrote %d pages, assets and data to %s" % (len(built), SITE))
 
 
