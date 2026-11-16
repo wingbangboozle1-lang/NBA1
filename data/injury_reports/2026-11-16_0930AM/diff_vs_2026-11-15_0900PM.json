@@ -1,0 +1,181 @@
+{
+ "title": "Injury-report status diff — 2026-11-15 09:00 PM ET → 2026-11-16 09:30 AM ET",
+ "diffed_by": "arena/acc2fd9e-nba1",
+ "diffed_at_utc": "2026-11-16T14:44Z..14:52Z",
+ "previous_edition": {
+  "edition": "2026-11-15 09:00 PM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf",
+  "file": "data/official/injury_2026-11-15_0900PM_dfef26dc.json",
+  "game_dates": [
+   "11/15/2026",
+   "11/16/2026"
+  ]
+ },
+ "current_edition": {
+  "edition": "2026-11-16 09:30 AM",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_30AM.pdf",
+  "file": "data/official/injury_2026-11-16_0930AM_acc2fd9e.json",
+  "game_dates": [
+   "11/16/2026",
+   "11/17/2026"
+  ]
+ },
+ "rule": "a status change is recorded only when the same (game date, matchup, team, player) prints a different Current Status in the two editions. A player who appears in one edition and not the other is listed as added/removed, not as a status change. A row whose status the PDF text layer lost in the current edition is reported under not_comparable and is never counted as a change.",
+ "comparison_window": {
+  "game_dates_compared": [
+   "11/16/2026"
+  ],
+  "game_dates_only_in_previous": [
+   "11/15/2026"
+  ],
+  "game_dates_only_in_current": [
+   "11/17/2026"
+  ],
+  "why": "the report is a rolling document: it lists the next two game dates. Comparing dates only one edition covers would report every finished game as a removal."
+ },
+ "status_changes": [],
+ "status_changes_count": 0,
+ "not_comparable": [
+  {
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Butler III, Jimmy",
+   "previous_status": "Out",
+   "current_status": null,
+   "why": "PDF text layer lost the status/reason column boundary for this row: the only trailing text printed was 'Injury/Illness - Right ACL Repair / Surgery', which is a reason, not a status. Status and reason are left null and the row is flagged rather than guessed."
+  }
+ ],
+ "not_comparable_count": 1,
+ "added": [],
+ "added_count": 0,
+ "removed": [],
+ "removed_count": 0,
+ "unchanged_rows": 61,
+ "not_yet_submitted_previous": [
+  {
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards"
+  },
+  {
+   "matchup": "ORL@BOS",
+   "team": "Boston Celtics"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers"
+  },
+  {
+   "matchup": "PHX@DEN",
+   "team": "Phoenix Suns"
+  }
+ ],
+ "not_yet_submitted_current": [
+  {
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets"
+  },
+  {
+   "matchup": "CHA@LAL",
+   "team": "Los Angeles Lakers"
+  },
+  {
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons"
+  },
+  {
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs"
+  },
+  {
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards"
+  },
+  {
+   "matchup": "NYK@TOR",
+   "team": "New York Knicks"
+  },
+  {
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors"
+  },
+  {
+   "matchup": "ORL@BOS",
+   "team": "Boston Celtics"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers"
+  },
+  {
+   "matchup": "PHX@DEN",
+   "team": "Phoenix Suns"
+  },
+  {
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves"
+  },
+  {
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz"
+  }
+ ],
+ "not_yet_submitted_resolved": [],
+ "not_yet_submitted_new": [
+  {
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets"
+  },
+  {
+   "matchup": "CHA@LAL",
+   "team": "Los Angeles Lakers"
+  },
+  {
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons"
+  },
+  {
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs"
+  },
+  {
+   "matchup": "NYK@TOR",
+   "team": "New York Knicks"
+  },
+  {
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors"
+  },
+  {
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves"
+  },
+  {
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz"
+  }
+ ]
+}
