@@ -6425,3 +6425,12 @@ Other observations, not flagged as irregularities: the 06:15 PM report has five 
 - The other partial rows (R01, R04, R07, R09, R12 replacement shares, R13, R14, R15, R16, R26) are not touched in this session. In particular R09 (the published HCA of 1.23 vs the measured 0.88) and R15 (rotation column on the legacy picks page) need model or UI work and were out of this session's file scope.
 - No pick, line, settlement or ledger entry was changed. The 11/15 settlement is unchanged.
 - nba.com HTTP status is not claimed from the CI sandbox; the three games were re-read through the fetch channel, not through a browser.
+
+### 57.7 Cross-scope requests logged (not fixed here — other sessions' files)
+
+| Request | Irregularity (measured, not changed) | Owner to act |
+| --- | --- | --- |
+| X-57-01 HCA | Four home-court values are in circulation for the same league: 2.0 (`engine` flat_hca), 1.09 (`data/hca_measured.json`, 60 games, measured home-win rate 0.5333), 1.23 (published per R09), 2.5 (`scripts/build_edge_site.py`), and 0.88 (latest R09 re-measure). The brief pins HCA to the measured home-win rate. Only the integration seat may decide which value publishes. | Integration seat / R09 owner |
+| X-57-02 SGP rho | `engine/strategies.py` `SGP_RHO` holds side_total 0.00, teammates −0.20, opponents 0.05. The measured value on the roll page is −0.0635. The engine constants are not the measured value. | Strategy owner for T-SGP / T-PARLAY (R-parlay rows) |
+
+No fixes were made in this session. Both requests are non-blocking for merge (ground rule 2) and should be picked up by a session that has claimed the relevant files.
