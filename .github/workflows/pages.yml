@@ -202,60 +202,12 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-
-      # WHY THIS STEP EXISTS (session arena/c348e6c7-nba1, COORDINATION §47.2).
-      #
-      # `actions/deploy-pages` cannot publish to a repository whose Pages
-      # publishing source is a branch. On 2026-11-16 the API reports this repo
-      # as:  build_type = "legacy",  source = { branch: "main", path: "/" }.
-      # Every run of the deploy step against that configuration fails with an
-      # opaque error, and each attempt still costs a runner and a queue slot.
-      #
-      # Changing the publishing source requires repository admin ("Pages: write"
-      # on the settings API). This repository's automation token does NOT have
-      # it - `gh api -X PUT /repos/wingbangboozle1-lang/NBA1/pages -F
-      # build_type=workflow` returns HTTP 403 "Resource not accessible by
-      # integration" (measured 2026-11-16 02:1x UTC). So the workflow cannot
-      # fix this for the owner; it can only say so precisely, once, and stop
-      # wasting the queue.
-      #
-      # Until the owner flips one setting, the site is published by GitHub's
-      # built-in branch build (the `pages build and deployment` run), which
-      # deploys from `main` at `/` and honours the root `.nojekyll`. This job
-      # therefore does NOT fail the workflow when that is the configuration -
-      # a red X here would be a false alarm, because the site still deploys.
-      - name: Check whether Pages is published by Actions or by branch
-        id: source
-        run: |
-          set -euo pipefail
-          info=$(gh api repos/${{ github.repository }}/pages \
-                   --jq '{build_type: .build_type, branch: .source.branch, path: .source.path}')
-          echo "pages_config=$info" >> "$GITHUB_OUTPUT"
-          echo "Pages publishing configuration: $info"
-          bt=$(echo "$info" | jq -r .build_type)
-          if [ "$bt" = "workflow" ]; then
-            echo "actions_source=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "actions_source=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::GitHub Pages for this repository is published from the '$(
-              echo "$info" | jq -r .branch)$' branch, not from GitHub Actions, so this job "\
-              "cannot deploy. The site is being published by the built-in branch build "\
-              "instead. To switch it (one setting, repository admin required): "\
-              "https://github.com/${{ github.repository }}/settings/pages -> "\
-              "'Build and deployment' -> Source -> 'GitHub Actions'."
-          fi
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Configure Pages
-        if: steps.source.outputs.actions_source == 'true'
         uses: actions/configure-pages@v5
       - name: Upload static site
-        if: steps.source.outputs.actions_source == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: .
       - name: Deploy to Pages
-        if: steps.source.outputs.actions_source == 'true'
         id: deployment
         uses: actions/deploy-pages@v4

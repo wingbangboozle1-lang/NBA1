@@ -815,6 +815,17 @@
    0,
    "0022600243",
    "S3_2026-11-15"
+  ],
+  [
+   "2026-11-15",
+   "OKC",
+   125,
+   "SAC",
+   103,
+   0,
+   0,
+   "0022600244",
+   "S3_2026-11-15"
   ]
  ],
  "row_sources": {
@@ -830,118 +841,23 @@
   "0022600240": "https://www.nba.com/game/dal-vs-bos-0022600240",
   "0022600241": "https://www.nba.com/game/nyk-vs-tor-0022600241",
   "0022600242": "https://www.nba.com/game/hou-vs-was-0022600242",
-  "0022600243": "https://www.nba.com/game/atl-vs-mil-0022600243"
+  "0022600243": "https://www.nba.com/game/atl-vs-mil-0022600243",
+  "0022600244": "https://www.nba.com/game/okc-vs-sac-0022600244"
  },
  "verification": {
   "verified": true,
   "source_urls": [
-   "https://www.nba.com/game/atl-vs-mil-0022600243",
-   "https://www.nba.com/game/bkn-vs-mem-0022600234",
-   "https://www.nba.com/game/cha-vs-lac-0022600238",
-   "https://www.nba.com/game/chi-vs-min-0022600235",
-   "https://www.nba.com/game/dal-vs-bos-0022600240",
-   "https://www.nba.com/game/dal-vs-cle-0022600232",
-   "https://www.nba.com/game/den-vs-nop-0022600231",
-   "https://www.nba.com/game/det-vs-mia-0022600233",
-   "https://www.nba.com/game/hou-vs-was-0022600242",
-   "https://www.nba.com/game/ind-vs-phi-0022600236",
-   "https://www.nba.com/game/lal-vs-phx-0022600237",
-   "https://www.nba.com/game/nyk-vs-tor-0022600241",
-   "https://www.nba.com/game/sas-vs-uta-0022600239"
+   "https://www.nba.com/game/okc-vs-sac-0022600244"
   ],
-  "verified_at_utc": "2026-11-16T15:01:15Z",
+  "verified_at_utc": "2026-11-16T15:19:36Z",
   "verified_by": "engine/promote_official.py",
   "rule": "A final is appended only from an official www.nba.com results capture with integer scores and a Final status; when an independent record exists it must agree exactly. A capture whose snapshot comparison shows any mismatch, missed committed final or bad matchup blocks the whole append.",
   "appended_this_run": [
    {
-    "game_id": "0022600231",
-    "date": "2026-11-14",
-    "final": "DEN 116-108 NOP",
-    "source_url": "https://www.nba.com/game/den-vs-nop-0022600231",
-    "cross_checked": true
-   },
-   {
-    "game_id": "0022600232",
-    "date": "2026-11-14",
-    "final": "DAL 117-127 CLE",
-    "source_url": "https://www.nba.com/game/dal-vs-cle-0022600232",
-    "cross_checked": true
-   },
-   {
-    "game_id": "0022600233",
-    "date": "2026-11-14",
-    "final": "DET 117-137 MIA",
-    "source_url": "https://www.nba.com/game/det-vs-mia-0022600233",
-    "cross_checked": true
-   },
-   {
-    "game_id": "0022600234",
-    "date": "2026-11-14",
-    "final": "BKN 110-129 MEM",
-    "source_url": "https://www.nba.com/game/bkn-vs-mem-0022600234",
-    "cross_checked": true
-   },
-   {
-    "game_id": "0022600235",
-    "date": "2026-11-14",
-    "final": "CHI 117-106 MIN",
-    "source_url": "https://www.nba.com/game/chi-vs-min-0022600235",
-    "cross_checked": true
-   },
-   {
-    "game_id": "0022600236",
+    "game_id": "0022600244",
     "date": "2026-11-15",
-    "final": "IND 124-131 PHI",
-    "source_url": "https://www.nba.com/game/ind-vs-phi-0022600236",
-    "cross_checked": true
-   },
-   {
-    "game_id": "0022600237",
-    "date": "2026-11-15",
-    "final": "LAL 131-123 PHX",
-    "source_url": "https://www.nba.com/game/lal-vs-phx-0022600237",
-    "cross_checked": true
-   },
-   {
-    "game_id": "0022600238",
-    "date": "2026-11-15",
-    "final": "CHA 105-113 LAC",
-    "source_url": "https://www.nba.com/game/cha-vs-lac-0022600238",
-    "cross_checked": true
-   },
-   {
-    "game_id": "0022600239",
-    "date": "2026-11-15",
-    "final": "SAS 110-102 UTA",
-    "source_url": "https://www.nba.com/game/sas-vs-uta-0022600239",
-    "cross_checked": true
-   },
-   {
-    "game_id": "0022600240",
-    "date": "2026-11-15",
-    "final": "DAL 94-131 BOS",
-    "source_url": "https://www.nba.com/game/dal-vs-bos-0022600240",
-    "cross_checked": true
-   },
-   {
-    "game_id": "0022600241",
-    "date": "2026-11-15",
-    "final": "NYK 112-108 TOR",
-    "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600241",
-    "cross_checked": true
-   },
-   {
-    "game_id": "0022600242",
-    "date": "2026-11-15",
-    "final": "HOU 147-119 WAS",
-    "source_url": "https://www.nba.com/game/hou-vs-was-0022600242",
-    "cross_checked": true
-   },
-   {
-    "game_id": "0022600243",
-    "date": "2026-11-15",
-    "final": "ATL 113-106 MIL",
-    "source_url": "https://www.nba.com/game/atl-vs-mil-0022600243",
+    "final": "OKC 125-103 SAC",
+    "source_url": "https://www.nba.com/game/okc-vs-sac-0022600244",
     "cross_checked": true
    }
   ]
