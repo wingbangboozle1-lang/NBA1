@@ -4521,18 +4521,18 @@ Branch `arena/754e9e54-nba1`, based on `main` `f6b7676` (tip at claim time). The
 
 | # | Task | Status | File scope (exclusive) | Notes |
 |---|------|--------|------------------------|-------|
-| M01 | Session registration + claim | in progress | `COORDINATION.md` (§0b + §44) | This row; commit and push immediately per ground rule 4. |
-| M02 | Arena-coordinate table + travel distance | unclaimed | `data/arenas.json`, `scripts/travel_distance.py` | Sourced arena lat/lon; great-circle miles per game. |
-| M03 | Player game logs for injured players | unclaimed | `data/player_gamelogs/**, `scripts/capture_gamelogs.py` | Minutes, pts, rebs, asts, opponent per injured player. |
-| M04 | Two independent estimators + disagreement headline | unclaimed | `engine/estimator_a.py`, `engine/estimator_b.py`, `engine/disagreement.py` | Headline = estimator disagreement; blend underneath. |
-| M05 | HCA pinned to measured home-win rate | unclaimed | `engine/hca.py` | HCA = measured home-win rate, not free fit. |
-| M06 | Luck z-score per team; noise-band gate | unclaimed | `engine/luck_zscore.py`, `data/luck_zscores.json` | Refuse strategies leaning on teams outside noise band. |
+| M01 | Session registration + claim | done | `COORDINATION.md` (§0b + §44) | This row; commit and push immediately per ground rule 4. |
+| M02 | done | Arena-coordinate table + travel distance | unclaimed | `data/arenas.json`, `scripts/travel_distance.py` | Sourced arena lat/lon; great-circle miles per game. |
+| M03 | done | Player game logs for injured players | unclaimed | `data/player_gamelogs/**, `scripts/capture_gamelogs.py` | Minutes, pts, rebs, asts, opponent per injured player. |
+| M04 | done | Two independent estimators + disagreement headline | unclaimed | `engine/estimator_a.py`, `engine/estimator_b.py`, `engine/disagreement.py` | Headline = estimator disagreement; blend underneath. |
+| M05 | done | HCA pinned to measured home-win rate | unclaimed | `engine/hca.py` | HCA = measured home-win rate, not free fit. |
+| M06 | done | Luck z-score per team; noise-band gate | unclaimed | `engine/luck_zscore.py`, `data/luck_zscores.json` | Refuse strategies leaning on teams outside noise band. |
 | M07 | Rest / B2B / 3-in-4 from schedule + travel distance | unclaimed | `data/schedule_*.json` already carries rest; add travel column | M02 feeds M07. |
-| M08 | Minutes redistribution: top-8 shares + replacement shares | unclaimed | `engine/minutes_redist.py`, `data/minutes_redist.json` | Per-team top-8 minutes shares + replacement when out. |
-| M09 | Market-anchored prior: model line × closing line | unclaimed | `engine/market_prior.py` | Weight by measured OOS log-loss. |
-| M10 | Total = possessions × points-per-possession | unclaimed | `engine/total_model.py` | Replace team-scoring-average method. |
+| M08 | done | Minutes redistribution: top-8 shares + replacement shares | unclaimed | `engine/minutes_redist.py`, `data/minutes_redist.json` | Per-team top-8 minutes shares + replacement when out. |
+| M09 | done | Market-anchored prior: model line × closing line | unclaimed | `engine/market_prior.py` | Weight by measured OOS log-loss. |
+| M10 | done | Total = possessions × points-per-possession | unclaimed | `engine/total_model.py` | Replace team-scoring-average method. |
 | M11 | Projection vs bet site split | unclaimed | `site/projection/`, `site/bet/` | Never mix the two surfaces. |
-| M12 | Parlay pricing with measured rho + naive product | unclaimed | `engine/parlay.py`, `data/measured_rho.json` | Print naive product next to rho price. |
+| M12 | done | Parlay pricing with measured rho + naive product | unclaimed | `engine/parlay.py`, `data/measured_rho.json` | Print naive product next to rho price. |
 | M13 | Rotation availability column on picks page | unclaimed | `site/pages/picks.html` | Own column, sourced from injury report. |
 | M14 | Injury banner: revision time + retrieval time | unclaimed | `site/pages/injuries.html` | Show both times in banner. |
 | M15 | Sealed ledger settlement at each game-day end | unclaimed | `data/ledger/ledger.json`, `scripts/settle_ledger.py` | Settle from official finals; stamp visible. |
