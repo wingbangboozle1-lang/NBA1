@@ -672,6 +672,194 @@
    0,
    "0022600042",
    "S3_2026-11-13"
+  ],
+  [
+   "2026-11-14",
+   "DEN",
+   116,
+   "NOP",
+   108,
+   0,
+   0,
+   "0022600231",
+   "S3_2026-11-14"
+  ],
+  [
+   "2026-11-14",
+   "DAL",
+   117,
+   "CLE",
+   127,
+   0,
+   0,
+   "0022600232",
+   "S3_2026-11-14"
+  ],
+  [
+   "2026-11-14",
+   "DET",
+   117,
+   "MIA",
+   137,
+   0,
+   0,
+   "0022600233",
+   "S3_2026-11-14"
+  ],
+  [
+   "2026-11-14",
+   "BKN",
+   110,
+   "MEM",
+   129,
+   0,
+   0,
+   "0022600234",
+   "S3_2026-11-14"
+  ],
+  [
+   "2026-11-14",
+   "CHI",
+   117,
+   "MIN",
+   106,
+   0,
+   0,
+   "0022600235",
+   "S3_2026-11-14"
+  ],
+  [
+   "2026-11-15",
+   "IND",
+   124,
+   "PHI",
+   131,
+   0,
+   0,
+   "0022600236",
+   "S3_2026-11-15"
+  ],
+  [
+   "2026-11-15",
+   "LAL",
+   131,
+   "PHX",
+   123,
+   0,
+   0,
+   "0022600237",
+   "S3_2026-11-15"
+  ],
+  [
+   "2026-11-15",
+   "CHA",
+   105,
+   "LAC",
+   113,
+   0,
+   0,
+   "0022600238",
+   "S3_2026-11-15"
+  ],
+  [
+   "2026-11-15",
+   "SAS",
+   110,
+   "UTA",
+   102,
+   0,
+   0,
+   "0022600239",
+   "S3_2026-11-15"
+  ],
+  [
+   "2026-11-15",
+   "DAL",
+   94,
+   "BOS",
+   131,
+   0,
+   0,
+   "0022600240",
+   "S3_2026-11-15"
+  ],
+  [
+   "2026-11-15",
+   "NYK",
+   112,
+   "TOR",
+   108,
+   1,
+   0,
+   "0022600241",
+   "S3_2026-11-15"
+  ],
+  [
+   "2026-11-15",
+   "HOU",
+   147,
+   "WAS",
+   119,
+   0,
+   0,
+   "0022600242",
+   "S3_2026-11-15"
+  ],
+  [
+   "2026-11-15",
+   "ATL",
+   113,
+   "MIL",
+   106,
+   0,
+   0,
+   "0022600243",
+   "S3_2026-11-15"
+  ],
+  [
+   "2026-11-15",
+   "OKC",
+   125,
+   "SAC",
+   103,
+   0,
+   0,
+   "0022600244",
+   "S3_2026-11-15"
   ]
- ]
+ ],
+ "row_sources": {
+  "0022600231": "https://www.nba.com/game/den-vs-nop-0022600231",
+  "0022600232": "https://www.nba.com/game/dal-vs-cle-0022600232",
+  "0022600233": "https://www.nba.com/game/det-vs-mia-0022600233",
+  "0022600234": "https://www.nba.com/game/bkn-vs-mem-0022600234",
+  "0022600235": "https://www.nba.com/game/chi-vs-min-0022600235",
+  "0022600236": "https://www.nba.com/game/ind-vs-phi-0022600236",
+  "0022600237": "https://www.nba.com/game/lal-vs-phx-0022600237",
+  "0022600238": "https://www.nba.com/game/cha-vs-lac-0022600238",
+  "0022600239": "https://www.nba.com/game/sas-vs-uta-0022600239",
+  "0022600240": "https://www.nba.com/game/dal-vs-bos-0022600240",
+  "0022600241": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+  "0022600242": "https://www.nba.com/game/hou-vs-was-0022600242",
+  "0022600243": "https://www.nba.com/game/atl-vs-mil-0022600243",
+  "0022600244": "https://www.nba.com/game/okc-vs-sac-0022600244"
+ },
+ "verification": {
+  "verified": true,
+  "source_urls": [
+   "https://www.nba.com/game/okc-vs-sac-0022600244"
+  ],
+  "verified_at_utc": "2026-11-16T15:19:36Z",
+  "verified_by": "engine/promote_official.py",
+  "rule": "A final is appended only from an official www.nba.com results capture with integer scores and a Final status; when an independent record exists it must agree exactly. A capture whose snapshot comparison shows any mismatch, missed committed final or bad matchup blocks the whole append.",
+  "appended_this_run": [
+   {
+    "game_id": "0022600244",
+    "date": "2026-11-15",
+    "final": "OKC 125-103 SAC",
+    "source_url": "https://www.nba.com/game/okc-vs-sac-0022600244",
+    "cross_checked": true
+   }
+  ]
+ }
 }

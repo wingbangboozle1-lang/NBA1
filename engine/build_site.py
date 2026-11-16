@@ -128,12 +128,12 @@ def p_index(meta, ex):
     verdict = ex["verdict"]
     findings = "\n".join(
         f"""<details class="q">
-  <summary>{i['n']}. {i['title']}</summary>
+  <summary>{n}. {i['title']}</summary>
   <div class="body">
     <p>{i['detail']}</p>
     <p class="small"><strong>Reading:</strong> {i.get('reading','')}</p>
   </div>
-</details>""" for i in ex["findings"])
+</details>""" for n, i in enumerate(ex["findings"], 1))
 
     live = "\n".join(f"<li>{x}</li>" for x in ex["what_is_live_now"])
     def _action_source(a):

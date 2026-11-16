@@ -318,7 +318,38 @@ class Promoter:
         }
         write_json(os.path.join(RAW, "schedule_upcoming.json"), payload)
         self.rows_written["schedule_upcoming.json"] = len(rows)
-        self.ok(item, f"{len(rows)} games -> data/raw/schedule_upcoming.json")
+
+        # Keep the source register in step with the per-row source ids just
+        # written: every row carries source_id S4_<game_id>, and the site
+        # checker refuses a row whose id is absent from data/raw/sources.json
+        # (check_site: "source id ... is not in the register").  Entries are
+        # the official game-summary URLs the capture itself read - nothing is
+        # inferred; a row whose capture carried no source_url gets no entry
+        # and stays flagged at render time.
+        try:
+            reg = read_json(os.path.join(RAW, "sources.json"))
+        except (OSError, ValueError):
+            reg = {}
+        reg_src = reg.setdefault("sources", {})
+        added = 0
+        for g in games:
+            gid = str(g.get("game_id") or "")
+            url = g.get("source_url")
+            sid = f"S4_{gid}"
+            if gid and url and sid not in reg_src:
+                reg_src[sid] = {
+                    "title": (f"NBA.com Game Summary - {g.get('away')}@"
+                              f"{g.get('home')} ({g.get('date')})"),
+                    "url": url,
+                    "publisher": "NBA.com (official)",
+                    "used_for": (f"Official schedule row source_id {sid} "
+                                 f"(upcoming slate window)."),
+                }
+                added += 1
+        if added:
+            write_json(os.path.join(RAW, "sources.json"), reg)
+        self.ok(item, f"{len(rows)} games -> data/raw/schedule_upcoming.json; "
+                      f"{added} source-register entries added")
 
     # ------------------------------------------------------------ injuries
     def promote_injuries(self):

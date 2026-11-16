@@ -29,19 +29,15 @@ DERIVED = os.path.join(ROOT, "data", "derived")
 OFF = os.path.join(ROOT, "data", "official")
 
 # The pick window is "up to 3 days ahead" from the current slate date.
-TODAY = "2026-11-15"
-# The 2026-11-15 slate was already in progress when the official pages were
-# read (18:45 ET: five games live, three not yet tipped), so the pick window
-# starts on the next slate and runs three days ahead.
+# Rolled 2026-11-16 by arena/ed8496e9-nba1 (E04): the 2026-11-16 slate has
+# not tipped yet (first tip 7:00 PM ET), so the window keeps today and runs
+# three days ahead through 2026-11-19 (four games, all 8:00 PM ET, verified
+# on the official schedule card and each game page GAME INFO block).
+TODAY = "2026-11-16"
 PICK_WINDOW_START = "2026-11-16"
-PICK_WINDOW_END = "2026-11-18"
-# The line window is the pick window: 2026-11-15 is dropped because every game
-# on that slate has tipped (six are final, three were still in progress at
-# 2026-11-16T02:16Z), and 2026-11-19 is dropped because it is four days ahead
-# and the brief caps origination at three.  Lines are therefore only ever
-# originated for a game that has not started.
+PICK_WINDOW_END = "2026-11-19"
 LINE_WINDOW_START = "2026-11-16"
-LINE_WINDOW_END = "2026-11-18"
+LINE_WINDOW_END = "2026-11-19"
 
 STATUS_PLAY_PROB = {"Out": 0.00, "Doubtful": 0.25, "Questionable": 0.50,
                     "Probable": 0.80, "Available": 1.00}
