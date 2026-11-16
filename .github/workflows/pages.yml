@@ -69,6 +69,19 @@ jobs:
       - name: Independent integration verification
         run: python3 scripts/verify_integration.py
 
+      # Added by session arena/2823d556-nba1 (COORDINATION §47.1), implementing
+      # the open cross-session request logged at the end of §42.5.
+      #
+      # Why it is needed, in the words of the finding it comes from: R-42-B was
+      # a `<span>` substituted into an `href`, which produced a broken internal
+      # link on site/pages/injuries.html. `verify_integration.py` passed on
+      # `main` while it was broken; only `verify_all.py` caught it. CI did not
+      # run verify_all.py, so the defect was one merge away from the live site.
+      # A gate that exists in the repository but is absent from CI is not a
+      # gate.
+      - name: Row-level provenance and link audit (verify_all)
+        run: python3 scripts/verify_all.py
+
       - name: Render every page in a headless DOM
         run: |
           npm install --no-save jsdom >/dev/null 2>&1

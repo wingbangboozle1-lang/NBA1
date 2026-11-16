@@ -1,0 +1,223 @@
+{
+ "title": "Live official re-read, 2026-11-16 02:17Z-02:27Z \u2014 currency of the published 11/16 horizon, and the 11/15 slate's completion state",
+ "session": "arena/2823d556-nba1",
+ "board_section": "47",
+ "retrieved_utc": "2026-11-16T02:17Z..02:27Z",
+ "read_by": "the session's web-fetch channel (fetch_page). The sandbox's own sockets still refuse: `curl https://www.nba.com/` from this session's shell returns HTTP 000. Both facts are true and both are recorded \u2014 see finding F-47-A.",
+ "rule": "Only what the official page printed is recorded. A game still printing a quarter clock is IN PROGRESS and its live score is never stored as a final. Where the official page printed nothing, the cell is null, never inferred.",
+ "sources": [
+  {
+   "url": "https://www.nba.com/games?date=2026-11-15",
+   "read_at_utc": "2026-11-16T02:17Z and again at 02:27Z",
+   "what": "the official games/scoreboard page for 2026-11-15"
+  },
+  {
+   "url": "https://www.nba.com/games?date=2026-11-16",
+   "read_at_utc": "2026-11-16T02:20Z",
+   "what": "the official games/scoreboard page for 2026-11-16"
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "read_at_utc": "not re-read in this pass",
+   "what": "the official team-advanced table; the committed capture of it is data/official/teams_advanced_2026-11-15_2345Z.json (retrieved 2026-11-15T23:38Z..23:52Z) and that file is what is compared here"
+  }
+ ],
+ "slate_2026_11_15": {
+  "source_url": "https://www.nba.com/games?date=2026-11-15",
+  "read_at_utc": "2026-11-16T02:27Z",
+  "n_games": 9,
+  "n_final": 6,
+  "n_in_progress": 3,
+  "settleable": false,
+  "settleable_note": "The brief's rule is 'settle only after final scores are verified'. 3 of 9 games are still printing a quarter clock, so the 2026-11-15 slate CANNOT be settled at this retrieval time.",
+  "rows": [
+   {
+    "game_id": "0022600236",
+    "away": "IND",
+    "home": "PHI",
+    "official_state_at_retrieval": "Final",
+    "away_pts": 124,
+    "home_pts": 131,
+    "live_score_not_a_final": null,
+    "is_final": true,
+    "source_url": "https://www.nba.com/games?date=2026-11-15",
+    "box_score_url": "https://www.nba.com/game/ind-vs-phi-0022600236/box-score#box-score"
+   },
+   {
+    "game_id": "0022600237",
+    "away": "LAL",
+    "home": "PHX",
+    "official_state_at_retrieval": "Final",
+    "away_pts": 131,
+    "home_pts": 123,
+    "live_score_not_a_final": null,
+    "is_final": true,
+    "source_url": "https://www.nba.com/games?date=2026-11-15",
+    "box_score_url": "https://www.nba.com/game/lal-vs-phx-0022600237/box-score#box-score"
+   },
+   {
+    "game_id": "0022600238",
+    "away": "CHA",
+    "home": "LAC",
+    "official_state_at_retrieval": "Final",
+    "away_pts": 105,
+    "home_pts": 113,
+    "live_score_not_a_final": null,
+    "is_final": true,
+    "source_url": "https://www.nba.com/games?date=2026-11-15",
+    "box_score_url": "https://www.nba.com/game/cha-vs-lac-0022600238/box-score#box-score"
+   },
+   {
+    "game_id": "0022600239",
+    "away": "SAS",
+    "home": "UTA",
+    "official_state_at_retrieval": "Final",
+    "away_pts": 110,
+    "home_pts": 102,
+    "live_score_not_a_final": null,
+    "is_final": true,
+    "source_url": "https://www.nba.com/games?date=2026-11-15",
+    "box_score_url": "https://www.nba.com/game/sas-vs-uta-0022600239/box-score#box-score"
+   },
+   {
+    "game_id": "0022600240",
+    "away": "DAL",
+    "home": "BOS",
+    "official_state_at_retrieval": "Final",
+    "away_pts": 94,
+    "home_pts": 131,
+    "live_score_not_a_final": null,
+    "is_final": true,
+    "source_url": "https://www.nba.com/games?date=2026-11-15",
+    "box_score_url": "https://www.nba.com/game/dal-vs-bos-0022600240/box-score#box-score"
+   },
+   {
+    "game_id": "0022600241",
+    "away": "NYK",
+    "home": "TOR",
+    "official_state_at_retrieval": "Final/OT",
+    "away_pts": 112,
+    "home_pts": 108,
+    "live_score_not_a_final": null,
+    "is_final": true,
+    "source_url": "https://www.nba.com/games?date=2026-11-15",
+    "box_score_url": "https://www.nba.com/game/nyk-vs-tor-0022600241/box-score#box-score"
+   },
+   {
+    "game_id": "0022600242",
+    "away": "HOU",
+    "home": "WAS",
+    "official_state_at_retrieval": "Q4 5:24",
+    "away_pts": null,
+    "home_pts": null,
+    "live_score_not_a_final": "HOU 132 - 102 WAS (Q4 5:24)",
+    "is_final": false,
+    "source_url": "https://www.nba.com/games?date=2026-11-15",
+    "box_score_url": "https://www.nba.com/game/hou-vs-was-0022600242/box-score#box-score"
+   },
+   {
+    "game_id": "0022600243",
+    "away": "ATL",
+    "home": "MIL",
+    "official_state_at_retrieval": "Q3 10:42",
+    "away_pts": null,
+    "home_pts": null,
+    "live_score_not_a_final": "ATL 57 - 53 MIL (Q3 10:42)",
+    "is_final": false,
+    "source_url": "https://www.nba.com/games?date=2026-11-15",
+    "box_score_url": "https://www.nba.com/game/atl-vs-mil-0022600243/box-score#box-score"
+   },
+   {
+    "game_id": "0022600244",
+    "away": "OKC",
+    "home": "SAC",
+    "official_state_at_retrieval": "Q1 7:59",
+    "away_pts": null,
+    "home_pts": null,
+    "live_score_not_a_final": "OKC 15 - 4 SAC (Q1 7:59)",
+    "is_final": false,
+    "source_url": "https://www.nba.com/games?date=2026-11-15",
+    "box_score_url": "https://www.nba.com/game/okc-vs-sac-0022600244/box-score#box-score"
+   }
+  ]
+ },
+ "slate_2026_11_16": {
+  "source_url": "https://www.nba.com/games?date=2026-11-16",
+  "read_at_utc": "2026-11-16T02:20Z",
+  "n_games": 8,
+  "rows": [
+   {
+    "game_id": "0022600245",
+    "away": "ORL",
+    "home": "BOS",
+    "tip_et": "7:00 PM ET",
+    "away_record_live": "5-7",
+    "home_record_live": "11-2",
+    "source_url": "https://www.nba.com/games?date=2026-11-16"
+   },
+   {
+    "game_id": "0022600246",
+    "away": "CHI",
+    "home": "CLE",
+    "tip_et": "7:00 PM ET",
+    "away_record_live": "3-9",
+    "home_record_live": "7-7",
+    "source_url": "https://www.nba.com/games?date=2026-11-16"
+   },
+   {
+    "game_id": "0022600247",
+    "away": "MEM",
+    "home": "WAS",
+    "tip_et": "7:00 PM ET",
+    "away_record_live": "9-4",
+    "home_record_live": "4-9",
+    "source_url": "https://www.nba.com/games?date=2026-11-16"
+   },
+   {
+    "game_id": "0022600248",
+    "away": "PHI",
+    "home": "BKN",
+    "tip_et": "7:30 PM ET",
+    "away_record_live": "11-3",
+    "home_record_live": "3-9",
+    "source_url": "https://www.nba.com/games?date=2026-11-16"
+   },
+   {
+    "game_id": "0022600249",
+    "away": "HOU",
+    "home": "MIA",
+    "tip_et": "7:30 PM ET",
+    "away_record_live": "10-3",
+    "home_record_live": "7-6",
+    "source_url": "https://www.nba.com/games?date=2026-11-16"
+   },
+   {
+    "game_id": "0022600250",
+    "away": "POR",
+    "home": "MIN",
+    "tip_et": "8:00 PM ET",
+    "away_record_live": "9-3",
+    "home_record_live": "9-4",
+    "source_url": "https://www.nba.com/games?date=2026-11-16"
+   },
+   {
+    "game_id": "0022600251",
+    "away": "GSW",
+    "home": "NOP",
+    "tip_et": "8:00 PM ET",
+    "away_record_live": "8-5",
+    "home_record_live": "4-10",
+    "source_url": "https://www.nba.com/games?date=2026-11-16"
+   },
+   {
+    "game_id": "0022600252",
+    "away": "PHX",
+    "home": "DEN",
+    "tip_et": "9:00 PM ET",
+    "away_record_live": "5-7",
+    "home_record_live": "7-4",
+    "source_url": "https://www.nba.com/games?date=2026-11-16"
+   }
+  ]
+ }
+}
