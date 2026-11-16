@@ -1,7 +1,7 @@
 {
  "title": "Official per-game results feed — 2026-11-15 (kept current; finals verified from official box scores)",
  "captured_by": "arena/8f64e94c-nba1 (I03)",
- "retrieved_utc": "2026-11-15T23:45Z..23:55Z",
+ "retrieved_utc": "2026-11-15T23:45Z..23:55Z; three rows completed 2026-11-16T14:33Z..14:41Z",
  "rule": "One row per game. A row is marked FINAL only when the official game page prints Final and its LINESCORES quarters sum to the printed final (asserted per row). Not-yet-final rows carry null score fields and the observed state; nothing is inferred and no live score is stored as a final. Picks are NOT graded here: the ledger settles at game-day end (data/settlement/), after every game on the slate is final.",
  "columns": [
   "date",
@@ -256,51 +256,117 @@
    "game_id": "0022600242",
    "away": "HOU",
    "home": "WAS",
-   "status": "NOT FINAL — pregame at retrieval",
-   "away_pts": null,
-   "home_pts": null,
-   "away_quarters": null,
-   "home_quarters": null,
-   "ot_periods": null,
-   "final_label": null,
+   "status": "FINAL",
+   "away_pts": 147,
+   "home_pts": 119,
+   "away_quarters": [
+    36,
+    37,
+    46,
+    28
+   ],
+   "home_quarters": [
+    31,
+    23,
+    34,
+    31
+   ],
+   "ot_periods": 0,
+   "final_label": "Final",
    "tip_et": "07:00 PM ET",
-   "state_at_retrieval": "PREGAME at 23:45Z..23:55Z",
+   "state_at_retrieval": "Final at 2026-11-16T14:33Z..14:41Z",
    "source_url": "https://www.nba.com/game/hou-vs-was-0022600242",
-   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15",
+   "quarters_sum_check": "away 36+37+46+28=147 ✓, home 31+23+34+31=119 ✓",
+   "venue": "Capital One Arena",
+   "city": "Washington, DC",
+   "attendance": 18041,
+   "officials": "Bill Kennedy, Jacyn Goble, Simone Jelks",
+   "recap_video_url": "https://www.nba.com/watch/video/game-recap-rockets-147-wizards-119-nov-15",
+   "ap_headline_on_official_page": null,
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf",
+   "source_box_score_url": "https://www.nba.com/game/hou-vs-was-0022600242/box-score#box-score",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS.pdf",
+   "completed_by": "arena/acc2fd9e-nba1 (C01)",
+   "completed_at_utc": "2026-11-16T14:33Z..14:41Z"
   },
   {
    "date": "2026-11-15",
    "game_id": "0022600243",
    "away": "ATL",
    "home": "MIL",
-   "status": "NOT FINAL — scheduled at retrieval",
-   "away_pts": null,
-   "home_pts": null,
-   "away_quarters": null,
-   "home_quarters": null,
-   "ot_periods": null,
-   "final_label": null,
+   "status": "FINAL",
+   "away_pts": 113,
+   "home_pts": 106,
+   "away_quarters": [
+    18,
+    37,
+    32,
+    26
+   ],
+   "home_quarters": [
+    37,
+    16,
+    27,
+    26
+   ],
+   "ot_periods": 0,
+   "final_label": "Final",
    "tip_et": "08:00 PM ET",
-   "state_at_retrieval": "Scheduled at 23:45Z..23:55Z",
+   "state_at_retrieval": "Final at 2026-11-16T14:33Z..14:41Z",
    "source_url": "https://www.nba.com/game/atl-vs-mil-0022600243",
-   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15",
+   "quarters_sum_check": "away 18+37+32+26=113 ✓, home 37+16+27+26=106 ✓",
+   "venue": "Fiserv Forum",
+   "city": "Milwaukee, WI",
+   "attendance": 11474,
+   "officials": "Ben Taylor, Kevin Cutler, Gina Catanzariti",
+   "recap_video_url": "https://www.nba.com/watch/video/game-recap-hawks-113-bucks-106-nov-15",
+   "ap_headline_on_official_page": null,
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_ATLMIL_book.pdf",
+   "source_box_score_url": "https://www.nba.com/game/atl-vs-mil-0022600243/box-score#box-score",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_ATLMIL.pdf",
+   "completed_by": "arena/acc2fd9e-nba1 (C01)",
+   "completed_at_utc": "2026-11-16T14:33Z..14:41Z"
   },
   {
    "date": "2026-11-15",
    "game_id": "0022600244",
    "away": "OKC",
    "home": "SAC",
-   "status": "NOT FINAL — scheduled at retrieval",
-   "away_pts": null,
-   "home_pts": null,
-   "away_quarters": null,
-   "home_quarters": null,
-   "ot_periods": null,
-   "final_label": null,
+   "status": "FINAL",
+   "away_pts": 125,
+   "home_pts": 103,
+   "away_quarters": [
+    32,
+    30,
+    32,
+    31
+   ],
+   "home_quarters": [
+    24,
+    26,
+    30,
+    23
+   ],
+   "ot_periods": 0,
+   "final_label": "Final",
    "tip_et": "09:00 PM ET",
-   "state_at_retrieval": "Scheduled at 23:45Z..23:55Z",
+   "state_at_retrieval": "Final at 2026-11-16T14:33Z..14:41Z",
    "source_url": "https://www.nba.com/game/okc-vs-sac-0022600244",
-   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15",
+   "quarters_sum_check": "away 32+30+32+31=125 ✓, home 24+26+30+23=103 ✓",
+   "venue": "Golden 1 Center",
+   "city": "Sacramento, CA",
+   "attendance": 13021,
+   "officials": "Justin Van Duyne, Tre Maddox, Dannica Baroody",
+   "recap_video_url": "https://www.nba.com/watch/video/game-recap-thunder-125-kings-103-nov-15",
+   "ap_headline_on_official_page": null,
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC_book.pdf",
+   "source_box_score_url": "https://www.nba.com/game/okc-vs-sac-0022600244/box-score#box-score",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC.pdf",
+   "completed_by": "arena/acc2fd9e-nba1 (C01)",
+   "completed_at_utc": "2026-11-16T14:33Z..14:41Z"
   }
  ],
  "sources": [
@@ -335,5 +401,75 @@
    "DAL 94-131 BOS",
    "NYK 112-108 TOR"
   ]
- }
+ },
+ "completion": {
+  "completed_by": "arena/acc2fd9e-nba1 (COORDINATION §50, task C01)",
+  "completed_at_utc": "2026-11-16T14:33Z..14:41Z",
+  "what_changed": "three rows that were pregame/scheduled at the previous capture (2026-11-15T23:45Z..23:55Z) were filled from the official gamebook PDFs after every game on the date had ended. `tip_et` on those rows was already in the feed and is untouched. No other field of any other row was edited.",
+  "rows_filled": [
+   {
+    "game_id": "0022600242",
+    "matchup": "HOU@WAS",
+    "final": "HOU 147 - WAS 119",
+    "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf"
+   },
+   {
+    "game_id": "0022600243",
+    "matchup": "ATL@MIL",
+    "final": "ATL 113 - MIL 106",
+    "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_ATLMIL_book.pdf"
+   },
+   {
+    "game_id": "0022600244",
+    "matchup": "OKC@SAC",
+    "final": "OKC 125 - SAC 103",
+    "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC_book.pdf"
+   }
+  ],
+  "independent_second_reading": {
+   "note": "the six rows already marked FINAL were re-read in this session from the official gamebook PDFs, independently of the session that captured them. Every final score and every quarter score agrees, value for value.",
+   "games": [
+    {
+     "game_id": "0022600236",
+     "matchup": "IND@PHI",
+     "second_reading_matches_stored_row": true,
+     "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf"
+    },
+    {
+     "game_id": "0022600237",
+     "matchup": "LAL@PHX",
+     "second_reading_matches_stored_row": true,
+     "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf"
+    },
+    {
+     "game_id": "0022600238",
+     "matchup": "CHA@LAC",
+     "second_reading_matches_stored_row": true,
+     "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_CHALAC_book.pdf"
+    },
+    {
+     "game_id": "0022600239",
+     "matchup": "SAS@UTA",
+     "second_reading_matches_stored_row": true,
+     "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_SASUTA_book.pdf"
+    },
+    {
+     "game_id": "0022600240",
+     "matchup": "DAL@BOS",
+     "second_reading_matches_stored_row": true,
+     "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_DALBOS_book.pdf"
+    },
+    {
+     "game_id": "0022600241",
+     "matchup": "NYK@TOR",
+     "second_reading_matches_stored_row": true,
+     "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_NYKTOR_book.pdf"
+    }
+   ],
+   "disagreements": 0
+  },
+  "verification_rule": "a row is FINAL only when the official gamebook's SCORE BY PERIOD row sums to the printed final for both teams; asserted per row above."
+ },
+ "row_count": 9,
+ "final_row_count": 9
 }

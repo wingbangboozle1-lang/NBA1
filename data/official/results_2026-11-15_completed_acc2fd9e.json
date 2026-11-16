@@ -1,0 +1,475 @@
+{
+ "title": "Official per-game results feed — 2026-11-15 (kept current; finals verified from official box scores)",
+ "captured_by": "arena/8f64e94c-nba1 (I03)",
+ "retrieved_utc": "2026-11-15T23:45Z..23:55Z; three rows completed 2026-11-16T14:33Z..14:41Z",
+ "rule": "One row per game. A row is marked FINAL only when the official game page prints Final and its LINESCORES quarters sum to the printed final (asserted per row). Not-yet-final rows carry null score fields and the observed state; nothing is inferred and no live score is stored as a final. Picks are NOT graded here: the ledger settles at game-day end (data/settlement/), after every game on the slate is final.",
+ "columns": [
+  "date",
+  "game_id",
+  "away",
+  "home",
+  "status",
+  "away_pts",
+  "home_pts",
+  "away_quarters",
+  "home_quarters",
+  "ot_periods",
+  "final_label",
+  "tip_et",
+  "venue",
+  "city",
+  "attendance",
+  "officials",
+  "ap_headline_on_official_page",
+  "state_at_retrieval",
+  "source_url",
+  "source_box_score_url",
+  "source_gamebook_pdf",
+  "source_game_pdf",
+  "source_date_url"
+ ],
+ "rows": [
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600236",
+   "away": "IND",
+   "home": "PHI",
+   "status": "FINAL",
+   "away_pts": 124,
+   "home_pts": 131,
+   "away_quarters": [
+    35,
+    22,
+    30,
+    37
+   ],
+   "home_quarters": [
+    29,
+    29,
+    39,
+    34
+   ],
+   "quarters_sum_check": "away 35+22+30+37=124 ✓, home 29+29+39+34=131 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "01:00 PM ET",
+   "venue": "Xfinity Mobile Arena",
+   "city": "Philadelphia, PA",
+   "attendance": 21024,
+   "officials": "Sean Corbin, Karl Lane, Matt Myers",
+   "ap_headline_on_official_page": "LeBron James moves past Jason Kidd for 3rd in NBA's career assist list, 76ers top Pacers 131-124 (AP, 4:32 PM)",
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/ind-vs-phi-0022600236",
+   "source_box_score_url": "https://www.nba.com/game/ind-vs-phi-0022600236/box-score#box-score",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI.pdf",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600237",
+   "away": "LAL",
+   "home": "PHX",
+   "status": "FINAL",
+   "away_pts": 131,
+   "home_pts": 123,
+   "away_quarters": [
+    33,
+    31,
+    40,
+    27
+   ],
+   "home_quarters": [
+    24,
+    30,
+    26,
+    43
+   ],
+   "quarters_sum_check": "away 33+31+40+27=131 ✓, home 24+30+26+43=123 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "04:00 PM ET",
+   "venue": "Mortgage Matchup Center",
+   "city": "Phoenix, AZ",
+   "attendance": 17071,
+   "officials": "James Williams, John Butler, Sha'Rae Mitchell",
+   "ap_headline_on_official_page": "No recap headline on the page at retrieval; the displayed article is the pre-game preview 'Lakers ride 7-game win streak into matchup vs. Suns' (Field Level Media, 11:54 AM). The LINESCORES and GAME INFO blocks are the official record used.",
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/lal-vs-phx-0022600237",
+   "source_box_score_url": "https://www.nba.com/game/lal-vs-phx-0022600237/box-score#box-score",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX.pdf",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600238",
+   "away": "CHA",
+   "home": "LAC",
+   "status": "FINAL",
+   "away_pts": 105,
+   "home_pts": 113,
+   "away_quarters": [
+    21,
+    31,
+    31,
+    22
+   ],
+   "home_quarters": [
+    22,
+    29,
+    33,
+    29
+   ],
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "04:30 PM ET",
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/cha-vs-lac-0022600238",
+   "source_box_score_url": "https://www.nba.com/game/cha-vs-lac-0022600238/box-score#box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15",
+   "quarters_sum_check": "away 21+31+31+22=105 ✓, home 22+29+33+29=113 ✓",
+   "venue": "Intuit Dome",
+   "city": "Inglewood, CA",
+   "attendance": 17487,
+   "officials": "Marc Davis, Andy Nagy, Biniam Maru",
+   "ap_headline_on_official_page": "Darius Garland scores 27 as Clippers run win streak over Hornets to 17 with 113-105 win (AP, 7:21 PM)",
+   "retrieved_utc": "2026-11-16T02:20Z..02:35Z",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_CHALAC_book.pdf",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_CHALAC.pdf"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600239",
+   "away": "SAS",
+   "home": "UTA",
+   "status": "FINAL",
+   "away_pts": 110,
+   "home_pts": 102,
+   "away_quarters": [
+    31,
+    27,
+    23,
+    29
+   ],
+   "home_quarters": [
+    33,
+    22,
+    26,
+    21
+   ],
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "05:00 PM ET",
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/sas-vs-uta-0022600239",
+   "source_box_score_url": "https://www.nba.com/game/sas-vs-uta-0022600239/box-score#box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15",
+   "quarters_sum_check": "away 31+27+23+29=110 ✓, home 33+22+26+21=102 ✓",
+   "venue": "Delta Center",
+   "city": "Salt Lake City, UT",
+   "attendance": 17867,
+   "officials": "Zach Zarba, Dedric Taylor, Pat O'Connell",
+   "ap_headline_on_official_page": "Spurs win 12th straight while sending Jazz to 12th straight loss (AP, 7:42 PM)",
+   "retrieved_utc": "2026-11-16T02:20Z..02:35Z",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_SASUTA_book.pdf",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_SASUTA.pdf"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600240",
+   "away": "DAL",
+   "home": "BOS",
+   "status": "FINAL",
+   "away_pts": 94,
+   "home_pts": 131,
+   "away_quarters": [
+    9,
+    28,
+    34,
+    23
+   ],
+   "home_quarters": [
+    42,
+    25,
+    37,
+    27
+   ],
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "06:00 PM ET",
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/dal-vs-bos-0022600240",
+   "source_box_score_url": "https://www.nba.com/game/dal-vs-bos-0022600240/box-score#box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15",
+   "quarters_sum_check": "away 9+28+34+23=94 ✓, home 42+25+37+27=131 ✓",
+   "venue": "TD Garden",
+   "city": "Boston, MA",
+   "attendance": 19156,
+   "officials": "JB DeRosa, Derrick Collins, Ray Acosta",
+   "ap_headline_on_official_page": "Tatum scores 32, Celtics set franchise history on the way to 131-94 rout of Mavericks (AP, 8:20 PM)",
+   "retrieved_utc": "2026-11-16T02:20Z..02:35Z",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_DALBOS_book.pdf",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_DALBOS.pdf"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600241",
+   "away": "NYK",
+   "home": "TOR",
+   "status": "FINAL",
+   "away_pts": 112,
+   "home_pts": 108,
+   "away_quarters": [
+    23,
+    24,
+    20,
+    28,
+    17
+   ],
+   "home_quarters": [
+    17,
+    26,
+    31,
+    21,
+    13
+   ],
+   "ot_periods": 1,
+   "final_label": "Final/OT",
+   "tip_et": "06:00 PM ET",
+   "state_at_retrieval": "Final/OT",
+   "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+   "source_box_score_url": "https://www.nba.com/game/nyk-vs-tor-0022600241/box-score#box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15",
+   "quarters_sum_check": "away 23+24+20+28+17=112 ✓, home 17+26+31+21+13=108 ✓",
+   "venue": "Scotiabank Arena",
+   "city": "Toronto, ON",
+   "attendance": 19800,
+   "officials": "Tony Brothers, Jason Goldberg, Phenizee Ransom",
+   "ap_headline_on_official_page": "No final recap headline on the page at retrieval (the displayed article is the 11/14 preview). The LINESCORES and GAME INFO blocks are the official record used.",
+   "retrieved_utc": "2026-11-16T02:20Z..02:35Z",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_NYKTOR_book.pdf",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_NYKTOR.pdf"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600242",
+   "away": "HOU",
+   "home": "WAS",
+   "status": "FINAL",
+   "away_pts": 147,
+   "home_pts": 119,
+   "away_quarters": [
+    36,
+    37,
+    46,
+    28
+   ],
+   "home_quarters": [
+    31,
+    23,
+    34,
+    31
+   ],
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "07:00 PM ET",
+   "state_at_retrieval": "Final at 2026-11-16T14:33Z..14:41Z",
+   "source_url": "https://www.nba.com/game/hou-vs-was-0022600242",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15",
+   "quarters_sum_check": "away 36+37+46+28=147 ✓, home 31+23+34+31=119 ✓",
+   "venue": "Capital One Arena",
+   "city": "Washington, DC",
+   "attendance": 18041,
+   "officials": "Bill Kennedy, Jacyn Goble, Simone Jelks",
+   "recap_video_url": "https://www.nba.com/watch/video/game-recap-rockets-147-wizards-119-nov-15",
+   "ap_headline_on_official_page": null,
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf",
+   "source_box_score_url": "https://www.nba.com/game/hou-vs-was-0022600242/box-score#box-score",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS.pdf",
+   "completed_by": "arena/acc2fd9e-nba1 (C01)",
+   "completed_at_utc": "2026-11-16T14:33Z..14:41Z"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600243",
+   "away": "ATL",
+   "home": "MIL",
+   "status": "FINAL",
+   "away_pts": 113,
+   "home_pts": 106,
+   "away_quarters": [
+    18,
+    37,
+    32,
+    26
+   ],
+   "home_quarters": [
+    37,
+    16,
+    27,
+    26
+   ],
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "08:00 PM ET",
+   "state_at_retrieval": "Final at 2026-11-16T14:33Z..14:41Z",
+   "source_url": "https://www.nba.com/game/atl-vs-mil-0022600243",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15",
+   "quarters_sum_check": "away 18+37+32+26=113 ✓, home 37+16+27+26=106 ✓",
+   "venue": "Fiserv Forum",
+   "city": "Milwaukee, WI",
+   "attendance": 11474,
+   "officials": "Ben Taylor, Kevin Cutler, Gina Catanzariti",
+   "recap_video_url": "https://www.nba.com/watch/video/game-recap-hawks-113-bucks-106-nov-15",
+   "ap_headline_on_official_page": null,
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_ATLMIL_book.pdf",
+   "source_box_score_url": "https://www.nba.com/game/atl-vs-mil-0022600243/box-score#box-score",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_ATLMIL.pdf",
+   "completed_by": "arena/acc2fd9e-nba1 (C01)",
+   "completed_at_utc": "2026-11-16T14:33Z..14:41Z"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600244",
+   "away": "OKC",
+   "home": "SAC",
+   "status": "FINAL",
+   "away_pts": 125,
+   "home_pts": 103,
+   "away_quarters": [
+    32,
+    30,
+    32,
+    31
+   ],
+   "home_quarters": [
+    24,
+    26,
+    30,
+    23
+   ],
+   "ot_periods": 0,
+   "final_label": "Final",
+   "tip_et": "09:00 PM ET",
+   "state_at_retrieval": "Final at 2026-11-16T14:33Z..14:41Z",
+   "source_url": "https://www.nba.com/game/okc-vs-sac-0022600244",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15",
+   "quarters_sum_check": "away 32+30+32+31=125 ✓, home 24+26+30+23=103 ✓",
+   "venue": "Golden 1 Center",
+   "city": "Sacramento, CA",
+   "attendance": 13021,
+   "officials": "Justin Van Duyne, Tre Maddox, Dannica Baroody",
+   "recap_video_url": "https://www.nba.com/watch/video/game-recap-thunder-125-kings-103-nov-15",
+   "ap_headline_on_official_page": null,
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC_book.pdf",
+   "source_box_score_url": "https://www.nba.com/game/okc-vs-sac-0022600244/box-score#box-score",
+   "source_game_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC.pdf",
+   "completed_by": "arena/acc2fd9e-nba1 (C01)",
+   "completed_at_utc": "2026-11-16T14:33Z..14:41Z"
+  }
+ ],
+ "sources": [
+  "https://www.nba.com/games?date=2026-11-15",
+  "https://www.nba.com/game/ind-vs-phi-0022600236",
+  "https://www.nba.com/game/ind-vs-phi-0022600236/box-score",
+  "https://www.nba.com/game/lal-vs-phx-0022600237",
+  "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf",
+  "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf"
+ ],
+ "settlement_note": "The 2026-11-15 ledger settlement (grading the pre-tip record in data/archive/horizon_picks_2026-11-15.json) runs at game-day end, after the last game (OKC@SAC, 09:00 PM ET) is final and every row above is FINAL. Recorded now, settled later — that is the rule, not an omission.",
+ "feed_update": {
+  "at_utc": "2026-11-16T02:20Z..02:35Z",
+  "by": "arena/d31fb422-nba1 (live official re-read of each game page)",
+  "rule": "A row is marked FINAL only when the official game page printed Final (or Final/OT) and its LINESCORES quarters sum to the printed final; both sums are asserted by the writer and printed in quarters_sum_check.",
+  "still_not_final": [
+   "0022600242 HOU@WAS",
+   "0022600243 ATL@MIL",
+   "0022600244 OKC@SAC"
+  ],
+  "still_not_final_note": "At 02:2xZ on 2026-11-16 these three were still live on the official site (HOU 132-101 WAS in Q4; ATL 55-53 MIL at Half; OKC@SAC in Q1). Their score fields stay null by rule: a live score is never stored as a final."
+ },
+ "summary": {
+  "rows": 9,
+  "final": 6,
+  "not_final": 3,
+  "finals": [
+   "IND 124-131 PHI",
+   "LAL 131-123 PHX",
+   "CHA 105-113 LAC",
+   "SAS 110-102 UTA",
+   "DAL 94-131 BOS",
+   "NYK 112-108 TOR"
+  ]
+ },
+ "completion": {
+  "completed_by": "arena/acc2fd9e-nba1 (COORDINATION §50, task C01)",
+  "completed_at_utc": "2026-11-16T14:33Z..14:41Z",
+  "what_changed": "three rows that were pregame/scheduled at the previous capture (2026-11-15T23:45Z..23:55Z) were filled from the official gamebook PDFs after every game on the date had ended. `tip_et` on those rows was already in the feed and is untouched. No other field of any other row was edited.",
+  "rows_filled": [
+   {
+    "game_id": "0022600242",
+    "matchup": "HOU@WAS",
+    "final": "HOU 147 - WAS 119",
+    "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf"
+   },
+   {
+    "game_id": "0022600243",
+    "matchup": "ATL@MIL",
+    "final": "ATL 113 - MIL 106",
+    "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_ATLMIL_book.pdf"
+   },
+   {
+    "game_id": "0022600244",
+    "matchup": "OKC@SAC",
+    "final": "OKC 125 - SAC 103",
+    "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC_book.pdf"
+   }
+  ],
+  "independent_second_reading": {
+   "note": "the six rows already marked FINAL were re-read in this session from the official gamebook PDFs, independently of the session that captured them. Every final score and every quarter score agrees, value for value.",
+   "games": [
+    {
+     "game_id": "0022600236",
+     "matchup": "IND@PHI",
+     "second_reading_matches_stored_row": true,
+     "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_INDPHI_book.pdf"
+    },
+    {
+     "game_id": "0022600237",
+     "matchup": "LAL@PHX",
+     "second_reading_matches_stored_row": true,
+     "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_LALPHX_book.pdf"
+    },
+    {
+     "game_id": "0022600238",
+     "matchup": "CHA@LAC",
+     "second_reading_matches_stored_row": true,
+     "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_CHALAC_book.pdf"
+    },
+    {
+     "game_id": "0022600239",
+     "matchup": "SAS@UTA",
+     "second_reading_matches_stored_row": true,
+     "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_SASUTA_book.pdf"
+    },
+    {
+     "game_id": "0022600240",
+     "matchup": "DAL@BOS",
+     "second_reading_matches_stored_row": true,
+     "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_DALBOS_book.pdf"
+    },
+    {
+     "game_id": "0022600241",
+     "matchup": "NYK@TOR",
+     "second_reading_matches_stored_row": true,
+     "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_NYKTOR_book.pdf"
+    }
+   ],
+   "disagreements": 0
+  },
+  "verification_rule": "a row is FINAL only when the official gamebook's SCORE BY PERIOD row sums to the printed final for both teams; asserted per row above."
+ },
+ "row_count": 9,
+ "final_row_count": 9
+}
