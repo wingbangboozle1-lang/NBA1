@@ -1,6 +1,6 @@
 {
  "title": "Flagged for Review",
- "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md \u00a723): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link.",
+ "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link.",
  "items": [
   {
    "id": "F1",
@@ -329,7 +329,7 @@
    "id": "F34",
    "severity": "Medium",
    "title": "The repository's gate checks structure, not values",
-   "detail": "The dashboard gate is structural, not a value check: scripts/verify_dashboard.py counts four categories separately \u2014 rows with an allowed official source link, explicit no-source marks with an explanatory title, marks whose title carries an approved official URL (rendered as a clickable context link since 2026-11-14), and unmarked rows \u2014 and fails only on the last category. It never fetches an NBA page and never compares a published value with its source; scripts/source_check.py is the row-value spot-check, and both were run on the merged tree before every merge (COORDINATION section 35). The original finding stands: a link is not a value check.",
+   "detail": "The dashboard gate is structural, not a value check: scripts/verify_dashboard.py counts four categories separately — rows with an allowed official source link, explicit no-source marks with an explanatory title, marks whose title carries an approved official URL (rendered as a clickable context link since 2026-11-14), and unmarked rows — and fails only on the last category. It never fetches an NBA page and never compares a published value with its source; scripts/source_check.py is the row-value spot-check, and both were run on the merged tree before every merge (COORDINATION section 35). The original finding stands: a link is not a value check.",
    "affected": "Trust in 'VERIFY OK' and in every 'verified' label on the site",
    "source": null,
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_all.py",
@@ -735,7 +735,7 @@
    "id": "F80",
    "severity": "medium",
    "title": "First 11/14 tip stated as 00:30Z; official tip is 7:00 PM ET (00:00Z)",
-   "detail": "COORDINATION \u00a740 says the earliest 11/14 game tipped at 00:30Z on 11/15. The official results file lists DEN @ NOP at 7:00 PM ET, which is 00:00Z (EST, UTC-5). Ledger entry 1 records first_tip_utc 2026-11-15T00:00Z, which matches the official time.",
+   "detail": "COORDINATION §40 says the earliest 11/14 game tipped at 00:30Z on 11/15. The official results file lists DEN @ NOP at 7:00 PM ET, which is 00:00Z (EST, UTC-5). Ledger entry 1 records first_tip_utc 2026-11-15T00:00Z, which matches the official time.",
    "source_url": "https://www.nba.com/game/den-vs-nop-0022600231",
    "status": "open"
   },
@@ -936,6 +936,16 @@
    "title": "Players on the injury report with no minutes this season have no measured minutes share",
    "detail": "Rotation availability is the minutes-weighted share of a team's measured top-8 that is not ruled out. A player who has not appeared in an official box score this season has no measured share, so removing them changes availability by 0.00 even when a coach would have played them. The top-8 table shows the window each share was measured over.",
    "source_url": "https://www.nba.com/games",
+   "status": "open"
+  },
+  {
+   "id": "F108",
+   "severity": "Medium",
+   "title": "R21 coverage gap: 10 injury-report players have no Final-game official box-score row (blank and flagged, never filled in)",
+   "detail": "The R21 per-player game logs cover 164 of the 174 players named by stored official injury-report editions. For 10 players no row exists in any captured official box score of a Final game, so their minutes/points/rebounds/assists are published blank. Two cases are reported separately on the player-logs page and neither is guessed: (a) 2 players are listed in official box scores but had no Final-game row at capture time (Jayden Quaintance and Tobias Harris, SAS - their 11/15 game was still in progress when the 23:50Z capture ran; a post-finals capture resolves them); (b) 8 players have no exact name in any captured official box score - either they have not appeared in a game this season, or the official report prints a name spelling that matches no box-score name (for example the official PDF prints 'Embid' where the box score prints 'Embiid'; 'Christopher Cenac Jr.' vs 'Chris Cenac Jr.'; the PDF's 'Udeh Jr., Ernest' vs the box score's suffix-first ordering). The other 5: Justin Champagne, Richie Saunders, Sean Pedulla, Sergio Larrea, Shaedon Sharpe. Name matching is exact after the published normalization; no fuzzy matching is applied, by design.",
+   "affected": "site/pages/player-logs.html - the blank R21 rows and the coverage table; data/derived/player_game_logs_2026_27.json",
+   "suggested_action": "Re-run the box-score capture after each game day ends (the scheduled job, task C07) so case (a) resolves itself. For case (b), a reviewer can approve an explicit sourced alias table (official report spelling -> official box score spelling) and then the names join the logs; never a silent fuzzy match.",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "status": "open"
   }
  ]

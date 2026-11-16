@@ -97,6 +97,7 @@ CATEGORIES = [
     ("Rest &amp; travel", "rest-travel.html", "Rest days, back-to-back and 3-in-4 from the official schedule, plus travel between arenas (flagged)."),
     ("Luck z-scores", "luck-z.html", "Luck per team as a z-score, and the refusal rule for teams outside the noise band."),
     ("Injury PDF ledger", "injury-ledger.html", "75 editions stored with revision and retrieval times; consecutive editions diffed for status changes."),
+    ("Per-player game logs (R21)", "player-logs.html", "Minutes, points, rebounds, assists and the opponent for every player on a stored official injury report - one row per game, each from the official box score it links to. Blank where no official row exists."),
     ("Settlement &amp; ledger", "settlement.html", "The 15 Nov slate graded from official finals only, and the hash chain proving the picks predate the tip."),
     ("Requirements coverage", "brief-coverage.html", "Every instruction in the brief, its status, and the evidence for that status."),
     ("VERIFICATION", None, "Checked line by line against NBA.com on the day of capture. Mismatches are listed, not corrected."),
@@ -2834,6 +2835,11 @@ def main():
     # page only, so the two builders never both claim requirements.html.
     import build_roll_page as _roll
     built.update(_roll.build(sys.modules[__name__]))
+
+    # === R21 per-player game logs (integration session arena/f03745ef-nba1) ===
+    # Built after the roll page so it reads the same captures this rebuild sees.
+    import build_player_logs as _pl
+    built.update(_pl.build(sys.modules[__name__]))
 
     # ------------------------------------------------------------------ write
     for name, html in built.items():

@@ -58,6 +58,7 @@
 <a href="rest-travel.html">Rest &amp; travel</a>
 <a href="luck-z.html">Luck z-scores</a>
 <a href="injury-ledger.html">Injury PDF ledger</a>
+<a href="player-logs.html">Per-player game logs (R21)</a>
 <a href="settlement.html">Settlement &amp; ledger</a>
 <a href="brief-coverage.html">Requirements coverage</a>
 </div>
@@ -1009,6 +1010,15 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F108</td>
+<td>Medium</td>
+<td><b>R21 coverage gap: 10 injury-report players have no Final-game official box-score row (blank and flagged, never filled in)</b></td>
+<td>The R21 per-player game logs cover 164 of the 174 players named by stored official injury-report editions. For 10 players no row exists in any captured official box score of a Final game, so their minutes/points/rebounds/assists are published blank. Two cases are reported separately on the player-logs page and neither is guessed: (a) 2 players are listed in official box scores but had no Final-game row at capture time (Jayden Quaintance and Tobias Harris, SAS - their 11/15 game was still in progress when the 23:50Z capture ran; a post-finals capture resolves them); (b) 8 players have no exact name in any captured official box score - either they have not appeared in a game this season, or the official report prints a name spelling that matches no box-score name (for example the official PDF prints 'Embid' where the box score prints 'Embiid'; 'Christopher Cenac Jr.' vs 'Chris Cenac Jr.'; the PDF's 'Udeh Jr., Ernest' vs the box score's suffix-first ordering). The other 5: Justin Champagne, Richie Saunders, Sean Pedulla, Sergio Larrea, Shaedon Sharpe. Name matching is exact after the published normalization; no fuzzy matching is applied, by design.</td>
+<td>site/pages/player-logs.html - the blank R21 rows and the coverage table; data/derived/player_game_logs_2026_27.json</td>
+<td>Re-run the box-score capture after each game day ends (the scheduled job, task C07) so case (a) resolves itself. For case (b), a reviewer can approve an explicit sourced alias table (official report spelling -&gt; official box score spelling) and then the names join the logs; never a silent fuzzy match.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">
