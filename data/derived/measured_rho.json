@@ -1,0 +1,82 @@
+{
+ "title": "Measured correlations from official finals",
+ "generated_by": "scripts/measure_rho.py",
+ "corpus": {
+  "n_games": 66,
+  "n_regulation": 63,
+  "n_overtime": 3,
+  "first_date": "2026-11-06",
+  "last_date": "2026-11-15",
+  "files": [
+   {
+    "file": "data/raw/games_completed.json",
+    "games_added": 60,
+    "official_url": "https://www.nba.com/games?date=2026-11-06"
+   },
+   {
+    "file": "data/verified/finals_2026-11-13.json",
+    "games_added": 8,
+    "official_url": "https://www.nba.com/games?date=2026-11-13"
+   },
+   {
+    "file": "data/official/results_2026-11-14.json",
+    "games_added": 5,
+    "official_url": "https://www.nba.com/games?date=2026-11-14"
+   },
+   {
+    "file": "data/official/results_2026-11-15.json",
+    "games_added": 1,
+    "official_url": "https://www.nba.com/games?date=2026-11-15"
+   }
+  ],
+  "rule": "only games whose official label is Final are used; a game still live at capture time is excluded, never filled in"
+ },
+ "measured": [
+  {
+   "x": "home margin",
+   "y": "game total",
+   "r": -0.0635,
+   "p_value": 0.6109,
+   "n": 66,
+   "subset": "all finals",
+   "status": "MEASURED from official final scores",
+   "why": "the rho a same-game side-and-total parlay needs"
+  },
+  {
+   "x": "home margin",
+   "y": "game total",
+   "r": -0.0621,
+   "p_value": 0.6272,
+   "n": 63,
+   "subset": "regulation finals only (no overtime)",
+   "status": "MEASURED from official final scores",
+   "why": "overtime raises the total without moving the margin the same way, so the regulation-only figure is the cleaner estimate"
+  }
+ ],
+ "not_measurable": [
+  {
+   "quantity": "rho between two different games on the same date",
+   "why_not": "two games have no natural pairing, so a number would be an artefact of how the pairs were made rather than a property of the games",
+   "consequence": "cross-game parlays are published as the naive product p1 x p2 with the Frechet-Hoeffding band [max(0, p1+p2-1), min(p1, p2)]; no rho is asserted"
+  },
+  {
+   "quantity": "rho between a model pick and a market price",
+   "why_not": "no NBA-operated source publishes a price, so there is no market leg to correlate",
+   "consequence": "market-comparison gates remain blocked"
+  }
+ ],
+ "home_win_rate": {
+  "home_wins": 36,
+  "n_decided": 66,
+  "n_games": 66,
+  "rate": 0.5455,
+  "status": "MEASURED from official final scores",
+  "note": "this is the measured home-win rate the brief asks to pin home-court advantage to; it is published here and is NOT applied to any originated line yet (flag F-W02 / F74)"
+ },
+ "sources": [
+  "https://www.nba.com/games?date=2026-11-06",
+  "https://www.nba.com/games?date=2026-11-13",
+  "https://www.nba.com/games?date=2026-11-14",
+  "https://www.nba.com/games?date=2026-11-15"
+ ]
+}

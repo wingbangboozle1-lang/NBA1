@@ -92,7 +92,7 @@ def main():
     rows = [dict(zip(cols, r)) for r in cap["rows"]]
 
     # tip times printed by the league referee office on the official injury PDF
-    inj = json.load(open(os.path.join(OFF, "injury_2026-11-15_0615PM.json"),
+    inj = json.load(open(os.path.join(OFF, "injury_2026-11-15_0615PM_arena49f70042.json"),
                          encoding="utf-8"))
     pdf_tip = {}
     for r in inj["rows"]:

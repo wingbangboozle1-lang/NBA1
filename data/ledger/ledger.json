@@ -77,7 +77,48 @@
    },
    "note": "Rolling-slate publication for the 2026-11-15..18 window, generated after the 2026-11-14 games were settled (entry 3) and before the first tip of the window. Preregistration files for every strategy family are frozen by digest here. The 2026-11-14..17 vintage (entry 1) remains settleable from its archives.",
    "prev": "e6f6be8333f85637eb808ae91fd012260524ab97a2ffdda22b50ad6431a3a08c"
+  },
+  {
+   "entry": 5,
+   "type": "pre_tip_publication",
+   "at_utc": "2026-11-16T00:16Z",
+   "first_tip_utc": "2026-11-17T00:00Z",
+   "first_game_tipping": "2026-11-16 ORL@BOS (7:00 PM ET)",
+   "window": "2026-11-16 .. 2026-11-18 (today + up to 3 days)",
+   "games_in_universe": 25,
+   "games_per_day": "2026-11-16=8, 2026-11-17=5, 2026-11-18=12",
+   "files": {
+    "data/archive/horizon_picks_2026-11-16.json": "9b43d77bf29288765aa6ddcf418d7789567832a2374ce700db64397085922ad8",
+    "data/archive/horizon_lines_2026-11-16.json": "04bd73ff50917bf378dab11b82eacbe1f5da56bc3c1fbcc6f0f1b7082c42ac64"
+   },
+   "prereg_files": {
+    "data/prereg/S01.json": "62daaeeebeb4ed9ef4e40a7e1e59f2fa21c6a1477b54ccf545fd80e25ef9c9ad",
+    "data/prereg/S02.json": "c0d61a6be4d13dcd56a11b4141b2ba96ef7544c4623563242498e2657f6a5cae",
+    "data/prereg/S03.json": "7335207d1e5bed3f8964d0c4c4fd51aee405342c9232088453b8cf639e5a5e29",
+    "data/prereg/S04.json": "6e72a6d00e21ad44edc2099347f11c4aa1a062ec0ba46e80c9fd5b28a51b1162",
+    "data/prereg/S05.json": "56b3ea3168ef45987814b018b0ebcca0d6540376eaddc47dc08226a1a84ef724",
+    "data/prereg/S06.json": "2fdb86ccaec143240eaf13833fb8f205b6e259273e02ccde6fac26784971cc4c",
+    "data/prereg/S07.json": "5c592b300f6b5ef421d531045baf5afb8bb99d06726030a50dd9b2d79568699f",
+    "data/prereg/S08.json": "267b62a7c85085fb684ca0119e409798585ba9e378beac9f9bb0189b8b8c5af2",
+    "data/prereg/T-SINGLE.json": "d4bcb5ab8530929fa91c80c2d1e6c4846c4bc2d5c7ef59324c4a4c2071356366",
+    "data/prereg/T-PARLAY.json": "bbf8b4a107aebf083ed2fd49223edb1902d1f943706110e2a4966dbfef777c38",
+    "data/prereg/T-SGP.json": "7f2d6744f793f2bba8ba79d7dcac3a8946e1ae9624c03ec1b6f693bb9c923f96",
+    "data/prereg/Prereg_index.json": "04d3e318362240bcd9395308bc3114a2bf938edc08ed2f272e9737fa19e8d827"
+   },
+   "prereg_archive_dir": "data/archive/prereg_2026-11-16",
+   "model_input_digests": {
+    "data/derived/horizon_picks.json": "9b43d77bf29288765aa6ddcf418d7789567832a2374ce700db64397085922ad8",
+    "data/derived/horizon_lines.json": "04bd73ff50917bf378dab11b82eacbe1f5da56bc3c1fbcc6f0f1b7082c42ac64",
+    "data/teams_advanced_2026_27.json": "926e10910ed990703ef4f344c7a0176839d0488879c7105047d3f1c04d81c4e5",
+    "data/teams_scoring_2026_27.json": "8f6a1fa8ee420549a3fd149a5561d6e3f70306aa32eac1e4b16d678431ed132e",
+    "data/raw/official_schedule_capture_2026-11-16.json": "c9562db861a88f788de128bdc97399745c64cc9b1f838d49e52c68cf01894241",
+    "data/official/injury_2026-11-15_0615PM.json": "71271109886a025c279bbdd22a76884d7386ca2993acf993aeb0d222eea7b335",
+    "data/official/results_2026-11-15.json": "351804cf5a7d66020da46b8d190c6758d87a4ff82c5a3c4bc1809b42343e74ac",
+    "data/settlement/settlement_2026-11-14.json": "992796498633d9a98c68de69dba164400be0471d195265a67dc30daea2a37827"
+   },
+   "note": "Rolling-slate publication for the 2026-11-16 .. 2026-11-18 window, generated before the first tip of the window (2026-11-17T00:00Z) and after the previous slate's settlement. Preregistration files for every strategy family are frozen by digest here. Every earlier vintage stays settleable from its own archive under data/archive/.",
+   "prev": "c46e0a37b321679b968ca4aee84a7477a53b2d1f5fa803bd9213672cc310a4bb"
   }
  ],
- "head": "c46e0a37b321679b968ca4aee84a7477a53b2d1f5fa803bd9213672cc310a4bb"
+ "head": "18a25667d251d2596b157dba6e06516514eb57e112e29d846902eba5085395c0"
 }

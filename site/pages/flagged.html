@@ -18,6 +18,7 @@
     <nav class="topnav">
       <a href="model-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
       <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="../../picks.html">Rolling horizon pick file</a>
       <a href="picks.html">Horizon</a>
       <a href="strategies.html">Evidence</a>
       <a href="decisions.html">Decisions</a>
@@ -30,6 +31,7 @@
   <aside class="sidebar">
     <div class="side-h">Sections</div>
     <div class="nav-group"><h3>HORIZON</h3>
+<a href="roll.html">Rolling Slate</a>
 <a href="picks.html">Lines &amp; Picks</a>
 <a href="props.html">Player Props</a>
 <a href="prop-variance.html">Prop Variance &amp; Rotation</a>
@@ -49,11 +51,13 @@
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
 <a href="official-verify.html">Live Re-verification</a>
+<a href="verify-2026-11-15.html">Nov 15 re-verification</a>
 </div>
 <div class="nav-group"><h3>DECISION</h3>
 <a href="questions.html">Open Questions</a>
 <a href="suggestions.html">Suggestions</a>
 <a href="decisions.html">Decisions: pick a path</a>
+<a href="requirements.html">Brief Traceability</a>
 <a href="flagged.html">Flagged for Review</a>
 <a href="sources.html">Source Register</a>
 <a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
@@ -691,7 +695,7 @@
 <td>F71</td>
 <td>Medium</td>
 <td><b>Horizon stops at 11/17: the 12 official 11/18 games are outside every published surface</b></td>
-<td>Today is 2026-11-15, so the brief's maximum horizon (today + 3 days) runs through 11/18. The official calendar prints 12 games on 11/18 and this session captured all 12 (game ids 0022600258-0022600269), but data/raw/schedule_upcoming.json has window 11/14..11/17, the published picks' slate_dates stop at 11/17, and no surface carries a 11/18 row.</td>
+<td>Today is 2026-11-15, so the brief's maximum horizon (today + 3 days) runs through 11/18. The official calendar prints 12 games on 11/18 and this session captured all 12 (game ids 0022600258-0022600269), but data/raw/schedule_upcoming.json has window 11/14..11/17, the published picks' slate_dates stop at 11/17, and no surface carries a 11/18 row.  RESOLVED 2026-11-16 (session arena/161f1638-nba1): the window is now derived from the newest official schedule capture instead of typed dates and the 11/18 games are published on site/pages/roll.html (window 2026-11-16..2026-11-18, 25 games).</td>
 <td>schedule, lines and picks surfaces for 11/18</td>
 <td>Extend the horizon capture to 11/18 and regenerate lines/picks for the new window; the 12 rows are already captured here with sources.</td>
 <td class="src"><span class="na" title="source id S115-G18 is not in the register">&mdash;</span></td>
@@ -700,7 +704,7 @@
 <td>F72</td>
 <td>Medium</td>
 <td><b>Injury basis is two editions behind: site prices from 11/14 04:15 AM ET, newest official edition is 11/15 06:15 AM ET</b></td>
-<td>site/data/injuries.json is built from the 11/14/26 04:15 AM ET edition (75 rows) and meta.json says the lines were priced from it, with the 01:30 PM ET edition recorded as NOT RE-PRICED. The official hub at read time (2026-11-15 ~11:35Z) lists editions at 15-minute cadence through 11/15 06:15 AM ET, which this session captured in full (101 rows: 85 for 11/15, 16 NOT YET SUBMITTED team rows for 11/16). Diff against the previous in-repo edition (11/14 01:30 PM ET): 16 of 18 team entries for 11/15 moved from NOT YET SUBMITTED to filed, 84 player designation rows appeared, Dallas remains NOT YET SUBMITTED (inside its game-day window), and New York has no row of any kind - recorded as absent, not interpreted. Player-level status changes are not computable between these two editions because the older one listed no players for 11/15. Lines are deliberately NOT re-priced (post-cut information must not enter a graded number).</td>
+<td>site/data/injuries.json is built from the 11/14/26 04:15 AM ET edition (75 rows) and meta.json says the lines were priced from it, with the 01:30 PM ET edition recorded as NOT RE-PRICED. The official hub at read time (2026-11-15 ~11:35Z) lists editions at 15-minute cadence through 11/15 06:15 AM ET, which this session captured in full (101 rows: 85 for 11/15, 16 NOT YET SUBMITTED team rows for 11/16). Diff against the previous in-repo edition (11/14 01:30 PM ET): 16 of 18 team entries for 11/15 moved from NOT YET SUBMITTED to filed, 84 player designation rows appeared, Dallas remains NOT YET SUBMITTED (inside its game-day window), and New York has no row of any kind - recorded as absent, not interpreted. Player-level status changes are not computable between these two editions because the older one listed no players for 11/15. Lines are deliberately NOT re-priced (post-cut information must not enter a graded number).  RESOLVED 2026-11-16 (session arena/161f1638-nba1): the injury basis is now the newest stored edition, 11/15 06:15 PM ET (155 rows), resolved at run time by scripts/originate_horizon.py rather than typed.</td>
 <td>injury layer for 11/15 games; any line adjustment driven by it</td>
 <td>Refresh the injury layer to the newest edition at the next pricing cut (before the 11/15 tips), keeping both editions visible; re-price only before publication, never after a line is frozen.</td>
 <td class="src"><span class="na" title="source id S115-IR0615 is not in the register">&mdash;</span></td>
@@ -749,6 +753,177 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-18" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F78</td>
+<td>high</td>
+<td><b>Pre-registration was frozen after the 11/14 picks it would govern</b></td>
+<td>data/prereg/*.json were frozen 2026-11-15T12:55Z. The 11/14 published picks are ledger entry 1 (2026-11-14T22:18:48Z), which predates every prereg file. The 11/14 results are therefore not pre-registered evidence and must not be presented as such.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/prereg/S01.json" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F79</td>
+<td>high</td>
+<td><b>Ledger anchor commit is not on main</b></td>
+<td>origin/main is a single squashed root commit (cd8fd27). The pre-tip anchor commit ef2e723 named in ledger entry 1 is an ancestor of arena/83d380ad-nba1 only, not of main. The hash chain still verifies (scripts/verify_ledger.py), but the external anchor is not on main's history.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/commit/ef2e723e13523b5b2495656c2a4ae5b461244374" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F80</td>
+<td>medium</td>
+<td><b>First 11/14 tip stated as 00:30Z; official tip is 7:00 PM ET (00:00Z)</b></td>
+<td>COORDINATION §40 says the earliest 11/14 game tipped at 00:30Z on 11/15. The official results file lists DEN @ NOP at 7:00 PM ET, which is 00:00Z (EST, UTC-5). Ledger entry 1 records first_tip_utc 2026-11-15T00:00Z, which matches the official time.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/game/den-vs-nop-0022600231" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F81</td>
+<td>high</td>
+<td><b>Player game logs cover 3 players; the injury edition lists 101 rows</b></td>
+<td>data/live/player_game_logs.json holds 3 players. The 11/15 06:15 AM ET injury edition has 101 rows. The brief requires per-player logs for at least the players on an injury report, so coverage is far short.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/player/203999/nikola-joki-c/game-log" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F82</td>
+<td>medium</td>
+<td><b>Injury PDFs are not retained in the repository</b></td>
+<td>The fetcher downloads injury PDFs, but no .pdf file is tracked in git. The repository holds transcriptions with revision and retrieval times, plus one consecutive diff. Every PDF must be stored with its timestamp to meet the brief.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F83</td>
+<td>medium</td>
+<td><b>Picks page has no rotation-availability column</b></td>
+<td>The picks table shows Home injury status and Away injury status. The brief asks for rotation availability as its own column.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): a rotation-availability column now exists on site/pages/roll.html, built from the official injury report (Out / Questionable counts and NOT YET SUBMITTED blocks). The legacy Lines &amp; Picks page still has no such column, so the item stays open.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F84</td>
+<td>high</td>
+<td><b>Home-court advantage is a fixed constant, not pinned to the measured home-win rate</b></td>
+<td>engine/model_core.py uses flat_hca = 2.0. scripts/originate_horizon.py records that HCA could not be sourced from an official NBA page. The measured 57.6% home-win rate from another build is a note only and is not applied.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): the home-win rate is now measured from official finals - 0.5455 (36 of 66) - and published on site/pages/roll.html. It is still not applied to any line. The gap is quantified: estimator B fits HCA at +3.508 points (t = 1.539, estimated in-sample) while estimator A applies none, and that single term is 90% of the models' mean 3.89-point disagreement.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/originate_horizon.py" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F85</td>
+<td>high</td>
+<td><b>No arena-coordinate table; travel distance and 3-in-4 not computed</b></td>
+<td>The repository has no arena latitude or longitude table, so travel distance cannot be computed from a sourced table. No 3-in-4 metric was found by search. Rest and back-to-back are shown per game.  ADVANCED 2026-11-16 (session arena/161f1638-nba1): 3-in-4 IS now computed from the official schedule and published in the rest column of site/pages/roll.html. Travel distance remains uncomputed - no official arena-coordinate table has been sourced, so the cell stays empty rather than filled from memory.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F86</td>
+<td>high</td>
+<td><b>No closing line or licensed price: market-anchored prior is blocked</b></td>
+<td>data/prereg/S01.json states: 'No licensed two-sided price exists (no odds feed)'. Blending the model with a closing line, weighted by out-of-sample log-loss, cannot be built until an official or licensed price source exists.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/prereg/S01.json" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F87</td>
+<td>high</td>
+<td><b>Two independent estimators and a disagreement headline are not implemented</b></td>
+<td>The picks table shows reference and model margins side by side and a spread edge. No second independent estimator module was found by search, and the headline was not verified to be a disagreement measure.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F88</td>
+<td>medium</td>
+<td><b>No noise-band refusal rule for strategies</b></td>
+<td>Luck z-scores are computed for all 30 teams in command-center/data/luck.json. No rule was found that refuses to publish a strategy leaning on a team outside the noise band.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/command-center/data/luck.json" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F89</td>
+<td>medium</td>
+<td><b>Top-8 minutes shares not reported; redistribution rule unmeasured</b></td>
+<td>data/derived/injury_impact.json sets the redistribution rule to a model rule, labelled 'MODEL RULE, not measured'. Top-8 minutes shares for each team are not reported.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/injury_impact.json" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F90</td>
+<td>medium</td>
+<td><b>Parlay rho is a fixed model constant, not a measured value</b></td>
+<td>scripts/generate_picks.py uses SGP_RHO_TEAMMATES = -0.2 and SGP_RHO_OPPONENTS = 0.05, labelled as model-derived. The naive product printed beside each parlay price was not verified on the parlay table.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/generate_picks.py" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F91</td>
+<td>high</td>
+<td><b>Most nba.com URLs were blocked from the probe runner; row values were not re-read here</b></td>
+<td>data/raw/probe_official.json: 1,911 URLs probed, 114 OK, 1,679 blocked, 116 unreachable. This session's sandbox allows only GitHub and package hosts, so no nba.com value was re-fetched and compared. Row-level values remain as captured in the repo.</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/probe_official.json" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F92</td>
+<td>medium</td>
+<td><b>GSW@NOP 2026-11-16 tip time: published capture says 09:00 PM ET, the official page now prints 8:00 PM ET</b></td>
+<td>The pre-tip schedule capture (data/official/schedule_2026-11-15_to_18.json, retrieved 2026-11-15T11:35Z..12:20Z) and the frozen horizon row both record 09:00 PM ET for game 0022600251. Two reads of the live official page on 2026-11-15 at 23:45Z..23:58Z (the scoreboard strips and a direct read of the 11/16 date page) print 8:00 PM ET for the same game id. Either the official page moved the tip after the capture or the capture mis-read it; nothing is inferred and the frozen pre-tip row is not edited - both readings and their timestamps are in verify/2026-11-15-8f64e94c/. The next rolling re-cut should take the live page's value. (Flag id renumbered from F78 to F92 at merge: F78-F91 were published first by arena/513516f6-nba1 in PR #108.)</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F93</td>
+<td>low</td>
+<td><b>Injury-report editions published 2026-11-15 after 06:15 AM ET are not captured; the site's banner names the basis edition, not the league's latest at read time</b></td>
+<td>The official injury index lists 2026-11-15 editions in 15-minute steps; on a read at 2026-11-15T23:54Z the fetched chunk showed editions from 12:00 AM ET through at least 4:15 PM ET. The published lines (15-18 Nov roll) are priced from the 06:15 AM ET edition (retrieved 2026-11-15T11:52Z) and are deliberately not re-priced (a line re-priced after its cut cannot be graded - SG29/F72). The gap is a capture-currency gap, not a pricing error: the Injuries page banner states the edition, its revision time and its retrieval time. Capture the remaining editions at the next refresh (SG30 cadence). (Flag id renumbered from F79 to F93 at merge: F78-F91 were published first by arena/513516f6-nba1 in PR #108.)</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F94</td>
+<td>High</td>
+<td><b>The site is not split into a projection surface and a gated bet surface</b></td>
+<td>The brief requires two surfaces that are never mixed: 'projection' safe to publish now, 'bet' gated behind validation. No page carries either label. Picks carry the status string 'MODEL OUTPUT - UNVALIDATED' but sit beside projections in the same tables.</td>
+<td>Lines &amp; Picks, roll.html, Player Props, Strategies</td>
+<td>Label every page projection or bet, and move every gated pick behind its own surface.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F95</td>
+<td>Medium</td>
+<td><b>2026-11-15 is not settled: 2 of its 9 games had reached Final at the last capture</b></td>
+<td>At 2026-11-15T23:55Z only IND@PHI (131-124) and LAL@PHX (131-123) were Final; four more were in progress and three had not tipped. Settlement is deferred rather than guessed - the seven rows without a final carry null score fields and the observed state. The results feed for 11/15 is kept current in data/official/results_2026-11-15.json.</td>
+<td>ledger settlement for 11/15; the 11/16 pre-registration's prior-day context</td>
+<td>Settle the ledger for 11/15 as soon as all nine games are Final (last tip 09:00 PM ET).</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F96</td>
+<td>Low</td>
+<td><b>POR@MIN is listed twice on the official schedule in two nights</b></td>
+<td>The official games pages list Portland at Minnesota on both 2026-11-16 (game 0022600250, 8:00 PM ET, Target Center) and 2026-11-17 (game 0022600254, 8:00 PM ET, Target Center) - two distinct official game IDs, same arena, consecutive nights. Both are published, because that is what the official source prints; each was checked on its own date page and neither was de-duplicated. Flagged because a same-venue back-to-back between the same two clubs is unusual enough to be worth a second look before either game is priced.</td>
+<td>roll.html rows for 11/16 and 11/17; any rest/B2B flag for POR and MIN</td>
+<td>Confirm against the box scores after both games; if one is a page artefact, drop the row.</td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-17" target="_blank" rel="noopener">link</a></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">

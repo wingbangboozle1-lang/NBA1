@@ -2,21 +2,21 @@
  "_meta": {
   "title": "Originated horizon lines v2 - 2026-11-15 through 2026-11-19",
   "generated_by": "scripts/build_horizon_v2.py",
-  "generated_utc": "2026-11-16T00:20:09Z",
+  "generated_utc": "2026-11-16T00:31:26Z",
   "method": "two independent estimators built on the official team tables, blended underneath; their disagreement is the headline confidence signal; the home-court advantage is pinned to the measured official home win rate",
   "pick_window": "2026-11-15 .. 2026-11-18 (up to 3 days ahead)",
   "line_window": "2026-11-15 .. 2026-11-19",
   "inputs": {
    "team_tables": {
-    "advanced": "teams_advanced_2026-11-15_2340Z.json",
-    "traditional": "teams_traditional_2026-11-15_2340Z.json",
-    "opponent": "teams_opponent_2026-11-15_2340Z.json"
+    "advanced": "teams_advanced_2026-11-15_2345Z.json",
+    "traditional": "teams_traditional_2026-11-15_2345Z.json",
+    "opponent": "teams_opponent_2026-11-15_2345Z.json"
    },
    "team_table_source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
    "standings_file": "standings_2026-11-15_2347Z.json",
    "schedule_file": "official_schedule_2026-11-15_to_19.json",
    "arena_file": "arena_coordinates_2026-11-15.json",
-   "injury_edition_file": "injury_2026-11-15_0615PM.json",
+   "injury_edition_file": "injury_2026-11-15_0615PM_arena49f70042.json",
    "injury_edition_revision": "2026-11-15 06:15 PM ET",
    "minutes_file": "player_minutes_top50_2026-11-15.json"
   },
@@ -32,13 +32,13 @@
   },
   "home_court_anchor": {
    "measured_home_win_rate": 0.5319,
-   "measured_home_win_rate_from_final_scores": 0.5161290322580645,
-   "hca_points_from_final_scores_crosscheck": 0.7,
+   "measured_home_win_rate_from_final_scores": 0.5159235668789809,
+   "hca_points_from_final_scores_crosscheck": 0.69,
    "primary_measurement": "the official standings HOME/ROAD columns (the largest official sample); the final-score corpus measurement is published beside it as a cross-check",
-   "measured_road_win_rate": 0.4838709677419355,
-   "games_measured": 155,
-   "home_wins": 80,
-   "home_games": 155,
+   "measured_road_win_rate": 0.4840764331210191,
+   "games_measured": 157,
+   "home_wins": 81,
+   "home_games": 157,
    "standings_cross_check": {
     "home_win_rate": 0.5319,
     "road_win_rate": 0.4681,
@@ -46,7 +46,7 @@
     "road_games": 188,
     "source_url": "https://www.nba.com/standings"
    },
-   "sigma_margin_used": 17.29,
+   "sigma_margin_used": 17.2,
    "sigma_margin_source": "population standard deviation of the margin on the official final-score corpus",
    "hca_points": 1.38,
    "hca_z": 0.08,
@@ -152,9 +152,9 @@
     "total": 226.3
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6357,
-    "p_home_win_estimator_b": 0.6357,
-    "p_home_win_blend": 0.6357,
+    "p_home_win_estimator_a": 0.6364,
+    "p_home_win_estimator_b": 0.6364,
+    "p_home_win_blend": 0.6364,
     "disagreement": 0.0,
     "disagreement_pp": 0.0,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -165,7 +165,7 @@
    },
    "line_total": 225.1,
    "line_spread_home": 6.7,
-   "model_home_win_prob": 0.651,
+   "model_home_win_prob": 0.6518,
    "model_home_ml": -187,
    "confidence_signal_pp": 0.0,
    "rest_home": {
@@ -288,14 +288,14 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": -0.37,
+    "luck_z": -0.31,
     "in_noise_band": true,
-    "luck_points": -17.1
+    "luck_points": -14.7
    },
    "luck_away": {
-    "luck_z": -0.6,
+    "luck_z": -0.63,
     "in_noise_band": true,
-    "luck_points": -27.2
+    "luck_points": -29.6
    },
    "source_url": "https://www.nba.com/game/ind-vs-phi-0022600236",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -337,12 +337,12 @@
     "total": 235.3
    },
    "blend": {
-    "p_home_win_estimator_a": 0.2567,
-    "p_home_win_estimator_b": 0.2604,
-    "p_home_win_blend": 0.2585,
-    "disagreement": 0.0037,
-    "disagreement_pp": 0.37,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.37 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.2556,
+    "p_home_win_estimator_b": 0.2593,
+    "p_home_win_blend": 0.2575,
+    "disagreement": 0.0038,
+    "disagreement_pp": 0.38,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.38 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": -11.2,
@@ -350,9 +350,9 @@
    },
    "line_total": 235.8,
    "line_spread_home": -5.8,
-   "model_home_win_prob": 0.369,
-   "model_home_ml": 171,
-   "confidence_signal_pp": 0.37,
+   "model_home_win_prob": 0.3683,
+   "model_home_ml": 172,
+   "confidence_signal_pp": 0.38,
    "rest_home": {
     "rest_days": 2,
     "back_to_back": false,
@@ -483,14 +483,14 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": 0.19,
+    "luck_z": 0.29,
     "in_noise_band": true,
-    "luck_points": 8.0
+    "luck_points": 12.7
    },
    "luck_away": {
-    "luck_z": -0.65,
+    "luck_z": -0.73,
     "in_noise_band": true,
-    "luck_points": -31.1
+    "luck_points": -35.9
    },
    "source_url": "https://www.nba.com/game/lal-vs-phx-0022600237",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -532,9 +532,9 @@
     "total": 205.4
    },
    "blend": {
-    "p_home_win_estimator_a": 0.672,
-    "p_home_win_estimator_b": 0.6699,
-    "p_home_win_blend": 0.671,
+    "p_home_win_estimator_a": 0.6728,
+    "p_home_win_estimator_b": 0.6707,
+    "p_home_win_blend": 0.6718,
     "disagreement": 0.0021,
     "disagreement_pp": 0.21,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.21 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -545,8 +545,8 @@
    },
    "line_total": 207.7,
    "line_spread_home": 8.1,
-   "model_home_win_prob": 0.6808,
-   "model_home_ml": -213,
+   "model_home_win_prob": 0.6817,
+   "model_home_ml": -214,
    "confidence_signal_pp": 0.21,
    "rest_home": {
     "rest_days": 4,
@@ -705,9 +705,9 @@
     "total": 224.6
    },
    "blend": {
-    "p_home_win_estimator_a": 0.0975,
-    "p_home_win_estimator_b": 0.0936,
-    "p_home_win_blend": 0.0956,
+    "p_home_win_estimator_a": 0.0964,
+    "p_home_win_estimator_b": 0.0925,
+    "p_home_win_blend": 0.0944,
     "disagreement": 0.0039,
     "disagreement_pp": 0.39,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.39 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -718,8 +718,8 @@
    },
    "line_total": 222.6,
    "line_spread_home": -21.1,
-   "model_home_win_prob": 0.1111,
-   "model_home_ml": 800,
+   "model_home_win_prob": 0.1099,
+   "model_home_ml": 810,
    "confidence_signal_pp": 0.39,
    "rest_home": {
     "rest_days": 3,
@@ -845,7 +845,7 @@
     "note": "official per-player minutes not captured for this team"
    },
    "luck_home": {
-    "luck_z": 0.89,
+    "luck_z": 0.9,
     "in_noise_band": true,
     "luck_points": 40.6
    },
@@ -894,9 +894,9 @@
     "total": 211.4
    },
    "blend": {
-    "p_home_win_estimator_a": 0.7616,
-    "p_home_win_estimator_b": 0.758,
-    "p_home_win_blend": 0.7598,
+    "p_home_win_estimator_a": 0.7627,
+    "p_home_win_estimator_b": 0.7591,
+    "p_home_win_blend": 0.7609,
     "disagreement": 0.0036,
     "disagreement_pp": 0.36,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.36 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -907,8 +907,8 @@
    },
    "line_total": 213.9,
    "line_spread_home": 13.9,
-   "model_home_win_prob": 0.7886,
-   "model_home_ml": -373,
+   "model_home_win_prob": 0.7897,
+   "model_home_ml": -376,
    "confidence_signal_pp": 0.36,
    "rest_home": {
     "rest_days": 3,
@@ -1080,7 +1080,7 @@
     "luck_points": -25.8
    },
    "luck_away": {
-    "luck_z": 1.22,
+    "luck_z": 1.23,
     "in_noise_band": true,
     "luck_points": 55.5
    },
@@ -1124,12 +1124,12 @@
     "total": 204.3
    },
    "blend": {
-    "p_home_win_estimator_a": 0.4243,
-    "p_home_win_estimator_b": 0.4288,
-    "p_home_win_blend": 0.4266,
-    "disagreement": 0.0045,
-    "disagreement_pp": 0.45,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.45 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.4239,
+    "p_home_win_estimator_b": 0.4285,
+    "p_home_win_blend": 0.4262,
+    "disagreement": 0.0046,
+    "disagreement_pp": 0.46,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.46 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": -3.2,
@@ -1137,9 +1137,9 @@
    },
    "line_total": 209.4,
    "line_spread_home": -2.8,
-   "model_home_win_prob": 0.4354,
+   "model_home_win_prob": 0.4351,
    "model_home_ml": 130,
-   "confidence_signal_pp": 0.45,
+   "confidence_signal_pp": 0.46,
    "rest_home": {
     "rest_days": 2,
     "back_to_back": false,
@@ -1316,9 +1316,9 @@
     "total": 216.5
    },
    "blend": {
-    "p_home_win_estimator_a": 0.2278,
-    "p_home_win_estimator_b": 0.2313,
-    "p_home_win_blend": 0.2295,
+    "p_home_win_estimator_a": 0.2266,
+    "p_home_win_estimator_b": 0.2301,
+    "p_home_win_blend": 0.2284,
     "disagreement": 0.0035,
     "disagreement_pp": 0.35,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.35 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -1329,8 +1329,8 @@
    },
    "line_total": 218.4,
    "line_spread_home": -11.4,
-   "model_home_win_prob": 0.2552,
-   "model_home_ml": 292,
+   "model_home_win_prob": 0.2541,
+   "model_home_ml": 293,
    "confidence_signal_pp": 0.35,
    "rest_home": {
     "rest_days": 2,
@@ -1531,12 +1531,12 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": -0.96,
+    "luck_z": -0.97,
     "in_noise_band": true,
     "luck_points": -43.7
    },
    "luck_away": {
-    "luck_z": 0.31,
+    "luck_z": 0.32,
     "in_noise_band": true,
     "luck_points": 13.6
    },
@@ -1576,16 +1576,16 @@
     "pace_factor": 1.0419,
     "pts_home": 113.7,
     "pts_away": 130.2,
-    "margin": -15.1,
+    "margin": -15.2,
     "total": 243.9
    },
    "blend": {
-    "p_home_win_estimator_a": 0.2008,
-    "p_home_win_estimator_b": 0.1912,
-    "p_home_win_blend": 0.196,
-    "disagreement": 0.0096,
-    "disagreement_pp": 0.96,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.96 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.1996,
+    "p_home_win_estimator_b": 0.1884,
+    "p_home_win_blend": 0.194,
+    "disagreement": 0.0112,
+    "disagreement_pp": 1.12,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.12 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": -14.8,
@@ -1593,9 +1593,9 @@
    },
    "line_total": 238.8,
    "line_spread_home": -14.0,
-   "model_home_win_prob": 0.2096,
-   "model_home_ml": 377,
-   "confidence_signal_pp": 0.96,
+   "model_home_win_prob": 0.2084,
+   "model_home_ml": 380,
+   "confidence_signal_pp": 1.12,
    "rest_home": {
     "rest_days": 3,
     "back_to_back": false,
@@ -1769,9 +1769,9 @@
     "total": 220.3
    },
    "blend": {
-    "p_home_win_estimator_a": 0.196,
-    "p_home_win_estimator_b": 0.1992,
-    "p_home_win_blend": 0.1976,
+    "p_home_win_estimator_a": 0.1948,
+    "p_home_win_estimator_b": 0.198,
+    "p_home_win_blend": 0.1964,
     "disagreement": 0.0032,
     "disagreement_pp": 0.32,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.32 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -1782,8 +1782,8 @@
    },
    "line_total": 221.2,
    "line_spread_home": -14.1,
-   "model_home_win_prob": 0.207,
-   "model_home_ml": 383,
+   "model_home_win_prob": 0.2058,
+   "model_home_ml": 386,
    "confidence_signal_pp": 0.32,
    "rest_home": {
     "rest_days": 4,
@@ -1973,7 +1973,7 @@
     "luck_points": 15.2
    },
    "luck_away": {
-    "luck_z": 0.8,
+    "luck_z": 0.81,
     "in_noise_band": true,
     "luck_points": 36.5
    },
@@ -2017,9 +2017,9 @@
     "total": 201.4
    },
    "blend": {
-    "p_home_win_estimator_a": 0.8301,
-    "p_home_win_estimator_b": 0.8196,
-    "p_home_win_blend": 0.8249,
+    "p_home_win_estimator_a": 0.8313,
+    "p_home_win_estimator_b": 0.8209,
+    "p_home_win_blend": 0.8261,
     "disagreement": 0.0104,
     "disagreement_pp": 1.04,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.04 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -2030,8 +2030,8 @@
    },
    "line_total": 204.4,
    "line_spread_home": 20.9,
-   "model_home_win_prob": 0.8871,
-   "model_home_ml": -786,
+   "model_home_win_prob": 0.8883,
+   "model_home_ml": -795,
    "confidence_signal_pp": 1.04,
    "rest_home": {
     "rest_days": 0,
@@ -2039,7 +2039,7 @@
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-15",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -2214,9 +2214,9 @@
     "total": 256.5
    },
    "blend": {
-    "p_home_win_estimator_a": 0.7992,
-    "p_home_win_estimator_b": 0.8104,
-    "p_home_win_blend": 0.8048,
+    "p_home_win_estimator_a": 0.8004,
+    "p_home_win_estimator_b": 0.8116,
+    "p_home_win_blend": 0.806,
     "disagreement": 0.0112,
     "disagreement_pp": 1.12,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.12 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -2227,8 +2227,8 @@
    },
    "line_total": 250.4,
    "line_spread_home": 14.8,
-   "model_home_win_prob": 0.804,
-   "model_home_ml": -410,
+   "model_home_win_prob": 0.8052,
+   "model_home_ml": -413,
    "confidence_signal_pp": 1.12,
    "rest_home": {
     "rest_days": 1,
@@ -2393,33 +2393,33 @@
     "pace_factor": 1.0041,
     "pts_home": 108.5,
     "pts_away": 123.4,
-    "margin": -13.4,
+    "margin": -13.5,
     "total": 231.9
    },
    "blend": {
-    "p_home_win_estimator_a": 0.2243,
-    "p_home_win_estimator_b": 0.2191,
-    "p_home_win_blend": 0.2217,
-    "disagreement": 0.0052,
-    "disagreement_pp": 0.52,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.52 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.2231,
+    "p_home_win_estimator_b": 0.2163,
+    "p_home_win_blend": 0.2197,
+    "disagreement": 0.0069,
+    "disagreement_pp": 0.69,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.69 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -13.2,
+    "margin_blend": -13.3,
     "total_blend": 229.4
    },
    "line_total": 229.4,
-   "line_spread_home": -14.3,
-   "model_home_win_prob": 0.204,
-   "model_home_ml": 390,
-   "confidence_signal_pp": 0.52,
+   "line_spread_home": -14.4,
+   "model_home_win_prob": 0.2012,
+   "model_home_ml": 397,
+   "confidence_signal_pp": 0.69,
    "rest_home": {
     "rest_days": 0,
     "back_to_back": true,
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-15",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -2481,12 +2481,12 @@
     "note": "official per-player minutes not captured for this team"
    },
    "luck_home": {
-    "luck_z": -0.96,
+    "luck_z": -0.97,
     "in_noise_band": true,
     "luck_points": -43.7
    },
    "luck_away": {
-    "luck_z": -1.06,
+    "luck_z": -1.07,
     "in_noise_band": true,
     "luck_points": -48.3
    },
@@ -2530,9 +2530,9 @@
     "total": 222.3
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3449,
-    "p_home_win_estimator_b": 0.3449,
-    "p_home_win_blend": 0.3449,
+    "p_home_win_estimator_a": 0.3441,
+    "p_home_win_estimator_b": 0.3441,
+    "p_home_win_blend": 0.3441,
     "disagreement": 0.0,
     "disagreement_pp": 0.0,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -2543,7 +2543,7 @@
    },
    "line_total": 222.0,
    "line_spread_home": -5.7,
-   "model_home_win_prob": 0.3707,
+   "model_home_win_prob": 0.3701,
    "model_home_ml": 170,
    "confidence_signal_pp": 0.0,
    "rest_home": {
@@ -2561,7 +2561,7 @@
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-15",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "travel_away": {
@@ -2682,9 +2682,9 @@
     "luck_points": -6.0
    },
    "luck_away": {
-    "luck_z": -0.37,
+    "luck_z": -0.31,
     "in_noise_band": true,
-    "luck_points": -17.1
+    "luck_points": -14.7
    },
    "source_url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -2726,9 +2726,9 @@
     "total": 235.2
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3033,
-    "p_home_win_estimator_b": 0.3013,
-    "p_home_win_blend": 0.3023,
+    "p_home_win_estimator_a": 0.3024,
+    "p_home_win_estimator_b": 0.3004,
+    "p_home_win_blend": 0.3014,
     "disagreement": 0.002,
     "disagreement_pp": 0.2,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.20 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -2739,8 +2739,8 @@
    },
    "line_total": 234.6,
    "line_spread_home": -6.7,
-   "model_home_win_prob": 0.3494,
-   "model_home_ml": 186,
+   "model_home_win_prob": 0.3487,
+   "model_home_ml": 187,
    "confidence_signal_pp": 0.2,
    "rest_home": {
     "rest_days": 1,
@@ -2769,7 +2769,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Kaseya%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "official schedule",
+   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
    "availability_redistribution_home": {
     "team": "MIA",
     "minutes_removed": 0.0,
@@ -2863,7 +2863,7 @@
     "luck_points": 6.4
    },
    "luck_away": {
-    "luck_z": 0.31,
+    "luck_z": 0.32,
     "in_noise_band": true,
     "luck_points": 13.6
    },
@@ -2903,26 +2903,26 @@
     "pace_factor": 1.0227,
     "pts_home": 119.0,
     "pts_away": 114.9,
-    "margin": 5.5,
+    "margin": 5.4,
     "total": 233.9
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6226,
-    "p_home_win_estimator_b": 0.6248,
-    "p_home_win_blend": 0.6237,
-    "disagreement": 0.0022,
-    "disagreement_pp": 0.22,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.22 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.6232,
+    "p_home_win_estimator_b": 0.6232,
+    "p_home_win_blend": 0.6232,
+    "disagreement": 0.0,
+    "disagreement_pp": 0.0,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 5.5,
+    "margin_blend": 5.4,
     "total_blend": 231.2
    },
    "line_total": 229.2,
-   "line_spread_home": 2.1,
-   "model_home_win_prob": 0.5492,
-   "model_home_ml": -122,
-   "confidence_signal_pp": 0.22,
+   "line_spread_home": 2.0,
+   "model_home_win_prob": 0.5471,
+   "model_home_ml": -121,
+   "confidence_signal_pp": 0.0,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -3119,9 +3119,9 @@
     "total": 247.3
    },
    "blend": {
-    "p_home_win_estimator_a": 0.2456,
-    "p_home_win_estimator_b": 0.2348,
-    "p_home_win_blend": 0.2402,
+    "p_home_win_estimator_a": 0.2445,
+    "p_home_win_estimator_b": 0.2337,
+    "p_home_win_blend": 0.2391,
     "disagreement": 0.0108,
     "disagreement_pp": 1.08,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.08 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -3132,8 +3132,8 @@
    },
    "line_total": 241.2,
    "line_spread_home": -14.2,
-   "model_home_win_prob": 0.2058,
-   "model_home_ml": 386,
+   "model_home_win_prob": 0.2046,
+   "model_home_ml": 389,
    "confidence_signal_pp": 1.08,
    "rest_home": {
     "rest_days": 1,
@@ -3305,12 +3305,12 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": -0.5,
+    "luck_z": -0.51,
     "in_noise_band": true,
     "luck_points": -22.9
    },
    "luck_away": {
-    "luck_z": 1.94,
+    "luck_z": 1.95,
     "in_noise_band": false,
     "luck_points": 84.1
    },
@@ -3354,9 +3354,9 @@
     "total": 219.8
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6699,
-    "p_home_win_estimator_b": 0.6657,
-    "p_home_win_blend": 0.6678,
+    "p_home_win_estimator_a": 0.6707,
+    "p_home_win_estimator_b": 0.6665,
+    "p_home_win_blend": 0.6686,
     "disagreement": 0.0042,
     "disagreement_pp": 0.42,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.42 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -3367,8 +3367,8 @@
    },
    "line_total": 223.5,
    "line_spread_home": 9.2,
-   "model_home_win_prob": 0.7034,
-   "model_home_ml": -237,
+   "model_home_win_prob": 0.7043,
+   "model_home_ml": -238,
    "confidence_signal_pp": 0.42,
    "rest_home": {
     "rest_days": 1,
@@ -3385,7 +3385,7 @@
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-15",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "travel_away": {
@@ -3460,9 +3460,9 @@
     "luck_points": 8.6
    },
    "luck_away": {
-    "luck_z": 0.19,
+    "luck_z": 0.29,
     "in_noise_band": true,
-    "luck_points": 8.0
+    "luck_points": 12.7
    },
    "source_url": "https://www.nba.com/game/phx-vs-den-0022600252",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -3504,12 +3504,12 @@
     "total": 204.3
    },
    "blend": {
-    "p_home_win_estimator_a": 0.4243,
-    "p_home_win_estimator_b": 0.4288,
-    "p_home_win_blend": 0.4266,
-    "disagreement": 0.0045,
-    "disagreement_pp": 0.45,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.45 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.4239,
+    "p_home_win_estimator_b": 0.4285,
+    "p_home_win_blend": 0.4262,
+    "disagreement": 0.0046,
+    "disagreement_pp": 0.46,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.46 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": -3.2,
@@ -3517,16 +3517,16 @@
    },
    "line_total": 209.4,
    "line_spread_home": -3.2,
-   "model_home_win_prob": 0.4266,
-   "model_home_ml": 134,
-   "confidence_signal_pp": 0.45,
+   "model_home_win_prob": 0.4262,
+   "model_home_ml": 135,
+   "confidence_signal_pp": 0.46,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-15",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -3547,7 +3547,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Scotiabank%20Arena&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "official schedule",
+   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
    "availability_redistribution_home": {
     "team": "TOR",
     "minutes_removed": 0.0,
@@ -3692,26 +3692,26 @@
     "pace_factor": 1.0227,
     "pts_home": 119.0,
     "pts_away": 114.9,
-    "margin": 5.5,
+    "margin": 5.4,
     "total": 233.9
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6226,
-    "p_home_win_estimator_b": 0.6248,
-    "p_home_win_blend": 0.6237,
-    "disagreement": 0.0022,
-    "disagreement_pp": 0.22,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.22 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.6232,
+    "p_home_win_estimator_b": 0.6232,
+    "p_home_win_blend": 0.6232,
+    "disagreement": 0.0,
+    "disagreement_pp": 0.0,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 5.5,
+    "margin_blend": 5.4,
     "total_blend": 231.2
    },
    "line_total": 229.2,
-   "line_spread_home": -0.2,
-   "model_home_win_prob": 0.495,
-   "model_home_ml": 102,
-   "confidence_signal_pp": 0.22,
+   "line_spread_home": -0.3,
+   "model_home_win_prob": 0.4926,
+   "model_home_ml": 103,
+   "confidence_signal_pp": 0.0,
    "rest_home": {
     "rest_days": 0,
     "back_to_back": true,
@@ -3908,9 +3908,9 @@
     "total": 221.2
    },
    "blend": {
-    "p_home_win_estimator_a": 0.7007,
-    "p_home_win_estimator_b": 0.7007,
-    "p_home_win_blend": 0.7007,
+    "p_home_win_estimator_a": 0.7016,
+    "p_home_win_estimator_b": 0.7016,
+    "p_home_win_blend": 0.7016,
     "disagreement": 0.0,
     "disagreement_pp": 0.0,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -3921,8 +3921,8 @@
    },
    "line_total": 220.2,
    "line_spread_home": 9.1,
-   "model_home_win_prob": 0.7007,
-   "model_home_ml": -234,
+   "model_home_win_prob": 0.7016,
+   "model_home_ml": -235,
    "confidence_signal_pp": 0.0,
    "rest_home": {
     "rest_days": 1,
@@ -4031,9 +4031,9 @@
     "total": 231.4
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6636,
-    "p_home_win_estimator_b": 0.6678,
-    "p_home_win_blend": 0.6657,
+    "p_home_win_estimator_a": 0.6644,
+    "p_home_win_estimator_b": 0.6686,
+    "p_home_win_blend": 0.6665,
     "disagreement": 0.0042,
     "disagreement_pp": 0.42,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.42 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -4044,8 +4044,8 @@
    },
    "line_total": 227.6,
    "line_spread_home": 8.1,
-   "model_home_win_prob": 0.6806,
-   "model_home_ml": -213,
+   "model_home_win_prob": 0.6815,
+   "model_home_ml": -214,
    "confidence_signal_pp": 0.42,
    "rest_home": {
     "rest_days": 1,
@@ -4053,7 +4053,7 @@
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-15",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -4062,7 +4062,7 @@
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-15",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "travel_away": {
@@ -4074,7 +4074,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Intuit%20Dome&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "official schedule",
+   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
    "availability_redistribution_home": {
     "team": "LAC",
     "minutes_removed": 0.0,
@@ -4146,7 +4146,7 @@
     "luck_points": 3.8
    },
    "luck_away": {
-    "luck_z": 0.89,
+    "luck_z": 0.9,
     "in_noise_band": true,
     "luck_points": 40.6
    },
@@ -4190,9 +4190,9 @@
     "total": 211.8
    },
    "blend": {
-    "p_home_win_estimator_a": 0.8799,
-    "p_home_win_estimator_b": 0.8728,
-    "p_home_win_blend": 0.8763,
+    "p_home_win_estimator_a": 0.8811,
+    "p_home_win_estimator_b": 0.874,
+    "p_home_win_blend": 0.8775,
     "disagreement": 0.0071,
     "disagreement_pp": 0.71,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.71 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -4203,8 +4203,8 @@
    },
    "line_total": 215.2,
    "line_spread_home": 20.0,
-   "model_home_win_prob": 0.8765,
-   "model_home_ml": -710,
+   "model_home_win_prob": 0.8777,
+   "model_home_ml": -717,
    "confidence_signal_pp": 0.71,
    "rest_home": {
     "rest_days": 1,
@@ -4233,7 +4233,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Crypto.com%20Arena&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "official schedule",
+   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
    "availability_redistribution_home": {
     "team": "LAL",
     "minutes_removed": 0.0,
@@ -4278,9 +4278,9 @@
     "note": "official per-player minutes not captured for this team"
    },
    "luck_home": {
-    "luck_z": -0.65,
+    "luck_z": -0.73,
     "in_noise_band": true,
-    "luck_points": -31.1
+    "luck_points": -35.9
    },
    "luck_away": {
     "luck_z": -0.01,
@@ -4327,12 +4327,12 @@
     "total": 239.6
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3643,
-    "p_home_win_estimator_b": 0.3599,
-    "p_home_win_blend": 0.3621,
-    "disagreement": 0.0043,
-    "disagreement_pp": 0.43,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.43 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.3636,
+    "p_home_win_estimator_b": 0.3592,
+    "p_home_win_blend": 0.3614,
+    "disagreement": 0.0044,
+    "disagreement_pp": 0.44,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.44 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": -6.1,
@@ -4340,9 +4340,9 @@
    },
    "line_total": 237.8,
    "line_spread_home": -5.7,
-   "model_home_win_prob": 0.3701,
-   "model_home_ml": 170,
-   "confidence_signal_pp": 0.43,
+   "model_home_win_prob": 0.3694,
+   "model_home_ml": 171,
+   "confidence_signal_pp": 0.44,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -4424,7 +4424,7 @@
     "luck_points": 21.7
    },
    "luck_away": {
-    "luck_z": -1.06,
+    "luck_z": -1.07,
     "in_noise_band": true,
     "luck_points": -48.3
    },
@@ -4455,7 +4455,7 @@
     "ppp_proj_away": 1.1948,
     "pts_home": 106.9,
     "pts_away": 118.1,
-    "margin": -9.8,
+    "margin": -9.9,
     "total": 224.9
    },
    "estimator_b": {
@@ -4468,22 +4468,22 @@
     "total": 220.7
    },
    "blend": {
-    "p_home_win_estimator_a": 0.2854,
-    "p_home_win_estimator_b": 0.2893,
-    "p_home_win_blend": 0.2874,
-    "disagreement": 0.0039,
-    "disagreement_pp": 0.39,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.39 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.2824,
+    "p_home_win_estimator_b": 0.2884,
+    "p_home_win_blend": 0.2854,
+    "disagreement": 0.0059,
+    "disagreement_pp": 0.59,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.59 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -9.7,
+    "margin_blend": -9.8,
     "total_blend": 222.8
    },
    "line_total": 222.8,
-   "line_spread_home": -7.9,
-   "model_home_win_prob": 0.324,
-   "model_home_ml": 209,
-   "confidence_signal_pp": 0.39,
+   "line_spread_home": -8.0,
+   "model_home_win_prob": 0.3211,
+   "model_home_ml": 211,
+   "confidence_signal_pp": 0.59,
    "rest_home": {
     "rest_days": 2,
     "back_to_back": false,
@@ -4582,12 +4582,12 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": -0.6,
+    "luck_z": -0.63,
     "in_noise_band": true,
-    "luck_points": -27.2
+    "luck_points": -29.6
    },
    "luck_away": {
-    "luck_z": 0.31,
+    "luck_z": 0.32,
     "in_noise_band": true,
     "luck_points": 13.6
    },
@@ -4631,9 +4631,9 @@
     "total": 244.9
    },
    "blend": {
-    "p_home_win_estimator_a": 0.8056,
-    "p_home_win_estimator_b": 0.8135,
-    "p_home_win_blend": 0.8096,
+    "p_home_win_estimator_a": 0.8068,
+    "p_home_win_estimator_b": 0.8147,
+    "p_home_win_blend": 0.8108,
     "disagreement": 0.0079,
     "disagreement_pp": 0.79,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.79 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -4644,8 +4644,8 @@
    },
    "line_total": 240.7,
    "line_spread_home": 16.8,
-   "model_home_win_prob": 0.834,
-   "model_home_ml": -502,
+   "model_home_win_prob": 0.8352,
+   "model_home_ml": -507,
    "confidence_signal_pp": 0.79,
    "rest_home": {
     "rest_days": 1,
@@ -4662,7 +4662,7 @@
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-15",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "travel_away": {
@@ -4674,7 +4674,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Kaseya%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "official schedule",
+   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
    "availability_redistribution_home": {
     "team": "MIA",
     "minutes_removed": 0.0,
@@ -4767,9 +4767,9 @@
     "total": 214.2
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3818,
-    "p_home_win_estimator_b": 0.384,
-    "p_home_win_blend": 0.3829,
+    "p_home_win_estimator_a": 0.3812,
+    "p_home_win_estimator_b": 0.3834,
+    "p_home_win_blend": 0.3823,
     "disagreement": 0.0022,
     "disagreement_pp": 0.22,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.22 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -4780,7 +4780,7 @@
    },
    "line_total": 215.6,
    "line_spread_home": -3.5,
-   "model_home_win_prob": 0.4198,
+   "model_home_win_prob": 0.4194,
    "model_home_ml": 138,
    "confidence_signal_pp": 0.22,
    "rest_home": {
@@ -4886,9 +4886,9 @@
     "luck_points": 1.5
    },
    "luck_away": {
-    "luck_z": -0.37,
+    "luck_z": -0.31,
     "in_noise_band": true,
-    "luck_points": -17.1
+    "luck_points": -14.7
    },
    "source_url": "https://www.nba.com/game/phi-vs-orl-0022600261",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -4930,9 +4930,9 @@
     "total": 248.1
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6357,
-    "p_home_win_estimator_b": 0.6422,
-    "p_home_win_blend": 0.639,
+    "p_home_win_estimator_a": 0.6364,
+    "p_home_win_estimator_b": 0.6429,
+    "p_home_win_blend": 0.6397,
     "disagreement": 0.0065,
     "disagreement_pp": 0.65,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.65 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -4943,8 +4943,8 @@
    },
    "line_total": 242.4,
    "line_spread_home": 6.7,
-   "model_home_win_prob": 0.6509,
-   "model_home_ml": -186,
+   "model_home_win_prob": 0.6516,
+   "model_home_ml": -187,
    "confidence_signal_pp": 0.65,
    "rest_home": {
     "rest_days": 1,
@@ -5064,16 +5064,16 @@
     "pace_factor": 0.9983,
     "pts_home": 116.3,
     "pts_away": 109.0,
-    "margin": 8.7,
+    "margin": 8.6,
     "total": 225.2
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6906,
-    "p_home_win_estimator_b": 0.6926,
-    "p_home_win_blend": 0.6916,
-    "disagreement": 0.002,
-    "disagreement_pp": 0.2,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.20 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.6915,
+    "p_home_win_estimator_b": 0.6915,
+    "p_home_win_blend": 0.6915,
+    "disagreement": 0.0,
+    "disagreement_pp": 0.0,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": 8.6,
@@ -5081,9 +5081,9 @@
    },
    "line_total": 224.6,
    "line_spread_home": 7.9,
-   "model_home_win_prob": 0.6766,
-   "model_home_ml": -209,
-   "confidence_signal_pp": 0.2,
+   "model_home_win_prob": 0.6775,
+   "model_home_ml": -210,
+   "confidence_signal_pp": 0.0,
    "rest_home": {
     "rest_days": 0,
     "back_to_back": true,
@@ -5185,7 +5185,7 @@
     "luck_points": -3.0
    },
    "luck_away": {
-    "luck_z": -0.96,
+    "luck_z": -0.97,
     "in_noise_band": true,
     "luck_points": -43.7
    },
@@ -5229,9 +5229,9 @@
     "total": 243.5
    },
    "blend": {
-    "p_home_win_estimator_a": 0.2295,
-    "p_home_win_estimator_b": 0.2174,
-    "p_home_win_blend": 0.2235,
+    "p_home_win_estimator_a": 0.2284,
+    "p_home_win_estimator_b": 0.2163,
+    "p_home_win_blend": 0.2223,
     "disagreement": 0.0121,
     "disagreement_pp": 1.21,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.21 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -5242,8 +5242,8 @@
    },
    "line_total": 237.4,
    "line_spread_home": -11.5,
-   "model_home_win_prob": 0.2535,
-   "model_home_ml": 295,
+   "model_home_win_prob": 0.2524,
+   "model_home_ml": 296,
    "confidence_signal_pp": 1.21,
    "rest_home": {
     "rest_days": 1,
@@ -5338,7 +5338,7 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": -0.5,
+    "luck_z": -0.51,
     "in_noise_band": true,
     "luck_points": -22.9
    },
@@ -5387,9 +5387,9 @@
     "total": 231.5
    },
    "blend": {
-    "p_home_win_estimator_a": 0.5915,
-    "p_home_win_estimator_b": 0.5915,
-    "p_home_win_blend": 0.5915,
+    "p_home_win_estimator_a": 0.592,
+    "p_home_win_estimator_b": 0.592,
+    "p_home_win_blend": 0.592,
     "disagreement": 0.0,
     "disagreement_pp": 0.0,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -5400,8 +5400,8 @@
    },
    "line_total": 228.7,
    "line_spread_home": 4.9,
-   "model_home_win_prob": 0.6116,
-   "model_home_ml": -157,
+   "model_home_win_prob": 0.6121,
+   "model_home_ml": -158,
    "confidence_signal_pp": 0.0,
    "rest_home": {
     "rest_days": 2,
@@ -5430,7 +5430,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Paycom%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "official schedule",
+   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
    "availability_redistribution_home": {
     "team": "OKC",
     "minutes_removed": 0.0,
@@ -5499,7 +5499,7 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": 0.8,
+    "luck_z": 0.81,
     "in_noise_band": true,
     "luck_points": 36.5
    },
@@ -5548,9 +5548,9 @@
     "total": 229.8
    },
    "blend": {
-    "p_home_win_estimator_a": 0.4379,
-    "p_home_win_estimator_b": 0.4379,
-    "p_home_win_blend": 0.4379,
+    "p_home_win_estimator_a": 0.4376,
+    "p_home_win_estimator_b": 0.4376,
+    "p_home_win_blend": 0.4376,
     "disagreement": 0.0,
     "disagreement_pp": 0.0,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -5561,7 +5561,7 @@
    },
    "line_total": 228.8,
    "line_spread_home": -2.2,
-   "model_home_win_prob": 0.4501,
+   "model_home_win_prob": 0.4499,
    "model_home_ml": 122,
    "confidence_signal_pp": 0.0,
    "rest_home": {
@@ -5659,12 +5659,12 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": 1.22,
+    "luck_z": 1.23,
     "in_noise_band": true,
     "luck_points": 55.5
    },
    "luck_away": {
-    "luck_z": 1.94,
+    "luck_z": 1.95,
     "in_noise_band": false,
     "luck_points": 84.1
    },
@@ -5708,12 +5708,12 @@
     "total": 205.6
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3218,
-    "p_home_win_estimator_b": 0.3301,
-    "p_home_win_blend": 0.3259,
-    "disagreement": 0.0083,
-    "disagreement_pp": 0.83,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.83 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.3209,
+    "p_home_win_estimator_b": 0.3293,
+    "p_home_win_blend": 0.3251,
+    "disagreement": 0.0084,
+    "disagreement_pp": 0.84,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.84 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": -7.8,
@@ -5721,9 +5721,9 @@
    },
    "line_total": 210.1,
    "line_spread_home": -5.2,
-   "model_home_win_prob": 0.3811,
-   "model_home_ml": 162,
-   "confidence_signal_pp": 0.83,
+   "model_home_win_prob": 0.3805,
+   "model_home_ml": 163,
+   "confidence_signal_pp": 0.84,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -5855,9 +5855,9 @@
     "total": 238.6
    },
    "blend": {
-    "p_home_win_estimator_a": 0.8844,
-    "p_home_win_estimator_b": 0.8889,
-    "p_home_win_blend": 0.8867,
+    "p_home_win_estimator_a": 0.8856,
+    "p_home_win_estimator_b": 0.8901,
+    "p_home_win_blend": 0.8878,
     "disagreement": 0.0044,
     "disagreement_pp": 0.44,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.44 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -5868,8 +5868,8 @@
    },
    "line_total": 235.8,
    "line_spread_home": 20.9,
-   "model_home_win_prob": 0.8868,
-   "model_home_ml": -783,
+   "model_home_win_prob": 0.888,
+   "model_home_ml": -793,
    "confidence_signal_pp": 0.44,
    "rest_home": {
     "rest_days": 0,
@@ -5965,12 +5965,12 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": -0.65,
+    "luck_z": -0.73,
     "in_noise_band": true,
-    "luck_points": -31.1
+    "luck_points": -35.9
    },
    "luck_away": {
-    "luck_z": 0.89,
+    "luck_z": 0.9,
     "in_noise_band": true,
     "luck_points": 40.6
    },
@@ -6014,9 +6014,9 @@
     "total": 228.8
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3428,
-    "p_home_win_estimator_b": 0.3449,
-    "p_home_win_blend": 0.3438,
+    "p_home_win_estimator_a": 0.342,
+    "p_home_win_estimator_b": 0.3441,
+    "p_home_win_blend": 0.3431,
     "disagreement": 0.0021,
     "disagreement_pp": 0.21,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.21 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -6027,8 +6027,8 @@
    },
    "line_total": 230.3,
    "line_spread_home": -5.3,
-   "model_home_win_prob": 0.3786,
-   "model_home_ml": 164,
+   "model_home_win_prob": 0.378,
+   "model_home_ml": 165,
    "confidence_signal_pp": 0.21,
    "rest_home": {
     "rest_days": 2,
@@ -6036,7 +6036,7 @@
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-15",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -6127,9 +6127,9 @@
     "luck_points": 15.2
    },
    "luck_away": {
-    "luck_z": 0.19,
+    "luck_z": 0.29,
     "in_noise_band": true,
-    "luck_points": 8.0
+    "luck_points": 12.7
    },
    "source_url": "https://www.nba.com/game/phx-vs-sac-0022600269",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -6171,9 +6171,9 @@
     "total": 235.0
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6336,
-    "p_home_win_estimator_b": 0.6357,
-    "p_home_win_blend": 0.6347,
+    "p_home_win_estimator_a": 0.6342,
+    "p_home_win_estimator_b": 0.6364,
+    "p_home_win_blend": 0.6353,
     "disagreement": 0.0022,
     "disagreement_pp": 0.22,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.22 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -6184,8 +6184,8 @@
    },
    "line_total": 233.1,
    "line_spread_home": 6.5,
-   "model_home_win_prob": 0.6467,
-   "model_home_ml": -183,
+   "model_home_win_prob": 0.6474,
+   "model_home_ml": -184,
    "confidence_signal_pp": 0.22,
    "rest_home": {
     "rest_days": 0,
@@ -6261,12 +6261,12 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": -1.06,
+    "luck_z": -1.07,
     "in_noise_band": true,
     "luck_points": -48.3
    },
    "luck_away": {
-    "luck_z": 1.94,
+    "luck_z": 1.95,
     "in_noise_band": false,
     "luck_points": 84.1
    },
@@ -6310,9 +6310,9 @@
     "total": 233.9
    },
    "blend": {
-    "p_home_win_estimator_a": 0.1144,
-    "p_home_win_estimator_b": 0.1133,
-    "p_home_win_blend": 0.1139,
+    "p_home_win_estimator_a": 0.1133,
+    "p_home_win_estimator_b": 0.1122,
+    "p_home_win_blend": 0.1127,
     "disagreement": 0.0011,
     "disagreement_pp": 0.11,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.11 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -6323,8 +6323,8 @@
    },
    "line_total": 233.1,
    "line_spread_home": -21.0,
-   "model_home_win_prob": 0.1117,
-   "model_home_ml": 795,
+   "model_home_win_prob": 0.1106,
+   "model_home_ml": 804,
    "confidence_signal_pp": 0.11,
    "rest_home": {
     "rest_days": 0,
@@ -6446,9 +6446,9 @@
     "total": 205.2
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6379,
-    "p_home_win_estimator_b": 0.6357,
-    "p_home_win_blend": 0.6368,
+    "p_home_win_estimator_a": 0.6386,
+    "p_home_win_estimator_b": 0.6364,
+    "p_home_win_blend": 0.6375,
     "disagreement": 0.0022,
     "disagreement_pp": 0.22,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.22 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -6459,8 +6459,8 @@
    },
    "line_total": 207.9,
    "line_spread_home": 6.2,
-   "model_home_win_prob": 0.6406,
-   "model_home_ml": -178,
+   "model_home_win_prob": 0.6413,
+   "model_home_ml": -179,
    "confidence_signal_pp": 0.22,
    "rest_home": {
     "rest_days": 1,
@@ -6595,16 +6595,16 @@
     "pace_factor": 0.9981,
     "pts_home": 123.3,
     "pts_away": 104.7,
-    "margin": 20.0,
+    "margin": 19.9,
     "total": 228.0
    },
    "blend": {
-    "p_home_win_estimator_a": 0.874,
+    "p_home_win_estimator_a": 0.8752,
     "p_home_win_estimator_b": 0.8764,
-    "p_home_win_blend": 0.8752,
-    "disagreement": 0.0024,
-    "disagreement_pp": 0.24,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.24 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_blend": 0.8758,
+    "disagreement": 0.0012,
+    "disagreement_pp": 0.12,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.12 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": 19.9,
@@ -6612,9 +6612,9 @@
    },
    "line_total": 226.9,
    "line_spread_home": 21.3,
-   "model_home_win_prob": 0.8916,
-   "model_home_ml": -822,
-   "confidence_signal_pp": 0.24,
+   "model_home_win_prob": 0.8927,
+   "model_home_ml": -832,
+   "confidence_signal_pp": 0.12,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,

@@ -17,6 +17,7 @@ import json
 import os
 import re
 import shutil
+import sys
 from urllib.parse import urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -62,6 +63,7 @@ def load(path):
 # (label, filename under site/pages, blurb)
 CATEGORIES = [
     ("HORIZON", None, "The next three days of NBA games and the lines we originate for them."),
+    ("Rolling Slate", "roll.html", "The current 3-day window re-cut from a fresh official capture: the two estimators and their disagreement, rotation availability, rest and back-to-back, and parlays priced with the measured rho beside the naive product."),
     ("Lines &amp; Picks", "picks.html", "Originated spread, total and fair-moneyline for every game in the horizon, and the gated paper picks built on them."),
     ("Player Props", "props.html", "Per-player projections and prop combinations, with the minutes coverage stated next to every number."),
     ("Prop Variance &amp; Rotation", "prop-variance.html", "Game-to-game dispersion measured from official game logs: the uncertainty behind every prop, the minutes-to-production elasticity, and what the injury report changed since the lines were cut."),
@@ -79,10 +81,12 @@ CATEGORIES = [
     ("VERIFICATION", None, "Checked line by line against NBA.com on the day of capture. Mismatches are listed, not corrected."),
     ("Official Source Check", "source-check.html", "Every horizon game and every 11/13 final compared with NBA.com, the 11/13 settlement, and the conflicts between builds."),
     ("Live Re-verification", "official-verify.html", "Every official value on this site read again at 18:40Z on 2026-11-14 and compared with what was published: 185 checks, one row and one official link each."),
+    ("Nov 15 re-verification", "verify-2026-11-15.html", "The 15-18 Nov horizon read again on 2026-11-15 and compared row by row: settled 11/14 finals, the 34-game schedule, standings, the three team-stat inputs, and a diff of two consecutive official injury-report editions."),
     ("DECISION", None, "What is still open, what could be improved, and what could not be verified."),
     ("Open Questions", "questions.html", "What we know, what we do not, and the concrete step that would answer each open item."),
     ("Suggestions", "suggestions.html", "Improvements written as options with effort, risk and what each unlocks, so a reviewer can pick a path."),
     ("Decisions: pick a path", "decisions.html", "Six decisions in dependency order, every open question mapped to the decision that closes it, and every suggestion ranked against them. Start here before implementing anything."),
+    ("Brief Traceability", "requirements.html", "Every requirement in the brief checked against the repository: done, partial, missing or blocked, with the gap and the link to the evidence."),
     ("Flagged for Review", "flagged.html", "Every value that could not be confirmed from an official source, with the link it would need."),
     ("Source Register", "sources.html", "Every official URL this site is built from."),
     ("Executive Summary", "../../EXECUTIVE_SUMMARY.md", "The whole picture in one document: what was verified, what the model has and has not shown, the limits, and the decisions waiting."),
@@ -159,6 +163,7 @@ def page(title, sub, body, depth=1, extra_head=""):
     <nav class="topnav">
       <a href="model-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
       <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="%(repo)spicks.html">Rolling horizon pick file</a>
       <a href="%(navbase)spicks.html">Horizon</a>
       <a href="%(navbase)sstrategies.html">Evidence</a>
       <a href="%(navbase)sdecisions.html">Decisions</a>
@@ -1585,6 +1590,20 @@ def link_repo(path, label):
             'rel="noopener">%s</a>' % (esc(path), esc(label)))
 
 
+def _window_label(iso_dates):
+    """'15&ndash;18 Nov' for a list of ISO dates in one month; '28 Nov&ndash;1 Dec' across months."""
+    _M = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+          "Aug", "Sep", "Oct", "Nov", "Dec"]
+    if not iso_dates:
+        return "&mdash;"
+    a, b = iso_dates[0], iso_dates[-1]
+    da, ma = int(a[8:10]), _M[int(a[5:7]) - 1]
+    db, mb = int(b[8:10]), _M[int(b[5:7]) - 1]
+    if a[:7] == b[:7]:
+        return "%d&ndash;%d %s" % (da, db, ma)
+    return "%d %s&ndash;%d %s" % (da, ma, db, mb)
+
+
 # ------------------------------------------------------------------------- main
 def main():
     sources = load(os.path.join(RAW, "sources.json"))["sources"]
@@ -1623,12 +1642,25 @@ def main():
                              if " & " not in r["matchup"]})
     n_flags = len(flagged["items"])
     body = []
+    # I02 (arena/8f64e94c-nba1, taking over PR #106): the landing tiles must state the
+    # CURRENT rolling horizon (data/derived/horizon_*.json), not a hard-coded window. The
+    # strategy-lab window (docs/data/lines.json + picks.json) is a separate, frozen record
+    # and is labelled as such. Counts are read from the data files, never hard-coded.
+    hz = load(os.path.join(ROOT, "data", "derived", "horizon_lines.json"))
+    hz_p = load(os.path.join(ROOT, "data", "derived", "horizon_picks.json"))
+    hz_games = hz["games"]
+    hz_n = len(hz_games)
+    hz_priced = sum(1 for x in hz_p["singles"] if (x.get("pick") or {}).get("pick_line"))
+    hz_label = _window_label(sorted({g["date"] for g in hz_games}))
+    lab_label = _window_label(horizon)
     body.append(tiles([
-        ("Games in horizon", n_games, "14&ndash;17 Nov 2026 (today + 3 days)"),
-        ("Originated lines", n_games, "spread, total and fair moneyline per game"),
+        ("Games in horizon (%s)" % hz_label, hz_n,
+         "rolling slate %s 2026 (today + 3 days) &mdash; see the picks page" % hz_label),
+        ("Originated lines", hz_n, "spread, total and fair moneyline per game"),
         ("Paper picks, single-leg", n_singles,
-         "%d of %d games &middot; +%d two-leg combos = %d plays; none market-validated"
-         % (n_games_with_pick, n_games, n_leg_combo, n_picks)),
+         "%d of %d games &middot; +%d two-leg combos = %d plays in the strategy-lab window (%s); "
+         "the %s roll publishes %d priced singles on the picks page"
+         % (n_games_with_pick, n_games, n_leg_combo, n_picks, lab_label, hz_label, hz_priced)),
         ("Strategies tested", len(lb["rows"]), "%d capped at a quarter unit &middot; %d research-only"
          % (sum(1 for r in lb["rows"] if "Not funded" not in r["tier"]),
             sum(1 for r in lb["rows"] if "Not funded" in r["tier"]))),
@@ -1790,8 +1822,10 @@ def main():
                      'arena coordinates, measured rho, inert market leg &mdash; 38 lines 15&ndash;19 Nov, '
                      '25 zero-stake model-output picks 16&ndash;18 Nov (14 gate passes, nothing promoted). '
                      '<a href="model-v2.html">Open model v2</a>.</li>'
-                     '<li><b>Current &mdash; this build.</b> The 27-game 14&ndash;17 Nov horizon, 60 gated paper picks, '
-                     'the 11/14/26 04:15 AM ET injury edition, and the full strategy/evidence set. '
+                     '<li><b>Current &mdash; this build.</b> The rolling ' + hz_label + ' horizon (originated lines, '
+                     'pick rows, settlement stamp), the frozen 14&ndash;17 Nov strategy-lab window with its '
+                     '60 gated paper picks (settled day by day from official finals), the 11/15/26 '
+                     '06:15 AM ET injury edition, and the full strategy/evidence set. '
                      '<a href="site/pages/picks.html">Open the horizon</a>.</li>'
                      '<li><a href="command-center/index.html">Command Center</a> &mdash; a second consolidated '
                      'site built in session <code>arena/791c9114-nba1</code> from the same official captures. '
@@ -1934,16 +1968,21 @@ def main():
         _newer = None
     if _newer:
         _sm = _newer["summary"]
-        b.append(banner("warn", "A newer official injury edition exists than the one the model uses",
-            "<p>The lines on this site are built on the <b>11/13/26 07:30 PM ET</b> edition. On 2026-11-14 this "
-            "session read a newer one, the <b>11/14/26 04:15 AM ET</b> edition "
-            "(<a href=\"%s\">official PDF</a>), and transcribed all %d rows to "
-            "<code>verify/2026-11-14/official_injury_2026-11-14_0415AM_s934ca56f.json</code>. "
-            "It has deliberately <b>not</b> been fed into the model, because it would move every 11/14 line and that "
-            "is a reviewer decision, not an integration step.</p>"
-            "<p><b>What it changes in practice: very little.</b> The same five of the ten teams playing on 11/14 "
+        # I02 (arena/8f64e94c-nba1): retitle and complete the prose. The takeover copy in
+        # PR #106 left this sentence truncated mid-clause ("...but every "); the complete,
+        # original reading is kept here so nothing is left dangling on the page.
+        b.append(banner("warn", "Historical: the 11/14 game-day edition handling (superseded)",
+            "<p>This section is a dated record of the 2026-11-14 game-day injury cycle. Those lines are "
+            "<b>settled and stamped</b> on the picks and settlement pages, and the current "
+            "2026-11-15..18 window is priced from the <b>11/15/26 06:15 AM ET</b> edition (see the "
+            "current-edition banner above). The <b>11/14/26 04:15 AM ET</b> edition shown below "
+            "(<a href=\"%s\">official PDF</a>) was transcribed &mdash; all %d rows &mdash; to "
+            "<code>verify/2026-11-14/official_injury_2026-11-14_0415AM_s934ca56f.json</code> and was "
+            "deliberately <b>not</b> fed into the settled 11/14 lines, because a line re-priced after "
+            "the cut cannot be graded.</p>"
+            "<p><b>What it showed: very little changed.</b> The same five of the ten teams playing on 11/14 "
             "(%s) still print <b>NOT YET SUBMITTED</b>; the teams that filed are %s. The %d player-level rows are "
-            "Denver, Dallas, Brooklyn, Minnesota and Detroit. The 11/15 games do appear in this edition but every "
+            "Denver, Dallas, Brooklyn, Minnesota and Detroit. The 11/15 games do appear in that edition but every "
             "team is NOT YET SUBMITTED, and no 11/16 or 11/17 game appears at all. So the older edition was not "
             "hiding a status change &mdash; it was simply one publication cycle behind.</p>"
             % (_newer["source_url"], _sm["rows_transcribed"],
@@ -1993,29 +2032,48 @@ def main():
     gd_path = os.path.join(ROOT, "data", "derived", "gameday_read.json")
     if os.path.exists(gd_path):
         b.insert(0, banner("warn", "There is a newer official edition than the one behind these numbers",
-                           "The rows below are the edition the published lines were cut from. The league "
-                           "has since published its game-day report, and four more clubs have filed. The "
-                           "diff, the re-priced lines and a row-by-row re-verification of the whole horizon "
-                           "are on <a href=\"gameday.html\">Game-Day Injury Read</a>. Those numbers do not "
-                           "replace the ones here: a line re-priced after it was frozen cannot be graded."))
+                           "The rows below are the <b>11/13/26 07:30 PM ET</b> edition &mdash; the one the "
+                           "settled 14&ndash;17 Nov strategy-lab window was cut from. The league has since "
+                           "published newer reports: the 11/14 game-day cycle is on "
+                           "<a href=\"gameday.html\">Game-Day Injury Read</a>, and the current 15&ndash;18 Nov "
+                           "window is priced from the <b>11/15/26 06:15 AM ET</b> edition in the banner "
+                           "above. Those numbers do not replace the ones here: a line re-priced after it was "
+                           "frozen cannot be graded."))
     # Newest-edition banner: report revision + retrieval time (brief requirement).
-    newest_path = os.path.join(ROOT, "data", "official", "injury_2026-11-15_0615AM.json")
-    if os.path.exists(newest_path):
+    # ROLLING: pick the newest stored edition and the newest consecutive-edition diff
+    # instead of a hardcoded filename, so the banner cannot go stale between passes.
+    import glob as _glob, re as _re
+    def _newest(pattern):
+        c = [q for q in _glob.glob(os.path.join(ROOT, "data", "official", pattern))
+             if _re.search(r"_\d{4}-\d{2}-\d{2}", q)]
+        if not c:
+            c = _glob.glob(os.path.join(ROOT, "data", "official", pattern))
+        return sorted(c)[-1] if c else None
+    newest_path = _newest("injury_2*.json")
+    if newest_path and os.path.exists(newest_path):
         _n = load(newest_path)
         _rows = _n.get("rows", [])
         _players = sum(1 for r in _rows if r.get("player"))
         _nys = sum(1 for r in _rows if r.get("status") == "NOT YET SUBMITTED")
         diff_note = ""
-        diff_path = os.path.join(ROOT, "data", "official",
-                                 "injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json")
-        if os.path.exists(diff_path):
+        diff_path = _newest("injury_diff_*.json")
+        if diff_path and os.path.exists(diff_path):
             _df = load(diff_path)
             _c = _df.get("counts", {})
-            diff_note = ("Consecutive-edition diff: %d comparable player rows, %d status changes, "
-                         "%d team blocks filed since the previous stored edition "
-                         "(<a href=\"../../data/official/injury_diff_2026-11-14_0130PM_to_2026-11-15_0615AM.json\">diff file</a>)."
-                         % (_c.get("comparable_player_rows", 0), _c.get("status_changes", 0),
-                            len(_df.get("team_blocks_filed_since", []))))
+            if _c:
+                _cmp = _c.get("comparable_player_rows", 0)
+                _chg = _c.get("status_changes", 0)
+                _filed = len(_df.get("team_blocks_filed_since", []))
+            else:
+                # schema written by the rolling capture passes (keyed lists)
+                _cmp = _df.get("unchanged", 0) + len(_df.get("changed", []))
+                _chg = len(_df.get("changed", []))
+                _filed = len(_df.get("added", []))
+            diff_note = ("Consecutive-edition diff against %s: %d comparable player rows, "
+                         "%d status changes, %d rows the newer edition adds "
+                         "(<a href=\"../../data/official/%s\">diff file</a>)."
+                         % (esc(_df.get("from_edition", "the previous stored edition")),
+                            _cmp, _chg, _filed, esc(os.path.basename(diff_path))))
         b.insert(0, banner("info", "Newest official edition: report revision and retrieval time",
                            "<p><b>Report revision:</b> %s &nbsp;|&nbsp; <b>retrieved (UTC):</b> %s &nbsp;|&nbsp; "
                            "<b>rows:</b> %d (%d player rows, %d NOT YET SUBMITTED team blocks). "
@@ -2654,8 +2712,37 @@ def main():
     # === live re-verification (session arena/cc5a6652-nba1, COORDINATION section 30) ===
     built["official-verify.html"] = build_official_verify()
 
+    # === 2026-11-15 independent re-verification (session arena/4533630f-nba1, COORDINATION §42) ===
+    _v2511 = os.path.join(ROOT, "verify", "2026-11-15-4533630f", "index.html")
+    if os.path.exists(_v2511):
+        # The page is generated by that session's own builder from its captures; the site
+        # publishes it verbatim rather than re-deriving numbers a second time.
+        with open(_v2511, encoding="utf-8") as _fh:
+            built["verify-2026-11-15.html"] = _fh.read()
+    else:
+        built["verify-2026-11-15.html"] = page(
+            "Nov 15 re-verification", "the artifact is missing",
+            banner("warn", "Artifact missing",
+                   "<p><code>verify/2026-11-15-4533630f/index.html</code> is not present. Run "
+                   "<code>python3 verify/2026-11-15-4533630f/build_report.py</code>.</p>"))
+
     # === decisions (session arena/cc5a6652-nba1) =================================
     built["decisions.html"] = build_decisions(questions, suggestions)
+
+
+    # === brief traceability (session arena/513516f6-nba1, COORDINATION section 41) ===
+    import sys as _sys
+    _sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import build_requirements
+    built["requirements.html"] = build_requirements.render(page, table)
+
+    # === rolling slate (integration session arena/161f1638-nba1) ==============
+    # Built last so the page reads the same files this rebuild just wrote. The
+    # requirements register is the shared register in data/content/requirements.json
+    # and is rendered by build_requirements above; this builder adds the rolling-slate
+    # page only, so the two builders never both claim requirements.html.
+    import build_roll_page as _roll
+    built.update(_roll.build(sys.modules[__name__]))
 
     # ------------------------------------------------------------------ write
     for name, html in built.items():

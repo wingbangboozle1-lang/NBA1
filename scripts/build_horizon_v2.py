@@ -54,9 +54,18 @@ GATES = {
 
 def load_injury_edition():
     """The newest official injury-report edition in the repo."""
-    files = sorted(f for f in os.listdir(OFF)
-                   if f.startswith("injury_2026") and f.endswith(".json"))
-    path = os.path.join(OFF, files[-1])
+    # prefer this session's namespaced transcription (which carries the raw
+    # team cell + game_time fields the PDF tip column uses); fall back to the
+    # canonical path, which now carries the parallel arena/161f1638-nba1
+    # transcription of the same edition (kept at merge, zero status
+    # disagreements between the two)
+    pref = os.path.join(OFF, "injury_2026-11-15_0615PM_arena49f70042.json")
+    if os.path.exists(pref):
+        path = pref
+    else:
+        files = sorted(f for f in os.listdir(OFF)
+                       if f.startswith("injury_2026") and f.endswith(".json"))
+        path = os.path.join(OFF, files[-1])
     doc = M._load(path)
     rows = []
     for r in doc["rows"]:
