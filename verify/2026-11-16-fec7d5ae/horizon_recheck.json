@@ -1,0 +1,31 @@
+{
+  "captured_by": "arena/fec7d5ae-nba1",
+  "captured_utc": "2026-11-16T14:35:00Z",
+  "source_urls": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://www.nba.com/games?date=2026-11-18"
+  ],
+  "stored_capture": "data/official/official_schedule_2026-11-16_to_18_dfef26dc.json",
+  "first_hand_games": 25,
+  "first_hand_per_day": {
+    "2026-11-16": 8,
+    "2026-11-17": 5,
+    "2026-11-18": 12
+  },
+  "rows_compared": 25,
+  "mismatches": [],
+  "irregularities_confirmed": [
+    {
+      "id": "F102",
+      "item": "POR@MIN appears on 11/16 (id 0022600250) and 11/17 (id 0022600254)",
+      "status": "CONFIRMED first-hand on both official games pages"
+    },
+    {
+      "id": "F101",
+      "item": "GSW@NOP tip time 8:00 PM ET (this read) vs 09:00 PM ET (earlier capture)",
+      "status": "CONFIRMED: 11/16 games page prints 8:00 PM ET for 0022600251"
+    }
+  ],
+  "result": "PASS"
+}
