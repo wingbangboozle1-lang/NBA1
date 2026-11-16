@@ -70,14 +70,14 @@ the hash chain are on the Settlement page.
 
 ### 0.5 What is still blocked
 
-1. **Market-anchored prior (F95).** No closing line exists anywhere in this repository
+1. **Market-anchored prior (F102).** No closing line exists anywhere in this repository
    and no NBA-operated source publishes one, so the prior weight is 0 and no
    market-blended price is published. Two validation gates are blocked on the same
    missing input.
-2. **Travel distance (F94).** Arena name, city and state are official; latitude and
+2. **Travel distance (F101).** Arena name, city and state are official; latitude and
    longitude are not published by any NBA page, so the distances are derived and flagged.
    No travel value moves a line.
-3. **The official stats pages (F96).** They cannot be read by a script. Either a headless
+3. **The official stats pages (F103).** They cannot be read by a script. Either a headless
    browser is added to the refresh job or the box-score rebuild is adopted as the
    official path. Silently straddling the two is not an option.
 
@@ -94,7 +94,7 @@ All gates pass on the merged tree: `check_site` · `check_links` · `check_rende
 `render_check` (151 pages / 9,602 rendered rows / 0 problems) · `verify_ledger`
 (chain OK) · `build_verification_page` idempotent.
 
-### 0.8 What was found and corrected after the first publication (F100)
+### 0.8 What was found and corrected after the first publication (F107)
 
 The first publication of the parlay page priced every parlay and same-game parlay
 **three times too high**. The joint-probability routine used composite Simpson weights
@@ -107,7 +107,7 @@ has been recomputed and re-published, still before the tip of the earliest game 
 cover (2026-11-16). **No single-leg ticket changed** — singles are priced from the
 normal CDF directly and were never affected.
 
-This is recorded, not hidden: it is flag **F100** on the Flagged for Review page, a
+This is recorded, not hidden: it is flag **F107** on the Flagged for Review page, a
 correction banner at the top of the parlay-pricing page, and ledger entry 10. Ledger
 entries 6 and 8 are marked **superseded** by entry 9 rather than edited — the chain is
 append-only, so the earlier entries remain in it and are reported as superseded instead

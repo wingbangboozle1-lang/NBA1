@@ -54,7 +54,7 @@ def main():
     # ------------------------------------------------------------- flags
     fl = load("flagged.json")
     new_flags = [
-        {"id": "F100", "severity": "high",
+        {"id": "F107", "severity": "high",
          "title": "Parlay and SGP joint probabilities were published three times too large (found and fixed 2026-11-16)",
          "detail": ("bivariate_normal_cdf() in scripts/build_horizon_801ba27f.py used composite "
                     "Simpson weights without the h/3 factor, so every rho-priced joint "
@@ -71,7 +71,7 @@ def main():
                     "fix are recorded in ledger entry 10; entries 6 and 8 are marked superseded "
                     "by entry 9."),
          "source_url": GITHUB + "data/derived/horizon_picks_801ba27f.json", "status": "resolved"},
-        {"id": "F94", "severity": "medium",
+        {"id": "F101", "severity": "medium",
          "title": "Arena latitude/longitude are not published by the NBA, so travel distances are unverified",
          "detail": ("The arena NAME, CITY and STATE on every row of the Rest & Travel page are "
                     "official (printed on the official box score page of a game played there). "
@@ -80,7 +80,7 @@ def main():
                     "are published with this flag attached and no travel value is used to move "
                     "a line."),
          "source_url": NBA_GAMES, "status": "open"},
-        {"id": "F95", "severity": "high",
+        {"id": "F102", "severity": "high",
          "title": "Market-anchored prior cannot be applied: no official closing line exists anywhere in this repository",
          "detail": ("The brief asks for a market-anchored prior that blends the model line with "
                     "the closing line, weighted by measured out-of-sample log-loss. No closing "
@@ -89,7 +89,7 @@ def main():
                     "published. Inventing a closing line would be a hallucination. The weighting "
                     "machinery is in place and switches on the moment a price feed is added."),
          "source_url": GITHUB + "data/derived/horizon_picks_801ba27f.json", "status": "open"},
-        {"id": "F96", "severity": "medium",
+        {"id": "F103", "severity": "medium",
          "title": "The three official team-stat pages carry no data in an HTTP response",
          "detail": ("www.nba.com/stats/teams/traditional, /opponent and /advanced render their "
                     "tables in the browser. The raw response captured this session contains zero "
@@ -100,20 +100,20 @@ def main():
                     "traces to an official game page. The captured stat pages are committed as "
                     "evidence."),
          "source_url": STATS_ADV, "status": "open"},
-        {"id": "F97", "severity": "low",
+        {"id": "F104", "severity": "low",
          "title": "Only 2 of the 9 games on the 2026-11-15 slate were Final at capture time",
          "detail": ("Four were still in progress and three had not tipped. Their tickets are left "
                     "PENDING and are not graded. The settlement page re-reads the official feed "
                     "and grades them as they go final; nothing is graded from a live score."),
          "source_url": "https://www.nba.com/games?date=2026-11-15", "status": "open"},
-        {"id": "F98", "severity": "low",
+        {"id": "F105", "severity": "low",
          "title": "The injury-report index is read once; editions published after the capture are not stored",
          "detail": ("All 75 editions the official index linked for 2026-11-15 were downloaded, "
                     "hashed, stored and parsed. Editions the league publishes after the capture "
                     "run are not in the repository. The revision time and the retrieval time of "
                     "the newest stored edition are printed on the Injury PDF Ledger page."),
          "source_url": INJ_INDEX, "status": "open"},
-        {"id": "F99", "severity": "low",
+        {"id": "F106", "severity": "low",
          "title": "Players on the injury report with no minutes this season have no measured minutes share",
          "detail": ("Rotation availability is the minutes-weighted share of a team's measured "
                     "top-8 that is not ruled out. A player who has not appeared in an official "
@@ -217,7 +217,7 @@ def main():
          "question": "What is the real closing line, and how far is the model from it?",
          "what_is_missing": ("A price feed. No closing price is captured anywhere in this "
                              "repository and no NBA source publishes one, so the market-anchored "
-                             "prior is switched off (F95)."),
+                             "prior is switched off (F102)."),
          "how_to_answer": ("Log the closing spread, total and price for every graded play into a "
                            "new file at capture time. Until then 'units won' means model against "
                            "a naive model, not against a market."),
@@ -229,7 +229,7 @@ def main():
          "question": "Do travel distance and 3-in-4 schedule spots move a line at all?",
          "what_is_missing": ("Both columns are now computed and published, but no test has been "
                              "run against them. Travel is additionally flagged because the "
-                             "coordinates are not official (F94)."),
+                             "coordinates are not official (F101)."),
          "how_to_answer": ("Regress the model's margin and total error on rest days, back-to-back, "
                            "3-in-4 and travel miles over 190 official finals, and publish the "
                            "coefficients with standard errors before any of them is applied."),
@@ -250,7 +250,7 @@ def main():
          "source_url": GITHUB + "data/derived/rho_2026_27.json"},
         {"id": "Q28",
          "question": "Should the model inputs come from the official stats pages or from rebuilt box scores?",
-         "what_is_missing": ("The stats pages carry no data in an HTTP response (F96), so this "
+         "what_is_missing": ("The stats pages carry no data in an HTTP response (F103), so this "
                              "session rebuilt the ratings from official box scores. That is a "
                              "substantial architectural choice, not a detail."),
          "how_to_answer": ("Decide explicitly: either add a headless browser to the refresh job so "
@@ -319,7 +319,7 @@ def main():
         {"id": "SG33",
          "title": "Add a price feed so the market gates can run",
          "category": "Data",
-         "problem": ("G4 and G5 are blocked and the market-anchored prior is switched off (F95) "
+         "problem": ("G4 and G5 are blocked and the market-anchored prior is switched off (F102) "
                      "because no closing price exists anywhere in the repository. Everything the "
                      "site calls 'units' is model against a naive model."),
          "options": [
@@ -342,7 +342,7 @@ def main():
         {"id": "SG34",
          "title": "Decide the official input path: stats pages or rebuilt box scores",
          "category": "Architecture",
-         "problem": ("www.nba.com/stats carries no data in a plain HTTP response (F96). This "
+         "problem": ("www.nba.com/stats carries no data in a plain HTTP response (F103). This "
                      "session rebuilt the ratings from official box scores instead, which works "
                      "and is fully traceable, but it is a different source from the one the "
                      "brief names."),
@@ -503,7 +503,7 @@ def main():
          "title": "Travel is computed and flagged, not quietly used",
          "detail": ("Arena names, cities and states are official - they are printed on the box "
                     "score of a game played there. Latitude and longitude are not published by "
-                    "any NBA page, so the great-circle distances are derived and flagged (F94). "
+                    "any NBA page, so the great-circle distances are derived and flagged (F101). "
                     "No travel value moves a line."),
          "reading": "Rest, back-to-back and 3-in-4 are computed from the official schedule and "
                     "are solid. Travel is a candidate input awaiting a source."},
@@ -512,7 +512,7 @@ def main():
          "detail": ("The brief asks for the model line to be blended with the closing line, "
                     "weighted by measured out-of-sample log-loss. No closing line exists anywhere "
                     "in this repository and no NBA-operated source publishes one, so the weight "
-                    "is 0 and no blended price is published (F95)."),
+                    "is 0 and no blended price is published (F102)."),
          "reading": "This is the single change that would unlock the most: two validation gates "
                     "and the prior are all blocked on the same missing input."},
     ]
@@ -543,11 +543,11 @@ def main():
     _my_actions = [
         {"rank": 1,
          "action": "Log a closing price for every graded play. It is the only missing input that "
-                   "blocks two validation gates and the market-anchored prior (F95, Q25).",
+                   "blocks two validation gates and the market-anchored prior (F102, Q25).",
          "why": "Until it exists, 'units won' measures the model against a naive model."},
         {"rank": 2,
          "action": "Decide whether the official input path is the stats pages or the box-score "
-                   "rebuild (F96, Q28).",
+                   "rebuild (F103, Q28).",
          "why": "Two sources of truth is worse than either one chosen deliberately."},
         {"rank": 3,
          "action": "Test whether the estimator disagreement predicts error, then either use it "

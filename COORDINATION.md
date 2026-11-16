@@ -4127,17 +4127,17 @@ valid (1,905 URLs, 2026-11-15T14:15:23Z) · workflow relative-link scan 136 page
 
 ---
 
-## §45 — session `arena/801ba27f-nba1` completion record (opened 2026-11-15 23:35 UTC, closed 2026-11-16)
+## §46 — session `arena/801ba27f-nba1` completion record (opened 2026-11-15 23:35 UTC, closed 2026-11-16)
 
 Branch `arena/801ba27f-nba1`, based on `main` `cd8fd27`. Claimed as **§41** in the banner at
-the top of this board; **renumbered §45 here** because `main` already carries §41
+the top of this board; **renumbered §46 here** because `main` already carries §41
 (`arena/513516f6-nba1`), §42, §43 and §44 (`arena/8f64e94c-nba1`, which was also originally
 claimed as §41). Two sessions wrote a §41 claim **four minutes apart** (23:35 vs 23:39 UTC),
 each invisible to the other; `arena/8f64e94c-nba1` reached `main` first (PR #112, merged
 `bfc5678`). This record is therefore the second of the two, and every place where the two
 sessions touched the same file is listed below with what was kept.
 
-### §45.0 How the collision with `arena/8f64e94c-nba1` was resolved
+### §46.0 How the collision with `arena/8f64e94c-nba1` was resolved
 
 `git pull --rebase origin main` was attempted first and hit **11 commits of conflicts**
 (`COORDINATION.md`, `data/content/flagged.json`, `executive.json`, `site/data/*`, `index.html`,
@@ -4151,7 +4151,7 @@ Every hunk was resolved by **keeping both sides**. Nothing from either session w
 | File | Conflict | Resolution |
 |---|---|---|
 | `COORDINATION.md` (2 hunks: banner, §41 area) | both sessions appended to the tail | both texts kept, mine appended after theirs |
-| `data/content/flagged.json` (→ `docs/data`, `site/data`) | both appended flags; **id collision** | unioned by id: 89 items from `main` (F1–F93) + my 6 (F94–F99) = **95 unique**, sorted. My 6 had been pre-emptively renumbered F78–F83 → F94–F99 in commit `1148413` once `main` was seen to carry F78–F93 |
+| `data/content/flagged.json` (→ `docs/data`, `site/data`) | both appended flags; **id collision** | unioned by id: 89 items from `main` (F1–F93) + my 6 = **95 unique**, sorted. My 6 were renumbered **twice**: F78–F83 → F94–F99 in `1148413` (main already carried F78–F93), then F94–F100 → **F101–F107** when `main` moved again and `arena/161f1638-nba1` took F94–F96. `scripts/content_801ba27f.py` is idempotent by id, so the renumber is a script edit plus a re-run, never a hand-edit of the JSON |
 | `data/content/executive.json` (→ `docs/data`, `site/data`) | both rewrote the current-position record | unioned: my headline/verdict kept, their findings / live items / next actions appended and prefixed `[arena/8f64e94c-nba1]` (28 findings, 20 live items, 11 actions). `scripts/content_801ba27f.py` was made idempotent so re-runs no longer duplicate or drop them |
 | `scripts/build_dashboard.py` | both rewrote the landing tiles | **both tile rows** kept (my 2026-11-15 re-cut row, then their rolled-horizon row) |
 | `site/pages/requirements.html` (add/add) | both created a page at that path | theirs kept at `requirements.html` (Brief traceability, from `scripts/build_requirements.py`); **mine renamed to `brief-coverage.html`** (Requirements coverage, 21 brief instructions) rather than clobbering theirs. Nav, banner link and `EXECUTIVE_SUMMARY.md` updated |
@@ -4163,7 +4163,7 @@ times, and it **overwrote** `what_is_live_now` / `recommended_next_actions`, sil
 the other session's entries. Both fixed (dedupe by title, preserve rows tagged with a session
 prefix); the merged record was rebuilt from the two parents' JSON and re-verified.
 
-### §45.1 What this session built (H01–H06)
+### §46.1 What this session built (H01–H06)
 
 * **H01 Official capture.** `scripts/capture_official_801ba27f.py` + workflow
   `capture-2026-11-15-801ba27f.yml` (host allow-list `www.nba.com`, `official.nba.com`,
@@ -4175,7 +4175,7 @@ prefix); the merged record was rebuilt from the two parents' JSON and re-verifie
   Nembhard Q→Out, Landale A→Q→Out, Irving Q→Out, Fox Q→Out, Barnes Q→Probable→Available).
 * **H03 Model re-cut.** `scripts/model_801ba27f.py` — inputs rebuilt from **190 official finals**
   (2026-10-20 → 11-15) because the three official team-stat pages are client-rendered and carry
-  no data in an HTTP response (F96). Constants: home-win rate **0.5263** (100/190) → HCA
+  no data in an HTTP response (F103). Constants: home-win rate **0.5263** (100/190) → HCA
   **1.108 pts** (pinned, not fitted), sigma_margin 16.784, sigma_total 19.166, league_off_rtg
   111.782, pace 101.739, mean_total 227.53. Two genuinely independent estimators
   (E1 possessions × PPP; E2 ridge power rating λ=5) with **disagreement as the headline**:
@@ -4185,21 +4185,21 @@ prefix); the merged record was rebuilt from the two parents' JSON and re-verifie
   Settlement of 2026-11-15 from official finals only: **2 graded (both won), 7 PENDING,
   +2.00 paper units**. `data/official/results_feed_2026_27.json`: 222 rows, quarter-sum
   assertion failures **none**.
-* **H05 Ledger.** Hash-chained, entries 5–11. See §45.2.
+* **H05 Ledger.** Hash-chained, entries 5–11. See §46.2.
 * **H06 Pages + content.** 11 pages in `site/pages/`: `official-feed`, `estimators`,
   `projection`, `bet-surface` (gated), `parlay-pricing`, `rotation`, `rest-travel`, `luck-z`,
-  `injury-ledger`, `settlement`, `brief-coverage`. Content: flags **F94–F100**, questions
+  `injury-ledger`, `settlement`, `brief-coverage`. Content: flags **F101–F107**, questions
   **A18–A24 / Q25–Q30**, suggestions **SG32–SG38**. Landing tiles on `index.html` regenerated
   from data (via `scripts/build_dashboard.py`, the generator — `index.html` must never be
   hand-edited). Requirements page: **16 DONE, 2 PARTIAL, 1 BLOCKED, 1 BLOCKED-WORKED-AROUND,
   1 DONE WITH A GAP** of 21 brief instructions.
 
-### §45.2 Ledger state, and the correction this session made to its own work
+### §46.2 Ledger state, and the correction this session made to its own work
 
 `data/ledger/ledger.json` — 11 entries, head `8f7ec3295e7d9c50`. Entries 5–11 are this
 session's. **No entry was edited; the chain is append-only.**
 
-* **F100 (high) — published parlay prices were three times too large.**
+* **F107 (high) — published parlay prices were three times too large.**
   `bivariate_normal_cdf()` used composite Simpson weights without the `h/3` factor, so every
   rho-priced joint probability was returned **3×** its true value and the parlay page
   published joint probabilities **above 1.000** (ORL@BOS / MIL@MIA printed as **1.6171**
@@ -4233,28 +4233,28 @@ session's. **No entry was edited; the chain is append-only.**
   `earliest_tip_of_any_published_ticket` = 2026-11-16 (ORL@BOS, `0022600245`) plus a note,
   in the builder and in ledger entry 9.
 
-### §45.3 Irregularities logged by this session
+### §46.3 Irregularities logged by this session
 
 | Id | Irregularity |
 |---|---|
-| F94 | Arena latitude/longitude are not published by any NBA page → travel distances derived, flagged, and never used to move a line |
-| F95 | Market-anchored prior cannot be applied: no closing line exists anywhere in the repo and no NBA-operated source publishes one → weight 0, no market-blended price published |
-| F96 | The three official team-stat pages carry no data in an HTTP response (client-rendered) → inputs rebuilt from official box scores instead; the captured pages are committed as evidence |
-| F97 | Only 2 of 9 games on the 2026-11-15 slate were Final at capture → their tickets stay PENDING, nothing graded from a live score |
-| F98/F99 | per-player game logs: players with no minutes this season have nothing to capture (DONE WITH A GAP); refresh-job coverage of the captured stat pages (PARTIAL) |
-| F100 | parlay/SGP joint probabilities published 3× too large — found, fixed, re-published pre-tip (§45.2) |
+| F101 | Arena latitude/longitude are not published by any NBA page → travel distances derived, flagged, and never used to move a line |
+| F102 | Market-anchored prior cannot be applied: no closing line exists anywhere in the repo and no NBA-operated source publishes one → weight 0, no market-blended price published |
+| F103 | The three official team-stat pages carry no data in an HTTP response (client-rendered) → inputs rebuilt from official box scores instead; the captured pages are committed as evidence |
+| F104 | Only 2 of 9 games on the 2026-11-15 slate were Final at capture → their tickets stay PENDING, nothing graded from a live score |
+| F105/F106 | per-player game logs: players with no minutes this season have nothing to capture (DONE WITH A GAP); refresh-job coverage of the captured stat pages (PARTIAL) |
+| F107 | parlay/SGP joint probabilities published 3× too large — found, fixed, re-published pre-tip (§46.2) |
 | — | `scripts/content_801ba27f.py` prepended executive findings and overwrote the other session's live/action lists on every run (fixed) |
 | — | `scripts/verify_ledger.py` and `scripts/build_dashboard.py` are shared; both changes are additive and logged here |
 | — | `.note` / `.mono` CSS classes used by this session's pages do not exist in the shared `site/assets/site.css`, so a **session-scoped `<style>` block** is injected by `build_pages_801ba27f.py` rather than editing the shared stylesheet |
 
-### §45.4 Verification performed (all green on the merged tree)
+### §46.4 Verification performed (all green on the merged tree)
 
 `check_site.py` PASS · `check_links.py` PASS · `check_rendered.py` PASS · `verify_all.py`
 **VERIFY OK** · `verify_integration.py` **PASSED (0 errors, 44 pre-existing published
 warnings)** · `render_check.mjs` **151 pages / 9,602 rendered rows / 0 problems** ·
 `verify_ledger.py` **chain OK** · `build_verification_page.py` idempotent.
 
-### §45.5 Delivery
+### §46.5 Delivery
 
 PR **[#114](https://github.com/wingbangboozle1-lang/NBA1/pull/114)**
 (`arena/801ba27f-nba1` → `main`), merged without waiting for approval per the brief; Pages
