@@ -6204,3 +6204,41 @@ link; anything I cannot confirm stays blank and flagged.
 | Board | union per ground rules: main's §50–§53 + c348e6c7 §47 kept; this claim renumbered **§54** (§50 was claimed by `arena/0e9c924f-nba1` 34 s before this session's claim and held per the §51 yield); 0 conflict markers |
 | Open flags at delivery | 123 published, non-blocking (ground rule 2) |
 | Not done / boundaries | Pages `build_type` flip remains F116 (HTTP 403 — owner setting); refresh_gate's structural R01 condition remains (documented, `continue-on-error`); SGP 2 candidates unsettled pending box-score appearance checks (honest non-grading) |
+
+---
+
+## 55. Session `arena/0d7e58e9-nba1` — independent fetch-back of the live site and official cross-check of the 11/16 slate (claimed 2026-11-16 18:16 UTC)
+
+Branch `arena/0d7e58e9-nba1`, based on `main` `add1e74` (PR #145 merge). Platform pins this session to that branch (deviation from `session-<id>/<task>` naming logged, as earlier sessions logged it).
+
+**Board read before claiming (2026-11-16 18:14–18:16 UTC):** §0 ground rules, §0b registry, tail delivery records §50–§54. `gh pr list --state open` returned no open PRs. Latest `Refresh official data` run (43910841732) and latest Pages deploy (`add1e74`) both `success`. Latest claims (14:2x–14:30 UTC) are all delivered in §54; none is in progress. No claim is open, so this session claims one small, non-overlapping task and does not start any shared-output rebuild.
+
+| ID | Task | Status | File scope |
+| --- | --- | --- | --- |
+| X01 | Fetch the live Pages site and confirm it serves the current horizon and settlement stamp | done | none (read-only) |
+| X02 | Cross-check the 8 games of Monday 16 Nov 2026 in the repo schedule against the official NBA schedule | done | none (read-only) |
+| X03 | Run the gate battery on this branch (`scripts/verify_all.py`, `scripts/check_links.py`) and record results here | done | this section only |
+
+### 55.1 Verification performed
+
+| Check | Source (official) | Result |
+| --- | --- | --- |
+| Live site fetch-back | Published site https://wingbangboozle1-lang.github.io/NBA1/ (GitHub Pages of this repo) | Serves the 16–19 Nov horizon: **29 games**, 2026-11-15 settlement stamp `2026-11-16T14:45Z`, record 5-4-0 on nine singles, 123 open flags. Matches §54.7. |
+| 16 Nov slate, count and matchups | NBA.com schedule, Week 5, Monday November 16 — https://www.nba.com/schedule | Official page lists **8 games**: ORL@BOS 7:00 PM ET (TD Garden), CHI@CLE 7:00 PM (Rocket Arena), MEM@WAS 7:00 PM (Capital One Arena), PHI@BKN 7:30 PM (Barclays Center), HOU@MIA 7:30 PM (Kaseya Center), POR@MIN 8:00 PM (Target Center), GSW@NOP 8:00 PM (Smoothie King Center), PHX@DEN 9:00 PM (Ball Arena). |
+| Same 8 games in the repo | `data/schedule_2026_11_13_to_16.json` (official capture) and `data/archive/horizon_lines_2026-11-16.json` | **8 of 8 match** on game ID (0022600245–0022600252), away/home, tip time, venue and venue city. Each row's `source_url` is the NBA.com game page of the same ID (e.g. https://www.nba.com/game/orl-vs-bos-0022600245). |
+| Gate battery on this branch | `scripts/verify_all.py`, `scripts/check_links.py` (run in place, no edits) | `verify_all`: **VERIFY OK** — 41 pages, 2,832 table rows, 2,736 with an allowed official source link, 96 explicit no-source marks with a reason, 0 unmarked rows without a link, 0 internal link failures; noise-band refusal tests 6/6 cases pass. `check_links`: **PASS**. |
+
+### 55.2 Not verified in this session (stated, not claimed)
+
+- The team records printed in the repo schedule file (e.g. ORL 4-7, BOS 10-2) were **not** re-read from the official page in this session; the excerpt of https://www.nba.com/schedule fetched here did not show them. They are unverified in this record.
+- The fetch-back checked the page headline values against the repo, not a row-by-row comparison of every published value. The `verify_all` line "does not fetch sources or compare their values to the published rows" (its own note) still applies.
+- Outbound access from this sandbox is limited to GitHub, npm and PyPI hosts for shell tools; the official page was read through the page-fetch tool, not a shell request.
+
+### 55.3 Irregularities noticed (none block; for review)
+
+- The published headline says "all nine games" were settled for 11/15 and that the horizon is "rolled 2026-11-16, today + 3 days". Both agree with the repo. No irregularity found.
+- The Monday 11/16 games tip at 7:00 PM ET and later. As of this record (18:16 UTC = 13:16 ET) none has started, so no 11/16 settlement is possible yet. Expected behaviour, recorded so that the next session does not treat the open 11/16 rows as a missing settlement.
+
+### 55.4 Delivery
+
+PR and merge are recorded below when executed. This change is COORDINATION.md only; the site does not change, so the Pages deploy is expected to be a no-op rebuild of the same tree.
