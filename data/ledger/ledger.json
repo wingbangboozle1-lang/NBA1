@@ -159,7 +159,48 @@
     ]
    },
    "prev": "d5f75692d7d7f1dc8d2019a39c4f3c2850e4386c9e1a9df47648f7b8b739a216"
+  },
+  {
+   "entry": 8,
+   "type": "settlement_settlement_verification",
+   "at_utc": "2026-11-16T15:23Z",
+   "verifies_entry": 1,
+   "files_at_settlement": {
+    "data/archive/horizon_picks_2026-11-14.json": "fd027304b89e505f6a2145c9c82708d92eed5cc2895c6e36e2f2eb9a90d78cdf",
+    "data/archive/horizon_lines_2026-11-14.json": "2b7405421b1efe0d6dd410aba2177d4f859e4f74d26513d0d62c6c75f99bd92f"
+   },
+   "unchanged_since_pre_tip": true,
+   "settled_dates": [
+    "2026-11-15"
+   ],
+   "prev": "294aa9ce20ad771479c0e5d69c53b48a286e22be03f01db52a4fd20267b2fca7"
+  },
+  {
+   "entry": 9,
+   "type": "settlement_record",
+   "at_utc": "2026-11-16T15:23Z",
+   "file": "data/settlement/settlement_2026-11-14.json",
+   "sha256": "9479640d9a56957353b48ebac42385b0ca2264569058d67eeda9f7d89346f77a",
+   "official_finals_files": [
+    "data/official/results_2026-11-15.json"
+   ],
+   "settled_by": "scheduled settle (refresh-data.yml)",
+   "summary": {
+    "record": "5-4-0",
+    "singles_units_at_minus110": 0.6,
+    "parlay_units": -3.3,
+    "total_units_settled": -2.7,
+    "dates_settled": [
+     "2026-11-15"
+    ],
+    "dates_unsettled": [
+     "2026-11-14",
+     "2026-11-16",
+     "2026-11-17"
+    ]
+   },
+   "prev": "104f1a45de404b261a064052d6068167f16432f36b4a2b5b8ec19549fb61ca4a"
   }
  ],
- "head": "294aa9ce20ad771479c0e5d69c53b48a286e22be03f01db52a4fd20267b2fca7"
+ "head": "9732ea637200a9a114371d2d580c74a76c053b717c252203a2a6e87632d1dfef"
 }
