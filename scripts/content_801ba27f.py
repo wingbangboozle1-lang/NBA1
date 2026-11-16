@@ -54,6 +54,23 @@ def main():
     # ------------------------------------------------------------- flags
     fl = load("flagged.json")
     new_flags = [
+        {"id": "F100", "severity": "high",
+         "title": "Parlay and SGP joint probabilities were published three times too large (found and fixed 2026-11-16)",
+         "detail": ("bivariate_normal_cdf() in scripts/build_horizon_801ba27f.py used composite "
+                    "Simpson weights without the h/3 factor, so every rho-priced joint "
+                    "probability was returned three times its true value. The parlay page "
+                    "therefore published joint probabilities above 1.000 - for example 1.6171 "
+                    "for the ORL@BOS / MIL@MIA two-leg, against a naive independent product of "
+                    "0.5375. The h/3 factor has been restored and the corrected function was "
+                    "checked against two closed forms: rho = 0 now reproduces the independent "
+                    "product exactly, and rho = 0.5 at a = b = 0 reproduces "
+                    "1/4 + arcsin(rho)/(2*pi) = 0.333333. Every parlay and SGP row has been "
+                    "recomputed and re-published, still before the tip of the earliest game "
+                    "they cover (2026-11-16). No single-leg ticket changed: singles are priced "
+                    "from the normal CDF directly and were never affected. The defect and the "
+                    "fix are recorded in ledger entry 10; entries 6 and 8 are marked superseded "
+                    "by entry 9."),
+         "source_url": GITHUB + "data/derived/horizon_picks_801ba27f.json", "status": "resolved"},
         {"id": "F94", "severity": "medium",
          "title": "Arena latitude/longitude are not published by the NBA, so travel distances are unverified",
          "detail": ("The arena NAME, CITY and STATE on every row of the Rest & Travel page are "
@@ -445,7 +462,7 @@ def main():
                 "run - the two that need a closing price - are blocked on data nobody in this "
                 "project has. Publishing the block rather than the number is the whole point.")
     }
-    ex["findings"] = [
+    _my_findings = [
         {"n": 1,
          "title": "Home court is measured, not fitted: 0.5263 over 190 official finals",
          "detail": ("Home teams won 100 of 190 official finals from 2026-10-20 to 2026-11-15. "
@@ -498,8 +515,14 @@ def main():
                     "is 0 and no blended price is published (F95)."),
          "reading": "This is the single change that would unlock the most: two validation gates "
                     "and the prior are all blocked on the same missing input."},
-    ] + ex["findings"]
-    ex["what_is_live_now"] = [
+    ]
+    _my_f_titles = {f["title"] for f in _my_findings}
+    ex["findings"] = _my_findings + [f for f in ex.get("findings", [])
+                                     if f.get("title") not in _my_f_titles]
+    for _i, _f in enumerate(ex["findings"], 1):
+        _f["n"] = _i
+        _f.setdefault("reading", "")
+    _my_live = [
         "Official result feed: 222 games captured, 190 Final, quarter scores summing to the "
         "final on every one.",
         "Ratings rebuilt from official box scores for all 30 teams (pace, offensive rating, "
@@ -514,7 +537,10 @@ def main():
         "detected.",
         "Ledger: hash-chained, extended with the 11/15 settlement and this publication.",
     ]
-    ex["recommended_next_actions"] = [
+    _my_live_set = set(_my_live)
+    ex["what_is_live_now"] = _my_live + [x for x in ex.get("what_is_live_now", [])
+                                         if x not in _my_live_set]
+    _my_actions = [
         {"rank": 1,
          "action": "Log a closing price for every graded play. It is the only missing input that "
                    "blocks two validation gates and the market-anchored prior (F95, Q25).",
@@ -536,6 +562,12 @@ def main():
          "action": "Set a retention rule for raw captures (Q30, SG37).",
          "why": "22 MB of HTML and 7.5 MB of PDFs were added today and the season is young."},
     ]
+    _kept = [a for a in ex.get("recommended_next_actions", [])
+             if str(a.get("action", "")).startswith("[session ") or
+                str(a.get("action", "")).startswith("[arena/")]
+    ex["recommended_next_actions"] = _my_actions + _kept
+    for _i, _a in enumerate(ex["recommended_next_actions"], 1):
+        _a["rank"] = _i
     ex["bottom_line"] = ("Everything on this site is now derived from an official page or flagged "
                          "as not being. That is a real change from the position a day ago, when "
                          "the scheduled refresh had never once executed against nba.com. What it "

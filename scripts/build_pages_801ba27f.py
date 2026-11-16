@@ -100,6 +100,18 @@ def page(title, subtitle, body, active=None):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>%s &middot; NBA1</title>
 <link rel="stylesheet" href="../assets/site.css">
+<style>
+/* Session-scoped additions (arena/801ba27f-nba1). The shared stylesheet is owned by
+   other sessions, so these classes are injected here instead of added there. */
+.note{margin:0 0 18px;padding:12px 14px;border:1px solid var(--line);border-left:3px solid var(--ink3);
+      border-radius:8px;background:var(--panel);font-size:13px;line-height:1.6;max-width:100ch}
+.note.ok{border-left-color:#2e9e5b}.note.bad{border-left-color:#c0392b}.note.warn{border-left-color:#d98b0a}
+.note strong{color:var(--ink)}
+.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
+.lede{color:var(--ink2);max-width:92ch;margin:0 0 22px;line-height:1.55}
+.foot{margin-top:28px;font-size:12px;color:var(--ink2)}
+.tablewrap{overflow-x:auto;margin:0 0 22px}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -320,6 +332,15 @@ def build_parlay_pricing():
                       val(p["naive_independent_product_printed_beside"]),
                       link(p["sources"][0], "game 1")])
     body = [
+        note("bad", "<strong>Correction 2026-11-16 (F100, ledger entry 10).</strong> The first "
+                    "publication of this page priced every parlay and same-game parlay three "
+                    "times too high: the joint-probability routine used Simpson weights without "
+                    "the h/3 factor, so joint probabilities above 1.000 were published "
+                    "(ORL@BOS / MIL@MIA was printed as 1.6171 against a naive product of "
+                    "0.5375). The factor has been restored, the routine was checked against two "
+                    "closed forms, and every row below is recomputed and re-published, still "
+                    "before the tip of the earliest game it covers. No single-leg ticket was "
+                    "affected. Ledger entries 6 and 8 are superseded by entry 9."),
         note("ok", "Every parlay is priced with a <strong>measured</strong> rho and the "
                    "naive independent product is printed immediately beside it, so the "
                    "reader can see exactly what the correlation assumption is worth."),

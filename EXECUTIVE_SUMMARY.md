@@ -18,7 +18,7 @@ Where a value could not be confirmed it is described as unconfirmed rather than 
 ## 0. The 2026-11-15 re-cut — current position
 
 **Session** `arena/801ba27f-nba1` · **COORDINATION.md §41** · **Requirements coverage**:
-<https://wingbangboozle1-lang.github.io/NBA1/site/pages/requirements.html>
+<https://wingbangboozle1-lang.github.io/NBA1/site/pages/brief-coverage.html>
 
 ### 0.1 Why the inputs were rebuilt
 
@@ -85,14 +85,40 @@ the hash chain are on the Settlement page.
 
 **16 of 21** numbered instructions in the brief are fully delivered; the remaining five
 are partial or blocked, and each says exactly what is missing. One page, one row per
-instruction: <https://wingbangboozle1-lang.github.io/NBA1/site/pages/requirements.html>
+instruction: <https://wingbangboozle1-lang.github.io/NBA1/site/pages/brief-coverage.html>
 
 ### 0.7 Verification performed
 
 All gates pass on the merged tree: `check_site` · `check_links` · `check_rendered` ·
 `verify_all` (VERIFY OK) · `verify_integration` (0 errors, 44 pre-existing warnings) ·
-`render_check` (146 pages / 9,238 rendered rows / 0 problems) · `verify_ledger`
+`render_check` (151 pages / 9,602 rendered rows / 0 problems) · `verify_ledger`
 (chain OK) · `build_verification_page` idempotent.
+
+### 0.8 What was found and corrected after the first publication (F100)
+
+The first publication of the parlay page priced every parlay and same-game parlay
+**three times too high**. The joint-probability routine used composite Simpson weights
+without the `h/3` factor, so joint probabilities above 1.000 were published — the
+ORL@BOS / MIL@MIA two-leg was printed as **1.6171** against a naive independent product
+of 0.5375. The factor has been restored and the routine was checked against two closed
+forms: `rho = 0` now reproduces the independent product exactly, and `rho = 0.5` at
+`a = b = 0` reproduces `1/4 + arcsin(rho)/(2*pi) = 0.333333`. Every parlay and SGP row
+has been recomputed and re-published, still before the tip of the earliest game they
+cover (2026-11-16). **No single-leg ticket changed** — singles are priced from the
+normal CDF directly and were never affected.
+
+This is recorded, not hidden: it is flag **F100** on the Flagged for Review page, a
+correction banner at the top of the parlay-pricing page, and ledger entry 10. Ledger
+entries 6 and 8 are marked **superseded** by entry 9 rather than edited — the chain is
+append-only, so the earlier entries remain in it and are reported as superseded instead
+of being silently rewritten. Entry 5 is superseded by entry 7 for the same reason (a
+re-run 27 seconds later rewrote the settlement file's timestamp); entry 7 was restored
+to verify again once the settlement stamp was redefined as the moment of *first*
+settlement rather than the last builder run.
+
+The lesson is the point of the ledger: an error that makes a probability larger than
+one is exactly the kind of thing a hash-chained, independently verified publication
+process is supposed to catch, and it did — one review pass after publication.
 
 ---
 

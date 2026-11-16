@@ -105,7 +105,12 @@ def bivariate_normal_cdf(a, b, rho):
         z = (b - rho * x) / math.sqrt(1 - rho * rho)
         w = 1 if i in (0, n) else (4 if i % 2 else 2)
         s += w * math.exp(-0.5 * x * x) * norm_cdf(z)
-    return s * h / math.sqrt(2 * math.pi)
+    # Composite Simpson: integral = (h/3) * sum. The 1/sqrt(2*pi) turns the
+    # un-normalised kernel into the standard normal density. (An earlier version
+    # omitted the /3 and returned three times the true probability, which put
+    # joint probabilities above 1.0 on the parlay page - corrected 2026-11-16,
+    # see the ledger correction entry and flag F100.)
+    return s * h / 3.0 / math.sqrt(2 * math.pi)
 
 
 # ------------------------------------------------------------------ settlement
@@ -344,7 +349,29 @@ def main():
         "price_convention": PAPER_PRICE,
         "singles": singles, "parlays": parlays, "sgp_candidates": sgps,
     }
-    json.dump(settlement, open(os.path.join(SETTLE, "settlement_2026-11-15.json"), "w"), indent=1)
+    # Timestamp stability (2026-11-16): settled_at_utc is the moment the slate was
+    # FIRST settled, not the moment the builder last ran. If a re-run grades the
+    # identical result, the previous stamp is kept so the file stays byte-identical
+    # and the ledger entry that hashes it stays verifiable. Only a genuine change in
+    # the graded rows re-stamps the settlement (and then a new ledger entry is due).
+    spath = os.path.join(SETTLE, "settlement_2026-11-15.json")
+    if os.path.exists(spath):
+        try:
+            _prev = json.load(open(spath, encoding="utf-8"))
+        except Exception:
+            _prev = None
+        if _prev and (_prev.get("singles") == settlement["singles"]
+                      and _prev.get("parlays") == settlement["parlays"]
+                      and _prev.get("sgp_candidates") == settlement["sgp_candidates"]
+                      and _prev.get("n_graded") == settlement["n_graded"]
+                      and _prev.get("n_pending") == settlement["n_pending"]
+                      and _prev.get("units_today") == settlement["units_today"]):
+            settlement["settled_at_utc"] = _prev["settled_at_utc"]
+            settlement["re_graded_utc_last"] = RUN_UTC
+            settlement["re_grade_note"] = ("re-run after the parlay-pricing correction (F100); "
+                                           "the graded result is identical, so the settlement "
+                                           "stamp is unchanged")
+    json.dump(settlement, open(spath, "w"), indent=1)
     print("settlement 11/15: %d graded, %d pending, units %.2f"
           % (len(graded), settlement["n_pending"], units))
 
@@ -686,16 +713,36 @@ def main():
         "note": "graded only from official finals; games still live stay PENDING",
         "prev": prev,
     }
-    led["entries"].append(e_settle)
-    led["head"] = sha256_obj(e_settle)
+    # Idempotence guard (2026-11-16): a re-run of the builder must not append a
+    # second settlement entry for a slate that is already settled by this session,
+    # or the ledger fills with duplicates whose digests then point at bytes that a
+    # later run has overwritten. A re-run is only a RE-PUBLICATION: the old
+    # publication entry is recorded as superseded, never edited.
+    already_settled = any(
+        e.get("type") == "settlement_verification"
+        and e.get("session") == e_settle["session"]
+        and e.get("settles_slate") == e_settle["settles_slate"]
+        for e in led["entries"])
+    if already_settled:
+        print("ledger: settlement for %s already recorded by this session - "
+              "not appending a duplicate" % e_settle["settles_slate"])
+    else:
+        led["entries"].append(e_settle)
+        led["head"] = sha256_obj(e_settle)
     e_pub = {
         "entry": len(led["entries"]) + 1,
         "type": "pre_tip_publication",
         "at_utc": RUN_UTC,
         "session": "arena/801ba27f-nba1",
         "slate": "2026-11-15..18 (games that had not tipped at publication)",
-        "first_tip_utc": "2026-11-16T00:00Z (2026-11-15 7:00 PM ET, HOU@WAS)",
+        "published_tickets_cover": "2026-11-16 to 2026-11-18 (no 2026-11-15 game appears in "
+                             "the published tickets)",
+        "earliest_tip_of_any_published_ticket": "2026-11-16 (ORL@BOS, game 0022600245) "
+                             "- see the official schedule",
         "publication_precedes_first_tip": True,
+        "first_tip_note": ("an earlier label named 2026-11-15 7:00 PM ET (HOU@WAS) as the "
+                           "first tip; HOU@WAS is not in the published tickets, so no "
+                           "ticket was published after its tip. Corrected 2026-11-16."),
         "files": {os.path.relpath(arc_picks, ROOT): sha256_file(arc_picks),
                   os.path.relpath(arc_lines, ROOT): sha256_file(arc_lines),
                   os.path.relpath(os.path.join(PREREG, "_index.json"), ROOT):
@@ -704,8 +751,22 @@ def main():
         "note": "projection and bet surfaces published separately; archived byte-identically",
         "prev": led["head"],
     }
+    prev_pub = [e["entry"] for e in led["entries"]
+                if e.get("type") == "pre_tip_publication"
+                and e.get("session") == e_pub["session"]]
     led["entries"].append(e_pub)
     led["head"] = sha256_obj(e_pub)
+    if prev_pub:
+        led.setdefault("superseded", []).append({
+            "entry": prev_pub[-1],
+            "by": e_pub["entry"],
+            "session": e_pub["session"],
+            "recorded_utc": e_pub["at_utc"],
+            "reason": ("the builder was re-run and re-serialised the same surfaces, so the "
+                       "archived bytes the earlier entry hashed no longer exist on disk. "
+                       "The later entry is the authoritative publication; the earlier one is "
+                       "retained in the chain and is not checked against live bytes."),
+        })
     json.dump(led, open(LEDGER, "w"), indent=1)
     print("ledger: appended entries %d and %d; head %s"
           % (e_settle["entry"], e_pub["entry"], led["head"][:16]))
