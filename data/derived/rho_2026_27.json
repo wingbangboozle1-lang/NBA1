@@ -1,0 +1,38 @@
+{
+ "title": "Measured correlations from official game logs",
+ "session": "arena/801ba27f-nba1",
+ "built_utc": "2026-11-16T00:02:33Z",
+ "n_final_games": 190,
+ "source": "official NBA box score pages",
+ "measured": [
+  {
+   "pair": "same game: home margin vs total points",
+   "rho": -0.0199,
+   "n": 190,
+   "status": "MEASURED",
+   "note": "the correlation that prices a side/total same-game parlay"
+  },
+  {
+   "pair": "cross-game: home margin vs home margin, two games on the same date",
+   "rho": 0.0142,
+   "n_pairs": 1546,
+   "status": "MEASURED",
+   "note": "the rho that prices an ordinary multi-game parlay; if two different games really are independent this is 0"
+  },
+  {
+   "pair": "two team-mates: points (top-2 minutes on the same team)",
+   "rho": -0.0975,
+   "n": 374,
+   "status": "MEASURED",
+   "note": "small sample at this point in the season"
+  },
+  {
+   "pair": "two opponents: points (leading scorer on each team)",
+   "rho": 0.0321,
+   "n": 187,
+   "status": "MEASURED",
+   "note": "small sample at this point in the season"
+  }
+ ],
+ "caveat": "these are measured, not modelled; they are still early-season samples and are published with their n"
+}
