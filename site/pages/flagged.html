@@ -16,7 +16,7 @@
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
-      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="../../picks.html">Rolling horizon pick file</a>
       <a href="picks.html">Horizon</a>
       <a href="strategies.html">Evidence</a>
       <a href="decisions.html">Decisions</a>
@@ -876,6 +876,24 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/probe_official.json" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F92</td>
+<td>medium</td>
+<td><b>GSW@NOP 2026-11-16 tip time: published capture says 09:00 PM ET, the official page now prints 8:00 PM ET</b></td>
+<td>The pre-tip schedule capture (data/official/schedule_2026-11-15_to_18.json, retrieved 2026-11-15T11:35Z..12:20Z) and the frozen horizon row both record 09:00 PM ET for game 0022600251. Two reads of the live official page on 2026-11-15 at 23:45Z..23:58Z (the scoreboard strips and a direct read of the 11/16 date page) print 8:00 PM ET for the same game id. Either the official page moved the tip after the capture or the capture mis-read it; nothing is inferred and the frozen pre-tip row is not edited - both readings and their timestamps are in verify/2026-11-15-8f64e94c/. The next rolling re-cut should take the live page's value. (Flag id renumbered from F78 to F92 at merge: F78-F91 were published first by arena/513516f6-nba1 in PR #108.)</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://www.nba.com/games?date=2026-11-16" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F93</td>
+<td>low</td>
+<td><b>Injury-report editions published 2026-11-15 after 06:15 AM ET are not captured; the site's banner names the basis edition, not the league's latest at read time</b></td>
+<td>The official injury index lists 2026-11-15 editions in 15-minute steps; on a read at 2026-11-15T23:54Z the fetched chunk showed editions from 12:00 AM ET through at least 4:15 PM ET. The published lines (15-18 Nov roll) are priced from the 06:15 AM ET edition (retrieved 2026-11-15T11:52Z) and are deliberately not re-priced (a line re-priced after its cut cannot be graded - SG29/F72). The gap is a capture-currency gap, not a pricing error: the Injuries page banner states the edition, its revision time and its retrieval time. Capture the remaining editions at the next refresh (SG30 cadence). (Flag id renumbered from F79 to F93 at merge: F78-F91 were published first by arena/513516f6-nba1 in PR #108.)</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">

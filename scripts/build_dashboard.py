@@ -159,7 +159,7 @@ def page(title, sub, body, depth=1, extra_head=""):
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
-      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="%(repo)spicks.html">Rolling horizon pick file</a>
       <a href="%(navbase)spicks.html">Horizon</a>
       <a href="%(navbase)sstrategies.html">Evidence</a>
       <a href="%(navbase)sdecisions.html">Decisions</a>
@@ -1586,6 +1586,20 @@ def link_repo(path, label):
             'rel="noopener">%s</a>' % (esc(path), esc(label)))
 
 
+def _window_label(iso_dates):
+    """'15&ndash;18 Nov' for a list of ISO dates in one month; '28 Nov&ndash;1 Dec' across months."""
+    _M = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+          "Aug", "Sep", "Oct", "Nov", "Dec"]
+    if not iso_dates:
+        return "&mdash;"
+    a, b = iso_dates[0], iso_dates[-1]
+    da, ma = int(a[8:10]), _M[int(a[5:7]) - 1]
+    db, mb = int(b[8:10]), _M[int(b[5:7]) - 1]
+    if a[:7] == b[:7]:
+        return "%d&ndash;%d %s" % (da, db, ma)
+    return "%d %s&ndash;%d %s" % (da, ma, db, mb)
+
+
 # ------------------------------------------------------------------------- main
 def main():
     sources = load(os.path.join(RAW, "sources.json"))["sources"]
@@ -1624,15 +1638,25 @@ def main():
                              if " & " not in r["matchup"]})
     n_flags = len(flagged["items"])
     body = []
+    # I02 (arena/8f64e94c-nba1, taking over PR #106): the landing tiles must state the
+    # CURRENT rolling horizon (data/derived/horizon_*.json), not a hard-coded window. The
+    # strategy-lab window (docs/data/lines.json + picks.json) is a separate, frozen record
+    # and is labelled as such. Counts are read from the data files, never hard-coded.
     hz = load(os.path.join(ROOT, "data", "derived", "horizon_lines.json"))
-    hz_games = len(hz["games"])
+    hz_p = load(os.path.join(ROOT, "data", "derived", "horizon_picks.json"))
+    hz_games = hz["games"]
+    hz_n = len(hz_games)
+    hz_priced = sum(1 for x in hz_p["singles"] if (x.get("pick") or {}).get("pick_line"))
+    hz_label = _window_label(sorted({g["date"] for g in hz_games}))
+    lab_label = _window_label(horizon)
     body.append(tiles([
-        ("Games in horizon (15&ndash;18 Nov)", hz_games,
-         "rolling slate 15&ndash;18 Nov 2026 (today + 3 days) &mdash; see the picks page"),
-        ("Originated lines", hz_games, "spread, total and fair moneyline per game"),
+        ("Games in horizon (%s)" % hz_label, hz_n,
+         "rolling slate %s 2026 (today + 3 days) &mdash; see the picks page" % hz_label),
+        ("Originated lines", hz_n, "spread, total and fair moneyline per game"),
         ("Paper picks, single-leg", n_singles,
-         "%d of %d games &middot; +%d two-leg combos = %d plays in the strategy-lab window (14&ndash;17 Nov); the 15&ndash;18 roll publishes %d singles on the picks page"
-         % (n_games_with_pick, n_games, n_leg_combo, n_picks, 33)),
+         "%d of %d games &middot; +%d two-leg combos = %d plays in the strategy-lab window (%s); "
+         "the %s roll publishes %d priced singles on the picks page"
+         % (n_games_with_pick, n_games, n_leg_combo, n_picks, lab_label, hz_label, hz_priced)),
         ("Strategies tested", len(lb["rows"]), "%d capped at a quarter unit &middot; %d research-only"
          % (sum(1 for r in lb["rows"] if "Not funded" not in r["tier"]),
             sum(1 for r in lb["rows"] if "Not funded" in r["tier"]))),
@@ -1788,8 +1812,10 @@ def main():
                      'only in presentation, data cut and how much of the pipeline they exercise. The pages '
                      'above are the current build; the rest are reachable from here.</p>'
                      '<ul class="plain">'
-                     '<li><b>Current &mdash; this build.</b> The 27-game 14&ndash;17 Nov horizon, 60 gated paper picks, '
-                     'the 11/14/26 04:15 AM ET injury edition, and the full strategy/evidence set. '
+                     '<li><b>Current &mdash; this build.</b> The rolling ' + hz_label + ' horizon (originated lines, '
+                     'pick rows, settlement stamp), the frozen 14&ndash;17 Nov strategy-lab window with its '
+                     '60 gated paper picks (settled day by day from official finals), the 11/15/26 '
+                     '06:15 AM ET injury edition, and the full strategy/evidence set. '
                      '<a href="site/pages/picks.html">Open the horizon</a>.</li>'
                      '<li><a href="command-center/index.html">Command Center</a> &mdash; a second consolidated '
                      'site built in session <code>arena/791c9114-nba1</code> from the same official captures. '
@@ -1932,18 +1958,23 @@ def main():
         _newer = None
     if _newer:
         _sm = _newer["summary"]
+        # I02 (arena/8f64e94c-nba1): retitle and complete the prose. The takeover copy in
+        # PR #106 left this sentence truncated mid-clause ("...but every "); the complete,
+        # original reading is kept here so nothing is left dangling on the page.
         b.append(banner("warn", "Historical: the 11/14 game-day edition handling (superseded)",
-            "<p>This section is a dated record of the 2026-11-14 game-day injury cycle; those lines are "
-            "<b>settled and stamped</b> on the backtest and picks pages, and the 2026-11-15..18 window is priced "
-            "(<a href=\"%s\">official PDF</a>), and transcribed all %d rows to "
-            "<code>verify/2026-11-14/official_injury_2026-11-14_0415AM_s934ca56f.json</code>. "
-            "from the <b>11/15/26 06:15 AM ET</b> edition (see the current-edition banner above). It was "
-            "deliberately <b>not</b> fed into the settled 11/14 lines, because a line re-priced after the cut cannot be graded.</p>"
-            "<p><b>What it showed:</b> five of the ten teams playing on 11/14 "
+            "<p>This section is a dated record of the 2026-11-14 game-day injury cycle. Those lines are "
+            "<b>settled and stamped</b> on the picks and settlement pages, and the current "
+            "2026-11-15..18 window is priced from the <b>11/15/26 06:15 AM ET</b> edition (see the "
+            "current-edition banner above). The <b>11/14/26 04:15 AM ET</b> edition shown below "
+            "(<a href=\"%s\">official PDF</a>) was transcribed &mdash; all %d rows &mdash; to "
+            "<code>verify/2026-11-14/official_injury_2026-11-14_0415AM_s934ca56f.json</code> and was "
+            "deliberately <b>not</b> fed into the settled 11/14 lines, because a line re-priced after "
+            "the cut cannot be graded.</p>"
+            "<p><b>What it showed: very little changed.</b> The same five of the ten teams playing on 11/14 "
             "(%s) still print <b>NOT YET SUBMITTED</b>; the teams that filed are %s. The %d player-level rows are "
-            "Denver, Dallas, Brooklyn, Minnesota and Detroit. The 11/15 games do appear in this edition but every "
-            
-            
+            "Denver, Dallas, Brooklyn, Minnesota and Detroit. The 11/15 games do appear in that edition but every "
+            "team is NOT YET SUBMITTED, and no 11/16 or 11/17 game appears at all. So the older edition was not "
+            "hiding a status change &mdash; it was simply one publication cycle behind.</p>"
             % (_newer["source_url"], _sm["rows_transcribed"],
                ", ".join(_sm["teams_not_yet_submitted_for_a_2026_11_14_game"]),
                ", ".join(_sm["teams_that_filed_for_a_2026_11_14_game"]),
@@ -1991,11 +2022,13 @@ def main():
     gd_path = os.path.join(ROOT, "data", "derived", "gameday_read.json")
     if os.path.exists(gd_path):
         b.insert(0, banner("warn", "There is a newer official edition than the one behind these numbers",
-                           "The rows below are the edition the published lines were cut from. The league "
-                           "has since published its game-day report, and four more clubs have filed. The "
-                           "diff, the re-priced lines and a row-by-row re-verification of the whole horizon "
-                           "are on <a href=\"gameday.html\">Game-Day Injury Read</a>. Those numbers do not "
-                           "replace the ones here: a line re-priced after it was frozen cannot be graded."))
+                           "The rows below are the <b>11/13/26 07:30 PM ET</b> edition &mdash; the one the "
+                           "settled 14&ndash;17 Nov strategy-lab window was cut from. The league has since "
+                           "published newer reports: the 11/14 game-day cycle is on "
+                           "<a href=\"gameday.html\">Game-Day Injury Read</a>, and the current 15&ndash;18 Nov "
+                           "window is priced from the <b>11/15/26 06:15 AM ET</b> edition in the banner "
+                           "above. Those numbers do not replace the ones here: a line re-priced after it was "
+                           "frozen cannot be graded."))
     # Newest-edition banner: report revision + retrieval time (brief requirement).
     newest_path = os.path.join(ROOT, "data", "official", "injury_2026-11-15_0615AM.json")
     if os.path.exists(newest_path):
