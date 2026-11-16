@@ -6204,3 +6204,50 @@ link; anything I cannot confirm stays blank and flagged.
 | Board | union per ground rules: main's §50–§53 + c348e6c7 §47 kept; this claim renumbered **§54** (§50 was claimed by `arena/0e9c924f-nba1` 34 s before this session's claim and held per the §51 yield); 0 conflict markers |
 | Open flags at delivery | 123 published, non-blocking (ground rule 2) |
 | Not done / boundaries | Pages `build_type` flip remains F116 (HTTP 403 — owner setting); refresh_gate's structural R01 condition remains (documented, `continue-on-error`); SGP 2 candidates unsettled pending box-score appearance checks (honest non-grading) |
+
+---
+
+## 56. Session `arena/cdc6c39d-nba1` — legacy Lines & Picks surface alignment: estimator-disagreement headline column (R13), rotation-availability column (R15), and the stale date-window label (claimed 2026-11-16 18:2x UTC)
+
+Branch `arena/cdc6c39d-nba1`, based on `main` `add1e74` (PR #145 merge = tip at claim time). The platform pins
+this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single pre-named
+branch (deviation logged, as every earlier session logged it).
+
+**Board read before claiming (2026-11-16 18:14–18:2x UTC):** §0 ground rules, §0b registry, tail delivery
+records §50–§55, `gh pr list --state open`, `gh run list`, `gh api /repos/.../pages`, and the live data files.
+Measured at claim time, not inferred: `main` = `add1e74`; Pages API `status: built`, `build_type: legacy`,
+`html_url` https://wingbangboozle1-lang.github.io/NBA1/. **One session is live: `arena/0d7e58e9-nba1` (§55),
+open PR [#146](https://github.com/wingbangboozle1-lang/NBA1/pull/146) — an independent read-only live fetch-back
+and 11/16-slate cross-check whose file scope is **COORDINATION.md only**.** This session's scope is disjoint from it
+(content/model/scripts, no COORDINATION edits beyond this claim). All earlier claims (§50–§54) are delivered and
+merged; none is in progress. No 11/16 settlement is possible yet (the 11/16 slate tips 7:00 PM ET = 00:00 UTC
+11/17; at 18:2x UTC none has started) — recorded so the open 11/16 rows are not read as a missing settlement.
+
+**Why this scope, measured at claim time:** the brief's requirements register (`data/content/requirements.json`)
+shows **19 done / 14 partial**, with the legacy *Lines & Picks* surface (`picks.html`, root namespace, built by
+`scripts/build_horizon_page.py`) still carrying three concrete gaps that the modern `roll.html` surface already
+closed: (R13) it leads with a single model's spread and carries no estimator-disagreement column; (R15) it has no
+rotation-availability column of its own; and the page's date-window label is **hardcoded "15–18 Nov" while the
+underlying data (`data/derived/horizon_lines.json`) is the current 16–19 Nov, 29-game window** — a stale-label
+irregularity. The two estimator spreads needed for R13 both exist in current official-derived files: estimator A =
+`horizon_lines.json` `line_spread_home`, estimator B = `docs/data/lines.json` `model_spread_home`; a first-hand
+join confirmed **29/29 games match** on (date, matchup), so the disagreement is computable at render time with no
+inference (the same method `scripts/build_roll_page.py` already uses). Rotation counts are computable from each
+game's `availability_rows` (Out/Questionable) sourced from the official injury report.
+
+### 56.1 Task table
+
+| ID | Task | Status | Owner | File scope |
+| --- | --- | --- | --- | --- |
+| S56-01 | Board read, registration, claim committed and pushed immediately (ground rule 4) | **done** | `arena/cdc6c39d-nba1` | `COORDINATION.md` (this §56) |
+| S56-02 | R13: add an estimator-disagreement column to the horizon-lines table; lead with the disagreement as the confidence headline, both spreads printed underneath (not blended) | in progress → done | same | `scripts/build_horizon_page.py`, generated `picks.html` |
+| S56-03 | R15: add a dedicated rotation-availability column (Out / Questionable counts) from the official injury report | in progress → done | same | `scripts/build_horizon_page.py`, generated `picks.html` |
+| S56-04 | Fix the stale date-window label: derive the window from the data instead of hardcoding "15–18 Nov" (h1, nav, top-note) | in progress → done | same | `scripts/build_horizon_page.py`, generated `picks.html` |
+| S56-05 | Rebuild `picks.html`; verify the new columns are present and populated; run the gate battery (`check_site`, `check_links`, `verify_all`, `verify_integration`) | pending | same | scripts run in place; fixes only in this scope |
+| S56-06 | Update the requirements register (R13/R15 legacy gaps, R30 note) with the evidence | pending | same | `data/content/requirements.json` (via its builder if present) |
+| S56-07 | PR → main, merge without waiting, confirm Pages deploy, record sources/verification/irregularities here | pending | same | whole-repo integration (this scope only) |
+
+**Scope note.** `index.html` nav and the shared `site/**` index are changed only through the integration role;
+this session edits only `scripts/build_horizon_page.py`, the generated `picks.html`, the requirements register, and
+this board section. Every row keeps its official-source link; any value that cannot be confirmed stays blank and
+flagged, never inferred.
