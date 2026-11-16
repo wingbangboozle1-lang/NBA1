@@ -40,6 +40,9 @@ on:
     branches: ["arena/**"]
     paths:
       - engine/fetch_official.py
+      - engine/parse_official.py
+      - engine/promote_official.py
+      - engine/injury_diff.py
       - .github/workflows/refresh-data.yml
 
 permissions:
