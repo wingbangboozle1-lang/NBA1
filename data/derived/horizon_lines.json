@@ -2,7 +2,7 @@
  "_meta": {
   "title": "Originated horizon lines — 2026-11-16 through 2026-11-18 (25 unplayed games)",
   "generated_by": "scripts/originate_horizon.py (rolling window)",
-  "generated_utc": "2026-11-16T15:09Z",
+  "generated_utc": "2026-11-16T15:28Z",
   "method": "identical formulas to scripts/originate_lines.py (Build A)",
   "horizon": "2026-11-16 .. 2026-11-18: the rolling window (today + up to 3 days ahead) as captured in data/raw/official_schedule_capture_2026-11-16.json — scope: rolling 3-day window 2026-11-16 .. 2026-11-18 (25 games)",
   "window_rule": "the window is defined by the capture, never re-derived here: 2026-11-16=8, 2026-11-17=5, 2026-11-18=12 games",
