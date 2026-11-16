@@ -4282,3 +4282,55 @@ capture artifacts — read-only inputs here).
 - **Site:** `model-v2.html` regenerated with the refreshed measurements; the shared dashboard
   builder (both sessions' additions kept) regenerated `index.html` and 25 `site/pages/*`; zero
   conflict markers remain; `check_site.py` and `check_links.py` re-run green before the merge.
+### 42.2 Delivery record — PR #109 merged (2026-11-16T00:00:23Z), Pages deploying
+
+- **PR #109:** [Nov 15 independent official-source verification](https://github.com/wingbangboozle1-lang/NBA1/pull/109)
+  merged with no approval wait; merge commit `243538d1ffa5e0857e62ce2906c997e64afa1057`, head `ecc07a4`.
+  It was rebased three times while §41/§43 landed (#108, #110, #111); each conflict was the board
+  itself and was resolved as a union — no other session's text was dropped. `index.html` is a
+  generated file and was always taken from `main` then rebuilt by `scripts/build_dashboard.py`.
+- **Gates on the merged head (run locally, in CI order):** `check_site` PASS · `verify_integration`
+  0 errors · `check_links` PASS · `check_rendered` PASS · `verify_all` PASS · `render_check.mjs`
+  139 pages / 8,894 rendered rows / **0 problems** · `build_dashboard.py` 24 pages.
+- **Scope honoured:** this session never wrote outside `verify/2026-11-15-4533630f/**`, the one nav
+  entry + publish line in `scripts/build_dashboard.py`, the regenerated site output, and this board.
+  It did **not** take the integration seat, did **not** touch `data/**`, and did **not** roll the
+  horizon (that would rewrite PR #106's scope) — the stale 11/15 rows are logged for the next cycle.
+
+**What the pass established, with the source for each**
+
+| # | Finding | Evidence |
+| --- | --- | --- |
+| 1 | The settled 11/14 finals are **exact**: 45/45 compared cells agree — finals, quarter lines (summing to the finals), venue, city, attendance, officials. | `verify/2026-11-15-4533630f/compare.json` → `finals_2026_11_14`; pages [DEN@NOP](https://www.nba.com/game/den-vs-nop-0022600231), [DAL@CLE](https://www.nba.com/game/dal-vs-cle-0022600232), [DET@MIA](https://www.nba.com/game/det-vs-mia-0022600233), [BKN@MEM](https://www.nba.com/game/bkn-vs-mem-0022600234), [CHI@MIN](https://www.nba.com/game/chi-vs-min-0022600235) |
+| 2 | **IND and PHI model rows had already moved at tip-off** (GP 13→14; OffRtg 110.1→110.9 and 111.0→112.3), and every one of the 34 published games is modelled from those rows. | `stale_inputs.json`; [advanced stats](https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season) |
+| 3 | Two schedule rows were published with a **blank venue the official page prints** — PHI@ORL → Kia Center, ATL@OKC → Paycom Center. Cited, **not filled in**. | `compare.json` → `schedule`; [0022600261](https://www.nba.com/game/phi-vs-orl-0022600261), [0022600265](https://www.nba.com/game/atl-vs-okc-0022600265) |
+| 4 | Standings 347/360 cells agree; the 13 differences are all on PHI/IND, who **finished a game during the read** — correct-at-a-different-time, not errors. | `compare.json` → `standings`; [standings](https://www.nba.com/standings) |
+| 5 | The injury read-out is **48 editions behind**: the model used 11/15 **06:15 AM ET**, the official index listed **06:15 PM ET** at read time. | `capture_injury.json`; [injury index](https://official.nba.com/nba-injury-report-2026-27-season/) |
+| 6 | Diffing those two editions: **15 of 16 compared players changed status** (1 downgrade, 10 upgrades), a starter added as **Out on game day** (Fox, SAS), and the **entire Dallas block printed `NOT YET SUBMITTED`** in the edition the lines were cut from. | `injury_diff.json`; [06:15 AM PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf), [06:15 PM PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf) |
+
+**The one finding that should change a decision:** finding 6. The published paperwork says the
+lines were cut from an edition in which an entire team's participation status did not exist, and
+in which the eventual game-day downgrades had not happened. Findings 2 and 5 belong with §43's
+refresh audit: the gate is sound, but the data it guards only moves when a run promotes it.
+
+**Irregularities this pass could not close (published, non-blocking)**
+
+- F-42-1 — `data/raw/_last_refresh.json` still reads `captured_at_utc: 2026-11-14T19:40:43Z` while
+  runs [43731578639](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43731578639) and
+  [43770932084](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43770932084) completed
+  `success` with the builder skipped; the run log download returns `EOF` from this sandbox, so the
+  gate's own diagnostics cannot be read back. Owner: the next refresh/integration session.
+- F-42-2 — the published horizon still contains **9 games that tipped on 11/15**. A roll to
+  11/16–11/19 is unclaimed; this session did not do it (PR #106 / §40 scope).
+- F-42-3 — team **opponent** stats and 27 of 30 traditional rows were **not re-read** in this pass.
+  They are marked `not read`, never `agree`.
+
+### 42.3 Deploy record
+
+Deploy is tracked on the `Publish static site to GitHub Pages` run for merge commit `243538d`
+(run queued at record time; the workflow's `concurrency` group serialises production deploys, so it
+completes behind the parallel sessions' runs). This session fetched the site back at
+`https://wingbangboozle1-lang.github.io/NBA1/` and got an HTTP 000 from the sandbox — the preview
+proxy is not reachable from here — so **the live fetch-back is reported as pending, not as
+confirmed**. The authoritative check for the owner is the Actions run for `243538d` plus
+`site/pages/verify-2026-11-15.html` on the live host.
