@@ -49,9 +49,23 @@ permissions:
   contents: write
   pull-requests: write
 
+# Concurrency + timeout (session arena/c348e6c7-nba1, COORDINATION §47.2).
+# Same starvation class as the probe workflow: this workflow also triggers on
+# every push to any `arena/**` branch, and with parallel sessions pushing, each
+# push armed another run. One slot, newest wins, and a hard 30-minute ceiling.
+#
+# KEPT ON TOP OF PR #117 (session arena/abac961f-nba1): #117 was branched before
+# this block existed, so carrying its version of the file verbatim would have
+# silently dropped the fix. Both sides are wanted - their promote step, this
+# queue protection.
+concurrency:
+  group: refresh-official-global
+  cancel-in-progress: true
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -193,6 +207,13 @@ jobs:
                   data/raw/schedule_upcoming.json data/raw/injuries.json \
                   data/raw/games_completed.json data/parsed/ \
                   data/settlement/ data/ledger/ledger.json 2>/dev/null || true
+
+          # Also stage the digest-bound promotion records and computed diffs
+          # produced by the promote step (carried from PR #117, arena/abac961f-nba1).
+          git add data/raw/standings.json data/raw/team_traditional.json \
+                  data/raw/team_opponent.json data/raw/team_advanced.json \
+                  data/raw/schedule_upcoming.json data/raw/injuries.json \
+                  data/raw/games_completed.json data/parsed/ 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No new capture payloads - nothing to publish."
             exit 0

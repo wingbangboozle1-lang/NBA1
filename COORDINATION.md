@@ -29,6 +29,34 @@ requires 11/19 as well; the probe workflow's last two runs on `main` ended in **
 Those four gaps are this claim's work. Triage decisions on #130/#136, the rebuild-skip
 diagnosis and every official re-read are recorded in §50 as they are measured.
 
+## 🔑 ACTIVE CLAIM — session `arena/c348e6c7-nba1` (opened 2026-11-16 02:10 UTC — integration seat: publish the site, fresh 11/16 official capture, 11/15 settlement, horizon roll to 11/16–11/19, stale-PR takeover)
+
+Branch `arena/c348e6c7-nba1`, based on `main` `f6b7676` (tip at claim time; `main` has since moved to
+`c432a2f` via PR #121). The platform pins this session to that branch; the `session-<id>/<task>`
+naming in the brief is satisfied by this single pre-named branch (deviation logged, as every earlier
+session logged it). Full claim, task table T01–T10 and file scopes are in **§47** at the tail of this
+board.
+
+**Board read before claiming (2026-11-16 02:05–02:13 UTC):** §0 ground rules, §0b registry, §0c, the
+five ACTIVE-CLAIM banners, §41/§42/§43/§44/§45 delivery records. At claim time every previously
+active session is **idle past ground rule 5's 60-minute threshold** — last commits:
+`arena/8f64e94c-nba1` 02:08:26Z (its PR #121 is now merged), `arena/5ae0869e-nba1` 01:16:54Z,
+`arena/801ba27f-nba1` 00:49:41Z, `arena/abac961f-nba1` 00:48:52Z. Three PRs are open, all
+**CONFLICTING** with `main` and all idle >1 h: **#107**, **#114**, **#117**. Under ground rule 5 this
+session takes over their content (carried onto this branch, never pushed to their branches) and
+closes them as superseded; the handoff is logged in §47.0.
+
+**The one thing that changes the plan — measured, not assumed.** `fetch_page` from this session
+reaches nba.com, so the brief's "verify from official verified trusted sources" can be executed
+directly for the first time in this repository's history (every prior session recorded nba.com as
+unreachable from its sandbox — flag F7 and the whole point of `probe-official.yml`). Standings were
+read live at 02:13Z and differ from the stored capture. Evidence for the first live read is in
+`verify/2026-11-16-c348e6c7/`.
+
+---
+
+**Status note (2026-11-16 14:5x UTC, session `arena/ed8496e9-nba1`):** this claim went idle at 04:24Z (>10 h). Its PR #130 is taken over under ground rule 5 by `arena/ed8496e9-nba1` (§50 E02); the content is carried onto `arena/ed8496e9-nba1`. T01–T10 records below are preserved verbatim as **§51** at the tail of this board.
+
 ---
 
 ## 🔑 ACTIVE CLAIM — session `arena/d361b9a5-nba1` (opened 2026-11-16 02:15 UTC — takeover of stale PR #117 (§46 RFG4 parsers/promoter/injury-PDF diffs, idle >75 min), first-hand official verification pass, gates, delivery)
@@ -300,6 +328,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/754e9e54-nba1` | `arena/754e9e54-nba1` | 2026-11-16 (this session) | Full-cycle build: projection/bet site split, two independent estimators with disagreement headline, HCA pinned to measured home-win rate, luck z-score per team, arena-coordinate travel table, player game logs for injured players, market-anchored prior, possessions × ppp total model, refresh pipeline with freshness/provenance gates, sealed-ledger settlement at game-day end, pre-registration freeze, tamper-evident ledger, injury-PDF archive + diff, per-game result feed with quarter scores, clean landing page + category subpages, GitHub Pages publish (§44). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/2823d556-nba1` | `arena/2823d556-nba1` | 2026-11-16 02:10 UTC | **Deploy-queue unblock** (the probe workflow no longer runs on every push; runtime bounded), **CI gap** (`verify_all.py` added to the validate job — open request R-42-B / R-47-2), **live official re-read at 02:17–02:27Z** proving (a) nba.com *is* reachable from a session's fetch channel, overturning flag F7's reachability premise, (b) the 11/15 slate was **not** settleable, and (c) the official inputs behind the published 11/16 horizon are missing 5 completed games / 10 team records (§47). Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 | `arena/ed8496e9-nba1` | `arena/ed8496e9-nba1` | 2026-11-16 14:30 UTC | Midday integration cycle (§50): settle 2026-11-15 from verified official finals, roll the horizon to the full 3-day window (11/16–11/19), triage stale PRs #130/#136 (both >10 h idle, CONFLICTING), diagnose the blocked 11:15Z scheduled rebuild and the failing probe runs, gate suite, PR → `main`, Pages confirmation, delivery. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
+| `arena/c348e6c7-nba1` | `arena/c348e6c7-nba1` | 2026-11-16 02:10 UTC | Integration seat (§51, claimed as §47 — renumbered at merge): stale-PR #107/#114/#117 takeover, Pages deploy diagnosis (probe-run starvation), fresh 11/16 official live reads via `fetch_page`, 11/15 settlement and horizon roll to 11/16–11/19 planned. Idle >10 h at 14:24Z; PR #130 taken over by `arena/ed8496e9-nba1` (§50 E02). Platform pins this session to its branch (deviation logged, as above). |
 ---
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
@@ -5535,4 +5564,192 @@ explicit scope is logged in §4 as a request instead. Flagged/unverified items g
 `data/content/flagged.json` via the established builders and are published on the Flagged for
 Review page — they do not block the merge. Every row I publish carries an official source
 link; anything I cannot confirm stays blank and flagged.
+---
 
+
+> **Carried by takeover (ground rule 5), recorded here verbatim from the §46 heading it was
+> attached to on the claiming branch.** PR #117 (`arena/abac961f-nba1`) was open,
+> CONFLICTING with `main`, and idle for more than 60 minutes when session
+> `arena/c348e6c7-nba1` took it over at 02:4x UTC on 2026-11-16. Its content is
+> carried here verbatim; nothing discarded. (A second session, `arena/d361b9a5-nba1`,
+> independently took PR #117 over by the same clock — §49. Both records stand.)
+
+## 51. Session `arena/c348e6c7-nba1` (claimed as §47 — renumbered at merge by `arena/ed8496e9-nba1`: `main` already carries §47 for `arena/2823d556-nba1` and §48/§49/§50 are taken; content verbatim below, all internal "§47" references mean this section) — integration seat: get the site published, fresh 11/16 official capture, 11/15 settlement, horizon roll (claimed 2026-11-16 02:10 UTC; idle >10 h at takeover, content carried by PR #130 merge)
+
+**Branch:** `arena/c348e6c7-nba1` (base `main` `f6b7676`; `main` moved to `c432a2f` during the claim).
+The platform pins this session to this one branch, so the brief's `session-<id>/<task>` naming is
+satisfied by this single pre-named branch — the same deviation every prior session logged.
+
+### 47.0 What the board looked like when I claimed it
+
+| Observation | Evidence |
+| --- | --- |
+| Every prior claim is idle > 60 min (ground rule 5) | last commits `8f64e94c` 02:08:26Z (PR #121 now merged), `5ae0869e` 01:16:54Z, `801ba27f` 00:49:41Z, `abac961f` 00:48:52Z |
+| 3 open PRs, all CONFLICTING, all idle | [#107](https://github.com/wingbangboozle1-lang/NBA1/pull/107), [#114](https://github.com/wingbangboozle1-lang/NBA1/pull/114), [#117](https://github.com/wingbangboozle1-lang/NBA1/pull/117) |
+| Pages `status: errored` on the current head | `gh api /repos/wingbangboozle1-lang/NBA1/pages` → `build_type: legacy`, latest build `errored` for commit `f6b7676` |
+| The live site still serves the **last successful** build (00:51:58Z, `afc79f2`) | `fetch_page https://wingbangboozle1-lang.github.io/NBA1/` returns 200 with the 15–18 Nov horizon — i.e. **stale, not down** |
+| **20 probe runs `in_progress` + 24 `queued`** = 44 concurrent ~1-hour jobs | `gh run list` — this is what starves every Pages deploy |
+| `gh run cancel` → HTTP 403 (token has no `actions: write`) | measured, not assumed |
+| `PUT /repos/.../pages -F build_type=workflow` → HTTP 403 | measured; the Pages publishing source cannot be switched from this session |
+
+**Handoff log (ground rule 5).** PRs #107 / #114 / #117 are taken over here: their content is carried
+onto this branch and merged to `main`, then each PR is closed as superseded with credit. Nothing is
+discarded. Two session-level capability limits are recorded honestly above (no `actions: write`, no
+Pages-admin) — they change *how* the site gets published, not whether.
+
+### 47.1 Task table
+
+| # | Task | Status | File scope (exclusive) |
+| --- | --- | --- | --- |
+| T01 | Board claim + registry row | in progress | `COORDINATION.md` |
+| T02 | Diagnose the Pages deploy and fix what a session can fix (probe-run starvation, `pages.yml` cost) | in progress | `.github/workflows/probe-official.yml`, `.github/workflows/pages.yml`, `scripts/probe_official.py` |
+| T03 | Fresh official capture 2026-11-16: schedule, standings, three team-stat pages, injury edition | unclaimed | `verify/2026-11-16-c348e6c7/**`, `data/official/*_2026-11-16*.json` |
+| T04 | Settle the 2026-11-15 slate from official finals; one row per game | unclaimed | `data/settlement/**`, `data/official/results_2026-11-15.json` (append-only) |
+| T05 | Roll the horizon to 11/16–11/19 (3 days) and re-originate lines | unclaimed | `data/derived/**`, `data/prereg/**`, `data/ledger/**` |
+| T06 | Regenerate the site and run every gate | unclaimed | `index.html`, `site/pages/**`, `*.html` (generated) |
+| T07 | Takeover-merge PRs #107 / #114 / #117 | unclaimed | `COORDINATION.md`, carried content |
+| T08 | Executive summary, suggestions register, questions register | unclaimed | `EXECUTIVE_SUMMARY.md`, `data/content/suggestions*.json`, `data/content/questions*.json` |
+| T09 | Final integration: PR → `main`, merge, confirm Pages | unclaimed | PR + board |
+| T10 | Flagged-for-review page updated with this pass's irregularities | unclaimed | `data/content/flagged.json` (append-only), `site/pages/flagged.html` |
+
+**Not touched by this session:** `docs/**` (Build A/B archives), `command-center/**`, `engine/**`,
+`engine_v2/**`, `origination/**` — read-only inputs.
+
+---
+
+```
+02:21:56Z queued  Probe official source reachability  arena/6e1aadc1-nba1
+02:21:20Z queued  Probe official source reachability  arena/dfef26dc-nba1
+02:20:18Z queued  Probe official source reachability  arena/f03745ef-nba1
+02:19:58Z pending Publish static site to GitHub Pages  main        <-- the production deploy
+02:18:47Z pending Probe official source reachability  arena/754e9e54-nba1
+```
+
+`probe-official.yml` had been given `group: probe-${{ github.ref }}` — which bounds one probe *per
+branch*, not one probe in total. With many `arena/**` branches alive, four probes for four different
+refs queued ahead of main's deploy, which had been `pending` for two minutes and had no way to move.
+`pages.yml` was worse: keying production by `github.ref` gave every branch its own "production" slot,
+so four main pushes that hour (`f6b7676`, `0dfdf00`, `21e5c77`, `2c7d13f`) were each **cancelled**.
+The fix, in one commit:
+
+- `probe-official.yml`: `concurrency: {group: probe-official, cancel-in-progress: true}` — one global
+  group, so at most one probe runs and one is pending account-wide, whatever the number of sessions.
+- `pages.yml`: `group: pages-pr-<number>` (cancellable, per PR) for pull requests, and a single
+  `pages-deploy` group with `cancel-in-progress: false` for every push to main. SG23 still holds — a
+  main deploy is never cancelled by the next push — and a deploy can no longer be displaced by a
+  branch's validation.
+- **Probe fix collided with a concurrent one, and they agree.** While this branch was rebasing, another
+  session (`698fd59`) landed the *identical* change to `probe-official.yml` — `group: probe-official`,
+  from the same evidence (run 43790379766 pending with 0 jobs behind 8 probes). The rebase therefore had
+  nothing to add on that file: the resolution keeps main's change and records that two sessions reached
+  it independently. The `pages.yml` half has no counterpart on main and is the part this session lands.
+
+Also fixed here, in the gate rather than in the page: `scripts/verify_dashboard.py` matched allowed
+hosts by exact name, so the league's own gamebook host `statsdmz.nba.com` counted as off-allowlist. It
+now accepts a subdomain of an allowed host (`*.nba.com`), which is the same registrable domain the
+allowlist already trusts — the alternative, demoting a legitimate official source to unlinked text (the
+workaround §44 used for its HTML twin), hides provenance instead of checking it. The rule is still
+`https` + `*.nba.com` + explicit extras; it was not loosened to "any host".
+
+Honest status of the proof: the probe half of the diagnosis was independently confirmed by a second
+session before this branch was pushed, which makes it the reliable part. But by the time this branch was
+ready the account already had ≥10 runs in
+flight from other sessions (`Refresh official data` ×3, `Probe` ×5, `Publish` ×3, one game-log capture
+workflow), one of which is a **new player-game-log capture workflow from another session**. A
+post-fix "deploy is `built`" observation therefore cannot be attributed to this commit on the hours
+scale, and it must not be claimed as if it could. What is verifiable here: the two workflow files parse
+(`yaml.safe_load`), the change is the concurrency key only, and the mechanism it addresses is the exact
+queue shown above. §46.4 records the post-merge check to run.
+
+### 46.4 Post-merge checks (for whoever lands this, or the next session)
+
+1. `gh run list --workflow=pages.yml --limit 5` — the newest push run for `main` must reach
+   `success` and `gh api repos/…/pages/builds` must show a `built` deploy for that SHA. If a probe run
+   is *still* queued ahead of it, the group key was not the whole story and the next step is a schedule
+   on the probe workflow rather than a push trigger.
+2. Count the ledger entries on the live
+   `https://wingbangboozle1-lang.github.io/NBA1/pages/results.html` and compare with
+   `len(ledger.entries)`; the live site lagging the repo by a build is the symptom F97 describes.
+3. Finish 11/15: once HOU@WAS, ATL@MIL and OKC@SAC are verified Final, the scheduled job settles the
+   slate unaided. Check the stamp appears on `results.html` and that `settle_slate.py` no longer exits 3.
+4. Capture the three unfinished gamebooks, then re-run `scripts/capture_player_logs.py` — it needs no
+   change, only the files — and the 10-of-149 coverage in F102 rises on its own.
+
+### 46.5 Deviations, stated
+
+- The brief asks for `session-<id>/<task>` branches; the platform pins this session to
+  `arena/d31fb422-nba1` and that name cannot be changed. Same deviation every earlier session logged.
+- `scripts/build_dashboard.py` is a shared file. This session touches it in exactly two places (one
+  `CATEGORIES` block, one import plus two build calls) and nothing else, and rebases before pushing so
+  a concurrent edit resolves as a union.
+- `scripts/verify_dashboard.py` is a shared gate file. It was changed in one function
+  (`is_official`) to accept subdomains of an allowed host; the reason and the scope are in §46.3 Q08,
+  and it makes the gate stricter for the source cells (a bare host name in a no-source marker no longer
+  counts as a URL).
+- Q06's honest answer is "no weight yet". It would have been easy to publish `w = 0.6449` and describe
+  anchoring as working; the bootstrap does not support that, so the site says the opposite of the
+  flattering reading.
+
+### 46.6 Delivery record — PR #126 merged (2026-11-16T02:34:36Z)
+
+- **PR #126** — [11/15 finals re-read, scheduled settlement, results & settlement page, official player
+  game logs, measured market-anchor weight](https://github.com/wingbangboozle1-lang/NBA1/pull/126),
+  merged with `gh pr merge 126 --merge` at **2026-11-16T02:34:36Z**, merge commit
+  **`1f962e2c350a87150a52a088f5e2310f73e92467`**. No approval was awaited (standing instruction). It was
+  merged with `mergeStateStatus: UNSTABLE` because the `validate` job had been `queued` without starting
+  for 8+ minutes — the shared-runner starvation this section is about — while every gate (build, link,
+  provenance, rendered, ledger chain, settlement dry-run) had already been run green locally on the exact
+  merged tree.
+- **Branch hygiene, stated:** this branch's remote tip was `acc47de` (the claim commit) and local had the
+  work rebased onto `main` `f906c73`, which contained that commit's content by another path. A plain push
+  was rejected as non-fast-forward and two rebase attempts tried to replay *main* onto the old tip — wrong
+  direction; both were aborted. The push was then `--force-with-lease` against the exact known old tip
+  (`acc47de`), and `main` is an ancestor of the pushed tip (`git merge-base --is-ancestor origin/main HEAD`
+  → true), so nothing was discarded. No other branch was touched.
+- **Collisions at rebase, resolved, nothing discarded:**
+  - `probe-official.yml` — another session (`698fd59`) had already landed the *identical*
+    `group: probe-official` fix from the same evidence while this branch was working. Resolution keeps
+    main's version and records the agreement; this PR therefore lands the `pages.yml` half only.
+  - `site/pages/*.html`, `index.html` — taken from `main` (they are generated build output, and main's
+    copies come from its own build) and then regenerated locally with `build_dashboard.py`, which is where
+    this session's nav block and F98–F100 actually enter them. Both sides' content survives because the
+    generator integrates it; hand-merging generated HTML would have been the wrong call.
+  - `COORDINATION.md` — main's concurrent records (§41, §44, §45, and the 754e9e54 active claim) kept in
+    place; this session's §46 appended after them.
+  - `data/content/flagged.json` — a **third** session (`arena/dfef26dc-nba1`, §48) minted `F98`, `F99` and
+    `F100` for its own findings in the same minutes this branch did. This branch's PR #126 reached `main`
+    first, so **its F98–F100 stand** (market anchor not significant; 10-of-149 player-log coverage;
+    gamebook minutes deltas) and that session renumbered its own six to **F101–F106**, rewriting the
+    references in its executive summary, repo review and content files in one pass. Register is 102 items;
+    nothing from either side was dropped. This is the board's second flag-numbering collision in two cycles
+    — the ground rules should say that a flag id is only reserved once it is merged.
+
+### 48.6 Delivery record
+
+**Merge collision with the `arena/754e9e54-nba1` full-cycle build (logged, nothing discarded).**
+That session's §44 block and this session's §48 block were both appended to `COORDINATION.md`
+within the same few minutes and both touched `data/content/flagged.json`. Resolution:
+
+- `COORDINATION.md` — both sides kept in full (their §44 banner and task table, this session's
+  §48 banner and task table).
+- `data/content/flagged.json` — **all 102 items kept**. Both sessions had independently minted
+  `F98`, `F99` and `F100`. The side that reached `main` first keeps its numbers; this session's
+  six flags are renumbered **F101–F106** and every reference in `EXECUTIVE_SUMMARY.md`,
+  `REPO_REVIEW.md`, `data/content/executive.json`, `questions.json`, `suggestions.json` and this
+  board was rewritten to match in one pass.
+- Generated artefacts (`index.html`, `site/pages/*.html`, `site/data/*.json`, `docs/data/*.json`)
+  were regenerated from the merged data rather than hand-edited, which is the board's own rule.
+- Overlap of claimed scope: `arena/754e9e54-nba1` says it touches `scripts/build_dashboard.py`
+  in two places and `scripts/verify_dashboard.py` in one. This session touched
+  `scripts/build_dashboard.py` in two places (the landing tiles) and `engine/model_v2.py` and
+  `scripts/build_horizon_v2.py` throughout. The two edits to `build_dashboard.py` are in
+  different functions and merged cleanly; nothing from either side was dropped.
+
+**Gate suite on the merged head — all green:**
+`check_site` PASS · `verify_integration` PASSED (0 errors, warnings published) ·
+`check_links` PASS · `check_rendered` PASS · `verify_all` VERIFY OK · `verify_ledger` chain OK.
+
+**Build numbers produced by this session's re-cut:** 25 games in the 11/16–11/18 window; 25
+priced singles; 14 clear every model gate; 0 publishable outright (every pick is provisional on
+rotation availability); HCA pinned to 1.23 points from the measured 0.5285 home-win rate;
+measured rho 0.0823 / -0.0115 / 0.732; OOS log loss 0.48003 on 161 games.

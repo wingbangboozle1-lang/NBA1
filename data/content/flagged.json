@@ -1,6 +1,6 @@
 {
  "title": "Flagged for Review",
- "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md \u00a723): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link.",
+ "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link.",
  "items": [
   {
    "id": "F1",
@@ -329,7 +329,7 @@
    "id": "F34",
    "severity": "Medium",
    "title": "The repository's gate checks structure, not values",
-   "detail": "The dashboard gate is structural, not a value check: scripts/verify_dashboard.py counts four categories separately \u2014 rows with an allowed official source link, explicit no-source marks with an explanatory title, marks whose title carries an approved official URL (rendered as a clickable context link since 2026-11-14), and unmarked rows \u2014 and fails only on the last category. It never fetches an NBA page and never compares a published value with its source; scripts/source_check.py is the row-value spot-check, and both were run on the merged tree before every merge (COORDINATION section 35). The original finding stands: a link is not a value check.",
+   "detail": "The dashboard gate is structural, not a value check: scripts/verify_dashboard.py counts four categories separately — rows with an allowed official source link, explicit no-source marks with an explanatory title, marks whose title carries an approved official URL (rendered as a clickable context link since 2026-11-14), and unmarked rows — and fails only on the last category. It never fetches an NBA page and never compares a published value with its source; scripts/source_check.py is the row-value spot-check, and both were run on the merged tree before every merge (COORDINATION section 35). The original finding stands: a link is not a value check.",
    "affected": "Trust in 'VERIFY OK' and in every 'verified' label on the site",
    "source": null,
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_all.py",
@@ -735,7 +735,7 @@
    "id": "F80",
    "severity": "medium",
    "title": "First 11/14 tip stated as 00:30Z; official tip is 7:00 PM ET (00:00Z)",
-   "detail": "COORDINATION \u00a740 says the earliest 11/14 game tipped at 00:30Z on 11/15. The official results file lists DEN @ NOP at 7:00 PM ET, which is 00:00Z (EST, UTC-5). Ledger entry 1 records first_tip_utc 2026-11-15T00:00Z, which matches the official time.",
+   "detail": "COORDINATION §40 says the earliest 11/14 game tipped at 00:30Z on 11/15. The official results file lists DEN @ NOP at 7:00 PM ET, which is 00:00Z (EST, UTC-5). Ledger entry 1 records first_tip_utc 2026-11-15T00:00Z, which matches the official time.",
    "source_url": "https://www.nba.com/game/den-vs-nop-0022600231",
    "status": "open"
   },
@@ -971,6 +971,65 @@
    "affected": "the live site at https://wingbangboozle1-lang.github.io/NBA1/ - it serves 2026-11-15T23:44Z content, not the current main",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/actions/workflows/pages.yml",
    "suggested_action": "Switch Pages to the Actions build type (Settings > Pages > Source: GitHub Actions), or delete pages.yml, so exactly one path deploys. Recorded as SG37."
+  },
+  {
+   "id": "F108",
+   "severity": "High",
+   "title": "The 2026-11-15 slate is not settled because three of its nine games were still in progress",
+   "detail": "[Renumbered from F99 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] Read from the official games page at 2026-11-16 02:2x UTC (21:2x ET on 11/15). Final: PHI 131-124 IND (0022600236), LAL 131-123 PHX (0022600237), LAC 113-105 CHA (0022600238), SAS 110-102 UTA (0022600239), BOS 131-94 DAL (0022600240), NYK 112-108 TOR/OT (0022600241). In progress: HOU@WAS Q4 5:24 (132-102), ATL@MIL Q3 10:42 (57-53), OKC@SAC Q1 7:59 (15-4). The settlement rule requires the official page to print Final with quarter linescores summing to it, so the slate stays open rather than being settled from live scores.",
+   "affected": "data/settlement/, the ledger, the leaderboard and every pick graded against this slate",
+   "source": "NBA.com official games page, 2026-11-15",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "suggested_action": "Settle at game-day end from official finals once all nine games print Final; store one row per game with date, teams, final score and quarter scores."
+  },
+  {
+   "id": "F109",
+   "severity": "Low",
+   "title": "Injury PDFs can be archived only by a runner with outbound network; the session sandbox cannot do it",
+   "detail": "MOSTLY CLOSED AT MERGE. The carry of PR #114 (arena/801ba27f-nba1) put 152 official injury PDFs into data/raw/injury_pdfs/, archived by content hash with JSON sidecars, produced by a GitHub Actions runner that has outbound network. What remains open is narrower: this session's own sandbox has no outbound network (curl to ak-static.cms.nba.com fails at the TLS handshake, HTTP 000, 0 bytes) and the agent-side fetcher returns parsed text only, so a session cannot archive a NEW edition at the moment it reads one. That is a tooling limit, not a data gap, and it now has a working path: capture inside the refresh workflow. The editions already archived cover the 11/15 cycle; anything published after that still needs a runner to archive it.",
+   "affected": "data/raw/injury_pdfs/ (empty, 0 files); verifiability of every injury edition",
+   "source": "measured in this session; see verify/2026-11-16-c348e6c7/capture_injury.py",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf",
+   "suggested_action": "Nothing to fix in the data. If a newer edition needs archiving, run the refresh workflow (or add the fetch to it) so the archive happens on a runner."
+  },
+  {
+   "id": "F110",
+   "severity": "Medium",
+   "title": "Stored injury editions encode NOT YET SUBMITTED rows with an inherited player name",
+   "detail": "[Renumbered from F101 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] data/official/injury_2026-11-15_0615PM.json has a row: team='Boston Celtics', player='Penda, Noah', status='Out', reason='NOT YET SUBMITTED'. 'Penda, Noah' belongs to the preceding Orlando Magic row. NOT YET SUBMITTED is a team-level marker and the league prints no player on it, so any consumer reading the status column counts an unnamed player as ruled out for a team that had filed nothing. The consecutive-edition diff now detects this encoding in both the status and the reason field.",
+   "affected": "data/official/injury_*.json; every availability calculation built on them",
+   "source": "official injury PDF, 11/15/2026 06:15 PM edition",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf",
+   "suggested_action": "Re-parse the affected editions with the rule 'a NOT YET SUBMITTED row carries no player', or null the player field on those rows; do not drop the rows, they are the record that a team had not filed."
+  },
+  {
+   "id": "F111",
+   "severity": "Medium",
+   "title": "The live horizon lines were cut from the 06:15 PM injury edition; Denver filed four Out players at 09:00 PM",
+   "detail": "[Renumbered from F102 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] Diffing 11/15 06:15 PM against 09:00 PM for the 11/16 games: zero player-level status changes, one team submission change. Denver submitted nothing at 06:15 PM and filed four players Out at 09:00 PM (Holmes II, Nembhard, Strawther, Whitmore) for PHX@DEN (0022600252). Five teams had still not submitted at 09:00 PM: WAS, BOS, HOU, PHI, PHX. The lines were deliberately NOT re-priced: a line re-priced after publication cannot be graded. This is the exact class of gap identified in COORDINATION §42.",
+   "affected": "the PHX@DEN line; every pick or parlay containing it",
+   "source": "official injury PDFs, 11/15/2026 06:15 PM and 09:00 PM editions",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf",
+   "suggested_action": "Reader decision, recorded as a suggestion: re-cut unpublished future slates from the newest edition, and treat PHX@DEN as carrying a known unpriced availability gap."
+  },
+  {
+   "id": "F112",
+   "severity": "Low",
+   "title": "Sacramento's standings row was only partially read on 2026-11-16",
+   "detail": "[Renumbered from F103 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] The standings page fetch returned the Sacramento Kings row split across a chunk boundary, so only its W-L (1-11, confirmed separately from the official 11/18 games page) was captured. The remaining cells - win%, GB, conference, division, home, road, neutral, OT, last-10 and streak - are recorded as null with a reason rather than inferred.",
+   "affected": "verify/2026-11-16-c348e6c7/standings_live.json; any standings-derived figure touching SAC",
+   "source": "NBA.com official standings",
+   "source_url": "https://www.nba.com/standings",
+   "suggested_action": "Re-read https://www.nba.com/standings and fill the ten SAC cells; the row is flagged in place so it cannot be silently treated as complete."
+  },
+  {
+   "id": "F113",
+   "severity": "Medium",
+   "title": "GitHub Pages deployments were superseded faster than they run (measured 2026-11-15T23:55Z..2026-11-16T02:0xZ)",
+   "detail": "[Renumbered from the claiming branch's F97 at merge by arena/ed8496e9-nba1: main already carries a different finding under F97 and another session's renumber dance took F98-F106. Content unchanged from the measurement.] Every pages.yml push run to main between 2026-11-15T23:55Z and 2026-11-16T01:00Z was cancelled or left pending while five sessions pushed to main inside the same hour. At the last fetch-back the live site still served the pre-11/16 build (34-game 15-18 Nov landing tiles, 4 ledger entries) even though site/pages/roll.html is present in main (1,408 lines, 61.1 KB) and every gate on the branch passes. Nothing in the build is broken: this is a deploy-backlog artefact of parallel sessions, and it means a fetch-back cannot be used to prove what main contains. UPDATE 2026-11-16T02:35Z (session arena/d31fb422-nba1): after the Pages workflow was repaired locally and PR #126 merged as 1f962e2, the account-wide queue held 33 queued runs and two long-lived probe runs (43790671278 started 02:11:49Z, 43785336088 started 01:16:57Z) still in progress. The two runs created for the merge - 'Publish static site to GitHub Pages' 43793011882 and the legacy 'pages build and deployment' 43793011658 - were both still `queued` minutes later, and the Pages build for 1f962e2 sat in `building`. Every earlier push run in the hour (f6b7676, 0dfdf00, 21e5c77, 2c7d13f, f906c73) ended `cancelled` or `errored`. So the deploy backlog is not only a concurrency-key problem: the account's runner pool is being consumed by ~1-hour probe runs plus one refresh/publish pair per push per branch, and nothing in this repository bounds the number of branches pushing. The group keys are now correct (probe-official globally; pages-deploy serialised and never cancelled), which stops deploys from being killed, but it cannot create runners.",
+   "affected": "every published page; any claim about what the live site currently shows",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/actions/workflows/pages.yml",
+   "suggested_action": "Either serialize merges to main (a merge queue) so each deploy completes, or verify against the main tree and the Actions run log rather than a live fetch-back while several sessions are pushing. Also move the probe workflow off the push trigger for arena/** branches (a schedule plus workflow_dispatch is enough for a reachability record) so a 1-hour job cannot be armed by every push from every session."
   }
  ]
 }

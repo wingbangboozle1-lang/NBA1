@@ -55,6 +55,7 @@ OFFICIAL_HOSTS = {
     # the host is official, the omission was the defect.
     "statsdmz.nba.com",
     "cdn.nba.com",
+    "statsdmz.nba.com",  # official NBA gamebook PDFs (verified 2026-11-16)
     # GitHub / docs (used for Pages + tooling references only)
     "github.com",
     "docs.github.com",
