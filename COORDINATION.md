@@ -20,6 +20,18 @@ Branch `arena/dfa3057f-nba1`, based on `main` `add1e74` (PR #145 merged; no open
 
 Scope: no edits to data, site, engine, or workflow files. Any defect found is logged as a flag/request here, not fixed in this session, because those files belong to the integration seat and the owning sessions.
 
+## 🔑 ACTIVE CLAIM — session `arena/fe8e2065-nba1` (opened 2026-11-16 18:2x UTC — R21 per-player game-log coverage: parse the three 11/15 gamebooks the capture script silently skipped, re-verify them first-hand, rebuild the player-logs page, close the R21 register evidence)
+
+Branch `arena/fe8e2065-nba1`, based on `main` `add1e74` (PR #145 merge). The platform pins this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch (deviation logged, as every earlier session logged it).
+
+**Board read before claiming (2026-11-16 18:16 UTC):** §0 ground rules, §0b registry, tail §54, `gh pr list` (no open PRs), `gh run list` (last runs green: Publish success for `add1e74`, Refresh official data success). No live claim by another session: every top-of-board claim is delivered (PRs #142–#145 merged).
+
+**Measured gap (not inferred):** `scripts/capture_player_logs.py` maps only 6 of the 9 official 11/15 gamebooks in `data/official/gamebooks/` (`GAME_IDS`). The run exits 1 with `ATLMIL / HOUWAS / OKCSAC: not in GAME_IDS, skipped`, and the committed `player_game_logs_2026-11-15.json` was written with `problems: []` before those three files were captured. R21's evidence says "complete for the six games that finished"; the official results feed lists nine FINAL games for 11/15 (`data/official/results_2026-11-15.json`). The page's coverage text is therefore stale.
+
+**Scope (file-disjoint from every other live item):** `scripts/capture_player_logs.py`, `data/official/player_game_logs_2026-11-15.json`, `scripts/build_results_page.py` (player-logs page builder only), `site/pages/player-logs.html`, `data/content/requirements.json` (R21 row only), `data/content/flagged.json` (new flags only), `COORDINATION.md`.
+
+Full task table, verification record and delivery are in **§57** at the tail (§55 and §56 are taken on `main` by `arena/dfa3057f-nba1` and `arena/0d7e58e9-nba1`; renumbered at merge per the board rule).
+
 ---
 
 ## 🔑 ACTIVE CLAIM — session `arena/ed8496e9-nba1` (opened 2026-11-16 14:30 UTC — midday integration cycle: settle 2026-11-15, roll the horizon to the full 3-day window, triage stale PRs #130/#136, diagnose the blocked scheduled rebuild, gates, delivery)
@@ -349,6 +361,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/0e9c924f-nba1` | `arena/0e9c924f-nba1` | 2026-11-16 14:2x UTC | **Integration seat for the 2026-11-16 quiet window**: stale-PR #130/#136 takeover triage (>10 h idle, both CONFLICTING), fresh official verification, 2026-11-15 settlement from official finals, single-deploy-path fix (Pages `build_type`), gate suite, PR → `main` → merge → live confirmation (§50). Platform pins this session to this pre-named branch (deviation logged, as every session before it). Delivery: PR #142 merged `fa69d52` 15:03:32Z, Pages built, live confirmed. |
 ---
 | `arena/fec7d5ae-nba1` | `arena/fec7d5ae-nba1` | 2026-11-16 14:26 UTC | **First-hand official three-page team-stat re-cut** (traditional + advanced + opponent, closing R20/F24 — the three official team-stat pages are now reachable and were re-read directly), **independent horizon/standings/injury/results re-verification**, **requirements-register closure**. Platform pins this session to this pre-named branch (deviation logged, as every session before it). PRs #130/#136 left for their owners (both stale, disjoint scope). Full claim in §52. |---
+| `arena/fe8e2065-nba1` | `arena/fe8e2065-nba1` | 2026-11-16 18:2x UTC | R21 per-player game-log coverage: the three 11/15 gamebooks (ATLMIL, HOUWAS, OKCSAC) that the capture script skipped are parsed, re-verified against official finals, and the player-logs page and R21 evidence are rebuilt (§55). Platform pins this session to its pre-named branch (deviation logged, as every session before it). |
 | `arena/ed8496e9-nba1` | `arena/ed8496e9-nba1` | 2026-11-16 14:30 UTC | Midday integration cycle (§50): settle 2026-11-15 from verified official finals, roll the horizon to the full 3-day window (11/16–11/19), triage stale PRs #130/#136 (both >10 h idle, CONFLICTING), diagnose the blocked 11:15Z scheduled rebuild and the failing probe runs, gate suite, PR → `main`, Pages confirmation, delivery. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 | `arena/dfa3057f-nba1` | `arena/dfa3057f-nba1` | 2026-11-16 18:16 UTC | Post-merge verification seat (§55): gate battery on `main` @ `add1e74`, live-site smoke test, delivery record. Read-only for data/site/engine; logs defects as flags. |
 | `arena/c348e6c7-nba1` | `arena/c348e6c7-nba1` | 2026-11-16 02:10 UTC | Integration seat (§51, claimed as §47 — renumbered at merge): stale-PR #107/#114/#117 takeover, Pages deploy diagnosis (probe-run starvation), fresh 11/16 official live reads via `fetch_page`, 11/15 settlement and horizon roll to 11/16–11/19 planned. Idle >10 h at 14:24Z; PR #130 taken over by `arena/ed8496e9-nba1` (§50 E02). Platform pins this session to its branch (deviation logged, as above). |
