@@ -1,0 +1,291 @@
+{
+ "title": "Consecutive-edition diff: 11/16 12:00 PM (session transcription) -> 11/16 01:30 PM (session transcription)",
+ "from_edition": {
+  "edition_id": "2026-11-16_1200PM",
+  "revision": "11/16/2026 12:00 PM ET",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_12_00PM.pdf"
+ },
+ "to_edition": {
+  "edition_id": "2026-11-16_0130PM",
+  "revision": "11/16/2026 01:30 PM ET",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_30PM.pdf"
+ },
+ "computed_by": "arena/7ec9e7a3-nba1",
+ "computed_utc": "2026-11-16T19:2xZ",
+ "method": "player key = (game_date, matchup, player-normalised); the 01:30 PM PDF prints 'Mathurin, Benedict' where earlier editions print 'Bennedict' - normalised to one key with the spelling recorded per row; GG Jackson's reason reassembly across the page break ('Left 5th Metatarsal' + 'Fracture') is treated as one continuation; a row whose status cell is unreadable in the render is incomparable, never compared",
+ "counts": {
+  "previous_rows": 72,
+  "current_rows": 87,
+  "comparable_rows": 49,
+  "status_changes": 7,
+  "rows_added": 19,
+  "rows_removed": 0
+ },
+ "status_changes": [
+  {
+   "date": "11/16/2026",
+   "matchup": "CHI@CLE",
+   "team": "Cleveland Cavaliers",
+   "player": "Tyson, Jaylon",
+   "from": {
+    "status": "Questionable",
+    "reason": "Injury/Illness - Right Ankle Injury Management"
+   },
+   "to": {
+    "status": "Doubtful",
+    "reason": "Injury/Illness - Right Ankle Injury Management"
+   }
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Jackson, GG",
+   "from": {
+    "status": "Out",
+    "reason": "Injury/Illness - Left Foot Injury"
+   },
+   "to": {
+    "status": "Out",
+    "reason": "Injury/Illness - Left 5th Metatarsal Fracture"
+   }
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Memphis Grizzlies",
+   "player": "Stewart, Isaiah",
+   "from": {
+    "status": "Questionable",
+    "reason": "Injury/Illness - Illness"
+   },
+   "to": {
+    "status": "Out",
+    "reason": "Injury/Illness - Illness"
+   }
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "HOU@MIA",
+   "team": "Miami Heat",
+   "player": "Larsson, Pelle",
+   "from": {
+    "status": "Questionable",
+    "reason": "Injury/Illness - Illness"
+   },
+   "to": {
+    "status": "Doubtful",
+    "reason": "Injury/Illness - Illness"
+   }
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Dia, Malik",
+   "from": {
+    "status": "Questionable",
+    "reason": "G League - Two-Way"
+   },
+   "to": {
+    "status": "Probable",
+    "reason": "G League - Two-Way"
+   }
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Pierre Jr., Jaron",
+   "from": {
+    "status": "Questionable",
+    "reason": "G League - Two-Way"
+   },
+   "to": {
+    "status": "Probable",
+    "reason": "G League - Two-Way"
+   }
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Reese, Julian",
+   "from": {
+    "status": "Questionable",
+    "reason": "G League - Two-Way"
+   },
+   "to": {
+    "status": "Probable",
+    "reason": "G League - Two-Way"
+   }
+  }
+ ],
+ "rows_added": [
+  {
+   "date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Beekman, Reece",
+   "status": "Out",
+   "reason": "Injury/Illness - Right AC Joint Injury"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Champagne, Justin",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Surgery"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Johnson, Tre",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Low Back Soreness"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Okpara, Felix",
+   "status": "Questionable",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Vukcevic, Tristan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hip Impingement"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Watkins, Jamir",
+   "status": "Out",
+   "reason": "Injury/Illness - Left ACL Repair / Surgery"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "ORL@BOS",
+   "team": "Boston Celtics",
+   "player": "Queta, Neemias",
+   "status": "Questionable",
+   "reason": "Rest"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "player": "Adams, Steven",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Lower Leg Injury Management"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "player": "Capela, Clint",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Ankle Sprain"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "player": "Copeland, Quadir",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "player": "Phillips, Julian",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "player": "Smart, Marcus",
+   "status": "Out",
+   "reason": "League Suspension"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "HOU@MIA",
+   "team": "Houston Rockets",
+   "player": "Thompson, Amen",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Knee Soreness"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "HOU@MIA",
+   "team": "Miami Heat",
+   "player": "Jovic, Nikola",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Illness"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "player": "Barlow, Dominick",
+   "status": "Out",
+   "reason": "Injury/Illness - Low Back Stress Reaction"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "player": "Bona, Adem",
+   "status": "Out",
+   "reason": "Injury/Illness - Cervical Spine Sprain"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "player": "Embiid, Joel",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Right Foot Plantar Fascia Injury Management"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "player": "Hukporti, Ariel",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Achilles Tendon Rupture / Tear"
+  },
+  {
+   "date": "11/16/2026",
+   "matchup": "PHI@BKN",
+   "team": "Philadelphia 76ers",
+   "player": "James, LeBron",
+   "status": "Out",
+   "reason": "Injury/Illness - Low Back/Sciatica Management"
+  }
+ ],
+ "rows_removed": [],
+ "incomparable_rows": [
+  {
+   "matchup": "GSW@NOP",
+   "player": "Butler III, Jimmy",
+   "note": "status cell not visible in the fetched render (repeats the 12:00 PM render pattern); not filled in (the 09:45 AM edition prints Out for the same reason text)"
+  }
+ ],
+ "caveats": [
+  "the promoted pipeline input (data/raw/injuries.json) remains the 11/16 09:45 AM edition because promotion is digest-bound to a runner-retrieved PDF (engine/promote_official.py); the runner's next scheduled run (22:15Z) retrieves the current edition digest-bound and promotes it; no model line is re-priced on this diff - lines are frozen pre-tip by the pre-registration rule",
+  "four team blocks that had not filed before 01:30 PM filed now: WAS (6 rows), BOS (1), HOU (6), PHI (5)",
+  "status upgrades to Probable are G League two-way players (Dia, Pierre Jr., Reese) - rotation impact none on the published availability column beyond what the promoted edition already shows"
+ ]
+}

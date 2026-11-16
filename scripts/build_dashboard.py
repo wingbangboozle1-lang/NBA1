@@ -1860,8 +1860,8 @@ def main():
                      '<a href="model-v2.html">Open model v2</a>.</li>'
                      '<li><b>Current &mdash; this build.</b> The rolling ' + hz_label + ' horizon (originated lines, '
                      'pick rows, settlement stamp), the frozen 14&ndash;17 Nov strategy-lab window with its '
-                     '60 gated paper picks (settled day by day from official finals), the 11/15/26 '
-                     '06:15 AM ET injury edition, and the full strategy/evidence set. '
+                     '60 gated paper picks (settled day by day from official finals), the 11/16/26 '
+                     '09:45 AM ET injury edition, and the full strategy/evidence set. '
                      '<a href="site/pages/picks.html">Open the horizon</a>.</li>'
                      '<li><a href="command-center/index.html">Command Center</a> &mdash; a second consolidated '
                      'site built in session <code>arena/791c9114-nba1</code> from the same official captures. '
@@ -1993,38 +1993,6 @@ def main():
     # === injuries ==========================================================
     b = [h2("Injury report read-out", "One row per official injury-report line, with the minutes it implies and the impact it carries.")]
 
-    # F-DFA-01 (session arena/07920bdc-nba1, COORDINATION §56): three places on
-    # this page named a "newest official edition", and they named three different
-    # ones - a hardcoded 11/15 06:15 AM, a duplicated transcription's blank
-    # revision, and the banner's own pick. Two of the three were literals, so they
-    # went stale the moment a newer edition was captured. Read the newest stored
-    # edition once and let every sentence on the page quote that same value.
-    def _newest_edition_line():
-        """(revision_text, source_url) of the newest stored official edition."""
-        import glob as _g, re as _r
-        best, best_key = None, None
-        for _p in _g.glob(os.path.join(ROOT, "data", "official", "injury_2*.json")):
-            _m = _r.search(r"_(\d{4})-(\d{2})-(\d{2})_(\d{2})[_-]?(\d{2})\s*(AM|PM)",
-                           _p, _r.I)
-            if not _m:
-                continue
-            _y, _mo, _d, _hh, _mm, _ap = _m.groups()
-            _key = (int(_y), int(_mo), int(_d),
-                    int(_hh) % 12 + (12 if _ap.upper() == "PM" else 0), int(_mm))
-            if best_key is None or _key > best_key:
-                best_key, best = _key, _p
-        if not best:
-            return None, None
-        try:
-            _j = load(best)
-        except (OSError, ValueError):
-            return None, None
-        return (_j.get("revision_time_et") or _j.get("edition"),
-                _j.get("source_url"))
-
-    _newest_rev, _newest_src = _newest_edition_line()
-    _newest_rev_txt = esc(_newest_rev) if _newest_rev else "the newest stored edition"
-
     # The site's model is built on the 11/13 07:30 PM ET edition. A newer edition was
     # read on 2026-11-14 and is strictly better information; it is shown here as a
     # comparison, and deliberately NOT fed into the model, because doing so would move
@@ -2042,7 +2010,7 @@ def main():
         b.append(banner("warn", "Historical: the 11/14 game-day edition handling (superseded)",
             "<p>This section is a dated record of the 2026-11-14 game-day injury cycle. Those lines are "
             "<b>settled and stamped</b> on the picks and settlement pages, and the current "
-            "2026-11-15..18 window is priced from the <b>" + _newest_rev_txt + "</b> edition (see the "
+            "2026-11-16..19 window is priced from the <b>11/16/26 09:45 AM ET</b> edition (see the "
             "current-edition banner above). The <b>11/14/26 04:15 AM ET</b> edition shown below "
             "(<a href=\"%s\">official PDF</a>) was transcribed &mdash; all %d rows &mdash; to "
             "<code>verify/2026-11-14/official_injury_2026-11-14_0415AM_s934ca56f.json</code> and was "
@@ -2103,9 +2071,12 @@ def main():
                            "The rows below are the <b>11/13/26 07:30 PM ET</b> edition &mdash; the one the "
                            "settled 14&ndash;17 Nov strategy-lab window was cut from. The league has since "
                            "published newer reports: the 11/14 game-day cycle is on "
-                           "<a href=\"gameday.html\">Game-Day Injury Read</a>, and the current 15&ndash;18 Nov "
-                           "window is priced from the <b>" + _newest_rev_txt + "</b> edition in the banner "
-                           "above. Those numbers do not replace the ones here: a line re-priced after it was "
+                           "<a href=\"gameday.html\">Game-Day Injury Read</a>, and the current 16&ndash;19 Nov "
+                           "window is priced from the <b>11/16/26 09:45 AM ET</b> edition (the digest-bound promoted "
+                           "input); the newest-edition banner above shows the latest official edition read "
+                           "this cycle (01:30 PM ET) with its consecutive-edition diff - 26 added designations "
+                           "and 7 status changes still awaiting digest-bound runner promotion (flag F128). "
+                           "Those numbers do not replace the ones here: a line re-priced after it was "
                            "frozen cannot be graded."))
     # Newest-edition banner: report revision + retrieval time (brief requirement).
     # ROLLING: pick the newest stored edition and the newest consecutive-edition diff

@@ -52,7 +52,7 @@
    "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
    "suggested_action": "The refresh job should archive every edition it sees; grading can then start once ~30 graded S6 plays exist.",
    "status": "retired",
-   "retired_utc": "2026-11-16T18:46:48Z",
+   "retired_utc": "2026-11-16T18:49:05Z",
    "retired_by": "arena/07920bdc-nba1",
    "retired_note": "RETIRED 2026-11-16 (COORDINATION \u00a756, flag F-DFA-04): the premise is no longer true - data/raw/injury_pdfs/ now holds 29 content-addressed editions, 11/15 12:45 PM through 11/16 01:15 PM ET, each with its retrieval timestamp and SHA-256. The grading gap this flag described is now carried by F-X01 instead (parsed editions that are silently incomplete), not by an empty archive."
   },
@@ -1085,8 +1085,8 @@
   {
    "id": "F119",
    "severity": "High",
-   "title": "The 2026-11-15 slate is not settled because three of its nine games were still in progress",
-   "detail": "[Renumbered from F108 at merge with main (PR #138's register already holds F108 with different content): content unchanged.] [Renumbered from F99 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] Read from the official games page at 2026-11-16 02:2x UTC (21:2x ET on 11/15). Final: PHI 131-124 IND (0022600236), LAL 131-123 PHX (0022600237), LAC 113-105 CHA (0022600238), SAS 110-102 UTA (0022600239), BOS 131-94 DAL (0022600240), NYK 112-108 TOR/OT (0022600241). In progress: HOU@WAS Q4 5:24 (132-102), ATL@MIL Q3 10:42 (57-53), OKC@SAC Q1 7:59 (15-4). The settlement rule requires the official page to print Final with quarter linescores summing to it, so the slate stays open rather than being settled from live scores.",
+   "title": "RESOLVED 2026-11-16 18:4xZ - the 2026-11-15 slate is settled (was: three of its nine games were still in progress at the 02:2xZ read)",
+   "detail": "Original finding (2026-11-16 02:2x UTC read, 21:2x ET on 11/15): three games were still in progress, so the slate could not be settled then - the rule 'grade only from a printed Final' held. Resolution chain: settled 2026-11-16T14:45Z by scripts/settle_slate.py from data/official/results_2026-11-15.json (official game-page LINESCORES with quarter sums asserted against the printed final; data/settlement/settlement_2026-11-15.json, sealed-ledger entries 6-7). Independent re-verification on 2026-11-16 18:3xZ by session arena/7ec9e7a3-nba1, first-hand from https://www.nba.com/games?date=2026-11-15 - all nine finals re-read and numerically identical to the settlement: IND 124@PHI 131, LAL 131@PHX 123, CHA 105@LAC 113, SAS 110@UTA 102, NYK 112@TOR 108 (OT), DAL 94@BOS 131, HOU 147@WAS 119, ATL 113@MIL 106, OKC 125@SAC 103. Nothing inferred; every graded entry traces to the official game page.",
    "affected": "data/settlement/, the ledger, the leaderboard and every pick graded against this slate",
    "source": "NBA.com official games page, 2026-11-15",
    "source_url": "https://www.nba.com/games?date=2026-11-15",
@@ -1115,8 +1115,8 @@
   {
    "id": "F122",
    "severity": "Medium",
-   "title": "The live horizon lines were cut from the 06:15 PM injury edition; Denver filed four Out players at 09:00 PM",
-   "detail": "[Renumbered from F111 at merge with main (PR #138's register already holds F111 with different content): content unchanged.] [Renumbered from F102 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] Diffing 11/15 06:15 PM against 09:00 PM for the 11/16 games: zero player-level status changes, one team submission change. Denver submitted nothing at 06:15 PM and filed four players Out at 09:00 PM (Holmes II, Nembhard, Strawther, Whitmore) for PHX@DEN (0022600252). Five teams had still not submitted at 09:00 PM: WAS, BOS, HOU, PHI, PHX. The lines were deliberately NOT re-priced: a line re-priced after publication cannot be graded. This is the exact class of gap identified in COORDINATION \u00a742.",
+   "title": "RESOLVED 2026-11-16 18:4xZ - horizon lines are cut from the 11/16 09:45 AM official edition, which contains the Denver designations the finding was about (was: lines cut from 11/15 06:15 PM while Denver filed four Out at 09:00 PM)",
+   "detail": "Original finding: the 11/16 lines were priced from the 11/15 06:15 PM injury edition; Denver filed four players Out at 09:00 PM for PHX@DEN. Resolution: the scheduled runner promoted the official 11/16 09:45 AM edition into data/raw/injuries.json at 2026-11-16T15:25Z (digest-bound, data/raw/injury_pdfs/Injury-Report_2026-11-16_09_45AM__a84e58a9*.pdf); it contains all four Denver designations (Holmes II, Nembhard, Strawther, Whitmore - Out) and the remaining 11/16 designations. Session arena/7ec9e7a3-nba1 diffed the next official edition (12:00 PM) against the promoted input on 2026-11-16 18:4xZ: zero status changes, seven ADDED rows (MEM +5, NOP +2), no Denver change (data/official/injury_diff_2026-11-16_0945AM_to_1200PM_7ec9e7a3.json). Lines stay frozen pre-tip and are not re-priced after publication - the residual rule from the original finding stands.",
    "affected": "the PHX@DEN line; every pick or parlay containing it",
    "source": "official injury PDFs, 11/15/2026 06:15 PM and 09:00 PM editions",
    "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf",
@@ -1125,8 +1125,8 @@
   {
    "id": "F123",
    "severity": "Low",
-   "title": "Sacramento's standings row was only partially read on 2026-11-16",
-   "detail": "[Renumbered from F112 at merge with main (PR #138's register already holds F112 with different content): content unchanged.] [Renumbered from F103 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] The standings page fetch returned the Sacramento Kings row split across a chunk boundary, so only its W-L (1-11, confirmed separately from the official 11/18 games page) was captured. The remaining cells - win%, GB, conference, division, home, road, neutral, OT, last-10 and streak - are recorded as null with a reason rather than inferred.",
+   "title": "RESOLVED 2026-11-16 18:2xZ - Sacramento's standings row read in full (was: partially read, null cells recorded)",
+   "detail": "Original finding: the standings fetch split Sacramento's row across a chunk boundary and only the W-L was captured. Resolution: the complete row was read first-hand from https://www.nba.com/standings on 2026-11-16 18:2xZ by session arena/7ec9e7a3-nba1: W 1, L 12, WIN% .077, GB 10.5, CONF 1-10, DIV 0-2, HOME 0-8, ROAD 1-4, Neutral 0-0, OT 0-0, LAST10 1-9, STREAK L 6. Evidence: verify/2026-11-16-7ec9e7a3/evidence_official_reads.json. The promoted standings snapshot on the site (data/official/standings_2026-11-16_0213Z_dfef26dc.json) is dated 2026-11-16T02:13Z and predates the 11/15 finals for some rows (it holds SAC 1-11); the scheduled runner refreshes it (next run 22:15Z). The horizon rows' team records were independently verified current against the official games page (every record shown matches the 18:2xZ standings read).",
    "affected": "verify/2026-11-16-c348e6c7/standings_live.json; any standings-derived figure touching SAC",
    "source": "NBA.com official standings",
    "source_url": "https://www.nba.com/standings",
@@ -1173,6 +1173,82 @@
    "suggested_action": "Grant the app pages:write (or run the PUT from an admin UI session), flip build_type=workflow, then restore the four deploy steps in pages.yml as documented in its header comment."
   },
   {
+   "id": "F128",
+   "severity": "High",
+   "title": "Per-player game-log capture skipped three of the nine official 11/15 gamebooks, while the committed log reported six games and zero problems",
+   "detail": "scripts/capture_player_logs.py mapped six games in GAME_IDS; data/official/gamebooks/ holds nine. ATLMIL, HOUWAS and OKCSAC printed 'not in GAME_IDS, skipped' and the run exited 1, but the committed data/official/player_game_logs_2026-11-15.json was written with problems: []. The R21 evidence said 'complete for the six games that finished' although data/official/results_2026-11-15.json lists nine FINAL games. Corrected by arena/fe8e2065-nba1 (COORDINATION \u00a755): the three ids were added, and each id is now checked against the official results feed (away, home, FINAL) before any parsing. All nine games pass the points check against the official final (9 of 9; 18 team totals). Minutes match the printed team total exactly in 13 of 18 teams (largest difference 3 s, published as printed).",
+   "affected": "data/official/player_game_logs_2026-11-15.json; site/pages/player-logs.html; data/content/requirements.json (R21)",
+   "source": "Official game pages re-read 2026-11-16 ~18:2xZ: ATL 113 - MIL 106 Final, HOU 147 - WAS 119 Final, OKC 125 - SAC 103 Final",
+   "source_url": "https://www.nba.com/game/atl-vs-mil-0022600243",
+   "suggested_action": "Review the corrected log and page. No further action is needed for the nine 11/15 games; later games need their own gamebooks."
+  },
+  {
+   "id": "F129",
+   "severity": "Medium",
+   "title": "Parser dropped non-appearance rows: DND rows with the jersey and name in separate cells, and NWT rows, produced no row",
+   "detail": "Found by re-reading the 11/15 gamebook text. ATL: '| 4 | Kingston Flemings | | DND - Injury/Illness - Lumbar Strain |' produced no row because the DNP branch only read a jersey and name in one cell. HOU: '| 36 Marcus Smart | | NWT - League Suspension |' was not recognised because NWT was not a non-appearance note. Both are fixed in scripts/capture_player_logs.py; both players now have played=false rows that carry the printed note. The points and minutes checks were already passing, so no published total changed.",
+   "affected": "scripts/capture_player_logs.py; data/official/player_game_logs_2026-11-15.json",
+   "source": "Official gamebook PDFs, page 1 box score (re-read 2026-11-16)",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf",
+   "suggested_action": "None beyond review. Keep the NWT and DND/DNP recognition when the parser is extended to later games."
+  },
+  {
+   "id": "F130",
+   "severity": "Medium",
+   "title": "Injury-report status conflicts with the gamebook: Dillon Mitchell and Amari Williams (DAL@BOS) are 'Available' on the 06:15 PM ET report but on the gamebook's Inactive line as 'G League - Two-Way'",
+   "detail": "Both names are on the 11/15 06:15 PM ET report with status Available. The DAL@BOS gamebook's Inactive line for the Celtics lists 'Mitchell (G League - Two-Way), Williams (G League - Two-Way)'. The gamebook reason is not an injury, and the report lists them as available, so both documents cannot describe the same status for a G League assignment. Recorded as printed: the player rows carry the gamebook reason and the report status, and the conflict is listed in the coverage section. Neither value was changed.",
+   "affected": "data/official/player_game_logs_2026-11-15.json (coverage.report_players_unexplained_by_gamebooks); site/pages/player-logs.html",
+   "source": "Injury report 11/15 06:15 PM ET (official index edition), and gamebook DAL@BOS Inactive line",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf",
+   "suggested_action": "Ask the league or the club which document governs a two-way assignment listed on the report. No change to values until answered."
+  },
+  {
+   "id": "F131",
+   "severity": "Low",
+   "title": "Name variant not reconciled: 'Christopher Cenac Jr.' (DAL@BOS, report: Available) vs 'Chris Cenac Jr.' in the gamebook box score",
+   "detail": "The gamebook box score lists 'Chris Cenac Jr.' for Dallas, who played 06:57 with 3 points. The report lists 'Cenac Jr., Christopher' as Available. The two names describe the same surname and suffix, but the official documents do not state that they are the same player, so no row was merged and the report entry is listed as unexplained.",
+   "affected": "site/pages/player-logs.html (coverage list)",
+   "source": "Gamebook DAL@BOS page 1 (statsdmz) and injury report 11/15 06:15 PM ET",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_DALBOS_book.pdf",
+   "suggested_action": "Confirm the identity from an official roster source before merging the report entry into the player row."
+  },
+  {
+   "id": "F132",
+   "severity": "Medium",
+   "title": "Spelling conflict: report 'Champagne, Justin' (HOU@WAS, Out) vs gamebook Inactive line 'Champagnie (Injury/Illness - Right Foot Surgery)' for Washington",
+   "detail": "The 11/15 06:15 PM ET report spells the name 'Champagne'. The Washington Inactive line in the gamebook spells it 'Champagnie'. The two names are not paired. The report entry is listed as unexplained. The gamebook reason is recorded on the Inactive line, and no value was changed.",
+   "affected": "site/pages/player-logs.html (coverage list)",
+   "source": "Gamebook HOU@WAS page 1 (statsdmz) and injury report 11/15 06:15 PM ET",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf",
+   "suggested_action": "Confirm the legal spelling from the league roster before pairing the two entries."
+  },
+  {
+   "id": "F133",
+   "severity": "Low",
+   "title": "Ambiguous surname: OKC@SAC report lists Jalen Williams and Jaylin Williams (both Out); the Thunder Inactive line lists 'Williams' twice with two reasons and no first names",
+   "detail": "The gamebook prints 'Williams (Injury/Illness - Left Ankle Surgery)' and 'Williams (Injury/Illness - Low Back Spasms)' on the Thunder Inactive line. It gives no first names. Pairing either report entry to either line by surname would be a guess, so neither entry was paired. Both report entries are listed as unexplained.",
+   "affected": "site/pages/player-logs.html (coverage list)",
+   "source": "Gamebook OKC@SAC page 1 (statsdmz) and injury report 11/15 06:15 PM ET",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC_book.pdf",
+   "suggested_action": "Use the official game page's player list or a dated roster to pair the two entries."
+  },
+  {
+   "id": "F134",
+   "severity": "Low",
+   "title": "Status reason differs: Marcus Smart (HOU@WAS) is 'Out' on the 06:15 PM ET report, but the gamebook prints 'NWT - League Suspension'",
+   "detail": "The report gives Smart status Out with no injury reason in the row matched by name. The gamebook prints a league suspension (NWT, not with team). Both are recorded as printed: the row carries the gamebook note, and the report status is kept in the injury-report fields. The reasons were not reconciled.",
+   "affected": "data/official/player_game_logs_2026-11-15.json (HOU@WAS row)",
+   "source": "Gamebook HOU@WAS page 1 (statsdmz) and injury report 11/15 06:15 PM ET",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf",
+   "suggested_action": "Confirm whether a league suspension should be reported as Out on the injury report."
+  },
+  {
+   "id": "F135",
+   "severity": "Medium",
+   "title": "The freshest official injury editions read this cycle (11/16 12:00 PM and 01:30 PM ET) run ahead of the promoted pipeline input (11/16 09:45 AM ET): 26 added designations and 7 status changes across the two later editions, all awaiting digest-bound runner promotion",
+   "detail": "Session arena/7ec9e7a3-nba1 retrieved two newer official editions as text on 2026-11-16: the 12:00 PM edition (18:3xZ) and the 01:30 PM edition (19:1xZ), transcribed under data/official/ with the canonical schema (revision + retrieval stamps; unreadable render cells left empty and noted). 09:45 AM -> 12:00 PM: zero status changes, seven ADDED rows (MEM +5, NOP +2) - data/official/injury_diff_2026-11-16_0945AM_to_1200PM_7ec9e7a3.json. 12:00 PM -> 01:30 PM: 49 comparable rows, SEVEN status changes (CLE Tyson Questionable->Doubtful; MEM Stewart Questionable->Out; MIA Larsson Questionable->Doubtful; MEM GG Jackson reason completed to 'Left 5th Metatarsal Fracture'; NOP Dia / Pierre Jr. / Reese Questionable->Probable, all three G League two-way) and NINETEEN ADDED rows as four previously-unfiled team blocks filed (WAS 6, BOS 1 - Queta Questionable Rest, HOU 6 incl. Smart Out - League Suspension, PHI 5 incl. LeBron James Out and Embiid Questionable) - data/official/injury_diff_2026-11-16_1200PM_to_0130PM_7ec9e7a3.json. Why the pipeline input is not updated in place: promotion into data/raw/injuries.json is digest-bound to a runner-retrieved PDF (engine/promote_official.py; F120's sandbox limitation), so these rows stay out of the promoted input until the runner's next scheduled run (22:15Z) retrieves the then-current edition. Impact until then: the picks surface's rotation-availability column understates WAS/HOU/PHI absence depth (they read NOT YET SUBMITTED at 09:45 AM) and misses the Memphis/New Orleans designations; the 01:30 PM state is published from the transcription in the Injuries banner and the transcription/diff files above. No model line is re-priced: lines are frozen pre-tip by the pre-registration rule."
+  },
+  {
    "id": "F-X01",
    "severity": "High",
    "status": "open",
@@ -1198,7 +1274,7 @@
    "id": "F-DFA-01",
    "severity": "High",
    "status": "resolved",
-   "resolved_utc": "2026-11-16T18:46:48Z",
+   "resolved_utc": "2026-11-16T18:49:05Z",
    "resolved_by": "arena/07920bdc-nba1",
    "title": "RESOLVED - three pages named three different 'newest official injury editions'",
    "detail": "Found by session arena/dfa3057f-nba1 (\u00a755) on 2026-11-16: the Injuries banner named the 11/15 09:00 PM edition, the picks page's availability columns cited 11/16 09:45 AM, and the Injuries body text said the window was priced from 11/15 06:15 AM, while the official index listed 11/16 editions through 1:00 PM ET. Resolved in \u00a756: twelve further 11/16 editions (09:15 AM through 01:15 PM ET) were captured byte-exactly from ak-static.cms.nba.com by a runner with network access and archived with their SHA-256 and retrieval timestamps; the 01:15 PM edition was transcribed twice by two independent readers and promoted; the two hard-coded 'newest' sentences on the Injuries page now read the same value as the banner. The banner shows report revision 11/16/2026 01:15 PM ET and retrieval 2026-11-16T18:25:44Z. The page still also shows a separate 'Report edition in use' banner (11/16 09:45 AM) - deliberately, because that is the edition the published availability numbers were cut from, and a line re-priced after the cut cannot be graded.",
@@ -1211,7 +1287,7 @@
    "id": "F-DFA-02",
    "severity": "Medium",
    "status": "resolved",
-   "resolved_utc": "2026-11-16T18:46:48Z",
+   "resolved_utc": "2026-11-16T18:49:05Z",
    "resolved_by": "arena/07920bdc-nba1",
    "title": "RESOLVED - test_injury_diff.py pinned a player from an older edition against the newest archived PDF",
    "detail": "The test asserted that 'Furphy, Johnny' appears in the newest archived injury PDF. He appears in the 11/15 slate's reports, so the test failed as soon as the archive rolled to an 11/16 edition that does not list him - a stale fixture, not a parser fault. It was not wired into any workflow, so no gate was affected. Fixed: the test now loads the edition the independent transcription was made from (11/15 06:15 AM) and compares every shared player row instead of one hand-picked name, skipping cleanly when those bytes are absent. scripts/test_injury_edition_crosscheck_07920bdc.py adds the regression this exposed: the independent cell reader must never recover fewer player rows than the line parser, and the seven rows the line parser dropped (F-X01) must be present in the bytes.",
@@ -1224,7 +1300,7 @@
    "id": "F-DFA-03",
    "severity": "Low",
    "status": "resolved",
-   "resolved_utc": "2026-11-16T18:46:48Z",
+   "resolved_utc": "2026-11-16T18:49:05Z",
    "resolved_by": "arena/07920bdc-nba1",
    "title": "RESOLVED - answered question A12 read as current while quoting a stale count",
    "detail": "A12 ('Does the site now produce a line for every game in the next three days?') answered 'Yes. 27 games from 2026-11-14 to 2026-11-17' under the Answered heading, while the live horizon is 29 games, 16-19 Nov. The answer was correct when written and was not re-opened, but under 'Answered' the wording read as current. The answer now opens with the date it was recorded and states the live count separately; the underlying record is unchanged.",
@@ -1237,7 +1313,7 @@
    "id": "F-DFA-04",
    "severity": "Low",
    "status": "resolved",
-   "resolved_utc": "2026-11-16T18:46:48Z",
+   "resolved_utc": "2026-11-16T18:49:05Z",
    "resolved_by": "arena/07920bdc-nba1",
    "title": "RESOLVED - flag F5 ('No archived injury reports') was out of date",
    "detail": "F5 said only the 2026-11-13 05:15 PM edition had been captured. The archive now holds 29 editions (11/15 12:45 PM through 11/16 01:15 PM ET), each content-addressed with its retrieval timestamp. F5 is retired below: its premise is false, and the grading consequence it described no longer follows from an empty archive but from F-X01 (parsed editions that are silently incomplete), which is the live item.",
@@ -1256,6 +1332,17 @@
    "source": "",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/test_refresh_gate.py",
    "suggested_action": "Add the repository root to sys.path in the test module, as scripts/test_injury_diff.py already does."
+  },
+  {
+   "id": "F-X03",
+   "severity": "High",
+   "status": "open",
+   "title": "An edition transcribed from the text render of an official PDF loses the Reason column on wrapped GSW rows and one Status",
+   "detail": "The 2026-11-16 01:30 PM edition in data/official/ was transcribed by session arena/7ec9e7a3-nba1 from the fetch_page text render of the official PDF rather than from its bytes. Diffing it against the byte-verified 01:15 PM edition (87 rows each, 85 comparable) shows 9 differences, and checking each against a fresh read of the official 01:30 PM PDF separates them: 3 are real league status changes (Dia, Malik; Pierre Jr., Jaron; Reese, Julian - all New Orleans, Questionable to Probable between 01:15 and 01:30 PM), and 6 are reading losses in the render (the Reason column is empty for Butler III, Curry, Moody, Porzingis, Santos and Williams - every Golden State row, whose table block is the one the render splits across pages - and Butler's Status is empty). The render also prints 'Champagne, Justin' and 'Mathurin, Benedict' where the official bytes print 'Champagnie' and 'Bennedict'. The 3 real upgrades are published as status changes; the 6 losses are reported as unverified and the blank values are left blank, never copied forward from the earlier edition.",
+   "affected": "data/official/injury_2026-11-16_0130PM_7ec9e7a3.json and any availability figure derived from it; the Injuries banner's 'Report revision' row counts",
+   "source": "S5",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_30PM.pdf",
+   "suggested_action": "Prefer byte-exact capture (the workflow added in \u00a756 does this) and re-transcribe 01:30 PM from the archived PDF once it is captured, before any availability input is re-cut from that edition."
   }
  ]
 }

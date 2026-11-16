@@ -253,7 +253,133 @@ def main() -> int:
     print(f"diff    -> {os.path.relpath(diff_path, ROOT)} "
           f"({len(comparable)} comparable, {len(changes)} status changes, "
           f"{len(added)} added, {len(removed)} removed)")
+    # Coherence: make sure the banner's edition and its diff are the same pair.
+    diff_newest_pair()
     return 0
+
+
+def diff_newest_pair() -> str:
+    """Diff the two newest stored editions, whoever transcribed them.
+
+    Two sessions captured 2026-11-16 editions within an hour of each other, so
+    the banner's edition and its diff could come from different sources and
+    disagree. This diffs the pair the banner actually shows, and records each
+    side's provenance, so the page is coherent and a reader can see which side
+    was read from PDF bytes and which from a text render.
+    """
+    import glob as _g
+    files = sorted(_g.glob(os.path.join(OFFICIAL, "injury_2*.json")),
+                   key=lambda p: _stamp_key(os.path.basename(p)))
+    if len(files) < 2:
+        return ""
+    prev_p, curr_p = files[-2], files[-1]
+    prev = json.load(open(prev_p, encoding="utf-8"))
+    curr = json.load(open(curr_p, encoding="utf-8"))
+    prev_stamp = file_stamp(_label_from_edition_file(prev_p))
+    curr_stamp = file_stamp(_label_from_edition_file(curr_p))
+    out_path = os.path.join(
+        OFFICIAL, f"injury_diff_{prev_stamp}_to_{curr_stamp}_07920bdc.json")
+    if os.path.exists(out_path):
+        return out_path
+
+    def key(r):
+        return (r.get("matchup"), r.get("team"),
+                r.get("player") or "<team block>")
+
+    prev_rows = {key(r): r for r in prev["rows"]}
+    curr_rows = {key(r): r for r in curr["rows"]}
+    comparable = sorted(set(prev_rows) & set(curr_rows))
+    added = sorted(set(curr_rows) - set(prev_rows))
+    removed = sorted(set(prev_rows) - set(curr_rows))
+    changes = []
+    for k in comparable:
+        a, b = prev_rows[k], curr_rows[k]
+        if (a.get("status"), a.get("reason")) != (b.get("status"), b.get("reason")):
+            changes.append({"matchup": k[0], "team": k[1], "player": k[2],
+                            "from_status": a.get("status"),
+                            "to_status": b.get("status"),
+                            "from_reason": a.get("reason"),
+                            "to_reason": b.get("reason")})
+    unverified = [k for k in comparable
+                  if not (curr_rows[k].get("status") or "").strip()
+                  and (prev_rows[k].get("status") or "").strip()]
+    diff = {
+        "title": ("Consecutive-edition injury diff: %s -> %s"
+                  % (prev.get("edition"), curr.get("edition"))),
+        "from_edition": {"edition_id": os.path.basename(prev_p),
+                         "revision": prev.get("revision_time_et"),
+                         "source_url": prev.get("source_url"),
+                         "transcribed_by": prev.get("captured_by"),
+                         "provenance": prev.get("provenance_limit")
+                         or prev.get("extraction", {}).get("primary")
+                         or "not stated"},
+        "to_edition": {"edition_id": os.path.basename(curr_p),
+                       "revision": curr.get("revision_time_et"),
+                       "source_url": curr.get("source_url"),
+                       "transcribed_by": curr.get("captured_by"),
+                       "provenance": curr.get("provenance_limit")
+                       or curr.get("extraction", {}).get("primary")
+                       or "not stated"},
+        "computed_by": SESSION,
+        "computed_utc": datetime.datetime.now(
+            datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "method": ("Row-by-row comparison of two consecutive official editions "
+                   "keyed on (matchup, team, player). The two sides were "
+                   "transcribed by different sessions by different methods, and "
+                   "each side's provenance is recorded, so a difference is not "
+                   "silently attributed to the league. Nothing is inferred."),
+        "counts": {"previous_rows": len(prev_rows), "current_rows": len(curr_rows),
+                   "comparable_rows": len(comparable),
+                   "status_changes": len(changes),
+                   "rows_added": len(added), "rows_removed": len(removed)},
+        "status_changes": changes,
+        "rows_added": [{"matchup": k[0], "team": k[1],
+                        "player": "" if k[2] == "<team block>" else k[2],
+                        "status": curr_rows[k].get("status"),
+                        "reason": curr_rows[k].get("reason")} for k in added],
+        "rows_removed": [{"matchup": k[0], "team": k[1],
+                          "player": "" if k[2] == "<team block>" else k[2],
+                          "status": prev_rows[k].get("status"),
+                          "reason": prev_rows[k].get("reason")} for k in removed],
+        "caveats": [
+            "The two sides were transcribed by different methods: %s (from: %s) "
+            "and %s (to: %s). A difference between them is reported, never "
+            "resolved by choosing a side."
+            % (prev.get("captured_by"), os.path.basename(prev_p),
+               curr.get("captured_by"), os.path.basename(curr_p)),
+            "%d row(s) carry a status in the earlier edition and none in the "
+            "later one (%s). That is a reading gap in the later transcription, "
+            "not a status change: the value is left blank and flagged, never "
+            "copied forward (flag F-X03)."
+            % (len(unverified),
+               ", ".join(sorted(k[2] for k in unverified)) or "none"),
+        ],
+    }
+    with open(out_path, "w", encoding="utf-8") as fh:
+        json.dump(diff, fh, indent=1)
+        fh.write("\n")
+    print("diff    -> %s (%d comparable, %d status changes, %d unverified)"
+          % (os.path.relpath(out_path, ROOT), len(comparable), len(changes),
+             len(unverified)))
+    return out_path
+
+
+def _stamp_key(name: str):
+    m = re.search(r"_(\d{4})-(\d{2})-(\d{2})_(\d{2})[_-]?(\d{2})\s*(AM|PM)",
+                  name, re.I)
+    if not m:
+        return (0, 0, 0, 0, 0)
+    y, mo, d, hh, mm, ap = m.groups()
+    return (int(y), int(mo), int(d),
+            int(hh) % 12 + (12 if ap.upper() == "PM" else 0), int(mm))
+
+
+def _label_from_edition_file(path: str) -> str:
+    """injury_2026-11-16_0115PM_07920bdc.json -> Injury-Report_2026-11-16_01_15PM"""
+    m = re.search(r"(\d{4})-(\d{2})-(\d{2})_(\d{2})(\d{2})(AM|PM)",
+                  os.path.basename(path))
+    y, mo, d, hh, mm, ap = m.groups()
+    return f"Injury-Report_{y}-{mo}-{d}_{hh}_{mm}{ap}"
 
 
 if __name__ == "__main__":

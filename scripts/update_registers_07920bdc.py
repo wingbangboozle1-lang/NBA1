@@ -33,6 +33,40 @@ GH_BLOB = "https://github.com/wingbangboozle1-lang/NBA1/blob/main/"
 
 NEW_FLAGS = [
     {
+        "id": "F-X03",
+        "severity": "High",
+        "status": "open",
+        "title": ("An edition transcribed from the text render of an official PDF "
+                  "loses the Reason column on wrapped GSW rows and one Status"),
+        "detail": (
+            "The 2026-11-16 01:30 PM edition in data/official/ was transcribed by "
+            "session arena/7ec9e7a3-nba1 from the fetch_page text render of the "
+            "official PDF rather than from its bytes. Diffing it against the "
+            "byte-verified 01:15 PM edition (87 rows each, 85 comparable) shows 9 "
+            "differences, and checking each against a fresh read of the official "
+            "01:30 PM PDF separates them: 3 are real league status changes (Dia, "
+            "Malik; Pierre Jr., Jaron; Reese, Julian - all New Orleans, Questionable "
+            "to Probable between 01:15 and 01:30 PM), and 6 are reading losses in the "
+            "render (the Reason column is empty for Butler III, Curry, Moody, "
+            "Porzingis, Santos and Williams - every Golden State row, whose table "
+            "block is the one the render splits across pages - and Butler's Status is "
+            "empty). The render also prints 'Champagne, Justin' and 'Mathurin, "
+            "Benedict' where the official bytes print 'Champagnie' and 'Bennedict'. "
+            "The 3 real upgrades are published as status changes; the 6 losses are "
+            "reported as unverified and the blank values are left blank, never copied "
+            "forward from the earlier edition."),
+        "affected": ("data/official/injury_2026-11-16_0130PM_7ec9e7a3.json and any "
+                     "availability figure derived from it; the Injuries banner's "
+                     "'Report revision' row counts"),
+        "source": "S5",
+        "source_url": ("https://ak-static.cms.nba.com/referee/injury/"
+                       "Injury-Report_2026-11-16_01_30PM.pdf"),
+        "suggested_action": ("Prefer byte-exact capture (the workflow added in §56 "
+                             "does this) and re-transcribe 01:30 PM from the archived "
+                             "PDF once it is captured, before any availability input "
+                             "is re-cut from that edition."),
+    },
+    {
         "id": "F-X01",
         "severity": "High",
         "status": "open",
@@ -220,12 +254,18 @@ def main() -> int:
     items = flagged["items"]
     by_id = {f["id"]: f for f in items}
 
+    # Additive only. The register is append-only and another session may have
+    # landed the same id in the meantime: theirs stands, mine is not re-written
+    # over it. A flag id this session already owns is left untouched.
+    added = []
     for new in NEW_FLAGS:
         if new["id"] in by_id:
-            by_id[new["id"]].update({k: v for k, v in new.items() if k != "id"})
-        else:
-            items.append(new)
-            by_id[new["id"]] = new
+            print("  keep existing %s (another session's text is not "
+                  "overwritten)" % new["id"])
+            continue
+        items.append(new)
+        by_id[new["id"]] = new
+        added.append(new["id"])
 
     # Retire F5 in place (append-only: the original text is kept, the retirement
     # is recorded on top of it and made visible in the title).
@@ -249,7 +289,8 @@ def main() -> int:
     with open(FLAGGED, "w", encoding="utf-8") as fh:
         json.dump(flagged, fh, indent=1)
         fh.write("\n")
-    print("flagged.json: %d items" % len(items))
+    print("flagged.json: %d items, %d added by this session: %s"
+          % (len(items), len(added), ", ".join(added) or "none"))
 
     with open(QUESTIONS, encoding="utf-8") as fh:
         qs = json.load(fh)
