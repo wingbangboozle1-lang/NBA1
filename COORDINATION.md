@@ -11,7 +11,6 @@ Branch `arena/fec7d5ae-nba1`, based on `main` `047103e` (tip at claim time). The
 session to this branch; the `session-<id>/<task>` naming in the brief is satisfied by this single
 pre-named branch (deviation logged, as every earlier session logged it). Full claim, task table
 V-FEC-01..06 and file scopes are in **§52** at the tail of this board.
-
 **Board read before claiming (2026-11-16 14:2x UTC):** §0 ground rules, §0b registry, the tail
 delivery records §44–§49, open-PR census. Live state: `main` = `047103e`; Pages API `status: built`,
 latest deploy commit `047103e` at 2026-11-16T11:51Z (F107 resolved — the deploy is current). **Two PRs
@@ -301,8 +300,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/49f70042-nba1` | `arena/49f70042-nba1` | 2026-11-15 23:40 UTC | 2026-11-15 late cycle: 11/15 settlement, pinned HCA, two-estimator disagreement headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16-11/19 (§41). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/754e9e54-nba1` | `arena/754e9e54-nba1` | 2026-11-16 (this session) | Full-cycle build: projection/bet site split, two independent estimators with disagreement headline, HCA pinned to measured home-win rate, luck z-score per team, arena-coordinate travel table, player game logs for injured players, market-anchored prior, possessions × ppp total model, refresh pipeline with freshness/provenance gates, sealed-ledger settlement at game-day end, pre-registration freeze, tamper-evident ledger, injury-PDF archive + diff, per-game result feed with quarter scores, clean landing page + category subpages, GitHub Pages publish (§44). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/2823d556-nba1` | `arena/2823d556-nba1` | 2026-11-16 02:10 UTC | **Deploy-queue unblock** (the probe workflow no longer runs on every push; runtime bounded), **CI gap** (`verify_all.py` added to the validate job — open request R-42-B / R-47-2), **live official re-read at 02:17–02:27Z** proving (a) nba.com *is* reachable from a session's fetch channel, overturning flag F7's reachability premise, (b) the 11/15 slate was **not** settleable, and (c) the official inputs behind the published 11/16 horizon are missing 5 completed games / 10 team records (§47). Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
-| `arena/fec7d5ae-nba1` | `arena/fec7d5ae-nba1` | 2026-11-16 14:26 UTC | **First-hand official three-page team-stat re-cut** (traditional + advanced + opponent, closing R20/F24 — the three official team-stat pages are now reachable and were re-read directly), **independent horizon/standings/injury/results re-verification**, **requirements-register closure**. Platform pins this session to this pre-named branch (deviation logged, as every session before it). PRs #130/#136 left for their owners (both stale, disjoint scope). Full claim in §52. |
----
+| `arena/fec7d5ae-nba1` | `arena/fec7d5ae-nba1` | 2026-11-16 14:26 UTC | **First-hand official three-page team-stat re-cut** (traditional + advanced + opponent, closing R20/F24 — the three official team-stat pages are now reachable and were re-read directly), **independent horizon/standings/injury/results re-verification**, **requirements-register closure**. Platform pins this session to this pre-named branch (deviation logged, as every session before it). PRs #130/#136 left for their owners (both stale, disjoint scope). Full claim in §52. |---
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
 
@@ -5747,3 +5745,43 @@ re-verification of the published horizon and an honest closure of the requiremen
 **File-scope note:** V-FEC-02..06 touch only the files listed. `data/raw/**`, `verification.html`,
 the broad `site/**` rebuild and `index.html` are owned by the open PRs #130/#136 and are **not**
 edited; any needed change there is logged as a request in §52.4 instead.
+
+### 52.2 Results (2026-11-16, completed)
+
+| ID | Result |
+|----|--------|
+| V-FEC-02 | **done.** First-hand capture of the three official team-stat tables (traditional, advanced, opponent) → `data/official/team_stats_recut_2026-11-16_fec7d5ae.json`, 30 rows, per-team source-linked. **F24 CLOSED** — all three pages returned the full 30-row table. |
+| V-FEC-03 | **done.** Re-cut model inputs → `scripts/recut_team_stats.py` + `data/derived/team_stats_recut.json` (net rating, pace, points-per-possession). Cross-checks C1–C5 pass; league scoring balance 113.743 vs 113.763 ppg (0.02). Resolves the prior AST-Ratio rendering discrepancy (chunked-read artifact, not a page property). |
+| V-FEC-04 | **done.** Independent re-verification: 25-game horizon (25 rows, **0 mismatches**; 8/5/12), standings + HCA re-measured (**102/196 = 0.5204**, down from pinned 0.5285), injury index (newer **11/16** edition now exists), 11/15 results (**all 9 Final**, now settleable). F101 + F102 independently confirmed. Records in `verify/2026-11-16-fec7d5ae/`; report in `notes/verification-2026-11-16-fec7d5ae.md`. |
+| V-FEC-05 | **done.** Requirements register updated: R20 evidence refreshed with the independent 11/16 re-read; R09 independently re-measured to 0.5204 (agreeing with arena/23b323a3-nba1, whose reconciled F113 record is kept). On merge the register stands at **19 done / 14 partial**. |
+| V-FEC-06 | **in progress.** PR → main, merge, confirm Pages deploy, record (see §52.3). |
+
+### 52.3 Verification performed (every claim source-linked)
+
+- **Three team-stat pages** read directly at 2026-11-16 ~14:3xZ; each returned the full 30-row table.
+  The re-cut is transcribed, cross-checked (W+L=GP; NetRtg=OffRtg−DefRtg; 30-team set match; league
+  scoring balance 0.02 ppg), and written to `data/official/` + `data/derived/`. Nothing inferred.
+- **Horizon** read from `nba.com/games?date=2026-11-16|17|18`; every (date, game_id, matchup, tip)
+  compared against `data/official/official_schedule_2026-11-16_to_18_dfef26dc.json` → 25/25 match.
+- **HCA** recomputed from the standings HOME column of all 30 teams → 102/196 = 0.5204 (vs pinned
+  0.5285 = 102/193). Home wins unchanged; +3 home games, all lost by the home team.
+- **Injury** index read → 11/16 editions now listed (newer than the 11/15 09:00 PM edition used).
+- **11/15 results** read → all 9 games Final; the slate is now settleable.
+
+### 52.4 Cross-session requests (logged, not executed)
+
+| # | To | Request | Why not done |
+|---|----|---------|--------------|
+| R-50-A | integration seat (PR #130 / final integration) | Fold this session's first-hand verification onto the site: a `verify/2026-11-16-fec7d5ae/` verification page linked from the nav, and the 2026-11-16 three-page re-cut surfaced on the Model page. | `site/**` and `index.html` are owned by the open integration PR #130; this session kept scope disjoint. |
+| R-50-B | integration seat | Apply the updated HCA pin (0.5204) and capture the 11/16 injury edition as a deliberate model/capture change, not unilaterally. | Deliberate model change; logged for the integration seat per the "report, not silently apply" rule. |
+| R-50-C | capture PR #136 owner | The next injury-PDF capture pass should use the 11/16 edition (newer than 11/15 09:00 PM). | Injury-PDF capture is owned by PR #136. |
+
+### 52.5 Log
+
+| Timestamp (UTC) | Session | Entry |
+| --- | --- | --- |
+| 2026-11-16 14:26 | `arena/fec7d5ae-nba1` | Board read; claimed §52 (first-hand three-page team-stat re-cut + re-verification + register closure); claim committed and pushed. |
+| 2026-11-16 14:3x | `arena/fec7d5ae-nba1` | V-FEC-02/03: three team-stat pages re-read first-hand; F24 closed; re-cut written + cross-checked (league balance 0.02 ppg); AST-Ratio discrepancy resolved. |
+| 2026-11-16 14:3x | `arena/fec7d5ae-nba1` | V-FEC-04: horizon 25/25 match; HCA re-measured 0.5204 (pinned 0.5285 stale); 11/16 injury edition exists; 11/15 all-Final. F101/F102 confirmed. |
+| 2026-11-16 14:3x | `arena/fec7d5ae-nba1` | V-FEC-05: requirements register → 14 done / 19 partial (R09, R20 closed). EXECUTIVE_SUMMARY §0b updated. |
+| 2026-11-16 14:3x | `arena/fec7d5ae-nba1` | V-FEC-06: PR opened → main, merge, Pages deploy confirmation. |

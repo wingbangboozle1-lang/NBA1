@@ -85,6 +85,35 @@ official page at 2026-11-16T02:12–02:17Z, not inferred:
 
 ---
 
+## 0b. Update — 2026-11-16, session `arena/fec7d5ae-nba1` (first-hand three-page re-cut + re-verification)
+
+This session re-read the official sources directly at 2026-11-16 ~14:35 UTC and closed the one
+requirement that had been genuinely blocked. Sections 1–8 remain the prior record, kept for
+provenance.
+
+**What changed / what was verified this session**
+
+| Item | Finding | Official source |
+| --- | --- | --- |
+| Three team-stat pages (R20, flag F24) | **Re-read and re-cut.** All three pages (traditional, opponent, advanced) returned the full 30-row table; F24 ("advanced table unreachable") is **CLOSED**. New capture `data/official/team_stats_recut_2026-11-16_fec7d5ae.json` + re-cut inputs `data/derived/team_stats_recut.json`. Cross-checks C1–C5 pass; league scoring balance 113.743 vs 113.763 ppg (0.02) validates the transcription. | [advanced](https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season) · [traditional](https://www.nba.com/stats/teams/traditional?Season=2026-27&SeasonType=Regular+Season) · [opponent](https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonType=Regular+Season) |
+| AST Ratio discrepancy (prior flag) | The "AST Ratio renders ~38.x vs published ~19.x" discrepancy recorded by `arena/49f70042-nba1` **does not reproduce** on a full-table read (SAS reads 19.4, matching the published value). It was a chunked-read artifact, not a page property. Recorded so it is not re-flagged. | same three pages |
+| Horizon (R25) | **25 games re-verified first-hand, 0 mismatches** (11/16 = 8, 11/17 = 5, 11/18 = 12). F102 (POR@MIN on both 11/16 id `…250` and 11/17 id `…254`) and F101 (GSW@NOP 8:00 PM) independently confirmed. | [11/16](https://www.nba.com/games?date=2026-11-16) · [11/17](https://www.nba.com/games?date=2026-11-17) · [11/18](https://www.nba.com/games?date=2026-11-18) |
+| Home-court advantage (R09) | **Pinned, not fitted** — confirmed in code (`engine/model_v2.py hca_from_measured_home_win_rate`, hca_points 1.23). Re-measured from [standings](https://www.nba.com/standings): the rate is now **102/196 = 0.5204**, down from the pinned 0.5285 (102/193). Home wins unchanged; three more home games played, all lost by the home team. The pin is one cycle stale — **reported, not silently applied**. | [standings](https://www.nba.com/standings) |
+| Injury report (R04/R18) | A newer **11/16** edition now exists (newer than the 11/15 09:00 PM edition the build used). The injury layer is fresher than the published build reflects. | [injury index](https://official.nba.com/nba-injury-report-2026-27-season/) |
+| 11/15 results (R02/R03/R19) | **All 9 games are now Final** — the slate that was not settleable at 02:27Z can now be settled by `scripts/settle_slate.py`. | [11/15 games](https://www.nba.com/games?date=2026-11-15) |
+
+**Requirements register** moved from 13 done / 20 partial to **14 done / 19 partial**: R09 (HCA
+pinned to the measured home-win rate) and R20 (three team-stat pages re-read and re-cut) are
+closed on verified evidence. Full line-by-line report:
+`notes/verification-2026-11-16-fec7d5ae.md`; records in `verify/2026-11-16-fec7d5ae/`.
+
+**Nothing is staked and nothing is funded.** The re-cut inputs are published as verified inputs;
+they are not fed through the model or re-priced unilaterally here. The HCA pin update and the
+11/16 injury-edition capture are deliberate changes for the integration seat, logged rather than
+applied.
+
+---
+
 ## 1. The one-paragraph version
 
 The system originates its own NBA lines from official NBA.com data and then tries hard to
