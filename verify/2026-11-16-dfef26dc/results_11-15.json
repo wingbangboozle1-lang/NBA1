@@ -1,0 +1,147 @@
+{
+ "title": "Official per-game results feed - 2026-11-15 (slate in progress at retrieval time)",
+ "captured_by": "arena/dfef26dc-nba1",
+ "retrieved_utc": "2026-11-16T02:12Z..02:17Z",
+ "rule": "A row is settleable only when the official page prints Final. In-progress rows keep their live score visible but carry settleable=false and null final fields. Quarter scores are NOT filled in here because they were not read from the official box score in this pass - they are left null and flagged rather than inferred.",
+ "columns": [
+  "date",
+  "game_id",
+  "away",
+  "home",
+  "status",
+  "away_pts",
+  "home_pts",
+  "away_pts_live",
+  "home_pts_live",
+  "settleable",
+  "official_url"
+ ],
+ "rows": [
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600236",
+   "away": "IND",
+   "home": "PHI",
+   "status": "FINAL",
+   "away_pts": 124,
+   "home_pts": 131,
+   "away_pts_live": 124,
+   "home_pts_live": 131,
+   "settleable": true,
+   "official_url": "https://www.nba.com/game/ind-vs-phi-0022600236"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600237",
+   "away": "LAL",
+   "home": "PHX",
+   "status": "FINAL",
+   "away_pts": 131,
+   "home_pts": 123,
+   "away_pts_live": 131,
+   "home_pts_live": 123,
+   "settleable": true,
+   "official_url": "https://www.nba.com/game/lal-vs-phx-0022600237"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600238",
+   "away": "CHA",
+   "home": "LAC",
+   "status": "FINAL",
+   "away_pts": 105,
+   "home_pts": 113,
+   "away_pts_live": 105,
+   "home_pts_live": 113,
+   "settleable": true,
+   "official_url": "https://www.nba.com/game/cha-vs-lac-0022600238"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600239",
+   "away": "SAS",
+   "home": "UTA",
+   "status": "FINAL",
+   "away_pts": 110,
+   "home_pts": 102,
+   "away_pts_live": 110,
+   "home_pts_live": 102,
+   "settleable": true,
+   "official_url": "https://www.nba.com/game/sas-vs-uta-0022600239"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600240",
+   "away": "DAL",
+   "home": "BOS",
+   "status": "FINAL",
+   "away_pts": 94,
+   "home_pts": 131,
+   "away_pts_live": 94,
+   "home_pts_live": 131,
+   "settleable": true,
+   "official_url": "https://www.nba.com/game/dal-vs-bos-0022600240"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600241",
+   "away": "NYK",
+   "home": "TOR",
+   "status": "FINAL/OT",
+   "away_pts": 112,
+   "home_pts": 108,
+   "away_pts_live": 112,
+   "home_pts_live": 108,
+   "settleable": true,
+   "official_url": "https://www.nba.com/game/nyk-vs-tor-0022600241"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600242",
+   "away": "HOU",
+   "home": "WAS",
+   "status": "IN PROGRESS (Q4 5:48)",
+   "away_pts": null,
+   "home_pts": null,
+   "away_pts_live": 132,
+   "home_pts_live": 101,
+   "settleable": false,
+   "official_url": "https://www.nba.com/game/hou-vs-was-0022600242"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600243",
+   "away": "ATL",
+   "home": "MIL",
+   "status": "IN PROGRESS (Half)",
+   "away_pts": null,
+   "home_pts": null,
+   "away_pts_live": 55,
+   "home_pts_live": 53,
+   "settleable": false,
+   "official_url": "https://www.nba.com/game/atl-vs-mil-0022600243"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600244",
+   "away": "OKC",
+   "home": "SAC",
+   "status": "IN PROGRESS (Q1 8:41)",
+   "away_pts": null,
+   "home_pts": null,
+   "away_pts_live": 13,
+   "home_pts_live": 4,
+   "settleable": false,
+   "official_url": "https://www.nba.com/game/okc-vs-sac-0022600244"
+  }
+ ],
+ "counts": {
+  "final": 6,
+  "in_progress": 3,
+  "total": 9
+ },
+ "sources": {
+  "games_page": "https://www.nba.com/games?date=2026-11-15",
+  "schedule_strip": "https://www.nba.com/game/por-vs-min-0022600254"
+ }
+}
