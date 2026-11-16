@@ -6251,3 +6251,30 @@ game's `availability_rows` (Out/Questionable) sourced from the official injury r
 this session edits only `scripts/build_horizon_page.py`, the generated `picks.html`, the requirements register, and
 this board section. Every row keeps its official-source link; any value that cannot be confirmed stays blank and
 flagged, never inferred.
+
+### 56.2 Results (2026-11-16, completed)
+
+| ID | Result |
+|----|--------|
+| S56-02 | **done (R13).** `scripts/build_horizon_page.py` section A now leads with a **Disagreement (A vs B)** column — `\|estimator A spread − estimator B spread\|` — and prints both spreads underneath it, **not blended**. Estimator A = `data/derived/horizon_lines.json` `line_spread_home` (`scripts/originate_horizon.py`); estimator B = `docs/data/lines.json` `model_spread_home` (`engine/pipeline.py`). Join on (date, matchup) **verified 29/29 games**; where estimator B has no row the cell is blank + flagged (`— no B line`), never inferred. |
+| S56-03 | **done (R15).** A dedicated **Rotation (Out/Q)** column was added to table A: Out and Questionable counts per game from each game's `availability_rows` in the official injury report (`data/official/injury_2026-11-15_0900PM_dfef26dc.json`); a game with none prints `clean`. |
+| S56-04 | **done.** The horizon window label is now **derived from the data** (`window_label()`) in the nav, top-note, h1 and metric label — it reads **16–19 Nov** (the actual rolled window) instead of the hardcoded, stale **15–18 Nov**. |
+| S56-05 | **done.** `picks.html` rebuilt (29 line rows, 62 availability rows). Gate battery green on the final tree: `check_site` OK (picks.html 154 rows, every row source-linked); `check_links` PASS (0 broken, 0 ragged); `verify_all` VERIFY OK (0 failures); `verify_integration` PASSED (0 errors, 44 published warnings); `verify_ledger` chain OK. |
+| S56-06 | **done.** Requirements register updated: **R13 → done**, **R15 → done** (legacy-surface gaps closed); **R30** evidence extended. Register now **21 done / 12 partial**. |
+
+### 56.3 Irregularities found and fixed (recorded as flags F128–F130, non-blocking)
+
+Line-by-line review of the legacy Lines & Picks builder found three stale-provenance/label defects, all **fixed** and recorded on the Flagged for Review page:
+
+- **F128** — the page's horizon window label was hardcoded "15–18 Nov" while the data was the rolled 16–19 Nov window. Fixed: label now derived from the capture.
+- **F129** — the method/provenance section linked the 11/15 schedule capture and printed "34 games" while the lines used the 11/16 capture (29 games). Fixed: link, count and capture date now read from the input metadata.
+- **F130** — the page cited the "11/15 06:15 AM ET" injury edition in its notice, section E header, method line and inherited flag F-C03, but the input actually used was the **11/15 09:00 PM ET** edition. Fixed: edition, revision time, retrieval time and PDF link now read from the injury input's metadata; section E renders the current horizon's availability rows and is conditional on their presence.
+
+No value was inferred; every fix derives from the input files' own metadata.
+
+### 56.4 Sources (every row keeps its official link)
+
+- Estimator A spreads: `data/derived/horizon_lines.json` (from the three official team-stat pages, nba.com/stats/teams/{traditional,advanced,opponent}).
+- Estimator B spreads: `docs/data/lines.json` (from `engine/pipeline.py`, official inputs).
+- Rotation statuses: `data/official/injury_2026-11-15_0900PM_dfef26dc.json` → official PDF `https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf`.
+- Schedule: `data/raw/official_schedule_capture_2026-11-16.json` → `https://www.nba.com/schedule`.

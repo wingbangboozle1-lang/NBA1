@@ -212,13 +212,17 @@
   {
    "id": "R13",
    "requirement": "Stop publishing a single blended rating as the headline; publish the disagreement as the headline and the blend underneath.",
-   "status": "partial",
-   "evidence": "Not found. The site headline was not verified to be a disagreement measure. Updated 2026-11-16 by session arena/161f1638-nba1. site/pages/roll.html leads with the disagreement column (mean |delta| 4.69 pts) and prints both spreads underneath it; the two are NOT blended, because averaging two models whose errors have not been measured against each other would hide the signal.",
-   "gap": "Only the new rolling-slate page is built this way. The legacy Lines & Picks surface still leads with a single model's line and carries the disagreement only as flag F26.",
+   "status": "done",
+   "evidence": "Two published surfaces now lead with the disagreement, not a blended rating. site/pages/roll.html leads with the disagreement column and prints both spreads underneath it. This session (arena/cdc6c39d-nba1, 2026-11-16) closed the legacy gap: the root Lines & Picks page (picks.html, built by scripts/build_horizon_page.py) section A now leads with a 'Disagreement (A vs B)' column — |estimator A spread − estimator B spread| — computed at render time by joining data/derived/horizon_lines.json (estimator A = scripts/originate_horizon.py) with docs/data/lines.json (estimator B = engine/pipeline.py); the join matched 29/29 games. The two spreads are printed underneath the disagreement, never blended.",
+   "gap": "Closed 2026-11-16: the legacy Lines & Picks surface now leads with the disagreement as the headline (it previously led with a single model's line and carried the disagreement only as flag F26). F26 (choosing between the two estimators) remains an open decision, not a gap in this requirement.",
    "links": [
     {
-     "label": "Index page (repo)",
-     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/index.html"
+     "label": "Lines & Picks page (repo)",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/picks.html"
+    },
+    {
+     "label": "Builder (repo)",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/build_horizon_page.py"
     }
    ]
   },
@@ -242,13 +246,13 @@
   {
    "id": "R15",
    "requirement": "Put rotation availability on the picks page as its own column.",
-   "status": "partial",
-   "evidence": "The picks table headers are Home injury status and Away injury status. No rotation-availability column exists. Updated 2026-11-16 by session arena/161f1638-nba1. site/pages/roll.html carries a rotation-availability column built from the official injury report: Out / Questionable counts per game plus the count of club blocks still filed as NOT YET SUBMITTED.",
-   "gap": "The legacy Lines & Picks page still has no such column. See F83.",
+   "status": "done",
+   "evidence": "Rotation availability now appears as its own column on both picks surfaces. site/pages/roll.html carries a rotation-availability column. This session (arena/cdc6c39d-nba1, 2026-11-16) closed the legacy gap: the root Lines & Picks page (picks.html, scripts/build_horizon_page.py) table A now has a dedicated 'Rotation (Out/Q)' column with Out and Questionable counts per game, computed from each game's availability_rows in the official injury report (data/official/injury_2026-11-15_0900PM_dfef26dc.json).",
+   "gap": "Closed 2026-11-16: the legacy Lines & Picks page now has the rotation-availability column (previously F83). Counts come from the official injury report; a game with no listed Out/Questionable prints 'clean'.",
    "links": [
     {
-     "label": "Picks page (repo)",
-     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/site/pages/picks.html"
+     "label": "Lines & Picks page (repo)",
+     "url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/picks.html"
     }
    ]
   },
@@ -318,7 +322,7 @@
    "status": "done",
    "evidence": "data/official/teams_traditional_2026-11-15.json, teams_opponent_2026-11-15.json and teams_advanced_2026-11-15.json each hold 30 rows with source_url and retrieved_utc. Model input files were re-cut from them (as stated in PR #106; the files are present in this tree). Updated 2026-11-16 by session arena/161f1638-nba1. The re-read was also APPLIED, not just stored: scripts/recut_model_inputs.py re-cut data/teams_advanced_2026_27.json and data/teams_scoring_2026_27.json from the three 2026-11-15_2345Z captures. The diff against the previous cut was PHI and IND only - the two teams in the one Final game since - which is exactly the expected change and confirms nothing else moved.",
    "gap": "Re-read 11/15 and independently re-read 11/16 by session arena/fec7d5ae-nba1. The next re-read depends on R01.",
-  "evidence_2026_11_16_fec7d5ae": "Independent first-hand re-read of all three pages on 2026-11-16 ~14:3xZ (every page returned the full 30-row table; flag F24 CLOSED). Produced data/official/team_stats_recut_2026-11-16_fec7d5ae.json (verbatim 30-team capture, per-team source-linked) and data/derived/team_stats_recut.json (re-cut model inputs: net rating, pace, points per possession). Cross-checks C1-C5 all pass; league scoring balance 113.743 vs 113.763 ppg (0.02 gap) validates the transcription. Resolves the AST Ratio rendering discrepancy flagged by arena/49f70042-nba1: the column renders correctly on a full-table read (e.g. SAS 19.4), so that discrepancy was a chunked-read artifact, not a page property. See scripts/recut_team_stats.py and notes/verification-2026-11-16-fec7d5ae.md.",
+   "evidence_2026_11_16_fec7d5ae": "Independent first-hand re-read of all three pages on 2026-11-16 ~14:3xZ (every page returned the full 30-row table; flag F24 CLOSED). Produced data/official/team_stats_recut_2026-11-16_fec7d5ae.json (verbatim 30-team capture, per-team source-linked) and data/derived/team_stats_recut.json (re-cut model inputs: net rating, pace, points per possession). Cross-checks C1-C5 all pass; league scoring balance 113.743 vs 113.763 ppg (0.02 gap) validates the transcription. Resolves the AST Ratio rendering discrepancy flagged by arena/49f70042-nba1: the column renders correctly on a full-table read (e.g. SAS 19.4), so that discrepancy was a chunked-read artifact, not a page property. See scripts/recut_team_stats.py and notes/verification-2026-11-16-fec7d5ae.md.",
    "links": [
     {
      "label": "Team advanced (NBA.com)",
@@ -479,8 +483,8 @@
    "id": "R30",
    "requirement": "Line-by-line repository review with flagged irregularities and links for manual review.",
    "status": "partial",
-   "evidence": "REPO_REVIEW.md, the Repo Review page and the Flagged for Review register (data/content/flagged.json). Updated 2026-11-16 by session arena/161f1638-nba1. This session added flags F94-F96 and resolved F71 and F72.",
-   "gap": "Not every line was reviewed in this session. This session added flags F78–F91.",
+   "evidence": "REPO_REVIEW.md, the Repo Review page and the Flagged for Review register (data/content/flagged.json). Updated 2026-11-16 by session arena/161f1638-nba1. This session added flags F94-F96 and resolved F71 and F72. This session (arena/cdc6c39d-nba1, 2026-11-16) reviewed the legacy Lines & Picks builder line by line and found and fixed three stale-provenance/label irregularities, recorded as flags F128 (stale window label), F129 (stale schedule-capture reference) and F130 (stale injury-edition reference) in data/content/flagged.json.",
+   "gap": "Not every line of the whole repository was reviewed in this session; this session reviewed the legacy Lines & Picks surface line by line and added flags F128–F130.",
    "links": [
     {
      "label": "Flagged for Review (repo)",

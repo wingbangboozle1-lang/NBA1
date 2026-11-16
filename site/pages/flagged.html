@@ -1220,6 +1220,33 @@
 <td>Grant the app pages:write (or run the PUT from an admin UI session), flip build_type=workflow, then restore the four deploy steps in pages.yml as documented in its header comment.</td>
 <td class="src"><span class="na" title="source id GitHub REST API response captured in session log; GET /repos/.../pages shows build_type=legacy is not in the register">&mdash;</span></td>
 </tr>
+<tr>
+<td>F128</td>
+<td>Medium</td>
+<td><b>Stale date-window label on the legacy Lines &amp; Picks page (hardcoded 15–18 Nov while the data was the 16–19 Nov window)</b></td>
+<td>Line-by-line review (session arena/cdc6c39d-nba1, 2026-11-16) found the root picks.html builder (scripts/build_horizon_page.py) hardcoded the horizon window as '15–18 Nov' in the nav, top-note, h1 and metric label, while the underlying data/derived/horizon_lines.json was already the rolled 16–19 Nov, 29-game window (§54). FIXED: the window label is now derived from the games in the capture (window_label()), so the page label always matches the data. No value was inferred.</td>
+<td>Root picks.html (Lines &amp; Picks) window label</td>
+<td>None — fixed. Re-verify on each horizon roll that the label follows the data.</td>
+<td class="src"><span class="na" title="source id repo:scripts/build_horizon_page.py is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F129</td>
+<td>Medium</td>
+<td><b>Stale schedule-capture provenance reference on the legacy Lines &amp; Picks page (pointed at the 11/15 capture / 34 games)</b></td>
+<td>The method/provenance section of picks.html linked data/raw/official_schedule_capture_2026-11-15.json and printed '34 games', but the lines were built from data/raw/official_schedule_capture_2026-11-16.json (29 games, the 16–19 Nov window) per data/derived/horizon_lines.json _meta.inputs.schedule_capture. FIXED: the schedule input link, game count and capture date are now read from the input's own metadata.</td>
+<td>Root picks.html method/provenance</td>
+<td>None — fixed. Provenance now derives from the input metadata.</td>
+<td class="src"><span class="na" title="source id repo:data/derived/horizon_lines.json is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F130</td>
+<td>Medium</td>
+<td><b>Stale injury-edition reference on the legacy Lines &amp; Picks page (cited the 11/15 06:15 AM edition; the input was the 11/15 09:00 PM edition)</b></td>
+<td>picks.html cited the '11/15 06:15 AM ET' injury report in its notice, section E header, method line and inherited flag F-C03, but the injury input actually used (data/official/injury_2026-11-15_0900PM_dfef26dc.json) is the 11/15 09:00 PM ET edition (source_url ...Injury-Report_2026-11-15_09_00PM.pdf, retrieved 2026-11-16T02:14Z..02:17Z). FIXED: the edition, revision time, retrieval time and PDF link are now read from the injury input's own metadata; section E renders the current horizon's availability rows and is conditional on their presence.</td>
+<td>Root picks.html injury provenance</td>
+<td>None — fixed. Injury provenance now derives from the input metadata.</td>
+<td class="src"><span class="na" title="source id repo:data/official/injury_2026-11-15_0900PM_dfef26dc.json is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
