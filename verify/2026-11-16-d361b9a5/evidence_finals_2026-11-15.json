@@ -1,0 +1,87 @@
+{
+  "title": "First-hand official finals verification - 2026-11-15 slate (session arena/d361b9a5-nba1, Z03)",
+  "retrieved_utc": "2026-11-16T02:08Z..02:24Z",
+  "retrieval_method": "Session page-fetch tool against official www.nba.com game-summary pages (the sandbox's own HTTP client cannot reach www.nba.com - curl returns HTTP 000; recorded as a tool limitation, like the F-42-1 note on the board). Every row below was read from the official page named in its source_url; quarter linescores come from that page's LINESCORES table and are asserted to sum to the printed final.",
+  "rule": "A row is FINAL only when the official game page prints Final and its quarter linescores sum to the printed final. Games still in progress are recorded with their observed state and are never stored as finals. Nothing is inferred.",
+  "slate_source": {
+    "url": "https://www.nba.com/games?date=2026-11-15",
+    "state": "official scoreboard sidebar on each game-summary page shows all nine 11/15 games; 6 Final, 3 in progress at retrieval"
+  },
+  "finals": [
+    {
+      "game_id": "0022600236", "date": "2026-11-15", "away": "IND", "home": "PHI",
+      "away_pts": 124, "home_pts": 131, "ot": 0, "status": "Final",
+      "away_quarters": null, "home_quarters": null,
+      "quarter_sums_verified": false,
+      "cross_check": "already verified with quarter sums by session arena/8f64e94c-nba1 (data/official/results_2026-11-15.json row 0022600236: 124-131) - scores agree exactly",
+      "state_at_retrieval": "Final (scoreboard sidebar)",
+      "source_url": "https://www.nba.com/game/ind-vs-phi-0022600236"
+    },
+    {
+      "game_id": "0022600237", "date": "2026-11-15", "away": "LAL", "home": "PHX",
+      "away_pts": 131, "home_pts": 123, "ot": 0, "status": "Final",
+      "away_quarters": null, "home_quarters": null,
+      "quarter_sums_verified": false,
+      "cross_check": "already verified with quarter sums by session arena/8f64e94c-nba1 (data/official/results_2026-11-15.json row 0022600237: 131-123) - scores agree exactly",
+      "state_at_retrieval": "Final (scoreboard sidebar)",
+      "source_url": "https://www.nba.com/game/lal-vs-phx-0022600237"
+    },
+    {
+      "game_id": "0022600238", "date": "2026-11-15", "away": "CHA", "home": "LAC",
+      "away_pts": 105, "home_pts": 113, "ot": 0, "status": "Final",
+      "away_quarters": [21, 31, 31, 22], "home_quarters": [22, 29, 33, 29],
+      "quarter_sums_verified": true,
+      "venue": "Intuit Dome, Inglewood, CA", "tip_et": "4:30 PM", "attendance": 17487,
+      "officials": "Marc Davis, Andy Nagy, Biniam Maru",
+      "ap_recap_headline_on_official_page": "Darius Garland scores 27 as Clippers run win streak over Hornets to 17 with 113-105 win",
+      "cross_check": "data/raw/official_results_2026-11-15.json row 0022600238 (105-113, captured earlier by the scheduled-refresh CI) agrees exactly",
+      "source_url": "https://www.nba.com/game/cha-vs-lac-0022600238",
+      "gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_CHALAC_book.pdf"
+    },
+    {
+      "game_id": "0022600239", "date": "2026-11-15", "away": "SAS", "home": "UTA",
+      "away_pts": 110, "home_pts": 102, "ot": 0, "status": "Final",
+      "away_quarters": [31, 27, 23, 29], "home_quarters": [33, 22, 26, 21],
+      "quarter_sums_verified": true,
+      "venue": "Delta Center, Salt Lake City, UT", "tip_et": "5:00 PM", "attendance": 17867,
+      "officials": "Zach Zarba, Dedric Taylor, Pat O'Connell",
+      "ap_recap_headline_on_official_page": "Spurs win 12th straight while sending Jazz to 12th straight loss",
+      "cross_check": "no prior in-repo record of this final; first-hand only (independent-record rule noted in the promotion gap below)",
+      "source_url": "https://www.nba.com/game/sas-vs-uta-0022600239",
+      "gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_SASUTA_book.pdf"
+    },
+    {
+      "game_id": "0022600240", "date": "2026-11-15", "away": "DAL", "home": "BOS",
+      "away_pts": 94, "home_pts": 131, "ot": 0, "status": "Final",
+      "away_quarters": [9, 28, 34, 23], "home_quarters": [42, 25, 37, 27],
+      "quarter_sums_verified": true,
+      "venue": "TD Garden, Boston, MA", "tip_et": "6:00 PM", "attendance": 19156,
+      "officials": "JB DeRosa, Derrick Collins, Ray Acosta",
+      "ap_recap_headline_on_official_page": "Tatum scores 32, Celtics set franchise history on the way to 131-94 rout of Mavericks",
+      "cross_check": "no prior in-repo record of this final; first-hand only",
+      "source_url": "https://www.nba.com/game/dal-vs-bos-0022600240",
+      "gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_DALBOS_book.pdf"
+    },
+    {
+      "game_id": "0022600241", "date": "2026-11-15", "away": "NYK", "home": "TOR",
+      "away_pts": 112, "home_pts": 108, "ot": 1, "status": "Final/OT",
+      "away_quarters": [23, 24, 20, 28, 17], "home_quarters": [17, 26, 31, 21, 13],
+      "quarter_sums_verified": true,
+      "quarters_note": "5 periods; OT1 included; sums 23+24+20+28+17=112 and 17+26+31+21+13=108 match the printed finals exactly",
+      "venue": "Scotiabank Arena, Toronto, ON", "tip_et": "6:00 PM", "attendance": 19800,
+      "officials": "Tony Brothers, Jason Goldenberg, Phenizee Ransom",
+      "cross_check": "no prior in-repo record of this final; first-hand only",
+      "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600241",
+      "gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261115/20261115_NYKTOR_book.pdf"
+    }
+  ],
+  "not_final": [
+    {"game_id": "0022600242", "away": "HOU", "home": "WAS", "state_at_retrieval": "Q4 5:48, HOU 132-101 (live score observed on the official page but NOT recorded as a final)", "source_url": "https://www.nba.com/game/hou-vs-was-0022600242"},
+    {"game_id": "0022600243", "away": "ATL", "home": "MIL", "state_at_retrieval": "Half, ATL 55-53 (live score observed, not recorded as a final)", "source_url": "https://www.nba.com/game/atl-vs-mil-0022600243"},
+    {"game_id": "0022600244", "away": "OKC", "home": "SAC", "state_at_retrieval": "Q1 9:07, OKC 11-4 (live score observed, not recorded as a final)", "source_url": "https://www.nba.com/game/okc-vs-sac-0022600244"}
+  ],
+  "promotion_gap_flag": {
+    "id": "Z03-G1",
+    "detail": "The carried engine/promote_official.py results cross-check compares (away_pts, home_pts) against every independent record found in data/raw/official_results_<date>.json and data/official/results_<date>.json. data/official/results_2026-11-15.json (owner: session arena/8f64e94c-nba1, out of this session's scope) still carries away_pts/home_pts = null for games that were in progress at its retrieval time and are final now, and its rows overwrite the raw cross file in the promoter's merge order - so a capture containing the four new finals would fail-closed with 'disagrees with independent record None-None'. Nothing was appended to data/raw/games_completed.json this session; no gate was loosened and no out-of-scope file was edited. The verified finals above are recorded here as first-hand evidence, ready for promotion once the independent record is refreshed (its owner) or the promoter gains a null-aware rule (engine owner)."
+  }
+}

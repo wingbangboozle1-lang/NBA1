@@ -1,0 +1,55 @@
+{
+  "title": "First-hand official schedule verification - published horizon rows vs official nba.com games pages (session arena/d361b9a5-nba1, Z03)",
+  "retrieved_utc": "2026-11-16T02:15Z..02:24Z",
+  "published_artifact": "data/derived/horizon_lines_v2.json (38 games, windows 2026-11-15..2026-11-19; generated 2026-11-16T00:31:26Z by scripts/build_horizon_v2.py)",
+  "rule": "Every published row was compared against the official www.nba.com/games?date=<date> page fetched first-hand this session. A row agrees when the official page prints the same matchup, tip time and (for 11/16, read in full) the same game count. Nothing was corrected; discrepancies are flagged.",
+  "day_counts": {
+    "2026-11-15": {"official": 9, "published": 9, "agree": true},
+    "2026-11-16": {"official": 8, "published": 8, "agree": true},
+    "2026-11-17": {"official": 5, "published": 5, "agree": true},
+    "2026-11-18": {"official": 12, "published": 12, "agree": true},
+    "2026-11-19": {"official": 4, "published": 4, "agree": true}
+  },
+  "rows_11_16": [
+    {"matchup": "ORL@BOS", "official_tip": "7:00 PM ET", "published_tip": "07:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/orl-vs-bos-0022600245"},
+    {"matchup": "CHI@CLE", "official_tip": "7:00 PM ET", "published_tip": "07:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/chi-vs-cle-0022600246"},
+    {"matchup": "MEM@WAS", "official_tip": "7:00 PM ET", "published_tip": "07:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/mem-vs-was-0022600247"},
+    {"matchup": "PHI@BKN", "official_tip": "7:30 PM ET", "published_tip": "07:30 PM ET", "agree": true, "official_url": "https://www.nba.com/game/phi-vs-bkn-0022600248"},
+    {"matchup": "HOU@MIA", "official_tip": "7:30 PM ET", "published_tip": "07:30 PM ET", "agree": true, "official_url": "https://www.nba.com/game/hou-vs-mia-0022600249"},
+    {"matchup": "POR@MIN", "official_tip": "8:00 PM ET", "published_tip": "08:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/por-vs-min-0022600250"},
+    {"matchup": "GSW@NOP", "official_tip": "8:00 PM ET", "published_tip": "09:00 PM ET", "agree": false, "discrepancy": "F92 (published by session arena/8f64e94c-nba1 on 2026-11-15) re-confirmed first-hand: the official games page and the official scoreboard sidebar both print 8:00 PM ET for GSW@NOP 0022600251; the published horizon still says 09:00 PM ET. Not corrected here (post-cut discipline + file scope); the discrepancy stays flagged.", "official_url": "https://www.nba.com/game/gsw-vs-nop-0022600251"},
+    {"matchup": "PHX@DEN", "official_tip": "9:00 PM ET", "published_tip": "09:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/phx-vs-den-0022600252"}
+  ],
+  "rows_11_17": [
+    {"matchup": "NYK@TOR", "official_tip": "7:30 PM ET", "published_tip": "07:30 PM ET", "agree": true, "official_url": "https://www.nba.com/game/nyk-vs-tor-0022600253"},
+    {"matchup": "POR@MIN", "official_tip": "8:00 PM ET", "published_tip": "08:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/por-vs-min-0022600254"},
+    {"matchup": "DET@SAS", "official_tip": "8:00 PM ET", "published_tip": "08:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/det-vs-sas-0022600255"},
+    {"matchup": "UTA@LAC", "official_tip": "10:30 PM ET", "published_tip": "10:30 PM ET", "agree": true, "official_url": "https://www.nba.com/game/uta-vs-lac-0022600257"},
+    {"matchup": "CHA@LAL", "official_tip": "11:00 PM ET", "published_tip": "11:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/cha-vs-lal-0022600256"}
+  ],
+  "rows_11_18": [
+    {"matchup": "MEM@CLE", "official_tip": "7:00 PM ET", "published_tip": "07:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/mem-vs-cle-0022600258"},
+    {"matchup": "HOU@IND", "official_tip": "7:00 PM ET", "published_tip": "07:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/hou-vs-ind-0022600259"},
+    {"matchup": "MIL@MIA", "official_tip": "7:00 PM ET", "published_tip": "07:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/mil-vs-mia-0022600260"},
+    {"matchup": "PHI@ORL", "official_tip": "7:00 PM ET", "published_tip": "07:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/phi-vs-orl-0022600261"},
+    {"matchup": "CHI@BKN", "official_tip": "7:30 PM ET", "published_tip": "07:30 PM ET", "agree": true, "official_url": "https://www.nba.com/game/chi-vs-bkn-0022600262"},
+    {"matchup": "WAS@TOR", "official_tip": "7:30 PM ET", "published_tip": "07:30 PM ET", "agree": true, "official_url": "https://www.nba.com/game/was-vs-tor-0022600263"},
+    {"matchup": "DET@NOP", "official_tip": "8:00 PM ET", "published_tip": "08:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/det-vs-nop-0022600264"},
+    {"matchup": "ATL@OKC", "official_tip": "8:00 PM ET", "published_tip": "08:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/atl-vs-okc-0022600265"},
+    {"matchup": "GSW@DAL", "official_tip": "8:00 PM ET", "published_tip": "08:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/gsw-vs-dal-0022600267"},
+    {"matchup": "BOS@DEN", "official_tip": "9:30 PM ET", "published_tip": "09:30 PM ET", "agree": true, "official_url": "https://www.nba.com/game/bos-vs-den-0022600266"},
+    {"matchup": "UTA@LAL", "official_tip": "10:00 PM ET", "published_tip": "10:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/uta-vs-lal-0022600268"},
+    {"matchup": "PHX@SAC", "official_tip": "10:00 PM ET", "published_tip": "10:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/phx-vs-sac-0022600269"}
+  ],
+  "rows_11_19": [
+    {"matchup": "GSW@MEM", "official_tip": "8:00 PM ET", "published_tip": "8:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/gsw-vs-mem-0022600270"},
+    {"matchup": "POR@MIL", "official_tip": "8:00 PM ET", "published_tip": "8:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/por-vs-mil-0022600271"},
+    {"matchup": "NYK@MIN", "official_tip": "8:00 PM ET", "published_tip": "8:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/nyk-vs-min-0022600272"},
+    {"matchup": "LAC@SAS", "official_tip": "8:00 PM ET", "published_tip": "8:00 PM ET", "agree": true, "official_url": "https://www.nba.com/game/lac-vs-sas-0022600273"}
+  ],
+  "repeat_matchup_note": {
+    "finding": "POR@MIN officially appears on BOTH 2026-11-16 (game 0022600250) and 2026-11-17 (game 0022600254) - two distinct official game IDs, both printed on the official pages. NYK@TOR likewise appears on 2026-11-15 (0022600241, now Final/OT) and 2026-11-17 (0022600253). The F13 flag ('repeat matchups on the official pages') is confirmed live: the back-to-back same-matchup pairs are real on the official pages, with Portland playing consecutive nights at Target Center and Toronto hosting New York twice in three nights.",
+    "disposition": "recorded, not corrected - the published horizon carries both rows exactly as the official pages print them"
+  },
+  "records_cross_check": "Every team record printed on the official 11/16 and 11/17 pages (ORL 5-7, BOS 11-2, MEM 9-4, WAS 4-9, CHI 3-9, CLE 7-7, HOU 10-3, MIA 7-6, PHI 11-3, BKN 3-9, POR 9-3, MIN 9-4, GSW 8-5, NOP 4-10, PHX 5-7, DEN 7-4, NYK 7-6, TOR 5-8, DET 8-4, SAS 12-2, UTA 1-13, LAC 4-8, CHA 4-9, LAL 12-2) matches the live standings page captured the same session."
+}

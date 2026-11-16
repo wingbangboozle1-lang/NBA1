@@ -52,6 +52,7 @@ import urllib.request
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from common import ABBR, RAW, ROOT, read_json, rows_by_cols, write_json
+import parse_official as po
 
 INJURY_PDF_DIR = os.path.join(RAW, "injury_pdfs")
 
@@ -90,13 +91,16 @@ FETCHES = {
     "S4_schedule": ("https://www.nba.com/schedule", "schedule"),
     "S5_injury_index": ("https://official.nba.com/nba-injury-report-2026-27-season/",
                         "injury_index"),
-    # Official source pages are captured as evidence even when the page does
-    # not expose a stable server-rendered table. A content digest is not a
-    # parsed data update: the freshness gate blocks rebuild until verified
-    # structured rows are promoted into the committed model inputs.
-    "S8_standings": ("https://www.nba.com/standings", "page_snapshot"),
-    "S9_team_traditional": ("https://www.nba.com/stats/teams/traditional", "page_snapshot"),
-    "S10_team_opponent": ("https://www.nba.com/stats/teams/opponent", "page_snapshot"),
+    # RFG4 (section 38/42): these three official pages are parsed into
+    # structured rows at fetch time (engine/parse_official.py), with bounded
+    # parse evidence kept when no strategy yields a complete table. A content
+    # digest alone is not a parsed data update: the freshness gate blocks
+    # rebuild until verified structured rows are promoted.
+    "S8_standings": ("https://www.nba.com/standings", "standings"),
+    "S9_team_traditional": ("https://www.nba.com/stats/teams/traditional",
+                            "team_stats"),
+    "S10_team_opponent": ("https://www.nba.com/stats/teams/opponent",
+                          "team_stats"),
 }
 
 TEAM_ABBR_RE = re.compile(
@@ -873,32 +877,51 @@ def main():
             fetched_from = url
             api_evidence = None
             if len(rows) != 30:
+                # RFG4: try the structured strategies before the API - the
+                # page's __NEXT_DATA__ state may carry the table rows.
+                cols_p, rows_p, meta_p = po.parse_team_table(
+                    text, cols=STATS_COLS, int_cols=STATS_API_INT,
+                    variant="advanced")
+                if rows_p and len(rows_p) == 30:
+                    rows = rows_p
+                    fetched_from = f"{url} ({meta_p['strategy']})"
+                    log(f"  parse_official/{meta_p['strategy']} parsed 30 rows")
+            if len(rows) != 30:
                 # The cited page renders its table in the browser; fall back
                 # to the official stats API behind it (resource name taken
-                # from the page's own JS chunk - see chunk_probe below).
+                # from the page's own JS chunk - see chunk_probe below). The
+                # API has been observed to time out intermittently, so the
+                # attempt is retried once before it is recorded as failed.
                 if key == "S1_season":
                     df, dt = "", ""
                 else:
                     df, dt = "10%2F20%2F2026", "11%2F05%2F2026"
                 api_url = STATS_API.format(df=df, dt=dt)
-                api_evidence = {"url": api_url}
-                try:
-                    raw2 = get(api_url, timeout=45)
-                    api_evidence["http_status"] = 200
-                    api_evidence["bytes"] = len(raw2)
-                    rows, note = parse_stats_api(json.loads(as_text(raw2)))
-                    api_evidence["parse_note"] = note
-                    if len(rows) == 30:
-                        fetched_from = api_url
-                        log(f"  stats API fallback parsed {len(rows)} rows ({note})")
-                except urllib.error.HTTPError as exc:
-                    api_evidence["http_status"] = exc.code
-                    api_evidence["parse_note"] = f"HTTP {exc.code}"
-                    rows = []
-                except Exception as exc:              # noqa: BLE001
-                    api_evidence["parse_note"] = f"{type(exc).__name__}: {exc}"
-                    rows = []
-                time.sleep(1.0)
+                api_evidence = {"url": api_url, "attempts": []}
+                for attempt in (1, 2):
+                    attempt_rec = {"attempt": attempt}
+                    api_evidence["attempts"].append(attempt_rec)
+                    try:
+                        raw2 = get(api_url, timeout=60)
+                        attempt_rec["http_status"] = 200
+                        attempt_rec["bytes"] = len(raw2)
+                        rows, note = parse_stats_api(json.loads(as_text(raw2)))
+                        api_evidence["parse_note"] = note
+                        attempt_rec["parse_note"] = note
+                        if len(rows) == 30:
+                            fetched_from = api_url
+                            log(f"  stats API fallback parsed {len(rows)} rows ({note})")
+                            break
+                    except urllib.error.HTTPError as exc:
+                        attempt_rec["http_status"] = exc.code
+                        attempt_rec["parse_note"] = f"HTTP {exc.code}"
+                        api_evidence["parse_note"] = f"HTTP {exc.code}"
+                        rows = []
+                    except Exception as exc:          # noqa: BLE001
+                        attempt_rec["parse_note"] = f"{type(exc).__name__}: {exc}"
+                        api_evidence["parse_note"] = f"{type(exc).__name__}: {exc}"
+                        rows = []
+                    time.sleep(2.0)
             if len(rows) != 30:
                 failed.append((key, f"expected 30 team rows, parsed {len(rows)}"))
                 log(f"  SKIPPED: parsed {len(rows)} rows - keeping the existing snapshot")
@@ -937,6 +960,7 @@ def main():
                         {"captured_at_utc": now, "source_url": url,
                          "status": "parse_failed",
                          "api_attempt": api_evidence,
+                         "diagnostics": po.diagnostics(text),
                          "indicators": {n: text.count(n) for n in needles},
                          "failure_evidence": [
                              {"around": n, "excerpt": e} for n in needles
@@ -964,15 +988,64 @@ def main():
                                  "rows": rows,
                                  "page_sha256": hashlib.sha256(raw).hexdigest()}):
                 changed.append(key)
-        elif kind == "page_snapshot":
-            log(f"  captured official page evidence ({len(raw)} bytes)")
-            if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"),
-                                {"captured_at_utc": now, "source_url": url,
-                                 "bytes": len(raw),
-                                 "page_sha256": hashlib.sha256(raw).hexdigest(),
-                                 "capture_type": "official_page_evidence_only",
-                                 "note": "Page-level evidence only; not structured or promoted model data."}):
-                changed.append(key)
+        elif kind == "standings":
+            cols, rows, meta = po.parse_standings(text)
+            if rows:
+                log(f"  parsed {len(rows)} standings rows via {meta['strategy']}")
+                if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"),
+                                    {"captured_at_utc": now, "source_url": url,
+                                     "bytes": len(raw), "strategy": meta["strategy"],
+                                     "row_count": len(rows), "cols": cols,
+                                     "rows": rows,
+                                     "page_sha256": hashlib.sha256(raw).hexdigest(),
+                                     "note": "Capture only: parsed rows await "
+                                             "verified promotion (engine/"
+                                             "promote_official.py)."}):
+                    changed.append(key)
+            else:
+                failed.append((key, f"no standings rows parsed "
+                                    f"({meta.get('problems')})"))
+                log(f"  SKIPPED: no standings rows - keeping the existing snapshot")
+                if write_if_changed(
+                        os.path.join(RAW, f"_capture_evidence_{key}.json"),
+                        {"captured_at_utc": now, "source_url": url,
+                         "status": "parse_failed",
+                         "problems": meta.get("problems"),
+                         "diagnostics": po.diagnostics(text),
+                         "note": "Bounded raw-HTML evidence for the next "
+                                 "parser iteration. The committed snapshot is "
+                                 "untouched."}):
+                    changed.append(f"evidence {key}")
+        elif kind == "team_stats":
+            variant = "opponent" if "opponent" in url else "traditional"
+            cols, rows, meta = po.parse_team_table(text, variant=variant)
+            if rows:
+                log(f"  parsed {len(rows)} {variant} team rows via {meta['strategy']}")
+                if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"),
+                                    {"captured_at_utc": now, "source_url": url,
+                                     "bytes": len(raw), "strategy": meta["strategy"],
+                                     "variant": variant,
+                                     "row_count": len(rows), "cols": cols,
+                                     "rows": rows,
+                                     "page_sha256": hashlib.sha256(raw).hexdigest(),
+                                     "note": "Capture only: parsed rows await "
+                                             "verified promotion (engine/"
+                                             "promote_official.py)."}):
+                    changed.append(key)
+            else:
+                failed.append((key, f"no {variant} team rows parsed "
+                                    f"({meta.get('problems')})"))
+                log(f"  SKIPPED: no {variant} team rows - keeping the existing snapshot")
+                if write_if_changed(
+                        os.path.join(RAW, f"_capture_evidence_{key}.json"),
+                        {"captured_at_utc": now, "source_url": url,
+                         "status": "parse_failed",
+                         "problems": meta.get("problems"),
+                         "diagnostics": po.diagnostics(text),
+                         "note": "Bounded raw-HTML evidence for the next "
+                                 "parser iteration. The committed snapshot is "
+                                 "untouched."}):
+                    changed.append(f"evidence {key}")
         elif kind == "players":
             log(f"  captured {len(text)} bytes")
             if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"),
@@ -980,16 +1053,73 @@ def main():
                                  "page_sha256": hashlib.sha256(raw).hexdigest()}):
                 changed.append(key)
         elif kind == "schedule":
-            games = parse_schedule(text)
-            log(f"  parsed {len(games)} game links")
+            games, parsed_via, fallback_sources = [], None, []
+            g1 = parse_schedule(text)
+            if g1:
+                games = [{"game_id": g["game_id"], "away": g["away"],
+                          "home": g["home"], "date": None,
+                          "source_url": game_url(g["away"], g["home"], g["game_id"])}
+                         for g in g1]
+                parsed_via = "schedule-page game links"
             if not games:
-                failed.append((key, "no game links found"))
+                _c, g2, meta2 = po.parse_schedule(text)
+                if g2:
+                    games = g2
+                    parsed_via = f"schedule-page {meta2['strategy']}"
+            if not games:
+                # Date-aware fallback (RFG4): the schedule page is client-
+                # rendered and serves no game links in its HTML, so read the
+                # official per-date games feed (www.nba.com/games?date=...),
+                # the same embedded-JSON source the results pipeline proves
+                # on every run, for today through the brief's +3-day horizon.
+                today = datetime.datetime.now(datetime.timezone.utc).date()
+                for delta in range(0, 4):
+                    d = (today + datetime.timedelta(days=delta)).isoformat()
+                    durl = f"https://www.nba.com/games?date={d}"
+                    try:
+                        draw = get(durl)
+                    except Exception as exc:               # noqa: BLE001
+                        fallback_sources.append({"date": d, "url": durl,
+                                                 "error": f"{type(exc).__name__}: {exc}"})
+                        continue
+                    fallback_sources.append(
+                        {"date": d, "url": durl, "http_status": 200,
+                         "bytes": len(draw),
+                         "sha256": hashlib.sha256(draw).hexdigest()})
+                    embedded = extract_json_games(as_text(draw))
+                    for gid in sorted(embedded):
+                        kind_row, payload = row_from_json_game(embedded[gid], {})
+                        g = embedded[gid]
+                        away, home = (g.get("awayTeam") or {}), (g.get("homeTeam") or {})
+                        status = str(g.get("gameStatusText") or "")
+                        time_et = status if not re.match(r"final", status, re.I) else None
+                        games.append({
+                            "game_id": gid,
+                            "away": away.get("teamTricode"),
+                            "home": home.get("teamTricode"),
+                            "date": d,
+                            "time_et": time_et,
+                            "away_rec": away.get("teamSubtitle"),
+                            "home_rec": home.get("teamSubtitle"),
+                            "venue": g.get("arenaName") or g.get("arena"),
+                            "city": g.get("arenaCity") or g.get("city"),
+                            "source_url": f"https://www.nba.com/game/"
+                                          f"{str(away.get('teamTricode')).lower()}-vs-"
+                                          f"{str(home.get('teamTricode')).lower()}-{gid}",
+                        })
+                    time.sleep(1.0)
+                if games:
+                    parsed_via = "official games-feed embedded JSON (per date)"
+            log(f"  parsed {len(games)} games via {parsed_via or 'nothing'}")
+            if not games:
+                failed.append((key, "no games parsed from any official strategy"))
                 needles = ["JSON.parse(", "window.__", "gameId", "Friday, November"]
                 if write_if_changed(
                         os.path.join(RAW, f"_capture_evidence_{key}.json"),
                         {"captured_at_utc": now, "source_url": url,
                          "status": "parse_failed",
                          "indicators": {n: text.count(n) for n in needles},
+                         "diagnostics": po.diagnostics(text),
                          "failure_evidence": [
                              {"around": n, "excerpt": e} for n in needles
                              for e in [excerpt_around(text, n)] if e][:2],
@@ -1001,7 +1131,15 @@ def main():
             if write_if_changed(os.path.join(RAW, f"_capture_{key}.json"),
                                 {"captured_at_utc": now, "source_url": url,
                                  "games": games,
-                                 "page_sha256": hashlib.sha256(raw).hexdigest()}):
+                                 "parsed_via": parsed_via,
+                                 "fallback_sources": fallback_sources,
+                                 "page_sha256": hashlib.sha256(raw).hexdigest(),
+                                 "note": "Capture only: parsed games await "
+                                         "verified promotion. When parsed_via "
+                                         "names the games feed, each row's "
+                                         "source_url is that game's own "
+                                         "official page and fallback_sources "
+                                         "records the exact responses read."}):
                 changed.append(key)
         elif kind == "injury_index":
             links = parse_injury_index(text)
