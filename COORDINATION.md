@@ -6391,7 +6391,7 @@ Branch `arena/fe8e2065-nba1`, based on `main` `add1e74` (PR #145). The platform 
 | Minutes vs printed team total | 13 of 18 exact; largest difference 3 s (official document's own, published, not corrected) |
 | Coverage (computed) | 9 games; 304 player rows; 199 appeared; 73 rows recovered from Inactive lines; 149 unique report names → 92 have a row, 53 later-game only, 4 unexplained (flags F130–F133) |
 | `python3 scripts/build_results_page.py` | `results.html` byte-identical to HEAD; `player-logs.html` rebuilt |
-| `scripts/verify_all.py` | **VERIFY OK** (builders, checker, data audits; 3091 table rows, 0 unsourced). First run failed on six flagged-table rows without a link; fixed by adding the gamebook PDF to each row, re-run passed |
+| `scripts/verify_all.py` | **VERIFY OK** (builders, checker, data audits; 3091 table rows: 2988 with an approved official link, 103 explicit no-source marks with a reason, 0 unmarked). First run failed on six flagged-table rows without a link; fixed by adding the gamebook PDF to each row, re-run passed |
 | `scripts/check_site.py` | pass (every table row has an official source link) |
 | `scripts/verify_integration.py` | PASSED, 0 errors, 44 warnings (existing, published on the Flagged page) |
 | `scripts/build_verification_page.py` + porcelain check | regenerated; `verification.html` not stale |
