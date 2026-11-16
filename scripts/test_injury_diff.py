@@ -10,6 +10,7 @@ the two editions share players. Standard library only.
 import glob
 import json
 import os
+import re
 import sys
 import unittest
 
@@ -49,6 +50,20 @@ class RealPdfTests(unittest.TestCase):
         with open(os.path.join(ROOT, "data", "official",
                                "injury_2026-11-15_0615AM.json")) as fh:
             cls.cross = json.load(fh)
+        # F-DFA-02 (session arena/07920bdc-nba1, COORDINATION §56 X06): the
+        # Furphy assertion below is a comparison against an INDEPENDENT
+        # transcription of one named edition, so it must be run against that
+        # edition's PDF - not against whatever happens to be newest in the
+        # archive. Pinned to the newest, it failed the moment the league rolled
+        # to an 11/16 slate whose report no longer lists that player: a stale
+        # fixture, not a parser fault. Load the edition the transcription was
+        # made from, and skip the comparison cleanly if those bytes are absent.
+        cls.cross_rec = None
+        cross_edition = cls.cross.get("source_url", "").rsplit("/", 1)[-1]
+        for p in paths:
+            if os.path.basename(p).split("__")[0] + ".pdf" == cross_edition:
+                cls.cross_rec = ij.load_edition(p)
+                break
 
     def test_rows_extracted(self):
         self.assertGreater(self.rec["row_count"], 50)
@@ -57,14 +72,38 @@ class RealPdfTests(unittest.TestCase):
         # Furphy's reason wraps across three text lines around his name row;
         # the independent 06:15 AM transcription of the same slate confirms
         # the full phrase.
-        rows = {r[4]: r for r in self.rec["rows"]}
-        furphy = rows.get("Furphy, Johnny")
-        self.assertIsNotNone(furphy)
+        #
+        # F-DFA-02: run it against the edition the independent transcription
+        # was made from (see setUpClass), never against "the newest archived
+        # PDF". A slate roll is not a regression, and this test exists to catch
+        # a parsing regression, not the calendar.
+        if self.cross_rec is None:
+            self.skipTest("the PDF behind the independent transcription is not "
+                          "archived in this checkout")
+        # Both readers of these PDFs split a hyphenated word into two kerned
+        # strings and re-join them with a space, printing "Two- Way" for
+        # "Two-Way" (flag F-X02). That is a rendering artifact in both, not a
+        # disagreement about content, so it is normalised before comparing -
+        # and only that, so any other difference still fails the test.
+        def norm(text):
+            return re.sub(r"(\w)-\s+(\w)", r"\1-\2", text or "")
+
+        rows = {r[4]: r for r in self.cross_rec["rows"]}
         cross_rows = self.cross.get("rows") or []
-        cross = next((r for r in cross_rows
-                      if r.get("player") == "Furphy, Johnny"), None)
-        if cross:
-            self.assertEqual(furphy[6], cross["reason"])
+        checked = 0
+        for cross in cross_rows:
+            player = cross.get("player")
+            if not player or not cross.get("reason"):
+                continue
+            parsed = rows.get(player)
+            if parsed is None:
+                continue
+            checked += 1
+            self.assertEqual(norm(parsed[6]), norm(cross["reason"]),
+                             "reason mismatch for %s" % player)
+        self.assertGreaterEqual(checked, 20,
+                                "expected the two independent reads of the same "
+                                "edition to share at least 20 player rows")
 
     def test_not_yet_submitted_blocks_present(self):
         nys = [r for r in self.rec["rows"] if r[5] == "NOT YET SUBMITTED"]

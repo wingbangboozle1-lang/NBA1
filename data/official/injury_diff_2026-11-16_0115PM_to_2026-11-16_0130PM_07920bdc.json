@@ -1,0 +1,147 @@
+{
+ "title": "Consecutive-edition injury diff: 2026-11-16 01:15 PM -> 2026-11-16_0130PM",
+ "from_edition": {
+  "edition_id": "injury_2026-11-16_0115PM_07920bdc.json",
+  "revision": "11/16/2026 01:15 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:15 PM')",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_15PM.pdf",
+  "transcribed_by": "arena/07920bdc-nba1",
+  "provenance": "per clipped-rectangle cell, grouped into rows by rectangle geometry, columns mapped from each page's own header row (scripts/verify_injury_edition_07920bdc.py)"
+ },
+ "to_edition": {
+  "edition_id": "injury_2026-11-16_0130PM_7ec9e7a3.json",
+  "revision": "11/16/2026 01:30 PM ET (printed on the PDF as 'Injury Report: 11/16/26 01:30 PM')",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_30PM.pdf",
+  "transcribed_by": "arena/7ec9e7a3-nba1 (fetch_page text render of the official PDF)",
+  "provenance": "the PDF's binary bytes cannot be fetched from this sandbox (flag F120 class), so no sha256 of the source file is available; this is a transcription of the official PDF's rendered text, with every cell not visible in the render left empty and noted"
+ },
+ "computed_by": "arena/07920bdc-nba1",
+ "computed_utc": "2026-11-16T18:50:45Z",
+ "method": "Row-by-row comparison of two consecutive official editions keyed on (matchup, team, player). The two sides were transcribed by different sessions by different methods, and each side's provenance is recorded, so a difference is not silently attributed to the league. Nothing is inferred.",
+ "counts": {
+  "previous_rows": 87,
+  "current_rows": 87,
+  "comparable_rows": 85,
+  "status_changes": 9,
+  "rows_added": 2,
+  "rows_removed": 2
+ },
+ "status_changes": [
+  {
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Butler III, Jimmy",
+   "from_status": "Out",
+   "to_status": "",
+   "from_reason": "Injury/Illness - Right ACL Repair / Surgery",
+   "to_reason": "Injury/Illness - Right ACL Repair / Surgery"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Curry, Stephen",
+   "from_status": "Out",
+   "to_status": "Out",
+   "from_reason": "Injury/Illness - Right Oblique Tear",
+   "to_reason": ""
+  },
+  {
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Moody, Moses",
+   "from_status": "Out",
+   "to_status": "Out",
+   "from_reason": "Injury/Illness - Left Patellar Tendon Repair / Surgery",
+   "to_reason": ""
+  },
+  {
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Porzingis, Kristaps",
+   "from_status": "Out",
+   "to_status": "Out",
+   "from_reason": "Not With Team",
+   "to_reason": ""
+  },
+  {
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Santos, Gui",
+   "from_status": "Questionable",
+   "to_status": "Questionable",
+   "from_reason": "Injury/Illness - Right Ankle Inflammation",
+   "to_reason": ""
+  },
+  {
+   "matchup": "GSW@NOP",
+   "team": "Golden State Warriors",
+   "player": "Williams, Brandon",
+   "from_status": "Out",
+   "to_status": "Out",
+   "from_reason": "Injury/Illness - Left Hamstring Strain",
+   "to_reason": ""
+  },
+  {
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Dia, Malik",
+   "from_status": "Questionable",
+   "to_status": "Probable",
+   "from_reason": "G League - Two-Way",
+   "to_reason": "G League - Two-Way"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Pierre Jr., Jaron",
+   "from_status": "Questionable",
+   "to_status": "Probable",
+   "from_reason": "G League - Two-Way",
+   "to_reason": "G League - Two-Way"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Reese, Julian",
+   "from_status": "Questionable",
+   "to_status": "Probable",
+   "from_reason": "G League - Two-Way",
+   "to_reason": "G League - Two-Way"
+  }
+ ],
+ "rows_added": [
+  {
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Mathurin, Benedict",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Plantar Fasciitis"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Champagne, Justin",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Surgery"
+  }
+ ],
+ "rows_removed": [
+  {
+   "matchup": "GSW@NOP",
+   "team": "New Orleans Pelicans",
+   "player": "Mathurin, Bennedict",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Plantar Fasciitis"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "team": "Washington Wizards",
+   "player": "Champagnie, Justin",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Surgery"
+  }
+ ],
+ "caveats": [
+  "The two sides were transcribed by different methods: arena/07920bdc-nba1 (from: injury_2026-11-16_0115PM_07920bdc.json) and arena/7ec9e7a3-nba1 (fetch_page text render of the official PDF) (to: injury_2026-11-16_0130PM_7ec9e7a3.json). A difference between them is reported, never resolved by choosing a side.",
+  "1 row(s) carry a status in the earlier edition and none in the later one (Butler III, Jimmy). That is a reading gap in the later transcription, not a status change: the value is left blank and flagged, never copied forward (flag F-X03)."
+ ]
+}

@@ -153,8 +153,8 @@
 <tr>
 <td>F5</td>
 <td>High</td>
-<td><b>No archived injury reports, so the availability strategy is ungraded</b></td>
-<td>Only the 2026-11-13 05:15 PM edition of the official injury report was captured. Strategy S6 (availability shock) and gate G7 (flip every Questionable player to Out) therefore have no graded record. They are shown as UNGRADED / NOT RUN rather than being scored with substituted data.</td>
+<td><b>RETIRED - No archived injury reports, so the availability strategy is ungraded</b></td>
+<td>RETIRED 2026-11-16 (§56). RETIRED 2026-11-16 (COORDINATION §56, flag F-DFA-04): the premise is no longer true - data/raw/injury_pdfs/ now holds 29 content-addressed editions, 11/15 12:45 PM through 11/16 01:15 PM ET, each with its retrieval timestamp and SHA-256. The grading gap this flag described is now carried by F-X01 instead (parsed editions that are silently incomplete), not by an empty archive. Original finding, kept verbatim: Only the 2026-11-13 05:15 PM edition of the official injury report was captured. Strategy S6 (availability shock) and gate G7 (flip every Questionable player to Out) therefore have no graded record. They are shown as UNGRADED / NOT RUN rather than being scored with substituted data.</td>
 <td>S6, gate G7</td>
 <td>The refresh job should archive every edition it sees; grading can then start once ~30 graded S6 plays exist.</td>
 <td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
@@ -1292,6 +1292,78 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="no official source">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-X01</td>
+<td>High</td>
+<td><b>The injury-PDF parser drops player rows that the official PDF contains, and reports zero unparsed cells</b></td>
+<td>engine/injury_diff.py recovers report text by grouping words into visual lines. Read against the 2026-11-16 01:15 PM edition it returns 80 rows and reports 0 unparsed cells, while the same PDF's content stream contains 87 report rows. Seven player rows are silently missing: Jerome (Ty), Pippen Jr. (Scotty), Post (Quinten), Saunders (Richie) and Stewart (Isaiah) for Memphis in MEM@WAS, and Reese (Julian) and Watford (Trendon) for New Orleans in GSW@NOP. The bytes were re-read independently, per clipped rectangle rather than per visual line, by scripts/verify_injury_edition_07920bdc.py, which recovers all 87 with 0 status disagreements and 0 rows the line parser finds that it does not. A parser that drops rows while reporting a clean parse is the worst failure mode for an archive whose purpose is detecting a status change, so this session's published edition and its consecutive diff are built from the verified rows, and each recovered row carries recovered_by.</td>
+<td>data/parsed/injury_diffs/** (every edition parsed so far), any consecutive-edition diff computed from it, and any availability strategy graded from parsed editions</td>
+<td>Port the per-clipped-rectangle reader in scripts/verify_injury_edition_07920bdc.py into engine/injury_diff.py, or make it fail loudly when a row's cells do not assemble. Until then, no parsed edition's row count should be treated as complete. Logged as a cross-session request in COORDINATION §56.7 - the file is outside this session's claim.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F-X02</td>
+<td>Low</td>
+<td><b>Both PDF readers split a hyphenated word into two kerned strings and print it with a spurious space</b></td>
+<td>The reports draw 'Two-Way' as two kerned strings, so a reader that joins drawn strings with a space prints 'G League - Two- Way'. Both engine/injury_diff.py and this session's cell reader do it. It is a rendering artifact, not a content disagreement: the independent 11/15 06:15 AM transcription prints 'Two-Way'. The cell reader now suppresses the space when the preceding string ends in a hyphen and is not itself a standalone dash, and the regression test normalises it before comparing, so no value on the site is affected - but any future diff of reason text should normalise it too.</td>
+<td>Reason text in parsed editions, and reason comparison in tests</td>
+<td>Normalise kerned hyphens at the point of extraction in engine/injury_diff.py so reason strings are comparable across editions without post-processing.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F-DFA-01</td>
+<td>High</td>
+<td><b>RESOLVED - three pages named three different 'newest official injury editions'</b></td>
+<td>Found by session arena/dfa3057f-nba1 (§55) on 2026-11-16: the Injuries banner named the 11/15 09:00 PM edition, the picks page's availability columns cited 11/16 09:45 AM, and the Injuries body text said the window was priced from 11/15 06:15 AM, while the official index listed 11/16 editions through 1:00 PM ET. Resolved in §56: twelve further 11/16 editions (09:15 AM through 01:15 PM ET) were captured byte-exactly from ak-static.cms.nba.com by a runner with network access and archived with their SHA-256 and retrieval timestamps; the 01:15 PM edition was transcribed twice by two independent readers and promoted; the two hard-coded 'newest' sentences on the Injuries page now read the same value as the banner. The banner shows report revision 11/16/2026 01:15 PM ET and retrieval 2026-11-16T18:25:44Z. The page still also shows a separate 'Report edition in use' banner (11/16 09:45 AM) - deliberately, because that is the edition the published availability numbers were cut from, and a line re-priced after the cut cannot be graded.</td>
+<td>site/pages/injuries.html, site/pages/picks.html availability columns</td>
+<td>Re-point the 'Report edition in use' at a newer edition only alongside a deliberate re-cut of the availability inputs, never silently (§56.7 request 2).</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F-DFA-02</td>
+<td>Medium</td>
+<td><b>RESOLVED - test_injury_diff.py pinned a player from an older edition against the newest archived PDF</b></td>
+<td>The test asserted that 'Furphy, Johnny' appears in the newest archived injury PDF. He appears in the 11/15 slate's reports, so the test failed as soon as the archive rolled to an 11/16 edition that does not list him - a stale fixture, not a parser fault. It was not wired into any workflow, so no gate was affected. Fixed: the test now loads the edition the independent transcription was made from (11/15 06:15 AM) and compares every shared player row instead of one hand-picked name, skipping cleanly when those bytes are absent. scripts/test_injury_edition_crosscheck_07920bdc.py adds the regression this exposed: the independent cell reader must never recover fewer player rows than the line parser, and the seven rows the line parser dropped (F-X01) must be present in the bytes.</td>
+<td>scripts/test_injury_diff.py, the unit-test suite</td>
+<td>Wire both test files into the validate job so a parser regression fails CI rather than a reviewer's read.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F-DFA-03</td>
+<td>Low</td>
+<td><b>RESOLVED - answered question A12 read as current while quoting a stale count</b></td>
+<td>A12 ('Does the site now produce a line for every game in the next three days?') answered 'Yes. 27 games from 2026-11-14 to 2026-11-17' under the Answered heading, while the live horizon is 29 games, 16-19 Nov. The answer was correct when written and was not re-opened, but under 'Answered' the wording read as current. The answer now opens with the date it was recorded and states the live count separately; the underlying record is unchanged.</td>
+<td>site/pages/questions.html answer A12</td>
+<td>Give every answered question a recorded-on date and have the page render it, so a dated answer can never silently read as a live one.</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">S4</a></td>
+</tr>
+<tr>
+<td>F-DFA-04</td>
+<td>Low</td>
+<td><b>RESOLVED - flag F5 ('No archived injury reports') was out of date</b></td>
+<td>F5 said only the 2026-11-13 05:15 PM edition had been captured. The archive now holds 29 editions (11/15 12:45 PM through 11/16 01:15 PM ET), each content-addressed with its retrieval timestamp. F5 is retired below: its premise is false, and the grading consequence it described no longer follows from an empty archive but from F-X01 (parsed editions that are silently incomplete), which is the live item.</td>
+<td>Flagged page item F5</td>
+<td>None. Retired, kept in the register for the record.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
+</tr>
+<tr>
+<td>F-DFA-05</td>
+<td>Info</td>
+<td><b>scripts/test_refresh_gate.py cannot import engine when run as a script from the repository root</b></td>
+<td>It needs PYTHONPATH=. because it imports the engine package. Harmless in CI, which does not run it, but a reviewer running the suite by hand sees a failure that is not a defect.</td>
+<td>scripts/test_refresh_gate.py</td>
+<td>Add the repository root to sys.path in the test module, as scripts/test_injury_diff.py already does.</td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/test_refresh_gate.py" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F-X03</td>
+<td>High</td>
+<td><b>An edition transcribed from the text render of an official PDF loses the Reason column on wrapped GSW rows and one Status</b></td>
+<td>The 2026-11-16 01:30 PM edition in data/official/ was transcribed by session arena/7ec9e7a3-nba1 from the fetch_page text render of the official PDF rather than from its bytes. Diffing it against the byte-verified 01:15 PM edition (87 rows each, 85 comparable) shows 9 differences, and checking each against a fresh read of the official 01:30 PM PDF separates them: 3 are real league status changes (Dia, Malik; Pierre Jr., Jaron; Reese, Julian - all New Orleans, Questionable to Probable between 01:15 and 01:30 PM), and 6 are reading losses in the render (the Reason column is empty for Butler III, Curry, Moody, Porzingis, Santos and Williams - every Golden State row, whose table block is the one the render splits across pages - and Butler's Status is empty). The render also prints 'Champagne, Justin' and 'Mathurin, Benedict' where the official bytes print 'Champagnie' and 'Bennedict'. The 3 real upgrades are published as status changes; the 6 losses are reported as unverified and the blank values are left blank, never copied forward from the earlier edition.</td>
+<td>data/official/injury_2026-11-16_0130PM_7ec9e7a3.json and any availability figure derived from it; the Injuries banner's 'Report revision' row counts</td>
+<td>Prefer byte-exact capture (the workflow added in §56 does this) and re-transcribe 01:30 PM from the archived PDF once it is captured, before any availability input is re-cut from that edition.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">S5</a></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">

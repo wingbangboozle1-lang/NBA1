@@ -1,0 +1,55 @@
+{
+ "title": "Injury-report consecutive-edition diff (status-change detection)",
+ "before": {
+  "edition": "Injury-Report_2026-11-15_06_00PM__4f57f0cd018af8d0.pdf",
+  "label": "Injury-Report_2026-11-15_06_00PM",
+  "source_url": null,
+  "retrieved_at_utc": null,
+  "sha256": "4f57f0cd018af8d0f7dc68541939b32d2224b1159181aa8ebea100f753d9502d",
+  "rows": 140
+ },
+ "after": {
+  "edition": "Injury-Report_2026-11-15_06_15PM__17fbcb8d206fa260.pdf",
+  "label": "Injury-Report_2026-11-15_06_15PM",
+  "source_url": null,
+  "retrieved_at_utc": null,
+  "sha256": "17fbcb8d206fa2602a712977af9cdf854a7c8c898767c1d6ac8cd62ba4da3203",
+  "rows": 140
+ },
+ "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
+ "status_or_reason_changes": [
+  {
+   "team": "Atlanta Hawks",
+   "player": "Landale, Jock",
+   "before_status": "Questionable",
+   "after_status": "Out",
+   "before_reason": "Injury/Illness - Right Hip Inflammation",
+   "after_reason": "Injury/Illness - Right Hip Inflammation",
+   "before_matchup": "ATL@MIL",
+   "after_matchup": "ATL@MIL"
+  },
+  {
+   "team": "Atlanta Hawks",
+   "player": "Wilson, Jalen",
+   "before_status": "Doubtful",
+   "after_status": "Out",
+   "before_reason": "G League - Two- Way",
+   "after_reason": "G League - Two- Way",
+   "before_matchup": "ATL@MIL",
+   "after_matchup": "ATL@MIL"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Rollins, Ryan",
+   "before_status": "Questionable",
+   "after_status": "Out",
+   "before_reason": "Injury/Illness - Illness",
+   "after_reason": "Injury/Illness - Illness",
+   "before_matchup": "ATL@MIL",
+   "after_matchup": "ATL@MIL"
+  }
+ ],
+ "listed_in_after_only": [],
+ "listed_in_before_only": [],
+ "team_block_filing_changes": []
+}
