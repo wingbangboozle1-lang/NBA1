@@ -96,7 +96,31 @@ def verdict_box(kind, title, body):
 
 # ---------------------------------------------------------------------------
 def results_page():
-    feeds = sorted(glob.glob(os.path.join(ROOT, "data", "official", "results_*.json")))
+    # Defect fixed by arena/23b323a3-nba1 (COORDINATION §50, finding F112):
+    # a second capture of the same game day may be committed under a
+    # session-namespaced name (`results_2026-11-15_dfef26dc.json`). The old code
+    # took the date from the whole file stem, so that file produced its own
+    # section under the heading "2026-11-15_dfef26dc", matched zero rows and
+    # printed "0 of 0 final — NOT settleable" DIRECTLY BENEATH the settled
+    # 2026-11-15 section. That is a false negative on the one page whose job is
+    # to say whether a game day is settleable. The date is now read from the
+    # first ten characters of the stem, and when a canonical `results_<date>.json`
+    # exists it is authoritative — the extra captures are listed as superseded
+    # rather than rendered as empty game days.
+    _feeds_all = sorted(glob.glob(os.path.join(ROOT, "data", "official", "results_*.json")))
+    _by_date = {}
+    for _p in _feeds_all:
+        _stem = os.path.basename(_p)[len("results_"):-5]
+        _by_date.setdefault(_stem[:10], []).append(_p)
+    feeds, superseded_captures = [], {}
+    for _d in sorted(_by_date):
+        _paths = _by_date[_d]
+        _canon = [p for p in _paths
+                  if os.path.basename(p) == "results_%s.json" % _d]
+        feeds.append(_canon[0] if _canon else _paths[0])
+        _extra = [p for p in _paths if p != ( _canon[0] if _canon else _paths[0])]
+        if _extra:
+            superseded_captures[_d] = [os.path.basename(p) for p in _extra]
     settlements = {os.path.basename(p)[:-5]: p
                    for p in glob.glob(os.path.join(ROOT, "data", "settlement", "settlement_*.json"))}
     ledger = load("data", "ledger", "ledger.json")
@@ -112,7 +136,7 @@ def results_page():
     total_games = total_final = 0
     for path in feeds:
         feed = json.load(open(path, encoding="utf-8"))
-        date = os.path.basename(path)[len("results_"):-5]
+        date = os.path.basename(path)[len("results_"):-5][:10]
         rows = [r for r in feed.get("rows", []) if r.get("date") == date]
         # Two capture styles exist in this repo: the 11/15 feed adds an explicit
         # `status` field, the 11/14 feed records the same fact as `final_label`.
@@ -176,6 +200,15 @@ def results_page():
                    "<code>refresh-data.yml</code>)." if rows and len(finals) == len(rows)
                    else "Games that are not final cannot be graded; settling now would be a "
                         "guess, so nothing is written.")))
+
+        if date in superseded_captures:
+            body.append('<p class="fine">Additional captures of this same game day are held in the '
+                        'repository but are <b>not</b> rendered as separate game days, because they '
+                        'describe the same slate at an earlier retrieval time and the canonical file '
+                        'above supersedes them: <code>%s</code>. They are kept on disk as evidence of '
+                        'what was observed then, which is why an earlier capture can still say a game '
+                        'was not final.</p>'
+                        % html.escape(", ".join(superseded_captures[date])))
 
     body.append('<h2>How a game day gets settled</h2>')
     body.append('<ol class="steps">'

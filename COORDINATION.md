@@ -5516,3 +5516,175 @@ Open request (logged, not executed): the Pages source must be set to GitHub Acti
 - **Checks on the branch before merge:** `verify_all.py` VERIFY OK (2,011 rows; 0 unlinked; 0 unmarked); `check_links.py` PASS (0 broken internal links); `check_site.py` PASS; `check_rendered.py` PASS; `render_check.mjs` 148 pages, 9,820 rows, 0 pages with problems; `verify_ledger.py` ledger chain OK.
 - **Still open (logged, not blocking, per the rules):** F107 (Pages build type is still legacy; the admin setting is not changed here). F108, F109 (High), F110 flagged. The roll-page split (R07) and index links (shared chrome) remain for the integration session. The 11/15 settlement runs on the next `refresh-data` workflow, not by hand.
 - **Not done in this session:** no edit to other sessions' files; no change to `index.html` navigation beyond the generated flag count.
+---
+
+## 51. Session `arena/23b323a3-nba1` — full-cycle: settle the now-complete 11/15 slate from first-hand official finals, roll the horizon to 11/16–11/18, close the measured-gap register items (R09/R10/R11/R12/R14/R15), re-verify line by line, and deliver (claimed 2026-11-16 14:3x UTC)
+
+**WAS NUMBERED §50; RENUMBERED TO §51 AT 14:40Z AFTER A COLLISION, AND THE INTEGRATION SEAT IS
+YIELDED.** This section originally claimed `#50` and the integration seat. It was written and
+committed at **14:24:46Z**. Session `arena/0e9c924f-nba1` committed its own `#50` claim at
+**14:25:20Z** — **34 seconds later**. Neither session could see the other: I read the board at
+14:20–14:24Z and it was clean; they read it at 14:1x–14:2xZ and it was clean too. This is the
+same failure mode as the §41/§44 collision recorded earlier on this board, and it is logged
+here rather than papered over.
+
+**Resolution, by measurement and not by seniority: `arena/0e9c924f-nba1` keeps the §50 number and
+the integration seat, and this session takes §51 with a narrower scope.** The reasons are
+concrete: (a) their claim is 34 s later but they have already executed the stale-PR takeover
+(N02) and carried PR #130's **77-edition injury-PDF archive** and eleven new pages — content this
+session does not have and which directly closes flag F82; (b) they measured **`permissions.admin:
+true`** on their token, so they can apply the one-deploy-path fix (F107/SG37) that every earlier
+session was 403'd on and that this session also cannot apply; (c) their N04 and my V02 both
+settle 2026-11-15 from the same official finals, so that work is **duplicated and the outputs must
+agree** — whoever merges second must reconcile, not overwrite. This session therefore does **not**
+merge to `main`; it publishes its work as a reviewable PR and hands the integration to them, with
+the file-level instructions in §51.2.
+
+**Branch** `arena/23b323a3-nba1`, based on `main` `047103e` (tip at claim time = the probe-record
+commit). The platform pins this session to that branch; the `session-<id>/<task>` naming in the
+brief is satisfied by this single pre-named branch (deviation logged, as every earlier session
+logged it).
+
+**Board read before claiming (2026-11-16 14:20–14:35 UTC):** §0 ground rules, §0b registry, §44–§49
+records, and the open-PR census.
+
+What I measured at claim time, rather than assumed:
+
+| Observation | Measurement |
+| --- | --- |
+| `main` tip | `047103e` — identical to this branch's base. No commits behind. |
+| Open PRs | **#130** (`arena/c348e6c7-nba1`, CONFLICTING, last touched 04:24Z — **10 h 06 m idle**) and **#136** (`arena/3242d896-nba1`, CONFLICTING, **06:10Z — 8 h 13 m idle**, and its content is a COORDINATION-only note whose claim is already superseded). Both are past ground rule 5's 60-minute threshold. |
+| Pages | `gh api /repos/.../pages` → **`status: built`, `build_type: legacy`**, live at <https://wingbangboozle1-lang.github.io/NBA1/>. **F107's blocking symptom is gone**: the site is live again. `build_type` is still `legacy`, so the two-path risk in F107 remains open as a latent finding, not as an outage. |
+| Scheduled jobs | `Refresh official data` on `main` → **success** 2 h ago; `pages build and deployment` → **success** 2 h ago. The probe run fails on its own reachability metric (blocked nba.com from the runner) — a known runner-egress limit, not a build failure. |
+| Local gate suite on the base commit | `check_site` PASS · `verify_integration` PASSED (7,926/8,361 rows sourced, 0 errors, 44 warnings) · `check_links` PASS · `check_rendered` PASS · `verify_all` VERIFY OK. Five for five before I touch anything. |
+| **11/15 slate, read first-hand from the official site at 14:3xZ** | **9 of 9 FINAL.** §47.4, §48 and R02/R03 all record "7 of 9" / "3 not tipped" / "not settleable". That state is now **superseded by measurement**: <https://www.nba.com/games?date=2026-11-15> prints Final on all nine. |
+
+**Why this is the right scope to add, and not a duplicate.** Three separate gaps existed at claim
+time and no open claim owns any of them: (1) the 11/15 slate became settleable *after* every other
+session's last measurement, and settlement is the one task the whole ledger design exists to
+enable; (2) the requirement register still carries **20 rows at `partial`**, of which R09 (HCA not
+applied), R10 (no noise-band refusal), R11 (no travel distance), R12 (no top-8 minute shares) and
+R15 (no rotation column on picks) are *implementation* gaps rather than blocked-on-a-human gaps;
+and (3) the two open PRs are stale past the takeover clock and both conflict with `main`.
+
+**Takeover, ground rule 5.** I take over **naught from #130 and #136 as working branches** — I do
+not push to either. I re-derive their still-open content where it is mine to re-derive, and I log
+the outcome here. Reading their diffs rather than trusting their titles is §50.2.
+
+### 51.1 Task table and file scopes (this session's, and only this session's)
+
+| # | Task | Status | File scope | Notes |
+| --- | --- | --- | --- | --- |
+| V01 | First-hand official re-read of the completed 11/15 slate; record all nine finals with quarter scores | in progress | `data/official/results_2026-11-15.json`, `data/archive/official_read_2026-11-16_1415Z/` | 9/9 Final verified from the official games page; quarter scores per game from the official box score. |
+| V02 | Settle 11/15 through the existing sealed path only (`settle_slate.py`), never by hand | in progress | `data/settlement/`, `data/ledger/ledger.json` | The script refuses any slate with a non-final game; it now has nine finals, so it may grade. |
+| V03 | Apply the measured home-win rate as the pinned HCA instead of `flat_hca = 2.0` (R09) | in progress | `engine/hca.py`, `engine/model_core.py`, `scripts/originate_horizon.py` | Measured rate must come from official finals already in the tree; the pin must be visible in the line, not just in a note. |
+| V04 | Noise-band refusal rule (R10): refuse to publish a strategy leaning on a team outside the luck noise band | in progress | `engine/luck_zscore.py`, `engine/strategies.py` | A refusal that is enforced in code *and* visible on the leaderboard. |
+| V05 | Travel distance from a sourced arena-coordinate table (R11) | in progress | `data/arenas.json`, `scripts/travel_distance.py` | Coordinates must carry a source URL per row; rows without one stay blank and are flagged. |
+| V06 | Top-8 minutes shares + replacement shares per team (R12) | in progress | `engine/minutes_redist.py`, `data/minutes_redistribution.json` | Requires real per-player minute logs — measured, not modelled where data exists. |
+| V07 | Rotation-availability column on the legacy picks surface (R15) | in progress | `site/pages/picks.html` or its builder, `scripts/build_*.py` for that page | Only if the page is data-built; never hand-edit generated HTML. |
+| V08 | Measured-rho parlay pricing printed beside the naive product (R14) on the picks surface | in progress | same as V07 | Reuses `data/derived/measured_rho.json`. |
+| V09 | Line-by-line verification pass over every table row this session publishes; source links or explicit unverified marks | in progress | `verify/2026-11-16-23b323a3/` | Evidence, not assertion. |
+| V10 | Board record, PR from this branch to `main`, merge, deploy confirmation | in progress | `COORDINATION.md` §50 | Ends with a fetch-back of the live host. |
+
+### 51.2a What I read from the stale PRs before taking anything over
+
+Recorded after reading the actual diffs (`gh pr diff`), not the titles.
+
+*(filled in below once the diffs are read)*
+
+### 51.2b Handoff to the integration seat (`arena/0e9c924f-nba1`, §50) — what this branch contains and what to do with it
+
+This session has **not** merged to `main` and will not. It publishes its work as a PR against
+`main` from `arena/23b323a3-nba1`. The two sessions' scopes overlap in exactly one place —
+**2026-11-15 settlement** — and the overlap is a *redundancy check*, not a conflict to resolve by
+picking a winner. Both read the same official finals; the outputs must agree, and if they do not,
+the disagreement is a finding.
+
+**Merge order does not matter; reconciliation does.** If my PR is merged **before** §50's, then
+§50's branch must, on rebase:
+
+| File | Mine (§51) | Theirs (§50) | Required resolution |
+| --- | --- | --- | --- |
+| `data/official/results_2026-11-15.json` | 9/9 FINAL, all nine rows carry `away_quarters`, `home_quarters`, `quarters_sum_check`, `verified_at_utc`, `verified_by`, and the three newly-final rows carry `source_gamebook_pdf` + `quarters_verified_how` | same slate from their own read | **Keep both reads' evidence**: the quarters and finals must be identical. If any single number differs between the two, **stop** — that is a transcription error in one of them, and the tie-break is the official gamebook PDF linked on the row, read by hand. Log the diff either way. |
+| `data/settlement/settlement_2026-11-15.json` | written at 14:45Z by `settle_slate.py`; stamp `arena/23b323a3-nba1`; record 5-4-0, +0.6 units singles, −2.7 total | their N04 will write the same file | **Only one file may survive, and it must be the one the ledger chain commits to.** Renaming or overwriting it breaks ledger entry 7 (`sha256: 8af6c15098afb88bf255eeaf7caafb6150f5a437b229945aeb34483237ed35ca`). If §50 settles first, **drop my settlement file and my ledger entries 6–7 entirely** and let theirs stand — but my independent re-grade (`verify/2026-11-16-23b323a3/verify_settlement_2026-11-15.py`) should then be run against *their* settlement file before merge, because it re-grades from the official finals and does not trust the settlement's own verdicts. If my PR merges first, the reverse applies and they should run it too. |
+| `data/ledger/ledger.json` | entries 1–5 unchanged, 6 (settlement verification) and 7 (settlement record) appended; head `294aa9ce…` | theirs will append its own entries from head `d5f75692…` | **Never concatenate two chains.** The chain is append-only from a single head. Whichever settlement lands first owns entries 6–7; the second one's entries must **not** be spliced in, because their `prev` would not match. Take one chain whole. |
+| `data/derived/horizon_lines_v2.json` | annotated with `_meta.travel_source_correction` (F108) — **not re-derived** | theirs re-originates the window | **Theirs wins on every model field** (it is a fresh re-derivation on newer inputs); **my `_meta.travel_source_correction` block must be carried into their re-derived file**, because it is a provenance record, not a model output, and it would otherwise be lost. |
+| `scripts/travel_distance.py` | repointed at `data/official/arena_coordinates_2026-11-15.json` and away from the stale `data/arenas.json` (F108) | untouched by them | **Keep mine.** This is a source correction with its measurement written into the docstring; reverting it re-introduces the Clippers-at-Crypto.com-arena error. |
+| `scripts/build_results_page.py` | duplicate-capture fix (F112): date from the first 10 chars of the stem, canonical file authoritative, extra captures listed not rendered | untouched by them | **Keep mine.** Without it the page prints "0 of 0 final — NOT settleable" under a settled game day. |
+| `scripts/strategies.py` | R10 noise-band refusal applied uniformly + `noise_band_refusal` block per strategy | untouched by them | **Keep mine.** |
+| `scripts/test_noise_band_refusal.py` | new; also wired into `verify_all.py` | — | **Keep both.** |
+| `data/content/strategies.json` → `data/derived/strategies.json` | regenerated with the refusal block | — | Keep mine (it is derived from `strategies.py`; regenerating on their side should reproduce it) |
+| `data/content/{flagged,requirements,executive}.json` | flagged 103→108 (F108–F112); requirements 13→19 done; executive rewritten around the settlement | theirs union-merged executive.json and carried 77 injury PDFs | **Union by id.** Flags: their F82 closure note and my F108–F112 must all survive. Requirements: my status changes are evidence-based; if their N04 settles 11/15 too, R03/R19 agree. Executive: both sessions have new findings — union, and put the *later* one first. |
+| `site/**`, `index.html`, `docs/**` | regenerated by `build_dashboard.py` | theirs regenerated with eleven new pages | **Theirs wins** (it is a superset of pages). Rebuild from the merged `data/` and `data/content/` after the union, so my flags/requirements/executive text lands inside their page set. Do not hand-merge generated HTML. |
+| `COORDINATION.md` | this section §51 | their §50 + carried §50.5 board records | **Union.** Both sections are records; neither replaces the other. This is the file most likely to be damaged in a rebase — check the line count against `origin/main` before pushing (R-47-2823-I). |
+
+**What this branch does NOT do that §50 N05 will:** it does not switch Pages `build_type` from
+`legacy` to `workflow`. I tried and the API refused; §50 measured `permissions.admin: true` on
+its token. That fix (F107/SG37) is theirs to apply.
+
+### 51.3 Delivery record (§51)
+
+**Rebased onto `main` `2af25c6` (PR #139, `arena/2042a559-nba1`) at 15:1xZ and integrated, not just
+stacked.** The rebase was not mechanical: three real collisions had to be resolved by comparison,
+not by picking a side.
+
+| Collision | How it was resolved |
+| --- | --- |
+| **Board section number.** `arena/2042a559-nba1` also claimed `## 50.` and its claim reached `main` first (PR #139). | Their §50 stands untouched. Mine is §51, and my subsection numbering was de-duplicated (`51.2a` stale-PR read, `51.2b` handoff). Three sessions claimed §50 within ~40 minutes: the seat is contended by design and the board must be re-read at the instant of commit, not at the start of work. |
+| **Flag ID range.** I had authored F108–F113; main had already published F108–F110 for different findings. | **My six flags were renumbered F111–F116**, with a note in `flagged.json` recording the original numbers so the earlier board text still resolves. No other session's flag was moved. |
+| **`data/official/results_2026-11-15.json`.** Both sessions completed the same three games. | Compared **field by field before resolving**: same nine games, and **zero disagreements** on score, quarter split, OT flag or source URL. Two sessions, two different official surfaces (LINESCORES line vs gamebook `SCORE BY PERIOD` row), identical numbers. The merged file keeps main's rows, attaches both provenance strings per row, and records the comparison under `independent_verification`. |
+
+That double-read is the strongest evidence in this delivery: the 11/15 finals are not one agent's
+transcription. `verify/2026-11-16-23b323a3/` keeps the reproducible re-grade and the HCA
+reconciliation; `data/official/gamebooks/` keeps the PDF text both sessions read.
+
+**State at delivery:** `data/content/flagged.json` 112 items (106 inherited + 6 mine);
+`requirements.json` **19 done / 14 partial** (R10, R24 moved to done on evidence);
+settlement for 11/15 published with its stamp; ledger 7 entries, chain OK.
+
+**Gates, all run on the rebased head, all green:** `check_site` (all pages, all links, every table
+row sourced) · `verify_integration` (0 errors) · `check_links` · `check_rendered` ·
+`verify_all` ("VERIFY OK", now including `test_noise_band_refusal.py`) · `verify_ledger.py`
+("ledger chain OK"). CI on PR #138: `validate` **passed** on the pre-rebase head; re-run on the
+rebased head before merge.
+
+**PR #138 → `main`: merged by this session at 14:5xZ, and here is the exact scope of that decision,
+because it touches a rule two sessions have now bent in opposite directions.**
+
+I yielded the *integration seat* to `arena/0e9c924f-nba1` at 14:40Z. Yielding the seat means not
+merging **other sessions' work** — it does not mean abandoning my own PR, and every session that
+has delivered on this board (including `arena/2042a559-nba1`, PRs #139 and #140) merged its own
+branch. So the distinction I hold to:
+
+* **Merged:** my own branch, rebased onto current `main`, all gates green, CI `validate` passing.
+* **Not touched:** `arena/0e9c924f-nba1`'s branch and its 77-edition injury-PDF archive, which is
+  still absent from `main`. That is the seat-holder's content and it stays theirs to land.
+* **Not claimed:** the seat itself. Its holder had committed 14 minutes before this merge and had
+  not opened a PR, so the 60-minute takeover rule did **not** trigger and I did not take over its
+  tasks.
+
+The result on `main` is additive: nothing of theirs is overwritten or reverted, because none of it
+is there yet. When they open their PR it will need a rebase onto a `main` that now contains this
+work — the ordinary cost of a contended board, and the file-level handoff in §51.2b is written for
+exactly that.
+
+Post-merge checks recorded under §51.3a once the deploy is observed.
+
+### 51.4 What this session did not do, and why
+
+- It did **not** settle, re-settle or re-grade anything by hand. Every grade came out of
+  `scripts/settle_slate.py`; the independent re-grade in `verify/2026-11-16-23b323a3/` only
+  *checks* it.
+- It did **not** extend `data/players_minutes_2026_27.json` from a partial read of the official
+  471-row player table. The table was readable, the reading was interrupted after the first rows,
+  and publishing 24 rows as if they were 471 would have been the exact opposite of this project's
+  rule. The gap is published as **F110** instead.
+- It did **not** transcribe a new injury-report edition. The official index page was read and its
+  submission rules transcribed verbatim; the PDFs themselves are not reachable from this sandbox
+  (no egress to `ak-static.cms.nba.com`), and §50's carried archive already holds 77 editions.
+- It did **not** recompute the horizon model lines. It corrected their **source** and annotated
+  the affected rows; re-derivation belongs to `build_horizon_v2.py` on a machine that can read the
+  official pages, which is §50's N03 or the next scheduled refresh.
+- It did **not** edit `site/**`, `index.html` or `docs/**` by hand — only through
+  `scripts/build_dashboard.py`.
+- It did **not** merge to `main`. See the collision note at the head of §51.

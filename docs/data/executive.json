@@ -1,14 +1,29 @@
 {
  "title": "Executive Summary",
- "as_of": "2026-11-16",
- "headline": "The rolling horizon is 2026-11-16 to 2026-11-18: 25 games, each with two independent estimators, their disagreement published as the headline confidence signal and the blend underneath it. Home-court advantage is pinned to the measured official home-win rate (0.5285, worth 1.23 points), not fitted. 14 of the 25 picks clear every model gate and 0 are publishable outright, because no official injury edition covers 11/17 or 11/18 yet and five 11/16 teams print NOT YET SUBMITTED - so every pick is provisional and nothing is staked.",
- "lead": "This session re-read the official sources at 2026-11-16T02:12-02:17Z and re-cut the model from them: the per-date games pages for 11/16, 11/17 and 11/18, the official standings, the newest injury-report edition (11/15 09:00 PM) diffed against the previous one, and the official games page for 11/15. Six of nine 11/15 games were final at capture; three were still in progress and are stored as not settleable. The line window is now exactly the pick window: no line is originated for a game that has already tipped, and nothing beyond three days ahead is originated at all. Every table row on the site links to the official page it came from; a value no official source confirms is left blank and carried on the Flagged for Review page.",
+ "as_of": "2026-11-16 (re-read and settled at 2026-11-16T14:40–15:20Z)",
+ "headline": "The 2026-11-15 slate is COMPLETE and SETTLED. All nine games were read first-hand from the official site in this session and every quarter row sums to its printed final; data/settlement/settlement_2026-11-15.json carries the stamp 2026-11-16T14:45Z and the record 5-4-0 on nine published singles (+0.6 units at paper −110), with parlays −3.3 units for a settled total of −2.7 units. Two game days are now graded (11/14 and 11/15). The rolling horizon remains 2026-11-16 to 2026-11-18: 25 games, each with two independent estimators, their disagreement as the headline confidence signal and the blend underneath. Home-court advantage is pinned to the measured official home-win rate (0.5285, worth 1.23 points), not fitted. Nothing is staked: no strategy has passed the full validation gate set.",
+ "lead": "This session re-read https://www.nba.com/games?date=2026-11-15, where all nine games now print Final, and completed the three that were unfinished at the previous capture from the league's own gamebook PDFs (HOU@WAS 147-119, ATL@MIL 113-106, OKC@SAC 125-103, each with its SCORE BY PERIOD row transcribed and its quarter sums checked against the printed final). Only then did scripts/settle_slate.py grade the slate — it refuses any date holding a non-final game, and it had refused this one earlier in the day at 6 of 9 final. Two substantive defects were also found and fixed rather than worked around: a stale duplicate arena table that placed the LA Clippers in the wrong building, and a duplicate-capture bug that made the Results & Settlement page print '0 of 0 final — NOT settleable' directly beneath the section saying the same game day was settled. Both were found by reading the page and the data against the official source, not by a gate — all five gates were green while the second one was wrong.",
  "verdict": {
   "status": "PROVISIONAL - not funded",
   "one_line": "The model beats the naive reference on margin accuracy (MAE 12.98 against 13.62) and loses to it on totals (14.83 against 14.72) and on picking winners (42-18 against 40-20). S1 (side edge) is now 23-9, worth +11.91 model units, and for the first time its record is outside what luck alone produces (exact binomial p = 0.020, Wilson lower bound 0.546 against the 0.524 break-even) - but it fails the calibration gate (hit rate 0.719 against a mean predicted 0.627) and the stability gate (the bootstrap interval on the model's margin MAE still overlaps the reference), and the availability gate cannot run at all. Under the tier ceilings it stays a quarter-unit strategy. The 34 games of the 15-18 Nov roll are published as lines and paper picks, not as recommendations.",
   "why": "Sixty games with a 17.4-point residual standard deviation have finally made one record statistically distinguishable from a coin flip - and that is exactly when the other gates matter most. A hit rate the model itself did not predict is a calibration failure, not a windfall; an improvement whose interval overlaps the reference is not stable; and a gate that cannot run is not passed. Selective skill means paying for the part that survives every gate and nothing else."
  },
  "findings": [
+  {
+   "reading": "Nine of nine games final at https://www.nba.com/games?date=2026-11-15; quarter scores transcribed per game (six from the games page, three from the official gamebooks); every quarters row sums to its printed final; settlement graded 9 singles 5-4-0 and appended ledger entries 6 and 7, chain verified OK. Status: DONE. Source: https://www.nba.com/games?date=2026-11-15",
+   "title": "11/15 settled from official finals, first-hand",
+   "detail": ""
+  },
+  {
+   "reading": "data/arenas.json put the LA Clippers at Crypto.com Arena in Los Angeles; the official schedule page puts them at Intuit Dome, Inglewood, CA, and the repository's own official capture already said so. PHI and PHX venue names were stale in the same file. scripts/travel_distance.py now reads the official capture; the discrepancy is published as F108 rather than quietly overwritten. Status: FIXED, flagged F108. Source: https://www.nba.com/schedule",
+   "title": "Two arena tables in the repo disagreed, and travel distance used the wrong one",
+   "detail": ""
+  },
+  {
+   "reading": "A session-namespaced duplicate capture (results_2026-11-15_dfef26dc.json) became its own page section headed '2026-11-15_dfef26dc', matched no rows and printed '0 of 0 final — NOT settleable' under the settled game day. Fixed in the builder and published as F112. This is the clearest evidence in the repo that a green gate suite is not the same thing as a correct page. Status: FIXED, flagged F112. Source: https://www.nba.com/games?date=2026-11-15",
+   "title": "The settlement page contradicted itself while all five gates passed",
+   "detail": ""
+  },
   {
    "n": 1,
    "title": "The model wins on the margin and loses on totals and winners",
@@ -84,6 +99,7 @@
   }
  ],
  "what_is_live_now": [
+  "Two graded game days with a visible settlement stamp on site/pages/results.html: 2026-11-14 (2026-11-15T12:35Z) and 2026-11-15 (2026-11-16T14:45Z, 5-4-0 on nine singles, −2.7 units total at paper −110). The stamps are read from the settlement JSON, so the page cannot show a settlement that was not written and chained.",
   "Originated spreads, totals and fair moneylines for all 25 games across 2026-11-16, 2026-11-17 and 2026-11-18 - the pick window and the line window are now the same three days.",
   "Two estimators per game with their disagreement published as the headline confidence signal (max 1.37 pp, mean 0.45 pp, gate 4.0 pp) and the blend underneath.",
   "Home-court advantage pinned to the measured official home-win rate: 0.5285 from the standings HOME/ROAD columns (102 of 193), cross-checked at 0.5155 from the final-score corpus, worth 1.23 points.",

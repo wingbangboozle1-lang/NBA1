@@ -1,74 +1,17 @@
 {
  "_meta": {
-  "source": "data/arenas.json (approx arena coords) + official schedule",
+  "source": "data/official/arena_coordinates_2026-11-15.json (venue names transcribed from https://www.nba.com/schedule; coordinates from the Wikipedia coordinate parameter, SOURCED SECONDARY - not NBA-published) + official schedule",
+  "supersedes": "data/arenas.json, whose LAC/LAL/PHX/PHI/SAC arena entries were measured wrong against the official schedule page in COORDINATION \u00a750 (finding F-50-01).",
   "method": "great-circle miles from previous game arena to current game arena (away team only); home team = 0.0",
-  "note": "Away-team travel is None when the team has no previous game in the capture window (first game of season for that team). Coordinates are approximate and flagged for review."
+  "note": "Away-team travel is None when the team has no previous game in the capture window (first game of season for that team).",
+  "correction_measured_utc": "2026-11-16T15:10Z",
+  "correction_by": "arena/23b323a3-nba1"
  },
  "travel": {
-  "2026-11-13": {
-   "NYK@IND": {
-    "home": 0.0,
-    "away": null
-   },
-   "MIL@ORL": {
-    "home": 0.0,
-    "away": null
-   },
-   "CLE@MIA": {
-    "home": 0.0,
-    "away": null
-   },
-   "ATL@CHI": {
-    "home": 0.0,
-    "away": null
-   },
-   "MEM@NOP": {
-    "home": 0.0,
-    "away": null
-   },
-   "UTA@HOU": {
-    "home": 0.0,
-    "away": null
-   },
-   "GSW@SAS": {
-    "home": 0.0,
-    "away": null
-   },
-   "POR@SAC": {
-    "home": 0.0,
-    "away": null
-   },
-   "OKC@LAC": {
-    "home": 0.0,
-    "away": null
-   }
-  },
-  "2026-11-14": {
-   "DEN@NOP": {
-    "home": 0.0,
-    "away": null
-   },
-   "DAL@CLE": {
-    "home": 0.0,
-    "away": null
-   },
-   "DET@MIA": {
-    "home": 0.0,
-    "away": null
-   },
-   "BKN@MEM": {
-    "home": 0.0,
-    "away": null
-   },
-   "CHI@MIN": {
-    "home": 0.0,
-    "away": 353.2
-   }
-  },
   "2026-11-15": {
    "IND@PHI": {
     "home": 0.0,
-    "away": 582.5
+    "away": null
    },
    "LAL@PHX": {
     "home": 0.0,
@@ -80,41 +23,41 @@
    },
    "SAS@UTA": {
     "home": 0.0,
-    "away": 1089.7
+    "away": null
    },
    "DAL@BOS": {
     "home": 0.0,
-    "away": 549.2
+    "away": null
    },
    "NYK@TOR": {
     "home": 0.0,
-    "away": 440.3
+    "away": null
    },
    "HOU@WAS": {
     "home": 0.0,
-    "away": 1218.9
+    "away": null
    },
    "ATL@MIL": {
     "home": 0.0,
-    "away": 81.4
+    "away": null
    },
    "OKC@SAC": {
     "home": 0.0,
-    "away": 361.2
+    "away": null
    }
   },
   "2026-11-16": {
    "ORL@BOS": {
     "home": 0.0,
-    "away": 1116.1
+    "away": null
    },
    "CHI@CLE": {
     "home": 0.0,
-    "away": 630.2
+    "away": null
    },
    "MEM@WAS": {
     "home": 0.0,
-    "away": 763.6
+    "away": null
    },
    "PHI@BKN": {
     "home": 0.0,
@@ -126,15 +69,15 @@
    },
    "POR@MIN": {
     "home": 0.0,
-    "away": 1511.0
+    "away": null
    },
    "GSW@NOP": {
     "home": 0.0,
-    "away": 502.9
+    "away": null
    },
    "PHX@DEN": {
     "home": 0.0,
-    "away": 585.9
+    "away": 585.4
    }
   },
   "2026-11-17": {
@@ -142,21 +85,89 @@
     "home": 0.0,
     "away": 0.0
    },
-   "DET@SAS": {
-    "home": 0.0,
-    "away": 1144.3
-   },
    "POR@MIN": {
     "home": 0.0,
     "away": 0.0
    },
+   "DET@SAS": {
+    "home": 0.0,
+    "away": null
+   },
    "UTA@LAC": {
     "home": 0.0,
-    "away": 580.9
+    "away": 589.1
    },
    "CHA@LAL": {
     "home": 0.0,
-    "away": 0.0
+    "away": 8.0
+   }
+  },
+  "2026-11-18": {
+   "MEM@CLE": {
+    "home": 0.0,
+    "away": 304.7
+   },
+   "HOU@IND": {
+    "home": 0.0,
+    "away": 1025.8
+   },
+   "MIL@MIA": {
+    "home": 0.0,
+    "away": 1270.2
+   },
+   "PHI@ORL": {
+    "home": 0.0,
+    "away": 938.0
+   },
+   "CHI@BKN": {
+    "home": 0.0,
+    "away": 405.4
+   },
+   "WAS@TOR": {
+    "home": 0.0,
+    "away": 350.0
+   },
+   "DET@NOP": {
+    "home": 0.0,
+    "away": 502.7
+   },
+   "ATL@OKC": {
+    "home": 0.0,
+    "away": 732.6
+   },
+   "GSW@DAL": {
+    "home": 0.0,
+    "away": 442.7
+   },
+   "BOS@DEN": {
+    "home": 0.0,
+    "away": 1766.0
+   },
+   "UTA@LAL": {
+    "home": 0.0,
+    "away": 8.0
+   },
+   "PHX@SAC": {
+    "home": 0.0,
+    "away": 885.9
+   }
+  },
+  "2026-11-19": {
+   "GSW@MEM": {
+    "home": 0.0,
+    "away": 419.8
+   },
+   "POR@MIL": {
+    "home": 0.0,
+    "away": 297.8
+   },
+   "NYK@MIN": {
+    "home": 0.0,
+    "away": 692.4
+   },
+   "LAC@SAS": {
+    "home": 0.0,
+    "away": 1209.1
    }
   }
  }

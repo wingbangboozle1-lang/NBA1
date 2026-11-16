@@ -118,7 +118,48 @@
    },
    "note": "Rolling-slate publication for the 2026-11-16 .. 2026-11-18 window, generated before the first tip of the window (2026-11-17T00:00Z) and after the previous slate's settlement. Preregistration files for every strategy family are frozen by digest here. Every earlier vintage stays settleable from its own archive under data/archive/.",
    "prev": "c46e0a37b321679b968ca4aee84a7477a53b2d1f5fa803bd9213672cc310a4bb"
+  },
+  {
+   "entry": 6,
+   "type": "settlement_settlement_verification",
+   "at_utc": "2026-11-16T14:45Z",
+   "verifies_entry": 4,
+   "files_at_settlement": {
+    "data/archive/horizon_picks_2026-11-15.json": "82974ede2fa98c5a515f521f39103724ea6165b3e12d8e725ddb2476c5b66dfe",
+    "data/archive/horizon_lines_2026-11-15.json": "534f0cc160c47d4f839793b102afd46a9af854c0f30b5f476956520e2a85e633"
+   },
+   "unchanged_since_pre_tip": true,
+   "settled_dates": [
+    "2026-11-15"
+   ],
+   "prev": "18a25667d251d2596b157dba6e06516514eb57e112e29d846902eba5085395c0"
+  },
+  {
+   "entry": 7,
+   "type": "settlement_record",
+   "at_utc": "2026-11-16T14:45Z",
+   "file": "data/settlement/settlement_2026-11-15.json",
+   "sha256": "8af6c15098afb88bf255eeaf7caafb6150f5a437b229945aeb34483237ed35ca",
+   "official_finals_files": [
+    "data/official/results_2026-11-15.json"
+   ],
+   "settled_by": "arena/23b323a3-nba1 (scripts/settle_slate.py)",
+   "summary": {
+    "record": "5-4-0",
+    "singles_units_at_minus110": 0.6,
+    "parlay_units": -3.3,
+    "total_units_settled": -2.7,
+    "dates_settled": [
+     "2026-11-15"
+    ],
+    "dates_unsettled": [
+     "2026-11-16",
+     "2026-11-17",
+     "2026-11-18"
+    ]
+   },
+   "prev": "d5f75692d7d7f1dc8d2019a39c4f3c2850e4386c9e1a9df47648f7b8b739a216"
   }
  ],
- "head": "18a25667d251d2596b157dba6e06516514eb57e112e29d846902eba5085395c0"
+ "head": "294aa9ce20ad771479c0e5d69c53b48a286e22be03f01db52a4fd20267b2fca7"
 }

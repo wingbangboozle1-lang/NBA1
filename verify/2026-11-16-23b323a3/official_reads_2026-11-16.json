@@ -1,0 +1,161 @@
+{
+ "session": "arena/23b323a3-nba1",
+ "read_utc": "2026-11-16T14:40Z..15:20Z",
+ "note": "Every value below was copied out of the official page or PDF named beside it, in this session. Nothing was inferred, rounded into a different value, or carried over from an earlier capture.",
+ "reads": [
+  {
+   "url": "https://www.nba.com/games?date=2026-11-15",
+   "read_for": "state of all nine 2026-11-15 games",
+   "transcribed": {
+    "IND@PHI": "Final 124-131",
+    "LAL@PHX": "Final 131-123",
+    "CHA@LAC": "Final 105-113",
+    "SAS@UTA": "Final 110-102",
+    "DAL@BOS": "Final 94-131",
+    "NYK@TOR": "Final/OT 112-108",
+    "HOU@WAS": "Final 147-119",
+    "ATL@MIL": "Final 113-106",
+    "OKC@SAC": "Final 125-103"
+   }
+  },
+  {
+   "url": "https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf",
+   "read_for": "HOU@WAS quarter scores (SCORE BY PERIOD row)",
+   "transcribed": {
+    "away_quarters": [
+     36,
+     37,
+     46,
+     28
+    ],
+    "home_quarters": [
+     31,
+     23,
+     34,
+     31
+    ],
+    "away_pts": 147,
+    "home_pts": 119,
+    "attendance": 18041,
+    "officials": "Bill Kennedy, Jacyn Goble, Simone Jelks",
+    "venue": "Capital One Arena, Washington, DC",
+    "check": "36+37+46+28=147 and 31+23+34+31=119, both equal to the printed final"
+   }
+  },
+  {
+   "url": "https://statsdmz.nba.com/pdfs/20261115/20261115_ATLMIL_book.pdf",
+   "read_for": "ATL@MIL quarter scores (SCORE BY PERIOD row); the box-score quarter rows were truncated in the extracted text, so the period totals were cross-checked against the running play-by-play (End of 3rd QUARTER 80-87)",
+   "transcribed": {
+    "away_quarters": [
+     18,
+     37,
+     32,
+     26
+    ],
+    "home_quarters": [
+     37,
+     16,
+     27,
+     26
+    ],
+    "away_pts": 113,
+    "home_pts": 106,
+    "attendance": 11474,
+    "officials": "Ben Taylor, Kevin Cutler, Gina Catanzariti",
+    "venue": "Fiserv Forum, Milwaukee, WI",
+    "check": "18+37+32+26=113 and 37+16+27+26=106, both equal to the printed final"
+   }
+  },
+  {
+   "url": "https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC_book.pdf",
+   "read_for": "OKC@SAC quarter scores (SCORE BY PERIOD row)",
+   "transcribed": {
+    "away_quarters": [
+     32,
+     30,
+     32,
+     31
+    ],
+    "home_quarters": [
+     24,
+     26,
+     30,
+     23
+    ],
+    "away_pts": 125,
+    "home_pts": 103,
+    "attendance": 13021,
+    "officials": "Justin Van Duyne, Tre Maddox, Dannica Baroody",
+    "venue": "Golden 1 Center, Sacramento, CA",
+    "check": "32+30+32+31=125 and 24+26+30+23=103, both equal to the printed final"
+   }
+  },
+  {
+   "url": "https://www.nba.com/schedule?date=2026-11-17",
+   "read_for": "venue names, to audit the repository's own arena table",
+   "transcribed": {
+    "2026-11-15 venues": {
+     "IND@PHI": "Xfinity Mobile Arena, Philadelphia, PA",
+     "LAL@PHX": "Mortgage Matchup Center, Phoenix, AZ",
+     "CHA@LAC": "Intuit Dome, Inglewood, CA",
+     "SAS@UTA": "Delta Center, Salt Lake City, UT",
+     "DAL@BOS": "TD Garden, Boston, MA",
+     "NYK@TOR": "Scotiabank Arena, Toronto, ON",
+     "HOU@WAS": "Capital One Arena, Washington, DC",
+     "ATL@MIL": "Fiserv Forum, Milwaukee, WI",
+     "OKC@SAC": "Golden 1 Center, Sacramento, CA"
+    },
+    "2026-11-16 slate": {
+     "count": 8,
+     "tips": [
+      "ORL@BOS 7:00 PM ET",
+      "CHI@CLE 7:00 PM ET",
+      "MEM@WAS 7:00 PM ET",
+      "PHI@BKN 7:30 PM ET",
+      "HOU@MIA 7:30 PM ET",
+      "POR@MIN 8:00 PM ET",
+      "GSW@NOP 8:00 PM ET",
+      "PHX@DEN 9:00 PM ET"
+     ]
+    }
+   },
+   "correction_it_forced": {
+    "LAC": "data/arenas.json said Crypto.com Arena, Los Angeles; the official schedule says Intuit Dome, Inglewood, CA (finding F108)",
+    "PHI": "data/arenas.json said Wells Fargo Center; the official schedule says Xfinity Mobile Arena",
+    "PHX": "data/arenas.json said Footprint Center; the official schedule says Mortgage Matchup Center"
+   }
+  },
+  {
+   "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "read_for": "the submission rules and the 2026-11-16 edition index",
+   "transcribed_verbatim": "By 5 p.m. local time the day before a game (other than the second day of a back-to-back), teams must designate a participation status and identify a specific injury, illness, other medical condition, or other reason for any player whose participation in the game may be affected for any reason. For the second game of a back-to-back, teams must report the above information by 1 p.m. local time on the day of the game. In addition, teams are required to submit a game-day injury report between 11 a.m. and 1 p.m. local time (and between 8 and 10 a.m. for tip-offs 5 p.m. or earlier) on game days (besides the second game of a back-to-back).",
+   "editions_listed_2026_11_16": "every 15 minutes from 12:00 a.m. ET to 09:15 a.m. ET, each with its own PDF URL under https://ak-static.cms.nba.com/referee/injury/",
+   "noted_limit": "the PDF bytes themselves were not downloaded in this session (no direct egress to ak-static.cms.nba.com from this sandbox; the index HTML was readable). No transcription of a new edition was therefore claimed."
+  },
+  {
+   "url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame",
+   "read_for": "whether a national per-player minutes table is readable from here",
+   "transcribed": {
+    "table_size": "471 Rows",
+    "columns_include": "GP, W, L, Min, PTS, REB, AST",
+    "sample_rows": [
+     {
+      "player": "Luka Dončić",
+      "team": "LAL",
+      "gp": 12,
+      "min": 35.9,
+      "pts": 39.0
+     },
+     {
+      "player": "Shai Gilgeous-Alexander",
+      "team": "OKC",
+      "gp": 14,
+      "min": 33.0,
+      "pts": 30.9
+     }
+    ]
+   },
+   "noted_limit": "the read was interrupted after the first rows. The capture was NOT extended from a partial read: data/players_minutes_2026_27.json is unchanged and the gap is published as F110."
+  }
+ ]
+}
