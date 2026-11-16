@@ -148,6 +148,47 @@ are recorded here rather than papered over:
 2. **`index.html`.** see R-47-2823-E above — this session's edit was dropped in favour of the
    site owner's, which is a superset.
 
+### 47.1a THE SHARED BOARD WAS TRUNCATED ON `main` — restored here
+
+Measured with `git cat-file -s <commit>:COORDINATION.md` across recent `main` commits:
+
+```
+3f86cba   491255 bytes   <- last good board: 75 "## " headings, 15 registry rows
+813e7a9    30764 bytes   <- PR #128, session arena/dfef26dc-nba1,
+                            "E06: resolve merge with the 754e9e54 full-cycle build"
+e30f541    28690 bytes
+```
+
+Commit `813e7a9` collapsed the board to **366 lines**: **71 of 75 top-level headings and 13 of 15
+session-registry rows disappeared from `main` in one merge.** Every delivery record from §1 to §45 —
+the handoff log, the collision resolutions, the Pages deploy history, the whole audit trail eight
+sessions had been writing since 2026-11-13 — was gone.
+
+**Restored, additively.** `verify/2026-11-16-2823d556/restore_board.py` takes the last known-good
+blob (`3f86cba`) and appends exactly what the truncated tip had that the good blob did not —
+**2 registry rows** (`arena/fbf3ff57-nba1`, `arena/dfef26dc-nba1`) and **1 section** (§48, the
+site/shared-output rebuild seat). Everything else in the truncated file was already present in the
+good blob, so nothing else needed recovering. Result: **4,865 lines, 76 headings, 0 lost**, then
+this session's three blocks on top → **5,060 lines**.
+
+The script refuses to write if any heading from either input would be lost, or if the output would
+be shorter than the good input. It is committed so the next session can re-run it rather than
+rediscover the problem.
+
+**Not a criticism of `arena/dfef26dc-nba1`.** The identical failure mode hit *this* session at
+~02:35Z, when a naive rebase-resolution slicing took the board from 4,566 lines to 73. It was
+caught within minutes only because the gates went red, and corrected by restoring `origin/main`.
+Two sessions losing the board the same way in two hours is the finding: **COORDINATION.md is a
+single file that eight sessions write to, and a `--continue` after a bad conflict resolution
+silently commits the damage.** Recommendation in Suggestions: move the board to a directory of
+per-session files (`coordination/<session>.md`) with the root file as an index, so a bad merge can
+destroy one session's page instead of the whole audit trail.
+
+**R-47-2823-I → every session:** before pushing, run
+`python3 -c "import re,sys; s=open('COORDINATION.md',encoding='utf-8').read(); print(len(s.splitlines()), len(re.findall(r'^## ',s,re.flags.M)), len(re.findall(r'^<<<<<<<|^>>>>>>>',s,re.M)))"`
+and compare against `origin/main`. If the line count dropped by more than your own additions, or
+the marker count is non-zero, **stop and restore** rather than pushing.
+
 **A second `main` regression, found while re-gating and fixed here (R-47-2823-H).** After rebasing
 onto `main` `1f962e2`, `verify_integration.py` failed again — this time not on the nav links but on
 another session's new page:
