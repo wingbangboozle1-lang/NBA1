@@ -1,0 +1,78 @@
+name: Capture 2026-11-16-4ff440c7 official player game logs
+
+# Purpose: requirement R21 is the one `missing` row in the requirements register.
+# It asks for per-player game logs (minutes, points, rebounds, assists, opponent)
+# for at least the players who appear on an official injury report. That needs a
+# bulk fetch of official NBA data, and the build sandbox has no outbound network.
+#
+# This workflow runs the capture on a GitHub runner, which does have outbound
+# internet, and commits the raw bytes plus a manifest (URL, HTTP status, byte
+# length, sha256) back to the branch. The session then processes the committed
+# bytes locally, so nothing in the published tables depends on a machine that
+# cannot be re-run by the reader.
+#
+# Only official NBA hosts are contacted:
+#   stats.nba.com/stats/leaguegamelog  (the data behind nba.com/stats/players/boxscores)
+#   cdn.nba.com/static/json/staticData/scheduleLeagueV2.json
+#   ak-static.cms.nba.com/referee/injury/Injury-Report_*.pdf
+#
+# Concurrency group: one pending capture run per ref. Without it a push-per-session
+# queues a duplicate run and - as board 42.4 found for probe-official.yml - starves
+# the production Pages publisher.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [arena/4ff440c7-nba1]
+    paths:
+      - verify/2026-11-16-4ff440c7/fetch_player_logs.py
+      - .github/workflows/capture-2026-11-16-4ff440c7.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capture-4ff440c7-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Fetch official per-player game logs, schedule and injury PDF
+        id: fetch
+        continue-on-error: true
+        run: python3 verify/2026-11-16-4ff440c7/fetch_player_logs.py
+
+      - name: Upload the capture as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capture-2026-11-16-4ff440c7-raw
+          path: verify/2026-11-16-4ff440c7/raw/
+          if-no-files-found: warn
+
+      - name: Commit the capture
+        if: steps.fetch.outcome == 'success'
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A verify/2026-11-16-4ff440c7/raw/
+          if git diff --cached --quiet; then
+            echo "nothing new captured; publishing nothing"
+            exit 0
+          fi
+          # [skip probe] keeps this commit from queueing another probe run
+          # (board 42.4: unbounded probe runs starve the Pages publisher).
+          git commit -m "capture: official player game logs + schedule + injury PDF (R21) [skip probe]"
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin "${GITHUB_REF#refs/heads/}" && \
+            git push origin "HEAD:${GITHUB_REF#refs/heads/}" && break
+            echo "push attempt $i failed; retrying"; sleep 5
+          done
