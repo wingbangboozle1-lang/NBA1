@@ -3,422 +3,100 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Strategies and leaderboard &middot; NBA1</title>
-<link rel="stylesheet" href="../assets/site.css">
-
+<title>NBA1 &mdash; Strategies &amp; Leaderboard</title>
+<link rel="stylesheet" href="../../styles.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
+
 <header class="topbar">
   <div class="wrap topbar-in">
     <a class="brand" href="../../index.html">
-      <span class="mark">NBA1</span>
-      <span class="brand-txt">Originated lines &amp; strategy lab</span>
+      <span class="brand-mark">N1</span>
+      <div><span class="brand-txt">NBA1</span><span class="brand-sub">originated lines &bull; strategy lab</span></div>
     </a>
     <nav class="topnav">
-      <a href="../../model-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
-      <a href="picks.html">Horizon 14–17 (session build)</a>
-      <a href="../../picks.html">Rolling horizon pick file</a>
-      <a href="picks.html">Horizon</a>
-      <a href="strategies.html">Evidence</a>
-      <a href="decisions.html">Decisions</a>
-      <a href="suggestions.html">Suggestions</a>
+      <a href="../../index.html">Home</a>
+      <a href="picks.html">Picks</a>
+      <a href="validation.html">Validation</a>
+      <a href="luck.html">Luck</a>
       <a href="flagged.html">Flagged</a>
     </nav>
   </div>
 </header>
+
 <div class="wrap layout">
   <aside class="sidebar">
     <div class="side-h">Sections</div>
-    <div class="nav-group"><h3>HORIZON</h3>
-<a href="roll.html">Rolling Slate</a>
-<a href="picks.html">Lines &amp; Picks</a>
-<a href="props.html">Player Props</a>
-<a href="prop-variance.html">Prop Variance &amp; Rotation</a>
-<a href="injuries.html">Injuries &amp; Rotation</a>
-<a href="gameday.html">Game-Day Injury Read</a>
-<a href="gameflow.html">Game Flow</a>
-</div>
-<div class="nav-group"><h3>EVIDENCE</h3>
-<a href="strategies.html">Strategies &amp; Leaderboard</a>
-<a href="validation.html">Validation Gates</a>
-<a href="leaderboard.html">Leaderboard &amp; Rewards</a>
-<a href="correlations.html">Correlations</a>
-<a href="luck.html">Luck &amp; Skill</a>
-<a href="backtest.html">Out-of-Sample Backtest</a>
-<a href="model.html">Model &amp; Teams</a>
-</div>
-<div class="nav-group"><h3>VERIFICATION</h3>
-<a href="source-check.html">Official Source Check</a>
-<a href="official-verify.html">Live Re-verification</a>
-<a href="verify-2026-11-15.html">Nov 15 re-verification</a>
-</div>
-<div class="nav-group"><h3>DECISION</h3>
-<a href="questions.html">Open Questions</a>
-<a href="suggestions.html">Suggestions</a>
-<a href="decisions.html">Decisions: pick a path</a>
-<a href="requirements.html">Brief Traceability</a>
-<a href="flagged.html">Flagged for Review</a>
-<a href="sources.html">Source Register</a>
-<a href="../../EXECUTIVE_SUMMARY.md">Executive Summary</a>
-<a href="repo-review.html">Repo Review</a>
-</div>
-<div class="nav-group"><h3>INDEPENDENT CHECK &middot; 14 NOV</h3>
-<a href="../../verified/index.html">&#10003; What is actually true</a>
-<a href="../../verified/summary.html">Executive summary</a>
-<a href="../../verified/verification.html">Row-level verification</a>
-<a href="../../verified/review.html">Repo review</a>
-<a href="../../verified/flagged.html">Flagged (17)</a>
-</div>
-    <div class="side-note">
-      <strong>Reading rule.</strong> Every table row either links to the official source
-      it came from or carries an explicit no-source mark with a stated reason (the mark
-      explains why no official source exists or could confirm the cell). A blank or
-      dashed cell means the value could not be confirmed from an official source &mdash;
-      it is never filled in by guesswork. See
-      <a href="flagged.html">Flagged for Review</a>.
+    <div class="nav-group"><h3>EVIDENCE</h3>
+      <a href="strategies.html">Strategies &amp; Leaderboard</a>
+      <a href="validation.html">Validation Gates</a>
+      <a href="correlations.html">Correlations</a>
+      <a href="luck.html">Luck &amp; Skill</a>
+      <a href="backtest.html">Out-of-Sample Backtest</a>
+      <a href="model.html">Model &amp; Teams</a>
     </div>
+    <div class="nav-group"><h3>DECISION</h3>
+      <a href="questions.html">Open Questions</a>
+      <a href="suggestions.html">Suggestions</a>
+      <a href="flagged.html">Flagged for Review</a>
+      <a href="sources.html">Source Register</a>
+    </div>
+    <div class="side-note"><strong>No strategy is funded.</strong> All are capped at a quarter unit or held as research-only until every runnable gate passes.</div>
   </aside>
+
   <main id="main">
     <div class="page-head">
-      <h1>Strategies and leaderboard</h1>
-      <p class="sub">Ten strategies, the reward tiers they earn, and the leaderboard that ranks them &mdash; with nothing promoted that has not cleared every gate.</p>
+      <h1>Strategies &amp; Leaderboard</h1>
+      <p class="sub">Ten strategies tested against a strictly out-of-sample window. Every strategy must pass validation gates before promotion. Leaderboard score weights sample, edge, calibration, result and gates.</p>
     </div>
-    <h2 class="sec">Leaderboard</h2><p class="secsub">Ranked by the reward score. The tier is capped by the gates, not by the score: a strategy that fails the skill gate cannot be promoted past a quarter unit however high it scores.</p>
-<div class="tablewrap">
-<table class="tbl "
->
-<thead><tr>
-<th>#</th>
-<th>ID</th>
-<th>Strategy</th>
-<th>Family</th>
-<th>Graded</th>
-<th>Record</th>
-<th>Units</th>
-<th>Score</th>
-<th>Tier</th>
-<th>Cap note</th>
-<th class="src">Source</th>
-</tr></thead><tbody>
-<tr>
-<td>1</td>
-<td><b>S1</b></td>
-<td>Side edge vs reference</td>
-<td>Single bet</td>
-<td>32</td>
-<td>23-9</td>
-<td>11.91</td>
-<td>84.8</td>
-<td>Tier 3 - Quarter unit</td>
-<td>Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G2, G5 failed.</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>2</td>
-<td><b>S5</b></td>
-<td>Back-to-back fade</td>
-<td>Single bet</td>
-<td>12</td>
-<td>8-4</td>
-<td>3.27</td>
-<td>77.7</td>
-<td>Tier 3 - Quarter unit</td>
-<td>Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G4, G5 failed.</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>3</td>
-<td><b>S2</b></td>
-<td>Total edge vs reference</td>
-<td>Single bet</td>
-<td>15</td>
-<td>8-7</td>
-<td>0.27</td>
-<td>43.1</td>
-<td>Tier 3 - Quarter unit</td>
-<td>Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G2, G4, G5 failed.</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>4</td>
-<td><b>S10</b></td>
-<td>Same-game parlay (side + total)</td>
-<td>Parlay / SGP</td>
-<td>26</td>
-<td>11-15</td>
-<td>3.63</td>
-<td>34.0</td>
-<td>Tier 3 - Quarter unit</td>
-<td>Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G3, G4, G5 failed.</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>5</td>
-<td><b>S3</b></td>
-<td>Moneyline value</td>
-<td>Single bet</td>
-<td>22</td>
-<td>10-12</td>
-<td>-2.91</td>
-<td>33.9</td>
-<td>Tier 3 - Quarter unit</td>
-<td>Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G3, G4, G5 failed.</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>6</td>
-<td><b>S9</b></td>
-<td>Two-leg cross-game parlay</td>
-<td>Parlay</td>
-<td>8</td>
-<td>3-5</td>
-<td>-1.30</td>
-<td>13.0</td>
-<td>Tier 3 - Quarter unit</td>
-<td>Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G1, G2, G3, G4, G5 failed.</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>7</td>
-<td><b>S4</b></td>
-<td>Pace-driven total</td>
-<td>Single bet</td>
-<td>0</td>
-<td>0-0</td>
-<td>0.00</td>
-<td>0.0</td>
-<td>Not funded - research only</td>
-<td>No graded record yet, or a hard gate failure. - never graded.</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>8</td>
-<td><b>S6</b></td>
-<td>Availability shock</td>
-<td>Single bet</td>
-<td>0</td>
-<td>0-0</td>
-<td>0.00</td>
-<td>0.0</td>
-<td>Not funded - research only</td>
-<td>No graded record yet, or a hard gate failure. - never graded.</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>9</td>
-<td><b>S7</b></td>
-<td>Player points prop</td>
-<td>Player prop</td>
-<td>0</td>
-<td>0-0</td>
-<td>0.00</td>
-<td>0.0</td>
-<td>Not funded - research only</td>
-<td>No graded record yet, or a hard gate failure. - never graded.</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>10</td>
-<td><b>S8</b></td>
-<td>Points + rebounds + assists combo</td>
-<td>Player prop</td>
-<td>0</td>
-<td>0-0</td>
-<td>0.00</td>
-<td>0.0</td>
-<td>Not funded - research only</td>
-<td>No graded record yet, or a hard gate failure. - never graded.</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-</tbody></table></div>
-<p class="tnote">Units assume the standard -110 price, which is a disclosed convention, not an observed price: no sportsbook price was observable anywhere in this environment. A blank or 0 record means the strategy has no graded plays, never a loss.</p>
-<h2 class="sec">Reward tiers</h2><p class="secsub">What a strategy earns once it clears the gates it must clear.</p>
-<div class="tablewrap">
-<table class="tbl "
->
-<thead><tr>
-<th>Tier</th>
-<th>Name</th>
-<th>Rule</th>
-<th>Minimum score</th>
-<th class="src">Source</th>
-</tr></thead><tbody>
-<tr>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td>Tier 1 - Funded</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td>Tier 2 - Half unit</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td>Tier 3 - Quarter unit</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td>Not funded - research only</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-</tbody></table></div>
-<h2 class="sec">The strategy library</h2><p class="secsub">What each strategy actually is, and why it was written.</p>
-<div class="tablewrap">
-<table class="tbl "
->
-<thead><tr>
-<th>ID</th>
-<th>Name</th>
-<th>Family</th>
-<th>Market</th>
-<th>Rule</th>
-<th>Threshold</th>
-<th>Why</th>
-<th>Ungraded reason</th>
-<th class="src">Source</th>
-</tr></thead><tbody>
-<tr>
-<td>S1</td>
-<td><b>Side edge vs reference</b></td>
-<td>Single bet</td>
-<td>Point spread</td>
-<td>Play the side when the originated margin differs from the reference spread by at least 3.0 points.</td>
-<td>3.0 pts</td>
-<td>The additive efficiency model collapses to a net-rating difference, so a side edge can only come from shrinkage, home court, rest and availability. A 3.0-point filter keeps only the plays where those refinements actually bite.</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S2</td>
-<td><b>Total edge vs reference</b></td>
-<td>Single bet</td>
-<td>Game total</td>
-<td>Play over/under when the originated total differs from the reference total by at least 6.0 points.</td>
-<td>6.0 pts</td>
-<td>The reference total is simply the two teams' published scoring averages added together, so it ignores defence entirely. The gap is the opponent-adjustment signal.</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S3</td>
-<td><b>Moneyline value</b></td>
-<td>Single bet</td>
-<td>Moneyline</td>
-<td>Play the moneyline when the originated win probability differs from the reference win probability by at least 6 percentage points and the originated price is shorter than +200.</td>
-<td>6 pp</td>
-<td>Moneylines punish favourites less than spreads do, so a large probability gap is the efficient way to monetise a side edge on a big favourite.</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S4</td>
-<td><b>Pace-driven total</b></td>
-<td>Single bet</td>
-<td>Game total</td>
-<td>Totals only, and only when the game's expected pace is at least 3.0 possessions per 48 minutes away from the league average AND the total edge is at least 4.0 points.</td>
-<td>pace &gt;= 3.0 and 4.0 pts</td>
-<td>Pace is the most persistent team stat in the official advanced table. Restricting totals to genuine pace outliers removes the games where the total edge is just defensive noise.</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S5</td>
-<td><b>Back-to-back fade</b></td>
-<td>Single bet</td>
-<td>Point spread</td>
-<td>Exactly one team is on the second night of a back-to-back and the originated margin differs from the reference spread by at least 2.0 points.</td>
-<td>2.0 pts</td>
-<td>Rest is the one schedule effect that is fully observable from the official schedule and results. Both teams are held to the same threshold so the filter is not simply 'fade the tired team'.</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S6</td>
-<td><b>Availability shock</b></td>
-<td>Single bet</td>
-<td>Point spread / total</td>
-<td>At least 15% of one team's minutes are at risk in the official injury report and the originated number differs from the reference by at least 2.0 points.</td>
-<td>15% minutes and 2.0 pts</td>
-<td>Minutes at risk is measurable from the official injury report plus the official minutes table. UNGRADED: no historical injury-report editions were captured, so this strategy cannot be scored yet.</td>
-<td>Requires archived official injury reports (Flagged F5).</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S7</td>
-<td><b>Player points prop</b></td>
-<td>Player prop</td>
-<td>Player points</td>
-<td>Play over/under a player's season scoring average when the originated projection differs from that average by at least 2.0 points.</td>
-<td>2.0 pts</td>
-<td>Season average is the reference prop line; possession, opponent-defence and teammate-availability multipliers are the signal. UNGRADED: no player game logs were captured, so projection accuracy is unmeasured.</td>
-<td>Requires player game logs to measure game-to-game variance (Flagged F2/Q3).</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S8</td>
-<td><b>Points + rebounds + assists combo</b></td>
-<td>Player prop</td>
-<td>Player PRA</td>
-<td>Play over/under a player's season PRA average when the originated PRA projection differs by at least 3.0.</td>
-<td>3.0 PRA</td>
-<td>Combining three categories averages out single-category noise. UNGRADED for the same reason as S7.</td>
-<td>Requires player game logs to measure game-to-game variance (Flagged F2/Q3).</td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S9</td>
-<td><b>Two-leg cross-game parlay</b></td>
-<td>Parlay</td>
-<td>Parlay</td>
-<td>Take the two highest-edge S1/S2 legs of the day from DIFFERENT games, each with an edge at least 2.5, and parlay them.</td>
-<td>2.5 per leg</td>
-<td>Legs from different games are independent, so the parlay price is the product of the legs and the only edge is the model edge on each leg.</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-<tr>
-<td>S10</td>
-<td><b>Same-game parlay (side + total)</b></td>
-<td>Parlay / SGP</td>
-<td>Same-game parlay</td>
-<td>In the same game, parlay the side leg and the total leg when each has an edge of at least 2.5 and the modelled side/total correlation is at most 0.30.</td>
-<td>2.5 per leg, rho &lt;= 0.30</td>
-<td>Same-game legs share possessions, so they are correlated. Pricing them as independent is the classic SGP error; the copula price is published next to the independent price so the difference is visible.</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><a href="https://www.nba.com/stats/teams/advanced" target="_blank" rel="noopener">S1</a></td>
-</tr>
-</tbody></table></div>
-    <footer class="foot">
-      <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the
-      signal is skill or luck. Nothing on this site is a betting recommendation, and no
-      market price is used anywhere: every "edge" is against a naive model that stands in
-      for the market, because no official NBA-operated price feed exists.</p>
-      <p class="foot-l">Generated by <code>scripts/build_dashboard.py</code> from
-      <code>docs/data/*.json</code>. Sources: <a href="sources.html">source register</a>.
-      Earlier builds, kept as archives:
-      <a href="../../command-center/index.html">Command Center</a> &middot;
-      <a href="../../edge-lab/index.html">Edge Lab (frozen 11/13)</a> &middot;
-      <a href="../../desk.html">Integration Desk</a> &middot;
-      <a href="../../docs/index.html">Build A &mdash; dated NBA snapshot</a> &middot;
-      <a href="../../docs/b/index.html">Build B &mdash; backtested desk</a> &middot;
-      <a href="../../origination/index.html">Origination build &mdash; 22 lines for 14&ndash;16 Nov, 101-game walk-forward</a> &middot;
-      <a href="../../strategy-lab/index.html">Strategy Lab &mdash; season-wide audit on 160 games</a> &middot;
-      <a href="../../schedule-verified.html">verified schedule</a> &middot;
-      <a href="../../verification.html">live verification</a>.</p>
-    </footer>
+
+    <div class="banner warn">
+      <div class="b-t">Funding status: NOT FUNDED</div>
+      <div class="b-b"><p>The best strategy &mdash; S1 (side edge) at 23-9, +11.91 units &mdash; cleared the luck gate (exact binomial p = 0.020, Wilson lower bound 0.546 above the 0.524 break-even) but fails the calibration gate (hit rate 0.719 vs mean predicted 0.627) and the stability gate (bootstrap MAE interval overlaps the reference). Under the tier ceilings it stays capped at a quarter unit.</p></div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Strategy</th><th>Signal</th><th>Universe</th><th>Record</th><th>Units</th><th>Gates</th><th>Tier</th><th>Pre-reg</th>
+        </tr></thead>
+        <tbody>
+        <tr>
+          <td><strong>S1</strong> &mdash; Side edge</td><td>Model spread vs reference spread</td><td>All upcoming games</td><td>23-9</td><td>+11.91</td><td>1 of 6 passed</td><td>Tier 3 &mdash; Quarter unit</td><td class="src"><a href="../../data/prereg/S01.json">S01.json</a></td>
+        </tr>
+        <tr>
+          <td><strong>S2</strong> &mdash; Total edge</td><td>Model total vs reference total</td><td>All upcoming games</td><td>&mdash;</td><td>&mdash;</td><td>0 of 6</td><td>Research only</td><td class="src"><a href="../../data/prereg/S02.json">S02.json</a></td>
+        </tr>
+        <tr>
+          <td><strong>S3</strong> &mdash; Moneyline</td><td>Model win prob vs fair moneyline</td><td>All upcoming games</td><td>&mdash;</td><td>&mdash;</td><td>0 of 6</td><td>Research only</td><td class="src"><a href="../../data/prereg/S03.json">S03.json</a></td>
+        </tr>
+        <tr>
+          <td><strong>S4&ndash;S8</strong></td><td>Parlay, SGP, prop variants</td><td>Gated combinations</td><td>&mdash;</td><td>&mdash;</td><td>0 of 6</td><td>Research only</td><td class="src"><a href="../../data/prereg/">Prereg index</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <div class="section-head"><h2>Validation Gates (G1&ndash;G7)</h2></div>
+      <table>
+        <thead><tr><th>Gate</th><th>Name</th><th>Definition</th><th>S1 status</th></tr></thead>
+        <tbody>
+        <tr><td><strong>G1</strong></td><td>Sample size</td><td>At least 30 graded plays; 10&ndash;29 is provisional</td><td>Pass (32 graded)</td></tr>
+        <tr><td><strong>G2</strong></td><td>Calibration</td><td>Observed hit rate within 8 pp of mean predicted probability</td><td><strong>Fail</strong> (0.719 vs 0.627)</td></tr>
+        <tr><td><strong>G3</strong></td><td>Edge over break-even</td><td>Mean modelled probability at or above 52.38%</td><td>Pass</td></tr>
+        <tr><td><strong>G4</strong></td><td>Skill, not luck</td><td>Wilson 95% lower bound above 52.38%; exact binomial p reported</td><td>Pass (p = 0.020)</td></tr>
+        <tr><td><strong>G5</strong></td><td>Stability</td><td>Bootstrap 95% CI of margin MAE entirely below reference MAE</td><td><strong>Fail</strong> (overlaps)</td></tr>
+        <tr><td><strong>G6</strong></td><td>Correlation limit</td><td>Parlay leg pairs limited to |rho| &le; 0.30</td><td>N/A (singles only)</td></tr>
+        <tr><td><strong>G7</strong></td><td>Availability robustness</td><td>Play survives flipping every Questionable player to Out</td><td>Cannot run</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="table-note">Pre-registration files are frozen before the first tip of each slate (signal, thresholds, universe, exact settlement rule). Hash-chained into data/ledger/ledger.json. No sportsbook price is used anywhere &mdash; no NBA-operated source publishes one. "Edge" means the originated model vs a naive reference model built from the same official ratings.</p>
+
   </main>
 </div>
-<script src="../assets/site.js"></script>
 </body>
 </html>

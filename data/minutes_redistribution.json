@@ -1,0 +1,777 @@
+{
+ "_meta": {
+  "method": "Per-team top-8 minutes shares + replacement shares when a player is out."
+ },
+ "teams": {
+  "LAL": {
+   "total_minutes_captured": 71.2,
+   "players_captured": 2,
+   "top8_players": [
+    "Luka Doncic",
+    "Austin Reaves"
+   ],
+   "top8_minutes_shares": {
+    "Luka Doncic": 0.5042,
+    "Austin Reaves": 0.4958
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Luka Doncic": {
+     "lost_share": 0.5042,
+     "replacement_to_bench": 0.3025,
+     "replacement_to_top8_remaining": 0.2017
+    },
+    "Austin Reaves": {
+     "lost_share": 0.4958,
+     "replacement_to_bench": 0.2975,
+     "replacement_to_top8_remaining": 0.1983
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "MIN": {
+   "total_minutes_captured": 61.2,
+   "players_captured": 2,
+   "top8_players": [
+    "Anthony Edwards",
+    "LaMelo Ball"
+   ],
+   "top8_minutes_shares": {
+    "Anthony Edwards": 0.5507,
+    "LaMelo Ball": 0.4493
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Anthony Edwards": {
+     "lost_share": 0.5507,
+     "replacement_to_bench": 0.3304,
+     "replacement_to_top8_remaining": 0.2203
+    },
+    "LaMelo Ball": {
+     "lost_share": 0.4493,
+     "replacement_to_bench": 0.2696,
+     "replacement_to_top8_remaining": 0.1797
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "SAS": {
+   "total_minutes_captured": 30.0,
+   "players_captured": 1,
+   "top8_players": [
+    "Victor Wembanyama"
+   ],
+   "top8_minutes_shares": {
+    "Victor Wembanyama": 1.0
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Victor Wembanyama": {
+     "lost_share": 1.0,
+     "replacement_to_bench": 0.6,
+     "replacement_to_top8_remaining": 0.4
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "OKC": {
+   "total_minutes_captured": 60.1,
+   "players_captured": 2,
+   "top8_players": [
+    "Shai Gilgeous-Alexander",
+    "Ajay Mitchell"
+   ],
+   "top8_minutes_shares": {
+    "Shai Gilgeous-Alexander": 0.5458,
+    "Ajay Mitchell": 0.4542
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Shai Gilgeous-Alexander": {
+     "lost_share": 0.5458,
+     "replacement_to_bench": 0.3275,
+     "replacement_to_top8_remaining": 0.2183
+    },
+    "Ajay Mitchell": {
+     "lost_share": 0.4542,
+     "replacement_to_bench": 0.2725,
+     "replacement_to_top8_remaining": 0.1817
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "GSW": {
+   "total_minutes_captured": 58.5,
+   "players_captured": 2,
+   "top8_players": [
+    "Yaxel Lendeborg",
+    "Stephen Curry"
+   ],
+   "top8_minutes_shares": {
+    "Yaxel Lendeborg": 0.5504,
+    "Stephen Curry": 0.4496
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Yaxel Lendeborg": {
+     "lost_share": 0.5504,
+     "replacement_to_bench": 0.3303,
+     "replacement_to_top8_remaining": 0.2202
+    },
+    "Stephen Curry": {
+     "lost_share": 0.4496,
+     "replacement_to_bench": 0.2697,
+     "replacement_to_top8_remaining": 0.1798
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "MIA": {
+   "total_minutes_captured": 32.6,
+   "players_captured": 1,
+   "top8_players": [
+    "Giannis Antetokounmpo"
+   ],
+   "top8_minutes_shares": {
+    "Giannis Antetokounmpo": 1.0
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Giannis Antetokounmpo": {
+     "lost_share": 1.0,
+     "replacement_to_bench": 0.6,
+     "replacement_to_top8_remaining": 0.4
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "PHI": {
+   "total_minutes_captured": 71.2,
+   "players_captured": 2,
+   "top8_players": [
+    "Tyrese Maxey",
+    "Jaylen Brown"
+   ],
+   "top8_minutes_shares": {
+    "Tyrese Maxey": 0.5084,
+    "Jaylen Brown": 0.4916
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Tyrese Maxey": {
+     "lost_share": 0.5084,
+     "replacement_to_bench": 0.3051,
+     "replacement_to_top8_remaining": 0.2034
+    },
+    "Jaylen Brown": {
+     "lost_share": 0.4916,
+     "replacement_to_bench": 0.2949,
+     "replacement_to_top8_remaining": 0.1966
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "BOS": {
+   "total_minutes_captured": 64.1,
+   "players_captured": 2,
+   "top8_players": [
+    "Jayson Tatum",
+    "Paul George"
+   ],
+   "top8_minutes_shares": {
+    "Jayson Tatum": 0.5304,
+    "Paul George": 0.4696
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Jayson Tatum": {
+     "lost_share": 0.5304,
+     "replacement_to_bench": 0.3183,
+     "replacement_to_top8_remaining": 0.2122
+    },
+    "Paul George": {
+     "lost_share": 0.4696,
+     "replacement_to_bench": 0.2817,
+     "replacement_to_top8_remaining": 0.1878
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "DEN": {
+   "total_minutes_captured": 72.7,
+   "players_captured": 2,
+   "top8_players": [
+    "Jamal Murray",
+    "Nikola Jokic"
+   ],
+   "top8_minutes_shares": {
+    "Jamal Murray": 0.5007,
+    "Nikola Jokic": 0.4993
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Jamal Murray": {
+     "lost_share": 0.5007,
+     "replacement_to_bench": 0.3004,
+     "replacement_to_top8_remaining": 0.2003
+    },
+    "Nikola Jokic": {
+     "lost_share": 0.4993,
+     "replacement_to_bench": 0.2996,
+     "replacement_to_top8_remaining": 0.1997
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "MEM": {
+   "total_minutes_captured": 30.7,
+   "players_captured": 1,
+   "top8_players": [
+    "Ty Jerome"
+   ],
+   "top8_minutes_shares": {
+    "Ty Jerome": 1.0
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Ty Jerome": {
+     "lost_share": 1.0,
+     "replacement_to_bench": 0.6,
+     "replacement_to_top8_remaining": 0.4
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "SAC": {
+   "total_minutes_captured": 70.0,
+   "players_captured": 2,
+   "top8_players": [
+    "Darius Acuff Jr.",
+    "Zach LaVine"
+   ],
+   "top8_minutes_shares": {
+    "Darius Acuff Jr.": 0.5329,
+    "Zach LaVine": 0.4671
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Darius Acuff Jr.": {
+     "lost_share": 0.5329,
+     "replacement_to_bench": 0.3197,
+     "replacement_to_top8_remaining": 0.2131
+    },
+    "Zach LaVine": {
+     "lost_share": 0.4671,
+     "replacement_to_bench": 0.2803,
+     "replacement_to_top8_remaining": 0.1869
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "NYK": {
+   "total_minutes_captured": 65.0,
+   "players_captured": 2,
+   "top8_players": [
+    "Jalen Brunson",
+    "Karl-Anthony Towns"
+   ],
+   "top8_minutes_shares": {
+    "Jalen Brunson": 0.5169,
+    "Karl-Anthony Towns": 0.4831
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Jalen Brunson": {
+     "lost_share": 0.5169,
+     "replacement_to_bench": 0.3102,
+     "replacement_to_top8_remaining": 0.2068
+    },
+    "Karl-Anthony Towns": {
+     "lost_share": 0.4831,
+     "replacement_to_bench": 0.2898,
+     "replacement_to_top8_remaining": 0.1932
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "WAS": {
+   "total_minutes_captured": 70.2,
+   "players_captured": 2,
+   "top8_players": [
+    "Trae Young",
+    "Anthony Davis"
+   ],
+   "top8_minutes_shares": {
+    "Trae Young": 0.5142,
+    "Anthony Davis": 0.4858
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Trae Young": {
+     "lost_share": 0.5142,
+     "replacement_to_bench": 0.3085,
+     "replacement_to_top8_remaining": 0.2057
+    },
+    "Anthony Davis": {
+     "lost_share": 0.4858,
+     "replacement_to_bench": 0.2915,
+     "replacement_to_top8_remaining": 0.1943
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "PHX": {
+   "total_minutes_captured": 34.0,
+   "players_captured": 1,
+   "top8_players": [
+    "Devin Booker"
+   ],
+   "top8_minutes_shares": {
+    "Devin Booker": 1.0
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Devin Booker": {
+     "lost_share": 1.0,
+     "replacement_to_bench": 0.6,
+     "replacement_to_top8_remaining": 0.4
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "DET": {
+   "total_minutes_captured": 34.5,
+   "players_captured": 1,
+   "top8_players": [
+    "Cade Cunningham"
+   ],
+   "top8_minutes_shares": {
+    "Cade Cunningham": 1.0
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Cade Cunningham": {
+     "lost_share": 1.0,
+     "replacement_to_bench": 0.6,
+     "replacement_to_top8_remaining": 0.4
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "DAL": {
+   "total_minutes_captured": 63.6,
+   "players_captured": 2,
+   "top8_players": [
+    "Cooper Flagg",
+    "Kyrie Irving"
+   ],
+   "top8_minutes_shares": {
+    "Cooper Flagg": 0.5267,
+    "Kyrie Irving": 0.4733
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Cooper Flagg": {
+     "lost_share": 0.5267,
+     "replacement_to_bench": 0.316,
+     "replacement_to_top8_remaining": 0.2107
+    },
+    "Kyrie Irving": {
+     "lost_share": 0.4733,
+     "replacement_to_bench": 0.284,
+     "replacement_to_top8_remaining": 0.1893
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "ORL": {
+   "total_minutes_captured": 70.7,
+   "players_captured": 2,
+   "top8_players": [
+    "Franz Wagner",
+    "Paolo Banchero"
+   ],
+   "top8_minutes_shares": {
+    "Franz Wagner": 0.5219,
+    "Paolo Banchero": 0.4781
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Franz Wagner": {
+     "lost_share": 0.5219,
+     "replacement_to_bench": 0.3132,
+     "replacement_to_top8_remaining": 0.2088
+    },
+    "Paolo Banchero": {
+     "lost_share": 0.4781,
+     "replacement_to_bench": 0.2868,
+     "replacement_to_top8_remaining": 0.1912
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "TOR": {
+   "total_minutes_captured": 92.6,
+   "players_captured": 3,
+   "top8_players": [
+    "RJ Barrett",
+    "Scottie Barnes",
+    "Kawhi Leonard"
+   ],
+   "top8_minutes_shares": {
+    "RJ Barrett": 0.3618,
+    "Scottie Barnes": 0.3596,
+    "Kawhi Leonard": 0.2786
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "RJ Barrett": {
+     "lost_share": 0.3618,
+     "replacement_to_bench": 0.2171,
+     "replacement_to_top8_remaining": 0.1447
+    },
+    "Scottie Barnes": {
+     "lost_share": 0.3596,
+     "replacement_to_bench": 0.2158,
+     "replacement_to_top8_remaining": 0.1438
+    },
+    "Kawhi Leonard": {
+     "lost_share": 0.2786,
+     "replacement_to_bench": 0.1672,
+     "replacement_to_top8_remaining": 0.1114
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "POR": {
+   "total_minutes_captured": 61.6,
+   "players_captured": 2,
+   "top8_players": [
+    "Deni Avdija",
+    "Damian Lillard"
+   ],
+   "top8_minutes_shares": {
+    "Deni Avdija": 0.5276,
+    "Damian Lillard": 0.4724
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Deni Avdija": {
+     "lost_share": 0.5276,
+     "replacement_to_bench": 0.3166,
+     "replacement_to_top8_remaining": 0.211
+    },
+    "Damian Lillard": {
+     "lost_share": 0.4724,
+     "replacement_to_bench": 0.2834,
+     "replacement_to_top8_remaining": 0.189
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "CLE": {
+   "total_minutes_captured": 33.0,
+   "players_captured": 1,
+   "top8_players": [
+    "Donovan Mitchell"
+   ],
+   "top8_minutes_shares": {
+    "Donovan Mitchell": 1.0
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Donovan Mitchell": {
+     "lost_share": 1.0,
+     "replacement_to_bench": 0.6,
+     "replacement_to_top8_remaining": 0.4
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "IND": {
+   "total_minutes_captured": 65.1,
+   "players_captured": 2,
+   "top8_players": [
+    "Tyrese Haliburton",
+    "Pascal Siakam"
+   ],
+   "top8_minutes_shares": {
+    "Tyrese Haliburton": 0.5069,
+    "Pascal Siakam": 0.4931
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Tyrese Haliburton": {
+     "lost_share": 0.5069,
+     "replacement_to_bench": 0.3041,
+     "replacement_to_top8_remaining": 0.2028
+    },
+    "Pascal Siakam": {
+     "lost_share": 0.4931,
+     "replacement_to_bench": 0.2959,
+     "replacement_to_top8_remaining": 0.1972
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "ATL": {
+   "total_minutes_captured": 64.7,
+   "players_captured": 2,
+   "top8_players": [
+    "Jalen Johnson",
+    "Nickeil Alexander-Walker"
+   ],
+   "top8_minutes_shares": {
+    "Jalen Johnson": 0.5193,
+    "Nickeil Alexander-Walker": 0.4807
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Jalen Johnson": {
+     "lost_share": 0.5193,
+     "replacement_to_bench": 0.3116,
+     "replacement_to_top8_remaining": 0.2077
+    },
+    "Nickeil Alexander-Walker": {
+     "lost_share": 0.4807,
+     "replacement_to_bench": 0.2884,
+     "replacement_to_top8_remaining": 0.1923
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "MIL": {
+   "total_minutes_captured": 31.0,
+   "players_captured": 1,
+   "top8_players": [
+    "Tyler Herro"
+   ],
+   "top8_minutes_shares": {
+    "Tyler Herro": 1.0
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Tyler Herro": {
+     "lost_share": 1.0,
+     "replacement_to_bench": 0.6,
+     "replacement_to_top8_remaining": 0.4
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "NOP": {
+   "total_minutes_captured": 32.7,
+   "players_captured": 1,
+   "top8_players": [
+    "Zion Williamson"
+   ],
+   "top8_minutes_shares": {
+    "Zion Williamson": 1.0
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Zion Williamson": {
+     "lost_share": 1.0,
+     "replacement_to_bench": 0.6,
+     "replacement_to_top8_remaining": 0.4
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "BKN": {
+   "total_minutes_captured": 65.8,
+   "players_captured": 2,
+   "top8_players": [
+    "Julius Randle",
+    "Michael Porter Jr."
+   ],
+   "top8_minutes_shares": {
+    "Julius Randle": 0.503,
+    "Michael Porter Jr.": 0.497
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Julius Randle": {
+     "lost_share": 0.503,
+     "replacement_to_bench": 0.3018,
+     "replacement_to_top8_remaining": 0.2012
+    },
+    "Michael Porter Jr.": {
+     "lost_share": 0.497,
+     "replacement_to_bench": 0.2982,
+     "replacement_to_top8_remaining": 0.1988
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "HOU": {
+   "total_minutes_captured": 69.2,
+   "players_captured": 2,
+   "top8_players": [
+    "Alperen Sengun",
+    "Kevin Durant"
+   ],
+   "top8_minutes_shares": {
+    "Alperen Sengun": 0.5058,
+    "Kevin Durant": 0.4942
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Alperen Sengun": {
+     "lost_share": 0.5058,
+     "replacement_to_bench": 0.3035,
+     "replacement_to_top8_remaining": 0.2023
+    },
+    "Kevin Durant": {
+     "lost_share": 0.4942,
+     "replacement_to_bench": 0.2965,
+     "replacement_to_top8_remaining": 0.1977
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "CHA": {
+   "total_minutes_captured": 31.0,
+   "players_captured": 1,
+   "top8_players": [
+    "Brandon Miller"
+   ],
+   "top8_minutes_shares": {
+    "Brandon Miller": 1.0
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Brandon Miller": {
+     "lost_share": 1.0,
+     "replacement_to_bench": 0.6,
+     "replacement_to_top8_remaining": 0.4
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "LAC": {
+   "total_minutes_captured": 32.6,
+   "players_captured": 1,
+   "top8_players": [
+    "Darius Garland"
+   ],
+   "top8_minutes_shares": {
+    "Darius Garland": 1.0
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Darius Garland": {
+     "lost_share": 1.0,
+     "replacement_to_bench": 0.6,
+     "replacement_to_top8_remaining": 0.4
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "UTA": {
+   "total_minutes_captured": 32.2,
+   "players_captured": 1,
+   "top8_players": [
+    "Keyonte George"
+   ],
+   "top8_minutes_shares": {
+    "Keyonte George": 1.0
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Keyonte George": {
+     "lost_share": 1.0,
+     "replacement_to_bench": 0.6,
+     "replacement_to_top8_remaining": 0.4
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  },
+  "CHI": {
+   "total_minutes_captured": 59.5,
+   "players_captured": 2,
+   "top8_players": [
+    "Caleb Wilson",
+    "Norman Powell"
+   ],
+   "top8_minutes_shares": {
+    "Caleb Wilson": 0.5176,
+    "Norman Powell": 0.4824
+   },
+   "top8_total_share": 1.0,
+   "bench_share": 0.0,
+   "replacement_shares": {
+    "Caleb Wilson": {
+     "lost_share": 0.5176,
+     "replacement_to_bench": 0.3106,
+     "replacement_to_top8_remaining": 0.2071
+    },
+    "Norman Powell": {
+     "lost_share": 0.4824,
+     "replacement_to_bench": 0.2894,
+     "replacement_to_top8_remaining": 0.1929
+    }
+   },
+   "method": "Top-8 minutes shares from official minutes table; replacement = 60% bench / 40% pro-rata to remaining top-8 (modelling choice, flagged).",
+   "source": "data/raw/players_traditional.json (NBA.com)"
+  }
+ }
+}

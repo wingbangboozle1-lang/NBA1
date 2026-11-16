@@ -1,0 +1,42 @@
+{
+  "_meta": {
+    "title": "NBA arena coordinates for travel-distance computation",
+    "source_note": "Arena latitudes/longitudes are sourced from publicly available arena location data (city/state known from each team's home market). Coordinates are approximate arena centroids used only for great-circle travel-distance estimation between consecutive road games. Not an official NBA-published coordinate table - flagged for review.",
+    "method": "Haversine great-circle distance in miles between the home arenas of consecutive games for each team; back-to-back and multi-day gaps computed from the official schedule.",
+    "verification_rule": "Team -> arena mapping and arena city are verifiable from NBA.com team pages. Coordinates themselves are approximate and flagged as non-official.",
+    "units": "miles",
+    "earth_radius_miles": 3958.8
+  },
+  "arenas": {
+    "ATL": {"arena": "State Farm Arena", "city": "Atlanta", "state": "GA", "lat": 33.7568, "lon": -84.3957},
+    "BOS": {"arena": "TD Garden", "city": "Boston", "state": "MA", "lat": 42.3662, "lon": -71.0622},
+    "BKN": {"arena": "Barclays Center", "city": "Brooklyn", "state": "NY", "lat": 40.6826, "lon": -73.9754},
+    "CHA": {"arena": "Spectrum Center", "city": "Charlotte", "state": "NC", "lat": 35.2245, "lon": -80.8432},
+    "CHI": {"arena": "United Center", "city": "Chicago", "state": "IL", "lat": 41.8806, "lon": -87.6741},
+    "CLE": {"arena": "Rocket Arena", "city": "Cleveland", "state": "OH", "lat": 41.4965, "lon": -81.6891},
+    "DAL": {"arena": "American Airlines Center", "city": "Dallas", "state": "TX", "lat": 32.7877, "lon": -96.8102},
+    "DEN": {"arena": "Ball Arena", "city": "Denver", "state": "CO", "lat": 39.7489, "lon": -104.9961},
+    "DET": {"arena": "Little Caesars Arena", "city": "Detroit", "state": "MI", "lat": 42.3408, "lon": -83.0520},
+    "GSW": {"arena": "Chase Center", "city": "San Francisco", "state": "CA", "lat": 37.7681, "lon": -122.3877},
+    "HOU": {"arena": "Toyota Center", "city": "Houston", "state": "TX", "lat": 29.7509, "lon": -95.3585},
+    "IND": {"arena": "Gainbridge Fieldhouse", "city": "Indianapolis", "state": "IN", "lat": 39.7644, "lon": -86.1567},
+    "LAC": {"arena": "Crypto.com Arena", "city": "Los Angeles", "state": "CA", "lat": 34.0430, "lon": -118.2687},
+    "LAL": {"arena": "Crypto.com Arena", "city": "Los Angeles", "state": "CA", "lat": 34.0430, "lon": -118.2687},
+    "MEM": {"arena": "FedExForum", "city": "Memphis", "state": "TN", "lat": 35.1382, "lon": -90.0538},
+    "MIA": {"arena": "Kaseya Center", "city": "Miami", "state": "FL", "lat": 25.7813, "lon": -80.1889},
+    "MIL": {"arena": "Fiserv Forum", "city": "Milwaukee", "state": "WI", "lat": 43.0450, "lon": -87.9172},
+    "MIN": {"arena": "Target Center", "city": "Minneapolis", "state": "MN", "lat": 44.9795, "lon": -93.2753},
+    "NOP": {"arena": "Smoothie King Center", "city": "New Orleans", "state": "LA", "lat": 29.9493, "lon": -90.0827},
+    "NYK": {"arena": "Madison Square Garden", "city": "New York", "state": "NY", "lat": 40.7505, "lon": -73.9934},
+    "OKC": {"arena": "Paycom Center", "city": "Oklahoma City", "state": "OK", "lat": 35.4638, "lon": -97.5161},
+    "ORL": {"arena": "Kia Center", "city": "Orlando", "state": "FL", "lat": 28.5393, "lon": -81.3841},
+    "PHI": {"arena": "Wells Fargo Center", "city": "Philadelphia", "state": "PA", "lat": 39.9022, "lon": -75.1718},
+    "PHX": {"arena": "Footprint Center", "city": "Phoenix", "state": "AZ", "lat": 33.4454, "lon": -112.0713},
+    "POR": {"arena": "Moda Center", "city": "Portland", "state": "OR", "lat": 45.5357, "lon": -122.6660},
+    "SAC": {"arena": "Golden 1 Center", "city": "Sacramento", "state": "CA", "lat": 38.5796, "lon": -121.4957},
+    "SAS": {"arena": "Frost Bank Center", "city": "San Antonio", "state": "TX", "lat": 29.4261, "lon": -98.4419},
+    "TOR": {"arena": "Scotiabank Arena", "city": "Toronto", "state": "ON", "lat": 43.6436, "lon": -79.3793},
+    "UTA": {"arena": "Delta Center", "city": "Salt Lake City", "state": "UT", "lat": 40.7662, "lon": -111.9039},
+    "WAS": {"arena": "Capital One Arena", "city": "Washington", "state": "DC", "lat": 38.8981, "lon": -77.0209}
+  }
+}
