@@ -136,8 +136,10 @@ def render_page(doc) -> str:
     body.append("<h2>Replacement shares &mdash; blocked</h2>")
     rep = doc["replacement_shares"]
     body.append("<div class=\"tablewrap\"><table class=\"dash\"><thead><tr><th>Measure</th><th>Status</th>"
-                "<th>Why</th><th>What would unblock it</th></tr></thead><tbody><tr>"
-                "<td>Replacement share when a player is out</td><td><strong>%s</strong></td><td>%s</td><td>%s</td>"
+                "<th>Why, and what would unblock it</th><th>Source</th></tr></thead><tbody><tr>"
+                "<td>Replacement share when a player is out</td><td><strong>%s</strong></td>"
+                "<td>%s <em>Unblock:</em> %s</td>"
+                "<td><span class=\"na\" title=\"Blocked, because no measured value exists and so there is no source to link\">&mdash;</span></td>"
                 "</tr></tbody></table></div>" % (_e(rep["status"]), _e(rep["reason"]), _e(rep["unblock"])))
     if doc["flags"]:
         body.append("<h2>Flags</h2><ul>")

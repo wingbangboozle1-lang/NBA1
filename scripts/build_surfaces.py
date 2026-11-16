@@ -275,7 +275,9 @@ def render_bet(gates, picks):
     for g in gates["gates"]:
         out.append("<tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>" % (
             _e(g["id"]), _e(g["requirement"]), _e(g["observed"]),
-            "PASS" if g["passed"] else "CLOSED", _e(g["source"])))
+            "PASS" if g["passed"] else "CLOSED",
+            '<span class="na" title="computed from a repository file, not an official value: no official link applies">&mdash;</span> '
+            + _e(g["source"])))
     out.append("</tbody></table></div>")
     if gates["open"]:
         out.append('<div class="tablewrap"><table class="dash"><thead><tr>'
