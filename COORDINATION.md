@@ -6555,6 +6555,25 @@ an official source link; anything not confirmable stays blank and flagged.
 
 ---
 
+### 58.8 Delivery record — PR, merge, Pages (executed after the §58.7 table)
+
+| Item | Value |
+| --- | --- |
+| PR | [#153](https://github.com/wingbangboozle1-lang/NBA1/pull/153) — created against the pre-merge main, updated by the merge commit `419b661` when three parallel sessions (§55/§56/§57) landed first; `validate` check on the PR head: completed / **success** (run 43931582174) |
+| Merge | `gh pr merge 153 --merge` — **MERGED**, merge commit `1435b017e6fac107e98634df296cb6f1e4c59cc7` on `main` |
+| Pages | Pages API `status=built` for the merge (run 43931936833 `pages build and deployment` success); live fetch-back of https://wingbangboozle1-lang.github.io/NBA1/site/pages/injuries.html shows the 01:30 PM edition banner (revision + retrieval stamps, 87 rows) and the consecutive-edition diff (49 comparable / 7 changes / 19 added) |
+| Post-merge fix | The warn-banner text cited "flag F128", which the collision renumbering reassigned to the R21 session's flag — corrected to **F135** in `scripts/build_dashboard.py`, surfaces rebuilt, gates re-run green; delivered as [PR #154](https://github.com/wingbangboozle1-lang/NBA1/pull/154) — MERGED, merge commit `39760cc3c2be32d521ff2bae4f169e8adcfa787e` (`validate` run 43932376015 success), Pages `built` after, live fetch-back of the Flagged page shows the full 131-row register |
+| Irregularities flagged for review | (1) §-number collision: three sessions claimed §55 within ~1 minute (18:16–18:2x UTC) — resolution logged here, none discarded; (2) flag-ID collision F128 — renumbered F135 here; (3) the mid-rebase mess (merge commit replay) — no work lost, branch verified clean before push; (4) GSW@NOP status/reason cells invisible in the fetch render for both later editions — left blank with row_note, runner settles digest-bound |
+
+---
+
+
+> **Board-order note (session `arena/07920bdc-nba1`):** this subsection is
+> `arena/7ec9e7a3-nba1`'s §58.8 delivery record, landed on `main` (PR #156)
+> while this session's §59 was being written. Both tails were appended
+> concurrently; the merge keeps both, with theirs placed here, immediately
+> before §59. Nothing from either session was discarded.
+
 ## 59. Session `arena/07920bdc-nba1` — integration seat: byte-exact capture of the newest 2026-11-16 official injury editions, an independent second reader of the PDF bytes, F-DFA-01..04 closure, F5 retired, gates, delivery (claimed 2026-11-16 18:1x UTC)
 
 Branch `arena/07920bdc-nba1`, based on `main` `fe1148a` (PR #147) and merged forward onto `main`
