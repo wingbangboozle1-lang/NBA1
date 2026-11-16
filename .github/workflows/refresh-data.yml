@@ -62,6 +62,16 @@ jobs:
         continue-on-error: true
         run: python3 engine/fetch_official.py
 
+      # RFG4 (COORDINATION.md section 38/42): re-validate every parsed row,
+      # cross-check the official standings page against the team-traditional
+      # page, and write digest-bound promotion records. Fail-closed: anything
+      # unprovable stays in `changed` and the gate below blocks the rebuild.
+      - name: Promote verified structured inputs (fail-closed)
+        id: promote
+        if: steps.fetch.outcome == 'success'
+        continue-on-error: true
+        run: python3 engine/promote_official.py
+
       - name: Require fresh provenance and verified-promotion gates
         id: freshness
         if: steps.fetch.outcome == 'success'
@@ -135,10 +145,16 @@ jobs:
           git config user.name  "nba1-bot"
           git config user.email "nba1-bot@users.noreply.github.com"
 
-          # Stage only capture payloads and content-addressed injury PDFs.
-          # _last_refresh.json rides along only when evidence changes, so a
-          # no-change run produces no timestamp-only commit.
-          git add data/raw/_capture_*.json data/raw/injury_pdfs/ 2>/dev/null || true
+          # Stage capture payloads, content-addressed injury PDFs, the
+          # digest-bound promotion records the promote step verified, and the
+          # computed injury-report diffs. _last_refresh.json rides along only
+          # when evidence changes, so a no-change run produces no
+          # timestamp-only commit.
+          git add data/raw/_capture_*.json data/raw/injury_pdfs/ \
+                  data/raw/standings.json data/raw/team_traditional.json \
+                  data/raw/team_opponent.json data/raw/team_advanced.json \
+                  data/raw/schedule_upcoming.json data/raw/injuries.json \
+                  data/raw/games_completed.json data/parsed/ 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "No new capture payloads - nothing to publish."
             exit 0
@@ -157,11 +173,13 @@ jobs:
           failed = "; ".join(f"{k}: {v}" for k, v in s.get("failed", [])) or "(none)"
           check_tail = (check.stdout + check.stderr).strip()[-1500:]
           body = (
-              "## Automated official-data refresh (captures only)\n\n"
-              "Opened by the `Refresh official data` workflow. **No committed "
-              "snapshot was overwritten**: parsed rows land in "
-              "`data/raw/_capture_*.json` for a verifier to diff and promote "
-              "after re-checking the official page.\n\n"
+              "## Automated official-data refresh (captures + verified promotions)\n\n"
+              "Opened by the `Refresh official data` workflow. Parsed rows "
+              "land in `data/raw/_capture_*.json`; only rows that "
+              "`engine/promote_official.py` re-validated and digest-bound are "
+              "promoted into the committed inputs (with a `verification` "
+              "block naming the exact official response). Anything unprovable "
+              "was left unpromoted and blocked the rebuild.\n\n"
               "### Run record\n\n"
               f"- run at (UTC): {s.get('workflow_run_at_utc')}\n"
               f"- ref: {s.get('workflow_ref')}\n"
@@ -185,7 +203,7 @@ jobs:
           print(body)
           PY
 
-          MSG="chore: refresh official data - captures only, snapshots not promoted [skip probe] [skip ci]"
+          MSG="chore: refresh official data - captures + verified promotions [skip probe] [skip ci]"
 
           if [ "${GITHUB_REF}" = "refs/heads/main" ]; then
             # Scheduled run: never push to main directly (R7 / I-01).
