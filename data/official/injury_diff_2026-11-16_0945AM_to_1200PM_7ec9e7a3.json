@@ -1,24 +1,35 @@
 {
  "title": "Consecutive-edition diff: 11/16 09:45 AM (promoted input) -> 11/16 12:00 PM (session transcription)",
  "from_edition": {
-  "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_45AM.pdf",
-  "captured": "2026-11-16T15:25:57Z",
-  "rows": 65
+  "edition_id": "2026-11-16_0945AM",
+  "revision": "11/16/2026 09:45 AM ET",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_45AM.pdf"
  },
  "to_edition": {
-  "source": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_12_00PM.pdf",
-  "retrieved": "2026-11-16T18:3xZ",
-  "rows": 72
+  "edition_id": "2026-11-16_1200PM",
+  "revision": "11/16/2026 12:00 PM ET",
+  "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_12_00PM.pdf"
  },
- "added_rows": [
+ "computed_by": "arena/7ec9e7a3-nba1",
+ "computed_utc": "2026-11-16T18:4xZ",
+ "method": "player key = (game_date, matchup, player); statuses and reasons compared literally (G League spacing normalised); a row whose status cell is unreadable in the render is listed separately as incomparable and never compared",
+ "counts": {
+  "previous_rows": 65,
+  "current_rows": 72,
+  "comparable_rows": 49,
+  "status_changes": 0,
+  "rows_added": 7,
+  "rows_removed": 0
+ },
+ "status_changes": [],
+ "rows_added": [
   {
    "date": "2026-11-16",
    "matchup": "MEM@WAS",
    "team": "Memphis Grizzlies",
    "player": "Jerome, Ty",
    "status": "Out",
-   "reason": "Injury/Illness - Right Hip Soreness",
-   "note": "team cell blank on the PDF continuation row; attributed to Memphis by the report's own group structure (Memphis group, before the Washington Wizards NOT YET SUBMITTED row)"
+   "reason": "Injury/Illness - Right Hip Soreness"
   },
   {
    "date": "2026-11-16",
@@ -26,8 +37,7 @@
    "team": "Memphis Grizzlies",
    "player": "Pippen Jr., Scotty",
    "status": "Out",
-   "reason": "Injury/Illness - Lumbar Disc Herniation",
-   "note": "team cell blank on the PDF continuation row; attributed to Memphis by the report's own group structure"
+   "reason": "Injury/Illness - Lumbar Disc Herniation"
   },
   {
    "date": "2026-11-16",
@@ -35,8 +45,7 @@
    "team": "Memphis Grizzlies",
    "player": "Post, Quinten",
    "status": "Questionable",
-   "reason": "Injury/Illness - Concussion Protocol",
-   "note": "team cell blank on the PDF continuation row; attributed to Memphis by the report's own group structure"
+   "reason": "Injury/Illness - Concussion Protocol"
   },
   {
    "date": "2026-11-16",
@@ -44,8 +53,7 @@
    "team": "Memphis Grizzlies",
    "player": "Saunders, Richie",
    "status": "Out",
-   "reason": "Injury/Illness - Right Knee Surgery",
-   "note": "team cell blank on the PDF continuation row; attributed to Memphis by the report's own group structure"
+   "reason": "Injury/Illness - Right Knee Surgery"
   },
   {
    "date": "2026-11-16",
@@ -53,8 +61,7 @@
    "team": "Memphis Grizzlies",
    "player": "Stewart, Isaiah",
    "status": "Questionable",
-   "reason": "Injury/Illness - Illness",
-   "note": "team cell blank on the PDF continuation row; attributed to Memphis by the report's own group structure"
+   "reason": "Injury/Illness - Illness"
   },
   {
    "date": "2026-11-16",
@@ -62,8 +69,7 @@
    "team": "New Orleans Pelicans",
    "player": "Reese, Julian",
    "status": "Questionable",
-   "reason": "G League - Two-Way",
-   "note": "team cell blank on the PDF continuation row; attributed to New Orleans by the report's own group structure (New Orleans group, before the POR@MIN Portland group header)"
+   "reason": "G League - Two-Way"
   },
   {
    "date": "2026-11-16",
@@ -71,20 +77,13 @@
    "team": "New Orleans Pelicans",
    "player": "Watford, Trendon",
    "status": "Out",
-   "reason": "Injury/Illness - Right Ankle Sprain",
-   "note": "team cell blank on the PDF continuation row; attributed to New Orleans by the report's own group structure"
+   "reason": "Injury/Illness - Right Ankle Sprain"
   }
  ],
- "status_changes": [],
- "incomparable_rows": [
-  {
-   "date": "2026-11-16",
-   "matchup": "GSW@NOP",
-   "player": "Butler III, Jimmy",
-   "note": "status cell not visible in the fetched render; not filled in (the 09:45 AM edition prints Out for the same reason text)"
-  }
- ],
- "dropped_rows": [],
- "unchanged_rows_comparable": 49,
- "impact": "added rows are all additions with no status change: MEM +5 (Jerome Out, Pippen Jr. Out, Post Questionable, Saunders Out, Stewart Questionable) and NOP +2 (Reese Questionable, Watford Out); the promoted pipeline input (data/raw/injuries.json) stays at 09:45 AM because promotion is digest-bound to a runner-retrieved PDF (engine/promote_official.py); MEM@WAS / GSW@NOP availability on the picks surface is understated until the runner promotes a newer edition."
+ "rows_removed": [],
+ "caveats": [
+  "GSW@NOP rows (Butler III status; Curry/Moody/Porzingis/Santos/Williams reasons) are not fully visible in the 12:00 PM render, so no change is claimed for them either way; the runner's PDF retrieval (next scheduled run 22:15Z) settles them digest-bound.",
+  "the five Memphis continuation rows carry a blank team cell in the PDF's group layout and are attributed by the report's own group structure; Ty Jerome's Memphis membership is independently confirmed by the official games page (Memphis season leader)",
+  "impact: the promoted pipeline input (data/raw/injuries.json) stays at 09:45 AM because promotion is digest-bound to a runner-retrieved PDF (engine/promote_official.py); MEM@WAS and GSW@NOP availability on the picks surface is understated until the runner promotes a newer edition (next scheduled run 22:15Z)"
+ ]
 }
