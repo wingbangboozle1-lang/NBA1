@@ -73,6 +73,7 @@ def finding(nid, sev, title, body_html, evidence_html=""):
 def main() -> int:
     reads = load("live_reads.json")
     drift = load("drift.json")
+    deploy = load("deploy_diagnosis.json")
 
     s15 = reads["slate_2026_11_15"]
     s16 = reads["slate_2026_11_16"]
@@ -255,6 +256,21 @@ was read from. Where the official page printed nothing, the cell is left blank �
   f"readings agree on <b>all 18</b>. Disagreements between the two live pages: "
   f"<b>{len(drift['the_two_live_pages_disagree_on'])}</b>. This is an internal consistency check on "
   "the evidence, not a data point about the teams.</p>")}
+
+{finding("F-47-F", "High", "Why the live site is down: Pages is on the legacy branch deployer and every branch build has failed since 01:02Z",
+  "<p>" + esc(deploy["claim"]) + "</p>"
+  "<table><thead><tr><th>Check</th><th>Result</th><th>Why it matters</th></tr></thead><tbody>"
+  + "".join("<tr><td><code>" + esc(e["check"]) + "</code></td><td>" + esc(e["result"])
+            + "</td><td>" + esc(e["why_it_matters"]) + "</td></tr>" for e in deploy["evidence"])
+  + "</tbody></table>"
+  "<p><b>What this does not claim:</b></p><ul>"
+  + "".join(f"<li>{esc(x)}</li>" for x in deploy["not_claimed"])
+  + "</ul>"
+  "<p><b>Action required, and it needs the repository owner:</b> "
+  + esc(deploy["owner_action_required"]["what"]) + " <i>"
+  + esc(deploy["owner_action_required"]["why"]) + "</i> Measured at "
+  + esc(deploy["measured_at_utc"]) + ". Settings page: "
+  + link(deploy["owner_action_required"]["where"], "Settings → Pages") + ".</p>")}
 
 <h2 id="s15">2026-11-15 slate — official state at {esc(s15['read_at_utc'])}</h2>
 <p class="small">Source: {link(G15, G15)} · read twice (02:17Z and 02:27Z) ·
