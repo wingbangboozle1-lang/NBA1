@@ -70,6 +70,9 @@ CATEGORIES = [
     ("Injuries &amp; Rotation", "injuries.html", "The official injury report, the rotation minutes it implies, and the measured production impact."),
     ("Game-Day Injury Read", "gameday.html", "The newest official injury edition against the edition the lines were cut from: what four clubs filed, what it does to tonight's five lines, and every horizon row re-read from NBA.com today."),
     ("Game Flow", "gameflow.html", "Pace, expected margin and total, blow-out and overtime probability, and the rest and back-to-back context."),
+    ("RESULTS &amp; SETTLEMENT", None, "What actually happened, and whether the paperwork was settled from it."),
+    ("Official Results &amp; Settlement", "results.html", "One row per game with date, teams, final score and quarter scores, read from the official game pages; the verified-final count per game day; and the visible settlement stamp with the ledger head behind it."),
+    ("Player Game Logs", "player-logs.html", "Minutes, points, rebounds and assists for every player in each finished game's official gamebook, with the report cross-reference and the DNP/DND rows kept."),
     ("EVIDENCE", None, "Whether any of it is skill. The out-of-sample record, the gates, the correlations and the luck check."),
     ("Strategies &amp; Leaderboard", "strategies.html", "Ten strategies, the reward tiers, and the leaderboard that ranks them - with nothing promoted that has not passed."),
     ("Validation Gates", "validation.html", "The seven gates every strategy must clear, the definition of each, and how each strategy scored."),
@@ -2752,6 +2755,14 @@ def main():
     # page only, so the two builders never both claim requirements.html.
     import build_roll_page as _roll
     built.update(_roll.build(sys.modules[__name__]))
+
+    # === results feed + settlement stamp, and the player game logs =============
+    # (session arena/d31fb422-nba1, COORDINATION §46). Both pages read only
+    # committed files and are regenerated on every build, so a settlement that
+    # lands in the same run is visible immediately and a page cannot go stale.
+    import build_results_page as _res
+    built["results.html"] = _res.results_page()
+    built["player-logs.html"] = _res.player_logs_page()
 
     # ------------------------------------------------------------------ write
     for name, html in built.items():

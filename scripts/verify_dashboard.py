@@ -99,8 +99,19 @@ class TableScan(HTMLParser):
 
 
 def is_official(url):
+    """True when the URL is https and lives on an allowed host or a subdomain of one.
+
+    Using the subdomain rule (rather than an exact host set) is what lets the
+    league's own gamebook host `statsdmz.nba.com` be cited as the source of a
+    box-score cell: it is `*.nba.com`, the same registrable domain the rest of
+    the allowlist uses.  Loosening this to "any https host" would defeat the
+    point of the gate, so the rule stays `*.nba.com` + the explicit extras.
+    """
     p = urlparse(url)
-    return p.scheme == "https" and p.netloc in ALLOWED
+    if p.scheme != "https":
+        return False
+    host = (p.netloc or "").split(":")[0].lower()
+    return any(host == a or host.endswith("." + a) for a in ALLOWED)
 
 
 def main():
