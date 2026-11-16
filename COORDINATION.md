@@ -6222,3 +6222,66 @@ link; anything I cannot confirm stays blank and flagged.
 | Board | union per ground rules: main's §50–§53 + c348e6c7 §47 kept; this claim renumbered **§54** (§50 was claimed by `arena/0e9c924f-nba1` 34 s before this session's claim and held per the §51 yield); 0 conflict markers |
 | Open flags at delivery | 123 published, non-blocking (ground rule 2) |
 | Not done / boundaries | Pages `build_type` flip remains F116 (HTTP 403 — owner setting); refresh_gate's structural R01 condition remains (documented, `continue-on-error`); SGP 2 candidates unsettled pending box-score appearance checks (honest non-grading) |
+
+---
+
+## 55. Session `arena/dfa3057f-nba1` — post-merge verification seat (claimed 2026-11-16 18:16 UTC, D01–D04)
+
+### 55.1 Task table
+
+| ID | Task | Status | Owner | File scope |
+| --- | --- | --- | --- | --- |
+| D01 | Claim recorded and pushed before any other edit | **done** | `arena/dfa3057f-nba1` | this section, §0b row, top claim block |
+| D02 | Gate battery on `main` @ `add1e74` | **done** (see 55.2) | same | read-only |
+| D03 | Live-site smoke test of Pages and category subpages | **done** (see 55.3) | same | read-only fetch |
+| D04 | Delivery record, PR with this board-only change, merge, Pages confirmation | in progress | same | `COORDINATION.md` |
+
+### 55.2 Gate battery (D02) — run locally on `add1e74`, measured
+
+| Gate | Command | Result |
+| --- | --- | --- |
+| Site check | `python3 scripts/check_site.py` | PASS — all pages exist, local links resolve, every table row has an official link |
+| Integration | `python3 scripts/verify_integration.py` | PASS — 8,895 / 9,371 rows official-sourced, 0 errors, 44 warnings (published on Flagged page) |
+| Verify all | `python3 scripts/verify_all.py` | PASS — 0 failures |
+| Ledger | `python3 scripts/verify_ledger.py` | PASS — `ledger chain OK` |
+| Links | `python3 scripts/check_links.py` | PASS (nba.com HTTP status not checkable from the sandbox, stated by the tool) |
+| Rendered rows | `python3 scripts/check_rendered.py` | PASS — 0 rows without a link, 0 bad cells |
+| Dashboard provenance | `python3 scripts/verify_dashboard.py` | PASS — 0 unmarked rows without an official link |
+| Unit tests `scripts/test_*.py` | run one by one | 4 PASS; `test_refresh_gate.py` needs `PYTHONPATH=.` (import path only) — then **7/7 PASS**; `test_injury_diff.py` **1 FAIL of 7** (see F-DFA-02) |
+
+Not run here: the `render_check.mjs` step needs `jsdom` from npm, which was not installed in this sandbox; `check_rendered.py` is the equivalent gate that was run.
+
+### 55.3 Live-site smoke test (D03) — fetched 2026-11-16 ~18:20 UTC
+
+| Page | URL | HTTP / result |
+| --- | --- | --- |
+| Landing | https://wingbangboozle1-lang.github.io/NBA1/ | 200 — 29 games in horizon (16–19 Nov), 29 lines, 49 paper picks, 123 open flags, settlement executive present |
+| Flagged | https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html | 200 — 123 rows, sourced |
+| Injuries | https://wingbangboozle1-lang.github.io/NBA1/site/pages/injuries.html | 200 — **banner stale** (see F-DFA-01) |
+| Picks | https://wingbangboozle1-lang.github.io/NBA1/site/pages/picks.html | 200 — 29 rows, each with official game-page link; injury columns cite the 11/16 09:45 AM edition (see F-DFA-01) |
+| Questions | https://wingbangboozle1-lang.github.io/NBA1/site/pages/questions.html | 200 — 20 answered rows; A12 still says "27 games" (see F-DFA-03) |
+| Suggestions | https://wingbangboozle1-lang.github.io/NBA1/site/pages/suggestions.html | 200 — 37 rows, decision-needed column present |
+| Root-level `flagged.html` (guessed path) | https://wingbangboozle1-lang.github.io/NBA1/flagged.html | 404 — the page lives at `site/pages/flagged.html`; no broken link found in `index.html` (its five `flagged` hrefs point to `site/pages/flagged.html` / `verified/flagged.html`) |
+
+### 55.4 Irregularities found (for the Flagged page and integration seat — not fixed here, out of this session's scope)
+
+| ID | Severity | What was measured | Evidence |
+| --- | --- | --- | --- |
+| **F-DFA-01** | **High** | The Injuries banner names the **11/15/26 09:00 PM ET** edition as the newest official report, retrieved 2026-11-16T02:14Z. The official index https://official.nba.com/nba-injury-report-2026-27-season/ lists 11/16 editions **through 1:00 PM ET**, and `https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_10_30AM.pdf` returns `Injury Report: 11/16/26 10:30 AM` with 11/16 and 11/17 rows. The repo archive already holds 11/16 editions 09:30, 09:45, 10:00, 10:15, 10:30 AM (`data/raw/injury_pdfs/`). The picks page's "no entry" text cites 11/16 09:45 AM, and the Injuries body text says the current window is priced from 11/15 06:15 AM — three different "newest" editions on one site. | injuries.html banner + body; picks.html injury columns; official index; official PDF |
+| **F-DFA-02** | Medium | `scripts/test_injury_diff.py::test_wrapped_reason_matches_independent_transcription` fails: it asserts player "Furphy, Johnny" exists in the newest archived PDF (11/16 10:30 AM), and that edition has 65 rows with no Furphy. The test pins a player from an older edition, so it is a stale fixture, not a parser fault. It is not wired into any workflow, so no gate is affected. | `python3 scripts/test_injury_diff.py`; `engine/injury_diff.py` load of newest PDF |
+| **F-DFA-03** | Low | `questions.html` answer A12 still reads "27 games from 2026-11-14 to 2026-11-17" under "Answered", while the horizon is 29 games (16–19 Nov). It is a dated answer kept as-is, but the wording reads as current. | questions.html A12 |
+| **F-DFA-04** | Low | Flagged item F5 ("No archived injury reports") is out of date: 17 editions are archived in `data/raw/injury_pdfs/` (11/15 12:45 PM through 11/16 10:30 AM). | flagged.html F5; `data/raw/injury_pdfs/` |
+| **F-DFA-05** | Info | `scripts/test_refresh_gate.py` cannot import `engine` when run as a script from the repo root (needs `PYTHONPATH=.`). Harmless in CI because CI does not run it. | runner invocation |
+
+### 55.5 Requests to the integration seat (logged, not executed — §4 rule)
+
+1. **Injury banner and picks injury columns:** point the banner at the newest official edition in `data/raw/injury_pdfs/` (currently 11/16 10:30 AM, and newer if the official index now lists them) and show its revision time and retrieval time. Re-run `verify_dashboard.py` and `check_rendered.py` after the change.
+2. **Flagged register:** add F-DFA-01 (high), F-DFA-02 through F-DFA-05 to `data/content/flagged.json` (append-only), and retire F5.
+3. **Test fixture:** replace the "Furphy, Johnny" assertion in `scripts/test_injury_diff.py` with a player present in the newest edition, or make it check the 11/15 12:45 PM edition explicitly.
+
+### 55.6 Sources used in this section
+
+- https://wingbangboozle1-lang.github.io/NBA1/ and the four `site/pages/*.html` URLs listed in 55.3 (live site, fetched).
+- https://official.nba.com/nba-injury-report-2026-27-season/ (official NBA injury-report index — lists 11/16 editions 12:00 AM through 1:00 PM ET).
+- https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_10_30AM.pdf (official PDF, fetched and read).
+- Repository files: `data/raw/injury_pdfs/`, `scripts/test_injury_diff.py`, `engine/injury_diff.py`, `scripts/check_site.py` and the other gate scripts named in 55.2.
