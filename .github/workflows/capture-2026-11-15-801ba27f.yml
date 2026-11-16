@@ -22,7 +22,10 @@ name: Capture official HTML (session 801ba27f)
 on:
   workflow_dispatch:
   push:
-    branches: [arena/801ba27f-nba1]
+    # C03 takeover (arena/f03745ef-nba1, COORDINATION.md §48): the branch filter
+    # is widened to arena/** so the rolling capture runs on the branch a session
+    # is actually working on (originally hard-coded to arena/801ba27f-nba1).
+    branches: ["arena/**"]
     paths:
       - scripts/capture_official_801ba27f.py
       - .github/workflows/capture-2026-11-15-801ba27f.yml
