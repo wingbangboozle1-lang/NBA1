@@ -1,0 +1,47 @@
+{
+ "all_fetches_ok": false,
+ "captured_by": "session arena/4ff440c7-nba1",
+ "captured_utc": "2026-11-16T03:58:33Z",
+ "items": [
+  {
+   "bytes": null,
+   "http_status": null,
+   "name": "leaguegamelog",
+   "note": "FETCH FAILED: TimeoutError('The read operation timed out')",
+   "path": "raw/leaguegamelog.json.gz",
+   "sha256": null,
+   "url": "https://stats.nba.com/stats/leaguegamelog?Counter=1000&DateFromNullable=&DateToNullable=&Direction=DESC&LeagueID=00&PlayerOrTeam=P&Season=2026-27&SeasonType=Regular+Season&Sorter=DATE"
+  },
+  {
+   "bytes": null,
+   "http_status": null,
+   "name": "scheduleLeagueV2",
+   "note": "FETCH FAILED: <HTTPError 403: 'Forbidden'>",
+   "path": "raw/scheduleLeagueV2.json.gz",
+   "sha256": null,
+   "url": "https://cdn.nba.com/static/json/staticData/scheduleLeagueV2.json"
+  },
+  {
+   "bytes": 109024,
+   "http_status": 200,
+   "name": "injury_pdf_2026-11-15_09_00PM",
+   "note": "PDF archived by content hash (R04)",
+   "path": "raw/injury_pdfs/Injury-Report_2026-11-15_09_00PM__3a148bf1db5fb016.pdf",
+   "sha256": "3a148bf1db5fb0165a495915ba42eb955e9387efe55916eb5feb7dd3688c1448",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf"
+  },
+  {
+   "bytes": null,
+   "http_status": null,
+   "name": "commonallplayers",
+   "note": "FETCH FAILED: TimeoutError('The read operation timed out')",
+   "path": "raw/commonallplayers.json.gz",
+   "sha256": null,
+   "url": "https://stats.nba.com/stats/commonallplayers?IsOnlyCurrentSeason=1&LeagueID=00&Season=2026-27"
+  }
+ ],
+ "per_player_logs_failed": 0,
+ "per_player_logs_fetched": 0,
+ "season": "2026-27",
+ "season_type": "Regular Season"
+}
