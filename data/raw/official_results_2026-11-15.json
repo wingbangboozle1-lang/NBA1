@@ -1,0 +1,58 @@
+{
+  "captured_at_utc": "2026-11-16T00:25:00Z",
+  "note": "Independent cross-check record for the 2026-11-15 results-feed promotion (engine/promote_official.py reads this before treating a finals row as cross-verified). Read live from the official NBA.com game and box-score pages via the Arena fetch_page tool; the platform's own text renderer served the pages. Scores and statuses were transcribed verbatim; anything not rendered on the page is left blank and flagged. Used only as the second source for exact-score agreement - never as a sole source of feed rows.",
+  "source": "official page read (Arena fetch_page)",
+  "sources": [
+    "https://www.nba.com/game/phi-vs-ind-0022600236",
+    "https://www.nba.com/game/ind-vs-phi-0022600236/box-score",
+    "https://www.nba.com/games"
+  ],
+  "rows": [
+    {
+      "gid": "0022600236",
+      "date": "2026-11-15",
+      "away": "IND",
+      "home": "PHI",
+      "away_pts": 124,
+      "home_pts": 131,
+      "ot": 0,
+      "status": "Final",
+      "venue": "Xfinity Mobile Arena, Philadelphia, PA",
+      "quarts": null,
+      "quarts_flag": "unverified: quarter line-score not rendered in the read box-score chunks",
+      "source_url": "https://www.nba.com/game/ind-vs-phi-0022600236"
+    },
+    {
+      "gid": "0022600237",
+      "date": "2026-11-15",
+      "away": "LAL",
+      "home": "PHX",
+      "away_pts": 131,
+      "home_pts": 123,
+      "ot": 0,
+      "status": "Final",
+      "venue": "",
+      "venue_flag": "unverified",
+      "quarts": null,
+      "quarts_flag": "unverified",
+      "source_url": "https://www.nba.com/game/phi-vs-ind-0022600236"
+    },
+    {
+      "gid": "0022600238",
+      "date": "2026-11-15",
+      "away": "CHA",
+      "home": "LAC",
+      "away_pts": 105,
+      "home_pts": 113,
+      "ot": 0,
+      "status": "Final",
+      "venue": "",
+      "venue_flag": "unverified",
+      "quarts": null,
+      "quarts_flag": "unverified",
+      "source_url": "https://www.nba.com/game/phi-vs-ind-0022600236"
+    }
+  ],
+  "in_progress_at_read_utc": "2026-11-16T00:25:00Z",
+  "in_progress_note": "SAS@UTA 0022600239, NYK@TOR 0022600241, DAL@BOS 0022600240, HOU@WAS 0022600242 were still in progress at read time; ATL@MIL 0022600243 and OKC@SAC 0022600244 not started. None appended to any feed."
+}
