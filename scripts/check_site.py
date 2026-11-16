@@ -11,7 +11,9 @@ PAGES = ["index.html", "research.html", "slate.html", "suggestions.html", "revie
          "desk.html", "desk-lines.html", "desk-validation.html", "desk-props.html",
          "desk-capture.html",
          # horizon picks page (session arena/697fca1e-nba1, R-W1)
-         "picks.html"]
+         "picks.html",
+         # model v2 disagreement-first page (session arena/49f70042-nba1)
+         "model-v2.html"]
 OFFICIAL_HOSTS = {"nba.com", "www.nba.com", "official.nba.com", "docs.github.com"}
 
 class Audit(HTMLParser):
