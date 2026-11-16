@@ -4320,13 +4320,13 @@ block), so `refresh_gate.py` correctly BLOCKs and no rebuild may run. That gap i
 
 | # | Task | Status | File scope (exclusive) | Plan |
 | --- | --- | --- | --- | --- |
-| A01 | Board claim (banner + §0b row + this §42) pushed before any other edit | done (this commit) | `COORDINATION.md` (banner + §0b row + §42 only) | Claim first, work second. |
+| A01 | Board claim (banner + §0b row + this §46) pushed before any other edit | done (this commit) | `COORDINATION.md` (banner + §0b row + §42 only) | Claim first, work second. |
 | A02 | Multi-strategy structured parsers for the official pages the gate demands: standings (S8), team traditional (S9), team opponent (S10), team advanced (S1/S2), schedule (S4) — HTML-table, embedded-JSON/`__NEXT_DATA__` and text fallbacks, strict integrity checks (30 teams, W+L==GP, ranges), every row tagged with its official source URL; never guess a value | **done** (17 unit tests green; live validation in the CI refresh run, see 42.2) | `engine/parse_official.py` (new), `scripts/test_parse_official.py` (new) | A row that cannot be read from the official payload is left out and reported, never inferred. |
 | A03 | Wire the parsers into the scheduled fetch: structured `_capture_S*_*.json` rows + bounded raw parse evidence + CI-readable diagnostics; iterate against live official responses via the push-triggered refresh run until S1/S4 parse failures are resolved or proven unresolvable from the served payload | in progress (wired + pushed; CI iteration loop running) | `engine/fetch_official.py` (parser/capture layer only; RFG1 owner is `done`, edit logged here) | Push to `arena/**` triggers the refresh job (workflow path filter); run logs are the verification loop against live nba.com responses. |
 | A04 | Verified promotion records the gate requires (`data/raw/standings.json`, `team_traditional.json`, `team_opponent.json`, `schedule_upcoming.json`, `injuries.json`): rows + `verification` block bound to the same-run capture URL + SHA-256 + timestamp; independent re-validation incl. cross-page agreement (standings W/L vs traditional W/L); fail-closed promoter step in the refresh workflow between fetch and gate | in progress (promoter + workflow step written; first live promotion runs in CI) | `engine/promote_official.py` (new), `.github/workflows/refresh-data.yml` (one additive promote step, logged), `data/raw/standings.json`, `data/raw/team_traditional.json`, `data/raw/team_opponent.json`, `data/raw/schedule_upcoming.json`, `data/raw/injuries.json` (promotion records only) | Capture ≠ promotion: the promoter re-validates and binds digests; a changed capture is never an input by itself. |
 | A05 | Consecutive official injury-report PDF diffs: extract status text from the archived PDFs, diff successive editions per player/team, publish status-change rows with each edition's revision time and retrieval time | **done** (127 rows/edition from the real 11/15 05:15PM+05:30PM PDFs, 0 unparsed cells; 3 real status changes detected between them; cross-checked against the independent 06:15AM transcription) | `engine/injury_diff.py` (new), `data/raw/injury_pdfs/**`, `data/parsed/injury_diffs/**` (new) | PDF bytes stay content-addressed; the diff is computed, never hand-written. |
 | A06 | Verification record: tests green, gate outcomes run and reported honestly (PASS or exact BLOCK reasons), every data row source-linked to an official NBA URL, irregularities flagged in my namespace (the shared Flagged register is §41 K02's merge territory) | unclaimed | `verify/2026-11-15-abac961f/**` (new namespace) | "Never mark anything verified without checking it against an official source, and link that source." |
-| A07 | PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy, record PR link + merge result here; rebase around §41's integration PR (union-merge `COORDINATION.md`, never discard their rows) | unclaimed | `COORDINATION.md` (§42 delivery record only) | Flagged items do not block. "Do not merge a broken site." |
+| A07 | PR → `main`, merge without waiting for approval, confirm GitHub Pages deploy, record PR link + merge result here; rebase around §41's integration PR (union-merge `COORDINATION.md`, never discard their rows) | unclaimed | `COORDINATION.md` (§46 delivery record only) | Flagged items do not block. "Do not merge a broken site." |
 
 | A08 | Results-feed currency (scope amendment 2026-11-16 00:0x UTC, brief item "keep an official per-game result feed current and settle only after final scores are verified"): append official finals to `data/raw/games_completed.json` only when the official capture's integer Final score agrees with an independent record where one exists (exact match required); per-row official game URL recorded in `row_sources` | in progress | `data/raw/games_completed.json`, `data/raw/_last_refresh.json` (promotion markers only), `data/parsed/**` | The gate's results reconciliation blocks the rebuild until the feed is current; the promoter does the append with cross-checks and the next fetch reconciles cleanly. Quarter-score settlement rows live in `data/settlement/**` (G02) and are not duplicated here. |
 
@@ -4344,11 +4344,11 @@ provenance gates pass", and "compute rest, back-to-back and 3-in-4 from the offi
 can reference `engine/parse_official.py`, `engine/injury_diff.py`, `engine/promote_official.py`
 and the `verify/2026-11-15-abac961f/` record. Logged as a request; that file is not edited here.
 
-### 42.1 Claim log
+### 46.1 Claim log
 
 - 2026-11-15 23:40 UTC — claim written and pushed before any other edit (A01).
 
-### 42.2 Implementation log (2026-11-16 00:0x UTC)
+### 46.2 Implementation log (2026-11-16 00:0x UTC)
 
 - `engine/parse_official.py` (new): multi-strategy parsers. HTML-table,
   `__NEXT_DATA__` and stats-API `rowSet` strategies for the team tables
