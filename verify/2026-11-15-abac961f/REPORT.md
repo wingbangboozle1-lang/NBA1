@@ -76,13 +76,51 @@ Line-by-line sources:
   `data/official/injury_2026-11-15_0615AM.json` (06:15 AM) and
   `data/official/injury_2026-11-14_01_45PM.json` (day-2 baseline).
 
+## Offline promote -> gate round-trip (scripts/test_gate_roundtrip.py)
+
+`python3 scripts/test_gate_roundtrip.py` builds an isolated tree whose
+captures match the live fetcher's shapes byte-for-byte (structured table
+captures with response digests, S1/S2 window rows, S4 games, injury-probe
+results carrying the REAL archived PDF bytes, results captures including the
+run-date slate, `_last_refresh.json` with `source_checks`), then runs
+`engine/promote_official.py` followed by `engine/refresh_gate.py` with a test
+clock. Result on 2026-11-16 ~00:55 UTC:
+
+```
+13 promoted, 0 blocked
+PASS: all freshness, provenance, integrity, and promotion gates passed
+promote exit: 0 gate exit: 0
+ROUNDTRIP: PASS
+```
+
+Two integration bugs were found and fixed by running the real gate offline:
+the refresh-record timestamp key is `captured_at_utc` (not
+`completed_at_utc`), and the gate requires a results capture for the run
+date itself even when its slate has no finals yet. A third audit fix:
+`verification.source_sha256` must bind the fetcher's `source_checks[].sha256`
+key, and the injury-PDF probe's proof must bind `results[0]`'s digest (the
+probe record has no top-level `http_status`).
+
 ## Live runs (iteration log)
 
 | run | workflow | outcome |
 | --- | --- | --- |
-| to be filled as runs complete | `Refresh official data` / `Probe official source reachability` | |
+| 43778764505 | `Refresh official data` (push, first live parser run) | queued behind a hung probe job (see Flagged) |
+| 43776185453 | `Probe official source reachability` (push) | **hung** in the probe step since 23:41:47Z (runner slot held); cancel is not possible from this sandbox's token (Actions write 403) |
 
 ## Flagged / unverified
+
+- **Runner starvation (infra)**: probe run 43776185453 has been stuck in the
+  probe step for over an hour and holds a runner slot; subsequent runs on
+  this branch queue behind it. The probe step (K01 scope,
+  `.github/workflows/probe-official.yml`) appears to make an HTTP call
+  without an effective timeout. Not fixed here (not this session's file);
+  flagged for the probe-workflow owner. Follow-up commits use `[skip probe]`.
+- **First live parser run pending**: the `Refresh official data` run's
+  captures are the only raw-HTML validation of the S8/S9/S10 strategies
+  (this sandbox has no raw-HTML egress to nba.com; only the platform's
+  rendered-text channel). The offline round-trip proves the promote/gate
+  chain, not the live HTML shapes.
 
 - Quarter scores for the 2026-11-15 finals: not rendered in the read
   box-score chunks → left `quarts: null, quarts_flag: unverified` in the
