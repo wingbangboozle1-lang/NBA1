@@ -1,6 +1,6 @@
 {
  "title": "Flagged for Review",
- "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md \u00a723): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link.",
+ "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link. Items F111 to F116 were added on 2026-11-16 by session arena/23b323a3-nba1 (COORDINATION §51). Their numbers were assigned F108-F113 on that branch and RENUMBERED here because arena/2042a559-nba1 landed F108-F110 on main first; nothing was renumbered away from another session.",
  "items": [
   {
    "id": "F1",
@@ -329,7 +329,7 @@
    "id": "F34",
    "severity": "Medium",
    "title": "The repository's gate checks structure, not values",
-   "detail": "The dashboard gate is structural, not a value check: scripts/verify_dashboard.py counts four categories separately \u2014 rows with an allowed official source link, explicit no-source marks with an explanatory title, marks whose title carries an approved official URL (rendered as a clickable context link since 2026-11-14), and unmarked rows \u2014 and fails only on the last category. It never fetches an NBA page and never compares a published value with its source; scripts/source_check.py is the row-value spot-check, and both were run on the merged tree before every merge (COORDINATION section 35). The original finding stands: a link is not a value check.",
+   "detail": "The dashboard gate is structural, not a value check: scripts/verify_dashboard.py counts four categories separately — rows with an allowed official source link, explicit no-source marks with an explanatory title, marks whose title carries an approved official URL (rendered as a clickable context link since 2026-11-14), and unmarked rows — and fails only on the last category. It never fetches an NBA page and never compares a published value with its source; scripts/source_check.py is the row-value spot-check, and both were run on the merged tree before every merge (COORDINATION section 35). The original finding stands: a link is not a value check.",
    "affected": "Trust in 'VERIFY OK' and in every 'verified' label on the site",
    "source": null,
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/verify_all.py",
@@ -735,7 +735,7 @@
    "id": "F80",
    "severity": "medium",
    "title": "First 11/14 tip stated as 00:30Z; official tip is 7:00 PM ET (00:00Z)",
-   "detail": "COORDINATION \u00a740 says the earliest 11/14 game tipped at 00:30Z on 11/15. The official results file lists DEN @ NOP at 7:00 PM ET, which is 00:00Z (EST, UTC-5). Ledger entry 1 records first_tip_utc 2026-11-15T00:00Z, which matches the official time.",
+   "detail": "COORDINATION §40 says the earliest 11/14 game tipped at 00:30Z on 11/15. The official results file lists DEN @ NOP at 7:00 PM ET, which is 00:00Z (EST, UTC-5). Ledger entry 1 records first_tip_utc 2026-11-15T00:00Z, which matches the official time.",
    "source_url": "https://www.nba.com/game/den-vs-nop-0022600231",
    "status": "open"
   },
@@ -1004,6 +1004,60 @@
    "source_url": "https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC_book.pdf",
    "affected": "data/official/gamebooks/2026-11-15_HOUWAS.md, _ATLMIL.md, _OKCSAC.md",
    "suggested_action": "Capture the full gamebooks in a later pass if they are needed for minutes or player logs."
+  },
+  {
+   "id": "F111",
+   "severity": "High",
+   "title": "A second arena table in the repo names the wrong building for the LA Clippers, and travel distance was computed from it",
+   "detail": "data/arenas.json maps LAC to Crypto.com Arena in Los Angeles (34.0430, -118.2687) and LAL to the same coordinates. The official NBA schedule page prints the LA Clippers' home venue as Intuit Dome, Inglewood, CA, and the repository's own official capture agrees: data/official/arena_coordinates_2026-11-15.json row LAC -> {'arena': 'Intuit Dome', 'city': 'Inglewood, CA', 'lat': 33.9451, 'lon': -118.3431}, with venue_source_url https://www.nba.com/schedule. The same official page also prints PHI at Xfinity Mobile Arena (data/arenas.json still says Wells Fargo Center) and PHX at Mortgage Matchup Center (data/arenas.json still says Footprint Center). scripts/travel_distance.py read the stale table, so any travel mile derived from it inherits the error - the material one being a Clippers home game, where an LA-vs-Inglewood swap moves the away team's journey by roughly 9 miles.",
+   "affected": "data/arenas.json (5 rows); data/travel_distance.json; the 4 horizon rows whose home team is LAC, PHI, PHX, LAL or SAC (annotated, not hand-edited)",
+   "source_url": "https://www.nba.com/schedule",
+   "suggested_action": "scripts/travel_distance.py now reads data/official/arena_coordinates_2026-11-15.json, and data/derived/horizon_lines_v2.json carries meta.travel_source_correction naming the affected games. data/arenas.json is left in place so the discrepancy stays visible; it should be regenerated from the official capture and then either deleted or made a pointer to it."
+  },
+  {
+   "id": "F112",
+   "severity": "Medium",
+   "title": "Arena coordinates are sourced from Wikipedia, not from an NBA-published table",
+   "detail": "No NBA-published arena-coordinate table was found. data/official/arena_coordinates_2026-11-15.json records venue names transcribed from https://www.nba.com/schedule per row (official) but latitude/longitude from each arena's Wikipedia coordinate parameter, which is OpenStreetMap-derived. The file labels this itself: coordinate_status = 'SOURCED (secondary source: Wikipedia/Wikidata, not NBA-published)'. Great-circle distance is a lower bound on road distance and ignores airport/layover routing, so travel miles are an approximation of an approximation.",
+   "affected": "the travel column wherever it is published",
+   "source_url": "https://www.nba.com/schedule",
+   "suggested_action": "Keep the secondary-source label on every row that shows a mile figure. If a primary coordinate source is required, the arena operator or city GIS open-data portal would be the place to get one; neither was retrieved in this session."
+  },
+  {
+   "id": "F113",
+   "severity": "Medium",
+   "title": "The horizon's per-player minutes capture covers 24 players, so most picks cannot compute minutes redistribution",
+   "detail": "data/players_minutes_2026_27.json holds 24 ranked player rows. The horizon's minutes-redistribution gate needs an official minutes capture for whichever players the injury report lists, and on the 2026-11-16..18 window 11 of 25 games failed the gate ONLY for that reason (gates_failed = ['minutes redistribution not computable for one of the teams (per-player minutes not captured)']). Nationally readable official player tables exist - https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame returns 471 player rows and was reached in this session - but the reading was interrupted and only the first rows were transcribed, so the capture was NOT extended on the strength of a partial read.",
+   "affected": "data/players_minutes_2026_27.json; 11 of 25 horizon picks (gate FAIL, zero stake)",
+   "source_url": "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame",
+   "suggested_action": "Complete a full transcription of the 471-row official table (or a paged read of the 30 teams' rosters) and re-run scripts/build_horizon_v2.py. Until then those picks stay gated, which is the conservative outcome, not a defect in the gate."
+  },
+  {
+   "id": "F114",
+   "severity": "Low",
+   "title": "The legacy lines table has no rotation-availability or parlay-rho columns (register R15/R14 still partial)",
+   "detail": "The rolling-slate page (site/pages/roll.html) carries a rotation-availability column and prices parlays with the measured rho beside the naive product. The legacy 'Lines & Picks' page (site/pages/picks.html) has home/away injury status but no rotation-availability column, and its SGP pricing still uses the fixed model constants SGP_RHO_TEAMMATES = -0.2 and SGP_RHO_OPPONENTS = 0.05 rather than the measured rho.",
+   "affected": "site/pages/picks.html; scripts/generate_picks.py",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "suggested_action": "Add both columns to the legacy builder in a dedicated pass. It was NOT done here: the legacy page is a different generator with its own layout, and mixing a layout change into a data-currency session is how a green gate ships a broken table."
+  },
+  {
+   "id": "F115",
+   "severity": "High",
+   "title": "The Results & Settlement page printed \"0 of 0 final — NOT settleable\" directly under the settled 11/15 game day",
+   "detail": "Two official captures of 2026-11-15 exist in data/official/: results_2026-11-15.json (the canonical file) and results_2026-11-15_dfef26dc.json (a session-namespaced capture at 2026-11-16T02:12Z..02:17Z). scripts/build_results_page.py derived the game day from the whole file stem, so the second file became its own section headed '2026-11-15_dfef26dc', matched zero rows against that impossible date, and printed 'Retrieved 2026-11-16T02:12Z..02:17Z · 0 of 0 final — NOT settleable' immediately beneath the section that says the same game day IS settled (stamp 2026-11-16T14:45Z, 5-4-0). Found by reading the built page, not by a gate: all five gates passed while it was wrong, because it is a false statement in prose rather than a broken link.",
+   "affected": "site/pages/results.html — the one page whose job is to answer 'is this game day settleable'",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "suggested_action": "Fixed: the date is now the first ten characters of the stem, the canonical results_<date>.json is authoritative when present, and extra captures are listed by name in a note instead of being rendered as empty game days. Verified after the fix: the page has exactly three sections (2026-11-14, 2026-11-15, How a game day gets settled) and zero occurrences of 'NOT settleable'."
+  },
+  {
+   "id": "F116",
+   "severity": "Medium",
+   "title": "The pinned home-court advantage is computed on a stale standings read, and the published file contains two different standings-derived samples",
+   "detail": "The HCA the model is pinned to is 1.23 points, from a measured home-win rate of 0.5285 on 193 games. That figure was measured from the official standings at the 2026-11-16T02:12Z..02:17Z capture, and it was honestly labelled as including only the 11/15 games that had gone Final at that moment. All three games that finished afterwards (HOU@WAS, ATL@MIL, OKC@SAC) were AWAY wins, so re-adding the official standings at 14:3xZ in this session gives home W-L 102-94 = 196 games, a home-win rate of 0.5204, and a pinned HCA of 0.88 points rather than 1.23. The drift reconciles EXACTLY: +3 games, +0 home wins, +3 road wins, which is precisely those three away wins - verified by verify/2026-11-16-23b323a3/verify_hca_anchor.py, which also re-checks the two internal consistency identities on the live table (home wins 102 == road losses 102; road wins 94 == home losses 94). A second, separate problem is visible in the same JSON: data/derived/horizon_lines_v2.json meta.home_court_anchor reports measured_home_win_rate 0.5285 with games_measured 161, while its own standings_cross_check sub-object reports 0.5285 over 193 games and the final-score corpus measures 0.5155 over 161. The rate and the game count in the top-level fields do not come from the same sample.",
+   "affected": "data/derived/horizon_lines_v2.json meta.home_court_anchor; every line on site/pages/roll.html and model-v2.html that carries the pinned HCA",
+   "source_url": "https://www.nba.com/standings",
+   "suggested_action": "Re-run scripts/build_horizon_v2.py against the current standings so the pin is recomputed rather than hand-corrected; that run also fixes the rate/count mismatch, because both are then read from one capture. This session deliberately did NOT hand-edit the pinned input: a hand-edited model input is exactly what this project forbids, and the re-derivation needs a run that reads the official pages. The arithmetic reconciliation above is committed so the size and direction of the correction are known in advance."
   }
  ]
 }

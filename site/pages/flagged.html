@@ -1056,13 +1056,58 @@
 <td class="src"><span class="na" title="source id Official gamebook PDFs (statsdmz) and nba.com game pages is not in the register">&mdash;</span></td>
 </tr>
 <tr>
+<td>F111</td>
+<td>High</td>
+<td><b>A second arena table in the repo names the wrong building for the LA Clippers, and travel distance was computed from it</b></td>
+<td>data/arenas.json maps LAC to Crypto.com Arena in Los Angeles (34.0430, -118.2687) and LAL to the same coordinates. The official NBA schedule page prints the LA Clippers' home venue as Intuit Dome, Inglewood, CA, and the repository's own official capture agrees: data/official/arena_coordinates_2026-11-15.json row LAC -&gt; {'arena': 'Intuit Dome', 'city': 'Inglewood, CA', 'lat': 33.9451, 'lon': -118.3431}, with venue_source_url https://www.nba.com/schedule. The same official page also prints PHI at Xfinity Mobile Arena (data/arenas.json still says Wells Fargo Center) and PHX at Mortgage Matchup Center (data/arenas.json still says Footprint Center). scripts/travel_distance.py read the stale table, so any travel mile derived from it inherits the error - the material one being a Clippers home game, where an LA-vs-Inglewood swap moves the away team's journey by roughly 9 miles.</td>
+<td>data/arenas.json (5 rows); data/travel_distance.json; the 4 horizon rows whose home team is LAC, PHI, PHX, LAL or SAC (annotated, not hand-edited)</td>
+<td>scripts/travel_distance.py now reads data/official/arena_coordinates_2026-11-15.json, and data/derived/horizon_lines_v2.json carries meta.travel_source_correction naming the affected games. data/arenas.json is left in place so the discrepancy stays visible; it should be regenerated from the official capture and then either deleted or made a pointer to it.</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
 <td>F112</td>
+<td>Medium</td>
+<td><b>Arena coordinates are sourced from Wikipedia, not from an NBA-published table</b></td>
+<td>No NBA-published arena-coordinate table was found. data/official/arena_coordinates_2026-11-15.json records venue names transcribed from https://www.nba.com/schedule per row (official) but latitude/longitude from each arena's Wikipedia coordinate parameter, which is OpenStreetMap-derived. The file labels this itself: coordinate_status = 'SOURCED (secondary source: Wikipedia/Wikidata, not NBA-published)'. Great-circle distance is a lower bound on road distance and ignores airport/layover routing, so travel miles are an approximation of an approximation.</td>
+<td>the travel column wherever it is published</td>
+<td>Keep the secondary-source label on every row that shows a mile figure. If a primary coordinate source is required, the arena operator or city GIS open-data portal would be the place to get one; neither was retrieved in this session.</td>
+<td class="src"><a href="https://www.nba.com/schedule" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F113</td>
+<td>Medium</td>
+<td><b>The horizon's per-player minutes capture covers 24 players, so most picks cannot compute minutes redistribution</b></td>
+<td>data/players_minutes_2026_27.json holds 24 ranked player rows. The horizon's minutes-redistribution gate needs an official minutes capture for whichever players the injury report lists, and on the 2026-11-16..18 window 11 of 25 games failed the gate ONLY for that reason (gates_failed = ['minutes redistribution not computable for one of the teams (per-player minutes not captured)']). Nationally readable official player tables exist - https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame returns 471 player rows and was reached in this session - but the reading was interrupted and only the first rows were transcribed, so the capture was NOT extended on the strength of a partial read.</td>
+<td>data/players_minutes_2026_27.json; 11 of 25 horizon picks (gate FAIL, zero stake)</td>
+<td>Complete a full transcription of the 471-row official table (or a paged read of the 30 teams' rosters) and re-run scripts/build_horizon_v2.py. Until then those picks stay gated, which is the conservative outcome, not a defect in the gate.</td>
+<td class="src"><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;SeasonType=Regular+Season&amp;PerMode=PerGame" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F114</td>
+<td>Low</td>
+<td><b>The legacy lines table has no rotation-availability or parlay-rho columns (register R15/R14 still partial)</b></td>
+<td>The rolling-slate page (site/pages/roll.html) carries a rotation-availability column and prices parlays with the measured rho beside the naive product. The legacy 'Lines &amp; Picks' page (site/pages/picks.html) has home/away injury status but no rotation-availability column, and its SGP pricing still uses the fixed model constants SGP_RHO_TEAMMATES = -0.2 and SGP_RHO_OPPONENTS = 0.05 rather than the measured rho.</td>
+<td>site/pages/picks.html; scripts/generate_picks.py</td>
+<td>Add both columns to the legacy builder in a dedicated pass. It was NOT done here: the legacy page is a different generator with its own layout, and mixing a layout change into a data-currency session is how a green gate ships a broken table.</td>
+<td class="src"><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F115</td>
 <td>High</td>
 <td><b>The Results &amp; Settlement page printed &quot;0 of 0 final — NOT settleable&quot; directly under the settled 11/15 game day</b></td>
 <td>Two official captures of 2026-11-15 exist in data/official/: results_2026-11-15.json (the canonical file) and results_2026-11-15_dfef26dc.json (a session-namespaced capture at 2026-11-16T02:12Z..02:17Z). scripts/build_results_page.py derived the game day from the whole file stem, so the second file became its own section headed '2026-11-15_dfef26dc', matched zero rows against that impossible date, and printed 'Retrieved 2026-11-16T02:12Z..02:17Z · 0 of 0 final — NOT settleable' immediately beneath the section that says the same game day IS settled (stamp 2026-11-16T14:45Z, 5-4-0). Found by reading the built page, not by a gate: all five gates passed while it was wrong, because it is a false statement in prose rather than a broken link.</td>
 <td>site/pages/results.html — the one page whose job is to answer 'is this game day settleable'</td>
 <td>Fixed: the date is now the first ten characters of the stem, the canonical results_&lt;date&gt;.json is authoritative when present, and extra captures are listed by name in a note instead of being rendered as empty game days. Verified after the fix: the page has exactly three sections (2026-11-14, 2026-11-15, How a game day gets settled) and zero occurrences of 'NOT settleable'.</td>
 <td class="src"><a href="https://www.nba.com/games?date=2026-11-15" target="_blank" rel="noopener">link</a></td>
+</tr>
+<tr>
+<td>F116</td>
+<td>Medium</td>
+<td><b>The pinned home-court advantage is computed on a stale standings read, and the published file contains two different standings-derived samples</b></td>
+<td>The HCA the model is pinned to is 1.23 points, from a measured home-win rate of 0.5285 on 193 games. That figure was measured from the official standings at the 2026-11-16T02:12Z..02:17Z capture, and it was honestly labelled as including only the 11/15 games that had gone Final at that moment. All three games that finished afterwards (HOU@WAS, ATL@MIL, OKC@SAC) were AWAY wins, so re-adding the official standings at 14:3xZ in this session gives home W-L 102-94 = 196 games, a home-win rate of 0.5204, and a pinned HCA of 0.88 points rather than 1.23. The drift reconciles EXACTLY: +3 games, +0 home wins, +3 road wins, which is precisely those three away wins - verified by verify/2026-11-16-23b323a3/verify_hca_anchor.py, which also re-checks the two internal consistency identities on the live table (home wins 102 == road losses 102; road wins 94 == home losses 94). A second, separate problem is visible in the same JSON: data/derived/horizon_lines_v2.json meta.home_court_anchor reports measured_home_win_rate 0.5285 with games_measured 161, while its own standings_cross_check sub-object reports 0.5285 over 193 games and the final-score corpus measures 0.5155 over 161. The rate and the game count in the top-level fields do not come from the same sample.</td>
+<td>data/derived/horizon_lines_v2.json meta.home_court_anchor; every line on site/pages/roll.html and model-v2.html that carries the pinned HCA</td>
+<td>Re-run scripts/build_horizon_v2.py against the current standings so the pin is recomputed rather than hand-corrected; that run also fixes the rate/count mismatch, because both are then read from one capture. This session deliberately did NOT hand-edit the pinned input: a hand-edited model input is exactly what this project forbids, and the re-derivation needs a run that reads the official pages. The arithmetic reconciliation above is committed so the size and direction of the correction are known in advance.</td>
+<td class="src"><a href="https://www.nba.com/standings" target="_blank" rel="noopener">link</a></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">

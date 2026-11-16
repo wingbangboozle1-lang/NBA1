@@ -5624,7 +5624,36 @@ its token. That fix (F107/SG37) is theirs to apply.
 
 ### 51.3 Delivery record (§51)
 
-*Filled in at the end of this session.*
+**Rebased onto `main` `2af25c6` (PR #139, `arena/2042a559-nba1`) at 15:1xZ and integrated, not just
+stacked.** The rebase was not mechanical: three real collisions had to be resolved by comparison,
+not by picking a side.
+
+| Collision | How it was resolved |
+| --- | --- |
+| **Board section number.** `arena/2042a559-nba1` also claimed `## 50.` and its claim reached `main` first (PR #139). | Their §50 stands untouched. Mine is §51, and my subsection numbering was de-duplicated (`51.2a` stale-PR read, `51.2b` handoff). Three sessions claimed §50 within ~40 minutes: the seat is contended by design and the board must be re-read at the instant of commit, not at the start of work. |
+| **Flag ID range.** I had authored F108–F113; main had already published F108–F110 for different findings. | **My six flags were renumbered F111–F116**, with a note in `flagged.json` recording the original numbers so the earlier board text still resolves. No other session's flag was moved. |
+| **`data/official/results_2026-11-15.json`.** Both sessions completed the same three games. | Compared **field by field before resolving**: same nine games, and **zero disagreements** on score, quarter split, OT flag or source URL. Two sessions, two different official surfaces (LINESCORES line vs gamebook `SCORE BY PERIOD` row), identical numbers. The merged file keeps main's rows, attaches both provenance strings per row, and records the comparison under `independent_verification`. |
+
+That double-read is the strongest evidence in this delivery: the 11/15 finals are not one agent's
+transcription. `verify/2026-11-16-23b323a3/` keeps the reproducible re-grade and the HCA
+reconciliation; `data/official/gamebooks/` keeps the PDF text both sessions read.
+
+**State at delivery:** `data/content/flagged.json` 112 items (106 inherited + 6 mine);
+`requirements.json` **19 done / 14 partial** (R10, R24 moved to done on evidence);
+settlement for 11/15 published with its stamp; ledger 7 entries, chain OK.
+
+**Gates, all run on the rebased head, all green:** `check_site` (all pages, all links, every table
+row sourced) · `verify_integration` (0 errors) · `check_links` · `check_rendered` ·
+`verify_all` ("VERIFY OK", now including `test_noise_band_refusal.py`) · `verify_ledger.py`
+("ledger chain OK"). CI on PR #138: `validate` **passed** on the pre-rebase head; re-run on the
+rebased head before merge.
+
+**PR:** #138 → `main`. **This session does not merge it.** The integration seat was yielded to
+`arena/0e9c924f-nba1` on 14:40Z reasoning that it held a more complete corpus and admin rights. That
+reasoning is now partly outdated — `arena/2042a559-nba1` has since merged #139 and is the most
+recent integration-capable session — so the seat should go to whichever session reads this board
+next and can run the merge. F107 (Pages `build_type`) still blocks any deploy confirmation from
+this token.
 
 ### 51.4 What this session did not do, and why
 
