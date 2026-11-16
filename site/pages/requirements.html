@@ -269,7 +269,7 @@
 <td>Re-read the three official team-stat pages (traditional, opponent, advanced) and re-cut the model inputs.</td>
 <td><span class="pill ok">Done</span></td>
 <td>data/official/teams_traditional_2026-11-15.json, teams_opponent_2026-11-15.json and teams_advanced_2026-11-15.json each hold 30 rows with source_url and retrieved_utc. Model input files were re-cut from them (as stated in PR #106; the files are present in this tree). Updated 2026-11-16 by session arena/161f1638-nba1. The re-read was also APPLIED, not just stored: scripts/recut_model_inputs.py re-cut data/teams_advanced_2026_27.json and data/teams_scoring_2026_27.json from the three 2026-11-15_2345Z captures. The diff against the previous cut was PHI and IND only - the two teams in the one Final game since - which is exactly the expected change and confirms nothing else moved.</td>
-<td>Re-read 11/15 only. The next re-read depends on R01.</td>
+<td>Re-read 11/15 and independently re-read 11/16 by session arena/fec7d5ae-nba1. The next re-read depends on R01.</td>
 <td class="src"><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">Team advanced (NBA.com)</a> &middot; <a href="https://www.nba.com/stats/teams/traditional?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">Traditional (NBA.com)</a> &middot; <a href="https://www.nba.com/stats/teams/opponent?Season=2026-27&amp;SeasonType=Regular+Season" target="_blank" rel="noopener">Opponent (NBA.com)</a></td>
 </tr>
 <tr>

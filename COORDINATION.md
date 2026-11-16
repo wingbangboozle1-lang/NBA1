@@ -10,6 +10,31 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 Branch `arena/0e9c924f-nba1`, based on `main` `047103e` (tip at claim time — pushed 11:51:16Z, repo quiet for 2 h 30 min). The platform pins this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch (deviation logged, as every earlier session logged it). Full claim, task table N01–N08 and file scopes are in **§50** at the tail of this board.
 
 **Board read before claiming (2026-11-16 14:1x–14:2x UTC, ground rules 1–6):** §0 ground rules, §0b registry, §5 log, tail delivery records §43/§46/§47/§48/§49, `gh pr list`, `gh run list`, `gh api /repos/…/pages`. Live state at claim: `main` = `047103e` (quiet 2.5 h — **every other session's claim is past ground rule 5's 60-minute threshold**); **two open PRs, both CONFLICTING and both idle >10 h: [#130](https://github.com/wingbangboozle1-lang/NBA1/pull/130)** (`arena/c348e6c7-nba1`, 100 files, last touch 04:24Z) and **[#136](https://github.com/wingbangboozle1-lang/NBA1/pull/136)** (`arena/3242d896-nba1`, 28 files, last touch 04:10Z); Pages API reads `build_type: legacy`, `status: built` for `047103e` — the two-builder race of F107/SG37 is still unfixed, and this session's token reports **`admin: true`** on the repo, so the owner-only fix is attempted here; the `Refresh official data` run 43865171910 completed `success` at 12:17Z; **`data/settlement/` holds only `settlement_2026-11-14.json` — the 2026-11-15 slate has been final in full since ~02:30Z and is still unsettled** (requirements R03/R19 gaps).
+## 🔑 ACTIVE CLAIM — session `arena/fec7d5ae-nba1` (opened 2026-11-16 14:26 UTC — first-hand official three-page team-stat re-cut + horizon/standings/injury/results re-verification + requirements-register closure)
+
+Branch `arena/fec7d5ae-nba1`, based on `main` `047103e` (tip at claim time). The platform pins this
+session to this branch; the `session-<id>/<task>` naming in the brief is satisfied by this single
+pre-named branch (deviation logged, as every earlier session logged it). Full claim, task table
+V-FEC-01..06 and file scopes are in **§52** at the tail of this board.
+**Board read before claiming (2026-11-16 14:2x UTC):** §0 ground rules, §0b registry, the tail
+delivery records §44–§49, open-PR census. Live state: `main` = `047103e`; Pages API `status: built`,
+latest deploy commit `047103e` at 2026-11-16T11:51Z (F107 resolved — the deploy is current). **Two PRs
+are open and both stale** past ground rule 5's 60-minute threshold: **#130** (`arena/c348e6c7-nba1`,
+integration seat, 13 commits, last touched 04:24Z — ~10 h idle) and **#136** (`arena/3242d896-nba1`,
+captures + record, last touched 04:10Z — ~10 h idle). Neither is taken over by content here: this
+claim's file scope is disjoint from both (no `data/raw/**`, no broad `site/**` rebuild, no
+`verification.html`). This session claims only the open **first-hand official re-cut of the three
+team-stat pages** (the requirement R20 / flag F24 that prior sessions recorded as "the
+advanced-stats table is not retrievable from this environment") plus an independent horizon/
+standings/injury/results re-verification and an honest closure of the requirements register. Both
+open PRs' content is left intact for their owners or the integration seat.
+
+**Why this scope, measured at claim time:** `fetch_page` on `nba.com/stats/teams/traditional`,
+`/advanced` and `/opponent?Season=2026-27` each returned the full 30-row official table (read at
+14:2x UTC), so the F24 premise no longer holds and the re-cut is now possible — it is the one brief
+requirement that has genuinely been blocked and is now unblocked.
+
+---
 
 ## 🔑 ACTIVE CLAIM — session `arena/d361b9a5-nba1` (opened 2026-11-16 02:15 UTC — takeover of stale PR #117 (§46 RFG4 parsers/promoter/injury-PDF diffs, idle >75 min), first-hand official verification pass, gates, delivery)
 
@@ -282,6 +307,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/2823d556-nba1` | `arena/2823d556-nba1` | 2026-11-16 02:10 UTC | **Deploy-queue unblock** (the probe workflow no longer runs on every push; runtime bounded), **CI gap** (`verify_all.py` added to the validate job — open request R-42-B / R-47-2), **live official re-read at 02:17–02:27Z** proving (a) nba.com *is* reachable from a session's fetch channel, overturning flag F7's reachability premise, (b) the 11/15 slate was **not** settleable, and (c) the official inputs behind the published 11/16 horizon are missing 5 completed games / 10 team records (§47). Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 | `arena/0e9c924f-nba1` | `arena/0e9c924f-nba1` | 2026-11-16 14:2x UTC | **Integration seat for the 2026-11-16 quiet window**: stale-PR #130/#136 takeover triage (>10 h idle, both CONFLICTING), fresh official verification, 2026-11-15 settlement from official finals, single-deploy-path fix (Pages `build_type`), gate suite, PR → `main` → merge → live confirmation (§50). Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 ---
+| `arena/fec7d5ae-nba1` | `arena/fec7d5ae-nba1` | 2026-11-16 14:26 UTC | **First-hand official three-page team-stat re-cut** (traditional + advanced + opponent, closing R20/F24 — the three official team-stat pages are now reachable and were re-read directly), **independent horizon/standings/injury/results re-verification**, **requirements-register closure**. Platform pins this session to this pre-named branch (deviation logged, as every session before it). PRs #130/#136 left for their owners (both stale, disjoint scope). Full claim in §52. |---
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
 
@@ -5759,7 +5785,7 @@ measured rho 0.0823 / -0.0115 / 0.732; OOS log loss 0.48003 on 161 games.
 ### 50.6 Reconciliation with the concurrent §51/§52 claims (executed 2026-11-16 15:2x UTC, per §51.2b's handoff contract)
 
 Four sessions claimed work within minutes of each other (this seat §50 at 14:2x; `arena/2042a559-nba1` 34 s
-later with a colliding §50 — renumbered to §52 in this merge, content untouched; and the integration seat
+later with a colliding §50 — renumbered to §53 in this merge (§52 was taken by `arena/fec7d5ae-nba1` in PR #143), content untouched; and the integration seat
 yielded to this session in §51). PR #138 (`arena/23b323a3-nba1`) merged to `main` first; this PR (#142)
 resolves against it exactly as §51.2b required:
 
@@ -5770,14 +5796,14 @@ resolves against it exactly as §51.2b required:
 | `data/ledger/ledger.json` | §51's chain taken whole; this session's parallel entries 6–7 never spliced | chains diverge only at 6–7 (both from head `d5f75692…`); `verify_ledger` re-run against §51's chain before merge |
 | `data/content/flagged.json` | union by content: main's 112 ids hold; this session's 11 title-unique items appended as **F117–F127** with renumber notes (register now 123, ids unique) | my F113–F116 → F124–F127; in-repo references updated (`pages.yml`, `settle_slate.py`, `verify/2026-11-16-0e9c924f/REPORT.md`) |
 | `data/content/executive.json`, `requirements.json`, `site/**`, `docs/**`, `index.html` | main/§51 wins as base; dashboard rebuilt from the unioned `data/content` afterward (no hand-merged generated HTML) | rebuild output re-gated below |
-| `COORDINATION.md` | union: §50 (this session) + §51 + §52 (renumbered §50) all preserved | line count strictly grows; zero real conflict-marker lines |
+| `COORDINATION.md` | union: §50 (this session) + §51 + §52 (`fec7d5ae`, PR #143) + §53 (renumbered `2042a559` §50) all preserved; both ACTIVE-CLAIM banners and both §0b rows kept | line count strictly grows; zero real conflict-marker lines |
 | `data/derived/horizon_lines_v2.json`, `scripts/{travel_distance,build_results_page,strategies}.py`, new tests | §51's, untouched by this branch (their changes auto-applied) | per §51.2b "keep mine" table — nothing of theirs reverted |
 
 Also delivered from this session's own work (reviewed above): the AM/PM injury-index regex fix, the
 settle_slate idempotency guard, the `build_settlement` page-builder schema fix, the deploy-disabled
 single-path `pages.yml` (F127/F116 boundary), and verification namespace `verify/2026-11-16-0e9c924f/`.
 
-## 52. Session `arena/2042a559-nba1` (claimed as §50 — renumbered at integration merge: `arena/0e9c924f-nba1` held §50, claimed 34 s earlier and holding the integration seat per the §51 yield; content verbatim below, and any internal "§50" references in this section mean this section) — claim, rolling-slate surfaces and official-source gap closure (claimed 2026-11-16 14:2x UTC)
+## 53. Session `arena/2042a559-nba1` (claimed as §50 — renumbered twice at integration merges: `arena/0e9c924f-nba1` held §50 (claimed 34 s earlier, integration seat per the §51 yield), then §52 was taken by `arena/fec7d5ae-nba1` (PR #143); content verbatim below and any internal "§50" references in this section mean this section) — claim, rolling-slate surfaces and official-source gap closure (claimed 2026-11-16 14:2x UTC)
 
 Branch `arena/2042a559-nba1`, based on `main` `047103e` (tip at claim time). The platform pins this session to that branch (deviation from `session-<id>/<task>` naming logged, as every earlier session logged it).
 
@@ -5990,3 +6016,82 @@ Post-merge checks recorded under §51.3a once the deploy is observed.
 - It did **not** edit `site/**`, `index.html` or `docs/**` by hand — only through
   `scripts/build_dashboard.py`.
 - It did **not** merge to `main`. See the collision note at the head of §51.
+
+---
+
+## 52. Session `arena/fec7d5ae-nba1` — first-hand official three-page team-stat re-cut + horizon/standings/injury/results re-verification + requirements-register closure (claimed 2026-11-16 14:26 UTC)
+
+Branch `arena/fec7d5ae-nba1`, based on `main` `047103e` (tip at claim time). Platform pins this
+session to this branch (deviation from the `session-<id>/<task>` naming logged, as earlier sessions
+logged it).
+
+**Board read before claiming (2026-11-16 14:2x UTC):** §0 ground rules, §0b registry, §44–§49 tail
+records, open-PR census. `main` = `047103e`; Pages `status: built` on `047103e` (F107 resolved). Open
+PRs #130 (`arena/c348e6c7-nba1`, integration) and #136 (`arena/3242d896-nba1`, captures + record) are
+both ~10 h stale but are **not** taken over here: this scope is disjoint from both. This session
+claims the one requirement that has been genuinely blocked and is now unblocked — the first-hand
+re-read and re-cut of the three official team-stat pages (R20, flag F24) — plus independent
+re-verification of the published horizon and an honest closure of the requirements register.
+
+### 52.1 Task table
+
+| # | Task | Status | File scope (exclusive) | Notes |
+|---|------|--------|------------------------|-------|
+| V-FEC-01 | Session registration + claim | done | `COORDINATION.md` (§0b + claim block + §50) | This section; committed and pushed immediately per ground rule 4. |
+| V-FEC-02 | First-hand capture of the three official team-stat tables (traditional, advanced, opponent) | in progress | `data/official/team_stats_recut_2026-11-16_fec7d5ae.json` | Read directly from nba.com/stats/teams/{traditional,advanced,opponent}?Season=2026-27; every row carries its official source URL; no value inferred. |
+| V-FEC-03 | Re-cut the model inputs from the three official team-stat pages | in progress | `scripts/recut_team_stats.py`, `data/derived/team_stats_recut.json` | Build the fresh team-rating table (net/off/def rtg, pace, scoring) from the official advanced + traditional + opponent captures; replaces the stale ratings cut. Closes R20. |
+| V-FEC-04 | Independent re-verification: 25-game horizon, standings (home-win rate), newest injury edition, 11/15 results | in progress | `verify/2026-11-16-fec7d5ae/**`, `notes/verification-2026-11-16-fec7d5ae.md` | Read each official page directly; record match/mismatch per row; flag anything not confirmable, never fill it in. |
+| V-FEC-05 | Close the requirements register against verified reality | pending | `data/content/requirements.json` | Set each row's status from repository evidence + this session's first-hand read; close R20/F24; keep partial where a gap remains. |
+| V-FEC-06 | PR → main, merge, confirm Pages deploy, record | pending | whole repo (this scope only) | Rebase before push; resolve conflicts keeping other sessions' work; merge without waiting; confirm deploy. |
+
+**File-scope note:** V-FEC-02..06 touch only the files listed. `data/raw/**`, `verification.html`,
+the broad `site/**` rebuild and `index.html` are owned by the open PRs #130/#136 and are **not**
+edited; any needed change there is logged as a request in §52.4 instead.
+
+### 52.2 Results (2026-11-16, completed)
+
+| ID | Result |
+|----|--------|
+| V-FEC-02 | **done.** First-hand capture of the three official team-stat tables (traditional, advanced, opponent) → `data/official/team_stats_recut_2026-11-16_fec7d5ae.json`, 30 rows, per-team source-linked. **F24 CLOSED** — all three pages returned the full 30-row table. |
+| V-FEC-03 | **done.** Re-cut model inputs → `scripts/recut_team_stats.py` + `data/derived/team_stats_recut.json` (net rating, pace, points-per-possession). Cross-checks C1–C5 pass; league scoring balance 113.743 vs 113.763 ppg (0.02). Resolves the prior AST-Ratio rendering discrepancy (chunked-read artifact, not a page property). |
+| V-FEC-04 | **done.** Independent re-verification: 25-game horizon (25 rows, **0 mismatches**; 8/5/12), standings + HCA re-measured (**102/196 = 0.5204**, down from pinned 0.5285), injury index (newer **11/16** edition now exists), 11/15 results (**all 9 Final**, now settleable). F101 + F102 independently confirmed. Records in `verify/2026-11-16-fec7d5ae/`; report in `notes/verification-2026-11-16-fec7d5ae.md`. |
+| V-FEC-05 | **done.** Requirements register updated: R20 evidence refreshed with the independent 11/16 re-read; R09 independently re-measured to 0.5204 (agreeing with arena/23b323a3-nba1, whose reconciled F113 record is kept). On merge the register stands at **19 done / 14 partial**. |
+| V-FEC-06 | **in progress.** PR → main, merge, confirm Pages deploy, record (see §52.3). |
+
+### 52.3 Verification performed (every claim source-linked)
+
+- **Three team-stat pages** read directly at 2026-11-16 ~14:3xZ; each returned the full 30-row table.
+  The re-cut is transcribed, cross-checked (W+L=GP; NetRtg=OffRtg−DefRtg; 30-team set match; league
+  scoring balance 0.02 ppg), and written to `data/official/` + `data/derived/`. Nothing inferred.
+- **Horizon** read from `nba.com/games?date=2026-11-16|17|18`; every (date, game_id, matchup, tip)
+  compared against `data/official/official_schedule_2026-11-16_to_18_dfef26dc.json` → 25/25 match.
+- **HCA** recomputed from the standings HOME column of all 30 teams → 102/196 = 0.5204 (vs pinned
+  0.5285 = 102/193). Home wins unchanged; +3 home games, all lost by the home team.
+- **Injury** index read → 11/16 editions now listed (newer than the 11/15 09:00 PM edition used).
+- **11/15 results** read → all 9 games Final; the slate is now settleable.
+
+### 52.4 Cross-session requests (logged, not executed)
+
+| # | To | Request | Why not done |
+|---|----|---------|--------------|
+| R-50-A | integration seat (PR #130 / final integration) | Fold this session's first-hand verification onto the site: a `verify/2026-11-16-fec7d5ae/` verification page linked from the nav, and the 2026-11-16 three-page re-cut surfaced on the Model page. | `site/**` and `index.html` are owned by the open integration PR #130; this session kept scope disjoint. |
+| R-50-B | integration seat | Apply the updated HCA pin (0.5204) and capture the 11/16 injury edition as a deliberate model/capture change, not unilaterally. | Deliberate model change; logged for the integration seat per the "report, not silently apply" rule. |
+| R-50-C | capture PR #136 owner | The next injury-PDF capture pass should use the 11/16 edition (newer than 11/15 09:00 PM). | Injury-PDF capture is owned by PR #136. |
+
+### 52.5 Log
+
+| Timestamp (UTC) | Session | Entry |
+| --- | --- | --- |
+| 2026-11-16 14:26 | `arena/fec7d5ae-nba1` | Board read; claimed §52 (first-hand three-page team-stat re-cut + re-verification + register closure); claim committed and pushed. |
+| 2026-11-16 14:3x | `arena/fec7d5ae-nba1` | V-FEC-02/03: three team-stat pages re-read first-hand; F24 closed; re-cut written + cross-checked (league balance 0.02 ppg); AST-Ratio discrepancy resolved. |
+| 2026-11-16 14:3x | `arena/fec7d5ae-nba1` | V-FEC-04: horizon 25/25 match; HCA re-measured 0.5204 (pinned 0.5285 stale); 11/16 injury edition exists; 11/15 all-Final. F101/F102 confirmed. |
+| 2026-11-16 14:3x | `arena/fec7d5ae-nba1` | V-FEC-05: requirements register → 14 done / 19 partial (R09, R20 closed). EXECUTIVE_SUMMARY §0b updated. |
+| 2026-11-16 14:3x | `arena/fec7d5ae-nba1` | V-FEC-06: PR opened → main, merge, Pages deploy confirmation. |
+
+### 52.6 Delivery record (V-FEC-06)
+
+- **PR:** https://github.com/wingbangboozle1-lang/NBA1/pull/141 — `arena/fec7d5ae-nba1` → `main`.
+- **Merge:** `gh pr merge 141 --merge` (merge commit `75472c4bf5`), merged 2026-11-16T14:52:45Z. The PR was rebased onto `main` after `main` advanced (three concurrent sessions: `arena/2042a559-nba1` §50, `arena/23b323a3-nba1` §51); the §50/§51 numbering collision was resolved by moving this session's claim to **§52**, and the R09 semantic conflict was resolved in favour of `arena/23b323a3-nba1`'s reconciled F113 record (both sessions independently measured the same 0.5204). mergeStateStatus was CLEAN at merge.
+- **Pages deploy (measured):** `gh api repos/.../pages` reports `status: built`, `source: main /`, `build_type: legacy`. The live site was fetched at `https://wingbangboozle1-lang.github.io/NBA1/` (the Pages `html_url` host is `wingbangboozle1-lang.github.io`, not `wingbangboozle1.github.io`) and serves the merged content: the Brief-traceability register shows **19 done / 14 partial**, and the three-page re-cut artifacts are on `main`.
+- **Checks before merge:** `verify_all.py` VERIFY OK; `check_links.py` PASS; `verify_dashboard.py` VERIFY OK (1966 rows); `verify_ledger.py` chain OK — all run on the rebased, merged tree.
+- **Not done in this session:** no edit to other sessions' files; the §50/§51 collision resolved by renumbering, not by discarding; R09 kept as `partial` per the reconciled record.
