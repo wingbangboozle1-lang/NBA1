@@ -159,8 +159,27 @@ jobs:
                   data/raw/schedule_upcoming.json data/raw/injuries.json \
                   data/raw/games_completed.json data/parsed/ 2>/dev/null || true
           if git diff --cached --quiet; then
-            echo "No new capture payloads - nothing to publish."
-            exit 0
+            # No capture payloads at all. If the run record reports problems,
+            # publish it anyway (it is the only observable evidence of what
+            # failed when the log/artifact hosts are unreachable) - the
+            # record itself is content-stable per engine/fetch_official.py's
+            # write_if_changed, so a fully clean no-change run still produces
+            # no timestamp-only commit.
+            HAS_PROBLEMS=$(python3 - <<'PY'
+          import json, os
+          p = os.path.join("data", "raw", "_last_refresh.json")
+          s = json.load(open(p)) if os.path.exists(p) else {}
+          print("yes" if (s.get("failed") or s.get("changed")) else "no")
+          PY
+          )
+            if [ "$HAS_PROBLEMS" = "yes" ]; then
+              git add data/raw/_last_refresh.json 2>/dev/null || true
+            fi
+            if git diff --cached --quiet; then
+              echo "No new capture payloads - nothing to publish."
+              exit 0
+            fi
+            echo "Publishing the run record only (it reports problems)."
           fi
           git add data/raw/_last_refresh.json 2>/dev/null || true
 

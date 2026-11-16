@@ -4350,6 +4350,19 @@ and the `verify/2026-11-15-abac961f/` record. Logged as a request; that file is 
 
 ### 46.2 Implementation log (2026-11-16 00:0x UTC)
 
+**Conflict-resolution log (required by ground rule 3; recorded verbatim):**
+At `git pull --rebase origin main` (2026-11-16 ~01:0x UTC) `COORDINATION.md`
+conflicted in three regions because `main` had taken §42 for
+`arena/4533630f-nba1` and added §43/§44/§45 while this claim was live. The
+resolution KEPT BOTH SIDES everywhere: (1) the three newer ACTIVE CLAIM
+blocks plus this session's block; (2) the §0b registry rows of all four
+sessions; (3) all of `main`'s §41–§45 sections plus this section, renumbered
+to **§46** with a renumber note (the board's established convention, see
+§37's header and §44's renumber note). No text of any other session was
+discarded. Internal self-references were renumbered to §46 in a follow-up
+commit; the claim's task table is A01–A08 (A08 added by the logged scope
+amendment below).
+
 - `engine/parse_official.py` (new): multi-strategy parsers. HTML-table,
   `__NEXT_DATA__` and stats-API `rowSet` strategies for the team tables
   (standings / traditional / opponent / advanced), game-link, embedded-JSON
