@@ -10,6 +10,34 @@ Where a value could not be confirmed it is described as unconfirmed rather than 
 
 ---
 
+## 0a. Update — 2026-11-16T14:40–15:20Z, session `arena/23b323a3-nba1` (read this first)
+
+**The 2026-11-15 slate is complete and settled.** Every other section of this document that
+describes 11/15 as "6 of 9 final" or "not settleable" is superseded by this one, and by the
+data files that now carry the later observation.
+
+| Item | Was | Is now | Official source |
+| --- | --- | --- | --- |
+| 11/15 games final | 6 of 9 at the 23:45Z capture | **9 of 9** | <https://www.nba.com/games?date=2026-11-15> |
+| The three that were unfinished | HOU@WAS, ATL@MIL, OKC@SAC stored as not tipped | **147-119, 113-106, 125-103**, each with its SCORE BY PERIOD row transcribed and its quarter sums checked against the printed final | [HOUWAS](https://statsdmz.nba.com/pdfs/20261115/20261115_HOUWAS_book.pdf) · [ATLMIL](https://statsdmz.nba.com/pdfs/20261115/20261115_ATLMIL_book.pdf) · [OKCSAC](https://statsdmz.nba.com/pdfs/20261115/20261115_OKCSAC_book.pdf) |
+| 11/15 settlement | refused (3 games not final) | **SETTLED**, stamp `2026-11-16T14:45Z`, record **5-4-0** on nine singles, −2.7 units total at paper −110 | `data/settlement/settlement_2026-11-15.json` |
+| Ledger | 5 entries | **7 entries** (6 settlement verification, 7 settlement record), chain verified OK | `python3 scripts/verify_ledger.py` |
+
+**Two defects were found by reading the built site against the official source, not by a gate.**
+All five gates were green while both were live.
+
+| Finding | What it was | Status |
+| --- | --- | --- |
+| **F108** | `data/arenas.json` placed the **LA Clippers at Crypto.com Arena, Los Angeles**. The official schedule page puts them at **Intuit Dome, Inglewood, CA** — and the repository's own official capture already said so. PHI (Wells Fargo Center → Xfinity Mobile Arena) and PHX (Footprint Center → Mortgage Matchup Center) were stale in the same file. `scripts/travel_distance.py` read the wrong table, so travel miles inherited the error. | Table repointed at the official capture; discrepancy published, not quietly overwritten. [source](https://www.nba.com/schedule) |
+| **F112** | The Results & Settlement page printed **"0 of 0 final — NOT settleable"** directly beneath the section saying the same game day *was* settled. Cause: a session-namespaced duplicate capture (`results_2026-11-15_dfef26dc.json`) became its own section, and matched zero rows against a date that cannot exist. | Builder fixed; the page now has exactly three sections and zero occurrences of "NOT settleable". [source](https://www.nba.com/games?date=2026-11-15) |
+
+**What is still not true, and is not being claimed:** no strategy is funded; no market price
+exists anywhere in this repository, so every unit figure is a paper figure at a stated −110
+convention; travel miles rest on Wikipedia coordinates (F109); and per-player minutes cover 24
+players, which is why 11 of 25 horizon picks fail the redistribution gate (F110).
+
+---
+
 ## 0. Update — 2026-11-16, session `arena/dfef26dc-nba1` (read this first)
 
 The window has rolled and the model has been re-cut from a fresh official capture. Sections
