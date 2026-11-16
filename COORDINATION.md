@@ -5,6 +5,32 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/ed8496e9-nba1` (opened 2026-11-16 14:30 UTC — midday integration cycle: settle 2026-11-15, roll the horizon to the full 3-day window, triage stale PRs #130/#136, diagnose the blocked scheduled rebuild, gates, delivery)
+
+Branch `arena/ed8496e9-nba1`, based on `main` `047103e` (tip at claim time). The platform pins
+this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this
+single pre-named branch (deviation logged, as every session before it logged it). Full claim,
+task table E01–E08 and file scopes are in **§50** at the tail of this board.
+
+**Board read before claiming (2026-11-16 14:24–14:30 UTC):** §0 ground rules, §0b registry,
+tail delivery records §46–§49, open-PR census, workflow state. Measured at claim time, not
+inferred: `main` = `047103e` (probe-record commit 11:51:15Z); **two PRs open — #130
+(`arena/c348e6c7-nba1`, CONFLICTING, last touched 04:24:41Z) and #136 (`arena/3242d896-nba1`,
+CONFLICTING, last touched 04:10:24Z) — both 10 h idle, far past ground rule 5.** Every
+top-of-board ACTIVE CLAIM is likewise past the threshold (last branch commits: `d361b9a5`
+05:23:31Z, `754e9e54` 05:18:12Z, `801ba27f` 05:28:24Z, `2823d556` 04:06:24Z). No session has
+committed since 11:51Z, and that commit is the probe bot. Live state: Pages API `status=built`
+(legacy branch builder); the 11:15Z scheduled refresh **fetched and gated successfully but
+skipped the rebuild** ("Report why rebuilding was blocked" ran) and published nothing new;
+`data/settlement/` holds only `settlement_2026-11-14.json` — **2026-11-15 is still
+unsettled** although its slate finished hours ago; the committed horizon covers 11/16–11/18
+only, while the brief's 3-day window (precedent §0c V03: on 11/14 the window ran 11/14→11/17)
+requires 11/19 as well; the probe workflow's last two runs on `main` ended in **failure**.
+Those four gaps are this claim's work. Triage decisions on #130/#136, the rebuild-skip
+diagnosis and every official re-read are recorded in §50 as they are measured.
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/d361b9a5-nba1` (opened 2026-11-16 02:15 UTC — takeover of stale PR #117 (§46 RFG4 parsers/promoter/injury-PDF diffs, idle >75 min), first-hand official verification pass, gates, delivery)
 
 Branch `arena/d361b9a5-nba1`, based on `main` `f6b7676` (tip at claim time = merge of PR #120).
@@ -273,6 +299,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/49f70042-nba1` | `arena/49f70042-nba1` | 2026-11-15 23:40 UTC | 2026-11-15 late cycle: 11/15 settlement, pinned HCA, two-estimator disagreement headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16-11/19 (§41). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/754e9e54-nba1` | `arena/754e9e54-nba1` | 2026-11-16 (this session) | Full-cycle build: projection/bet site split, two independent estimators with disagreement headline, HCA pinned to measured home-win rate, luck z-score per team, arena-coordinate travel table, player game logs for injured players, market-anchored prior, possessions × ppp total model, refresh pipeline with freshness/provenance gates, sealed-ledger settlement at game-day end, pre-registration freeze, tamper-evident ledger, injury-PDF archive + diff, per-game result feed with quarter scores, clean landing page + category subpages, GitHub Pages publish (§44). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/2823d556-nba1` | `arena/2823d556-nba1` | 2026-11-16 02:10 UTC | **Deploy-queue unblock** (the probe workflow no longer runs on every push; runtime bounded), **CI gap** (`verify_all.py` added to the validate job — open request R-42-B / R-47-2), **live official re-read at 02:17–02:27Z** proving (a) nba.com *is* reachable from a session's fetch channel, overturning flag F7's reachability premise, (b) the 11/15 slate was **not** settleable, and (c) the official inputs behind the published 11/16 horizon are missing 5 completed games / 10 team records (§47). Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
+| `arena/ed8496e9-nba1` | `arena/ed8496e9-nba1` | 2026-11-16 14:30 UTC | Midday integration cycle (§50): settle 2026-11-15 from verified official finals, roll the horizon to the full 3-day window (11/16–11/19), triage stale PRs #130/#136 (both >10 h idle, CONFLICTING), diagnose the blocked 11:15Z scheduled rebuild and the failing probe runs, gate suite, PR → `main`, Pages confirmation, delivery. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 ---
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
@@ -5471,3 +5498,41 @@ another build cycle, and re-check with
 `gh api /repos/wingbangboozle1-lang/NBA1/pages --jq .status` (should read `built`) plus a
 fetch-back that shows **25 games (16–18 Nov)** and **103 open flags**. Until then, verify
 against the `main` tree, not the live host.
+
+---
+
+## 50. Session `arena/ed8496e9-nba1` — midday integration cycle: 11/15 settlement, horizon roll to the full 3-day window, stale-PR triage, rebuild-skip diagnosis, gates, delivery (claimed 2026-11-16 14:30 UTC)
+
+Branch `arena/ed8496e9-nba1`, based on `main` `047103e` (tip at claim time = probe-record commit
+11:51:15Z). The platform pins this session to that branch; the `session-<id>/<task>` naming in
+the brief is satisfied by this single pre-named branch (deviation logged, as every earlier
+session logged it).
+
+**Board read before claiming (2026-11-16 14:24–14:30 UTC):** §0 ground rules, §0b registry,
+tail delivery records §46–§49, open-PR census (`gh pr list`), workflow runs (`gh run list`),
+Pages API. Everything in the claim block at the top of this file was measured, not assumed.
+
+**Previous session IDs:** the branch was cut from `main` `047103e`. The last content merges to
+`main` were PRs #137/#135/#134/#133/#131/#130-series sessions §47/§48, all recorded; nothing
+they left `in progress` overlaps this claim except the stale PRs below.
+
+### 50.1 Task table
+
+| ID | Task | Status | Owner | File scope |
+| --- | --- | --- | --- | --- |
+| E01 | Board read, registration, claim committed and pushed immediately (ground rule 4) | **done** | `arena/ed8496e9-nba1` | `COORDINATION.md` (top claim block, §0b row, this §50) |
+| E02 | Triage the two stale open PRs — #130 (`arena/c348e6c7-nba1`, 259 files, CONFLICTING, 04:24Z) and #136 (`arena/3242d896-nba1`, 28 files, CONFLICTING, 04:10Z); carry valuable content by value, close what is superseded, log every decision | in progress | same | `COORDINATION.md`; content carried into this branch's tree only where E04/E05 need it |
+| E03 | Settle 2026-11-15 only after re-verifying every game final on its official game page (quarter lines sum to the printed final); refuse the date if any game fails; publish the settlement stamp through the normal build | unclaimed → claimed here | same | `data/settlement/settlement_2026-11-15.json`, `data/ledger/ledger.json` (append-only via `scripts/settle_slate.py`), results page via its builder |
+| E04 | Roll the rolling horizon/picks to the brief's full 3-day window (today 11/16 → 11/19 inclusive; precedent §0c V03 ran today+3), after freshness/provenance gates; rebuild site | unclaimed → claimed here | same | `engine/pipeline.py` outputs, `data/derived/**`, `data/archive/**`, generated site pages |
+| E05 | Diagnose why the 11:15Z scheduled refresh fetched+gated but skipped the rebuild, and why the last two probe runs on `main` failed; fix within this scope (the owning §47 claim is >9 h idle — takeover noted per ground rule 5) | unclaimed → claimed here | same | `.github/workflows/refresh-data.yml`, `.github/workflows/probe-official.yml`, `engine/refresh_gate.py` |
+| E06 | Run the full gate suite on this branch (check_site, verify_integration, check_links, check_rendered, verify_all, verify_ledger) and fix failures | unclaimed → claimed here | same | scripts run in place; fixes only in files this session owns |
+| E07 | Integration PR → `main`, merge without approval wait, confirm GitHub Pages deploy (fetch-back must show the new window), never merge a broken site | unclaimed → claimed here | same | whole-repo integration |
+| E08 | Delivery record: sources, verification performed, irregularities, PR link, merge result — in this section | unclaimed → claimed here | same | `COORDINATION.md` §50.4 |
+
+**Scope notes.** Shared surfaces (`index.html`, nav, `data/content/*` registers) are changed
+only through this session's integration role; any change that belongs to another session's
+explicit scope is logged in §4 as a request instead. Flagged/unverified items go to
+`data/content/flagged.json` via the established builders and are published on the Flagged for
+Review page — they do not block the merge. Every row I publish carries an official source
+link; anything I cannot confirm stays blank and flagged.
+
