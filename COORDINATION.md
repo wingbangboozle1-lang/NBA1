@@ -7,6 +7,12 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+---
+
+---
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/2823d556-nba1` (opened 2026-11-16 02:10 UTC — deploy-queue unblock, CI gap, and a live official re-read of the published 11/16 horizon)
 
 Branch `arena/2823d556-nba1`, based on `main` `f6b7676` (tip at claim time). The platform pins this
@@ -5018,7 +5024,7 @@ produced **no** new probe run, where every prior push in this repository's histo
 | ID | Severity | Finding |
 | --- | --- | --- |
 | F-47-A | High | **The official sources are reachable from a session.** Flag `F7` and the "1749 cited URLs are refused to a non-browser client" finding describe the sandbox's *raw sockets* (`curl https://www.nba.com/` from this session's shell still returns **HTTP 000**), not the session's web-fetch channel, which returned full server-rendered content for both `games?date=` pages. |
-| F-47-B | High | **The 2026-11-15 slate is not complete.** At 02:27Z the official page shows **6 of 9 Final**, 3 still printing a quarter clock (HOU@WAS Q4 5:24, ATL@MIL Q3 10:42, OKC@SAC Q1 7:59). The brief forbids settling before finals are verified, so **11/15 is not settleable at this retrieval time** — timestamped evidence for the sessions claiming that settlement. |
+| F-47-B | High | **The 2026-11-15 slate is not complete — measured twice, 42 minutes apart.** First reading **02:27Z: 6 of 9 Final**, 3 printing a quarter clock (HOU@WAS Q4 5:24, ATL@MIL Q3 10:42, OKC@SAC Q1 7:59). Second reading of the same official page **03:10Z: 7 of 9 Final** — HOU@WAS went **Final 147–119** — with ATL@MIL at **Q4 8:05** and OKC@SAC at **Q2 3:38** still running. **Not settleable at either reading.** The brief forbids settling before finals are verified, so this is timestamped evidence for the three sessions claiming an 11/15 settlement this cycle: it is a sequencing fact, not an opinion. |
 | F-47-C | High | **The official team-stat inputs behind the published 11/16 horizon are missing 5 completed games.** The committed advanced table counts **189** completed games (`sum(gp)/2`, measured from the file). Five 11/15 games finished after it was read → **10 team-record deltas** (BOS, CHA, DAL, LAC, LAL, NYK, PHX, SAS, TOR, UTA). Two of those teams (BOS, PHX) are on the 11/16 slate, so the published `BOS -14.5` and `DEN -5.0` picks were priced from a record the official page no longer prints. |
 | F-47-D | Resolved | **The 11/16 slate itself is intact.** All 8 games, matchups and tip times agree between the committed capture and the live page; 6 of 8 rows agree on every field; the 2 that differ differ only in the team record (F-47-C). |
 | F-47-E | Informational | **The two live official pages agree with each other on all 18 teams both print.** |
