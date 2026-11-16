@@ -23,6 +23,7 @@ from urllib.parse import urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ALLOWED = {"www.nba.com", "nba.com", "official.nba.com", "ak-static.cms.nba.com",
+            "statsdmz.nba.com",  # official NBA gamebook PDFs (verified 2026-11-16)
            "cdn.nba.com", "docs.github.com", "github.com", "kansspelautoriteit.nl",
            "www.kansspelautoriteit.nl", "www.monumentalsportsnetwork.com",
            "nbatickets.nba.com", "a.data.nba.com", "www.peacocktv.com",

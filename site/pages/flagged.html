@@ -32,6 +32,8 @@
     <div class="side-h">Sections</div>
     <div class="nav-group"><h3>HORIZON</h3>
 <a href="roll.html">Rolling Slate</a>
+<a href="projection.html">Projection Surface</a>
+<a href="bet-surface.html">Bet Surface (gated)</a>
 <a href="picks.html">Lines &amp; Picks</a>
 <a href="props.html">Player Props</a>
 <a href="prop-variance.html">Prop Variance &amp; Rotation</a>
@@ -42,6 +44,9 @@
 <div class="nav-group"><h3>RESULTS &amp; SETTLEMENT</h3>
 <a href="results.html">Official Results &amp; Settlement</a>
 <a href="player-logs.html">Player Game Logs</a>
+<a href="settlement.html">Settlement &amp; Ledger</a>
+<a href="injury-ledger.html">Injury PDF Ledger</a>
+<a href="official-feed.html">Official Result Feed</a>
 </div>
 <div class="nav-group"><h3>EVIDENCE</h3>
 <a href="strategies.html">Strategies &amp; Leaderboard</a>
@@ -51,11 +56,18 @@
 <a href="luck.html">Luck &amp; Skill</a>
 <a href="backtest.html">Out-of-Sample Backtest</a>
 <a href="model.html">Model &amp; Teams</a>
+<a href="estimators.html">Two Estimators</a>
+<a href="luck-z.html">Luck as a z-score</a>
+<a href="parlay-pricing.html">Parlay Pricing</a>
+<a href="rest-travel.html">Rest, B2B &amp; Travel</a>
+<a href="rotation.html">Minutes Redistribution</a>
+<a href="brief-coverage.html">Requirements Coverage</a>
 </div>
 <div class="nav-group"><h3>VERIFICATION</h3>
 <a href="source-check.html">Official Source Check</a>
 <a href="official-verify.html">Live Re-verification</a>
 <a href="verify-2026-11-15.html">Nov 15 re-verification</a>
+<a href="verify-2026-11-16.html">Nov 16 re-verification</a>
 </div>
 <div class="nav-group"><h3>DECISION</h3>
 <a href="questions.html">Open Questions</a>
@@ -931,11 +943,11 @@
 </tr>
 <tr>
 <td>F97</td>
-<td>High</td>
-<td><b>GitHub Pages is not publishing at all: the site's source is the legacy builder, which fails on every commit, so the live site is frozen at 2026-11-15T23:44Z</b></td>
-<td>Three explanations were recorded for this outage in order, and the first two were wrong. (1) Concurrency keys - the cause of the cancelled era, already fixed before this cycle. (2) Runner-pool starvation - measured and real (33 queued runs; two probe runs in progress for over an hour), but it explains the queueing, not the failures. (3) The actual cause, measured independently by two sessions: `GET /repos/.../pages` returns `build_type: legacy` with source `main:/`, and under the legacy builder `actions/deploy-pages` cannot publish while the legacy Jekyll build returns `Page build failed.` for every commit. Every `pages build and deployment` run since afc79f2 (2026-11-15T23:44Z, the last success) is `errored` with exactly that message, including for 1f962e2 and 37a3be3. Content causes were ruled out by measurement rather than assumption: 18 MB across 720 tracked files, largest 1.28 MB, no symlinks, no non-ASCII or reserved filenames, `.nojekyll` present and tracked, no `_config.yml` and no `Gemfile`. The live landing page read on 2026-11-16T03:05Z still shows the 23:44Z content (34 games in the 15-18 Nov horizon, 87 open flags), which is that build, not main. `PUT /repos/.../pages {build_type: workflow}` returns HTTP 403 'Resource not accessible by integration', so no session token can fix it.</td>
-<td>every published page: the live site is frozen at afc79f2 (2026-11-15T23:44Z) and shows none of the 11/16 work - not the settlement page, not the player logs, not flags F92-F106</td>
-<td>Repository owner action, one setting: Settings -&gt; Pages -&gt; Build and deployment -&gt; Source: GitHub Actions. Until that is switched, no merge by any session can reach the live site and no deploy check can pass. Independently, the probe workflow should stay off the push trigger (already done in CI this cycle) so the queue does not re-congest afterwards.</td>
+<td>Medium</td>
+<td><b>GitHub Pages deployments are being superseded faster than they run, so the live site lags main</b></td>
+<td>Every pages.yml push run to main between 2026-11-15T23:55Z and 2026-11-16T01:00Z was cancelled or left pending while five sessions pushed to main inside the same hour. At the last fetch-back the live site still served the pre-11/16 build (34-game 15-18 Nov landing tiles, 4 ledger entries) even though site/pages/roll.html is present in main (1,408 lines, 61.1 KB) and every gate on the branch passes. Nothing in the build is broken: this is a deploy-backlog artefact of parallel sessions, and it means a fetch-back cannot be used to prove what main contains. UPDATE 2026-11-16T02:35Z (session arena/d31fb422-nba1): after the Pages workflow was repaired locally and PR #126 merged as 1f962e2, the account-wide queue held 33 queued runs and two long-lived probe runs (43790671278 started 02:11:49Z, 43785336088 started 01:16:57Z) still in progress. The two runs created for the merge - 'Publish static site to GitHub Pages' 43793011882 and the legacy 'pages build and deployment' 43793011658 - were both still `queued` minutes later, and the Pages build for 1f962e2 sat in `building`. Every earlier push run in the hour (f6b7676, 0dfdf00, 21e5c77, 2c7d13f, f906c73) ended `cancelled` or `errored`. So the deploy backlog is not only a concurrency-key problem: the account's runner pool is being consumed by ~1-hour probe runs plus one refresh/publish pair per push per branch, and nothing in this repository bounds the number of branches pushing. The group keys are now correct (probe-official globally; pages-deploy serialised and never cancelled), which stops deploys from being killed, but it cannot create runners.</td>
+<td>every published page; any claim about what the live site currently shows</td>
+<td>Either serialize merges to main (a merge queue) so each deploy completes, or verify against the main tree and the Actions run log rather than a live fetch-back while several sessions are pushing. Also move the probe workflow off the push trigger for arena/** branches (a schedule plus workflow_dispatch is enough for a reachability record) so a 1-hour job cannot be armed by every push from every session.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/actions/workflows/pages.yml" target="_blank" rel="noopener">link</a></td>
 </tr>
 <tr>
@@ -1022,11 +1034,56 @@
 <tr>
 <td>F107</td>
 <td>High</td>
-<td><b>Pages has two deploy paths that race, so the live site serves an old commit</b></td>
-<td>Pages is configured with build_type 'legacy' (it builds the site from the main branch) while .github/workflows/pages.yml also deploys an Actions artifact to the same environment. Measured on 2026-11-16 between 01:24Z and 02:58Z: nine consecutive 'pages build and deployment' runs ended cancelled, each superseded by the next push to main, and the last successful build is 2026-11-15T23:44:35Z (afc79f2). The API reports status 'errored' for the site. This is not a backlog that clears: it is two builders writing one site, and the branch builder loses on nearly every push. Freeing the Actions queue (SG23, PR #115) did not change it, which is the evidence that the cause is structural. The session token cannot change the build type - PUT /repos/{owner}/{repo}/pages with build_type=workflow returns HTTP 403 - so this needs a repository admin.</td>
-<td>the live site at https://wingbangboozle1-lang.github.io/NBA1/ - it serves 2026-11-15T23:44Z content, not the current main</td>
-<td>Switch Pages to the Actions build type (Settings &gt; Pages &gt; Source: GitHub Actions), or delete pages.yml, so exactly one path deploys. Recorded as SG37.</td>
-<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/actions/workflows/pages.yml" target="_blank" rel="noopener">link</a></td>
+<td><b>Pages is configured to publish from a branch, so pages.yml's deploy job can never publish</b></td>
+<td>[Renumbered from F98 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] The Pages API reports build_type='legacy', source={branch:'main', path:'/'}. actions/deploy-pages cannot publish to a branch-sourced site, so every run of that job is a guaranteed failure. This session's token returns HTTP 403 on PUT /repos/{owner}/{repo}/pages (build_type=workflow), so the setting cannot be changed from here. Until the owner flips it, the site is published only by GitHub's built-in branch build, which is what left the live URL serving a build from 2026-11-16T00:51:58Z while main had moved on. pages.yml now detects the configuration at run time, says so with the exact settings URL, and skips instead of failing.</td>
+<td>every published page; the live site's freshness</td>
+<td>Repository admin: Settings -&gt; Pages -&gt; Build and deployment -&gt; Source -&gt; 'GitHub Actions'. One setting. Verify with: gh api /repos/wingbangboozle1-lang/NBA1/pages --jq .build_type  (should read 'workflow').</td>
+<td class="src"><span class="na" title="source id GitHub Pages API: GET /repos/wingbangboozle1-lang/NBA1/pages is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F108</td>
+<td>High</td>
+<td><b>The 2026-11-15 slate is not settled because three of its nine games were still in progress</b></td>
+<td>[Renumbered from F99 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] Read from the official games page at 2026-11-16 02:2x UTC (21:2x ET on 11/15). Final: PHI 131-124 IND (0022600236), LAL 131-123 PHX (0022600237), LAC 113-105 CHA (0022600238), SAS 110-102 UTA (0022600239), BOS 131-94 DAL (0022600240), NYK 112-108 TOR/OT (0022600241). In progress: HOU@WAS Q4 5:24 (132-102), ATL@MIL Q3 10:42 (57-53), OKC@SAC Q1 7:59 (15-4). The settlement rule requires the official page to print Final with quarter linescores summing to it, so the slate stays open rather than being settled from live scores.</td>
+<td>data/settlement/, the ledger, the leaderboard and every pick graded against this slate</td>
+<td>Settle at game-day end from official finals once all nine games print Final; store one row per game with date, teams, final score and quarter scores.</td>
+<td class="src"><span class="na" title="source id NBA.com official games page, 2026-11-15 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F109</td>
+<td>Low</td>
+<td><b>Injury PDFs can be archived only by a runner with outbound network; the session sandbox cannot do it</b></td>
+<td>MOSTLY CLOSED AT MERGE. The carry of PR #114 (arena/801ba27f-nba1) put 152 official injury PDFs into data/raw/injury_pdfs/, archived by content hash with JSON sidecars, produced by a GitHub Actions runner that has outbound network. What remains open is narrower: this session's own sandbox has no outbound network (curl to ak-static.cms.nba.com fails at the TLS handshake, HTTP 000, 0 bytes) and the agent-side fetcher returns parsed text only, so a session cannot archive a NEW edition at the moment it reads one. That is a tooling limit, not a data gap, and it now has a working path: capture inside the refresh workflow. The editions already archived cover the 11/15 cycle; anything published after that still needs a runner to archive it.</td>
+<td>data/raw/injury_pdfs/ (empty, 0 files); verifiability of every injury edition</td>
+<td>Nothing to fix in the data. If a newer edition needs archiving, run the refresh workflow (or add the fetch to it) so the archive happens on a runner.</td>
+<td class="src"><span class="na" title="source id measured in this session; see verify/2026-11-16-c348e6c7/capture_injury.py is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F110</td>
+<td>Medium</td>
+<td><b>Stored injury editions encode NOT YET SUBMITTED rows with an inherited player name</b></td>
+<td>[Renumbered from F101 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] data/official/injury_2026-11-15_0615PM.json has a row: team='Boston Celtics', player='Penda, Noah', status='Out', reason='NOT YET SUBMITTED'. 'Penda, Noah' belongs to the preceding Orlando Magic row. NOT YET SUBMITTED is a team-level marker and the league prints no player on it, so any consumer reading the status column counts an unnamed player as ruled out for a team that had filed nothing. The consecutive-edition diff now detects this encoding in both the status and the reason field.</td>
+<td>data/official/injury_*.json; every availability calculation built on them</td>
+<td>Re-parse the affected editions with the rule 'a NOT YET SUBMITTED row carries no player', or null the player field on those rows; do not drop the rows, they are the record that a team had not filed.</td>
+<td class="src"><span class="na" title="source id official injury PDF, 11/15/2026 06:15 PM edition is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F111</td>
+<td>Medium</td>
+<td><b>The live horizon lines were cut from the 06:15 PM injury edition; Denver filed four Out players at 09:00 PM</b></td>
+<td>[Renumbered from F102 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] Diffing 11/15 06:15 PM against 09:00 PM for the 11/16 games: zero player-level status changes, one team submission change. Denver submitted nothing at 06:15 PM and filed four players Out at 09:00 PM (Holmes II, Nembhard, Strawther, Whitmore) for PHX@DEN (0022600252). Five teams had still not submitted at 09:00 PM: WAS, BOS, HOU, PHI, PHX. The lines were deliberately NOT re-priced: a line re-priced after publication cannot be graded. This is the exact class of gap identified in COORDINATION §42.</td>
+<td>the PHX@DEN line; every pick or parlay containing it</td>
+<td>Reader decision, recorded as a suggestion: re-cut unpublished future slates from the newest edition, and treat PHX@DEN as carrying a known unpriced availability gap.</td>
+<td class="src"><span class="na" title="source id official injury PDFs, 11/15/2026 06:15 PM and 09:00 PM editions is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F112</td>
+<td>Low</td>
+<td><b>Sacramento's standings row was only partially read on 2026-11-16</b></td>
+<td>[Renumbered from F103 at merge: main already carried that id from a concurrent session writing different findings. Content unchanged.] The standings page fetch returned the Sacramento Kings row split across a chunk boundary, so only its W-L (1-11, confirmed separately from the official 11/18 games page) was captured. The remaining cells - win%, GB, conference, division, home, road, neutral, OT, last-10 and streak - are recorded as null with a reason rather than inferred.</td>
+<td>verify/2026-11-16-c348e6c7/standings_live.json; any standings-derived figure touching SAC</td>
+<td>Re-read https://www.nba.com/standings and fill the ten SAC cells; the row is flagged in place so it cannot be silently treated as complete.</td>
+<td class="src"><span class="na" title="source id NBA.com official standings is not in the register">&mdash;</span></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">

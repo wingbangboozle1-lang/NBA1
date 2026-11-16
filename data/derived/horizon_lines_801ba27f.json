@@ -1,0 +1,1685 @@
+{
+ "title": "PROJECTION surface \u2014 originated lines, 2026-11-15..18",
+ "surface": "projection",
+ "session": "arena/801ba27f-nba1",
+ "published_utc": "2026-11-16T00:32:39Z",
+ "headline": "the DISAGREEMENT between the two estimators; the 50/50 blend is printed underneath",
+ "estimator_1": "possessions x points-per-possession: POSS = pace_h + pace_a - league_pace; PTS = (OffRtg * opp DefRtg / league OffRtg) * POSS / 100",
+ "estimator_2": "score-based: spread from a least-squares power rating solved on official final margins (HCA pinned to the measured home-win rate); total from the teams' own scored and allowed rates",
+ "home_court": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+ "home_court_points": 1.108,
+ "home_win_rate": 0.5263,
+ "n_final_games_behind_it": 190,
+ "injury_edition": "2026-11-15 06:30PM ET",
+ "injury_retrieved_utc": "2026-11-15T23:43:14Z",
+ "injury_source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_30PM.pdf",
+ "bet_surface": "data/derived/horizon_picks_801ba27f.json (gated; never merged into this table)",
+ "rows": [
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600236",
+   "matchup": "IND@PHI",
+   "away": "IND",
+   "home": "PHI",
+   "status_official": "Final",
+   "publishable": false,
+   "e1_total": 221.8,
+   "e1_spread_home": -3.2,
+   "e2_total": 224.8,
+   "e2_spread_home": -4.6,
+   "disagreement_total": 3.0,
+   "disagreement_spread": 1.3,
+   "blend_total": 223.3,
+   "blend_spread_home": -3.9,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.896,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.896,
+    "rotation_window": "2026-10-28 .. 2026-11-15",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.724,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.724,
+    "rotation_window": "2026-10-28 .. 2026-11-15",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 582.5
+   },
+   "luck_z_home": 1.656,
+   "luck_z_away": -0.521,
+   "source_url": "https://www.nba.com/game/ind-vs-phi-0022600236/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600237",
+   "matchup": "LAL@PHX",
+   "away": "LAL",
+   "home": "PHX",
+   "status_official": "Final",
+   "publishable": false,
+   "e1_total": 237.9,
+   "e1_spread_home": 13.8,
+   "e2_total": 233.8,
+   "e2_spread_home": 6.2,
+   "disagreement_total": 4.1,
+   "disagreement_spread": 7.6,
+   "blend_total": 235.9,
+   "blend_spread_home": 10.0,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.843,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.843,
+    "rotation_window": "2026-10-26 .. 2026-11-15",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.851,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.851,
+    "rotation_window": "2026-10-28 .. 2026-11-15",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 4,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 1461.6
+   },
+   "luck_z_home": 0.39,
+   "luck_z_away": 1.166,
+   "source_url": "https://www.nba.com/game/lal-vs-phx-0022600237/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600238",
+   "matchup": "CHA@LAC",
+   "away": "CHA",
+   "home": "LAC",
+   "status_official": "Q4 :34.3",
+   "publishable": false,
+   "e1_total": 211.5,
+   "e1_spread_home": -5.8,
+   "e2_total": 219.0,
+   "e2_spread_home": -6.9,
+   "disagreement_total": 7.5,
+   "disagreement_spread": 1.1,
+   "blend_total": 215.2,
+   "blend_spread_home": -6.4,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.823,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.823,
+    "rotation_window": "2026-10-23 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.805,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.805,
+    "rotation_window": "2026-10-24 .. 2026-11-12",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 358.3
+   },
+   "luck_z_home": -0.508,
+   "luck_z_away": 1.303,
+   "source_url": "https://www.nba.com/game/cha-vs-lac-0022600238/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600239",
+   "matchup": "SAS@UTA",
+   "away": "SAS",
+   "home": "UTA",
+   "status_official": "Q4 8:35",
+   "publishable": false,
+   "e1_total": 224.4,
+   "e1_spread_home": 22.0,
+   "e2_total": 225.9,
+   "e2_spread_home": 14.3,
+   "disagreement_total": 1.5,
+   "disagreement_spread": 7.7,
+   "blend_total": 225.1,
+   "blend_spread_home": 18.2,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.775,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.775,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.844,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.844,
+    "rotation_window": "2026-10-27 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 1200.6
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 1089.8
+   },
+   "luck_z_home": -1.123,
+   "luck_z_away": 0.094,
+   "source_url": "https://www.nba.com/game/sas-vs-uta-0022600239/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600240",
+   "matchup": "DAL@BOS",
+   "away": "DAL",
+   "home": "BOS",
+   "status_official": "Q2 2:31",
+   "publishable": false,
+   "e1_total": 216.9,
+   "e1_spread_home": -8.4,
+   "e2_total": 222.1,
+   "e2_spread_home": -5.9,
+   "disagreement_total": 5.2,
+   "disagreement_spread": 2.5,
+   "blend_total": 219.5,
+   "blend_spread_home": -7.1,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.788,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.788,
+    "rotation_window": "2026-10-26 .. 2026-11-11",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.801,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.801,
+    "rotation_window": "2026-10-26 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 4,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 429.2
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": true,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 549.1
+   },
+   "luck_z_home": 0.231,
+   "luck_z_away": 0.243,
+   "source_url": "https://www.nba.com/game/dal-vs-bos-0022600240/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600241",
+   "matchup": "NYK@TOR",
+   "away": "NYK",
+   "home": "TOR",
+   "status_official": "Q2 6:59",
+   "publishable": false,
+   "e1_total": 216.2,
+   "e1_spread_home": 6.8,
+   "e2_total": 220.2,
+   "e2_spread_home": 0.9,
+   "disagreement_total": 4.1,
+   "disagreement_spread": 5.9,
+   "blend_total": 218.2,
+   "blend_spread_home": 3.9,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.823,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.823,
+    "rotation_window": "2026-10-25 .. 2026-11-12",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.837,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.837,
+    "rotation_window": "2026-10-25 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 337.3
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 440.3
+   },
+   "luck_z_home": -0.881,
+   "luck_z_away": -1.41,
+   "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600241/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600242",
+   "matchup": "HOU@WAS",
+   "away": "HOU",
+   "home": "WAS",
+   "status_official": "pregame",
+   "publishable": true,
+   "e1_total": 219.8,
+   "e1_spread_home": 15.2,
+   "e2_total": 224.7,
+   "e2_spread_home": 11.6,
+   "disagreement_total": 4.8,
+   "disagreement_spread": 3.6,
+   "blend_total": 222.2,
+   "blend_spread_home": 13.4,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.886,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.886,
+    "rotation_window": "2026-10-26 .. 2026-11-12",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.882,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.882,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 1219.1
+   },
+   "luck_z_home": -0.166,
+   "luck_z_away": 0.17,
+   "source_url": "https://www.nba.com/game/hou-vs-was-0022600242/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600243",
+   "matchup": "ATL@MIL",
+   "away": "ATL",
+   "home": "MIL",
+   "status_official": "8:00 pm ET",
+   "publishable": true,
+   "e1_total": 234.9,
+   "e1_spread_home": 12.3,
+   "e2_total": 230.7,
+   "e2_spread_home": 7.7,
+   "disagreement_total": 4.2,
+   "disagreement_spread": 4.6,
+   "blend_total": 232.8,
+   "blend_spread_home": 10.0,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.783,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.783,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.888,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.888,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 1066.2
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 81.4
+   },
+   "luck_z_home": -0.74,
+   "luck_z_away": -0.001,
+   "source_url": "https://www.nba.com/game/atl-vs-mil-0022600243/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-15",
+   "game_id": "0022600244",
+   "matchup": "OKC@SAC",
+   "away": "OKC",
+   "home": "SAC",
+   "status_official": "9:00 pm ET",
+   "publishable": true,
+   "e1_total": 221.1,
+   "e1_spread_home": 17.1,
+   "e2_total": 223.8,
+   "e2_spread_home": 10.4,
+   "disagreement_total": 2.7,
+   "disagreement_spread": 6.7,
+   "blend_total": 222.5,
+   "blend_spread_home": 13.7,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.846,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.846,
+    "rotation_window": "2026-10-25 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.808,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.808,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 361.4
+   },
+   "luck_z_home": -0.836,
+   "luck_z_away": -0.017,
+   "source_url": "https://www.nba.com/game/okc-vs-sac-0022600244/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-15"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600245",
+   "matchup": "ORL@BOS",
+   "away": "ORL",
+   "home": "BOS",
+   "status_official": "7:00 pm ET",
+   "publishable": true,
+   "e1_total": 212.2,
+   "e1_spread_home": -13.1,
+   "e2_total": 219.2,
+   "e2_spread_home": -10.5,
+   "disagreement_total": 7.0,
+   "disagreement_spread": 2.5,
+   "blend_total": 215.7,
+   "blend_spread_home": -11.8,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.788,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.788,
+    "rotation_window": "2026-10-26 .. 2026-11-11",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.852,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.852,
+    "rotation_window": "2026-10-25 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "back_to_back": true,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 1116.1
+   },
+   "luck_z_home": 0.231,
+   "luck_z_away": 0.375,
+   "source_url": "https://www.nba.com/game/orl-vs-bos-0022600245/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600246",
+   "matchup": "CHI@CLE",
+   "away": "CHI",
+   "home": "CLE",
+   "status_official": "7:00 pm ET",
+   "publishable": true,
+   "e1_total": 245.8,
+   "e1_spread_home": -11.8,
+   "e2_total": 236.9,
+   "e2_spread_home": -8.7,
+   "disagreement_total": 8.9,
+   "disagreement_spread": 3.1,
+   "blend_total": 241.4,
+   "blend_spread_home": -10.2,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.756,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.756,
+    "rotation_window": "2026-10-29 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.746,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.746,
+    "rotation_window": "2026-10-24 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 630.2
+   },
+   "luck_z_home": -0.367,
+   "luck_z_away": 0.321,
+   "source_url": "https://www.nba.com/game/chi-vs-cle-0022600246/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600247",
+   "matchup": "MEM@WAS",
+   "away": "MEM",
+   "home": "WAS",
+   "status_official": "7:00 pm ET",
+   "publishable": true,
+   "e1_total": 230.1,
+   "e1_spread_home": 14.0,
+   "e2_total": 229.0,
+   "e2_spread_home": 9.1,
+   "disagreement_total": 1.0,
+   "disagreement_spread": 4.9,
+   "blend_total": 229.6,
+   "blend_spread_home": 11.5,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.886,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.886,
+    "rotation_window": "2026-10-26 .. 2026-11-12",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.759,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.759,
+    "rotation_window": "2026-10-26 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "back_to_back": true,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 763.5
+   },
+   "luck_z_home": -0.166,
+   "luck_z_away": -0.431,
+   "source_url": "https://www.nba.com/game/mem-vs-was-0022600247/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600248",
+   "matchup": "PHI@BKN",
+   "away": "PHI",
+   "home": "BKN",
+   "status_official": "7:30 pm ET",
+   "publishable": true,
+   "e1_total": 220.8,
+   "e1_spread_home": 8.2,
+   "e2_total": 224.8,
+   "e2_spread_home": 4.3,
+   "disagreement_total": 4.0,
+   "disagreement_spread": 3.8,
+   "blend_total": 222.8,
+   "blend_spread_home": 6.2,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.756,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.756,
+    "rotation_window": "2026-10-25 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.896,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.896,
+    "rotation_window": "2026-10-28 .. 2026-11-15",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 954.5
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": true,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 83.0
+   },
+   "luck_z_home": -0.499,
+   "luck_z_away": 1.656,
+   "source_url": "https://www.nba.com/game/phi-vs-bkn-0022600248/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600249",
+   "matchup": "HOU@MIA",
+   "away": "HOU",
+   "home": "MIA",
+   "status_official": "7:30 pm ET",
+   "publishable": true,
+   "e1_total": 235.3,
+   "e1_spread_home": 14.2,
+   "e2_total": 231.0,
+   "e2_spread_home": 6.9,
+   "disagreement_total": 4.3,
+   "disagreement_spread": 7.2,
+   "blend_total": 233.2,
+   "blend_spread_home": 10.6,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.872,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.872,
+    "rotation_window": "2026-10-26 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.882,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.882,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": true,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 924.8
+   },
+   "luck_z_home": 0.521,
+   "luck_z_away": 0.17,
+   "source_url": "https://www.nba.com/game/hou-vs-mia-0022600249/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600250",
+   "matchup": "POR@MIN",
+   "away": "POR",
+   "home": "MIN",
+   "status_official": "8:00 pm ET",
+   "publishable": true,
+   "e1_total": 230.6,
+   "e1_spread_home": -3.7,
+   "e2_total": 228.2,
+   "e2_spread_home": -2.4,
+   "disagreement_total": 2.3,
+   "disagreement_spread": 1.3,
+   "blend_total": 229.4,
+   "blend_spread_home": -3.0,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.846,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.846,
+    "rotation_window": "2026-10-26 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.851,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.851,
+    "rotation_window": "2026-10-27 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 1511.1
+   },
+   "luck_z_home": -1.042,
+   "luck_z_away": 0.25,
+   "source_url": "https://www.nba.com/game/por-vs-min-0022600250/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600251",
+   "matchup": "GSW@NOP",
+   "away": "GSW",
+   "home": "NOP",
+   "status_official": "8:00 pm ET",
+   "publishable": true,
+   "e1_total": 242.1,
+   "e1_spread_home": 15.8,
+   "e2_total": 234.9,
+   "e2_spread_home": 10.4,
+   "disagreement_total": 7.1,
+   "disagreement_spread": 5.3,
+   "blend_total": 238.5,
+   "blend_spread_home": 13.1,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.78,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.78,
+    "rotation_window": "2026-10-29 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.749,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.749,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 502.7
+   },
+   "luck_z_home": 0.224,
+   "luck_z_away": -0.093,
+   "source_url": "https://www.nba.com/game/gsw-vs-nop-0022600251/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600252",
+   "matchup": "PHX@DEN",
+   "away": "PHX",
+   "home": "DEN",
+   "status_official": "9:00 pm ET",
+   "publishable": true,
+   "e1_total": 227.8,
+   "e1_spread_home": -5.0,
+   "e2_total": 228.7,
+   "e2_spread_home": -4.3,
+   "disagreement_total": 0.9,
+   "disagreement_spread": 0.6,
+   "blend_total": 228.3,
+   "blend_spread_home": -4.6,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.868,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.868,
+    "rotation_window": "2026-10-24 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.843,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.843,
+    "rotation_window": "2026-10-26 .. 2026-11-15",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 1081.2
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": true,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 585.4
+   },
+   "luck_z_home": 0.541,
+   "luck_z_away": 0.39,
+   "source_url": "https://www.nba.com/game/phx-vs-den-0022600252/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600253",
+   "matchup": "NYK@TOR",
+   "away": "NYK",
+   "home": "TOR",
+   "status_official": "7:30 pm ET",
+   "publishable": true,
+   "e1_total": 216.2,
+   "e1_spread_home": 6.8,
+   "e2_total": 220.2,
+   "e2_spread_home": 0.9,
+   "disagreement_total": 4.1,
+   "disagreement_spread": 5.9,
+   "blend_total": 218.2,
+   "blend_spread_home": 3.9,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.823,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.823,
+    "rotation_window": "2026-10-25 .. 2026-11-12",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.837,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.837,
+    "rotation_window": "2026-10-25 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "luck_z_home": -0.881,
+   "luck_z_away": -1.41,
+   "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600253/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "matchup": "POR@MIN",
+   "away": "POR",
+   "home": "MIN",
+   "status_official": "8:00 pm ET",
+   "publishable": true,
+   "e1_total": 230.6,
+   "e1_spread_home": -3.7,
+   "e2_total": 228.2,
+   "e2_spread_home": -2.4,
+   "disagreement_total": 2.3,
+   "disagreement_spread": 1.3,
+   "blend_total": 229.4,
+   "blend_spread_home": -3.0,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.846,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.846,
+    "rotation_window": "2026-10-26 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.851,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.851,
+    "rotation_window": "2026-10-27 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "back_to_back": true,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": true,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "luck_z_home": -1.042,
+   "luck_z_away": 0.25,
+   "source_url": "https://www.nba.com/game/por-vs-min-0022600254/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "matchup": "DET@SAS",
+   "away": "DET",
+   "home": "SAS",
+   "status_official": "8:00 pm ET",
+   "publishable": true,
+   "e1_total": 223.7,
+   "e1_spread_home": -3.5,
+   "e2_total": 225.8,
+   "e2_spread_home": -7.6,
+   "disagreement_total": 2.1,
+   "disagreement_spread": 4.1,
+   "blend_total": 224.7,
+   "blend_spread_home": -5.6,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.844,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.844,
+    "rotation_window": "2026-10-27 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.889,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.889,
+    "rotation_window": "2026-10-25 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 1089.8
+   },
+   "rest_away": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 1144.2
+   },
+   "luck_z_home": 0.094,
+   "luck_z_away": 0.042,
+   "source_url": "https://www.nba.com/game/det-vs-sas-0022600255/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600256",
+   "matchup": "CHA@LAL",
+   "away": "CHA",
+   "home": "LAL",
+   "status_official": "10:00 pm ET",
+   "publishable": true,
+   "e1_total": 217.9,
+   "e1_spread_home": -19.7,
+   "e2_total": 222.9,
+   "e2_spread_home": -15.3,
+   "disagreement_total": 5.0,
+   "disagreement_spread": 4.4,
+   "blend_total": 220.4,
+   "blend_spread_home": -17.5,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.851,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.851,
+    "rotation_window": "2026-10-28 .. 2026-11-15",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.805,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.805,
+    "rotation_window": "2026-10-24 .. 2026-11-12",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 358.3
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "luck_z_home": 1.166,
+   "luck_z_away": 1.303,
+   "source_url": "https://www.nba.com/game/cha-vs-lal-0022600256/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "matchup": "UTA@LAC",
+   "away": "UTA",
+   "home": "LAC",
+   "status_official": "10:30 pm ET",
+   "publishable": true,
+   "e1_total": 226.7,
+   "e1_spread_home": -2.7,
+   "e2_total": 227.9,
+   "e2_spread_home": -4.5,
+   "disagreement_total": 1.3,
+   "disagreement_spread": 1.7,
+   "blend_total": 227.3,
+   "blend_spread_home": -3.6,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.823,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.823,
+    "rotation_window": "2026-10-23 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.775,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.775,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 581.0
+   },
+   "luck_z_home": -0.508,
+   "luck_z_away": -1.123,
+   "source_url": "https://www.nba.com/game/uta-vs-lac-0022600257/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600258",
+   "matchup": "MEM@CLE",
+   "away": "MEM",
+   "home": "CLE",
+   "status_official": "7:00 pm ET",
+   "publishable": true,
+   "e1_total": 238.6,
+   "e1_spread_home": 7.7,
+   "e2_total": 232.8,
+   "e2_spread_home": 2.6,
+   "disagreement_total": 5.8,
+   "disagreement_spread": 5.1,
+   "blend_total": 235.7,
+   "blend_spread_home": 5.1,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.756,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.756,
+    "rotation_window": "2026-10-29 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.759,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.759,
+    "rotation_window": "2026-10-26 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 304.7
+   },
+   "luck_z_home": -0.367,
+   "luck_z_away": -0.431,
+   "source_url": "https://www.nba.com/game/mem-vs-cle-0022600258/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600259",
+   "matchup": "HOU@IND",
+   "away": "HOU",
+   "home": "IND",
+   "status_official": "7:00 pm ET",
+   "publishable": true,
+   "e1_total": 221.5,
+   "e1_spread_home": 13.0,
+   "e2_total": 225.1,
+   "e2_spread_home": 8.9,
+   "disagreement_total": 3.6,
+   "disagreement_spread": 4.1,
+   "blend_total": 223.3,
+   "blend_spread_home": 10.9,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.724,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.724,
+    "rotation_window": "2026-10-28 .. 2026-11-15",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.882,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.882,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 582.5
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 1025.8
+   },
+   "luck_z_home": -0.521,
+   "luck_z_away": 0.17,
+   "source_url": "https://www.nba.com/game/hou-vs-ind-0022600259/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600260",
+   "matchup": "MIL@MIA",
+   "away": "MIL",
+   "home": "MIA",
+   "status_official": "7:00 pm ET",
+   "publishable": true,
+   "e1_total": 237.0,
+   "e1_spread_home": -9.1,
+   "e2_total": 232.5,
+   "e2_spread_home": -9.4,
+   "disagreement_total": 4.5,
+   "disagreement_spread": 0.3,
+   "blend_total": 234.7,
+   "blend_spread_home": -9.2,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.872,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.872,
+    "rotation_window": "2026-10-26 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.783,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.783,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 1270.2
+   },
+   "luck_z_home": 0.521,
+   "luck_z_away": -0.74,
+   "source_url": "https://www.nba.com/game/mil-vs-mia-0022600260/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600261",
+   "matchup": "PHI@ORL",
+   "away": "PHI",
+   "home": "ORL",
+   "status_official": "7:00 pm ET",
+   "publishable": true,
+   "e1_total": 216.7,
+   "e1_spread_home": 7.5,
+   "e2_total": 222.0,
+   "e2_spread_home": 2.9,
+   "disagreement_total": 5.4,
+   "disagreement_spread": 4.6,
+   "blend_total": 219.4,
+   "blend_spread_home": 5.2,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.852,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.852,
+    "rotation_window": "2026-10-25 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.896,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.896,
+    "rotation_window": "2026-10-28 .. 2026-11-15",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 1116.1
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 938.0
+   },
+   "luck_z_home": 0.375,
+   "luck_z_away": 1.656,
+   "source_url": "https://www.nba.com/game/phi-vs-orl-0022600261/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600262",
+   "matchup": "CHI@BKN",
+   "away": "CHI",
+   "home": "BKN",
+   "status_official": "7:30 pm ET",
+   "publishable": true,
+   "e1_total": 237.3,
+   "e1_spread_home": -4.2,
+   "e2_total": 233.5,
+   "e2_spread_home": -2.9,
+   "disagreement_total": 3.8,
+   "disagreement_spread": 1.3,
+   "blend_total": 235.4,
+   "blend_spread_home": -3.5,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.756,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.756,
+    "rotation_window": "2026-10-25 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.746,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.746,
+    "rotation_window": "2026-10-24 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 405.4
+   },
+   "luck_z_home": -0.499,
+   "luck_z_away": 0.321,
+   "source_url": "https://www.nba.com/game/chi-vs-bkn-0022600262/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600263",
+   "matchup": "WAS@TOR",
+   "away": "WAS",
+   "home": "TOR",
+   "status_official": "7:30 pm ET",
+   "publishable": true,
+   "e1_total": 226.2,
+   "e1_spread_home": -2.8,
+   "e2_total": 226.4,
+   "e2_spread_home": -7.5,
+   "disagreement_total": 0.2,
+   "disagreement_spread": 4.7,
+   "blend_total": 226.3,
+   "blend_spread_home": -5.1,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.823,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.823,
+    "rotation_window": "2026-10-25 .. 2026-11-12",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.886,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.886,
+    "rotation_window": "2026-10-26 .. 2026-11-12",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "back_to_back": true,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 349.9
+   },
+   "luck_z_home": -0.881,
+   "luck_z_away": -0.166,
+   "source_url": "https://www.nba.com/game/was-vs-tor-0022600263/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600264",
+   "matchup": "DET@NOP",
+   "away": "DET",
+   "home": "NOP",
+   "status_official": "8:00 pm ET",
+   "publishable": true,
+   "e1_total": 237.9,
+   "e1_spread_home": 17.6,
+   "e2_total": 233.4,
+   "e2_spread_home": 8.9,
+   "disagreement_total": 4.6,
+   "disagreement_spread": 8.8,
+   "blend_total": 235.6,
+   "blend_spread_home": 13.2,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.78,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.78,
+    "rotation_window": "2026-10-29 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.889,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.889,
+    "rotation_window": "2026-10-25 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": true,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 502.7
+   },
+   "luck_z_home": 0.224,
+   "luck_z_away": 0.042,
+   "source_url": "https://www.nba.com/game/det-vs-nop-0022600264/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600265",
+   "matchup": "ATL@OKC",
+   "away": "ATL",
+   "home": "OKC",
+   "status_official": "8:00 pm ET",
+   "publishable": true,
+   "e1_total": 229.2,
+   "e1_spread_home": -3.9,
+   "e2_total": 226.8,
+   "e2_spread_home": -5.8,
+   "disagreement_total": 2.4,
+   "disagreement_spread": 1.9,
+   "blend_total": 228.0,
+   "blend_spread_home": -4.8,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.808,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.808,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.888,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.888,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 1336.6
+   },
+   "rest_away": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 732.6
+   },
+   "luck_z_home": -0.017,
+   "luck_z_away": -0.001,
+   "source_url": "https://www.nba.com/game/atl-vs-okc-0022600265/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600266",
+   "matchup": "BOS@DEN",
+   "away": "BOS",
+   "home": "DEN",
+   "status_official": "9:30 pm ET",
+   "publishable": true,
+   "e1_total": 217.1,
+   "e1_spread_home": 8.8,
+   "e2_total": 222.4,
+   "e2_spread_home": 3.3,
+   "disagreement_total": 5.3,
+   "disagreement_spread": 5.5,
+   "blend_total": 219.7,
+   "blend_spread_home": 6.1,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.868,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.868,
+    "rotation_window": "2026-10-24 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.788,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.788,
+    "rotation_window": "2026-10-26 .. 2026-11-11",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 1765.9
+   },
+   "luck_z_home": 0.541,
+   "luck_z_away": 0.231,
+   "source_url": "https://www.nba.com/game/bos-vs-den-0022600266/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600267",
+   "matchup": "GSW@DAL",
+   "away": "GSW",
+   "home": "DAL",
+   "status_official": "8:00 pm ET",
+   "publishable": true,
+   "e1_total": 226.9,
+   "e1_spread_home": 5.4,
+   "e2_total": 227.9,
+   "e2_spread_home": 2.1,
+   "disagreement_total": 1.0,
+   "disagreement_spread": 3.3,
+   "blend_total": 227.4,
+   "blend_spread_home": 3.7,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.801,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.801,
+    "rotation_window": "2026-10-26 .. 2026-11-14",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.749,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.749,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 1549.2
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 442.7
+   },
+   "luck_z_home": 0.243,
+   "luck_z_away": -0.093,
+   "source_url": "https://www.nba.com/game/gsw-vs-dal-0022600267/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600268",
+   "matchup": "UTA@LAL",
+   "away": "UTA",
+   "home": "LAL",
+   "status_official": "10:00 pm ET",
+   "publishable": true,
+   "e1_total": 233.5,
+   "e1_spread_home": -17.6,
+   "e2_total": 231.9,
+   "e2_spread_home": -12.8,
+   "disagreement_total": 1.6,
+   "disagreement_spread": 4.7,
+   "blend_total": 232.7,
+   "blend_spread_home": -15.2,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.851,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.851,
+    "rotation_window": "2026-10-28 .. 2026-11-15",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.775,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.775,
+    "rotation_window": "2026-10-26 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 1,
+    "back_to_back": true,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": true,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "luck_z_home": 1.166,
+   "luck_z_away": -1.123,
+   "source_url": "https://www.nba.com/game/uta-vs-lal-0022600268/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600269",
+   "matchup": "PHX@SAC",
+   "away": "PHX",
+   "home": "SAC",
+   "status_official": "10:00 pm ET",
+   "publishable": true,
+   "e1_total": 230.5,
+   "e1_spread_home": 10.9,
+   "e2_total": 229.5,
+   "e2_spread_home": 4.4,
+   "disagreement_total": 1.0,
+   "disagreement_spread": 6.4,
+   "blend_total": 230.0,
+   "blend_spread_home": 7.6,
+   "hca_applied": 1.11,
+   "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
+   "rotation_availability_home": {
+    "available_share": 0.846,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.846,
+    "rotation_window": "2026-10-25 .. 2026-11-13",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rotation_availability_away": {
+    "available_share": 0.843,
+    "outs_in_top8": [],
+    "top8_minutes_share_total": 0.843,
+    "rotation_window": "2026-10-26 .. 2026-11-15",
+    "source": "measured minutes shares from official box scores x the newest official injury edition (2026-11-15 06:30PM ET)"
+   },
+   "rest_home": {
+    "rest_days": 3,
+    "back_to_back": false,
+    "three_in_four": false,
+    "travel_miles_from_previous_venue": 0.0
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": true,
+    "travel_miles_from_previous_venue": 885.9
+   },
+   "luck_z_home": -0.836,
+   "luck_z_away": 0.39,
+   "source_url": "https://www.nba.com/game/phx-vs-sac-0022600269/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18"
+  }
+ ]
+}
