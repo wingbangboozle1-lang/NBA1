@@ -6226,8 +6226,39 @@ link; anything I cannot confirm stays blank and flagged.
 ---
 
 ## 55. Session `arena/dfa3057f-nba1` — post-merge verification seat (claimed 2026-11-16 18:16 UTC, D01–D04)
+## 56. Session `arena/94a5aa5d-nba1` (claimed as §55 — renumbered at merge: `arena/dfa3057f-nba1` claimed §55 at 18:16 UTC, 10 minutes before this claim; content verbatim, and every internal "§55" reference in this section means this section) — evening cycle: unblock the scheduled refresh's structured team-stat promotion (R01), roll the horizon to 11/16–11/19 official re-reads, verify 11/15 settlement chain, gates, integration delivery (claimed 2026-11-16 18:2x UTC)
 
-### 55.1 Task table
+Branch `arena/94a5aa5d-nba1`, based on `main` `add1e74` (merge of PR #145, tip at claim time). The
+platform pins this session to that branch; the `session-<id>/<task>` naming in the brief is
+satisfied by this single pre-named branch (deviation logged, as every session before it logged it).
+
+**Board read before claiming (2026-11-16 18:16–18:24 UTC, ground rules 1–6):** §0 ground rules,
+§0b registry, tail delivery records §50–§54, `gh pr list` (state all), `gh run list`, `gh api
+/repos/…/pages`. Everything below was **measured**, not assumed:
+
+| Measurement | Value at claim time | How measured |
+| --- | --- | --- |
+| `main` tip | `add1e74` (merge of PR #145) | `git log` |
+| Open PRs | **none** | `gh pr list --state open` |
+| Pages | `status: built`, `build_type: legacy`, source `main /` | `gh api …/pages` |
+| Last scheduled refresh | run `43910841732`, `success` 17:16Z; step 6 gate **success**, step 7 rebuild **skipped** | `gh api …/actions/runs/…/jobs` |
+| Gate BLOCKs now | **13** (was 10 at §54; +3 from the 15:15/16:15 runs' digest binding, and the 5 fetch parse failures) | `python3 engine/refresh_gate.py --max-age-hours 10` |
+| Root cause of the skip | `engine/fetch_official.py` parses **0 rows** from `nba.com/stats/teams/{traditional,advanced,opponent}` and `/standings`: the server response is a client-rendered shell (`rowSet: 0`, 12 `<tr>`). `stats.nba.com` API times out from the runner. | the capture evidence files + `engine/parse_official.py` strategies |
+| My channel differs | `fetch_page` on the same three URLs returns the full 30-row official table (read 18:2xZ) — this environment can read the rendered table where the runner cannot | direct read |
+| Settlement | `data/settlement/` holds 11/14 **and** 11/15; ledger chain OK (`scripts/verify_ledger.py`) | file read + gate run |
+| Local gates | `check_site`, `check_links`, `check_rendered`, `verify_all`, `verify_dashboard` (2832 rows), `verify_ledger` all pass on `add1e74` | full battery run |
+| Stale claim | every top-of-board claim is >3 h old; no session has committed since 15:43Z | `git log origin/main` |
+
+**Why this scope and not another capture.** The brief's first line — *"Extend the scheduled job to
+refresh the official schedule, standings, team statistics and injury report for each rolling slate,
+then rebuild only after freshness and provenance gates pass"* (register R01) — is the one requirement
+the repo has never closed, and §54 recorded it as "structural (stats.nba.com transport-blocked,
+continue-on-error by design)". That conclusion is now **measurable as wrong on one half**: the pages
+*are* readable through a rendering fetch channel, so the parser — not the network — is the failing
+component. R01 is therefore unblocked in principle; this session closes what it can prove and leaves
+the rest explicitly flagged rather than declaring it done.
+
+### 56.1 Task table
 
 | ID | Task | Status | Owner | File scope |
 | --- | --- | --- | --- | --- |
@@ -6285,3 +6316,18 @@ Not run here: the `render_check.mjs` step needs `jsdom` from npm, which was not 
 - https://official.nba.com/nba-injury-report-2026-27-season/ (official NBA injury-report index — lists 11/16 editions 12:00 AM through 1:00 PM ET).
 - https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_10_30AM.pdf (official PDF, fetched and read).
 - Repository files: `data/raw/injury_pdfs/`, `scripts/test_injury_diff.py`, `engine/injury_diff.py`, `scripts/check_site.py` and the other gate scripts named in 55.2.
+| S01 | Board read, registration, claim committed and pushed immediately (ground rule 4) | **in progress** | `arena/94a5aa5d-nba1` | `COORDINATION.md` (top claim, §0b row, this §55) |
+| S02 | Diagnose the structured-parse failure on S1/S8/S9/S10 line by line against the real capture evidence; fix the parser where the failure is ours; make the fetcher record a *didactic* failure where it is environmental | in progress | same | `engine/parse_official.py`, `engine/fetch_official.py`, tests |
+| S03 | Re-read the three official team-stat pages + standings + schedule + injury report first-hand; promote verified rows with digest-bound provenance; rebuild model inputs | in progress | same | `data/official/**`, `data/derived/**`, `engine/promote_official.py` |
+| S04 | Verify the 2026-11-15 settlement chain line by line (9 official finals, quarter sums) and confirm the stamp is visible on the site | in progress | same | read-only; corrections only in files this session owns |
+| S05 | Roll the horizon to the full 3-day window (11/16–11/19, 29 games) against the official schedule; picks with rotation availability column; pre-registration + ledger append | in progress | same | `data/derived/horizon_*`, `data/prereg/**`, `data/ledger/**`, generated pages |
+| S06 | Re-cut every partial requirement that is now provably closable, with a source link per row; leave the rest partial and flagged — no inflation | in progress | same | `data/content/requirements.json` via its builder |
+| S07 | Full gate battery on the branch (check_site, check_links, check_rendered, verify_all, verify_dashboard, verify_ledger, refresh_gate); fix failures | in progress | same | run in place |
+| S08 | Integration PR → `main`, merge without approval wait, confirm the Pages deploy serves the new content, record PR/merge/deploy | in progress | same | whole-repo integration |
+| S09 | Delivery record: sources, verification performed, irregularities, links — in §56.4 | in progress | same | `COORDINATION.md` §56.4 |
+
+**Scope boundaries.** No other session holds an open PR or a commit newer than 15:43Z, so nothing is
+taken over. Shared surfaces (`index.html`, nav, `data/content/*`) are changed only through this
+session's integration role. Flagged/unverified items go to `data/content/flagged.json` through the
+established builder and are published on the Flagged for Review page; per ground rule 2 they do not
+block the merge.
