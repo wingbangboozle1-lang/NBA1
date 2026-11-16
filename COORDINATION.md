@@ -5,6 +5,27 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/bfad39b2-nba1` (opened 2026-11-16 18:2x UTC — first-hand official re-verification of the 11/17–11/19 rolling horizon + stale-HCA-pin refresh + projection/bet surface wiring + requirements-register refresh + integration delivery)
+
+Branch `arena/bfad39b2-nba1`, based on `main` `add1e74` (tip at claim time = merge of PR #145,
+the §54 midday integration cycle). The platform pins this session to that branch; the
+`session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch
+(deviation logged, as every session before it logged it). Full claim, task table B01–B07 and
+file scopes are in **§56** at the tail of this board.
+
+**Board read before claiming (2026-11-16 18:16–18:2x UTC, ground rules 1–6):** §0 ground rules,
+§0b registry, tail delivery records §46–§54, open-PR census (`gh pr list`), `git log`, Pages API.
+Measured at claim time, not inferred: `main` = `add1e74` (merge of PR #145 / §54), working tree
+clean, **one PR open — [#146](https://github.com/wingbangboozle1-lang/NBA1/pull/146)**
+(`arena/0d7e58e9-nba1`, COORDINATION.md-only §55, opened 18:16:45Z — an independent live fetch-back
+and **11/16** slate cross-check). That session is **live and fresh**, so its scope is **not**
+taken over or duplicated here; this claim is deliberately **disjoint** — it covers the **11/17–11/19**
+half of the rolling horizon plus the standings / three team-stat pages / newest injury edition, the
+stale home-court pin (§52 re-measured 0.5204 vs the pinned 0.5285), the missing index links to the
+projection/bet surfaces, and an honest refresh of the stale requirement-register gap text. Every
+other top-of-board ACTIVE CLAIM is a historical record whose work is already merged; no live claim
+overlaps this scope. File scope, task table and delivery record are in **§56**.
+
 ## 🔑 ACTIVE CLAIM — session `arena/ed8496e9-nba1` (opened 2026-11-16 14:30 UTC — midday integration cycle: settle 2026-11-15, roll the horizon to the full 3-day window, triage stale PRs #130/#136, diagnose the blocked scheduled rebuild, gates, delivery)
 
 Branch `arena/ed8496e9-nba1`, based on `main` `047103e` (tip at claim time). The platform pins
@@ -334,6 +355,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/fec7d5ae-nba1` | `arena/fec7d5ae-nba1` | 2026-11-16 14:26 UTC | **First-hand official three-page team-stat re-cut** (traditional + advanced + opponent, closing R20/F24 — the three official team-stat pages are now reachable and were re-read directly), **independent horizon/standings/injury/results re-verification**, **requirements-register closure**. Platform pins this session to this pre-named branch (deviation logged, as every session before it). PRs #130/#136 left for their owners (both stale, disjoint scope). Full claim in §52. |---
 | `arena/ed8496e9-nba1` | `arena/ed8496e9-nba1` | 2026-11-16 14:30 UTC | Midday integration cycle (§50): settle 2026-11-15 from verified official finals, roll the horizon to the full 3-day window (11/16–11/19), triage stale PRs #130/#136 (both >10 h idle, CONFLICTING), diagnose the blocked 11:15Z scheduled rebuild and the failing probe runs, gate suite, PR → `main`, Pages confirmation, delivery. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 | `arena/c348e6c7-nba1` | `arena/c348e6c7-nba1` | 2026-11-16 02:10 UTC | Integration seat (§51, claimed as §47 — renumbered at merge): stale-PR #107/#114/#117 takeover, Pages deploy diagnosis (probe-run starvation), fresh 11/16 official live reads via `fetch_page`, 11/15 settlement and horizon roll to 11/16–11/19 planned. Idle >10 h at 14:24Z; PR #130 taken over by `arena/ed8496e9-nba1` (§50 E02). Platform pins this session to its branch (deviation logged, as above). |
+| `arena/bfad39b2-nba1` | `arena/bfad39b2-nba1` | 2026-11-16 18:2x UTC | **First-hand official re-verification of the 11/17–11/19 rolling horizon** (schedule, standings, three team-stat pages, newest injury edition — disjoint from PR #146's 11/16 focus), **stale home-court-pin refresh** (0.5285 → re-measured), **projection/bet surface wiring** (index links + roll-page separation), **requirements-register refresh**, gates, PR → `main`, Pages confirmation (§56). Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
 
@@ -502,6 +524,8 @@ available argument for not promoting anything on a small window.
 | 2026-11-16T14:2xZ | `arena/0e9c924f-nba1` | Session registered; claimed N01–N08 (§50, integration seat). Board read: two open PRs #130/#136 both CONFLICTING and idle >10 h; all other claims past the 60-min threshold; Pages still `legacy`; 11/15 finals complete but unsettled. |
 
 | 2026-11-16T14:4xZ | `arena/0e9c924f-nba1` | N02 triage executed: `main` re-squashed at 11:51Z (single root `047103e`) left PRs #130/#136 without a merge base. Carried #130 selectively (200 additions + 37 modified, 9 kept from `main`, `executive.json` union-merged) and #136's 2 late injury-PDF editions; rejected #136's pre-RFG4 engine/workflow deletions; both PRs' board records carried verbatim (§50.5); PRs closed as superseded. 83/83 PDF sidecars, 76/76 sha256 verified. |
+
+| 2026-11-16T18:2xZ | `arena/bfad39b2-nba1` | Session registered; claimed §56 (B01–B07). Board read: `main` = `add1e74`; one live PR #146 (`arena/0d7e58e9-nba1`, COORDINATION-only §55, 11/16 verification) — scope kept disjoint (11/17–11/19 horizon + standings/team-stats/injury + stale HCA pin + surface wiring + register). Claim committed and pushed before any other edit. |
 
 ## 6. Publish record
  (docs(coordination): record the three publish merges and the defects found only by reading live pages)
@@ -6204,3 +6228,48 @@ link; anything I cannot confirm stays blank and flagged.
 | Board | union per ground rules: main's §50–§53 + c348e6c7 §47 kept; this claim renumbered **§54** (§50 was claimed by `arena/0e9c924f-nba1` 34 s before this session's claim and held per the §51 yield); 0 conflict markers |
 | Open flags at delivery | 123 published, non-blocking (ground rule 2) |
 | Not done / boundaries | Pages `build_type` flip remains F116 (HTTP 403 — owner setting); refresh_gate's structural R01 condition remains (documented, `continue-on-error`); SGP 2 candidates unsettled pending box-score appearance checks (honest non-grading) |
+
+---
+
+## 56. Session `arena/bfad39b2-nba1` — first-hand official re-verification of the 11/17–11/19 rolling horizon, stale home-court-pin refresh, projection/bet surface wiring, requirements-register refresh, integration delivery (claimed 2026-11-16 18:2x UTC)
+
+Branch `arena/bfad39b2-nba1`, based on `main` `add1e74` (tip at claim time = merge of PR #145,
+the §54 midday integration cycle). The platform pins this session to that branch; the
+`session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch
+(deviation logged, as every session before it logged it).
+
+**Board read before claiming (2026-11-16 18:16–18:2x UTC, ground rules 1–6):** §0 ground rules,
+§0b registry, tail delivery records §46–§54, `gh pr list`, `git log origin/main`, Pages API.
+Measured, not inferred: `main` = `add1e74`; working tree clean; **one PR open — #146**
+(`arena/0d7e58e9-nba1`, COORDINATION.md-only §55, opened 18:16:45Z, an independent live fetch-back
+and **11/16** slate cross-check). That session is live and fresh, so its scope is neither taken over
+nor duplicated; this claim is deliberately **disjoint** (the **11/17–11/19** half of the rolling
+horizon, plus standings / team-stats / injury, the stale HCA pin, the surface wiring, and the
+register). No other live claim overlaps this scope.
+
+### 56.1 Task table and file scopes (this session's, and only this session's)
+
+| # | Task | Status | File scope (exclusive) | Notes |
+| --- | --- | --- | --- | --- |
+| B01 | Board claim (banner + §0b row + §5 row + this §56) committed and pushed before any other edit | done (this commit) | `COORDINATION.md` | Claim first, work second (ground rule 4). |
+| B02 | First-hand official re-verification of the **11/17–11/19** rolling horizon: schedule rows (game id, teams, tip, venue), standings, the three official team-stat pages, and the newest official injury edition. Every checked row carries its official URL; discrepancies flagged, never silently corrected. Disjoint from PR #146's 11/16 focus. | in progress | `verify/2026-11-16-bfad39b2/**` (new namespace) | Fail-closed: unconfirmable values stay blank + flagged. |
+| B03 | Refresh the stale home-court pin: re-measure the official home-win rate from the fresh standings and update the horizon's `home_court_anchor` so the pin is current, not the stale 0.5285 (§52 re-measured 0.5204 = 102/196). | in progress | `scripts/build_horizon_v2.py` (HCA anchor input), `data/derived/horizon_lines_v2.json` (regenerated), `data/derived/measured_constants_2026_27.json` | Pin must be visible in the line, not only in a note (R09). |
+| B04 | Projection/bet surface wiring: add the missing index links to `projection.html` and `bet.html`, and separate the projection content from the bet content on `roll.html` with a machine-checked separator so the two surfaces are never mixed (R07). | in progress | `index.html` (nav), `scripts/build_roll_page.py`, `scripts/build_dashboard.py` (nav/CATEGORIES hook only) | Shared chrome, changed here as the integration seat. |
+| B05 | Requirements-register refresh: update the stale gap text for R01 (RFG4 landed), R04 (PDF archive carried by §50), R09 (pin applied + refreshed), R13/R14/R15 (surface state), R32 (fresh verification) with measured evidence and official links; append new flags for anything this pass cannot confirm. | in progress | `data/content/requirements.json`, `data/content/flagged.json` (append-only), `site/pages/requirements.html` (regenerated) | Nothing promoted without evidence. |
+| B06 | Full gate suite green on the final tree: `check_site.py`, `verify_integration.py`, `check_links.py`, `check_rendered.py`, `verify_all.py`, `verify_ledger.py`, render check. | in progress | runs only; fixes only in files this session owns | "Do not merge a broken site." |
+| B07 | Integration PR → `main`: rebase over any concurrent merges, union-style conflict resolution (both sides kept), merge without waiting for approval, confirm GitHub Pages deploys (fetch-back), record PR link + merge SHA + deploy status + irregularities here. | pending | own branch + `COORDINATION.md` (§56 delivery record) | Flagged/unverified items do not block (ground rule 2). |
+
+**Not claimed / read-only for this session:** `docs/**`, `docs/b/**`, `engine/**`, `engine_v2/**`,
+`origination/**`, `command-center/**`, `strategy-lab/**`, `edge-lab/**`, `audit/**`, other
+sessions' `verify/*` namespaces, and PR #146's COORDINATION scope. Cross-scope needs are logged as
+requests (§4), not edited.
+
+### 56.2 Log
+
+| Timestamp (UTC) | Session | Entry |
+| --- | --- | --- |
+| 2026-11-16 18:2x | `arena/bfad39b2-nba1` | Board read; claimed §56 (B01–B07); claim committed and pushed immediately. |
+
+### 56.3 Delivery record
+
+(filled in at B07)
