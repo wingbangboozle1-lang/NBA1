@@ -1,0 +1,19 @@
+standings rows           : 30
+home W-L                 : 102-94  (196 games)
+road W-L                 : 94-102  (196 games)
+cross-checks             : home_wins==road_losses True, road_wins==home_losses True
+rows where HOME+ROAD != W+L (neutral-site games): [('IND', 5, 9, '2-4', '3-4', 1), ('DEN', 7, 4, '2-2', '4-2', 1)]
+
+anchor from THIS read    : 0.5204  (102/196)
+anchor the model used    : 0.5285  (102/193 games)  [the standings-anchor cross-check; the final-score corpus separately measures 0.5155 on 161 games]
+  ...and the top-level anchor field says 0.5285 on 161 games, so the two standings-derived numbers in this file disagree with each other: see F113.
+sigma_margin used        : 17.24
+HCA from this read       : 0.88 points
+HCA published            : 1.23 points
+
+  capture-implied at read  : home 102/193, road wins 91
+delta since that capture : +3 games, +0 home wins, +3 road wins
+explained by the 3 11/15 games that finished after the capture (HOU@WAS, ATL@MIL, OKC@SAC, all away wins): True
+
+RESULT: the published anchor is stale but exactly reconcilable
+NOTE: this script does not rewrite the model input. Re-derivation belongs to scripts/build_horizon_v2.py on a run that reads the official pages (finding F113).
