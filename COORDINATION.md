@@ -4375,3 +4375,35 @@ the `Publish static site to GitHub Pages` run for the head that is on `main` whe
 the sandbox to `https://wingbangboozle1-lang.github.io/NBA1/` returns **HTTP 000** (the proxy is not
 reachable from here), so no live evidence is claimed. Earlier sessions could fetch it; this one
 cannot. That is a sandbox limitation, recorded rather than papered over.
+
+### 42.5 Two pre-existing breakages on `main` found while gating — both fixed here
+
+While rebasing this session onto `main` at `ab8d699` (PR #116, §44's session), the gate suite went
+**red on `main` itself**, not on this session's changes. Both causes are in `scripts/build_dashboard.py`,
+which every page is generated from, so no session could have seen them from its own branch.
+
+**R-42-A — a permanent broken nav link (`verify_integration` + `verify_all` FAIL).**
+Commit `7730466` (session `arena/49f70042-nba1`) added `<a href="model-v2.html">` to the shared
+**topnav**, which is emitted at every page depth. `scripts/build_horizon_page_v2.py` writes that page
+at the **repository root** (`/model-v2.html`) and, before this fix, **nothing invoked it** — so the
+link resolved to `site/pages/model-v2.html`, which never existed. All 25 generated subpages carried
+the broken link. Fix: root the topnav target like the other root pages (`%(repo)smodel-v2.html`) and
+invoke `build_horizon_page_v2.py` as part of the build record below. The root page is now committed
+(38 line rows, 25 pick rows, 14 gate passes, 2 gap rows, 1 anomaly row) and both gates pass.
+
+**R-42-B — a `<span>` substituted into an `href` (`verify_all` FAIL on `site/pages/injuries.html`).**
+The injuries banner did `% (esc(_n.get("revision_time_et")), ...)` inside a string that also builds
+`<a href="%s">`. When the edition file had no revision stamp, `esc(None)` produced `""` and the
+`NA` fallback span was substituted into the **URL slot**, emitting `href="<span class="na" ...`,
+which every link verifier correctly reads as a broken internal link. Fix: substitute the span only
+into text position, and keep URL slots as real URLs.
+
+**Both were on `main` and neither was introduced by this session.** They are recorded here because
+the brief's rule is "do not merge a broken site", and `main` was broken. The gate suite is green on
+this branch's head: `check_site` · `verify_integration` · `check_links` · `check_rendered` ·
+`verify_all` all PASS.
+
+**Note for the next integration session:** the CI `validate` job in `.github/workflows/pages.yml`
+runs `python3 scripts/verify_integration.py` but **not** `scripts/verify_all.py`. R-42-B failed only
+in `verify_all.py`, so it would have shipped through CI. Adding `verify_all.py` to the job would have
+caught it; that edit is in `pages.yml`, which this session does not own, so it is logged as a request.
