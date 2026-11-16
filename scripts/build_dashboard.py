@@ -161,8 +161,8 @@ def page(title, sub, body, depth=1, extra_head=""):
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
-      <a href="model-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
-      <a href="picks.html">Horizon 14–17 (session build)</a>
+      <a href="%(repo)smodel-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
+      <a href="%(repo)spicks.html">Horizon 14–17 (session build)</a>
       <a href="%(repo)spicks.html">Rolling horizon pick file</a>
       <a href="%(navbase)spicks.html">Horizon</a>
       <a href="%(navbase)sstrategies.html">Evidence</a>
@@ -2055,6 +2055,28 @@ def main():
         _rows = _n.get("rows", [])
         _players = sum(1 for r in _rows if r.get("player"))
         _nys = sum(1 for r in _rows if r.get("status") == "NOT YET SUBMITTED")
+        # Editions written by different sessions use different key names for the same
+        # two facts (index_url / edition_index_url, revision_time_et / revision). Read
+        # both rather than rendering "None", and render an em dash - never a link with a
+        # blank or broken href - when neither is present.
+        def _first(doc, *keys):
+            for k in keys:
+                v = doc.get(k)
+                if v:
+                    return v
+            return None
+
+        def _as_text(v, fallback):
+            if v is None:
+                return fallback
+            if isinstance(v, dict):
+                for k in ("edition_id", "revision", "label", "edition", "name"):
+                    if v.get(k):
+                        return str(v[k])
+                return ", ".join("%s %s" % (esc(k), esc(str(x)[:40]))
+                                 for k, x in list(v.items())[:3])
+            return str(v)
+
         diff_note = ""
         diff_path = _newest("injury_diff_*.json")
         if diff_path and os.path.exists(diff_path):
@@ -2072,16 +2094,22 @@ def main():
             diff_note = ("Consecutive-edition diff against %s: %d comparable player rows, "
                          "%d status changes, %d rows the newer edition adds "
                          "(<a href=\"../../data/official/%s\">diff file</a>)."
-                         % (esc(_df.get("from_edition", "the previous stored edition")),
+                         % (esc(_as_text(_df.get("from_edition") or _df.get("from"),
+                                         "the previous stored edition")),
                             _cmp, _chg, _filed, esc(os.path.basename(diff_path))))
+        _idx_url = _first(_n, "index_url", "edition_index_url", "source_index_url")
+        _idx_html = (srclink_url(_idx_url, "official.nba.com") if _idx_url else NA)
+        _pdf_url = _first(_n, "source_url", "pdf_url")
+        _pdf_html = (srclink_url(_pdf_url, "official PDF") if _pdf_url else NA)
         b.insert(0, banner("info", "Newest official edition: report revision and retrieval time",
                            "<p><b>Report revision:</b> %s &nbsp;|&nbsp; <b>retrieved (UTC):</b> %s &nbsp;|&nbsp; "
                            "<b>rows:</b> %d (%d player rows, %d NOT YET SUBMITTED team blocks). "
-                           "Source: <a href=\"%s\">official PDF</a> (index: <a href=\"%s\">official.nba.com</a>).</p>"
+                           "Source: %s (index: %s).</p>"
                            "<p>%s %s</p>"
-                           % (esc(_n.get("revision_time_et")), esc(_n.get("retrieved_utc")),
+                           % (esc(_first(_n, "revision_time_et", "revision", "edition")),
+                              esc(_n.get("retrieved_utc")),
                               len(_rows), _players, _nys,
-                              esc(_n.get("source_url")), esc(_n.get("index_url")),
+                              _pdf_html, _idx_html,
                               diff_note,
                               esc(_n.get("merged_cell_caveat", "")))))
     # Newer official edition seen on the NBA host but NOT yet ingested (flag F93, already on main).
