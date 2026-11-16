@@ -5,6 +5,39 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/acc2fd9e-nba1` (opened 2026-11-16 14:30 UTC — 11/15 settlement of the sealed ledger, fresh midday official re-read of the 11/16–11/18 horizon, rebuild, verification, integration delivery)
+
+Branch `arena/acc2fd9e-nba1`, based on `main` `047103e` (tip at claim time). The platform pins
+this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this
+single pre-named branch (deviation logged, as every earlier session logged it). Full claim, task
+table C01–C09 and file scopes are in **§50** at the tail of this board.
+
+**Board read before claiming (2026-11-16 14:24–14:30 UTC):** §0 ground rules, §0b registry,
+§44–§49 records, the open-PR census and the Pages API. Live state measured, not assumed:
+
+- `main` = `047103e`, pushed 2026-11-16T11:51:16Z. Only the probe workflow has touched `main`
+  since `128e7fe` (merge of PR #137 at 03:44Z).
+- **Two PRs open, both CONFLICTING and both far past ground rule 5's 60-minute threshold:**
+  **PR #130** (`arena/c348e6c7-nba1`, 259 files / +118,450 / −2,441, last commit 02:51Z —
+  **11 h 33 min idle**) and **PR #136** (`arena/3242d896-nba1`, 28 files / +4,610 / −2,245,
+  last commit 03:37Z — **10 h 47 min idle**). Disposition is logged in §50.2; neither is merged
+  by this session, and the reason is measured rather than assumed.
+- No other session has committed since 04:24Z. **This session therefore takes the integration
+  seat**, and says so explicitly: shared outputs (`index.html`, `site/**`, `data/content/**`,
+  `data/derived/**`) are rebuilt here because nobody else is rebuilding them.
+- Pages API at claim time: `status: built`, `build_type: legacy`. The last
+  `pages build and deployment` run (43861367442) **succeeded** 2 h before this claim, so the
+  F107 deploy race recorded in §48.7 is no longer actively cancelling builds. A fetch-back of
+  the live host was performed at claim time and returns the current 25-game 11/16–11/18 build
+  with 103 open flags — i.e. the live host and `main` agree, which §48.8 could not establish.
+  F107 stays open because the *structural* cause (two deploy paths) is unchanged; it is no
+  longer *blocking*.
+- `data/settlement/` holds `settlement_2026-11-14.json` only. **The 2026-11-15 slate has never
+  been settled.** The last official capture of that date (`data/raw/_capture_results_2026-11-15.json`,
+  02:45Z) shows **7 of 9 Final with 0022600243 and 0022600244 still live**. Eleven and a half
+  hours later every one of those games has ended, so C01 (settle 11/15 from official finals) is
+  the single highest-value task on this board and this session claims it.
+
 ## 🔑 ACTIVE CLAIM — session `arena/d361b9a5-nba1` (opened 2026-11-16 02:15 UTC — takeover of stale PR #117 (§46 RFG4 parsers/promoter/injury-PDF diffs, idle >75 min), first-hand official verification pass, gates, delivery)
 
 Branch `arena/d361b9a5-nba1`, based on `main` `f6b7676` (tip at claim time = merge of PR #120).
@@ -273,6 +306,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/49f70042-nba1` | `arena/49f70042-nba1` | 2026-11-15 23:40 UTC | 2026-11-15 late cycle: 11/15 settlement, pinned HCA, two-estimator disagreement headline, travel + minutes-redistribution context, injury-PDF archive, roll to 11/16-11/19 (§41). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/754e9e54-nba1` | `arena/754e9e54-nba1` | 2026-11-16 (this session) | Full-cycle build: projection/bet site split, two independent estimators with disagreement headline, HCA pinned to measured home-win rate, luck z-score per team, arena-coordinate travel table, player game logs for injured players, market-anchored prior, possessions × ppp total model, refresh pipeline with freshness/provenance gates, sealed-ledger settlement at game-day end, pre-registration freeze, tamper-evident ledger, injury-PDF archive + diff, per-game result feed with quarter scores, clean landing page + category subpages, GitHub Pages publish (§44). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/2823d556-nba1` | `arena/2823d556-nba1` | 2026-11-16 02:10 UTC | **Deploy-queue unblock** (the probe workflow no longer runs on every push; runtime bounded), **CI gap** (`verify_all.py` added to the validate job — open request R-42-B / R-47-2), **live official re-read at 02:17–02:27Z** proving (a) nba.com *is* reachable from a session's fetch channel, overturning flag F7's reachability premise, (b) the 11/15 slate was **not** settleable, and (c) the official inputs behind the published 11/16 horizon are missing 5 completed games / 10 team records (§47). Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
+| `arena/acc2fd9e-nba1` | `arena/acc2fd9e-nba1` | 2026-11-16 14:30 UTC | **Integration seat, midday 11/16 cycle (§50)**: settle the 2026-11-15 slate from official finals (never settled; C01), fresh first-hand official re-read of the 11/16-11/18 horizon, standings, the three team-stat tables, the newest injury edition + status diff and player game logs (C02-C06), rebuild + re-verify the published site (C07-C08), PR → `main` → Pages (C09). Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 ---
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
@@ -5471,3 +5505,56 @@ another build cycle, and re-check with
 `gh api /repos/wingbangboozle1-lang/NBA1/pages --jq .status` (should read `built`) plus a
 fetch-back that shows **25 games (16–18 Nov)** and **103 open flags**. Until then, verify
 against the `main` tree, not the live host.
+
+---
+
+## 50. Session `arena/acc2fd9e-nba1` — midday 2026-11-16 cycle: settle 11/15, fresh official re-read, rebuild, deliver (CLAIMED 2026-11-16 14:30 UTC)
+
+Branch `arena/acc2fd9e-nba1`, base `main` `047103e`. Platform pins this session to its branch;
+the `session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch
+(deviation logged, as every earlier session logged it).
+
+### 50.0 Why this session exists, in one measured paragraph
+
+At claim time the repository published a 25-game 11/16–11/18 horizon built from an official
+capture taken at **02:12–02:45Z on 2026-11-16**. The 2026-11-15 slate had **seven of nine games
+final** at that moment and was therefore correctly left unsettled (§48.6, F-47-B). Eleven and a
+half hours later it is 14:24Z and every 11/15 game has ended, so the two things the brief
+demands and the board does not yet have are (a) **one settled row per 11/15 game** in the
+official per-game result feed, and (b) **a settlement stamp on the sealed ledger**. Everything
+else in this session follows from that: a fresh capture is worthless to the model while the
+result feed it is verified against is a day behind.
+
+### 50.1 Task table
+
+| # | Task | Status | File scope owned by this session |
+| --- | --- | --- | --- |
+| C01 | Settle 2026-11-15 from official finals; one row per game (date, teams, final score, quarter scores); verify the quarters sum to the printed final | in progress | `data/official/results_2026-11-15_settled_acc2fd9e.json`, `data/settlement/settlement_2026-11-15.json`, `data/ledger/ledger.json` |
+| C02 | Fresh official schedule read for the rolling slate (11/16, 11/17, 11/18) | in progress | `data/official/schedule_2026-11-16_to_18_acc2fd9e.json` |
+| C03 | Fresh official standings read; re-measure the home-win rate that HCA is pinned to | in progress | `data/official/standings_2026-11-16_1430Z_acc2fd9e.json` |
+| C04 | Re-read the three official team-stat pages (traditional, opponent, advanced) and re-cut the model inputs | in progress | `data/official/teams_{traditional,opponent,advanced}_2026-11-16_1430Z_acc2fd9e.json` |
+| C05 | Capture the newest official injury PDF with its timestamp; diff consecutive reports for status changes | in progress | `data/official/injury_2026-11-16_*_acc2fd9e.json`, `data/injury_reports/2026-11-16_*/` |
+| C06 | Per-player game logs for the players who appear on the captured injury report | in progress | `data/official/player_game_logs_2026-11-16_acc2fd9e.json` |
+| C07 | Rebuild the derived layer and the site from the fresh captures | in progress | `data/derived/**`, `site/**`, `command-center/**`, `index.html` |
+| C08 | Run every gate in the repository and fix what they find | in progress | gate outputs recorded in §50.8 |
+| C09 | PR → `main`, merge, confirm Pages deploy, record the result | in progress | PR link in §50.9 |
+
+### 50.2 Disposition of the two open PRs (measured at claim time, decided here, logged rather than silently skipped)
+
+| PR | Owner | Measured state | Disposition |
+| --- | --- | --- | --- |
+| **#130** | `arena/c348e6c7-nba1` | `mergeable: CONFLICTING`, 259 files, **+118,450 / −2,441**, last commit `610b4af` at 02:51:25Z — **11 h 33 min idle at claim time** | **Not merged by this session.** It is takeover-eligible under ground rule 5, but it is a full second re-cut of the derived layer (`data/derived/power_ratings_2026_27.json`, `team_ratings_2026_27.json`, `rotation_2026_27.json`, `horizon_*_801ba27f.json` …) whose content overlaps `data/derived/horizon_lines_v2.json`, the file the live site renders. Merging a conflicting 118k-line re-cut that re-cuts the same numbers this session is re-cutting from fresher official reads would produce two answers to the same question on one site. **Logged as a reviewer decision, not executed.**
+| **#136** | `arena/3242d896-nba1` | `mergeable: CONFLICTING`, 28 files, +4,610 / −2,245, last commit `b8461ae` at 03:37Z — **10 h 47 min idle** | **Not merged by this session.** Its substantive payload is a set of `data/raw/_capture_*.json` and injury PDFs captured at ~03:37Z, all of which this session supersedes with captures eleven hours newer. Merging stale captures over fresh ones would move the site backwards. Its one non-capture finding — that the Pages fix needs a repository admin — is already on `main` as F107 (§48.7). **Logged as superseded-in-place; left open for its owner.**
+
+Both are published on the site's Flagged for Review page so the reviewer can overrule this
+session. Neither blocks C01–C09.
+
+### 50.3 What this session will NOT do (so it can be checked)
+
+- It will not re-fit home-court advantage. HCA stays pinned to the measured official home-win
+  rate (brief requirement), and C03 re-measures it from the fresh standings.
+- It will not originate a line for a game that has already tipped, or for a date beyond three
+  days ahead.
+- It will not fill a value an official page does not print. A missing value stays blank and
+  gains a flag.
+- It will not edit another session's `verify/*`, `audit/*` or `engine_v2/*` namespace.
