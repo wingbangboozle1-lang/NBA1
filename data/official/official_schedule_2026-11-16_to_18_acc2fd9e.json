@@ -1,0 +1,589 @@
+{
+ "title": "Official NBA schedule 2026-11-16 .. 2026-11-18, re-read from the official games pages",
+ "captured_by": "arena/acc2fd9e-nba1",
+ "captured_utc": "2026-11-16T15:15Z..15:19Z",
+ "captured_utc_basis": "a bracket: the three pages were read after this branch's previous commit (8b48742, 2026-11-16T15:14:51Z) and before this file was written. Both ends are artefacts in the repository, not estimates.",
+ "sources": {
+  "2026-11-16": "https://www.nba.com/games?date=2026-11-16",
+  "2026-11-17": "https://www.nba.com/games?date=2026-11-17",
+  "2026-11-18": "https://www.nba.com/games?date=2026-11-18"
+ },
+ "cross_check_sources": {
+  "standings": "https://www.nba.com/standings",
+  "injury_report": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_30AM.pdf"
+ },
+ "tip_time_policy": "tip time taken from the official games page for the date; cross-checked against the official injury report where it prints one; venue/city carried from official_schedule_2026-11-15_to_19.json because the games pages do not print them",
+ "counts": {
+  "rows": 25,
+  "per_day": {
+   "2026-11-16": 8,
+   "2026-11-17": 5,
+   "2026-11-18": 12
+  }
+ },
+ "verification": {
+  "game_ids": "contiguous run 0022600245 .. 0022600269, each copied out of that game's own official link on the date page",
+  "per_day_matches_page_calendar": true,
+  "team_record_cells_checked_against_standings": 50,
+  "tip_times_checked_against_injury_report": 13,
+  "tip_conflicts": []
+ },
+ "caveats": [
+  "The official injury PDF prints game times on a 12-hour clock with the meridiem omitted ('07:00 (ET)' is 7:00 PM). Read as a 24-hour clock all 13 times it covers disagree with the games pages by exactly twelve hours. The conversion applied here is documented in the docstring of scripts/capture_2026_11_16_schedule.py, and the value stored in tip_et_injury_pdf is the document's own string, unaltered.",
+  "Venue and city are not printed on the games pages; they are carried from official_schedule_2026-11-15_to_19.json, which took them from the official per-game cards, and each row names that file in venue_source.",
+  "Records printed on the games pages are the standings through 2026-11-15; they are cross-checked cell by cell against standings_2026-11-16_1445Z_acc2fd9e.json."
+ ],
+ "conflicts": [],
+ "anomalies": [
+  {
+   "id": "A-50-1",
+   "item": "POR@MIN is scheduled on two consecutive nights with two different game ids (0022600250 on 2026-11-16 and 0022600254 on 2026-11-17), both at Target Center",
+   "verification": "both ids appear on their own date pages, each linking to its own official game page; the 11/16 09:30 AM injury edition lists POR@MIN under both 11/16/2026 and 11/17/2026",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/games?date=2026-11-17",
+    "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_30AM.pdf"
+   ],
+   "effect": "the two teams play each other twice in two nights; rest / back-to-back and 3-in-4 are computed from the official dates as printed, so both games count"
+  },
+  {
+   "id": "A-50-2",
+   "item": "GSW@NOP on 2026-11-16: the official injury report itself REVISED this game's tip time between editions. The 11/15 06:15 PM edition prints 09:00 (ET); the 11/15 09:00 PM edition and this window's 11/16 09:30 AM edition both print 08:00 (ET), which is also what the official games page for 2026-11-16 shows.",
+   "verification": "read directly out of the three stored edition files: data/official/injury_2026-11-15_0615PM_arena49f70042.json (09:00 ET), data/official/injury_2026-11-15_0900PM_dfef26dc.json (08:00 ET) and data/official/injury_2026-11-16_0930AM_acc2fd9e.json (08:00 ET), against this read of https://www.nba.com/games?date=2026-11-16 (8:00 PM ET)",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf",
+    "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf",
+    "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_09_30AM.pdf"
+   ],
+   "effect": "flag F101 (a tip-time disagreement on this game) is resolved in favour of 8:00 PM ET: three independent official sources now agree, and only the value carried from the older nba.com/schedule read still says 9:00 PM. The model's tip time for this game is unchanged at 8:00 PM ET, so no line moved."
+  }
+ ],
+ "rows": [
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600245",
+   "away": "ORL",
+   "home": "BOS",
+   "matchup": "ORL@BOS",
+   "venue": "TD Garden",
+   "city": "Boston, MA",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "7:00 PM ET",
+   "tip_et_primary": "7:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-16 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": "07:00 (ET)",
+   "records_as_printed": {
+    "away": "5-7",
+    "home": "11-2"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/magic-vs-celtics-0022600245"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600246",
+   "away": "CHI",
+   "home": "CLE",
+   "matchup": "CHI@CLE",
+   "venue": "Rocket Arena",
+   "city": "Cleveland, OH",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "7:00 PM ET",
+   "tip_et_primary": "7:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-16 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": "07:00 (ET)",
+   "records_as_printed": {
+    "away": "3-9",
+    "home": "7-7"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/bulls-vs-cavaliers-0022600246"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600247",
+   "away": "MEM",
+   "home": "WAS",
+   "matchup": "MEM@WAS",
+   "venue": "Capital One Arena",
+   "city": "Washington, DC",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "7:00 PM ET",
+   "tip_et_primary": "7:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-16 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": "07:00 (ET)",
+   "records_as_printed": {
+    "away": "9-4",
+    "home": "4-10"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/grizzlies-vs-wizards-0022600247"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600248",
+   "away": "PHI",
+   "home": "BKN",
+   "matchup": "PHI@BKN",
+   "venue": "Barclays Center",
+   "city": "Brooklyn, NY",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "7:30 PM ET",
+   "tip_et_primary": "7:30 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-16 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": "07:30 (ET)",
+   "records_as_printed": {
+    "away": "11-3",
+    "home": "3-9"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/sixers-vs-nets-0022600248"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600249",
+   "away": "HOU",
+   "home": "MIA",
+   "matchup": "HOU@MIA",
+   "venue": "Kaseya Center",
+   "city": "Miami, FL",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "7:30 PM ET",
+   "tip_et_primary": "7:30 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-16 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": "07:30 (ET)",
+   "records_as_printed": {
+    "away": "11-3",
+    "home": "7-6"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/rockets-vs-heat-0022600249"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600250",
+   "away": "POR",
+   "home": "MIN",
+   "matchup": "POR@MIN",
+   "venue": "Target Center",
+   "city": "Minneapolis, MN",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "8:00 PM ET",
+   "tip_et_primary": "8:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-16 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": "08:00 (ET)",
+   "records_as_printed": {
+    "away": "9-3",
+    "home": "9-4"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/blazers-vs-timberwolves-0022600250"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600251",
+   "away": "GSW",
+   "home": "NOP",
+   "matchup": "GSW@NOP",
+   "venue": "Smoothie King Center",
+   "city": "New Orleans, LA",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "8:00 PM ET",
+   "tip_et_primary": "8:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-16 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": "08:00 (ET)",
+   "records_as_printed": {
+    "away": "8-5",
+    "home": "4-10"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/warriors-vs-pelicans-0022600251"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600252",
+   "away": "PHX",
+   "home": "DEN",
+   "matchup": "PHX@DEN",
+   "venue": "Ball Arena",
+   "city": "Denver, CO",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "9:00 PM ET",
+   "tip_et_primary": "9:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-16 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": "09:00 (ET)",
+   "records_as_printed": {
+    "away": "5-7",
+    "home": "7-4"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/suns-vs-nuggets-0022600252"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600253",
+   "away": "NYK",
+   "home": "TOR",
+   "matchup": "NYK@TOR",
+   "venue": "Scotiabank Arena",
+   "city": "Toronto, ON",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "7:30 PM ET",
+   "tip_et_primary": "7:30 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-17 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": "07:30 (ET)",
+   "records_as_printed": {
+    "away": "7-6",
+    "home": "5-8"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/knicks-vs-raptors-0022600253"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "away": "POR",
+   "home": "MIN",
+   "matchup": "POR@MIN",
+   "venue": "Target Center",
+   "city": "Minneapolis, MN",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "8:00 PM ET",
+   "tip_et_primary": "8:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-17 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": "08:00 (ET)",
+   "records_as_printed": {
+    "away": "9-3",
+    "home": "9-4"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/blazers-vs-timberwolves-0022600254"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "away": "DET",
+   "home": "SAS",
+   "matchup": "DET@SAS",
+   "venue": "Frost Bank Center",
+   "city": "San Antonio, TX",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "8:00 PM ET",
+   "tip_et_primary": "8:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-17 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": "08:00 (ET)",
+   "records_as_printed": {
+    "away": "8-4",
+    "home": "12-2"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/pistons-vs-spurs-0022600255"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600256",
+   "away": "CHA",
+   "home": "LAL",
+   "matchup": "CHA@LAL",
+   "venue": "Crypto.com Arena",
+   "city": "Los Angeles, CA",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "11:00 PM ET",
+   "tip_et_primary": "11:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-17 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": "11:00 (ET)",
+   "records_as_printed": {
+    "away": "4-9",
+    "home": "12-2"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/hornets-vs-lakers-0022600256"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "away": "UTA",
+   "home": "LAC",
+   "matchup": "UTA@LAC",
+   "venue": "Intuit Dome",
+   "city": "Inglewood, CA",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "10:30 PM ET",
+   "tip_et_primary": "10:30 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-17 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": "10:30 (ET)",
+   "records_as_printed": {
+    "away": "1-13",
+    "home": "4-8"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/jazz-vs-clippers-0022600257"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600258",
+   "away": "MEM",
+   "home": "CLE",
+   "matchup": "MEM@CLE",
+   "venue": "Rocket Arena",
+   "city": "Cleveland, OH",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "7:00 PM ET",
+   "tip_et_primary": "7:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-18 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": null,
+   "records_as_printed": {
+    "away": "9-4",
+    "home": "7-7"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/grizzlies-vs-cavaliers-0022600258"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600259",
+   "away": "HOU",
+   "home": "IND",
+   "matchup": "HOU@IND",
+   "venue": "Gainbridge Fieldhouse",
+   "city": "Indianapolis, IN",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "7:00 PM ET",
+   "tip_et_primary": "7:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-18 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": null,
+   "records_as_printed": {
+    "away": "11-3",
+    "home": "5-9"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/rockets-vs-pacers-0022600259"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600260",
+   "away": "MIL",
+   "home": "MIA",
+   "matchup": "MIL@MIA",
+   "venue": "Kaseya Center",
+   "city": "Miami, FL",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "7:00 PM ET",
+   "tip_et_primary": "7:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-18 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": null,
+   "records_as_printed": {
+    "away": "1-13",
+    "home": "7-6"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/bucks-vs-heat-0022600260"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600261",
+   "away": "PHI",
+   "home": "ORL",
+   "matchup": "PHI@ORL",
+   "venue": "Kia Center",
+   "city": "Orlando, FL",
+   "venue_source": "https://www.nba.com/schedule",
+   "tip_et": "7:00 PM ET",
+   "tip_et_primary": "7:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-18 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": null,
+   "records_as_printed": {
+    "away": "11-3",
+    "home": "5-7"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/sixers-vs-magic-0022600261"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600262",
+   "away": "CHI",
+   "home": "BKN",
+   "matchup": "CHI@BKN",
+   "venue": "Barclays Center",
+   "city": "Brooklyn, NY",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "7:30 PM ET",
+   "tip_et_primary": "7:30 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-18 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": null,
+   "records_as_printed": {
+    "away": "3-9",
+    "home": "3-9"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/bulls-vs-nets-0022600262"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600263",
+   "away": "WAS",
+   "home": "TOR",
+   "matchup": "WAS@TOR",
+   "venue": "Scotiabank Arena",
+   "city": "Toronto, ON",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "7:30 PM ET",
+   "tip_et_primary": "7:30 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-18 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": null,
+   "records_as_printed": {
+    "away": "4-10",
+    "home": "5-8"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/wizards-vs-raptors-0022600263"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600264",
+   "away": "DET",
+   "home": "NOP",
+   "matchup": "DET@NOP",
+   "venue": "Smoothie King Center",
+   "city": "New Orleans, LA",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "8:00 PM ET",
+   "tip_et_primary": "8:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-18 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": null,
+   "records_as_printed": {
+    "away": "8-4",
+    "home": "4-10"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/pistons-vs-pelicans-0022600264"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600265",
+   "away": "ATL",
+   "home": "OKC",
+   "matchup": "ATL@OKC",
+   "venue": "Paycom Center",
+   "city": "Oklahoma City, OK",
+   "venue_source": "https://www.nba.com/schedule",
+   "tip_et": "8:00 PM ET",
+   "tip_et_primary": "8:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-18 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": null,
+   "records_as_printed": {
+    "away": "8-6",
+    "home": "9-5"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/hawks-vs-thunder-0022600265"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600266",
+   "away": "BOS",
+   "home": "DEN",
+   "matchup": "BOS@DEN",
+   "venue": "Ball Arena",
+   "city": "Denver, CO",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "9:30 PM ET",
+   "tip_et_primary": "9:30 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-18 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": null,
+   "records_as_printed": {
+    "away": "11-2",
+    "home": "7-4"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/celtics-vs-nuggets-0022600266"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600267",
+   "away": "GSW",
+   "home": "DAL",
+   "matchup": "GSW@DAL",
+   "venue": "American Airlines Center",
+   "city": "Dallas, TX",
+   "venue_source": "https://www.nba.com/schedule",
+   "tip_et": "8:00 PM ET",
+   "tip_et_primary": "8:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-18 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": null,
+   "records_as_printed": {
+    "away": "8-5",
+    "home": "7-7"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/warriors-vs-mavericks-0022600267"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600268",
+   "away": "UTA",
+   "home": "LAL",
+   "matchup": "UTA@LAL",
+   "venue": "Crypto.com Arena",
+   "city": "Los Angeles, CA",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "10:00 PM ET",
+   "tip_et_primary": "10:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-18 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": null,
+   "records_as_printed": {
+    "away": "1-13",
+    "home": "12-2"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/jazz-vs-lakers-0022600268"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600269",
+   "away": "PHX",
+   "home": "SAC",
+   "matchup": "PHX@SAC",
+   "venue": "Golden 1 Center",
+   "city": "Sacramento, CA",
+   "venue_source": "official per-game card (data/raw/official_schedule_capture_2026-11-15.json)",
+   "tip_et": "10:00 PM ET",
+   "tip_et_primary": "10:00 PM ET",
+   "tip_et_primary_source": "official games page https://www.nba.com/games?date=2026-11-18 (re-read 2026-11-16T15:15Z..15:19Z)",
+   "tip_et_schedule_page": null,
+   "tip_et_injury_pdf": null,
+   "records_as_printed": {
+    "away": "5-7",
+    "home": "1-12"
+   },
+   "schedule_page_url": "https://www.nba.com/schedule",
+   "source_url": "https://www.nba.com/game/suns-vs-kings-0022600269"
+  }
+ ]
+}
