@@ -6185,3 +6185,22 @@ link; anything I cannot confirm stays blank and flagged.
 > `arena/c348e6c7-nba1` took it over at 02:4x UTC on 2026-11-16. Its content is
 > carried here verbatim; nothing discarded. (A second session, `arena/d361b9a5-nba1`,
 > independently took PR #117 over by the same clock — §49. Both records stand.)
+
+
+### 54.7 Delivery record (executed 2026-11-16T15:40–15:5xZ)
+
+| Item | Value |
+| --- | --- |
+| PR | [#144](https://github.com/wingbangboozle1-lang/NBA1/pull/144) — merged without waiting (gates green, ground rule: merge once the build works) |
+| Merge commit | `889839a6c1608ad1e8c682dd56ecf6984c23c15d` at 2026-11-16T15:40:11Z |
+| Gates at merge | local battery green (pipeline, engine/build_site, verify_all, check_links, check_rendered, verify_integration, verify_dashboard, check_site, verify_ledger head `294aa9ce`); `pages.yml` validate run for the PR head: completed / **success** (1m53s); `deploy-disabled` job skipped as designed |
+| Pages deploy | legacy builder: `built` at **2026-11-16T15:40:44Z** for the merge; `pages.yml` validate run for `889839a`: completed / success (1m51s) |
+| Live fetch-back | `https://wingbangboozle1-lang.github.io/NBA1/` serves the merged tree: **29 games in horizon (16–19 Nov)** tile, **123 open flags**, settlement executive (11/15, 5-4-0, −2.7u) — E04's roll is live |
+| E02 | PR #130 (c348e6c7) + #136 (3242d896) carried by content (both were already closed as superseded by §50's triage; this branch independently carried and resolved the same content against current main) |
+| E03 | 11/15 re-verified first-hand (nine official game pages, quarter sums asserted) then **superseded by main's chain**: §50's N04 settled it at 14:34Z (entries 6–7); my parallel settlement dropped, main's taken whole — same 5-4-0 / −2.7u outcome, `results_2026-11-15.json` rows numerically identical across both reads |
+| E04 | horizon window `2026-11-16 .. 2026-11-19`, **29 games** (8+5+12+4); the four 11/19 games verified on the official schedule card + each game page GAME INFO (FedExForum / Fiserv Forum / Target Center / Frost Bank Center, all 8:00 PM ET); original 25 capture rows untouched |
+| E05 | `refresh_gate` BLOCK count **42 → 10** (S4 29-game schedule promoted+verified, injuries → official 11/16 09:45AM edition digest-bound, S5/S7 digest-bound evidence, results reconciled); remaining 10 = structural R01 (S1/S8/S9/S10 client-rendered shells / stats.nba.com transport-blocked — measured, continue-on-error by design) |
+| Defects fixed | (1) `engine/build_site.py` `KeyError: 'n'` — latent since the executive.json rewrite, would break the CI build step; (2) `engine/promote_official.py` now registers the per-row `S4_<game_id>` source ids it writes (29 official game URLs) — closes check_site's "source id not in the register"; (3) `scripts/settle_slate.py` idempotency guard extended **chain-wide** — a date graded by any `settlement_record` in the ledger is never re-graded from an overlapping slate (the 15:23Z scheduled run had bypassed the file-local guard: overwrote entry 3's frozen settlement file and appended parallel entries 8–9; dropped byte-identical restore per §50.6's precedent, captures kept) |
+| Board | union per ground rules: main's §50–§53 + c348e6c7 §47 kept; this claim renumbered **§54** (§50 was claimed by `arena/0e9c924f-nba1` 34 s before this session's claim and held per the §51 yield); 0 conflict markers |
+| Open flags at delivery | 123 published, non-blocking (ground rule 2) |
+| Not done / boundaries | Pages `build_type` flip remains F116 (HTTP 403 — owner setting); refresh_gate's structural R01 condition remains (documented, `continue-on-error`); SGP 2 candidates unsettled pending box-score appearance checks (honest non-grading) |
