@@ -63,11 +63,11 @@ def load(path):
 # (label, filename under site/pages, blurb)
 CATEGORIES = [
     ("HORIZON", None, "The next three days of NBA games and the lines we originate for them."),
-    ("Rolling Slate", "roll.html", "The current 3-day window re-cut from a fresh official capture: the two estimators and their disagreement, rotation availability, rest and back-to-back, and parlays priced with the measured rho beside the naive product."),
+    ("Rolling Slate", "roll.html", "The current 3-day window re-cut from a fresh official capture: the two estimators and their disagreement, rotation availability, rest and back-to-back, and the gate state of the bet surface. Projection only (R07): picks live behind the gate."),
     ("Projection Surface", "projection.html", "Safe to publish now: originated lines, two estimators with their disagreement as the headline, rest/travel and rotation context. Model output, not a recommendation."),
-    ("Bet Surface (gated)", "bet-surface.html", "GATED. Paper picks, parlays priced with the measured rho beside the naive product, and the gate state that blocks funding. Never mixed with the projection surface."),
+    ("Bet Surface (gated)", "bet-surface.html", "GATED, fail-closed: the four computed gates, and picks only while all four pass. Currently closed by the validation and sample-floor gates, so no picks are shown. Never mixed with the projection surface."),
     ("Bet surface (gate state)", "bet.html", "The canonical gated surface built by scripts/build_surfaces.py: the four computed gates (validation, sample floor, pre-registration, ledger integrity) and picks only when all four pass. Fail-closed; shows no picks while any gate is closed. Machine-checked as separate from the projection surface."),
-    ("Lines &amp; Picks", "picks.html", "Originated spread, total and fair-moneyline for every game in the horizon, and the gated paper picks built on them."),
+    ("Lines &amp; Picks", "picks.html", "The two-estimator disagreement as the headline for every game in the horizon, the blend underneath, rotation availability as its own column, and the gated paper picks built on them."),
     ("Player Props", "props.html", "Per-player projections and prop combinations, with the minutes coverage stated next to every number."),
     ("Prop Variance &amp; Rotation", "prop-variance.html", "Game-to-game dispersion measured from official game logs: the uncertainty behind every prop, the minutes-to-production elasticity, and what the injury report changed since the lines were cut."),
     ("Injuries &amp; Rotation", "injuries.html", "The official injury report, the rotation minutes it implies, and the measured production impact."),
@@ -177,9 +177,8 @@ def page(title, sub, body, depth=1, extra_head=""):
       <span class="brand-txt">Originated lines &amp; strategy lab</span>
     </a>
     <nav class="topnav">
-      <a href="%(repo)smodel-v2.html">Model v2 — 15–19 Nov (disagreement-first)</a>
-      <a href="picks.html">Horizon 14–17 (session build)</a>
-      <a href="%(repo)spicks.html">Rolling horizon pick file</a>
+      <a href="%(repo)smodel-v2.html">Model v2 (disagreement-first)</a>
+      <a href="%(repo)spicks.html">Legacy horizon picks file</a>
       <a href="%(navbase)spicks.html">Horizon</a>
       <a href="%(navbase)sstrategies.html">Evidence</a>
       <a href="%(navbase)sdecisions.html">Decisions</a>
@@ -1899,9 +1898,91 @@ def main():
     built["index.html"] = landing
 
     # === picks =============================================================
-    b = [h2("Originated lines for every game in the horizon",
-            "Spread, total and fair moneyline originated from official team ratings, shown against the naive "
-            "reference line the model has to beat.")]
+    # §61 W03 (R13 / R15 / F83): the HEADLINE on this page is the disagreement
+    # between the two independent estimators; the blended line and the legacy
+    # single-model line are published underneath it, never on top.  Rotation
+    # availability gets its own column on every table below, read from the
+    # official injury edition via data/derived/horizon_lines_v2.json.
+    hz2 = load(os.path.join(ROOT, "data", "derived", "horizon_lines_v2.json"))
+    hz2_games = sorted(hz2.get("games", []), key=lambda g: (g["date"], g["matchup"]))
+    hz2_by = {(g["date"], g["matchup"]): g for g in hz2_games}
+    try:
+        v2pk_doc = load(os.path.join(ROOT, "data", "derived", "horizon_picks_v2.json"))
+        v2pk_by = {(p["date"], p["matchup"]): p for p in v2pk_doc.get("picks", [])}
+    except Exception:
+        v2pk_by = {}
+
+    def _rot_side(x):
+        """One team's rotation-availability cell from the v2 row."""
+        if not x:
+            return NA
+        team = esc(x.get("team") or "?")
+        status = str(x.get("status") or "")
+        pct = x.get("availability_pct")
+        if pct is None:
+            if "NOT YET SUBMITTED" in status:
+                return "%s: &mdash; (NOT YET SUBMITTED)" % team
+            if "not captured" in status:
+                return "%s: &mdash; (official per-player minutes not captured)" % team
+            note = str(x.get("note") or "")
+            if note:
+                return "%s: &mdash; (%s)" % (team, esc(note))
+            return "%s: &mdash; (%s)" % (team, esc(status or "unknown"))
+        bits = []
+        if x.get("rotation_out_count"):
+            bits.append("%d rotation Out" % x["rotation_out_count"])
+        if x.get("rotation_questionable_count"):
+            bits.append("%d rotation Questionable" % x["rotation_questionable_count"])
+        extra = (" (%s)" % ", ".join(bits)) if bits else ""
+        return "%s: %.0f%%%s" % (team, pct, extra)
+
+    def rot_cell(date, matchup):
+        g = hz2_by.get((date, matchup))
+        if not g:
+            return NA
+        return ("H " + _rot_side(g.get("rotation_availability_home"))
+                + " &middot; A " + _rot_side(g.get("rotation_availability_away")))
+
+    # ---- headline: two-estimator disagreement -----------------------------
+    b = [h2("Estimator disagreement &mdash; the headline signal",
+            "Two independent estimators of every game (A: possession &times; points-per-possession; "
+            "B: points-scored/points-allowed with opponent and pace adjustment) are built from the "
+            "official team tables. Their disagreement |P(A) &minus; P(B)| in percentage points is the "
+            "primary confidence signal: small means the two constructions agree, large means the line "
+            "is not safe to publish. The blended line is published underneath, never on top.")]
+    drows = []
+    for g in hz2_games:
+        bl = g.get("blend") or {}
+        pk = v2pk_by.get((g["date"], g["matchup"]))
+        drows.append([
+            esc(g["date"]), '<b>%s</b>' % esc(g["matchup"]),
+            num((g.get("estimator_a") or {}).get("margin"), 1),
+            num((g.get("estimator_b") or {}).get("margin"), 1),
+            "<b>%s</b>" % num(bl.get("disagreement_pp"), 2),
+            num(bl.get("margin_blend"), 1),
+            num(bl.get("total_blend"), 1),
+            esc(pk.get("gate_verdict")) if pk else NA,
+            srclink_url(g.get("schedule_source_url") or g.get("source_url"), "game"),
+        ])
+    b.append(table(
+        ["Date", "Matchup", "Est A margin", "Est B margin",
+         "&Delta; pp (HEADLINE)", "Blend margin (underneath)", "Blend total",
+         "Per-pick gate", "Source"],
+        drows,
+        note="Sign convention: margins are projected HOME MARGIN (home minus away). "
+             "&Delta; pp = |P(home win, estimator A) &minus; P(home win, estimator B)|, the "
+             "disagreement published as the primary confidence signal (requirement: publish the "
+             "disagreement as the headline and the blend underneath). The per-pick gate is the "
+             "model's own gate set (max disagreement 4.0 pp, min model probability 0.55, luck band) "
+             "run in scripts/build_horizon_v2.py; every pick is zero-stake MODEL OUTPUT because no "
+             "strategy has passed the strategy validation gates. Source: official schedule card per "
+             "game, read for this window."))
+
+    # ---- underneath: the legacy single-model line, now with rotation -------
+    b.append(h2("Underneath: the originated line (single model, for reference)",
+                "The same games as cut by the single-model origination, kept for comparison. It is "
+                "no longer the headline: where it disagrees with the blend, flag F26 records the "
+                "difference rather than hiding it."))
     rows = []
     for r in lines:
         rows.append([
@@ -1914,6 +1995,7 @@ def main():
             num(r["p_home_win"], 3),
             esc(r["ml_home_fair"]) if r["ml_home_fair"] is not None else NA,
             esc(r["ml_away_fair"]) if r["ml_away_fair"] is not None else NA,
+            (rot_cell(r["date"], r["matchup"]) if hz2_by.get((r["date"], r["matchup"])) else NA),
             ("H " + num(r["home_rest_days"], 0) + " / A " + num(r["away_rest_days"], 0))
             if (r["home_rest_days"] is not None or r["away_rest_days"] is not None) else NA,
             esc(r["home_report_status"]), esc(r["away_report_status"]),
@@ -1922,13 +2004,18 @@ def main():
     b.append(table(
         ["Date", "Tip ET", "Matchup", "Away", "Home", "Venue", "Ref home margin", "Model home margin",
          "Spread edge", "Ref total", "Model total", "Total edge", "P(home)", "Fair ML home",
-         "Fair ML away", "Rest days H/A", "Home injury status", "Away injury status", "Source"],
+         "Fair ML away", "Rotation availability (own column)", "Rest days H/A",
+         "Home injury status", "Away injury status", "Source"],
         rows,
         note="SIGN CONVENTION: 'Ref spread' and 'Model spread' are both the projected HOME MARGIN (home minus away), "
              "not a book-style home spread. A NEGATIVE value means the home team is projected to lose by that many "
              "points (flag F27: Build A's stored field uses the opposite sign, and the two builds are not comparable "
              "cell for cell). Fair moneyline is the model's own break-even "
-             "price (no market price is used). Rest days: number of days since that team's previous game, taken "
+             "price (no market price is used). Rotation availability is its own column (requirement R15): the "
+             "share of the team's top-8 minutes still available according to the official injury edition, with the "
+             "rotation players Out/Questionable named in the cell; a dash with NOT YET SUBMITTED means the official "
+             "edition has no filing for that team yet, and the cell stays blank rather than estimated. Rest days: "
+             "number of days since that team's previous game, taken "
              "from the official schedule; a blank means the team's previous game falls outside the captured "
              "window. Injury status is the official report read-out for that team on that date."))
 
@@ -1940,15 +2027,18 @@ def main():
             esc(r["market"]), esc(r["side"]), esc(r["line_display"]),
             num(r["model_value"]), num(r["ref_line"]),
             ("%+.2f" % r["edge"]) if r["edge"] is not None else NA,
-            num(r["p_model"], 3), str(r["n_legs"]), esc(r["status"]),
+            num(r["p_model"], 3),
+            (rot_cell(r["date"], r["matchup"]) if hz2_by.get((r["date"], r["matchup"])) else NA),
+            str(r["n_legs"]), esc(r["status"]),
             srclink(sources, "S1"),
         ])
     b.append(table(
         ["Date", "Matchup", "Strategy", "Market", "Side", "Line", "Model value", "Ref line",
-         "Edge", "P(model)", "Legs", "Status", "Source"],
+         "Edge", "P(model)", "Rotation availability (own column)", "Legs", "Status", "Source"],
         prows,
         note="Status is PENDING for every row: these games have not been played yet, so no result exists and "
-             "none is written. A settled record and ROI column stays blank until an official final score exists."))
+             "none is written. A settled record and ROI column stays blank until an official final score exists. "
+             "Rotation availability is read from the same official injury edition as the table above (R15)."))
 
     b.append(card("How a pick becomes a pick",
                    "<p>Each strategy is a rule over the originated lines. A play is only published when the "
@@ -1957,8 +2047,9 @@ def main():
                    "leaderboard. <strong>No pick here is market-validated</strong>, because no official price "
                    "feed exists; a win would mean the model beat a naive model, not that it beat a book.</p>"))
     built["picks.html"] = page("Lines &amp; picks",
-                                "Originated spread, total and moneyline for all %d games in the horizon, and the "
-                                "gated paper picks built on them." % n_games, "\n".join(b))
+                                "Estimator disagreement as the headline for all %d games in the horizon, the "
+                                "blend underneath, rotation availability as its own column, and the gated "
+                                "paper picks built on them." % n_games, "\n".join(b))
 
     # === props =============================================================
     b = [h2("Player projections", "Per-player points, rebounds, assists, threes and PRA, projected from official season averages adjusted for pace, opponent and availability.")]

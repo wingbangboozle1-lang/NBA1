@@ -130,8 +130,8 @@ def main():
         sigma_margin = measured_sd
     anchor = M.measured_home_win_rate(results, standings)
     hwr_gl = anchor["home_win_rate"]
-    hwr_std = (standings["measured_home_court_anchor"]["home_win_rate"]
-               if standings else None)
+    std = standings["measured_home_court_anchor"] if standings else None
+    hwr_std = std["home_win_rate"] if std else None
     # PRIMARY measurement: the official standings HOME/ROAD columns, which
     # cover every game completed at read time (the largest official sample).
     # The final-score corpus is published next to it as a cross-check.
@@ -139,21 +139,37 @@ def main():
     hca_points, hca_z = M.hca_from_measured_home_win_rate(hwr, sigma_margin)
     hca_points_gl, hca_z_gl = M.hca_from_measured_home_win_rate(hwr_gl, sigma_margin)
 
+    # Every rate is published with the n it was measured on (F113: the old
+    # block paired the standings rate with the final-score corpus's game
+    # count, so the two numbers in one row disagreed).  The unplayed-row
+    # filter in engine/model_v2.load_results is what makes the two sources
+    # measure the same games: 197 finished games through 2026-11-15, of
+    # which 196 are home/road decisions and 1 is neutral-site.
     hca_block = {
         "measured_home_win_rate": hwr,
-        "measured_home_win_rate_from_final_scores": hwr_gl,
+        "measured_home_win_rate_from_final_scores": round(hwr_gl, 4) if hwr_gl else None,
         "hca_points_from_final_scores_crosscheck": round(hca_points_gl, 2) if hca_points_gl else None,
         "primary_measurement": ("the official standings HOME/ROAD columns (the "
                                 "largest official sample); the final-score corpus "
                                 "measurement is published beside it as a "
                                 "cross-check"),
-        "measured_road_win_rate": anchor["road_win_rate"],
+        "measured_road_win_rate": (std["road_win_rate"] if std
+                                   else anchor["road_win_rate"]),
+        # games_measured pairs with measured_home_win_rate_from_final_scores;
+        # home_wins/home_games pair with measured_home_win_rate (standings).
         "games_measured": anchor["n_games"],
-        "home_wins": anchor["home_wins"], "home_games": anchor["home_games"],
+        "final_score_home_wins": anchor["home_wins"],
+        "final_score_home_games": anchor["home_games"],
+        "home_wins": (std["home_wins"] if std else anchor["home_wins"]),
+        "home_games": (std["home_games"] if std else anchor["home_games"]),
         "standings_cross_check": anchor.get("standings_anchor"),
+        "sources_agree": (hwr_std is not None and hwr_gl is not None
+                          and round(hwr_std, 4) == round(hwr_gl, 4)),
         "sigma_margin_used": round(sigma_margin, 2),
         "sigma_margin_source": "population standard deviation of the margin on "
-                               "the official final-score corpus",
+                               "the official final-score corpus (finished games "
+                               "only; scheduled rows with placeholder scores "
+                               "are excluded by engine/model_v2.load_results)",
         "hca_points": round(hca_points, 2),
         "hca_z": round(hca_z, 4),
         "formula": ("HCA_points = sigma_margin * Phi^-1(measured home win rate). "

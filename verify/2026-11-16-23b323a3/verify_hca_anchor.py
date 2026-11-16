@@ -84,14 +84,24 @@ print("anchor from THIS read    : %.4f  (%d/%d)" % (rate, hw, hg))
 SC = used["standings_cross_check"]
 print("anchor the model used    : %.4f  (%d/%d games)  [the standings-anchor cross-check; "
       "the final-score corpus separately measures %.4f on %d games]"
-      % (SC["home_win_rate"], SC["home_games"] * SC["home_win_rate"], SC["home_games"],
+      % (SC["home_win_rate"], round(SC["home_games"] * SC["home_win_rate"]), SC["home_games"],
          used["measured_home_win_rate_from_final_scores"], used["games_measured"]))
-print("  ...and the top-level anchor field says %.4f on %d games, so the two standings-derived "
-      "numbers in this file disagree with each other: see F113."
-      % (used["measured_home_win_rate"], used["home_games"]))
+# F113's mislabeling: the top-level rate and the cross-check rate must be the
+# same number now that both are measured on the same finished games.
+if abs(used["measured_home_win_rate"] - SC["home_win_rate"]) > 5e-5:
+    print("  ...and the top-level anchor field says %.4f, so the two standings-derived "
+          "numbers in this file disagree with each other: see F113."
+          % used["measured_home_win_rate"])
+    fails.append("top-level anchor rate disagrees with standings_cross_check (F113 still open)")
+else:
+    print("  ...and the top-level anchor field says %.4f: the two standings-derived "
+          "numbers agree (F113's mislabeling is resolved)."
+          % used["measured_home_win_rate"])
 print("sigma_margin used        : %.2f" % sigma)
 print("HCA from this read       : %.2f points" % hca_now)
 print("HCA published            : %.2f points" % used["hca_points"])
+if abs(hca_now - used["hca_points"]) > 0.011:
+    fails.append("published hca_points does not match sigma * probit(fresh standings rate)")
 print()
 # Can the difference be explained exactly, by name?
 newly = json.load(open(os.path.join(ROOT, "data/official/results_2026-11-15.json"),
@@ -109,13 +119,30 @@ dg = hg - SC["home_games"]; dw = hw - _scw; drw = rw - _scrw
 print("delta since that capture : %+d games, %+d home wins, %+d road wins"
       % (dg, dw, drw))
 explained = (dg == len(late) and dw == 0 and drw == len(away_wins) == len(late))
-print("explained by the %d 11/15 games that finished after the capture (%s, all away wins): %s"
-      % (len(late), ", ".join("%s@%s" % (r["away"], r["home"]) for r in late), explained))
-if not explained:
+reconciled = (dg == 0 and dw == 0 and drw == 0)
+if explained:
+    print("explained by the %d 11/15 games that finished after the capture (%s, all away wins): %s"
+          % (len(late), ", ".join("%s@%s" % (r["away"], r["home"]) for r in late), explained))
+elif reconciled:
+    # The anchor this script compares against was re-captured after every
+    # 11/15 final was in (standings_2026-11-16_1835Z_23ec1e32.json), so the
+    # drift against this script's own 14:3xZ read is zero by construction.
+    # That is the reconciled state, not a stale one: both reads transcribed
+    # the same 102-94 / 94-102 standings, so no game finished between them.
+    print("reconciled: the published anchor already includes every game in this "
+          "script's own 14:3xZ standings read (both reads are 102-94 / 94-102)")
+else:
+    print("explained by the %d 11/15 games that finished after the capture (%s, all away wins): %s"
+          % (len(late), ", ".join("%s@%s" % (r["away"], r["home"]) for r in late), explained))
     fails.append("the anchor drift is NOT explained by the late 11/15 finals; re-read the standings")
 
-print("\nRESULT: %s" % ("the published anchor is stale but exactly reconcilable" if not fails
-                        else "FAILURES: %d" % len(fails)))
+if fails:
+    result = "FAILURES: %d" % len(fails)
+elif reconciled:
+    result = "the published anchor is current and reconciled (zero drift against this read)"
+else:
+    result = "the published anchor is stale but exactly reconcilable"
+print("\nRESULT: %s" % result)
 for f in fails:
     print("  -", f)
 print("NOTE: this script does not rewrite the model input. Re-derivation belongs to "

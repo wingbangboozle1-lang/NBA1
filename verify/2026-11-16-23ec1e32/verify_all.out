@@ -1,0 +1,79 @@
+
+root pages: nothing stale found to reconcile
+summary row count synced to 870
+wrote 15 pages
+built lines.html + gameflow.html · games=36 model_picks=30 parlays=15 props=72 impact_rows=72 unattributed=20
+BUILD D: 27 horizon games, 23 gated paper picks, 12 parlay cards, 54 prop rows, 28 attributed 11/14 injury rows, 5 unattributed (flagged)
+NOTE: 11/14 and 11/17 rows of the schedule capture re-verified against fresh NBA.com captures (10/10 games match).
+NOTE: leader stats: 0 team gap(s) filled from fresh official captures; all overlapping values matched leaders.json.
+NOTE: fidelity: 27 overlapping games (11/14–11/16) reproduce Build A's published RecordLine-1 spread and pick side exactly (same records, same formula).
+NOTE: time mismatch DET@MIA 2026-11-14: report prints 07:00 (ET), schedule prints 8:00 PM ET
+NOTE: page self-audit: 148 table rows, every row carries an official *.nba.com source link; local links resolve.
+VERIFY OK
+index.html: 29 table rows checked
+research.html: 19 table rows checked
+slate.html: 132 table rows checked
+suggestions.html: 17 table rows checked
+review.html: 63 table rows checked
+sources.html: 7 table rows checked
+lines.html: 128 table rows checked
+gameflow.html: 139 table rows checked
+picks-2026-11-14.html: 148 table rows checked
+desk.html: 8 table rows checked
+desk-lines.html: 91 table rows checked
+desk-validation.html: 128 table rows checked
+desk-props.html: 152 table rows checked
+desk-capture.html: 88 table rows checked
+picks.html: 101 table rows checked
+model-v2.html: 82 table rows checked
+
+All pages exist; local links resolve; every table row includes an official NBA/GitHub source link.
+official games 11/13-11/17: 36; published rows compared: 36; mismatches: 0; calendar counts match: True; teams that played 11/13 in horizon: 18 (records refreshed to official post-11/13 values)
+wrote site/pages/minutes.html
+games: 6  team-games: 12  teams: 12  flags: 4
+wrote data/derived/minutes_shares.json
+gates: G1_validation=CLOSED, G2_sample_floor=CLOSED, G3_preregistration=PASS, G4_ledger_integrity=PASS
+projection rows: 29
+separation checks: OK
+content: flagged.json     141 items  (data/content -> docs/data + site/data)
+content: questions.json    45 items  (data/content -> docs/data + site/data)
+content: suggestions.json  37 items  (data/content -> docs/data + site/data)
+content: executive.json     1 items  (data/content -> docs/data + site/data)
+Wrote 28 pages, assets and data to /home/user/NBA1/site
+pages checked                         : 41
+table rows checked                    : 3114
+rows with an allowed official source link       : 3002 / 3114
+no-source marks with explanatory text           : 112 / 3114
+no-source marks with approved URL in title only : 0 / 3114
+unmarked rows without an official link           : 0
+no-source markers without a reason/pointer       : 0
+
+VERIFY OK - every row has an allowed source link or an explicit no-source mark with an explanation or approved URL pointer; all internal links resolve.
+NOTE - this checks provenance/link structure only; it does not fetch sources or compare their values to the published rows.
+case 1 — lean on a team INSIDE the band must not be refused
+  PASS  not refused
+  PASS  one bet checked
+  PASS  team identified as BBB
+  PASS  z was carried through
+case 2 — lean on a team OUTSIDE the band must be refused
+  PASS  refused
+  PASS  offending team named with its z
+  PASS  one offending bet
+case 3 — the band boundary is the published one
+  PASS  |z| = 1.95 inside -> not refused
+  PASS  |z| = 1.96 is the boundary -> refused
+  PASS  a LARGE NEGATIVE z also refuses (band is two-sided)
+case 4 — an unmeasurable lean refuses rather than passing silently
+  PASS  refused when the team has no z-score
+  PASS  counted as unmeasurable, not as offending
+case 5 — a bet with no team lean (totals) is not refused
+  PASS  not refused
+  PASS  checked zero bets
+case 6 — the live tables agree the rule is being applied to the real batch
+  PASS  every strategy carries a noise_band_refusal block
+  PASS  the meta states the rule
+  PASS  the lucky teams in the real table are inside the band or would be refused
+
+FAILURES: 0
+
+VERIFY OK — builders, checker, and data audits all passed.

@@ -10,6 +10,8 @@ Outputs
                                no pick rows, no stake/price fields, no travel distances (Q04).
   site/pages/bet.html          closed gates + no picks while any gate fails. Picks are read from
                                data/derived/horizon_picks_v2.json ONLY when all four gates pass.
+  site/pages/bet-surface.html  the index-linked ALIAS of bet.html, written from the same render in
+                               the same run so the two can never disagree (R07 split; §61 W04).
   data/derived/surface_gates.json  the four gates, their requirement, observed value, and pass flag.
 
 The four gates (all computed here from repository files, fail-closed; ALL must pass)
@@ -43,6 +45,7 @@ STRATEGIES = os.path.join(DERIVED, "strategies.json")
 GATES_OUT = os.path.join(DERIVED, "surface_gates.json")
 PROJECTION = os.path.join(PAGES, "projection.html")
 BET = os.path.join(PAGES, "bet.html")
+BET_ALIAS = os.path.join(PAGES, "bet-surface.html")  # index-linked; same render, same run
 
 SAMPLE_FLOOR = 100
 
@@ -140,7 +143,9 @@ def compute_gates():
     return {
         "title": "Bet-surface gates (R07)",
         "generated_by": "scripts/build_surfaces.py",
-        "rule": "bet.html shows picks only when ALL four gates pass (fail-closed). Projection carries model output and is not gated.",
+        "rule": ("bet.html and its index-linked alias bet-surface.html show picks only when ALL "
+                 "four gates pass (fail-closed); both are written from the same render in the "
+                 "same run. Projection carries model output and is not gated."),
         "gates": gates,
         "open": all(g["passed"] for g in gates),
         "closed_by": [g["id"] for g in gates if not g["passed"]],
@@ -228,7 +233,7 @@ def render_projection(rows, flags, hca):
                'Every row links its official game page. A blank cell is a value that could not be confirmed.</p>')
     out.append('<p class="note"><strong>Home-court anchor (measured):</strong> home win rate %s '
                '(official standings HOME/ROAD columns). <a href="%s" rel="noopener">Official standings</a>.</p>'
-               % (_pct(hca["measured_home_win_rate"]), _e(hca["source_url"])))
+               % (_pct(hca["measured_home_win_rate"], 2), _e(hca["source_url"])))
     out.append('<div class="tablewrap"><table class="dash"><thead><tr>'
                '<th>Date</th><th>Game</th><th>Tip (ET)</th><th>Disagreement (pp) &mdash; headline</th>'
                '<th>P(home) A</th><th>P(home) B</th><th>P(home) blend</th>'
@@ -339,9 +344,13 @@ def write_outputs():
         fh.write(proj_html)
     with open(BET, "w", encoding="utf-8") as fh:
         fh.write(bet_html)
+    with open(BET_ALIAS, "w", encoding="utf-8") as fh:
+        fh.write(bet_html)
 
-    # machine-checked separation
-    problems = check_projection_html(PROJECTION) + check_bet_html(BET, gates, picks)
+    # machine-checked separation (both bet URLs)
+    problems = (check_projection_html(PROJECTION)
+                + check_bet_html(BET, gates, picks)
+                + check_bet_html(BET_ALIAS, gates, picks))
     # projection rows must not carry forbidden keys
     for r in rows:
         bad = FORBIDDEN_KEYS & set(r)

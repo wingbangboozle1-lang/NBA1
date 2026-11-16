@@ -715,8 +715,12 @@ def build_requirements():
 PAGES_BUILDERS = [
     ("official-feed.html", build_official_feed),
     ("estimators.html", build_estimators),
-    ("projection.html", build_projection),
-    ("bet-surface.html", build_bet_surface),
+    # projection.html and bet-surface.html are deliberately NOT in this list:
+    # since COORDINATION §53 (Q03) they are written by scripts/build_surfaces.py
+    # (the machine-checked fail-closed split), which the dashboard hook runs on
+    # every build.  This legacy builder's versions predate that rule and would
+    # re-mix picks onto the bet surface — §61 W04 removed them here so this
+    # script can never overwrite the gated pages if it is ever run again.
     ("parlay-pricing.html", build_parlay_pricing),
     ("rotation.html", build_rotation),
     ("rest-travel.html", build_rest_travel),

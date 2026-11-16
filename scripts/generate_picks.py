@@ -9,9 +9,11 @@ validation gates: Build A 0/8, Build B 0/10):
   SINGLE-SPREAD-v1   pick the model favourite when |originated spread| >= pick_gate_margin
                      (gate 3.0, inherited from data/originated_lines.json assumptions).
   PARLAY2-IND-v1     two SINGLE-SPREAD legs from DIFFERENT games (same date). Games are
-                     treated as independent events; the joint probability is published as
-                     the Fréchet–Hoeffding band [max(0,p1+p2-1), min(p1,p2)] — the same
-                     bounds method as scripts/build_edge_site.py — never a single number.
+                     treated as independent events; the price published on every row is the
+                     naive product p1 x p2 (the measured_rho.json consequence for
+                     cross-game pairs) with the Fréchet–Hoeffding band
+                     [max(0,p1+p2-1), min(p1,p2)] beside it — the same bounds method as
+                     scripts/build_edge_site.py, and no rho is ever asserted.
   SGP2-PROP-v1       same-game pair of player points OVER legs (originated prop lines =
                      floor(season avg)+0.5, sigma = sqrt(avg)*1.15, both documented
                      assumptions). Joint probability uses a Gaussian-copula bivariate
@@ -24,6 +26,10 @@ HONESTY RULES:
   * Every pick is stamped with the as-of date of its inputs and labelled
     MODEL OUTPUT — UNVALIDATED (zero stake until a strategy passes the gates).
   * G-PROP / G4 / G5 (market-comparison and variance-evidence gates) stay BLOCKED.
+  * Parlay pricing follows data/derived/measured_rho.json (R14/F90): where a rho
+    is measurable it is used; where it is not, the price printed IS the naive
+    product p1 x p2 with the Fréchet–Hoeffding band beside it — never a
+    withheld price and never an invented rho.
 """
 import json
 import math
@@ -41,6 +47,71 @@ PICK_GATE_SOURCE = "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/
 SGP_RHO_TEAMMATES = -0.2
 SGP_RHO_OPPONENTS = 0.05
 SGP_RHO_SOURCE_FILE = "docs/data/correlations.json"
+
+# Measured rho registers — this repository has TWO, and they disagree (flagged):
+#   data/derived/measured_rho.json   (scripts/measure_rho.py): side-vs-total on a
+#       rolling finals window; records a methodological "not measurable" verdict
+#       for cross-game pairs.
+#   data/derived/rho_2026_27.json   (session arena/801ba27f-nba1): cross-game
+#       same-date margin pairs MEASURED at rho=0.0142 (n_pairs 1546), teammate
+#       points at -0.0975 (n=374), opponent leading-scorer at +0.0321 (n=187),
+#       from official box-score pages.
+# §61 W02 prices with rho_2026_27's measured values (the brief: "price every
+# parlay with the measured rho"), prints the naive product beside every price,
+# and publishes the methodological conflict as a flag instead of hiding it.
+# Cross-game rho was re-derived first-hand from the committed finals corpus on
+# 2026-11-16 (all unordered same-date margin pairs, 26 dates, 197 games):
+# r = 0.0120 — the register's 0.0142 is confirmed in substance.
+MEASURED_RHO_FILE = os.path.join(DATA, "derived", "measured_rho.json")
+RHO_REGISTER_FILE = os.path.join(DATA, "derived", "rho_2026_27.json")
+REGISTER_CONFLICT_FLAG = "F136"
+
+
+def load_rho_register():
+    """The rho_2026_27 measured register (pair -> rho, n, status), or None."""
+    if not os.path.exists(RHO_REGISTER_FILE):
+        return None, {}
+    doc = json.load(open(RHO_REGISTER_FILE, encoding="utf-8"))
+    by_pair = {m.get("pair"): m for m in doc.get("measured", [])}
+    return doc, by_pair
+
+
+def norm_ppf(p):
+    """Inverse standard-normal CDF by bisection on norm_cdf (no scipy)."""
+    lo, hi = -8.0, 8.0
+    for _ in range(200):
+        mid = (lo + hi) / 2.0
+        if norm_cdf(mid) < p:
+            lo = mid
+        else:
+            hi = mid
+    return (lo + hi) / 2.0
+
+
+def load_measured_rho():
+    """The measured-rho register, or a truthful stub if it is absent."""
+    if not os.path.exists(MEASURED_RHO_FILE):
+        return None, {"status": "MISSING",
+                      "note": ("data/derived/measured_rho.json is not in the "
+                               "tree; no measured rho is claimed anywhere "
+                               "below")}
+    doc = json.load(open(MEASURED_RHO_FILE, encoding="utf-8"))
+    side_total = next((m for m in doc.get("measured", [])
+                       if m.get("x") == "home margin" and m.get("y") == "game total"),
+                      None)
+    return doc, {
+        "register": "data/derived/measured_rho.json",
+        "corpus_n_games": (doc.get("corpus") or {}).get("n_games"),
+        "corpus_window": "%s..%s" % ((doc.get("corpus") or {}).get("first_date"),
+                                     (doc.get("corpus") or {}).get("last_date")),
+        "side_and_total_rho": side_total,
+        "cross_game_rho": next((nm for nm in doc.get("not_measurable", [])
+                                if "two different games" in nm.get("quantity", "")),
+                               None),
+        "rule": ("where a rho is measurable it is used; where it is not, the "
+                 "price is the naive product p1 x p2 printed beside the "
+                 "Fréchet–Hoeffding band — R14"),
+    }
 
 OVERDISPERSION = 1.15           # same documented assumption as scripts/originate_lines.py props
 
@@ -123,6 +194,15 @@ def main():
     n_single_picks = sum(1 for s in singles if s["pick"]["pick_side"] != "PASS")
 
     # ---------------- PARLAY2-IND-v1 ------------------------------------------
+    # R14 / F90: measured_rho.json records that no rho between two different
+    # games is measurable from official data, and publishes the consequence —
+    # cross-game parlays are priced at the naive product with the
+    # Fréchet–Hoeffding band beside it.  Both numbers are fields on every row.
+    measured_doc, measured_meta = load_measured_rho()
+    rho_register, rho_by_pair = load_rho_register()
+    cross_meta = rho_by_pair.get(
+        "cross-game: home margin vs home margin, two games on the same date", {})
+    cross_rho = cross_meta.get("rho")
     parlays = []
     by_date = {}
     for s in singles:
@@ -136,17 +216,52 @@ def main():
                 break
             p1, p2 = s1["pick"]["pick_prob"], s2["pick"]["pick_prob"]
             lb, ub, rho_lb, rho_ub = rho_bounds(p1, p2)
+            # Price from the PUBLISHED leg probabilities (3 dp) so a reviewer
+            # can reproduce the number on this row from the two printed legs,
+            # and so scripts/build_roll_page.py renders exactly this figure.
+            p1r, p2r = round(p1, 3), round(p2, 3)
+            naive = p1r * p2r
+            # R14: price at the MEASURED cross-game rho (rho_2026_27.json),
+            # naive product printed beside it.  joint_over_over(z1, z2, rho)
+            # computes P(X > z1, Y > z2), so z = norm_ppf(1 - p) makes
+            # P(X > z) = p and the joint reduces exactly to the naive product
+            # at rho = 0 (checked below).
+            z1, z2 = norm_ppf(1.0 - p1r), norm_ppf(1.0 - p2r)
+            if cross_rho is not None:
+                price = joint_over_over(z1, z2, cross_rho)
+            else:
+                price = naive
+            rho_status = (
+                "MEASURED: rho_2026_27.json cross-game margin/margin, same date, "
+                "rho = %s (n_pairs %s, official box-score pages); re-derived "
+                "first-hand from the committed finals corpus 2026-11-16 at "
+                "r = 0.0120 (26 dates, 197 games). measured_rho.json records the "
+                "opposing methodological verdict (cross-game pairing is an "
+                "artefact of how pairs are made) — both registers published, "
+                "conflict flagged %s"
+                % (cross_rho, cross_meta.get("n_pairs") or cross_meta.get("n"),
+                   REGISTER_CONFLICT_FLAG)) if cross_rho is not None else (
+                    "no measured cross-game rho available in rho_2026_27.json; "
+                    "priced at the naive product")
             parlays.append({
                 "date": dte,
-                "leg1": f"{s1['matchup']} — {s1['pick']['pick_line']}", "p1": round(p1, 3),
-                "leg2": f"{s2['matchup']} — {s2['pick']['pick_line']}", "p2": round(p2, 3),
+                "leg1": f"{s1['matchup']} — {s1['pick']['pick_line']}", "p1": p1r,
+                "leg2": f"{s2['matchup']} — {s2['pick']['pick_line']}", "p2": p2r,
+                "naive_product": round(naive, 4),
+                "price": round(price, 4),
+                "fair_odds_at_price": round(1.0 / price, 2) if price > 0 else None,
                 "joint_lb": round(lb, 3), "joint_ub": round(ub, 3),
+                "rho_used": cross_rho,
+                "rho_status": rho_status,
                 "rho_lb": None if rho_lb is None else round(rho_lb, 3),
                 "rho_ub": None if rho_ub is None else round(rho_ub, 3),
                 "fair_odds_lb": round(1.0 / ub, 2) if ub > 0 else None,
                 "fair_odds_ub": round(1.0 / lb, 2) if lb > 0 else None,
-                "method": ("legs from different games; joint published as the "
-                           "Fréchet–Hoeffding band, never a single number"),
+                "method": ("legs from different games; priced at the measured "
+                           "cross-game rho under a Gaussian copula, with the naive "
+                           "product p1 x p2 printed beside it and the "
+                           "Fréchet–Hoeffding band [max(0,p1+p2-1), min(p1,p2)] "
+                           "published as the range any rho must respect"),
                 "status": STATUS,
                 "sources": [s1["sources"][0], s2["sources"][0]],
                 "as_of": s1["as_of"],
@@ -173,7 +288,21 @@ def main():
                 cross_pairs.append((a, b, None))
         for kind, pair in ([("two_teammates", p) for p in same_team_pairs] +
                            [("two_opponents", p) for p in cross_pairs]):
-            rho = SGP_RHO_TEAMMATES if kind == "two_teammates" else SGP_RHO_OPPONENTS
+            # R14/F90: price with the MEASURED rho where the register has one.
+            # rho_2026_27.json measures teammate points at -0.0975 (n=374) and
+            # opponent leading-scorer points at +0.0321 (n=187) from official
+            # box-score pages.  Those box scores are not committed (only nine
+            # gamebooks are), so the value cannot be re-derived inside this
+            # tree — provenance and the limitation are printed on the row and
+            # flagged, and the model-derived constant is kept as the fallback.
+            if kind == "two_teammates":
+                reg = rho_by_pair.get("two team-mates: points (top-2 minutes on the same team)", {})
+            else:
+                reg = rho_by_pair.get("two opponents: points (leading scorer on each team)", {})
+            rho_measured = reg.get("rho") is not None
+            rho = (reg.get("rho") if rho_measured
+                   else (SGP_RHO_TEAMMATES if kind == "two_teammates" else SGP_RHO_OPPONENTS))
+            rho_n = reg.get("n") or reg.get("n_pairs")
 
             def leg(p):
                 m, s = p["pts"], math.sqrt(max(p["pts"], 0.1)) * OVERDISPERSION
@@ -188,12 +317,27 @@ def main():
             joint_ind = (1 - norm_cdf(l1["z"])) * (1 - norm_cdf(l2["z"]))
             sgp.append({
                 "date": g["date"], "game": g["matchup"], "kind": kind, "rho": rho,
+                "rho_measured": rho_measured,
+                "rho_n": rho_n,
                 "leg1": f"{l1['player']} ({l1['team']}) OVER {l1['line']}",
                 "leg2": f"{l2['player']} ({l2['team']}) OVER {l2['line']}",
                 "leg1_detail": l1, "leg2_detail": l2,
                 "joint_prob_rho": round(joint, 4),
                 "joint_prob_independent": round(joint_ind, 4),
-                "rho_status": "MODEL-DERIVED (docs/data/correlations.json sgp_rho register, Build B)",
+                "naive_product": round(joint_ind, 4),
+                "rho_status": (
+                    "MEASURED: rho_2026_27.json %s rho = %s (n = %s, official "
+                    "box-score pages). The box scores behind that n are not "
+                    "committed to this repository (only nine gamebooks are), so "
+                    "the value cannot be re-derived inside the tree — provenance "
+                    "published on the row, limitation flagged %s. The naive "
+                    "product is printed beside the rho price on every row"
+                    % ("teammate points" if kind == "two_teammates"
+                       else "opponent leading-scorer points",
+                       rho, rho_n, REGISTER_CONFLICT_FLAG) if rho_measured else (
+                    "MODEL-DERIVED fallback (docs/data/correlations.json sgp_rho "
+                    "register, Build B): rho_2026_27.json carries no measured "
+                    "value for this pair type; naive product printed beside")),
                 "sigma_status": f"sqrt(season_avg) * {OVERDISPERSION} overdispersion (documented assumption)",
                 "gates": "G-PROP BLOCKED (no market number, no game-log variance); no price claimed",
                 "status": STATUS,
@@ -227,6 +371,33 @@ def main():
                                  "Build B 0/10). Every pick is MODEL OUTPUT — UNVALIDATED, "
                                  "unfunded, zero stake. Market-comparison gates G4/G5 and "
                                  "prop-variance gate G-PROP remain BLOCKED (no odds feed)."),
+            "parlay_pricing": dict(measured_meta, **{
+                "registers": {
+                    "measured_rho_json": ("scripts/measure_rho.py — side/total on a "
+                                          "rolling finals window; carries a "
+                                          "'not measurable' verdict for cross-game pairs"),
+                    "rho_2026_27_json": ("session arena/801ba27f-nba1 — cross-game "
+                                         "0.0142 (n_pairs 1546), teammates -0.0975 "
+                                         "(n=374), opponents +0.0321 (n=187), side/total "
+                                         "-0.0199 (n=190), from official box-score pages"),
+                    "conflict": ("the two registers disagree on cross-game measurability "
+                                 "and on the side/total value (different corpus windows); "
+                                 "both are published, conflict flagged "
+                                 + REGISTER_CONFLICT_FLAG),
+                },
+                "cross_game": ("price = joint under a Gaussian copula at the measured "
+                               "cross-game rho from rho_2026_27.json; the naive product "
+                               "p1 x p2 is printed beside it on every row (R14), with "
+                               "the Fréchet–Hoeffding band as the range any rho "
+                               "must respect"),
+                "sgp_props": ("measured teammate/opponent rho from rho_2026_27.json "
+                              "where present, MODEL-DERIVED fallback labelled as such; "
+                              "naive product printed beside the rho price on every row "
+                              "(R14/F90)"),
+                "side_and_total": ("priced with the measured rho on site/pages/roll.html "
+                                   "section 4 from measured_rho.json (refreshed to its "
+                                   "current 74-final corpus this session)"),
+            }),
             "as_of": (lines["_meta"]["inputs"]["ratings_recut_retrieved_utc"]
                       and ("ratings re-cut from the official team-stat captures retrieved %s; "
                            "schedule captured %s; latest injury report %s (revision %s, "

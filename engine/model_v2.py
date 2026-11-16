@@ -377,21 +377,51 @@ def r_get(row, key):
     return row.get(key)
 
 
+def _played(g):
+    """True only for a game that has actually finished.
+
+    Three ways an unplayed row gets into a results file, all measured in
+    data/official/results_feed_2026_27.json on 2026-11-16 (session
+    arena/23ec1e32-nba1, COORDINATION §61 W01):
+
+      * `game_status: 1` (scheduled) with tied placeholder scores 0-0 — 25 such
+        rows (11/16-11/18) were being counted as road wins and as 25 zero
+        margins, which deflated sigma_margin and broke the home-win anchor
+        (finding F113's mechanical cause);
+      * `game_status: 2` (live) with partial scores — must not be read as final;
+      * a null score in a mid-game capture.
+
+    A finished row has game_status == 3 where the field exists, and otherwise
+    two present, unequal scores: an NBA game never ends tied.
+    """
+    st = g.get("game_status")
+    if st is not None:
+        try:
+            return int(st) == 3
+        except (TypeError, ValueError):
+            return False
+    hp, ap = g.get("home_pts"), g.get("away_pts")
+    if hp is None or ap is None:
+        return False
+    return hp != ap
+
+
 def load_results():
     """Official completed-game corpus: the season game log plus the dated
-    results files.  Each row: date, away, home, away_pts, home_pts, neutral."""
+    results files, filtered to games that have finished (`_played`).
+    Each row: date, away, home, away_pts, home_pts, neutral."""
     games = []
     path = os.path.join(OFF, "gamelog.json")
     if os.path.exists(path):
         for g in _load(path)["games"]:
             games.append(dict(g))
-    rdir = os.path.join(ROOT, "data", "settlement")
     for name in sorted(os.listdir(OFF)):
         if name.startswith("results_") and name.endswith(".json"):
             doc = _load(os.path.join(OFF, name))
             for g in doc.get("games", doc.get("rows", [])):
-                if isinstance(g, dict) and "home_pts" in g:
+                if isinstance(g, dict) and "home_pts" in g and _played(g):
                     games.append(dict(g))
+    games = [g for g in games if _played(g)]
     # De-duplicate on game id.  A later capture wins over an earlier one when
     # the later one is more complete: the 2026-11-15 slate was captured
     # mid-game, so the first capture of those ids carries null scores while a

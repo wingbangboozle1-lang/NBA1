@@ -1,0 +1,84 @@
+Independent integration verification of /home/user/NBA1
+
+[I1] JSON parses and site data exists
+  ok      759 JSON files parse
+  ok      6 referenced data files all exist
+
+[I2/I3] Internal links resolve; external links are https on trusted hosts
+  ok      regulator host cited for legal scope only: kansspelautoriteit.nl
+  ok      160 HTML files, 17286 static links
+
+[I4] Data rows carry a source link
+  WARN    review.html: row without an official source link (no official NBA link)
+  WARN    schedule-verified.html: row without an official source link (no official NBA link)
+  WARN    schedule-verified.html: row without an official source link (no official NBA link)
+  WARN    sources.html: row without an official source link (no official NBA link)
+  WARN    suggestions.html: row without an official source link (no official NBA link)
+  WARN    suggestions.html: row without an official source link (no official NBA link)
+  WARN    verification.html: row without an official source link (no external link at all)
+  WARN    verification.html: row without an official source link (no external link at all)
+  WARN    verification.html: row without an official source link (no external link at all)
+  WARN    verification.html: row without an official source link (no external link at all)
+  WARN    verification.html: row without an official source link (no external link at all)
+  WARN    verification.html: row without an official source link (no external link at all)
+  WARN    verification.html: row without an official source link (no external link at all)
+  WARN    verification.html: row without an official source link (no external link at all)
+  WARN    verification.html: row without an official source link (no external link at all)
+  WARN    command-center/executive.html: row without an official source link (no external link at all)
+  WARN    command-center/index.html: row without an official source link (no external link at all)
+  WARN    command-center/index.html: row without an official source link (no external link at all)
+  WARN    command-center/index.html: row without an official source link (no external link at all)
+  WARN    command-center/index.html: row without an official source link (no external link at all)
+  WARN    command-center/index.html: row without an official source link (no external link at all)
+  WARN    command-center/index.html: row without an official source link (no external link at all)
+  WARN    command-center/index.html: row without an official source link (no external link at all)
+  WARN    command-center/index.html: row without an official source link (no external link at all)
+  WARN    command-center/index.html: row without an official source link (no external link at all)
+  WARN    command-center/index.html: row without an official source link (no external link at all)
+  WARN    command-center/index.html: row without an official source link (no external link at all)
+  WARN    command-center/index.html: row without an official source link (no external link at all)
+  WARN    command-center/strategy.html: row without an official source link (no external link at all)
+  WARN    command-center/suggestions.html: row without an official source link (no external link at all)
+  WARN    docs/flagged.html: row without an official source link (no official NBA link)
+  WARN    docs/flagged.html: row without an official source link (no official NBA link)
+  WARN    docs/flagged.html: row without an official source link (no official NBA link)
+  WARN    docs/index.html: row without an official source link (no external link at all)
+  WARN    docs/index.html: row without an official source link (no external link at all)
+  WARN    docs/index.html: row without an official source link (no external link at all)
+  WARN    docs/index.html: row without an official source link (no external link at all)
+  WARN    docs/index.html: row without an official source link (no external link at all)
+  WARN    docs/questions.html: row without an official source link (no official NBA link)
+  WARN    docs/questions.html: row without an official source link (no official NBA link)
+  WARN    ... and 452 more rows without an official link
+  ok      9073/9565 data rows carry an official source link
+
+[I5] No leaked placeholders or sentinels
+  WARN    site/pages/decisions.html:107: 'None' rendered into prose
+  WARN    site/pages/decisions.html:108: 'None' rendered into prose
+  WARN    site/pages/decisions.html:109: 'None' rendered into prose
+
+[I6] Headline counts in prose match the data
+  data  {'out_of_sample_games': 60, 'strategies': 10, 'upcoming_games': 29, 'pick_rows': 58}
+  ok      backtest lists exactly 60 games, matching meta.json
+  ok      strategy count agrees (10)
+
+[I6b] Published site-wide row counts match the pages
+  ok      summary's 870 rows / 807 sourced match the pages exactly
+
+[I7] Both builds reachable from the repository root
+  ok      index.html exists
+  ok      docs/index.html exists
+  ok      docs/b/index.html exists
+  ok      root index.html links to docs/index.html
+  ok      root index.html links to docs/b/index.html
+
+==================================================================
+JSON files  : 759
+HTML files  : 160
+Links       : 17286
+Data rows   : 9073/9565 official-sourced
+Errors      : 0
+Warnings    : 44
+==================================================================
+
+PASSED - no errors. Warnings are listed above and are published on the Flagged for Review page.
