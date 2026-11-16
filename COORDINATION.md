@@ -5488,7 +5488,7 @@ Branch `arena/2042a559-nba1`, based on `main` `047103e` (tip at claim time). The
 | Q03 | Projection / bet surface split. `projection.html` carries model output only (no picks, edges, parlays or stakes; machine-checked). `bet.html` shows picks only when four computed gates pass; otherwise it shows the closed gates and no picks. | done (split built; bet gates closed, no picks shown) | `scripts/build_surfaces.py` (new), `data/derived/surface_gates.json` (new), `site/pages/projection.html`, `site/pages/bet.html` (new, generated) | R07 |
 | Q04 | Travel distance (R11): NOT computed. The only coordinate tables are Wikipedia-derived (`data/official/arena_coordinates_2026-11-15.json`) or unsourced (`data/arenas.json`); neither is an official source, so the values stay blank and flagged, per the verification rule. | done (blocked, flagged) | none beyond the flags file | R11 |
 | Q05 | Shared wiring and register: one call added to `scripts/build_dashboard.py` so the new pages regenerate with the site; `data/content/requirements.json` rows R02, R03, R07, R11, R12 updated to the measured state; new flags in `data/content/flagged.json`. Shared files, edited by the seat that merges this branch — logged here. | done (hook + R02/R03/R07/R11/R12 + F108–F110; rebuilt site) | `scripts/build_dashboard.py` (one hook), `data/content/requirements.json`, `data/content/flagged.json` | — |
-| Q06 | Verification (`scripts/verify_all.py`, `scripts/check_site.py`, `scripts/check_links.py`, `scripts/render_check.mjs`), PR to `main`, merge, Pages deploy confirmation, record here. | in progress (this session) | whole branch | — |
+| Q06 | Verification (`scripts/verify_all.py`, `scripts/check_site.py`, `scripts/check_links.py`, `scripts/render_check.mjs`), PR to `main`, merge, Pages deploy confirmation, record here. | done (PR #139 merged 2026-11-16T14:37:51Z, merge commit `2af25c6`; Pages deploy confirmed; see §50.2) | whole branch | — |
 
 Open request (logged, not executed): the Pages source must be set to GitHub Actions by a repository admin (flag F107 in §48/§47); this session records the Pages status it actually observes.
 
@@ -5507,3 +5507,12 @@ Open request (logged, not executed): the Pages source must be set to GitHub Acti
 3. Pages deploy: F107 still applies (Pages source must be set to GitHub Actions by a repo admin).
 
 **Q06 (next):** run `scripts/verify_all.py`, `scripts/check_site.py`, `scripts/check_links.py`, `scripts/render_check.mjs`; open the PR to `main`; merge; confirm the Pages deploy; record the PR link and merge result here.
+
+### 50.2 Delivery record (Q06)
+
+- **PR:** https://github.com/wingbangboozle1-lang/NBA1/pull/139 — `arena/2042a559-nba1` → `main`, 7 commits (`a0108bf`, `d27bb18`, `ffbff72`, `1aab56d`, `4aa3529`, `a7de753`, `480595f`).
+- **Merge:** `gh pr merge 139 --merge` (merge commit `2af25c63356a5564d6af844d54c3be137b6b6b5b`), merged 2026-11-16T14:37:51Z. No required checks were reported on the branch; mergeStateStatus was CLEAN.
+- **Pages deploy (measured):** the `Publish static site to GitHub Pages` run for `2af25c6` finished success (validate and deploy jobs, `gh run watch --exit-status`). The legacy `pages build and deployment` run for the same commit also succeeded. `gh api repos/.../pages` reports `status: built`, `build_type: legacy`, `source: main /`. The live pages were fetched: `…/site/pages/projection.html` shows all 25 model-output rows, and `…/site/pages/bet.html` shows the gates closed with no picks.
+- **Checks on the branch before merge:** `verify_all.py` VERIFY OK (2,011 rows; 0 unlinked; 0 unmarked); `check_links.py` PASS (0 broken internal links); `check_site.py` PASS; `check_rendered.py` PASS; `render_check.mjs` 148 pages, 9,820 rows, 0 pages with problems; `verify_ledger.py` ledger chain OK.
+- **Still open (logged, not blocking, per the rules):** F107 (Pages build type is still legacy; the admin setting is not changed here). F108, F109 (High), F110 flagged. The roll-page split (R07) and index links (shared chrome) remain for the integration session. The 11/15 settlement runs on the next `refresh-data` workflow, not by hand.
+- **Not done in this session:** no edit to other sessions' files; no change to `index.html` navigation beyond the generated flag count.
