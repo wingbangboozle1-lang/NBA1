@@ -526,7 +526,7 @@ REQUIREMENTS = [
      "The fetch and the fail-closed gate exist and are proven on a runner (engine/fetch_official.py, "
      "engine/refresh_gate.py). This session added a second capture job that stores every official "
      "page and box score it reads. The standings and team-stat parsers cannot produce rows because "
-     "those pages carry no data in an HTTP response (F80).",
+     "those pages carry no data in an HTTP response (F96).",
      "https://github.com/wingbangboozle1-lang/NBA1/blob/main/engine/refresh_gate.py"),
     ("Keep an official per-game result feed current; settle only after final scores are verified; "
      "store one row per game: date, teams, final score, quarter scores",
@@ -580,7 +580,7 @@ REQUIREMENTS = [
      "PARTIAL",
      "Rest, back-to-back and 3-in-4 are computed from the official schedule and official finals. "
      "Travel is computed and published but flagged: arena city and state are official, latitude and "
-     "longitude are not published by any NBA page (F78).",
+     "longitude are not published by any NBA page (F94).",
      "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/rest_travel_2026_27.json"),
     ("Model minutes redistribution explicitly: for each team, the top-8 minutes shares and the "
      "replacement shares when a player is out",
@@ -610,7 +610,7 @@ REQUIREMENTS = [
      "BLOCKED",
      "No closing line is captured anywhere in this repository and no NBA-operated source publishes "
      "one, so the prior weight is 0 and no market-blended price is published. Stated on the bet "
-     "surface rather than silently omitted (F79).",
+     "surface rather than silently omitted (F95).",
      "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_picks_801ba27f.json"),
     ("Model the total as possessions x points-per-possession, not as an average of team scoring "
      "averages",
@@ -635,14 +635,14 @@ REQUIREMENTS = [
      "BLOCKED - WORKED AROUND",
      "All three pages were fetched. None carries data in an HTTP response: they render their tables "
      "in the browser. The same quantities were rebuilt from official box scores instead, which are "
-     "server-rendered. Every rating traces to an official game page (F80).",
+     "server-rendered. Every rating traces to an official game page (F96).",
      "https://www.nba.com/stats/teams/advanced"),
     ("Capture per-player game logs (minutes, points, rebounds, assists and the opponent) for at "
      "least the players who appear on an injury report",
      "DONE WITH A GAP",
      "Every player in every one of the 222 captured games has minutes, points, rebounds, assists "
      "and the opponent. The gap: a player on the injury report with no minutes this season has no "
-     "measured minutes share, so removing them moves availability by 0.00 (F83).",
+     "measured minutes share, so removing them moves availability by 0.00 (F99).",
      "https://www.nba.com/games"),
     ("Generate picks for every upcoming slate of games up to a maximum of 3 days in advance using "
      "the originated lines",

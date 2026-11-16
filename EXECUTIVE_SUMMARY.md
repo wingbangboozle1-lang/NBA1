@@ -70,14 +70,14 @@ the hash chain are on the Settlement page.
 
 ### 0.5 What is still blocked
 
-1. **Market-anchored prior (F79).** No closing line exists anywhere in this repository
+1. **Market-anchored prior (F95).** No closing line exists anywhere in this repository
    and no NBA-operated source publishes one, so the prior weight is 0 and no
    market-blended price is published. Two validation gates are blocked on the same
    missing input.
-2. **Travel distance (F78).** Arena name, city and state are official; latitude and
+2. **Travel distance (F94).** Arena name, city and state are official; latitude and
    longitude are not published by any NBA page, so the distances are derived and flagged.
    No travel value moves a line.
-3. **The official stats pages (F80).** They cannot be read by a script. Either a headless
+3. **The official stats pages (F96).** They cannot be read by a script. Either a headless
    browser is added to the refresh job or the box-score rebuild is adopted as the
    official path. Silently straddling the two is not an option.
 

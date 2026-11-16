@@ -762,6 +762,54 @@
    "detail": "Rotation availability is the minutes-weighted share of a team's measured top-8 that is not ruled out. A player who has not appeared in an official box score this season has no measured share, so removing them changes availability by 0.00 even when a coach would have played them. The top-8 table shows the window each share was measured over.",
    "source_url": "https://www.nba.com/games",
    "status": "open"
+  },
+  {
+   "id": "F94",
+   "severity": "medium",
+   "title": "Arena latitude/longitude are not published by the NBA, so travel distances are unverified",
+   "detail": "The arena NAME, CITY and STATE on every row of the Rest & Travel page are official (printed on the official box score page of a game played there). The latitude and longitude are not printed by any NBA page, so the great-circle distances computed from them are derived, not official. They are published with this flag attached and no travel value is used to move a line.",
+   "source_url": "https://www.nba.com/games",
+   "status": "open"
+  },
+  {
+   "id": "F95",
+   "severity": "high",
+   "title": "Market-anchored prior cannot be applied: no official closing line exists anywhere in this repository",
+   "detail": "The brief asks for a market-anchored prior that blends the model line with the closing line, weighted by measured out-of-sample log-loss. No closing line is captured anywhere in this repo and no NBA-operated source publishes one, so the prior weight is set to 0 and no market-blended price is published. Inventing a closing line would be a hallucination. The weighting machinery is in place and switches on the moment a price feed is added.",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/horizon_picks_801ba27f.json",
+   "status": "open"
+  },
+  {
+   "id": "F96",
+   "severity": "medium",
+   "title": "The three official team-stat pages carry no data in an HTTP response",
+   "detail": "www.nba.com/stats/teams/traditional, /opponent and /advanced render their tables in the browser. The raw response captured this session contains zero team rows (no 'resultSets', two <table> elements, both date-picker calendars). The brief asks for these pages to be re-read and the inputs re-cut, so the same quantities were rebuilt from first principles out of official box scores, which ARE server-rendered. Every rating therefore traces to an official game page. The captured stat pages are committed as evidence.",
+   "source_url": "https://www.nba.com/stats/teams/advanced",
+   "status": "open"
+  },
+  {
+   "id": "F97",
+   "severity": "low",
+   "title": "Only 2 of the 9 games on the 2026-11-15 slate were Final at capture time",
+   "detail": "Four were still in progress and three had not tipped. Their tickets are left PENDING and are not graded. The settlement page re-reads the official feed and grades them as they go final; nothing is graded from a live score.",
+   "source_url": "https://www.nba.com/games?date=2026-11-15",
+   "status": "open"
+  },
+  {
+   "id": "F98",
+   "severity": "low",
+   "title": "The injury-report index is read once; editions published after the capture are not stored",
+   "detail": "All 75 editions the official index linked for 2026-11-15 were downloaded, hashed, stored and parsed. Editions the league publishes after the capture run are not in the repository. The revision time and the retrieval time of the newest stored edition are printed on the Injury PDF Ledger page.",
+   "source_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "status": "open"
+  },
+  {
+   "id": "F99",
+   "severity": "low",
+   "title": "Players on the injury report with no minutes this season have no measured minutes share",
+   "detail": "Rotation availability is the minutes-weighted share of a team's measured top-8 that is not ruled out. A player who has not appeared in an official box score this season has no measured share, so removing them changes availability by 0.00 even when a coach would have played them. The top-8 table shows the window each share was measured over.",
+   "source_url": "https://www.nba.com/games",
+   "status": "open"
   }
  ]
 }

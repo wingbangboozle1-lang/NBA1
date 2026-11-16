@@ -36,6 +36,42 @@
   {
    "n": 5,
    "title": "Travel is computed and flagged, not quietly used",
+   "detail": "Arena names, cities and states are official - they are printed on the box score of a game played there. Latitude and longitude are not published by any NBA page, so the great-circle distances are derived and flagged (F94). No travel value moves a line.",
+   "reading": "Rest, back-to-back and 3-in-4 are computed from the official schedule and are solid. Travel is a candidate input awaiting a source."
+  },
+  {
+   "n": 6,
+   "title": "The market-anchored prior remains switched off, and that is a finding",
+   "detail": "The brief asks for the model line to be blended with the closing line, weighted by measured out-of-sample log-loss. No closing line exists anywhere in this repository and no NBA-operated source publishes one, so the weight is 0 and no blended price is published (F95).",
+   "reading": "This is the single change that would unlock the most: two validation gates and the prior are all blocked on the same missing input."
+  },
+  {
+   "n": 1,
+   "title": "Home court is measured, not fitted: 0.5263 over 190 official finals",
+   "detail": "Home teams won 100 of 190 official finals from 2026-10-20 to 2026-11-15. Converted through the empirical margin distribution (sigma 16.78) that is 1.108 points, and that is the number every line now uses. An earlier build fitted home court freely and got 3.51 points with a standard error of 2.28 - a number the data cannot support.",
+   "reading": "The pinned value is smaller and honest. It is not a tweak; it removes a free parameter that was soaking up noise."
+  },
+  {
+   "n": 2,
+   "title": "The two estimators disagree by 4.05 points on the spread on average",
+   "detail": "Estimator 1 builds the line from possessions and points per possession. Estimator 2 uses a completely different information set: a least-squares power rating solved from official final margins, and the teams' own scored and allowed rates. Across the 34 games on the slate they disagree by 4.05 points on the spread on average and up to 8.8.",
+   "reading": "The disagreement is the headline number on the projection page. The 50/50 blend sits underneath it and is never the headline."
+  },
+  {
+   "n": 3,
+   "title": "Two independent estimators are only useful if they are actually independent",
+   "detail": "The first attempt at a second estimator reused the same efficiency ratings with different arithmetic and disagreed by 0.1 to 0.2 points - noise dressed up as a signal. It was replaced with a margin-based power rating on a different information set.",
+   "reading": "A disagreement that is smaller than the rounding is not a confidence signal. This is worth checking on any future estimator added to the site."
+  },
+  {
+   "n": 4,
+   "title": "The official injury report changed 28 times in one day",
+   "detail": "The league published 75 editions on 2026-11-15. Every one was downloaded, hashed, stored and parsed, and each was diffed against the edition immediately before it. Twenty-eight status changes were found, including T.J. McConnell Probable to Available at 12:15 PM ET and Andrew Nembhard Questionable to Out in the same minute.",
+   "reading": "Any rotation read older than a few hours is stale. The banner on the Injury PDF Ledger page prints the revision time and the retrieval time so the reader can see exactly how old it is."
+  },
+  {
+   "n": 5,
+   "title": "Travel is computed and flagged, not quietly used",
    "detail": "Arena names, cities and states are official - they are printed on the box score of a game played there. Latitude and longitude are not published by any NBA page, so the great-circle distances are derived and flagged (F78). No travel value moves a line.",
    "reading": "Rest, back-to-back and 3-in-4 are computed from the official schedule and are solid. Travel is a candidate input awaiting a source."
   },
@@ -128,12 +164,12 @@
  "recommended_next_actions": [
   {
    "rank": 1,
-   "action": "Log a closing price for every graded play. It is the only missing input that blocks two validation gates and the market-anchored prior (F79, Q25).",
+   "action": "Log a closing price for every graded play. It is the only missing input that blocks two validation gates and the market-anchored prior (F95, Q25).",
    "why": "Until it exists, 'units won' measures the model against a naive model."
   },
   {
    "rank": 2,
-   "action": "Decide whether the official input path is the stats pages or the box-score rebuild (F80, Q28).",
+   "action": "Decide whether the official input path is the stats pages or the box-score rebuild (F96, Q28).",
    "why": "Two sources of truth is worse than either one chosen deliberately."
   },
   {
