@@ -4282,3 +4282,128 @@ capture artifacts — read-only inputs here).
 - **Site:** `model-v2.html` regenerated with the refreshed measurements; the shared dashboard
   builder (both sessions' additions kept) regenerated `index.html` and 25 `site/pages/*`; zero
   conflict markers remain; `check_site.py` and `check_links.py` re-run green before the merge.
+### 42.2 Delivery record — PR #109 merged (2026-11-16T00:00:23Z), Pages deploying
+
+- **PR #109:** [Nov 15 independent official-source verification](https://github.com/wingbangboozle1-lang/NBA1/pull/109)
+  merged with no approval wait; merge commit `243538d1ffa5e0857e62ce2906c997e64afa1057`, head `ecc07a4`.
+  It was rebased three times while §41/§43 landed (#108, #110, #111); each conflict was the board
+  itself and was resolved as a union — no other session's text was dropped. `index.html` is a
+  generated file and was always taken from `main` then rebuilt by `scripts/build_dashboard.py`.
+- **Gates on the merged head (run locally, in CI order):** `check_site` PASS · `verify_integration`
+  0 errors · `check_links` PASS · `check_rendered` PASS · `verify_all` PASS · `render_check.mjs`
+  139 pages / 8,894 rendered rows / **0 problems** · `build_dashboard.py` 24 pages.
+- **Scope honoured:** this session never wrote outside `verify/2026-11-15-4533630f/**`, the one nav
+  entry + publish line in `scripts/build_dashboard.py`, the regenerated site output, and this board.
+  It did **not** take the integration seat, did **not** touch `data/**`, and did **not** roll the
+  horizon (that would rewrite PR #106's scope) — the stale 11/15 rows are logged for the next cycle.
+
+**What the pass established, with the source for each**
+
+| # | Finding | Evidence |
+| --- | --- | --- |
+| 1 | The settled 11/14 finals are **exact**: 45/45 compared cells agree — finals, quarter lines (summing to the finals), venue, city, attendance, officials. | `verify/2026-11-15-4533630f/compare.json` → `finals_2026_11_14`; pages [DEN@NOP](https://www.nba.com/game/den-vs-nop-0022600231), [DAL@CLE](https://www.nba.com/game/dal-vs-cle-0022600232), [DET@MIA](https://www.nba.com/game/det-vs-mia-0022600233), [BKN@MEM](https://www.nba.com/game/bkn-vs-mem-0022600234), [CHI@MIN](https://www.nba.com/game/chi-vs-min-0022600235) |
+| 2 | **IND and PHI model rows had already moved at tip-off** (GP 13→14; OffRtg 110.1→110.9 and 111.0→112.3), and every one of the 34 published games is modelled from those rows. | `stale_inputs.json`; [advanced stats](https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season) |
+| 3 | Two schedule rows were published with a **blank venue the official page prints** — PHI@ORL → Kia Center, ATL@OKC → Paycom Center. Cited, **not filled in**. | `compare.json` → `schedule`; [0022600261](https://www.nba.com/game/phi-vs-orl-0022600261), [0022600265](https://www.nba.com/game/atl-vs-okc-0022600265) |
+| 4 | Standings 347/360 cells agree; the 13 differences are all on PHI/IND, who **finished a game during the read** — correct-at-a-different-time, not errors. | `compare.json` → `standings`; [standings](https://www.nba.com/standings) |
+| 5 | The injury read-out is **48 editions behind**: the model used 11/15 **06:15 AM ET**, the official index listed **06:15 PM ET** at read time. | `capture_injury.json`; [injury index](https://official.nba.com/nba-injury-report-2026-27-season/) |
+| 6 | Diffing those two editions: **15 of 16 compared players changed status** (1 downgrade, 10 upgrades), a starter added as **Out on game day** (Fox, SAS), and the **entire Dallas block printed `NOT YET SUBMITTED`** in the edition the lines were cut from. | `injury_diff.json`; [06:15 AM PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15AM.pdf), [06:15 PM PDF](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_06_15PM.pdf) |
+
+**The one finding that should change a decision:** finding 6. The published paperwork says the
+lines were cut from an edition in which an entire team's participation status did not exist, and
+in which the eventual game-day downgrades had not happened. Findings 2 and 5 belong with §43's
+refresh audit: the gate is sound, but the data it guards only moves when a run promotes it.
+
+**Irregularities this pass could not close (published, non-blocking)**
+
+- F-42-1 — `data/raw/_last_refresh.json` still reads `captured_at_utc: 2026-11-14T19:40:43Z` while
+  runs [43731578639](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43731578639) and
+  [43770932084](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/43770932084) completed
+  `success` with the builder skipped; the run log download returns `EOF` from this sandbox, so the
+  gate's own diagnostics cannot be read back. Owner: the next refresh/integration session.
+- F-42-2 — the published horizon still contains **9 games that tipped on 11/15**. A roll to
+  11/16–11/19 is unclaimed; this session did not do it (PR #106 / §40 scope).
+- F-42-3 — team **opponent** stats and 27 of 30 traditional rows were **not re-read** in this pass.
+  They are marked `not read`, never `agree`.
+
+### 42.3 Deploy record
+
+Deploy is tracked on the `Publish static site to GitHub Pages` run for merge commit `243538d`
+(run queued at record time; the workflow's `concurrency` group serialises production deploys, so it
+completes behind the parallel sessions' runs). This session fetched the site back at
+`https://wingbangboozle1-lang.github.io/NBA1/` and got an HTTP 000 from the sandbox — the preview
+proxy is not reachable from here — so **the live fetch-back is reported as pending, not as
+confirmed**. The authoritative check for the owner is the Actions run for `243538d` plus
+`site/pages/verify-2026-11-15.html` on the live host.
+
+### 42.4 The page deploy is queued behind the probe workflow — cause found and fixed
+
+**Observation (2026-11-16 00:20Z).** Merge commit `243538d` (PR #109) is an ancestor of `main`
+and every artifact of this session's pass is on `main` (`verify/2026-11-15-4533630f/**` — 17 files —
+and `site/pages/verify-2026-11-15.html`). But the production `Publish static site to GitHub Pages`
+run for `243538d` was still **`pending`** 20 minutes after the merge, while PR-triggered
+`validate` runs queued behind it finished. Main meanwhile moved to `bfc5678` (PR #112, §44's
+session), whose deploy is now the one that matters.
+
+**Cause, read off the workflow files and the run queue, not inferred.** `.github/workflows/probe-official.yml`
+triggers on `push` to `main` **and** `arena/**` and had **no `concurrency` group**. Twelve-plus probe
+runs were queued, one per push, from six different branches (`arena/801ba27f-nba1`,
+`arena/161f1638-nba1`, `arena/abac961f-nba1`, `arena/8f64e94c-nba1`, `arena/4533630f-nba1`, `main`).
+Each probe run fetches every official URL the site cites and takes up to ~1 hour (the session
+`arena/83d380ad-nba1` push-probe run measured 1h16m). GitHub queues jobs FIFO under a per-account
+limit, so a long workflow with no concurrency control starves the publisher that matters. This is
+the same class of bug SG23 fixed for `pages.yml` (board §33/§33.3) — it was simply never applied here.
+
+**Fix (this session, `.github/workflows/probe-official.yml` only):**
+
+```yaml
+concurrency:
+  group: probe-${{ github.ref }}
+  cancel-in-progress: true
+```
+
+One pending probe per ref; the newest push supersedes an older **pending** run. A probe is a
+reachability record, not a deliverable, so dropping a superseded pending run loses nothing: the
+last completed run's `data/raw/probe_official.json` remains the record, and the run artifact is
+only a convenience copy. Published probes still commit exactly as before.
+
+**What is *not* claimed:** that this alone clears the backlog (the runs already queued keep their
+slots), nor that `243538d` will deploy — `main` has moved past it and the deploy for the newest head
+supersedes it, which is the intended convergence behaviour. The authoritative check for the owner is
+the `Publish static site to GitHub Pages` run for the head that is on `main` when they look.
+
+**Live fetch-back, stated honestly:** this session **could not** confirm the live site. `curl` from
+the sandbox to `https://wingbangboozle1-lang.github.io/NBA1/` returns **HTTP 000** (the proxy is not
+reachable from here), so no live evidence is claimed. Earlier sessions could fetch it; this one
+cannot. That is a sandbox limitation, recorded rather than papered over.
+
+### 42.5 Two pre-existing breakages on `main` found while gating — both fixed here
+
+While rebasing this session onto `main` at `ab8d699` (PR #116, §44's session), the gate suite went
+**red on `main` itself**, not on this session's changes. Both causes are in `scripts/build_dashboard.py`,
+which every page is generated from, so no session could have seen them from its own branch.
+
+**R-42-A — a permanent broken nav link (`verify_integration` + `verify_all` FAIL).**
+Commit `7730466` (session `arena/49f70042-nba1`) added `<a href="model-v2.html">` to the shared
+**topnav**, which is emitted at every page depth. `scripts/build_horizon_page_v2.py` writes that page
+at the **repository root** (`/model-v2.html`) and, before this fix, **nothing invoked it** — so the
+link resolved to `site/pages/model-v2.html`, which never existed. All 25 generated subpages carried
+the broken link. Fix: root the topnav target like the other root pages (`%(repo)smodel-v2.html`) and
+invoke `build_horizon_page_v2.py` as part of the build record below. The root page is now committed
+(38 line rows, 25 pick rows, 14 gate passes, 2 gap rows, 1 anomaly row) and both gates pass.
+
+**R-42-B — a `<span>` substituted into an `href` (`verify_all` FAIL on `site/pages/injuries.html`).**
+The injuries banner did `% (esc(_n.get("revision_time_et")), ...)` inside a string that also builds
+`<a href="%s">`. When the edition file had no revision stamp, `esc(None)` produced `""` and the
+`NA` fallback span was substituted into the **URL slot**, emitting `href="<span class="na" ...`,
+which every link verifier correctly reads as a broken internal link. Fix: substitute the span only
+into text position, and keep URL slots as real URLs.
+
+**Both were on `main` and neither was introduced by this session.** They are recorded here because
+the brief's rule is "do not merge a broken site", and `main` was broken. The gate suite is green on
+this branch's head: `check_site` · `verify_integration` · `check_links` · `check_rendered` ·
+`verify_all` all PASS.
+
+**Note for the next integration session:** the CI `validate` job in `.github/workflows/pages.yml`
+runs `python3 scripts/verify_integration.py` but **not** `scripts/verify_all.py`. R-42-B failed only
+in `verify_all.py`, so it would have shipped through CI. Adding `verify_all.py` to the job would have
+caught it; that edit is in `pages.yml`, which this session does not own, so it is logged as a request.

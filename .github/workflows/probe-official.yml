@@ -24,6 +24,25 @@ on:
 permissions:
   contents: write
 
+# Concurrency (added by session arena/4533630f-nba1, COORDINATION §42.4).
+#
+# Observed 2026-11-16 00:20Z: this workflow is triggered by every push to any
+# arena/** branch and has no concurrency group, so parallel sessions queue a
+# separate ~1-hour probe run per push. At that moment the queue held six probe
+# runs ahead of the production "Publish static site to GitHub Pages" run for
+# main, and the push deploy for the merged commit was still `pending` ~20
+# minutes after the merge while PR-triggered validations behind it also
+# completed. GitHub runs at most a bounded number of jobs per account and
+# queues the rest FIFO, so a long, unbounded workflow starves the publisher.
+#
+# Fix: one pending probe per ref, and the newest push supersedes the older
+# pending run. A probe is a reachability record, not a deliverable, so
+# dropping a superseded pending run loses nothing - the committed
+# data/raw/probe_official.json from the last completed run is still the record.
+concurrency:
+  group: probe-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   probe:
     if: "!contains(github.event.head_commit.message, '[skip probe]')"
