@@ -501,32 +501,49 @@ def build_injury_ledger():
 
 
 def build_settlement():
+    # Schema note (arena/0e9c924f-nba1, §50 N04): this builder previously read
+    # keys (n_graded / n_pending / units_today / pre_tip_anchor) that no
+    # settlement file written by scripts/settle_slate.py has ever carried, so
+    # it crashed with KeyError.  It now reads the real settle_slate.py schema
+    # (summary.* + slate_archive.*) and derives the stamp values from it.
     s = jload(os.path.join(SETTLE, "settlement_2026-11-15.json"))
     led = jload(os.path.join(ROOT, "data", "ledger", "ledger.json"))
+    summ = s.get("summary", {})
+    n_graded = len(s.get("singles", [])) + sum(
+        1 for p in s.get("parlays", []) if p.get("result")) + s.get("summary", {}).get("sgp_settled", 0)
+    n_pending = (summ.get("sgp_published", 0) - summ.get("sgp_settled", 0))
     srows = []
     for r in s["singles"]:
+        final = (f"{r.get('away_pts')}-{r.get('home_pts')}"
+                 if r.get("away_pts") is not None else None)
         srows.append([r["date"], r["matchup"], esc(r["pick_line"]),
-                      val(r.get("final_score")), val(r.get("margin_pick_team")),
+                      val(final), val(r.get("margin_pick_team")),
                       "<strong>%s</strong>" % esc(r["result"]), val(r["units"]),
-                      link(r.get("source_url") or
+                      link(r.get("source_url") or r.get("source_game_url") or
                            "https://www.nba.com/games?date=2026-11-15", "official final")])
     lrows = [[val(e["entry"]), esc(e["type"]), esc(e["at_utc"]),
               '<span class="mono">%s</span>' % esc((e["head"] if "head" in e
                                                     else e.get("prev") or "")[:16]),
               link("https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json",
                    "ledger")] for e in led["entries"]]
+    arch = s.get("slate_archive", {})
     body = [
         note("ok", "<strong>Settlement stamp.</strong> Slate 2026-11-15 settled "
-                   "<strong>%s</strong> from official finals only. "
-                   "<strong>%d</strong> tickets graded, <strong>%d</strong> left PENDING "
-                   "because the official page is not Final yet, units <strong>%s</strong>."
-             % (esc(s["settled_at_utc"]), s["n_graded"], s["n_pending"],
-                val(s["units_today"]))),
+                   "<strong>%s</strong> from official finals only "
+                   "(dates settled: %s; dates still open: %s). "
+                   "<strong>%d</strong> tickets graded, <strong>%d</strong> left PENDING, "
+                   "units <strong>%s</strong>. %s"
+             % (esc(s["settled_at_utc"]),
+                esc(", ".join(summ.get("dates_settled", [])) or "(none)"),
+                esc(", ".join(summ.get("dates_unsettled", [])) or "(none)"),
+                n_graded, n_pending,
+                val(summ.get("total_units_settled")),
+                esc(summ.get("validation_note", "")))),
         note("info", "Pre-tip anchor: <code>%s</code> SHA-256 "
                      "<span class='mono'>%s</span>. Nothing graded here was published "
                      "after the first tip."
-             % (esc(s["pre_tip_anchor"]["publication_file"]),
-                esc(s["pre_tip_anchor"]["sha256"][:32]))),
+             % (esc(arch.get("picks", "?")),
+                esc((arch.get("picks_sha256") or "")[:32]))),
         "<h2>Singles</h2>",
         table(["Date", "Game", "Ticket", "Official final", "Margin", "Result",
                "Units", "Source"], srows),
