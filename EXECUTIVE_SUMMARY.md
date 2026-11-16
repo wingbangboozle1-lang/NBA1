@@ -1,12 +1,98 @@
 # Executive summary — NBA1 line origination and strategy lab
 
-**As of** 2026-11-14 (UTC) · **Session** `arena/934ca56f-nba1` · **Live site**
-<https://wingbangboozle1-lang.github.io/NBA1/>
+**As of** 2026-11-15 (UTC) · **Latest rebuild** session `arena/801ba27f-nba1` ·
+**Live site** <https://wingbangboozle1-lang.github.io/NBA1/>
+
+> **2026-11-15 update — read this first.** The model inputs were re-cut from first
+> principles out of official box scores (§0 below). Sections 1 onward are the
+> 2026-11-14 statement and are preserved unchanged for the audit trail; where they
+> disagree with §0, §0 is the current position.
 
 This document states what the system does, what it has actually established, what it has
 not, and what a decision-maker needs in front of them before choosing anything. Every
 number here is traceable to an official source; the source for each claim is named inline.
 Where a value could not be confirmed it is described as unconfirmed rather than filled in.
+
+---
+
+## 0. The 2026-11-15 re-cut — current position
+
+**Session** `arena/801ba27f-nba1` · **COORDINATION.md §41** · **Requirements coverage**:
+<https://wingbangboozle1-lang.github.io/NBA1/site/pages/requirements.html>
+
+### 0.1 Why the inputs were rebuilt
+
+The brief asks for the three official team-stat pages (traditional, opponent,
+advanced) to be re-read and the model inputs re-cut. All three were fetched. **None
+carries data in an HTTP response** — they render their tables in the browser, so the
+raw response contains no team rows (evidence: `data/raw/html/2026-11-15-801ba27f/
+team_advanced.html.gz`, zero `resultSets`, two `<table>` elements, both date-picker
+calendars). The official **box score** pages, by contrast, are server-rendered and carry
+the complete official team and player statistics, so the same quantities were rebuilt
+from those instead:
+
+```
+POSS    = FGA - OREB + TOV + 0.44 * FTA        (official box score terms)
+OFF_RTG = 100 * PTS / POSS
+DEF_RTG = the opponent's OFF_RTG in the same game
+PACE    = POSS per game
+```
+
+**222 games** were captured (2026-10-20 to 2026-11-18), **190** of them Final. On every
+Final game the quarter scores were asserted to sum to the final score; there are no
+failures. Every rating on the site now traces to an official game page.
+
+### 0.2 What changed
+
+| Change | Before | Now | Source |
+| --- | --- | --- | --- |
+| Home court | fitted freely: +3.51 pts, standard error 2.28 | **pinned to the measured home-win rate**: 0.5263 over 190 finals → **1.108 pts** | `data/derived/measured_constants_2026_27.json` |
+| Confidence signal | one blended rating | **disagreement between two independent estimators**, mean **4.05 pts** on the spread | `data/derived/estimators_2026_27.json` |
+| Ratings | scraped from a page that returns no data | rebuilt from official box scores, 190 finals | `data/derived/team_ratings_2026_27.json` |
+| Injury handling | one edition transcribed by hand | **75 editions** downloaded, hashed, stored, parsed; **28 status changes** computed between consecutive editions | `data/injury_reports/diff_2026-11-15.json` |
+| Parlay pricing | model-derived rho | **measured** rho (cross-game 0.0142 over 1,546 pairs; team-mates -0.0975 over 374), naive product printed beside it | `data/derived/rho_2026_27.json` |
+| Rotation | minutes known for 50 players | measured top-8 minutes shares for all 30 teams, with a worked replacement | `data/derived/rotation_2026_27.json` |
+| Surfaces | one mixed page | **projection** (safe) and **bet** (gated) as separate pages, never merged | `site/pages/projection.html`, `site/pages/bet-surface.html` |
+
+### 0.3 The rolling window
+
+Today plus three days, per the brief: **2026-11-15 to 2026-11-18, 34 games**, of which
+**28 had not tipped** at publication. Games that had already tipped are excluded from the
+bet surface and are shown on the projection surface with their official status.
+
+### 0.4 Settlement
+
+The 2026-11-15 slate was settled from official finals only. At capture **2 of 9 games
+were Final** and both published tickets on them won (**+2.00** paper units); four games
+were in progress and three had not tipped, so their **7 tickets remain PENDING**. Nothing
+was graded from a live score. The pre-tip anchor (SHA-256 of the publication file) and
+the hash chain are on the Settlement page.
+
+### 0.5 What is still blocked
+
+1. **Market-anchored prior (F79).** No closing line exists anywhere in this repository
+   and no NBA-operated source publishes one, so the prior weight is 0 and no
+   market-blended price is published. Two validation gates are blocked on the same
+   missing input.
+2. **Travel distance (F78).** Arena name, city and state are official; latitude and
+   longitude are not published by any NBA page, so the distances are derived and flagged.
+   No travel value moves a line.
+3. **The official stats pages (F80).** They cannot be read by a script. Either a headless
+   browser is added to the refresh job or the box-score rebuild is adopted as the
+   official path. Silently straddling the two is not an option.
+
+### 0.6 Requirements
+
+**16 of 21** numbered instructions in the brief are fully delivered; the remaining five
+are partial or blocked, and each says exactly what is missing. One page, one row per
+instruction: <https://wingbangboozle1-lang.github.io/NBA1/site/pages/requirements.html>
+
+### 0.7 Verification performed
+
+All gates pass on the merged tree: `check_site` · `check_links` · `check_rendered` ·
+`verify_all` (VERIFY OK) · `verify_integration` (0 errors, 44 pre-existing warnings) ·
+`render_check` (146 pages / 9,238 rendered rows / 0 problems) · `verify_ledger`
+(chain OK) · `build_verification_page` idempotent.
 
 ---
 
