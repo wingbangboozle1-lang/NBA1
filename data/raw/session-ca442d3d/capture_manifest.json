@@ -1,0 +1,139 @@
+{
+ "session": "arena/ca442d3d-nba1",
+ "run_at_utc": "2026-11-17T16:00:00Z",
+ "hosts_allowed": [
+  "ak-static.cms.nba.com",
+  "official.nba.com",
+  "statsdmz.nba.com",
+  "www.nba.com"
+ ],
+ "rule": "Bytes as received, content-addressed. This script publishes no parsed value: parsing happens locally on the stored bytes so it can be re-run and audited.",
+ "days": [
+  {
+   "date": "2026-11-16",
+   "games": 8,
+   "marked_final": 0,
+   "http_status": 200,
+   "page_stored": "data/raw/session-ca442d3d/html/games_2026-11-16__fb09b260a26436e2da1997a27c7a173ca779b0934df69d46458ac04eb2c799a4.json.gz"
+  },
+  {
+   "date": "2026-11-17",
+   "games": 5,
+   "marked_final": 0,
+   "http_status": 200,
+   "page_stored": "data/raw/session-ca442d3d/html/games_2026-11-17__537224ac92b0d5f4a791183b2f38ba98cd26f8af5442ad767305d0be0144b4ba.json.gz"
+  }
+ ],
+ "pages": [
+  {
+   "kind": "slate",
+   "date": "2026-11-17",
+   "games": 5,
+   "http_status": 200,
+   "stored": "data/raw/session-ca442d3d/html/slate_2026-11-17__146d58eee53c85f81cc2644f9cc10a02f14c1c16e2e46f2bf325a6c1ca274711.json.gz",
+   "sha256": "146d58eee53c85f81cc2644f9cc10a02f14c1c16e2e46f2bf325a6c1ca274711",
+   "retrieved_at_utc": "2026-11-17T16:00:01Z"
+  },
+  {
+   "kind": "slate",
+   "date": "2026-11-18",
+   "games": 12,
+   "http_status": 200,
+   "stored": "data/raw/session-ca442d3d/html/slate_2026-11-18__5e9b61b0bb1aacd945136082fc32c6c8c01c2abb16bbe6a44a128de4f882afca.json.gz",
+   "sha256": "5e9b61b0bb1aacd945136082fc32c6c8c01c2abb16bbe6a44a128de4f882afca",
+   "retrieved_at_utc": "2026-11-17T16:00:01Z"
+  },
+  {
+   "kind": "slate",
+   "date": "2026-11-19",
+   "games": 4,
+   "http_status": 200,
+   "stored": "data/raw/session-ca442d3d/html/slate_2026-11-19__354efdd318bf38d42b0f1a410af452820cfb06cc2a8c8968c3d57862ef6529bf.json.gz",
+   "sha256": "354efdd318bf38d42b0f1a410af452820cfb06cc2a8c8968c3d57862ef6529bf",
+   "retrieved_at_utc": "2026-11-17T16:00:02Z"
+  },
+  {
+   "kind": "slate",
+   "date": "2026-11-20",
+   "games": 9,
+   "http_status": 200,
+   "stored": "data/raw/session-ca442d3d/html/slate_2026-11-20__53312b082c31e699596ad710d8cbabcf75c3c7c70988558cbf7ffda948dbe81a.json.gz",
+   "sha256": "53312b082c31e699596ad710d8cbabcf75c3c7c70988558cbf7ffda948dbe81a",
+   "retrieved_at_utc": "2026-11-17T16:00:03Z"
+  },
+  {
+   "url": "https://www.nba.com/standings",
+   "name": "standings_2026-11-17",
+   "http_status": 200,
+   "error": null,
+   "attempts": 1,
+   "stored": "data/raw/session-ca442d3d/pages/standings_2026-11-17__d214c4f4e0a829301b2e7514dd0e84248f71675b9c0f37c74aed699f9e1f9e7f.json.gz",
+   "sha256": "d214c4f4e0a829301b2e7514dd0e84248f71675b9c0f37c74aed699f9e1f9e7f",
+   "bytes": 254103,
+   "retrieved_at_utc": "2026-11-17T16:00:03Z",
+   "kind": "standings"
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/traditional",
+   "name": "teams_traditional_2026-11-17",
+   "http_status": 200,
+   "error": null,
+   "attempts": 1,
+   "stored": "data/raw/session-ca442d3d/pages/teams_traditional_2026-11-17__d3c24cb24ba5223517ed8b15a604c73cae79db42ca49801cfe2ce43b99718de0.json.gz",
+   "sha256": "d3c24cb24ba5223517ed8b15a604c73cae79db42ca49801cfe2ce43b99718de0",
+   "bytes": 322557,
+   "retrieved_at_utc": "2026-11-17T16:00:03Z",
+   "kind": "teams_traditional"
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/opponent",
+   "name": "teams_opponent_2026-11-17",
+   "http_status": 200,
+   "error": null,
+   "attempts": 1,
+   "stored": "data/raw/session-ca442d3d/pages/teams_opponent_2026-11-17__6f21e4c688eb25022bf383f7e4573206a5760c7a55ccaf95b7c811e4f621f1b7.json.gz",
+   "sha256": "6f21e4c688eb25022bf383f7e4573206a5760c7a55ccaf95b7c811e4f621f1b7",
+   "bytes": 322494,
+   "retrieved_at_utc": "2026-11-17T16:00:04Z",
+   "kind": "teams_opponent"
+  },
+  {
+   "url": "https://www.nba.com/stats/teams/advanced",
+   "name": "teams_advanced_2026-11-17",
+   "http_status": 200,
+   "error": null,
+   "attempts": 1,
+   "stored": "data/raw/session-ca442d3d/pages/teams_advanced_2026-11-17__815313c0117866813bbac2abb88dfb12c9c5b2f9cdb33664c69cedec06f6fce7.json.gz",
+   "sha256": "815313c0117866813bbac2abb88dfb12c9c5b2f9cdb33664c69cedec06f6fce7",
+   "bytes": 322487,
+   "retrieved_at_utc": "2026-11-17T16:00:04Z",
+   "kind": "teams_advanced"
+  },
+  {
+   "url": "https://www.nba.com/schedule",
+   "name": "schedule_page_2026-11-17",
+   "http_status": 200,
+   "error": null,
+   "attempts": 1,
+   "stored": "data/raw/session-ca442d3d/pages/schedule_page_2026-11-17__4f732fcaee4b351bde908409c24534544ca6d63c6049ff4ac21736bbcd3daffc.json.gz",
+   "sha256": "4f732fcaee4b351bde908409c24534544ca6d63c6049ff4ac21736bbcd3daffc",
+   "bytes": 232236,
+   "retrieved_at_utc": "2026-11-17T16:00:05Z",
+   "kind": "schedule_page"
+  },
+  {
+   "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "name": "injury_index_2026-11-17",
+   "http_status": 200,
+   "error": null,
+   "attempts": 1,
+   "stored": "data/raw/session-ca442d3d/pages/injury_index_2026-11-17__db12c2d89b18c6243385ccf28a63dfc9f22247ef09330c07a09a4608358766d3.json.gz",
+   "sha256": "db12c2d89b18c6243385ccf28a63dfc9f22247ef09330c07a09a4608358766d3",
+   "bytes": 123038,
+   "retrieved_at_utc": "2026-11-17T16:00:05Z",
+   "kind": "injury_index"
+  }
+ ],
+ "gamebooks": [],
+ "failures": []
+}
