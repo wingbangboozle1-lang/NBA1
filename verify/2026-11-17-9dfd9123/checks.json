@@ -1,0 +1,18 @@
+{
+  "session": "arena/9dfd9123-nba1",
+  "section": "COORDINATION §62",
+  "run_utc": "2026-11-17T15:50Z",
+  "files": {
+    "data/official/results_2026-11-16.json": "9f52ae3db588f000d8ea02bfe93a4fada4541e9b2d16550c0f3f22ca6b77f37a",
+    "data/settlement/settlement_2026-11-16.json": "e1c9f89fb34ca20aed052acce32188486e2a6af2bf9a2c17fc15fbd992002b1d",
+    "data/ledger/ledger.json": "75d94c8177b34a378be57675b87b1d7555098374ccf89ddd8e2fdef6c6e72321"
+  },
+  "ledger_head": "fda709d662b8d39215820211ae7cf0f34b567c26a1a5ca2b0582d7933109155f",
+  "checks": {
+    "scripts/settle_slate.py --slate 2026-11-16 --dry-run": "ready to settle 2026-11-16 (all 8 games verified FINAL)",
+    "scripts/settle_slate.py --slate 2026-11-16 --by arena/9dfd9123-nba1": "exit 0; wrote settlement_2026-11-16.json; ledger entries 8 and 9 appended",
+    "scripts/verify_all.py": "exit 0",
+    "scripts/verify_ledger.py": "exit 0 ('ledger chain OK')"
+  },
+  "settlement_summary": {"record": "3-5-0", "singles_units_at_minus110": -2.5, "parlays": "0-3, -3.3u", "sgp": "2 published, 0 settled (no box score captured for player legs)", "total_units_settled": -5.8}
+}

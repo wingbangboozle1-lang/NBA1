@@ -5,7 +5,7 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
-## 🔑 ACTIVE CLAIM — session `arena/9dfd9123-nba1` (opened 2026-11-17 15:4x UTC — 11/16 game day ended: official finals capture for all 8 games, results feed rows, sealed-ledger settlement of the 2026-11-16 slate from official finals, verification record; §62)
+## 🔑 CLAIM DELIVERED — session `arena/9dfd9123-nba1` (opened 2026-11-17 15:4x UTC; delivered 2026-11-17 15:5x UTC, §62.1 — 11/16 game day ended: official finals capture for all 8 games, results feed rows, sealed-ledger settlement of the 2026-11-16 slate from official finals, verification record; §62)
 
 Branch `arena/9dfd9123-nba1`, based on `main` `22d56af` (PR #160). The platform pins this session to that
 branch (the `session-<id>/<task>` naming is satisfied by this pre-named branch; deviation logged as in every
@@ -6921,11 +6921,26 @@ Outputs archived in `verify/2026-11-16-23ec1e32/` (README.md + nine `.out` files
 ## 62. Session `arena/9dfd9123-nba1` — 11/16 official finals, results feed, sealed-ledger settlement (claimed 2026-11-17 15:4x UTC)
 
 Claim, scope and board read: see the banner at the top of this file. Task table and delivery record
-are added below as the work lands. Status of this section: **in progress**.
+are added below as the work lands. Status of this section: **delivered** (§62.1).
 
 | # | Task | Status | File scope |
 | --- | --- | --- | --- |
-| S01 | Capture the eight 2026-11-16 official game pages (nba.com/game/…): status, LINESCORES quarters, final score; one row per game | in progress | `data/official/results_2026-11-16.json` |
-| S02 | Settle the 2026-11-16 slate from the pre-tip archive (`data/archive/horizon_picks_2026-11-16.json`, ledger entry 5) via `scripts/settle_slate.py`; refuse if any game is not verified FINAL | pending S01 | `data/settlement/settlement_2026-11-16.json`, `data/ledger/ledger.json` |
-| S03 | Verify the settlement chain (`scripts/verify_ledger.py`), write the evidence record | pending S02 | `verify/2026-11-17-9dfd9123/**` |
-| S04 | Register evidence rows R02/R03/R19 (no status change unless the evidence supports it) | pending S03 | `data/content/requirements.json` |
+| S01 | Capture the eight 2026-11-16 official game pages (nba.com/game/…): status, LINESCORES quarters, final score; one row per game | done (8/8 FINAL, two official reads each) | `data/official/results_2026-11-16.json` |
+| S02 | Settle the 2026-11-16 slate from the pre-tip archive (`data/archive/horizon_picks_2026-11-16.json`, ledger entry 5) via `scripts/settle_slate.py`; refuse if any game is not verified FINAL | done (dry run, then real run; ledger entries 8 and 9) | `data/settlement/settlement_2026-11-16.json`, `data/ledger/ledger.json` |
+| S03 | Verify the settlement chain (`scripts/verify_ledger.py`), write the evidence record | done (`verify_ledger` chain OK; `verify_all` OK) | `verify/2026-11-17-9dfd9123/**` |
+| S04 | Register evidence rows R02/R03/R19 (no status change unless the evidence supports it) | done (evidence appended; statuses unchanged) | `data/content/requirements.json` |
+
+### §62.1 Delivery record
+
+- **Result.** All eight 2026-11-16 games are FINAL. Each final was read from the nba.com game page (LINESCORES) and from the gamebook PDF on statsdmz.nba.com (SCORE BY PERIOD). Quarters sum to finals. Files: `data/official/results_2026-11-16.json`, `data/settlement/settlement_2026-11-16.json`.
+- **Settlement.** The dry run found 11/16 ready to settle, then the real run settled it from the pre-tip archive (sha256 `9b43d77b…` matches ledger entry 5). Ledger entries 8 and 9 were appended, and the chain is OK. Record **3-5** on eight singles (−2.5u). Parlays **0-3** (−3.3u). SGP 2 published, 0 settled. Total −5.8u. All units are paper, zero stake, unfunded. Hand check of every single against the official margins: done.
+- **Checks.** `scripts/verify_all.py` OK (failures 0). `scripts/verify_ledger.py` ledger chain OK. Record: `verify/2026-11-17-9dfd9123/` (REPORT.md, checks.json with file hashes and ledger head `fda709d6…`).
+- **Evidence rows.** R02, R03 and R19 in `data/content/requirements.json` carry 11/16 evidence. No status changed. Each already read `done`.
+- **Scope kept.** `index.html`, shared chrome, `engine/**`, `data/archive/**`, the 11/17–11/19 horizon, and PRs #152/#155 were not touched.
+- **Flags (non-blocking; for the integration seat):**
+  - **F-62-01.** `data/official/results_feed_2026_27.json` still lists the eight 11/16 games as scheduled rows (status 1, 0-0). It is the model-corpus feed, and changing it moves published model numbers. Left for integration.
+  - **F-62-02.** `verify_all.py` regenerates `site/pages/results.html` and `site/pages/backtest.html` from the new data. The regenerated results page shows the 11/16 section (ALL FINAL, settleable) and the new ledger head. These shared outputs were reverted here, per the rule that only the integration seat changes them. **Integration must rebuild these pages.**
+  - **F-62-03.** `settlement_2026-11-16.json` rules text names `data/official/results_2026-11-14.json` as the finals source. This is the same defect as 11/15 (it copies the frozen rules verbatim). The `official_finals_files` field points to the correct 11/16 file.
+  - **F-62-04.** Tip times, AP headlines and the ORL@BOS officials line were not captured this session. They are blank and flagged in `results_2026-11-16.json`.
+  - **F-62-05.** The `probe-official` cancellations (~25 min) noted in §61 remain uninvestigated.
+- **Handoff.** The next settlement seat for 11/17 needs `results_2026-11-17.json`, which does not yet exist.

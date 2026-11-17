@@ -159,7 +159,47 @@
     ]
    },
    "prev": "d5f75692d7d7f1dc8d2019a39c4f3c2850e4386c9e1a9df47648f7b8b739a216"
+  },
+  {
+   "entry": 8,
+   "type": "settlement_settlement_verification",
+   "at_utc": "2026-11-17T15:46Z",
+   "verifies_entry": 5,
+   "files_at_settlement": {
+    "data/archive/horizon_picks_2026-11-16.json": "9b43d77bf29288765aa6ddcf418d7789567832a2374ce700db64397085922ad8",
+    "data/archive/horizon_lines_2026-11-16.json": "04bd73ff50917bf378dab11b82eacbe1f5da56bc3c1fbcc6f0f1b7082c42ac64"
+   },
+   "unchanged_since_pre_tip": true,
+   "settled_dates": [
+    "2026-11-16"
+   ],
+   "prev": "294aa9ce20ad771479c0e5d69c53b48a286e22be03f01db52a4fd20267b2fca7"
+  },
+  {
+   "entry": 9,
+   "type": "settlement_record",
+   "at_utc": "2026-11-17T15:46Z",
+   "file": "data/settlement/settlement_2026-11-16.json",
+   "sha256": "e1c9f89fb34ca20aed052acce32188486e2a6af2bf9a2c17fc15fbd992002b1d",
+   "official_finals_files": [
+    "data/official/results_2026-11-16.json"
+   ],
+   "settled_by": "arena/9dfd9123-nba1",
+   "summary": {
+    "record": "3-5-0",
+    "singles_units_at_minus110": -2.5,
+    "parlay_units": -3.3,
+    "total_units_settled": -5.8,
+    "dates_settled": [
+     "2026-11-16"
+    ],
+    "dates_unsettled": [
+     "2026-11-17",
+     "2026-11-18"
+    ]
+   },
+   "prev": "8c60b997d7ab8704a93368213d4b06408000cf60f13035452eae6bf6871612a7"
   }
  ],
- "head": "294aa9ce20ad771479c0e5d69c53b48a286e22be03f01db52a4fd20267b2fca7"
+ "head": "fda709d662b8d39215820211ae7cf0f34b567c26a1a5ca2b0582d7933109155f"
 }
