@@ -1,8 +1,8 @@
 {
- "captured_at_utc": "2026-11-16T15:30:05Z",
+ "captured_at_utc": "2026-11-17T11:56:07Z",
  "source_url": "https://www.nba.com/games?date=2026-11-17",
- "page_bytes": 368329,
- "page_sha256": "87d2f3f900d577297791e0bea1ded7b4b1d3dc820f34a5c5608cb0c809b1dfa8",
+ "page_bytes": 368256,
+ "page_sha256": "12d76ab242c5fabc44484f6c3154becf4b516381642003d5663d0dc7c8509fba",
  "page_indicators": {
   "__NEXT_DATA__": 1,
   "clean_gameId": 0,
@@ -32,7 +32,15 @@
   "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
   "mismatches": [],
   "promotion_candidates": [],
-  "committed_finals_missed": []
+  "committed_finals_missed": [],
+  "reconciled_at_utc": "2026-11-17T12:01:55Z",
+  "reconciled_by": "engine/promote_official.py (promoted into data/raw/games_completed.json)"
  },
- "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected."
+ "note": "Capture only: this file never overwrites a committed snapshot. A promotion_candidate is a final the official page shows but the committed snapshot does not have; it becomes data only after a verifier re-checks it and a session promotes it. A mismatch is logged, never silently corrected.",
+ "snapshot_comparison_first_capture": {
+  "checked_against": "data/raw/games_completed.json + data/raw/schedule_upcoming.json",
+  "mismatches": [],
+  "promotion_candidates": [],
+  "committed_finals_missed": []
+ }
 }
