@@ -1,7 +1,7 @@
 {
  "title": "Settlement — 2026-11-16 slate (settled from official finals)",
- "settled_at_utc": "2026-11-17T15:49Z",
- "settled_by": "arena/09ed2727-nba1 (section 62 Y03)",
+ "settled_at_utc": "2026-11-17T15:44Z",
+ "settled_by": "arena/b454a53d-nba1 (scripts/settle_slate.py --slate 2026-11-16 --settle-date 2026-11-16)",
  "slate_archive": {
   "picks": "data/archive/horizon_picks_2026-11-16.json",
   "picks_sha256": "9b43d77bf29288765aa6ddcf418d7789567832a2374ce700db64397085922ad8",
@@ -44,12 +44,11 @@
    ],
    "ot_periods": 0,
    "margin_pick_team": -10,
-   "quarter_source": null,
    "result": "LOSS",
    "units": -1.1,
    "price_convention": "paper -110: stake 1.10 to win 1.00",
    "source_game_url": "https://www.nba.com/game/orl-vs-bos-0022600245",
-   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES)"
   },
   {
    "date": "2026-11-16",
@@ -77,12 +76,11 @@
    ],
    "ot_periods": 0,
    "margin_pick_team": 11,
-   "quarter_source": null,
    "result": "LOSS",
    "units": -1.1,
    "price_convention": "paper -110: stake 1.10 to win 1.00",
    "source_game_url": "https://www.nba.com/game/chi-vs-cle-0022600246",
-   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES)"
   },
   {
    "date": "2026-11-16",
@@ -110,12 +108,11 @@
    ],
    "ot_periods": 0,
    "margin_pick_team": 16,
-   "quarter_source": null,
    "result": "WIN",
    "units": 1.0,
    "price_convention": "paper -110: stake 1.10 to win 1.00",
    "source_game_url": "https://www.nba.com/game/mem-vs-was-0022600247",
-   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES)"
   },
   {
    "date": "2026-11-16",
@@ -143,12 +140,11 @@
    ],
    "ot_periods": 0,
    "margin_pick_team": 12,
-   "quarter_source": null,
    "result": "WIN",
    "units": 1.0,
    "price_convention": "paper -110: stake 1.10 to win 1.00",
    "source_game_url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
-   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES)"
   },
   {
    "date": "2026-11-16",
@@ -176,12 +172,11 @@
    ],
    "ot_periods": 0,
    "margin_pick_team": -18,
-   "quarter_source": "The gamebook's SCORE BY PERIOD row for the visitor is not in the PDF text layer; HOU's quarters are the period-end cumulative scores printed in this same gamebook's play-by-play (End of 1st QUARTER 29-15; End of 2nd QUARTER 62-46; the 3rd-period cumulative team line 180:00 shows 81; End of 4th QUARTER 128-110), which sum to the printed final 110. Cross-checked against the 3rd-period cumulative team total. Both sides sum to the printed finals.",
    "result": "LOSS",
    "units": -1.1,
    "price_convention": "paper -110: stake 1.10 to win 1.00",
    "source_game_url": "https://www.nba.com/game/hou-vs-mia-0022600249",
-   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES)"
   },
   {
    "date": "2026-11-16",
@@ -209,12 +204,11 @@
    ],
    "ot_periods": 0,
    "margin_pick_team": 8,
-   "quarter_source": null,
    "result": "WIN",
    "units": 1.0,
    "price_convention": "paper -110: stake 1.10 to win 1.00",
    "source_game_url": "https://www.nba.com/game/por-vs-min-0022600250",
-   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES)"
   },
   {
    "date": "2026-11-16",
@@ -242,12 +236,11 @@
    ],
    "ot_periods": 0,
    "margin_pick_team": -21,
-   "quarter_source": null,
    "result": "LOSS",
    "units": -1.1,
    "price_convention": "paper -110: stake 1.10 to win 1.00",
    "source_game_url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
-   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES)"
   },
   {
    "date": "2026-11-16",
@@ -275,12 +268,11 @@
    ],
    "ot_periods": 0,
    "margin_pick_team": -12,
-   "quarter_source": null,
    "result": "LOSS",
    "units": -1.1,
    "price_convention": "paper -110: stake 1.10 to win 1.00",
    "source_game_url": "https://www.nba.com/game/phx-vs-den-0022600252",
-   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES)"
   }
  ],
  "parlays": [
@@ -404,29 +396,13 @@
    ],
    "frozen_price_joint_prob_rho": 0.2512,
    "frozen_price_independent_printed_beside": 0.2432,
-   "result": "LOSS",
-   "units": -1.1,
+   "result": "UNSETTLED — player appearance requires the official box score",
+   "units": null,
+   "why_not_settled": "Grading a prop needs that player's official box-score row (did he appear?). No box score was captured for this slate in this run, so the ticket is left open rather than graded on inference.",
    "sources": [
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
-   ],
-   "leg_results": [
-    {
-     "leg": "Jayson Tatum (BOS) OVER 26.5",
-     "pts": 24,
-     "line": 26.5,
-     "result": "LOSS",
-     "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_ORLBOS_book.pdf"
-    },
-    {
-     "leg": "Paolo Banchero (ORL) OVER 24.5",
-     "void": true,
-     "why": "official box score lists the player as inactive/DNP",
-     "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_ORLBOS_book.pdf"
-    }
-   ],
-   "box_score_evidence": "data/official/boxscore_2026-11-16.json (official gamebook box score + Inactive line)",
-   "settlement_rule": "frozen T-SGP exact_settlement_rule: Inactive player = VOID leg (removed; remaining legs settle at the frozen ticket price); any losing leg loses 1.10"
+   ]
   },
   {
    "date": "2026-11-16",
@@ -438,39 +414,20 @@
    ],
    "frozen_price_joint_prob_rho": 0.2511,
    "frozen_price_independent_printed_beside": 0.2431,
-   "result": "LOSS",
-   "units": -1.1,
+   "result": "UNSETTLED — player appearance requires the official box score",
+   "units": null,
+   "why_not_settled": "Grading a prop needs that player's official box-score row (did he appear?). No box score was captured for this slate in this run, so the ticket is left open rather than graded on inference.",
    "sources": [
     "https://www.nba.com/games?date=2026-11-16",
     "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
-   ],
-   "leg_results": [
-    {
-     "leg": "Ty Jerome (MEM) OVER 26.5",
-     "void": true,
-     "why": "official box score lists the player as inactive/DNP",
-     "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_MEMWAS_book.pdf"
-    },
-    {
-     "leg": "Anthony Davis (WAS) OVER 25.5",
-     "pts": 23,
-     "line": 25.5,
-     "result": "LOSS",
-     "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_MEMWAS_book.pdf"
-    }
-   ],
-   "box_score_evidence": "data/official/boxscore_2026-11-16.json (official gamebook box score + Inactive line)",
-   "settlement_rule": "frozen T-SGP exact_settlement_rule: Inactive player = VOID leg (removed; remaining legs settle at the frozen ticket price); any losing leg loses 1.10"
+   ]
   }
  ],
  "summary": {
   "dates_settled": [
    "2026-11-16"
   ],
-  "dates_unsettled": [
-   "2026-11-17",
-   "2026-11-18"
-  ],
+  "dates_unsettled": [],
   "singles_published": 8,
   "wins": 3,
   "losses": 5,
@@ -481,9 +438,8 @@
   "parlays_won": 0,
   "parlay_units": -3.3,
   "sgp_published": 2,
-  "sgp_settled": 2,
-  "sgp_units": -2.2,
-  "total_units_settled": -8.0,
+  "sgp_settled": 0,
+  "total_units_settled": -5.8,
   "validation_note": "Every ticket was published as MODEL OUTPUT — UNVALIDATED, unfunded, zero-stake paper output. No strategy is funded.",
   "record": "3-5-0"
  },

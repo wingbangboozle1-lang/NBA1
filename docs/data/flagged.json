@@ -1,6 +1,6 @@
 {
  "title": "Flagged for Review",
- "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link. Items F111 to F116 were added on 2026-11-16 by session arena/23b323a3-nba1 (COORDINATION §51). Their numbers were assigned F108-F113 on that branch and RENUMBERED here because arena/2042a559-nba1 landed F108-F110 on main first; nothing was renumbered away from another session.",
+ "intro": "Every item below is something the verification pass could not confirm from an official source, or a value that was left blank rather than filled in. None of these blocks the site: they are published here so they can be reviewed and assigned. Each item carries the official link it relates to. Items F13 to F25 were added on 2026-11-14 by the horizon build and the refresh session, and concern the fresh three-day horizon, the refresh path, and what could not be refreshed. Items F26 to F37 were added on 2026-11-14 (UTC) by the official-source check (COORDINATION.md §23): conflicts between builds, sign conventions, counts, stale finals, and the 11/17 capture gap. Items F38 to F39 were added on 2026-11-14 by the final integration session (COORDINATION.md section 21): a leaderboard tier-label defect (found and fixed in engine/leaderboard.py) and one injury-row attribution resolved against the official roster page. F13 and F14 were resolved the same morning by the integration refresh; F15, F16 and F19 were updated to the 04:15 AM ET injury edition. Items F40 to F46 were added on 2026-11-14 (UTC) by the measured prop-variance build (COORDINATION.md section 26): what could not be captured, the staleness and its reconciliation, why the parlay rho stays an assumption, the half-filed game-day report, the limits of a 3-4 game window, the F31 resolution, and the rows that carry a dash instead of a link. Items F111 to F116 were added on 2026-11-16 by session arena/23b323a3-nba1 (COORDINATION §51). Their numbers were assigned F108-F113 on that branch and RENUMBERED here because arena/2042a559-nba1 landed F108-F110 on main first; nothing was renumbered away from another session. F138 and F139 were both closed on 2026-11-17 by section 63 from the official gamebook PDFs: the 11/16 venue/officials/attendance headers and the two SGP players' Inactive lines.",
  "items": [
   {
    "id": "F1",
@@ -1365,6 +1365,50 @@
    "source_url": "https://www.nba.com/games",
    "status": "open",
    "suggested_action": "Re-run measure_rho.py on refresh when its corpus inputs change; add a staleness assertion to the gate battery."
+  },
+  {
+   "id": "F138",
+   "severity": "Medium",
+   "status": "resolved",
+   "title": "11/16 venue, city, attendance and officials: read from each gamebook's page-1 header (was: blanked)",
+   "detail": "Resolved 2026-11-17 by session arena/09ed2727-nba1. Each of the eight official gamebook PDFs prints the venue and city on the date line, an 'Officials:' line, and 'Attendance:' in the game-duration cell. Those values are now in data/official/results_2026-11-16.json and in the eight 2026-11-16 rows of data/official/results_feed_2026_27.json. Example read re-confirmed this session: \"Monday, November 16, 2026 Rocket Arena, Cleveland, OH / Officials:#74 Curtis Blair, #54 Ray Acosta, #71 Rodney Mott ... Attendance: 19432 (Sellout)\". Four of the eight gamebooks print no attendance value in the extracted text; those four stay null rather than being estimated.",
+   "affected": "data/official/results_2026-11-16.json; data/official/results_feed_2026_27.json; site/pages/results.html",
+   "source": "official gamebook PDFs (page-1 header)",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_CHICLE_book.pdf",
+   "suggested_action": "None; blank attendance cells on the four gamebooks that do not print it stay blank by rule."
+  },
+  {
+   "id": "F139",
+   "severity": "Medium",
+   "status": "resolved",
+   "title": "11/16 SGP: Banchero and Ty Jerome are named INACTIVE on the official gamebooks - both legs VOID (was: unresolved)",
+   "detail": "Resolved 2026-11-17 by session arena/09ed2727-nba1. F139 said the fix needed the official gamebook, and the gamebooks have it: ORL@BOS page 1 prints \"Inactive: Magic - Banchero (Injury/Illness - Right High Ankle Sprain)\" and MEM@WAS prints \"Inactive: Grizzlies - ... Jerome (Injury/Illness - Right Hip Soreness)\". Both players therefore did not play, so both legs are VOID (inactive leg removed) rather than UNRESOLVED. Evidence file: data/settlement/gamebook_evidence_2026-11-16_sgp.json, sealed as ledger entry 12 (type sgp_leg_resolution). Units are unchanged at -2.2: each ticket carried a determinate losing leg anyway (Tatum 24 < 26.5; Davis 23 < 25.5), so the ticket result never depended on the withdrawn legs. The nba.com box-score pages could not confirm this because they rendered no stat table at all; the gamebook PDF is the league's own record of who was in uniform.",
+   "affected": "data/settlement/gamebook_evidence_2026-11-16_sgp.json; data/ledger/ledger.json entry 12; data/settlement/sgp_grades_2026-11-16.json (unchanged, byte-sealed as entry 10)",
+   "source": "official gamebook PDFs (page 1 box score + Inactive line)",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_ORLBOS_book.pdf",
+   "suggested_action": "None for the result. Remaining gap: the two SGP grading records (entry 10 original, entry 11 amendment) are sealed and were not rewritten; entry 12 is the record of record for leg status. Any page that renders leg status should read entry 12 last."
+  },
+  {
+   "id": "F140",
+   "severity": "High",
+   "status": "open",
+   "title": "The scheduled refresh did not promote the 11/16 finals: the settle step reported success with nothing written, and 11/16 was entered by hand",
+   "detail": "Session arena/b454a53d-nba1, 2026-11-17. Run 44078416610 (11:56Z) captured all eight 11/16 games as Final in data/raw/_capture_results_2026-11-16.json (pushed to auto/refresh-20261117-120158, parser embedded JSON, 8 finals, 0 unparsed). Its 'Settle every game day that has ended' step succeeded, but it wrote no 11/16 settlement and promoted nothing to data/official/results_2026-11-16.json. Those files were produced by a session transcribing nba.com reads. The scores match the capture 8 of 8. Quarter scores were read once, by fetch_page. Result: the refresh gate did not promote a verified final that its own capture contained.",
+   "affected": "engine/fetch_official.py (capture_results); engine/promote_official.py; scripts/settle_slate.py; .github/workflows/refresh-data.yml; data/official/results_2026-11-16.json",
+   "source": "GitHub Actions run 44078416610; nba.com games?date=2026-11-16",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44078416610",
+   "suggested_action": "Make the refresh promote FINAL captures for ended dates into data/official/ (with quarter-sum assertions) before the settle step, and have the settle step fail loudly when a date has finals in its capture but no official results file."
+  },
+  {
+   "id": "F141",
+   "severity": "Low",
+   "status": "open",
+   "title": "Settlement-record provenance check: ledger entries 6-7 are the 11/15 settlement by another session, not 11/16",
+   "detail": "Checked 2026-11-17. Entries 6-7 (2026-11-16T14:45Z, arena/23b323a3-nba1) settle data/settlement/settlement_2026-11-15.json (settled_dates [2026-11-15]). They are not 11/16 records, and entries 8-9 (this session, 11/16) are not duplicates of them. settlement_2026-11-16.json did not exist before this session's real run, since it was untracked with a clean git tree at start. Remaining risk: scripts/settle_slate.py's idempotency guard does not check every ledger entry for the same date across sessions. Its dry run did not refuse the 11/16 run, but no duplicate was created.",
+   "affected": "scripts/settle_slate.py; data/ledger/ledger.json entries 6-9",
+   "source": "data/ledger/ledger.json",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json",
+   "suggested_action": "Have settle_slate.py refuse when any settlement_record in the ledger already covers the requested date, regardless of which session wrote it."
   }
  ]
 }

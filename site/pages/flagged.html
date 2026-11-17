@@ -1392,6 +1392,42 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td>Re-run measure_rho.py on refresh when its corpus inputs change; add a staleness assertion to the gate battery.</td>
 <td class="src"><a href="https://www.nba.com/games" target="_blank" rel="noopener">link</a></td>
 </tr>
+<tr>
+<td>F138</td>
+<td>Medium</td>
+<td><b>11/16 venue, city, attendance and officials: read from each gamebook's page-1 header (was: blanked)</b></td>
+<td>Resolved 2026-11-17 by session arena/09ed2727-nba1. Each of the eight official gamebook PDFs prints the venue and city on the date line, an 'Officials:' line, and 'Attendance:' in the game-duration cell. Those values are now in data/official/results_2026-11-16.json and in the eight 2026-11-16 rows of data/official/results_feed_2026_27.json. Example read re-confirmed this session: &quot;Monday, November 16, 2026 Rocket Arena, Cleveland, OH / Officials:#74 Curtis Blair, #54 Ray Acosta, #71 Rodney Mott ... Attendance: 19432 (Sellout)&quot;. Four of the eight gamebooks print no attendance value in the extracted text; those four stay null rather than being estimated.</td>
+<td>data/official/results_2026-11-16.json; data/official/results_feed_2026_27.json; site/pages/results.html</td>
+<td>None; blank attendance cells on the four gamebooks that do not print it stay blank by rule.</td>
+<td class="src"><span class="na" title="source id official gamebook PDFs (page-1 header) is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F139</td>
+<td>Medium</td>
+<td><b>11/16 SGP: Banchero and Ty Jerome are named INACTIVE on the official gamebooks - both legs VOID (was: unresolved)</b></td>
+<td>Resolved 2026-11-17 by session arena/09ed2727-nba1. F139 said the fix needed the official gamebook, and the gamebooks have it: ORL@BOS page 1 prints &quot;Inactive: Magic - Banchero (Injury/Illness - Right High Ankle Sprain)&quot; and MEM@WAS prints &quot;Inactive: Grizzlies - ... Jerome (Injury/Illness - Right Hip Soreness)&quot;. Both players therefore did not play, so both legs are VOID (inactive leg removed) rather than UNRESOLVED. Evidence file: data/settlement/gamebook_evidence_2026-11-16_sgp.json, sealed as ledger entry 12 (type sgp_leg_resolution). Units are unchanged at -2.2: each ticket carried a determinate losing leg anyway (Tatum 24 &lt; 26.5; Davis 23 &lt; 25.5), so the ticket result never depended on the withdrawn legs. The nba.com box-score pages could not confirm this because they rendered no stat table at all; the gamebook PDF is the league's own record of who was in uniform.</td>
+<td>data/settlement/gamebook_evidence_2026-11-16_sgp.json; data/ledger/ledger.json entry 12; data/settlement/sgp_grades_2026-11-16.json (unchanged, byte-sealed as entry 10)</td>
+<td>None for the result. Remaining gap: the two SGP grading records (entry 10 original, entry 11 amendment) are sealed and were not rewritten; entry 12 is the record of record for leg status. Any page that renders leg status should read entry 12 last.</td>
+<td class="src"><span class="na" title="source id official gamebook PDFs (page 1 box score + Inactive line) is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F140</td>
+<td>High</td>
+<td><b>The scheduled refresh did not promote the 11/16 finals: the settle step reported success with nothing written, and 11/16 was entered by hand</b></td>
+<td>Session arena/b454a53d-nba1, 2026-11-17. Run 44078416610 (11:56Z) captured all eight 11/16 games as Final in data/raw/_capture_results_2026-11-16.json (pushed to auto/refresh-20261117-120158, parser embedded JSON, 8 finals, 0 unparsed). Its 'Settle every game day that has ended' step succeeded, but it wrote no 11/16 settlement and promoted nothing to data/official/results_2026-11-16.json. Those files were produced by a session transcribing nba.com reads. The scores match the capture 8 of 8. Quarter scores were read once, by fetch_page. Result: the refresh gate did not promote a verified final that its own capture contained.</td>
+<td>engine/fetch_official.py (capture_results); engine/promote_official.py; scripts/settle_slate.py; .github/workflows/refresh-data.yml; data/official/results_2026-11-16.json</td>
+<td>Make the refresh promote FINAL captures for ended dates into data/official/ (with quarter-sum assertions) before the settle step, and have the settle step fail loudly when a date has finals in its capture but no official results file.</td>
+<td class="src"><span class="na" title="source id GitHub Actions run 44078416610; nba.com games?date=2026-11-16 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F141</td>
+<td>Low</td>
+<td><b>Settlement-record provenance check: ledger entries 6-7 are the 11/15 settlement by another session, not 11/16</b></td>
+<td>Checked 2026-11-17. Entries 6-7 (2026-11-16T14:45Z, arena/23b323a3-nba1) settle data/settlement/settlement_2026-11-15.json (settled_dates [2026-11-15]). They are not 11/16 records, and entries 8-9 (this session, 11/16) are not duplicates of them. settlement_2026-11-16.json did not exist before this session's real run, since it was untracked with a clean git tree at start. Remaining risk: scripts/settle_slate.py's idempotency guard does not check every ledger entry for the same date across sessions. Its dry run did not refuse the 11/16 run, but no duplicate was created.</td>
+<td>scripts/settle_slate.py; data/ledger/ledger.json entries 6-9</td>
+<td>Have settle_slate.py refuse when any settlement_record in the ledger already covers the requested date, regardless of which session wrote it.</td>
+<td class="src"><span class="na" title="source id data/ledger/ledger.json is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the

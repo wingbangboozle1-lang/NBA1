@@ -7554,7 +7554,7 @@
    "arena": "TD Garden",
    "arena_city": "Boston",
    "arena_state": "MA",
-   "attendance": 0,
+   "attendance": null,
    "officials": "#24 Kevin Scott, #41 Nate Green, #53 Matt Kallio",
    "source_url": "https://www.nba.com/game/orl-vs-bos-0022600245",
    "source_date_url": "https://www.nba.com/games?date=2026-11-16"
@@ -7630,7 +7630,7 @@
    "arena": "Capital One Arena",
    "arena_city": "Washington",
    "arena_state": "DC",
-   "attendance": 0,
+   "attendance": null,
    "officials": "#4 Sean Wright, #28 Mousa Dagher, #95 Tyler Ricks",
    "source_url": "https://www.nba.com/game/mem-vs-was-0022600247",
    "source_date_url": "https://www.nba.com/games?date=2026-11-16"
@@ -7668,7 +7668,7 @@
    "arena": "Barclays Center",
    "arena_city": "Brooklyn",
    "arena_state": "NY",
-   "attendance": 0,
+   "attendance": null,
    "officials": "#14 JB DeRosa, #68 Jacyn Goble, #93 Jenna Reneau",
    "source_url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
    "source_date_url": "https://www.nba.com/games?date=2026-11-16"
@@ -8302,6 +8302,6 @@
    "source_date_url": "https://www.nba.com/games?date=2026-11-18"
   }
  ],
- "last_updated_utc": "2026-11-17T15:52:13Z",
- "last_updated_by": "arena/09ed2727-nba1 (section 62 Y04): the eight 2026-11-16 rows re-cut to FINAL from data/official/results_2026-11-16.json (official games listing + each gamebook's SCORE BY PERIOD); poss/rtg/pace left null because the box-score inputs they require are not captured in this repository."
+ "last_updated_utc": "2026-11-17T15:55:09Z",
+ "last_updated_by": "arena/09ed2727-nba1 (section 63 Y04): the eight 2026-11-16 rows re-cut to FINAL from data/official/results_2026-11-16.json (official games listing + each gamebook PDF's SCORE BY PERIOD); poss/rtg/pace left null because the box-score inputs they require are not captured in this repository. arena / arena_city / arena_state / attendance / officials filled from each gamebook's page-1 header (venue, city, 'Officials:' line, 'Attendance:'), closing F138."
 }

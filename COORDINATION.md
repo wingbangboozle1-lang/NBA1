@@ -5,6 +5,23 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/b454a53d-nba1` (opened 2026-11-17 15:4x UTC — 2026-11-16 official settlement: first-hand official finals for all eight 11/16 games, results feed rows 11/16 re-cut to FINAL, settlement + SGP grading written under the hash chain, site rebuild, gates, delivery)
+
+Branch `arena/b454a53d-nba1`, based on `main` `22d56af` (PR #160). Board read before claiming: §0 ground rules, §0b registry, §61 delivery record, `gh pr list` (two OPEN, non-owned PRs: #152 `arena/cdc6c39d-nba1`, #155 `arena/3ff8ff0f-nba1` — both left untouched), `gh api …/pages` (`built`, legacy), `data/ledger/ledger.json` (chain OK, entry 5 = 11/16 pre-tip archive at 2026-11-16T00:16Z). Measured at claim time: the 11/16 games had finished (nba.com date page shows Final for all 8) while `data/official/results_feed_2026_27.json` still carried them as `game_status: 1`; no settlement existed for 11/16. File scope: `data/official/results_2026-11-16.json` (new), `data/official/results_feed_2026_27.json` (8 rows), `data/settlement/settlement_2026-11-16.json` + `sgp_grades_2026-11-16.json` (new), `data/ledger/ledger.json` (append-only), `verify/2026-11-17-b454a53d/**`, generated pages `site/pages/results.html`, `site/pages/settlement.html`, `site/pages/player-logs.html` and the index/dashboard shell via their builders, `data/content/requirements.json` (evidence notes only), `data/content/flagged.json` (appended flags only), this board. Explicitly **not** in scope (see §62.4): HCA re-derivation, horizon roll to 11/17–11/19, injury-edition capture, team-stat re-cut, legacy `engine/**`.
+
+**Delivery record (session `arena/b454a53d-nba1`, 2026-11-17 UTC).**
+- **Done.** 11/16 settled from official finals. Eight games FINAL, each quarter row summed to its final. Singles 3-5-0 (−2.5u), parlays 0-3 (−3.3u), SGP 0-2 (−2.2u, graded from box scores). Settled total −8.0u. Results feed 11/16 rows FINAL (205 of 222). Ledger entries 8–11, chain verified. The results and settlement pages render every settlement record.
+- **Sources.** https://www.nba.com/games?date=2026-11-16; game pages `…/game/<slug>-<gameId>` for 0022600245–0022600252 (LINESCORES, chunk 2); box scores ORL@BOS `…/orl-vs-bos-0022600245/box-score` and MEM@WAS `…/mem-vs-was-0022600247/box-score`; scheduled capture `data/raw/_capture_results_2026-11-16.json` on `auto/refresh-20261117-120158` (8 of 8 scores agree); TD Garden venue from ORL@BOS game page chunk 1.
+- **Irregularities checked.** Ledger entries 6–7 are the 11/15 settlement by `arena/23b323a3-nba1` (settled_dates `2026-11-15`). They are not 11/16 records and are not duplicated by entries 8–9. The SGP grading record was amended by appended entry 11, not edited in place. The original is byte-verified against entry 10.
+- **Flags opened (do not block merge).** F138 venue, attendance and officials blanked (kept for ORL@BOS venue only). F139 Banchero and Jerome UNRESOLVED, both SGP tickets still LOSS. F140 the scheduled refresh captured the 11/16 finals but did not promote them or settle the day. F141 settle_slate idempotency coverage across sessions.
+- **Cross-scope edits (logged, not silent).** `scripts/build_pages_801ba27f.py` (settlement page now renders all settlement records, was hard-wired to 11/15) and `scripts/build_results_page.py` (phantom `results_feed_2026_27` section removed; SGP line reads grading records). Both are shared builders. Changes are confined to the settlement and results render paths.
+- **Branch.** The platform pins this session to `arena/b454a53d-nba1`. The `session-<id>/<task>` convention was not used. Deviation logged here per the ground rules.
+- **Gates (order per pages.yml).** check_site, verify_integration (0 errors, 44 warnings), verify_all, check_rendered, check_links: all PASS on the merged tree.
+- **Not in this session's scope.** The rest of the brief (the scheduled-refresh gates, the injury PDF store, the strategy pre-registration, and so on) belongs to other claims. Nothing was changed there.
+- **PR.** To be recorded below after open and merge.
+
+---
+
 ## ✅ CLAIM CLOSED — session `arena/23ec1e32-nba1` (opened 2026-11-16 18:2x UTC, **delivered 2026-11-16 19:35Z via [PR #159](https://github.com/wingbangboozle1-lang/NBA1/pull/159)** — measured-HCA re-derivation (R09), measured-rho parlay pricing (R14/F90), disagreement headline + rotation column on Lines & Picks (R13/R15/F83), projection/bet split on the roll page (R07), register refresh (R01/R04), gates green, Pages live; full record in **§61**)
 
 Branch `arena/23ec1e32-nba1`, based on `main` `add1e74` (tip at claim time = merge of PR #145,
@@ -6905,7 +6922,34 @@ Outputs archived in `verify/2026-11-16-23ec1e32/` (README.md + nine `.out` files
 
 ---
 
-## 🔑 ACTIVE CLAIM — session `arena/09ed2727-nba1` (opened 2026-11-17 15:4x UTC — midnight-roll integration seat: settle 2026-11-16 from official finals, roll the horizon to 11/17–11/20 with a first-hand official re-read of schedule/standings/three team-stat pages/newest injury edition, retire the three stale requirements gaps this unblocks (R21, R01, R32), close the two stale PRs as superseded, gates, delivery)
+## 62. Session `arena/825bb504-nba1` — refresh workflow promotion-gate hardening and run-record observability (claimed 2026-11-17 UTC)
+
+**Board read / conflict check:** Read the board before starting. `gh pr list --state open` measured two open PRs (#152 and #155); inspected their changed-file lists and neither edits `.github/workflows/refresh-data.yml` or a workflow-gate test. No workflow-specific claim appears in the latest completed records. Current checkout is the platform-pinned branch `arena/825bb504-nba1` at `22d56af`; the branch is fixed for this session and will not be renamed or replaced with a session-specific branch.
+
+| Task | Scope | Status |
+| --- | --- | --- |
+| 62.1 | Make scheduled rebuild conditional explicitly on successful promotion, successful freshness-gate execution, and the gate's `ok=true` output. Preserve fail-closed behavior. | done |
+| 62.2 | Persist fetch, promotion, freshness, settlement, and build outcomes in the refresh run record; add a focused regression check for workflow guard conditions and record fields. | done |
+| 62.3 | Run workflow regression and repository verification; record exact outcomes and any limitations here. | done |
+
+**Files in scope:** `.github/workflows/refresh-data.yml`, `scripts/test_refresh_workflow.py`, and this section of `COORDINATION.md`. No shared site data, source captures, generated pages, or other session files are in scope.
+
+**Observed source state before edits (2026-11-17):** GitHub Actions run [44078416610](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44078416610) completed successfully, but its step list shows the rebuild was **skipped**. Local `engine/refresh_gate.py --max-age-hours 10` also blocked the committed snapshot: it reported a 24.23-hour-old refresh, five failed fetch/parse checks, stale source checks, and missing/mismatched same-run captures/promotions. This task does not claim to fix the official-source reachability/parsing gaps; it hardens the workflow's gate condition and makes per-run outcomes visible for review. Official-source values will not be fabricated or promoted.
+
+**Recovery note:** The first claim commit accidentally replaced this entire shared board instead of appending. Immediately restored the exact prior board bytes from its parent commit, then reapplied this section. The corrective commit below preserves the full historical board and adds this claim; no prior coordination records are intentionally removed.
+
+
+### 62.1–62.3 Verification / delivery
+
+- `python3 scripts/test_refresh_workflow.py`: **PASS**, 3 structural regression tests.
+- `python3 -m unittest scripts.test_refresh_gate -v`: **PASS**, 7 freshness/provenance gate cases. (`python3 scripts/test_refresh_gate.py` was first attempted and failed because direct script invocation omits the repository root from `sys.path`; reran successfully as a module. No product code change was needed.)
+- `python3 scripts/verify_all.py`: **PASS**, `FAILURES: 0`; site builder, provenance/link checks, data audits, and noise-band refusal tests all green. Its source audit reports 3,002 of 3,114 table rows with allowed official links and 112 explanatory no-source marks; this is repository structural verification and does not itself fetch/validate every NBA source.
+- `python3 -m py_compile engine/refresh_gate.py scripts/test_refresh_workflow.py` and `git diff --check`: **PASS**.
+- The scheduled rebuild condition now explicitly requires successful fetch, promotion, freshness-gate execution, and `freshness.outputs.ok == 'true'`. The run record and automated refresh-PR body expose fetch/promotion/freshness (including its boolean result)/settlement/build outcomes.
+- **Important unresolved source limitation (not concealed):** run #44078416610 was green overall but its build was skipped. Current committed input gate remains blocked (24.23h old at check, failed source/parse checks, stale same-run captures/promotions); this session did not fabricate data or bypass the gate.
+- **Delivery:** current branch only: `arena/825bb504-nba1`. The task-claim commit and corrective board-restoration commit are on this branch; workflow/test changes will be committed and pushed after reviewing the final diff. PR/merge/deploy follow only after branch checks are green.>>>>>>> origin/main
+
+## 63. ACTIVE CLAIM — session `arena/09ed2727-nba1` (opened 2026-11-17 15:4x UTC — midnight-roll integration seat: settle 2026-11-16 from official finals, roll the horizon to 11/17–11/20 with a first-hand official re-read of schedule/standings/three team-stat pages/newest injury edition, retire the three stale requirements gaps this unblocks (R21, R01, R32), close the two stale PRs as superseded, gates, delivery)
 
 Branch `arena/09ed2727-nba1`, based on `main` `22d56af` (tip at claim time = merge of PR #160,
 the board-only follow-up to the §61 delivery). The platform pins this session to that branch;
@@ -6918,7 +6962,7 @@ inferred:
 | Observation | Measurement |
 | --- | --- |
 | `main` tip | `22d56af` — the merge of PR #160 (board-only §61 delivery record). Working tree clean. |
-| Open PRs | **#152** (`arena/cdc6c39d-nba1`) and **#155** (`arena/3ff8ff0f-nba1`). Last branch commits 2026-11-16T18:33:45Z and 18:49:39Z → **~21 h idle, far past ground rule 5's 60-minute threshold.** §61.3 states both contents already exist on `main` (R13/R15, measured HCA pin, measured rho). Triage is in §62.1. |
+| Open PRs | **#152** (`arena/cdc6c39d-nba1`) and **#155** (`arena/3ff8ff0f-nba1`). Last branch commits 2026-11-16T18:33:45Z and 18:49:39Z → **~21 h idle, far past ground rule 5's 60-minute threshold.** §61.3 states both contents already exist on `main` (R13/R15, measured HCA pin, measured rho). Triage is in §63.1. |
 | Pages | `gh api /repos/…/pages` → `status: built`, `build_type: legacy`, source `main /`, https enforced. |
 | Workflows | Latest `Refresh official data` (run 44078416610) → **success** ~3 h ago; `Publish static site` on `main` → success; three probe runs `cancelled` (superseded by its own concurrency group, a known pattern since §47). |
 | Settlement | `data/settlement/` holds **11/14 and 11/15 only**. The 11/16 slate has been final since ~2026-11-17T05:00Z and is **still unsettled** — this is the primary measured gap. |
@@ -6929,7 +6973,7 @@ inferred:
 work is merged; the only two live-looking artefacts are the two stale PRs above, both of whose
 content is on `main`.
 
-### 62.1 Task table and file scopes (this session's, and only this session's)
+### 63.1 Task table and file scopes (this session's, and only this session's)
 
 | ID | Task | Status | File scope |
 | --- | --- | --- | --- |
