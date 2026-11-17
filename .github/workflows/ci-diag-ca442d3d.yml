@@ -1,0 +1,97 @@
+# One-seat diagnostic workflow (session arena/ca442d3d-nba1, COORDINATION §65.6).
+#
+# WHY THIS EXISTS: the `Publish static site to GitHub Pages` validate job now runs
+# every scripts/test_*.py, and that step fails on ubuntu-latest while all 10 modules
+# pass in the agent sandbox and in a clean clone of the same commit. The runner's job
+# log is served from a blob host this sandbox cannot reach (gh api .../logs and
+# gh run view --log both return empty/EOF), and the annotations endpoint 404s with the
+# session token, so the failure text cannot be read from here. This workflow runs the
+# identical loop and *commits the output back into the repository*, which is a channel
+# the sandbox can read. It is scoped to one branch, triggers only when this file or the
+# test step changes, and its own commits carry [skip ci] so it cannot loop.
+#
+# Delete this file (or leave it: it is inert on every other branch) once the pages.yml
+# unit-test step is green on main.
+name: CI diagnostic (ca442d3d)
+
+on:
+  push:
+    branches:
+      - arena/ca442d3d-nba1
+    paths:
+      - ".github/workflows/ci-diag-ca442d3d.yml"
+      - "scripts/test_*.py"
+      - "scripts/capture_official_ca442d3d.py"
+      - "engine/injury_diff.py"
+      - "engine/injury_cells.py"
+      - "engine/promote_official.py"
+      - "engine/fetch_official.py"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ci-diag-ca442d3d
+  cancel-in-progress: false
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/ca442d3d-nba1
+          persist-credentials: true
+
+      - name: Run the same loop pages.yml runs, capture everything
+        env:
+          PYTHONPATH: "."
+        run: |
+          set -u
+          mkdir -p data/ci
+          {
+            echo "# CI diagnostic: unit-test loop as pages.yml runs it"
+            echo
+            echo "- generated_utc: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "- runner: ${ImageOS:-unknown} / ${ImageVersion:-unknown}"
+            echo "- python: $(python3 -V 2>&1)  (path: $(command -v python3))"
+            echo "- pip list (third-party, first 40):"
+            python3 -m pip list 2>/dev/null | head -40 | sed 's/^/    /' || echo "    (pip unavailable)"
+            echo
+            echo '```'
+            for t in scripts/test_*.py; do
+              mod=$(echo "$t" | sed 's#/#.#g; s/\.py$//')
+              if grep -qE "class [A-Za-z_0-9]+\((unittest\.)?TestCase" "$t"; then
+                cmd="python3 -m unittest $mod"
+              else
+                cmd="python3 $t"
+              fi
+              if out=$(eval "$cmd" 2>&1) && ! grep -q "NO TESTS RAN\|Ran 0 tests" <<<"$out"; then
+                echo "PASS  $mod   [$cmd]"
+              else
+                echo "FAIL  $mod   [$cmd]"
+                echo "$out" | tail -40 | sed 's/^/      /'
+              fi
+            done
+            echo '```'
+          } > data/ci/unit-test-diagnostic.md 2>&1
+          test -s data/ci/unit-test-diagnostic.md
+
+      - name: Commit the diagnostic back to this branch
+        if: always()
+        run: |
+          set -u
+          mkdir -p data/ci
+          test -s data/ci/unit-test-diagnostic.md || echo "(step failed before writing output)" > data/ci/unit-test-diagnostic.md
+          git config user.name "ci-diag-ca442d3d"
+          git config user.email "ci-diag-ca442d3d@users.noreply.github.com"
+          git add -f data/ci/unit-test-diagnostic.md
+          if git diff --cached --quiet; then
+            echo "no change to commit"
+            exit 0
+          fi
+          git commit -q -m "CI diagnostic: unit-test loop output from ubuntu-latest [skip ci]"
+          git pull --rebase origin arena/ca442d3d-nba1 >/dev/null 2>&1 || true
+          git push origin HEAD:arena/ca442d3d-nba1
