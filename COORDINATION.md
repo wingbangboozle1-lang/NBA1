@@ -7176,8 +7176,8 @@ Claimed 2026-11-17 15:4x UTC. Branch `arena/c5487cbb-nba1` (platform-pinned; the
 
 | Item | Record |
 | --- | --- |
-| PR | see below, recorded after merge |
-| Merge / deploy | see below |
+| PR | [#167](https://github.com/wingbangboozle1-lang/NBA1/pull/167) — opened 2026-11-17 16:14Z against `main` @ `d8a05f2`, mergeable/CLEAN, **merged without waiting for approval** per the standing brief |
+| Merge / deploy | merge commit [`f0c611b`](https://github.com/wingbangboozle1-lang/NBA1/commit/f0c611b53c66e82ba465d884f64b99227214c59e) at 2026-11-17T16:15:45Z. **The Pages deploy did NOT run for this merge**: the `Publish static site to GitHub Pages` run 44123742284 failed in the *validate* job, in the unit-test step this seat had just added, and `deploy` was skipped. The live site therefore still serves the previous successful build (run 44121489751, `main` @ `d8a05f2`) - **not broken, just one merge behind**. Fix-forward in progress, recorded in 65.6 below. |
 
 ## 65. Session `arena/ca442d3d-nba1` — game-day-rollover integration seat (claimed 2026-11-17 15:4x UTC)
 
@@ -7277,3 +7277,40 @@ measured HCA pin, measured-rho pricing). Both were closed as **superseded** with
 at §61 and §63 and at the specific defect #155 would have re-introduced if merged (the 25 scheduled
 `0-0` placeholder rows polluting the finals corpus, fixed in §61 W01). No content was discarded:
 each PR's branch remains on the remote for its owner to re-open if they disagree.
+
+### 65.6 The CI step this seat added turned `main` red — full record, no euphemism
+
+**What happened.** This seat added a step to the `validate` job of `.github/workflows/pages.yml` that
+runs every `scripts/test_*.py` (the §60.7 request that no test module ran in CI). All 10 modules pass
+here, twice: on the working tree and in a clean `git clone` of the merged commit `c506f89`. On
+`ubuntu-latest` the step failed, which skipped `deploy` and left `main` red for every session that
+merges after it.
+
+**What was known at the time of merging and what was not.** The gate battery that was run green
+(`verify_all`, `check_site`, `verify_integration`, `verify_ledger`, `check_links`, `check_rendered`,
+`verify_dashboard`, roll separation, `refresh_gate`'s by-design BLOCKs) did **not** include the new
+test step itself, because that step only executes inside the workflow - a check that exists solely on
+the runner cannot be observed from the sandbox, and this seat merged anyway. That is the judgment
+error to record: when a change adds a *new* blocking gate to the deploy path, the gate must be proven
+on a runner (or made advisory first) before the commit that also carries the merge; the established
+"merge without waiting" practice presumes the CI that runs is the CI you have already seen.
+
+**Why the cause was not immediately readable.** `actions/checkout` logs are served from
+`*.blob.core.windows.net` / `results-receiver.actions.githubusercontent.com`, which are outside this
+sandbox's allowlist, so `gh run view --log`, `--log-failed` and `gh api .../jobs/<id>/logs` all return
+empty or EOF (a limitation this repo's sessions keep hitting - the previous instance in the board is
+`arena/825bb504-nba1` 62.4). Fix: the step now emits each failing module's last 30 lines as a
+**job annotation** (`::error file=...::`), which the API returns without the blob host, and runs every
+module before exiting so one failure cannot mask the next. Commit `903ce63`.
+
+**Suspects ranked, from what is measurable here** (the runner has no `setup-python` and no
+`pip install` step, so every test module must be stdlib-only - the repo has no `requirements.txt`):
+Python 3.12 (runner) vs 3.11 (sandbox) behaviour, or a third-party module that exists in this sandbox
+and not on `ubuntu-latest`. Both classes are pinned by reading the annotation, not by guessing; the
+disposition is recorded in the follow-up PR.
+
+**Rule this seat wants recorded for the board:** a step added to the deploy-blocking `validate` job
+must either be demonstrated on a runner in a throwaway run first, or land with
+`continue-on-error: true` plus a flag and be flipped to blocking in a later PR once its output has
+been read. Redeploys for sessions that merge after a red `validate` are not caused by their own work,
+and the live site silently drifts a merge behind with no visible alarm.
