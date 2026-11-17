@@ -7363,3 +7363,30 @@ text render rather than byte-exact PDFs (which is why the roll page prints 0 out
 the four home-court pins need one corpus of record (F-CA-03). `workflow_dispatch` returns 403 with the
 session token, so arm a branch workflow by pushing to the branch - `capture-official-ca442d3d.yml` is a
 working template, run 44120656545 committed its captures back to `data/raw/session-ca442d3d/`.
+
+### 65.9 Post-delivery addendum: the capture this seat wrote ran on a runner, and it found the trigger gap
+
+After PR #167 merged, the push-armed scheduled refresh on this branch was **not** cancelled (unlike the
+three before it) and its own commit `68caa0e` landed on this branch carrying what the new index-driven
+`capture_injury` produced: **10 previously un-archived official editions for 2026-11-17** (09:00 AM →
+11:30 AM ET), content-addressed with sidecars, plus the 11/16–11/17 results captures. Read back here:
+
+* `python3 engine/injury_diff.py --pdf-dir data/raw/injury_pdfs` over the enlarged archive →
+  **"110 edition(s) parsed with no row disagreement between the two readers"** - the F-X01 fix holds on
+  bytes captured by the new path, not just on the 100 it was developed against.
+* The promotion-time chain, run over the committed archive: `Injury-Report_2026-11-17_11_15AM →
+  11_30AM`, 59 rows / 33 player rows, **0 status changes, 0 filing changes** →
+  `data/parsed/injury_diffs/promote_diff_Injury-Report_2026-11-17_11_15AM_to_Injury-Report_2026-11-17_11_30AM.json`.
+* **But that run never reached promotion.** `data/raw/_last_refresh.json` for 16:36Z records an empty
+  promotion record while `changed` lists only the three *failed* evidence sources (`S1_season`,
+  `S2_train`, `S8_standings`, all "expected 30 team rows, parsed 0" - F-CA-02). An editions-only change
+  is not in the vocabulary that wakes the promote step, so `data/raw/injuries.json` is still
+  `Injury-Report_2026-11-16_09_45AM.pdf` (verified 2026-11-16T15:25:57Z) - a day and ~25 editions behind
+  the newest archived PDF - while the roll page's banner names the 11/17 edition because the horizon
+  build read it separately as a text render. Filed as **F-CA-07** (High, open, with the one-line fix
+  proposed for the refresh owner); R04's register row now carries all of the above, and it stays
+  *partial* on exactly that point: capture and diff are proven, the scheduled trigger is not wired.
+
+This is also the cleanest illustration of why F-CA-04 matters: the same code produced a useful capture
+when the shared concurrency slot happened to be free and nothing at all three times before. Nothing in
+this addendum changes a file another session claims.
