@@ -7314,3 +7314,32 @@ must either be demonstrated on a runner in a throwaway run first, or land with
 `continue-on-error: true` plus a flag and be flipped to blocking in a later PR once its output has
 been read. Redeploys for sessions that merge after a red `validate` are not caused by their own work,
 and the live site silently drifts a merge behind with no visible alarm.
+
+### 65.7 Root cause of the red step, read off the runner (2026-11-17 16:3x–16:4x UTC) — and a defect it exposed
+
+The suspects in 65.6 were wrong in an instructive way. The diagnostic workflow (commit `130bb12`, after
+a first attempt died on its own missing `mkdir`) committed the runner's output into
+`data/ci/unit-test-diagnostic.md`, and that says it plainly: **the image ships Python 3.14.4**, and on
+3.14 a test file that runs zero tests is an error, so the step failed on exactly one module —
+`scripts.test_gate_roundtrip` — with `NO TESTS RAN`. Everything else passed on the runner.
+
+Why that module ran zero tests: it is not a unittest module. It is a script ending in a `__main__`
+guard that calls `sys.exit(main())`, and `python3 -m unittest scripts.test_gate_roundtrip` only
+*imports* it, so its 178 lines of end-to-end assertions — promote → freshness gate on an isolated
+tree — have **never executed in any harness** (on Python 3.11 the same command exited 0). The step now
+picks the runner per file (unittest modules by module name, script-style files as files) and treats
+"Ran 0 tests"/"NO TESTS RAN" as a failure on every interpreter, so a test cannot pass by not running.
+
+Executing it found a real bug, which is the point of the exercise: **flag F-CA-05**. In
+`engine/promote_official.py` a day's capture was reconciled only `if original != comparison or
+appended:` — and `original` is a copy of `comparison`, so that test reduces to "did I append a row this
+run". Re-capture a day the feed already contains and `promotion_candidates` stays populated forever,
+and `engine/refresh_gate.py` (hardened by `arena/825bb504-nba1` in 62) blocks on a non-empty list:
+"official results for <date> do not reconcile to promoted finals". That is the mechanism behind
+`arena/b454a53d-nba1`'s F140 — a refresh that captured the 11/16 finals and left them looking
+unsettled — and it was *not* in any session's scope. Promotion now reconciles against the feed's own id
+set, records `reconciled_without_append: true` so the two paths stay distinguishable, and fails loudly
+if a candidate is still absent after the append pass. Roundtrip after the fix: promote exit 0, gate
+exit 0, "14 promoted, 0 blocked", PASS.
+
+Registers: F-CA-05 (resolved) and F-CA-06 (resolved) added — 155 items; R19 evidence appended.

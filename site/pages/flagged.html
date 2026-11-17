@@ -1500,6 +1500,24 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="no official source">&mdash;</span></td>
 </tr>
+<tr>
+<td>F-CA-05</td>
+<td>Medium</td>
+<td><b>RESOLVED - a capture whose promotion candidates were already in the feed was never reconciled, so the freshness gate blocked on a fully-settled day (the mechanism behind flag F140)</b></td>
+<td>Found 2026-11-17 by session arena/ca442d3d-nba1 by *executing* scripts/test_gate_roundtrip.py as the script it is, and fixed in engine/promote_official.py. The promoter cleared a day's `snapshot_comparison` only when it appended a row that run - the guard was `if original != comparison or appended:`, and `original` is a copy of `comparison`, so the first half is always false. A re-capture of a day the feed already contained therefore left `promotion_candidates` populated, and engine/refresh_gate.py (hardened by arena/825bb504-nba1, 62) blocks on a non-empty candidate list with &quot;official results for &lt;date&gt; do not reconcile to promoted finals&quot;. That is the same surface arena/b454a53d-nba1 recorded as F140 - a refresh that captured the 11/16 finals but neither promoted nor settled them - and it is why a day could still look unsettled to the gate after being settled by hand. Promotion now reconciles when every listed candidate is in the feed's own id set, records `reconciled_without_append: true` so the two paths stay distinguishable, and fails loudly if a candidate is still absent after the append pass. `python3 scripts/test_gate_roundtrip.py` -&gt; ROUNDTRIP: PASS, promote exit 0, gate exit 0, 14 promoted, 0 blocked.</td>
+<td>engine/promote_official.py, engine/refresh_gate.py, scripts/test_gate_roundtrip.py, data/raw/_capture_results_*.json</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-CA-06</td>
+<td>High</td>
+<td><b>RESOLVED - two of this repository's test files could never fail in CI, and the test step this seat added turned main red because of it</b></td>
+<td>Session arena/ca442d3d-nba1, 2026-11-17. When the unit-test step was added to the `validate` job of .github/workflows/pages.yml it failed on `ubuntu-latest` while all 10 modules passed in the sandbox and in a clean clone of the same commit. Cause, read off the runner through a branch-scoped diagnostic workflow that commits its own output back into data/ci/unit-test-diagnostic.md (the runner's log blob host and the check-annotation endpoint are both unreachable from the agent sandbox, which is why this class of failure has kept being unreadable in this repo - cf. arena/825bb504-nba1 62.4): the image now ships Python 3.14, where &quot;NO TESTS RAN&quot; is an error, and `scripts/test_gate_roundtrip.py` is not a unittest module at all - it is a script that ends in a `__main__` guard calling `sys.exit(main())`, so `python3 -m unittest` imported it, ran zero tests and exited 0 on Python 3.11. Its assertions have therefore never run in any harness, and once they were made to run they found F-CA-05. `scripts/test_noise_band_refusal.py` is the mirror case: no TestCase and no main guard, it `sys.exit()`s from module scope, so under `-m unittest` the reported result is whatever the import happens to produce. The step now selects the runner per file (unittest modules by module name, script-style files as scripts), treats &quot;Ran 0 tests&quot; and &quot;NO TESTS RAN&quot; as a failure on every interpreter, runs every file before exiting so one failure cannot mask the next, and emits the failing tail as a `::error::` annotation so it is readable through the API. Two follow-ups for whoever owns those files: give test_noise_band_refusal.py a main guard so it can be run both ways, and adopt &quot;a test file that executes zero tests is a build error&quot; repo-wide.</td>
+<td>.github/workflows/pages.yml, scripts/test_gate_roundtrip.py, scripts/test_noise_band_refusal.py, data/ci/unit-test-diagnostic.md, .github/workflows/ci-diag-ca442d3d.yml</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the

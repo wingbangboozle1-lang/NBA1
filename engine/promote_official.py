@@ -535,7 +535,32 @@ class Promoter:
             # Clean date: every parsed final is now in the feed, so every
             # promotion candidate is resolved. Mismatches and missed stay
             # empty because the blockers above would have returned.
-            if original != comparison or appended:
+            #
+            # A day is reconciled when every candidate this capture listed is
+            # now in the feed - which is NOT the same thing as having appended
+            # a row this run. Under the previous condition (`appended`, or the
+            # always-false `original != comparison`) a capture whose candidates
+            # had already been promoted by an earlier run was left permanently
+            # unreconciled, and the freshness gate blocked on
+            # "official results for <date> do not reconcile to promoted finals"
+            # for a day that was in fact fully settled - the state
+            # arena/b454a53d-nba1 recorded as flag F140, which this seat found
+            # by running scripts/test_gate_roundtrip.py as the script it is
+            # (see COORDINATION 65.6: the test had never executed under the old
+            # unittest-only CI step). Reconciling here is safe because every
+            # blocker above returns first, and `known` is the feed's own id set.
+            def _cand_id(c):
+                return str(c.get("game_id") if isinstance(c, dict) else c)
+            pending = [c for c in (comparison.get("promotion_candidates") or [])
+                       if _cand_id(c) not in known]
+            if pending:
+                self.fail("results_feed",
+                          f"{date}: {len(pending)} promotion candidate(s) still "
+                          f"absent from the feed after the append pass "
+                          f"({[_cand_id(c) for c in pending][:4]}) - capture "
+                          f"left unreconciled on purpose")
+                return
+            if appended or comparison.get("promotion_candidates"):
                 cap.setdefault("snapshot_comparison_first_capture", original)
                 comparison.update({
                     "mismatches": [], "promotion_candidates": [],
@@ -543,6 +568,7 @@ class Promoter:
                     "reconciled_at_utc": self.now,
                     "reconciled_by": "engine/promote_official.py (promoted "
                                      "into data/raw/games_completed.json)",
+                    "reconciled_without_append": not appended,
                 })
                 cap["snapshot_comparison"] = comparison
                 write_json(path, cap)
