@@ -390,6 +390,36 @@
    "how_to_answer": "Name the per-date games page as the source, normalise the format, and have the refresh record a conflict row whenever two captures of one game id differ instead of overwriting (SG33).",
    "blocks": "Any downstream use of tip time - rest windows, pre-tip publication, and the ledger's publish-before-tip rule",
    "source_url": "https://www.nba.com/games?date=2026-11-16"
+  },
+  {
+   "id": "Q31",
+   "question": "Which of the two parallel 11/16 settlement records is the settlement of record for the two SGP tickets?",
+   "what_is_missing": "Neither record was wrong on its own terms. One left the two prop tickets UNSETTLED because that session captured no box score; the other graded both LOSS from official box-score rows under the frozen rule (at least one leg is a determinate loss). The rule text supports the graded reading, but nobody has declared which file is authoritative, so the running season total is either -5.80u (singles+parlays, SGPs open) or -8.00u (all six tickets).",
+   "how_to_answer": "A one-line ruling from the project owner: does a ticket with one determinate losing leg settle as LOSS even while another leg is unresolved? If yes, adopt sgp_grades_2026-11-16_amendment1.json as the settlement of record and close F143. The ledger already carries both records, so either answer is verifiable from published bytes.",
+   "blocks": "The publicly displayed season record and the settlement stamp for 2026-11-16",
+   "priority": "High",
+   "source": "data/settlement/sgp_grades_2026-11-16_amendment1.json",
+   "source_url": "https://www.nba.com/game/orl-vs-bos-0022600245/box-score"
+  },
+  {
+   "id": "Q32",
+   "question": "Is a served page allowed to contain two different values for the same team, and what should a reader do with the one that failed the identity check?",
+   "what_is_missing": "The 2026-11-17 standings read printed two UTA rows in one download (F142). Current policy is to publish the row that satisfies the arithmetic identities and record both reads. That policy is not stated anywhere as a rule, so a reviewer cannot tell whether a published standings value is a first read, a corrected read or a tie-break by convention.",
+   "how_to_answer": "Adopt an explicit standings policy on the Flagged page: publish the identity-satisfying read, publish the failing read verbatim beside it, never average, never prefer a read because it came first. That is what this cycle did, but writing it down makes it checkable.",
+   "blocks": "Every published standings value and the home-court pin that is derived from them",
+   "priority": "Medium",
+   "source": "data/official/standings_2026-11-17_1547Z_84264db0.json",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "id": "Q33",
+   "question": "Should the rolling publication window extend to the fourth day ahead?",
+   "what_is_missing": "The brief says 'up to 3 days ahead'. This cycle published 11/17-11/20 (four calendar days counting today), and the official read did not include 11/21, which carries 6 games. Whether '3 days ahead' means today+3 or three days from tomorrow has never been resolved in writing, and the ledger's window label carries the phrase rather than the dates.",
+   "how_to_answer": "Pick one reading and put it in the brief's own words in COORDINATION.md, then have the next cycle's official schedule read extend one day further so the label is literally true. Zero re-computation is needed either way: the frozen digests cover exactly what was published.",
+   "blocks": "The next cycle's window and every future window label in the ledger",
+   "priority": "Medium",
+   "source": "data/ledger/ledger.json entry 12",
+   "source_url": "https://www.nba.com/schedule"
   }
  ]
 }

@@ -2,7 +2,7 @@
  "_meta": {
   "title": "Originated horizon lines v2 - 2026-11-15 through 2026-11-19",
   "generated_by": "scripts/build_horizon_v2.py",
-  "generated_utc": "2026-11-17T15:52:30Z",
+  "generated_utc": "2026-11-17T15:54:25Z",
   "method": "two independent estimators built on the official team tables, blended underneath; their disagreement is the headline confidence signal; the home-court advantage is pinned to the measured official home win rate",
   "pick_window": "2026-11-17 .. 2026-11-20 (up to 3 days ahead)",
   "line_window": "2026-11-17 .. 2026-11-20",
@@ -351,7 +351,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Target%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "official schedule",
+   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
    "availability_redistribution_home": {
     "team": "MIN",
     "minutes_removed": 33.7,
@@ -963,7 +963,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Rocket%20Arena&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "official schedule",
+   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
    "availability_redistribution_home": {
     "team": "CLE",
     "minutes_removed": 0.0,
@@ -1104,7 +1104,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Gainbridge%20Fieldhouse&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "official schedule",
+   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
    "availability_redistribution_home": {
     "team": "IND",
     "minutes_removed": 0.0,
@@ -1400,7 +1400,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Kia%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "official schedule",
+   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
    "availability_redistribution_home": {
     "team": "ORL",
     "minutes_removed": 0.0,
@@ -1567,7 +1567,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Barclays%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "official schedule",
+   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
    "availability_redistribution_home": {
     "team": "BKN",
     "minutes_removed": 0.0,
@@ -1705,7 +1705,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Scotiabank%20Arena&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "official schedule",
+   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
    "availability_redistribution_home": {
     "team": "TOR",
     "minutes_removed": 0.0,
@@ -2319,7 +2319,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=American%20Airlines%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "official schedule",
+   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
    "availability_redistribution_home": {
     "team": "DAL",
     "minutes_removed": 0.0,
@@ -2617,7 +2617,7 @@
     "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Golden%201%20Center&format=json&formatversion=2",
     "venue_source": "https://www.nba.com/schedule"
    },
-   "travel_source": "official schedule",
+   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
    "availability_redistribution_home": {
     "team": "SAC",
     "minutes_removed": 0.0,
