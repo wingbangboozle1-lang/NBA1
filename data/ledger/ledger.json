@@ -18,7 +18,7 @@
     "data/derived/horizon_lines.json"
    ],
    "note": "Published picks and model lines as committed at the pre-tip anchor. Commit time 2026-11-14T22:18:48Z precedes the first tip (2026-11-15T00:00Z DEN@NOP) by 1h41m. Byte-identical archives are committed to by digest so the chain survives the rolling update.",
-   "prev": "GENESIS"
+   "prev": null
   },
   {
    "entry": 2,
@@ -30,7 +30,7 @@
     "data/derived/horizon_lines.json": "2b7405421b1efe0d6dd410aba2177d4f859e4f74d26513d0d62c6c75f99bd92f"
    },
    "unchanged_since_pre_tip": true,
-   "prev": "da74fc1689097d42596a3c7deebd6076f5b9b8c10e471e59c131a3c4c52bd9c0"
+   "prev": "c69c01bd9830744a78057ebade3ffd91343bece6192d72e630f11feb63599200"
   },
   {
    "entry": 3,
@@ -39,7 +39,7 @@
    "file": "data/settlement/settlement_2026-11-14.json",
    "sha256": "992796498633d9a98c68de69dba164400be0471d195265a67dc30daea2a37827",
    "official_finals_file": "data/official/results_2026-11-14.json",
-   "prev": "3c0cceb9e5528be32f67f84a54269795670ae2e609695721119772a1f0db1349"
+   "prev": "851d7373ad61d9fa55e087e1e013116cdfcdb41c604a8c2939ef6edc61d935d3"
   },
   {
    "entry": 4,
@@ -76,7 +76,7 @@
     "data/settlement/settlement_2026-11-14.json": "992796498633d9a98c68de69dba164400be0471d195265a67dc30daea2a37827"
    },
    "note": "Rolling-slate publication for the 2026-11-15..18 window, generated after the 2026-11-14 games were settled (entry 3) and before the first tip of the window. Preregistration files for every strategy family are frozen by digest here. The 2026-11-14..17 vintage (entry 1) remains settleable from its archives.",
-   "prev": "e6f6be8333f85637eb808ae91fd012260524ab97a2ffdda22b50ad6431a3a08c"
+   "prev": "a021a26d396786df9ab8e6e73d84b575c290fe9b3676f3ba0cc9e5d57720e8ca"
   },
   {
    "entry": 5,
@@ -117,7 +117,7 @@
     "data/settlement/settlement_2026-11-14.json": "992796498633d9a98c68de69dba164400be0471d195265a67dc30daea2a37827"
    },
    "note": "Rolling-slate publication for the 2026-11-16 .. 2026-11-18 window, generated before the first tip of the window (2026-11-17T00:00Z) and after the previous slate's settlement. Preregistration files for every strategy family are frozen by digest here. Every earlier vintage stays settleable from its own archive under data/archive/.",
-   "prev": "c46e0a37b321679b968ca4aee84a7477a53b2d1f5fa803bd9213672cc310a4bb"
+   "prev": "5fa4ef22b36ae829ad1e38af9650ee8634720afa7a60d038867069dbf1190b41"
   },
   {
    "entry": 6,
@@ -132,7 +132,7 @@
    "settled_dates": [
     "2026-11-15"
    ],
-   "prev": "18a25667d251d2596b157dba6e06516514eb57e112e29d846902eba5085395c0"
+   "prev": "97673581ecc3d3ffaede6200e55759452b933228df6bf5739a70ac69d70c6df7"
   },
   {
    "entry": 7,
@@ -158,7 +158,7 @@
      "2026-11-18"
     ]
    },
-   "prev": "d5f75692d7d7f1dc8d2019a39c4f3c2850e4386c9e1a9df47648f7b8b739a216"
+   "prev": "7b95e064b22041f11b21ade8adf66855f413d1392833a4b19b42ac0e8be5534a"
   },
   {
    "entry": 8,
@@ -173,7 +173,7 @@
    "settled_dates": [
     "2026-11-16"
    ],
-   "prev": "294aa9ce20ad771479c0e5d69c53b48a286e22be03f01db52a4fd20267b2fca7"
+   "prev": "0f78274eb5e7b91544c5288a3cff35f8639f32ee5e492c00018a7b3a0317589e"
   },
   {
    "entry": 9,
@@ -195,7 +195,7 @@
     ],
     "dates_unsettled": []
    },
-   "prev": "f21a4dc0b0fef2d05a0863231d9cef185bb6aa43d8f792a70001088881dd89b3"
+   "prev": "ea464c90e87d3fc5c1ee7448e8a3f68cbd50ca3e6e0c0dcfcfe3167bc25d11b4"
   },
   {
    "entry": 10,
@@ -212,7 +212,7 @@
     "won": 0,
     "units": -2.2
    },
-   "prev": "9d5c497e31449495397c012150cd867430f41e985fa7c84dfbcf50a927f86ae4"
+   "prev": "2c90c76c5bb836cf877f11687c1277a5cad4b562bc59386a2e727f5af152931d"
   },
   {
    "entry": 11,
@@ -231,7 +231,7 @@
     "won": 0,
     "units": -2.2
    },
-   "prev": "ef354bd34eec2a440b80e5c5e4105510bc2e52baeb8b8239a04b623528617d30"
+   "prev": "ddb5e80cc93ca62ed6acf625a8e570a9507f59a36df3ce63a5059a3139263e8b"
   },
   {
    "entry": 12,
@@ -245,7 +245,8 @@
     "legs": [
      "Paolo Banchero (ORL) OVER 24.5",
      "Ty Jerome (MEM) OVER 26.5"
-    ]
+    ],
+    "slate": "2026-11-16"
    },
    "finding": "Both players are named on their game's official gamebook `Inactive:` line with an injury reason, so both did not play. Leg status moves from UNRESOLVED to VOID (inactive leg removed). This confirms the ledger-10 grading that entry 11 withdrew for lack of a source; the source now exists.",
    "effect_on_units": "None. Each ticket already had a determinate losing leg - Tatum 24 < 26.5 and Davis 23 < 25.5 - so both tickets were LOSS at 1.10 each (-2.2 total) under either reading. The SGP result is unchanged by this entry.",
@@ -271,8 +272,9 @@
      "what": "Inactive line names Jerome"
     }
    ],
-   "prev": "2b3041707dc5e5bd7ad4ddeb39b3393e0831307a52a614a54d7f9c5783e45773"
+   "prev": "0fffd81164de03e5546d4c6a2cb841e52f0232004f5fe693168e3aefe44f43eb",
+   "slate": "2026-11-16"
   }
  ],
- "head": "dd7c58919eea3079268e27a4b3f7299c7b2d7dc1d0b94f7b9161d6cd10c5d851"
+ "head": "7e6c2e99256a02ad015d65abb20ced2f0c9823ad19dcaba17b8df0ec1bccd226"
 }

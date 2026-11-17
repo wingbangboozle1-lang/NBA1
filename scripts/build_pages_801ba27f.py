@@ -523,10 +523,39 @@ def build_settlement():
         if not os.path.exists(sgp_p):
             sgp_p = os.path.join(SETTLE, "sgp_grades_%s.json" % slate)
         sgp = jload(sgp_p) if os.path.exists(sgp_p) else None
+        # The ledger is the record of record for leg status: a later
+        # `sgp_leg_resolution` entry (e.g. arena/09ed2727-nba1's gamebook read)
+        # can resolve legs the grading record left UNRESOLVED. Overlay it here so
+        # the page never prints a status the chain has already superseded.
+        resolved_legs = {}
+        res_entry = None
+        for _e in led.get("entries", []):
+            if _e.get("type") == "sgp_leg_resolution" and (
+                    _e.get("slate") == slate or slate in json.dumps(_e.get("resolves", {}))):
+                res_entry = _e
+                _evp = os.path.join(ROOT, _e["file"])
+                if os.path.exists(_evp):
+                    for _pl in jload(_evp).get("players", []):
+                        # Gamebook rows are "Last, First"; ticket legs are "First Last".
+                        # Key on the surname so both conventions match.
+                        _key = _pl["player"].split(",")[0].strip()
+                        resolved_legs[_key] = _pl
+                        resolved_legs[_key.split()[-1]] = _pl
+        if sgp and resolved_legs:
+            for _t in sgp["tickets"]:
+                for _l in _t["legs"]:
+                    _hit = (resolved_legs.get(_l["player"].split()[-1])
+                            or resolved_legs.get(_l["player"].split()[0]))
+                    if _hit and _l.get("result") == "UNRESOLVED":
+                        _l["result"] = "VOID"
+                        _l["official_pts"] = None
+                        _l["resolution"] = _hit.get("evidence", "")
+                        _l["resolved_by_ledger_entry"] = res_entry["entry"]
         n_graded = len(s.get("singles", [])) + sum(
             1 for p in s.get("parlays", []) if p.get("result")) + (
             sgp["summary"]["tickets"] if sgp else summ.get("sgp_settled", 0))
-        n_pending = summ.get("sgp_published", 0) - (sgp["summary"]["tickets"] if sgp else summ.get("sgp_settled", 0))
+        _sgp_settled = sgp["summary"]["tickets"] if sgp else summ.get("sgp_settled", 0)
+        n_pending = max(0, summ.get("sgp_published", 0) - _sgp_settled)
         total = summ.get("total_units_settled")
         if sgp:
             total = round((total or 0) + (sgp["summary"]["units"] or 0), 2)
@@ -561,10 +590,17 @@ def build_settlement():
                 legs = "; ".join("%s %s %s &rarr; %s%s" % (esc(l["player"]), esc(l["side"]), esc(l["line"]),
                                                         esc(l["result"]),
                                                         (" (%s pts)" % esc(l["official_pts"]))
-                                                        if l["official_pts"] is not None else " (no box-score row)")
+                                                        if l["official_pts"] is not None
+                                                        else (" (inactive - gamebook)" if l.get("resolution")
+                                                              else " (no box-score row)"))
                                  for l in t["legs"])
+                _srcs = [link(t["sources"][0], "official box score")]
+                if any(l.get("resolution") for l in t["legs"]):
+                    _srcs.append(link(res_entry.get("sources", [{}])[0].get("url")
+                                      if res_entry.get("sources") else t["sources"][0],
+                                      "official gamebook (Inactive line)"))
                 grows.append([slate, esc(t["game"]), legs, "<strong>%s</strong>" % esc(t["result"]),
-                              val(t["units"]), link(t["sources"][0], "official box score")])
+                              val(t["units"]), " &middot; ".join(_srcs)])
             body.append("<h2>SGP tickets &mdash; graded from official box scores (%s)</h2>" % esc(slate))
             body.append(table(["Date", "Game", "Legs (official points)", "Result", "Units", "Source"], grows))
         else:
