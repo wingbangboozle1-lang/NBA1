@@ -22,9 +22,56 @@ shrinkage, home court, rest and availability. That is stated on the Model page
 because it explains why the refinements below are the whole game.
 """
 
+import json
 import math
+import os
 
 from common import ABBR, TEAM_NAME, mean, norm_cdf, rnd
+
+HCA_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                        "data", "hca_measured.json")
+
+_HCA_CACHE = {}
+
+
+def measured_hca():
+    """The pinned home-court advantage, in points, with its provenance.
+
+    R09: the home-court advantage is pinned to the measured home-win rate and
+    is never fitted freely.  ``engine/hca.py`` measures it from the official
+    standings and the official final-score corpus and writes it to
+    ``data/hca_measured.json``; this is the only place the engine reads it
+    from, so no component can quietly carry a free parameter.
+
+    If the file is missing the function returns ``None`` and the caller falls
+    back to zero rather than to a guess.
+    """
+    if "value" in _HCA_CACHE:
+        return _HCA_CACHE["value"]
+    value = None
+    try:
+        with open(HCA_FILE, encoding="utf-8") as fh:
+            doc = json.load(fh)
+        points = doc.get("hca_points")
+        if points is not None:
+            value = {
+                "points": float(points),
+                "home_win_rate": doc.get("home_win_rate"),
+                "home_wins": doc.get("home_wins"),
+                "home_games": doc.get("home_games"),
+                "sigma_margin": doc.get("sigma_margin"),
+                "source_url": (doc.get("sources", {})
+                               .get("home_win_rate", {})
+                               .get("source_url")),
+                "capture_file": (doc.get("sources", {})
+                                 .get("home_win_rate", {})
+                                 .get("capture_file")),
+                "rule": doc.get("_meta", {}).get("method"),
+            }
+    except (OSError, ValueError):
+        value = None
+    _HCA_CACHE["value"] = value
+    return value
 
 ASSUMPTIONS = {
     "shrink_k": {
@@ -162,43 +209,74 @@ def apply_availability(line, loss_home=0.0, loss_away=0.0, alpha=None):
     return out
 
 
-def reference_line(table, home, away, flat_hca=2.0):
+def reference_line(table, home, away, flat_hca=None):
     """The REFERENCE line we bet against.
 
     Deliberately naive and public: raw published net rating (no shrinkage,
-    no rest, no availability), a flat +2.0 home edge, and a total that is
+    no rest, no availability), the *measured* home edge, and a total that is
     simply the two teams' published scoring averages added together (no
     defensive adjustment at all).
+
+    The home edge is the pinned measurement from ``engine/hca.py`` (R09), not
+    a free constant: ``flat_hca=None`` reads the pin.  An explicit number can
+    still be passed, and the unit tests do that, but the published path never
+    does.
 
     Why a model stands in for the market: no sportsbook price is published by
     an NBA-operated source, so no official link can be attached to one. See
     Flagged for Review F3.
     """
+    hca = flat_hca
+    hca_source = "explicit override"
+    if hca is None:
+        pin = measured_hca()
+        hca = float(pin["points"]) if pin else 0.0
+        hca_source = (
+            "MEASURED PIN (engine/hca.py): home-win rate %.4f (%s/%s), "
+            "sigma_margin %s -> %.4f points"
+            % (pin["home_win_rate"], pin["home_wins"], pin["home_games"],
+               pin["sigma_margin"], hca)
+        ) if pin else "UNAVAILABLE - data/hca_measured.json missing"
     base = base_line(table, home, away, shrink_k=None)
     naive_total = table.ppg(home) + table.ppg(away)
     return {
         "poss": base["poss"],
-        "h_pts": base["h_pts"] + flat_hca / 2.0,
-        "a_pts": base["a_pts"] - flat_hca / 2.0,
-        "margin": base["margin"] + flat_hca,
+        "h_pts": base["h_pts"] + hca / 2.0,
+        "a_pts": base["a_pts"] - hca / 2.0,
+        "margin": base["margin"] + hca,
         "total": naive_total,
-        "h100": base["h100"], "a100": base["a100"],
-        "home": home, "away": away,
-        "hca": flat_hca,
+        "h100": base["h100"], "a100": base["a100"], "home": home, "away": away,
+        "hca": hca,
+        "hca_source": hca_source,
     }
 
 
 def model_line(table, home, away, params, loss_home=0.0, loss_away=0.0,
                home_b2b=0, away_b2b=0, shrink_k=None):
-    """Full originated line: efficiency + shrinkage + HCA + rest + availability."""
+    """Full originated line: efficiency + shrinkage + HCA + rest + availability.
+
+    The home-court advantage is the pinned measurement unless ``params``
+    explicitly carries one (R09: the pin is the default, never a free fit).
+    """
     base = base_line(table, home, away, shrink_k=shrink_k)
     rest_home = params.get("b2b_penalty", 0.0) * (1 if home_b2b else 0)
     rest_away = params.get("b2b_penalty", 0.0) * (1 if away_b2b else 0)
     line = apply_availability(base,
                               loss_home=loss_home + rest_home,
                               loss_away=loss_away + rest_away)
-    line["margin"] += params.get("hca", 0.0)
-    line["hca"] = params.get("hca", 0.0)
+    hca = params.get("hca")
+    if hca is None:
+        pin = measured_hca()
+        hca = float(pin["points"]) if pin else 0.0
+        line["hca_source"] = (
+            "MEASURED PIN (engine/hca.py): home-win rate %.4f (%s/%s) -> "
+            "%.4f points"
+            % (pin["home_win_rate"], pin["home_wins"], pin["home_games"], hca)
+        ) if pin else "UNAVAILABLE - data/hca_measured.json missing"
+    else:
+        line["hca_source"] = "params['hca']"
+    line["margin"] += hca
+    line["hca"] = hca
     line["rest_home"] = rest_home
     line["rest_away"] = rest_away
     return line

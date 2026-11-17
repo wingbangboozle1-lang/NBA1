@@ -1,12 +1,44 @@
 {
  "_meta": {
-  "method": "HCA_points = sigma_margin * norm_ppf(home_win_rate), pinned to the measured home-win rate from official completed games. Not a free parameter.",
-  "home_win_rate": 0.5333,
-  "home_wins": 32,
-  "games": 60,
-  "sigma_margin": 13.0,
-  "source": "data/games.json + docs/data/backtest.json (official NBA.com scores)"
+  "method": "HCA_points = sigma_margin * Phi^-1(measured home-win rate).  The rate is counted from the official NBA standings HOME column; the number of points is read off the measurement and is NOT fitted.",
+  "rule": "The home-court advantage is a pinned constant.  No component downstream may fit it freely.",
+  "built_by": "engine/hca.py",
+  "built_utc": "2026-11-17T15:50:44Z"
  },
- "hca_points": 1.09,
- "home_win_rate": 0.5333
+ "home_win_rate": 0.5196,
+ "home_wins": 106,
+ "home_games": 204,
+ "road_win_rate": 0.4804,
+ "road_wins": 98,
+ "road_games": 204,
+ "neutral_wins": 1,
+ "neutral_games": 2,
+ "sigma_margin": 16.9441,
+ "hca_points": 0.8331,
+ "hca_z": 0.049169,
+ "sources": {
+  "home_win_rate": {
+   "source_url": "https://www.nba.com/standings",
+   "capture_file": "data/official/standings_2026-11-17_1605Z_a374ec9f.json",
+   "captured_by": "arena/a374ec9f-nba1",
+   "retrieved_utc": "2026-11-17T16:05Z"
+  },
+  "sigma_margin": {
+   "rule": "population standard deviation of the margin over the official final-score corpus (finished games only; scheduled rows with placeholder scores are excluded)",
+   "corpus_games": 196,
+   "corpus_source": "data/official/gamelog.json + data/official/results_*.json (official NBA box scores)"
+  }
+ },
+ "cross_check": {
+  "finals_corpus_home_win_rate": 0.5204,
+  "finals_corpus_home_wins": 102,
+  "finals_corpus_games": 196,
+  "sources_agree": true,
+  "note": "The two official measurements are published side by side. A disagreement is reported, not averaged away."
+ },
+ "identity_checks": {
+  "home_wins_equal_road_losses": true,
+  "road_wins_equal_home_losses": true,
+  "per_team_games_sum_to_w_plus_l": true
+ }
 }

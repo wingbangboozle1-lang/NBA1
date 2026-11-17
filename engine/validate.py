@@ -20,8 +20,9 @@ import math
 
 from common import (bootstrap_ci, mean, norm_cdf, pearson, rnd, stdev,
                     wilson_ci, binom_test_two_sided)
-from model_core import (ASSUMPTIONS, RatingTable, base_line, model_line,
-                        reference_line, cover_probability, total_probability)
+from model_core import (ASSUMPTIONS, RatingTable, base_line, measured_hca,
+                        model_line, reference_line, cover_probability,
+                        total_probability)
 
 HOLDOUT_START = "2026-11-06"
 HOLDOUT_END = "2026-11-13"
@@ -158,7 +159,7 @@ def run(train_block, season_block, completed, train_src, season_src):
     resid_raw = []
     for g in holdout:
         raw = base_line(train, g["home"], g["away"], shrink_k=None)
-        ref0 = reference_line(train, g["home"], g["away"], flat_hca=2.0)
+        ref0 = reference_line(train, g["home"], g["away"])
         resid_raw.append((g["home_pts"] - g["away_pts"]) - ref0["margin"])
     sd_resid = stdev(resid_raw)
     s2 = (sd_resid ** 2) / (2.0 * (1.0 + 1.0 / g_avg))
@@ -184,7 +185,7 @@ def run(train_block, season_block, completed, train_src, season_src):
     for g in holdout:
         hb, ab, hrest, arest, known = rest_flags(g, last_played)
         base = base_line(train, g["home"], g["away"], shrink_k=k)
-        ref = reference_line(train, g["home"], g["away"], flat_hca=2.0)
+        ref = reference_line(train, g["home"], g["away"])
         actual_margin = g["home_pts"] - g["away_pts"]
         actual_total = g["home_pts"] + g["away_pts"]
         rows.append({
@@ -198,15 +199,41 @@ def run(train_block, season_block, completed, train_src, season_src):
             "resid_total": actual_total - base["total"],
         })
 
-    # ---- fit HCA and the B2B penalty on the holdout residuals (disclosed in-sample)
+    # ---- the home-court advantage is PINNED, not fitted (R09)
+    #
+    # The pin is the measured home-win rate (engine/hca.py -> data/hca_measured.json):
+    # HCA_points = sigma_margin * Phi^-1(measured home win rate), counted from the
+    # official NBA standings HOME column.  The HCA is therefore not a free
+    # parameter of this fit.
+    #
+    # Two fits are run and both are published:
+    #   * the FREE fit (intercept + B2B slope) is kept only as a diagnostic, so a
+    #     reader can see what the holdout would have chosen and that it is no
+    #     longer used;
+    #   * the PINNED fit subtracts the measured HCA from the residual first and
+    #     then estimates only the B2B slope, with the residual variance
+    #     recomputed around the pinned model.
+    pin = measured_hca()
+    hca_measured = float(pin["points"]) if pin else 0.0
+
     # HCA is not applied at a neutral site, so the intercept is dropped for those rows
     X = [[1.0 if not r["neutral"] else 0.0, float(r["home_b2b"] - r["away_b2b"])]
          for r in rows]
     y = [r["resid_margin"] for r in rows]
     b, se, t, resid, s2, dof = ols(X, y)
-    hca, hca_se, hca_t = b[0], se[0], t[0]
+    hca_free, hca_se, hca_t = b[0], se[0], t[0]
     b2b_coef, b2b_se, b2b_t = b[1], se[1], t[1]
-    sigma_margin = math.sqrt(s2)
+
+    # the pinned fit: HCA held fixed at the measurement, B2B slope re-estimated
+    Xp = [[float(r["home_b2b"] - r["away_b2b"])] for r in rows]
+    yp = [r["resid_margin"] - (0.0 if r["neutral"] else hca_measured) for r in rows]
+    bp, sep, tp, residp, s2p, dofp = ols(Xp, yp)
+    b2b_coef_pinned = bp[0]
+    use_b2b_pinned = abs(tp[0]) >= 1.0
+    sigma_margin = math.sqrt(max(0.0, s2p))
+    hca = hca_measured
+    hca_se = hca_se
+    hca_t = hca_t
 
     # ---- totals: intercept (scoring bias) + B2B slope
     Xt = [[1.0, float(r["home_b2b"] + r["away_b2b"])] for r in rows]
@@ -216,11 +243,17 @@ def run(train_block, season_block, completed, train_src, season_src):
     total_b2b, total_b2b_se, total_b2b_t = bt[1], set_[1], tt[1]
     sigma_total = math.sqrt(s2t)
 
-    use_b2b = abs(b2b_t) >= 1.0
+    use_b2b = use_b2b_pinned
     use_total_b2b = abs(total_b2b_t) >= 1.0
     params = {
         "hca": hca,
-        "b2b_penalty": (-b2b_coef if use_b2b else 0.0),
+        "hca_source": ("MEASURED PIN (engine/hca.py): home-win rate %.4f "
+                       "(%s/%s) -> %.4f points"
+                       % (pin["home_win_rate"], pin["home_wins"],
+                          pin["home_games"], hca)) if pin else
+                      "UNAVAILABLE - data/hca_measured.json missing",
+        "hca_fitted_diagnostic": hca_free,
+        "b2b_penalty": (-b2b_coef_pinned if use_b2b else 0.0),
         "total_bias": total_bias,
         "total_b2b_coef": (total_b2b if use_total_b2b else 0.0),
         "sigma_margin": sigma_margin,

@@ -1,0 +1,254 @@
+{
+ "title": "Official NBA schedule, 2026-11-17 through 2026-11-19 (21 games) - the three-day rolling horizon",
+ "captured_by": "arena/a374ec9f-nba1",
+ "captured_utc": "2026-11-17T16:05Z..16:25Z",
+ "sources": {
+  "games_by_date": "https://www.nba.com/games?date=YYYY-MM-DD",
+  "schedule_page": "https://www.nba.com/schedule",
+  "per_game_card": "https://www.nba.com/game/<away>-vs-<home>-<gameId>"
+ },
+ "read_method": "each date's official games listing was fetched and transcribed game by game; on nba.com/games the FIRST team listed is AWAY and the second is HOME (confirmed against the official game-card URL pattern <away>-vs-<home>-<gameId> and against the 2026-11-16 final scores)",
+ "window_rule": "today plus up to 3 days ahead (the brief's maximum horizon)",
+ "counts": {
+  "games": 21,
+  "per_date": {
+   "2026-11-17": 5,
+   "2026-11-18": 12,
+   "2026-11-19": 4
+  }
+ },
+ "game_id_continuity_check": "game ids 0022600253..0022600273 are contiguous with no gaps, which matches the 5 + 12 + 4 games the official calendar prints for 11/17, 11/18 and 11/19",
+ "rows": [
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600253",
+   "away": "NYK",
+   "home": "TOR",
+   "matchup": "NYK@TOR",
+   "tip_et": "7:30 PM ET",
+   "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600253",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "away": "POR",
+   "home": "MIN",
+   "matchup": "POR@MIN",
+   "tip_et": "8:00 PM ET",
+   "source_url": "https://www.nba.com/game/por-vs-min-0022600254",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "away": "DET",
+   "home": "SAS",
+   "matchup": "DET@SAS",
+   "tip_et": "8:00 PM ET",
+   "source_url": "https://www.nba.com/game/det-vs-sas-0022600255",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600256",
+   "away": "CHA",
+   "home": "LAL",
+   "matchup": "CHA@LAL",
+   "tip_et": "11:00 PM ET",
+   "source_url": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "away": "UTA",
+   "home": "LAC",
+   "matchup": "UTA@LAC",
+   "tip_et": "10:30 PM ET",
+   "source_url": "https://www.nba.com/game/uta-vs-lac-0022600257",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600258",
+   "away": "MEM",
+   "home": "CLE",
+   "matchup": "MEM@CLE",
+   "tip_et": "7:00 PM ET",
+   "source_url": "https://www.nba.com/game/mem-vs-cle-0022600258",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600259",
+   "away": "HOU",
+   "home": "IND",
+   "matchup": "HOU@IND",
+   "tip_et": "7:00 PM ET",
+   "source_url": "https://www.nba.com/game/hou-vs-ind-0022600259",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600260",
+   "away": "MIL",
+   "home": "MIA",
+   "matchup": "MIL@MIA",
+   "tip_et": "7:00 PM ET",
+   "source_url": "https://www.nba.com/game/mil-vs-mia-0022600260",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600261",
+   "away": "PHI",
+   "home": "ORL",
+   "matchup": "PHI@ORL",
+   "tip_et": "7:00 PM ET",
+   "source_url": "https://www.nba.com/game/phi-vs-orl-0022600261",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600262",
+   "away": "CHI",
+   "home": "BKN",
+   "matchup": "CHI@BKN",
+   "tip_et": "7:30 PM ET",
+   "source_url": "https://www.nba.com/game/chi-vs-bkn-0022600262",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600263",
+   "away": "WAS",
+   "home": "TOR",
+   "matchup": "WAS@TOR",
+   "tip_et": "7:30 PM ET",
+   "source_url": "https://www.nba.com/game/was-vs-tor-0022600263",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600264",
+   "away": "DET",
+   "home": "NOP",
+   "matchup": "DET@NOP",
+   "tip_et": "8:00 PM ET",
+   "source_url": "https://www.nba.com/game/det-vs-nop-0022600264",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600265",
+   "away": "ATL",
+   "home": "OKC",
+   "matchup": "ATL@OKC",
+   "tip_et": "8:00 PM ET",
+   "source_url": "https://www.nba.com/game/atl-vs-okc-0022600265",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600266",
+   "away": "BOS",
+   "home": "DEN",
+   "matchup": "BOS@DEN",
+   "tip_et": "9:30 PM ET",
+   "source_url": "https://www.nba.com/game/bos-vs-den-0022600266",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600267",
+   "away": "GSW",
+   "home": "DAL",
+   "matchup": "GSW@DAL",
+   "tip_et": "8:00 PM ET",
+   "source_url": "https://www.nba.com/game/gsw-vs-dal-0022600267",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600268",
+   "away": "UTA",
+   "home": "LAL",
+   "matchup": "UTA@LAL",
+   "tip_et": "10:00 PM ET",
+   "source_url": "https://www.nba.com/game/uta-vs-lal-0022600268",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600269",
+   "away": "PHX",
+   "home": "SAC",
+   "matchup": "PHX@SAC",
+   "tip_et": "10:00 PM ET",
+   "source_url": "https://www.nba.com/game/phx-vs-sac-0022600269",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600270",
+   "away": "GSW",
+   "home": "MEM",
+   "matchup": "GSW@MEM",
+   "tip_et": "8:00 PM ET",
+   "source_url": "https://www.nba.com/game/gsw-vs-mem-0022600270",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-19",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600271",
+   "away": "POR",
+   "home": "MIL",
+   "matchup": "POR@MIL",
+   "tip_et": "8:00 PM ET",
+   "source_url": "https://www.nba.com/game/por-vs-mil-0022600271",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-19",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600272",
+   "away": "NYK",
+   "home": "MIN",
+   "matchup": "NYK@MIN",
+   "tip_et": "8:00 PM ET",
+   "source_url": "https://www.nba.com/game/nyk-vs-min-0022600272",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-19",
+   "status": "SCHEDULED (not yet played at read time)"
+  },
+  {
+   "date": "2026-11-19",
+   "game_id": "0022600273",
+   "away": "LAC",
+   "home": "SAS",
+   "matchup": "LAC@SAS",
+   "tip_et": "8:00 PM ET",
+   "source_url": "https://www.nba.com/game/lac-vs-sas-0022600273",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-19",
+   "status": "SCHEDULED (not yet played at read time)"
+  }
+ ]
+}

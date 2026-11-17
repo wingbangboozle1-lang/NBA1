@@ -159,7 +159,7 @@ def main():
         loss_home = loss_away = 0.0
         if date in {r["game_date"] for r in injuries}:
             loss_home, loss_away, rep_home, rep_away = avail.game_loss(date, matchup)
-        ref = reference_line(season, home, away, flat_hca=2.0)
+        ref = reference_line(season, home, away)
         ml = model_line(season, home, away, params,
                         loss_home=loss_home, loss_away=loss_away,
                         home_b2b=hb, away_b2b=ab_, shrink_k=params["shrink_k"])
@@ -212,7 +212,7 @@ def main():
                         actual_margin=r["actual_margin"], actual_total=r["actual_total"])
         # keep the out-of-sample ratings: rebuild with the TRAINING table
         tr = bt["train"]
-        ctx["ref"] = reference_line(tr, g["home"], g["away"], flat_hca=2.0)
+        ctx["ref"] = reference_line(tr, g["home"], g["away"])
         mlt = model_line(tr, g["home"], g["away"], params,
                          home_b2b=r["home_b2b"], away_b2b=r["away_b2b"],
                          shrink_k=params["shrink_k"])
