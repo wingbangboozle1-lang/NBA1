@@ -1,0 +1,361 @@
+{
+ "title": "Official per-game result feed rows for 2026-11-16 (re-cut from a stored capture)",
+ "generated_by": "scripts/build_results_feed_ca442d3d.py",
+ "session": "arena/ca442d3d-nba1",
+ "rule": "one row per game: date, teams, final score, quarter scores. A game is settled only when the official page prints gameStatus 3 (Final) and the quarter scores sum to the printed final.",
+ "capture": {
+  "stored_at": "data/raw/session-ca442d3d/html/games_2026-11-16__fb09b260a26436e2da1997a27c7a173ca779b0934df69d46458ac04eb2c799a4.json.gz",
+  "source_url": "https://www.nba.com/games?date=2026-11-16",
+  "http_status": 200,
+  "bytes": 541448,
+  "sha256_of_page_bytes": "fb09b260a26436e2da1997a27c7a173ca779b0934df69d46458ac04eb2c799a4",
+  "retrieved_at_utc": "2026-11-17T16:00:00Z",
+  "extracted_from": "the page's own <script id=\"__NEXT_DATA__\"> scoreboard JSON"
+ },
+ "games_on_page": 8,
+ "settled_rows": 8,
+ "excluded_not_final": [],
+ "quarter_sum_assertion_failures": [],
+ "cross_check": {
+  "feed_compared": 8,
+  "feed_agreements": [
+   {
+    "game_id": "0022600245",
+    "this_capture": "ORL 115 @ BOS 105",
+    "committed_feed": "ORL 115 @ BOS 105"
+   },
+   {
+    "game_id": "0022600247",
+    "this_capture": "MEM 136 @ WAS 120",
+    "committed_feed": "MEM 136 @ WAS 120"
+   },
+   {
+    "game_id": "0022600246",
+    "this_capture": "CHI 115 @ CLE 126",
+    "committed_feed": "CHI 115 @ CLE 126"
+   },
+   {
+    "game_id": "0022600249",
+    "this_capture": "HOU 110 @ MIA 128",
+    "committed_feed": "HOU 110 @ MIA 128"
+   },
+   {
+    "game_id": "0022600248",
+    "this_capture": "PHI 135 @ BKN 123",
+    "committed_feed": "PHI 135 @ BKN 123"
+   },
+   {
+    "game_id": "0022600251",
+    "this_capture": "GSW 94 @ NOP 115",
+    "committed_feed": "GSW 94 @ NOP 115"
+   },
+   {
+    "game_id": "0022600250",
+    "this_capture": "POR 98 @ MIN 106",
+    "committed_feed": "POR 98 @ MIN 106"
+   },
+   {
+    "game_id": "0022600252",
+    "this_capture": "PHX 117 @ DEN 105",
+    "committed_feed": "PHX 117 @ DEN 105"
+   }
+  ],
+  "feed_conflicts": [],
+  "feed_missing": [],
+  "settlement_compared": 8,
+  "settlement_agreements": [
+   {
+    "game_id": "0022600245",
+    "capture": "ORL 115 @ BOS 105",
+    "settlement": "ORL 115 @ BOS 105",
+    "quarters_agree": true
+   },
+   {
+    "game_id": "0022600247",
+    "capture": "MEM 136 @ WAS 120",
+    "settlement": "MEM 136 @ WAS 120",
+    "quarters_agree": true
+   },
+   {
+    "game_id": "0022600246",
+    "capture": "CHI 115 @ CLE 126",
+    "settlement": "CHI 115 @ CLE 126",
+    "quarters_agree": true
+   },
+   {
+    "game_id": "0022600249",
+    "capture": "HOU 110 @ MIA 128",
+    "settlement": "HOU 110 @ MIA 128",
+    "quarters_agree": true
+   },
+   {
+    "game_id": "0022600248",
+    "capture": "PHI 135 @ BKN 123",
+    "settlement": "PHI 135 @ BKN 123",
+    "quarters_agree": true
+   },
+   {
+    "game_id": "0022600251",
+    "capture": "GSW 94 @ NOP 115",
+    "settlement": "GSW 94 @ NOP 115",
+    "quarters_agree": true
+   },
+   {
+    "game_id": "0022600250",
+    "capture": "POR 98 @ MIN 106",
+    "settlement": "POR 98 @ MIN 106",
+    "quarters_agree": true
+   },
+   {
+    "game_id": "0022600252",
+    "capture": "PHX 117 @ DEN 105",
+    "settlement": "PHX 117 @ DEN 105",
+    "quarters_agree": true
+   }
+  ],
+  "settlement_conflicts": [],
+  "settlement_missing": null
+ },
+ "rows": [
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600245",
+   "game_status": 3,
+   "game_status_text": "Final",
+   "home": "BOS",
+   "away": "ORL",
+   "home_pts": 105,
+   "away_pts": 115,
+   "home_quarters": [
+    17,
+    24,
+    36,
+    28
+   ],
+   "away_quarters": [
+    20,
+    30,
+    25,
+    40
+   ],
+   "ot_periods": 0,
+   "margin_home": -10,
+   "total_pts": 220,
+   "home_record": "11-3",
+   "away_record": "6-7",
+   "tip_utc": "2026-11-17T00:00:00Z",
+   "official_source": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/magic-vs-celtics-0022600245"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600247",
+   "game_status": 3,
+   "game_status_text": "Final",
+   "home": "WAS",
+   "away": "MEM",
+   "home_pts": 120,
+   "away_pts": 136,
+   "home_quarters": [
+    35,
+    34,
+    18,
+    33
+   ],
+   "away_quarters": [
+    33,
+    26,
+    42,
+    35
+   ],
+   "ot_periods": 0,
+   "margin_home": -16,
+   "total_pts": 256,
+   "home_record": "4-11",
+   "away_record": "10-4",
+   "tip_utc": "2026-11-17T00:00:00Z",
+   "official_source": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/grizzlies-vs-wizards-0022600247"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600246",
+   "game_status": 3,
+   "game_status_text": "Final",
+   "home": "CLE",
+   "away": "CHI",
+   "home_pts": 126,
+   "away_pts": 115,
+   "home_quarters": [
+    25,
+    32,
+    31,
+    38
+   ],
+   "away_quarters": [
+    31,
+    17,
+    31,
+    36
+   ],
+   "ot_periods": 0,
+   "margin_home": 11,
+   "total_pts": 241,
+   "home_record": "8-7",
+   "away_record": "3-10",
+   "tip_utc": "2026-11-17T00:00:00Z",
+   "official_source": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/bulls-vs-cavaliers-0022600246"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600249",
+   "game_status": 3,
+   "game_status_text": "Final",
+   "home": "MIA",
+   "away": "HOU",
+   "home_pts": 128,
+   "away_pts": 110,
+   "home_quarters": [
+    29,
+    33,
+    39,
+    27
+   ],
+   "away_quarters": [
+    15,
+    31,
+    35,
+    29
+   ],
+   "ot_periods": 0,
+   "margin_home": 18,
+   "total_pts": 238,
+   "home_record": "8-6",
+   "away_record": "11-4",
+   "tip_utc": "2026-11-17T00:30:00Z",
+   "official_source": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/rockets-vs-heat-0022600249"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600248",
+   "game_status": 3,
+   "game_status_text": "Final",
+   "home": "BKN",
+   "away": "PHI",
+   "home_pts": 123,
+   "away_pts": 135,
+   "home_quarters": [
+    26,
+    33,
+    36,
+    28
+   ],
+   "away_quarters": [
+    33,
+    45,
+    27,
+    30
+   ],
+   "ot_periods": 0,
+   "margin_home": -12,
+   "total_pts": 258,
+   "home_record": "3-10",
+   "away_record": "12-3",
+   "tip_utc": "2026-11-17T00:30:00Z",
+   "official_source": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/sixers-vs-nets-0022600248"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600251",
+   "game_status": 3,
+   "game_status_text": "Final",
+   "home": "NOP",
+   "away": "GSW",
+   "home_pts": 115,
+   "away_pts": 94,
+   "home_quarters": [
+    35,
+    26,
+    32,
+    22
+   ],
+   "away_quarters": [
+    11,
+    25,
+    29,
+    29
+   ],
+   "ot_periods": 0,
+   "margin_home": 21,
+   "total_pts": 209,
+   "home_record": "5-10",
+   "away_record": "8-6",
+   "tip_utc": "2026-11-17T01:00:00Z",
+   "official_source": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/warriors-vs-pelicans-0022600251"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600250",
+   "game_status": 3,
+   "game_status_text": "Final",
+   "home": "MIN",
+   "away": "POR",
+   "home_pts": 106,
+   "away_pts": 98,
+   "home_quarters": [
+    26,
+    33,
+    28,
+    19
+   ],
+   "away_quarters": [
+    26,
+    25,
+    22,
+    25
+   ],
+   "ot_periods": 0,
+   "margin_home": 8,
+   "total_pts": 204,
+   "home_record": "10-4",
+   "away_record": "9-4",
+   "tip_utc": "2026-11-17T01:00:00Z",
+   "official_source": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/blazers-vs-timberwolves-0022600250"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600252",
+   "game_status": 3,
+   "game_status_text": "Final",
+   "home": "DEN",
+   "away": "PHX",
+   "home_pts": 105,
+   "away_pts": 117,
+   "home_quarters": [
+    24,
+    29,
+    29,
+    23
+   ],
+   "away_quarters": [
+    20,
+    36,
+    34,
+    27
+   ],
+   "ot_periods": 0,
+   "margin_home": -12,
+   "total_pts": 222,
+   "home_record": "7-5",
+   "away_record": "6-7",
+   "tip_utc": "2026-11-17T02:00:00Z",
+   "official_source": "https://www.nba.com/games?date=2026-11-16",
+   "game_url": "https://www.nba.com/game/suns-vs-nuggets-0022600252"
+  }
+ ]
+}

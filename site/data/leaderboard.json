@@ -15,16 +15,16 @@
    "components": {
     "sample": 1.0,
     "edge": 1.0,
-    "calibration": 0.39,
+    "calibration": 0.2,
     "result": 1.0,
     "gates": 0.6
    },
-   "lbs": 84.8,
+   "lbs": 82.0,
    "tier": "Tier 3 - Quarter unit",
    "tier_note": "Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G2, G5 failed.",
-   "n_graded": 32,
-   "record": "23-9",
-   "units": 11.909,
+   "n_graded": 31,
+   "record": "23-8",
+   "units": 12.909,
    "status": "GRADED",
    "rank": 1
   },
@@ -33,18 +33,18 @@
    "name": "Back-to-back fade",
    "family": "Single bet",
    "components": {
-    "sample": 0.4,
+    "sample": 0.433,
     "edge": 1.0,
-    "calibration": 0.814,
-    "result": 1.0,
+    "calibration": 0.824,
+    "result": 0.916,
     "gates": 0.5
    },
-   "lbs": 77.7,
+   "lbs": 76.4,
    "tier": "Tier 3 - Quarter unit",
    "tier_note": "Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G4, G5 failed.",
-   "n_graded": 12,
-   "record": "8-4",
-   "units": 3.273,
+   "n_graded": 13,
+   "record": "8-5",
+   "units": 2.273,
    "status": "GRADED",
    "rank": 2
   },
@@ -69,42 +69,42 @@
    "rank": 3
   },
   {
-   "id": "S10",
-   "name": "Same-game parlay (side + total)",
-   "family": "Parlay / SGP",
-   "components": {
-    "sample": 0.867,
-    "edge": 0.0,
-    "calibration": 0.693,
-    "result": 0.0,
-    "gates": 0.417
-   },
-   "lbs": 34.0,
-   "tier": "Tier 3 - Quarter unit",
-   "tier_note": "Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G3, G4, G5 failed.",
-   "n_graded": 26,
-   "record": "11-15",
-   "units": 3.628,
-   "status": "GRADED",
-   "rank": 4
-  },
-  {
    "id": "S3",
    "name": "Moneyline value",
    "family": "Single bet",
    "components": {
-    "sample": 0.733,
-    "edge": 0.251,
-    "calibration": 0.563,
+    "sample": 0.567,
+    "edge": 0.524,
+    "calibration": 0.525,
     "result": 0.0,
-    "gates": 0.3
+    "gates": 0.5
    },
-   "lbs": 33.9,
+   "lbs": 39.8,
+   "tier": "Tier 3 - Quarter unit",
+   "tier_note": "Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G4, G5 failed.",
+   "n_graded": 17,
+   "record": "8-9",
+   "units": -1.727,
+   "status": "GRADED",
+   "rank": 4
+  },
+  {
+   "id": "S10",
+   "name": "Same-game parlay (side + total)",
+   "family": "Parlay / SGP",
+   "components": {
+    "sample": 0.8,
+    "edge": 0.0,
+    "calibration": 0.893,
+    "result": 0.0,
+    "gates": 0.417
+   },
+   "lbs": 35.6,
    "tier": "Tier 3 - Quarter unit",
    "tier_note": "Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G3, G4, G5 failed.",
-   "n_graded": 22,
-   "record": "10-12",
-   "units": -2.909,
+   "n_graded": 24,
+   "record": "9-15",
+   "units": 1.03,
    "status": "GRADED",
    "rank": 5
   },
@@ -115,16 +115,16 @@
    "components": {
     "sample": 0.267,
     "edge": 0.0,
-    "calibration": 0.346,
+    "calibration": 0.362,
     "result": 0.0,
     "gates": 0.167
    },
-   "lbs": 13.0,
+   "lbs": 13.3,
    "tier": "Tier 3 - Quarter unit",
    "tier_note": "Directional evidence only; stake capped. At least one applicable gate failed. - capped because gate G1, G2, G3, G4, G5 failed.",
    "n_graded": 8,
    "record": "3-5",
-   "units": -1.297,
+   "units": -1.873,
    "status": "GRADED",
    "rank": 6
   },

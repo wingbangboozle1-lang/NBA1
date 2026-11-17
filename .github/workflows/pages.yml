@@ -130,6 +130,33 @@ jobs:
           print(f"Command Center: {len(need)} data files valid, {len(pages)} pages present.")
           PY
 
+      # CI gap closed by session arena/ca442d3d-nba1 (COORDINATION §63, at the
+      # request of §60.7 item 3). Until now every scripts/test_*.py ran only when
+      # a reviewer remembered to run it, so a parser regression - flag F-X01,
+      # seven player rows dropped per injury-report edition while the parse
+      # reported a clean 0 unparsed cells - could land green. Each module is run
+      # by module name (namespace-package import, so no __init__.py is needed)
+      # and its exit code is checked; PYTHONPATH=. is set because several tests
+      # import from the repository root (flag F-DFA-05).
+      - name: Run the unit-test suite (parsers, promotion, injury diff, gates)
+        env:
+          PYTHONPATH: "."
+        run: |
+          set -u
+          n=0
+          for t in scripts/test_*.py; do
+            mod=$(echo "$t" | sed 's#/#.#g; s/\.py$//')
+            if python3 -m unittest "$mod" >/tmp/t.log 2>&1; then
+              echo "PASS  $mod"
+            else
+              echo "FAIL  $mod"
+              tail -25 /tmp/t.log
+              exit 1
+            fi
+            n=$((n+1))
+          done
+          echo "$n test module(s) passed."
+
       - name: Static link and source check across every build
         run: python3 scripts/check_links.py
 

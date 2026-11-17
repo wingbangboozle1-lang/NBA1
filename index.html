@@ -103,12 +103,12 @@
     <div class="tiles">
 <div class="tile"><div class="tile-v">29</div><div class="tile-l">Games in horizon (16&ndash;19 Nov)</div><div class="tile-s">rolling slate 16&ndash;19 Nov 2026 (today + 3 days) &mdash; see the picks page</div></div>
 <div class="tile"><div class="tile-v">29</div><div class="tile-l">Originated lines</div><div class="tile-s">spread, total and fair moneyline per game</div></div>
-<div class="tile"><div class="tile-v">49</div><div class="tile-l">Paper picks, single-leg</div><div class="tile-s">23 of 29 games &middot; +9 two-leg combos = 58 plays in the strategy-lab window (16&ndash;19 Nov); the 16&ndash;19 Nov roll prices 29 singles, of which 17 clear every model gate and 7 are publishable outright - the rest are provisional because no official injury edition covers the game date yet</div></div>
+<div class="tile"><div class="tile-v">52</div><div class="tile-l">Paper picks, single-leg</div><div class="tile-s">21 of 29 games &middot; +16 two-leg combos = 68 plays in the strategy-lab window (16&ndash;19 Nov); the 16&ndash;19 Nov roll prices 29 singles, of which 17 clear every model gate and 7 are publishable outright - the rest are provisional because no official injury edition covers the game date yet</div></div>
 <div class="tile"><div class="tile-v">10</div><div class="tile-l">Strategies tested</div><div class="tile-s">6 capped at a quarter unit &middot; 4 research-only</div></div>
 <div class="tile"><div class="tile-v">60</div><div class="tile-l">Out-of-sample games</div><div class="tile-s">every one predicted out of sample</div></div>
-<div class="tile"><div class="tile-v">145</div><div class="tile-l">Open flags</div><div class="tile-s">published, non-blocking</div></div>
+<div class="tile"><div class="tile-v">149</div><div class="tile-l">Open flags</div><div class="tile-s">published, non-blocking</div></div>
 </div>
-<div class="banner warn"><div class="b-t">What this site is, and what it is not</div><div class="b-b"><p>This is an <strong>origination and research</strong> workspace. It produces its own lines from official NBA data and then tries hard to prove that those lines carry skill. As of this build <strong>no strategy is funded</strong>. The best one &mdash; 23-9 at Tier 3 - Quarter unit &mdash; has cleared the registered luck gate G4 (Wilson 95% lower bound on its hit rate above the 52.38% break-even; the exact binomial p = 0.020 is uncorrected for the number of strategies tried, and this gate set registers no multiplicity gate), but it fails the calibration and stability gates and the availability gate cannot run, so it stays capped at a quarter unit. Every strategy is therefore capped at a quarter unit or held back as research-only, and that is the result, not an obstacle to be worked around.</p><p>No sportsbook price is used anywhere, because no NBA-operated source publishes one. &ldquo;Edge&rdquo; on this site means <em>the model against a deliberately naive reference model built from the same official ratings</em>. It does not mean an edge against a book.</p></div></div>
+<div class="banner warn"><div class="b-t">What this site is, and what it is not</div><div class="b-b"><p>This is an <strong>origination and research</strong> workspace. It produces its own lines from official NBA data and then tries hard to prove that those lines carry skill. As of this build <strong>no strategy is funded</strong>. The best one &mdash; 23-8 at Tier 3 - Quarter unit &mdash; has cleared the registered luck gate G4 (Wilson 95% lower bound on its hit rate above the 52.38% break-even; the exact binomial p = 0.020 is uncorrected for the number of strategies tried, and this gate set registers no multiplicity gate), but it fails the calibration and stability gates and the availability gate cannot run, so it stays capped at a quarter unit. Every strategy is therefore capped at a quarter unit or held back as research-only, and that is the result, not an obstacle to be worked around.</p><p>No sportsbook price is used anywhere, because no NBA-operated source publishes one. &ldquo;Edge&rdquo; on this site means <em>the model against a deliberately naive reference model built from the same official ratings</em>. It does not mean an edge against a book.</p></div></div>
 <section class="card exec"><h2>Executive summary</h2><p class="lead">The 2026-11-16 slate is SETTLED from official finals: all eight games printed Final and each quarter row sums to its final. Singles 3-5-0 (-2.5 units at paper -110), parlays 0-3 (-3.3 units), single-game SGP tickets 0-2 (-2.2 units, graded from official box scores). Settled total on 11/16: -8.0 units. Three game days are graded: 11/14, 11/15 and 11/16. Two of the four 11/16 SGP player legs (Banchero, Jerome) have no box-score row and are UNRESOLVED; both tickets still lose because each has a determinate losing leg. Nothing is staked, and no strategy has passed the full validation gate set.</p><p>This session re-read every 11/16 game on the official site (https://www.nba.com/games?date=2026-11-16 and the eight game pages). The eight final scores were also matched 8 of 8 against the scheduled 11/17 capture (data/raw/_capture_results_2026-11-16.json). Quarter scores were read once per game, and venue, attendance and officials were blanked where no read confirmed them (flag F138). The scheduled refresh captured the finals but did not promote them or settle the day, so this session entered them by hand and recorded that gap as F140. Results and settlement now render every settlement record in the repository, including 11/16 and its SGP grading, from the data files themselves.</p><div class="verdict"><div class="v-t">Verdict &mdash; PROVISIONAL - not funded</div><div class="v-b">The model beats the naive reference on margin accuracy (MAE 12.98 against 13.62) and loses to it on totals (14.83 against 14.72) and on picking winners (42-18 against 40-20). S1 (side edge) is now 23-9, worth +11.91 model units, and for the first time its record is outside what luck alone produces (exact binomial p = 0.020, Wilson lower bound 0.546 against the 0.524 break-even) - but it fails the calibration gate (hit rate 0.719 against a mean predicted 0.627) and the stability gate (the bootstrap interval on the model's margin MAE still overlaps the reference), and the availability gate cannot run at all. Under the tier ceilings it stays a quarter-unit strategy. The 29 games of the 16-19 Nov roll are published as lines and paper picks, not as recommendations.</div><div class="v-w"><strong>Why:</strong> Sixty games with a 17.4-point residual standard deviation have finally made one record statistically distinguishable from a coin flip - and that is exactly when the other gates matter most. A hit rate the model itself did not predict is a calibration failure, not a windfall; an improvement whose interval overlaps the reference is not stable; and a gate that cannot run is not passed. Selective skill means paying for the part that survives every gate and nothing else.</div></div><ol class="findings"><li><b>11/15 settled from official finals, first-hand</b> &mdash; <br><span class="fine">Nine of nine games final at https://www.nba.com/games?date=2026-11-15; quarter scores transcribed per game (six from the games page, three from the official gamebooks); every quarters row sums to its printed final; settlement graded 9 singles 5-4-0 and appended ledger entries 6 and 7, chain verified OK. Status: DONE. Source: https://www.nba.com/games?date=2026-11-15</span></li><li><b>Two arena tables in the repo disagreed, and travel distance used the wrong one</b> &mdash; <br><span class="fine">data/arenas.json put the LA Clippers at Crypto.com Arena in Los Angeles; the official schedule page puts them at Intuit Dome, Inglewood, CA, and the repository's own official capture already said so. PHI and PHX venue names were stale in the same file. scripts/travel_distance.py now reads the official capture; the discrepancy is published as F108 rather than quietly overwritten. Status: FIXED, flagged F108. Source: https://www.nba.com/schedule</span></li><li><b>The settlement page contradicted itself while all five gates passed</b> &mdash; <br><span class="fine">A session-namespaced duplicate capture (results_2026-11-15_dfef26dc.json) became its own page section headed '2026-11-15_dfef26dc', matched no rows and printed '0 of 0 final — NOT settleable' under the settled game day. Fixed in the builder and published as F112. This is the clearest evidence in the repo that a green gate suite is not the same thing as a correct page. Status: FIXED, flagged F112. Source: https://www.nba.com/games?date=2026-11-15</span></li><li><b>The model wins on the margin and loses on totals and winners</b> &mdash; Margin: MAE 12.98 against 13.62 for the naive reference, RMSE 17.12 against 17.88 - the model is better on both. Totals: MAE 14.83 against 14.72, RMSE 19.35 against 19.10 - the reference is better on both. Straight up the reference went 42-18 and the model 40-20, and the reference has the better Brier score (0.2001 against 0.2020) and the better log loss (0.5827 against 0.5873).<br><span class="fine">The refinements buy a real but tiny margin improvement and nothing else. The probability calibration is the weakest part of the model, and it is where the remaining work should go.</span></li><li><b>Growing the window keeps changing what can be claimed - which is the point of the sample gate</b> &mdash; On the 28-game window the model beat the reference on totals (MAE 14.50 against 14.75). On 51 games it did not (14.86 against 14.75) - the sign flipped. On the 60-game window the sign holds (14.83 against 14.72) and the gap narrowed, but the conclusion stands. Each addition of data has moved at least one claim.<br><span class="fine">Any single-window result at this sample size should be treated as a hypothesis, not a finding.</span></li><li><b>S1 has cleared the luck gate at 23-9 - and failed two others, which is the honest headline</b> &mdash; S1 (side edge vs the reference spread) produced 32 graded plays at 23-9, worth +11.91 model units and a 37.2% return at -110. Its exact binomial p-value against a coin flip is 0.020 and the Wilson 95% interval on its hit rate is 0.546 to 0.844 - the lower bound is now above the 0.5238 break-even, so G4 (skill, not luck) passes for the first time. But its hit rate of 0.719 against a mean predicted probability of 0.627 fails the calibration gate (gap 0.091 against a 0.08 tolerance), and the stability gate fails because the bootstrap interval on the model's margin MAE (10.2 to 15.94) still contains the reference MAE (13.62). The availability gate cannot run at all for the graded window.<br><span class="fine">This is what selectively skill-based looks like: one gate says this is probably not luck, two gates say the model does not understand why, and the funding tier stays at quarter unit until every gate that can be run has been run and passed.</span></li><li><b>Home court looks normal; the back-to-back penalty is large but uncertain</b> &mdash; Home-court advantage estimates at +3.51 points with a standard error of 2.28 (t = 1.54) across 60 games, squarely in the historical NBA range. The back-to-back penalty estimates at -6.26 points with a standard error of 4.86 (t = -1.29); because |t| &gt;= 1 the model applies the full 6.26, but the standard error is most of the estimate.<br><span class="fine">Both are published with their standard errors and both are fitted on the test window, which is disclosed on every row they touch.</span></li><li><b>Shrinkage was derived rather than guessed, and the curve is flat where it matters</b> &mdash; The empirical-Bayes calculation gives k = 2.9, weighting each team's observed net rating at 0.739. The fixed-k sweep shows margin MAE moving from 13.62 at k = 0 to 12.91 at k = 4, then degrading to 13.36 by k = 20. Heavy shrinkage is clearly wrong; the choice between light and none barely matters.<br><span class="fine">The constant is defensible, its sensitivity is published, and it is not a source of hidden risk.</span></li><li><b>Availability impact is a measured floor, not an estimate</b> &mdash; Minutes are only known for the 50 players in the captured official table. Players outside it contribute 0.00 to the impact, so teams missing rotation players who are not top-50 scorers show a smaller number than the truth - sometimes zero. The minutes-coverage column sits next to every figure so a 0.00 is never read as 'healthy'.<br><span class="fine">Correct but incomplete - the Injuries page says so on every row rather than hiding it.</span></li><li><b>Correlation is measured where it can be and flagged where it cannot</b> &mdash; Thirteen team-statistic pairs were measured directly on all 30 teams from the official advanced table. Net rating explains 87% of the variation in win percentage; pace is nearly unrelated to net rating (r = -0.34, p = 0.063) and assist percentage is unrelated to offensive efficiency (r = 0.02, p = 0.92). The parlay and same-game-parlay correlations that drive pricing are model-derived and labelled as such.<br><span class="fine">The distinction matters most for parlays, because pricing correlated legs as independent is the classic way to overpay.</span></li><li><b>The word 'edge' on this site does not mean edge against a sportsbook</b> &mdash; No sportsbook price is published by an NBA-operated source, so no official link can be attached to one. The site bets the originated line against a deliberately naive reference model built from the same official ratings. Until real prices are logged, 'units won' means model-vs-naive-model units.<br><span class="fine">This is the single most important caveat for anyone reading the leaderboard.</span></li><li><b>The 2026-11-13 slate is settled, and it did not go well - which is the system working</b> &mdash; Every published paper pick on the 2026-11-13 slate was settled against the official finals captured on 2026-11-14. The seven gated singles went 3-4 (-1.40 units at -110) and all three two-leg parlays lost. The picks were pre-registered: the model blocks in the live file are identical to the copy frozen at 2026-11-13T22:45Z, before tip. The originated margin line was off by 12.39 points on average across the nine games - consistent with the 12.98 MAE on the wider window, and a useful reminder that a night like this is normal at this sample size.<br><span class="fine">Two gaps closed the same morning: the finals now exist (F13 resolved) and the 18 stale team records were refreshed from the official cards (F14 resolved). Two remain open and are published as such: at the newest injury edition five of the ten teams playing on 11/14 have still not filed, and no edition lists any player for the 11/16 and 11/17 games.</span></li><li><b>The 60-game extension is real, but it cannot be reproduced from this repository alone</b> &mdash; The 2026-11-13 finals are captured, transcribed three independent times that all agree 9/9, and used to settle every published 11/13 pick (seven singles 3-4 at -1.40 units, three two-leg parlays 0-3). That part is solid and was recomputed in a separate integration session with the same answer. What is NOT reproducible here is the extended metric: the 51-&gt;60 window and the 12.98 vs 13.62 margin MAE depend on a team-ratings refresh, and https://www.nba.com/stats/teams/advanced?Season=2026-27&amp;SeasonType=Regular+Season returns no data table to this environment (flag F24, re-tested 2026-11-14). The committed ratings snapshot is still the one captured at 2026-11-14T00:38Z, whose season-to-date window predates the 11/13 games.<br><span class="fine">A reader can check every score and every settlement row against NBA.com, and should. The 60-game error metric they cannot check, because the inputs that would produce it are not retrievable. Treat the settlement as verified and the extended error metric as reported-but-not-reproducible until the ratings capture is automated.</span></li><li><b>The game-day edition arrived, and it moved the model far less than it should have</b> &mdash; New Orleans, Cleveland, Chicago and Miami filed between the 04:15 AM ET edition the horizon was cut from and the 01:30 PM ET game-day edition, adding 24 player rows and changing four statuses; Memphis was still inside its filing window. Re-run through the engine's own availability adjustment, that edition moves 3 of the 5 games tipping tonight (DAL@CLE -1.8 to -2.5; DET@MIA -12.2 to -12.4; CHI@MIN 30.6 to 33.2) and leaves DEN@NOP, BKN@MEM unchanged. No favourite flips and no published pick changes side.<br><span class="fine">Two readings are available and the site publishes both. The charitable one: intra-day report churn is usually noise, and a model that lurched on every status label would be worse. The uncomfortable one: the reason it cannot move New Orleans is that the Pelicans' five listed names are not in the minutes table, so the model is not judging them, it is blind to them. That is F47, and it is the highest-value item in the register.</span></li><li><b>Provenance, not the availability percentage, is the honest output of the injury layer</b> &mdash; Only 4 of the 25 picks have a measured rotation availability for the pick team. The rest are blank for a stated reason: no official edition covers the game date (11/17 and 11/18), the team's entry prints NOT YET SUBMITTED (WAS, BOS, HOU, PHI, PHX on 11/16), or per-player minutes were never captured for that team. Before this pass the column silently read 100% for those cases and was labelled MEASURED, which was wrong - an empty injury list is not evidence that nobody is injured.<br><span class="fine">A blank cell with a reason is more decision-useful than a confident 100%. The fix is to make the refresh re-read the injury index so the column fills in game date by game date (SG36), and to capture minutes for all thirty teams so redistribution is computable everywhere (SG32).</span></li></ol></section>
 <section class="card exec"><h2>Verified again at 18:40Z today &mdash; what moved</h2><p class="lead">Every official value this site publishes was read again on 2026-11-14 between 18:40Z and 19:10Z and compared, row by row, with what is published here: <strong>185 checks, 109 match, 76 differ</strong>. The rows that differ are explained one at a time on the <a href="site/pages/official-verify.html">Live Re-verification</a> page, each with the official link it was read from.</p><ul class="findings"><li><b>The nine 2026-11-13 finals, the 27 horizon games and every record printed on them &mdash; all 63 rows match the official pages exactly.</b> No defect. <span class="fine">Sections A, B and C of the verification page.</span></li><li><b>A real defect, found and fixed: the site was publishing an older copy of three decision files.</b> It showed 39 flags, 13 answered + 18 open questions and 16 suggestions while the repository held 46, 15 + 19 and 18. The build now copies the authored files from <code>data/content</code> on every run and fails loudly if one is missing. <span class="fine">R-30-1 in the task board.</span></li><li><b>The site prices availability from a nine-hour-old injury edition.</b> The newest edition on the official index is 01:30 PM ET; the site uses 04:15 AM ET, and 33 status lines changed in between. Four of the five teams the site marks &ldquo;had not filed&rdquo; had filed. Every line now carries the edition it came from and says <em>not re-priced</em>. Re-cutting them is decision <a href="site/pages/decisions.html">P1</a>.</li><li><b>19 of 30 teams moved between the published ratings window and the live Teams Advanced page</b>, because the live page now includes 11/13. The lines were computed from the older window, so re-basing the ratings alone would make two pages disagree: the live value is published beside the used one and nothing was re-cut. Which set is official is decision <a href="site/pages/decisions.html">P2</a>.</li><li><b>The 18:40Z standings read disagreed with the committed copy on 18 of 30 teams &mdash; and the site was right.</b> The committed capture was taken at 00:45Z, before the 11/13 finals. Verified, not assumed.</li><li><b>All 18 published backtest metrics and the whole S1 headline were re-derived from the repository's own rows: 18 of 18 reproduce exactly</b>, including 23-9 = +11.909 units at -110, Wilson 95% [0.5463, 0.8444] and an exact binomial p of 0.0201.</li></ul><p class="fine">Read live: 2026-11-14T18:40Z..19:10Z. Artifact: <code>verify/2026-11-14-cc5a6652/compare.json</code>.</p></section>
 <section class="card exec"><h2>Where to go next</h2><p><b>If you are deciding what to build:</b> start at <a href="site/pages/decisions.html">Decisions: pick a path</a> &mdash; six decisions in dependency order, every open question mapped to the one that closes it, and every suggestion ranked against them.</p><p><b>If you are checking a number:</b> <a href="site/pages/official-verify.html">Live Re-verification</a> for official values, <a href="site/pages/validation.html">Validation</a> for the gates and the statistics, <a href="site/pages/flagged.html">Flagged for Review</a> for everything that could not be confirmed.</p><p><b>If you want tonight's games:</b> <a href="site/pages/picks.html">Lines &amp; Picks</a>, then <a href="site/pages/injuries.html">Injuries &amp; Rotation</a> for what could change the rotation, then <a href="site/pages/gameflow.html">Game Flow</a> for pace and blow-out risk. No pick on this site is a betting recommendation.</p></section>
@@ -137,11 +137,11 @@
 <td><b>ORL@BOS</b></td>
 <td>5-7</td>
 <td>11-2</td>
-<td>12.5</td>
+<td>9.6</td>
 <td>220.6</td>
-<td>-5.73</td>
+<td>-8.64</td>
 <td>-0.64</td>
-<td>0.764</td>
+<td>0.710</td>
 <td>B2B</td>
 <td class="src"><a href="https://www.nba.com/game/orl-vs-bos-0022600245" target="_blank" rel="noopener">S4_0022600245</a></td>
 </tr>
@@ -151,11 +151,11 @@
 <td><b>CHI@CLE</b></td>
 <td>3-9</td>
 <td>7-7</td>
-<td>18.9</td>
+<td>16.0</td>
 <td>239.2</td>
-<td>-0.43</td>
+<td>-3.35</td>
 <td>+10.51</td>
-<td>0.861</td>
+<td>0.820</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/chi-vs-cle-0022600246" target="_blank" rel="noopener">S4_0022600246</a></td>
 </tr>
@@ -165,11 +165,11 @@
 <td><b>MEM@WAS</b></td>
 <td>9-4</td>
 <td>4-10</td>
-<td>-11.9</td>
+<td>-14.8</td>
 <td>226.8</td>
-<td>-2.52</td>
+<td>-5.43</td>
 <td>+1.74</td>
-<td>0.247</td>
+<td>0.197</td>
 <td>B2B</td>
 <td class="src"><a href="https://www.nba.com/game/mem-vs-was-0022600247" target="_blank" rel="noopener">S4_0022600247</a></td>
 </tr>
@@ -179,11 +179,11 @@
 <td><b>PHI@BKN</b></td>
 <td>11-3</td>
 <td>3-9</td>
-<td>4.5</td>
+<td>1.6</td>
 <td>222.1</td>
-<td>+9.10</td>
+<td>+6.18</td>
 <td>+1.93</td>
-<td>0.602</td>
+<td>0.536</td>
 <td>B2B</td>
 <td class="src"><a href="https://www.nba.com/game/phi-vs-bkn-0022600248" target="_blank" rel="noopener">S4_0022600248</a></td>
 </tr>
@@ -193,11 +193,11 @@
 <td><b>HOU@MIA</b></td>
 <td>11-3</td>
 <td>7-6</td>
-<td>-1.3</td>
+<td>-4.2</td>
 <td>231.1</td>
-<td>+10.53</td>
+<td>+7.62</td>
 <td>+1.21</td>
-<td>0.471</td>
+<td>0.405</td>
 <td>B2B</td>
 <td class="src"><a href="https://www.nba.com/game/hou-vs-mia-0022600249" target="_blank" rel="noopener">S4_0022600249</a></td>
 </tr>
@@ -207,11 +207,11 @@
 <td><b>POR@MIN</b></td>
 <td>9-3</td>
 <td>9-4</td>
-<td>6.6</td>
+<td>3.7</td>
 <td>228.5</td>
-<td>-1.77</td>
+<td>-4.69</td>
 <td>-9.50</td>
-<td>0.648</td>
+<td>0.584</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600250" target="_blank" rel="noopener">S4_0022600250</a></td>
 </tr>
@@ -221,11 +221,11 @@
 <td><b>GSW@NOP</b></td>
 <td>8-5</td>
 <td>4-10</td>
-<td>-6.7</td>
+<td>-9.6</td>
 <td>235.8</td>
-<td>+6.04</td>
+<td>+3.12</td>
 <td>+3.77</td>
-<td>0.351</td>
+<td>0.291</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/gsw-vs-nop-0022600251" target="_blank" rel="noopener">S4_0022600251</a></td>
 </tr>
@@ -235,11 +235,11 @@
 <td><b>PHX@DEN</b></td>
 <td>5-7</td>
 <td>7-4</td>
-<td>13.2</td>
+<td>10.3</td>
 <td>233.0</td>
-<td>+6.73</td>
+<td>+3.81</td>
 <td>+7.86</td>
-<td>0.777</td>
+<td>0.723</td>
 <td>B2B</td>
 <td class="src"><a href="https://www.nba.com/game/phx-vs-den-0022600252" target="_blank" rel="noopener">S4_0022600252</a></td>
 </tr>
@@ -249,11 +249,11 @@
 <td><b>NYK@TOR</b></td>
 <td>7-6</td>
 <td>5-8</td>
-<td>-0.3</td>
+<td>-3.3</td>
 <td>222.8</td>
-<td>+2.53</td>
+<td>-0.39</td>
 <td>-1.61</td>
-<td>0.492</td>
+<td>0.426</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/nyk-vs-tor-0022600253" target="_blank" rel="noopener">S4_0022600253</a></td>
 </tr>
@@ -263,11 +263,11 @@
 <td><b>POR@MIN</b></td>
 <td>9-3</td>
 <td>9-4</td>
-<td>8.7</td>
+<td>5.8</td>
 <td>230.6</td>
-<td>+0.36</td>
+<td>-2.56</td>
 <td>-7.40</td>
-<td>0.692</td>
+<td>0.631</td>
 <td>B2B</td>
 <td class="src"><a href="https://www.nba.com/game/por-vs-min-0022600254" target="_blank" rel="noopener">S4_0022600254</a></td>
 </tr>
@@ -277,11 +277,11 @@
 <td><b>DET@SAS</b></td>
 <td>8-4</td>
 <td>12-2</td>
-<td>6.6</td>
+<td>3.7</td>
 <td>222.9</td>
-<td>+0.88</td>
+<td>-2.04</td>
 <td>-8.30</td>
-<td>0.649</td>
+<td>0.585</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/det-vs-sas-0022600255" target="_blank" rel="noopener">S4_0022600255</a></td>
 </tr>
@@ -291,11 +291,11 @@
 <td><b>CHA@LAL</b></td>
 <td>4-9</td>
 <td>12-2</td>
-<td>18.9</td>
+<td>16.0</td>
 <td>223.4</td>
-<td>-2.05</td>
+<td>-4.97</td>
 <td>+2.57</td>
-<td>0.861</td>
+<td>0.821</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/cha-vs-lal-0022600256" target="_blank" rel="noopener">S4_0022600256</a></td>
 </tr>
@@ -305,11 +305,11 @@
 <td><b>UTA@LAC</b></td>
 <td>1-13</td>
 <td>4-8</td>
-<td>8.4</td>
+<td>5.5</td>
 <td>223.1</td>
-<td>+0.54</td>
+<td>-2.38</td>
 <td>+7.48</td>
-<td>0.685</td>
+<td>0.623</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/uta-vs-lac-0022600257" target="_blank" rel="noopener">S4_0022600257</a></td>
 </tr>
@@ -319,11 +319,11 @@
 <td><b>MEM@CLE</b></td>
 <td>9-4</td>
 <td>7-7</td>
-<td>0.5</td>
+<td>-2.4</td>
 <td>230.7</td>
-<td>+2.33</td>
+<td>-0.59</td>
 <td>-1.40</td>
-<td>0.512</td>
+<td>0.445</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/mem-vs-cle-0022600258" target="_blank" rel="noopener">S4_0022600258</a></td>
 </tr>
@@ -333,11 +333,11 @@
 <td><b>HOU@IND</b></td>
 <td>11-3</td>
 <td>5-9</td>
-<td>-5.4</td>
+<td>-8.3</td>
 <td>225.1</td>
-<td>+3.64</td>
+<td>+0.72</td>
 <td>-2.23</td>
-<td>0.379</td>
+<td>0.317</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/hou-vs-ind-0022600259" target="_blank" rel="noopener">S4_0022600259</a></td>
 </tr>
@@ -347,11 +347,11 @@
 <td><b>MIL@MIA</b></td>
 <td>1-13</td>
 <td>7-6</td>
-<td>11.6</td>
+<td>8.7</td>
 <td>231.9</td>
-<td>-0.41</td>
+<td>-3.33</td>
 <td>+10.76</td>
-<td>0.748</td>
+<td>0.692</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/mil-vs-mia-0022600260" target="_blank" rel="noopener">S4_0022600260</a></td>
 </tr>
@@ -361,11 +361,11 @@
 <td><b>PHI@ORL</b></td>
 <td>11-3</td>
 <td>5-7</td>
-<td>-1.6</td>
+<td>-4.5</td>
 <td>219.9</td>
-<td>+2.79</td>
+<td>-0.13</td>
 <td>+1.11</td>
-<td>0.464</td>
+<td>0.399</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/phi-vs-orl-0022600261" target="_blank" rel="noopener">S4_0022600261</a></td>
 </tr>
@@ -375,11 +375,11 @@
 <td><b>CHI@BKN</b></td>
 <td>3-9</td>
 <td>3-9</td>
-<td>11.2</td>
+<td>8.3</td>
 <td>234.4</td>
-<td>-0.87</td>
+<td>-3.79</td>
 <td>+11.94</td>
-<td>0.740</td>
+<td>0.683</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/chi-vs-bkn-0022600262" target="_blank" rel="noopener">S4_0022600262</a></td>
 </tr>
@@ -389,11 +389,11 @@
 <td><b>WAS@TOR</b></td>
 <td>4-10</td>
 <td>5-8</td>
-<td>3.2</td>
+<td>0.3</td>
 <td>226.7</td>
-<td>-6.09</td>
+<td>-9.01</td>
 <td>+4.00</td>
-<td>0.573</td>
+<td>0.506</td>
 <td>B2B</td>
 <td class="src"><a href="https://www.nba.com/game/was-vs-tor-0022600263" target="_blank" rel="noopener">S4_0022600263</a></td>
 </tr>
@@ -403,11 +403,11 @@
 <td><b>DET@NOP</b></td>
 <td>8-4</td>
 <td>4-10</td>
-<td>-1.7</td>
+<td>-4.6</td>
 <td>229.6</td>
-<td>+10.70</td>
+<td>+7.78</td>
 <td>+2.48</td>
-<td>0.462</td>
+<td>0.396</td>
 <td>B2B</td>
 <td class="src"><a href="https://www.nba.com/game/det-vs-nop-0022600264" target="_blank" rel="noopener">S4_0022600264</a></td>
 </tr>
@@ -417,11 +417,11 @@
 <td><b>ATL@OKC</b></td>
 <td>8-6</td>
 <td>9-5</td>
-<td>5.2</td>
+<td>2.3</td>
 <td>225.5</td>
-<td>+1.09</td>
+<td>-1.83</td>
 <td>-3.89</td>
-<td>0.618</td>
+<td>0.552</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/atl-vs-okc-0022600265" target="_blank" rel="noopener">S4_0022600265</a></td>
 </tr>
@@ -431,11 +431,11 @@
 <td><b>BOS@DEN</b></td>
 <td>11-2</td>
 <td>7-4</td>
-<td>-5.2</td>
+<td>-8.1</td>
 <td>223.5</td>
-<td>+3.51</td>
+<td>+0.59</td>
 <td>-3.05</td>
-<td>0.383</td>
+<td>0.321</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/bos-vs-den-0022600266" target="_blank" rel="noopener">S4_0022600266</a></td>
 </tr>
@@ -445,11 +445,11 @@
 <td><b>GSW@DAL</b></td>
 <td>8-5</td>
 <td>7-7</td>
-<td>-1.9</td>
+<td>-4.8</td>
 <td>228.7</td>
-<td>+2.82</td>
+<td>-0.10</td>
 <td>-2.47</td>
-<td>0.457</td>
+<td>0.391</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/gsw-vs-dal-0022600267" target="_blank" rel="noopener">S4_0022600267</a></td>
 </tr>
@@ -459,11 +459,11 @@
 <td><b>UTA@LAL</b></td>
 <td>1-13</td>
 <td>12-2</td>
-<td>19.5</td>
+<td>16.5</td>
 <td>233.0</td>
-<td>-2.25</td>
+<td>-5.17</td>
 <td>+6.19</td>
-<td>0.868</td>
+<td>0.829</td>
 <td>B2B</td>
 <td class="src"><a href="https://www.nba.com/game/uta-vs-lal-0022600268" target="_blank" rel="noopener">S4_0022600268</a></td>
 </tr>
@@ -473,11 +473,11 @@
 <td><b>PHX@SAC</b></td>
 <td>5-7</td>
 <td>1-12</td>
-<td>-3.0</td>
+<td>-6.0</td>
 <td>231.6</td>
-<td>+3.24</td>
+<td>+0.32</td>
 <td>+11.07</td>
-<td>0.430</td>
+<td>0.366</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/phx-vs-sac-0022600269" target="_blank" rel="noopener">S4_0022600269</a></td>
 </tr>
@@ -487,11 +487,11 @@
 <td><b>GSW@MEM</b></td>
 <td>8-5</td>
 <td>9-4</td>
-<td>2.1</td>
+<td>-0.9</td>
 <td>233.2</td>
-<td>+1.76</td>
+<td>-1.16</td>
 <td>-1.60</td>
-<td>0.547</td>
+<td>0.480</td>
 <td>B2B</td>
 <td class="src"><a href="https://www.nba.com/game/gsw-vs-mem-0022600270" target="_blank" rel="noopener">S4_0022600270</a></td>
 </tr>
@@ -501,11 +501,11 @@
 <td><b>POR@MIL</b></td>
 <td>9-3</td>
 <td>1-13</td>
-<td>-20.2</td>
+<td>-23.1</td>
 <td>233.6</td>
-<td>-0.42</td>
+<td>-3.34</td>
 <td>+7.32</td>
-<td>0.123</td>
+<td>0.092</td>
 <td>B2B</td>
 <td class="src"><a href="https://www.nba.com/game/por-vs-mil-0022600271" target="_blank" rel="noopener">S4_0022600271</a></td>
 </tr>
@@ -515,11 +515,11 @@
 <td><b>NYK@MIN</b></td>
 <td>7-6</td>
 <td>9-4</td>
-<td>8.9</td>
+<td>6.0</td>
 <td>218.9</td>
-<td>+0.34</td>
+<td>-2.58</td>
 <td>-9.62</td>
-<td>0.696</td>
+<td>0.635</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/nyk-vs-min-0022600272" target="_blank" rel="noopener">S4_0022600272</a></td>
 </tr>
@@ -529,11 +529,11 @@
 <td><b>LAC@SAS</b></td>
 <td>4-8</td>
 <td>12-2</td>
-<td>16.9</td>
+<td>13.9</td>
 <td>228.3</td>
-<td>-1.94</td>
+<td>-4.86</td>
 <td>-0.84</td>
-<td>0.833</td>
+<td>0.788</td>
 <td></td>
 <td class="src"><a href="https://www.nba.com/game/lac-vs-sas-0022600273" target="_blank" rel="noopener">S4_0022600273</a></td>
 </tr>
