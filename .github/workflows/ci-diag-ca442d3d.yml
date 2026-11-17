@@ -50,6 +50,7 @@ jobs:
           PYTHONPATH: "."
         run: |
           set -u
+          mkdir -p data/ci
           {
             echo "# CI diagnostic: unit-test loop as pages.yml runs it"
             echo
@@ -70,13 +71,15 @@ jobs:
               fi
             done
             echo '```'
-          } > data/ci/unit-test-diagnostic.md
-          mkdir -p data/ci
+          } > data/ci/unit-test-diagnostic.md 2>&1
           test -s data/ci/unit-test-diagnostic.md
 
       - name: Commit the diagnostic back to this branch
+        if: always()
         run: |
           set -u
+          mkdir -p data/ci
+          test -s data/ci/unit-test-diagnostic.md || echo "(step failed before writing output)" > data/ci/unit-test-diagnostic.md
           git config user.name "ci-diag-ca442d3d"
           git config user.email "ci-diag-ca442d3d@users.noreply.github.com"
           git add -f data/ci/unit-test-diagnostic.md
