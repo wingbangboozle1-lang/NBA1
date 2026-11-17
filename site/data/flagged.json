@@ -1447,14 +1447,23 @@
    "id": "F145",
    "severity": "Medium",
    "status": "open",
-   "title": "The 11/17 freeze is sealed after the first 11/17 tip, and the window is labelled \"today + 3 days\" while covering only three of the four days ahead",
-   "detail": [
-    "Ledger entry 12 (pre_tip_publication, sealed 2026-11-17T15:54Z) covers 30 games over 2026-11-17..2026-11-20. Its first_tip_utc is 2026-11-18T00:30Z, which is 7:30 PM ET on 11/17 (NYK@TOR) - correct in UTC, and correctly before that tip. But the 11/17 slate itself (5 games: NYK@TOR 7:30, POR@MIN 8:00, DET@SAS 8:00, UTA@LAC 10:30, CHA@LAL 11:00 ET) had not tipped at seal time (15:54Z = 10:54 ET), so the seal is honest for those five games as well. What is NOT true is the label: \"today + up to 3 days\" is written into the ledger's window string, but the window ends at 11/20 because the official schedule read did not extend to 11/21, which carries 6 further games (MIL@PHI, POR@NYK, LAC@DAL, MEM@MIN, NOP@SAS, BOS@SAC). The shortfall is a scope choice, stated here rather than hidden, not a scheduling error."
-   ],
+   "title": "The publication window is labelled \"today + 3 days\" but covers 2026-11-17 to 2026-11-20, because the official read did not extend to 11/21",
+   "detail": "Ledger entry 12 (pre_tip_publication, sealed 2026-11-17T15:54Z) covers 30 games over 2026-11-17..2026-11-20. Its first_tip_utc is 2026-11-18T00:30Z, which is 7:30 PM ET on 11/17 (NYK@TOR) - correct in UTC, and correctly before that tip. But the 11/17 slate itself (5 games: NYK@TOR 7:30, POR@MIN 8:00, DET@SAS 8:00, UTA@LAC 10:30, CHA@LAL 11:00 ET) had not tipped at seal time (15:54Z = 10:54 ET), so the seal is honest for those five games as well. What is NOT true is the label: \"today + up to 3 days\" is written into the ledger's window string, but the window ends at 11/20 because the official schedule read did not extend to 11/21, which carries 6 further games (MIL@PHI, POR@NYK, LAC@DAL, MEM@MIN, NOP@SAS, BOS@SAC). The shortfall is a scope choice, stated here rather than hidden, not a scheduling error.",
    "affected": "data/ledger/ledger.json entry 12 (window label); data/derived/horizon_lines.json (30-game window)",
    "source": "data/ledger/ledger.json entry 12",
    "source_url": "https://www.nba.com/schedule?date=2026-11-19",
    "suggested_action": "Either label the window with the dates it actually covers (2026-11-17 .. 2026-11-20) instead of the phrase \"today + up to 3 days\", or extend the next cycle's official read through the fourth day ahead so the phrase is true. No frozen bytes need to change: the digests in entry 12 are of the 30 games that were actually published."
+  },
+  {
+   "id": "F146",
+   "severity": "Medium",
+   "status": "resolved",
+   "title": "A flag's detail cell was published as a Python list and rendered as a repr on the live site",
+   "detail": "The 2026-11-17 cycle stored flag F145's detail as a list instead of a string. The page builder coerced it with str(), so the live Flagged page showed a bracketed list repr wrapped around the sentence that should have been plain text - the field was populated, so nothing looked wrong, and every existing gate passed: the rendered-output check forbids the usual JavaScript coercion artefacts and a Python list produces none of those, the provenance check only inspects links, and the builder coerces whatever it is handed. Found by reading the deployed page back and comparing it with the source register. Fixed by rewriting F145's detail as a string and correcting its title, which contradicted its own body. A new gate, scripts/check_registers.py, now runs inside verify_all.py and asserts that every field in flagged/questions/suggestions/executive is a plain string with no repr artefact; it was tested by reintroducing the exact defect, which it rejected.",
+   "affected": "site/pages/flagged.html (F145); every register that feeds a page",
+   "source": "scripts/check_registers.py; data/content/flagged.json",
+   "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/scripts/check_registers.py",
+   "suggested_action": "Keep check_registers.py in verify_all.py. Any new register field that reaches a reader should be added to its TEXT_FIELDS list at the same time it is added to the builder."
   }
  ]
 }

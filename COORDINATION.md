@@ -7017,3 +7017,29 @@ cross-scope request from §59/§61 for `flat_hca`), does not delete any earlier 
 | Irregularities published | **F142** two different UTA rows in one standings download (both reads kept, identity-satisfying one published); **F143** the parallel settlement; **F144** published results file blanks attendance/officials that the official gamebooks print; **F145** the window label says "today + 3 days" but covers 11/17-11/20 because 11/21's six games were not in the official read. Earlier flags F138-F141 untouched. Total published flags **149**. |
 | Questions / suggestions | **Q31** which settlement record prevails for the SGP tickets; **Q32** the standings tie-break policy; **Q33** whether "3 days ahead" means today+3 or three days from tomorrow. **S38** stale-output guard for the freeze step; **S39** lift F138 game by game from the gamebooks. Registers: questions 48 (28 open), suggestions 39. |
 | Not done / boundaries | No stake anywhere (no strategy cleared the full validation set; no official closing price exists - F-X10/F98). Injury coverage for the priced window is the 11/17 10:30 AM ET edition only: POR@MIN and every 11/18 game printed NOT YET SUBMITTED at that edition (F-X12), so availability for those games is **unknown, not 100%**, and the rotation columns say so. `raw_pdf_sha256` remains **null** on both 11/17 editions because direct egress to `ak-static.cms.nba.com` is blocked from this sandbox (TLS closed) - the text render and its `text_sha256` are the provenance (F-X13). Legacy `engine/**` `flat_hca=2.0` left untouched (standing cross-scope request). Two stale PRs #152/#155 remain open for their live owners. |
+
+### 63.2 Post-merge fetch-back: one defect found on the live page and fixed
+
+The delivery record above was written before the Pages fetch-back. Reading the **deployed** page back
+(not the local build) found a defect the whole gate suite had passed:
+
+- **F145's `detail` was stored as a Python list**, so `site/pages/flagged.html` published it as a
+  bracketed list repr wrapped around the sentence. Every existing gate passed it: the rendered-output
+  check forbids the usual JavaScript coercion artefacts (and a Python list produces none of those), the
+  provenance check only inspects links, and the builder coerces whatever it is handed. The title also
+  contradicted the body, claiming the seal came *after* the first 11/17 tip when the body shows 15:54Z
+  is 10:54 ET and the earliest 11/17 tip is 19:30 ET.
+- **Fixed**: F145 rewritten as a string with a title that matches its body; published as **F146**
+  (severity Medium, status resolved) with the mechanism and the fix, rather than quietly corrected.
+- **New gate**: `scripts/check_registers.py` asserts every field in `flagged`/`questions`/
+  `suggestions`/`executive` is a plain string with no repr artefact, and is now run inside
+  `verify_all.py`. It was **tested by reintroducing the exact defect**, which it rejected
+  (`PROBLEM flagged.json.items[F145].detail is list, not a string`). It also immediately caught its own
+  F146 text on the first draft, which is the behaviour wanted.
+- Re-verified after the fix: `check_site`, `check_links`, `check_rendered`, `verify_dashboard`,
+  `verify_integration`, `verify_ledger` all PASS; `verify_all` → **VERIFY OK, FAILURES: 0**; registers
+  gate → `checked 1910 text fields across 4 registers; 0 problem(s)`. Flags now **150**.
+
+**Lesson recorded for the next cycle**: a gate suite that reads files is not the same as a fetch-back
+that reads the published page. Both are now in the loop, and the register gate closes the specific gap
+between them.
