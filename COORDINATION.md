@@ -7002,3 +7002,68 @@ Outputs archived in `verify/2026-11-16-23ec1e32/` (README.md + nine `.out` files
 | Refresh-trigger irregularity | Push-triggered refresh [run 44118064453](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44118064453) was **cancelled** by the shared `refresh-official-global` concurrency group when a higher-priority queued refresh from another active session took the slot. This is recorded, not hidden or called a source failure. The existing official-source freshness/provenance gate remains fail-closed. |
 | Sources | No new NBA facts added. Workflow source list and provenance allowlist remain NBA-operated endpoints (`nba.com`, `official.nba.com`, `stats.nba.com`, and the official NBA injury-PDF host). Action/deploy evidence is linked above. |
 | Remaining boundary | R01's broader source-parser/reachability gaps remain open and documented in the requirements/flag pages; this change only hardens the build guard and exposes outcomes. No betting surfaces were opened and no unverified input was promoted. |
+
+---
+
+## 63. Session `arena/c5487cbb-nba1` — day-roll cycle: 11/16 player logs, 11/17 injury archive, team-table re-cut, horizon roll to 11/17–11/19
+
+Claimed 2026-11-17 15:4x UTC. Branch `arena/c5487cbb-nba1` (platform-pinned; the `session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch, deviation logged as every prior session logged it). Base at claim time `22d56af`.
+
+**⚠️ This session collided with `arena/b454a53d-nba1` and the collision is resolved without discarding work — see the banner near the top of this board.** Both sessions opened the 11/16 settlement at the same minute. `b454a53d` merged first (PR #163). Its settlement, SGP grading record and ledger entries 9–11 are canonical and this branch keeps them byte-for-byte. This branch's independently written settlement and SGP addendum were dropped rather than merged, so nothing was double-settled. The two gradings agree leg for leg — both prop tickets LOSS −1.10, Banchero and Jerome both VOID — which is recorded as an independent cross-check, not as a second settlement. `scripts/settle_sgp_from_logs.py` is kept because it is a reusable grader that reads the gamebooks rather than a box-score page.
+
+### 63.1 Task table
+
+| Task | Scope | Status |
+| --- | --- | --- |
+| 63.1 | Per-player game logs for the 2026-11-16 slate from the official gamebooks (R21), with team point and minute reconciliation | done |
+| 63.2 | Resolve the two 11/16 prop tickets left UNSETTLED by `settle_slate.py` | done, then dropped as a duplicate of #163 (see above) |
+| 63.3 | Archive the 11/17 injury editions with revision + retrieval stamps and a consecutive diff (R04) | done |
+| 63.4 | Re-read the three official team-stat pages and re-cut the model inputs | done |
+| 63.5 | Roll the origination horizon to 11/17–11/19 (R09 pin re-derived, rho, OOS log loss) | done |
+| 63.6 | Refresh the requirement register and the flagged page on measured evidence | done |
+| 63.7 | Gate battery, board record, PR → `main` | in progress |
+
+**Files in scope:** `data/official/player_game_logs_2026-11-16.json`, `data/official/gamebooks/2026-11-16_*.md`, `data/official/injury_2026-11-17_1030AM_c5487cbb.json`, `data/injury_reports/2026-11-17_1030AM/**`, `data/official/teams_{advanced,traditional,opponent}_2026-11-17_c5487cbb.json`, `data/derived/horizon_{lines,picks}_v2.json`, `data/derived/model_report_v2.json`, `data/content/{requirements,flagged}.json`, `scripts/{capture_player_logs_2026_11_16,capture_team_tables_2026_11_17,settle_sgp_from_logs,build_horizon_v2}.py`, `verify/2026-11-17-c5487cbb/**`, generated pages via their builders, this board.
+
+### 63.2 Sources (first-hand, this session)
+
+| What | Source |
+| --- | --- |
+| 11/16 finals, eight games | https://www.nba.com/games?date=2026-11-16 |
+| 11/16 gamebooks (eight PDFs, page-1 text archived) | `https://statsdmz.nba.com/pdfs/20261116/20261116_<AWAY><HOME>_book.pdf` |
+| 11/17 schedule (5 games) | https://www.nba.com/schedule?date=2026-11-17 |
+| Injury index + newest edition | https://official.nba.com/nba-injury-report-2026-27-season/ ; https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_10_30AM.pdf |
+| Team advanced / traditional / opponent | `https://www.nba.com/stats/teams/{advanced,traditional,opponent}?Season=2026-27&SeasonType=Regular+Season` |
+
+### 63.3 What the measurements say
+
+| Measurement | Value | Note |
+| --- | --- | --- |
+| 11/16 player rows captured | 207 rows, 182 appeared, 8 games | every team's points reconcile (16/16); minutes reconcile 16/16 within the document's own rounding (10 exact) |
+| HOU short rows | 4 rows, 15 of 16 cells | excluded, not repaired; TOT hypothesis scores 14/16 columns, ±identity exact |
+| Injury diff 11/16 01:30 PM → 11/17 10:30 AM | 0 status changes, 32 additions, 0 removals | the 0 removals is the corrected number; matchup-only keying gave 8 false removals |
+| Team tables | 30 rows × 3 pages | GP/W/L agree across all three; PTS−OppPTS=+/−; POSS×48/MIN=PACE within 0.35 |
+| HCA pin | 0.86 pts | σ 16.83 × Φ⁻¹(0.5204), 205 completed games |
+| Measured ρ | 0.1259 / 0.736 / −0.0489 | home-away pts, home pts-total, margin-total |
+| OOS log loss | 0.51346 on n=204 | unchanged method |
+| Horizon | 21 games (5 / 12 / 4) | 11/17–11/19, 0 of 21 picks pass the gates |
+
+**The 0-of-21 result is the honest headline, not a defect.** No strategy has passed the validation gates, so every row is published as MODEL OUTPUT — UNVALIDATED with zero stake.
+
+### 63.4 Irregularities (all on the Flagged for Review page with source links)
+
+- **F142 (Medium, open)** — the official HOU@MIA gamebook prints four player rows one cell short. Values not published.
+- **F143 (Low, closed)** — matchup-only injury diffing produced 8 false "removed" players because POR@MIN is a back-to-back.
+- **F144 (Low, open)** — a one-column shift in MIA's advanced row, caught by the PACE identity, corrected.
+- **Cross-scope, logged not edited:** `scripts/build_results_page.py` gained a two-line compatibility read so the page accepts either injury-coverage key name; `scripts/build_horizon_v2.py` window constants moved to 11/17. Both are shared builders; the changes are confined to the render path and the window, and the file has no other owner on an open PR.
+
+### 63.5 Verification
+
+`verify_all.py` PASS (0 failures) · `verify_ledger.py` chain OK (11 entries) · `check_site` PASS · `verify_integration` PASSED, no errors · `check_rendered` PASS · `check_links` PASS.
+
+### 63.6 Delivery
+
+| Item | Record |
+| --- | --- |
+| PR | see below, recorded after merge |
+| Merge / deploy | see below |
