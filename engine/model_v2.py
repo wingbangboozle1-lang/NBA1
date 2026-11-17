@@ -528,11 +528,24 @@ def measured_home_win_rate(results, standings_doc=None):
            "n_games": hg}
     if standings_doc:
         a = standings_doc["measured_home_court_anchor"]
+        # Tolerant read (2026-11-17): standings captures written by different
+        # sessions carry slightly different anchor blocks - the 11/17 capture
+        # states home_games/home_wins but not the road split separately, while
+        # the 11/16 capture carried both.  Derive only what is arithmetically
+        # implied by the closed-system identity (road games == home games,
+        # road wins == home losses) and mark anything derived, rather than
+        # inventing a field or crashing the build.
+        hg = a.get("home_games")
+        hw = a.get("home_wins")
         out["standings_anchor"] = {
-            "home_win_rate": a["home_win_rate"],
-            "road_win_rate": a["road_win_rate"],
-            "home_games": a["home_games"], "road_games": a["road_games"],
-            "source_url": a["source_url"]}
+            "home_win_rate": a.get("home_win_rate"),
+            "road_win_rate": a.get("road_win_rate"),
+            "home_games": hg,
+            "home_wins": hw,
+            "road_games": a.get("road_games", hg),
+            "road_wins": a.get("road_wins", (hg - hw) if (hg is not None and hw is not None) else None),
+            "derived_fields": [k for k in ("road_games", "road_wins") if k not in a],
+            "source_url": a.get("source_url")}
     return out
 
 

@@ -1,0 +1,511 @@
+{
+ "title": "Official injury report 2026-11-17 10:30 AM ET — archived as retrieved text",
+ "edition": "2026-11-17 10 30AM",
+ "revision_time_et": "11/17/2026 10:30 AM ET (printed on the official PDF)",
+ "retrieved_utc": "2026-11-17T15:50Z",
+ "retrieval_channel": "web-fetch text render of the official PDF. Raw bytes were NOT retrievable from this sandbox: curl and urllib both fail the TLS handshake to ak-static.cms.nba.com (recorded in COORDINATION §62).",
+ "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_10_30AM.pdf",
+ "index_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "raw_pdf_sha256": null,
+ "raw_pdf_sha256_note": "NOT MEASURED — the bytes could not be downloaded, so no PDF hash is claimed. Earlier editions are byte-exact under data/raw/injury_pdfs/ with sha256 sidecars; this edition is text-only and the gap is published on the Flagged page instead of being filled with an invented hash.",
+ "text_file": "data/official/injury_2026-11-17_1030AM_84264db0_text.md",
+ "text_sha256": "30bdecc369ea0181138278d44defbf68bd39e9f12e5483b998e47769217d40ca",
+ "columns": [
+  "game_date",
+  "game_time_et",
+  "matchup",
+  "team",
+  "player",
+  "status",
+  "reason"
+ ],
+ "rows": [
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "player": "Bittle, Nate",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Avulsion Fracture"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "player": "Leonard, Kawhi",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Injury Management"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "player": "McCullar Jr., Kevin",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "player": "Smith, Malachi",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Duren, Jalen",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hamstring Strain"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Holland II, Ronald",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Contusion / Bone Bruise"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Joe, Isaiah",
+   "status": "Doubtful",
+   "reason": "Injury/Illness - Right Hip Contusion"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Okorie, Ebuka",
+   "status": "Out",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Onyenso, Ugonna",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Prince, Taurean",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Soreness"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Robinson, Duncan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Quadriceps Strain"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Brown, Maliq",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Gillespie, Ja'Kobi",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Harris, Tobias",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Calf Strain"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Quaintance, Jayden",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Surgery"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "10:30 (ET)",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "player": "Bufkin, Kobe",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "10:30 (ET)",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "player": "Hayes, Jaxson",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Strain"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "10:30 (ET)",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "player": "Ingram, Harrison",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "10:30 (ET)",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "player": "Jackson Jr., Jaren",
+   "status": "Out",
+   "reason": "Injury/Illness - Right MCL Tear"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "10:30 (ET)",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "player": "Markkanen, Lauri",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hand Fracture"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "10:30 (ET)",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "player": "Nurkic, Jusuf",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Right Foot; 2nd Plantar Plate Tear"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "10:30 (ET)",
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers",
+   "player": "Beal, Bradley",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Injury Management"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "10:30 (ET)",
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers",
+   "player": "Ingram, Brandon",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Heel Surgery"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "10:30 (ET)",
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers",
+   "player": "Miller, Jordan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Rotator Cuff Surgery"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "10:30 (ET)",
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers",
+   "player": "Niederhauser, Yanic Konan",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Lisfranc Surgery"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "11:00 (ET)",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "player": "Ajayi, Michael",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "11:00 (ET)",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "player": "Boswell, Kylan",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "11:00 (ET)",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "player": "Knueppel, Kon",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "11:00 (ET)",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "player": "Schroder, Dennis",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "11:00 (ET)",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "player": "Steinbach, Hannes",
+   "status": "Out",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "11:00 (ET)",
+   "matchup": "CHA@LAL",
+   "team": "Los Angeles Lakers",
+   "player": "Grimes, Quentin",
+   "status": "Available",
+   "reason": "Injury/Illness - Right Finger Splint"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "11:00 (ET)",
+   "matchup": "CHA@LAL",
+   "team": "Los Angeles Lakers",
+   "player": "Kessler, Walker",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Lower Leg Soreness"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "11:00 (ET)",
+   "matchup": "CHA@LAL",
+   "team": "Los Angeles Lakers",
+   "player": "Reaves, Austin",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Heel Contusion / Bone Bruise"
+  }
+ ],
+ "not_yet_submitted": [
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers"
+  },
+  {
+   "game_date": "11/17/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "HOU@IND",
+   "team": "Houston Rockets"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "HOU@IND",
+   "team": "Indiana Pacers"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@CLE",
+   "team": "Memphis Grizzlies"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MEM@CLE",
+   "team": "Cleveland Cavaliers"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MIL@MIA",
+   "team": "Milwaukee Bucks"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "MIL@MIA",
+   "team": "Miami Heat"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "PHI@ORL",
+   "team": "Philadelphia 76ers"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "07:00 (ET)",
+   "matchup": "PHI@ORL",
+   "team": "Orlando Magic"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "CHI@BKN",
+   "team": "Chicago Bulls"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "CHI@BKN",
+   "team": "Brooklyn Nets"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "WAS@TOR",
+   "team": "Washington Wizards"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "07:30 (ET)",
+   "matchup": "WAS@TOR",
+   "team": "Toronto Raptors"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "ATL@OKC",
+   "team": "Atlanta Hawks"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "ATL@OKC",
+   "team": "Oklahoma City Thunder"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@NOP",
+   "team": "Detroit Pistons"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "DET@NOP",
+   "team": "New Orleans Pelicans"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@DAL",
+   "team": "Golden State Warriors"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "08:00 (ET)",
+   "matchup": "GSW@DAL",
+   "team": "Dallas Mavericks"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "09:30 (ET)",
+   "matchup": "BOS@DEN",
+   "team": "Boston Celtics"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "09:30 (ET)",
+   "matchup": "BOS@DEN",
+   "team": "Denver Nuggets"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "10:00 (ET)",
+   "matchup": "PHX@SAC",
+   "team": "Phoenix Suns"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "10:00 (ET)",
+   "matchup": "PHX@SAC",
+   "team": "Sacramento Kings"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "10:00 (ET)",
+   "matchup": "UTA@LAL",
+   "team": "Utah Jazz"
+  },
+  {
+   "game_date": "11/18/2026",
+   "game_time_et": "10:00 (ET)",
+   "matchup": "UTA@LAL",
+   "team": "Los Angeles Lakers"
+  }
+ ],
+ "counts": {
+  "player_rows": 33,
+  "status": {
+   "Out": 31,
+   "Doubtful": 1,
+   "Available": 1
+  },
+  "teams_with_rows": 7,
+  "not_yet_submitted_slots": 26,
+  "games_with_a_submitted_report": [
+   "CHA@LAL",
+   "DET@SAS",
+   "NYK@TOR",
+   "UTA@LAC"
+  ],
+  "games_not_yet_submitted": [
+   "ATL@OKC",
+   "BOS@DEN",
+   "CHI@BKN",
+   "DET@NOP",
+   "GSW@DAL",
+   "HOU@IND",
+   "MEM@CLE",
+   "MIL@MIA",
+   "PHI@ORL",
+   "PHX@SAC",
+   "POR@MIN",
+   "UTA@LAL",
+   "WAS@TOR"
+  ]
+ },
+ "transcription_note": "Two wrapped cells are joined only where the same download prints the continuation unambiguously: Kessler's Reason ('... Right Lower Leg' + the next fragment 'Soreness') and Reaves' team (the cell is empty on the wrapped line and the row sits inside the CHA@LAL / Los Angeles Lakers block). Both joins are listed on the edition and are the only joins made."
+}
