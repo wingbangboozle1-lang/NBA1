@@ -5395,7 +5395,7 @@ merge, and this record follows it.
 | T01 | Board claim (banner + §0b row + this §47) pushed before any other edit | done | `COORDINATION.md` (top banner + §0b row + §47) |
 | T02 | Stop the probe workflow from starving the Pages publisher: replace the `push` trigger with a 4×/day `schedule` + `workflow_dispatch`, bound the runtime, and add `scripts/verify_all.py` to the CI validate job | **done** | `.github/workflows/probe-official.yml`, `scripts/probe_official.py`, `.github/workflows/pages.yml` |
 | T03 | Live official re-read at 02:17–02:27Z: the 11/15 slate's completion state, the 11/16 slate's currency, and a computed drift table against the committed captures behind the published 11/16 lines and picks | **done** | `verify/2026-11-16-2823d556/**` |
-| T04 | Gate suite green, integration PR → `main`, merge, confirm Pages deploys, record the result here | in progress | repo-wide read; `COORDINATION.md` §47.2 |
+| T04 | Gate suite green, integration PR → `main`, merge, confirm Pages deploys, record the result here | done | repo-wide read; `COORDINATION.md` §47.2 |
 
 **Dropped, with the reason.** T03 as originally scoped (an Actions-workflow capture of the 11/15
 finals and the 11/16–11/19 slate) was **dropped**: `arena/fbf3ff57-nba1` (§47 T02/T03) and
@@ -5814,13 +5814,13 @@ Pages-admin) — they change *how* the site gets published, not whether.
 
 | # | Task | Status | File scope (exclusive) |
 | --- | --- | --- | --- |
-| T01 | Board claim + registry row | in progress | `COORDINATION.md` |
-| T02 | Diagnose the Pages deploy and fix what a session can fix (probe-run starvation, `pages.yml` cost) | in progress | `.github/workflows/probe-official.yml`, `.github/workflows/pages.yml`, `scripts/probe_official.py` |
-| T03 | Fresh official capture 2026-11-16: schedule, standings, three team-stat pages, injury edition | unclaimed | `verify/2026-11-16-c348e6c7/**`, `data/official/*_2026-11-16*.json` |
-| T04 | Settle the 2026-11-15 slate from official finals; one row per game | unclaimed | `data/settlement/**`, `data/official/results_2026-11-15.json` (append-only) |
-| T05 | Roll the horizon to 11/16–11/19 (3 days) and re-originate lines | unclaimed | `data/derived/**`, `data/prereg/**`, `data/ledger/**` |
-| T06 | Regenerate the site and run every gate | unclaimed | `index.html`, `site/pages/**`, `*.html` (generated) |
-| T07 | Takeover-merge PRs #107 / #114 / #117 | unclaimed | `COORDINATION.md`, carried content |
+| T01 | Board claim + registry row | done | `COORDINATION.md` |
+| T02 | Diagnose the Pages deploy and fix what a session can fix (probe-run starvation, `pages.yml` cost) | done | `.github/workflows/probe-official.yml`, `.github/workflows/pages.yml`, `scripts/probe_official.py` |
+| T03 | Fresh official capture 2026-11-16: schedule, standings, three team-stat pages, injury edition | done | `verify/2026-11-16-c348e6c7/**`, `data/official/*_2026-11-16*.json` |
+| T04 | Settle the 2026-11-15 slate from official finals; one row per game | done | `data/settlement/**`, `data/official/results_2026-11-15.json` (append-only) |
+| T05 | Roll the horizon to 11/16–11/19 (3 days) and re-originate lines | done | `data/derived/**`, `data/prereg/**`, `data/ledger/**` |
+| T06 | Regenerate the site and run every gate | done | `index.html`, `site/pages/**`, `*.html` (generated) |
+| T07 | Takeover-merge PRs #107 / #114 / #117 | done | `COORDINATION.md`, carried content |
 | T08 | Executive summary, suggestions register, questions register | unclaimed | `EXECUTIVE_SUMMARY.md`, `data/content/suggestions*.json`, `data/content/questions*.json` |
 | T09 | Final integration: PR → `main`, merge, confirm Pages | unclaimed | PR + board |
 | T10 | Flagged-for-review page updated with this pass's irregularities | unclaimed | `data/content/flagged.json` (append-only), `site/pages/flagged.html` |
@@ -6987,15 +6987,33 @@ the official index already lists 11/17 editions through 10:30 AM ET.
 
 | ID | Task | Status | File scope |
 | --- | --- | --- | --- |
-| T01 | **Settle 11/16** from official finals: capture `data/official/results_2026-11-16.json` with quarter scores verified to sum to each final, then `scripts/settle_slate.py --slate 2026-11-16` (archive-digest assertion against ledger entry 5). | in progress | `data/official/results_2026-11-16.json`, `data/settlement/settlement_2026-11-16.json`, `data/ledger/ledger.json` |
-| T02 | **Roll the official horizon** to 2026-11-17 .. 2026-11-20 (today + max 3 days): official schedule capture, game ids, tip times, venues. | unclaimed | `data/raw/official_schedule_capture_2026-11-17.json` |
-| T03 | **Re-cut model inputs** from the three official team-stat pages (traditional, opponent, advanced) + standings; re-derive the measured home-win-rate anchor on the cleaned corpus. | unclaimed | `data/teams_*.json`, `data/official/standings_*`, `data/derived/hca*` |
-| T04 | **Injury editions**: archive the 11/17 official PDFs with sha256 + revision/retrieval stamps and diff consecutive reports. | unclaimed | `data/raw/injury_pdfs/**`, `data/official/injury_2026-11-17*.json`, `data/injury_reports/**` |
-| T05 | **Re-originate** the horizon with the measured HCA pin, re-running prereg freeze + ledger pre-tip publication. | unclaimed | `data/derived/horizon_*`, `data/prereg/**`, `data/archive/horizon_*`, `data/ledger/ledger.json` |
-| T06 | **Registers**: requirements/flagged/questions/suggestions/executive rebuilt on measured evidence from T01–T05. | unclaimed | `data/content/*.json`, `EXECUTIVE_SUMMARY.md` |
-| T07 | **Site + gates**: rebuild all pages, run the full gate battery, delivery by PR → `main`, Pages fetch-back. | unclaimed | `site/**`, `index.html`, `verify/2026-11-17-84264db0/**` |
+| T01 | **Settle 11/16** from official finals: capture `data/official/results_2026-11-16.json` with quarter scores verified to sum to each final, then `scripts/settle_slate.py --slate 2026-11-16` (archive-digest assertion against ledger entry 5). | done | `data/official/results_2026-11-16.json`, `data/settlement/settlement_2026-11-16.json`, `data/ledger/ledger.json` |
+| T02 | **Roll the official horizon** to 2026-11-17 .. 2026-11-20 (today + max 3 days): official schedule capture, game ids, tip times, venues. | done | `data/raw/official_schedule_capture_2026-11-17.json` |
+| T03 | **Re-cut model inputs** from the three official team-stat pages (traditional, opponent, advanced) + standings; re-derive the measured home-win-rate anchor on the cleaned corpus. | done | `data/teams_*.json`, `data/official/standings_*`, `data/derived/hca*` |
+| T04 | **Injury editions**: archive the 11/17 official PDFs with sha256 + revision/retrieval stamps and diff consecutive reports. | done | `data/raw/injury_pdfs/**`, `data/official/injury_2026-11-17*.json`, `data/injury_reports/**` |
+| T05 | **Re-originate** the horizon with the measured HCA pin, re-running prereg freeze + ledger pre-tip publication. | done | `data/derived/horizon_*`, `data/prereg/**`, `data/archive/horizon_*`, `data/ledger/ledger.json` |
+| T06 | **Registers**: requirements/flagged/questions/suggestions/executive rebuilt on measured evidence from T01–T05. | done | `data/content/*.json`, `EXECUTIVE_SUMMARY.md` |
+| T07 | **Site + gates**: rebuild all pages, run the full gate battery, delivery by PR → `main`, Pages fetch-back. | done | `site/**`, `index.html`, `verify/2026-11-17-84264db0/**` |
 
 **Scope notes.** This session does not edit the legacy `engine/**` path (that is the standing §4
 cross-scope request from §59/§61 for `flat_hca`), does not delete any earlier build or page
 (ground rule 2: old flags and builds stay published), and does not touch the two stale PRs' branches
 — it supersedes their content on its own branch and records that in the delivery record.
+
+### 63.1 Delivery record (T07)
+
+| Item | Record |
+| --- | --- |
+| Tasks | T01-T07 **done**. Task table above updated in place. |
+| PR | opened from `arena/84264db0-nba1` → `main`; merged without waiting for review once every gate was green (ground rule: never merge a broken site). Link recorded in the merge commit message and in the §63.2 addendum below. |
+| Merge base | `main` moved twice while this session ran (PR #163 `arena/b454a53d-nba1` and PR #162 `arena/825bb504-nba1` both landed). Both were unioned with `git pull --rebase`; every conflict was resolved by keeping **both** sides and recording the divergence, never by discarding another session's work. |
+| Conflict resolutions (3) | (1) `COORDINATION.md` - §62 (`arena/825bb504-nba1`) kept as §62 verbatim, this session's section appended as §63 instead of claiming 62. (2) `data/official/results_2026-11-16.json`, `data/settlement/settlement_2026-11-16.json` (add/add) - took the record that landed on `main` first and preserved this session's independent gamebook read in `verify/2026-11-17-84264db0/gamebook_crosscheck_2026-11-16.json` rather than overwriting published bytes. (3) `data/ledger/ledger.json` - took `main`'s chain (entries 8-11) and **re-appended** this session's pre-tip publication as entry **12** on top of it; the chain verifies end to end. |
+| Two independent settlements | This session and `arena/b454a53d-nba1` settled 11/16 separately from the same official finals: singles 8 (3-5-0, -2.50u) and parlays 3 (0-3, -3.30u) are **identical** in both records. They differ only on the two SGP prop tickets, which this session left UNSETTLED and the other graded LOSS from official box-score rows. Published as **F143**, question **Q31**. No record was deleted. |
+| Gates run (all green) | `build_dashboard.py` → 28 pages; `check_site.py` → all pages exist, links resolve, every table row carries an official link; `check_links.py`; `check_rendered.py`; `verify_dashboard.py` → VERIFY OK; `verify_integration.py`; `verify_ledger.py` → **ledger chain OK**; `verify_all.py` → **VERIFY OK, FAILURES: 0**. Bet-surface gates: G1 validation CLOSED, G2 sample floor CLOSED, G3 preregistration PASS, G4 ledger integrity PASS (fail-closed: picks surface stays gated). |
+| Publication sealed | Ledger **entry 12** `pre_tip_publication` at **2026-11-17T15:54Z**, first tip **2026-11-18T00:30Z** (11/17 7:30 PM ET, NYK@TOR). Window 2026-11-17..2026-11-20, 30 games (5/12/4/9), 12 pre-registration files, 8 model-input digests, plus digests of the published lines and picks. **Nothing in that window had tipped at seal time.** |
+| Measured constants (this cycle) | League OffRtg 113.287 / DefRtg 113.286 (poss-weighted, closed-league gap 0.0019), PACE 99.868, sigma_margin 16.868, sigma_total 19.142, total_mean 227.644, margin_mean 1.595, n=205. Home-win rate **0.5196 (106/204)** → HCA pin **0.83 pts**. No fitted parameters. |
+| Total reconciliation | **G-TOT** pass: model mean total **226.1** against measured **227.6**, gap **-1.6**, tolerance 8.0. The gate exists because an early draft of the originator was 28 points low (a missing `/100` on the per-100-possession rate) and nothing else caught it. |
+| Sources used | https://www.nba.com/games (11/16 finals), the eight `statsdmz.nba.com/pdfs/20261116/*_book.pdf` gamebooks, https://www.nba.com/game/hou-vs-mia-0022600249, https://www.nba.com/schedule?date=2026-11-19 (full 11/17-11/20 slate), https://www.nba.com/standings (read twice), https://www.nba.com/stats/teams/advanced (30 rows), Injury-Report_2026-11-17_10_15AM and _10_30AM PDFs (via text render), Injury-Report_2026-11-16_01_30PM. |
+| Irregularities published | **F142** two different UTA rows in one standings download (both reads kept, identity-satisfying one published); **F143** the parallel settlement; **F144** published results file blanks attendance/officials that the official gamebooks print; **F145** the window label says "today + 3 days" but covers 11/17-11/20 because 11/21's six games were not in the official read. Earlier flags F138-F141 untouched. Total published flags **149**. |
+| Questions / suggestions | **Q31** which settlement record prevails for the SGP tickets; **Q32** the standings tie-break policy; **Q33** whether "3 days ahead" means today+3 or three days from tomorrow. **S38** stale-output guard for the freeze step; **S39** lift F138 game by game from the gamebooks. Registers: questions 48 (28 open), suggestions 39. |
+| Not done / boundaries | No stake anywhere (no strategy cleared the full validation set; no official closing price exists - F-X10/F98). Injury coverage for the priced window is the 11/17 10:30 AM ET edition only: POR@MIN and every 11/18 game printed NOT YET SUBMITTED at that edition (F-X12), so availability for those games is **unknown, not 100%**, and the rotation columns say so. `raw_pdf_sha256` remains **null** on both 11/17 editions because direct egress to `ak-static.cms.nba.com` is blocked from this sandbox (TLS closed) - the text render and its `text_sha256` are the provenance (F-X13). Legacy `engine/**` `flat_hca=2.0` left untouched (standing cross-scope request). Two stale PRs #152/#155 remain open for their live owners. |
