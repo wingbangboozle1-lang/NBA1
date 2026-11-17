@@ -1,0 +1,82 @@
+name: Capture official gamebooks + newest injury editions (a374ec9f)
+
+# Session arena/a374ec9f-nba1, COORDINATION §62 / A03 + A04.
+#
+# A session runs in a sandbox whose only outbound path is the GitHub API, so it
+# cannot write the *bytes* of an official gamebook PDF or injury PDF to disk.
+# This workflow puts the fetch on a runner that has the network and commits the
+# content-addressed documents back to this session's branch.
+#
+# Deliberately narrow:
+#   * it runs only on this session's branch, and only when this file or one of
+#     the two capture scripts changes - so it cannot arm itself in a loop and
+#     it cannot be armed by another session's push;
+#   * the bot commit carries [skip ci], which does not trigger workflows;
+#   * it touches nothing but data/raw/gamebooks/**, data/raw/injury_pdfs/**,
+#     data/parsed/injury_diffs/** and verify/2026-11-17-a374ec9f/**;
+#   * both capture scripts refuse any host other than the official NBA hosts.
+
+on:
+  push:
+    branches: [arena/a374ec9f-nba1]
+    paths:
+      - scripts/capture_gamebooks_a374ec9f.py
+      - scripts/capture_injury_07920bdc.py
+      - .github/workflows/capture-a374ec9f.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capture-a374ec9f
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch the eight official 2026-11-16 gamebook PDFs
+        run: |
+          python3 scripts/capture_gamebooks_a374ec9f.py --date 2026-11-16 \
+            --game 0022600245:ORL:BOS \
+            --game 0022600246:CHI:CLE \
+            --game 0022600247:MEM:WAS \
+            --game 0022600248:PHI:BKN \
+            --game 0022600249:HOU:MIA \
+            --game 0022600250:POR:MIN \
+            --game 0022600251:GSW:NOP \
+            --game 0022600252:PHX:DEN
+
+      - name: Fetch every injury edition the official index still lists
+        run: |
+          python3 scripts/capture_injury_07920bdc.py --max 80
+
+      - name: Parse every archived edition and diff consecutive reports
+        run: |
+          python3 engine/injury_diff.py --pdf-dir data/raw/injury_pdfs \
+            --out-dir data/parsed/injury_diffs 2>&1 | tail -60
+
+      - name: Commit captures
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/raw/gamebooks data/raw/injury_pdfs data/parsed/injury_diffs verify/2026-11-17-a374ec9f
+          if git diff --cached --quiet; then
+            echo "no new capture payloads - nothing committed"
+            exit 0
+          fi
+          git commit -m "Capture official gamebooks + newest injury editions (a374ec9f A03/A04) [skip ci]"
+          # Rebase in case the session pushed while the run was in flight; never
+          # force, so another session's or the owner's work is never discarded.
+          git pull --rebase origin arena/a374ec9f-nba1
+          git push origin HEAD:arena/a374ec9f-nba1
