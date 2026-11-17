@@ -69,9 +69,22 @@ jobs:
             --game 0022600251:GSW:NOP \
             --game 0022600252:PHX:DEN
 
+      - name: Fetch the nine official 2026-11-15 gamebook PDFs
+        run: |
+          python3 scripts/capture_gamebooks_a374ec9f.py --date 2026-11-15 \
+            --game 0022600236:IND:PHI \
+            --game 0022600237:LAL:PHX \
+            --game 0022600238:CHA:LAC \
+            --game 0022600239:SAS:UTA \
+            --game 0022600240:DAL:BOS \
+            --game 0022600241:NYK:TOR \
+            --game 0022600242:HOU:WAS \
+            --game 0022600243:ATL:MIL \
+            --game 0022600244:OKC:SAC
+
       - name: Fetch every injury edition the official index still lists
         run: |
-          python3 scripts/capture_injury_07920bdc.py --max 80
+          python3 scripts/capture_injury_07920bdc.py --max 200
 
       - name: Parse every archived edition and diff consecutive reports
         run: |
