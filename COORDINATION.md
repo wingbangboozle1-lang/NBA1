@@ -18,7 +18,9 @@ Branch `arena/b454a53d-nba1`, based on `main` `22d56af` (PR #160). Board read be
 - **Branch.** The platform pins this session to `arena/b454a53d-nba1`. The `session-<id>/<task>` convention was not used. Deviation logged here per the ground rules.
 - **Gates (order per pages.yml).** check_site, verify_integration (0 errors, 44 warnings), verify_all, check_rendered, check_links: all PASS on the merged tree.
 - **Not in this session's scope.** The rest of the brief (the scheduled-refresh gates, the injury PDF store, the strategy pre-registration, and so on) belongs to other claims. Nothing was changed there.
-- **PR.** To be recorded below after open and merge.
+- **PR and merge.** [PR #163](https://github.com/wingbangboozle1-lang/NBA1/pull/163) (`arena/b454a53d-nba1` → `main`) opened and merged with `gh pr merge 163 --merge` at 2026-11-17T15:52:06Z. Merge commit `52fa144`. Mergeable and CLEAN at merge time. No `--auto`.
+- **Pages.** Latest build for `52fa144`: status `built`, no error (`gh api repos/wingbangboozle1-lang/NBA1/pages/builds/latest`, 15:52:37Z). Live page https://wingbangboozle1-lang.github.io/NBA1/site/pages/settlement.html was read after the build and shows the 11/16 block, the SGP grades, and the ledger through entry 11.
+- **Open follow-ups (not blocking, not yet fixed).** (1) The 11/14 settlement has no `slate_archive`, so its pre-tip anchor renders as a bare `?` and its total as `—`. These should read "not recorded in the settlement file", and the render should not print `?`. (2) The external nba.com links could not be fetched from this sandbox, so their HTTP status is unverified (check_links says so). (3) Flags F138–F141 remain open.
 
 ---
 
