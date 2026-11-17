@@ -6,7 +6,7 @@
   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_00PM.pdf",
   "retrieved_at_utc": "2026-11-16T02:28:18Z",
   "sha256": "3a148bf1db5fb0165a495915ba42eb955e9387efe55916eb5feb7dd3688c1448",
-  "rows": 142
+  "rows": 160
  },
  "after": {
   "edition": "Injury-Report_2026-11-15_09_15PM.pdf",
@@ -14,11 +14,40 @@
   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-15_09_15PM.pdf",
   "retrieved_at_utc": "2026-11-16T02:45:04Z",
   "sha256": "06a1c3640db8bcd7d5c0079071aa84320c55f33dc66e69351a9015a4815793e1",
-  "rows": 110
+  "rows": 125
  },
  "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
  "status_or_reason_changes": [],
- "listed_in_after_only": [],
+ "listed_in_after_only": [
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Quaintance, Jayden",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Surgery",
+   "matchup": "LAL@PHX"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Sellers, Jaylin",
+   "status": "Out",
+   "reason": "G League - Two-Way",
+   "matchup": "ATL@MIL"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Smith, Jalen",
+   "status": "Questionable",
+   "reason": "Injury/Illness - Left Finger Sprain",
+   "matchup": "ATL@MIL"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Wilson, Caleb",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Metacarpal Fracture",
+   "matchup": "ATL@MIL"
+  }
+ ],
  "listed_in_before_only": [
   {
    "team": "Charlotte Hornets",
@@ -63,6 +92,24 @@
    "matchup": "CHI@CLE"
   },
   {
+   "team": "Chicago Bulls",
+   "player": "Sellers, Jaylin",
+   "status": "Out",
+   "matchup": "CHI@CLE"
+  },
+  {
+   "team": "Chicago Bulls",
+   "player": "Smith, Jalen",
+   "status": "Questionable",
+   "matchup": "CHI@CLE"
+  },
+  {
+   "team": "Chicago Bulls",
+   "player": "Wilson, Caleb",
+   "status": "Out",
+   "matchup": "CHI@CLE"
+  },
+  {
    "team": "LA Clippers",
    "player": "Beal, Bradley",
    "status": "Out",
@@ -91,6 +138,24 @@
    "player": "Niederhauser, Yanic Konan",
    "status": "Out",
    "matchup": "CHA@LAC"
+  },
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Sexton, Collin",
+   "status": "Available",
+   "matchup": "LAL@PHX"
+  },
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Thiero, Adou",
+   "status": "Available",
+   "matchup": "LAL@PHX"
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "player": "Ryan, Cormac",
+   "status": "Out",
+   "matchup": "ATL@MIL"
   },
   {
    "team": "Oklahoma City Thunder",
@@ -209,6 +274,12 @@
   {
    "team": "San Antonio Spurs",
    "player": "Harris, Tobias",
+   "status": "Out",
+   "matchup": "SAS@UTA"
+  },
+  {
+   "team": "San Antonio Spurs",
+   "player": "Quaintance, Jayden",
    "status": "Out",
    "matchup": "SAS@UTA"
   }

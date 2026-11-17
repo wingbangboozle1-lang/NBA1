@@ -15,6 +15,7 @@
   "status",
   "reason"
  ],
+ "reader": "clipped-rectangle",
  "rows": [
   [
    "2026-11-16",
@@ -41,7 +42,7 @@
    "Chicago Bulls",
    "Sellers, Jaylin",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -113,7 +114,7 @@
    "Cleveland Cavaliers",
    "Udeh, Jr., Ernest",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -140,7 +141,52 @@
    "Memphis Grizzlies",
    "Jackson, GG",
    "Out",
-   "Injury/Illness - Left 5th Metatarsal"
+   "Injury/Illness - Left 5th Metatarsal Fracture"
+  ],
+  [
+   "2026-11-16",
+   "07:00",
+   "MEM@WAS",
+   "Memphis Grizzlies",
+   "Jerome, Ty",
+   "Out",
+   "Injury/Illness - Right Hip Soreness"
+  ],
+  [
+   "2026-11-16",
+   "07:00",
+   "MEM@WAS",
+   "Memphis Grizzlies",
+   "Pippen Jr., Scotty",
+   "Out",
+   "Injury/Illness - Lumbar Disc Herniation"
+  ],
+  [
+   "2026-11-16",
+   "07:00",
+   "MEM@WAS",
+   "Memphis Grizzlies",
+   "Post, Quinten",
+   "Questionable",
+   "Injury/Illness - Concussion Protocol"
+  ],
+  [
+   "2026-11-16",
+   "07:00",
+   "MEM@WAS",
+   "Memphis Grizzlies",
+   "Saunders, Richie",
+   "Out",
+   "Injury/Illness - Right Knee Surgery"
+  ],
+  [
+   "2026-11-16",
+   "07:00",
+   "MEM@WAS",
+   "Memphis Grizzlies",
+   "Stewart, Isaiah",
+   "Out",
+   "Injury/Illness - Illness"
   ],
   [
    "2026-11-16",
@@ -176,7 +222,7 @@
    "Washington Wizards",
    "Okpara, Felix",
    "Questionable",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -266,7 +312,7 @@
    "Houston Rockets",
    "Copeland, Quadir",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -275,7 +321,7 @@
    "Houston Rockets",
    "Phillips, Julian",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -302,7 +348,7 @@
    "Miami Heat",
    "Goldin, Vladislav",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -383,7 +429,7 @@
    "Brooklyn Nets",
    "Bilodeau, Tyler",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -401,7 +447,7 @@
    "Brooklyn Nets",
    "Nelson, Grant",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -482,7 +528,7 @@
    "New Orleans Pelicans",
    "Dia, Malik",
    "Questionable",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -527,7 +573,25 @@
    "New Orleans Pelicans",
    "Pierre Jr., Jaron",
    "Questionable",
-   "G League - Two- Way"
+   "G League - Two-Way"
+  ],
+  [
+   "2026-11-16",
+   "08:00",
+   "GSW@NOP",
+   "New Orleans Pelicans",
+   "Reese, Julian",
+   "Questionable",
+   "G League - Two-Way"
+  ],
+  [
+   "2026-11-16",
+   "08:00",
+   "GSW@NOP",
+   "New Orleans Pelicans",
+   "Watford, Trendon",
+   "Out",
+   "Injury/Illness - Right Ankle Sprain"
   ],
   [
    "2026-11-16",
@@ -626,7 +690,7 @@
    "Denver Nuggets",
    "Nembhard, Ryan",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-16",
@@ -644,7 +708,7 @@
    "Denver Nuggets",
    "Whitmore, Cam",
    "Out",
-   "G League - Two- Way"
+   "G League - Two-Way"
   ],
   [
    "2026-11-17",
@@ -737,6 +801,24 @@
    ""
   ]
  ],
- "row_count": 80,
- "unparsed": []
+ "row_count": 87,
+ "unparsed": [],
+ "reader_cross_check": {
+  "primary_reader": "clipped-rectangle",
+  "secondary_reader": "visual-line",
+  "cell_reader_rows": 87,
+  "line_reader_rows": 80,
+  "cell_only_players": [
+   "Jerome, Ty",
+   "Pippen Jr., Scotty",
+   "Post, Quinten",
+   "Reese, Julian",
+   "Saunders, Richie",
+   "Stewart, Isaiah",
+   "Watford, Trendon"
+  ],
+  "line_only_players": [],
+  "both_readers_players": 69,
+  "status_disagreements": []
+ }
 }

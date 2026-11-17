@@ -15,7 +15,18 @@
   "status",
   "reason"
  ],
+ "reader": "clipped-rectangle",
  "rows": [],
  "row_count": 0,
- "unparsed": []
+ "unparsed": [],
+ "reader_cross_check": {
+  "primary_reader": "clipped-rectangle",
+  "secondary_reader": "visual-line",
+  "cell_reader_rows": 0,
+  "line_reader_rows": 0,
+  "cell_only_players": [],
+  "line_only_players": [],
+  "both_readers_players": 0,
+  "status_disagreements": []
+ }
 }

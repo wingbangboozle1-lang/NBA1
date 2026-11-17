@@ -6,7 +6,7 @@
   "source_url": null,
   "retrieved_at_utc": null,
   "sha256": "eec639713fd48121a439cf8e049cc2eb391a41c635c9f7113a3854c90a376387",
-  "rows": 124
+  "rows": 134
  },
  "after": {
   "edition": "Injury-Report_2026-11-15_05_00PM__8be609b429d619a6.pdf",
@@ -14,7 +14,7 @@
   "source_url": null,
   "retrieved_at_utc": null,
   "sha256": "8be609b429d619a61d66dc34dc36ca5eb961ef42bbadadcd33fbe2ccffdee4a6",
-  "rows": 127
+  "rows": 144
  },
  "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
  "status_or_reason_changes": [
@@ -23,8 +23,8 @@
    "player": "Carter, Devin",
    "before_status": "Questionable",
    "after_status": "Available",
-   "before_reason": "G League - Two- Way",
-   "after_reason": "G League - Two- Way",
+   "before_reason": "G League - Two-Way",
+   "after_reason": "G League - Two-Way",
    "before_matchup": "DAL@BOS",
    "after_matchup": "DAL@BOS"
   },
@@ -37,6 +37,26 @@
    "after_reason": "G League - On Assignment",
    "before_matchup": "DAL@BOS",
    "after_matchup": "DAL@BOS"
+  },
+  {
+   "team": "Boston Celtics",
+   "player": "Mitchell, Dillon",
+   "before_status": "Questionable",
+   "after_status": "Available",
+   "before_reason": "G League - Two-Way",
+   "after_reason": "G League - Two-Way",
+   "before_matchup": "DAL@BOS",
+   "after_matchup": "DAL@BOS"
+  },
+  {
+   "team": "Boston Celtics",
+   "player": "Williams, Amari",
+   "before_status": "Questionable",
+   "after_status": "Available",
+   "before_reason": "G League - Two-Way",
+   "after_reason": "G League - Two-Way",
+   "before_matchup": "DAL@BOS",
+   "after_matchup": "DAL@BOS"
   }
  ],
  "listed_in_after_only": [
@@ -44,7 +64,7 @@
    "team": "Brooklyn Nets",
    "player": "Bilodeau, Tyler",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "PHI@BKN"
   },
   {
@@ -58,7 +78,7 @@
    "team": "Brooklyn Nets",
    "player": "Nelson, Grant",
    "status": "Out",
-   "reason": "G League - Two- Way",
+   "reason": "G League - Two-Way",
    "matchup": "PHI@BKN"
   },
   {
@@ -125,49 +145,6 @@
    "matchup": "MEM@WAS"
   }
  ],
- "listed_in_before_only": [
-  {
-   "team": "New Orleans Pelicans",
-   "player": "Mathurin, Bennedict",
-   "status": "Out",
-   "matchup": "GSW@NOP"
-  },
-  {
-   "team": "New Orleans Pelicans",
-   "player": "McGowens, Bryce",
-   "status": "Out",
-   "matchup": "GSW@NOP"
-  },
-  {
-   "team": "New Orleans Pelicans",
-   "player": "Murphy III, Trey",
-   "status": "Out",
-   "matchup": "GSW@NOP"
-  },
-  {
-   "team": "New Orleans Pelicans",
-   "player": "Murray, Dejounte",
-   "status": "Out",
-   "matchup": "GSW@NOP"
-  },
-  {
-   "team": "New Orleans Pelicans",
-   "player": "Pierre Jr., Jaron",
-   "status": "Questionable",
-   "matchup": "GSW@NOP"
-  },
-  {
-   "team": "New Orleans Pelicans",
-   "player": "Reese, Julian",
-   "status": "Questionable",
-   "matchup": "GSW@NOP"
-  },
-  {
-   "team": "New Orleans Pelicans",
-   "player": "Watford, Trendon",
-   "status": "Out",
-   "matchup": "GSW@NOP"
-  }
- ],
+ "listed_in_before_only": [],
  "team_block_filing_changes": []
 }

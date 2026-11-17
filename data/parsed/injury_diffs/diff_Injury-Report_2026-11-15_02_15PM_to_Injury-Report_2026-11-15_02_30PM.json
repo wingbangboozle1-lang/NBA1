@@ -6,7 +6,7 @@
   "source_url": null,
   "retrieved_at_utc": null,
   "sha256": "f382c574a327b6d9e6c30751d4cc1a352bd89467f0c1dd114a538b89fd08f6bf",
-  "rows": 105
+  "rows": 114
  },
  "after": {
   "edition": "Injury-Report_2026-11-15_02_30PM__59d58ef723a73df1.pdf",
@@ -14,7 +14,7 @@
   "source_url": null,
   "retrieved_at_utc": null,
   "sha256": "59d58ef723a73df11a9d4fbdfe43b6e400b3dfd6a1d694317be12499dd90ff9d",
-  "rows": 105
+  "rows": 114
  },
  "comparability_note": "Consecutive editions cover different game slates. A player-level status change can only be observed for players listed in both editions; listed-additions and listed-removals usually reflect the slate change, not a status change.",
  "status_or_reason_changes": [
@@ -25,6 +25,26 @@
    "after_status": "Available",
    "before_reason": "Injury/Illness - Illness",
    "after_reason": "Injury/Illness - Illness",
+   "before_matchup": "LAL@PHX",
+   "after_matchup": "LAL@PHX"
+  },
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Sexton, Collin",
+   "before_status": "Questionable",
+   "after_status": "Available",
+   "before_reason": "Injury/Illness - Right Orbital Laceration",
+   "after_reason": "Injury/Illness - Right Orbital Laceration",
+   "before_matchup": "LAL@PHX",
+   "after_matchup": "LAL@PHX"
+  },
+  {
+   "team": "Los Angeles Lakers",
+   "player": "Thiero, Adou",
+   "before_status": "Questionable",
+   "after_status": "Available",
+   "before_reason": "Injury/Illness - Left Ankle Sprain",
+   "after_reason": "Injury/Illness - Left Ankle Sprain",
    "before_matchup": "LAL@PHX",
    "after_matchup": "LAL@PHX"
   },
@@ -45,6 +65,16 @@
    "after_status": "Available",
    "before_reason": "Injury/Illness - Chest / Sternum Contusion",
    "after_reason": "Injury/Illness - Chest / Sternum Contusion",
+   "before_matchup": "HOU@WAS",
+   "after_matchup": "HOU@WAS"
+  },
+  {
+   "team": "Washington Wizards",
+   "player": "Sarr, Alex",
+   "before_status": "Questionable",
+   "after_status": "Available",
+   "before_reason": "Injury/Illness - Illness",
+   "after_reason": "Injury/Illness - Illness",
    "before_matchup": "HOU@WAS",
    "after_matchup": "HOU@WAS"
   }
