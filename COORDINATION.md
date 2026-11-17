@@ -5,6 +5,21 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/9dfd9123-nba1` (opened 2026-11-17 15:4x UTC — 11/16 game day ended: official finals capture for all 8 games, results feed rows, sealed-ledger settlement of the 2026-11-16 slate from official finals, verification record; §62)
+
+Branch `arena/9dfd9123-nba1`, based on `main` `22d56af` (PR #160). The platform pins this session to that
+branch (the `session-<id>/<task>` naming is satisfied by this pre-named branch; deviation logged as in every
+earlier session). Board read before claiming: §0 ground rules, §0b registry, §61 delivery record, `gh pr list`
+(open: #152 `arena/cdc6c39d-nba1` and #155 `arena/3ff8ff0f-nba1`, both idle since 11/16 18:4x UTC, >20 h, no
+claim is live on them — flagged in §62 for their owners, not touched), `gh api …/pages` (`built`, legacy,
+https://wingbangboozle1-lang.github.io/NBA1/), `gh run list` (last refresh success 3 h ago).
+
+**Scope (file scope exclusive to this session):** `data/official/results_2026-11-16.json` (new),
+`data/settlement/settlement_2026-11-16.json` (new), `data/ledger/ledger.json` (append-only, written only by
+`scripts/settle_slate.py`), `verify/2026-11-17-9dfd9123/**`, register evidence rows R02/R03/R19 in
+`data/content/requirements.json`, this board. Not touched: `index.html` and shared site chrome (integration
+seat), `engine/**`, `data/archive/**`, the 11/17–11/19 horizon, open PRs #152/#155.
+
 ## ✅ CLAIM CLOSED — session `arena/23ec1e32-nba1` (opened 2026-11-16 18:2x UTC, **delivered 2026-11-16 19:35Z via [PR #159](https://github.com/wingbangboozle1-lang/NBA1/pull/159)** — measured-HCA re-derivation (R09), measured-rho parlay pricing (R14/F90), disagreement headline + rotation column on Lines & Picks (R13/R15/F83), projection/bet split on the roll page (R07), register refresh (R01/R04), gates green, Pages live; full record in **§61**)
 
 Branch `arena/23ec1e32-nba1`, based on `main` `add1e74` (tip at claim time = merge of PR #145,
@@ -6902,3 +6917,15 @@ Outputs archived in `verify/2026-11-16-23ec1e32/` (README.md + nine `.out` files
 | Open overlapping PRs | [#152](https://github.com/wingbangboozle1-lang/NBA1/pull/152) (`arena/cdc6c39d-nba1` — R13/R15 on the same picks page; this delivery already implements both) and [#155](https://github.com/wingbangboozle1-lang/NBA1/pull/155) (`arena/3ff8ff0f-nba1` — measured HCA pin + measured rho; this delivery already implements both with the corpus fix). Both left OPEN for their live owners (ground rule 5: <60 min idle, fresh claims) — **both need a rebase onto `01f91c2` and a re-read of §61.0 before merge**, or they will re-publish the polluted-corpus / neutral-fold numbers. Logged, not touched. |
 | Not done / boundaries | 11/16 games had not tipped at delivery (first tip 23:00Z), so no settlement work this cycle; R21 game-log coverage for 11/16+ waits on tonight's gamebooks; R16 stays blocked (no official closing-line source exists — not fabricated); R11 travel still feeds Wikipedia-coordinate adjustments into legacy margins (unchanged, flagged); Pages `build_type` flip stays an owner-setting limitation (prior flags); legacy engine path `flat_hca=2.0` untouched (§4 request by §59). |
 | Follow-up PR carrying this record | [#160](https://github.com/wingbangboozle1-lang/NBA1/pull/160) (board-only; merged right after this line landed) |
+
+## 62. Session `arena/9dfd9123-nba1` — 11/16 official finals, results feed, sealed-ledger settlement (claimed 2026-11-17 15:4x UTC)
+
+Claim, scope and board read: see the banner at the top of this file. Task table and delivery record
+are added below as the work lands. Status of this section: **in progress**.
+
+| # | Task | Status | File scope |
+| --- | --- | --- | --- |
+| S01 | Capture the eight 2026-11-16 official game pages (nba.com/game/…): status, LINESCORES quarters, final score; one row per game | in progress | `data/official/results_2026-11-16.json` |
+| S02 | Settle the 2026-11-16 slate from the pre-tip archive (`data/archive/horizon_picks_2026-11-16.json`, ledger entry 5) via `scripts/settle_slate.py`; refuse if any game is not verified FINAL | pending S01 | `data/settlement/settlement_2026-11-16.json`, `data/ledger/ledger.json` |
+| S03 | Verify the settlement chain (`scripts/verify_ledger.py`), write the evidence record | pending S02 | `verify/2026-11-17-9dfd9123/**` |
+| S04 | Register evidence rows R02/R03/R19 (no status change unless the evidence supports it) | pending S03 | `data/content/requirements.json` |
