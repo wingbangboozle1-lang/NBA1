@@ -37,6 +37,25 @@ SRC_OPPONENT = "https://www.nba.com/stats/teams/opponent?Season=2026-27&SeasonTy
 SRC_INJ_INDEX = "https://official.nba.com/nba-injury-report-2026-27-season/"
 
 
+
+def _input(meta, *names, default="not printed"):
+    """Resolve a model-input label across both originator generations.
+
+    The 11/16 originator emits `injury_file`, `ratings_recut_retrieved_utc` and
+    `schedule_captured_on`; the 11/17 measured-HCA originator emits
+    `injury_edition`, `team_ratings_read_utc` and `schedule_captured_utc` (plus
+    `injury_retrieved_utc` absent, because the edition was retrieved as a text
+    render only).  Reading through this helper keeps the page honest for either
+    window instead of crashing or silently printing 'None'.
+    """
+    inputs = meta.get("inputs", {})
+    for n in names:
+        v = inputs.get(n)
+        if v not in (None, ""):
+            return v
+    return default
+
+
 def load(path):
     with open(path, encoding="utf-8") as fh:
         return json.load(fh)
@@ -159,7 +178,7 @@ def build(db):
     rho_doc = load(rho_path) if os.path.exists(rho_path) else None
 
     inj_path = os.path.join(DATA, "official",
-                            os.path.basename(meta["inputs"]["injury_file"]))
+                            os.path.basename(_input(meta, "injury_file", "injury_edition")))
     inj = load(inj_path) if os.path.exists(inj_path) else {"rows": []}
 
     # estimator B: the validated engine's own model line, where the windows overlap
@@ -225,11 +244,11 @@ def build(db):
         "<p><b>Cut:</b> schedule captured %s &middot; ratings re-cut from captures retrieved %s "
         "&middot; injury edition <b>%s</b> (revision %s, retrieved %s).</p>"
         % (esc(dates[0]), esc(dates[-1]),
-           esc(meta["inputs"]["schedule_captured_on"]),
-           esc(meta["inputs"]["ratings_recut_retrieved_utc"]),
+           esc(_input(meta, "schedule_captured_on", "schedule_captured_utc")),
+           esc(_input(meta, "ratings_recut_retrieved_utc", "team_ratings_read_utc")),
            esc(meta["inputs"]["injury_edition"]),
            esc(meta["inputs"]["injury_revision_et"]),
-           esc(meta["inputs"]["injury_retrieved_utc"])))))
+           esc(_input(meta, "injury_retrieved_utc", default="retrieved as a text render this cycle"))))))
 
     n_out = sum(v[1] for v in avail.values())
     n_ns = sum(len(v[3]) for v in avail.values())
@@ -598,23 +617,23 @@ def build(db):
     b.append(table(
         ["Input", "Official page", "Captured"],
         [["Schedule, tip times, venues", srclink_url(SRC_SCHEDULE, SRC_SCHEDULE),
-          esc(meta["inputs"]["schedule_captured_on"]),
+          esc(_input(meta, "schedule_captured_on", "schedule_captured_utc")),
           srclink_url(SRC_SCHEDULE, "schedule")],
          ["Team records", srclink_url(SRC_STANDINGS, SRC_STANDINGS),
-          esc(meta["inputs"]["schedule_captured_on"]),
+          esc(_input(meta, "schedule_captured_on", "schedule_captured_utc")),
           srclink_url(SRC_STANDINGS, "standings")],
          ["Pace, OffRtg, DefRtg", srclink_url(SRC_ADVANCED, SRC_ADVANCED),
-          esc(meta["inputs"]["ratings_recut_retrieved_utc"]),
+          esc(_input(meta, "ratings_recut_retrieved_utc", "team_ratings_read_utc")),
           srclink_url(SRC_ADVANCED, "advanced")],
          ["Own scoring splits", srclink_url(SRC_TRADITIONAL, SRC_TRADITIONAL),
-          esc(meta["inputs"]["ratings_recut_retrieved_utc"]),
+          esc(_input(meta, "ratings_recut_retrieved_utc", "team_ratings_read_utc")),
           srclink_url(SRC_TRADITIONAL, "traditional")],
          ["Opponent scoring splits", srclink_url(SRC_OPPONENT, SRC_OPPONENT),
-          esc(meta["inputs"]["ratings_recut_retrieved_utc"]),
+          esc(_input(meta, "ratings_recut_retrieved_utc", "team_ratings_read_utc")),
           srclink_url(SRC_OPPONENT, "opponent")],
          ["Injury statuses", srclink_url(inj.get("source_url", SRC_INJ_INDEX), "official PDF"),
           "%s (%s)" % (esc(meta["inputs"]["injury_revision_et"]),
-                       esc(meta["inputs"]["injury_retrieved_utc"])),
+                       esc(_input(meta, "injury_retrieved_utc", default="retrieved as a text render this cycle"))),
           srclink_url(SRC_INJ_INDEX, "index")],
          ["Injury policy (filing deadlines)", srclink_url(SRC_INJ_INDEX, SRC_INJ_INDEX),
           "policy page", srclink_url(SRC_INJ_INDEX, "index")]]))

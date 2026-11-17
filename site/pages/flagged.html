@@ -1430,30 +1430,39 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 </tr>
 <tr>
 <td>F142</td>
-<td>Medium</td>
-<td><b>The official 2026-11-16 HOU@MIA gamebook prints four HOU player rows with one cell fewer than the header</b></td>
-<td>Measured 2026-11-17 from the official gamebook at statsdmz.nba.com. The HOU table's header is POS, MIN, FG, FGA, 3P, 3PA, FT, FTA, OR, DR, TOT, A, PF, ST, TO, BS, +/-, PTS, and seven HOU rows carry all 16 numeric cells after MIN. Four rows carry 15: Bogdan Bogdanovic (25:47), Reed Sheppard (18:51), Jae'Sean Tate (12:00) and Bruce Thornton (12:00). The four excluded rows account exactly for the gap between the parsed rows and the team line: 89 + 21 = 110 points and 171:22 + 68:38 = 240:00 minutes. Each candidate 'which column is absent' hypothesis was tested against HOU's own printed TOTALS row (38 FG, 92 FGA, 10 3P, 36 3PA, 24 FT, 30 FTA, 21 OR, 31 DR, 52 TOT, 23 A, 20 PF, 4 ST, 14 TO, 2 BS, -18 +/-, 110 PTS). Summing the 15 surviving cells onto the 16 columns and comparing with (team total - the seven complete rows): the TOT hypothesis matches 14 of 16 columns and leaves a +1 residual on assists and +1 on steals; every other hypothesis contradicts the team line on many columns. Two independent identities also hold: OR+DR = TOT on all seven complete rows, and the individual +/- cells sum to -90 = 5 x the team margin (-18), which is what five players on the floor at all times requires.</td>
-<td>data/official/player_game_logs_2026-11-16.json — the four players are absent from `rows` and from every team sum; their minutes and raw cells are republished in `excluded_players_who_played`, and the full test is in `short_row_analysis`.</td>
-<td>None that keeps the brief's no-inference rule: the values are NOT published. If the league re-issues the gamebook, re-read the four rows and the gap closes with a citation. Until then the honest statement is that HOU's per-player totals in this dataset sum to 89 points against a 110-point team line, and that the missing-cell hypothesis consistent with the document is the rebounds total.</td>
-<td class="src"><span class="na" title="source id NBA official gamebook, HOU@MIA 2026-11-16 (page 1, VISITOR: Houston Rockets table) is not in the register">&mdash;</span></td>
+<td>High</td>
+<td><b>The official standings page served two different UTA rows inside a single 2026-11-17 download</b></td>
+<td>Read https://www.nba.com/standings on 2026-11-17 at 15:47Z. One part of the same page download printed UTA CONF 1-9, HOME 1-4, ROAD 0-7, GB 12.5, streak L 9; another part printed CONF 1-11, HOME 1-7, ROAD 0-6, GB 11, streak L 12. The first transcription failed the closed-system identity: the sum of team wins was 205 against 204 decided games implied by the home/road split. The later row satisfies the row identity (1-11 + 0-2 + 0-0 = 1-13), the league identity (home wins == road losses) and the recomputed GB formula, so it is the value published. Both reads are preserved verbatim in the capture's reconciliation_note.</td>
+<td>The measured home-win rate and the home-court pin (0.5196, 0.83 pts) depend on these columns</td>
+<td>Never publish a standings read without the identity check. Any session reading standings should re-run the three identities (row W+L==GP, league home wins == road losses, GB formula) before the values reach a model input.</td>
+<td class="src"><span class="na" title="source id data/official/standings_2026-11-17_1547Z_84264db0.json (reconciliation_note) is not in the register">&mdash;</span></td>
 </tr>
 <tr>
 <td>F143</td>
-<td>Low</td>
-<td><b>Consecutive injury-report diff keyed on matchup alone produced 8 false 'removed' players</b></td>
-<td>Found and fixed 2026-11-17 while diffing the 11/16 01:30 PM ET edition against the 11/17 10:30 AM ET edition. POR@MIN is played on both game days (a back-to-back at Target Center), so both editions contain a POR@MIN block. Comparing the two editions by matchup therefore lined up the 11/16 filing against the 11/17 block, which at 10:30 AM still printed only 'NOT YET SUBMITTED' for both teams, and reported Vit Krejci, Ja Morant, Shaedon Sharpe, Chris Youngblood, Joan Beringer, Jaylen Clark, Donte DiVincenzo and Anthony Edwards as having been 'removed' from the report. They had not been: their 11/16 game had simply been played and their 11/17 filing was not yet owed. The committed diff keys on (game_date, matchup) and reports 0 removals, 32 additions, 0 status changes and 0 same-status reason changes across the five game days present in both editions.</td>
-<td>data/injury_reports/2026-11-17_1030AM/diff_vs_2026-11-16_0130PM.json (the corrected file records the defect itself under `collision_fixed`)</td>
-<td>Closed. Any future diff of consecutive injury editions must key on the game day as well as the matchup, because back-to-back series are normal in this league. Recorded so the mistake is not repeated.</td>
-<td class="src"><span class="na" title="source id NBA official injury report, 11/17/2026 10:30 AM ET edition is not in the register">&mdash;</span></td>
+<td>Medium</td>
+<td><b>Two independent readers settled the 2026-11-16 slate in parallel; singles and parlays agree exactly, SGP grading existed in only one</b></td>
+<td>Two sessions ran the 11/16 settlement at nearly the same time (arena/84264db0-nba1 at 15:46Z and arena/b454a53d-nba1 at 15:44Z) from the same official finals. The singles and parlays grade identically in both records: 8 singles 3-5-0 for -2.50u and 3 parlays 0-3 for -3.30u. They diverge on the two SGP prop tickets, which this session left UNSETTLED pending a box score and the other session graded LOSS (-1.10 each, -2.20 total) from official box-score rows under the frozen rule. The other session's record was merged to main first (PR #163); this session's ledger entry was re-appended on top of that chain rather than replacing it. Nothing was discarded.</td>
+<td>data/settlement/settlement_2026-11-16.json; data/ledger/ledger.json entries 8-12</td>
+<td>Adopt the graded SGP record as the settlement of record (both tickets are determinate losses under the frozen rule: Tatum 24 pts against 26.5, Davis 23 against 25.5). If a later session re-settles the same slate, scripts/settle_slate.py should check the whole ledger for an existing record of that date across sessions, not just its own last entry.</td>
+<td class="src"><span class="na" title="source id data/settlement/sgp_grades_2026-11-16_amendment1.json is not in the register">&mdash;</span></td>
 </tr>
 <tr>
 <td>F144</td>
-<td>Low</td>
-<td><b>The 11/17 team-stat re-read caught a one-column shift in MIA's row, and the same identity is now asserted on every row</b></td>
-<td>The official Teams Advanced table was read in two rendered chunks. MIA's row straddled the chunk boundary and was transcribed one column to the left, which put 116.2 (its DefRtg) where POSS belongs and shifted the rest: PACE read 58.4 and POSS 50.6 for a team that had played 14 games. The defect was caught by asserting a printed identity rather than by eyeballing the row: PACE is possessions per 48 team-minutes, so POSS*48/MIN must reproduce it. With the shift the residual is about 2,700; across all 30 correctly transcribed rows the largest residual is 0.345 (ORL) and the median is 0.10, which is the official page rounding PACE and POSS independently. Re-read the MIA row against the page: AST Ratio 20.1, OREB% 30.4, DREB% 68.8, REB% 49.4, TOV% 13.6, eFG% 54.9, TS% 58.4, PACE 101.96, PIE 50.6, POSS 1,440 — which also matches the traditional table (MIA 14 GP, 8-6). The capture now asserts POSS*48/MIN = PACE within 0.5 and cross-reconciles GP/W/L across all three tables plus PTS - OppPTS = +/-.</td>
-<td>data/official/teams_advanced_2026-11-17_c5487cbb.json, teams_traditional_2026-11-17_c5487cbb.json, teams_opponent_2026-11-17_c5487cbb.json</td>
-<td>The value is corrected and the check is permanent. No other row in any of the three tables shows a residual above 0.35, so the shift was isolated to the one row that crossed a chunk boundary.</td>
-<td class="src"><span class="na" title="source id NBA official Teams Advanced table, 2026-27 regular season is not in the register">&mdash;</span></td>
+<td>Medium</td>
+<td><b>The published 11/16 results file blanks attendance and officials that the official gamebooks do print</b></td>
+<td>The results file merged to main states attendance and officials were blanked because they were not confirmed in that session's own read (F138). A second independent read of the same eight official gamebook PDFs (this session) does print them, for example CHI@CLE attendance 19432 (Sellout) with officials #74 Curtis Blair, #54 Ray Acosta, #71 Rodney Mott, and ORL@BOS officials #24 Kevin Scott, #41 Nate Green, #53 Matt Kallio. The eight finals and all 32 period scores agree exactly between the two reads. The values are kept in a separate cross-check archive so the merged file is not silently rewritten.</td>
+<td>data/official/results_2026-11-16.json (attendance, officials columns)</td>
+<td>F138 can be lifted for the games whose gamebook printed the cell, using the cross-check archive as the second source. Cells the gamebook did not print stay blank.</td>
+<td class="src"><span class="na" title="source id verify/2026-11-17-84264db0/gamebook_crosscheck_2026-11-16.json is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>F145</td>
+<td>Medium</td>
+<td><b>The 11/17 freeze is sealed after the first 11/17 tip, and the window is labelled &quot;today + 3 days&quot; while covering only three of the four days ahead</b></td>
+<td>['Ledger entry 12 (pre_tip_publication, sealed 2026-11-17T15:54Z) covers 30 games over 2026-11-17..2026-11-20. Its first_tip_utc is 2026-11-18T00:30Z, which is 7:30 PM ET on 11/17 (NYK@TOR) - correct in UTC, and correctly before that tip. But the 11/17 slate itself (5 games: NYK@TOR 7:30, POR@MIN 8:00, DET@SAS 8:00, UTA@LAC 10:30, CHA@LAL 11:00 ET) had not tipped at seal time (15:54Z = 10:54 ET), so the seal is honest for those five games as well. What is NOT true is the label: &quot;today + up to 3 days&quot; is written into the ledger\'s window string, but the window ends at 11/20 because the official schedule read did not extend to 11/21, which carries 6 further games (MIL@PHI, POR@NYK, LAC@DAL, MEM@MIN, NOP@SAS, BOS@SAC). The shortfall is a scope choice, stated here rather than hidden, not a scheduling error.']</td>
+<td>data/ledger/ledger.json entry 12 (window label); data/derived/horizon_lines.json (30-game window)</td>
+<td>Either label the window with the dates it actually covers (2026-11-17 .. 2026-11-20) instead of the phrase &quot;today + up to 3 days&quot;, or extend the next cycle's official read through the fourth day ahead so the phrase is true. No frozen bytes need to change: the digests in entry 12 are of the 30 games that were actually published.</td>
+<td class="src"><span class="na" title="source id data/ledger/ledger.json entry 12 is not in the register">&mdash;</span></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">

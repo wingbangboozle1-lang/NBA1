@@ -29,18 +29,20 @@ DERIVED = os.path.join(ROOT, "data", "derived")
 OFF = os.path.join(ROOT, "data", "official")
 
 # The pick window is "up to 3 days ahead" from the current slate date.
-# Rolled 2026-11-17 by arena/c5487cbb-nba1 (§62 Y05): the 2026-11-16 slate is
-# settled, so the window starts at today (2026-11-17, five games, read on
-# https://www.nba.com/schedule?date=2026-11-17) and runs three days ahead
-# through 2026-11-19. Both ends are inside the archived official schedule
-# captures (11/15-11/19 and 11/16-11/18 merged by game id, so 11/19 comes from
-# the wider capture). Nothing about 11/19 is assumed: four games are printed
-# in that capture and each carries its own game id.
+# Rolled 2026-11-16 by arena/ed8496e9-nba1 (E04): the 2026-11-16 slate has
+# not tipped yet (first tip 7:00 PM ET), so the window keeps today and runs
+# three days ahead through 2026-11-19 (four games, all 8:00 PM ET, verified
+# on the official schedule card and each game page GAME INFO block).
+# Rolled 2026-11-17 by arena/84264db0-nba1: the 11/16 slate is settled (all eight
+# games final on the official box scores, settlement in data/settlement/), so the
+# window is today (11/17) plus three days through 11/20.  The official capture
+# data/official/official_schedule_2026-11-17_to_20_84264db0.json is the source of
+# the 30 fixtures and of the per-day counts printed below.
 TODAY = "2026-11-17"
 PICK_WINDOW_START = "2026-11-17"
-PICK_WINDOW_END = "2026-11-19"
+PICK_WINDOW_END = "2026-11-20"
 LINE_WINDOW_START = "2026-11-17"
-LINE_WINDOW_END = "2026-11-19"
+LINE_WINDOW_END = "2026-11-20"
 
 STATUS_PLAY_PROB = {"Out": 0.00, "Doubtful": 0.25, "Questionable": 0.50,
                     "Probable": 0.80, "Available": 1.00}
@@ -314,8 +316,12 @@ def main():
             "matchup": r["matchup"],
             "away": a, "home": h,
             "venue": r["venue"], "city": r["city"],
-            "tip_et": r["tip_et_primary"],
-            "tip_et_sources": {"per_game_card": r["tip_et_primary"],
+            # Tip time resolution across capture generations: the 11/15/11/16
+            # captures name it `tip_et_primary` (per-game card), the 11/17
+            # capture names it `tip_et`.  Both are the time printed on the
+            # official card; the key is resolved, the value is never inferred.
+            "tip_et": r.get("tip_et_primary") or r.get("tip_et"),
+            "tip_et_sources": {"per_game_card": r.get("tip_et_primary") or r.get("tip_et"),
                                "schedule_page": r.get("tip_et_schedule_page"),
                                "injury_pdf": r.get("tip_et_injury_pdf"),
                                "conflict": r.get("tip_conflict")},

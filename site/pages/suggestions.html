@@ -484,6 +484,26 @@
 <td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
 <td class="src"><span class="na" title="no source id on this row">&mdash;</span></td>
 </tr>
+<tr>
+<td>S38</td>
+<td>Verification</td>
+<td><b>Add a stale-output guard to the freeze step</b></td>
+<td>scripts/freeze_prereg.py derives the publication window and the first tip from whatever data/derived/horizon_lines.json currently holds. If that file is one slate behind, the guard still fires (it refuses to seal after a passed tip) but the message talks about a tip that has nothing to do with the slate being priced, which reads as a pricing bug.</td>
+<td>- Leave the guard as it is; it fails closed and nothing wrong is published <span class='fine'>(effort: None; risk: Low - the only cost is a misleading message when the lines file is stale; unlocks: Nothing new)</span><br>- Check that the lines file's window start equals the current slate date, and fail with that reason before the tip check <span class='fine'>(effort: Low - three lines in freeze_prereg.py; risk: Low - no change to what gets frozen; unlocks: A clear cause for a refusal; removes the false impression that pricing is broken)</span><br>- Make the freeze read the window from the ledger's last pre-tip entry and refuse any mismatch <span class='fine'>(effort: Medium - couples the freezer to the ledger; risk: Medium - the ledger is the output, not the input; unlocks: Cross-check between window and chain)</span></td>
+<td>Take option 2: it is three lines, it names the real cause, and it does not make the ledger an input to the freeze.</td>
+<td>Choose A, B or C.</td>
+<td class="src"><span class="na" title="source id data/ledger/ledger.json entry 12; scripts/freeze_prereg.py assert PUB_AT &lt; FIRST_TIP is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>S39</td>
+<td>Data coverage</td>
+<td><b>Publish the referee crew and attendance the gamebooks already print</b></td>
+<td>F138 blanked attendance and officials for all eight 11/16 games because one session could not confirm them. A second independent read of the same gamebook PDFs confirms them for at least CHI@CLE (19432, sellout, three officials named) and ORL@BOS (three officials named). The cells are on the official document; only the pipeline connection is missing.</td>
+<td>- Keep attendance and officials blank until a future cycle re-reads the PDFs <span class='fine'>(effort: None; risk: Low - values stay missing, F138 stays open; unlocks: Nothing new)</span><br>- Fill each game's cells from the cross-check archive where the official gamebook printed them, leaving the rest blank <span class='fine'>(effort: Low - one file, eight rows already transcribed; risk: Low - each filled cell has two independent reads and a PDF link; unlocks: Attendance and officials columns become usable; F138 closes game by game)</span><br>- Treat attendance as permanently out of scope <span class='fine'>(effort: None; risk: Medium - discards official data that governs a real home-advantage signal; unlocks: Nothing new)</span></td>
+<td>Take option 2. Every filled cell has two independent reads and an official PDF link; the games whose gamebook printed no attendance stay blank and stay flagged.</td>
+<td>Approve lifting F138 game by game.</td>
+<td class="src"><span class="na" title="source id verify/2026-11-17-84264db0/gamebook_crosscheck_2026-11-16.json is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>
 <div class="tablewrap">

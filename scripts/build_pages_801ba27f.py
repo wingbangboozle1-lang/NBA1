@@ -206,6 +206,18 @@ def build_official_feed():
 def build_estimators():
     e = jload(os.path.join(DERIVED, "estimators_2026_27.json"))
     c = jload(os.path.join(DERIVED, "measured_constants_2026_27.json"))
+    # The 2026-11-17 re-cut (scripts/recut_2026_11_17.py) nests the pin under
+    # `home_court_pin` and names its sample `finals_n`; earlier cuts kept the
+    # same numbers flat. Read whichever shape is on disk rather than forcing
+    # one file to be rewritten in the other's schema.
+    if "home_court_pin" in c:
+        pin = c["home_court_pin"]
+        c = dict(c, home_win_rate=pin.get("home_win_rate"),
+                 home_court_points=pin.get("hca_points"),
+                 n_final_games=pin.get("home_games")
+                 or (c.get("dispersion") or {}).get("finals_n"),
+                 sigma_margin=pin.get("sigma_margin_used")
+                 or (c.get("dispersion") or {}).get("sigma_margin"))
     rows = []
     for r in e["rows"]:
         rows.append([r["date"], r["away"] + " @ " + r["home"],
