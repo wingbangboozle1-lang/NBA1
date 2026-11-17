@@ -29,14 +29,17 @@ DERIVED = os.path.join(ROOT, "data", "derived")
 OFF = os.path.join(ROOT, "data", "official")
 
 # The pick window is "up to 3 days ahead" from the current slate date.
-# Rolled 2026-11-16 by arena/ed8496e9-nba1 (E04): the 2026-11-16 slate has
-# not tipped yet (first tip 7:00 PM ET), so the window keeps today and runs
-# three days ahead through 2026-11-19 (four games, all 8:00 PM ET, verified
-# on the official schedule card and each game page GAME INFO block).
-TODAY = "2026-11-16"
-PICK_WINDOW_START = "2026-11-16"
+# Rolled 2026-11-17 by arena/c5487cbb-nba1 (§62 Y05): the 2026-11-16 slate is
+# settled, so the window starts at today (2026-11-17, five games, read on
+# https://www.nba.com/schedule?date=2026-11-17) and runs three days ahead
+# through 2026-11-19. Both ends are inside the archived official schedule
+# captures (11/15-11/19 and 11/16-11/18 merged by game id, so 11/19 comes from
+# the wider capture). Nothing about 11/19 is assumed: four games are printed
+# in that capture and each carries its own game id.
+TODAY = "2026-11-17"
+PICK_WINDOW_START = "2026-11-17"
 PICK_WINDOW_END = "2026-11-19"
-LINE_WINDOW_START = "2026-11-16"
+LINE_WINDOW_START = "2026-11-17"
 LINE_WINDOW_END = "2026-11-19"
 
 STATUS_PLAY_PROB = {"Out": 0.00, "Doubtful": 0.25, "Questionable": 0.50,
