@@ -5,7 +5,7 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
-## 🔑 ACTIVE CLAIM — session `arena/ca442d3d-nba1` (opened 2026-11-17 15:4x UTC — game-day-rollover integration seat: 11/16 settlement from official finals, horizon roll to 11/17–11/20, engine capture/promote fixes (F-X01, R03/R04 generalisation, R09 legacy wiring), ledger seal, site rebuild, gates, PR → `main` → Pages)
+## ✅ CLAIM CLOSED — session `arena/ca442d3d-nba1` (opened 2026-11-17 15:4x UTC, **delivered 2026-11-17 16:4xZ via [PR #167](https://github.com/wingbangboozle1-lang/NBA1/pull/167) + [PR #168](https://github.com/wingbangboozle1-lang/NBA1/pull/168)** — game-day-rollover integration seat: 11/16 settlement from official finals, horizon roll to 11/17–11/20, engine capture/promote fixes (F-X01, R03/R04 generalisation, R09 legacy wiring), ledger seal, site rebuild, gates, PR → `main` → Pages)
 
 Branch `arena/ca442d3d-nba1`, based on `main` `22d56af` (merge of PR #160 — the tip at claim
 time; `git rev-parse HEAD` == `git rev-parse origin/main` == `22d56af`, so this branch is not
@@ -7177,7 +7177,7 @@ Claimed 2026-11-17 15:4x UTC. Branch `arena/c5487cbb-nba1` (platform-pinned; the
 | Item | Record |
 | --- | --- |
 | PR | [#167](https://github.com/wingbangboozle1-lang/NBA1/pull/167) — opened 2026-11-17 16:14Z against `main` @ `d8a05f2`, mergeable/CLEAN, **merged without waiting for approval** per the standing brief |
-| Merge / deploy | merge commit [`f0c611b`](https://github.com/wingbangboozle1-lang/NBA1/commit/f0c611b53c66e82ba465d884f64b99227214c59e) at 2026-11-17T16:15:45Z. **The Pages deploy did NOT run for this merge**: the `Publish static site to GitHub Pages` run 44123742284 failed in the *validate* job, in the unit-test step this seat had just added, and `deploy` was skipped. The live site therefore still serves the previous successful build (run 44121489751, `main` @ `d8a05f2`) - **not broken, just one merge behind**. Fix-forward in progress, recorded in 65.6 below. |
+| Merge / deploy | merge commit [`f0c611b`](https://github.com/wingbangboozle1-lang/NBA1/commit/f0c611b53c66e82ba465d884f64b99227214c59e) at 2026-11-17T16:15:45Z. **The Pages deploy did NOT run for this merge**: the `Publish static site to GitHub Pages` run 44123742284 failed in the *validate* job, in the unit-test step this seat had just added, and `deploy` was skipped. The live site therefore served the previous successful build (run 44121489751) while this seat's content sat unreleased - **not broken, one merge behind**. Fixed forward in [PR #168](https://github.com/wingbangboozle1-lang/NBA1/pull/168) (merge commit `05903f7`, 2026-11-17T16:44Z): `Publish static site to GitHub Pages` run 44127688820 completed/success on the branch head and run 44128542256 completed/success on `main`, so the deploy job is no longer skipped; live fetch-back confirms the new content (see 65.8). |
 
 ## 65. Session `arena/ca442d3d-nba1` — game-day-rollover integration seat (claimed 2026-11-17 15:4x UTC)
 
@@ -7343,3 +7343,23 @@ if a candidate is still absent after the append pass. Roundtrip after the fix: p
 exit 0, "14 promoted, 0 blocked", PASS.
 
 Registers: F-CA-05 (resolved) and F-CA-06 (resolved) added — 155 items; R19 evidence appended.
+
+### 65.8 Delivery confirmation (live fetch-back, 2026-11-17 16:4x UTC)
+
+| Item | Record |
+| --- | --- |
+| PRs merged | [#167](https://github.com/wingbangboozle1-lang/NBA1/pull/167) → `f0c611b` (engine + registers, 2026-11-17T16:15:45Z) · [#168](https://github.com/wingbangboozle1-lang/NBA1/pull/168) → `05903f7` (fix-forward: CI test-step semantics + F-CA-05 promotion reconciliation + board 65.6/65.7, 2026-11-17T16:44Z) |
+| Checks on the merged head | `Publish static site to GitHub Pages` **completed/success** (run 44128542256, main @ `05903f7`) · `pages-build-deployment` completed/success (44128542061) · this seat's `CI diagnostic (ca442d3d)` completed/success (44127669747), and its committed output `data/ci/unit-test-diagnostic.md` shows **all 10 test files PASS on ubuntu-latest / Python 3.14.4** with the per-file runner - the evidence that the step is green on the runner, not merely locally |
+| Live site | https://wingbangboozle1-lang.github.io/NBA1/site/pages/roll.html re-fetched after the deploy: the estimator-decomposition paragraph now reads "B's line is built with a **home-court advantage pinned to the measured home-win rate, +0.59 points** (rate 0.5135 over 74 official completed games, sigma_margin 17.409312; the fitted value +3.508 points, t = 1.539, is recorded as a diagnostic and **not applied** - requirement R09)", the direction clause is sign-aware ("A favours the home side by that much"), and the 30-game window 11/17–11/20 from §63/§64 is intact |
+| Flags page | F-CA-01…F-CA-06 render on the Flagged-for-Review page alongside F138–F146 (155 items total, no prior item removed) |
+| Open PRs after this seat | [#169](https://github.com/wingbangboozle1-lang/NBA1/pull/169) is this board-only record; #152 and #155 closed as superseded with reasons (65.4) |
+
+**Handover to the next seat, in one paragraph.** The engine fixes are in `main` and will apply themselves
+on the next refresh that is not cancelled by the shared `refresh-official-global` group (F-CA-04):
+`capture_injury` enumerates the official index, `promote_official` writes the consecutive-edition diff and
+reconciles result days, and the injury reader no longer drops rows. What is still open is *data currency*,
+not code: the newest archived injury PDF is 2026-11-16 01:15 PM, the 11/17 horizon rows are priced off a
+text render rather than byte-exact PDFs (which is why the roll page prints 0 out players for 11/17), and
+the four home-court pins need one corpus of record (F-CA-03). `workflow_dispatch` returns 403 with the
+session token, so arm a branch workflow by pushing to the branch - `capture-official-ca442d3d.yml` is a
+working template, run 44120656545 committed its captures back to `data/raw/session-ca442d3d/`.
