@@ -281,26 +281,65 @@ def build(db):
         _b2b = (_fit.get("b2b_coef_on_home_margin") or {}).get("penalty_applied")
     _signed = ([a["line_spread_home"] - c["model_spread_home"] for a, c in shared])
     _mean_signed = (sum(_signed) / len(_signed)) if _signed else 0.0
+    # Direction is read out of the sign, never asserted: the columns are home-side
+    # margins, so A minus B negative means B is the one favouring the home team.
+    # (Before requirement R09 was wired in, the fitted +3.5 HCA made the sign
+    # reliably negative and the sentence below was hardcoded; after the pin it is
+    # not, and a hardcoded direction would have become a false statement.)
+    _dir = ("B favours the home side by that much." if _mean_signed < 0
+            else "A favours the home side by that much, i.e. B's home-side edge is now "
+                 "the smaller of the two.") if _signed else ""
     _decomp = ""
     if _hca is not None:
-        _decomp = (
-            "<p><b>Where most of the gap comes from.</b> The mean <i>signed</i> difference "
-            "(A &minus; B) is <b>%+.2f points</b>, i.e. B favours the home team by that much. "
-            "B's line is built with a <b>fitted home-court advantage of %+.3f points</b> "
-            "(t = %s, estimated in-sample on the test window) and a back-to-back penalty of "
-            "%s points; estimator A applies <b>neither</b>, because no official page publishes "
-            "either number. The fitted HCA alone accounts for %.0f%% of the mean gap. That is "
-            "the whole of requirement R08 in one number: the measured home-win rate is %s "
-            "(%d of %d official finals), and a fitted %+.2f-point edge is a far stronger claim "
-            "than that evidence supports.</p>"
-            % (_mean_signed, _hca,
-               esc((load(_vpath).get("fit", {}).get("hca") or {}).get("t")),
-               ("%.3f" % _b2b) if _b2b is not None else NA,
-               min(100.0, 100.0 * abs(_hca) / abs(_mean_signed)) if _mean_signed else 0.0,
-               (("%.4f" % rho_doc["home_win_rate"]["rate"]) if rho_doc else NA),
-               (rho_doc["home_win_rate"]["home_wins"] if rho_doc else 0),
-               (rho_doc["home_win_rate"]["n_games"] if rho_doc else 0),
-               _hca))
+        _hrec = (load(_vpath).get("fit", {}).get("hca") or {})
+        _used = _hrec.get("used")
+        _pin = _hrec.get("pinned_to") or {}
+        if _used is False and _pin:
+            # R09 wired into the legacy engine (session arena/ca442d3d-nba1,
+            # COORDINATION 65.2): B's published line no longer applies the fitted
+            # HCA, so saying it does would make this page disagree with the numbers
+            # two lines above it. The sentence is composed from the record instead.
+            _eff = _pin.get("hca_points")
+            _eff_txt = ("a <b>home-court advantage pinned to the measured home-win rate, "
+                        "%+.2f points</b> (rate %s over %s official completed games, sigma_margin %s; "
+                        "the fitted value %+.3f points, t = %s, is recorded as a diagnostic and "
+                        "<b>not applied</b> - requirement R09)"
+                        % (_eff, ("%.4f" % _pin["home_win_rate"]) if _pin.get("home_win_rate") is not None else NA,
+                           _pin.get("games"), _pin.get("sigma_margin"), _hca,
+                           esc(_hrec.get("t"))))
+            _share = (min(100.0, 100.0 * abs(_eff) / abs(_mean_signed))
+                      if _mean_signed and _eff is not None else 0.0)
+            _tail = ("Home court is now the smaller of the two claims: pinning it removed "
+                     "%.2f points of B's home-side edge, which is why the mean signed gap "
+                     "moved when the pin was wired in." % (abs(_hca) - abs(_eff))
+                     if _eff is not None else "")
+            _decomp = (
+                "<p><b>Where most of the gap comes from.</b> The mean <i>signed</i> difference "
+                "(A &minus; B) is <b>%+.2f points</b>, %s "
+                "B's line is built with %s and a back-to-back penalty of %s points; estimator A "
+                "applies <b>neither</b>, because no official page publishes either number. The "
+                "applied home-court term accounts for %.0f%% of the mean gap. %s</p>"
+                % (_mean_signed, _dir, _eff_txt,
+                   ("%.3f" % _b2b) if _b2b is not None else NA, _share, _tail))
+        else:
+            _decomp = (
+                "<p><b>Where most of the gap comes from.</b> The mean <i>signed</i> difference "
+                "(A &minus; B) is <b>%+.2f points</b>, %s "
+                "B's line is built with a <b>fitted home-court advantage of %+.3f points</b> "
+                "(t = %s, estimated in-sample on the test window) and a back-to-back penalty of "
+                "%s points; estimator A applies <b>neither</b>, because no official page publishes "
+                "either number. The fitted HCA alone accounts for %.0f%% of the mean gap. That is "
+                "the whole of requirement R08 in one number: the measured home-win rate is %s "
+                "(%d of %d official finals), and a fitted %+.2f-point edge is a far stronger claim "
+                "than that evidence supports.</p>"
+                % (_mean_signed, _dir, _hca,
+                   esc(_hrec.get("t")),
+                   ("%.3f" % _b2b) if _b2b is not None else NA,
+                   min(100.0, 100.0 * abs(_hca) / abs(_mean_signed)) if _mean_signed else 0.0,
+                   (("%.4f" % rho_doc["home_win_rate"]["rate"]) if rho_doc else NA),
+                   (rho_doc["home_win_rate"]["home_wins"] if rho_doc else 0),
+                   (rho_doc["home_win_rate"]["n_games"] if rho_doc else 0),
+                   _hca))
     b.append(banner("warn", "Two independent estimators &mdash; their disagreement is the headline", (
         "<p>Every game below carries a line from <b>two models built from the same official "
         "inputs by different code</b>: estimator A is <code>scripts/originate_horizon.py</code> "

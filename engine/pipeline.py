@@ -133,6 +133,28 @@ def main():
             "hca_points": _hca_pts,
             "home_win_rate": _hca_rate,
         })
+        # The published records must not claim the fitted HCA is applied. The
+        # backtest's own diagnostic fit keeps its number, but its `used` flag and
+        # disclosure are corrected here, at the point the pin replaces it, so
+        # docs/data/{backtest,validation}.json and every page that reads them
+        # (site/pages/roll.html's estimator decomposition is the one that matters
+        # to a reader) describe the line the site actually publishes.
+        _fit_hca = (bt.get("fit") or {}).get("hca")
+        if isinstance(_fit_hca, dict):
+            _fit_hca["used"] = False
+            _fit_hca["pinned_to"] = {
+                "hca_points": _hca_pts,
+                "home_win_rate": _hca_rate,
+                "games": _hca_n,
+                "sigma_margin": round(sigma_m, 6),
+                "provenance": "data/hca_measured.json / engine/hca.compute_hca",
+            }
+            _fit_hca["disclosure"] = (
+                "estimated on the test window (in-sample) - NOT APPLIED to any "
+                "published line: requirement R09 pins home-court advantage to the "
+                "measured home-win rate instead of fitting it freely. The pinned "
+                "value is in `pinned_to`; the diagnostic fit is kept so the reader "
+                "can see the size of the claim the pin refuses to make.")
         print(f"[R09] HCA pinned to {_hca_pts} pts from measured home-win rate "
               f"{_hca_rate} over {_hca_n} official completed games "
               f"(sigma_margin {sigma_m:.3f}); the fitted value "

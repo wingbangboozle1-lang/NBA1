@@ -7241,6 +7241,36 @@ client-side. So the gate's refusal is a property of the official page, not of ou
 parseable official source for records/scores/quarters is the per-day scoreboard page's embedded
 `__NEXT_DATA__` JSON, which is what the results re-cut reads.
 
+### 65.5 Gate battery, the roll-page provenance defect this seat found in *itself*, and delivery
+
+**A page that contradicted its own numbers, found after the merge and fixed before the PR.** The
+merge took `main`'s generated `site/pages/*.html` verbatim and rebuilt; the rebuilt
+`site/pages/roll.html` then printed "B's line is built with a **fitted home-court advantage of
++3.508 points**" underneath a table whose numbers had moved by ~2.9 points because this seat's
+`engine/pipeline.py` change pins B's HCA to the measured rate. The prose was hardcoded in
+`scripts/build_roll_page.py` from the fitted value it read out of `docs/data/validation.json`, and
+`engine/validate.py` wrote that record with `"used": true` - true of its own diagnostic backtest,
+false of every published line. Two fixes, both in the code rather than in the output: the pipeline
+now annotates the fit record it replaces (`used: false`, a `pinned_to` block with the applied value
+and its provenance, and a disclosure explaining why the diagnostic is still printed), and the roll
+builder composes the sentence from that record instead of assuming a fitted build - including a
+sign-aware direction clause, because with the pin applied the mean signed estimator gap flipped from
+-1.59 to +1.33 and a hardcoded "B favours the home team" would have become the opposite of the table
+next to it. The stale-provenance class of defect this closes is the same one #152 was opened for.
+
+| Gate | Command | Result |
+| --- | --- | --- |
+| Unit tests (all modules) | `python3 -m unittest scripts.test_*` per module, `PYTHONPATH=.` | **10/10 modules pass**, incl. this seat's `test_injury_diff` (10), `test_injury_edition_crosscheck_07920bdc` (4), `test_capture_official_ca442d3d` (9). Now enforced in CI - see the pages.yml step. |
+| Full audit | `python3 scripts/verify_all.py` | **VERIFY OK**, FAILURES: 0 (builders + checker + data audits + noise-band cases) |
+| Site check A | `python3 scripts/check_site.py` | PASS - all pages exist, links resolve, every table row carries an official source link |
+| Integration | `python3 scripts/verify_integration.py` | PASSED - no errors |
+| Ledger | `python3 scripts/verify_ledger.py` | OK through entry 11 (the 11/16 settlement + SGP amendment, both by other seats) - chain intact after the merge |
+| Links / render | `check_links.py`, `check_rendered.py` | PASS / PASS |
+| Dashboard provenance | `python3 scripts/verify_dashboard.py` | VERIFY OK - every row linked or explicitly marked no-source |
+| Roll separation | `python3 scripts/build_roll_page.py` | roll.html projection/bet separation: OK |
+| Refresh gate | `PYTHONPATH=. python3 scripts/refresh_gate.py` | **BLOCKs as designed** on the client-rendered official pages (this is F-CA-02, now measured at byte level); non-blocking in CI, published on the Flagged page rather than bypassed |
+| Results re-cut | `python3 scripts/build_results_feed_ca442d3d.py --date 2026-11-16` | 8/8 settled, 0 quarter-sum failures, **8/8 agree with the committed feed and 8/8 with the settlement record** (exit 0). 2026-11-17: 0 settled, 5 excluded not-final. |
+
 ### 65.4 Stale-PR triage (N08)
 
 #152 (`arena/cdc6c39d-nba1`, updated 2026-11-16T18:34:10Z) and #155 (`arena/3ff8ff0f-nba1`,
