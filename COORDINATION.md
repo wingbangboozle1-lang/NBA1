@@ -6958,3 +6958,44 @@ Outputs archived in `verify/2026-11-16-23ec1e32/` (README.md + nine `.out` files
 | Refresh-trigger irregularity | Push-triggered refresh [run 44118064453](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44118064453) was **cancelled** by the shared `refresh-official-global` concurrency group when a higher-priority queued refresh from another active session took the slot. This is recorded, not hidden or called a source failure. The existing official-source freshness/provenance gate remains fail-closed. |
 | Sources | No new NBA facts added. Workflow source list and provenance allowlist remain NBA-operated endpoints (`nba.com`, `official.nba.com`, `stats.nba.com`, and the official NBA injury-PDF host). Action/deploy evidence is linked above. |
 | Remaining boundary | R01's broader source-parser/reachability gaps remain open and documented in the requirements/flag pages; this change only hardens the build guard and exposes outcomes. No betting surfaces were opened and no unverified input was promoted. |
+
+---
+
+## 63. Session `arena/84264db0-nba1` — 2026-11-17 cycle: settle the 11/16 slate from official finals, roll the official horizon to 2026-11-17 – 2026-11-20 (today + 3 days), re-cut team stats/standings, archive the 11/17 injury editions, re-originate with the measured HCA pin, refresh registers, gates, delivery (claimed 2026-11-17 ~15:45 UTC)
+
+Branch `arena/84264db0-nba1`, based on `main` `22d56af` (merge of PR #160, §61 delivery). The
+platform pins this session to that branch; the `session-<id>/<task>` naming in the brief is
+satisfied by this single pre-named branch (deviation logged, as every session before it logged it).
+
+**Board read before claiming (2026-11-17 15:4x UTC, ground rules 1–6):** §0 ground rules, the
+tail delivery records §58–§61, `gh pr list --state all` (two **OPEN** PRs from 2026-11-16:
+[#152](https://github.com/wingbangboozle1-lang/NBA1/pull/152) `arena/cdc6c39d-nba1` and
+[#155](https://github.com/wingbangboozle1-lang/NBA1/pull/155) `arena/3ff8ff0f-nba1` — both
+superseded by §61, whose delivery record already implements #152's R13/R15 and #155's measured
+HCA/rho; both are > 20 h old, past ground rule 5's 60-minute threshold, and their scopes are
+therefore **takeable**), `git log --oneline -5`, and `gh api /repos/…/pages`
+(`status: built`, `build_type: legacy`, https://wingbangboozle1-lang.github.io/NBA1/).
+
+Measured live state at claim time (first-hand, not inherited): today is **2026-11-17**; the
+published horizon is **2026-11-16 .. 2026-11-19** (`data/derived/horizon_lines.json`,
+`generated_utc 2026-11-16T14:57Z`, 29 unplayed games); `data/settlement/` holds 11/14 and 11/15
+only — **the 2026-11-16 slate has not been settled** even though its 8 games are final on
+https://www.nba.com/games (read 15:4xZ) and its pre-tip archive
+`data/archive/horizon_picks_2026-11-16.json` verifies against ledger entry 5 (both digests
+re-computed and matched). The newest official injury edition in the repo is 2026-11-16 01:15 PM ET;
+the official index already lists 11/17 editions through 10:30 AM ET.
+
+| ID | Task | Status | File scope |
+| --- | --- | --- | --- |
+| T01 | **Settle 11/16** from official finals: capture `data/official/results_2026-11-16.json` with quarter scores verified to sum to each final, then `scripts/settle_slate.py --slate 2026-11-16` (archive-digest assertion against ledger entry 5). | in progress | `data/official/results_2026-11-16.json`, `data/settlement/settlement_2026-11-16.json`, `data/ledger/ledger.json` |
+| T02 | **Roll the official horizon** to 2026-11-17 .. 2026-11-20 (today + max 3 days): official schedule capture, game ids, tip times, venues. | unclaimed | `data/raw/official_schedule_capture_2026-11-17.json` |
+| T03 | **Re-cut model inputs** from the three official team-stat pages (traditional, opponent, advanced) + standings; re-derive the measured home-win-rate anchor on the cleaned corpus. | unclaimed | `data/teams_*.json`, `data/official/standings_*`, `data/derived/hca*` |
+| T04 | **Injury editions**: archive the 11/17 official PDFs with sha256 + revision/retrieval stamps and diff consecutive reports. | unclaimed | `data/raw/injury_pdfs/**`, `data/official/injury_2026-11-17*.json`, `data/injury_reports/**` |
+| T05 | **Re-originate** the horizon with the measured HCA pin, re-running prereg freeze + ledger pre-tip publication. | unclaimed | `data/derived/horizon_*`, `data/prereg/**`, `data/archive/horizon_*`, `data/ledger/ledger.json` |
+| T06 | **Registers**: requirements/flagged/questions/suggestions/executive rebuilt on measured evidence from T01–T05. | unclaimed | `data/content/*.json`, `EXECUTIVE_SUMMARY.md` |
+| T07 | **Site + gates**: rebuild all pages, run the full gate battery, delivery by PR → `main`, Pages fetch-back. | unclaimed | `site/**`, `index.html`, `verify/2026-11-17-84264db0/**` |
+
+**Scope notes.** This session does not edit the legacy `engine/**` path (that is the standing §4
+cross-scope request from §59/§61 for `flat_hca`), does not delete any earlier build or page
+(ground rule 2: old flags and builds stay published), and does not touch the two stale PRs' branches
+— it supersedes their content on its own branch and records that in the delivery record.
