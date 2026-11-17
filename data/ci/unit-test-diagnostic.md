@@ -1,6 +1,6 @@
 # CI diagnostic: unit-test loop as pages.yml runs it
 
-- generated_utc: 2026-11-17T16:30:41Z
+- generated_utc: 2026-11-17T16:36:31Z
 - runner: ubuntu26 / 20261111.196.1
 - python: Python 3.14.4  (path: /usr/bin/python3)
 - pip list (third-party, first 40):
@@ -46,19 +46,14 @@
     lazr.restfulclient        0.14.6
 
 ```
-PASS  scripts.test_capture_official_ca442d3d
-FAIL  scripts.test_gate_roundtrip
-      
-      ----------------------------------------------------------------------
-      Ran 0 tests in 0.000s
-      
-      NO TESTS RAN
-PASS  scripts.test_injury_diff
-PASS  scripts.test_injury_edition_crosscheck_07920bdc
-PASS  scripts.test_minutes_shares
-PASS  scripts.test_noise_band_refusal
-PASS  scripts.test_parse_official
-PASS  scripts.test_promote_official
-PASS  scripts.test_refresh_gate
-PASS  scripts.test_refresh_workflow
+PASS  scripts.test_capture_official_ca442d3d   [python3 -m unittest scripts.test_capture_official_ca442d3d]
+PASS  scripts.test_gate_roundtrip   [python3 scripts/test_gate_roundtrip.py]
+PASS  scripts.test_injury_diff   [python3 -m unittest scripts.test_injury_diff]
+PASS  scripts.test_injury_edition_crosscheck_07920bdc   [python3 -m unittest scripts.test_injury_edition_crosscheck_07920bdc]
+PASS  scripts.test_minutes_shares   [python3 -m unittest scripts.test_minutes_shares]
+PASS  scripts.test_noise_band_refusal   [python3 scripts/test_noise_band_refusal.py]
+PASS  scripts.test_parse_official   [python3 -m unittest scripts.test_parse_official]
+PASS  scripts.test_promote_official   [python3 -m unittest scripts.test_promote_official]
+PASS  scripts.test_refresh_gate   [python3 -m unittest scripts.test_refresh_gate]
+PASS  scripts.test_refresh_workflow   [python3 -m unittest scripts.test_refresh_workflow]
 ```
