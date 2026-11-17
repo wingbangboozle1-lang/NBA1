@@ -1,0 +1,110 @@
+{
+ "title": "Model index for the 2026-11-17 10:30 AM ET injury edition — what is filed, where each row came from, and what is missing",
+ "edition": "11/17/2026 10:30 AM ET",
+ "file": "data/official/injury_2026-11-17_1030AM_c5487cbb.json",
+ "retrieved_utc": "2026-11-17T15:44Z",
+ "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_10_30AM.pdf",
+ "index_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "rule": "Every row is either (a) printed as a named player/status in the 10:30 AM edition, (b) printed as 'NOT YET SUBMITTED', or (c) explicitly listed here as a gap. A gap is never filled by carrying a value forward silently.",
+ "narrative": "The 10:30 AM edition's own text render carries 51 rows: 34 named rows across the five 11/17 game days (NYK@TOR 4, DET@SAS 11, POR@MIN 0 named + 2 NOT YET SUBMITTED, UTA@LAC 10, CHA@LAL 7 plus the detached Reaves row), 17 rows for 11/18 (13 matchups listed, all NOT YET SUBMITTED), and 1 torn fragment. The previous edition (11/16 01:30 PM) carried only the two-team 'NOT YET SUBMITTED' pillars for those same five 11/17 game days, which is 10 rows. So 24 named 11/17 players are newly printed in this edition and 0 previously-printed 11/17 players changed status or disappeared. The diff is reported that way rather than as '8 players removed', which was a defect of a matchup-only key (POR@MIN is played on both days).",
+ "by_game_day": {
+  "11/17/2026 CHA@LAL": {
+   "named": 7,
+   "not_yet_submitted": 0
+  },
+  "11/17/2026 DET@SAS": {
+   "named": 11,
+   "not_yet_submitted": 0
+  },
+  "11/17/2026 NYK@TOR": {
+   "named": 4,
+   "not_yet_submitted": 0
+  },
+  "11/17/2026 POR@MIN": {
+   "named": 0,
+   "not_yet_submitted": 2
+  },
+  "11/17/2026 UTA@LAC": {
+   "named": 10,
+   "not_yet_submitted": 0
+  },
+  "11/18/2026 ATL@OKC": {
+   "named": 0,
+   "not_yet_submitted": 2
+  },
+  "11/18/2026 CHI@BKN": {
+   "named": 0,
+   "not_yet_submitted": 2
+  },
+  "11/18/2026 DET@NOP": {
+   "named": 0,
+   "not_yet_submitted": 2
+  },
+  "11/18/2026 HOU@IND": {
+   "named": 0,
+   "not_yet_submitted": 2
+  },
+  "11/18/2026 MEM@CLE": {
+   "named": 0,
+   "not_yet_submitted": 2
+  },
+  "11/18/2026 MIL@MIA": {
+   "named": 0,
+   "not_yet_submitted": 2
+  },
+  "11/18/2026 PHI@ORL": {
+   "named": 0,
+   "not_yet_submitted": 2
+  },
+  "11/18/2026 WAS@TOR": {
+   "named": 0,
+   "not_yet_submitted": 2
+  },
+  "date-not-printed BOS@DEN": {
+   "named": 0,
+   "not_yet_submitted": 2
+  },
+  "date-not-printed GSW@DAL": {
+   "named": 0,
+   "not_yet_submitted": 2
+  },
+  "date-not-printed PHX@SAC": {
+   "named": 0,
+   "not_yet_submitted": 2
+  },
+  "date-not-printed UTA@LAL": {
+   "named": 0,
+   "not_yet_submitted": 2
+  },
+  "date-not-printed matchup-not-printed": {
+   "named": 1,
+   "not_yet_submitted": 0
+  }
+ },
+ "gaps": [
+  {
+   "what": "Reason text for the torn fragment",
+   "rows_affected": 1,
+   "why": "the render splits the cell; the fragment reads only 'Soreness'",
+   "treatment": "left unresolved"
+  },
+  {
+   "what": "Game date for GSW@DAL / BOS@DEN / PHX@SAC / UTA@LAL",
+   "rows_affected": 8,
+   "why": "the final page prints no game-date cell for these four matchups",
+   "treatment": "game_date null in the capture; the official schedule page is the only source that carries it, and it is linked"
+  },
+  {
+   "what": "Matchup for Reaves, Austin (Los Angeles Lakers)",
+   "rows_affected": 1,
+   "why": "his row is detached from its block by a page break",
+   "treatment": "matchup null; team is printed and kept"
+  }
+ ],
+ "sources": [
+  "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_10_30AM.pdf",
+  "https://official.nba.com/nba-injury-report-2026-27-season/",
+  "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_30PM.pdf",
+  "https://www.nba.com/schedule?date=2026-11-17"
+ ]
+}

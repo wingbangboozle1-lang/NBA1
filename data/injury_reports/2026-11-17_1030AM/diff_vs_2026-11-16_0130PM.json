@@ -1,0 +1,550 @@
+{
+ "title": "Consecutive injury-report diff (game-day aware) — 11/16/2026 01:30 PM ET -> 11/17/2026 10:30 AM ET",
+ "diff_of": [
+  {
+   "edition": "11/16/2026 01:30 PM ET",
+   "file": "data/official/injury_2026-11-16_0130PM_7ec9e7a3.json",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_30PM.pdf",
+   "sha256": "2d392646a6d743b01a10e8af82541267e7045623066c12ed21115d4f5c60ae72"
+  },
+  {
+   "edition": "11/17/2026 10:30 AM ET",
+   "file": "data/official/injury_2026-11-17_1030AM_c5487cbb.json",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_10_30AM.pdf",
+   "sha256": "50dcef781b66b595b5515e30aefb1ddcd3672c1048e711fd40045e9bf8266784"
+  }
+ ],
+ "revision_time_et": {
+  "from": "2026-11-16 01:30 PM ET",
+  "to": "2026-11-17 10:30 AM ET"
+ },
+ "retrieval_time_utc": {
+  "from": "2026-11-16T19:1xZ",
+  "to": "2026-11-17T15:44Z"
+ },
+ "key": "(game_date, matchup, team, player)",
+ "rule": "Grouped by (game_date, matchup) — NOT by matchup alone, because the same matchup can appear on consecutive game days (POR@MIN is played on 11/16 and again on 11/17 here, a back-to-back). Comparing the two editions by matchup alone would report a player's status from the 11/16 filing as 'removed' when in fact the 11/17 block is simply not filed yet. That defect was measured and fixed in this diff; see `collision_fixed`. Only a game day present in BOTH editions is compared row by row.",
+ "collision_fixed": {
+  "matchup": "POR@MIN",
+  "why": "played 2026-11-16 (both teams filed) and again 2026-11-17 (neither team filed at 10:30 AM)",
+  "effect_if_keyed_on_matchup_alone": "8 players falsely reported as 'removed' from the report"
+ },
+ "groups": {
+  "compared": [
+   [
+    "11/17/2026",
+    "CHA@LAL"
+   ],
+   [
+    "11/17/2026",
+    "DET@SAS"
+   ],
+   [
+    "11/17/2026",
+    "NYK@TOR"
+   ],
+   [
+    "11/17/2026",
+    "POR@MIN"
+   ],
+   [
+    "11/17/2026",
+    "UTA@LAC"
+   ]
+  ],
+  "closed_in_newer": [
+   [
+    "11/16/2026",
+    "CHI@CLE"
+   ],
+   [
+    "11/16/2026",
+    "GSW@NOP"
+   ],
+   [
+    "11/16/2026",
+    "HOU@MIA"
+   ],
+   [
+    "11/16/2026",
+    "MEM@WAS"
+   ],
+   [
+    "11/16/2026",
+    "ORL@BOS"
+   ],
+   [
+    "11/16/2026",
+    "PHI@BKN"
+   ],
+   [
+    "11/16/2026",
+    "PHX@DEN"
+   ],
+   [
+    "11/16/2026",
+    "POR@MIN"
+   ]
+  ],
+  "opened_in_newer": [
+   [
+    "11/18/2026",
+    "ATL@OKC"
+   ],
+   [
+    "11/18/2026",
+    "CHI@BKN"
+   ],
+   [
+    "11/18/2026",
+    "DET@NOP"
+   ],
+   [
+    "11/18/2026",
+    "HOU@IND"
+   ],
+   [
+    "11/18/2026",
+    "MEM@CLE"
+   ],
+   [
+    "11/18/2026",
+    "MIL@MIA"
+   ],
+   [
+    "11/18/2026",
+    "PHI@ORL"
+   ],
+   [
+    "11/18/2026",
+    "WAS@TOR"
+   ],
+   [
+    null,
+    "BOS@DEN"
+   ],
+   [
+    null,
+    "GSW@DAL"
+   ],
+   [
+    null,
+    null
+   ],
+   [
+    null,
+    "PHX@SAC"
+   ],
+   [
+    null,
+    "UTA@LAL"
+   ]
+  ]
+ },
+ "counts": {
+  "status_changes": 0,
+  "reason_changes_same_status": 0,
+  "players_added_to_a_compared_game_day": 32,
+  "players_removed_from_a_compared_game_day": 0,
+  "prev_rows": 87,
+  "cur_rows": 59
+ },
+ "changes": [],
+ "added": [
+  {
+   "game_date": "11/17/2026",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "player": "Ajayi, Michael",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "player": "Boswell, Kylan",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "player": "Knueppel, Kon",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "player": "Schroder, Dennis",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Hamstring Strain"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "CHA@LAL",
+   "team": "Charlotte Hornets",
+   "player": "Steinbach, Hannes",
+   "status": "Out",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "CHA@LAL",
+   "team": "Los Angeles Lakers",
+   "player": "Grimes, Quentin",
+   "status": "Available",
+   "reason": "Injury/Illness - Right Finger Splint"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "CHA@LAL",
+   "team": "Los Angeles Lakers",
+   "player": "Kessler, Walker",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Lower Leg"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Duren, Jalen",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hamstring Strain"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Holland II, Ronald",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Contusion / Bone Bruise"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Joe, Isaiah",
+   "status": "Doubtful",
+   "reason": "Injury/Illness - Right Hip Contusion"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Okorie, Ebuka",
+   "status": "Out",
+   "reason": "G League - On Assignment"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Onyenso, Ugonna",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Prince, Taurean",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Soreness"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "DET@SAS",
+   "team": "Detroit Pistons",
+   "player": "Robinson, Duncan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Quadriceps Strain"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Brown, Maliq",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Gillespie, Ja'Kobi",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Harris, Tobias",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Calf Strain"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "DET@SAS",
+   "team": "San Antonio Spurs",
+   "player": "Quaintance, Jayden",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Surgery"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "player": "Bittle, Nate",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Foot Avulsion Fracture"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "player": "Leonard, Kawhi",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Injury Management"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "player": "McCullar Jr., Kevin",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "NYK@TOR",
+   "team": "Toronto Raptors",
+   "player": "Smith, Malachi",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers",
+   "player": "Beal, Bradley",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Knee Injury Management"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers",
+   "player": "Ingram, Brandon",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Heel Surgery"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers",
+   "player": "Miller, Jordan",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Rotator Cuff Surgery"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "UTA@LAC",
+   "team": "LA Clippers",
+   "player": "Niederhauser, Yanic Konan",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Lisfranc Surgery"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "player": "Bufkin, Kobe",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "player": "Hayes, Jaxson",
+   "status": "Out",
+   "reason": "Injury/Illness - Left Knee Strain"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "player": "Ingram, Harrison",
+   "status": "Out",
+   "reason": "G League - Two-Way"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "player": "Jackson Jr., Jaren",
+   "status": "Out",
+   "reason": "Injury/Illness - Right MCL Tear"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "player": "Markkanen, Lauri",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Hand Fracture"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "UTA@LAC",
+   "team": "Utah Jazz",
+   "player": "Nurkic, Jusuf",
+   "status": "Out",
+   "reason": "Injury/Illness - Right Right Foot; 2nd Plantar Plate Tear"
+  }
+ ],
+ "removed": [],
+ "not_yet_submitted_cur": [
+  {
+   "game_date": "11/17/2026",
+   "matchup": "POR@MIN",
+   "team": "Portland Trail Blazers"
+  },
+  {
+   "game_date": "11/17/2026",
+   "matchup": "POR@MIN",
+   "team": "Minnesota Timberwolves"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "HOU@IND",
+   "team": "Houston Rockets"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "HOU@IND",
+   "team": "Indiana Pacers"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "MEM@CLE",
+   "team": "Memphis Grizzlies"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "MEM@CLE",
+   "team": "Cleveland Cavaliers"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "MIL@MIA",
+   "team": "Milwaukee Bucks"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "MIL@MIA",
+   "team": "Miami Heat"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "PHI@ORL",
+   "team": "Philadelphia 76ers"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "PHI@ORL",
+   "team": "Orlando Magic"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "CHI@BKN",
+   "team": "Chicago Bulls"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "CHI@BKN",
+   "team": "Brooklyn Nets"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "WAS@TOR",
+   "team": "Washington Wizards"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "WAS@TOR",
+   "team": "Toronto Raptors"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "ATL@OKC",
+   "team": "Atlanta Hawks"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "ATL@OKC",
+   "team": "Oklahoma City Thunder"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "DET@NOP",
+   "team": "Detroit Pistons"
+  },
+  {
+   "game_date": "11/18/2026",
+   "matchup": "DET@NOP",
+   "team": "New Orleans Pelicans"
+  },
+  {
+   "game_date": null,
+   "matchup": "GSW@DAL",
+   "team": "Golden State Warriors"
+  },
+  {
+   "game_date": null,
+   "matchup": "GSW@DAL",
+   "team": "Dallas Mavericks"
+  },
+  {
+   "game_date": null,
+   "matchup": "BOS@DEN",
+   "team": "Boston Celtics"
+  },
+  {
+   "game_date": null,
+   "matchup": "BOS@DEN",
+   "team": "Denver Nuggets"
+  },
+  {
+   "game_date": null,
+   "matchup": "PHX@SAC",
+   "team": "Phoenix Suns"
+  },
+  {
+   "game_date": null,
+   "matchup": "PHX@SAC",
+   "team": "Sacramento Kings"
+  },
+  {
+   "game_date": null,
+   "matchup": "UTA@LAL",
+   "team": "Utah Jazz"
+  },
+  {
+   "game_date": null,
+   "matchup": "UTA@LAL",
+   "team": "Los Angeles Lakers"
+  }
+ ],
+ "sources": [
+  "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_30PM.pdf",
+  "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_10_30AM.pdf",
+  "https://official.nba.com/nba-injury-report-2026-27-season/",
+  "https://www.nba.com/schedule?date=2026-11-17"
+ ]
+}

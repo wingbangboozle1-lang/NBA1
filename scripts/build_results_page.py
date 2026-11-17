@@ -262,6 +262,11 @@ def player_logs_page():
 
     doc = json.load(open(cands[-1], encoding="utf-8"))
     cov = doc["coverage"]
+    # The 2026-11-15 capture predates a naming change; read whichever key the
+    # capture carries rather than inventing a count.
+    inj_count = (cov.get("players_on_2026_11_16_0130PM_report")
+                 if cov.get("players_on_2026_11_16_0130PM_report") is not None
+                 else cov.get("players_on_2026_11_15_0615PM_report"))
     body.append('<p class="lead">Minutes, points, rebounds and assists for <b>every player in the '
                 'official gamebook</b> of each finished game &mdash; not just the players on the '
                 'injury report, because a rotation question needs the players who actually played. '
@@ -274,7 +279,7 @@ def player_logs_page():
         "on the %s injury report."
         % (html.escape(doc["source_name"]), html.escape(doc["retrieved_utc"]),
            cov["games"], cov["player_rows"], cov["players_who_played"],
-           cov["players_on_2026_11_15_0615PM_report"], html.escape(cov["injury_report_edition"]))))
+           inj_count, html.escape(cov["injury_report_edition"]))))
 
     mc = doc.get("minutes_check") or {}
     body.append('<h2>The checks the parser must pass</h2>')
