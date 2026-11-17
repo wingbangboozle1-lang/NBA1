@@ -143,19 +143,26 @@ jobs:
           PYTHONPATH: "."
         run: |
           set -u
-          n=0
+          python3 -V
+          n=0; bad=0
           for t in scripts/test_*.py; do
             mod=$(echo "$t" | sed 's#/#.#g; s/\.py$//')
             if python3 -m unittest "$mod" >/tmp/t.log 2>&1; then
               echo "PASS  $mod"
             else
+              bad=1
+              # The runner log lives on a host the agent sandbox cannot read, so the
+              # failing tail is surfaced as a job annotation (visible through the API)
+              # instead of only in the log stream.
+              oneline=$(tail -30 /tmp/t.log | tr '\r' '\n' | sed 's/[\"]/\'/g' | awk 'NF' | tail -12 | paste -sd ' | ' -)
+              echo "::error file=${t}::${mod} failed: ${oneline:0:480}"
               echo "FAIL  $mod"
-              tail -25 /tmp/t.log
-              exit 1
+              tail -30 /tmp/t.log
             fi
             n=$((n+1))
           done
-          echo "$n test module(s) passed."
+          echo "$n test module(s) run, $bad failing."
+          [ "$bad" -eq 0 ] || exit 1
 
       - name: Static link and source check across every build
         run: python3 scripts/check_links.py
