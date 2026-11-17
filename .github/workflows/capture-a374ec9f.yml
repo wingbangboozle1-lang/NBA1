@@ -39,6 +39,10 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          # A full history: the commit step rebases onto the branch tip, and a
+          # depth-1 shallow clone cannot rebase reliably.
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -68,15 +72,35 @@ jobs:
 
       - name: Commit captures
         run: |
+          set -x
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/raw/gamebooks data/raw/injury_pdfs data/parsed/injury_diffs verify/2026-11-17-a374ec9f
+          git add -A data/raw/gamebooks data/raw/injury_pdfs data/parsed/injury_diffs verify/2026-11-17-a374ec9f
           if git diff --cached --quiet; then
             echo "no new capture payloads - nothing committed"
             exit 0
           fi
           git commit -m "Capture official gamebooks + newest injury editions (a374ec9f A03/A04) [skip ci]"
-          # Rebase in case the session pushed while the run was in flight; never
-          # force, so another session's or the owner's work is never discarded.
-          git pull --rebase origin arena/a374ec9f-nba1
-          git push origin HEAD:arena/a374ec9f-nba1
+          # Rebase onto the branch tip in case the session pushed while the run
+          # was in flight; never force, so another session's or the owner's
+          # work is never discarded.
+          pushed=0
+          for attempt in 1 2 3; do
+            git fetch origin arena/a374ec9f-nba1 || true
+            if git rebase FETCH_HEAD; then
+              if git push origin HEAD:arena/a374ec9f-nba1; then
+                echo "pushed on attempt ${attempt}"
+                pushed=1
+                break
+              fi
+            fi
+            echo "rebase/push attempt ${attempt} did not succeed"
+            sleep 10
+          done
+          if [ "$pushed" -ne 1 ]; then
+            echo "capture could not be pushed after 3 attempts - the payloads stay on the runner"
+            git log --oneline -5 || true
+            git status --porcelain | head -20 || true
+            exit 1
+          fi
