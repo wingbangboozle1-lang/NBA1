@@ -2,7 +2,7 @@
  "_meta": {
   "title": "Horizon picks v2 - every game in the 3-day pick window",
   "generated_by": "scripts/build_horizon_v2.py",
-  "generated_utc": "2026-11-16T19:31:59Z",
+  "generated_utc": "2026-11-17T15:52:30Z",
   "status_note": "no strategy has passed the validation gates in this repository, so every pick below is MODEL OUTPUT - UNVALIDATED with zero stake. The gate results are published so a reviewer can see exactly what each pick cleared and what it did not.",
   "gates": {
    "max_disagreement_pp": 4.0,
@@ -11,674 +11,39 @@
    "note": "a pick must survive every gate to be published as a stakeable pick. No strategy has passed the strategy validation gates in this repository, so every pick below is published as MODEL OUTPUT - UNVALIDATED with zero stake, which is the honest state of the evidence."
   },
   "home_court_anchor": {
-   "measured_home_win_rate": 0.5204,
-   "measured_home_win_rate_from_final_scores": 0.5204,
-   "hca_points_from_final_scores_crosscheck": 0.87,
+   "measured_home_win_rate": 0.5196,
+   "measured_home_win_rate_from_final_scores": 0.5196,
+   "hca_points_from_final_scores_crosscheck": 0.83,
    "primary_measurement": "the official standings HOME/ROAD columns (the largest official sample); the final-score corpus measurement is published beside it as a cross-check",
-   "measured_road_win_rate": 0.4796,
-   "games_measured": 196,
-   "final_score_home_wins": 102,
-   "final_score_home_games": 196,
-   "home_wins": 102,
-   "home_games": 196,
+   "measured_road_win_rate": 0.4804,
+   "games_measured": 204,
+   "final_score_home_wins": 106,
+   "final_score_home_games": 204,
+   "home_wins": 106,
+   "home_games": 204,
    "standings_cross_check": {
-    "home_win_rate": 0.5204,
-    "road_win_rate": 0.4796,
-    "home_games": 196,
-    "road_games": 196,
+    "home_win_rate": 0.5196,
+    "road_win_rate": 0.4804,
+    "home_games": 204,
+    "home_wins": 106,
+    "road_games": 204,
+    "road_wins": 98,
+    "derived_fields": [
+     "road_games",
+     "road_wins"
+    ],
     "source_url": "https://www.nba.com/standings"
    },
    "sources_agree": true,
-   "sigma_margin_used": 16.93,
+   "sigma_margin_used": 16.83,
    "sigma_margin_source": "population standard deviation of the margin on the official final-score corpus (finished games only; scheduled rows with placeholder scores are excluded by engine/model_v2.load_results)",
-   "hca_points": 0.87,
-   "hca_z": 0.0512,
+   "hca_points": 0.83,
+   "hca_z": 0.0491,
    "formula": "HCA_points = sigma_margin * Phi^-1(measured home win rate). The number of points is read off the measurement; nothing about it is fitted.",
    "status": "MEASURED - the home-court advantage is pinned to the official home win rate"
   }
  },
  "picks": [
-  {
-   "availability_provenance": {
-    "pick_team": "measured",
-    "opponent": "measured"
-   },
-   "publication_verdict": "PASS - publishable",
-   "date": "2026-11-16",
-   "game_id": "0022600245",
-   "matchup": "ORL@BOS",
-   "pick": "BOS wins",
-   "side": "home",
-   "team": "BOS",
-   "opponent": "ORL",
-   "model_probability": 0.8744,
-   "model_ml": -696,
-   "line_total": 204.4,
-   "line_spread_home": 19.4,
-   "confidence_signal_pp": 1.08,
-   "rotation_availability_pick_team": {
-    "team": "BOS",
-    "rotation_players": 1,
-    "rotation_players_named": [
-     "jayson tatum"
-    ],
-    "listed_on_injury_report": 1,
-    "out": [],
-    "questionable": [
-     "Queta, Neemias"
-    ],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_opponent": {
-    "team": "ORL",
-    "rotation_players": 4,
-    "rotation_players_named": [
-     "desmond bane",
-     "franz wagner",
-     "paolo banchero",
-     "wendell carter jr"
-    ],
-    "listed_on_injury_report": 4,
-    "out": [
-     "Banchero, Paolo",
-     "Isaac, Jonathan",
-     "Nelson, Izaiyah",
-     "Penda, Noah"
-    ],
-    "questionable": [],
-    "rotation_out": [
-     "Banchero, Paolo"
-    ],
-    "rotation_questionable": [],
-    "rotation_out_count": 1,
-    "rotation_questionable_count": 0,
-    "availability_pct": 75.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rest_days_pick_team": 0,
-   "rest_days_opponent": 2,
-   "back_to_back_pick_team": true,
-   "travel_miles_opponent": 1116.0,
-   "luck_z_pick_team": -0.38,
-   "gates_passed": [
-    "disagreement <= 4.0 pp",
-    "model probability >= 0.55",
-    "BOS inside the luck band",
-    "ORL inside the luck band",
-    "minutes redistribution computed"
-   ],
-   "gates_failed": [],
-   "gate_verdict": "PASS",
-   "stake_units": 0,
-   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
-   "source_url": "https://www.nba.com/game/orl-vs-bos-0022600245"
-  },
-  {
-   "availability_provenance": {
-    "pick_team": "measured",
-    "opponent": "not captured"
-   },
-   "publication_verdict": "FAIL - minutes redistribution not computable for one of the teams (per-player minutes not captured)",
-   "date": "2026-11-16",
-   "game_id": "0022600246",
-   "matchup": "CHI@CLE",
-   "pick": "CLE wins",
-   "side": "home",
-   "team": "CLE",
-   "opponent": "CHI",
-   "model_probability": 0.8009,
-   "model_ml": -402,
-   "line_total": 250.4,
-   "line_spread_home": 14.3,
-   "confidence_signal_pp": 1.15,
-   "rotation_availability_pick_team": {
-    "team": "CLE",
-    "rotation_players": 2,
-    "rotation_players_named": [
-     "donovan mitchell",
-     "james harden"
-    ],
-    "listed_on_injury_report": 7,
-    "out": [
-     "Diop, Khalifa",
-     "Merrill, Sam",
-     "Mobley, Evan",
-     "Tomlin, Nae'Qwan",
-     "Udeh, Jr., Ernest"
-    ],
-    "questionable": [
-     "Tyson, Jaylon",
-     "Watson, Peyton"
-    ],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_opponent": {
-    "team": "CHI",
-    "status": "not captured",
-    "rotation_players": null,
-    "out": null,
-    "questionable": null,
-    "note": "official per-player minutes not captured for this team"
-   },
-   "rest_days_pick_team": 1,
-   "rest_days_opponent": 1,
-   "back_to_back_pick_team": false,
-   "travel_miles_opponent": null,
-   "luck_z_pick_team": 0.01,
-   "gates_passed": [
-    "disagreement <= 4.0 pp",
-    "model probability >= 0.55",
-    "CLE inside the luck band",
-    "CHI inside the luck band"
-   ],
-   "gates_failed": [
-    "minutes redistribution not computable for one of the teams (per-player minutes not captured)"
-   ],
-   "gate_verdict": "FAIL",
-   "stake_units": 0,
-   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
-   "source_url": "https://www.nba.com/game/chi-vs-cle-0022600246"
-  },
-  {
-   "availability_provenance": {
-    "pick_team": "not captured",
-    "opponent": "measured"
-   },
-   "publication_verdict": "FAIL - minutes redistribution not computable for one of the teams (per-player minutes not captured)",
-   "date": "2026-11-16",
-   "game_id": "0022600247",
-   "matchup": "MEM@WAS",
-   "pick": "MEM wins",
-   "side": "away",
-   "team": "MEM",
-   "opponent": "WAS",
-   "model_probability": 0.8009,
-   "model_ml": -402,
-   "line_total": 229.4,
-   "line_spread_home": -14.3,
-   "confidence_signal_pp": 0.68,
-   "rotation_availability_pick_team": {
-    "team": "MEM",
-    "status": "not captured",
-    "rotation_players": null,
-    "out": null,
-    "questionable": null,
-    "note": "official per-player minutes not captured for this team"
-   },
-   "rotation_availability_opponent": {
-    "team": "WAS",
-    "rotation_players": 4,
-    "rotation_players_named": [
-     "aj dybantsa",
-     "anthony davis",
-     "kyshawn george",
-     "trae young"
-    ],
-    "listed_on_injury_report": 6,
-    "out": [
-     "Beekman, Reece",
-     "Champagne, Justin",
-     "Vukcevic, Tristan",
-     "Watkins, Jamir"
-    ],
-    "questionable": [
-     "Johnson, Tre",
-     "Okpara, Felix"
-    ],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rest_days_pick_team": 1,
-   "rest_days_opponent": 0,
-   "back_to_back_pick_team": false,
-   "travel_miles_opponent": null,
-   "luck_z_pick_team": -1.13,
-   "gates_passed": [
-    "disagreement <= 4.0 pp",
-    "model probability >= 0.55",
-    "WAS inside the luck band",
-    "MEM inside the luck band"
-   ],
-   "gates_failed": [
-    "minutes redistribution not computable for one of the teams (per-player minutes not captured)"
-   ],
-   "gate_verdict": "FAIL",
-   "stake_units": 0,
-   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
-   "source_url": "https://www.nba.com/game/mem-vs-was-0022600247"
-  },
-  {
-   "availability_provenance": {
-    "pick_team": "measured",
-    "opponent": "measured"
-   },
-   "publication_verdict": "PASS - publishable",
-   "date": "2026-11-16",
-   "game_id": "0022600248",
-   "matchup": "PHI@BKN",
-   "pick": "PHI wins",
-   "side": "away",
-   "team": "PHI",
-   "opponent": "BKN",
-   "model_probability": 0.5922,
-   "model_ml": -145,
-   "line_total": 221.1,
-   "line_spread_home": -3.9,
-   "confidence_signal_pp": 0.0,
-   "rotation_availability_pick_team": {
-    "team": "PHI",
-    "rotation_players": 4,
-    "rotation_players_named": [
-     "jaylen brown",
-     "lebron james",
-     "tyrese maxey",
-     "vj edgecombe"
-    ],
-    "listed_on_injury_report": 5,
-    "out": [
-     "Barlow, Dominick",
-     "Bona, Adem",
-     "Hukporti, Ariel",
-     "James, LeBron"
-    ],
-    "questionable": [
-     "Embiid, Joel"
-    ],
-    "rotation_out": [
-     "James, LeBron"
-    ],
-    "rotation_questionable": [],
-    "rotation_out_count": 1,
-    "rotation_questionable_count": 0,
-    "availability_pct": 75.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_opponent": {
-    "team": "BKN",
-    "rotation_players": 2,
-    "rotation_players_named": [
-     "julius randle",
-     "michael porter jr"
-    ],
-    "listed_on_injury_report": 5,
-    "out": [
-     "Bilodeau, Tyler",
-     "Jefferson, Joshua",
-     "Nelson, Grant",
-     "Powell, Drake",
-     "Saraf, Ben"
-    ],
-    "questionable": [],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rest_days_pick_team": 0,
-   "rest_days_opponent": 1,
-   "back_to_back_pick_team": true,
-   "travel_miles_opponent": 83.0,
-   "luck_z_pick_team": -0.28,
-   "gates_passed": [
-    "disagreement <= 4.0 pp",
-    "model probability >= 0.55",
-    "BKN inside the luck band",
-    "PHI inside the luck band",
-    "minutes redistribution computed"
-   ],
-   "gates_failed": [],
-   "gate_verdict": "PASS",
-   "stake_units": 0,
-   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
-   "source_url": "https://www.nba.com/game/phi-vs-bkn-0022600248"
-  },
-  {
-   "availability_provenance": {
-    "pick_team": "measured",
-    "opponent": "measured"
-   },
-   "publication_verdict": "PASS - publishable",
-   "date": "2026-11-16",
-   "game_id": "0022600249",
-   "matchup": "HOU@MIA",
-   "pick": "HOU wins",
-   "side": "away",
-   "team": "HOU",
-   "opponent": "MIA",
-   "model_probability": 0.6398,
-   "model_ml": -178,
-   "line_total": 234.1,
-   "line_spread_home": -6.1,
-   "confidence_signal_pp": 0.2,
-   "rotation_availability_pick_team": {
-    "team": "HOU",
-    "rotation_players": 4,
-    "rotation_players_named": [
-     "alperen sengun",
-     "amen thompson",
-     "jabari smith jr",
-     "kevin durant"
-    ],
-    "listed_on_injury_report": 6,
-    "out": [
-     "Adams, Steven",
-     "Capela, Clint",
-     "Copeland, Quadir",
-     "Phillips, Julian",
-     "Smart, Marcus"
-    ],
-    "questionable": [
-     "Thompson, Amen"
-    ],
-    "rotation_out": [],
-    "rotation_questionable": [
-     "Thompson, Amen"
-    ],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 1,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_opponent": {
-    "team": "MIA",
-    "rotation_players": 2,
-    "rotation_players_named": [
-     "bam adebayo",
-     "davion mitchell"
-    ],
-    "listed_on_injury_report": 4,
-    "out": [
-     "Goldin, Vladislav"
-    ],
-    "questionable": [
-     "Jovic, Nikola",
-     "Larsson, Pelle"
-    ],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rest_days_pick_team": 0,
-   "rest_days_opponent": 1,
-   "back_to_back_pick_team": true,
-   "travel_miles_opponent": 925.0,
-   "luck_z_pick_team": 0.65,
-   "gates_passed": [
-    "disagreement <= 4.0 pp",
-    "model probability >= 0.55",
-    "MIA inside the luck band",
-    "HOU inside the luck band",
-    "minutes redistribution computed"
-   ],
-   "gates_failed": [],
-   "gate_verdict": "PASS",
-   "stake_units": 0,
-   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
-   "source_url": "https://www.nba.com/game/hou-vs-mia-0022600249"
-  },
-  {
-   "availability_provenance": {
-    "pick_team": "measured",
-    "opponent": "measured"
-   },
-   "publication_verdict": "FAIL - model probability 0.536 < 0.55",
-   "date": "2026-11-16",
-   "game_id": "0022600250",
-   "matchup": "POR@MIN",
-   "pick": "MIN wins",
-   "side": "home",
-   "team": "MIN",
-   "opponent": "POR",
-   "model_probability": 0.5364,
-   "model_ml": -116,
-   "line_total": 229.2,
-   "line_spread_home": 1.5,
-   "confidence_signal_pp": 0.23,
-   "rotation_availability_pick_team": {
-    "team": "MIN",
-    "rotation_players": 2,
-    "rotation_players_named": [
-     "anthony edwards",
-     "jaden mcdaniels"
-    ],
-    "listed_on_injury_report": 4,
-    "out": [
-     "Clark, Jaylen",
-     "DiVincenzo, Donte",
-     "Edwards, Anthony"
-    ],
-    "questionable": [],
-    "rotation_out": [
-     "Edwards, Anthony"
-    ],
-    "rotation_questionable": [],
-    "rotation_out_count": 1,
-    "rotation_questionable_count": 0,
-    "availability_pct": 50.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_opponent": {
-    "team": "POR",
-    "rotation_players": 1,
-    "rotation_players_named": [
-     "deni avdija"
-    ],
-    "listed_on_injury_report": 4,
-    "out": [
-     "Krejci, Vit",
-     "Morant, Ja",
-     "Sharpe, Shaedon",
-     "Youngblood, Chris"
-    ],
-    "questionable": [],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rest_days_pick_team": 1,
-   "rest_days_opponent": 2,
-   "back_to_back_pick_team": false,
-   "travel_miles_opponent": 1511.0,
-   "luck_z_pick_team": -0.53,
-   "gates_passed": [
-    "disagreement <= 4.0 pp",
-    "MIN inside the luck band",
-    "POR inside the luck band",
-    "minutes redistribution computed"
-   ],
-   "gates_failed": [
-    "model probability 0.536 < 0.55"
-   ],
-   "gate_verdict": "FAIL",
-   "stake_units": 0,
-   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
-   "source_url": "https://www.nba.com/game/por-vs-min-0022600250"
-  },
-  {
-   "availability_provenance": {
-    "pick_team": "measured",
-    "opponent": "measured"
-   },
-   "publication_verdict": "PASS - publishable",
-   "date": "2026-11-16",
-   "game_id": "0022600251",
-   "matchup": "GSW@NOP",
-   "pick": "GSW wins",
-   "side": "away",
-   "team": "GSW",
-   "opponent": "NOP",
-   "model_probability": 0.8134,
-   "model_ml": -436,
-   "line_total": 241.2,
-   "line_spread_home": -15.1,
-   "confidence_signal_pp": 1.07,
-   "rotation_availability_pick_team": {
-    "team": "GSW",
-    "rotation_players": 1,
-    "rotation_players_named": [
-     "brandin podziemski"
-    ],
-    "listed_on_injury_report": 6,
-    "out": [
-     "Curry, Stephen",
-     "Moody, Moses",
-     "Porzingis, Kristaps",
-     "Williams, Brandon"
-    ],
-    "questionable": [
-     "Santos, Gui"
-    ],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_opponent": {
-    "team": "NOP",
-    "rotation_players": 2,
-    "rotation_players_named": [
-     "trey murphy iii",
-     "zion williamson"
-    ],
-    "listed_on_injury_report": 8,
-    "out": [
-     "Mathurin, Benedict",
-     "McGowens, Bryce",
-     "Murphy III, Trey",
-     "Murray, Dejounte",
-     "Watford, Trendon"
-    ],
-    "questionable": [
-     "Dia, Malik",
-     "Pierre Jr., Jaron",
-     "Reese, Julian"
-    ],
-    "rotation_out": [
-     "Murphy III, Trey"
-    ],
-    "rotation_questionable": [],
-    "rotation_out_count": 1,
-    "rotation_questionable_count": 0,
-    "availability_pct": 50.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rest_days_pick_team": 2,
-   "rest_days_opponent": 1,
-   "back_to_back_pick_team": false,
-   "travel_miles_opponent": 503.0,
-   "luck_z_pick_team": 0.65,
-   "gates_passed": [
-    "disagreement <= 4.0 pp",
-    "model probability >= 0.55",
-    "NOP inside the luck band",
-    "GSW inside the luck band",
-    "minutes redistribution computed"
-   ],
-   "gates_failed": [],
-   "gate_verdict": "PASS",
-   "stake_units": 0,
-   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
-   "source_url": "https://www.nba.com/game/gsw-vs-nop-0022600251"
-  },
-  {
-   "availability_provenance": {
-    "pick_team": "measured",
-    "opponent": "measured"
-   },
-   "publication_verdict": "PASS - publishable",
-   "date": "2026-11-16",
-   "game_id": "0022600252",
-   "matchup": "PHX@DEN",
-   "pick": "DEN wins",
-   "side": "home",
-   "team": "DEN",
-   "opponent": "PHX",
-   "model_probability": 0.695,
-   "model_ml": -228,
-   "line_total": 223.5,
-   "line_spread_home": 8.6,
-   "confidence_signal_pp": 0.65,
-   "rotation_availability_pick_team": {
-    "team": "DEN",
-    "rotation_players": 3,
-    "rotation_players_named": [
-     "christian braun",
-     "jamal murray",
-     "nikola jokic"
-    ],
-    "listed_on_injury_report": 4,
-    "out": [
-     "Holmes II, DaRon",
-     "Nembhard, Ryan",
-     "Strawther, Julian",
-     "Whitmore, Cam"
-    ],
-    "questionable": [],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_opponent": {
-    "team": "PHX",
-    "rotation_players": 1,
-    "rotation_players_named": [
-     "devin booker"
-    ],
-    "listed_on_injury_report": 0,
-    "out": [],
-    "questionable": [],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rest_days_pick_team": 1,
-   "rest_days_opponent": 0,
-   "back_to_back_pick_team": false,
-   "travel_miles_opponent": 585.0,
-   "luck_z_pick_team": 0.04,
-   "gates_passed": [
-    "disagreement <= 4.0 pp",
-    "model probability >= 0.55",
-    "DEN inside the luck band",
-    "PHX inside the luck band",
-    "minutes redistribution computed"
-   ],
-   "gates_failed": [],
-   "gate_verdict": "PASS",
-   "stake_units": 0,
-   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
-   "source_url": "https://www.nba.com/game/phx-vs-den-0022600252"
-  },
   {
    "availability_provenance": {
     "pick_team": "measured",
@@ -692,9 +57,9 @@
    "side": "away",
    "team": "NYK",
    "opponent": "TOR",
-   "model_probability": 0.5865,
+   "model_probability": 0.587,
    "model_ml": -142,
-   "line_total": 209.4,
+   "line_total": 207.3,
    "line_spread_home": -3.7,
    "confidence_signal_pp": 0.46,
    "rotation_availability_pick_team": {
@@ -735,7 +100,7 @@
    "rest_days_opponent": 1,
    "back_to_back_pick_team": false,
    "travel_miles_opponent": 0.0,
-   "luck_z_pick_team": -0.52,
+   "luck_z_pick_team": -0.49,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -764,7 +129,7 @@
    "opponent": "MIN",
    "model_probability": 0.5216,
    "model_ml": -109,
-   "line_total": 229.2,
+   "line_total": 229.1,
    "line_spread_home": -0.9,
    "confidence_signal_pp": 0.23,
    "rotation_availability_pick_team": {
@@ -815,7 +180,7 @@
    "rest_days_opponent": 0,
    "back_to_back_pick_team": true,
    "travel_miles_opponent": 0.0,
-   "luck_z_pick_team": 0.02,
+   "luck_z_pick_team": -0.06,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "MIN inside the luck band",
@@ -843,11 +208,11 @@
    "side": "home",
    "team": "SAS",
    "opponent": "DET",
-   "model_probability": 0.6943,
-   "model_ml": -227,
-   "line_total": 220.2,
+   "model_probability": 0.6954,
+   "model_ml": -228,
+   "line_total": 220.0,
    "line_spread_home": 8.6,
-   "confidence_signal_pp": 0.0,
+   "confidence_signal_pp": 0.21,
    "rotation_availability_pick_team": {
     "team": "SAS",
     "status": "not captured",
@@ -876,7 +241,7 @@
    "rest_days_opponent": 2,
    "back_to_back_pick_team": false,
    "travel_miles_opponent": null,
-   "luck_z_pick_team": -0.83,
+   "luck_z_pick_team": -0.82,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -904,10 +269,10 @@
    "side": "home",
    "team": "LAL",
    "opponent": "CHA",
-   "model_probability": 0.8754,
-   "model_ml": -703,
-   "line_total": 215.2,
-   "line_spread_home": 19.5,
+   "model_probability": 0.8756,
+   "model_ml": -704,
+   "line_total": 215.1,
+   "line_spread_home": 19.4,
    "confidence_signal_pp": 0.73,
    "rotation_availability_pick_team": {
     "team": "LAL",
@@ -966,11 +331,11 @@
    "side": "home",
    "team": "LAC",
    "opponent": "UTA",
-   "model_probability": 0.6736,
-   "model_ml": -206,
-   "line_total": 227.6,
-   "line_spread_home": 7.6,
-   "confidence_signal_pp": 0.43,
+   "model_probability": 0.6723,
+   "model_ml": -205,
+   "line_total": 226.9,
+   "line_spread_home": 7.5,
+   "confidence_signal_pp": 0.22,
    "rotation_availability_pick_team": {
     "team": "LAC",
     "rotation_players": 1,
@@ -1034,11 +399,11 @@
    "side": "away",
    "team": "MEM",
    "opponent": "CLE",
-   "model_probability": 0.6458,
-   "model_ml": -182,
-   "line_total": 237.8,
+   "model_probability": 0.6466,
+   "model_ml": -183,
+   "line_total": 238.9,
    "line_spread_home": -6.3,
-   "confidence_signal_pp": 0.22,
+   "confidence_signal_pp": 0.44,
    "rotation_availability_pick_team": {
     "team": "MEM",
     "status": "not captured",
@@ -1077,7 +442,7 @@
    "rest_days_opponent": 1,
    "back_to_back_pick_team": false,
    "travel_miles_opponent": 305.0,
-   "luck_z_pick_team": -1.13,
+   "luck_z_pick_team": -1.04,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -1105,9 +470,9 @@
    "side": "away",
    "team": "HOU",
    "opponent": "IND",
-   "model_probability": 0.692,
-   "model_ml": -225,
-   "line_total": 222.8,
+   "model_probability": 0.693,
+   "model_ml": -226,
+   "line_total": 222.9,
    "line_spread_home": -8.5,
    "confidence_signal_pp": 0.39,
    "rotation_availability_pick_team": {
@@ -1160,7 +525,7 @@
    "rest_days_opponent": 2,
    "back_to_back_pick_team": false,
    "travel_miles_opponent": 1026.0,
-   "luck_z_pick_team": 0.65,
+   "luck_z_pick_team": 0.08,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -1190,8 +555,8 @@
    "model_probability": 0.8317,
    "model_ml": -494,
    "line_total": 240.7,
-   "line_spread_home": 16.3,
-   "confidence_signal_pp": 0.81,
+   "line_spread_home": 16.2,
+   "confidence_signal_pp": 0.65,
    "rotation_availability_pick_team": {
     "team": "MIA",
     "rotation_players": 2,
@@ -1226,7 +591,7 @@
    "rest_days_opponent": 2,
    "back_to_back_pick_team": false,
    "travel_miles_opponent": 1270.0,
-   "luck_z_pick_team": -0.12,
+   "luck_z_pick_team": 0.44,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -1254,7 +619,7 @@
    "side": "away",
    "team": "PHI",
    "opponent": "ORL",
-   "model_probability": 0.5934,
+   "model_probability": 0.594,
    "model_ml": -146,
    "line_total": 215.6,
    "line_spread_home": -4.0,
@@ -1317,7 +682,7 @@
    "rest_days_opponent": 1,
    "back_to_back_pick_team": false,
    "travel_miles_opponent": 938.0,
-   "luck_z_pick_team": -0.28,
+   "luck_z_pick_team": -0.19,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -1344,9 +709,9 @@
    "side": "home",
    "team": "BKN",
    "opponent": "CHI",
-   "model_probability": 0.6408,
-   "model_ml": -178,
-   "line_total": 242.4,
+   "model_probability": 0.6416,
+   "model_ml": -179,
+   "line_total": 243.1,
    "line_spread_home": 6.1,
    "confidence_signal_pp": 0.45,
    "rotation_availability_pick_team": {
@@ -1384,7 +749,7 @@
    "rest_days_opponent": 1,
    "back_to_back_pick_team": false,
    "travel_miles_opponent": 405.0,
-   "luck_z_pick_team": -0.07,
+   "luck_z_pick_team": -0.14,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -1412,11 +777,11 @@
    "side": "home",
    "team": "TOR",
    "opponent": "WAS",
-   "model_probability": 0.6695,
+   "model_probability": 0.6704,
    "model_ml": -203,
-   "line_total": 224.6,
+   "line_total": 223.9,
    "line_spread_home": 7.4,
-   "confidence_signal_pp": 0.0,
+   "confidence_signal_pp": 0.21,
    "rotation_availability_pick_team": {
     "team": "TOR",
     "rotation_players": 2,
@@ -1492,11 +857,11 @@
    "side": "away",
    "team": "DET",
    "opponent": "NOP",
-   "model_probability": 0.7603,
-   "model_ml": -317,
+   "model_probability": 0.7617,
+   "model_ml": -320,
    "line_total": 237.4,
    "line_spread_home": -12.0,
-   "confidence_signal_pp": 1.19,
+   "confidence_signal_pp": 1.02,
    "rotation_availability_pick_team": {
     "team": "DET",
     "rotation_players": 1,
@@ -1573,9 +938,9 @@
    "side": "home",
    "team": "OKC",
    "opponent": "ATL",
-   "model_probability": 0.6025,
+   "model_probability": 0.6032,
    "model_ml": -152,
-   "line_total": 228.7,
+   "line_total": 229.1,
    "line_spread_home": 4.4,
    "confidence_signal_pp": 0.23,
    "rotation_availability_pick_team": {
@@ -1614,7 +979,7 @@
    "rest_days_opponent": 2,
    "back_to_back_pick_team": false,
    "travel_miles_opponent": 733.0,
-   "luck_z_pick_team": 0.7,
+   "luck_z_pick_team": 0.68,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -1641,11 +1006,11 @@
    "side": "away",
    "team": "BOS",
    "opponent": "DEN",
-   "model_probability": 0.6325,
-   "model_ml": -172,
-   "line_total": 210.1,
+   "model_probability": 0.6333,
+   "model_ml": -173,
+   "line_total": 210.4,
    "line_spread_home": -5.7,
-   "confidence_signal_pp": 0.84,
+   "confidence_signal_pp": 0.63,
    "rotation_availability_pick_team": {
     "team": "BOS",
     "rotation_players": 1,
@@ -1691,7 +1056,7 @@
    "rest_days_opponent": 1,
    "back_to_back_pick_team": false,
    "travel_miles_opponent": 1766.0,
-   "luck_z_pick_team": -0.38,
+   "luck_z_pick_team": -0.85,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -1718,11 +1083,11 @@
    "side": "away",
    "team": "GSW",
    "opponent": "DAL",
-   "model_probability": 0.5626,
+   "model_probability": 0.563,
    "model_ml": -129,
-   "line_total": 228.8,
+   "line_total": 228.2,
    "line_spread_home": -2.7,
-   "confidence_signal_pp": 0.0,
+   "confidence_signal_pp": 0.23,
    "rotation_availability_pick_team": {
     "team": "GSW",
     "rotation_players": 1,
@@ -1766,7 +1131,7 @@
    "rest_days_opponent": 2,
    "back_to_back_pick_team": false,
    "travel_miles_opponent": 443.0,
-   "luck_z_pick_team": 0.65,
+   "luck_z_pick_team": -0.05,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -1793,9 +1158,9 @@
    "side": "home",
    "team": "LAL",
    "opponent": "UTA",
-   "model_probability": 0.886,
-   "model_ml": -777,
-   "line_total": 235.8,
+   "model_probability": 0.8874,
+   "model_ml": -788,
+   "line_total": 235.9,
    "line_spread_home": 20.4,
    "confidence_signal_pp": 0.57,
    "rotation_availability_pick_team": {
@@ -1862,11 +1227,11 @@
    "side": "away",
    "team": "PHX",
    "opponent": "SAC",
-   "model_probability": 0.635,
+   "model_probability": 0.6356,
    "model_ml": -174,
-   "line_total": 230.3,
+   "line_total": 230.8,
    "line_spread_home": -5.8,
-   "confidence_signal_pp": 0.21,
+   "confidence_signal_pp": 0.0,
    "rotation_availability_pick_team": {
     "team": "PHX",
     "rotation_players": 1,
@@ -1905,7 +1270,7 @@
    "rest_days_opponent": 2,
    "back_to_back_pick_team": false,
    "travel_miles_opponent": 886.0,
-   "luck_z_pick_team": 0.78,
+   "luck_z_pick_team": 1.1,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -1932,11 +1297,11 @@
    "side": "home",
    "team": "MEM",
    "opponent": "GSW",
-   "model_probability": 0.6386,
-   "model_ml": -177,
-   "line_total": 233.1,
-   "line_spread_home": 6.0,
-   "confidence_signal_pp": 0.22,
+   "model_probability": 0.6372,
+   "model_ml": -176,
+   "line_total": 233.3,
+   "line_spread_home": 5.9,
+   "confidence_signal_pp": 0.0,
    "rotation_availability_pick_team": {
     "team": "MEM",
     "status": "not captured",
@@ -1972,7 +1337,7 @@
    "rest_days_opponent": 0,
    "back_to_back_pick_team": true,
    "travel_miles_opponent": 420.0,
-   "luck_z_pick_team": -1.13,
+   "luck_z_pick_team": -1.04,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -2000,11 +1365,11 @@
    "side": "away",
    "team": "POR",
    "opponent": "MIL",
-   "model_probability": 0.8984,
-   "model_ml": -884,
-   "line_total": 233.1,
-   "line_spread_home": -21.5,
-   "confidence_signal_pp": 0.11,
+   "model_probability": 0.9008,
+   "model_ml": -908,
+   "line_total": 233.6,
+   "line_spread_home": -21.6,
+   "confidence_signal_pp": 0.32,
    "rotation_availability_pick_team": {
     "team": "POR",
     "rotation_players": 1,
@@ -2038,7 +1403,7 @@
    "rest_days_opponent": 0,
    "back_to_back_pick_team": false,
    "travel_miles_opponent": 298.0,
-   "luck_z_pick_team": 0.02,
+   "luck_z_pick_team": -0.06,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -2066,11 +1431,11 @@
    "side": "home",
    "team": "MIN",
    "opponent": "NYK",
-   "model_probability": 0.6324,
-   "model_ml": -172,
-   "line_total": 207.9,
+   "model_probability": 0.6331,
+   "model_ml": -173,
+   "line_total": 206.9,
    "line_spread_home": 5.7,
-   "confidence_signal_pp": 0.22,
+   "confidence_signal_pp": 0.0,
    "rotation_availability_pick_team": {
     "team": "MIN",
     "rotation_players": 2,
@@ -2115,7 +1480,7 @@
    "rest_days_opponent": 1,
    "back_to_back_pick_team": false,
    "travel_miles_opponent": 692.0,
-   "luck_z_pick_team": -0.53,
+   "luck_z_pick_team": -0.42,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -2142,10 +1507,10 @@
    "side": "home",
    "team": "SAS",
    "opponent": "LAC",
-   "model_probability": 0.8909,
-   "model_ml": -817,
-   "line_total": 226.9,
-   "line_spread_home": 20.8,
+   "model_probability": 0.89,
+   "model_ml": -809,
+   "line_total": 226.3,
+   "line_spread_home": 20.6,
    "confidence_signal_pp": 0.12,
    "rotation_availability_pick_team": {
     "team": "SAS",
@@ -2175,7 +1540,7 @@
    "rest_days_opponent": 1,
    "back_to_back_pick_team": false,
    "travel_miles_opponent": 1209.0,
-   "luck_z_pick_team": -0.83,
+   "luck_z_pick_team": -0.82,
    "gates_passed": [
     "disagreement <= 4.0 pp",
     "model probability >= 0.55",
@@ -2189,6 +1554,681 @@
    "stake_units": 0,
    "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
    "source_url": "https://www.nba.com/game/lac-vs-sas-0022600273"
+  },
+  {
+   "availability_provenance": {
+    "pick_team": "not yet published",
+    "opponent": "not captured"
+   },
+   "publication_verdict": "FAIL - minutes redistribution not computable for one of the teams (per-player minutes not captured)",
+   "date": "2026-11-20",
+   "game_id": "0022600043",
+   "matchup": "CHA@ATL",
+   "pick": "ATL wins",
+   "side": "home",
+   "team": "ATL",
+   "opponent": "CHA",
+   "model_probability": 0.8281,
+   "model_ml": -482,
+   "line_total": 216.1,
+   "line_spread_home": 15.9,
+   "confidence_signal_pp": 0.17,
+   "rotation_availability_pick_team": {
+    "team": "ATL",
+    "rotation_players": 1,
+    "rotation_players_named": [
+     "jalen johnson"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_opponent": {
+    "team": "CHA",
+    "status": "not captured",
+    "rotation_players": null,
+    "out": null,
+    "questionable": null,
+    "note": "official per-player minutes not captured for this team"
+   },
+   "rest_days_pick_team": 1,
+   "rest_days_opponent": 2,
+   "back_to_back_pick_team": false,
+   "travel_miles_opponent": 1934.0,
+   "luck_z_pick_team": -0.79,
+   "gates_passed": [
+    "disagreement <= 4.0 pp",
+    "model probability >= 0.55",
+    "ATL inside the luck band",
+    "CHA inside the luck band"
+   ],
+   "gates_failed": [
+    "minutes redistribution not computable for one of the teams (per-player minutes not captured)"
+   ],
+   "gate_verdict": "FAIL",
+   "stake_units": 0,
+   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
+   "source_url": "https://www.nba.com/game/cha-vs-atl-0022600043"
+  },
+  {
+   "availability_provenance": {
+    "pick_team": "not yet published",
+    "opponent": "not yet published"
+   },
+   "publication_verdict": "FAIL - model probability 0.509 < 0.55",
+   "date": "2026-11-20",
+   "game_id": "0022600044",
+   "matchup": "ORL@BKN",
+   "pick": "BKN wins",
+   "side": "home",
+   "team": "BKN",
+   "opponent": "ORL",
+   "model_probability": 0.5095,
+   "model_ml": -104,
+   "line_total": 217.4,
+   "line_spread_home": 0.4,
+   "confidence_signal_pp": 0.0,
+   "rotation_availability_pick_team": {
+    "team": "BKN",
+    "rotation_players": 2,
+    "rotation_players_named": [
+     "julius randle",
+     "michael porter jr"
+    ],
+    "listed_on_injury_report": 5,
+    "out": [
+     "Bilodeau, Tyler",
+     "Jefferson, Joshua",
+     "Nelson, Grant",
+     "Powell, Drake",
+     "Saraf, Ben"
+    ],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_opponent": {
+    "team": "ORL",
+    "rotation_players": 4,
+    "rotation_players_named": [
+     "desmond bane",
+     "franz wagner",
+     "paolo banchero",
+     "wendell carter jr"
+    ],
+    "listed_on_injury_report": 4,
+    "out": [
+     "Banchero, Paolo",
+     "Isaac, Jonathan",
+     "Nelson, Izaiyah",
+     "Penda, Noah"
+    ],
+    "questionable": [],
+    "rotation_out": [
+     "Banchero, Paolo"
+    ],
+    "rotation_questionable": [],
+    "rotation_out_count": 1,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rest_days_pick_team": 1,
+   "rest_days_opponent": 1,
+   "back_to_back_pick_team": false,
+   "travel_miles_opponent": 938.0,
+   "luck_z_pick_team": -0.14,
+   "gates_passed": [
+    "disagreement <= 4.0 pp",
+    "BKN inside the luck band",
+    "ORL inside the luck band",
+    "minutes redistribution computed"
+   ],
+   "gates_failed": [
+    "model probability 0.509 < 0.55"
+   ],
+   "gate_verdict": "FAIL",
+   "stake_units": 0,
+   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
+   "source_url": "https://www.nba.com/game/orl-vs-bkn-0022600044"
+  },
+  {
+   "availability_provenance": {
+    "pick_team": "not yet published",
+    "opponent": "not yet published"
+   },
+   "publication_verdict": "PASS - PROVISIONAL: rotation availability not yet published for CLE, IND",
+   "date": "2026-11-20",
+   "game_id": "0022600045",
+   "matchup": "IND@CLE",
+   "pick": "CLE wins",
+   "side": "home",
+   "team": "CLE",
+   "opponent": "IND",
+   "model_probability": 0.6241,
+   "model_ml": -166,
+   "line_total": 234.9,
+   "line_spread_home": 5.3,
+   "confidence_signal_pp": 0.23,
+   "rotation_availability_pick_team": {
+    "team": "CLE",
+    "rotation_players": 2,
+    "rotation_players_named": [
+     "donovan mitchell",
+     "james harden"
+    ],
+    "listed_on_injury_report": 7,
+    "out": [
+     "Diop, Khalifa",
+     "Merrill, Sam",
+     "Mobley, Evan",
+     "Tomlin, Nae'Qwan",
+     "Udeh, Jr., Ernest"
+    ],
+    "questionable": [
+     "Tyson, Jaylon",
+     "Watson, Peyton"
+    ],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_opponent": {
+    "team": "IND",
+    "rotation_players": 2,
+    "rotation_players_named": [
+     "andrew nembhard",
+     "tyrese haliburton"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rest_days_pick_team": 1,
+   "rest_days_opponent": 1,
+   "back_to_back_pick_team": false,
+   "travel_miles_opponent": 263.0,
+   "luck_z_pick_team": -0.04,
+   "gates_passed": [
+    "disagreement <= 4.0 pp",
+    "model probability >= 0.55",
+    "CLE inside the luck band",
+    "IND inside the luck band",
+    "minutes redistribution computed"
+   ],
+   "gates_failed": [],
+   "gate_verdict": "PASS",
+   "stake_units": 0,
+   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
+   "source_url": "https://www.nba.com/game/ind-vs-cle-0022600045"
+  },
+  {
+   "availability_provenance": {
+    "pick_team": "not yet published",
+    "opponent": "not yet published"
+   },
+   "publication_verdict": "PASS - PROVISIONAL: rotation availability not yet published for DET, TOR",
+   "date": "2026-11-20",
+   "game_id": "0022600046",
+   "matchup": "TOR@DET",
+   "pick": "DET wins",
+   "side": "home",
+   "team": "DET",
+   "opponent": "TOR",
+   "model_probability": 0.6156,
+   "model_ml": -160,
+   "line_total": 222.8,
+   "line_spread_home": 4.9,
+   "confidence_signal_pp": 0.0,
+   "rotation_availability_pick_team": {
+    "team": "DET",
+    "rotation_players": 1,
+    "rotation_players_named": [
+     "cade cunningham"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_opponent": {
+    "team": "TOR",
+    "rotation_players": 2,
+    "rotation_players_named": [
+     "rj barrett",
+     "scottie barnes"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rest_days_pick_team": 1,
+   "rest_days_opponent": 1,
+   "back_to_back_pick_team": false,
+   "travel_miles_opponent": 206.0,
+   "luck_z_pick_team": -0.2,
+   "gates_passed": [
+    "disagreement <= 4.0 pp",
+    "model probability >= 0.55",
+    "DET inside the luck band",
+    "TOR inside the luck band",
+    "minutes redistribution computed"
+   ],
+   "gates_failed": [],
+   "gate_verdict": "PASS",
+   "stake_units": 0,
+   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
+   "source_url": "https://www.nba.com/game/tor-vs-det-0022600046"
+  },
+  {
+   "availability_provenance": {
+    "pick_team": "not yet published",
+    "opponent": "not captured"
+   },
+   "publication_verdict": "FAIL - minutes redistribution not computable for one of the teams (per-player minutes not captured)",
+   "date": "2026-11-20",
+   "game_id": "0022600047",
+   "matchup": "WAS@CHI",
+   "pick": "WAS wins",
+   "side": "away",
+   "team": "WAS",
+   "opponent": "CHI",
+   "model_probability": 0.5882,
+   "model_ml": -143,
+   "line_total": 242.0,
+   "line_spread_home": -3.8,
+   "confidence_signal_pp": 0.69,
+   "rotation_availability_pick_team": {
+    "team": "WAS",
+    "rotation_players": 4,
+    "rotation_players_named": [
+     "aj dybantsa",
+     "anthony davis",
+     "kyshawn george",
+     "trae young"
+    ],
+    "listed_on_injury_report": 6,
+    "out": [
+     "Beekman, Reece",
+     "Champagne, Justin",
+     "Vukcevic, Tristan",
+     "Watkins, Jamir"
+    ],
+    "questionable": [
+     "Johnson, Tre",
+     "Okpara, Felix"
+    ],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_opponent": {
+    "team": "CHI",
+    "status": "not captured",
+    "rotation_players": null,
+    "out": null,
+    "questionable": null,
+    "note": "official per-player minutes not captured for this team"
+   },
+   "rest_days_pick_team": 1,
+   "rest_days_opponent": 1,
+   "back_to_back_pick_team": false,
+   "travel_miles_opponent": 438.0,
+   "luck_z_pick_team": -0.93,
+   "gates_passed": [
+    "disagreement <= 4.0 pp",
+    "model probability >= 0.55",
+    "CHI inside the luck band",
+    "WAS inside the luck band"
+   ],
+   "gates_failed": [
+    "minutes redistribution not computable for one of the teams (per-player minutes not captured)"
+   ],
+   "gate_verdict": "FAIL",
+   "stake_units": 0,
+   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
+   "source_url": "https://www.nba.com/game/was-vs-chi-0022600047"
+  },
+  {
+   "availability_provenance": {
+    "pick_team": "not yet published",
+    "opponent": "not yet published"
+   },
+   "publication_verdict": "PASS - PROVISIONAL: rotation availability not yet published for OKC, NOP",
+   "date": "2026-11-20",
+   "game_id": "0022600048",
+   "matchup": "NOP@OKC",
+   "pick": "OKC wins",
+   "side": "home",
+   "team": "OKC",
+   "opponent": "NOP",
+   "model_probability": 0.7989,
+   "model_ml": -397,
+   "line_total": 230.9,
+   "line_spread_home": 14.1,
+   "confidence_signal_pp": 0.52,
+   "rotation_availability_pick_team": {
+    "team": "OKC",
+    "rotation_players": 1,
+    "rotation_players_named": [
+     "shai gilgeous-alexander"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_opponent": {
+    "team": "NOP",
+    "rotation_players": 2,
+    "rotation_players_named": [
+     "trey murphy iii",
+     "zion williamson"
+    ],
+    "listed_on_injury_report": 8,
+    "out": [
+     "Mathurin, Benedict",
+     "McGowens, Bryce",
+     "Murphy III, Trey",
+     "Murray, Dejounte",
+     "Watford, Trendon"
+    ],
+    "questionable": [
+     "Dia, Malik",
+     "Pierre Jr., Jaron",
+     "Reese, Julian"
+    ],
+    "rotation_out": [
+     "Murphy III, Trey"
+    ],
+    "rotation_questionable": [],
+    "rotation_out_count": 1,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rest_days_pick_team": 1,
+   "rest_days_opponent": 1,
+   "back_to_back_pick_team": false,
+   "travel_miles_opponent": 576.0,
+   "luck_z_pick_team": 0.68,
+   "gates_passed": [
+    "disagreement <= 4.0 pp",
+    "model probability >= 0.55",
+    "OKC inside the luck band",
+    "NOP inside the luck band",
+    "minutes redistribution computed"
+   ],
+   "gates_failed": [],
+   "gate_verdict": "PASS",
+   "stake_units": 0,
+   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
+   "source_url": "https://www.nba.com/game/nop-vs-okc-0022600048"
+  },
+  {
+   "availability_provenance": {
+    "pick_team": "not yet published",
+    "opponent": "not yet published"
+   },
+   "publication_verdict": "PASS - PROVISIONAL: rotation availability not yet published for PHX, UTA",
+   "date": "2026-11-20",
+   "game_id": "0022600049",
+   "matchup": "PHX@UTA",
+   "pick": "PHX wins",
+   "side": "away",
+   "team": "PHX",
+   "opponent": "UTA",
+   "model_probability": 0.6362,
+   "model_ml": -175,
+   "line_total": 224.8,
+   "line_spread_home": -5.9,
+   "confidence_signal_pp": 0.0,
+   "rotation_availability_pick_team": {
+    "team": "PHX",
+    "rotation_players": 1,
+    "rotation_players_named": [
+     "devin booker"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_opponent": {
+    "team": "UTA",
+    "rotation_players": 1,
+    "rotation_players_named": [
+     "keyonte george"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rest_days_pick_team": 1,
+   "rest_days_opponent": 1,
+   "back_to_back_pick_team": false,
+   "travel_miles_opponent": 532.0,
+   "luck_z_pick_team": 1.1,
+   "gates_passed": [
+    "disagreement <= 4.0 pp",
+    "model probability >= 0.55",
+    "UTA inside the luck band",
+    "PHX inside the luck band",
+    "minutes redistribution computed"
+   ],
+   "gates_failed": [],
+   "gate_verdict": "PASS",
+   "stake_units": 0,
+   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
+   "source_url": "https://www.nba.com/game/phx-vs-uta-0022600049"
+  },
+  {
+   "availability_provenance": {
+    "pick_team": "not yet published",
+    "opponent": "not yet published"
+   },
+   "publication_verdict": "PASS - PROVISIONAL: rotation availability not yet published for HOU, DEN",
+   "date": "2026-11-20",
+   "game_id": "0022600050",
+   "matchup": "HOU@DEN",
+   "pick": "HOU wins",
+   "side": "away",
+   "team": "HOU",
+   "opponent": "DEN",
+   "model_probability": 0.6158,
+   "model_ml": -160,
+   "line_total": 218.2,
+   "line_spread_home": -5.0,
+   "confidence_signal_pp": 0.67,
+   "rotation_availability_pick_team": {
+    "team": "HOU",
+    "rotation_players": 4,
+    "rotation_players_named": [
+     "alperen sengun",
+     "amen thompson",
+     "jabari smith jr",
+     "kevin durant"
+    ],
+    "listed_on_injury_report": 6,
+    "out": [
+     "Adams, Steven",
+     "Capela, Clint",
+     "Copeland, Quadir",
+     "Phillips, Julian",
+     "Smart, Marcus"
+    ],
+    "questionable": [
+     "Thompson, Amen"
+    ],
+    "rotation_out": [],
+    "rotation_questionable": [
+     "Thompson, Amen"
+    ],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 1,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_opponent": {
+    "team": "DEN",
+    "rotation_players": 3,
+    "rotation_players_named": [
+     "christian braun",
+     "jamal murray",
+     "nikola jokic"
+    ],
+    "listed_on_injury_report": 4,
+    "out": [
+     "Holmes II, DaRon",
+     "Nembhard, Ryan",
+     "Strawther, Julian",
+     "Whitmore, Cam"
+    ],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rest_days_pick_team": 1,
+   "rest_days_opponent": 1,
+   "back_to_back_pick_team": false,
+   "travel_miles_opponent": 1000.0,
+   "luck_z_pick_team": 0.08,
+   "gates_passed": [
+    "disagreement <= 4.0 pp",
+    "model probability >= 0.55",
+    "DEN inside the luck band",
+    "HOU inside the luck band",
+    "minutes redistribution computed"
+   ],
+   "gates_failed": [],
+   "gate_verdict": "PASS",
+   "stake_units": 0,
+   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
+   "source_url": "https://www.nba.com/game/hou-vs-den-0022600050"
+  },
+  {
+   "availability_provenance": {
+    "pick_team": "not yet published",
+    "opponent": "not yet published"
+   },
+   "publication_verdict": "PASS - PROVISIONAL: rotation availability not yet published for LAL, SAC",
+   "date": "2026-11-20",
+   "game_id": "0022600051",
+   "matchup": "SAC@LAL",
+   "pick": "LAL wins",
+   "side": "home",
+   "team": "LAL",
+   "opponent": "SAC",
+   "model_probability": 0.9068,
+   "model_ml": -973,
+   "line_total": 242.1,
+   "line_spread_home": 22.2,
+   "confidence_signal_pp": 0.2,
+   "rotation_availability_pick_team": {
+    "team": "LAL",
+    "rotation_players": 2,
+    "rotation_players_named": [
+     "austin reaves",
+     "luka doncic"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_opponent": {
+    "team": "SAC",
+    "rotation_players": 3,
+    "rotation_players_named": [
+     "darius acuff jr",
+     "domantas sabonis",
+     "zach lavine"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rest_days_pick_team": 1,
+   "rest_days_opponent": 1,
+   "back_to_back_pick_team": false,
+   "travel_miles_opponent": 361.0,
+   "luck_z_pick_team": -0.48,
+   "gates_passed": [
+    "disagreement <= 4.0 pp",
+    "model probability >= 0.55",
+    "LAL inside the luck band",
+    "SAC inside the luck band",
+    "minutes redistribution computed"
+   ],
+   "gates_failed": [],
+   "gate_verdict": "PASS",
+   "stake_units": 0,
+   "status": "MODEL OUTPUT - UNVALIDATED - NO STRATEGY HAS PASSED THE VALIDATION GATES; zero stake",
+   "source_url": "https://www.nba.com/game/sac-vs-lal-0022600051"
   }
  ]
 }

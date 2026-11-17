@@ -2,18 +2,18 @@
  "_meta": {
   "title": "Originated horizon lines v2 - 2026-11-15 through 2026-11-19",
   "generated_by": "scripts/build_horizon_v2.py",
-  "generated_utc": "2026-11-16T19:31:59Z",
+  "generated_utc": "2026-11-17T15:52:30Z",
   "method": "two independent estimators built on the official team tables, blended underneath; their disagreement is the headline confidence signal; the home-court advantage is pinned to the measured official home win rate",
-  "pick_window": "2026-11-16 .. 2026-11-19 (up to 3 days ahead)",
-  "line_window": "2026-11-16 .. 2026-11-19",
+  "pick_window": "2026-11-17 .. 2026-11-20 (up to 3 days ahead)",
+  "line_window": "2026-11-17 .. 2026-11-20",
   "inputs": {
    "team_tables": {
-    "advanced": "teams_advanced_2026-11-15_2345Z.json",
+    "advanced": "teams_advanced_2026-11-17_84264db0.json",
     "traditional": "teams_traditional_2026-11-15_2345Z.json",
     "opponent": "teams_opponent_2026-11-15_2345Z.json"
    },
    "team_table_source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
-   "standings_file": "standings_2026-11-16_1835Z_23ec1e32.json",
+   "standings_file": "standings_2026-11-17_1547Z_84264db0.json",
    "schedule_file": "official_schedule_2026-11-15_to_19.json",
    "arena_file": "arena_coordinates_2026-11-15.json",
    "injury_edition_file": "injury_2026-11-16_0115PM_bfad39b2.json",
@@ -21,38 +21,44 @@
    "minutes_file": "player_minutes_top50_2026-11-15.json"
   },
   "league_baselines": {
-   "league_off_rtg": 113.1267,
-   "league_def_rtg": 113.14,
-   "league_pace": 99.8383,
+   "league_off_rtg": 113.2367,
+   "league_def_rtg": 113.2667,
+   "league_pace": 99.846,
    "league_pts_per_game": 113.6367,
    "league_opp_pts_per_game": 113.6667,
-   "league_ppp_off": 1.1315,
-   "league_ppp_def": 1.1313,
+   "league_ppp_off": 1.1313,
+   "league_ppp_def": 1.1311,
    "n_teams": 30
   },
   "home_court_anchor": {
-   "measured_home_win_rate": 0.5204,
-   "measured_home_win_rate_from_final_scores": 0.5204,
-   "hca_points_from_final_scores_crosscheck": 0.87,
+   "measured_home_win_rate": 0.5196,
+   "measured_home_win_rate_from_final_scores": 0.5196,
+   "hca_points_from_final_scores_crosscheck": 0.83,
    "primary_measurement": "the official standings HOME/ROAD columns (the largest official sample); the final-score corpus measurement is published beside it as a cross-check",
-   "measured_road_win_rate": 0.4796,
-   "games_measured": 196,
-   "final_score_home_wins": 102,
-   "final_score_home_games": 196,
-   "home_wins": 102,
-   "home_games": 196,
+   "measured_road_win_rate": 0.4804,
+   "games_measured": 204,
+   "final_score_home_wins": 106,
+   "final_score_home_games": 204,
+   "home_wins": 106,
+   "home_games": 204,
    "standings_cross_check": {
-    "home_win_rate": 0.5204,
-    "road_win_rate": 0.4796,
-    "home_games": 196,
-    "road_games": 196,
+    "home_win_rate": 0.5196,
+    "road_win_rate": 0.4804,
+    "home_games": 204,
+    "home_wins": 106,
+    "road_games": 204,
+    "road_wins": 98,
+    "derived_fields": [
+     "road_games",
+     "road_wins"
+    ],
     "source_url": "https://www.nba.com/standings"
    },
    "sources_agree": true,
-   "sigma_margin_used": 16.93,
+   "sigma_margin_used": 16.83,
    "sigma_margin_source": "population standard deviation of the margin on the official final-score corpus (finished games only; scheduled rows with placeholder scores are excluded by engine/model_v2.load_results)",
-   "hca_points": 0.87,
-   "hca_z": 0.0512,
+   "hca_points": 0.83,
+   "hca_z": 0.0491,
    "formula": "HCA_points = sigma_margin * Phi^-1(measured home win rate). The number of points is read off the measurement; nothing about it is fitted.",
    "status": "MEASURED - the home-court advantage is pinned to the official home win rate"
   },
@@ -119,1677 +125,6 @@
  },
  "games": [
   {
-   "date": "2026-11-16",
-   "game_id": "0022600245",
-   "matchup": "ORL@BOS",
-   "away": "ORL",
-   "home": "BOS",
-   "venue": "TD Garden",
-   "city": "Boston, MA",
-   "tip_et": "7:00 PM ET",
-   "tip_et_sources": {
-    "per_game_card": "7:00 PM ET",
-    "schedule_page": "7:00 PM ET",
-    "injury_pdf": "07:00 (ET)",
-    "conflict": false
-   },
-   "in_pick_window": true,
-   "estimator_a": {
-    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 95.01,
-    "game_possessions_from_official_poss_column": 98.04,
-    "ppp_proj_home": 1.1857,
-    "ppp_proj_away": 1.0268,
-    "pts_home": 112.7,
-    "pts_away": 97.6,
-    "margin": 16.0,
-    "total": 210.2
-   },
-   "estimator_b": {
-    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 95.01,
-    "pace_factor": 0.9517,
-    "pts_home": 107.9,
-    "pts_away": 93.5,
-    "margin": 15.3,
-    "total": 201.4
-   },
-   "blend": {
-    "p_home_win_estimator_a": 0.8277,
-    "p_home_win_estimator_b": 0.8169,
-    "p_home_win_blend": 0.8223,
-    "disagreement": 0.0108,
-    "disagreement_pp": 1.08,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.08 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
-    "blend_weight_a": 0.5,
-    "blend_weight_b": 0.5,
-    "margin_blend": 15.7,
-    "total_blend": 205.8
-   },
-   "line_total": 204.4,
-   "line_spread_home": 19.4,
-   "model_home_win_prob": 0.8744,
-   "model_home_ml": -696,
-   "confidence_signal_pp": 1.08,
-   "rest_home": {
-    "rest_days": 0,
-    "back_to_back": true,
-    "three_in_four": false,
-    "games_in_last_4_days": 2,
-    "last_date": "2026-11-15",
-    "last_game_was_home": true,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "rest_away": {
-    "rest_days": 2,
-    "back_to_back": false,
-    "three_in_four": false,
-    "games_in_last_4_days": 2,
-    "last_date": "2026-11-13",
-    "last_game_was_home": true,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "travel_away": {
-    "from_venue": "Kia Center",
-    "from_city": "Orlando, FL",
-    "to_venue": "TD Garden",
-    "to_city": "Boston, MA",
-    "miles": 1116.0,
-    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=TD%20Garden&format=json&formatversion=2",
-    "venue_source": "https://www.nba.com/schedule"
-   },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
-   "availability_redistribution_home": {
-    "team": "BOS",
-    "minutes_removed": 0.0,
-    "net_points_lost": 0.0,
-    "absent_players": [
-     {
-      "player": "Queta, Neemias",
-      "status": "Questionable",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     }
-    ],
-    "note": "no absent player has an official minutes capture -> no redistribution is computed"
-   },
-   "availability_redistribution_away": {
-    "team": "ORL",
-    "minutes_removed": 33.8,
-    "absent_players": [
-     {
-      "player": "Banchero, Paolo",
-      "status": "Out",
-      "minutes_removed_share": 1.0,
-      "min": 33.8,
-      "pts": 24.5,
-      "min_captured": 33.8,
-      "pts_captured": 24.5,
-      "source_url": null,
-      "note": "minutes removed at the status share (Out -> 100% of his captured minutes)"
-     }
-    ],
-    "production_per_minute_removed": 0.7249,
-    "bench_efficiency_ratio": 0.85,
-    "redistribution": [
-     {
-      "player": "Franz Wagner",
-      "minutes_before": 36.8,
-      "minutes_added": 11.95,
-      "share_before": 0.2669,
-      "share_after": 0.2839,
-      "expected_points_added": 7.36
-     },
-     {
-      "player": "Desmond Bane",
-      "minutes_before": 34.6,
-      "minutes_added": 11.23,
-      "share_before": 0.2509,
-      "share_after": 0.2669,
-      "expected_points_added": 6.92
-     },
-     {
-      "player": "Wendell Carter Jr.",
-      "minutes_before": 32.7,
-      "minutes_added": 10.62,
-      "share_before": 0.2371,
-      "share_after": 0.2523,
-      "expected_points_added": 6.54
-     }
-    ],
-    "team_points_lost": 24.5,
-    "team_points_gained_by_replacement": 20.82,
-    "net_points_lost": 3.68,
-    "note": "minutes that leave the rotation are re-spread across the remaining rotation in proportion to existing minutes and valued at the bench-efficiency ratio"
-   },
-   "net_points_lost_home": 0.0,
-   "net_points_lost_away": 3.68,
-   "rest_adjustment_home": 1.1,
-   "rest_adjustment_away": 0.0,
-   "travel_adjustment_away": 1.339,
-   "rotation_availability_home": {
-    "team": "BOS",
-    "rotation_players": 1,
-    "rotation_players_named": [
-     "jayson tatum"
-    ],
-    "listed_on_injury_report": 1,
-    "out": [],
-    "questionable": [
-     "Queta, Neemias"
-    ],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_away": {
-    "team": "ORL",
-    "rotation_players": 4,
-    "rotation_players_named": [
-     "desmond bane",
-     "franz wagner",
-     "paolo banchero",
-     "wendell carter jr"
-    ],
-    "listed_on_injury_report": 4,
-    "out": [
-     "Banchero, Paolo",
-     "Isaac, Jonathan",
-     "Nelson, Izaiyah",
-     "Penda, Noah"
-    ],
-    "questionable": [],
-    "rotation_out": [
-     "Banchero, Paolo"
-    ],
-    "rotation_questionable": [],
-    "rotation_out_count": 1,
-    "rotation_questionable_count": 0,
-    "availability_pct": 75.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "luck_home": {
-    "luck_z": -0.38,
-    "in_noise_band": true,
-    "luck_points": -18.4
-   },
-   "luck_away": {
-    "luck_z": -0.21,
-    "in_noise_band": true,
-    "luck_points": -9.8
-   },
-   "source_url": "https://www.nba.com/game/orl-vs-bos-0022600245",
-   "schedule_source_url": "https://www.nba.com/schedule"
-  },
-  {
-   "date": "2026-11-16",
-   "game_id": "0022600246",
-   "matchup": "CHI@CLE",
-   "away": "CHI",
-   "home": "CLE",
-   "venue": "Rocket Arena",
-   "city": "Cleveland, OH",
-   "tip_et": "7:00 PM ET",
-   "tip_et_sources": {
-    "per_game_card": "7:00 PM ET",
-    "schedule_page": "7:00 PM ET",
-    "injury_pdf": "07:00 (ET)",
-    "conflict": false
-   },
-   "in_pick_window": true,
-   "estimator_a": {
-    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 103.69,
-    "game_possessions_from_official_poss_column": 102.62,
-    "ppp_proj_home": 1.2421,
-    "ppp_proj_away": 1.1152,
-    "pts_home": 128.8,
-    "pts_away": 115.6,
-    "margin": 14.0,
-    "total": 244.4
-   },
-   "estimator_b": {
-    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 103.69,
-    "pace_factor": 1.0386,
-    "pts_home": 135.2,
-    "pts_away": 121.4,
-    "margin": 14.7,
-    "total": 256.5
-   },
-   "blend": {
-    "p_home_win_estimator_a": 0.7959,
-    "p_home_win_estimator_b": 0.8074,
-    "p_home_win_blend": 0.8016,
-    "disagreement": 0.0115,
-    "disagreement_pp": 1.15,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.15 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
-    "blend_weight_a": 0.5,
-    "blend_weight_b": 0.5,
-    "margin_blend": 14.3,
-    "total_blend": 250.4
-   },
-   "line_total": 250.4,
-   "line_spread_home": 14.3,
-   "model_home_win_prob": 0.8009,
-   "model_home_ml": -402,
-   "confidence_signal_pp": 1.15,
-   "rest_home": {
-    "rest_days": 1,
-    "back_to_back": false,
-    "three_in_four": true,
-    "games_in_last_4_days": 3,
-    "last_date": "2026-11-14",
-    "last_game_was_home": true,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "rest_away": {
-    "rest_days": 1,
-    "back_to_back": false,
-    "three_in_four": true,
-    "games_in_last_4_days": 3,
-    "last_date": "2026-11-14",
-    "last_game_was_home": false,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "travel_away": null,
-   "travel_source": "official schedule",
-   "availability_redistribution_home": {
-    "team": "CLE",
-    "minutes_removed": 0.0,
-    "net_points_lost": 0.0,
-    "absent_players": [
-     {
-      "player": "Diop, Khalifa",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Merrill, Sam",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Mobley, Evan",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Tomlin, Nae'Qwan",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Tyson, Jaylon",
-      "status": "Doubtful",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Udeh, Jr., Ernest",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Watson, Peyton",
-      "status": "Questionable",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     }
-    ],
-    "note": "no absent player has an official minutes capture -> no redistribution is computed"
-   },
-   "availability_redistribution_away": null,
-   "net_points_lost_home": 0.0,
-   "net_points_lost_away": 0.0,
-   "rest_adjustment_home": 0.6,
-   "rest_adjustment_away": 0.6,
-   "travel_adjustment_away": 0.0,
-   "rotation_availability_home": {
-    "team": "CLE",
-    "rotation_players": 2,
-    "rotation_players_named": [
-     "donovan mitchell",
-     "james harden"
-    ],
-    "listed_on_injury_report": 7,
-    "out": [
-     "Diop, Khalifa",
-     "Merrill, Sam",
-     "Mobley, Evan",
-     "Tomlin, Nae'Qwan",
-     "Udeh, Jr., Ernest"
-    ],
-    "questionable": [
-     "Tyson, Jaylon",
-     "Watson, Peyton"
-    ],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_away": {
-    "team": "CHI",
-    "status": "not captured",
-    "rotation_players": null,
-    "out": null,
-    "questionable": null,
-    "note": "official per-player minutes not captured for this team"
-   },
-   "luck_home": {
-    "luck_z": 0.01,
-    "in_noise_band": true,
-    "luck_points": 0.4
-   },
-   "luck_away": {
-    "luck_z": 0.97,
-    "in_noise_band": true,
-    "luck_points": 45.1
-   },
-   "source_url": "https://www.nba.com/game/chi-vs-cle-0022600246",
-   "schedule_source_url": "https://www.nba.com/schedule"
-  },
-  {
-   "date": "2026-11-16",
-   "game_id": "0022600247",
-   "matchup": "MEM@WAS",
-   "away": "MEM",
-   "home": "WAS",
-   "venue": "Capital One Arena",
-   "city": "Washington, DC",
-   "tip_et": "7:00 PM ET",
-   "tip_et_sources": {
-    "per_game_card": "7:00 PM ET",
-    "schedule_page": "7:30 PM ET",
-    "injury_pdf": "07:00 (ET)",
-    "conflict": true
-   },
-   "in_pick_window": true,
-   "estimator_a": {
-    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 100.25,
-    "game_possessions_from_official_poss_column": 101.27,
-    "ppp_proj_home": 1.059,
-    "ppp_proj_away": 1.2037,
-    "pts_home": 106.2,
-    "pts_away": 120.7,
-    "margin": -13.6,
-    "total": 226.8
-   },
-   "estimator_b": {
-    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 100.25,
-    "pace_factor": 1.0041,
-    "pts_home": 108.5,
-    "pts_away": 123.4,
-    "margin": -14.0,
-    "total": 231.9
-   },
-   "blend": {
-    "p_home_win_estimator_a": 0.2109,
-    "p_home_win_estimator_b": 0.2041,
-    "p_home_win_blend": 0.2075,
-    "disagreement": 0.0068,
-    "disagreement_pp": 0.68,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.68 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
-    "blend_weight_a": 0.5,
-    "blend_weight_b": 0.5,
-    "margin_blend": -13.8,
-    "total_blend": 229.4
-   },
-   "line_total": 229.4,
-   "line_spread_home": -14.3,
-   "model_home_win_prob": 0.1991,
-   "model_home_ml": 402,
-   "confidence_signal_pp": 0.68,
-   "rest_home": {
-    "rest_days": 0,
-    "back_to_back": true,
-    "three_in_four": false,
-    "games_in_last_4_days": 2,
-    "last_date": "2026-11-15",
-    "last_game_was_home": true,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "rest_away": {
-    "rest_days": 1,
-    "back_to_back": false,
-    "three_in_four": true,
-    "games_in_last_4_days": 3,
-    "last_date": "2026-11-14",
-    "last_game_was_home": true,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "travel_away": null,
-   "travel_source": "official schedule",
-   "availability_redistribution_home": {
-    "team": "WAS",
-    "minutes_removed": 0.0,
-    "net_points_lost": 0.0,
-    "absent_players": [
-     {
-      "player": "Beekman, Reece",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Champagne, Justin",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Johnson, Tre",
-      "status": "Questionable",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Okpara, Felix",
-      "status": "Questionable",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Vukcevic, Tristan",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Watkins, Jamir",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     }
-    ],
-    "note": "no absent player has an official minutes capture -> no redistribution is computed"
-   },
-   "availability_redistribution_away": null,
-   "net_points_lost_home": 0.0,
-   "net_points_lost_away": 0.0,
-   "rest_adjustment_home": 1.1,
-   "rest_adjustment_away": 0.6,
-   "travel_adjustment_away": 0.0,
-   "rotation_availability_home": {
-    "team": "WAS",
-    "rotation_players": 4,
-    "rotation_players_named": [
-     "aj dybantsa",
-     "anthony davis",
-     "kyshawn george",
-     "trae young"
-    ],
-    "listed_on_injury_report": 6,
-    "out": [
-     "Beekman, Reece",
-     "Champagne, Justin",
-     "Vukcevic, Tristan",
-     "Watkins, Jamir"
-    ],
-    "questionable": [
-     "Johnson, Tre",
-     "Okpara, Felix"
-    ],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_away": {
-    "team": "MEM",
-    "status": "not captured",
-    "rotation_players": null,
-    "out": null,
-    "questionable": null,
-    "note": "official per-player minutes not captured for this team"
-   },
-   "luck_home": {
-    "luck_z": -0.96,
-    "in_noise_band": true,
-    "luck_points": -48.2
-   },
-   "luck_away": {
-    "luck_z": -1.13,
-    "in_noise_band": true,
-    "luck_points": -54.7
-   },
-   "source_url": "https://www.nba.com/game/mem-vs-was-0022600247",
-   "schedule_source_url": "https://www.nba.com/schedule"
-  },
-  {
-   "date": "2026-11-16",
-   "game_id": "0022600248",
-   "matchup": "PHI@BKN",
-   "away": "PHI",
-   "home": "BKN",
-   "venue": "Barclays Center",
-   "city": "Brooklyn, NY",
-   "tip_et": "7:30 PM ET",
-   "tip_et_sources": {
-    "per_game_card": "7:30 PM ET",
-    "schedule_page": "7:30 PM ET",
-    "injury_pdf": "07:30 (ET)",
-    "conflict": false
-   },
-   "in_pick_window": true,
-   "estimator_a": {
-    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 99.84,
-    "game_possessions_from_official_poss_column": 100.31,
-    "ppp_proj_home": 1.0687,
-    "ppp_proj_away": 1.1514,
-    "pts_home": 106.7,
-    "pts_away": 115.0,
-    "margin": -7.4,
-    "total": 221.7
-   },
-   "estimator_b": {
-    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 99.84,
-    "pace_factor": 1.0,
-    "pts_home": 107.0,
-    "pts_away": 115.3,
-    "margin": -7.4,
-    "total": 222.3
-   },
-   "blend": {
-    "p_home_win_estimator_a": 0.331,
-    "p_home_win_estimator_b": 0.331,
-    "p_home_win_blend": 0.331,
-    "disagreement": 0.0,
-    "disagreement_pp": 0.0,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
-    "blend_weight_a": 0.5,
-    "blend_weight_b": 0.5,
-    "margin_blend": -7.4,
-    "total_blend": 222.0
-   },
-   "line_total": 221.1,
-   "line_spread_home": -3.9,
-   "model_home_win_prob": 0.4078,
-   "model_home_ml": 145,
-   "confidence_signal_pp": 0.0,
-   "rest_home": {
-    "rest_days": 1,
-    "back_to_back": false,
-    "three_in_four": false,
-    "games_in_last_4_days": 2,
-    "last_date": "2026-11-14",
-    "last_game_was_home": false,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "rest_away": {
-    "rest_days": 0,
-    "back_to_back": true,
-    "three_in_four": false,
-    "games_in_last_4_days": 2,
-    "last_date": "2026-11-15",
-    "last_game_was_home": true,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "travel_away": {
-    "from_venue": "Xfinity Mobile Arena",
-    "from_city": "Philadelphia, PA",
-    "to_venue": "Barclays Center",
-    "to_city": "Brooklyn, NY",
-    "miles": 83.0,
-    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Barclays%20Center&format=json&formatversion=2",
-    "venue_source": "https://www.nba.com/schedule"
-   },
-   "travel_source": "official schedule",
-   "availability_redistribution_home": {
-    "team": "BKN",
-    "minutes_removed": 0.0,
-    "net_points_lost": 0.0,
-    "absent_players": [
-     {
-      "player": "Bilodeau, Tyler",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Jefferson, Joshua",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Nelson, Grant",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Powell, Drake",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Saraf, Ben",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     }
-    ],
-    "note": "no absent player has an official minutes capture -> no redistribution is computed"
-   },
-   "availability_redistribution_away": {
-    "team": "PHI",
-    "minutes_removed": 32.6,
-    "absent_players": [
-     {
-      "player": "James, LeBron",
-      "status": "Out",
-      "minutes_removed_share": 1.0,
-      "min": 32.6,
-      "pts": 15.1,
-      "min_captured": 32.6,
-      "pts_captured": 15.1,
-      "source_url": null,
-      "note": "minutes removed at the status share (Out -> 100% of his captured minutes)"
-     }
-    ],
-    "production_per_minute_removed": 0.4632,
-    "bench_efficiency_ratio": 0.85,
-    "redistribution": [
-     {
-      "player": "Tyrese Maxey",
-      "minutes_before": 36.1,
-      "minutes_added": 11.27,
-      "share_before": 0.2635,
-      "share_after": 0.2793,
-      "expected_points_added": 4.44
-     },
-     {
-      "player": "Jaylen Brown",
-      "minutes_before": 34.8,
-      "minutes_added": 10.87,
-      "share_before": 0.254,
-      "share_after": 0.2693,
-      "expected_points_added": 4.28
-     },
-     {
-      "player": "VJ Edgecombe",
-      "minutes_before": 33.5,
-      "minutes_added": 10.46,
-      "share_before": 0.2445,
-      "share_after": 0.2592,
-      "expected_points_added": 4.12
-     }
-    ],
-    "team_points_lost": 15.1,
-    "team_points_gained_by_replacement": 12.84,
-    "net_points_lost": 2.26,
-    "note": "minutes that leave the rotation are re-spread across the remaining rotation in proportion to existing minutes and valued at the bench-efficiency ratio"
-   },
-   "net_points_lost_home": 0.0,
-   "net_points_lost_away": 2.26,
-   "rest_adjustment_home": 0.0,
-   "rest_adjustment_away": 1.1,
-   "travel_adjustment_away": 0.1,
-   "rotation_availability_home": {
-    "team": "BKN",
-    "rotation_players": 2,
-    "rotation_players_named": [
-     "julius randle",
-     "michael porter jr"
-    ],
-    "listed_on_injury_report": 5,
-    "out": [
-     "Bilodeau, Tyler",
-     "Jefferson, Joshua",
-     "Nelson, Grant",
-     "Powell, Drake",
-     "Saraf, Ben"
-    ],
-    "questionable": [],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_away": {
-    "team": "PHI",
-    "rotation_players": 4,
-    "rotation_players_named": [
-     "jaylen brown",
-     "lebron james",
-     "tyrese maxey",
-     "vj edgecombe"
-    ],
-    "listed_on_injury_report": 5,
-    "out": [
-     "Barlow, Dominick",
-     "Bona, Adem",
-     "Hukporti, Ariel",
-     "James, LeBron"
-    ],
-    "questionable": [
-     "Embiid, Joel"
-    ],
-    "rotation_out": [
-     "James, LeBron"
-    ],
-    "rotation_questionable": [],
-    "rotation_out_count": 1,
-    "rotation_questionable_count": 0,
-    "availability_pct": 75.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "luck_home": {
-    "luck_z": -0.07,
-    "in_noise_band": true,
-    "luck_points": -3.2
-   },
-   "luck_away": {
-    "luck_z": -0.28,
-    "in_noise_band": true,
-    "luck_points": -14.0
-   },
-   "source_url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
-   "schedule_source_url": "https://www.nba.com/schedule"
-  },
-  {
-   "date": "2026-11-16",
-   "game_id": "0022600249",
-   "matchup": "HOU@MIA",
-   "away": "HOU",
-   "home": "MIA",
-   "venue": "Kaseya Center",
-   "city": "Miami, FL",
-   "tip_et": "7:30 PM ET",
-   "tip_et_sources": {
-    "per_game_card": "7:30 PM ET",
-    "schedule_page": "8:00 PM ET",
-    "injury_pdf": "07:30 (ET)",
-    "conflict": true
-   },
-   "in_pick_window": true,
-   "estimator_a": {
-    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 100.07,
-    "game_possessions_from_official_poss_column": 100.42,
-    "ppp_proj_home": 1.1184,
-    "ppp_proj_away": 1.2212,
-    "pts_home": 111.9,
-    "pts_away": 122.2,
-    "margin": -9.4,
-    "total": 234.1
-   },
-   "estimator_b": {
-    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 100.07,
-    "pace_factor": 1.0023,
-    "pts_home": 112.4,
-    "pts_away": 122.8,
-    "margin": -9.5,
-    "total": 235.2
-   },
-   "blend": {
-    "p_home_win_estimator_a": 0.2894,
-    "p_home_win_estimator_b": 0.2873,
-    "p_home_win_blend": 0.2884,
-    "disagreement": 0.002,
-    "disagreement_pp": 0.2,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.20 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
-    "blend_weight_a": 0.5,
-    "blend_weight_b": 0.5,
-    "margin_blend": -9.4,
-    "total_blend": 234.6
-   },
-   "line_total": 234.1,
-   "line_spread_home": -6.1,
-   "model_home_win_prob": 0.3602,
-   "model_home_ml": 178,
-   "confidence_signal_pp": 0.2,
-   "rest_home": {
-    "rest_days": 1,
-    "back_to_back": false,
-    "three_in_four": true,
-    "games_in_last_4_days": 3,
-    "last_date": "2026-11-14",
-    "last_game_was_home": true,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "rest_away": {
-    "rest_days": 0,
-    "back_to_back": true,
-    "three_in_four": true,
-    "games_in_last_4_days": 3,
-    "last_date": "2026-11-15",
-    "last_game_was_home": false,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "travel_away": {
-    "from_venue": "Capital One Arena",
-    "from_city": "Washington, DC",
-    "to_venue": "Kaseya Center",
-    "to_city": "Miami, FL",
-    "miles": 925.0,
-    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Kaseya%20Center&format=json&formatversion=2",
-    "venue_source": "https://www.nba.com/schedule"
-   },
-   "travel_source": "official schedule",
-   "availability_redistribution_home": {
-    "team": "MIA",
-    "minutes_removed": 0.0,
-    "net_points_lost": 0.0,
-    "absent_players": [
-     {
-      "player": "Goldin, Vladislav",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Jovic, Nikola",
-      "status": "Questionable",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Larsson, Pelle",
-      "status": "Doubtful",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Thompson, Klay",
-      "status": "Available",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     }
-    ],
-    "note": "no absent player has an official minutes capture -> no redistribution is computed"
-   },
-   "availability_redistribution_away": {
-    "team": "HOU",
-    "minutes_removed": 16.9,
-    "absent_players": [
-     {
-      "player": "Thompson, Amen",
-      "status": "Questionable",
-      "minutes_removed_share": 0.5,
-      "min": 16.85,
-      "pts": 7.5,
-      "min_captured": 33.7,
-      "pts_captured": 15.0,
-      "source_url": null,
-      "note": "minutes removed at the status share (Questionable -> 50% of his captured minutes)"
-     }
-    ],
-    "production_per_minute_removed": 0.4451,
-    "bench_efficiency_ratio": 0.85,
-    "redistribution": [
-     {
-      "player": "Alperen Sengun",
-      "minutes_before": 35.2,
-      "minutes_added": 5.71,
-      "share_before": 0.256,
-      "share_after": 0.2651,
-      "expected_points_added": 2.16
-     },
-     {
-      "player": "Jabari Smith Jr.",
-      "minutes_before": 34.4,
-      "minutes_added": 5.58,
-      "share_before": 0.2502,
-      "share_after": 0.259,
-      "expected_points_added": 2.11
-     },
-     {
-      "player": "Kevin Durant",
-      "minutes_before": 34.2,
-      "minutes_added": 5.55,
-      "share_before": 0.2487,
-      "share_after": 0.2575,
-      "expected_points_added": 2.1
-     }
-    ],
-    "team_points_lost": 7.5,
-    "team_points_gained_by_replacement": 6.37,
-    "net_points_lost": 1.13,
-    "note": "minutes that leave the rotation are re-spread across the remaining rotation in proportion to existing minutes and valued at the bench-efficiency ratio"
-   },
-   "net_points_lost_home": 0.0,
-   "net_points_lost_away": 1.13,
-   "rest_adjustment_home": 0.6,
-   "rest_adjustment_away": 1.7000000000000002,
-   "travel_adjustment_away": 1.11,
-   "rotation_availability_home": {
-    "team": "MIA",
-    "rotation_players": 2,
-    "rotation_players_named": [
-     "bam adebayo",
-     "davion mitchell"
-    ],
-    "listed_on_injury_report": 4,
-    "out": [
-     "Goldin, Vladislav"
-    ],
-    "questionable": [
-     "Jovic, Nikola",
-     "Larsson, Pelle"
-    ],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_away": {
-    "team": "HOU",
-    "rotation_players": 4,
-    "rotation_players_named": [
-     "alperen sengun",
-     "amen thompson",
-     "jabari smith jr",
-     "kevin durant"
-    ],
-    "listed_on_injury_report": 6,
-    "out": [
-     "Adams, Steven",
-     "Capela, Clint",
-     "Copeland, Quadir",
-     "Phillips, Julian",
-     "Smart, Marcus"
-    ],
-    "questionable": [
-     "Thompson, Amen"
-    ],
-    "rotation_out": [],
-    "rotation_questionable": [
-     "Thompson, Amen"
-    ],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 1,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "luck_home": {
-    "luck_z": -0.12,
-    "in_noise_band": true,
-    "luck_points": -5.8
-   },
-   "luck_away": {
-    "luck_z": 0.65,
-    "in_noise_band": true,
-    "luck_points": 32.7
-   },
-   "source_url": "https://www.nba.com/game/hou-vs-mia-0022600249",
-   "schedule_source_url": "https://www.nba.com/schedule"
-  },
-  {
-   "date": "2026-11-16",
-   "game_id": "0022600250",
-   "matchup": "POR@MIN",
-   "away": "POR",
-   "home": "MIN",
-   "venue": "Target Center",
-   "city": "Minneapolis, MN",
-   "tip_et": "8:00 PM ET",
-   "tip_et_sources": {
-    "per_game_card": "8:00 PM ET",
-    "schedule_page": "8:00 PM ET",
-    "injury_pdf": "08:00 (ET)",
-    "conflict": false
-   },
-   "in_pick_window": true,
-   "estimator_a": {
-    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 102.1,
-    "game_possessions_from_official_poss_column": 101.33,
-    "ppp_proj_home": 1.1385,
-    "ppp_proj_away": 1.0996,
-    "pts_home": 116.2,
-    "pts_away": 112.3,
-    "margin": 4.8,
-    "total": 228.5
-   },
-   "estimator_b": {
-    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 102.1,
-    "pace_factor": 1.0227,
-    "pts_home": 119.0,
-    "pts_away": 114.9,
-    "margin": 4.9,
-    "total": 233.9
-   },
-   "blend": {
-    "p_home_win_estimator_a": 0.6116,
-    "p_home_win_estimator_b": 0.6139,
-    "p_home_win_blend": 0.6127,
-    "disagreement": 0.0023,
-    "disagreement_pp": 0.23,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.23 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
-    "blend_weight_a": 0.5,
-    "blend_weight_b": 0.5,
-    "margin_blend": 4.8,
-    "total_blend": 231.2
-   },
-   "line_total": 229.2,
-   "line_spread_home": 1.5,
-   "model_home_win_prob": 0.5364,
-   "model_home_ml": -116,
-   "confidence_signal_pp": 0.23,
-   "rest_home": {
-    "rest_days": 1,
-    "back_to_back": false,
-    "three_in_four": false,
-    "games_in_last_4_days": 2,
-    "last_date": "2026-11-14",
-    "last_game_was_home": true,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "rest_away": {
-    "rest_days": 2,
-    "back_to_back": false,
-    "three_in_four": false,
-    "games_in_last_4_days": 2,
-    "last_date": "2026-11-13",
-    "last_game_was_home": false,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "travel_away": {
-    "from_venue": "Golden 1 Center",
-    "from_city": "Sacramento, CA",
-    "to_venue": "Target Center",
-    "to_city": "Minneapolis, MN",
-    "miles": 1511.0,
-    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Target%20Center&format=json&formatversion=2",
-    "venue_source": "https://www.nba.com/schedule"
-   },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
-   "availability_redistribution_home": {
-    "team": "MIN",
-    "minutes_removed": 33.7,
-    "absent_players": [
-     {
-      "player": "Edwards, Anthony",
-      "status": "Out",
-      "minutes_removed_share": 1.0,
-      "min": 33.7,
-      "pts": 33.3,
-      "min_captured": 33.7,
-      "pts_captured": 33.3,
-      "source_url": null,
-      "note": "minutes removed at the status share (Out -> 100% of his captured minutes)"
-     }
-    ],
-    "production_per_minute_removed": 0.9881,
-    "bench_efficiency_ratio": 0.85,
-    "redistribution": [
-     {
-      "player": "Jaden McDaniels",
-      "minutes_before": 33.4,
-      "minutes_added": 33.7,
-      "share_before": 0.4978,
-      "share_after": 0.6657,
-      "expected_points_added": 28.3
-     }
-    ],
-    "team_points_lost": 33.3,
-    "team_points_gained_by_replacement": 28.3,
-    "net_points_lost": 5.0,
-    "note": "minutes that leave the rotation are re-spread across the remaining rotation in proportion to existing minutes and valued at the bench-efficiency ratio"
-   },
-   "availability_redistribution_away": {
-    "team": "POR",
-    "minutes_removed": 0.0,
-    "net_points_lost": 0.0,
-    "absent_players": [
-     {
-      "player": "Krejci, Vit",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Morant, Ja",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Sharpe, Shaedon",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Youngblood, Chris",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     }
-    ],
-    "note": "no absent player has an official minutes capture -> no redistribution is computed"
-   },
-   "net_points_lost_home": 5.0,
-   "net_points_lost_away": 0.0,
-   "rest_adjustment_home": 0.0,
-   "rest_adjustment_away": 0.0,
-   "travel_adjustment_away": 1.813,
-   "rotation_availability_home": {
-    "team": "MIN",
-    "rotation_players": 2,
-    "rotation_players_named": [
-     "anthony edwards",
-     "jaden mcdaniels"
-    ],
-    "listed_on_injury_report": 4,
-    "out": [
-     "Clark, Jaylen",
-     "DiVincenzo, Donte",
-     "Edwards, Anthony"
-    ],
-    "questionable": [],
-    "rotation_out": [
-     "Edwards, Anthony"
-    ],
-    "rotation_questionable": [],
-    "rotation_out_count": 1,
-    "rotation_questionable_count": 0,
-    "availability_pct": 50.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_away": {
-    "team": "POR",
-    "rotation_players": 1,
-    "rotation_players_named": [
-     "deni avdija"
-    ],
-    "listed_on_injury_report": 4,
-    "out": [
-     "Krejci, Vit",
-     "Morant, Ja",
-     "Sharpe, Shaedon",
-     "Youngblood, Chris"
-    ],
-    "questionable": [],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "luck_home": {
-    "luck_z": -0.53,
-    "in_noise_band": true,
-    "luck_points": -25.7
-   },
-   "luck_away": {
-    "luck_z": 0.02,
-    "in_noise_band": true,
-    "luck_points": 1.1
-   },
-   "source_url": "https://www.nba.com/game/por-vs-min-0022600250",
-   "schedule_source_url": "https://www.nba.com/schedule"
-  },
-  {
-   "date": "2026-11-16",
-   "game_id": "0022600251",
-   "matchup": "GSW@NOP",
-   "away": "GSW",
-   "home": "NOP",
-   "venue": "Smoothie King Center",
-   "city": "New Orleans, LA",
-   "tip_et": "8:00 PM ET",
-   "tip_et_sources": {
-    "per_game_card": "8:00 PM ET",
-    "schedule_page": "9:00 PM ET",
-    "injury_pdf": "09:00 (ET)",
-    "conflict": false
-   },
-   "in_pick_window": true,
-   "estimator_a": {
-    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 101.65,
-    "game_possessions_from_official_poss_column": 102.3,
-    "ppp_proj_home": 1.1005,
-    "ppp_proj_away": 1.2313,
-    "pts_home": 111.9,
-    "pts_away": 125.2,
-    "margin": -12.4,
-    "total": 237.0
-   },
-   "estimator_b": {
-    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 101.65,
-    "pace_factor": 1.0182,
-    "pts_home": 116.7,
-    "pts_away": 130.6,
-    "margin": -13.0,
-    "total": 247.3
-   },
-   "blend": {
-    "p_home_win_estimator_a": 0.2319,
-    "p_home_win_estimator_b": 0.2213,
-    "p_home_win_blend": 0.2266,
-    "disagreement": 0.0107,
-    "disagreement_pp": 1.07,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.07 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
-    "blend_weight_a": 0.5,
-    "blend_weight_b": 0.5,
-    "margin_blend": -12.7,
-    "total_blend": 242.2
-   },
-   "line_total": 241.2,
-   "line_spread_home": -15.1,
-   "model_home_win_prob": 0.1866,
-   "model_home_ml": 436,
-   "confidence_signal_pp": 1.07,
-   "rest_home": {
-    "rest_days": 1,
-    "back_to_back": false,
-    "three_in_four": true,
-    "games_in_last_4_days": 3,
-    "last_date": "2026-11-14",
-    "last_game_was_home": true,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "rest_away": {
-    "rest_days": 2,
-    "back_to_back": false,
-    "three_in_four": false,
-    "games_in_last_4_days": 2,
-    "last_date": "2026-11-13",
-    "last_game_was_home": false,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "travel_away": {
-    "from_venue": "Frost Bank Center",
-    "from_city": "San Antonio, TX",
-    "to_venue": "Smoothie King Center",
-    "to_city": "New Orleans, LA",
-    "miles": 503.0,
-    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Smoothie%20King%20Center&format=json&formatversion=2",
-    "venue_source": "https://www.nba.com/schedule"
-   },
-   "travel_source": "DERIVED: the official schedule prints the venue of the home team's home games as that team's arena",
-   "availability_redistribution_home": {
-    "team": "NOP",
-    "minutes_removed": 32.8,
-    "absent_players": [
-     {
-      "player": "Murphy III, Trey",
-      "status": "Out",
-      "minutes_removed_share": 1.0,
-      "min": 32.8,
-      "pts": 15.6,
-      "min_captured": 32.8,
-      "pts_captured": 15.6,
-      "source_url": null,
-      "note": "minutes removed at the status share (Out -> 100% of his captured minutes)"
-     }
-    ],
-    "production_per_minute_removed": 0.4756,
-    "bench_efficiency_ratio": 0.85,
-    "redistribution": [
-     {
-      "player": "Zion Williamson",
-      "minutes_before": 32.6,
-      "minutes_added": 32.8,
-      "share_before": 0.4985,
-      "share_after": 0.666,
-      "expected_points_added": 13.26
-     }
-    ],
-    "team_points_lost": 15.6,
-    "team_points_gained_by_replacement": 13.26,
-    "net_points_lost": 2.34,
-    "note": "minutes that leave the rotation are re-spread across the remaining rotation in proportion to existing minutes and valued at the bench-efficiency ratio"
-   },
-   "availability_redistribution_away": {
-    "team": "GSW",
-    "minutes_removed": 0.0,
-    "net_points_lost": 0.0,
-    "absent_players": [
-     {
-      "player": "Butler III, Jimmy",
-      "status": null,
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Curry, Stephen",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Moody, Moses",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Porzingis, Kristaps",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Santos, Gui",
-      "status": "Questionable",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Williams, Brandon",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     }
-    ],
-    "note": "no absent player has an official minutes capture -> no redistribution is computed"
-   },
-   "net_points_lost_home": 2.34,
-   "net_points_lost_away": 0.0,
-   "rest_adjustment_home": 0.6,
-   "rest_adjustment_away": 0.0,
-   "travel_adjustment_away": 0.604,
-   "rotation_availability_home": {
-    "team": "NOP",
-    "rotation_players": 2,
-    "rotation_players_named": [
-     "trey murphy iii",
-     "zion williamson"
-    ],
-    "listed_on_injury_report": 8,
-    "out": [
-     "Mathurin, Benedict",
-     "McGowens, Bryce",
-     "Murphy III, Trey",
-     "Murray, Dejounte",
-     "Watford, Trendon"
-    ],
-    "questionable": [
-     "Dia, Malik",
-     "Pierre Jr., Jaron",
-     "Reese, Julian"
-    ],
-    "rotation_out": [
-     "Murphy III, Trey"
-    ],
-    "rotation_questionable": [],
-    "rotation_out_count": 1,
-    "rotation_questionable_count": 0,
-    "availability_pct": 50.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_away": {
-    "team": "GSW",
-    "rotation_players": 1,
-    "rotation_players_named": [
-     "brandin podziemski"
-    ],
-    "listed_on_injury_report": 6,
-    "out": [
-     "Curry, Stephen",
-     "Moody, Moses",
-     "Porzingis, Kristaps",
-     "Williams, Brandon"
-    ],
-    "questionable": [
-     "Santos, Gui"
-    ],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "luck_home": {
-    "luck_z": -0.24,
-    "in_noise_band": true,
-    "luck_points": -11.9
-   },
-   "luck_away": {
-    "luck_z": 0.65,
-    "in_noise_band": true,
-    "luck_points": 31.7
-   },
-   "source_url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
-   "schedule_source_url": "https://www.nba.com/schedule"
-  },
-  {
-   "date": "2026-11-16",
-   "game_id": "0022600252",
-   "matchup": "PHX@DEN",
-   "away": "PHX",
-   "home": "DEN",
-   "venue": "Ball Arena",
-   "city": "Denver, CO",
-   "tip_et": "9:00 PM ET",
-   "tip_et_sources": {
-    "per_game_card": "9:00 PM ET",
-    "schedule_page": null,
-    "injury_pdf": "09:00 (ET)",
-    "conflict": false
-   },
-   "in_pick_window": true,
-   "estimator_a": {
-    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 96.28,
-    "game_possessions_from_official_poss_column": 98.5,
-    "ppp_proj_home": 1.2122,
-    "ppp_proj_away": 1.1479,
-    "pts_home": 116.7,
-    "pts_away": 110.5,
-    "margin": 7.1,
-    "total": 227.2
-   },
-   "estimator_b": {
-    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 96.28,
-    "pace_factor": 0.9644,
-    "pts_home": 112.9,
-    "pts_away": 106.9,
-    "margin": 6.8,
-    "total": 219.8
-   },
-   "blend": {
-    "p_home_win_estimator_a": 0.6625,
-    "p_home_win_estimator_b": 0.656,
-    "p_home_win_blend": 0.6593,
-    "disagreement": 0.0065,
-    "disagreement_pp": 0.65,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.65 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
-    "blend_weight_a": 0.5,
-    "blend_weight_b": 0.5,
-    "margin_blend": 6.9,
-    "total_blend": 223.5
-   },
-   "line_total": 223.5,
-   "line_spread_home": 8.6,
-   "model_home_win_prob": 0.695,
-   "model_home_ml": -228,
-   "confidence_signal_pp": 0.65,
-   "rest_home": {
-    "rest_days": 1,
-    "back_to_back": false,
-    "three_in_four": false,
-    "games_in_last_4_days": 2,
-    "last_date": "2026-11-14",
-    "last_game_was_home": false,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "rest_away": {
-    "rest_days": 0,
-    "back_to_back": true,
-    "three_in_four": false,
-    "games_in_last_4_days": 2,
-    "last_date": "2026-11-15",
-    "last_game_was_home": true,
-    "source": "official results (data/official/gamelog.json) + official schedule"
-   },
-   "travel_away": {
-    "from_venue": "Mortgage Matchup Center",
-    "from_city": "Phoenix, AZ",
-    "to_venue": "Ball Arena",
-    "to_city": "Denver, CO",
-    "miles": 585.0,
-    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Ball%20Arena&format=json&formatversion=2",
-    "venue_source": "https://www.nba.com/schedule"
-   },
-   "travel_source": "official schedule",
-   "availability_redistribution_home": {
-    "team": "DEN",
-    "minutes_removed": 0.0,
-    "net_points_lost": 0.0,
-    "absent_players": [
-     {
-      "player": "Holmes II, DaRon",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Nembhard, Ryan",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Strawther, Julian",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     },
-     {
-      "player": "Whitmore, Cam",
-      "status": "Out",
-      "min": null,
-      "pts": null,
-      "note": "no official minutes capture for this player -> his minutes are NOT estimated; the effect is left blank"
-     }
-    ],
-    "note": "no absent player has an official minutes capture -> no redistribution is computed"
-   },
-   "availability_redistribution_away": {
-    "team": "PHX",
-    "minutes_removed": 0.0,
-    "net_points_lost": 0.0,
-    "absent_players": [],
-    "note": "no absent player has an official minutes capture -> no redistribution is computed"
-   },
-   "net_points_lost_home": 0.0,
-   "net_points_lost_away": 0.0,
-   "rest_adjustment_home": 0.0,
-   "rest_adjustment_away": 1.1,
-   "travel_adjustment_away": 0.702,
-   "rotation_availability_home": {
-    "team": "DEN",
-    "rotation_players": 3,
-    "rotation_players_named": [
-     "christian braun",
-     "jamal murray",
-     "nikola jokic"
-    ],
-    "listed_on_injury_report": 4,
-    "out": [
-     "Holmes II, DaRon",
-     "Nembhard, Ryan",
-     "Strawther, Julian",
-     "Whitmore, Cam"
-    ],
-    "questionable": [],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "rotation_availability_away": {
-    "team": "PHX",
-    "rotation_players": 1,
-    "rotation_players_named": [
-     "devin booker"
-    ],
-    "listed_on_injury_report": 0,
-    "out": [],
-    "questionable": [],
-    "rotation_out": [],
-    "rotation_questionable": [],
-    "rotation_out_count": 0,
-    "rotation_questionable_count": 0,
-    "availability_pct": 100.0,
-    "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
-   },
-   "luck_home": {
-    "luck_z": 0.04,
-    "in_noise_band": true,
-    "luck_points": 1.9
-   },
-   "luck_away": {
-    "luck_z": 0.78,
-    "in_noise_band": true,
-    "luck_points": 36.2
-   },
-   "source_url": "https://www.nba.com/game/phx-vs-den-0022600252",
-   "schedule_source_url": "https://www.nba.com/schedule"
-  },
-  {
    "date": "2026-11-17",
    "game_id": "0022600253",
    "matchup": "NYK@TOR",
@@ -1807,39 +142,39 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 95.67,
-    "game_possessions_from_official_poss_column": 97.79,
-    "ppp_proj_home": 1.096,
-    "ppp_proj_away": 1.1452,
-    "pts_home": 104.9,
-    "pts_away": 109.6,
+    "game_possessions": 95.36,
+    "game_possessions_from_official_poss_column": 98.42,
+    "ppp_proj_home": 1.0821,
+    "ppp_proj_away": 1.1307,
+    "pts_home": 103.2,
+    "pts_away": 107.8,
     "margin": -3.8,
-    "total": 214.4
+    "total": 211.0
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 95.67,
-    "pace_factor": 0.9583,
-    "pts_home": 99.9,
-    "pts_away": 104.4,
+    "game_possessions": 95.36,
+    "pace_factor": 0.9551,
+    "pts_home": 99.6,
+    "pts_away": 104.1,
     "margin": -3.6,
-    "total": 204.3
+    "total": 203.7
    },
    "blend": {
-    "p_home_win_estimator_a": 0.4112,
-    "p_home_win_estimator_b": 0.4158,
-    "p_home_win_blend": 0.4135,
+    "p_home_win_estimator_a": 0.4107,
+    "p_home_win_estimator_b": 0.4153,
+    "p_home_win_blend": 0.413,
     "disagreement": 0.0046,
     "disagreement_pp": 0.46,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.46 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": -3.7,
-    "total_blend": 209.4
+    "total_blend": 207.3
    },
-   "line_total": 209.4,
+   "line_total": 207.3,
    "line_spread_home": -3.7,
-   "model_home_win_prob": 0.4135,
+   "model_home_win_prob": 0.413,
    "model_home_ml": 142,
    "confidence_signal_pp": 0.46,
    "rest_home": {
@@ -1926,12 +261,12 @@
    "luck_home": {
     "luck_z": -0.04,
     "in_noise_band": true,
-    "luck_points": -2.0
+    "luck_points": -1.9
    },
    "luck_away": {
-    "luck_z": -0.52,
+    "luck_z": -0.49,
     "in_noise_band": true,
-    "luck_points": -25.1
+    "luck_points": -24.2
    },
    "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600253",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -1954,37 +289,37 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 102.1,
-    "game_possessions_from_official_poss_column": 101.33,
-    "ppp_proj_home": 1.1385,
-    "ppp_proj_away": 1.0996,
-    "pts_home": 116.2,
+    "game_possessions": 102.01,
+    "game_possessions_from_official_poss_column": 101.27,
+    "ppp_proj_home": 1.1401,
+    "ppp_proj_away": 1.1011,
+    "pts_home": 116.3,
     "pts_away": 112.3,
     "margin": 4.8,
-    "total": 228.5
+    "total": 228.6
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 102.1,
-    "pace_factor": 1.0227,
-    "pts_home": 119.0,
-    "pts_away": 114.9,
+    "game_possessions": 102.01,
+    "pace_factor": 1.0217,
+    "pts_home": 118.9,
+    "pts_away": 114.8,
     "margin": 4.9,
-    "total": 233.9
+    "total": 233.7
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6116,
-    "p_home_win_estimator_b": 0.6139,
-    "p_home_win_blend": 0.6127,
+    "p_home_win_estimator_a": 0.6123,
+    "p_home_win_estimator_b": 0.6145,
+    "p_home_win_blend": 0.6134,
     "disagreement": 0.0023,
     "disagreement_pp": 0.23,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.23 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": 4.8,
-    "total_blend": 231.2
+    "total_blend": 231.1
    },
-   "line_total": 229.2,
+   "line_total": 229.1,
    "line_spread_home": -0.9,
    "model_home_win_prob": 0.4784,
    "model_home_ml": 109,
@@ -1995,7 +330,7 @@
     "three_in_four": true,
     "games_in_last_4_days": 3,
     "last_date": "2026-11-16",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -2136,14 +471,14 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": -0.53,
+    "luck_z": -0.42,
     "in_noise_band": true,
-    "luck_points": -25.7
+    "luck_points": -21.8
    },
    "luck_away": {
-    "luck_z": 0.02,
+    "luck_z": -0.06,
     "in_noise_band": true,
-    "luck_points": 1.1
+    "luck_points": -2.9
    },
    "source_url": "https://www.nba.com/game/por-vs-min-0022600254",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -2166,41 +501,41 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 98.58,
-    "game_possessions_from_official_poss_column": 100.63,
-    "ppp_proj_home": 1.1506,
-    "ppp_proj_away": 1.0726,
-    "pts_home": 113.4,
-    "pts_away": 105.7,
-    "margin": 8.6,
+    "game_possessions": 98.4,
+    "game_possessions_from_official_poss_column": 100.53,
+    "ppp_proj_home": 1.1531,
+    "ppp_proj_away": 1.0749,
+    "pts_home": 113.5,
+    "pts_away": 105.8,
+    "margin": 8.5,
     "total": 219.2
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 98.58,
-    "pace_factor": 0.9874,
-    "pts_home": 114.5,
-    "pts_away": 106.7,
+    "game_possessions": 98.4,
+    "pace_factor": 0.9856,
+    "pts_home": 114.3,
+    "pts_away": 106.5,
     "margin": 8.6,
-    "total": 221.2
+    "total": 220.8
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6943,
-    "p_home_win_estimator_b": 0.6943,
+    "p_home_win_estimator_a": 0.6933,
+    "p_home_win_estimator_b": 0.6954,
     "p_home_win_blend": 0.6943,
-    "disagreement": 0.0,
-    "disagreement_pp": 0.0,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "disagreement": 0.0021,
+    "disagreement_pp": 0.21,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.21 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": 8.6,
-    "total_blend": 220.2
+    "total_blend": 220.0
    },
-   "line_total": 220.2,
+   "line_total": 220.0,
    "line_spread_home": 8.6,
-   "model_home_win_prob": 0.6943,
-   "model_home_ml": -227,
-   "confidence_signal_pp": 0.0,
+   "model_home_win_prob": 0.6954,
+   "model_home_ml": -228,
+   "confidence_signal_pp": 0.21,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -2259,14 +594,14 @@
     "status": "MEASURED from the official injury-report edition and the official per-player minutes capture"
    },
    "luck_home": {
-    "luck_z": -0.83,
+    "luck_z": -0.82,
     "in_noise_band": true,
-    "luck_points": -41.8
+    "luck_points": -42.0
    },
    "luck_away": {
     "luck_z": -0.2,
     "in_noise_band": true,
-    "luck_points": -9.5
+    "luck_points": -9.6
    },
    "source_url": "https://www.nba.com/game/det-vs-sas-0022600255",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -2289,40 +624,40 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 97.49,
-    "game_possessions_from_official_poss_column": 98.61,
-    "ppp_proj_home": 1.218,
-    "ppp_proj_away": 1.024,
+    "game_possessions": 97.44,
+    "game_possessions_from_official_poss_column": 98.59,
+    "ppp_proj_home": 1.2185,
+    "ppp_proj_away": 1.0245,
     "pts_home": 118.7,
     "pts_away": 99.8,
-    "margin": 19.8,
+    "margin": 19.7,
     "total": 218.6
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 97.49,
-    "pace_factor": 0.9765,
-    "pts_home": 115.1,
+    "game_possessions": 97.44,
+    "pace_factor": 0.9759,
+    "pts_home": 115.0,
     "pts_away": 96.7,
-    "margin": 19.2,
-    "total": 211.8
+    "margin": 19.1,
+    "total": 211.7
    },
    "blend": {
-    "p_home_win_estimator_a": 0.8789,
-    "p_home_win_estimator_b": 0.8716,
-    "p_home_win_blend": 0.8753,
+    "p_home_win_estimator_a": 0.8791,
+    "p_home_win_estimator_b": 0.8718,
+    "p_home_win_blend": 0.8755,
     "disagreement": 0.0073,
     "disagreement_pp": 0.73,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.73 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 19.5,
-    "total_blend": 215.2
+    "margin_blend": 19.4,
+    "total_blend": 215.1
    },
-   "line_total": 215.2,
-   "line_spread_home": 19.5,
-   "model_home_win_prob": 0.8754,
-   "model_home_ml": -703,
+   "line_total": 215.1,
+   "line_spread_home": 19.4,
+   "model_home_win_prob": 0.8756,
+   "model_home_ml": -704,
    "confidence_signal_pp": 0.73,
    "rest_home": {
     "rest_days": 1,
@@ -2398,7 +733,7 @@
    "luck_away": {
     "luck_z": -0.08,
     "in_noise_band": true,
-    "luck_points": -4.0
+    "luck_points": -3.9
    },
    "source_url": "https://www.nba.com/game/cha-vs-lal-0022600256",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -2421,41 +756,41 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 101.21,
-    "game_possessions_from_official_poss_column": 101.88,
-    "ppp_proj_home": 1.1342,
-    "ppp_proj_away": 1.0757,
-    "pts_home": 114.8,
-    "pts_away": 108.9,
+    "game_possessions": 100.42,
+    "game_possessions_from_official_poss_column": 101.35,
+    "ppp_proj_home": 1.1464,
+    "ppp_proj_away": 1.0873,
+    "pts_home": 115.1,
+    "pts_away": 109.2,
     "margin": 6.8,
-    "total": 223.7
+    "total": 224.3
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 101.21,
-    "pace_factor": 1.0138,
-    "pts_home": 118.8,
-    "pts_away": 112.7,
-    "margin": 7.0,
-    "total": 231.4
+    "game_possessions": 100.42,
+    "pace_factor": 1.0058,
+    "pts_home": 117.9,
+    "pts_away": 111.8,
+    "margin": 6.9,
+    "total": 229.6
    },
    "blend": {
-    "p_home_win_estimator_a": 0.656,
-    "p_home_win_estimator_b": 0.6604,
-    "p_home_win_blend": 0.6582,
-    "disagreement": 0.0043,
-    "disagreement_pp": 0.43,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.43 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.6569,
+    "p_home_win_estimator_b": 0.6591,
+    "p_home_win_blend": 0.658,
+    "disagreement": 0.0022,
+    "disagreement_pp": 0.22,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.22 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 6.9,
-    "total_blend": 227.6
+    "margin_blend": 6.8,
+    "total_blend": 226.9
    },
-   "line_total": 227.6,
-   "line_spread_home": 7.6,
-   "model_home_win_prob": 0.6736,
-   "model_home_ml": -206,
-   "confidence_signal_pp": 0.43,
+   "line_total": 226.9,
+   "line_spread_home": 7.5,
+   "model_home_win_prob": 0.6723,
+   "model_home_ml": -205,
+   "confidence_signal_pp": 0.22,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -2541,9 +876,9 @@
     "luck_points": 15.0
    },
    "luck_away": {
-    "luck_z": 1.4,
+    "luck_z": 1.38,
     "in_noise_band": true,
-    "luck_points": 70.5
+    "luck_points": 71.0
    },
    "source_url": "https://www.nba.com/game/uta-vs-lac-0022600257",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -2566,48 +901,48 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 100.34,
-    "game_possessions_from_official_poss_column": 100.94,
-    "ppp_proj_home": 1.1386,
-    "ppp_proj_away": 1.2126,
-    "pts_home": 114.2,
-    "pts_away": 121.7,
+    "game_possessions": 101.06,
+    "game_possessions_from_official_poss_column": 101.21,
+    "ppp_proj_home": 1.1326,
+    "ppp_proj_away": 1.2062,
+    "pts_home": 114.5,
+    "pts_away": 121.9,
     "margin": -6.6,
-    "total": 235.9
+    "total": 236.4
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 100.34,
-    "pace_factor": 1.005,
-    "pts_home": 116.0,
-    "pts_away": 123.6,
-    "margin": -6.7,
-    "total": 239.6
+    "game_possessions": 101.06,
+    "pace_factor": 1.0122,
+    "pts_home": 116.9,
+    "pts_away": 124.5,
+    "margin": -6.8,
+    "total": 241.3
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3483,
-    "p_home_win_estimator_b": 0.3461,
-    "p_home_win_blend": 0.3472,
-    "disagreement": 0.0022,
-    "disagreement_pp": 0.22,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.22 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.3474,
+    "p_home_win_estimator_b": 0.3431,
+    "p_home_win_blend": 0.3453,
+    "disagreement": 0.0044,
+    "disagreement_pp": 0.44,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.44 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": -6.7,
-    "total_blend": 237.8
+    "total_blend": 238.9
    },
-   "line_total": 237.8,
+   "line_total": 238.9,
    "line_spread_home": -6.3,
-   "model_home_win_prob": 0.3542,
-   "model_home_ml": 182,
-   "confidence_signal_pp": 0.22,
+   "model_home_win_prob": 0.3534,
+   "model_home_ml": 183,
+   "confidence_signal_pp": 0.44,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-16",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -2677,14 +1012,14 @@
     "note": "official per-player minutes not captured for this team"
    },
    "luck_home": {
-    "luck_z": 0.01,
+    "luck_z": -0.04,
     "in_noise_band": true,
-    "luck_points": 0.4
+    "luck_points": -1.9
    },
    "luck_away": {
-    "luck_z": -1.13,
+    "luck_z": -1.04,
     "in_noise_band": true,
-    "luck_points": -54.7
+    "luck_points": -53.5
    },
    "source_url": "https://www.nba.com/game/mem-vs-cle-0022600258",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -2707,40 +1042,40 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 98.83,
-    "game_possessions_from_official_poss_column": 99.23,
-    "ppp_proj_home": 1.0812,
-    "ppp_proj_away": 1.1948,
+    "game_possessions": 98.9,
+    "game_possessions_from_official_poss_column": 99.27,
+    "ppp_proj_home": 1.0805,
+    "ppp_proj_away": 1.194,
     "pts_home": 106.9,
     "pts_away": 118.1,
     "margin": -10.4,
-    "total": 224.9
+    "total": 225.0
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 98.83,
-    "pace_factor": 0.9899,
+    "game_possessions": 98.9,
+    "pace_factor": 0.9906,
     "pts_home": 104.9,
     "pts_away": 115.9,
     "margin": -10.2,
-    "total": 220.7
+    "total": 220.9
    },
    "blend": {
-    "p_home_win_estimator_a": 0.2695,
-    "p_home_win_estimator_b": 0.2734,
-    "p_home_win_blend": 0.2715,
+    "p_home_win_estimator_a": 0.2683,
+    "p_home_win_estimator_b": 0.2722,
+    "p_home_win_blend": 0.2702,
     "disagreement": 0.0039,
     "disagreement_pp": 0.39,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.39 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": -10.3,
-    "total_blend": 222.8
+    "total_blend": 222.9
    },
-   "line_total": 222.8,
+   "line_total": 222.9,
    "line_spread_home": -8.5,
-   "model_home_win_prob": 0.308,
-   "model_home_ml": 225,
+   "model_home_win_prob": 0.307,
+   "model_home_ml": 226,
    "confidence_signal_pp": 0.39,
    "rest_home": {
     "rest_days": 2,
@@ -2838,12 +1173,12 @@
    "luck_home": {
     "luck_z": -0.38,
     "in_noise_band": true,
-    "luck_points": -19.4
+    "luck_points": -19.5
    },
    "luck_away": {
-    "luck_z": 0.65,
+    "luck_z": 0.08,
     "in_noise_band": true,
-    "luck_points": 32.7
+    "luck_points": 4.4
    },
    "source_url": "https://www.nba.com/game/hou-vs-ind-0022600259",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -2866,48 +1201,48 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 102.96,
-    "game_possessions_from_official_poss_column": 101.92,
-    "ppp_proj_home": 1.2143,
-    "ppp_proj_away": 1.0828,
-    "pts_home": 125.0,
-    "pts_away": 111.5,
+    "game_possessions": 102.79,
+    "game_possessions_from_official_poss_column": 101.79,
+    "ppp_proj_home": 1.2176,
+    "ppp_proj_away": 1.0858,
+    "pts_home": 125.2,
+    "pts_away": 111.6,
     "margin": 14.4,
-    "total": 236.5
+    "total": 236.8
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 102.96,
-    "pace_factor": 1.0313,
-    "pts_home": 129.4,
-    "pts_away": 115.4,
-    "margin": 14.9,
-    "total": 244.9
+    "game_possessions": 102.79,
+    "pace_factor": 1.0295,
+    "pts_home": 129.2,
+    "pts_away": 115.2,
+    "margin": 14.8,
+    "total": 244.5
    },
    "blend": {
-    "p_home_win_estimator_a": 0.8025,
-    "p_home_win_estimator_b": 0.8106,
-    "p_home_win_blend": 0.8066,
-    "disagreement": 0.0081,
-    "disagreement_pp": 0.81,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.81 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.8039,
+    "p_home_win_estimator_b": 0.8104,
+    "p_home_win_blend": 0.8072,
+    "disagreement": 0.0065,
+    "disagreement_pp": 0.65,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.65 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 14.7,
+    "margin_blend": 14.6,
     "total_blend": 240.7
    },
    "line_total": 240.7,
-   "line_spread_home": 16.3,
+   "line_spread_home": 16.2,
    "model_home_win_prob": 0.8317,
    "model_home_ml": -494,
-   "confidence_signal_pp": 0.81,
+   "confidence_signal_pp": 0.65,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-16",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -2973,12 +1308,12 @@
     "note": "official per-player minutes not captured for this team"
    },
    "luck_home": {
-    "luck_z": -0.12,
+    "luck_z": 0.44,
     "in_noise_band": true,
-    "luck_points": -5.8
+    "luck_points": 22.5
    },
    "luck_away": {
-    "luck_z": 0.89,
+    "luck_z": 0.87,
     "in_noise_band": true,
     "luck_points": 44.6
    },
@@ -3003,28 +1338,28 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 98.6,
-    "game_possessions_from_official_poss_column": 99.52,
-    "ppp_proj_home": 1.0672,
-    "ppp_proj_away": 1.1337,
-    "pts_home": 105.2,
-    "pts_away": 111.8,
+    "game_possessions": 98.48,
+    "game_possessions_from_official_poss_column": 99.44,
+    "ppp_proj_home": 1.0691,
+    "ppp_proj_away": 1.1357,
+    "pts_home": 105.3,
+    "pts_away": 111.9,
     "margin": -5.7,
-    "total": 217.0
+    "total": 217.1
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 98.6,
-    "pace_factor": 0.9876,
-    "pts_home": 103.9,
-    "pts_away": 110.4,
+    "game_possessions": 98.48,
+    "pace_factor": 0.9864,
+    "pts_home": 103.8,
+    "pts_away": 110.2,
     "margin": -5.6,
-    "total": 214.2
+    "total": 214.0
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3682,
-    "p_home_win_estimator_b": 0.3704,
-    "p_home_win_blend": 0.3693,
+    "p_home_win_estimator_a": 0.3674,
+    "p_home_win_estimator_b": 0.3696,
+    "p_home_win_blend": 0.3685,
     "disagreement": 0.0022,
     "disagreement_pp": 0.22,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.22 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
@@ -3035,7 +1370,7 @@
    },
    "line_total": 215.6,
    "line_spread_home": -4.0,
-   "model_home_win_prob": 0.4066,
+   "model_home_win_prob": 0.406,
    "model_home_ml": 146,
    "confidence_signal_pp": 0.22,
    "rest_home": {
@@ -3140,14 +1475,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": -0.21,
+    "luck_z": 0.31,
     "in_noise_band": true,
-    "luck_points": -9.8
+    "luck_points": 15.2
    },
    "luck_away": {
-    "luck_z": -0.28,
+    "luck_z": -0.19,
     "in_noise_band": true,
-    "luck_points": -14.0
+    "luck_points": -10.3
    },
    "source_url": "https://www.nba.com/game/phi-vs-orl-0022600261",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -3170,40 +1505,40 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 103.44,
-    "game_possessions_from_official_poss_column": 102.54,
-    "ppp_proj_home": 1.1669,
-    "ppp_proj_away": 1.1219,
-    "pts_home": 120.7,
-    "pts_away": 116.0,
+    "game_possessions": 103.87,
+    "game_possessions_from_official_poss_column": 102.69,
+    "ppp_proj_home": 1.1637,
+    "ppp_proj_away": 1.1189,
+    "pts_home": 120.9,
+    "pts_away": 116.2,
     "margin": 5.5,
-    "total": 236.8
+    "total": 237.1
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 103.44,
-    "pace_factor": 1.0361,
-    "pts_home": 126.5,
-    "pts_away": 121.6,
+    "game_possessions": 103.87,
+    "pace_factor": 1.0403,
+    "pts_home": 127.0,
+    "pts_away": 122.1,
     "margin": 5.7,
-    "total": 248.1
+    "total": 249.1
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6274,
-    "p_home_win_estimator_b": 0.6318,
-    "p_home_win_blend": 0.6296,
+    "p_home_win_estimator_a": 0.6281,
+    "p_home_win_estimator_b": 0.6326,
+    "p_home_win_blend": 0.6304,
     "disagreement": 0.0045,
     "disagreement_pp": 0.45,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.45 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": 5.6,
-    "total_blend": 242.4
+    "total_blend": 243.1
    },
-   "line_total": 242.4,
+   "line_total": 243.1,
    "line_spread_home": 6.1,
-   "model_home_win_prob": 0.6408,
-   "model_home_ml": -178,
+   "model_home_win_prob": 0.6416,
+   "model_home_ml": -179,
    "confidence_signal_pp": 0.45,
    "rest_home": {
     "rest_days": 1,
@@ -3211,7 +1546,7 @@
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-16",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -3278,14 +1613,14 @@
     "note": "official per-player minutes not captured for this team"
    },
    "luck_home": {
-    "luck_z": -0.07,
+    "luck_z": -0.14,
     "in_noise_band": true,
-    "luck_points": -3.2
+    "luck_points": -7.0
    },
    "luck_away": {
-    "luck_z": 0.97,
+    "luck_z": 0.95,
     "in_noise_band": true,
-    "luck_points": 45.1
+    "luck_points": 47.0
    },
    "source_url": "https://www.nba.com/game/chi-vs-bkn-0022600262",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -3308,41 +1643,41 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 99.67,
-    "game_possessions_from_official_poss_column": 100.45,
-    "ppp_proj_home": 1.1595,
-    "ppp_proj_away": 1.087,
-    "pts_home": 115.6,
-    "pts_away": 108.3,
-    "margin": 8.1,
-    "total": 223.9
+    "game_possessions": 99.61,
+    "game_possessions_from_official_poss_column": 100.71,
+    "ppp_proj_home": 1.1537,
+    "ppp_proj_away": 1.0816,
+    "pts_home": 114.9,
+    "pts_away": 107.7,
+    "margin": 8.0,
+    "total": 222.7
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 99.67,
-    "pace_factor": 0.9983,
-    "pts_home": 116.3,
-    "pts_away": 109.0,
+    "game_possessions": 99.61,
+    "pace_factor": 0.9977,
+    "pts_home": 116.2,
+    "pts_away": 108.9,
     "margin": 8.1,
-    "total": 225.2
+    "total": 225.1
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6838,
-    "p_home_win_estimator_b": 0.6838,
+    "p_home_win_estimator_a": 0.6828,
+    "p_home_win_estimator_b": 0.6849,
     "p_home_win_blend": 0.6838,
-    "disagreement": 0.0,
-    "disagreement_pp": 0.0,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "disagreement": 0.0021,
+    "disagreement_pp": 0.21,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.21 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": 8.1,
-    "total_blend": 224.6
+    "total_blend": 223.9
    },
-   "line_total": 224.6,
+   "line_total": 223.9,
    "line_spread_home": 7.4,
-   "model_home_win_prob": 0.6695,
+   "model_home_win_prob": 0.6704,
    "model_home_ml": -203,
-   "confidence_signal_pp": 0.0,
+   "confidence_signal_pp": 0.21,
    "rest_home": {
     "rest_days": 0,
     "back_to_back": true,
@@ -3358,7 +1693,7 @@
     "three_in_four": true,
     "games_in_last_4_days": 3,
     "last_date": "2026-11-16",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "travel_away": {
@@ -3437,12 +1772,12 @@
    "luck_home": {
     "luck_z": -0.04,
     "in_noise_band": true,
-    "luck_points": -2.0
+    "luck_points": -1.9
    },
    "luck_away": {
-    "luck_z": -0.96,
+    "luck_z": -0.93,
     "in_noise_band": true,
-    "luck_points": -48.2
+    "luck_points": -49.6
    },
    "source_url": "https://www.nba.com/game/was-vs-tor-0022600263",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -3465,31 +1800,31 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 101.47,
-    "game_possessions_from_official_poss_column": 102.74,
-    "ppp_proj_home": 1.0706,
-    "ppp_proj_away": 1.2102,
-    "pts_home": 108.6,
-    "pts_away": 122.8,
-    "margin": -13.3,
-    "total": 231.4
+    "game_possessions": 101.25,
+    "game_possessions_from_official_poss_column": 102.54,
+    "ppp_proj_home": 1.075,
+    "ppp_proj_away": 1.2151,
+    "pts_home": 108.8,
+    "pts_away": 123.0,
+    "margin": -13.4,
+    "total": 231.9
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 101.47,
-    "pace_factor": 1.0164,
-    "pts_home": 114.3,
-    "pts_away": 129.2,
+    "game_possessions": 101.25,
+    "pace_factor": 1.0141,
+    "pts_home": 114.1,
+    "pts_away": 128.9,
     "margin": -14.0,
-    "total": 243.5
+    "total": 243.0
    },
    "blend": {
-    "p_home_win_estimator_a": 0.216,
-    "p_home_win_estimator_b": 0.2041,
-    "p_home_win_blend": 0.2101,
-    "disagreement": 0.0119,
-    "disagreement_pp": 1.19,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.19 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.2129,
+    "p_home_win_estimator_b": 0.2027,
+    "p_home_win_blend": 0.2078,
+    "disagreement": 0.0102,
+    "disagreement_pp": 1.02,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 1.02 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": -13.7,
@@ -3497,16 +1832,16 @@
    },
    "line_total": 237.4,
    "line_spread_home": -12.0,
-   "model_home_win_prob": 0.2397,
-   "model_home_ml": 317,
-   "confidence_signal_pp": 1.19,
+   "model_home_win_prob": 0.2383,
+   "model_home_ml": 320,
+   "confidence_signal_pp": 1.02,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-16",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -3593,14 +1928,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": -0.24,
+    "luck_z": 0.43,
     "in_noise_band": true,
-    "luck_points": -11.9
+    "luck_points": 22.7
    },
    "luck_away": {
     "luck_z": -0.2,
     "in_noise_band": true,
-    "luck_points": -9.5
+    "luck_points": -9.6
    },
    "source_url": "https://www.nba.com/game/det-vs-nop-0022600264",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -3623,10 +1958,10 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 102.29,
-    "game_possessions_from_official_poss_column": 101.46,
-    "ppp_proj_home": 1.1161,
-    "ppp_proj_away": 1.0909,
+    "game_possessions": 102.66,
+    "game_possessions_from_official_poss_column": 101.64,
+    "ppp_proj_home": 1.1123,
+    "ppp_proj_away": 1.0871,
     "pts_home": 114.2,
     "pts_away": 111.6,
     "margin": 3.4,
@@ -3634,28 +1969,28 @@
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 102.29,
-    "pace_factor": 1.0246,
-    "pts_home": 117.1,
-    "pts_away": 114.4,
+    "game_possessions": 102.66,
+    "pace_factor": 1.0282,
+    "pts_home": 117.5,
+    "pts_away": 114.8,
     "margin": 3.5,
-    "total": 231.5
+    "total": 232.3
    },
    "blend": {
-    "p_home_win_estimator_a": 0.5796,
-    "p_home_win_estimator_b": 0.5819,
-    "p_home_win_blend": 0.5807,
+    "p_home_win_estimator_a": 0.5801,
+    "p_home_win_estimator_b": 0.5824,
+    "p_home_win_blend": 0.5812,
     "disagreement": 0.0023,
     "disagreement_pp": 0.23,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.23 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": 3.5,
-    "total_blend": 228.7
+    "total_blend": 229.1
    },
-   "line_total": 228.7,
+   "line_total": 229.1,
    "line_spread_home": 4.4,
-   "model_home_win_prob": 0.6025,
+   "model_home_win_prob": 0.6032,
    "model_home_ml": -152,
    "confidence_signal_pp": 0.23,
    "rest_home": {
@@ -3738,14 +2073,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": 0.7,
+    "luck_z": 0.68,
     "in_noise_band": true,
     "luck_points": 35.1
    },
    "luck_away": {
-    "luck_z": -0.8,
+    "luck_z": -0.79,
     "in_noise_band": true,
-    "luck_points": -40.3
+    "luck_points": -40.4
    },
    "source_url": "https://www.nba.com/game/atl-vs-okc-0022600265",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -3768,48 +2103,48 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 94.45,
-    "game_possessions_from_official_poss_column": 98.08,
-    "ppp_proj_home": 1.0858,
-    "ppp_proj_away": 1.1849,
-    "pts_home": 102.6,
-    "pts_away": 111.9,
+    "game_possessions": 94.54,
+    "game_possessions_from_official_poss_column": 98.03,
+    "ppp_proj_home": 1.087,
+    "ppp_proj_away": 1.1862,
+    "pts_home": 102.8,
+    "pts_away": 112.1,
     "margin": -8.5,
-    "total": 214.5
+    "total": 214.9
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 94.45,
-    "pace_factor": 0.946,
-    "pts_home": 98.3,
-    "pts_away": 107.3,
-    "margin": -8.1,
-    "total": 205.6
+    "game_possessions": 94.54,
+    "pace_factor": 0.9469,
+    "pts_home": 98.4,
+    "pts_away": 107.4,
+    "margin": -8.2,
+    "total": 205.8
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3078,
-    "p_home_win_estimator_b": 0.3162,
-    "p_home_win_blend": 0.312,
-    "disagreement": 0.0084,
-    "disagreement_pp": 0.84,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.84 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.3067,
+    "p_home_win_estimator_b": 0.313,
+    "p_home_win_blend": 0.3099,
+    "disagreement": 0.0063,
+    "disagreement_pp": 0.63,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.63 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": -8.3,
-    "total_blend": 210.1
+    "total_blend": 210.4
    },
-   "line_total": 210.1,
+   "line_total": 210.4,
    "line_spread_home": -5.7,
-   "model_home_win_prob": 0.3675,
-   "model_home_ml": 172,
-   "confidence_signal_pp": 0.84,
+   "model_home_win_prob": 0.3667,
+   "model_home_ml": 173,
+   "confidence_signal_pp": 0.63,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
     "three_in_four": false,
     "games_in_last_4_days": 2,
     "last_date": "2026-11-16",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "rest_away": {
@@ -3818,7 +2153,7 @@
     "three_in_four": true,
     "games_in_last_4_days": 3,
     "last_date": "2026-11-16",
-    "last_game_was_home": false,
+    "last_game_was_home": true,
     "source": "official results (data/official/gamelog.json) + official schedule"
    },
    "travel_away": {
@@ -3892,14 +2227,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": 0.04,
+    "luck_z": -0.34,
     "in_noise_band": true,
-    "luck_points": 1.9
+    "luck_points": -16.4
    },
    "luck_away": {
-    "luck_z": -0.38,
+    "luck_z": -0.85,
     "in_noise_band": true,
-    "luck_points": -18.4
+    "luck_points": -43.7
    },
    "source_url": "https://www.nba.com/game/bos-vs-den-0022600266",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -3922,10 +2257,10 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 100.36,
-    "game_possessions_from_official_poss_column": 100.58,
-    "ppp_proj_home": 1.1147,
-    "ppp_proj_away": 1.1553,
+    "game_possessions": 99.91,
+    "game_possessions_from_official_poss_column": 100.36,
+    "ppp_proj_home": 1.1198,
+    "ppp_proj_away": 1.1606,
     "pts_home": 111.9,
     "pts_away": 116.0,
     "margin": -3.2,
@@ -3933,30 +2268,30 @@
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 100.36,
-    "pace_factor": 1.0052,
-    "pts_home": 112.8,
-    "pts_away": 116.9,
-    "margin": -3.2,
-    "total": 229.8
+    "game_possessions": 99.91,
+    "pace_factor": 1.0007,
+    "pts_home": 112.3,
+    "pts_away": 116.4,
+    "margin": -3.3,
+    "total": 228.7
    },
    "blend": {
-    "p_home_win_estimator_a": 0.425,
-    "p_home_win_estimator_b": 0.425,
-    "p_home_win_blend": 0.425,
-    "disagreement": 0.0,
-    "disagreement_pp": 0.0,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.4246,
+    "p_home_win_estimator_b": 0.4223,
+    "p_home_win_blend": 0.4234,
+    "disagreement": 0.0023,
+    "disagreement_pp": 0.23,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.23 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": -3.2,
-    "total_blend": 228.8
+    "total_blend": 228.2
    },
-   "line_total": 228.8,
+   "line_total": 228.2,
    "line_spread_home": -2.7,
-   "model_home_win_prob": 0.4374,
+   "model_home_win_prob": 0.437,
    "model_home_ml": 129,
-   "confidence_signal_pp": 0.0,
+   "confidence_signal_pp": 0.23,
    "rest_home": {
     "rest_days": 2,
     "back_to_back": false,
@@ -4046,12 +2381,12 @@
    "luck_home": {
     "luck_z": -0.03,
     "in_noise_band": true,
-    "luck_points": -1.4
+    "luck_points": -1.5
    },
    "luck_away": {
-    "luck_z": 0.65,
+    "luck_z": -0.05,
     "in_noise_band": true,
-    "luck_points": 31.7
+    "luck_points": -2.7
    },
    "source_url": "https://www.nba.com/game/gsw-vs-dal-0022600267",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -4074,40 +2409,40 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 101.16,
-    "game_possessions_from_official_poss_column": 101.38,
-    "ppp_proj_home": 1.2464,
-    "ppp_proj_away": 1.0558,
-    "pts_home": 126.1,
-    "pts_away": 106.8,
+    "game_possessions": 101.01,
+    "game_possessions_from_official_poss_column": 101.21,
+    "ppp_proj_home": 1.2508,
+    "ppp_proj_away": 1.0595,
+    "pts_home": 126.3,
+    "pts_away": 107.0,
     "margin": 20.1,
-    "total": 232.9
+    "total": 233.4
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 101.16,
-    "pace_factor": 1.0133,
-    "pts_home": 129.2,
-    "pts_away": 109.4,
+    "game_possessions": 101.01,
+    "pace_factor": 1.0117,
+    "pts_home": 129.0,
+    "pts_away": 109.3,
     "margin": 20.6,
-    "total": 238.6
+    "total": 238.3
    },
    "blend": {
-    "p_home_win_estimator_a": 0.8824,
-    "p_home_win_estimator_b": 0.8882,
-    "p_home_win_blend": 0.8853,
+    "p_home_win_estimator_a": 0.8839,
+    "p_home_win_estimator_b": 0.8896,
+    "p_home_win_blend": 0.8867,
     "disagreement": 0.0057,
     "disagreement_pp": 0.57,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.57 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": 20.4,
-    "total_blend": 235.8
+    "total_blend": 235.9
    },
-   "line_total": 235.8,
+   "line_total": 235.9,
    "line_spread_home": 20.4,
-   "model_home_win_prob": 0.886,
-   "model_home_ml": -777,
+   "model_home_win_prob": 0.8874,
+   "model_home_ml": -788,
    "confidence_signal_pp": 0.57,
    "rest_home": {
     "rest_days": 0,
@@ -4195,9 +2530,9 @@
     "luck_points": -24.4
    },
    "luck_away": {
-    "luck_z": 1.4,
+    "luck_z": 1.38,
     "in_noise_band": true,
-    "luck_points": 70.5
+    "luck_points": 71.0
    },
    "source_url": "https://www.nba.com/game/uta-vs-lal-0022600268",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -4220,41 +2555,41 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 99.61,
-    "game_possessions_from_official_poss_column": 99.51,
-    "ppp_proj_home": 1.1216,
-    "ppp_proj_away": 1.2057,
-    "pts_home": 111.7,
-    "pts_away": 120.1,
+    "game_possessions": 100.11,
+    "game_possessions_from_official_poss_column": 99.81,
+    "ppp_proj_home": 1.115,
+    "ppp_proj_away": 1.1986,
+    "pts_home": 111.6,
+    "pts_away": 120.0,
     "margin": -7.5,
-    "total": 231.8
+    "total": 231.6
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 99.61,
-    "pace_factor": 0.9977,
-    "pts_home": 110.3,
-    "pts_away": 118.5,
-    "margin": -7.4,
-    "total": 228.8
+    "game_possessions": 100.11,
+    "pace_factor": 1.0027,
+    "pts_home": 110.8,
+    "pts_away": 119.1,
+    "margin": -7.5,
+    "total": 229.9
    },
    "blend": {
-    "p_home_win_estimator_a": 0.3289,
-    "p_home_win_estimator_b": 0.331,
-    "p_home_win_blend": 0.3299,
-    "disagreement": 0.0021,
-    "disagreement_pp": 0.21,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.21 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.3279,
+    "p_home_win_estimator_b": 0.3279,
+    "p_home_win_blend": 0.3279,
+    "disagreement": 0.0,
+    "disagreement_pp": 0.0,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": -7.5,
-    "total_blend": 230.3
+    "total_blend": 230.8
    },
-   "line_total": 230.3,
+   "line_total": 230.8,
    "line_spread_home": -5.8,
-   "model_home_win_prob": 0.365,
+   "model_home_win_prob": 0.3644,
    "model_home_ml": 174,
-   "confidence_signal_pp": 0.21,
+   "confidence_signal_pp": 0.0,
    "rest_home": {
     "rest_days": 2,
     "back_to_back": false,
@@ -4337,14 +2672,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-18; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": 0.93,
+    "luck_z": 0.92,
     "in_noise_band": true,
-    "luck_points": 45.2
+    "luck_points": 45.3
    },
    "luck_away": {
-    "luck_z": 0.78,
+    "luck_z": 1.1,
     "in_noise_band": true,
-    "luck_points": 36.2
+    "luck_points": 54.4
    },
    "source_url": "https://www.nba.com/game/phx-vs-sac-0022600269",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -4367,41 +2702,41 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 100.28,
-    "game_possessions_from_official_poss_column": 100.96,
-    "ppp_proj_home": 1.1755,
-    "ppp_proj_away": 1.1304,
-    "pts_home": 117.9,
-    "pts_away": 113.4,
+    "game_possessions": 100.34,
+    "game_possessions_from_official_poss_column": 100.93,
+    "ppp_proj_home": 1.1765,
+    "ppp_proj_away": 1.1313,
+    "pts_home": 118.1,
+    "pts_away": 113.5,
     "margin": 5.4,
-    "total": 231.2
+    "total": 231.6
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 100.28,
-    "pace_factor": 1.0044,
-    "pts_home": 119.8,
-    "pts_away": 115.2,
-    "margin": 5.5,
-    "total": 235.0
+    "game_possessions": 100.34,
+    "pace_factor": 1.005,
+    "pts_home": 119.9,
+    "pts_away": 115.3,
+    "margin": 5.4,
+    "total": 235.1
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6251,
-    "p_home_win_estimator_b": 0.6274,
-    "p_home_win_blend": 0.6262,
-    "disagreement": 0.0022,
-    "disagreement_pp": 0.22,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.22 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.6259,
+    "p_home_win_estimator_b": 0.6259,
+    "p_home_win_blend": 0.6259,
+    "disagreement": 0.0,
+    "disagreement_pp": 0.0,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 5.5,
-    "total_blend": 233.1
+    "margin_blend": 5.4,
+    "total_blend": 233.3
    },
-   "line_total": 233.1,
-   "line_spread_home": 6.0,
-   "model_home_win_prob": 0.6386,
-   "model_home_ml": -177,
-   "confidence_signal_pp": 0.22,
+   "line_total": 233.3,
+   "line_spread_home": 5.9,
+   "model_home_win_prob": 0.6372,
+   "model_home_ml": -176,
+   "confidence_signal_pp": 0.0,
    "rest_home": {
     "rest_days": 0,
     "back_to_back": true,
@@ -4475,14 +2810,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": -1.13,
+    "luck_z": -1.04,
     "in_noise_band": true,
-    "luck_points": -54.7
+    "luck_points": -53.5
    },
    "luck_away": {
-    "luck_z": 0.65,
+    "luck_z": -0.05,
     "in_noise_band": true,
-    "luck_points": 31.7
+    "luck_points": -2.7
    },
    "source_url": "https://www.nba.com/game/gsw-vs-mem-0022600270",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -4505,41 +2840,41 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 101.14,
-    "game_possessions_from_official_poss_column": 100.53,
-    "ppp_proj_home": 1.0385,
-    "ppp_proj_away": 1.2575,
-    "pts_home": 105.0,
-    "pts_away": 127.2,
+    "game_possessions": 101.48,
+    "game_possessions_from_official_poss_column": 100.66,
+    "ppp_proj_home": 1.0358,
+    "ppp_proj_away": 1.2542,
+    "pts_home": 105.1,
+    "pts_away": 127.3,
     "margin": -21.3,
-    "total": 232.2
+    "total": 232.4
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 101.14,
-    "pace_factor": 1.0131,
-    "pts_home": 105.8,
-    "pts_away": 128.1,
-    "margin": -21.4,
-    "total": 233.9
+    "game_possessions": 101.48,
+    "pace_factor": 1.0164,
+    "pts_home": 106.2,
+    "pts_away": 128.5,
+    "margin": -21.6,
+    "total": 234.7
    },
    "blend": {
-    "p_home_win_estimator_a": 0.1042,
-    "p_home_win_estimator_b": 0.1031,
-    "p_home_win_blend": 0.1036,
-    "disagreement": 0.0011,
-    "disagreement_pp": 0.11,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.11 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.1028,
+    "p_home_win_estimator_b": 0.0996,
+    "p_home_win_blend": 0.1012,
+    "disagreement": 0.0032,
+    "disagreement_pp": 0.32,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.32 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": -21.4,
-    "total_blend": 233.1
+    "margin_blend": -21.5,
+    "total_blend": 233.6
    },
-   "line_total": 233.1,
-   "line_spread_home": -21.5,
-   "model_home_win_prob": 0.1016,
-   "model_home_ml": 884,
-   "confidence_signal_pp": 0.11,
+   "line_total": 233.6,
+   "line_spread_home": -21.6,
+   "model_home_win_prob": 0.0992,
+   "model_home_ml": 908,
+   "confidence_signal_pp": 0.32,
    "rest_home": {
     "rest_days": 0,
     "back_to_back": true,
@@ -4611,14 +2946,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": 0.89,
+    "luck_z": 0.87,
     "in_noise_band": true,
     "luck_points": 44.6
    },
    "luck_away": {
-    "luck_z": 0.02,
+    "luck_z": -0.06,
     "in_noise_band": true,
-    "luck_points": 1.1
+    "luck_points": -2.9
    },
    "source_url": "https://www.nba.com/game/por-vs-mil-0022600271",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -4641,41 +2976,41 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 97.06,
-    "game_possessions_from_official_poss_column": 98.92,
-    "ppp_proj_home": 1.1093,
-    "ppp_proj_away": 1.0604,
-    "pts_home": 107.7,
-    "pts_away": 102.9,
-    "margin": 5.6,
-    "total": 210.6
+    "game_possessions": 97.02,
+    "game_possessions_from_official_poss_column": 99.31,
+    "ppp_proj_home": 1.1004,
+    "ppp_proj_away": 1.0519,
+    "pts_home": 106.8,
+    "pts_away": 102.1,
+    "margin": 5.5,
+    "total": 208.8
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 97.06,
-    "pace_factor": 0.9722,
+    "game_possessions": 97.02,
+    "pace_factor": 0.9717,
     "pts_home": 104.9,
     "pts_away": 100.3,
     "margin": 5.5,
-    "total": 205.2
+    "total": 205.1
    },
    "blend": {
-    "p_home_win_estimator_a": 0.6296,
-    "p_home_win_estimator_b": 0.6274,
-    "p_home_win_blend": 0.6285,
-    "disagreement": 0.0022,
-    "disagreement_pp": 0.22,
-    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.22 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "p_home_win_estimator_a": 0.6281,
+    "p_home_win_estimator_b": 0.6281,
+    "p_home_win_blend": 0.6281,
+    "disagreement": 0.0,
+    "disagreement_pp": 0.0,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
     "margin_blend": 5.5,
-    "total_blend": 207.9
+    "total_blend": 206.9
    },
-   "line_total": 207.9,
+   "line_total": 206.9,
    "line_spread_home": 5.7,
-   "model_home_win_prob": 0.6324,
-   "model_home_ml": -172,
-   "confidence_signal_pp": 0.22,
+   "model_home_win_prob": 0.6331,
+   "model_home_ml": -173,
+   "confidence_signal_pp": 0.0,
    "rest_home": {
     "rest_days": 1,
     "back_to_back": false,
@@ -4764,14 +3099,14 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": -0.53,
+    "luck_z": -0.42,
     "in_noise_band": true,
-    "luck_points": -25.7
+    "luck_points": -21.8
    },
    "luck_away": {
-    "luck_z": -0.52,
+    "luck_z": -0.49,
     "in_noise_band": true,
-    "luck_points": -25.1
+    "luck_points": -24.2
    },
    "source_url": "https://www.nba.com/game/nyk-vs-min-0022600272",
    "schedule_source_url": "https://www.nba.com/schedule"
@@ -4794,40 +3129,40 @@
    "in_pick_window": true,
    "estimator_a": {
     "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
-    "game_possessions": 99.65,
-    "game_possessions_from_official_poss_column": 100.65,
-    "ppp_proj_home": 1.2252,
-    "ppp_proj_away": 1.0407,
-    "pts_home": 122.1,
-    "pts_away": 103.7,
-    "margin": 19.3,
-    "total": 225.8
+    "game_possessions": 98.97,
+    "game_possessions_from_official_poss_column": 100.24,
+    "ppp_proj_home": 1.2355,
+    "ppp_proj_away": 1.0494,
+    "pts_home": 122.3,
+    "pts_away": 103.9,
+    "margin": 19.2,
+    "total": 226.1
    },
    "estimator_b": {
     "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
-    "game_possessions": 99.65,
-    "pace_factor": 0.9981,
-    "pts_home": 123.3,
-    "pts_away": 104.7,
-    "margin": 19.4,
-    "total": 228.0
+    "game_possessions": 98.97,
+    "pace_factor": 0.9913,
+    "pts_home": 122.5,
+    "pts_away": 104.0,
+    "margin": 19.3,
+    "total": 226.5
    },
    "blend": {
-    "p_home_win_estimator_a": 0.8729,
-    "p_home_win_estimator_b": 0.8741,
-    "p_home_win_blend": 0.8735,
+    "p_home_win_estimator_a": 0.8731,
+    "p_home_win_estimator_b": 0.8743,
+    "p_home_win_blend": 0.8737,
     "disagreement": 0.0012,
     "disagreement_pp": 0.12,
     "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.12 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
     "blend_weight_a": 0.5,
     "blend_weight_b": 0.5,
-    "margin_blend": 19.4,
-    "total_blend": 226.9
+    "margin_blend": 19.2,
+    "total_blend": 226.3
    },
-   "line_total": 226.9,
-   "line_spread_home": 20.8,
-   "model_home_win_prob": 0.8909,
-   "model_home_ml": -817,
+   "line_total": 226.3,
+   "line_spread_home": 20.6,
+   "model_home_win_prob": 0.89,
+   "model_home_ml": -809,
    "confidence_signal_pp": 0.12,
    "rest_home": {
     "rest_days": 1,
@@ -4895,9 +3230,9 @@
     "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-19; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
    },
    "luck_home": {
-    "luck_z": -0.83,
+    "luck_z": -0.82,
     "in_noise_band": true,
-    "luck_points": -41.8
+    "luck_points": -42.0
    },
    "luck_away": {
     "luck_z": 0.32,
@@ -4905,6 +3240,1359 @@
     "luck_points": 15.0
    },
    "source_url": "https://www.nba.com/game/lac-vs-sas-0022600273",
+   "schedule_source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600043",
+   "matchup": "CHA@ATL",
+   "away": "CHA",
+   "home": "ATL",
+   "venue": "State Farm Arena",
+   "city": "Atlanta, GA",
+   "tip_et": "7:00 PM ET",
+   "tip_et_sources": {
+    "per_game_card": "7:00 PM ET",
+    "schedule_page": null,
+    "injury_pdf": null,
+    "conflict": null
+   },
+   "in_pick_window": true,
+   "estimator_a": {
+    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
+    "game_possessions": 100.49,
+    "game_possessions_from_official_poss_column": 100.52,
+    "ppp_proj_home": 1.1351,
+    "ppp_proj_away": 1.0091,
+    "pts_home": 114.1,
+    "pts_away": 101.4,
+    "margin": 13.5,
+    "total": 215.5
+   },
+   "estimator_b": {
+    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
+    "game_possessions": 100.49,
+    "pace_factor": 1.0065,
+    "pts_home": 114.7,
+    "pts_away": 102.0,
+    "margin": 13.6,
+    "total": 216.7
+   },
+   "blend": {
+    "p_home_win_estimator_a": 0.7888,
+    "p_home_win_estimator_b": 0.7905,
+    "p_home_win_blend": 0.7897,
+    "disagreement": 0.0017,
+    "disagreement_pp": 0.17,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.17 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "blend_weight_a": 0.5,
+    "blend_weight_b": 0.5,
+    "margin_blend": 13.6,
+    "total_blend": 216.1
+   },
+   "line_total": 216.1,
+   "line_spread_home": 15.9,
+   "model_home_win_prob": 0.8281,
+   "model_home_ml": -482,
+   "confidence_signal_pp": 0.17,
+   "rest_home": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": false,
+    "games_in_last_4_days": 2,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "rest_away": {
+    "rest_days": 2,
+    "back_to_back": false,
+    "three_in_four": false,
+    "games_in_last_4_days": 2,
+    "last_date": "2026-11-17",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "travel_away": {
+    "from_venue": "Crypto.com Arena",
+    "from_city": "Los Angeles, CA",
+    "to_venue": "State Farm Arena",
+    "to_city": "Atlanta, GA",
+    "miles": 1934.0,
+    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=State%20Farm%20Arena&format=json&formatversion=2",
+    "venue_source": "https://www.nba.com/schedule"
+   },
+   "travel_source": "official schedule",
+   "availability_redistribution_home": {
+    "team": "ATL",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "availability_redistribution_away": null,
+   "net_points_lost_home": 0.0,
+   "net_points_lost_away": 0.0,
+   "rest_adjustment_home": 0.0,
+   "rest_adjustment_away": 0.0,
+   "travel_adjustment_away": 2.321,
+   "rotation_availability_home": {
+    "team": "ATL",
+    "rotation_players": 1,
+    "rotation_players_named": [
+     "jalen johnson"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_away": {
+    "team": "CHA",
+    "status": "not captured",
+    "rotation_players": null,
+    "out": null,
+    "questionable": null,
+    "note": "official per-player minutes not captured for this team"
+   },
+   "luck_home": {
+    "luck_z": -0.79,
+    "in_noise_band": true,
+    "luck_points": -40.4
+   },
+   "luck_away": {
+    "luck_z": -0.08,
+    "in_noise_band": true,
+    "luck_points": -3.9
+   },
+   "source_url": "https://www.nba.com/game/cha-vs-atl-0022600043",
+   "schedule_source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600044",
+   "matchup": "ORL@BKN",
+   "away": "ORL",
+   "home": "BKN",
+   "venue": "Barclays Center",
+   "city": "Brooklyn, NY",
+   "tip_et": "7:30 PM ET",
+   "tip_et_sources": {
+    "per_game_card": "7:30 PM ET",
+    "schedule_page": null,
+    "injury_pdf": null,
+    "conflict": null
+   },
+   "in_pick_window": true,
+   "estimator_a": {
+    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
+    "game_possessions": 97.8,
+    "game_possessions_from_official_poss_column": 99.42,
+    "ppp_proj_home": 1.1118,
+    "ppp_proj_away": 1.1275,
+    "pts_home": 108.7,
+    "pts_away": 110.3,
+    "margin": -0.7,
+    "total": 219.0
+   },
+   "estimator_b": {
+    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
+    "game_possessions": 97.8,
+    "pace_factor": 0.9795,
+    "pts_home": 107.1,
+    "pts_away": 108.6,
+    "margin": -0.7,
+    "total": 215.8
+   },
+   "blend": {
+    "p_home_win_estimator_a": 0.4834,
+    "p_home_win_estimator_b": 0.4834,
+    "p_home_win_blend": 0.4834,
+    "disagreement": 0.0,
+    "disagreement_pp": 0.0,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "blend_weight_a": 0.5,
+    "blend_weight_b": 0.5,
+    "margin_blend": -0.7,
+    "total_blend": 217.4
+   },
+   "line_total": 217.4,
+   "line_spread_home": 0.4,
+   "model_home_win_prob": 0.5095,
+   "model_home_ml": -104,
+   "confidence_signal_pp": 0.0,
+   "rest_home": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": false,
+    "games_in_last_4_days": 2,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": false,
+    "games_in_last_4_days": 2,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "travel_away": {
+    "from_venue": "Kia Center",
+    "from_city": "Orlando, FL",
+    "to_venue": "Barclays Center",
+    "to_city": "Brooklyn, NY",
+    "miles": 938.0,
+    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Barclays%20Center&format=json&formatversion=2",
+    "venue_source": "https://www.nba.com/schedule"
+   },
+   "travel_source": "official schedule",
+   "availability_redistribution_home": {
+    "team": "BKN",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "availability_redistribution_away": {
+    "team": "ORL",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "net_points_lost_home": 0.0,
+   "net_points_lost_away": 0.0,
+   "rest_adjustment_home": 0.0,
+   "rest_adjustment_away": 0.0,
+   "travel_adjustment_away": 1.126,
+   "rotation_availability_home": {
+    "team": "BKN",
+    "rotation_players": 2,
+    "rotation_players_named": [
+     "julius randle",
+     "michael porter jr"
+    ],
+    "listed_on_injury_report": 5,
+    "out": [
+     "Bilodeau, Tyler",
+     "Jefferson, Joshua",
+     "Nelson, Grant",
+     "Powell, Drake",
+     "Saraf, Ben"
+    ],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_away": {
+    "team": "ORL",
+    "rotation_players": 4,
+    "rotation_players_named": [
+     "desmond bane",
+     "franz wagner",
+     "paolo banchero",
+     "wendell carter jr"
+    ],
+    "listed_on_injury_report": 4,
+    "out": [
+     "Banchero, Paolo",
+     "Isaac, Jonathan",
+     "Nelson, Izaiyah",
+     "Penda, Noah"
+    ],
+    "questionable": [],
+    "rotation_out": [
+     "Banchero, Paolo"
+    ],
+    "rotation_questionable": [],
+    "rotation_out_count": 1,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "luck_home": {
+    "luck_z": -0.14,
+    "in_noise_band": true,
+    "luck_points": -7.0
+   },
+   "luck_away": {
+    "luck_z": 0.31,
+    "in_noise_band": true,
+    "luck_points": 15.2
+   },
+   "source_url": "https://www.nba.com/game/orl-vs-bkn-0022600044",
+   "schedule_source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600045",
+   "matchup": "IND@CLE",
+   "away": "IND",
+   "home": "CLE",
+   "venue": "Rocket Arena",
+   "city": "Cleveland, OH",
+   "tip_et": "7:30 PM ET",
+   "tip_et_sources": {
+    "per_game_card": "7:30 PM ET",
+    "schedule_page": null,
+    "injury_pdf": null,
+    "conflict": null
+   },
+   "in_pick_window": true,
+   "estimator_a": {
+    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
+    "game_possessions": 101.7,
+    "game_possessions_from_official_poss_column": 101.04,
+    "ppp_proj_home": 1.1651,
+    "ppp_proj_away": 1.1252,
+    "pts_home": 118.5,
+    "pts_away": 114.4,
+    "margin": 4.9,
+    "total": 232.9
+   },
+   "estimator_b": {
+    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
+    "game_possessions": 101.7,
+    "pace_factor": 1.0186,
+    "pts_home": 120.6,
+    "pts_away": 116.4,
+    "margin": 5.0,
+    "total": 237.0
+   },
+   "blend": {
+    "p_home_win_estimator_a": 0.6145,
+    "p_home_win_estimator_b": 0.6168,
+    "p_home_win_blend": 0.6157,
+    "disagreement": 0.0023,
+    "disagreement_pp": 0.23,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.23 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "blend_weight_a": 0.5,
+    "blend_weight_b": 0.5,
+    "margin_blend": 5.0,
+    "total_blend": 234.9
+   },
+   "line_total": 234.9,
+   "line_spread_home": 5.3,
+   "model_home_win_prob": 0.6241,
+   "model_home_ml": -166,
+   "confidence_signal_pp": 0.23,
+   "rest_home": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": false,
+    "games_in_last_4_days": 2,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": false,
+    "games_in_last_4_days": 2,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "travel_away": {
+    "from_venue": "Gainbridge Fieldhouse",
+    "from_city": "Indianapolis, IN",
+    "to_venue": "Rocket Arena",
+    "to_city": "Cleveland, OH",
+    "miles": 263.0,
+    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Rocket%20Arena&format=json&formatversion=2",
+    "venue_source": "https://www.nba.com/schedule"
+   },
+   "travel_source": "official schedule",
+   "availability_redistribution_home": {
+    "team": "CLE",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "availability_redistribution_away": {
+    "team": "IND",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "net_points_lost_home": 0.0,
+   "net_points_lost_away": 0.0,
+   "rest_adjustment_home": 0.0,
+   "rest_adjustment_away": 0.0,
+   "travel_adjustment_away": 0.316,
+   "rotation_availability_home": {
+    "team": "CLE",
+    "rotation_players": 2,
+    "rotation_players_named": [
+     "donovan mitchell",
+     "james harden"
+    ],
+    "listed_on_injury_report": 7,
+    "out": [
+     "Diop, Khalifa",
+     "Merrill, Sam",
+     "Mobley, Evan",
+     "Tomlin, Nae'Qwan",
+     "Udeh, Jr., Ernest"
+    ],
+    "questionable": [
+     "Tyson, Jaylon",
+     "Watson, Peyton"
+    ],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_away": {
+    "team": "IND",
+    "rotation_players": 2,
+    "rotation_players_named": [
+     "andrew nembhard",
+     "tyrese haliburton"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "luck_home": {
+    "luck_z": -0.04,
+    "in_noise_band": true,
+    "luck_points": -1.9
+   },
+   "luck_away": {
+    "luck_z": -0.38,
+    "in_noise_band": true,
+    "luck_points": -19.5
+   },
+   "source_url": "https://www.nba.com/game/ind-vs-cle-0022600045",
+   "schedule_source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600046",
+   "matchup": "TOR@DET",
+   "away": "TOR",
+   "home": "DET",
+   "venue": "Little Caesars Arena",
+   "city": "Detroit, MI",
+   "tip_et": "7:30 PM ET",
+   "tip_et_sources": {
+    "per_game_card": "7:30 PM ET",
+    "schedule_page": null,
+    "injury_pdf": null,
+    "conflict": null
+   },
+   "in_pick_window": true,
+   "estimator_a": {
+    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
+    "game_possessions": 99.18,
+    "game_possessions_from_official_poss_column": 100.79,
+    "ppp_proj_home": 1.1359,
+    "ppp_proj_away": 1.0973,
+    "pts_home": 112.7,
+    "pts_away": 108.8,
+    "margin": 4.7,
+    "total": 221.5
+   },
+   "estimator_b": {
+    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
+    "game_possessions": 99.18,
+    "pace_factor": 0.9934,
+    "pts_home": 114.1,
+    "pts_away": 110.2,
+    "margin": 4.7,
+    "total": 224.2
+   },
+   "blend": {
+    "p_home_win_estimator_a": 0.61,
+    "p_home_win_estimator_b": 0.61,
+    "p_home_win_blend": 0.61,
+    "disagreement": 0.0,
+    "disagreement_pp": 0.0,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "blend_weight_a": 0.5,
+    "blend_weight_b": 0.5,
+    "margin_blend": 4.7,
+    "total_blend": 222.8
+   },
+   "line_total": 222.8,
+   "line_spread_home": 4.9,
+   "model_home_win_prob": 0.6156,
+   "model_home_ml": -160,
+   "confidence_signal_pp": 0.0,
+   "rest_home": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": true,
+    "games_in_last_4_days": 3,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": true,
+    "games_in_last_4_days": 3,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "travel_away": {
+    "from_venue": "Scotiabank Arena",
+    "from_city": "Toronto, ON",
+    "to_venue": "Little Caesars Arena",
+    "to_city": "Detroit, MI",
+    "miles": 206.0,
+    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Little%20Caesars%20Arena&format=json&formatversion=2",
+    "venue_source": "https://www.nba.com/schedule"
+   },
+   "travel_source": "official schedule",
+   "availability_redistribution_home": {
+    "team": "DET",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "availability_redistribution_away": {
+    "team": "TOR",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "net_points_lost_home": 0.0,
+   "net_points_lost_away": 0.0,
+   "rest_adjustment_home": 0.6,
+   "rest_adjustment_away": 0.6,
+   "travel_adjustment_away": 0.247,
+   "rotation_availability_home": {
+    "team": "DET",
+    "rotation_players": 1,
+    "rotation_players_named": [
+     "cade cunningham"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_away": {
+    "team": "TOR",
+    "rotation_players": 2,
+    "rotation_players_named": [
+     "rj barrett",
+     "scottie barnes"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "luck_home": {
+    "luck_z": -0.2,
+    "in_noise_band": true,
+    "luck_points": -9.6
+   },
+   "luck_away": {
+    "luck_z": -0.04,
+    "in_noise_band": true,
+    "luck_points": -1.9
+   },
+   "source_url": "https://www.nba.com/game/tor-vs-det-0022600046",
+   "schedule_source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600047",
+   "matchup": "WAS@CHI",
+   "away": "WAS",
+   "home": "CHI",
+   "venue": "United Center",
+   "city": "Chicago, IL",
+   "tip_et": "8:00 PM ET",
+   "tip_et_sources": {
+    "per_game_card": "8:00 PM ET",
+    "schedule_page": null,
+    "injury_pdf": null,
+    "conflict": null
+   },
+   "in_pick_window": true,
+   "estimator_a": {
+    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
+    "game_possessions": 104.23,
+    "game_possessions_from_official_poss_column": 103.17,
+    "ppp_proj_home": 1.1026,
+    "ppp_proj_away": 1.1506,
+    "pts_home": 114.9,
+    "pts_away": 119.9,
+    "margin": -4.2,
+    "total": 234.9
+   },
+   "estimator_b": {
+    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
+    "game_possessions": 104.23,
+    "pace_factor": 1.0439,
+    "pts_home": 121.9,
+    "pts_away": 127.2,
+    "margin": -4.5,
+    "total": 249.1
+   },
+   "blend": {
+    "p_home_win_estimator_a": 0.4015,
+    "p_home_win_estimator_b": 0.3946,
+    "p_home_win_blend": 0.398,
+    "disagreement": 0.0069,
+    "disagreement_pp": 0.69,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.69 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "blend_weight_a": 0.5,
+    "blend_weight_b": 0.5,
+    "margin_blend": -4.3,
+    "total_blend": 242.0
+   },
+   "line_total": 242.0,
+   "line_spread_home": -3.8,
+   "model_home_win_prob": 0.4118,
+   "model_home_ml": 143,
+   "confidence_signal_pp": 0.69,
+   "rest_home": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": false,
+    "games_in_last_4_days": 2,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": false,
+    "games_in_last_4_days": 2,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "travel_away": {
+    "from_venue": "Scotiabank Arena",
+    "from_city": "Toronto, ON",
+    "to_venue": "United Center",
+    "to_city": "Chicago, IL",
+    "miles": 438.0,
+    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=United%20Center&format=json&formatversion=2",
+    "venue_source": "https://www.nba.com/schedule"
+   },
+   "travel_source": "official schedule",
+   "availability_redistribution_home": null,
+   "availability_redistribution_away": {
+    "team": "WAS",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "net_points_lost_home": 0.0,
+   "net_points_lost_away": 0.0,
+   "rest_adjustment_home": 0.0,
+   "rest_adjustment_away": 0.0,
+   "travel_adjustment_away": 0.526,
+   "rotation_availability_home": {
+    "team": "CHI",
+    "status": "not captured",
+    "rotation_players": null,
+    "out": null,
+    "questionable": null,
+    "note": "official per-player minutes not captured for this team"
+   },
+   "rotation_availability_away": {
+    "team": "WAS",
+    "rotation_players": 4,
+    "rotation_players_named": [
+     "aj dybantsa",
+     "anthony davis",
+     "kyshawn george",
+     "trae young"
+    ],
+    "listed_on_injury_report": 6,
+    "out": [
+     "Beekman, Reece",
+     "Champagne, Justin",
+     "Vukcevic, Tristan",
+     "Watkins, Jamir"
+    ],
+    "questionable": [
+     "Johnson, Tre",
+     "Okpara, Felix"
+    ],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "luck_home": {
+    "luck_z": 0.95,
+    "in_noise_band": true,
+    "luck_points": 47.0
+   },
+   "luck_away": {
+    "luck_z": -0.93,
+    "in_noise_band": true,
+    "luck_points": -49.6
+   },
+   "source_url": "https://www.nba.com/game/was-vs-chi-0022600047",
+   "schedule_source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600048",
+   "matchup": "NOP@OKC",
+   "away": "NOP",
+   "home": "OKC",
+   "venue": "Paycom Center",
+   "city": "Oklahoma City, OK",
+   "tip_et": "8:00 PM ET",
+   "tip_et_sources": {
+    "per_game_card": "8:00 PM ET",
+    "schedule_page": null,
+    "injury_pdf": null,
+    "conflict": null
+   },
+   "in_pick_window": true,
+   "estimator_a": {
+    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
+    "game_possessions": 100.59,
+    "game_possessions_from_official_poss_column": 101.26,
+    "ppp_proj_home": 1.1981,
+    "ppp_proj_away": 1.0738,
+    "pts_home": 120.5,
+    "pts_away": 108.0,
+    "margin": 13.3,
+    "total": 228.5
+   },
+   "estimator_b": {
+    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
+    "game_possessions": 100.59,
+    "pace_factor": 1.0075,
+    "pts_home": 123.1,
+    "pts_away": 110.3,
+    "margin": 13.6,
+    "total": 233.4
+   },
+   "blend": {
+    "p_home_win_estimator_a": 0.7853,
+    "p_home_win_estimator_b": 0.7905,
+    "p_home_win_blend": 0.7879,
+    "disagreement": 0.0052,
+    "disagreement_pp": 0.52,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.52 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "blend_weight_a": 0.5,
+    "blend_weight_b": 0.5,
+    "margin_blend": 13.4,
+    "total_blend": 230.9
+   },
+   "line_total": 230.9,
+   "line_spread_home": 14.1,
+   "model_home_win_prob": 0.7989,
+   "model_home_ml": -397,
+   "confidence_signal_pp": 0.52,
+   "rest_home": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": false,
+    "games_in_last_4_days": 2,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": false,
+    "games_in_last_4_days": 2,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "travel_away": {
+    "from_venue": "Smoothie King Center",
+    "from_city": "New Orleans, LA",
+    "to_venue": "Paycom Center",
+    "to_city": "Oklahoma City, OK",
+    "miles": 576.0,
+    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Paycom%20Center&format=json&formatversion=2",
+    "venue_source": "https://www.nba.com/schedule"
+   },
+   "travel_source": "official schedule",
+   "availability_redistribution_home": {
+    "team": "OKC",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "availability_redistribution_away": {
+    "team": "NOP",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "net_points_lost_home": 0.0,
+   "net_points_lost_away": 0.0,
+   "rest_adjustment_home": 0.0,
+   "rest_adjustment_away": 0.0,
+   "travel_adjustment_away": 0.691,
+   "rotation_availability_home": {
+    "team": "OKC",
+    "rotation_players": 1,
+    "rotation_players_named": [
+     "shai gilgeous-alexander"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_away": {
+    "team": "NOP",
+    "rotation_players": 2,
+    "rotation_players_named": [
+     "trey murphy iii",
+     "zion williamson"
+    ],
+    "listed_on_injury_report": 8,
+    "out": [
+     "Mathurin, Benedict",
+     "McGowens, Bryce",
+     "Murphy III, Trey",
+     "Murray, Dejounte",
+     "Watford, Trendon"
+    ],
+    "questionable": [
+     "Dia, Malik",
+     "Pierre Jr., Jaron",
+     "Reese, Julian"
+    ],
+    "rotation_out": [
+     "Murphy III, Trey"
+    ],
+    "rotation_questionable": [],
+    "rotation_out_count": 1,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "luck_home": {
+    "luck_z": 0.68,
+    "in_noise_band": true,
+    "luck_points": 35.1
+   },
+   "luck_away": {
+    "luck_z": 0.43,
+    "in_noise_band": true,
+    "luck_points": 22.7
+   },
+   "source_url": "https://www.nba.com/game/nop-vs-okc-0022600048",
+   "schedule_source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600049",
+   "matchup": "PHX@UTA",
+   "away": "PHX",
+   "home": "UTA",
+   "venue": "Delta Center",
+   "city": "Salt Lake City, UT",
+   "tip_et": "9:30 PM ET",
+   "tip_et_sources": {
+    "per_game_card": "9:30 PM ET",
+    "schedule_page": null,
+    "injury_pdf": null,
+    "conflict": null
+   },
+   "in_pick_window": true,
+   "estimator_a": {
+    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
+    "game_possessions": 99.25,
+    "game_possessions_from_official_poss_column": 100.27,
+    "ppp_proj_home": 1.0976,
+    "ppp_proj_away": 1.1651,
+    "pts_home": 108.9,
+    "pts_away": 115.6,
+    "margin": -5.9,
+    "total": 224.6
+   },
+   "estimator_b": {
+    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
+    "game_possessions": 99.25,
+    "pace_factor": 0.9941,
+    "pts_home": 109.2,
+    "pts_away": 115.9,
+    "margin": -5.9,
+    "total": 225.0
+   },
+   "blend": {
+    "p_home_win_estimator_a": 0.3629,
+    "p_home_win_estimator_b": 0.3629,
+    "p_home_win_blend": 0.3629,
+    "disagreement": 0.0,
+    "disagreement_pp": 0.0,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.00 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "blend_weight_a": 0.5,
+    "blend_weight_b": 0.5,
+    "margin_blend": -5.9,
+    "total_blend": 224.8
+   },
+   "line_total": 224.8,
+   "line_spread_home": -5.9,
+   "model_home_win_prob": 0.3638,
+   "model_home_ml": 175,
+   "confidence_signal_pp": 0.0,
+   "rest_home": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": true,
+    "games_in_last_4_days": 3,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": false,
+    "games_in_last_4_days": 2,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "travel_away": {
+    "from_venue": "Golden 1 Center",
+    "from_city": "Sacramento, CA",
+    "to_venue": "Delta Center",
+    "to_city": "Salt Lake City, UT",
+    "miles": 532.0,
+    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Delta%20Center&format=json&formatversion=2",
+    "venue_source": "https://www.nba.com/schedule"
+   },
+   "travel_source": "official schedule",
+   "availability_redistribution_home": {
+    "team": "UTA",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "availability_redistribution_away": {
+    "team": "PHX",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "net_points_lost_home": 0.0,
+   "net_points_lost_away": 0.0,
+   "rest_adjustment_home": 0.6,
+   "rest_adjustment_away": 0.0,
+   "travel_adjustment_away": 0.638,
+   "rotation_availability_home": {
+    "team": "UTA",
+    "rotation_players": 1,
+    "rotation_players_named": [
+     "keyonte george"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_away": {
+    "team": "PHX",
+    "rotation_players": 1,
+    "rotation_players_named": [
+     "devin booker"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "luck_home": {
+    "luck_z": 1.38,
+    "in_noise_band": true,
+    "luck_points": 71.0
+   },
+   "luck_away": {
+    "luck_z": 1.1,
+    "in_noise_band": true,
+    "luck_points": 54.4
+   },
+   "source_url": "https://www.nba.com/game/phx-vs-uta-0022600049",
+   "schedule_source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600050",
+   "matchup": "HOU@DEN",
+   "away": "HOU",
+   "home": "DEN",
+   "venue": "Ball Arena",
+   "city": "Denver, CO",
+   "tip_et": "10:00 PM ET",
+   "tip_et_sources": {
+    "per_game_card": "10:00 PM ET",
+    "schedule_page": null,
+    "injury_pdf": null,
+    "conflict": null
+   },
+   "in_pick_window": true,
+   "estimator_a": {
+    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
+    "game_possessions": 95.51,
+    "game_possessions_from_official_poss_column": 98.19,
+    "ppp_proj_home": 1.1286,
+    "ppp_proj_away": 1.2019,
+    "pts_home": 107.8,
+    "pts_away": 114.8,
+    "margin": -6.2,
+    "total": 222.6
+   },
+   "estimator_b": {
+    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
+    "game_possessions": 95.51,
+    "pace_factor": 0.9566,
+    "pts_home": 103.6,
+    "pts_away": 110.3,
+    "margin": -5.9,
+    "total": 213.9
+   },
+   "blend": {
+    "p_home_win_estimator_a": 0.3563,
+    "p_home_win_estimator_b": 0.3629,
+    "p_home_win_blend": 0.3596,
+    "disagreement": 0.0067,
+    "disagreement_pp": 0.67,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.67 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "blend_weight_a": 0.5,
+    "blend_weight_b": 0.5,
+    "margin_blend": -6.1,
+    "total_blend": 218.2
+   },
+   "line_total": 218.2,
+   "line_spread_home": -5.0,
+   "model_home_win_prob": 0.3842,
+   "model_home_ml": 160,
+   "confidence_signal_pp": 0.67,
+   "rest_home": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": false,
+    "games_in_last_4_days": 2,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": false,
+    "games_in_last_4_days": 2,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "travel_away": {
+    "from_venue": "Gainbridge Fieldhouse",
+    "from_city": "Indianapolis, IN",
+    "to_venue": "Ball Arena",
+    "to_city": "Denver, CO",
+    "miles": 1000.0,
+    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Ball%20Arena&format=json&formatversion=2",
+    "venue_source": "https://www.nba.com/schedule"
+   },
+   "travel_source": "official schedule",
+   "availability_redistribution_home": {
+    "team": "DEN",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "availability_redistribution_away": {
+    "team": "HOU",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "net_points_lost_home": 0.0,
+   "net_points_lost_away": 0.0,
+   "rest_adjustment_home": 0.0,
+   "rest_adjustment_away": 0.0,
+   "travel_adjustment_away": 1.2,
+   "rotation_availability_home": {
+    "team": "DEN",
+    "rotation_players": 3,
+    "rotation_players_named": [
+     "christian braun",
+     "jamal murray",
+     "nikola jokic"
+    ],
+    "listed_on_injury_report": 4,
+    "out": [
+     "Holmes II, DaRon",
+     "Nembhard, Ryan",
+     "Strawther, Julian",
+     "Whitmore, Cam"
+    ],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_away": {
+    "team": "HOU",
+    "rotation_players": 4,
+    "rotation_players_named": [
+     "alperen sengun",
+     "amen thompson",
+     "jabari smith jr",
+     "kevin durant"
+    ],
+    "listed_on_injury_report": 6,
+    "out": [
+     "Adams, Steven",
+     "Capela, Clint",
+     "Copeland, Quadir",
+     "Phillips, Julian",
+     "Smart, Marcus"
+    ],
+    "questionable": [
+     "Thompson, Amen"
+    ],
+    "rotation_out": [],
+    "rotation_questionable": [
+     "Thompson, Amen"
+    ],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 1,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "luck_home": {
+    "luck_z": -0.34,
+    "in_noise_band": true,
+    "luck_points": -16.4
+   },
+   "luck_away": {
+    "luck_z": 0.08,
+    "in_noise_band": true,
+    "luck_points": 4.4
+   },
+   "source_url": "https://www.nba.com/game/hou-vs-den-0022600050",
+   "schedule_source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "date": "2026-11-20",
+   "game_id": "0022600051",
+   "matchup": "SAC@LAL",
+   "away": "SAC",
+   "home": "LAL",
+   "venue": "Crypto.com Arena",
+   "city": "Los Angeles, CA",
+   "tip_et": "10:00 PM ET",
+   "tip_et_sources": {
+    "per_game_card": "10:00 PM ET",
+    "schedule_page": null,
+    "injury_pdf": null,
+    "conflict": null
+   },
+   "in_pick_window": true,
+   "estimator_a": {
+    "estimator": "A: possession x points-per-possession (official efficiency, traditional and opponent tables)",
+    "game_possessions": 101.87,
+    "game_possessions_from_official_poss_column": 100.75,
+    "ppp_proj_home": 1.2868,
+    "ppp_proj_away": 1.0762,
+    "pts_home": 131.1,
+    "pts_away": 109.6,
+    "margin": 22.3,
+    "total": 240.7
+   },
+   "estimator_b": {
+    "estimator": "B: points-scored / points-allowed with an opponent and pace adjustment (official traditional and opponent tables only)",
+    "game_possessions": 101.87,
+    "pace_factor": 1.0203,
+    "pts_home": 132.6,
+    "pts_away": 110.9,
+    "margin": 22.5,
+    "total": 243.5
+   },
+   "blend": {
+    "p_home_win_estimator_a": 0.9075,
+    "p_home_win_estimator_b": 0.9094,
+    "p_home_win_blend": 0.9084,
+    "disagreement": 0.002,
+    "disagreement_pp": 0.2,
+    "confidence_signal": "HEADLINE: |P(A) - P(B)| = 0.20 percentage points. A small disagreement means two independent official-input constructions agree, so the number is trustworthy; a large one means the line is not safe to publish.",
+    "blend_weight_a": 0.5,
+    "blend_weight_b": 0.5,
+    "margin_blend": 22.4,
+    "total_blend": 242.1
+   },
+   "line_total": 242.1,
+   "line_spread_home": 22.2,
+   "model_home_win_prob": 0.9068,
+   "model_home_ml": -973,
+   "confidence_signal_pp": 0.2,
+   "rest_home": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": true,
+    "games_in_last_4_days": 3,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "rest_away": {
+    "rest_days": 1,
+    "back_to_back": false,
+    "three_in_four": false,
+    "games_in_last_4_days": 2,
+    "last_date": "2026-11-18",
+    "last_game_was_home": false,
+    "source": "official results (data/official/gamelog.json) + official schedule"
+   },
+   "travel_away": {
+    "from_venue": "Golden 1 Center",
+    "from_city": "Sacramento, CA",
+    "to_venue": "Crypto.com Arena",
+    "to_city": "Los Angeles, CA",
+    "miles": 361.0,
+    "coordinate_source": "https://en.wikipedia.org/w/api.php?action=query&prop=coordinates&redirects=1&titles=Crypto.com%20Arena&format=json&formatversion=2",
+    "venue_source": "https://www.nba.com/schedule"
+   },
+   "travel_source": "official schedule",
+   "availability_redistribution_home": {
+    "team": "LAL",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "availability_redistribution_away": {
+    "team": "SAC",
+    "minutes_removed": 0.0,
+    "net_points_lost": 0.0,
+    "absent_players": [],
+    "note": "no absent player has an official minutes capture -> no redistribution is computed"
+   },
+   "net_points_lost_home": 0.0,
+   "net_points_lost_away": 0.0,
+   "rest_adjustment_home": 0.6,
+   "rest_adjustment_away": 0.0,
+   "travel_adjustment_away": 0.433,
+   "rotation_availability_home": {
+    "team": "LAL",
+    "rotation_players": 2,
+    "rotation_players_named": [
+     "austin reaves",
+     "luka doncic"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "rotation_availability_away": {
+    "team": "SAC",
+    "rotation_players": 3,
+    "rotation_players_named": [
+     "darius acuff jr",
+     "domantas sabonis",
+     "zach lavine"
+    ],
+    "listed_on_injury_report": 0,
+    "out": [],
+    "questionable": [],
+    "rotation_out": [],
+    "rotation_questionable": [],
+    "rotation_out_count": 0,
+    "rotation_questionable_count": 0,
+    "availability_pct": null,
+    "status": "NOT YET PUBLISHED - no official injury edition covers 2026-11-20; the newest edition stops at 2026-11-16, 2026-11-17. An empty injury list is not evidence that nobody is injured, so the cell is blank rather than 100%."
+   },
+   "luck_home": {
+    "luck_z": -0.48,
+    "in_noise_band": true,
+    "luck_points": -24.4
+   },
+   "luck_away": {
+    "luck_z": 0.92,
+    "in_noise_band": true,
+    "luck_points": 45.3
+   },
+   "source_url": "https://www.nba.com/game/sac-vs-lal-0022600051",
    "schedule_source_url": "https://www.nba.com/schedule"
   }
  ]
