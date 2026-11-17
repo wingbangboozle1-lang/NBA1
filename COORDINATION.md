@@ -6929,3 +6929,15 @@ Outputs archived in `verify/2026-11-16-23ec1e32/` (README.md + nine `.out` files
 - The scheduled rebuild condition now explicitly requires successful fetch, promotion, freshness-gate execution, and `freshness.outputs.ok == 'true'`. The run record and automated refresh-PR body expose fetch/promotion/freshness (including its boolean result)/settlement/build outcomes.
 - **Important unresolved source limitation (not concealed):** run #44078416610 was green overall but its build was skipped. Current committed input gate remains blocked (24.23h old at check, failed source/parse checks, stale same-run captures/promotions); this session did not fabricate data or bypass the gate.
 - **Delivery:** current branch only: `arena/825bb504-nba1`. The task-claim commit and corrective board-restoration commit are on this branch; workflow/test changes will be committed and pushed after reviewing the final diff. PR/merge/deploy follow only after branch checks are green.
+
+### 62.4 Delivery record (post-merge update)
+
+| Item | Record |
+| --- | --- |
+| PR | [#161](https://github.com/wingbangboozle1-lang/NBA1/pull/161) — `arena/825bb504-nba1` → `main`; merged 2026-11-17T15:48:56Z without waiting for review after the validate workflow passed. |
+| Merge commit | `a09d4698094b7b2e5523b34607f2b37bd6dbab1f`. |
+| PR validation | [run 44118106476](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44118106476) **success** — site links/source coverage, both build data sets, integration verification, provenance, DOM rendering, verification-page freshness and internal-link checks passed. `deploy-disabled` is the PR-workflow safeguard, not a deploy failure. |
+| Main publish/deploy | [Publish validation run 44118641223](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44118641223) **success**; Pages build/deployment [run 44118640050](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44118640050) **success**. `gh api repos/wingbangboozle1-lang/NBA1/pages` returned `status: built`, URL `https://wingbangboozle1-lang.github.io/NBA1/`, `build_type: legacy`. |
+| Refresh-trigger irregularity | Push-triggered refresh [run 44118064453](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44118064453) was **cancelled** by the shared `refresh-official-global` concurrency group when a higher-priority queued refresh from another active session took the slot. This is recorded, not hidden or called a source failure. The existing official-source freshness/provenance gate remains fail-closed. |
+| Sources | No new NBA facts added. Workflow source list and provenance allowlist remain NBA-operated endpoints (`nba.com`, `official.nba.com`, `stats.nba.com`, and the official NBA injury-PDF host). Action/deploy evidence is linked above. |
+| Remaining boundary | R01's broader source-parser/reachability gaps remain open and documented in the requirements/flag pages; this change only hardens the build guard and exposes outcomes. No betting surfaces were opened and no unverified input was promoted. |
