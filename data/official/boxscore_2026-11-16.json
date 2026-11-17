@@ -1,0 +1,60 @@
+{
+ "title": "Official box-score evidence for the 2026-11-16 SGP legs (gamebook page-1 box score + Inactive line)",
+ "captured_by": "arena/09ed2727-nba1 (§62 Y03)",
+ "retrieved_utc": "2026-11-17T15:5xZ",
+ "rule": "One row per SGP leg. `pts` is the player's printed PTS cell in the official gamebook's page-1 box score. A player printed on the gamebook's own `Inactive:` line, with no box-score row, is recorded as appeared=false and pts=null - never graded on inference. The gamebook PDF is the league's official box-score document; the nba.com game page is cited as the companion official URL.",
+ "players": [
+  {
+   "game_id": "0022600245",
+   "team": "BOS",
+   "player": "Tatum, Jayson",
+   "appeared": true,
+   "pts": 24,
+   "min": "36:03",
+   "evidence": "printed box-score row: 9-23 FG, 12 REB, 4 AST, 24 PTS",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_ORLBOS_book.pdf",
+   "companion_official_url": "https://www.nba.com/game/orl-vs-bos-0022600245"
+  },
+  {
+   "game_id": "0022600245",
+   "team": "ORL",
+   "player": "Banchero, Paolo",
+   "appeared": false,
+   "pts": null,
+   "min": null,
+   "evidence": "listed on the gamebook's Inactive line: 'Inactive: Magic - Banchero (Injury/Illness - Right High Ankle Sprain)'; no box-score row",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_ORLBOS_book.pdf",
+   "companion_official_url": "https://www.nba.com/game/orl-vs-bos-0022600245",
+   "corroboration": "official injury report 11/16 01:15 PM ET and 01:30 PM ET both list Banchero, Paolo / ORL / Out (data/official/injury_2026-11-16_0115PM_bfad39b2.json)"
+  },
+  {
+   "game_id": "0022600247",
+   "team": "MEM",
+   "player": "Jerome, Ty",
+   "appeared": false,
+   "pts": null,
+   "min": null,
+   "evidence": "listed on the gamebook's Inactive line: 'Inactive: Grizzlies - ... Jerome (Injury/Illness - Right Hip Soreness)'; no box-score row",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_MEMWAS_book.pdf",
+   "companion_official_url": "https://www.nba.com/game/mem-vs-was-0022600247",
+   "corroboration": "official injury report 11/16 01:30 PM ET lists Jerome, Ty / MEM / Out (data/official/injury_2026-11-16_0130PM_7ec9e7a3.json)"
+  },
+  {
+   "game_id": "0022600247",
+   "team": "WAS",
+   "player": "Davis, Anthony",
+   "appeared": true,
+   "pts": 23,
+   "min": "34:41",
+   "evidence": "printed box-score row: 8-15 FG, 4 REB, 23 PTS",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_MEMWAS_book.pdf",
+   "companion_official_url": "https://www.nba.com/game/mem-vs-was-0022600247"
+  }
+ ],
+ "sources": [
+  "https://statsdmz.nba.com/pdfs/20261116/20261116_ORLBOS_book.pdf",
+  "https://statsdmz.nba.com/pdfs/20261116/20261116_MEMWAS_book.pdf",
+  "https://www.nba.com/game/orl-vs-bos-0022600245",
+  "https://www.nba.com/game/mem-vs-was-0022600247"
+ ]
+}

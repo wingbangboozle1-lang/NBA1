@@ -1,0 +1,501 @@
+{
+ "title": "Settlement — 2026-11-16 slate (settled from official finals)",
+ "settled_at_utc": "2026-11-17T15:49Z",
+ "settled_by": "arena/09ed2727-nba1 (section 62 Y03)",
+ "slate_archive": {
+  "picks": "data/archive/horizon_picks_2026-11-16.json",
+  "picks_sha256": "9b43d77bf29288765aa6ddcf418d7789567832a2374ce700db64397085922ad8",
+  "lines": "data/archive/horizon_lines_2026-11-16.json",
+  "lines_sha256": "04bd73ff50917bf378dab11b82eacbe1f5da56bc3c1fbcc6f0f1b7082c42ac64",
+  "ledger_entry_committing_it": 5
+ },
+ "rules": {
+  "single": "grade from published pick_line text \"TEAM -x.x\": cover if team wins by more than x.x, PUSH at exactly x.x, else LOSS; units paper -110 (WIN +1.00, LOSS -1.10, PUSH 0.00); gate failures NO BET 0.00",
+  "parlay": "every leg must WIN; any losing leg loses stake 1.10; WIN pays the published fair-odds band lower bound",
+  "sgp": "legs are player props (Over/Under). A leg whose player did not play is VOID and removed; remaining legs settle at the ticket price frozen at publication (joint_prob_rho as fair price; G-PROP blocked, no market price). Any losing leg loses the stake (1.10).",
+  "finals_source": "data/official/results_2026-11-14.json — official game pages (LINESCORES), quarters sum to finals (asserted at capture)",
+  "source": "grading rules copied verbatim from data/settlement/settlement_2026-11-14.json (frozen)"
+ },
+ "official_finals_rule": "A game is graded only when its official page printed Final and its quarter scores sum to the printed final; data/official/results_<date>.json rows are re-checked by verify_final() at settlement time.",
+ "singles": [
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600245",
+   "matchup": "ORL@BOS",
+   "pick_side": "HOME",
+   "pick_line": "BOS -14.5",
+   "pick_prob": 0.8129,
+   "gate": "G-CFG pass (|spread| 14.5 >= 3.0)",
+   "away": "ORL",
+   "away_pts": 115,
+   "home": "BOS",
+   "home_pts": 105,
+   "away_quarters": [
+    20,
+    30,
+    25,
+    40
+   ],
+   "home_quarters": [
+    17,
+    24,
+    36,
+    28
+   ],
+   "ot_periods": 0,
+   "margin_pick_team": -10,
+   "quarter_source": null,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/orl-vs-bos-0022600245",
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600246",
+   "matchup": "CHI@CLE",
+   "pick_side": "HOME",
+   "pick_line": "CLE -13.2",
+   "pick_prob": 0.7907,
+   "gate": "G-CFG pass (|spread| 13.2 >= 3.0)",
+   "away": "CHI",
+   "away_pts": 115,
+   "home": "CLE",
+   "home_pts": 126,
+   "away_quarters": [
+    31,
+    17,
+    31,
+    36
+   ],
+   "home_quarters": [
+    25,
+    32,
+    31,
+    38
+   ],
+   "ot_periods": 0,
+   "margin_pick_team": 11,
+   "quarter_source": null,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/chi-vs-cle-0022600246",
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600247",
+   "matchup": "MEM@WAS",
+   "pick_side": "AWAY",
+   "pick_line": "MEM -14.2",
+   "pick_prob": 0.8079,
+   "gate": "G-CFG pass (|spread| 14.2 >= 3.0)",
+   "away": "MEM",
+   "away_pts": 136,
+   "home": "WAS",
+   "home_pts": 120,
+   "away_quarters": [
+    33,
+    26,
+    42,
+    35
+   ],
+   "home_quarters": [
+    35,
+    34,
+    18,
+    33
+   ],
+   "ot_periods": 0,
+   "margin_pick_team": 16,
+   "quarter_source": null,
+   "result": "WIN",
+   "units": 1.0,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/mem-vs-was-0022600247",
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600248",
+   "matchup": "PHI@BKN",
+   "pick_side": "AWAY",
+   "pick_line": "PHI -8.1",
+   "pick_prob": 0.6902,
+   "gate": "G-CFG pass (|spread| 8.1 >= 3.0)",
+   "away": "PHI",
+   "away_pts": 135,
+   "home": "BKN",
+   "home_pts": 123,
+   "away_quarters": [
+    33,
+    45,
+    27,
+    30
+   ],
+   "home_quarters": [
+    26,
+    33,
+    36,
+    28
+   ],
+   "ot_periods": 0,
+   "margin_pick_team": 12,
+   "quarter_source": null,
+   "result": "WIN",
+   "units": 1.0,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600249",
+   "matchup": "HOU@MIA",
+   "pick_side": "AWAY",
+   "pick_line": "HOU -10.8",
+   "pick_prob": 0.7459,
+   "gate": "G-CFG pass (|spread| 10.8 >= 3.0)",
+   "away": "HOU",
+   "away_pts": 110,
+   "home": "MIA",
+   "home_pts": 128,
+   "away_quarters": [
+    15,
+    31,
+    35,
+    29
+   ],
+   "home_quarters": [
+    29,
+    33,
+    39,
+    27
+   ],
+   "ot_periods": 0,
+   "margin_pick_team": -18,
+   "quarter_source": "The gamebook's SCORE BY PERIOD row for the visitor is not in the PDF text layer; HOU's quarters are the period-end cumulative scores printed in this same gamebook's play-by-play (End of 1st QUARTER 29-15; End of 2nd QUARTER 62-46; the 3rd-period cumulative team line 180:00 shows 81; End of 4th QUARTER 128-110), which sum to the printed final 110. Cross-checked against the 3rd-period cumulative team total. Both sides sum to the printed finals.",
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/hou-vs-mia-0022600249",
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600250",
+   "matchup": "POR@MIN",
+   "pick_side": "HOME",
+   "pick_line": "MIN -4.3",
+   "pick_prob": 0.6039,
+   "gate": "G-CFG pass (|spread| 4.3 >= 3.0)",
+   "away": "POR",
+   "away_pts": 98,
+   "home": "MIN",
+   "home_pts": 106,
+   "away_quarters": [
+    26,
+    25,
+    22,
+    25
+   ],
+   "home_quarters": [
+    26,
+    33,
+    28,
+    19
+   ],
+   "ot_periods": 0,
+   "margin_pick_team": 8,
+   "quarter_source": null,
+   "result": "WIN",
+   "units": 1.0,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/por-vs-min-0022600250",
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600251",
+   "matchup": "GSW@NOP",
+   "pick_side": "AWAY",
+   "pick_line": "GSW -13.2",
+   "pick_prob": 0.7907,
+   "gate": "G-CFG pass (|spread| 13.2 >= 3.0)",
+   "away": "GSW",
+   "away_pts": 94,
+   "home": "NOP",
+   "home_pts": 115,
+   "away_quarters": [
+    11,
+    25,
+    29,
+    29
+   ],
+   "home_quarters": [
+    35,
+    26,
+    32,
+    22
+   ],
+   "ot_periods": 0,
+   "margin_pick_team": -21,
+   "quarter_source": null,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600252",
+   "matchup": "PHX@DEN",
+   "pick_side": "HOME",
+   "pick_line": "DEN -5.0",
+   "pick_prob": 0.6203,
+   "gate": "G-CFG pass (|spread| 5.0 >= 3.0)",
+   "away": "PHX",
+   "away_pts": 117,
+   "home": "DEN",
+   "home_pts": 105,
+   "away_quarters": [
+    20,
+    36,
+    34,
+    27
+   ],
+   "home_quarters": [
+    24,
+    29,
+    29,
+    23
+   ],
+   "ot_periods": 0,
+   "margin_pick_team": -12,
+   "quarter_source": null,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110: stake 1.10 to win 1.00",
+   "source_game_url": "https://www.nba.com/game/phx-vs-den-0022600252",
+   "source_finals": "data/official/results_2026-11-16.json (official LINESCORES + SCORE BY PERIOD)"
+  }
+ ],
+ "parlays": [
+  {
+   "date": "2026-11-16",
+   "legs": [
+    "ORL@BOS — BOS -14.5",
+    "MEM@WAS — MEM -14.2"
+   ],
+   "leg_results": [
+    {
+     "leg": "ORL@BOS — BOS -14.5",
+     "result": "LOSS",
+     "margin": -10,
+     "source_game_url": "https://www.nba.com/game/orl-vs-bos-0022600245"
+    },
+    {
+     "leg": "MEM@WAS — MEM -14.2",
+     "result": "WIN",
+     "margin": 16,
+     "source_game_url": "https://www.nba.com/game/mem-vs-was-0022600247"
+    }
+   ],
+   "joint_published": {
+    "joint_lb": 0.621,
+    "joint_ub": 0.808,
+    "rho_lb": -0.234,
+    "rho_ub": 0.984,
+    "joint_prob_rho": null
+   },
+   "naive_product_printed_beside": null,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110 legs; fair-odds band published pre-tip",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "legs": [
+    "ORL@BOS — BOS -14.5",
+    "CHI@CLE — CLE -13.2"
+   ],
+   "leg_results": [
+    {
+     "leg": "ORL@BOS — BOS -14.5",
+     "result": "LOSS",
+     "margin": -10,
+     "source_game_url": "https://www.nba.com/game/orl-vs-bos-0022600245"
+    },
+    {
+     "leg": "CHI@CLE — CLE -13.2",
+     "result": "LOSS",
+     "margin": 11,
+     "source_game_url": "https://www.nba.com/game/chi-vs-cle-0022600246"
+    }
+   ],
+   "joint_published": {
+    "joint_lb": 0.604,
+    "joint_ub": 0.791,
+    "rho_lb": -0.247,
+    "rho_ub": 0.932,
+    "joint_prob_rho": null
+   },
+   "naive_product_printed_beside": null,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110 legs; fair-odds band published pre-tip",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "legs": [
+    "ORL@BOS — BOS -14.5",
+    "GSW@NOP — GSW -13.2"
+   ],
+   "leg_results": [
+    {
+     "leg": "ORL@BOS — BOS -14.5",
+     "result": "LOSS",
+     "margin": -10,
+     "source_game_url": "https://www.nba.com/game/orl-vs-bos-0022600245"
+    },
+    {
+     "leg": "GSW@NOP — GSW -13.2",
+     "result": "LOSS",
+     "margin": -21,
+     "source_game_url": "https://www.nba.com/game/gsw-vs-nop-0022600251"
+    }
+   ],
+   "joint_published": {
+    "joint_lb": 0.604,
+    "joint_ub": 0.791,
+    "rho_lb": -0.247,
+    "rho_ub": 0.932,
+    "joint_prob_rho": null
+   },
+   "naive_product_printed_beside": null,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110 legs; fair-odds band published pre-tip",
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  }
+ ],
+ "sgp_candidates": [
+  {
+   "date": "2026-11-16",
+   "game": "ORL@BOS",
+   "kind": "two_opponents",
+   "legs": [
+    "Jayson Tatum (BOS) OVER 26.5",
+    "Paolo Banchero (ORL) OVER 24.5"
+   ],
+   "frozen_price_joint_prob_rho": 0.2512,
+   "frozen_price_independent_printed_beside": 0.2432,
+   "result": "LOSS",
+   "units": -1.1,
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "leg_results": [
+    {
+     "leg": "Jayson Tatum (BOS) OVER 26.5",
+     "pts": 24,
+     "line": 26.5,
+     "result": "LOSS",
+     "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_ORLBOS_book.pdf"
+    },
+    {
+     "leg": "Paolo Banchero (ORL) OVER 24.5",
+     "void": true,
+     "why": "official box score lists the player as inactive/DNP",
+     "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_ORLBOS_book.pdf"
+    }
+   ],
+   "box_score_evidence": "data/official/boxscore_2026-11-16.json (official gamebook box score + Inactive line)",
+   "settlement_rule": "frozen T-SGP exact_settlement_rule: Inactive player = VOID leg (removed; remaining legs settle at the frozen ticket price); any losing leg loses 1.10"
+  },
+  {
+   "date": "2026-11-16",
+   "game": "MEM@WAS",
+   "kind": "two_opponents",
+   "legs": [
+    "Ty Jerome (MEM) OVER 26.5",
+    "Anthony Davis (WAS) OVER 25.5"
+   ],
+   "frozen_price_joint_prob_rho": 0.2511,
+   "frozen_price_independent_printed_beside": 0.2431,
+   "result": "LOSS",
+   "units": -1.1,
+   "sources": [
+    "https://www.nba.com/games?date=2026-11-16",
+    "https://www.nba.com/stats/players/traditional?Season=2026-27&SeasonType=Regular+Season&PerMode=PerGame&dir=-1&sort=PTS"
+   ],
+   "leg_results": [
+    {
+     "leg": "Ty Jerome (MEM) OVER 26.5",
+     "void": true,
+     "why": "official box score lists the player as inactive/DNP",
+     "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_MEMWAS_book.pdf"
+    },
+    {
+     "leg": "Anthony Davis (WAS) OVER 25.5",
+     "pts": 23,
+     "line": 25.5,
+     "result": "LOSS",
+     "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_MEMWAS_book.pdf"
+    }
+   ],
+   "box_score_evidence": "data/official/boxscore_2026-11-16.json (official gamebook box score + Inactive line)",
+   "settlement_rule": "frozen T-SGP exact_settlement_rule: Inactive player = VOID leg (removed; remaining legs settle at the frozen ticket price); any losing leg loses 1.10"
+  }
+ ],
+ "summary": {
+  "dates_settled": [
+   "2026-11-16"
+  ],
+  "dates_unsettled": [
+   "2026-11-17",
+   "2026-11-18"
+  ],
+  "singles_published": 8,
+  "wins": 3,
+  "losses": 5,
+  "pushes": 0,
+  "no_bets": 0,
+  "singles_units_at_minus110": -2.5,
+  "parlays_published": 3,
+  "parlays_won": 0,
+  "parlay_units": -3.3,
+  "sgp_published": 2,
+  "sgp_settled": 2,
+  "sgp_units": -2.2,
+  "total_units_settled": -8.0,
+  "validation_note": "Every ticket was published as MODEL OUTPUT — UNVALIDATED, unfunded, zero-stake paper output. No strategy is funded.",
+  "record": "3-5-0"
+ },
+ "sources": [
+  "data/official/results_2026-11-16.json",
+  "https://www.nba.com/game/chi-vs-cle-0022600246",
+  "https://www.nba.com/game/gsw-vs-nop-0022600251",
+  "https://www.nba.com/game/hou-vs-mia-0022600249",
+  "https://www.nba.com/game/mem-vs-was-0022600247",
+  "https://www.nba.com/game/orl-vs-bos-0022600245",
+  "https://www.nba.com/game/phi-vs-bkn-0022600248",
+  "https://www.nba.com/game/phx-vs-den-0022600252",
+  "https://www.nba.com/game/por-vs-min-0022600250"
+ ]
+}

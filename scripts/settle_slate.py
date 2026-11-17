@@ -53,6 +53,7 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -106,6 +107,109 @@ def verify_final(row):
     if not row.get("source_url"):
         reasons.append("no official source_url on the row")
     return (not reasons), reasons
+
+
+
+# ---------------------------------------------------------------------------
+# SGP grading from OFFICIAL BOX SCORES (opt-in per date)
+# ---------------------------------------------------------------------------
+# The frozen T-SGP pre-registration says: "Legs settle from official box-score
+# points (Over if pts > line). Inactive player = VOID leg (removed; remaining
+# legs settle at the frozen ticket price)."
+#
+# This script will not invent that evidence.  It grades an SGP ticket only when
+# `data/official/boxscore_<date>.json` exists, holds a player row for EVERY leg,
+# and each row carries the official box-score URL it was read from.  Otherwise
+# the ticket stays UNSETTLED with the reason printed — the previous behaviour,
+# now with a route to settle instead of a dead end.
+#
+# File schema (one entry per leg; `pts` is the printed PTS cell, null for a
+# player the official box score lists as inactive/DNP):
+#   {"date": "...", "source_url": "https://www.nba.com/game/...",
+#    "players": [{"game_id": "...", "team": "ORL", "player": "Banchero, Paolo",
+#                 "appeared": false, "pts": null,
+#                 "source_url": "https://statsdmz.nba.com/pdfs/.../....pdf"}]}
+
+def load_boxscore(date):
+    rel = f"data/official/boxscore_{date}.json"
+    path = os.path.join(ROOT, rel)
+    if not os.path.exists(path):
+        return None, f"no official box-score file ({rel})"
+    doc = load(rel)
+    index = {}
+    for row in doc.get("players") or []:
+        if not row.get("source_url"):
+            return None, f"{rel}: player row without a source_url"
+        index[(row.get("game_id"), norm_name(row.get("player")))] = row
+    return index, None
+
+
+def norm_name(name):
+    """Surname-only matching is never used: 'Banchero, Paolo' -> 'paolo banchero'."""
+    if not name:
+        return ""
+    parts = [p.strip() for p in name.split(",")]
+    return " ".join(reversed(parts)).lower() if len(parts) == 2 else name.lower()
+
+
+def parse_leg(leg):
+    """'Paolo Banchero (ORL) OVER 24.5' -> ('paolo banchero', 'ORL', 'OVER', 24.5)."""
+    m = re.match(r"^(.+?)\s*\(([A-Z]{3})\)\s*(OVER|UNDER)\s*([\d.]+)$", leg.strip(), re.I)
+    if not m:
+        return None
+    return (m.group(1).strip().lower(), m.group(2).upper(), m.group(3).upper(), float(m.group(4)))
+
+
+def grade_sgp(row, box_index, box_reason):
+    """Return (result, units, detail dict) for one frozen SGP ticket."""
+    legs = [row[k] for k in ("leg1", "leg2") if row.get(k)]
+    detail = {"leg_results": [],
+              "box_score_evidence": (f"data/official/boxscore_{row['date']}.json "
+                                     f"(official gamebook box score + Inactive line)")
+                                    if box_index is not None else box_reason}
+    if box_index is None:
+        return ("UNSETTLED — player appearance requires the official box score",
+                None, detail)
+    live = 0
+    any_loss = False
+    for leg in legs:
+        parsed = parse_leg(leg)
+        if parsed is None:
+            return (f"UNSETTLED — leg not parseable as a player prop ({leg})", None, detail)
+        name, team, side, line = parsed
+        hit = None
+        for (gid, pname), rec in box_index.items():
+            if pname == name and (rec.get("team") or "").upper() == team:
+                hit = rec
+                break
+        if hit is None:
+            return (f"UNSETTLED — no official box-score row for {leg}", None, detail)
+        if not hit.get("appeared"):
+            detail["leg_results"].append({"leg": leg, "void": True,
+                                          "why": "official box score lists the player as inactive/DNP",
+                                          "source_url": hit["source_url"]})
+            continue                      # VOID: removed, ticket price unchanged
+        pts = hit.get("pts")
+        if pts is None:
+            return (f"UNSETTLED — box-score row for {leg} has no printed PTS", None, detail)
+        won = (pts > line) if side == "OVER" else (pts < line)
+        every = (pts != line)             # a prop landing exactly on the line is a PUSH
+        detail["leg_results"].append({"leg": leg, "pts": pts, "line": line,
+                                      "result": "WIN" if won else ("PUSH" if not every else "LOSS"),
+                                      "source_url": hit["source_url"]})
+        if not every:
+            return ("UNSETTLED — a leg pushed on the line; the frozen rule does not define a push price",
+                    None, detail)
+        live += 1
+        any_loss = any_loss or (not won)
+    if live == 0:
+        return ("VOID — every leg was inactive (ticket removed)", 0.0, detail)
+    if any_loss:
+        return ("LOSS", -1.10, detail)
+    price = row.get("joint_prob_rho")
+    if not price:
+        return ("WIN", None, detail)
+    return ("WIN", round(1.10 * (1.0 / price - 1.0), 2), detail)
 
 
 def fnum(x):
@@ -205,12 +309,14 @@ def main(argv=None):
 
     settled_dates, unsettled = [], {}
     finals_by_matchup, finals_by_id = {}, {}
+    feed_docs = {}
     for date in dates:
         rel = f"data/official/results_{date}.json"
         if not os.path.exists(os.path.join(ROOT, rel)):
             unsettled[date] = [f"no official results file ({rel})"]
             continue
         feed = load(rel)
+        feed_docs[date] = feed
         rows = [r for r in feed["rows"] if r.get("date") == date]
         problems = []
         for r in rows:
@@ -225,6 +331,10 @@ def main(argv=None):
             continue
         for r in rows:
             r = dict(r, date=date)
+            # Per-game provenance, carried from the row itself when the feed
+            # states it (a game whose quarters came from a documented alternate
+            # block says so on its own row; never generalised to the slate).
+            r["_quarter_source"] = r.get("quarter_source_note")
             finals_by_matchup[f"{r['away']}@{r['home']}"] = r
             finals_by_id[r["game_id"]] = r
         settled_dates.append(date)
@@ -264,10 +374,12 @@ def main(argv=None):
             "home_quarters": g.get("home_quarters"),
             "ot_periods": g.get("ot_periods"),
             "margin_pick_team": res.get("margin"),
+            "quarter_source": g.get("_quarter_source"),
             "result": res["result"], "units": res["units"],
             "price_convention": "paper -110: stake 1.10 to win 1.00",
             "source_game_url": g["source_url"],
-            "source_finals": f"data/official/results_{row['date']}.json (official LINESCORES)",
+            "source_finals": (f"data/official/results_{row['date']}.json "
+                              f"({(feed_docs.get(row['date']) or {}).get('quarter_source') or 'official LINESCORES + SCORE BY PERIOD'})"),
         })
 
     parlays_out = []
@@ -294,25 +406,39 @@ def main(argv=None):
     # ticket UNSETTLED rather than guessing.  (11/14 was graded by hand from
     # official box scores in settle_2026_11_14.py, which is kept as the record.)
     sgp_out = []
+    box_cache = {}
     for row in picks.get("sgp_candidates", []):
         if row["date"] not in settled_dates:
             continue
-        sgp_out.append({
+        if row["date"] not in box_cache:
+            box_cache[row["date"]] = load_boxscore(row["date"])
+        box_index, box_reason = box_cache[row["date"]]
+        result, units, detail = grade_sgp(row, box_index, box_reason)
+        out = {
             "date": row["date"], "game": row.get("game"), "kind": row.get("kind"),
             "legs": [row[k] for k in ("leg1", "leg2") if row.get(k)],
             "frozen_price_joint_prob_rho": row.get("joint_prob_rho"),
             "frozen_price_independent_printed_beside": row.get("joint_prob_independent"),
-            "result": "UNSETTLED — player appearance requires the official box score",
-            "units": None,
-            "why_not_settled": ("Grading a prop needs that player's official box-score "
-                                "row (did he appear?). No box score was captured for "
-                                "this slate in this run, so the ticket is left open "
-                                "rather than graded on inference."),
+            "result": result,
+            "units": units,
             "sources": row.get("sources", []),
-        })
+        }
+        out.update(detail)
+        if units is None:
+            out["why_not_settled"] = (
+                "Grading a prop needs that player's official box-score row (did he "
+                "appear, and how many points?). " + (box_reason or
+                "The box-score file present did not cover every leg.") +
+                " The ticket is left open rather than graded on inference.")
+        else:
+            out["settlement_rule"] = ("frozen T-SGP exact_settlement_rule: Inactive player = "
+                                      "VOID leg (removed; remaining legs settle at the frozen "
+                                      "ticket price); any losing leg loses 1.10")
+        sgp_out.append(out)
 
-    settled_units = [r["units"] for r in singles_out] + \
-                    [r["units"] for r in parlays_out]
+    settled_units = ([r["units"] for r in singles_out] +
+                     [r["units"] for r in parlays_out] +
+                     [r["units"] for r in sgp_out if r["units"] is not None])
     summary = {
         "dates_settled": settled_dates,
         "dates_unsettled": sorted(unsettled),
@@ -327,6 +453,8 @@ def main(argv=None):
         "parlay_units": round(sum(r["units"] for r in parlays_out), 2),
         "sgp_published": len(sgp_out),
         "sgp_settled": sum(1 for r in sgp_out if r["units"] is not None),
+        "sgp_units": round(sum(r["units"] for r in sgp_out
+                               if r["units"] is not None), 2),
         "total_units_settled": round(sum(settled_units), 2),
         "validation_note": ("Every ticket was published as MODEL OUTPUT — UNVALIDATED, "
                             "unfunded, zero-stake paper output. No strategy is funded."),

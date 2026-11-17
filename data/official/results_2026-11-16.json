@@ -1,0 +1,373 @@
+{
+ "title": "Official per-game results feed — 2026-11-16 (kept current; finals verified from official game pages and gamebooks)",
+ "captured_by": "arena/09ed2727-nba1 (§62 Y02)",
+ "retrieved_utc": "2026-11-17T15:45Z..16:0xZ",
+ "rule": "One row per game. A row is marked FINAL only when the official game page prints Final and its quarters sum to the printed final (asserted per row, see quarters_sum_check). Nothing is inferred and no live score is stored as a final. Picks are NOT graded here: the ledger settles at game-day end (data/settlement/), after every game on the slate is final.",
+ "columns": [
+  "date",
+  "game_id",
+  "away",
+  "home",
+  "status",
+  "away_pts",
+  "home_pts",
+  "away_quarters",
+  "home_quarters",
+  "ot_periods",
+  "final_label",
+  "venue",
+  "city",
+  "attendance",
+  "officials",
+  "source_url",
+  "source_box_score_url",
+  "source_gamebook_pdf",
+  "source_date_url"
+ ],
+ "rows": [
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600245",
+   "away": "ORL",
+   "home": "BOS",
+   "status": "FINAL",
+   "away_pts": 115,
+   "home_pts": 105,
+   "away_quarters": [
+    20,
+    30,
+    25,
+    40
+   ],
+   "home_quarters": [
+    17,
+    24,
+    36,
+    28
+   ],
+   "quarters_sum_check": "away 20+30+25+40=115 ✓, home 17+24+36+28=105 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "TD Garden",
+   "city": "Boston, MA",
+   "attendance": null,
+   "officials": "#24 Kevin Scott, #41 Nate Green, #53 Matt Kallio",
+   "source_url": "https://www.nba.com/game/orl-vs-bos-0022600245",
+   "source_box_score_url": "https://www.nba.com/game/orl-vs-bos-0022600245/box-score#box-score",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261116/20261116_ORLBOS_book.pdf",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16",
+   "verified_at_utc": "2026-11-17T15:5xZ",
+   "verified_by_reads": [
+    "arena/09ed2727-nba1: official games listing https://www.nba.com/games?date=2026-11-16 (final + both scores, 8/8)",
+    "arena/09ed2727-nba1: SCORE BY PERIOD block of each official gamebook PDF (quarters, both sides, each summing to the printed final)"
+   ],
+   "independent_reads_agree": true
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600246",
+   "away": "CHI",
+   "home": "CLE",
+   "status": "FINAL",
+   "away_pts": 115,
+   "home_pts": 126,
+   "away_quarters": [
+    31,
+    17,
+    31,
+    36
+   ],
+   "home_quarters": [
+    25,
+    32,
+    31,
+    38
+   ],
+   "quarters_sum_check": "away 31+17+31+36=115 ✓, home 25+32+31+38=126 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Rocket Arena",
+   "city": "Cleveland, OH",
+   "attendance": 19432,
+   "officials": "#74 Curtis Blair, #54 Ray Acosta, #71 Rodney Mott",
+   "source_url": "https://www.nba.com/game/chi-vs-cle-0022600246",
+   "source_box_score_url": "https://www.nba.com/game/chi-vs-cle-0022600246/box-score#box-score",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261116/20261116_CHICLE_book.pdf",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16",
+   "verified_at_utc": "2026-11-17T15:5xZ",
+   "verified_by_reads": [
+    "arena/09ed2727-nba1: official games listing https://www.nba.com/games?date=2026-11-16 (final + both scores, 8/8)",
+    "arena/09ed2727-nba1: SCORE BY PERIOD block of each official gamebook PDF (quarters, both sides, each summing to the printed final)"
+   ],
+   "independent_reads_agree": true
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600247",
+   "away": "MEM",
+   "home": "WAS",
+   "status": "FINAL",
+   "away_pts": 136,
+   "home_pts": 120,
+   "away_quarters": [
+    33,
+    26,
+    42,
+    35
+   ],
+   "home_quarters": [
+    35,
+    34,
+    18,
+    33
+   ],
+   "quarters_sum_check": "away 33+26+42+35=136 ✓, home 35+34+18+33=120 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Capital One Arena",
+   "city": "Washington, DC",
+   "attendance": null,
+   "officials": "#4 Sean Wright, #28 Mousa Dagher, #95 Tyler Ricks",
+   "source_url": "https://www.nba.com/game/mem-vs-was-0022600247",
+   "source_box_score_url": "https://www.nba.com/game/mem-vs-was-0022600247/box-score#box-score",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261116/20261116_MEMWAS_book.pdf",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16",
+   "verified_at_utc": "2026-11-17T15:5xZ",
+   "verified_by_reads": [
+    "arena/09ed2727-nba1: official games listing https://www.nba.com/games?date=2026-11-16 (final + both scores, 8/8)",
+    "arena/09ed2727-nba1: SCORE BY PERIOD block of each official gamebook PDF (quarters, both sides, each summing to the printed final)"
+   ],
+   "independent_reads_agree": true
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600248",
+   "away": "PHI",
+   "home": "BKN",
+   "status": "FINAL",
+   "away_pts": 135,
+   "home_pts": 123,
+   "away_quarters": [
+    33,
+    45,
+    27,
+    30
+   ],
+   "home_quarters": [
+    26,
+    33,
+    36,
+    28
+   ],
+   "quarters_sum_check": "away 33+45+27+30=135 ✓, home 26+33+36+28=123 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Barclays Center",
+   "city": "Brooklyn, NY",
+   "attendance": null,
+   "officials": "#14 JB DeRosa, #68 Jacyn Goble, #93 Jenna Reneau",
+   "source_url": "https://www.nba.com/game/phi-vs-bkn-0022600248",
+   "source_box_score_url": "https://www.nba.com/game/phi-vs-bkn-0022600248/box-score#box-score",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261116/20261116_PHIBKN_book.pdf",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16",
+   "verified_at_utc": "2026-11-17T15:5xZ",
+   "verified_by_reads": [
+    "arena/09ed2727-nba1: official games listing https://www.nba.com/games?date=2026-11-16 (final + both scores, 8/8)",
+    "arena/09ed2727-nba1: SCORE BY PERIOD block of each official gamebook PDF (quarters, both sides, each summing to the printed final)"
+   ],
+   "independent_reads_agree": true
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600249",
+   "away": "HOU",
+   "home": "MIA",
+   "status": "FINAL",
+   "away_pts": 110,
+   "home_pts": 128,
+   "away_quarters": [
+    15,
+    31,
+    35,
+    29
+   ],
+   "home_quarters": [
+    29,
+    33,
+    39,
+    27
+   ],
+   "quarters_sum_check": "away 15+31+35+29=110 ✓, home 29+33+39+27=128 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Kaseya Center",
+   "city": "Miami, FL",
+   "attendance": 19662,
+   "officials": "#50 Gediminas Petraitis, #32 Marat Kogut, #56 John Conley",
+   "source_url": "https://www.nba.com/game/hou-vs-mia-0022600249",
+   "source_box_score_url": "https://www.nba.com/game/hou-vs-mia-0022600249/box-score#box-score",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261116/20261116_HOUMIA_book.pdf",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16",
+   "verified_at_utc": "2026-11-17T15:5xZ",
+   "verified_by_reads": [
+    "arena/09ed2727-nba1: official games listing https://www.nba.com/games?date=2026-11-16 (final + both scores, 8/8)",
+    "arena/09ed2727-nba1: SCORE BY PERIOD block of each official gamebook PDF (quarters, both sides, each summing to the printed final)"
+   ],
+   "independent_reads_agree": true,
+   "quarter_source_note": "The gamebook's SCORE BY PERIOD row for the visitor is not in the PDF text layer; HOU's quarters are the period-end cumulative scores printed in this same gamebook's play-by-play (End of 1st QUARTER 29-15; End of 2nd QUARTER 62-46; the 3rd-period cumulative team line 180:00 shows 81; End of 4th QUARTER 128-110), which sum to the printed final 110. Cross-checked against the 3rd-period cumulative team total. Both sides sum to the printed finals."
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600250",
+   "away": "POR",
+   "home": "MIN",
+   "status": "FINAL",
+   "away_pts": 98,
+   "home_pts": 106,
+   "away_quarters": [
+    26,
+    25,
+    22,
+    25
+   ],
+   "home_quarters": [
+    26,
+    33,
+    28,
+    19
+   ],
+   "quarters_sum_check": "away 26+25+22+25=98 ✓, home 26+33+28+19=106 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Target Center",
+   "city": "Minneapolis, MN",
+   "attendance": 18236,
+   "officials": "#39 Tyler Ford, #37 Eric Dalen, #94 JD Ralls",
+   "source_url": "https://www.nba.com/game/por-vs-min-0022600250",
+   "source_box_score_url": "https://www.nba.com/game/por-vs-min-0022600250/box-score#box-score",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261116/20261116_PORMIN_book.pdf",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16",
+   "verified_at_utc": "2026-11-17T15:5xZ",
+   "verified_by_reads": [
+    "arena/09ed2727-nba1: official games listing https://www.nba.com/games?date=2026-11-16 (final + both scores, 8/8)",
+    "arena/09ed2727-nba1: SCORE BY PERIOD block of each official gamebook PDF (quarters, both sides, each summing to the printed final)"
+   ],
+   "independent_reads_agree": true
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600251",
+   "away": "GSW",
+   "home": "NOP",
+   "status": "FINAL",
+   "away_pts": 94,
+   "home_pts": 115,
+   "away_quarters": [
+    11,
+    25,
+    29,
+    29
+   ],
+   "home_quarters": [
+    35,
+    26,
+    32,
+    22
+   ],
+   "quarters_sum_check": "away 11+25+29+29=94 ✓, home 35+26+32+22=115 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Smoothie King Center",
+   "city": "New Orleans, LA",
+   "attendance": 16624,
+   "officials": "#45 Brian Forte, #29 Mark Lindsay, #38 Michael Smith",
+   "source_url": "https://www.nba.com/game/gsw-vs-nop-0022600251",
+   "source_box_score_url": "https://www.nba.com/game/gsw-vs-nop-0022600251/box-score#box-score",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261116/20261116_GSWNOP_book.pdf",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16",
+   "verified_at_utc": "2026-11-17T15:5xZ",
+   "verified_by_reads": [
+    "arena/09ed2727-nba1: official games listing https://www.nba.com/games?date=2026-11-16 (final + both scores, 8/8)",
+    "arena/09ed2727-nba1: SCORE BY PERIOD block of each official gamebook PDF (quarters, both sides, each summing to the printed final)"
+   ],
+   "independent_reads_agree": true
+  },
+  {
+   "date": "2026-11-16",
+   "game_id": "0022600252",
+   "away": "PHX",
+   "home": "DEN",
+   "status": "FINAL",
+   "away_pts": 117,
+   "home_pts": 105,
+   "away_quarters": [
+    20,
+    36,
+    34,
+    27
+   ],
+   "home_quarters": [
+    24,
+    29,
+    29,
+    23
+   ],
+   "quarters_sum_check": "away 20+36+34+27=117 ✓, home 24+29+29+23=105 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Ball Arena",
+   "city": "Denver, CO",
+   "attendance": 19520,
+   "officials": "#3 Nick Buchert, #21 Dedric Taylor, #47 Suyash Mehta",
+   "source_url": "https://www.nba.com/game/phx-vs-den-0022600252",
+   "source_box_score_url": "https://www.nba.com/game/phx-vs-den-0022600252/box-score#box-score",
+   "source_gamebook_pdf": "https://statsdmz.nba.com/pdfs/20261116/20261116_PHXDEN_book.pdf",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-16",
+   "verified_at_utc": "2026-11-17T15:5xZ",
+   "verified_by_reads": [
+    "arena/09ed2727-nba1: official games listing https://www.nba.com/games?date=2026-11-16 (final + both scores, 8/8)",
+    "arena/09ed2727-nba1: SCORE BY PERIOD block of each official gamebook PDF (quarters, both sides, each summing to the printed final)"
+   ],
+   "independent_reads_agree": true
+  }
+ ],
+ "sources": [
+  "https://statsdmz.nba.com/pdfs/20261116/20261116_CHICLE_book.pdf",
+  "https://statsdmz.nba.com/pdfs/20261116/20261116_GSWNOP_book.pdf",
+  "https://statsdmz.nba.com/pdfs/20261116/20261116_HOUMIA_book.pdf",
+  "https://statsdmz.nba.com/pdfs/20261116/20261116_MEMWAS_book.pdf",
+  "https://statsdmz.nba.com/pdfs/20261116/20261116_ORLBOS_book.pdf",
+  "https://statsdmz.nba.com/pdfs/20261116/20261116_PHIBKN_book.pdf",
+  "https://statsdmz.nba.com/pdfs/20261116/20261116_PHXDEN_book.pdf",
+  "https://statsdmz.nba.com/pdfs/20261116/20261116_PORMIN_book.pdf",
+  "https://www.nba.com/game/chi-vs-cle-0022600246",
+  "https://www.nba.com/game/gsw-vs-nop-0022600251",
+  "https://www.nba.com/game/hou-vs-mia-0022600249",
+  "https://www.nba.com/game/mem-vs-was-0022600247",
+  "https://www.nba.com/game/orl-vs-bos-0022600245",
+  "https://www.nba.com/game/phi-vs-bkn-0022600248",
+  "https://www.nba.com/game/phx-vs-den-0022600252",
+  "https://www.nba.com/game/por-vs-min-0022600250",
+  "https://www.nba.com/games?date=2026-11-16"
+ ],
+ "summary": {
+  "rows": 8,
+  "final": 8,
+  "not_final": 0,
+  "finals": [
+   "ORL 115-105 BOS",
+   "CHI 115-126 CLE",
+   "MEM 136-120 WAS",
+   "PHI 135-123 BKN",
+   "HOU 110-128 MIA",
+   "POR 98-106 MIN",
+   "GSW 94-115 NOP",
+   "PHX 117-105 DEN"
+  ]
+ },
+ "cross_check": {
+  "against": "https://www.nba.com/games?date=2026-11-16 (read first-hand this session)",
+  "result": "8/8 games agree on status Final, both scores and the matchup",
+  "checked_by": "arena/09ed2727-nba1"
+ }
+}
