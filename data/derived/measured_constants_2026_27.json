@@ -1,21 +1,41 @@
 {
- "title": "Measured constants from official finals",
- "session": "arena/801ba27f-nba1",
- "built_utc": "2026-11-16T00:02:33Z",
- "source": "https://www.nba.com/games?date=YYYY-MM-DD and the official box score of each game",
- "n_final_games": 190,
- "date_range": [
-  "2026-10-20",
-  "2026-11-15"
- ],
- "home_win_rate": 0.5263,
- "home_wins": 100,
- "home_court_points": 1.108,
- "home_court_rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate).",
- "sigma_margin": 16.784,
- "sigma_total": 19.166,
- "league_off_rtg": 111.782,
- "league_pace": 101.739,
- "mean_total": 227.53,
- "mean_home_margin": 1.805
+ "_meta": {
+  "title": "Measured constants for the 2026-27 model, re-derived on 2026-11-17",
+  "generated_by": "scripts/recut_2026_11_17.py",
+  "retrieved_utc": "2026-11-17T15:50Z",
+  "rule": "measure, never fit. Each constant states the official column it came from."
+ },
+ "league": {
+  "off_rtg_poss_weighted": 113.287,
+  "pace_gp_weighted": 99.868,
+  "formula": "sum(OffRtg_i * POSS_i) / sum(POSS_i) over the 30 official rows; PACE weighted by GP",
+  "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season"
+ },
+ "dispersion": {
+  "finals_n": 205,
+  "margin_mean": 1.595,
+  "sigma_margin": 16.868,
+  "total_mean": 227.644,
+  "sigma_total": 19.142,
+  "formula": "sample standard deviation (n-1) of the official home-minus-away margin and of the official game total, over every decided game in the corpus, de-duplicated by game id",
+  "source_url": "https://www.nba.com/games"
+ },
+ "home_court_pin": {
+  "home_win_rate": 0.5196,
+  "home_wins": 106,
+  "home_games": 204,
+  "sigma_margin_used": 16.868,
+  "hca_points": 0.83,
+  "formula": "HCA_points = sigma_margin * Phi^-1(home_win_rate); the rate comes from the official standings HOME/ROAD columns, never from a fit",
+  "source_url": "https://www.nba.com/standings",
+  "prior_pin": {
+   "rate": 0.5204,
+   "hca_points": 0.87,
+   "as_of": "2026-11-16 (session arena/23ec1e32-nba1)"
+  },
+  "drift": {
+   "rate_change": -0.0008,
+   "points_change": -0.041
+  }
+ }
 }
