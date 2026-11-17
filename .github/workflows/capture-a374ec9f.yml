@@ -32,7 +32,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: capture-a374ec9f
@@ -47,6 +47,10 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          # The capture branch below is this session's own scratch branch: it is
+          # created by this workflow and nothing else ever writes to it, so a
+          # force push onto it cannot discard another session's work.
+          ref: arena/a374ec9f-nba1
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -91,3 +95,20 @@ jobs:
           path: payload
           retention-days: 14
           if-no-files-found: error
+
+      - name: Publish the captured bytes to this session's capture branch
+        run: |
+          set -x
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git config user.name "nba1-bot"
+          git config user.email "nba1-bot@users.noreply.github.com"
+          git checkout -B arena/a374ec9f-captures
+          git add -A data/raw/gamebooks data/raw/injury_pdfs verify/2026-11-17-a374ec9f
+          if git diff --cached --quiet; then
+            echo "no new capture payloads - nothing to publish"
+          else
+            git commit -m "capture: official gamebooks + injury editions (a374ec9f) [skip ci]"
+          fi
+          # The branch is this workflow's own scratch branch; nothing else writes
+          # to it, so this push cannot discard anyone else's work.
+          git push --force origin HEAD:refs/heads/arena/a374ec9f-captures
