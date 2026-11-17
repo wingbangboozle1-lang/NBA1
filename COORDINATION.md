@@ -6902,3 +6902,30 @@ Outputs archived in `verify/2026-11-16-23ec1e32/` (README.md + nine `.out` files
 | Open overlapping PRs | [#152](https://github.com/wingbangboozle1-lang/NBA1/pull/152) (`arena/cdc6c39d-nba1` — R13/R15 on the same picks page; this delivery already implements both) and [#155](https://github.com/wingbangboozle1-lang/NBA1/pull/155) (`arena/3ff8ff0f-nba1` — measured HCA pin + measured rho; this delivery already implements both with the corpus fix). Both left OPEN for their live owners (ground rule 5: <60 min idle, fresh claims) — **both need a rebase onto `01f91c2` and a re-read of §61.0 before merge**, or they will re-publish the polluted-corpus / neutral-fold numbers. Logged, not touched. |
 | Not done / boundaries | 11/16 games had not tipped at delivery (first tip 23:00Z), so no settlement work this cycle; R21 game-log coverage for 11/16+ waits on tonight's gamebooks; R16 stays blocked (no official closing-line source exists — not fabricated); R11 travel still feeds Wikipedia-coordinate adjustments into legacy margins (unchanged, flagged); Pages `build_type` flip stays an owner-setting limitation (prior flags); legacy engine path `flat_hca=2.0` untouched (§4 request by §59). |
 | Follow-up PR carrying this record | [#160](https://github.com/wingbangboozle1-lang/NBA1/pull/160) (board-only; merged right after this line landed) |
+
+## 62. Session `arena/825bb504-nba1` — refresh workflow promotion-gate hardening and run-record observability (claimed 2026-11-17 UTC)
+
+**Board read / conflict check:** Read the board before starting. `gh pr list --state open` measured two open PRs (#152 and #155); inspected their changed-file lists and neither edits `.github/workflows/refresh-data.yml` or a workflow-gate test. No workflow-specific claim appears in the latest completed records. Current checkout is the platform-pinned branch `arena/825bb504-nba1` at `22d56af`; the branch is fixed for this session and will not be renamed or replaced with a session-specific branch.
+
+| Task | Scope | Status |
+| --- | --- | --- |
+| 62.1 | Make scheduled rebuild conditional explicitly on successful promotion, successful freshness-gate execution, and the gate's `ok=true` output. Preserve fail-closed behavior. | done |
+| 62.2 | Persist fetch, promotion, freshness, settlement, and build outcomes in the refresh run record; add a focused regression check for workflow guard conditions and record fields. | done |
+| 62.3 | Run workflow regression and repository verification; record exact outcomes and any limitations here. | done |
+
+**Files in scope:** `.github/workflows/refresh-data.yml`, `scripts/test_refresh_workflow.py`, and this section of `COORDINATION.md`. No shared site data, source captures, generated pages, or other session files are in scope.
+
+**Observed source state before edits (2026-11-17):** GitHub Actions run [44078416610](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44078416610) completed successfully, but its step list shows the rebuild was **skipped**. Local `engine/refresh_gate.py --max-age-hours 10` also blocked the committed snapshot: it reported a 24.23-hour-old refresh, five failed fetch/parse checks, stale source checks, and missing/mismatched same-run captures/promotions. This task does not claim to fix the official-source reachability/parsing gaps; it hardens the workflow's gate condition and makes per-run outcomes visible for review. Official-source values will not be fabricated or promoted.
+
+**Recovery note:** The first claim commit accidentally replaced this entire shared board instead of appending. Immediately restored the exact prior board bytes from its parent commit, then reapplied this section. The corrective commit below preserves the full historical board and adds this claim; no prior coordination records are intentionally removed.
+
+
+### 62.1–62.3 Verification / delivery
+
+- `python3 scripts/test_refresh_workflow.py`: **PASS**, 3 structural regression tests.
+- `python3 -m unittest scripts.test_refresh_gate -v`: **PASS**, 7 freshness/provenance gate cases. (`python3 scripts/test_refresh_gate.py` was first attempted and failed because direct script invocation omits the repository root from `sys.path`; reran successfully as a module. No product code change was needed.)
+- `python3 scripts/verify_all.py`: **PASS**, `FAILURES: 0`; site builder, provenance/link checks, data audits, and noise-band refusal tests all green. Its source audit reports 3,002 of 3,114 table rows with allowed official links and 112 explanatory no-source marks; this is repository structural verification and does not itself fetch/validate every NBA source.
+- `python3 -m py_compile engine/refresh_gate.py scripts/test_refresh_workflow.py` and `git diff --check`: **PASS**.
+- The scheduled rebuild condition now explicitly requires successful fetch, promotion, freshness-gate execution, and `freshness.outputs.ok == 'true'`. The run record and automated refresh-PR body expose fetch/promotion/freshness (including its boolean result)/settlement/build outcomes.
+- **Important unresolved source limitation (not concealed):** run #44078416610 was green overall but its build was skipped. Current committed input gate remains blocked (24.23h old at check, failed source/parse checks, stale same-run captures/promotions); this session did not fabricate data or bypass the gate.
+- **Delivery:** current branch only: `arena/825bb504-nba1`. The task-claim commit and corrective board-restoration commit are on this branch; workflow/test changes will be committed and pushed after reviewing the final diff. PR/merge/deploy follow only after branch checks are green.
