@@ -156,6 +156,24 @@ def rho_bounds(p1, p2):
     return lb_joint, ub_joint, rho_lb, rho_ub
 
 
+def as_of_string(lines):
+    """One sentence naming every input's capture time, tolerant of both the
+    11/16 originator's input block and the 11/17 one (measured-HCA rewrite),
+    so a new window cannot silently blank the as-of line."""
+    inp = lines.get("_meta", {}).get("inputs", {})
+    ratings = (inp.get("ratings_recut_retrieved_utc")
+               or inp.get("team_ratings_read_utc")
+               or "not printed")
+    sched = inp.get("schedule_captured_on") or inp.get("schedule_captured_utc") or "not printed"
+    inj = inp.get("injury_edition", "not printed")
+    rev = inp.get("injury_revision_et", "not printed")
+    ret = inp.get("injury_retrieved_utc") or "not printed (text render only)"
+    return ("ratings re-cut from the official team-stat pages read %s; schedule captured %s; "
+            "latest injury report %s (revision %s, retrieved %s)."
+            % (ratings, sched, inj, rev, ret))
+
+
+
 def main():
     hl = json.load(open(os.path.join(DATA, "derived", "horizon_lines.json"), encoding="utf-8"))
     lines = hl
@@ -398,15 +416,7 @@ def main():
                                    "section 4 from measured_rho.json (refreshed to its "
                                    "current 74-final corpus this session)"),
             }),
-            "as_of": (lines["_meta"]["inputs"]["ratings_recut_retrieved_utc"]
-                      and ("ratings re-cut from the official team-stat captures retrieved %s; "
-                           "schedule captured %s; latest injury report %s (revision %s, "
-                           "retrieved %s)."
-                           % (lines["_meta"]["inputs"]["ratings_recut_retrieved_utc"],
-                              lines["_meta"]["inputs"]["schedule_captured_on"],
-                              lines["_meta"]["inputs"]["injury_edition"],
-                              lines["_meta"]["inputs"]["injury_revision_et"],
-                              lines["_meta"]["inputs"]["injury_retrieved_utc"]))),
+            "as_of": as_of_string(lines),
         },
         "singles": singles,
         "parlays": parlays,
