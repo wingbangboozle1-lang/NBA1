@@ -138,3 +138,58 @@ class DiffTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CellReaderRecoversDroppedRowsTests(unittest.TestCase):
+    """Regression pin for flag F-X01 (COORDINATION §60.2, session
+    arena/07920bdc-nba1; fix landed by session arena/ca442d3d-nba1).
+
+    engine/injury_diff.parse_rows (the word-band line parser) returns 80 rows
+    and reports unparsed: 0 for the 2026-11-16 01:00/01:15 PM editions while
+    seven player rows are missing from its output: Jerome, Pippen Jr., Post,
+    Saunders and Stewart (Memphis, MEM@WAS) and Reese and Watford (New
+    Orleans, GSW@NOP). load_edition now reads the same bytes a second way - the
+    report's own clipped cell rectangles - and publishes that pass, so those
+    rows are present and a disagreement between the two readers can never again
+    be silent.
+    """
+
+    EDITION = "Injury-Report_2026-11-16_01_15PM"
+    MISSING = [("Memphis Grizzlies", "Jerome, Ty"),
+               ("Memphis Grizzlies", "Pippen Jr., Scotty"),
+               ("Memphis Grizzlies", "Post, Quinten"),
+               ("Memphis Grizzlies", "Saunders, Richie"),
+               ("Memphis Grizzlies", "Stewart, Isaiah"),
+               ("New Orleans Pelicans", "Reese, Julian"),
+               ("New Orleans Pelicans", "Watford, Trendon")]
+
+    @classmethod
+    def setUpClass(cls):
+        root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        pdfs = [p for p in glob.glob(os.path.join(
+            root, "data", "raw", "injury_pdfs", "*.pdf"))
+            if cls.EDITION in os.path.basename(p)]
+        if not pdfs:
+            raise unittest.SkipTest(f"{cls.EDITION} not archived in this checkout")
+        cls.rec = ij.load_edition(sorted(pdfs)[0])
+
+    def test_dropped_player_rows_are_recovered(self):
+        have = {(r[3], r[4]) for r in self.rec["rows"] if len(self.rec["rows"][0]) > 4}
+        for team, player in self.MISSING:
+            self.assertIn((team, player), have,
+                          f"{player} ({team}) dropped from the parsed edition")
+
+    def test_cell_reader_is_the_published_pass(self):
+        audit = self.rec["row_audit"]
+        self.assertGreaterEqual(audit["cell_reader_player_rows"],
+                                audit["line_parser_player_rows"])
+        self.assertGreaterEqual(self.rec["row_count"], 87)
+        self.assertTrue(audit["selected"].startswith("clipped-cell reader"))
+
+    def test_no_silent_drop_and_no_unassigned_text(self):
+        audit = self.rec["row_audit"]
+        self.assertFalse(audit["silent_drop_detected"],
+                         f"a reader saw rows the output lacks: "
+                         f"{audit['rows_only_in_cell_reader']} / "
+                         f"{audit['rows_only_in_line_parser']}")
+        self.assertEqual(audit["cell_reader_audit"].get("unassigned_count"), 0)

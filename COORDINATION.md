@@ -5,6 +5,44 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/ca442d3d-nba1` (opened 2026-11-17 15:4x UTC — game-day-rollover integration seat: 11/16 settlement from official finals, horizon roll to 11/17–11/20, engine capture/promote fixes (F-X01, R03/R04 generalisation, R09 legacy wiring), ledger seal, site rebuild, gates, PR → `main` → Pages)
+
+Branch `arena/ca442d3d-nba1`, based on `main` `22d56af` (merge of PR #160 — the tip at claim
+time; `git rev-parse HEAD` == `git rev-parse origin/main` == `22d56af`, so this branch is not
+behind). The platform pins this session to that branch; the `session-<id>/<task>` naming in the
+brief is satisfied by this single pre-named branch (deviation logged, as every session before it
+logged it). Full claim, task table N01–N09 and file scopes are in **§62** at the tail of this board.
+
+**Board read before claiming (2026-11-17 15:4x UTC, ground rules 1–6):** §0 ground rules, §0b
+registry, the tail delivery records §57–§61, `gh pr list --state open`, `gh run list`,
+`gh api /repos/…/pages`, and the requirements register. **Measured, not inferred:**
+
+| Observation | Measurement |
+| --- | --- |
+| `main` tip | `22d56af` — merge of PR #160 (§61.2/§61.3 delivery record). This branch's base, 0 commits behind. |
+| Open PRs | **2**, both `CONFLICTING` and both owned by sessions idle >22 h: [#152](https://github.com/wingbangboozle1-lang/NBA1/pull/152) (`arena/cdc6c39d-nba1`, updated 2026-11-16T18:34:10Z — R13/R15 legacy-page alignment, already delivered by §61 W03/W04) and [#155](https://github.com/wingbangboozle1-lang/NBA1/pull/155) (`arena/3ff8ff0f-nba1`, updated 2026-11-16T18:49:47Z — measured HCA pin + measured rho, already delivered by §61 W01/W02 with the corpus defect fixed). §61.3 lists both as "open overlapping PRs … this delivery already implements both". Past ground rule 5's 60-minute threshold with no commits → this seat takes over their disposition (triage recorded in §62). |
+| Pages | `status: built`, `build_type: legacy`, https://wingbangboozle1-lang.github.io/NBA1/ |
+| Scheduled job | `Refresh official data` last run **44078416610 success 2026-11-17 ~12:1x UTC** (the 11:15Z cron); `data/raw/_last_refresh.json` shows the parse failure this seat fixes: `S1_season`/`S2_train`/`S8_standings`/`S9`/`S10` → "expected 30 team rows, parsed 0" (client-rendered shells), captured_at 2026-11-16T15:30:05Z. |
+| Requirements register | **23 done / 10 partial** of 33 (`data/content/requirements.json`). Partials: R01, R04, R09, R11, R12, R16, R21, R26, R30, R32. |
+| Flag register | **141 items**, max numeric id F137; open High items this seat can close: **F-X01** (`engine/injury_diff.py` silently drops 7 player rows/edition) and the §60.7 cross-session requests (generalised injury-PDF capture in `engine/fetch_official.py`; `test_*.py` wired into CI). |
+| **Currency — the reason this cycle exists** | Everything committed stops at game day **2026-11-15** (`data/settlement/` holds 11/14 + 11/15 only) while **eight games were played on 11/16** and are final. Read first-hand at claim time from https://www.nba.com/schedule and https://www.nba.com/games?Date=2026-11-16 : ORL 115 @ BOS 105, CHI 115 @ CLE 126, MEM 136 @ WAS 120, PHI 135 @ BKN 123, HOU 110 @ MIA 128, POR 98 @ MIN 106, GSW 94 @ NOP 115, PHX 117 @ DEN 105 (game ids 0022600245–252). The official November calendar on the same page prints **11/17: 5 games, 11/18: 12, 11/19: 4, 11/20: 9** — the rolling window this seat must originate. |
+| Injury index | https://official.nba.com/nba-injury-report-2026-27-season/ read at 15:4x UTC: **39 editions for 2026-11-17**, newest `Injury-Report_2026-11-17_10_30AM.pdf` (10:30 a.m. ET). None of them is in `data/raw/injury_pdfs/` (200 files, newest 11/16), so R04's diff chain is one game day behind. |
+
+**Scope.** Nine tasks (N01–N09) in §62. File scopes are declared there and are disjoint from both
+stale PRs' remaining content (their merged-equivalent work is on `main` already). This seat takes
+the integration role: no other session has committed in >22 h.
+
+**Board-number note (this session, recorded at merge):** three sessions claimed a section on
+2026-11-17 inside the same ten minutes. `arena/825bb504-nba1` landed **§62** on `main` first (via
+PR #161, 15:48:56Z) and `arena/b454a53d-nba1` delivered the 2026-11-16 settlement into the banner
+above; this seat's tail section is therefore **§63** (claimed as §62 — the content is unchanged and
+every internal "Â§62" reference below means this section). Nothing from either session was discarded,
+and this seat took no file either of them claimed: the 11/16 settlement files, the results-feed rows
+and the requirements/flag registers that `arena/b454a53d-nba1` owns are **not** edited here -
+`git diff origin/main -- data/settlement data/ledger data/official` is empty for this branch.
+
+---
+
 ## 🔑 ACTIVE CLAIM — session `arena/c5487cbb-nba1` (opened 2026-11-17 15:4x UTC — day-roll cycle: settle the now-final 2026-11-16 slate from first-hand official finals, roll the origination horizon to 11/17–11/19 with pre-tip ledger commitments, archive the 2026-11-17 injury editions with revision + retrieval stamps and consecutive diffs, refresh the requirement register on measured evidence, gate battery, PR → `main` → merge → Pages; full claim and delivery record in **§62** at the tail of this board)
 
 Branch `arena/c5487cbb-nba1`, based on `main` `22d56af` (tip at claim time = merge of PR #160, 2026-11-17 04:43Z, i.e. 11:43Z ET on 11/16). The platform pins this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch (deviation logged, as every session before it logged it). File scope, task table Y01–Y09 and the full evidence log are in **§62**.
@@ -533,6 +571,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/bfad39b2-nba1` | `arena/bfad39b2-nba1` | 2026-11-16 18:2x UTC | **First-hand official re-verification of the 11/17–11/19 rolling horizon** (schedule, standings, three team-stat pages, newest injury edition — disjoint from PR #146's 11/16 focus), **stale home-court-pin refresh** (0.5285 → re-measured), **projection/bet surface wiring** (index links + roll-page separation), **requirements-register refresh**, gates, PR → `main`, Pages confirmation (§56). Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 
 | `arena/c5487cbb-nba1` | `arena/c5487cbb-nba1` | 2026-11-17 15:4x UTC | **Day-roll cycle (§62):** settle the 2026-11-16 slate (8 games, first-hand official finals + quarter sums asserted), roll the origination horizon to 11/17–11/19 and freeze each strategy's pre-registration before tip, archive the 2026-11-17 injury editions with revision *and* retrieval stamps plus consecutive diffs, refresh the requirement register on measured evidence, gate battery, PR → `main` → merge → Pages. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
+| `arena/ca442d3d-nba1` | `arena/ca442d3d-nba1` | 2026-11-17 15:4x UTC | **Game-day-rollover seat (§65, claimed as §62 — renumbered twice at merge: `arena/825bb504-nba1` landed §62 and `arena/84264db0-nba1` landed §63, `arena/c5487cbb-nba1` §64)**: settle game day 2026-11-16 from official finals (one row per game: date, teams, final, quarters) and seal/verify the ledger; roll the originated horizon to 11/17–11/20 with pre-registration frozen before tip; generalise the official capture path in `engine/fetch_official.py` (index-driven injury editions, R03/R04) and fix the **F-X01** row-dropping parser in `engine/injury_diff.py`; wire the measured HCA pin into the legacy engine path (R09); re-read standings + three team-stat pages and re-cut model inputs; stale-PR #152/#155 triage; gates, PR → `main` → Pages, register/flag/doc refresh. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
 
@@ -7139,3 +7178,102 @@ Claimed 2026-11-17 15:4x UTC. Branch `arena/c5487cbb-nba1` (platform-pinned; the
 | --- | --- |
 | PR | see below, recorded after merge |
 | Merge / deploy | see below |
+
+## 65. Session `arena/ca442d3d-nba1` — game-day-rollover integration seat (claimed 2026-11-17 15:4x UTC)
+
+### 65.1 Task table and file scopes (this session's, and only this session's)
+
+| ID | Task | Status | File scope (exclusive) |
+|----|------|--------|------------------------|
+| N01 | Board read, claim committed and pushed before any other edit (ground rule 4) | **done** | top claim block, §0b row, this §65 |
+| N02 | **F-X01 engine fix**: `engine/injury_diff.py` drops 7 player rows per 11/16 edition while reporting 0 unparsed cells — reproduced first-hand this session on the committed PDF bytes (page 1 bands 95.4–219.6 carry Jerome/Pippen Jr./Post/Saunders/Stewart and page 4 carries Reese/Watford; `parse_rows` returns 80 rows / 0 unparsed, the independent cell reader returns 87 rows / 76 players). Port the per-clipped-rectangle reader as the primary pass, keep the line parser as a cross-check, make an unassemblable row **fail loudly** (orphan-word audit + row-count assertion in `load_edition`) | in progress | `engine/injury_diff.py`, `scripts/test_injury_diff.py`, `scripts/injury_recover_ca442d3d.py` (new), `verify/2026-11-17-ca442d3d/**` |
+| N03 | **R03/R04 generalisation** (the §60.7 request to the capture owner): drive injury-PDF capture from the official index (every edition the league lists, newest-first, up to a cap) instead of the four hard-coded times, and run the parse+diff chain for 11/16 11:30 AM → 11/17 so the consecutive-diff chain is current | in progress | `engine/fetch_official.py`, `engine/promote_official.py` (capture/promote only), `.github/workflows/refresh-data.yml` (only if a step must be added), `data/raw/injury_pdfs/**` (via the runner), `data/parsed/injury_diffs/**` |
+| N04 | **R09 legacy wiring**: measured home-court pin wired into `engine/model_core.py` / `engine/pipeline.py` (replace `flat_hca = 2.0` with the measured value read from the committed measured-constants file, never a hard-coded new number), closing the gap §61 left as a cross-scope request | in progress | `engine/model_core.py`, `engine/pipeline.py`, `scripts/test_hca_pin_ca442d3d.py` (new) |
+| N05 | **Game-day 2026-11-16 settlement** from official finals: one row per game (date, teams, final, quarter scores), quarter sums asserted, ledger hash verified and settlement stamp published; 11/16 picks settled against it | in progress | `data/settlement/settlement_2026-11-16.json`, `data/ledger/ledger.json`, `site/pages/settlement.html`, `verify/2026-11-17-ca442d3d/**` |
+| N06 | **Horizon roll to 11/17–11/20** (max 3 days in advance from today) on re-read official inputs: schedule (official calendar says 11/17: 5, 11/18: 12, 11/19: 4, 11/20: 9 games), standings, the three team-stat pages re-cut, pre-registration frozen before tip for every strategy that will bet the new slate | in progress | `data/derived/horizon_lines.json`, `data/derived/horizon_picks.json`, `data/prereg/**`, `data/official/standings_2026-11-17*.json`, `site/pages/picks.html`, `site/pages/roll.html` (via builders) |
+| N07 | **Registers and pages refreshed on measured evidence**: `data/content/requirements.json` (R01/R03/R04/R09/R30 status text), `data/content/flagged.json` (F-X01 resolution + any new finding, additive), `data/content/questions.json`, `data/content/suggestions.json`, `EXECUTIVE_SUMMARY.md`, `README.md`, `REPO_REVIEW.md` | in progress | those files only |
+| N08 | **Stale-PR triage** (ground rule 5, both idle >22 h and CONFLICTING, both implemented by §61 per its own delivery record): disposition of #152 and #155 recorded here; content compared first, nothing discarded | in progress | `COORDINATION.md`, PR close comments |
+| N09 | **Gates, PR → `main`, merge without waiting, Pages fetch-back**, record in §62.3 | in progress | whole-branch integration |
+
+**Not claimed / boundaries.** `docs/**` (Build A/B/C archives), `command-center/**` (another build's
+generated site, read-only here), the two stale PR branches (their sessions' branches; the platform
+forbids pushing to them — disposition is by close-as-superseded with the reason recorded), the
+Pages `build_type` flip (owner setting, HTTP 403 for session tokens, F116). R16 stays blocked:
+no NBA-operated closing-line source exists, and the site does not fabricate one.
+
+### 65.2 Log
+
+- 15:4xZ claim read: `main` = `22d56af`; open PRs #152/#155 (both CONFLICTING, idle >22 h);
+  Pages `built`; refresh run 44078416610 success at ~12:1xZ with `parsed 0` on all five
+  structured sources; register 23 done / 10 partial; 141 flags.
+- 15:5xZ first-hand official reads through the fetch channel: injury index (39 editions for
+  11/17, newest 10:30 AM ET), `nba.com/schedule` (11/16 finals × 8 with scores and game ids,
+  11/17 5 games with tip times and game ids, month-grid counts 11/17: 5 · 11/18: 12 · 11/19: 4 ·
+  11/20: 9), `nba.com/games?Date=2026-11-16` (the same 8 finals, plus post-game records).
+- F-X01 reproduced locally on committed PDF bytes before any edit (see N02).
+
+### 65.3 Status and scope changes during the cycle (measured, not assumed)
+
+Five sessions claimed a section inside the same 20 minutes on 2026-11-17, so the board renumbered
+three times. This seat's response was to **yield overlap rather than duplicate it**, and the yields
+are recorded here so a reviewer can see who did what:
+
+| Task | Final state | Why |
+| --- | --- | --- |
+| N02 F-X01 engine parser | **done** | Fixed and verified on the committed PDF bytes: 87 rows / 76 player rows for the 2026-11-16 01:15 PM edition (was 80 / 69); all 100 archived editions now parse with `silent_drop_detected: false`; 10 tests pin it and CI runs every `scripts/test_*.py` (the §60.7 request 3 that no test ran in CI is closed). Flag **F-CA-01** (resolved). |
+| N03 index-driven capture + promote-time diff | **done** | `engine/fetch_official.py::capture_injury` now enumerates the official index (newest first, cap per run, already-archived skipped) and `engine/promote_official.py::diff_injury_chain` writes the consecutive diff + edition records during promotion. The 11/17 PDFs themselves are not in this branch: every `Refresh official data` run armed from this branch was cancelled by the shared concurrency group (3 of 3) - **F-CA-04**, with the per-ref alternative proved by this session's own capture run. |
+| N04 measured-HCA pin in the legacy engine | **done** | `engine/pipeline.py` overrides the fitted `hca` (3.51) with `engine/hca.compute_hca` over the run's official completed-game corpus (0.5135 / 74 games -> 0.59 pts) and writes provenance to `data/hca_measured.json`. Re-measured on the current feed: **0.5171 (106/205) -> 0.72 pts, sigma 16.868, Wilson lower 0.4490** -> `data/derived/hca_pin_2026_11_17_ca442d3d.json`. Four pins from four samples are now published side by side instead of blended - **F-CA-03** asks the register owner to name a corpus of record. |
+| N05 11/16 settlement | **done by `arena/b454a53d-nba1` (§61 banner) and `arena/84264db0-nba1` (§63); this seat's role changed to independent verification** | This seat wrote no settlement or ledger row (their files, claimed live). Instead `scripts/build_results_feed_ca442d3d.py` re-cut 2026-11-16 from an *independent* runner capture and cross-checked: 8/8 rows settled, 0 quarter-sum failures, **8/8 agree with `data/official/results_feed_2026_27.json` and 8/8 agree with the finals embedded in `data/settlement/settlement_2026-11-16.json`**. For 2026-11-17 it emitted 0 settled rows and excluded all 5 games as not-final. |
+| N06 horizon roll to 11/17-11/20 | **yielded to §63 (`arena/84264db0-nba1`)** | Their claim was live and explicitly covered the roll plus the pre-registration freeze; `arena/b454a53d-nba1` explicitly excluded the horizon roll from its scope, so whoever held it first held it. This seat touched no `data/derived/horizon_*`, `data/prereg/**` or ledger file - `git diff origin/main..HEAD` on this branch is empty for those paths, and the merge took `main`'s generated pages verbatim and rebuilt. |
+| N07 registers | **done (additive)** | `data/content/requirements.json` R01/R02/R04/R09/R30/R32 evidence appended (statuses left as the owners set them: R01/R04/R09 stay partial on measured grounds); four flags F-CA-01..04 appended; union-merged with their F142-F146 in the same file (153 items). |
+| N08 stale-PR triage | **done** | See §65.4. |
+| N09 gates, PR, Pages | **done** | See §65.5. |
+
+New finding that no other session's scope covered (**F-CA-02**): the reason the scheduled refresh
+reports "expected 30 team rows, parsed 0" was measured at byte level. A runner fetched
+`www.nba.com/standings` (254,060 bytes) and the three team-stat pages (322,550 / 322,487 /
+322,487 bytes) at HTTP 200, content-addressed under `data/raw/session-ca442d3d/pages/`; none of
+those bytes contains the strings `wins`, `losses` or `team` at all - the tables are built
+client-side. So the gate's refusal is a property of the official page, not of our parser, and the
+parseable official source for records/scores/quarters is the per-day scoreboard page's embedded
+`__NEXT_DATA__` JSON, which is what the results re-cut reads.
+
+### 65.5 Gate battery, the roll-page provenance defect this seat found in *itself*, and delivery
+
+**A page that contradicted its own numbers, found after the merge and fixed before the PR.** The
+merge took `main`'s generated `site/pages/*.html` verbatim and rebuilt; the rebuilt
+`site/pages/roll.html` then printed "B's line is built with a **fitted home-court advantage of
++3.508 points**" underneath a table whose numbers had moved by ~2.9 points because this seat's
+`engine/pipeline.py` change pins B's HCA to the measured rate. The prose was hardcoded in
+`scripts/build_roll_page.py` from the fitted value it read out of `docs/data/validation.json`, and
+`engine/validate.py` wrote that record with `"used": true` - true of its own diagnostic backtest,
+false of every published line. Two fixes, both in the code rather than in the output: the pipeline
+now annotates the fit record it replaces (`used: false`, a `pinned_to` block with the applied value
+and its provenance, and a disclosure explaining why the diagnostic is still printed), and the roll
+builder composes the sentence from that record instead of assuming a fitted build - including a
+sign-aware direction clause, because with the pin applied the mean signed estimator gap flipped from
+-1.59 to +1.33 and a hardcoded "B favours the home team" would have become the opposite of the table
+next to it. The stale-provenance class of defect this closes is the same one #152 was opened for.
+
+| Gate | Command | Result |
+| --- | --- | --- |
+| Unit tests (all modules) | `python3 -m unittest scripts.test_*` per module, `PYTHONPATH=.` | **10/10 modules pass**, incl. this seat's `test_injury_diff` (10), `test_injury_edition_crosscheck_07920bdc` (4), `test_capture_official_ca442d3d` (9). Now enforced in CI - see the pages.yml step. |
+| Full audit | `python3 scripts/verify_all.py` | **VERIFY OK**, FAILURES: 0 (builders + checker + data audits + noise-band cases) |
+| Site check A | `python3 scripts/check_site.py` | PASS - all pages exist, links resolve, every table row carries an official source link |
+| Integration | `python3 scripts/verify_integration.py` | PASSED - no errors |
+| Ledger | `python3 scripts/verify_ledger.py` | OK through entry 11 (the 11/16 settlement + SGP amendment, both by other seats) - chain intact after the merge |
+| Links / render | `check_links.py`, `check_rendered.py` | PASS / PASS |
+| Dashboard provenance | `python3 scripts/verify_dashboard.py` | VERIFY OK - every row linked or explicitly marked no-source |
+| Roll separation | `python3 scripts/build_roll_page.py` | roll.html projection/bet separation: OK |
+| Refresh gate | `PYTHONPATH=. python3 scripts/refresh_gate.py` | **BLOCKs as designed** on the client-rendered official pages (this is F-CA-02, now measured at byte level); non-blocking in CI, published on the Flagged page rather than bypassed |
+| Results re-cut | `python3 scripts/build_results_feed_ca442d3d.py --date 2026-11-16` | 8/8 settled, 0 quarter-sum failures, **8/8 agree with the committed feed and 8/8 with the settlement record** (exit 0). 2026-11-17: 0 settled, 5 excluded not-final. |
+
+### 65.4 Stale-PR triage (N08)
+
+#152 (`arena/cdc6c39d-nba1`, updated 2026-11-16T18:34:10Z) and #155 (`arena/3ff8ff0f-nba1`,
+2026-11-16T18:49:47Z) were both ~22 h idle, both CONFLICTING, and §61.3 already recorded for each
+that "this delivery already implements both" (R13 disagreement headline, R15 rotation column,
+measured HCA pin, measured-rho pricing). Both were closed as **superseded** with a comment pointing
+at §61 and §63 and at the specific defect #155 would have re-introduced if merged (the 25 scheduled
+`0-0` placeholder rows polluting the finals corpus, fixed in §61 W01). No content was discarded:
+each PR's branch remains on the remote for its owner to re-open if they disagree.

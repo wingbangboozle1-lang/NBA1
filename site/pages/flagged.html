@@ -1464,6 +1464,42 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td>Either label the window with the dates it actually covers (2026-11-17 .. 2026-11-20) instead of the phrase &quot;today + up to 3 days&quot;, or extend the next cycle's official read through the fourth day ahead so the phrase is true. No frozen bytes need to change: the digests in entry 12 are of the 30 games that were actually published.</td>
 <td class="src"><span class="na" title="source id data/ledger/ledger.json entry 12 is not in the register">&mdash;</span></td>
 </tr>
+<tr>
+<td>F-CA-01</td>
+<td>High</td>
+<td><b>RESOLVED - engine/injury_diff.py silently dropped 7 player rows per injury-report edition (F-X01)</b></td>
+<td>Fixed 2026-11-17 by session arena/ca442d3d-nba1 (COORDINATION §63). Reproduced first-hand on the committed official PDF bytes before any edit: for Injury-Report_2026-11-16_01_15PM the engine's word-band parser returned 80 rows and reported unparsed: 0 while seven player rows were absent from its output - Jerome (Ty), Pippen Jr. (Scotty), Post (Quinten), Saunders (Richie) and Stewart (Isaiah) for Memphis in MEM@WAS, and Reese (Julian) and Watford (Trendon) for New Orleans in GSW@NOP. The per-clipped-rectangle reader that session arena/07920bdc-nba1 had published as a verification script is now ported into the engine as engine/injury_cells.py and is the primary pass of load_edition; the word-band parser is kept as a cross-check, and every edition carries row_audit with silent_drop_detected, so a row one reader sees and the published output does not is an error rather than a silent omission. Verified on the same bytes after the change: 87 rows / 76 player rows, 0 unassigned cell text, and all 100 archived editions parse with no disagreement between the two readers. Pinned by 10 tests in scripts/test_injury_diff.py, which now run in CI on every pull request.</td>
+<td>engine/injury_diff.py, engine/injury_cells.py, scripts/test_injury_diff.py, .github/workflows/pages.yml</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-CA-02</td>
+<td>Medium</td>
+<td><b>The standings page and all three team-stat pages embed no table data - the refresh &quot;parsed 0&quot; is a property of the official page, not of our parser</b></td>
+<td>Measured 2026-11-17 by session arena/ca442d3d-nba1 (COORDINATION §63) on bytes a runner fetched at HTTP 200 and stored content-addressed under data/raw/session-ca442d3d/ (sha256 and retrieval timestamp in each sidecar): www.nba.com/standings (254,060 bytes) contains the strings &quot;wins&quot;, &quot;losses&quot; and &quot;team&quot; zero times, and www.nba.com/stats/teams/{traditional,opponent,advanced} (322,550 / 322,487 / 322,487 bytes) contain none of them either. Each ships a __NEXT_DATA__ shell whose table is filled client-side. engine/refresh_gate.py's BLOCK on those five sources is therefore correct behaviour for an HTML reader and cannot be fixed by parsing harder. The parseable official source for records, scores and per-period scores is www.nba.com/games?date=YYYY-MM-DD, whose embedded scoreboard JSON carries gameStatus, periods[] and wins/losses - proved by scripts/build_results_feed_ca442d3d.py, which read 8/8 finals with their quarter lines out of that JSON for 2026-11-16. A decision is needed and was not taken here: whether the refresh should promote standings and team-record rows derived from per-day scoreboard captures, which changes what &quot;the official standings source&quot; means.</td>
+<td>engine/refresh_gate.py, engine/fetch_official.py, engine/promote_official.py, R01, R20</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-CA-03</td>
+<td>Medium</td>
+<td><b>Four different home-court pins are in the repository, each measured on a different sample; no corpus of record is named</b></td>
+<td>Measured 2026-11-17 by session arena/ca442d3d-nba1 (COORDINATION §63): 0.5204 -&gt; 0.87 pts (102/196 home/road games from the standings capture; session arena/23ec1e32-nba1 published this as &quot;the&quot; pin); 0.5263 -&gt; 1.108 pts (190 finals through 2026-11-15, data/derived/measured_constants_2026_27.json); 0.5171 -&gt; 0.72 pts (205 decided rows through 2026-11-16, quarter sums asserted, data/derived/hca_pin_2026_11_17_ca442d3d.json); 0.5135 -&gt; 0.59 pts (74-game train corpus, the legacy engine pin this session wired into engine/pipeline.py). All four are arithmetically right on their own sample - the spread is sample choice, not error. It matters because the pin moves every spread and every total, and because a reader cannot currently tell which number a published line used. Proposed for the register owner: name one corpus of record (this seat proposes the per-game feed through the latest settled game day, 0.5171 / 0.72 pts as of 2026-11-16), print the sample beside every pin, and re-derive it when each game day settles. Nothing was blended or overwritten here.</td>
+<td>data/derived/measured_constants_2026_27.json, data/derived/hca_pin_2026_11_17_ca442d3d.json, data/hca_measured.json, data/derived/horizon_lines.json</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+</tr>
+<tr>
+<td>F-CA-04</td>
+<td>Medium</td>
+<td><b>Push-triggered refresh runs on session branches are cancelled by the shared concurrency group, so session-armed captures never land</b></td>
+<td>Measured 2026-11-17 by session arena/ca442d3d-nba1 (COORDINATION §63): .github/workflows/refresh-data.yml sets concurrency.group: refresh-official-global with cancel-in-progress: true - one slot shared by every branch (added by session arena/c348e6c7-nba1, COORDINATION §47.2, to stop run starvation, and kept on top of PR #117). With several sessions pushing in the same minutes, 3 of 3 refresh runs armed from arena/ca442d3d-nba1 were cancelled within about two minutes, each in favour of another branch's run. The consequence is not cosmetic: the injury-PDF capture, promotion and consecutive-edition diff this workflow performs are exactly what would move R04's chain to 2026-11-17, so that row cannot close while every session arms the same single slot. Proposed (owner of the workflow file, not applied here): scope the group to the git ref for non-main branches so only the scheduled main runs share one slot. This session's own capture workflow uses a per-ref group and completed and committed back to the branch (run 44120656545), which is the evidence that the alternative works.</td>
+<td>.github/workflows/refresh-data.yml, R01, R04</td>
+<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
+<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+</tr>
 </tbody></table></div>
     <footer class="foot">
       <p>NBA1 &mdash; a research workspace for originating NBA lines and testing whether the

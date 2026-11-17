@@ -351,6 +351,44 @@ class Promoter:
         self.ok(item, f"{len(rows)} games -> data/raw/schedule_upcoming.json; "
                       f"{added} source-register entries added")
 
+    def diff_injury_chain(self, newest_rec):
+        """Diff the newest archived edition against the one before it (R04).
+
+        Reads the archive under data/raw/injury_pdfs/ by edition timestamp, so
+        the pair is consecutive by the league's own filing clock. Both sides are
+        parsed from the stored bytes; nothing is carried over from a previous
+        run's transcription.
+        """
+        import glob as _glob
+        pdfs = sorted(_glob.glob(os.path.join(RAW, "injury_pdfs", "*.pdf")),
+                      key=lambda q: ij.edition_key(os.path.basename(q)))
+        if len(pdfs) < 2:
+            self.fail("injury_diff_chain", "fewer than two archived PDFs")
+            return
+        labels = [ij.edition_label(os.path.basename(q)) for q in pdfs]
+        newest = newest_rec["label"]
+        if newest not in labels:
+            self.fail("injury_diff_chain",
+                      f"newest promoted edition {newest} is not in the archive")
+            return
+        i = labels.index(newest)
+        before = ij.load_edition(pdfs[i - 1]) if i else None
+        if before is None:
+            self.fail("injury_diff_chain", "no edition before the newest to diff")
+            return
+        d = ij.diff_editions(before, newest_rec)
+        out_dir = os.path.join(ROOT, "data", "parsed", "injury_diffs")
+        os.makedirs(os.path.join(out_dir, "editions"), exist_ok=True)
+        name = f"promote_diff_{before['label']}_to_{newest}.json"
+        write_json(os.path.join(out_dir, name), d)
+        for rec in (before, newest_rec):
+            write_json(os.path.join(out_dir, "editions", rec["label"] + ".json"), rec)
+        self.ok("injury_diff_chain",
+                f"{before['label']} -> {newest}: "
+                f"{len(d['status_or_reason_changes'])} status/reason changes, "
+                f"{len(d['team_block_filing_changes'])} filing changes -> "
+                f"data/parsed/injury_diffs/{name}")
+
     # ------------------------------------------------------------ injuries
     def promote_injuries(self):
         item = "injury_pdf_probe"
@@ -379,7 +417,17 @@ class Promoter:
             "row_count": rec["row_count"],
             "unparsed_cells": len(rec["unparsed"]),
             "source_capture": latest.get("artifact_path"),
+            "row_audit": rec.get("row_audit", {}),
+            "player_rows": sum(1 for r in rec["rows"] if len(r) > 4 and r[4]),
         }
+        # Consecutive-edition chain (R04): the newest archived edition and the
+        # one before it are diffed here, so the status-change detection runs on
+        # every scheduled refresh rather than only when a session remembers to
+        # run engine/injury_diff.py by hand.
+        try:
+            self.diff_injury_chain(rec)
+        except Exception as exc:                        # noqa: BLE001
+            self.fail("injury_diff_chain", f"{type(exc).__name__}: {exc}")
         payload = {
             "captured_at_utc": self.now,
             "report": f"NBA Official Injury Report, {rec['label']}",

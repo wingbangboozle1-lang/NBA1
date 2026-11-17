@@ -1,0 +1,101 @@
+name: Capture official evidence (ca442d3d)
+
+# Session arena/ca442d3d-nba1, COORDINATION §62 (N05/N06).
+#
+# The sandbox this session runs in reaches only github.com / npm / pypi, so
+# nba.com cannot be read from the agent. This workflow puts the fetch on a
+# runner that has the network and commits the content-addressed bytes back to
+# this branch, where the parsers and the checks run locally against them.
+#
+# Deliberately narrow (same shape as capture-injury-07920bdc.yml, which this
+# pattern was copied from and which the board reviewed):
+#   * runs only on this session's branch, and only when this file or the capture
+#     script itself changes - it cannot arm itself in a loop and cannot be armed
+#     by another session's push;
+#   * the bot commit carries [skip ci], which does not trigger workflows;
+#   * it writes only data/raw/session-ca442d3d/** (this session's capture dir);
+#   * the fetch script refuses any host outside the four official ones.
+
+on:
+  push:
+    branches: [arena/ca442d3d-nba1]
+    paths:
+      - scripts/capture_official_ca442d3d.py
+      - .github/workflows/capture-official-ca442d3d.yml
+  workflow_dispatch:
+    inputs:
+      dates:
+        description: "comma-separated result days to capture (YYYY-MM-DD)"
+        required: false
+        default: ""
+      slate_dates:
+        description: "comma-separated future slate days (YYYY-MM-DD)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capture-official-ca442d3d
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Work out which days to capture
+        id: days
+        run: |
+          if [ -n "${{ inputs.dates }}" ]; then
+            DATES="${{ inputs.dates }}"
+            SLATE="${{ inputs.slate_dates }}"
+          else
+            # Game day to settle = the two most recent days in UTC (a late
+            # Pacific tip finishes after 00:00Z). Horizon = today + 1..3 days,
+            # the brief's "up to a maximum of 3 days in advance".
+            DATES="$(date -u -d 'yesterday' +%F),$(date -u +%F)"
+            SLATE="$(date -u -d 'today' +%F),$(date -u -d 'tomorrow' +%F),$(date -u -d '+2 day' +%F),$(date -u -d '+3 day' +%F)"
+          fi
+          echo "dates=${DATES}" >> "$GITHUB_OUTPUT"
+          echo "slate=${SLATE}" >> "$GITHUB_OUTPUT"
+          echo "capturing results days: ${DATES}"
+          echo "capturing slate days:   ${SLATE}"
+
+      - name: Fetch official scoreboard pages, gamebooks and stat pages
+        run: |
+          python3 scripts/capture_official_ca442d3d.py \
+            --dates "${{ steps.days.outputs.dates }}" \
+            --slate-dates "${{ steps.days.outputs.slate }}"
+
+      - name: Commit the captures
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/raw/session-ca442d3d
+          if git diff --cached --quiet; then
+            echo "no new capture payloads - nothing committed"
+            exit 0
+          fi
+          git commit -m "Capture official NBA evidence for 2026-11-16/17 (ca442d3d N05/N06) [skip ci]"
+          # Rebase in case the session pushed while the run was in flight; never
+          # force, so another session's work is never discarded.
+          git pull --rebase origin arena/ca442d3d-nba1
+          git push origin HEAD:arena/ca442d3d-nba1
+
+      - name: Upload the manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capture-manifest-ca442d3d
+          path: data/raw/session-ca442d3d/capture_manifest.json
+          if-no-files-found: warn

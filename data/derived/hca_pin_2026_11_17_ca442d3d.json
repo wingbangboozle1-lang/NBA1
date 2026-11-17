@@ -1,0 +1,45 @@
+{
+ "title": "Home-court advantage pinned to the measured home-win rate (R09)",
+ "generated_by": "scripts/measure_hca_ca442d3d.py",
+ "session": "arena/ca442d3d-nba1",
+ "corpus": {
+  "source_file": "data/official/results_feed_2026_27.json",
+  "source_url": "https://www.nba.com/games?date=YYYY-MM-DD (per game day)",
+  "rows_in_feed": 222,
+  "decided_rows_used": 205,
+  "skipped": {
+   "not_final": 17,
+   "zero_placeholder": 0,
+   "quarter_sum_mismatch": 0,
+   "neutral_site": 0
+  },
+  "date_range": [
+   "2026-10-20",
+   "2026-11-16"
+  ]
+ },
+ "home_wins": 106,
+ "home_win_rate": 0.5171,
+ "wilson_lower_95": 0.449,
+ "sigma_margin": 16.868,
+ "mean_home_margin": 1.595,
+ "home_court_points": 0.72,
+ "rule": "HCA is NOT fitted. It is the points equivalent of the measured home-win rate: sigma_margin * Phi^-1(home_win_rate), computed on finals whose quarter scores sum to the printed final.",
+ "comparison": {
+  "data/derived/measured_constants_2026_27.json": {
+   "home_win_rate": 0.5263,
+   "home_court_points": 1.108,
+   "sigma_margin": 16.784,
+   "n_final_games": 190,
+   "built_utc": "2026-11-16T00:02:33Z"
+  },
+  "data/hca_measured.json (legacy engine pin)": {
+   "home_win_rate": 0.5135,
+   "hca_points": 0.59,
+   "games": 74,
+   "sigma_margin": 17.409312
+  }
+ },
+ "measured_at_utc": "2026-11-17T16:05:02Z",
+ "note_staleness": "The site's published pin (0.5204 / 0.87 pts, session arena/23ec1e32-nba1, COORDINATION \u00a761) was measured on the standings capture through 2026-11-16 18:35Z and on finals through 2026-11-15. This row is measured on the per-game feed through 2026-11-16 - the day's eight verified finals are included. The difference between the two is the sample, not a correction: 0.5171 over 205 decided feed games vs 0.5204 over the 196 home/road games the standings page printed. Both are published; neither is blended."
+}

@@ -775,26 +775,57 @@ def capture_results(now, changed, failed, known, committed, source_checks):
 
 
 def capture_injury(now, changed, failed, index_editions):
-    """Fetch the newest report PDFs fully; probe today's/yesterday's editions.
+    """Fetch the newest report PDFs fully; index-driven (R03, §60.7 request).
+
+    The official index page lists every edition the league has published, and it
+    files at 15-minute intervals on game days - so the four fixed clock times
+    this function used to probe (12:00 PM, 3:00 PM, 5:15 PM, 7:30 PM) see a
+    minority of editions and the consecutive-diff chain goes stale between them.
+    Now the editions listed by the index, newest first, are fetched until the
+    cap, skipping anything already archived (captures are content-addressed, so
+    a re-download of identical bytes writes nothing).
 
     Every HTTP status is recorded. 403 means 'unavailable to this client at
     this time', never 'does not exist'.
     """
-    candidates = []
-    for e in index_editions[:2]:
-        candidates.append(e)
-    today = datetime.datetime.now(datetime.timezone.utc).date()
-    for delta in (0, 1):
-        day = today - datetime.timedelta(days=delta)
-        for t in INJURY_EDITION_TIMES:
-            name = f"Injury-Report_{day.isoformat().replace('-', '_')}_{t}.pdf"
-            if name not in candidates:
-                candidates.append(name)
+    name_re = re.compile(r"Injury-Report_\d{4}-\d{2}-\d{2}_\d{2}_\d{2}(?:AM|PM)\.pdf")
+
+    def ed_key(name):
+        m = re.search(r"_(\d{4})-(\d{2})-(\d{2})_(\d{2})_(\d{2})(AM|PM)", name)
+        if not m:
+            return (name, 0)
+        y, mo, d, hh, mm, ampm = m.groups()
+        return (f"{y}-{mo}-{d}", (int(hh) % 12 + (12 if ampm == "PM" else 0)) * 100 + int(mm))
+
+    listed = sorted({e for e in (index_editions or []) if name_re.fullmatch(e)},
+                    key=ed_key, reverse=True)
+
+    archived = set()
+    if os.path.isdir(INJURY_PDF_DIR):
+        for fn in os.listdir(INJURY_PDF_DIR):
+            if fn.endswith(".pdf"):
+                archived.add(fn[:-4].split("__")[0] + ".pdf")
+
+    # A cap of 10 new editions is deliberate: at 15-minute filings that is two
+    # and a half hours of reports - enough to continue the diff chain from a job
+    # that runs three times a day, without turning the refresh into a bulk crawl.
+    todo = [e for e in listed if e not in archived][:10]
+    if not todo:
+        # Nothing new on the index: keep the old fixed-clock probe so the run
+        # still records the league's own reporting deadlines for today/yesterday.
+        for delta in (0, 1):
+            day = datetime.datetime.now(datetime.timezone.utc).date() - datetime.timedelta(days=delta)
+            for t in INJURY_EDITION_TIMES:
+                nm = f"Injury-Report_{day.isoformat().replace('-', '_')}_{t}.pdf"
+                if nm not in archived and nm not in todo:
+                    todo.append(nm)
+        todo = todo[:12]
     results = []
-    for edition in candidates[:12]:
+    for edition in todo:
         url = INJURY_HOST + edition
         rec = {"edition": edition, "url": url, "http_status": None,
-               "bytes": 0, "sha256": None, "attempts": 0}
+               "bytes": 0, "sha256": None, "attempts": 0,
+               "listed_on_official_index": edition in set(listed)}
         # The first executed run saw 200,200 then 403,403... on a tight loop
         # over ak-static - the shape of a rate limit, not of absent files.
         # Space the requests and retry a 403 once before recording it.
@@ -826,7 +857,7 @@ def capture_injury(now, changed, failed, index_editions):
                                    "sha256": rec["sha256"],
                                    "content_type": "application/pdf"},
                                   meta_file, indent=2)
-                    new_artifact = True
+                        new_artifact = True
                 if new_artifact:
                     changed.append(f"injury pdf {edition}")
                 rec["artifact_path"] = os.path.relpath(pdf_path, ROOT).replace(os.sep, "/")
@@ -845,9 +876,19 @@ def capture_injury(now, changed, failed, index_editions):
                 break
         results.append(rec)
         time.sleep(1.5)
+    # Newest first: promote_official.py takes results[0] as the edition to
+    # publish, and the Injuries banner must show the newest verified edition.
+    results.sort(key=lambda r: ed_key(r["edition"]), reverse=True)
     if write_if_changed(os.path.join(RAW, "_capture_injury_probe.json"),
                         {"captured_at_utc": now,
                          "results": results,
+                         "editions_listed_on_index": len(listed),
+                         "newest_listed": listed[0] if listed else None,
+                         "editions_already_archived": len(archived),
+                         "method": ("index-driven: every edition listed by "
+                                    "official.nba.com, newest first, capped per "
+                                    "run, already-archived editions skipped "
+                                    "because captures are content-addressed"),
                          "note": ("HTTP status only. 403 from ak-static.cms.nba.com "
                                   "has been observed both for editions that exist to a "
                                   "browser and for editions that are not published yet; "
@@ -855,7 +896,6 @@ def capture_injury(now, changed, failed, index_editions):
                                   "as proof of absence.")}):
         changed.append("injury probe")
     return results
-
 
 def main():
     now = now_utc()

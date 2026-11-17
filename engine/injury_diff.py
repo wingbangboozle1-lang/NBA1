@@ -404,8 +404,30 @@ def edition_label(filename):
     return m.group(1) if m else filename
 
 
+def _player_keys(rows):
+    """(team, player) for every row that carries a player name."""
+    return {(r[3], r[4]) for r in rows if len(r) > 4 and (r[4] or "").strip()}
+
+
 def load_edition(pdf_path):
-    """Parse one archived PDF into a metadata+rows record."""
+    """Parse one archived PDF into a metadata+rows record.
+
+    Two independent passes read the same bytes:
+
+    * the **clipped-cell reader** (``engine/injury_cells.py``), which groups the
+      report's own cell rectangles into rows - the primary pass;
+    * the **line parser** (``parse_rows`` above), which groups positioned words
+      into row bands.
+
+    The cell reader is used when it recovers at least as many player rows as the
+    line parser; a pass that yields *more* rows than the one selected is
+    recorded as ``row_disagreement`` and the edition is marked
+    ``silent_drop_detected`` so the scheduled job, the test suite and the reader
+    of the output all see it. This closes flag **F-X01**: the line parser alone
+    returned 80 rows and ``unparsed: 0`` for the 2026-11-16 editions while
+    seven player rows (MEM Jerome/Pippen Jr./Post/Saunders/Stewart, NOP
+    Reese/Watford) were missing from the output entirely.
+    """
     stem = pdf_path[:-4]
     sidecar = {}
     if os.path.exists(stem + ".json"):
@@ -415,7 +437,38 @@ def load_edition(pdf_path):
         raw = fh.read()
     import hashlib
     pages = extract_pages(raw)
-    rows, unparsed = parse_rows(pages)
+    line_rows, unparsed = parse_rows(pages)
+    try:
+        import injury_cells
+        cell = injury_cells.parse_pdf(raw)
+    except Exception as exc:                            # noqa: BLE001
+        cell = {"rows": [], "audit": {"error": f"{type(exc).__name__}: {exc}"}}
+    cell_rows = cell["rows"]
+
+    line_players, cell_players = _player_keys(line_rows), _player_keys(cell_rows)
+    cell_only = sorted(f"{t} | {p}" for t, p in cell_players - line_players)
+    line_only = sorted(f"{t} | {p}" for t, p in line_players - cell_players)
+    if len(cell_players) >= len(line_players) and cell_rows:
+        rows, method = cell_rows, "clipped-cell reader (engine/injury_cells.py)"
+    else:
+        rows, method = line_rows, "line parser (word bands)"
+    audit = {
+        "line_parser_rows": len(line_rows),
+        "line_parser_player_rows": len(line_players),
+        "cell_reader_rows": len(cell_rows),
+        "cell_reader_player_rows": len(cell_players),
+        "cell_reader_audit": cell.get("audit", {}),
+        "selected": method,
+        "rows_only_in_cell_reader": cell_only,
+        "rows_only_in_line_parser": line_only,
+        # True when a pass saw a player row the published output does not have:
+        # the row was dropped by the *other* pass, which is the failure mode
+        # F-X01 describes. The published rows are never a silent subset.
+        "silent_drop_detected": bool(line_only if method.startswith("clipped")
+                                     else cell_only),
+    }
+    for t in (cell.get("audit", {}).get("unassigned_text") or [])[:10]:
+        unparsed.append({"cell_text_unassigned": t["text"], "page": t["page"]})
     return {
         "edition": sidecar.get("edition") or os.path.basename(pdf_path),
         "label": edition_label(os.path.basename(pdf_path)),
@@ -428,6 +481,7 @@ def load_edition(pdf_path):
         "rows": rows,
         "row_count": len(rows),
         "unparsed": unparsed[:20],
+        "row_audit": audit,
     }
 
 
@@ -511,6 +565,7 @@ def main():
         return 0
     os.makedirs(os.path.join(args.out_dir, "editions"), exist_ok=True)
     editions = []
+    silent_drops = 0
     for p in paths:
         rec = load_edition(p)
         out = os.path.join(args.out_dir, "editions",
@@ -519,7 +574,15 @@ def main():
             json.dump(rec, fh, indent=1)
             fh.write("\n")
         print(f"{rec['label']}: {rec['row_count']} rows, "
-              f"{len(rec['unparsed'])} unparsed cells, {rec['pages']} pages")
+              f"{len(rec['unparsed'])} unparsed cells, {rec['pages']} pages"
+              f" [{rec['row_audit']['selected']}, "
+              f"cell {rec['row_audit']['cell_reader_player_rows']} players / "
+              f"line {rec['row_audit']['line_parser_player_rows']} players]")
+        if rec["row_audit"]["silent_drop_detected"]:
+            print(f"  ::error:: {rec['label']}: a reader saw player rows the "
+                  f"published output does not - see row_audit "
+                  f"(flag F-X01 regression)")
+            silent_drops += 1
         editions.append(rec)
     diffs = []
     for before, after in zip(editions, editions[1:]):
@@ -538,12 +601,26 @@ def main():
                            "retrieved_at_utc": e["retrieved_at_utc"],
                            "sha256": e["sha256"]} for e in editions],
              "diffs": diffs,
-             "rule": "Parsed verbatim from the official PDFs archived under "
-                     "data/raw/injury_pdfs/; unparseable cells are recorded "
-                     "under unparsed and never inferred."}
+             "rule": ("Rows are read by two independent passes over the same "
+                     "bytes - the clipped-cell reader (engine/injury_cells.py) "
+                     "and the word-band line parser - and the cell reader's "
+                     "rows are published when it recovers at least as many "
+                     "player rows. A row that either pass saw and the "
+                     "published output does not carry is reported in "
+                     "row_audit as silent_drop_detected (flag F-X01); it is "
+                     "never quietly dropped. Unparseable cells are recorded "
+                     "under unparsed and never inferred."),
+             "silent_drop_editions": silent_drops,
+             "editions_parsed": len(editions)}
     with open(os.path.join(args.out_dir, "index.json"), "w", encoding="utf-8") as fh:
         json.dump(index, fh, indent=1)
         fh.write("\n")
+    if silent_drops:
+        print(f"{silent_drops} edition(s) show a row disagreement between the "
+              f"two readers - see the per-edition row_audit files")
+        return 1
+    print(f"{len(editions)} edition(s) parsed with no row disagreement between "
+          f"the two readers")
     return 0
 
 

@@ -1,0 +1,56 @@
+{
+ "title": "Official per-game result feed rows for 2026-11-17 (re-cut from a stored capture)",
+ "generated_by": "scripts/build_results_feed_ca442d3d.py",
+ "session": "arena/ca442d3d-nba1",
+ "rule": "one row per game: date, teams, final score, quarter scores. A game is settled only when the official page prints gameStatus 3 (Final) and the quarter scores sum to the printed final.",
+ "capture": {
+  "stored_at": "data/raw/session-ca442d3d/html/games_2026-11-17__537224ac92b0d5f4a791183b2f38ba98cd26f8af5442ad767305d0be0144b4ba.json.gz",
+  "source_url": "https://www.nba.com/games?date=2026-11-17",
+  "http_status": 200,
+  "bytes": 416018,
+  "sha256_of_page_bytes": "537224ac92b0d5f4a791183b2f38ba98cd26f8af5442ad767305d0be0144b4ba",
+  "retrieved_at_utc": "2026-11-17T16:00:00Z",
+  "extracted_from": "the page's own <script id=\"__NEXT_DATA__\"> scoreboard JSON"
+ },
+ "games_on_page": 5,
+ "settled_rows": 0,
+ "excluded_not_final": [
+  {
+   "game_id": "0022600253",
+   "game_status": 1,
+   "game_status_text": "7:30 pm ET"
+  },
+  {
+   "game_id": "0022600255",
+   "game_status": 1,
+   "game_status_text": "8:00 pm ET"
+  },
+  {
+   "game_id": "0022600254",
+   "game_status": 1,
+   "game_status_text": "8:00 pm ET"
+  },
+  {
+   "game_id": "0022600257",
+   "game_status": 1,
+   "game_status_text": "10:30 pm ET"
+  },
+  {
+   "game_id": "0022600256",
+   "game_status": 1,
+   "game_status_text": "11:00 pm ET"
+  }
+ ],
+ "quarter_sum_assertion_failures": [],
+ "cross_check": {
+  "feed_compared": 0,
+  "feed_agreements": [],
+  "feed_conflicts": [],
+  "feed_missing": [],
+  "settlement_compared": 0,
+  "settlement_agreements": [],
+  "settlement_conflicts": [],
+  "settlement_missing": null
+ },
+ "rows": []
+}
