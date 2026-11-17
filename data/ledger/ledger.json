@@ -238,7 +238,7 @@
    "type": "sgp_leg_resolution",
    "at_utc": "2026-11-17T15:55Z",
    "file": "data/settlement/gamebook_evidence_2026-11-16_sgp.json",
-   "sha256": "5e115f677b7a985577340a79eb294575f9648a94c847ed28a3afb2d4582355ed",
+   "sha256": "87113dba6b37da0dbf29002d4b812c99dfa5382de42772e68e463cd47a4b0da8",
    "resolves": {
     "flag": "F139",
     "ledger_entry": 11,
@@ -248,20 +248,8 @@
     ],
     "slate": "2026-11-16"
    },
-   "finding": "Both players are named on their game's official gamebook `Inactive:` line with an injury reason, so both did not play. Leg status moves from UNRESOLVED to VOID (inactive leg removed). This confirms the ledger-10 grading that entry 11 withdrew for lack of a source; the source now exists.",
-   "effect_on_units": "None. Each ticket already had a determinate losing leg - Tatum 24 < 26.5 and Davis 23 < 25.5 - so both tickets were LOSS at 1.10 each (-2.2 total) under either reading. The SGP result is unchanged by this entry.",
-   "ticket_units": {
-    "ORL@BOS": -1.1,
-    "MEM@WAS": -1.1,
-    "total": -2.2
-   },
-   "summary": {
-    "record": "3-5-0",
-    "singles_units_at_minus110": -2.5,
-    "parlay_units": -3.3,
-    "sgp_units": -2.2,
-    "total_units_settled": -8.0
-   },
+   "finding": "Both players are named on their game's official gamebook `Inactive:` line with an injury reason, so neither played. This is a statement about player appearance only.",
+   "effect_on_units": "None, and none is asserted. The SGP tickets for 2026-11-16 stay UNSETTLED exactly as sealed in entry 9 (sgp_settled 0, total_units_settled -5.8): no settlement record grades them, and this entry does not settle them. Recorded only so that whoever settles them has the appearance evidence the box-score pages could not render.",
    "sources": [
     {
      "url": "https://statsdmz.nba.com/pdfs/20261116/20261116_ORLBOS_book.pdf",
@@ -276,5 +264,5 @@
    "slate": "2026-11-16"
   }
  ],
- "head": "7e6c2e99256a02ad015d65abb20ced2f0c9823ad19dcaba17b8df0ec1bccd226"
+ "head": "84a631349c358c0d20183be8a28813c8dba4aaa63f020dcd9d44bd92ba0a7fb6"
 }

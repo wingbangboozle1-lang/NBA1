@@ -537,7 +537,8 @@ def build_settlement():
                 if os.path.exists(_evp):
                     for _pl in jload(_evp).get("players", []):
                         # Gamebook rows are "Last, First"; ticket legs are "First Last".
-                        # Key on the surname so both conventions match.
+                        # Key on the surname so both conventions match. Each entry keeps
+                        # its OWN gamebook URL - a leg must cite the game it was played in.
                         _key = _pl["player"].split(",")[0].strip()
                         resolved_legs[_key] = _pl
                         resolved_legs[_key.split()[-1]] = _pl
@@ -551,14 +552,18 @@ def build_settlement():
                         _l["official_pts"] = None
                         _l["resolution"] = _hit.get("evidence", "")
                         _l["resolved_by_ledger_entry"] = res_entry["entry"]
+                        _l["resolution_url"] = _hit.get("source_url")
         n_graded = len(s.get("singles", [])) + sum(
             1 for p in s.get("parlays", []) if p.get("result")) + (
-            sgp["summary"]["tickets"] if sgp else summ.get("sgp_settled", 0))
-        _sgp_settled = sgp["summary"]["tickets"] if sgp else summ.get("sgp_settled", 0)
+            summ.get("sgp_settled", 0))
+        _sgp_settled = summ.get("sgp_settled", 0)
         n_pending = max(0, summ.get("sgp_published", 0) - _sgp_settled)
+        # Never add a grading record's units onto the sealed settlement total: the
+        # settlement record alone states what the slate settled at. A grading record
+        # is a leg-status record; if a slate's SGP is not settled in the settlement
+        # record, the tickets are UNSETTLED and contribute nothing to units.
         total = summ.get("total_units_settled")
-        if sgp:
-            total = round((total or 0) + (sgp["summary"]["units"] or 0), 2)
+        sgp_settled_here = bool(summ.get("sgp_settled"))
         srows = []
         for r in s["singles"]:
             final = (f"{r.get('away_pts')}-{r.get('home_pts')}"
@@ -595,10 +600,9 @@ def build_settlement():
                                                               else " (no box-score row)"))
                                  for l in t["legs"])
                 _srcs = [link(t["sources"][0], "official box score")]
-                if any(l.get("resolution") for l in t["legs"]):
-                    _srcs.append(link(res_entry.get("sources", [{}])[0].get("url")
-                                      if res_entry.get("sources") else t["sources"][0],
-                                      "official gamebook (Inactive line)"))
+                _ev_urls = {l.get("resolution_url") for l in t["legs"] if l.get("resolution_url")}
+                for _u in sorted(_ev_urls):
+                    _srcs.append(link(_u, "official gamebook (Inactive line)"))
                 grows.append([slate, esc(t["game"]), legs, "<strong>%s</strong>" % esc(t["result"]),
                               val(t["units"]), " &middot; ".join(_srcs)])
             body.append("<h2>SGP tickets &mdash; graded from official box scores (%s)</h2>" % esc(slate))

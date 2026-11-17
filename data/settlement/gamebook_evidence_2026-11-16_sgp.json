@@ -2,7 +2,7 @@
  "title": "Gamebook evidence for the 2026-11-16 SGP legs whose players have no box-score row (F139 follow-up)",
  "captured_by": "arena/09ed2727-nba1 (section 63 Y05)",
  "retrieved_utc": "2026-11-17T15:5xZ",
- "purpose": "Closes the question F139 left open: were Banchero and Ty Jerome inactive for the 11/16 games, or did they play? The nba.com box-score pages read earlier did not render their tables fully; the official gamebook PDFs print an `Inactive:` line naming every player not in uniform, which is the league's own document for exactly this fact.",
+ "purpose": "Answers the question F139 left open: were Banchero and Ty Jerome inactive for the 11/16 games, or did they play? The nba.com box-score pages read earlier rendered no stat table; the official gamebook PDFs print an `Inactive:` line naming every player not in uniform, which is the league's own document for exactly this fact.",
  "rule": "A player is recorded appeared=false only when the gamebook's `Inactive:` line names him with a reason. No row is created for a player who is merely absent from a table: absence from a table is not evidence of inactivity.",
  "source_note": "The nba.com box-score pages failed to render a stat table for these games (nav/marketing text only), so the gamebook PDF is the primary read and the game URL is cited as the companion official page.",
  "players": [
@@ -39,5 +39,6 @@
   "https://www.nba.com/game/orl-vs-bos-0022600245",
   "https://www.nba.com/game/mem-vs-was-0022600247",
   "https://official.nba.com/nba-injury-report-2026-27-season/"
- ]
+ ],
+ "scope_limit": "This file records PLAYER APPEARANCE ONLY. It does not grade the SGP tickets and does not change any units. The SGP tickets on the 2026-11-16 slate remain UNSETTLED in data/settlement/settlement_2026-11-16.json (sgp_settled 0, total_units_settled -5.8) unless and until a settlement record settles them. Leg status and ticket settlement are two different facts and this file states only the first."
 }
