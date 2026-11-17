@@ -1,0 +1,48 @@
+{
+ "edition_id": "2026-11-17_1030AM",
+ "revision": "Injury Report: 11/17/26 10:30 AM",
+ "edition_published_utc": "2026-11-17T15:30Z",
+ "retrieved_utc": "2026-11-17T16:2xZ",
+ "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_10_30AM.pdf",
+ "edition_index_url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+ "captured_by": "arena/09ed2727-nba1",
+ "capture_method": "Read live through the web-fetch channel; rows transcribed verbatim in report order.",
+ "binary_pdf_stored": false,
+ "binary_pdf_note": "text-extraction channel only; SHA-256 is of the transcribed row text",
+ "rows_sha256": "224923e4ffc86aac3b32b0c38e737b9db1cbb2515e5b6a030c46520af6d84a41",
+ "row_counts": {
+  "rows_total": 59,
+  "player_rows": 33,
+  "not_yet_submitted_blocks": 26,
+  "rows_with_inherited_team": 0
+ },
+ "game_dates_in_edition": [
+  "11/17/2026",
+  "11/18/2026"
+ ],
+ "extraction_artefacts": [
+  {
+   "id": "IA-1",
+   "matchup": "POR@MIN",
+   "note": "Both teams printed NOT YET SUBMITTED in this edition; recorded as such, not as zero injuries."
+  },
+  {
+   "id": "IA-2",
+   "matchup": "CHA@LAL",
+   "note": "Reaves, Austin's row appears in the page's third table fragment with the Team cell carried over from the block above (Los Angeles Lakers) and the reason wrapped onto the previous line ('Soreness'); transcribed verbatim."
+  },
+  {
+   "id": "IA-3",
+   "matchup": "UTA@LAC",
+   "note": "Nurkic, Jusuf reason prints 'Right Right Foot; 2nd Plantar Plate Tear' - the duplicated word is in the official PDF, kept verbatim."
+  },
+  {
+   "id": "IA-4",
+   "matchup": "BOS@DEN and later",
+   "note": "The trailing table fragments lose the Game Date / Game Time cells for the last eight team blocks; game date/time are carried from the block header on the same page where printed, and null where the text render lost them. No date is inferred."
+  }
+ ],
+ "notes": [
+  "This is the newest edition on the official index at read time (see edition_index_url). Later editions published after this read are not covered here."
+ ]
+}
