@@ -89,9 +89,57 @@ def main():
     bt = run_backtest(train_rows, season_rows, completed,
                       train_block["source_id"], season_block["source_id"])
     season = bt["season"]
-    params = bt["params"]
+    params = dict(bt["params"])
     sigma_m = params["sigma_margin"]
     sigma_t = params["sigma_total"]
+
+    # ---------------------------------------------------------------- R09 pin
+    # Home-court advantage is PINNED to the measured home-win rate of the
+    # official completed-game corpus this run read - it is never the fitted free
+    # parameter the backtest would otherwise hand back. engine/hca.compute_hca
+    # is the single implementation of the conversion
+    # (HCA_points = sigma_margin * Phi^-1(home_win_rate)), so the site, the
+    # horizon build and this engine cannot drift to three different values.
+    # The reference model keeps its own fixed +2.0: that number is the *naive
+    # benchmark* this project is scored against, not a claim about HCA.
+    from hca import compute_hca as _compute_hca
+    _hca_pts, _hca_rate, _hca_n, _hca_err = _compute_hca(completed, sigma_m)
+    if _hca_n:
+        params["hca"] = _hca_pts
+        params["hca_source"] = {
+            "home_win_rate": _hca_rate,
+            "games": _hca_n,
+            "home_wins": sum(1 for g in completed
+                             if g.get("home_won", g.get("home_pts", 0) > g.get("away_pts", 0))),
+            "sigma_margin": round(sigma_m, 6),
+            "method": ("HCA_points = sigma_margin * norm_ppf(measured home_win_rate) "
+                       "- pinned to the measured rate, not fitted freely (R09)"),
+            "corpus": ("the official completed-game set this run read "
+                       "(data/raw/games_completed.json and its per-source captures)"),
+        }
+        write_json("data/hca_measured.json", {
+            "_meta": {
+                "method": ("HCA_points = sigma_margin * norm_ppf(home_win_rate), "
+                           "pinned to the measured home-win rate from official "
+                           "completed games. Not a free parameter."),
+                "home_win_rate": _hca_rate,
+                "home_wins": params["hca_source"]["home_wins"],
+                "games": _hca_n,
+                "sigma_margin": round(sigma_m, 6),
+                "source": ("data/raw/games_completed.json (official NBA.com game "
+                           "pages, captured by engine/fetch_official.py) written by "
+                           "engine/pipeline.py from engine/hca.compute_hca"),
+            },
+            "hca_points": _hca_pts,
+            "home_win_rate": _hca_rate,
+        })
+        print(f"[R09] HCA pinned to {_hca_pts} pts from measured home-win rate "
+              f"{_hca_rate} over {_hca_n} official completed games "
+              f"(sigma_margin {sigma_m:.3f}); the fitted value "
+              f"{bt['params'].get('hca')} is not used")
+    else:
+        print("[R09] WARNING: no completed games to measure home-win rate from - "
+              "params['hca'] left as delivered by the backtest")
 
     avail = Availability(injuries, players)
 
