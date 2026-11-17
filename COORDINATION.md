@@ -5,6 +5,42 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/b675418c-nba1` (opened 2026-11-17 UTC — R09: wire the measured home-court-advantage pin into the legacy engine path; first-hand official re-measurement of the home-win rate)
+
+Branch `arena/b675418c-nba1`, based on `main` `22d56af` (merge of PR #160 / §61). The platform
+pins this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this
+single pre-named branch (deviation logged, as every session before it logged it).
+
+**Board read before claiming (2026-11-17 UTC, ground rules 1–6):** §0 ground rules, §0b registry,
+the tail delivery records §55–§61, `gh pr list` (two open PRs — #155 `arena/3ff8ff0f-nba1`
+(data/derived + content, 100 files, **no `engine/` or `scripts/`**) and #152
+`arena/cdc6c39d-nba1` (legacy Lines & Picks alignment); both active owners, **not touched**),
+`gh run list` (last "Refresh official data" success ~3 h ago; probe runs cancelled),
+`gh api …/pages` (`status: built`, `build_type: legacy`, live at
+https://wingbangboozle1-lang.github.io/NBA1/). Measured at claim time: `main` = `22d56af`; working
+tree clean.
+
+**Scope (file-disjoint from the two open PRs — neither touches `engine/` or `scripts/`):** closes the
+R09 gap the board logged as an open cross-scope request (COORDINATION §4). The measured HCA pin is
+applied in the horizon build (`scripts/build_horizon_v2.py`) but the **legacy engine path still
+fits/uses a free HCA**: `engine/model_core.py:reference_line` defaults `flat_hca=2.0`;
+`engine/pipeline.py` passes `flat_hca=2.0` at both call sites; `engine/validate.py` **fits** the HCA
+intercept freely on the holdout residuals (committed fit `hca.est = 3.508`, `se = 2.28`, `t = 1.539`,
+disclosed "estimated on the test window (in-sample)"); and `scripts/originate_horizon.py` records
+`home_court_applied: False` with flag **F-W02** ("No home-court advantage in any line"). R09 requires
+HCA be *pinned to the measured home-win rate, not fitted freely*. This session re-measures the
+home-win rate **first-hand** from the official NBA.com standings (2026-11-17), refreshes the single
+source of truth `data/hca_measured.json`, and wires the measured pin into the legacy path.
+
+| ID | Task | Status | Owner | File scope |
+| --- | --- | --- | --- | --- |
+| B6-01 | Claim recorded and pushed before any other edit | **done** | `arena/b675418c-nba1` | this section |
+| B6-02 | First-hand official re-measurement of the home-win rate from nba.com/standings; refresh `data/hca_measured.json` with full provenance | in progress | same | `scripts/verify_hca_b675418c.py`, `data/hca_measured.json` |
+| B6-03 | Wire the measured pin into `engine/model_core.py:reference_line`, `engine/pipeline.py`, `engine/validate.py` (pin the HCA intercept to the measured value; refit the B2B slope only) | in progress | same | `engine/model_core.py`, `engine/pipeline.py`, `engine/validate.py` |
+| B6-04 | Apply the measured HCA in `scripts/originate_horizon.py`; set `home_court_applied: True`; retire F-W02 | in progress | same | `scripts/originate_horizon.py` |
+| B6-05 | Dedicated pin test + the gate battery (`scripts/verify_all.py`) | in progress | same | `scripts/test_hca_pin_b675418c.py`, verification output |
+| B6-06 | Requirements-register closure (R09) + board delivery record; PR → main; confirm Pages | pending | same | `data/content/requirements.json` (R09 row only), `COORDINATION.md`, PR |
+
 ## ✅ CLAIM CLOSED — session `arena/23ec1e32-nba1` (opened 2026-11-16 18:2x UTC, **delivered 2026-11-16 19:35Z via [PR #159](https://github.com/wingbangboozle1-lang/NBA1/pull/159)** — measured-HCA re-derivation (R09), measured-rho parlay pricing (R14/F90), disagreement headline + rotation column on Lines & Picks (R13/R15/F83), projection/bet split on the roll page (R07), register refresh (R01/R04), gates green, Pages live; full record in **§61**)
 
 Branch `arena/23ec1e32-nba1`, based on `main` `add1e74` (tip at claim time = merge of PR #145,
