@@ -4,16 +4,22 @@ name: Capture official gamebooks + newest injury editions (a374ec9f)
 #
 # A session runs in a sandbox whose only outbound path is the GitHub API, so it
 # cannot write the *bytes* of an official gamebook PDF or injury PDF to disk.
-# This workflow puts the fetch on a runner that has the network and commits the
-# content-addressed documents back to this session's branch.
+# This workflow puts the fetch on a runner that has the network and hands the
+# captured payloads back as a workflow artifact.
+#
+# The artifact route (rather than a bot commit) is deliberate: a previous
+# version of this workflow committed and pushed the captures from the runner
+# and the push step failed on every run (the fetch itself succeeded). The
+# session then downloads the artifact with the GitHub API and commits the
+# files from the sandbox, where the commit is made by the session's own
+# credential and can be reviewed.
 #
 # Deliberately narrow:
 #   * it runs only on this session's branch, and only when this file or one of
 #     the two capture scripts changes - so it cannot arm itself in a loop and
 #     it cannot be armed by another session's push;
-#   * the bot commit carries [skip ci], which does not trigger workflows;
-#   * it touches nothing but data/raw/gamebooks/**, data/raw/injury_pdfs/**,
-#     data/parsed/injury_diffs/** and verify/2026-11-17-a374ec9f/**;
+#   * it reads nothing from the repository except the two capture scripts and
+#     the engine parser;
 #   * both capture scripts refuse any host other than the official NBA hosts.
 
 on:
@@ -26,7 +32,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: capture-a374ec9f
@@ -40,9 +46,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
         with:
-          # A full history: the commit step rebases onto the branch tip, and a
-          # depth-1 shallow clone cannot rebase reliably.
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -70,37 +74,20 @@ jobs:
           python3 engine/injury_diff.py --pdf-dir data/raw/injury_pdfs \
             --out-dir data/parsed/injury_diffs 2>&1 | tail -60
 
-      - name: Commit captures
+      - name: Collect the captured payloads
         run: |
-          set -x
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A data/raw/gamebooks data/raw/injury_pdfs data/parsed/injury_diffs verify/2026-11-17-a374ec9f
-          if git diff --cached --quiet; then
-            echo "no new capture payloads - nothing committed"
-            exit 0
-          fi
-          git commit -m "Capture official gamebooks + newest injury editions (a374ec9f A03/A04) [skip ci]"
-          # Rebase onto the branch tip in case the session pushed while the run
-          # was in flight; never force, so another session's or the owner's
-          # work is never discarded.
-          pushed=0
-          for attempt in 1 2 3; do
-            git fetch origin arena/a374ec9f-nba1 || true
-            if git rebase FETCH_HEAD; then
-              if git push origin HEAD:arena/a374ec9f-nba1; then
-                echo "pushed on attempt ${attempt}"
-                pushed=1
-                break
-              fi
-            fi
-            echo "rebase/push attempt ${attempt} did not succeed"
-            sleep 10
-          done
-          if [ "$pushed" -ne 1 ]; then
-            echo "capture could not be pushed after 3 attempts - the payloads stay on the runner"
-            git log --oneline -5 || true
-            git status --porcelain | head -20 || true
-            exit 1
-          fi
+          mkdir -p payload/data/raw payload/data/parsed payload/verify
+          cp -r data/raw/gamebooks payload/data/raw/ 2>/dev/null || true
+          cp -r data/raw/injury_pdfs payload/data/raw/ 2>/dev/null || true
+          cp -r data/parsed/injury_diffs payload/data/parsed/ 2>/dev/null || true
+          cp -r verify/2026-11-17-a374ec9f payload/verify/ 2>/dev/null || true
+          du -sh payload
+          find payload -type f | wc -l
+
+      - name: Upload the captured payloads
+        uses: actions/upload-artifact@v4
+        with:
+          name: nba1-capture-a374ec9f
+          path: payload
+          retention-days: 14
+          if-no-files-found: error
