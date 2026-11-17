@@ -1,0 +1,605 @@
+{
+ "title": "Cross-day official injury-report diff — 2026-11-16 01:30 PM ET → 2026-11-17 10:30 AM ET",
+ "consecutive": false,
+ "why_not_consecutive": "The editions published between 2026-11-16 01:30 PM ET and 2026-11-17 10:15 AM ET were not retrieved by this session (the official index lists 11/17 editions from 12:00 AM ET onward; a single session cannot poll every 15 minutes). Every change below is therefore 'a change that happened at some point in that gap', never 'the change in this step'. The consecutive step this cycle measured is the 10:15 → 10:30 diff.",
+ "from_edition": {
+  "label": "2026-11-16 01:30 PM ET",
+  "captured_by": "arena/7ec9e7a3-nba1",
+  "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-16_01_30PM.pdf",
+  "file": "data/official/injury_2026-11-16_0130PM_7ec9e7a3.json"
+ },
+ "to_edition": {
+  "label": "2026-11-17 10:30 AM ET",
+  "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_10_30AM.pdf"
+ },
+ "built_utc": "2026-11-17T15:50Z",
+ "rule": "same rule as the consecutive diff; rows are keyed on (matchup, player) across both game days",
+ "counts": {
+  "from_rows": 82,
+  "to_rows": 33,
+  "added": 33,
+  "removed": 82,
+  "changed": 0
+ },
+ "added": [
+  {
+   "matchup": "NYK@TOR",
+   "player": "Bittle, Nate",
+   "status": "Out"
+  },
+  {
+   "matchup": "NYK@TOR",
+   "player": "Leonard, Kawhi",
+   "status": "Out"
+  },
+  {
+   "matchup": "NYK@TOR",
+   "player": "McCullar Jr., Kevin",
+   "status": "Out"
+  },
+  {
+   "matchup": "NYK@TOR",
+   "player": "Smith, Malachi",
+   "status": "Out"
+  },
+  {
+   "matchup": "DET@SAS",
+   "player": "Duren, Jalen",
+   "status": "Out"
+  },
+  {
+   "matchup": "DET@SAS",
+   "player": "Holland II, Ronald",
+   "status": "Out"
+  },
+  {
+   "matchup": "DET@SAS",
+   "player": "Joe, Isaiah",
+   "status": "Doubtful"
+  },
+  {
+   "matchup": "DET@SAS",
+   "player": "Okorie, Ebuka",
+   "status": "Out"
+  },
+  {
+   "matchup": "DET@SAS",
+   "player": "Onyenso, Ugonna",
+   "status": "Out"
+  },
+  {
+   "matchup": "DET@SAS",
+   "player": "Prince, Taurean",
+   "status": "Out"
+  },
+  {
+   "matchup": "DET@SAS",
+   "player": "Robinson, Duncan",
+   "status": "Out"
+  },
+  {
+   "matchup": "DET@SAS",
+   "player": "Brown, Maliq",
+   "status": "Out"
+  },
+  {
+   "matchup": "DET@SAS",
+   "player": "Gillespie, Ja'Kobi",
+   "status": "Out"
+  },
+  {
+   "matchup": "DET@SAS",
+   "player": "Harris, Tobias",
+   "status": "Out"
+  },
+  {
+   "matchup": "DET@SAS",
+   "player": "Quaintance, Jayden",
+   "status": "Out"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "player": "Bufkin, Kobe",
+   "status": "Out"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "player": "Hayes, Jaxson",
+   "status": "Out"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "player": "Ingram, Harrison",
+   "status": "Out"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "player": "Jackson Jr., Jaren",
+   "status": "Out"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "player": "Markkanen, Lauri",
+   "status": "Out"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "player": "Nurkic, Jusuf",
+   "status": "Out"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "player": "Beal, Bradley",
+   "status": "Out"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "player": "Ingram, Brandon",
+   "status": "Out"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "player": "Miller, Jordan",
+   "status": "Out"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "player": "Niederhauser, Yanic Konan",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHA@LAL",
+   "player": "Ajayi, Michael",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHA@LAL",
+   "player": "Boswell, Kylan",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHA@LAL",
+   "player": "Knueppel, Kon",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHA@LAL",
+   "player": "Schroder, Dennis",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHA@LAL",
+   "player": "Steinbach, Hannes",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHA@LAL",
+   "player": "Grimes, Quentin",
+   "status": "Available"
+  },
+  {
+   "matchup": "CHA@LAL",
+   "player": "Kessler, Walker",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHA@LAL",
+   "player": "Reaves, Austin",
+   "status": "Out"
+  }
+ ],
+ "removed": [
+  {
+   "matchup": "CHI@CLE",
+   "player": "Awaka, Tobe",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHI@CLE",
+   "player": "Robinson, Orlando",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHI@CLE",
+   "player": "Sellers, Jaylin",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHI@CLE",
+   "player": "Smith, Jalen",
+   "status": "Questionable"
+  },
+  {
+   "matchup": "CHI@CLE",
+   "player": "Wilson, Caleb",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHI@CLE",
+   "player": "Diop, Khalifa",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHI@CLE",
+   "player": "Merrill, Sam",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHI@CLE",
+   "player": "Mobley, Evan",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHI@CLE",
+   "player": "Tomlin, Nae'Qwan",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHI@CLE",
+   "player": "Tyson, Jaylon",
+   "status": "Doubtful"
+  },
+  {
+   "matchup": "CHI@CLE",
+   "player": "Udeh, Jr., Ernest",
+   "status": "Out"
+  },
+  {
+   "matchup": "CHI@CLE",
+   "player": "Watson, Peyton",
+   "status": "Questionable"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "player": "Edey, Zach",
+   "status": "Questionable"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "player": "Jackson, GG",
+   "status": "Out"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "player": "Jerome, Ty",
+   "status": "Out"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "player": "Pippen Jr., Scotty",
+   "status": "Out"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "player": "Post, Quinten",
+   "status": "Questionable"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "player": "Saunders, Richie",
+   "status": "Out"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "player": "Stewart, Isaiah",
+   "status": "Out"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "player": "Beekman, Reece",
+   "status": "Out"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "player": "Champagne, Justin",
+   "status": "Out"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "player": "Johnson, Tre",
+   "status": "Questionable"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "player": "Okpara, Felix",
+   "status": "Questionable"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "player": "Vukcevic, Tristan",
+   "status": "Out"
+  },
+  {
+   "matchup": "MEM@WAS",
+   "player": "Watkins, Jamir",
+   "status": "Out"
+  },
+  {
+   "matchup": "ORL@BOS",
+   "player": "Banchero, Paolo",
+   "status": "Out"
+  },
+  {
+   "matchup": "ORL@BOS",
+   "player": "Isaac, Jonathan",
+   "status": "Out"
+  },
+  {
+   "matchup": "ORL@BOS",
+   "player": "Nelson, Izaiyah",
+   "status": "Out"
+  },
+  {
+   "matchup": "ORL@BOS",
+   "player": "Penda, Noah",
+   "status": "Out"
+  },
+  {
+   "matchup": "ORL@BOS",
+   "player": "Queta, Neemias",
+   "status": "Questionable"
+  },
+  {
+   "matchup": "HOU@MIA",
+   "player": "Adams, Steven",
+   "status": "Out"
+  },
+  {
+   "matchup": "HOU@MIA",
+   "player": "Capela, Clint",
+   "status": "Out"
+  },
+  {
+   "matchup": "HOU@MIA",
+   "player": "Copeland, Quadir",
+   "status": "Out"
+  },
+  {
+   "matchup": "HOU@MIA",
+   "player": "Phillips, Julian",
+   "status": "Out"
+  },
+  {
+   "matchup": "HOU@MIA",
+   "player": "Smart, Marcus",
+   "status": "Out"
+  },
+  {
+   "matchup": "HOU@MIA",
+   "player": "Thompson, Amen",
+   "status": "Questionable"
+  },
+  {
+   "matchup": "HOU@MIA",
+   "player": "Goldin, Vladislav",
+   "status": "Out"
+  },
+  {
+   "matchup": "HOU@MIA",
+   "player": "Jovic, Nikola",
+   "status": "Questionable"
+  },
+  {
+   "matchup": "HOU@MIA",
+   "player": "Larsson, Pelle",
+   "status": "Doubtful"
+  },
+  {
+   "matchup": "HOU@MIA",
+   "player": "Thompson, Klay",
+   "status": "Available"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "player": "Barlow, Dominick",
+   "status": "Out"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "player": "Bona, Adem",
+   "status": "Out"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "player": "Embiid, Joel",
+   "status": "Questionable"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "player": "Hukporti, Ariel",
+   "status": "Out"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "player": "James, LeBron",
+   "status": "Out"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "player": "Bilodeau, Tyler",
+   "status": "Out"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "player": "Jefferson, Joshua",
+   "status": "Out"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "player": "Nelson, Grant",
+   "status": "Out"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "player": "Powell, Drake",
+   "status": "Out"
+  },
+  {
+   "matchup": "PHI@BKN",
+   "player": "Saraf, Ben",
+   "status": "Out"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "player": "Butler III, Jimmy",
+   "status": ""
+  },
+  {
+   "matchup": "GSW@NOP",
+   "player": "Curry, Stephen",
+   "status": "Out"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "player": "Moody, Moses",
+   "status": "Out"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "player": "Porzingis, Kristaps",
+   "status": "Out"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "player": "Santos, Gui",
+   "status": "Questionable"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "player": "Williams, Brandon",
+   "status": "Out"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "player": "Dia, Malik",
+   "status": "Probable"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "player": "Mathurin, Benedict",
+   "status": "Out"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "player": "McGowens, Bryce",
+   "status": "Out"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "player": "Murphy III, Trey",
+   "status": "Out"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "player": "Murray, Dejounte",
+   "status": "Out"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "player": "Pierre Jr., Jaron",
+   "status": "Probable"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "player": "Reese, Julian",
+   "status": "Probable"
+  },
+  {
+   "matchup": "GSW@NOP",
+   "player": "Watford, Trendon",
+   "status": "Out"
+  },
+  {
+   "matchup": "POR@MIN",
+   "player": "Krejci, Vit",
+   "status": "Out"
+  },
+  {
+   "matchup": "POR@MIN",
+   "player": "Morant, Ja",
+   "status": "Out"
+  },
+  {
+   "matchup": "POR@MIN",
+   "player": "Sharpe, Shaedon",
+   "status": "Out"
+  },
+  {
+   "matchup": "POR@MIN",
+   "player": "Youngblood, Chris",
+   "status": "Out"
+  },
+  {
+   "matchup": "POR@MIN",
+   "player": "Beringer, Joan",
+   "status": "Available"
+  },
+  {
+   "matchup": "POR@MIN",
+   "player": "Clark, Jaylen",
+   "status": "Out"
+  },
+  {
+   "matchup": "POR@MIN",
+   "player": "DiVincenzo, Donte",
+   "status": "Out"
+  },
+  {
+   "matchup": "POR@MIN",
+   "player": "Edwards, Anthony",
+   "status": "Out"
+  },
+  {
+   "matchup": "PHX@DEN",
+   "player": "",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "matchup": "PHX@DEN",
+   "player": "Holmes II, DaRon",
+   "status": "Out"
+  },
+  {
+   "matchup": "PHX@DEN",
+   "player": "Nembhard, Ryan",
+   "status": "Out"
+  },
+  {
+   "matchup": "PHX@DEN",
+   "player": "Strawther, Julian",
+   "status": "Out"
+  },
+  {
+   "matchup": "PHX@DEN",
+   "player": "Whitmore, Cam",
+   "status": "Out"
+  },
+  {
+   "matchup": "NYK@TOR",
+   "player": "",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "matchup": "DET@SAS",
+   "player": "",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "matchup": "POR@MIN",
+   "player": "",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "matchup": "UTA@LAC",
+   "player": "",
+   "status": "NOT YET SUBMITTED"
+  },
+  {
+   "matchup": "CHA@LAL",
+   "player": "",
+   "status": "NOT YET SUBMITTED"
+  }
+ ],
+ "changed": [],
+ "reading": "Most of the apparent 'added' rows are 11/17 and 11/18 fixtures that did not exist in the 11/16 edition's universe, not status changes. The rows worth reading are the 'removed' and 'changed' ones, and even those are gap-attributed."
+}

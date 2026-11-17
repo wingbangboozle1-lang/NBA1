@@ -93,7 +93,22 @@ _SCHED_REL = os.path.relpath(
     os.path.join(ROOT, _LMETA["inputs"]["schedule_capture"].lstrip("/")), ROOT) \
     if _LMETA["inputs"].get("schedule_capture", "").startswith(("data/", "/data")) \
     else "data/raw/" + os.path.basename(_LMETA["inputs"]["schedule_capture"])
-_INJ_REL = "data/official/" + os.path.basename(_LMETA["inputs"]["injury_file"])
+# The injury input is named `injury_file` by the 11/16 originator and by the
+# edition itself in the 11/17 originator; resolve either, and fall back to the
+# edition label so a new window can never pre-register against a blank path.
+_INJ_INPUT = _LMETA["inputs"].get("injury_edition")
+# The 11/17 originator records the edition label; the edition JSONs live in
+# data/official/ as injury_<label>_<session>.json.  Resolve by comparing the
+# edition field, never by guessing a file name from a human label.
+_INJ_REL = None
+for _cand in sorted(_glob.glob(os.path.join(ROOT, "data/official/injury_*.json"))):
+    try:
+        _doc = json.load(open(_cand, encoding="utf-8"))
+    except (OSError, ValueError):
+        continue
+    if _doc.get("edition") == _INJ_INPUT:
+        _INJ_REL = os.path.relpath(_cand, ROOT)
+_INJ_REL = _INJ_REL or "not printed"
 
 UNIVERSE = ("all %d games on the official %s slate (%s: %s); source file %s; "
             "window rule = the newest official schedule capture, today (UTC) + up "
@@ -220,13 +235,18 @@ TICKETS = [
 # Every input the lines were built from, hashed at the moment of publication so a
 # later settlement can prove which bytes were frozen. Resolved from the lines file
 # plus the newest stored official capture of each kind - nothing typed.
-DIGEST_RELS = [
-    "data/derived/horizon_picks.json",
-    "data/derived/horizon_lines.json",
-] + list(_LMETA["inputs"]["ratings_files"]) + [
-    _SCHED_REL,
-    _INJ_REL,
-]
+# The rating input list is `ratings_files` in the 11/16 originator and
+# `team_ratings` in the 11/17 one; resolve whichever is present so the digest set
+# follows the model rather than a fixed file list.
+_RATINGS_RELS = list(_LMETA["inputs"].get("ratings_files") or [])
+for _k in ("team_ratings", "measured_constants", "schedule_capture"):
+    _v = _LMETA["inputs"].get(_k)
+    if isinstance(_v, str) and _v.startswith("data/"):
+        _RATINGS_RELS.append(_v)
+DIGEST_RELS = list(dict.fromkeys(
+    ["data/derived/horizon_picks.json", "data/derived/horizon_lines.json"]
+    + _RATINGS_RELS + [_SCHED_REL, _INJ_REL]
+))
 for _pat in ("data/official/results_*.json", "data/settlement/settlement_*.json"):
     _f = _newest(_pat)
     if _f:

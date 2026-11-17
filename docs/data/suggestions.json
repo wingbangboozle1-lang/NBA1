@@ -937,6 +937,66 @@
    ],
    "recommended": "A",
    "note": "This session's token returned HTTP 403 on PUT /repos/{owner}/{repo}/pages (build_type=workflow), so it could not be applied here; it needs a repository admin."
+  },
+  {
+   "id": "S38",
+   "title": "Add a stale-output guard to the freeze step",
+   "category": "Verification",
+   "problem": "scripts/freeze_prereg.py derives the publication window and the first tip from whatever data/derived/horizon_lines.json currently holds. If that file is one slate behind, the guard still fires (it refuses to seal after a passed tip) but the message talks about a tip that has nothing to do with the slate being priced, which reads as a pricing bug.",
+   "options": [
+    {
+     "option": "Leave the guard as it is; it fails closed and nothing wrong is published",
+     "effort": "None",
+     "risk": "Low - the only cost is a misleading message when the lines file is stale",
+     "unlocks": "Nothing new"
+    },
+    {
+     "option": "Check that the lines file's window start equals the current slate date, and fail with that reason before the tip check",
+     "effort": "Low - three lines in freeze_prereg.py",
+     "risk": "Low - no change to what gets frozen",
+     "unlocks": "A clear cause for a refusal; removes the false impression that pricing is broken"
+    },
+    {
+     "option": "Make the freeze read the window from the ledger's last pre-tip entry and refuse any mismatch",
+     "effort": "Medium - couples the freezer to the ledger",
+     "risk": "Medium - the ledger is the output, not the input",
+     "unlocks": "Cross-check between window and chain"
+    }
+   ],
+   "recommendation": "Take option 2: it is three lines, it names the real cause, and it does not make the ledger an input to the freeze.",
+   "decision_needed": "Choose A, B or C.",
+   "source": "data/ledger/ledger.json entry 12; scripts/freeze_prereg.py assert PUB_AT < FIRST_TIP",
+   "source_url": "https://www.nba.com/schedule"
+  },
+  {
+   "id": "S39",
+   "title": "Publish the referee crew and attendance the gamebooks already print",
+   "category": "Data coverage",
+   "problem": "F138 blanked attendance and officials for all eight 11/16 games because one session could not confirm them. A second independent read of the same gamebook PDFs confirms them for at least CHI@CLE (19432, sellout, three officials named) and ORL@BOS (three officials named). The cells are on the official document; only the pipeline connection is missing.",
+   "options": [
+    {
+     "option": "Keep attendance and officials blank until a future cycle re-reads the PDFs",
+     "effort": "None",
+     "risk": "Low - values stay missing, F138 stays open",
+     "unlocks": "Nothing new"
+    },
+    {
+     "option": "Fill each game's cells from the cross-check archive where the official gamebook printed them, leaving the rest blank",
+     "effort": "Low - one file, eight rows already transcribed",
+     "risk": "Low - each filled cell has two independent reads and a PDF link",
+     "unlocks": "Attendance and officials columns become usable; F138 closes game by game"
+    },
+    {
+     "option": "Treat attendance as permanently out of scope",
+     "effort": "None",
+     "risk": "Medium - discards official data that governs a real home-advantage signal",
+     "unlocks": "Nothing new"
+    }
+   ],
+   "recommendation": "Take option 2. Every filled cell has two independent reads and an official PDF link; the games whose gamebook printed no attendance stay blank and stay flagged.",
+   "decision_needed": "Approve lifting F138 game by game.",
+   "source": "verify/2026-11-17-84264db0/gamebook_crosscheck_2026-11-16.json",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_CHICLE_book.pdf"
   }
  ]
 }

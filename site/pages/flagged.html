@@ -1429,40 +1429,40 @@ RESOLVED 2026-11-16T19:0xZ (session arena/23ec1e32-nba1, COORDINATION §61 W01):
 <td class="src"><span class="na" title="source id data/ledger/ledger.json is not in the register">&mdash;</span></td>
 </tr>
 <tr>
-<td>F-CA-01</td>
+<td>F142</td>
 <td>High</td>
-<td><b>RESOLVED - engine/injury_diff.py silently dropped 7 player rows per injury-report edition (F-X01)</b></td>
-<td>Fixed 2026-11-17 by session arena/ca442d3d-nba1 (COORDINATION §63). Reproduced first-hand on the committed official PDF bytes before any edit: for Injury-Report_2026-11-16_01_15PM the engine's word-band parser returned 80 rows and reported unparsed: 0 while seven player rows were absent from its output - Jerome (Ty), Pippen Jr. (Scotty), Post (Quinten), Saunders (Richie) and Stewart (Isaiah) for Memphis in MEM@WAS, and Reese (Julian) and Watford (Trendon) for New Orleans in GSW@NOP. The per-clipped-rectangle reader that session arena/07920bdc-nba1 had published as a verification script is now ported into the engine as engine/injury_cells.py and is the primary pass of load_edition; the word-band parser is kept as a cross-check, and every edition carries row_audit with silent_drop_detected, so a row one reader sees and the published output does not is an error rather than a silent omission. Verified on the same bytes after the change: 87 rows / 76 player rows, 0 unassigned cell text, and all 100 archived editions parse with no disagreement between the two readers. Pinned by 10 tests in scripts/test_injury_diff.py, which now run in CI on every pull request.</td>
-<td>engine/injury_diff.py, engine/injury_cells.py, scripts/test_injury_diff.py, .github/workflows/pages.yml</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+<td><b>The official standings page served two different UTA rows inside a single 2026-11-17 download</b></td>
+<td>Read https://www.nba.com/standings on 2026-11-17 at 15:47Z. One part of the same page download printed UTA CONF 1-9, HOME 1-4, ROAD 0-7, GB 12.5, streak L 9; another part printed CONF 1-11, HOME 1-7, ROAD 0-6, GB 11, streak L 12. The first transcription failed the closed-system identity: the sum of team wins was 205 against 204 decided games implied by the home/road split. The later row satisfies the row identity (1-11 + 0-2 + 0-0 = 1-13), the league identity (home wins == road losses) and the recomputed GB formula, so it is the value published. Both reads are preserved verbatim in the capture's reconciliation_note.</td>
+<td>The measured home-win rate and the home-court pin (0.5196, 0.83 pts) depend on these columns</td>
+<td>Never publish a standings read without the identity check. Any session reading standings should re-run the three identities (row W+L==GP, league home wins == road losses, GB formula) before the values reach a model input.</td>
+<td class="src"><span class="na" title="source id data/official/standings_2026-11-17_1547Z_84264db0.json (reconciliation_note) is not in the register">&mdash;</span></td>
 </tr>
 <tr>
-<td>F-CA-02</td>
+<td>F143</td>
 <td>Medium</td>
-<td><b>The standings page and all three team-stat pages embed no table data - the refresh &quot;parsed 0&quot; is a property of the official page, not of our parser</b></td>
-<td>Measured 2026-11-17 by session arena/ca442d3d-nba1 (COORDINATION §63) on bytes a runner fetched at HTTP 200 and stored content-addressed under data/raw/session-ca442d3d/ (sha256 and retrieval timestamp in each sidecar): www.nba.com/standings (254,060 bytes) contains the strings &quot;wins&quot;, &quot;losses&quot; and &quot;team&quot; zero times, and www.nba.com/stats/teams/{traditional,opponent,advanced} (322,550 / 322,487 / 322,487 bytes) contain none of them either. Each ships a __NEXT_DATA__ shell whose table is filled client-side. engine/refresh_gate.py's BLOCK on those five sources is therefore correct behaviour for an HTML reader and cannot be fixed by parsing harder. The parseable official source for records, scores and per-period scores is www.nba.com/games?date=YYYY-MM-DD, whose embedded scoreboard JSON carries gameStatus, periods[] and wins/losses - proved by scripts/build_results_feed_ca442d3d.py, which read 8/8 finals with their quarter lines out of that JSON for 2026-11-16. A decision is needed and was not taken here: whether the refresh should promote standings and team-record rows derived from per-day scoreboard captures, which changes what &quot;the official standings source&quot; means.</td>
-<td>engine/refresh_gate.py, engine/fetch_official.py, engine/promote_official.py, R01, R20</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+<td><b>Two independent readers settled the 2026-11-16 slate in parallel; singles and parlays agree exactly, SGP grading existed in only one</b></td>
+<td>Two sessions ran the 11/16 settlement at nearly the same time (arena/84264db0-nba1 at 15:46Z and arena/b454a53d-nba1 at 15:44Z) from the same official finals. The singles and parlays grade identically in both records: 8 singles 3-5-0 for -2.50u and 3 parlays 0-3 for -3.30u. They diverge on the two SGP prop tickets, which this session left UNSETTLED pending a box score and the other session graded LOSS (-1.10 each, -2.20 total) from official box-score rows under the frozen rule. The other session's record was merged to main first (PR #163); this session's ledger entry was re-appended on top of that chain rather than replacing it. Nothing was discarded.</td>
+<td>data/settlement/settlement_2026-11-16.json; data/ledger/ledger.json entries 8-12</td>
+<td>Adopt the graded SGP record as the settlement of record (both tickets are determinate losses under the frozen rule: Tatum 24 pts against 26.5, Davis 23 against 25.5). If a later session re-settles the same slate, scripts/settle_slate.py should check the whole ledger for an existing record of that date across sessions, not just its own last entry.</td>
+<td class="src"><span class="na" title="source id data/settlement/sgp_grades_2026-11-16_amendment1.json is not in the register">&mdash;</span></td>
 </tr>
 <tr>
-<td>F-CA-03</td>
+<td>F144</td>
 <td>Medium</td>
-<td><b>Four different home-court pins are in the repository, each measured on a different sample; no corpus of record is named</b></td>
-<td>Measured 2026-11-17 by session arena/ca442d3d-nba1 (COORDINATION §63): 0.5204 -&gt; 0.87 pts (102/196 home/road games from the standings capture; session arena/23ec1e32-nba1 published this as &quot;the&quot; pin); 0.5263 -&gt; 1.108 pts (190 finals through 2026-11-15, data/derived/measured_constants_2026_27.json); 0.5171 -&gt; 0.72 pts (205 decided rows through 2026-11-16, quarter sums asserted, data/derived/hca_pin_2026_11_17_ca442d3d.json); 0.5135 -&gt; 0.59 pts (74-game train corpus, the legacy engine pin this session wired into engine/pipeline.py). All four are arithmetically right on their own sample - the spread is sample choice, not error. It matters because the pin moves every spread and every total, and because a reader cannot currently tell which number a published line used. Proposed for the register owner: name one corpus of record (this seat proposes the per-game feed through the latest settled game day, 0.5171 / 0.72 pts as of 2026-11-16), print the sample beside every pin, and re-derive it when each game day settles. Nothing was blended or overwritten here.</td>
-<td>data/derived/measured_constants_2026_27.json, data/derived/hca_pin_2026_11_17_ca442d3d.json, data/hca_measured.json, data/derived/horizon_lines.json</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+<td><b>The published 11/16 results file blanks attendance and officials that the official gamebooks do print</b></td>
+<td>The results file merged to main states attendance and officials were blanked because they were not confirmed in that session's own read (F138). A second independent read of the same eight official gamebook PDFs (this session) does print them, for example CHI@CLE attendance 19432 (Sellout) with officials #74 Curtis Blair, #54 Ray Acosta, #71 Rodney Mott, and ORL@BOS officials #24 Kevin Scott, #41 Nate Green, #53 Matt Kallio. The eight finals and all 32 period scores agree exactly between the two reads. The values are kept in a separate cross-check archive so the merged file is not silently rewritten.</td>
+<td>data/official/results_2026-11-16.json (attendance, officials columns)</td>
+<td>F138 can be lifted for the games whose gamebook printed the cell, using the cross-check archive as the second source. Cells the gamebook did not print stay blank.</td>
+<td class="src"><span class="na" title="source id verify/2026-11-17-84264db0/gamebook_crosscheck_2026-11-16.json is not in the register">&mdash;</span></td>
 </tr>
 <tr>
-<td>F-CA-04</td>
+<td>F145</td>
 <td>Medium</td>
-<td><b>Push-triggered refresh runs on session branches are cancelled by the shared concurrency group, so session-armed captures never land</b></td>
-<td>Measured 2026-11-17 by session arena/ca442d3d-nba1 (COORDINATION §63): .github/workflows/refresh-data.yml sets concurrency.group: refresh-official-global with cancel-in-progress: true - one slot shared by every branch (added by session arena/c348e6c7-nba1, COORDINATION §47.2, to stop run starvation, and kept on top of PR #117). With several sessions pushing in the same minutes, 3 of 3 refresh runs armed from arena/ca442d3d-nba1 were cancelled within about two minutes, each in favour of another branch's run. The consequence is not cosmetic: the injury-PDF capture, promotion and consecutive-edition diff this workflow performs are exactly what would move R04's chain to 2026-11-17, so that row cannot close while every session arms the same single slot. Proposed (owner of the workflow file, not applied here): scope the group to the git ref for non-main branches so only the scheduled main runs share one slot. This session's own capture workflow uses a per-ref group and completed and committed back to the branch (run 44120656545), which is the evidence that the alternative works.</td>
-<td>.github/workflows/refresh-data.yml, R01, R04</td>
-<td><span class="na" title="not published - no official source confirmed this value">&mdash;</span></td>
-<td class="src"><span class="na" title="no official source">&mdash;</span></td>
+<td><b>The 11/17 freeze is sealed after the first 11/17 tip, and the window is labelled &quot;today + 3 days&quot; while covering only three of the four days ahead</b></td>
+<td>['Ledger entry 12 (pre_tip_publication, sealed 2026-11-17T15:54Z) covers 30 games over 2026-11-17..2026-11-20. Its first_tip_utc is 2026-11-18T00:30Z, which is 7:30 PM ET on 11/17 (NYK@TOR) - correct in UTC, and correctly before that tip. But the 11/17 slate itself (5 games: NYK@TOR 7:30, POR@MIN 8:00, DET@SAS 8:00, UTA@LAC 10:30, CHA@LAL 11:00 ET) had not tipped at seal time (15:54Z = 10:54 ET), so the seal is honest for those five games as well. What is NOT true is the label: &quot;today + up to 3 days&quot; is written into the ledger\'s window string, but the window ends at 11/20 because the official schedule read did not extend to 11/21, which carries 6 further games (MIL@PHI, POR@NYK, LAC@DAL, MEM@MIN, NOP@SAS, BOS@SAC). The shortfall is a scope choice, stated here rather than hidden, not a scheduling error.']</td>
+<td>data/ledger/ledger.json entry 12 (window label); data/derived/horizon_lines.json (30-game window)</td>
+<td>Either label the window with the dates it actually covers (2026-11-17 .. 2026-11-20) instead of the phrase &quot;today + up to 3 days&quot;, or extend the next cycle's official read through the fourth day ahead so the phrase is true. No frozen bytes need to change: the digests in entry 12 are of the 30 games that were actually published.</td>
+<td class="src"><span class="na" title="source id data/ledger/ledger.json entry 12 is not in the register">&mdash;</span></td>
 </tr>
 </tbody></table></div>
     <footer class="foot">
