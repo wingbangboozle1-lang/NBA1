@@ -159,7 +159,80 @@
     ]
    },
    "prev": "d5f75692d7d7f1dc8d2019a39c4f3c2850e4386c9e1a9df47648f7b8b739a216"
+  },
+  {
+   "entry": 8,
+   "type": "settlement_settlement_verification",
+   "at_utc": "2026-11-17T15:44Z",
+   "verifies_entry": 5,
+   "files_at_settlement": {
+    "data/archive/horizon_picks_2026-11-16.json": "9b43d77bf29288765aa6ddcf418d7789567832a2374ce700db64397085922ad8",
+    "data/archive/horizon_lines_2026-11-16.json": "04bd73ff50917bf378dab11b82eacbe1f5da56bc3c1fbcc6f0f1b7082c42ac64"
+   },
+   "unchanged_since_pre_tip": true,
+   "settled_dates": [
+    "2026-11-16"
+   ],
+   "prev": "294aa9ce20ad771479c0e5d69c53b48a286e22be03f01db52a4fd20267b2fca7"
+  },
+  {
+   "entry": 9,
+   "type": "settlement_record",
+   "at_utc": "2026-11-17T15:44Z",
+   "file": "data/settlement/settlement_2026-11-16.json",
+   "sha256": "101dc06334df17769ee99407d028dd1cf1336ed77f58ca14ca17953c4237b77b",
+   "official_finals_files": [
+    "data/official/results_2026-11-16.json"
+   ],
+   "settled_by": "arena/b454a53d-nba1 (scripts/settle_slate.py --slate 2026-11-16 --settle-date 2026-11-16)",
+   "summary": {
+    "record": "3-5-0",
+    "singles_units_at_minus110": -2.5,
+    "parlay_units": -3.3,
+    "total_units_settled": -5.8,
+    "dates_settled": [
+     "2026-11-16"
+    ],
+    "dates_unsettled": []
+   },
+   "prev": "f21a4dc0b0fef2d05a0863231d9cef185bb6aa43d8f792a70001088881dd89b3"
+  },
+  {
+   "entry": 10,
+   "type": "sgp_grading_record",
+   "at_utc": "2026-11-17T15:45Z",
+   "file": "data/settlement/sgp_grades_2026-11-16.json",
+   "sha256": "0e485b06461f553e0530d65b1a4818338a5ad4dc5551bef251410969c5b3b778",
+   "graded_from": [
+    "data/settlement/settlement_2026-11-16.json"
+   ],
+   "summary": {
+    "tickets": 2,
+    "lost": 2,
+    "won": 0,
+    "units": -2.2
+   },
+   "prev": "9d5c497e31449495397c012150cd867430f41e985fa7c84dfbcf50a927f86ae4"
+  },
+  {
+   "entry": 11,
+   "type": "sgp_grading_amendment",
+   "at_utc": "2026-11-17T16:00Z",
+   "file": "data/settlement/sgp_grades_2026-11-16_amendment1.json",
+   "sha256": "ccff7b7cb4a3eb7845cc1950ea571c9815ae16190eb29871c079ab0392ea9d7b",
+   "supersedes": {
+    "file": "data/settlement/sgp_grades_2026-11-16.json",
+    "sha256": "0e485b06461f553e0530d65b1a4818338a5ad4dc5551bef251410969c5b3b778"
+   },
+   "reason": "Entry 10 graded Banchero and Ty Jerome VOID with notes that were not source-backed (a points reconciliation inference and an unsourced injury note). Amended: both legs UNRESOLVED (no box-score row, DNP unconfirmed); unsourced notes removed. Both tickets remain LOSS because each has a determinate losing leg (Tatum 24 < 26.5; Davis 23 < 25.5). Original file restored byte-for-byte to its entry-10 hash.",
+   "summary": {
+    "tickets": 2,
+    "lost": 2,
+    "won": 0,
+    "units": -2.2
+   },
+   "prev": "ef354bd34eec2a440b80e5c5e4105510bc2e52baeb8b8239a04b623528617d30"
   }
  ],
- "head": "294aa9ce20ad771479c0e5d69c53b48a286e22be03f01db52a4fd20267b2fca7"
+ "head": "2b3041707dc5e5bd7ad4ddeb39b3393e0831307a52a614a54d7f9c5783e45773"
 }
