@@ -1409,6 +1409,39 @@
    "source": "data/ledger/ledger.json",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json",
    "suggested_action": "Have settle_slate.py refuse when any settlement_record in the ledger already covers the requested date, regardless of which session wrote it."
+  },
+  {
+   "id": "F142",
+   "severity": "Medium",
+   "status": "open",
+   "title": "The official 2026-11-16 HOU@MIA gamebook prints four HOU player rows with one cell fewer than the header",
+   "detail": "Measured 2026-11-17 from the official gamebook at statsdmz.nba.com. The HOU table's header is POS, MIN, FG, FGA, 3P, 3PA, FT, FTA, OR, DR, TOT, A, PF, ST, TO, BS, +/-, PTS, and seven HOU rows carry all 16 numeric cells after MIN. Four rows carry 15: Bogdan Bogdanovic (25:47), Reed Sheppard (18:51), Jae'Sean Tate (12:00) and Bruce Thornton (12:00). The four excluded rows account exactly for the gap between the parsed rows and the team line: 89 + 21 = 110 points and 171:22 + 68:38 = 240:00 minutes. Each candidate 'which column is absent' hypothesis was tested against HOU's own printed TOTALS row (38 FG, 92 FGA, 10 3P, 36 3PA, 24 FT, 30 FTA, 21 OR, 31 DR, 52 TOT, 23 A, 20 PF, 4 ST, 14 TO, 2 BS, -18 +/-, 110 PTS). Summing the 15 surviving cells onto the 16 columns and comparing with (team total - the seven complete rows): the TOT hypothesis matches 14 of 16 columns and leaves a +1 residual on assists and +1 on steals; every other hypothesis contradicts the team line on many columns. Two independent identities also hold: OR+DR = TOT on all seven complete rows, and the individual +/- cells sum to -90 = 5 x the team margin (-18), which is what five players on the floor at all times requires.",
+   "affected": "data/official/player_game_logs_2026-11-16.json — the four players are absent from `rows` and from every team sum; their minutes and raw cells are republished in `excluded_players_who_played`, and the full test is in `short_row_analysis`.",
+   "source": "NBA official gamebook, HOU@MIA 2026-11-16 (page 1, VISITOR: Houston Rockets table)",
+   "source_url": "https://statsdmz.nba.com/pdfs/20261116/20261116_HOUMIA_book.pdf",
+   "suggested_action": "None that keeps the brief's no-inference rule: the values are NOT published. If the league re-issues the gamebook, re-read the four rows and the gap closes with a citation. Until then the honest statement is that HOU's per-player totals in this dataset sum to 89 points against a 110-point team line, and that the missing-cell hypothesis consistent with the document is the rebounds total."
+  },
+  {
+   "id": "F143",
+   "severity": "Low",
+   "status": "closed",
+   "title": "Consecutive injury-report diff keyed on matchup alone produced 8 false 'removed' players",
+   "detail": "Found and fixed 2026-11-17 while diffing the 11/16 01:30 PM ET edition against the 11/17 10:30 AM ET edition. POR@MIN is played on both game days (a back-to-back at Target Center), so both editions contain a POR@MIN block. Comparing the two editions by matchup therefore lined up the 11/16 filing against the 11/17 block, which at 10:30 AM still printed only 'NOT YET SUBMITTED' for both teams, and reported Vit Krejci, Ja Morant, Shaedon Sharpe, Chris Youngblood, Joan Beringer, Jaylen Clark, Donte DiVincenzo and Anthony Edwards as having been 'removed' from the report. They had not been: their 11/16 game had simply been played and their 11/17 filing was not yet owed. The committed diff keys on (game_date, matchup) and reports 0 removals, 32 additions, 0 status changes and 0 same-status reason changes across the five game days present in both editions.",
+   "affected": "data/injury_reports/2026-11-17_1030AM/diff_vs_2026-11-16_0130PM.json (the corrected file records the defect itself under `collision_fixed`)",
+   "source": "NBA official injury report, 11/17/2026 10:30 AM ET edition",
+   "source_url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-17_10_30AM.pdf",
+   "suggested_action": "Closed. Any future diff of consecutive injury editions must key on the game day as well as the matchup, because back-to-back series are normal in this league. Recorded so the mistake is not repeated."
+  },
+  {
+   "id": "F144",
+   "severity": "Low",
+   "status": "open",
+   "title": "The 11/17 team-stat re-read caught a one-column shift in MIA's row, and the same identity is now asserted on every row",
+   "detail": "The official Teams Advanced table was read in two rendered chunks. MIA's row straddled the chunk boundary and was transcribed one column to the left, which put 116.2 (its DefRtg) where POSS belongs and shifted the rest: PACE read 58.4 and POSS 50.6 for a team that had played 14 games. The defect was caught by asserting a printed identity rather than by eyeballing the row: PACE is possessions per 48 team-minutes, so POSS*48/MIN must reproduce it. With the shift the residual is about 2,700; across all 30 correctly transcribed rows the largest residual is 0.345 (ORL) and the median is 0.10, which is the official page rounding PACE and POSS independently. Re-read the MIA row against the page: AST Ratio 20.1, OREB% 30.4, DREB% 68.8, REB% 49.4, TOV% 13.6, eFG% 54.9, TS% 58.4, PACE 101.96, PIE 50.6, POSS 1,440 — which also matches the traditional table (MIA 14 GP, 8-6). The capture now asserts POSS*48/MIN = PACE within 0.5 and cross-reconciles GP/W/L across all three tables plus PTS - OppPTS = +/-.",
+   "affected": "data/official/teams_advanced_2026-11-17_c5487cbb.json, teams_traditional_2026-11-17_c5487cbb.json, teams_opponent_2026-11-17_c5487cbb.json",
+   "source": "NBA official Teams Advanced table, 2026-27 regular season",
+   "source_url": "https://www.nba.com/stats/teams/advanced?Season=2026-27&SeasonType=Regular+Season",
+   "suggested_action": "The value is corrected and the check is permanent. No other row in any of the three tables shows a residual above 0.35, so the shift was isolated to the one row that crossed a chunk boundary."
   }
  ]
 }
