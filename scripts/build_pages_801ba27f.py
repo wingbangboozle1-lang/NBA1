@@ -15,6 +15,7 @@ official captures. Three rules are enforced here, not assumed downstream:
 """
 
 import datetime
+import re
 import html
 import json
 import os
@@ -501,52 +502,83 @@ def build_injury_ledger():
 
 
 def build_settlement():
-    # Schema note (arena/0e9c924f-nba1, §50 N04): this builder previously read
-    # keys (n_graded / n_pending / units_today / pre_tip_anchor) that no
-    # settlement file written by scripts/settle_slate.py has ever carried, so
-    # it crashed with KeyError.  It now reads the real settle_slate.py schema
-    # (summary.* + slate_archive.*) and derives the stamp values from it.
-    s = jload(os.path.join(SETTLE, "settlement_2026-11-15.json"))
+    # Schema note (arena/0e9c924f-nba1, §50 N04): reads the real settle_slate.py schema
+    # (summary.* + slate_archive.*). arena/b454a53d-nba1 (2026-11-17): the page was hard-wired
+    # to settlement_2026-11-15.json, so the 2026-11-16 settlement was invisible. It now renders
+    # EVERY settlement record in data/settlement/ (one stamp + singles table per slate, oldest
+    # first) and the box-score SGP grading record for any slate that has one.
     led = jload(os.path.join(ROOT, "data", "ledger", "ledger.json"))
-    summ = s.get("summary", {})
-    n_graded = len(s.get("singles", [])) + sum(
-        1 for p in s.get("parlays", []) if p.get("result")) + s.get("summary", {}).get("sgp_settled", 0)
-    n_pending = (summ.get("sgp_published", 0) - summ.get("sgp_settled", 0))
-    srows = []
-    for r in s["singles"]:
-        final = (f"{r.get('away_pts')}-{r.get('home_pts')}"
-                 if r.get("away_pts") is not None else None)
-        srows.append([r["date"], r["matchup"], esc(r["pick_line"]),
-                      val(final), val(r.get("margin_pick_team")),
-                      "<strong>%s</strong>" % esc(r["result"]), val(r["units"]),
-                      link(r.get("source_url") or r.get("source_game_url") or
-                           "https://www.nba.com/games?date=2026-11-15", "official final")])
+    import glob as _glob
+    slates = []
+    for _p in sorted(_glob.glob(os.path.join(SETTLE, "settlement_*.json"))):
+        _slate = os.path.basename(_p)[len("settlement_"):-5]
+        if re.match(r"^\d{4}-\d{2}-\d{2}$", _slate):
+            slates.append((_slate, jload(_p)))
+    body = []
+    for slate, s in slates:
+        summ = s.get("summary", {})
+        arch = s.get("slate_archive", {})
+        # A later amendment (sgp_grades_<slate>_amendment1.json, ledger-linked) supersedes the original.
+        sgp_p = os.path.join(SETTLE, "sgp_grades_%s_amendment1.json" % slate)
+        if not os.path.exists(sgp_p):
+            sgp_p = os.path.join(SETTLE, "sgp_grades_%s.json" % slate)
+        sgp = jload(sgp_p) if os.path.exists(sgp_p) else None
+        n_graded = len(s.get("singles", [])) + sum(
+            1 for p in s.get("parlays", []) if p.get("result")) + (
+            sgp["summary"]["tickets"] if sgp else summ.get("sgp_settled", 0))
+        n_pending = summ.get("sgp_published", 0) - (sgp["summary"]["tickets"] if sgp else summ.get("sgp_settled", 0))
+        total = summ.get("total_units_settled")
+        if sgp:
+            total = round((total or 0) + (sgp["summary"]["units"] or 0), 2)
+        srows = []
+        for r in s["singles"]:
+            final = (f"{r.get('away_pts')}-{r.get('home_pts')}"
+                     if r.get("away_pts") is not None else None)
+            srows.append([r["date"], r["matchup"], val(r.get("pick_line")),
+                          val(final), val(r.get("margin_pick_team")),
+                          "<strong>%s</strong>" % esc(r["result"]), val(r["units"]),
+                          link(r.get("source_url") or r.get("source_game_url") or
+                               "https://www.nba.com/games?date=%s" % slate, "official final")])
+        body.append(note("ok", "<strong>Settlement stamp.</strong> Slate %s settled "
+                               "<strong>%s</strong> from official finals only "
+                               "(dates settled: %s; dates still open: %s). "
+                               "<strong>%d</strong> tickets graded, <strong>%d</strong> left PENDING, "
+                               "units <strong>%s</strong>. %s"
+                         % (esc(slate), esc(s["settled_at_utc"]),
+                            esc(", ".join(summ.get("dates_settled", [])) or "(none)"),
+                            esc(", ".join(summ.get("dates_unsettled", [])) or "(none)"),
+                            n_graded, n_pending, val(total),
+                            esc(summ.get("validation_note", "")))))
+        body.append(note("info", "Pre-tip anchor: <code>%s</code> SHA-256 <span class='mono'>%s</span>. "
+                                 "Nothing graded here was published after the first tip."
+                         % (esc(arch.get("picks", "?")), esc((arch.get("picks_sha256") or "")[:32]))))
+        body.append("<h2>Singles &mdash; %s</h2>" % esc(slate))
+        body.append(table(["Date", "Game", "Ticket", "Official final", "Margin", "Result",
+                           "Units", "Source"], srows))
+        if sgp:
+            grows = []
+            for t in sgp["tickets"]:
+                legs = "; ".join("%s %s %s &rarr; %s%s" % (esc(l["player"]), esc(l["side"]), esc(l["line"]),
+                                                        esc(l["result"]),
+                                                        (" (%s pts)" % esc(l["official_pts"]))
+                                                        if l["official_pts"] is not None else " (no box-score row)")
+                                 for l in t["legs"])
+                grows.append([slate, esc(t["game"]), legs, "<strong>%s</strong>" % esc(t["result"]),
+                              val(t["units"]), link(t["sources"][0], "official box score")])
+            body.append("<h2>SGP tickets &mdash; graded from official box scores (%s)</h2>" % esc(slate))
+            body.append(table(["Date", "Game", "Legs (official points)", "Result", "Units", "Source"], grows))
+        else:
+            n_sgp = summ.get("sgp_published", 0)
+            if n_sgp:
+                body.append(note("warn", "%d SGP ticket(s) for %s are not graded: a player leg needs the "
+                                         "official box-score row, which no grading record holds yet."
+                                 % (n_sgp, esc(slate))))
     lrows = [[val(e["entry"]), esc(e["type"]), esc(e["at_utc"]),
               '<span class="mono">%s</span>' % esc((e["head"] if "head" in e
                                                     else e.get("prev") or "")[:16]),
               link("https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/ledger/ledger.json",
                    "ledger")] for e in led["entries"]]
-    arch = s.get("slate_archive", {})
-    body = [
-        note("ok", "<strong>Settlement stamp.</strong> Slate 2026-11-15 settled "
-                   "<strong>%s</strong> from official finals only "
-                   "(dates settled: %s; dates still open: %s). "
-                   "<strong>%d</strong> tickets graded, <strong>%d</strong> left PENDING, "
-                   "units <strong>%s</strong>. %s"
-             % (esc(s["settled_at_utc"]),
-                esc(", ".join(summ.get("dates_settled", [])) or "(none)"),
-                esc(", ".join(summ.get("dates_unsettled", [])) or "(none)"),
-                n_graded, n_pending,
-                val(summ.get("total_units_settled")),
-                esc(summ.get("validation_note", "")))),
-        note("info", "Pre-tip anchor: <code>%s</code> SHA-256 "
-                     "<span class='mono'>%s</span>. Nothing graded here was published "
-                     "after the first tip."
-             % (esc(arch.get("picks", "?")),
-                esc((arch.get("picks_sha256") or "")[:32]))),
-        "<h2>Singles</h2>",
-        table(["Date", "Game", "Ticket", "Official final", "Margin", "Result",
-               "Units", "Source"], srows),
+    body += [
         "<h2>Ledger chain</h2>",
         table(["#", "Type", "At (UTC)", "prev / head (16)", "File"], lrows),
     ]

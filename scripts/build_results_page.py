@@ -111,6 +111,11 @@ def results_page():
     _by_date = {}
     for _p in _feeds_all:
         _stem = os.path.basename(_p)[len("results_"):-5]
+        # Only files named for a calendar date are game-day captures. The season-wide
+        # running feed (`results_feed_2026_27.json`) is not a game day: before this guard
+        # it rendered a phantom "feed_2026_ ... 0 of 0 final" section (2026-11-17, b454a53d).
+        if not re.match(r"^\d{4}-\d{2}-\d{2}", _stem):
+            continue
         _by_date.setdefault(_stem[:10], []).append(_p)
     feeds, superseded_captures = [], {}
     for _d in sorted(_by_date):
@@ -187,11 +192,26 @@ def results_page():
                    esc(sm.get("parlay_units")),
                    esc(sm.get("total_units_settled", sm.get("total_units"))),
                    link("../../" + os.path.relpath(settlements[srel], ROOT), "settlement JSON"))))
-            body.append('<p class="fine">SGP tickets: %s published, %s won, %s units. '
-                        'Papers are graded by the price convention printed on each row, and '
-                        'no market price exists anywhere on this site.</p>'
-                        % (esc(sm.get("sgp_published")), esc(sm.get("sgp_won")),
-                           esc(sm.get("sgp_units"))))
+            # SGP tickets: scripts/settle_slate.py cannot read box scores and leaves them
+            # UNSETTLED. A separate grading record (sgp_grades_<date>.json, hash-chained in
+            # the ledger) carries the box-score grades when someone has read them.
+            _sgp_p = os.path.join(ROOT, "data", "settlement", "sgp_grades_%s_amendment1.json" % date)
+            if not os.path.exists(_sgp_p):
+                _sgp_p = os.path.join(ROOT, "data", "settlement", "sgp_grades_%s.json" % date)
+            if os.path.exists(_sgp_p):
+                _g = json.load(open(_sgp_p, encoding="utf-8"))["summary"]
+                _combined = round((sm.get("total_units_settled") or 0) + (_g.get("units") or 0), 2)
+                _sgp_txt = ("SGP tickets: %s published, graded from official box scores: "
+                            "%s won, %s lost, %s units (grading record: %s). "
+                            "Combined with singles and parlays: <b>%s units</b>."
+                            % (esc(sm.get("sgp_published")), esc(_g.get("won")), esc(_g.get("lost")),
+                               esc(_g.get("units")), link("../../" + os.path.relpath(_sgp_p, ROOT),
+                                                          "sgp_grades JSON"), esc(_combined)))
+            else:
+                _sgp_txt = ("SGP tickets: %s published, %s settled, not graded (player legs need the "
+                            "official box score)." % (esc(sm.get("sgp_published")), esc(sm.get("sgp_settled"))))
+            body.append('<p class="fine">%s Papers are graded by the price convention printed on each '
+                        'row, and no market price exists anywhere on this site.</p>' % _sgp_txt)
         else:
             body.append(verdict_box("warn", "NOT SETTLED YET",
                 "No settlement file exists for this game day. %s"

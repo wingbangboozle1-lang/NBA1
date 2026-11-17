@@ -1,0 +1,90 @@
+{
+ "title": "SGP grading record — 2026-11-16 (player legs graded from official box scores)",
+ "graded_by": "arena/b454a53d-nba1 (verify/2026-11-17-b454a53d/grade_sgp_2026_11_16.py)",
+ "graded_at_utc": "2026-11-17T15:45Z",
+ "why": "scripts/settle_slate.py cannot read box scores and leaves SGP tickets UNSETTLED. This record grades them from the official box-score rows, under the frozen rule in settlement_2026-11-16.json.",
+ "rule": "legs are player props (Over/Under). A leg whose player did not play is VOID and removed; remaining legs settle at the ticket price frozen at publication (joint_prob_rho as fair price; G-PROP blocked, no market price). Any losing leg loses the stake (1.10).",
+ "tickets": [
+  {
+   "date": "2026-11-16",
+   "game": "ORL@BOS",
+   "kind": "two_opponents",
+   "legs": [
+    {
+     "leg": "Jayson Tatum (BOS) OVER 26.5",
+     "player": "Jayson Tatum",
+     "side": "OVER",
+     "line": 26.5,
+     "official_pts": 24,
+     "appeared": true,
+     "result": "LOSS",
+     "source_box_score_url": "https://www.nba.com/game/orl-vs-bos-0022600245/box-score",
+     "note": "BOS table: 36:03 min, 24 PTS."
+    },
+    {
+     "leg": "Paolo Banchero (ORL) OVER 24.5",
+     "player": "Paolo Banchero",
+     "side": "OVER",
+     "line": 24.5,
+     "official_pts": null,
+     "appeared": false,
+     "result": "VOID",
+     "source_box_score_url": "https://www.nba.com/game/orl-vs-bos-0022600245/box-score",
+     "note": "No row in either team table (active or DNP). ORL team PTS 115 reconciles to the 113 listed points + 2 from A. Cain's row without him."
+    }
+   ],
+   "frozen_price_joint_prob_rho": 0.2512,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110: a losing ticket loses the 1.10 stake",
+   "sources": [
+    "https://www.nba.com/game/orl-vs-bos-0022600245/box-score",
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  },
+  {
+   "date": "2026-11-16",
+   "game": "MEM@WAS",
+   "kind": "two_opponents",
+   "legs": [
+    {
+     "leg": "Ty Jerome (MEM) OVER 26.5",
+     "player": "Ty Jerome",
+     "side": "OVER",
+     "line": 26.5,
+     "official_pts": null,
+     "appeared": false,
+     "result": "VOID",
+     "source_box_score_url": "https://www.nba.com/game/mem-vs-was-0022600247/box-score",
+     "note": "No row in the MEM table. MEM rows sum to 136 (team final) without him. AP recap on the same page: out with a sore right hip."
+    },
+    {
+     "leg": "Anthony Davis (WAS) OVER 25.5",
+     "player": "Anthony Davis",
+     "side": "OVER",
+     "line": 25.5,
+     "official_pts": 23,
+     "appeared": true,
+     "result": "LOSS",
+     "source_box_score_url": "https://www.nba.com/game/mem-vs-was-0022600247/box-score",
+     "note": "WAS table: 34:41 min, 23 PTS."
+    }
+   ],
+   "frozen_price_joint_prob_rho": 0.2511,
+   "result": "LOSS",
+   "units": -1.1,
+   "price_convention": "paper -110: a losing ticket loses the 1.10 stake",
+   "sources": [
+    "https://www.nba.com/game/mem-vs-was-0022600247/box-score",
+    "https://www.nba.com/games?date=2026-11-16"
+   ]
+  }
+ ],
+ "summary": {
+  "tickets": 2,
+  "lost": 2,
+  "won": 0,
+  "units": -2.2
+ },
+ "validation_note": "MODEL OUTPUT — UNVALIDATED, unfunded, zero-stake paper output."
+}
