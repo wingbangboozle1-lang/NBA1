@@ -100,7 +100,11 @@ jobs:
       # promoted. A clean current capture set may rebuild committed inputs.
       - name: Rebuild only after all freshness and provenance gates pass
         id: build
-        if: steps.fetch.outcome == 'success' && steps.freshness.outputs.ok == 'true'
+        # Defense in depth: a green freshness output is necessary, but so is
+        # successful completion of the promotion step that writes the verified
+        # inputs. Neither continue-on-error step may be treated as a pass merely
+        # because the workflow itself continues to settlement and reporting.
+        if: steps.fetch.outcome == 'success' && steps.promote.outcome == 'success' && steps.freshness.outcome == 'success' && steps.freshness.outputs.ok == 'true'
         continue-on-error: true
         run: |
           python3 engine/pipeline.py
@@ -162,6 +166,10 @@ jobs:
           s["workflow_run_at_utc"] = now
           s["workflow_ref"] = "${{ github.ref }}"
           s["fetch_outcome"] = "${{ steps.fetch.outcome }}"
+          s["promote_outcome"] = "${{ steps.promote.outcome }}"
+          s["freshness_outcome"] = "${{ steps.freshness.outcome }}"
+          s["freshness_ok"] = "${{ steps.freshness.outputs.ok }}"
+          s["settlement_outcome"] = "${{ steps.settle.outcome }}"
           s["build_outcome"] = "${{ steps.build.outcome }}"
           json.dump(s, open(p, "w"), indent=1)
           print(json.dumps(s, indent=1))
@@ -237,6 +245,10 @@ jobs:
               f"- run at (UTC): {s.get('workflow_run_at_utc')}\n"
               f"- ref: {s.get('workflow_ref')}\n"
               f"- fetch step: {s.get('fetch_outcome')}\n"
+              f"- promotion step: {s.get('promote_outcome')}\n"
+              f"- freshness step: {s.get('freshness_outcome')}\n"
+              f"- freshness gate `ok`: {s.get('freshness_ok')}\n"
+              f"- settlement step: {s.get('settlement_outcome')}\n"
               f"- build step: {s.get('build_outcome')}\n"
               f"- captures changed: {changed}\n"
               f"- problems: {failed}\n"
