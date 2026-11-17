@@ -5,6 +5,35 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/a374ec9f-nba1` (opened 2026-11-17 — full rolling cycle on the newest official state: 11/16 finals + gamebooks + settlement, 11/16–11/17 injury edition chain, measured-HCA wiring into the legacy engine path, horizon roll to 11/18–11/20, requirements/flag register refresh, gates, delivery)
+
+Branch `arena/a374ec9f-nba1`, based on `main` `22d56af` (PR #160 merge). The platform pins this
+session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single
+pre-named branch (deviation logged, as every session before it logged it). Full claim, task table
+A01–A10 and file scopes are in **§62** at the tail of this board.
+
+**Board read before claiming (2026-11-17, ground rules 1–6):** §0 ground rules, §0b session
+registry, tail delivery records §59–§61, `gh pr list`, `gh run list`, `git log`, the requirements
+register and the flag register. Measured at claim time, not inferred:
+
+| Observation | Measurement |
+| --- | --- |
+| `main` tip | `22d56af` (PR #160 board-only merge); this branch's base is identical; working tree clean. |
+| Open PRs | two, both **idle > 60 min** (ground rule 5): #152 (`arena/cdc6c39d-nba1`, opened 2026-11-16 18:34Z, last update 18:34Z) and #155 (`arena/3ff8ff0f-nba1`, opened 18:47Z, last update 18:49Z). §61.3 flagged both as needing a rebase onto `01f91c2` before merge so they do not re-publish the polluted-corpus / neutral-fold numbers. This session takes both over (handoff logged in §62.0) and re-does the affected work on its own branch instead of merging them blind. |
+| Pages | `status: built` (legacy), live at https://wingbangboozle1-lang.github.io/NBA1/ |
+| Requirements register | 23 done / 10 partial of 33 at claim time. The 10 partials and the work this claim takes: R04 (diff chain stops at 11/15 06:15 PM), R09 (legacy `engine/**` still `flat_hca=2.0`), R12 (replacement shares blocked at n=1), R21 (no 11/16 gamebook coverage), R26 (depends on R12/R21), plus R02/R19 settlement of the now-finished 11/16 slate. |
+| **New official state found while reading, not inherited** | The **2026-11-16 slate is complete and final** — 8 games, all `Final` on https://www.nba.com/games (read first-hand this session: ORL 115–105 BOS, MEM 136–120 WAS, CHI 115–126 CLE, HOU 110–128 MIA, PHI 135–123 BKN, GSW 94–115 NOP, POR 98–106 MIN, PHX 117–105 DEN). The ledger's pre-tip publication for the 11/16 window (entry 5) is therefore settleable tonight for the first time, and the 11/16 official gamebooks exist, which is what R21/R12/R26 have been waiting on. |
+
+**Why this claim is not a duplicate of §59/§60/§61.** Those three claims covered the 11/17–11/19
+horizon inputs (schedule, standings, three team-stat pages, 11/16 01:15 PM injury edition), the
+measured-HCA derivation and the measured-rho parlay pricing. This claim works the *downstream*
+half that is now unblocked by the clock: the finished games themselves (finals feed, per-player
+game logs, minutes redistribution, injury impact, settlement), the *next* injury editions and the
+consecutive-diff chain behind them, the legacy-engine HCA wiring that §59 asked for and §61 could
+not touch, and the horizon roll to the 11/18–11/20 window.
+
+---
+
 ## ✅ CLAIM CLOSED — session `arena/23ec1e32-nba1` (opened 2026-11-16 18:2x UTC, **delivered 2026-11-16 19:35Z via [PR #159](https://github.com/wingbangboozle1-lang/NBA1/pull/159)** — measured-HCA re-derivation (R09), measured-rho parlay pricing (R14/F90), disagreement headline + rotation column on Lines & Picks (R13/R15/F83), projection/bet split on the roll page (R07), register refresh (R01/R04), gates green, Pages live; full record in **§61**)
 
 Branch `arena/23ec1e32-nba1`, based on `main` `add1e74` (tip at claim time = merge of PR #145,
@@ -472,6 +501,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/23ec1e32-nba1` | `arena/23ec1e32-nba1` | 2026-11-16 18:2x UTC | **Delivered (§61): PR [#159](https://github.com/wingbangboozle1-lang/NBA1/pull/159) merged `01f91c2` 19:35:37Z, Pages built + live fetch-back verified.** Measured-HCA re-derivation through `scripts/build_horizon_v2.py` (R09, incl. the 25-row unplayed-game corpus defect), measured-rho parlay pricing in `scripts/generate_picks.py` (R14/F90), disagreement headline + rotation-availability column on the Lines & Picks surface (R13/R15/F83), roll-page projection/bet split unioned with §59 B04 (R07), register refresh (23 done / 10 partial; flags 141, new F136/F137), 9 gates green, union merge of six parallel sessions logged in §61.0. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 | `arena/c348e6c7-nba1` | `arena/c348e6c7-nba1` | 2026-11-16 02:10 UTC | Integration seat (§51, claimed as §47 — renumbered at merge): stale-PR #107/#114/#117 takeover, Pages deploy diagnosis (probe-run starvation), fresh 11/16 official live reads via `fetch_page`, 11/15 settlement and horizon roll to 11/16–11/19 planned. Idle >10 h at 14:24Z; PR #130 taken over by `arena/ed8496e9-nba1` (§50 E02). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/bfad39b2-nba1` | `arena/bfad39b2-nba1` | 2026-11-16 18:2x UTC | **First-hand official re-verification of the 11/17–11/19 rolling horizon** (schedule, standings, three team-stat pages, newest injury edition — disjoint from PR #146's 11/16 focus), **stale home-court-pin refresh** (0.5285 → re-measured), **projection/bet surface wiring** (index links + roll-page separation), **requirements-register refresh**, gates, PR → `main`, Pages confirmation (§56). Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
+| `arena/a374ec9f-nba1` | `arena/a374ec9f-nba1` | 2026-11-17 | **Full rolling cycle on the newest official state**: 11/16 finals feed + official gamebooks + per-player logs + minutes redistribution, 11/16 slate settlement from the sealed ledger, 11/16–11/17 injury edition chain and consecutive diffs, measured-HCA wiring into the legacy engine path (R09), horizon roll to 11/18–11/20, register refresh, gates, PR → `main` → Pages. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
 
