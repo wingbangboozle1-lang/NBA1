@@ -5,6 +5,12 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
+## 🔑 ACTIVE CLAIM — session `arena/b454a53d-nba1` (opened 2026-11-17 15:4x UTC — 2026-11-16 official settlement: first-hand official finals for all eight 11/16 games, results feed rows 11/16 re-cut to FINAL, settlement + SGP grading written under the hash chain, site rebuild, gates, delivery)
+
+Branch `arena/b454a53d-nba1`, based on `main` `22d56af` (PR #160). Board read before claiming: §0 ground rules, §0b registry, §61 delivery record, `gh pr list` (two OPEN, non-owned PRs: #152 `arena/cdc6c39d-nba1`, #155 `arena/3ff8ff0f-nba1` — both left untouched), `gh api …/pages` (`built`, legacy), `data/ledger/ledger.json` (chain OK, entry 5 = 11/16 pre-tip archive at 2026-11-16T00:16Z). Measured at claim time: the 11/16 games had finished (nba.com date page shows Final for all 8) while `data/official/results_feed_2026_27.json` still carried them as `game_status: 1`; no settlement existed for 11/16. File scope: `data/official/results_2026-11-16.json` (new), `data/official/results_feed_2026_27.json` (8 rows), `data/settlement/settlement_2026-11-16.json` + `sgp_grades_2026-11-16.json` (new), `data/ledger/ledger.json` (append-only), `verify/2026-11-17-b454a53d/**`, generated pages `site/pages/results.html`, `site/pages/settlement.html`, `site/pages/player-logs.html` and the index/dashboard shell via their builders, `data/content/requirements.json` (evidence notes only), `data/content/flagged.json` (appended flags only), this board. Explicitly **not** in scope (see §62.4): HCA re-derivation, horizon roll to 11/17–11/19, injury-edition capture, team-stat re-cut, legacy `engine/**`.
+
+---
+
 ## ✅ CLAIM CLOSED — session `arena/23ec1e32-nba1` (opened 2026-11-16 18:2x UTC, **delivered 2026-11-16 19:35Z via [PR #159](https://github.com/wingbangboozle1-lang/NBA1/pull/159)** — measured-HCA re-derivation (R09), measured-rho parlay pricing (R14/F90), disagreement headline + rotation column on Lines & Picks (R13/R15/F83), projection/bet split on the roll page (R07), register refresh (R01/R04), gates green, Pages live; full record in **§61**)
 
 Branch `arena/23ec1e32-nba1`, based on `main` `add1e74` (tip at claim time = merge of PR #145,
