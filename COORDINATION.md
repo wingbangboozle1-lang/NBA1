@@ -6902,3 +6902,47 @@ Outputs archived in `verify/2026-11-16-23ec1e32/` (README.md + nine `.out` files
 | Open overlapping PRs | [#152](https://github.com/wingbangboozle1-lang/NBA1/pull/152) (`arena/cdc6c39d-nba1` — R13/R15 on the same picks page; this delivery already implements both) and [#155](https://github.com/wingbangboozle1-lang/NBA1/pull/155) (`arena/3ff8ff0f-nba1` — measured HCA pin + measured rho; this delivery already implements both with the corpus fix). Both left OPEN for their live owners (ground rule 5: <60 min idle, fresh claims) — **both need a rebase onto `01f91c2` and a re-read of §61.0 before merge**, or they will re-publish the polluted-corpus / neutral-fold numbers. Logged, not touched. |
 | Not done / boundaries | 11/16 games had not tipped at delivery (first tip 23:00Z), so no settlement work this cycle; R21 game-log coverage for 11/16+ waits on tonight's gamebooks; R16 stays blocked (no official closing-line source exists — not fabricated); R11 travel still feeds Wikipedia-coordinate adjustments into legacy margins (unchanged, flagged); Pages `build_type` flip stays an owner-setting limitation (prior flags); legacy engine path `flat_hca=2.0` untouched (§4 request by §59). |
 | Follow-up PR carrying this record | [#160](https://github.com/wingbangboozle1-lang/NBA1/pull/160) (board-only; merged right after this line landed) |
+
+---
+
+## 🔑 ACTIVE CLAIM — session `arena/09ed2727-nba1` (opened 2026-11-17 15:4x UTC — midnight-roll integration seat: settle 2026-11-16 from official finals, roll the horizon to 11/17–11/20 with a first-hand official re-read of schedule/standings/three team-stat pages/newest injury edition, retire the three stale requirements gaps this unblocks (R21, R01, R32), close the two stale PRs as superseded, gates, delivery)
+
+Branch `arena/09ed2727-nba1`, based on `main` `22d56af` (tip at claim time = merge of PR #160,
+the board-only follow-up to the §61 delivery). The platform pins this session to that branch;
+the `session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch
+(deviation logged, as every session before it logged it).
+
+**Board read before claiming (2026-11-17 15:3x–15:4x UTC, ground rules 1–6).** Measured, not
+inferred:
+
+| Observation | Measurement |
+| --- | --- |
+| `main` tip | `22d56af` — the merge of PR #160 (board-only §61 delivery record). Working tree clean. |
+| Open PRs | **#152** (`arena/cdc6c39d-nba1`) and **#155** (`arena/3ff8ff0f-nba1`). Last branch commits 2026-11-16T18:33:45Z and 18:49:39Z → **~21 h idle, far past ground rule 5's 60-minute threshold.** §61.3 states both contents already exist on `main` (R13/R15, measured HCA pin, measured rho). Triage is in §62.1. |
+| Pages | `gh api /repos/…/pages` → `status: built`, `build_type: legacy`, source `main /`, https enforced. |
+| Workflows | Latest `Refresh official data` (run 44078416610) → **success** ~3 h ago; `Publish static site` on `main` → success; three probe runs `cancelled` (superseded by its own concurrency group, a known pattern since §47). |
+| Settlement | `data/settlement/` holds **11/14 and 11/15 only**. The 11/16 slate has been final since ~2026-11-17T05:00Z and is **still unsettled** — this is the primary measured gap. |
+| Horizon | `data/derived/horizon_lines.json` window is **2026-11-16 … 2026-11-19** (generated 2026-11-16T14:57Z). Today is 11/17, so the published window starts on a day whose games have finished. The rolling rule ("up to 3 days ahead") requires **11/17 … 11/20**. |
+| Latest archived official results | `data/official/results_2026-11-15.json` — **there is no `results_2026-11-16.json`**, so `settle_slate.py` cannot even be attempted for 11/16. |
+
+**No session holds a live claim.** Every top-of-board ACTIVE CLAIM is a historical record whose
+work is merged; the only two live-looking artefacts are the two stale PRs above, both of whose
+content is on `main`.
+
+### 62.1 Task table and file scopes (this session's, and only this session's)
+
+| ID | Task | Status | File scope |
+| --- | --- | --- | --- |
+| Y01 | Claim recorded and pushed before any other edit; stale-PR triage (#152/#155) with a handoff note | **in progress** | `COORDINATION.md` §62 |
+| Y02 | **Live official per-game results feed for 2026-11-16** — read every 11/16 game first-hand from nba.com, write `data/official/results_2026-11-16.json` in the exact schema `settle_slate.py` verifies (status FINAL, per-side quarters summing to the printed final, source_url), and extend the season feed so the file is a feed, not a one-off | `data/official/results_*.json`, `data/official/results_feed_2026_27.json`, `scripts/` (new capture script only) |
+| Y03 | **Settle 2026-11-16** through `scripts/settle_slate.py` (pre-tip archive + ledger append only; nothing settled unless every game verifies final) and confirm the ledger chain | `data/settlement/settlement_2026-11-16.json`, `data/ledger/ledger.json` |
+| Y04 | **Roll the horizon to 11/17–11/20** after a first-hand official re-read of the schedule, standings, the three team-stat pages and the newest injury edition; rebuild lines/picks through the existing builders | `data/raw/official_schedule_capture_*.json`, `data/official/standings_*.json`, `data/official/teams_*.json`, `data/official/injury_*.json`, `data/derived/horizon_*`, `data/archive/horizon_*` |
+| Y05 | **Requirements register refresh on evidence** — the three gaps this cycle can actually close (R21 game-log coverage for the 11/16 games, R01/R32 re-verified against first-hand reads), each only if the evidence holds; every other row's gap text left honest | `data/content/requirements.json` |
+| Y06 | **Line-by-line verification + gates** — full battery, evidence archived under `verify/2026-11-17-09ed2727/`, every changed row carrying an official link or an explicit unverified mark | `verify/2026-11-17-09ed2727/**` |
+| Y07 | **Delivery** — PR to `main`, merge without waiting, confirm Pages by fetch-back, record sources / verification / irregularities / PR link / merge result here | `COORDINATION.md` §62 |
+
+**Scope notes.** This claim does not re-open the settled 11/14 and 11/15 settlements, does not
+edit the legacy `engine/**` path (the §59 cross-scope request for `flat_hca` stays open), and
+does not attempt the Pages `build_type` flip (owner setting, HTTP 403 for every session token
+measured so far). The two stale PRs are triaged with a handoff note, not rebased by this session
+unless their content is measured to be missing from `main`.
