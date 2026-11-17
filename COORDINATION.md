@@ -5,7 +5,24 @@ Base commit for both builds: `f73edd2166257df22c91dfb198d27a04cd022c15` (`main`)
 
 ---
 
-## 🔑 ACTIVE CLAIM — session `arena/b454a53d-nba1` (opened 2026-11-17 15:4x UTC — 2026-11-16 official settlement: first-hand official finals for all eight 11/16 games, results feed rows 11/16 re-cut to FINAL, settlement + SGP grading written under the hash chain, site rebuild, gates, delivery)
+## 🔑 ACTIVE CLAIM — session `arena/c5487cbb-nba1` (opened 2026-11-17 15:4x UTC — day-roll cycle: settle the now-final 2026-11-16 slate from first-hand official finals, roll the origination horizon to 11/17–11/19 with pre-tip ledger commitments, archive the 2026-11-17 injury editions with revision + retrieval stamps and consecutive diffs, refresh the requirement register on measured evidence, gate battery, PR → `main` → merge → Pages; full claim and delivery record in **§62** at the tail of this board)
+
+Branch `arena/c5487cbb-nba1`, based on `main` `22d56af` (tip at claim time = merge of PR #160, 2026-11-17 04:43Z, i.e. 11:43Z ET on 11/16). The platform pins this session to that branch; the `session-<id>/<task>` naming in the brief is satisfied by this single pre-named branch (deviation logged, as every session before it logged it). File scope, task table Y01–Y09 and the full evidence log are in **§62**.
+
+**Board read before claiming (2026-11-17 15:40–15:45 UTC, ground rules 1–6):** §0 ground rules, §0b registry, every top-of-board ὑ1 ACTIVE CLAIM banner, the tail delivery records §59–§61, `gh pr list --state all`, `gh run list`, `gh api /repos/…/pages`. Measured, not inferred:
+
+| Observation | Measurement at claim time |
+| --- | --- |
+| `main` tip / branch base | `22d56af` (merge of PR #160, board-only) — identical to this branch's base; 0 commits behind. |
+| Open PRs | **two**, both idle ~20 h: [#152](https://github.com/wingbangboozle1-lang/NBA1/pull/152) (`arena/cdc6c39d-nba1`, R13/R15) and [#155](https://github.com/wingbangboozle1-lang/NBA1/pull/155) (`arena/3ff8ff0f-nba1`, measured HCA + measured rho). §61.3 already records that this delivery implements both subjects; §61.3 flags that both need a rebase before merge. Past ground rule 5's 60-minute threshold, so **not** live owners; this session does not push to their branches and does not duplicate their scope — both are left open and re-triaged in §62. |
+| Pages | `status: built`, `build_type: legacy`, https://wingbangboozle1-lang.github.io/NBA1/ |
+| Scheduled refresh | last run **success** 2026-11-17 09:1xZ (`Refresh official data`, 6m17s). Its `data/raw/_last_refresh.json` records `build_outcome: skipped` — the fetch step reported **5 failed source/parse checks** (S1_season, S2_train, S8_standings, S9_team_traditional, S10_team_opponent all parsed 0 rows) and `engine/refresh_gate.py --max-age-hours 10` therefore BLOCKs the rebuild. Diagnosed in §62: the scheduled job is alive and failing **closed**, exactly as designed; nothing stale was rebuilt. |
+| **The reason this cycle exists** | The full 2026-11-16 slate (8 games) reached official **Final** overnight; `data/settlement/` still holds only 11/14 + 11/15, and the archived horizon still starts at 11/16. §61 promised “11/16 settles at its game-day end”; this cycle executes it from a first-hand read of https://www.nba.com/games?date=2026-11-16 . |
+| Injury currency | Official index read first-hand at 15:42Z: the 2026-11-17 series is published and continuous from 12:00 AM through **10:30 AM ET** (43 editions listed for 11/17). No 11/17 edition is archived in this repository yet; the newest archived edition is 11/16 01:30 PM. |
+
+---
+
+## ✅ CLAIM CLOSED — session `arena/b454a53d-nba1` (opened 2026-11-17 15:4x UTC, **merged 2026-11-17 via [PR #163](https://github.com/wingbangboozle1-lang/NBA1/pull/163)** — 2026-11-16 official settlement: first-hand official finals for all eight 11/16 games, results feed rows 11/16 re-cut to FINAL, settlement + SGP grading written under the hash chain, site rebuild, gates, delivery)
 
 Branch `arena/b454a53d-nba1`, based on `main` `22d56af` (PR #160). Board read before claiming: §0 ground rules, §0b registry, §61 delivery record, `gh pr list` (two OPEN, non-owned PRs: #152 `arena/cdc6c39d-nba1`, #155 `arena/3ff8ff0f-nba1` — both left untouched), `gh api …/pages` (`built`, legacy), `data/ledger/ledger.json` (chain OK, entry 5 = 11/16 pre-tip archive at 2026-11-16T00:16Z). Measured at claim time: the 11/16 games had finished (nba.com date page shows Final for all 8) while `data/official/results_feed_2026_27.json` still carried them as `game_status: 1`; no settlement existed for 11/16. File scope: `data/official/results_2026-11-16.json` (new), `data/official/results_feed_2026_27.json` (8 rows), `data/settlement/settlement_2026-11-16.json` + `sgp_grades_2026-11-16.json` (new), `data/ledger/ledger.json` (append-only), `verify/2026-11-17-b454a53d/**`, generated pages `site/pages/results.html`, `site/pages/settlement.html`, `site/pages/player-logs.html` and the index/dashboard shell via their builders, `data/content/requirements.json` (evidence notes only), `data/content/flagged.json` (appended flags only), this board. Explicitly **not** in scope (see §62.4): HCA re-derivation, horizon roll to 11/17–11/19, injury-edition capture, team-stat re-cut, legacy `engine/**`.
 
@@ -21,6 +38,31 @@ Branch `arena/b454a53d-nba1`, based on `main` `22d56af` (PR #160). Board read be
 - **PR.** To be recorded below after open and merge.
 
 ---
+
+> **⚠️ PARALLEL-CLAIM COLLISION — 2026-11-16 settlement, logged 2026-11-17 16:2x UTC.**
+> `arena/b454a53d-nba1` and `arena/c5487cbb-nba1` both opened the same task (settle the
+> now-final 11/16 slate) at ~15:4x UTC, before either banner was pushed. Neither session
+> saw the other's claim because both read a board whose tip was `22d56af`.
+>
+> Resolved without discarding either session's work, per ground rule 5:
+> * `b454a53d` merged first (PR #163). **Its settlement, SGP grading record, and ledger
+>   entries 9–11 are the canonical ones and are kept byte-for-byte.**
+> * `c5487cbb` independently wrote a settlement with the same eight finals, the same
+>   singles/parlay grades, and the same SGP outcomes (both tickets LOSS −1.10; Banchero
+>   and Jerome VOID). Its file is dropped in favour of the merged one; the agreement is
+>   recorded as an independent cross-check, not as a second settlement.
+> * `c5487cbb`'s SGP addendum (`data/settlement/sgp_settlement_2026-11-16.json` and its
+>   ledger entry) is dropped for the same reason — it would have double-settled the same
+>   two tickets. `scripts/settle_sgp_from_logs.py` is kept: it is the reusable grader, and
+>   it agrees leg-for-leg with `verify/2026-11-17-b454a53d/grade_sgp_2026_11_16.py`.
+> * What remains **unique** to `c5487cbb` and does not overlap either claim: the 11/16
+>   per-player game logs (R21), the eight archived gamebooks, the 11/17 10:30 AM injury
+>   edition with its game-day-aware diff, and the three team-stat tables re-read on 11/17.
+>
+> Ground-rule 5 says claims older than 60 min with no commits may be taken over. Neither
+> claim was 60 min old; the collision was a same-minute race, not a takeover. Both are
+> closed now; the board records it so the next session can see that the duplicate was
+> detected and reconciled rather than silently overwritten.
 
 ## ✅ CLAIM CLOSED — session `arena/23ec1e32-nba1` (opened 2026-11-16 18:2x UTC, **delivered 2026-11-16 19:35Z via [PR #159](https://github.com/wingbangboozle1-lang/NBA1/pull/159)** — measured-HCA re-derivation (R09), measured-rho parlay pricing (R14/F90), disagreement headline + rotation column on Lines & Picks (R13/R15/F83), projection/bet split on the roll page (R07), register refresh (R01/R04), gates green, Pages live; full record in **§61**)
 
@@ -489,6 +531,8 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/23ec1e32-nba1` | `arena/23ec1e32-nba1` | 2026-11-16 18:2x UTC | **Delivered (§61): PR [#159](https://github.com/wingbangboozle1-lang/NBA1/pull/159) merged `01f91c2` 19:35:37Z, Pages built + live fetch-back verified.** Measured-HCA re-derivation through `scripts/build_horizon_v2.py` (R09, incl. the 25-row unplayed-game corpus defect), measured-rho parlay pricing in `scripts/generate_picks.py` (R14/F90), disagreement headline + rotation-availability column on the Lines & Picks surface (R13/R15/F83), roll-page projection/bet split unioned with §59 B04 (R07), register refresh (23 done / 10 partial; flags 141, new F136/F137), 9 gates green, union merge of six parallel sessions logged in §61.0. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 | `arena/c348e6c7-nba1` | `arena/c348e6c7-nba1` | 2026-11-16 02:10 UTC | Integration seat (§51, claimed as §47 — renumbered at merge): stale-PR #107/#114/#117 takeover, Pages deploy diagnosis (probe-run starvation), fresh 11/16 official live reads via `fetch_page`, 11/15 settlement and horizon roll to 11/16–11/19 planned. Idle >10 h at 14:24Z; PR #130 taken over by `arena/ed8496e9-nba1` (§50 E02). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/bfad39b2-nba1` | `arena/bfad39b2-nba1` | 2026-11-16 18:2x UTC | **First-hand official re-verification of the 11/17–11/19 rolling horizon** (schedule, standings, three team-stat pages, newest injury edition — disjoint from PR #146's 11/16 focus), **stale home-court-pin refresh** (0.5285 → re-measured), **projection/bet surface wiring** (index links + roll-page separation), **requirements-register refresh**, gates, PR → `main`, Pages confirmation (§56). Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
+
+| `arena/c5487cbb-nba1` | `arena/c5487cbb-nba1` | 2026-11-17 15:4x UTC | **Day-roll cycle (§62):** settle the 2026-11-16 slate (8 games, first-hand official finals + quarter sums asserted), roll the origination horizon to 11/17–11/19 and freeze each strategy's pre-registration before tip, archive the 2026-11-17 injury editions with revision *and* retrieval stamps plus consecutive diffs, refresh the requirement register on measured evidence, gate battery, PR → `main` → merge → Pages. Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 
 ## 0c. Task board — integration follow-up (`arena-0de855e5`)
 
