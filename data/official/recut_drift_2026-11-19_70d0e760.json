@@ -1,0 +1,462 @@
+{
+ "title": "Model-input drift record: 2026-11-19T05:44Z cut vs 13:05Z re-read",
+ "generated_by": "scripts/recut_70d0e760.py",
+ "read_utc": "2026-11-19T12:42:33Z",
+ "old_cut": "data/derived/team_stats_recut.json @ 2026-11-19T05:44Z (scripts/recut_2026_11_19.py)",
+ "new_cut": "data/derived/team_stats_recut.json (this run)",
+ "drifted_teams": [],
+ "drifted_count": 0,
+ "adopted": "The drift F-89F-04 / S-89F-02 / Q37 recorded (LAL/UTA 15 -> 16 GP on the official pages) is ADOPTED by this re-cut. The frozen 11/19-11/22 horizon is deliberately NOT re-priced: its pre-registration is ledger-sealed (section 66); the refreshed inputs price the next window.",
+ "cross_check": [
+  {
+   "team": "Los Angeles Lakers",
+   "abbr": "LAL",
+   "advanced": [
+    16,
+    13,
+    3
+   ],
+   "standings": [
+    16,
+    13,
+    3
+   ],
+   "agree": true
+  },
+  {
+   "team": "Philadelphia 76ers",
+   "abbr": "PHI",
+   "advanced": [
+    16,
+    13,
+    3
+   ],
+   "standings": [
+    16,
+    13,
+    3
+   ],
+   "agree": true
+  },
+  {
+   "team": "Houston Rockets",
+   "abbr": "HOU",
+   "advanced": [
+    16,
+    12,
+    4
+   ],
+   "standings": [
+    16,
+    12,
+    4
+   ],
+   "agree": true
+  },
+  {
+   "team": "San Antonio Spurs",
+   "abbr": "SAS",
+   "advanced": [
+    15,
+    12,
+    3
+   ],
+   "standings": [
+    15,
+    12,
+    3
+   ],
+   "agree": true
+  },
+  {
+   "team": "Boston Celtics",
+   "abbr": "BOS",
+   "advanced": [
+    15,
+    11,
+    4
+   ],
+   "standings": [
+    15,
+    11,
+    4
+   ],
+   "agree": true
+  },
+  {
+   "team": "Memphis Grizzlies",
+   "abbr": "MEM",
+   "advanced": [
+    15,
+    11,
+    4
+   ],
+   "standings": [
+    15,
+    11,
+    4
+   ],
+   "agree": true
+  },
+  {
+   "team": "Minnesota Timberwolves",
+   "abbr": "MIN",
+   "advanced": [
+    15,
+    11,
+    4
+   ],
+   "standings": [
+    15,
+    11,
+    4
+   ],
+   "agree": true
+  },
+  {
+   "team": "Detroit Pistons",
+   "abbr": "DET",
+   "advanced": [
+    14,
+    10,
+    4
+   ],
+   "standings": [
+    14,
+    10,
+    4
+   ],
+   "agree": true
+  },
+  {
+   "team": "Atlanta Hawks",
+   "abbr": "ATL",
+   "advanced": [
+    15,
+    9,
+    6
+   ],
+   "standings": [
+    15,
+    9,
+    6
+   ],
+   "agree": true
+  },
+  {
+   "team": "Miami Heat",
+   "abbr": "MIA",
+   "advanced": [
+    15,
+    9,
+    6
+   ],
+   "standings": [
+    15,
+    9,
+    6
+   ],
+   "agree": true
+  },
+  {
+   "team": "Oklahoma City Thunder",
+   "abbr": "OKC",
+   "advanced": [
+    15,
+    9,
+    6
+   ],
+   "standings": [
+    15,
+    9,
+    6
+   ],
+   "agree": true
+  },
+  {
+   "team": "Portland Trail Blazers",
+   "abbr": "POR",
+   "advanced": [
+    14,
+    9,
+    5
+   ],
+   "standings": [
+    14,
+    9,
+    5
+   ],
+   "agree": true
+  },
+  {
+   "team": "Cleveland Cavaliers",
+   "abbr": "CLE",
+   "advanced": [
+    16,
+    8,
+    8
+   ],
+   "standings": [
+    16,
+    8,
+    8
+   ],
+   "agree": true
+  },
+  {
+   "team": "Dallas Mavericks",
+   "abbr": "DAL",
+   "advanced": [
+    15,
+    8,
+    7
+   ],
+   "standings": [
+    15,
+    8,
+    7
+   ],
+   "agree": true
+  },
+  {
+   "team": "Denver Nuggets",
+   "abbr": "DEN",
+   "advanced": [
+    13,
+    8,
+    5
+   ],
+   "standings": [
+    13,
+    8,
+    5
+   ],
+   "agree": true
+  },
+  {
+   "team": "Golden State Warriors",
+   "abbr": "GSW",
+   "advanced": [
+    15,
+    8,
+    7
+   ],
+   "standings": [
+    15,
+    8,
+    7
+   ],
+   "agree": true
+  },
+  {
+   "team": "New York Knicks",
+   "abbr": "NYK",
+   "advanced": [
+    14,
+    8,
+    6
+   ],
+   "standings": [
+    14,
+    8,
+    6
+   ],
+   "agree": true
+  },
+  {
+   "team": "Phoenix Suns",
+   "abbr": "PHX",
+   "advanced": [
+    14,
+    7,
+    7
+   ],
+   "standings": [
+    14,
+    7,
+    7
+   ],
+   "agree": true
+  },
+  {
+   "team": "Orlando Magic",
+   "abbr": "ORL",
+   "advanced": [
+    14,
+    6,
+    8
+   ],
+   "standings": [
+    14,
+    6,
+    8
+   ],
+   "agree": true
+  },
+  {
+   "team": "Indiana Pacers",
+   "abbr": "IND",
+   "advanced": [
+    15,
+    5,
+    10
+   ],
+   "standings": [
+    15,
+    5,
+    10
+   ],
+   "agree": true
+  },
+  {
+   "team": "New Orleans Pelicans",
+   "abbr": "NOP",
+   "advanced": [
+    16,
+    5,
+    11
+   ],
+   "standings": [
+    16,
+    5,
+    11
+   ],
+   "agree": true
+  },
+  {
+   "team": "Toronto Raptors",
+   "abbr": "TOR",
+   "advanced": [
+    15,
+    5,
+    10
+   ],
+   "standings": [
+    15,
+    5,
+    10
+   ],
+   "agree": true
+  },
+  {
+   "team": "Washington Wizards",
+   "abbr": "WAS",
+   "advanced": [
+    16,
+    5,
+    11
+   ],
+   "standings": [
+    16,
+    5,
+    11
+   ],
+   "agree": true
+  },
+  {
+   "team": "Charlotte Hornets",
+   "abbr": "CHA",
+   "advanced": [
+    14,
+    4,
+    10
+   ],
+   "standings": [
+    14,
+    4,
+    10
+   ],
+   "agree": true
+  },
+  {
+   "team": "Chicago Bulls",
+   "abbr": "CHI",
+   "advanced": [
+    14,
+    4,
+    10
+   ],
+   "standings": [
+    14,
+    4,
+    10
+   ],
+   "agree": true
+  },
+  {
+   "team": "LA Clippers",
+   "abbr": "LAC",
+   "advanced": [
+    13,
+    4,
+    9
+   ],
+   "standings": [
+    13,
+    4,
+    9
+   ],
+   "agree": true
+  },
+  {
+   "team": "Brooklyn Nets",
+   "abbr": "BKN",
+   "advanced": [
+    14,
+    3,
+    11
+   ],
+   "standings": [
+    14,
+    3,
+    11
+   ],
+   "agree": true
+  },
+  {
+   "team": "Utah Jazz",
+   "abbr": "UTA",
+   "advanced": [
+    16,
+    3,
+    13
+   ],
+   "standings": [
+    16,
+    3,
+    13
+   ],
+   "agree": true
+  },
+  {
+   "team": "Milwaukee Bucks",
+   "abbr": "MIL",
+   "advanced": [
+    15,
+    1,
+    14
+   ],
+   "standings": [
+    15,
+    1,
+    14
+   ],
+   "agree": true
+  },
+  {
+   "team": "Sacramento Kings",
+   "abbr": "SAC",
+   "advanced": [
+    14,
+    1,
+    13
+   ],
+   "standings": [
+    14,
+    1,
+    13
+   ],
+   "agree": true
+  }
+ ]
+}
