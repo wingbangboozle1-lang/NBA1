@@ -216,5 +216,87 @@ class ResultsFeedTests(unittest.TestCase):
                          ["cross_checked"])
 
 
+class DeclaredUnreadableTests(unittest.TestCase):
+    """COORDINATION.md section 69: a declared source must not poison the exit code.
+
+    The promote step used to append an ordinary blocking entry for each of the
+    three client-rendered pages on EVERY run, so it always exited 1 and the
+    rebuild step in refresh-data.yml was unreachable. These tests pin the
+    narrow replacement: a declared source is recorded, is never promoted, and
+    does not make the run fail - while an UNDECLARED parse failure still does.
+    """
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.raw = os.path.join(self.tmp.name, "data", "raw")
+        os.makedirs(self.raw)
+        self.real_raw = promote_official.RAW
+        self.real_root = promote_official.ROOT
+        promote_official.RAW = self.raw
+        promote_official.ROOT = self.tmp.name
+
+    def tearDown(self):
+        promote_official.RAW = self.real_raw
+        promote_official.ROOT = self.real_root
+        self.tmp.cleanup()
+
+    def _declare(self, keys):
+        with open(os.path.join(self.raw, "unreadable_sources.json"), "w") as fh:
+            json.dump({"declarations": [
+                {"source_key": k, "expires_at_utc": "2026-12-19T00:00:00Z",
+                 "review_flag": "F1"} for k in keys]}, fh)
+
+    def _empty_capture(self, key, name):
+        # Exactly what the fetcher leaves behind for a client-rendered page:
+        # a page-level record with no parsed rows.
+        with open(os.path.join(self.raw, name), "w") as fh:
+            json.dump({"source_url": "https://www.nba.com/x", "page_sha256": "a" * 64}, fh)
+
+    def _promoter(self):
+        promoter = promote_official.Promoter.__new__(promote_official.Promoter)
+        promoter.promoted, promoter.blocked = [], []
+        promoter.unreadable = []
+        promoter.warnings, promoter.rows_written = [], {}
+        promoter.checks = {}
+        promoter.now = "2026-11-15T22:44:31Z"
+        return promoter
+
+    def test_declared_source_is_recorded_not_blocked(self):
+        self._declare(["S8_standings"])
+        self._empty_capture("S8_standings", "_capture_S8_standings.json")
+        promoter = self._promoter()
+        promoter.promote_standings()
+        self.assertEqual(promoter.blocked, [])
+        self.assertEqual(len(promoter.unreadable), 1)
+        entry = promoter.unreadable[0]
+        self.assertEqual(entry["item"], "S8_standings")
+        self.assertEqual(entry["expires_at_utc"], "2026-12-19T00:00:00Z")
+        self.assertIn("Nothing was promoted", entry["detail"])
+        # Critically: no snapshot was written from an unreadable page.
+        self.assertFalse(os.path.exists(os.path.join(self.raw, "standings.json")))
+
+    def test_undeclared_source_still_blocks(self):
+        self._empty_capture("S8_standings", "_capture_S8_standings.json")
+        promoter = self._promoter()
+        promoter.promote_standings()
+        self.assertEqual(promoter.unreadable, [])
+        self.assertEqual(len(promoter.blocked), 1)
+        self.assertEqual(promoter.blocked[0]["item"], "S8_standings")
+
+    def test_a_declaration_does_not_excuse_a_missing_capture_file(self):
+        """A declared page still must have been attempted this run."""
+        self._declare(["S8_standings"])
+        promoter = self._promoter()
+        promoter.promote_standings()
+        self.assertEqual(len(promoter.blocked), 1)
+        self.assertEqual(promoter.unreadable, [])
+
+    def test_exit_code_ignores_declared_items_but_not_real_blocks(self):
+        import inspect
+        source = inspect.getsource(promote_official.Promoter.run)
+        self.assertIn("return 1 if self.blocked else 0", source)
+        self.assertNotIn("self.unreadable", source.split("return 1 if")[1][:40])
+
+
 if __name__ == "__main__":
     unittest.main()
