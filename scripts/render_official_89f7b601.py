@@ -37,8 +37,15 @@ proves whether they do, from bytes, before anything is changed.
 
 WHAT IT WRITES (all under data/raw/session-89f7b601/render/)
 
-    <name>__<sha256>.rendered.html       the rendered DOM, content-addressed
-    <name>__<sha256>.rendered.html.gz    the same bytes, gzipped
+    <name>__<sha256>.rendered.dom        the rendered DOM, content-addressed
+    <name>__<sha256>.rendered.dom.gz     the same bytes, gzipped
+
+The artifact deliberately does NOT end in `.html`: `scripts/render_check.mjs`
+walks every `.html` file in the repository and reports one with no rendered
+table as a broken page. These are captured evidence, not site pages, and on
+2026-11-19 the scanner correctly reported all five denials as "no table
+rendered at all" - five red lines caused by a file extension. The extension is
+now `.dom` and the evidence is still byte-identical and still content-addressed.
     <name>__<sha256>.tables.json         every <table> in the live DOM, as text
                                          cells with the row/col index and the
                                          section heading above it
@@ -118,13 +125,13 @@ def store(name, url, html, tables, extra):
     digest = hashlib.sha256(html.encode("utf-8")).hexdigest()
     stem = "%s__%s" % (name, digest)
     os.makedirs(OUTDIR, exist_ok=True)
-    hpath = os.path.join(OUTDIR, stem + ".rendered.html")
+    hpath = os.path.join(OUTDIR, stem + ".rendered.dom")
     with open(hpath, "w", encoding="utf-8") as fh:
         fh.write(html)
     # Re-hash from disk: the digest a verifier recomputes is the one recorded.
     with open(hpath, "rb") as fh:
         disk = fh.read()
-    with gzip.open(os.path.join(OUTDIR, stem + ".rendered.html.gz"), "wb",
+    with gzip.open(os.path.join(OUTDIR, stem + ".rendered.dom.gz"), "wb",
                    compresslevel=9) as fh:
         fh.write(disk)
     tpath = os.path.join(OUTDIR, stem + ".tables.json")
