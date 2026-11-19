@@ -94,28 +94,42 @@ def log(msg: str) -> None:
     print(f"[{now_utc()}] {msg}", flush=True)
 
 
+def _load_day(d):
+    """Reuse the captured scoreboard day when the bytes are already stored."""
+    path = os.path.join(SESSION_DIR, f"games_{d}.json")
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as fh:
+            return json.load(fh)
+    return None
+
+
 def capture_gamebooks(dates, manifest):
     for d in dates:
         url = f"https://www.nba.com/games?date={d}"
-        rec = base.fetch_recorded(url, "html", f"games_{d}", compress=True)
-        html = (rec.pop("_raw", b"") or b"").decode("utf-8", "replace")
-        day = base.parse_scoreboard(html, d)
-        day["source_url"] = url
-        day["page_sha256"] = rec.get("sha256")
-        day["page_retrieved_at_utc"] = rec.get("retrieved_at_utc")
-        day["http_status"] = rec.get("http_status")
-        if rec.get("error"):
-            manifest["failures"].append({"url": url, "error": rec["error"]})
-        with open(os.path.join(SESSION_DIR, f"games_{d}.json"), "w",
-                  encoding="utf-8") as fh:
-            json.dump(day, fh, indent=1)
-            fh.write("\n")
+        day = _load_day(d)   # re-arm fast path: the day's bytes are already stored
+        if day is not None:
+            log(f"games?date={d}: reused captured day "
+                f"({len(day['games'])} game cards, {day['final_count']} marked Final)")
+        else:
+            rec = base.fetch_recorded(url, "html", f"games_{d}", compress=True)
+            html = (rec.pop("_raw", b"") or b"").decode("utf-8", "replace")
+            day = base.parse_scoreboard(html, d)
+            day["source_url"] = url
+            day["page_sha256"] = rec.get("sha256")
+            day["page_retrieved_at_utc"] = rec.get("retrieved_at_utc")
+            day["http_status"] = rec.get("http_status")
+            if rec.get("error"):
+                manifest["failures"].append({"url": url, "error": rec["error"]})
+            with open(os.path.join(SESSION_DIR, f"games_{d}.json"), "w",
+                      encoding="utf-8") as fh:
+                json.dump(day, fh, indent=1)
+                fh.write("\n")
+            log(f"games?date={d}: {len(day['games'])} game cards, "
+                f"{day['final_count']} marked Final")
         manifest["days"].append({"date": d, "games": len(day["games"]),
                                  "marked_final": day["final_count"],
-                                 "http_status": rec.get("http_status"),
-                                 "page_stored": rec.get("stored")})
-        log(f"games?date={d}: {len(day['games'])} game cards, "
-            f"{day['final_count']} marked Final")
+                                 "http_status": day.get("http_status"),
+                                 "page_stored": day.get("page_stored")})
 
         ymd = d.replace("-", "")
         for g in day["games"]:
@@ -290,7 +304,7 @@ def probe_clock_grid():
                 log("  %s: %s" % (edition, rec["error"]))
                 break
         results.append(rec)
-        time.sleep(1.5)
+        time.sleep(1.0)
     return results
 
 
@@ -334,7 +348,12 @@ def capture_injury_editions(manifest):
 
     all_results = []
     changed, failed = [], []
+    if GRID_WINDOW is not None:
+        log("grid batch window set: skipping the index-driven passes "
+            "(index editions were captured in earlier runs)")
     for p in range(1, MAX_INJURY_PASSES + 1):
+        if GRID_WINDOW is not None:
+            break
         results = fo.capture_injury(now_utc(), changed, failed, editions)
         fresh = [r for r in results if r.get("artifact_path")]
         all_results.extend(results)
