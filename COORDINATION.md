@@ -11261,3 +11261,17 @@ No other session's scope is edited. Cross-scope requests go here, not into their
 
 **Sources.** https://www.nba.com/games?date=2026-11-17 and https://www.nba.com/games?date=2026-11-18 (via the merged results files and eec70f24's page reads); https://official.nba.com/nba-injury-report-2026-27-season/ (edition provenance, §65.9); ledger `data/ledger/ledger.json` entries 12–16 (read, not edited).
 
+---
+
+### 67.1 Delivery confirmation (PR #177 merge + Pages fetch-back, 2026-11-19 ~06:0x–07:1x UTC)
+
+| Item | Record |
+| --- | --- |
+| PR opened | [#177](https://github.com/wingbangboozle1-lang/NBA1/pull/177) from `arena/8938790d-nba1` (content: `engine/fetch_official.py` quarter-line parse + `verify/2026-11-19-8938790d/` + §67) |
+| Reconciliations en route | two `origin/main` merges mid-flight (047bbd1 after PRs #170–#174; 5b55633 after #173/#175 merged during the PR window) — main's tree taken verbatim both times; the only engine delta this PR ships is the unowned `fetch_official.py` quarters parse |
+| Merged | **yes** — `gh pr merge 177 --merge`, merge commit `b00139d` (2026-11-19T05:59Z; GitHub's stale `CONFLICTING` mergeability flag cleared at merge time — the branch contained main's tip exactly) |
+| Pages deploy | `Publish static site to GitHub Pages` run [44468946458](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44468946458) **completed/success** on `main` @ `b00139d`; `pages-build-deployment` success; Pages API `status: built`, https://wingbangboozle1-lang.github.io/NBA1/ |
+| Live fetch-back | landing page re-fetched after deploy: 26 games in horizon (19–22 Nov), "11/17 settled 1-4-0 … (-6.7u paper); 11/18 settled 4-8-0 … (-8.1u paper)", "The results feed now carries 222 of 222 finals", "Ledger 17 entries, chain verified OK", 161 open flags — the site serves the merged, settled, rolled-forward state |
+| Re-grade on the merged tree | `verify/2026-11-19-8938790d/regrade_2026_11_17_18.py`: **54 checks, 0 mismatches, PASS** (re-run after both reconciliations) |
+| Gates on the delivered tree | `verify_all` FAILURES: 0 · `check_site` PASS · `verify_integration` 0 errors · `check_links` PASS · `check_rendered` PASS · `verify_ledger` chain OK · `check_registers` 0 problems · `verify_dashboard` OK · 10 unittest modules + 2 script-style tests green |
+| Handover | the 4 SGP tickets (2 on 11/17, 2 on 11/18) still need official box scores — `arena/bc8c07a3-nba1`'s gamebook capture is the right owner; the 11/19 slate (4 games) settles at its game-day end from the next capture (the quarters now flow mechanically via the `fetch_official.py` periods parse); the promotion-isolation proposal sits at `verify/2026-11-19-8938790d/promote_isolation_proposal.patch` for the next refresh-owner seat |
