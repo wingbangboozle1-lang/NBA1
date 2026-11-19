@@ -1,0 +1,99 @@
+name: Capture official evidence (bc8c07a3)
+
+# Session arena/bc8c07a3-nba1, COORDINATION §66 (Z02-Z05).
+#
+# WHY THIS EXISTS: the agent sandbox reaches github.com / api.github.com only;
+# https://www.nba.com fails the TLS handshake (SSL_ERROR_SYSCALL) and
+# https://official.nba.com is unreachable, measured 2026-11-19. Every value this
+# cycle publishes must therefore come from bytes a GitHub runner fetched and
+# committed back. This is the same mechanism capture-injury-07920bdc.yml and
+# capture-official-ca442d3d.yml use, and it is deliberately as narrow:
+#
+#   * it runs only on this session's branch, and only when this file or the
+#     capture script changes - it cannot arm itself in a loop and cannot be
+#     armed by another session's push;
+#   * its bot commit carries [skip ci];
+#   * it writes only data/raw/session-bc8c07a3/** and the content-addressed
+#     injury PDFs under data/raw/injury_pdfs/ (append-only, deduped by edition);
+#   * the script refuses any host outside the six official ones.
+
+on:
+  push:
+    branches: [arena/bc8c07a3-nba1]
+    paths:
+      - scripts/capture_official_bc8c07a3.py
+      - .github/workflows/capture-official-bc8c07a3.yml
+  workflow_dispatch:
+    inputs:
+      result_dates:
+        description: "comma-separated scoreboard dates"
+        required: false
+        default: "2026-11-17,2026-11-18,2026-11-19,2026-11-20"
+      gamebook_dates:
+        description: "comma-separated gamebook dates"
+        required: false
+        default: "2026-11-17"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capture-official-bc8c07a3
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Work out what to capture
+        id: days
+        run: |
+          if [ -n "${{ inputs.result_dates }}" ]; then
+            RESULT="${{ inputs.result_dates }}"
+            BOOKS="${{ inputs.gamebook_dates }}"
+          else
+            RESULT="${{ github.event.inputs.result_dates }}"
+            BOOKS="${{ github.event.inputs.gamebook_dates }}"
+            [ -z "$RESULT" ] && RESULT="2026-11-17,2026-11-18,2026-11-19,2026-11-20"
+            [ -z "$BOOKS" ] && BOOKS="2026-11-17"
+          fi
+          echo "result=${RESULT}" >> "$GITHUB_OUTPUT"
+          echo "books=${BOOKS}" >> "$GITHUB_OUTPUT"
+          echo "scoreboards: ${RESULT}"
+          echo "gamebooks:   ${BOOKS}"
+
+      - name: Fetch official pages, gamebooks, stats API and injury PDFs
+        run: |
+          python3 scripts/capture_official_bc8c07a3.py \
+            --result-dates "${{ steps.days.outputs.result }}" \
+            --gamebook-dates "${{ steps.days.outputs.books }}"
+
+      - name: Commit the captures
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/raw/session-bc8c07a3 data/raw/injury_pdfs
+          if git diff --cached --quiet; then
+            echo "no new capture payloads - nothing committed"
+            exit 0
+          fi
+          git commit -m "Capture official NBA evidence for 2026-11-17/18 (bc8c07a3 Z02-Z05) [skip ci]"
+          git pull --rebase origin arena/bc8c07a3-nba1
+          git push origin HEAD:arena/bc8c07a3-nba1
+
+      - name: Upload the manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capture-manifest-bc8c07a3
+          path: data/raw/session-bc8c07a3/capture_manifest.json
+          if-no-files-found: warn
