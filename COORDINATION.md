@@ -11224,3 +11224,10 @@ No other session's scope is edited. Cross-scope requests go here, not into their
 | Pages deploy on `main` | `Publish static site to GitHub Pages` run **44467997208 — success**; `pages build and deployment` run 44467996741 — success. `gh api repos/…/pages` → `status: built`, `build_type: legacy`. |
 | Live fetch-back | https://wingbangboozle1-lang.github.io/NBA1/site/pages/settlement.html re-fetched 2026-11-19: serves the settlement page with the 11/14, 11/15 and 11/16 stamps and the ledger chain table. The 11/17 stamp was present in the build before merge (checked in the local build; the live fetch read the first of two chunks). |
 | Flags | This session's own F-EJ-01…04 were on the superseded data branch and are **not** on `main`. The live irregularity (scheduled captures for 11/17–11/18 predate tip-off) is recorded in the collision record above. |
+
+### 66.2 Pull request and Pages result
+
+- **Parallel-session rebase notes:** the board-only update conflicted first with the append-only settlement cross-check added by `arena/eec70f24-nba1` (PR #174), and again with its merge-result addendum (PR #176). Both full records and this PR/deployment record were preserved; only `COORDINATION.md` conflicted.
+- PR [#171](https://github.com/wingbangboozle1-lang/NBA1/pull/171) merged to `main` at 2026-11-19T05:48:16Z as `9a6bfd1aaba883fdf19f45b14beb515877fc5815`.
+- PR validation run [44467440390](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44467440390): **success**. Main validation run [44467666692](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44467666692): **success**. GitHub Pages build/deploy run [44467666033](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44467666033): **success**; GitHub API reports Pages `built` at https://wingbangboozle1-lang.github.io/NBA1/.
+- The Pages API confirms deployment completion, but this sandbox cannot fetch the published page or NBA host directly; no direct HTTP/content re-fetch is claimed. GitHub Actions emitted only the existing Node.js 20 deprecation warning; checks passed.
