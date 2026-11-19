@@ -1,0 +1,77 @@
+name: Capture official evidence (4f19ecf1)
+
+# Session arena/4f19ecf1-nba1, COORDINATION §68 (G02/G03): byte-exact official
+# gamebook PDFs for the finished 2026-11-17/18 slates (R21 + SGP evidence) and
+# the missing 2026-11-17..19 injury-report editions (R04 diff chain).
+#
+# The sandbox this session runs in reaches only github.com / npm / pypi, so
+# nba.com cannot be read from the agent. This workflow puts the fetch on a
+# runner that has the network and commits the content-addressed bytes back to
+# this branch, where the parsers and the checks run locally against them.
+#
+# Deliberately narrow (same shape as capture-official-ca442d3d.yml, which this
+# pattern was copied from and which the board reviewed):
+#   * runs only on this session's branch, and only when this file or the capture
+#     script itself changes - it cannot arm itself in a loop and cannot be armed
+#     by another session's push;
+#   * the bot commit carries [skip ci], which does not trigger workflows;
+#   * it writes only data/raw/session-4f19ecf1/** (this session's capture dir),
+#     the canonical append-only content-addressed data/raw/injury_pdfs/** archive
+#     (claimed by this session in §68 G02) and its probe run record;
+#   * the fetch script refuses any host outside the four official ones.
+
+on:
+  push:
+    branches: [arena/4f19ecf1-nba1]
+    paths:
+      - scripts/capture_official_4f19ecf1.py
+      - .github/workflows/capture-official-4f19ecf1.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capture-official-4f19ecf1
+  cancel-in-progress: false
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch official gamebooks and injury editions
+        run: python3 scripts/capture_official_4f19ecf1.py
+
+      - name: Commit the captures
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/raw/session-4f19ecf1 data/raw/injury_pdfs data/raw/_capture_injury_probe.json
+          if git diff --cached --quiet; then
+            echo "no new capture payloads - nothing committed"
+            exit 0
+          fi
+          git commit -m "Capture official NBA evidence: 11/17-18 gamebooks + 11/17..19 injury editions (4f19ecf1 G02/G03) [skip ci]"
+          # Rebase in case the session pushed while the run was in flight; never
+          # force, so another session's work is never discarded.
+          git pull --rebase origin arena/4f19ecf1-nba1
+          git push origin HEAD:arena/4f19ecf1-nba1
+
+      - name: Upload the manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: capture-manifest-4f19ecf1
+          path: |
+            data/raw/session-4f19ecf1/capture_manifest.json
+            data/raw/_capture_injury_probe.json
+          if-no-files-found: warn
