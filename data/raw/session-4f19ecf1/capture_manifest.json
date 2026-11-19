@@ -1,7 +1,7 @@
 {
  "session": "arena/4f19ecf1-nba1",
  "coordination": "COORDINATION.md \u00a768 (G02/G03)",
- "run_at_utc": "2026-11-19T06:42:45Z",
+ "run_at_utc": "2026-11-19T06:47:51Z",
  "hosts_allowed": [
   "ak-static.cms.nba.com",
   "official.nba.com",
@@ -19,14 +19,14 @@
    "games": 5,
    "marked_final": 5,
    "http_status": 200,
-   "page_stored": "data/raw/session-4f19ecf1/html/games_2026-11-17__859696aae5dc51237e3a3b6237ddccf4e053748f444ba50cef9c2ea7beecb9e7.json.gz"
+   "page_stored": null
   },
   {
    "date": "2026-11-18",
    "games": 12,
    "marked_final": 12,
    "http_status": 200,
-   "page_stored": "data/raw/session-4f19ecf1/html/games_2026-11-18__e97efdb79b7315f0fba36c13f423b8c0018b7b2860f2e068f2ad8f7052a40486.json.gz"
+   "page_stored": null
   }
  ],
  "gamebooks": [
@@ -452,6 +452,10 @@
   },
   {
    "at_utc": "2026-11-19T06:42:45Z",
+   "argv": "--only gamebooks"
+  },
+  {
+   "at_utc": "2026-11-19T06:47:51Z",
    "argv": "--only gamebooks"
   }
  ]
