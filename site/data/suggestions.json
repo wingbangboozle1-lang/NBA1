@@ -1025,7 +1025,7 @@
    ],
    "recommendation": "Take option 1. It is the only option that turns a measured structural impossibility into a green gate without inventing data. The eleven fields the feed cannot carry must be rendered as unavailable, not estimated.",
    "decision_needed": "Approve retiring the standings-page parser in favour of the games feed plus the corroboration check.",
-   "source": "data/official/standings_corroboration_89f7b601.json",
+   "source": "S89F_CORROB",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/standings_corroboration_89f7b601.json"
   },
   {
@@ -1049,7 +1049,7 @@
    ],
    "recommendation": "Take option 1. A check that cannot block is a comment.",
    "decision_needed": "Approve wiring the drift check into origination as a hard gate.",
-   "source": "data/derived/recut_drift_89f7b601.json",
+   "source": "S89F_DRIFT",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/recut_drift_89f7b601.json"
   },
   {
@@ -1073,7 +1073,7 @@
    ],
    "recommendation": "Take option 1. It is a rendering job on data that already exists.",
    "decision_needed": "Approve a reachability table on the source-check page.",
-   "source": "data/raw/_last_refresh.json",
+   "source": "S89F_REFRESH",
    "source_url": "https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json"
   }
  ]

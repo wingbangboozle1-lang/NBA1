@@ -1,16 +1,13 @@
 {
  "gate": "refresh freshness + provenance",
- "run_at_utc": "2026-11-19T07:11:05Z",
- "max_age_hours": 10,
+ "run_at_utc": "2026-11-19T08:14:27Z",
+ "max_age_hours": 10.0,
  "ok": false,
  "blocking_errors": [
   "fetcher reported 2 failed source/parse checks",
   "missing/invalid payload capture for S1_season",
   "missing/invalid structured capture: data/raw/_capture_S1_season.json",
-  "advanced team input cannot be compared with a complete promoted snapshot",
-  "promoted input is not verified against this run's capture: data/raw/schedule_upcoming.json",
-  "promoted input provenance URL is stale: data/raw/injuries.json",
-  "promoted input is not verified against this run's capture: data/raw/injuries.json"
+  "advanced team input cannot be compared with a complete promoted snapshot"
  ],
  "declarations_applied": [
   {
@@ -36,9 +33,9 @@
   }
  ],
  "warnings": [
-  "declared source failed as expected: S8_standings: no standings rows parsed (['html_table: East: parsed 0 teams, expected 15', 'html_table: West: parsed 0 teams, expected 15', 'next_data: no standings-like team records found in __NEXT_DATA__']) (evidence data/raw/_capture_evidence_S8_standings.json)",
-  "declared source failed as expected: S9_team_traditional: no traditional team rows parsed (['html_table: no header row with a Team column found', 'next_data: no team-table structure found in JSON']) (evidence data/raw/_capture_evidence_S9_team_traditional.json)",
-  "declared source failed as expected: S10_team_opponent: no opponent team rows parsed (['html_table: no header row with a Team column found', 'next_data: no team-table structure found in JSON']) (evidence data/raw/_capture_evidence_S10_team_opponent.json)",
+  "declared source failed as expected: S8_standings: no standings rows parsed (html_tr=0 team_links=0 problems_total=3) ['html_table: East: parsed 0 teams, expected 15', 'html_table: West: parsed 0 teams, expected 15', 'next_data: no standings-like team records found in __NEXT_DATA__'] (evidence data/raw/_capture_evidence_S8_standings.json)",
+  "declared source failed as expected: S9_team_traditional: no traditional team rows parsed (html_tr=12 team_links=0 problems_total=6) [\"html_table: row with 7 cells did not resolve to a club (first cell '1')\", \"html_table: row with 7 cells did not resolve to a club (first cell '8')\", \"html_table: row with 7 cells did not resolve to a club (first cell '15')\", 'html_table: 10 rows in total did not resolve to a club', 'html_table: no header row with a Team column found', 'next_data: no team-table structure found in JSON']) (evidence data/raw/_capture_evidence_S9_team_traditional.json)",
+  "declared source failed as expected: S10_team_opponent: no opponent team rows parsed (html_tr=12 team_links=0 problems_total=6) [\"html_table: row with 7 cells did not resolve to a club (first cell '1')\", \"html_table: row with 7 cells did not resolve to a club (first cell '8')\", \"html_table: row with 7 cells did not resolve to a club (first cell '15')\", 'html_table: 10 rows in total did not resolve to a club', 'html_table: no header row with a Team column found', 'next_data: no team-table structure found in JSON']) (evidence data/raw/_capture_evidence_S10_team_opponent.json)",
   "S10_team_opponent: no parsed payload by design (declared unreadable); provenance verified against data/raw/_capture_evidence_S10_team_opponent.json",
   "S8_standings: no parsed payload by design (declared unreadable); provenance verified against data/raw/_capture_evidence_S8_standings.json",
   "S9_team_traditional: no parsed payload by design (declared unreadable); provenance verified against data/raw/_capture_evidence_S9_team_traditional.json"

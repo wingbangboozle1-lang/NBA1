@@ -771,7 +771,7 @@
 <td>F-89F-01 and F-89F-02 together close every path to the standings page from CI: the HTML has no table, the data layer times out, and a browser is refused at the edge. Meanwhile the per-date games feed is reached successfully on every scheduled run and prints each team's record. The pipeline is currently failing on a source it cannot read while ignoring a source it reads every day.</td>
 <td>Take option 1. It is the only option that turns a measured structural impossibility into a green gate without inventing data. The eleven fields the feed cannot carry must be rendered as unavailable, not estimated.</td>
 <td>&mdash;</td>
-<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/official/standings_corroboration_89f7b601.json" target="_blank" rel="noopener">S89F_CORROB</a></td>
 </tr>
 <tr>
 <td>S-89F-02</td>
@@ -780,7 +780,7 @@
 <td>data/derived/team_stats_recut.json is priced from official tables that move several times a day. A re-read found 5 of 80 compared rows stale, including a GP change that a standing flag had already described. Nothing in the pipeline notices: the recut is rebuilt by a session script, not by a gate.</td>
 <td>Take option 1. A check that cannot block is a comment.</td>
 <td>&mdash;</td>
-<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/derived/recut_drift_89f7b601.json" target="_blank" rel="noopener">S89F_DRIFT</a></td>
 </tr>
 <tr>
 <td>S-89F-03</td>
@@ -789,7 +789,7 @@
 <td>Five sources failed for a day under the label 'parse failure' while the real condition was 'not deliverable'. The difference matters: a parse failure is fixable in code, a delivery failure is not. The evidence needed to tell them apart was already being collected (counts of table rows, team links, rowSet) and was being thrown away.</td>
 <td>Take option 1. It is a rendering job on data that already exists.</td>
 <td>&mdash;</td>
-<td class="src"><span class="na" title="no source id on this suggestion in the catalogue">&mdash;</span></td>
+<td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
 </tr>
 </tbody></table></div>
 <p class="tnote">Sources are the official pages the suggestion is built on. A suggestion that adds a source is the only kind that can add a link here, which is why the rows for licensed-price work point at the NBA page that shows the gap.</p>
