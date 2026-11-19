@@ -12066,3 +12066,5 @@ build is green and the site is live on `7f18a29`.
 **Delivery:** The assertions now live in `main()` behind the standard executable guard, so unittest discovery imports the file without executing or exiting. Direct CLI behavior is retained. Detailed verification is recorded in `verify/2026-11-19-994186ba/report.md`.
 
 **Verification:** `python3 scripts/test_noise_band_refusal.py` — PASS (0 assertion failures); `python3 -m unittest discover -s scripts -p 'test_*.py'` — PASS (109 tests, 3 skipped); `git diff --check` — PASS. The full test run emitted non-fatal ResourceWarnings from two untouched legacy test modules. No NBA values, source claims, picks or bet gates were changed; no model/strategy validation is claimed.
+
+**Delivery:** PR [#194](https://github.com/wingbangboozle1-lang/NBA1/pull/194) merged at 2026-11-19T12:17:56Z as `b5e53576b594edfe8160ffe29c6ecff042aa0afc`. CI validation passed. GitHub Pages deployment run [44522582003](https://github.com/wingbangboozle1-lang/NBA1/actions/runs/44522582003) succeeded. Its runner emitted a non-blocking Node.js 20 deprecation warning for `actions/upload-artifact@v4`; deployment completed successfully.
