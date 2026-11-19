@@ -356,8 +356,13 @@ def main() -> int:
                                         f"{tot_w} wins == {tot_l} losses == {len(decided_feed)} settled "
                                         f"finals in the results feed; team-games {tot_gp} == 2 x "
                                         f"{tot_gp // 2}"),
-        "GA9_schedule_day_counts_eq_month_grid": ("pass" if all(
-            sum(1 for g in sched if g["date"] == d) == n for d, n in MONTH_GRID_GAMES.items())
+        # the month grid covers 11/17 and 11/18 too, where the games are already in
+        # the results feed rather than in the forward fixture list
+        "GA9_schedule_day_counts_eq_month_grid": (
+            "pass" if all(
+                (sum(1 for g in sched if g["date"] == d) if d >= "2026-11-19"
+                 else sum(1 for r in feed_rows if r["date"] == d and r["game_status"] == 3)) == n
+                for d, n in MONTH_GRID_GAMES.items())
             else "FAIL"),
     }
 

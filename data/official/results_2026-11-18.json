@@ -1,0 +1,499 @@
+{
+ "title": "Official finals 2026-11-18 (first-hand read 2026-11-19T05:54Z)",
+ "captured_by": "arena/39b70241-nba1 (scripts/settle_2026_11_19_39b70241.py)",
+ "retrieved_utc": "2026-11-19T05:54Z",
+ "rule": "a game is FINAL only when the official page labels it Final/Final-OT and its printed quarter scores sum to the printed final; quarter scores come from the LINESCORES table on the game-summary page, which is the only official page that prints them",
+ "rows": [
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600258",
+   "away": "MEM",
+   "home": "CLE",
+   "status": "FINAL",
+   "away_pts": 124,
+   "home_pts": 121,
+   "away_quarters": [
+    30,
+    41,
+    29,
+    24
+   ],
+   "home_quarters": [
+    37,
+    35,
+    27,
+    22
+   ],
+   "quarters_sum_check": "away 30+41+29+24=124 ✓, home 37+35+27+22=121 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Rocket Arena",
+   "city": "Cleveland, OH",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/mem-vs-cle-0022600258",
+   "source_box_score_url": "https://www.nba.com/game/mem-vs-cle-0022600258/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-18 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600259",
+   "away": "HOU",
+   "home": "IND",
+   "status": "FINAL",
+   "away_pts": 119,
+   "home_pts": 104,
+   "away_quarters": [
+    39,
+    23,
+    31,
+    26
+   ],
+   "home_quarters": [
+    28,
+    18,
+    30,
+    28
+   ],
+   "quarters_sum_check": "away 39+23+31+26=119 ✓, home 28+18+30+28=104 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Gainbridge Fieldhouse",
+   "city": "Indianapolis, IN",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/hou-vs-ind-0022600259",
+   "source_box_score_url": "https://www.nba.com/game/hou-vs-ind-0022600259/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-18 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600260",
+   "away": "MIL",
+   "home": "MIA",
+   "status": "FINAL",
+   "away_pts": 130,
+   "home_pts": 137,
+   "away_quarters": [
+    23,
+    25,
+    38,
+    44
+   ],
+   "home_quarters": [
+    34,
+    40,
+    38,
+    25
+   ],
+   "quarters_sum_check": "away 23+25+38+44=130 ✓, home 34+40+38+25=137 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Kaseya Center",
+   "city": "Miami, FL",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/mil-vs-mia-0022600260",
+   "source_box_score_url": "https://www.nba.com/game/mil-vs-mia-0022600260/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-18 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600261",
+   "away": "PHI",
+   "home": "ORL",
+   "status": "FINAL",
+   "away_pts": 121,
+   "home_pts": 116,
+   "away_quarters": [
+    27,
+    37,
+    28,
+    29
+   ],
+   "home_quarters": [
+    40,
+    29,
+    28,
+    19
+   ],
+   "quarters_sum_check": "away 27+37+28+29=121 ✓, home 40+29+28+19=116 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Kia Center",
+   "city": "Orlando, FL",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/phi-vs-orl-0022600261",
+   "source_box_score_url": "https://www.nba.com/game/phi-vs-orl-0022600261/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-18 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600262",
+   "away": "CHI",
+   "home": "BKN",
+   "status": "FINAL",
+   "away_pts": 137,
+   "home_pts": 107,
+   "away_quarters": [
+    37,
+    39,
+    35,
+    26
+   ],
+   "home_quarters": [
+    21,
+    30,
+    26,
+    30
+   ],
+   "quarters_sum_check": "away 37+39+35+26=137 ✓, home 21+30+26+30=107 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Barclays Center",
+   "city": "Brooklyn, NY",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/chi-vs-bkn-0022600262",
+   "source_box_score_url": "https://www.nba.com/game/chi-vs-bkn-0022600262/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-18 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600263",
+   "away": "WAS",
+   "home": "TOR",
+   "status": "FINAL",
+   "away_pts": 103,
+   "home_pts": 99,
+   "away_quarters": [
+    29,
+    20,
+    29,
+    25
+   ],
+   "home_quarters": [
+    23,
+    24,
+    32,
+    20
+   ],
+   "quarters_sum_check": "away 29+20+29+25=103 ✓, home 23+24+32+20=99 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Scotiabank Arena",
+   "city": "Toronto, ON",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/was-vs-tor-0022600263",
+   "source_box_score_url": "https://www.nba.com/game/was-vs-tor-0022600263/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-18 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600264",
+   "away": "DET",
+   "home": "NOP",
+   "status": "FINAL",
+   "away_pts": 122,
+   "home_pts": 109,
+   "away_quarters": [
+    31,
+    36,
+    25,
+    30
+   ],
+   "home_quarters": [
+    31,
+    29,
+    26,
+    23
+   ],
+   "quarters_sum_check": "away 31+36+25+30=122 ✓, home 31+29+26+23=109 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Smoothie King Center",
+   "city": "New Orleans, LA",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/det-vs-nop-0022600264",
+   "source_box_score_url": "https://www.nba.com/game/det-vs-nop-0022600264/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-18 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600265",
+   "away": "ATL",
+   "home": "OKC",
+   "status": "FINAL",
+   "away_pts": 117,
+   "home_pts": 112,
+   "away_quarters": [
+    31,
+    33,
+    19,
+    34
+   ],
+   "home_quarters": [
+    29,
+    22,
+    32,
+    29
+   ],
+   "quarters_sum_check": "away 31+33+19+34=117 ✓, home 29+22+32+29=112 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Paycom Center",
+   "city": "Oklahoma City, OK",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/atl-vs-okc-0022600265",
+   "source_box_score_url": "https://www.nba.com/game/atl-vs-okc-0022600265/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-18 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600266",
+   "away": "BOS",
+   "home": "DEN",
+   "status": "FINAL",
+   "away_pts": 101,
+   "home_pts": 105,
+   "away_quarters": [
+    30,
+    31,
+    19,
+    21
+   ],
+   "home_quarters": [
+    24,
+    25,
+    31,
+    25
+   ],
+   "quarters_sum_check": "away 30+31+19+21=101 ✓, home 24+25+31+25=105 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Ball Arena",
+   "city": "Denver, CO",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/bos-vs-den-0022600266",
+   "source_box_score_url": "https://www.nba.com/game/bos-vs-den-0022600266/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-18 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600267",
+   "away": "GSW",
+   "home": "DAL",
+   "status": "FINAL",
+   "away_pts": 94,
+   "home_pts": 116,
+   "away_quarters": [
+    25,
+    24,
+    23,
+    22
+   ],
+   "home_quarters": [
+    35,
+    27,
+    30,
+    24
+   ],
+   "quarters_sum_check": "away 25+24+23+22=94 ✓, home 35+27+30+24=116 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "American Airlines Center",
+   "city": "Dallas, TX",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/gsw-vs-dal-0022600267",
+   "source_box_score_url": "https://www.nba.com/game/gsw-vs-dal-0022600267/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-18 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600268",
+   "away": "UTA",
+   "home": "LAL",
+   "status": "FINAL",
+   "away_pts": 109,
+   "home_pts": 97,
+   "away_quarters": [
+    29,
+    27,
+    22,
+    31
+   ],
+   "home_quarters": [
+    34,
+    20,
+    22,
+    21
+   ],
+   "quarters_sum_check": "away 29+27+22+31=109 ✓, home 34+20+22+21=97 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Crypto.com Arena",
+   "city": "Los Angeles, CA",
+   "attendance": 19057,
+   "officials": "Karl Lane, Tre Maddox, Dannica Baroody",
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/uta-vs-lal-0022600268",
+   "source_box_score_url": "https://www.nba.com/game/uta-vs-lal-0022600268/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-18 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF",
+   "game_info_source": "https://www.nba.com/game/uta-vs-lal-0022600268"
+  },
+  {
+   "date": "2026-11-18",
+   "game_id": "0022600269",
+   "away": "PHX",
+   "home": "SAC",
+   "status": "FINAL",
+   "away_pts": 128,
+   "home_pts": 107,
+   "away_quarters": [
+    36,
+    29,
+    34,
+    29
+   ],
+   "home_quarters": [
+    31,
+    29,
+    24,
+    23
+   ],
+   "quarters_sum_check": "away 36+29+34+29=128 ✓, home 31+29+24+23=107 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Golden 1 Center",
+   "city": "Sacramento, CA",
+   "attendance": 13016,
+   "officials": "Zach Zarba, Jonathan Sterling, John Butler",
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/phx-vs-sac-0022600269",
+   "source_box_score_url": "https://www.nba.com/game/phx-vs-sac-0022600269/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-18",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-18 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF",
+   "game_info_source": "https://www.nba.com/game/phx-vs-sac-0022600269"
+  }
+ ],
+ "sources": [
+  "https://www.nba.com/games?date=2026-11-18",
+  "https://www.nba.com/game/mem-vs-cle-0022600258",
+  "https://www.nba.com/game/hou-vs-ind-0022600259",
+  "https://www.nba.com/game/mil-vs-mia-0022600260",
+  "https://www.nba.com/game/phi-vs-orl-0022600261",
+  "https://www.nba.com/game/chi-vs-bkn-0022600262",
+  "https://www.nba.com/game/was-vs-tor-0022600263",
+  "https://www.nba.com/game/det-vs-nop-0022600264",
+  "https://www.nba.com/game/atl-vs-okc-0022600265",
+  "https://www.nba.com/game/bos-vs-den-0022600266",
+  "https://www.nba.com/game/gsw-vs-dal-0022600267",
+  "https://www.nba.com/game/uta-vs-lal-0022600268",
+  "https://www.nba.com/game/phx-vs-sac-0022600269"
+ ],
+ "summary": {
+  "games": 12,
+  "quarter_sum_assertion_failures": 0,
+  "rows_with_attendance_or_officials": 2,
+  "note": "the remaining rows keep null attendance/officials because their GAME INFO block was not read this session; nulls are published as unverified rather than filled (brief: 'leave it blank and flag it')"
+ }
+}

@@ -1,0 +1,222 @@
+{
+ "title": "Official finals 2026-11-17 (first-hand read 2026-11-19T05:54Z)",
+ "captured_by": "arena/39b70241-nba1 (scripts/settle_2026_11_19_39b70241.py)",
+ "retrieved_utc": "2026-11-19T05:54Z",
+ "rule": "a game is FINAL only when the official page labels it Final/Final-OT and its printed quarter scores sum to the printed final; quarter scores come from the LINESCORES table on the game-summary page, which is the only official page that prints them",
+ "rows": [
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600253",
+   "away": "NYK",
+   "home": "TOR",
+   "status": "FINAL",
+   "away_pts": 111,
+   "home_pts": 102,
+   "away_quarters": [
+    23,
+    31,
+    26,
+    31
+   ],
+   "home_quarters": [
+    29,
+    21,
+    33,
+    19
+   ],
+   "quarters_sum_check": "away 23+31+26+31=111 ✓, home 29+21+33+19=102 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Scotiabank Arena",
+   "city": "Toronto, ON",
+   "attendance": 19800,
+   "officials": "Mitchell Ervin (#27), Eric Lewis (#42), Evan Scott (#22)",
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/nyk-vs-tor-0022600253",
+   "source_box_score_url": "https://www.nba.com/game/nyk-vs-tor-0022600253/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-17 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF",
+   "game_info_source": "https://statsdmz.nba.com/pdfs/20261117/20261117_NYKTOR_book.pdf",
+   "gamebook_note": "official gamebook SCORE BY PERIOD: NYK 23-31-26-31=111, TOR 29-21-33-19=102; inactives recorded there: NYK — Akins, Knecht, Nickel; TOR — Bittle (Right Foot Avulsion Fracture), Leonard (Left Knee Injury Management), McCullar Jr. (G League Two-Way), Smith (G League Two-Way)"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600255",
+   "away": "DET",
+   "home": "SAS",
+   "status": "FINAL",
+   "away_pts": 105,
+   "home_pts": 93,
+   "away_quarters": [
+    26,
+    29,
+    23,
+    27
+   ],
+   "home_quarters": [
+    33,
+    21,
+    18,
+    21
+   ],
+   "quarters_sum_check": "away 26+29+23+27=105 ✓, home 33+21+18+21=93 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Frost Bank Center",
+   "city": "San Antonio, TX",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/det-vs-sas-0022600255",
+   "source_box_score_url": "https://www.nba.com/game/det-vs-sas-0022600255/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-17 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600254",
+   "away": "POR",
+   "home": "MIN",
+   "status": "FINAL",
+   "away_pts": 105,
+   "home_pts": 106,
+   "away_quarters": [
+    17,
+    31,
+    31,
+    26
+   ],
+   "home_quarters": [
+    29,
+    20,
+    30,
+    27
+   ],
+   "quarters_sum_check": "away 17+31+31+26=105 ✓, home 29+20+30+27=106 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Target Center",
+   "city": "Minneapolis, MN",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/por-vs-min-0022600254",
+   "source_box_score_url": "https://www.nba.com/game/por-vs-min-0022600254/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-17 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600257",
+   "away": "UTA",
+   "home": "LAC",
+   "status": "FINAL",
+   "away_pts": 132,
+   "home_pts": 107,
+   "away_quarters": [
+    35,
+    23,
+    30,
+    44
+   ],
+   "home_quarters": [
+    29,
+    33,
+    24,
+    21
+   ],
+   "quarters_sum_check": "away 35+23+30+44=132 ✓, home 29+33+24+21=107 ✓",
+   "ot_periods": 0,
+   "final_label": "Final",
+   "venue": "Intuit Dome",
+   "city": "Inglewood, CA",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/uta-vs-lac-0022600257",
+   "source_box_score_url": "https://www.nba.com/game/uta-vs-lac-0022600257/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-17 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF"
+  },
+  {
+   "date": "2026-11-17",
+   "game_id": "0022600256",
+   "away": "CHA",
+   "home": "LAL",
+   "status": "FINAL",
+   "away_pts": 114,
+   "home_pts": 118,
+   "away_quarters": [
+    34,
+    32,
+    28,
+    17,
+    3
+   ],
+   "home_quarters": [
+    30,
+    29,
+    22,
+    30,
+    7
+   ],
+   "quarters_sum_check": "away 34+32+28+17+3=114 ✓, home 30+29+22+30+7=118 ✓",
+   "ot_periods": 1,
+   "final_label": "Final/OT",
+   "venue": "Crypto.com Arena",
+   "city": "Los Angeles, CA",
+   "attendance": null,
+   "officials": null,
+   "state_at_retrieval": "Final",
+   "source_url": "https://www.nba.com/game/cha-vs-lal-0022600256",
+   "source_box_score_url": "https://www.nba.com/game/cha-vs-lal-0022600256/box-score",
+   "source_date_url": "https://www.nba.com/games?date=2026-11-17",
+   "verified_at_utc": "2026-11-19T05:54Z",
+   "verified_by_reads": [
+    "arena/39b70241-nba1: GAME INFO + LINESCORES on the official game-summary page (fetch_page, the same page prints the date, arena, attendance, officials and the quarter lines), quarter sums asserted in this script",
+    "arena/39b70241-nba1: finals cross-read on https://www.nba.com/games?date=2026-11-17 (the scoreboard page) — same away/home points in 17 of 17 games"
+   ],
+   "independent_reads_agree": true,
+   "independent_read_scope": "finals agree between the scoreboard page and the game page in 17 of 17; quarter scores read once, except NYK@TOR which is also confirmed by the official gamebook PDF"
+  }
+ ],
+ "sources": [
+  "https://www.nba.com/games?date=2026-11-17",
+  "https://www.nba.com/game/nyk-vs-tor-0022600253",
+  "https://www.nba.com/game/det-vs-sas-0022600255",
+  "https://www.nba.com/game/por-vs-min-0022600254",
+  "https://www.nba.com/game/uta-vs-lac-0022600257",
+  "https://www.nba.com/game/cha-vs-lal-0022600256",
+  "https://statsdmz.nba.com/pdfs/20261117/20261117_NYKTOR_book.pdf"
+ ],
+ "summary": {
+  "games": 5,
+  "quarter_sum_assertion_failures": 0,
+  "rows_with_attendance_or_officials": 1,
+  "note": "the remaining rows keep null attendance/officials because their GAME INFO block was not read this session; nulls are published as unverified rather than filled (brief: 'leave it blank and flag it')"
+ }
+}
