@@ -200,8 +200,17 @@ jobs:
           while read -r slate; do
             [ -z "${slate}" ] && continue
             echo "=== slate ${slate} ==="
-            python3 scripts/settle_slate.py --slate "${slate}" --by "scheduled settle (refresh-data.yml)"
-            rc=$?
+            # `|| rc=$?` is load-bearing: Actions runs this script as
+            # `bash -eo pipefail`, so `python3 ...; rc=$?` died at
+            # settle_slate's documented exit 3 ("nothing settleable") BEFORE
+            # the tolerance below could run - the step reported `failure` on
+            # every run whose newest window was incomplete (run 44520339923
+            # annotation: "Process completed with exit code 3"), and an
+            # un-settleable slate aborted the loop before later slates ran
+            # (arena/4eef6d3b-nba1, claimed section 74 T03, merged as
+            # section 78; pinned in scripts/test_refresh_publish_4eef6d3b.py).
+            rc=0
+            python3 scripts/settle_slate.py --slate "${slate}" --by "scheduled settle (refresh-data.yml)" || rc=$?
             if [ "${rc}" -ne 0 ] && [ "${rc}" -ne 3 ]; then rc_all=1; fi
           done < /tmp/slates.txt
           python3 scripts/verify_ledger.py || rc_all=1

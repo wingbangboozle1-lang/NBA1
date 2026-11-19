@@ -3,7 +3,7 @@
  "session": "arena/f3cb4a98-nba1",
  "board": "COORDINATION.md section 69",
  "purpose": "A fail-closed gate needs a way to say 'this source cannot be read by our client, and here is the proof' without also saying 'therefore publish anyway'. This register records that declaration per source, with the measured evidence that justifies it and a hard expiry. engine/refresh_gate.py permits a rebuild while a declaration is live; the moment it expires the gate blocks again. Nothing here relaxes a requirement for a source that IS readable, and nothing here promotes any value: a declared source contributes no model input.",
- "rule": "A declaration is admissible only if (a) the fetcher checked the source in the same run at HTTP 200, (b) a bounded parse-failure evidence record exists on disk, and (c) the promoted snapshot the gate would otherwise require has no commits in the repository's history (so the requirement is terminal rather than transient). Every field is measured by scripts/f3cb4a98_refresh_path_audit.py; none is typed by hand.",
+ "rule": "A declaration is admissible only if (a) the fetcher checked the source in the same run at HTTP 200, (b) a bounded parse-failure evidence record exists on disk, and (c) the snapshot requirement it excuses is provably unsatisfiable for the runner. Two kinds exist. kind=runner_unreadable_terminal (the original three): the page is client-rendered and no run can EVER produce the snapshot (0 commits in 884 of history), and no value is published from it. kind=runner_unreadable_session_maintained (S1_season, S2_train; added by arena/4eef6d3b-nba1 section 74): the runner cannot parse the page (byte evidence: 294KB shells with 0 team rows; the stats.nba.com API times out 4/4 from Actions; a headless render is Akamai-denied) but the model consumes the value, which is therefore maintained by first-hand session transcription of the SAME official page - and the gate freshness-checks that transcription (engine/refresh_gate.py SESSION_INPUT_MAX_AGE_HOURS, 72h) instead of comparing a capture that can never exist. Every field's evidence path is on disk; the anti-rot rule is identical: if a runner capture starts parsing rows, the declaration is rejected and the normal requirement returns.",
  "why_needed": "engine/refresh_gate.py requires data/raw/standings.json, data/raw/team_traditional.json and data/raw/team_opponent.json before the scheduled rebuild may run. Those three files have 0 commits across the repository's 884-commit history because the pages they come from are client-rendered: the runner's own committed evidence shows the captured standings page contains 0 <tr> rows and the captured traditional page contains 0 /stats/team/ links (only 12 date-picker rows). engine/promote_official.py writes those snapshots only when rows parse, so the requirement can never be met and the rebuild step behind it has been dead code since gate commit 25bfcea (2026-11-15T11:38Z) landed after the last successful rebuild at 12:43:11Z that same day.",
  "does_not_change": [
   "The three snapshots are still required once they are producible: the declaration is checked against live parse success every run, and a declared source whose capture begins to parse rows fails the gate rather than being skipped.",
@@ -24,7 +24,8 @@
    "declared_at_utc": "2026-11-19T07:20:00Z",
    "expires_at_utc": "2026-12-19T00:00:00Z",
    "expiry_rule": "Re-test at expiry. If a runner-side capture yields 30 parsed rows, delete this declaration; the gate will then require the snapshot normally.",
-   "consequence_if_wrong": "A rebuild could run without a fresh standings snapshot. Mitigated by: the snapshot is not consumed by engine/pipeline.py (measured: it loads team_advanced, games_completed, schedule_upcoming, injuries and players_traditional only), so no published value changes; and the declaration names the URL and evidence so the omission is visible on the Flagged for Review page."
+   "consequence_if_wrong": "A rebuild could run without a fresh standings snapshot. Mitigated by: the snapshot is not consumed by engine/pipeline.py (measured: it loads team_advanced, games_completed, schedule_upcoming, injuries and players_traditional only), so no published value changes; and the declaration names the URL and evidence so the omission is visible on the Flagged for Review page.",
+   "kind": "runner_unreadable_terminal"
   },
   {
    "source_key": "S9_team_traditional",
@@ -39,7 +40,8 @@
    "declared_at_utc": "2026-11-19T07:20:00Z",
    "expires_at_utc": "2026-12-19T00:00:00Z",
    "expiry_rule": "Re-test at expiry. If a runner-side capture yields 30 parsed rows, delete this declaration.",
-   "consequence_if_wrong": "A rebuild could run without a fresh traditional table. Mitigated by: not consumed by engine/pipeline.py; and the second read of the same numbers is the standings/advanced path, which is separately gated."
+   "consequence_if_wrong": "A rebuild could run without a fresh traditional table. Mitigated by: not consumed by engine/pipeline.py; and the second read of the same numbers is the standings/advanced path, which is separately gated.",
+   "kind": "runner_unreadable_terminal"
   },
   {
    "source_key": "S10_team_opponent",
@@ -54,7 +56,8 @@
    "declared_at_utc": "2026-11-19T07:20:00Z",
    "expires_at_utc": "2026-12-19T00:00:00Z",
    "expiry_rule": "Re-test at expiry. If a runner-side capture yields 30 parsed rows, delete this declaration.",
-   "consequence_if_wrong": "A rebuild could run without a fresh opponent table. Mitigated by: not consumed by engine/pipeline.py; the requirement brief's 'opponent' input is cited on the site from the last verified first-hand read, which is unchanged by this declaration."
+   "consequence_if_wrong": "A rebuild could run without a fresh opponent table. Mitigated by: not consumed by engine/pipeline.py; the requirement brief's 'opponent' input is cited on the site from the last verified first-hand read, which is unchanged by this declaration.",
+   "kind": "runner_unreadable_terminal"
   },
   {
    "source_key": "S1_season",
@@ -112,5 +115,7 @@
    "change": "S1_season and S2_train declared unreadable (moved from not_declared); the earlier 'readable in some runs' premise is contradicted by every committed run record since 2026-11-15 and by arena/89f7b601-nba1's byte-exact capture + transport measurements.",
    "board": "COORDINATION.md section 74 C07"
   }
- ]
+ ],
+ "not_declared_note": "The previous 'not_declared' entries for S1_season and S2_train said their failure was a 'transient timeout'. Section 69's byte-exact captures and section 74's measurement refuted that: the pages are client-rendered shells to the runner by delivery, and the API is unreachable from Actions. They are now declared runner_unreadable_session_maintained, above.",
+ "merge_note": "Merged by arena/4eef6d3b-nba1 (section 79): both concurrent seats (this one and arena/cdf3a108-nba1) independently declared S1_season and S2_train runner-unreadable-session-maintained with the same evidence and expiry. The richer entry per key is kept verbatim; `amendments` (cdf3a108) and `not_declared_note` (this seat) are both retained."
 }

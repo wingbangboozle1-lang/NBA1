@@ -170,13 +170,20 @@ class GateDeclarationReachTests(unittest.TestCase):
             with open(os.path.join(raw, filename), "w") as fh:
                 json.dump(payload, fh)
 
-        # The consumed advanced snapshot: exists, digest-bound history aside,
-        # promoted 4.5 days before this run — the age must be reported.
+        # The consumed advanced snapshot in the shape the merged gate
+        # (arena/4eef6d3b-nba1, §79) demands when S1 is declared: exists,
+        # carries an explicit session verification on an official URL, is
+        # within SESSION_INPUT_MAX_AGE_HOURS (72 h) of this run, and its
+        # season_to_date window is a complete 30-row W+L==GP table.
         with open(os.path.join(raw, "team_advanced.json"), "w") as fh:
             json.dump({"captured_at_utc": "2026-11-11T00:38:00Z",
-                       "cols": ["team", "gp"],
+                       "verification": {"verified": True,
+                                        "source_url": S1_URL,
+                                        "verified_at_utc": "2026-11-15T08:00:00Z",
+                                        "verified_by": "test fixture"},
+                       "cols": ["team", "gp", "w", "l"],
                        "windows": [{"window_id": "season_to_date",
-                                    "rows": [["Team %02d" % i, 1]
+                                    "rows": [["Team %02d" % i, 1, 1, 0]
                                              for i in range(30)]}]}, fh)
 
         for date in ("2026-11-14", "2026-11-15"):
@@ -221,19 +228,28 @@ class GateDeclarationReachTests(unittest.TestCase):
         self.assertEqual(errors, [], errors)
         applied = {d["source_key"] for d in report["declarations_applied"]}
         self.assertEqual(applied, {"S1_season", "S2_train"})
-        age_warnings = [w for w in report["warnings"]
-                        if "published as stale" in w
-                        and "advanced team comparison skipped" in w]
-        self.assertEqual(len(age_warnings), 1, report["warnings"])
-        # Measured, not asserted: run 2026-11-15T11:55Z minus promoted
-        # 2026-11-11T00:38Z = 4.47 days, printed to one decimal (§78's
-        # additive amendment: "published as stale" must carry a number).
-        self.assertIn("4.5 days before this run", age_warnings[0])
-        self.assertIn("engine/pipeline.py consumes it", age_warnings[0])
-        # The pass is visibly a pass-by-declaration.
-        self.assertTrue(any("no structured capture" in w
+        # The pass is visibly a pass-by-declaration AND a pass on the
+        # session-maintained input (the merged gate's branch (b)).
+        accepted = [w for w in report["warnings"]
+                    if "accepted via session verification" in w]
+        self.assertEqual(len(accepted), 1, report["warnings"])
+        self.assertTrue(any("no parsed payload by design" in w
                             and "declared unreadable" in w
                             for w in report["warnings"]), report["warnings"])
+
+    def test_session_verification_older_than_72_hours_blocks(self):
+        """The declaration must not hide an aged-out consumed input."""
+        self._declare()
+        path = os.path.join(self.root, "data/raw/team_advanced.json")
+        with open(path) as fh:
+            snap = json.load(fh)
+        # Verified 100 h before NOW (2026-11-15T12:00Z) > 72 h.
+        snap["verification"]["verified_at_utc"] = "2026-11-11T08:00:00Z"
+        with open(path, "w") as fh:
+            json.dump(snap, fh)
+        errors, _ = evaluate_with_report(self.record, NOW)
+        self.assertTrue(any("advanced team input is stale" in e
+                            and "100.0h old" in e for e in errors), errors)
 
     def test_anti_rot_a_rows_bearing_capture_refuses_the_declaration(self):
         """If the page ever parses, the requirement comes back immediately."""
@@ -261,8 +277,8 @@ class GateDeclarationReachTests(unittest.TestCase):
         self._declare()
         os.remove(os.path.join(self.root, "data/raw/team_advanced.json"))
         errors, _ = evaluate_with_report(self.record, NOW)
-        self.assertTrue(any("team_advanced.json is missing or unreadable" in e
-                            for e in errors), errors)
+        self.assertTrue(any("session-maintained) missing or unreadable" in e
+                            and "team_advanced.json" in e for e in errors), errors)
 
     def test_evidence_url_must_match_this_runs_check(self):
         self._declare()
@@ -342,7 +358,17 @@ class PromoteDeclaredReachTests(unittest.TestCase):
         with open(os.path.join(self.raw, "_capture_evidence_S1_season.json"), "w") as fh:
             json.dump({"status": "parse_failed", "source_url": S1_URL,
                        "captured_at_utc": "2026-11-15T11:55:00Z"}, fh)
-        self.record = {"changed": [], "source_checks": []}
+        # The merged promote routes a missing capture to `blocked_unreadable`
+        # only if THIS run attempted the fetch (an HTTP-200 source check) —
+        # section 74's rule. Without the attempt it must still block.
+        self.record = {
+            "changed": [],
+            "source_checks": [
+                {"key": "S1_season", "url": S1_URL,
+                 "checked_at_utc": "2026-11-15T11:55:00Z",
+                 "http_status": 200, "bytes": 12345, "sha256": DIGEST},
+            ],
+        }
 
     def tearDown(self):
         (self.promote.RAW, self.promote.ROOT,

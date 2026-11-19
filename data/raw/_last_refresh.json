@@ -1,5 +1,5 @@
 {
- "captured_at_utc": "2026-11-19T12:03:37Z",
+ "captured_at_utc": "2026-11-19T12:49:05Z",
  "changed": [
   "evidence S1_season",
   "evidence S2_train",
@@ -31,270 +31,217 @@
   {
    "key": "S1_season",
    "url": "https://www.nba.com/stats/teams/advanced",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 293898,
-   "sha256": "54a6e914f7b8015f55ba00c8b6d5d1deef88331b4f6b054e1e1b845c5df48746"
+   "bytes": 293802,
+   "sha256": "6e386b4da325f80e38d0c5696828567d28fa2d8784b0d82951fe783b8566d89e"
   },
   {
    "key": "S2_train",
    "url": "https://www.nba.com/stats/teams/advanced?DateFrom=10%2F20%2F2026&DateTo=11%2F05%2F2026&SeasonType=Regular+Season",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 294945,
-   "sha256": "c8fa0b2b810f3a2e1b1cef831cca40fffb4a9b9a4028d9a172d55b0fe3f139c8"
+   "bytes": 294849,
+   "sha256": "b19148368e0c3bb7e566ea49d83ce957b14ea930475298a497494e8183257087"
   },
   {
    "key": "S7_players",
    "url": "https://www.nba.com/stats/players/traditional",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 371619,
-   "sha256": "b31a225ecb444bda9de5db89f836505e15c75b7c633495586ae6123d6d591c61"
+   "bytes": 371678,
+   "sha256": "76b13f52ea1e6e9e65379876fdbf431069a00d92f4b00ccb78dbcc0dcf6cb7d0"
   },
   {
    "key": "S4_schedule",
    "url": "https://www.nba.com/schedule",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 203664,
-   "sha256": "968197dba975367d6be79503ac359e82a53a08b27c9635d334a3c25cf1703a5c"
+   "bytes": 203546,
+   "sha256": "0b5e0c13e3a429331013ce821e497fab9917482ab1aef462c990f693134a5a37"
   },
   {
    "key": "S5_injury_index",
    "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 39599,
-   "sha256": "6920c0652c0e78c766c4278038942a49b72006aa7a0e6e5b084e27a4ee37de54"
+   "bytes": 39998,
+   "sha256": "014c3098b33e44dbb0f1d8172e416bd60c547f957eb8e3ca2c4bf2a9d07c552d"
   },
   {
    "key": "S8_standings",
    "url": "https://www.nba.com/standings",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 225635,
-   "sha256": "d1fc8a2c2eea01c467ac1380640e9beb959f970c25ab0c93dfe86f74bcf73f00"
+   "bytes": 225484,
+   "sha256": "c8d18a7249e533f65e5b76f1d7f7051b1326b0f7619ceba2aec10a1fafb67c7c"
   },
   {
    "key": "S9_team_traditional",
    "url": "https://www.nba.com/stats/teams/traditional",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 293825,
-   "sha256": "2169fd9fe79d9f0843e22697c746affcb95a235446695b9f67847a1ae29f6c42"
+   "bytes": 293865,
+   "sha256": "0c794d8f2e90196b30e28cfd808e1ac5374e802604f288049bd8c100e180e8ad"
   },
   {
    "key": "S10_team_opponent",
    "url": "https://www.nba.com/stats/teams/opponent",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 293898,
-   "sha256": "8db40556d7c0e70804ab85495f8ac8894e1e627c2da8cb3dedbca857aeaa04fd"
+   "bytes": 293802,
+   "sha256": "ac467ffd07b56bd9e5a4ce6e3f122199f1be8ddee42b8ceb6e9c785d07ff16cd"
   },
   {
    "key": "results_2026-11-06",
    "url": "https://www.nba.com/games?date=2026-11-06",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 536502,
-   "sha256": "68c40129053784671ade90a58b510b305db246cd5320f9fe0f5581fb1bf62d36"
+   "bytes": 536406,
+   "sha256": "0880e02362b0d4a0757988fc5e7e95fd957b509eb455eacf0035282b8077c4fa"
   },
   {
    "key": "results_2026-11-07",
    "url": "https://www.nba.com/games?date=2026-11-07",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 477177,
-   "sha256": "fc001f42bf7a60c96ed0b8dcdf8a55d816854bbbae7f35cf4ae69974ced34761"
+   "bytes": 477081,
+   "sha256": "097c7f39f614e38beed9e474b7837ad17a2922e5db953ff5cf82257ba8b1c940"
   },
   {
    "key": "results_2026-11-08",
    "url": "https://www.nba.com/games?date=2026-11-08",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 469075,
-   "sha256": "8f8e46b4335dd3bfb7c771f4ce86db62a379ece2b10bf8095cca2be100cf86aa"
+   "bytes": 468979,
+   "sha256": "6baa5c1a023f7bedcf3b0406e35ddfca8c586d2b5888892ec6f45edb3791cf57"
   },
   {
    "key": "results_2026-11-09",
    "url": "https://www.nba.com/games?date=2026-11-09",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 495149,
-   "sha256": "7426d3070455faf1a5e87b3fb95c9be29b5daf24d578a10e961a66179563875b"
+   "bytes": 495053,
+   "sha256": "39cdf7aa9525d3321a871ea9414e79f427838415fd9a37e974a56118942bd122"
   },
   {
    "key": "results_2026-11-10",
    "url": "https://www.nba.com/games?date=2026-11-10",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 436231,
-   "sha256": "365537de208b3946a56e69af2111e827523d9d597a704452fc13aaed95dfa870"
+   "bytes": 436135,
+   "sha256": "ed68b0a080c0662b50a15911b920617525d5c476c3a022e19ea4280f1f30ac5d"
   },
   {
    "key": "results_2026-11-11",
    "url": "https://www.nba.com/games?date=2026-11-11",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 561817,
-   "sha256": "414a4ece430223a725b79380ad8d36d292a5dc185708dde6fa3c764263368938"
+   "bytes": 561721,
+   "sha256": "6b18532c62ff4cbc9107d17907bb688de4a2cd6f075ea73918bb574316c9fdfb"
   },
   {
    "key": "results_2026-11-12",
    "url": "https://www.nba.com/games?date=2026-11-12",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 380622,
-   "sha256": "f66464351071b09cdcb01b094259512488dc19cd621a838aceb186843d6818af"
+   "bytes": 380526,
+   "sha256": "0f29e357ebbb6fab9133c4a312120b01929048c594dd83d06619510f1bc61762"
   },
   {
    "key": "results_2026-11-13",
    "url": "https://www.nba.com/games?date=2026-11-13",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 546116,
-   "sha256": "99a18bf93808f813998cd4cceef472294edaf7622e084beef6769eedc06f22c3"
+   "bytes": 546020,
+   "sha256": "a1fd31bbb037158e1a59c9d481990d593a6b3ebb2a96587c3aaa2ee62e66d70c"
   },
   {
    "key": "results_2026-11-14",
    "url": "https://www.nba.com/games?date=2026-11-14",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 411036,
-   "sha256": "eb800f9854275354949a6de819f99b46dcf1737654b6966264da90c7e8442157"
+   "bytes": 410940,
+   "sha256": "a923ba8878e98bca96e1363a3cf21b9a7b295c3e413d748930f7dd9e19489a23"
   },
   {
    "key": "results_2026-11-15",
    "url": "https://www.nba.com/games?date=2026-11-15",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 522898,
-   "sha256": "aae08bc0a5fcec2d956a3b04b1f8e363f5d37889666bfc847a41db0dc8dafe15"
+   "bytes": 522802,
+   "sha256": "e4ffa9c13162bc7ef8e76471a97561eff6d4bced4443a475b9ef22168d5b7164"
   },
   {
    "key": "results_2026-11-16",
    "url": "https://www.nba.com/games?date=2026-11-16",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 510257,
-   "sha256": "6677a31d3bcc12c646307d71bc9092706d3c89f3d43df270ac720745fb56fdd8"
+   "bytes": 510161,
+   "sha256": "7fe35a5248d0051eedb68c4dd51b927129b2e1e0474dcb5b7507a1ea08fb7a91"
   },
   {
    "key": "results_2026-11-17",
    "url": "https://www.nba.com/games?date=2026-11-17",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 430432,
-   "sha256": "1ad807cbe59b6828606c7affa004e1f80a1705253754c102a982bedd8eb4122c"
+   "bytes": 430336,
+   "sha256": "ca8fb4989f53eed3f154efec4106c2d2f7ce70d74667f5125fcbc60e181e8fa3"
   },
   {
    "key": "results_2026-11-18",
    "url": "https://www.nba.com/games?date=2026-11-18",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 658288,
-   "sha256": "9e48bf7e06b8549391ca76d885cfe2eec470d65b6e8fd1e0320ce7396f9656b3"
+   "bytes": 658192,
+   "sha256": "acf8ff462948630ebdcfe30ec9bbdc031cbda15c88292201605f4844a59d018f"
   },
   {
    "key": "results_2026-11-19",
    "url": "https://www.nba.com/games?date=2026-11-19",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "http_status": 200,
-   "bytes": 346722,
-   "sha256": "ab0ebd6ddc25b8a095a180fe396d2881356c26ea6338f21863d2cb9a727ae2a7"
+   "bytes": 346689,
+   "sha256": "f08c23b30b097d6d92adbcdcd16edb6cd48ab51a741b7f7129315253a50482b2"
+  },
+  {
+   "key": "results_2026-11-20",
+   "url": "https://www.nba.com/games?date=2026-11-20",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
+   "http_status": 200,
+   "bytes": 359496,
+   "sha256": "2c2fa9914baeba797f035819b207601b7be2bb029e7ceb5141c6ab68cbb814eb"
+  },
+  {
+   "key": "results_2026-11-21",
+   "url": "https://www.nba.com/games?date=2026-11-21",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
+   "http_status": 200,
+   "bytes": 324656,
+   "sha256": "3816d5e670acdac12abea533d212c267a0df036dd3f4c47d717ed467afad8711"
+  },
+  {
+   "key": "results_2026-11-22",
+   "url": "https://www.nba.com/games?date=2026-11-22",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
+   "http_status": 200,
+   "bytes": 330159,
+   "sha256": "746be998ceca010b01815a9ac68da78601799bfa39071df0f8f2ef95883fc205"
   },
   {
    "key": "injury_pdf_probe",
-   "checked_at_utc": "2026-11-19T12:03:37Z",
+   "checked_at_utc": "2026-11-19T12:49:05Z",
    "results": [
     {
-     "edition": "Injury-Report_2026-11-19_07_00AM.pdf",
-     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_07_00AM.pdf",
+     "edition": "Injury-Report_2026-11-19_07_45AM.pdf",
+     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_07_45AM.pdf",
      "http_status": 200,
-     "bytes": 87244,
-     "sha256": "df045f5282e86d3c3d7876f2e49a56a94fea36b5c28928bfa097c10d1303d6e5",
+     "bytes": 87481,
+     "sha256": "849f3aa751497be5f70737bb6a213537bbe0591f619b30cb815eea4a60491249",
      "attempts": 1,
      "listed_on_official_index": true,
      "pdf_valid": true,
-     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_07_00AM__df045f5282e86d3c3d7876f2e49a56a94fea36b5c28928bfa097c10d1303d6e5.pdf"
-    },
-    {
-     "edition": "Injury-Report_2026-11-19_06_45AM.pdf",
-     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_06_45AM.pdf",
-     "http_status": 200,
-     "bytes": 87397,
-     "sha256": "4394c4e62bd1a2193d1d61747f69dd8da3148253425908ae569793f564c5b9d7",
-     "attempts": 1,
-     "listed_on_official_index": true,
-     "pdf_valid": true,
-     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_06_45AM__4394c4e62bd1a2193d1d61747f69dd8da3148253425908ae569793f564c5b9d7.pdf"
-    },
-    {
-     "edition": "Injury-Report_2026-11-19_06_30AM.pdf",
-     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_06_30AM.pdf",
-     "http_status": 200,
-     "bytes": 87322,
-     "sha256": "15eb7a7cc14b389c707e74994e5eafa9fac396274bf7ff2f979722a7a5253d0e",
-     "attempts": 1,
-     "listed_on_official_index": true,
-     "pdf_valid": true,
-     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_06_30AM__15eb7a7cc14b389c707e74994e5eafa9fac396274bf7ff2f979722a7a5253d0e.pdf"
-    },
-    {
-     "edition": "Injury-Report_2026-11-19_06_15AM.pdf",
-     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_06_15AM.pdf",
-     "http_status": 200,
-     "bytes": 87289,
-     "sha256": "e4165ed27252c6023875d1b08b7d8c20653c9fc7eb3369c163009b9d3e7f3d2b",
-     "attempts": 1,
-     "listed_on_official_index": true,
-     "pdf_valid": true,
-     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_06_15AM__e4165ed27252c6023875d1b08b7d8c20653c9fc7eb3369c163009b9d3e7f3d2b.pdf"
-    },
-    {
-     "edition": "Injury-Report_2026-11-19_06_00AM.pdf",
-     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_06_00AM.pdf",
-     "http_status": 200,
-     "bytes": 87160,
-     "sha256": "27746aca79df446624c86150d07a1fc054534ebc3a77b063a8ce03885fc81307",
-     "attempts": 1,
-     "listed_on_official_index": true,
-     "pdf_valid": true,
-     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_06_00AM__27746aca79df446624c86150d07a1fc054534ebc3a77b063a8ce03885fc81307.pdf"
-    },
-    {
-     "edition": "Injury-Report_2026-11-19_05_45AM.pdf",
-     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_05_45AM.pdf",
-     "http_status": 200,
-     "bytes": 87396,
-     "sha256": "9a32beefabc2472c03a0637f53e03b44d14ecbd2e38bb944abf8340140db659b",
-     "attempts": 1,
-     "listed_on_official_index": true,
-     "pdf_valid": true,
-     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_05_45AM__9a32beefabc2472c03a0637f53e03b44d14ecbd2e38bb944abf8340140db659b.pdf"
-    },
-    {
-     "edition": "Injury-Report_2026-11-19_05_30AM.pdf",
-     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_05_30AM.pdf",
-     "http_status": 200,
-     "bytes": 87443,
-     "sha256": "4f84f7ca8126605e75dc8595f2226d7f26bbbe3996cb1037f420b6c6598fda07",
-     "attempts": 1,
-     "listed_on_official_index": true,
-     "pdf_valid": true,
-     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_05_30AM__4f84f7ca8126605e75dc8595f2226d7f26bbbe3996cb1037f420b6c6598fda07.pdf"
-    },
-    {
-     "edition": "Injury-Report_2026-11-19_05_15AM.pdf",
-     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_05_15AM.pdf",
-     "http_status": 200,
-     "bytes": 87289,
-     "sha256": "033b705b7fd1f9639168b1b9fe03ae743c485456b6402a3c99482397fcaa3643",
-     "attempts": 1,
-     "listed_on_official_index": true,
-     "pdf_valid": true,
-     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_05_15AM__033b705b7fd1f9639168b1b9fe03ae743c485456b6402a3c99482397fcaa3643.pdf"
+     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_07_45AM__849f3aa751497be5f70737bb6a213537bbe0591f619b30cb815eea4a60491249.pdf"
     },
     {
      "edition": "Injury-Report_2026-11-19_05_00AM.pdf",
@@ -317,6 +264,72 @@
      "listed_on_official_index": true,
      "pdf_valid": true,
      "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_04_45AM__f5feb2c0ef89fa39d731cf0133234edeed33f851ef8742719767136cf2c52158.pdf"
+    },
+    {
+     "edition": "Injury-Report_2026-11-19_04_30AM.pdf",
+     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_04_30AM.pdf",
+     "http_status": 200,
+     "bytes": 87426,
+     "sha256": "690976e06fe2693f5972c2500e97a2fecf6e00a64f979520e1f305ad5df9cd69",
+     "attempts": 1,
+     "listed_on_official_index": true,
+     "pdf_valid": true,
+     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_04_30AM__690976e06fe2693f5972c2500e97a2fecf6e00a64f979520e1f305ad5df9cd69.pdf"
+    },
+    {
+     "edition": "Injury-Report_2026-11-19_04_15AM.pdf",
+     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_04_15AM.pdf",
+     "http_status": 200,
+     "bytes": 87396,
+     "sha256": "e86da58e9eda8368ba203314d341ba8186b03ccdaf590a482b4f3ab2e09e02be",
+     "attempts": 1,
+     "listed_on_official_index": true,
+     "pdf_valid": true,
+     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_04_15AM__e86da58e9eda8368ba203314d341ba8186b03ccdaf590a482b4f3ab2e09e02be.pdf"
+    },
+    {
+     "edition": "Injury-Report_2026-11-19_04_00AM.pdf",
+     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_04_00AM.pdf",
+     "http_status": 200,
+     "bytes": 87263,
+     "sha256": "88181b3421305942c9a9a40cc8c57d8c869101af0445837d86ca89ad188f4e4f",
+     "attempts": 1,
+     "listed_on_official_index": true,
+     "pdf_valid": true,
+     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_04_00AM__88181b3421305942c9a9a40cc8c57d8c869101af0445837d86ca89ad188f4e4f.pdf"
+    },
+    {
+     "edition": "Injury-Report_2026-11-19_03_45AM.pdf",
+     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_03_45AM.pdf",
+     "http_status": 200,
+     "bytes": 87544,
+     "sha256": "e82a0d597d4793dc40c92e995d77f640c1ac897652eb75befd80d6c45bc8dee7",
+     "attempts": 1,
+     "listed_on_official_index": true,
+     "pdf_valid": true,
+     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_03_45AM__e82a0d597d4793dc40c92e995d77f640c1ac897652eb75befd80d6c45bc8dee7.pdf"
+    },
+    {
+     "edition": "Injury-Report_2026-11-19_03_30AM.pdf",
+     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_03_30AM.pdf",
+     "http_status": 200,
+     "bytes": 87322,
+     "sha256": "d5bb0c90da9cfe54f67218f13aec13d61c390f937b695807fc75d6d4d995b614",
+     "attempts": 1,
+     "listed_on_official_index": true,
+     "pdf_valid": true,
+     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_03_30AM__d5bb0c90da9cfe54f67218f13aec13d61c390f937b695807fc75d6d4d995b614.pdf"
+    },
+    {
+     "edition": "Injury-Report_2026-11-19_03_15AM.pdf",
+     "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-19_03_15AM.pdf",
+     "http_status": 200,
+     "bytes": 87441,
+     "sha256": "3fd3b6c1fac44327cc54500b3f54fda19852781a6f1e4d51c97c5fde47fcac83",
+     "attempts": 1,
+     "listed_on_official_index": true,
+     "pdf_valid": true,
+     "artifact_path": "data/raw/injury_pdfs/Injury-Report_2026-11-19_03_15AM__3fd3b6c1fac44327cc54500b3f54fda19852781a6f1e4d51c97c5fde47fcac83.pdf"
     }
    ]
   }
@@ -325,302 +338,117 @@
  "promoted": [
   {
    "item": "S4_schedule",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "26 games -> data/raw/schedule_upcoming.json; 22 source-register entries added"
   },
   {
    "item": "injury_diff_chain",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
-   "detail": "Injury-Report_2026-11-19_06_45AM -> Injury-Report_2026-11-19_07_00AM: 0 status/reason changes, 0 filing changes -> data/parsed/injury_diffs/promote_diff_Injury-Report_2026-11-19_06_45AM_to_Injury-Report_2026-11-19_07_00AM.json"
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
+   "detail": "Injury-Report_2026-11-19_07_30AM -> Injury-Report_2026-11-19_07_45AM: 0 status/reason changes, 0 filing changes -> data/parsed/injury_diffs/promote_diff_Injury-Report_2026-11-19_07_30AM_to_Injury-Report_2026-11-19_07_45AM.json"
   },
   {
    "item": "injury_pdf_probe",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
-   "detail": "44 rows from Injury-Report_2026-11-19_07_00AM -> data/raw/injuries.json"
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
+   "detail": "44 rows from Injury-Report_2026-11-19_07_45AM -> data/raw/injuries.json"
   },
   {
    "item": "results 2026-11-06",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "9 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-07",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "7 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-08",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "7 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-09",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "8 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-10",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "6 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-11",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "10 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-12",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "4 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-13",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "9 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-14",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "5 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-15",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "9 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-16",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
-   "detail": "8 finals reconciled (8 new this run)"
-  },
-  {
-   "item": "results 2026-11-17",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
-   "detail": "5 finals reconciled (13 new this run)"
-  },
-  {
-   "item": "results 2026-11-18",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
-   "detail": "12 finals reconciled (25 new this run)"
-  },
-  {
-   "item": "results 2026-11-19",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
-   "detail": "0 finals reconciled (25 new this run)"
-  },
-  {
-   "item": "results_feed",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
-   "detail": "25 finals appended -> data/raw/games_completed.json"
-  },
-  {
-   "item": "S5_injury_index",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
-   "detail": "digest-bound evidence record written (no model input)"
-  },
-  {
-   "item": "S7_players",
-   "promoted_at_utc": "2026-11-19T12:08:36Z",
-   "detail": "digest-bound evidence record written (no model input)"
-  },
-  {
-   "item": "S4_schedule",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
-   "detail": "26 games -> data/raw/schedule_upcoming.json; 0 source-register entries added"
-  },
-  {
-   "item": "injury_diff_chain",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
-   "detail": "Injury-Report_2026-11-19_06_45AM -> Injury-Report_2026-11-19_07_00AM: 0 status/reason changes, 0 filing changes -> data/parsed/injury_diffs/promote_diff_Injury-Report_2026-11-19_06_45AM_to_Injury-Report_2026-11-19_07_00AM.json"
-  },
-  {
-   "item": "injury_pdf_probe",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
-   "detail": "44 rows from Injury-Report_2026-11-19_07_00AM -> data/raw/injuries.json"
-  },
-  {
-   "item": "results 2026-11-06",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
-   "detail": "9 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-07",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
-   "detail": "7 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-08",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
-   "detail": "7 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-09",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
-   "detail": "8 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-10",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
-   "detail": "6 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-11",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
-   "detail": "10 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-12",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
-   "detail": "4 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-13",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
-   "detail": "9 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-14",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
-   "detail": "5 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-15",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
-   "detail": "9 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-16",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "8 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-17",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "5 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-18",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "12 finals reconciled (0 new this run)"
   },
   {
    "item": "results 2026-11-19",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
+   "detail": "0 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-20",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
+   "detail": "0 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-21",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
+   "detail": "0 finals reconciled (0 new this run)"
+  },
+  {
+   "item": "results 2026-11-22",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "0 finals reconciled (0 new this run)"
   },
   {
    "item": "results_feed",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "no new finals to append"
   },
   {
    "item": "S5_injury_index",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "digest-bound evidence record written (no model input)"
   },
   {
    "item": "S7_players",
-   "promoted_at_utc": "2026-11-19T12:44:33Z",
-   "detail": "digest-bound evidence record written (no model input)"
-  },
-  {
-   "item": "S4_schedule",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "26 games -> data/raw/schedule_upcoming.json; 0 source-register entries added"
-  },
-  {
-   "item": "injury_diff_chain",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "Injury-Report_2026-11-19_06_45AM -> Injury-Report_2026-11-19_07_00AM: 0 status/reason changes, 0 filing changes -> data/parsed/injury_diffs/promote_diff_Injury-Report_2026-11-19_06_45AM_to_Injury-Report_2026-11-19_07_00AM.json"
-  },
-  {
-   "item": "injury_pdf_probe",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "44 rows from Injury-Report_2026-11-19_07_00AM -> data/raw/injuries.json"
-  },
-  {
-   "item": "results 2026-11-06",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "9 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-07",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "7 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-08",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "7 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-09",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "8 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-10",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "6 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-11",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "10 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-12",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "4 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-13",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "9 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-14",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "5 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-15",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "9 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-16",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "8 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-17",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "5 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-18",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "12 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results 2026-11-19",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "0 finals reconciled (0 new this run)"
-  },
-  {
-   "item": "results_feed",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "no new finals to append"
-  },
-  {
-   "item": "S5_injury_index",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
-   "detail": "digest-bound evidence record written (no model input)"
-  },
-  {
-   "item": "S7_players",
-   "promoted_at_utc": "2026-11-19T12:58:20Z",
+   "promoted_at_utc": "2026-11-19T12:53:44Z",
    "detail": "digest-bound evidence record written (no model input)"
   }
  ],
@@ -648,19 +476,19 @@
   },
   {
    "item": "S1_season",
-   "reason": "S1_season capture has no parsed rows (the fetcher wrote _capture_evidence_S1_season.json instead of a rows-bearing capture)",
+   "reason": "S1_season capture unreadable: [Errno 2] No such file or directory: '/home/runner/work/NBA1/NBA1/data/raw/_capture_S1_season.json'",
    "expires_at_utc": "2026-12-19T00:00:00Z",
-   "review_flag": "F-89F-01",
+   "review_flag": "F-F3C-03",
    "detail": "declared unreadable by data/raw/unreadable_sources.json: the page is client-rendered, so no runner capture can produce this snapshot. Nothing was promoted."
   }
  ],
  "promotion_warnings": [],
- "workflow_run_at_utc": "2026-11-19T12:08:36Z",
- "workflow_ref": "refs/heads/main",
+ "workflow_run_at_utc": "2026-11-19T12:53:45Z",
+ "workflow_ref": "refs/heads/arena/4eef6d3b-nba1",
  "fetch_outcome": "success",
- "promote_outcome": "failure",
- "freshness_outcome": "failure",
- "freshness_ok": "false",
- "settlement_outcome": "failure",
- "build_outcome": "skipped"
+ "promote_outcome": "success",
+ "freshness_outcome": "success",
+ "freshness_ok": "true",
+ "settlement_outcome": "success",
+ "build_outcome": "success"
 }

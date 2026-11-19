@@ -1,5 +1,5 @@
 {
- "captured_at_utc": "2026-11-19T12:03:37Z",
+ "captured_at_utc": "2026-11-19T12:49:05Z",
  "source_url": "https://www.nba.com/schedule",
  "games": [
   {
@@ -321,31 +321,31 @@
    "date": "2026-11-19",
    "url": "https://www.nba.com/games?date=2026-11-19",
    "http_status": 200,
-   "bytes": 346649,
-   "sha256": "cb080283e3616e00554d33279bd5dc7d4fe5b99a6a1dac0faf0bfb0f9408eab5"
+   "bytes": 346689,
+   "sha256": "91064f98cfe26b73246f73f4f284e564fcbec835b019ff1ed2d22f121b29c587"
   },
   {
    "date": "2026-11-20",
    "url": "https://www.nba.com/games?date=2026-11-20",
    "http_status": 200,
-   "bytes": 359502,
-   "sha256": "5dcae38597899eedc6efb094ba769c0fb9043f06a7434ca4a289da4ea3f174d5"
+   "bytes": 359496,
+   "sha256": "60281940eb3eb9782ed2152bbcd0e2459627657169b41d9c02a0ba7899ffc7b9"
   },
   {
    "date": "2026-11-21",
    "url": "https://www.nba.com/games?date=2026-11-21",
    "http_status": 200,
-   "bytes": 324752,
-   "sha256": "f9233be788d4dc633afb5980d3e70e9f32890ba3d9ab9290696d4d43f2db151e"
+   "bytes": 324656,
+   "sha256": "efc57868cc9a481cf455170d2cc265a3ce07da96790524ccffa24b934a65042d"
   },
   {
    "date": "2026-11-22",
    "url": "https://www.nba.com/games?date=2026-11-22",
    "http_status": 200,
-   "bytes": 330255,
-   "sha256": "ee386a71648518f071f29244cfe7fb29cb5ebbcff758ef363e669c47553a3781"
+   "bytes": 330159,
+   "sha256": "2ac89151869328115f73d9a91c56a07c7e38a7d1833c8eaf9fd50c3b9587c220"
   }
  ],
- "page_sha256": "968197dba975367d6be79503ac359e82a53a08b27c9635d334a3c25cf1703a5c",
+ "page_sha256": "0b5e0c13e3a429331013ce821e497fab9917482ab1aef462c990f693134a5a37",
  "note": "Capture only: parsed games await verified promotion. When parsed_via names the games feed, each row's source_url is that game's own official page and fallback_sources records the exact responses read."
 }

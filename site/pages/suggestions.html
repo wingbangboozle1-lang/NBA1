@@ -570,6 +570,36 @@
 <td>Approve the sweep + loud-failure change to refresh-data.yml.</td>
 <td class="src"><a href="https://github.com/wingbangboozle1-lang/NBA1/blob/main/data/raw/_last_refresh.json" target="_blank" rel="noopener">S89F_REFRESH</a></td>
 </tr>
+<tr>
+<td>S-4EE-01</td>
+<td>Model</td>
+<td><b>Pre-register a corrected pick-probability formula (sigma 18.303) for the next roll; keep every sealed probability as published</b></td>
+<td>F-4EE-06: published probabilities divide the spread by sigma of game margins (16.714) instead of sigma of the spread error (measured 18.303). Realized hit rate 0.3784 against 0.7197 mean published probability. Changing sealed numbers would break the pre-registration discipline; the fix must be prospective.</td>
+<td>- Freeze a prereg v2 (new strategy ids or an amended freeze) whose signal uses sigma 18.303 before the next horizon's first tip, and report old-vs-new calibration side by side until v2 has 30 graded plays <span class='fine'>(effort: Medium - one formula change plus a prereg freeze and a calibration-comparison page; risk: Low - sealed probabilities stand untouched; only future picks change; unlocks: F-4EE-06; a leaderboard that ranks on honest probabilities (S-4EE-02))</span><br>- Leave the formula and let the strategy-validation gates absorb the miscalibration <span class='fine'>(effort: None; risk: High - the leaderboard keeps ranking on numbers measured to be wrong (F-4EE-06); unlocks: nothing)</span></td>
+<td>Option 1. The measurement is unambiguous and the settlement rules are unaffected (they grade the pick line, not the probability).</td>
+<td>Yes - the formula belongs to the pre-registered signal, so only an explicit decision can change it (owner: next roll/integration seat or the user).</td>
+<td class="src"><span class="na" title="source id data/content/signal_diagnostics_2026-11-19_d66245d4.json (section 72 measurement) is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-4EE-02</td>
+<td>Data</td>
+<td><b>Derive one authoritative per-strategy record from the sealed tickets and reconcile README + leaderboard to it</b></td>
+<td>F-4EE-05: S1's published record differs between README (23-9 / +11.91) and docs/data/leaderboard.json (23-8 / +12.909); settlement grades tickets, not strategies, so neither is derivable.</td>
+<td>- A namespaced rollup script that reads data/settlement/** plus the pre-tip archives, attributes each graded ticket to its strategy, and writes one records file both surfaces render <span class='fine'>(effort: Medium - one script plus a builder hookup; every input is already in-repo; risk: Low - read-only over sealed files; adds a derived record; unlocks: F-4EE-05; honest leaderboard/reward ranking)</span><br>- Hand-edit one surface to match the other <span class='fine'>(effort: Low; risk: High - hides the derivation; the brief forbids unauditable values; unlocks: nothing)</span></td>
+<td>Option 1, adopted by the next strategy/leaderboard seat.</td>
+<td>No - needs an owner, not a decision.</td>
+<td class="src"><span class="na" title="source id COORDINATION.md section 72 finding 3 is not in the register">&mdash;</span></td>
+</tr>
+<tr>
+<td>S-4EE-03</td>
+<td>Automation</td>
+<td><b>Decide whether a gate-passing scheduled rebuild should publish the regenerated site data or stay smoke-only (today the run discards docs/data + docs/b churn)</b></td>
+<td>The rebuild step (pipeline + build_site) now runs when gates pass, but the 'Discard generated-site churn only' step reverts docs/data and docs/b before the publish commit, so the scheduled job never updates the live site's data - sessions do, at integration. That is defensible churn control (the generated files embed wall-clock ages) but it means 'rebuild' in the brief's first requirement is validated, not published.</td>
+<td>- Keep smoke-only rebuild plus session-published site (current) <span class='fine'>(effort: None; risk: Low - site-data freshness depends on session cadence; unlocks: nothing)</span><br>- Publish the rebuilt data on gate pass, with the wall-clock fields scrubbed first <span class='fine'>(effort: Medium - a scrubber plus publish-step changes; risk: Medium - more moving parts in the auto PRs; unlocks: the brief's refresh-to-publish chain running unattended)</span></td>
+<td>Flag for the decision register; either choice is coherent, but it should be an explicit decision, not an accident of a churn filter.</td>
+<td>Yes - integration/user.</td>
+<td class="src"><span class="na" title="source id .github/workflows/refresh-data.yml (Discard generated-site churn only step) is not in the register">&mdash;</span></td>
+</tr>
 </tbody></table></div>
 <h2 class="sec">Decision index</h2><p class="secsub">Everything the site is currently waiting on a reviewer to choose, in one place, with the consequence of not choosing. Sorted so the items that block the most come first.</p>
 <div class="tablewrap">

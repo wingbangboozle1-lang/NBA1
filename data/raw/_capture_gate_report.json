@@ -1,6 +1,6 @@
 {
  "gate": "refresh freshness + provenance",
- "run_at_utc": "2026-11-19T13:14:57Z",
+ "run_at_utc": "2026-11-19T12:53:44Z",
  "max_age_hours": 10.0,
  "ok": true,
  "blocking_errors": [],
@@ -29,16 +29,16 @@
   {
    "source_key": "S1_season",
    "expires_at_utc": "2026-12-19T00:00:00Z",
-   "review_flag": "F-89F-01",
+   "review_flag": "F-F3C-03",
    "evidence": "data/raw/_capture_evidence_S1_season.json",
    "required_snapshot": "data/raw/team_advanced.json"
   },
   {
    "source_key": "S2_train",
    "expires_at_utc": "2026-12-19T00:00:00Z",
-   "review_flag": "F-89F-01",
+   "review_flag": "F-F3C-03",
    "evidence": "data/raw/_capture_evidence_S2_train.json",
-   "required_snapshot": "data/raw/team_advanced.json (training window)"
+   "required_snapshot": "data/raw/team_advanced.json (train_2026-10-20_2026-11-05 window)"
   }
  ],
  "warnings": [
@@ -51,7 +51,6 @@
   "S1_season: no parsed payload by design (declared unreadable); provenance verified against data/raw/_capture_evidence_S1_season.json",
   "S8_standings: no parsed payload by design (declared unreadable); provenance verified against data/raw/_capture_evidence_S8_standings.json",
   "S9_team_traditional: no parsed payload by design (declared unreadable); provenance verified against data/raw/_capture_evidence_S9_team_traditional.json",
-  "S1_season: no structured capture (data/raw/_capture_S1_season.json) by design (declared unreadable); nothing promoted",
-  "advanced team comparison skipped by live declaration (S1_season unreadable); data/raw/team_advanced.json stays at its last verified promotion and is published as stale (promoted 2026-11-14T00:38:00Z, 5.5 days before this run; engine/pipeline.py consumes it)"
+  "advanced team input accepted via session verification (runner-unreadable source, declared); no runner capture compared"
  ]
 }

@@ -109,11 +109,21 @@ class Promoter:
         the downstream rebuild unreachable. The declaration is re-validated
         independently by engine/refresh_gate.py; this record is the audit
         trail, not the authority.
+
+        A missing/unreadable capture counts as a parse failure of a DECLARED
+        source only when this run actually attempted the fetch (an HTTP-200
+        source check): section 74 measured S1_season/S2_train arriving as
+        shells with no rows-bearing capture file, which is the same fact as a
+        parse failure. A declared source with NO capture attempt this run
+        still blocks (section 73's rule).
         """
         declaration = self._declarations().get(item)
+        check = self.checks.get(item) or {}
+        attempted = check.get("http_status") == 200
         parse_failed = any(token in reason for token in (
-            "no parsed rows", "no header row", "capture has no", "parsed 0"))
-        if declaration and parse_failed:
+            "no parsed rows", "no header row", "capture has no", "parsed 0",
+            "capture unreadable"))
+        if declaration and parse_failed and attempted:
             self.unreadable.append({
                 "item": item,
                 "reason": reason,
