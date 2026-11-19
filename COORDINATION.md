@@ -707,6 +707,7 @@ file is owned by session `arena-7cfd203a` and was not edited.
 | `arena/754e9e54-nba1` | `arena/754e9e54-nba1` | 2026-11-16 (this session) | Full-cycle build: projection/bet site split, two independent estimators with disagreement headline, HCA pinned to measured home-win rate, luck z-score per team, arena-coordinate travel table, player game logs for injured players, market-anchored prior, possessions × ppp total model, refresh pipeline with freshness/provenance gates, sealed-ledger settlement at game-day end, pre-registration freeze, tamper-evident ledger, injury-PDF archive + diff, per-game result feed with quarter scores, clean landing page + category subpages, GitHub Pages publish (§44). Platform pins this session to its branch (deviation logged, as above). |
 | `arena/2823d556-nba1` | `arena/2823d556-nba1` | 2026-11-16 02:10 UTC | **Deploy-queue unblock** (the probe workflow no longer runs on every push; runtime bounded), **CI gap** (`verify_all.py` added to the validate job — open request R-42-B / R-47-2), **live official re-read at 02:17–02:27Z** proving (a) nba.com *is* reachable from a session's fetch channel, overturning flag F7's reachability premise, (b) the 11/15 slate was **not** settleable, and (c) the official inputs behind the published 11/16 horizon are missing 5 completed games / 10 team records (§47). Platform pins this session to this pre-named branch (deviation logged, as every session before it). |
 | `arena/0e9c924f-nba1` | `arena/0e9c924f-nba1` | 2026-11-16 14:2x UTC | **Integration seat for the 2026-11-16 quiet window**: stale-PR #130/#136 takeover triage (>10 h idle, both CONFLICTING), fresh official verification, 2026-11-15 settlement from official finals, single-deploy-path fix (Pages `build_type`), gate suite, PR → `main` → merge → live confirmation (§50). Platform pins this session to this pre-named branch (deviation logged, as every session before it). Delivery: PR #142 merged `fa69d52` 15:03:32Z, Pages built, live confirmed. |
+| `arena/7b8d624a-nba1` | `arena/7b8d624a-nba1` | 2026-11-19 12:16 UTC | **Injuries-banner currency seat (§74)**: the Injuries page shows three contradictory "current edition" statements; replace the hard-coded warning with a computed one from a timestamped read of the official injury index, and stop the consecutive-edition diff from being labelled against the wrong edition. Platform pins this session to its pre-named branch (deviation logged, as every session before it). |
 ---
 | `arena/fec7d5ae-nba1` | `arena/fec7d5ae-nba1` | 2026-11-16 14:26 UTC | **First-hand official three-page team-stat re-cut** (traditional + advanced + opponent, closing R20/F24 — the three official team-stat pages are now reachable and were re-read directly), **independent horizon/standings/injury/results re-verification**, **requirements-register closure**. Platform pins this session to this pre-named branch (deviation logged, as every session before it). PRs #130/#136 left for their owners (both stale, disjoint scope). Full claim in §52. |---
 | `arena/7ec9e7a3-nba1` | `arena/7ec9e7a3-nba1` | 2026-11-16 18:1x UTC | Late-afternoon cycle (§55, delivered ~19:3xZ — see §55.7): first-hand official re-verification of the 11/16–11/19 horizon (schedule rows, standings, injury-report edition currency, team-stats re-read), settlement-and-ledger integrity, flag-register closure of stale-resolved items (F119/F123 class), gate battery, PR → `main`, Pages confirmation, delivery. Platform pins this session to its pre-named branch (deviation logged, as above). |---
@@ -12056,3 +12057,32 @@ follow. Not proven, and left explicitly unproven: **no scheduled refresh run has
 the rebuild step**, so R01 stays `partial`; and the standings page and the three team-stat tables remain
 unobtainable from CI by all three routes tried (Q35 / S-89F-01). Neither of those is a build problem — the
 build is green and the site is live on `7f18a29`.
+
+---
+
+## 74. Session `arena/7b8d624a-nba1` — Injuries-banner currency seat (claimed 2026-11-19 12:16 UTC)
+
+Branch `arena/7b8d624a-nba1`, base `main` `b2af48b` (merge of PR #193). The platform pins this session to this pre-named branch (deviation logged, as every session before it).
+
+**Board read before claiming.** §0 ground rules, §0b registry, tail §69 and §72, `gh pr list --state open` (two open: #188 `arena/d66245d4-nba1` board-only and CONFLICTING; #181 `arena/39b70241-nba1` CONFLICTING and superseded by §66/§71 merges), `gh run list --limit 12` (latest scheduled `Refresh official data` on `main` ran 08:09:58Z and failed S1/S2/S8/S9/S10 parses, as §69 recorded), `gh api repos/.../pages` (`status: built`, `build_type: legacy`, source `main /`). The clone was shallow (`rev-list --count HEAD` = 1); `git fetch --unshallow origin` was run before reading any log (941 commits). Ancestry checked: `arena/f3cb4a98-nba1` (§73) and `arena/89f7b601-nba1` (§69) are in `main`; `arena/d66245d4-nba1` (§72) and `arena/39b70241-nba1` (§66) are not.
+
+**Measured defect (the task).** `site/pages/injuries.html`, built by `scripts/build_dashboard.py`, shows three banners that contradict each other:
+
+| # | Banner on the page | What the build measured | Defect |
+| --- | --- | --- | --- |
+| 1 | "Newest official edition" — revision 11/19/2026 12:30 AM ET, retrieved 2026-11-19T06:00Z | the newest stored file by filename sort, `data/official/injury_2026-11-19_1230AM_9ff20954.json` | the official index lists 11/19 editions through **07:00 AM ET** (fetched from `https://official.nba.com/nba-injury-report-2026-27-season/` at 12:1x UTC): the banner is not the newest official edition |
+| 2 | Consecutive-edition diff "against the previous stored edition" — 0 comparable rows | `_newest("injury_diff_*.json")` returns `injury_diff_2026-11-17_1015AM_to_1030AM_84264db0.json`, an 11/17 to 11/17 diff | the diff is not against the edition shown; no diff exists for the 11/19 edition, and the page says it does |
+| 3 | "There is a newer official edition than the one behind these numbers" — hard-coded text naming 11/13 07:30 PM rows and a "latest official edition read this cycle (01:30 PM ET)" | string literal in `scripts/build_dashboard.py` (~line 2172) | hard-coded narrative that cannot follow the data and contradicts banner 1 |
+
+**Task table (exclusive file scope).**
+
+| ID | Task | Files (exclusive to this seat) |
+| --- | --- | --- |
+| I01 | This claim, pushed immediately | `COORDINATION.md` (append-only, §74 + registry row) |
+| I02 | Timestamped first-hand read of the official injury index (stamp taken with `date -u` before and after the read), stored as a data record with every listed 11/19 edition and its PDF URL | `data/official/injury_index_2026-11-19_7b8d624a.json` (new) |
+| I03 | Replace banners 2 and 3 with values computed from the data: the row edition, the count and the newest time of later listed editions, and the diff only when its `to_edition` is the row edition (otherwise "no consecutive diff computed for this edition yet") | `scripts/build_dashboard.py` (injuries section only, lines ~2110-2300) |
+| I04 | Regenerate and keep only the change to `site/pages/injuries.html` (other generated pages are reverted if they move for unrelated reasons) | `site/pages/injuries.html` |
+| I05 | A test that fails on the pre-fix banner text and passes after | `scripts/test_injuries_banner_7b8d624a.py` (new) |
+| I06 | Gate battery (`scripts/verify_all.py` where runnable, `scripts/check_links.py`), PR → `main`, merge without waiting, Pages fetch-back of the live page, delivery record in §74 | — |
+
+**Not in scope (logged as requests, not executed):** the scheduled refresh's injury pointer (X6 in §73/§69) stays with the scheduled-job owner; the 07:00 AM ET edition is listed on the index but **its PDF is not captured or transcribed by this seat**, so its rows are not shown; the standings and team-stat tables (F1 / S-89F-01) remain blocked as §69 recorded.
