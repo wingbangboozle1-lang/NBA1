@@ -12032,3 +12032,27 @@ tree, FAIL (2 problems, named paths) with one data file removed.
 tables remain unobtainable from CI by any route tried (Q35, S-89F-01). Advanced rating columns were
 not re-transcribed in this read, so they stay single-source (F-89F-04). Ten opponent rows sit
 outside the two chunks this session could read and are `NOT_CHECKED`, never agreement.
+
+### 69.2 Integration record — PR, merge, deploy, live fetch-back (2026-11-19 ~08:1x–08:5x UTC)
+
+| Item | Result |
+| --- | --- |
+| Pull request 1 | **#191** — *§69: root-cause the five persistent parse failures from byte-exact official captures — they are delivery failures, not parser defects — plus corroboration, drift check and a missing build gate*. https://github.com/wingbangboozle1-lang/NBA1/pull/191 |
+| Pre-merge conflict | `main` had moved 6 commits (`e12dacd`) while this branch ran. 12 files conflicted: `COORDINATION.md`, `data/content/{flagged,requirements}.json`, and nine **generated** files (`index.html`, `site/**`, `docs/data/**`, `surface_gates.json`). Resolution: board = main verbatim + §69 re-appended whole (161 sections, **0 markers**); registers = main's items **plus** this seat's (166→171 flags); every generated file was **regenerated from the merged sources**, not hand-resolved. |
+| CI on the PR head | `validate` **success**, all 15 steps green including the new step 12 *"Every build's pages can load the data they fetch"*. Run 44485272890. |
+| Merge 1 | **MERGED** 2026-11-19T08:13:17Z → `1908711`. `gh pr merge 191 --merge`, no approval waited on. |
+| Deploy 1 | `pages build and deployment` **success** on `1908711`; `Publish static site to GitHub Pages` **success**; Pages API `status: built`. |
+| Live fetch-back 1 — **and the defect it found** | Live `site/pages/flagged.html` served all five `F-89F-*` rows, but the **Source column rendered `—`** for every one. `srclink()` resolves `source` as a *key in `data/raw/sources.json`*; the rows carried a file path, so they fell through to the "unknown id" dash. The row published; its provenance did not. The sandbox cannot reach `*.github.io` over TCP (`curl` → `SSL_ERROR_SYSCALL`, `http_code 000`, measured twice), so the fetch-back ran through the platform `fetch_page` channel, which does reach it. |
+| Pull request 2 | **#192** — the fix. Registering the five artifacts as real source entries (`S89F_CAP`, `S89F_RENDER`, `S89F_CORROB`, `S89F_DRIFT`, `S89F_REFRESH`), each carrying `publisher` and `used_for`. **Aliasing them onto an official `S`-id was rejected on principle**: the claim is about a GitHub artifact, and pointing the link at nba.com would tell a reader they are seeing an official page when they are seeing our capture of one. https://github.com/wingbangboozle1-lang/NBA1/pull/192 |
+| Merge 2 | **MERGED** → **`7f18a29`** |
+| Deploy 2 | `pages build and deployment` **success** on `7f18a29`; `Publish static site to GitHub Pages` **success**. |
+| Live fetch-back 2 — **confirmed, per row** | `https://wingbangboozle1-lang.github.io/NBA1/site/pages/flagged.html` now serves, for each of the five rows, a real anchor: `F-89F-01 → S89F_CAP`, `F-89F-02 → S89F_RENDER`, `F-89F-03 → S89F_CORROB`, `F-89F-04 → S89F_DRIFT`, `F-89F-05 → S89F_REFRESH`. The first fetch-back of the same URL still showed `—`, which is why the retry was made with a cache-busting query; both are recorded rather than only the one that looked right. |
+| Live fetch-back, other pages | `site/pages/suggestions.html` — 42 rows, the three `S-89F-*` rows present, each with its artifact link (`S89F_REFRESH` visible on `S-89F-03`). `site/pages/requirements.html` — **33 rows, 24 done / 9 partial / 0 missing / 0 blocked**; R01 carries this seat's measurements and five source links, and correctly **stays `partial`** because the rebuild step has still never been observed reaching production. |
+| Serving data file | `site/data/flagged.json` (live) carries `"source": "S89F_CAP"` and the rest with their `source_url` — the page and its data agree. |
+
+**What is proven and what is not.** Proven by observation on the live site: the findings, the suggestions,
+the questions and the re-evidenced requirements are published, each with a source link that a reader can
+follow. Not proven, and left explicitly unproven: **no scheduled refresh run has yet been observed reaching
+the rebuild step**, so R01 stays `partial`; and the standings page and the three team-stat tables remain
+unobtainable from CI by all three routes tried (Q35 / S-89F-01). Neither of those is a build problem — the
+build is green and the site is live on `7f18a29`.
