@@ -218,6 +218,7 @@ jobs:
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
+          BUILD_OUTCOME: ${{ steps.build.outcome }}
         run: |
           set -u
           git config user.name  "nba1-bot"
@@ -228,21 +229,31 @@ jobs:
           # no-change run produces no timestamp-only commit.
           # Settlement output is evidence, not a snapshot: it may land in the
           # same PR when a game day ended during this run.
-          git add data/raw/_capture_*.json data/raw/injury_pdfs/ \
-                  data/settlement/ data/ledger/ledger.json 2>/dev/null || true
+          #
+          # Staging goes through scripts/stage_publish.py, path by path
+          # (COORDINATION.md section 77.1): `git add a.json missing.json`
+          # stages NOTHING and hides the error behind `2>/dev/null || true`,
+          # which is how every verified promotion of every scheduled run was
+          # silently discarded while the run record claimed `promoted` -
+          # `data/raw/standings.json` has never existed, and its absence
+          # aborted the whole batch. One missing file must never cost the
+          # rest of the evidence again.
+          python3 scripts/stage_publish.py evidence
 
           # Also stage the digest-bound promotion records and computed diffs
-          # produced by the promote step (carried from PR #117, arena/abac961f-nba1).
-          git add data/raw/standings.json data/raw/team_traditional.json \
-                  data/raw/team_opponent.json data/raw/team_advanced.json \
-                  data/raw/unreadable_sources.json data/raw/refresh_path_audit.json \
-                  data/raw/schedule_upcoming.json data/raw/injuries.json \
-                  data/raw/games_completed.json data/parsed/ 2>/dev/null || true
+          # produced by the promote step (carried from PR #117, arena/abac961f-nba1),
+          # plus the source register the promoter updates and the rebuild's
+          # own committed outputs (pipeline's docs/data churn is discarded by
+          # design; these are what it actually publishes).
+          python3 scripts/stage_publish.py promoted
+          if [ "${BUILD_OUTCOME}" = "success" ]; then
+            python3 scripts/stage_publish.py derived
+          fi
           if git diff --cached --quiet; then
             echo "No new capture payloads - nothing to publish."
             exit 0
           fi
-          git add data/raw/_last_refresh.json 2>/dev/null || true
+          python3 scripts/stage_publish.py record
 
           # Evidence for the pull request body: the run record plus this
           # job's own site check (CI does not run on token-created PRs).
