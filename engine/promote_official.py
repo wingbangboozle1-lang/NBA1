@@ -484,10 +484,56 @@ class Promoter:
         # newest SUCCESSFUL retrieval instead of failing the whole item
         # (flag F-CA-07: an edition-only change must still reach promotion).
         ok_results = [r for r in results if r.get("http_status") == 200]
-        if not ok_results:
-            self.fail(item, "no successful injury-PDF retrieval in this run")
-            return
-        latest = ok_results[0]
+        latest = ok_results[0] if ok_results else None
+        bound_from = "fetched this run"
+        if latest is None:
+            # Steady state (COORDINATION §80): the run caught up with the
+            # index, every listed edition is already archived, and results[]
+            # holds only the fixed-clock probe's expected 403s. Bind the
+            # promotion to the archived copy of the NEWEST INDEX-LISTED
+            # edition - the same edition engine/refresh_gate.py's canonical
+            # check verifies - instead of failing a run in which nothing new
+            # was owed. A listed edition that is neither archived nor
+            # fetched still blocks, unchanged.
+            newest_listed = (probe or {}).get("newest_listed")
+            archived = None
+            if isinstance(newest_listed, str) and newest_listed:
+                directory = os.path.join(RAW, "injury_pdfs")
+                # Content-addressed name: <edition-without-.pdf>__<sha256>.pdf.
+                stem_name = (newest_listed[:-4]
+                             if newest_listed.endswith(".pdf") else newest_listed)
+                filename = None
+                try:
+                    for candidate in sorted(os.listdir(directory)):
+                        if candidate.startswith(stem_name + "__") and \
+                                candidate.endswith(".pdf"):
+                            filename = candidate
+                            break
+                except OSError:
+                    filename = None
+                if filename:
+                    stem = filename[:-4]
+                    try:
+                        meta = read_json(os.path.join(directory, stem + ".json"))
+                    except (OSError, ValueError):
+                        meta = {}
+                    name_sha = filename[len(stem_name) + 2:-4]
+                    if meta.get("sha256") and meta["sha256"] != name_sha:
+                        self.fail(item, "archived injury PDF sidecar sha256 does "
+                                        "not match the content-addressed filename")
+                        return
+                    archived = {
+                        "edition": newest_listed,
+                        "url": meta.get("source_url"),
+                        "sha256": meta.get("sha256") or name_sha,
+                        "artifact_path": f"data/raw/injury_pdfs/{filename}",
+                    }
+            if archived is None:
+                self.fail(item, "no successful injury-PDF retrieval in this run "
+                                "(and the newest index-listed edition is not archived)")
+                return
+            latest = archived
+            bound_from = "archived steady state (newest index-listed edition)"
         art = os.path.join(ROOT, latest.get("artifact_path", ""))
         if ij is None or not os.path.exists(art):
             self.fail(item, f"archived PDF missing or extractor unavailable: {art}")
@@ -507,6 +553,7 @@ class Promoter:
             "row_count": rec["row_count"],
             "unparsed_cells": len(rec["unparsed"]),
             "source_capture": latest.get("artifact_path"),
+            "bound_from": bound_from,
             "row_audit": rec.get("row_audit", {}),
             "player_rows": sum(1 for r in rec["rows"] if len(r) > 4 and r[4]),
         }
@@ -534,7 +581,8 @@ class Promoter:
         }
         write_json(os.path.join(RAW, "injuries.json"), payload)
         self.rows_written["injuries.json"] = rec["row_count"]
-        self.ok(item, f"{rec['row_count']} rows from {rec['label']} -> data/raw/injuries.json")
+        self.ok(item, f"{rec['row_count']} rows from {rec['label']} -> "
+                      f"data/raw/injuries.json ({bound_from})")
 
     # -------------------------------------------------------------- results
     def promote_results(self):

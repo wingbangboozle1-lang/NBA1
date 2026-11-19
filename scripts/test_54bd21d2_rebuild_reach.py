@@ -327,6 +327,101 @@ class GateDeclarationReachTests(unittest.TestCase):
         self.assertTrue(any("EXPIRED" in w for w in report["warnings"]),
                         report["warnings"])
 
+    # ------------------------------------------------ catch-up ("steady state")
+    # Measured failure without them: run 44533474414 (2026-11-19T13:27Z) had
+    # every index-listed edition already archived, probed the fixed-clock
+    # editions (all expected 403), and the gate blocked the rebuild on
+    # results[0] — a probe edition that is not even on the index.
+
+    def _make_catch_up(self):
+        """Probe state of a run that owes no new retrieval (all listed archived)."""
+        akamai = ("https://ak-static.cms.nba.com/referee/injury/"
+                  "Injury-Report_2026-11-15_12_00PM.pdf")
+        listed = "Injury-Report_2026-11-15_12_00PM.pdf"
+        probe_results = []
+        for future in ("03_00PM", "05_15PM", "07_30PM"):
+            probe_results.append({
+                "edition": f"Injury-Report_2026-11-15_{future}.pdf",
+                "url": ("https://ak-static.cms.nba.com/referee/injury/"
+                        f"Injury-Report_2026-11-15_{future}.pdf"),
+                "http_status": 403, "listed_on_official_index": False,
+            })
+        for check in self.record["source_checks"]:
+            if check.get("key") == "injury_pdf_probe":
+                check["results"] = probe_results
+                check["newest_listed"] = listed
+        # The archive sidecar for the listed edition (the PDF itself was
+        # written by setUp, content-addressed as <name>__<PDF_DIGEST>.pdf).
+        stem = f"Injury-Report_2026-11-15_12_00PM__{PDF_DIGEST}"
+        with open(os.path.join(self.root, f"data/raw/injury_pdfs/{stem}.json"), "w") as fh:
+            json.dump({"edition": listed, "source_url": akamai,
+                       "retrieved_at_utc": "2026-11-15T09:00:00Z",
+                       "sha256": PDF_DIGEST, "bytes": len(PDF_BYTES)}, fh)
+        # injuries.json already binds to this exact edition/digest (setUp) —
+        # the same pair promote will bind in this state.
+        return listed
+
+    def test_catch_up_run_passes_via_the_archived_newest_listed_edition(self):
+        self._declare()
+        listed = self._make_catch_up()
+        errors, report = evaluate_with_report(self.record, NOW)
+        self.assertEqual(errors, [], errors)
+        hits = [w for w in report["warnings"] if "already archived" in w]
+        self.assertEqual(len(hits), 1, report["warnings"])
+        self.assertIn(listed, hits[0])
+        self.assertIn("retrieved 2026-11-15T09:00:00Z", hits[0])
+
+    def test_catch_up_with_newest_listed_unarchived_still_blocks(self):
+        """No fresh retrieval AND no archive = the rebuild must not run."""
+        self._make_catch_up()
+        for fn in os.listdir(os.path.join(self.root, "data/raw/injury_pdfs")):
+            if fn.startswith("Injury-Report_2026-11-15_12_00PM"):
+                os.remove(os.path.join(self.root, "data/raw/injury_pdfs", fn))
+        errors, _ = evaluate_with_report(self.record, NOW)
+        self.assertTrue(any("latest indexed injury PDF was not retrieved successfully" in e
+                            for e in errors), errors)
+
+    def test_fetched_state_ignores_the_403_probes_and_binds_results(self):
+        """When something WAS fetched, the newest 200 is canonical — not results[0]."""
+        self._declare()
+        self._make_catch_up()
+        akamai_old = ("https://ak-static.cms.nba.com/referee/injury/"
+                      "Injury-Report_2026-11-15_09_45AM.pdf")
+        # Newer 403 (listed) sits at results[0]; older 9:45AM fetched 200.
+        good = {"edition": "Injury-Report_2026-11-15_09_45AM.pdf", "url": akamai_old,
+                "http_status": 200, "sha256": PDF_DIGEST, "pdf_valid": True,
+                "listed_on_official_index": True,
+                "artifact_path": (f"data/raw/injury_pdfs/"
+                                  f"Injury-Report_2026-11-15_12_00PM__{PDF_DIGEST}.pdf")}
+        bad = {"edition": "Injury-Report_2026-11-15_10_00AM.pdf",
+               "url": ("https://ak-static.cms.nba.com/referee/injury/"
+                       "Injury-Report_2026-11-15_10_00AM.pdf"),
+               "http_status": 403, "listed_on_official_index": True}
+        for check in self.record["source_checks"]:
+            if check.get("key") == "injury_pdf_probe":
+                check["results"] = [bad, good]
+                check["newest_listed"] = bad["edition"]
+        # Rebind injuries.json to the edition that will actually be promoted
+        # (the newest SUCCESSFUL retrieval — promote's F-CA-07 rule).
+        with open(os.path.join(self.root, "data/raw/injuries.json")) as fh:
+            inj = json.load(fh)
+        inj["verification"]["source_url"] = akamai_old
+        inj["verification"]["source_sha256"] = PDF_DIGEST
+        with open(os.path.join(self.root, "data/raw/injuries.json"), "w") as fh:
+            json.dump(inj, fh)
+        # The artifact for the fetched edition must carry those bytes; reuse
+        # the same content-addressed file under the fetched name.
+        src = os.path.join(self.root,
+                           f"data/raw/injury_pdfs/Injury-Report_2026-11-15_12_00PM__{PDF_DIGEST}.pdf")
+        dst_name = f"Injury-Report_2026-11-15_09_45AM__{PDF_DIGEST}.pdf"
+        with open(src, "rb") as fh:
+            body = fh.read()
+        with open(os.path.join(self.root, "data/raw/injury_pdfs", dst_name), "wb") as fh:
+            fh.write(body)
+        good["artifact_path"] = f"data/raw/injury_pdfs/{dst_name}"
+        errors, _ = evaluate_with_report(self.record, NOW)
+        self.assertEqual(errors, [], errors)
+
 
 class PromoteDeclaredReachTests(unittest.TestCase):
     """promote_official must classify a declared S1_season as unreadable."""
@@ -412,6 +507,125 @@ class PromoteDeclaredReachTests(unittest.TestCase):
             promoter.promote_evidence_only = original_evidence
         self.assertEqual(code, 0)
         self.assertEqual([u["item"] for u in promoter.unreadable], ["S1_season"])
+
+
+class CatchUpPromoteTests(unittest.TestCase):
+    """Steady-state promotion: bind from the archive, or still block.
+
+    Measured failure without this behaviour: run 44533474414 (13:27Z) had
+    every index-listed edition archived, so no result returned 200 and
+    `promote_injuries` failed the whole item on the fixed-clock probe's
+    expected 403s — which then left injuries.json stale and the gate
+    blocked three more ways.
+    """
+
+    def setUp(self):
+        import promote_official  # noqa: E402 - path set at module import
+        self.promote = promote_official
+        self.tmp = tempfile.TemporaryDirectory()
+        self.raw = os.path.join(self.tmp.name, "data", "raw")
+        os.makedirs(os.path.join(self.raw, "injury_pdfs"), exist_ok=True)
+        self.real = (promote_official.RAW, promote_official.ROOT,
+                     promote_official.PROMOTION_LOG, promote_official.REPORT,
+                     promote_official.ij)
+        promote_official.RAW = self.raw
+        promote_official.ROOT = self.tmp.name
+        promote_official.PROMOTION_LOG = os.path.join(
+            self.tmp.name, "data", "parsed", "promotions_log.json")
+        promote_official.REPORT = os.path.join(
+            self.tmp.name, "data", "parsed", "promotion_report.json")
+        # The extractor is stubbed: these tests pin WHICH edition gets bound
+        # and when promotion refuses, not the PDF reader (pinned separately
+        # by scripts/test_promote_official.py and the injury-diff suite).
+        class _StubIJ:
+            COLS = ["date", "matchup", "team", "player", "status", "reason"]
+
+            @staticmethod
+            def load_edition(path):
+                return {"edition": "Injury-Report_2026-11-15_12_00PM.pdf",
+                        "label": "11/15/2026 12:00 PM ET",
+                        "source_url": ("https://ak-static.cms.nba.com/referee/"
+                                       "injury/Injury-Report_2026-11-15_12_00PM.pdf"),
+                        "rows": [["11/15", "AAA vs BBB", "AAA", "Example Player",
+                                  "Out", "Injury"]],
+                        "row_count": 1, "unparsed": [], "row_audit": {}}
+        promote_official.ij = _StubIJ
+        self.listed = "Injury-Report_2026-11-15_12_00PM.pdf"
+        self.akamai = ("https://ak-static.cms.nba.com/referee/injury/"
+                       + self.listed)
+        self.record = {"changed": ["injury probe"], "source_checks": [
+            {"key": "injury_pdf_probe",
+             "checked_at_utc": "2026-11-15T11:55:00Z",
+             "newest_listed": self.listed,
+             "results": [{"edition": "Injury-Report_2026-11-15_12_00PM.pdf",
+                          "url": self.akamai, "http_status": 403,
+                          "listed_on_official_index": False}]},
+        ]}
+
+    def tearDown(self):
+        (self.promote.RAW, self.promote.ROOT,
+         self.promote.PROMOTION_LOG, self.promote.REPORT,
+         self.promote.ij) = self.real
+        self.tmp.cleanup()
+
+    def _archive(self):
+        name_sha = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        stem = f"Injury-Report_2026-11-15_12_00PM__{name_sha}"
+        with open(os.path.join(self.raw, f"injury_pdfs/{stem}.pdf"), "wb") as fh:
+            fh.write(PDF_BYTES)
+        with open(os.path.join(self.raw, f"injury_pdfs/{stem}.json"), "w") as fh:
+            json.dump({"edition": self.listed, "source_url": self.akamai,
+                       "retrieved_at_utc": "2026-11-15T09:00:00Z",
+                       "sha256": name_sha, "bytes": len(PDF_BYTES)}, fh)
+
+    def _promoter(self):
+        promoter = self.promote.Promoter(
+            json.loads(json.dumps(self.record)), "2026-11-15T11:55:00Z")
+        promoter.diff_injury_chain = lambda rec: None
+        return promoter
+
+    def test_steady_state_binds_promotion_from_the_archive(self):
+        self._archive()
+        promoter = self._promoter()
+        for name in ("promote_standings", "promote_team_tables",
+                     "promote_team_advanced", "promote_schedule",
+                     "promote_results", "promote_evidence_only"):
+            setattr(promoter, name, lambda *a, **k: None)
+        code = promoter.run()
+        self.assertEqual(code, 0, promoter.blocked)
+        self.assertEqual(promoter.blocked, [], promoter.blocked)
+        self.assertEqual([p["item"] for p in promoter.promoted], ["injury_pdf_probe"])
+        with open(os.path.join(self.raw, "injuries.json")) as fh:
+            payload = json.load(fh)
+        proof = payload["verification"]
+        self.assertEqual(proof["source_url"], self.akamai)
+        self.assertIn("archived steady state", proof["bound_from"])
+        # The probe's expected-403 result must not leave the capture awaiting
+        # promotion: the run's `changed` list is settled by this promotion.
+        self.assertEqual(promoter.record["changed"], [])
+
+    def test_steady_state_without_an_archive_still_blocks_with_the_same_reason(self):
+        promoter = self._promoter()
+        promoter.promote_injuries()
+        self.assertEqual(promoter.promoted, [])
+        self.assertEqual(len(promoter.blocked), 1)
+        self.assertEqual(promoter.blocked[0]["item"], "injury_pdf_probe")
+        self.assertTrue(promoter.blocked[0]["reason"].startswith(
+            "no successful injury-PDF retrieval in this run"), promoter.blocked)
+
+    def test_mismatched_sidecar_sha_refuses_the_archive_binding(self):
+        self._archive()
+        stem = f"Injury-Report_2026-11-15_12_00PM__{'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'}"
+        sidecar = os.path.join(self.raw, f"injury_pdfs/{stem}.json")
+        with open(sidecar) as fh:
+            meta = json.load(fh)
+        meta["sha256"] = "b" * 64
+        with open(sidecar, "w") as fh:
+            json.dump(meta, fh)
+        promoter = self._promoter()
+        promoter.promote_injuries()
+        self.assertEqual([b["item"] for b in promoter.blocked], ["injury_pdf_probe"])
+        self.assertIn("sidecar sha256 does not match", promoter.blocked[0]["reason"])
 
 
 if __name__ == "__main__":
